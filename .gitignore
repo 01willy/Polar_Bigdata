@@ -1,0 +1,53 @@
+# ============================================================
+# Polar_Bigdata .gitignore
+# 원칙: 코드·문서·작은 결과 CSV·시각화 산출물(그림/지도)은 추적,
+#       대용량 원천/파생 데이터·모델 체크포인트·저작권 PDF는 제외.
+# 제외된 대용량은 scripts/0_download·1_data_prep 로 재생성 가능.
+# ============================================================
+
+# --- 대용량 원천/중간 데이터 (재생성 가능) ---
+data/raw/
+data/interim/
+
+# --- 대용량 파생 데이터 / 바이너리 아티팩트 ---
+*.parquet
+*.npy
+*.npz
+*.vti
+*.vtp
+data/processed/dl_dataset*.csv
+data/processed/*_predictions.csv
+data/processed/*fold_predictions*.csv
+data/processed/alt_above_pointlevel.csv
+data/processed/dl_locations.csv
+# (추적 유지: curated_scope_results / model_tournament_results / *_significance /
+#  b0*_results / alt_global / ground_temp* 등 작은 결과·라벨 요약 CSV)
+
+# --- 모델 체크포인트 (재학습 가능) ---
+outputs/models/
+*.pt
+*.pth
+*.ckpt
+
+# --- 저작권 논문 PDF (README만 추적) ---
+references/*.pdf
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# --- 비밀/자격증명 (절대 커밋 금지) ---
+.env
+*.env
+.netrc
+*credential*
+*secret*
+.claude/settings.local.json
+
+# --- OS/에디터 ---
+.DS_Store
+*.swp

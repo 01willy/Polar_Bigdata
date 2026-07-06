@@ -1,0 +1,44 @@
+# Project config for skills (cleanup/handoff/status/collect/start-session/gpu-check)
+project_name: polar_bigdata
+display_name: Polar Bigdata — Permafrost ALT map + shallow 3D thermal (DL)
+working_dir: /home/willy010313/Polar_Bigdata
+
+# GPU policy
+gpu_default: [4, 5]
+gpu_strict: false        # user often specifies exact GPUs; latest instruction wins
+process_name: Polar_Bigdata
+
+# Status / collect scripts (relative to working_dir) — 아직 없음
+status_script: null
+collect_script: null
+
+# Tracked artifacts
+session_handoff: SESSION_HANDOFF.md
+experiment_log: docs/EXPERIMENT_LOG.md
+research_plan: null
+
+# GPT collaboration
+gpt_handoff_dir: gpt/handoff/
+legacy_handoff_dirs: []
+
+# Git
+git_main_branch: main
+gitignore_required: ["*.pt", "*.pth", "*.ckpt", "*.parquet", "*.npy", "*.npz",
+                     "data/raw/", "data/interim/", "outputs/models/",
+                     "references/*.pdf", "__pycache__/"]
+active_phase_paths: []
+
+# Reports
+authoritative_reports_dir: docs/
+
+# Naming canonical
+naming_canonical: |
+  실험 단계 명칭:
+    B0  = 사전학습(InSAR weak label 403.6만)+미세조정 MLP
+    B0b = CCI 피처 추가 + (DL+GBM)/2 앙상블
+    B1/B1b = 3D 신경장(neural field) — 킬스위치로 탈락, 3D 엔진=GBM 조건장
+    tournament = 6모델 공정비교(GBM/MLP/FT-Transformer/TabM/Flow/Diffusion)
+    curated = 정확도-범위 트레이드오프(평탄툰드라 12.97cm SOTA급)
+  공변량: 14종 = 지형(dem_) 6 + 기후(e5_ ERA5-Land) 8. 물리관측(PHYS)= PolSAR/InSAR 4.
+  산출 폴더: outputs/{figures,maps,volumes_3d,animations,models}/
+  핵심 수치는 항상 data/processed/*_results.csv 근거와 함께 인용.

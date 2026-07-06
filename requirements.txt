@@ -1,0 +1,16 @@
+# --- 현재 파이프라인(확보·전처리·시각화)에 필요 (환경에 이미 설치됨) ---
+requests
+numpy
+pandas
+pyarrow            # parquet I/O
+scipy              # RBF 보간 등
+matplotlib         # 2D 시각화
+pyvista            # 3D 시각화 / mesh
+
+# --- 모델링 단계(추후, 경량) ---
+# pip install pykrige gstools scikit-gstat meshio
+scikit-learn       # regression-kriging trend, RF/GBM baseline
+
+# --- 선택(필요 시) ---
+# geopandas        # shapefile I/O (GDAL 의존, 무거움)
+# torch            # PINN/SIREN (CUDA 환경 이미 보유)
