@@ -1,0 +1,8 @@
+model,rmse_cm,mae_cm,skill_vs_mean,cov90_%,sharp90_cm
+앙상블(GBM+FT-T),16.95,12.56,12.3,,
+Diffusion,17.09,12.11,11.6,74.0,40.2
+GBM,17.24,12.82,10.8,,
+FT-Transformer,17.95,13.46,7.1,,
+MLP,18.18,13.54,6.0,,
+Flow matching,18.31,13.03,5.3,70.8,37.9
+TabM,20.36,15.38,-5.3,79.7,67.5

@@ -1,0 +1,9 @@
+cv,config,rmse,mae
+공간블록,WorldClim 5종 (기존 baseline),70.7,44.4
+공간블록,WC + 사인곡선 도일 (Stage1),68.5,42.0
+공간블록,ERA5-Land 실측 (+고도),71.3,43.3
+공간블록,WC + ERA5-Land + 도일 (전체),68.1,42.4
+LORO(전이),WorldClim 5종 (기존 baseline),108.5,62.3
+LORO(전이),WC + 사인곡선 도일 (Stage1),101.9,59.2
+LORO(전이),ERA5-Land 실측 (+고도),87.3,55.5
+LORO(전이),WC + ERA5-Land + 도일 (전체),94.2,52.6

@@ -1,0 +1,8 @@
+approach,rmse_cm
+앙상블 +PolSAR,16.24
+GBM 14공변량(참조),16.78
+GBM +PolSAR특징,16.92
+Diffusion +PolSAR특징,17.21
+잔차보정 GBM(PolSAR+ΔGBM),24.05
+잔차보정 Diffusion(PolSAR+ΔDiff),28.2
+PolSAR 그대로(base),38.29

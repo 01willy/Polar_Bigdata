@@ -1,0 +1,5 @@
+model,rmse
+DL+CCI피처 (사전학습+미세조정),19.2
+GBM+CCI피처,18.1
+앙상블 (DL+GBM)/2,17.5
+ESA CCI 그대로,20.9

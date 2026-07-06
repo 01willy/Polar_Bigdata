@@ -1,0 +1,8 @@
+featureset,model,rmse_cm
+BASE(14 공변량),GBM,17.24
+BASE(14 공변량),Diffusion,21.06
+BASE(14 공변량),앙상블(GBM+Diff),18.13
++InSAR(20),GBM,18.79
++InSAR(20),Diffusion,18.73
++InSAR(20),앙상블(GBM+Diff),16.82
++InSAR(20),InSAR제품 그대로(base),19.19

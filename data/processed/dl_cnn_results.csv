@@ -1,0 +1,3 @@
+model,rmse,mae
+패치 CNN (DEM패치+ERA5/지형),17.2,12.5
+GBM (스칼라만),17.7,12.9
