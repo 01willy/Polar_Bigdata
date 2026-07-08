@@ -3,6 +3,65 @@
 > 세션별 작업 기록. 큐레이션된 마스터 인덱스는 [EXPERIMENTS.md](EXPERIMENTS.md),
 > GPT 공유 핸드오프는 [gpt/handoff/](../gpt/handoff/) 참조.
 
+## 2026-07-08 — 스레드 R 착수: 데이터 재구조화(㉡집계·㉢가중) + ERA5 다년 확보
+
+### 전략 확정 (재구조화 먼저 vs 다운로드 먼저)
+- 확인: ERA5 원본이 디스크에 **2015–2020만** 있는데 **라벨 70%가 2010–2014**(2014=59%). → ㉠ 시간정합은 ERA5 다년 다운로드가 전제.
+- 결론: **㉡집계·㉢가중은 무료·즉시**(재구조화 먼저 맞음), **㉠은 targeted ERA5 다운로드 필요**(둘 병렬). 새 모달리티(SoilGrids/Sentinel)는 재구조화 기준선 후.
+
+### ㉡㉢ 집계·가중 (`aggregate_alt_cell.py`, `restructure_gate.py`)
+- `dl_dataset_cell.csv`: 225k → **14,348 위치당 1행**. 정답=셀평균 ALT, **alt_sd=셀내 SD(불확실성 라벨, 중앙 2.0cm)**, 위치 동등가중.
+- **R3 게이트**(셀평균 ALT 공정채점, 공간블록+LORO): (1)pooled 현재 skill **−0.8%/0.04%** → (2)**+1/n가중 10.9%/7.3%** → (3)cell학습 −1.9%/**8.1%(전이 최고)**.
+- **핵심 발견**: 현재 pooled는 위치-동등 채점 시 **거의 평균 수준**(밀집셀 편향으로 점-단위 R²0.2가 부풀려짐). **재가중만으로(무료) 보간 +11%·전이 +7~8% 회복.** 적대검증: 가중치 정합(0.005~1.0, loc합=1)·상위1%셀이 점의 11.9% 확인 → 버그 아님. 절대 skill은 fold 분산 큼(정성 결론). `restructure_gate_results.csv`, `figures/02_evaluation/restructure_gate.png`.
+
+### ㉠ 시간정합 준비 완료
+- **ERA5-Land 2010–2024 다운로드 성공**(`era5land_monthly_multiyear.py`, 816MB, 180 monthly steps, t2m/sd/stl1). → 라벨 99.4% 연도정합.
+
+### ㉠ 시간정합 게이트 (`era5land_temporal_covariates.py`, `temporal_gate.py`) — 정직한 혼합/음성
+- 연도별 도일/적설/토양온도 파생(`alt_era5_temporal.csv` 2.96M행, 같은 위치 연도별 TDD SD=145 → 연도신호 실재). (위치,연도) 17,800단위, 조인 100%.
+- **static vs temporal(그해 기후) GBM**: 보간(공간블록) temporal 8.7%>static 5.7%(+3), **전이(LORO) temporal 5.1%<static 9.9%(−5)**, **per-year holdout temporal 20%<static 28%(−8)**.
+- **결론**: 그해 기후를 GBM에 스냅샷으로 넣는 것은 **매핑엔 도움 안 됨**(전이·연도holdout 악화). **ALT 변동은 '그 해 날씨'보다 '위치 고유성질'이 지배**(static이 위치 기후평년 학습 → 강한 baseline). 시간축은 **매핑 지렛대 아님** → 시계열 신호는 **lagged ALT(사이트 지속성)** 로만 유효한데 그건 모니터링 사이트 **예측(T1)** 용(매핑엔 미가용). **T-lite/GRU는 매핑용으로 게이트 탈락**, 예측 응용으로만 별도.
+
+### 스레드 R 종합 (재구조화)
+- **채택**: ㉢ 1/n 가중(무료·큰 이득 +11%/+8%) · ㉡ 셀집계+셀내SD(불확실성 라벨·척도정합).
+- **탈락(게이트)**: ㉠ 시간정합 climate 스냅샷(매핑엔 혼합/음성).
+- **정직한 함의**: "데이터를 올바르게 넣기"의 실질 이득은 **가중/집계**였고, 정확도의 남은 지렛대는 (a)새 모달리티/세밀 해상도 (b)예측(T1)으로의 응용 전환. 모델(DL)이 아님 재확인.
+
+## 2026-07-06 18:40 — P0 실행 + 스레드 A(다중모달 ablation) + 횡단 AOA/UQ
+
+### P0/P1 (기반)
+- **`src/polar/eval_metrics.py`** 표준지표(rmse/mae/bias/r2/target_sd/skill_over_mean/coverage/width) — 모든 결과가 RMSE 옆 R²·skill 병기.
+- **재채점**(`rescore_results.py`): 토너먼트 R²(앙상블 0.23·GBM 0.20, 전부 skill~12%), 큐레이션 skill **전역 10.4% > 평탄툰드라 7.4%** → "12.97 SOTA 돌파"가 범위축소 아티팩트임 확증. 산출 `model_tournament_results_rescored.csv`, `curated_scope_results_rescored.csv`, `figures/02_evaluation/skill_reframing.png`.
+- **apparent-floor 진단**(`diagnose_apparent_floor.py`): 분산분해 within 13.7%/between 86.3%, **비가역하한 ~7.2cm ≪ 현재 16.9cm** = covariate 병목(헤드룸). 산출 `apparent_floor_diagnosis.csv`, `figures/02_evaluation/apparent_floor_diagnosis.png`.
+- **`design/`** 디자인 시스템(brand_tokens/layout_rules/visual_qa_checklist).
+
+### 스레드 A — ALT 다중모달 feature ablation (`alt_feature_ablation.py`, GBM 고정, 공간블록+LORO)
+- PolSAR/InSAR 데이터셋 행정렬 검증 후 결합(14+PolSAR3+InSAR5). HistGBM NaN 네이티브.
+- **핵심(정직-평가 스토리)**: within-domain(공간블록)=**기후(ERA5) 지배**(M2 16.3cm, skill 15%), 지형 추가는 **공간 과적합**으로 악화(M3 19.4); transfer(LORO)=**InSAR 필수**(M4 16.4 최고), 지형만 31.9cm 파탄(skill −65%). **정보원이 보간 vs 전이에서 다름.** per-fold 검증(악화는 fold0 지형=지역대리 과적합)으로 버그 아님 확인.
+- 산출 `alt_feature_ablation_results.csv`, `alt_ablation_M6_oof.csv`, `figures/06_deep_learning/alt_feature_ablation.png`. 미취득: SoilGrids/Sentinel/CCI(다음 데이터 확장).
+
+### 횡단 — AOA + Conformal UQ (`aoa_conformal_alt.py`, `aoa_transfer.py`)
+- **within-domain CQR**(spatial-block): raw quantile-GBM coverage **71.2% → CQR 보정 89.2%**(목표 90%, width 37.7→53.7cm). 생성모델 과신 교정 실증. `alt_conformal_aoa_results.csv`, `figures/02_evaluation/coverage_calibration.png`, `maps/alt_uncertainty_width.png`.
+- **transfer AOA**(LORO, Meyer DI): DI↑ → **RMSE 15.5→27.1cm, coverage 69→51%**; AOA 안(16.9cm/68%) < 밖(21.0cm/62%). ⚠️pseudo-replication이 DI 정규화 깨뜨림 → 참조점 **고유위치 dedup**으로 수정. `alt_aoa_transfer_results.csv`, `maps/alt_aoa_mask.png`.
+
+### 시각화 QA
+- scientific-figure-reviewer + visual-reviewer 2에이전트 검토 → 냉색 규약·경도(°W)·주석겹침·음의skill 구분 등 수정. **이관(다음 viz-통합 단계)**: basemap(coastline), dual-axis 분리, fold error-bar, SVG 폰트 감사.
+
+## 2026-07-06 17:20 — 논리 검증 + 문헌 재조사(49편) + 방향 확정(PLAN_FORWARD) + P0 정정
+
+### 검증 결과 (과대표현 정정)
+- **"17cm=물리하한" 폐기**: 비가역잡음 ~4cm(분산분해 within 12.3%), 현재 R²≈0.2 = **공변량 정보병목**. pseudo-replication 진단으로 확증(아래).
+- **pseudo-replication 발견**: `dl_dataset.csv` 225,421행 → 고유위치 14,348개. 한 위치 내 연도 달라도 **피처 std=0**(정적 climatology), ALT만 SD~14.6cm. 예: 한 셀 2013년 동일피처 ~100점, ALT 34–96cm. → 같은 X→다른 y = 라벨잡음, 모델 평균회귀 강제, apparent floor 생성. CV는 위치그룹핑이라 누설은 없음.
+- **"12.97cm=SOTA 돌파" 정정**: skill-over-mean(1−RMSE/자기SD) 전역 10.4% > 평탄툰드라 7.4% → 큐레이션은 설명력을 낮춤. 범위축소 아티팩트. "레짐별 지배 정보원 차이"로 재프레이밍.
+
+### 문헌 재조사
+- 워크플로 57에이전트·49편 web-검증, 오픈PDF 36편 `references/0X_*/` 정리 + `references/INDEX.md` + 핵심10편 `references/00_core10/`. 저자 오귀속 3건 적발(Ran2022 공저자·Rahaman↔Chance·Suzuki↔Ieki).
+- T1(지점 ALT 예측)=붐빔(Rahaman2025/Luo2022), T2(4D)=열림. 차별성=transfer+UQ+shallow3D(Koven2025 리뷰가 open gap 인증).
+
+### 방향 확정 + P0 착수
+- `docs/PLAN_FORWARD.md` 작성: 스레드 A(다중모달 ablation)/B(3D 조건장)/C(진단)/D(T-lite) + 횡단 AOA/UQ. 우선순위=데이터 활용량·규모+기술차별성.
+- **P0 정정 반영**: SESSION_HANDOFF·EXPERIMENTS 표현 수정(본 항목), GPT 핸드오프 `gpt/handoff/20260706_1717-lit-review-forecasting-4d-tracks.md`.
+
 ## 2026-07-06 11:13 — GitHub 초기화 + cleanup/handoff (토너먼트·floor·큐레이션 아크 정리)
 
 ### 이 세션의 작업

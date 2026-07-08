@@ -52,8 +52,8 @@
 | **B0b CCI피처+앙상블** | CCI 피처는 무익(중복정보). **앙상블 (DL+GBM)/2 = 17.5cm 최고** | `b0b_results.csv` |
 | **B1/B1b 3D 신경장 게이트** | NF 2.17→2.36°C vs **GBM 1.31/IDW 1.30** — 탈락, **3D 엔진=GBM 조건장**(킬스위치). 단 지역전이 GBM 1.40 < IDW 1.69(조건장이 전이 우세) | `b1_neural_field_results.csv`, `b1b_results.csv` |
 | **모델 토너먼트(6종, 6fold+2seed)** | 앙상블 16.95 ≈ **Diffusion 17.09** ≈ GBM 17.24 > FT-T 17.95 > MLP 18.18 > Flow 18.31 > TabM 20.36. **부트스트랩: 전 모델 GBM과 동률**(유의차 없음). 1:1 진단서 전 모델 평균회귀 → **정보병목 시각 확증**. Diffusion MAE 최저+네이티브 UQ로 채택 | `model_tournament_{results,perfold,significance}.csv`, `figures/06_deep_learning/model_tournament*.png`, `maps/deploy_*` |
-| **point-scale floor 4중 확증** | InSAR(ReSALT r=0.23~0.35)·PolSAR(우리점 r=0.31/38cm)·격자지지·areal 전부 17cm 못뚫음. 셀내 SD 11cm=대표성 하한 | `insar_ablation`·`polsar_residual`·`grid_support`·`areal_eval` |
-| **정확도-범위 트레이드오프(첫 돌파)** | 평탄툰드라(PolSAR+InSAR 앙상블) **12.97cm=SOTA급** → 완만 16.6 → 전역 17.3. 큐레이션+물리관측이 floor 돌파 | `curated_scope_results.csv`, `figures/06_deep_learning/accuracy_vs_scope.png` |
+| **정보병목(구 "floor", 정정)** | 17cm은 **물리하한 아님** — 쉬운 공변량(InSAR/PolSAR/격자) 소진 상태. **비가역잡음 ~4cm**, pseudo-replication(같은 공변량 셀 ALT 34–96cm)+척도불일치(라벨30m vs 기후9km)가 apparent floor 생성. 미투입 모달리티 헤드룸 존재 | `insar_ablation`·`polsar_residual`·`grid_support`·`areal_eval` (§스레드C 재분석 예정) |
+| **정확도-범위 트레이드오프(정정)** | 평탄지 12.97cm은 **범위축소 아티팩트**(skill-over-mean 7.4% < 전역 10.4%). **"SOTA 돌파" 아님**, 레짐별 지배 정보원 차이(평탄지=PolSAR만 유효). 모든 RMSE에 R²·skill 병기 | `curated_scope_results.csv`, `figures/06_deep_learning/accuracy_vs_scope.png` |
 | **고정밀 국소 데모** | 북사면 평탄툰드라 250m ALT 필드(PolSAR/모델/UQ 3패널) + Area-of-Applicability 마스크 | `maps/local_demo_alt_field.png` |
 
 ## 4. 산출물 (outputs/) — 규칙은 docs/VISUALIZATION.md
@@ -63,7 +63,9 @@
 - `volumes_3d/` : `thermal_cube_alaska`(3D 층층 슬라이스) / `animations/` : `thermal_depth_slices.gif`
 - `models/` : `b0_mlp_pretrained/finetuned_full.pt`, `b1b_neural_field.pt`, `patchcnn_fold*.pt`
 
-## 5. 다음
-- **모델 토너먼트(준비 완료, GPU 대기중)**: `scripts/3_deep_learning/model_tournament.py` — GBM·MLP·FT-Transformer·TabM·Flow matching·Diffusion을 동일 공간블록 CV로 비교(+생성모델 UQ 커버리지). torch 직접구현(외부 의존성 0). 실행: `CUDA_VISIBLE_DEVICES=<유휴> python3 scripts/3_deep_learning/model_tournament.py` → `charts_model_tournament.py`로 시각화. 스모크(SMOKE=1) 검증 완료: 6모델 정상, 소표본 미리보기서 FT-T/Flow가 GBM 상회·Flow/Diffusion UQ 91~93% 보정.
-- 그다음: 정확도 실질 지렛대 = 새 공변량 모달리티(Sentinel-1 InSAR 시계열·Sentinel-2 영상·SoilGrids)를 먹는 영상 CNN/ViT.
-- 3D(PyVista/VTK): 최고 모델 확정 후 — 복셀 볼륨 + marching-cubes 삼각메쉬 등온면 + DEM 드레이프 + 인터랙티브 HTML/고해상 렌더.
+## 5. 다음 → `docs/PLAN_FORWARD.md` (2026-07-06 확정)
+- **스레드 A**: ALT 다중모달 feature ablation(GBM 고정, 지형/기후/InSAR/PolSAR/토양/CCI 그룹, 공간블록+LORO) — "무엇이 ALT를 지배하나" 분해.
+- **횡단 AOA + Conformal UQ**: 외삽영역 마스킹 + 90% 구간 coverage 검증(현 Diffusion 74% 과신 보정).
+- **스레드 B(3D)**: GBM 조건장 + CCI prior + 물리 단조성, PyVista 인터랙티브 열큐브 + 0°C 등온면.
+- **스레드 C**: apparent-floor 진단 figure(pseudo-replication). **스레드 D**: T-lite GRU 게이트(연별 forcing).
+- 표준 metric: 모든 결과 CSV에 `r2·target_sd·skill_over_mean·coverage_90` 병기(`src/polar/eval_metrics.py`).
