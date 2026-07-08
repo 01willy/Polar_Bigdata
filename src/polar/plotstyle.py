@@ -113,6 +113,27 @@ def use_korean():
     return use_polar()
 
 
+def lon_formatter():
+    """음수 경도를 서경(°W)으로 표기하는 FuncFormatter (지도 x축 표기 오류 방지)."""
+    from matplotlib.ticker import FuncFormatter
+    def _f(x, _pos):
+        if x < 0:
+            return f"{abs(x):.0f}°W"
+        return f"{x:.0f}°E"
+    return FuncFormatter(_f)
+
+
+def lat_formatter():
+    from matplotlib.ticker import FuncFormatter
+    return FuncFormatter(lambda y, _p: f"{abs(y):.0f}°{'N' if y >= 0 else 'S'}")
+
+
+def despine(ax):
+    """상/우 spine 제거 (지도/그래프 공통)."""
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+
+
 def style_geo(ax, title=None, xlabel="경도 (°E)", ylabel="위도 (°N)"):
     """지도축 공통 마무리: 라벨·격자·타이틀."""
     if title:

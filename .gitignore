@@ -18,6 +18,8 @@ data/interim/
 data/processed/dl_dataset*.csv
 data/processed/*_predictions.csv
 data/processed/*fold_predictions*.csv
+data/processed/*_oof.csv
+data/processed/alt_era5_temporal.csv
 data/processed/alt_above_pointlevel.csv
 data/processed/dl_locations.csv
 # (추적 유지: curated_scope_results / model_tournament_results / *_significance /
@@ -29,8 +31,9 @@ outputs/models/
 *.pth
 *.ckpt
 
-# --- 저작권 논문 PDF (README만 추적) ---
+# --- 저작권 논문 PDF (README/INDEX .md만 추적, 하위폴더 포함 PDF 전부 제외) ---
 references/*.pdf
+references/**/*.pdf
 
 # --- Python ---
 __pycache__/

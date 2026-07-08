@@ -1,0 +1,52 @@
+{
+  "meta": {
+    "project": "Polar_Bigdata",
+    "purpose": "극지 빅데이터 대회 — ALT 2D + 얕은 3D 열구조 발표/그림 디자인 토큰",
+    "authority": "src/polar/plotstyle.py 의 use_polar()/CMAP 과 정합. 이 파일은 그 규약의 사람이 읽는 명세.",
+    "updated": "2026-07-06"
+  },
+  "colormaps": {
+    "principle": "Crameri 2020 (지각균일·색맹안전). 붉은 계열 금지. 부호장=0중심 발산, 비음수 강도=순차형.",
+    "alt":   { "cmc": "oslo_r (0.12–0.90 trunc)", "use": "활성층 두께/깊이(순차, 청색 짙을수록 두꺼움)", "kind": "sequential" },
+    "temp":  { "cmc": "vik", "use": "지중온도(0°C 중심 발산; TwoSlopeNorm vcenter=0)", "kind": "diverging", "center": 0 },
+    "err":   { "cmc": "acton (0.05–0.95 trunc)", "use": "오차/불확실성 폭(순차, 자주)", "kind": "sequential" },
+    "diff":  { "cmc": "broc", "use": "차이/개선(0 중심 발산)", "kind": "diverging", "center": 0 },
+    "count": { "cmc": "davos_r (0.06–0.97 trunc)", "use": "밀도/개수(순차)", "kind": "sequential" },
+    "terr":  { "cmc": "bukavu", "use": "고도/지형(중립 대지색)", "kind": "sequential" },
+    "aoa":   { "gray_outside": "#B8BEC6", "note": "AOA 외삽영역은 회색으로 마스킹(색으로만 정보전달 금지)" }
+  },
+  "categorical": {
+    "note": "모델/그룹 구분용 — 색맹안전, 냉색 우선",
+    "gbm": "#1f4e79", "dl": "#2e8b9e", "ensemble": "#6a51a3", "baseline": "#8a8f98",
+    "highlight": "#0b7285", "warn": "#b5651d"
+  },
+  "typography": {
+    "family": "NanumGothic (한글) / DejaVu Sans (라틴·수식)",
+    "title_pt": 15, "subtitle_pt": 12, "axis_label_pt": 11, "tick_pt": 9, "annot_pt": 9, "caption_pt": 8,
+    "weight_title": "bold"
+  },
+  "figure_sizes_in": {
+    "note": "target medium별 explicit 크기(inch). dpi: 논문/포스터 300, 슬라이드 200.",
+    "single_panel": [6.4, 4.8],
+    "map_single": [7.2, 6.0],
+    "wide_2panel": [11.0, 4.6],
+    "grid_3panel": [13.5, 4.6],
+    "poster_hero": [16.0, 10.0],
+    "slide_16x9": [12.8, 7.2]
+  },
+  "spacing": {
+    "grid": "축은 좌우/상하 정렬. subplot 간격 wspace/hspace 0.25 기본.",
+    "margin_frac": 0.08,
+    "colorbar": { "fraction": 0.046, "pad": 0.04, "label_required": true, "unit_required": true }
+  },
+  "line_marker": {
+    "linewidth": 1.8, "marker_size": 5, "grid_alpha": 0.25, "spine_top_right": "off"
+  },
+  "annotation_rules": {
+    "units_required_on": ["axes", "colorbars", "scalebars"],
+    "map_required": ["scalebar_or_gridlines", "north_or_latlon", "colorbar_with_unit"],
+    "no_rainbow_jet": true,
+    "signed_field_diverging_zero_centered": true,
+    "export": ["vector: SVG/PDF", "raster: PNG @ dpi"]
+  }
+}
