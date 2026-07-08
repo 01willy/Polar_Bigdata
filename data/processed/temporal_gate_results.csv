@@ -1,0 +1,7 @@
+cv_type,method,nfold,n,rmse_cm,r2,target_sd_cm,skill_over_mean
+spatial_block,static(정적기후),6,17800,21.653,0.1102,22.955,0.0567
+spatial_block,temporal(그해기후),6,17800,20.964,0.1659,22.955,0.0867
+LORO,static(정적기후),4,17800,20.675,0.1888,22.955,0.0993
+LORO,temporal(그해기후),4,17800,21.774,0.1002,22.955,0.0514
+per_year,static(정적기후),14,17715,16.601,0.4748,22.907,0.2753
+per_year,temporal(그해기후),14,17715,18.297,0.362,22.907,0.2013

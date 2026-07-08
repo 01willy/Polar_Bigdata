@@ -1,0 +1,7 @@
+cv_type,method,n,rmse_cm,mae_cm,r2,target_sd_cm,skill_over_mean
+spatial_block,(1) pooled(현재),14348,18.68,14.542,-0.0155,18.536,-0.0077
+spatial_block,(2) pooled+1/n가중,14348,16.509,11.994,0.2068,18.536,0.1094
+spatial_block,(3) cell-trained,14348,18.889,14.574,-0.0384,18.536,-0.019
+LORO,(1) pooled(현재),14332,18.431,13.702,0.0009,18.439,0.0004
+LORO,(2) pooled+1/n가중,14332,17.097,12.386,0.1403,18.439,0.0728
+LORO,(3) cell-trained,14332,16.943,12.045,0.1557,18.439,0.0812
