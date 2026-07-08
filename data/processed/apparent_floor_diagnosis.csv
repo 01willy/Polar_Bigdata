@@ -1,0 +1,2 @@
+n_points,n_unique_loc,within_frac_pct,between_frac_pct,irreducible_rmse_cm,total_sd_cm,current_best_rmse_cm,within_cell_sd_median_cm
+225421,14348,13.7,86.3,7.16,19.33,16.95,3.72
