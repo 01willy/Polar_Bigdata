@@ -51,6 +51,11 @@ venv/
 *secret*
 .claude/settings.local.json
 
+# --- 실행 로그 · 재생성 가능 렌더 PNG(용량) ---
+logs/
+deck/render/*.png
+deck/assets/figs/_prev_*.png
+
 # --- OS/에디터 ---
 .DS_Store
 *.swp

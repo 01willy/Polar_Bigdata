@@ -1,5 +1,11 @@
 # 데이터 취득 실행계획 (Data Acquisition Plan)
 
+> **[2026-07-10 갱신]** 이번 세션 진행/상태 (상세: `docs/EXPERIMENT_LOG.md` 2026-07-10 항목)
+> - **완료 — ESA CCI ALT prior 추출**: 기보유 25년 NetCDF(828MB)를 다년평균 → 14,348 셀 최근접 추출(`scripts/1_data_prep/enrich_cci_cell.py`). 전 셀 유효, 관측 셀평균과 r=0.53. ablation **M8 +CCI는 무익**(기후와 중복) — prior/benchmark로만 활용.
+> - **정체 — SoilGrids 250m**: ISRIC WebDAV VRT vsicurl 원격 windowed-read가 20분+ 산출 0으로 정체. 중단. **재시도 방안**: (a) 사전 타일 다운로드 후 로컬 창 읽기, (b) 시간대 바꿔 재시도, (c) 대체 미러. 스크립트 `scripts/0_download/soilgrids_alaska.py` 유지.
+> - **다음 우선순위**: SoilGrids(M6) → Sentinel-2/NDVI(M7) → PANGAEA CALM 2025(T-lite 월별 forcing). 각 모달리티는 동일 fold/target/가중/지표로 M3 대비 Δskill·Δcoverage·ΔAOA 보고 후 채택.
+> - **채택 원칙**: RMSE↓라도 전이(LORO)·커버리지 악화 시 주력 채택 안 함. 고차원 EO/SAR encoder(DL)는 handcrafted feature가 효과를 보인 뒤 게이트 통과 시만.
+
 > 작성일: 2026-06-30
 > 연구 목표: 전 지구 borehole 지중온도 + CALM ALT 관측 + 공변량 → 공간인식 딥러닝으로
 > (1) 주 출력 ALT 지도, (2) 0~20m 3D 지중 열구조, (3) 셀별 불확실성 예측, 그리고

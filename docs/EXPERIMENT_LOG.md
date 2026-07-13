@@ -3,6 +3,35 @@
 > 세션별 작업 기록. 큐레이션된 마스터 인덱스는 [EXPERIMENTS.md](EXPERIMENTS.md),
 > GPT 공유 핸드오프는 [gpt/handoff/](../gpt/handoff/) 참조.
 
+## 2026-07-10 — overnight: 셀 단위 재분석 + T-lite 게이트 + 데이터 확충 + 발표덱 v2
+
+GPT 계획(`gpt/20260709_claude_next_research_plan_dl_alt_3d.md`) P2/P3/P6-C 실행. 코드: `scripts/2_evaluation/overnight_cell_experiments.py`, `scripts/3_deep_learning/tlite_sequence_gate.py`, `scripts/1_data_prep/enrich_cci_cell.py`.
+
+### 셀 단위(location-equal) 다중모달 ablation — 정직한 재분석 (`alt_ablation_cell_results.csv`)
+- 기준선 = `dl_dataset_cell.csv`(14,348 셀, 셀평균 ALT). 공간블록·LORO, 표준지표.
+- **LORO**: M0 지역평균 21.8 · M1 기후 **16.45(skill 10.8%)** · M3 기후+지형 16.94(지형 추가 악화) · **M4 +InSAR 16.09(skill 12.7%, 물리 최고)** · M5 +PolSAR 16.98 · M9 전체 16.43.
+- **위치 대조군(lat+lon 2피처)**: LORO **15.72cm skill 14.7%** — 물리 공변량 조합보다 높음. 위도가 기후 이상을 대리 = **정보 병목의 직접 증거**. (점-단위 옛 ablation의 15% skill는 pseudo-replication 착시였음이 셀 재평가로 확증.)
+
+### 보정 UQ + AOA (셀, `alt_conformal_cell_results.csv`, `alt_aoa_cell_transfer.csv`)
+- raw 분위-GBM 90% 커버리지 **56.1%(심한 과신)** → **CQR 보정 85.9%**(폭 50.6cm). 점-단위(71%)보다 raw 과신 심함.
+- AOA DI-구간(qcut10→중복제거 6구간): RMSE 저DI 13 → 고DI 30cm. **커버리지는 비단조**(D1 61% → D3 88% 피크 → D6 50%) — 공간 calib/test 분리 + marginal 보장 특성. 정직히 표기.
+
+### T-lite 시계열 DL 게이트 — 정직한 음성 (`tlite_sequence_gate_results.csv`, gate_meta)
+- CALM site-year 251사이트·3,345 시퀀스. GRU/TCN vs persistence·climatology·GBM-annual. 검증: site-disjoint 5-fold + temporal holdout(≤2014/≥2015).
+- **site-disjoint**: GRU 16.79 < persistence 16.98 < GBM 17.33 (GRU 소폭 최우수). **temporal holdout**: **GBM-annual 15.86 < persistence 17.02 < GRU 19.15 < TCN 23.85** (DL 붕괴).
+- **게이트 미통과**(temporal 미충족) → 부록/future work 강등. **정적 tabular ALT는 GBM으로 충분** 재확인. DL은 고차원 EO/SAR·시간축에서 게이트 통과 시만.
+
+### 데이터 확충
+- **ESA CCI ALT prior**: 25년 다년평균을 14,348 셀에 추출(`enrich_cci_cell.py`), 전 셀 유효, 관측 셀평균과 **r=0.53**. ablation **M8 +CCI**: 개선 없음/악화(기후와 중복) — 정직한 음성. CCI는 prior/benchmark로만.
+- **SoilGrids**: ISRIC VRT vsicurl 원격 읽기 정체(산출 0) → 중단, 다음 세션 재시도(사전 타일 캐시 권장). 계획: `docs/DATA_ACQUISITION_PLAN.md` 갱신.
+
+### 발표덱 v2 (에디토리얼/학술 보고서)
+- v1의 "AI틱 라운드카드·테크그라디언트" 결별: 종이 배경 + 세리프 제목(Noto Serif CJK KR) + Pretendard 본문, booktabs 표, 저널형 러닝헤더/푸터, 박스없는 figure-of-merit, 렌더된 수식(skill·Stefan·CQR·DI·분산분해), 번호 캡션. 코드 `deck/report_lib.py`·`deck/build_report.py`(18슬라이드). 배경·동기·선행연구·연구질문 슬라이드 추가.
+- 시각+과학 리뷰 반복 반영(수식 여백·표 넘침·여백축소·GRU 게이트 정직 서술·Mloc=위경도·AOA 비단조·CCI 중복). 산출: `deck/render/permafrost_report.{pptx,pdf}`.
+- **문체 규율**: 모든 프로젝트 기본 = 정돈된 보고서/논문 톤(메모리 `report-tone-default` 고정, 전역 규칙 `~/.claude/rules/writing-tone.md`).
+- **덱 v2 개정(사용자 지적 반영)**: 렌더 텍스트에서 em-dash(—) 전량 제거(불릿 머리·러닝헤더 포함), 전역 규칙에 em-dash 금지 명시. 장식 위젯 절제(finding 컬러 세로바 제거, fom 컬러 규칙선 제거). 그림은 논문 관례로 재작성(도판에 박힌 결론형 굵은 제목 제거, 패널 라벨 (a)/(b), 회귀선 추가). 친절한 예시 추가(skill 계산 예, pseudo-replication 34/96cm 예, 누설 예). 수식 캐시 경로 버그 수정(`assets/eq/`). 시각·과학 리뷰 재반영.
+- **미완/다음 세션**: 그림 전면 재구성(concept·지도류 포함) 및 PPT 전면 재구성 검토. 사용자가 GPT와 상의 예정. README·PLAN_FORWARD·EXPERIMENTS 구계획 서술 현행화 필요(교차문서 감사 지적).
+
 ## 2026-07-08 — 스레드 R 착수: 데이터 재구조화(㉡집계·㉢가중) + ERA5 다년 확보
 
 ### 전략 확정 (재구조화 먼저 vs 다운로드 먼저)

@@ -1,5 +1,11 @@
 # Polar_Bigdata — 앞으로의 연구 세부 계획 (Forward Plan, 확정본)
 
+> **[2026-07-10 상태 갱신]** 이 문서(2026-07-06 작성) 이후 진행분은 `SESSION_HANDOFF.md`·`docs/EXPERIMENT_LOG.md`가 최신이다.
+> - 스레드 R(데이터 재구조화): 완료. 셀집계 `dl_dataset_cell.csv`(14,348셀) 채택, ㉡㉢ 가중/집계 채택, ㉠시간정합은 매핑에 음성으로 게이트 탈락.
+> - 스레드 A(다중모달 ablation): 셀 단위로 재실행 완료. 점-단위 옛 15% skill은 pseudo-replication 착시로 확인. 위경도만 skill 14.7%가 물리 공변량 조합 이상이므로 정보병목을 강화.
+> - 스레드 D(T-lite): 게이트 미통과 확정(temporal holdout에서 GBM-annual 우위). 예측용(T1) 응용으로만 유지하며 매핑 헤드라인이 아니다.
+> - 아래 §7 "다음 착수"는 데이터 확장·스레드 B(3D)·시각화만 유효하다.
+
 작성 2026-07-06 · 근거: 세션 검증결과 + GPT 방향분석(`gpt/polar_bigdata_research_direction_for_claude.md`) + 문헌 49편(`references/INDEX.md`).
 **우선순위(사용자 확정)**: ① 데이터 활용량·규모 + 기술적 차별성(연구 본체) → ② 임팩트·시각화(발표). 대회 형식(보고서/데모/PPT)은 후순위. 마감 여유 1개월+.
 

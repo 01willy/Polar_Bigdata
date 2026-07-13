@@ -1,6 +1,7 @@
 # SESSION_HANDOFF — Polar_Bigdata (현재 상태 스냅샷)
 
-**갱신**: 2026-07-06 18:40 · **다음 세션은 이 파일부터 읽으세요.** · 방향/계획: `docs/PLAN_FORWARD.md`
+**갱신**: 2026-07-10 (overnight) · **다음 세션은 이 파일부터 읽으세요.** · 방향/계획: `docs/PLAN_FORWARD.md` · 데이터확충: `docs/DATA_ACQUISITION_PLAN.md`
+**발표덱 v2**(에디토리얼/학술): `deck/render/permafrost_report.{pptx,pdf}` (18슬라이드, 빌드 `deck/build_report.py`+`deck/report_lib.py`). v1(progress)는 `deck/render/permafrost_progress.*`.
 
 ## 목표 (한 줄)
 전 지구 borehole 지중온도 + CALM ALT 관측 + 공변량 → 딥러닝으로 **ALT 2D 지도 + 얕은 3D 지중열구조 + 셀별 불확실성**,
@@ -19,6 +20,10 @@
 | **보정 UQ** (신규, 횡단) | quantile-GBM 과신을 conformal(CQR)이 90%로 보정 | coverage 71.2→**89.2%** | `alt_conformal_aoa_results.csv` |
 | **transfer AOA** (신규, 횡단) | 환경 비유사도(DI)↑ → 오차↑·커버리지↓. 외삽영역 정직 표기 | RMSE 15.5→27.1cm, cov 69→51%; AOA안 16.9<밖 21.0 | `alt_aoa_transfer_results.csv` |
 | **apparent-floor 진단** (신규, 스레드 C) | 17cm은 물리벽 아님 — 비가역 7.2cm ≪ 현재 | within 13.7%/between 86.3% | `apparent_floor_diagnosis.csv` |
+| **셀 단위 재분석** (신규 2026-07-10) | location-equal 재평가에서 skill 하락(점-단위 착시 제거 확증). **위치 대조군(lat+lon)이 물리 공변량 이상** = 정보병목 직접증거. 기후 지배·+InSAR 전이 최고·CCI prior 중복(무익) | LORO M1 기후 16.45(10.8%)·M4 +InSAR 16.09(12.7%)·**Mloc 위경도 15.72(14.7%)**·M8 +CCI 악화 | `alt_ablation_cell_results.csv` |
+| **보정 UQ·AOA (셀)** (신규 2026-07-10) | raw 90% 커버리지 56%(심한 과신)→CQR 86%. AOA DI-구간 RMSE 13→30cm, 커버리지 **비단조**(D3 88% 피크) | 56.1→85.9%(폭 50.6cm) | `alt_conformal_cell_results.csv`, `alt_aoa_cell_transfer.csv` |
+| **T-lite 시계열 DL 게이트** (신규 2026-07-10) | site-disjoint는 GRU 소폭 최우수이나 **temporal holdout에서 GBM-annual에 미달 → 게이트 미통과**(부록). 정적 tabular는 GBM 충분 재확인 | temporal: GBM 15.86<pers 17.02<GRU 19.15<TCN 23.85 | `tlite_sequence_gate_results.csv` |
+| **CCI prior 확충** (신규 2026-07-10) | ESA CCI ALT 25년 다년평균을 14,348셀 추출(전 셀 유효, 관측과 r=0.53). ablation M8은 무익(기후 중복) | r=0.53 · M8 개선 없음 | `scripts/1_data_prep/enrich_cci_cell.py` |
 
 ## 시각화 규약
 - **냉색 계열 표준**(cmcrameri, Crameri 2020): ALT=oslo_r, 온도=vik, 오차=acton, 차이=broc. 붉은 계열 금지.
@@ -28,17 +33,17 @@
 대회용 연구축 확정: **다중모달 big-data 융합 + 정직한 평가(누설통제·AOA·보정 UQ) + 얕은 3D + 전이**. 스레드 A(ALT 다중모달 ablation)·B(3D 조건장)·C(apparent-floor 진단)·D(T-lite 게이트) + 횡단 AOA/UQ. 우선순위: 데이터 활용량·규모 + 기술 차별성 → 시각화.
 
 ## 다음 (우선순위)
-1. **데이터 확장**(심사 1순위 지렛대): SoilGrids(서버복구)·Sentinel-1 InSAR 시계열·Sentinel-2 → ablation M7~M9 채우기. 22GB 보유분(PolSAR 7G·ReSALT 6.9G·CCI) 활용률↑.
+1. **데이터 확장**(심사 1순위 지렛대): SoilGrids(vsicurl 정체 → 사전 타일 캐시로 재시도)·Sentinel-1/2 → ablation M6/M7 채우기. CCI prior(M8)는 무익 확인. `docs/DATA_ACQUISITION_PLAN.md`.
 2. **스레드 B(3D)**: GBM 조건장 + CCI 0/1/2/5/10m prior + 물리 단조성 → PyVista 인터랙티브 열큐브 + 0°C 등온면. (`thermal3d_conditioned_gbm.py` 예정)
-3. **스레드 D(T-lite 게이트)**: 연별 ERA5 forcing + CALM site-year 시계열 → GRU vs GBM-annual, 전이 개선시만 확장.
-4. **시각화 통합(polish 단계)**: 이관된 QA 항목 — basemap(coastline), dual-axis 분리, fold error-bar, SVG 폰트 감사. + 슬라이드/포스터/인터랙티브 조립.
+3. **T-lite(부록)**: 게이트 미통과(temporal). 재시도 시 월별 ERA5 forcing + lagged ALT로 재검증 — 통과 못하면 future work 유지.
+4. **발표덱 후속**: 데이터 확충 결과 반영해 M6/M7 슬라이드 갱신. 필요시 포스터/인터랙티브 조립.
 
 ## 운영 메모
-- **GPU**: [6,7,8,9](2026-07-08 최신). 사용자가 매 세션 지정하므로 최신 지시 우선. GBM ablation/UQ·데이터 재구조화는 CPU(sklearn); GPU는 torch(GRU/3D)만.
-- **자격증명**: `~/.netrc`(Earthdata)는 사용자가 직접 관리. 비밀값 출력 금지.
-- **언어**: 모든 설명 한글.
-- **보류**: SoilGrids 다운로드(ISRIC 서버 불가) — 복구 시 `scripts/0_download/soilgrids_alaska.py`.
-- 대용량 데이터(22GB)는 git 제외 — `scripts/0_download`·`1_data_prep`로 재생성.
+- **GPU**: [0,1,2,3](2026-07-10 최신). 사용자가 매 세션 지정하므로 최신 지시 우선. **점유 변동 잦음**(세션 중 타 사용자 점유로 OOM 발생 이력) — 사용 전 `nvidia-smi` 필수, 소형 DL은 CPU도 충분. GBM ablation/UQ는 CPU(sklearn).
+- **자격증명**: `~/.netrc`·`~/.cdsapirc`는 사용자가 직접 관리. 비밀값 출력 금지.
+- **언어·문체**: 모든 설명 한글. **정돈된 보고서/논문 톤**(과장·수사·AI틱 금지) — 메모리 `report-tone-default`, 전역 규칙 `~/.claude/rules/writing-tone.md`.
+- **보류**: SoilGrids(ISRIC vsicurl VRT 정체) — `scripts/0_download/soilgrids_alaska.py` 재시도.
+- 대용량 데이터(22GB)·`dl_dataset*.csv`·`*_oof.csv`·`logs/`·`deck/render/*.png`는 git 제외 — 스크립트로 재생성.
 
 ## 문서 지도
 - 마스터 인덱스: `docs/EXPERIMENTS.md` · 세션 로그: `docs/EXPERIMENT_LOG.md` · 시각화: `docs/VISUALIZATION.md`
