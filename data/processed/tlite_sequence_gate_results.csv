@@ -1,0 +1,11 @@
+split,model,n,rmse_cm,mae_cm,bias_cm,r2,target_sd_cm,skill_over_mean
+site_disjoint,persistence,3345,16.984,8.178,-1.294,0.9794,118.35,0.8565
+site_disjoint,climatology,3345,20.422,9.866,-4.447,0.9702,118.35,0.8274
+site_disjoint,gbm_annual,3345,17.326,9.093,0.493,0.9786,118.35,0.8536
+site_disjoint,gru,3345,16.791,9.027,-0.141,0.9799,118.35,0.8581
+site_disjoint,tcn,3345,18.144,10.113,0.823,0.9765,118.35,0.8467
+temporal_holdout,persistence,1026,17.016,8.055,-1.618,0.9732,103.907,0.8362
+temporal_holdout,climatology,1026,21.547,10.206,-6.275,0.957,103.907,0.7926
+temporal_holdout,gbm_annual,1026,15.863,8.346,-0.238,0.9767,103.907,0.8473
+temporal_holdout,gru,1026,19.151,12.605,5.839,0.966,103.907,0.8157
+temporal_holdout,tcn,1026,23.846,17.593,13.356,0.9473,103.907,0.7705

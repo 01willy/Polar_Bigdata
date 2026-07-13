@@ -1,0 +1,26 @@
+{
+  "best_config": "M1 기후",
+  "best_feats": [
+    "e5_maat",
+    "e5_tdd",
+    "e5_fdd",
+    "e5_sqrt_tdd",
+    "e5_twarm",
+    "e5_tcold",
+    "e5_stl1",
+    "e5_swe"
+  ],
+  "n_cells": 14348,
+  "groups": {
+    "TERRAIN": 6,
+    "CLIMATE": 8,
+    "INSAR": 5,
+    "POLSAR": 3,
+    "CCI": 2,
+    "LOC": 2
+  },
+  "raw_cov": 56.1,
+  "cqr_cov": 85.9,
+  "cqr_width": 50.6,
+  "elapsed_s": 164.9
+}

@@ -1,0 +1,19 @@
+{
+  "n_samples": 3345,
+  "n_sites": 251,
+  "L": 8,
+  "device": "cpu",
+  "verdict": {
+    "gru": {
+      "beats_baselines_site": true,
+      "beats_baselines_temporal": false,
+      "gate_pass": false
+    },
+    "tcn": {
+      "beats_baselines_site": false,
+      "beats_baselines_temporal": false,
+      "gate_pass": false
+    }
+  },
+  "elapsed_s": 37.7
+}
