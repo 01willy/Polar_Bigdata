@@ -1,5 +1,7 @@
 # Handoff Index — Polar_Bigdata
 
+- [2026-07-14 11:39] [중간보고 PPT 재구성 + 연구방향·데이터구조 정밀검증](20260714_1139-ppt-rebuild-research-direction-audit.md) — 학습데이터 6.6MB=ALT ML 관행(병목=라벨희소+공변량정보, 문헌20편+ 검증), ALT(알래스카)와 지중온도(9개국) 별개망 발견(0°C깊이로 통합), 3D=GBM조건장·기후+깊이만·patch-CNN≈GBM 확인. PPT v3(Pretendard·EMP톤·2.5D단면). 다음: GPU 6,7,8,9로 P0(인벤토리지도)→P1(전지역·전공변량 통합학습)→P2(Stefan+DL)→P3~P5.
+
 - [2026-06-30 15:05] [전 지구 ALT 예측 — 데이터 구축 + Stage 0/1 baseline](20260630_1505-global-alt-baseline-stage0-1.md) — 목표 확정(다지역 ALT+전이), GTN-P/CALM 무계정 취득, 누설검증 평가골격, 도일피처 baseline(LORO ~97cm). 다음: 계정 데이터 or 공간DL.
 - [2026-07-06 11:13] [모델 토너먼트·floor 규명·큐레이션 SOTA급 데모·GitHub 초기화](20260706_1113-tournament-floor-curated-demo.md) — 6모델 전부 GBM과 동률(정보병목), 17cm=물리하한 4중확증, 큐레이션으로 첫 돌파(평탄툰드라 12.97cm=SOTA급), GitHub 버전관리 도입. 다음: 국소완성도/지형계층확장/3D+전이. **⚠️후속 정정: "17cm 물리하한"·"12.97 SOTA 돌파"는 각각 apparent floor·범위축소 아티팩트로 폐기(아래 참조).**
 - [2026-07-06 17:17] [문헌 재조사(49편)·예측(T1)/4D(T2) 트랙 신규성 판정](20260706_1717-lit-review-forecasting-4d-tracks.md) — 논리검증(17cm·12.97 정정), 문헌 49편 web-검증+핵심10편, T1 붐빔·T2 열림, 차별성=transfer+UQ+shallow3D. 방향 확정 PLAN_FORWARD.
