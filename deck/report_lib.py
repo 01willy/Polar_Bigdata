@@ -40,12 +40,12 @@ FILL    = RGBColor(0xF2, 0xF0, 0xE9)   # 아주 옅은 패널(드묾)
 INK_DK  = RGBColor(0x14, 0x28, 0x30)   # 표지 딥
 WHITE   = RGBColor(0xFF, 0xFF, 0xFF)
 
-# ---------- 폰트 ----------
-SERIF   = "Noto Serif CJK KR"     # 제목/섹션(세리프, 학술 무게)
-SANS    = "Pretendard"
+# ---------- 폰트 (Pretendard, ~/.fonts 설치 확인 · LibreOffice fontconfig 렌더) ----------
+SERIF   = "Pretendard ExtraBold"  # 제목(굵은 산세리프, EMP 덱 톤)
+SANS    = "Pretendard SemiBold"   # 본문
 SANS_M  = "Pretendard Medium"
 SANS_S  = "Pretendard SemiBold"
-SANS_L  = "Pretendard Light"
+SANS_L  = "Pretendard"
 
 
 def new_deck():
