@@ -119,3 +119,33 @@ GPT 계획(`gpt/20260709_claude_next_research_plan_dl_alt_3d.md`) P2/P3/P6-C 실
 ### 미결(다음 세션)
 - 확장 방향 3택 대기: ① 국소 데모 완성도(실측 검증수치+여러 창 일반성) ② 지형 계층 확장(툰드라/산지/삼림 각자 최적화) ③ 3D+전이(CCI 지중온도 1/2/5/10m).
 - SoilGrids 다운로드 보류(ISRIC 서버 불가). 서버 복구 시 `scripts/0_download/soilgrids_alaska.py` 재실행.
+
+## 2026-07-14 — 중간보고 PPT 전면 재구성 + 연구방향 검증(데이터규모·학습시간)
+
+### PPT (deck/build_midreport.py v3, 18슬라이드)
+- 폰트: Pretendard SemiBold/ExtraBold로 교체(~/.fonts 설치 확인, LibreOffice fontconfig 렌더). 기존 Pretendard 미인식→Noto 대체가 자간 깨짐 원인이었음. report_lib.py 수정.
+- 표지: 흰 배경 EMP 톤(청록 accent·룰선), ALT 지도 제거. 줄바꿈 자연화.
+- 아키텍처 그림(mk_architecture_fig.py): Digital Rock 논문 톤, 실제 데이터 썸네일(입력)→모델→산출물(출력).
+- 3D→2.5D 전환(mk_cross_section.py): PyVista 컷어웨이(SSAA·NaN흰색) 시도 후, 위도-깊이 단면+0°C 등온선+깊이슬라이스 5장의 2.5D로 교체(사용자 지시).
+- 그래프 6종 재제작(mk_midreport_figs.py): EMP·Digital Rock 톤(뚜렷한 색·굵은 값라벨·최소격자). bottleneck·sota·era5_transfer·cv_concept·tournament·conformal.
+- figure_hero 재설계: 지표 스트립+상세 설명 문단+해석 노트로 밀도↑, 여백·겹침 제거. 페이지 카운터 버그(6/18) 전역카운터로 수정.
+- QA: visual-reviewer 2회. 남은 것: 선행연구 이미지/모식도, DL 모델 전용 슬라이드, 실험결과 반영.
+
+### 연구방향 검증 (문헌 20편+ 조사, 파이프라인 실측)
+- 학습 데이터 = 6.6MB tabular(14,348셀×36피처), 22GB 아님. 22GB는 전처리(피처증류). 학습시간 초~분(GBM). ALT ML 관행 확인: Gautam2025 68사이트, Ran2022 ~1000점 → 우리 14,348은 상위권. 병목=데이터부피 아닌 라벨희소+공변량정보(분산분해 between 86%).
+- 3D = GBM 조건장(vol_thermal_field_alaska.py), 시추공 10,747점 학습, 기후+깊이만 입력. 신경장 폐기(2.2 vs GBM 1.3°C). 0°C 등온면 끊김=GBM 셀독립 예측.
+- patch-CNN 기시행: DEM패치+스칼라 17.2 ≈ GBM 17.7(대등). PolSAR7GB·ReSALT7GB SAR는 이미지 아닌 스칼라로만 활용.
+- 라벨 지역분포: ALT 94% 알래스카(ABoVE_AK 13,542). 시추공 지중온도는 9개국 260사이트(스위스7741·미국1600·러시아735·서시베리아390 등)로 다지역.
+- Stefan+DL 잔차 미실행(PI-LSTM 근거 27~69%↓). 물리 base+DL 보정이 라벨희소·전이열화 처방.
+
+### 데이터 확보
+- ALLena(시베리아 레나델타 9,186점), TPDC QTEC(티베트 지온), ds2332(기보유 확인). SMALT=우리 22만점과 동일(중복). FireALT 서버장애·대기.
+
+### 문서
+- docs/CONTEST_PLAN_2026.md(v2 두트랙), EXPERIMENT_ROADMAP.md(E1~E7), EXPERIMENT_PLAN_2026-07-14.md(P0~P5·공변량 인벤토리·Q&A). deck/DESIGN_BRIEF_MIDREPORT.md.
+
+### 미결(다음 세션, GPU 6,7,8,9)
+- P0: 데이터 인벤토리 세계지도 + 6모델별 ALT 예측·오차 지도(model_tournament_predictions.csv 재료).
+- P1: 전 공변량(DEM+InSAR+PolSAR+CCI) + 전 지역(알래스카+시베리아+티베트) 통합 ALT 재학습, 6모델 재비교.
+- P2: Stefan 물리 base + DL 잔차. P3: 3D 전공변량+연속성DL. P4: AlphaEarth 임베딩. P5(트랙): 이미지 조건 diffusion/flow.
+- 실험 결과는 전문 mapping·시각화 후 PPT 반영.

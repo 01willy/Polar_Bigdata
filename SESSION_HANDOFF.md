@@ -1,6 +1,13 @@
 # SESSION_HANDOFF — Polar_Bigdata (현재 상태 스냅샷)
 
-**갱신**: 2026-07-10 (overnight) · **다음 세션은 이 파일부터 읽으세요.** · 방향/계획: `docs/PLAN_FORWARD.md` · 데이터확충: `docs/DATA_ACQUISITION_PLAN.md`
+**갱신**: 2026-07-14 · **다음 세션은 이 파일부터 읽으세요.**
+
+## ★ 다음 세션 즉시 착수(2026-07-14 확정) — `docs/EXPERIMENT_PLAN_2026-07-14.md`
+GPU **6,7,8,9**. 순서: **P0** 데이터 인벤토리 세계지도 + 6모델별 ALT 예측·오차 지도(즉시) → **P1** 전 공변량(DEM+InSAR+PolSAR+CCI) + 전 지역(알래스카+시베리아 ALLena+티베트 QTEC) 통합 ALT 재학습·6모델 재비교 → **P2** Stefan 물리 base + DL 잔차 → **P3** 3D 전공변량+연속성DL(등온면 매끄럽게) → **P4** AlphaEarth 임베딩 → **P5(트랙)** 이미지 조건 diffusion/flow. 결과는 전문 mapping·시각화 후 PPT 반영.
+- 핵심 확인 사실: 학습데이터 6.6MB tabular(관행·상위권, 병목=라벨희소+공변량정보). ALT 94% 알래스카. 3D=GBM 조건장·기후+깊이만. 페이지7 ALT지도=ERA5만. 시추공 지중온도 9개국 260사이트.
+- 중간보고 PPT v3: `deck/build_midreport.py`(18슬라이드, Pretendard·EMP톤·2.5D단면·아키텍처그림), 렌더 `deck/render/permafrost_midreport.pdf`.
+
+기존 방향/계획: `docs/PLAN_FORWARD.md` · `docs/EXPERIMENT_ROADMAP.md`(E1~E7) · `docs/CONTEST_PLAN_2026.md`(대회 v2) · 데이터확충: `docs/DATA_ACQUISITION_PLAN.md`
 **발표덱 v2**(에디토리얼/학술): `deck/render/permafrost_report.{pptx,pdf}` (18슬라이드, 빌드 `deck/build_report.py`+`deck/report_lib.py`). v1(progress)는 `deck/render/permafrost_progress.*`.
 
 ## 목표 (한 줄)
@@ -39,7 +46,7 @@
 4. **발표덱 후속**: 데이터 확충 결과 반영해 M6/M7 슬라이드 갱신. 필요시 포스터/인터랙티브 조립.
 
 ## 운영 메모
-- **GPU**: [0,1,2,3](2026-07-10 최신). 사용자가 매 세션 지정하므로 최신 지시 우선. **점유 변동 잦음**(세션 중 타 사용자 점유로 OOM 발생 이력) — 사용 전 `nvidia-smi` 필수, 소형 DL은 CPU도 충분. GBM ablation/UQ는 CPU(sklearn).
+- **GPU**: [6,7,8,9](2026-07-14 최신). 사용자가 매 세션 지정하므로 최신 지시 우선. **점유 변동 잦음**(세션 중 타 사용자 점유로 OOM 발생 이력) — 사용 전 `nvidia-smi` 필수, 소형 DL은 CPU도 충분. GBM ablation/UQ는 CPU(sklearn).
 - **자격증명**: `~/.netrc`·`~/.cdsapirc`는 사용자가 직접 관리. 비밀값 출력 금지.
 - **언어·문체**: 모든 설명 한글. **정돈된 보고서/논문 톤**(과장·수사·AI틱 금지) — 메모리 `report-tone-default`, 전역 규칙 `~/.claude/rules/writing-tone.md`.
 - **보류**: SoilGrids(ISRIC vsicurl VRT 정체) — `scripts/0_download/soilgrids_alaska.py` 재시도.
