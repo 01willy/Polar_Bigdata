@@ -1,0 +1,30 @@
+{
+  "purpose": "KPDC 콘슬·c1 현장 기상 → 지점 연도별 기후 지표(ERA5 검증·물리 forcing용)",
+  "n_records": 4,
+  "sites": [
+    "Council",
+    "c1"
+  ],
+  "years": [
+    2016,
+    2018,
+    2019,
+    2021
+  ],
+  "tdd_definitions": {
+    "tdd_st": "일평균>0 누적(물리 정의). 결측일 제외(부분연도).",
+    "tdd_st_mon": "월평균>0 클립 × 관측일수(ERA5-Land 방법과 동일 정의). ERA5 대조 전용."
+  },
+  "valid_months_note": "valid_months = 실측 자료에 존재하는 월(pipe 구분). ERA5 대조 마스킹의 단일 진실 원천이다. c1 2018은 원자료가 10-18일에 끝나 관측월=1-10월이다.",
+  "coord_note": "콘슬 64.85N/-163.70W(ALT 44셀 확인). c1 좌표 미확정 → 콘슬 좌표 잠정·불확실 표기.",
+  "coverage_notes": [
+    "Council 2021: 304 valid days, MAAT=-2.168",
+    "Council 2019: 100 growing-season days (months [6, 7, 8, 9])",
+    "c1 2016: 365 valid days, MAAT=-0.556",
+    "c1 2018: 291 valid days, MAAT=1.193"
+  ],
+  "missing_codes_removed": [
+    -9999,
+    6999.0
+  ]
+}

@@ -1,0 +1,4 @@
+cv,model,n_sites,n_violation,viol_rate
+site_gkf6,FIELD_full,190,36,0.1895
+spatial_block6,FIELD_full,190,40,0.2105
+loro,FIELD_full,178,33,0.1854

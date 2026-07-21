@@ -1,0 +1,58 @@
+{
+  "cell": "data/processed/dl_dataset_cell_v2.csv",
+  "n_cells": 17422,
+  "features": [
+    "dem_elev",
+    "dem_slope",
+    "dem_aspect_sin",
+    "dem_aspect_cos",
+    "dem_tpi",
+    "dem_rough",
+    "e5_maat",
+    "e5_tdd",
+    "e5_fdd",
+    "e5_sqrt_tdd",
+    "e5_twarm",
+    "e5_tcold",
+    "e5_stl1",
+    "e5_swe",
+    "insar_alt",
+    "insar_alt_std",
+    "insar_sub",
+    "insar_dist",
+    "insar_n",
+    "polsar_alt",
+    "polsar_std",
+    "polsar_valid",
+    "cci_alt",
+    "cci_valid",
+    "insar_miss"
+  ],
+  "n_feat": 25,
+  "smoke": false,
+  "regions": {
+    "ABoVE_AK": 13542,
+    "Lena_RU": 3037,
+    "ABoVE_CA": 726,
+    "United States (Alaska)": 64,
+    "Canada": 16,
+    "GTNPenv_RU": 15,
+    "GTNPenv_SJ": 10,
+    "GTNPenv_US": 9,
+    "GTNPenv_CH": 2,
+    "QTP_CN": 1
+  },
+  "loro_regions": [
+    "ABoVE_CA",
+    "ABoVE_AK",
+    "Lena_RU"
+  ],
+  "epochs": {
+    "mlp": 60,
+    "ftt": 45,
+    "tabm": 60,
+    "flow": 80,
+    "diff": 70
+  },
+  "elapsed_s": 271.8
+}

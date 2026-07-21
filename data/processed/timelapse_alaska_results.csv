@@ -1,0 +1,10 @@
+model,eval_type,n,rmse_cm,mae_cm,bias_cm,r2,skill_over_mean
+STEFAN,temporal_holdout,99931,14.967,11.23,-2.457,0.338,0.1864
+GBM_ANN,temporal_holdout,99931,19.187,15.759,-3.553,-0.0879,-0.043
+MLP,temporal_holdout,99931,16.273,12.545,-5.027,0.2175,0.1154
+STEFAN,within_site_anomaly,5690,11.719,7.393,-0.0,-0.0064,-0.0032
+GBM_ANN,within_site_anomaly,5690,15.308,11.249,0.0,-0.7172,-0.3104
+MLP,within_site_anomaly,5690,12.88,8.946,0.0,-0.2157,-0.1026
+OBS_annual_mean,trend_alt,15,1.2878,0.0721,-2524.53,0.0721,
+OBS_annual_mean,trend_tdd,15,26.763,,,,
+within_site,corr_tdd_alt_anom,5690,,,,0.0707,

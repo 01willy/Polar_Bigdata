@@ -1,0 +1,114 @@
+{
+  "task": "experiment2_A1_field3d_leakage_reeval",
+  "n_rows": 8258,
+  "n_sites": 255,
+  "n_regions": 8,
+  "leakage": {
+    "n_sites": 255,
+    "nn_km_median": 0.8211,
+    "nn_km_q": [
+      0.0,
+      0.0027,
+      0.0635,
+      0.8211,
+      24.9954,
+      90.5529
+    ],
+    "frac_nn_lt_1km": 0.5255,
+    "frac_nn_lt_5km": 0.6157,
+    "n_blocks": 112,
+    "n_multi_blocks": 42,
+    "max_sites_in_block": 19,
+    "frac_sites_in_multiblock": 0.7255
+  },
+  "cv_schemes": {
+    "site_gkf6": "6fold",
+    "spatial_block6": "6fold(block=0.5deg)",
+    "loro": "4regions:['Switzerland', 'United States', 'Russia', 'Svalbard']"
+  },
+  "overall_rmse": {
+    "site_gkf6": {
+      "FIELD_base": 1.2271,
+      "FIELD_full": 1.1815
+    },
+    "spatial_block6": {
+      "FIELD_base": 1.3705,
+      "FIELD_full": 1.4436
+    },
+    "loro": {
+      "FIELD_base": 1.5992,
+      "FIELD_full": 1.7288
+    }
+  },
+  "band_delta_full_minus_base": {
+    "site_gkf6": {
+      "0-2m": 0.0061,
+      "2-5m": -0.0348,
+      "5-10m": -0.1238,
+      "10-20m": -0.0695,
+      "all": -0.0456
+    },
+    "spatial_block6": {
+      "0-2m": 0.2334,
+      "2-5m": 0.1061,
+      "5-10m": 0.0191,
+      "10-20m": -0.1139,
+      "all": 0.0731
+    },
+    "loro": {
+      "0-2m": 0.1688,
+      "2-5m": 0.2273,
+      "5-10m": 0.1519,
+      "10-20m": 0.0547,
+      "all": 0.1296
+    }
+  },
+  "deep_verdict_by_cv": {
+    "site_gkf6": "full_improves_deep",
+    "spatial_block6": "no_deep_gain",
+    "loro": "no_deep_gain"
+  },
+  "monotonicity": {
+    "site_gkf6": 0.1895,
+    "spatial_block6": 0.2105,
+    "loro": 0.1854
+  },
+  "sample_composition": {
+    "frac_permos_overall": 0.7295,
+    "frac_switzerland_overall": 0.7447,
+    "deep_5_20m_frac_switzerland": 0.8159,
+    "note": "심부 5-20m 밴드가 스위스 PERMOS 알프스 암빙하 시추공에 80%+ 편중. 그림3 알래스카 2m/20m 지도는 심부 신호가 스위스 데이터에 지배되는 도메인 밖 외삽이다."
+  },
+  "fold_balance_spatial_block6": {
+    "n_rows_min": 187,
+    "n_rows_max": 2940,
+    "n_deep_min": 78,
+    "n_deep_max": 1294,
+    "note": "fold 행수 심한 불균형. 밴드 델타는 pooled OOF(스위스-과다 fold 가중)이며 작은 fold서 noisy. 단일 밴드 델타 수치를 정밀 효과크기로 과대해석 금지."
+  },
+  "alt_consistency_honest": {
+    "n_matched": 130,
+    "n_evaluated": 89,
+    "n_nan_envelope": 41,
+    "n_clip_sat": 9,
+    "frac_clip_sat": 0.101,
+    "delta_holdout_median_m": 1.0,
+    "seasonal_max_envelope": {
+      "n": 89,
+      "rmse": 171.83,
+      "mae": 142.18,
+      "bias": 0.94,
+      "corr": 0.162,
+      "n_matched": 130,
+      "n_nan_envelope": 41,
+      "n_clip_sat": 9,
+      "frac_clip_sat": 0.101,
+      "interpretation": "null_negative"
+    },
+    "interpretation": "null_negative",
+    "note": "유도 ALT가 관측 ALT를 추종하지 못함(r=0.16, RMSE 172cm, 평가점 10% 400cm 클립 포화). 귀무/음성 결과이며 field 모델의 독립 검증 근거로 인용해서는 안 된다."
+  },
+  "magt_reference_note": "field_alt_magt_cm(참고 전용)은 버그수정 후 완전동결 프로파일에 대해 NaN을 반환한다(과거 버전은 표층 음온 시 d[0]=0cm를 반환해 86/109개의 무의미한 0값을 양산). 헤드라인 통계에는 미사용.",
+  "verdict": "공변량 추가(full)의 심부 이득은 site-GKF에서만 나타나고 누설통제(공간블록·LORO)서 소멸·역전. 따라서 '3D 심부 field가 공변량으로 개선된다'는 기존 주장은 기각. 심부 표본이 스위스 알프스에 편중되어 알래스카 심부 field는 도메인 밖 외삽이며, ALT 교차 정합은 귀무결과로 독립 검증 불가.",
+  "note": "site-GKF는 근접 사이트 누설을 허용(사이트 73%가 0.5°블록 공유). 공간블록·LORO에서 심부 full 이득이 소멸·역전하므로 기존 심부 개선은 누설 착시."
+}

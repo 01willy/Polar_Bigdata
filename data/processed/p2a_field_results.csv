@@ -1,0 +1,11 @@
+model,cv,depth_band,n,rmse_c,r2
+FIELD_base,site_gkf6,0-2m,2245,1.3636,0.6727
+FIELD_base,site_gkf6,2-5m,1766,1.0792,0.4323
+FIELD_base,site_gkf6,5-10m,1653,1.1988,0.414
+FIELD_base,site_gkf6,10-20m,1715,1.2168,0.5455
+FIELD_base,site_gkf6,all,8258,1.2271,0.5941
+FIELD_full,site_gkf6,0-2m,2245,1.3697,0.6698
+FIELD_full,site_gkf6,2-5m,1766,1.0444,0.4683
+FIELD_full,site_gkf6,5-10m,1653,1.075,0.5288
+FIELD_full,site_gkf6,10-20m,1715,1.1473,0.596
+FIELD_full,site_gkf6,all,8258,1.1815,0.6237

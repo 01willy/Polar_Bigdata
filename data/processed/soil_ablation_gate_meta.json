@@ -1,0 +1,42 @@
+{
+  "gate": "reject",
+  "rule": "공간블록+LORO 둘 다 M_climterr 대비 rmse 감소 && skill 증가 시에만 채택",
+  "verdict": {
+    "spatial_block": {
+      "climterr_rmse": 24.47,
+      "soil_rmse": 19.09,
+      "d_rmse": -5.38,
+      "climterr_skill": -0.2094,
+      "soil_skill": 0.0564,
+      "d_skill": 0.2658,
+      "improved": true
+    },
+    "LORO": {
+      "climterr_rmse": 21.98,
+      "soil_rmse": 31.5,
+      "d_rmse": 9.52,
+      "climterr_skill": -0.1429,
+      "soil_skill": -0.6377,
+      "d_skill": -0.4948,
+      "improved": false
+    }
+  },
+  "lena_transfer": {
+    "lena_climterr_rmse": 22.13,
+    "lena_soil_rmse": 62.62,
+    "lena_d_rmse": 40.49
+  },
+  "n_soil_features": 9,
+  "soil_features": [
+    "sg_bdod_5_15",
+    "sg_cfvo_5_15",
+    "sg_clay_5_15",
+    "sg_phh2o_5_15",
+    "sg_sand_5_15",
+    "sg_silt_5_15",
+    "sg_soc_0_5",
+    "sg_soc_15_30",
+    "sg_soc_5_15"
+  ],
+  "elapsed_s": 51.1
+}

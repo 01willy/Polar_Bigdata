@@ -1,0 +1,2 @@
+lat,lon,region,alt_cm,alt_sd,alt_min,alt_max,n_obs,year_min,year_max,n_years,censor_flag,site
+35.22,93.08,QTP_CN,298.0952380952381,25.590531128656014,280.0,316.1904761904762,2,2014,2019,2,1,Wudaoliang

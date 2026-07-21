@@ -1,0 +1,153 @@
+{
+  "n_cells": 17423,
+  "n_feats": 23,
+  "feats": [
+    "e5_maat",
+    "e5_tdd",
+    "e5_fdd",
+    "e5_sqrt_tdd",
+    "e5_twarm",
+    "e5_tcold",
+    "e5_stl1",
+    "e5_swe",
+    "dem_elev",
+    "dem_slope",
+    "dem_aspect_sin",
+    "dem_aspect_cos",
+    "dem_tpi",
+    "dem_rough",
+    "sg_clay_5_15",
+    "sg_sand_5_15",
+    "sg_silt_5_15",
+    "sg_bdod_5_15",
+    "sg_cfvo_5_15",
+    "sg_phh2o_5_15",
+    "sg_soc_0_5",
+    "sg_soc_5_15",
+    "sg_soc_15_30"
+  ],
+  "soil_E_feats": [
+    "sg_soc_5_15",
+    "sg_bdod_5_15",
+    "sg_clay_5_15",
+    "e5_swe"
+  ],
+  "missing_cols": [],
+  "device": "cuda:0",
+  "seed_ensemble": 5,
+  "target_sd_cm": 20.234,
+  "loro_regions": [
+    "ABoVE_AK",
+    "ABoVE_CA",
+    "Lena_RU"
+  ],
+  "loro_covered_cells": {
+    "ABoVE_AK": 13542,
+    "ABoVE_CA": 726,
+    "Lena_RU": 3037
+  },
+  "loro_excluded_small_cells": 118,
+  "representativeness_note": "LORO 전역 지표(n=17305)의 대표성은 사실상 3개 대지역(AK·CA·Lena)에 국한된다. 소규모 지역 118셀(region<100: US(Alaska)·Canada·GTNPenv_* 등)은 어떤 LORO test 폴드에도 등장하지 않는다(누설 아님, 대표성 한정).",
+  "council_summary": {
+    "PHYS_const": {
+      "n": 44,
+      "mean_pred": 58.79,
+      "mean_obs": 35.0,
+      "bias": 23.8,
+      "ratio": 1.68,
+      "rmse": 27.31,
+      "pred_std": 0.19,
+      "obs_std": 13.38,
+      "corr": -0.089
+    },
+    "PHYS_soil": {
+      "n": 44,
+      "mean_pred": 64.71,
+      "mean_obs": 35.0,
+      "bias": 29.71,
+      "ratio": 1.849,
+      "rmse": 32.59,
+      "pred_std": 0.18,
+      "obs_std": 13.38,
+      "corr": -0.089
+    },
+    "PHYS_nn": {
+      "n": 44,
+      "mean_pred": 38.47,
+      "mean_obs": 35.0,
+      "bias": 3.47,
+      "ratio": 1.099,
+      "rmse": 13.67,
+      "pred_std": 0.9,
+      "obs_std": 13.38,
+      "corr": 0.213
+    },
+    "matched_cells": 44
+  },
+  "council_leakage_note": "콘슬 44셀 교정은 held-out 전이가 아니라 완전 in-domain 이다. 44셀 전부(43셀 ABoVE_AK)가 최종 모델의 학습 데이터에 포함되며, 이 44셀로 학습한 모델을 같은 44셀에서 예측한다. 따라서 콘슬 결과에서 전이 일반화 주장을 도출하면 안 된다. 또한 콘슬 44셀은 √TDD 동일값이라 상수 E 모델(const·soil)의 예측은 사실상 단일점이고, PHYS_nn 은 예측 표준편차 0.9cm(obs 13.38cm)로 좁은 밴드에 뭉쳐 obs 와 셀별 상관 0.213(약 0.2, seed별 요동)에 불과하다. 즉 bias 감소는 셀별 물리보정이 아니라 평균회귀다.",
+  "lena_phys_nn_seed_spread": {
+    "n_seeds": 5,
+    "single_seed_rmse": [
+      70.03,
+      38.95,
+      52.21,
+      34.48,
+      39.42
+    ],
+    "single_seed_rmse_mean": 47.02,
+    "single_seed_rmse_sd": 12.93,
+    "single_seed_rmse_min": 34.48,
+    "single_seed_rmse_max": 70.03,
+    "single_seed_bias": [
+      58.85,
+      24.51,
+      38.46,
+      20.41,
+      24.99
+    ],
+    "single_seed_E_mean": [
+      3.36,
+      2.22,
+      2.71,
+      2.09,
+      2.23
+    ],
+    "E_mean_range": [
+      2.09,
+      3.36
+    ],
+    "ensemble_rmse": 45.64
+  },
+  "claim_i_soil_nn_vs_const": {
+    "lena_PHYS_const": 22.16,
+    "lena_PHYS_soil": 21.61,
+    "lena_PHYS_nn": 45.64,
+    "loro_PHYS_const": 18.24,
+    "loro_PHYS_soil": 19.99,
+    "loro_PHYS_nn": 25.72,
+    "soil_helps_lena": true,
+    "nn_helps_lena": false,
+    "lena_PHYS_soil_debiased_rmse": 20.946,
+    "lena_PHYS_soil_corr": 0.13,
+    "lena_PHYS_const_debiased_rmse": 21.007,
+    "lena_PHYS_const_corr": 0.103,
+    "soil_gain_is_mean_shift_only": true,
+    "soil_skill_over_mean_negative": true
+  },
+  "claim_ii_phys_constraint_effect": {
+    "lena_PHYS_nn": 45.64,
+    "lena_ML_pure_nn": 32.59,
+    "lena_phys_effect_cm": -13.05,
+    "loro_PHYS_nn": 25.72,
+    "loro_ML_pure_nn": 22.25,
+    "loro_phys_effect_cm": -3.47,
+    "phys_constraint_helps": false
+  },
+  "claim_iii_Ex_vs_raw": {
+    "lena_PHYS_soil": 21.61,
+    "lena_PHYS_nn": 45.64,
+    "lena_ML_pure_gbm_raw": 65.13,
+    "Ex_beats_raw_soil": true
+  },
+  "elapsed_s": 531.7
+}

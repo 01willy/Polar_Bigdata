@@ -1,0 +1,176 @@
+{
+  "n_cells": 17423,
+  "n_feats": 25,
+  "feats": [
+    "dem_elev",
+    "dem_slope",
+    "dem_aspect_sin",
+    "dem_aspect_cos",
+    "dem_tpi",
+    "dem_rough",
+    "e5_maat",
+    "e5_tdd",
+    "e5_fdd",
+    "e5_sqrt_tdd",
+    "e5_twarm",
+    "e5_tcold",
+    "e5_stl1",
+    "e5_swe",
+    "insar_alt",
+    "insar_alt_std",
+    "insar_sub",
+    "insar_dist",
+    "insar_n",
+    "polsar_alt",
+    "polsar_std",
+    "polsar_valid",
+    "cci_alt",
+    "cci_valid",
+    "insar_miss"
+  ],
+  "missing_cols": [],
+  "target_sd_cm": 20.234,
+  "E_fits": {
+    "spatial_block": [
+      {
+        "fold": 0,
+        "region": null,
+        "E_mode": "intercept",
+        "E": 1.541,
+        "a": 0.6303,
+        "train_rmse": 19.493,
+        "strat_g0": 1.5526,
+        "strat_g1_swe": 1.0551,
+        "strat_g2_maat": 0.0113,
+        "n_tr": 12705,
+        "n_te": 4718
+      },
+      {
+        "fold": 1,
+        "region": null,
+        "E_mode": "intercept",
+        "E": 1.2205,
+        "a": 11.5301,
+        "train_rmse": 16.115,
+        "strat_g0": 1.6095,
+        "strat_g1_swe": 0.0815,
+        "strat_g2_maat": 0.0041,
+        "n_tr": 14882,
+        "n_te": 2541
+      },
+      {
+        "fold": 2,
+        "region": null,
+        "E_mode": "intercept",
+        "E": 1.3398,
+        "a": 8.7663,
+        "train_rmse": 16.919,
+        "strat_g0": 1.5758,
+        "strat_g1_swe": 1.0304,
+        "strat_g2_maat": 0.0045,
+        "n_tr": 14882,
+        "n_te": 2541
+      },
+      {
+        "fold": 3,
+        "region": null,
+        "E_mode": "intercept",
+        "E": 1.1606,
+        "a": 13.3181,
+        "train_rmse": 17.142,
+        "strat_g0": 1.5744,
+        "strat_g1_swe": 0.8945,
+        "strat_g2_maat": 0.0053,
+        "n_tr": 14882,
+        "n_te": 2541
+      },
+      {
+        "fold": 4,
+        "region": null,
+        "E_mode": "intercept",
+        "E": 1.3016,
+        "a": 9.8747,
+        "train_rmse": 17.701,
+        "strat_g0": 1.5761,
+        "strat_g1_swe": 0.7681,
+        "strat_g2_maat": 0.0032,
+        "n_tr": 14882,
+        "n_te": 2541
+      },
+      {
+        "fold": 5,
+        "region": null,
+        "E_mode": "intercept",
+        "E": 1.2879,
+        "a": 11.1245,
+        "train_rmse": 17.222,
+        "strat_g0": 1.5658,
+        "strat_g1_swe": 0.8222,
+        "strat_g2_maat": -0.0049,
+        "n_tr": 14882,
+        "n_te": 2541
+      }
+    ],
+    "LORO": [
+      {
+        "fold": 0,
+        "region": "ABoVE_CA",
+        "E_mode": "intercept",
+        "E": 1.25,
+        "a": 11.1952,
+        "train_rmse": 16.894,
+        "strat_g0": 1.5585,
+        "strat_g1_swe": 0.8856,
+        "strat_g2_maat": 0.0015,
+        "n_tr": 16697,
+        "n_te": 726
+      },
+      {
+        "fold": 1,
+        "region": "ABoVE_AK",
+        "E_mode": "intercept",
+        "E": 2.127,
+        "a": -19.7436,
+        "train_rmse": 25.842,
+        "strat_g0": 1.9287,
+        "strat_g1_swe": 1.2014,
+        "strat_g2_maat": 0.0557,
+        "n_tr": 3881,
+        "n_te": 13542
+      },
+      {
+        "fold": 2,
+        "region": "Lena_RU",
+        "E_mode": "intercept",
+        "E": 1.2654,
+        "a": 11.9845,
+        "train_rmse": 16.324,
+        "strat_g0": 1.5652,
+        "strat_g1_swe": 0.7143,
+        "strat_g2_maat": -0.0071,
+        "n_tr": 14386,
+        "n_te": 3037
+      }
+    ]
+  },
+  "gate": {
+    "spatial_block": {
+      "rmse_RESIDUAL": 20.255,
+      "rmse_ML_only": 20.524,
+      "rmse_PHYS_only": 17.86,
+      "d_vs_ML": -0.269,
+      "d_vs_PHYS": 2.395,
+      "RESIDUAL_improves_both": false
+    },
+    "LORO": {
+      "rmse_RESIDUAL": 48.841,
+      "rmse_ML_only": 40.644,
+      "rmse_PHYS_only": 18.237,
+      "d_vs_ML": 8.197,
+      "d_vs_PHYS": 30.604,
+      "RESIDUAL_improves_both": false
+    }
+  },
+  "verdict": "REJECT",
+  "elapsed_s": 50.1
+}

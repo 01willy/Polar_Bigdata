@@ -1,0 +1,155 @@
+{
+  "part_A_validation": {
+    "definition": "ERA5 도일 = 월평균>0 클립 × 그 달 일수. 지점도 동일 정의(tdd_st_mon)로 대조.",
+    "masking": "부분연도는 실측 관측월만 골라 ERA5 도일·MAAT 계산(정합). 관측월은 parse_kpdc_met가 자료에서 유도한 valid_months(단일 진실 원천)를 사용한다. 관측월: Council 2021=1-10, Council 2019=6-9, c1 2016=1-12, c1 2018=1-10.",
+    "masking_bugfix": "이전 버전은 c1 2018 관측월을 1-12로 잘못 지정해(원자료는 10-18일 종료) ERA5 MAAT를 11-12월(Nov -6.97·Dec -17.94) 포함 12개월로 계산, 허위 냉편의 bias -2.59°C를 만들었다. 관측월 1-10 정합 시 c1 2018 bias는 -0.38°C이며, MAAT 요약은 bias -0.31°C·RMSE 0.32°C로 정정된다. 따라서 ERA5 MAAT 냉편의 주장은 성립하지 않는다.",
+    "small_sample_caveat": "√TDD 상관 r=0.88(n=4)과 RMSE 1.04는 단일 이상점 Council 2019(성장기 부분값)에 의해 지배된다. 이 점을 빼면 n=3에서 r=1.00·RMSE 0.13으로 급변한다(summary.sqrt_tdd_loo 참조). r=0.88을 'ERA5가 지점을 잘 추종'의 일반 근거로 해석하지 말 것.",
+    "summary": {
+      "maat": {
+        "metric": "MAAT (°C)",
+        "n": 3,
+        "bias_mean": -0.3047048708597819,
+        "rmse": 0.3182500552464187,
+        "abs_max": 0.38347087430953986
+      },
+      "tdd": {
+        "metric": "TDD (°C·d)",
+        "n": 4,
+        "bias_mean": 41.31106658935545,
+        "rmse": 77.06820082775023,
+        "abs_max": 153.27669799804698
+      },
+      "sqrt_tdd": {
+        "metric": "√TDD",
+        "n": 4,
+        "bias_mean": 0.5547054455066007,
+        "rmse": 1.043756267884611,
+        "abs_max": 2.0761451167969085
+      },
+      "corr_maat": 0.9995791297184673,
+      "corr_tdd": 0.882705775629375,
+      "corr_sqrt_tdd": 0.8834557135812995,
+      "sqrt_tdd_loo": {
+        "n": 4,
+        "r_all": 0.8834557135812995,
+        "rmse_all": 1.043756267884611,
+        "r_range_loo": [
+          0.8295067018365537,
+          0.9998479480094916
+        ],
+        "rmse_range_loo": [
+          0.1256052559860968,
+          1.2033561067892669
+        ],
+        "per_point": [
+          {
+            "dropped": "Council 2021",
+            "r_without": 0.8410050598630856,
+            "rmse_without": 1.2033561067892669
+          },
+          {
+            "dropped": "Council 2019",
+            "r_without": 0.9998479480094916,
+            "rmse_without": 0.1256052559860968
+          },
+          {
+            "dropped": "c1 2016",
+            "r_without": 0.8295067018365537,
+            "rmse_without": 1.2033255170530552
+          },
+          {
+            "dropped": "c1 2018",
+            "r_without": 0.882901819021828,
+            "rmse_without": 1.2024448789546611
+          }
+        ]
+      },
+      "maat_loo": {
+        "n": 3,
+        "r_all": 0.9995791297184673,
+        "rmse_all": 0.3182500552464187,
+        "r_range_loo": null,
+        "rmse_range_loo": [
+          0.2799994478113508,
+          0.36940741386297044
+        ],
+        "per_point": [
+          {
+            "dropped": "Council 2021",
+            "r_without": null,
+            "rmse_without": 0.36940741386297044
+          },
+          {
+            "dropped": "c1 2016",
+            "r_without": null,
+            "rmse_without": 0.2983081708593587
+          },
+          {
+            "dropped": "c1 2018",
+            "r_without": null,
+            "rmse_without": 0.2799994478113508
+          }
+        ]
+      },
+      "n_note": "n<=4 사례연구. 상관·RMSE는 단일 점 의존이라 leave-one-out 범위를 병기한다."
+    }
+  },
+  "part_B_forcing": {
+    "n_council_cells": 44,
+    "n_train_ak_cells": 13562,
+    "stefan_fit": {
+      "mode": "intercept",
+      "E": 1.2371807950444744,
+      "a": 12.638750935392162,
+      "train_rmse": 13.746036390812021
+    },
+    "forcing_sqrt_tdd": {
+      "era5_cell_median": 37.661927411740194,
+      "era5_point": 36.14545451526084,
+      "kpdc_station": 35.1655
+    },
+    "council_rmse_cm": {
+      "era5_cell": {
+        "rmse": 27.840642715025712,
+        "mae": 24.81462985464356,
+        "bias": 24.40539196575281
+      },
+      "era5_point": {
+        "rmse": 26.057675673763338,
+        "mae": 22.870760246234056,
+        "bias": 22.3601377007303
+      },
+      "kpdc_station": {
+        "rmse": 25.025073845243337,
+        "mae": 21.713487562949766,
+        "bias": 21.147756794432475
+      },
+      "ak_mean_baseline": {
+        "rmse": 20.495207944536855,
+        "mae": 17.06101903809345,
+        "bias": 15.525039296774402
+      },
+      "council_mean_baseline": {
+        "rmse": 13.380086080568285,
+        "mae": 10.567033754637048,
+        "bias": 1.937843824800273e-15
+      }
+    },
+    "skill_over_council_mean": {
+      "era5_point": -0.9474968633876386,
+      "kpdc_station": -0.8703223353388516
+    },
+    "forcing_delta_rmse_cm": 1.0326018285200007,
+    "delta_rmse_interpretation": "ΔRMSE ~1.0cm는 √TDD 정의 불일치 잡음 수준이다. 지점 forcing √TDD는 Council 2019 성장기 부분값(양의 도일 일부 누락으로 과소)이 평균에 섞여 우연히 낮아진 것일 수 있다. '실측이 ERA5보다 우세'로 읽지 말 것. 방향성 근거는 약하다.",
+    "leakage_control": "Stefan E·a는 AK 학습셋(region ABoVE_AK·United States (Alaska), 콘슬 박스 제외) 13,562셀에서 적합했고 콘슬 44셀은 하나도 포함되지 않는다(누출 0, 재현 확인). 콘슬 셀은 예측·평가에만 쓰였다.",
+    "skill_baseline_note": "skill 하한은 콘슬에 유리한 AK train 평균(50.5cm)이 아니라 콘슬 국소 평균(35cm, RMSE 13.4cm)으로 채택했다. 세 forcing(25-28cm) 모두 이 자명한 하한을 못 이기므로 forcing에 유리한 누출은 없다. '정보 병목은 기후 forcing 정밀도가 아니다'라는 결론은 유지된다."
+  },
+  "caveats": [
+    "콘슬 단일 지역·소표본(ALT 셀 44, 지점 관측연 2)이라 일반화 아닌 사례연구.",
+    "n<=4 지표(상관·RMSE)는 단일 점 의존이므로 leave-one-out 범위 병기(summary 참조).",
+    "성장기 부분값(2019)·11-12월 결측(2021)으로 지점 연지표 부분성.",
+    "부분월 가중 불일치(경미): c1 2018 10월은 지점이 관측일수(18일) 가중인데 ERA5는 10월 31일 전체를 쓴다. √TDD bias +0.14 수준으로 결론에 영향 없으나 정의상 부분월 정합이 완전하지는 않다.",
+    "c1 좌표 미확정(콘슬 잠정)이라 c1 검증은 보조·불확실.",
+    "ERA5 셀 √TDD는 2015-2020 정적 기후, 지점 실측은 관측연 → 시기 불일치 잔존."
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "generated": "2026-07-20 14:56",
+  "runtime_sec": 28.6,
+  "n_label_rows": 764,
+  "n_boreholes": 30,
+  "n_sites": 14,
+  "n_fold": 6,
+  "depth_range_m": [
+    0.02,
+    3.0
+  ],
+  "max_cov_join_km": 15.5,
+  "feats": [
+    "e5_maat",
+    "e5_tdd",
+    "e5_fdd",
+    "e5_sqrt_tdd",
+    "e5_twarm",
+    "e5_tcold",
+    "e5_stl1",
+    "e5_swe",
+    "dem_elev",
+    "dem_slope",
+    "dem_aspect_sin",
+    "dem_aspect_cos",
+    "dem_tpi",
+    "dem_rough",
+    "sg_clay_5_15",
+    "sg_sand_5_15",
+    "sg_silt_5_15",
+    "sg_bdod_5_15",
+    "sg_cfvo_5_15",
+    "sg_phh2o_5_15",
+    "sg_soc_0_5",
+    "sg_soc_5_15",
+    "sg_soc_15_30",
+    "depth_m",
+    "sqrt_depth",
+    "inv_depth",
+    "exp_depth",
+    "sqrttdd_x_expdepth"
+  ],
+  "metric_unit": {
+    "bands": "C (t_max, 온도)",
+    "alt_match": "cm (0C 교차 유도 ALT)",
+    "note": "all_metrics 컬럼명은 _cm 고정이나 밴드행 값은 °C다. results CSV의 unit 컬럼 참조."
+  },
+  "metrics_all_mono": {
+    "n": 764,
+    "rmse_cm": 2.66,
+    "mae_cm": 2.056,
+    "bias_cm": -0.13,
+    "r2": 0.4688,
+    "target_sd_cm": 3.65,
+    "skill_over_mean": 0.2712,
+    "coverage_90": NaN,
+    "width_90": NaN
+  },
+  "metrics_all_free": {
+    "n": 764,
+    "rmse_cm": 2.812,
+    "mae_cm": 2.158,
+    "bias_cm": -0.267,
+    "r2": 0.4065,
+    "target_sd_cm": 3.65,
+    "skill_over_mean": 0.2296,
+    "coverage_90": NaN,
+    "width_90": NaN
+  },
+  "monotonicity_violation": {
+    "mono": 0.0,
+    "free": 0.3243,
+    "note": "mono=0.000은 물리 정합의 독립 검증이 아니라 제약의 자명한 귀결이다. 시추공 내부에서 공변량은 상수이고 depth 파생 5피처가 모두 depth에 단조라, 5피처 전부에 monotonic_cst를 걸면 프로파일 감소 단조가 수학적으로 보장된다. 무제약(free) 위반율 0.324와의 대비가 정보이며, 0.000 자체를 '장의 물리적 사실성' 증거로 인용하면 과대해석이다."
+  },
+  "loro_true": {
+    "method": "각 사이트 완전제외 재적합 후 그 사이트만 예측(진짜 leave-one-site-out)",
+    "n_sites_reported": 10,
+    "n_pos_skill_loro": 8,
+    "n_pos_skill_oof6_aggregation": 7,
+    "note": "이전 결과의 'LORO'는 실제로 6-fold OOF의 사이트별 집계였다(co-fold 사이트가 함께 훈련에서 빠져 진짜 LORO가 아님). 진짜 LORO 재적합 시 사이트별 R²가 이동한다 (예 Barrow 0.15->0.39, Ivotuk 0.54->0.21, Galbraith -0.06->+0.12, Dead Horse 0.72->0.63). 양전이 다수 방향은 유지되나 표현을 'LORO'로 정정했다. 상세는 loro CSV의 r2(=LORO)·r2_oof6(=6-fold 집계) 컬럼 비교."
+  },
+  "alt_match": {
+    "n_boreholes_with_obs": 21,
+    "n_with_pred_crossing": 18,
+    "r": 0.282,
+    "rmse_cm": 40.662,
+    "r2": -0.2938,
+    "bias_cm": 11.239,
+    "no_fairbanks": {
+      "n": 12,
+      "r": 0.254,
+      "rmse_cm": 23.789,
+      "r2": -0.3042
+    },
+    "note": "RMSE 41cm는 헤드라인 단독 사용 부적절. Fairbanks(18개 중 6개) 제외 시 RMSE 41->24cm로 급감하는데 이는 모델 개선이 아니라 Fairbanks 심부 obs ALT를 3m 관측격자가 못 잡아 생기는 절단 아티팩트다. r(0.28->0.25)은 큰 변화 없다. obs·pred ALT 모두 최심 관측깊이(<=3m)로 상한 절단되므로 평가가 얕은 대역에 유리하게 편향된다(altmatch CSV의 alt_obs_near_maxdepth 플래그 참조). R²<0(=자기평균보다 나쁨)이 정직한 요약이다."
+  },
+  "phase1_deep_reference": {
+    "r": 0.162,
+    "rmse_cm": 172.0,
+    "n": 89,
+    "obs_alt_sd_cm": 150,
+    "obs_alt_max_cm": 495,
+    "frac_pred_clip_400cm": 0.1,
+    "note": "field3d_reeval 심부판(스위스+알래스카 혼합) 0C->ALT 참조. RMSE 절대비교는 사과-오렌지 비교다. 심부판 n=89·obs ALT SD≈150cm·최대 495cm·10%가 400cm 클립 포화, 얕은판 n=18·obs ALT SD≈37cm(알래스카 전용). 대상 분산이 약 4배 작아 RMSE 절대차(41 vs 172cm)의 상당부는 모델 우수성이 아니라 대상범위 축소를 반영한다. 두 판 모두 자기평균 대비 skill이 음수(심부≈-0.21, 얕은 R²≈-0.29)라는 점이 정직한 그림이다. '약 4배 개선'· '얕은 장이 심부 장을 명백히 이긴다'는 표현은 부적절."
+  },
+  "caveats": [
+    "라벨=시추공 t_max(연최대 월기후 온도) 실측만. 유사라벨 미사용.",
+    "공변량은 최근접 ALT 셀에서 취득(최대 15.5km) — 원지점 재추출 아님.",
+    "사이트 14개로 공간블록·LORO 표본 제한. 툰드라 사면 편중 가능(외삽·표본편향).",
+    "격자 예측은 3m 이하 얕은 대역 한정(심부 외삽 아님).",
+    "격자 예측은 완전한 공변량을 가진 이산 알래스카 셀을 4개 깊이에서 산점 예측한 것이다. 연속 볼륨/조밀 '온도장'이 아니며 '3D 온도장'이라는 표현은 산출물보다 조밀·연속성을 과장한다.",
+    "온도 예측 자체는 held-out 검증 성립(t_max site-block R²≈0.47). ALT 유도 정합은 성립하지 않음(R²<0)."
+  ]
+}

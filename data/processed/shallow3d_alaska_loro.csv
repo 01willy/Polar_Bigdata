@@ -1,0 +1,11 @@
+model,cv,site,n,rmse_cm,mae_cm,bias_cm,r2,target_sd_cm,skill_over_mean,coverage_90,width_90,r2_oof6,rmse_oof6_cm
+gbm_mono,LORO_site,Barrow,49,1.919,1.278,1.063,0.3851,2.447,0.2159,,,0.1491,2.257
+gbm_mono,LORO_site,Chandalar Shelf,33,1.388,1.149,0.425,0.5714,2.12,0.3453,,,0.5909,1.356
+gbm_mono,LORO_site,Dead Horse,87,1.569,1.305,-1.305,0.6329,2.59,0.3941,,,0.7157,1.381
+gbm_mono,LORO_site,Fairbanks,190,2.871,2.281,0.453,0.4464,3.859,0.2559,,,0.4464,2.871
+gbm_mono,LORO_site,Franklin Bluff,174,3.076,2.496,-2.263,0.2689,3.597,0.1449,,,0.2689,3.076
+gbm_mono,LORO_site,Galbraith Lake,31,2.571,2.396,2.342,0.1198,2.741,0.0618,,,-0.0583,2.819
+gbm_mono,LORO_site,Happy Valley,46,3.839,3.164,3.144,-1.1011,2.648,-0.4495,,,-0.6225,3.373
+gbm_mono,LORO_site,Ivotuk,48,3.865,2.57,-2.108,0.2099,4.348,0.1111,,,0.5439,2.936
+gbm_mono,LORO_site,Sagwon,52,1.963,1.364,-0.78,0.6195,3.183,0.3832,,,0.6218,1.958
+gbm_mono,LORO_site,West Dock,41,2.867,2.612,2.612,-1.3645,1.865,-0.5377,,,-1.0875,2.694

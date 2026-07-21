@@ -1,0 +1,123 @@
+{
+  "claim": "라벨 증강이 전이에 해가 된다",
+  "verdict": "부분기각(조건부 성립)",
+  "reason": "결측 공변량을 가진 전공변량 GBM만 대폭 악화(Δ-66cm)하고, 결측 없는 물리·기후만·지형기후 모델은 무해(|Δ|<10cm)하다. 열화는 심부 라벨 자체의 분포이동이 아니라 결측 공변량과 심부 GTNPenv 라벨의 결합이 원인이다(H1 지지). 다만 (1) BASE 전이 자체가 평균예측보다 나쁜 근퇴화 상태(skill=-0.033)라 cap의 '회복'은 전이 기량 회복이 아니라 평균예측 수준 복귀이며, (2) 붕괴 기제는 _isnan 플래그 단독이 아니라 심부 GTNPenv 18행이 핵심이다(플래그 제거만으로는 88→76cm 부분완화, 심부18행 제거 시 플래그有 23·플래그無 32cm 회복). '증강이 해가 된다'는 [전공변량 GBM + 무처리]라는 좁은 조건에서만 성립한다.",
+  "confirmed_conclusions": [
+    "전공변량 GBM의 Lena 전이 붕괴(BASE 21.8 -> AUG 88.1cm)는 seed 견고(GBM AUG 범위 74.2-88.1cm, 모든 seed에서 BASE보다 30cm+ 악화).",
+    "결측 없는 물리(Δ-0.1)·기후만ML(Δ-1.7)·지형기후ML은 증강에 무해 -> 붕괴는 결측 공변량 채널을 통해서만 전파(H1 지지).",
+    "붕괴 기제는 _isnan 플래그 단독이 아님: 심부 GTNPenv 18행 제거가 플래그 유무와 무관하게 회복을 유발(AUG 88.1 -> nodeep 22.5). 플래그 제거만으로는 76.0로 부분완화에 그침."
+  ],
+  "corrections_from_v1": [
+    "tautology 명시: LORO에서 test 지역 제외 시 학습셋이 BASE와 비트 동일해지는 셀(+Lena@Lena, +GTNPenv@GTNPenv_ALL)을 tautology 열로 표시. '+Lena 단독 무해'는 자명성의 산물이라 근거 아님.",
+    "Lena 증강 순효과는 GTNPenv_OUT 타깃에서만 관측 가능: +Lena는 오히려 소폭 악화(Δ+2.28cm) -> '+Lena 무해' 결론 철회.",
+    "근퇴화 기저선 표면화: Lena 상수 평균예측 RMSE=21.09cm(=std), BASE full ML=21.78cm(skill=-0.033<0). BASE 전이는 평균예측보다 나쁨. cap '회복'은 평균예측 수준 복귀.",
+    "기제 과단정 정정: '_isnan 플래그 라우팅'은 여러 채널 중 하나. 심부 GTNPenv 18행이 핵심.",
+    "누설 위치 정정: GTNPenv_US 혼입은 기존 p2m GTNPenv_ALL '전이 집계'의 표본오염(집계착시)이지, 본 재해부의 공간블록/LORO CV를 오염시키는 train/test 누설이 아님(test 블록 공유 행 전부 배제)."
+  ],
+  "lena_transfer_variants": {
+    "note": "+Lena는 Lena가 test라 LORO 제외 -> 학습셋이 BASE와 동일(tautology). 변형 비교 아님.",
+    "BASE_rmse": 21.78,
+    "BASE_skill": -0.033,
+    "+Lena_rmse": 21.78,
+    "+Lena_tautology": "identical_to_BASE",
+    "+GTNPenv_rmse": 88.13,
+    "+GTNPenv_skill": -3.178,
+    "+Lena+GTNPenv_rmse": 88.13,
+    "+Lena+GTNPenv_skill": -3.178
+  },
+  "lena_augmentation_net_effect_on_GTNPenv_OUT": {
+    "note": "Lena가 test 아닌 타깃에서 관측한 Lena 증강 순효과. +면 악화.",
+    "BASE_rmse": 144.78,
+    "+Lena_rmse": 147.06,
+    "delta_cm": 2.28
+  },
+  "near_degenerate_baseline": {
+    "lena_obs_mean_cm": 42.22,
+    "constant_mean_pred_rmse_cm": 21.09,
+    "base_full_ml_rmse_cm": 21.78,
+    "base_skill_over_mean": -0.0326,
+    "base_is_worse_than_mean_pred": true
+  },
+  "controls_lena": {
+    "full_ml_BASE_vs_AUG_rmse": [
+      21.78,
+      88.13,
+      -66.35
+    ],
+    "climate_ml_BASE_vs_AUG_rmse": [
+      22.0,
+      23.74,
+      -1.74
+    ],
+    "physics_BASE_vs_AUG_rmse": [
+      22.07,
+      22.16,
+      -0.09
+    ],
+    "routing_hypothesis_supported": true
+  },
+  "mechanism_2x2_lena_rmse": {
+    "BASE_flags": 21.78,
+    "AUG_flags": 88.13,
+    "AUG_noflags": 76.01,
+    "AUG_nodeep_flags": 22.53,
+    "AUG_nodeep_noflags": 31.6,
+    "n_deep_removed": 18,
+    "flag_removal_alone_recovers": false,
+    "deep_removal_recovers": true,
+    "primary_driver": "deep_GTNPenv_labels"
+  },
+  "deep_treatments_lena_rmse": {
+    "as_is": 88.13,
+    "cap_gt150": 25.06,
+    "aoa_gate": 48.06,
+    "deep_downweight": 48.63,
+    "base_transfer_rmse": 21.78,
+    "treatments_recovering_to_near_BASE": [
+      "cap_gt150"
+    ],
+    "note": "cap만 BASE 근처(평균예측 수준)로 복귀. gate/downweight는 48cm로 회복 실패. '심부처리로 회복'은 cap 한정."
+  },
+  "seed_robustness": {
+    "gbm_BASE": {
+      "mean": 23.19,
+      "sd": 0.86,
+      "lo": 21.78,
+      "hi": 23.91,
+      "n": 4
+    },
+    "gbm_AUG": {
+      "mean": 82.82,
+      "sd": 5.59,
+      "lo": 74.17,
+      "hi": 88.13,
+      "n": 4
+    },
+    "mlp_BASE": {
+      "mean": 32.79,
+      "sd": 8.04,
+      "lo": 24.18,
+      "hi": 43.53,
+      "n": 3
+    },
+    "mlp_AUG": {
+      "mean": 70.72,
+      "sd": 6.78,
+      "lo": 61.45,
+      "hi": 77.49,
+      "n": 3
+    },
+    "gbm_collapse_robust_across_seeds": true,
+    "mlp_BASE_unstable_across_seeds": true,
+    "dl_conclusion_note": "MLP BASE 자체가 seed에 따라 24-44cm로 변동. 'DL은 증강 하에서만 붕괴'라는 인과 서술은 seed 취약. AUG는 모든 seed에서 BASE보다 나쁘나(평균 71 vs 33), 단일 seed 결론은 불안정."
+  },
+  "leakage_diagnosis": {
+    "gtnpenv_us_n": 9,
+    "gtnpenv_us_blocks": 7,
+    "gtnpenv_us_blocks_shared_with_AK": 7,
+    "gtnpenv_us_in_AK_box": 9,
+    "classification": "aggregation_contamination_in_p2m_GTNPenv_ALL_transfer_not_CV_leakage_in_this_dissect",
+    "note": "GTNPenv_US 7블록 전부 AK 블록. 기존 p2m의 GTNPenv_ALL 전이 집계에 AK 내부 9셀 혼입(집계착시). 본 재해부 공간블록/LORO CV는 test 블록 공유 행을 전부 train서 배제하므로 누설 안전."
+  },
+  "elapsed_s": 150.7
+}

@@ -1,0 +1,5 @@
+target,variant,obs_mean,pred_mean,pred_std,overestimate_cm,constant_flag
+Lena_RU,BASE,42.22,50.71,3.75,8.49,False
+Lena_RU,+Lena,42.22,50.71,3.75,8.49,False
+Lena_RU,+GTNPenv,42.22,127.76,6.85,85.54,False
+Lena_RU,+Lena+GTNPenv,42.22,127.76,6.85,85.54,False

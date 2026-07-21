@@ -1,0 +1,11 @@
+dataset,cv_type,region,eval_scope,n,rmse_cm,mae_cm,bias_cm,r2,target_sd_cm,skill_over_mean
+BASE,spatial_block_AK,Alaska_all,alaska_cells,14348,18.223,14.046,4.254,0.0335,18.536,0.0169
+AUG,spatial_block_AK,Alaska_all,alaska_cells,14348,20.368,15.803,6.334,-0.2074,18.536,-0.0988
+BASE,LORO_transfer,Lena_RU,held_out_region,3037,21.782,16.467,8.488,-0.0663,21.094,-0.0326
+AUG,LORO_transfer,Lena_RU,held_out_region,3037,89.199,87.31,86.57,-16.8817,21.094,-3.2287
+BASE,LORO_transfer,GTNPenv_ALL,held_out_region,38,131.028,106.803,-105.56,-1.7336,79.249,-0.6534
+AUG,LORO_transfer,GTNPenv_ALL,held_out_region,38,132.862,106.742,-106.328,-1.8107,79.249,-0.6765
+BASE,LORO_transfer,ABoVE_CA,held_out_region,726,25.877,20.1,-2.433,0.265,30.184,0.1427
+AUG,LORO_transfer,ABoVE_CA,held_out_region,726,28.008,20.214,-8.081,0.139,30.184,0.0721
+AUG_AK+Lena,spatial_block_Lena,Lena_RU,lena_own_labels_in_train,3037,17.837,11.773,-1.253,0.285,21.094,0.1544
+AUG_AK+GTNPenv,LORO_confound_diag,Lena_RU,gtnpenv_confound,3037,89.199,87.31,86.57,-16.8817,21.094,-3.2287

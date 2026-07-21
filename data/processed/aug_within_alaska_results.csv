@@ -1,0 +1,5 @@
+model,real_only_rmse_cm,real_only_r2,real_only_skill,best_aug_config,best_aug_rmse_cm,best_aug_r2,best_aug_skill,delta_rmse_cm,delta_rmse_ci_lo,delta_rmse_ci_hi,aug_helps_sig
+GBM,14.961,0.2591,0.1393,real+phys+borehole,14.204,0.3322,0.1828,-0.757,-0.847,-0.667,True
+MLP,13.982,0.3529,0.1956,real+phys_r1.0_w0.3_const,13.857,0.3645,0.2028,-0.125,-0.204,-0.052,True
+FTTransformer,15.25,0.2303,0.1227,real+phys_r2.0_w1.0_const,14.389,0.3147,0.1722,-0.861,-0.978,-0.744,True
+TabM,15.375,0.2176,0.1155,real+phys_r0.5_w1.0_const,14.182,0.3343,0.1841,-1.193,-1.32,-1.056,True

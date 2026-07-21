@@ -1,0 +1,48 @@
+{
+  "gate_verdict": "미채택",
+  "alaska_indomain": {
+    "BASE_rmse_cm": 18.22,
+    "AUG_rmse_cm": 20.37,
+    "delta_BASE_minus_AUG_cm": -2.14,
+    "BASE_skill": 0.0169,
+    "AUG_skill": -0.0988,
+    "note": "양수 delta=AUG가 알래스카 in-domain 개선; 음수=in-domain 소폭 해"
+  },
+  "transfer_Lena_RU": {
+    "n": 3037,
+    "BASE_rmse_cm": 21.78,
+    "AUG_rmse_cm": 89.2,
+    "delta_BASE_minus_AUG_cm": -67.42,
+    "BASE_skill": -0.0326,
+    "AUG_skill": -3.2287,
+    "improved": false
+  },
+  "transfer_GTNPenv_ALL": {
+    "n": 38,
+    "BASE_rmse_cm": 131.03,
+    "AUG_rmse_cm": 132.86,
+    "delta_BASE_minus_AUG_cm": -1.83,
+    "BASE_skill": -0.6534,
+    "AUG_skill": -0.6765,
+    "improved": false
+  },
+  "diagnostic_Lena_selfconsistency": {
+    "note": "AK+Lena 공동학습 후 Lena 공간블록 CV(=Lena 라벨이 train에 있을 때). Lena 자체 라벨의 유용성/자기일관성 지표.",
+    "rmse_cm": 17.84,
+    "skill": 0.1544,
+    "r2": 0.285,
+    "interpretation": "이 값이 BASE→Lena(21.78)보다 우수하고 skill>0이면 Lena 라벨 자체는 유효. LORO 열화는 GTNPenv 교란 탓."
+  },
+  "diagnostic_GTNPenv_confound": {
+    "note": "AK+GTNPenv→Lena(GTNPenv 제외 안 함). GTNPenv 심부 라벨의 교란.",
+    "rmse_cm": 89.2,
+    "interpretation": "GTNPenv 37셀(평균 154cm 심부)이 Lena 냉대륙 OOD 기후에서 과대추정 유발."
+  },
+  "augment_label_quality": {
+    "n_new": 3075,
+    "in_range_0_400_pct": 100.0,
+    "alt_min": 2.0,
+    "alt_max": 298.1
+  },
+  "elapsed_s": 131.6
+}

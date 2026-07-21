@@ -1,0 +1,129 @@
+{
+  "track": "alpha_P2a",
+  "n_rows": 8258,
+  "n_sites": 255,
+  "n_regions": 8,
+  "features": {
+    "base": [
+      "e5_maat",
+      "e5_tdd",
+      "e5_fdd",
+      "e5_sqrt_tdd",
+      "e5_twarm",
+      "e5_tcold",
+      "e5_stl1",
+      "e5_swe",
+      "depth_m",
+      "logd",
+      "ff0",
+      "ff1",
+      "ff2",
+      "ff3",
+      "ff4",
+      "ff5",
+      "ff6",
+      "ff7",
+      "ff8",
+      "ff9"
+    ],
+    "full": [
+      "e5_maat",
+      "e5_tdd",
+      "e5_fdd",
+      "e5_sqrt_tdd",
+      "e5_twarm",
+      "e5_tcold",
+      "e5_stl1",
+      "e5_swe",
+      "dem_elev",
+      "dem_slope",
+      "dem_aspect_sin",
+      "dem_aspect_cos",
+      "dem_tpi",
+      "dem_rough",
+      "cci_alt",
+      "depth_m",
+      "logd",
+      "ff0",
+      "ff1",
+      "ff2",
+      "ff3",
+      "ff4",
+      "ff5",
+      "ff6",
+      "ff7",
+      "ff8",
+      "ff9",
+      "has_dem",
+      "cci_valid"
+    ],
+    "excluded": [
+      "insar5",
+      "polsar3"
+    ],
+    "exclude_reason": "InSAR/PolSAR는 알래스카 전용 → 시추공 위치 전면 결측"
+  },
+  "dem": {
+    "sites_with_dem": 245,
+    "sites_total": 255,
+    "tiles_ok": 92,
+    "tiles_miss": 0
+  },
+  "cci": {
+    "valid_sites": 250,
+    "total_sites": 255
+  },
+  "cv": "site_disjoint_GroupKFold_6",
+  "overall_rmse": {
+    "base": 1.2271,
+    "full": 1.1815
+  },
+  "depth_band_rmse": {
+    "FIELD_base": {
+      "0-2m": 1.3636,
+      "2-5m": 1.0792,
+      "5-10m": 1.1988,
+      "10-20m": 1.2168,
+      "all": 1.2271
+    },
+    "FIELD_full": {
+      "0-2m": 1.3697,
+      "2-5m": 1.0444,
+      "5-10m": 1.075,
+      "10-20m": 1.1473,
+      "all": 1.1815
+    }
+  },
+  "alt_consistency": {
+    "n_matched": 130,
+    "match_tol_deg": 0.05,
+    "damp_delta_fit_m": 0.6,
+    "magt_isotherm": {
+      "n": 120,
+      "rmse": 205.38,
+      "mae": 152.58,
+      "bias": -40.62,
+      "corr": 0.21
+    },
+    "seasonal_max_envelope": {
+      "n": 109,
+      "rmse": 158.32,
+      "mae": 110.66,
+      "bias": 5.94,
+      "corr": 0.43
+    },
+    "note": "(A) MAGT 등온선=영구동토 상단(계절 ALT와 물리적으로 다름). (B) 연최대 포락선(감쇠파 δ 단일보정)=계절 최대융해깊이 대응. 관측 ALT 정합은 (B) 기준."
+  },
+  "gate": {
+    "band_delta_cm": {
+      "0-2m": -0.0061,
+      "2-5m": 0.0348,
+      "5-10m": 0.1238,
+      "10-20m": 0.0695,
+      "all": 0.0456
+    },
+    "n_bands_improved": 3,
+    "overall_improved": true,
+    "verdict": "ADOPT_full"
+  }
+}

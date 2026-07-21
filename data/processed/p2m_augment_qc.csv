@@ -1,0 +1,13 @@
+group,flag,flag_value,n,alt_mean,alt_min,alt_max,in_range_0_400_pct
+new_augment,qc_flag,-1.0,38,154.14,31.9,298.1,100.0
+new_augment,qc_flag,0.0,3033,42.2,2.0,260.0,100.0
+new_augment,qc_flag,1.0,4,57.75,33.5,85.5,100.0
+new_augment,censor_flag,0,3074,43.52,2.0,296.6,100.0
+new_augment,censor_flag,1,1,298.1,298.1,298.1,100.0
+new_augment,region,GTNPenv_AQ,1,93.8,93.8,93.8,100.0
+new_augment,region,GTNPenv_CH,2,272.45,248.3,296.6,100.0
+new_augment,region,GTNPenv_RU,15,162.91,47.5,286.8,100.0
+new_augment,region,GTNPenv_SJ,10,159.91,47.2,277.4,100.0
+new_augment,region,GTNPenv_US,9,97.53,31.9,247.7,100.0
+new_augment,region,Lena_RU,3037,42.22,2.0,260.0,100.0
+new_augment,region,QTP_CN,1,298.1,298.1,298.1,100.0
