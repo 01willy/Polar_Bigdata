@@ -59,3 +59,12 @@ deck/assets/figs/_prev_*.png
 # --- OS/에디터 ---
 .DS_Store
 *.swp
+
+# --- 대회 KPDC 원본(저작권·raw, data/raw와 동급) ---
+kpdc/
+# --- 대용량 발표덱 렌더(빌드 스크립트로 재생성) ---
+deck/render/*.pptx
+deck/render/*.pdf
+# --- 대용량 파생 격자/공변량 CSV(재생성 가능) ---
+data/processed/shallow3d_alaska_grid.csv
+data/processed/new_regions_covariates.csv

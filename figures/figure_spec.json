@@ -1,0 +1,49 @@
+{
+  "figures": [
+    {
+      "id": "data_inventory_world",
+      "script": "scripts/4_visualization/map_data_inventory_world.py",
+      "intent": "보유·신규 확보 관측 데이터의 공간 분포와 지역별 데이터 가용성을 한 장에 요약한다.",
+      "layout": {
+        "panels": 2,
+        "arrangement": "상단 세계지도(25-84N, ERA5 육지 마스크 배경) + 하단 지역x데이터 가용성 매트릭스(7x7), 패널 라벨 (a)/(b)",
+        "figsize_in": [16.5, 13.5]
+      },
+      "assets": [
+        "data/raw/era5land/nh_monthly_2015-2020.nc (t2m 첫 timestep 육지 마스크)",
+        "data/processed/dl_dataset_cell.csv (ALT 14,348 셀)",
+        "data/processed/ground_temp_all.csv (지중온도 260 사이트)",
+        "data/raw/allena/PANGAEA_973813_ALLena_main.txt (레나델타 신규 ALT)",
+        "QTEC 2 사이트 좌표(WMO 지점: Wudaoliang 35.22N 93.08E, Golmud 36.42N 94.90E)"
+      ],
+      "style": "polar.plotstyle.use_polar, ALT 점=CMAP.alt 냉색, 지온=^, 신규 ALLena='x' 마커+강조색(색 단독 부호화 금지), 커버리지 박스=점선, 해양/결측=BAD(#e9ecef)·육지=백색, 붉은 계열·rainbow 금지, pdf.fonttype=42",
+      "exports": ["outputs/maps/data_inventory_world.png", "outputs/maps/data_inventory_world.pdf"]
+    },
+    {
+      "id": "tournament_pred_maps",
+      "script": "scripts/4_visualization/map_tournament_error_maps.py",
+      "intent": "7개 모델(GBM/MLP/FT-Transformer/TabM/Flow/Diffusion/앙상블)의 ALT 예측 공간 패턴을 관측과 비교한다.",
+      "layout": {
+        "panels": 8,
+        "arrangement": "2x4 = 관측 ALT + 7모델 예측, 공통 컬러바 1개(CMAP.alt, vmin=20, vmax=90 cm, extend=both 삼각형), 패널 라벨 (a)-(h), 하단 캡션에 색 범위 근거(관측 p1-p97)와 절단 비율",
+        "figsize_in": [18, 8.6]
+      },
+      "assets": ["data/processed/model_tournament_predictions.csv (위치 동등가중: lat/lon 0.0001도 반올림 groupby mean, N=14,348 위치)"],
+      "style": "패널 제목=모델명+위치가중 RMSE(cm), 산점도 s=9(발표 판독성), 배경=ERA5 육지 마스크(크롭, 해양/결측=BAD·육지=백색), pdf.fonttype=42",
+      "exports": ["outputs/maps/tournament_pred_maps.png", "outputs/maps/tournament_pred_maps.pdf"]
+    },
+    {
+      "id": "tournament_error_maps",
+      "script": "scripts/4_visualization/map_tournament_error_maps.py",
+      "intent": "모델별 예측 오차(예측-관측)의 공간 분포와 위치가중 RMSE·skill을 비교한다.",
+      "layout": {
+        "panels": 8,
+        "arrangement": "2x4 = 7모델 오차 지도(CMAP.diff, tnorm(-40,40) 0중심, 컬러바 extend=both 삼각형) + RMSE·skill 가로 막대 1패널, 패널 라벨 (a)-(h), 하단 캡션에 ±40 cm 절단 비율",
+        "figsize_in": [18, 8.6]
+      },
+      "assets": ["data/processed/model_tournament_predictions.csv"],
+      "style": "오차=0중심 발산맵(broc), skill = 1 - RMSE/std(관측, xlabel에 정의 표기), 막대=냉색, 산점도 s=9, 배경=ERA5 육지 마스크(해양/결측=BAD·육지=백색), pdf.fonttype=42",
+      "exports": ["outputs/maps/tournament_error_maps.png", "outputs/maps/tournament_error_maps.pdf"]
+    }
+  ]
+}
