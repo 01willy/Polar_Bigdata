@@ -1,5 +1,6 @@
 # Handoff Index — Polar_Bigdata
 
+- [2026-07-21 16:37] [회의적 재검증 다사이클 · 전이 상한·정보병목·연구목적 재확정](20260721_1637-skeptical-reverify-transfer-ceiling.md) — 전이는 모델 구조로 못 뚫음(물리 상수 E LORO 18.24cm 최선, 순수ML 40·잔차 48·토양E(x)·미분물리층 전부 악화, 레나 skill 전부 음수). 공변량 추가는 내삽 이득·전이 손실(covariate shift). 회의적 검증이 헤드라인 반복 정정(3D 심부개선=site-GKF 누설, 알래스카 증강개선=특징복제 누설·seed 기각). 연구목적 재확정=정확도·차별성(정직성은 도구). 다음: 전지역 pooled 학습·InSAR 30m 면적검증·물리+ML fine-tune·신규 KPDC(콘슬 8층 토양온도·Thaw depth 실측) 파싱.
 - [2026-07-14 11:39] [중간보고 PPT 재구성 + 연구방향·데이터구조 정밀검증](20260714_1139-ppt-rebuild-research-direction-audit.md) — 학습데이터 6.6MB=ALT ML 관행(병목=라벨희소+공변량정보, 문헌20편+ 검증), ALT(알래스카)와 지중온도(9개국) 별개망 발견(0°C깊이로 통합), 3D=GBM조건장·기후+깊이만·patch-CNN≈GBM 확인. PPT v3(Pretendard·EMP톤·2.5D단면). 다음: GPU 6,7,8,9로 P0(인벤토리지도)→P1(전지역·전공변량 통합학습)→P2(Stefan+DL)→P3~P5.
 
 - [2026-06-30 15:05] [전 지구 ALT 예측 — 데이터 구축 + Stage 0/1 baseline](20260630_1505-global-alt-baseline-stage0-1.md) — 목표 확정(다지역 ALT+전이), GTN-P/CALM 무계정 취득, 누설검증 평가골격, 도일피처 baseline(LORO ~97cm). 다음: 계정 데이터 or 공간DL.
