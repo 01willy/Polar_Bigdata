@@ -51,19 +51,19 @@ for (path, box, lab), yy in zip(inputs, iy):
         for sp in ax.spines.values(): sp.set_edgecolor(RULE); sp.set_linewidth(1.0)
     except Exception:
         ax.axis("off")
-    bg.text(11, yy-1.6, lab, fontsize=9.5, color=INK, ha="center", va="top", fontproperties=FP)
-bg.text(11, 94, "입력: 다중모달 관측", fontsize=12.5, color=NAVY, ha="center", fontproperties=FPB)
+    bg.text(11, yy-1.6, lab, fontsize=12, color=INK, ha="center", va="top", fontproperties=FP)
+bg.text(11, 94, "입력: 다중모달 관측", fontsize=14.5, color=NAVY, ha="center", fontproperties=FPB)
 
 # ---- 모델 블록(중) ----
-mx, mw = 37, 22
+mx, mw = 36, 24
 bg.add_patch(FancyBboxPatch((mx, 30), mw, 40, boxstyle="round,pad=0.4,rounding_size=1.2",
                             fc=CARD, ec=TEAL, lw=1.6, zorder=2))
-bg.text(mx+mw/2, 64, "모델", fontsize=13, color=TEAL, ha="center", fontproperties=FPB, zorder=3)
+bg.text(mx+mw/2, 64.5, "모델", fontsize=16, color=TEAL, ha="center", fontproperties=FPB, zorder=3)
 for i, t in enumerate(["GBM 조건장 (주력)", "6모델 토너먼트 비교", "Stefan 물리 결합 (잔차)", "셀 집계 · 1/n 가중"]):
-    bg.text(mx+2, 57-i*6.5, "· "+t, fontsize=10, color=INK, ha="left", va="center",
+    bg.text(mx+1.8, 57.5-i*7.0, "· "+t, fontsize=13.5, color=INK, ha="left", va="center",
             fontproperties=FP, zorder=3)
-bg.text(mx+mw/2, 25, "누설 통제 평가", fontsize=10, color=SLATE, ha="center", fontproperties=FP)
-bg.text(mx+mw/2, 21, "공간블록 · LORO · AOA · conformal", fontsize=9, color=MUTE, ha="center", fontproperties=FP)
+bg.text(mx+mw/2, 25.5, "누설 통제 평가", fontsize=12.5, color=SLATE, ha="center", fontproperties=FP)
+bg.text(mx+mw/2, 21, "공간블록 · LORO · AOA · conformal", fontsize=11.5, color=MUTE, ha="center", fontproperties=FP)
 
 # ---- 출력 썸네일(우) ----
 outputs = [
@@ -79,12 +79,12 @@ for (path, box, lab), yy in zip(outputs, oy):
         for sp in ax.spines.values(): sp.set_edgecolor(RULE); sp.set_linewidth(1.0)
     except Exception:
         ax.axis("off")
-    bg.text(79.5, yy-2.0, lab, fontsize=9.5, color=INK, ha="center", va="top", fontproperties=FP)
-bg.text(79.5, 94, "출력: 지도 · 3D · 불확실성", fontsize=12.5, color=TEAL2, ha="center", fontproperties=FPB)
+    bg.text(79.5, yy-2.0, lab, fontsize=12, color=INK, ha="center", va="top", fontproperties=FP)
+bg.text(79.5, 94, "출력: 지도 · 3D · 불확실성", fontsize=14.5, color=TEAL2, ha="center", fontproperties=FPB)
 
 # ---- 화살표 ----
-bg.add_patch(FancyArrowPatch((30, 50), (36.5, 50), arrowstyle="-|>", mutation_scale=26, lw=2.4, color=SLATE, zorder=1))
-bg.add_patch(FancyArrowPatch((59.5, 50), (68, 50), arrowstyle="-|>", mutation_scale=26, lw=2.4, color=SLATE, zorder=1))
+bg.add_patch(FancyArrowPatch((30, 50), (35.5, 50), arrowstyle="-|>", mutation_scale=26, lw=2.4, color=SLATE, zorder=1))
+bg.add_patch(FancyArrowPatch((60.5, 50), (68, 50), arrowstyle="-|>", mutation_scale=26, lw=2.4, color=SLATE, zorder=1))
 
 fig.savefig(f"{OUT}/architecture.png", dpi=200, facecolor=PAPER, bbox_inches="tight")
 plt.close(fig); print("saved architecture.png")

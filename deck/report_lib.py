@@ -119,7 +119,7 @@ def image(s, path, x, y, w, h, align='center', valign='middle'):
     return (dx, dy, dw, dh)
 
 # ---------- 러닝 헤더/푸터 (저널 페이지 느낌) ----------
-def chrome(s, idx, total, section, running="영구동토 활성층 두께·얕은 3D 지중 열구조, 관측기반 GeoAI"):
+def chrome(s, idx, total, section, running="영구동토 활동층 두께 예측 · 3D 지중온도장, 관측기반 GeoAI"):
     # 상단 러닝헤더
     text(s, ML, 0.32, CW*0.7, 0.24, [[{'t': running, 'size': 8, 'color': MUTE, 'font': SANS_M, 'spc': 0.3}]],
          anchor=MSO_ANCHOR.MIDDLE)
