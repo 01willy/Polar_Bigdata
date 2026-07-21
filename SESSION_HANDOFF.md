@@ -1,6 +1,47 @@
 # SESSION_HANDOFF — Polar_Bigdata (현재 상태 스냅샷)
 
-**갱신**: 2026-07-14 · **다음 세션은 이 파일부터 읽으세요.**
+**갱신**: 2026-07-14(P0·P1 실행) · **다음 세션은 이 파일부터 읽으세요.**
+
+## ★ 최신 완료(2026-07-20 저녁) — 알래스카 내부 3트랙 + 적대적 검증 정정 → `docs/RESULTS_SUMMARY_2026-07-20.md`
+- **증강(적대적 검증 후 기각)**: 1차 "4모델 유의 개선"은 착시. GBM 개선=test 인접 특징복제 누설(donor 제거 시 14.2→16.0 악화), MLP=seed 운(블록 부트스트랩 CI 0 포함). 살아남은 것: MLP>GBM ≈−0.7cm(3-seed), Stefan 라벨의 placebo 대비 정보성, TabM 안정화. 재실험 조건: 거리버퍼·블록부트스트랩·multi-seed·nested 선택(`aug_within_alaska.py` 수정 필요).
+- **timelapse(완료)**: 연별 지도는 물리 forcing 최선(연도 홀드아웃 14.97cm, R² 0.34). **연도 간 anomaly는 예측 불가(corr 0.06)** = 시간 신호의 예측 불가능성 정량화가 정직 산출. GIF `outputs/animations/timelapse_alt_alaska.gif`.
+- **얕은 3D(검증 통과)**: 알래스카 0-3m 실측 764행, 필드 2.66°C·R² 0.47, 0°C→ALT r 0.28(심부 0.16 대비 개선, 절대 정합 미완).
+- **신규 KPDC(16:22 추가)**: 콘슬 8층 토양온도(L1-L8)+VWC+CO2/CH4(ID0-ID5, 2021-2022), 쿠가록 화재/비화재 토양온도·수분(2019-2022), ID01-13 일별 VWC(2023-2025), 2016 토양물성(Thaw depth 실측 포함!), AWS 2023·2025. → E 지점 실측·콘슬 ALT 유도·화재 교란 사례연구 재료. 파싱 미착수.
+- **비판적 검토** `docs/CRITICAL_REVIEW_2026-07-20.md`: 점 검증 상한(~12cm 대표성 잡음)에 갇힘 → 다음 지렛대=면적 검증(다중프로브·InSAR), 서사=신뢰·물리·UQ/AOA·3D·timelapse.
+
+## 이전 완료(2026-07-20) — W3 물리결합 엔진 → `docs/EXPERIMENT_W3_2026-07-20.md`
+가설 "토양 E(x)·물리식 형태강제 ML(구조 C)이 전이 회복" **기각**(적대적 검증). 8모델 공간블록+LORO.
+- PHYS_const(상수 E) LORO 18.24cm가 여전히 최선. PHYS_soil 19.99·PHYS_nn(미분물리층) 25.72로 악화. 물리 형태강제 순효과 음수. E(x)는 covariate shift 재수입.
+- **결정적**: 모든 모델의 레나 skill 음수(−0.02~−2.09) → **라벨 없는 OOD 전이는 모델 구조로 못 뚫는다**. 병목은 레나 공변량-ALT가 알래스카서 학습 불가.
+- **방향 조정**: (1) 물리 상수 앵커+AOA 게이팅 정직 배포, (2) 타깃 지역 라벨 확보(W1 백본)가 유일 실효 지렛대(레나 라벨 있으면 in-domain 17.8cm), (3) "전이 풀었다" 아닌 "AOA 표시+물리 앵커" 프레이밍. 추가 모델 구조 실험 소진 말 것. W2.2 우선순위 하향(결측은 증상, 근본은 covariate shift).
+- HYBRID_aoa 실용 최선(공간블록 17.56)이나 전이서 PHYS_const로 수렴. 스크립트 `w3_physics_ml.py`.
+
+## 이전 완료(2026-07-20) — W2.1 SoilGrids + KPDC → `docs/EXPERIMENT_W21_KPDC_2026-07-20.md`
+- **SoilGrids 토양 공변량**(ISRIC WCS로 취득, VRT는 정체로 실패): 게이트 **미채택**. 내삽(공간블록)은 개선(skill +5.6%)이나 **전이(LORO)는 붕괴(−63.8%, 레나 62.6cm)**. 토양은 전지구 커버라 결측 없는데도 전이 실패 = **진짜 covariate shift**(토양-ALT 관계가 지역마다 다름). → 공변량 추가는 내삽 이득·전이 손실. **전이 escape는 물리뿐**. 토양은 물리 E(x) 입력으로 재활용(W3). 산출 `dl_dataset_cell_v3_soil.csv`, `soil_ablation_gate.csv`.
+- **KPDC 콘슬 현장 검증**: ERA5 √TDD가 실측과 정합(bias ~0.1)=공변량 backbone 검증(대회 KPDC 활용). 단일 E Stefan은 콘슬 약 1.7배(ratio 1.68) 과대예측 → **E(x) 동기**(토양·W3로 수렴). 단 콘슬 44셀 교정은 **in-domain**(전이 아님)이고 PHYS_nn 의 bias 감소는 **평균회귀**이므로 전이 일반화 근거로 쓰지 않는다. 산출 `kpdc_station_climate.csv`, `kpdc_era5_validation.csv`. Sentinel·AlphaEarth는 GEE 미설치로 미취득.
+- **순서 재조정**: covariate shift가 전이 근본 병목이므로 **W3(물리 base 고도화 + 토양 의존 E(x))가 W2.2보다 전이엔 우선**. 다음=W3.
+
+## 이전 완료(2026-07-20) — Phase 1 회의적 재검증 → `docs/EXPERIMENT_PHASE1_2026-07-20.md`
+연구 프로그램 `docs/RESEARCH_PROGRAM_2026-07-17.md`(증강 백본 W1 최상단 재배치) 착수. 기존 P2 결론 2건을 반증 설계로 재검증(적대적 검증 통과):
+- **라벨 증강 "해가 된다" 부분기각**: 증강 자체가 아니라 "심부 GTNPenv 라벨 + 결측 모달리티(신규지역 InSAR/PolSAR 100% 결측=완전 공선)" 결합만 붕괴(레나 22→88cm). 물리·기후만 ML은 면역. → 백본 게이트 = 결측 처리(W2.2). 스크립트 `aug_backbone_dissect.py`.
+- **3D "지형+CCI 심부 개선" 기각**: site-GKF 누설 착시(72.6% 사이트가 같은 0.5°블록 공유). 누설통제 시 악화(LORO 1.60→1.73°C). 정보병목 재확인. 스크립트 `field3d_reeval.py`.
+- 평가 프레이밍 정정: `docs/EVAL_FRAMING_NOTE.md`(공간블록≠전이, 16.95는 알래스카 내 공간블록).
+- 다음: W2.2 결측 재설계 → 증강 안전화, W3 물리 base 고도화(Kudryavtsev), W2.1 데이터 확충. 유도 라벨은 held-out 실측 게이트 통과 전 백본 제외.
+
+## 이전 완료(2026-07-14 저녁) — P2 실험 3트랙 + 슬림 덱(11p)
+- **P2 결과** → `docs/EXPERIMENT_P2_RESULTS_2026-07-14.md`. 스크립트 `scripts/3_deep_learning/p2_{augment,field,stefan}_experiment.py`.
+  - **물리 우선이 전이에 강함(핵심)**: Stefan 아핀(a+E√TDD) LORO 18.2cm ≫ 순수 ML 40.6cm(알래스카 과적합, Lena bias +86cm). 잔차학습 무익(REJECT).
+  - 라벨 증강 미채택(GTNPenv 심부 37셀이 Lena OOD서 128cm 과대추정 교란. 단 Lena 3,037셀 자체는 유효 skill +0.154). 3D 기질 전 공변량 소폭 이득(1.23→1.18°C, ADOPT 잠정).
+  - **후속 필수**: 트랙 α 공간블록+LORO 재평가(site-GKF 누설 의심), 트랙 M GTNPenv AOA 게이팅 재실행, 물리 base 고도화(Kudryavtsev류).
+- **슬림 발표덱 11p**: `deck/build_summary.py` → `deck/render/permafrost_summary.{pptx,pdf}`. ALT main·3D 증강·Stefan 프레임, 용어정의 상세, 완료/진행/예정+대회일정. 신규 그림 `deck/mk_summary_figs.py`(connection·uncertainty_map·magt_clean). 상세 21p는 `permafrost_midreport` 보존.
+
+## 이전 완료(2026-07-14 오후) — P0·P1 실행 + PPT 반영 → `docs/EXPERIMENT_P0_P1_RESULTS_2026-07-14.md`
+- **P0**: 데이터 인벤토리 세계지도(`outputs/maps/data_inventory_world.*`) + 6모델 예측·오차 지도(`tournament_{pred,error}_maps.*`). 위치가중 순위 GBM 16.1 ≈ Diffusion 16.2 ≈ 앙상블 16.2cm(동률 재확인).
+- **P1**: 다지역 통합 셀 v2 `data/processed/dl_dataset_cell_v2.csv`(17,423행: +레나델타 3,037·GTNPenv 37·QTP 1). 하네스 `scripts/3_deep_learning/unified_tournament_cell.py`(전 공변량 25·공간블록+LORO·GPU). 결과 `unified_tournament_*.csv`.
+  - LORO 전이서 **DL(FT-T·앙상블) 15.0cm가 GBM 17.6 상회**(알래스카, 이질 소표본 첫 DL 이점). 레나 전이는 25~30cm로 병목 지속.
+  - **결측 라우팅 아티팩트**: NaN 네이티브 GBM이 "InSAR 결측=깊은 ALT" 오학습(레나 50.6cm). 다지역은 중앙값 대체+플래그 필수.
+  - **통합 학습 게이트 미채택**(현 결측 처리서 알래스카 in-domain 저하 18.1→20.9). 전이 병목 정량화는 채택. 후속=모달리티 드롭아웃·Stefan.
+- **PPT v3 → 21슬라이드**: `deck/build_midreport.py`(신규 5b 인벤토리·13b 6모델오차·15b 다지역전이 + 1차 품질개선). 그림 `deck/mk_p0p1_figs.py`. 렌더 `deck/render/permafrost_midreport.{pptx,pdf}`.
 
 ## ★ 다음 세션 즉시 착수(2026-07-14 확정) — `docs/EXPERIMENT_PLAN_2026-07-14.md`
 GPU **6,7,8,9**. 순서: **P0** 데이터 인벤토리 세계지도 + 6모델별 ALT 예측·오차 지도(즉시) → **P1** 전 공변량(DEM+InSAR+PolSAR+CCI) + 전 지역(알래스카+시베리아 ALLena+티베트 QTEC) 통합 ALT 재학습·6모델 재비교 → **P2** Stefan 물리 base + DL 잔차 → **P3** 3D 전공변량+연속성DL(등온면 매끄럽게) → **P4** AlphaEarth 임베딩 → **P5(트랙)** 이미지 조건 diffusion/flow. 결과는 전문 mapping·시각화 후 PPT 반영.

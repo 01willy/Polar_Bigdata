@@ -1,48 +1,177 @@
 {
   "meta": {
-    "title": "영구동토 활성층 두께·얕은 3D 열구조 예측 — 진행상황 보고",
+    "title": "북극 영구동토 활동층 두께와 얕은 3D 열구조의 관측기반 GeoAI 예측 (중간보고)",
     "audience": "극지 빅데이터 대회 심사·연구 협업",
-    "tone": "보고서/논문체(~이다/~한다), 과장 없음, 냉색 표준",
+    "tone": "보고서/논문체(~이다/~한다), 과장 금지, em/en-dash 금지, 명사형 제목, 불릿 최대 4개",
     "language": "ko",
     "aspect": "16:9 (13.333 x 7.5 in)",
-    "font": "Pretendard (슬라이드 크롬) / 그림은 원본 NanumGothic",
-    "date": "2026-07-09",
-    "build": "deck/build_deck.py + deck/polar_slides.py -> render/permafrost_progress.pptx -> PDF/PNG",
-    "authority": "모든 수치는 data/processed/*_results.csv 근거 · design/brand_tokens.json 색규약 준수",
-    "note": "폐기표현 금지: '17cm 물리하한'(→정보병목), '평탄지 12.97 SOTA 돌파'(→범위축소 아티팩트)"
+    "font": "Pretendard(슬라이드·그림 공통)",
+    "date": "2026-07-14",
+    "build": "deck/mk_midreport_figs.py -> deck/assets/mid/*.png, (deck/) build_midreport.py -> render/permafrost_midreport.pptx -> soffice PDF -> pdftoppm PNG",
+    "authority": "모든 수치는 data/processed/*.csv와 SESSION_HANDOFF.md 확정값만 사용. 16.95cm·skill 14.7%·56.1→85.9%·108.5→87.3cm·IDW 28.0→111.4cm 고정",
+    "figure_numbering": "빌드 전역 카운터 FIG()로 지면 순서 연속 번호. 표는 표 1",
+    "layout_rules": "콘텐츠 하한 BLIM=6.94in(푸터 규칙선 7.06in 위 여유). figure_hero: 넓은 그림(ar>2.1)은 상단그림+지표·설명(좌)+해석(우), 좁은 그림은 좌그림+우열(지표/설명 위, 해석 하단 고정). 캡션은 image() 반환 좌표로 그림 바로 아래 배치"
   },
+  "changes_this_pass": [
+    "리뷰 반영 v4: p01 표지 태그라인 회색 이탤릭→틸 정색, 부제 하이픈→가운뎃점",
+    "p02: 개념도(concept_alt.png) 재작성(폰트 12pt+, 0°C 경계선 남색+직접 라벨, 범례 좌하단 분리), 불릿 3개+구분선+핵심 질문 블록으로 위계 분리",
+    "p03: architecture.png 모델 박스 내부 폰트 10→13.5pt, 입출력 라벨 9.5→12pt",
+    "p06: 그림→캡션→용어 순 인접 배치, LORO 한국어 대응어(지역 제외 평가) 병기",
+    "p07: alt_map.png 재렌더(동일 데이터·결정적 GBM, 축·컬러바 폰트 16~19pt). 컬러맵은 rainbow가 아닌 단색조 순차형 oslo_r(프로젝트 규약) 유지",
+    "p08: local_demo.png 재조판(지도 래스터 동일, 패널 제목 17pt·컬러바 14~16pt). GPU diffusion 재계산 불가로 픽셀 보존 재조판",
+    "p09: 3열 축소 해소, aoa_di.png(확정 CSV 기반, 큰 폰트) 2열 배치, 참고 수치에 그림 번호 병기",
+    "p10: '엔진 GBM 조건장' 해석 불릿에 맥락 문장 추가",
+    "p11: magt_2m_20m.png 우측 10% 흰 패딩(컬러바 라벨 잘림 방지, 표시폭 기준 약 11mm)",
+    "p12: IDW 막대 hatch 이중부호화, 4배 주석에 흰 배경 박스",
+    "p13: x축 라벨 13→15pt, 눈금 14pt",
+    "p14: x축 상한 37→40cm(32.7 여백 확보), LORO 정의를 그림 내부에 기재",
+    "p15: −20% 라벨을 기준선과 분리(이중 화살표 주석), 기준 라벨 흰 배경+상향",
+    "p17: 완료 열 불릿 5→4개(conformal·AOA·전이·게이트 병합)",
+    "p18: 섹션 번호 09 부여, 커버리지 스트립 라벨에 conformal UQ 명시"
+  ],
   "slides": [
-    {"id": 1, "type": "title", "message": "다중모달 빅데이터로 ALT 2D·얕은 3D 열구조·보정 불확실성을 만들고 전이를 검증한다",
-     "archetype": "hero-dark", "assets": ["outputs/volumes_3d/hero_3d_permafrost.png"], "intent": "표지·연구 한 줄 정의"},
-    {"id": 2, "type": "overview", "message": "발표는 목적→입력→모델→평가의 정직성→결과→포지셔닝 순으로 진행한다",
-     "archetype": "agenda-2col", "assets": [], "intent": "목차와 한 줄 목적"},
-    {"id": 3, "type": "content", "kicker": "01 · 연구 목적", "message": "시추공 온도·ALT 관측·다중모달 공변량 → ALT 2D 지도 + 얕은 3D 열구조 + 셀별 불확실성",
-     "archetype": "figure-right+io-chips", "assets": ["outputs/figures/00_concept/research_concept.png"], "intent": "입력·출력·전이 목표를 개념도로 정의"},
-    {"id": 4, "type": "content", "kicker": "02 · 입력 데이터", "message": "22GB+ 다중모달 빅데이터를 알래스카 학습·전지구 전이 구조로 융합한다",
-     "archetype": "figure-top+table", "assets": ["outputs/figures/01_data/global_alt_coverage.png"], "intent": "데이터 출처·규모·공간범위"},
-    {"id": 5, "type": "content", "kicker": "02 · 입력 데이터", "message": "공변량 14종(지형6+기후8) + 물리관측 4종, 그리고 InSAR 약지도 403.6만으로 라벨을 확장한다",
-     "archetype": "chips+figure", "assets": ["outputs/maps/weaklabels_overview.png"], "intent": "공변량 구성과 약지도 사전학습"},
-    {"id": 6, "type": "architecture", "kicker": "03 · 모델 구조", "message": "관측·공변량 → 2D ALT 경로(사전학습·앙상블·토너먼트)와 3D 조건장 경로, 평가·UQ·AOA가 횡단한다",
-     "archetype": "native-diagram", "assets": [], "intent": "파이프라인 시맨틱 그래프(편집가능 텍스트)"},
-    {"id": 7, "type": "content", "kicker": "03 · 모델 구조", "message": "정적 ALT에서는 GBM≈딥러닝 — 병목은 모델 용량이 아니라 공변량 정보이다",
-     "archetype": "table+kpi", "assets": ["outputs/figures/06_deep_learning/pred_vs_obs.png"], "intent": "6모델 토너먼트 동률·정보병목"},
-    {"id": 8, "type": "content", "kicker": "04 · 정직한 평가", "message": "무작위 CV는 전이를 과대평가한다 — 헤드라인은 공간블록/LORO CV만 쓴다",
-     "archetype": "figure-left+text", "assets": ["outputs/figures/02_evaluation/cv_leakage.png"], "intent": "누설 통제 평가 설계"},
-    {"id": 9, "type": "content", "kicker": "04 · 정직한 평가", "message": "17cm은 물리벽이 아니라 공변량 정보병목이다 — 비가역하한 약 7cm, 헤드룸이 남아 있다",
-     "archetype": "kpi-row+text", "assets": [], "intent": "apparent-floor 진단(정정)"},
-    {"id": 10, "type": "content", "kicker": "05 · 핵심 결과", "message": "알래스카 전역 ALT 예측면을 관측 오버레이와 함께 복원한다",
-     "archetype": "figure-hero", "assets": ["outputs/maps/alt_alaska_pred.png"], "intent": "ALT 2D 대표 결과"},
-    {"id": 11, "type": "content", "kicker": "05 · 핵심 결과", "message": "지배 정보원은 과제마다 다르다 — 보간은 기후, 전이는 InSAR이며 ERA5로 전이를 20% 개선한다",
-     "archetype": "figure-left+kpi", "assets": ["outputs/figures/06_deep_learning/cnn_vs_gbm_importance.png"], "intent": "모달리티 ablation·전이 개선"},
-    {"id": 12, "type": "content", "kicker": "05 · 핵심 결과", "message": "예측구간을 conformal로 보정(71→89%)하고 AOA로 신뢰 밖 영역을 표기한다",
-     "archetype": "two-figure", "assets": ["outputs/figures/02_evaluation/coverage_calibration.png", "outputs/maps/alt_aoa_mask.png"], "intent": "보정 UQ + 적용범위"},
-    {"id": 13, "type": "content", "kicker": "05 · 핵심 결과", "message": "위도를 따라 영구동토 경계 심도가 달라지는 얕은 3D 열구조를 복원한다",
-     "archetype": "two-figure", "assets": ["outputs/volumes_3d/cross_section_lat_depth.png", "outputs/figures/05_alaska_pilot/depth_slices.png"], "intent": "3D 열구조·0°C 등온면"},
-    {"id": 14, "type": "content", "kicker": "06 · 기존 연구 대비", "message": "규모·전이·보정 UQ·얕은 3D의 결합이 선행연구와의 차별점이다",
-     "archetype": "positioning-table", "assets": [], "intent": "선행연구 포지셔닝·SOTA 대비"},
-    {"id": 15, "type": "content", "kicker": "07 · 다음 단계", "message": "데이터 확장·3D 조건장 구현·시각화 통합이 다음 지렛대이다",
-     "archetype": "roadmap", "assets": [], "intent": "우선순위 로드맵"},
-    {"id": 16, "type": "closing", "message": "정직한 평가로 진단한 정보병목을, 데이터·전이·불확실성·얕은 3D로 확장한다",
-     "archetype": "takeaways", "assets": [], "intent": "요약·기여 3~4줄"}
-  ]
+    {
+      "id": 1,
+      "kicker": "표지",
+      "message": "활동층 두께와 얕은 3D 열구조의 관측기반 GeoAI 예측",
+      "assets": []
+    },
+    {
+      "id": 2,
+      "kicker": "연구 배경",
+      "message": "활동층 두께(ALT)가 융해를 대표하나 관측이 희소하다",
+      "assets": [
+        "assets/mid/concept_alt.png"
+      ]
+    },
+    {
+      "id": 3,
+      "kicker": "연구 목적",
+      "message": "다중모달 입력에서 4종 산출물(2D 지도·3D 열구조·불확실성·전이)까지의 구조",
+      "assets": [
+        "assets/mid/architecture.png"
+      ]
+    },
+    {
+      "id": 4,
+      "kicker": "선행연구",
+      "message": "전이·보정 불확실성·얕은 3D가 남은 공백이다(표 1)",
+      "assets": []
+    },
+    {
+      "id": 5,
+      "kicker": "입력 데이터",
+      "message": "약 22만 관측 + ERA5-Land·ArcticDEM·SAR + KPDC 검증·전이 축",
+      "assets": [
+        "outputs/figures/01_data/global_alt_coverage.png"
+      ]
+    },
+    {
+      "id": 6,
+      "kicker": "방법",
+      "message": "셀 집계·6모델 비교·누설 통제 평가·conformal/AOA·음성결과 보고. 용어 정의 포함",
+      "assets": [
+        "assets/mid/cv_concept.png"
+      ]
+    },
+    {
+      "id": 7,
+      "kicker": "결과",
+      "message": "알래스카 ALT 지도, 전이 RMSE 16.95cm(관측 SD 18.5cm 대비)",
+      "assets": [
+        "assets/mid/alt_map.png"
+      ]
+    },
+    {
+      "id": 8,
+      "kicker": "결과",
+      "message": "30m 국소 데모: 예측과 90% 예측구간 폭을 함께 지도화",
+      "assets": [
+        "assets/mid/local_demo.png"
+      ]
+    },
+    {
+      "id": 9,
+      "kicker": "결과",
+      "message": "conformal 보정 56.1→85.9% + AOA 외삽 경고(DI 상위 RMSE 15.5→27.1cm)",
+      "assets": [
+        "assets/mid/conformal.png",
+        "assets/mid/aoa_di.png"
+      ]
+    },
+    {
+      "id": 10,
+      "kicker": "결과",
+      "message": "깊이 0~20m MAGT 복원, 0°C 등온면 = 영구동토 상단(시추공 10,748점)",
+      "assets": [
+        "assets/mid/cross_section.png"
+      ]
+    },
+    {
+      "id": 11,
+      "kicker": "결과",
+      "message": "2m(기후 민감) vs 20m(안정 냉기) 깊이별 지중온도 대비",
+      "assets": [
+        "assets/mid/magt_2m_20m.png"
+      ]
+    },
+    {
+      "id": 12,
+      "kicker": "정직한 평가",
+      "message": "무작위 CV는 약 4배 낙관(IDW 28.0→111.4cm), 헤드라인은 공간블록·LORO만",
+      "assets": [
+        "assets/mid/cv_leakage.png"
+      ]
+    },
+    {
+      "id": 13,
+      "kicker": "핵심 발견",
+      "message": "위경도 대조군 skill 14.7% > 물리 최고 12.7%: 병목은 공변량 정보",
+      "assets": [
+        "assets/mid/bottleneck.png"
+      ]
+    },
+    {
+      "id": 14,
+      "kicker": "선행연구 대비",
+      "message": "프로토콜 통제 비교: 본 연구 16.95cm(LORO) vs CCI 제품 20.6cm vs 동급 논문 22cm(무작위)",
+      "assets": [
+        "assets/mid/sota.png"
+      ]
+    },
+    {
+      "id": 15,
+      "kicker": "결과",
+      "message": "ERA5-Land 실측 공변량이 전이 오차 108.5→87.3cm(−20%). E1 다지역 재검증 필요",
+      "assets": [
+        "assets/mid/era5_transfer.png"
+      ]
+    },
+    {
+      "id": 16,
+      "kicker": "정직성",
+      "message": "게이트 판정: 시계열 DL·CCI prior 미통과, 주력 GBM + Diffusion(UQ) 확정",
+      "assets": [
+        "assets/figs/tlite_gate.png"
+      ]
+    },
+    {
+      "id": 17,
+      "kicker": "일정·계획",
+      "message": "완료·진행·예정과 대회 일정(07-31 예선)",
+      "assets": [
+        "assets/mid/timeline.png"
+      ]
+    },
+    {
+      "id": 18,
+      "kicker": "요약",
+      "message": "정직한 진단(정보병목) 위에 물리 결합·다지역 전이로 확장. 핵심 수치 4종 스트립",
+      "assets": []
+    }
+  ],
+  "reserved": {
+    "tournament.png": "P0 결과 슬라이드용으로 보류(이번 덱에서 사용 금지)",
+    "note": "P0·P1 실험 결과 반영은 다음 단계(슬라이드 추가·삭제 금지, 18장 유지)"
+  }
 }
