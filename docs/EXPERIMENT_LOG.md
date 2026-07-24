@@ -3,6 +3,88 @@
 > 세션별 작업 기록. 큐레이션된 마스터 인덱스는 [EXPERIMENTS.md](EXPERIMENTS.md),
 > GPT 공유 핸드오프는 [gpt/handoff/](../gpt/handoff/) 참조.
 
+## 2026-07-24 — S3: 물리 pseudo-label 증강비율 반응곡선 (엄격 통제) + 시각화 인프라 고도화
+
+`RESEARCH_PLAN_multifidelity` S3. 알래스카 실측 + target(Lena/Canada) 물리 pseudo를 r∈{0,.25,.5,1,2,5,10}로 증강, target 전이 개선 규명. 공간블록 pseudo/test 분리(거리버퍼)·placebo(알래스카 평균 상수) 대조·블록부트스트랩. 스크립트 `s3_augmentation_curve.py`.
+- **핵심 발견(catboost, mlp는 전이 발산 제외)**: (1) **Lena**: Stefan pseudo +4.66cm ≈ placebo +3.95cm → 증강 이득의 ~85%가 물리 정보가 아니라 **target 방향 앵커링(bias 교정)**, 물리 순가치 +0.71cm에 불과. (2) **Canada**: Stefan +1.18만 유효, placebo −6.7·Ku −20 악화 → 정확한 물리만 유효. (3) **Kudryavtsev pseudo는 두 지역 모두 악화**(부정확 물리는 해). (4) r≥1 포화. → RQ1/RQ3 답: 물리 pseudo는 bias 큰 전이서 앵커링으로 돕되 물리 순가치 작고, 부정확 물리는 해.
+- **mlp 전이 발산**: 알래스카만 학습→Lena/Canada 극단 covariate shift에서 신경망 발산(base RMSE 3.6만). catboost 강건. 시각화·결론서 mlp 제외. (S1 FT-T가 전이 최선이었던 것과 정합, mlp는 전이 불안정.)
+- **산출**: `s3_aug_curve_results.csv`·`meta.json`. 시각화 `outputs/figures/s3_aug/`(반응곡선 물리vs placebo·물리 순가치).
+- 대회 함의: "증강 비교분석표"의 핵심 = 증강이 언제 돕고(bias 큰 전이) 언제 해치나(부정확 물리·잘못된 지역). 단순 병합 무익 결론(P1/P2)을 조건부로 정밀화.
+
+## 2026-07-24 — 전체 리뷰(S0~S2) + must_fix 처리 + 시각화 고도화 착수 → S1 재렌더
+
+시각화 인프라 논문형 고도화(4렌즈 조사: Ran2022·Whitcomb2024·Obu2019·ESA CCI·Crameri2020). `src/polar/geomap.py`(hexbin_map·field_map·support_mask·add_inset_locator·add_scalebar·circular_boundary·to_proj·ALT_LEVELS), `src/polar/gridding.py`(make_grid·interp_obs·grid_predict) 신규. S1 대표그림 재렌더(hexbin 셀통계+범북극 위치 inset+스케일바). S0/S2 재렌더는 보고서 단계로 유예. 이후 각 단계 결과물은 이 인프라로 시각화.
+
+## 2026-07-24 — 전체 리뷰(S0~S2) + must_fix 처리
+
+멀티에이전트 전체 리뷰(3렌즈: 누설·결과정합·물리/시각화). **critical 0건, pytest 통과, 헤드라인 무효화 누설 없음**. 발견된 must_fix 처리:
+- **LORO 지리 누설 수정**: `MACRO_REGION` 도입, `loro_splits` 매크로 지역 기준(ABoVE_AK+US Alaska→Alaska). 동일 지점 세부라벨 train/test 분리 제거. LORO 게이트 21.86→**22.24cm**(US Alaska 제외 정정).
+- **s2 OOF E=1.0 스케일 버그 수정**: `phys0=physics_ensemble(df, E=E_GLOBAL)`. p1_stefan OOF 중앙 30.5→**47.5cm**(관측 47.9 정합). fold-safe p1(`p1_stefan_calib_ak`) 별도 저장.
+- **fold-safe 가드 프로덕션 배선**: `assert_fold_safe_E`를 s2 E 역산 직전 삽입. `prep`을 `src/polar/preprocessing.py`(`fold_prep`)로 공용화(s1/s2 중복 제거). 테스트 11→**16개**(physics.fit_E fold-safe·fold_prep train-only·macro LORO·sigma_prior 금지 추가).
+- **sigma_prior_cm 금지**: `LABEL_DERIVED_BANNED`에 추가(alt_sd 파생, S3 σ 역가중 누설 방지).
+- **서술 정정**: S1 in-domain은 "3-seed 앙상블 OOF 14.37/14.40, seed-mean 14.66/15.03" 병기. "Stefan 최선"→"**Stefan이 전이 하한 확보·GBM 압도, 최신 DL(FT-T)과 동급**"(seed 노이즈 범위). 멤버 상관 0.89~1.00.
+- **다음 순서 확정(사용자)**: S0~S11 전부 완주. 시각화 먼저 고도화(최신 논문형 지도·3D·timelapse). 핵심 S3→S11 먼저, 나머지 순차. GPU 6-9.
+- 리뷰 상세: `gpt/handoff` 또는 세션 기록. 남은 low(meta 해시 일부·TTOP 마스크 그림 범례)는 시각화 재생성 시 처리.
+
+## 2026-07-23 — S2: 물리식 5종 앙상블 baseline + physics-as-feature(A2)
+
+`RESEARCH_PLAN_multifidelity` S2. 워크플로 정밀조사(수식·계수·단위 실측검증)로 `src/polar/physics.py` 구현(Stefan 기본·edaphic·TTOP·Kudryavtsev·λ보정). SoilGrids 이미 물리단위 확인(이중변환 금지), bdod×1000·soc/1000·TDD×86400 가드.
+- **Part A 물리 baseline**: in-domain **p1 Stefan 14.56cm**(bias -0.99, 정확도 담당) ≪ p4 Ku 25.29 < p3 TTOP 31.10 < p2 edaphic 40.95 < p5 λ 46.30(정교화 물리는 상방편향 +32~38cm). **LORO 게이트(비가중평균 AK·Lena·CA 고정) p1 Stefan 21.86cm 최선**(AK17.5·Lena21.7·CA26.4), p4 Ku 39.66(2위), 나머지 59-69. → **물리 정교화가 전이 개선 안 함**(기본 Stefan이 전 지역 최선), Gautam2025·W3 정합. 게이트 프로토콜 고정(기존 18.24는 다른 지역집합/집계, 비판 지적 반영).
+- **Part B physics-as-feature(A2)**: in-domain 무익(catboost 15.55→15.59 Δ+0.04·mlp 14.66→14.56 Δ-0.10·lightgbm Δ-0.17), LORO 악화(catboost +0.95·lightgbm +1.82·mlp +0.51). → **A2 미채택**. 물리 예측=기후공변량(TDD)의 결정론적 변환이라 새 정보 없음(**GPT 로드맵 위험2 실증**). 물리는 전이 앵커(p1 직접예측)로만 유효.
+- **멤버 다양성 한계(적대검증)**: 5종 상관 0.93~1.00(전부 Stefan축). 실질 다양성=수준 오프셋·TTOP 동토마스크(81.5%)·Ku 눈 성분(p1과 비상관 최대). phys_std는 상대 불확실성 지표.
+- **산출**: `s2_physics_results.csv`·`s2_physics_oof.csv`·`s2_physics_meta.json`. 시각화 5종 `outputs/figures/s2_physics/`(물리5종 지도·앙상블스프레드·동토마스크·물리별LORO·feature효과, 실제 지도배경).
+- 다음: S3(증강비율 반응곡선, 엄격통제) 또는 S6(source-aware). 전체 리뷰 후 결정.
+
+## 2026-07-23 — S1: 실측-only 다모델 baseline (여러 DL 병렬, 표준화 버그 수정) + 지도 시각화 인프라
+
+`RESEARCH_PLAN_multifidelity` S1 완료. 모델군 7개(HistGBM·LightGBM·XGBoost·CatBoost·MLP·FT-T·TabM). 평가 2축: 알래스카 in-domain 공간블록 6-fold(FULL 34), LORO 전이(SHARED 25, SAR 제외). 3-seed.
+- **결과(표준화 후, seed평균)**: in-domain **MLP 14.37·TabM 14.40**(신경망 최선, 대표성 하한 14cm 도달) > CatBoost 15.61 > XGBoost 16.16 > LightGBM 16.48 > HistGBM 17.21 > FT-T 18.56. 전이(Lena) **FT-T 22.5**(최선) > TabM 27.3 > MLP 28.8 ≫ GBM류 40-57(covariate shift). → in-domain은 신경망/GBM 접전, 전이는 DL 우세. **기존 "6모델 동률·GBM 우위 16.95" 갱신**(표준화 신경망이 앞섬, 단 CI는 S11).
+- **버그 2건 근본 수정**: (1) **GPU 오용** — CUDA_VISIBLE_DEVICES가 torch 초기화 후 설정돼 물리 0번(타 사용자 공유) 사용. `tab_models.py` lazy CUDA(`_dev()`) + `s1` GPU고정을 전 import 앞 + 6/7/8/9 assert + uuid 가드. 검증: PID가 물리6(uuid b840175b) 사용·GPU0 무점유 확인. (2) **torch 입력 미표준화** — 신경망에 raw 스케일 투입해 TabM full 61cm 발산·MLP 저평가. fold-safe z-score 추가 → MLP/TabM 14.4cm로 정상화·최선 등극. grad clip도 추가.
+- **신규 모듈**: `src/polar/tab_models.py`(7모델 통합 인터페이스, available_models 자동감지), `src/polar/geomap.py`(cartopy 실제 지도배경 매핑, 알래스카/범북극/레나 프리셋), `scripts/3_deep_learning/s1_baseline_tournament.py`, `scripts/4_visualization/s1_baseline_figs.py`.
+- **산출**: `s1_baseline_results.csv`·`s1_baseline_oof.csv`·`s1_baseline_meta.json`. 시각화 4종 `outputs/figures/s1_baseline/`(실제 지도배경 위 관측vs예측·잔차맵·Taylor·모델비교막대, 냉색).
+- **보류(자동 스킵)**: TabPFN(라이선스 `TABPFN_TOKEN` 필요), RealMLP/pytabkit(torchvision 충돌). FT-T in-domain 저조는 별도 점검 대상.
+- 다음: S2(물리식 5종 앙상블 Stefan/modified/λ보정/TTOP/Ku, LORO 18.24 하한 게이트).
+
+## 2026-07-23 — S0 착수: fidelity 스키마 + 누설방지 pytest + overlap gate + 시각화
+
+세부계획(`docs/RESEARCH_PLAN_multifidelity_2026-07-22.md`) S0 구현·검증 완료. 모델 무관 공통 계층.
+- **`src/polar/fidelity.py`**(신규): 공변량 코어34(지형6+기후8+토양9+InSAR5+PolSAR3+CCI2+flag1) 전량 사용, 라벨파생7(alt_sd/min/max·n_obs·n_years·year_min/max) 영구제외. split 3축(0.5°블록 GroupKFold·LORO·leave-source-out), fold-safe Stefan E 역산(assert_fold_safe_E), SHARED_CORE25(SAR 제외 pooled 전이용).
+- **`build_fidelity_schema.py`**(신규): `fidelity_base.csv`(17423×45), `source_overlap_matrix.csv`, `fidelity_observations_long.csv`(59184행: F4 17386·CCI 17340·InSAR 14348·PolSAR 10073·GTNPenv 37), `covariate_availability_by_region.csv`, `fidelity_schema_meta.json`.
+- **overlap gate 결과**: direct 대비 Stefan 100%·CCI 99.5% clean(full source-aware 가능), InSAR 82.4%(AK100/Lena0/CA100)·PolSAR 57.8%(AK74/나머지0), F3 온도유도 151쌍. → A5 clean 소스는 Stefan·CCI뿐 재확인.
+- **`tests/test_leakage.py`**(신규): 누설방지 11테스트 전부 PASS(라벨파생 제외·타깃 제외·SAR 공유코어 배제·블록 GroupKFold 비중첩·폴드 커버리지·LORO 지역분리·leave-source-out·fold-safe Stefan E·가드 자체검증). **이후 모든 게이트 무결성의 전제.**
+- **`s0_schema_figs.py`**(신규): overlap 히트맵·0.5°블록 폴드 지도(누설통제 시각확인)·지역×공변량 가용성 막대. 냉색 cmcrameri, PNG300+PDF, `outputs/figures/s0_schema/`.
+- 다음: S1(실측-only baseline, 여러 DL 병렬: GBM3·RealMLP·TabM·FT-T·TabPFN, 하나로 단정 금지).
+
+## 2026-07-22 — Source-aware multi-fidelity 세부계획(GPT 로드맵 반영) + 6개 질문 근거분석
+
+사용자 6개 질문(좁은지역 ALT분산·모델고도화·공동학습·input·차별성·불확실성)에 데이터·문헌 근거로 답하고, GPT 멀티충실도 로드맵(`gpt/ALT_multifidelity_...`)을 우리 자산에 매핑한 세부계획 수립. 멀티에이전트 워크플로 2회(차별성 다각도조사 6에이전트, overlap실증+novelty+재검증+종합+비판 5에이전트).
+
+### 데이터 근거 확정
+- **좁은지역 ALT분산**: 측정정밀(동일좌표 반복 SD 0.2cm, 측정오차 median 7.7cm), 좁은지역 큰차이는 진짜 미세환경변동(100m 셀내 range 19cm, 같은 100m에 23~226cm 공존). 위치간 분산 86.3% vs 위치내 13.7%. 스케일 의존성(셀내SD 30m 3.7→1km 11.1→10km 13.2cm)이 공간구조 증거. 소수 극단값은 결측코드·site뭉침 품질이슈.
+- **모델 비교**: in-domain 앙상블 16.95≈Diffusion 17.09≈GBM 17.24≈Flow 18.31(부트스트랩 동률). LORO Diffusion 23.48·Flow 32.39 > GBM 20.82(생성모델 전이 열세). 정확도는 정보병목 지배.
+- **불확실성**: GBM+conformal 56→86%로 충분, 전이선 GBM>diffusion. 생성모델 과신(cov90 74/70.8%), CQLDM식 conformal 후보정 필요.
+- **source overlap(GPT 중단기준 판정)**: direct×Stefan 100%·CCI 99.5%(full A5 가능)·InSAR 79.3%(알래스카만)·온도유도 셀 9~17개(paired 107~130). Stefan·CCI는 이미 51 feature라 A5 구조증분은 실증대상.
+
+### 세부계획 → `docs/RESEARCH_PLAN_multifidelity_2026-07-22.md`
+증강을 "라벨 개수 늘리기"→"자료원별 신뢰구조 모델링(source-aware multi-fidelity)"로 승격. 사용자 3종 증강 비전 유지하되 병합 아닌 관측모델 y_s=A_s[z]+b_s+ε_s로 분리추정. 단계 S0~S11(실측baseline→Stefan→physics feature→증강비율 반응곡선→source-aware A5→UQ+비교표→...). 9일 현실경로 S0→S1→S2→S3→S6→S11.
+- **적대검증 핵심 정정**: S3 초안 동기수치(증강 14.96→14.26)는 **이미 특징복제 누설로 기각된 헤드라인**(donor 제거 15.99). 재동원 금지, 거리버퍼·블록부트스트랩·placebo 셔플대조 게이트 강제. 순서 S2(하한게이트)를 S3 앞으로. 서사축을 S6 정확도가 아니라 S11(UQ)+S2(물리앵커 18.24)+S7(검열 방법론)+S3(반응곡선)에.
+- **novelty**: 6요소 조합(source-aware+검열+support+다축OOD+반응곡선)은 ALT 도메인 미발표이나 요소별 first-claim 전부 금지(SCE 2025·Gautam 2025·GeoCryoAI 2025·NCAM 2026·Read 2019·Du 2025 선점). "우리가 아는 한 ALT 최초"로 한정.
+- **정직한 경계**: A5 깨끗한 소스는 Stefan·CCI뿐(둘 다 이미 feature), 온도유도 식별 얇음(shallow3d 18쌍 corr 0.28). KPDC는 방법론 앵커로만 방어(보고서 첫머리+정량표 필수). in-domain 정확도는 대표성 하한 14cm에 막힘.
+
+## 2026-07-21 — KPDC 신규 데이터 정리 + 문헌 종합 실험계획(면적검증·pooled·물리주입·KPDC)
+
+멀티에이전트 워크플로(에이전트 12, 툴콜 181)로 KPDC 신규 파일 26종 병렬 파싱 + 문헌 4렌즈 조사 후 실험계획 종합·적대검증.
+
+### KPDC 폴더 정리 (`kpdc/`, gitignore 로컬 전용)
+- 64파일을 사이트/데이터종류 2계층으로 재구성: `council/{soil_temp/{active_layer_profile_5min,daily_profile_ID,zl6_shallow_10_40cm,wireless_nodes_2021},soil_moisture,core_alt,aws_met}`, `kougarok/`, `c1_toolik/`, `archive/{zips,duplicates}`. 인벤토리 `kpdc/README.md`.
+- **핵심 발견**: (1) ALT 직접 라벨 = `core_alt/AK_core_sample_2022.xlsx` 코어길이 18개(72-88cm, SF1-6×C/H/L). (2) ALT 간접 유도 = ID21-24(1.6m 16층) 최적·ID02-05(0.8m) 차선(0°C 등온선). (3) 완전중복 2종 격리(VWC 2022=온도 2022 md5동일, Avr _vol=_temperature). (4) 공통제약: 좌표·센서깊이 메타 부재 → KPDC 페이지 확보 필요.
+- `parse_kpdc_met.py` 경로 갱신(council/aws_met, c1_toolik/aws_met) 후 재실행 검증 완료(`kpdc_station_climate.csv` 재생성).
+
+### 실험계획 (`docs/EXPERIMENT_PLAN_2026-07-21.md` + `_쉬운설명.md`)
+연구목적 재정렬(정확도·차별성, 정직성은 도구). 우선순위 E1→E5→E4→E3→E7→E2→E6. 전역통제(≥3seed·74블록 부트스트랩·거리버퍼·셀 통째배정).
+- **적대검증이 게이트 정정**: E1 원안(1km≤12cm)은 `grid_support_results.csv`(지지↑→RMSE↑: 점17.04→1km17.49→25km23.05)·`areal_eval_results.csv`(1km 18.82)와 충돌 → **대표성 귀속(Parsekian 오차분해)을 주게이트로**, 셀내SD 9.7-13.3cm가 잔여RMSE ≥60% 설명. E2는 `insar_ablation`(+InSAR 18.79>BASE 17.24)·`field3d_reeval_leakage`(nn 0.05-0.2km) 근거로 footprint 버퍼 강제·R²와 국소RMSE 분리보고·우선순위 하향. E5 blocker(깊이메타) 과장 정정(ID01-24 깊이라벨 있음)·사례연구 프레임. E3 혼합 test 반드시 공간블록(무작위 vs 블록 병기).
+- **문헌 근거(웹검증)**: Gautam 2025(RF 시험 22cm·Stefan 18cm, 물리 외삽우세), Uxa 2026(ASM 14-18cm 바닥), Du 2025(스케일 오차예산), Merchant 2024(InSAR 업스케일 R² 0.476), Whitcomb 2023(CALM 11-12cm·P-band 65cm 포화), Parsekian 2021(오차 3분해), PI-LSTM Liu 2023(물리 pretrain+27~69%), Ohmer&Liesch 2026(유사도 층화 pooled), AlphaEarth 2025·Nakata 2026(임베딩).
+
 ## 2026-07-14~21 — P0·P1·PPT + P2 3트랙 + 회의적 재검증(Phase1·W2.1·W3) + 알래스카 내부 3트랙 + 연구목적 교정
 
 대형 세션. 회의적 재검증 원칙(모든 헤드라인은 공간블록+LORO·실측 held-out·적대적 검증)을 세워 다수 기존 결론을 교정. 상세는 개별 docs 참조.
