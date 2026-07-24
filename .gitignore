@@ -68,3 +68,10 @@ deck/render/*.pdf
 # --- 대용량 파생 격자/공변량 CSV(재생성 가능) ---
 data/processed/shallow3d_alaska_grid.csv
 data/processed/new_regions_covariates.csv
+
+# S0 대용량 파생(재생성: build_fidelity_schema.py)
+data/processed/fidelity_base.csv
+data/processed/fidelity_observations_long.csv
+
+# figures PDF는 대용량, PNG만 추적(재생성 가능)
+outputs/figures/**/*.pdf

@@ -74,7 +74,7 @@ recs = []
 notes = []
 
 # --- Council 2021: 반시간별 2mTair (Time (UTC), Air Temp (degC)) ---
-f = os.path.join(KPDC, "Council_2021_2mTair.csv")
+f = os.path.join(KPDC, "council", "aws_met", "Council_2021_2mTair.csv")
 d = pd.read_csv(f)
 d["t"] = pd.to_datetime(d["Time (UTC)"], errors="coerce")
 d = d.dropna(subset=["t"])
@@ -95,7 +95,7 @@ if r:
 notes.append(f"Council 2021: {day.notna().sum()} valid days, MAAT={r['maat_st']}")
 
 # --- Council 2019: 일별 gap-filled MET (탭구분, Group.1=날짜, Tair_f=기온, 결측 -9999) ---
-f = os.path.join(KPDC, "COUNCIL_2019_MET_f_day.txt")
+f = os.path.join(KPDC, "council", "aws_met", "COUNCIL_2019_MET_f_day.txt")
 d = pd.read_csv(f, sep="\t")
 d = d[d["Group.1"] != "-"].copy()
 d["t"] = pd.to_datetime(d["Group.1"], errors="coerce")
@@ -116,7 +116,7 @@ notes.append(f"Council 2019: {day.notna().sum()} growing-season days (months {mo
 
 # --- c1 2016 / 2018: 시간별 (Date, Air Temp @ 1m/3m, 결측 6999.0) ---
 for yr, fn in [(2016, "c1_met_2016 (1).csv"), (2018, "c1_met_2018.csv")]:
-    f = os.path.join(KPDC, fn)
+    f = os.path.join(KPDC, "c1_toolik", "aws_met", fn)
     d = pd.read_csv(f)
     d["t"] = pd.to_datetime(d["Date"], errors="coerce")
     d = d.dropna(subset=["t"])
