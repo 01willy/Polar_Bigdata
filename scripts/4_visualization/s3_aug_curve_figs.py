@@ -28,6 +28,9 @@ def save(fig, name):
 
 
 res = pd.read_csv(PROC / "s3_aug_curve_results.csv")
+ftt_path = PROC / "s3_aug_curve_results_ftt.csv"  # S3 보강(FT-T) 결과 병합
+if ftt_path.exists():
+    res = pd.concat([res, pd.read_csv(ftt_path)], ignore_index=True)
 seed_rows = res[res.seed != "SUMMARY"].copy()
 seed_rows["r"] = pd.to_numeric(seed_rows["r"])
 # 발산 모델 제외(전이 covariate shift 하 신경망 발산; base RMSE>100 = 비물리)
@@ -59,13 +62,17 @@ for mi, model in enumerate(models):
             ax.fill_between(g.index, delta - g["std"], delta + g["std"], color=PHYS_COLOR[phys], alpha=0.15)
         ax.axhline(0, color="0.4", lw=0.8, ls="--")
         ax.set_xscale("symlog", linthresh=0.25)
+        ax.set_xlim(-0.05, 12)
+        ax.set_xticks([0, 0.25, 0.5, 1, 2, 5, 10])
+        ax.set_xticklabels(["0", "0.25", "0.5", "1", "2", "5", "10"], fontsize=7.5)
         ax.set_xlabel("증강비율 r (pseudo/실측)", fontsize=9)
         ax.set_ylabel("ΔRMSE 개선 (cm, 양수=개선)", fontsize=9)
         ax.set_title(f"{model} → {target} 전이", fontsize=10)
         if mi == 0 and ti == 0:
             ax.legend(fontsize=8, loc="best")
-fig.suptitle("S3 물리 pseudo-label 증강 반응곡선 — 물리(Stefan/Ku) vs placebo(상수)\n"
-             "물리선이 placebo 위에 있어야 '물리 정보의 순가치'", fontsize=12, y=1.01)
+fig.suptitle("S3 물리 pseudo-label 증강 반응곡선: 물리(Stefan/Ku) vs placebo(상수)\n"
+             "물리선이 placebo 위에 있어야 물리 정보의 순가치 존재. r=10까지 포화 없이 개선",
+             fontsize=12, y=1.01)
 save(fig, "aug_response_curves")
 
 # ---------------- 물리 순가치: 물리 − placebo (같은 r에서) ----------------
@@ -80,9 +87,12 @@ for model in models:
         ax.plot(net.index, net.values, "o-", lw=1.6, ms=5, label=f"{model}→{target}")
 ax.axhline(0, color="0.4", lw=0.8, ls="--")
 ax.set_xscale("symlog", linthresh=0.25)
+ax.set_xlim(-0.05, 12)
+ax.set_xticks([0.25, 0.5, 1, 2, 5, 10])
+ax.set_xticklabels(["0.25", "0.5", "1", "2", "5", "10"], fontsize=7.5)
 ax.set_xlabel("증강비율 r", fontsize=9)
-ax.set_ylabel("Stefan − placebo ΔRMSE (cm)", fontsize=9)
-ax.set_title("물리 정보의 순가치 (Stefan pseudo − placebo 상수)\n양수=물리 구조가 단순 앵커링보다 유효", fontsize=11)
+ax.set_ylabel("Stefan - placebo ΔRMSE (cm)", fontsize=9)
+ax.set_title("물리 정보의 순가치 (Stefan pseudo - placebo 상수)\n양수=물리 구조가 단순 앵커링보다 유효, r 증가 시 순가치도 증가", fontsize=11)
 ax.legend(fontsize=8)
 save(fig, "physics_net_value")
 

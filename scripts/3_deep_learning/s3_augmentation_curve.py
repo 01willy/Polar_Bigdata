@@ -13,10 +13,11 @@
 
 산출: data/processed/s3_aug_curve_results.csv, s3_aug_curve_meta.json
 실행: GPU=6 python scripts/3_deep_learning/s3_augmentation_curve.py   (SMOKE=1 빠른점검)
+      MODELS=ftt OUT_TAG=_ftt ... → 모델 지정·별도 파일 저장(기존 결과 보존, S3 보강용)
 """
 import os
-GPU = os.environ.get("GPU", "6")
-assert GPU in {"6", "7", "8", "9"}, f"GPU는 6-9만 (요청 {GPU})"
+GPU = os.environ.get("GPU", "4")
+assert GPU in {"2", "3", "4", "5", "6", "7", "8", "9"}, f"GPU는 2-9만 (요청 {GPU})"
 os.environ["CUDA_VISIBLE_DEVICES"] = GPU
 
 import sys, json
@@ -41,7 +42,11 @@ SMOKE = os.environ.get("SMOKE", "0") == "1"
 PROC = C.PROCESSED
 R_GRID = [0.0, 0.25, 0.5, 1.0, 2.0, 5.0, 10.0]
 PHYS = ["stefan", "kudryavtsev", "placebo"]
-MODELS = [m for m in (["catboost", "mlp"] if not SMOKE else ["catboost"]) if m in available_models()]
+_default_models = ["catboost", "mlp"] if not SMOKE else ["catboost"]
+_env_models = os.environ.get("MODELS", "")
+MODELS = [m for m in (_env_models.split(",") if _env_models else _default_models)
+          if m in available_models()]
+OUT_TAG = os.environ.get("OUT_TAG", "")  # 예 "_ftt": 별도 파일 저장(기존 결과 보존)
 SEEDS = [0, 1, 2] if not SMOKE else [0]
 NBOOT = 300 if not SMOKE else 30
 
@@ -97,7 +102,10 @@ for target in (["Lena", "Canada"] if not SMOKE else ["Lena"]):
                     if n_ps == 0:
                         Xtr, ytr = Xsrc, ysrc
                     else:
-                        take = min(n_ps, len(pseudo_idx))
+                        # take=n_ps 그대로(상한 없음). pseudo 풀(target 블록분리 절반)이 source보다
+                        # 작아 r≥0.25면 항상 오버샘플링(replace=True) → r이 pseudo 손실 가중을 실제로
+                        # 좌우한다. (구버전 take=min(n_ps,pool) 상한이 r 스윕을 무력화하던 버그 수정.)
+                        take = n_ps
                         sel = np.random.RandomState(seed).choice(
                             len(pseudo_idx), take, replace=n_ps > len(pseudo_idx))
                         Xps = Xpseudo_all[sel]
@@ -135,7 +143,7 @@ for target in (["Lena", "Canada"] if not SMOKE else ["Lena"]):
         print(f"  {model}: {target} 반응곡선 완료")
 
 res = pd.DataFrame(rows)
-res.to_csv(PROC / "s3_aug_curve_results.csv", index=False)
+res.to_csv(PROC / f"s3_aug_curve_results{OUT_TAG}.csv", index=False)
 # 헤드라인: 물리 vs placebo 최고 개선
 summ = res[res.seed == "SUMMARY"]
 best = {}
@@ -147,5 +155,5 @@ meta = dict(purpose="S3 물리 pseudo-label 증강비율 반응곡선", E_alaska
             r_grid=R_GRID, physics=PHYS, models=MODELS, seeds=SEEDS,
             best_delta_by_phys=best, gpu=GPU,
             note="pseudo/test 공간블록 분리(거리버퍼). placebo=알래스카 평균 상수. Δ>0=개선.")
-(PROC / "s3_aug_curve_meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2))
+(PROC / f"s3_aug_curve_meta{OUT_TAG}.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2))
 print(f"\n[done] 최고 ΔRMSE(개선): {best}. 물리>placebo면 물리 정보 유효.")
