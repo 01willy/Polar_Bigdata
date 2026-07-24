@@ -226,3 +226,13 @@ def circular_boundary(ax):
     """PANARCTIC NorthPolarStereo 지도를 원형으로(공개 API)."""
     if getattr(ax, "_is_geo", False):
         _circular(ax)
+
+
+def mask_ocean(ax, zorder=3):
+    """데이터(hexbin/field) 위에 바다·호수·해안선을 재도색해 해안선 넘어 삐진 픽셀 제거.
+    관측은 육지에 있으나 육각형/보간 셀이 커서 바다로 삐지는 시각화 아티팩트를 덮는다."""
+    if not getattr(ax, "_is_geo", False):
+        return
+    ax.add_feature(cfeature.OCEAN.with_scale("50m"), facecolor=_OCEAN, zorder=zorder, edgecolor="none")
+    ax.add_feature(cfeature.LAKES.with_scale("50m"), facecolor=_OCEAN, alpha=0.7, zorder=zorder, edgecolor="none")
+    ax.add_feature(cfeature.COASTLINE.with_scale("50m"), edgecolor=_COAST, linewidth=0.5, zorder=zorder + 0.1)

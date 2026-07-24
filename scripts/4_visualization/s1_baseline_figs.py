@@ -15,7 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 from polar import config as C
 from polar.plotstyle import use_polar, CMAP, tnorm
 from polar.geomap import (make_ax, scatter_map, hexbin_map, add_colorbar, add_scalebar,
-                          add_inset_locator, ALASKA)
+                          add_inset_locator, mask_ocean, ALASKA)
 
 use_polar()
 PROC = C.PROCESSED
@@ -56,6 +56,7 @@ for i, (title, vals) in enumerate(panels):
     ax = fig.add_subplot(1, 4, i + 1, projection=proj)
     make_ax(ALASKA, ax=ax, fig=fig, title=title)
     hb = hexbin_map(ax, oof.lon, oof.lat, vals, gridsize=40, cmap=CMAP.alt, vmin=vmin, vmax=vmax)
+    mask_ocean(ax)   # 해안선 넘어 삐진 hexbin 제거
     if i == 0:
         add_inset_locator(fig, ax, ALASKA); add_scalebar(ax)
 cb = fig.colorbar(hb, ax=fig.axes, fraction=0.012, pad=0.02)
@@ -73,6 +74,7 @@ for i, m in enumerate(ordered):
     make_ax(ALASKA, ax=ax, fig=fig, title=f"{m}  (bias {(oof[f'pred_{m}']-oof.alt_cm).mean():+.1f})")
     resid = oof[f"pred_{m}"] - oof.alt_cm
     hb = hexbin_map(ax, oof.lon, oof.lat, resid, gridsize=38, cmap=CMAP.diff, norm=tnorm(-40, 40, 0))
+    mask_ocean(ax)
 cb = fig.colorbar(hb, ax=fig.axes, fraction=0.012, pad=0.02)
 cb.set_label("예측 - 관측 (cm)", fontsize=9)
 fig.suptitle("S1 모델별 잔차 지도 (hexbin 중앙값; 파랑=과소, 갈색=과대)", fontsize=12, y=1.0)
