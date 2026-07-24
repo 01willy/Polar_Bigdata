@@ -1,0 +1,19 @@
+{
+  "purpose": "S2 물리 5종 baseline + physics feature",
+  "E_global": 1.5709542211032395,
+  "loro_regions": [
+    "Canada",
+    "Alaska",
+    "Lena"
+  ],
+  "gate_protocol": "LORO 비가중평균(macro: Alaska·Lena·Canada)",
+  "p1_stefan_LORO_gate": 22.237333333333336,
+  "models_B": [
+    "catboost",
+    "mlp",
+    "lightgbm"
+  ],
+  "gpu": "6",
+  "git_commit": "d2205eb",
+  "note": "p1 시각화·feature=global E; 평가=fold별 E. OOF E=1.0 버그 수정됨."
+}

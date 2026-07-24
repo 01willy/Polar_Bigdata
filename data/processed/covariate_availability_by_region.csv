@@ -1,0 +1,67 @@
+region,group,valid_pct,n
+ABoVE_AK,terrain,100.0,13542
+ABoVE_AK,climate,100.0,13542
+ABoVE_AK,soil,100.0,13542
+ABoVE_AK,insar,100.0,13542
+ABoVE_AK,polsar,74.0,13542
+ABoVE_AK,cci,100.0,13542
+ABoVE_CA,terrain,100.0,726
+ABoVE_CA,climate,100.0,726
+ABoVE_CA,soil,100.0,726
+ABoVE_CA,insar,100.0,726
+ABoVE_CA,polsar,0.0,726
+ABoVE_CA,cci,100.0,726
+Canada,terrain,100.0,16
+Canada,climate,100.0,16
+Canada,soil,100.0,16
+Canada,insar,100.0,16
+Canada,polsar,0.0,16
+Canada,cci,93.8,16
+GTNPenv_AQ,terrain,100.0,1
+GTNPenv_AQ,climate,0.0,1
+GTNPenv_AQ,soil,0.0,1
+GTNPenv_AQ,insar,0.0,1
+GTNPenv_AQ,polsar,0.0,1
+GTNPenv_AQ,cci,0.0,1
+GTNPenv_CH,terrain,100.0,2
+GTNPenv_CH,climate,100.0,2
+GTNPenv_CH,soil,100.0,2
+GTNPenv_CH,insar,0.0,2
+GTNPenv_CH,polsar,0.0,2
+GTNPenv_CH,cci,100.0,2
+GTNPenv_RU,terrain,100.0,15
+GTNPenv_RU,climate,100.0,15
+GTNPenv_RU,soil,80.0,15
+GTNPenv_RU,insar,0.0,15
+GTNPenv_RU,polsar,0.0,15
+GTNPenv_RU,cci,86.7,15
+GTNPenv_SJ,terrain,100.0,10
+GTNPenv_SJ,climate,100.0,10
+GTNPenv_SJ,soil,100.0,10
+GTNPenv_SJ,insar,0.0,10
+GTNPenv_SJ,polsar,0.0,10
+GTNPenv_SJ,cci,100.0,10
+GTNPenv_US,terrain,100.0,9
+GTNPenv_US,climate,100.0,9
+GTNPenv_US,soil,100.0,9
+GTNPenv_US,insar,0.0,9
+GTNPenv_US,polsar,0.0,9
+GTNPenv_US,cci,100.0,9
+Lena_RU,terrain,100.0,3037
+Lena_RU,climate,100.0,3037
+Lena_RU,soil,87.0,3037
+Lena_RU,insar,0.0,3037
+Lena_RU,polsar,0.0,3037
+Lena_RU,cci,97.4,3037
+QTP_CN,terrain,100.0,1
+QTP_CN,climate,100.0,1
+QTP_CN,soil,100.0,1
+QTP_CN,insar,0.0,1
+QTP_CN,polsar,0.0,1
+QTP_CN,cci,100.0,1
+United States (Alaska),terrain,100.0,64
+United States (Alaska),climate,100.0,64
+United States (Alaska),soil,100.0,64
+United States (Alaska),insar,100.0,64
+United States (Alaska),polsar,87.5,64
+United States (Alaska),cci,100.0,64

@@ -1,0 +1,41 @@
+{
+  "purpose": "S3 물리 pseudo-label 증강비율 반응곡선",
+  "E_alaska": 1.6200388443364633,
+  "r_grid": [
+    0.0,
+    0.25,
+    0.5,
+    1.0,
+    2.0,
+    5.0,
+    10.0
+  ],
+  "physics": [
+    "stefan",
+    "kudryavtsev",
+    "placebo"
+  ],
+  "models": [
+    "catboost",
+    "mlp"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "gpu": "6",
+  "note": "pseudo/test 공간블록 분리(거리버퍼). placebo=알래스카 평균 상수. Δ>0=개선.",
+  "best_delta_by_phys_catboost": {
+    "stefan": 4.66,
+    "kudryavtsev": 0.0,
+    "placebo": 3.95
+  },
+  "mlp_status": "전이 발산(base RMSE 3.6만), 결론·시각화서 제외. catboost만 유효.",
+  "headline_catboost": "Lena: Stefan +4.66 ≈ placebo +3.95(물리순가치 +0.71); Canada: Stefan만 유효(placebo·Ku 악화)",
+  "best_delta_by_phys_RAW_mlp오염": {
+    "stefan": 36586.483666666674,
+    "kudryavtsev": 36571.900666666676,
+    "placebo": 36585.48900000001
+  }
+}
