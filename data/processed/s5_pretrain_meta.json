@@ -1,0 +1,40 @@
+{
+  "purpose": "S5 dense Stefan pseudo 사전학습→실측 finetune",
+  "feat": [
+    "dem_elev",
+    "dem_slope",
+    "dem_aspect_sin",
+    "dem_aspect_cos",
+    "dem_tpi",
+    "dem_rough",
+    "e5_maat",
+    "e5_tdd",
+    "e5_fdd",
+    "e5_sqrt_tdd",
+    "e5_twarm",
+    "e5_tcold",
+    "e5_stl1",
+    "e5_swe"
+  ],
+  "n_grid": 500000,
+  "models": [
+    "mlp",
+    "ftt"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "pre_epochs": 15,
+  "smoke": false,
+  "gate_table": {
+    "ftt_pretrain": 21.56266666666667,
+    "ftt_scratch": 22.466222222222225,
+    "mlp_pretrain": 36.95766666666667,
+    "mlp_scratch": 33.718222222222224
+  },
+  "gpu": "5",
+  "git_commit": "c1a0df8",
+  "note": "입력 14(지형+기후) 고정 공정비교. Alaska·Canada fold는 transductive 표기. pseudo=E_train·√TDD(fold-safe E). 격자 test-블록 버퍼 제거."
+}

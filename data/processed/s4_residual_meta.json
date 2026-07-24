@@ -1,0 +1,41 @@
+{
+  "purpose": "S4 Stefan 앵커 + 저용량 잔차 shrinkage 게이트",
+  "s2_gate_cm": 22.237333333333336,
+  "lambdas": [
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "featsets": {
+    "shift14": 14,
+    "shared25": 25
+  },
+  "models": [
+    "ridge",
+    "catboost_lo",
+    "catboost"
+  ],
+  "loro_regions": [
+    "Canada",
+    "Alaska",
+    "Lena"
+  ],
+  "stefan_only_gate_lsq": 21.264333333333337,
+  "best_posthoc": {
+    "model": "ridge",
+    "featset": "shared25",
+    "lam": 0.0,
+    "gate_rmse": 21.264333333333333
+  },
+  "best_autolam": {
+    "model": "ridge",
+    "featset": "shared25",
+    "gate_rmse": 21.192666666666668
+  },
+  "gate_pass_posthoc": false,
+  "gpu": "6",
+  "git_commit": "c1a0df8",
+  "note": "예측=E_train·√TDD+λ·g(x). 사후 λ 곡선은 진단용, 배포 판정은 autolam(정직). E 추정기: S4=최소제곱(λ0 게이트 21.26) vs S2=중앙값비(22.24) — 최소제곱 앵커가 우세. 판정: λ>0 전 구간 게이트 악화(Alaska fold 파탄이 지배) → 잔차학습 negative 확정(P2 재확인)."
+}

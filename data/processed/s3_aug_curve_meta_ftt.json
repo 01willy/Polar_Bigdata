@@ -16,8 +16,7 @@
     "placebo"
   ],
   "models": [
-    "catboost",
-    "mlp"
+    "ftt"
   ],
   "seeds": [
     0,
@@ -25,14 +24,14 @@
     2
   ],
   "best_delta_by_phys": {
-    "stefan": 5.364,
+    "stefan": 3.316,
     "kudryavtsev": 0.0,
-    "placebo": 3.823
+    "placebo": 0.0
   },
   "gpu": "4",
   "note": "pseudo/test 공간블록 분리(거리버퍼). placebo=알래스카 평균 상수. Δ>0=개선. | best_delta·net_value는 발산(mlp) 제외. take 상한 버그 수정판(r 스윕 유효, 포화 없음).",
   "physics_net_value_max": {
-    "catboost_Canada": 10.202,
-    "catboost_Lena": 1.651
+    "ftt_Canada": 10.357,
+    "ftt_Lena": 1.712
   }
 }
