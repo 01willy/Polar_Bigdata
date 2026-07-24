@@ -1,5 +1,6 @@
 # Handoff Index — Polar_Bigdata
 
+- [2026-07-24 13:27] [Source-aware Multi-fidelity 파이프라인 S0~S3 + 다음 세션 plan](20260724_1327-s0-s3-multifidelity-pipeline.md) — GPT 멀티충실도 로드맵 코드 구현. S0(스키마·누설pytest 16통과·overlap gate: Stefan/CCI만 clean)·S1(표준화 수정후 신경망 MLP/TabM 14.4 최선>CatBoost 15.6, 전이 FT-T 22.5≫GBM 40-57)·S2(물리5종 중 Stefan만 정확 게이트 22.24, physics-feature 무익 미채택)·S3(물리 pseudo 증강 이득 ~85%가 target 앵커링, 물리순가치 +0.71, 부정확 물리는 해). GPU 오용·표준화·바다삐짐 버그 수정. 시각화 논문형 고도화(hexbin·격자필드·inset·mask_ocean). 다음: S4→S5→S3(FT-T)→S6→S7(KPDC)→S9(timelapse)→S10(3D)→S8→S11(UQ). e6a0ee5 push.
 - [2026-07-21 16:37] [회의적 재검증 다사이클 · 전이 상한·정보병목·연구목적 재확정](20260721_1637-skeptical-reverify-transfer-ceiling.md) — 전이는 모델 구조로 못 뚫음(물리 상수 E LORO 18.24cm 최선, 순수ML 40·잔차 48·토양E(x)·미분물리층 전부 악화, 레나 skill 전부 음수). 공변량 추가는 내삽 이득·전이 손실(covariate shift). 회의적 검증이 헤드라인 반복 정정(3D 심부개선=site-GKF 누설, 알래스카 증강개선=특징복제 누설·seed 기각). 연구목적 재확정=정확도·차별성(정직성은 도구). 다음: 전지역 pooled 학습·InSAR 30m 면적검증·물리+ML fine-tune·신규 KPDC(콘슬 8층 토양온도·Thaw depth 실측) 파싱.
 - [2026-07-14 11:39] [중간보고 PPT 재구성 + 연구방향·데이터구조 정밀검증](20260714_1139-ppt-rebuild-research-direction-audit.md) — 학습데이터 6.6MB=ALT ML 관행(병목=라벨희소+공변량정보, 문헌20편+ 검증), ALT(알래스카)와 지중온도(9개국) 별개망 발견(0°C깊이로 통합), 3D=GBM조건장·기후+깊이만·patch-CNN≈GBM 확인. PPT v3(Pretendard·EMP톤·2.5D단면). 다음: GPU 6,7,8,9로 P0(인벤토리지도)→P1(전지역·전공변량 통합학습)→P2(Stefan+DL)→P3~P5.
 
