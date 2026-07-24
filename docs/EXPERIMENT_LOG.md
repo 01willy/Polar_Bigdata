@@ -3,13 +3,39 @@
 > 세션별 작업 기록. 큐레이션된 마스터 인덱스는 [EXPERIMENTS.md](EXPERIMENTS.md),
 > GPT 공유 핸드오프는 [gpt/handoff/](../gpt/handoff/) 참조.
 
+## 2026-07-24 — S5: dense Stefan pseudo 사전학습→실측 finetune → 이득은 transductive 아티팩트
+
+`RESEARCH_PLAN_multifidelity` S5. 물리(Stefan) 유도장을 dense 격자(pretrain_weaklabels 500k, 알래스카·서부캐나다)에서 사전학습한 신경망이 실측 finetune 후 from-scratch 대비 전이를 개선하는지 게이트식 검증. pseudo y=E_train·√TDD(fold-safe E), 격자 test-블록 버퍼 제거, 입력 14(지형+기후) 고정 공정비교, mlp·ftt 3seed. 스크립트 `s5_pretrain_finetune.py`.
+- **게이트는 외견상 개선(FT-T scratch 22.47→pretrain 21.56)이나 전이 지식 아님.** 개선 전량이 Alaska fold(scratch 19.17→pretrain 15.22, Δ+3.95)에서 나오는데 이 fold는 **transductive**(격자가 test인 알래스카 공변량을 포함). 깨끗한 비-transductive 사례 **Lena는 Δ+0.05로 사실상 무효**(격자가 Lena를 안 덮음). Canada(transductive)는 오히려 Δ−1.29 악화.
+- **결론**: 물리 사전학습 이득 = 격자가 target 공변량 공간을 덮는 transductive 노출 효과이지 전이 가능한 물리 지식이 아니다. S3(증강 이득 대부분이 target 앵커링)·S4(잔차 전이 파탄)·전이 상한 서사와 정합. covariate shift 밖에선 사전학습도 물리 앵커를 못 넘는다.
+- **MLP 전이 발산 재확인**: 게이트 scratch 33.72·pretrain 36.96(둘 다 파탄), 전이엔 FT-T만 유효. in-domain AK는 mlp scratch 17.37→pretrain 15.70(Δ+1.66)로 사전학습이 in-domain엔 유효.
+- **산출**: `s5_pretrain_results.csv`·`s5_pretrain_meta.json`. 시각화 `outputs/figures/s5_pretrain/`(scratch→pretrain 덤벨·게이트 막대, †=transductive 표기).
+
+## 2026-07-24 — S3 버그 수정: 증강비율 표본상한 제거(포화 결론 정정) + FT-T 재확인
+
+S3 재검토 중 **증강비율 반응곡선을 무력화하던 버그 발견·수정**. `take = min(n_ps, len(pseudo_idx))`가 pseudo 표본 수를 target 풀 크기(Lena 1519·Canada 371)로 상한 처리해, source(알래스카 13606)보다 풀이 작으니 r≥0.25 전 구간이 동일한 풀 전체만 사용 → r=0.25와 r=10 결과 완전 동일. `replace=n_ps>pool`로 오버샘플링을 의도했으나 상한이 무력화. **`take=n_ps`로 수정**(r≥0.25는 항상 replace=True 오버샘플링, r이 pseudo 손실 가중을 실제로 좌우).
+- **"r≥1 포화" 결론 정정**: 포화가 아니라 상한 버그 아티팩트였음. 수정 후 catboost Lena stefan은 r=0.25 17.24→r=10 16.54로 **r=10까지 단조 개선**(포화 없음). 증강 이득은 r을 키울수록 계속 증가.
+- **FT-T 증강 재확인(S1 전이 최선 모델)**: mlp가 전이 발산해 S3에 빠졌던 것을 FT-T로 보강. (정확한 r-스윕 재산출은 아래 재실행 결과로 갱신.)
+- 영향 범위: 기존 S3 net-value(Stefan−placebo, 고정 r 비교)는 유효하나 곡선 형태·포화 서술은 수정판으로 대체. 실험로그·핸드오프의 "r≥1 포화" 문구 정정 대상.
+
+## 2026-07-24 — S4: Stefan 앵커 + 저용량 잔차 shrinkage 게이트 → negative 확정(P2 재확인)
+
+`RESEARCH_PLAN_multifidelity` S4. 재검증 질문: 과거 "잔차학습 무익(48cm)"은 covariate shift 심한 토양 입력 조건의 판정이었다. shift-robust 입력(지형6+기후8)·저용량 모델(ridge<catboost d3<catboost d6)·shrinkage λ∈{0,.25,.5,.75,1}로 재게이트. 예측=E_train·√TDD+λ·g(x), fold-safe E, LORO 매크로(Alaska·Lena·Canada) 비가중평균 게이트. 스크립트 `s4_residual_learning.py`.
+- **게이트 판정: negative 확정.** 사후 λ 곡선에서 λ>0 전 구간이 게이트 악화(λ0 21.26 → λ0.25 21.83 이상). 저용량·shift-robust 입력으로도 잔차학습은 물리 앵커를 넘지 못한다.
+- **지역 비대칭이 원인(블록부트스트랩 95% CI)**: Lena(+0.39~+1.00)·Canada(+0.91~+3.16)는 유의 개선. 그러나 Alaska fold(잔차를 비알래스카 소표본 3.8천셀에서 학습→13.6천셀 전이)는 −3.4~−35cm 유의 파탄. 게이트(비가중평균)는 Alaska 파탄이 지배. → 잔차 전이는 "라벨 풍부 지역→빈곤 지역" 방향만 소폭 유효, 역방향은 파탄.
+- **λ 자동선택 불가 실증**: inner 공간블록 CV는 in-domain 이득만 보고 λ>0 선택 → 게이트 27.7~30.0 붕괴(catboost). ridge만 λ*≈0 선택해 21.2 유지. 타깃 라벨 없이는 shrinkage 조절 자체가 불가능(전이 상한 재확인).
+- **in-domain은 반대로 개선**: AK 공간블록 14.46→**13.33**(ridge·shared25·λ0.75, 프로젝트 in-domain 최저. 기존 최선 MLP 14.37 하회). Stefan 앵커+잔차 구조가 in-domain 유효 확인.
+- **E 추정기 발견**: 최소제곱 E(fidelity.fit_stefan_E)가 중앙값비 E(physics.fit_E, S2 게이트 22.24) 대비 LORO 앵커 우세(21.26). 물리 앵커 자체도 E 추정으로 ~1cm 개선 여지.
+- **산출**: `s4_residual_{results,oof}.csv`·`s4_residual_meta.json`. 시각화 `outputs/figures/s4_residual/`(λ곡선 지역별+게이트·부트스트랩CI·in-domain vs 전이 대비).
+
 ## 2026-07-24 — S3: 물리 pseudo-label 증강비율 반응곡선 (엄격 통제) + 시각화 인프라 고도화
 
 `RESEARCH_PLAN_multifidelity` S3. 알래스카 실측 + target(Lena/Canada) 물리 pseudo를 r∈{0,.25,.5,1,2,5,10}로 증강, target 전이 개선 규명. 공간블록 pseudo/test 분리(거리버퍼)·placebo(알래스카 평균 상수) 대조·블록부트스트랩. 스크립트 `s3_augmentation_curve.py`.
-- **핵심 발견(catboost, mlp는 전이 발산 제외)**: (1) **Lena**: Stefan pseudo +4.66cm ≈ placebo +3.95cm → 증강 이득의 ~85%가 물리 정보가 아니라 **target 방향 앵커링(bias 교정)**, 물리 순가치 +0.71cm에 불과. (2) **Canada**: Stefan +1.18만 유효, placebo −6.7·Ku −20 악화 → 정확한 물리만 유효. (3) **Kudryavtsev pseudo는 두 지역 모두 악화**(부정확 물리는 해). (4) r≥1 포화. → RQ1/RQ3 답: 물리 pseudo는 bias 큰 전이서 앵커링으로 돕되 물리 순가치 작고, 부정확 물리는 해.
-- **mlp 전이 발산**: 알래스카만 학습→Lena/Canada 극단 covariate shift에서 신경망 발산(base RMSE 3.6만). catboost 강건. 시각화·결론서 mlp 제외. (S1 FT-T가 전이 최선이었던 것과 정합, mlp는 전이 불안정.)
-- **산출**: `s3_aug_curve_results.csv`·`meta.json`. 시각화 `outputs/figures/s3_aug/`(반응곡선 물리vs placebo·물리 순가치).
-- 대회 함의: "증강 비교분석표"의 핵심 = 증강이 언제 돕고(bias 큰 전이) 언제 해치나(부정확 물리·잘못된 지역). 단순 병합 무익 결론(P1/P2)을 조건부로 정밀화.
+- **⚠️ 1차 결론은 표본상한 버그로 무효화**(아래 "S3 버그 수정" 항목·2026-07-24 참조). 원 스크립트가 pseudo 표본을 풀 크기로 상한 처리해 r 스윕이 무력(모든 r 동일). "r≥1 포화·물리 순가치 +0.71cm" 등은 저-r에 눌린 아티팩트였다. **아래는 수정 후 정확한 스윕 결과로 대체**.
+- **핵심 발견(catboost·FT-T 일치, mlp는 전이 발산 제외)**: (1) **포화 없음**, r=10까지 단조 개선. (2) **물리 순가치(Stefan−placebo)가 r에 따라 증가**: Lena +0.8→+1.7cm, Canada +9.6→+10.4cm(두 모델 일치). (3) **Canada는 물리가 필수**: placebo가 −7~−8 악화인데 Stefan은 +2~+3 개선 → 앵커링이 아니라 물리 정보가 전이 견인. (4) **Lena는 base 모델 품질에 의존**: catboost(base 21.9, 약함)는 앵커링+소폭 물리로 개선, FT-T(base 14.5, 전이 최강)는 증강이 오히려 소폭 해(순가치는 여전히 placebo보다 나음). (5) **부정확 물리(Ku)는 r 키울수록 더 악화**(−16~−30). → RQ1/RQ3 답: 물리 pseudo 순가치는 정확한 물리·bias 큰 전이·약한 base일수록 크고, 부정확 물리는 양이 늘수록 해.
+- **mlp 전이 발산**: 알래스카만 학습→Lena/Canada 극단 covariate shift에서 신경망 발산(base RMSE 3.6만). catboost·FT-T 강건. 시각화·결론서 mlp 제외.
+- **산출**: `s3_aug_curve_results{,_ftt}.csv`·`meta.json`. 시각화 `outputs/figures/s3_aug/`(반응곡선 물리vs placebo·물리 순가치, 두 모델 일치).
+- 대회 함의: "증강 비교분석표"의 핵심 = 증강이 언제 돕고(정확 물리·bias 큰 전이·약한 base) 언제 해치나(부정확 물리·이미 강한 전이 모델). 단순 병합 무익 결론(P1/P2)을 조건부로 정밀화.
 
 ## 2026-07-24 — 전체 리뷰(S0~S2) + must_fix 처리 + 시각화 고도화 착수 → S1 재렌더
 

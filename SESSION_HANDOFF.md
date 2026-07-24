@@ -1,8 +1,16 @@
 # SESSION_HANDOFF — Polar_Bigdata (현재 상태 스냅샷)
 
-**갱신**: 2026-07-14(P0·P1 실행) · **다음 세션은 이 파일부터 읽으세요.**
+**갱신**: 2026-07-24(S4·S5·S3정정) · **다음 세션은 이 파일부터 읽으세요.**
 
-## ★ 최신 완료(2026-07-20 저녁) — 알래스카 내부 3트랙 + 적대적 검증 정정 → `docs/RESULTS_SUMMARY_2026-07-20.md`
+## ★ 최신 완료(2026-07-24 오후) — S4·S5 완주 + S3 증강비율 버그 수정
+
+GPU **4,5**(사용자 RTM 잡이 6,7,8,9 점유 → 겹침 회피. 스크립트 가드 2-9 확장, 기본 GPU=4). 실험로그 `docs/EXPERIMENT_LOG.md` 최신 4항목.
+- **S4 잔차학습 fallback → negative 확정(P2 재확인)**: 예측=Stefan앵커(E_train·√TDD)+λ·저용량잔차. shift-robust 입력·저용량으로도 λ>0 전 구간 LORO 게이트 악화(21.26→). Alaska fold 파탄(부트스트랩 −3.4~−35cm)이 게이트 지배, inner CV λ 자동선택 불가 실증. **부수 성과**: in-domain AK 13.33cm(ridge·λ0.75, 프로젝트 최저 갱신). 최소제곱 E가 중앙값비 E보다 앵커 우세(21.26<22.24). 스크립트 `s4_residual_learning.py`, 그림 `outputs/figures/s4_residual/`.
+- **S5 dense Stefan pseudo 사전학습→finetune → 이득은 transductive 아티팩트**: 게이트 개선(FT-T 22.47→21.56) 전량이 Alaska(transductive) fold. 깨끗한 Lena Δ+0.05 무효, Canada Δ−1.29 악화. 물리 사전학습은 격자가 target 공변량 덮을 때만 유효(전이 지식 아님). mlp 전이 발산. 스크립트 `s5_pretrain_finetune.py`, 그림 `outputs/figures/s5_pretrain/`.
+- **S3 증강비율 버그 발견·수정(헤드라인 정정)**: `take=min(n_ps,pool)` 상한이 r 스윕 무력화(r=0.25=r=10) → `take=n_ps`로 수정. **"r≥1 포화" 결론은 버그 아티팩트**. 수정 후 catboost·FT-T 일치: 포화 없이 r=10까지 개선, 물리 순가치(Stefan−placebo) r 따라 증가(Lena +0.8→+1.7·Canada +9.6→+10.4). Canada는 물리 필수(placebo 악화), Lena는 base 품질 의존, Ku(부정확)는 r 키울수록 해. `s3_aug_curve_results{,_ftt}.csv`.
+- **다음**: S6(source-aware A5, Stefan+CCI) 또는 S7(KPDC 검증)·S9(timelapse)·S10(3D)·S11(UQ). GPT 로드맵 순서 `gpt/handoff/20260724_1327-*`. 누설 pytest 16개 통과 유지.
+
+## ★ 이전 완료(2026-07-20 저녁) — 알래스카 내부 3트랙 + 적대적 검증 정정 → `docs/RESULTS_SUMMARY_2026-07-20.md`
 - **증강(적대적 검증 후 기각)**: 1차 "4모델 유의 개선"은 착시. GBM 개선=test 인접 특징복제 누설(donor 제거 시 14.2→16.0 악화), MLP=seed 운(블록 부트스트랩 CI 0 포함). 살아남은 것: MLP>GBM ≈−0.7cm(3-seed), Stefan 라벨의 placebo 대비 정보성, TabM 안정화. 재실험 조건: 거리버퍼·블록부트스트랩·multi-seed·nested 선택(`aug_within_alaska.py` 수정 필요).
 - **timelapse(완료)**: 연별 지도는 물리 forcing 최선(연도 홀드아웃 14.97cm, R² 0.34). **연도 간 anomaly는 예측 불가(corr 0.06)** = 시간 신호의 예측 불가능성 정량화가 정직 산출. GIF `outputs/animations/timelapse_alt_alaska.gif`.
 - **얕은 3D(검증 통과)**: 알래스카 0-3m 실측 764행, 필드 2.66°C·R² 0.47, 0°C→ALT r 0.28(심부 0.16 대비 개선, 절대 정합 미완).
