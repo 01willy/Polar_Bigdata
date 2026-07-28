@@ -213,6 +213,46 @@ def add_inset_locator(fig, ax, extent, size=0.24):
     return axins
 
 
+def add_zoom_inset(fig, ax, extent, bbox, loc=(0.58, 0.02, 0.40, 0.40),
+                   edgecolor="#c0392b", lw=1.2):
+    """본 지도(ax) 위에 밀집 사이트 확대 inset을 추가한다.
+
+    bbox=(lo0, lo1, la0, la1) 확대 범위. 본 지도에 해당 범위 사각형을 표시하고
+    inset 축(같은 투영)을 반환한다. 호출부가 inset에 산점을 그린다(개별 셀 노출).
+    반환: inset axes(_is_geo 세팅됨).
+    """
+    if not _HAS_CARTOPY:
+        return None
+    lo0, lo1, la0, la1 = bbox
+    proj = _proj(extent)
+    axz = ax.inset_axes(loc, projection=proj)
+    axz.set_extent([lo0, lo1, la0, la1], crs=ccrs.PlateCarree())
+    axz.add_feature(cfeature.OCEAN.with_scale("50m"), facecolor=_OCEAN, zorder=0)
+    axz.add_feature(cfeature.LAND.with_scale("50m"), facecolor=_LAND, zorder=0)
+    axz.add_feature(cfeature.COASTLINE.with_scale("50m"), edgecolor=_COAST, linewidth=0.5, zorder=2)
+    for sp in axz.spines.values():
+        sp.set_edgecolor(edgecolor); sp.set_linewidth(lw + 0.4)
+    axz.set_xticks([]); axz.set_yticks([])
+    axz._is_geo = True
+    # 본 지도에 확대 위치 표시: bbox가 지도 축척에서 sub-pixel이라 사각형 대신 원형 마커.
+    clon, clat = 0.5 * (lo0 + lo1), 0.5 * (la0 + la1)
+    ax.plot(clon, clat, marker="o", ms=7, mfc="none", mec=edgecolor, mew=1.4,
+            transform=ccrs.PlateCarree(), zorder=6)
+    ax.plot(clon, clat, marker="+", ms=6, color=edgecolor, mew=1.2,
+            transform=ccrs.PlateCarree(), zorder=6)
+    # 위치 마커 -> inset 연결선(어느 클러스터를 확대했는지 명시).
+    try:
+        import matplotlib.patches as mpatches
+        con = mpatches.ConnectionPatch(
+            xyA=(clon, clat), coordsA=ccrs.PlateCarree()._as_mpl_transform(ax),
+            xyB=(0.5, 1.0), coordsB=axz.transAxes,
+            color=edgecolor, lw=0.8, ls="--", alpha=0.7, zorder=5)
+        fig.add_artist(con)
+    except Exception:
+        pass
+    return axz
+
+
 def _circular(ax):
     """극지 스테레오 축을 원형 경계로."""
     import matplotlib.path as mpath

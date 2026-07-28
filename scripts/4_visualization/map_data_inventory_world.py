@@ -57,6 +57,19 @@ qtec = pd.DataFrame({
     "lon": [93.08, 94.90],
 })
 
+# 6) KPDC 현장관측(대회 주 활용 데이터): Council 주 사이트(Seward Peninsula, AK).
+# 코어 길이 18개(72-88cm) = ALT 직접 실측, 일별 지중온도 프로파일 = 0°C 등온선 ALT 유도.
+kpdc = pd.DataFrame({
+    "site": ["Council"],
+    "lat": [64.85],
+    "lon": [-163.70],
+})
+try:
+    kpdc_alt = pd.read_csv("data/processed/s7_council_alt_derived.csv")
+    n_kpdc_season = len(kpdc_alt)
+except Exception:
+    n_kpdc_season = 0
+
 # 레나델타 박스 내 기존 지온 사이트 수(매트릭스용, 러시아 계수에 포함)
 lena_gt = gt[(gt.lat >= 71.0) & (gt.lat <= 74.0) & (gt.lon >= 122) & (gt.lon <= 131)]
 
@@ -65,6 +78,7 @@ C_ALT = CMAP.alt(0.72)          # ALT 셀: 짙은 냉색
 C_GT = CMAP.err(0.62)           # 지온: 자주 계열(acton)
 C_ALLENA = "#e0851f"            # 신규 강조: 앰버
 C_QTEC = "#0f766e"              # 신규 강조: 청록
+C_KPDC = "#c2185b"              # 대회 주 활용(KPDC): 마젠타 강조(색+마커 이중 부호화)
 C_INSAR = "#33518e"
 C_POLSAR = "#5c7fbe"
 
@@ -87,9 +101,10 @@ ax.imshow(land_img, cmap=cm_land, origin="upper",
           extent=(lon_e5.min(), lon_e5.max(), lat_e5.min(), lat_e5.max()),
           aspect="auto", interpolation="nearest", zorder=0)
 
-# a) ALT 셀
-ax.scatter(cell.lon, cell.lat, s=2.5, c=[C_ALT], marker="o", lw=0,
-           alpha=0.85, zorder=4, rasterized=True)
+# a) ALT 셀 — 지적8 대응: s=2.5는 세계지도 축척에서 거의 보이지 않아
+# 14,348 셀의 밀도가 드러나지 않는다. s=8·alpha 0.7·엷은 테두리로 확대해 점 밀도를 노출한다.
+ax.scatter(cell.lon, cell.lat, s=8, c=[C_ALT], marker="o",
+           edgecolors="white", linewidths=0.15, alpha=0.7, zorder=4, rasterized=True)
 # b) 지중온도 사이트
 ax.scatter(gt_n.lon, gt_n.lat, s=34, c=[C_GT], marker="^",
            edgecolors="white", linewidths=0.5, alpha=0.95, zorder=5, rasterized=True)
@@ -105,6 +120,14 @@ ax.scatter(qtec.lon, qtec.lat, s=210, c=[C_QTEC], marker="*",
 ax.annotate("QTEC Wudaoliang·Golmud (신규)\nWMO 지점좌표", xy=(94.0, 35.8),
             xytext=(55, 28.5), fontsize=9.5, color=C_QTEC, fontweight="bold",
             arrowprops=dict(arrowstyle="-", color=C_QTEC, lw=0.9))
+
+# d2) KPDC 현장관측(대회 주 활용): Council. 색+마커('P') 이중 부호화, 최상위 zorder.
+ax.scatter(kpdc.lon, kpdc.lat, s=240, c=[C_KPDC], marker="P",
+           edgecolors="white", linewidths=0.9, zorder=9)
+ax.annotate("KPDC Council (대회 주 활용)\nALT 코어 실측 + 지중온도 프로파일",
+            xy=(-163.7, 64.85), xytext=(-150, 44),
+            fontsize=9.5, color=C_KPDC, fontweight="bold",
+            arrowprops=dict(arrowstyle="-", color=C_KPDC, lw=0.9))
 
 # e) 물리관측 커버리지 박스
 ax.add_patch(mpatches.Rectangle((-166.7, 57.8), (-110.4) - (-166.7), 71.5 - 57.8,
@@ -131,8 +154,10 @@ ax.text(0.0, 1.012, "(a)", transform=ax.transAxes, ha="left", va="bottom",
 ax.grid(alpha=0.3, lw=0.4, color="#bbbbbb")
 
 handles = [
-    Line2D([], [], marker="o", ls="", ms=5, mfc=C_ALT, mec="none",
-           label=f"ALT 측정 셀 ({n_alt:,}개: 알래스카 {n_ak:,}, 서캐나다 {n_ca:,})"),
+    Line2D([], [], marker="P", ls="", ms=11, mfc=C_KPDC, mec="white",
+           label="KPDC Council 현장관측 (대회 주 활용)"),
+    Line2D([], [], marker="o", ls="", ms=7, mfc=C_ALT, mec="white", mew=0.4,
+           label=f"ALT 측정 셀 {n_alt:,}개 (알래스카 {n_ak:,}·서캐나다 {n_ca:,}; 원 관측 22.5만 레코드 집계)"),
     Line2D([], [], marker="^", ls="", ms=7, mfc=C_GT, mec="white",
            label=f"시추공 지중온도 ({n_gt} 사이트, 남극 1 표시범위 밖)"),
     Line2D([], [], marker="x", ls="", ms=6, mew=1.4, color=C_ALLENA,
@@ -148,8 +173,8 @@ ax.legend(handles=handles, loc="lower left", fontsize=9.5, ncol=2,
 # ============================ 하단: 매트릭스 ============================
 axm = fig.add_subplot(gs[1])
 
-rows = ["알래스카 ABoVE", "서캐나다", "레나델타 (신규)", "티베트 QTP (신규)",
-        "스위스 알프스", "러시아·시베리아", "스발바르"]
+rows = ["KPDC Council (대회)", "알래스카 ABoVE", "서캐나다", "레나델타 (신규)",
+        "티베트 QTP (신규)", "스위스 알프스", "러시아·시베리아", "스발바르"]
 cols = ["ALT 라벨", "지온 3D 라벨", "ERA5 기후", "DEM 지형", "InSAR", "PolSAR", "CCI prior"]
 
 # 상태 코드: 3=보유, 2=부분, 1=전지구 취득가능, 0=불가
@@ -157,6 +182,7 @@ HOLD, PART, ACQ, NO = 3, 2, 1, 0
 n_ru = int(reg_cnt.get("Russia", 0) + reg_cnt.get("Russia(W.Siberia)", 0))
 status = np.array([
     # ALT      지온    ERA5   DEM    InSAR  PolSAR CCI
+    [HOLD,     HOLD,   HOLD,  HOLD,  NO,    NO,    HOLD],   # KPDC Council(대회)
     [HOLD,     HOLD,   HOLD,  HOLD,  HOLD,  HOLD,  HOLD],   # 알래스카
     [HOLD,     PART,   HOLD,  HOLD,  NO,    NO,    HOLD],   # 서캐나다
     [HOLD,     PART,   HOLD,  ACQ,   NO,    NO,    HOLD],   # 레나델타(신규)
@@ -166,6 +192,7 @@ status = np.array([
     [NO,       HOLD,   HOLD,  ACQ,   NO,    NO,    HOLD],   # 스발바르
 ])
 text = [
+    ["18 코어", f"{n_kpdc_season} 프로파일", "O", "O", "X", "X", "O"],
     [f"{n_ak:,} 셀", f"{int(reg_cnt.get('United States', 0))} 사이트", "O", "O", "ReSALT", "ABoVE", "O"],
     [f"{n_ca:,} 셀", f"{int(reg_cnt.get('Canada', 0))} 사이트", "O", "O", "X", "X", "O"],
     [f"{n_allena:,} 위치", f"{len(lena_gt)} 사이트*", "O", "취득", "X", "X", "O"],
@@ -194,12 +221,12 @@ for i in range(len(rows)):
         tcol = "white" if st == HOLD else ("#1b2a41" if st in (PART, ACQ) else "#8a919b")
         fw = "bold" if st == HOLD else "normal"
         axm.text(j, i, text[i][j], ha="center", va="center",
-                 fontsize=9.5, color=tcol, fontweight=fw)
+                 fontsize=12, color=tcol, fontweight=fw)
 
 axm.set_xticks(range(len(cols)))
-axm.set_xticklabels(cols, fontsize=10.5)
+axm.set_xticklabels(cols, fontsize=12)
 axm.set_yticks(range(len(rows)))
-axm.set_yticklabels(rows, fontsize=10.5)
+axm.set_yticklabels(rows, fontsize=12)
 axm.set_xticks(np.arange(-0.5, len(cols)), minor=True)
 axm.set_yticks(np.arange(-0.5, len(rows)), minor=True)
 axm.grid(which="minor", color="white", lw=1.6)
@@ -210,25 +237,30 @@ axm.text(0.0, 1.02, "(b)", transform=axm.transAxes, ha="left", va="bottom",
          fontsize=12, fontweight="bold", color="#1b2a41")
 
 mat_handles = [
-    mpatches.Patch(fc=col_hold, label="보유"),
-    mpatches.Patch(fc=col_part, label="부분 보유"),
-    mpatches.Patch(fc=col_acq, label="전지구 취득가능"),
-    mpatches.Patch(fc=col_no, label="불가 (X)"),
+    mpatches.Patch(fc=col_hold, ec="0.4", label="보유"),
+    mpatches.Patch(fc=col_part, ec="0.4", label="부분 보유"),
+    mpatches.Patch(fc=col_acq, ec="0.4", label="전지구 취득가능"),
+    mpatches.Patch(fc=col_no, ec="0.4", label="불가 (X)"),
 ]
-axm.legend(handles=mat_handles, loc="upper left", bbox_to_anchor=(0.0, -0.14),
-           ncol=4, fontsize=9.5, frameon=False)
-axm.text(1.0, -0.16,
+# 색범례를 표 하단 중앙에 크게 명시(발표 판독성): 셀 색-상태 대응을 표와 함께 노출.
+leg = axm.legend(handles=mat_handles, loc="upper center", bbox_to_anchor=(0.5, -0.13),
+                 ncol=4, fontsize=12, frameon=True, framealpha=0.95,
+                 edgecolor="0.6", borderpad=0.9, handlelength=1.6,
+                 handleheight=1.2, columnspacing=1.8, title="셀 색 = 데이터 가용 상태")
+leg.get_title().set_fontsize(11.5)
+leg.get_title().set_fontweight("bold")
+axm.text(1.0, -0.30,
          "* 레나델타 지온 2 사이트(Samoylov·Tiksi)는 러시아·시베리아 계수에 포함. "
          "표 외 지온: 스웨덴 8·오스트리아 4·남극 1.",
-         transform=axm.transAxes, ha="right", va="top", fontsize=8.5, color="#555555")
+         transform=axm.transAxes, ha="right", va="top", fontsize=10, color="#555555")
 
 fig.suptitle("영구동토 관측 데이터 인벤토리: 공간 분포와 지역별 가용성", fontsize=16,
              fontweight="bold", y=0.985)
 
 png = mappath("data_inventory_world")
 pdf = mappath("data_inventory_world", ext="pdf")
-fig.savefig(png)
-fig.savefig(pdf)
+fig.savefig(png, dpi=300)          # 보고서용 고해상 PNG(전역 savefig.dpi 260 → 300 상향)
+fig.savefig(pdf)                    # 벡터 PDF(래스터 요소는 rasterized dpi 상속)
 plt.close(fig)
 print(f"[saved] {png}")
 print(f"[saved] {pdf}")

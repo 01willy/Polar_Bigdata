@@ -57,7 +57,7 @@ fig, ax = plt.subplots(figsize=(12, 7))
 extent = [lon.min(), lon.max(), lat.min(), lat.max()]
 im = ax.imshow(alt_grid, extent=extent, origin="upper", cmap=CMAP.alt,
                vmin=20, vmax=110, aspect="auto")
-add_cbar(fig, im, ax, "예측 활성층 두께 ALT (cm)  — 짙을수록 깊음(활성층 두꺼움)")
+add_cbar(fig, im, ax, "예측 활성층 두께 ALT (cm): 짙을수록 깊음(활성층 두꺼움)")
 
 # 관측점 오버레이 — 위치 마커에 온도의미색(적) 재사용 금지 → 흰 채움+검은 테두리(중립 고대비)
 calm = df[(df.lat.between(BBOX["s"], BBOX["n"])) & (df.lon.between(BBOX["w"], BBOX["e"]))]
@@ -71,7 +71,7 @@ try:
 except Exception:
     pass
 
-style_geo(ax, title="알래스카 활성층 두께(ALT) 예측 지도 — ERA5-Land 공변량 + GBM\n"
+style_geo(ax, title="알래스카 활성층 두께(ALT) 예측 지도 (ERA5-Land 공변량 + GBM)\n"
                     "(회색=해양/결측, 옅은청→짙은청=얕음→깊음)")
 ax.legend(loc="lower left", fontsize=9)
 fig.savefig(mappath("alt_alaska_pred"))

@@ -11,6 +11,7 @@ from polar.plotstyle import use_polar, CMAP, add_cbar, style_geo, BAD
 from polar.outputs import mappath
 plt = use_polar()
 plt.rcParams["image.cmap"] = "cmc.batlow"  # 기본 컬러맵 이름을 이 mpl 버전에 등록된 형태로(contour 폴백용)
+plt.rcParams["pdf.fonttype"] = 42          # PDF 텍스트를 TrueType로 임베딩(검색·편집 가능)
 from sklearn.ensemble import HistGradientBoostingRegressor
 
 E5F = ["e5_maat", "e5_tdd", "e5_fdd", "e5_sqrt_tdd", "e5_twarm", "e5_tcold", "e5_stl1", "e5_swe"]
@@ -44,7 +45,8 @@ print(f"표면 예측: {land.sum():,} 육지셀, ALT {np.nanmin(alt):.0f}~{np.na
 # 렌더
 fig, ax = plt.subplots(figsize=(13, 6.5))
 ax.set_facecolor(BAD)   # 해양/결측(NaN) = 중립 회색 배경 → 저ALT 육지와 명확히 구분
-mesh = ax.pcolormesh(glon, glat, alt, cmap=CMAP.alt, vmin=20, vmax=90, shading="auto")
+mesh = ax.pcolormesh(glon, glat, alt, cmap=CMAP.alt, vmin=20, vmax=90, shading="auto",
+                     rasterized=True)  # PDF에서 색면만 래스터, 축·텍스트는 벡터 유지
 cs = ax.contour(glon, glat, alt, levels=[30, 45, 60, 75], colors="#3a3a3a", linewidths=0.5, alpha=0.6)
 ax.clabel(cs, fmt="%dcm", fontsize=7.5)
 cb = add_cbar(fig, mesh, ax, "예측 활성층 두께 ALT (cm)")
@@ -55,8 +57,11 @@ ax.scatter(obs.lon, obs.lat, c=obs.alt, s=20, cmap=CMAP.alt, vmin=20, vmax=90,
            edgecolors="#222222", linewidths=0.5, zorder=5)
 ax.set_xlim(Wl, E); ax.set_ylim(S, N)
 style_geo(ax, xlabel="경도 (°E)", ylabel="위도 (°N)")
-ax.set_title(f"알래스카 북사면 활성층 두께(ALT) 예측 표면 — 연속 2D 레이어\n"
+ax.set_title(f"알래스카 북사면 활성층 두께(ALT) 예측 표면 (연속 2D 레이어)\n"
              f"(색면=예측, 테두리점=실측 관측 {len(obs)}곳, 등고선=ALT)")
-fig.tight_layout(); fig.savefig(mappath("alt_surface_northslope"))
+fig.tight_layout()
+fig.savefig(mappath("alt_surface_northslope"), dpi=300)             # 보고서용 고해상 PNG(260 → 300)
+fig.savefig(mappath("alt_surface_northslope", ext="pdf"))          # 벡터 PDF 동반
 plt.close(fig)
 print("saved", mappath("alt_surface_northslope"))
+print("saved", mappath("alt_surface_northslope", ext="pdf"))

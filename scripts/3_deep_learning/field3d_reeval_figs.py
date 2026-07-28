@@ -21,6 +21,7 @@ sys.path.insert(0, "src")
 from polar.plotstyle import use_polar, CMAP, tnorm, add_cbar, style_geo, BAD, FROZEN, THAWED
 from polar.outputs import figpath, mappath
 plt = use_polar()
+plt.rcParams["pdf.fonttype"] = 42          # PDF 텍스트를 TrueType로 임베딩(검색·편집 가능)
 import matplotlib.ticker as mticker
 
 FIGDIR = "outputs/figures/08_field3d"
@@ -28,8 +29,8 @@ os.makedirs(FIGDIR, exist_ok=True)
 
 
 def savefig(fig, path_png):
-    fig.savefig(path_png, dpi=260, bbox_inches="tight")
-    fig.savefig(path_png.replace(".png", ".pdf"), bbox_inches="tight")
+    fig.savefig(path_png, dpi=300, bbox_inches="tight")          # 보고서용 고해상 PNG(260 → 300)
+    fig.savefig(path_png.replace(".png", ".pdf"), bbox_inches="tight")  # 벡터 PDF 동반
     plt.close(fig)
 
 
@@ -215,7 +216,8 @@ except Exception:
 
 fig, axes = plt.subplots(1, 2, figsize=(13, 5.2))
 for ax, arr, dz in zip(axes, [t2, t20], [2, 20]):
-    pm = ax.pcolormesh(LO, LA, arr, cmap=CMAP.temp, norm=norm, shading="auto")
+    pm = ax.pcolormesh(LO, LA, arr, cmap=CMAP.temp, norm=norm, shading="auto",
+                       rasterized=True)  # PDF에서 색면만 래스터, 축·텍스트는 벡터 유지
     cs = ax.contour(LO, LA, arr, levels=[0.0], colors=[FROZEN], linewidths=1.8)
     ax.clabel(cs, fmt="0°C", fontsize=8)
     # 심부 지도에 도메인 밖 외삽 경고 배지

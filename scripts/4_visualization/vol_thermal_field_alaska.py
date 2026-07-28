@@ -14,6 +14,7 @@ from polar.plotstyle import use_polar, CMAP, tnorm, FROZEN
 from polar.outputs import mappath, volpath, animpath
 plt = use_polar()
 plt.rcParams["image.cmap"] = "cmc.batlow"  # 이 matplotlib 버전은 'batlow' 미등록 → 정식명으로 보정
+plt.rcParams["pdf.fonttype"] = 42          # PDF 텍스트를 TrueType로 임베딩(검색·편집 가능)
 from matplotlib import cm, colors
 from matplotlib.animation import FuncAnimation, PillowWriter
 from sklearn.ensemble import HistGradientBoostingRegressor
@@ -132,7 +133,7 @@ for d in [0.5, 2, 5, 10, 15, 20]:
                     rstride=1, cstride=2, shade=False, linewidth=0)
     ax.text(E + 0.3, S, -d, f"{d:g} m", fontsize=9)
 m = cm.ScalarMappable(norm=norm, cmap=CMAP.temp); m.set_array([])
-cb = fig.colorbar(m, ax=ax, shrink=0.6, pad=0.06); cb.set_label("지중온도 (°C) — 파랑=동결")
+cb = fig.colorbar(m, ax=ax, shrink=0.6, pad=0.06); cb.set_label("지중온도 (°C, 파랑=동결)")
 ax.set_xlabel("경도"); ax.set_ylabel("위도"); ax.set_zlabel("깊이 (m)")
 ax.set_zlim(-21, 0); ax.view_init(elev=22, azim=-60)
 ax.set_title(f"알래스카 3D 지중 열구조 (엔진: {engine} 조건장, 깊이 0.5~20m 슬라이스)",
@@ -149,7 +150,8 @@ bh = g[(g.lat.between(S, N)) & (g.lon.between(Wl, E))]
 fig, axes = plt.subplots(2, 1, figsize=(13, 11), sharex=True)
 for ax_, d, dlo, dhi in [(axes[0], 2, 1.0, 3.5), (axes[1], 20, 12, 28)]:
     Z = slice_at(d)
-    mesh = ax_.pcolormesh(glon, glat, Z, cmap=CMAP.temp, norm=tnorm(-8, 4), shading="auto")
+    mesh = ax_.pcolormesh(glon, glat, Z, cmap=CMAP.temp, norm=tnorm(-8, 4), shading="auto",
+                          rasterized=True)  # PDF에서 색면만 래스터, 축·텍스트는 벡터 유지
     cs = ax_.contour(glon, glat, Z, levels=[0], colors=FROZEN, linewidths=1.6)
     ax_.clabel(cs, fmt="0°C", fontsize=9)
     ob = bh[bh.depth_m.between(dlo, dhi)].groupby("site").agg(
@@ -158,27 +160,30 @@ for ax_, d, dlo, dhi in [(axes[0], 2, 1.0, 3.5), (axes[1], 20, 12, 28)]:
                 edgecolors="k", linewidths=0.8, zorder=5)
     fig.colorbar(mesh, ax=ax_, shrink=0.9).set_label("연평균 지중온도 (°C)")
     ax_.set_ylabel("위도"); ax_.set_xlim(Wl, E); ax_.set_ylim(S, N)
-    ax_.set_title(f"깊이 {d}m — 파란 0°C 등고선=영구동토 경계, 테두리점=시추공 실측({len(ob)}곳)",
+    ax_.set_title(f"깊이 {d}m · 파란 0°C 등고선=영구동토 경계, 테두리점=시추공 실측({len(ob)}곳)",
                   fontsize=12, weight="bold")
 axes[1].set_xlabel("경도")
-fig.suptitle(f"알래스카 연평균 지중온도(MAGT) 지도 — 엔진 {engine} 조건장\n"
+fig.suptitle(f"알래스카 연평균 지중온도(MAGT) 지도 (엔진 {engine} 조건장)\n"
              "남부(온난·비동토) ↔ 북사면(한랭·연속 영구동토) 대비", fontsize=14, weight="bold")
 fig.tight_layout()
-fig.savefig(mappath("magt_alaska_2m_20m")); plt.close(fig)
+fig.savefig(mappath("magt_alaska_2m_20m"), dpi=300)          # 보고서용 고해상 PNG(260 → 300)
+fig.savefig(mappath("magt_alaska_2m_20m", ext="pdf"))       # 벡터 PDF 동반
+plt.close(fig)
 print("saved", mappath("magt_alaska_2m_20m"))
+print("saved", mappath("magt_alaska_2m_20m", ext="pdf"))
 
 # ---------------- (3) 깊이 내려가는 GIF ----------------
 fig, ax = plt.subplots(figsize=(11, 5.1))
 i0 = 0
 mesh = ax.pcolormesh(glon, glat, cube[i0], cmap=CMAP.temp, norm=tnorm(-8, 4), shading="auto")
-cb = fig.colorbar(mesh, ax=ax, shrink=0.9); cb.set_label("지중온도 (°C) — 파랑=동결")
-tt = ax.set_title("깊이 0.00 m — 지중온도 수평 슬라이스", fontsize=12, weight="bold")
+cb = fig.colorbar(mesh, ax=ax, shrink=0.9); cb.set_label("지중온도 (°C, 파랑=동결)")
+tt = ax.set_title("깊이 0.00 m · 지중온도 수평 슬라이스", fontsize=12, weight="bold")
 ax.set_xlabel("경도 (°E)"); ax.set_ylabel("위도 (°N)")
 fig.subplots_adjust(top=0.88, bottom=0.11, left=0.07, right=0.99)  # GIF는 tight bbox 미적용 → 제목 여백 확보
 frames = list(range(0, len(DEPTHS), 2))
 def update(fi):
     mesh.set_array(cube[fi].ravel())
-    tt.set_text(f"깊이 {DEPTHS[fi]:.2f} m — 지중온도 수평 슬라이스 (엔진 {engine})")
+    tt.set_text(f"깊이 {DEPTHS[fi]:.2f} m · 지중온도 수평 슬라이스 (엔진 {engine})")
     return mesh, tt
 ani = FuncAnimation(fig, update, frames=frames, interval=120)
 ani.save(animpath("thermal_depth_slices"), writer=PillowWriter(fps=8), dpi=100)

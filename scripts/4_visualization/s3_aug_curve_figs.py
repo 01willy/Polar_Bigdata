@@ -42,7 +42,11 @@ if len(div):
 targets = sorted(seed_rows.target.unique())
 models = sorted(seed_rows.model.unique())
 PHYS_LABEL = {"stefan": "Stefan pseudo", "kudryavtsev": "Kudryavtsev pseudo", "placebo": "placebo(상수)"}
-PHYS_COLOR = {"stefan": "#1f6f8b", "kudryavtsev": "#5a9e6f", "placebo": "#b0651a"}
+# 냉색 규약: 물리 두 선은 청·청록, placebo는 중립 회청(붉은/주황 계열 배제)
+PHYS_COLOR = {"stefan": "#1f6f8b", "kudryavtsev": "#4f9d8f", "placebo": "#8a8f99"}
+# 순가치 그림용: 모델=색(냉색), target=선/마커 스타일 (색만으로 정보 인코딩 금지 규약)
+MODEL_COLOR = {"catboost": "#27536b", "ftt": "#4f9d8f", "mlp": "#6b7a8f"}
+TARGET_STYLE = {"Canada": dict(ls="-", marker="o"), "Lena": dict(ls="--", marker="s")}
 
 # ---------------- 반응곡선: target×model 그리드, r vs ΔRMSE(개선) ----------------
 fig, axes = plt.subplots(len(models), len(targets), figsize=(5.2 * len(targets), 4.2 * len(models)),
@@ -64,12 +68,12 @@ for mi, model in enumerate(models):
         ax.set_xscale("symlog", linthresh=0.25)
         ax.set_xlim(-0.05, 12)
         ax.set_xticks([0, 0.25, 0.5, 1, 2, 5, 10])
-        ax.set_xticklabels(["0", "0.25", "0.5", "1", "2", "5", "10"], fontsize=7.5)
-        ax.set_xlabel("증강비율 r (pseudo/실측)", fontsize=9)
-        ax.set_ylabel("ΔRMSE 개선 (cm, 양수=개선)", fontsize=9)
-        ax.set_title(f"{model} → {target} 전이", fontsize=10)
+        ax.set_xticklabels(["0", "0.25", "0.5", "1", "2", "5", "10"], fontsize=9)
+        ax.set_xlabel("증강비율 r (pseudo/실측)", fontsize=9.5)
+        ax.set_ylabel("ΔRMSE 개선 (cm, 양수=개선)", fontsize=9.5)
+        ax.set_title(f"{model} → {target} 전이", fontsize=10.5)
         if mi == 0 and ti == 0:
-            ax.legend(fontsize=8, loc="best")
+            ax.legend(fontsize=9.5, loc="best")
 fig.suptitle("S3 물리 pseudo-label 증강 반응곡선: 물리(Stefan/Ku) vs placebo(상수)\n"
              "물리선이 placebo 위에 있어야 물리 정보의 순가치 존재. r=10까지 포화 없이 개선",
              fontsize=12, y=1.01)
@@ -84,7 +88,10 @@ for model in models:
         st = base - sub[sub.phys == "stefan"].groupby("r").rmse_cm.mean()
         pl = base - sub[sub.phys == "placebo"].groupby("r").rmse_cm.mean()
         net = (st - pl).reindex(sorted(sub.r.unique()))
-        ax.plot(net.index, net.values, "o-", lw=1.6, ms=5, label=f"{model}→{target}")
+        stl = TARGET_STYLE.get(target, dict(ls="-", marker="o"))
+        ax.plot(net.index, net.values, lw=1.6, ms=5,
+                color=MODEL_COLOR.get(model, "#27536b"), ls=stl["ls"],
+                marker=stl["marker"], label=f"{model} → {target}")
 ax.axhline(0, color="0.4", lw=0.8, ls="--")
 ax.set_xscale("symlog", linthresh=0.25)
 ax.set_xlim(-0.05, 12)
