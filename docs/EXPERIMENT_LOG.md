@@ -3,6 +3,37 @@
 > 세션별 작업 기록. 큐레이션된 마스터 인덱스는 [EXPERIMENTS.md](EXPERIMENTS.md),
 > GPT 공유 핸드오프는 [gpt/handoff/](../gpt/handoff/) 참조.
 
+## 2026-07-28 — 예선 제출물 조립 + 사용자 지적 9건 반영 보고서 전면 재작업
+
+실험 아님(문서·그림·제출물). 상세 스냅샷 `SESSION_HANDOFF.md` 최상단.
+- **발표덱 10장**: `deck/build_summary.py` 재구성(S6~S11·E1·E2 반영) → `deck/render/permafrost_summary.{pptx,pdf}`. 페이지버그·제목클리핑·블라인드 푸터 익명화·s7 dpi300 수정. visual QA 통과.
+- **분석보고서(md→검증)**: `docs/CONTEST_REPORT_2026.md`(10섹션). 핵심 수치 전 항목 CSV 대조 정합, 블라인드·em-dash 0. §2.1 관측분산 실측정정(sd 18.5→20, 범위 1~298). S2 physics-as-feature 로그 부호오류 CSV대조 정정.
+- **그림 전면 재작업(사용자 지적)**: (8) ALT 관측 밀도문제=데이터구조 규명(13,606셀이 83개 0.5°지역 초집중)+배로 250m 확대 inset(4,381셀), scatter 전환. (3·7) 고해상 자산 편입(local_demo PolSAR·northslope·magt·field3d·tournament, dpi300+PDF), deploy 2종 제외. (6) 얕은3D 논문형 재작성=`s10_depth_slices`(깊이슬라이스 4패널)·`s10_fence_sections`·`s10_profiles_trumpet`, 3D warp 강등. em-dash·주황색·저해상 다수 교정.
+- **LaTeX 논문(주 제출물)**: `docs/report/main.{tex,pdf}`(6쪽 2단, xelatex+xeCJK). 논문구조(초록·서론·데이터·방법·결과·논의·결론·참고문헌), 강점·차별성·의의·한계극복 중심 서술. **xeCJK CJKspace=false 한글공백 버그 수정**(CJKspace=true). Word 병행 `outputs/CONTEST_REPORT_2026.docx`(pandoc).
+- **다음 세션**: 결과·보고서·그림 수정 계속. 참고문헌 완전서지, 물리쪽수 조정(규정시), PDF 용량.
+
+## 2026-07-27 — E1 co-kriging baseline + E2 계절내 D(t) (사용자 피드백 반영) + 적대검증·정정
+
+GPU **7**(세션 중 3,4,5→6,9→7 재배정, E2는 6,9→7 이전 재실행). 사용자 피드백 2건 반영: 인터폴레이션(co-kriging) 비교, timelapse에 따른 ALT 계산(시계열). 누설 pytest 16개 통과, git 미커밋.
+
+- **E1 co-kriging/RK vs GBM·Stefan (채택)**: 정통 공간보간을 정식 baseline으로 편입. in-domain 알래스카 공간블록 OK 15.77·IDW 15.80이 공변량 GBM 17.73과 경쟁(사실상 동률~소폭 우세), RK 17.23(seed평균; 앙상블 15.25는 seed간 bias 상쇄 아티팩트라 헤드라인 제외). **물리 Stefan 앵커만 양축 최선(in-domain 14.46·LORO 21.26)**. LORO 전이서 보간 붕괴: OK 29.40·IDW 50.92(레나 84.8 폭주)·RK 36.30·GBM 41.37. **진단**: kriging 전이 붕괴 원인=variogram(range≈899km·sill 442cm²)이 지역마다 다름=covariate shift의 공간통계판. OK 레나 22.3은 실력 아닌 mean 회귀 아티팩트(range 밖→train 전역평균 수렴). 정정: STEF in-domain √TDD 셀 오정렬 버그(bias −2.5 아티팩트→−0.99·RMSE 14.39→14.46), RK 앙상블 아티팩트 서술. 스크립트 `e1_kriging_baseline.py`, 그림 `outputs/figures/e1_kriging/`.
+- **E2 계절내 융해진행 D(t) (partial, KPDC 심화)**: "timelapse에 따라 ALT 계산"을 연도간 최대ALT 외삽(S9 corr0.06 예측불가)이 아니라 **계절내 D(t) 예측으로 재정의**. KPDC 콘슬 일별 8-16층 온도(19프로파일·2년·2023-2025)에서 표층연결 0°C 등온선 계절곡선 유도. 물리(Stefan √cumTDD)·시계열 GRU·persistence·static 비교, profile(물리위치) leave-out + 계절 전반→후반 시간분할. **계절내 D(t)는 예측 가능한 계절 구조 보유**(Stefan deepening 구간 R² 0.31~0.57, 연도간과 대조). 단 common-support·물리위치 fold·calib 제외 통제 후 7일 persistence(17.5cm)가 강baseline이라 Stefan(40.8)·GRU(46.6) 미달(2년 소표본·지온유래 forcing 한계). EOS(최대깊이 도달일)는 단조 물리식 원리적 불가(argmax=창끝 고정), **GRU만 내부 peak 예측 가능**(정확도 우위 아님, 예측가능성 자체가 차별점). **결론: 시간 성능은 방법 아닌 문제정의·데이터밀도 의존**. 문헌 정합(알래스카 Nature2025 랜덤분할서도 RF R²0.84→0.24 붕괴·Stefan 유지, 순수 시계열DL 성공사례는 forcing 주어짐/조밀지온/물리 사전학습 세팅). 스크립트 `e2_seasonal_dt.py`, 그림 `outputs/figures/e2_seasonal_dt/`.
+- **시계열 게이트 미통과 규명**: 기존 T-lite(GRU/TCN) temporal holdout 미통과는 방법 실패 아니라 "정적 공변량+연1회 CALM으로 미래연도 외삽"이 예측신호 없는 문제(within-site corr 0.06)임을 문헌 대조로 확정. 우리도 가능한 경로=forcing 명시입력·물리 사전학습·조밀 지중온도(E2가 계절내로 재정의한 시도).
+- **다음**: 시각화 통일(8서사축 대표그림)·예선 보고서 조립(데이터출처·기법 명시, 블라인드, PPT 10장 내외).
+
+## 2026-07-27 — S6~S11 완주(잔여 6단계) + 적대검증 3렌즈 + 표적 수정
+
+GPU **3,4,5**(사용자 2026-07-27 지시). 잔여 단계 S6·S7·S8·S9·S10·S11을 병렬 구현·실행(S6=GPU3·S8/S10=GPU4/5·S7/S9/S11=CPU), 이어 누설·수치정합·시각화 QA 3렌즈 적대검증, 지적사항 표적 수정·재렌더. 누설 pytest 16개 통과 유지. git 미커밋(cleanup 세션 담당).
+
+- **S7 KPDC 콘슬 검증 (채택, 대회 KPDC 주활용 충족)**: Council(수어드반도) 일별 지중온도 프로파일 19종(배치 A 8·B 11, 깊이 역순 QC교정·재설치 불연속 site 분리)에서 0°C 등온선 ALT 유도. 2025 비검열 부분집합 조건부 중앙값 136.4cm(n=5, CI 75.6-153.1), 38시즌 중 23건 우측검열(구간검열 정량표 확보). Stefan 59.6·S1모델 53-55cm는 사이트 관측 스펙트럼(ABoVE 35↔코어 81↔유도 121-153cm) 내부이나 16층 유도 대비 과소 → **점검증 대표성 잡음 지배 재확인**(알래스카 in-domain, 전이 근거 아님). `s7_kpdc_{results,meta}.csv/json`, `s7_council_{daily_temp,alt_derived}.csv`, 그림 `outputs/figures/s7_kpdc/`.
+- **S9 timelapse 마감 (채택)**: 재학습 없이 2010-2024 연별 ALT 프레임 15장을 mask_ocean·고정색축(40-75cm)·oslo_r로 재렌더 + adaptive palette GIF(`timelapse_alt_alaska_v2.gif`). 연 anomaly broc 프레임·GIF 추가(`timelapse_alt_anomaly_v1.gif`, 절대변화 0.7%로 비가시→편차 가시화). 홀드아웃 RMSE 14.97cm[14.72,15.22]·R²0.338, 연 anomaly corr +0.059(예측불가, 각주 명시). 시간정합=연도별 ERA5×연도별 ALT(정적 다년평균과 구분). `s9_timelapse_meta.json`, `outputs/figures/s9_timelapse/`.
+- **S10 얕은 3D 재현 (채택)**: `shallow3d_alaska.py` 재실행이 기존 산출과 바이트단위 동일(RMSE 2.66°C·R²0.4688·0°C→ALT r0.282, 문서치 일치). 깊이별 지도·남북 단면(0°C masked contour, 갭 진회색)·0°C 등온면 3D(PyVista) 재렌더. 온도장만 검증 성립, 0°C 유도 ALT는 r0.28이나 R²<0(절대정합 미성립). `s10_shallow3d_meta.json`, `outputs/figures/s10_shallow3d/`, `outputs/volumes_3d/s10_*`.
+- **S6 source-aware multi-fidelity A5 (negative)**: 공유 인코더+소스별(b_s,logσ_s)+Gaussian NLL 구조가 LORO 게이트 sa_fusion 21.53·sa_z 21.84cm로 baseline 최고(naive pooling 21.11·Stefan앵커 21.26·고정증강 21.28)를 못 넘음. σ헤드 cov90 0.996은 폭발산(473cm) 무정보 커버리지 → 정확도·UQ 게이트 모두 미달 **negative 확정**. 부산물: in-domain서 sa_z 14.35로 pooling의 in-domain 파괴 회복(Δ+1.80 유의), b_stefan≈0은 실제 bias 정합·b_cci는 과소추정(식별성 한계). **보고서엔 비교표 1행+소스신뢰도 진단으로만 편입**(헤드라인 금지, 계획 문서 권고). `s6_source_aware_{results,meta}`, `outputs/figures/s6_source_aware/`.
+- **S8 mixture-of-physics (negative, 진단가치)**: 물리5종+공변량 게이트 mixture가 단일 Stefan 못 이김(LORO 29.22 vs 22.24, in-domain 동률). S2 예측대로. 진단: 게이트 선택은 환경의존적 해석 가능(한랭·저SOC=Stefan, 온난=λ변형)이나 정확한 전문가가 Stefan뿐이라 전환이 오히려 편향전문가로 이동. Alaska LORO fold 파탄(비-Alaska 학습 게이트가 Alaska 61%를 상방편향 p5_λ 배정→36.48cm)=**전이서 전문가 선택 불가능성 정량 증거**. oracle 하한 15.48cm(모델 아님). `s8_mixture_{results,meta}`, `outputs/figures/s8_mixture/`.
+- **S11 종합 비교표 + conformal UQ (채택, 헤드라인)**: quantile CatBoost raw cov90 44.6%(과신)→train 블록내부 CQR 93.4%[88.9,96.6] 보정(폭 14.7→53.6cm). 16행 증강방식 비교표(전 수치 CSV 재계산): LORO 게이트서 어떤 증강·구조도 Stefan 앵커(최소제곱 E 21.26) 유의 초과 못함, in-domain 최저는 S4 앵커+잔차 13.33cm. 다축 검증표(공간블록·LORO·temporal·소스leave-out·누설pytest16통과). **transductive 라벨링**: pool_mlp·고정증강·S5 pretrain 3행에 'target 셀 보조관측 사용' regime 열 부여(S5 아티팩트 기각과 기준 일치, 검증 지적 반영). `s11_comparison_table.csv`·`s11_multiaxis_validation.csv`·`s11_conformal_{results,meta}`, `outputs/figures/s11_uq/`.
+- **적대검증 결과**: 직접 라벨 누설 0, 핵심 수치 전수 재현. 지적 반영 수정 완료 — 그림 제목 em-dash 제거(문체규칙), S8 환경구간 라벨 겹침(범위구분자 '~'·자릿수통일), S8 지도 overplotting(마커 투명·순서), S6 막대 y축 0시작, S7 지도 컬러바 분위조정·contour 클러터 축소, S10 갭색·masked contour, S9 경도라벨(160/150/140°W)·GIF duration 표기. 수치 표기정정: S7 프로파일 19개·CI[31.0,39.0], S6 b_cci −0.2~−0.9, S8 mix_mlp seed평균 라벨. **S2 physics-as-feature 로그 부호오류 정정**(위 2026-07-23 항목, CSV 대조로 무익→소폭개선이나 앵커 대체 불가).
+- **다음**: 대회 예선 보고서 조립(§8 산출물 7종). 대표 시각화 셀렉션·통일 재렌더. S6 inductive 변형 이중보고는 여유 시.
+
 ## 2026-07-24 — S5: dense Stefan pseudo 사전학습→실측 finetune → 이득은 transductive 아티팩트
 
 `RESEARCH_PLAN_multifidelity` S5. 물리(Stefan) 유도장을 dense 격자(pretrain_weaklabels 500k, 알래스카·서부캐나다)에서 사전학습한 신경망이 실측 finetune 후 from-scratch 대비 전이를 개선하는지 게이트식 검증. pseudo y=E_train·√TDD(fold-safe E), 격자 test-블록 버퍼 제거, 입력 14(지형+기후) 고정 공정비교, mlp·ftt 3seed. 스크립트 `s5_pretrain_finetune.py`.
@@ -56,7 +87,7 @@ S3 재검토 중 **증강비율 반응곡선을 무력화하던 버그 발견·�
 
 `RESEARCH_PLAN_multifidelity` S2. 워크플로 정밀조사(수식·계수·단위 실측검증)로 `src/polar/physics.py` 구현(Stefan 기본·edaphic·TTOP·Kudryavtsev·λ보정). SoilGrids 이미 물리단위 확인(이중변환 금지), bdod×1000·soc/1000·TDD×86400 가드.
 - **Part A 물리 baseline**: in-domain **p1 Stefan 14.56cm**(bias -0.99, 정확도 담당) ≪ p4 Ku 25.29 < p3 TTOP 31.10 < p2 edaphic 40.95 < p5 λ 46.30(정교화 물리는 상방편향 +32~38cm). **LORO 게이트(비가중평균 AK·Lena·CA 고정) p1 Stefan 21.86cm 최선**(AK17.5·Lena21.7·CA26.4), p4 Ku 39.66(2위), 나머지 59-69. → **물리 정교화가 전이 개선 안 함**(기본 Stefan이 전 지역 최선), Gautam2025·W3 정합. 게이트 프로토콜 고정(기존 18.24는 다른 지역집합/집계, 비판 지적 반영).
-- **Part B physics-as-feature(A2)**: in-domain 무익(catboost 15.55→15.59 Δ+0.04·mlp 14.66→14.56 Δ-0.10·lightgbm Δ-0.17), LORO 악화(catboost +0.95·lightgbm +1.82·mlp +0.51). → **A2 미채택**. 물리 예측=기후공변량(TDD)의 결정론적 변환이라 새 정보 없음(**GPT 로드맵 위험2 실증**). 물리는 전이 앵커(p1 직접예측)로만 유효.
+- **Part B physics-as-feature(A2)**: CSV 재계산 기준 in-domain 소폭 개선(catboost 15.55→15.29 Δ−0.26·mlp 14.66→14.58 Δ−0.08·lightgbm 16.78→16.45 Δ−0.33), LORO catboost 지역평균 39.37→37.28(Δ−2.09)도 소폭 개선. **그러나 base·+physics 모두 순수 ML 전이 파탄대(catboost 37~50cm)**로 Stefan 앵커(LORO 21~22cm)를 전혀 대체 못 함 → **A2 미채택**(물리 feature는 파탄한 ML을 미미하게 완화할 뿐, 전이는 앵커=p1 직접예측으로만 유효). *최초 로그의 'Δ+0.04 무익·LORO 악화'는 표기 오류로 정정(2026-07-27 S11 검증서 `s2_physics_results.csv` 대조 확인).*
 - **멤버 다양성 한계(적대검증)**: 5종 상관 0.93~1.00(전부 Stefan축). 실질 다양성=수준 오프셋·TTOP 동토마스크(81.5%)·Ku 눈 성분(p1과 비상관 최대). phys_std는 상대 불확실성 지표.
 - **산출**: `s2_physics_results.csv`·`s2_physics_oof.csv`·`s2_physics_meta.json`. 시각화 5종 `outputs/figures/s2_physics/`(물리5종 지도·앙상블스프레드·동토마스크·물리별LORO·feature효과, 실제 지도배경).
 - 다음: S3(증강비율 반응곡선, 엄격통제) 또는 S6(source-aware). 전체 리뷰 후 결정.

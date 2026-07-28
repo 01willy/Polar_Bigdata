@@ -7,7 +7,10 @@
       "layout": {
         "panels": 2,
         "arrangement": "상단 세계지도(25-84N, ERA5 육지 마스크 배경) + 하단 지역x데이터 가용성 매트릭스(7x7), 패널 라벨 (a)/(b)",
-        "figsize_in": [16.5, 13.5]
+        "figsize_in": [
+          16.5,
+          13.5
+        ]
       },
       "assets": [
         "data/raw/era5land/nh_monthly_2015-2020.nc (t2m 첫 timestep 육지 마스크)",
@@ -17,7 +20,10 @@
         "QTEC 2 사이트 좌표(WMO 지점: Wudaoliang 35.22N 93.08E, Golmud 36.42N 94.90E)"
       ],
       "style": "polar.plotstyle.use_polar, ALT 점=CMAP.alt 냉색, 지온=^, 신규 ALLena='x' 마커+강조색(색 단독 부호화 금지), 커버리지 박스=점선, 해양/결측=BAD(#e9ecef)·육지=백색, 붉은 계열·rainbow 금지, pdf.fonttype=42",
-      "exports": ["outputs/maps/data_inventory_world.png", "outputs/maps/data_inventory_world.pdf"]
+      "exports": [
+        "outputs/maps/data_inventory_world.png",
+        "outputs/maps/data_inventory_world.pdf"
+      ]
     },
     {
       "id": "tournament_pred_maps",
@@ -26,11 +32,19 @@
       "layout": {
         "panels": 8,
         "arrangement": "2x4 = 관측 ALT + 7모델 예측, 공통 컬러바 1개(CMAP.alt, vmin=20, vmax=90 cm, extend=both 삼각형), 패널 라벨 (a)-(h), 하단 캡션에 색 범위 근거(관측 p1-p97)와 절단 비율",
-        "figsize_in": [18, 8.6]
+        "figsize_in": [
+          18,
+          8.6
+        ]
       },
-      "assets": ["data/processed/model_tournament_predictions.csv (위치 동등가중: lat/lon 0.0001도 반올림 groupby mean, N=14,348 위치)"],
+      "assets": [
+        "data/processed/model_tournament_predictions.csv (위치 동등가중: lat/lon 0.0001도 반올림 groupby mean, N=14,348 위치)"
+      ],
       "style": "패널 제목=모델명+위치가중 RMSE(cm), 산점도 s=9(발표 판독성), 배경=ERA5 육지 마스크(크롭, 해양/결측=BAD·육지=백색), pdf.fonttype=42",
-      "exports": ["outputs/maps/tournament_pred_maps.png", "outputs/maps/tournament_pred_maps.pdf"]
+      "exports": [
+        "outputs/maps/tournament_pred_maps.png",
+        "outputs/maps/tournament_pred_maps.pdf"
+      ]
     },
     {
       "id": "tournament_error_maps",
@@ -39,11 +53,386 @@
       "layout": {
         "panels": 8,
         "arrangement": "2x4 = 7모델 오차 지도(CMAP.diff, tnorm(-40,40) 0중심, 컬러바 extend=both 삼각형) + RMSE·skill 가로 막대 1패널, 패널 라벨 (a)-(h), 하단 캡션에 ±40 cm 절단 비율",
-        "figsize_in": [18, 8.6]
+        "figsize_in": [
+          18,
+          8.6
+        ]
       },
-      "assets": ["data/processed/model_tournament_predictions.csv"],
+      "assets": [
+        "data/processed/model_tournament_predictions.csv"
+      ],
       "style": "오차=0중심 발산맵(broc), skill = 1 - RMSE/std(관측, xlabel에 정의 표기), 막대=냉색, 산점도 s=9, 배경=ERA5 육지 마스크(해양/결측=BAD·육지=백색), pdf.fonttype=42",
-      "exports": ["outputs/maps/tournament_error_maps.png", "outputs/maps/tournament_error_maps.pdf"]
+      "exports": [
+        "outputs/maps/tournament_error_maps.png",
+        "outputs/maps/tournament_error_maps.pdf"
+      ]
+    },
+    {
+      "id": "s9_timelapse",
+      "script": "scripts/4_visualization/s9_timelapse_figs.py",
+      "intent": "연도별 ERA5-Land forcing x fold-safe Stefan(E,a)로 2010-2024 연별 ALT 지도를 전 위치(197,648) dense로 재렌더하고, 고정 색축 GIF로 시간 변동을 제시한다. 연 anomaly 예측불가(corr 0.06)는 각 프레임 각주로 명시한다.",
+      "layout": {
+        "panels": "프레임 1장/연도(15장) + 대표 4연도 패널(2x2, 공통 컬러바)",
+        "arrangement": "cartopy AlbersEqualArea, ABoVE 영역(알래스카+서부 캐나다), hexbin 셀통계(median), mask_ocean, 연도 스탬프+실측 n 주석, 하단 정직 각주",
+        "figsize_in": [
+          7.6,
+          5.2
+        ]
+      },
+      "assets": [
+        "data/processed/alt_era5_temporal.csv (연도별 ERA5-Land forcing, 197,648 위치 x 2010-2024)",
+        "data/processed/timelapse_alaska_meta.json (연도별 fold-safe Stefan E,a + 평가 수치)",
+        "data/processed/timelapse_alaska_oof.csv (temporal holdout OOF, 부트스트랩 CI 산출)"
+      ],
+      "style": "CMAP.alt(oslo_r 절단) 고정 vmin/vmax(전 연도 공통), 붉은 계열·rainbow 금지, 컬러바 단위 cm, 프레임 픽셀 크기 고정(bbox tight 미사용)",
+      "exports": [
+        "outputs/figures/s9_timelapse/frames/frame_YYYY.png (15장)",
+        "outputs/figures/s9_timelapse/alt_year_panels_v2.png/pdf",
+        "outputs/animations/timelapse_alt_alaska_v2.gif (PIL 공통 adaptive palette + FS dither)",
+        "data/processed/s9_timelapse_meta.json"
+      ]
+    },
+    {
+      "id": "s8_dominant_expert_map",
+      "script": "scripts/4_visualization/s8_mixture_figs.py",
+      "intent": "LORO 전이·알래스카 in-domain에서 게이트가 선택한 지배 물리 전문가의 공간 분포를 범주형으로 보인다(진단).",
+      "layout": {
+        "panels": 2,
+        "arrangement": "(a) 범북극 LORO 지배 전문가(NorthPolarStereo 원형) + (b) 알래스카 in-domain(Albers, inset locator·scalebar)",
+        "figsize_in": [
+          13.5,
+          6.2
+        ]
+      },
+      "assets": [
+        "data/processed/s8_mixture_oof.csv"
+      ],
+      "style": "범주형 5색(냉색·붉은계열 금지)+마커 5종(o s ^ D v) 병기(색 단독 부호화 금지), mask_ocean 적용, 범례에 전문가명+셀 수, use_polar",
+      "exports": [
+        "outputs/figures/s8_mixture/s8_dominant_expert_map.png",
+        "outputs/figures/s8_mixture/s8_dominant_expert_map.pdf"
+      ]
+    },
+    {
+      "id": "s8_weight_error",
+      "script": "scripts/4_visualization/s8_mixture_figs.py",
+      "intent": "게이트 확신(w_max)·엔트로피와 |오차|의 관계, 전문가별 가중치-|해당 전문가 오차| 스피어만 상관을 정량화한다.",
+      "layout": {
+        "panels": 2,
+        "arrangement": "(a) w_max 십분위별 평균 |오차|(지역별 선) + (b) 전문가별 corr(w_k,|err_k|) 막대(해치 병기)",
+        "figsize_in": [
+          11.5,
+          4.4
+        ]
+      },
+      "assets": [
+        "data/processed/s8_mixture_results.csv",
+        "data/processed/s8_mixture_oof.csv"
+      ],
+      "style": "냉색, 축에 단위(cm·무차원), use_polar",
+      "exports": [
+        "outputs/figures/s8_mixture/s8_weight_error.png",
+        "outputs/figures/s8_mixture/s8_weight_error.pdf"
+      ]
+    },
+    {
+      "id": "s8_env_selection",
+      "script": "scripts/4_visualization/s8_mixture_figs.py",
+      "intent": "환경변수(MAAT·TDD·SWE·고도·경사·SOC) 구간별 전문가 선택(평균 게이트 가중) 분포를 보인다.",
+      "layout": {
+        "panels": 6,
+        "arrangement": "2x3 스택 막대(오분위 구간 x 평균 가중), 공통 범례 1개",
+        "figsize_in": [
+          14.5,
+          7.6
+        ]
+      },
+      "assets": [
+        "data/processed/s8_mixture_results.csv"
+      ],
+      "style": "전문가 5색+해치 병기, x축 구간 경계에 단위 표기(°C, °C·day, m, °, g/kg), use_polar",
+      "exports": [
+        "outputs/figures/s8_mixture/s8_env_selection.png",
+        "outputs/figures/s8_mixture/s8_env_selection.pdf"
+      ]
+    },
+    {
+      "id": "s8_gate_compare",
+      "script": "scripts/4_visualization/s8_mixture_figs.py",
+      "intent": "mixture vs 단일 Stefan vs 균등평균 vs oracle(진단 하한)의 LORO 게이트·지역별 RMSE와 블록부트스트랩 ΔRMSE CI를 비교한다.",
+      "layout": {
+        "panels": 3,
+        "arrangement": "(a) LORO 게이트(비가중평균) 막대+S2 참조선 + (b) 지역별 RMSE 그룹막대 + (c) 지역별 ΔRMSE(Stefan−mixture) 95% CI",
+        "figsize_in": [
+          15.5,
+          4.6
+        ]
+      },
+      "assets": [
+        "data/processed/s8_mixture_results.csv"
+      ],
+      "style": "냉색 막대, oracle은 회색 해치(모델 아님·진단 하한 명시), 축 단위 cm, use_polar",
+      "exports": [
+        "outputs/figures/s8_mixture/s8_gate_compare.png",
+        "outputs/figures/s8_mixture/s8_gate_compare.pdf"
+      ]
+    },
+    {
+      "id": "s10_tmax_depth_maps",
+      "script": "scripts/4_visualization/s10_shallow3d_figs.py",
+      "intent": "얕은 3D 재현 산출(t_max GBM 조건장, site-block R2 0.47)의 깊이별(0.5/1/2/3 m) 공간 패턴을 0°C 중심 발산맵으로 제시한다.",
+      "layout": {
+        "panels": 4,
+        "arrangement": "2x2 cartopy Albers(ALASKA), 공통 컬러바 1개(vik, tnorm 0중심), 패널 라벨 (a)-(d)=깊이, (a)에 범북극 inset locator+스케일바",
+        "figsize_in": [
+          11.6,
+          9.2
+        ]
+      },
+      "assets": [
+        "data/processed/shallow3d_alaska_grid.csv (13,606셀 x 4깊이, 재현 확인분)"
+      ],
+      "style": "CMAP.temp(vik)+tnorm(0°C 중심), hexbin_map(median, 보간 없음), mask_ocean, 컬러바 단위 °C, 붉은 계열 단독·rainbow 금지",
+      "exports": [
+        "outputs/figures/s10_shallow3d/s10_tmax_depth_maps.png",
+        "outputs/figures/s10_shallow3d/s10_tmax_depth_maps.pdf"
+      ]
+    },
+    {
+      "id": "s10_tmax_section_thaw",
+      "script": "scripts/4_visualization/s10_shallow3d_figs.py",
+      "intent": "남북 단면(Dalton 회랑)의 0-3 m 온도 구조와 0°C 등온선, 그리고 0°C 교차 깊이 지도를 제시한다(관측 ALT와 r=0.28, 절대 정합 미성립 주석).",
+      "layout": {
+        "panels": 2,
+        "arrangement": "(a) 위도x깊이 단면(vik+0°C 등온선, 깊이 아래방향) + (b) 0°C 교차 깊이 지도(CMAP.alt)+시추공 관측 ALT 오버레이+단면 회랑 표시",
+        "figsize_in": [
+          13.2,
+          5.4
+        ]
+      },
+      "assets": [
+        "data/processed/s10_shallow3d_volume.npz (지원반경 15 km 격자 볼륨, 재생성 가능)",
+        "data/processed/shallow3d_alaska_altmatch.csv"
+      ],
+      "style": "단면=vik tnorm 0중심+검정 0°C 등온선, 깊이맵=CMAP.alt(oslo_r), mask_ocean, 축·컬러바 단위(m, cm, °N) 필수",
+      "exports": [
+        "outputs/figures/s10_shallow3d/s10_tmax_section_thaw.png",
+        "outputs/figures/s10_shallow3d/s10_tmax_section_thaw.pdf"
+      ]
+    },
+    {
+      "id": "s10_validation",
+      "script": "scripts/4_visualization/s10_shallow3d_figs.py",
+      "intent": "재현 검증 수치를 그림으로 고정한다: 깊이밴드별 RMSE(단조 vs 무제약)와 0°C 교차 유도 ALT vs 실측 산점(r=0.28, R2<0 정직 표기).",
+      "layout": {
+        "panels": 2,
+        "arrangement": "(a) 밴드별 RMSE 막대(°C) + (b) 유도 ALT 산점(1:1, 절단 플래그 open marker)",
+        "figsize_in": [
+          12.4,
+          5.0
+        ]
+      },
+      "assets": [
+        "data/processed/shallow3d_alaska_results.csv",
+        "data/processed/shallow3d_alaska_altmatch.csv"
+      ],
+      "style": "막대=냉색 2색, 산점=냉색+절단 플래그는 open marker(색 단독 부호화 금지), 단위 병기",
+      "exports": [
+        "outputs/figures/s10_shallow3d/s10_validation.png",
+        "outputs/figures/s10_shallow3d/s10_validation.pdf"
+      ]
+    },
+    {
+      "id": "s10_depth_slices",
+      "script": "scripts/4_visualization/s10_shallow3d_figs.py",
+      "intent": "지적6 대응 주력 그림: 얕은 0-3 m 온도장을 3D warp 대신 논문형 깊이-슬라이스 평면지도(0.5/1/1.5/2 m)로 제시한다. 3D 대표 그림을 대체한다.",
+      "layout": {
+        "panels": 4,
+        "arrangement": "2x2 cartopy Albers(ALASKA), 공통 컬러바 1개(vik, tnorm 0중심 ±4°C), 각 패널 0°C 등온선 검은 윤곽, (a) inset locator+스케일바",
+        "figsize_in": [
+          11.6,
+          9.4
+        ]
+      },
+      "assets": [
+        "data/processed/s10_shallow3d_volume.npz (지원반경 15 km 격자 볼륨)"
+      ],
+      "style": "CMAP.temp(vik)+tnorm(0°C 중심, clim ±4°C), field_map(격자, 보간 없음), 0°C 등온선 검은선, mask_ocean, 회색=지원반경 밖, 컬러바 단위 °C, dpi 300",
+      "exports": [
+        "outputs/figures/s10_shallow3d/s10_depth_slices.png",
+        "outputs/figures/s10_shallow3d/s10_depth_slices.pdf"
+      ]
+    },
+    {
+      "id": "s10_thaw_depth_map",
+      "script": "scripts/4_visualization/s10_shallow3d_figs.py",
+      "intent": "지적6 보조A: 0°C 등온면 깊이(융해깊이 대리)를 2D 색면으로 제시하고 실측 ALT 시추공을 동일 색척도로 오버레이한다(실측 ALT와 r=0.28, 정성 보조).",
+      "layout": {
+        "panels": 1,
+        "arrangement": "cartopy Albers(ALASKA), oslo_r 이산 단계 BoundaryNorm, 실측 ALT 테두리 점, inset locator+스케일바",
+        "figsize_in": [
+          8.2,
+          7.4
+        ]
+      },
+      "assets": [
+        "data/processed/s10_shallow3d_volume.npz",
+        "data/processed/shallow3d_alaska_altmatch.csv"
+      ],
+      "style": "CMAP.alt(oslo_r) 순차형, clim 데이터 분위(약 45-140 cm), mask_ocean, 컬러바 단위 cm, r=0.28 정성 주석·절대 정합 미성립(R2<0) 명기, dpi 300",
+      "exports": [
+        "outputs/figures/s10_shallow3d/s10_thaw_depth_map.png",
+        "outputs/figures/s10_shallow3d/s10_thaw_depth_map.pdf"
+      ]
+    },
+    {
+      "id": "s10_fence_sections",
+      "script": "scripts/4_visualization/s10_shallow3d_figs.py",
+      "intent": "지적6 보조B: 3D warp 대신 matplotlib 2D fence 단면 2매(경도-깊이·위도-깊이)로 얕은 온도 구조와 0°C 등온선을 제시한다. 세로축=실제 깊이(m, 과장 없음).",
+      "layout": {
+        "panels": 2,
+        "arrangement": "(a) 경도-깊이(위도 68.5°N) + (b) 위도-깊이(경도 -148.7°E), 각각 vik+0°C 등온선",
+        "figsize_in": [
+          13.4,
+          5.2
+        ]
+      },
+      "assets": [
+        "data/processed/s10_shallow3d_volume.npz"
+      ],
+      "style": "vik tnorm 0중심 + 검은 0°C 등온선(부호변화 있는 열만), 진회색=지원반경 밖, 축 단위(m·°E·°N), 컬러바 °C, dpi 300",
+      "exports": [
+        "outputs/figures/s10_shallow3d/s10_fence_sections.png",
+        "outputs/figures/s10_shallow3d/s10_fence_sections.pdf"
+      ]
+    },
+    {
+      "id": "s10_profiles_trumpet",
+      "script": "scripts/4_visualization/s10_shallow3d_figs.py",
+      "intent": "지적6 보조C: 대표 4지점(내륙 온난 → 최북 한랭) 깊이별 T(z) 프로파일로 예측(전량학습) vs 실측 t_max를 비교한다. 트럼펫형 프로파일.",
+      "layout": {
+        "panels": 4,
+        "arrangement": "1x4 공유 y축(깊이 0-3 m 아래방향), 예측 곡선(적)·실측 산점(청)·0°C 기준선",
+        "figsize_in": [
+          13.6,
+          4.8
+        ]
+      },
+      "assets": [
+        "data/processed/s10_shallow3d_volume.npz",
+        "data/processed/ground_temp_gtnp_global.csv (라벨 t_max)"
+      ],
+      "style": "예측=적 실선·실측=청 산점(색 단독 부호화 아님, 형태 구분), 0°C 점선 기준, 축 단위(°C·m), 시각화용 산출(검증 지표는 site-block R2 0.47) 명기, dpi 300",
+      "exports": [
+        "outputs/figures/s10_shallow3d/s10_profiles_trumpet.png",
+        "outputs/figures/s10_shallow3d/s10_profiles_trumpet.pdf"
+      ]
+    },
+    {
+      "id": "s10_shallow3d_hero_3d",
+      "script": "scripts/4_visualization/s10_render_shallow3d_pyvista.py",
+      "intent": "발표 보조(3D warp)만 사용. 0-3 m t_max 볼륨과 0°C 등온면을 3D로 보이나, 지원반경 15 km 회랑(격자 4.7%)이라 판독성이 낮다. 보고서 주력 3D 대체는 s10_depth_slices(깊이-슬라이스 평면)이며 3D는 발표 보조로만 남긴다(지적6).",
+      "layout": {
+        "panels": 1,
+        "arrangement": "PyVista off-screen 3000x2200 SSAA, 수평 km 물리 종횡비 + 깊이축 과장(주석 명기), matplotlib 합성 제목·캡션",
+        "figsize_in": [
+          10,
+          8
+        ]
+      },
+      "assets": [
+        "data/processed/s10_shallow3d_volume.npz"
+      ],
+      "style": "vik clim 0중심 대칭, 0°C 등온면=청록 반투명, 컬러바 단위 °C, 회색 outline",
+      "exports": [
+        "outputs/volumes_3d/s10_shallow3d_hero.png",
+        "outputs/volumes_3d/s10_shallow3d_isotherm.png"
+      ],
+      "role": "presentation_aid_only"
+    },
+    {
+      "id": "s11_calibration_curve",
+      "script": "scripts/4_visualization/s11_uq_figs.py",
+      "intent": "quantile CatBoost 90% 구간의 과신을 CQR conformal이 명목 커버리지로 보정함을 calibration 곡선과 cov90 전후 막대로 제시한다.",
+      "layout": {
+        "panels": 2,
+        "arrangement": "좌: 명목 vs 실제 커버리지 곡선(raw·CQR, 블록 부트스트랩 CI 음영, seed 산점) + 대각선 / 우: cov90 전후 막대(CI·목표 90% 점선·폭 주석)",
+        "figsize_in": [
+          10.6,
+          4.6
+        ]
+      },
+      "assets": [
+        "data/processed/s11_conformal_results.csv"
+      ],
+      "style": "raw=회청·CQR=진청, 축 라벨 %, 폭 주석 cm",
+      "exports": [
+        "outputs/figures/s11_uq/s11_calibration_curve.png",
+        "outputs/figures/s11_uq/s11_calibration_curve.pdf"
+      ]
+    },
+    {
+      "id": "s11_uq_maps",
+      "script": "scripts/4_visualization/s11_uq_figs.py",
+      "intent": "알래스카 셀별 OOF 중앙값 예측과 CQR 보정 90% 구간폭 공간 분포를 나란히 제시한다(불확실성 지도 헤드라인).",
+      "layout": {
+        "panels": 2,
+        "arrangement": "(a) 중앙값 예측 hexbin(oslo_r) + inset locator + scalebar / (b) CQR 90% 구간폭 hexbin(acton), 둘 다 AlbersEqualArea·mask_ocean",
+        "figsize_in": [
+          13.2,
+          5.6
+        ]
+      },
+      "assets": [
+        "data/processed/s11_conformal_oof.csv"
+      ],
+      "style": "ALT=CMAP.alt(oslo_r 절단)·불확실성=CMAP.err(acton 절단), 컬러바 단위 cm, p2-p98 색축",
+      "exports": [
+        "outputs/figures/s11_uq/s11_uq_maps.png",
+        "outputs/figures/s11_uq/s11_uq_maps.pdf"
+      ]
+    },
+    {
+      "id": "s11_comparison_table",
+      "script": "scripts/4_visualization/s11_uq_figs.py",
+      "intent": "증강방식 8계열(실측-only·앵커·physfeat·pooling·고정가중·잔차·pretrain·source-aware·mixture)의 in-domain·LORO·판정을 한 표로 집계한다(전 수치 CSV 재계산).",
+      "layout": {
+        "panels": 1,
+        "arrangement": "matplotlib table, 판정별 배경색(채택=녹·negative/미채택=적·참고=회), 헤더 진청",
+        "figsize_in": [
+          13.6,
+          9.0
+        ]
+      },
+      "assets": [
+        "data/processed/s11_comparison_table.csv"
+      ],
+      "style": "셀 8.2pt, 프로토콜 상이 항목은 캡션에서 caveat 열 참조 안내",
+      "exports": [
+        "outputs/figures/s11_uq/s11_comparison_table.png",
+        "outputs/figures/s11_uq/s11_comparison_table.pdf"
+      ]
+    },
+    {
+      "id": "s11_multiaxis_table",
+      "script": "scripts/4_visualization/s11_uq_figs.py",
+      "intent": "공간블록·LORO·temporal·독립 소스·source leave-out·누설 pytest·UQ 보정의 다축 검증 결과를 한 표로 제시한다.",
+      "layout": {
+        "panels": 1,
+        "arrangement": "matplotlib table 5열(축·프로토콜·대표 방법·지표·값[CI]), 줄무늬 배경",
+        "figsize_in": [
+          13.6,
+          5.6
+        ]
+      },
+      "assets": [
+        "data/processed/s11_multiaxis_validation.csv"
+      ],
+      "style": "각주 전문은 CSV verdict_footnote 열 참조",
+      "exports": [
+        "outputs/figures/s11_uq/s11_multiaxis_table.png",
+        "outputs/figures/s11_uq/s11_multiaxis_table.pdf"
+      ]
     }
   ]
 }

@@ -75,3 +75,10 @@ data/processed/fidelity_observations_long.csv
 
 # figures PDF는 대용량, PNG만 추적(재생성 가능)
 outputs/figures/**/*.pdf
+
+# 대용량 재생성물(tex/md에서 생성) — git 경량화
+docs/report/*.pdf
+docs/report/*.aux
+docs/report/*.log
+docs/report/*.out
+outputs/*.docx
