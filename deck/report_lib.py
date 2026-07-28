@@ -119,7 +119,7 @@ def image(s, path, x, y, w, h, align='center', valign='middle'):
     return (dx, dy, dw, dh)
 
 # ---------- 러닝 헤더/푸터 (저널 페이지 느낌) ----------
-def chrome(s, idx, total, section, running="영구동토 활동층 두께 예측 · 3D 지중온도장, 관측기반 GeoAI"):
+def chrome(s, idx, total, section, running="영구동토 활동층 두께 예측 · 3D 지중온도장 · 관측기반 GeoAI"):
     # 상단 러닝헤더
     text(s, ML, 0.32, CW*0.7, 0.24, [[{'t': running, 'size': 8, 'color': MUTE, 'font': SANS_M, 'spc': 0.3}]],
          anchor=MSO_ANCHOR.MIDDLE)
@@ -129,7 +129,7 @@ def chrome(s, idx, total, section, running="영구동토 활동층 두께 예측
     # 하단 푸터
     yb = SH-0.4
     rule(s, ML, yb-0.04, CW, color=RULE, wt=0.75)
-    text(s, ML, yb, CW*0.6, 0.24, [[{'t': "Polar_Bigdata · 진행 보고 (2026-07)", 'size': 8, 'color': MUTE, 'font': SANS_M}]],
+    text(s, ML, yb, CW*0.6, 0.24, [[{'t': "영구동토 ALT · 진행 보고 (2026-07)", 'size': 8, 'color': MUTE, 'font': SANS_M}]],
          anchor=MSO_ANCHOR.MIDDLE)
     text(s, CR-1.2, yb, 1.2, 0.24, [[{'t': f"{idx} / {total}", 'size': 8.5, 'color': SLATE, 'font': SANS_M}]],
          align=PP_ALIGN.RIGHT, anchor=MSO_ANCHOR.MIDDLE)

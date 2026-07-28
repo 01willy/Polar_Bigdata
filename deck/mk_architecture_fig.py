@@ -32,7 +32,7 @@ def crop(path, box=None):
         im = im.crop((int(box[0]*w), int(box[1]*h), int(box[2]*w), int(box[3]*h)))
     return np.asarray(im)
 
-fig = plt.figure(figsize=(12.5, 6.0), dpi=200)
+fig = plt.figure(figsize=(12.5, 6.0), dpi=260)
 fig.patch.set_facecolor(PAPER)
 bg = fig.add_axes([0, 0, 1, 1]); bg.set_xlim(0, 100); bg.set_ylim(0, 100); bg.axis("off")
 
@@ -41,7 +41,7 @@ inputs = [
     ("outputs/figures/01_data/covariates_overview.png", (0.0, 0.0, 0.5, 0.5), "기후 (ERA5-Land)"),
     ("outputs/figures/01_data/covariates_overview.png", (0.5, 0.0, 1.0, 0.5), "지형 (ArcticDEM)"),
     ("outputs/maps/weaklabels_overview.png", (0.0, 0.0, 0.33, 1.0), "SAR · InSAR"),
-    ("outputs/maps/ground_temp_global.png", (0.0, 0.0, 1.0, 1.0), "시추공 지중온도"),
+    ("outputs/maps/ground_temp_global.png", (0.0, 0.0, 1.0, 1.0), "지중온도 · KPDC Council"),
 ]
 iy = [77, 56, 35, 14]
 for (path, box, lab), yy in zip(inputs, iy):
@@ -55,36 +55,46 @@ for (path, box, lab), yy in zip(inputs, iy):
 bg.text(11, 94, "입력: 다중모달 관측", fontsize=14.5, color=NAVY, ha="center", fontproperties=FPB)
 
 # ---- 모델 블록(중) ----
-mx, mw = 36, 24
-bg.add_patch(FancyBboxPatch((mx, 30), mw, 40, boxstyle="round,pad=0.4,rounding_size=1.2",
+mx, mw = 35, 26
+bg.add_patch(FancyBboxPatch((mx, 28), mw, 42, boxstyle="round,pad=0.4,rounding_size=1.2",
                             fc=CARD, ec=TEAL, lw=1.6, zorder=2))
-bg.text(mx+mw/2, 64.5, "모델", fontsize=16, color=TEAL, ha="center", fontproperties=FPB, zorder=3)
-for i, t in enumerate(["GBM 조건장 (주력)", "6모델 토너먼트 비교", "Stefan 물리 결합 (잔차)", "셀 집계 · 1/n 가중"]):
-    bg.text(mx+1.8, 57.5-i*7.0, "· "+t, fontsize=13.5, color=INK, ha="left", va="center",
+bg.text(mx+mw/2, 65.0, "모델·비교", fontsize=16, color=TEAL, ha="center", fontproperties=FPB, zorder=3)
+model_lines = [
+    "Stefan 물리 앵커 (전이 최선)",
+    "GBM 공변량 · 6모델 토너먼트",
+    "소스인지 융합 (다중충실도 · S6)",
+    "co-kriging · IDW 공간보간 (기준선)",
+    "계절내 융해진행 D(t) (KPDC)",
+]
+for i, t in enumerate(model_lines):
+    bg.text(mx+1.8, 59.0-i*6.4, "· "+t, fontsize=12.5, color=INK, ha="left", va="center",
             fontproperties=FP, zorder=3)
-bg.text(mx+mw/2, 25.5, "누설 통제 평가", fontsize=12.5, color=SLATE, ha="center", fontproperties=FP)
-bg.text(mx+mw/2, 21, "공간블록 · LORO · AOA · conformal", fontsize=11.5, color=MUTE, ha="center", fontproperties=FP)
+bg.text(mx+mw/2, 24.0, "누설 통제 평가", fontsize=12.5, color=SLATE, ha="center", fontproperties=FP)
+bg.text(mx+mw/2, 19.6, "공간블록 · LORO · 대표성분해 · AOA · conformal", fontsize=10.8,
+        color=MUTE, ha="center", fontproperties=FP)
 
 # ---- 출력 썸네일(우) ----
 outputs = [
     ("outputs/maps/alt_alaska_pred.png", None, "활동층 두께 2D 지도"),
     ("outputs/volumes_3d/thermal3d_exploded.png", None, "얕은 3D 열구조"),
     ("outputs/maps/alt_aoa_mask.png", None, "불확실성 · 적용범위(AOA)"),
+    ("outputs/figures/e2_seasonal_dt/e2_dt_curves.png", None, "계절내 융해진행 D(t)"),
 ]
-oy = [66, 40, 15]
+oy = [72, 51, 30, 9]
 for (path, box, lab), yy in zip(outputs, oy):
-    ax = fig.add_axes([0.70, yy/100.0, 0.19, 0.20])
+    ax = fig.add_axes([0.70, yy/100.0, 0.19, 0.165])
     try:
         ax.imshow(crop(path, box)); ax.set_xticks([]); ax.set_yticks([])
         for sp in ax.spines.values(): sp.set_edgecolor(RULE); sp.set_linewidth(1.0)
     except Exception:
         ax.axis("off")
-    bg.text(79.5, yy-2.0, lab, fontsize=12, color=INK, ha="center", va="top", fontproperties=FP)
-bg.text(79.5, 94, "출력: 지도 · 3D · 불확실성", fontsize=14.5, color=TEAL2, ha="center", fontproperties=FPB)
+    bg.text(79.5, yy-1.8, lab, fontsize=11.5, color=INK, ha="center", va="top", fontproperties=FP)
+bg.text(79.5, 94, "출력: 지도 · 3D · 불확실성 · 시계열", fontsize=13.5, color=TEAL2, ha="center", fontproperties=FPB)
 
 # ---- 화살표 ----
 bg.add_patch(FancyArrowPatch((30, 50), (35.5, 50), arrowstyle="-|>", mutation_scale=26, lw=2.4, color=SLATE, zorder=1))
 bg.add_patch(FancyArrowPatch((60.5, 50), (68, 50), arrowstyle="-|>", mutation_scale=26, lw=2.4, color=SLATE, zorder=1))
 
-fig.savefig(f"{OUT}/architecture.png", dpi=200, facecolor=PAPER, bbox_inches="tight")
-plt.close(fig); print("saved architecture.png")
+fig.savefig(f"{OUT}/architecture.png", dpi=260, facecolor=PAPER, bbox_inches="tight")
+fig.savefig(f"{OUT}/architecture.pdf", facecolor=PAPER, bbox_inches="tight")
+plt.close(fig); print("saved architecture.png + architecture.pdf")

@@ -407,10 +407,18 @@ for ax, (x0, x1), (ttl, cmap, vlim, lab, cbt) in zip(axes, PBOX, specs):
     for t in cb.ax.get_yticklabels():
         t.set_fontproperties(FPM); t.set_fontsize(14)
     cb.outline.set_linewidth(0.6); cb.outline.set_edgecolor("#444444")
-fig.tight_layout()
+# 원본 래스터에 박힌 제목은 em-dash('고정밀 국소 데모 — …')였다. 재조판본은 슬라이스
+# 상단에 콜론형 제목('고정밀 국소 데모: …')을 새 텍스트로 다시 얹는다(연결자 em-dash 제거).
+fig.suptitle("고정밀 국소 데모: 알래스카 북사면 평탄 툰드라",
+             fontsize=19, fontproperties=FPB, color=INK, y=1.06)
+fig.tight_layout(rect=[0, 0, 1, 0.98])
 _src(fig, "자료: maps/local_demo_alt_field.png 동일 데이터 재조판 · 회색 = 모델 유효범위(평탄 툰드라) 밖 · 테두리 점 = 실측")
 fig.savefig(f"{OUT}/local_demo.png", dpi=200, facecolor=PAPER, bbox_inches="tight")
-plt.close(fig); print("saved local_demo.png")
+# 보고서용 재조판본(dpi 300 + 벡터 PDF 동반). 산출 폴더 outputs/maps에 신규 저장.
+os.makedirs("outputs/maps", exist_ok=True)
+fig.savefig("outputs/maps/local_demo_restyled.png", dpi=300, facecolor=PAPER, bbox_inches="tight")
+fig.savefig("outputs/maps/local_demo_restyled.pdf", facecolor=PAPER, bbox_inches="tight")
+plt.close(fig); print("saved local_demo.png + outputs/maps/local_demo_restyled.{png,pdf}")
 
 # ================================================================= 11. MAGT 2m/20m 우측 여백 (슬라이드 11)
 # 컬러바 라벨이 그림 우측 가장자리에 붙어 투사 시 잘릴 위험 → 우측 10% 흰 여백 패딩

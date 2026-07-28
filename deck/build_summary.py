@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
-"""중간보고 슬림 덱 (11p) · 목적·배경 → 파이프라인 → 본론(main 지도, 상세 설명) → 결론·일정.
-처음 보는 사람도 이해하도록 용어를 정의하며 각 슬라이드에 입력·방법·출력을 명시.
-방법론 상세(누설통제 원리·conformal 유도·정보병목 진단)는 제외. main 산출=ALT 예측.
+"""발표 PPT 10장 (대회 예선용 · 블라인드). 최신 결과(S6~E2) 반영 재빌드.
+스토리보드: 문제·목표 → 데이터·입력 → 방법 개요 → ALT 지도 → 정보병목 →
+전이(물리앵커 vs ML vs co-kriging) → 증강 분석 → UQ 보정 → 시계열+얕은3D → KPDC 검증·결론.
+처음 보는 심사자가 각 장에서 (주장형 제목 · 핵심수치 · 데이터출처/기법 1줄)을 읽고 이해하도록 구성.
 report_lib.py 재사용. 출력 deck/render/permafrost_summary.pptx
 빌드: (deck/) python3 build_summary.py · 렌더 soffice --headless --convert-to pdf
+문체: 렌더 텍스트 em-dash/en-dash 연결자 금지(콜론·가운뎃점·괄호·문장분리), 보고서톤(~이다/~한다).
+블라인드: 학교·연구실·기관·개인명·이메일 노출 금지.
 """
 import os
 import report_lib as R
@@ -16,8 +19,8 @@ from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 def F(p): return os.path.join("..", p)
 
 prs = R.new_deck()
-TOTAL = 11
-_SN = [1]
+TOTAL = 10
+_SN = [0]
 def CH(s, section):
     _SN[0] += 1
     R.chrome(s, _SN[0], TOTAL, section)
@@ -42,17 +45,22 @@ def io_block(s, x, y, w, io, size=10):
     """입력·방법·출력·용어 설명 블록(run-in 라벨). io = [(라벨, 본문), ...]."""
     R.bullets(s, x, y, w, io, size=size, gap=5)
 
-def body(section, no, title, sub, img, cap, io, metrics, notes, cap_src=None):
-    """본론 슬라이드: 그림 + 입력/방법/출력 설명 + 지표 + 해석."""
+def _resolve(img):
+    return img if os.path.exists(img) else F(img)
+
+def body(section, no, kicker, claim, img, cap, io, metrics, notes, cap_src=None, fw_cap=6.45):
+    """본론 슬라이드: 그림 + 입력/방법/출력 설명 + 지표 + 해석.
+    kicker=짧은 섹션 라벨(작게), claim=주장형 제목(크게)."""
     s = R.slide(prs); CH(s, section)
-    y = R.title_block(s, no, title, sub) if False else R.title_block(s, no, title, sub)
-    path = img if os.path.exists(img) else F(img)
+    y = R.title_block(s, no, kicker, claim)
+    path = _resolve(img)
     ar = R._aspect(path)
     fig_no = FIG()
-    if ar > 2.0:
+    if ar > 1.8:
         # 넓은 그림: 상단 그림 + 캡션, 하단 좌(설명)·우(지표+해석)
-        ih = min(CW / ar, SH - y - 2.62)
-        dx, dy, dw, dh = R.image(s, img, ML, y+0.06, CW, ih, valign='top', align='center')
+        # 높이구속 완화(reserve 2.62→2.40)로 그림이 슬라이드 폭·높이를 더 채운다.
+        ih = min(CW / ar, SH - y - 2.40)
+        dx, dy, dw, dh = R.image(s, path, ML, y+0.06, CW, ih, valign='top', align='center')
         cy = dy + dh + 0.05
         R.caption(s, ML, cy, CW, fig_no, cap, src=cap_src)
         by = cy + (0.46 if cap_src else 0.34)
@@ -72,8 +80,8 @@ def body(section, no, title, sub, img, cap, io, metrics, notes, cap_src=None):
     else:
         # 좁은 그림: 좌 그림, 우 설명(입력/방법/출력) + 지표 + 해석
         ah = SH - y - 1.02
-        fw = min(ah * ar, 6.45)
-        dx, dy, dw, dh = R.image(s, img, ML, y+0.1, fw, ah, valign='top', align='left')
+        fw = min(ah * ar, fw_cap)
+        dx, dy, dw, dh = R.image(s, path, ML, y+0.1, fw, ah, valign='top', align='left')
         R.caption(s, ML, dy+dh+0.06, fw, fig_no, cap, src=cap_src)
         nx = ML + fw + 0.45; nw = CR - nx; yy = y+0.14
         R.text(s, nx, yy, nw, 0.24, [[{'t': "입력·방법·출력", 'size': 9.5, 'color': TEAL, 'font': SANS_S, 'spc': 0.4}]])
@@ -88,173 +96,187 @@ def body(section, no, title, sub, img, cap, io, metrics, notes, cap_src=None):
             R.bullets(s, nx, yy+0.26, nw, notes, size=10, gap=4)
     return s
 
-# ================================================================= 1 표지
-s = R.slide(prs, bg=WHITE)
-R.text(s, ML, 1.55, CW, 0.3,
-       [[{'t': "연구 중간보고 · 2026. 07", 'size': 12.5, 'color': SLATE, 'font': SANS_S, 'spc': 1.0}]])
-R.text(s, ML, 2.1, CW*0.98, 1.5,
-       [[{'t': "북극 영구동토 ", 'size': 33, 'color': INK, 'font': SANS_L},
-         {'t': "활동층 두께(ALT)", 'size': 33, 'color': INK, 'font': SERIF, 'bold': True},
-         {'t': " 예측", 'size': 33, 'color': INK, 'font': SANS_L}],
-        [{'t': "관측 기반 GeoAI · ", 'size': 33, 'color': INK, 'font': SANS_L},
-         {'t': "3D 지중온도장", 'size': 33, 'color': INK, 'font': SERIF, 'bold': True},
-         {'t': "으로 증강", 'size': 33, 'color': INK, 'font': SANS_L}]], ls=1.28)
-R.text(s, ML, 3.9, CW*0.92, 0.4,
-       [[{'t': "다지역 활동층 두께 지도 · 불확실성 · 3D 지중온도장 · 물리 결합 전이",
-          'size': 13.5, 'color': TEAL, 'font': SANS_S}]])
-R.rule(s, ML, 5.1, 2.2, color=TEAL, wt=2.4)
-R.text(s, ML, 5.35, CW, 0.6,
-       [[{'t': "Polar_Bigdata 연구팀", 'size': 13, 'color': INK, 'font': SANS_S}],
-        [{'t': "2026 극지 빅데이터 · 인공지능 활용 경진대회 준비", 'size': 11, 'color': SLATE, 'font': SANS}]], ls=1.3, sa=2)
-
-# ================================================================= 2 연구 배경·목적
-s = R.slide(prs); CH(s, "배경·목적")
-y = R.title_block(s, "01", "연구 배경과 목적", "활동층 두께를 왜, 무엇으로 만드는가")
-R.bullets(s, ML, y+0.2, 6.05, [
-    ("현안.", "영구동토(연중 0°C 이하로 언 땅) 융해는 탄소 방출과 지반 침하로 인한 인프라 위험과 직결된다"),
-    ("지표.", "여름에 녹는 표층의 두께(활동층 두께, ALT)가 융해 정도를 대표하는 핵심 지표다"),
-    ("한계.", "현장 관측은 희소하고 위성은 간접적이라 넓은 지역의 신뢰 있는 지도가 없다"),
-    ("목적.", "관측 기반 GeoAI로 ALT 2D 지도와 불확실성을 만들고, 3D 지중온도장으로 라벨을 증강한다"),
-], size=12.5, gap=13)
-_d = R.image(s, "assets/mid/concept_alt.png", 6.9, y+0.2, 5.7, 3.7, valign='top')
-R.caption(s, 6.9, _d[1]+_d[3]+0.08, 5.7, FIG(),
-          "활동층과 영구동토. 연중 최고 지중온도가 0°C를 지나는 깊이가 활동층 두께(ALT)다")
-R.rule(s, ML, BLIM-0.62, CW, color=RULE, wt=0.8)
-R.text(s, ML, BLIM-0.5, CW, 0.4,
-       [[{'t': "최종 산출물   ", 'size': 11.5, 'color': TEAL, 'font': SANS_S},
-         {'t': "① ALT 2D 예측 지도   ② 예측 불확실성 지도   ③ 3D 지중온도장(0°C 등온면)   "
-               "④ 타 지대 전이 검증", 'size': 11.5, 'color': INK2, 'font': SANS_M}]], ls=1.2)
-
-# ================================================================= 3 접근 개요(연결)
-s = R.slide(prs); CH(s, "접근 개요")
-y = R.title_block(s, "02", "접근 개요", "ALT 예측을 중심으로 3D 지중온도장과 물리를 결합")
-_d = R.image(s, "assets/mid/connection.png", ML, y+0.16, CW, SH-y-1.35, valign='top', align='center')
+# ============================================================ 1 문제·목표
+s = R.slide(prs); CH(s, "문제·목표")
+y = R.title_block(s, "01", "문제와 목표",
+                  "활동층 두께가 영구동토 융해를 대표하는 지표이며, 넓은 지역의 신뢰 지도가 없다")
+_d = R.image(s, "assets/mid/concept.png", ML, y+0.14, CW, SH-y-2.10, valign='top', align='center')
 R.caption(s, ML, _d[1]+_d[3]+0.06, CW, FIG(),
-          "데이터가 있는 정도에 따라 ALT를 얻는 세 경로. 셋 다 0°C 등온면을 공유 경계로 하며 ALT 예측으로 수렴한다")
-R.text(s, ML, BLIM-0.34, CW, 0.32,
-       [[{'t': "main 트랙  ", 'size': 10.5, 'color': TEAL, 'font': SANS_S},
-         {'t': "3D 지중온도장 라벨 증강(가장 실효적)  ·  ", 'size': 10.5, 'color': INK2, 'font': SANS_M},
-         {'t': "병렬 트랙  ", 'size': 10.5, 'color': GOLD, 'font': SANS_S},
-         {'t': "3D 지중온도장 기질 추정, Stefan·개선 물리 잔차학습", 'size': 10.5, 'color': INK2, 'font': SANS_M}]], ls=1.2)
-
-# ================================================================= 4 데이터·모델 파이프라인 (아키텍처)
-s = R.slide(prs); CH(s, "파이프라인")
-y = R.title_block(s, "03", "데이터와 모델 파이프라인", "입력 공변량에서 산출물까지의 처리 흐름")
-_d = R.image(s, "assets/mid/architecture.png", ML, y+0.1, CW, SH-y-2.15, valign='top', align='center')
-R.caption(s, ML, _d[1]+_d[3]+0.05, CW, FIG(),
-          "다중모달 입력을 위치별 표(tabular)로 정렬해 회귀모델에 넣고, 4종 산출물을 만든다")
-_by = _d[1]+_d[3]+0.52
-ew = CW*0.60
-R.text(s, ML, _by, ew, 0.24, [[{'t': "구성", 'size': 9.5, 'color': TEAL, 'font': SANS_S, 'spc': 0.4}]])
+          "관측 기반 GeoAI 개요. 다중모달 관측을 입력으로 활동층 두께(ALT) 지도·불확실성·3D 지중온도장을 만든다.")
+_by = _d[1]+_d[3]+0.5
+ew = CW*0.585
+R.text(s, ML, _by, ew, 0.24, [[{'t': "배경", 'size': 9.5, 'color': TEAL, 'font': SANS_S, 'spc': 0.4}]])
 R.bullets(s, ML, _by+0.26, ew, [
-    ("입력(공변량).", "기후(ERA5-Land 재분석 8종)·지형(ArcticDEM 6종)·위성 SAR(InSAR·PolSAR)·시추공 지중온도"),
-    ("정렬.", "각 관측 위치에 공변량 값을 부착해 위치×변수 표를 만든다. 공변량=예측에 쓰는 입력 변수"),
-    ("모델.", "표 데이터에 강한 GBM(그래디언트 부스팅) 회귀. 공간블록 교차검증으로 낙관적 평가를 통제"),
+    ("현안.", "영구동토(연중 0°C 이하로 언 땅) 융해는 탄소 방출·지반 침하 위험과 직결된다"),
+    ("지표.", "여름에 녹는 표층의 두께(활동층 두께, ALT)가 융해 정도를 대표한다"),
+    ("한계.", "현장 관측은 희소하고 위성은 간접적이라 넓은 지역의 신뢰 지도가 없다"),
 ], size=9.9, gap=5)
 nx = ML + ew + 0.4
 R.vrule(s, nx-0.22, _by+0.02, 1.3, color=RULE, wt=0.9)
-R.text(s, nx, _by, CR-nx, 0.24, [[{'t': "산출물", 'size': 9.5, 'color': TEAL, 'font': SANS_S, 'spc': 0.4}]])
+R.text(s, nx, _by, CR-nx, 0.24, [[{'t': "목표(최종 산출물)", 'size': 9.5, 'color': TEAL, 'font': SANS_S, 'spc': 0.4}]])
 R.bullets(s, nx, _by+0.26, CR-nx, [
-    ("2D.", "ALT 예측 지도 + 불확실성"),
-    ("3D.", "깊이별 지중온도장(0°C 등온면)"),
-    ("검증.", "타 지대 전이 성능"),
-], size=9.9, gap=5)
+    ("2D.", "알래스카 ALT 예측 지도"),
+    ("얕은 3D.", "깊이별 지중온도장(0°C 등온면)"),
+    ("UQ.", "보정된 예측 불확실성"),
+    ("전이.", "타 지대 일반화 검증"),
+], size=9.9, gap=4)
 
-# ================================================================= 5 본론: ALT 예측 지도
-body("본론", "04", "활동층 두께 예측 지도",
-     "알래스카 전역 활동층 두께와 현장 관측",
-     "assets/mid/alt_map.png",
-     "ERA5-Land 기후 공변량으로 복원한 알래스카 활동층 두께(cm). 흰 점=CALM, 삼각형=ABoVE 현장 관측.",
-     [("입력.", "ERA5-Land(유럽중기예보센터 지표 기후 재분석, 9km 월별)에서 뽑은 8종. 연평균기온, "
-               "융해도일 TDD(여름철 0°C 넘는 기온의 누적), 동결도일 FDD, 최난·최한월 기온, 지표토양온도, 적설량"),
-      ("방법.", "각 위치의 8개 기후값을 입력, 관측 ALT를 정답으로 GBM 회귀 학습(log 변환). 알래스카 전 격자에 적용"),
-      ("출력.", "격자별 ALT(cm) 연속면. 관측 없는 곳도 기후로 채워 지도화")],
-     [("16.95 cm", "전이 RMSE"), ("1,395", "관측점"), ("51 cm", "평균 ALT")],
-     [("연속 예측.", "관측 공백을 공변량으로 채움"),
+# ============================================================ 2 데이터·입력
+body("데이터·입력", "02", "데이터와 입력",
+     "관측·재분석·위성을 위치별로 정렬해 예측 입력으로 쓴다",
+     "outputs/maps/data_inventory_world.png",
+     "관측 데이터 인벤토리와 지역별 가용성. KPDC Council(수어드반도)이 검증 자료로 편입된다.",
+     [("관측(라벨).", "CALM·ABoVE 활동층 두께, GTN-P 시추공 깊이별 지중온도. KPDC Council 일별 프로파일은 0°C 등온선 검증에 사용"),
+      ("공변량 14종.", "지형 6종(ArcticDEM 유래 표고·경사 등)·기후 8종(ERA5-Land 재분석: 연평균기온·융해도일 TDD·동결도일 FDD 등)"),
+      ("보조.", "위성 SAR(InSAR·PolSAR)는 스칼라 특징으로 편입. 각 관측 위치에 공변량을 부착해 위치×변수 표를 구성")],
+     [("14종", "핵심 공변량"), ("KPDC", "Council 검증"), ("다지역", "AK·Lena·Canada")],
+     [("출처.", "재분석·공개 관측망·KPDC"),
+      ("정렬.", "위치별 tabular 표로 통합")],
+     cap_src="자료: ERA5-Land, ArcticDEM, CALM/GTN-P/ABoVE, KPDC Council. 지도는 육지 마스크·해양 결측 처리.")
+
+# ============================================================ 3 방법 개요
+body("방법 개요", "03", "방법 개요",
+     "물리 앵커·ML·증강·누설통제·UQ를 한 파이프라인으로 결합한다",
+     "assets/mid/architecture.png",
+     "입력 공변량에서 산출물까지의 처리 흐름. 물리(Stefan)·ML·소스인지 융합을 비교하고 4종 산출물을 만든다.",
+     [("모델·비교.", "Stefan 물리 앵커(전이 최선)·GBM 공변량 회귀·6모델 토너먼트·소스인지 융합·co-kriging/IDW 공간보간 기준선"),
+      ("누설통제.", "0.5° 공간블록 교차검증·지역 leave-out(LORO)·대표성 분해·적용범위(AOA)로 낙관적 평가를 배제"),
+      ("UQ·시계열.", "분위수 회귀를 conformal로 보정해 90% 구간 제공. 계절내 융해진행 D(t)는 KPDC로 별도 검증")],
+     [("Stefan", "물리 앵커"), ("6모델", "토너먼트"), ("conformal", "UQ 보정")],
+     [("원칙.", "솔버·렌더·평가 모듈 분리"),
+      ("공유 경계.", "0°C 등온면으로 2D·3D 연결")])
+
+# ============================================================ 4 ALT 예측 지도(main)
+body("본론", "04", "ALT 예측 지도",
+     "알래스카 전역 활동층 두께를 관측과 정합하게 복원한다",
+     "outputs/figures/s1_baseline/alaska_obs_vs_pred_maps.png",
+     "(a) 현장 관측 ALT와 (b)-(d) 상위 모델의 예측. 공간블록 out-of-fold(OOF) 평가로 낙관적 편향을 통제.",
+     [("입력.", "각 격자에 ERA5-Land 기후·지형 공변량을 부착. 관측 ALT를 정답으로 회귀 학습(log 변환)"),
+      ("방법.", "0.5° 공간블록 6-fold 교차검증. 이웃 관측이 학습·시험에 섞이지 않도록 셀 단위로 분리"),
+      ("출력.", "격자별 ALT(cm) 연속면. 관측 공백을 공변량으로 채워 지도화")],
+     [("14.7 cm", "MLP OOF RMSE"), ("15.7 cm", "CatBoost"), ("~50 cm", "평균 ALT")],
+     [("in-domain.", "상위 모델 14-16cm 대역"),
       ("한계.", "9km 기후 해상도의 국지 편차")])
 
-# ================================================================= 6 본론: 불확실성 지도
-body("본론", "04", "예측 불확실성 지도",
-     "예측값과 함께 어디를 얼마나 믿을지 제시",
-     "assets/mid/uncertainty_map.png",
-     "(좌) 90% 예측구간 폭 지도(좁을수록 신뢰). (우) 실측 대비 예측 오차 지도. 두 지도가 정합하면 잘 보정된 것.",
-     [("방법.", "같은 GBM을 분위수 회귀로 학습해 5%·95% 지점을 예측하면 90% 예측구간이 나온다. "
-               "예측구간=참값이 그 안에 들어올 확률이 90%가 되도록 만든 범위"),
-      ("보정.", "검증자료의 실제 오차로 구간 폭을 재조정해 명목 90%가 실제 90%에 맞도록 교정"),
-      ("출력.", "위치별 구간 폭(신뢰도)과 실측 대비 오차를 지도로 제시")],
-     [("50.6 cm", "평균 구간 폭"), ("90%", "구간 신뢰수준")],
-     [("직관.", "예측값 + 신뢰 폭을 함께"),
-      ("응용.", "불확실 상위 = 관측 추가 후보")])
+# ============================================================ 5 정보 병목 진단
+body("본론", "05", "정보 병목 진단",
+     "위경도 2개가 물리 공변량 24개와 동률이며 병목은 입력 정보량이다",
+     "outputs/figures/06_deep_learning/alt_info_bottleneck.png",
+     "공변량 조합별 셀 단위 RMSE. 위경도 2개만 쓴 대조군(점선)이 전체 24개와 동률 이상이다.",
+     [("무엇.", "지형·기후·InSAR를 순차 추가한 조합과, 위경도 2개만 쓴 대조군을 같은 프로토콜로 비교"),
+      ("결과.", "공간블록·전이(LORO) 두 축 모두 위경도 대조군이 전체 공변량과 동률. 위도가 기후 이상을 대리한다"),
+      ("함의.", "예측 한계는 모델이나 물리 특징이 아니라 격자 공변량에 담긴 국소 정보량이다")],
+     [("17.2 cm", "위경도(공간블록)"), ("15.7 cm", "위경도(전이)")],
+     [("병목.", "입력 정보량이 상한을 정함"),
+      ("지렛대.", "모델 교체 아닌 정보 확충")])
 
-# ================================================================= 7 본론: 고해상 국소 데모
-body("본론", "04", "고해상 국소 데모",
-     "북사면 평탄 툰드라의 30m 활동층 두께",
-     "assets/mid/local_demo.png",
-     "(좌) PolSAR 유도 ALT 30m · (중) 본 연구 예측 · (우) 90% 예측구간 폭.",
-     [("PolSAR 원자료.", "편파 합성개구레이더. P밴드(장파장) 레이더는 지표 아래까지 투과해 30m 해상도로 ALT를 유도한다"),
-      ("방법.", "PolSAR와 기후·지형 공변량을 함께 넣은 앙상블 모델로 예측(중). Diffusion(확률 생성모델)으로 "
-               "예측의 90% 구간 폭을 산출(우)"),
-      ("출력.", "전 지구 9km 지도가 놓치는 30m 미세 융해 패턴 + 불확실성")],
-     [("30 m", "공간 해상도"), ("90%", "예측구간")],
-     [("고해상.", "30m 미세 패턴 재현"),
-      ("응용.", "위험 스크리닝 후보 식별")])
+# ============================================================ 6 전이: 물리앵커 vs ML vs co-kriging
+body("본론", "06", "전이 성능 비교",
+     "전이에서 공간보간은 붕괴하고, Stefan 물리 앵커만 양축 최선이다",
+     "outputs/figures/e1_kriging/e1_rmse_bars.png",
+     "(좌) 알래스카 in-domain 공간블록, (우) 지역 leave-out 전이. co-kriging·IDW·RK·GBM·Stefan 앵커 비교.",
+     [("기준선.", "정통 공간보간(OK/IDW/RK)과 공변량 GBM을 물리 Stefan 앵커와 같은 프로토콜로 비교"),
+      ("in-domain.", "OK 15.8·IDW 15.8이 GBM 17.7과 경쟁. 밀집 관측 안에서는 보간이 유효"),
+      ("전이.", "지역이 바뀌면 보간이 붕괴(OK 29.4·IDW 50.9). variogram이 지역마다 달라 covariate shift에 취약")],
+     [("14.5 cm", "Stefan in-domain"), ("21.3 cm", "Stefan 전이(LORO)")],
+     [("Stefan.", "양축 모두 최선"),
+      ("보간.", "전이에서 신뢰 불가")])
 
-# ================================================================= 8 본론: 3D 지중온도장
-body("본론", "04", "3D 지중온도장 깊이별 지도",
-     "2m와 20m 연평균 지중온도와 0°C 경계",
-     "assets/mid/magt_clean.png",
-     "연평균 지중온도(MAGT) 2m와 20m. 남색 실선=0°C 등온선(영구동토 상단). 테두리점=시추공 실측.",
-     [("입력.", "GTN-P 시추공의 깊이별 지중온도 10,748점 + 기후 공변량 + 깊이(m). MAGT=연평균 지중온도"),
-      ("방법.", "깊이를 입력 변수에 포함해 (위치, 깊이)→온도를 GBM으로 회귀. 알래스카 격자·깊이 0~20m에 적용"),
-      ("출력·연결.", "깊이별 온도장. 이 장이 0°C를 지나는 깊이가 곧 ALT이므로, 시추공은 있고 ALT 관측이 없는 "
-                    "지역의 라벨 증강에 쓴다")],
-     [("0~20 m", "복원 깊이"), ("10,748", "시추공 라벨")],
-     [("표층.", "2m는 기후 따라 변동 큼"),
-      ("심부.", "20m는 안정된 냉기")])
+# ============================================================ 7 증강 비교분석
+body("본론", "07", "증강 비교분석",
+     "어떤 증강도 전이에서 Stefan 앵커를 넘지 못한다",
+     "outputs/figures/s3_aug/aug_response_curves.png",
+     "증강비율 r에 따른 전이 RMSE 개선량. 물리(Stefan/Ku) pseudo-label과 placebo(상수) 대조. 위가 개선.",
+     [("설계.", "물리(Stefan)·부정확 물리(Ku)·placebo(상수) pseudo-label을 증강비율 r을 키우며 비교. 거리버퍼·블록 부트스트랩으로 누설 차단"),
+      ("결과.", "물리선이 placebo 위에 있어 순가치가 존재하고, r=10까지 포화 없이 단조 개선한다. 부정확 물리(Ku)는 r이 클수록 악화"),
+      ("경계.", "Canada는 물리가 전이를 견인, Lena는 base 모델 품질에 의존. 증강 이득의 크기·부호가 지역·물리 정확도에 좌우된다")],
+     [("+10.4 cm", "Canada 물리 순가치"), ("r=10", "포화 없음")],
+     [("순가치.", "정확 물리>placebo"),
+      ("한계.", "앵커 대체는 못함")],
+     fw_cap=5.55)
 
-# ================================================================= 9 본론: 모델별 오차 분포 지도
-body("본론", "04", "모델별 오차 분포 지도",
-     "여섯 모델의 오차 분포가 공간적으로 거의 같다",
-     "assets/mid/tournament_errors.png",
-     "위치 동등가중(같은 위치의 반복 관측을 1회로 집계, 14,348 위치) 여섯 모델·앙상블의 예측 오차(예측−관측). "
-     "우하단은 모델별 RMSE·skill 막대.",
-     [("무엇.", "GBM·MLP·Transformer·TabM·Flow·Diffusion 6종과 앙상블을 같은 조건에서 비교"),
-      ("수치 차이.", "이 지도는 위치 동등가중(14,348 위치) 기준 16~20cm다. 다른 슬라이드의 헤드라인 16.95cm는 "
-                   "점 단위(22만 관측) 앙상블 값으로, 집계 방식만 다를 뿐 같은 평가다"),
-      ("함의.", "모델을 바꿔도 오차가 커지는 위치와 크기가 거의 겹친다. 한계는 모델이 아니라 입력 정보다")],
-     [("16.1 cm", "최저(GBM)"), ("20.5 cm", "최고(TabM)")],
-     [("동률.", "6모델 16~20cm 밀집"),
-      ("지렛대.", "모델 아닌 정보 확충")])
+# ============================================================ 8 불확실성·보정(UQ)
+body("본론", "08", "불확실성 보정",
+     "원 분위수는 과신하며 conformal 보정으로 명목 90%를 실측 90%에 맞춘다",
+     "outputs/figures/s11_uq/s11_calibration_curve.png",
+     "(좌) calibration 곡선(점선=이상적). (우) 90% 구간의 실제 커버리지 cov90, 보정 전후.",
+     [("문제.", "분위수 CatBoost의 원 90% 구간은 실제로 44.6%만 덮는 과신 상태. 구간 폭이 좁아 신뢰할 수 없다"),
+      ("방법.", "학습 블록 내부에서 CQR(conformalized quantile regression)로 구간 폭을 재조정. 명목 90%가 실측 90%에 맞도록 보정"),
+      ("결과.", "cov90 44.6%→93.4%[88.9,96.6], 구간 폭 14.7→53.6cm. 정직한 폭을 확보")],
+     [("44.6% → 93.4%", "cov90 보정"), ("90%", "명목 신뢰수준")],
+     [("과신 교정.", "폭을 정직하게 넓힘"),
+      ("응용.", "불확실 상위=관측 후보")],
+     fw_cap=6.05)
 
-# ================================================================= 10 본론: 선행연구 대비 성능
-body("본론", "04", "선행연구 대비 성능",
-     "평가 프로토콜을 통제해 비교한다",
-     "assets/mid/sota.png",
-     "보고 RMSE 비교. 회색=무작위 CV·제품, 초록=물리기반 사이트검증, 남색=본 연구(공간블록·전이).",
-     [("선정 기준.", "같은 대상(영구동토 활동층)·비슷한 지역의 대표 연구를 골랐다. 핵심은 절대 오차가 아니라 "
-                   "평가 프로토콜 통제다. 무작위 CV는 이웃 관측이 학습·시험에 섞여 오차를 낙관한다"),
-      ("기법.", "Gautam 2025=랜덤포레스트(68점), Liu 2024=격자 통계·ML, QTP 2025=청장고원 ML, "
-               "ESA CCI 제품=CryoGrid 물리모델+위성 강제자료로 만든 공개 영구동토 제품(우리 셀에 직접 채점)"),
-      ("13cm 관련.", "무작위 CV나 좁은 범위로 좁히면 13cm급도 보고된다. 우리 평탄툰드라 12.97cm도 같은 "
-                    "범위축소 효과이지 진짜 돌파가 아니다. 엄격한 전이로는 16.95cm가 정직한 대표값이다")],
-     [("16.95 cm", "본 연구(전이)"), ("20.6 cm", "공개 CCI 제품")],
-     [("동급.", "정직 검증군(14~18cm) 대역"),
-      ("제품.", "공개 CCI보다 정확")])
+# ============================================================ 9 시계열 + 얕은 3D
+s = R.slide(prs); CH(s, "본론")
+y = R.title_block(s, "09", "시계열과 얕은 3D",
+                  "연별 ALT를 재현하고 0°C 등온면으로 3D 지중온도장을 연결한다")
+# 좌: S9 연별 패널, 우: S10 3D 등온면
+gap = 0.4
+lw = (CW - gap) * 0.52
+rw = CW - gap - lw
+# 왼쪽 그림
+p9 = _resolve("outputs/figures/s9_timelapse/alt_year_panels_v2.png")
+ar9 = R._aspect(p9)
+lh = min(lw/ar9, SH - y - 2.55)
+d9 = R.image(s, p9, ML, y+0.12, lw, lh, valign='top', align='center')
+R.caption(s, ML, d9[1]+d9[3]+0.05, lw, FIG(),
+          "연별 대표 ALT 4개 연도(공통 색축 40-75cm). 연도별 ERA5 강제와 연도별 ALT를 정합.")
+# 오른쪽 그림
+rx = ML + lw + gap
+p10 = _resolve("outputs/volumes_3d/s10_shallow3d_isotherm.png")
+ar10 = R._aspect(p10)
+rh = min(rw/ar10, SH - y - 2.55)
+d10 = R.image(s, p10, rx, y+0.12, rw, rh, valign='top', align='center')
+R.caption(s, rx, d10[1]+d10[3]+0.05, rw, FIG(),
+          "0°C 등온면 깊이(cm). 온도장은 사이트블록 R² 0.47로 성립.")
+# 하단 설명 + 지표
+_by = max(d9[1]+d9[3], d10[1]+d10[3]) + 0.5
+ew = CW*0.60
+R.text(s, ML, _by, ew, 0.24, [[{'t': "입력·방법·출력", 'size': 9.5, 'color': TEAL, 'font': SANS_S, 'spc': 0.4}]])
+R.bullets(s, ML, _by+0.26, ew, [
+    ("시계열(S9).", "재학습 없이 2010-2024 연별 ALT 프레임을 렌더. 홀드아웃 RMSE 14.97cm·R² 0.34. 연 anomaly 상관 +0.06으로 연도간 변화는 예측 불가(각주)"),
+    ("얕은 3D(S10).", "GTN-P 깊이별 지중온도를 (위치, 깊이)→온도로 회귀. 0°C를 지나는 깊이를 등온면으로 시각화"),
+], size=9.9, gap=5)
+nx = ML + ew + 0.4
+R.vrule(s, nx-0.22, _by+0.02, 1.3, color=RULE, wt=0.9)
+metric_strip(s, nx, _by, CR-nx, [("R² 0.47", "온도장(사이트블록)"), ("r 0.28", "0°C→ALT 상관")], vsize=12.5)
+R.text(s, nx, _by+0.82, CR-nx, 0.24, [[{'t': "해석", 'size': 9.5, 'color': TEAL, 'font': SANS_S, 'spc': 0.4}]])
+R.bullets(s, nx, _by+1.06, CR-nx, [
+    ("온도장.", "사이트블록 R² 0.47 성립"),
+    ("절대 유도.", "0°C→ALT는 r 0.28(R²<0)"),
+    ("계절 D(t).", "E2에서 계절내로 재정의"),
+], size=9.5, gap=3)
 
-# ================================================================= 11 결론 + 완료·진행·예정·일정
-s = R.slide(prs); CH(s, "결론·계획")
-y = R.title_block(s, "05", "현재까지 결론과 향후 계획", "완료·진행·예정과 대회 일정")
-R.bullets(s, ML, y+0.14, CW, [
-    ("결론.", "알래스카 전역 ALT 지도·불확실성·3D 지중온도장을 산출. 전이 16.95cm로 정직 검증 대역, 공개 제품(20.6cm)보다 정확"),
-    ("병목.", "여섯 모델이 동률이다. 한계는 모델이 아니라 공변량 정보와 지역 다양성이다. 라벨을 14,348에서 17,423셀로 확대"),
-], size=11.5, gap=8)
-_ty = y+1.28
-R.image(s, "assets/mid/timeline.png", ML, _ty, CW, SH-_ty-1.05, valign='top', align='center')
-R.rule(s, ML, BLIM-0.62, CW, color=RULE, wt=0.8)
-R.text(s, ML, BLIM-0.5, CW, 0.4,
-       [[{'t': "다음 지렛대   ", 'size': 11, 'color': TEAL, 'font': SANS_S},
-         {'t': "3D 지중온도장 0°C 라벨 증강(main) · 3D 기질추정 · Stefan/개선 물리 잔차학습(병렬). "
-               "각 실험은 전 입력 활용·데이터 관리·평가를 기록", 'size': 11, 'color': INK2, 'font': SANS_M}]], ls=1.2)
+# ============================================================ 10 KPDC 검증 + 결론
+s = R.slide(prs); CH(s, "검증·결론")
+y = R.title_block(s, "10", "KPDC 검증과 결론",
+                  "KPDC Council 0°C 등온선으로 검증하고 구간검열을 정량화한다")
+p7 = _resolve("outputs/figures/s7_kpdc/s7_alt_comparison.png")
+ar7 = R._aspect(p7)
+ah = SH - y - 1.02
+fw = min(ah*ar7, 6.55)
+d7 = R.image(s, p7, ML, y+0.1, fw, ah, valign='top', align='left')
+R.caption(s, ML, d7[1]+d7[3]+0.06, fw, FIG(),
+          "KPDC Council 유도 ALT vs 코어·실측·물리·학습 모델. 검열 시즌은 하한 화살표로 표기.")
+nx = ML + fw + 0.45; nw = CR - nx; yy = y+0.14
+R.text(s, nx, yy, nw, 0.24, [[{'t': "검증(대회 KPDC 주활용)", 'size': 9.5, 'color': TEAL, 'font': SANS_S, 'spc': 0.4}]])
+R.bullets(s, nx, yy+0.26, nw, [
+    ("자료.", "KPDC Council 일별 지중온도 프로파일 19종에서 0°C 등온선 ALT 유도"),
+    ("검열.", "2025 비검열 부분집합 조건부 중앙값 136cm(n=5). 38시즌 중 23건이 우측검열로 구간검열 정량화"),
+], size=9.7, gap=5)
+yy += 0.26 + 2*0.62 + 0.14
+R.rule(s, nx, yy, nw, color=RULE, wt=0.7)
+metric_strip(s, nx, yy+0.12, nw, [("136 cm", "유도 중앙값(n=5)"), ("23 / 38", "우측검열 시즌")], vsize=13.0)
+yy += 0.95
+R.text(s, nx, yy, nw, 0.24, [[{'t': "결론", 'size': 9.5, 'color': TEAL, 'font': SANS_S, 'spc': 0.4}]])
+R.bullets(s, nx, yy+0.26, nw, [
+    ("정보 병목.", "한계는 모델 아닌 입력 정보량"),
+    ("물리 앵커.", "전이는 Stefan이 양축 최선"),
+    ("정직한 UQ.", "conformal 보정 90% 구간"),
+    ("로드맵.", "InSAR 정보 확충·계절 D(t) 심화"),
+], size=9.7, gap=3)
 
 out = "render/permafrost_summary.pptx"
 prs.save(out)

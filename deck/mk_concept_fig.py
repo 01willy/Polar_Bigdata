@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""연구 개념 모식도 — 입력(다중모달) → 모델 → 출력(ALT·3D·불확실성·전이).
+"""연구 개념 모식도: 입력(다중모달) → 모델 → 출력(ALT·3D·불확실성·전이).
 깨끗한 냉색, 겹침 없는 배치, 한글 가독. 출력 deck/assets/mid/concept.png
 """
 import os, sys
@@ -38,13 +38,13 @@ box(2, 6, 26, 34, "입력: 다중모달 관측", [
 ], head=NAVY)
 
 # 모델(중)
-box(37, 13, 24, 20, "모델", [
-    "· GBM 조건장 (주력)",
-    "· 6모델 토너먼트 비교",
-    "· 물리 결합 (Stefan 잔차)",
-    "· 셀 단위·1/n 가중",
+box(37, 13, 24, 20, "모델·비교", [
+    "· Stefan 물리 앵커 (전이 최선)",
+    "· GBM 공변량 · 6모델 토너먼트",
+    "· 소스인지 융합 (다중충실도)",
+    "· co-kriging · IDW 기준선 비교",
 ], head=TEAL)
-ax.text(49, 9.5, "누설 통제 평가\n공간블록 · LORO", ha="center", va="center",
+ax.text(49, 9.5, "누설 통제 평가\n공간블록 · LORO · 대표성분해", ha="center", va="center",
         fontsize=9.0, color=SLATE, style="italic")
 
 # 출력(우)
@@ -52,6 +52,7 @@ box(70, 6, 28, 34, "출력", [
     "· 활동층 두께(ALT) 2D 지도",
     "· 얕은 3D 지중 열구조(0~20m)",
     "· 0°C 등온면(영구동토 상단)",
+    "· 계절내 융해진행 D(t) (KPDC)",
     "· 셀별 보정 불확실성(conformal)",
     "· 적용범위(AOA) 마스크",
     "· 알래스카→타 지대 전이 검증",
@@ -65,6 +66,7 @@ for x0, x1 in [(28.5, 36.5), (61.5, 69.5)]:
 ax.text(50, 43.5, "관측기반 GeoAI: 무엇이 활동층 두께를 지배하는지 분해하고, 어디까지 믿을 수 있는지까지 제시한다",
         ha="center", va="center", fontsize=11.5, color=INK, fontweight="bold")
 fig.tight_layout()
-fig.savefig(f"{OUT}/concept.png", dpi=200, facecolor=PAPER, bbox_inches="tight")
+fig.savefig(f"{OUT}/concept.png", dpi=260, facecolor=PAPER, bbox_inches="tight")
+fig.savefig(f"{OUT}/concept.pdf", facecolor=PAPER, bbox_inches="tight")
 plt.close(fig)
-print("saved concept.png")
+print("saved concept.png + concept.pdf")
