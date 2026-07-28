@@ -1,0 +1,111 @@
+{
+  "stage": "S9",
+  "date": "2026-07-27",
+  "smoke": false,
+  "period": "2010-2024",
+  "data": {
+    "forcing": "data/processed/alt_era5_temporal.csv (연도별 ERA5-Land, 197,648 위치 x 15년)",
+    "labels": "alt_above_pointlevel.csv 유래 (위치,연도) 패널 99,931행/95,793위치 (timelapse_alaska.py, 2026-07-20)",
+    "reused_results": [
+      "data/processed/timelapse_alaska_results.csv",
+      "data/processed/timelapse_alaska_meta.json",
+      "data/processed/timelapse_alaska_oof.csv"
+    ]
+  },
+  "headline": {
+    "model": "STEFAN (a + E·√TDD, fold-safe E)",
+    "temporal_holdout_rmse_cm": 14.967,
+    "temporal_holdout_rmse_ci95_cm": [
+      14.72,
+      15.22
+    ],
+    "temporal_holdout_r2": 0.338,
+    "temporal_holdout_skill": 0.1864,
+    "anomaly_corr": 0.0585,
+    "anomaly_corr_ci95": [
+      0.029,
+      0.088
+    ],
+    "anomaly_skill": -0.0032,
+    "trend_alt_cm_per_yr": 1.2878,
+    "trend_alt_r2": 0.0721,
+    "trend_tdd_per_yr": 26.763,
+    "bootstrap": "위치 블록 부트스트랩 1000회 (seed 0)"
+  },
+  "temporal_alignment": "기후 시간 불일치 해결: 학습·평가 모두 연도별 ERA5-Land forcing(e5t_*, 그해 값)과 연도별 ALT 라벨을 (위치 key, year)로 정확 병합한 시간 정합 설계이다. leave-one-year-out으로 각 연도의 (a,E)를 그 연도 제외 데이터에서 적합했고, 본 렌더의 dense 예측도 같은 fold-safe (a,E)를 사용한다. 정적 지도 산출물(fidelity_base.csv의 alt_cm=다년평균 x 다년평균 기후)과 구분되는 연별 제품이다.",
+  "honest_caveats": [
+    "within-site 연 anomaly는 예측 불가: corr 0.06(95% CI 병기), anomaly skill -0.003. 연도 간 지도 차이는 그해 forcing의 반영일 뿐 위치별 연 변동 예측력을 의미하지 않는다.",
+    "temporal holdout R² 0.338의 대부분은 공간 신호이다(시간 분산 비율 0.40, within-site corr(ΔTDD,ΔALT)=0.07).",
+    "관측 연평균 추세 +1.29 cm/yr는 R² 0.07로 약하고 연도별 관측 위치 구성 변화의 영향을 받는다(2014년 64,114행 등 표본 불균형).",
+    "프레임의 dense 커버리지는 forcing 가용 위치 기준이며 실측 라벨 수는 연 21~64,114개로 불균등하다(각 프레임에 n 표기)."
+  ],
+  "render": {
+    "extent": [
+      "알래스카·서부 캐나다 (ABoVE)",
+      -166.8,
+      -112.5,
+      59.8,
+      72.1
+    ],
+    "projection": "AlbersEqualArea",
+    "cmap": "cmcrameri oslo_r (CMAP.alt 절단)",
+    "fixed_clim_cm": [
+      40.0,
+      75.0
+    ],
+    "hexbin_gridsize": 46,
+    "mask_ocean": true,
+    "graticule": "경도 눈금 160·150·140°W 명시(본토 범위 168~141°W 정합). 자동 격자가 120°W 하나만 라벨하던 문제를 고정 locator로 교체.",
+    "frames": [
+      "outputs/figures/s9_timelapse/frames/frame_2010.png",
+      "outputs/figures/s9_timelapse/frames/frame_2011.png",
+      "outputs/figures/s9_timelapse/frames/frame_2012.png",
+      "outputs/figures/s9_timelapse/frames/frame_2013.png",
+      "outputs/figures/s9_timelapse/frames/frame_2014.png",
+      "outputs/figures/s9_timelapse/frames/frame_2015.png",
+      "outputs/figures/s9_timelapse/frames/frame_2016.png",
+      "outputs/figures/s9_timelapse/frames/frame_2017.png",
+      "outputs/figures/s9_timelapse/frames/frame_2018.png",
+      "outputs/figures/s9_timelapse/frames/frame_2019.png",
+      "outputs/figures/s9_timelapse/frames/frame_2020.png",
+      "outputs/figures/s9_timelapse/frames/frame_2021.png",
+      "outputs/figures/s9_timelapse/frames/frame_2022.png",
+      "outputs/figures/s9_timelapse/frames/frame_2023.png",
+      "outputs/figures/s9_timelapse/frames/frame_2024.png"
+    ],
+    "gif": "outputs/animations/timelapse_alt_alaska_v2.gif",
+    "gif_palette": "PIL median-cut 256색 공통 팔레트 + Floyd-Steinberg dither",
+    "frame_duration_ms": 800,
+    "frame_duration_note": "프레임당 800 ms. 단, 마지막 프레임은 1600 ms 홀드(정지 시각 확보)로 frame_duration_ms=800의 예외이다.",
+    "anomaly": {
+      "note": "연도-다년평균 ALT 편차 렌더(broc 0중심, 대칭 색축). 절대 ALT의 연간 변화가 평균 0.7%로 절대값 지도에서 비가시라, forcing 연변동을 편차로 가시화한 추가 산출물이다. 절대값 v2 산출물은 그대로 유지.",
+      "cmap": "cmcrameri broc (CMAP.diff, 0중심)",
+      "sym_clim_cm": [
+        -10.0,
+        10.0
+      ],
+      "frames": [
+        "outputs/figures/s9_timelapse/frames/anom_frame_2010.png",
+        "outputs/figures/s9_timelapse/frames/anom_frame_2011.png",
+        "outputs/figures/s9_timelapse/frames/anom_frame_2012.png",
+        "outputs/figures/s9_timelapse/frames/anom_frame_2013.png",
+        "outputs/figures/s9_timelapse/frames/anom_frame_2014.png",
+        "outputs/figures/s9_timelapse/frames/anom_frame_2015.png",
+        "outputs/figures/s9_timelapse/frames/anom_frame_2016.png",
+        "outputs/figures/s9_timelapse/frames/anom_frame_2017.png",
+        "outputs/figures/s9_timelapse/frames/anom_frame_2018.png",
+        "outputs/figures/s9_timelapse/frames/anom_frame_2019.png",
+        "outputs/figures/s9_timelapse/frames/anom_frame_2020.png",
+        "outputs/figures/s9_timelapse/frames/anom_frame_2021.png",
+        "outputs/figures/s9_timelapse/frames/anom_frame_2022.png",
+        "outputs/figures/s9_timelapse/frames/anom_frame_2023.png",
+        "outputs/figures/s9_timelapse/frames/anom_frame_2024.png"
+      ],
+      "gif": "outputs/animations/timelapse_alt_anomaly_v1.gif",
+      "frame_duration_ms": 800,
+      "frame_duration_note": "프레임당 800 ms, 마지막 프레임 1600 ms 홀드(예외)."
+    }
+  },
+  "ci_note": "headline의 temporal_holdout_rmse_ci95_cm 및 anomaly_corr_ci95는 위치 블록 부트스트랩이다: 관측 위치 key를 재표집 단위로 삼아 위치 내 상관을 보존한다. 0.5° 공간 블록이 아니라 개별 관측 위치(key) 단위 블록이다.",
+  "elapsed_s": 48.1
+}

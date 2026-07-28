@@ -1,0 +1,65 @@
+{
+  "purpose": "S8 mixture-of-physics experts 진단(어느 물리가 어느 환경서 선택되는가)",
+  "experts": [
+    "p1_stefan",
+    "p2_edaphic",
+    "p3_ttop",
+    "p4_kudryavtsev",
+    "p5_lambda"
+  ],
+  "gate_feats": [
+    "dem_elev",
+    "dem_slope",
+    "dem_aspect_sin",
+    "dem_aspect_cos",
+    "dem_tpi",
+    "dem_rough",
+    "e5_maat",
+    "e5_tdd",
+    "e5_fdd",
+    "e5_sqrt_tdd",
+    "e5_twarm",
+    "e5_tcold",
+    "e5_stl1",
+    "e5_swe"
+  ],
+  "gate_models": [
+    "logit",
+    "mlp(32,32)x3seed"
+  ],
+  "seeds_mlp": [
+    0,
+    1,
+    2
+  ],
+  "nboot": 300,
+  "smoke": false,
+  "protocol": "E fold-safe(physics.fit_E, train만)·게이트 라벨=train argmin|y-p_k|·결측 전문가 재정규화",
+  "loro_regions": [
+    "Canada",
+    "Alaska",
+    "Lena"
+  ],
+  "s2_reference_gate_cm": 22.237333333333336,
+  "loro_gate_cm": {
+    "mix_logit": 29.21766666666667,
+    "mix_mlp": 33.364333333333335,
+    "mix_mlp_seedmean": 31.552666666666667,
+    "oracle": 15.476333333333335,
+    "stefan": 22.237333333333336,
+    "uniform": 47.554
+  },
+  "indomain_ak_cm": {
+    "stefan": 14.557,
+    "uniform": 31.304,
+    "oracle": 10.341,
+    "mix_logit": 14.968,
+    "mix_mlp": 14.848,
+    "mix_mlp_seedmean": 14.564
+  },
+  "verdict": "negative",
+  "gpu": "미사용(sklearn CPU, CUDA_VISIBLE_DEVICES='')",
+  "git_commit": "cc0897b",
+  "runtime_s": 208.9,
+  "note": "oracle은 test 라벨 사용 진단 하한(모델 아님). p2~p5 결정론 예측·공변량 중앙값 대치는 S2 규약 승계(라벨 미사용). 진단 가중치는 logit 게이트(결정론) 기준."
+}

@@ -1,0 +1,165 @@
+{
+  "purpose": "E1 정통 공간통계 보간(OK·RK·IDW·지역평균) vs GBM·Stefan 물리앵커 비교표",
+  "methods": [
+    "MEAN",
+    "IDW",
+    "OK",
+    "GBM",
+    "RK",
+    "STEF"
+  ],
+  "stochastic": [
+    "GBM",
+    "RK"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "n_cells": 17422,
+  "n_alaska": 13606,
+  "full_features": [
+    "dem_elev",
+    "dem_slope",
+    "dem_aspect_sin",
+    "dem_aspect_cos",
+    "dem_tpi",
+    "dem_rough",
+    "e5_maat",
+    "e5_tdd",
+    "e5_fdd",
+    "e5_sqrt_tdd",
+    "e5_twarm",
+    "e5_tcold",
+    "e5_stl1",
+    "e5_swe",
+    "sg_clay_5_15",
+    "sg_sand_5_15",
+    "sg_silt_5_15",
+    "sg_bdod_5_15",
+    "sg_cfvo_5_15",
+    "sg_phh2o_5_15",
+    "sg_soc_0_5",
+    "sg_soc_5_15",
+    "sg_soc_15_30",
+    "insar_alt",
+    "insar_alt_std",
+    "insar_sub",
+    "insar_dist",
+    "insar_n",
+    "polsar_alt",
+    "polsar_std",
+    "polsar_valid",
+    "cci_alt",
+    "cci_valid",
+    "insar_miss"
+  ],
+  "shared_features": [
+    "dem_elev",
+    "dem_slope",
+    "dem_aspect_sin",
+    "dem_aspect_cos",
+    "dem_tpi",
+    "dem_rough",
+    "e5_maat",
+    "e5_tdd",
+    "e5_fdd",
+    "e5_sqrt_tdd",
+    "e5_twarm",
+    "e5_tcold",
+    "e5_stl1",
+    "e5_swe",
+    "sg_clay_5_15",
+    "sg_sand_5_15",
+    "sg_silt_5_15",
+    "sg_bdod_5_15",
+    "sg_cfvo_5_15",
+    "sg_phh2o_5_15",
+    "sg_soc_0_5",
+    "sg_soc_5_15",
+    "sg_soc_15_30",
+    "cci_alt",
+    "cci_valid"
+  ],
+  "variogram_model": "spherical",
+  "n_closest_points": 24,
+  "max_krig_train": 2500,
+  "loro_regions": [
+    "Canada",
+    "Alaska",
+    "Lena"
+  ],
+  "in_domain_rmse": {
+    "MEAN": 19.449,
+    "IDW": 15.8,
+    "OK": 15.773,
+    "GBM": 17.735,
+    "RK": 17.231333333333335,
+    "STEF": 14.457
+  },
+  "in_domain_rmse_seed_ensemble": {
+    "MEAN": 19.449,
+    "IDW": 15.8,
+    "OK": 15.773,
+    "GBM": 17.644,
+    "RK": 15.247,
+    "STEF": 14.457
+  },
+  "in_domain_rmse_note": "확률적 방법(GBM·RK)의 대표 RMSE는 seed평균이다. seed 앙상블 예측은 RK에서 seed0 bias≈-5.6·seed1/2 bias≈+4.3의 상쇄로 앙상블 RMSE가 seed평균보다 낮게 보이는 아티팩트라 헤드라인에서 제외한다.",
+  "variogram_sill_median_cm2": 442.0461963878583,
+  "variogram_sill_note": "in-domain OK 6-fold sill 중앙값(cm²). 공간상관 총분산 규모.",
+  "loro_gate_rmse": {
+    "MEAN": 24.835,
+    "IDW": 50.924,
+    "OK": 29.402,
+    "GBM": 41.371,
+    "RK": 36.303,
+    "STEF": 21.264
+  },
+  "loro_by_region": {
+    "MEAN": {
+      "Canada": 33.849,
+      "Alaska": 17.655,
+      "Lena": 23.002
+    },
+    "IDW": {
+      "Canada": 38.593,
+      "Alaska": 29.377,
+      "Lena": 84.802
+    },
+    "OK": {
+      "Canada": 35.417,
+      "Alaska": 30.491,
+      "Lena": 22.297
+    },
+    "GBM": {
+      "Canada": 41.492,
+      "Alaska": 33.358,
+      "Lena": 49.262
+    },
+    "RK": {
+      "Canada": 41.754,
+      "Alaska": 34.644,
+      "Lena": 32.51
+    },
+    "STEF": {
+      "Canada": 27.469,
+      "Alaska": 14.602,
+      "Lena": 21.722
+    }
+  },
+  "gate_protocol": "LORO 비가중평균(macro: Alaska·Lena·Canada), in-domain=알래스카 공간블록 6-fold",
+  "fold_safe": "variogram·GBM회귀·Stefan E 전부 train fold 내부. kriging은 test 좌표서 예측만.",
+  "findings": {
+    "q1_in_domain": "in-domain(알래스카) 대표 RMSE(seed평균): OK 15.77·IDW 15.80·RK 17.23·GBM 17.73·STEF 14.46. 정통 공간보간 OK·IDW는 공변량 GBM과 경쟁(사실상 동률~소폭 우세). 알래스카 관측이 조밀·공간자기상관 강해 좌표만으로도 GBM급 대표성. Stefan 물리앵커가 in-domain 최저. RK(회귀크리깅)는 GBM·OK 대비 열세로 이점 없음(seed평균 기준).",
+    "q2_transfer": "LORO 전이서 순수 공간보간 붕괴: IDW 게이트 50.92·OK 29.40·RK 36.30 ≫ Stefan 21.26. IDW는 레나서 폭주. covariate shift의 공간통계판.",
+    "q2_ok_caveat": "OK 레나 낮은 RMSE는 공간보간 실력이 아니라 mean 회귀 아티팩트: 레나 최근접 train(알래스카+캐나다)이 variogram range 밖이라 OK가 train 전역평균으로 수렴. 레나 평균 ≈ 알래스카+CA 평균이라 우연히 낮음(MEAN 레나와 사실상 동일). 전이서 kriging의 국소구조 정보는 소멸.",
+    "q3_physics_ml": "Stefan 물리앵커가 in-domain(14.46)·전이(21.26) 양축 최선. 정통 보간은 in-domain 경쟁하나 전이서 붕괴. RK(회귀크리깅)도 GBM covariate shift 계승. 물리+ML의 우위는 전이(OOD)이며, 물리는 앵커로만 유효.",
+    "stef_bugfix": "과거 STEF in-domain은 Part1 √TDD 셀 오정렬 버그로 왜곡(bias≈-2.5cm 아티팩트). fold-local √TDD로 교정. 교정 후 bias는 물리앵커의 정직한 계통편차를 반영.",
+    "rk_ensemble_caveat": "RK in-domain seed 앙상블 RMSE는 seed간 bias 상쇄로 부당히 낮게 보였다. 대표 지표를 seed평균으로 통일해 헤드라인·비교표·meta를 일치시켰다."
+  },
+  "gpu": "none(CPU)",
+  "git_commit": "cc0897b",
+  "smoke": false
+}

@@ -1,0 +1,76 @@
+{
+  "purpose": "S6 source-aware multi-fidelity(A5): 공유 인코더 + source별 (b_s, log σ_s), Gaussian NLL",
+  "obs_model": "y_s = z(x) + b_s + eps_s, eps_s~N(0, sigma_s(x)^2), b_direct=0 고정",
+  "sources": [
+    "direct",
+    "stefan",
+    "cci"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "nboot": 300,
+  "smoke": false,
+  "gpu": "3",
+  "git_commit": "cc0897b",
+  "enc_features": {
+    "LORO": 23,
+    "AK": 32
+  },
+  "baseline_features": {
+    "LORO": 25,
+    "AK": 34
+  },
+  "fair_regime": "보조소스(Stefan pseudo=E_train·√TDD, CCI)는 test 셀에서도 가용 취급. baseline도 cci_alt·e5_sqrt_tdd를 test 셀 feature로 사용하므로 동일 정보량. 직접 라벨은 어떤 방법도 test 것 미사용(fold-safe E, assert 배선).",
+  "fixaug_note": "S3 최적(stefan·r=10)을 표본가중 w=r·n_tr/n_te로 등가 구현(기대손실 동일)",
+  "gates_ref": {
+    "s2_stefan": 22.24,
+    "s4_anchor": 21.26
+  },
+  "loro_gate": {
+    "pool_mlp": 21.105777777777778,
+    "pool_catboost": 21.201555555555554,
+    "stefan_anchor": 21.264333333333333,
+    "fixaug_catboost": 21.27722222222222,
+    "sa_fusion": 21.527666666666665,
+    "sa_z": 21.844444444444445,
+    "direct_mlp": 34.23577777777778,
+    "physfeat_catboost": 38.0,
+    "direct_catboost": 38.42433333333333
+  },
+  "loro_cov90": {
+    "pool_catboost": 0.2878111111111111,
+    "fixaug_catboost": 0.042211111111111116,
+    "sa_fusion": 0.23194444444444443,
+    "sa_z": 0.9957666666666668,
+    "physfeat_catboost": 0.1764888888888889,
+    "direct_catboost": 0.17171111111111112
+  },
+  "loro_width90": {
+    "pool_catboost": 15.273666666666665,
+    "fixaug_catboost": 2.5,
+    "sa_fusion": 14.168888888888889,
+    "sa_z": 473.0842222222222,
+    "physfeat_catboost": 33.449666666666666,
+    "direct_catboost": 28.603000000000005
+  },
+  "width_sane": {
+    "pool_catboost": true,
+    "fixaug_catboost": true,
+    "sa_fusion": true,
+    "sa_z": false,
+    "physfeat_catboost": true,
+    "direct_catboost": true
+  },
+  "cov90_note": "cov90 우위 판정은 폭 건전성(width_90 ≤ 4·RMSE) 통과 방법만 대상. 과대폭 구간의 커버리지 1.0은 무정보(공허)로 배제한다.",
+  "b_cci_diag_note": "LORO 진단: 학습된 CCI 소스 bias b_cci는 -0.2~-0.9cm(지역 seed 평균 -0.4~-0.6). CSV(s6_source_aware_results.csv, sa_diag·source=cci·axis=LORO) 재현값이며 전 지역 seed에서 음(-)의 소폭 bias로 CCI가 실측 대비 약간 얕게 추정됨을 뜻한다.",
+  "sa_best_gate": 21.527666666666665,
+  "baseline_best_gate": 21.105777777777778,
+  "baseline_best_method": "pool_mlp",
+  "accuracy_win": false,
+  "cov90_win": false,
+  "verdict": "negative(진단 산출물만 채택)",
+  "runtime_min": 10.5
+}

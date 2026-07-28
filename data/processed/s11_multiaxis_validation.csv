@@ -1,0 +1,10 @@
+axis,protocol,best_method,metric,value,ci95,n,verdict_footnote,source
+공간블록(in-domain),"알래스카 0.5° GroupKFold 6-fold, 공변량34","Stefan 앵커+잔차(ridge·λ0.75, S4)",RMSE(cm),13.33,,13606.0,프로젝트 최저. 실측-only 최고 MLP 앙상블 14.37·Stefan 단독 14.56과 ~1cm 차,s4_residual_results.csv
+공간블록(in-domain),동일 프로토콜,"실측-only MLP(3-seed 앙상블 OOF, S1)",RMSE(cm),14.37,,13606.0,CatBoost 15.61 대비 일관 우세이나 부트스트랩 CI 0 포함(유의성 미확정),s1_baseline_oof.csv
+LORO 전이(OOD),매크로 3지역(Alaska·Lena·Canada) 비가중평균 게이트,"Stefan 앵커(최소제곱 E, S4/S6)",RMSE(cm),21.26,,3.0,실측-only ML은 34-38로 붕괴. 어떤 증강·구조(S3-S6·S8)도 앵커를 유의하게 못 넘음(pool_mlp 21.11은 동률·in-domain 파괴 대가),s6_source_aware_results.csv
+LORO 전이(OOD),동일 게이트,"Stefan 앵커(중앙값비 E, S2)",RMSE(cm),22.24,,3.0,S2 게이트 프로토콜 확정값. E 추정 개선으로 21.26까지 하락,s2_physics_results.csv
+temporal(연도 홀드아웃),"leave-one-year-out 2010-2024, 연도별 ERA5 forcing","STEFAN(a+E√TDD, S9)",RMSE(cm),14.967,"[14.72, 15.22]",99931.0,"R² 0.338. 단 within-site 연 anomaly는 예측 불가(corr +0.059 [0.029, 0.088], R²의 대부분은 공간 신호)",timelapse_alaska_results.csv; s9_timelapse_meta.json
+독립 소스 점검증,"KPDC Council 지중온도 유도 ALT(0°C 등온선), 최근접 셀 0.97km",S1 7모델 평균 vs 유도/실측 스펙트럼(S7),예측(cm),53.8,,38.0,관측 스펙트럼(ABoVE 인근 35.0 ↔ 코어 81.3 ↔ 유도 2025 중앙값 136.4) 내부이나 16층 유도 대비 과소. 알래스카 in-domain 점검증(전이 근거 아님). 38시즌 중 23 우측검열,s7_kpdc_results.csv; s7_kpdc_meta.json
+source leave-out,leave_source_out_splits(fidelity.py) 정의만 존재,미실시,-,,,,"clean 보조소스가 Stefan·CCI 2종뿐이고 둘 다 이미 공변량이라 별도 축 불성립. 대체: S6 소스별 (b_s,σ_s) 진단(b_stefan≈0 정합, b_cci 과소추정)·S7 독립 KPDC 점검증",source_overlap_matrix.csv; s6_source_aware_results.csv
+UQ 보정(cov90),"quantile CatBoost+CQR, calib=train 블록 내부 분리",CQR conformal(S11),coverage@90%,93.4,"[88.9, 96.6]",13606.0,raw 44.6%(과신) → CQR 93.4% (폭 14.7→53.6cm). in-domain 보정이며 전이 커버리지 보장 아님(S6: 전이는 전 방법 과신),s11_conformal_results.csv
+누설통제,tests/test_leakage.py (fold-safe E·라벨파생 금지·매크로 LORO 등),pytest,통과,16 passed in 3.26s,,,공변량 코어34/라벨파생7 영구제외·블록 GroupKFold·fold-safe Stefan E 강제,tests/test_leakage.py

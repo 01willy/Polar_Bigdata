@@ -1,0 +1,52 @@
+{
+ "stage": "S11",
+ "purpose": "quantile CatBoost + CQR conformal 보정 UQ (알래스카 in-domain)",
+ "protocol": {
+  "data": "fidelity_base.csv 알래스카(ABoVE_AK+US Alaska)",
+  "n": 13606,
+  "features": 34,
+  "folds": "0.5° 공간블록 GroupKFold 6",
+  "calibration": "각 fold의 train 블록 25%를 calib로 내부 분리(test 블록 무접촉, assert 배선)",
+  "model": "CatBoost MultiQuantile alpha=0.05,0.1,0.15,0.2,0.25,0.5,0.75,0.8,0.85,0.9,0.95, iters=600, lr=0.03, depth=6",
+  "crossing_fix": "분위 정렬(rearrangement)",
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "nboot_blocks": 1000
+ },
+ "n_calib_per_seed": {
+  "0": 20039,
+  "1": 11785,
+  "2": 21371
+ },
+ "headline": {
+  "cov90_raw": 0.4456,
+  "cov90_raw_ci": [
+   0.3227,
+   0.6167
+  ],
+  "width90_raw_cm": 14.65,
+  "cov90_cqr": 0.9344,
+  "cov90_cqr_ci": [
+   0.8894,
+   0.9659
+  ],
+  "width90_cqr_cm": 53.64,
+  "median_rmse_cm": 14.962333333333333
+ },
+ "prior_reference": {
+  "alt_conformal_cell": "raw 56.1→CQR 85.9% (OOF 절반분할, 프로토콜 상이)",
+  "alt_conformal_aoa": "raw 71.2→CQR 89.2%"
+ },
+ "caveats": [
+  "in-domain(알래스카 공간블록) 보정. 전이(LORO) 커버리지 보장 아님(S6에서 전이는 전 방법 과신 확인).",
+  "calibration은 train 블록 내부 분리라 기존 overnight(OOF 절반분할)보다 엄격. 수치 직접 비교 금지.",
+  "CQR 보장은 exchangeability 가정 하 marginal coverage. 공간 자기상관 존재 시 근사."
+ ],
+ "smoke": false,
+ "gpu": "미사용(CPU CatBoost, CUDA_VISIBLE_DEVICES='')",
+ "git_commit": "cc0897b",
+ "runtime_min": 4.6
+}

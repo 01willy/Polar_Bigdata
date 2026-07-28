@@ -1,0 +1,161 @@
+{
+  "purpose": "S7 KPDC 콘슬 0°C 등온선 유도 ALT vs 코어·물리·학습모델 정합(대회 KPDC 주 활용)",
+  "framing": "Council=알래스카 in-domain 점검증. 전이(LORO) 근거로 사용 금지.",
+  "council": {
+    "lat": 64.85,
+    "lon": -163.7,
+    "coord_source": "kpdc/README(파일 내 좌표 부재)"
+  },
+  "headline": {
+    "derived_2025_median_cm": 136.4,
+    "derived_2025_note": "2025 헤드라인 중앙값은 비검열 부분집합(2025 시즌·우측검열 제외·피크 커버리지 peak_days>=40, n=5) 프로파일의 조건부 추정이다. 검열 프로파일을 배제한 심부 16층 하위집단 조건부 값이므로 콘슬 전체 대표 ALT로 일반화하지 않는다.",
+    "derived_2025_ci95": [
+      75.6,
+      153.1
+    ],
+    "derived_2025_n": 5,
+    "core2022_len_mean_cm": 81.3,
+    "core2022_ci95": [
+      79.1,
+      83.3
+    ],
+    "core2022_top_mean_cm": 29.5,
+    "core2022_bot_mean_cm": 110.8,
+    "above_near_obs_mean_cm": 35.0,
+    "above_near_obs_ci95": [
+      31.0,
+      39.0
+    ],
+    "above_near_obs_n": 44,
+    "stefan_clim_cm": 59.6,
+    "stefan_year_cm": {
+      "2022": 56.6,
+      "2023": 54.0,
+      "2024": 52.5
+    },
+    "s1_models_cm": {
+      "histgbm": 47.1,
+      "mlp": 54.9,
+      "ftt": 55.0,
+      "tabm": 54.1,
+      "lightgbm": 50.7,
+      "xgboost": 62.0,
+      "catboost": 53.0
+    },
+    "s1_ens7_cm": 53.8,
+    "nearest_cell_dist_km": 0.97
+  },
+  "censoring_table": [
+    {
+      "deployment": "A",
+      "depth_max_cm": 80.0,
+      "right_censored": 1,
+      "n": 8
+    },
+    {
+      "deployment": "A",
+      "depth_max_cm": 160.0,
+      "right_censored": 1,
+      "n": 8
+    },
+    {
+      "deployment": "B",
+      "depth_max_cm": 80.0,
+      "right_censored": 0,
+      "n": 7
+    },
+    {
+      "deployment": "B",
+      "depth_max_cm": 80.0,
+      "right_censored": 1,
+      "n": 5
+    },
+    {
+      "deployment": "B",
+      "depth_max_cm": 160.0,
+      "right_censored": 0,
+      "n": 8
+    },
+    {
+      "deployment": "B",
+      "depth_max_cm": 160.0,
+      "right_censored": 1,
+      "n": 2
+    }
+  ],
+  "n_profiles": 19,
+  "n_profiles_by_deployment": {
+    "A": 8,
+    "B": 11
+  },
+  "n_profiles_note": "QC 통과 프로파일은 site_key 기준 19종이다(배치 A 8, 배치 B 11). 배치 A/B는 재설치로 분리하므로 동일 ID라도 별개 프로파일로 센다.",
+  "n_rows": 38,
+  "n_censored": 23,
+  "e_global": 1.5709542211032395,
+  "e_source": "s2_physics_meta.json",
+  "sqrt_tdd_clim": 37.94831344616257,
+  "depth_provenance": "깊이=파일 내 헤더(cm). 배치 A는 겨울 단조성 검정으로 역순 확증 후 (min+max)-d 교정(물리 추론, depth_reversed=1로 전파). 배치 B=워크북 기준본.",
+  "qc": {
+    "channel_masked": {
+      "ID03_B": [
+        "40cm: wiring(med|resid|=2.8C)"
+      ],
+      "ID21_B": [
+        "30cm: dead(zeros 100%)",
+        "110cm: wiring(med|resid|=2.7C)"
+      ],
+      "ID24_B": [
+        "110cm: dead(zeros 100%)"
+      ]
+    },
+    "period_truncated": {
+      "ID01_A": "~2024-03-31 절단(비지중 의심 월 4개)",
+      "ID01_B": "~2025-09-30 절단(비지중 의심 월 5개)"
+    },
+    "profile_excluded": {
+      "ID01_A": "비지중 기록 절단 후 잔여 없음",
+      "ID10_A": "채널-깊이 인터리브 의심(README)·단조성 모호",
+      "ID11_A": "채널-깊이 인터리브 의심(README)·단조성 모호",
+      "ID12_A": "채널-깊이 인터리브 의심(README)·단조성 모호",
+      "ID13_A": "채널-깊이 인터리브 의심(README)·단조성 모호",
+      "ID14_A": "채널-깊이 인터리브 의심(README)·단조성 모호",
+      "ID01_B": "비지중 기록 절단 후 잔여 없음",
+      "ID10_B": "겨울 단조성 모호(rho=0.02), 채널-깊이 매핑 신뢰 불가",
+      "ID14_B": "겨울 단조성 모호(rho=0.29), 채널-깊이 매핑 신뢰 불가"
+    },
+    "orientation": {
+      "ID01_A": "rho=1.00 -> as-labeled",
+      "ID02_A": "rho=-0.93 -> reversed",
+      "ID03_A": "rho=-0.98 -> reversed",
+      "ID04_A": "rho=-1.00 -> reversed",
+      "ID05_A": "rho=-1.00 -> reversed",
+      "ID21_A": "rho=-0.98 -> reversed",
+      "ID22_A": "rho=-1.00 -> reversed",
+      "ID23_A": "rho=-0.74 -> reversed",
+      "ID24_A": "rho=-1.00 -> reversed",
+      "ID01_B": "rho=1.00 -> as-labeled(기준본)",
+      "ID02_B": "rho=0.93 -> as-labeled(기준본)",
+      "ID03_B": "rho=0.98 -> as-labeled(기준본)",
+      "ID04_B": "rho=1.00 -> as-labeled(기준본)",
+      "ID05_B": "rho=1.00 -> as-labeled(기준본)",
+      "ID11_B": "rho=0.76 -> as-labeled(기준본)",
+      "ID13_B": "rho=0.83 -> as-labeled(기준본)",
+      "ID20_B": "rho=0.96 -> as-labeled(기준본)",
+      "ID21_B": "rho=0.60 -> as-labeled(기준본)",
+      "ID22_B": "rho=1.00 -> as-labeled(기준본)",
+      "ID23_B": "rho=0.94 -> as-labeled(기준본)",
+      "ID24_B": "rho=0.95 -> as-labeled(기준본)"
+    }
+  },
+  "core_interpretation": "README 규약=코어 길이(72-88cm)를 ALT 약라벨로 사용. 대안 해석(코어 상단 19-36cm=동결면, 하단 104-120cm)도 기록. 상단은 ABoVE 인근 실측(10-46cm)과, 하단은 16층 유도 ALT(116-153cm)와 정합해 해석 불확실성이 큼을 명시.",
+  "caveats": [
+    "KPDC 프로파일·코어의 개별 좌표 미상 → 사이트 대표점(64.85N,-163.70W) 비교",
+    "배치 A(2023-24) 깊이 역순 교정은 물리 추론(겨울 단조성) 근거",
+    "배치 A 전 시즌 우측 검열(전층 양수) = 심부 미동결 구간(탈릭 의심) 포함 가능",
+    "유도 ALT는 연도별(2023-2025), Stefan 다년평균·S1 OOF는 정적 다년평균 대상",
+    "확률 모델 없음(결정론적 파싱·유도) → seed 반복 비적용, CI는 부트스트랩"
+  ],
+  "nboot": 10000,
+  "smoke": false,
+  "runtime_s": 27.0
+}

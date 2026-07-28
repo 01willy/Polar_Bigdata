@@ -1,0 +1,90 @@
+{
+  "purpose": "S7 KPDC Council 지중온도 프로파일 파싱 + 0C 등온선 ALT 유도",
+  "source_files": [
+    "kpdc/council/soil_temp/daily_profile_ID/ID01_Day_SoilTemperature.xlsx",
+    "kpdc/council/soil_temp/daily_profile_ID/ID01_Day_soil_2024-2025.xlsx",
+    "kpdc/council/soil_temp/daily_profile_ID/ID02_Day_SoilTemperature.xlsx",
+    "kpdc/council/soil_temp/daily_profile_ID/ID03_Day_SoilTemperature.xlsx",
+    "kpdc/council/soil_temp/daily_profile_ID/ID04_Day_SoilTemperature.xlsx",
+    "kpdc/council/soil_temp/daily_profile_ID/ID05_Day_SoilTemperature.xlsx",
+    "kpdc/council/soil_temp/daily_profile_ID/ID10_Day_SoilTemperature.xlsx",
+    "kpdc/council/soil_temp/daily_profile_ID/ID11_Day_SoilTemperature.xlsx",
+    "kpdc/council/soil_temp/daily_profile_ID/ID12_Day_SoilTemperature.xlsx",
+    "kpdc/council/soil_temp/daily_profile_ID/ID13_Day_SoilTemperature.xlsx",
+    "kpdc/council/soil_temp/daily_profile_ID/ID14_Day_SoilTemperature.xlsx",
+    "kpdc/council/soil_temp/daily_profile_ID/ID21_Day_SoilTemperature.xlsx",
+    "kpdc/council/soil_temp/daily_profile_ID/ID22_Day_SoilTemperature.xlsx",
+    "kpdc/council/soil_temp/daily_profile_ID/ID23_Day_SoilTemperature.xlsx",
+    "kpdc/council/soil_temp/daily_profile_ID/ID24_Day_SoilTemperature.xlsx"
+  ],
+  "council_coords": {
+    "lat": 64.85,
+    "lon": -163.7,
+    "source": "kpdc/README.md(파일 내 좌표 부재, KPDC 메타 근사)"
+  },
+  "depth_provenance": "깊이=파일 내 헤더(cm). 배치 A는 겨울 단조성 검정으로 역순 확증 후 (min+max)-d 교정(물리 추론, depth_reversed=1로 전파). 배치 B=워크북 기준본.",
+  "deployment_break": "2024-09 재설치로 배치 A/B 심부 온도 불연속. site_key 분리, 병합 금지.",
+  "season_window": "5-10월",
+  "qc": {
+    "channel_masked": {
+      "ID03_B": [
+        "40cm: wiring(med|resid|=2.8C)"
+      ],
+      "ID21_B": [
+        "30cm: dead(zeros 100%)",
+        "110cm: wiring(med|resid|=2.7C)"
+      ],
+      "ID24_B": [
+        "110cm: dead(zeros 100%)"
+      ]
+    },
+    "period_truncated": {
+      "ID01_A": "~2024-03-31 절단(비지중 의심 월 4개)",
+      "ID01_B": "~2025-09-30 절단(비지중 의심 월 5개)"
+    },
+    "profile_excluded": {
+      "ID01_A": "비지중 기록 절단 후 잔여 없음",
+      "ID10_A": "채널-깊이 인터리브 의심(README)·단조성 모호",
+      "ID11_A": "채널-깊이 인터리브 의심(README)·단조성 모호",
+      "ID12_A": "채널-깊이 인터리브 의심(README)·단조성 모호",
+      "ID13_A": "채널-깊이 인터리브 의심(README)·단조성 모호",
+      "ID14_A": "채널-깊이 인터리브 의심(README)·단조성 모호",
+      "ID01_B": "비지중 기록 절단 후 잔여 없음",
+      "ID10_B": "겨울 단조성 모호(rho=0.02), 채널-깊이 매핑 신뢰 불가",
+      "ID14_B": "겨울 단조성 모호(rho=0.29), 채널-깊이 매핑 신뢰 불가"
+    },
+    "orientation": {
+      "ID01_A": "rho=1.00 -> as-labeled",
+      "ID02_A": "rho=-0.93 -> reversed",
+      "ID03_A": "rho=-0.98 -> reversed",
+      "ID04_A": "rho=-1.00 -> reversed",
+      "ID05_A": "rho=-1.00 -> reversed",
+      "ID21_A": "rho=-0.98 -> reversed",
+      "ID22_A": "rho=-1.00 -> reversed",
+      "ID23_A": "rho=-0.74 -> reversed",
+      "ID24_A": "rho=-1.00 -> reversed",
+      "ID01_B": "rho=1.00 -> as-labeled(기준본)",
+      "ID02_B": "rho=0.93 -> as-labeled(기준본)",
+      "ID03_B": "rho=0.98 -> as-labeled(기준본)",
+      "ID04_B": "rho=1.00 -> as-labeled(기준본)",
+      "ID05_B": "rho=1.00 -> as-labeled(기준본)",
+      "ID11_B": "rho=0.76 -> as-labeled(기준본)",
+      "ID13_B": "rho=0.83 -> as-labeled(기준본)",
+      "ID20_B": "rho=0.96 -> as-labeled(기준본)",
+      "ID21_B": "rho=0.60 -> as-labeled(기준본)",
+      "ID22_B": "rho=1.00 -> as-labeled(기준본)",
+      "ID23_B": "rho=0.94 -> as-labeled(기준본)",
+      "ID24_B": "rho=0.95 -> as-labeled(기준본)"
+    }
+  },
+  "n_profiles": 19,
+  "n_alt_rows": 38,
+  "n_profiles_by_deployment": {
+    "A": 8,
+    "B": 11
+  },
+  "n_profiles_note": "QC 통과 프로파일은 site_key 기준 19종이다(배치 A 8, 배치 B 11). 배치 A/B는 재설치로 분리하므로 동일 ID라도 별개 프로파일로 센다.",
+  "n_censored": 23,
+  "smoke": false,
+  "runtime_s": 2.7
+}
