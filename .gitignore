@@ -82,3 +82,13 @@ docs/report/*.aux
 docs/report/*.log
 docs/report/*.out
 outputs/*.docx
+
+# 보고서 위치 이전(docs/report -> outputs/report) 반영
+outputs/report/*.aux
+outputs/report/*.log
+outputs/report/*.out
+outputs/report/*.docx
+outputs/report/*.pdf
+outputs/*.hwp
+# CatBoost 학습 부산물
+catboost_info/

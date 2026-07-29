@@ -3,23 +3,24 @@
     {
       "id": "data_inventory_world",
       "script": "scripts/4_visualization/map_data_inventory_world.py",
-      "intent": "보유·신규 확보 관측 데이터의 공간 분포와 지역별 데이터 가용성을 한 장에 요약한다.",
+      "intent": "관측 자료의 공간 분포와 지역별 자료 가용성을 한 장에 요약한다.",
       "layout": {
         "panels": 2,
-        "arrangement": "상단 세계지도(25-84N, ERA5 육지 마스크 배경) + 하단 지역x데이터 가용성 매트릭스(7x7), 패널 라벨 (a)/(b)",
+        "arrangement": "(a) 세계지도(25-84N, ERA5 육지 마스크 배경) + (b) 지역(8)x자료(7) 가용성 매트릭스. 두 패널의 라벨 포함 좌측 경계를 맞추기 위해 gridspec 분리(지도 left=0.105, 매트릭스 left=0.150), 패널 라벨 (a)/(b) 도형상 x 정렬",
         "figsize_in": [
-          16.5,
-          13.5
+          12.6,
+          11.2
         ]
       },
       "assets": [
         "data/raw/era5land/nh_monthly_2015-2020.nc (t2m 첫 timestep 육지 마스크)",
         "data/processed/dl_dataset_cell.csv (ALT 14,348 셀)",
         "data/processed/ground_temp_all.csv (지중온도 260 사이트)",
-        "data/raw/allena/PANGAEA_973813_ALLena_main.txt (레나델타 신규 ALT)",
-        "QTEC 2 사이트 좌표(WMO 지점: Wudaoliang 35.22N 93.08E, Golmud 36.42N 94.90E)"
+        "data/raw/allena/PANGAEA_973813_ALLena_main.txt (레나델타 ALT 3,956 위치)",
+        "QTEC 2 사이트 좌표(WMO 지점: Wudaoliang 35.22N 93.08E, Golmud 36.42N 94.90E)",
+        "data/processed/s7_council_alt_derived.csv (KPDC Council 유도 ALT 프로파일 수)"
       ],
-      "style": "polar.plotstyle.use_polar, ALT 점=CMAP.alt 냉색, 지온=^, 신규 ALLena='x' 마커+강조색(색 단독 부호화 금지), 커버리지 박스=점선, 해양/결측=BAD(#e9ecef)·육지=백색, 붉은 계열·rainbow 금지, pdf.fonttype=42",
+      "style": "polar.plotstyle.use_polar. 저채도 냉색 4단 팔레트(#2f4b6e 진청·#4a7c8c 청록·#8296a8 청회·#b8c4d0 연청회). 강조는 진청 1색만, 나머지는 회청 계열. 현장 지점은 마커 형태(P/x/*)로도 구분(색 단독 부호화 금지). 매트릭스 셀은 저채도 4단(#7d94a8/#a9bbc8/#d4dce2/#eef1f3), 진한 남색 채움 금지. 해양/결측=BAD(#e9ecef)·육지=백색. 폰트 위계: 축라벨 10.5·눈금 9.5·범례 9.5·패널라벨 11 bold, 그 외 bold 미사용. 범례 테두리 옅게(#d5dae0) 또는 frameon=False. 그림 내부 제목 없음(캡션이 대신), 내부 단계코드·내부 명명 미노출. 붉은 계열·rainbow 금지, pdf.fonttype=42",
       "exports": [
         "outputs/maps/data_inventory_world.png",
         "outputs/maps/data_inventory_world.pdf"
@@ -72,11 +73,15 @@
       "script": "scripts/4_visualization/s9_timelapse_figs.py",
       "intent": "연도별 ERA5-Land forcing x fold-safe Stefan(E,a)로 2010-2024 연별 ALT 지도를 전 위치(197,648) dense로 재렌더하고, 고정 색축 GIF로 시간 변동을 제시한다. 연 anomaly 예측불가(corr 0.06)는 각 프레임 각주로 명시한다.",
       "layout": {
-        "panels": "프레임 1장/연도(15장) + 대표 4연도 패널(2x2, 공통 컬러바)",
-        "arrangement": "cartopy AlbersEqualArea, ABoVE 영역(알래스카+서부 캐나다), hexbin 셀통계(median), mask_ocean, 연도 스탬프+실측 n 주석, 하단 정직 각주",
+        "panels": "프레임 1장/연도(15장, GIF 전용) + 대표 4연도 패널 2종(절대값·편차, 각 2x2, 공통 컬러바)",
+        "arrangement": "cartopy AlbersEqualArea, ABoVE 영역(알래스카+서부 캐나다), hexbin 셀통계(median), mask_ocean. 프레임=연도 스탬프+실측 n 주석+하단 정직 각주(GIF 판독용). 패널=제목·각주 없음(캡션 대체), 패널 라벨 (a)-(d), 격자 라벨은 왼쪽 열·아래 행만",
         "figsize_in": [
           7.6,
           5.2
+        ],
+        "panel_figsize_in": [
+          11.8,
+          7.6
         ]
       },
       "assets": [
@@ -84,11 +89,14 @@
         "data/processed/timelapse_alaska_meta.json (연도별 fold-safe Stefan E,a + 평가 수치)",
         "data/processed/timelapse_alaska_oof.csv (temporal holdout OOF, 부트스트랩 CI 산출)"
       ],
-      "style": "CMAP.alt(oslo_r 절단) 고정 vmin/vmax(전 연도 공통), 붉은 계열·rainbow 금지, 컬러바 단위 cm, 프레임 픽셀 크기 고정(bbox tight 미사용)",
+      "style": "CMAP.alt(oslo_r 절단) 고정 vmin/vmax(전 연도 공통), 편차=CMAP.diff(broc, 0중심 대칭), 붉은 계열·rainbow 금지, 컬러바 단위 cm, 프레임 픽셀 크기 고정(bbox tight 미사용). 패널 2종은 dpi 300 고정 캔버스(bbox tight 미사용)로 저장하여 픽셀 치수 동일(3540x2280 px), 격자·컬러바 틱·n= 라벨 12pt(인쇄폭 8~17cm 축소 대비)",
       "exports": [
-        "outputs/figures/s9_timelapse/frames/frame_YYYY.png (15장)",
-        "outputs/figures/s9_timelapse/alt_year_panels_v2.png/pdf",
+        "outputs/figures/s9_timelapse/frames/frame_YYYY.png (15장, GIF 전용 중간산출물: 방법론 제목·각주 포함, 보고서 직접 게재 금지)",
+        "outputs/figures/s9_timelapse/frames/anom_frame_YYYY.png (15장, GIF 전용 중간산출물, 동일 규약)",
+        "outputs/figures/s9_timelapse/alt_year_panels_v2.png/pdf (게재용 정지 그림)",
+        "outputs/figures/s9_timelapse/alt_anom_year_panels_v1.png/pdf (게재용 정지 그림, 절대값 패널과 동일 픽셀 치수)",
         "outputs/animations/timelapse_alt_alaska_v2.gif (PIL 공통 adaptive palette + FS dither)",
+        "outputs/animations/timelapse_alt_anomaly_v1.gif (편차 GIF, 동일 팔레트 규약)",
         "data/processed/s9_timelapse_meta.json"
       ]
     },
@@ -351,21 +359,91 @@
       "role": "presentation_aid_only"
     },
     {
+      "id": "s0_spatial_block_folds_map",
+      "script": "scripts/4_visualization/s0_schema_figs.py (인자 spatial_block_folds_map 로 단독 재생성)",
+      "intent": "0.5° 공간블록을 통째로 하나의 교차검증 폴드에 배정한다는 사실을 지도에서 직접 보이게 한다. 블록 경계를 실선으로 그리고, 확대 패널에서 한 칸 안의 모든 관측이 같은 색임을 노출한다. 그림 내부 제목은 두지 않는다.",
+      "layout": {
+        "panels": 3,
+        "arrangement": "(a) 범북극 위치 맥락(NorthPolarStereo 원형, 관측 점 + 알래스카 범위 사각형 + 66.5°N 참조 파선) · (b) 알래스카(AlbersEqualArea, 관측 보유 0.5° 블록을 폴드 색 사각형으로 + 확대 범위 사각형) · (c) 68.5-69.5°N, 151-148°W 확대(0.5° 블록 격자 실선 6x2칸, 칸별 폴드 라벨, 칸 내부 관측 산점). 패널 라벨 좌상단 (a)/(b)/(c), suptitle 없음, 하단 공통 범례 1개(폴드 1-6 + 관측 없는 블록), (b) 300 km 축척 막대는 좌하단 · (c) 10 km 축척 막대는 관측 없는 우하단 블록에 두어 칸 라벨과 분리. 패널 폭은 투영 후 가로/세로 비를 width_ratios로 정렬하고, 원형 패널 (a)는 (b)(c)의 눈금 라벨 하단까지 높이를 늘려 세로 여백을 없앤다(1차 draw에서 tightbbox 측정 후 set_position). 패널 라벨 (a)(b)(c)는 그림 좌표의 공통 y에 배치해 높이 조정과 무관하게 한 줄로 정렬.",
+        "figsize_in": [
+          11.2,
+          3.9
+        ]
+      },
+      "assets": [
+        "data/processed/fidelity_base.csv (add_group_keys + spatial_block_splits 재계산, 경량)",
+        "cartopy 50m 육지·해양·해안선·국경 (polar.geomap.make_ax, ALASKA/PANARCTIC 프리셋)"
+      ],
+      "style": "use_polar + 저채도 이산 팔레트 FOLD_COLORS=[#2f4b6e,#4a7c8c,#59636b,#7fa38a,#9b93ac,#aeb9c2] (CIELAB 최소 색차 15.3, 육지·해양 배경 대비 20 이상, 빨강·주황·rainbow 금지). 폴드는 명목 범주이므로 컬러바 대신 이산 범례. 색 단독 부호화를 피해 확대 패널의 칸마다 '폴드 k' 텍스트 병기. 칸 라벨은 셀 안 6개 후보 위치(위·아래 × 좌·우·가운데)의 텍스트 bbox를 렌더러로 재어 관측 마커 중심과 축척 막대 bbox에 걸리지 않는 첫 위치를 채택하고, 관측이 셀 전면에 깔려 회피가 불가능한 칸만 글자 윤곽을 따르는 두꺼운 흰 마스크(3.6pt)로 처리한다(색칠 상자 금지). 확대 패널 산점은 alpha 0.7로 최밀집 구역의 중첩 정도를 노출하고, 점 테두리는 동일 색상 어둡게(0.35pt). 패널 라벨 (a) 11pt bold + 설명어 10pt regular, 눈금 라벨 9pt, 범례 9.5pt, 칸 라벨 7.5pt(#444), 축척·위도 참조 8-8.5pt. 투영 안내 텍스트·주석 상자 없음. dpi 300 PNG + PDF(pdf.fonttype=42, NanumGothic subset 임베딩, bbox_inches tight)",
+      "exports": [
+        "outputs/figures/s0_schema/spatial_block_folds_map.png",
+        "outputs/figures/s0_schema/spatial_block_folds_map.pdf"
+      ]
+    },
+    {
+      "id": "s7_alt_comparison",
+      "script": "scripts/3_deep_learning/s7_kpdc_validation.py (FIGS_ONLY=1 로 그림만 재생성)",
+      "intent": "KPDC 콘슬 지중온도에서 유도한 0°C 등온선 ALT가 코어 길이·인근 실측·Stefan 물리·학습모델 예측과 어느 범위에서 어긋나는지를 한 축(cm)에서 대조한다. 관측 방식에 따라 35~136 cm로 벌어진다는 것이 단일 메시지다.",
+      "layout": {
+        "panels": 1,
+        "arrangement": "단일 축, x=비교 대상 6열(유도 ALT·검열 하한·코어 길이·인근 실측·Stefan·학습모델), y=활동층 두께 ALT(cm) 정방향(0 아래). 요약값은 마름모+95% CI, 개별값은 작은 표식. 그림 내부 제목 없음",
+        "figsize_in": [
+          9.2,
+          5.0
+        ],
+        "aspect_note": "보고서 3열 배치(폭 0.32\\textwidth) 기준 종횡비 1.84"
+      },
+      "assets": [
+        "data/processed/s7_council_alt_derived.csv (0°C 등온선 유도 ALT·검열 플래그·센서 구간 alt_lo/alt_hi)",
+        "data/processed/s7_kpdc_results.csv (코어 2022 18개)",
+        "data/processed/s7_kpdc_meta.json (headline: 중앙값·평균·부트스트랩 95% CI·Stefan·학습모델)",
+        "data/processed/fidelity_base.csv (인근 3 km 이내 실측 셀)"
+      ],
+      "style": "polar.plotstyle.use_polar. 저채도 냉색 4단(#2f4b6e 진청·#4a7c8c 청록·#8296a8 청회·#b8c4d0 연청회), 채도 높은 원색·붉은 계열·rainbow 금지. 범주는 표식 모양으로도 구분(색 단독 부호화 금지). 폰트 위계: 축라벨 10.5·눈금 9.5·범례 9·주석 8~8.5(#444), 패널라벨 (a) 11 bold, 그 외 bold 미사용. 범례 frameon=False, 격자 alpha 0.25·lw 0.5, spine 좌·하만, 색칠 콜아웃 박스 없음. 그림 내부 제목 없음(캡션이 대신), 내부 단계코드·내부 명명 미노출. PNG dpi 300 + 동일 basename PDF, pdf.fonttype=42. 통계 표기는 모두 범례에서 정의한다: 개별 점의 세로선=인접 센서 깊이 구간[alt_lo, alt_hi](측정 불확실성 아님), 상자=사분위수(Q1–Q3)·수염=1.5×IQR, 마름모=중앙값·평균 [95% CI], 삼각+수평선=검열 하한. 표식과 텍스트의 값 이중 부호화 금지(값은 표식 위치로만 읽고 텍스트는 이름만 병기)",
+      "exports": [
+        "outputs/figures/s7_kpdc/s7_alt_comparison.png",
+        "outputs/figures/s7_kpdc/s7_alt_comparison.pdf"
+      ]
+    },
+    {
+      "id": "s7_council_map",
+      "script": "scripts/3_deep_learning/s7_kpdc_validation.py (FIGS_ONLY=1 로 그림만 재생성)",
+      "intent": "KPDC 콘슬 사이트가 알래스카 어디에 있고 인근 ABoVE 실측 셀과 얼마나 가까운지를 광역·확대 2단으로 보여 대회 자료가 학습 표본과 근접함을 확인한다.",
+      "layout": {
+        "panels": 2,
+        "arrangement": "(a) 알래스카 광역 위치도(AlbersEqualArea, 북극 inset locator) / (b) 사이트 반경 3 km 확대도(실측 ALT 색부호·군집별 평균 라벨·축척 막대). 두 패널 높이 동일, 폭은 투영 종횡비에 비례(약 1.2:1). 그림 내부 제목 없음",
+        "figsize_in": [
+          9.8,
+          4.4
+        ],
+        "aspect_note": "확대 패널은 경도 여백을 넓혀 투영 종횡비를 1에 맞춘다. 두 패널 높이를 같게 유지하면서 폭 비를 1.2:1로 좁혀 좌우 비대칭과 패널 간 과대 여백을 함께 줄인다"
+      },
+      "assets": [
+        "data/processed/fidelity_base.csv (인근 3 km 이내 ABoVE 실측 셀 44개)",
+        "kpdc/README (콘슬 대표 좌표 64.85N, -163.70W)"
+      ],
+      "style": "polar.plotstyle.use_polar. 저채도 냉색 4단(#2f4b6e 진청·#4a7c8c 청록·#8296a8 청회·#b8c4d0 연청회), 채도 높은 원색·붉은 계열·rainbow 금지. 범주는 표식 모양으로도 구분(색 단독 부호화 금지). 폰트 위계: 축라벨 10.5·눈금 9.5·범례 9·주석 8~8.5(#444), 패널라벨 (a) 11 bold, 그 외 bold 미사용. 범례 frameon=False, 격자 alpha 0.25·lw 0.5, spine 좌·하만, 색칠 콜아웃 박스 없음. 그림 내부 제목 없음(캡션이 대신), 내부 단계코드·내부 명명 미노출. PNG dpi 300 + 동일 basename PDF, pdf.fonttype=42. 지도 배경은 polar.geomap 규약(육지 #efece6·해양 #eaf1f4·해안선 0.5pt), 실측 ALT는 CMAP.alt(oslo_r 절단) + 컬러바 범위 5~95 분위수로 과포화 방지. 사이트 대표점은 붉은 별 금지·중립 진회 별(백색 테두리). 확대 패널의 모든 점 군집은 단일연결(200 m) 군집화 후 평균·개수 라벨을 붙이며, 고립 관측(n=1)은 평균이 아니라 관측값으로 표기해 라벨 누락을 만들지 않는다",
+      "exports": [
+        "outputs/figures/s7_kpdc/s7_council_map.png",
+        "outputs/figures/s7_kpdc/s7_council_map.pdf"
+      ]
+    },
+    {
       "id": "s11_calibration_curve",
       "script": "scripts/4_visualization/s11_uq_figs.py",
       "intent": "quantile CatBoost 90% 구간의 과신을 CQR conformal이 명목 커버리지로 보정함을 calibration 곡선과 cov90 전후 막대로 제시한다.",
       "layout": {
         "panels": 2,
-        "arrangement": "좌: 명목 vs 실제 커버리지 곡선(raw·CQR, 블록 부트스트랩 CI 음영, seed 산점) + 대각선 / 우: cov90 전후 막대(CI·목표 90% 점선·폭 주석)",
+        "arrangement": "좌: 명목 vs 실제 커버리지 곡선(보정 전·후, 공간블록 부트스트랩 95% CI 음영, 반복별 산점) + 이상적 보정 대각선 / 우: 90% 구간 커버리지 전후 막대(동일 부트스트랩 CI 오차막대·목표 90% 점선·구간폭 주석). 폭 비 1.15:1, 범례는 그림 하단 외부 3열. 그림 내부 제목 없음",
         "figsize_in": [
-          10.6,
-          4.6
+          8.4,
+          3.7
         ]
       },
       "assets": [
         "data/processed/s11_conformal_results.csv"
       ],
-      "style": "raw=회청·CQR=진청, 축 라벨 %, 폭 주석 cm",
+      "style": "polar.plotstyle.use_polar. 저채도 냉색 4단(#2f4b6e 진청·#4a7c8c 청록·#8296a8 청회·#b8c4d0 연청회), 채도 높은 원색·붉은 계열·rainbow 금지. 범주는 표식 모양으로도 구분(색 단독 부호화 금지). 폰트 위계: 축라벨 10.5·눈금 9.5·범례 9·주석 8~8.5(#444), 패널라벨 (a) 11 bold, 그 외 bold 미사용. 범례 frameon=False, 격자 alpha 0.25·lw 0.5, spine 좌·하만, 색칠 콜아웃 박스 없음. 그림 내부 제목 없음(캡션이 대신), 내부 단계코드·내부 명명 미노출. PNG dpi 300 + 동일 basename PDF, pdf.fonttype=42. 보정 전=청회(#8296a8)·보정 후=진청(#2f4b6e) 2단만 사용. 두 패널의 음영과 오차막대는 동일한 공간블록 부트스트랩 95% CI이며 범례에 '음영 · 오차막대 공통'으로 명시한다. 축 라벨 %, 구간폭 주석 cm",
       "exports": [
         "outputs/figures/s11_uq/s11_calibration_curve.png",
         "outputs/figures/s11_uq/s11_calibration_curve.pdf"
@@ -433,6 +511,226 @@
         "outputs/figures/s11_uq/s11_multiaxis_table.png",
         "outputs/figures/s11_uq/s11_multiaxis_table.pdf"
       ]
+    },
+    {
+      "id": "s4_indomain_vs_transfer",
+      "script": "scripts/4_visualization/s4_residual_figs.py (인자 s4_indomain_vs_transfer 로 단독 재생성)",
+      "intent": "Stefan 앵커에 잔차 성분을 λ만큼 더할 때 지역 내 정확도는 개선되나 지역 간 전이는 악화됨을 한 장으로 보인다.",
+      "layout": {
+        "panels": 1,
+        "arrangement": "단일 축, x=잔차 가중 λ(0-1), y=RMSE(cm), 모델 3계열(표식 원·삼각·마름모) x 검증축 2종(실선·채운 표식=지역 내, 파선·빈 표식=지역 간 전이), 그림 내부 제목 없음(캡션 대체)",
+        "figsize_in": [
+          4.9,
+          4.2
+        ],
+        "aspect_note": "보고서 2열 배치(폭 0.5\\textwidth) 기준 종횡비 1.16. 짝 그림 transfer_loro_summary(1.14)와 높이 정합"
+      },
+      "assets": [
+        "data/processed/s4_residual_results.csv (spatial_block_AK = 지역 내, LORO_gate = 지역 간 전이, featset shift14)"
+      ],
+      "style": "저채도 냉색 3색(#8296a8·#4a7c8c·#2f4b6e), 모델은 표식 모양(o·^·D), 검증축은 선형태+표식 채움으로 이중 부호화(색 단독 금지), 전이 곡선에 지역 간 표준오차(n=3) 오차막대, 범례 frameon=False·9pt·내부 코드명 미노출, 격자 alpha 0.25, spine 좌·하만, pdf.fonttype=42",
+      "exports": [
+        "outputs/figures/s4_residual/s4_indomain_vs_transfer.png",
+        "outputs/figures/s4_residual/s4_indomain_vs_transfer.pdf"
+      ]
+    },
+    {
+      "id": "s2_physics_loro_bars",
+      "script": "scripts/4_visualization/s2_physics_figs.py (인자 physics_loro_bars 로 단독 재생성)",
+      "intent": "물리경험식 5종과 그 평균의 지역 간 전이 RMSE를 비교해 기본 Stefan만 전 지역에서 정확함을 보인다.",
+      "layout": {
+        "panels": 1,
+        "arrangement": "가로 막대 6항목(Stefan·edaphic·TTOP·Kudryavtsev·열전도도 보정·5종 평균) × 지역 3(Alaska·Canada·Lena)",
+        "figsize_in": [
+          2.95,
+          2.85
+        ]
+      },
+      "assets": [
+        "data/processed/s2_physics_results.csv"
+      ],
+      "style": "저채도 냉색 3단계(#2f4b6e·#7d97ab·#c3ccd5), 테두리 없음, x축 격자만, 좌·하 spine, 그림 내 제목 없음",
+      "exports": [
+        "outputs/figures/s2_physics/physics_loro_bars.png",
+        "outputs/figures/s2_physics/physics_loro_bars.pdf"
+      ]
+    },
+    {
+      "id": "s3_aug_response_curves",
+      "script": "scripts/4_visualization/s3_aug_curve_figs.py",
+      "intent": "유사라벨 증강비율 r에 따른 개선폭 ΔRMSE를 전이 대상별로 제시한다. 정확한 물리(Stefan)는 개선, 부정확한 물리(Kudryavtsev)는 악화시킨다.",
+      "layout": {
+        "panels": 2,
+        "arrangement": "2행 1열 ((a) Canada 전이 / (b) Lena 전이). 색=유사라벨 종류, 선 종류=모델, 음영=난수 3회 ±1σ",
+        "figsize_in": [
+          2.95,
+          2.85
+        ]
+      },
+      "assets": [
+        "data/processed/s3_aug_curve_results.csv",
+        "data/processed/s3_aug_curve_results_ftt.csv"
+      ],
+      "style": "Stefan #2f4b6e · Kudryavtsev #4a7c8c · 대조 #a7b3c0, 범례 테두리 없음, 공통 y라벨(supylabel)",
+      "exports": [
+        "outputs/figures/s3_aug/aug_response_curves.png",
+        "outputs/figures/s3_aug/aug_response_curves.pdf"
+      ]
+    },
+    {
+      "id": "s3_physics_net_value",
+      "script": "scripts/4_visualization/s3_aug_curve_figs.py",
+      "intent": "같은 r에서 Stefan 라벨과 대조(상수 라벨)의 개선폭 차이로 물리 정보 자체의 순가치를 분리해 제시한다.",
+      "layout": {
+        "panels": 1,
+        "arrangement": "단일 축, 색=모델(CatBoost·FT-Transformer), 선 종류=전이 대상(Canada 실선·Lena 파선)",
+        "figsize_in": [
+          2.95,
+          2.85
+        ]
+      },
+      "assets": [
+        "data/processed/s3_aug_curve_results.csv",
+        "data/processed/s3_aug_curve_results_ftt.csv"
+      ],
+      "style": "저채도 냉색 2색, 0 기준 파선, 범례 테두리 없음",
+      "exports": [
+        "outputs/figures/s3_aug/physics_net_value.png",
+        "outputs/figures/s3_aug/physics_net_value.pdf"
+      ]
+    },
+    {
+      "id": "s1_model_comparison_bars",
+      "script": "scripts/4_visualization/s1_baseline_figs.py (인자 --only model_comparison_bars 로 단독 재생성)",
+      "intent": "실측 라벨만으로 학습한 모델 7종이 지역 내에서는 관측 대표성 하한 부근에 몰려 동률을 이루나, 지역 간 전이에서는 평가 지역에 따라 오차가 크게 벌어짐을 한 장으로 보인다.",
+      "layout": {
+        "panels": 2,
+        "arrangement": "2행 1열 가로 방향. (a) 지역 내 RMSE 가로 막대 7종(난수 3회 ±1 표준편차 오차막대, 값 라벨 소수 첫째 자리, 14 cm 대표성 하한 파선) + (b) 지역 간 전이 점도표(모델 행 x 평가 지역 3, 표식 o·s·^ + 색 이중 부호화, 반복이 있는 모델만 오차막대). 두 패널의 모델 순서는 지역 내 RMSE 오름차순 공유, 그림 내부 제목 없음, 하단 각주 2줄로 오차막대 정의와 반복 수 차이를 명시",
+        "figsize_in": [
+          3.46,
+          3.18
+        ],
+        "placement_note": "보고서 main.tex의 figure* 안 subfigure 0.50\\textwidth = 88 mm에 실제 크기(축소율 1.0)로 배치. 폰트는 인쇄 기준 pt로 직접 지정(축라벨 6.6·눈금 6.0·값라벨 5.6·각주 5.2). 종전 9.6 in 렌더는 축소율 0.36이 걸려 인쇄물에서 3 pt대가 되었다"
+      },
+      "assets": [
+        "data/processed/s1_baseline_results.csv (cv=spatial_block_AK 난수 3회, cv=LORO 지역 3 x 난수 3회(신경망)·1회(부스팅))"
+      ],
+      "style": "저채도 냉색(#8296a8 막대, 점도표 #9aabbb·#4a7c8c·#2f4b6e), 좌·하 spine, 세로 격자 alpha 0.3, 범례 frameon=False, 내부 단계코드·내부 명명 미노출(LORO→지역 간 전이, in-domain→지역 내), 값 라벨은 (a)에만(21개 점에 라벨을 달면 단 폭에서 겹침), pdf.fonttype=42, PNG dpi 600 + PDF",
+      "exports": [
+        "outputs/figures/s1_baseline/model_comparison_bars.png",
+        "outputs/figures/s1_baseline/model_comparison_bars.pdf"
+      ]
+    },
+    {
+      "id": "s1_alaska_obs_vs_pred_maps",
+      "script": "scripts/4_visualization/s1_baseline_figs.py (인자 --only alaska_obs_vs_pred_maps 로 단독 재생성)",
+      "intent": "관측 ALT와 상위 3모델 예측의 공간 패턴을 같은 색축으로 비교하고, 관측이 소수 밀집 사이트에 집중된 공간 대표성 한계를 확대창으로 함께 보인다.",
+      "layout": {
+        "panels": 4,
+        "arrangement": "2x2 cartopy AlbersEqualArea(ALASKA), 공통 컬러바 1개(oslo_r 절단, vmin 25·vmax 90 cm, extend=both), 패널 라벨 (a)-(d), 각 패널 우하단 배로 250 m 격자 확대창, (a)에만 범북극 위치 inset과 200 km 스케일바, 경위도 라벨은 좌열·하행만(경도 3·위도 3 눈금), 하단 각주 2줄에 색축 절단 비율·확대창 표본 수·괄호 수치 정의",
+        "figsize_in": [
+          3.26,
+          2.62
+        ],
+        "placement_note": "보고서 main.tex의 figure* 안 subfigure 0.47\\textwidth = 83 mm에 실제 크기로 배치. 짝 그림 s1_model_comparison_bars와 인쇄 높이를 2.7 대 3.2 in로 맞춘다"
+      },
+      "assets": [
+        "data/processed/s1_baseline_oof.csv (알래스카 13,606셀 OOF, 난수 3회 평균 예측)",
+        "data/processed/s1_baseline_results.csv (패널 제목의 지역 내 RMSE)"
+      ],
+      "style": "CMAP.alt(oslo_r 절단) 순차형, 산점 s=1.6·alpha 0.5·rasterized(글자는 벡터 유지), 확대창 표식 s=2.2, 색축 절단 비율은 그림 안에서 정량 표기(관측 하한 미만 3.1%·상한 초과 2.2%, 예측 절단 없음), 붉은 계열·rainbow 금지, 각주·격자 라벨 5.2 pt, pdf.fonttype=42, PNG dpi 600 + PDF",
+      "exports": [
+        "outputs/figures/s1_baseline/alaska_obs_vs_pred_maps.png",
+        "outputs/figures/s1_baseline/alaska_obs_vs_pred_maps.pdf"
+      ]
+    },
+    {
+      "id": "alt_prediction_hires",
+      "script": "scripts/4_visualization/report_alt_map_hires.py",
+      "intent": "알래스카 전역 조밀 격자에서 물리식으로 계산한 연속 ALT 예측장을 한 장으로 제시한다. 기존 점 산포 지도의 성긴 표현을 대체한다.",
+      "layout": {
+        "panels": 1,
+        "arrangement": "단일 지도(Albers 등적, 알래스카 -170~-138°E / 59~72°N). 계산 격자는 표시 창보다 경도 ±9°·위도 ±3° 넓게 잡아 정사영 프레임 모서리까지 채운다. 부속: 우측 세로 컬러바 1개, 좌상단 범북극 위치 inset, 우하단 축척(200 km), 좌하단 범례, 축 하단 각주 1행. 그림 내부 제목 없음.",
+        "figsize_in": [
+          8.8,
+          6.6
+        ]
+      },
+      "assets": [
+        "data/raw/era5land/nh_monthly_2015-2020.nc (t2m·stl1·sd 월 기후값 → TDD·FDD·MAAT·최난/최한월·적설수당량)",
+        "data/raw/soilgrids_wcs/namerica/{bdod,sand,cfvo,soc}_5-15cm_mean.tif (약 5 km, IGH 좌표계 → 이중선형 샘플)",
+        "data/processed/s2_physics_meta.json (E_global = 1.5710, 재학습 없이 기존 산출물 재사용)",
+        "data/processed/dl_dataset_cell_v3_soil.csv (알래스카 관측 셀 13,615 → 0.05° 중복제거 210 지점 오버레이)"
+      ],
+      "method": "polar.physics.physics_ensemble 로 Johansen 열전도도·동토상부온도(TTOP)를 계산하고, 검증 최상위 물리 예측인 Stefan 해 ALT = E x TDD^0.5 을 예측장으로 쓴다. TTOP >= 0 인 육지(비영구동토)는 예측을 표시하지 않는다. 새 학습 없음, CPU 전용.",
+      "style": "polar.plotstyle.use_polar + polar.geomap. 컬러맵 cmcrameri oslo_r 유지하되 하단 0.20·상단 0.68 로 절단(연청회 #b2bccc → 중명도 진청 #1d4a78): 상단 절단은 과채도 방지, 하단 절단은 육지 배경(#efece6)·해양(#eaf1f4)과의 혼동 방지. vmin/vmax = 표시 창 내 분위수 p5/p97(5 cm 반올림), extend=both 로 절단분 명시. 등치선 15 cm 간격 회색 lw 0.3 alpha 0.35(라벨 없음). 폰트 위계: 컬러바 라벨 10·눈금 9·범례 9·경위도 8.5·각주 7.2, bold 미사용. 범례는 테두리 없는 반투명 흰 바탕. 색칠 콜아웃·화살표 주석 없음. 그림 내부 제목 없음(캡션이 대신). 내부 단계코드·내부 명명 미노출. pdf.fonttype=42, PNG dpi 300 + 동명 PDF.",
+      "exports": [
+        "outputs/maps/alt_prediction_hires.png",
+        "outputs/maps/alt_prediction_hires.pdf"
+      ],
+      "caption": "알래스카 활성층 두께(ALT) 예측 지도. 0.02° 격자에서 Stefan 해로 계산한 연속 예측장이며, ERA5-Land 월 기후값(2015-2020)과 SoilGrids 토양 물성을 입력으로 쓴다. 검은 점은 실측 관측 지점, 베이지색 육지는 동토상부온도가 0 °C 이상이어서 예측에서 제외한 비영구동토 지역이다. 격자 세분(0.1° → 0.02°)은 렌더용 평활화이며 정보량은 0.1° 강제력에 한정된다."
+    },
+    {
+      "id": "alt_uncertainty_aoa_map",
+      "script": "scripts/4_visualization/report_uq_map.py",
+      "intent": "알래스카 ALT 예측지도의 신뢰 범위를 하나의 그림으로 제시한다. 보정된 90% 예측구간 폭(공간 분포)과 적용가능 영역 표기(외삽 구간)를 같은 지도 격자 위에 결합하고, 비유사도가 커질수록 전이 오차가 커지고 구간 커버리지가 무너지는 근거를 함께 둔다. 기존 s11_uq_maps(구간 폭 지도)와 alt_aoa_mask(적용가능 영역)를 대체한다.",
+      "layout": {
+        "panels": 3,
+        "arrangement": "상단 2패널 = 동일 크기·동일 육각 격자 지도((a) 보정 90% 예측구간 폭 cm, (b) 환경 비유사도 지수 무차원), 각 패널 우측에 세로 컬러바. 두 지도 아래 한 줄 공통 범례(사선 해칭=적용가능 영역 밖, 회색 윤곽=판정 없음). 하단 1패널 = (c) 비유사도 구간별 지역 간 전이 RMSE 막대(커버리지는 막대 위 값 라벨). 축 사각형은 투영 종횡비(projected_aspect)로 인치 단위 직접 배치해 (a)(b) 높이·폭을 완전히 일치시킨다.",
+        "figsize_in": [
+          9.2,
+          6.86
+        ]
+      },
+      "assets": [
+        "data/processed/s11_conformal_oof.csv (셀별 lat/lon/width90_cqr, 알래스카 13,606 셀)",
+        "data/processed/alt_cell_best_oof.csv (셀별 di/aoa_inside; 좌표 소수 6자리 키로 1:1 결합, assert 검증)",
+        "data/processed/alt_aoa_cell_transfer.csv (비유사도 구간 6개의 RMSE·커버리지)",
+        "data/processed/s11_conformal_meta.json (보정 커버리지 헤드라인, 콘솔 검증 출력용)"
+      ],
+      "style": "polar.plotstyle.use_polar + polar.geomap. 지도창은 관측 분포에 맞춘 (-168, -139, 59.5, 72) 알래스카 창(표준 프리셋은 빈 여백이 넓어 종횡비가 눕는다). 육각 셀 집계(hexbin gridsize 30, 보간 없음), 두 지도 패널이 같은 투영좌표 extent를 공유해 셀이 1:1 대응. 컬러맵은 부호 없는 양수 스칼라용 단조 순차형 2종: (a) cmcrameri oslo_r 0.18-0.88 절단(청→남색), (b) 규약 팔레트 기반 연청록→청록. 양끝 절단으로 과포화 방지, 색축은 p2-p98(a)·0-p98(b)에 컬러바 extend 삼각형으로 절단 표기. 적용가능 영역 밖=사선 해칭(#4a4a4a, lw 0.35), 판정 없는 셀=회색 윤곽(#9a9a9a)+(b)에서만 중립 회색 채움 — 색 단독 부호화 금지. 폰트 위계: 축라벨 10·눈금 9·컬러바라벨 9.5·컬러바눈금 8.5·위경도 8.5·범례 8.6·패널라벨 11 bold, 그 외 bold 미사용. 값 라벨은 연회색(#5a5a5a). 격자 y축만 alpha 0.25, spine 좌·하만. 범례 frameon=False, 그림 내부 제목 없음, 내부 단계코드·내부 명명 미노출(적용가능 영역·환경 비유사도 지수 등 평이한 학술 표현). pdf.fonttype=42, 컬러바 solids 비래스터화.",
+      "caption": "알래스카 활성층 두께 예측지도의 신뢰 범위. (a) 0.5° 공간블록 교차검증에서 conformal 보정(CQR)한 90% 예측구간의 셀별 폭. 전 지역 평균 폭 53.6 cm, 실제 커버리지 93.4% [88.9, 96.6]. 사선 해칭은 지역 간 전이 시 적용가능 영역 밖(전체 판정 셀의 57.1%)이며, 회색 윤곽 셀은 판정 자료가 없는 셀이다. (b) 같은 격자의 환경 비유사도 지수. (c) 비유사도 구간별 지역 간 전이 RMSE와 90% 예측구간 커버리지. 비유사도 최상위 구간에서 RMSE 30.0 cm·커버리지 49.9%로, 적용가능 영역 밖에서는 점추정과 구간 모두 신뢰할 수 없다. n = 13,606 셀(그중 13,542 셀에 적용가능 영역 판정).",
+      "exports": [
+        "outputs/maps/alt_uncertainty_aoa_map.png (300 dpi)",
+        "outputs/maps/alt_uncertainty_aoa_map.pdf"
+      ],
+      "replaces": [
+        "outputs/figures/s11_uq/s11_uq_maps.png (b 패널)",
+        "outputs/maps/alt_aoa_mask.png"
+      ]
+    },
+    {
+      "id": "alt_downscale_demo",
+      "script": "scripts/4_visualization/report_alt_downscale_demo.py",
+      "intent": "광역 ALT 예측장의 세부 구조가 어디에서 오는지 한 장으로 보인다. 기후 강제력만으로는 정보 해상도가 ERA5-Land 0.1°(약 11 km)에 묶여 격자를 세분해도 장이 매끄럽기만 하다. Copernicus DEM 30 m에서 지형 공변량 6종을 실제로 산출해 약 250 m 격자에서 재예측하면 하천곡·능선·호수평야 규모의 구조가 나타난다. 그 차이가 지형이 더한 정보임을 동일 창·동일 색범위로 대조한다.",
+      "layout": {
+        "panels": 3,
+        "arrangement": "가로 3패널 동일 투영(AlbersEqualArea)·동일 창. (a) 지형 6종을 창 평균으로 고정한 기후·토양 단독 예측장, (b) 30 m DEM 유래 지형 6종을 넣은 250 m 예측장, (c) (b)−(a) 차이. (a)(b)는 공통 순차형 컬러바(하단 2칸 병합), (c)는 0중심 발산형 컬러바(하단 우측 1칸). 세 패널 모두 관측 지점 오버레이·축척막대, 경위도 라벨은 좌측 패널에만.",
+        "figsize_in": [
+          11.4,
+          6.0
+        ]
+      },
+      "assets": [
+        "data/raw/dem/Copernicus_DSM_COG_10_N{68,69}_00_W{149..152}_00_DEM.tif (30 m DEM 8매, 위도 1\"·경도 2\")",
+        "data/raw/era5land/nh_monthly_2015-2020.nc (월 기후값 0.1°, 학습 공변량과 동일 기간)",
+        "data/raw/soilgrids_wcs/namerica/*.tif (SoilGrids 9종, 약 5 km, IGH)",
+        "data/processed/fidelity_base.csv (알래스카 13,615 관측셀 — 모델 학습 + 관측 오버레이)"
+      ],
+      "method": [
+        "창 = 경도 -152.0~-148.0°, 위도 68.2~70.0° (약 159 x 200 km, 브룩스 산맥 북사면~북극 연안평야). 창 내 관측 3,509셀.",
+        "지형: DEM 원해상도 모자이크(7200 x 6480 px)에서 표고·경사·사면방위(sin,cos)·TPI·거칠기를 scripts/1_data_prep/terrain_features_dem.py 와 동일한 식·동일한 33x33 px 국소창으로 계산한 뒤 8(위도) x 11(경도) 화소 블록평균으로 목표 격자에 집계.",
+        "기후: ERA5-Land 월 기후값 8종을 목표 격자로 이중선형 보간(해양 결측은 최근접 육지값으로 선충전).",
+        "토양: SoilGrids 9종을 IGH 좌표로 변환해 이중선형 샘플.",
+        "예측: 알래스카 관측셀로 CatBoost(CPU, iterations 1200·depth 7)를 학습해 격자에 적용. (a)는 지형 6종을 격자 중앙값으로 고정한 동일 모델 예측이므로 두 패널 차이는 지형 공변량에만 기인한다(평균은 창 남단 산지 꼬리에 끌려 대표성이 낮다). 지도 산출용이며 일반화 성능 주장이 아니다."
+      ],
+      "style": "polar.plotstyle.use_polar. ALT 순차형 = cmcrameri oslo_r 의 0.20~0.68 구간(연청회→중명도 진청, 육지·해양 배경과 명도 충돌 회피), BoundaryNorm 24단. 차이 = cmcrameri broc 0.08~0.92, 0중심 대칭 20단. 무지개·jet 금지. 색 이산화는 BoundaryNorm이 담당하므로 외관은 등치대와 같고, 목표 격자 53만 셀에서 contourf는 등치선 폴리곤 투영변환이 1시간을 넘겨 동일 norm의 pcolormesh로 렌더한다(셀이 인쇄 시 1픽셀 미만이라 외관 차이 없음, 렌더 9초). 등치선 오버레이는 조밀 격자에서 선 잡음이 되므로 두지 않는다. 원뿔투영 모서리에 자료 없는 배경 띠가 남지 않도록 축 범위를 자료 사각형의 내접 직사각형으로 좁힌다. 관측 지점은 검정 소형 점(s=1.4). 그림 내부 제목 없음(캡션이 담당), 내부 코드명·단계명 미표기. 패널 라벨은 (a)/(b)/(c) + 사실 서술 한 줄, 9.5 pt 회색(#444444). 축척막대 7 pt. 한글 폰트에 U+2212 글리프가 없어 axes.unicode_minus=False.",
+      "exports": [
+        "outputs/maps/alt_downscale_demo.png (3391 x 1752 px, dpi 300)",
+        "outputs/maps/alt_downscale_demo.pdf (11.30 x 5.84 in, 예측장만 래스터화·문자와 축은 벡터)"
+      ],
+      "qa": "PNG를 실제로 열어 (b)가 (a)보다 세부 구조를 보이는지 확인한다. 정량 지표로 3x3 라플라시안 고주파 표준편차를 두 장에서 계산해 표준출력에 남긴다(비율 5배 이상이면 통과). 지형 공변량 일부(TPI·거칠기)는 창 남단 산지에서 학습 분포 상한을 넘는다. 트리 앙상블은 최외곽 분할구간으로 포화하므로 외삽이 아니라 값이 평탄해지는 형태로 나타난다.",
+      "result": "목표 격자 654 x 810 = 529,740 셀, 셀 243 m x 247 m. 지형 6종 중요도 합 55.2%(기후 21.1%·토양 23.8%). (a) 표준편차 5.2 cm vs (b) 6.5 cm. 3x3 라플라시안 고주파 표준편차 (a) 0.469 cm vs (b) 2.906 cm(6배). (b)-(a) 는 p1~p99 로 -7.8~+17.9 cm, |차이| 중앙값 4.3 cm. 총 실행 23초(CPU)."
     }
   ]
 }
