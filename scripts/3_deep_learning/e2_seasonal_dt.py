@@ -34,9 +34,10 @@
 실행: GPU=7 python scripts/3_deep_learning/e2_seasonal_dt.py   (SMOKE=1 로 빠른 점검)
 """
 import os
-# FIGS_ONLY=1: 기존 CSV(e2_seasonal_dt_{results,eos,summary}.csv)만 읽어 그림을 재생성한다.
-#   torch·GPU 없이 CPU에서 실행되며 모델 재학습·수치 재계산은 하지 않는다(그림 규약 점검용).
-FIGS_ONLY = os.environ.get("FIGS_ONLY", "0") == "1"
+import sys
+# FIGS_ONLY=1 또는 --figs-only: 기존 CSV(e2_seasonal_dt_{results,eos,summary}.csv)만 읽어
+#   그림을 재생성한다. torch·GPU 없이 CPU에서 실행되며 모델 재학습·수치 재계산은 하지 않는다.
+FIGS_ONLY = os.environ.get("FIGS_ONLY", "0") == "1" or "--figs-only" in sys.argv
 if not FIGS_ONLY:
     # ★ GPU 고정은 어떤 import(특히 torch)보다 먼저. 2026-07-27 오후 지시: 물리 7번만 허용.
     GPU = os.environ.get("GPU", "7")
@@ -45,7 +46,6 @@ if not FIGS_ONLY:
 else:
     GPU = "cpu"
 
-import sys
 import json
 import time
 from pathlib import Path
@@ -73,7 +73,7 @@ SEASON = (5, 10)
 # 값은 build_dt_panel/select_seasons로부터 산출되며 재실행 때마다 meta에 기록·검증한다.
 REF_PEAK_D = 93.46
 RNG = np.random.default_rng(20260727)
-DPI = 90 if SMOKE else 220
+DPI = 90 if SMOKE else 300
 PROC = ROOT / "data/processed"
 FIGD = ROOT / "outputs/figures/e2_seasonal_dt"
 FIGD.mkdir(parents=True, exist_ok=True)
@@ -781,146 +781,292 @@ def _describe_finding(summ, eos_summ=None):
 # 6. 시각화
 # ============================================================
 def make_figures(panel, seasons, res, eos_all):
+    """논문 게재용 그림 3종. 데이터·수치 로직은 건드리지 않고 표현만 담당한다.
+
+    표기 규범: 그림 내부에 내부 단계코드·영문 약칭을 남기지 않는다(RMSE·Stefan·GRU·TDD 등
+    표준 학술 용어는 유지). 저채도 냉색 4단계 + 회색조 보조, 값 라벨은 소형 회색.
+    """
     import matplotlib
     matplotlib.use("Agg")
-    from polar.plotstyle import use_polar, CMAP, tnorm, FROZEN, THAWED
+    from polar.plotstyle import use_polar
     import matplotlib.pyplot as plt
-    import matplotlib.dates as mdates
     plt = use_polar()
+    plt.rcParams.update({
+        "axes.titleweight": "normal",
+        "axes.titlesize": 10.5,
+        "axes.labelsize": 10.5,
+        "xtick.labelsize": 9.5,
+        "ytick.labelsize": 9.5,
+        "legend.fontsize": 9.5,
+        "legend.frameon": False,
+        "grid.alpha": 0.25,
+        "grid.linewidth": 0.5,
+        "grid.color": "#c9d1d9",
+        "axes.edgecolor": "#8a8f96",
+        "axes.linewidth": 0.7,
+    })
+    # 저채도 냉색 팔레트(진청→연청회) + 무채색 보조.
+    C_DEEP, C_TEAL, C_SLATE, C_PALE = "#2f4b6e", "#4a7c8c", "#8296a8", "#b8c4d0"
+    C_GRAY, C_LAB, C_FAINT = "#6e6e6e", "#444444", "#7a8590"
+
+    def _clean(ax, grid="both"):
+        for s in ("top", "right"):
+            ax.spines[s].set_visible(False)
+        for s in ("left", "bottom"):
+            ax.spines[s].set_linewidth(0.7)
+            ax.spines[s].set_color("#8a8f96")
+        ax.grid(axis=grid, alpha=0.25, lw=0.5, color="#c9d1d9")
+        ax.set_axisbelow(True)
+        ax.tick_params(length=3, width=0.7, colors=C_LAB, labelsize=9.5)
+
+    def _panel_tag(ax, i, text):
+        """(a) 패널 식별자만 굵게, 설명은 보통 굵기."""
+        ax.set_title(f"$\\bf{{({chr(97 + i)})}}$   {text}", loc="left",
+                     fontsize=10.5, color="#333333", pad=6)
+
+    def _site_label(season_id):
+        """'ID23_B|2025' → 'ID23 지점 · 2025년'(내부 배치 접미 비노출)."""
+        site, yr = season_id.split("|")
+        return f"{site.split('_')[0]} 지점 · {yr}년"
 
     obs = panel[panel.season_id.isin(seasons)]
 
-    # --- (i) 대표 프로파일 D(t) 관측 vs Stefan vs GRU 시계열 ---
-    # 대표=2025 배치B 온전한 시즌(심부 2·중간 1·얕은 1). 배치A 조각 시즌은 제외.
+    # ------------------------------------------------------------------
+    # (i) 대표 프로파일의 융해면 깊이 D(t): 관측 vs Stefan vs GRU
+    #     x축은 4패널 공통(융해기 day-of-year). 프로파일마다 자료 길이가 다른 것은 렌더
+    #     문제가 아니라 로거 기록 종료 시점 차이라는 자료 특성이다(예: ID02_B는 2025-06-17
+    #     종료). 공통 축 위에서 기록 종료 이후를 무채색으로 비워 그 차이가 읽히게 하되,
+    #     기록이 융해기 후반까지 남지 않은 시즌은 대표 패널에서 제외해 패널 간 정보밀도가
+    #     크게 어긋나지 않게 한다(선정 기준은 그림 하단 주석에 명시).
+    # ------------------------------------------------------------------
     prof = res[res.split == "profile"]
+
+    def _doy(dates):
+        return pd.to_datetime(pd.Series(np.asarray(dates))).dt.dayofyear.values
+
+    LAST_DOY_MIN = 205        # 대표 패널 후보: 관측이 최소 7월 하순까지 남은 시즌
     b2025 = obs[(obs.season_year == 2025) & obs.site_key.str.endswith("_B")]
-    peak_by = b2025.groupby("season_id")["D"].max().sort_values(ascending=False)
-    if len(peak_by) >= 4:
-        rep_ids = [peak_by.index[0], peak_by.index[1],
-                   peak_by.index[len(peak_by) // 2], peak_by.index[-1]]
+    bv = b2025[b2025.D.notna() & (~b2025.censored)]
+    cand = bv.groupby("season_id").agg(peak=("D", "max"), last=("date", "max"))
+    cand["last_doy"] = pd.to_datetime(cand["last"]).dt.dayofyear
+    ok = cand[cand["last_doy"] >= LAST_DOY_MIN].sort_values("peak", ascending=False)
+    if len(ok) >= 4:
+        # 최대 융해깊이 범위를 고르게 대표하도록 목표 peak를 등간격으로 두고 최근접 선택.
+        targets = np.linspace(ok["peak"].max(), ok["peak"].min(), 4)
+        rep_ids = []
+        for t in targets:
+            for sid in (ok["peak"] - t).abs().sort_values().index:
+                if sid not in rep_ids:
+                    rep_ids.append(sid)
+                    break
     else:
         rep_ids = list(obs.groupby("season_id")["D"].max().sort_values(ascending=False).index[:4])
     rep_ids = list(dict.fromkeys(rep_ids))[:4]
-    fig, axes = plt.subplots(2, 2, figsize=(11.5, 7.4), constrained_layout=True)
-    for ax, sid in zip(axes.ravel(), rep_ids):
+
+    MON_DOY = [(121, "5월"), (152, "6월"), (182, "7월"),
+               (213, "8월"), (244, "9월"), (274, "10월")]
+
+    _rep_last = max(int(_doy(obs[obs.season_id == s]["date"]).max()) for s in rep_ids)
+    XLO, XHI = 118, _rep_last + 9
+    DMAX = 160.0     # 최심센서 160 cm. Stefan 과대추정 곡선은 이 아래에서 축 밖으로 나간다.
+    YLO, YHI = DMAX + 16, -6
+
+    def _gapped(dates, vals, maxgap=2):
+        """관측 결측·검열로 날짜가 끊긴 구간에 NaN을 넣어 선을 잇지 않는다."""
+        x = _doy(dates).astype(float)
+        y = np.asarray(vals, dtype=float)
+        if len(x) < 2:
+            return x, y
+        xo, yo = [x[0]], [y[0]]
+        for i in range(1, len(x)):
+            if x[i] - x[i - 1] > maxgap:
+                xo.append(np.nan)
+                yo.append(np.nan)
+            xo.append(x[i])
+            yo.append(y[i])
+        return np.array(xo), np.array(yo)
+
+    MODEL_STYLE = [("stefan", C_SLATE, (0, (5, 2.2)), 1.3, "Stefan(공통 계수)"),
+                   ("stefan_site", C_TEAL, (0, (6, 1.6, 1.4, 1.6)), 1.3, "Stefan(지점 계수)"),
+                   ("gru", C_GRAY, (0, (1.4, 1.8)), 1.4, "GRU")]
+
+    # 하단에 범례 1줄 + 주석 2줄을 겹치지 않게 두기 위해 여백을 명시적으로 잡는다.
+    fig, axes = plt.subplots(2, 2, figsize=(11.0, 7.0), sharex=True, sharey=True)
+    fig.subplots_adjust(left=0.072, right=0.985, top=0.955, bottom=0.205,
+                        hspace=0.22, wspace=0.055)
+    for pi, (ax, sid) in enumerate(zip(axes.ravel(), rep_ids)):
         g = obs[obs.season_id == sid].sort_values("date")
         gv = g[g.D.notna() & (~g.censored)]
-        dmax = 170.0   # 최심센서(160cm) 부근 플롯 상한. Stefan overshoot는 이 위로 클립.
-        ax.plot(gv["date"], gv["D"], "-", color="#1f4e79", lw=1.6, label="관측 D(t)")
-        ax.scatter(gv["date"], gv["D"], s=9, color="#1f4e79", zorder=3)
-        # deepening 피크일 표시
+        ox, oy = _gapped(gv["date"], gv["D"])
+        ax.plot(ox, oy, "-", color=C_DEEP, lw=1.4, label="관측", zorder=4)
+        ax.scatter(_doy(gv["date"]), gv["D"], s=6, color=C_DEEP, lw=0, zorder=5)
         if len(gv):
-            pk = gv.loc[gv["D"].idxmax()]
-            ax.axvline(pk["date"], color="#999999", ls=":", lw=0.8)
-        for mname, col, ls in [("stefan", "#c79a3a", ":"), ("stefan_site", THAWED, "--"),
-                               ("gru", "#2e7d63", "-.")]:
+            pk = int(_doy([gv.loc[gv["D"].idxmax(), "date"]])[0])
+            # 기준선은 무채색 실선(범례 혼동 방지), 범례 기호는 축 상단 ▼ 표식으로 구분.
+            ax.axvline(pk, color="#c6ccd2", ls="-", lw=0.8, zorder=1)
+            ax.plot([pk], [1.0], marker="v", ms=5, ls="none", color=C_SLATE, mec="none",
+                    transform=ax.get_xaxis_transform(), clip_on=False, zorder=6,
+                    label=("관측 최대깊이 도달일" if pi == 0 else "_nolegend_"))
+        for mname, col, ls, lw, lab in MODEL_STYLE:
             pm = prof[(prof.season_id == sid) & (prof.model == mname)].sort_values("date")
             pm = pm.dropna(subset=["D_pred"])
             if len(pm):
-                yv = pm["D_pred"].clip(upper=dmax + 30)  # overshoot는 상한 부근서 클립(가독)
-                ax.plot(pm["date"], yv, ls, color=col, lw=1.5,
-                        label={"stefan": "Stefan(pooled E)", "stefan_site": "Stefan(site E)",
-                               "gru": "GRU"}[mname])
-        ax.set_ylim(dmax + 20, -5)   # y 반전(깊이 아래로), overshoot 살짝만 보이게
-        ax.set_title(sid.replace("|", " "), fontsize=10)
-        ax.xaxis.set_major_locator(mdates.MonthLocator(interval=1))
-        ax.xaxis.set_major_formatter(mdates.DateFormatter("%m월"))
-        ax.grid(alpha=0.3)
+                px, py = _gapped(pm["date"], pm["D_pred"].clip(upper=DMAX + 26))
+                ax.plot(px, py, ls=ls, color=col, lw=lw,
+                        label=(lab if pi == 0 else "_nolegend_"), zorder=3)
+            elif mname == "stefan_site":
+                ax.text(0.03, 0.06, "Stefan(지점 계수) 미표시: 보정 구간 표본 부족",
+                        transform=ax.transAxes, ha="left", va="bottom",
+                        fontsize=8.5, color=C_FAINT)
+        # 로거 기록 종료 이후(관측 없음) 구간을 옅은 무채색으로 비워 표시
+        rec_end = int(_doy([g["date"].max()])[0])
+        if rec_end < XHI - 8:
+            ax.axvspan(rec_end, XHI, color="#9aa3ab", alpha=0.09, lw=0, zorder=0)
+            mmdd = pd.Timestamp(g["date"].max())
+            # 라벨은 패널 아래쪽(곡선이 오지 않는 영역)에 두고, 회색 구간이 넓으면 그 안에
+            # 좌측 정렬, 좁으면 경계 바로 왼쪽에 우측 정렬해 잘리지 않게 한다.
+            wide = (XHI - rec_end) >= 38
+            ax.text(rec_end + (3 if wide else -3), 0.035,
+                    f"관측 종료 {mmdd.month}/{mmdd.day}",
+                    transform=ax.get_xaxis_transform(), fontsize=8.5, color=C_FAINT,
+                    ha=("left" if wide else "right"), va="bottom")
+        ax.set_xlim(XLO, XHI)
+        ax.set_ylim(YLO, YHI)               # y 반전(깊이 아래로)
+        ax.set_yticks([0, 50, 100, 150])
+        ax.set_xticks([d for d, _ in MON_DOY if d <= XHI - 4])
+        ax.set_xticklabels([m for d, m in MON_DOY if d <= XHI - 4])
+        _clean(ax)
+        _panel_tag(ax, pi, _site_label(sid))
     for ax in axes[:, 0]:
-        ax.set_ylabel("융해면 깊이 D(t) (깊이, cm, 아래로 증가)")
-    axes[0, 0].legend(loc="lower left", fontsize=8.2)
-    fig.suptitle("계절 내 융해 진행 D(t): 관측 vs Stefan vs GRU (profile leave-out, 알래스카 in-domain)\n"
-                 "점선=관측 최대깊이 도달일. Stefan은 √TDD 단조증가로 피크 후 과대(재동결 미모형).",
-                 fontsize=11.5)
-    fig.savefig(FIGD / "e2_dt_curves.png", dpi=DPI)
-    fig.savefig(FIGD / "e2_dt_curves.pdf")   # 논문 벡터
+        ax.set_ylabel("융해면 깊이 D(t) (cm)")
+    h, l = axes[0, 0].get_legend_handles_labels()
+    fig.legend(h, l, loc="upper center", bbox_to_anchor=(0.5, 0.125), ncol=5,
+               frameon=False, fontsize=9.5, handlelength=2.6, columnspacing=1.8)
+    fig.text(0.5, 0.075,
+             "회색 구간은 로거 기록이 종료돼 관측이 없는 기간이며, 선이 끊긴 곳은 결측·검열로 "
+             "D(t)를 정의할 수 없는 날이다. 봄·가을에 D(t)가 0으로 떨어지는 날은\n"
+             "10 cm 지온 일평균이 0 °C 이하인 표층 재동결일이며 보간 아티팩트가 아니다. "
+             "대표 프로파일 4개는 관측이 7월 하순 이후까지 남은 시즌 가운데\n"
+             "최대 융해깊이 범위를 고르게 대표하도록 선정했다. 전체 12개 시즌 집계는 "
+             "RMSE 비교 그림에 제시한다.",
+             ha="center", va="top", fontsize=8.2, color=C_FAINT, linespacing=1.7)
+    fig.savefig(FIGD / "e2_dt_curves.png", dpi=DPI, bbox_inches="tight")
+    fig.savefig(FIGD / "e2_dt_curves.pdf", bbox_inches="tight")
     plt.close(fig)
 
-    # --- (ii) 모델별 RMSE 막대 (공간·시간 분할, CI): 전 시즌·공통 support(헤드라인 분모 통일) ---
+    # ------------------------------------------------------------------
+    # (ii) 모델별 D(t) 예측 RMSE (지점 분리 검증 · 시간 분할 검증)
+    #      값 선택 로직은 기존과 동일(공통 구간 기준, 전일 지속만 참조 표본).
+    # ------------------------------------------------------------------
     summ = pd.read_csv(PROC / "e2_seasonal_dt_summary.csv")
-    # 헤드라인=common support(전 비교모델 공통 예측행). persistence_now는 공통 support 제외군이라
-    # per_model 값을 참조로 병기(막대 위 표기로 구분).
     summ_c = summ[(summ.phase == "all") & (summ.support == "common")]
     summ_pm = summ[(summ.phase == "all") & (summ.support == "per_model")]
-    fig, ax = plt.subplots(figsize=(10.4, 5.6), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(11.0, 7.0), constrained_layout=True)
     order = ["persistence_now", "persistence", "static", "stefan", "stefan_site", "gru"]
-    labmap = {"persistence_now": "지속(전일)\nnowcast*",
-              "persistence": f"지속({H_FCST}일전)\nforecast", "static": "정적회귀\n(당일√TDD)",
-              "stefan": "Stefan\n(pooled E)", "stefan_site": "Stefan\n(site E)",
-              "gru": "GRU\n(lag 시퀀스)"}
-    # 냉색 이중부호화: 공간=짙은청(민무늬), 시간=중청(해칭). 붉은·주황 회피(규약).
-    colmap = {"profile": "#274c77", "temporal": "#4a90b8"}
-    hatchmap = {"profile": None, "temporal": "///"}
+    labmap = {"persistence_now": "지속\n(전일 값)",
+              "persistence": f"지속\n({H_FCST}일 전 값)",
+              "static": "선형회귀\n(당일 √TDD)",
+              "stefan": "Stefan\n(공통 계수)",
+              "stefan_site": "Stefan\n(지점 계수)",
+              "gru": f"GRU\n(과거 {LAG}일 시퀀스)"}
+    colmap = {"profile": C_DEEP, "temporal": C_SLATE}
+    labsplit = {"profile": "지점 분리 검증", "temporal": "시간 분할 검증(앞→뒤)"}
     w = 0.38
     xs = np.arange(len(order))
+    top = 0.0
     for k, split in enumerate(["profile", "temporal"]):
         sc = summ_c[summ_c.split == split].set_index("model")
         spm = summ_pm[summ_pm.split == split].set_index("model")
-        # persistence_now는 common에 없으므로 per_model에서, 나머지는 common에서.
+
         def _row(m, col):
             if m == "persistence_now":
                 return spm.loc[m, col] if m in spm.index else np.nan
             return sc.loc[m, col] if m in sc.index else np.nan
+
         vals = [_row(m, "rmse_cm") for m in order]
         los = [_row(m, "rmse_ci_lo") for m in order]
         his = [_row(m, "rmse_ci_hi") for m in order]
         ns = [_row(m, "n") for m in order]
+        pcts = [_row(m, "rmse_pct") for m in order]
         yerr = np.array([[v - l for v, l in zip(vals, los)],
                          [h - v for v, h in zip(vals, his)]])
         yerr = np.where(np.isfinite(yerr), yerr, 0)
-        ax.bar(xs + (k - 0.5) * w, vals, w, yerr=yerr, capsize=3,
-               color=colmap[split], hatch=hatchmap[split],
-               label={"profile": "공간(profile leave-out)",
-                      "temporal": "시간(앞→뒤 분할)"}[split],
-               edgecolor="#233", lw=0.6)
-        for x, v, m, nn in zip(xs + (k - 0.5) * w, vals, order, ns):
-            if np.isfinite(v):
-                pct = _row(m, "rmse_pct")
-                nlab = f"n{int(nn)}" if np.isfinite(nn) else ""
-                ax.annotate(f"{v:.1f}\n{pct:.0f}%\n{nlab}", (x, v), ha="center", va="bottom",
-                            fontsize=7.2, xytext=(0, 2), textcoords="offset points")
+        ax.bar(xs + (k - 0.5) * w, vals, w, yerr=yerr, capsize=2.5,
+               color=colmap[split], lw=0, label=labsplit[split], zorder=2,
+               error_kw=dict(ecolor="#5a636c", elinewidth=0.9, capthick=0.9))
+        for x, v, m, nn, hi, pc in zip(xs + (k - 0.5) * w, vals, order, ns, his, pcts):
+            if not np.isfinite(v):
+                continue
+            ytop = hi if np.isfinite(hi) else v
+            top = max(top, ytop)
+            # RMSE(cm)를 주 라벨로, 참조 깊이 대비 비율과 표본 수는 한 줄 보조 라벨로 병기.
+            # 이중축(cm/%)은 두 눈금의 숫자가 비슷해 오독을 유발하므로 사용하지 않는다.
+            ax.annotate(f"{v:.1f}", (x, ytop), ha="center", va="bottom",
+                        fontsize=9, color=C_LAB, xytext=(0, 3),
+                        textcoords="offset points")
+            sub = []
+            if np.isfinite(pc):
+                sub.append(f"{pc:.0f}%")
+            if np.isfinite(nn):
+                sub.append(f"n {int(nn)}")
+            if sub:
+                ax.annotate(" · ".join(sub), (x, ytop), ha="center", va="bottom",
+                            fontsize=7.5, color=C_FAINT, xytext=(0, 14),
+                            textcoords="offset points")
     ax.set_xticks(xs)
-    ax.set_xticklabels([labmap[m] for m in order], fontsize=9.2)
+    ax.set_xticklabels([labmap[m] for m in order], fontsize=9.5)
     ax.set_ylabel("D(t) 예측 RMSE (cm)")
-    ax.set_ylim(0, None)
-    ax.set_title("계절 내 D(t) 예측 오차: 모델·검증축별 (공통 support, 95% CI, 라벨=cm/참조%·n)\n"
-                 f"참조% 분모=고정 REF_PEAK_D≈{REF_PEAK_D:.0f}cm. *nowcast는 공통 support 제외군(per-model n).",
-                 fontsize=10.5)
-    ax.legend(loc="upper right", fontsize=9)
-    ax.grid(axis="y", alpha=0.3)
-    fig.savefig(FIGD / "e2_rmse_bars.png", dpi=DPI)
-    fig.savefig(FIGD / "e2_rmse_bars.pdf")   # 논문 벡터
+    ax.set_ylim(0, top * 1.30)
+    _clean(ax, grid="y")
+    ax.legend(loc="upper left", fontsize=9.5, frameon=False, ncol=1,
+              bbox_to_anchor=(0.0, 1.0))
+    ax.text(0.0, -0.155,
+            f"오차막대: 시즌 단위 블록 부트스트랩 95% 신뢰구간({NBOOT:,}회).  "
+            f"막대 위 작은 글씨의 % = 관측 최대깊이 평균 {REF_PEAK_D:.1f} cm 대비 RMSE 비율.\n"
+            "n = 평가 표본 일수(전일 값 지속만 공통 구간 밖 참조 표본).",
+            transform=ax.transAxes, ha="left", va="top", fontsize=8.5, color=C_FAINT,
+            linespacing=1.6)
+    fig.savefig(FIGD / "e2_rmse_bars.png", dpi=DPI, bbox_inches="tight")
+    fig.savefig(FIGD / "e2_rmse_bars.pdf", bbox_inches="tight")
     plt.close(fig)
 
-    # --- (iii) EOS(내부 peak day) 산점: GRU vs persistence만 (단조 물리는 예측 불가) ---
-    fig, ax = plt.subplots(figsize=(7.2, 6.6), constrained_layout=True)
+    # ------------------------------------------------------------------
+    # (iii) 최대깊이 도달일 산점: GRU vs 지속 기준선(단조 물리는 내부 정점 예측 불가)
+    # ------------------------------------------------------------------
+    fig, ax = plt.subplots(figsize=(6.6, 6.6), constrained_layout=True)
     ee = eos_all[eos_all.split == "profile"].copy()
     ee["obs_doy"] = ee["obs_peak_day"].dt.dayofyear
     ee["pred_doy"] = ee["pred_peak_day"].dt.dayofyear
-    # 냉색 이중부호화: GRU=청록 사각(s), persistence=짙은청 마름모(D). 주황 회피(규약).
-    mk = {"gru": ("s", "#2e7d63"), "persistence": ("D", "#274c77")}
-    for mname, (mkr, col) in mk.items():
+    mk = {"gru": ("s", C_DEEP, "GRU"),
+          "persistence": ("D", C_SLATE, f"지속({H_FCST}일 전 값)")}
+    # 표식이 축 경계에서 잘려 다른 기호로 오인되지 않도록 자료 범위 바깥까지 여유를 둔다.
+    _v = pd.concat([ee["obs_doy"], ee["pred_doy"]]).astype(float)
+    lo = float(np.floor((_v.min() - 12) / 10) * 10)
+    hi = float(np.ceil((_v.max() + 12) / 10) * 10)
+    ax.plot([lo, hi], [lo, hi], ls=(0, (4, 3)), color="#9aa3ab", lw=0.9,
+            label="1:1", zorder=1)
+    for mname, (mkr, col, lab) in mk.items():
         sub = ee[ee.model == mname]
         if len(sub):
             mae = np.mean(np.abs(sub["pred_doy"] - sub["obs_doy"]))
-            lab = {"gru": "GRU (내부 peak 예측)", "persistence": f"persistence({H_FCST}일 지연)"}[mname]
-            ax.scatter(sub["obs_doy"], sub["pred_doy"], marker=mkr, s=48, color=col,
-                       edgecolor="k", lw=0.5, alpha=0.85,
-                       label=f"{lab}, MAE {mae:.0f}일")
-    lo, hi = 150, 300
-    ax.plot([lo, hi], [lo, hi], "k--", lw=1, alpha=0.6, label="1:1")
+            nseas = sub["season_id"].nunique()
+            ax.scatter(sub["obs_doy"], sub["pred_doy"], marker=mkr, s=42, color=col,
+                       edgecolor="white", lw=0.4, alpha=0.9, zorder=3, clip_on=False,
+                       label=f"{lab} · 평균절대오차 {mae:.0f}일 (n {nseas})")
     ax.set_xlim(lo, hi)
     ax.set_ylim(lo, hi)
-    ax.set_xlabel("관측 최대깊이 도달일 (day-of-year)")
-    ax.set_ylabel("예측 최대깊이 도달일 (day-of-year)")
-    ax.set_title("EOS(최대깊이 도달) 시점 예측: GRU vs persistence (profile leave-out)\n"
-                 "단조 물리(Stefan·정적)는 argmax가 창끝 고정 → 내부 peak 예측 불가로 제외.",
-                 fontsize=10.5)
-    ax.legend(loc="upper left", fontsize=9)
+    ax.set_xlabel("관측 최대깊이 도달일 (연중 일수)")
+    ax.set_ylabel("예측 최대깊이 도달일 (연중 일수)")
     ax.set_aspect("equal")
-    ax.grid(alpha=0.3)
-    fig.savefig(FIGD / "e2_eos_scatter.png", dpi=DPI)
-    fig.savefig(FIGD / "e2_eos_scatter.pdf")   # 논문 벡터
+    _clean(ax)
+    ax.legend(loc="upper left", fontsize=9.5, frameon=False)
+    ax.text(0.0, -0.115,
+            "n = 지점-연도 수(지점 분리 검증).  Stefan·선형회귀는 예측이 누적 융해도일에 대해 "
+            "단조 증가해\n구간 내부 정점을 예측할 수 없으므로 비교에서 제외했다.",
+            transform=ax.transAxes, ha="left", va="top", fontsize=8.5, color=C_FAINT,
+            linespacing=1.6)
+    fig.savefig(FIGD / "e2_eos_scatter.png", dpi=DPI, bbox_inches="tight")
+    fig.savefig(FIGD / "e2_eos_scatter.pdf", bbox_inches="tight")
     plt.close(fig)
 
 

@@ -68,12 +68,12 @@ for i, m in enumerate(ms):
     g = loro[loro.method == m]
     per_seed = g.groupby("seed").apply(lambda s: s.groupby("region").rmse_cm.mean().mean())
     ax.plot(np.full(len(per_seed), i), per_seed.values, "o", color="#2b2f38", ms=3.5, alpha=0.75)
-ax.axhline(S2_GATE, color="#7a1f2b", lw=1.2, ls="--", label=f"S2 Stefan 게이트 {S2_GATE:.2f}")
-ax.axhline(S4_GATE, color="#7a1f2b", lw=1.2, ls=":", label=f"S4 최고 앵커 {S4_GATE:.2f}")
+ax.axhline(S2_GATE, color="#1a3a4a", lw=1.2, ls="--", label=f"S2 Stefan 게이트 {S2_GATE:.2f}")
+ax.axhline(S4_GATE, color="#1a3a4a", lw=1.2, ls=":", label=f"S4 최고 앵커 {S4_GATE:.2f}")
 ax.set_xticks(xs, [LABEL[m] for m in ms], rotation=38, ha="right", fontsize=8)
 ax.set_ylabel("LORO 게이트 RMSE (cm)")
 ax.set_ylim(0, max(vals) + 3)   # y축 0 시작: 막대 높이로 RMSE 절대크기를 정직하게 표시
-ax.set_title("(a) LORO 전이 게이트(3지역 비가중평균)", fontsize=10)
+ax.set_title("(a)", fontsize=10)
 ax.legend(fontsize=7.5)
 # (2) in-domain
 ax = axes[1]
@@ -87,7 +87,7 @@ for i, m in enumerate(ms2):
 ax.set_xticks(xs2, [LABEL[m] for m in ms2], rotation=38, ha="right", fontsize=8)
 ax.set_ylabel("AK 공간블록 OOF RMSE (cm)")
 ax.set_ylim(0, max(vals2) + 1)   # y축 0 시작
-ax.set_title("(b) 알래스카 in-domain(공간블록 6-fold)", fontsize=10)
+ax.set_title("(b)", fontsize=10)
 # (3) cov90
 ax = axes[2]
 rows_c = []
@@ -104,19 +104,18 @@ ax.bar(xs3 - w / 2, [r[1] for r in rows_c], w, color="#5b7f95", edgecolor=EDGE, 
        label="LORO(3지역 평균)")
 ax.bar(xs3 + w / 2, [r[2] for r in rows_c], w, color="#9dbcCB".lower(), edgecolor=EDGE, lw=0.5,
        label="in-domain AK")
-ax.axhline(0.90, color="#7a1f2b", lw=1.2, ls="--", label="목표 90%")
+ax.axhline(0.90, color="#1a3a4a", lw=1.2, ls="--", label="목표 90%")
 ax.set_xticks(xs3, [LABEL[r[0]] for r in rows_c], rotation=38, ha="right", fontsize=8)
 ax.set_ylabel("90% 구간 실제 커버리지")
 ax.set_ylim(0, 1.14)
-ax.set_title("(c) cov90 보정(σ 헤드 vs quantile CatBoost)", fontsize=10)
+ax.set_title("(c)", fontsize=10)
 # sa_z 과대커버리지는 구간폭 발산(무정보)임을 명기
 i_saz = next((i for i, r in enumerate(rows_c) if r[0] == "sa_z"), None)
 if i_saz is not None:
     ax.annotate("폭 발산\n(LORO 473cm)", (i_saz, 1.01), xytext=(i_saz - 1.6, 1.06),
-                fontsize=7, color="#7a1f2b",
-                arrowprops=dict(arrowstyle="-", color="#7a1f2b", lw=0.8))
+                fontsize=7, color="#39404d",
+                arrowprops=dict(arrowstyle="-", color="#39404d", lw=0.8))
 ax.legend(fontsize=7.5, loc="center right")
-fig.suptitle("S6 source-aware multi-fidelity(A5) vs 비교군: 동일 공변량·동일 fold", fontsize=12, y=1.03)
 save(fig, "s6_method_bars")
 
 # ---------------- 2. 학습 b_s·σ_s vs 실제 소스 bias ----------------
@@ -134,7 +133,7 @@ ax.axhline(0, color="0.85", lw=0.8, zorder=0); ax.axvline(0, color="0.85", lw=0.
 ax.set_xlim(-lim, lim); ax.set_ylim(-lim, lim)
 ax.set_xlabel("실제 소스 bias (train 지역, y_s - 실측, cm)")
 ax.set_ylabel("학습된 b_s (cm)")
-ax.set_title("(a) 학습 b_s vs 실제 bias (1:1선=정합)", fontsize=10)
+ax.set_title("(a)", fontsize=10)
 ax = axes[1]
 for (src, reg), g in dl.groupby(["source", "region"]):
     ax.plot(g.sig_emp_train_cm, g.sig_learned_te_cm, REG_MARK[reg], color=SRC_COLOR[src], ms=7,
@@ -144,14 +143,13 @@ ax.plot([0, hi], [0, hi], "-", color="0.6", lw=1.0, zorder=0)
 ax.set_xlim(0, hi); ax.set_ylim(0, hi)
 ax.set_xlabel("실제 소스 잔차 SD (train 지역, cm)")
 ax.set_ylabel("학습된 σ_s 평균 (test 셀, cm)")
-ax.set_title("(b) 학습 σ_s vs 실제 잔차 SD", fontsize=10)
+ax.set_title("(b)", fontsize=10)
 from matplotlib.lines import Line2D
 hnd = ([Line2D([], [], color=c, marker="o", ls="", ms=7, label=f"{s} 소스")
         for s, c in SRC_COLOR.items()]
        + [Line2D([], [], color="0.4", marker=m, ls="", ms=7, label=f"{r} fold(제외 지역)")
           for r, m in REG_MARK.items()])
 fig.legend(handles=hnd, fontsize=8, ncol=5, loc="upper center", bbox_to_anchor=(0.5, 0.02))
-fig.suptitle("S6 소스 신뢰도 추정 진단: LORO fold별 (b_s, σ_s) 학습값 vs 경험값", fontsize=12, y=1.02)
 save(fig, "s6_bias_sigma_scatter")
 
 # ---------------- 3. LORO 지역별 분해 + 부트스트랩 CI ----------------
@@ -168,7 +166,7 @@ for ax, reg in zip(axes[:3], regions):
         ax.plot(np.full(len(g), i), g.rmse_cm.values, "o", color="#2b2f38", ms=3, alpha=0.7)
     ax.set_xticks(np.arange(len(ms)), [LABEL[m] for m in ms], rotation=42, ha="right", fontsize=7.5)
     ax.set_ylabel("LORO RMSE (cm)")
-    ax.set_title(f"{reg} 전이 (n={int(sub.n.max()):,})", fontsize=10)
+    ax.set_title(reg, fontsize=10)
     ax.set_ylim(0, max(vals) * 1.08)   # y축 0 시작: 방법 간 RMSE 차이 과장 방지
 # ΔRMSE CI 패널 (sa_fusion vs 경쟁 상위 baseline만. 붕괴 baseline(실측-only 22~28cm 차)은
 # 자명 유의라 제외하고 본문 수치로 보고)
@@ -197,11 +195,10 @@ for base, comp in pairs:
 ax.axvline(0, color="0.4", lw=1.0)
 ax.set_yticks(yt, ylab, fontsize=8)
 ax.set_xlabel("ΔRMSE = baseline - sa_fusion (cm)\n양수=sa 개선 · 95% 블록부트스트랩 CI")
-ax.set_title("sa_fusion ΔRMSE (지역별)", fontsize=10)
+ax.set_title("ΔRMSE", fontsize=10)
 hnd = [Line2D([], [], color=c, marker="o", ls="", ms=6, label=r) for r, c in REG_C.items()]
 ax.legend(handles=hnd, fontsize=8, loc="best")
 fig.subplots_adjust(wspace=0.42)
-fig.suptitle("S6 LORO 지역별 분해: source-aware vs 비교군", fontsize=12, y=1.03)
 save(fig, "s6_loro_regions")
 
 print("[done] 그림 3종 저장 완료")

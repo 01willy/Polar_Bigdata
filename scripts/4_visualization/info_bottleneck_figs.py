@@ -28,26 +28,30 @@ plt.rcParams["pdf.fonttype"] = 42
 
 res = pd.read_csv("data/processed/alt_ablation_cell_results.csv")
 
-# 표시 순서(정보 추가 순 + 대조군 Mloc). 라벨은 심사자용으로 간결화(내부 코드 병기).
+# 표시 순서(정보 추가 순 + 대조군 Mloc). 라벨은 축소 게재 판독성 위해 짧게:
+# 누적 추가 표기('+기후'=지형에 기후 추가=M3 기후+지형), 괄호=누적 공변량 수.
 ORDER = [
-    ("M0 지역평균", "지역평균\n(baseline)", 0),
-    ("M2 지형", "지형\n(DEM 6)", 6),
-    ("M3 기후+지형", "기후+지형\n(14)", 14),
+    ("M0 지역평균", "지역평균\n(0)", 0),
+    ("M2 지형", "지형\n(6)", 6),
+    ("M3 기후+지형", "+기후\n(14)", 14),
     ("M4 +InSAR", "+InSAR\n(19)", 19),
-    ("M9 전체", "전체 공변량\n(24)", 24),
+    ("M9 전체", "전체\n(24)", 24),
     ("Mloc 위치만(대조)", "위경도만\n(2, 대조)", 2),
 ]
-CV = [("spatial_block", "공간블록 검증 (0.5° 이웃 분리)"),
-      ("LORO", "지역제외 전이 검증 (LORO)")]
+CV = [("spatial_block", "(a) 공간블록 검증 (0.5° 이웃 분리)"),
+      ("LORO", "(b) 지역제외 전이 검증 (LORO)")]
 
 # 냉색 이산 팔레트(붉은계열 회피). 대조군 Mloc은 강조색(짙은 청록)으로 구분.
 base = cmc.davos_r
 pal = [base(t) for t in np.linspace(0.16, 0.72, len(ORDER) - 1)]
 HILITE = "#0b7285"   # Mloc 위경도만: 강조
 
-sd_ref = float(res.target_sd_cm.iloc[0])   # 관측 표준편차(skill 기준선)
+# 관측 표준편차(skill 기준선)는 검증 프로토콜별로 다르다(σ_spatial=18.54, σ_LORO=18.44 cm).
+sd_by_cv = {cv: float(res.loc[res.cv_type == cv, "target_sd_cm"].iloc[0]) for cv, _ in CV}
 
-fig, axes = plt.subplots(1, 2, figsize=(12.4, 5.2), sharey=True)
+# 양단(2단) 인쇄폭 17 cm 타깃: 설계폭 9.2 in(23.4 cm, tight 후 약 22 cm) → 축소율 약 0.75.
+# 최소 폰트 11 pt는 인쇄 시 약 8 pt로 판독 임계(7 pt) 이상.
+fig, axes = plt.subplots(1, 2, figsize=(9.2, 4.1), sharey=True)
 ymax = 0
 for ax, (cv, cv_title) in zip(axes, CV):
     sub = res[res.cv_type == cv].set_index("config")
@@ -60,49 +64,44 @@ for ax, (cv, cv_title) in zip(axes, CV):
     # Mloc 기준 수평선: 물리 공변량이 넘지 못하는 하한
     mloc_r = float(sub.loc["Mloc 위치만(대조)", "rmse_cm"])
     ax.axhline(mloc_r, color=HILITE, ls="--", lw=1.2, zorder=2)
-    ax.text(-0.35, mloc_r - 0.4, f"위경도만 {mloc_r:.1f} cm", color=HILITE,
-            fontsize=9, va="top", ha="left", fontweight="bold")
+    ax.text(-0.1, mloc_r - 0.45, f"위경도만 {mloc_r:.1f} cm", color=HILITE,
+            fontsize=11, va="top", ha="left", fontweight="bold", zorder=4)
     for xi, r in zip(x, rmse):
-        ax.text(xi, r + 0.25, f"{r:.1f}", ha="center", va="bottom", fontsize=9.5,
+        ax.text(xi, r + 0.25, f"{r:.1f}", ha="center", va="bottom", fontsize=11,
                 color="#222222")
     ax.set_xticks(x)
-    ax.set_xticklabels([lab for _, lab, _ in ORDER], fontsize=8.5)
-    ax.set_title(cv_title, fontsize=11)
+    ax.set_xticklabels([lab for _, lab, _ in ORDER], fontsize=11)
+    ax.set_title(cv_title, fontsize=13, loc="left")
     ax.grid(axis="y", alpha=0.35, lw=0.5)
     ax.grid(axis="x", visible=False)
     despine(ax)
 
-axes[0].set_ylabel("셀 단위 RMSE (cm, 낮을수록 우수)", fontsize=11)
+axes[0].set_ylabel("셀 단위 RMSE (cm)", fontsize=13)
+axes[0].tick_params(axis="y", labelsize=11.5)
 for ax in axes:
     ax.set_ylim(0, ymax * 1.16)
 
-# skill 보조축(우측 패널 오른쪽): skill = 1 - RMSE/σ, σ=관측 표준편차
+# skill 보조축(패널 (b) 오른쪽): skill = 1 - RMSE/σ. σ는 해당 패널(LORO)의 관측 표준편차 사용.
+sd_loro = sd_by_cv["LORO"]
 axr = axes[1].twinx()
 axr.set_ylim(0, ymax * 1.16)
 tick_r = np.array([12, 15, 18, 21])
 axr.set_yticks(tick_r)
-axr.set_yticklabels([f"{1 - r / sd_ref:+.2f}" for r in tick_r], fontsize=11)
-axr.set_ylabel(f"skill = 1 - RMSE/σ  (σ = {sd_ref:.1f} cm)", fontsize=11.5, color="#555")
+axr.set_yticklabels([f"{1 - r / sd_loro:+.2f}" for r in tick_r], fontsize=11.5)
+# σ는 패널 (b) LORO의 관측 표준편차(18.44 cm). 정의 문장은 본문 캡션에 기재.
+axr.set_ylabel(f"skill = 1 - RMSE/σ  (σ = {sd_loro:.1f} cm, LORO)",
+               fontsize=12.5, color="#555")
 axr.grid(False)
 
-fig.suptitle("정보 병목 진단: 예측 skill이 공변량이 아니라 공간좌표에서 포화한다",
-             fontsize=14, fontweight="bold", y=1.005)
-fig.text(0.5, 0.955,
-         "위경도 2개만 쓴 대조모델(Mloc)이 물리 공변량 24개(전체)와 동률 이상. "
-         "모델·공변량 추가로는 셀 단위 정보 하한을 넘지 못한다.",
-         ha="center", va="top", fontsize=10, color="#333333")
-fig.text(0.5, 0.012,
-         "GBM 고정, 셀 프로토콜 n=14,348 위치. 두 검증 모두 위경도만(점선)이 전체 공변량 이상. "
-         "병목은 모델 용량이 아니라 공변량이 담지 못한 국소 편차(정보량)에 있다.",
-         ha="center", va="bottom", fontsize=8.5, color="#666666")
-fig.subplots_adjust(left=0.075, right=0.905, top=0.86, bottom=0.13, wspace=0.08)
+fig.subplots_adjust(left=0.09, right=0.895, top=0.91, bottom=0.14, wspace=0.08)
 
 for ext in ("png", "pdf"):
     fig.savefig(figpath("spatial_dl", "alt_info_bottleneck", ext=ext),
                 dpi=300 if ext == "png" else None, bbox_inches="tight")
 plt.close(fig)
 print("[fig] outputs/figures/06_deep_learning/alt_info_bottleneck.png+pdf")
-print(f"[check] σ(obs)={sd_ref:.2f} cm")
+print(f"[check] σ(spatial_block)={sd_by_cv['spatial_block']:.3f} cm, "
+      f"σ(LORO)={sd_by_cv['LORO']:.3f} cm (skill 축은 LORO σ 사용)")
 for cv, _ in CV:
     sub = res[res.cv_type == cv].set_index("config")
     print(f"  {cv}: Mloc={sub.loc['Mloc 위치만(대조)','rmse_cm']:.1f}  "

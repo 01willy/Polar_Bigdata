@@ -104,6 +104,10 @@ def use_polar():
         "legend.edgecolor": "#cccccc",
         "legend.fontsize": 9.5,
         "image.cmap": "cmc.batlow",
+        # 벡터 출력 시 텍스트를 TrueType(Type 42)으로 임베드한다. 기본값 3(Type 3)은
+        # 저널 PDF 검수에서 거부되는 사례가 있고 텍스트 선택·추출이 되지 않는다.
+        "pdf.fonttype": 42,
+        "ps.fonttype": 42,
     })
     return plt
 

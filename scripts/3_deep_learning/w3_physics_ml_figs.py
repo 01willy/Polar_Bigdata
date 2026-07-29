@@ -25,6 +25,9 @@ import pandas as pd
 from polar.plotstyle import use_polar, CMAP, tnorm, BAD, FROZEN, THAWED
 from polar.outputs import figpath
 plt = use_polar()
+# 저널 제출용: 폰트를 Type 42(TrueType)로 임베딩(Type 3 방지, 텍스트 검색·확대 인쇄 품질 확보)
+plt.rcParams["pdf.fonttype"] = 42
+plt.rcParams["ps.fonttype"] = 42
 
 PROC = "data/processed"
 CAT = "11_physics_ml"
@@ -43,8 +46,16 @@ COL = {"PHYS_const": "#08519c", "PHYS_clim": "#3182bd", "PHYS_soil": "#6baed6",
        "RESIDUAL": "#525252", "HYBRID_aoa": "#238b45"}
 
 
+# figs-only: 명령행 인자로 그림 basename 부분문자열을 주면 해당 그림만 저장한다.
+# (재계산 없음. CSV만 읽는 스크립트라 나머지 그림은 렌더 후 저장 생략)
+ONLY = [a for a in sys.argv[1:] if not a.startswith("-")]
+
+
 def save(fig, name):
-    fig.savefig(figpath(CAT, name, "png"), dpi=200, bbox_inches="tight")
+    if ONLY and not any(k in name for k in ONLY):
+        plt.close(fig)
+        return
+    fig.savefig(figpath(CAT, name, "png"), dpi=300, bbox_inches="tight")
     fig.savefig(figpath(CAT, name, "pdf"), bbox_inches="tight")
     plt.close(fig)
 
@@ -102,20 +113,39 @@ save(fig, "02_physics_constraint_net_effect")
 
 
 # ============ 3. E(x) 지역별 분포 + 물리 타당범위 ============
-fig, axes = plt.subplots(1, 2, figsize=(11.5, 4.6), sharey=True)
-lo = oof[oof["Ex_soil_LORO"].notna()]
-for ax, col, title in [(axes[0], "Ex_soil_LORO", "PHYS_soil"), (axes[1], "Ex_nn_LORO", "PHYS_nn")]:
+# 내부 제목 없음(보고서 캡션이 제목 대체). 패널 (a)(b) 라벨 + 단위 cm/√(°C·day).
+# E_const 지역값: Ex_diag LORO 행(해당 지역이 held-out 일 때 학습지역 적합 상수 E).
+E_UNIT = "cm/√(°C·day)"
+exd_loro = exd[exd.cv_type == "LORO"].set_index("region")["E_const"]
+fig, axes = plt.subplots(1, 2, figsize=(10.5, 4.6), sharey=True)
+for k, (ax, col, mdl) in enumerate([(axes[0], "Ex_soil_LORO", "PHYS_soil"),
+                                    (axes[1], "Ex_nn_LORO", "PHYS_nn")]):
     data = [oof[(oof.region == r) & oof[col].notna()][col].values for r in REGIONS]
     bp = ax.boxplot(data, positions=x, widths=0.5, patch_artist=True, showfliers=False,
-                    medianprops=dict(color="#111", lw=1.4))
-    for patch, r in zip(bp["boxes"], REGIONS):
+                    medianprops=dict(color="#111", lw=1.6))
+    for patch in bp["boxes"]:
         patch.set_facecolor(CMAP.count(0.55)); patch.set_alpha(0.85)
     ax.axhspan(1.0, 5.0, color="#c6dbef", alpha=0.35, zorder=0)
-    ax.text(0.02, 4.7, "물리 타당범위 1 to 5 cm/√degday", fontsize=8, color="#2166ac", va="top")
-    ax.set_xticks(x); ax.set_xticklabels([REG_LABEL[r] for r in REGIONS], fontsize=9)
-    ax.set_title(f"{title}: E(x) 지역별")
-axes[0].set_ylabel("적합된 E(x) (cm / √degday)")
-fig.suptitle("E(x) 지역별 분포: 지역 더미처럼 튀는지 진단(전이 fold 값)", y=1.02, fontsize=12)
+    for j, r in enumerate(REGIONS):
+        e = float(exd_loro[r])
+        ax.plot([x[j] - 0.32, x[j] + 0.32], [e, e], ls="--", color="#08519c",
+                lw=1.6, zorder=6)
+        ax.annotate(f"{e:.2f}", (x[j] + 0.36, e), fontsize=10.5, color="#08519c",
+                    va="center", ha="left")
+    ax.set_xlim(-0.6, 2.85)
+    ax.set_xticks(x); ax.set_xticklabels([REG_LABEL[r] for r in REGIONS], fontsize=13)
+    ax.tick_params(axis="y", labelsize=11.5)
+    ax.text(0.02, 0.975, f"({'ab'[k]}) {mdl}", transform=ax.transAxes,
+            va="top", ha="left", fontsize=13)
+axes[0].set_ylabel(f"적합된 E(x) ({E_UNIT})", fontsize=13)
+from matplotlib.patches import Patch
+from matplotlib.lines import Line2D
+_handles = [Patch(facecolor="#c6dbef", alpha=0.5, label=f"물리 타당범위 1-5 {E_UNIT}"),
+            Line2D([0], [0], ls="--", color="#08519c", lw=1.6,
+                   label="E_const (LORO 학습지역 적합)")]
+# 두 패널 공통 범례: 패널 상단 중앙(그림 수준)에 배치해 (a)(b) 모두에 적용됨을 명시
+fig.legend(handles=_handles, loc="lower center", bbox_to_anchor=(0.5, 0.955),
+           ncol=2, fontsize=11, framealpha=0.9, columnspacing=1.8)
 save(fig, "03_Ex_byregion_boxplot")
 
 

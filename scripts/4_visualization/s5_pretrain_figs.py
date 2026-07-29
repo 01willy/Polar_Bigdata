@@ -66,8 +66,6 @@ ax.set_xlabel("RMSE (cm, 3-seed 평균 ± SD)", fontsize=9)
 ax.plot([], [], "o", color=V_COLOR["scratch"], label="scratch(실측만)")
 ax.plot([], [], "o", color=V_COLOR["pretrain"], label="Stefan pseudo 사전학습→finetune")
 ax.legend(fontsize=8, loc="lower right")
-ax.set_title("S5 물리 사전학습 효과 (숫자=ΔRMSE, 양수=개선. †=격자가 test 지역 공변량 포함(transductive))",
-             fontsize=10.5)
 save(fig, "s5_pretrain_dumbbell")
 
 # ---------------- 게이트 요약 ----------------
@@ -85,7 +83,6 @@ if len(gate):
     ax.set_xticklabels(models)
     ax.set_ylabel("LORO 게이트 RMSE (cm, 비가중평균)", fontsize=9)
     ax.legend(fontsize=8)
-    ax.set_title("S5 게이트: LORO 비가중평균(Alaska·Lena·Canada)", fontsize=10.5)
     save(fig, "s5_gate_bars")
 
 print("[done] S5 시각화 완료")

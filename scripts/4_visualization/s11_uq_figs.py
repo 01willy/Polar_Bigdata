@@ -3,7 +3,7 @@
 입력: data/processed/s11_conformal_{results,oof}.csv · s11_conformal_meta.json
       data/processed/s11_comparison_table.csv · s11_multiaxis_validation.csv
 출력: outputs/figures/s11_uq/*.png+pdf (규약: use_polar·hexbin_map·mask_ocean·
-      ALT=oslo_r·불확실성=acton·축/컬러바 단위 필수)
+      ALT=oslo_r·CQR 구간폭=Blues 순차형(부호 없는 양수)·축/컬러바 단위 필수)
 실행: python scripts/4_visualization/s11_uq_figs.py
 """
 import os, sys, json
@@ -30,7 +30,15 @@ multi = pd.read_csv(PROC / "s11_multiaxis_validation.csv")
 H = meta["headline"]
 
 
+ONLY = {s.strip() for s in os.environ.get("FIGS", "").split(",") if s.strip()}
+
+
 def save(fig, name):
+    """PNG(300dpi)+PDF 동시 저장. 환경변수 FIGS로 일부 그림만 재렌더 가능."""
+    if ONLY and name not in ONLY:
+        plt.close(fig)
+        print(f"  건너뜀 {name}")
+        return
     for ext in ["png", "pdf"]:
         fig.savefig(OUT / f"{name}.{ext}", dpi=300 if ext == "png" else None,
                     bbox_inches="tight")
@@ -38,75 +46,136 @@ def save(fig, name):
     print(f"  저장 {name}.png/.pdf")
 
 
-# ============ 1. calibration 곡선 (명목 vs 실제) + cov90 막대 ============
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10.6, 4.6),
-                               gridspec_kw=dict(width_ratios=[1.25, 1]))
+# ============ 1. 보정 곡선 (명목 vs 실제 커버리지) + 90% 커버리지 막대 ============
+# 색: 저채도 냉색 2단(청회=보정 전, 진청=보정 후). 강조는 진청 하나만 쓴다.
+C_RAW, C_CQR, C_TXT = "#8296a8", "#2f4b6e", "#444444"
+# 두 패널 폭 비를 1.15:1로 좁혀 좌우 비대칭을 완화한다(곡선 패널만 약간 넓게).
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8.4, 3.7),
+                               gridspec_kw=dict(width_ratios=[1.15, 1]))
 sm = res[res.seed == -1]
 per = res[(res.seed >= 0) & (res.setting.isin(["raw", "cqr"]))]
-col = {"raw": "#8e9bad", "cqr": "#27536b"}
-lab = {"raw": "raw quantile CatBoost", "cqr": "CQR conformal 보정"}
-ax1.plot([40, 100], [40, 100], ls="--", c="0.6", lw=1, zorder=1, label="이상적 보정(y=x)")
+col = {"raw": C_RAW, "cqr": C_CQR}
+lab = {"raw": "보정 전 (분위수 회귀)", "cqr": "보정 후 (CQR)"}
+ax1.plot([40, 100], [40, 100], ls="--", c="0.65", lw=0.9, zorder=1, label="이상적 보정 (y = x)")
 for tag in ["raw", "cqr"]:
     g = sm[sm.setting == f"{tag}_seedmean"].sort_values("level")
-    ax1.plot(g.level * 100, g.coverage * 100, "-o", c=col[tag], lw=1.8, ms=5, label=lab[tag])
+    ax1.plot(g.level * 100, g.coverage * 100, "-o", c=col[tag], lw=1.6, ms=4.5,
+             mew=0, label=lab[tag])
     ax1.fill_between(g.level * 100, g.cov_ci_lo * 100, g.cov_ci_hi * 100,
-                     color=col[tag], alpha=0.18, lw=0)
+                     color=col[tag], alpha=0.16, lw=0)
     p = per[per.setting == tag]
-    ax1.scatter(p.level * 100, p.coverage * 100, c=col[tag], s=10, alpha=0.45, zorder=2)
-ax1.set_xlabel("명목 커버리지 (%)"); ax1.set_ylabel("실제 커버리지 (%)")
+    ax1.scatter(p.level * 100, p.coverage * 100, c=col[tag], s=8, alpha=0.5,
+                lw=0, zorder=2)
+ax1.set_xlabel("명목 커버리지 (%)", fontsize=10.5)
+ax1.set_ylabel("실제 커버리지 (%)", fontsize=10.5)
 ax1.set_xlim(45, 95); ax1.set_ylim(10, 100)
-ax1.set_title("calibration 곡선 (음영=블록 부트스트랩 95% CI, 점=seed)")
-ax1.legend(frameon=False, fontsize=8.5, loc="upper left")
-ax1.grid(alpha=0.3, lw=0.4)
+ax1.tick_params(labelsize=9.5, length=3)
+# 범례 5항목은 패널 내부에서 판독 한계 → 그림 하단 외부로 배치
+import matplotlib.patches as _mp
+from matplotlib.lines import Line2D as _L2D
+# 항목 순서: 가장 긴 CI 항목을 마지막 열에 두어 열 폭 불균형(중간 여백)을 없앤다.
+h, l = ax1.get_legend_handles_labels()
+h += [_L2D([], [], marker="o", ls="none", mfc="0.55", mec="none", ms=4.5, alpha=0.6),
+      _mp.Patch(fc="0.55", alpha=0.20)]
+l += ["반복별 커버리지", "공간블록 부트스트랩 95% CI (음영 · 오차막대 공통)"]
+fig.legend(h, l, frameon=False, fontsize=9.5, loc="upper center",
+           bbox_to_anchor=(0.5, -0.01), ncol=3, columnspacing=1.4,
+           handlelength=1.6, handletextpad=0.5, labelspacing=0.5)
+ax1.grid(alpha=0.25, lw=0.5)
 
 r90 = sm[(sm.setting == "raw_seedmean") & (sm.level == 0.90)].iloc[0]
 c90 = sm[(sm.setting == "cqr_seedmean") & (sm.level == 0.90)].iloc[0]
-bars = ax2.bar([0, 1], [r90.coverage * 100, c90.coverage * 100], width=0.55,
-               color=[col["raw"], col["cqr"]])
+ax2.bar([0, 1], [r90.coverage * 100, c90.coverage * 100], width=0.52,
+        color=[col["raw"], col["cqr"]], lw=0)
 for i, r in enumerate([r90, c90]):
     ax2.errorbar(i, r.coverage * 100,
                  yerr=[[100 * (r.coverage - r.cov_ci_lo)], [100 * (r.cov_ci_hi - r.coverage)]],
-                 c="0.2", capsize=4, lw=1.2)
-    ax2.text(i, r.coverage * 100 + 3.5, f"{r.coverage*100:.1f}%\n폭 {r.width_cm:.0f}cm",
-             ha="center", fontsize=9)
-ax2.axhline(90, ls=":", c="0.35", lw=1)
-ax2.text(-0.42, 91.5, "목표 90%", fontsize=8, color="0.35", ha="left")
-ax2.set_xticks([0, 1]); ax2.set_xticklabels(["raw\nquantile", "CQR\nconformal"])
-ax2.set_ylabel("90% 구간 실제 커버리지 (%)"); ax2.set_ylim(0, 104)
-ax2.set_title("cov90: 보정 전후")
-fig.suptitle("S11 보정 UQ · 알래스카 in-domain 공간블록 (calibration=train 블록 내부 분리)",
-             fontsize=11, y=1.02)
+                 c="0.35", capsize=3, lw=1.0)
+    # 값 라벨은 CI 상단 위에 둬 오차막대와 겹치지 않게 한다.
+    ax2.text(i, r.cov_ci_hi * 100 + 2.5, f"{r.coverage*100:.1f}%\n구간폭 {r.width_cm:.0f} cm",
+             ha="center", va="bottom", fontsize=9, color=C_TXT, linespacing=1.3)
+ax2.axhline(90, ls=":", c="0.5", lw=0.8)
+ax2.text(-0.46, 86.5, "목표 90%", fontsize=8.5, color="0.45", ha="left", va="top")
+ax2.set_xticks([0, 1])
+ax2.set_xticklabels(["보정 전\n(분위수 회귀)", "보정 후\n(CQR)"])
+ax2.tick_params(labelsize=9.5, length=3)
+ax2.set_ylabel("90% 구간의 실제 커버리지 (%)", fontsize=10.5)
+ax2.set_ylim(0, 118)
+ax2.grid(axis="y", alpha=0.25, lw=0.5)
+for _a in (ax1, ax2):
+    _a.set_axisbelow(True)
+    for _s in ("top", "right"):
+        _a.spines[_s].set_visible(False)
+ax1.set_title("(a)", loc="left", fontsize=11, fontweight="bold")
+ax2.set_title("(b)", loc="left", fontsize=11, fontweight="bold")
+fig.subplots_adjust(wspace=0.32)
 save(fig, "s11_calibration_curve")
 
-# ============ 2. UQ 지도: 중앙값 예측(oslo_r) + CQR 구간폭(acton) ============
+# ============ 2. UQ 지도: 중앙값 예측(oslo_r) + CQR 구간폭(Blues 순차형) ============
 # make_ax는 단일 axes 전용이라 지역 표준 투영으로 subplot 두 개를 직접 구성한다.
+# 캔버스 33.5→29cm 축소 + 폰트 상향: 17cm(두 컬럼) 인쇄에서 눈금 유효 7pt 확보.
 from polar.geomap import _proj
 proj = _proj(ALASKA)
-fig = plt.figure(figsize=(13.2, 5.6))
+fig = plt.figure(figsize=(11.4, 4.9))
 panels = []
 for i in range(2):
     ax = fig.add_subplot(1, 2, i + 1, projection=proj)
     _, ax = make_ax(ALASKA, ax=ax, fig=fig)
     panels.append(ax)
 axA, axB = panels
+# 위경도 눈금 레이블 확대(make_ax 기본 8pt는 축소 게재 시 6pt 미만) + 경도 레이블 수평화
+# cartopy 0.23은 ax._gridliners가 없어 ax.artists에서 Gridliner를 찾는다.
+from cartopy.mpl.gridliner import Gridliner as _GL
+for _ax in panels:
+    for _gl in [a for a in _ax.artists if isinstance(a, _GL)]:
+        _gl.xlabel_style = {"size": 12, "color": "0.3"}
+        _gl.ylabel_style = {"size": 12, "color": "0.3"}
+        _gl.rotate_labels = False
+# (a) 컬러바 라벨과 (b) 좌측 위도 레이블 충돌 방지: 패널 간격 확대
+fig.subplots_adjust(wspace=0.30)
 
+
+def _scalebar(ax):
+    """geomap.add_scalebar와 동일하되 폰트 확대(축소 게재 판독성)."""
+    try:
+        from matplotlib_scalebar.scalebar import ScaleBar
+        ax.add_artist(ScaleBar(1, units="m", location="lower right", length_fraction=0.25,
+                               box_alpha=0.7, color="0.2", font_properties={"size": 10}))
+    except Exception:
+        pass
+
+
+# CQR 구간폭은 부호 없는 양수 스칼라 → 단조 순차 컬러맵(Blues 절단: 순백·근흑 회피).
+# acton(자주→분홍)은 발산형으로 오독될 수 있어 교체. 패널 (a) oslo_r와도 색상 분리.
+from matplotlib.colors import LinearSegmentedColormap as _LSC
+CMAP_WIDTH = _LSC.from_list(
+    "width_seq", plt.get_cmap("Blues")(np.linspace(0.10, 0.95, 256)))
+CMAP_WIDTH.set_bad("#e9ecef")
+
+# gridsize 46→34: 육각 셀 확대(축소 게재 시인성). 컬러바 라벨·틱도 확대.
 v = oof.pred_med.values
-hb1 = hexbin_map(axA, oof.lon.values, oof.lat.values, v, gridsize=46, cmap=CMAP.alt,
+hb1 = hexbin_map(axA, oof.lon.values, oof.lat.values, v, gridsize=34, cmap=CMAP.alt,
                  vmin=np.nanpercentile(v, 2), vmax=np.nanpercentile(v, 98))
 mask_ocean(axA)
-add_colorbar(fig, hb1, axA, "예측 ALT 중앙값 (cm)")
-add_scalebar(axA); add_inset_locator(fig, axA, ALASKA)
-axA.set_title("(a) OOF 중앙값 예측 (quantile CatBoost, 셀 median)", fontsize=10)
+cbA = add_colorbar(fig, hb1, axA, "예측 ALT 중앙값 (cm)")
+cbA.set_label("예측 ALT 중앙값 (cm)", fontsize=13)
+cbA.ax.tick_params(labelsize=11.5)
+_scalebar(axA); add_inset_locator(fig, axA, ALASKA)
+axA.set_title("(a)", loc="left", fontsize=13.5)
 
 w = oof.width90_cqr.values
-hb2 = hexbin_map(axB, oof.lon.values, oof.lat.values, w, gridsize=46, cmap=CMAP.err,
+hb2 = hexbin_map(axB, oof.lon.values, oof.lat.values, w, gridsize=34, cmap=CMAP_WIDTH,
                  vmin=np.nanpercentile(w, 2), vmax=np.nanpercentile(w, 98))
 mask_ocean(axB)
-add_colorbar(fig, hb2, axB, "CQR 90% 구간폭 (cm)")
-add_scalebar(axB)
-axB.set_title(f"(b) 보정 90% 구간폭 (cov90 {H['cov90_cqr']*100:.1f}%)", fontsize=10)
-fig.suptitle("S11 보정 불확실성 지도 · 알래스카 (0.5° 공간블록 OOF, seed-mean)",
-             fontsize=11.5, y=0.99)
+cbB = add_colorbar(fig, hb2, axB, "CQR 90% 구간폭 (cm)")
+cbB.set_label("CQR 90% 구간폭 (cm)", fontsize=13)
+cbB.ax.tick_params(labelsize=11.5)
+_scalebar(axB)
+axB.set_title("(b)", loc="left", fontsize=13.5)
+# 컬러바 그래디언트를 벡터 패스로 출력(기본 rasterize → PDF 인쇄 banding 방지)
+for _cb in (cbA, cbB):
+    _cb.solids.set_rasterized(False)
+    _cb.solids.set_edgecolor("face")
 save(fig, "s11_uq_maps")
 
 # ============ 3. 비교표 렌더 ============

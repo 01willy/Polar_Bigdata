@@ -1,9 +1,12 @@
 """E1 시각화: 정통 공간보간(OK·RK·IDW·MEAN) vs GBM·Stefan 물리앵커 비교.
 
-`e1_kriging_baseline.py` 산출을 3종 그림으로. 컬러맵 규약(ALT=oslo_r)·mask_ocean·축단위 준수.
-  (i)   방법별 RMSE 막대: in-domain vs LORO 게이트, y축 0시작, 블록부트스트랩 CI.
-  (ii)  OK variogram: 경험 semivariance + 적합 spherical(range·sill·nugget 주석).
-  (iii) 대표 지역(알래스카) 예측 지도 비교: GBM vs RK vs STEF(실제 배경·mask_ocean·oslo_r).
+`e1_kriging_baseline.py` 산출을 5종 그림으로. 컬러맵 규약(ALT=oslo_r)·mask_ocean·축단위 준수.
+그림 내부 제목·주장문 없음(보고서 캡션이 대신함). 패널 (a)(b) 라벨·축단위 유지.
+  (i)    방법별 RMSE 막대: in-domain vs LORO 게이트, y축 0시작, 블록부트스트랩 CI.
+  (ii)   OK variogram: 경험 semivariance + 적합 spherical(range·sill·nugget 범례 표기).
+  (ii-b) CV 문맥별 적합 변동도 비교: spatial_block_AK vs LORO 3문맥(OK·RK fold 평균)
+         곡선 오버레이 + range·sill·nugget 막대 패널.
+  (iii)  대표 지역(알래스카) 예측 지도 비교: GBM vs RK vs STEF(실제 배경·mask_ocean·oslo_r).
 
 실행: python scripts/4_visualization/e1_kriging_figs.py
 """
@@ -64,7 +67,11 @@ ax.errorbar(xpos, vals, yerr=[lo, hi], fmt="none", ecolor="#333", elinewidth=1.1
             capsize=3.5, zorder=3)
 for x, v in zip(xpos, vals):
     ax.text(x, v + max(hi) * 0.12, f"{v:.1f}", ha="center", va="bottom", fontsize=9)
-ax.set_title("알래스카 in-domain (공간블록 6-fold)")
+ax.text(0.0, 1.02, "(a) in-domain", transform=ax.transAxes, ha="left", va="bottom",
+        fontsize=11, fontweight="bold")
+# 오차막대 정의 명시(리뷰 지적): 공간블록 부트스트랩 95% CI (2.5-97.5 백분위, n=200)
+ax.text(0.985, 0.975, "오차막대 = 공간블록 부트스트랩 95% CI", transform=ax.transAxes,
+        ha="right", va="top", fontsize=8.5, color="#333")
 ax.set_ylabel("RMSE (cm)")
 ax.set_ylim(0, max([boot.loc[m, "ci_hi"] for m in order]) * 1.12)
 ax.set_xticks(xpos); ax.set_xticklabels([LABELS[m] for m in order], rotation=20, ha="right", fontsize=8.5)
@@ -76,15 +83,20 @@ gate = [float(comp.loc[m, "LORO_gate_rmse"]) for m in order]
 ax.bar(xpos, gate, color=cols, edgecolor="#333", linewidth=0.6, width=0.68, zorder=2)
 for x, v in zip(xpos, gate):
     ax.text(x, v + max(gate) * 0.015, f"{v:.1f}", ha="center", va="bottom", fontsize=9)
-ax.set_title("LORO 전이 게이트 (비가중평균: 알래스카·레나·캐나다)")
+ax.text(0.0, 1.02, "(b) LORO 전이", transform=ax.transAxes, ha="left", va="bottom",
+        fontsize=11, fontweight="bold")
 ax.set_ylabel("RMSE (cm)")
 ax.set_ylim(0, max(gate) * 1.15)
 ax.set_xticks(xpos); ax.set_xticklabels([LABELS[m] for m in order], rotation=20, ha="right", fontsize=8.5)
 ax.grid(axis="y", alpha=0.4)
-ax.axhline(gate[order.index("STEF")], color=COLORS["STEF"], ls="--", lw=1.0, alpha=0.7, zorder=1)
+# 파선 기준선 = Stefan 물리앵커 LORO 게이트 RMSE. 인라인 라벨로 의미 명시(리뷰 지적).
+stef_gate = gate[order.index("STEF")]
+ax.axhline(stef_gate, color=COLORS["STEF"], ls="--", lw=1.0, alpha=0.7, zorder=1)
+ax.text(0.015, stef_gate / (max(gate) * 1.15) + 0.012,
+        f"Stefan 게이트 {stef_gate:.1f} cm", transform=ax.transAxes,
+        fontsize=8.5, color=COLORS["STEF"], va="bottom",
+        bbox=dict(boxstyle="round,pad=0.25", fc="white", ec="none", alpha=0.85))
 
-fig.suptitle("E1 인터폴레이션 vs 물리+ML: in-domain은 공간보간 경쟁, 전이는 물리앵커만 방어",
-             fontsize=12.5, y=1.02)
 save(fig, "e1_rmse_bars")
 
 
@@ -124,22 +136,109 @@ except Exception as e:
     print(f"[vario] skgstat 실패({str(e)[:60]}), 경험 semivariance 생략")
 
 # 파이프라인 실사용(pykrige) 적합선을 기본 적합으로 표기(6 in-domain fold 중앙값).
+#   단위는 sill·nugget 각각에 명시(cm^2), 위첨자는 mathtext로 렌더(유니코드 ² 오독 방지).
 hh = np.linspace(0, 800, 200)
+sill_tot = psill_m + nug_m
 ax.plot(hh, spherical(hh, psill_m, rng_m, nug_m), "-", color="#1f4e79", lw=2.2,
         label=(f"적합 spherical (파이프라인·pykrige)\n"
-               f"range={rng_m:.0f}km · sill={psill_m + nug_m:.0f} · nugget={nug_m:.0f} cm²"), zorder=2)
-ax.axhline(psill_m + nug_m, color="0.55", ls=":", lw=1.0, zorder=1)
+               f"range={rng_m:.0f} km · sill={sill_tot:.0f} cm$^2$ · nugget={nug_m:.0f} cm$^2$"),
+        zorder=2)
+ax.axhline(sill_tot, color="0.55", ls=":", lw=1.0, zorder=1)
+# sill 기준선 인라인 라벨(리뷰 지적: 축소 인쇄 시 범례 유추 없이 직접 판독)
+ax.text(8, sill_tot + 6, f"sill {sill_tot:.0f} cm$^2$", fontsize=9,
+        color="0.35", ha="left", va="bottom")
 ax.axvline(rng_m, color="0.55", ls=":", lw=1.0, zorder=1)
 ax.set_xlabel("거리 h (km)")
-ax.set_ylabel("semivariance γ(h) (cm²)")
-ax.set_title("OK variogram (알래스카 in-domain): 공간 자기상관 구조")
+ax.set_ylabel(r"semivariance $\gamma(h)$ (cm$^2$)")
 ax.set_xlim(0, 800)
-ax.legend(fontsize=8.5, loc="lower right")
+ax.legend(fontsize=9, loc="lower right")
 ax.grid(alpha=0.4)
-ax.text(0.02, 0.97, "range 밖에서 sill 포화 = 공간상관 소멸 거리\nnugget = 미세규모 변동·측정잡음",
-        transform=ax.transAxes, fontsize=8, va="top", color="0.3",
-        bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="0.8", alpha=0.85))
 save(fig, "e1_ok_variogram")
+
+
+# ============================================================
+# (ii-b) CV 문맥별 적합 변동도 비교: spatial_block_AK vs LORO 3문맥
+#   파라미터 = 문맥별 OK·RK fold 평균 (in-domain 12 fit, LORO 문맥별 2 fit).
+#   (a) 적합 spherical 곡선 오버레이(+0-1300 km 확대 인셋), (b)-(d) range·sill·nugget 막대.
+# ============================================================
+CTX = [  # (cv키, 범례명, 색, 곡선 linestyle, 막대 hatch) — 색+선종류+해칭 병행(색맹안전)
+    ("spatial_block_AK", "알래스카 공간블록 CV", "#1f4e79", "-", ""),
+    ("LORO_Alaska", "LORO 알래스카", "#2f6f9f", "--", "//"),
+    ("LORO_Canada", "LORO 캐나다", "#4a90b8", "-.", ".."),
+    ("LORO_Lena", "LORO 레나", "#7fbfc7", ":", "xx"),
+]
+pars = {}
+for cv_key, *_ in CTX:
+    p = vario[vario.cv == cv_key][["psill", "range_km", "nugget"]].mean()
+    pars[cv_key] = dict(psill=float(p.psill), rng=float(p.range_km), nug=float(p.nugget),
+                        sill=float(p.psill + p.nugget))
+
+fig = plt.figure(figsize=(13.6, 4.8))
+gs = fig.add_gridspec(1, 2, width_ratios=[2.9, 3.0], wspace=0.26)
+gsb = gs[1].subgridspec(1, 3, wspace=0.14)
+
+# (a) 적합 spherical 곡선 오버레이
+ax = fig.add_subplot(gs[0])
+hh = np.linspace(0, 10500, 600)
+ymax = max(p["sill"] for p in pars.values()) * 1.12
+for cv_key, name, col, ls, _h in CTX:
+    p = pars[cv_key]
+    ax.plot(hh, spherical(hh, p["psill"], p["rng"], p["nug"]), ls=ls, color=col, lw=2.4,
+            label=f"{name} (range {p['rng']:.0f} km)", zorder=3)
+    ax.plot([p["rng"], p["rng"]], [0, p["sill"]], color=col, ls=(0, (2, 2)), lw=1.0,
+            alpha=0.75, zorder=2)
+ax.set_xlim(0, 10500)
+ax.set_ylim(0, ymax)
+ax.set_xlabel("거리 h (km)")
+# 단위 cm^2 (ALT[cm]의 semivariance). 위첨자 mathtext 렌더로 'cm^-1' 오독 방지(리뷰 지적).
+ax.set_ylabel(r"semivariance $\gamma(h)$ (cm$^2$)")
+ax.legend(fontsize=9, loc="upper left", title="적합 spherical (OK·RK fold 평균)",
+          title_fontsize=9)
+ax.grid(alpha=0.4)
+ax.text(0.0, 1.02, "(a)", transform=ax.transAxes, ha="left", va="bottom",
+        fontsize=11, fontweight="bold")
+
+# 확대 인셋: in-domain(652 km) 곡선의 포화가 보이는 0-1300 km 구간
+axins = ax.inset_axes([0.60, 0.10, 0.37, 0.38])
+for cv_key, name, col, ls, _h in CTX:
+    p = pars[cv_key]
+    axins.plot(hh, spherical(hh, p["psill"], p["rng"], p["nug"]), ls=ls, color=col, lw=1.8)
+p0 = pars["spatial_block_AK"]
+axins.plot([p0["rng"], p0["rng"]], [0, p0["sill"]], color=CTX[0][2], ls=(0, (2, 2)), lw=1.0)
+axins.text(p0["rng"] + 40, 28, f"{p0['rng']:.0f} km", fontsize=8, color=CTX[0][2])
+axins.set_xlim(0, 1300)
+axins.set_ylim(0, 360)
+axins.tick_params(labelsize=8)
+axins.grid(alpha=0.35)
+ax.indicate_inset_zoom(axins, edgecolor="0.45", lw=0.9)
+
+# (b)-(d) range·sill·nugget 막대 (가로막대, 문맥 순서 공유)
+ypos = np.arange(len(CTX))[::-1]
+panels_bd = [
+    ("(b)", "range (km)", [pars[k]["rng"] for k, *_ in CTX], "{:.0f}"),
+    ("(c)", "sill (cm$^2$)", [pars[k]["sill"] for k, *_ in CTX], "{:.0f}"),
+    ("(d)", "nugget (cm$^2$)", [pars[k]["nug"] for k, *_ in CTX], "{:.1f}"),
+]
+for j, (tag, xlab, vals, vfmt) in enumerate(panels_bd):
+    axb = fig.add_subplot(gsb[j])
+    for (cv_key, name, col, _ls, hat), y, v in zip(CTX, ypos, vals):
+        axb.barh(y, v, height=0.62, color=col, hatch=hat, edgecolor="#222",
+                 linewidth=0.6, zorder=2)
+        axb.text(v + max(vals) * 0.03, y, vfmt.format(v), va="center", ha="left", fontsize=8)
+    axb.set_xlim(0, max(vals) * 1.30)
+    axb.set_ylim(-0.55, len(CTX) - 0.45)
+    axb.set_yticks(ypos)
+    if j == 0:
+        axb.set_yticklabels(["AK 블록", "LORO AK", "LORO 캐나다", "LORO 레나"], fontsize=8.5)
+    else:
+        axb.set_yticklabels([])
+    axb.set_xlabel(xlab, fontsize=9.5)
+    axb.tick_params(axis="x", labelsize=8)
+    axb.grid(axis="x", alpha=0.4)
+    axb.grid(axis="y", visible=False)
+    axb.text(0.0, 1.02, tag, transform=axb.transAxes, ha="left", va="bottom",
+             fontsize=11, fontweight="bold")
+save(fig, "e1_variogram_regions")
 
 
 # ============================================================
@@ -161,8 +260,6 @@ for i, (title, col) in enumerate(panels):
     add_scalebar(ax, loc="lower right")
 cb = fig.colorbar(sc, ax=fig.axes, fraction=0.011, pad=0.02)
 cb.set_label("ALT (cm)", fontsize=9)
-fig.suptitle("E1 알래스카 in-domain 예측 비교: GBM·RK·Stefan (셀 중앙값 hexbin, 실제 배경)",
-             fontsize=12.5, y=1.03)
 save(fig, "e1_pred_maps_alaska")
 
 # ============================================================
@@ -191,10 +288,10 @@ stef_worst = float(np.nanmax(loro.loc["STEF"].values))
 ax.axhline(stef_worst, color=REG_COLOR["Alaska"], ls="--", lw=1.0, alpha=0.7, zorder=1)
 ax.text(0.015, stef_worst / (float(np.nanmax(loro.values)) * 1.12) + 0.015,
         f"Stefan 최악 지역 {stef_worst:.0f} cm", transform=ax.transAxes,
-        fontsize=8, color=REG_COLOR["Alaska"], va="bottom")
-ax.set_title("LORO 지역별 전이 RMSE: 순수 보간(IDW·OK)은 지역 편차 큼, Stefan만 전역 안정")
+        fontsize=8.5, color=REG_COLOR["Alaska"], va="bottom",
+        bbox=dict(boxstyle="round,pad=0.25", fc="white", ec="none", alpha=0.85))
 ax.legend(title="전이 대상 지역", fontsize=9)
 ax.grid(axis="y", alpha=0.4)
 save(fig, "e1_loro_by_region")
 
-print("[done] E1 그림 4종 저장:", OUT)
+print("[done] E1 그림 5종 저장:", OUT)

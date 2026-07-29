@@ -188,54 +188,94 @@ print("[done] 3개 그림(PNG+PDF) 저장")
 # 컨투어. S10 볼륨은 지원반경 15 km 회랑(격자의 4.7%)이라 3D warp 판독이 나쁘다. 온도장
 # 예측은 site-block R2 0.47로 성립, 유도 ALT는 r=0.28(정성 보조, 절대 정합 미성립).
 # ============================================================
+from matplotlib.lines import Line2D
+
 lon2d_v, lat2d_v = np.meshgrid(lons, lats)
 
 
-def save300(fig, name):
-    """보고서용 고해상 저장(dpi 300). 기존 save()는 무수정으로 두고 신규 그림에만 적용."""
+def _rasterize_geo_features(fig):
+    """PDF 용량 절감: 지도 배경 지물(50m 해안선·육지·해양 FeatureArtist)만 래스터층으로
+    전환. 등온선·텍스트·컬러바·격자 라벨은 벡터 유지. PNG 출력에는 영향 없음."""
+    try:
+        from cartopy.mpl.feature_artist import FeatureArtist
+    except Exception:
+        return
+    for ax in fig.get_axes():
+        for a in ax.get_children():
+            if isinstance(a, FeatureArtist):
+                a.set_rasterized(True)
+
+
+def save300(fig, name, pdf_dpi=150):
+    """보고서용 고해상 저장. PNG dpi 300, PDF는 래스터층(dpi=pdf_dpi)만 낮춰 용량 절감
+    (텍스트·등온선·해안선은 벡터 유지). 기존 save()는 무수정으로 두고 신규 그림에만 적용."""
     png = os.path.join(OUTDIR, f"{name}.png")
     fig.savefig(png, dpi=300, bbox_inches="tight")
-    fig.savefig(png.replace(".png", ".pdf"), bbox_inches="tight")
+    fig.savefig(png.replace(".png", ".pdf"), dpi=pdf_dpi, bbox_inches="tight")
     plt.close(fig)
     print(f"[fig300] {png}")
 
 
 # ---------- 그림 4(주력): 깊이-슬라이스 4패널 평면지도(0.5/1/1.5/2 m) ----------
-# 3D warp의 논문형 대체. 각 깊이 평면을 지도에 색면(온도 vik, 0°C 중심 대칭)으로 깔고
-# 0°C 등온선을 검은 윤곽으로 겹친다. 볼륨(지원반경 15 km 격자)에서 슬라이스를 취해
-# 4패널 모두 동일 좌표·동일 clim을 공유한다(프레임 간 색한계 고정).
+# 3D warp의 논문형 대체. 각 깊이 평면을 지도에 색면(온도 vik, 0°C 중심 대칭)으로 깐다.
+# 볼륨(지원반경 15 km 격자)에서 슬라이스를 취해 4패널 모두 동일 좌표·동일 clim을
+# 공유한다(프레임 간 색한계 고정).
+#
+# 0°C 등온선(검은 컨투어)은 제거했다. 지원 격자가 전체의 4.7%(48개 소규모 군집)에 불과해
+# 컨투어가 군집 내부에서만 생성되고, 최장 조각도 50-75 km(인쇄 시 약 3 mm)라 선이 아니라
+# 문자형 파편으로 렌더링된다. 평활화·최소길이 필터로도 파편성이 남으므로 등온선을 빼고
+# 0°C 경계를 색 전환으로만 표현한다: 이산 경계 노름(BoundaryNorm)에 vik 중앙 무채색
+# 구간을 제거해, 0°C를 지나는 지점에서 청→갈 색 단차가 생기도록 했다.
 SLICE_DEPTHS = [0.5, 1.0, 1.5, 2.0]        # m — 지적6이 지정한 대표 깊이
-CLIM_SLICE = 4.0                            # ±4°C 대칭(요구 예시), 0°C 중심 diverging
-norm_slice = tnorm(-CLIM_SLICE, CLIM_SLICE, 0.0)
-cmap_slice = CMAP.temp.copy()
-cmap_slice.set_bad(BAD)                     # 지원반경 밖 = 중립 회색
+LEV_SLICE = [-4, -3, -2, -1, -0.5, 0, 0.5, 1, 2, 3, 4]   # °C, 0°C 대칭
+GAP_FILL = "#d9d9d9"                        # field_map의 결측 채움색과 동일(범례 일치)
 
+
+def _step_at_zero(cmap, gap=0.14, n=256):
+    """발산맵 중앙의 무채색 구간을 잘라 0 교차에서 색 단차가 보이게 한다(0 중심 유지)."""
+    from matplotlib.colors import LinearSegmentedColormap
+    lo = cmap(np.linspace(0.0, 0.5 - gap / 2, n))
+    hi = cmap(np.linspace(0.5 + gap / 2, 1.0, n))
+    return LinearSegmentedColormap.from_list("temp_step0", np.vstack([lo, hi]))
+
+
+cmap_slice = _step_at_zero(CMAP.temp)
+cmap_slice.set_bad(GAP_FILL)                # 지원반경 밖 = 중립 회색
+norm_slice = BoundaryNorm(LEV_SLICE, cmap_slice.N, extend="both")
+
+# 전폭(17 cm) 게재 전제(약 57% 축소 인쇄). 축소 후에도 7 pt 이상이 되도록 범례 13 pt,
+# 주석 12.5 pt, 컬러바 13.5 pt, 격자 경위도 라벨 11.5 pt로 상향.
 fig = plt.figure(figsize=(11.6, 9.4), constrained_layout=True)
 sax = []
 for i, dm in enumerate(SLICE_DEPTHS):
     ax = fig.add_subplot(2, 2, i + 1, projection=PROJ)
     make_ax(ALASKA, ax=ax, fig=fig)
+    for _gl in getattr(ax, "_gridliners", []):
+        _gl.xlabel_style = {"size": 11.5, "color": "0.3"}
+        _gl.ylabel_style = {"size": 11.5, "color": "0.3"}
     di = int(np.argmin(np.abs(depths - dm)))
     sl = tvol[di]                          # (nlat, nlon), 지원 밖 NaN
     pm = field_map(ax, lon2d_v, lat2d_v, sl, cmap=cmap_slice, norm=norm_slice)
-    # 0°C 등온선(동결/융해 경계). 유한값 있는 셀에서만 그린다.
-    if np.isfinite(sl).any():
-        ax.contour(lon2d_v, lat2d_v, np.ma.masked_invalid(sl), levels=[0.0],
-                   colors="k", linewidths=1.2, transform=ccrs.PlateCarree(), zorder=4)
     mask_ocean(ax)
-    ax.set_title(f"({chr(97+i)}) 깊이 {dm:g} m", fontsize=11.5)
+    ax.set_title(f"({chr(97+i)}) 깊이 {dm:g} m", fontsize=14.5)
     sax.append((ax, pm))
-sax[0][0].plot([], [], color="k", lw=1.2, label="0°C 등온선")
-sax[0][0].legend(loc="lower left", fontsize=8.0, framealpha=0.85)
 add_inset_locator(fig, sax[0][0], ALASKA)
 add_scalebar(sax[0][0], loc="lower right")
+# 범례: 그림 전체 하단에 1회만 배치해 4패널 공통 적용(패널 내부 배치 금지).
+from matplotlib.legend_handler import HandlerTuple
+_frz_h = mpatches.Patch(facecolor=cmap_slice(norm_slice(-0.25)), edgecolor="none")
+_thw_h = mpatches.Patch(facecolor=cmap_slice(norm_slice(0.25)), edgecolor="none")
+_gap_h = mpatches.Patch(facecolor=GAP_FILL, edgecolor="0.55", linewidth=0.6)
+fig.legend([(_frz_h, _thw_h), _gap_h],
+           ["0°C 동결/융해 경계(색 전환)", "지원반경 15 km 밖(예측 없음)"],
+           handler_map={tuple: HandlerTuple(ndivide=None, pad=0.0)},
+           loc="outside lower center", ncol=2, fontsize=13, framealpha=0.9,
+           handlelength=2.6, columnspacing=2.4)
 cb = fig.colorbar(sax[-1][1], ax=[a for a, _ in sax], shrink=0.74, pad=0.02,
-                  aspect=30, extend="both")
-cb.set_label("연최대 지중온도 (°C)  ·  0°C 중심(청=동결 유지, 갈=여름 융해)", fontsize=10)
-fig.suptitle("알래스카 얕은 지중 연최대온도 깊이-슬라이스 지도 (0.5·1·1.5·2 m 평면)\n"
-             "3D 대체(논문형 깊이 평면지도) · 색면=온도(vik ±4°C), 검은선=0°C 등온선 · 사이트블록 $R^2$ 0.47\n"
-             "격자=관측셀 지원반경 15 km 회랑 한정(회색=지원 밖, 연속 온도장 아님)",
-             fontsize=12.5, fontweight="bold")
+                  aspect=30, extend="both", ticks=LEV_SLICE)
+cb.set_label("연최대 지중온도 (°C)  ·  0°C 중심(청=동결 유지, 갈=여름 융해)", fontsize=13.5)
+cb.ax.tick_params(labelsize=12.5)
+_rasterize_geo_features(fig)
 save300(fig, "s10_depth_slices")
 
 
@@ -304,10 +344,12 @@ fvmax = max(1.0, float(np.nanpercentile(np.abs(np.r_[sect_lon[np.isfinite(sect_l
                                                       sect_lat[np.isfinite(sect_lat)].ravel()]), 99)))
 norm_f = tnorm(-fvmax, fvmax, 0.0)
 
-fig = plt.figure(figsize=(13.4, 5.2), constrained_layout=True)
+# 단컬럼(17 cm) 게재 전제: 폭 6.7 in(≈17 cm) 세로 2단 배치, 100% 축척 인쇄 기준
+# 폰트 9.5-11 pt. 두 패널이 동일 norm이므로 컬러바 1개 공유.
+fig = plt.figure(figsize=(6.7, 7.6), constrained_layout=True)
 
 # (a) 경도-깊이
-axf1 = fig.add_subplot(1, 2, 1)
+axf1 = fig.add_subplot(2, 1, 1)
 hasA = np.isfinite(sect_lon).any(axis=0)
 loA0, loA1 = lons[hasA].min() - 0.3, lons[hasA].max() + 0.3
 pmA = axf1.pcolormesh(lons, depths, np.ma.masked_invalid(sect_lon), cmap=cmap_fence,
@@ -316,18 +358,20 @@ srcA = _isotherm_cols(sect_lon)
 if np.isfinite(srcA).any():
     axf1.contour(lons, depths, np.ma.masked_invalid(srcA), levels=[0.0],
                  colors="k", linewidths=1.4)
-axf1.plot([], [], color="k", lw=1.4, label="0°C 등온선(교차 열만)")
 axf1.set_xlim(loA0, loA1)
 axf1.set_ylim(depths.max(), 0.0)           # 깊이 아래 방향, 실제 m(과장 없음)
-axf1.set_xlabel("경도 (°E)")
-axf1.set_ylabel("깊이 (m)")
-axf1.set_title(f"(a) 경도-깊이 fence  ·  위도 {LAT_FENCE:g}°N(North Slope)")
-axf1.legend(loc="lower left", fontsize=8.5)
-cbfA = fig.colorbar(pmA, ax=axf1, shrink=0.9, pad=0.02, extend="both")
-cbfA.set_label("연최대 지중온도 (°C)", fontsize=10)
+axf1.set_xlabel("경도 (°E)", fontsize=10.5)
+axf1.set_ylabel("깊이 (m)", fontsize=10.5)
+axf1.set_title(f"(a) 경도-깊이 단면  ·  위도 {LAT_FENCE:g}°N (North Slope)", fontsize=11)
+axf1.tick_params(labelsize=9.5)
+# 범례: 0°C 등온선 + 진회색(지원반경 밖) 의미 통합(별도 구석 주석 제거)
+_iso_f = Line2D([0], [0], color="k", lw=1.4)
+_gap_f = mpatches.Patch(facecolor=GAP_GRAY6, edgecolor="0.45", linewidth=0.6)
+axf1.legend([_iso_f, _gap_f], ["0°C 등온선(교차 열만)", "진회색: 지원반경 15 km 밖(무예측)"],
+            loc="lower left", fontsize=9, framealpha=0.9)
 
 # (b) 위도-깊이
-axf2 = fig.add_subplot(1, 2, 2)
+axf2 = fig.add_subplot(2, 1, 2)
 hasB = np.isfinite(sect_lat).any(axis=0)
 laB0, laB1 = lats[hasB].min() - 0.2, lats[hasB].max() + 0.2
 pmB = axf2.pcolormesh(lats, depths, np.ma.masked_invalid(sect_lat), cmap=cmap_fence,
@@ -336,23 +380,17 @@ srcB = _isotherm_cols(sect_lat)
 if np.isfinite(srcB).any():
     axf2.contour(lats, depths, np.ma.masked_invalid(srcB), levels=[0.0],
                  colors="k", linewidths=1.4)
-axf2.plot([], [], color="k", lw=1.4, label="0°C 등온선(교차 열만)")
 axf2.set_xlim(laB0, laB1)
 axf2.set_ylim(depths.max(), 0.0)
-axf2.set_xlabel("위도 (°N)")
-axf2.set_ylabel("깊이 (m)")
-axf2.set_title(f"(b) 위도-깊이 fence  ·  경도 {LON_FENCE:g}°E(Dalton 회랑)")
-axf2.legend(loc="lower left", fontsize=8.5)
-cbfB = fig.colorbar(pmB, ax=axf2, shrink=0.9, pad=0.02, extend="both")
-cbfB.set_label("연최대 지중온도 (°C)", fontsize=10)
-for _axf in (axf1, axf2):
-    _axf.text(0.99, 0.02, "진회색=지원반경 15 km 밖(관측 희소 회랑)",
-              transform=_axf.transAxes, ha="right", va="bottom", fontsize=8, color="0.25")
+axf2.set_xlabel("위도 (°N)", fontsize=10.5)
+axf2.set_ylabel("깊이 (m)", fontsize=10.5)
+axf2.set_title(f"(b) 위도-깊이 단면  ·  경도 {LON_FENCE:g}°E (Dalton 회랑)", fontsize=11)
+axf2.tick_params(labelsize=9.5)
 
-fig.suptitle("얕은 온도장 fence 단면 (2D, 세로축=실제 깊이 m, 과장 없음)  ·  3D warp 대체\n"
-             "온도 vik(0°C 중심) + 검은 0°C 등온선(부호변화 있는 열만)\n"
-             "진회색 영역(약 3/4)=지원반경 15 km 밖(관측 희소 회랑, 무예측) · 색면=예측 온도장",
-             fontsize=12.0, fontweight="bold")
+cbf = fig.colorbar(pmA, ax=[axf1, axf2], shrink=0.85, pad=0.02, extend="both")
+cbf.set_label("연최대 지중온도 (°C)", fontsize=10.5)
+cbf.ax.tick_params(labelsize=9.5)
+
 save300(fig, "s10_fence_sections")
 
 
@@ -372,8 +410,10 @@ PROFILE_SITES = [(610, "Fairbanks (64.95°N, 내륙)"),
                  (106, "Franklin Bluff (69.66°N, 툰드라)"),
                  (33, "Barrow (71.31°N, 최북 한랭)")]
 
-fig, axp = plt.subplots(1, len(PROFILE_SITES), figsize=(13.6, 4.8),
-                        constrained_layout=True, sharey=True)
+# 단컬럼(17 cm) 게재 전제: 폭 6.7 in(≈17 cm) 2x2 배치, 100% 축척 인쇄 기준 폰트 9.5-10.5 pt.
+fig, axg = plt.subplots(2, 2, figsize=(6.7, 7.2), constrained_layout=True,
+                        sharex=True, sharey=True)
+axp = axg.ravel()
 for ax, (bid, name) in zip(axp, PROFILE_SITES):
     sub = ak_lab[ak_lab.borehole_id == bid].sort_values("depth")
     la, lo = float(sub.lat.iloc[0]), float(sub.lon.iloc[0])
@@ -381,19 +421,20 @@ for ax, (bid, name) in zip(axp, PROFILE_SITES):
     k = int(np.argmin(np.abs(lons - lo)))
     pred = tvol[:, j, k]
     ax.axvline(0.0, color="0.55", lw=0.9, ls=":", zorder=1)   # 0°C 동결/융해 경계
-    ax.plot(pred, depths, color="#b2182b", lw=1.8, zorder=3, label="예측 T(z)")
-    ax.scatter(sub.t_max.values, sub.depth.values, s=22, color="#2166ac",
+    ax.plot(pred, depths, color="#37474f", lw=1.8, zorder=3, label="예측 T(z)")
+    ax.scatter(sub.t_max.values, sub.depth.values, s=26, color="#2166ac",
                edgecolors="white", linewidths=0.4, zorder=4, label="실측 $t_{max}$")
     ax.set_ylim(3.0, 0.0)
     ax.set_xlim(-8, 12)
-    ax.set_xlabel("연최대 지중온도 (°C)")
-    ax.set_title(name, fontsize=9.8)
+    ax.set_title(name, fontsize=10.5)
+    ax.tick_params(labelsize=9.5)
     ax.grid(alpha=0.25, lw=0.5)
-axp[0].set_ylabel("깊이 (m)")
-axp[0].legend(loc="lower left", fontsize=8.0, framealpha=0.9)
-fig.suptitle("대표 지점 깊이별 T(z) 프로파일  ·  예측(전량학습) vs 실측 $t_{max}$  ·  0°C=동결/융해 경계\n"
-             "남→북 열구배(내륙 온난 → 최북 한랭) · 시각화용 산출(검증 지표는 site-block $R^2$ 0.47)",
-             fontsize=12.0, fontweight="bold")
+for ax in axg[1, :]:
+    ax.set_xlabel("연최대 지중온도 (°C)", fontsize=10.5)
+for ax in axg[:, 0]:
+    ax.set_ylabel("깊이 (m)", fontsize=10.5)
+axp[0].plot([], [], color="0.55", lw=0.9, ls=":", label="0°C 동결/융해 경계")
+axp[0].legend(loc="lower left", fontsize=9, framealpha=0.9)
 save300(fig, "s10_profiles_trumpet")
 
 print("[done] 지적6 대체 그림 4종(깊이슬라이스·융해깊이·fence·프로파일) 추가 저장")

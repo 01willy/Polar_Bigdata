@@ -46,8 +46,15 @@ def _proj(extent):
                                 standard_parallels=(la0 + 3, la1 - 3))
 
 
-def make_ax(extent=ALASKA, figsize=(7.2, 6.0), ax=None, fig=None, title=None):
-    """실제 지도 배경(육지·해양·해안선·격자) 위 axes 반환. cartopy 없으면 평면 fallback."""
+def make_ax(extent=ALASKA, figsize=(7.2, 6.0), ax=None, fig=None, title=None,
+            title_fontsize=11, grid=True, grid_labels=True, grid_kw=None,
+            grid_lon=None, grid_lat=None):
+    """실제 지도 배경(육지·해양·해안선·격자) 위 axes 반환. cartopy 없으면 평면 fallback.
+
+    grid=False면 격자선을 그리지 않는다. grid_kw로 선 스타일을 덮어쓰고,
+    grid_lon/grid_lat에 경위도 배열을 주면 해당 위치에만 격자선을 둔다
+    (예: 0.5° 공간블록 경계). 생성된 Gridliner는 ax._gl로 접근 가능.
+    """
     name, lo0, lo1, la0, la1 = extent
     if not _HAS_CARTOPY:
         if ax is None:
@@ -56,7 +63,7 @@ def make_ax(extent=ALASKA, figsize=(7.2, 6.0), ax=None, fig=None, title=None):
         ax.set_aspect(1.0 / np.cos(np.deg2rad(0.5 * (la0 + la1))))
         ax.set_xlabel("경도 (°)"); ax.set_ylabel("위도 (°)")
         if title:
-            ax.set_title(title)
+            ax.set_title(title, fontsize=title_fontsize)
         ax._is_geo = False
         return fig, ax
 
@@ -70,14 +77,45 @@ def make_ax(extent=ALASKA, figsize=(7.2, 6.0), ax=None, fig=None, title=None):
     ax.add_feature(cfeature.LAKES.with_scale("50m"), facecolor=_OCEAN, alpha=0.6, zorder=0.5)
     ax.add_feature(cfeature.COASTLINE.with_scale("50m"), edgecolor=_COAST, linewidth=0.5, zorder=2)
     ax.add_feature(cfeature.BORDERS.with_scale("50m"), edgecolor=_BORDER, linewidth=0.4, zorder=2)
-    gl = ax.gridlines(draw_labels=True, linewidth=0.3, color="0.7", alpha=0.6, linestyle=":")
-    gl.top_labels = gl.right_labels = False
-    gl.xformatter = LONGITUDE_FORMATTER; gl.yformatter = LATITUDE_FORMATTER
-    gl.xlabel_style = gl.ylabel_style = {"size": 8, "color": "0.3"}
+    ax._gl = None
+    if grid:
+        gkw = dict(draw_labels=grid_labels, linewidth=0.3, color="0.7",
+                   alpha=0.6, linestyle=":")
+        if grid_kw:
+            gkw.update(grid_kw)
+        gl = ax.gridlines(**gkw)
+        if grid_lon is not None:
+            gl.xlocator = mticker.FixedLocator(list(grid_lon))
+        if grid_lat is not None:
+            gl.ylocator = mticker.FixedLocator(list(grid_lat))
+        gl.top_labels = gl.right_labels = False
+        gl.xformatter = LONGITUDE_FORMATTER; gl.yformatter = LATITUDE_FORMATTER
+        gl.xlabel_style = gl.ylabel_style = {"size": 8, "color": "0.3"}
+        ax._gl = gl
     if title:
-        ax.set_title(title, fontsize=11)
+        ax.set_title(title, fontsize=title_fontsize)
     ax._is_geo = True
     return fig, ax
+
+
+def map_projection(extent):
+    """지역 프리셋에 대응하는 투영 객체. 호출부가 직접 subplot을 만들 때 쓴다."""
+    return _proj(extent)
+
+
+def projected_aspect(extent):
+    """투영 후 패널 가로/세로 비. 여러 지도 패널의 높이를 맞출 width_ratios 산정용."""
+    _, lo0, lo1, la0, la1 = extent
+    if not _HAS_CARTOPY:
+        return (lo1 - lo0) * np.cos(np.deg2rad(0.5 * (la0 + la1))) / (la1 - la0)
+    fig = plt.figure()
+    try:
+        ax = fig.add_subplot(1, 1, 1, projection=_proj(extent))
+        ax.set_extent([lo0, lo1, la0, la1], crs=ccrs.PlateCarree())
+        x0, x1, y0, y1 = ax.get_extent()
+        return (x1 - x0) / (y1 - y0)
+    finally:
+        plt.close(fig)
 
 
 def scatter_map(ax, lon, lat, vals, cmap=None, vmin=None, vmax=None, s=9,
@@ -185,13 +223,16 @@ def support_mask(lon2d, lat2d, lon_obs, lat_obs, thresh_km=25.0):
     return (d.reshape(lon2d.shape) > thresh_km)
 
 
-def add_scalebar(ax, length_km=200, loc="lower right"):
-    """Albers 등 m 단위 투영에 물리 축척. 실패 시 조용히 스킵."""
+def add_scalebar(ax, length_km=200, loc="lower right", fontsize=9):
+    """Albers 등 m 단위 투영에 물리 축척. 실패 시 조용히 스킵.
+
+    fontsize는 인쇄 기준 pt. 단 폭(83~88 mm)에 실제 크기로 렌더하는 그림은 5~6 pt로 낮춘다.
+    """
     try:
         from matplotlib_scalebar.scalebar import ScaleBar
         if getattr(ax, "_is_geo", False):
             ax.add_artist(ScaleBar(1, units="m", location=loc, length_fraction=0.25,
-                                   box_alpha=0.7, color="0.2", font_properties={"size": 7}))
+                                   box_alpha=0.7, color="0.2", font_properties={"size": fontsize}))
     except Exception:
         pass
 
@@ -209,12 +250,12 @@ def add_inset_locator(fig, ax, extent, size=0.24):
     _circular(axins)
     import matplotlib.patches as mpatches
     axins.add_patch(mpatches.Rectangle((lo0, la0), lo1 - lo0, la1 - la0, transform=ccrs.PlateCarree(),
-                                       fill=False, edgecolor="#c0392b", linewidth=1.3, zorder=5))
+                                       fill=False, edgecolor="#1f4e79", linewidth=1.3, zorder=5))
     return axins
 
 
 def add_zoom_inset(fig, ax, extent, bbox, loc=(0.58, 0.02, 0.40, 0.40),
-                   edgecolor="#c0392b", lw=1.2):
+                   edgecolor="#1f4e79", lw=1.2, ms=7):
     """본 지도(ax) 위에 밀집 사이트 확대 inset을 추가한다.
 
     bbox=(lo0, lo1, la0, la1) 확대 범위. 본 지도에 해당 범위 사각형을 표시하고
@@ -236,9 +277,9 @@ def add_zoom_inset(fig, ax, extent, bbox, loc=(0.58, 0.02, 0.40, 0.40),
     axz._is_geo = True
     # 본 지도에 확대 위치 표시: bbox가 지도 축척에서 sub-pixel이라 사각형 대신 원형 마커.
     clon, clat = 0.5 * (lo0 + lo1), 0.5 * (la0 + la1)
-    ax.plot(clon, clat, marker="o", ms=7, mfc="none", mec=edgecolor, mew=1.4,
+    ax.plot(clon, clat, marker="o", ms=ms, mfc="none", mec=edgecolor, mew=0.2 * ms,
             transform=ccrs.PlateCarree(), zorder=6)
-    ax.plot(clon, clat, marker="+", ms=6, color=edgecolor, mew=1.2,
+    ax.plot(clon, clat, marker="+", ms=0.86 * ms, color=edgecolor, mew=0.17 * ms,
             transform=ccrs.PlateCarree(), zorder=6)
     # 위치 마커 -> inset 연결선(어느 클러스터를 확대했는지 명시).
     try:

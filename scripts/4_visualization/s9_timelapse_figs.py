@@ -16,6 +16,12 @@
 - 정직 각주: within-site 연 anomaly는 예측 불가(corr 0.06)임을 프레임과 meta에 명시.
 
 실행: SMOKE=1 python scripts/4_visualization/s9_timelapse_figs.py  (검증 후 SMOKE 없이 본 실행)
+      PANELS=1 → 대표 4연도 패널 그림만 재생성(프레임·GIF·부트스트랩·메타 생략, figs-only)
+
+산출물 게재 구분
+- frames/frame_YYYY.png, frames/anom_frame_YYYY.png 은 GIF 전용 중간산출물이다.
+  연도 스탬프·방법론 제목·각주는 애니메이션 판독을 위한 것으로, 보고서에 직접 게재하지
+  않는다(게재용 정지 그림은 alt_year_panels_v2·alt_anom_year_panels_v1 패널만 사용).
 """
 import os
 import sys
@@ -47,11 +53,13 @@ LON_TICKS = [-160, -150, -140]
 LAT_TICKS = [60, 63, 66, 69, 72]
 
 
-def fix_graticule(ax):
+def fix_graticule(ax, label_size=8, left_labels=True, bottom_labels=True):
     """make_ax가 그린 자동 경도 격자(120°W 하나만 라벨) 대신 160·150·140°W를 명시.
     make_ax가 이미 만든 gridliner의 눈금을 고정 locator로 덮어써서 120°W 단일 라벨
     문제를 없앤다(gridliner를 추가하지 않고 기존 것을 갱신). cartopy 0.23에서 gridliner는
-    ax.get_children()에 존재한다(ax._gridliners 아님)."""
+    ax.get_children()에 존재한다(ax._gridliners 아님).
+    left_labels/bottom_labels: 다패널 그림에서 왼쪽 열·아래 행에만 라벨을 남겨
+    큰 폰트(12pt)에서도 패널 간 라벨 충돌을 막는다."""
     if not (_HAS_CARTOPY and getattr(ax, "_is_geo", False)):
         return
     gls = [c for c in ax.get_children() if isinstance(c, Gridliner)]
@@ -59,9 +67,26 @@ def fix_graticule(ax):
         gl.xlocator = mticker.FixedLocator(LON_TICKS)
         gl.ylocator = mticker.FixedLocator(LAT_TICKS)
         gl.top_labels = gl.right_labels = False
-        gl.xlabel_style = gl.ylabel_style = {"size": 8, "color": "0.3"}
+        gl.left_labels = left_labels
+        gl.bottom_labels = bottom_labels
+        gl.xlabel_style = gl.ylabel_style = {"size": label_size, "color": "0.3"}
+
+def add_panel_scalebar(ax, font_size=9):
+    """패널 전용 스케일바(geomap.add_scalebar와 동일 규약, 축소 게재용 폰트 확대).
+    공유 모듈을 바꾸지 않고 이 그림에서만 폰트를 키운다. 실패 시 조용히 스킵."""
+    try:
+        from matplotlib_scalebar.scalebar import ScaleBar
+        if getattr(ax, "_is_geo", False):
+            ax.add_artist(ScaleBar(1, units="m", location="lower right",
+                                   length_fraction=0.25, box_alpha=0.7, color="0.2",
+                                   font_properties={"size": font_size}))
+    except Exception:
+        pass
+
 
 SMOKE = os.environ.get("SMOKE", "0") == "1"
+# figs-only 분기: 대표 패널(정적 그림)만 재생성. 프레임·GIF·부트스트랩·meta는 기존 산출 유지.
+PANELS_ONLY = os.environ.get("PANELS", "0") == "1"
 t0 = time.time()
 rng = np.random.default_rng(0)
 use_polar()
@@ -83,6 +108,7 @@ ANIMDIR.mkdir(parents=True, exist_ok=True)
 # ABoVE 관측역(알래스카+서부 캐나다). 데이터 범위 lat 60.4-71.3, lon -166.0~-113.0
 ABOVE = ("알래스카·서부 캐나다 (ABoVE)", -166.8, -112.5, 59.8, 72.1)
 GRIDSIZE = 46  # hexbin 셀 크기(관측 클러스터가 보이도록 과소분할 방지)
+PANEL_GRIDSIZE = 30  # 4패널 정적 그림 전용: 축소 게재 시 희소 hex 판독성을 위해 셀 확대
 
 # =====================================================================
 # 1. 기존 결과 로드(재학습 없음)
@@ -122,6 +148,8 @@ RENDER_YEARS = [YEARS[0], YEARS[-1]] if SMOKE else YEARS
 
 # =====================================================================
 # 2. 프레임 렌더(픽셀 크기 고정: bbox tight 미사용)
+#    GIF 전용 중간산출물: 제목·각주·연도 스탬프는 애니메이션 판독용이며
+#    보고서 게재용 정지 그림(섹션 4 패널)에는 적용되지 않는다.
 # =====================================================================
 FOOT = ("주: 연도 간 차이는 그해 ERA5-Land forcing 반영이다. within-site 연 anomaly "
         f"예측력은 없음(corr {meta0['anom_corr']['STEFAN']:+.2f}). "
@@ -157,32 +185,34 @@ def render_frame(yr):
 
 
 frame_paths = []
-for yr in RENDER_YEARS:
-    t1 = time.time()
-    frame_paths.append(render_frame(yr))
-    print(f"[frame] {yr}  ({time.time()-t1:.1f}s)")
+if not PANELS_ONLY:
+    for yr in RENDER_YEARS:
+        t1 = time.time()
+        frame_paths.append(render_frame(yr))
+        print(f"[frame] {yr}  ({time.time()-t1:.1f}s)")
 
 # =====================================================================
 # 3. GIF v2: 공통 adaptive palette + FS dither(밴딩 최소화)
 # =====================================================================
 from PIL import Image
 
-imgs = [Image.open(p).convert("RGB") for p in frame_paths]
-assert len({im.size for im in imgs}) == 1, "프레임 픽셀 크기 불일치"
-# 공통 팔레트: 전 프레임 축소 몽타주에서 median-cut 256색
-tw, th = imgs[0].width // 4, imgs[0].height // 4
-mont = Image.new("RGB", (tw, th * len(imgs)))
-for i, im in enumerate(imgs):
-    mont.paste(im.resize((tw, th)), (0, i * th))
-pal = mont.quantize(colors=256, method=Image.MEDIANCUT)
-qs = [im.quantize(palette=pal, dither=Image.FLOYDSTEINBERG) for im in imgs]
-durations = [800] * len(qs)
-durations[-1] = 1600  # 마지막 프레임 홀드
-gif_path = ANIMDIR / ("timelapse_alt_alaska_v2_smoke.gif" if SMOKE
-                      else "timelapse_alt_alaska_v2.gif")
-qs[0].save(gif_path, save_all=True, append_images=qs[1:], duration=durations,
-           loop=0, optimize=False, disposal=2)
-print(f"[gif] {gif_path}  ({gif_path.stat().st_size/1e6:.2f} MB, {len(qs)}프레임)")
+if not PANELS_ONLY:
+    imgs = [Image.open(p).convert("RGB") for p in frame_paths]
+    assert len({im.size for im in imgs}) == 1, "프레임 픽셀 크기 불일치"
+    # 공통 팔레트: 전 프레임 축소 몽타주에서 median-cut 256색
+    tw, th = imgs[0].width // 4, imgs[0].height // 4
+    mont = Image.new("RGB", (tw, th * len(imgs)))
+    for i, im in enumerate(imgs):
+        mont.paste(im.resize((tw, th)), (0, i * th))
+    pal = mont.quantize(colors=256, method=Image.MEDIANCUT)
+    qs = [im.quantize(palette=pal, dither=Image.FLOYDSTEINBERG) for im in imgs]
+    durations = [800] * len(qs)
+    durations[-1] = 1600  # 마지막 프레임 홀드
+    gif_path = ANIMDIR / ("timelapse_alt_alaska_v2_smoke.gif" if SMOKE
+                          else "timelapse_alt_alaska_v2.gif")
+    qs[0].save(gif_path, save_all=True, append_images=qs[1:], duration=durations,
+               loop=0, optimize=False, disposal=2)
+    print(f"[gif] {gif_path}  ({gif_path.stat().st_size/1e6:.2f} MB, {len(qs)}프레임)")
 
 # =====================================================================
 # 3b. anomaly 프레임 + GIF: 연도-다년평균 편차(broc, 0중심). forcing 연변동 가시화.
@@ -232,90 +262,90 @@ def render_anom_frame(yr):
 
 
 anom_paths = []
-for yr in RENDER_YEARS:
-    t1 = time.time()
-    anom_paths.append(render_anom_frame(yr))
-    print(f"[anom-frame] {yr}  ({time.time()-t1:.1f}s)")
+if not PANELS_ONLY:
+    for yr in RENDER_YEARS:
+        t1 = time.time()
+        anom_paths.append(render_anom_frame(yr))
+        print(f"[anom-frame] {yr}  ({time.time()-t1:.1f}s)")
 
-aimgs = [Image.open(p).convert("RGB") for p in anom_paths]
-assert len({im.size for im in aimgs}) == 1, "anomaly 프레임 픽셀 크기 불일치"
-atw, ath = aimgs[0].width // 4, aimgs[0].height // 4
-amont = Image.new("RGB", (atw, ath * len(aimgs)))
-for i, im in enumerate(aimgs):
-    amont.paste(im.resize((atw, ath)), (0, i * ath))
-apal = amont.quantize(colors=256, method=Image.MEDIANCUT)
-aqs = [im.quantize(palette=apal, dither=Image.FLOYDSTEINBERG) for im in aimgs]
-adurations = [800] * len(aqs)
-adurations[-1] = 1600  # 마지막 프레임 홀드
-anom_gif_path = ANIMDIR / ("timelapse_alt_anomaly_v1_smoke.gif" if SMOKE
-                           else "timelapse_alt_anomaly_v1.gif")
-aqs[0].save(anom_gif_path, save_all=True, append_images=aqs[1:], duration=adurations,
-            loop=0, optimize=False, disposal=2)
-print(f"[anom-gif] {anom_gif_path}  ({anom_gif_path.stat().st_size/1e6:.2f} MB, "
-      f"{len(aqs)}프레임)")
+    aimgs = [Image.open(p).convert("RGB") for p in anom_paths]
+    assert len({im.size for im in aimgs}) == 1, "anomaly 프레임 픽셀 크기 불일치"
+    atw, ath = aimgs[0].width // 4, aimgs[0].height // 4
+    amont = Image.new("RGB", (atw, ath * len(aimgs)))
+    for i, im in enumerate(aimgs):
+        amont.paste(im.resize((atw, ath)), (0, i * ath))
+    apal = amont.quantize(colors=256, method=Image.MEDIANCUT)
+    aqs = [im.quantize(palette=apal, dither=Image.FLOYDSTEINBERG) for im in aimgs]
+    adurations = [800] * len(aqs)
+    adurations[-1] = 1600  # 마지막 프레임 홀드
+    anom_gif_path = ANIMDIR / ("timelapse_alt_anomaly_v1_smoke.gif" if SMOKE
+                               else "timelapse_alt_anomaly_v1.gif")
+    aqs[0].save(anom_gif_path, save_all=True, append_images=aqs[1:], duration=adurations,
+                loop=0, optimize=False, disposal=2)
+    print(f"[anom-gif] {anom_gif_path}  ({anom_gif_path.stat().st_size/1e6:.2f} MB, "
+          f"{len(aqs)}프레임)")
 
 # =====================================================================
-# 4. 대표 4연도 패널(공통 컬러바)
+# 4. 대표 4연도 패널(공통 컬러바) : 절대값(4)·편차(4b)를 같은 함수로 렌더
+#    - 축소 게재(인쇄폭 8~17cm) 대비 격자·컬러바 틱·n= 라벨 12pt 상향.
+#    - 두 그림의 픽셀 치수를 동일하게 맞추기 위해 고정 캔버스로 저장한다
+#      (bbox_inches tight 미사용, 컬러바는 명시 cax). 라벨 길이와 무관하게
+#      figsize x dpi = 3540x2280 px로 두 그림이 일치한다.
+#    - 격자 라벨은 왼쪽 열(위도)·아래 행(경도)에만 남겨 12pt에서 충돌을 방지.
 # =====================================================================
 rep_years = [int(y) for y in meta0.get("rep_years_panel", RENDER_YEARS[:4])]
 if SMOKE:
     rep_years = RENDER_YEARS[:2] * 2
-fig = plt.figure(figsize=(11.8, 7.6))
-fig.subplots_adjust(top=0.90, bottom=0.07, left=0.05, right=0.99,
-                    hspace=0.16, wspace=0.06)
-hb = None
-for i, yr in enumerate(rep_years):
-    ax = fig.add_subplot(2, 2, i + 1, projection=proj)
-    make_ax(ABOVE, ax=ax, fig=fig, title=f"({chr(97+i)}) {yr}년")
-    fix_graticule(ax)
-    sub = era[era["year"] == yr]
-    hb = hexbin_map(ax, sub["lon"].values, sub["lat"].values, sub["pred_cm"].values,
-                    gridsize=GRIDSIZE, cmap=CMAP.alt, vmin=vlo, vmax=vhi)
-    mask_ocean(ax)
-    if i == 0:
-        add_inset_locator(fig, ax, ABOVE)
-        add_scalebar(ax, length_km=200)
-    ax.text(0.975, 0.955, f"실측 n={obs_per_year.get(yr, 0):,}", transform=ax.transAxes,
-            ha="right", va="top", fontsize=8, color="0.25", zorder=10,
-            bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="#aaa", alpha=0.8))
-cb = fig.colorbar(hb, ax=fig.axes, fraction=0.03, pad=0.02, shrink=0.75)
-cb.set_label("예측 ALT (cm)", fontsize=10)
-fig.suptitle("연도별 예측 ALT 대표 4개 연도 · STEFAN(그해 forcing) · 공통 색축", fontsize=13)
-fig.text(0.01, 0.005, FOOT, fontsize=7.5, color="0.35", ha="left", va="bottom")
-for ext in ("png", "pdf"):
-    fig.savefig(FIGDIR / f"alt_year_panels_v2.{ext}", dpi=260, bbox_inches="tight")
-plt.close(fig)
-print(f"[fig] {FIGDIR}/alt_year_panels_v2.png+pdf")
 
-# 4b. 편차(anomaly) 대표 4연도 패널: 발표 PDF용 GIF 정지 대표(broc 0중심, 대칭 색축).
-#     절대값 패널과 짝을 이뤄 "연도 차이=그해 forcing 반영"을 정지 그림으로 보인다.
-fig = plt.figure(figsize=(11.8, 7.6))
-fig.subplots_adjust(top=0.90, bottom=0.07, left=0.05, right=0.99,
-                    hspace=0.16, wspace=0.06)
-hb = None
-for i, yr in enumerate(rep_years):
-    ax = fig.add_subplot(2, 2, i + 1, projection=proj)
-    make_ax(ABOVE, ax=ax, fig=fig, title=f"({chr(97+i)}) {yr}년")
-    fix_graticule(ax)
-    sub = era[era["year"] == yr]
-    hb = hexbin_map(ax, sub["lon"].values, sub["lat"].values, sub["pred_anom"].values,
-                    gridsize=GRIDSIZE, cmap=CMAP.diff, norm=anorm)
-    mask_ocean(ax)
-    if i == 0:
-        add_inset_locator(fig, ax, ABOVE)
-        add_scalebar(ax, length_km=200)
-    ax.text(0.975, 0.955, f"실측 n={obs_per_year.get(yr, 0):,}", transform=ax.transAxes,
-            ha="right", va="top", fontsize=8, color="0.25", zorder=10,
-            bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="#aaa", alpha=0.8))
-cb = fig.colorbar(hb, ax=fig.axes, fraction=0.03, pad=0.02, shrink=0.75)
-cb.set_label("ALT 편차 (cm, 그해값 빼기 다년평균)", fontsize=10)
-fig.suptitle("연도별 예측 ALT 편차 대표 4개 연도 · 그해값 빼기 다년평균(0중심) · 공통 색축",
-             fontsize=13)
-fig.text(0.01, 0.005, FOOT_A, fontsize=7.5, color="0.35", ha="left", va="bottom")
-for ext in ("png", "pdf"):
-    fig.savefig(FIGDIR / f"alt_anom_year_panels_v1.{ext}", dpi=260, bbox_inches="tight")
-plt.close(fig)
-print(f"[fig] {FIGDIR}/alt_anom_year_panels_v1.png+pdf")
+
+def render_panels(value_col, cmap, cbar_label, out_stem, vmin=None, vmax=None, norm=None):
+    fig = plt.figure(figsize=(11.8, 7.6))
+    fig.subplots_adjust(top=0.955, bottom=0.075, left=0.075, right=0.90,
+                        hspace=0.14, wspace=0.08)
+    hb = None
+    for i, yr in enumerate(rep_years):
+        ax = fig.add_subplot(2, 2, i + 1, projection=proj)
+        make_ax(ABOVE, ax=ax, fig=fig)
+        ax.set_title(f"({chr(97+i)}) {yr}년", fontsize=13)
+        fix_graticule(ax, label_size=12, left_labels=(i % 2 == 0), bottom_labels=(i >= 2))
+        sub = era[era["year"] == yr]
+        ckw = dict(norm=norm) if norm is not None else dict(vmin=vmin, vmax=vmax)
+        hb = hexbin_map(ax, sub["lon"].values, sub["lat"].values, sub[value_col].values,
+                        gridsize=PANEL_GRIDSIZE, cmap=cmap, **ckw)
+        mask_ocean(ax)
+        if i == 0:
+            axins = add_inset_locator(fig, ax, ABOVE)
+            if axins is not None:  # 위치 박스를 진청 계열로(난색 강조 금지)
+                for p_ in axins.patches:
+                    p_.set_edgecolor("#2b4a6f")
+            add_panel_scalebar(ax, font_size=11)
+        ax.text(0.975, 0.955, f"실측 n={obs_per_year.get(yr, 0):,}",
+                transform=ax.transAxes, ha="right", va="top", fontsize=12, color="0.25",
+                zorder=10,
+                bbox=dict(boxstyle="round,pad=0.2", fc="white", ec="#aaa", alpha=0.8))
+    cax = fig.add_axes([0.915, 0.17, 0.016, 0.64])
+    cb = fig.colorbar(hb, cax=cax)
+    cb.set_label(cbar_label, fontsize=13)
+    cb.ax.tick_params(labelsize=12)
+    # use_polar()의 전역 savefig.bbox='tight'를 해제해 고정 캔버스로 저장한다.
+    # tight crop은 컬러바 라벨 길이에 따라 두 그림의 픽셀 치수를 다르게 만든다.
+    with plt.rc_context({"savefig.bbox": None}):
+        for ext in ("png", "pdf"):
+            fig.savefig(FIGDIR / f"{out_stem}.{ext}", dpi=300)  # 고정 캔버스(치수 동일)
+    plt.close(fig)
+    print(f"[fig] {FIGDIR}/{out_stem}.png+pdf")
+
+
+render_panels("pred_cm", CMAP.alt, "예측 ALT (cm)", "alt_year_panels_v2",
+              vmin=vlo, vmax=vhi)
+# 4b. 편차 패널: 절대값 패널과 짝을 이뤄 "연도 차이=그해 forcing 반영"을 정지 그림으로 보인다.
+render_panels("pred_anom", CMAP.diff, "ALT 편차 (cm, 그해값 빼기 다년평균)",
+              "alt_anom_year_panels_v1", norm=anorm)
+
+# figs-only 종료: 프레임·GIF는 기존 산출 유지, 부트스트랩·meta 재계산 생략
+if PANELS_ONLY:
+    print(f"[done] 패널만 재생성  {time.time()-t0:.0f}s  (PANELS=1)")
+    sys.exit(0)
 
 # =====================================================================
 # 5. 헤드라인 수치 블록 부트스트랩 CI(위치 블록, OOF 재사용)
