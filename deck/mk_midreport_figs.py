@@ -366,59 +366,12 @@ plt.close(fig); print("saved aoa_di.png")
 
 # ================================================================= 10. 국소 데모 재조판 (슬라이드 8)
 # 원본(maps/local_demo_alt_field.png)은 GPU diffusion 산출이라 재계산 불가 →
-# 지도 래스터(데이터)는 그대로 두고 제목·축·컬러바만 큰 폰트로 다시 조판한다.
-from PIL import Image
-from matplotlib.colors import Normalize
-from matplotlib.cm import ScalarMappable
-from matplotlib.ticker import FuncFormatter
-from polar.plotstyle import CMAP as PCMAP
-
-srcA = np.asarray(Image.open("outputs/maps/local_demo_alt_field.png").convert("RGB"))
-# 축 스파인 자동탐지로 얻은 패널 내부 픽셀 좌표(원본은 고정 산출물)
-PBOX = [(178, 1295), (1725, 2841), (3271, 4388)]; PY0, PY1 = 184, 1453
-WL, EL, SL, NL = -153.6, -150.8, 69.7, 70.9      # 스크립트의 지리 범위와 동일
-UNC_VMAX = 59.7                                   # 원본 컬러바 눈금 실측(0~50 눈금, 상단 59.7)
-specs = [("PolSAR 원자료 (P-band 물리, 30 m)", PCMAP.alt, (20, 70), "ALT (cm)", None),
-         ("본 연구 예측 (PolSAR+공변량 앙상블)", PCMAP.alt, (20, 70), "ALT (cm)", None),
-         ("Diffusion 90% 예측구간 폭", PCMAP.err, (0, UNC_VMAX), "구간 폭 (cm)", [0, 10, 20, 30, 40, 50])]
-fig, axes = plt.subplots(1, 3, figsize=(13.5, 4.8), dpi=200)
-lonfmt = FuncFormatter(lambda v, p: f"{abs(v):.0f}°W" if v < 0 else f"{v:.0f}°E")
-latfmt = FuncFormatter(lambda v, p: f"{abs(v):.1f}°N")
-for ax, (x0, x1), (ttl, cmap, vlim, lab, cbt) in zip(axes, PBOX, specs):
-    ax.imshow(srcA[PY0:PY1, x0:x1], extent=[WL, EL, SL, NL], aspect="auto",
-              interpolation="bilinear", zorder=1)
-    ax.set_title(ttl, fontsize=17, fontproperties=FPB, color=INK, pad=9)
-    ax.set_xlabel("경도", fontsize=14.5, fontproperties=FP)
-    ax.set_ylabel("위도", fontsize=14.5, fontproperties=FP)
-    ax.set_xticks([-153, -152, -151]); ax.set_yticks([69.8, 70.2, 70.6])
-    ax.xaxis.set_major_formatter(lonfmt); ax.yaxis.set_major_formatter(latfmt)
-    ax.tick_params(length=0, labelsize=13)
-    for t in ax.get_xticklabels() + ax.get_yticklabels():
-        t.set_fontproperties(FPM); t.set_fontsize(13)
-    for sp in ax.spines.values():
-        sp.set_color("#C9CDD2"); sp.set_linewidth(1.0)
-    ax.grid(False)
-    sm = ScalarMappable(norm=Normalize(*vlim), cmap=cmap)
-    cb = fig.colorbar(sm, ax=ax, fraction=0.05, pad=0.03)
-    if cbt is not None:
-        cb.set_ticks(cbt)
-    cb.set_label(lab, fontsize=16, fontproperties=FP)
-    cb.ax.tick_params(labelsize=14, length=2.5)
-    for t in cb.ax.get_yticklabels():
-        t.set_fontproperties(FPM); t.set_fontsize(14)
-    cb.outline.set_linewidth(0.6); cb.outline.set_edgecolor("#444444")
-# 원본 래스터에 박힌 제목은 em-dash('고정밀 국소 데모 — …')였다. 재조판본은 슬라이스
-# 상단에 콜론형 제목('고정밀 국소 데모: …')을 새 텍스트로 다시 얹는다(연결자 em-dash 제거).
-fig.suptitle("고정밀 국소 데모: 알래스카 북사면 평탄 툰드라",
-             fontsize=19, fontproperties=FPB, color=INK, y=1.06)
-fig.tight_layout(rect=[0, 0, 1, 0.98])
-_src(fig, "자료: maps/local_demo_alt_field.png 동일 데이터 재조판 · 회색 = 모델 유효범위(평탄 툰드라) 밖 · 테두리 점 = 실측")
-fig.savefig(f"{OUT}/local_demo.png", dpi=200, facecolor=PAPER, bbox_inches="tight")
-# 보고서용 재조판본(dpi 300 + 벡터 PDF 동반). 산출 폴더 outputs/maps에 신규 저장.
-os.makedirs("outputs/maps", exist_ok=True)
-fig.savefig("outputs/maps/local_demo_restyled.png", dpi=300, facecolor=PAPER, bbox_inches="tight")
-fig.savefig("outputs/maps/local_demo_restyled.pdf", facecolor=PAPER, bbox_inches="tight")
-plt.close(fig); print("saved local_demo.png + outputs/maps/local_demo_restyled.{png,pdf}")
+# 지도 래스터(데이터)는 그대로 두고 축·컬러바만 큰 폰트로 다시 조판한다.
+# 렌더러는 deck/render_local_demo.py 로 분리(단독 재렌더 가능). 덱 슬라이드용
+# local_demo.png(제목·출처각주 유지)과 보고서용 local_demo_restyled(제목·각주 제거
+# + km 스케일바)를 함께 생성한다.
+from render_local_demo import render_local_demo
+render_local_demo(out_dir=OUT, maps_dir="outputs/maps", save_deck=True)
 
 # ================================================================= 11. MAGT 2m/20m 우측 여백 (슬라이드 11)
 # 컬러바 라벨이 그림 우측 가장자리에 붙어 투사 시 잘릴 위험 → 우측 10% 흰 여백 패딩
