@@ -42,9 +42,10 @@ def series(proto):
         best = dict(family="anchored", anchor="stefan_cci", resid="catboost", lam=0.25, pseudo="none", r=0.0)
     return [
         ("기계학습 단독",        pick(proto, family="direct", resid="catboost", pseudo="none")),
-        ("위성제품 단독",        pick(proto, family="analytic", anchor="cci")),
-        ("물리식(Stefan) 단독",  pick(proto, family="analytic", anchor="stefan")),
-        ("물리식+위성제품 결합",  pick(proto, family="analytic", anchor="stefan_cci")),
+        ("위성 제품 단독",        pick(proto, family="analytic", anchor="cci")),
+        # 표 8(tab:s12)과 동일 기준: w_stefan_cci=1.0이므로 순수 Stefan이나 CCI 유효 셀로 한정된다.
+        ("물리식(Stefan) 단독",  pick(proto, family="analytic", anchor="stefan_cci_w")),
+        ("물리식+위성 제품 결합",  pick(proto, family="analytic", anchor="stefan_cci")),
         ("결합 + 잔차 학습",     pick(proto, **best)),
     ]
 
@@ -53,8 +54,8 @@ fig = plt.figure(figsize=(11.6, 7.4))
 gs = fig.add_gridspec(2, 2, height_ratios=[1.0, 0.82], hspace=0.52, wspace=0.24)
 
 # ---- (a),(b) 지역별 RMSE
-for j, (proto, pn) in enumerate([("half", "대상 지역 공변량 사용 가능"),
-                                 ("loro", "대상 지역 정보 없음")]):
+for j, (proto, pn) in enumerate([("half", "공변량만 조건 (대상 라벨 없음)"),
+                                 ("loro", "정보 없음 조건")]):
     ax = fig.add_subplot(gs[0, j])
     S = series(proto)
     x = np.arange(len(S)); w = 0.36
@@ -79,16 +80,17 @@ for j, (proto, pn) in enumerate([("half", "대상 지역 공변량 사용 가능
 # ---- (c) 편향 상쇄
 ax = fig.add_subplot(gs[1, 0])
 labels, stef_b, cci_b, comb_b = [], [], [], []
-for proto, pn in [("half", "공변량 사용"), ("loro", "정보 없음")]:
+for proto, pn in [("half", "공변량만"), ("loro", "정보 없음")]:
     for tg in ["Lena", "Canada"]:
         labels.append(f"{'레나델타' if tg=='Lena' else '캐나다'}\n({pn})")
-        stef_b.append(pick(proto, family="analytic", anchor="stefan").loc[tg, "bias"])
+        # 본문 4.7절 편향(레나 +5.8·캐나다 +2.6)과 동일 기준(CCI 유효 셀 한정)
+        stef_b.append(pick(proto, family="analytic", anchor="stefan_cci_w").loc[tg, "bias"])
         cci_b.append(pick(proto, family="analytic", anchor="cci").loc[tg, "bias"])
         comb_b.append(pick(proto, family="analytic", anchor="stefan_cci").loc[tg, "bias"])
 x = np.arange(len(labels)); w = 0.26
 ax.axhline(0, color="#3a4a5a", lw=0.9, zorder=2)
 ax.bar(x - w, stef_b, w, color="#8296a8", label="물리식", zorder=3)
-ax.bar(x, cci_b, w, color="#b8c4d0", label="위성제품", zorder=3)
+ax.bar(x, cci_b, w, color="#b8c4d0", label="위성 제품", zorder=3)
 ax.bar(x + w, comb_b, w, color="#2f4b6e", label="결합", zorder=3)
 ax.set_xticks(x); ax.set_xticklabels(labels, fontsize=8.6)
 ax.set_ylabel("평균 편향 (cm)", fontsize=10)
@@ -103,7 +105,7 @@ ax.set_ylim(min(cci_b) * 1.5, max(max(stef_b), max(cci_b)) * 1.85)
 # 각 λ에서 두 지역이 모두 산출된 구성 중 최소값(포락선)을 그린다. 한 계열만 그리면
 # 표의 "결합 + 잔차 학습" 행과 어긋나므로, 표와 같은 선택 규칙을 쓴다.
 ax = fig.add_subplot(gs[1, 1])
-for proto, cc, mk, pn in [("half", C_LENA, "o", "공변량 사용"), ("loro", C_CAN, "s", "정보 없음")]:
+for proto, cc, mk, pn in [("half", C_LENA, "o", "공변량만"), ("loro", C_CAN, "s", "정보 없음")]:
     d = df[(df.proto == proto) & (df.family == "anchored")]
     per = d.groupby(["anchor", "resid", "lam", "pseudo", "r", "target"]).rmse_cm.mean().reset_index()
     agg = (per.groupby(["anchor", "resid", "lam", "pseudo", "r"])
