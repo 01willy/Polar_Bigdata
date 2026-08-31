@@ -92,3 +92,9 @@ outputs/report/*.pdf
 outputs/*.hwp
 # CatBoost 학습 부산물
 catboost_info/
+
+# --- 참고용 대용량 입력물(외부 제공, 재배포 대상 아님) ---
+CI_ai.zip
+IMAGE_*.pptx
+# --- 타 사업 문서(본 연구 산출물 아님) ---
+outputs/report/*.pptx
