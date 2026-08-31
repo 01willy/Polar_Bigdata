@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """
+# [아카이브] 2026-07 진행보고 산출본. 재실행 금지 — 폐기된 헤드라인 수치가 하드코딩되어 있다.
+# 현행 수치 정본 = outputs/report/main.tex, 현행 덱 = deck/build_final.py
 build_deck.py — Polar_Bigdata 진행상황 보고 덱 빌드.
 스펙: deck/deck_spec.json · 라이브러리: deck/polar_slides.py
 수치 근거: data/processed/*_results.csv (조사 워크플로 검증) · 색: design/brand_tokens.json

@@ -7,6 +7,8 @@
 report_lib.py 재사용. 출력 deck/render/permafrost_midreport.pptx
 빌드: (deck/) python3 build_midreport.py · 렌더: soffice --headless --convert-to pdf
 """
+# [아카이브] 2026-07 중간보고 산출본. 재실행 금지 — 폐기된 헤드라인 수치가 하드코딩되어 있다.
+# 현행 수치 정본 = outputs/report/main.tex, 현행 덱 = deck/build_final.py
 import os
 import math
 import report_lib as R

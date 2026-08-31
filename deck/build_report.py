@@ -3,6 +3,8 @@
 문체 규율: em-dash(—) 사용 금지, 보고서/논문 문어체, 과장·수사 배제(전역 규칙 writing-tone.md).
 실행: cd deck && python3 build_report.py → render/permafrost_report.pptx
 """
+# [아카이브] 2026-07 보고서덱 산출본. 재실행 금지 — 폐기된 헤드라인 수치가 하드코딩되어 있다.
+# 현행 수치 정본 = outputs/report/main.tex, 현행 덱 = deck/build_final.py
 import os
 import report_lib as R
 from report_lib import (ML, MR, MT, CW, CR, SW, SH, PAPER, INK, INK2, SLATE, MUTE, TEAL, TEAL2,

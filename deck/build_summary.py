@@ -8,6 +8,8 @@ report_lib.py 재사용. 출력 deck/render/permafrost_summary.pptx
 문체: 렌더 텍스트 em-dash/en-dash 연결자 금지(콜론·가운뎃점·괄호·문장분리), 보고서톤(~이다/~한다).
 블라인드: 학교·연구실·기관·개인명·이메일 노출 금지.
 """
+# [아카이브] 2026-07 예선요약 산출본. 재실행 금지 — 폐기된 헤드라인 수치가 하드코딩되어 있다.
+# 현행 수치 정본 = outputs/report/main.tex, 현행 덱 = deck/build_final.py
 import os
 import report_lib as R
 from report_lib import (ML, MR, MT, MB, CW, CR, SW, SH,

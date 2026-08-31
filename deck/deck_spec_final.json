@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "title": "희소 관측 조건에서 물리경험식 유사라벨 증강과 기계학습을 이용한 영구동토 활동층 두께 예측",
+    "deliverable": "2026 극지 빅데이터·인공지능 활용 경진대회 본선 발표덱 (15분)",
+    "audience": "본선 심사위원 (심사 기준: 창의성 30 · 적합성 20 · 완성도 20 · 파급성 30)",
+    "style_reference": "IMAGE_SEUNGWONBAEK_Stochastic reverse-time migration via machine learning-assisted pseudo-MCMC.pptx",
+    "style_tokens": {
+      "canvas_in": [13.333, 7.5],
+      "background": "#FFFFFF",
+      "accent": "#EA851B",
+      "ink": "#111111",
+      "gray": "#6B6B6B",
+      "gray2": "#4A4A4A",
+      "hairline": "#DDDDDD",
+      "panel": "#F7F7F5",
+      "font_title": "Pretendard ExtraBold (참고덱 Arial Bold 대응, 무료 OFL)",
+      "font_body": "Pretendard Medium / Pretendard",
+      "title_pt": 27, "subtitle_pt": 14.5, "body_pt": 12.5, "takeaway_pt": 14,
+      "page_number": "우상단 12pt gray",
+      "slide_grammar": "오렌지 볼드 타이틀(좌상) + 회색 부제 1줄 + 본문(그림 중심) + 하단 한 줄 결론(hairline 위 15pt ink)"
+    },
+    "language": "ko, 보고서체(~이다/~한다), 명사형 제목, em-dash 금지, 불릿 최대 4",
+    "authority": "모든 수치는 outputs/report/main.tex(정합 감사 완료본)에서만 인용",
+    "build": "deck/mk_final_figs.py → deck/assets/final/*.png; deck/build_final.py → deck/render/permafrost_final.pptx → soffice PDF → pdftoppm PNG",
+    "time_budget_min": 15,
+    "date": "2026-08-24"
+  },
+  "judging_map": {
+    "창의성(30)": "물리식의 역할 재정의(제약이 아닌 라벨 생성기·예측 앵커), 상수 라벨 대조로 물리 순가치 분리, 편향·산포 분해로 정보원 결합 경로 도출 (슬라이드 7·8·10·12·13)",
+    "적합성(20)": "극지 빅데이터(CALM·ABoVE·GTN-P·ERA5·CCI) + KPDC 자료 주된 활용(현장 검증·공변량 대조 전용 슬라이드 16)",
+    "완성도(20)": "검증 3조건 정의·공간블록 CV·누설 통제·보정 예측구간·AOA·음성 결과 보고 (슬라이드 9·15 + 백업)",
+    "파급성(30)": "고해상 지도·연별 시계열·표층 3D 온도장·신뢰 범위 지도, 다른 극지 변수로 일반화 (슬라이드 4·13·14·15·17)"
+  },
+  "slides": [
+    {"id": 1, "type": "title", "message": "제목·부제·대회명", "layout": "ref-title: 중앙 큰 제목(ink) + 오렌지 한줄 요약 + 하단 대회 정보",
+     "assets": [], "intent": "연구 한 줄 압축: 물리가 라벨을 만들고 기계학습이 지도를 그린다", "time": 0.5},
+    {"id": 2, "type": "background", "message": "배경·필요성: 영구동토 활동층은 탄소 되먹임·인프라 위험의 지표이다", "layout": "좌 개념도(활동층 단면) + 우 3불릿(1,300Pg 탄소·4배 온난화·인프라 위험)",
+     "assets": ["assets/final/fig_concept_alt.png"], "intent": "왜 ALT인가를 30초에 전달", "time": 1.0},
+    {"id": 3, "type": "problem", "message": "문제 정의: 라벨 희소(대상 격자의 1.5%)와 기존 연구 세 한계", "layout": "좌 라벨 비대칭 다이어그램 + 우 한계 3카드(평가 없는 시뮬레이션·구간 없는 지도·물리 주입의 미확장)",
+     "assets": ["assets/final/fig_label_gap.png"], "intent": "창의성 채점 진입점: 무엇이 막혀 있었는가", "time": 1.0},
+    {"id": 4, "type": "overview", "message": "연구 개요: 한계→개선→기대효과 3열", "layout": "ref-overview: 전폭 그림 1장",
+     "assets": ["outputs/figures/00_overview/report_overview.png"], "intent": "심사표 전 항목의 지도(map) 역할", "time": 1.0},
+    {"id": 5, "type": "data", "message": "사용 데이터: 범북극 3출처 라벨 + 공변량 34종 + KPDC", "layout": "좌 대형 인벤토리 지도·가용성 행렬 + 우 열(라벨 3출처·공변량 구성·KPDC 식별자)",
+     "assets": ["outputs/maps/data_inventory_world.png"], "intent": "적합성: 극지 공공 빅데이터 총동원, KPDC 명시", "time": 1.0},
+    {"id": 6, "type": "method-arch", "message": "전체 워크플로: 세 출처 라벨 검증 게이트 → 증강 학습 → 물리 결합 → 4종 산출물", "layout": "ref-workflow: 전폭 아키텍처 다이어그램 1장",
+     "assets": ["assets/final/fig_workflow.png"], "intent": "방법 전체를 한 그림으로, 검증 게이트 강조", "time": 1.5},
+    {"id": 7, "type": "method-physics", "message": "물리경험식 5종 비교: Stefan만이 증강 공급원 자격", "layout": "좌 Stefan 수식·역할 재정의 + 우 5종 성능 막대(physics_loro_bars)",
+     "assets": ["outputs/figures/s2_physics/physics_loro_bars.png"], "intent": "창의성: 물리식=라벨 생성기·앵커 재정의, 식 선택의 근거", "time": 1.0},
+    {"id": 8, "type": "method-aug", "message": "증강 설계: 유사라벨 3조건과 상수 대조에 의한 순가치 분리", "layout": "전폭 증강·대조실험 개념도(수식 포함)",
+     "assets": ["assets/final/fig_aug_design.png"], "intent": "창의성 핵심: 개선의 원천을 분리하는 실험 설계", "time": 1.0},
+    {"id": 9, "type": "method-validation", "message": "검증 설계: 공간블록 CV와 검증 3조건, 누설 통제", "layout": "좌 fold 지도 + 우 3조건 표",
+     "assets": ["outputs/figures/s0_schema/spatial_block_folds_map.png"], "intent": "완성도: 낙관 편향을 막는 평가 규약", "time": 0.75},
+    {"id": 10, "type": "result-aug", "message": "결과 1: 정확한 물리 유사라벨이 희소 지역 오차를 낮춘다(캐나다 순가치 약 10cm)", "layout": "좌 반응곡선 + 우 순가치 + 하단 표(21.9→16.5, 34.0→31.8)",
+     "assets": ["outputs/figures/s3_aug/aug_response_curves.png", "outputs/figures/s3_aug/physics_net_value.png"], "intent": "창의성+완성도: 대조로 분리된 물리 정보의 기여", "time": 1.25},
+    {"id": 11, "type": "result-indomain", "message": "결과 2: 물리 잔차 결합이 지역 내 최저 13.33cm", "layout": "좌 모델 7종 막대 + 우 λ 반응곡선",
+     "assets": ["outputs/figures/s1_baseline/model_comparison_bars.png", "outputs/figures/s4_residual/s4_indomain_vs_transfer.png"], "intent": "물리와 데이터의 보완 관계 입증", "time": 1.0},
+    {"id": 12, "type": "result-transfer", "message": "결과 3a: 전이에서는 구조 정교화가 물리식 단독을 넘지 못한다", "layout": "전폭 transfer_loro_summary + 좌하 해석",
+     "assets": ["outputs/figures/02_evaluation/transfer_loro_summary.png"], "intent": "반증 설계: 병목은 모델 구조가 아니다", "time": 0.75},
+    {"id": 13, "type": "result-hybrid", "message": "결과 3b: 산출 원리가 다른 위성 관측 결합으로 편향 상쇄(24.11→22.92cm)", "layout": "전폭 s12_hybrid_summary",
+     "assets": ["outputs/figures/s12_hybrid/s12_hybrid_summary.png"], "intent": "핵심 차별점: 지렛대는 정보원의 다양성", "time": 1.25},
+    {"id": 14, "type": "result-maps", "message": "결과 4: 관측 없는 곳까지 고해상 ALT 지도(0.02°)와 243m 다운스케일", "layout": "좌 hires 지도 + 우 downscale 데모",
+     "assets": ["outputs/maps/alt_prediction_hires.png", "outputs/maps/alt_downscale_demo.png"], "intent": "파급성: 산출물의 실사용 가치", "time": 1.0},
+    {"id": 15, "type": "result-4d", "message": "결과 5: 시간(연별 2010-2024)과 깊이(0-3m 3D 온도장)로 확장", "layout": "상 연별 필드 + 하 깊이 슬라이스",
+     "assets": ["outputs/figures/s9_timelapse/alt_annual_fields.png", "outputs/figures/s10_shallow3d/s10_depth_slices.png"], "intent": "파급성: 단일 지도를 넘는 상태 기술", "time": 1.0},
+    {"id": 16, "type": "result-uq", "message": "결과 6: 보정 예측구간(44.6→93.4%)과 적용가능 영역 지도", "layout": "좌 보정 곡선 + 우 신뢰 범위 지도",
+     "assets": ["outputs/figures/s11_uq/s11_calibration_curve.png", "outputs/maps/alt_uncertainty_aoa_map.png"], "intent": "완성도: 지도를 믿을 수 있는 범위 명시", "time": 0.75},
+    {"id": 17, "type": "kpdc", "message": "KPDC 현장 검증: ERA5 공변량 정합과 관측 방식별 ALT 편차(35-136cm)", "layout": "좌 ALT 방식 비교 + 우 ERA5 산점 + 하단 시사",
+     "assets": ["outputs/figures/s7_kpdc/s7_alt_comparison.png", "outputs/figures/10_kpdc/kpdc_era5_scatter.png"], "intent": "적합성: 대회 자료(KOPRI-KPDC-00002125)의 실질 활용", "time": 0.75},
+    {"id": 18, "type": "conclusion", "message": "결론·시사점: 성과 4카드 + 파급 효과 + 한계", "layout": "상 핵심 수치 4카드(ref-scenario 스타일) + 하 2열(시사점·파급성 | 한계·극복)",
+     "assets": [], "intent": "파급성 마무리: 프레임워크 일반화 주장", "time": 1.0},
+    {"id": 19, "type": "closing", "message": "참고문헌(압축)·데이터 출처·감사", "layout": "2열 참고문헌 소형 활자 + 데이터·코드 명시",
+     "assets": [], "intent": "학술대회 양식 요건 충족", "time": 0.25}
+  ],
+  "backup_slides": [
+    {"id": "B1", "message": "지중온도 유도 라벨의 음성 결과: 편입 시 전이 악화(21.8→88.1cm)와 3원인 분해", "assets": [], "intent": "완성도: 검증 게이트가 실제로 작동한 증거"},
+    {"id": "B2", "message": "결합 개선의 통계적 유의성: 블록 부트스트랩 95% CI가 0 포함, 재현 가능한 경향으로 보고", "assets": ["outputs/figures/s4_residual/s4_bootstrap_ci.png"], "intent": "완성도: 과장 없는 보고"},
+    {"id": "B3", "message": "연별 지도의 한계: 연도 간 anomaly 상관 0.06-0.10, 공간 구조 반영으로 해석", "assets": ["outputs/figures/s9_timelapse/alt_anom_year_panels_v1.png"], "intent": "질의 대비"},
+    {"id": "B4", "message": "표층 3D 상세: 검증(2.66°C, R² 0.47)과 융해면 유도 한계(40.7cm)", "assets": ["outputs/figures/s10_shallow3d/s10_validation.png"], "intent": "질의 대비"}
+  ],
+  "new_figures": [
+    {"file": "assets/final/fig_concept_alt.png", "message": "활동층·영구동토 단면 개념과 ALT 정의(0°C 등온선)", "style": "백색 배경, 냉색, 라벨 직접 표기"},
+    {"file": "assets/final/fig_label_gap.png", "message": "공변량(광역 조밀) 대 라벨(지점 희소) 비대칭과 기존 연구 3한계", "style": "좌우 대비 다이어그램"},
+    {"file": "assets/final/fig_workflow.png", "message": "세 출처 라벨→검증 게이트→증강→모델군→4종 산출물 파이프라인", "style": "ref-workflow: 구역 배경색+블록+화살표, 오렌지 강조"},
+    {"file": "assets/final/fig_aug_design.png", "message": "증강 3조건(Stefan·부정확·상수 대조)과 순가치 산식", "style": "수식+블록, 대조군 회색"}
+  ],
+  "qa": "렌더 후 visual-reviewer + scientific-figure-reviewer, 결함 수정 전 완료 선언 금지",
+  "qa_log_2026_08_24": [
+    "그림 QA(병렬 18장): use-as-is 5 · usable-minor 7 · re-render 6 → 크롭·재배치로 해소(인벤토리 지도/가용성 행렬 분리, s12 상하 분할, s11 (b)패널 크롭, s7 8.55in 확대, 폴드맵 전폭 스트립+네이티브 표)",
+    "슬라이드 QA(병렬+직접 26장): major 4건 수정(5 하단 겹침, 14·25 고아 마침표, 22 크롭 절단), minor 다수 수정(폴드/폴드 용어 통일, 표-그림 순서 일치, 17 우측 여백, 8 합류 화살표·상단 정렬, 23·24 여백 배분)",
+    "구현 세부: 모든 텍스트 런에 latin+ea+cs 폰트(Pretendard) 지정",
+    "알려진 한계: LibreOffice 렌더(PDF)에서 한글-라틴 경계·문장부호 앞 자동 간격이 보임. Impress 고유 동작으로 설정 키 없음(스키마 확인). PowerPoint에서는 정상 렌더. s12 (a)(b) 세로축 범위 상이(원본 그림), 발표 시 구두 보완",
+    "미기재 항목: 표지에 발표자·소속·팀명 없음(사용자 기입 필요)"
+  ],
+  "revision_v2_2026_08_24": [
+    "표지: 부제 보고서체 교체, 팀 ALT_ctrl·발표자 백승원(밑줄)·소속 3인 기재, 2026.08.28, SAI'L·서울대·KOPRI 로고(참고덱 미디어 추출 + CI_ai.zip 변환)",
+    "어투 전면 정리: 부제목·결론 줄·불릿을 명사형 종결로 통일, 결론 줄 중앙 정렬(강조 시 오렌지)",
+    "배경·문제정의: 문헌 근거([1]-[6],[19]-[23]) 병기, 숫자 카드형을 굵은 리드 불릿으로 교체, 한계 3항 무박스 번호 리스트",
+    "그림 v2: 개념도 질감(유기층·자갈·얼음렌즈·얼음쐐기·식생)·축겹침 수정, 워크플로 입력 미니아이콘·산출물 실썸네일, 딥러닝 아키텍처 신설(fig_dl_arch), 증강설계 실지도 썸네일",
+    "슬라이드 신설: 9 예측 모델군 아키텍처, 12 증강 효과 공간 분포(lena_aug_mapping 크롭, r=1 예시임을 명기) → 본편 23장 + 보충 5장",
+    "여백 정리: 병목·메커니즘·3D·보충자료 불릿 크기 13-13.5pt·간격 확대, 보충 25 수직 중앙 배치",
+    "결론 재구성: 무박스 지표열(세로 구분선) + 핵심 성과 5불릿 + 대표 산출물 그림, 마무리 슬라이드 감사합니다/Q&A 중앙 + 참고문헌 8.5pt 축소",
+    "색감: 인벤토리·폴드맵 표시본 채도 1.22배·대비 1.06배 보정 사본 사용(원본 불변), '백업'→'보충자료' 개칭"
+  ],
+  "revision_v3_2026_08_25": [
+    "표지: '밑줄=발표자' 문구 삭제",
+    "개념도: 얼음쐐기 제거, ALT 화살표 양끝 캡(<|-|> + 가로 바)으로 구간 명시, 라벨 재배치",
+    "인용: [n] 각주 번호를 저자-연도(Hugelius et al. 2014 등) 병기로 전환, 마무리 참고문헌은 저자 알파벳순 무번호",
+    "어휘 정리: '선택→선정', '성패를 결정', '지렛대', '출발점', '핵심 차별점' 등 수사 제거. p3 하단 = 연구 목적 한 문장, 결론 하단 = 성과 요약 한 문장. accent 결론은 잉크 볼드로 변경(주황 텍스트 가독성 문제)",
+    "그림: 모델 비교 막대를 표 3 수치로 덱 전용 재작성(fig_model_bars, 참조선 라벨·숫자 겹침 해소), 아키텍처 잔차부 좌측 엘보·×λ·결합식 병기, 레인별 ŷ 합류선, 증강 설계에 RMSE(r) 아이콘, 워크플로 화살표·부스팅 텍스트 수정",
+    "슬라이드 12: (b)(c) 육안 구분 불가 문제로 (a) 관측 + (d) 증강 효과 2패널 재구성(원본 그림의 위도라벨-컬러바 겹침 때문에 (a)는 지도만 크롭)",
+    "s11 (b) 크롭: 원본에서 세로축 라벨과 겹친 '목표 90%'를 백패치로 정리, 눈금 온전 확보",
+    "연별 지도: 표시본 채도 0.90·밝기 1.06 소프트 보정(annual_soft), 13.33·2.66°C 강조는 박스 대신 룰라인 스탯 블록",
+    "여백: p2·3·12·14·16·17·19·21 본문 확장·크기 확대로 하단 여백 정리, 결론 지표열 단위 cm 통일·의미 명시",
+    "보충자료 5장 삭제, 최종 본편 23장"
+  ],
+  "revision_v9_2026_08_26": [
+    "p6 하단 룰-캡션 간격, p8 조건별 예측 라벨 분리, p7 수식·p22 지표 라벨 주황 강조",
+    "p9 배선 완결: MLP 주석 1줄 상단 이동, 레인 출력선 전폭, 딥러닝→물리 잔차 '비교' 화살표 복원, 결합식→출력 직각 사슬 연결",
+    "p12 최종: (a)관측·(b)증강 전(확대·동일 ALT 스케일) + (c)증강 전후 변화량 지도(±30 스케일, 채도 보정)로 확정. 셀 단위 예측 원자료 부재로 지도 재렌더 불가, 변화량 지도가 방향·공간 일관성을 전달(생성 스크립트는 7/24 세션 임시본으로 소실)",
+    "p20 좌하: 지도 읽기 해설 블록으로 여백 해소. 대본 p12 문구 동기화"
+  ],
+  "revision_v8_2026_08_26": [
+    "p6: 열 5개 균등 배분 + 행 높이를 열 간 정렬(R1-R4)해 화살표 전부 수평·평행, 공변량 우회도 수평·수직 직각만",
+    "p6·7·8·9: 연회색 배경 패널 전면 제거(백색 배경 + 파선 구분선만). p7 수식 패널 박스 제거",
+    "p8: 라벨 부여를 직각 배선으로, 조건 3열 하향 중앙 배치, 채점 레인 전 요소 중심 y 정렬로 화살표 수평화",
+    "p9: 레인 출력선을 전 폭으로 연장해 ŷ 라벨 정렬·MLP 우측 여백 해소, 열2→열3 화살표 제거(관계는 하단 텍스트로), 물리 열을 수직 사슬(앵커→⊕→결합식)로 재배선, g 학습 타깃에 리드 문구",
+    "p12: 관측 밀집 구역 확대 크롭 + 공유 컬러바(ALT cm, 20-120) 명시 + 그림 세로 확장(H 5.0)으로 하단 여백 해소, (b) 21.9로 표기 통일",
+    "p19·20·21·22: 선+주황 라벨+큰 숫자 통계 블록을 key-value 헤어라인 표(kv_table)로 전환, p22 지표 열 세로선 제거·북탭스 룰로 대체"
+  ],
+  "revision_v7_2026_08_26": [
+    "방법부 3그림 3차 재설계(확정, 참조덱 p3·5·6·8 평면 문법): 외곽 프레임·구역 패널·판정 태그 박스·곡선 화살표 전면 폐지. 연회색 배경 + 파선 세로/가로 구분선 + 주황 헤딩 + 텍스트 위계. 박스는 실데이터 이미지·셰브런(황=학습, 녹=평가)·네트워크 연산 블록(황색)에만 허용",
+    "p6: 게이트·모델군을 북탭스(booktabs) 헤어라인 표로, 판정은 채택(녹)/제외(적) 색 텍스트로, 증강은 자유 배치 수식으로. p8: 조건 3열을 세로 헤어라인 분리 텍스트 열로, 순가치 수식 자유 배치. p9: 물리식 앵커를 텍스트+수식으로, g(c)만 황색 블록. 화살표 전부 직선"
+  ],
+  "revision_v6_2026_08_26": [
+    "방법부 3그림 2차 재설계(참조덱 p4 문법): 짙은 외곽 프레임+제목 밴드, 색 구역 패널(청·주황·녹·보라·회) + 색 헤딩, 채택/제외 녹·적 의미 태그, 네트워크 블록 황색(참조덱 U-Net 색), 셰브런 프로세스 블록, 학습 전용 적색 파선. 번호 틱바·균일 박스 그리드 폐지, 파선 장거리 우회 경로 제거(텍스트 연계로 대체)",
+    "p12 재구성: 관측/증강 전(21.9)/증강 후(17.0) 3지도 동일 색 스케일 비교 + 오차·편향 곡선",
+    "p13 그림 원복(13.33 라벨·기준선 제거), 페이지 상호참조(pNN) 전면 삭제, p20을 보정된 예측구간 지도((a)(b) 크롭) 중심으로 재편하고 보정 전 44.6%는 슬라이드·결론에서 제거(질의 대응용으로만 유지)",
+    "최종 검수(4에이전트): 오탈자(석박사통합과정)·용어 통일(3차원/물리 잔차 결합/위성 제품/레나델타/증강 비율)·단위 표기·p5 리더선 관통·p9 배선 관통·p12 컬러바 잔재·p16 CI 문장 등 22건 수정, 원본 그림 7종 재생성",
+    "발표대본·Q&A 문서 v6 동기화 (p12 3지도, p20 보정 후 중심, 결론 93.4%)"
+  ],
+  "revision_v5_2026_08_26": [
+    "방법부 3그림(p6 워크플로·p8 증강설계·p9 아키텍처)을 참조덱 도식 문법으로 전면 재설계: 저채도 틴트 구역 폐지 → 연회색 패널+번호 소제목+오렌지 틱바, 실데이터 썸네일 삽입(인벤토리 지도·물리식 점지도·트럼펫 프로파일·공변량 래스터·반응곡선·순가치곡선), 게이트 판정 칩(체크/엑스), 선종류 범례, 기호 정의 각주, p8 2레인(설계|채점·순가치) 구조",
+    "정합 감사(워크플로 12에이전트, 오탐 0): p4 개요 그림 83→74블록 수정, p6 배너 LORO 세 지역 표기, p13 14.46/14.56 추정량 병기, p15 평가 셀 기준 각주, p23 참고문헌 4건 추가(Gorishniy×2·Prokhorenkova·Riseborough)",
+    "이해도 리뷰(3렌즈) 반영: p6 유사라벨·앵커·LORO 최초 정의, p7 TDD 기호 풀이+TTOP 각주, p8 첨자 설명+평가 조건 명시, p10 표에 대응 결과 열, p11 곡선 기준선·순가치 +10.3cm 주석, p13 13.33 기준선을 그림에 표시+λ 선택 규칙, p14 비교군 정의+22.24/21.26 산출 조건, p15 앵커 정의 각주, p16 산포 정의, p17 고주파(표준편차), p18 지도 생성 모델 명시, p21 셀 단위 검증 표현 통일, p5 원자료/집계 구분 캡션",
+    "s12 그림 패널 제목을 검증 조건 명칭(공변량만/정보 없음)과 통일, 시각 QA(4에이전트) 후 겹침·잘림 9건 수정, 최종 render/permafrost_final.pptx + pdf"
+  ],
+  "revision_v4_2026_08_25": [
+    "인용 검증: 슬라이드 인용 전수 대조(main.tex 참고문헌 기준) 후 미인용 문헌에 위치 추가: Stefan 1891(p7 수식), Gautam 2025(p7), Muñoz-Sabater 2021(p5), Westermann 2024(p15 부제), Romano 2019·Meyer&Pebesma 2021(p20), Nelson 1998(p21)",
+    "아키텍처 확정값 반영(src/polar/tab_models.py): MLP 256-128-64(ReLU·BN·Dropout0.1), TabM 공유몸체 256→128+병렬헤드×8, FT-T d=64·8헤드 MHSA·FFN128·블록×3·pre-LN, 학습 SmoothL1·Adam(lr 1e-3, FT-T 5e-4)·검증10% 조기종료",
+    "p9: 잔차 결합부 재배선 유지 + 출력 노드에 실제 산출물 썸네일(고해상 지도·UQ 지도), TabM 헤드 박스 확대로 글씨 겹침 해소",
+    "p12 재구성: fig_aug_spatial 신설 = 델타 확대 관측 지도 + 채도 강화한 증강 차이 지도 + s3_aug_curve_results.csv 실데이터 곡선(RMSE 21.9→16.5, 편향 +16.2→+8.3, 3-seed 평균)",
+    "p13 스탯 줄바꿈 재구성, p17 수동 개행 4줄, p19 불릿 5개로 확장, p18 감마 1.28 보정(심색부 완화), p20 스파인 백패치 복원(주변 픽셀 탐색)",
+    "발표 대본 신설: deck/mk_script_docx.py → render/발표대본_ALT_ctrl.docx (23장·15분 배분·발표체)"
+  ]
+}
