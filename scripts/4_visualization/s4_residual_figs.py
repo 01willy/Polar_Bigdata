@@ -144,7 +144,7 @@ for t in leg.get_texts():
 
 # 각주: 오차막대의 정의(표준편차가 아닌 지역 간 표준오차)와 반복 수. 캡션 없이 그림만으로 확인된다.
 N_REG = int(reg_mean.shape[1])
-REG_NAMES = "·".join({"Alaska": "알래스카", "Lena": "레나", "Canada": "캐나다"}.get(r, r)
+REG_NAMES = "·".join({"Alaska": "알래스카", "Lena": "레나델타", "Canada": "캐나다"}.get(r, r)
                      for r in regions)
 _seed_n = loro_sh.groupby(["model", "lam", "region"]).seed.nunique()
 N_SEED = int(_seed_n.max())

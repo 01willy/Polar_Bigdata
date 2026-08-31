@@ -3,7 +3,7 @@
 의도(단일 메시지): 알래스카 ALT 예측지도의 신뢰 범위를 공간적으로 제시한다.
   (a) 지역 내(0.5° 공간블록 교차검증) 보정된 90% 예측구간 폭 (cm). 값이 클수록 신뢰 폭이 넓다.
       지역 간 전이 시 적용가능 영역 밖으로 판정된 셀은 해칭으로 덮어 외삽 구간을 명시한다.
-  (b) 환경 비유사도 지수 (무차원). 적용가능 영역 판정의 연속 근거.
+  (b) 학습 분포와의 환경 차이 (무차원). 적용가능 영역 판정의 연속 근거.
   (c) 비유사도 구간별 지역 간 전이 오차와 90% 구간 커버리지. 비유사도 표기의 타당성 근거.
 
 입력(모두 기저장 셀별 값. 모델·통계 재계산 없음):
@@ -60,9 +60,11 @@ CMAP_DI = LinearSegmentedColormap.from_list(             # 연청록 → 청록 
 for _c in (CMAP_WIDTH, CMAP_DI):
     _c.set_bad("#e9ecef")
 
-GRIDSIZE = 30          # 육각 셀 크기: 축소 게재에서도 개별 셀 판독 가능
-FS_AX, FS_TK = 10.0, 9.0
-FS_CB, FS_CBT, FS_GEO = 9.5, 8.5, 8.5
+GRIDSIZE = 30
+# 인쇄 1:1. 아래 pt 값이 곧 인쇄 pt 이며 하한 6.5 pt 를 지킨다.
+FS_AX, FS_TK = 7.0, 6.6
+FS_CB, FS_CBT, FS_GEO = 6.8, 6.5, 6.5
+FS_LEG, FS_NOTE, FS_LAB = 6.6, 6.5, 7.6
 
 
 # ------------------------------------------------------------------ 자료 적재
@@ -141,8 +143,12 @@ def style_colorbar(cb, label):
     return cb
 
 
-def geo_labels(ax, size=FS_GEO):
-    """위경도 눈금 레이블 크기·회전 정리(cartopy 0.23: Gridliner는 ax.artists에 있음)."""
+def geo_labels(ax, size=FS_GEO, left=True):
+    """위경도 눈금 레이블 크기·회전 정리(cartopy 0.23: Gridliner는 ax.artists에 있음).
+
+    left=False 면 위도 라벨을 두지 않는다. 두 지도 패널이 같은 범위이므로 오른쪽
+    패널의 위도 라벨은 정보를 더하지 않고 왼쪽 패널 컬러바 이름과 겹친다.
+    """
     from cartopy.mpl.gridliner import Gridliner
     gls = [a for a in ax.artists if isinstance(a, Gridliner)]
     if getattr(ax, "_gl", None) is not None and ax._gl not in gls:
@@ -151,16 +157,20 @@ def geo_labels(ax, size=FS_GEO):
         gl.xlabel_style = {"size": size, "color": "0.35"}
         gl.ylabel_style = {"size": size, "color": "0.35"}
         gl.rotate_labels = False
+        gl.left_labels = left
+        gl.right_labels = gl.top_labels = False
 
 
 # ------------------------------------------------------------------ 레이아웃
 # 지도 종횡비를 먼저 구해 축 사각형을 인치 단위로 직접 배치한다(패널 높이·정렬 고정).
-FIG_W = 9.2
-M_L, M_R, M_T, M_B = 0.60, 0.14, 0.28, 0.58      # 바깥 여백 (in)
-CB_GAP, CB_W, CB_LAB = 0.07, 0.11, 0.44          # 컬러바 블록 (in)
-COL_GAP, ROW_GAP = 0.40, 1.02                    # 패널 간격 (in)
-CHART_H = 1.80                                   # (c) 높이 (in)
-LEG_DROP = 0.30                                  # 지도 하단 ~ 공통 범례 (in)
+# main.tex 삽입 폭 0.78 textwidth = 137.3 mm 와 같은 figsize 로 만들고 tight 크롭을
+# 쓰지 않으므로 축소 배율이 1.0 이다. 여백은 위 글자 크기에 맞춰 다시 잡았다.
+FIG_W = 137.3 / 25.4
+M_L, M_R, M_T, M_B = 0.34, 0.07, 0.17, 0.34      # 바깥 여백 (in)
+CB_GAP, CB_W, CB_LAB = 0.04, 0.075, 0.30         # 컬러바 블록 (in)
+COL_GAP, ROW_GAP = 0.30, 0.60                    # 패널 간격 (in)
+CHART_H = 1.02                                   # (c) 높이 (in)
+LEG_DROP = 0.19                                  # 지도 하단 ~ 공통 범례 (in)
 
 _ASP = projected_aspect(AK)                      # 투영 후 지도 가로/세로
 _CB_BLOCK = CB_GAP + CB_W + CB_LAB
@@ -201,7 +211,7 @@ def build(df: pd.DataFrame, dec: pd.DataFrame):
     caxA, caxB = fig.add_axes(R["ca"]), fig.add_axes(R["cb"])
     for ax in (axA, axB):
         make_ax(AK, ax=ax, fig=fig)
-        geo_labels(ax)
+        geo_labels(ax, left=ax is axA)
 
     ext = hex_extent(axA, df.lon.values, df.lat.values)
     # 모든 레이어가 같은 extent·gridsize를 써서 두 지도 패널의 육각 셀이 1:1 대응한다.
@@ -227,8 +237,8 @@ def build(df: pd.DataFrame, dec: pd.DataFrame):
     hex_overlay(axA, hb_ok, np.asarray(hb_ok.get_array(), float) > 0.5, hatch="///")
     hex_overlay(axA, hb_na, sel_na, hatch=None, color=NA_EDGE, lw=0.55)
 
-    add_scalebar(axA, fontsize=8)
-    add_inset_locator(fig, axA, AK, size=0.24)
+    add_scalebar(axA, fontsize=FS_GEO)
+    add_inset_locator(fig, axA, AK, size=0.22)
 
     # ---- (b) 환경 비유사도 지수 ----
     d = df.di[ok].values
@@ -238,7 +248,7 @@ def build(df: pd.DataFrame, dec: pd.DataFrame):
                 facecolor=NA_FILL, zorder=1.5)
     mask_ocean(axB)
     style_colorbar(fig.colorbar(hbB, cax=caxB, extend="max", extendfrac=0.028),
-                   "환경 비유사도 지수 (무차원)")
+                   "학습 분포와의 환경 차이 (무차원)")
     for h in (hb_ok, hb_na):
         h.remove()
 
@@ -249,8 +259,8 @@ def build(df: pd.DataFrame, dec: pd.DataFrame):
         Patch(facecolor=NA_FILL, edgecolor=NA_EDGE, linewidth=0.55,
               label="적용가능 영역 판정 없음")],
         loc="upper center", bbox_to_anchor=(R["leg_x"], R["leg_y"]), ncol=2,
-        frameon=False, fontsize=8.6, handlelength=1.6, handletextpad=0.55,
-        columnspacing=2.2)
+        frameon=False, fontsize=FS_LEG, handlelength=1.4, handletextpad=0.45,
+        columnspacing=1.4)
 
     # ---- (c) 비유사도 구간별 전이 오차 (커버리지는 막대 위 값 라벨) ----
     x = np.arange(len(dec))
@@ -258,13 +268,13 @@ def build(df: pd.DataFrame, dec: pd.DataFrame):
     axC.bar(x, rmse, width=0.48, color=SLATE, lw=0, zorder=2)
     for xi, r, c in zip(x, rmse, cov):
         axC.text(xi, r + 0.9, f"{c:.0f}%", ha="center", va="bottom",
-                 fontsize=8.2, color="#5a5a5a")
+                 fontsize=FS_NOTE, color="#5a5a5a")
     axC.text(0.012, 0.99, "막대 위 숫자 = 90% 예측구간 커버리지 (%), 목표 90%\n"
              "전이 평가 대상: 알래스카·캐나다 전 지역 셀 (지도 범위 밖 포함)",
-             transform=axC.transAxes, ha="left", va="top", fontsize=8.4,
-             color="#6a6a6a", linespacing=1.5)
+             transform=axC.transAxes, ha="left", va="top", fontsize=FS_NOTE,
+             color="#6a6a6a", linespacing=1.4)
     axC.set_ylabel("지역 간 전이 RMSE (cm)", fontsize=FS_AX)
-    axC.set_xlabel("환경 비유사도 지수 (구간 평균, 무차원)", fontsize=FS_AX)
+    axC.set_xlabel("학습 분포와의 환경 차이 (구간 평균, 무차원)", fontsize=FS_AX)
     axC.set_xticks(x)
     axC.set_xticklabels([f"{v:.1f}" if v < 100 else f"{v:.0f}" for v in dec.di_mean])
     axC.set_xlim(-0.60, len(dec) - 0.40)
@@ -277,7 +287,7 @@ def build(df: pd.DataFrame, dec: pd.DataFrame):
         axC.spines[s].set_visible(False)
 
     for ax, lab in ((axA, "(a)"), (axB, "(b)"), (axC, "(c)")):
-        ax.set_title(lab, loc="left", fontsize=11, fontweight="bold", pad=5)
+        ax.set_title(lab, loc="left", fontsize=FS_LAB, fontweight="bold", pad=2.5)
     return fig, (axA, axB)
 
 
@@ -303,7 +313,7 @@ def main():
         print(f"  패널({tag}) 배치 h={p.height:.4f} w={p.width:.4f}")
     for ext in ("png", "pdf"):
         fig.savefig(OUT / f"{NAME}.{ext}", dpi=300 if ext == "png" else None,
-                    bbox_inches="tight")
+                    bbox_inches=None)
     plt.close(fig)
     print("저장:", OUT / f"{NAME}.png", "·", OUT / f"{NAME}.pdf")
 

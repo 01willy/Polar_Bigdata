@@ -7,15 +7,16 @@
     지형이 더한 세부 구조를 같은 창에서 직접 비교한다.
 
 방법
-    1) 창: 브룩스 산맥 북사면~북극 연안평야 (경도 -151.5~-148.5°, 위도 68.0~70.0°).
-       알래스카 관측 13,615셀 중 3,509셀이 이 창에 든다.
+    1) 창: 브룩스 산맥 북사면~북극 연안평야 (경도 -152.0~-148.0°, 위도 68.2~70.0°).
+       창 안 실측 셀은 3,509개이며, 0.01° 격자로 집계하면 146개 위치가 된다.
     2) 지형: Copernicus DEM 30 m 타일 8매를 모자이크해 원해상도(위도 1", 경도 2")에서
        표고·경사·사면방위(sin·cos)·TPI·거칠기를 계산한다. 계산식·창크기(33x33 px)는
        학습 공변량 생성 스크립트(scripts/1_data_prep/terrain_features_dem.py)와 동일하다.
        원해상도 화소값을 8(위도) x 11(경도) 블록평균해 목표 격자로 집계한다.
     3) 기후: ERA5-Land 월 기후값(2015-2020, 0.1°) 8종을 목표 격자로 이중선형 보간한다.
     4) 토양: SoilGrids(약 5 km, IGH) 9종을 목표 격자에 샘플링한다.
-    5) 예측: 알래스카 관측셀로 CatBoost(CPU)를 학습해 목표 격자에 적용한다.
+    5) 예측: 알래스카 관측 13,606셀(보고서 표본과 동일한 지역 정의)로 CatBoost(CPU)를
+       학습해 목표 격자에 적용한다.
        (a) 지형 6종을 창 중앙값으로 고정 → 기후·토양만의 기여(정보량 약 11 km).
        (b) 지형 6종에 실제 격자값 사용 → 30 m 지형정보 반영.
        (c) (b) - (a) = 지형 기여.
@@ -24,6 +25,8 @@
 산출
     outputs/maps/alt_downscale_demo.png (dpi 300)
     outputs/maps/alt_downscale_demo.pdf
+    보고서 삽입 폭(0.78 x textwidth = 137.3 mm)과 같은 figsize 로 생성하므로 축소 배율은
+    1.0 이고, 스크립트에 지정한 pt 값이 그대로 인쇄 pt 가 된다(최소 7.0 pt).
 
 실행
     PYTHONPATH=/home/willy010313/Polar_Bigdata/src \
@@ -51,15 +54,22 @@ from polar.fidelity import TERRAIN, CLIMATE, SOIL  # noqa: E402
 
 plt = use_polar()
 plt.rcParams["axes.unicode_minus"] = False   # 한글 폰트에 U+2212 글리프 없음
+# 축 사각형을 인치로 직접 배치하므로 tight 크롭을 끈다(인쇄 폭을 figsize 로 확정).
+plt.rcParams["savefig.bbox"] = None
 
 DEM_DIR = os.path.join(ROOT, "data/raw/dem")
 NC = os.path.join(ROOT, "data/raw/era5land/nh_monthly_2015-2020.nc")
 SG_DIR = os.path.join(ROOT, "data/raw/soilgrids_wcs/namerica")
 TRAIN_CSV = os.path.join(ROOT, "data/processed/fidelity_base.csv")
-CACHE = "/tmp/claude-1025/-home-willy010313-Polar-Bigdata/9214e5fa-1d0d-42d3-aadb-4b38d210b11b/scratchpad"
 
-AK_REGIONS = ("ABoVE_AK", "United States (Alaska)", "GTNPenv_US")
+# 알래스카 지역 정의는 보고서 표본(13,606셀)과 같게 둔다. 다른 보고서 지도 스크립트
+# (report_alt_map_hires.py)와 동일한 정의이며, 학습 표본이 표·본문 수치와 어긋나지 않는다.
+AK_REGIONS = ("ABoVE_AK", "United States (Alaska)")
 IGH = "+proj=igh +lat_0=0 +lon_0=0 +datum=WGS84 +units=m +no_defs"
+
+# 창 안 실측 셀(3,509개)은 그대로 찍으면 서로 겹치므로 0.01° 격자로 집계해 표시한다.
+# 범례의 n은 관측 지점 수가 아니라 집계 위치 수다(그림 4와 같은 표기 규칙, 간격만 다름).
+DEDUP_DEG = 0.01
 
 # 창(경도0, 경도1, 위도0, 위도1). 약 159 x 200 km. DEM 타일 8매 보유 구간.
 WIN = (-152.0, -148.0, 68.2, 70.0)
@@ -84,7 +94,30 @@ SG_LAYERS = {
 }
 
 GREY_TXT = "#444444"
-LAND_BG = "#efece6"
+
+# ---- 인쇄 크기 ----------------------------------------------------------
+# main.tex 는 이 그림을 width=0.78\textwidth 로 넣는다(textwidth 176 mm → 137.3 mm).
+# 그림을 그 폭 그대로 생성하고 tight 크롭을 끄면 축소 배율이 1.0 이 되어, 아래 pt 값이
+# 인쇄 pt 와 같아진다. 모든 글자를 7 pt 이상으로 두어 6.5 pt 하한을 만족시킨다.
+FIG_W_MM = 109.1      # main.tex \includegraphics[width=0.62\textwidth] 와 동일(인쇄 1:1)
+FS_TAG = 7.5        # 패널 라벨
+FS_CB_LAB = 7.5     # 컬러바 라벨
+FS_CB_TICK = 7.0    # 컬러바 눈금
+FS_GRID = 7.0       # 경위도 눈금
+FS_LEG = 7.0        # 범례
+FS_SCALE = 7.0      # 축척막대
+
+# 축 사각형을 인치로 직접 배치한다(단위 in). 세 패널 폭이 정확히 같아지고 컬러바가
+# 패널 폭에 정렬된다.
+M_L, M_R = 0.38, 0.02       # 좌(위도 눈금)·우 여백. 7자 라벨(69.5°N) 폭 확보
+M_T = 0.16                  # 상(패널 라벨) 여백
+COL_GAP = 0.05              # 패널 간격
+FOOT_H = 0.17               # 하단 범례 줄
+CB_LAB_H, CB_TICK_H = 0.115, 0.105   # 컬러바 라벨·눈금 영역
+CB_H = 0.075                # 컬러바 두께
+LON_LAB_H = 0.145           # 지도 아래 경도 눈금 영역
+CB_Y = FOOT_H + CB_LAB_H + CB_TICK_H
+M_B = CB_Y + CB_H + LON_LAB_H
 
 
 # ----------------------------------------------------------------------
@@ -354,7 +387,7 @@ def predict_fields(model, T, C, S, lat_t, lon_t):
     return fa, fb, d
 
 
-def load_obs(win, dedup_deg=0.01):
+def load_obs(win, dedup_deg=DEDUP_DEG):
     lo0, lo1, la0, la1 = win
     d = pd.read_csv(TRAIN_CSV, low_memory=False,
                     usecols=["lat", "lon", "region", "alt_cm"])
@@ -363,7 +396,7 @@ def load_obs(win, dedup_deg=0.01):
     g = (d.assign(_la=(d.lat / dedup_deg).round(), _lo=(d.lon / dedup_deg).round())
            .groupby(["_la", "_lo"], as_index=False)
            .agg(lat=("lat", "mean"), lon=("lon", "mean"), alt_cm=("alt_cm", "mean")))
-    print(f"[관측] 창 내 {len(d):,}셀 → {dedup_deg}° 중복제거 {len(g):,} 지점")
+    print(f"[관측] 창 내 원 셀 {len(d):,} → {dedup_deg}° 집계 {len(g):,} 위치")
     return g
 
 
@@ -404,12 +437,13 @@ def _panel(ax, lon_t, lat_t, F, cmap, norm):
     return im
 
 
-def _fit_to_data(ax, extent):
-    """축 범위를 자료 사각형의 내접 직사각형으로 좁힌다.
+def inscribed_box(proj, extent):
+    """자료 사각형의 내접 직사각형 (x0, x1, y0, y1)을 투영좌표로 반환한다.
 
     원뿔투영에서 경위도 창은 곡선 사변형이 되므로 set_extent 의 외접 사각형에는
     자료가 없는 모서리 띠가 남는다. 네 변을 투영해 내접 직사각형을 취하면 예측장이
-    축 전체를 채운다.
+    축 전체를 채운다. 이 상자의 가로/세로 비로 축 사각형을 잡아야 등축척(equal aspect)
+    조정이 축 크기를 다시 줄이지 않는다.
     """
     import cartopy.crs as ccrs
     _, lo0, lo1, la0, la1 = extent
@@ -417,16 +451,37 @@ def _fit_to_data(ax, extent):
     lo = np.linspace(lo0, lo1, n)
     la = np.linspace(la0, la1, n)
 
-    def proj(x, y):
-        p = ax.projection.transform_points(ccrs.PlateCarree(),
-                                           np.asarray(x), np.asarray(y))
+    def pr(x, y):
+        p = proj.transform_points(ccrs.PlateCarree(), np.asarray(x), np.asarray(y))
         return p[:, 0], p[:, 1]
-    xl, _ = proj(np.full(n, lo0), la)
-    xr, _ = proj(np.full(n, lo1), la)
-    _, yb = proj(lo, np.full(n, la0))
-    _, yt = proj(lo, np.full(n, la1))
-    ax.set_xlim(float(xl.max()), float(xr.min()))
-    ax.set_ylim(float(yb.max()), float(yt.min()))
+    xl, _ = pr(np.full(n, lo0), la)
+    xr, _ = pr(np.full(n, lo1), la)
+    _, yb = pr(lo, np.full(n, la0))
+    _, yt = pr(lo, np.full(n, la1))
+    return float(xl.max()), float(xr.min()), float(yb.max()), float(yt.min())
+
+
+def _check_print_size(fig, tags, map_w):
+    """인쇄 1:1 가정에서 글자 크기·라벨 폭을 실측 검증한다(축소 배율 1.0)."""
+    from matplotlib.text import Text
+    fig.canvas.draw()
+    r = fig.canvas.get_renderer()
+    seen = []
+    for t in fig.findobj(Text):
+        s = (t.get_text() or "").strip()
+        if s:
+            seen.append((float(t.get_fontsize()), s))
+    # 축척막대 문자는 매 draw 마다 새 OffsetBox 로 만들어져 findobj 로 잡히지 않는다.
+    seen.append((float(FS_SCALE), "축척막대"))
+    seen.sort(key=lambda x: x[0])
+    lo = [f"{v:.1f} pt '{s[:22]}'" for v, s in seen[:3]]
+    print(f"[QA] 그림 내 글자 {len(seen)}개 · 최소 " + " | ".join(lo))
+    if seen[0][0] < 6.5:
+        print("[QA] 경고: 6.5 pt 미만 글자가 있다")
+    for t in tags:
+        w = t.get_window_extent(renderer=r).width / fig.dpi
+        flag = "" if w <= map_w else "  <- 패널 폭 초과"
+        print(f"[QA] 라벨 폭 {w:.2f} in / 패널 {map_w:.2f} in  '{t.get_text()}'{flag}")
 
 
 def render(lon_t, lat_t, fa, fb, d, obs, cell_m, out="alt_downscale_demo"):
@@ -438,6 +493,10 @@ def render(lon_t, lat_t, fa, fb, d, obs, cell_m, out="alt_downscale_demo"):
     # 표시 창을 격자 셀 중심의 외곽에 맞춘다(등치대가 축 가장자리까지 채워 배경 띠 제거).
     extent = (WIN_NAME, float(lon_t[0]), float(lon_t[-1]),
               float(lat_t[0]), float(lat_t[-1]))
+    proj = map_projection(extent)
+    x0, x1, y0, y1 = inscribed_box(proj, extent)
+    asp = (x1 - x0) / (y1 - y0)
+
     v = np.concatenate([fa[np.isfinite(fa)], fb[np.isfinite(fb)]])
     vmin = float(np.floor(np.percentile(v, 1) / 2) * 2)
     vmax = float(np.ceil(np.percentile(v, 99) / 2) * 2)
@@ -452,26 +511,38 @@ def render(lon_t, lat_t, fa, fb, d, obs, cell_m, out="alt_downscale_demo"):
     dnorm = BoundaryNorm(dlev, ncolors=dcmap.N, extend="both")
     print(f"[색] ALT {vmin:.0f}~{vmax:.0f} cm ({len(levels)-1}단) | 차이 ±{dv:.0f} cm")
 
-    fig = plt.figure(figsize=(11.4, 6.0))
-    proj = map_projection(extent)
-    gs = fig.add_gridspec(2, 3, height_ratios=[1.0, 0.040], hspace=0.13,
-                          wspace=0.055, left=0.052, right=0.988,
-                          top=0.955, bottom=0.085)
+    fig_w = FIG_W_MM / 25.4
+    map_w = (fig_w - M_L - M_R - 2 * COL_GAP) / 3
+    map_h = map_w / asp
+    fig_h = M_B + map_h + M_T
+    print(f"[배치] 패널 종횡비 {asp:.3f} · 지도 {map_w*25.4:.1f} x {map_h*25.4:.1f} mm · "
+          f"전체 {fig_w*25.4:.1f} x {fig_h*25.4:.1f} mm (인쇄 1:1)")
+
+    def fr(x, y, w, h):
+        """인치 → figure 좌표."""
+        return [x / fig_w, y / fig_h, w / fig_w, h / fig_h]
+
+    fig = plt.figure(figsize=(fig_w, fig_h))
     axes = []
     for i in range(3):
-        ax = fig.add_subplot(gs[0, i], projection=proj)
-        make_ax(extent, ax=ax, fig=fig, grid=True, grid_labels=(i == 0),
+        ax = fig.add_axes(fr(M_L + i * (map_w + COL_GAP), M_B, map_w, map_h),
+                          projection=proj)
+        make_ax(extent, ax=ax, fig=fig, grid=True, grid_labels=True,
                 grid_kw=dict(linewidth=0.25, color="0.72", alpha=0.5,
                              linestyle=":"))
         gl = ax._gl
         if gl is not None:
             gl.rotate_labels = False
-            gl.xlocator = mticker.FixedLocator(np.arange(-151.5, -148.4, 1.0))
+            gl.left_labels = (i == 0)          # 위도 눈금은 왼쪽 패널에만
+            gl.xpadding = gl.ypadding = 2      # 기본 5 pt 는 좁은 여백에서 과하다
+            gl.xlocator = mticker.FixedLocator(np.arange(-151.0, -148.4, 1.0))
             gl.ylocator = mticker.FixedLocator(np.arange(68.5, 70.0, 0.5))
-            gl.xlabel_style = gl.ylabel_style = {"size": 8, "color": "0.38"}
+            gl.xlabel_style = gl.ylabel_style = {"size": FS_GRID, "color": "0.38"}
         for sp in ax.spines.values():
             sp.set_linewidth(0.6)
             sp.set_edgecolor("#8e8e8e")
+        ax.set_xlim(x0, x1)
+        ax.set_ylim(y0, y1)
         axes.append(ax)
 
     im_a = _panel(axes[0], lon_t, lat_t, fa, cmap, norm)
@@ -479,45 +550,49 @@ def render(lon_t, lat_t, fa, fb, d, obs, cell_m, out="alt_downscale_demo"):
     im_c = _panel(axes[2], lon_t, lat_t, d, dcmap, dnorm)
 
     for ax in axes:
-        _fit_to_data(ax, extent)
-        ax.scatter(obs.lon.values, obs.lat.values, s=1.4, c="#111111",
+        ax.scatter(obs.lon.values, obs.lat.values, s=2.0, c="#111111",
                    linewidths=0, alpha=0.6, transform=ccrs.PlateCarree(),
                    zorder=4)
-        add_scalebar(ax, fontsize=7)
+    # 세 패널이 같은 창·같은 투영이므로 축척막대는 하나만 둔다.
+    add_scalebar(axes[0], fontsize=FS_SCALE)
 
-    tags = ["(a) 기후(11 km)·토양(5 km) 공변량만",
-            f"(b) 30 m 지형 공변량 추가, 격자 {cell_m[0]:.0f} m",
-            "(c) 지형 기여, (b) - (a)"]
-    for ax, t in zip(axes, tags):
-        ax.text(0.0, 1.014, t, transform=ax.transAxes, fontsize=9.5,
-                color=GREY_TXT, ha="left", va="bottom")
+    tags = ["(a) 기후·토양만",
+            f"(b) 지형 추가 · {cell_m[0]:.0f} m",
+            "(c) (b) $-$ (a)"]
+    dy = 0.02 / map_h                          # 축 위 2 mm 미만 간격(축 좌표 환산)
+    tag_txt = [ax.text(0.0, 1.0 + dy, t, transform=ax.transAxes,
+                       fontsize=FS_TAG, color=GREY_TXT, ha="left", va="bottom")
+               for ax, t in zip(axes, tags)]
 
-    cax1 = fig.add_subplot(gs[1, 0:2])
+    cax1 = fig.add_axes(fr(M_L, CB_Y, 2 * map_w + COL_GAP, CB_H))
     cb1 = fig.colorbar(im_a, cax=cax1, orientation="horizontal")
-    cb1.set_label("활성층 두께 ALT (cm)", fontsize=9.5, color=GREY_TXT, labelpad=2)
+    cb1.set_label("활성층 두께 ALT (cm)", fontsize=FS_CB_LAB, color=GREY_TXT,
+                  labelpad=1.5)
     cb1.set_ticks(np.arange(np.ceil(vmin / 5) * 5, vmax + 0.1, 5))
-    cax2 = fig.add_subplot(gs[1, 2])
+    cax2 = fig.add_axes(fr(M_L + 2 * (map_w + COL_GAP), CB_Y, map_w, CB_H))
     cb2 = fig.colorbar(im_c, cax=cax2, orientation="horizontal")
-    cb2.set_label("ALT 차이 (cm)", fontsize=9.5, color=GREY_TXT, labelpad=2)
-    cb2.set_ticks(np.arange(-dv, dv + 0.1, max(2.0, round(dv / 3))))
+    cb2.set_label("ALT 차이 (cm)", fontsize=FS_CB_LAB, color=GREY_TXT, labelpad=1.5)
+    cb2.set_ticks(np.arange(-dv, dv + 0.1, max(2.0, round(dv / 2))))
     for cb in (cb1, cb2):
-        cb.ax.tick_params(labelsize=8, length=2.2, color=GREY_TXT,
-                          labelcolor=GREY_TXT)
+        cb.ax.tick_params(labelsize=FS_CB_TICK, length=2.0, pad=1.4,
+                          color=GREY_TXT, labelcolor=GREY_TXT)
         cb.outline.set_linewidth(0.5)
         cb.outline.set_edgecolor("#9a9a9a")
 
-    h = plt.Line2D([], [], marker="o", ls="none", ms=2.6, mfc="#111111",
-                   mec="none", label=f"관측 지점 (n={len(obs):,})")
-    leg = axes[0].legend(handles=[h], loc="lower left", fontsize=8,
-                         frameon=True, facecolor="white", framealpha=0.75,
-                         edgecolor="none", handletextpad=0.5, borderpad=0.4)
-    leg.set_zorder(6)
+    # 관측점 범례는 지도 위 상자 대신 하단 한 줄로 둔다(좁은 패널을 가리지 않는다).
+    h = plt.Line2D([], [], marker="o", ls="none", ms=2.4, mfc="#111111", mec="none",
+                   label=f"실측 셀 {DEDUP_DEG:g}° 집계 위치 (n={len(obs):,})")
+    leg = fig.legend(handles=[h], loc="lower left", frameon=False,
+                     bbox_to_anchor=(M_L / fig_w, 0.02 / fig_h),
+                     fontsize=FS_LEG, handletextpad=0.4, borderpad=0.0,
+                     borderaxespad=0.0)
     for t in leg.get_texts():
         t.set_color(GREY_TXT)
 
+    _check_print_size(fig, tag_txt, map_w)
     png, pdf = mappath(out), mappath(out, ext="pdf")
-    fig.savefig(png, dpi=300, bbox_inches="tight")
-    fig.savefig(pdf, dpi=300, bbox_inches="tight")
+    fig.savefig(png, dpi=300)
+    fig.savefig(pdf, dpi=300)
     plt.close(fig)
     print("saved", png)
     print("saved", pdf)

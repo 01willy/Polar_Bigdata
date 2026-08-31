@@ -95,8 +95,7 @@ def fig_scatter():
             color="#555", bbox=dict(boxstyle="round,pad=0.3", fc="white",
                                     ec="#ccc", lw=0.5))
 
-    fig.suptitle("KPDC 지점 실측 대비 ERA5-Land 공변량 정합 (관측월 정합, n=4 사례연구)",
-                 fontsize=12, y=1.02)
+    # 내부 제목은 두지 않는다(보고서 캡션이 담당).
     fig.tight_layout()
     _save(fig, figpath("10_kpdc", "kpdc_era5_scatter"))
 

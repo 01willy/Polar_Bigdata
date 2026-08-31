@@ -78,7 +78,7 @@ REGION_KO = {"Canada": "캐나다", "Lena": "레나델타", "Alaska": "알래스
 # 증강비율 격자값 전부를 주 눈금으로 고정한다. symlog 기본 로케이터에 맡기면 0.5·2가
 # 보조 눈금으로 분류되어 라벨 색·크기가 나머지와 달라진다.
 XTICKS = [0, 0.25, 0.5, 1, 2, 5, 10]
-XLABEL = "증강비율 r (유사라벨/실측)\n가로축 대칭로그(0.25 이하 선형)"
+XLABEL = "증강 비율 r (유사라벨/실측)\n가로축 대칭로그(0.25 이하 선형)"
 
 
 def style_xaxis(ax, show_labels=True):
@@ -119,6 +119,10 @@ for ti, target in enumerate(targets):
             ax.fill_between(g.index, delta - g["std"], delta + g["std"],
                             color=PHYS_COLOR[phys], alpha=0.12, lw=0)
     ax.axhline(0, color="#9aa2ab", lw=0.7, ls="--", zorder=1)
+    if ti == 0:
+        ax.text(0.60, 0.74, "기준 0 = 증강 없음(r = 0)", transform=ax.transAxes,
+                ha="center", va="top", fontsize=6.8, color="#6a7280",
+                bbox=dict(facecolor="white", edgecolor="none", alpha=0.85, pad=1.0))
     ax.yaxis.set_major_locator(mticker.MaxNLocator(4))
     paperize(ax, labelsize=8)
     style_xaxis(ax, show_labels=(ti == len(targets) - 1))
@@ -138,6 +142,7 @@ save(fig, "aug_response_curves")
 
 # ---------------- 물리 라벨의 순가치: 물리 라벨 − 대조 라벨 (같은 r에서) ----------------
 fig, ax = plt.subplots(figsize=(2.95, 2.85), layout="constrained")
+_net_ends = {}
 for model in models:
     for target in targets:
         sub = seed_rows[(seed_rows.model == model) & (seed_rows.target == target)]
@@ -159,7 +164,17 @@ for model in models:
         ax.plot(net.index, net.values, lw=1.1, ms=2.6, mew=0, zorder=3,
                 color=col, ls=stl["ls"], marker=stl["marker"],
                 label=f"{MODEL_LABEL.get(model, model)} · {REGION_KO.get(target, target)}")
+        if model == "catboost":
+            _net_ends.setdefault(REGION_KO.get(target, target), []).append(
+                (float(net.index[-1]), float(net.values[-1])))
 ax.axhline(0, color="#9aa2ab", lw=0.7, ls="--", zorder=1)
+if "캐나다" in _net_ends:
+    _xe = _net_ends["캐나다"][0][0]
+    _ye = sum(v for _, v in _net_ends["캐나다"]) / len(_net_ends["캐나다"])
+    ax.annotate(f"캐나다 순가치 +{_ye:.1f} cm (CatBoost)", xy=(_xe, _ye), xytext=(-4, -32),
+                textcoords="offset points", ha="right", fontsize=7.2, color="#1f3a52",
+                bbox=dict(facecolor="white", edgecolor="none", alpha=0.85, pad=1.0),
+                arrowprops=dict(arrowstyle="-", color="#9aa2ab", lw=0.6))
 style_xaxis(ax)                             # r=0(기준점) 포함, 보조 눈금 라벨 표기
 # 수식 마이너스는 mathtext($-$)로 렌더 — NanumGothic에 U+2212 글리프 부재
 ax.set_ylabel("Stefan $-$ 대조 라벨 개선폭 (cm)", fontsize=9)

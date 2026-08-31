@@ -135,6 +135,7 @@ save(fig, "ttop_permafrost_mask")
 # 좁은 단(0.32\textwidth) 배치 대비: 가로 막대 + 좌측 항목명(회전 라벨 제거).
 REGIONS = ["Alaska", "Canada", "Lena"]
 REG_COLOR = {"Alaska": "#2f4b6e", "Canada": "#7d97ab", "Lena": "#c3ccd5"}
+REG_KO = {"Alaska": "알래스카", "Canada": "캐나다", "Lena": "레나델타"}
 pa = res[(res.part == "A_physics") & (res.cv == "LORO")].copy()
 piv = (pa.pivot_table(index="model", columns="region", values="rmse_cm", aggfunc="mean")
          .reindex(MEMBERS + ["phys_mean"])[REGIONS])
@@ -150,7 +151,7 @@ sep = (y[is_mean].max() + y[~is_mean].min()) / 2
 h = 0.26
 for k, reg in enumerate(REGIONS):
     ax.barh(y + (1 - k) * h, piv[reg].to_numpy(dtype=float), height=h,
-            color=REG_COLOR[reg], edgecolor="none", label=reg, zorder=3)
+            color=REG_COLOR[reg], edgecolor="none", label=REG_KO.get(reg, reg), zorder=3)
 ax.axhline(sep, color="#aab3bd", lw=0.6, ls=(0, (3, 3)), zorder=2)
 ax.set_yticks(y)
 ax.set_yticklabels([LABELS.get(m, m) for m in piv.index], fontsize=8.5)

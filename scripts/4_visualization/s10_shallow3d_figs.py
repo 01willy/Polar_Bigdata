@@ -216,6 +216,17 @@ def save300(fig, name, pdf_dpi=150):
     print(f"[fig300] {png}")
 
 
+def save_exact(fig, name, pdf_dpi=150):
+    """인쇄 1:1 저장. tight 크롭을 쓰지 않으므로 figsize 가 그대로 게재 폭이 되고,
+    스크립트에 적은 pt 값이 곧 인쇄 pt 가 된다."""
+    png = os.path.join(OUTDIR, f"{name}.png")
+    fig.savefig(png, dpi=300, bbox_inches=None)
+    fig.savefig(png.replace(".png", ".pdf"), dpi=pdf_dpi, bbox_inches=None)
+    plt.close(fig)
+    w, h = fig.get_size_inches()
+    print(f"[1:1] {png}  {w * 25.4:.1f} x {h * 25.4:.1f} mm")
+
+
 # ---------- 그림 4(주력): 깊이-슬라이스 4패널 평면지도(0.5/1/1.5/2 m) ----------
 # 3D warp의 논문형 대체. 각 깊이 평면을 지도에 색면(온도 vik, 0°C 중심 대칭)으로 깐다.
 # 볼륨(지원반경 15 km 격자)에서 슬라이스를 취해 4패널 모두 동일 좌표·동일 clim을
@@ -243,24 +254,32 @@ cmap_slice = _step_at_zero(CMAP.temp)
 cmap_slice.set_bad(GAP_FILL)                # 지원반경 밖 = 중립 회색
 norm_slice = BoundaryNorm(LEV_SLICE, cmap_slice.N, extend="both")
 
-# 전폭(17 cm) 게재 전제(약 57% 축소 인쇄). 축소 후에도 7 pt 이상이 되도록 범례 13 pt,
-# 주석 12.5 pt, 컬러바 13.5 pt, 격자 경위도 라벨 11.5 pt로 상향.
-fig = plt.figure(figsize=(11.6, 9.4), constrained_layout=True)
+# 인쇄 1:1. main.tex 삽입 폭 0.62 textwidth = 109.1 mm 와 같은 figsize 로 만들고 tight
+# 크롭을 쓰지 않으므로 축소 배율이 1.0 이다. 아래 pt 값이 곧 인쇄 pt 이며 하한 6.5 pt 를 지킨다.
+FIG_W_MM, FIG_H_MM = 109.1, 88.4
+fig = plt.figure(figsize=(FIG_W_MM / 25.4, FIG_H_MM / 25.4), constrained_layout=True)
+fig.set_constrained_layout_pads(w_pad=0.006, h_pad=0.006, wspace=0.012, hspace=0.02)
 sax = []
 for i, dm in enumerate(SLICE_DEPTHS):
     ax = fig.add_subplot(2, 2, i + 1, projection=PROJ)
-    make_ax(ALASKA, ax=ax, fig=fig)
-    for _gl in getattr(ax, "_gridliners", []):
-        _gl.xlabel_style = {"size": 11.5, "color": "0.3"}
-        _gl.ylabel_style = {"size": 11.5, "color": "0.3"}
+    make_ax(ALASKA, ax=ax, fig=fig, grid_lon=[-160, -150, -140], grid_lat=[60, 65, 70])
+    # 네 패널이 같은 범위·같은 투영이므로 경위도 라벨은 바깥 테두리에만 둔다.
+    # 회전 라벨은 이 폭에서 아래 패널 제목과 겹치므로 수평으로 고정한다.
+    for _gl in [g for g in ([getattr(ax, "_gl", None)] + list(getattr(ax, "_gridliners", []))) if g]:
+        _gl.rotate_labels = False
+        _gl.left_labels = i % 2 == 0
+        _gl.bottom_labels = i >= 2
+        _gl.right_labels = _gl.top_labels = False
+        _gl.xlabel_style = {"size": 6.6, "color": "0.3"}
+        _gl.ylabel_style = {"size": 6.6, "color": "0.3"}
     di = int(np.argmin(np.abs(depths - dm)))
     sl = tvol[di]                          # (nlat, nlon), 지원 밖 NaN
     pm = field_map(ax, lon2d_v, lat2d_v, sl, cmap=cmap_slice, norm=norm_slice)
     mask_ocean(ax)
-    ax.set_title(f"({chr(97+i)}) 깊이 {dm:g} m", fontsize=14.5)
+    ax.set_title(f"({chr(97+i)}) 깊이 {dm:g} m", fontsize=8.0, pad=2.0)
     sax.append((ax, pm))
-add_inset_locator(fig, sax[0][0], ALASKA)
-add_scalebar(sax[0][0], loc="lower right")
+# 이 폭에서는 위치 안내 inset 과 축척바가 패널 지도의 상당 부분을 가린다. 네 패널이 모두
+# 같은 알래스카 범위이므로 둘 다 두지 않고 경위도 격자가 축척을 대신한다.
 # 범례: 그림 전체 하단에 1회만 배치해 4패널 공통 적용(패널 내부 배치 금지).
 from matplotlib.legend_handler import HandlerTuple
 _frz_h = mpatches.Patch(facecolor=cmap_slice(norm_slice(-0.25)), edgecolor="none")
@@ -269,14 +288,15 @@ _gap_h = mpatches.Patch(facecolor=GAP_FILL, edgecolor="0.55", linewidth=0.6)
 fig.legend([(_frz_h, _thw_h), _gap_h],
            ["0°C 동결/융해 경계(색 전환)", "지원반경 15 km 밖(예측 없음)"],
            handler_map={tuple: HandlerTuple(ndivide=None, pad=0.0)},
-           loc="outside lower center", ncol=2, fontsize=13, framealpha=0.9,
-           handlelength=2.6, columnspacing=2.4)
-cb = fig.colorbar(sax[-1][1], ax=[a for a, _ in sax], shrink=0.74, pad=0.02,
-                  aspect=30, extend="both", ticks=LEV_SLICE)
-cb.set_label("연최대 지중온도 (°C)  ·  0°C 중심(청=동결 유지, 갈=여름 융해)", fontsize=13.5)
-cb.ax.tick_params(labelsize=12.5)
+           loc="outside lower center", ncol=2, fontsize=6.8, framealpha=0.9,
+           handlelength=1.8, columnspacing=1.2, borderpad=0.3, handletextpad=0.5)
+cb = fig.colorbar(sax[-1][1], ax=[a for a, _ in sax], shrink=0.80, pad=0.015,
+                  aspect=26, extend="both", ticks=LEV_SLICE)
+cb.set_label("연최대 지중온도 (°C)", fontsize=7.0, labelpad=2.0)
+cb.ax.tick_params(labelsize=6.5, length=1.8, pad=1.2)
+cb.outline.set_linewidth(0.5)
 _rasterize_geo_features(fig)
-save300(fig, "s10_depth_slices")
+save_exact(fig, "s10_depth_slices")
 
 
 # ---------- 그림 5(보조A): 융해깊이(0°C 등온면 깊이) 2D 색면 ----------

@@ -2,8 +2,10 @@
 
 목적
     기존 ALT 지도는 관측점 산포라 공간적으로 성글다. 여기서는 알래스카 전역 0.02° 격자
-    (약 100만 셀)에서 Stefan 해를 직접 계산해 연속 예측장을 만들고, 그 위에 실측 관측
-    지점을 겹쳐 논문 수록용 단일 지도를 만든다. 새로운 학습은 하지 않는다.
+    (약 100만 셀)에서 학습 모델로 연속 예측장을 만들고, 그 위에 실측 셀 위치를 겹쳐
+    논문 수록용 단일 지도를 만든다.
+    실측 셀(13,606개)은 그대로 찍으면 서로 겹치므로 0.05° 격자로 집계해 표시한다.
+    범례의 n은 관측 지점 수가 아니라 집계 위치 수다.
 
 방법 (모두 기존 자산·물리식만 사용)
     1) 기후 강제력: ERA5-Land 월 기후값(2015-2020, 0.1°)을 알래스카 창으로 잘라
@@ -11,16 +13,21 @@
        사이트 공변량(data/processed/alt_era5_covariates.csv)과 동일한 정의·기간이다.
     2) 격자 세분: 0.1° 원장을 0.02° 격자로 이중선형 세분한다. 세분은 렌더용 평활화이며
        정보량은 0.1° 원장에 한정된다(그림 각주에 명시).
-    3) 토양 물성: SoilGrids(WCS namerica 창, 약 5 km, IGH 좌표계)에서 용적밀도·모래·자갈·
-       유기탄소를 격자점에 이중선형 샘플링한다.
-    4) 예측: polar.physics.physics_ensemble 로 열물성·동토상부온도(TTOP)를 계산하고,
-       검증에서 최상위였던 Stefan 해 ALT = E x TDD^0.5 를 예측장으로 쓴다.
-       E 는 재학습 없이 알래스카 실측에 최소제곱으로 적합한다(보고서의 다른 두 지도와 동일).
+    3) 토양 물성: SoilGrids(WCS namerica 창, 약 5 km, IGH 좌표계) 9종을 격자점에
+       이중선형 샘플링한다.
+    4) 예측: 격자에서 전부 채울 수 있는 공변량 17종(기후 8 + 토양 9)으로 CatBoost를
+       알래스카 실측 13,606셀에 학습해 격자에 적용한다(3-seed 앙상블 예측).
+       이 입력 집합에서의 모델 비교는 scripts/2_evaluation/map_model_gate.py 이며,
+       다층 퍼셉트론 13.86 · CatBoost 13.77 · Stefan 2모수 13.93 · Stefan 1모수 14.46 cm다
+       (알래스카 0.5° 공간블록 6-fold). 지형 6종은 알래스카 전역 DEM 미확보로,
+       SAR 8종은 관측 지점에만 존재해 격자 산출 불가로 제외한다.
        영구동토 범위는 다년평균 연평균기온 < 0 °C 로 정의하며, 그 밖의 육지는 표시하지 않는다.
 
 산출
     outputs/maps/alt_prediction_hires.png (dpi 300)
     outputs/maps/alt_prediction_hires.pdf
+    폭은 보고서 삽입 크기(0.54 x textwidth = 95.04 mm)와 같게 잡고 tight 크롭을 쓰지
+    않으므로 축소 배율은 1.0이다. 즉 스크립트의 fontsize(pt)가 곧 인쇄 pt다.
 
 실행
     PYTHONPATH=/home/willy010313/Polar_Bigdata/src python scripts/4_visualization/report_alt_map_hires.py
@@ -37,14 +44,17 @@ import sys
 import numpy as np
 import pandas as pd
 
+os.environ.setdefault("CUDA_VISIBLE_DEVICES", os.environ.get("GPU", "9"))
+
 ROOT = "/home/willy010313/Polar_Bigdata"
 if os.path.join(ROOT, "src") not in sys.path:
     sys.path.insert(0, os.path.join(ROOT, "src"))
 
 from polar.plotstyle import use_polar  # noqa: E402
 from polar.geomap import (ALASKA, make_ax, mask_ocean, add_scalebar,  # noqa: E402
-                          add_inset_locator)
-from polar.physics import physics_ensemble  # noqa: E402
+                          add_inset_locator, map_projection, projected_aspect)
+from polar.tab_models import fit_predict, NAN_NATIVE, set_device  # noqa: E402
+from polar.preprocessing import fold_prep  # noqa: E402
 from polar.fidelity import macro_region, fit_stefan_E  # noqa: E402
 from polar.outputs import mappath  # noqa: E402
 
@@ -56,19 +66,41 @@ def fidelity_base_alaska():
     return _d[_d.macro == "Alaska"]
 
 plt = use_polar()
+# 축 사각형을 인치로 직접 배치하므로 tight 크롭을 끈다(최종 인쇄 크기를 확정하기 위함).
+plt.rcParams["savefig.bbox"] = None
 
 NC = os.path.join(ROOT, "data/raw/era5land/nh_monthly_2015-2020.nc")
 SG_DIR = os.path.join(ROOT, "data/raw/soilgrids_wcs/namerica")
-S2_META = os.path.join(ROOT, "data/processed/s2_physics_meta.json")
 OBS_CSV = os.path.join(ROOT, "data/processed/dl_dataset_cell_v3_soil.csv")
-AK_REGIONS = ("ABoVE_AK", "United States (Alaska)", "GTNPenv_US")
+# 보고서 본문·표의 알래스카 학습·평가 표본(13,606셀)과 동일한 지역 정의.
+# GTN-P 알래스카 9셀은 그 표본에 들어 있지 않으므로 지도 관측점에서도 제외한다.
+AK_REGIONS = ("ABoVE_AK", "United States (Alaska)")
+# 관측 셀은 0.05° 격자로 집계해 표시한다(원 셀 13,606개는 겹쳐 그려져 분포를 가린다).
+DEDUP_DEG = 0.05
 
 IGH = "+proj=igh +lat_0=0 +lon_0=0 +datum=WGS84 +units=m +no_defs"
 # SoilGrids 정수 스케일 → 물리단위 (enrich_soilgrids_wcs.py SCALE 과 동일)
 SG_LAYERS = {"sg_bdod_5_15": ("bdod_5-15cm_mean.tif", 100.0),   # cg/cm3 → g/cm3
              "sg_sand_5_15": ("sand_5-15cm_mean.tif", 10.0),    # g/kg → %
+             "sg_silt_5_15": ("silt_5-15cm_mean.tif", 10.0),    # g/kg → %
+             "sg_clay_5_15": ("clay_5-15cm_mean.tif", 10.0),    # g/kg → %
              "sg_cfvo_5_15": ("cfvo_5-15cm_mean.tif", 10.0),    # per-mille → vol%
-             "sg_soc_5_15": ("soc_5-15cm_mean.tif", 10.0)}      # dg/kg → g/kg
+             "sg_phh2o_5_15": ("phh2o_5-15cm_mean.tif", 10.0),  # pH*10 → pH
+             "sg_soc_0_5": ("soc_0-5cm_mean.tif", 10.0),        # dg/kg → g/kg
+             "sg_soc_5_15": ("soc_5-15cm_mean.tif", 10.0),      # dg/kg → g/kg
+             "sg_soc_15_30": ("soc_15-30cm_mean.tif", 10.0)}    # dg/kg → g/kg
+
+# 격자에서 전부 채울 수 있는 공변량(= 예측 모델 입력). 지형 6종은 알래스카 전역 DEM
+# 미확보로, SAR 8종은 관측 지점에만 존재해 격자 산출 불가로 제외한다.
+# 이 집합에서 모델을 재검증한 결과가 data/processed/map_model_gate_meta.json 이다.
+CLIM_COLS = ["e5_maat", "e5_tdd", "e5_fdd", "e5_sqrt_tdd",
+             "e5_twarm", "e5_tcold", "e5_stl1", "e5_swe"]
+GRIDDABLE = CLIM_COLS + ["sg_clay_5_15", "sg_sand_5_15", "sg_silt_5_15",
+                         "sg_bdod_5_15", "sg_cfvo_5_15", "sg_phh2o_5_15",
+                         "sg_soc_0_5", "sg_soc_5_15", "sg_soc_15_30"]
+MAP_MODEL = "catboost"  # 게이트 최상위(13.77 cm). 트리 모델은 학습 라벨 범위 밖으로
+                       # 외삽하지 않아 관측 없는 산지에서 비물리적 값이 생기지 않는다.
+MAP_SEEDS = (0, 1, 2)  # 표 4와 같은 3-seed 앙상블 예측 규약
 
 # 저채도 냉색 규약(전역 그림 규범)
 GREY_TXT = "#444444"
@@ -204,29 +236,36 @@ def build_field(res, extent):
         print(f"[토양] {c}: 유효 {np.isfinite(df[c]).mean()*100:.1f}%  "
               f"중앙 {np.nanmedian(df[c]):.3f}")
 
-    # 계수와 영구동토 범위는 보고서의 다른 두 지도(연별 ALT 장, 결합 모델 지도)와 맞춘다.
-    # 종전에는 전 지역 적합 E_global(1.5710)과 TTOP<0 마스크를 써서, 같은 알래스카 ALT를
-    # 그린 세 지도의 값과 범위가 서로 달랐다. 알래스카 실측 최소제곱 E와 연평균기온 기준으로
-    # 통일한다. 연평균기온 기준을 택한 것은 세 지도가 모두 산출할 수 있는 유일한 공통 기준이기
-    # 때문이다(TTOP는 토양 격자가 필요해 연별 지도에서 산출할 수 없다).
+    # 예측 모델. 격자에서 전부 채울 수 있는 공변량 17종으로 재검증한 결과
+    # (map_model_gate: 다층 퍼셉트론 13.86 · CatBoost 13.77 · Stefan 2모수 13.93 ·
+    #  Stefan 1모수 14.46 cm, 알래스카 0.5° 공간블록 6-fold)에서 최상위권인
+    # 다층 퍼셉트론을 쓴다. 학습 표본은 보고서 표본과 같은 알래스카 실측 13,606셀이다.
+    # 영구동토 범위는 다년평균 연평균기온 < 0 °C 로 두어 연별 ALT 지도와 기준을 맞춘다
+    # (TTOP 기준은 토양 격자가 필요해 연별 지도에서 산출할 수 없다).
     ak = fidelity_base_alaska()
+    Xtr = ak[GRIDDABLE].to_numpy("float32")
+    ytr = ak["alt_cm"].to_numpy(float)
+    Xte = df[GRIDDABLE].to_numpy("float32")
+    Xtr_p, Xte_p = fold_prep(Xtr, Xte, MAP_MODEL in NAN_NATIVE)
+    preds = [fit_predict(MAP_MODEL, Xtr_p, ytr, Xte_p, seed=sd)["pred"]
+             for sd in MAP_SEEDS]
+    alt = np.full(ny * nx, np.nan)
+    alt[sel] = np.clip(np.mean(preds, axis=0), 1.0, 400.0)
+    alt = alt.reshape(ny, nx)
     E = float(fit_stefan_E(ak["alt_cm"].values.astype(float),
                            ak["e5_sqrt_tdd"].values.astype(float)))
-    phys = physics_ensemble(df, E)
-    alt = np.full(ny * nx, np.nan)
-    alt[sel] = phys["p1_stefan"]
-    alt = alt.reshape(ny, nx)
     pf = G["e5_maat"] < 0.0                         # 영구동토 범위(다년평균 연평균기온 < 0 °C)
     alt_pf = np.where(pf & land, alt, np.nan)
-    print(f"[예측] E={E:.4f}(알래스카 실측 최소제곱) | 영구동토 셀 "
-          f"{int((pf & land).sum()):,} / 육지 {land.sum():,} "
+    print(f"[예측] 모델 {MAP_MODEL} · 입력 {len(GRIDDABLE)}종 · "
+          f"학습 {len(ak):,}셀 · seed {len(MAP_SEEDS)}회 앙상블")
+    print(f"[예측] 영구동토 셀 {int((pf & land).sum()):,} / 육지 {land.sum():,} "
           f"({(pf & land).sum()/max(land.sum(),1)*100:.1f}%)")
     print(f"[예측] ALT {np.nanpercentile(alt_pf,1):.0f}–{np.nanpercentile(alt_pf,99):.0f} cm "
           f"(중앙 {np.nanmedian(alt_pf):.0f})")
     return glon, glat, alt_pf, E
 
 
-def load_obs(extent, dedup_deg=0.05):
+def load_obs(extent, dedup_deg=DEDUP_DEG):
     _, lo0, lo1, la0, la1 = extent
     d = pd.read_csv(OBS_CSV, low_memory=False,
                     usecols=["lat", "lon", "region", "alt_cm"])
@@ -235,7 +274,7 @@ def load_obs(extent, dedup_deg=0.05):
     g = (d.assign(_la=(d.lat / dedup_deg).round(), _lo=(d.lon / dedup_deg).round())
            .groupby(["_la", "_lo"], as_index=False)
            .agg(lat=("lat", "mean"), lon=("lon", "mean"), alt_cm=("alt_cm", "mean")))
-    print(f"[관측] 원 셀 {len(d):,} → {dedup_deg}° 중복제거 {len(g):,} 지점")
+    print(f"[관측] 알래스카 원 셀 {len(d):,} → {dedup_deg}° 집계 {len(g):,} 위치")
     return g
 
 
@@ -255,6 +294,17 @@ def check_against_obs(glon, glat, alt, obs):
 # ----------------------------------------------------------------------
 # 4) 렌더
 # ----------------------------------------------------------------------
+# 인쇄 1:1 배치. 보고서 삽입 폭(0.54 x textwidth = 95.04 mm)과 같은 figsize로 만들고
+# tight 크롭을 쓰지 않으므로, 아래 fontsize 값이 그대로 인쇄 pt가 된다(축소 배율 1.0).
+FIG_W = 95.04 / 25.4                    # in — \includegraphics[width=0.54\textwidth]
+M_L, M_R = 0.36, 0.03                   # 좌(위도 라벨)·우 여백
+M_T, M_B = 0.08, 0.23                   # 상·하(경도 라벨) 여백
+CB_GAP, CB_W, CB_LAB = 0.07, 0.085, 0.31   # 컬러바 블록(간격·폭·눈금/라벨 영역)
+# 그림 안 글자 크기(pt). 인쇄 하한 6.5 pt 이상.
+FS_GRID, FS_CB_TICK, FS_CB_LAB = 7.0, 7.0, 7.5
+FS_LEGEND, FS_SCALE = 7.0, 7.0
+
+
 def render(glon, glat, alt, obs, E, res, extent=ALASKA, out="alt_prediction_hires"):
     import cartopy.crs as ccrs
     import matplotlib.patches as mpatches
@@ -272,13 +322,25 @@ def render(glon, glat, alt, obs, E, res, extent=ALASKA, out="alt_prediction_hire
     clipped = float(np.mean((v < vmin) | (v > vmax)) * 100)
     print(f"[색] vmin={vmin:.0f} vmax={vmax:.0f} cm, 범위 밖 {clipped:.1f}%")
 
-    fig, ax = make_ax(extent, figsize=(8.8, 6.6), grid=True, grid_labels=True)
+    # 투영 후 지도 종횡비로 축 사각형을 인치 단위로 확정한다(축소 없이 저장).
+    asp = projected_aspect(extent)
+    map_w = FIG_W - M_L - M_R - CB_GAP - CB_W - CB_LAB
+    map_h = map_w / asp
+    fig_h = M_T + map_h + M_B
+    x_cb = M_L + map_w + CB_GAP
+    print(f"[배치] 종횡비 {asp:.4f} · 지도 {map_w*25.4:.1f} x {map_h*25.4:.1f} mm · "
+          f"전체 {FIG_W*25.4:.2f} x {fig_h*25.4:.2f} mm (축소 배율 1.0)")
+
+    fig = plt.figure(figsize=(FIG_W, fig_h))
+    ax = fig.add_axes([M_L / FIG_W, M_B / fig_h, map_w / FIG_W, map_h / fig_h],
+                      projection=map_projection(extent))
+    make_ax(extent, ax=ax, fig=fig, grid=True, grid_labels=True)
     gl = ax._gl
     if gl is not None:
         gl.rotate_labels = False
         gl.xlocator = mticker.FixedLocator(np.arange(-170, -134, 5))
         gl.ylocator = mticker.FixedLocator(np.arange(58, 74, 2))
-        gl.xlabel_style = gl.ylabel_style = {"size": 8.5, "color": "0.35"}
+        gl.xlabel_style = gl.ylabel_style = {"size": FS_GRID, "color": "0.35"}
 
     # 기후 구동장은 원자료가 0.1도라 연속 래스터로 그리면 뿌옇게 보인다. 등치대(filled
     # contour)로 그려 경계를 선명하게 하고, 5 cm 간격 등치선으로 구조를 드러낸다.
@@ -292,12 +354,16 @@ def render(glon, glat, alt, obs, E, res, extent=ALASKA, out="alt_prediction_hire
     im = ax.contourf(glon, glat, A, levels=levels, cmap=cmap, norm=norm,
                      extend="both", transform=ccrs.PlateCarree(),
                      zorder=1.5, antialiased=True)
+    # matplotlib 3.8은 ContourSet.collections를 폐기 예고하며 경고를 낸다. 대체 API
+    # (im.set_edgecolor("face") + ax.set_rasterization_zorder)로 바꿔 대조 렌더한 결과,
+    # 영구동토 마스크 경계에서 등치면 가장자리 반픽셀이 어긋나 PNG 37,500 px(전체 1.8%,
+    # 최대 ΔRGB 197)가 달라졌다. 등치선 형상·색·마스크는 동일하고 차이는 경계
+    # 안티에일리어싱뿐이지만, 산출이 바뀌므로 현행 구현을 유지한다(경고는 남는다).
     for c in im.collections:                        # PDF 흰 실선 아티팩트 제거
         c.set_edgecolor("face")
         c.set_rasterized(True)
-    ax.contour(glon[::step], glat[::step], A[::step, ::step], levels=levels,
-               colors="#ffffff", linewidths=0.25, alpha=0.55,
-               transform=ccrs.PlateCarree(), zorder=2.4)
+    # 학습 모델 예측장은 물리식 단독보다 국소 변동이 커서 5 cm 간격 등치선을 전부 그리면
+    # 선 잡음이 된다. 등치대 경계가 이미 구조를 나타내므로 굵은 등치선만 남긴다.
     lv_bold = [x for x in levels if x % 15 == 0]
     if lv_bold:
         ax.contour(glon[::step], glat[::step], A[::step, ::step], levels=lv_bold,
@@ -308,34 +374,39 @@ def render(glon, glat, alt, obs, E, res, extent=ALASKA, out="alt_prediction_hire
     ax.scatter(obs.lon.values, obs.lat.values, s=3.0, c="#1f1f1f",
                linewidths=0, alpha=0.8, transform=ccrs.PlateCarree(), zorder=4)
 
-    cb = fig.colorbar(im, ax=ax, fraction=0.030, pad=0.02, shrink=0.84,
-                      extend="both")
-    cb.set_label("ALT (cm)", fontsize=10, color=GREY_TXT)
-    cb.ax.tick_params(labelsize=9, length=2.5, color=GREY_TXT,
+    cax = fig.add_axes([x_cb / FIG_W, M_B / fig_h, CB_W / FIG_W, map_h / fig_h])
+    cb = fig.colorbar(im, cax=cax, extend="both")
+    cb.set_label("ALT (cm)", fontsize=FS_CB_LAB, color=GREY_TXT, labelpad=3)
+    cb.ax.tick_params(labelsize=FS_CB_TICK, length=2.0, pad=1.8, color=GREY_TXT,
                       labelcolor=GREY_TXT)
     cb.outline.set_linewidth(0.5)
     cb.outline.set_edgecolor("#9a9a9a")
 
+    # 점 하나는 관측 지점이 아니라 0.05° 집계 위치다(그림 5와 같은 표기 규칙).
+    # n은 집계 위치 수이지 실측 셀 수가 아니므로, 문구에서 이를 먼저 밝힌다.
     handles = [plt.Line2D([], [], marker="o", ls="none", ms=3.2, mfc="#1f1f1f",
-                          mec="none", label=f"관측 지점 (n={len(obs):,})"),
+                          mec="none",
+                          label=f"실측 셀 {DEDUP_DEG:g}° 집계 위치 (n={len(obs):,})"),
                mpatches.Patch(fc=LAND_BG, ec="#b8b3aa", lw=0.4,
                               label="영구동토 외 육지 (예측 제외)")]
-    leg = ax.legend(handles=handles, loc="lower left", fontsize=9,
+    leg = ax.legend(handles=handles, loc="lower left", fontsize=FS_LEGEND,
                     frameon=True, facecolor="white", framealpha=0.72,
                     edgecolor="none", handletextpad=0.6, borderpad=0.5)
     leg.set_zorder(6)
     for t in leg.get_texts():
         t.set_color(GREY_TXT)
 
-    add_scalebar(ax, fontsize=8)
+    add_scalebar(ax, fontsize=FS_SCALE)
     add_inset_locator(fig, ax, extent, size=0.22)
 
     # 산출 조건(격자·계수·자료원)은 보고서 캡션이 담당하므로 그림 내부 각주는 두지 않는다.
 
     png, pdf = mappath(out), mappath(out, ext="pdf")
-    fig.savefig(png, dpi=300, bbox_inches="tight")
-    fig.savefig(pdf, bbox_inches="tight")
+    fig.savefig(png, dpi=300)          # bbox 크롭 없음 — figsize 그대로 저장
+    fig.savefig(pdf)
     plt.close(fig)
+    print(f"[글자] 최소 {min(FS_GRID, FS_CB_TICK, FS_CB_LAB, FS_LEGEND, FS_SCALE):.1f} pt "
+          f"(인쇄 크기 동일)")
     print("saved", png)
     print("saved", pdf)
 

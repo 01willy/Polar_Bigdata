@@ -33,12 +33,12 @@ gate = gate[gate.n_reg == 2]
 
 def label(row):
     """외부 독자용 구성 이름."""
-    anc = {"stefan": "Stefan", "cci": "위성제품", "cci_cal": "위성제품(보정)",
-           "stefan_cci": "Stefan+위성제품", "stefan_cci_w": "Stefan+위성제품(가중학습)",
+    anc = {"stefan": "Stefan", "cci": "위성 제품", "cci_cal": "위성 제품(보정)",
+           "stefan_cci": "Stefan+위성 제품", "stefan_cci_w": "Stefan+위성 제품(가중학습)",
            "none": ""}[row.anchor]
     md = {"ridge": "선형", "catboost": "부스팅", "mlp": "다층퍼셉트론",
           "ftt": "트랜스포머", "none": ""}[row.resid]
-    ps = {"none": "", "stefan": "Stefan 증강", "cci": "위성제품 증강",
+    ps = {"none": "", "stefan": "Stefan 증강", "cci": "위성 제품 증강",
           "stefan_cci": "Stefan+위성 증강", "const": "상수 증강"}[row.pseudo]
     if row.family == "analytic":
         return anc
@@ -51,8 +51,8 @@ for tbl in (agg, gate):
     tbl["name"] = tbl.apply(label, axis=1)
 
 print("\n" + "=" * 100)
-for proto, pn in [("half", "설정 B · 대상 지역 공변량 사용 가능"),
-                  ("loro", "설정 C · 대상 지역 정보 없음")]:
+for proto, pn in [("half", "공변량만 조건 (대상 라벨 없음)"),
+                  ("loro", "정보 없음 조건")]:
     g = gate[gate.proto == proto].sort_values("rmse_mean")
     ref = g[(g.family == "analytic") & (g.anchor == "stefan")].rmse_mean
     ref = float(ref.iloc[0]) if len(ref) else np.nan
@@ -111,7 +111,7 @@ for ax, (proto, pn) in zip(axes, [("half", "대상 지역 공변량 사용 가�
         ax.spines[sp].set_visible(False)
     ax.set_xlim(0, max(g.rmse_mean) * 1.18)
 from matplotlib.patches import Patch
-fig.legend(handles=[Patch(fc=C["analytic"], label="물리식·위성제품(학습 없음)"),
+fig.legend(handles=[Patch(fc=C["analytic"], label="물리식·위성 제품(학습 없음)"),
                     Patch(fc=C["direct"], label="기계학습 단독"),
                     Patch(fc=C["anchored"], label="앵커 + 잔차 결합")],
            loc="lower center", ncol=3, frameon=False, fontsize=9.5,

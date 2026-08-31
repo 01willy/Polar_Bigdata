@@ -90,11 +90,15 @@ C_INSAR = "#5f7d95"
 C_POLSAR = C_GRAY
 
 # ---------------------------------------------------------------- 그림
-fig = plt.figure(figsize=(12.6, 11.2))
+# 인쇄 1:1 배치. 보고서 삽입 폭(1.0 x textwidth = 176 mm)과 같은 figsize로 만들고
+# tight 크롭을 끄므로 축소 배율이 1.0이다. 즉 아래 fontsize(pt)가 곧 인쇄 pt다.
+plt.rcParams["savefig.bbox"] = None
+FIG_W_MM, FIG_H_MM = 176.0, 116.0
+fig = plt.figure(figsize=(FIG_W_MM / 25.4, FIG_H_MM / 25.4))
 # 두 패널의 '라벨 포함' 좌측 경계를 맞추기 위해 gridspec을 분리한다.
 # 매트릭스는 행 라벨(최대 8자)이 축 밖으로 나가므로 축 좌측을 그만큼 안쪽으로 넣는다.
-gs_map = fig.add_gridspec(1, 1, left=0.105, right=0.985, top=0.975, bottom=0.475)
-gs_mat = fig.add_gridspec(1, 1, left=0.150, right=0.985, top=0.400, bottom=0.130)
+gs_map = fig.add_gridspec(1, 1, left=0.088, right=0.988, top=0.965, bottom=0.520)
+gs_mat = fig.add_gridspec(1, 1, left=0.128, right=0.988, top=0.415, bottom=0.115)
 
 # ============================ (a) 세계지도 ============================
 ax = fig.add_subplot(gs_map[0])
@@ -120,53 +124,52 @@ ax.scatter(al_pos.lon, al_pos.lat, s=8, c=[C_SITE], marker="x", linewidths=0.7,
            alpha=0.85, zorder=6, rasterized=True)
 # 라벨은 시베리아 지온 사이트 점군과 겹치지 않도록 북극해(자료 없음) 위로 배치
 ax.annotate("ALLena 레나델타", xy=(129.0, 73.4), xytext=(133, 78.6),
-            fontsize=9.5, color=C_MUTE,
+            fontsize=6.8, color=C_MUTE,
             arrowprops=dict(arrowstyle="-", color=C_MUTE, lw=0.6))
 # QTEC(티베트고원)
 ax.scatter(qtec.lon, qtec.lat, s=130, c=[C_SITE], marker="*",
            edgecolors="white", linewidths=0.5, zorder=7)
-ax.annotate("QTEC Wudaoliang·Golmud", xy=(94.0, 35.4), xytext=(52, 29.0),
-            fontsize=9.5, color=C_MUTE,
+ax.annotate("QTEC Wudaoliang·Golmud", xy=(96.0, 36.6), xytext=(104, 45.5),
+            fontsize=6.8, color=C_MUTE,
             arrowprops=dict(arrowstyle="-", color=C_MUTE, lw=0.6))
 # KPDC Council 현장관측
 ax.scatter(kpdc.lon, kpdc.lat, s=150, c=[C_SITE], marker="P",
            edgecolors="white", linewidths=0.6, zorder=9)
-ax.annotate("KPDC Council\nALT 코어·지중온도 프로파일",
-            xy=(-163.7, 64.85), xytext=(-152, 45.5),
-            fontsize=9.5, color=C_MUTE, linespacing=1.35,
+ax.annotate("KPDC Council", xy=(-163.7, 64.85), xytext=(-140, 50.0),
+            fontsize=6.8, color=C_MUTE,
             arrowprops=dict(arrowstyle="-", color=C_MUTE, lw=0.6))
 
 # 물리관측 커버리지 박스
 ax.add_patch(mpatches.Rectangle((-166.7, 57.8), (-110.4) - (-166.7), 71.5 - 57.8,
              fill=False, ec=C_INSAR, ls=(0, (5, 3)), lw=1.1, zorder=8))
-ax.text(-165.5, 54.8, "InSAR (ReSALT)", color=C_INSAR, fontsize=9.5)
+ax.text(-179.5, 55.0, "InSAR (ReSALT)", color=C_INSAR, fontsize=6.8)
 ax.add_patch(mpatches.Rectangle((-166.0, 68.0), (-148.0) - (-166.0), 71.5 - 68.0,
              fill=False, ec=C_POLSAR, ls=(0, (2, 2)), lw=1.1, zorder=8))
-ax.text(-146.0, 72.8, "PolSAR (ABoVE 북알래스카)", color="#66798c", fontsize=9.5)
+ax.text(-146.0, 72.8, "PolSAR (ABoVE 북알래스카)", color="#66798c", fontsize=6.8)
 
 # 북극권
 ax.axhline(66.56, color=C_GRAY, ls="--", lw=0.7, alpha=0.9, zorder=3)
 # 라벨 위치: InSAR 박스와 겹치지 않도록 그린란드 내부(데이터 없음)로 배치
-ax.text(-52, 67.6, "북극권 66.6°N", color=C_MUTE, fontsize=9)
+ax.text(-52, 67.6, "북극권 66.6°N", color=C_MUTE, fontsize=6.6)
 
 ax.set_xlim(-180, 180)
 ax.set_ylim(25, 84)
 ax.xaxis.set_major_formatter(lon_formatter())
 ax.yaxis.set_major_formatter(lat_formatter())
-ax.set_xlabel("경도", fontsize=10.5, color=C_TXT)
-ax.set_ylabel("위도", fontsize=10.5, color=C_TXT)
-ax.tick_params(labelsize=9.5, length=2.5, colors=C_TXT)
+ax.set_xlabel("경도", fontsize=7.4, color=C_TXT)
+ax.set_ylabel("위도", fontsize=7.4, color=C_TXT)
+ax.tick_params(labelsize=6.8, length=2.5, colors=C_TXT)
 ax.grid(alpha=0.25, lw=0.5, color="#aab2bb")
 for s in ax.spines.values():
     s.set_linewidth(0.6)
     s.set_edgecolor("#b4bcc4")
 ax.text(0.0, 1.010, "(a)", transform=ax.transAxes, ha="left", va="bottom",
-        fontsize=11, fontweight="bold", color="#26333f")
+        fontsize=7.6, fontweight="bold", color="#26333f")
 
 handles = [
-    Line2D([], [], marker="o", ls="", ms=5, mfc=C_ALT, mec="none",
+    Line2D([], [], marker="o", ls="", ms=3.2, mfc=C_ALT, mec="none",
            label=f"ALT 셀 {n_alt:,} (알래스카 {n_ak:,}·캐나다 {n_ca:,})"),
-    Line2D([], [], marker="^", ls="", ms=6, mfc=C_GT, mec="white", mew=0.4,
+    Line2D([], [], marker="^", ls="", ms=3.8, mfc=C_GT, mec="white", mew=0.4,
            label=f"시추공 지중온도 {n_gt} 사이트"),
     Line2D([], [], marker="P", ls="", ms=9, mfc=C_SITE, mec="white", mew=0.5,
            label="KPDC Council 현장관측"),
@@ -177,10 +180,13 @@ handles = [
     Line2D([], [], ls=(0, (5, 3)), color=C_INSAR, lw=1.1, label="InSAR (ReSALT)"),
     Line2D([], [], ls=(0, (2, 2)), color=C_POLSAR, lw=1.1, label="PolSAR (ABoVE)"),
 ]
-leg_map = ax.legend(handles=handles, loc="lower left", fontsize=9.5, ncol=2,
-                    frameon=True, framealpha=0.92, edgecolor="#d5dae0",
-                    borderpad=0.7, labelspacing=0.55, columnspacing=1.3,
-                    handletextpad=0.6)
+# 범례는 좌하단(자료 없는 태평양·북미 남부)에 작게 둔다. 크게 두면 티베트 별표식과
+# 시베리아 삼각표식을 가린다.
+leg_map = ax.legend(handles=handles, loc="lower left",
+                    bbox_to_anchor=(0.002, 0.004), fontsize=5.9, ncol=2,
+                    frameon=True, framealpha=0.90, edgecolor="#dde1e6",
+                    borderpad=0.42, labelspacing=0.34, columnspacing=0.85,
+                    handletextpad=0.42, markerscale=0.82)
 leg_map.get_frame().set_linewidth(0.5)
 for t in leg_map.get_texts():
     t.set_color(C_TXT)
@@ -239,12 +245,12 @@ for i in range(len(rows)):
         st = status[i, j]
         tcol = "#98a2ac" if st == NO else "#26333f"
         axm.text(j, i, text[i][j], ha="center", va="center",
-                 fontsize=10, color=tcol)
+                 fontsize=6.8, color=tcol)
 
 axm.set_xticks(range(len(cols)))
-axm.set_xticklabels(cols, fontsize=10, color=C_TXT)
+axm.set_xticklabels(cols, fontsize=6.8, color=C_TXT)
 axm.set_yticks(range(len(rows)))
-axm.set_yticklabels(rows, fontsize=10, color=C_TXT)
+axm.set_yticklabels(rows, fontsize=6.8, color=C_TXT)
 axm.set_xticks(np.arange(-0.5, len(cols)), minor=True)
 axm.set_yticks(np.arange(-0.5, len(rows)), minor=True)
 axm.grid(which="minor", color="white", lw=1.4)
@@ -255,7 +261,7 @@ for s in axm.spines.values():
 # (a)·(b) 패널 라벨의 도형상 x 위치를 일치시킨다(두 축의 left 차이 0.045를
 # 매트릭스 축 폭 0.835로 나눈 값만큼 왼쪽으로 이동).
 axm.text(-0.054, 1.015, "(b)", transform=axm.transAxes, ha="left", va="bottom",
-         fontsize=11, fontweight="bold", color="#26333f")
+         fontsize=7.6, fontweight="bold", color="#26333f")
 
 mat_handles = [
     mpatches.Patch(fc=col_hold, ec="none", label="보유"),
@@ -264,10 +270,15 @@ mat_handles = [
     mpatches.Patch(fc=col_no, ec="#ccd3d9", lw=0.6, label="해당 없음"),
 ]
 leg = axm.legend(handles=mat_handles, loc="upper center", bbox_to_anchor=(0.5, -0.11),
-                 ncol=4, fontsize=9.5, frameon=False, handlelength=1.5,
+                 ncol=4, fontsize=6.8, frameon=False, handlelength=1.5,
                  handleheight=1.0, columnspacing=2.0, handletextpad=0.6)
 for t in leg.get_texts():
     t.set_color(C_TXT)
+
+_txt = [t for t in fig.findobj(match=lambda o: hasattr(o, "get_fontsize"))
+        if getattr(t, "get_text", lambda: "")()]
+print(f"[배치] {FIG_W_MM:.1f} x {FIG_H_MM:.1f} mm (인쇄 1:1)")
+print(f"[글자] 최소 {min(t.get_fontsize() for t in _txt):.1f} pt (인쇄 크기 동일)")
 
 png = mappath("data_inventory_world")
 pdf = mappath("data_inventory_world", ext="pdf")
