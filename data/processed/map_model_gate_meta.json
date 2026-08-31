@@ -1,0 +1,44 @@
+{
+  "featset": [
+    "e5_maat",
+    "e5_tdd",
+    "e5_fdd",
+    "e5_sqrt_tdd",
+    "e5_twarm",
+    "e5_tcold",
+    "e5_stl1",
+    "e5_swe",
+    "sg_clay_5_15",
+    "sg_sand_5_15",
+    "sg_silt_5_15",
+    "sg_bdod_5_15",
+    "sg_cfvo_5_15",
+    "sg_phh2o_5_15",
+    "sg_soc_0_5",
+    "sg_soc_5_15",
+    "sg_soc_15_30"
+  ],
+  "n_features": 17,
+  "n_cells": 13606,
+  "n_blocks": 74,
+  "protocol": "알래스카 0.5도 공간블록 6-fold, seed 3회, 3-seed 앙상블 예측",
+  "note": "지형 6종은 알래스카 전역 DEM 미확보로 제외. SAR 8종은 격자 산출 불가로 제외.",
+  "physics_only": {
+    "Stefan 1모수": 14.457,
+    "Stefan 2모수": 13.932
+  },
+  "ensemble_rmse_cm": {
+    "histgbm": 14.907,
+    "mlp": 13.861,
+    "tabm": 14.03,
+    "catboost": 13.769
+  },
+  "per_seed_mean": {
+    "catboost": 13.811,
+    "histgbm": 15.378,
+    "mlp": 14.325,
+    "tabm": 14.281
+  },
+  "best_learned_model": "catboost",
+  "best_learned_rmse_cm": 13.769
+}
