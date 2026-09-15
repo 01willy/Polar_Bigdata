@@ -1,0 +1,12 @@
+{
+ "stage": "E4.1",
+ "inputs": [
+  "s12_hybrid_transfer_shard0.csv",
+  "s12_hybrid_transfer_shard1.csv",
+  "s12_hybrid_transfer_shard2.csv",
+  "s12_hybrid_transfer_shard3.csv"
+ ],
+ "w_stefan_cci": 1.0,
+ "method": "leave-one-target-out: 지역 X에서 seed 평균 RMSE 최소 구성 선택, 지역 Y에서 채점. 두 지역 모두 산출된 구성만 사용. R1은 CCI 유효 셀 한정 Stefan(anchor=stefan_cci_w, W_SC=1.0)",
+ "plan": "docs/EXPERIMENT_PLAN_PAPER_2026-09-08.md §4 E4.1, §7 H1·H2"
+}

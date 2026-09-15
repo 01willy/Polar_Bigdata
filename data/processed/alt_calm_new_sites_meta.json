@@ -1,0 +1,7 @@
+{
+ "stage": "E3-1",
+ "n_sites": 157,
+ "n_tiles_added": 66,
+ "filter_complement": "(lat > 50) & (lon < -100) 의 보집합",
+ "plan": "docs/EXPERIMENT_PLAN_PAPER_2026-09-08.md §3"
+}

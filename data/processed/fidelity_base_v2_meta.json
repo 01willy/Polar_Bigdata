@@ -1,0 +1,102 @@
+{
+ "stage": "E3-2",
+ "created": "2026-09-08",
+ "n_old": 17423,
+ "n_new": 149,
+ "n_total": 17572,
+ "old_rows_unchanged": true,
+ "old_hash": "7725315bba15",
+ "dedup_dropped": 8,
+ "missing_dem_tiles": [],
+ "e5_fallback": {
+  "0.2": 8,
+  "0.5": 0,
+  "fail": 0
+ },
+ "coverage_by_region": {
+  "CALM_Alps": {
+   "n": 9,
+   "dem": 9,
+   "e5": 9,
+   "cci": 8,
+   "sg9": 9,
+   "alt_mean": 378.5,
+   "n_blocks": 5
+  },
+  "CALM_Canada": {
+   "n": 10,
+   "dem": 10,
+   "e5": 10,
+   "cci": 8,
+   "sg9": 8,
+   "alt_mean": 69.3,
+   "n_blocks": 10
+  },
+  "CALM_Greenland": {
+   "n": 3,
+   "dem": 3,
+   "e5": 3,
+   "cci": 3,
+   "sg9": 3,
+   "alt_mean": 69.7,
+   "n_blocks": 2
+  },
+  "CALM_Mongolia_CAsia": {
+   "n": 46,
+   "dem": 46,
+   "e5": 46,
+   "cci": 43,
+   "sg9": 46,
+   "alt_mean": 306.3,
+   "n_blocks": 21
+  },
+  "CALM_QTP_China": {
+   "n": 6,
+   "dem": 6,
+   "e5": 6,
+   "cci": 6,
+   "sg9": 6,
+   "alt_mean": 181.2,
+   "n_blocks": 6
+  },
+  "CALM_Russia_C": {
+   "n": 7,
+   "dem": 7,
+   "e5": 7,
+   "cci": 7,
+   "sg9": 6,
+   "alt_mean": 79.4,
+   "n_blocks": 6
+  },
+  "CALM_Russia_E": {
+   "n": 30,
+   "dem": 30,
+   "e5": 30,
+   "cci": 27,
+   "sg9": 30,
+   "alt_mean": 60.0,
+   "n_blocks": 21
+  },
+  "CALM_Russia_W": {
+   "n": 31,
+   "dem": 31,
+   "e5": 31,
+   "cci": 28,
+   "sg9": 31,
+   "alt_mean": 90.8,
+   "n_blocks": 21
+  },
+  "CALM_Svalbard": {
+   "n": 7,
+   "dem": 7,
+   "e5": 7,
+   "cci": 6,
+   "sg9": 7,
+   "alt_mean": 201.1,
+   "n_blocks": 7
+  }
+ },
+ "note": "fidelity_base.csv 불변. 신규 region은 'CALM_'+macro, MACRO_REGION(fidelity.py)에 매핑. SAR 공변량 NaN·insar_miss=1(신규 지역 규약 동일). 심부 레짐(몽골·알프스·QTP)은 TRANSFER_DEEP.",
+ "plan": "docs/EXPERIMENT_PLAN_PAPER_2026-09-08.md §3",
+ "elapsed_s": 684.2
+}

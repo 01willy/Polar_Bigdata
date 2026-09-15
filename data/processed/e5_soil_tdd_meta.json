@@ -1,0 +1,21 @@
+{
+ "stage": "E2-F7",
+ "nc": "nh_monthly_2015-2020.nc",
+ "clim_years": "2015-2020",
+ "n_locs": 17580,
+ "fallback_counts": {
+  "0": 16064,
+  "2": 400,
+  "5": 1115,
+  "None": 1
+ },
+ "columns": [
+  "e5_tdd_soil",
+  "e5_fdd_soil",
+  "e5_sqrt_tdd_soil",
+  "e5_stl1_twarm",
+  "e5_stl1_tcold",
+  "soil_fallback_deg"
+ ],
+ "note": "fidelity_base.csv는 수정하지 않음. E2 스크립트가 loc_id로 병합."
+}

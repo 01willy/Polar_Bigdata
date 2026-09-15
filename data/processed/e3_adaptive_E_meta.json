@@ -1,0 +1,17 @@
+{
+ "stage": "E3-adaptiveE",
+ "base": "fidelity_base_v2.csv",
+ "n_grid": [
+  0,
+  3,
+  5,
+  10,
+  20,
+  40
+ ],
+ "reps": 30,
+ "E_alaska": 1.6166886671406264,
+ "E_alaska_soil": 1.5440268193439508,
+ "protocol": "대상 지역 0.5° 블록 2분할, A에서 n개 라벨로 E 재적합, B(CCI·토양도일 유효)에서 RMSE. 반복 평균.",
+ "plan": "docs/EXPERIMENT_PLAN_PAPER_2026-09-08.md §3.3"
+}

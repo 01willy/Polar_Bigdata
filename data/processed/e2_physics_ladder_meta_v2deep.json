@@ -1,0 +1,119 @@
+{
+ "stage": "E2",
+ "n_cells": 17535,
+ "formulas": [
+  {
+   "id": "F1k1",
+   "family": "F1 Stefan",
+   "k": 1,
+   "desc": "E·√TDD"
+  },
+  {
+   "id": "F1k2",
+   "family": "F1 Stefan",
+   "k": 2,
+   "desc": "a+E·√TDD"
+  },
+  {
+   "id": "F2k2",
+   "family": "F2 멱법칙",
+   "k": 2,
+   "desc": "a·TDD^b"
+  },
+  {
+   "id": "F3k2",
+   "family": "F3 TDD 선형",
+   "k": 2,
+   "desc": "a+b·TDD"
+  },
+  {
+   "id": "F4k2",
+   "family": "F4 MAAT 선형",
+   "k": 2,
+   "desc": "a+b·MAAT"
+  },
+  {
+   "id": "F5k0",
+   "family": "F5 edaphic",
+   "k": 0,
+   "desc": "pedotransfer raw"
+  },
+  {
+   "id": "F5k1",
+   "family": "F5 edaphic",
+   "k": 1,
+   "desc": "c·edaphic"
+  },
+  {
+   "id": "F5k2",
+   "family": "F5 edaphic",
+   "k": 2,
+   "desc": "a+c·edaphic"
+  },
+  {
+   "id": "F6k0",
+   "family": "F6 Kudryavtsev",
+   "k": 0,
+   "desc": "raw"
+  },
+  {
+   "id": "F6k1",
+   "family": "F6 Kudryavtsev",
+   "k": 1,
+   "desc": "c·Ku"
+  },
+  {
+   "id": "F6k2",
+   "family": "F6 Kudryavtsev",
+   "k": 2,
+   "desc": "a+c·Ku"
+  },
+  {
+   "id": "F7k1",
+   "family": "F7 지표강제 Stefan",
+   "k": 1,
+   "desc": "E·√TDD_stl1"
+  },
+  {
+   "id": "F7k2",
+   "family": "F7 지표강제 Stefan",
+   "k": 2,
+   "desc": "a+E·√TDD_stl1"
+  },
+  {
+   "id": "F8k2",
+   "family": "F8 2층 Stefan",
+   "k": 2,
+   "desc": "유기층(h·f_om) + E_m√(TDD−TDD_o)"
+  },
+  {
+   "id": "F9k2",
+   "family": "F9 Stefan+FDD",
+   "k": 2,
+   "desc": "E·√TDD+γ·√FDD"
+  },
+  {
+   "id": "F10k2",
+   "family": "F10 Stefan×눈",
+   "k": 2,
+   "desc": "E·√TDD·(1+γ·SWE)"
+  }
+ ],
+ "indomain": "Alaska 0.5° block 6-fold, coefs fitted on train fold only",
+ "loro": [
+  "Tibet",
+  "Mongolia_CAsia",
+  "Alps",
+  "Svalbard"
+ ],
+ "base": "fidelity_base_v2.csv",
+ "exclude": [],
+ "min_test": 3,
+ "paired_reference": "F1k1 (Stefan E least squares) on identical cells; block paired bootstrap 400",
+ "inputs": [
+  "fidelity_base.csv",
+  "e5_soil_tdd.csv"
+ ],
+ "plan": "docs/EXPERIMENT_PLAN_PAPER_2026-09-08.md §2, H4·H5",
+ "elapsed_s": 28.1
+}

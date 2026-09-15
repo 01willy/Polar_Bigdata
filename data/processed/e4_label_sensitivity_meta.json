@@ -1,0 +1,21 @@
+{
+ "stage": "E4.4",
+ "n_ak_cells": 13606,
+ "label_class_counts": {
+  "ABoVE GPR 우세": 10835,
+  "ABoVE 기타/결측": 1423,
+  "ABoVE 탐침 우세": 1284,
+  "CALM(탐침)": 64
+ },
+ "E_all": 1.6166886671406264,
+ "E_probe": 1.6127323507676554,
+ "E_gpr": 1.6537523934757716,
+ "sqrt_tdd_median": 30.53589106789823,
+ "raw_counts": {
+  "n_pts": 224075,
+  "gpr": 193322,
+  "probe": 21953,
+  "late": 217443
+ },
+ "plan": "docs/EXPERIMENT_PLAN_PAPER_2026-09-08.md §4 E4.4"
+}
