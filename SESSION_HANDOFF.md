@@ -1,6 +1,25 @@
 # SESSION_HANDOFF — Polar_Bigdata (현재 상태 스냅샷)
 
-**갱신**: 2026-08-31(본선 발표덱 최종화 + 정합 감사) · **다음 세션은 이 파일부터 읽으세요.**
+**갱신**: 2026-09-15(논문화 실험 E1–E4 완료 + 대조·감사 + 전이 검증 계획) · **다음 세션은 이 파일부터 읽으세요.**
+
+## ★ 최신 완료(2026-09-08) — 논문화 실험 설계(사전 등록) + E1·E2·E3·E4 실행 완료
+
+정본 `docs/EXPERIMENT_PLAN_PAPER_2026-09-08.md`(사전 등록 H1–H6 + 개정 이력 5건), 결과 로그 `docs/EXPERIMENT_LOG.md` 2026-09-08 항목, 진행표 `docs/PAPER_PLAN_SCIREP.md` §7. GPU 2·3·4·5 사용. **git 미커밋**(cleanup 대기).
+- **E4.1 중첩 선택**: S12 185조합 탐색값(22.92/21.32)은 leave-one-target-out에서 25.49/25.32로 물리식(24.11/22.91)보다 나쁨 → 주 추정치를 사전 지정 등가중 앵커(23.27/21.68)·λ=0.25 ridge(23.00/22.24)로 교체.
+- **E2 물리식 사다리**(같은 보정 자유도 k): "Stefan만 정확"은 보정 비대칭의 교락. 비가중 7지역 평균은 보정 Kudryavtsev 30.7 < Stefan 33.7이나 그린란드 3셀 효과이고 셀 가중은 Stefan 우세(09-14 정정). 토양 도일 Stefan(`e5_sqrt_tdd_soil`)은 알래스카·레나 우세, 러시아 열세, 그린란드는 TDD_stl1=0 아티팩트. 멱지수 b≈0.35–0.42.
+- **E3 CALM 확충**: `assemble_dl_dataset.py:45` 북미 필터로 비북미 157좌표 미편입이었음 → `data/processed/fidelity_base_v2.csv`(17,572행, 기존 불변, 신규 149셀). 주 전이 집합(ALT<150 cm) 6지역 = 레나·캐나다·러시아 W/C/E·그린란드, 심부 4지역 = 스발바르·몽골·알프스·티베트(전 식 RMSE 180–350). `fidelity.py` TRANSFER_MAIN/DEEP, pytest 18 통과.
+- **E1 통합 요인 설계**(3조건×앵커×증강×잔차, 같은 셀): H1 Stefan+CCI 앵커 방향 일관·비유의(셀 가중 기준 10지역 8/10, 주 5/6, p=0.11/0.22; 블록 다수결은 혼재) · **H2 잔차 학습(ridge λ=0.25) 기각**(주 6/6 악화, 외삽 폭주) · **H3 √ 함수형 추가 기여는 캐나다 1.0·레나 0.1 cm**(도일 관계 자체 3.6/0.6, 상수 대조 10.8/1.7) · **H6 무보정 등가중 CCI 결합은 알래스카 지역 내 +2.02 악화**(보정 CCI 결합은 −0.24, 09-14 정정). 앵커 우세 지역이 갈림(레나·캐나다=Stefan+CCI, 시베리아=Kudryavtsev). 알래스카 지역 내 13.33(풀링)은 25종 ridge 단독 13.62와 −0.29 [−0.61, 0.08] 차이.
+- **E4.3 UQ**: CQR interval score 68.9 vs 상수 폭 참조 65.4, 양극단 5분위 커버리지 0.83–0.85 → C3 서술 완화. **E4.4 라벨 정의**: 알래스카 라벨 86% GPR, 계수·전이 결론 불변(≤0.5 cm).
+- 신규 스크립트: `scripts/3_deep_learning/e1_unified_factorial.py`·`e1_analysis.py`·`e2_physics_ladder.py`·`e3_adaptive_E.py`·`e4_nested_selection.py`·`e4_interval_score.py`·`e4_label_sensitivity.py`, `scripts/1_data_prep/expand_calm_regions.py`·`era5land_soil_tdd.py`, `scripts/4_visualization/e2_ladder_figs.py`·`e1_figs.py`. 그림 `outputs/figures/{e2_physics_ladder,e1_factorial}/`(figure_spec 등록 5건).
+
+### ★ 2026-09-14/15 추가 — 기존 주장 대조·감사 + 다음 세션 계획 확정
+- 대조 워크플로(8 주장 + 5 스크립트 감사): **뒤집힘 0**·강화 1·정교화 4·하향 3, 신규 스크립트 결론 무효화 결함 0. 종합 `docs/RESULTS_RECONCILIATION_2026-09-14.md`(§5 원고 변경 표, §6 09-08 서술 정정 5건·데이터 후속 수정).
+- 사용자 입장(2026-09-15): 기존 "CCI 앵커+잔차 ML의 완전 전이 개선"이 선택 효과라는 판정을 **아직 신뢰하지 않음**. 다음 세션에서 (1) 판정 재확인(V1–V4), (2) 완전 전이 돌파 후보 총력 시험(T1–T6, 중첩 선택 필수), (3) 병행으로 희소 라벨 전이(F1–F3), (4) 사전 고정 결정 규칙 A/B/C로 두 번째 의의 확정. **정본 `docs/EXPERIMENT_PLAN_TRANSFER_2026-09-15.md`.**
+- 선행 데이터 정비: Svalbard 매크로 본토 3사이트 분리, CALM 지온 유도 68셀 등급 분리, e5_tdd_soil=0 결측, 블록<8 CI 미산출, GTN-P ALT 106 데이터셋(`data/raw/gtnp/alt_csv/`, 미편입) 편입 검토.
+
+### ▶ 다음 세션 진입 순서
+1. `docs/EXPERIMENT_PLAN_TRANSFER_2026-09-15.md` §4 데이터 정비 → §1 V1–V4 → §2 T1–T4(GPU 2·3·4·5) → §3 F1–F3 → §5 결정 규칙 적용.
+2. 그 뒤 원고 재단(`docs/RESULTS_RECONCILIATION_2026-09-14.md` §5 표) → 영문화·그림·보충자료.
 
 ## ★ 최신 완료(2026-08-31) — 본선 발표덱 최종화 + 정합 감사 + 논문화 전략
 
