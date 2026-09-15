@@ -163,3 +163,41 @@ def test_fold_prep_nan_native_passthrough():
     Xtr = np.array([[1.0, np.nan], [2.0, 3.0]]); Xte = np.array([[np.nan, 1.0]])
     a, b = fold_prep(Xtr, Xte, nan_native=True)
     assert np.array_equal(a, Xtr, equal_nan=True) and np.array_equal(b, Xte, equal_nan=True)
+
+
+# ---- 9. E3 확충 데이터(fidelity_base_v2) 무결성 (2026-09-08) ----
+BASE_V2 = ROOT / "data" / "processed" / "fidelity_base_v2.csv"
+
+
+@pytest.mark.skipif(not BASE_V2.exists(), reason="fidelity_base_v2.csv 미생성")
+def test_v2_old_rows_unchanged():
+    """v2의 앞 17,423행은 fidelity_base.csv와 값이 같아야 한다(확충이 기존 셀을 바꾸지 않음)."""
+    old = pd.read_csv(BASE, low_memory=False)
+    v2 = pd.read_csv(BASE_V2, low_memory=False)
+    assert list(v2.columns) == list(old.columns)
+    head = v2.iloc[:len(old)].reset_index(drop=True)
+    pd.testing.assert_frame_equal(head, old, check_dtype=False, check_exact=False, atol=1e-9)
+    assert v2.loc_id.is_unique
+
+
+@pytest.mark.skipif(not BASE_V2.exists(), reason="fidelity_base_v2.csv 미생성")
+def test_v2_new_regions_mapped_and_disjoint():
+    """신규 CALM_* 지역은 전부 MACRO_REGION에 매핑되고 주/심부 전이 집합 중 하나에 속하며,
+    LORO에서 매크로 지역이 train·test로 갈리지 않는다. 신규 셀은 기존 셀과 0.01° 이상 떨어진다."""
+    from polar.fidelity import macro_region, MACRO_REGION, TRANSFER_MAIN, TRANSFER_DEEP
+    v2 = add_group_keys(pd.read_csv(BASE_V2, low_memory=False))
+    new = v2[v2.region.astype(str).str.startswith("CALM_")]
+    assert len(new) > 0
+    for r in new.region.unique():
+        assert r in MACRO_REGION, f"{r} 매크로 매핑 없음"
+    macro = macro_region(v2)
+    new_macro = set(macro[v2.region.astype(str).str.startswith("CALM_").values])
+    assert new_macro <= set(TRANSFER_MAIN + TRANSFER_DEEP), new_macro - set(TRANSFER_MAIN + TRANSFER_DEEP)
+    for r, tr, te in loro_splits(v2, min_test=3):
+        assert set(macro[tr]).isdisjoint(set(macro[te])), f"매크로 {r} train/test 분리"
+    old = pd.read_csv(BASE, low_memory=False)
+    from scipy.spatial import cKDTree
+    d, _ = cKDTree(old[["lat", "lon"]].values).query(new[["lat", "lon"]].values, p=np.inf)
+    assert (d >= 0.01).all(), f"기존 셀과 0.01° 이내 신규 셀 {(d < 0.01).sum()}개"
+    # 신규 셀은 SAR 결측·insar_miss=1·F4_direct
+    assert new.insar_alt.isna().all() and (new.insar_miss == 1).all() and (new.source_id == "F4_direct").all()

@@ -98,3 +98,7 @@ CI_ai.zip
 IMAGE_*.pptx
 # --- 타 사업 문서(본 연구 산출물 아님) ---
 outputs/report/*.pptx
+
+# E3 대용량 파생(재생성: expand_calm_regions.py --attach, era5land_soil_tdd.py)
+data/processed/fidelity_base_v2.csv
+data/processed/e5_soil_tdd.csv
