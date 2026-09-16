@@ -1,10 +1,10 @@
 # SESSION_HANDOFF — Polar_Bigdata (현재 상태 스냅샷)
 
-**갱신**: 2026-09-15(논문화 실험 E1–E4 완료 + 대조·감사 + 전이 검증 계획) · **다음 세션은 이 파일부터 읽으세요.**
+**갱신**: 2026-09-16(E1–E4 완료 + 대조·감사 + 마스터 요인 실험 계획 확정) · **다음 세션은 이 파일부터 읽으세요.**
 
 ## ★ 최신 완료(2026-09-08) — 논문화 실험 설계(사전 등록) + E1·E2·E3·E4 실행 완료
 
-정본 `docs/EXPERIMENT_PLAN_PAPER_2026-09-08.md`(사전 등록 H1–H6 + 개정 이력 5건), 결과 로그 `docs/EXPERIMENT_LOG.md` 2026-09-08 항목, 진행표 `docs/PAPER_PLAN_SCIREP.md` §7. GPU 2·3·4·5 사용. **git 미커밋**(cleanup 대기).
+정본 `docs/EXPERIMENT_PLAN_PAPER_2026-09-08.md`(사전 등록 H1–H6 + 개정 이력 5건), 결과 로그 `docs/EXPERIMENT_LOG.md` 2026-09-08 항목, 진행표 `docs/PAPER_PLAN_SCIREP.md` §7. GPU 2·3·4·5 사용. 커밋 5488d1a·726927d·292f8ba·ff6504a(09-15 cleanup).
 - **E4.1 중첩 선택**: S12 185조합 탐색값(22.92/21.32)은 leave-one-target-out에서 25.49/25.32로 물리식(24.11/22.91)보다 나쁨 → 주 추정치를 사전 지정 등가중 앵커(23.27/21.68)·λ=0.25 ridge(23.00/22.24)로 교체.
 - **E2 물리식 사다리**(같은 보정 자유도 k): "Stefan만 정확"은 보정 비대칭의 교락. 비가중 7지역 평균은 보정 Kudryavtsev 30.7 < Stefan 33.7이나 그린란드 3셀 효과이고 셀 가중은 Stefan 우세(09-14 정정). 토양 도일 Stefan(`e5_sqrt_tdd_soil`)은 알래스카·레나 우세, 러시아 열세, 그린란드는 TDD_stl1=0 아티팩트. 멱지수 b≈0.35–0.42.
 - **E3 CALM 확충**: `assemble_dl_dataset.py:45` 북미 필터로 비북미 157좌표 미편입이었음 → `data/processed/fidelity_base_v2.csv`(17,572행, 기존 불변, 신규 149셀). 주 전이 집합(ALT<150 cm) 6지역 = 레나·캐나다·러시아 W/C/E·그린란드, 심부 4지역 = 스발바르·몽골·알프스·티베트(전 식 RMSE 180–350). `fidelity.py` TRANSFER_MAIN/DEEP, pytest 18 통과.
