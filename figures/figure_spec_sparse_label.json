@@ -1,0 +1,47 @@
+{
+ "note": "figures/figure_spec.json 과 같은 스키마. 기존 파일 수정 금지 규약(2026-09-21 작업)에 따라 별도 파일로 둔다. 계획 docs/EXPERIMENT_PLAN_TRANSFER_2026-09-15.md §3 F1–F3, docs/EXPERIMENT_PLAN_MASTER_2026-09-16.md §3 S-F(개정 09-21 §B 4지역).",
+ "figures": [
+  {
+   "id": "sparse_label_curve",
+   "script": "scripts/3_deep_learning/m1_sparse_label_curve.py (make_figures, --figure-only 로 재렌더)",
+   "intent": "대상 지역 라벨 n개(A블록 무작위 추출)에 따라 전이 RMSE가 어떻게 줄고, 라벨을 쓰는 세 층(물리 계수 수축 재적합 · 잔차 학습 · 계수 적응 + 잔차 · 직접 회귀 + 유사라벨) 중 어느 것이 같은 n에서 더 낮은가를 4지역 × 앵커 2종에서 보인다. 기준선 두 개(물리식 n=0, A 전체 라벨 상한)가 곡선의 위치를 읽게 한다. 지배 메시지: 라벨 몇 개부터 물리식(알래스카 계수)을 넘는지와 계수 적응 대 잔차 학습의 우열.",
+   "layout": {
+    "panels": 8,
+    "arrangement": "2행(앵커 Stefan / Stefan+CCI) × 4열(레나·캐나다·러시아 W·러시아 E), 열별 y 공유. x = 라벨 수 n 범주 위치(0·3·5·10·20·40·80, 로그 간격 격자; 러시아 W/E는 |A|≈15라 0·3·5·10), 열 폭은 격자 점 수 비례(7:7:4:4). 선 = 분할 10 × 반복 × seed 평균, 세로 막대 = 10–90% 범위(방법별 x 미세 이동). 회색 실선 = 물리식 n=0(E_AK), 회색 파선 = A 전체 라벨로 얻는 최소 RMSE(상한). 범례 그림 하단 1행, 각주에 반복·seed·λ·평가 셀 규약.",
+    "figsize_in": [13.5, 6.9],
+    "width_ratios": [7, 7, 4, 4]
+   },
+   "assets": [
+    "data/processed/m1/sparse_label_curve.csv (지역 × 앵커 × 방법 × λ × n 집계: 평균·SD·중앙값·10–90%·승률·Δ)",
+    "data/processed/m1/sparse_label_meta.json (E_AK·κ·분할 크기·최소 n)"
+   ],
+   "style": "polar.plotstyle.use_polar. 계열 4색(dataviz validate_palette light, all-pairs: 명도·채도·CVD ΔE≥8·정상시 ΔE≥15 통과; aqua 대비 2.74 경고 → 마커·범례·표로 보완): 계수 적응(수축) #2a78d6 원, 잔차 학습 #c0692a 사각, 계수+잔차 #4a3aa7 마름모, 직접+유사라벨 #1baf7a 삼각·파선. 기준선 회색 #7a7a7a(실선·파선, 값 라벨 병기). 그림 내부 결론형 제목 없음(캡션 담당), 패널 라벨 (a)–(h) 11 pt bold, 패널 제목 10.5(지역·|A|·B셀 수), 축라벨 10.5, 눈금 9, 범례 8.3, 각주 7.8. 상/우 spine 제거, y 격자만 옅게. pdf.fonttype=42. 붉은 계열 없음(갈색 #c0692a는 brand_tokens categorical.warn 계열 재단계).",
+   "exports": [
+    "outputs/figures/m1/sparse_label_curve.png (dpi 300)",
+    "outputs/figures/m1/sparse_label_curve.pdf"
+   ],
+   "qa": "scientific-figure-reviewer + visual-reviewer 로 검토 후 결함 수정(단위·범례·기준선 라벨 겹침·글리프)."
+  },
+  {
+   "id": "sparse_label_curve_estimators",
+   "script": "scripts/3_deep_learning/m1_sparse_label_curve.py (make_figures)",
+   "intent": "F1 계수 추정량 3종(최소제곱 E_n · 수축 E_n(κ 경험 베이즈) · 위치·척도 a+E_n√TDD)의 소량 라벨 안정성 비교. 보조 그림.",
+   "layout": {
+    "panels": 8,
+    "arrangement": "주 그림과 동일 격자. 계열 3색: 최소제곱 #008300 사각, 수축 #2a78d6 원(주 그림과 동일 개체·동일 색), 위치·척도 #d55181 삼각·파선. 기준선 동일.",
+    "figsize_in": [13.5, 6.9],
+    "width_ratios": [7, 7, 4, 4]
+   },
+   "assets": [
+    "data/processed/m1/sparse_label_curve.csv",
+    "data/processed/m1/sparse_label_meta.json"
+   ],
+   "style": "주 그림과 동일. 3색 all-pairs 전 항목 통과(대비 포함).",
+   "exports": [
+    "outputs/figures/m1/sparse_label_curve_estimators.png (dpi 300)",
+    "outputs/figures/m1/sparse_label_curve_estimators.pdf"
+   ],
+   "qa": "주 그림과 함께 검토."
+  }
+ ]
+}

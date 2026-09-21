@@ -838,5 +838,20 @@
     "outputs/figures/e1_factorial/e1_lambda_per_region_e3.pdf"
    ]
   }
- ]
+ ],
+ "m1/m1_sc_main_effects": {
+  "script": "scripts/4_visualization/m1_figs.py",
+  "inputs": [
+   "data/processed/m1/m1_sc_tests.csv",
+   "data/processed/m1/m1_sc_summary.csv",
+   "data/processed/m1/m1_sc_uq.csv"
+  ],
+  "message": "M1 주효과: 앵커·유사라벨 대조·모델·생성 모델 UQ",
+  "exports": [
+   "png",
+   "pdf"
+  ],
+  "units": "cm",
+  "generated": "2026-09-21"
+ }
 }

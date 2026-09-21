@@ -1,0 +1,28 @@
+{
+ "note": "figures/figure_spec.json 과 같은 스키마. 기존 파일 수정 금지 규약(2026-09-21 작업)에 따라 별도 파일로 둔다.",
+ "figures": [
+  {
+   "id": "cv_scheme_comparison",
+   "script": "scripts/3_deep_learning/m1_cv_scheme_comparison.py (make_figure, --figure-only 로 재렌더)",
+   "intent": "같은 자료(알래스카 13,606셀)·같은 모델에서 CV 분할 방식만 바꾸면 오차 수치가 어떻게 달라지는지, 그리고 각 방식의 검증→학습 최근접 거리 분포가 실제 예측 상황(영구동토 지도 격자→학습 셀)과 얼마나 닮았는지를 한 장에 보인다. 지배 메시지: 무작위 CV는 근접 중복 표본(최근접 4 m) 사이 보간을 채점해 유연 모델 오차를 과소 추정하고, 물리 모델(Stefan)은 분할 방식에 둔감하다.",
+   "layout": {
+    "panels": 2,
+    "arrangement": "(a) 모델 4종(Stefan λ=0 · 능형 직접 · 저용량 CatBoost 직접 · Stefan+능형 잔차 λ=0.75) × 검증 방식 6종(무작위 셀·무작위 사이트 0.05°·공간블록 0.5°(현행)·1.0°·2.0°·kNNDM) 묶음 막대, 막대=6-fold 풀링 RMSE seed 평균, 오차 막대=fold RMSE 표준편차, 막대 위 값 라벨(세로). (b) 최근접 학습 셀 거리 ECDF(로그 km, 1 m–500 km): 예측 영역(검정 굵은선)·학습 셀 간 LOO(회색 점선)·방식별 검증→학습(seed 0), 범례에 Wasserstein 거리 W(km).",
+    "figsize_in": [11.0, 4.6],
+    "width_ratios": [1.35, 1.0]
+   },
+   "assets": [
+    "data/processed/m1/cv_scheme_comparison.csv (scheme × model × seed 풀링 지표)",
+    "data/processed/m1/cv_scheme_comparison_folds.csv (fold 단위 RMSE, 오차 막대)",
+    "data/processed/m1/cv_scheme_distances.csv (거리 표본: prediction_permafrost 20,000 · loo_train · 방식별 13,606)",
+    "data/processed/m1/cv_scheme_comparison_meta.json (W 통계·kNNDM 선택 q)"
+   ],
+   "style": "polar.plotstyle.use_polar. 냉색 6색 고정 순서(무작위 셀 #a0a7b0 · 사이트 #0b7285 · 블록 0.5° #8fb3dd · 1.0° #3f6fa8 · 2.0° #17365d · kNNDM #8468b5): 블록 계열은 크기 순 명도 증가, dataviz validate_palette(light) 인접쌍 CVD ΔE≥8·정상시 ΔE≥15 통과, 연한 두 색의 대비 경고는 값 라벨·범례·CSV 표로 보완. (b)는 색+선종류 병행(점선/파선/실선/일점쇄선). 붉은 계열 없음. 그림 내부 제목 없음(캡션 담당), 패널 라벨 (a)(b) 11 pt bold, 축라벨 10.5, 눈금 9, 범례 8, 각주 7.8. 상/우 spine 제거, y 격자만 옅게. pdf.fonttype=42.",
+   "exports": [
+    "outputs/figures/m1/cv_scheme_comparison.png (dpi 300)",
+    "outputs/figures/m1/cv_scheme_comparison.pdf"
+   ],
+   "qa": "scientific-figure-reviewer 로 검토 후 결함 수정(단위·범례·글리프·겹침)."
+  }
+ ]
+}

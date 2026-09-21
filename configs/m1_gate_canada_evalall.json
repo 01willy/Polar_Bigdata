@@ -1,0 +1,6 @@
+[
+ {"anchor":"none","pseudo":"none","resid":"catboost"},
+ {"anchor":"none","pseudo":"stefan","r":10,"resid":"catboost"},
+ {"anchor":"none","pseudo":"const","r":10,"resid":"catboost"},
+ {"anchor":"none","pseudo":"ku_cal","r":10,"resid":"catboost"}
+]

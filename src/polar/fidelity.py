@@ -47,16 +47,22 @@ MACRO_REGION = {
     "GTNPenv_CH": "Alps", "GTNPenv_AQ": "Antarctica", "QTP_CN": "Tibet",
     # E3(2026-09-08) 비북미 CALM 확충. F4 직접 라벨. 심부 레짐 3종(몽골·알프스·QTP)은 주 전이 집합에서 분리.
     "CALM_Canada": "Canada", "CALM_Greenland": "Greenland", "CALM_Svalbard": "Svalbard",
+    # S-A(2026-09-18) v3: CALM_Svalbard에 섞여 있던 노르웨이 본토(Juvvasshøe·Snøheim)·스웨덴(Abisko) 3셀을 분리.
+    "CALM_Scandinavia": "Scandinavia",
     "CALM_Russia_W": "Russia_W", "CALM_Russia_C": "Russia_C", "CALM_Russia_E": "Russia_E",
     "CALM_Mongolia_CAsia": "Mongolia_CAsia", "CALM_Alps": "Alps", "CALM_QTP_China": "Tibet",
 }
 
 # E3 주 전이 집합 = 지역 ALT 평균 150 cm 미만(탐침 관측 실용 상한, 저지 툰드라·타이가 레짐).
-# 심부 레짐 집합 = 지온·융해관 유도 심부 라벨(티베트 181·몽골 306·알프스 379 cm; 'Svalbard'는 노르웨이 본토 3사이트 혼입 상태, 진짜 스발바르 146 cm이나 Stefan RMSE 123으로 심부 거동. 2026-09-15 계획 §4에서 분리 예정).
+# 심부 레짐 집합 = 지온·융해관 유도 심부 라벨(티베트 181·몽골 306·알프스 379 cm).
+# 'Svalbard'는 v2까지 노르웨이 본토 2·스웨덴 1 사이트가 혼입되어 있었고(fidelity_base_v3에서 'Scandinavia'로 분리),
+# 진짜 스발바르 4셀은 평균 146 cm이나 Stefan RMSE 123 cm으로 심부 거동이라 심부 집합에 유지한다(2026-09-15 계획 §4·2026-09-18 S-A).
 # 2026-09-08 개정: 스발바르는 계획 초판에서 주 집합이었으나 E3 적응 계수 실험에서 Stefan RMSE 296 cm로
 # 심부 레짐 거동이 확인되어 데이터 기준(150 cm)으로 재분류(계획 문서 개정 이력 참조).
 TRANSFER_MAIN = ["Lena", "Canada", "Russia_W", "Russia_C", "Russia_E", "Greenland"]
-TRANSFER_DEEP = ["Svalbard", "Mongolia_CAsia", "Alps", "Tibet"]
+# Scandinavia(v3 신설): 노르웨이 산악 시추공 2(228·519 cm, 지온 유도)·Abisko 탐침 1. 셀 3개(블록 3개)라 지역 수준 주장 불가,
+# 심부·산악 레짐으로 분류하며 결과 표에는 참고 값으로만 보고한다.
+TRANSFER_DEEP = ["Svalbard", "Mongolia_CAsia", "Alps", "Tibet", "Scandinavia"]
 
 
 def macro_region(df):
@@ -139,7 +145,8 @@ def assert_fold_safe_E(train_idx, test_idx, df) -> None:
 # 5. fidelity 체계 (F4>F3>F2>F1>F0) + source 정의
 # ============================================================
 FIDELITY = {
-    "F4_direct": 4,    # 직접 탐침(ABoVE·Lena)
+    "F4_direct": 4,    # 직접 탐침(ABoVE·Lena·CALM 탐침 격자)
+    "F4_calm_temp": 3, # CALM 사이트 중 지온·융해관 유도 라벨(PANGAEA 972777 Event Method 파싱, v3). F4_direct 필터에서 자동 제외
     "F3_temp": 3,      # 온도유도(shallow3d·field3d·KPDC)
     "F2_gtnp_env": 2,  # 심부 borehole 포락선
     "F1_stefan": 1,    # 물리 경험식

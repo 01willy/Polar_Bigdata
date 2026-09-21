@@ -1,0 +1,15 @@
+[
+ {"dset":"alaska","xset":"x25","anchor":"stefan","pseudo":"none","resid":"ridge"},
+ {"dset":"alaska","xset":"x25","anchor":"stefan_med","pseudo":"none","resid":"ridge"},
+ {"dset":"alaska","xset":"x25","anchor":"stefan_cci","pseudo":"none","resid":"ridge"},
+ {"dset":"alaska","xset":"x25","anchor":"none","pseudo":"none","resid":"ridge"},
+ {"dset":"alaska","xset":"x25","anchor":"none","pseudo":"none","resid":"catboost"},
+ {"dset":"alaska","xset":"x25","anchor":"none","pseudo":"none","resid":"catboost_lo"},
+ {"dset":"alaska","xset":"x25","anchor":"none","pseudo":"stefan","r":10,"resid":"catboost"},
+ {"dset":"alaska","xset":"x25","anchor":"none","pseudo":"stefan","r":10,"resid":"catboost_lo"},
+ {"dset":"alaska","xset":"x25","anchor":"none","pseudo":"const","r":10,"resid":"catboost"},
+ {"dset":"alaska","xset":"x25","anchor":"none","pseudo":"ku_cal","r":10,"resid":"catboost"},
+ {"dset":"alaska","xset":"x14","anchor":"stefan","pseudo":"none","resid":"catboost_lo"},
+ {"dset":"alaska","xset":"x34","anchor":"none","pseudo":"none","resid":"mlp"},
+ {"dset":"alaska","xset":"x34","anchor":"none","pseudo":"none","resid":"catboost"}
+]
