@@ -1,0 +1,18 @@
+{
+ "sources": "F4_direct,F4_calm_temp",
+ "E_alaska": 1.616688667140627,
+ "regions": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_C",
+  "Russia_E",
+  "Svalbard",
+  "Mongolia_CAsia",
+  "Alps",
+  "Tibet",
+  "Scandinavia"
+ ],
+ "note": "오라클은 대상 전 라벨 표본 내 적합(낙관적 상한)",
+ "elapsed_s": 0.3
+}

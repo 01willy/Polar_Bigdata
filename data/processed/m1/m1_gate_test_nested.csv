@@ -1,0 +1,13 @@
+family,cond,target,chosen,select_mean_others,score
+all,covonly,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""ridge"", ""iw"": 0, ""lam"": 0.0}",28.52,14.568
+all,covonly,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""ridge"", ""iw"": 0, ""lam"": 0.0}",14.568,28.52
+anchored,covonly,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""ridge"", ""iw"": 0, ""lam"": 0.0}",28.52,14.568
+anchored,covonly,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""ridge"", ""iw"": 0, ""lam"": 0.0}",14.568,28.52
+analytic,covonly,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""ridge"", ""iw"": 0, ""lam"": 0.0}",28.52,14.568
+analytic,covonly,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""ridge"", ""iw"": 0, ""lam"": 0.0}",14.568,28.52
+all,noinfo,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""ridge"", ""iw"": 0, ""lam"": 0.0}",25.719000000000005,20.761
+all,noinfo,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""ridge"", ""iw"": 0, ""lam"": 0.0}",20.761,25.719000000000005
+anchored,noinfo,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""ridge"", ""iw"": 0, ""lam"": 0.0}",25.719000000000005,20.761
+anchored,noinfo,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""ridge"", ""iw"": 0, ""lam"": 0.0}",20.761,25.719000000000005
+analytic,noinfo,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""ridge"", ""iw"": 0, ""lam"": 0.0}",25.719000000000005,20.761
+analytic,noinfo,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""ridge"", ""iw"": 0, ""lam"": 0.0}",20.761,25.719000000000005

@@ -1,0 +1,19 @@
+label,cond,target,old,new,new_seedmean,diff,pass_,source,note
+Stefan 최소제곱 E 지역 내,labels,Alaska,14.46,,,,False,tab:transfer/E2,미산출
+Stefan 중앙값비 E 지역 내,labels,Alaska,14.56,,,,False,tab:physics S2,미산출
+Stefan+ridge λ=.75 (13.33),labels,Alaska,13.33,,,,False,tab:transfer S4,미산출
+ridge 직접 25종,labels,Alaska,13.62,,,,False,09-14 대조,미산출
+Stefan 정보 없음 레나,noinfo,Lena,21.62,21.623974469334783,21.623974469334783,0.003974469334782071,True,E1-E3,풀링 앙상블·seed평균 중 근접값으로 판정
+Stefan 정보 없음 캐나다,noinfo,Canada,26.63,26.565276638985377,26.565276638985377,-0.06472336101462162,True,E1-E3,풀링 앙상블·seed평균 중 근접값으로 판정
+Stefan+CCI 정보 없음 레나,noinfo,Lena,20.76,20.760940506871332,20.760940506871332,0.0009405068713306264,True,E1-E3,풀링 앙상블·seed평균 중 근접값으로 판정
+Stefan+CCI 정보 없음 캐나다,noinfo,Canada,25.82,25.759076540163367,25.759076540163367,-0.0609234598366335,True,E1-E3,풀링 앙상블·seed평균 중 근접값으로 판정
+Stefan 공변량만 레나(split0),covonly,Lena,16.11,16.11395691126464,16.11395691126464,0.00395691126464115,True,E3 adaptive/S12,풀링 앙상블·seed평균 중 근접값으로 판정
+Stefan+CCI 공변량만 레나(split0),covonly,Lena,14.57,14.567517056791306,14.567517056791306,-0.0024829432086939107,True,S12,풀링 앙상블·seed평균 중 근접값으로 판정
+Stefan 유사라벨 r=10 catboost 레나,covonly,Lena,16.55,16.522151612595135,16.52403457389462,-0.025965426105379663,True,tab:aug S3,풀링 앙상블·seed평균 중 근접값으로 판정
+Stefan 유사라벨 r=10 catboost 캐나다,covonly,Canada,31.81,29.99541964809267,30.00284255570037,-1.80715744429963,False,tab:aug S3,풀링 앙상블·seed평균 중 근접값으로 판정
+Stefan 유사라벨 r=10 catboost_lo 레나,covonly,Lena,16.48,16.481750555889644,16.482091881226506,0.001750555889643124,True,E1,풀링 앙상블·seed평균 중 근접값으로 판정
+Stefan 유사라벨 r=10 catboost_lo 캐나다,covonly,Canada,30.21,30.20268302349343,30.209967472169737,-3.25278302639731e-05,True,E1,풀링 앙상블·seed평균 중 근접값으로 판정
+증강 없음 catboost 레나,covonly,Lena,21.9,21.826652105058116,21.873954537178914,-0.026045462821084442,True,tab:aug S3,풀링 앙상블·seed평균 중 근접값으로 판정
+증강 없음 catboost 캐나다,covonly,Canada,34.0,32.406651793753234,32.45388209903517,-1.5461179009648305,False,tab:aug S3,풀링 앙상블·seed평균 중 근접값으로 판정
+MLP 34종 3-seed 앙상블,labels,Alaska,14.37,,,,False,tab:models S1(앙상블),미산출
+CatBoost 34종 3-seed 앙상블,labels,Alaska,15.61,,,,False,tab:models S1(앙상블),미산출

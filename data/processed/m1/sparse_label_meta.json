@@ -1,0 +1,1013 @@
+{
+ "stage": "M1-S-F",
+ "tag": "sparse_label",
+ "base": "fidelity_base_v3.csv",
+ "soil": "e5_soil_tdd_v3.csv",
+ "sources": "F4_direct",
+ "features": "x25 (SHARED_CORE)",
+ "config": {
+  "targets": [
+   "Lena",
+   "Canada",
+   "Russia_W",
+   "Russia_E"
+  ],
+  "splits": 10,
+  "n_grid": [
+   0,
+   3,
+   5,
+   10,
+   20,
+   40,
+   80
+  ],
+  "reps_f1": 20,
+  "reps_f3": 10,
+  "reps_f2": 5,
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "lams": [
+   0.25,
+   0.5
+  ],
+  "r": 10.0,
+  "kappa_fixed": 10.0,
+  "workers": 4,
+  "threads": 4,
+  "smoke": false
+ },
+ "E_alaska": 1.616688667140627,
+ "E_alaska_k2": {
+  "a": 12.795126278012402,
+  "E": 1.2295023039157575
+ },
+ "n_alaska": 13606,
+ "kappa": {
+  "kappa": 1.4751687256145711,
+  "sigma2_pooled": 0.18357733114624883,
+  "sigma2_unweighted": 0.15090304703640936,
+  "tau2": 0.12444497226564273,
+  "var_E_blocks": 0.13154966278827462,
+  "sampling_noise": 0.007104690522631891,
+  "n_blocks": 38,
+  "min_cells": 3,
+  "E_block_ratio_mean": 1.4994256555729297,
+  "E_block_ls_sd": 0.36284364705010963,
+  "E_block_ratio_sd": 0.3626977568007205,
+  "block_n_median": 57.5,
+  "kappa_unweighted_sigma2": 1.2004107377037987,
+  "E_fold_train": [
+   1.5733794682552538,
+   1.624858225419867,
+   1.6269999259931562,
+   1.6515893063003515,
+   1.6063477761999378,
+   1.620761439998167
+  ],
+  "E_fold_test": [
+   1.85213488724529,
+   1.5896387962842353,
+   1.543901127585885,
+   1.4936471546059706,
+   1.7096015058429155,
+   1.596441494041758
+  ],
+  "E_fold_test_sd": 0.12995062530580095
+ },
+ "tasks": [
+  {
+   "target": "Canada",
+   "split": 0,
+   "n_A": 375,
+   "n_blocks_A": 19,
+   "n_eval": 374,
+   "n_blocks_eval": 19,
+   "n_fit": 834,
+   "elapsed_s": 510.7
+  },
+  {
+   "target": "Canada",
+   "split": 1,
+   "n_A": 355,
+   "n_blocks_A": 17,
+   "n_eval": 393,
+   "n_blocks_eval": 20,
+   "n_fit": 834,
+   "elapsed_s": 515.7
+  },
+  {
+   "target": "Canada",
+   "split": 2,
+   "n_A": 363,
+   "n_blocks_A": 25,
+   "n_eval": 385,
+   "n_blocks_eval": 12,
+   "n_fit": 834,
+   "elapsed_s": 502.5
+  },
+  {
+   "target": "Canada",
+   "split": 3,
+   "n_A": 406,
+   "n_blocks_A": 16,
+   "n_eval": 342,
+   "n_blocks_eval": 21,
+   "n_fit": 834,
+   "elapsed_s": 511.8
+  },
+  {
+   "target": "Canada",
+   "split": 4,
+   "n_A": 325,
+   "n_blocks_A": 12,
+   "n_eval": 423,
+   "n_blocks_eval": 25,
+   "n_fit": 834,
+   "elapsed_s": 529.6
+  },
+  {
+   "target": "Canada",
+   "split": 5,
+   "n_A": 360,
+   "n_blocks_A": 19,
+   "n_eval": 388,
+   "n_blocks_eval": 18,
+   "n_fit": 834,
+   "elapsed_s": 539.0
+  },
+  {
+   "target": "Canada",
+   "split": 6,
+   "n_A": 319,
+   "n_blocks_A": 26,
+   "n_eval": 430,
+   "n_blocks_eval": 12,
+   "n_fit": 834,
+   "elapsed_s": 531.2
+  },
+  {
+   "target": "Canada",
+   "split": 7,
+   "n_A": 396,
+   "n_blocks_A": 19,
+   "n_eval": 352,
+   "n_blocks_eval": 18,
+   "n_fit": 834,
+   "elapsed_s": 567.3
+  },
+  {
+   "target": "Canada",
+   "split": 8,
+   "n_A": 420,
+   "n_blocks_A": 16,
+   "n_eval": 329,
+   "n_blocks_eval": 22,
+   "n_fit": 834,
+   "elapsed_s": 569.7
+  },
+  {
+   "target": "Canada",
+   "split": 9,
+   "n_A": 404,
+   "n_blocks_A": 23,
+   "n_eval": 344,
+   "n_blocks_eval": 14,
+   "n_fit": 834,
+   "elapsed_s": 566.6
+  },
+  {
+   "target": "Lena",
+   "split": 0,
+   "n_A": 1519,
+   "n_blocks_A": 9,
+   "n_eval": 1496,
+   "n_blocks_eval": 11,
+   "n_fit": 834,
+   "elapsed_s": 523.2
+  },
+  {
+   "target": "Lena",
+   "split": 1,
+   "n_A": 1505,
+   "n_blocks_A": 9,
+   "n_eval": 1478,
+   "n_blocks_eval": 11,
+   "n_fit": 834,
+   "elapsed_s": 531.0
+  },
+  {
+   "target": "Lena",
+   "split": 2,
+   "n_A": 1293,
+   "n_blocks_A": 15,
+   "n_eval": 1687,
+   "n_blocks_eval": 5,
+   "n_fit": 834,
+   "elapsed_s": 521.3
+  },
+  {
+   "target": "Lena",
+   "split": 3,
+   "n_A": 1737,
+   "n_blocks_A": 6,
+   "n_eval": 1278,
+   "n_blocks_eval": 14,
+   "n_fit": 834,
+   "elapsed_s": 517.6
+  },
+  {
+   "target": "Lena",
+   "split": 4,
+   "n_A": 1533,
+   "n_blocks_A": 4,
+   "n_eval": 1428,
+   "n_blocks_eval": 16,
+   "n_fit": 834,
+   "elapsed_s": 497.4
+  },
+  {
+   "target": "Lena",
+   "split": 5,
+   "n_A": 1120,
+   "n_blocks_A": 4,
+   "n_eval": 1860,
+   "n_blocks_eval": 16,
+   "n_fit": 834,
+   "elapsed_s": 482.0
+  },
+  {
+   "target": "Lena",
+   "split": 6,
+   "n_A": 1583,
+   "n_blocks_A": 9,
+   "n_eval": 1378,
+   "n_blocks_eval": 11,
+   "n_fit": 834,
+   "elapsed_s": 478.3
+  },
+  {
+   "target": "Lena",
+   "split": 7,
+   "n_A": 1519,
+   "n_blocks_A": 10,
+   "n_eval": 1496,
+   "n_blocks_eval": 10,
+   "n_fit": 834,
+   "elapsed_s": 498.0
+  },
+  {
+   "target": "Lena",
+   "split": 8,
+   "n_A": 1474,
+   "n_blocks_A": 15,
+   "n_eval": 1560,
+   "n_blocks_eval": 5,
+   "n_fit": 834,
+   "elapsed_s": 478.0
+  },
+  {
+   "target": "Lena",
+   "split": 9,
+   "n_A": 1586,
+   "n_blocks_A": 6,
+   "n_eval": 1394,
+   "n_blocks_eval": 14,
+   "n_fit": 834,
+   "elapsed_s": 484.9
+  },
+  {
+   "target": "Russia_E",
+   "split": 0,
+   "n_A": 15,
+   "n_blocks_A": 10,
+   "n_eval": 12,
+   "n_blocks_eval": 9,
+   "n_fit": 429,
+   "elapsed_s": 276.1
+  },
+  {
+   "target": "Russia_E",
+   "split": 1,
+   "n_A": 15,
+   "n_blocks_A": 10,
+   "n_eval": 14,
+   "n_blocks_eval": 10,
+   "n_fit": 429,
+   "elapsed_s": 278.4
+  },
+  {
+   "target": "Russia_E",
+   "split": 2,
+   "n_A": 17,
+   "n_blocks_A": 11,
+   "n_eval": 11,
+   "n_blocks_eval": 8,
+   "n_fit": 429,
+   "elapsed_s": 261.9
+  },
+  {
+   "target": "Russia_E",
+   "split": 3,
+   "n_A": 15,
+   "n_blocks_A": 10,
+   "n_eval": 14,
+   "n_blocks_eval": 11,
+   "n_fit": 429,
+   "elapsed_s": 255.0
+  },
+  {
+   "target": "Russia_E",
+   "split": 4,
+   "n_A": 15,
+   "n_blocks_A": 11,
+   "n_eval": 14,
+   "n_blocks_eval": 10,
+   "n_fit": 429,
+   "elapsed_s": 262.7
+  },
+  {
+   "target": "Russia_E",
+   "split": 5,
+   "n_A": 16,
+   "n_blocks_A": 12,
+   "n_eval": 12,
+   "n_blocks_eval": 8,
+   "n_fit": 429,
+   "elapsed_s": 261.5
+  },
+  {
+   "target": "Russia_E",
+   "split": 6,
+   "n_A": 16,
+   "n_blocks_A": 11,
+   "n_eval": 14,
+   "n_blocks_eval": 10,
+   "n_fit": 429,
+   "elapsed_s": 255.7
+  },
+  {
+   "target": "Russia_E",
+   "split": 7,
+   "n_A": 15,
+   "n_blocks_A": 10,
+   "n_eval": 13,
+   "n_blocks_eval": 9,
+   "n_fit": 429,
+   "elapsed_s": 264.4
+  },
+  {
+   "target": "Russia_E",
+   "split": 8,
+   "n_A": 16,
+   "n_blocks_A": 12,
+   "n_eval": 12,
+   "n_blocks_eval": 8,
+   "n_fit": 429,
+   "elapsed_s": 287.3
+  },
+  {
+   "target": "Russia_E",
+   "split": 9,
+   "n_A": 16,
+   "n_blocks_A": 12,
+   "n_eval": 13,
+   "n_blocks_eval": 9,
+   "n_fit": 429,
+   "elapsed_s": 290.8
+  },
+  {
+   "target": "Russia_W",
+   "split": 0,
+   "n_A": 16,
+   "n_blocks_A": 10,
+   "n_eval": 12,
+   "n_blocks_eval": 8,
+   "n_fit": 429,
+   "elapsed_s": 265.9
+  },
+  {
+   "target": "Russia_W",
+   "split": 1,
+   "n_A": 16,
+   "n_blocks_A": 11,
+   "n_eval": 12,
+   "n_blocks_eval": 7,
+   "n_fit": 429,
+   "elapsed_s": 274.2
+  },
+  {
+   "target": "Russia_W",
+   "split": 2,
+   "n_A": 14,
+   "n_blocks_A": 9,
+   "n_eval": 17,
+   "n_blocks_eval": 12,
+   "n_fit": 429,
+   "elapsed_s": 288.8
+  },
+  {
+   "target": "Russia_W",
+   "split": 3,
+   "n_A": 15,
+   "n_blocks_A": 13,
+   "n_eval": 16,
+   "n_blocks_eval": 8,
+   "n_fit": 429,
+   "elapsed_s": 290.2
+  },
+  {
+   "target": "Russia_W",
+   "split": 4,
+   "n_A": 16,
+   "n_blocks_A": 9,
+   "n_eval": 14,
+   "n_blocks_eval": 11,
+   "n_fit": 429,
+   "elapsed_s": 275.6
+  },
+  {
+   "target": "Russia_W",
+   "split": 5,
+   "n_A": 16,
+   "n_blocks_A": 11,
+   "n_eval": 13,
+   "n_blocks_eval": 8,
+   "n_fit": 429,
+   "elapsed_s": 284.5
+  },
+  {
+   "target": "Russia_W",
+   "split": 6,
+   "n_A": 16,
+   "n_blocks_A": 11,
+   "n_eval": 14,
+   "n_blocks_eval": 9,
+   "n_fit": 429,
+   "elapsed_s": 298.8
+  },
+  {
+   "target": "Russia_W",
+   "split": 7,
+   "n_A": 14,
+   "n_blocks_A": 10,
+   "n_eval": 15,
+   "n_blocks_eval": 9,
+   "n_fit": 429,
+   "elapsed_s": 292.5
+  },
+  {
+   "target": "Russia_W",
+   "split": 8,
+   "n_A": 15,
+   "n_blocks_A": 12,
+   "n_eval": 14,
+   "n_blocks_eval": 7,
+   "n_fit": 429,
+   "elapsed_s": 270.1
+  },
+  {
+   "target": "Russia_W",
+   "split": 9,
+   "n_A": 15,
+   "n_blocks_A": 13,
+   "n_eval": 16,
+   "n_blocks_eval": 8,
+   "n_fit": 429,
+   "elapsed_s": 275.0
+  }
+ ],
+ "n_fit_total": 25260,
+ "n_rows": 97260,
+ "n_min": {
+  "Canada|none|direct_pseudo|1": {
+   "n_min_mean": 3,
+   "n_min_win90": -1,
+   "physics": 25.369,
+   "allA": 32.04
+  },
+  "Canada|stefan|both|0.25": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.369,
+   "allA": 28.134
+  },
+  "Canada|stefan|both|0.5": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.369,
+   "allA": 27.257
+  },
+  "Canada|stefan|both_ls|0.25": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.369,
+   "allA": 28.169
+  },
+  "Canada|stefan|both_ls|0.5": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.369,
+   "allA": 27.291
+  },
+  "Canada|stefan|locscale|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.369,
+   "allA": 24.817
+  },
+  "Canada|stefan|refit|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.369,
+   "allA": 29.107
+  },
+  "Canada|stefan|resid|0.25": {
+   "n_min_mean": 3,
+   "n_min_win90": -1,
+   "physics": 25.369,
+   "allA": 22.853
+  },
+  "Canada|stefan|resid|0.5": {
+   "n_min_mean": 3,
+   "n_min_win90": -1,
+   "physics": 25.369,
+   "allA": 23.334
+  },
+  "Canada|stefan|shrink|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.369,
+   "allA": 29.071
+  },
+  "Canada|stefan|shrink_k10|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.369,
+   "allA": 28.874
+  },
+  "Canada|stefan_cci|both|0.25": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.009,
+   "allA": 26.76
+  },
+  "Canada|stefan_cci|both|0.5": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.009,
+   "allA": 26.719
+  },
+  "Canada|stefan_cci|both_ls|0.25": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.009,
+   "allA": 26.776
+  },
+  "Canada|stefan_cci|both_ls|0.5": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.009,
+   "allA": 26.734
+  },
+  "Canada|stefan_cci|locscale|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.009,
+   "allA": 25.653
+  },
+  "Canada|stefan_cci|refit|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.009,
+   "allA": 27.085
+  },
+  "Canada|stefan_cci|resid|0.25": {
+   "n_min_mean": 3,
+   "n_min_win90": -1,
+   "physics": 25.009,
+   "allA": 24.152
+  },
+  "Canada|stefan_cci|resid|0.5": {
+   "n_min_mean": 3,
+   "n_min_win90": -1,
+   "physics": 25.009,
+   "allA": 24.6
+  },
+  "Canada|stefan_cci|shrink|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.009,
+   "allA": 27.07
+  },
+  "Canada|stefan_cci|shrink_k10|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.009,
+   "allA": 26.981
+  },
+  "Lena|none|direct_pseudo|1": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 20.442,
+   "allA": 26.525
+  },
+  "Lena|stefan|both|0.25": {
+   "n_min_mean": 80,
+   "n_min_win90": -1,
+   "physics": 20.442,
+   "allA": 24.465
+  },
+  "Lena|stefan|both|0.5": {
+   "n_min_mean": 80,
+   "n_min_win90": -1,
+   "physics": 20.442,
+   "allA": 24.377
+  },
+  "Lena|stefan|both_ls|0.25": {
+   "n_min_mean": 80,
+   "n_min_win90": -1,
+   "physics": 20.442,
+   "allA": 24.465
+  },
+  "Lena|stefan|both_ls|0.5": {
+   "n_min_mean": 80,
+   "n_min_win90": -1,
+   "physics": 20.442,
+   "allA": 24.377
+  },
+  "Lena|stefan|locscale|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 20.442,
+   "allA": 24.594
+  },
+  "Lena|stefan|refit|0": {
+   "n_min_mean": 80,
+   "n_min_win90": -1,
+   "physics": 20.442,
+   "allA": 24.576
+  },
+  "Lena|stefan|resid|0.25": {
+   "n_min_mean": 80,
+   "n_min_win90": -1,
+   "physics": 20.442,
+   "allA": 24.847
+  },
+  "Lena|stefan|resid|0.5": {
+   "n_min_mean": 80,
+   "n_min_win90": -1,
+   "physics": 20.442,
+   "allA": 24.593
+  },
+  "Lena|stefan|shrink|0": {
+   "n_min_mean": 80,
+   "n_min_win90": -1,
+   "physics": 20.442,
+   "allA": 24.575
+  },
+  "Lena|stefan|shrink_k10|0": {
+   "n_min_mean": 10,
+   "n_min_win90": -1,
+   "physics": 20.442,
+   "allA": 24.575
+  },
+  "Lena|stefan_cci|both|0.25": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 19.391,
+   "allA": 24.602
+  },
+  "Lena|stefan_cci|both|0.5": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 19.391,
+   "allA": 24.608
+  },
+  "Lena|stefan_cci|both_ls|0.25": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 19.391,
+   "allA": 24.603
+  },
+  "Lena|stefan_cci|both_ls|0.5": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 19.391,
+   "allA": 24.609
+  },
+  "Lena|stefan_cci|locscale|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 19.391,
+   "allA": 24.725
+  },
+  "Lena|stefan_cci|refit|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 19.391,
+   "allA": 24.695
+  },
+  "Lena|stefan_cci|resid|0.25": {
+   "n_min_mean": 80,
+   "n_min_win90": -1,
+   "physics": 19.391,
+   "allA": 24.301
+  },
+  "Lena|stefan_cci|resid|0.5": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 19.391,
+   "allA": 24.369
+  },
+  "Lena|stefan_cci|shrink|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 19.391,
+   "allA": 24.694
+  },
+  "Lena|stefan_cci|shrink_k10|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 19.391,
+   "allA": 24.69
+  },
+  "Russia_E|none|direct_pseudo|1": {
+   "n_min_mean": 3,
+   "n_min_win90": -1,
+   "physics": 25.066,
+   "allA": 22.387
+  },
+  "Russia_E|stefan|both|0.25": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.066,
+   "allA": 21.381
+  },
+  "Russia_E|stefan|both|0.5": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.066,
+   "allA": 21.49
+  },
+  "Russia_E|stefan|both_ls|0.25": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.066,
+   "allA": 21.904
+  },
+  "Russia_E|stefan|both_ls|0.5": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.066,
+   "allA": 22.0
+  },
+  "Russia_E|stefan|locscale|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.066,
+   "allA": 24.102
+  },
+  "Russia_E|stefan|refit|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.066,
+   "allA": 21.88
+  },
+  "Russia_E|stefan|resid|0.25": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.066,
+   "allA": 19.824
+  },
+  "Russia_E|stefan|resid|0.5": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.066,
+   "allA": 20.008
+  },
+  "Russia_E|stefan|shrink|0": {
+   "n_min_mean": -1,
+   "n_min_win90": -1,
+   "physics": 25.066,
+   "allA": 21.347
+  },
+  "Russia_E|stefan|shrink_k10|0": {
+   "n_min_mean": 3,
+   "n_min_win90": -1,
+   "physics": 25.066,
+   "allA": 19.961
+  },
+  "Russia_E|stefan_cci|both|0.25": {
+   "n_min_mean": 3,
+   "n_min_win90": -1,
+   "physics": 25.543,
+   "allA": 19.579
+  },
+  "Russia_E|stefan_cci|both|0.5": {
+   "n_min_mean": 5,
+   "n_min_win90": -1,
+   "physics": 25.543,
+   "allA": 19.928
+  },
+  "Russia_E|stefan_cci|both_ls|0.25": {
+   "n_min_mean": 5,
+   "n_min_win90": -1,
+   "physics": 25.543,
+   "allA": 19.607
+  },
+  "Russia_E|stefan_cci|both_ls|0.5": {
+   "n_min_mean": 10,
+   "n_min_win90": -1,
+   "physics": 25.543,
+   "allA": 20.019
+  },
+  "Russia_E|stefan_cci|locscale|0": {
+   "n_min_mean": 10,
+   "n_min_win90": -1,
+   "physics": 25.543,
+   "allA": 20.697
+  },
+  "Russia_E|stefan_cci|refit|0": {
+   "n_min_mean": 5,
+   "n_min_win90": -1,
+   "physics": 25.543,
+   "allA": 19.7
+  },
+  "Russia_E|stefan_cci|resid|0.25": {
+   "n_min_mean": 3,
+   "n_min_win90": -1,
+   "physics": 25.543,
+   "allA": 20.35
+  },
+  "Russia_E|stefan_cci|resid|0.5": {
+   "n_min_mean": 3,
+   "n_min_win90": -1,
+   "physics": 25.543,
+   "allA": 20.046
+  },
+  "Russia_E|stefan_cci|shrink|0": {
+   "n_min_mean": 3,
+   "n_min_win90": -1,
+   "physics": 25.543,
+   "allA": 19.74
+  },
+  "Russia_E|stefan_cci|shrink_k10|0": {
+   "n_min_mean": 3,
+   "n_min_win90": -1,
+   "physics": 25.543,
+   "allA": 20.041
+  },
+  "Russia_W|none|direct_pseudo|1": {
+   "n_min_mean": 3,
+   "n_min_win90": 10,
+   "physics": 39.792,
+   "allA": 28.92
+  },
+  "Russia_W|stefan|both|0.25": {
+   "n_min_mean": 3,
+   "n_min_win90": 3,
+   "physics": 39.792,
+   "allA": 28.437
+  },
+  "Russia_W|stefan|both|0.5": {
+   "n_min_mean": 3,
+   "n_min_win90": 3,
+   "physics": 39.792,
+   "allA": 28.538
+  },
+  "Russia_W|stefan|both_ls|0.25": {
+   "n_min_mean": 3,
+   "n_min_win90": 3,
+   "physics": 39.792,
+   "allA": 28.858
+  },
+  "Russia_W|stefan|both_ls|0.5": {
+   "n_min_mean": 3,
+   "n_min_win90": 3,
+   "physics": 39.792,
+   "allA": 28.896
+  },
+  "Russia_W|stefan|locscale|0": {
+   "n_min_mean": 10,
+   "n_min_win90": -1,
+   "physics": 39.792,
+   "allA": 29.854
+  },
+  "Russia_W|stefan|refit|0": {
+   "n_min_mean": 3,
+   "n_min_win90": 3,
+   "physics": 39.792,
+   "allA": 28.883
+  },
+  "Russia_W|stefan|resid|0.25": {
+   "n_min_mean": 3,
+   "n_min_win90": 5,
+   "physics": 39.792,
+   "allA": 40.191
+  },
+  "Russia_W|stefan|resid|0.5": {
+   "n_min_mean": 3,
+   "n_min_win90": 5,
+   "physics": 39.792,
+   "allA": 38.81
+  },
+  "Russia_W|stefan|shrink|0": {
+   "n_min_mean": 3,
+   "n_min_win90": 3,
+   "physics": 39.792,
+   "allA": 28.4
+  },
+  "Russia_W|stefan|shrink_k10|0": {
+   "n_min_mean": 3,
+   "n_min_win90": 3,
+   "physics": 39.792,
+   "allA": 29.846
+  },
+  "Russia_W|stefan_cci|both|0.25": {
+   "n_min_mean": 3,
+   "n_min_win90": 3,
+   "physics": 39.16,
+   "allA": 30.918
+  },
+  "Russia_W|stefan_cci|both|0.5": {
+   "n_min_mean": 3,
+   "n_min_win90": 3,
+   "physics": 39.16,
+   "allA": 30.931
+  },
+  "Russia_W|stefan_cci|both_ls|0.25": {
+   "n_min_mean": 3,
+   "n_min_win90": 3,
+   "physics": 39.16,
+   "allA": 30.295
+  },
+  "Russia_W|stefan_cci|both_ls|0.5": {
+   "n_min_mean": 3,
+   "n_min_win90": 3,
+   "physics": 39.16,
+   "allA": 30.251
+  },
+  "Russia_W|stefan_cci|locscale|0": {
+   "n_min_mean": 10,
+   "n_min_win90": 10,
+   "physics": 39.16,
+   "allA": 31.286
+  },
+  "Russia_W|stefan_cci|refit|0": {
+   "n_min_mean": 3,
+   "n_min_win90": 3,
+   "physics": 39.16,
+   "allA": 30.542
+  },
+  "Russia_W|stefan_cci|resid|0.25": {
+   "n_min_mean": 3,
+   "n_min_win90": 10,
+   "physics": 39.16,
+   "allA": 39.203
+  },
+  "Russia_W|stefan_cci|resid|0.5": {
+   "n_min_mean": 3,
+   "n_min_win90": 10,
+   "physics": 39.16,
+   "allA": 38.611
+  },
+  "Russia_W|stefan_cci|shrink|0": {
+   "n_min_mean": 3,
+   "n_min_win90": 3,
+   "physics": 39.16,
+   "allA": 31.104
+  },
+  "Russia_W|stefan_cci|shrink_k10|0": {
+   "n_min_mean": 3,
+   "n_min_win90": 3,
+   "physics": 39.16,
+   "allA": 33.595
+  }
+ },
+ "methods": {
+  "physics": "앵커 E_AK(n=0 기준선)",
+  "refit": "최소제곱 E_n",
+  "shrink": "(n·Ê_n + κ·E_AK)/(n+κ), κ 경험 베이즈",
+  "shrink_k10": "κ=10 고정(민감도)",
+  "locscale": "a + E_n√TDD 최소제곱(n ≥ 5)",
+  "resid": "앵커 E_AK 고정 + catboost_lo 잔차 g(알래스카 잔차 ∪ 대상 라벨 n개 잔차, 가중 없음), λ 스윕",
+  "both": "앵커 E_n(shrink) + 잔차 g(대상 n개 행의 잔차는 E_n 기준, 별도 적합)",
+  "both_ls": "both 의 g 에 E_n(refit) 앵커를 사후 결합(근사)",
+  "direct_pseudo": "직접 catboost_lo: 알래스카 실측 ∪ A풀 Stefan 유사라벨(r=10, 복원 추출) ∪ 라벨 n개(라벨 셀의 유사라벨 행을 실측으로 대체)"
+ },
+ "scoring": "셀 가중 RMSE(주), 블록 등가중 RMSE(보조), 승률 = 같은 분할 물리식(n=0) 대비 낮은 실행 비율. 10–90% 범위는 분할×반복×seed 합동 분포",
+ "label_draw": "RandomState(1000003·split + 1009·n + rep).choice(|A|, n, replace=False); F1·F3·F2 공유(짝지음)",
+ "catboost_lo": "iterations=200, lr=0.05, depth=3, l2=3, thread_count=4 (m1_core.fit_model 과 동일 초모수)",
+ "plan": "docs/EXPERIMENT_PLAN_TRANSFER_2026-09-15.md §3 F1–F3; docs/EXPERIMENT_PLAN_MASTER_2026-09-16.md §3 S-F, 개정 09-21 §A·§B",
+ "predecessor": "scripts/3_deep_learning/e3_adaptive_E.py (단일 분할, E 재적합만, 반복 30회)",
+ "env": {
+  "device": "cpu",
+  "cuda_visible_devices": "",
+  "git_commit": "7e0c890",
+  "elapsed_s": 4066.3
+ }
+}

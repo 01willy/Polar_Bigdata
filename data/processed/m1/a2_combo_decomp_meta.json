@@ -1,0 +1,20 @@
+{
+ "sources": "F4_direct,F4_calm_temp",
+ "nboot": 400,
+ "E_alaska": 1.616688667140627,
+ "cci_a": 31.21334571256368,
+ "cci_b": 0.4243431418715392,
+ "regions": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_C",
+  "Russia_E",
+  "Svalbard",
+  "Mongolia_CAsia",
+  "Alps",
+  "Tibet",
+  "Scandinavia"
+ ],
+ "elapsed_s": 0.9
+}

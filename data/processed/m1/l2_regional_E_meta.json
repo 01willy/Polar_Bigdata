@@ -1,0 +1,96 @@
+{
+ "created": "2026-09-21 11:03",
+ "git_commit": "291e2c7",
+ "cpu_only": true,
+ "omp_threads": "4",
+ "catboost_threads": 4,
+ "base": "fidelity_base_v3.csv",
+ "soil": "e5_soil_tdd_v3.csv",
+ "features": "x25 SHARED_CORE",
+ "script": "scripts/2_evaluation/l2_regional_E.py",
+ "sources": "F4_direct,F4_calm_temp",
+ "n_boot": 1000,
+ "min_cells_block": 3,
+ "E_alaska_LS": 1.616688667140627,
+ "regions": [
+  "Alaska",
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_C",
+  "Russia_E",
+  "Greenland",
+  "Svalbard",
+  "Mongolia_CAsia",
+  "Alps",
+  "Tibet",
+  "Scandinavia"
+ ],
+ "emap_features": [
+  "sg_clay_5_15",
+  "sg_sand_5_15",
+  "sg_silt_5_15",
+  "sg_bdod_5_15",
+  "sg_cfvo_5_15",
+  "sg_phh2o_5_15",
+  "sg_soc_0_5",
+  "sg_soc_5_15",
+  "sg_soc_15_30",
+  "e5_maat",
+  "e5_tdd",
+  "e5_fdd",
+  "e5_sqrt_tdd",
+  "e5_twarm",
+  "e5_tcold",
+  "e5_stl1",
+  "e5_swe"
+ ],
+ "units": {
+  "E": "cm/√(°C·day)",
+  "nfactor_proxy": "e5_tdd_soil/e5_tdd (무차원)",
+  "soc": "sg_soc_0_5 SoilGrids 원 단위(파이프라인 g/kg 표기)",
+  "clay": "%",
+  "bdod": "g/cm³ 표기(파이프라인 kg/dm³)",
+  "maat": "°C",
+  "tdd": "°C·day"
+ },
+ "literature_notes": [
+  {
+   "source": "Nelson & Outcalt (1987) Arctic Alpine Res. 19(3):279–288",
+   "quantity": "edaphic factor E (Stefan 해 ALT = E·√(n·DDT))",
+   "value": "정의 원전(지표 n-factor·토양 열물성을 한 계수로 묶음)",
+   "units": "",
+   "status": "정의 확인(웹 2차 요약)·수치 범위는 원문 미확인"
+  },
+  {
+   "source": "Nelson et al. (1997) Arctic Alpine Res. 29(4):367–378, Fig. 4 (Kuparuk Flux Study plots)",
+   "quantity": "플롯별 해빙률 β (Z = β·√DDT + α, 1995 여름)",
+   "value": "β = 1.36, 1.37, 1.41, 2.11, 2.49, 3.80 (α = −9.5~+13.9 cm); 95-1 Betty Pingo(습윤 비산성 툰드라) 1.37, 95-3 Sagwon 1(습윤 산성 툰드라) 2.11",
+   "units": "cm/√(°C·day)",
+   "status": "확인(원문 PDF 텍스트 추출, geobotany.org 공개본)"
+  },
+  {
+   "source": "Peng et al. (2018) J. Climate 31:251–266 (2차 요약)",
+   "quantity": "북반구 CALM·GTN-P 사이트 E 분포",
+   "value": "0–18, 대부분 0–12",
+   "units": "cm/√(°C·day) 로 추정(원문 단위 미확인)",
+   "status": "웹 요약만 확인·단위 미확인"
+  },
+  {
+   "source": "Klene et al. (2001) Arctic Antarct. Alpine Res. 33(2):140–148",
+   "quantity": "쿠파룩 식생·토양 계급별 여름 n-factor",
+   "value": "계급별 값 원문 미확인",
+   "units": "무차원",
+   "status": "미확인(초록만 확인). 본 연구 대리값은 ERA5-Land 표층 토양(0–7 cm) 도일/2 m 기온 도일"
+  },
+  {
+   "source": "Shiklomanov & Nelson (1999) Ecol. Model. 123:105–125",
+   "quantity": "쿠파룩 ALT 장 해석 표현(E 공간 지도 선례)",
+   "value": "",
+   "units": "",
+   "status": "미확인"
+  }
+ ],
+ "note": "E 적합 셀 = y 유효 ∩ √TDD>0(평가 마스크 미적용). CI 블록 부트스트랩 1,000회, 블록 8 미만 NaN. rmse_stefan_alaskaE 는 알래스카 E 고정(정보 없음), rmse_stefan_ownE 는 지역 자체 E(in-sample 상한).",
+ "elapsed_s": 6.9
+}

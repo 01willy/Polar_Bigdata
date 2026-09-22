@@ -1,0 +1,187 @@
+{
+ "stage": "A2-aux year_matched_tdd (audit C2-E)",
+ "created": "2026-09-21",
+ "base": "fidelity_base_v3.csv",
+ "soil": "e5_soil_tdd_v3.csv",
+ "sources": [
+  "F4_direct"
+ ],
+ "nc": "data/raw/era5land/nh_monthly_2010-2024.nc",
+ "nc_years": [
+  2010,
+  2024
+ ],
+ "clim_period": [
+  2015,
+  2020
+ ],
+ "pre2010_substitute": [
+  2010,
+  2014
+ ],
+ "year_source": "data/processed/m1/label_year_sensitivity_cells.csv",
+ "tdd_definition": "sum over months with monthly-mean t2m > 0 °C of (T − 0) × days in that month/year; clim uses 2019 day counts after averaging months",
+ "grid_rule": "nearest 0.1° grid; if ocean (NaN), Euclidean-nearest land grid within ±2 then ±5 cells (enrich_new_regions.py rule)",
+ "fallback_counts": {
+  "direct": 15963,
+  "0.2": 390,
+  "0.5": 1114,
+  "fail": 0
+ },
+ "clim_reproduction": {
+  "median_abs": 0.0005033612251281738,
+  "p95_abs": 0.0015511512756347656,
+  "max_abs": 78.15741539001465,
+  "n_gt20": 7,
+  "n_gt20_by_region": {
+   "Alaska": 7,
+   "Canada": 0,
+   "Greenland": 0,
+   "Lena": 0,
+   "Russia_C": 0,
+   "Russia_E": 0,
+   "Russia_W": 0,
+   "Scandinavia": 0,
+   "Svalbard": 0,
+   "Tibet": 0
+  }
+ },
+ "versions": {
+  "clim": "현행 열(2015–2020 월기후값 후 클립, fidelity_base_v3)",
+  "clim_re": "현행 정의를 2010–2024 파일·유클리드 폴백 격자에서 재산출",
+  "clim_yr": "2015–2020 연별 TDD 평균(클립 후 평균)",
+  "matched": "[year_min, year_max] ∩ [2010, 2024] 연별 TDD 평균(2010 이전 관측은 2010–2014 평균)",
+  "full": "2010–2024 연별 TDD 평균"
+ },
+ "replaced_columns": [
+  "e5_tdd",
+  "e5_sqrt_tdd"
+ ],
+ "n_cells": 17467,
+ "n_eval": 17377,
+ "n_pre2010": 857,
+ "n_partial": 284,
+ "regions": {
+  "Alaska": 13606,
+  "Lena": 3037,
+  "Canada": 750,
+  "Russia_W": 31,
+  "Russia_E": 30,
+  "Russia_C": 7,
+  "Greenland": 3,
+  "Tibet": 1,
+  "Scandinavia": 1,
+  "Svalbard": 1
+ },
+ "cov_regions": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_E"
+ ],
+ "pseudos": [
+  "stefan",
+  "const",
+  "tddlin",
+  "none"
+ ],
+ "ctrls": [
+  "const",
+  "tddlin",
+  "none"
+ ],
+ "r": 10.0,
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "splits": [
+  0,
+  1,
+  2
+ ],
+ "nboot": 400,
+ "min_blocks_ci": 8,
+ "catboost": {
+  "iterations": 200,
+  "learning_rate": 0.05,
+  "depth": 3,
+  "l2_leaf_reg": 3.0,
+  "thread_count": 4
+ },
+ "feats": "x25",
+ "n_fit": 555,
+ "E": {
+  "clim": 1.616688667140627,
+  "clim_re": 1.6166977539888958,
+  "clim_yr": 1.6061620616275911,
+  "matched": 1.6899396068315045,
+  "full": 1.660381621316139
+ },
+ "verdict": {
+  "clim_re": {
+   "n_conclusions": 25,
+   "sign_flips": [],
+   "sig_flips": [],
+   "n_sig_delta_version": 4,
+   "n_delta_version": 31,
+   "max_abs_d_rmse_noinfo_stefan": 0.00023778352694847626,
+   "max_abs_d_bias_noinfo_stefan": 0.0003691524151188119,
+   "main6_d_rmse_stefan": 5.1519030936475474e-05,
+   "main6_d_bias_stefan": 0.0002930208651843458
+  },
+  "clim_yr": {
+   "n_conclusions": 25,
+   "sign_flips": [],
+   "sig_flips": [
+    "H3-tddlin@Russia_E"
+   ],
+   "n_sig_delta_version": 6,
+   "n_delta_version": 31,
+   "max_abs_d_rmse_noinfo_stefan": 0.19405596435768757,
+   "max_abs_d_bias_noinfo_stefan": 0.35095587489430713,
+   "main6_d_rmse_stefan": -0.08045854101575856,
+   "main6_d_bias_stefan": -0.3042207357905662
+  },
+  "matched": {
+   "n_conclusions": 25,
+   "sign_flips": [],
+   "sig_flips": [
+    "H3-tddlin@Russia_W",
+    "bias_stefan@Canada",
+    "bias_stefan@MAIN6"
+   ],
+   "n_sig_delta_version": 8,
+   "n_delta_version": 31,
+   "max_abs_d_rmse_noinfo_stefan": 5.015201801200632,
+   "max_abs_d_bias_noinfo_stefan": 5.936395162060284,
+   "main6_d_rmse_stefan": -0.7555161805031005,
+   "main6_d_bias_stefan": 1.8648909923912091
+  },
+  "full": {
+   "n_conclusions": 25,
+   "sign_flips": [
+    "H3-tddlin@Lena",
+    "H3-tddlin@Canada"
+   ],
+   "sig_flips": [
+    "H3-const@Lena",
+    "H3-tddlin@Lena",
+    "bias_stefan@Canada",
+    "bias_stefan@MAIN6"
+   ],
+   "n_sig_delta_version": 6,
+   "n_delta_version": 31,
+   "max_abs_d_rmse_noinfo_stefan": 1.5931688732098763,
+   "max_abs_d_bias_noinfo_stefan": 3.8956480343575604,
+   "main6_d_rmse_stefan": 0.4915338847625499,
+   "main6_d_bias_stefan": 2.3617604015879143
+  }
+ },
+ "bias_sign": "bias = pred - obs (positive = overprediction); delta = first - second (negative = first better)",
+ "git_commit": "291e2c7",
+ "elapsed_s": 956.8,
+ "smoke": false,
+ "related": "scripts/3_deep_learning/m1_label_year_sensitivity.py (label-side subset sensitivity)"
+}

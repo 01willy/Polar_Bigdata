@@ -1,0 +1,27 @@
+{
+ "sources": "F4_direct,F4_calm_temp",
+ "nsub": 2000,
+ "nperm": 200,
+ "seed": 0,
+ "eval_all": false,
+ "di_threshold_x25": 2.3921659207588375,
+ "di_threshold_x14": 2.205992582314078,
+ "n_alaska": 13606,
+ "E_alaska": 1.616688667140627,
+ "regions": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_C",
+  "Russia_E",
+  "Svalbard",
+  "Mongolia_CAsia",
+  "Alps",
+  "Tibet",
+  "Scandinavia"
+ ],
+ "skipped": [
+  "Greenland"
+ ],
+ "elapsed_s": 120.8
+}

@@ -1,0 +1,33 @@
+{
+ "created": "2026-09-21 11:02",
+ "git_commit": "291e2c7",
+ "cpu_only": true,
+ "omp_threads": "4",
+ "catboost_threads": 4,
+ "base": "fidelity_base_v3.csv",
+ "soil": "e5_soil_tdd_v3.csv",
+ "features": "x25 SHARED_CORE",
+ "script": "scripts/2_evaluation/l2_fold_sensitivity.py",
+ "n_random": 10,
+ "methods": [
+  "stefan",
+  "stefan_ridge075",
+  "ridge",
+  "catboost_lo"
+ ],
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "big_block": 14199686,
+ "big_block_cells": 4716,
+ "n_blocks": 74,
+ "literal_shuffle_identical": "0/10",
+ "note": "무작위 배정 = 블록 순서 seed 순열 후 셀 수 최소 fold 탐욕 배정(6 fold). sklearn 1.3 GroupKFold 는 크기순 결정적 배정이라 id 순열로는 분할 불변.",
+ "elapsed_s": 80.1,
+ "exports": [
+  "/home/willy010313/Polar_Bigdata/outputs/figures/m1/l2_fold_sensitivity.png",
+  "/home/willy010313/Polar_Bigdata/outputs/figures/m1/l2_fold_sensitivity.pdf"
+ ]
+}

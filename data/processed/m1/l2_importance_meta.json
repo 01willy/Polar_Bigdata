@@ -1,0 +1,43 @@
+{
+ "created": "2026-09-21 11:01",
+ "git_commit": "291e2c7",
+ "cpu_only": true,
+ "omp_threads": "4",
+ "catboost_threads": 4,
+ "base": "fidelity_base_v3.csv",
+ "soil": "e5_soil_tdd_v3.csv",
+ "features": "x25 SHARED_CORE",
+ "script": "scripts/2_evaluation/l2_importance.py",
+ "n_rep": 10,
+ "methods_alaska": [
+  "catboost_lo",
+  "stefan_cb1"
+ ],
+ "transfer_regions": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_E"
+ ],
+ "rmse_base_alaska": {
+  "catboost_lo": 16.038445856947924,
+  "stefan_cb1": 14.293500625267564
+ },
+ "rmse_base_transfer": {
+  "Lena": 24.103325186835132,
+  "Canada": 28.51866490320412,
+  "Russia_W": 46.27760418104666,
+  "Russia_E": 30.55493490740804
+ },
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "note": "ΔRMSE = 순열 후 풀링 RMSE − 기준 풀링 RMSE(cm). fold별 독립 순열. 앵커 모델은 e5_sqrt_tdd 순열이 Stefan 앵커에도 전파. 그룹 동시 순열은 그룹 열에 같은 행 순열 적용.",
+ "elapsed_s": 49.7,
+ "exports": [
+  "/home/willy010313/Polar_Bigdata/outputs/figures/m1/l2_importance.png",
+  "/home/willy010313/Polar_Bigdata/outputs/figures/m1/l2_importance.pdf"
+ ]
+}

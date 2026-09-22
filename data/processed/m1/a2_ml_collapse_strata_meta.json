@@ -1,0 +1,30 @@
+{
+ "sources": "F4_direct,F4_calm_temp",
+ "lam": 0.25,
+ "eval_all": false,
+ "nboot": 400,
+ "di_threshold_x25": 2.3921659207588375,
+ "models": [
+  "ridge",
+  "catboost_lo",
+  "mlp"
+ ],
+ "modes": [
+  "direct",
+  "stefan+lam0.25"
+ ],
+ "mlp_source": "e1_factorial_e3 (v2) noinfo 예측 loc_id 대응",
+ "regions": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_C",
+  "Russia_E",
+  "Svalbard",
+  "Mongolia_CAsia",
+  "Alps",
+  "Tibet",
+  "Scandinavia"
+ ],
+ "elapsed_s": 14.9
+}

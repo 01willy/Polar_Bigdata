@@ -1,0 +1,241 @@
+{
+ "stage": "M1-aux label_year_sensitivity",
+ "created": "2026-09-21",
+ "base": "fidelity_base_v3.csv",
+ "soil": "e5_soil_tdd_v3.csv",
+ "sources": [
+  "F4_direct"
+ ],
+ "year_sources": [
+  "dl_dataset_cell_v2.csv",
+  "alt_calm_global_cell.csv"
+ ],
+ "join": {
+  "by_loc_id": 17467,
+  "by_coord_fallback": 0,
+  "failed": 0,
+  "coord_mismatch_gt_1e4": 0
+ },
+ "clim_period": [
+  2015,
+  2020
+ ],
+ "clim_mid": 2017.5,
+ "subset_def": {
+  "overlap": "year_max>=2015 & year_min<=2020",
+  "inside": "year_min>=2015 & year_max<=2020 (subset of overlap)",
+  "before": "year_max<2015",
+  "after": "year_min>2020 (supplementary; overlap+before+after=all)"
+ },
+ "subset_counts_all": {
+  "before": 10434,
+  "inside": 5581,
+  "overlap_only": 836,
+  "after": 616
+ },
+ "n_cells": 17467,
+ "n_eval": 17377,
+ "regions": {
+  "Alaska": 13606,
+  "Lena": 3037,
+  "Canada": 750,
+  "Russia_W": 31,
+  "Russia_E": 30,
+  "Russia_C": 7,
+  "Greenland": 3,
+  "Tibet": 1,
+  "Scandinavia": 1,
+  "Svalbard": 1
+ },
+ "nfold": 6,
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "nboot": 400,
+ "min_blocks_ci": 8,
+ "lam_ridge": 0.75,
+ "feats": "x25",
+ "catboost": {
+  "iterations": 200,
+  "learning_rate": 0.05,
+  "depth": 3,
+  "l2_leaf_reg": 3.0,
+  "thread_count": 4
+ },
+ "E_alaska_all": 1.616688667140627,
+ "coefs_fold": [
+  {
+   "train_set": "all",
+   "fold": 0,
+   "E": 1.5733794682552538,
+   "n_train": 8890,
+   "n_test": 4716,
+   "n_blocks_train": 73
+  },
+  {
+   "train_set": "all",
+   "fold": 1,
+   "E": 1.624858225419867,
+   "n_train": 11828,
+   "n_test": 1778,
+   "n_blocks_train": 61
+  },
+  {
+   "train_set": "all",
+   "fold": 2,
+   "E": 1.6269999259931562,
+   "n_train": 11828,
+   "n_test": 1778,
+   "n_blocks_train": 67
+  },
+  {
+   "train_set": "all",
+   "fold": 3,
+   "E": 1.6515893063003515,
+   "n_train": 11828,
+   "n_test": 1778,
+   "n_blocks_train": 57
+  },
+  {
+   "train_set": "all",
+   "fold": 4,
+   "E": 1.6063477761999378,
+   "n_train": 11828,
+   "n_test": 1778,
+   "n_blocks_train": 56
+  },
+  {
+   "train_set": "all",
+   "fold": 5,
+   "E": 1.620761439998167,
+   "n_train": 11828,
+   "n_test": 1778,
+   "n_blocks_train": 56
+  },
+  {
+   "train_set": "overlap",
+   "fold": 0,
+   "E": 1.5843300116029724,
+   "n_train": 4255,
+   "n_test": 4716,
+   "n_blocks_train": 52
+  },
+  {
+   "train_set": "overlap",
+   "fold": 1,
+   "E": 1.5850101787782576,
+   "n_train": 3516,
+   "n_test": 1778,
+   "n_blocks_train": 46
+  },
+  {
+   "train_set": "overlap",
+   "fold": 2,
+   "E": 1.5856030810714945,
+   "n_train": 4006,
+   "n_test": 1778,
+   "n_blocks_train": 48
+  },
+  {
+   "train_set": "overlap",
+   "fold": 3,
+   "E": 1.6045939558470603,
+   "n_train": 4480,
+   "n_test": 1778,
+   "n_blocks_train": 43
+  },
+  {
+   "train_set": "overlap",
+   "fold": 4,
+   "E": 1.5660574367300355,
+   "n_train": 4078,
+   "n_test": 1778,
+   "n_blocks_train": 39
+  },
+  {
+   "train_set": "overlap",
+   "fold": 5,
+   "E": 1.5538513942376213,
+   "n_train": 3110,
+   "n_test": 1778,
+   "n_blocks_train": 37
+  },
+  {
+   "train_set": "before",
+   "fold": 0,
+   "E": 1.566435583755905,
+   "n_train": 4516,
+   "n_test": 4716,
+   "n_blocks_train": 33
+  },
+  {
+   "train_set": "before",
+   "fold": 1,
+   "E": 1.6499321556111437,
+   "n_train": 8193,
+   "n_test": 1778,
+   "n_blocks_train": 26
+  },
+  {
+   "train_set": "before",
+   "fold": 2,
+   "E": 1.6618407086871214,
+   "n_train": 7703,
+   "n_test": 1778,
+   "n_blocks_train": 30
+  },
+  {
+   "train_set": "before",
+   "fold": 3,
+   "E": 1.7082408995165181,
+   "n_train": 7229,
+   "n_test": 1778,
+   "n_blocks_train": 27
+  },
+  {
+   "train_set": "before",
+   "fold": 4,
+   "E": 1.6399178667515446,
+   "n_train": 7631,
+   "n_test": 1778,
+   "n_blocks_train": 27
+  },
+  {
+   "train_set": "before",
+   "fold": 5,
+   "E": 1.6527997002545507,
+   "n_train": 8718,
+   "n_test": 1778,
+   "n_blocks_train": 27
+  }
+ ],
+ "trend_lit_cm_yr": 0.8,
+ "trend_bound": {
+  "Alaska": {
+   "year_gap_mean": 2.6181464059973543,
+   "year_gap_sd": 1.7187462325239642,
+   "level_offset_absorbed_cm": 2.0945171247978833,
+   "residual_noise_cm": 1.3749969860191715,
+   "rmse_stefan": 14.456724745464383,
+   "rmse_without_mismatch": 14.391187360831642,
+   "rmse_inflation_cm": 0.06553738463274073
+  },
+  "MAIN6": {
+   "year_gap_mean": 3.351380042462845,
+   "year_gap_sd": 5.611192012619883,
+   "level_offset_absorbed_cm": 2.6811040339702763,
+   "residual_noise_cm": 4.488953610095907,
+   "rmse_stefan": 23.04512634439375,
+   "rmse_without_mismatch": 22.603697567333487,
+   "rmse_inflation_cm": 0.4414287770602634
+  }
+ },
+ "aggregation": "indomain = cell-weighted pooled OOF over 6 folds; indomain_foldmean = mean of per-fold metrics (gate convention)",
+ "bias_sign": "bias = pred - obs (positive = overprediction); trend residual = obs - pred",
+ "git_commit": "291e2c7",
+ "elapsed_s": 26.7,
+ "smoke": false,
+ "plan": "docs/EXPERIMENT_LOG.md 2026-09-21 (연도별 대 다년 평균 ALT 라벨)"
+}

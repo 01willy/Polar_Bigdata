@@ -1,0 +1,61 @@
+{
+ "created": "2026-09-21 11:03",
+ "git_commit": "291e2c7",
+ "cpu_only": true,
+ "omp_threads": "4",
+ "catboost_threads": 4,
+ "base": "fidelity_base_v3.csv",
+ "soil": "e5_soil_tdd_v3.csv",
+ "features": "x25 SHARED_CORE",
+ "script": "scripts/2_evaluation/l2_residual_spatial.py",
+ "n_perm": 999,
+ "bands_km": [
+  5.0,
+  20.0,
+  50.0,
+  100.0
+ ],
+ "knn": 8,
+ "variogram_bins_km": [
+  0.0,
+  0.5,
+  1.0,
+  2.0,
+  5.0,
+  10.0,
+  20.0,
+  30.0,
+  50.0,
+  75.0,
+  100.0,
+  150.0,
+  200.0,
+  250.0,
+  300.0
+ ],
+ "sets": {
+  "Alaska_OOF": 13606,
+  "Lena": 2958,
+  "Canada": 747
+ },
+ "methods_alaska": [
+  "stefan",
+  "stefan_ridge075",
+  "catboost_lo"
+ ],
+ "methods_transfer": [
+  "stefan",
+  "stefan_cci"
+ ],
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "note": "잔차 = 예측 − 관측. 대역 가중 이진 대칭·자기 제외, kNN 행 표준화. 순열 p 단측(양의 자기상관). 변동도는 정렬 쌍 합/(2N).",
+ "elapsed_s": 153.9,
+ "exports": [
+  "/home/willy010313/Polar_Bigdata/outputs/figures/m1/l2_residual_spatial.png",
+  "/home/willy010313/Polar_Bigdata/outputs/figures/m1/l2_residual_spatial.pdf"
+ ]
+}

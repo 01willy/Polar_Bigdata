@@ -1,0 +1,58 @@
+{
+ "created": "2026-09-21 11:01",
+ "git_commit": "291e2c7",
+ "cpu_only": true,
+ "omp_threads": "4",
+ "catboost_threads": 4,
+ "base": "fidelity_base_v3.csv",
+ "soil": "e5_soil_tdd_v3.csv",
+ "features": "x25 SHARED_CORE",
+ "script": "scripts/2_evaluation/l2_stratified_error.py",
+ "n_boot": 1000,
+ "sets": {
+  "Alaska_OOF": 13606,
+  "Lena": 2958,
+  "Canada": 747,
+  "Russia_W": 28,
+  "Russia_E": 27
+ },
+ "methods_alaska": [
+  "stefan",
+  "stefan_ridge075",
+  "catboost_lo"
+ ],
+ "methods_transfer": [
+  "stefan",
+  "stefan_cci",
+  "catboost_lo"
+ ],
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "strata": {
+  "alt": "집합 내 5분위",
+  "elev_m": [
+   100,
+   300,
+   600
+  ],
+  "maat_c": [
+   -6,
+   -2
+  ],
+  "soc": "집합 내 3분위(sg_soc_0_5, SoilGrids 단위)",
+  "slope_deg": [
+   0.5,
+   2.0
+  ],
+  "lat": "2° 대역"
+ },
+ "note": "CI: 층 내 블록 재표집 1,000회, 같은 재표집으로 전 방법 채점(Δ 짝지음). 블록 8개 미만 NaN.",
+ "elapsed_s": 22.6,
+ "exports": [
+  "/home/willy010313/Polar_Bigdata/outputs/figures/m1/l2_stratified_error.png",
+  "/home/willy010313/Polar_Bigdata/outputs/figures/m1/l2_stratified_error.pdf"
+ ]
+}

@@ -1,0 +1,25 @@
+{
+ "created": "2026-09-21 11:02",
+ "git_commit": "291e2c7",
+ "cpu_only": true,
+ "omp_threads": "4",
+ "catboost_threads": 4,
+ "base": "fidelity_base_v3.csv",
+ "soil": "e5_soil_tdd_v3.csv",
+ "features": "x25 SHARED_CORE",
+ "script": "scripts/2_evaluation/l2_noise_floor.py",
+ "calm_raw": "/home/willy010313/Polar_Bigdata/data/raw/calm/PANGAEA_972777_CALM_ALT_NH.tab",
+ "calm_siteyears": 3663,
+ "calm_nonnumeric_ald": 34,
+ "calm_years": [
+  1990,
+  2024
+ ],
+ "canonical_alaska": {
+  "rmse_stefan": 14.46,
+  "rmse_best": 13.33,
+  "best_label": "Stefan+ridge λ=0.75 (지역 내 6-fold)"
+ },
+ "note": "(a) ABoVE 셀 내 점 관측 SD(n_obs≥2; 1yr 열은 n_years≤1 셀만), (b) CALM 사이트 연도 간 SD(n_years≥5), (b_detr) 사이트 내 연도 선형 추세 제거 잔차 SD, (c) SD/√n_years. Var(y)=평가 셀 관측 분산. 전이 RMSE는 알래스카 학습 정보 없음(l2_common.run_noinfo). 레나 연도 간 SD는 셀 alt_sd(연간 최대값 연도 간 SD, n_years≥2) 기반.",
+ "elapsed_s": 0.5
+}

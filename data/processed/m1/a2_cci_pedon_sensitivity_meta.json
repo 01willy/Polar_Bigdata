@@ -1,0 +1,43 @@
+{
+ "sources": "F4_direct,F4_calm_temp",
+ "radii": [
+  25.0,
+  50.0,
+  100.0
+ ],
+ "nboot": 400,
+ "audit_only": false,
+ "n_sites": 16,
+ "sites": [
+  "Samoylov (Lena Delta)",
+  "Seida",
+  "Cherskii (NESS)",
+  "Kytalyk (Chokurdakh)",
+  "Shalaurovo (Kolyma)",
+  "Spasskaya Pad (Yakutsk)",
+  "Taymyr (미확인 → CALM R6 Labaz Lake)",
+  "Zackenberg",
+  "Herschel Island",
+  "Tulemalu Lake",
+  "Richardson Mountains (중심 근사)",
+  "Ogilvie Mountains (중심 근사)",
+  "Abisko",
+  "Tarfala",
+  "Adventdalen",
+  "Ny-Ålesund (Bayelva)"
+ ],
+ "reference": "ESA CCI+ Permafrost ATBD v5.0 (2024-11-15), ground stratigraphy section (approx. 700 pedons)",
+ "regions": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_C",
+  "Russia_E",
+  "Svalbard",
+  "Mongolia_CAsia",
+  "Alps",
+  "Tibet",
+  "Scandinavia"
+ ],
+ "elapsed_s": 2.0
+}
