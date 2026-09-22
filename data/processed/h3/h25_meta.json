@@ -1,0 +1,61 @@
+{
+ "stage": "H25/H26",
+ "plan": "docs/EXPERIMENT_PLAN_LABEL_BUDGET_2026-09-22.md",
+ "targets": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_E",
+  "AL-1",
+  "AL-2",
+  "AL-3",
+  "AL-4",
+  "AL-5",
+  "AL-6",
+  "CA-1",
+  "CA-2",
+  "CA-3",
+  "LE-1",
+  "LE-2"
+ ],
+ "splits": [
+  0,
+  1,
+  2
+ ],
+ "n_grid": [
+  3,
+  5,
+  10,
+  20,
+  40,
+  80,
+  160,
+  320
+ ],
+ "reps": 20,
+ "reps_cb": 5,
+ "seeds": [
+  0,
+  1
+ ],
+ "lams": [
+  0.25,
+  0.5
+ ],
+ "alphas": [
+  1.0,
+  10.0,
+  100.0
+ ],
+ "r": 10.0,
+ "kappa": 10.0,
+ "buffer_km": 100.0,
+ "k_sub": "Alaska:6,Canada:3,Lena:2",
+ "rules": [
+  "random",
+  "kmedoid"
+ ],
+ "summarize_only": true,
+ "n_rows": 66155
+}
