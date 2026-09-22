@@ -837,6 +837,306 @@
     "outputs/figures/e1_factorial/e1_lambda_per_region_e3.png",
     "outputs/figures/e1_factorial/e1_lambda_per_region_e3.pdf"
    ]
+  },
+  {
+   "id": "h2_fig01_collapse_structure",
+   "script": "scripts/4_visualization/h2_figs.py --only fig01",
+   "intent": "전이 붕괴의 구조: 정보 없음 조건에서 지역별 Stefan(알래스카 E)·직접 ML·자체 E 오라클 RMSE, 수준 오차 대 구조 오차 분해, 지역 E와 알래스카 E의 격차. 메시지: 러시아 W·C는 수준(E) 오차, 레나·캐나다는 구조 오차가 지배.",
+   "layout": {
+    "panels": 3,
+    "arrangement": "1×3 가로막대·누적막대·점-CI",
+    "figsize_in": [
+     14.0,
+     4.8
+    ]
+   },
+   "assets": [
+    "data/processed/h2/h21_summary.csv",
+    "data/processed/m1/l2_regional_E.csv",
+    "data/processed/m1/m1_sc_summary.csv"
+   ],
+   "style": "use_polar, 검증 팔레트(#3a6ea5,#2a9d8f,#8e6bbf,#b8791f)+중립 참조 #6b7280, 참고 지역(블록<8) 알파 0.45, 해칭 병행",
+   "exports": [
+    "outputs/figures/h2/h2_fig01_collapse_structure.png",
+    "outputs/figures/h2/h2_fig01_collapse_structure.pdf"
+   ],
+   "units": "cm; E cm·(°C·day)^-1/2",
+   "generated": "2026-09-22",
+   "medium": "presentation/report wide (12–17.5 in); 논문 2단 판은 주석 9 pt 재조정 필요"
+  },
+  {
+   "id": "h2_fig04_coef_borrow",
+   "script": "scripts/4_visualization/h2_figs.py --only fig04",
+   "intent": "H21 계수 대여·H20 CCI 상대 계수: 대상별 E 추정치(최근접·커널·풀링·중첩 선택) 대 자체 E, ΔRMSE 대 알래스카 E Stefan(6지역+층화 평균, 부트스트랩 CI). 메시지: 유사도가 E를 예측하지 못해 확정 이득 없음.",
+   "layout": {
+    "panels": 2,
+    "arrangement": "1×2 점도표·포레스트",
+    "figsize_in": [
+     13.0,
+     5.0
+    ]
+   },
+   "assets": [
+    "data/processed/h2/h21_summary.csv",
+    "data/processed/h2/h21_tests.csv",
+    "data/processed/h2/h21_nested.csv"
+   ],
+   "style": "use_polar, 검증 팔레트, 마커 형태 병행(s/D/o/^/*/x)",
+   "exports": [
+    "outputs/figures/h2/h2_fig04_coef_borrow.png",
+    "outputs/figures/h2/h2_fig04_coef_borrow.pdf"
+   ],
+   "units": "cm",
+   "generated": "2026-09-22",
+   "medium": "presentation/report wide (12–17.5 in); 논문 2단 판은 주석 9 pt 재조정 필요"
+  },
+  {
+   "id": "h2_map01_new_covariates",
+   "script": "scripts/4_visualization/h2_figs.py --only map01",
+   "intent": "신규 공변량(MODIS LST n-factor·TWI·GSW 수체 점유율)의 라벨 셀 공간 분포, 알래스카·레나·캐나다. 메시지: 레나는 n-factor 0.80(지표가 기온보다 차가움)·수체 36%로 알래스카와 다른 지표 조건.",
+   "layout": {
+    "panels": 9,
+    "arrangement": "3 공변량 × 3 지역, 행별 공유 컬러바",
+    "figsize_in": [
+     13.5,
+     10.5
+    ]
+   },
+   "assets": [
+    "data/processed/covariates_ext_v1.csv",
+    "data/processed/fidelity_base_v3.csv"
+   ],
+   "style": "use_polar, n-factor=broc 1 중심 발산, TWI=davos_r, 수체=oslo_r, 위경도 포맷, rasterized 산점",
+   "exports": [
+    "outputs/figures/h2/h2_map01_new_covariates.png",
+    "outputs/figures/h2/h2_map01_new_covariates.pdf"
+   ],
+   "units": "무차원; %",
+   "generated": "2026-09-22",
+   "medium": "presentation/report wide (12–17.5 in); 논문 2단 판은 주석 9 pt 재조정 필요"
+  },
+  {
+   "id": "h2_fig02_info_axis",
+   "script": "scripts/4_visualization/h2_figs.py --only fig02",
+   "intent": "H18·H19 정보 축 포레스트: (a) LST 강제력 물리식 사다리 ΔRMSE 대 Stefan(기온), (b) 공변량만 입력 집합 Δ 대 x25, (c) 정보 없음 입력 집합 Δ 대 x25. 메시지: 관측 강제력·신규 공변량 어느 것도 확정 이득 없음, 전부 추가는 유의 악화(+0.64).",
+   "layout": {
+    "panels": 3,
+    "arrangement": "1×3 포레스트(행=수준, 조건별 평균 CI + 지역 점)",
+    "figsize_in": [
+     15.5,
+     6.0
+    ]
+   },
+   "assets": [
+    "data/processed/h2/h_tests_all.csv"
+   ],
+   "style": "use_polar, 공변량만=파랑 원·정보 없음=청록 사각, 지역 점 빈 마커, * = CI 0 제외",
+   "exports": [
+    "outputs/figures/h2/h2_fig02_info_axis.png",
+    "outputs/figures/h2/h2_fig02_info_axis.pdf"
+   ],
+   "units": "cm",
+   "generated": "2026-09-22",
+   "medium": "presentation/report wide (12–17.5 in); 논문 2단 판은 주석 9 pt 재조정 필요"
+  },
+  {
+   "id": "h2_fig03_blockE_explained",
+   "script": "scripts/4_visualization/h2_figs.py --only fig03",
+   "intent": "H19a 블록 Stefan 계수 E 설명력: 알래스카 LOBO R², 지역 간 LORO R²(전부 음수), 계수 지도 앵커의 셀 RMSE 변화. 메시지: 신규 공변량은 알래스카 내 설명력을 소폭 올리나 지역 간 E 를 예측하지 못한다.",
+   "layout": {
+    "panels": 3,
+    "arrangement": "막대 2 + 선 1",
+    "figsize_in": [
+     14.0,
+     4.6
+    ]
+   },
+   "assets": [
+    "data/processed/h2/h19_blockE.csv",
+    "data/processed/h2/h19_blockE_cells.csv"
+   ],
+   "style": "use_polar, ridge=파랑·CatBoost=청록, -1 미만은 수치 표기",
+   "exports": [
+    "outputs/figures/h2/h2_fig03_blockE_explained.png",
+    "outputs/figures/h2/h2_fig03_blockE_explained.pdf"
+   ],
+   "units": "R² 무차원; cm",
+   "generated": "2026-09-22",
+   "medium": "presentation/report wide (12–17.5 in); 논문 2단 판은 주석 9 pt 재조정 필요"
+  },
+  {
+   "id": "h2_map02_error_change",
+   "script": "scripts/4_visualization/h2_figs.py --only map02",
+   "intent": "정보 추가(x25+LST, x25+A)에 따른 셀별 |오차| 변화 지도(정보 없음, 직접 CatBoost), 레나·캐나다. 메시지: 개선·악화가 블록 단위로 섞여 지역 평균 이득이 상쇄된다.",
+   "layout": {
+    "panels": 4,
+    "arrangement": "2 수준 × 2 지역, 지역별 고정 색 범위",
+    "figsize_in": [
+     12.5,
+     9.0
+    ]
+   },
+   "assets": [
+    "data/processed/m1/h1819_shard0_preds.npz",
+    "data/processed/m1/h1819_shard1_preds.npz"
+   ],
+   "style": "use_polar, broc 0 중심 발산, rasterized 산점, 위경도 포맷",
+   "exports": [
+    "outputs/figures/h2/h2_map02_error_change.png",
+    "outputs/figures/h2/h2_map02_error_change.pdf"
+   ],
+   "units": "cm",
+   "generated": "2026-09-22",
+   "medium": "presentation/report wide (12–17.5 in); 논문 2단 판은 주석 9 pt 재조정 필요"
+  },
+  {
+   "id": "h2_map03_obs_design_map",
+   "script": "scripts/4_visualization/h2_figs.py --only map03",
+   "intent": "H24 관측 설계 지도: 선택 규칙(무작위·블록 순환·k-중심·좌표 층화)별 n=20 라벨 위치, 알래스카·레나 A/B 블록. 메시지: 블록 순환은 공간 대표성, k-중심은 공변량 대표성.",
+   "layout": {
+    "panels": 8,
+    "arrangement": "2 지역 × 4 규칙",
+    "figsize_in": [
+     16.0,
+     7.6
+    ]
+   },
+   "assets": [
+    "data/processed/fidelity_base_v3.csv"
+   ],
+   "style": "use_polar, A/B 셀 회청색 2단, 선택 셀 황토 별",
+   "exports": [
+    "outputs/figures/h2/h2_map03_obs_design_map.png",
+    "outputs/figures/h2/h2_map03_obs_design_map.pdf"
+   ],
+   "units": "deg",
+   "generated": "2026-09-22",
+   "medium": "presentation/report wide (12–17.5 in); 논문 2단 판은 주석 9 pt 재조정 필요"
+  },
+  {
+   "id": "h2_fig05_objective",
+   "script": "scripts/4_visualization/h2_figs.py --only fig05",
+   "intent": "H22 학습 목표 함수(ERM·IRM·V-REx·GroupDRO·DANN·지역 임베딩·안정 특징) ΔRMSE 대 Stefan(잔차 λ=.25, 직접)과 대 ERM. 메시지: 불변 학습은 ERM 대비 소폭 개선(V-REx −0.31)해도 물리식을 넘지 못한다.",
+   "layout": {
+    "panels": 3,
+    "arrangement": "1×3 포레스트",
+    "figsize_in": [
+     15.5,
+     5.6
+    ]
+   },
+   "assets": [
+    "data/processed/h2/h_tests_all.csv",
+    "data/processed/h2/h22_rows.csv"
+   ],
+   "style": "use_polar, 조건별 마커·색, 지역 점 빈 마커",
+   "exports": [
+    "outputs/figures/h2/h2_fig05_objective.png",
+    "outputs/figures/h2/h2_fig05_objective.pdf"
+   ],
+   "units": "cm",
+   "generated": "2026-09-22",
+   "medium": "presentation/report wide (12–17.5 in); 논문 2단 판은 주석 9 pt 재조정 필요"
+  },
+  {
+   "id": "h2_fig07_obs_design_curves",
+   "script": "scripts/4_visualization/h2_figs.py --only fig07",
+   "intent": "H24 관측 설계 곡선: 선택 규칙 6종 × n, 추정량(E 수축·앵커+잔차), 4지역 실전 + 알래스카 샌드박스(기존 CALM 사이트 규칙 포함). 메시지: 공변량 대표점·좌표 층화는 n≤5에서 무작위보다 낮고, n≥10에서 규칙 차이가 사라진다.",
+   "layout": {
+    "panels": 10,
+    "arrangement": "2 추정량 × 5 대상, 로그 x축(패널별 n 범위)",
+    "figsize_in": [
+     17.5,
+     7.6
+    ]
+   },
+   "assets": [
+    "data/processed/h2/h24_curve.csv",
+    "data/processed/h2/h24_tests.csv"
+   ],
+   "style": "use_polar, 규칙별 색+마커, 물리식 파선",
+   "exports": [
+    "outputs/figures/h2/h2_fig07_obs_design_curves.png",
+    "outputs/figures/h2/h2_fig07_obs_design_curves.pdf"
+   ],
+   "units": "cm",
+   "generated": "2026-09-22",
+   "medium": "presentation/report wide (12–17.5 in); 논문 2단 판은 주석 9 pt 재조정 필요"
+  },
+  {
+   "id": "h2_fig07b_obs_design_delta",
+   "script": "scripts/4_visualization/h2_figs.py --only fig07",
+   "intent": "H24 요약: Δ(규칙 − 무작위) n∈{3,10,20}, 4지역 평균(채움)·지역 점(빈 마커), 추정량 2종. 메시지: k-중심 n=3 −0.90, 블록 순환은 악화.",
+   "layout": {
+    "panels": 2,
+    "arrangement": "1×2 점도표(행=규칙, n 별 오프셋·알파)",
+    "figsize_in": [
+     13.0,
+     5.0
+    ]
+   },
+   "assets": [
+    "data/processed/h2/h24_tests.csv"
+   ],
+   "style": "use_polar, 규칙별 색+마커",
+   "exports": [
+    "outputs/figures/h2/h2_fig07b_obs_design_delta.png",
+    "outputs/figures/h2/h2_fig07b_obs_design_delta.pdf"
+   ],
+   "units": "cm",
+   "generated": "2026-09-22",
+   "medium": "presentation/report wide (12–17.5 in); 논문 2단 판은 주석 9 pt 재조정 필요"
+  },
+  {
+   "id": "h2_fig08_summary_forest",
+   "script": "scripts/4_visualization/h2_figs.py --only fig08",
+   "intent": "확인적 가설 H18–H24 종합 포레스트(지역 평균 Δ·층화 CI·수치). 메시지: 라벨 없는 전이에서 물리식을 넘은 요인 없음, 라벨 3개의 k-중심 선택만 지역별 유의 이득.",
+   "layout": {
+    "panels": 1,
+    "arrangement": "포레스트(행=가설, 조건별 마커)",
+    "figsize_in": [
+     12.0,
+     7.5
+    ]
+   },
+   "assets": [
+    "data/processed/h2/h_tests_all.csv",
+    "data/processed/h2/h23_tests.csv",
+    "data/processed/h2/h24_tests.csv"
+   ],
+   "style": "use_polar, 오른쪽 수치 주석",
+   "exports": [
+    "outputs/figures/h2/h2_fig08_summary_forest.png",
+    "outputs/figures/h2/h2_fig08_summary_forest.pdf"
+   ],
+   "units": "cm",
+   "generated": "2026-09-22",
+   "medium": "presentation/report wide (12–17.5 in); 논문 2단 판은 주석 9 pt 재조정 필요"
+  },
+  {
+   "id": "h2_fig06_maml_sparse",
+   "script": "scripts/4_visualization/h2_figs.py --only fig06",
+   "intent": "H23 희소 라벨 적응: MAML·ERM 미세조정·E 수축·E 수축+MAML 잔차의 RMSE 대 n(3·5·10), 4지역 + Δ(방법 − E 수축) 평균. 메시지: 메타학습 잔차 적응은 계수 수축 적합을 넘지 못하며 수준 오차 지역(러시아 W)에서 특히 열세.",
+   "layout": {
+    "panels": 5,
+    "arrangement": "4 지역 곡선 + 1 요약",
+    "figsize_in": [
+     17.0,
+     4.4
+    ]
+   },
+   "assets": [
+    "data/processed/h2/h23_summary.csv",
+    "data/processed/h2/h23_tests.csv"
+   ],
+   "style": "use_polar, 방법별 색+마커, 물리식 파선, E 재적합은 S-F 그림 참조(제외)",
+   "exports": [
+    "outputs/figures/h2/h2_fig06_maml_sparse.png",
+    "outputs/figures/h2/h2_fig06_maml_sparse.pdf"
+   ],
+   "units": "cm",
+   "generated": "2026-09-22",
+   "medium": "presentation/report wide (12–17.5 in); 논문 2단 판은 주석 9 pt 재조정 필요"
   }
  ],
  "m1/m1_sc_main_effects": {

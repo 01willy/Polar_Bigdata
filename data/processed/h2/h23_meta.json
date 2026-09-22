@@ -1,0 +1,54 @@
+{
+ "stage": "H23",
+ "design": "docs/EXPERIMENT_DESIGN_H18-H24_2026-09-22.md",
+ "E_AK": 1.616688667140627,
+ "targets": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_E"
+ ],
+ "n_grid": [
+  3,
+  5,
+  10
+ ],
+ "reps": 10,
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "splits": [
+  0,
+  1,
+  2
+ ],
+ "episodes": 3000,
+ "inner_steps": 5,
+ "adapt_steps": 10,
+ "inner_lr": 0.01,
+ "kappa": 10.0,
+ "lams": [
+  0.25,
+  0.5,
+  1.0
+ ],
+ "gpu": "4",
+ "meta": {
+  "Lena|0|train_s": 229.3,
+  "Lena|1|train_s": 237.8,
+  "Lena|2|train_s": 270.9,
+  "Canada|0|train_s": 274.9,
+  "Canada|1|train_s": 299.0,
+  "Canada|2|train_s": 305.9,
+  "Russia_W|0|train_s": 322.0,
+  "Russia_W|1|train_s": 314.9,
+  "Russia_W|2|train_s": 328.9,
+  "Russia_E|0|train_s": 326.0,
+  "Russia_E|1|train_s": 323.5,
+  "Russia_E|2|train_s": 328.3
+ },
+ "git_commit": "8385a1c",
+ "elapsed_s": 3735.4
+}

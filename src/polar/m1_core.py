@@ -26,9 +26,10 @@ from polar.physics import physics_ensemble
 INPUT_SETS = {"x25": list(SHARED_CORE), "x14": list(TERRAIN + CLIMATE), "x34": list(COVARIATE_CORE),
               "x17": list(CLIMATE + SOIL)}
 ANCHORS_ALL = ["none", "stefan", "stefan_med", "stefan_k2", "cci_cal", "cci_raw", "stefan_cci", "stefan_cci_cal",
-               "stefan_soil", "stefan_soil_cci", "ku_cal", "stefan_ku", "stefan_ku_cci", "emap_ridge", "emap_cb"]
+               "stefan_soil", "stefan_soil_cci", "ku_cal", "stefan_ku", "stefan_ku_cci", "emap_ridge", "emap_cb",
+               "stefan_lst", "stefan_lst_k2", "stefan_lst_cci"]                       # H18(--ext 필요)
 PSEUDOS_ALL = ["none", "stefan", "stefan_k2", "stefan_soil", "ku_cal", "ku_k2", "edaphic_k2", "tddlin",
-               "const", "const_t", "shuffle", "cci"]
+               "const", "const_t", "shuffle", "cci", "stefan_lst"]
 MODELS_ALL = ["ridge", "catboost_lo", "catboost", "mlp", "ftt", "tabm", "realmlp", "cfm", "ddpm", "nflow"]
 NAN_NATIVE = {"catboost_lo", "catboost"}
 LAM_GRID = [0.0, 0.25, 0.5, 0.75, 1.0]
@@ -36,9 +37,33 @@ EMAP_FEATS = list(SOIL + CLIMATE)      # 물리 계수 지도 입력(토양 9 + 
 
 
 # ---------------------------------------------------------------- 자료
-def load_base(proc, base="fidelity_base_v3.csv", soil="e5_soil_tdd_v3.csv", sources=("F4_direct",)):
-    """fidelity_base + 토양 도일 병합, 매크로 지역, Ku 원식(p4, 라벨 미사용) 부착. source_id 필터."""
+EXT_GROUPS = {}            # register_ext() 가 채움: 군 이름 → 열 목록
+EXT_REQUIRED = []          # 평가 마스크에 요구할 확장 열(하네스 --eval-require)
+
+
+def register_ext(meta: dict):
+    """covariates_ext_v1_meta.json 의 군 정의로 입력 집합을 등록(H18·H19 설계 §1.2·§2.3)."""
+    g = {k: list(v) for k, v in meta["groups"].items() if v}
+    EXT_GROUPS.clear(); EXT_GROUPS.update(g)
+    A = sum([g.get(k, []) for k in ("T", "W", "V", "H")], [])
+    x25, x14 = list(SHARED_CORE), list(TERRAIN + CLIMATE)
+    INPUT_SETS.update({"x25_lst": x25 + g.get("LST", []), "x25_A": x25 + A, "x14_A": x14 + A, "x25_A_lst": x25 + A + g.get("LST", []),
+                       "x16": [c for c in x25 if c not in SOIL]})
+    for k in ("T", "W", "V", "H"):
+        if k in g:
+            INPUT_SETS[f"x25_{k}"] = x25 + g[k]
+    return INPUT_SETS
+
+
+def load_base(proc, base="fidelity_base_v3.csv", soil="e5_soil_tdd_v3.csv", sources=("F4_direct",), ext=None):
+    """fidelity_base + 토양 도일 병합, 매크로 지역, Ku 원식(p4, 라벨 미사용) 부착. source_id 필터.
+    ext: 확장 공변량 CSV 파일명(data/processed/, 키 loc_id) — 있으면 병합하고 메타(JSON)로 입력 집합 등록."""
     df = add_group_keys(pd.read_csv(proc / base, low_memory=False))
+    if ext:
+        import json
+        ex = pd.read_csv(proc / ext).drop(columns=["lat", "lon"], errors="ignore")
+        df = df.merge(ex, on="loc_id", how="left")
+        register_ext(json.loads((proc / (str(ext).replace(".csv", "_meta.json"))).read_text()))
     sd = pd.read_csv(proc / soil)
     s1 = sd[sd.loc_id >= 0][["loc_id", "e5_sqrt_tdd_soil", "e5_tdd_soil"]]
     df = df.merge(s1, on="loc_id", how="left")
@@ -59,9 +84,13 @@ def load_base(proc, base="fidelity_base_v3.csv", soil="e5_soil_tdd_v3.csv", sour
     return df
 
 
-def eval_mask(d: pd.DataFrame) -> np.ndarray:
-    """평가 셀 = y 유효 ∩ CCI 유효 ∩ 토양 도일 유효 (모든 방법 동일 셀)."""
-    return (d[TARGET].notna() & d.cci_alt.notna() & d.e5_sqrt_tdd_soil.notna()).values
+def eval_mask(d: pd.DataFrame, require=None) -> np.ndarray:
+    """평가 셀 = y 유효 ∩ CCI 유효 ∩ 토양 도일 유효 (모든 방법 동일 셀). require: 추가로 유효해야 하는 열(EXT_REQUIRED 기본)."""
+    m = (d[TARGET].notna() & d.cci_alt.notna() & d.e5_sqrt_tdd_soil.notna()).values
+    for c in (EXT_REQUIRED if require is None else require):
+        if c in d:
+            m &= np.isfinite(d[c].values.astype(float))
+    return m
 
 
 # ---------------------------------------------------------------- 분할
@@ -125,6 +154,9 @@ def fit_coefs(train: pd.DataFrame, emap: bool = False) -> dict:
              E_soil=_ls_scale(ss, y), c_ku=_ls_scale(p4, y), c_ed=_ls_scale(p2, y),
              ymean=float(np.nanmean(y)), n_train_real=int(np.isfinite(y).sum()))
     k["st_a"], k["st_E"] = _ls_affine(s, y)
+    if "lst_sqrt_tdd" in train:                              # H18: 관측 지표 강제력 Stefan 계수(알래스카 학습 실측)
+        sl = train["lst_sqrt_tdd"].values.astype(float)
+        k["E_lst"] = _ls_scale(sl, y); k["lst_a"], k["lst_E"] = _ls_affine(sl, y)
     k["cci_a"], k["cci_b"] = _ls_affine(c, y)
     k["tdd_a"], k["tdd_b"] = _ls_affine(t, y)
     k["ku_a"], k["ku_b"] = _ls_affine(p4, y)
@@ -196,6 +228,11 @@ def anchor_pred(kind: str, d: pd.DataFrame, k: dict):
         "stefan_soil": st_soil, "stefan_soil_cci": 0.5 * (st_soil + c),
         "ku_cal": ku, "stefan_ku": 0.5 * (st + ku), "stefan_ku_cci": (st + ku + c) / 3.0,
     }
+    if kind in ("stefan_lst", "stefan_lst_k2", "stefan_lst_cci"):
+        sl = d["lst_sqrt_tdd"].values.astype(float)
+        p = k["E_lst"] * sl if kind != "stefan_lst_k2" else k["lst_a"] + k["lst_E"] * sl
+        p = np.where(np.isfinite(p), p, st)                  # LST 결측 셀은 대기 도일 Stefan 대체(평가에서는 마스크로 제외)
+        return 0.5 * (p + c) if kind == "stefan_lst_cci" else p
     if kind in table:
         return table[kind]
     if kind in ("emap_ridge", "emap_cb"):
@@ -210,6 +247,9 @@ def pseudo_label(kind: str, d: pd.DataFrame, k: dict, rng: np.random.RandomState
         return st
     if kind == "stefan_k2":
         return k["st_a"] + k["st_E"] * s
+    if kind == "stefan_lst":
+        p = k["E_lst"] * d["lst_sqrt_tdd"].values.astype(float)
+        return np.where(np.isfinite(p), p, st)
     if kind == "stefan_soil":
         return k["E_soil"] * d["e5_sqrt_tdd_soil"].values.astype(float)
     if kind == "ku_cal":

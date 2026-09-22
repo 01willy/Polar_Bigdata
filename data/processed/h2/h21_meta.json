@@ -1,0 +1,129 @@
+{
+ "stage": "H21/H20",
+ "design": "docs/EXPERIMENT_DESIGN_H18-H24_2026-09-22.md",
+ "E_AK": 1.6166886671406264,
+ "C_SCALE": 1.0865550361996714,
+ "kappa_small": 10.0,
+ "w_grid": [
+  0.25,
+  0.5,
+  0.75,
+  1.0
+ ],
+ "sims": [
+  "geo",
+  "cov",
+  "phys"
+ ],
+ "configs": [
+  "E_AK",
+  "pooled_cell",
+  "pooled_region",
+  "nearest_geo_w0.25",
+  "nearest_geo_w0.5",
+  "nearest_geo_w0.75",
+  "nearest_geo_w1",
+  "kernel_geo_w0.25",
+  "kernel_geo_w0.5",
+  "kernel_geo_w0.75",
+  "kernel_geo_w1",
+  "nearest_cov_w0.25",
+  "nearest_cov_w0.5",
+  "nearest_cov_w0.75",
+  "nearest_cov_w1",
+  "kernel_cov_w0.25",
+  "kernel_cov_w0.5",
+  "kernel_cov_w0.75",
+  "kernel_cov_w1",
+  "nearest_phys_w0.25",
+  "nearest_phys_w0.5",
+  "nearest_phys_w0.75",
+  "nearest_phys_w1",
+  "kernel_phys_w0.25",
+  "kernel_phys_w0.5",
+  "kernel_phys_w0.75",
+  "kernel_phys_w1"
+ ],
+ "nboot": 1000,
+ "regions": {
+  "Alaska": {
+   "region": "Alaska",
+   "n": 13606,
+   "n_blocks": 74,
+   "E_ls": 1.6166886671406264,
+   "E_used": 1.6166886671406264,
+   "shrunk": false,
+   "lat": 67.57780936735146,
+   "lon": -155.98525476313895,
+   "E_soil": 1.5440268193439508
+  },
+  "Lena": {
+   "region": "Lena",
+   "n": 3037,
+   "n_blocks": 20,
+   "E_ls": 1.4339838226739525,
+   "E_used": 1.4339838226739525,
+   "shrunk": false,
+   "lat": 72.13450576226539,
+   "lon": 127.8071431675996,
+   "E_soil": 1.4060214315013984
+  },
+  "Canada": {
+   "region": "Canada",
+   "n": 750,
+   "n_blocks": 39,
+   "E_ls": 1.597397653108288,
+   "E_used": 1.597397653108288,
+   "shrunk": false,
+   "lat": 65.17080750139516,
+   "lon": -127.30083010723372,
+   "E_soil": 1.6157939380664903
+  },
+  "Russia_W": {
+   "region": "Russia_W",
+   "n": 31,
+   "n_blocks": 21,
+   "E_ls": 2.6441227216083845,
+   "E_used": 2.6441227216083845,
+   "shrunk": false,
+   "lat": 68.77742258064515,
+   "lon": 69.24612903225807,
+   "E_soil": 2.6475076969865654
+  },
+  "Russia_C": {
+   "region": "Russia_C",
+   "n": 7,
+   "n_blocks": 6,
+   "E_ls": 2.283141376200387,
+   "E_used": 1.891110370871116,
+   "shrunk": true,
+   "lat": 65.21372857142858,
+   "lon": 117.50132857142857,
+   "E_soil": 2.440400707906948
+  },
+  "Russia_E": {
+   "region": "Russia_E",
+   "n": 30,
+   "n_blocks": 21,
+   "E_ls": 1.887204956079742,
+   "E_used": 1.887204956079742,
+   "shrunk": false,
+   "lat": 67.86638666666667,
+   "lon": 160.33066,
+   "E_soil": 1.8137008635055007
+  },
+  "Greenland": {
+   "region": "Greenland",
+   "n": 3,
+   "n_blocks": 2,
+   "E_ls": 3.885870160242426,
+   "E_used": 2.140345934779503,
+   "shrunk": true,
+   "lat": 72.72966666666667,
+   "lon": -31.539033333333336,
+   "E_soil": 2.5690053997104374
+  }
+ },
+ "git_commit": "8385a1c",
+ "elapsed_s": 3.8
+}

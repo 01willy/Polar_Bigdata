@@ -1,0 +1,173 @@
+{
+ "stage": "H24",
+ "design": "docs/EXPERIMENT_DESIGN_H18-H24_2026-09-22.md",
+ "E_AK": 1.616688667140627,
+ "E0_sandbox": 1.9943492856967027,
+ "E_reg": {
+  "Lena": 1.4339838226739525,
+  "Canada": 1.597397653108288,
+  "Russia_W": 2.6441227216083845,
+  "Russia_C": 2.0522801480634487,
+  "Russia_E": 1.887204956079742,
+  "Greenland": 2.3511064126463994
+ },
+ "kappa": 10.0,
+ "strategies": [
+  "random",
+  "block_rr",
+  "kmedoid",
+  "farthest",
+  "stefan_strat",
+  "geo_strat",
+  "calm_sites"
+ ],
+ "n_grid": [
+  3,
+  5,
+  10,
+  20,
+  40,
+  80
+ ],
+ "n_grid_ak": [
+  3,
+  5,
+  10,
+  20,
+  50,
+  100,
+  200
+ ],
+ "reps": 20,
+ "reps_cb": 10,
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "lam": 0.25,
+ "tasks": [
+  {
+   "target": "Lena",
+   "split": 2,
+   "n_A": 1293,
+   "n_eval": 1687,
+   "n_fit": 2163,
+   "elapsed_s": 901.6
+  },
+  {
+   "target": "Canada",
+   "split": 0,
+   "n_A": 375,
+   "n_eval": 374,
+   "n_fit": 2163,
+   "elapsed_s": 940.7
+  },
+  {
+   "target": "Lena",
+   "split": 0,
+   "n_A": 1519,
+   "n_eval": 1496,
+   "n_fit": 2163,
+   "elapsed_s": 953.6
+  },
+  {
+   "target": "Lena",
+   "split": 1,
+   "n_A": 1505,
+   "n_eval": 1478,
+   "n_fit": 2163,
+   "elapsed_s": 954.1
+  },
+  {
+   "target": "Russia_W",
+   "split": 1,
+   "n_A": 16,
+   "n_eval": 12,
+   "n_fit": 1083,
+   "elapsed_s": 465.9
+  },
+  {
+   "target": "Russia_W",
+   "split": 0,
+   "n_A": 16,
+   "n_eval": 12,
+   "n_fit": 1083,
+   "elapsed_s": 466.9
+  },
+  {
+   "target": "Canada",
+   "split": 1,
+   "n_A": 355,
+   "n_eval": 393,
+   "n_fit": 2163,
+   "elapsed_s": 900.5
+  },
+  {
+   "target": "Canada",
+   "split": 2,
+   "n_A": 363,
+   "n_eval": 385,
+   "n_fit": 2163,
+   "elapsed_s": 957.3
+  },
+  {
+   "target": "Russia_E",
+   "split": 0,
+   "n_A": 15,
+   "n_eval": 12,
+   "n_fit": 1083,
+   "elapsed_s": 482.5
+  },
+  {
+   "target": "Russia_W",
+   "split": 2,
+   "n_A": 14,
+   "n_eval": 17,
+   "n_fit": 1083,
+   "elapsed_s": 483.3
+  },
+  {
+   "target": "Russia_E",
+   "split": 1,
+   "n_A": 15,
+   "n_eval": 14,
+   "n_fit": 1083,
+   "elapsed_s": 465.4
+  },
+  {
+   "target": "Russia_E",
+   "split": 2,
+   "n_A": 17,
+   "n_eval": 11,
+   "n_fit": 1083,
+   "elapsed_s": 506.8
+  },
+  {
+   "target": "Alaska",
+   "split": 1,
+   "n_A": 7436,
+   "n_eval": 6170,
+   "n_fit": 2763,
+   "elapsed_s": 874.7
+  },
+  {
+   "target": "Alaska",
+   "split": 0,
+   "n_A": 6803,
+   "n_eval": 6803,
+   "n_fit": 2763,
+   "elapsed_s": 884.0
+  },
+  {
+   "target": "Alaska",
+   "split": 2,
+   "n_A": 6821,
+   "n_eval": 6785,
+   "n_fit": 2643,
+   "elapsed_s": 801.7
+  }
+ ],
+ "git_commit": "8385a1c",
+ "elapsed_s": 3078.4
+}

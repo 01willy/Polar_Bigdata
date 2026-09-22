@@ -72,6 +72,9 @@ ap.add_argument("--tag", default="m1")
 ap.add_argument("--exclude-models", default="", help="모델 축에서 제외(쉼표)")
 ap.add_argument("--only-models", default="", help="모델 축에서 이 모델만(쉼표)")
 ap.add_argument("--eval-all", action="store_true", help="평가 셀 마스크를 y 유효만으로(CCI·토양 도일 결측 셀 포함). 옛 S3 규약 재현용")
+ap.add_argument("--ext", default="", help="확장 공변량 CSV(data/processed/, 키 loc_id; H18·H19). 메타 JSON 으로 입력 집합 x25_lst/x25_A/… 등록")
+ap.add_argument("--eval-require", default="", help="평가 마스크에 유효를 요구할 확장 군(쉼표: LST,T,W,V,H). 모든 수준을 같은 셀로 채점")
+ap.add_argument("--xsets", default="", help="--axis ext 에서 쓸 입력 집합(쉼표). 기본 = 전 확장 집합")
 ap.add_argument("--smoke", action="store_true")
 args = ap.parse_args()
 
@@ -124,6 +127,18 @@ def build_configs(axis: str):
     elif axis == "xset":
         for x in ["x25", "x14", "x34"]:
             cs.append(cfg(xset=x)); cs.append(cfg(xset=x, anchor="none"))
+    elif axis == "ext":                                        # H18·H19: 입력 집합 축 + LST 앵커·유사라벨 수준(설계 §1.2·§2.3)
+        xs = args.xsets.split(",") if args.xsets else ["x25", "x25_lst", "x25_T", "x25_W", "x25_V", "x25_H", "x25_A", "x14_A", "x16", "x25_A_lst"]
+        for x in xs:
+            if x not in INPUT_SETS:
+                continue
+            cs.append(cfg(xset=x, anchor="none", pseudo="stefan"))     # 공변량만 레시피(직접, r=10)
+            cs.append(cfg(xset=x, anchor="none"))                      # 정보 없음 직접
+            cs.append(cfg(xset=x, anchor="stefan"))                    # Stefan 잔차 λ 스윕
+        if "lst_sqrt_tdd" in df.columns:
+            cs += [cfg(anchor="stefan_lst"), cfg(anchor="stefan_lst_k2"), cfg(anchor="stefan_lst_cci"), cfg(anchor="stefan_soil"),
+                   cfg(anchor="none", pseudo="stefan_lst"), cfg(anchor="stefan_lst", pseudo="stefan_lst"),
+                   cfg(xset="x25_lst", anchor="stefan_lst", pseudo="stefan_lst"), cfg(xset="x25_A_lst", anchor="stefan_lst", pseudo="stefan_lst")]
     elif axis == "iw":
         for m in ["catboost_lo", "mlp"]:
             for w in [0, 1]:
@@ -133,6 +148,11 @@ def build_configs(axis: str):
     return cs
 
 
+df = load_base(PROC, base=args.base, soil=args.soil, sources=tuple(args.sources.split(",")), ext=args.ext or None)
+if args.eval_require:
+    from polar import m1_core as _mc
+    _mc.EXT_REQUIRED[:] = sum([_mc.EXT_GROUPS.get(g, []) for g in args.eval_require.split(",")], [])
+    print(f"[mask] 확장 열 요구 {len(_mc.EXT_REQUIRED)}개: {args.eval_require}", flush=True)
 if args.configs:
     CONFIGS = [cfg(**c) for c in json.loads(Path(args.configs).read_text())]
 else:
@@ -150,8 +170,7 @@ CONFIGS = [c for i, c in enumerate(uniq) if i % args.nshard == args.shard]
 if args.smoke:
     CONFIGS = CONFIGS[:3]
 
-# ---------------------------------------------------------------- 자료
-df = load_base(PROC, base=args.base, soil=args.soil, sources=tuple(args.sources.split(",")))
+# ---------------------------------------------------------------- 자료 (df 는 위에서 적재)
 need_emap = any(c["anchor"].startswith("emap") for c in CONFIGS)
 print(f"[data] {args.base} · {len(df):,}셀 · 지역 {df.macro.nunique()} · GPU {GPU} · 구성 {len(CONFIGS)} · 조건 {CONDS} · 분할 {SPLITS}", flush=True)
 
@@ -309,7 +328,8 @@ for k, v in COEFS.items():
         coef_out[k]["emap_n_blocks"] = v["emap"]["n_blocks"]; coef_out[k]["emap_E_sd"] = v["emap"]["E_blocks_sd"]
 (OUT / f"{tag}_shard{SH}_meta.json").write_text(json.dumps(dict(
     stage="M1", tag=args.tag, shard=args.shard, nshard=args.nshard, base=args.base, soil=args.soil, sources=args.sources,
-    targets=TARGETS, conds=CONDS, splits=SPLITS, seeds=SEEDS, r=R, epochs=args.epochs, axis=args.axis,
+    targets=TARGETS, conds=CONDS, splits=SPLITS, seeds=SEEDS, r=R, epochs=args.epochs, axis=args.axis, ext=args.ext, eval_require=args.eval_require,
+    input_sets={k: len(v) for k, v in INPUT_SETS.items()},
     configs=CONFIGS, lam_grid=LAM_GRID, n_fit=n_fit, coefs=coef_out, git_commit=commit, gpu=GPU,
     n_cells=int(len(df)), regions={r: int(n) for r, n in df.macro.value_counts().items()},
     plan="docs/EXPERIMENT_PLAN_MASTER_2026-09-16.md", elapsed_s=round(time.time() - t0, 1)), ensure_ascii=False, indent=1))

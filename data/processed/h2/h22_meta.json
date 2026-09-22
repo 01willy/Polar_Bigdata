@@ -1,0 +1,374 @@
+{
+ "stage": "H22",
+ "design": "docs/EXPERIMENT_DESIGN_H18-H24_2026-09-22.md",
+ "E_AK": 1.616688667140627,
+ "targets": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_E",
+  "Russia_C",
+  "Greenland"
+ ],
+ "methods": [
+  "erm",
+  "irm",
+  "vrex",
+  "groupdro",
+  "dann",
+  "regemb",
+  "stable"
+ ],
+ "ytypes": [
+  "resid",
+  "direct"
+ ],
+ "hp": {
+  "irm": [
+   1.0,
+   10.0,
+   100.0
+  ],
+  "vrex": [
+   1.0,
+   10.0,
+   100.0
+  ],
+  "dann": [
+   0.1,
+   1.0
+  ],
+  "erm": [
+   0.0
+  ],
+  "groupdro": [
+   0.01
+  ],
+  "regemb": [
+   0.0
+  ]
+ },
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "splits": [
+  0,
+  1,
+  2
+ ],
+ "epochs": 100,
+ "be": 512,
+ "gpu": "5",
+ "meta": {
+  "noinfo|Lena|0|resid|irm|lodo": {
+   "1.0": 35.14833454266557,
+   "10.0": 35.14833454266557,
+   "100.0": 35.14833454266557
+  },
+  "noinfo|Lena|0|resid|vrex|lodo": {
+   "1.0": 34.749472872439235,
+   "10.0": 34.749472872439235,
+   "100.0": 34.749472872439235
+  },
+  "covonly|Lena|0|resid|dann|lodo": {
+   "0.1": 34.288164882258506,
+   "1.0": 34.28087996668557
+  },
+  "covonly|Lena|1|resid|dann|lodo": {
+   "0.1": 34.288164882258506,
+   "1.0": 34.28087996668557
+  },
+  "covonly|Lena|2|resid|dann|lodo": {
+   "0.1": 34.288164882258506,
+   "1.0": 34.28087996668557
+  },
+  "noinfo|Lena|0|resid|regemb_near": "Russia_E",
+  "Lena|resid|stable_feats": [
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_sin",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "sg_clay_5_15",
+   "cci_alt"
+  ],
+  "noinfo|Lena|0|direct|irm|lodo": {
+   "1.0": 51.60439460724158,
+   "10.0": 51.60439460724158,
+   "100.0": 51.60439460724158
+  },
+  "noinfo|Lena|0|direct|vrex|lodo": {
+   "1.0": 47.6214025906364,
+   "10.0": 46.893567662166824,
+   "100.0": 48.345033910120186
+  },
+  "covonly|Lena|0|direct|dann|lodo": {
+   "0.1": 38.44496668003516,
+   "1.0": 38.44340495412549
+  },
+  "covonly|Lena|1|direct|dann|lodo": {
+   "0.1": 38.44496668003516,
+   "1.0": 38.44340495412549
+  },
+  "covonly|Lena|2|direct|dann|lodo": {
+   "0.1": 38.44496668003516,
+   "1.0": 38.44340495412549
+  },
+  "noinfo|Lena|0|direct|regemb_near": "Russia_E",
+  "Lena|direct|stable_feats": [
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_sin",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "sg_clay_5_15",
+   "cci_alt"
+  ],
+  "noinfo|Canada|0|resid|irm|lodo": {
+   "1.0": 32.49590617308028,
+   "10.0": 32.49590617308028,
+   "100.0": 32.49590617308028
+  },
+  "noinfo|Canada|0|resid|vrex|lodo": {
+   "1.0": 32.35618426382471,
+   "10.0": 32.34729577945409,
+   "100.0": 32.35618426382471
+  },
+  "covonly|Canada|0|resid|dann|lodo": {
+   "0.1": 31.702766053249267,
+   "1.0": 31.702692779797896
+  },
+  "covonly|Canada|1|resid|dann|lodo": {
+   "0.1": 31.702766053249267,
+   "1.0": 31.702692779797896
+  },
+  "covonly|Canada|2|resid|dann|lodo": {
+   "0.1": 31.702766053249267,
+   "1.0": 31.702692779797896
+  },
+  "noinfo|Canada|0|resid|regemb_near": "Russia_E",
+  "Canada|resid|stable_feats": [
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_sin",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "e5_twarm",
+   "sg_clay_5_15",
+   "cci_alt"
+  ],
+  "noinfo|Canada|0|direct|irm|lodo": {
+   "1.0": 36.90843661232548,
+   "10.0": 36.90843661232548,
+   "100.0": 36.90843661232548
+  },
+  "noinfo|Canada|0|direct|vrex|lodo": {
+   "1.0": 37.81651032103673,
+   "10.0": 37.81651032103673,
+   "100.0": 37.81651032103673
+  },
+  "covonly|Canada|0|direct|dann|lodo": {
+   "0.1": 34.06353392727396,
+   "1.0": 34.06347930982679
+  },
+  "covonly|Canada|1|direct|dann|lodo": {
+   "0.1": 34.06353392727396,
+   "1.0": 34.06347930982679
+  },
+  "covonly|Canada|2|direct|dann|lodo": {
+   "0.1": 34.06353392727396,
+   "1.0": 34.06347930982679
+  },
+  "noinfo|Canada|0|direct|regemb_near": "Russia_E",
+  "Canada|direct|stable_feats": [
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "sg_clay_5_15",
+   "cci_alt"
+  ],
+  "noinfo|Russia_W|0|resid|irm|lodo": {
+   "1.0": 25.590368584388937,
+   "10.0": 25.590368584388937,
+   "100.0": 25.590368584388937
+  },
+  "noinfo|Russia_W|0|resid|vrex|lodo": {
+   "1.0": 25.358800564178527,
+   "10.0": 25.358800564178527,
+   "100.0": 25.358800564178527
+  },
+  "covonly|Russia_W|0|resid|dann|lodo": {
+   "0.1": 25.691709483114053,
+   "1.0": 25.69290580071959
+  },
+  "covonly|Russia_W|1|resid|dann|lodo": {
+   "0.1": 25.691709483114053,
+   "1.0": 25.69290580071959
+  },
+  "covonly|Russia_W|2|resid|dann|lodo": {
+   "0.1": 25.691709483114053,
+   "1.0": 25.69290580071959
+  },
+  "noinfo|Russia_W|0|resid|regemb_near": "AK5",
+  "Russia_W|resid|stable_feats": [
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_sin",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "e5_twarm",
+   "sg_clay_5_15",
+   "cci_alt"
+  ],
+  "noinfo|Russia_W|0|direct|irm|lodo": {
+   "1.0": 30.212434561992126,
+   "10.0": 30.212434561992126,
+   "100.0": 30.212434561992126
+  },
+  "noinfo|Russia_W|0|direct|vrex|lodo": {
+   "1.0": 30.400833330408243,
+   "10.0": 30.400833330408243,
+   "100.0": 30.400833330408243
+  },
+  "covonly|Russia_W|0|direct|dann|lodo": {
+   "0.1": 28.34099306324842,
+   "1.0": 28.334406364483694
+  },
+  "covonly|Russia_W|1|direct|dann|lodo": {
+   "0.1": 28.34099306324842,
+   "1.0": 28.334406364483694
+  },
+  "covonly|Russia_W|2|direct|dann|lodo": {
+   "0.1": 28.34099306324842,
+   "1.0": 28.334406364483694
+  },
+  "noinfo|Russia_W|0|direct|regemb_near": "AK5",
+  "Russia_W|direct|stable_feats": [
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "cci_alt"
+  ],
+  "noinfo|Russia_E|0|resid|irm|lodo": {
+   "1.0": 31.16426569338643,
+   "10.0": 31.16426569338643,
+   "100.0": 31.16426569338643
+  },
+  "noinfo|Russia_E|0|resid|vrex|lodo": {
+   "1.0": 31.578161760698777,
+   "10.0": 31.578161760698777,
+   "100.0": 31.578161760698777
+  },
+  "covonly|Russia_E|0|resid|dann|lodo": {
+   "0.1": 31.53629067782946,
+   "1.0": 31.53581723827845
+  },
+  "covonly|Russia_E|1|resid|dann|lodo": {
+   "0.1": 31.53629067782946,
+   "1.0": 31.53581723827845
+  },
+  "covonly|Russia_E|2|resid|dann|lodo": {
+   "0.1": 31.53629067782946,
+   "1.0": 31.53581723827845
+  },
+  "noinfo|Russia_E|0|resid|regemb_near": "Lena",
+  "Russia_E|resid|stable_feats": [
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_sin",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "sg_clay_5_15",
+   "cci_alt"
+  ],
+  "noinfo|Russia_E|0|direct|irm|lodo": {
+   "1.0": 36.767689274352755,
+   "10.0": 36.767689274352755,
+   "100.0": 36.767689274352755
+  },
+  "noinfo|Russia_E|0|direct|vrex|lodo": {
+   "1.0": 32.231985246162886,
+   "10.0": 32.231985246162886,
+   "100.0": 32.231985246162886
+  },
+  "covonly|Russia_E|0|direct|dann|lodo": {
+   "0.1": 33.26783344246737,
+   "1.0": 33.27029379859723
+  },
+  "covonly|Russia_E|1|direct|dann|lodo": {
+   "0.1": 33.26783344246737,
+   "1.0": 33.27029379859723
+  },
+  "covonly|Russia_E|2|direct|dann|lodo": {
+   "0.1": 33.26783344246737,
+   "1.0": 33.27029379859723
+  },
+  "noinfo|Russia_E|0|direct|regemb_near": "Lena",
+  "Russia_E|direct|stable_feats": [
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_sin",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "cci_alt"
+  ],
+  "noinfo|Russia_C|0|resid|irm|lodo": {
+   "1.0": 31.193143296681583,
+   "10.0": 31.193143296681583,
+   "100.0": 31.193143296681583
+  },
+  "noinfo|Russia_C|0|resid|vrex|lodo": {
+   "1.0": 30.91360938189577,
+   "10.0": 30.91360938189577,
+   "100.0": 30.91360938189577
+  },
+  "noinfo|Russia_C|0|resid|regemb_near": "Russia_E",
+  "Russia_C|resid|stable_feats": [
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_sin",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "e5_twarm",
+   "sg_clay_5_15",
+   "cci_alt"
+  ],
+  "noinfo|Russia_C|0|direct|irm|lodo": {
+   "1.0": 33.29144608982486,
+   "10.0": 33.29144608982486,
+   "100.0": 33.29144608982486
+  },
+  "noinfo|Russia_C|0|direct|vrex|lodo": {
+   "1.0": 35.02570103909597,
+   "10.0": 35.02570103909597,
+   "100.0": 35.02570103909597
+  },
+  "noinfo|Russia_C|0|direct|regemb_near": "Russia_E",
+  "Russia_C|direct|stable_feats": [
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_sin",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "e5_stl1",
+   "sg_clay_5_15",
+   "cci_alt"
+  ]
+ },
+ "git_commit": "8385a1c",
+ "elapsed_s": 2521.6
+}

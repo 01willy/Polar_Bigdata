@@ -1,0 +1,68 @@
+{
+ "stage": "H19a",
+ "ext": "covariates_ext_v1.csv",
+ "sets": {
+  "base17": 17,
+  "base17+LST": 23,
+  "base17+T": 23,
+  "base17+W": 20,
+  "base17+V": 22,
+  "base17+H": 27,
+  "base17+A": 41,
+  "base17+A+LST": 47,
+  "A_only": 24
+ },
+ "groups": {
+  "LST": [
+   "lst_tdd",
+   "lst_fdd",
+   "lst_sqrt_tdd",
+   "lst_nfactor",
+   "lst_amp",
+   "lst_nclear_summer"
+  ],
+  "T": [
+   "twi",
+   "twi_sd",
+   "flowacc_log",
+   "curv_plan",
+   "curv_prof",
+   "rel_1km"
+  ],
+  "W": [
+   "water_occ_1km",
+   "water_occ_5km",
+   "water_dist_km"
+  ],
+  "V": [
+   "treecover_1km",
+   "ndvi_summer",
+   "ndvi_max",
+   "evi_summer",
+   "ndwi_summer"
+  ],
+  "H": [
+   "e5_swvl1_summer",
+   "e5_swvl2_summer",
+   "e5_skt_tdd",
+   "e5_skt_fdd",
+   "e5_skt_nfactor",
+   "e5_lai_summer",
+   "e5_rsn_winter",
+   "e5_sde_winter",
+   "e5_tp_summer",
+   "e5_tp_annual"
+  ]
+ },
+ "n_blocks": 87,
+ "blocks_by_region": {
+  "Alaska": 42,
+  "Lena": 17,
+  "Canada": 16,
+  "Russia_W": 6,
+  "Russia_E": 5,
+  "Russia_C": 1
+ },
+ "E_AK": 1.6166886671406264,
+ "elapsed_s": 15.9
+}
