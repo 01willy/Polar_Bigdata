@@ -257,7 +257,7 @@ def summarize(runs):
         rmse_cm=("rmse_cm", "mean"), rmse_beq_cm=("rmse_beq_cm", "mean"), d_phys=("d_phys", "mean"), win=("win", "mean"))
     curve = g.groupby(["target", "parent", "rule", "stage", "scope", "lam", "alpha", "n"], as_index=False).agg(
         rmse_mean=("rmse_cm", "mean"), rmse_sd=("rmse_cm", "std"), rmse_beq_mean=("rmse_beq_cm", "mean"),
-        d_phys_mean=("d_phys", "mean"), win_rate=("win", "mean"), n_runs=("rmse_cm", "size"))
+        d_phys_mean=("d_phys", "mean"), win_rate=("win", "mean"), n_runs=("rmse_cm", "size"), n_splits=("split", "nunique"))
     # Δ 대 물리식의 (분할, 반복) 짝지음 부트스트랩 CI
     los, his = [], []
     for _, row in curve.iterrows():
@@ -281,7 +281,7 @@ def summarize(runs):
     curve["recovery"] = curve.apply(rec, axis=1)
     be = []
     for (t, rule, stage, lam, alpha), sub in curve[curve.scope == "n"].groupby(["target", "rule", "stage", "lam", "alpha"]):
-        sub = sub.sort_values("n")
+        sub = sub[sub.n_splits == sub.n_splits.max()].sort_values("n")            # 분할 일부에만 있는 n(|A| 불균형 대상)은 제외
         ok = sub[(sub.recovery >= 0.5) & (sub.win_rate >= 0.75)]
         ok2 = sub[(sub.d_phys_hi < 0)]
         be.append(dict(target=t, parent=sub.parent.iloc[0], rule=rule, stage=stage, lam=lam, alpha=alpha,

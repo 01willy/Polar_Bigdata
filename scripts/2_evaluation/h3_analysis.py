@@ -60,7 +60,7 @@ for tg in MAIN6:
         worst.append(dict(target=tg, rule=name, rmse=float(np.mean([np.sqrt(np.mean((p[s][ok] - y[ok]) ** 2)) for s in range(S)])), aoa_frac=float(inaoa.mean()), n=int(ok.sum())))
 W = pd.DataFrame(worst); W.to_csv(OUT / "h30_deploy_worst.csv", index=False)
 tests = []
-for name, a, b in [("H30_aoa_resid_vs_stefan", "aoa_resid", "stefan"), ("H30_aoa_direct_vs_ml_direct", "aoa_direct", "ml_direct"), ("H30x_aoa_direct_vs_stefan", "aoa_direct", "stefan"),
+for name, a, b in [("H30_aoa_resid_vs_stefan", "aoa_resid", "stefan"), ("H30_aoa_resid_vs_ml_direct", "aoa_resid", "ml_direct"), ("H30_aoa_direct_vs_ml_direct", "aoa_direct", "ml_direct"), ("H30x_aoa_direct_vs_stefan", "aoa_direct", "stefan"),
                    ("H30x_ml_resid_vs_stefan", "ml_resid", "stefan"), ("H30x_cci_agree20_vs_stefan_cci", "cci_agree20", "stefan_cci"), ("H30x_stefan_cci_vs_stefan", "stefan_cci", "stefan")]:
     per = {tg: boot_delta(y, blk, R[a], R[b], 1000, seed_of(name, tg)) for tg, (R, y, blk, _) in RULES.items()}
     tests += [dict(family="deploy", cond="noinfo", **r) for r in summarize_delta(name, per, MAIN6, 0)]

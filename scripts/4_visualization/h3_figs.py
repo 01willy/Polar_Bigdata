@@ -23,7 +23,8 @@ sys.path.insert(0, str(ROOT / "src"))
 from polar.plotstyle import use_polar, despine, lon_formatter, CMAP, tnorm   # noqa: E402
 
 ap = argparse.ArgumentParser(); ap.add_argument("--only", default=""); ap.add_argument("--dpi", type=int, default=300); args = ap.parse_args()
-plt = use_polar(); plt.rcParams.update({"axes.grid": True, "grid.alpha": 0.25, "axes.titlesize": 12, "axes.titleweight": "bold", "legend.fontsize": 9})
+plt = use_polar(); plt.rcParams.update({"axes.grid": True, "grid.alpha": 0.25, "axes.titlesize": 12, "axes.titleweight": "bold", "legend.fontsize": 9, "lines.linewidth": 1.8, "lines.markersize": 5})
+LW, MS, SUP = 1.8, 5, 15                                                     # brand_tokens: linewidth 1.8, marker 5, title 15 bold
 H3 = ROOT / "data" / "processed" / "h3"; H2 = ROOT / "data" / "processed" / "h2"
 FIG = ROOT / "outputs" / "figures" / "h3"; FIG.mkdir(parents=True, exist_ok=True)
 PAL = dict(blue="#3a6ea5", teal="#2a9d8f", purple="#8e6bbf", ochre="#b8791f", ref="#6b7280", navy="#17365d", light="#c9d3df")
@@ -35,7 +36,7 @@ EXPORTS = []
 
 def save(fig, name):
     for ext in ("png", "pdf"):
-        p = FIG / f"{name}.{ext}"; fig.savefig(p, dpi=args.dpi if ext == "png" else None, bbox_inches="tight"); EXPORTS.append(str(p.relative_to(ROOT)))
+        p = FIG / f"{name}.{ext}"; fig.savefig(p, dpi=args.dpi if ext == "png" else None, bbox_inches="tight", pad_inches=0.45); EXPORTS.append(str(p.relative_to(ROOT)))
     plt.close(fig); print(f"[fig] {name}", flush=True)
 
 
@@ -68,9 +69,9 @@ def fig00_overview():
         arrow(x + 2.1, 4.35, x + 2.1, 4.12)
     for x0 in (4.4, 8.6):
         ax.add_patch(FancyArrowPatch((x0 - 0.02, 2.35), (x0 + 0.02, 2.35), arrowstyle="-|>", mutation_scale=14, lw=1.2, color="#444"))
-        ax.text(x0, 2.55, "라벨 추가", ha="center", fontsize=8, color="#444")
-    box(0.2, 0.25, 12.6, 0.8, "채점: 같은 셀에서 짝지은 ΔRMSE, 블록 분할 A/B, 지역 층화 블록 부트스트랩 95% CI\n확정: 라벨 있음 -0.7~-1.1 cm(H13) · 라벨 3개 k-중심 선택 -0.7~-2.4 cm 대 무작위(H24) · 라벨 0 = 물리식 수준(H3·H18~H22)", fc="#f4f6f9", fs=9.0)
-    ax.set_title("ALT 전이 배포 절차: 라벨 예산에 따른 세 단계", loc="left", fontsize=13)
+        ax.text(x0 + 0.12, 2.6, "라벨 추가", ha="left", fontsize=8, color="#444")
+    box(0.2, 0.25, 12.6, 0.8, "채점: 같은 셀에서 짝지은 ΔRMSE, 블록 분할 A/B, 지역 층화 블록 부트스트랩 95% CI\n확정: 라벨 있음 -0.7~-1.1 cm(H13) · 라벨 3개 k-중심 선택 -0.7~-2.4 cm 대 무작위(H24; 레나·캐나다·러시아 W, 러시아 E 는 +0.2) · 라벨 0 = 물리식 수준(H3·H18~H22)", fc="#f4f6f9", fs=9.0)
+    ax.set_title("라벨 예산이 배포 절차를 결정한다: 0개는 물리 앵커, 3~10개는 관측 설계와 E 수축, 수십 개부터 잔차 ML", loc="left", fontsize=SUP)
     save(fig, "h3_fig00_overview")
 
 
@@ -79,45 +80,57 @@ def fig01_budget_curves():
     C = pd.read_csv(H3 / "h25_curve.csv"); B = pd.read_csv(H3 / "h25_breakeven.csv"); T = pd.read_csv(H3 / "h25_targets.csv")
     nA = T.groupby("target").n_A.min()
     subs = sorted([t for t in C.target.unique() if t not in MAIN4 and nA.get(t, 0) >= 6])
-    ncol = 6; nrow_sub = int(np.ceil(len(subs) / ncol))
-    fig = plt.figure(figsize=(17.5, 5.2 + 3.6 * nrow_sub)); gs = fig.add_gridspec(1 + nrow_sub, 12, height_ratios=[1.4] + [1.0] * nrow_sub, hspace=0.6, wspace=0.55)
-    axes = [fig.add_subplot(gs[0, i * 3:(i + 1) * 3]) for i in range(4)]
-    for j, t in enumerate(subs):
-        r, c = 1 + j // ncol, (j % ncol) * 2; axes.append(fig.add_subplot(gs[r, c:c + 2]))
-    targets = MAIN4 + subs
     series = [("S1", "random", 1.0, 0.0, "E 수축 · 무작위", PAL["ref"], "o", ":"), ("S1", "kmedoid", 1.0, 0.0, "E 수축 · k-중심", PAL["blue"], "o", "-"),
               ("S2", "kmedoid", 1.0, 1.0, "+유사라벨 증강 ML", PAL["teal"], "^", "-"), ("S3", "kmedoid", 1.0, 0.25, "+잔차 ML(λ=.25)", PAL["purple"], "D", "-"),
               ("S3", "kmedoid", 10.0, 0.25, "+잔차 ML(α=10)", PAL["ochre"], "v", "--")]
-    for ax, t in zip(axes, targets):
+    LEG = [Line2D([], [], marker=mk, color=col, ls=ls, label=lab) for _, _, _, _, lab, col, mk, ls in series] + \
+          [Line2D([], [], color=PAL["ref"], ls="--", label="물리식(E0, n=0)"), Line2D([], [], color=PAL["purple"], ls=":", label="라벨 전량(A 전체) 잔차 ML"),
+           Line2D([], [], color=PAL["purple"], lw=0.9, alpha=0.7, label="손익분기 n(회복률 50%·승률 75%)")]
+
+    def panel(ax, t, big):
         sub = C[(C.target == t) & (C.scope == "n")]
-        if not len(sub):
-            ax.set_visible(False); continue
-        phys = float((sub.rmse_mean - sub.d_phys_mean).iloc[0]); ax.axhline(phys, color=PAL["ref"], ls="--", lw=1.1)
+        if "n_splits" in sub:
+            sub = sub[sub.n_splits == sub.n_splits.max()]                       # 분할 일부에만 있는 n 제외(AL-1 등 |A| 불균형)
+        phys = float((sub.rmse_mean - sub.d_phys_mean).iloc[0]); ax.axhline(phys, color=PAL["ref"], ls="--", lw=1.2)
         for stage, rule, alpha, lam, lab, col, mk, ls in series:
             q = sub[(sub.stage == stage) & (sub.rule == rule) & (sub.alpha == alpha) & (sub.lam == lam)].sort_values("n")
             if len(q):
-                ax.plot(q.n, q.rmse_mean, marker=mk, color=col, ls=ls, lw=1.4, ms=3.8, label=lab)
+                ax.plot(q.n, q.rmse_mean, marker=mk, color=col, ls=ls, lw=LW, ms=MS)
         full = C[(C.target == t) & (C.scope == "allA") & (C.stage == "S3") & (C.alpha == 1.0) & (C.lam == 0.25)]
         if len(full):
-            ax.axhline(float(full.rmse_mean.mean()), color=PAL["purple"], ls=":", lw=1.0)
+            ax.axhline(float(full.rmse_mean.mean()), color=PAL["purple"], ls=":", lw=1.1)
         be = B[(B.target == t) & (B.rule == "kmedoid") & (B.stage == "S3") & (B.lam == 0.25) & (B.alpha == 1.0)]
+        nmin = int(sub.n.min()); nmax = int(sub.n.max())
         if len(be) and be.breakeven_n_rec50.iloc[0] > 0:
-            ax.axvline(be.breakeven_n_rec50.iloc[0], color=PAL["purple"], lw=0.8, alpha=0.6)
-        ax.set_xscale("log"); nmax = int(sub.n.max()); ax.set_xlim(2.6, nmax * 1.25)
+            bn = int(be.breakeven_n_rec50.iloc[0])
+            if bn > nmin:
+                ax.axvline(bn, color=PAL["purple"], lw=0.9, alpha=0.7)
+            ax.text(0.98, 0.96, f"손익분기 n = {bn}", transform=ax.transAxes, ha="right", va="top", fontsize=9 if big else 8.5, color=PAL["purple"], bbox=dict(fc="white", ec="none", alpha=0.8))
+        ax.set_xscale("log"); ax.set_xlim(2.6, nmax * 1.25)
         ax.set_xticks([v for v in [3, 10, 40, 160] if v <= nmax]); ax.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter()); ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
         tr = T[T.target == t]; er = float(tr.E_own.iloc[0] / tr.E0.mean())
-        ax.set_title((f"{label_of(t)} (A {int(tr.n_A.mean())}셀 · E비 {er:.2f})" if t in MAIN4 else f"{t}\nA {int(tr.n_A.mean())} · E비 {er:.2f}"), loc="left", fontsize=10 if t in MAIN4 else 8.5)
-        ax.tick_params(labelsize=8); despine(ax)
-        if t == "Lena" or (subs and t in (subs[0], subs[ncol] if len(subs) > ncol else subs[0])):
-            ax.set_ylabel("RMSE (cm), B블록", fontsize=9)
-        ax.set_xlabel("라벨 수 n", fontsize=8.5)
-    fig.legend(handles=[Line2D([], [], marker=mk, color=col, ls=ls, label=lab) for _, _, _, _, lab, col, mk, ls in series] +
-               [Line2D([], [], color=PAL["ref"], ls="--", label="물리식(E0, n=0)"), Line2D([], [], color=PAL["purple"], ls=":", label="라벨 전량(A 전체) 잔차 ML"),
-                Line2D([], [], color=PAL["purple"], lw=0.8, alpha=0.6, label="손익분기 n(회복률 50%·승률 75%)")],
-               loc="lower center", ncol=8, fontsize=8.5, frameon=False, bbox_to_anchor=(0.5, -0.01))
-    fig.suptitle("라벨 예산 계단: 라벨 수 n에 따른 단계별 오차 (위 = 주 4지역, 아래 = 하위 지역; 원천 = 대상 외 전체 라벨, 100 km 버퍼)", fontsize=13.5, fontweight="bold", y=0.995)
-    fig.text(0.01, -0.03, "분할 3 × 반복(해석적 20, CatBoost 5 × seed 2). 채점 = B블록 실측·CCI·토양 도일 유효 셀. |A| < 6 인 하위 지역(CA-1)은 제외. 근거: data/processed/h3/h25_{curve,breakeven,targets}.csv", fontsize=8, color="#555")
-    save(fig, "h3_fig01_label_budget_curves")
+        ax.set_title(f"{label_of(t)} (A {int(tr.n_A.mean())}셀 · E비 {er:.2f})", loc="left", fontsize=12 if big else 10.5)
+        ax.tick_params(labelsize=9); despine(ax); ax.set_xlabel("라벨 수 n", fontsize=10.5)
+
+    fig, axes = plt.subplots(1, 4, figsize=(16.0, 4.6))
+    for ax, t in zip(axes, MAIN4):
+        panel(ax, t, True); ax.set_ylabel("RMSE (cm), B블록", fontsize=10.5)
+    fig.legend(handles=LEG, loc="lower center", ncol=4, fontsize=9, frameon=False, bbox_to_anchor=(0.5, -0.16))
+    fig.suptitle("라벨 예산 계단(주 4지역): 수준 오차가 큰 러시아 서부만 라벨 3개로 물리식을 넘고, 레나·캐나다는 라벨을 늘려도 E 재적합 경로로는 못 넘는다", fontsize=SUP, fontweight="bold", y=1.03)
+    fig.text(0.01, -0.22, "원천 = 대상 외 전체 라벨(100 km 버퍼), 앵커 E0 = 원천 최소제곱. 분할 3 × 반복(해석적 20, CatBoost 5 × seed 2). 채점 = B블록 실측·CCI·토양 도일 유효 셀(분할 3 풀링; 세 분할 모두에 있는 n 만). 근거: data/processed/h3/h25_{curve,breakeven,targets}.csv", fontsize=8, color="#555")
+    fig.tight_layout(); save(fig, "h3_fig01_label_budget_curves")
+    ncol = 4; nrow = int(np.ceil(len(subs) / ncol))
+    fig, axes = plt.subplots(nrow, ncol, figsize=(16.0, 3.9 * nrow)); axes = np.atleast_2d(axes)
+    for k, ax in enumerate(axes.flat):
+        if k < len(subs):
+            panel(ax, subs[k], False)
+            ax.set_ylabel("RMSE (cm), B블록", fontsize=9.5)
+        else:
+            ax.set_visible(False)
+    fig.legend(handles=LEG, loc="lower center", ncol=4, fontsize=9, frameon=False, bbox_to_anchor=(0.5, -0.05))
+    fig.suptitle("라벨 예산 계단(하위 지역 11개): 손익분기는 E비가 1에서 먼 하위 지역(AL-1·AL-3·CA-2)에서만 나타난다", fontsize=SUP, fontweight="bold", y=1.0)
+    fig.text(0.01, -0.09, "하위 지역 = 블록 중심 k-means(알래스카 6·캐나다 3·레나 2, 라벨 미사용). |A| < 6 인 CA-1 제외. AL-1 은 4,716셀 단일 블록 때문에 A/B 가 불균형(288~4,716)이라 n ≤ 160 만 표시. 원천·채점·반복은 주 지역 그림과 동일.", fontsize=8, color="#555")
+    fig.tight_layout(); save(fig, "h3_fig01b_label_budget_curves_subregions")
 
 
 # ====================================================================== fig02 회복률·손익분기
@@ -157,7 +170,7 @@ def fig02_recovery():
     fig.legend(handles=[Line2D([], [], marker=mk, color=col, ls="none", label=lab) for _, _, _, _, lab, col, mk in series] +
                [Line2D([], [], marker="o", color=PAL["blue"], ls="none", label="손익분기: E 수축"), Line2D([], [], marker="D", color=PAL["purple"], ls="none", label="손익분기: +잔차 ML")],
                loc="lower center", ncol=6, fontsize=8.5, frameon=False, bbox_to_anchor=(0.5, -0.04))
-    fig.suptitle("H25·H26 라벨 3개·10개로 얻는 것과 손익분기: 수준 오차(E비가 1에서 먼) 지역만 소수 라벨로 이득", fontsize=13.5, fontweight="bold", y=1.01)
+    fig.suptitle("H25·H26 라벨 3개·10개로 얻는 것과 손익분기: 수준 오차(E비가 1에서 먼) 지역만 소수 라벨로 이득", fontsize=SUP, fontweight="bold", y=1.01)
     fig.text(0.01, -0.08, "대상은 E비 내림차순. E비 = 자체 E / 원천 E0(라벨 기반 진단). 근거: data/processed/h3/h25_{curve,breakeven,targets}.csv", fontsize=8, color="#555")
     fig.tight_layout(); save(fig, "h3_fig02_recovery_breakeven")
 
@@ -172,22 +185,28 @@ def fig03_rule():
     for k, (xcol, xlab, ttl) in enumerate((("abs_logE", "|log(자체 E / 원천 E0)| (라벨 기반 진단; 1 에서의 거리)", "(a) 수준 오차가 클수록 손익분기 n 이 작다"),
                                           ("smd_x25", "공변량 표준화 평균차 SMD (라벨 미사용)", "(b) 공변량 이동 대 손익분기 n"))):
         ax = axes[k]
-        for _, r in M.iterrows():
+        Ms = M.sort_values([ "be_n", xcol]); offs = [(4, 4), (4, -11), (4, 13), (-4, -20), (4, 22), (-4, 30)]
+        for j, (_, r) in enumerate(Ms.iterrows()):
             ax.plot(r[xcol], r.be_n, "o" if not r.censored else ">", color=PARENT_COL.get(r.parent, PAL["ref"]), ms=7, mfc="none" if r.censored else PARENT_COL.get(r.parent, PAL["ref"]))
-            ax.annotate(label_of(r.target), (r[xcol], r.be_n), fontsize=7, xytext=(3, 3), textcoords="offset points")
-        ax.set_yscale("log"); ax.set_xlabel(xlab); ax.set_ylabel("손익분기 n (S3, 로그)"); ax.set_title(ttl, loc="left"); despine(ax)
+            same = Ms[(np.abs(np.log(Ms.be_n) - np.log(r.be_n)) < 0.05)]; k = int(np.where(same.index == r.name)[0][0]) if len(same) > 1 else 0
+            ax.annotate(label_of(r.target), (r[xcol], r.be_n), fontsize=7, xytext=offs[k % len(offs)], textcoords="offset points", ha="left" if offs[k % len(offs)][0] > 0 else "right")
+        ax.set_yscale("log"); ax.set_ylim(2, float(M.be_n.max()) * 5); ax.set_xlabel(xlab); ax.set_ylabel("손익분기 n (S3, 로그)"); ax.set_title(ttl, loc="left"); despine(ax)
     ax = axes[2]
     if "pred_labelfree" in M:
         ax.plot(M.pred_labelfree, M.be_n, "o", color=PAL["blue"], ms=7); lim = [2, max(M.be_n.max(), M.pred_labelfree.max()) * 1.5]
         ax.plot(lim, lim, color=PAL["ref"], lw=1, ls="--"); ax.set_xscale("log"); ax.set_yscale("log")
-        for _, r in M.iterrows():
-            ax.annotate(label_of(r.target), (r.pred_labelfree, r.be_n), fontsize=7, xytext=(3, 3), textcoords="offset points")
+        Ms = M.sort_values(["be_n", "pred_labelfree"]); offs = [(4, 4), (4, -11), (4, 13), (-4, -20), (4, 22), (-4, 30)]
+        for _, r in Ms.iterrows():
+            same = Ms[(np.abs(np.log(Ms.be_n) - np.log(r.be_n)) < 0.05)]; k = int(np.where(same.index == r.name)[0][0]) if len(same) > 1 else 0
+            ax.annotate(label_of(r.target), (r.pred_labelfree, r.be_n), fontsize=7, xytext=offs[k % len(offs)], textcoords="offset points", ha="left" if offs[k % len(offs)][0] > 0 else "right")
         rr = R[(R.stage == "S3") & (R.features == "labelfree")].iloc[0]; re_ = R[(R.stage == "S3") & (R.features == "E_only")].iloc[0]
         ax.set_title(f"(c) 라벨 미사용 규칙의 LOO 예측 (R² {rr.loo_r2:.2f}, ρ {rr.spearman_pred:.2f}; |log E비| ρ {re_.spearman_Eratio_vs_be:.2f})", loc="left")
     ax.set_xlabel("예측 손익분기 n (leave-one-target-out)"); ax.set_ylabel("실제 손익분기 n"); despine(ax)
     fig.legend(handles=[Line2D([], [], marker="o", color=c, ls="none", label=label_of(p)) for p, c in PARENT_COL.items()] + [Line2D([], [], marker=">", color="#333", ls="none", mfc="none", label="미달성(우측 절단)")],
                loc="lower center", ncol=6, fontsize=8.5, frameon=False, bbox_to_anchor=(0.5, -0.05))
-    fig.suptitle("H27 새 지역에 라벨이 몇 개 필요한가: 손익분기 n 의 예측 가능성", fontsize=13.5, fontweight="bold", y=1.02)
+    fig.suptitle("H27 필요 라벨 수는 라벨 없이 예측되지 않지만, 대표점 3개로 잰 E비(|log E비|)가 손익분기 n 을 ρ -0.84 로 예측한다", fontsize=SUP, fontweight="bold", y=1.02)
+    nc = int(M.censored.sum()) if "censored" in M else 0
+    fig.text(0.01, -0.12, f"손익분기 n = 회복률 50%·승률 75% 를 처음 넘는 n(S3 λ=.25, k-중심). 미달성 {nc}/{len(M)} 대상은 격자 최댓값 × 2 로 우측 절단 대치해 순위 상관·LOO 회귀에 포함(절단 처리에 민감). 근거: data/processed/h3/h27_{{loo_S3,rule}}.csv", fontsize=8, color="#555")
     fig.tight_layout(); save(fig, "h3_fig03_breakeven_rule")
 
 
@@ -197,17 +216,23 @@ def fig04_block_value():
     if not f.exists():
         print("[skip] fig04"); return
     R = pd.read_csv(f); g = R.groupby(["target", "block"]).agg(lat=("lat", "mean"), lon=("lon", "mean"), n=("n_cells", "mean"), v1=("value_S1", "mean"), v3=("value_S3", "mean"), freq=("kmedoid_freq", "mean")).reset_index()
-    fig, axes = plt.subplots(1, 2, figsize=(13.5, 5.2), constrained_layout=True)
+    fig, axes = plt.subplots(1, 2, figsize=(13.5, 5.6)); fig.subplots_adjust(left=0.05, right=0.96, top=0.80, bottom=0.12, wspace=0.42)
+    vmax = min(6.0, float(np.nanpercentile(np.abs(g[g.target.isin(["Canada", "Lena"])].v3), 95)) or 1.0)      # 두 패널 공통 색 범위(±6 cm 상한, 초과는 화살표)
     for ax, t in zip(axes, ["Canada", "Lena"]):
-        d = g[g.target == t]; vmax = float(np.nanpercentile(np.abs(d.v3), 95)) or 1.0
+        d = g[g.target == t]
         sc = ax.scatter(d.lon, d.lat, c=-d.v3, s=20 + 4 * np.sqrt(d.n), cmap=CMAP.diff, norm=tnorm(-vmax, vmax, 0.0), edgecolor=np.where(d.freq > 0.5, "black", "none"), linewidths=0.8, zorder=3)
-        ax.set_aspect(1 / np.cos(np.radians(d.lat.mean()))); ax.xaxis.set_major_formatter(lon_formatter()); despine(ax)
+        ax.set_aspect(1 / np.cos(np.radians(d.lat.mean()))); ax.set_anchor("N"); ax.xaxis.set_major_formatter(lon_formatter()); despine(ax)
         dec = 1 if (d.lat.max() - d.lat.min()) < 5 else 0
         ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _p, dec=dec: f"{v:.{dec}f}°N"))
-        ax.set_title(f"{label_of(t)}: 블록 {len(d)}개, 해로운 블록 {int((d.v3 < 0).sum())}개", loc="left")
+        ax.set_title(f"{label_of(t)}: 블록 {len(d)}개, 해로운 블록 {int((d.v3 < 0).sum())}개", loc="left", pad=8)
         cb = fig.colorbar(sc, ax=ax, fraction=0.04, pad=0.02, extend="both"); cb.set_label("ΔRMSE = (E 수축 앵커+잔차 ML) - 물리식 (cm), 청 = 개선 · 갈 = 악화", fontsize=9)
-    fig.suptitle("H29 블록 하나를 통째로 라벨링했을 때의 가치: 한 블록에 몰린 라벨은 대체로 해롭다(검은 테두리 = k-중심이 자주 고르는 블록)", fontsize=13, fontweight="bold")
-    fig.text(0.01, -0.02, "원 크기 ∝ √셀 수. 분할 3 평균, 잔차 CatBoost λ=.25 seed 2. 근거: data/processed/h3/h29_block_value.csv", fontsize=8, color="#555")
+        for _, r in d[np.abs(d.v3) > vmax].iterrows():
+            ax.annotate(f"{r.v3:+.0f}", (r.lon, r.lat), fontsize=7, xytext=(5, 3), textcoords="offset points", color="#333")
+        ax.legend(handles=[Line2D([], [], marker="o", ls="none", color="#888", mfc="none", ms=np.sqrt(20 + 4 * np.sqrt(n)) , label=f"{n}셀") for n in (5, 50, 200)],
+                  title="블록 셀 수", fontsize=8, title_fontsize=8, loc="lower left" if t == "Canada" else "upper right", frameon=True)
+    harm = {t: float((g[g.target == t].v3 < 0).mean()) for t in ("Canada", "Lena")}
+    fig.suptitle(f"H29 한 블록에 몰린 라벨의 가치는 지역에 따라 다르다: 해로운 블록 레나델타 {harm['Lena']*100:.0f}%, 캐나다 {harm['Canada']*100:.0f}% (검은 테두리 = k-중심이 자주 고르는 블록)", fontsize=SUP, fontweight="bold", y=0.97)
+    fig.text(0.01, 0.01, "원 크기 ∝ √셀 수. 분할 3 평균, 잔차 CatBoost λ=.25 seed 2. 두 패널 공통 색 범위 ±6 cm(초과는 화살표, 극단값은 수치 표기). 등장방형 근사라 캐나다 고위도에서 동서 거리가 과장됨. 근거: data/processed/h3/h29_block_value.csv", fontsize=8, color="#555")
     save(fig, "h3_fig04_block_label_value")
 
 
@@ -233,7 +258,7 @@ def fig05_recipe():
             m = m.iloc[0]; ci_bar(ax, y[i], m.ci_lo, m.ci_hi, PAL["blue"], lw=1.6); ax.plot(m.delta, y[i], "o", color=PAL["blue"], ms=6.5, zorder=4)
             ax.text(xr + 0.15, y[i], f"{m.delta:+.2f} [{m.ci_lo:+.1f}, {m.ci_hi:+.1f}] · 블록 등가중 {m.delta_blockeq:+.1f}", fontsize=7.5, va="center", ha="left", color=PAL["blue"], clip_on=False)
     ax.axvline(0, color=PAL["ref"], lw=1); ax.set_yticks(y); ax.set_yticklabels([l for _, l in specs], fontsize=8.5); ax.set_xlabel("ΔRMSE 대 Stefan(알래스카 E) (cm)  ← 개선 | 악화 →"); despine(ax); ax.set_xlim(xl, xr)
-    ax.set_title("(a) 라벨 있음 조건(대상 A블록 실측 학습, B 채점), 4지역 평균·층화 CI + 지역 점", loc="left")
+    ax.set_title("(a) 라벨 있음 조건(대상 A블록 실측 학습, B 채점), 4지역 평균·층화 블록 부트스트랩 95% CI + 지역 점", loc="left")
     ax = axes[1]; ax.axis("off")
     AN = {"ku_cal": "Ku 보정", "stefan_ku_cci": "Stefan+Ku+CCI", "stefan_cci": "Stefan+CCI", "stefan": "Stefan", "stefan_cci_cal": "Stefan+CCI(보정)", "cci_cal": "CCI 보정", "stefan_ku": "Stefan+Ku", "stefan_soil": "토양 Stefan"}
     RN = {"catboost_lo": "CatBoost", "catboost": "CatBoost(deep)", "tabm": "TabM", "ridge": "ridge", "mlp": "MLP", "ftt": "FT-T", "realmlp": "RealMLP"}
@@ -247,7 +272,7 @@ def fig05_recipe():
     tb.auto_set_font_size(False); tb.set_fontsize(8); tb.scale(1.0, 1.9)
     ax.text(0.0, 0.12, "신경망 중첩 선택은 4지역 모두 Stefan+CCI 앵커 + TabM 잔차(λ 0.25~0.5)", transform=ax.transAxes, fontsize=8, color="#555")
     ax.set_title("(b) 대상별 선택 레시피와 RMSE (cm, B블록 3분할 풀링)", loc="left")
-    fig.suptitle("H28 라벨 있는 지역의 레시피 확정: 다른 지역에서 고른 레시피가 해당 지역에서도 물리식을 넘는가", fontsize=13.5, fontweight="bold", y=1.02)
+    fig.suptitle("H28 라벨 있는 지역: 사전 지정 Stefan+CatBoost 잔차만 확정적으로 물리식을 넘고, 중첩 선택 레시피의 큰 이득은 집계 의존", fontsize=SUP, fontweight="bold", y=1.02)
     fig.text(0.01, -0.05, "후보 = 앵커 14 × λ 5(CatBoost 잔차) ∪ 앵커 3 × 모델 7 × λ 5. 중첩 선택은 셀 가중에서 크게 개선되나 CI 가 0 을 포함하고 블록 등가중에서는 이득이 사라진다(집계 의존). 자기 최선은 선택 효과 포함(참고). 근거: data/processed/h3/h28_{tests,nested,scores}.csv", fontsize=8, color="#555")
     fig.tight_layout(); save(fig, "h3_fig05_recipe_nested")
 
@@ -262,10 +287,10 @@ def fig06_hurts():
     piv = H.pivot_table(index="method", columns=["target", "n"], values="d_phys")
     cols = [(t, n) for t in MAIN4 for n in [0, 3, 10, 40] if (t, n) in piv.columns]
     piv = piv[cols]
-    order = piv.mean(1).sort_values().index
+    order = piv.rank(axis=0, pct=True).mean(1).sort_values().index        # 열별 백분위 순위의 평균(러시아 서부의 큰 값·n=0 행의 열 수 차이가 지배하지 않도록)
     piv = piv.loc[order]
     fig, ax = plt.subplots(figsize=(13.5, 0.36 * len(piv) + 2.6))
-    vmax = 4.0                                                   # 러시아 서부 −10 이 색을 지배하지 않도록 ±4 cm 로 제한(수치는 셀에 표기)
+    vmax = 4.0                                                   # 러시아 서부 -10 이 색을 지배하지 않도록 ±4 cm 로 제한(수치는 셀에 표기)
     im = ax.imshow(piv.values, cmap=CMAP.diff, norm=tnorm(-vmax, vmax, 0.0), aspect="auto")
     ax.set_xticks(range(len(cols))); ax.set_xticklabels([f"{label_of(t)}\nn={n}" for t, n in cols], fontsize=8); ax.set_yticks(range(len(piv))); ax.set_yticklabels(piv.index, fontsize=8.5)
     for i in range(piv.shape[0]):
@@ -276,8 +301,8 @@ def fig06_hurts():
     for k in range(1, 4):
         ax.axvline(k * 4 - 0.5, color="white", lw=2)
     cb = fig.colorbar(im, ax=ax, fraction=0.025, pad=0.02, extend="both"); cb.set_label("ΔRMSE 대 물리식 (cm), 청 = 개선 · 갈 = 악화", fontsize=9)
-    ax.set_title("무엇이 해로운가: 방법 × 라벨 수 × 지역의 Δ(대 물리식). 위 = 이득, 아래 = 해", loc="left"); ax.grid(False)
-    fig.text(0.01, -0.02, "n=0 은 정보 없음 직접 회귀(M1). 근거: data/processed/h3/h3_hurts.csv(h25·h24·h23·M1 통합)", fontsize=8, color="#555")
+    ax.set_title("해로운 조합은 무작위 라벨 E 재적합·블록 순환 선택·증강 없는 직접 회귀다: 방법 × 라벨 수 × 지역의 Δ(대 물리식)", loc="left"); ax.grid(False)
+    fig.text(0.01, -0.02, "n=0 은 정보 없음 직접 회귀(M1). 행 순서 = 열별 백분위 순위의 평균(위 = 이득, 아래 = 해). 색은 ±4 cm 에서 포화(러시아 서부 -10 cm 등 정확한 값은 셀 숫자). 근거: data/processed/h3/h3_hurts.csv(h25·h24·h23·M1 통합)", fontsize=8, color="#555")
     save(fig, "h3_fig06_what_hurts")
 
 
@@ -292,10 +317,11 @@ def fig07_deploy():
     ax = axes[0]; y = np.arange(len(rules))[::-1]
     ax.barh(y + 0.18, piv.mean(1), 0.34, color=PAL["blue"], label="4지역 평균 RMSE")
     ax.barh(y - 0.18, piv.max(1), 0.34, color=PAL["ochre"], label="최악 지역 RMSE")
-    ax.set_yticks(y); ax.set_yticklabels([lab[r] for r in rules], fontsize=8.5); ax.set_xlabel("RMSE (cm), 정보 없음 조건"); despine(ax); ax.legend(fontsize=8.5, loc="lower right")
-    ax.set_title("(a) 규칙별 평균과 최악 지역 오차", loc="left"); ax.set_xlim(0, piv.max(1).max() * 1.38)
+    ax.set_yticks(y); ax.set_yticklabels([lab[r] for r in rules], fontsize=8.5); ax.set_xlabel("RMSE (cm), 정보 없음 조건"); despine(ax)
+    ax.legend(fontsize=8.5, loc="upper center", bbox_to_anchor=(0.5, -0.18), ncol=2, frameon=False)
+    ax.set_title("(a) 규칙별 평균과 최악 지역 오차", loc="left"); ax.set_xlim(0, piv.max(1).max() * 1.12)
     ax = axes[1]
-    specs = [("H30_aoa_direct_vs_ml_direct", "AOA 게이팅 직접 ML - 직접 ML  [H30]"), ("H30_aoa_resid_vs_stefan", "AOA 게이팅 잔차 ML - Stefan  [H30]"), ("H30x_aoa_direct_vs_stefan", "AOA 게이팅 직접 ML - Stefan"),
+    specs = [("H30_aoa_resid_vs_ml_direct", "AOA 게이팅 잔차 ML - 직접 ML  [H30 사전 등록 문구]"), ("H30_aoa_direct_vs_ml_direct", "AOA 게이팅 직접 ML - 직접 ML  [H30 동일 계열]"), ("H30_aoa_resid_vs_stefan", "AOA 게이팅 잔차 ML - Stefan  [H30]"), ("H30x_aoa_direct_vs_stefan", "AOA 게이팅 직접 ML - Stefan"),
              ("H30x_ml_resid_vs_stefan", "잔차 ML(전 셀) - Stefan"), ("H30x_stefan_cci_vs_stefan", "Stefan+CCI - Stefan"), ("H30x_cci_agree20_vs_stefan_cci", "CCI 일치 게이팅 - Stefan+CCI")]
     yy = np.arange(len(specs))[::-1]
     for i, (tid, l) in enumerate(specs):
@@ -308,9 +334,9 @@ def fig07_deploy():
         if len(m):
             m = m.iloc[0]; ci_bar(ax, yy[i], m.ci_lo, m.ci_hi, PAL["teal"], lw=1.6); ax.plot(m.delta, yy[i], "s", color=PAL["teal"], ms=6.5, zorder=4)
     ax.axvline(0, color=PAL["ref"], lw=1); ax.set_yticks(yy); ax.set_yticklabels([l for _, l in specs], fontsize=8.5); ax.set_xlabel("ΔRMSE (cm)  ← 개선 | 악화 →"); despine(ax)
-    ax.set_title("(b) 4지역 평균 Δ(층화 블록 부트스트랩 CI) + 지역 점", loc="left")
-    fig.suptitle("H30 배포 규칙: AOA 게이팅은 직접 ML의 최악을 줄이고 물리식과 동급이 된다", fontsize=13.5, fontweight="bold", y=1.02)
-    fig.text(0.01, -0.05, "AOA = 적용 가능 영역(공변량 이질성 지수 DI 임계 안). 근거: data/processed/h3/h30_deploy_{worst,tests}.csv (M1 모델 축 예측 재사용)", fontsize=8, color="#555")
+    ax.set_title("(b) 4지역 평균 Δ(층화 블록 부트스트랩 95% CI) + 지역 점", loc="left")
+    fig.suptitle("H30 배포 규칙: AOA 게이팅 + 잔차 ML 은 물리식과 동급(+0.1), AOA 게이팅 + 직접 ML 은 최악을 줄여도 물리식보다 +1.6 열세", fontsize=SUP, fontweight="bold", y=1.02)
+    fig.text(0.01, -0.05, "AOA = 적용 가능 영역(공변량 이질성 지수 DI 임계 안). 사전 등록 H30 문구의 비교(AOA 잔차 - 직접 ML)와 동일 계열 비교(AOA 직접 - 직접 ML)를 모두 표시. 근거: data/processed/h3/h30_deploy_{worst,tests}.csv (M1 모델 축 예측 재사용)", fontsize=8, color="#555")
     fig.tight_layout(); save(fig, "h3_fig07_deploy_rule")
 
 

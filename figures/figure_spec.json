@@ -1163,13 +1163,13 @@
   {
    "id": "h3_fig01_label_budget_curves",
    "script": "scripts/4_visualization/h3_figs.py --only fig01",
-   "intent": "대상 13개(주 4 + 하위 9)의 라벨 수 n 대 단계별 RMSE 곡선(E 수축 무작위/k-중심, +증강, +잔차, α=10), 물리식·라벨 전량·손익분기 표시.",
+   "intent": "주 4지역의 라벨 수 n 대 단계별 RMSE 곡선(E 수축 무작위/k-중심, +증강, +잔차, α=10), 물리식·라벨 전량·손익분기 표시. 메시지: 수준 오차가 큰 러시아 서부만 라벨 3개로 물리식을 넘는다.",
    "layout": {
-    "panels": 13,
-    "arrangement": "위 4 큰 패널 + 아래 9 작은 패널, 로그 x",
+    "panels": 4,
+    "arrangement": "1×4, 로그 x",
     "figsize_in": [
-     17.5,
-     9.6
+     16.0,
+     4.6
     ]
    },
    "assets": [
@@ -1329,6 +1329,32 @@
    "exports": [
     "outputs/figures/h3/h3_fig07_deploy_rule.png",
     "outputs/figures/h3/h3_fig07_deploy_rule.pdf"
+   ],
+   "units": "cm",
+   "generated": "2026-09-22",
+   "medium": "presentation/report wide"
+  },
+  {
+   "id": "h3_fig01b_label_budget_curves_subregions",
+   "script": "scripts/4_visualization/h3_figs.py --only fig01",
+   "intent": "하위 지역 11개의 라벨 예산 곡선(주 지역 그림과 같은 계열). 메시지: 손익분기는 E비가 1에서 먼 하위 지역(AL-1·AL-3·CA-2)에서만 나타난다.",
+   "layout": {
+    "panels": 11,
+    "arrangement": "3×4 격자, 로그 x",
+    "figsize_in": [
+     16.0,
+     11.7
+    ]
+   },
+   "assets": [
+    "data/processed/h3/h25_curve.csv",
+    "data/processed/h3/h25_breakeven.csv",
+    "data/processed/h3/h25_targets.csv"
+   ],
+   "style": "use_polar, 단계별 색+마커, 파선 기준",
+   "exports": [
+    "outputs/figures/h3/h3_fig01b_label_budget_curves_subregions.png",
+    "outputs/figures/h3/h3_fig01b_label_budget_curves_subregions.pdf"
    ],
    "units": "cm",
    "generated": "2026-09-22",
