@@ -1,0 +1,16 @@
+{
+ "name": "TableS6b_h27_rule_stats",
+ "ok": true,
+ "fails": [],
+ "words": {
+  "definition": 27,
+  "statistics": 47,
+  "panels": 34,
+  "data": 8,
+  "total": 116
+ },
+ "paths": {
+  "csv": "outputs/figures/paper/supp_tables/TableS6b_h27_rule_stats.csv",
+  "tex": "outputs/figures/paper/supp_tables/TableS6b_h27_rule_stats.tex"
+ }
+}

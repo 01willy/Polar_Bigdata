@@ -1361,30 +1361,1179 @@
    "medium": "presentation/report wide"
   },
   {
-   "id": "paper_fig2_label_budget",
+   "id": "paper_style_system",
+   "script": "src/polar/paperstyle.py, scripts/4_visualization/paper/_common.py, scripts/4_visualization/paper_figs.py",
+   "intent": "논문 그림 공용 스타일·로더·QA(스펙 figures/PAPER_FIGURE_REDESIGN_2026-09-26.md §1·§5·§6 단계 1–3).",
+   "style": "METHOD 색 고정: phys #4d4d4d, ref_allA #000000 파선, oracle_branch #000000 *, direct #6b7280 x, refit #2b5c8f o, augment #2e6b2e 일점쇄선 ^, residual #9a7bc9 D, tfm #ad921a s, cci #568f72 v (색각 시뮬레이션 ΔE00 최소 14.1, 흰 바탕 대비 ≥ 3.0). 지역은 마커(REGION_MARKER)로만 구분. Liberation Sans 7.5 pt(눈금 7, 범례·주석 6.5, 패널 문자 9 굵게), 수식 글꼴도 Liberation Sans(DejaVu 임베드 금지), pdf.fonttype 42, unicode minus. mm 절대 배치(axes_mm·slot_mm), bbox tight 미사용(캔버스 = 설계 폭). Δ 축은 DELTA_ZERO 0선 + better 표지, 발산 지도 cmc.broc TwoSlopeNorm 0 중심.",
+   "qa": "qa_check: PDF MediaBox 폭 180 ± 1 mm, 높이 ≤ 200 mm, 최소 6.5 pt, 텍스트 상자 겹침 0, 캔버스 밖 잘림 0, 축 제목 금지, Δ 축 0선, 범례 ≤ 1, pdffonts Liberation/Arial TrueType 임베드만, pdftotext 하이픈 음수 없음, 캡션 ≤ 350 단어(블록 80/80/150/40)·em dash·한글 금지. 실패 시 파일명 _FAIL, CAPTIONS·spec 갱신 생략.",
+   "exports": [
+    "outputs/figures/paper/_qa/style_test.png"
+   ],
+   "generated": "2026-09-26",
+   "medium": "paper (Sci Rep 2-column 180 mm)"
+  },
+  {
+   "id": "paper_fig2_recipe_decomp",
    "script": "scripts/4_visualization/paper_figs.py --only fig2",
-   "intent": "저널 규격 원형: 주 4지역 라벨 예산 계단(a–d)과 14 대상의 n=3·10 이득(e·f). 메시지: 필요 라벨 수는 |log(E_own/E0)|가 정한다.",
+   "exports": [
+    "outputs/figures/paper/Fig2_recipe_decomp.pdf",
+    "outputs/figures/paper/Fig2_recipe_decomp.png"
+   ],
    "layout": {
-    "panels": 6,
-    "arrangement": "2행(1×4 곡선 + 1×2 포레스트), 범례는 행 사이",
     "figsize_mm": [
-     180,
-     112
+     180.0,
+     136.0
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "라벨 있는 지역: 대조군 사다리 전 단 0 제외, 사전 지정 레시피 이득의 수준·구조 분해, 중첩 선택(H28 등록) 기각",
+   "panels": 4,
+   "layout_mm": {
+    "width": 180,
+    "height": 136.0,
+    "row1": {
+     "y": 94.0,
+     "h": 36.0
+    },
+    "row2": {
+     "y": 10.0,
+     "h": 70.0
+    },
+    "slots": {
+     "a": [
+      0,
+      27,
+      50
+     ],
+     "b": [
+      80,
+      24,
+      74
+     ],
+     "c": [
+      0,
+      24,
+      "7 | 1.5 | 63.5"
+     ],
+     "d": [
+      106,
+      30,
+      42
+     ]
+    },
+    "d_box": {
+     "y": 40.0,
+     "h": 40.0
+    },
+    "legend_top": 31.0,
+    "height_note": "136 = §2.2 합계(46 + 7 + 79 + 4). 범례 행 7 mm 는 d 아래로 옮기고 행 2 축을 70 mm 로 늘림. 행 1 축 하단(94)과 행 2 축 상단(80) 사이 14 mm 는 빈 띠가 아니다: 행 1 x 눈금·x 라벨(약 8 mm) + 행 2 패널 문자·'better ←' 표지(약 5 mm) + 여유 1 mm"
+   },
+   "assets": [
+    "data/processed/h4/a1_ladder.csv",
+    "data/processed/m1/m1_sc_tests.csv",
+    "data/processed/h4/a1_decomp.csv",
+    "data/processed/h3/h28_tests.csv"
+   ],
+   "ci_kinds": {
+    "a": "strat_AB4",
+    "b": "지역 = m1_stats.boot_delta 블록 부트스트랩(분할 합침, seed 짝지음, 블록 ≥ 8), 평균 = strat_AB4",
+    "c": "none (point estimates)",
+    "d": "strat_AB4(h28, 같은 블록 부트스트랩)"
+   },
+   "deviations": [
+    "d: 가로 포레스트(§1.6 방향 규칙)",
+    "H28ref_oracle = 사후 최선 레시피(oracle_branch ★), all A-block labels 아님",
+    "a 행 라벨: const_t = target-mean constant(m1_core 정의)",
+    "범례를 d 아래 빈 영역에 배치(d x 라벨 바로 아래, 1열 8항목)",
+    "c 띠 태그: level/structure 대신 '|log E ratio| ≥ 0.15 / < 0.15'(성분 우위로 오독 방지)",
+    "c: 러시아 W 끊긴 축 조각(off-scale 마커 대신 실제 값)",
+    "c: |구조 성분| < 0.5 cm 행에 열린 회색 부호 꺾쇠(◆ 바깥 1.9 mm, 선분 길이 불변)",
+    "패널 문자 dx = +1.2 mm(좌측 열 잉크-캔버스 여백 ≥ 1 mm)"
+   ],
+   "decomp_variant": "level_shrunk"
+  },
+  {
+   "id": "paper_fig6_label0",
+   "script": "scripts/4_visualization/paper_figs.py --only fig6",
+   "exports": [
+    "outputs/figures/paper/Fig6_label0.pdf",
+    "outputs/figures/paper/Fig6_label0.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     140.0
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "라벨 0 지역: 우회 기법(H18–H23) 기각, 배포 규칙(H30) 물리식 동급, CCI 결합(C1) 기각(F9), 계층 conformal(C2) 부분 지지(F10)",
+   "panels": 4,
+   "assets": [
+    "data/processed/h2/h_tests_all.csv",
+    "data/processed/h2/h23_summary.csv",
+    "data/processed/h2/h_deploy_gating.csv",
+    "data/processed/h3/h30_deploy_worst.csv",
+    "data/processed/h4/c1_tests.csv",
+    "data/processed/h4/c2_coverage.csv"
+   ],
+   "ci_kinds": {
+    "a": "strat_AB4 (H23 MAML: none)",
+    "b": "none",
+    "c": "block",
+    "d": "block (label0), none (H17 references)"
+   },
+   "layout_mm": "180 x 140: row1 axes 84-134 (a 28+60, b 24+64), legend 64-72 (4 cols x 2 rows), row2 axes 12-59 (c 18+66, d 12+78)",
+   "deviations": [
+    "색 = 모델 계열(스펙 가족별 색 대신, 보라 = 잔차 ML 전역 의미 유지)",
+    "b 축 높이 50 mm(스펙 35, 행 1 하단 정렬)",
+    "그림 높이 140 mm(스펙 132, 행 2 패널 문자와 범례 분리; 스펙 문서 §2.6 표는 담당 밖이라 미수정)",
+    "d 에서 wconf 제외(라벨 있음 n = 3·10, 캡션 명시)",
+    "c 에 블록 등가중 AB4 평균(빈 마커) 추가, 채운·빈 표지는 두 표지 모두 CI 오른쪽 끝 바깥(렌더러로 행 선택)",
+    "d 참조 구간 = 빈 회색 원 #838a96(범례 'Reference interval (d)'), direct #6b7280 과 색값 분리",
+    "b 연결선 모두 실선(파선은 a 조건 전용), 게이트 변형은 행 이름으로 구분",
+    "a 파선 = 공용 무늬(3.5, 1.8), 선마다 배율 0.75–1.25·위상을 맞춰 양 끝 대시 ≥ 1.2 pt·마커 밖 틈 보장",
+    "d 계층 conformal = 물리식 색 #4d4d4d(교차 점검: 파랑은 Fig 2·3·7 의 E 수축 전용), 약칭 blk·cdf·sub·pool·anc·CQR·ak·iw 를 캡션에 정의",
+    "d 약칭 단일 규칙(가장 왼쪽 요소 왼쪽 3 pt, 세로 가운데) + 겹친 쌍만 세로 벌림, x 축 0.3 부터"
+   ],
+   "placeholders": [],
+   "qa_extra": {
+    "marker_clip": "fig6.marker_clip_check: 0 clipped markers (build 에서 실패 시 예외)",
+    "dash_gaps": [
+     {
+      "tag": "H18 LST|covonly",
+      "len_pt": 41.34,
+      "scale": 1.0,
+      "visible_gap_pt": 11.83,
+      "end_dash_pt": 3.68,
+      "gap_pt": 2.16
+     },
+     {
+      "tag": "H18x soil|covonly",
+      "len_pt": 37.47,
+      "scale": 1.0,
+      "visible_gap_pt": 12.56,
+      "end_dash_pt": 1.75,
+      "gap_pt": 2.16
+     },
+     {
+      "tag": "H19 x14|covonly",
+      "len_pt": 21.66,
+      "scale": 1.0,
+      "visible_gap_pt": 6.02,
+      "end_dash_pt": 3.38,
+      "gap_pt": 2.16
+     },
+     {
+      "tag": "H19 x16|covonly",
+      "len_pt": 23.26,
+      "scale": 1.0,
+      "visible_gap_pt": 6.08,
+      "end_dash_pt": 4.18,
+      "gap_pt": 2.16
+     },
+     {
+      "tag": "H22 IRM|covonly",
+      "len_pt": 14.42,
+      "scale": 1.0,
+      "visible_gap_pt": 3.67,
+      "end_dash_pt": 2.94,
+      "gap_pt": 2.16
+     },
+     {
+      "tag": "H22 V-REx|covonly",
+      "len_pt": 14.66,
+      "scale": 1.0,
+      "visible_gap_pt": 3.58,
+      "end_dash_pt": 3.06,
+      "gap_pt": 2.16
+     },
+     {
+      "tag": "H22 DANN|covonly",
+      "len_pt": 9.48,
+      "scale": 0.825,
+      "visible_gap_pt": 2.33,
+      "end_dash_pt": 1.22,
+      "gap_pt": 1.78
+     }
+    ],
+    "ab4_counts": {
+     "cells": 3760,
+     "blocks": 93,
+     "source": "h4/c1_tests.csv MEAN[AB4] = h4/c2_coverage.csv label0 MEAN6[AB4]"
+    }
+   }
+  },
+  {
+   "id": "paper_fig5_label_placement",
+   "script": "scripts/4_visualization/paper_figs.py --only fig5",
+   "exports": [
+    "outputs/figures/paper/Fig5_label_placement.pdf",
+    "outputs/figures/paper/Fig5_label_placement.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     134.0
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "라벨 배치가 수보다 중요하다. 단일 블록 라벨은 캐나다 27 %·레나 56 % 블록에서 해로웠다(H29 고유 블록 평균, 확정). F7 기각: D-optimal 의 E 추정 분산(V_tot) 30 % 감소는 주 8 대상 중 2개(기준 6). 캡션 판정 문장은 b3_f7.csv 에서 계산.",
+   "panels": 4,
+   "ci_kinds": {
+    "a": "none(부호 해칭)",
+    "b": "none(부호 해칭)",
+    "c": "none(개별 점)",
+    "d": "block(대상 점)·strat_AB4(4 주 지역 평균)·strat_sub10(10 하위 지역 평균)"
+   },
+   "assets": [
+    "data/processed/h3/h29b_blocks.csv",
+    "data/processed/h3/h29b_summary.csv",
+    "data/processed/h4/b3_evar.csv",
+    "data/processed/h4/b3_f7.csv",
+    "data/processed/h4/b3_summary.csv",
+    "data/processed/h4/b3_region.csv"
+   ],
+   "deviations": [
+    "색 정규화 symlog(선형 ±2 cm, ±30 cm): 선형 TwoSlopeNorm 이면 |Δ| ≤ 2 cm 블록이 흰색에 가까움",
+    "원 면적 clip(0.45 n, 12, 90) pt²: 1셀 블록 색·해칭 판독 보장",
+    "h29b 고유 블록(33·18) 사용: 스펙의 61·33 은 행 수(감사 조치 6)",
+    "c 회색 = 셀 단위 부트스트랩 대체 대상(f7_eval False); rep_degenerate 는 D-optimal 전 대상이 True 라 표시 기준으로 쓰지 않음",
+    "k-중심 선호는 테두리만(검토 round 1)",
+    "표시 위치 이동(_repel, 검토 round 2): 모든 원 쌍의 바깥 테두리 사이 ≥ 0.3 mm, 31개·최대 2.19 mm, 참 위치가 원 밖인 6개는 점 + 회색 선(source_data offset_mm·leader)",
+    "해칭 12 사선(간격 약 0.6 mm), 원 면적 하한 12 pt²: 최소 원에도 사선 2개 이상(검토 round 2)",
+    "b 해안선 NE 10 m(삼각주 수로 표현), a 는 50 m. 원 위치 = 라벨 셀 중심, 육지 다각형 밖 중심은 캡션 문장(source_data in_water)",
+    "c·d 규칙 범주 라벨 동일 문자열·줄바꿈(Weighted/k-medoid, Active/PPI 두 줄, 검토 round 2)",
+    "캔버스 180 × 134 mm(§2.5 표 128 mm 대비 +6 mm): c 의 두 줄 범주 라벨과 두 줄 y 축 제목 아래 여백 12 mm, 지도 위 패널 문자 여백 5 mm 를 둔 결과. 200 mm 상한 안"
+   ],
+   "placeholders": [],
+   "ci_kind_defs": {
+    "strat_sub10": "10 하위 지역 평균의 층화 블록 부트스트랩(m1_stats.strat, 층 = 하위 지역 10개). strat_AB4 와 같은 함수, 층 집합만 다름. §1.6 표에 행 추가 필요"
+   }
+  },
+  {
+   "id": "paper_fig7_workflow",
+   "script": "scripts/4_visualization/paper_figs.py --only fig7",
+   "exports": [
+    "outputs/figures/paper/Fig7_workflow.pdf",
+    "outputs/figures/paper/Fig7_workflow.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     144.0
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "증거 기반 배포 절차(라벨 0 / 3–10 / 수백·전량)와 확인적 검증. 사전 등록 2단계 분기는 B1 에서 기각(F4), 외부 홀드아웃 D1 은 라벨 정의 교락을 밝힌 채 지지(F11)",
+   "panels": 3,
+   "layout_mm": {
+    "a": [
+     5,
+     72,
+     170.0,
+     66.0
+    ],
+    "b": [
+     30,
+     13.0,
+     47,
+     44.0
+    ],
+    "b_bars": [
+     80,
+     13.0,
+     6,
+     44.0
+    ],
+    "legend": [
+     4,
+     62.5,
+     172,
+     7.5
+    ],
+    "c": [
+     115,
+     13.0,
+     63,
+     44.0
     ]
    },
    "assets": [
-    "data/processed/h3/h25_curve.csv",
-    "data/processed/h3/h25_breakeven.csv",
+    "data/processed/h4/b1_protocol.csv",
+    "data/processed/h4/b1_summary.csv",
+    "data/processed/h4/b1_meta.json",
+    "data/processed/h4/c2_coverage.csv",
+    "data/processed/h4/a1_recipe_table.csv",
+    "data/processed/h4/a2_minn.csv",
+    "data/processed/h4/d1_summary.csv",
+    "data/processed/h4/d1_prediction.json",
+    "data/processed/h4/d1_runs.csv",
+    "outputs/figures/paper/workflow_tags.json",
+    "outputs/figures/paper/_qa/Fig7_d1_bias_check.json"
+   ],
+   "ci_kinds": {
+    "a": "태그별(P0 coverage 블록, PF 대상별 블록 평균 범위, P3 strat_AB4)",
+    "b": "none(평균·최악), 막대 진회색 = 블록 CI",
+    "c": "block(끝 틱)"
+   },
+   "placeholders": [],
+   "tau_sel": "loto",
+   "d1_tau": 0.15,
+   "checks": "간선·노드 교차 검사(shapely) 통과 시에만 렌더; c 는 D1 편향 점검 통과 시에만 본문",
+   "d1_bias_check": {
+    "passed": true,
+    "c_in_main": true,
+    "record": "outputs/figures/paper/_qa/Fig7_d1_bias_check.json"
+   },
+   "deviations": [
+    "a 를 사실 목록의 증거 기반 배포 절차(라벨 0 / 3–10 / 수백·전량)로 다시 그림. 스펙 §2.7 의 S3·Q2 분기(3라벨 E비 진단)는 F4 기각으로 권고 경로에서 빼고 회색 점선 곁가지 'tested, not supported (b)' 로만 둔다",
+    "잎 배지('95 % CI if ≥ 8 blocks') 제거: 잎 태그 = 기대 Δ 범위 + 근거 그림 번호. CI 종류는 캡션",
+    "라벨 3–10 잎 기대 Δ = b 의 'Shrink + res. (S3)' 대상별 블록 부트스트랩 평균(n = 3·10)의 오차 유형별 범위(그림 안 자기 근거). n = 3·10 중 Δ > +1 cm 대상(4개)은 범위에서 빼고 '> 1 cm 악화' 대상 수와 최대 악화 대상(CA-3)만 적는다(사실 목록 '−1.6 ~ −11, 약 0 ± 1, 일부 악화(CA-3 +4)'와 같은 정의·예시, 대상별 값은 Supplementary Table 4). 채점 블록 < 5 대상은 캡션에 명시",
+    "P3 잎: '구조 오차 지역 8개 중 6개가 수백 라벨 필요'(a2_minn E0 고정·전 블록·λ 0.25 에서 계산). 캐나다·AL-5 는 n = 0 에서 이미 물리식보다 나음을 캡션에 적는다(사실 목록 F1 정정)",
+    "간선 라벨 'Hundreds or all'(스펙 'n ≥ tens'): A2 에서 구조 오차 지역은 수백 라벨이 필요",
+    "그림 높이 144 mm(스펙 150): a 잎 상자를 글 높이에 맞춰 줄임",
+    "b x범위 [−2, 6.5](스펙 [−2, 6]): 최악 대상 마커 6.0 cm 가 축 끝에 겹치지 않게",
+    "b 막대: 연회색 = 점 추정 Δ > 0 대상 수, 진회색 = 블록 CI 하한 > 0 대상 수(n_worse_ci)",
+    "b 막대 축 폭 6 mm·c 라벨 열과 간격 4 mm(스펙 8 mm + 2 mm): 막대 축 제목이 c 행 이름 열과 겹치지 않게",
+    "b τ_sel = 'loto'(대상별 LOTO 선택 행 protocol@loto, 주 판정)",
+    "b·c 7행은 패널별 탐색 행(b explore_gate_agree@0.15, c offset_only). 0.3 pt 규선·기울임·†, 색은 계열 색",
+    "기호 분리: b 최악 대상 = 세로 틱 4 pt(스펙 §1.1 그대로, 빈 마커 = 블록 등가중 전역 규칙 보존), c CI = 끝 틱 없는 선(파선 끝 1.6 pt 실선). 마커보다 좁은 CI(n = 0 행)는 수치를 캡션에",
+    "c 사전 예측 방향 띠 제거(검토: 모든 값이 음수라 전 구간 빗금은 정보 없음). 사전 등록 검정 행은 굵은 행 이름 + 캡션 문장",
+    "b 막대 기호를 범례에 넣음(연회색 막대 위 진회색 막대 겹침 = BarPairHandle, 'Targets Δ > 0; dark, CI above 0')",
+    "b·c 7행 행 이름에 '(b only)'·'(c only)' 표기: 두 패널의 나머지 행은 같은 순서",
+    "c 게재 조건(편향 점검)은 _qa/Fig7_d1_bias_check.json 에 기록"
+   ],
+   "verdicts": {
+    "F4": "not supported",
+    "F11": "supported (label-definition confound)"
+   }
+  },
+  {
+   "id": "paper_table1",
+   "script": "scripts/4_visualization/paper_figs.py --only table1",
+   "exports": [
+    "outputs/figures/paper/Table1_region_summary.pdf",
+    "outputs/figures/paper/Table1_region_summary.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     135.6
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "Table 1 대상별 요약: 대상(Fig 1a 지역 번호), 셀·블록, E_own/E0·오차 유형(수준/중간/구조), 라벨 0 원천 잔차 Δ·계층 conformal 커버리지와 구간 폭(MAIN6), H25b·A2 주 정의 n*(미달성 '> n_max'), 라벨 전량 사전 지정 레시피 Δ(AB4). 표 본체는 LaTeX booktabs, PNG/PDF 는 미리보기.",
+   "assets": [
+    "data/processed/h3/h25b_targets.csv",
+    "data/processed/fidelity_base_v3.csv",
+    "data/processed/h4/a2_curve.csv",
+    "data/processed/h4/c2_coverage.csv",
+    "data/processed/h3/h25b_breakeven.csv",
+    "data/processed/h3/h27c_targets.csv",
+    "data/processed/h4/a2_minn.csv",
+    "data/processed/h4/a1_recipe_table.csv",
+    "data/processed/m1/m1_sc_tests.csv"
+   ],
+   "exports_table": [
+    "outputs/figures/paper/Table1_region_summary.csv",
+    "outputs/figures/paper/Table1_region_summary.tex"
+   ],
+   "ci_kinds": {
+    "n0_residual": "block (split-averaged)",
+    "coverage": "block (h4 C2)",
+    "coverage_mean": "strat_AB4",
+    "nstar": "block (three-criterion main definition)",
+    "recipe_regions": "block (M1)",
+    "recipe_mean": "strat_AB4"
+   },
+   "error_type_rule": "level ≥ 0.20, intermediate 0.15–0.20, structure < 0.15 (|ln(E_own/E0)|, h25b_targets)",
+   "coverage_method": "hier2_cdf",
+   "latex_check": {
+    "ok": true,
+    "pdf": "outputs/figures/paper/_qa/table1_tex/Table1_region_summary_check.pdf",
+    "overfull_pt": []
+   },
+   "facts": "scratchpad results_facts.md 2026-09-26 20:45 대조 통과(_qa/Table1_region_summary_values.txt)",
+   "design_note": "행 = H25b 분석 대상 14(F1–F11 분석 단위) + 라벨 0 평가만 있는 Russia C·Greenland + 요약 2행. 스펙 §3 초안의 외부 홀드아웃 행은 Fig 7c·ST7, 'Worst deploy RMSE' 는 Fig 7b·ST4a, 'Workflow branch' 는 Fig 7a 태그(workflow_tags.json), H27 손익분기는 ST6a 로 둔다. AL-6 라벨 0 잔차 Δ(+6.0 cm) 극단값은 각주(물리식 RMSE 최저 10.4 cm, 3분할 모두 악화)."
+  },
+  {
+   "id": "paper_fig1_problem",
+   "script": "scripts/4_visualization/paper_figs.py --only fig1",
+   "exports": [
+    "outputs/figures/paper/Fig1_problem.pdf",
+    "outputs/figures/paper/Fig1_problem.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     134.0
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "Regions differ in the Stefan coefficient E, and without target information direct ML transfers worse than the physics anchor.",
+   "panels": 4,
+   "layout_mm": "row 1 (y 58-129): a map 98 + gap 4 + b 20+56, axis height 71; legend band under a (y 50.3-57.7); row 2 (y 2-42): c schematic 98 + gap 4 + d 20+56 (axis y 12-41.5); b x-title to d 'better' label gap >= 3 mm; total 134 mm",
+   "assets": [
+    "data/processed/fidelity_base_v3.csv",
+    "data/processed/cci_pfr_mean_1997_2021.nc",
+    "data/raw/cci_pfr/ESACCI-PERMAFROST-L4-PFR-*-fv04.0.nc",
+    "data/processed/m1/m1_sc_tests.csv"
+   ],
+   "ci_kinds": {
+    "b": "block (1,000 block resamples of the region mean z)",
+    "d_regions": "rep_row",
+    "d_mean": "strat_AB4"
+   },
+   "source_data": [
+    "outputs/figures/paper/source_data/Fig1_a.csv",
+    "Fig1_b.csv",
+    "Fig1_d.csv"
+   ],
+   "deviations": [
+    "legend: horizontal band beneath panel a instead of inside a (bottom-left), because the lower-left map area holds Canada sites and the scale bar",
+    "map extent sized on regions 1-7 only; external holdout 8 blocks outside the frame are marked with one filled triangle 1.4 mm inside the nearest frame edge plus a direct label ('6 blocks beyond frame')",
+    "b: plotted points subsampled to <= 500 per region (statistics use all cells) so overplot density does not read as an encoded class",
+    "b: reference line labelled E_AK (Alaska exp(mean z)); Table 1 E0 is a leave-region-out fit and is a different quantity",
+    "b/d row order uses the log-space E (spec 2.1); Table 1 uses least-squares E and orders Canada before Russia E (disclosed in caption)",
+    "c: covariates-only A blocks hatched (physics pseudo-labels on A-block covariates, m1_master_factorial.py covonly: train = source labels + A pseudo-labels)",
+    "canvas 134 mm (spec 128) to separate b x-axis title from d"
+   ]
+  },
+  {
+   "id": "paper_figs4_subregion_budget",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/FigS4_subregion_budget.pdf",
+    "outputs/figures/paper/FigS4_subregion_budget.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     168.0
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "H25 하위 지역 10 대상 계단(Fig 3a–d 문법, 띠 없음) + 14 대상 n = 3·10 Δ 포레스트(블록 CI)",
+   "panels": 12,
+   "assets": [
+    "data/processed/h3/h25b_curve.csv",
     "data/processed/h3/h25_targets.csv"
    ],
-   "style": "journal_style(Arial 7.5 pt, 격자 없음, 위·오른쪽 spine 제거), 방법 색 고정(물리 회색·E 재적합 파랑·증강 초록·잔차 보라), 소문자 굵은 패널 문자, 그림 안 제목 없음, 캡션 CAPTIONS.md",
+   "ci_kinds": {
+    "a_j": "none(곡선)",
+    "k_l": "block"
+   }
+  },
+  {
+   "id": "paper_figs3_subregions",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
    "exports": [
-    "outputs/figures/paper/Fig2_label_budget.pdf",
-    "outputs/figures/paper/Fig2_label_budget.png"
+    "outputs/figures/paper/FigS3_subregions.pdf",
+    "outputs/figures/paper/FigS3_subregions.png"
    ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     90.0
+    ]
+   },
    "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
    "generated": "2026-09-26",
-   "medium": "paper (Sci Rep 2-column 180 mm)"
+   "draft": false,
+   "qa": "pass",
+   "intent": "하위 지역 11개 정의 지도(Alaska·Canada·Lena), 블록 면적 비례 원 + 하위 지역 볼록 껍질 외곽선 + 이름",
+   "panels": 3,
+   "assets": [
+    "data/processed/h3/subregions.csv",
+    "data/processed/fidelity_base_v3.csv"
+   ],
+   "check": "make_subregions 재현: 11개 하위 지역 블록·셀 수가 subregions.csv 와 일치"
+  },
+  {
+   "id": "paper_figs5_obs_design",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/FigS5_obs_design.pdf",
+    "outputs/figures/paper/FigS5_obs_design.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     98.0
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "H24 관측 설계 곡선(h2_fig07 재작성): 2 추정량 × 5 지역, 규칙 7종(k-중심만 방법 색)",
+   "panels": 10,
+   "assets": [
+    "data/processed/h2/h24_curve.csv"
+   ],
+   "ci_kinds": {
+    "all": "none"
+   }
+  },
+  {
+   "id": "paper_figs7_tfm",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/FigS7_tfm.pdf",
+    "outputs/figures/paper/FigS7_tfm.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     96.0
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "B4 TFM 대 CatBoost 잔차 포레스트(n = 3·10·40) + n = 10 물리식 대비",
+   "panels": 2,
+   "assets": [
+    "data/processed/h4/b4_summary.csv",
+    "data/processed/h4/b4_tests.csv"
+   ]
+  },
+  {
+   "id": "paper_figs9_label_year",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/FigS9_label_year.pdf",
+    "outputs/figures/paper/FigS9_label_year.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     84.0
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "D3 라벨 연도 민감도: 학습 연도 부분집합 짝지은 Δ(알래스카) + 전이 부분집합 차이",
+   "panels": 2,
+   "assets": [
+    "data/processed/m1/label_year_sensitivity.csv"
+   ]
+  },
+  {
+   "id": "paper_figs8_cci_bias",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/FigS8_cci_bias.pdf",
+    "outputs/figures/paper/FigS8_cci_bias.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     122.0
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "C1 CCI 편향 전파: 산점(1:1)·오차 전파·원천 분산 민감도·블록 편향 지도",
+   "panels": 4,
+   "assets": [
+    null,
+    "data/processed/fidelity_base_v3.csv"
+   ]
+  },
+  {
+   "id": "paper_figs1_stefan_scatter",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/FigS1_stefan_scatter.pdf",
+    "outputs/figures/paper/FigS1_stefan_scatter.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     92.0
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "S1: 지역별 ALT 대 √TDD 산점과 두 E 적합(선형 원점 통과 최소제곱·로그 공간) + 공변량 25 표",
+   "panels": 8,
+   "assets": [
+    "data/processed/fidelity_base_v3.csv"
+   ]
+  },
+  {
+   "id": "paper_figs2_scoring_protocol",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/FigS2_scoring_protocol.pdf",
+    "outputs/figures/paper/FigS2_scoring_protocol.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     74.0
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "채점 규약 도식: A/B 블록, 분할 안 짝지은 블록 부트스트랩, 분할·지역 결합",
+   "panels": 3,
+   "assets": []
+  },
+  {
+   "id": "paper_tables9_covariates",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/supp_tables/TableS9_covariates.csv",
+    "outputs/figures/paper/supp_tables/TableS9_covariates.tex"
+   ],
+   "kind": "supplementary table",
+   "rows_csv": 25,
+   "rows_tex": 25,
+   "generated": "2026-09-26",
+   "qa": "pass",
+   "style": "booktabs LaTeX(긴 표 longtable), 음수 U+2212, 절단 '> n_max' 표기"
+  },
+  {
+   "id": "paper_tables8_h18_h24_tests",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/supp_tables/TableS8_h18_h24_tests.csv",
+    "outputs/figures/paper/supp_tables/TableS8_h18_h24_tests.tex"
+   ],
+   "kind": "supplementary table",
+   "rows_csv": 338,
+   "rows_tex": 36,
+   "generated": "2026-09-26",
+   "qa": "pass",
+   "style": "booktabs LaTeX(긴 표 longtable), 음수 U+2212, 절단 '> n_max' 표기"
+  },
+  {
+   "id": "paper_tables3_ci_row_vs_block",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/supp_tables/TableS3_ci_row_vs_block.csv",
+    "outputs/figures/paper/supp_tables/TableS3_ci_row_vs_block.tex"
+   ],
+   "kind": "supplementary table",
+   "rows_csv": 8740,
+   "rows_tex": 7,
+   "generated": "2026-09-26",
+   "qa": "pass",
+   "style": "booktabs LaTeX(긴 표 longtable), 음수 U+2212, 절단 '> n_max' 표기"
+  },
+  {
+   "id": "paper_tables6a_h27_breakeven",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/supp_tables/TableS6a_h27_breakeven.csv",
+    "outputs/figures/paper/supp_tables/TableS6a_h27_breakeven.tex"
+   ],
+   "kind": "supplementary table",
+   "rows_csv": 14,
+   "rows_tex": 14,
+   "generated": "2026-09-26",
+   "qa": "pass",
+   "style": "booktabs LaTeX(긴 표 longtable), 음수 U+2212, 절단 '> n_max' 표기"
+  },
+  {
+   "id": "paper_tables6b_h27_rule_stats",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/supp_tables/TableS6b_h27_rule_stats.csv",
+    "outputs/figures/paper/supp_tables/TableS6b_h27_rule_stats.tex"
+   ],
+   "kind": "supplementary table",
+   "rows_csv": 96,
+   "rows_tex": 24,
+   "generated": "2026-09-26",
+   "qa": "pass",
+   "style": "booktabs LaTeX(긴 표 longtable), 음수 U+2212, 절단 '> n_max' 표기"
+  },
+  {
+   "id": "paper_tables6c_c2_coverage_blockeq",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/supp_tables/TableS6c_c2_coverage_blockeq.csv",
+    "outputs/figures/paper/supp_tables/TableS6c_c2_coverage_blockeq.tex"
+   ],
+   "kind": "supplementary table",
+   "rows_csv": 40,
+   "rows_tex": 21,
+   "generated": "2026-09-26",
+   "qa": "pass",
+   "style": "booktabs LaTeX(긴 표 longtable), 음수 U+2212, 절단 '> n_max' 표기"
+  },
+  {
+   "id": "paper_tables1_cells_blocks_e",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/supp_tables/TableS1_cells_blocks_E.csv",
+    "outputs/figures/paper/supp_tables/TableS1_cells_blocks_E.tex"
+   ],
+   "kind": "supplementary table",
+   "rows_csv": 22,
+   "rows_tex": 22,
+   "generated": "2026-09-26",
+   "qa": "pass",
+   "style": "booktabs LaTeX(긴 표 longtable), 음수 U+2212, 절단 '> n_max' 표기"
+  },
+  {
+   "id": "paper_tables2_holm_families",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/supp_tables/TableS2_holm_families.csv",
+    "outputs/figures/paper/supp_tables/TableS2_holm_families.tex"
+   ],
+   "kind": "supplementary table",
+   "rows_csv": 175,
+   "rows_tex": 175,
+   "generated": "2026-09-26",
+   "qa": "pass",
+   "style": "booktabs LaTeX(긴 표 longtable), 음수 U+2212, 절단 '> n_max' 표기"
+  },
+  {
+   "id": "paper_tables4a_b1_protocol",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/supp_tables/TableS4a_b1_protocol.csv",
+    "outputs/figures/paper/supp_tables/TableS4a_b1_protocol.tex"
+   ],
+   "kind": "supplementary table",
+   "rows_csv": 27,
+   "rows_tex": 27,
+   "generated": "2026-09-26",
+   "qa": "pass",
+   "style": "booktabs LaTeX(긴 표 longtable), 음수 U+2212, 절단 '> n_max' 표기"
+  },
+  {
+   "id": "paper_tables4b_h28_two_scorings",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/supp_tables/TableS4b_h28_two_scorings.csv",
+    "outputs/figures/paper/supp_tables/TableS4b_h28_two_scorings.tex"
+   ],
+   "kind": "supplementary table",
+   "rows_csv": 9,
+   "rows_tex": 9,
+   "generated": "2026-09-26",
+   "qa": "pass",
+   "style": "booktabs LaTeX(긴 표 longtable), 음수 U+2212, 절단 '> n_max' 표기"
+  },
+  {
+   "id": "paper_tables7_d1_external",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/supp_tables/TableS7_d1_external.csv",
+    "outputs/figures/paper/supp_tables/TableS7_d1_external.tex"
+   ],
+   "kind": "supplementary table",
+   "rows_csv": 21,
+   "rows_tex": 21,
+   "generated": "2026-09-26",
+   "qa": "pass",
+   "style": "booktabs LaTeX(긴 표 longtable), 음수 U+2212, 절단 '> n_max' 표기"
+  },
+  {
+   "id": "paper_tables10a_software",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/supp_tables/TableS10a_software.csv",
+    "outputs/figures/paper/supp_tables/TableS10a_software.tex"
+   ],
+   "kind": "supplementary table",
+   "rows_csv": 12,
+   "rows_tex": 12,
+   "generated": "2026-09-26",
+   "qa": "pass",
+   "style": "booktabs LaTeX(긴 표 longtable), 음수 U+2212, 절단 '> n_max' 표기"
+  },
+  {
+   "id": "paper_tables10b_runs",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/supp_tables/TableS10b_runs.csv",
+    "outputs/figures/paper/supp_tables/TableS10b_runs.tex"
+   ],
+   "kind": "supplementary table",
+   "rows_csv": 53,
+   "rows_tex": 48,
+   "generated": "2026-09-26",
+   "qa": "pass",
+   "style": "booktabs LaTeX(긴 표 longtable), 음수 U+2212, 절단 '> n_max' 표기"
+  },
+  {
+   "id": "paper_figs12_a2_matrix",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/FigS12_a2_matrix.pdf",
+    "outputs/figures/paper/FigS12_a2_matrix.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     84.6
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "A2 전 대상 행렬(E 처리 3종, broc 0 중심 공통 범위, 세 조건 충족 칸 테두리)",
+   "panels": 3,
+   "assets": [
+    "data/processed/h4/a2_curve.csv"
+   ]
+  },
+  {
+   "id": "paper_tables5_a2_nstar",
+   "script": "scripts/4_visualization/paper_figs.py --only supp",
+   "exports": [
+    "outputs/figures/paper/supp_tables/TableS5_a2_nstar.csv",
+    "outputs/figures/paper/supp_tables/TableS5_a2_nstar.tex"
+   ],
+   "kind": "supplementary table",
+   "rows_csv": 546,
+   "rows_tex": 14,
+   "generated": "2026-09-26",
+   "qa": "pass",
+   "style": "booktabs LaTeX(긴 표 longtable), 음수 U+2212, 절단 '> n_max' 표기"
+  },
+  {
+   "id": "paper_figs6_label_number_aux",
+   "script": "scripts/4_visualization/paper_figs.py --only supp --draft",
+   "exports": [
+    "outputs/figures/paper/FigS6_label_number_aux.pdf",
+    "outputs/figures/paper/FigS6_label_number_aux.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     118.0
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "S6 필요 라벨 수 보조: H27 이진 달성 + A2 생존형 계단 + α·λ·κ 민감도 + F6 이론 대 경험",
+   "panels": 4,
+   "assets": [
+    "data/processed/h3/h27c_targets.csv",
+    "data/processed/h3/h27c_rule.csv",
+    "data/processed/h4/a2_minn.csv",
+    "data/processed/h4/b2_theory.csv"
+   ],
+   "smoke_panels": []
+  },
+  {
+   "id": "paper_fig3_label_budget",
+   "script": "scripts/4_visualization/paper_figs.py --only fig3",
+   "exports": [
+    "outputs/figures/paper/Fig3_label_budget.pdf",
+    "outputs/figures/paper/Fig3_label_budget.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180.0,
+     118.0
+    ]
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "라벨 예산 계단(H25b 주 4지역, 블록 CI 띠, S3 무작위 추가로 레나 규칙 차이 표시)과 B2 부분 풀링 14 대상 평균 Δ 대 n(추정기 4종, 앵커만, 무작위 라벨, 블록 CI).",
+   "claim": "H25 이득은 오차 유형·라벨 배치 규칙에 따라 다르게 변한다. 고정 κ=10 수축이 관측 범위 전 n 에서 14(12·9) 대상 평균 최선이고, 오프셋 MLE·PPI++·혼합효과 부스팅은 이를 넘지 못한다(F5 기각).",
+   "panels": 5,
+   "assets": [
+    "data/processed/h3/h25b_curve.csv",
+    "data/processed/h4/b2_regional.csv"
+   ],
+   "ci_kinds": {
+    "a_d": "block",
+    "e": "block (target-stratified mean)"
+   },
+   "layout_mm": {
+    "row1": "axes y 73–113; slots a 14+36, b–d 4+36, right 10 (reference whisker margin); header band y 113.6–116.6 over each axes box (error type fill + region label + class text)",
+    "row2": "axes y 11–59; e 14+100 (x 14–114); legend x 118–180 y 11–59 (single legend, 8 items, labelspacing tuned to ~44 mm tall, vertically centred); e estimator key inside e (upper middle, 4 rows; κ=10 entry named as in the a–d legend)"
+   },
+   "panel_e": {
+    "filter": "vs=phys, region_set=ALL, variant=E, rule=random, scope=n",
+    "ylim": [
+     -2.0,
+     3.0
+    ],
+    "target_sets": {
+     "3-10": 14,
+     "20-160": 12,
+     "320-320": 9
+    },
+    "offscale_mixed_boost": [
+     "n=3:10.45",
+     "n=5:9.33",
+     "n=10:6.51",
+     "n=20:7.84",
+     "n=40:8.71",
+     "n=80:7.02",
+     "n=160:7.07",
+     "n=320:5.25"
+    ],
+    "k10_best_every_n": true,
+    "k10_ci_overlap": {
+     "onset_n": 5,
+     "no_overlap_n": [
+      3
+     ],
+     "overlap_by_n": {
+      "3": false,
+      "5": true,
+      "10": true,
+      "20": true,
+      "40": true,
+      "80": true,
+      "160": true,
+      "320": true
+     },
+     "vs": [
+      "offset_mle",
+      "ppi"
+     ],
+     "min_margin_cm": 0.0005,
+     "at_n": 160,
+     "rule": "κ=10 ci_hi ≥ 비교 추정기 ci_lo, 모든 검사 n 스캔(onset = 이후 전 n 겹침)"
+    },
+    "encoding": "METHOD refit 파랑 단일색 + 선종·마커(κ10 파선 o, 오프셋 MLE 일점쇄선 (0,(4,2,1,2)) s = Fig 4 선종, PPI++ 점선 P, 혼합효과 부스팅 = 축 위 열린 머리 ↑ + 수치). ▲ 는 최소 n 미달성 전용이라 쓰지 않음",
+    "key": "e 축 안 우상단 4줄 표지(그림 범례와 별개, 범례 항목 상한 8 은 그림 범례에 적용)"
+   },
+   "end_tick": "검사 n 이 끝나는 패널(c·d)에서 곡선 끝점 무리 아래 1 mm, 3 mm 길이 0.8 pt + 먼 끝 1.2 mm 가로 캡(T 모양; 공간 부족 시 위)",
+   "ref_allA": "분할 평균 파선 + 분할 범위 수염(축 상자 우측 바깥 1.5 mm, 분할별 값 = h25b_curve d_phys_splits JSON): Lena -1.69, -1.79, -0.75; Canada 3.40, 3.68, -0.07; Russia_W -8.63, -13.03, -13.98; Russia_E -0.98, 0.17, 0.87",
+   "error_type_encoding": "머리 띠 채움: 구조 = 없음, 수준 = #f2f2f2, 중간 = 회색 빗금(Fig 4 HATCH_INTER) + 우측 범주 글자. 축 배경 전체 채색은 n > 라벨 풀 음영(#f2f2f2)과 겹쳐 쓰지 않는다",
+   "ci_ad": {
+    "k_medoid": "잔차 ML 채운 띠(alpha 0.18)",
+    "random": "잔차 ML 파선 테두리 (0,(2,1.5)) 0.5 pt, 채움 없음",
+    "legend": "두 항목으로 구분"
+   }
+  },
+  {
+   "id": "paper_fig4_min_labels",
+   "script": "scripts/4_visualization/paper_figs.py --only fig4",
+   "exports": [
+    "outputs/figures/paper/Fig4_min_labels.pdf",
+    "outputs/figures/paper/Fig4_min_labels.png"
+   ],
+   "layout": {
+    "figsize_mm": [
+     180,
+     132.0
+    ],
+    "row1": "a 14+36, b–d 4+36, 우 10; 축 40 mm, 조건 라벨·수준/구조 괄호 8 mm",
+    "legend": "1개 7항목 4열 2줄(66–73 mm)",
+    "row2": "e 14+80(위 31 mm, 끊김 2, 띠 17) · 간격 2 · f 25+51(우 8, E 고정/라벨 추정 괄호)",
+    "deviation": "스펙 §2.4 대비: a–d 대상을 Russia W·Lena·Canada·AL-2 로 교체(사실 목록 메시지), n = 0 자리 추가(축 끊김), f 를 대상 행에서 E 처리 행(평균 + 개별 대상 점)으로 교체, |log E비| = h25b_targets 최소제곱(사실 목록 단일 정의)"
+   },
+   "units": "cm",
+   "medium": "paper (Sci Rep 2-column 180 mm)",
+   "style": "polar.paperstyle(Liberation Sans 7–8 pt, METHOD 색 고정, mm 절대 배치, 굵은 소문자 패널 문자)",
+   "generated": "2026-09-26",
+   "draft": false,
+   "qa": "pass",
+   "intent": "A2 교락 제거 최소 라벨 수: E 처리와 라벨 배치를 분리한 잔차 학습의 n*(주 정의 세 조건), 달성/미달성 이진 표시, E 처리별 라벨 배치 효과",
+   "claim": "대상 라벨 수십 개로는 원천 잔차가 대상에 적응하지 못한다(구조 지역 8곳 중 Lena n* = 320, AL-2·AL-4·AL-6·LE-1·LE-2 미달성, Canada·AL-5 는 n = 0 원천 잔차만으로 이미 충족; n* = 3 달성 6곳 중 5곳이 n = 0 충족). 소수 라벨의 가치는 E 추정에서 나오며(Russia W: E0 고정 −0.6 대 κ 수축 −11.4 cm, n = 10), 배치 효과도 E 를 라벨로 추정할 때만 생긴다(n = 40 분산 − 집중: κ −1.14, 오프셋 MLE −1.65, E0 고정 +0.04 cm).",
+   "facts": "scratchpad results_facts.md F1–F3(2026-09-26 20:45), 단일 분류 = h3/h25b_targets 최소제곱 |log E비|",
+   "panels": 6,
+   "ci_kinds": {
+    "a_d": "block",
+    "e": "none (판정 결과)",
+    "f": "block (대상 평균), 개별 대상 점은 CI 없음"
+   },
+   "ci_rule": "분할 합계 채점 블록 ≥ 8 일 때만 CI, 분할 채점 블록 < 5 대상은 †",
+   "block_info": {
+    "AL-1": {
+     "tot": 18,
+     "min": 1,
+     "flag": true,
+     "show_ci": true
+    },
+    "AL-2": {
+     "tot": 31,
+     "min": 10,
+     "flag": false,
+     "show_ci": true
+    },
+    "AL-3": {
+     "tot": 18,
+     "min": 4,
+     "flag": true,
+     "show_ci": true
+    },
+    "AL-4": {
+     "tot": 7,
+     "min": 1,
+     "flag": true,
+     "show_ci": false
+    },
+    "AL-5": {
+     "tot": 35,
+     "min": 9,
+     "flag": false,
+     "show_ci": true
+    },
+    "AL-6": {
+     "tot": 12,
+     "min": 1,
+     "flag": true,
+     "show_ci": true
+    },
+    "Alaska_f0": {
+     "tot": 39,
+     "min": 39,
+     "flag": false,
+     "show_ci": true
+    },
+    "CA-1": {
+     "tot": 9,
+     "min": 3,
+     "flag": true,
+     "show_ci": true
+    },
+    "CA-2": {
+     "tot": 11,
+     "min": 2,
+     "flag": true,
+     "show_ci": true
+    },
+    "CA-3": {
+     "tot": 28,
+     "min": 3,
+     "flag": true,
+     "show_ci": true
+    },
+    "Canada": {
+     "tot": 51,
+     "min": 12,
+     "flag": false,
+     "show_ci": true
+    },
+    "LE-1": {
+     "tot": 21,
+     "min": 3,
+     "flag": true,
+     "show_ci": true
+    },
+    "LE-2": {
+     "tot": 14,
+     "min": 4,
+     "flag": true,
+     "show_ci": true
+    },
+    "Lena": {
+     "tot": 27,
+     "min": 5,
+     "flag": false,
+     "show_ci": true
+    },
+    "Russia_E": {
+     "tot": 27,
+     "min": 8,
+     "flag": false,
+     "show_ci": true
+    },
+    "Russia_W": {
+     "tot": 27,
+     "min": 7,
+     "flag": false,
+     "show_ci": true
+    }
+   },
+   "marker_overlaps": 0,
+   "assets": [
+    "data/processed/h4/a2_curve.csv",
+    "data/processed/h4/a2_minn.csv",
+    "data/processed/h4/a2_spread.csv",
+    "data/processed/h3/h25b_targets.csv"
+   ],
+   "encoding": {
+    "filled": "n* 세 조건 충족(이 그림 유일한 빈 마커 의미)",
+    "E0_fixed": "실선 + 블록 CI 띠",
+    "shrink_k10": "파선",
+    "offset_mle": "일점쇄선 (0,(4,2,1,2))",
+    "E_own_fixed": "검정 점선 0.9 pt(참조, 상한 아님), 표지 위 zorder 3.4",
+    "secondary_markers": "κ 수축·오프셋 MLE 표지 2.4 pt(E0 고정 3.0 pt 의 80 %)",
+    "value_table": "E_own 점선이 표지에 가리고 n > n_max 음영에 자리가 있을 때(이 자료에서 a 만) n = 3·n_max 값 표(κ·Offset·E_own, cm)",
+    "abslogE_header": "|log E비| 소수 둘째 자리(0.51, 0.12, 0.00, 0.06; Fig 2·3·Table 1 과 통일)",
+    "n0": "x 축 '0' 자리(축 끊김), E0 고정 점 + 블록 CI 막대",
+    "ring": "e: n = 0 에서 이미 세 조건 충족(회색 고리)",
+    "untested": "a–d 음영 = n > n_max",
+    "censored": "띠 채운 ▲ #4d4d4d, range-limited 빈 △(흰 채움, #4d4d4d 테두리) + 글 '(range-limited)'",
+    "error_type": "수준 ≥ 0.20, 구조 < 0.15, 중간 0.15–0.20(e 빗금)",
+    "f_n": "n=10 CI 실선(+0.2), n=40 CI 파선(−0.2), 직접 표기"
+   }
   }
  ],
  "m1/m1_sc_main_effects": {

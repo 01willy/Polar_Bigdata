@@ -5,6 +5,8 @@
 중첩 선택: 대상 t 의 레시피는 다른 3 AB4 지역의 지역 등가중 RMSE 가 최소인 후보. 가족별(전체·CatBoost 계열·신경망 계열·해석적 앵커) 선택도 산출.
 알래스카 지역 내: fold 중첩(다른 5 fold 에서 선택 → 해당 fold 채점).
 검정: nested − Stefan, nested_cb − Stefan, nested_nn − Stefan, nested_cb − nested_nn, 사전 지정(stefan+catboost_lo λ.25/.5) − Stefan, oracle(자기 지역 최선, 참고) − Stefan. seed 짝지음·층화 블록 부트스트랩.
+Holm(감사 반영): 가족 = 이 파일의 지역 평균(MEAN) 행 확인적 대조(H28_·H28b_ 접두, 알래스카 fold 중첩 포함). H28x(탐색)·H28ref(참고)는 role 열로 구분하고
+  p_holm 은 비우며, 탐색 가족 안의 Holm 은 p_holm_expl 로만 병기한다.
 산출 data/processed/h3/h28_{scores,nested,tests}.csv
 """
 from __future__ import annotations
@@ -17,7 +19,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from polar.m1_stats import boot_delta, summarize_delta, seed_of                                     # noqa: E402
+from polar.m1_stats import boot_delta, summarize_delta, seed_of, holm                               # noqa: E402
 
 PROC = ROOT / "data" / "processed"; OUT = PROC / "h3"; OUT.mkdir(exist_ok=True)
 AB4 = ["Lena", "Canada", "Russia_W", "Russia_E"]
@@ -181,8 +183,22 @@ if ak_tks:
     pd.DataFrame(picks_ak).to_csv(OUT / "h28_alaska_nested.csv", index=False)
     print(pd.DataFrame(picks_ak).to_string(index=False))
 
-T = pd.DataFrame(tests); T.to_csv(OUT / "h28_tests.csv", index=False)
+T = pd.DataFrame(tests)
+
+
+def add_holm(T, confirm_prefixes):
+    """지역 평균 행의 확인적 대조에 가족별 Holm, 탐색·참고 대조는 role 로 구분."""
+    pre = T.test.str.split("_").str[0]
+    T["role"] = np.where(pre.isin(confirm_prefixes), "confirmatory", np.where(pre.str.endswith("ref"), "reference", "exploratory"))
+    T["is_mean"] = T.target.astype(str).str.startswith("MEAN")
+    T["p_holm"] = np.nan; T["p_holm_expl"] = np.nan
+    c = T.is_mean & (T.role == "confirmatory"); T.loc[c, "p_holm"] = holm(T.loc[c, "p_boot"].values)
+    e = T.is_mean & (T.role != "confirmatory"); T.loc[e, "p_holm_expl"] = holm(T.loc[e, "p_boot"].values)
+    return T
+
+
+T = add_holm(T, {"H28", "H28b"}); T.to_csv(OUT / "h28_tests.csv", index=False)
 pd.set_option("display.width", 250)
 print(PK.pivot_table(index="target", columns="choice", values="rmse_target").round(2).to_string())
 print(PK[PK.choice.isin(["nested_all", "nested_cb", "nested_nn"])][["target", "choice", "anchor", "resid", "lam"]].to_string(index=False))
-print(T[T.target.astype(str).str.startswith("MEAN") | (T.target == "Alaska")][["test", "target", "rmse_A", "rmse_B", "delta", "ci_lo", "ci_hi", "delta_blockeq", "ci_flag"]].round(2).to_string(index=False))
+print(T[T.target.astype(str).str.startswith("MEAN") | (T.target == "Alaska")][["test", "target", "rmse_A", "rmse_B", "delta", "ci_lo", "ci_hi", "delta_blockeq", "ci_flag", "role", "p_boot", "p_holm", "p_holm_expl"]].round(3).to_string(index=False))

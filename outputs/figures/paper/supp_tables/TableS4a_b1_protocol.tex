@@ -1,0 +1,33 @@
+\begin{tabular}{llrrrrrrlr}
+\toprule
+Method & Analysis & n & Worse (point) & Worse (block CI) & Better (block CI) & Mean $\Delta$ (cm) & Worst $\Delta$ (cm) & Worst target & Gap to oracle branch (cm) \\
+\midrule
+E0\_resid\_src & reference & 0 & 6 / 14 & 4 & 6 & 0.28 & 6.02 & AL-6 &  \\
+always\_E0\_resid & prereg & 3 & 7 / 14 & 3 & 5 & $-$0.10 & 1.51 & AL-2 & 1.06 \\
+always\_E0\_resid & prereg & 10 & 7 / 14 & 3 & 6 & $-$0.14 & 1.51 & AL-2 & 1.30 \\
+always\_shrink\_resid & prereg & 3 & 6 / 14 & 4 & 7 & $-$0.60 & 4.31 & CA-3 & 0.56 \\
+always\_shrink\_resid & prereg & 10 & 7 / 14 & 4 & 3 & $-$0.66 & 3.75 & CA-3 & 0.77 \\
+explore\_gate\_agree@0.1 & post hoc explore & 3 & 7 / 14 & 4 & 6 & $-$0.58 & 2.26 & CA-3 & 0.58 \\
+explore\_gate\_agree@0.1 & post hoc explore & 10 & 7 / 14 & 4 & 5 & $-$0.68 & 1.78 & CA-3 & 0.76 \\
+explore\_gate\_agree@0.15 & post hoc explore & 3 & 7 / 14 & 4 & 6 & $-$0.58 & 2.26 & CA-3 & 0.58 \\
+explore\_gate\_agree@0.15 & post hoc explore & 10 & 7 / 14 & 4 & 5 & $-$0.69 & 1.78 & CA-3 & 0.75 \\
+explore\_gate\_agree@0.2 & post hoc explore & 3 & 7 / 14 & 4 & 6 & $-$0.58 & 2.26 & CA-3 & 0.58 \\
+explore\_gate\_agree@0.2 & post hoc explore & 10 & 7 / 14 & 4 & 5 & $-$0.69 & 1.78 & CA-3 & 0.75 \\
+oracle\_any & reference & 3 & 1 / 14 & 1 & 7 & $-$1.30 & 0.22 & AL-2 & $-$0.14 \\
+oracle\_any & reference & 10 & 2 / 14 & 1 & 7 & $-$1.56 & 0.67 & AL-2 & $-$0.13 \\
+oracle\_branch & reference & 3 & 1 / 14 & 1 & 7 & $-$1.16 & 0.22 & AL-2 & 0.00 \\
+oracle\_branch & reference & 10 & 3 / 14 & 1 & 7 & $-$1.44 & 0.67 & AL-2 & 0.00 \\
+protocol@0.1 & prereg & 3 & 6 / 14 & 4 & 6 & $-$0.51 & 3.40 & CA-3 & 0.65 \\
+protocol@0.1 & prereg & 10 & 8 / 14 & 5 & 3 & $-$0.60 & 3.22 & CA-3 & 0.83 \\
+protocol@0.15 & prereg & 3 & 7 / 14 & 4 & 6 & $-$0.51 & 3.40 & CA-3 & 0.65 \\
+protocol@0.15 & prereg & 10 & 7 / 14 & 4 & 5 & $-$0.68 & 3.22 & CA-3 & 0.76 \\
+protocol@0.2 & prereg & 3 & 7 / 14 & 4 & 6 & $-$0.51 & 3.40 & CA-3 & 0.65 \\
+protocol@0.2 & prereg & 10 & 7 / 14 & 4 & 5 & $-$0.69 & 3.22 & CA-3 & 0.74 \\
+protocol@loto & prereg & 3 & 7 / 14 & 4 & 6 & $-$0.50 & 3.40 & CA-3 & 0.66 \\
+protocol@loto & prereg & 10 & 7 / 14 & 4 & 5 & $-$0.68 & 3.22 & CA-3 & 0.76 \\
+refit\_only & prereg & 3 & 8 / 14 & 5 & 1 & 2.74 & 36.95 & CA-3 & 3.90 \\
+refit\_only & prereg & 10 & 9 / 14 & 3 & 2 & 0.56 & 10.97 & CA-3 & 1.99 \\
+shrink\_only & prereg & 3 & 3 / 14 & 2 & 5 & $-$0.63 & 3.39 & CA-3 & 0.53 \\
+shrink\_only & prereg & 10 & 8 / 14 & 3 & 4 & $-$0.62 & 2.93 & CA-3 & 0.82 \\
+\bottomrule
+\end{tabular}

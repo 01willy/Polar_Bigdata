@@ -1,0 +1,16 @@
+{
+ "name": "TableS8_h18_h24_tests",
+ "ok": true,
+ "fails": [],
+ "words": {
+  "definition": 31,
+  "statistics": 46,
+  "panels": 21,
+  "data": 11,
+  "total": 109
+ },
+ "paths": {
+  "csv": "outputs/figures/paper/supp_tables/TableS8_h18_h24_tests.csv",
+  "tex": "outputs/figures/paper/supp_tables/TableS8_h18_h24_tests.tex"
+ }
+}

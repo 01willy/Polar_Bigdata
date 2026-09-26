@@ -1,0 +1,16 @@
+{
+ "name": "TableS10a_software",
+ "ok": true,
+ "fails": [],
+ "words": {
+  "definition": 11,
+  "statistics": 11,
+  "panels": 4,
+  "data": 9,
+  "total": 35
+ },
+ "paths": {
+  "csv": "outputs/figures/paper/supp_tables/TableS10a_software.csv",
+  "tex": "outputs/figures/paper/supp_tables/TableS10a_software.tex"
+ }
+}

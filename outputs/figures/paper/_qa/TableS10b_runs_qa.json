@@ -1,0 +1,16 @@
+{
+ "name": "TableS10b_runs",
+ "ok": true,
+ "fails": [],
+ "words": {
+  "definition": 14,
+  "statistics": 17,
+  "panels": 14,
+  "data": 4,
+  "total": 49
+ },
+ "paths": {
+  "csv": "outputs/figures/paper/supp_tables/TableS10b_runs.csv",
+  "tex": "outputs/figures/paper/supp_tables/TableS10b_runs.tex"
+ }
+}

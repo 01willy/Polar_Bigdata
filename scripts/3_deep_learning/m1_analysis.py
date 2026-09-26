@@ -20,6 +20,9 @@
   - 지역 층화 부트스트랩: 주 집합 각 지역의 블록을 동시에 재표집해 '지역 비가중 평균 Δ'의 CI(주 추정치). 분포가 없는
     지역(블록<8: 러시아 C·그린란드)은 CI에서 제외하고 `ci_flag`에 기록(`delta_rmse_ci_regions` = CI 산출 지역만의 평균 Δ).
     `REGION_SUMMARY_AB4` = 셀 수가 충분한 주 집합 4지역(레나·캐나다·러시아 W·러시아 E, §B) 요약 행.
+    정정 2026-09-26: 요약 행의 점 추정치(delta_rmse·delta_per_seed·delta_blockeq 등)는 CI 와 같은 지역 집합(CI 산출 지역)의
+    비가중 평균이다(polar.m1_stats.summarize_delta 규약). 블록<8 지역까지 포함한 평균은 `delta_allregions` 로 병기한다.
+    `regions_point` = 점 추정 지역, `ci_valid` = CI 산출 여부, `pt_in_ci` = 점 추정치의 CI 포함 여부(검증용).
     부호검정(n=6)은 기술 통계로 강등(`sign_test_p_descriptive`). 블록 단위 보조: Wilcoxon 부호순위(`wilcoxon_p`), 지역 층화
     순열검정(지역 내 부호 뒤집기 10,000회, `strat_perm_p`). 단위 = 블록별 ΔRMSE(seed 평균), 양측.
   - 앙상블(트리+신경망): 같은 (cond,target,split,seed,anchor,pseudo,r,iw)에서 catboost_lo·mlp의 g 평균(`resid=ens_cb_mlp`),
@@ -65,6 +68,8 @@ ap.add_argument("--pairing", default="per_seed", choices=["per_seed", "ensemble"
 ap.add_argument("--base", default="", help="평가 셀 공변량 파일(기본: meta의 base 또는 fidelity_base_v3.csv)")
 ap.add_argument("--gate", action="store_true")
 ap.add_argument("--tests", default="", help="검정 정의 JSON(없으면 내장 H12–H15). 항목: H,label,cond,A,B[,targets,splits,family]")
+ap.add_argument("--tests-only", action="store_true",
+                help="<out>_tests.csv 만 다시 쓰고 종료(요약·분할·분해·일관성·UQ·중첩 산출물은 건드리지 않는다). 09-26 요약 행 정정 재생성용")
 args = ap.parse_args()
 TAGS = [t for t in args.tags.split(",") if t]
 OUT = args.out or TAGS[0]
@@ -301,8 +306,11 @@ summ = (per.groupby(key, as_index=False)
                 fit_s=("fit_s", "mean"), rmse_cc=("rmse_cc", "mean"), n_cc=("n_cc", "first")))
 summ["regime"] = np.where(summ.target.isin(TRANSFER_MAIN), "main", np.where(summ.target.isin(TRANSFER_DEEP), "deep", "alaska"))
 summ["family_tag"] = [family_tag(dict(anchor=r.anchor, pseudo=r.pseudo, lam=r.lam)) for r in summ.itertuples()]
-summ.to_csv(M1 / f"{OUT}_summary.csv", index=False)
-print(f"[summary] {len(summ)}행 → {OUT}_summary.csv")
+if args.tests_only:
+    print(f"[summary] {len(summ)}행 (--tests-only: {OUT}_summary.csv 미기록)")
+else:
+    summ.to_csv(M1 / f"{OUT}_summary.csv", index=False)
+    print(f"[summary] {len(summ)}행 → {OUT}_summary.csv")
 
 
 # ---------------------------------------------------------------- 짝지은 블록 부트스트랩 (3종 채점 · seed별 짝지음)
@@ -480,17 +488,29 @@ def add_test(hid, label, cond, A, B, targets, splits="all", family=None):
         w = np.array([x["n_cells"] for x in sel], float)
         used = [x for x in sel if x["_r"][prim] is not None]        # 층화 CI는 분포가 있는 지역만(개정 09-21 §B)
         excl = [x["target"] for x in sel if x["_r"][prim] is None]
+        # 정정 2026-09-26: 점 추정치(평균 Δ·채점 3종)를 CI 와 같은 지역 집합(used)에서 계산한다(polar.m1_stats.summarize_delta 규약).
+        # 09-22 이전 판은 점 추정치를 블록<8 지역까지 포함한 sel 로, CI 는 used 로 계산해 점이 자기 CI 밖에 놓이는 행이 생겼다.
+        # CI 산출 지역이 하나도 없으면 점 추정치는 sel 평균으로 두고 CI 는 NaN(ci_valid=False).
+        pool = used if used else sel
+        ci_valid = bool(used)
+        dp = np.array([x["delta_rmse"] for x in pool]); wp = np.array([x["n_cells"] for x in pool], float)
         flag = "stratified_boot" + (f"(excl:{','.join(excl)})" if excl else "")
         if grp == "REGION_SUMMARY_AB4":
             miss = [t for t in AB4 if t not in [x["target"] for x in sel]]
             flag += f"(missing:{','.join(miss)})" if miss else ""
+        if not ci_valid:
+            flag += "(no_ci_region)"
         s_prim, s_ens, s_beq = (strat([x["_r"][k] for x in used]) for k in (prim, "dist_ens", "dist_blockeq"))
         lo, hi = ci(s_prim); lo_e, hi_e = ci(s_ens); lo_b, hi_b = ci(s_beq)
         sd = float(s_prim.std()) if s_prim is not None else np.nan
         blk = [x["_r"]["block_delta"] for x in sel]
         nblk = int(sum(len(b) for b in blk)); kneg = int(sum(x["block_neg_k"] for x in sel))
-        mean_of = lambda k: float(np.mean([x[k] for x in sel]))   # noqa: E731
-        TESTS.append(dict(H=hid, label=label, cond=cond, target=grp, n_splits=np.nan, delta_rmse=float(ds.mean()), ci_lo=lo, ci_hi=hi,
+        mean_of = lambda k: float(np.mean([x[k] for x in pool]))   # noqa: E731
+        d_pt = float(dp.mean())
+        pt_in_ci = bool(np.isfinite(lo) and lo - 1e-9 <= d_pt <= hi + 1e-9) if ci_valid else np.nan
+        if ci_valid and not pt_in_ci:
+            print(f"[경고] {hid} {label} {cond} {grp}: 점 추정치 {d_pt:.3f} 가 CI [{lo:.3f}, {hi:.3f}] 밖")
+        TESTS.append(dict(H=hid, label=label, cond=cond, target=grp, n_splits=np.nan, delta_rmse=d_pt, ci_lo=lo, ci_hi=hi,
                           boot_sd=sd, mde80=(2.8 * sd if np.isfinite(sd) else np.nan), n_cells=len(ds), n_blocks=neg, ci_flag=flag,
                           delta_split_mean=float(np.median(ds)), delta_split_sd=float((ds * w).sum() / w.sum()),
                           A=f"neg_regions={neg}/{len(ds)} [{','.join(x['target'] for x in sel)}]", B=f"sign_test_p={p_sign}",
@@ -501,10 +521,11 @@ def add_test(hid, label, cond, A, B, targets, splits="all", family=None):
                           wilcoxon_p=wilcoxon_p(np.concatenate(blk)),
                           strat_perm_p=strat_perm_p(blk, args.nperm, _seed_of("perm", hid, label, cond, grp)),
                           sign_test_p_descriptive=p_sign, n_regions=len(ds), neg_regions=neg, delta_region_median=float(np.median(ds)),
-                          delta_region_cellw=float((ds * w).sum() / w.sum()),
-                          delta_rmse_ci_regions=(float(np.mean([x["delta_rmse"] for x in used])) if used else np.nan), n_regions_ci=len(used),
-                          n_seed=int(min(x["n_seed"] for x in sel)), family=fam, family_tag=tagA, family_tag_B=tagB, p_holm=np.nan))
-
+                          delta_region_cellw=float((dp * wp).sum() / wp.sum()),
+                          delta_rmse_ci_regions=(d_pt if ci_valid else np.nan), n_regions_ci=len(used),
+                          n_seed=int(min(x["n_seed"] for x in sel)), family=fam, family_tag=tagA, family_tag_B=tagB, p_holm=np.nan,
+                          delta_allregions=float(ds.mean()), delta_region_cellw_all=float((ds * w).sum() / w.sum()),
+                          regions_point=",".join(x["target"] for x in pool), ci_valid=ci_valid, pt_in_ci=pt_in_ci))
 
 MAIN = [t for t in TRANSFER_MAIN if any(k.split("|")[1] == t for k in EVAL)]
 DEEP = [t for t in TRANSFER_DEEP if any(k.split("|")[1] == t for k in EVAL)]
@@ -609,14 +630,27 @@ if len(tests):
             pv = tests.loc[sel, "p_boot"].values.astype(float)
             tests.loc[sel, "p_holm"] = pv if fam == "primary" else holm(pv)   # 주 가설 H12는 무보정
             tests.loc[sel, "holm_m"] = int(np.isfinite(pv).sum())
+    if "ci_valid" in tests:                                   # 단일 대상 행: CI 가 있으면 유효, 점-CI 포함 여부 기록
+        single = ~tests.target.str.startswith("REGION_SUMMARY")
+        tests.loc[single, "ci_valid"] = tests.loc[single, "ci_lo"].notna()
+        fin = single & tests.ci_lo.notna()
+        tests.loc[single, "pt_in_ci"] = np.nan
+        tests.loc[fin, "pt_in_ci"] = ((tests.loc[fin, "delta_rmse"] >= tests.loc[fin, "ci_lo"] - 1e-9)
+                                      & (tests.loc[fin, "delta_rmse"] <= tests.loc[fin, "ci_hi"] + 1e-9))
     tests.to_csv(M1 / f"{OUT}_tests.csv", index=False)
-    pd.DataFrame(SPLITS).to_csv(M1 / f"{OUT}_splits.csv", index=False)
+    n_out = int((tests.pt_in_ci == False).sum()) if "pt_in_ci" in tests else -1   # noqa: E712
+    print(f"[tests] {len(tests)}행 → {OUT}_tests.csv · 점 추정치가 CI 밖인 행 {n_out}")
+    if not args.tests_only:
+        pd.DataFrame(SPLITS).to_csv(M1 / f"{OUT}_splits.csv", index=False)
     pd.set_option("display.width", 250)
     print("\n=== 짝지은 검정 (ΔRMSE = A − B, 음수 = A 우세; 주 짝지음 =", args.pairing, ") ===")
     show = tests[tests.target.str.startswith("REGION_SUMMARY") | tests.target.isin(["Alaska"])]
     cols = ["H", "label", "cond", "target", "delta_rmse", "ci_lo", "ci_hi", "delta_per_seed", "delta_ensemble", "delta_blockeq",
             "delta_cap100", "block_majority", "p_boot", "p_holm", "wilcoxon_p", "strat_perm_p", "n_cells", "n_blocks", "family"]
     print(show[cols].round(3).to_string(index=False, max_colwidth=48))
+if args.tests_only:
+    print(f"\nsaved: {OUT}_tests.csv (--tests-only)")
+    sys.exit(0)
 
 
 # ---------------------------------------------------------------- C2-A 결합 앵커 분해 (Stefan+CCI 대 Stefan)

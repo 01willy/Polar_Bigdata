@@ -1,0 +1,498 @@
+{
+ "tag": "c1",
+ "args": {
+  "tag": "c1",
+  "smoke": false,
+  "workers": 4,
+  "nboot": 1000,
+  "targets": "",
+  "skip_extract": false,
+  "unc_floor_cm": 1.0,
+  "src_min_cells": 3
+ },
+ "targets": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_C",
+  "Russia_E",
+  "Greenland"
+ ],
+ "targets_scored": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_C",
+  "Russia_E",
+  "Greenland"
+ ],
+ "ab4": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_E"
+ ],
+ "main6": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_C",
+  "Russia_E",
+  "Greenland"
+ ],
+ "git_commit": "834e4bf",
+ "elapsed_min": 0.83,
+ "n_rows": {
+  "tests": 72,
+  "decision": 18,
+  "worst": 36,
+  "cells": 3768,
+  "layers": 17572
+ },
+ "E0_alaska": 1.616688667140627,
+ "sigma_st2": 202.74068304392017,
+ "n_source_cells": 13606,
+ "sigma_src2": {
+  "Lena": {
+   "value": 1422.138313195782,
+   "regions": [
+    "Alaska",
+    "Canada",
+    "Greenland",
+    "Russia_C",
+    "Russia_E",
+    "Russia_W"
+   ]
+  },
+  "Canada": {
+   "value": 1372.0415749118204,
+   "regions": [
+    "Alaska",
+    "Greenland",
+    "Lena",
+    "Russia_C",
+    "Russia_E",
+    "Russia_W"
+   ]
+  },
+  "Russia_W": {
+   "value": 1151.791852124469,
+   "regions": [
+    "Alaska",
+    "Canada",
+    "Greenland",
+    "Lena",
+    "Russia_C",
+    "Russia_E"
+   ]
+  },
+  "Russia_C": {
+   "value": 1025.4634861866482,
+   "regions": [
+    "Alaska",
+    "Canada",
+    "Greenland",
+    "Lena",
+    "Russia_E",
+    "Russia_W"
+   ]
+  },
+  "Russia_E": {
+   "value": 1378.0624823816977,
+   "regions": [
+    "Alaska",
+    "Canada",
+    "Greenland",
+    "Lena",
+    "Russia_C",
+    "Russia_W"
+   ]
+  },
+  "Greenland": {
+   "value": 1186.6634879138055,
+   "regions": [
+    "Alaska",
+    "Canada",
+    "Lena",
+    "Russia_C",
+    "Russia_E",
+    "Russia_W"
+   ]
+  }
+ },
+ "src_region_mse": {
+  "Alaska": {
+   "n": 13606,
+   "mse": 202.74068304392017
+  },
+  "Canada": {
+   "n": 750,
+   "mse": 770.5958499773606
+  },
+  "Greenland": {
+   "n": 3,
+   "mse": 1882.8643719654503
+  },
+  "Lena": {
+   "n": 3037,
+   "mse": 470.01542027359113
+  },
+  "Russia_C": {
+   "n": 7,
+   "mse": 2850.064382328394
+  },
+  "Russia_E": {
+   "n": 30,
+   "mse": 734.470405158097
+  },
+  "Russia_W": {
+   "n": 31,
+   "mse": 2092.0941867014694
+  }
+ },
+ "gate_info": {
+  "Lena": {
+   "n": 2958,
+   "n_blocks": 20,
+   "gated_frac": 0.0,
+   "unc_valid_frac": 1.0,
+   "pfr_valid_frac": 1.0,
+   "gtd_valid_frac": 1.0,
+   "blockmed_valid_frac": 1.0,
+   "unc_median_cm": 25.64,
+   "w_cci_median_main": 0.23570379158216007,
+   "w_cci_median_srcvar": 0.6838689814125445
+  },
+  "Canada": {
+   "n": 747,
+   "n_blocks": 36,
+   "gated_frac": 0.44712182061579653,
+   "unc_valid_frac": 1.0,
+   "pfr_valid_frac": 1.0,
+   "gtd_valid_frac": 1.0,
+   "blockmed_valid_frac": 1.0,
+   "unc_median_cm": 78.68,
+   "w_cci_median_main": 0.03171151353857975,
+   "w_cci_median_srcvar": 0.1814249705475592
+  },
+  "Russia_W": {
+   "n": 28,
+   "n_blocks": 18,
+   "gated_frac": 0.5714285714285714,
+   "unc_valid_frac": 1.0,
+   "pfr_valid_frac": 1.0,
+   "gtd_valid_frac": 1.0,
+   "blockmed_valid_frac": 1.0,
+   "unc_median_cm": 54.58,
+   "w_cci_median_main": 0.06372072295133704,
+   "w_cci_median_srcvar": 0.2788328159921292
+  },
+  "Russia_C": {
+   "n": 7,
+   "n_blocks": 6,
+   "gated_frac": 0.14285714285714285,
+   "unc_valid_frac": 1.0,
+   "pfr_valid_frac": 1.0,
+   "gtd_valid_frac": 1.0,
+   "blockmed_valid_frac": 1.0,
+   "unc_median_cm": 32.0,
+   "w_cci_median_main": 0.16526775857865764,
+   "w_cci_median_srcvar": 0.5003570412931267
+  },
+  "Russia_E": {
+   "n": 27,
+   "n_blocks": 19,
+   "gated_frac": 0.18518518518518517,
+   "unc_valid_frac": 1.0,
+   "pfr_valid_frac": 1.0,
+   "gtd_valid_frac": 1.0,
+   "blockmed_valid_frac": 1.0,
+   "unc_median_cm": 29.44,
+   "w_cci_median_main": 0.18957395959635803,
+   "w_cci_median_srcvar": 0.613897525547216
+  },
+  "Greenland": {
+   "n": 1,
+   "n_blocks": 1,
+   "gated_frac": 1.0,
+   "unc_valid_frac": 1.0,
+   "pfr_valid_frac": 1.0,
+   "gtd_valid_frac": 1.0,
+   "blockmed_valid_frac": 1.0,
+   "unc_median_cm": 93.68,
+   "w_cci_median_main": 0.022580224869145033,
+   "w_cci_median_srcvar": 0.11911175662919811
+  }
+ },
+ "extract": {
+  "files": {
+   "alt": [
+    "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1997-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1998-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1999-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2000-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2001-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2002-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2003-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2004-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2005-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2006-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2007-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2008-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2009-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2010-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2011-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2012-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2013-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2014-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2015-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2016-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2017-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2018-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2019-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2020-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2021-fv04.0.nc"
+   ],
+   "pfr": [
+    "ESACCI-PERMAFROST-L4-PFR-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1997-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1998-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1999-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2000-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2001-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2002-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2003-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2004-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2005-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2006-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2007-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2008-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2009-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2010-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2011-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2012-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2013-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2014-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2015-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2016-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2017-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2018-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2019-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2020-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2021-fv04.0.nc"
+   ],
+   "gtd": [
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2003-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2004-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2005-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2006-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2007-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2008-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2009-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2010-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2011-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2012-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2013-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2014-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2015-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2016-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2017-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2018-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2019-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2020-fv04.0.nc",
+    "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2021-fv04.0.nc"
+   ]
+  },
+  "years": {
+   "alt": [
+    1997,
+    1998,
+    1999,
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021
+   ],
+   "pfr": [
+    1997,
+    1998,
+    1999,
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021
+   ],
+   "gtd": [
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021
+   ]
+  },
+  "failed": [],
+  "varnames": {
+   "cci_alt_files": "ALT",
+   "cci_alt_unc": "ALT_uncertainty",
+   "cci_pfr": "PFR",
+   "cci_pfr_unc": "PFR_uncertainty",
+   "cci_gtd_1m": "T1m",
+   "cci_gtd_2m": "T2m"
+  },
+  "years_limit": null,
+  "blocksmooth": {
+   "definition": "CCI ALT 래스터 0.5° 창 화소별 다년 평균의 유효 화소 중앙값(cm)",
+   "years": [
+    1997,
+    1998,
+    1999,
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021
+   ],
+   "n_blocks": 232,
+   "n_blocks_valid": 231,
+   "blocks_outside": [
+    -12600122
+   ],
+   "window_shapes": {
+    "50x50": 231,
+    "0x50": 1
+   },
+   "npix_median": 2458.0
+  }
+ },
+ "layer_csv": "data/processed/h4/cci_layers_cells.csv",
+ "m1_npz": [
+  "m1_model_shard0_preds.npz",
+  "m1_model_shard1_preds.npz",
+  "m1_model_shard2_preds.npz"
+ ],
+ "scoring_cells": "M1 npz eval::noinfo|<t>|0 (y, loc_id, block) 그대로",
+ "layer_cols": [
+  "cci_alt",
+  "cci_alt_files",
+  "cci_alt_unc",
+  "cci_pfr",
+  "cci_pfr_unc",
+  "cci_gtd_1m",
+  "cci_gtd_2m",
+  "cci_alt_blockmed",
+  "cci_alt_blockmed_cells"
+ ],
+ "nboot": 1000,
+ "alpha": 0.05,
+ "F9": {
+  "pass_": false,
+  "pass_strict": false,
+  "driver": "none",
+  "passing_members": [],
+  "primary": "pass_ (계획 §4 C1, 구성원 (ii)–(iv)); pass_strict 는 계획 §5 F9 표(구성원 (ii)·(iv)) 병기",
+  "family": [
+   "stefan_cci-stefan",
+   "cci_uncw-stefan",
+   "cci_blocksmooth-stefan",
+   "gate_gtd_pfr-stefan"
+  ],
+  "members": [
+   "cci_uncw",
+   "cci_blocksmooth",
+   "gate_gtd_pfr"
+  ],
+  "members_strict": [
+   "cci_uncw",
+   "gate_gtd_pfr"
+  ],
+  "level": "MEAN[AB4]",
+  "rule": "delta<0 & p_holm<0.05 & ci_hi_holm<0 (Holm 가족 = 결합 − stefan 4검정, 두 판정 공통)"
+ },
+ "holm_inconsistent_rows": 0,
+ "ci_scope": {
+  "AB4": "블록 부트스트랩 CI(지역 비가중, 같은 번호 평균)",
+  "MAIN6": "점 추정만",
+  "Russia_C": "점 추정만",
+  "Greenland": "점 추정만"
+ },
+ "variance_defs": {
+  "u2": "(ALT_uncertainty 다년 평균 cm)², 제품 정의 = 화소 안 공간 변동성, 하한 --unc-floor-cm",
+  "sigma_st2": "알래스카 원천 표본 안 Stefan 잔차 평균제곱(E0 고정)",
+  "sigma_src2": "민감도: 대상 제외 원천 macro 지역별 Stefan 잔차 평균제곱의 비가중 평균(셀 ≥ --src-min-cells)"
+ },
+ "rules": {
+  "stefan": "M1 npz anchor::noinfo|<t>|0|alaska|stefan",
+  "stefan_cci": "0.5(st+cci_alt)",
+  "cci_uncw": "(st/σ_st²+cci/u²)/(1/σ_st²+1/u²), u 하한 1.0 cm, u 결측→등가중",
+  "cci_uncw_srcvar": "cci_uncw 에서 σ_st² → σ²_src(t)",
+  "cci_blocksmooth": "0.5(st+CCI ALT 래스터 0.5° 창 다년 평균 화소 중앙값), 결측→셀 cci",
+  "gate_gtd_pfr": "PFR<50 % 또는 GTD T1m>-1 °C → st, 아니면 등가중; 결측 층은 게이트 미적용"
+ },
+ "ci_rep": "단일 분할·단일 반복이므로 정의되지 않음(NaN)"
+}

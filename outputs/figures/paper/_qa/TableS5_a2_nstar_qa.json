@@ -1,0 +1,16 @@
+{
+ "name": "TableS5_a2_nstar",
+ "ok": true,
+ "fails": [],
+ "words": {
+  "definition": 35,
+  "statistics": 20,
+  "panels": 44,
+  "data": 6,
+  "total": 105
+ },
+ "paths": {
+  "csv": "outputs/figures/paper/supp_tables/TableS5_a2_nstar.csv",
+  "tex": "outputs/figures/paper/supp_tables/TableS5_a2_nstar.tex"
+ }
+}

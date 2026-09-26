@@ -1,0 +1,54 @@
+file,stage,git_commit,seeds,splits,reps,nboot,elapsed_h
+data/processed/h2/h19_blockE_meta.json,H19a,,,,,,0.004416666666666667
+data/processed/h2/h21_meta.json,H21/H20,8385a1c,,,,1000,0.0010555555555555555
+data/processed/h2/h22_meta.json,H22,8385a1c,"[0, 1, 2]","[0, 1, 2]",,,0.7004444444444444
+data/processed/h2/h23_meta.json,H23,8385a1c,"[0, 1, 2]","[0, 1, 2]",10,,1.037611111111111
+data/processed/h2/h24_meta.json,H24,8385a1c,"[0, 1, 2]",,20,,0.8551111111111112
+data/processed/h3/h25_meta.json,H25/H26,,"[0, 1]","[0, 1, 2]",20,,
+data/processed/h3/h25b_meta.json,H25/H26 재실행(감사 반영),834e4bf,"[0, 1]","[0, 1, 2]",20,1000,0.9611388888888889
+data/processed/h3/h25x_meta.json,H25/H26 재실행(감사 반영),834e4bf,"[0, 1]","[0, 1, 2]",20,1000,0.21080555555555555
+data/processed/h4/a2_meta.json,H31/A2,834e4bf,"[0, 1]","[0, 1, 2]",20,1000,1.6704166666666667
+data/processed/h4/b1_meta.json,B1/H32,834e4bf,"[0, 1]","[0, 1, 2]",20,1000,0.08466666666666667
+data/processed/h4/b2_meta.json,H33/B2,834e4bf,"[0, 1]","[0, 1, 2]",10,1000,0.9210277777777778
+data/processed/h4/b3_meta.json,H34/B3,834e4bf,[0],"[0, 1, 2]",20,1000,0.2911666666666667
+data/processed/h4/b4_meta.json,H35/B4,834e4bf,,"[0, 1, 2]",3,,0.8407222222222221
+data/processed/h4/c1_meta.json,,834e4bf,,,,1000,
+data/processed/h4/c2_meta.json,H37/C2,834e4bf,,"[0, 1, 2]",10,1000,0.004333333333333333
+data/processed/h4/d1_meta.json,H38 D1/D2,834e4bf,"[0, 1]","[0, 1, 2]",20,,0.02441666666666667
+data/processed/m1/a2_cci_pedon_sensitivity_meta.json,,,,,,400,0.0005555555555555556
+data/processed/m1/a2_combo_decomp_meta.json,,,,,,400,0.00025
+data/processed/m1/a2_ml_collapse_strata_meta.json,,,,,,400,0.004138888888888889
+data/processed/m1/a2_oracle_E_meta.json,,,,,,,8.333333333333333e-05
+data/processed/m1/a2_shift_diagnostics_meta.json,,,,,,,0.033555555555555554
+data/processed/m1/a2_year_matched_tdd_meta.json,A2-aux year_matched_tdd (audit C2-E),291e2c7,"[0, 1, 2]","[0, 1, 2]",,400,0.2657777777777778
+data/processed/m1/cv_scheme_comparison_meta.json,M1-appendix,,"[0, 1, 2]",,,,
+data/processed/m1/h1819_shard0_meta.json,M1,8385a1c,"[0, 1, 2]","[0, 1, 2]",,,0.20169444444444445
+data/processed/m1/h1819_shard1_meta.json,M1,8385a1c,"[0, 1, 2]","[0, 1, 2]",,,0.2177222222222222
+data/processed/m1/h28model_shard0_meta.json,M1,640098c,"[0, 1, 2]","[0, 1, 2]",,,1.8994722222222222
+data/processed/m1/h28model_shard1_meta.json,M1,640098c,"[0, 1, 2]","[0, 1, 2]",,,0.17322222222222222
+data/processed/m1/h28model_shard2_meta.json,M1,640098c,"[0, 1, 2]","[0, 1, 2]",,,1.8656944444444445
+data/processed/m1/h28model_shard3_meta.json,M1,640098c,"[0, 1, 2]","[0, 1, 2]",,,1.752388888888889
+data/processed/m1/l2_fold_sensitivity_meta.json,,291e2c7,"[0, 1, 2]",,,,0.02225
+data/processed/m1/l2_importance_meta.json,,291e2c7,"[0, 1, 2]",,,,0.013805555555555557
+data/processed/m1/l2_noise_floor_meta.json,,291e2c7,,,,,0.0001388888888888889
+data/processed/m1/l2_regional_E_meta.json,,291e2c7,,,,,0.0019166666666666668
+data/processed/m1/l2_residual_spatial_meta.json,,291e2c7,"[0, 1, 2]",,,,0.04275
+data/processed/m1/l2_stratified_error_meta.json,,291e2c7,"[0, 1, 2]",,,,0.006277777777777778
+data/processed/m1/label_year_sensitivity_meta.json,M1-aux label_year_sensitivity,291e2c7,"[0, 1, 2]",,,400,0.007416666666666667
+data/processed/m1/m1_anchor_shard0_meta.json,M1,291e2c7,"[0, 1, 2]","[0, 1, 2]",,,0.12077777777777778
+data/processed/m1/m1_anchor_shard1_meta.json,M1,291e2c7,"[0, 1, 2]","[0, 1, 2]",,,0.14380555555555558
+data/processed/m1/m1_deep_shard0_meta.json,M1,291e2c7,"[0, 1, 2]",[0],,,0.04388888888888889
+data/processed/m1/m1_dset_shard0_meta.json,M1,291e2c7,"[0, 1, 2]","[0, 1, 2]",,,0.05380555555555555
+data/processed/m1/m1_gate_shard0_meta.json,M1,291e2c7,"[0, 1, 2]",[0],,,0.04686111111111111
+data/processed/m1/m1_gate_v1_shard0_meta.json,M1,291e2c7,"[0, 1, 2]",[0],,,0.0245
+data/processed/m1/m1_gate_v1all_shard0_meta.json,M1,291e2c7,"[0, 1, 2]",[0],,,0.019694444444444445
+data/processed/m1/m1_iw_shard0_meta.json,M1,291e2c7,"[0, 1, 2]",[0],,,0.052055555555555556
+data/processed/m1/m1_model_shard0_meta.json,M1,291e2c7,"[0, 1, 2]",[0],,,0.5860555555555556
+data/processed/m1/m1_model_shard1_meta.json,M1,291e2c7,"[0, 1, 2]",[0],,,0.5659166666666666
+data/processed/m1/m1_model_shard2_meta.json,M1,291e2c7,"[0, 1, 2]",[0],,,0.5740000000000001
+data/processed/m1/m1_pseudo_shard0_meta.json,M1,291e2c7,"[0, 1, 2]","[0, 1, 2]",,,0.2760277777777778
+data/processed/m1/m1_pseudo_shard1_meta.json,M1,291e2c7,"[0, 1, 2]","[0, 1, 2]",,,0.2776666666666667
+data/processed/m1/m1_realmlp_shard0_meta.json,M1,291e2c7,[0],[0],,,2.816777777777778
+data/processed/m1/m1_xset_shard0_meta.json,M1,291e2c7,"[0, 1, 2]","[0, 1, 2]",,,0.06977777777777777
+data/processed/m1/sparse_label_meta.json,M1-S-F,,,,,,
+data/processed/m1/transfer_uq_meta.json,M1-UQ,291e2c7,,,,,

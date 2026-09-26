@@ -1,0 +1,16 @@
+{
+ "name": "TableS4a_b1_protocol",
+ "ok": true,
+ "fails": [],
+ "words": {
+  "definition": 58,
+  "statistics": 29,
+  "panels": 10,
+  "data": 12,
+  "total": 109
+ },
+ "paths": {
+  "csv": "outputs/figures/paper/supp_tables/TableS4a_b1_protocol.csv",
+  "tex": "outputs/figures/paper/supp_tables/TableS4a_b1_protocol.tex"
+ }
+}

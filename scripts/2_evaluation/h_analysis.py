@@ -3,9 +3,13 @@
 입력
   --tag h1819 : data/processed/m1/h1819_shard*.csv + _preds.npz (m1_master_factorial.py --ext --axis ext 산출)
   H22        : data/processed/h2/h22_rows.csv + h22_preds.npz
-  H21·H23·H24: 자체 tests CSV(이미 부트스트랩) → 요약 행만 결합
+  H21        : 자체 tests CSV(data/processed/h2/h21_tests.csv, 이미 부트스트랩)의 행만 결합.
+               'test|AB4' 행은 같은 대조를 AB4 집합으로 다시 적은 중복이므로 confirmatory=False 로 두어 Holm 가족에서 뺀다(감사 반영).
+  H23·H24    : 결합하지 않는다. 두 가설은 n 곡선형 검정(h23_tests.csv 의 delta_vs_shrink, h24_tests.csv 의 delta_vs_random)이라
+               이 파일의 지역 평균 Δ·Holm 형식과 맞지 않으므로 각자의 CSV 로만 보고한다.
 산출 data/processed/h2/h_tests_all.csv (가설·대조·조건·지역·Δ·CI·p·Holm), h_tests_main.csv(확인적 가설만)
 실행: python3 scripts/2_evaluation/h_analysis.py --tag h1819
+      python3 scripts/2_evaluation/h_analysis.py --reholm   (부트스트랩 재계산 없이 기존 h_tests_all.csv 의 확인적 표지·Holm 만 다시 적용)
 """
 from __future__ import annotations
 import argparse
@@ -24,12 +28,44 @@ from polar.m1_stats import boot_delta, summarize_delta, seed_of, holm           
 ap = argparse.ArgumentParser()
 ap.add_argument("--tag", default="h1819")
 ap.add_argument("--nboot", type=int, default=1000)
+ap.add_argument("--reholm", action="store_true", help="기존 h_tests_all.csv 로 확인적 표지·Holm 만 재적용")
 args = ap.parse_args()
 PROC = ROOT / "data" / "processed"; OUT = PROC / "h2"; OUT.mkdir(exist_ok=True)
 MAIN6 = ["Lena", "Canada", "Russia_W", "Russia_C", "Russia_E", "Greenland"]
 AB4 = ["Lena", "Canada", "Russia_W", "Russia_E"]
 DEF = dict(dset="alaska", xset="x25", anchor="stefan", pseudo="none", r=0.0, resid="catboost_lo", iw=0, lam=0.0)
 ALL_ROWS = []
+H21_CONFIRM = ("H21_nested_vs_EAK", "H20_cci_blockE_vs_stefan")
+
+
+def h21_confirm(test):
+    """H21 확인적 대조 판정. 'test|AB4' 중복 행은 확인적이 아니다."""
+    return ("|AB4" not in str(test)) and str(test).split("|")[0] in H21_CONFIRM
+
+
+def finalize(T):
+    """지역 평균 행 표지, 가족별 Holm(확인적·지역 평균 행만), 저장·출력."""
+    T["is_mean"] = T.target.astype(str).str.startswith("MEAN")
+    T["p_holm"] = np.nan
+    for fam, sub in T[T.confirmatory & T.is_mean].groupby("family"):
+        T.loc[sub.index, "p_holm"] = holm(sub.p_boot.values)
+    T.to_csv(OUT / "h_tests_all.csv", index=False)
+    M = T[T.is_mean & T.confirmatory][["family", "source", "test", "cond", "target", "rmse_A", "rmse_B", "delta", "ci_lo", "ci_hi", "p_boot", "p_holm", "delta_blockeq", "block_majority", "ci_flag"]]
+    M.to_csv(OUT / "h_tests_main.csv", index=False)
+    pd.set_option("display.width", 250)
+    print(M.round(3).to_string())
+    X = T[T.is_mean & ~T.confirmatory][["source", "test", "cond", "rmse_A", "rmse_B", "delta", "ci_lo", "ci_hi", "delta_blockeq", "ci_flag"]]
+    print(X.round(2).to_string())
+    print(f"rows {len(T)}")
+
+
+if args.reholm:
+    T = pd.read_csv(OUT / "h_tests_all.csv")
+    T["confirmatory"] = T.confirmatory.astype(bool)
+    h21 = T.source == "h21"
+    T.loc[h21, "confirmatory"] = T.loc[h21, "test"].map(h21_confirm).astype(bool)
+    finalize(T)
+    sys.exit(0)
 
 
 # ---------------------------------------------------------------- m1 형식 적재
@@ -186,21 +222,11 @@ f21 = OUT / "h21_tests.csv"
 if f21.exists():
     t21 = pd.read_csv(f21)
     for _, r in t21.iterrows():
-        ALL_ROWS.append(dict(family="info", cond="noinfo" if "|AB4" not in r.test else "noinfo|AB4", confirmatory=r.test.split("|")[0] in ("H21_nested_vs_EAK", "H20_cci_blockE_vs_stefan"),
+        ALL_ROWS.append(dict(family="info", cond="noinfo" if "|AB4" not in r.test else "noinfo|AB4", confirmatory=h21_confirm(r.test),
                              source="h21", **{k: r[k] for k in t21.columns}))
 
 T = pd.DataFrame(ALL_ROWS)
 if len(T):
-    T["is_mean"] = T.target.astype(str).str.startswith("MEAN")
-    # 가족별 Holm(확인적·지역 평균 행만)
-    T["p_holm"] = np.nan
-    for fam, sub in T[T.confirmatory & T.is_mean].groupby("family"):
-        T.loc[sub.index, "p_holm"] = holm(sub.p_boot.values)
-    T.to_csv(OUT / "h_tests_all.csv", index=False)
-    M = T[T.is_mean & T.confirmatory][["family", "source", "test", "cond", "target", "rmse_A", "rmse_B", "delta", "ci_lo", "ci_hi", "p_boot", "p_holm", "delta_blockeq", "block_majority", "ci_flag"]]
-    M.to_csv(OUT / "h_tests_main.csv", index=False)
-    pd.set_option("display.width", 250)
-    print(M.round(3).to_string())
-    X = T[T.is_mean & ~T.confirmatory][["source", "test", "cond", "rmse_A", "rmse_B", "delta", "ci_lo", "ci_hi", "delta_blockeq", "ci_flag"]]
-    print(X.round(2).to_string())
-print(f"rows {len(T)}")
+    finalize(T)
+else:
+    print("rows 0")

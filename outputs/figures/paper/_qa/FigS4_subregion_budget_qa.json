@@ -1,0 +1,37 @@
+{
+ "width_mm": 180.0,
+ "height_mm": 168.0,
+ "min_font_pt": 6.5,
+ "clipped": [],
+ "overlaps": [],
+ "n_text_overlaps": 0,
+ "has_title_in_axes": false,
+ "delta_axes_have_zero": true,
+ "n_delta_axes": 12,
+ "n_legends": 1,
+ "fonts": [
+  "BGZIHO+LiberationSans-Bold|CID TrueType|yes",
+  "BGZIHO+LiberationSans|CID TrueType|yes"
+ ],
+ "fonts_ok": true,
+ "unicode_minus_ok": true,
+ "caption_words": {
+  "definition": 61,
+  "statistics": 58,
+  "panels": 111,
+  "data": 12,
+  "total": 242
+ },
+ "caption_problems": [],
+ "fails": [],
+ "ok": true,
+ "name": "FigS4_subregion_budget",
+ "draft": false,
+ "time": "2026-09-26T21:21:03",
+ "paths": {
+  "width_mm": 180.0,
+  "height_mm": 168.0,
+  "pdf": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/FigS4_subregion_budget.pdf",
+  "png": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/FigS4_subregion_budget.png"
+ }
+}

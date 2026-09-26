@@ -1,0 +1,16 @@
+{
+ "name": "TableS1_cells_blocks_E",
+ "ok": true,
+ "fails": [],
+ "words": {
+  "definition": 57,
+  "statistics": 43,
+  "panels": 10,
+  "data": 13,
+  "total": 123
+ },
+ "paths": {
+  "csv": "outputs/figures/paper/supp_tables/TableS1_cells_blocks_E.csv",
+  "tex": "outputs/figures/paper/supp_tables/TableS1_cells_blocks_E.tex"
+ }
+}

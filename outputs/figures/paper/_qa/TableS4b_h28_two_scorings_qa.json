@@ -1,0 +1,16 @@
+{
+ "name": "TableS4b_h28_two_scorings",
+ "ok": true,
+ "fails": [],
+ "words": {
+  "definition": 28,
+  "statistics": 12,
+  "panels": 13,
+  "data": 6,
+  "total": 59
+ },
+ "paths": {
+  "csv": "outputs/figures/paper/supp_tables/TableS4b_h28_two_scorings.csv",
+  "tex": "outputs/figures/paper/supp_tables/TableS4b_h28_two_scorings.tex"
+ }
+}

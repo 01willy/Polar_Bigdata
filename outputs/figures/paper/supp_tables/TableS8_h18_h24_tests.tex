@@ -1,0 +1,42 @@
+\begin{tabular}{lllrrl}
+\toprule
+Hypothesis & Condition & Comparison & $\Delta$ [95 \% CI] (cm) & Holm p & Note \\
+\midrule
+H18 & noinfo & H18a\_stefan\_lst\_vs\_stefan & 0.16 [$-$0.65, 1.24] & 1.00 &  \\
+H19 & noinfo & H19d\_x25\_A\_vs\_x25\_direct & 0.33 [$-$0.32, 0.88] & 1.00 &  \\
+H18 & covonly & H18a\_stefan\_lst\_vs\_stefan & 0.10 [$-$0.79, 0.91] & 1.00 &  \\
+H19 & covonly & H19p\_x25\_A\_vs\_x25\_pseudo & 0.64 [0.05, 1.12] & 0.17 &  \\
+H19 & covonly & H19p\_x25\_lst\_vs\_x25\_pseudo & 0.03 [$-$0.12, 0.12] & 1.00 &  \\
+H22 & noinfo & H22\_irm\_resid\_lam0.25\_vs\_stefan & 0.53 [0.24, 0.79] & 0.01 &  \\
+H22 & noinfo & H22\_vrex\_resid\_lam0.25\_vs\_stefan & 0.15 [$-$0.10, 0.45] & 0.42 &  \\
+H22 & covonly & H22\_dann\_resid\_lam0.25\_vs\_stefan & 0.27 [0.05, 0.44] & 0.08 &  \\
+H22 & covonly & H22\_irm\_resid\_lam0.25\_vs\_stefan & 0.39 [0.11, 0.70] & 0.04 &  \\
+H22 & covonly & H22\_vrex\_resid\_lam0.25\_vs\_stefan & 0.02 [$-$0.26, 0.34] & 0.78 &  \\
+H21 & noinfo & H21\_nested\_vs\_EAK & 1.26 [$-$0.52, 2.61] & 1.00 &  \\
+H20 & noinfo & H20\_cci\_blockE\_vs\_stefan & $-$0.43 [$-$2.56, 3.51] & 1.00 &  \\
+H23 & labels & finetune $-$ shrink $\kappa$10, $\lambda$ 0.25, n = 3 & 0.90 &  & win rate 0.28; not in Holm family \\
+H23 & labels & finetune $-$ shrink $\kappa$10, $\lambda$ 0.25, n = 5 & 1.13 &  & win rate 0.35; not in Holm family \\
+H23 & labels & finetune $-$ shrink $\kappa$10, $\lambda$ 0.25, n = 10 & 1.65 &  & win rate 0.33; not in Holm family \\
+H23 & labels & maml $-$ shrink $\kappa$10, $\lambda$ 0.25, n = 3 & 1.09 &  & win rate 0.29; not in Holm family \\
+H23 & labels & maml $-$ shrink $\kappa$10, $\lambda$ 0.25, n = 5 & 1.52 &  & win rate 0.33; not in Holm family \\
+H23 & labels & maml $-$ shrink $\kappa$10, $\lambda$ 0.25, n = 10 & 2.14 &  & win rate 0.35; not in Holm family \\
+H23 & labels & shrink+finetune $-$ shrink $\kappa$10, $\lambda$ 0.25, n = 3 & 0.21 &  & win rate 0.43; not in Holm family \\
+H23 & labels & shrink+finetune $-$ shrink $\kappa$10, $\lambda$ 0.25, n = 5 & 0.04 &  & win rate 0.47; not in Holm family \\
+H23 & labels & shrink+finetune $-$ shrink $\kappa$10, $\lambda$ 0.25, n = 10 & 0.13 &  & win rate 0.46; not in Holm family \\
+H23 & labels & shrink+maml $-$ shrink $\kappa$10, $\lambda$ 0.25, n = 3 & 0.20 &  & win rate 0.44; not in Holm family \\
+H23 & labels & shrink+maml $-$ shrink $\kappa$10, $\lambda$ 0.25, n = 5 & 0.11 &  & win rate 0.52; not in Holm family \\
+H23 & labels & shrink+maml $-$ shrink $\kappa$10, $\lambda$ 0.25, n = 10 & 0.13 &  & win rate 0.50; not in Holm family \\
+H24 & labels & kmedoid $-$ random, both, n = 3 & $-$1.08 &  & win rate 0.65; exploratory (gain at n = 3 only); not in Holm family \\
+H24 & labels & kmedoid $-$ random, both, n = 5 & $-$0.22 &  & win rate 0.58; exploratory (gain at n = 3 only); not in Holm family \\
+H24 & labels & kmedoid $-$ random, both, n = 10 & 0.03 &  & win rate 0.51; exploratory (gain at n = 3 only); not in Holm family \\
+H24 & labels & kmedoid $-$ random, refit, n = 3 & $-$0.14 &  & win rate 0.58; exploratory (gain at n = 3 only); not in Holm family \\
+H24 & labels & kmedoid $-$ random, refit, n = 5 & $-$1.01 &  & win rate 0.56; exploratory (gain at n = 3 only); not in Holm family \\
+H24 & labels & kmedoid $-$ random, refit, n = 10 & $-$0.20 &  & win rate 0.45; exploratory (gain at n = 3 only); not in Holm family \\
+H24 & labels & kmedoid $-$ random, resid, n = 3 & $-$0.29 &  & win rate 0.58; exploratory (gain at n = 3 only); not in Holm family \\
+H24 & labels & kmedoid $-$ random, resid, n = 5 & $-$0.14 &  & win rate 0.59; exploratory (gain at n = 3 only); not in Holm family \\
+H24 & labels & kmedoid $-$ random, resid, n = 10 & 0.03 &  & win rate 0.47; exploratory (gain at n = 3 only); not in Holm family \\
+H24 & labels & kmedoid $-$ random, shrink\_k10, n = 3 & $-$0.90 &  & win rate 0.67; exploratory (gain at n = 3 only); not in Holm family \\
+H24 & labels & kmedoid $-$ random, shrink\_k10, n = 5 & $-$0.26 &  & win rate 0.55; exploratory (gain at n = 3 only); not in Holm family \\
+H24 & labels & kmedoid $-$ random, shrink\_k10, n = 10 & $-$0.04 &  & win rate 0.51; exploratory (gain at n = 3 only); not in Holm family \\
+\bottomrule
+\end{tabular}

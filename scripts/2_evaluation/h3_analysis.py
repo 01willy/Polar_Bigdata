@@ -4,6 +4,8 @@
 C3: M1 모델 축 예측(정보 없음, x25, seed 3)과 셀별 DI(a2_shift_cells)로 규칙별 예측을 만들고 seed 짝지음·층화 블록 부트스트랩으로
     (aoa_resid − stefan), (aoa_direct − ml_direct), (aoa_direct − stefan), (cci_agree20 − stefan_cci) 를 검정. 지역별 최악 오차 표 병기.
 A3: 방법 × n 의 Δ(대 물리식) 통합표 — h25(S1·S1refit·S2·S3 α, 규칙 random/kmedoid), h24(block_rr·farthest·stefan_strat·geo_strat), h23(maml·finetune), M1 정보 없음 직접 회귀.
+Holm(감사 반영): 가족 = h30_deploy_tests 의 지역 평균(MEAN) 행 확인적 대조(H30_ 접두 3종). H30x 는 role=exploratory 로 구분하고 p_holm 은 비우며,
+  탐색 가족 안의 Holm 은 p_holm_expl 로만 병기한다.
 산출 data/processed/h3/h30_deploy_tests.csv, h30_deploy_worst.csv, h3_hurts.csv
 """
 from __future__ import annotations
@@ -16,7 +18,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from polar.m1_stats import boot_delta, summarize_delta, seed_of                                     # noqa: E402
+from polar.m1_stats import boot_delta, summarize_delta, seed_of, holm                               # noqa: E402
 
 PROC = ROOT / "data" / "processed"; OUT = PROC / "h3"; OUT.mkdir(exist_ok=True); H2 = PROC / "h2"
 MAIN6 = ["Lena", "Canada", "Russia_W", "Russia_C", "Russia_E", "Greenland"]; AB4 = ["Lena", "Canada", "Russia_W", "Russia_E"]
@@ -64,10 +66,17 @@ for name, a, b in [("H30_aoa_resid_vs_stefan", "aoa_resid", "stefan"), ("H30_aoa
                    ("H30x_ml_resid_vs_stefan", "ml_resid", "stefan"), ("H30x_cci_agree20_vs_stefan_cci", "cci_agree20", "stefan_cci"), ("H30x_stefan_cci_vs_stefan", "stefan_cci", "stefan")]:
     per = {tg: boot_delta(y, blk, R[a], R[b], 1000, seed_of(name, tg)) for tg, (R, y, blk, _) in RULES.items()}
     tests += [dict(family="deploy", cond="noinfo", **r) for r in summarize_delta(name, per, MAIN6, 0)]
-Tt = pd.DataFrame(tests); Tt.to_csv(OUT / "h30_deploy_tests.csv", index=False)
+Tt = pd.DataFrame(tests)
+_pre = Tt.test.str.split("_").str[0]
+Tt["role"] = np.where(_pre == "H30", "confirmatory", "exploratory")
+Tt["is_mean"] = Tt.target.astype(str).str.startswith("MEAN")
+Tt["p_holm"] = np.nan; Tt["p_holm_expl"] = np.nan
+_c = Tt.is_mean & (Tt.role == "confirmatory"); Tt.loc[_c, "p_holm"] = holm(Tt.loc[_c, "p_boot"].values)
+_e = Tt.is_mean & (Tt.role != "confirmatory"); Tt.loc[_e, "p_holm_expl"] = holm(Tt.loc[_e, "p_boot"].values)
+Tt.to_csv(OUT / "h30_deploy_tests.csv", index=False)
 pd.set_option("display.width", 240)
 print(W.pivot_table(index="rule", columns="target", values="rmse").round(2).assign(worst_AB4=lambda d: d[AB4].max(1), mean_AB4=lambda d: d[AB4].mean(1)).round(2).to_string())
-print(Tt[Tt.target.astype(str).str.startswith("MEAN")][["test", "target", "delta", "ci_lo", "ci_hi", "delta_blockeq", "ci_flag"]].round(2).to_string(index=False))
+print(Tt[Tt.is_mean][["test", "target", "delta", "ci_lo", "ci_hi", "delta_blockeq", "ci_flag", "role", "p_boot", "p_holm", "p_holm_expl"]].round(3).to_string(index=False))
 
 # ---------------------------------------------------------------- A3 해로운 조합 표
 rows = []

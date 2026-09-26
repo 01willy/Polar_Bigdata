@@ -1,0 +1,122 @@
+[start] c1 workers=4 nboot=1000 targets=['Lena', 'Canada', 'Russia_W', 'Russia_C', 'Russia_E', 'Greenland']
+[extract] alt: 파일 25개 (/home/willy010313/Polar_Bigdata/data/raw/cci_alt), 연도 [1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
+[extract] pfr: 파일 25개 (/home/willy010313/Polar_Bigdata/data/raw/cci_pfr), 연도 [1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
+[extract] gtd: 파일 19개 (/home/willy010313/Polar_Bigdata/data/raw/cci_gtd), 연도 [2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021]
+[extract] 블록 창 232개, 창 크기(행×열) 분포 {'50x50': 231, '0x50': 1}
+[extract] 래스터 범위(25–85°N) 밖 블록 [-12600122]: 블록 평활 결측 → 셀 cci 대체
+[extract] alt ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1999-fv04.0.nc: cci_alt_files 유효 17461, cci_alt_unc 유효 17461
+[extract] alt ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1997-fv04.0.nc: cci_alt_files 유효 17476, cci_alt_unc 유효 17476
+[extract] alt ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2000-fv04.0.nc: cci_alt_files 유효 17477, cci_alt_unc 유효 17477
+[extract] alt ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1998-fv04.0.nc: cci_alt_files 유효 17477, cci_alt_unc 유효 17477
+[extract] alt ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2001-fv04.0.nc: cci_alt_files 유효 17477, cci_alt_unc 유효 17477
+[extract] alt ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2002-fv04.0.nc: cci_alt_files 유효 17477, cci_alt_unc 유효 17477
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2004-fv04.0.nc: cci_alt_files 유효 17477, cci_alt_unc 유효 17477
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2003-fv04.0.nc: cci_alt_files 유효 17477, cci_alt_unc 유효 17477
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2005-fv04.0.nc: cci_alt_files 유효 17477, cci_alt_unc 유효 17477
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2006-fv04.0.nc: cci_alt_files 유효 17476, cci_alt_unc 유효 17476
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2007-fv04.0.nc: cci_alt_files 유효 17476, cci_alt_unc 유효 17476
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2008-fv04.0.nc: cci_alt_files 유효 17476, cci_alt_unc 유효 17476
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2009-fv04.0.nc: cci_alt_files 유효 17476, cci_alt_unc 유효 17476
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2010-fv04.0.nc: cci_alt_files 유효 17476, cci_alt_unc 유효 17476
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2011-fv04.0.nc: cci_alt_files 유효 17476, cci_alt_unc 유효 17476
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2012-fv04.0.nc: cci_alt_files 유효 17476, cci_alt_unc 유효 17476
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2013-fv04.0.nc: cci_alt_files 유효 17476, cci_alt_unc 유효 17476
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2014-fv04.0.nc: cci_alt_files 유효 17476, cci_alt_unc 유효 17476
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2015-fv04.0.nc: cci_alt_files 유효 17476, cci_alt_unc 유효 17476
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2016-fv04.0.nc: cci_alt_files 유효 17476, cci_alt_unc 유효 17476
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2017-fv04.0.nc: cci_alt_files 유효 17476, cci_alt_unc 유효 17476
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2018-fv04.0.nc: cci_alt_files 유효 17476, cci_alt_unc 유효 17476
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2020-fv04.0.nc: cci_alt_files 유효 17460, cci_alt_unc 유효 17460
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2019-fv04.0.nc: cci_alt_files 유효 17460, cci_alt_unc 유효 17460
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1997-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1998-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1999-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2000-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2001-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2021-fv04.0.nc: cci_alt_files 유효 17460, cci_alt_unc 유효 17460
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2002-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2003-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2004-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2005-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2006-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2007-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2009-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2008-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2010-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2011-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2014-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2012-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2013-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2015-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2016-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2017-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2018-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2019-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2020-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2021-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2004-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2005-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2003-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2006-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2007-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2009-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2010-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2008-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2011-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2014-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2012-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2013-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2015-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2016-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2018-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2017-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2021-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2020-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2019-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[saved] /home/willy010313/Polar_Bigdata/data/processed/h4/cci_layers_cells.csv (17572, 21)
+[check] 파일 재추출 ALT 대 base cci_alt: n=17476 r=0.9997 |diff| 중앙 0.00 cm (base = 25년 평균, 스모크는 2년)
+[check] 블록 평활 래스터 중앙값 대 관측 셀 중앙값(이전 정의): 블록 220 |diff| 중앙 2.00 cm, 창 유효 화소 중앙 2333
+[E0] 알래스카 원천 n=13606 E0=1.6167 잔차 RMSE=14.24 cm (σ_st²=202.7)
+[σ²_src] 지역별 Stefan 잔차 RMSE(E0 고정): Alaska 14.2 cm (n=13606), Canada 27.8 cm (n=750), Greenland 43.4 cm (n=3), Lena 21.7 cm (n=3037), Russia_C 53.4 cm (n=7), Russia_E 27.1 cm (n=30), Russia_W 45.7 cm (n=31)
+[check] Lena: npz stefan 대 재계산 E0·√TDD 최대차 0.000 cm; 채점 셀 n=2958, 블록 20
+[check] Lena: npz stefan_cci 대 0.5(st+cci) 최대차 0.000 cm
+[check] Canada: npz stefan 대 재계산 E0·√TDD 최대차 0.000 cm; 채점 셀 n=747, 블록 36
+[check] Canada: npz stefan_cci 대 0.5(st+cci) 최대차 0.000 cm
+[check] Russia_W: npz stefan 대 재계산 E0·√TDD 최대차 0.000 cm; 채점 셀 n=28, 블록 18
+[check] Russia_W: npz stefan_cci 대 0.5(st+cci) 최대차 0.000 cm
+[check] Russia_C: npz stefan 대 재계산 E0·√TDD 최대차 0.000 cm; 채점 셀 n=7, 블록 6
+[check] Russia_C: npz stefan_cci 대 0.5(st+cci) 최대차 0.000 cm
+[check] Russia_E: npz stefan 대 재계산 E0·√TDD 최대차 0.000 cm; 채점 셀 n=27, 블록 19
+[check] Russia_E: npz stefan_cci 대 0.5(st+cci) 최대차 0.000 cm
+[check] Greenland: npz stefan 대 재계산 E0·√TDD 최대차 0.000 cm; 채점 셀 n=1, 블록 1
+[check] Greenland: npz stefan_cci 대 0.5(st+cci) 최대차 0.000 cm
+[F9] 주 판정 F9_pass(§4, (ii)–(iv))=False; 병기 F9_pass_strict(§5, (ii)·(iv))=False; 기준 충족 구성원=[]; driver=none
+[F9] AB4 Holm 판정(가족 F9, m=4): 통과=False cci_uncw Δ=-0.43 CI_holm=[-0.98,0.17] p_holm=0.280; cci_blocksmooth Δ=-1.22 CI_holm=[-2.69,0.58] p_holm=0.384; gate_gtd_pfr Δ=-0.46 CI_holm=[-1.31,0.76] p_holm=0.660
+target           Canada  Greenland   Lena  Russia_C  Russia_E  Russia_W
+rule                                                                   
+cci_blocksmooth   23.63      27.20  20.85     56.62     27.85     41.83
+cci_uncw          26.44      30.46  20.88     53.75     27.93     42.06
+cci_uncw_srcvar   25.74      28.59  21.03     54.47     27.75     41.78
+gate_gtd_pfr      25.88      30.90  20.76     52.55     27.59     42.95
+stefan            26.50      30.90  21.62     53.39     28.44     42.46
+stefan_cci        25.72      21.20  20.76     54.00     27.66     41.44
+family                             test level  n_cells  delta  ci_lo  ci_hi  p_boot  p_holm  ci_lo_holm  ci_hi_holm  improve_holm holm_consistent  delta_beq        ci_flag
+    F9          C1_stefan_cci_vs_stefan   AB4     3760 -0.862 -2.071  0.888   0.330   0.660      -2.366       1.631         False            True      1.278        neg 4/4
+    F9          C1_stefan_cci_vs_stefan MAIN6     3768 -2.089    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN     -0.449 neg 5/6; 점 추정만
+    F9            C1_cci_uncw_vs_stefan   AB4     3760 -0.430 -0.844  0.037   0.070   0.280      -0.976       0.168         False            True      0.443        neg 4/4
+    F9            C1_cci_uncw_vs_stefan MAIN6     3768 -0.299    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN      0.164 neg 5/6; 점 추정만
+    F9     C1_cci_blocksmooth_vs_stefan   AB4     3760 -1.215 -2.244  0.292   0.128   0.384      -2.689       0.579         False            True      1.048        neg 4/4
+    F9     C1_cci_blocksmooth_vs_stefan MAIN6     3768 -0.888    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN      0.579 neg 5/6; 점 추정만
+    F9        C1_gate_gtd_pfr_vs_stefan   AB4     3760 -0.461 -1.166  0.556   0.442   0.660      -1.308       0.758         False            True      0.802        neg 3/4
+    F9        C1_gate_gtd_pfr_vs_stefan MAIN6     3768 -0.447    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN      0.583 neg 4/6; 점 추정만
+ vs_eq        C1_cci_uncw_vs_stefan_cci   AB4     3760  0.432 -1.099  1.402   0.594   1.000      -1.483       1.541         False            True     -0.834        neg 0/4
+ vs_eq        C1_cci_uncw_vs_stefan_cci MAIN6     3768  1.790    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN      0.613 neg 1/6; 점 추정만
+ vs_eq C1_cci_blocksmooth_vs_stefan_cci   AB4     3760 -0.354 -1.160  0.471   0.396   1.000      -1.450       0.704         False            True     -0.229        neg 1/4
+ vs_eq C1_cci_blocksmooth_vs_stefan_cci MAIN6     3768  1.201    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN      1.028 neg 1/6; 점 추정만
+ vs_eq    C1_gate_gtd_pfr_vs_stefan_cci   AB4     3760  0.401 -1.008  1.474   0.574   1.000      -1.292       1.807         False            True     -0.476        neg 1/4
+ vs_eq    C1_gate_gtd_pfr_vs_stefan_cci MAIN6     3768  1.641    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN      1.032 neg 2/6; 점 추정만
+  sens     C1_cci_uncw_srcvar_vs_stefan   AB4     3760 -0.683 -1.584  0.766   0.410   0.820      -1.716       1.009         False            True      1.394        neg 4/4
+  sens     C1_cci_uncw_srcvar_vs_stefan MAIN6     3768 -0.660    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN      0.771 neg 5/6; 점 추정만
+  sens C1_cci_uncw_srcvar_vs_stefan_cci   AB4     3760  0.179 -0.815  0.873   0.608   0.820      -0.931       0.986         False            True      0.116        neg 0/4
+  sens C1_cci_uncw_srcvar_vs_stefan_cci MAIN6     3768  1.429    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN      1.220 neg 0/6; 점 추정만
+[done] c1 경과 0.8 min → /home/willy010313/Polar_Bigdata/data/processed/h4/c1_{cci_layers,tests,worst,cells,blocksse,meta}

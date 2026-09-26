@@ -1,0 +1,16 @@
+{
+ "name": "TableS6c_c2_coverage_blockeq",
+ "ok": true,
+ "fails": [],
+ "words": {
+  "definition": 29,
+  "statistics": 38,
+  "panels": 6,
+  "data": 6,
+  "total": 79
+ },
+ "paths": {
+  "csv": "outputs/figures/paper/supp_tables/TableS6c_c2_coverage_blockeq.csv",
+  "tex": "outputs/figures/paper/supp_tables/TableS6c_c2_coverage_blockeq.tex"
+ }
+}

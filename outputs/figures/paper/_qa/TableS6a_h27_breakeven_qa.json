@@ -1,0 +1,16 @@
+{
+ "name": "TableS6a_h27_breakeven",
+ "ok": true,
+ "fails": [],
+ "words": {
+  "definition": 54,
+  "statistics": 62,
+  "panels": 16,
+  "data": 14,
+  "total": 146
+ },
+ "paths": {
+  "csv": "outputs/figures/paper/supp_tables/TableS6a_h27_breakeven.csv",
+  "tex": "outputs/figures/paper/supp_tables/TableS6a_h27_breakeven.tex"
+ }
+}

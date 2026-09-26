@@ -1,0 +1,37 @@
+{
+ "width_mm": 180.0,
+ "height_mm": 84.6,
+ "min_font_pt": 6.5,
+ "clipped": [],
+ "overlaps": [],
+ "n_text_overlaps": 0,
+ "has_title_in_axes": false,
+ "delta_axes_have_zero": true,
+ "n_delta_axes": 0,
+ "n_legends": 1,
+ "fonts": [
+  "BGZIHO+LiberationSans-Bold|CID TrueType|yes",
+  "BGZIHO+LiberationSans|CID TrueType|yes"
+ ],
+ "fonts_ok": true,
+ "unicode_minus_ok": true,
+ "caption_words": {
+  "definition": 65,
+  "statistics": 69,
+  "panels": 96,
+  "data": 17,
+  "total": 247
+ },
+ "caption_problems": [],
+ "fails": [],
+ "ok": true,
+ "name": "FigS12_a2_matrix",
+ "draft": false,
+ "time": "2026-09-26T21:21:17",
+ "paths": {
+  "width_mm": 180.0,
+  "height_mm": 84.6,
+  "pdf": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/FigS12_a2_matrix.pdf",
+  "png": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/FigS12_a2_matrix.png"
+ }
+}

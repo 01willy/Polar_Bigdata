@@ -1,0 +1,195 @@
+{
+ "stage": "H38 D1/D2",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_PAPER_2026-09-26.md §4 D1·D2, §5 F11",
+ "tag": "d1",
+ "target": "Mongolia_CAsia",
+ "args": {
+  "target": null,
+  "smoke_target": "Russia_W",
+  "splits": 3,
+  "reps": 20,
+  "seeds": 2,
+  "budgets": "3,10",
+  "taus": "0.10,0.15,0.20",
+  "tau_main": 0.15,
+  "kappa": 10.0,
+  "lam": 0.25,
+  "alpha": 1.0,
+  "buffer_km": 100.0,
+  "workers": 3,
+  "threads": 4,
+  "tag": "d1",
+  "smoke": false,
+  "force_prediction": false,
+  "skip_d2": false
+ },
+ "splits": [
+  0,
+  1,
+  2
+ ],
+ "reps": 20,
+ "seeds": [
+  0,
+  1
+ ],
+ "budgets": [
+  3,
+  10
+ ],
+ "taus": [
+  0.1,
+  0.15,
+  0.2
+ ],
+ "feats": [
+  "dem_elev",
+  "dem_slope",
+  "dem_aspect_sin",
+  "dem_aspect_cos",
+  "dem_tpi",
+  "dem_rough",
+  "e5_maat",
+  "e5_tdd",
+  "e5_fdd",
+  "e5_sqrt_tdd",
+  "e5_twarm",
+  "e5_tcold",
+  "e5_stl1",
+  "e5_swe",
+  "sg_clay_5_15",
+  "sg_sand_5_15",
+  "sg_silt_5_15",
+  "sg_bdod_5_15",
+  "sg_cfvo_5_15",
+  "sg_phh2o_5_15",
+  "sg_soc_0_5",
+  "sg_soc_5_15",
+  "sg_soc_15_30",
+  "cci_alt",
+  "cci_valid"
+ ],
+ "src_sources": [
+  "F4_direct"
+ ],
+ "tgt_sources": [
+  "F4_direct",
+  "F4_calm_temp"
+ ],
+ "prediction_file": "data/processed/h4/d1_prediction.json",
+ "prediction_mtime": "2026-09-26T13:15:11.927246",
+ "label_read_at": "2026-09-26T18:46:02.583697",
+ "prediction_before_labels": true,
+ "prediction_preexisting": true,
+ "prediction_written_at": "2026-09-26T13:15:11",
+ "prediction_target": "Mongolia_CAsia",
+ "prereg_disclosure": {
+  "smoke_results_viewed_before_full_run": true,
+  "smoke_first_prediction_written": "2026-09-26T13:15:11.927 (d1_smoke_prediction.json, --tag d1 --smoke, 대상 Mongolia_CAsia)",
+  "smoke_first_label_read": "2026-09-26T13:15:12 (같은 스모크 실행의 2단계)",
+  "parallel_check": "--tag d1test(분할 3, 반복 1, 13:15:54) 실행 후 삭제, 실측 E_allA 7.20–7.75 열람",
+  "prediction_source": "smoke stage1 file copied with cp -p (mtime 13:15:11.93 < first label read 13:15:12); 문구는 스모크 이전 스크립트 고정 두 범주",
+  "manuscript_note": "방법 절: 몽골 홀드아웃 결과는 개발 스모크에서 본 실행 전에 한 차례 열람되었고, 사전 예측 문구는 그 이전에 고정되었다."
+ },
+ "task_meta": [
+  {
+   "split": 2,
+   "n_A": 23,
+   "n_eval": 22,
+   "n_blocks_eval": 10,
+   "n_src": 17467,
+   "E0": 1.5917024900004222,
+   "E_allA": 7.7529229074921595,
+   "E_own": 7.569424756808712,
+   "n_fit": 162,
+   "elapsed_s": 79.6,
+   "prior_tau2": 0.15618648112047342,
+   "prior_sigma2": 0.10546982582944417,
+   "prior_regions": 7
+  },
+  {
+   "split": 0,
+   "n_A": 23,
+   "n_eval": 21,
+   "n_blocks_eval": 10,
+   "n_src": 17467,
+   "E0": 1.5917024900004222,
+   "E_allA": 7.467661091924576,
+   "E_own": 7.569424756808712,
+   "n_fit": 162,
+   "elapsed_s": 84.4,
+   "prior_tau2": 0.15618648112047342,
+   "prior_sigma2": 0.10546982582944417,
+   "prior_regions": 7
+  },
+  {
+   "split": 1,
+   "n_A": 23,
+   "n_eval": 22,
+   "n_blocks_eval": 10,
+   "n_src": 17467,
+   "E0": 1.5917024900004222,
+   "E_allA": 7.195459663908243,
+   "E_own": 7.569424756808712,
+   "n_fit": 162,
+   "elapsed_s": 85.2,
+   "prior_tau2": 0.15618648112047342,
+   "prior_sigma2": 0.10546982582944417,
+   "prior_regions": 7
+  }
+ ],
+ "f11_actual": {
+  "r_allA_by_split": {
+   "0": 1.5458,
+   "1": 1.5086,
+   "2": 1.5833
+  },
+  "r_own": 1.559312882890586,
+  "true_branch_allA": {
+   "0": "shrink",
+   "1": "shrink",
+   "2": "shrink"
+  },
+  "frac_shrink_by_split": {
+   "0": 1.0,
+   "1": 1.0,
+   "2": 1.0
+  }
+ },
+ "f11_verdict": {
+  "n3": {
+   "delta": -52.75021639309504,
+   "ci": [
+    -56.92098280296243,
+    -49.225367065415405
+   ],
+   "win_rate": 1.0,
+   "delta_le_0": true,
+   "ci_hi_lt_0": true,
+   "shrink_frac": 1.0,
+   "s3_delta": -79.15625479407626,
+   "protocol_win_rate_ge_S3": true
+  },
+  "n10": {
+   "delta": -89.26114869614273,
+   "ci": [
+    -97.35884047891334,
+    -81.44589565615195
+   ],
+   "win_rate": 1.0,
+   "delta_le_0": true,
+   "ci_hi_lt_0": true,
+   "shrink_frac": 1.0,
+   "s3_delta": -103.7456088235804,
+   "protocol_win_rate_ge_S3": true
+  }
+ },
+ "git_commit": "834e4bf",
+ "n_rows": {
+  "runs": 1815,
+  "summary": 21,
+  "branch": 9,
+  "d2": 5
+ },
+ "elapsed_s": 87.9
+}

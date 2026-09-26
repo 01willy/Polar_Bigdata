@@ -1,0 +1,6 @@
+label,delta_rmse,ci_lo,ci_hi,p_holm,n_regions_ci
+"covonly: Stefan 유사라벨 − const (직접 catboost_lo, r=10)",-4.016721031426661,-5.16137846710935,-1.8282356116534264,,4
+"covonly: Stefan 유사라벨 − const_t (직접 catboost_lo, r=10)",-1.7958269015508548,-2.401469172592665,-1.0386610356264776,,4
+"covonly: Stefan 유사라벨 − shuffle (직접 catboost_lo, r=10)",-1.8812782318840504,-2.4601614400647582,-1.042247648200558,,4
+"covonly: Stefan 유사라벨 − tddlin (직접 catboost_lo, r=10)",-0.6971456992486328,-0.9421059858229376,-0.2042098193051128,,4
+"covonly: Stefan 유사라벨 − none (직접 catboost_lo, r=10)",-3.57176904620451,-4.756424920647185,-1.852555389740414,,4

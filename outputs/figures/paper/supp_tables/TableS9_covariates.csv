@@ -1,0 +1,26 @@
+variable,group,description,unit,source,coverage_pct
+dem_elev,Terrain,Elevation,m,"Copernicus DEM, 30 m",100.0
+dem_slope,Terrain,Slope,°,"Copernicus DEM, 30 m",100.0
+dem_aspect_sin,Terrain,"Aspect, sine",–,"Copernicus DEM, 30 m",100.0
+dem_aspect_cos,Terrain,"Aspect, cosine",–,"Copernicus DEM, 30 m",100.0
+dem_tpi,Terrain,Topographic position index,m,"Copernicus DEM, 30 m",100.0
+dem_rough,Terrain,Roughness,m,"Copernicus DEM, 30 m",100.0
+e5_maat,Climate,Mean annual air temperature,°C,"ERA5-Land, 2015–2020",100.0
+e5_tdd,Climate,Thawing degree-days,°C d,"ERA5-Land, 2015–2020",100.0
+e5_fdd,Climate,Freezing degree-days,°C d,"ERA5-Land, 2015–2020",100.0
+e5_sqrt_tdd,Climate,Square root of TDD,(°C d)^0.5,"ERA5-Land, 2015–2020",100.0
+e5_twarm,Climate,Warmest-month temperature,°C,"ERA5-Land, 2015–2020",100.0
+e5_tcold,Climate,Coldest-month temperature,°C,"ERA5-Land, 2015–2020",100.0
+e5_stl1,Climate,Top-layer soil temperature,°C,"ERA5-Land, 2015–2020",100.0
+e5_swe,Climate,Snow water equivalent,m,"ERA5-Land, 2015–2020",100.0
+sg_clay_5_15,Soil,"Clay, 5–15 cm",g/kg,SoilGrids 250 m,98.41987748325414
+sg_sand_5_15,Soil,"Sand, 5–15 cm",g/kg,SoilGrids 250 m,98.41987748325414
+sg_silt_5_15,Soil,"Silt, 5–15 cm",g/kg,SoilGrids 250 m,98.41987748325414
+sg_bdod_5_15,Soil,"Bulk density, 5–15 cm",cg/cm³,SoilGrids 250 m,97.7156924486174
+sg_cfvo_5_15,Soil,"Coarse fragments, 5–15 cm",cm³/dm³,SoilGrids 250 m,98.41987748325414
+sg_phh2o_5_15,Soil,"pH (H2O), 5–15 cm",pH × 10,SoilGrids 250 m,98.41987748325414
+sg_soc_0_5,Soil,"Soil organic carbon, 0–5 cm",dg/kg,SoilGrids 250 m,97.7156924486174
+sg_soc_5_15,Soil,"Soil organic carbon, 5–15 cm",dg/kg,SoilGrids 250 m,97.7156924486174
+sg_soc_15_30,Soil,"Soil organic carbon, 15–30 cm",dg/kg,SoilGrids 250 m,97.7156924486174
+cci_alt,Remote sensing,ESA CCI Permafrost ALT,cm,"CCI Permafrost v4, 1 km",99.4961928207477
+cci_valid,Remote sensing,CCI ALT available,0/1,CCI Permafrost v4,100.0

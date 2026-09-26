@@ -1,0 +1,16 @@
+{
+ "name": "TableS3_ci_row_vs_block",
+ "ok": true,
+ "fails": [],
+ "words": {
+  "definition": 50,
+  "statistics": 32,
+  "panels": 14,
+  "data": 21,
+  "total": 117
+ },
+ "paths": {
+  "csv": "outputs/figures/paper/supp_tables/TableS3_ci_row_vs_block.csv",
+  "tex": "outputs/figures/paper/supp_tables/TableS3_ci_row_vs_block.tex"
+ }
+}

@@ -1,0 +1,60 @@
+{
+ "stage": "B1/H32",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_PAPER_2026-09-26.md",
+ "targets": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_E",
+  "AL-1",
+  "AL-2",
+  "AL-3",
+  "AL-4",
+  "AL-5",
+  "AL-6",
+  "CA-2",
+  "CA-3",
+  "LE-1",
+  "LE-2"
+ ],
+ "splits": [
+  0,
+  1,
+  2
+ ],
+ "reps": 20,
+ "reps_cb": 5,
+ "seeds": [
+  0,
+  1
+ ],
+ "ns": [
+  3,
+  10
+ ],
+ "taus": [
+  0.1,
+  0.15,
+  0.2
+ ],
+ "lam": 0.25,
+ "kappa": 10.0,
+ "buffer_km": 100.0,
+ "git_commit": "834e4bf",
+ "ci_rule": "block bootstrap within split (h4_common.boot_delta_blocks), shared indices across methods/reps/seeds; d_phys_lo_rep/hi_rep = (split, rep) row bootstrap",
+ "nboot": 1000,
+ "blocksse": "b1_blocksse.npz",
+ "key_format": "(method, tau[-1=none], n, rep, seed)",
+ "post_hoc_methods": [
+  "explore_gate_agree"
+ ],
+ "tau_rule": "protocol@loto = per-target tau chosen on other targets at same n: min n_worse(d_phys_mean>0), then min mean_d, then min |tau-0.15|; fixed-tau rows = sensitivity",
+ "label_budget": "within-budget diagnosis: n=3 uses sel3; n>3 uses select_nested (sel3 subset of sel_n, n labels total) for all methods",
+ "reference_methods": [
+  "oracle_branch",
+  "oracle_any",
+  "E0_resid_src"
+ ],
+ "n_rows": 11886,
+ "elapsed_s": 304.8
+}

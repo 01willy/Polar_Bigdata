@@ -1,0 +1,151 @@
+[
+ {
+  "item": "S1",
+  "status": "done",
+  "files": [
+   "FigS1_stefan_scatter",
+   "TableS9_covariates"
+  ],
+  "note": ""
+ },
+ {
+  "item": "S2",
+  "status": "done",
+  "files": [
+   "FigS2_scoring_protocol"
+  ],
+  "note": ""
+ },
+ {
+  "item": "S3",
+  "status": "done",
+  "files": [
+   "FigS3_subregions"
+  ],
+  "note": ""
+ },
+ {
+  "item": "S4",
+  "status": "done",
+  "files": [
+   "FigS4_subregion_budget"
+  ],
+  "note": ""
+ },
+ {
+  "item": "S5",
+  "status": "done",
+  "files": [
+   "FigS5_obs_design",
+   "TableS8_h18_h24_tests"
+  ],
+  "note": ""
+ },
+ {
+  "item": "S6",
+  "status": "done",
+  "files": [
+   "FigS6_label_number_aux"
+  ],
+  "note": ""
+ },
+ {
+  "item": "ST3",
+  "status": "done",
+  "files": [
+   "TableS3_ci_row_vs_block"
+  ],
+  "note": ""
+ },
+ {
+  "item": "ST6",
+  "status": "done",
+  "files": [
+   "TableS6a_h27_breakeven",
+   "TableS6b_h27_rule_stats",
+   "TableS6c_c2_coverage_blockeq"
+  ],
+  "note": ""
+ },
+ {
+  "item": "ST1",
+  "status": "done",
+  "files": [
+   "TableS1_cells_blocks_E"
+  ],
+  "note": ""
+ },
+ {
+  "item": "ST2",
+  "status": "done",
+  "files": [
+   "TableS2_holm_families"
+  ],
+  "note": ""
+ },
+ {
+  "item": "ST4",
+  "status": "done",
+  "files": [
+   "TableS4a_b1_protocol",
+   "TableS4b_h28_two_scorings"
+  ],
+  "note": ""
+ },
+ {
+  "item": "ST7",
+  "status": "done",
+  "files": [
+   "TableS7_d1_external"
+  ],
+  "note": ""
+ },
+ {
+  "item": "S11",
+  "status": "done",
+  "files": [
+   "TableS10a_software",
+   "TableS10b_runs"
+  ],
+  "note": ""
+ },
+ {
+  "item": "S7",
+  "status": "done",
+  "files": [
+   "FigS7_tfm"
+  ],
+  "note": ""
+ },
+ {
+  "item": "S8",
+  "status": "done",
+  "files": [
+   "FigS8_cci_bias"
+  ],
+  "note": ""
+ },
+ {
+  "item": "S9",
+  "status": "done",
+  "files": [
+   "FigS9_label_year"
+  ],
+  "note": ""
+ },
+ {
+  "item": "S12+ST5",
+  "status": "done",
+  "files": [
+   "FigS12_a2_matrix",
+   "TableS5_a2_nstar"
+  ],
+  "note": ""
+ },
+ {
+  "item": "S10",
+  "status": "not_run",
+  "files": [],
+  "note": "C4 InSAR multi-fidelity: not performed (time constraint); limitation described from the literature (Chang 2024; Wendt 2026)"
+ }
+]

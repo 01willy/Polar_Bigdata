@@ -1,0 +1,37 @@
+{
+ "width_mm": 180.0,
+ "height_mm": 98.0,
+ "min_font_pt": 6.5,
+ "clipped": [],
+ "overlaps": [],
+ "n_text_overlaps": 0,
+ "has_title_in_axes": false,
+ "delta_axes_have_zero": true,
+ "n_delta_axes": 10,
+ "n_legends": 1,
+ "fonts": [
+  "BGZIHO+LiberationSans-Bold|CID TrueType|yes",
+  "BGZIHO+LiberationSans|CID TrueType|yes"
+ ],
+ "fonts_ok": true,
+ "unicode_minus_ok": true,
+ "caption_words": {
+  "definition": 49,
+  "statistics": 55,
+  "panels": 52,
+  "data": 17,
+  "total": 173
+ },
+ "caption_problems": [],
+ "fails": [],
+ "ok": true,
+ "name": "FigS5_obs_design",
+ "draft": false,
+ "time": "2026-09-26T21:21:06",
+ "paths": {
+  "width_mm": 180.0,
+  "height_mm": 98.0,
+  "pdf": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/FigS5_obs_design.pdf",
+  "png": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/FigS5_obs_design.png"
+ }
+}

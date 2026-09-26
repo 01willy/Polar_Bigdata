@@ -1,0 +1,81 @@
+{
+ "stage": "H35/B4",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_PAPER_2026-09-26.md §4 B4, F8",
+ "args": {
+  "gpu": "9",
+  "targets": "",
+  "splits": 3,
+  "n_grid": "3,10,40",
+  "reps": 3,
+  "lams": "0.25,0.5",
+  "dup": 3,
+  "ctx_max": 10000,
+  "n_est": 8,
+  "model_path": "tabpfn-v2-regressor.ckpt",
+  "buffer_km": 100.0,
+  "k_sub": "Alaska:6,Canada:3,Lena:2",
+  "threads": 4,
+  "tag": "b4",
+  "smoke": false,
+  "summarize_only": false
+ },
+ "targets": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_E",
+  "AL-1",
+  "AL-2",
+  "AL-3",
+  "AL-4",
+  "AL-5",
+  "AL-6",
+  "CA-2",
+  "CA-3",
+  "LE-1",
+  "LE-2"
+ ],
+ "splits": [
+  0,
+  1,
+  2
+ ],
+ "n_grid": [
+  3,
+  10,
+  40
+ ],
+ "reps": 3,
+ "lams": [
+  0.25,
+  0.5
+ ],
+ "methods": [
+  "tfm",
+  "cb",
+  "cbr",
+  "anchor",
+  "physics"
+ ],
+ "gpu": "9",
+ "tabpfn": {
+  "version": "8.0.7",
+  "model_path": "tabpfn-v2-regressor.ckpt",
+  "n_estimators": 8,
+  "note": "8.0.7 기본 v3 가중치는 TABPFN_TOKEN 라이선스 토큰 없이는 내려받을 수 없어 계획 §9 대체안(공개 v2 회귀 가중치)을 사용"
+ },
+ "tabicl": {
+  "installed": false,
+  "attempted": false,
+  "note": "설치되어 있지 않아 시도하지 않음(지시)"
+ },
+ "anchor": "log E 오프셋 최대우도(h4_common.offset_mle_prior/estimate, 원천 macro 셀 ≥ 3, 적률 τ², 사전 평균 log E0 원천 최소제곱)",
+ "ci": "지역 안: h4_common.boot_delta_blocks(분할 안 블록 재표집, 대상별 공유 seed, 반복 짝지음), 보조 ci_rep = (분할, 반복) 행 재표집; 지역 평균: m1_stats.boot_delta/summarize_delta 층화 블록 부트스트랩",
+ "git_commit": "834e4bf",
+ "started": "2026-09-26 18:48:59",
+ "elapsed_s": 3026.6,
+ "n_rows": 2562,
+ "n_summary_rows": 280,
+ "n_test_rows": 506,
+ "verdict": "F8 n=3 λ=0.25: Δ(TFM−CB)=+0.11 cm [-0.18, +0.58] p_holm=1.000 · 동급(CI 0 포함)\nF8 n=3 λ=0.5: Δ(TFM−CB)=+0.15 cm [-0.36, +1.10] p_holm=1.000 · 동급(CI 0 포함)\nF8 n=10 λ=0.25: Δ(TFM−CB)=-0.14 cm [-0.42, +0.36] p_holm=1.000 · 동급(CI 0 포함)\nF8 n=10 λ=0.5: Δ(TFM−CB)=-0.30 cm [-0.86, +0.72] p_holm=1.000 · 동급(CI 0 포함)\nF8 n=40 λ=0.25: Δ(TFM−CB)=-0.33 cm [-0.54, -0.10] p_holm=0.012 · TFM 우위(상한 < 0)\nF8 n=40 λ=0.5: Δ(TFM−CB)=-0.56 cm [-1.06, -0.06] p_holm=0.160 · TFM 우위(상한 < 0)"
+}

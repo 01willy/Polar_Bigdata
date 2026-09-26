@@ -1,0 +1,17 @@
+method,label,target,delta,ci_scope
+stefan_cci,Equal weight,Lena,-0.8630338741677015,CI
+stefan_cci,Equal weight,Canada,-0.7845472939713822,CI
+stefan_cci,Equal weight,Russia_W,-1.0117768159995109,CI
+stefan_cci,Equal weight,Russia_E,-0.7875351083622526,CI
+cci_uncw,Unc. weight,Lena,-0.7455656087551503,CI
+cci_uncw,Unc. weight,Canada,-0.0679882568693805,CI
+cci_uncw,Unc. weight,Russia_W,-0.3914667330090609,CI
+cci_uncw,Unc. weight,Russia_E,-0.5140870297143998,CI
+cci_blocksmooth,Block smooth,Lena,-0.7694703470095163,CI
+cci_blocksmooth,Block smooth,Canada,-2.8710906219105112,CI
+cci_blocksmooth,Block smooth,Russia_W,-0.6300427221973663,CI
+cci_blocksmooth,Block smooth,Russia_E,-0.5911083761625555,CI
+gate_gtd_pfr,GTD·PFR gate,Lena,-0.8630338741677015,CI
+gate_gtd_pfr,GTD·PFR gate,Canada,-0.6196315756531732,CI
+gate_gtd_pfr,GTD·PFR gate,Russia_W,0.4930371080819427,CI
+gate_gtd_pfr,GTD·PFR gate,Russia_E,-0.8541731329246858,CI

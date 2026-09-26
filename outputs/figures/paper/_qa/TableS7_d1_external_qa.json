@@ -1,0 +1,16 @@
+{
+ "name": "TableS7_d1_external",
+ "ok": true,
+ "fails": [],
+ "words": {
+  "definition": 40,
+  "statistics": 44,
+  "panels": 12,
+  "data": 12,
+  "total": 108
+ },
+ "paths": {
+  "csv": "outputs/figures/paper/supp_tables/TableS7_d1_external.csv",
+  "tex": "outputs/figures/paper/supp_tables/TableS7_d1_external.tex"
+ }
+}

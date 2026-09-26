@@ -1,0 +1,339 @@
+hyp,family,cond,confirmatory,comparison,delta_cm,ci_lo_cm,ci_hi_cm,ci_kind,p_boot,p_holm,in_holm_family,note
+H18,info,noinfo,True,H18a_stefan_lst_vs_stefan,0.1615025638391811,-0.6515593951839009,1.2356943249707266,strat_AB4,0.636,1.0,True,
+H18,info,noinfo,False,H18x_stefan_soil_vs_stefan,0.702466804202146,-0.0828145823150715,1.2435710191091347,strat_AB4,0.102,,False,
+H18,info,noinfo,False,H18K1_stefan_lst_resid25_vs_stefan,0.3971490016411539,-0.3137398952381358,1.3647377681950206,strat_AB4,0.256,,False,
+H19,info,noinfo,False,H19d_x14_A_vs_x25_direct,0.8720930644064777,-0.7090677882531159,2.250736203559103,strat_AB4,0.234,,False,
+H19,info,noinfo,False,H19r_x14_A_resid25_vs_x25_resid25,0.3608400708761182,-0.1053290641532267,0.5899659289336068,strat_AB4,0.122,,False,
+H19,info,noinfo,False,H19r_x14_A_resid25_vs_stefan,0.5747731782137085,0.1316788566737387,0.922316029648924,strat_AB4,0.008,,False,
+H19,info,noinfo,False,H19d_x16_vs_x25_direct,2.1659003316623147,0.1478135534159935,3.647692388298023,strat_AB4,0.038,,False,
+H19,info,noinfo,False,H19r_x16_resid25_vs_x25_resid25,0.6322508999349644,0.2170145276948857,0.8422945585194919,strat_AB4,0.001,,False,
+H19,info,noinfo,False,H19r_x16_resid25_vs_stefan,0.8461840072725548,0.4084829840229981,1.1886629311984018,strat_AB4,0.001,,False,
+H19,info,noinfo,True,H19d_x25_A_vs_x25_direct,0.3313175768251888,-0.3209794152820873,0.8795209600723167,strat_AB4,0.294,1.0,True,
+H19,info,noinfo,False,H19r_x25_A_resid25_vs_x25_resid25,0.0876434326278037,-0.1232652192164885,0.2141718746126514,strat_AB4,0.42,,False,
+H19,info,noinfo,False,H19r_x25_A_resid25_vs_stefan,0.301576539965394,-0.1420408707328576,0.5838507572031599,strat_AB4,0.144,,False,
+H19,info,noinfo,False,H19d_x25_A_lst_vs_x25_direct,0.1798203723801297,-0.6854327898630784,0.7895957348191656,strat_AB4,0.702,,False,
+H19,info,noinfo,False,H19r_x25_A_lst_resid25_vs_x25_resid25,0.0261919224054153,-0.1657089823714658,0.1755017251975899,strat_AB4,0.862,,False,
+H19,info,noinfo,False,H19r_x25_A_lst_resid25_vs_stefan,0.2401250297430056,-0.1654853227938177,0.4825654861591495,strat_AB4,0.176,,False,
+H19,info,noinfo,False,H19d_x25_H_vs_x25_direct,0.1424615560079505,-0.2132314706010573,0.5216789161214473,strat_AB4,0.498,,False,
+H19,info,noinfo,False,H19r_x25_H_resid25_vs_x25_resid25,-0.0691125185093417,-0.1660469041407641,-0.0065828984000573,strat_AB4,0.03,,False,
+H19,info,noinfo,False,H19r_x25_H_resid25_vs_stefan,0.1448205888282485,-0.1372613273662497,0.3796400613110677,strat_AB4,0.3,,False,
+H19,info,noinfo,False,H19d_x25_T_vs_x25_direct,0.1441079027995465,-0.1113242551707291,0.4041642077961712,strat_AB4,0.264,,False,
+H19,info,noinfo,False,H19r_x25_T_resid25_vs_x25_resid25,-0.0376441340869447,-0.1204766653607185,0.0550640618156072,strat_AB4,0.606,,False,
+H19,info,noinfo,False,H19r_x25_T_resid25_vs_stefan,0.1762889732506455,-0.1104624471153431,0.4185944147661045,strat_AB4,0.168,,False,
+H19,info,noinfo,False,H19d_x25_V_vs_x25_direct,0.2895177186982651,0.0282621518467427,0.5634871681841722,strat_AB4,0.028,,False,
+H19,info,noinfo,False,H19r_x25_V_resid25_vs_x25_resid25,0.0622868469995362,-0.0639379489668118,0.1428155974424635,strat_AB4,0.302,,False,
+H19,info,noinfo,False,H19r_x25_V_resid25_vs_stefan,0.2762199543371265,-0.1350724042772782,0.5753117084162781,strat_AB4,0.142,,False,
+H19,info,noinfo,False,H19d_x25_W_vs_x25_direct,0.923875952371592,-0.0695270865671399,2.0723275939732777,strat_AB4,0.06,,False,
+H19,info,noinfo,False,H19r_x25_W_resid25_vs_x25_resid25,0.0678836337769084,-0.0883015262244064,0.2138126016102121,strat_AB4,0.326,,False,
+H19,info,noinfo,False,H19r_x25_W_resid25_vs_stefan,0.2818167411144987,-0.1509683131532083,0.5943733704095769,strat_AB4,0.142,,False,
+H19,info,noinfo,False,H19d_x25_lst_vs_x25_direct,-0.161164424709353,-0.3763195406434673,0.1065034560280863,strat_AB4,0.264,,False,
+H19,info,noinfo,False,H19r_x25_lst_resid25_vs_x25_resid25,0.0382223281146852,-0.0623290628260922,0.1613774128529624,strat_AB4,0.406,,False,
+H19,info,noinfo,False,H19r_x25_lst_resid25_vs_stefan,0.2521554354522755,-0.100262056759166,0.5317822018569699,strat_AB4,0.112,,False,
+H18,info,covonly,True,H18a_stefan_lst_vs_stefan,0.0953357780053005,-0.7934318905040684,0.9078315147911988,strat_AB4,0.738,1.0,True,
+H18,info,covonly,False,H18x_stefan_soil_vs_stefan,0.8892036054205423,-0.1430834518200633,1.3992798400528548,strat_AB4,0.112,,False,
+H18,info,covonly,False,H18K1_stefan_lst_resid25_vs_stefan,0.3268842788634156,-0.471375016741005,1.065917645605457,strat_AB4,0.392,,False,
+H19,info,covonly,False,H19p_x14_A_vs_x25_pseudo,1.0167809703473916,0.0920767967425526,1.5926993032341266,strat_AB4,0.012,,False,
+H19,info,covonly,False,H19s_x14_A_pseudo_vs_stefan,0.9014279718058136,-0.2190419582114103,1.5411314095827375,strat_AB4,0.138,,False,
+H19,info,covonly,False,H19r_x14_A_resid25_vs_x25_resid25,0.4666554752895839,-0.0346644325182127,0.6699985859493549,strat_AB4,0.072,,False,
+H19,info,covonly,False,H19r_x14_A_resid25_vs_stefan,0.7733301972757842,0.1865196684403982,1.0778083961897458,strat_AB4,0.001,,False,
+H19,info,covonly,False,H19p_x16_vs_x25_pseudo,0.513472409141548,0.0955593012718328,0.9522944907940322,strat_AB4,0.008,,False,
+H19,info,covonly,False,H19s_x16_pseudo_vs_stefan,0.39811941059997,-0.2942462821467194,1.1097110222569824,strat_AB4,0.282,,False,
+H19,info,covonly,False,H19r_x16_resid25_vs_x25_resid25,0.6431526785654034,0.1767339175990101,0.8784653154451415,strat_AB4,0.001,,False,
+H19,info,covonly,False,H19r_x16_resid25_vs_stefan,0.9498274005516038,0.3401956644412722,1.2976203128030972,strat_AB4,0.001,,False,
+H19,info,covonly,True,H19p_x25_A_vs_x25_pseudo,0.6362532615790586,0.0496475101567631,1.116923689580757,strat_AB4,0.024,0.168,True,
+H19,info,covonly,False,H19s_x25_A_pseudo_vs_stefan,0.5209002630374805,-0.2588692880349046,1.1491605706858552,strat_AB4,0.254,,False,
+H19,info,covonly,False,H19r_x25_A_resid25_vs_x25_resid25,0.1373845140669241,-0.1078809573000154,0.2657759693127945,strat_AB4,0.374,,False,
+H19,info,covonly,False,H19r_x25_A_resid25_vs_stefan,0.4440592360531245,-0.0397008232000177,0.7050928095891309,strat_AB4,0.08,,False,
+H19,info,covonly,False,H19p_x25_A_lst_vs_x25_pseudo,0.6869284254240139,-0.0316317778939981,1.1727306075119217,strat_AB4,0.066,,False,
+H19,info,covonly,False,H19s_x25_A_lst_pseudo_vs_stefan,0.571575426882436,-0.2849590693073166,1.1265831931085235,strat_AB4,0.298,,False,
+H19,info,covonly,False,H19r_x25_A_lst_resid25_vs_x25_resid25,0.0817450557972726,-0.1532415015791289,0.2616950328086307,strat_AB4,0.564,,False,
+H19,info,covonly,False,H19r_x25_A_lst_resid25_vs_stefan,0.388419777783473,-0.0708098448134984,0.6486283790969335,strat_AB4,0.092,,False,
+H19,info,covonly,False,H19p_x25_H_vs_x25_pseudo,0.3704459390309557,-0.1325338180579282,0.8440480967142093,strat_AB4,0.128,,False,
+H19,info,covonly,False,H19s_x25_H_pseudo_vs_stefan,0.2550929404893776,-0.5120013941438594,0.8929483807234366,strat_AB4,0.586,,False,
+H19,info,covonly,False,H19r_x25_H_resid25_vs_x25_resid25,-0.0631765124091758,-0.1702511527488064,0.0032911901330679,strat_AB4,0.072,,False,
+H19,info,covonly,False,H19r_x25_H_resid25_vs_stefan,0.2434982095770245,-0.1232242170324027,0.4424645677666294,strat_AB4,0.168,,False,
+H19,info,covonly,False,H19p_x25_T_vs_x25_pseudo,0.0536028856699406,-0.283781848223633,0.1900754560405342,strat_AB4,0.95,,False,
+H19,info,covonly,False,H19s_x25_T_pseudo_vs_stefan,-0.0617501128716373,-0.7932181622396818,0.3691558548828131,strat_AB4,0.668,,False,
+H19,info,covonly,False,H19r_x25_T_resid25_vs_x25_resid25,-0.0768266062595941,-0.1711867550003969,0.0628883331745719,strat_AB4,0.454,,False,
+H19,info,covonly,False,H19r_x25_T_resid25_vs_stefan,0.2298481157266063,-0.0614521888286319,0.4670553073968828,strat_AB4,0.108,,False,
+H19,info,covonly,False,H19p_x25_V_vs_x25_pseudo,0.2988471663102583,-0.0933343919734462,0.4660815731434544,strat_AB4,0.192,,False,
+H19,info,covonly,False,H19s_x25_V_pseudo_vs_stefan,0.1834941677686803,-0.5851436964256608,0.6969822626757155,strat_AB4,0.78,,False,
+H19,info,covonly,False,H19r_x25_V_resid25_vs_x25_resid25,0.1229294294389161,-0.0001440640764093,0.1923634993574513,strat_AB4,0.052,,False,
+H19,info,covonly,False,H19r_x25_V_resid25_vs_stefan,0.4296041514251166,0.0597888285341126,0.6404371662332239,strat_AB4,0.022,,False,
+H19,info,covonly,False,H19p_x25_W_vs_x25_pseudo,0.2022978548144027,-0.0457624791317075,0.3149479642951155,strat_AB4,0.12,,False,
+H19,info,covonly,False,H19s_x25_W_pseudo_vs_stefan,0.0869448562728247,-0.6846017021660676,0.5838951615319482,strat_AB4,0.996,,False,
+H19,info,covonly,False,H19r_x25_W_resid25_vs_x25_resid25,0.0570479127628121,-0.1666300799021204,0.2477122055159423,strat_AB4,0.56,,False,
+H19,info,covonly,False,H19r_x25_W_resid25_vs_stefan,0.3637226347490125,-0.071468063697393,0.6259512372716246,strat_AB4,0.1,,False,
+H19,info,covonly,True,H19p_x25_lst_vs_x25_pseudo,0.0316339957858516,-0.1170375783285539,0.1190351077654591,strat_AB4,0.854,1.0,True,
+H19,info,covonly,False,H19s_x25_lst_pseudo_vs_stefan,-0.0837190027557263,-0.735559249668293,0.3502569636868869,strat_AB4,0.612,,False,
+H19,info,covonly,False,H19r_x25_lst_resid25_vs_x25_resid25,0.0532074709202206,-0.0309291863627331,0.185633719688352,strat_AB4,0.176,,False,
+H19,info,covonly,False,H19r_x25_lst_resid25_vs_stefan,0.359882192906421,0.0980313262806256,0.6171282971013278,strat_AB4,0.016,,False,
+H18,info,covonly,False,H18Q1_pseudo_stefan_lst_vs_pseudo_stefan,0.5007185553480036,-0.6002511755443848,1.2372993299557065,strat_AB4,0.468,,False,
+H18,info,covonly,False,H18C_x25lst_anc_lst_ps_lst_resid25_vs_stefan,0.133639793482879,-0.7017524424250102,0.9152196811362212,strat_AB4,0.714,,False,
+H18,info,covonly,False,H18C_x25Alst_anc_lst_ps_lst_resid25_vs_stefan,0.2775598227669504,-0.5304009025430253,0.948750734374767,strat_AB4,0.508,,False,
+H18,info,covonly,False,H18C_anc_lst_ps_lst_resid25_vs_stefan,0.0564249712476483,-0.7525641176583425,0.776152560110088,strat_AB4,0.784,,False,
+H22,objective,noinfo,False,H22_groupdro_resid_lam0.25_vs_stefan,0.3829589807916059,0.136304573122211,0.5720440775156884,strat_AB4,0.008,,False,
+H22,objective,noinfo,False,H22_groupdro_resid_lam0.25_vs_erm,0.016726130825216,0.000447579914098,0.0354586184599074,strat_AB4,0.042,,False,
+H22,objective,noinfo,False,H22_groupdro_resid_lam0.5_vs_stefan,0.8731501430056037,0.4080628715887048,1.2644818548270682,strat_AB4,0.001,,False,
+H22,objective,noinfo,False,H22_groupdro_resid_lam0.5_vs_erm,0.0358648989304176,0.0020716621226485,0.0917777028554764,strat_AB4,0.038,,False,
+H22,objective,noinfo,False,H22_groupdro_resid_lam1_vs_stefan,2.151343759733506,1.421702960345098,2.7848489975320048,strat_AB4,0.001,,False,
+H22,objective,noinfo,False,H22_groupdro_resid_lam1_vs_erm,0.077522960426094,-0.0056748738552486,0.2517650039034034,strat_AB4,0.074,,False,
+H22,objective,noinfo,True,H22_irm_resid_lam0.25_vs_stefan,0.5267500019060908,0.2383306544083323,0.7931317382144364,strat_AB4,0.002,0.01,True,
+H22,objective,noinfo,False,H22_irm_resid_lam0.25_vs_erm,0.1605171519397009,0.0337371602247251,0.3160676553843766,strat_AB4,0.02,,False,
+H22,objective,noinfo,False,H22_irm_resid_lam0.5_vs_stefan,1.2191579204886225,0.6964381191699256,1.7153884963929995,strat_AB4,0.001,,False,
+H22,objective,noinfo,False,H22_irm_resid_lam0.5_vs_erm,0.3818726764134365,0.1317035456702037,0.6854845718391965,strat_AB4,0.001,,False,
+H22,objective,noinfo,False,H22_irm_resid_lam1_vs_stefan,3.0612197212112924,2.2246558559085554,4.060762603578729,strat_AB4,0.001,,False,
+H22,objective,noinfo,False,H22_irm_resid_lam1_vs_erm,0.9873989219038805,0.5757680847891545,1.4976818647123902,strat_AB4,0.001,,False,
+H22,objective,noinfo,False,H22_regemb_resid_lam0.25_vs_stefan,0.4000578785975829,0.1559891574907169,0.5935720466070448,strat_AB4,0.002,,False,
+H22,objective,noinfo,False,H22_regemb_resid_lam0.25_vs_erm,0.033825028631193,-0.0729527486574065,0.147601623408736,strat_AB4,0.544,,False,
+H22,objective,noinfo,False,H22_regemb_resid_lam0.5_vs_stefan,0.8622392941024556,0.3676761002132208,1.2457631305769017,strat_AB4,0.001,,False,
+H22,objective,noinfo,False,H22_regemb_resid_lam0.5_vs_erm,0.0249540500272695,-0.169939515437781,0.2099832185473269,strat_AB4,0.842,,False,
+H22,objective,noinfo,False,H22_regemb_resid_lam1_vs_stefan,1.9624466435831072,1.1162679758752108,2.7159834432711456,strat_AB4,0.001,,False,
+H22,objective,noinfo,False,H22_regemb_resid_lam1_vs_erm,-0.1113741557243047,-0.5448079388412174,0.2803041467548637,strat_AB4,0.53,,False,
+H22,objective,noinfo,False,H22_stable_resid_lam0.25_vs_stefan,0.2397259305704867,-0.2306408026431721,0.6617651436501297,strat_AB4,0.258,,False,
+H22,objective,noinfo,False,H22_stable_resid_lam0.25_vs_erm,-0.1265069193959031,-0.636266486924455,0.4228312367810529,strat_AB4,0.586,,False,
+H22,objective,noinfo,False,H22_stable_resid_lam0.5_vs_stefan,0.7284290352395972,-0.1192040627975099,1.733230034675952,strat_AB4,0.108,,False,
+H22,objective,noinfo,False,H22_stable_resid_lam0.5_vs_erm,-0.1088562088355888,-1.0506957528599896,1.0265350453096305,strat_AB4,0.862,,False,
+H22,objective,noinfo,False,H22_stable_resid_lam1_vs_stefan,2.3404682498587004,0.4544460179049993,4.90834556908795,strat_AB4,0.016,,False,
+H22,objective,noinfo,False,H22_stable_resid_lam1_vs_erm,0.2666474505512883,-1.7766981613833963,2.750499212010657,strat_AB4,0.796,,False,
+H22,objective,noinfo,True,H22_vrex_resid_lam0.25_vs_stefan,0.1494420229760595,-0.0981634081510709,0.4543375777481386,strat_AB4,0.212,0.424,True,
+H22,objective,noinfo,False,H22_vrex_resid_lam0.25_vs_erm,-0.2167908269903303,-0.3497091221711125,0.0408216749911988,strat_AB4,0.09,,False,
+H22,objective,noinfo,False,H22_vrex_resid_lam0.5_vs_stefan,0.5930353541312139,0.1171484081256162,1.2686368782923014,strat_AB4,0.022,,False,
+H22,objective,noinfo,False,H22_vrex_resid_lam0.5_vs_erm,-0.2442498899439721,-0.5561106775932146,0.3638240279409797,strat_AB4,0.442,,False,
+H22,objective,noinfo,False,H22_vrex_resid_lam1_vs_stefan,2.3088605671921023,1.3117018290415148,4.220762312634376,strat_AB4,0.002,,False,
+H22,objective,noinfo,False,H22_vrex_resid_lam1_vs_erm,0.2350397678846902,-0.62401725851806,1.8906151495756824,strat_AB4,0.558,,False,
+H22,objective,noinfo,False,H22_erm_resid_lam0.25_vs_stefan,0.3662328499663898,0.1136963933241247,0.5537417736486612,strat_AB4,0.002,,False,
+H22,objective,noinfo,False,H22_erm_resid_lam0.5_vs_stefan,0.8372852440751861,0.3768908136964924,1.2017958935508584,strat_AB4,0.001,,False,
+H22,objective,noinfo,False,H22_erm_resid_lam1_vs_stefan,2.0738207993074123,1.292985161498048,2.732946647229662,strat_AB4,0.001,,False,
+H22,objective,noinfo,False,H22_groupdro_direct_lam1_vs_stefan,2.770019221055842,1.4610462043469474,3.721856371452796,strat_AB4,0.001,,False,
+H22,objective,noinfo,False,H22_groupdro_direct_lam1_vs_erm,-0.2417746501734094,-0.3927016717265232,-0.0109506146784712,strat_AB4,0.04,,False,
+H22,objective,noinfo,False,H22_irm_direct_lam1_vs_stefan,3.306295762510765,1.8408535234422865,4.386412511755386,strat_AB4,0.001,,False,
+H22,objective,noinfo,False,H22_irm_direct_lam1_vs_erm,0.2945018912815135,-0.597419397570893,1.256695188723251,strat_AB4,0.532,,False,
+H22,objective,noinfo,False,H22_regemb_direct_lam1_vs_stefan,2.9008639925912827,1.1634078583236525,4.156601935762538,strat_AB4,0.001,,False,
+H22,objective,noinfo,False,H22_regemb_direct_lam1_vs_erm,-0.1109298786379685,-0.8705584953256156,0.4695041745132856,strat_AB4,0.642,,False,
+H22,objective,noinfo,False,H22_stable_direct_lam1_vs_stefan,2.727814024390912,0.110480382097103,6.069505400900317,strat_AB4,0.038,,False,
+H22,objective,noinfo,False,H22_stable_direct_lam1_vs_erm,-0.2839798468383394,-2.5927148024031927,3.42414347939618,strat_AB4,0.95,,False,
+H22,objective,noinfo,False,H22_vrex_direct_lam1_vs_stefan,3.374120677739529,2.184912668904987,5.11207746988622,strat_AB4,0.001,,False,
+H22,objective,noinfo,False,H22_vrex_direct_lam1_vs_erm,0.3623268065102776,-0.3869452890313706,1.80529857536476,strat_AB4,0.316,,False,
+H22,objective,noinfo,False,H22_erm_direct_lam1_vs_stefan,3.011793871229252,1.646693460168659,4.007308545525442,strat_AB4,0.001,,False,
+H22,objective,covonly,True,H22_dann_resid_lam0.25_vs_stefan,0.2684876987194936,0.0461527827855257,0.4363525386445938,strat_AB4,0.026,0.078,True,
+H22,objective,covonly,False,H22_dann_resid_lam0.25_vs_erm,-0.0621419867640709,-0.1466747906626639,0.0470392094991571,strat_AB4,0.208,,False,
+H22,objective,covonly,False,H22_dann_resid_lam0.5_vs_stefan,0.5858421207957596,0.166059571301256,0.9137871019726362,strat_AB4,0.014,,False,
+H22,objective,covonly,False,H22_dann_resid_lam0.5_vs_erm,-0.1755256595529667,-0.3442995389795802,-0.0068677263586225,strat_AB4,0.044,,False,
+H22,objective,covonly,False,H22_dann_resid_lam1_vs_stefan,1.3619897776469938,0.5894942132340875,2.154285057663674,strat_AB4,0.004,,False,
+H22,objective,covonly,False,H22_dann_resid_lam1_vs_erm,-0.5541474790991273,-0.987362863829405,-0.271900915826026,strat_AB4,0.002,,False,
+H22,objective,covonly,False,H22_groupdro_resid_lam0.25_vs_stefan,0.349939086605788,0.0867384797376482,0.5538763265144141,strat_AB4,0.018,,False,
+H22,objective,covonly,False,H22_groupdro_resid_lam0.25_vs_erm,0.0193094011222235,0.0037122623911839,0.0439113331461294,strat_AB4,0.022,,False,
+H22,objective,covonly,False,H22_groupdro_resid_lam0.5_vs_stefan,0.8027544053459377,0.2882762270583096,1.205095481906886,strat_AB4,0.006,,False,
+H22,objective,covonly,False,H22_groupdro_resid_lam0.5_vs_erm,0.0413866249972114,0.0042396910405432,0.1361231634155548,strat_AB4,0.026,,False,
+H22,objective,covonly,False,H22_groupdro_resid_lam1_vs_stefan,2.005019404381631,1.2320660438478792,2.9548633722416686,strat_AB4,0.001,,False,
+H22,objective,covonly,False,H22_groupdro_resid_lam1_vs_erm,0.0888821476355105,-0.0075079996865027,0.3291870403162662,strat_AB4,0.078,,False,
+H22,objective,covonly,True,H22_irm_resid_lam0.25_vs_stefan,0.3860970624017341,0.1084806231538589,0.7017971769713208,strat_AB4,0.01,0.04,True,
+H22,objective,covonly,False,H22_irm_resid_lam0.25_vs_erm,0.0554673769181697,-0.0567490750184365,0.2771716947297589,strat_AB4,0.34,,False,
+H22,objective,covonly,False,H22_irm_resid_lam0.5_vs_stefan,0.9345817631649695,0.4758317310287712,1.5851077398112383,strat_AB4,0.002,,False,
+H22,objective,covonly,False,H22_irm_resid_lam0.5_vs_erm,0.1732139828162434,-0.0379752762278843,0.5806583340142724,strat_AB4,0.112,,False,
+H22,objective,covonly,False,H22_irm_resid_lam1_vs_stefan,2.5117252289272654,1.7223940615698057,3.67040321671816,strat_AB4,0.001,,False,
+H22,objective,covonly,False,H22_irm_resid_lam1_vs_erm,0.5955879721811442,0.2459229481940708,1.2250712277192015,strat_AB4,0.002,,False,
+H22,objective,covonly,False,H22_regemb_resid_lam0.25_vs_stefan,0.3792623137490419,0.082580052056069,0.5946441956421035,strat_AB4,0.006,,False,
+H22,objective,covonly,False,H22_regemb_resid_lam0.25_vs_erm,0.0486326282654774,-0.0792185963763071,0.1708112651140498,strat_AB4,0.486,,False,
+H22,objective,covonly,False,H22_regemb_resid_lam0.5_vs_stefan,0.8164474410522502,0.3083586747457538,1.2261629659477606,strat_AB4,0.002,,False,
+H22,objective,covonly,False,H22_regemb_resid_lam0.5_vs_erm,0.0550796607035239,-0.2089830587420963,0.2668980021978405,strat_AB4,0.704,,False,
+H22,objective,covonly,False,H22_regemb_resid_lam1_vs_stefan,1.85945156772279,0.9737481830830164,2.7647031379551463,strat_AB4,0.001,,False,
+H22,objective,covonly,False,H22_regemb_resid_lam1_vs_erm,-0.0566856890233309,-0.5938583919286434,0.3105020744805436,strat_AB4,0.668,,False,
+H22,objective,covonly,False,H22_stable_resid_lam0.25_vs_stefan,0.1323142053680133,-0.6391708487479789,0.5214513097563799,strat_AB4,0.76,,False,
+H22,objective,covonly,False,H22_stable_resid_lam0.25_vs_erm,-0.1983154801155511,-0.9240846527929386,0.2713110842143293,strat_AB4,0.382,,False,
+H22,objective,covonly,False,H22_stable_resid_lam0.5_vs_stefan,0.4283973415612507,-1.0278196918810212,1.2336691617553233,strat_AB4,0.528,,False,
+H22,objective,covonly,False,H22_stable_resid_lam0.5_vs_erm,-0.3329704387874755,-1.8281586816487168,0.575862861826289,strat_AB4,0.44,,False,
+H22,objective,covonly,False,H22_stable_resid_lam1_vs_stefan,1.47917099802647,-1.0515334167132533,3.230010016521505,strat_AB4,0.214,,False,
+H22,objective,covonly,False,H22_stable_resid_lam1_vs_erm,-0.436966258719651,-2.9831575580077816,1.446002055407121,strat_AB4,0.564,,False,
+H22,objective,covonly,True,H22_vrex_resid_lam0.25_vs_stefan,0.0171543111842827,-0.2627062695916874,0.3407338003649706,strat_AB4,0.782,0.782,True,
+H22,objective,covonly,False,H22_vrex_resid_lam0.25_vs_erm,-0.3134753742992817,-0.4418230335689135,0.0031378958035108,strat_AB4,0.056,,False,
+H22,objective,covonly,False,H22_vrex_resid_lam0.5_vs_stefan,0.3354331818832899,-0.2111756030993686,1.4519652179882332,strat_AB4,0.182,,False,
+H22,objective,covonly,False,H22_vrex_resid_lam0.5_vs_erm,-0.4259345984654363,-0.7171330539584854,0.5515157885119105,strat_AB4,0.266,,False,
+H22,objective,covonly,False,H22_vrex_resid_lam1_vs_stefan,1.8658562977559887,0.6325597531370796,4.460362635730791,strat_AB4,0.001,,False,
+H22,objective,covonly,False,H22_vrex_resid_lam1_vs_erm,-0.0502809589901317,-0.973726748567796,2.201219723688329,strat_AB4,0.96,,False,
+H22,objective,covonly,False,H22_erm_resid_lam0.25_vs_stefan,0.3306296854835645,0.0388321804988734,0.515731563375662,strat_AB4,0.036,,False,
+H22,objective,covonly,False,H22_erm_resid_lam0.5_vs_stefan,0.7613677803487262,0.2945672635708817,1.1081930744985202,strat_AB4,0.004,,False,
+H22,objective,covonly,False,H22_erm_resid_lam1_vs_stefan,1.916137256746121,1.1200169225385317,2.699849304132623,strat_AB4,0.001,,False,
+H22,objective,covonly,False,H22_dann_direct_lam1_vs_stefan,3.095152939143583,1.4191726673576863,4.060734119106007,strat_AB4,0.001,,False,
+H22,objective,covonly,False,H22_dann_direct_lam1_vs_erm,-0.19276155753177,-0.976522433627627,0.3857406970812573,strat_AB4,0.466,,False,
+H22,objective,covonly,False,H22_groupdro_direct_lam1_vs_stefan,3.0012529377784958,1.604079422234839,3.940293653674154,strat_AB4,0.001,,False,
+H22,objective,covonly,False,H22_groupdro_direct_lam1_vs_erm,-0.286661558896857,-0.4282764414213919,0.0547438730224568,strat_AB4,0.11,,False,
+H22,objective,covonly,False,H22_irm_direct_lam1_vs_stefan,3.1524037879100586,1.77637684555181,4.483466064108445,strat_AB4,0.001,,False,
+H22,objective,covonly,False,H22_irm_direct_lam1_vs_erm,-0.135510708765294,-0.8020475709329964,1.1475928958886032,strat_AB4,0.922,,False,
+H22,objective,covonly,False,H22_regemb_direct_lam1_vs_stefan,3.5289867860967084,1.241595588779938,4.7077977894835135,strat_AB4,0.004,,False,
+H22,objective,covonly,False,H22_regemb_direct_lam1_vs_erm,0.2410722894213561,-0.9294887673565247,0.7775275013636056,strat_AB4,0.784,,False,
+H22,objective,covonly,False,H22_stable_direct_lam1_vs_stefan,2.48202669857294,-0.8418441291865633,5.421817064315074,strat_AB4,0.114,,False,
+H22,objective,covonly,False,H22_stable_direct_lam1_vs_erm,-0.8058877981024121,-3.439161382984613,2.582729836603314,strat_AB4,0.566,,False,
+H22,objective,covonly,False,H22_vrex_direct_lam1_vs_stefan,3.590051118316989,2.045528019238257,6.06658409420592,strat_AB4,0.001,,False,
+H22,objective,covonly,False,H22_vrex_direct_lam1_vs_erm,0.3021366216416365,-0.5388502590786939,2.7241025195964497,strat_AB4,0.494,,False,
+H22,objective,covonly,False,H22_erm_direct_lam1_vs_stefan,3.2879144966753526,1.7081814678583205,4.261532843788022,strat_AB4,0.001,,False,
+H21,info,noinfo,True,H21_nested_vs_EAK,1.2607365142108176,-0.519949289291563,2.6062792614012484,strat_AB4,0.178,1.0,True,
+H21,info,noinfo|AB4,False,H21_nested_vs_EAK|AB4,1.2607365142108176,-0.519949289291563,2.6062792614012484,strat_AB4,0.178,,False,
+H21,info,noinfo,False,H21ctrl_pooled_region_vs_EAK,0.6484779393116762,-1.2838699004579346,3.2550135268584373,strat_AB4,0.422,,False,
+H21,info,noinfo|AB4,False,H21ctrl_pooled_region_vs_EAK|AB4,0.6484779393116762,-1.2838699004579346,3.2550135268584373,strat_AB4,0.422,,False,
+H21,info,noinfo,False,H21ctrl_pooled_cell_vs_EAK,0.2575376384427814,0.0627094225606863,0.3862352213831148,strat_AB4,0.012,,False,
+H21,info,noinfo|AB4,False,H21ctrl_pooled_cell_vs_EAK|AB4,0.2575376384427814,0.0627094225606863,0.3862352213831148,strat_AB4,0.012,,False,
+H21,info,noinfo,False,H21ref_oracle_vs_EAK,-4.327162804456252,-6.334190851205199,-1.472934210644706,strat_AB4,0.002,,False,
+H21,info,noinfo|AB4,False,H21ref_oracle_vs_EAK|AB4,-4.327162804456252,-6.334190851205199,-1.472934210644706,strat_AB4,0.002,,False,
+H20,info,noinfo,True,H20_cci_blockE_vs_stefan,-0.4273565730499502,-2.562255671074952,3.510848991030998,strat_AB4,0.996,1.0,True,
+H20,info,noinfo|AB4,False,H20_cci_blockE_vs_stefan|AB4,-0.4273565730499502,-2.562255671074952,3.510848991030998,strat_AB4,0.996,,False,
+H20,info,noinfo,False,H20x_cci_scale_vs_cci_cal,1.333303715190616,-0.961235829231926,5.011740182488195,strat_AB4,0.214,,False,
+H20,info,noinfo|AB4,False,H20x_cci_scale_vs_cci_cal|AB4,1.333303715190616,-0.961235829231926,5.011740182488195,strat_AB4,0.214,,False,
+H20,info,noinfo,False,H20x_cci_blockE_vs_cci_cal,0.1195601306430882,-1.8282941501918213,3.4870897634160207,strat_AB4,0.696,,False,
+H20,info,noinfo|AB4,False,H20x_cci_blockE_vs_cci_cal|AB4,0.1195601306430882,-1.8282941501918213,3.4870897634160207,strat_AB4,0.696,,False,
+H20,info,noinfo,False,H20x_cci_blockE_stefan_vs_stefan_cci,-0.9169316385469894,-1.3756326742437142,-0.3453946523212904,strat_AB4,0.002,,False,
+H20,info,noinfo|AB4,False,H20x_cci_blockE_stefan_vs_stefan_cci|AB4,-0.9169316385469894,-1.3756326742437142,-0.3453946523212904,strat_AB4,0.002,,False,
+H21,info,noinfo,False,H21x_nested_cci_cal_vs_stefan_cci,0.7455306260176986,-0.9988495713448948,1.6816311630414629,strat_AB4,0.39,,False,
+H21,info,noinfo|AB4,False,H21x_nested_cci_cal_vs_stefan_cci|AB4,0.7455306260176986,-0.9988495713448948,1.6816311630414629,strat_AB4,0.39,,False,
+,info,noinfo,False,X_pooled_cell_vs_EAK,0.2575376384427814,0.0388531362988271,0.3903498530276981,strat_AB4,0.026,,False,
+,info,noinfo|AB4,False,X_pooled_cell_vs_EAK|AB4,0.2575376384427814,0.0388531362988271,0.3903498530276981,strat_AB4,0.026,,False,
+,info,noinfo,False,X_pooled_region_vs_EAK,0.6484779393116762,-1.3219957255655543,3.2727230878001468,strat_AB4,0.434,,False,
+,info,noinfo|AB4,False,X_pooled_region_vs_EAK|AB4,0.6484779393116762,-1.3219957255655543,3.2727230878001468,strat_AB4,0.434,,False,
+,info,noinfo,False,X_nearest_geo_w0.25_vs_EAK,-0.1448710431161863,-0.5220879622960276,0.0186188882554848,strat_AB4,0.092,,False,
+,info,noinfo|AB4,False,X_nearest_geo_w0.25_vs_EAK|AB4,-0.1448710431161863,-0.5220879622960276,0.0186188882554848,strat_AB4,0.092,,False,
+,info,noinfo,False,X_nearest_geo_w0.5_vs_EAK,-0.2173737352719893,-0.9192351591571646,0.1126169877837455,strat_AB4,0.234,,False,
+,info,noinfo|AB4,False,X_nearest_geo_w0.5_vs_EAK|AB4,-0.2173737352719893,-0.9192351591571646,0.1126169877837455,strat_AB4,0.234,,False,
+,info,noinfo,False,X_nearest_geo_w0.75_vs_EAK,-0.2203234361129524,-1.276401138281245,0.2792192388564152,strat_AB4,0.39,,False,
+,info,noinfo|AB4,False,X_nearest_geo_w0.75_vs_EAK|AB4,-0.2203234361129524,-1.276401138281245,0.2792192388564152,strat_AB4,0.39,,False,
+,info,noinfo,False,X_nearest_geo_w1_vs_EAK,-0.1563575029247745,-1.379810541596514,0.5566729593931885,strat_AB4,0.614,,False,
+,info,noinfo|AB4,False,X_nearest_geo_w1_vs_EAK|AB4,-0.1563575029247745,-1.379810541596514,0.5566729593931885,strat_AB4,0.614,,False,
+,info,noinfo,False,X_kernel_geo_w0.25_vs_EAK,-0.1092617232969708,-0.5196688288727946,0.3653958846857892,strat_AB4,0.748,,False,
+,info,noinfo|AB4,False,X_kernel_geo_w0.25_vs_EAK|AB4,-0.1092617232969708,-0.5196688288727946,0.3653958846857892,strat_AB4,0.748,,False,
+,info,noinfo,False,X_kernel_geo_w0.5_vs_EAK,-0.0744556586988141,-0.7628884660773572,0.9458895613024816,strat_AB4,0.93,,False,
+,info,noinfo|AB4,False,X_kernel_geo_w0.5_vs_EAK|AB4,-0.0744556586988141,-0.7628884660773572,0.9458895613024816,strat_AB4,0.93,,False,
+,info,noinfo,False,X_kernel_geo_w0.75_vs_EAK,0.0943800299786321,-1.0470734929533547,1.521871460427271,strat_AB4,0.732,,False,
+,info,noinfo|AB4,False,X_kernel_geo_w0.75_vs_EAK|AB4,0.0943800299786321,-1.0470734929533547,1.521871460427271,strat_AB4,0.732,,False,
+,info,noinfo,False,X_kernel_geo_w1_vs_EAK,0.3863171333790349,-1.1374771839930915,2.3458273537554435,strat_AB4,0.508,,False,
+,info,noinfo|AB4,False,X_kernel_geo_w1_vs_EAK|AB4,0.3863171333790349,-1.1374771839930915,2.3458273537554435,strat_AB4,0.508,,False,
+,info,noinfo,False,X_nearest_cov_w0.25_vs_EAK,0.9191922587089428,-0.3111893938287912,2.0069380536143564,strat_AB4,0.158,,False,
+,info,noinfo|AB4,False,X_nearest_cov_w0.25_vs_EAK|AB4,0.9191922587089428,-0.3111893938287912,2.0069380536143564,strat_AB4,0.158,,False,
+,info,noinfo,False,X_nearest_cov_w0.5_vs_EAK,2.673956624137353,0.2645239932226058,4.409486246745649,strat_AB4,0.026,,False,
+,info,noinfo|AB4,False,X_nearest_cov_w0.5_vs_EAK|AB4,2.673956624137353,0.2645239932226058,4.409486246745649,strat_AB4,0.026,,False,
+,info,noinfo,False,X_nearest_cov_w0.75_vs_EAK,4.956007921448449,1.8422521908237548,7.040184133057521,strat_AB4,0.001,,False,
+,info,noinfo|AB4,False,X_nearest_cov_w0.75_vs_EAK|AB4,4.956007921448449,1.8422521908237548,7.040184133057521,strat_AB4,0.001,,False,
+,info,noinfo,False,X_nearest_cov_w1_vs_EAK,7.5516334932049185,4.453442901307654,9.953235873024209,strat_AB4,0.001,,False,
+,info,noinfo|AB4,False,X_nearest_cov_w1_vs_EAK|AB4,7.5516334932049185,4.453442901307654,9.953235873024209,strat_AB4,0.001,,False,
+,info,noinfo,False,X_kernel_cov_w0.25_vs_EAK,-0.0058518494654213,-0.4364495118665514,0.5323979938333577,strat_AB4,0.844,,False,
+,info,noinfo|AB4,False,X_kernel_cov_w0.25_vs_EAK|AB4,-0.0058518494654213,-0.4364495118665514,0.5323979938333577,strat_AB4,0.844,,False,
+,info,noinfo,False,X_kernel_cov_w0.5_vs_EAK,0.1576068304715265,-0.7538730543693484,1.2645902664371886,strat_AB4,0.676,,False,
+,info,noinfo|AB4,False,X_kernel_cov_w0.5_vs_EAK|AB4,0.1576068304715265,-0.7538730543693484,1.2645902664371886,strat_AB4,0.676,,False,
+,info,noinfo,False,X_kernel_cov_w0.75_vs_EAK,0.4786686443367998,-0.8632777851561134,2.20589206235903,strat_AB4,0.416,,False,
+,info,noinfo|AB4,False,X_kernel_cov_w0.75_vs_EAK|AB4,0.4786686443367998,-0.8632777851561134,2.20589206235903,strat_AB4,0.416,,False,
+,info,noinfo,False,X_kernel_cov_w1_vs_EAK,0.9427018971096456,-0.903582778715658,3.211066001425597,strat_AB4,0.288,,False,
+,info,noinfo|AB4,False,X_kernel_cov_w1_vs_EAK|AB4,0.9427018971096456,-0.903582778715658,3.211066001425597,strat_AB4,0.288,,False,
+,info,noinfo,False,X_nearest_phys_w0.25_vs_EAK,0.3901727568273641,-0.0753149716367966,0.7621548616960171,strat_AB4,0.116,,False,
+,info,noinfo|AB4,False,X_nearest_phys_w0.25_vs_EAK|AB4,0.3901727568273641,-0.0753149716367966,0.7621548616960171,strat_AB4,0.116,,False,
+,info,noinfo,False,X_nearest_phys_w0.5_vs_EAK,0.906306785161429,-0.0335763628473778,1.5938331625680058,strat_AB4,0.056,,False,
+,info,noinfo|AB4,False,X_nearest_phys_w0.5_vs_EAK|AB4,0.906306785161429,-0.0335763628473778,1.5938331625680058,strat_AB4,0.056,,False,
+,info,noinfo,False,X_nearest_phys_w0.75_vs_EAK,1.5395354282452676,0.1297508245579037,2.560781279794233,strat_AB4,0.034,,False,
+,info,noinfo|AB4,False,X_nearest_phys_w0.75_vs_EAK|AB4,1.5395354282452676,0.1297508245579037,2.560781279794233,strat_AB4,0.034,,False,
+,info,noinfo,False,X_nearest_phys_w1_vs_EAK,2.279454023374263,0.5876014702535817,3.6774743157203567,strat_AB4,0.006,,False,
+,info,noinfo|AB4,False,X_nearest_phys_w1_vs_EAK|AB4,2.279454023374263,0.5876014702535817,3.6774743157203567,strat_AB4,0.006,,False,
+,info,noinfo,False,X_kernel_phys_w0.25_vs_EAK,-0.0006289378226584,-0.45134174510399,0.5065709181350206,strat_AB4,0.906,,False,
+,info,noinfo|AB4,False,X_kernel_phys_w0.25_vs_EAK|AB4,-0.0006289378226584,-0.45134174510399,0.5065709181350206,strat_AB4,0.906,,False,
+,info,noinfo,False,X_kernel_phys_w0.5_vs_EAK,0.1587666226690105,-0.7478632846065137,1.222670139326334,strat_AB4,0.618,,False,
+,info,noinfo|AB4,False,X_kernel_phys_w0.5_vs_EAK|AB4,0.1587666226690105,-0.7478632846065137,1.222670139326334,strat_AB4,0.618,,False,
+,info,noinfo,False,X_kernel_phys_w0.75_vs_EAK,0.4671045287626079,-0.8900997988504085,2.075294372973271,strat_AB4,0.434,,False,
+,info,noinfo|AB4,False,X_kernel_phys_w0.75_vs_EAK|AB4,0.4671045287626079,-0.8900997988504085,2.075294372973271,strat_AB4,0.434,,False,
+,info,noinfo,False,X_kernel_phys_w1_vs_EAK,0.910883448252182,-0.9410189083713808,2.991393070025219,strat_AB4,0.326,,False,
+,info,noinfo|AB4,False,X_kernel_phys_w1_vs_EAK|AB4,0.910883448252182,-0.9410189083713808,2.991393070025219,strat_AB4,0.326,,False,
+H23,sparse,labels,False,"finetune − shrink κ10, λ 0.25, n = 3",0.8988400481331527,,,none,,,False,win rate 0.28; not in Holm family
+H23,sparse,labels,False,"finetune − shrink κ10, λ 0.25, n = 5",1.1323398417188035,,,none,,,False,win rate 0.35; not in Holm family
+H23,sparse,labels,False,"finetune − shrink κ10, λ 0.25, n = 10",1.6502493597668977,,,none,,,False,win rate 0.33; not in Holm family
+H23,sparse,labels,False,"finetune − shrink κ10, λ 0.5, n = 3",1.375983289114224,,,none,,,False,win rate 0.23; not in Holm family
+H23,sparse,labels,False,"finetune − shrink κ10, λ 0.5, n = 5",1.2980149328212525,,,none,,,False,win rate 0.25; not in Holm family
+H23,sparse,labels,False,"finetune − shrink κ10, λ 0.5, n = 10",1.6497165888506808,,,none,,,False,win rate 0.32; not in Holm family
+H23,sparse,labels,False,"finetune − shrink κ10, λ 1, n = 3",4.089540628424069,,,none,,,False,win rate 0.17; not in Holm family
+H23,sparse,labels,False,"finetune − shrink κ10, λ 1, n = 5",3.47170182639661,,,none,,,False,win rate 0.20; not in Holm family
+H23,sparse,labels,False,"finetune − shrink κ10, λ 1, n = 10",3.436414637273969,,,none,,,False,win rate 0.11; not in Holm family
+H23,sparse,labels,False,"maml − shrink κ10, λ 0.25, n = 3",1.088972930735487,,,none,,,False,win rate 0.29; not in Holm family
+H23,sparse,labels,False,"maml − shrink κ10, λ 0.25, n = 5",1.5235750560301875,,,none,,,False,win rate 0.33; not in Holm family
+H23,sparse,labels,False,"maml − shrink κ10, λ 0.25, n = 10",2.139775631525873,,,none,,,False,win rate 0.35; not in Holm family
+H23,sparse,labels,False,"maml − shrink κ10, λ 0.5, n = 3",1.3929188947593163,,,none,,,False,win rate 0.28; not in Holm family
+H23,sparse,labels,False,"maml − shrink κ10, λ 0.5, n = 5",1.6938716515945391,,,none,,,False,win rate 0.30; not in Holm family
+H23,sparse,labels,False,"maml − shrink κ10, λ 0.5, n = 10",2.252360305692206,,,none,,,False,win rate 0.30; not in Holm family
+H23,sparse,labels,False,"maml − shrink κ10, λ 1, n = 3",2.8152589510294512,,,none,,,False,win rate 0.17; not in Holm family
+H23,sparse,labels,False,"maml − shrink κ10, λ 1, n = 5",2.792623825340915,,,none,,,False,win rate 0.17; not in Holm family
+H23,sparse,labels,False,"maml − shrink κ10, λ 1, n = 10",3.191919680075322,,,none,,,False,win rate 0.12; not in Holm family
+H23,sparse,labels,False,"refit − shrink κ10, λ 0, n = 3",2.1330312744219757,,,none,,,False,win rate 0.42; not in Holm family
+H23,sparse,labels,False,"refit − shrink κ10, λ 0, n = 5",1.4519331948133718,,,none,,,False,win rate 0.42; not in Holm family
+H23,sparse,labels,False,"refit − shrink κ10, λ 0, n = 10",1.0624153622776356,,,none,,,False,win rate 0.36; not in Holm family
+H23,sparse,labels,False,"shrink+finetune − shrink κ10, λ 0.25, n = 3",0.2133037985600888,,,none,,,False,win rate 0.43; not in Holm family
+H23,sparse,labels,False,"shrink+finetune − shrink κ10, λ 0.25, n = 5",0.0408479144820553,,,none,,,False,win rate 0.47; not in Holm family
+H23,sparse,labels,False,"shrink+finetune − shrink κ10, λ 0.25, n = 10",0.1251366713107586,,,none,,,False,win rate 0.46; not in Holm family
+H23,sparse,labels,False,"shrink+finetune − shrink κ10, λ 0.5, n = 3",0.9681684625086012,,,none,,,False,win rate 0.38; not in Holm family
+H23,sparse,labels,False,"shrink+finetune − shrink κ10, λ 0.5, n = 5",0.5884605890710414,,,none,,,False,win rate 0.42; not in Holm family
+H23,sparse,labels,False,"shrink+finetune − shrink κ10, λ 0.5, n = 10",0.6524129873361262,,,none,,,False,win rate 0.37; not in Holm family
+H23,sparse,labels,False,"shrink+finetune − shrink κ10, λ 1, n = 3",3.849515805439857,,,none,,,False,win rate 0.22; not in Holm family
+H23,sparse,labels,False,"shrink+finetune − shrink κ10, λ 1, n = 5",3.0128414406191,,,none,,,False,win rate 0.22; not in Holm family
+H23,sparse,labels,False,"shrink+finetune − shrink κ10, λ 1, n = 10",2.745195583259923,,,none,,,False,win rate 0.19; not in Holm family
+H23,sparse,labels,False,"shrink+maml − shrink κ10, λ 0.25, n = 3",0.2027840675423318,,,none,,,False,win rate 0.44; not in Holm family
+H23,sparse,labels,False,"shrink+maml − shrink κ10, λ 0.25, n = 5",0.1114591053691638,,,none,,,False,win rate 0.52; not in Holm family
+H23,sparse,labels,False,"shrink+maml − shrink κ10, λ 0.25, n = 10",0.1299630063273008,,,none,,,False,win rate 0.50; not in Holm family
+H23,sparse,labels,False,"shrink+maml − shrink κ10, λ 0.5, n = 3",0.6557081266091254,,,none,,,False,win rate 0.43; not in Holm family
+H23,sparse,labels,False,"shrink+maml − shrink κ10, λ 0.5, n = 5",0.446175841732988,,,none,,,False,win rate 0.45; not in Holm family
+H23,sparse,labels,False,"shrink+maml − shrink κ10, λ 0.5, n = 10",0.4638565019561744,,,none,,,False,win rate 0.42; not in Holm family
+H23,sparse,labels,False,"shrink+maml − shrink κ10, λ 1, n = 3",2.2208906333020426,,,none,,,False,win rate 0.34; not in Holm family
+H23,sparse,labels,False,"shrink+maml − shrink κ10, λ 1, n = 5",1.736082446569927,,,none,,,False,win rate 0.34; not in Holm family
+H23,sparse,labels,False,"shrink+maml − shrink κ10, λ 1, n = 10",1.694482105845882,,,none,,,False,win rate 0.35; not in Holm family
+H24,design,labels,False,"block_rr − random, both, n = 3",0.5076093111721306,,,none,,,False,win rate 0.39; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"block_rr − random, both, n = 5",0.8678452158627683,,,none,,,False,win rate 0.41; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"block_rr − random, both, n = 10",1.0779855395871325,,,none,,,False,win rate 0.41; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"block_rr − random, refit, n = 3",1.7746610855100426,,,none,,,False,win rate 0.43; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"block_rr − random, refit, n = 5",2.2412247856871947,,,none,,,False,win rate 0.38; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"block_rr − random, refit, n = 10",1.5400230944260989,,,none,,,False,win rate 0.44; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"block_rr − random, resid, n = 3",0.0479179561775417,,,none,,,False,win rate 0.39; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"block_rr − random, resid, n = 5",0.148385416578052,,,none,,,False,win rate 0.41; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"block_rr − random, resid, n = 10",0.0915900177926418,,,none,,,False,win rate 0.38; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"block_rr − random, shrink_k10, n = 3",0.3640527838819655,,,none,,,False,win rate 0.43; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"block_rr − random, shrink_k10, n = 5",0.5534566640916267,,,none,,,False,win rate 0.42; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"block_rr − random, shrink_k10, n = 10",0.7182983646211458,,,none,,,False,win rate 0.42; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"farthest − random, both, n = 3",-0.1749655600223394,,,none,,,False,win rate 0.53; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"farthest − random, both, n = 5",-0.1404344540833066,,,none,,,False,win rate 0.49; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"farthest − random, both, n = 10",0.5353614444943346,,,none,,,False,win rate 0.45; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"farthest − random, refit, n = 3",3.094866115141439,,,none,,,False,win rate 0.52; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"farthest − random, refit, n = 5",1.1469872756986688,,,none,,,False,win rate 0.47; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"farthest − random, refit, n = 10",1.0498583348672976,,,none,,,False,win rate 0.40; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"farthest − random, resid, n = 3",-0.0989320872545915,,,none,,,False,win rate 0.59; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"farthest − random, resid, n = 5",-0.0123118312111168,,,none,,,False,win rate 0.53; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"farthest − random, resid, n = 10",0.0428947345981091,,,none,,,False,win rate 0.43; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"farthest − random, shrink_k10, n = 3",-0.1499813975285574,,,none,,,False,win rate 0.56; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"farthest − random, shrink_k10, n = 5",-0.149632846904493,,,none,,,False,win rate 0.48; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"farthest − random, shrink_k10, n = 10",0.3437644014715048,,,none,,,False,win rate 0.47; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"geo_strat − random, both, n = 3",-0.6901906066748928,,,none,,,False,win rate 0.57; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"geo_strat − random, both, n = 5",-0.3990271817795028,,,none,,,False,win rate 0.61; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"geo_strat − random, both, n = 10",0.3920776407893498,,,none,,,False,win rate 0.46; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"geo_strat − random, refit, n = 3",-1.350919924480723,,,none,,,False,win rate 0.52; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"geo_strat − random, refit, n = 5",1.145872902257536,,,none,,,False,win rate 0.38; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"geo_strat − random, refit, n = 10",0.703276686664637,,,none,,,False,win rate 0.46; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"geo_strat − random, resid, n = 3",-0.1785995097132877,,,none,,,False,win rate 0.60; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"geo_strat − random, resid, n = 5",-0.3065247821187902,,,none,,,False,win rate 0.68; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"geo_strat − random, resid, n = 10",0.102687516594585,,,none,,,False,win rate 0.42; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"geo_strat − random, shrink_k10, n = 3",-0.5262586283789803,,,none,,,False,win rate 0.62; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"geo_strat − random, shrink_k10, n = 5",-0.4063249409712001,,,none,,,False,win rate 0.54; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"geo_strat − random, shrink_k10, n = 10",0.177051594601809,,,none,,,False,win rate 0.48; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"kmedoid − random, both, n = 3",-1.0849608429777338,,,none,,,False,win rate 0.65; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"kmedoid − random, both, n = 5",-0.2216753495133576,,,none,,,False,win rate 0.58; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"kmedoid − random, both, n = 10",0.0285266250865072,,,none,,,False,win rate 0.51; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"kmedoid − random, refit, n = 3",-0.1448187781832564,,,none,,,False,win rate 0.58; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"kmedoid − random, refit, n = 5",-1.0057871632824509,,,none,,,False,win rate 0.56; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"kmedoid − random, refit, n = 10",-0.2024037210000778,,,none,,,False,win rate 0.45; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"kmedoid − random, resid, n = 3",-0.2914557267016556,,,none,,,False,win rate 0.58; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"kmedoid − random, resid, n = 5",-0.1427150936720708,,,none,,,False,win rate 0.59; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"kmedoid − random, resid, n = 10",0.0270939048319965,,,none,,,False,win rate 0.47; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"kmedoid − random, shrink_k10, n = 3",-0.9047797001309728,,,none,,,False,win rate 0.67; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"kmedoid − random, shrink_k10, n = 5",-0.2589830770066373,,,none,,,False,win rate 0.55; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"kmedoid − random, shrink_k10, n = 10",-0.0400828673870488,,,none,,,False,win rate 0.51; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"stefan_strat − random, both, n = 3",0.1446182309842674,,,none,,,False,win rate 0.46; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"stefan_strat − random, both, n = 5",0.3322147275619254,,,none,,,False,win rate 0.45; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"stefan_strat − random, both, n = 10",-0.0584674524411112,,,none,,,False,win rate 0.47; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"stefan_strat − random, refit, n = 3",0.426209330170984,,,none,,,False,win rate 0.48; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"stefan_strat − random, refit, n = 5",1.3609703598383505,,,none,,,False,win rate 0.44; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"stefan_strat − random, refit, n = 10",-0.0317733011948615,,,none,,,False,win rate 0.50; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"stefan_strat − random, resid, n = 3",0.0296867444843503,,,none,,,False,win rate 0.47; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"stefan_strat − random, resid, n = 5",-0.0216986652414434,,,none,,,False,win rate 0.45; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"stefan_strat − random, resid, n = 10",-0.0496219528411323,,,none,,,False,win rate 0.53; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"stefan_strat − random, shrink_k10, n = 3",0.0974709322385208,,,none,,,False,win rate 0.51; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"stefan_strat − random, shrink_k10, n = 5",0.2708096963505855,,,none,,,False,win rate 0.44; exploratory (gain at n = 3 only); not in Holm family
+H24,design,labels,False,"stefan_strat − random, shrink_k10, n = 10",-0.1324580367927298,,,none,,,False,win rate 0.55; exploratory (gain at n = 3 only); not in Holm family

@@ -1,0 +1,8 @@
+rule,label,method,mean_AB4,worst_AB4,worst_region,ml_frac_mean
+stefan,Physics,phys,29.75694898758057,42.45573433260728,Russia_W,0.0
+ml_direct,Direct,direct,32.363632325364335,46.27760432397939,Russia_W,1.0
+aoa_direct,Direct+AOA,direct,31.296249122808437,45.066789241545614,Russia_W,0.6885352942512615
+ml_resid,Residual,residual,29.96357238127898,42.6482364426956,Russia_W,1.0
+aoa_resid,Residual+AOA,residual,29.86654589448973,42.600554179406295,Russia_W,0.6885352942512615
+stefan_cci,Physics+CCI,cci,28.895225714455368,41.44395751660776,Russia_W,1.0
+cci_agree20,CCI gate,cci,29.0419240014675,42.0075065453393,Russia_W,0.8843187985314299

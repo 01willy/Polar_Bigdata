@@ -1,0 +1,95 @@
+{
+ "stage": "H34/B3",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_PAPER_2026-09-26.md §4 B3, §5 F7",
+ "stats": "src/polar/h4_common.py",
+ "targets": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_E",
+  "AL-1",
+  "AL-2",
+  "AL-3",
+  "AL-4",
+  "AL-5",
+  "AL-6",
+  "CA-2",
+  "CA-3",
+  "LE-1",
+  "LE-2"
+ ],
+ "skipped": {
+  "CA-1": {
+   "pool_min": 3,
+   "pool_blocks_min": 3
+  }
+ },
+ "splits": [
+  0,
+  1,
+  2
+ ],
+ "n_grid": [
+  3,
+  5,
+  10,
+  20,
+  40
+ ],
+ "reps": 20,
+ "reps_cb": 5,
+ "seeds": [
+  0
+ ],
+ "rules": [
+  "random",
+  "kmedoid",
+  "kmedoid_weighted",
+  "doptimal",
+  "active_ppi"
+ ],
+ "stages": [
+  "S1",
+  "S3src",
+  "S3"
+ ],
+ "lam": 0.25,
+ "alpha": 1.0,
+ "kappa": 10.0,
+ "buffer_km": 100.0,
+ "k_sub": "Alaska:6,Canada:3,Lena:2",
+ "k_clusters": 8,
+ "min_pool": 5,
+ "min_blocks_a": 3,
+ "lev_col": "e5_sqrt_tdd",
+ "nboot": 1000,
+ "nboot_e": 100,
+ "boot_min_frac": 0.8,
+ "pool_one_block_targets": [
+  "AL-1",
+  "AL-4",
+  "AL-5",
+  "AL-6",
+  "LE-1",
+  "LE-2"
+ ],
+ "f7_definition": "주: vtot_ratio = V_tot(doptimal)/V_tot(random) ≤ 0.7 인 대상 수 ≥ ⌈(10/14)·N_eval⌉ (n=3). N_eval = 전 분할 풀 A 블록 ≥ 2 이고 doptimal·random 모두 boot_ok(분할마다 재표집 생존 비율 ≥ boot_min_frac) 인 대상 수. V_tot = 분할 간 분산 + 풀 A 블록 부트스트랩 분산(규칙 재적용). 사전 등록 문구 '14 중 10'과의 차이: 풀 블록이 1개인 하위 지역은 블록 부트스트랩이 퇴화하여 분모에서 빼고, 기준을 같은 비율로 옮겼다. 보조로 셀 단위 부트스트랩 대체 대상을 포함한 전체 집계를 병기한다. 사전 등록 문구의 '추출 분산'(var_rep)은 결정적 규칙에서 0 이 되어 자명하므로 보조로 강등.",
+ "ci_definition": "주: h4_common.boot_delta_blocks(채점 블록 부트스트랩, 짝지음, rep 짝 승률). 보조: rep_boot_ci(ci_rep).",
+ "region_layers": "main = 주 4지역, sub = 하위 지역(따로 요약, 겹치는 셀 이중 계산 방지)",
+ "git_commit": "834e4bf",
+ "elapsed_s": 1048.2,
+ "n_rows": 44592,
+ "n_rows_eboot": 96255,
+ "n_rows_summary": 990,
+ "n_rows_evar": 330,
+ "n_rows_region": 2052,
+ "argv": [
+  "--tag",
+  "b3",
+  "--workers",
+  "4"
+ ],
+ "summarize_only": false,
+ "n_tasks": 42,
+ "n_fit_total": 3766
+}

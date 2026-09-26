@@ -1,0 +1,16 @@
+{
+ "name": "TableS9_covariates",
+ "ok": true,
+ "fails": [],
+ "words": {
+  "definition": 28,
+  "statistics": 11,
+  "panels": 4,
+  "data": 13,
+  "total": 56
+ },
+ "paths": {
+  "csv": "outputs/figures/paper/supp_tables/TableS9_covariates.csv",
+  "tex": "outputs/figures/paper/supp_tables/TableS9_covariates.tex"
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "name": "TableS2_holm_families",
+ "ok": true,
+ "fails": [],
+ "words": {
+  "definition": 33,
+  "statistics": 48,
+  "panels": 19,
+  "data": 24,
+  "total": 124
+ },
+ "paths": {
+  "csv": "outputs/figures/paper/supp_tables/TableS2_holm_families.csv",
+  "tex": "outputs/figures/paper/supp_tables/TableS2_holm_families.tex"
+ }
+}

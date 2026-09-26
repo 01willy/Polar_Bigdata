@@ -1,0 +1,17 @@
+row,label,test,cond,method,family,delta,ci_lo,ci_hi,ci_kind,p_holm,source
+0,H18 LST,H18a_stefan_lst_vs_stefan,noinfo,phys,covariates,0.1615025638391811,-0.6515593951839009,1.2356943249707266,strat_AB4,1.0,h2/h_tests_all.csv
+0,H18 LST,H18a_stefan_lst_vs_stefan,covonly,phys,covariates,0.0953357780053005,-0.7934318905040684,0.9078315147911988,strat_AB4,1.0,h2/h_tests_all.csv
+1,H18x soil,H18x_stefan_soil_vs_stefan,noinfo,phys,covariates,0.702466804202146,-0.0828145823150715,1.2435710191091347,strat_AB4,,h2/h_tests_all.csv
+1,H18x soil,H18x_stefan_soil_vs_stefan,covonly,phys,covariates,0.8892036054205423,-0.1430834518200633,1.3992798400528548,strat_AB4,,h2/h_tests_all.csv
+2,H19 x14,H19r_x14_A_resid25_vs_stefan,noinfo,residual,covariates,0.5747731782137085,0.1316788566737387,0.922316029648924,strat_AB4,,h2/h_tests_all.csv
+2,H19 x14,H19r_x14_A_resid25_vs_stefan,covonly,residual,covariates,0.7733301972757842,0.1865196684403982,1.0778083961897458,strat_AB4,,h2/h_tests_all.csv
+3,H19 x16,H19r_x16_resid25_vs_stefan,noinfo,residual,covariates,0.8461840072725548,0.4084829840229981,1.1886629311984018,strat_AB4,,h2/h_tests_all.csv
+3,H19 x16,H19r_x16_resid25_vs_stefan,covonly,residual,covariates,0.9498274005516038,0.3401956644412722,1.2976203128030972,strat_AB4,,h2/h_tests_all.csv
+4,H21 E borrowing,H21_nested_vs_EAK,noinfo,phys,coefficient,1.2607365142108176,-0.519949289291563,2.6062792614012484,strat_AB4,1.0,h2/h_tests_all.csv
+5,H20 CCI block E,H20_cci_blockE_vs_stefan,noinfo,cci,coefficient,-0.4273565730499502,-2.562255671074952,3.510848991030998,strat_AB4,1.0,h2/h_tests_all.csv
+6,H22 IRM,H22_irm_resid_lam0.25_vs_stefan,noinfo,residual,objective,0.5267500019060908,0.2383306544083323,0.7931317382144364,strat_AB4,0.01,h2/h_tests_all.csv
+6,H22 IRM,H22_irm_resid_lam0.25_vs_stefan,covonly,residual,objective,0.3860970624017341,0.1084806231538589,0.7017971769713208,strat_AB4,0.04,h2/h_tests_all.csv
+7,H22 V-REx,H22_vrex_resid_lam0.25_vs_stefan,noinfo,residual,objective,0.1494420229760595,-0.0981634081510709,0.4543375777481386,strat_AB4,0.424,h2/h_tests_all.csv
+7,H22 V-REx,H22_vrex_resid_lam0.25_vs_stefan,covonly,residual,objective,0.0171543111842827,-0.2627062695916874,0.3407338003649706,strat_AB4,0.782,h2/h_tests_all.csv
+8,H22 DANN,H22_dann_resid_lam0.25_vs_stefan,covonly,residual,objective,0.2684876987194936,0.0461527827855257,0.4363525386445938,strat_AB4,0.078,h2/h_tests_all.csv
+9,H23 MAML,H23_maml0_lam0.25_d_phys(AB4 mean),noinfo,residual,objective,0.4571598547818656,,,none,,h2/h23_summary.csv

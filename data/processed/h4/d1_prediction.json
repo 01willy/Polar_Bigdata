@@ -1,0 +1,58 @@
+{
+ "track": "D1",
+ "target": "Mongolia_CAsia",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_PAPER_2026-09-26.md §4 D1, §5 F11",
+ "written_at": "2026-09-26T13:15:11",
+ "labels_read": false,
+ "label_free_metrics": {
+  "n_cells": 46,
+  "n_blocks": 21,
+  "n_cells_cci_valid": 43,
+  "n_src": 17467,
+  "smd_x25": 1.634213834127304,
+  "smd_x25_max_var": "dem_elev",
+  "smd_x25_max": 6.282296236827173,
+  "var_ratio_x25": 3.3601905849890468,
+  "di_src_median": 3.571761763028786,
+  "di_src_q3": 4.6997068605089325,
+  "di_src_thr": 2.501567230639427,
+  "out_aoa_src": 1.0,
+  "lat_mean": 49.20853695652173,
+  "lon_mean": 99.97250217391304,
+  "sqrt_tdd_mean": 40.253106912564306,
+  "sqrt_tdd_src_mean": 30.855080136604617
+ },
+ "alaska_reference_di_from_a2": {
+  "di_x25_median": 3.88,
+  "di_x25_q3": 4.564,
+  "out_aoa_x25": 1.0
+ },
+ "hypothesis_F11": "외부 홀드아웃에서 사전 예측한 분기·손익분기 n 범주가 실측과 일치하고, 최종 프로토콜 Δ ≤ 0",
+ "prediction": [
+  "E비 진단(수준 오차 대 구조 오차)은 대표점 3개 라벨로만 가능하므로, 라벨 미사용 지표(SMD·분산비·DI)로는 분기 범주를 맞힐 수 없다(H27: 라벨 미사용 특징의 LOO R² < 0, E_only 만 유의).",
+  "2단계 프로토콜(주 τ=0.15, n=3·10, kmedoid)의 물리식(E0) 대비 Δ(셀 가중 RMSE) ≤ 0 이며, 항상 수축+잔차(S3)보다 악화 반복 수가 적거나 같다."
+ ],
+ "expected_categories": {
+  "branch": "라벨 미사용 지표로는 판정 불가(사전 예측 없음)",
+  "protocol_delta": "Δ ≤ 0(점 추정), CI 상한 < 0 이면 확정 개선"
+ },
+ "decision_rule": {
+  "tau_main": 0.15,
+  "taus": [
+   0.1,
+   0.15,
+   0.2
+  ],
+  "kappa": 10.0,
+  "lam": 0.25,
+  "alpha": 1.0,
+  "budgets": [
+   3,
+   10
+  ],
+  "reps": 2,
+  "selection": "kmedoid(표준화 x25 k-means 중심 최근접 셀, A 블록 풀)",
+  "scoring": "B 블록 eval_mask, Δ = 방법 − E0, (분할, 반복) 짝지음 부트스트랩 1000회"
+ },
+ "note": "라벨 미사용 지표가 원천 대비 극단(AOA 밖 비율 1.0 수준)이면 공변량 외삽 자체가 강하므로 잔차 ML 분기의 이득은 제한적일 것으로 본다(방향만, 수치 예측 없음)."
+}

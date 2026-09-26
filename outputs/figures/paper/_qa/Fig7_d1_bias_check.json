@@ -1,0 +1,61 @@
+{
+ "target": "Mongolia_CAsia",
+ "n_cells": 46,
+ "label_sources": {
+  "F4_calm_temp": 46
+ },
+ "passed": true,
+ "i_label_definition": {
+  "ok": true,
+  "pangaea_definition": "Active layer thickness (ALT); maximum thaw depth at the end of the summer",
+  "site_methods_ground_temperature": "50/50",
+  "note": "원천 학습 라벨(F4_direct)은 직접 탐침(ABoVE·Lena 현장 조사가 대부분, v 참조), 대상은 지온 프로파일 유도. 같은 물리량(ALT), 다른 관측 방법"
+ },
+ "v_training_labels": {
+  "n_cells": 17467,
+  "counts": {
+   "ABoVE": 14268,
+   "Lena": 3037,
+   "other (CALM probe grids etc.)": 162
+  },
+  "frac": {
+   "ABoVE": 0.8168546401786225,
+   "Lena": 0.17387072765786912,
+   "other (CALM probe grids etc.)": 0.00927463216350833
+  },
+  "method_basis": "source_id F4_direct = direct probing (ABoVE·Lena·CALM probe grids); CALM 지온·융해관 사이트는 F4_calm_temp 로 분리(PANGAEA 972777 Event Method 파싱). 셀별 관측 방법 열은 없음"
+ },
+ "ii_units": {
+  "ok": true,
+  "unit": "cm",
+  "target_alt_cm": [
+   107.0,
+   315.5,
+   550.0
+  ],
+  "raw_site_year_alt_cm": [
+   82.0,
+   350.0,
+   590.0
+  ]
+ },
+ "iii_permafrost": {
+  "ok": true,
+  "pfr_median": 96.36759948730469,
+  "n_pfr_lt50": 3,
+  "frac_pfr_lt50": 0.06521739130434782,
+  "threshold": 0.1
+ },
+ "iv_years": {
+  "ok": true,
+  "year_min": 1990,
+  "year_max": 2011,
+  "cell_median_span": [
+   2002.5,
+   2009.0
+  ],
+  "n_years_median": 6.0
+ },
+ "physics_bias_m": -2.3971205120570995,
+ "log_text": "D1 편향 점검(Fig 7c 게재 조건, 스펙 §2.7 함정 4): (i) 대상 46셀 라벨 전부 F4_calm_temp, PANGAEA 정의 'ALT, 여름 말 최대 융해 깊이', 몽골·카자흐 사이트 관측 방법 50/50 지온 측정. 원천(F4_direct)과 같은 물리량, 다른 관측 방법. (ii) 단위 cm, 대상 값 107–550 cm(중앙 316)이 원자료 site-year 범위 82–590 cm 안. (iii) CCI PFR 중앙 96 %, PFR < 50 % 셀 3/46. (iv) 조사 연도 1990–2011(셀 중앙 2002–2009). 판정 통과: 물리식 편향 -2.4 m 는 자료 오류(단위·비영구동토)가 아니라 깊은 활동층 체제와 관측 방법 차이로 본다."
+}

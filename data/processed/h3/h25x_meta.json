@@ -1,0 +1,390 @@
+{
+ "stage": "H25/H26 재실행(감사 반영)",
+ "plan": [
+  "docs/EXPERIMENT_PLAN_LABEL_BUDGET_2026-09-22.md",
+  "docs/EXPERIMENT_PLAN_FINAL_PAPER_2026-09-26.md"
+ ],
+ "targets": [
+  "AL-1",
+  "AL-2",
+  "AL-3",
+  "AL-4",
+  "AL-5",
+  "AL-6",
+  "CA-1",
+  "CA-2",
+  "CA-3",
+  "LE-1",
+  "LE-2"
+ ],
+ "splits": [
+  0,
+  1,
+  2
+ ],
+ "n_grid": [
+  3,
+  5,
+  10,
+  20,
+  40,
+  80,
+  160,
+  320
+ ],
+ "reps": 20,
+ "reps_cb": 5,
+ "seeds": [
+  0,
+  1
+ ],
+ "lams": [
+  0.25,
+  0.5
+ ],
+ "alphas": [
+  1.0
+ ],
+ "r": 10.0,
+ "kappa": 10.0,
+ "buffer_km": 100.0,
+ "k_sub": "Alaska:6,Canada:3,Lena:2",
+ "rules": [
+  "random",
+  "kmedoid"
+ ],
+ "exclude_parent": true,
+ "no_s2": true,
+ "nboot": 1000,
+ "allA_n": -1,
+ "ci_main": "h4_common.boot_delta_blocks: 분할 안 채점 블록 재표집, 방법·반복·seed 짝지음, 분할 분포 평균(d_phys_lo/hi)",
+ "ci_aux": "(분할, 반복) 행 재표집(d_phys_lo_rep/hi_rep)",
+ "breakeven_main": "블록 CI 상한 < 0 · split_win ≥ 2/3 · rep_win ≥ 0.75 인 최소 n, 미달성 -1·censored",
+ "breakeven_aux": "회복률 ≥ 0.5 · 승률 ≥ 0.75(분모 ≤ 0 → 회복률 NaN), 회복률 기준 = 같은 단계 allA",
+ "split_rule": "중복 분할(A 블록 집합 동일)은 모든 집계에서 첫 분할만 사용, 거울 분할은 유지. 블록 CI 주 통계는 유효 분할(중복 아님 · 채점 블록 ≥ 2)만 결합, 유효 분할 < 2 인 대상은 breakeven_n_ci 절단(be_flag). 민감도 *_all = 중복만 제거한 전체 분할",
+ "split_info": {
+  "AL-1": {
+   "0": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 9,
+    "nb_A": 1,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 2
+   },
+   "1": {
+    "dup_of": -1,
+    "mirror_of": 0,
+    "nb_eval": 1,
+    "nb_A": 9,
+    "valid": false,
+    "n_unique_splits": 3,
+    "n_valid_splits": 2
+   },
+   "2": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 8,
+    "nb_A": 2,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 2
+   }
+  },
+  "AL-2": {
+   "0": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 11,
+    "nb_A": 9,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   },
+   "1": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 10,
+    "nb_A": 10,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   },
+   "2": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 10,
+    "nb_A": 10,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   }
+  },
+  "AL-3": {
+   "0": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 9,
+    "nb_A": 7,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   },
+   "1": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 4,
+    "nb_A": 12,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   },
+   "2": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 5,
+    "nb_A": 11,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   }
+  },
+  "AL-4": {
+   "0": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 3,
+    "nb_A": 1,
+    "valid": true,
+    "n_unique_splits": 2,
+    "n_valid_splits": 1
+   },
+   "1": {
+    "dup_of": 0,
+    "mirror_of": -1,
+    "nb_eval": 3,
+    "nb_A": 1,
+    "valid": false,
+    "n_unique_splits": 2,
+    "n_valid_splits": 1
+   },
+   "2": {
+    "dup_of": -1,
+    "mirror_of": 0,
+    "nb_eval": 1,
+    "nb_A": 3,
+    "valid": false,
+    "n_unique_splits": 2,
+    "n_valid_splits": 1
+   }
+  },
+  "AL-5": {
+   "0": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 16,
+    "nb_A": 1,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   },
+   "1": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 10,
+    "nb_A": 7,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   },
+   "2": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 9,
+    "nb_A": 8,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   }
+  },
+  "AL-6": {
+   "0": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 6,
+    "nb_A": 1,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 2
+   },
+   "1": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 5,
+    "nb_A": 2,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 2
+   },
+   "2": {
+    "dup_of": -1,
+    "mirror_of": 0,
+    "nb_eval": 1,
+    "nb_A": 6,
+    "valid": false,
+    "n_unique_splits": 3,
+    "n_valid_splits": 2
+   }
+  },
+  "CA-1": {
+   "0": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 3,
+    "nb_A": 3,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   },
+   "1": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 3,
+    "nb_A": 3,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   },
+   "2": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 3,
+    "nb_A": 3,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   }
+  },
+  "CA-2": {
+   "0": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 4,
+    "nb_A": 10,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   },
+   "1": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 5,
+    "nb_A": 9,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   },
+   "2": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 2,
+    "nb_A": 12,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   }
+  },
+  "CA-3": {
+   "0": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 12,
+    "nb_A": 7,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   },
+   "1": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 3,
+    "nb_A": 16,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   },
+   "2": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 13,
+    "nb_A": 5,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   }
+  },
+  "LE-1": {
+   "0": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 13,
+    "nb_A": 1,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   },
+   "1": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 5,
+    "nb_A": 9,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   },
+   "2": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 3,
+    "nb_A": 11,
+    "valid": true,
+    "n_unique_splits": 3,
+    "n_valid_splits": 3
+   }
+  },
+  "LE-2": {
+   "0": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 5,
+    "nb_A": 1,
+    "valid": true,
+    "n_unique_splits": 2,
+    "n_valid_splits": 2
+   },
+   "1": {
+    "dup_of": 0,
+    "mirror_of": -1,
+    "nb_eval": 5,
+    "nb_A": 1,
+    "valid": false,
+    "n_unique_splits": 2,
+    "n_valid_splits": 2
+   },
+   "2": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 4,
+    "nb_A": 2,
+    "valid": true,
+    "n_unique_splits": 2,
+    "n_valid_splits": 2
+   }
+  }
+ },
+ "smoke": false,
+ "git_commit": "834e4bf",
+ "n_rows": 27963,
+ "elapsed_s": 758.9
+}
