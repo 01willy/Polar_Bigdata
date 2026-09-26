@@ -1,6 +1,20 @@
 # SESSION_HANDOFF — Polar_Bigdata (현재 상태 스냅샷)
 
-**갱신**: 2026-09-22 저녁(라벨 예산 프로토콜 H25–H30 + 레시피 중첩 선택; 오후 H18–H24) · **다음 세션은 이 파일부터 읽으세요.**
+**갱신**: 2026-09-26(논문 완성 통합 실험 계획 확정, 실행은 다음 세션) · 09-22 저녁(H25–H30) · 09-22 오후(H18–H24) · **다음 세션은 이 파일부터 읽으세요.**
+
+## ★ 최신(2026-09-26) — 논문 완성 통합 실험 계획 확정(사전 등록) + 조사 3건 + 저널 규격 그림 원형
+
+정본: `docs/EXPERIMENT_PLAN_FINAL_PAPER_2026-09-26.md`(§1 주장별 상태, §2 조사 반영, §4 트랙 A–E, §5 가설 F1–F11, §6 실행 순서, §7 그림 설계). 로그 09-26 항목, 핸드오프 `gpt/handoff/20260926_1200-final-paper-plan.md`. 이번 세션은 실험을 돌리지 않았다.
+- 사용자 질문 1 답: 잔차 학습이 물리식을 넘는 최소 라벨 수는 수준 오차 지역 3–10(러시아 W·AL-1·AL-3), CA-2 40, 구조 오차 지역(레나·캐나다 등 10 대상)은 n ≤ 320에서 미달성. 단 H25 S3는 E 수축과 교락되어 있어 **구조 지역의 최소 n은 아직 정해지지 않았다** → Track A2로 판정.
+- 조사: LORO 전이 오차를 보고한 ALT 매핑 논문 없음, Gautam 2025(Sci Rep)가 유일한 ML 대 Stefan 비교(방향 일치), E 공변량 예측 성공 사례 없음, InSAR 프록시는 알래스카 밖 불안정 → 약라벨은 한계 서술. 채택 기법 = log E 오프셋 최대우도·혼합효과 부스팅·PPI++·계층 conformal·D-최적 설계·TFM(잔차 한정).
+- 그림: `scripts/4_visualization/paper_figs.py` 신설, `outputs/figures/paper/Fig2_label_budget` 원형(180 mm, Arial 7.5 pt, 패널 문자, PDF+600 dpi PNG, 캡션 자동).
+
+### ▶ 다음 세션(계획서 §6 순서대로, GPU 6–9 확인 후)
+0. CCI GTD·PFR·불확실성 층 다운로드 시작(`fetch_cci_layers.py` 신규, CEDA) → 백그라운드.
+1. A2 최소 라벨 수(`h31_min_labels_residual.py`, h25 골격, CPU 6워커 3 h) 스모크 → 본 실행.
+2. B2 부분 풀링(`h33_partial_pooling.py`) 병렬, B4 TFM few-shot(`h35_tfm_fewshot.py`, GPU 6·7).
+3. B3 선택 규칙 → B1 2단계 프로토콜 검정 → C1·C2 → D1 외부 홀드아웃(사전 예측 `h4/d1_prediction.json` 먼저 기록) → `h4_analysis.py` → `paper_figs.py` Fig1–7·표·부록 → 검토 에이전트 2회 → 로그·핸드오프·커밋.
+
 
 ## ★ 최신 완료(2026-09-22 저녁) — 라벨 예산 프로토콜 H25–H30 + 라벨 있음 레시피 중첩 선택 + 그림 8종
 

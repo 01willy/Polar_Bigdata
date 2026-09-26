@@ -3,6 +3,33 @@
 > 세션별 작업 기록. 큐레이션된 마스터 인덱스는 [EXPERIMENTS.md](EXPERIMENTS.md),
 > GPT 공유 핸드오프는 [gpt/handoff/](../gpt/handoff/) 참조.
 
+## 2026-09-26 — 논문 완성 통합 실험 계획 확정(사전 등록, 실행은 다음 세션) + 조사 3건 + 저널 규격 그림 원형 1종
+
+**정본**: `docs/EXPERIMENT_PLAN_FINAL_PAPER_2026-09-26.md`. 이번 세션은 실험을 돌리지 않고 계획을 확정했다(사용자 지시: 이번 세션 계획 확정, 다음 세션 실행).
+
+### 사용자 질문 1(잔차 학습의 최소 라벨 수)에 대한 현재 답
+- 조건을 나눠 실험한 것은 H25 S3(E 수축 κ=10 + 잔차 CatBoost, n ≤ 320)뿐이다. 수준 오차 지역(|log E비| ≥ 0.2)은 n = 3–10(러시아 W 3·AL-1 3·AL-3 10, CA-2 40)에서 물리식을 넘었고, 구조 오차 지역(레나·캐나다·하위 지역 7개)은 n ≤ 320 어디서도 넘지 못했다(레나는 A 전량 약 1,300개로 −1.4, 캐나다는 전량에서도 +2.3).
+- 이 결과는 E 처리와 잔차 학습이 교락되어 있다(같은 n개 라벨로 E를 건드린 해악이 잔차 이득을 가릴 수 있음). 따라서 "구조 오차형 지역에서 잔차 ML이 물리식을 넘는 최소 라벨 수는 아직 정해지지 않았다"가 정확한 진술이며, 다음 세션 Track A2(E0 고정·E_own 고정·κ 수축·오프셋 최대우도 × 라벨 블록 분산 3수준 × n)로 판정한다. 사전 등록 가설 F1: 구조 지역은 n ≤ 40으로 넘지 못하고 n ≥ 160에서만 넘는다.
+
+### 조사 3건(에이전트, 원문 확인 수준 표기)
+- ALT 전이 문헌 2022–2026: LORO 전이 오차를 보고한 ALT/MAGT 매핑 논문 없음. ML 대 Stefan 비교는 Gautam 2025(Sci Rep, 무작위 분할, RF R² 0.24 < Stefan 0.54) 하나. E를 공변량으로 지역 간 예측한 성공 사례 없음(Zhang 2024 국지 초분광만, Garibaldi 2025 토지피복 n-factor 전이 불가). InSAR-ALT 프록시는 알래스카 밖에서 불안정(Chang 2024, Wendt 2026). CCI 다층을 ML 입력으로 쓴 ALT 논문 없음.
+- 소수 라벨 전이 ML 기법: 채택 = log E 오프셋 최대우도(Maity 2023), 혼합효과 부스팅(GPBoost), PPI++, 2층 계층 conformal(Dunn 2023)·비교환성 가중 conformal(Barber 2023), D-최적 라벨 설계, TFM(TabPFN-2.5·TabICLv2)은 잔차 예측기 한정. 기각 = 무라벨 TTA·target shift 재가중·공변량 이동 conformal·잡음 라벨 학습(concept shift 하 보장 없음).
+- Sci Rep 규격: 본문 4,500단어·초록 200·display item ≤ 8·범례 ≤ 350단어·폭 88/180 mm·소문자 굵은 패널 문자·그림 안 제목 금지·통계 보고(n·검정·정확 P·다중 비교).
+
+### 계획 요지(§4·§5 사전 등록 가설 F1–F11)
+- Track A(라벨 있음): A1 레시피 재현·수준/구조 분해, **A2 최소 라벨 수(신규, h31)**.
+- Track B(라벨 희소): B1 2단계 프로토콜 확인적 검정(h32), B2 부분 풀링(오프셋 MLE·혼합효과·PPI++, h33), B3 선택 규칙 5종(D-최적·군집 가중 추가, h34), B4 TFM few-shot(h35, GPU 6·7).
+- Track C(라벨 0): C1 CCI GTD·PFR·불확실성 층 결합(h36, CEDA 다운로드 필요), C2 계층 conformal 구간(h37), C3 배포 산출물 표, C4 약라벨 다중 충실도(부록 한정).
+- Track D: D1 외부 홀드아웃(몽골·중앙아시아 46셀/21블록, 미사용 지역, 사전 예측 기록 후 1회), D2 GTNP 신규 5지점, D3 라벨 정의 민감도, D4 실용 지표.
+- Track E: 본문 그림 6 + 워크플로 1 + 표 1, 부록 S1–S11, 전부 `paper_figs.py`에서 저널 스타일로 생성.
+
+### 그림 원형
+- `scripts/4_visualization/paper_figs.py` 신설(journal_style, 180 mm, Arial 7.5 pt, 패널 문자, 그림 안 제목 없음, PDF fonttype 42 + 600 dpi PNG, 캡션 자동 기록). `outputs/figures/paper/Fig2_label_budget.{pdf,png}` + `CAPTIONS.md`. 스펙 `figures/figure_spec.json` paper_fig2.
+
+### 결과 열람 후 작업 규칙(계획서 §0)
+- §5 가설·판정 규칙은 고정. 실행 후에는 계획서 §9 결과 요약과 이 로그에만 기록한다.
+
+
 ## 2026-09-22 (저녁) — 라벨 예산 프로토콜 H25–H30 실행(하위 지역 13개) + 라벨 있음 레시피 중첩 선택 + 논문급 그림 8종
 
 정본: 계획(사전 등록) `docs/EXPERIMENT_PLAN_LABEL_BUDGET_2026-09-22.md`(커밋 640098c), 결과 DB `data/processed/h3/`, 모델 축 보충 `data/processed/m1/h28model_shard*`(GPU 6–9), 그림 `outputs/figures/h3/`(스펙 h3_*). 채점 = 개정 09-21(짝지음·층화 블록 부트스트랩·점 추정치와 CI 지역 집합 일치).
