@@ -1,0 +1,58 @@
+# LGX 본 실행의 CPU 작업: h42 의 cpu 부분(축 11개)과 h41(검증 사다리, 지역 내 블록 교차검증). 계획 docs/EXPERIMENT_PLAN_LG_2026-09-29.md §6A.
+# 항목: 기준 재실행(B0), X1, X2, X3a, X3b, X3c, X5, X9, N1, N2, N3, N4 와 ridge 축. GPU 부분(X6, X1 의 신경망)은 lgx_gpu.yaml 이다.
+#
+# 선행 조건: lgx_smoke.yaml 작업이 통과하고(단위 시험 포함) 시간 환산(lgx_smoke_full_projection.csv)을 확인한 뒤 제출한다.
+# 묶음 작성:   bash scripts/rescale/make_payload_lgx.sh
+# 제출 전 확인: python3 tools/rescale_client.py run configs/rescale/lgx_cpu.yaml --dry-run
+# 제출:        python3 tools/rescale_client.py run configs/rescale/lgx_cpu.yaml --yes --no-wait
+#
+# 노드: hematite(AMD EPYC 7V73X Milan-X, x86, GPU 없음). 허용 코어 수 [64], 메모리 코어당 7 GB(448 GB).
+#   0.0659 달러/코어·시간 × 64코어 = 4.22 달러/시간. 벽시계 6 h 기준 최악 25.31 달러.
+#   coretypes 조회(2026-09-29)에서 GPU 가 없고 64코어를 허용하는 x86 노드의 가격 순서는 redbud-bundle 0.0540, redbud 0.0600(AMD EPYC Genoa,
+#   코어당 2 GB), hematite 0.0659, hickory 0.0665(Genoa), medlar-max 0.0674 다. 더 싼 gallium, antimony, lavender, hydrangea 는 ARM 이라 뺐다.
+#   redbud 가 시간당 0.38 달러 싸지만 hematite 를 골랐다. 본 실행(LG)의 노드 iolite-4 는 AMD EPYC 7V12(Rome)이고 AVX-512 가 없다.
+#   Milan-X 도 AVX-512 가 없고 Genoa 는 있다. 수치 라이브러리가 명령어 집합에 따라 다른 경로를 타면 CatBoost 값이 재현 점검의 허용 차
+#   (0.02 cm)를 넘을 수 있다고 보았다. 이 판단은 추론이며 확인하지 못했다. '-bundle' 노드는 요금 구성을 확인하지 못해 뺐다.
+#   노드 종류가 본 실행과 다르므로 재현 여부는 작업 초반의 재현 점검(lgx_gate_early.csv, 로그의 [gate] 줄)으로 확인한다.
+#   기준은 묶음에 든 LG 사전 점검 조각(캐나다 x, 분할 1)이다. 허용 차를 넘어도 실행은 계속한다(확장의 대비는 확장 조각 안에서 닫힌다, §6A.6).
+#
+# 벽시계 근거(추정. 적합 수는 고정 입력 표가 있는 상태의 --count-only 값, 2026-09-29)
+#   h42 cpu: 적합 318,245건과 선택 단계 900건. 누적 36.0 h + 선택 단계 0.5 h = 36.5 h(4스레드 프로세스 1개 기준).
+#     축별 누적: base 4.21 · x1 3.69 · x2 11.89 · x9 4.33 · n3 4.82 · prox 3.10 · x5 1.23 · x9f 1.08 · n4 1.51 · ridge 0.12 h.
+#     워커 14개에서 36.5 / 14 = 2.61 h.
+#   h41: 작업 단위 292, 적합 5,556건, 누적 2.7 h. 워커 2개에서 1.35 h. h42 와 함께 돌므로 실행 구간은 2.61 h 다.
+#   여유 40 %: 2.61 × 1.4 = 3.65 h. 설치와 복원 0.1 h, 집계 예비 1.0 h(h42 집계 추정 0.3 h, h41 집계와 묶음 포함. 재표집 10,000회의
+#   집계 시간은 재지 않았다), 끝 여유 0.75 h 를 더하면 5.5 h 다. 올림해 6 h 로 둔다.
+#   스크립트는 5.25 h 에 맞춰 스스로 끝난다(LGX_BUDGET_MIN=315). 실행 구간의 한도는 약 4.2 h(추정의 1.6배)다.
+#   시간이 모자라 중단되면 결과 묶음을 입력으로 넣어 다시 제출한다(--resume 이 끝난 조각을 건너뛴다).
+#   재지 않은 값: catboost(600, 깊이 6), rf, catboost_tuned 의 기준 시간, r = 30 의 적합 시간, 선택 단계의 시간, 64코어 동시 실행의 감속,
+#   hematite 와 iolite 의 코어 속도 차. lgx_smoke.yaml 작업의 환산을 본 뒤 이 상한을 다시 정한다.
+#   예상 비용은 실행 2.61 h 와 집계 0.4 h, 설치 0.1 h 를 더한 약 3.1 h, 약 13달러다.
+
+name: polar-lgx-cpu
+
+hardware:
+  core_type: hematite        # GPU 없음, x86(AMD EPYC 7V73X). 허용 코어 수 [64] (coretypes 조회 2026-09-29)
+  cores_per_slot: 64
+  slots: 1
+  walltime_hours: 6
+
+max_cost_usd: 30
+low_priority: false          # 선점형 등급은 쓰지 않는다(프로젝트 방침)
+
+analysis:
+  code: pytorch              # 본 실행과 같은 이미지(python 3.11). cpu 부분은 torch 를 쓰지 않는다
+  version: "2.4.1"
+
+code_paths:
+  - work/lgx_payload.tar.gz
+
+# 이어서 실행할 때: 이전 작업의 results_lgx_cpu.tar.gz 를 올리고(rescale_client.py upload) 그 파일 id 를 여기에 넣는다.
+# 본 실행(ZovWo)의 results_lg.tar.gz 를 함께 넣으면 재현 점검의 기준이 본 실행 조각(117 단위)이 된다.
+dataset_file_ids: []
+
+# 환경 변수는 scripts/rescale/run_lgx.sh 상단에 설명이 있다. 워커 수는 기본값을 쓴다(h42 14개, h41 2개, 각 4스레드).
+command: |
+  [ -f lgx_payload.tar.gz ] && tar xzf lgx_payload.tar.gz; LGX_PARTS="cpu h41" LGX_LABEL=cpu LGX_BUDGET_MIN=315 LGX_SUM_RESERVE_MIN=60 bash scripts/rescale/run_lgx.sh
+
+results_dir: results/rescale_lgx_cpu

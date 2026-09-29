@@ -1,0 +1,34 @@
+# LGX(확장 실험) 본 실행, 한 작업 구성. 계획 docs/EXPERIMENT_PLAN_LG_2026-09-29.md 6A 절.
+# CPU 축 11개(h42), 검증 사다리(h41), GPU 축 3개(h42, 학습기 7종)를 본 실행(ZovWo)과 같은 노드 종류 iolite-4 한 대에서 함께 돌린다.
+# 같은 노드 종류를 쓰는 이유: 기준 방법의 재현 점검(허용 차 0.02 cm)과 학습기 5분할 판정에서 하드웨어 차이를 없애기 위해서다.
+# lgx_cpu.yaml(hematite)과 lgx_gpu.yaml 로 나눠 돌리는 구성의 대안이다. 둘 중 하나만 제출한다.
+#
+# 비용: 64코어 × 0.0890 달러/코어·시간 = 5.70 달러/시간. 벽시계 22 h 기준 최악 125.31 달러. 예상은 GPU 부분 13 h 에 설치와 집계를 더해 약 15 h, 약 85 달러다.
+# CPU 부분이 도는 첫 3–4 h 동안은 스레드 수요(CPU 14 × 4 + h41 2 × 4 + GPU 12 × 2 = 88)가 코어 64 를 넘는다(본 실행도 같은 방식이었다).
+# 작업 끝의 집계는 본 실행 조각 없이 돈다. L26, L27 과 전체 재현 점검은 통합 집계 작업(lgx_sum.yaml)에서 닫는다.
+# 제출: python3 tools/rescale_client.py run configs/rescale/lgx_all.yaml --yes --no-wait
+
+name: polar-lgx-all
+
+hardware:
+  core_type: iolite-4        # GPU 4장(T4). 허용 코어 수 [64] (coretypes 조회 2026-09-29)
+  cores_per_slot: 64
+  slots: 1
+  walltime_hours: 22
+
+max_cost_usd: 130
+low_priority: false          # 선점형 등급은 쓰지 않는다(프로젝트 방침)
+
+analysis:
+  code: pytorch
+  version: "2.4.1"
+
+code_paths:
+  - work/lgx_payload.tar.gz
+
+dataset_file_ids: []
+
+command: |
+  [ -f lgx_payload.tar.gz ] && tar xzf lgx_payload.tar.gz; LGX_PARTS="cpu h41 gpu" LGX_LABEL=all LGX_GPU_LEARNERS=all LGX_SUMMARIZE=1 LGX_BUDGET_MIN=1275 LGX_SUM_RESERVE_MIN=60 bash scripts/rescale/run_lgx.sh
+
+results_dir: results/rescale_lgx_all

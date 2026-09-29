@@ -1,0 +1,52 @@
+# LGX(H41·H42) 스모크·사전 점검 작업. 계획 docs/EXPERIMENT_PLAN_LG_2026-09-29.md §6A.9.
+#
+# 목적: 확장 본 실행(lgx_cpu.yaml, lgx_gpu.yaml) 전에 가장 싼 GPU 노드에서 환경, 의존성, 코드 경로를 확인하고 부분별 적합 시간을 잰다.
+#   h42 --smoke(cpu 11축, gpu 3축) · h41 --smoke → 집계(재표집 10,000회) → 단위 시험(tests/test_h42_ext.py, tests/test_h41_ladder.py,
+#   LG_RUN_HEAVY=1) → 본 실행 범위의 적합 수 표 → 남은 시간에 사전 점검(--precheck: 캐나다 x, 분할 1, n {0, 40}, 본 실행과 같은 설정)
+#   → 적합 시간 표와 본 실행 환산(lgx_smoke_full_projection.csv). 결과 묶음 results_lgx_smoke.tar.gz.
+# 이 작업의 산출은 경로 확인과 시간 측정용이다. 가설 판정에 쓰지 않는다.
+#
+# 묶음 작성:   bash scripts/rescale/make_payload_lgx.sh          (고정 입력 표가 없으면 --make-tables)
+# 제출 전 확인: python3 tools/rescale_client.py run configs/rescale/lgx_smoke.yaml --dry-run
+# 제출:        python3 tools/rescale_client.py run configs/rescale/lgx_smoke.yaml --yes --no-wait
+#
+# 비용: iolite-1 은 4코어 × 0.1721 달러/코어·시간 = 0.69 달러/시간. 벽시계 3 h 기준 최악 2.07 달러(max_cost_usd 3 이내).
+# 과금은 실제 사용 시간 기준이다. 스크립트는 시작 165분에 맞춰 스스로 끝난다(LGX_SMOKE_BUDGET_MIN).
+#
+# 벽시계 근거(추정. 스모크와 사전 점검 범위의 --count-only 값과 LG 사전 점검 qOkSo 의 실측을 썼다)
+#   설치 5분(qOkSo 실측 4분) · h42 cpu 스모크 1,072 적합과 선택 단계 234 적합 20–30분(CatBoost 0.3 s 실측, 고용량 학습기와 선택 단계는 가정값)
+#   · h42 gpu 스모크 467 적합 약 10분(qOkSo 의 같은 크기 스모크 6분. cpu 단계와 함께 돈다) · h41 스모크 290 적합 약 9분(가정값)
+#   · 집계 약 13분(재지 않았다) · 단위 시험 약 15분(재지 않았다) · 적합 수 표 3분 · 사전 점검 cpu 227 적합과 선택 72 적합 약 8분
+#   · 사전 점검 gpu 25 적합 약 8분(FT-Transformer 1건 60 s 실측) · RealMLP 2 적합 약 5분(256 epoch, qOkSo 환산 1건 78 s)
+#   합계 약 96분(gpu 스모크는 cpu 단계와 겹친다). 여유 40 % 를 더하면 134분이다. 끝 여유 15분을 더해 올림하면 3 h 다.
+#   과제 지정값은 2 h 였다. 위 추정에 여유 40 % 를 더하면 2 h 를 넘으므로 3 h 로 두었다(비용 상한 3달러는 그대로 지킨다).
+#   2 h 로 되돌리려면 walltime_hours 를 2, LGX_SMOKE_BUDGET_MIN 을 110 으로 바꾼다. 그 경우 사전 점검 단계는 남은 시간 안에서만 돌고
+#   시간이 모자라면 뒤 단계부터 생략한다(필수 단계는 스모크, 집계, 단위 시험이다). 생략된 단계는 command 앞에 LGX_SMOKE_DO=precheck 를
+#   붙여 다시 제출해 채운다.
+#   재지 않은 값이 많다(선택 단계, 고용량 학습기, 집계, 단위 시험). 위 시간은 실측이 아니다.
+
+name: polar-lgx-smoke
+
+hardware:
+  core_type: iolite-1        # GPU 1장(T4), AMD EPYC 7V12. 허용 코어 수 [4] (coretypes 조회 2026-09-29)
+  cores_per_slot: 4
+  slots: 1
+  walltime_hours: 3
+
+max_cost_usd: 3
+low_priority: false          # 선점형 등급은 쓰지 않는다(프로젝트 방침)
+
+analysis:
+  code: pytorch
+  version: "2.4.1"
+
+code_paths:
+  - work/lgx_payload.tar.gz
+
+dataset_file_ids: []
+
+# 환경 변수는 scripts/rescale/run_lgx_smoke.sh 상단에 설명이 있다.
+command: |
+  [ -f lgx_payload.tar.gz ] && tar xzf lgx_payload.tar.gz; LGX_SMOKE_BUDGET_MIN=165 bash scripts/rescale/run_lgx_smoke.sh
+
+results_dir: results/rescale_lgx_smoke
