@@ -648,3 +648,10 @@ TabICL 적합 1건의 시간은 재지 않았다. 기준은 LGT 의 TabPFN 추�
     - `catboost_tuned_loc` 의 CPU 시간(4.4 의 8 h 조건)은 재지 않았다(사전 점검 (d)). cbt 결정은 사전 점검 뒤에 한다.
     - 확정 절차: 6.3 단계 4 의 사전 점검(h47, h48 `--precheck`)으로 설정별 epoch 당 시간과 실제 epoch 수(E_c)를 잰 뒤 `lgf_projection.csv` 의 P_F, P_N, E1, S 행으로 P 를 다시 계산하고, 그 시점의 GPU 점유와 LGT 진행으로 B 를 정해 `--window-set` 으로 기록한다. 이 개정의 값은 그 결정을 대신하지 않는다.
   - 이 개정에서 로컬로 한 일: py_compile, pyflakes, 스레드 1의 `--count-only`(h47 19 s, h48 10 s. 적합 수와 설정 목록 해시는 개정 2·3 과 같다), 단위 시험(스레드 2, 28 s), GPU 5 스모크(h47, h48 각 1회). 사전 점검, 본 실행, 집계는 하지 않았다.
+- 2026-09-30 05:05 KST: 개정 5(사전 점검 개정, 결과 열람 전). 가설·판정 문구는 바꾸지 않았다.
+  - 사전 점검: h47 `--precheck`(04:33–04:35, GPU 5, 종료 코드 0), h48 `--precheck`(04:35–04:59, GPU 5, 종료 코드 0). 산출 `lgf_precheck_timing.csv`, `lgfn_precheck_timing.csv`, `lgfn_precheck_epochs.csv`, `lgf_projection.csv`.
+  - 측정 기반 P: P_F = 4.22 GPU-h(TabICL r main 0.267, full 0.254), P_N = 126.17 GPU-h. P = 130.40 GPU-h. ΔE1 = 27.40 GPU-h. C1(catboost_tuned_loc CPU) = 1.12 h ≤ 8 h 이므로 cbt = 1.
+  - B(8.1): (i) 점유 판정을 통과한 사전 허용 후보는 GPU 5 하나다(05:00 nvidia-smi: GPU 0–4 다른 사용자 13 GB·100 %, GPU 8 다른 사용자). 48 h. (ii) GPU 6·7·9: LGT 는 05:00 에 172 단위 중 58 단위 완료, 시작 01:40 부터 12,000 s. 완료 단위의 평균 벽시계 ÷ 워커 수 = 207 s. 남은 114 단위 × 207 s = 6.6 h, 예상 종료 약 11:35. t0 를 05:05 로 두면 각 48 − 6.5 = 41.5 h, 합계 124.5 h. (iii) LGU 는 04:32 에 끝나 GPU 5 를 나누지 않는다. B = 172.5 GPU-h. 사용자는 6·7·9 의 사용을 막지 않았다(2026-09-30 02시 대화에서 한 줄로 알림).
+  - 결정 절차: P + ΔE1 = 157.8 ≤ B = 172.5 이므로 E1 을 적용한다(FT-T·RealMLP 무작위 32). 축소 없음. cbt = 1.
+  - 열람 상태: LG(ZovWo) 미회수. LGX(Qjpbeb, ShFtT) 미회수. LGT 조각 있음·미열람. LGU 본 실행 완료(04:32)·판정 표 미열람. LGF 는 스모크와 사전 점검 산출만 있다(RMSE·Δ·판정 미기록).
+  - 실행: GPU 한 장(5)으로 6.4 절 단일 큐를 시작한다. LGT 가 끝나 6·7·9 가 비면 드레인 뒤 두 장 이상 구성으로 다시 시작한다(--resume).
