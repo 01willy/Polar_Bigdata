@@ -1,0 +1,8 @@
+target,mode,split,part,learner,n_A,n_eval,nb_eval,n_src,valid,n_rows,est_s,fit_learner,fit_mlp_alpha,fit_mlp_cont,fit_total,order
+Canada,x,1,gpu,mlp,355,393,20,16697,True,48,47.0,6,7.0,3.0,16,0
+Canada,x,1,gpu,tabm,355,393,20,16697,True,21,94.1,6,0.0,0.0,6,1
+Canada,x,1,gpu,cfm,355,393,20,16697,True,21,43.4,6,0.0,0.0,6,2
+Canada,x,1,gpu,ddpm,355,393,20,16697,True,21,54.3,6,0.0,0.0,6,3
+Canada,x,1,gpu,ftt,355,393,20,16697,True,21,405.3,6,0.0,0.0,6,4
+Canada,x,1,gpu,nflow,355,393,20,16697,True,21,311.2,6,0.0,0.0,6,5
+Canada,x,1,gpu,realmlp,355,393,20,16697,True,21,5844.2,6,0.0,0.0,6,6

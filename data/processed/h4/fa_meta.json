@@ -1,0 +1,67 @@
+{
+ "stage": "FA 실패 원인 분석(탐색)",
+ "plan": [
+  "docs/EXPERIMENT_PLAN_LG_2026-09-29.md",
+  "docs/RESEARCH_FRAME_2026-09-29.md"
+ ],
+ "targets": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_E",
+  "AL-1",
+  "AL-2",
+  "AL-3",
+  "AL-4",
+  "AL-5",
+  "AL-6",
+  "CA-2",
+  "CA-3",
+  "LE-1",
+  "LE-2"
+ ],
+ "splits": [
+  0,
+  1,
+  2
+ ],
+ "kappa": 10.0,
+ "buffer_km": 100.0,
+ "k_sub": "Alaska:6,Canada:3,Lena:2",
+ "parts": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "above_cells_unmatched": 0,
+ "gate_ok": true,
+ "gate_n_fail": 0,
+ "elapsed_s": 60.6,
+ "v1_p1_repro_maxdiff": {
+  "Canada|0": 0.0,
+  "Canada|1": 3.552713678800501e-15,
+  "Canada|2": 7.105427357601002e-15,
+  "CA-3|0": 1.4210854715202004e-14,
+  "CA-3|1": 7.105427357601002e-15,
+  "CA-3|2": 7.105427357601002e-15
+ },
+ "v1_n_catboost_fits": 18,
+ "aoa_crosscheck": {
+  "Canada": {
+   "n": 747,
+   "out_aoa_loro": 0.23159303882195448,
+   "out_aoa_alaska_ref": 0.5261044176706827,
+   "rho_di": 0.8295585709522377
+  },
+  "Lena": {
+   "n": 2958,
+   "out_aoa_loro": 0.028735632183908046,
+   "out_aoa_alaska_ref": 0.367816091954023,
+   "rho_di": 0.385780210846244
+  }
+ },
+ "resid_n_catboost_fits": 28
+}

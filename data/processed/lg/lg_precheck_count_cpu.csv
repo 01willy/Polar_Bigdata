@@ -1,0 +1,2 @@
+target,mode,split,part,learner,n_A,n_eval,nb_eval,n_src,valid,n_rows,est_s,fit_v1_ridge,fit_method,fit_alpha,fit_alpha_cont,fit_nested_cv,fit_nested_cont,fit_place,fit_learner,fit_total,order
+Canada,x,1,cpu,,355,393,20,16697,True,88,34.0,2,13,6,3,32,16,1,6,79,0

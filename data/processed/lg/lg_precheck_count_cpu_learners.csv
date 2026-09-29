@@ -1,0 +1,3 @@
+learner,n_fit,rows_per_fit,base_s,equiv_fits,est_h,n_fit_pseudo,est_h_pseudo
+catboost_lo,71,21669,0.5,65,0.01,4,0.0
+ridge,6,72374,0.05,26,0.0,2,0.0
