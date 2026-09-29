@@ -1,0 +1,401 @@
+{
+ "tag": "lgfn",
+ "cfg_sig": "4b6074dbf0ef564ed6658c3e7c9009a27e7aaa2d",
+ "configs": "/home/willy010313/Polar_Bigdata/data/processed/lgf/lgfn_configs.json",
+ "n_configs": {
+  "mlp": {
+   "D": 33,
+   "R": 33
+  },
+  "tabm": {
+   "D": 33,
+   "R": 33
+  },
+  "ftt": {
+   "D": 34,
+   "R": 34
+  },
+  "realmlp": {
+   "D": 33,
+   "R": 33
+  }
+ },
+ "k": {
+  "mlp": 32,
+  "tabm": 32,
+  "ftt": 16,
+  "realmlp": 16
+ },
+ "stage2_top": {
+  "mlp": 3,
+  "tabm": 3,
+  "ftt": 2,
+  "realmlp": 2
+ },
+ "stage2_seeds": [
+  1,
+  2
+ ],
+ "reduce": [],
+ "e1": false,
+ "jobs": [
+  "n_sel_fast",
+  "n_p0_fast",
+  "n_sel_slow",
+  "n_p0_slow",
+  "n_p1",
+  "n_t2"
+ ],
+ "learners": [
+  "mlp",
+  "tabm",
+  "ftt",
+  "realmlp"
+ ],
+ "targets": [
+  "Lena|x",
+  "Canada|x",
+  "Russia_W|x",
+  "Russia_E|x"
+ ],
+ "targets_t2": [
+  "Alaska|x"
+ ],
+ "folds": [
+  {
+   "target": "Lena",
+   "mode": "x",
+   "n_src": 14429,
+   "src_hash": "7b66649c651f",
+   "n_regions_src": 9,
+   "region": "Alaska",
+   "n_te": 13606,
+   "n_tr": 823,
+   "n_tr_within100km": 1
+  },
+  {
+   "target": "Lena",
+   "mode": "x",
+   "n_src": 14429,
+   "src_hash": "7b66649c651f",
+   "n_regions_src": 9,
+   "region": "Canada",
+   "n_te": 750,
+   "n_tr": 13679,
+   "n_tr_within100km": 20
+  },
+  {
+   "target": "Lena",
+   "mode": "x",
+   "n_src": 14429,
+   "src_hash": "7b66649c651f",
+   "n_regions_src": 9,
+   "region": "Russia_E",
+   "n_te": 30,
+   "n_tr": 14399,
+   "n_tr_within100km": 0
+  },
+  {
+   "target": "Lena",
+   "mode": "x",
+   "n_src": 14429,
+   "src_hash": "7b66649c651f",
+   "n_regions_src": 9,
+   "region": "Russia_W",
+   "n_te": 31,
+   "n_tr": 14398,
+   "n_tr_within100km": 0
+  },
+  {
+   "target": "Canada",
+   "mode": "x",
+   "n_src": 16697,
+   "src_hash": "a39eea33723e",
+   "n_regions_src": 9,
+   "region": "Alaska",
+   "n_te": 13586,
+   "n_tr": 3111,
+   "n_tr_within100km": 0
+  },
+  {
+   "target": "Canada",
+   "mode": "x",
+   "n_src": 16697,
+   "src_hash": "a39eea33723e",
+   "n_regions_src": 9,
+   "region": "Lena",
+   "n_te": 3037,
+   "n_tr": 13660,
+   "n_tr_within100km": 1
+  },
+  {
+   "target": "Canada",
+   "mode": "x",
+   "n_src": 16697,
+   "src_hash": "a39eea33723e",
+   "n_regions_src": 9,
+   "region": "Russia_E",
+   "n_te": 30,
+   "n_tr": 16667,
+   "n_tr_within100km": 0
+  },
+  {
+   "target": "Canada",
+   "mode": "x",
+   "n_src": 16697,
+   "src_hash": "a39eea33723e",
+   "n_regions_src": 9,
+   "region": "Russia_W",
+   "n_te": 31,
+   "n_tr": 16666,
+   "n_tr_within100km": 0
+  },
+  {
+   "target": "Russia_W",
+   "mode": "x",
+   "n_src": 17436,
+   "src_hash": "7cfea7987392",
+   "n_regions_src": 9,
+   "region": "Alaska",
+   "n_te": 13606,
+   "n_tr": 3830,
+   "n_tr_within100km": 1
+  },
+  {
+   "target": "Russia_W",
+   "mode": "x",
+   "n_src": 17436,
+   "src_hash": "7cfea7987392",
+   "n_regions_src": 9,
+   "region": "Canada",
+   "n_te": 750,
+   "n_tr": 16686,
+   "n_tr_within100km": 20
+  },
+  {
+   "target": "Russia_W",
+   "mode": "x",
+   "n_src": 17436,
+   "src_hash": "7cfea7987392",
+   "n_regions_src": 9,
+   "region": "Lena",
+   "n_te": 3037,
+   "n_tr": 14399,
+   "n_tr_within100km": 1
+  },
+  {
+   "target": "Russia_W",
+   "mode": "x",
+   "n_src": 17436,
+   "src_hash": "7cfea7987392",
+   "n_regions_src": 9,
+   "region": "Russia_E",
+   "n_te": 30,
+   "n_tr": 17406,
+   "n_tr_within100km": 0
+  },
+  {
+   "target": "Russia_E",
+   "mode": "x",
+   "n_src": 17437,
+   "src_hash": "ad0451482421",
+   "n_regions_src": 9,
+   "region": "Alaska",
+   "n_te": 13606,
+   "n_tr": 3831,
+   "n_tr_within100km": 1
+  },
+  {
+   "target": "Russia_E",
+   "mode": "x",
+   "n_src": 17437,
+   "src_hash": "ad0451482421",
+   "n_regions_src": 9,
+   "region": "Canada",
+   "n_te": 750,
+   "n_tr": 16687,
+   "n_tr_within100km": 20
+  },
+  {
+   "target": "Russia_E",
+   "mode": "x",
+   "n_src": 17437,
+   "src_hash": "ad0451482421",
+   "n_regions_src": 9,
+   "region": "Lena",
+   "n_te": 3037,
+   "n_tr": 14400,
+   "n_tr_within100km": 1
+  },
+  {
+   "target": "Russia_E",
+   "mode": "x",
+   "n_src": 17437,
+   "src_hash": "ad0451482421",
+   "n_regions_src": 9,
+   "region": "Russia_W",
+   "n_te": 31,
+   "n_tr": 17406,
+   "n_tr_within100km": 0
+  },
+  {
+   "target": "Alaska",
+   "mode": "x",
+   "n_src": 3860,
+   "src_hash": "5b1407e276f2",
+   "n_regions_src": 9,
+   "region": "Canada",
+   "n_te": 749,
+   "n_tr": 3111,
+   "n_tr_within100km": 0
+  },
+  {
+   "target": "Alaska",
+   "mode": "x",
+   "n_src": 3860,
+   "src_hash": "5b1407e276f2",
+   "n_regions_src": 9,
+   "region": "Lena",
+   "n_te": 3037,
+   "n_tr": 823,
+   "n_tr_within100km": 1
+  },
+  {
+   "target": "Alaska",
+   "mode": "x",
+   "n_src": 3860,
+   "src_hash": "5b1407e276f2",
+   "n_regions_src": 9,
+   "region": "Russia_E",
+   "n_te": 30,
+   "n_tr": 3830,
+   "n_tr_within100km": 0
+  },
+  {
+   "target": "Alaska",
+   "mode": "x",
+   "n_src": 3860,
+   "src_hash": "5b1407e276f2",
+   "n_regions_src": 9,
+   "region": "Russia_W",
+   "n_te": 31,
+   "n_tr": 3829,
+   "n_tr_within100km": 0
+  }
+ ],
+ "small_regions": {
+  "Lena|x": {
+   "Greenland": 3,
+   "Russia_C": 6,
+   "Scandinavia": 1,
+   "Svalbard": 1,
+   "Tibet": 1
+  },
+  "Canada|x": {
+   "Greenland": 3,
+   "Russia_C": 7,
+   "Scandinavia": 1,
+   "Svalbard": 1,
+   "Tibet": 1
+  },
+  "Russia_W|x": {
+   "Greenland": 3,
+   "Russia_C": 7,
+   "Scandinavia": 1,
+   "Svalbard": 1,
+   "Tibet": 1
+  },
+  "Russia_E|x": {
+   "Greenland": 3,
+   "Russia_C": 7,
+   "Scandinavia": 1,
+   "Svalbard": 1,
+   "Tibet": 1
+  },
+  "Alaska|x": {
+   "Greenland": 3,
+   "Russia_C": 7,
+   "Scandinavia": 1,
+   "Svalbard": 1,
+   "Tibet": 1
+  }
+ },
+ "cpu": [
+  {
+   "target": "Lena",
+   "mode": "x",
+   "fit_catboost_lo": 160,
+   "fit_cbt_select": 72,
+   "fit_catboost_tuned_loc": 160,
+   "est_cpu_h_lo": 0.022
+  },
+  {
+   "target": "Canada",
+   "mode": "x",
+   "fit_catboost_lo": 160,
+   "fit_cbt_select": 72,
+   "fit_catboost_tuned_loc": 160,
+   "est_cpu_h_lo": 0.022
+  },
+  {
+   "target": "Russia_W",
+   "mode": "x",
+   "fit_catboost_lo": 80,
+   "fit_cbt_select": 72,
+   "fit_catboost_tuned_loc": 80,
+   "est_cpu_h_lo": 0.011
+  },
+  {
+   "target": "Russia_E",
+   "mode": "x",
+   "fit_catboost_lo": 80,
+   "fit_cbt_select": 72,
+   "fit_catboost_tuned_loc": 80,
+   "est_cpu_h_lo": 0.011
+  },
+  {
+   "target": "Alaska",
+   "mode": "x",
+   "fit_catboost_lo": 160,
+   "fit_cbt_select": 72,
+   "fit_catboost_tuned_loc": 160,
+   "est_cpu_h_lo": 0.022
+  }
+ ],
+ "sel_sig": {
+  "mlp": "f28a40c27f69",
+  "tabm": "cd3aefd9119a",
+  "ftt": "85f1a7ca33b0",
+  "realmlp": "6484c0942743"
+ },
+ "code_sha": {
+  "h48": "47eebfc686e27b371856657ab1e4db348a6c6e1b",
+  "h43": "13148bb899e92c49ba24f2f9cb6463e56da26a2a",
+  "h40": "ffd0b3a76d36472cef15ac625eeeee344f948a8f",
+  "h42": "70ec084a1919d35a1526728957e3d20e206bfac6"
+ },
+ "revision_needed": [],
+ "elapsed_s": 8.0,
+ "time_basis": {
+  "default": {
+   "mlp": 0.9,
+   "tabm": 1.0,
+   "ftt": 28.0,
+   "realmlp": 38.0
+  },
+  "tuned_opt": {
+   "mlp": 5.0,
+   "tabm": 8.0,
+   "ftt": 50.0,
+   "realmlp": 45.0
+  },
+  "tuned_pes": {
+   "mlp": 10.0,
+   "tabm": 20.0,
+   "ftt": 150.0,
+   "realmlp": 90.0
+  },
+  "catboost": 0.5,
+  "note": "계획서 8.3 의 가정값. 사전 점검(6.3 단계 4)의 실측으로 바꾼다"
+ }
+}
