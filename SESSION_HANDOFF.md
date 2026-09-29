@@ -7,13 +7,13 @@
 정본: 계획 `docs/EXPERIMENT_PLAN_LG_2026-09-29.md`(개정 2), 큰 틀 `docs/RESEARCH_FRAME_2026-09-29.md`, 지역별 행렬 `docs/COVERAGE_MATRIX_BY_REGION_2026-09-29.md`, 실패 원인 `docs/FAILURE_ANALYSIS_2026-09-29.md`, 로그 09-29 항목. 커밋 40be64c(로컬).
 - **실행 환경**: 실험은 CPU 부분까지 Rescale에서 한다. 로컬은 `--count-only`, `--summarize-only`, CSV 읽기만 한다(스레드 1).
 - **Rescale 사전 점검(완료)**: 작업 `qOkSo`(iolite-1), 38분, 정산 0.44달러. 13단계 전부 종료 코드 0, 적합 실패 0건, 단위 시험 12건 통과. 결과 `results/rescale_lg_smoke/`. 실측 환산은 계획서 §6.1.
-- **본 실행(미제출)**: `configs/rescale/lg_full.yaml`(iolite-4, 64코어·T4 4장, 상한 10 h, 최악 56.96달러, 예상 약 7 h·40달러, RealMLP 제외 6종). 20달러를 넘으므로 사용자 확인 뒤 제출한다.
-- **미결**: RealMLP 범위. 실측 환산 98.4 GPU-h(워커 12개 8.2 h, 약 47달러). 후보는 별도 작업으로 전 범위 실행, R2 제외(18.5 GPU-h, 약 1.5 h), 제외.
+- **본 실행(제출, 실행 중)**: 작업 `ZovWo`, https://kr.rescale.com/jobs/ZovWo/ . `configs/rescale/lg_full.yaml`(iolite-4, 64코어·T4 4장, 사전 등록 범위 전부, 학습기 7종, 상한 22 h, 최악 125.31달러, 예상 15–16 h·약 88달러). 사용자 지시: 비용보다 범위의 완전성 우선.
+- **확장 실험(설계 중)**: 결합 방식 재현 비교(물리 입력, E 예측 비선형, 곱셈 보정), 의사 라벨 비율·위약, 검증 사다리, 셀 단위 예측 저장, 학습기 축 보강. 계획서 개정으로 사전 등록한 뒤 별도 작업으로 돌린다.
 - **신규성 검증**: 워크플로 wf_ea2b1da5-83e(선행 문헌 재확인, 누락 선례 탐색, 반박 심사). 결과는 메모리 `novelty-positioning`에 반영한다.
 
 ### ▶ 다음 세션
-1. 사용자 확인을 받은 뒤 본 실행을 제출한다: `python3 tools/rescale_client.py run configs/rescale/lg_full.yaml --yes --no-wait`(가격 조회가 느리므로 백그라운드, timeout 900 s). 제출 전 `bash scripts/rescale/make_payload.sh`로 묶음을 다시 만든다.
-2. RealMLP 범위를 사용자와 정하고 계획서 개정 이력에 적는다.
+1. `python3 tools/rescale_client.py status ZovWo`로 본 실행 상태를 본다. 끝났으면 `fetch ZovWo --dest results/rescale_lg`로 회수하고 `lg_status.csv`, `lg_tests.csv`, `lg_failed.csv`를 확인한다.
+2. 벽시계 상한에 걸렸으면 `results_lg.tar.gz`를 `results_lg_prev.tar.gz`로 올려 이어 실행한다(`lg_full.yaml`의 dataset_file_ids).
 3. 실행 중 로그는 Rescale API의 `jobs/<id>/runs/1/tail/process_output.log`로 볼 수 있다.
 4. 회수 뒤 로컬에서 `--summarize-only`로 집계하고 계획서 §7에 L1–L8 판정을 적는다. 그림은 `scripts/4_visualization/paper/`에 추가한다.
 
