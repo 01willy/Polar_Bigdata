@@ -8,7 +8,12 @@
 - **실행 환경**: 실험은 CPU 부분까지 Rescale에서 한다. 로컬은 `--count-only`, `--summarize-only`, CSV 읽기만 한다(스레드 1).
 - **Rescale 사전 점검(완료)**: 작업 `qOkSo`(iolite-1), 38분, 정산 0.44달러. 13단계 전부 종료 코드 0, 적합 실패 0건, 단위 시험 12건 통과. 결과 `results/rescale_lg_smoke/`. 실측 환산은 계획서 §6.1.
 - **본 실행(제출, 실행 중)**: 작업 `ZovWo`, https://kr.rescale.com/jobs/ZovWo/ . `configs/rescale/lg_full.yaml`(iolite-4, 64코어·T4 4장, 사전 등록 범위 전부, 학습기 7종, 상한 22 h, 최악 125.31달러, 예상 15–16 h·약 88달러). 사용자 지시: 비용보다 범위의 완전성 우선.
-- **확장 실험(설계 중)**: 결합 방식 재현 비교(물리 입력, E 예측 비선형, 곱셈 보정), 의사 라벨 비율·위약, 검증 사다리, 셀 단위 예측 저장, 학습기 축 보강. 계획서 개정으로 사전 등록한 뒤 별도 작업으로 돌린다.
+- **확장 실험 LGX(제출)**: 계획서 6A 절(가설 L9–L31). 하네스 `h42_label_grid_ext.py`, 검증 사다리 `h41_validation_ladder.py`. 사전 점검 `nxvpT` 는 21단계 중 19단계 통과, 재현 점검 통과, 결함 2건 수정. 본 실행은 A(`lgx_a.yaml`, CPU 축·검증 사다리·학습기 6종, 상한 14 h)와 B(`lgx_b.yaml`, RealMLP, 상한 10 h)로 나눠 제출했다. 작업 번호는 `results/rescale/_ledger.csv`. 끝나면 본 실행과 A·B 의 결과 묶음을 올려 `lgx_sum.yaml` 로 통합 집계한다.
+- **TabPFN 라벨 격자 LGT(구현 중)**: 로컬 GPU 전용(가중치 배포 조건). 계획서 6C 절, 하네스 `h43_tabpfn_label_grid.py`. 워크플로 wf_d7ec99b5-e4a.
+- **독립 지역 자료 확보 LGD(진행 중)**: 계획서 6B 절, 새 입력 표 v4. 워크플로 wf_d3f37deb-d20.
+- **예측 분포 실험 LGU(구현 중)**: 생성 모델 검토 `docs/GENERATIVE_MODEL_REVIEW_2026-09-29.md` 의 권고 3건(계층 예측 분포 사다리, 폭 정규화 conformal, 공간 정보량 진단). 계획서 `docs/EXPERIMENT_PLAN_LGU_2026-09-29.md`. 워크플로 wf_b0be06f0-359.
+- **신규성 검증본**: `docs/NOVELTY_POSITIONING_2026-09-29.md`. 기법 신규성 없음, 평가 설계와 음성 결과가 기여.
+- **로컬 GPU**: 2026-09-29 밤 사용자 허용(빈 GPU, 9·7·6·5 순, 0–4 는 남김). CPU 작업은 계속 Rescale.
 - **신규성 검증**: 워크플로 wf_ea2b1da5-83e(선행 문헌 재확인, 누락 선례 탐색, 반박 심사). 결과는 메모리 `novelty-positioning`에 반영한다.
 
 ### ▶ 다음 세션
