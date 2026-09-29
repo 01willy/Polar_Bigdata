@@ -1,0 +1,14 @@
+stage,required,rc,sec,note
+deps,1,0,79,ok
+smoke_cpu,1,0,104,
+smoke_gpu,1,0,364,
+smoke_sum,1,0,7,
+timing,1,0,0,
+pytest,1,0,14,
+count_cpu,0,0,21,
+count_gpu,0,0,12,
+precheck_cpu,0,0,27,
+precheck_gpu,0,0,1369,
+precheck_realmlp,0,0,83,
+precheck_sum,0,0,3,
+timing_final,0,0,1,

@@ -1,8 +1,23 @@
 # SESSION_HANDOFF — Polar_Bigdata (현재 상태 스냅샷)
 
-**갱신**: 2026-09-26 저녁(통합 실험 실행·감사·논문 그림) · 09-26 오전(통합 계획 확정) · 09-22(H18–H30) · **다음 세션은 이 파일부터 읽으세요.**
+**갱신**: 2026-09-29(LG 계획·하네스·Rescale 사전 점검 제출) · 2026-09-26 저녁(통합 실험 실행·감사·논문 그림) · 09-26 오전(통합 계획 확정) · 09-22(H18–H30) · **다음 세션은 이 파일부터 읽으세요.**
 
-## ★ 최신(2026-09-26 저녁): 통합 실험 A2·B1–B4·C1·C2·D1 실행 + 감사 21건 확정 + H25 블록 CI 재실행 + 논문 그림 Fig 1–7·Table 1·부록
+## ★ 최신(2026-09-29): LG(라벨 격자 통합 재실행) 사전 등록·하네스·Rescale 포장, 사전 점검 작업 제출
+
+정본: 계획 `docs/EXPERIMENT_PLAN_LG_2026-09-29.md`(개정 2), 큰 틀 `docs/RESEARCH_FRAME_2026-09-29.md`, 지역별 행렬 `docs/COVERAGE_MATRIX_BY_REGION_2026-09-29.md`, 실패 원인 `docs/FAILURE_ANALYSIS_2026-09-29.md`, 로그 09-29 항목. 커밋 40be64c(로컬).
+- **실행 환경**: 실험은 CPU 부분까지 Rescale에서 한다. 로컬은 `--count-only`, `--summarize-only`, CSV 읽기만 한다(스레드 1).
+- **Rescale 사전 점검(완료)**: 작업 `qOkSo`(iolite-1), 38분, 정산 0.44달러. 13단계 전부 종료 코드 0, 적합 실패 0건, 단위 시험 12건 통과. 결과 `results/rescale_lg_smoke/`. 실측 환산은 계획서 §6.1.
+- **본 실행(미제출)**: `configs/rescale/lg_full.yaml`(iolite-4, 64코어·T4 4장, 상한 10 h, 최악 56.96달러, 예상 약 7 h·40달러, RealMLP 제외 6종). 20달러를 넘으므로 사용자 확인 뒤 제출한다.
+- **미결**: RealMLP 범위. 실측 환산 98.4 GPU-h(워커 12개 8.2 h, 약 47달러). 후보는 별도 작업으로 전 범위 실행, R2 제외(18.5 GPU-h, 약 1.5 h), 제외.
+- **신규성 검증**: 워크플로 wf_ea2b1da5-83e(선행 문헌 재확인, 누락 선례 탐색, 반박 심사). 결과는 메모리 `novelty-positioning`에 반영한다.
+
+### ▶ 다음 세션
+1. 사용자 확인을 받은 뒤 본 실행을 제출한다: `python3 tools/rescale_client.py run configs/rescale/lg_full.yaml --yes --no-wait`(가격 조회가 느리므로 백그라운드, timeout 900 s). 제출 전 `bash scripts/rescale/make_payload.sh`로 묶음을 다시 만든다.
+2. RealMLP 범위를 사용자와 정하고 계획서 개정 이력에 적는다.
+3. 실행 중 로그는 Rescale API의 `jobs/<id>/runs/1/tail/process_output.log`로 볼 수 있다.
+4. 회수 뒤 로컬에서 `--summarize-only`로 집계하고 계획서 §7에 L1–L8 판정을 적는다. 그림은 `scripts/4_visualization/paper/`에 추가한다.
+
+## ★ 이전(2026-09-26 저녁): 통합 실험 A2·B1–B4·C1·C2·D1 실행 + 감사 21건 확정 + H25 블록 CI 재실행 + 논문 그림 Fig 1–7·Table 1·부록
 
 정본: 판정 `docs/EXPERIMENT_PLAN_FINAL_PAPER_2026-09-26.md` §10(§10.1 가설 판정, §10.3 원고 주장 갱신), 감사 `docs/AUDIT_2026-09-26.md`, 로그 09-26 저녁 항목, 핸드오프 `gpt/handoff/20260926_2130-final-experiments-audit-figures.md`, 그림 스펙 `figures/PAPER_FIGURE_REDESIGN_2026-09-26.md`, 그림 `outputs/figures/paper/`(Fig1–7, Table1, FigS*, supp_tables, CAPTIONS.md, source_data).
 - **채점 변경**: 모든 새 CI 는 `src/polar/h4_common.py` 블록 부트스트랩. 옛 (분할, 반복) CI 는 좁았다(감사). 손익분기 주 정의 = 블록 CI 상한 < 0 · 분할 승률 ≥ 2/3 · 반복 승률 ≥ 0.75.

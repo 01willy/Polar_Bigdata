@@ -1,0 +1,12 @@
+[timing] 조각 24 · 행 49 → lg_smoke_timing_by_learner.csv
+     tag part     learner  n_fit    sec  sec_full_epochs  epochs_run  sec_per_fit
+lg_smoke  cpu catboost_lo    298  95.27           95.270         NaN        0.320
+lg_smoke  cpu       ridge     24   1.82            1.820         NaN        0.076
+lg_smoke  gpu         cfm     24   5.75          191.667         3.0        0.240
+lg_smoke  gpu        ddpm     24  16.20          540.000         3.0        0.675
+lg_smoke  gpu         ftt     24 191.42         6380.667         3.0        7.976
+lg_smoke  gpu         mlp     74   7.52          229.327         3.0        0.102
+lg_smoke  gpu       nflow     24  19.29          643.000         3.0        0.804
+lg_smoke  gpu     realmlp     24 109.78         9367.893         3.0        4.574
+lg_smoke  gpu        tabm     24   5.69          189.667         3.0        0.237
+[timing] 적합 수 표(lg_count_<part>_learners.csv)가 없어 본 실행 환산을 생략한다

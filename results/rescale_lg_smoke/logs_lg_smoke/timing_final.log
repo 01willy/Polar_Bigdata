@@ -1,0 +1,33 @@
+[timing] 조각 32 · 행 98 → lg_smoke_timing_by_learner.csv
+          tag part     learner  n_fit     sec  sec_full_epochs  epochs_run  sec_per_fit
+  lg_precheck  cpu catboost_lo     71   20.62           20.620         NaN        0.290
+  lg_precheck  cpu       ridge      6    0.44            0.440         NaN        0.073
+  lg_precheck  gpu         cfm      6   67.52           67.520       100.0       11.253
+  lg_precheck  gpu        ddpm      6   77.17           77.170       100.0       12.862
+  lg_precheck  gpu         ftt      6 1333.29         1333.290       100.0      222.215
+  lg_precheck  gpu         mlp     16   29.08           29.080       100.0        1.818
+  lg_precheck  gpu       nflow      6  256.28          256.280       100.0       42.713
+  lg_precheck  gpu        tabm      6   26.62           26.620       100.0        4.437
+     lg_smoke  cpu catboost_lo    298   95.27           95.270         NaN        0.320
+     lg_smoke  cpu       ridge     24    1.82            1.820         NaN        0.076
+     lg_smoke  gpu         cfm     24    5.75          191.667         3.0        0.240
+     lg_smoke  gpu        ddpm     24   16.20          540.000         3.0        0.675
+     lg_smoke  gpu         ftt     24  191.42         6380.667         3.0        7.976
+     lg_smoke  gpu         mlp     74    7.52          229.327         3.0        0.102
+     lg_smoke  gpu       nflow     24   19.29          643.000         3.0        0.804
+     lg_smoke  gpu     realmlp     24  109.78         9367.893         3.0        4.574
+     lg_smoke  gpu        tabm     24    5.69          189.667         3.0        0.237
+lgrm_precheck  gpu     realmlp      6   76.48         2447.360         8.0       12.747
+[timing] 본 실행 환산 → lg_smoke_full_projection.csv (누적 시간 h, 워커 수로 나눈 벽시계 h)
+part     learner source  n_fit_measured  calib_all  n_fit_full  est_h_full  proj_h_full  workers  proj_wall_h
+ cpu catboost_lo  사전 점검              71      0.631      113176       13.97        8.972       14        0.641
+ cpu       ridge  사전 점검               6      0.338        1284        0.05        0.017       14        0.001
+ gpu     realmlp  사전 점검               6      0.419        1284      234.95       98.443       12        8.204
+ gpu         ftt  사전 점검               6      3.290        1284       16.29       53.610       12        4.467
+ gpu       nflow  사전 점검               6      0.824        1284       12.51       10.353       12        0.863
+ gpu        tabm  사전 점검               6      0.283        1284        3.78        1.073       12        0.089
+ gpu         mlp  사전 점검              16      0.618        4884        2.86        2.207       12        0.184
+ gpu        ddpm  사전 점검               6      1.422        1284        2.18        3.102       12        0.259
+ gpu         cfm  사전 점검               6      1.555        1284        1.75        2.727       12        0.227
+[timing] 부분 cpu: 환산 누적 9.0 h · 벽시계 0.6 h(워커 14개) · 실측 없는 학습기 []
+[timing] 부분 gpu: 환산 누적 171.5 h · 벽시계 14.3 h(워커 12개) · 실측 없는 학습기 []

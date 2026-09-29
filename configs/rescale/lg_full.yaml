@@ -6,11 +6,12 @@
 # 제출 전 확인: python3 tools/rescale_client.py run configs/rescale/lg_full.yaml --dry-run
 # 제출:        python3 tools/rescale_client.py run configs/rescale/lg_full.yaml --yes --no-wait
 #
-# 비용: iolite-4 는 64코어 × 0.0890 달러/코어·시간 = 5.70 달러/시간. 벽시계 14 h 기준 최악 79.74 달러.
-# 과금은 실제 사용 시간 기준이다. 스크립트는 13.25 h 에 맞춰 스스로 끝난다(LG_BUDGET_MIN).
+# 비용: iolite-4 는 64코어 × 0.0890 달러/코어·시간 = 5.70 달러/시간. 벽시계 10 h 기준 최악 56.96 달러.
+# 과금은 실제 사용 시간 기준이다. 스크립트는 9.25 h 에 맞춰 스스로 끝난다(LG_BUDGET_MIN).
+# 벽시계 근거: 사전 점검(qOkSo) 실측 환산으로 RealMLP 제외 6종은 GPU 누적 73.1 h, 워커 12개 약 6.1 h, 집계 포함 약 7 h 다(계획서 §6.1).
 #
-# RealMLP: 기본 학습기 목록에서 뺐다. 추정 235 GPU-h 로 이 작업의 벽시계 안에 끝나지 않고, 범위는 사전 점검 실측 뒤에
-# 정한다(계획서 §6 미결 사항 2). 포함하려면 command 의 LG_GPU_LEARNERS 를 all 로 바꾼다(RealMLP 는 맨 뒤에 실행된다).
+# RealMLP: 기본 학습기 목록에서 뺐다. 사전 점검 환산 98.4 GPU-h(워커 12개 8.2 h)로 이 작업의 벽시계 안에 함께 끝나지 않는다.
+# 범위는 사용자 결정 뒤 별도 작업으로 돌린다(계획서 §6 미결 사항 2). 포함하려면 command 의 LG_GPU_LEARNERS 를 all 로 바꾼다(RealMLP 는 맨 뒤에 실행된다).
 
 name: polar-lg-full
 
@@ -18,9 +19,9 @@ hardware:
   core_type: iolite-4        # GPU 4장(T4). 허용 코어 수 64 (coretypes --gpu-only, 2026-09-29 확인)
   cores_per_slot: 64
   slots: 1
-  walltime_hours: 14
+  walltime_hours: 10
 
-max_cost_usd: 85
+max_cost_usd: 60
 low_priority: false          # 선점형 등급은 쓰지 않는다(프로젝트 방침)
 
 analysis:
@@ -36,6 +37,6 @@ dataset_file_ids: []
 
 # 환경 변수는 scripts/rescale/run_lg.sh 상단에 설명이 있다.
 command: |
-  [ -f lg_payload.tar.gz ] && tar xzf lg_payload.tar.gz; LG_GPU_LEARNERS=mlp,cfm,ddpm,tabm,nflow,ftt LG_BUDGET_MIN=795 bash scripts/rescale/run_lg.sh
+  [ -f lg_payload.tar.gz ] && tar xzf lg_payload.tar.gz; LG_GPU_LEARNERS=mlp,cfm,ddpm,tabm,nflow,ftt LG_BUDGET_MIN=555 bash scripts/rescale/run_lg.sh
 
 results_dir: results/rescale_lg

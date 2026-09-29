@@ -1,0 +1,2 @@
+submitted_at,job_id,name,core_type,cores,slots,walltime_hours,low_priority,usd_per_hour,worst_case_usd,status,elapsed_hours,actual_usd
+2026-09-29T15:44:29,qOkSo,polar-lg-smoke,iolite-1,4,1,2,False,0.6884,1.38,submitted,,

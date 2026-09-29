@@ -1,0 +1,35 @@
+[data] 17,467셀 · 부분 cpu · 대상 3 · 분할 [1] · n [0, 3, 40, -1] · 추출 1 · seed [0] · 학습기 ['catboost_lo', 'ridge'] · α ['1', '10', '100', 'cont'] · 중첩 후보 ['10', '100', 'cont'] · λ [0.25, 0.5, 1.0] · 하위 지역 map:lg_subregion_map_v1.csv · 작업 단위 3(건너뜀 0)
+[summarize] 학습기별 적합 시간(전 조각 합계)
+part     learner  n_fit    sec  sec_per_fit
+ cpu catboost_lo    298  95.27     0.319698
+ cpu       ridge     24   1.82     0.075833
+ gpu         cfm     24   5.75     0.239583
+ gpu        ddpm     24  16.20     0.675000
+ gpu         ftt     24 191.42     7.975833
+ gpu         mlp     74   7.52     0.101622
+ gpu       nflow     24  19.29     0.803750
+ gpu     realmlp     24 109.78     4.574167
+ gpu        tabm     24   5.69     0.237083
+[summarize] 조각 24 · runs 999 · curve 999 · minn 300 · tests 134 · 5s → /enc/ukrprod_qOkSo/work/data/processed/lg/lg_smoke_*
+test_id role                        verdict                                                                                                                                                                        stat
+     L1    주 부분(지역 2/4): 검사한 지역에서는 지지 조건 충족 두 가중 CI 상한 < 0 인 지역 0/2 (Lena: 유의 [], 셀 가중만 [], 검사 []; Canada: 유의 [], 셀 가중만 [3], 검사 [0, 3, 40]; Russia_W: 유의 [], 셀 가중만 [], 검사 [0, 3, -1]; Russia_E: 유의 [], 셀 가중만 [], 검사 [])
+     L2    주                          판정 불가                                                                                                             R2-R1 유의 개선 n = [], 4지역 평균인 n = [] | n=40: undetermined(지역 1/4)
+     L2    주                          판정 불가                                                                                                             R3-R1 유의 개선 n = [], 4지역 평균인 n = [] | n=40: undetermined(지역 1/4)
+     L3    주            판정 불가(적격 대상 1개 < 2)                                                                    R0, AL 모드 i: 적격 1, n* ≤ 40 대상 0, 그중 α = 1 의 n* 보다 작은 대상 0 (Canada|x: n*=NA(α=1 NA, 블록 합집합 20, 분할 최소 20))
+     L3   보조            판정 불가(적격 대상 1개 < 2)                                                                    R0, AL 모드 x: 적격 1, n* ≤ 40 대상 0, 그중 α = 1 의 n* 보다 작은 대상 0 (Canada|x: n*=NA(α=1 NA, 블록 합집합 20, 분할 최소 20))
+     L3   보조            판정 불가(적격 대상 1개 < 2)                                                                    R1, AL 모드 i: 적격 1, n* ≤ 40 대상 0, 그중 α = 1 의 n* 보다 작은 대상 0 (Canada|x: n*=NA(α=1 NA, 블록 합집합 20, 분할 최소 20))
+     L3   보조            판정 불가(적격 대상 1개 < 2)                                                                    R1, AL 모드 x: 적격 1, n* ≤ 40 대상 0, 그중 α = 1 의 n* 보다 작은 대상 0 (Canada|x: n*=NA(α=1 NA, 블록 합집합 20, 분할 최소 20))
+     L4    주                          판정 불가                                       두 가중 CI 상한 < 0 인 최소 n: 4지역 평균 None, 2–3지역 평균 None | n=3: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+     L5    주                          판정 불가                                      cfm: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+     L5    주                          판정 불가                                     ddpm: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+     L5    주                          판정 불가                                      ftt: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+     L5    주                          판정 불가                                      mlp: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+     L5    주                          판정 불가                                    nflow: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+     L5    주                          판정 불가                                  realmlp: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+     L5    주                          판정 불가                                    ridge: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+     L5    주                          판정 불가                                     tabm: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+     L6    주                             기각                                                                                                                                   알래스카 통과 조합의 주 4지역 통과 3/20(두 가중, 방법별 기준 λ)
+     L6   보조                판정 불가(통과 조합 없음)                                                                                                                              민감도: 분할 안 채점 블록 ≥ 5 인 알래스카 대상만으로 조합을 고른 경우 0/0
+     L6   보조                             기각                                                                                                                                                    민감도: 셀 가중 CI 만 쓴 경우 4/20
+     L7    주                             기각                                                                                                                                            Canada|x n=40:X; Canada|x n=-1:X
+     L8    주                  판정 불가(지역 1/4)                                                                                                                           Δ 3.60 [-0.73, 6.20], 블록 등가중 [2.96, 6.54], 지역 1/4
