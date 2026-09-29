@@ -1,0 +1,428 @@
+{
+ "src_id": "grl_ilulissat_scheer",
+ "name": "Scheer 등 2024, 일루리사트 ALT 탐침 측정 2020–2021(PANGAEA 964306)",
+ "url": "https://doi.org/10.1594/PANGAEA.964306",
+ "doi": "10.1594/PANGAEA.964306",
+ "accessed": "2026-09-29",
+ "files": [
+  {
+   "name": "ILU_ALT_measurements_Vegetation_surveys_2020-2021.txt",
+   "size_bytes": 63162,
+   "sha256": "b592dfaee013dec4cc425faa7f37d7bbb94eeae2c93ac3848a99bade4e0c8257",
+   "url": "https://download.pangaea.de/dataset/964306/files/ILU_ALT_measurements_Vegetation_surveys_2020-2021.txt"
+  },
+  {
+   "name": "Metadata.pdf",
+   "size_bytes": 173334,
+   "sha256": "fa39cedafdeca64ff704a523ec197afd3d8166a79e713c32b6c26b3b4c1c6c84",
+   "url": "https://download.pangaea.de/reference/123920/attachments/Metadata.pdf"
+  },
+  {
+   "name": "PANGAEA_964306_description.tab",
+   "size_bytes": 7839,
+   "sha256": "d5ff38dd9dab8662a3787b3ef548990a869d354ce0ff3125990d1777a72e636c",
+   "url": "https://doi.pangaea.de/10.1594/PANGAEA.964306?format=textfile"
+  }
+ ],
+ "license": "CC-BY-4.0",
+ "license_basis": "PANGAEA 자료 설명의 License 항목(Creative Commons Attribution 4.0 International)",
+ "citation": "Scheer, Johanna; Caduff, Rafael; How, Penelope; Marcer, Marco; Strozzi, Tazio; Bartsch, Annett; Ingeman-Nielsen, Thomas (2024): Mapping the frost susceptibility of the ground from thaw-season InSAR surface displacements and extrapolated active layer thicknesses, Ilulissat, West-Greenland [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.964306",
+ "related_paper": "Scheer, J.; Caduff, R.; How, P.; Marcer, M.; Strozzi, T.; Bartsch, A.; Ingeman-Nielsen, T. (2023): Thaw-Season InSAR Surface Displacements and Frost Susceptibility Mapping to Support Community-Scale Planning in Ilulissat, West Greenland. Remote Sensing 15(13), 3310, https://doi.org/10.3390/rs15133310",
+ "parser": "scripts/1_data_prep/parse_ext_grl_ilulissat_scheer.py",
+ "parser_git_commit": "a112cef1ed17fe2db74898b3861a5f82de753fdd",
+ "parser_git_note": "parser_git_commit 은 실행 시점의 HEAD 다. parser_tracked 가 false 이면 파서는 아직 커밋되지 않았다",
+ "parser_tracked": false,
+ "parser_sha256": "4ebeb4dcb7dffe205fc87b869aa56d529182838cb6b99e5a0df2fb1dcbcb4dea",
+ "schema_version": "1.0",
+ "n_rows_raw": 395,
+ "n_rows_raw_note": "원자료의 한 행은 한 지점이고 ALT 열이 두 개(2020, 2021)다. 값 칸은 790개, 빈 칸은 237개다",
+ "n_rows_points": 553,
+ "n_by_label_def": {
+  "direct_eos": 553
+ },
+ "n_by_method": {
+  "probe": 553
+ },
+ "n_by_eos_basis": {
+  "dataset_statement": 553
+ },
+ "n_excluded_by_reason": {
+  "site_no_alt_both_years": 18,
+  "note": "두 해 모두 ALT 값이 없는 지점이다. 라벨 값이 없어 점 자료에 행을 만들지 않았다. 값이 있는 기록은 지우지 않았다"
+ },
+ "coordinate_conversion": {
+  "used": "파일의 LATITUDE, LONGITUDE(WGS84 십진 도) 문자열을 그대로 썼다. 변환하지 않았다",
+  "sign": "경도는 모두 음수(서경)다",
+  "precision": "소수 5자리(끝자리 0 생략). coord_prec_deg = 0.00001",
+  "utm_check": {
+   "done": true,
+   "n": 395,
+   "max_abs_dlat_deg": 5e-06,
+   "max_abs_dlon_deg": 5e-06,
+   "max_dist_m": 0.59,
+   "median_dist_m": 0.23
+  },
+  "utm_check_note": "Easting, Northing(EPSG:3182)을 WGS84 로 바꿔 파일의 위경도와 비교한 검산이다"
+ },
+ "label_rule": {
+  "method": "probe. 근거는 Metadata.pdf 표 13 의 'Active layer thicknesses (ALT) were probed'",
+  "label_def": "direct_eos",
+  "eos_basis": "dataset_statement. Metadata.pdf 표 13 의 'at the end of the summer in 2020 and/or 2021', 표 14 의 'at the end of the 2020(2021) thawing season'",
+  "month": "빈 칸. 파일에 ALT 측정 날짜가 없다",
+  "value_kind": "annual_value. 연도별 값 하나가 주어진다. 방문 횟수는 확인하지 못했다",
+  "n_obs": "1(모름). avg_CALM 행은 평균에 들어간 절점 수",
+  "unit": "cm(열 이름 'ALT_2020 [cm]', 'ALT_2021 [cm]'). 환산하지 않았다",
+  "missing_code": "빈 칸. 숫자 부호(-999 등)와 '>' 표기는 없었다"
+ },
+ "right_censored": {
+  "rule": "주석 'Out of range' 는 탐침 범위 초과로 보고 1 을 주었다. 주석 'ALT might be superior to indicated value' 는 값이 하한이라는 뜻이므로 1 을 주었다",
+  "rows": [
+   {
+    "site_id": "H2",
+    "year": 2021,
+    "alt_cm": 107.0,
+    "reason": "out_of_range"
+   },
+   {
+    "site_id": "ERT_CALM_22",
+    "year": 2021,
+    "alt_cm": 72.0,
+    "reason": "lower_bound_unreliable"
+   },
+   {
+    "site_id": "ERT_CALM_40",
+    "year": 2021,
+    "alt_cm": 110.0,
+    "reason": "out_of_range"
+   },
+   {
+    "site_id": "ERT_CALM_41",
+    "year": 2021,
+    "alt_cm": 110.0,
+    "reason": "out_of_range"
+   },
+   {
+    "site_id": "ERT_CALM_42",
+    "year": 2021,
+    "alt_cm": 110.0,
+    "reason": "out_of_range"
+   },
+   {
+    "site_id": "ERT_CALM_59",
+    "year": 2021,
+    "alt_cm": 74.0,
+    "reason": "lower_bound_unreliable"
+   },
+   {
+    "site_id": "Center",
+    "year": 2021,
+    "alt_cm": 110.0,
+    "reason": "out_of_range"
+   }
+  ],
+  "same_value_without_comment": [
+   {
+    "site_id": "ILU16013T",
+    "year": 2021,
+    "alt_cm": 107.0
+   },
+   {
+    "site_id": "ERT_CALM_43",
+    "year": 2021,
+    "alt_cm": 110.0
+   }
+  ],
+  "same_value_note": "절단 표기 행과 값이 같지만 주석이 없는 행이다. right_censored = 0 으로 두고 notes 에 적었다"
+ },
+ "derived_and_duplicate_rows": {
+  "avg_calm_sites": 37,
+  "avg_calm_reproduced": 37,
+  "avg_calm_rule": "화소 중심(Easting, Northing) ±5 m 안의 CALM 격자 절점 평균과 두 해 모두 0.01 cm 안에서 일치",
+  "calm_grid_nodes": 121,
+  "calm_grid_nodes_covered_once": 121,
+  "calm_grid_nodes_covered_more": 0,
+  "exact_duplicates": [
+   {
+    "site_id": "Drill16_2",
+    "dup_of": "Drill16_1"
+   },
+   {
+    "site_id": "T14_Drill4_2",
+    "dup_of": "T14_Drill4_1"
+   }
+  ],
+  "same_coord_different_value": [
+   [
+    "ILU2018-04",
+    "ERT_station"
+   ]
+  ],
+  "dup_of_format": "<src_id>:<site_id>. avg_CALM 행은 절점이 여러 개라 세미콜론으로 이었다"
+ },
+ "florsurv_date": {
+  "meaning": "식생 조사일이다. ALT 측정일과 같은지 확인하지 못했다. month 와 date 에 쓰지 않았다",
+  "distinct_dates": [
+   "2020-08-30",
+   "2020-08-31",
+   "2020-09-01",
+   "2020-09-02",
+   "2020-09-03",
+   "2020-09-04",
+   "2020-09-07",
+   "2020-09-08",
+   "2020-09-09",
+   "2020-09-10",
+   "2020-09-11",
+   "2020-09-14",
+   "2021-09-22",
+   "2021-09-24"
+  ],
+  "sites_with_alt_and_florsurv_date": 156,
+  "florsurv_year_has_alt_value": 155
+ },
+ "cusp_comparison": {
+  "done": true,
+  "file": "data/raw/cusp_v1_1/cusp_v1.1.csv",
+  "source_key": "Scheer_etal_2023",
+  "n_cusp_rows": 553,
+  "n_points_rows": 553,
+  "n_matched": 553,
+  "n_only_cusp": 0,
+  "n_only_points": 0,
+  "n_value_diff_gt_0p01cm": 0,
+  "max_abs_value_diff_cm": 0.0,
+  "max_abs_coord_diff_deg": 0.0,
+  "cusp_dates": [
+   "2020-09-01",
+   "2021-09-01"
+  ],
+  "cusp_obs_limit_filled": 0,
+  "cusp_quality_flags": [
+   "DA"
+  ],
+  "note": "CUSP 의 날짜는 연도별로 한 값이다. 원자료에 ALT 측정 날짜가 없으므로 CUSP 의 날짜를 month 에 쓰지 않았다. 자료원 사이의 중복은 계획서 6B.3 에 따라 이 자료원(개별 저장소 표)을 우선한다"
+ },
+ "related_sources": [
+  {
+   "src_id": "cusp_v1_1",
+   "relation": "같은 기록의 재수록(출처 키 Scheer_etal_2023)",
+   "priority": "이 자료원을 우선한다. CUSP 쪽 행에 dup_of 를 적는 일은 CUSP 파서의 몫이다"
+  },
+  {
+   "src_id": "mythaw_pangaea",
+   "relation": "myThaw 의 'Ilulissat CALM site'(69.219, -51.055, 2022년과 2023년)는 이 자료의 CALM 격자와 같은 1 km 셀에 든다. 연도가 달라 중복 기록은 아니다",
+   "basis": "탐색 단계 후보 표의 값이다. myThaw 원자료와 직접 대조하지는 않았다"
+  },
+  {
+   "src_id": "v3",
+   "relation": "v3 의 가장 가까운 F4_direct 셀은 CALM G3(Disko, 69.25, -53.5)이고 같은 macro(NAtlantic)다. 0.01° 안에 드는 v3 셀은 없다"
+  }
+ ],
+ "cell_preview": {
+  "rule": "ky = floor(lat/0.009), kx = floor(lon*cos(phi)/0.009), phi = (ky+0.5)*0.009 deg",
+  "n_rows_eligible": 470,
+  "n_sites_eligible": 331,
+  "n_cells": 13,
+  "n_blocks": 1,
+  "blocks": [
+   13799897
+  ],
+  "share_sites_top2_cells": 0.728,
+  "selection": "label_def = direct_eos, qc_flag = ok, right_censored = 0, dup_of 없음",
+  "cells": [
+   {
+    "ky": 7689,
+    "kx": -2017,
+    "n_sites": 1,
+    "lat": 69.20537,
+    "lon": -51.11336,
+    "alt_cm": 40.0
+   },
+   {
+    "ky": 7690,
+    "kx": -2016,
+    "n_sites": 1,
+    "lat": 69.21433,
+    "lon": -51.1066,
+    "alt_cm": 54.3
+   },
+   {
+    "ky": 7690,
+    "kx": -2015,
+    "n_sites": 3,
+    "lat": 69.2142,
+    "lon": -51.08978,
+    "alt_cm": 58.63
+   },
+   {
+    "ky": 7690,
+    "kx": -2014,
+    "n_sites": 158,
+    "lat": 69.21763,
+    "lon": -51.05823,
+    "alt_cm": 68.08
+   },
+   {
+    "ky": 7690,
+    "kx": -2013,
+    "n_sites": 28,
+    "lat": 69.21626,
+    "lon": -51.03493,
+    "alt_cm": 58.29
+   },
+   {
+    "ky": 7691,
+    "kx": -2014,
+    "n_sites": 25,
+    "lat": 69.22571,
+    "lon": -51.07807,
+    "alt_cm": 70.63
+   },
+   {
+    "ky": 7691,
+    "kx": -2013,
+    "n_sites": 83,
+    "lat": 69.22014,
+    "lon": -51.05755,
+    "alt_cm": 66.42
+   },
+   {
+    "ky": 7692,
+    "kx": -2014,
+    "n_sites": 1,
+    "lat": 69.23626,
+    "lon": -51.10577,
+    "alt_cm": 78.63
+   },
+   {
+    "ky": 7692,
+    "kx": -2013,
+    "n_sites": 5,
+    "lat": 69.23227,
+    "lon": -51.08039,
+    "alt_cm": 63.18
+   },
+   {
+    "ky": 7692,
+    "kx": -2012,
+    "n_sites": 18,
+    "lat": 69.23417,
+    "lon": -51.05421,
+    "alt_cm": 63.37
+   },
+   {
+    "ky": 7693,
+    "kx": -2011,
+    "n_sites": 3,
+    "lat": 69.24128,
+    "lon": -51.05688,
+    "alt_cm": 77.48
+   },
+   {
+    "ky": 7694,
+    "kx": -2010,
+    "n_sites": 2,
+    "lat": 69.2499,
+    "lon": -51.0451,
+    "alt_cm": 66.6
+   },
+   {
+    "ky": 7695,
+    "kx": -2008,
+    "n_sites": 3,
+    "lat": 69.26169,
+    "lon": -51.02229,
+    "alt_cm": 90.57
+   }
+  ],
+  "all_rows_variant": {
+   "rule": "ky = floor(lat/0.009), kx = floor(lon*cos(phi)/0.009), phi = (ky+0.5)*0.009 deg",
+   "n_rows_eligible": 553,
+   "n_sites_eligible": 377,
+   "n_cells": 13,
+   "n_blocks": 1,
+   "blocks": [
+    13799897
+   ],
+   "share_sites_top2_cells": 0.753,
+   "selection": "점 자료의 모든 행(파생 중복과 절단 행 포함)"
+  },
+  "note": "v3 와의 0.01° 중복 제거와 공변량 유효성 판정은 v4 조립 단계의 일이다. 탐색 단계 추정(셀 14개)은 셀 색인 정의가 달랐다(탐색 표의 ky 는 7696 에서 7702, 이 규칙의 ky 는 7689 에서 7695)"
+ },
+ "qc_summary": {
+  "n_sites_raw": 395,
+  "n_sites_points": 377,
+  "n_rows_points": 553,
+  "n_rows_by_year": {
+   "2020": 242,
+   "2021": 311
+  },
+  "n_sites_by_n_years": {
+   "1": 201,
+   "2": 176
+  },
+  "n_sites_by_group": {
+   "ALT_T": 21,
+   "CALM_grid": 121,
+   "Drill": 10,
+   "ERT_CALM": 61,
+   "Q50": 21,
+   "T14": 25,
+   "avg_CALM": 37,
+   "borehole_ILU": 9,
+   "iB": 15,
+   "letter": 47,
+   "other": 10
+  },
+  "n_by_macro": {
+   "NAtlantic": 553
+  },
+  "n_by_subunit": {
+   "Greenland": 553
+  },
+  "year_range": [
+   2020,
+   2021
+  ],
+  "alt_cm_all_rows": {
+   "n": 553,
+   "min": 31.5,
+   "median": 72.0,
+   "max": 110.0,
+   "mean": 69.9
+  },
+  "alt_cm_primary_rows": {
+   "n": 470,
+   "min": 31.5,
+   "median": 70.75,
+   "max": 110.0,
+   "mean": 68.859
+  },
+  "primary_rows_definition": "dup_of 없음, right_censored = 0, qc_flag = ok",
+  "n_rows_primary": 470,
+  "n_sites_primary": 331,
+  "n_rows_right_censored": 7,
+  "n_rows_dup_of": 76,
+  "n_rows_qc_not_ok": 0,
+  "lat_range": [
+   69.20537,
+   69.26307
+  ],
+  "lon_range": [
+   -51.11336,
+   -51.01941
+  ]
+ },
+ "unverified_items": [
+  "지점별 ALT 측정 날짜. 파일과 설명서에 없다. 계절 말 근거는 자료 설명뿐이다",
+  "탐침 길이와 지점별 반복 측정 수. 소수 값(예: 90.33, 69.67)은 반복 측정 평균으로 보이나 확인하지 못했다",
+  "논문 본문(Scheer 등 2023, Remote Sensing 15, 3310)의 측정 절차. mdpi.com 이 HTTP 403 을 돌려주어 읽지 못했다",
+  "지점별 시설 부지 여부. 조사 지역은 일루리사트 시가지와 주변이지만 파일에 지점별 표시가 없다. disturbed 는 빈 칸이다",
+  "주석 없이 값이 110 cm, 107 cm 인 행의 절단 여부",
+  "좌표가 같고 값이 다른 지점 쌍(ERT_station, ILU2018-04)의 위치 관계",
+  "주석 'Stony area, yearly ALT might not be reliable'(80-03B)의 값이 하한인지 여부. right_censored = 0 으로 두었다",
+  "주석 'Top frozen', 'Frozen', 'Ice thickness 14 cm' 의 뜻(지표 재동결 여부)",
+  "주석 'WTC and ALT_2016 measurements from drilling log information (08-2016)'(ILU16 시추공 8지점)과 'ALT_2018 from drilling log information (08-2018)'(ILU2018-03, ILU2018-04)이 있는 지점의 2020, 2021 값이 탐침 값인지 확인하지 못했다. 파일에 ALT_2016, ALT_2018 열은 없고, 설명서 표 14 는 ALT 2020, ALT 2021 을 해당 해 융해기 말의 값으로 정의한다. 탐침 값으로 두고 주석은 notes 에 남겼다",
+  "주석 'Data from iB ... included here'(CALM_H5, CALM_F6, CALM_D7)가 ALT 값까지 합친 것인지 식생 자료만 합친 것인지 확인하지 못했다. 언급된 iB 지점(A5-A30, B7-ABB, E7-D3E)은 파일에 따로 없으므로 파일 안의 중복은 아니다"
+ ]
+}

@@ -1,0 +1,393 @@
+{
+ "src_id": "qtp_fu_temp",
+ "name": "Fu 2025, 청장고원 동토 지온과 ALT 자료 2001-2020(figshare 29206613)",
+ "url": "https://doi.org/10.6084/m9.figshare.29206613.v1",
+ "doi": "10.6084/m9.figshare.29206613.v1",
+ "accessed": "2026-09-29",
+ "generated": "2026-09-29",
+ "schema_version": "1.0",
+ "files": [
+  {
+   "name": "Permafrost_Profile_QTP_2001-2020.xlsx",
+   "size": 69157,
+   "sha256": "c3d09908c5f3d5e7bfd8c4dc6eb2e404298da452fd6668ac2b89886da07f078d",
+   "md5": "3c7218c5eb343450cd13ff91a151315e",
+   "url": "https://ndownloader.figshare.com/files/55143119",
+   "md5_matches_figshare": true,
+   "orig_name": "Permafrost_Profile_QTP_2001-2020.xlsx"
+  },
+  {
+   "name": "README.txt",
+   "size": 2457,
+   "sha256": "ea64ea9adf99dfb125b0519d92a6c980ab190a95958dea2cd7b78756b04714b2",
+   "md5": "75a52e66137bb415670d3348f5123cff",
+   "url": "https://ndownloader.figshare.com/files/55023443",
+   "md5_matches_figshare": true,
+   "orig_name": "READEME- Dataset for Qinghai-Tibet Plateau Permafrost Profiles (2001–2020).txt"
+  }
+ ],
+ "raw_dir": "data/raw/qtp_fu_temp",
+ "license": "CC BY 4.0",
+ "license_basis": "figshare 기록의 license 항목과 README 의 License 절",
+ "citation": "Fu, Ziteng (2025). Permafrost ground temperature and active layer thickness data on the Qinghai–Tibet Plateau (2001–2020). figshare. Dataset. https://doi.org/10.6084/m9.figshare.29206613.v1",
+ "related_article": "README 가 적은 연결 논문 제목: Non-temperature Environmental Drivers Modulate Warming-induced 21st Century Permafrost Degradation on the Tibetan Plateau. DOI 와 게재 여부는 확인하지 못했다.",
+ "parser": "scripts/1_data_prep/parse_ext_qtp_fu_temp.py",
+ "parser_sha256": "6b52fda94620da3ef45b70075adc26fbd1bebd6e557db9fca4d07248cb058c1a",
+ "parser_git_commit": "6799b74",
+ "parser_git_state": "HEAD 6799b74, 파서 파일 상태 ??(?? 는 미추적)",
+ "role": "보조 라벨(지온 유도). 확인적 풀에 넣지 않는다. 계획서 6B.5 의 L39 비교 대상",
+ "n_rows_raw": 1100,
+ "n_rows_raw_detail": {
+  "sheet_SITE_rows": 54,
+  "sheet_ALT_year_rows": 20,
+  "sheet_ALT_site_columns": 55,
+  "sheet_ALT_cells": 1100,
+  "sheet_ALT_numeric_cells": 1080,
+  "sheet_ALT_missing_cells": 20
+ },
+ "n_rows_points": 1080,
+ "n_sites": 54,
+ "n_years_per_site": {
+  "min": 20,
+  "max": 20
+ },
+ "year_range": [
+  2001,
+  2020
+ ],
+ "n_by_label_def": {
+  "temp_derived": 1080
+ },
+ "n_by_method": {
+  "borehole_temp": 1080
+ },
+ "n_by_macro": {
+  "Tibet": 1080
+ },
+ "n_by_subunit": {
+  "QTEC": 1080
+ },
+ "n_by_qc_flag": {
+  "ok": 981,
+  "coord": 80,
+  "range": 19
+ },
+ "n_rows_qc_ok": 981,
+ "n_excluded_by_reason": {
+  "missing_code_and_no_site_row": 20
+ },
+ "excluded_detail": "지점 WL3 은 시트 ALT 의 20개 연도가 모두 '####' 이고 시트 SITE 에 행이 없다. 값과 좌표가 없으므로 점 자료에 넣지 않았다.",
+ "sites_in_ALT_not_in_SITE": [
+  "WL3"
+ ],
+ "sites_in_SITE_not_in_ALT": [],
+ "alt_cm_distribution": {
+  "all_rows": {
+   "n": 1080,
+   "min": 82.0,
+   "p25": 219.75,
+   "median": 275.5,
+   "mean": 296.6,
+   "p75": 343.0,
+   "max": 780.0
+  },
+  "qc_ok_rows": {
+   "n": 981,
+   "min": 82.0,
+   "p25": 220.0,
+   "median": 274.0,
+   "mean": 291.2,
+   "p75": 337.0,
+   "max": 600.0
+  }
+ },
+ "units": {
+  "raw_unit": "m",
+  "factor": 100.0,
+  "basis": "README 의 단위 표기는 'Centimeters (m)' 로 모순이다. 원자료 값의 범위가 0.82-7.80, 중앙값 2.755 이고 소수 둘째 자리까지 적혀 있다. v3 표에서 0.01도 안에 있는 셀의 ALT(cm)와 지점 평균(cm)을 대조했다(unit_check_vs_v3).",
+  "unit_check_vs_v3": [
+   {
+    "site_id": "QSH-3",
+    "site_mean_cm": 306.0,
+    "v3_loc_id": 17430,
+    "v3_source_id": "F4_calm_temp",
+    "v3_alt_cm": 316.2
+   },
+   {
+    "site_id": "WD1",
+    "site_mean_cm": 303.9,
+    "v3_loc_id": 17389,
+    "v3_source_id": "F4_direct",
+    "v3_alt_cm": 298.1
+   }
+  ]
+ },
+ "missing_code": "####",
+ "right_censored": "원자료에 '>' 표기나 하한 표시가 없다. 모든 행을 0 으로 두었다.",
+ "coordinate_conversion": {
+  "method": "시트 SITE 의 좌표는 십진 도 수치 또는 수식이다. 수식은 도 + 분/60 과 도 + (분 + 초/60)/60 두 형태이고 파서가 직접 계산했다. 북위와 동경이며 부호 변환은 없다. 출력은 소수 7자리까지 적고 뒤의 0 을 뺐다.",
+  "n_sites_by_raw_form": {
+   "formula:deg_decmin": 11,
+   "decimal_number:decimal": 9,
+   "decimal_number:decimal_from_decmin": 15,
+   "decimal_number:decimal_from_decmin+decimal": 6,
+   "formula:dms": 8,
+   "decimal_number:decimal_from_dms": 1,
+   "decimal_number:decimal+decimal_from_decmin": 4
+  },
+  "max_abs_diff_formula_vs_cached_value_deg": 0.0,
+  "coord_prec_deg": "원자료 표기의 자릿수에서 계산한 표기상 정밀도다(위도와 경도 가운데 작은 값. 끝자리 0 이 표기에서 사라지기 때문이다). 정확도가 아니다. README 는 일부 지점 위치가 보안을 이유로 일반화되었을 수 있다고 적었다.",
+  "datum": "원자료에 측지계 표기가 없다. WGS84 로 가정했다."
+ },
+ "qc_rules": {
+  "range": "0 < alt_cm <= 600 이 아닌 행",
+  "coord_R1": "보고 고도와 Copernicus DEM GLO-30 화소 고도의 차가 50 m 를 넘는 지점",
+  "coord_R2": "위도 또는 경도가 다른 지점과 1e-05 도 안에서 같은 쌍 가운데 DEM 고도 차의 절댓값이 큰 쪽. DEM 을 읽지 못하면 두 지점 모두",
+  "same_series": "두 지점의 연 값이 같은 연도가 5개 이상이면 notes 에 value_same_as 로 적는다. qc_flag 는 바꾸지 않는다"
+ },
+ "coord_flagged_sites": {
+  "XSH-2": [
+   "R1 dem_minus_elev_m=-105"
+  ],
+  "CM2": [
+   "R2 lat_same_as=WD1"
+  ],
+  "WD4": [
+   "R1 dem_minus_elev_m=-122",
+   "R2 latlon_same_as=WD3"
+  ],
+  "TG4": [
+   "R1 dem_minus_elev_m=+101"
+  ]
+ },
+ "coord_shared_pairs": [
+  {
+   "site_a": "CM2",
+   "site_b": "WD1",
+   "shared": "lat",
+   "flagged": [
+    "CM2"
+   ]
+  },
+  {
+   "site_a": "WD4",
+   "site_b": "WD3",
+   "shared": "latlon",
+   "flagged": [
+    "WD4"
+   ]
+  }
+ ],
+ "range_flagged_sites": {
+  "TT1": 1,
+  "TG2": 5,
+  "TM1": 9,
+  "AMD1": 3,
+  "AD1": 1
+ },
+ "same_series_pairs": [
+  {
+   "site_a": "QSH-2",
+   "site_b": "QSH-3",
+   "n_years": 12,
+   "year_min": 2003,
+   "year_max": 2014,
+   "years": [
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014
+   ]
+  }
+ ],
+ "dem_elevation_check": {
+  "dem": "Copernicus DEM GLO-30(data/raw/dem, 1도 타일)",
+  "n_sites_checked": 54,
+  "n_sites_unchecked": 0,
+  "abs_diff_m_median": 6.6,
+  "abs_diff_m_max": 122.2,
+  "n_sites_over_tol": 3,
+  "per_site": {
+   "XDT-1": 5.1,
+   "KLS-1": -2.7,
+   "KM2": -2.6,
+   "BD1": 1.8,
+   "XSH-1": -4.4,
+   "XSH-2": -104.6,
+   "CM3": -4.1,
+   "QSH-1": -7.3,
+   "QSH-2": -7.1,
+   "QSH-3": 0.0,
+   "CM5": -3.9,
+   "CM6": 0.1,
+   "CM7": -2.9,
+   "CM2": 39.3,
+   "WD1": -15.8,
+   "WD4": -122.2,
+   "WD3": -1.2,
+   "WD2": -6.9,
+   "HR3": -3.7,
+   "BL4": -20.2,
+   "BL5": -18.1,
+   "BL6": -7.5,
+   "BL7": -5.9,
+   "BL2": 1.6,
+   "BL3": -0.7,
+   "BL1": 8.3,
+   "BL10": -9.2,
+   "BL11": -12.4,
+   "BL12": -12.4,
+   "BL8": -6.4,
+   "BL9": -2.0,
+   "FH1": 2.1,
+   "FH2": -7.2,
+   "FH3": -8.8,
+   "YM1": -8.1,
+   "WL1": -38.4,
+   "KL1": 4.0,
+   "KXL1": -3.8,
+   "KL3": 2.4,
+   "TT1": 16.5,
+   "WQ1": -8.3,
+   "WQ2": -9.4,
+   "TG2": -7.3,
+   "TGB1": -3.4,
+   "TG3": 40.1,
+   "TG4": 101.2,
+   "TG1": -5.6,
+   "TEM1": -7.0,
+   "TJ1": -18.0,
+   "TM1": -1.4,
+   "AMD1": 2.5,
+   "TJ2": 1.9,
+   "AD1": 1.0,
+   "AD2": -9.7
+  }
+ },
+ "v3_proximity": {
+  "v3": {
+   "read": true,
+   "file": "data/processed/fidelity_base_v3.csv",
+   "n_rows_in_tibet_box": 6
+  },
+  "rule": "체비쇼프 거리 0.01 도 이내",
+  "sites_near_v3": {
+   "QSH-3": [
+    {
+     "loc_id": 17430,
+     "source_id": "F4_calm_temp",
+     "region": "CALM_QTP_China",
+     "alt_cm": 316.2
+    }
+   ],
+   "WD1": [
+    {
+     "loc_id": 17389,
+     "source_id": "F4_direct",
+     "region": "QTP_CN",
+     "alt_cm": 298.1
+    }
+   ]
+  }
+ },
+ "cell_estimate": {
+  "note": "v4 조립 전의 참고값이다. 셀 색인은 계획서 6B.3 의 식을 썼고, v3 의 F4_direct 셀과 체비쇼프 0.01도 이내인 셀을 중복으로 셌다.",
+  "all_sites": {
+   "n_sites": 54,
+   "n_cells": 47,
+   "n_cells_dup_v3_f4_direct": 1,
+   "n_new_cells": 46,
+   "n_new_blocks": 11,
+   "n_blocks_all": 11,
+   "multi_site_cells": [
+    [
+     "XSH-1",
+     "XSH-2"
+    ],
+    [
+     "WD4",
+     "WD3"
+    ],
+    [
+     "BL4",
+     "BL5"
+    ],
+    [
+     "BL6",
+     "BL7"
+    ],
+    [
+     "BL2",
+     "BL3"
+    ],
+    [
+     "BL1",
+     "BL10"
+    ],
+    [
+     "BL11",
+     "BL12"
+    ]
+   ],
+   "dup_cells": [
+    [
+     "WD1"
+    ]
+   ]
+  },
+  "excluding_coord_flagged_sites": {
+   "n_sites": 50,
+   "n_cells": 45,
+   "n_cells_dup_v3_f4_direct": 1,
+   "n_new_cells": 44,
+   "n_new_blocks": 11,
+   "n_blocks_all": 11,
+   "multi_site_cells": [
+    [
+     "BL4",
+     "BL5"
+    ],
+    [
+     "BL6",
+     "BL7"
+    ],
+    [
+     "BL2",
+     "BL3"
+    ],
+    [
+     "BL1",
+     "BL10"
+    ],
+    [
+     "BL11",
+     "BL12"
+    ]
+   ],
+   "dup_cells": [
+    [
+     "WD1"
+    ]
+   ]
+  }
+ },
+ "unverified_items": [
+  "시트 ALT 는 54개 지점 모두 2001-2020년의 20개 연도 값이 빠짐없이 있다. README 는 자료 공백을 보정했다고 적었으나 어느 연도가 관측에서 나온 값이고 어느 연도가 보간 또는 재구성 값인지는 자료에 없다. 확인하지 못했다.",
+  "ALT 산정 방법의 세부(온도 센서 깊이, 0도 등온선 내삽 방식, 연 최대의 기준일)는 README 에 없다. README 의 설명은 '지온 단면 해석으로 추정, 불확도 약 5 cm' 이다.",
+  "README 는 일부 지점 위치가 일반화되었을 수 있다고 적었다. 어느 지점인지는 적지 않았다.",
+  "좌표의 측지계는 자료에 없다.",
+  "coord 표시 지점의 원인(좌표 오기인지 고도 오기인지)은 확인하지 못했다. 좌표와 값은 고치지 않았다.",
+  "QSH-2 와 QSH-3 의 같은 값이 원자료의 복사 오류인지 같은 시추공 자료의 공유인지는 확인하지 못했다.",
+  "시추공이 자연 지반에 있는지 도로나 철도 노반 가까이에 있는지는 자료에 없다. disturbed 열은 비워 두었다.",
+  "연결 논문의 DOI 와 게재 여부는 확인하지 못했다.",
+  "MAGT 가 0도 이상인 지점(notes 의 magt_c)에서 ALT 값이 영구동토 상한 깊이를 뜻하는지는 확인하지 못했다."
+ ]
+}

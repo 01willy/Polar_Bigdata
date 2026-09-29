@@ -1,0 +1,1007 @@
+{
+ "src_id": "cusp_v1_1",
+ "name": "CUSP v1.1 합성 관측표 가운데 Jorgenson & Kanevskiy 2025, Petrone 등 2016 출처 행",
+ "url": "https://github.com/jonschwenk/cusp/releases/tag/v1.1",
+ "doi": "",
+ "accessed": "2026-09-29",
+ "doi_note": "CUSP 자체의 DOI 는 확인하지 못했다. 원 출처의 DOI 는 10.18739/A27P8TG0G, 10.1594/PANGAEA.845258 이다",
+ "files": [
+  {
+   "name": "data/raw/cusp_v1_1/cusp_v1.1.csv",
+   "size_bytes": 9139558,
+   "sha256": "75e2acba72087156b14b6d980c97a3cb440a52484a10f274da52736456e7b039",
+   "source_url": "https://github.com/jonschwenk/cusp/releases/download/v1.1/cusp_v1.1.csv",
+   "note": "주 입력. sha256 이 RELEASE_INFO.md 의 값과 같다"
+  },
+  {
+   "name": "data/raw/cusp_v1_1/cusp_sources_v1.1.bib",
+   "size_bytes": 22005,
+   "sha256": "d540aca9968cc72f85b201a72ce92cdde8a10f64d12d27c16738db8bab3b767c",
+   "source_url": "https://github.com/jonschwenk/cusp/releases/download/v1.1/cusp_sources_v1.1.bib"
+  },
+  {
+   "name": "data/raw/cusp_v1_1/RELEASE_INFO.md",
+   "size_bytes": 2290,
+   "sha256": "06854ea108af7423f54f1b3c20a456fd24839017bad866f3ef4eeb43fa2fe204",
+   "source_url": "https://github.com/jonschwenk/cusp/releases/download/v1.1/RELEASE_INFO.md"
+  },
+  {
+   "name": "data/raw/cusp_v1_1/orig_adc_A27P8TG0G/tbl_Site_2024.csv",
+   "size_bytes": 2693303,
+   "sha256": "d3c87e71707ac91e62d97c04a96c020efd1577c32b4e40c4b9c9c6837d6e0389",
+   "source_url": "https://arcticdata.io/metacat/d1/mn/v2/object/urn%3Auuid%3A17a73344-cf00-468f-a51f-cf2196e3f8c2",
+   "note": "Arctic Data Center doi:10.18739/A27P8TG0G 의 tbl_Site_2024.csv(CC0 1.0)"
+  },
+  {
+   "name": "data/raw/cusp_v1_1/orig_adc_A27P8TG0G/REF_Site_Thermokarst_Types_2024.csv",
+   "size_bytes": 1368,
+   "sha256": "810a1a9bcfd02404cf7524a656134e794d4939f4b48181c4b5555df33dc1e17d",
+   "source_url": "https://arcticdata.io/metacat/d1/mn/v2/object/urn%3Auuid%3A75f53252-7b60-465e-ba96-19c74ad4ddd1",
+   "note": "같은 자료집의 열카르스트 유형 부호표"
+  },
+  {
+   "name": "data/raw/cusp_v1_1/orig_adc_A27P8TG0G/REF_Site_Thermokarst_Stage_2024.csv",
+   "size_bytes": 1890,
+   "sha256": "93326540c99af963f2eb2d6c32e26ac7a428977602eed9270fd556ce2038f0b7",
+   "source_url": "https://arcticdata.io/metacat/d1/mn/v2/object/urn%3Auuid%3Ad7f9363c-6dd5-472c-9d87-b4f2388ba5df",
+   "note": "같은 자료집의 열카르스트 단계 부호표"
+  },
+  {
+   "name": "data/raw/cusp_v1_1/repo_src/Petrone_etal_2016/GPR_profiles_with_depths_by_class.xlsx",
+   "size_bytes": 90168,
+   "sha256": "566853b3039edacc5e708233c70bf98d20f076022714099e2900fb041e552523",
+   "source_url": "https://raw.githubusercontent.com/jonschwenk/cusp/v1.1/data/Petrone_etal_2016/GPR/GPR_profiles_with_depths_by_class.xlsx",
+   "note": "CUSP 저장소의 파생 표. PANGAEA 원본(GPR_profiles.xlsx)에는 왕복 주시만 있다"
+  },
+  {
+   "name": "data/raw/cusp_v1_1/orig_pangaea_845258/Petrone-etal_2016/Probe_transects/Probe_transects.xlsx",
+   "size_bytes": 14247,
+   "sha256": "db43786d7743d98a2cee6e4338c3e11fdb8986f282fa41ffcd5089670ff1cee2",
+   "source_url": "https://hs.pangaea.de/model/grasp/Petrone-etal_2016.zip",
+   "note": "PANGAEA 845258 원본 압축 파일 안의 표(CC BY-NC-SA 3.0)"
+  }
+ ],
+ "license": "CUSP 저장소: LICENSE.txt 가 저작권 고지(© 2026 Triad National Security, LLC. All rights reserved)이고 공개 이용 허락 조항이 없다. 원 출처: Jorgenson & Kanevskiy 2025 는 CC0 1.0, Petrone 등 2016 은 CC BY-NC-SA 3.0(PANGAEA 메타데이터)",
+ "license_basis": "GitHub API 의 license 는 NOASSERTION. 저장소 LICENSE.txt 와 README 의 License 절을 읽었다. 원 출처 약관은 Arctic Data Center EML 의 intellectualRights 와 PANGAEA JSON-LD 의 license 값이다",
+ "redistribution": "점 자료(cusp_v1_1_points.csv)는 커밋하지 않는다(data/processed/ext_labels/.gitignore). 이 메타 파일에는 원자료 행을 넣지 않았다(집계 수와 대상 지역의 셀 요약만 있다)",
+ "citation": "CUSP contributors (2026): CUSP: CommUnity near-Surface Permafrost data synthesis, version 1.1 (released 2026-08-06). https://github.com/jonschwenk/cusp/releases/tag/v1.1 (DOI 는 확인하지 못했다)",
+ "citation_original": [
+  "Jorgenson, M. T.; Kanevskiy, M. (2025): Alaska Permafrost Soils Inventory and Thermokarst Monitoring Database 2024 Update. Arctic Data Center, https://doi.org/10.18739/A27P8TG0G",
+  "Petrone, J.; Sohlenius, G.; Johansson, E.; Lindborg, T.; Naslund, J.-O.; Stromgren, M.; Brydsten, L. (2016): Using ground-penetrating radar, topography and classification of vegetation to model the sediment and active layer thickness in a periglacial lake catchment, Western Greenland [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.845258; Earth Syst. Sci. Data 8, 663-677, https://doi.org/10.5194/essd-8-663-2016"
+ ],
+ "citation_note": "CUSP 는 CUSP 와 원 출처를 함께 인용하라고 요구한다(README, CITATION.cff)",
+ "parser": "scripts/1_data_prep/parse_ext_cusp_v1_1.py",
+ "parser_sha256": "fa5af2f0ed3ff3daa033b82e8e373c1af86acdda1e7714fc7825be5b5c36a5d0",
+ "parser_git_commit": "6799b74281c6bfda959c1267fed0c93262b192fc",
+ "parser_git_note": "파서 파일은 이 커밋에 들어 있지 않다(작업 트리의 새 파일). 값은 실행 시점의 HEAD 다",
+ "schema_version": "1.0",
+ "n_rows_raw": 79389,
+ "n_rows_raw_selected_sources": {
+  "Jorgenson_Kanevskiy_2025": 1494,
+  "Petrone_etal_2016": 666
+ },
+ "n_sources_raw": 57,
+ "n_rows_points": 1988,
+ "n_by_label_def": {
+  "direct_dated": 575,
+  "direct_eos": 1304,
+  "unknown": 109
+ },
+ "n_by_method": {
+  "gpr": 590,
+  "pit_core": 1322,
+  "probe": 76
+ },
+ "n_excluded_by_reason": {
+  "원자료원을 쓰는 출처(CALM=CALM, Moore_et_al_2025=ABoVE, Veremeeva_etal_2025=ALLena, Talucci_2024=FireALT, PERMOS_2024=PERMOS, Scheer_etal_2023=Scheer)": 33450,
+  "방법 불명 출처(Smith_Burgess_2000, Smith_Burgess_2002)": 408,
+  "라벨 규칙에 없는 그 밖의 출처(47개)": 43371,
+  "선택 출처 안: 깊이 값 없음(pf_observed = 1, thaw_depth 와 pf_depth 모두 빈 칸)": 172
+ },
+ "n_excluded_by_source": {
+  "Moore_et_al_2025": 18945,
+  "Pawley_2018": 9308,
+  "Veremeeva_etal_2025": 9186,
+  "Pastick": 7714,
+  "Jafarov_2016": 6049,
+  "ViPER_2018": 4820,
+  "CALM": 3697,
+  "Natali_2023": 2865,
+  "Walker_2022": 1804,
+  "Barrow_CALM_U1": 1353,
+  "Seward": 870,
+  "Talucci_2024": 835,
+  "NCSS_Lab_Data_Mart": 735,
+  "Wang_2018": 628,
+  "Scheer_etal_2023": 553,
+  "Hanston_etal_2024": 546,
+  "Minsley_2015": 534,
+  "Whitley_2018": 493,
+  "Myers-Smith_2005": 469,
+  "Utqiagvik_ERT_GPR": 438,
+  "Minsley_2017": 401,
+  "Ruess_2025": 377,
+  "Koyukuk_2018": 370,
+  "Langer_etal_2020": 292,
+  "James_2019": 270,
+  "Daanen_2017": 244,
+  "Jones_Jones_2025": 242,
+  "PERMOS_2024": 234,
+  "Smith_Burgess_2002": 231,
+  "Peirce_2020": 224,
+  "Zhang_2019": 215,
+  "Jones_2025": 202,
+  "Smith_Burgess_2000": 177,
+  "Patton_2021": 163,
+  "Fisher_2016": 150,
+  "Chapin_2025": 148,
+  "Bonnaventure_Whati": 145,
+  "Wagner_2019": 143,
+  "Holloway_2019": 141,
+  "Hollingsworth_2005": 140,
+  "James_2020": 140,
+  "Jorgenson_Kanevskiy_2022_Jago": 129,
+  "Kling_2025": 104,
+  "Zhao_2021": 98,
+  "Schwenk_PFRR": 85,
+  "Minsley_2021": 79,
+  "Kling_2016": 57,
+  "Seward_2022": 50,
+  "Douglas_Koyukuk_2022": 45,
+  "Selawik": 31,
+  "Jorgenson_Kanevskiy_2022_Gosling": 21,
+  "Cable_2017": 19,
+  "Obu_etal_2016": 12,
+  "Bakian_Dogaheh_2020": 6,
+  "Ebel_2018": 2
+ },
+ "coordinate_conversion": "변환 없음. CUSP 의 lat, lon 은 WGS84 십진 도이고 서경은 음수다. 문자열을 그대로 옮겼다. 선택한 행의 경도는 모두 음수(-165.62 에서 -50.07), 위도는 58.67 에서 83.09 다",
+ "coord_prec_rule": "Jorgenson & Kanevskiy 행은 0.01(CUSP 와 원 지점 표 모두 소수 2자리). Petrone 탐침 행은 0.000001(원본 표기 소수 6자리). Petrone GPR 행은 0.00005(5 m 칸 안 원 픽 좌표의 평균)",
+ "units": "thaw_depth, pf_depth, obs_limit 는 cm(CUSP 자료 규약). 단위 변환 없음. Petrone 원본은 m 이고 CUSP 가 100 을 곱했다(탐침 0.7 m → 70 cm 확인). alt_cm 은 소수 6자리로 맞췄다",
+ "missing_code": "CUSP 는 빈 칸. 원 지점 표의 999(융해 깊이), 9999(관측 깊이)는 CUSP 가 결측으로 처리했다",
+ "season_end_basis": "기록 날짜의 월이 8월 또는 9월이면 direct_eos. Jorgenson & Kanevskiy 와 Petrone 탐침은 record_date(원자료에 방문 날짜가 있다). Petrone GPR 은 dataset_statement(CUSP 가 2011-08-18 을 부여했고 본문은 2011년 8월에 탐침과 함께 조사했다고 적었다)",
+ "row_unit": "Jorgenson & Kanevskiy: 토양 단면(site_id)과 연도. Petrone: 탐침 점 하나 또는 GPR 5 m 칸 하나",
+ "disturb_rule": {
+  "jorgenson_kanevskiy": "원 지점 표의 DisturbClass 가 H* 이면 infrastructure, Nf·Nft 이면 burned, Ngt·Ngtm·Nft·Hct·Hfdt 이면 thermo_erosion, W 이거나 TopoMicro 가 W 이거나 TkarstType 이 호수 부호(DL, SL, LD, LS, LG)이거나 TKarstStage 가 LKD, LKS 이면 water. TkarstType 이 부호표의 열카르스트 지형이고 TKarstStage 가 UD, PC, PR 이 아니면 thermo_erosion. TKarstStage 가 부호표의 열화, 안정화, 재동결 단계이면 유형과 무관하게 thermo_erosion. 여러 종류면 burned, water, thermo_erosion, infrastructure 순으로 하나를 적고 전체는 notes 의 disturb_all 에 적는다. 열카르스트를 thermo_erosion 에 넣은 것은 형식의 어휘에 맞춘 파서의 해석이다",
+  "petrone": "GPR 5 m 칸 안 원 픽의 식생 등급에 Water 가 하나라도 있으면 water",
+  "fluvial_coastal_eolian": "Ng, Ngf*, Ngm*, Nge*, Ngl, Ngd 등 지형 과정 등급은 표시하지 않고 notes 에 부호만 적는다"
+ },
+ "jorgenson_kanevskiy_checks": {
+  "aux_match_level": {
+   "id+date+thaw": 992,
+   "id+date": 498,
+   "ambiguous": 4
+  },
+  "unknown_codes": {
+   "tkarst=NP": 5,
+   "tkarst=np": 2,
+   "tkarst=MT": 3,
+   "disturb_class=pt": 1,
+   "tkarst=TF": 3
+  },
+  "landmark_mismatch": 0,
+  "n_rows_thaw_ne_pf_depth": 0,
+  "coord_decimals_max_cusp": 2,
+  "coord_decimals_max_orig_site_table": 2,
+  "orig_rows_not_in_cusp_target_boxes": [
+   {
+    "SiteIDYear": "BY5-9-2019",
+    "date": "2019-08-03",
+    "lat": 73.15,
+    "lon": -79.99,
+    "thaw_cm": 45.0,
+    "region": "Bylot Island",
+    "soil_method": "L"
+   },
+   {
+    "SiteIDYear": "BY5-8-2019",
+    "date": "2019-08-03",
+    "lat": 73.15,
+    "lon": -79.99,
+    "thaw_cm": 45.0,
+    "region": "Bylot Island",
+    "soil_method": "LC"
+   },
+   {
+    "SiteIDYear": "BY2-14-2019",
+    "date": "2019-07-31",
+    "lat": 73.16,
+    "lon": -79.92,
+    "thaw_cm": 50.0,
+    "region": "Bylot Island",
+    "soil_method": "E"
+   },
+   {
+    "SiteIDYear": "BY2-15-2019",
+    "date": "2019-08-01",
+    "lat": 73.16,
+    "lon": -79.92,
+    "thaw_cm": 40.0,
+    "region": "Bylot Island",
+    "soil_method": "E"
+   },
+   {
+    "SiteIDYear": "KG2-2024",
+    "date": "2024-09-07",
+    "lat": 67.07,
+    "lon": -50.34,
+    "thaw_cm": 110.0,
+    "region": "Kangerlussuaq",
+    "soil_method": "L"
+   },
+   {
+    "SiteIDYear": "KG1K-2024",
+    "date": "2024-09-12",
+    "lat": 67.04,
+    "lon": -50.49,
+    "thaw_cm": 115.0,
+    "region": "Kangerlussuaq",
+    "soil_method": "r"
+   },
+   {
+    "SiteIDYear": "KG9-2024",
+    "date": "2024-09-06",
+    "lat": 67.02,
+    "lon": -50.6,
+    "thaw_cm": 110.0,
+    "region": "Kangerlussuaq",
+    "soil_method": "e"
+   },
+   {
+    "SiteIDYear": "KG5N-2024",
+    "date": "2024-09-11",
+    "lat": 67.15,
+    "lon": -50.07,
+    "thaw_cm": 58.0,
+    "region": "Kangerlussuaq",
+    "soil_method": "n"
+   },
+   {
+    "SiteIDYear": "KG8-2024",
+    "date": "2024-09-06",
+    "lat": 67.02,
+    "lon": -50.6,
+    "thaw_cm": 45.0,
+    "region": "Kangerlussuaq",
+    "soil_method": "L"
+   }
+  ]
+ },
+ "petrone_checks": {
+  "gpr_native_picks": 1357,
+  "gpr_cells_rebuilt": 590,
+  "gpr_rows_matched": 590,
+  "gpr_rows_unmatched": 0,
+  "gpr_rows_water": 79,
+  "probe_workbook": {
+   "n_points": 76,
+   "n_sheets": 5,
+   "columns_as_expected": true,
+   "dates": [
+    "2011-08-18"
+   ]
+  }
+ },
+ "qc_summary": {
+  "n_sites": 1986,
+  "n_rows": 1988,
+  "n_rows_main": 987,
+  "main_set_rule": "label_def = direct_eos, qc_flag = ok, right_censored = 0, disturbed = 0",
+  "n_sites_by_macro": {
+   "Alaska": 1234,
+   "Canada": 63,
+   "NAtlantic": 689
+  },
+  "n_rows_by_macro": {
+   "Alaska": 1236,
+   "Canada": 63,
+   "NAtlantic": 689
+  },
+  "n_rows_main_by_macro": {
+   "Alaska": 358,
+   "Canada": 30,
+   "NAtlantic": 599
+  },
+  "n_rows_by_method": {
+   "gpr": 590,
+   "pit_core": 1322,
+   "probe": 76
+  },
+  "n_rows_main_by_method": {
+   "gpr": 511,
+   "pit_core": 400,
+   "probe": 76
+  },
+  "n_rows_by_label_def": {
+   "direct_dated": 575,
+   "direct_eos": 1304,
+   "unknown": 109
+  },
+  "n_rows_by_qc_flag": {
+   "ok": 1970,
+   "range": 13,
+   "range;year_pre1990": 4,
+   "year_pre1990": 1
+  },
+  "n_rows_by_macro_label_def": {
+   "Alaska|direct_dated": 548,
+   "Alaska|direct_eos": 579,
+   "Alaska|unknown": 109,
+   "Canada|direct_dated": 27,
+   "Canada|direct_eos": 36,
+   "NAtlantic|direct_eos": 689
+  },
+  "n_rows_by_month": {
+   "4": 26,
+   "5": 28,
+   "6": 125,
+   "7": 454,
+   "8": 1195,
+   "9": 147,
+   "10": 13
+  },
+  "n_right_censored": 218,
+  "n_disturbed": 514,
+  "n_disturbed_by_type": {
+   "burned": 44,
+   "thermo_erosion": 362,
+   "water": 108
+  },
+  "year_range": [
+   1970,
+   2024
+  ],
+  "year_range_main": [
+   1992,
+   2024
+  ],
+  "alt_cm_rows_all": {
+   "n": 1988,
+   "min": 0.0,
+   "median": 50.0,
+   "max": 792.0,
+   "mean": 63.9
+  },
+  "alt_cm_rows_main": {
+   "n": 987,
+   "min": 11.0,
+   "median": 48.66,
+   "max": 173.65,
+   "mean": 53.78
+  },
+  "alt_cm_rows_main_by_macro": {
+   "Alaska": {
+    "n": 358,
+    "min": 18.0,
+    "median": 43.5,
+    "max": 156.0,
+    "mean": 50.16
+   },
+   "Canada": {
+    "n": 30,
+    "min": 11.0,
+    "median": 35.5,
+    "max": 83.0,
+    "mean": 38.2
+   },
+   "NAtlantic": {
+    "n": 599,
+    "min": 20.0,
+    "median": 52.34,
+    "max": 173.65,
+    "mean": 56.72
+   }
+  },
+  "by_macro_subunit_outside_alaska": {
+   "Canada|Bylot_Island": {
+    "n_rows": 39,
+    "n_sites": 39,
+    "n_rows_main": 18,
+    "n_by_label_def": {
+     "direct_dated": 19,
+     "direct_eos": 20
+    },
+    "n_by_method": {
+     "pit_core": 39
+    },
+    "n_disturbed": 3,
+    "date_min": "2019-07-28",
+    "date_max": "2019-08-05",
+    "n_rows_aug_day_1_to_10": 20,
+    "alt_cm_all": {
+     "n": 39,
+     "min": 11.0,
+     "median": 33.0,
+     "max": 81.0,
+     "mean": 35.49
+    },
+    "alt_cm_main": {
+     "n": 18,
+     "min": 11.0,
+     "median": 32.5,
+     "max": 47.0,
+     "mean": 32.0
+    },
+    "alt_cm_main_by_method": {
+     "pit_core": {
+      "n": 18,
+      "min": 11.0,
+      "median": 32.5,
+      "max": 47.0,
+      "mean": 32.0
+     }
+    }
+   },
+   "Canada|Ward_Hunt_Island": {
+    "n_rows": 24,
+    "n_sites": 24,
+    "n_rows_main": 12,
+    "n_by_label_def": {
+     "direct_dated": 8,
+     "direct_eos": 16
+    },
+    "n_by_method": {
+     "pit_core": 24
+    },
+    "n_disturbed": 4,
+    "date_min": "2022-07-30",
+    "date_max": "2022-08-06",
+    "n_rows_aug_day_1_to_10": 16,
+    "alt_cm_all": {
+     "n": 24,
+     "min": 13.0,
+     "median": 59.5,
+     "max": 83.0,
+     "mean": 54.71
+    },
+    "alt_cm_main": {
+     "n": 12,
+     "min": 13.0,
+     "median": 45.0,
+     "max": 83.0,
+     "mean": 47.5
+    },
+    "alt_cm_main_by_method": {
+     "pit_core": {
+      "n": 12,
+      "min": 13.0,
+      "median": 45.0,
+      "max": 83.0,
+      "mean": 47.5
+     }
+    }
+   },
+   "NAtlantic|Greenland": {
+    "n_rows": 689,
+    "n_sites": 689,
+    "n_rows_main": 599,
+    "n_by_label_def": {
+     "direct_eos": 689
+    },
+    "n_by_method": {
+     "gpr": 590,
+     "pit_core": 23,
+     "probe": 76
+    },
+    "n_disturbed": 90,
+    "date_min": "2011-08-18",
+    "date_max": "2024-09-12",
+    "n_rows_aug_day_1_to_10": 0,
+    "alt_cm_all": {
+     "n": 689,
+     "min": 20.0,
+     "median": 54.78,
+     "max": 173.65,
+     "mean": 64.33
+    },
+    "alt_cm_main": {
+     "n": 599,
+     "min": 20.0,
+     "median": 52.34,
+     "max": 173.65,
+     "mean": 56.72
+    },
+    "alt_cm_main_by_method": {
+     "gpr": {
+      "n": 511,
+      "min": 29.6,
+      "median": 52.75,
+      "max": 173.65,
+      "mean": 57.51
+     },
+     "pit_core": {
+      "n": 12,
+      "min": 20.0,
+      "median": 38.5,
+      "max": 58.0,
+      "mean": 40.58
+     },
+     "probe": {
+      "n": 76,
+      "min": 30.0,
+      "median": 50.0,
+      "max": 122.0,
+      "mean": 53.93
+     }
+    }
+   }
+  },
+  "cells_main_by_macro": {
+   "Alaska": {
+    "n_cells": 170,
+    "n_blocks": 46,
+    "alt_cm_cells": {
+     "n": 170,
+     "min": 21.0,
+     "median": 45.0,
+     "max": 156.0,
+     "mean": 50.48
+    },
+    "n_cells_dropped_by_v3_f4_rule": 13,
+    "n_cells_new": 157,
+    "n_blocks_new": 42,
+    "nearest_f4_cheb_deg_min": 0.0001
+   },
+   "Canada": {
+    "n_cells": 5,
+    "n_blocks": 2,
+    "alt_cm_cells": {
+     "n": 5,
+     "min": 25.4,
+     "median": 35.43,
+     "max": 51.25,
+     "mean": 38.24
+    },
+    "n_cells_dropped_by_v3_f4_rule": 0,
+    "n_cells_new": 5,
+    "n_blocks_new": 2,
+    "nearest_f4_cheb_deg_min": 0.594
+   },
+   "NAtlantic": {
+    "n_cells": 6,
+    "n_blocks": 2,
+    "alt_cm_cells": {
+     "n": 6,
+     "min": 33.2,
+     "median": 46.59,
+     "max": 59.28,
+     "mean": 46.69
+    },
+    "n_cells_dropped_by_v3_f4_rule": 0,
+    "n_cells_new": 6,
+    "n_blocks_new": 2,
+    "nearest_f4_cheb_deg_min": 2.52
+   }
+  }
+ },
+ "cells_main_outside_alaska": [
+  {
+   "macro": "Canada",
+   "ky": 8127,
+   "kx": -2577,
+   "subunit": "Bylot_Island",
+   "lat": 73.15,
+   "lon": -79.99,
+   "alt_cm": 35.428571,
+   "n_sites": 7,
+   "methods": "pit_core:7",
+   "year_min": 2019,
+   "year_max": 2019,
+   "block": 14599840,
+   "nearest_f4_cheb_deg": 0.6607,
+   "nearest_f4_loc_id": 17561,
+   "nearest_f4_region": "CALM_Canada",
+   "dropped_by_v3_f4_rule": false
+  },
+  {
+   "macro": "Canada",
+   "ky": 8127,
+   "kx": -2576,
+   "subunit": "Bylot_Island",
+   "lat": 73.15,
+   "lon": -79.95,
+   "alt_cm": 25.4,
+   "n_sites": 5,
+   "methods": "pit_core:5",
+   "year_min": 2019,
+   "year_max": 2019,
+   "block": 14599840,
+   "nearest_f4_cheb_deg": 0.6207,
+   "nearest_f4_loc_id": 17561,
+   "nearest_f4_region": "CALM_Canada",
+   "dropped_by_v3_f4_rule": false
+  },
+  {
+   "macro": "Canada",
+   "ky": 8128,
+   "kx": -2574,
+   "subunit": "Bylot_Island",
+   "lat": 73.16,
+   "lon": -79.923333,
+   "alt_cm": 33.5,
+   "n_sites": 6,
+   "methods": "pit_core:6",
+   "year_min": 2019,
+   "year_max": 2019,
+   "block": 14599840,
+   "nearest_f4_cheb_deg": 0.594033,
+   "nearest_f4_loc_id": 17561,
+   "nearest_f4_region": "CALM_Canada",
+   "dropped_by_v3_f4_rule": false
+  },
+  {
+   "macro": "Canada",
+   "ky": 9232,
+   "kx": -992,
+   "subunit": "Ward_Hunt_Island",
+   "lat": 83.09,
+   "lon": -74.19125,
+   "alt_cm": 45.625,
+   "n_sites": 8,
+   "methods": "pit_core:8",
+   "year_min": 2022,
+   "year_max": 2022,
+   "block": 16599851,
+   "nearest_f4_cheb_deg": 2.51815,
+   "nearest_f4_loc_id": 17574,
+   "nearest_f4_region": "CALM_Canada",
+   "dropped_by_v3_f4_rule": false
+  },
+  {
+   "macro": "Canada",
+   "ky": 9232,
+   "kx": -991,
+   "subunit": "Ward_Hunt_Island",
+   "lat": 83.09,
+   "lon": -74.135,
+   "alt_cm": 51.25,
+   "n_sites": 4,
+   "methods": "pit_core:4",
+   "year_min": 2022,
+   "year_max": 2022,
+   "block": 16599851,
+   "nearest_f4_cheb_deg": 2.5744,
+   "nearest_f4_loc_id": 17574,
+   "nearest_f4_region": "CALM_Canada",
+   "dropped_by_v3_f4_rule": false
+  },
+  {
+   "macro": "NAtlantic",
+   "ky": 7443,
+   "kx": -2215,
+   "subunit": "Greenland",
+   "lat": 66.99,
+   "lon": -50.98,
+   "alt_cm": 39.0,
+   "n_sites": 1,
+   "methods": "pit_core:1",
+   "year_min": 2024,
+   "year_max": 2024,
+   "block": 13299898,
+   "nearest_f4_cheb_deg": 2.52,
+   "nearest_f4_loc_id": 17535,
+   "nearest_f4_region": "CALM_Greenland",
+   "dropped_by_v3_f4_rule": false
+  },
+  {
+   "macro": "NAtlantic",
+   "ky": 7443,
+   "kx": -2213,
+   "subunit": "Greenland",
+   "lat": 66.99,
+   "lon": -50.94,
+   "alt_cm": 33.2,
+   "n_sites": 5,
+   "methods": "pit_core:5",
+   "year_min": 2024,
+   "year_max": 2024,
+   "block": 13299898,
+   "nearest_f4_cheb_deg": 2.56,
+   "nearest_f4_loc_id": 17535,
+   "nearest_f4_region": "CALM_Greenland",
+   "dropped_by_v3_f4_rule": false
+  },
+  {
+   "macro": "NAtlantic",
+   "ky": 7448,
+   "kx": -2189,
+   "subunit": "Greenland",
+   "lat": 67.04,
+   "lon": -50.49,
+   "alt_cm": 55.5,
+   "n_sites": 2,
+   "methods": "pit_core:2",
+   "year_min": 2024,
+   "year_max": 2024,
+   "block": 13399899,
+   "nearest_f4_cheb_deg": 3.01,
+   "nearest_f4_loc_id": 17535,
+   "nearest_f4_region": "CALM_Greenland",
+   "dropped_by_v3_f4_rule": false
+  },
+  {
+   "macro": "NAtlantic",
+   "ky": 7458,
+   "kx": -2168,
+   "subunit": "Greenland",
+   "lat": 67.124665,
+   "lon": -50.181914,
+   "alt_cm": 59.275401,
+   "n_sites": 439,
+   "methods": "gpr:388|probe:51",
+   "year_min": 2011,
+   "year_max": 2011,
+   "block": 13399899,
+   "nearest_f4_cheb_deg": 3.318086,
+   "nearest_f4_loc_id": 17535,
+   "nearest_f4_region": "CALM_Greenland",
+   "dropped_by_v3_f4_rule": false
+  },
+  {
+   "macro": "NAtlantic",
+   "ky": 7459,
+   "kx": -2166,
+   "subunit": "Greenland",
+   "lat": 67.134612,
+   "lon": -50.16576,
+   "alt_cm": 50.438267,
+   "n_sites": 148,
+   "methods": "gpr:123|probe:25",
+   "year_min": 2011,
+   "year_max": 2011,
+   "block": 13399899,
+   "nearest_f4_cheb_deg": 3.33424,
+   "nearest_f4_loc_id": 17535,
+   "nearest_f4_region": "CALM_Greenland",
+   "dropped_by_v3_f4_rule": false
+  },
+  {
+   "macro": "NAtlantic",
+   "ky": 7461,
+   "kx": -2161,
+   "subunit": "Greenland",
+   "lat": 67.15,
+   "lon": -50.07,
+   "alt_cm": 42.75,
+   "n_sites": 4,
+   "methods": "pit_core:4",
+   "year_min": 2024,
+   "year_max": 2024,
+   "block": 13399899,
+   "nearest_f4_cheb_deg": 3.43,
+   "nearest_f4_loc_id": 17535,
+   "nearest_f4_region": "CALM_Greenland",
+   "dropped_by_v3_f4_rule": false
+  }
+ ],
+ "v3_site_relation": {
+  "rule": "위치 좌표가 v3 F4_direct 셀과 체비쇼프 0.01° 이내인 위치 수(참고용. 제외 판정은 셀 단위다)",
+  "n_sites_within_0p01_by_macro": {
+   "Alaska": 79,
+   "Canada": 0,
+   "NAtlantic": 0
+  },
+  "n_sites_by_macro": {
+   "Alaska": 1234,
+   "Canada": 63,
+   "NAtlantic": 689
+  }
+ },
+ "other_sources_outside_alaska": [
+  {
+   "source": "CALM",
+   "n_rows": 2416,
+   "lat_min": 34.33,
+   "lat_max": 81.4,
+   "lon_min": -171.63,
+   "lon_max": 177.2,
+   "methods": {
+    "temp": 780,
+    "tp": 1308,
+    "tt": 169,
+    "unknown": 159
+   },
+   "date_min": "1990-09-01",
+   "date_max": "2024-09-01",
+   "in_label_rule": "named_original"
+  },
+  {
+   "source": "Fisher_2016",
+   "n_rows": 133,
+   "lat_min": 61.34,
+   "lat_max": 62.7,
+   "lon_min": -135.66,
+   "lon_max": -114.96,
+   "methods": {
+    "tp": 133
+   },
+   "date_min": "2013-08-31",
+   "date_max": "2014-08-31",
+   "in_label_rule": "not_named"
+  },
+  {
+   "source": "Holloway_2019",
+   "n_rows": 71,
+   "lat_min": 57.79,
+   "lat_max": 60.76,
+   "lon_min": -117.71,
+   "lon_max": -115.86,
+   "methods": {
+    "temp": 7,
+    "tp": 64
+   },
+   "date_min": "1962-09-15",
+   "date_max": "2018-08-15",
+   "in_label_rule": "not_named"
+  },
+  {
+   "source": "Langer_etal_2020",
+   "n_rows": 117,
+   "lat_min": 58.18,
+   "lat_max": 58.73,
+   "lon_min": -94.15,
+   "lon_max": -93.8,
+   "methods": {
+    "tp": 117
+   },
+   "date_min": "2018-07-21",
+   "date_max": "2019-07-31",
+   "in_label_rule": "not_named"
+  },
+  {
+   "source": "Moore_et_al_2025",
+   "n_rows": 1314,
+   "lat_min": 60.52,
+   "lat_max": 68.75,
+   "lon_min": -139.76,
+   "lon_max": -113.0,
+   "methods": {
+    "tp": 1314
+   },
+   "date_min": "2008-06-22",
+   "date_max": "2022-09-01",
+   "in_label_rule": "named_original"
+  },
+  {
+   "source": "Obu_etal_2016",
+   "n_rows": 12,
+   "lat_min": 69.57,
+   "lat_max": 69.58,
+   "lon_min": -139.03,
+   "lon_max": -138.87,
+   "methods": {
+    "pit": 12
+   },
+   "date_min": "2013-06-23",
+   "date_max": "2013-06-23",
+   "in_label_rule": "not_named"
+  },
+  {
+   "source": "PERMOS_2024",
+   "n_rows": 229,
+   "lat_min": 45.99,
+   "lat_max": 46.56,
+   "lon_min": 7.27,
+   "lon_max": 9.93,
+   "methods": {
+    "temp": 229
+   },
+   "date_min": "1987-09-24",
+   "date_max": "2023-12-25",
+   "in_label_rule": "named_original"
+  },
+  {
+   "source": "Scheer_etal_2023",
+   "n_rows": 553,
+   "lat_min": 69.21,
+   "lat_max": 69.26,
+   "lon_min": -51.11,
+   "lon_max": -51.02,
+   "methods": {
+    "tp": 553
+   },
+   "date_min": "2020-09-01",
+   "date_max": "2021-09-01",
+   "in_label_rule": "named_original"
+  },
+  {
+   "source": "Smith_Burgess_2000",
+   "n_rows": 163,
+   "lat_min": 48.93,
+   "lat_max": 79.95,
+   "lon_min": -135.77,
+   "lon_max": -65.5,
+   "methods": {
+    "unknown": 163
+   },
+   "date_min": "1963-07-01",
+   "date_max": "1998-07-01",
+   "in_label_rule": "named_unknown_method"
+  },
+  {
+   "source": "Smith_Burgess_2002",
+   "n_rows": 231,
+   "lat_min": 48.93,
+   "lat_max": 82.5,
+   "lon_min": -140.33,
+   "lon_max": -56.47,
+   "methods": {
+    "unknown": 231
+   },
+   "date_min": "1961-07-01",
+   "date_max": "1988-07-01",
+   "in_label_rule": "named_unknown_method"
+  },
+  {
+   "source": "Talucci_2024",
+   "n_rows": 460,
+   "lat_min": 59.35,
+   "lat_max": 69.51,
+   "lon_min": -128.24,
+   "lon_max": 162.21,
+   "methods": {
+    "unknown": 460
+   },
+   "date_min": "2012-09-02",
+   "date_max": "2020-10-03",
+   "in_label_rule": "named_original"
+  },
+  {
+   "source": "Veremeeva_etal_2025",
+   "n_rows": 9164,
+   "lat_min": 71.55,
+   "lat_max": 73.58,
+   "lon_min": 123.36,
+   "lon_max": 130.03,
+   "methods": {
+    "aug": 26,
+    "pit": 495,
+    "tp": 8639,
+    "tp_pit": 4
+   },
+   "date_min": "1998-07-24",
+   "date_max": "2022-09-21",
+   "in_label_rule": "named_original"
+  },
+  {
+   "source": "Zhang_2019",
+   "n_rows": 194,
+   "lat_min": 68.31,
+   "lat_max": 69.43,
+   "lon_min": -133.78,
+   "lon_max": -132.91,
+   "methods": {
+    "tp": 194
+   },
+   "date_min": "2016-08-16",
+   "date_max": "2017-08-22",
+   "in_label_rule": "not_named"
+  },
+  {
+   "source": "Zhao_2021",
+   "n_rows": 65,
+   "lat_min": 31.82,
+   "lat_max": 35.72,
+   "lon_min": 91.74,
+   "lon_max": 94.13,
+   "methods": {
+    "temp": 65
+   },
+   "date_min": "2002-08-24",
+   "date_max": "2018-09-12",
+   "in_label_rule": "not_named"
+  }
+ ],
+ "unverified_items": [
+  "CUSP 자료의 재배포 허용 여부. LICENSE.txt 는 저작권 고지이고 공개 이용 허락 조항이 없다. 저장소 관리자에게 확인하지 않았다",
+  "CUSP 의 DOI(Zenodo 기록은 접근 제한이라 보지 못했다)",
+  "Jorgenson & Kanevskiy 좌표의 실제 위치 정확도. 공개된 원 지점 표도 소수 2자리(약 1.1 km)라서 같은 조사 구역의 단면들이 같은 좌표를 갖는다. 1 km 셀 배정이 한 칸 어긋날 수 있다",
+  "Jorgenson & Kanevskiy 의 융해 깊이 측정 기구. CUSP 는 method 를 pit_aug 로 고정했고 MU(방법 근사) 표시를 붙였다. 원 지점 표의 SoilMethod 는 토양 채취 방법이고 융해 깊이의 측정 기구를 따로 적지 않았다",
+  "Petrone GPR 깊이 환산 표(GPR_profiles_with_depths_by_class.xlsx)를 만든 절차. PANGAEA 원본에는 왕복 주시만 있고 식생 등급과 깊이 열은 CUSP 저장소 파일에만 있다. 속도 값은 Petrone 등 2016 표 2 와 같다",
+  "Petrone GPR 조사의 날짜(일). 본문은 2011년 8월이라고만 적었고 2011-08-18 은 CUSP 가 부여했다",
+  "Petrone 탐침 점 수. 본문은 83점, 원본 표와 CUSP 는 76점이다. 차이의 이유는 확인하지 못했다",
+  "8월 1–10일 관측(바일럿섬, 워드헌트섬)이 계절 말 값에 얼마나 가까운지. 규칙(관측 월 8–9월)으로는 direct_eos 다",
+  "다른 ext_labels 자료원과의 위치 중복(dup_of 는 비워 두었다). v4 조립 단계의 일이다",
+  "ERA5-Land 육지 폴백, CCI ALT 유효 여부, 공변량 부착 결과. v4 조립 단계의 일이다"
+ ]
+}

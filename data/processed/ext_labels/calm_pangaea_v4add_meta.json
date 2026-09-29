@@ -1,0 +1,605 @@
+{
+ "src_id": "calm_pangaea_v4add",
+ "name": "CALM PANGAEA 972777 의 v3 미편입 탐침 이벤트 9개",
+ "url": "https://doi.org/10.1594/PANGAEA.972777",
+ "doi": "10.1594/PANGAEA.972777",
+ "accessed": "2026-09-29",
+ "files": [
+  {
+   "name": "data/raw/calm/PANGAEA_972777_CALM_ALT_NH.tab",
+   "size_bytes": 479369,
+   "sha256": "4198a0e06b76bb3d764656cc201cda417adfc2b4cfc7c0f67a186cc29ef66045",
+   "source_url": "https://doi.pangaea.de/10.1594/PANGAEA.972777?format=textfile"
+  }
+ ],
+ "license": "CC BY 4.0",
+ "license_basis": "원자료 머리말의 License 행: Creative Commons Attribution 4.0 International (CC-BY-4.0) (URI: https://creativecommons.org/licenses/by/4.0/)",
+ "citation": "Streletskiy, Dmitry A; CALM; GTN-P; Wieczorek, Mareike; Heim, Birgit; Bartsch, Annett (2025): GTN-P CALM: 35 years of Active Layer Thickness (ALT) across latitudinal and elevational gradients in the Northern Hemisphere [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.972777",
+ "parser": "scripts/1_data_prep/parse_ext_calm_pangaea_v4add.py",
+ "parser_sha256": "0cf659e2375c98662b028b797babe96f1a60076d11dc6901839b4503e374c9d4",
+ "parser_git_commit": "a112cef1ed17fe2db74898b3861a5f82de753fdd",
+ "parser_git_note": "파서 파일은 이 커밋에 들어 있지 않다(작업 트리의 새 파일). 값은 실행 시점의 HEAD 다",
+ "schema_version": "1.0",
+ "n_rows_raw": 3819,
+ "n_rows_raw_target_events": 183,
+ "n_events_raw": 263,
+ "n_rows_points": 181,
+ "n_by_label_def": {
+  "direct_dated": 1,
+  "direct_eos": 180
+ },
+ "n_by_method": {
+  "probe": 181
+ },
+ "n_excluded_by_reason": {
+  "융해관 이벤트(C3A)": 22,
+  "지온 이벤트(CH6, M3, CN6, U20)": 48,
+  "대상 외 이벤트(v3 편입 셀이거나 탐침이 아닌 이벤트)": 3566,
+  "ALD 결측(Sample comment: inactive)": 2
+ },
+ "coordinate_conversion": "변환 없음. 원자료가 WGS84 십진 도이고 서경은 음수다. lat, lon 은 이벤트 머리말의 값(소수 6자리 표기, 뒤의 0 은 뗐다)이고 자료 행렬의 값(소수 4자리)과 반올림 범위에서 같음을 확인했다. 추코트카 R27, R41 의 경도는 원자료에서 음수다",
+ "coord_prec_rule": "위경도가 모두 분 단위 값이면 0.0167, 아니면 10^-(표기 소수 자릿수). 표기에서 추정한 값이다",
+ "units": "ALD [cm]. 단위 변환 없음",
+ "missing_code": "빈 칸. 대상 이벤트의 결측 2행은 Sample comment 가 inactive 다",
+ "season_end_basis": "CALM 규약(eos_basis = protocol). ALD 변수 설명: maximum thaw depth at the end of the summer. 자료 행렬의 Date/Time 은 연도뿐이라 month 와 date 는 빈 칸이다",
+ "qc_summary": {
+  "n_sites": 9,
+  "n_rows": 181,
+  "n_rows_main": 180,
+  "main_set_rule": "label_def = direct_eos, qc_flag = ok, right_censored = 0, disturbed = 0",
+  "n_sites_by_macro": {
+   "Alaska": 2,
+   "Canada": 1,
+   "NAtlantic": 2,
+   "Russia_E": 3,
+   "Russia_W": 1
+  },
+  "n_rows_by_macro": {
+   "Alaska": 59,
+   "Canada": 14,
+   "NAtlantic": 30,
+   "Russia_E": 50,
+   "Russia_W": 28
+  },
+  "n_rows_by_method": {
+   "probe": 181
+  },
+  "n_rows_by_qc_flag": {
+   "date": 1,
+   "ok": 180
+  },
+  "n_right_censored": 0,
+  "n_disturbed": 0,
+  "year_range": [
+   1993,
+   2024
+  ],
+  "alt_cm_rows_all": {
+   "n": 181,
+   "min": 25.0,
+   "median": 61.0,
+   "max": 199.0,
+   "mean": 76.9
+  },
+  "alt_cm_rows_main": {
+   "n": 180,
+   "min": 25.0,
+   "median": 60.5,
+   "max": 199.0,
+   "mean": 76.77
+  },
+  "alt_cm_site_multiyear_mean": {
+   "n": 9,
+   "min": 32.1,
+   "median": 67.5,
+   "max": 157.8
+  },
+  "n_distinct_1km_cells": 9,
+  "per_site": [
+   {
+    "site_id": "CALM_R27",
+    "site_name": "Lavrentia",
+    "macro": "Russia_E",
+    "n_rows": 25,
+    "n_main": 25,
+    "year_min": 2000,
+    "year_max": 2024,
+    "alt_mean_main_cm": 67.5,
+    "alt_min_main_cm": 59.0,
+    "alt_max_main_cm": 78.0
+   },
+   {
+    "site_id": "CALM_R41",
+    "site_name": "Lorino",
+    "macro": "Russia_E",
+    "n_rows": 15,
+    "n_main": 15,
+    "year_min": 2010,
+    "year_max": 2024,
+    "alt_mean_main_cm": 55.3,
+    "alt_min_main_cm": 47.0,
+    "alt_max_main_cm": 66.0
+   },
+   {
+    "site_id": "CALM_R30A",
+    "site_name": "Ploskii Tolbachik (Kamchatka)",
+    "macro": "Russia_E",
+    "n_rows": 10,
+    "n_main": 10,
+    "year_min": 2003,
+    "year_max": 2012,
+    "alt_mean_main_cm": 73.8,
+    "alt_min_main_cm": 67.0,
+    "alt_max_main_cm": 80.0
+   },
+   {
+    "site_id": "CALM_R1",
+    "site_name": "Nadym; West Siberia",
+    "macro": "Russia_W",
+    "n_rows": 28,
+    "n_main": 27,
+    "year_min": 1997,
+    "year_max": 2024,
+    "alt_mean_main_cm": 151.6,
+    "alt_min_main_cm": 114.0,
+    "alt_max_main_cm": 199.0
+   },
+   {
+    "site_id": "CALM_N3",
+    "site_name": "UNISCALM",
+    "macro": "NAtlantic",
+    "n_rows": 24,
+    "n_main": 24,
+    "year_min": 2000,
+    "year_max": 2023,
+    "alt_mean_main_cm": 100.0,
+    "alt_min_main_cm": 74.0,
+    "alt_max_main_cm": 110.0
+   },
+   {
+    "site_id": "CALM_IT1",
+    "site_name": "Ecogrid, Svalbard",
+    "macro": "NAtlantic",
+    "n_rows": 6,
+    "n_main": 6,
+    "year_min": 2014,
+    "year_max": 2019,
+    "alt_mean_main_cm": 157.8,
+    "alt_min_main_cm": 150.0,
+    "alt_max_main_cm": 163.0
+   },
+   {
+    "site_id": "CALM_C3B",
+    "site_name": "North Head (grid)",
+    "macro": "Canada",
+    "n_rows": 14,
+    "n_main": 14,
+    "year_min": 1998,
+    "year_max": 2013,
+    "alt_mean_main_cm": 46.8,
+    "alt_min_main_cm": 40.0,
+    "alt_max_main_cm": 52.0
+   },
+   {
+    "site_id": "CALM_U5",
+    "site_name": "West Dock 1 km grid",
+    "macro": "Alaska",
+    "n_rows": 31,
+    "n_main": 31,
+    "year_min": 1993,
+    "year_max": 2024,
+    "alt_mean_main_cm": 50.7,
+    "alt_min_main_cm": 44.0,
+    "alt_max_main_cm": 58.0
+   },
+   {
+    "site_id": "CALM_U4",
+    "site_name": "West Dock 1 ha grid",
+    "macro": "Alaska",
+    "n_rows": 28,
+    "n_main": 28,
+    "year_min": 1996,
+    "year_max": 2024,
+    "alt_mean_main_cm": 32.1,
+    "alt_min_main_cm": 25.0,
+    "alt_max_main_cm": 39.0
+   }
+  ]
+ },
+ "sites": [
+  {
+   "site_id": "CALM_R27",
+   "site_name": "Lavrentia",
+   "lat": "65.6",
+   "lon": "-171.05",
+   "lat_matrix": "65.6000",
+   "lon_matrix": "-171.0500",
+   "elev_m": "177.0",
+   "country": "Russia",
+   "country_raw": "Russia",
+   "area": "Chukotka",
+   "macro": "Russia_E",
+   "method_raw": "Spatially-oriented mechanical probing at 100 m Grid or Transect",
+   "grid_m": "100",
+   "pi": "Dmitri Zamolodchikov",
+   "uri": "https://www2.gwu.edu/~calm/data/webforms/r27_f.html",
+   "gtnp_id": "68",
+   "coord_prec_deg": 0.0167,
+   "cell_ky": 7288,
+   "cell_kx": -7853,
+   "n_rows_raw": 25
+  },
+  {
+   "site_id": "CALM_R41",
+   "site_name": "Lorino",
+   "lat": "65.539667",
+   "lon": "-171.63023",
+   "lat_matrix": "65.5397",
+   "lon_matrix": "-171.6302",
+   "elev_m": "49.0",
+   "country": "Russia",
+   "country_raw": "Russia",
+   "area": "Chukotka",
+   "macro": "Russia_E",
+   "method_raw": "Spatially-oriented mechanical probing at 100 m Grid or Transect",
+   "grid_m": "100",
+   "pi": "Dmitri Zamolodchikov",
+   "uri": "https://www2.gwu.edu/~calm/data/webforms/r41_f.html",
+   "gtnp_id": "69",
+   "coord_prec_deg": 1e-06,
+   "cell_ky": 7282,
+   "cell_kx": -7896,
+   "n_rows_raw": 15
+  },
+  {
+   "site_id": "CALM_R30A",
+   "site_name": "Ploskii Tolbachik (Kamchatka)",
+   "lat": "55.7507",
+   "lon": "160.2896",
+   "lat_matrix": "55.7507",
+   "lon_matrix": "160.2896",
+   "elev_m": "1314.0",
+   "country": "Russia",
+   "country_raw": "Russia",
+   "area": "Kamchatka",
+   "macro": "Russia_E",
+   "method_raw": "Spatially-oriented mechanical probing at 100 m Grid or Transect",
+   "grid_m": "100",
+   "pi": "Andrey Abramov",
+   "uri": "https://www2.gwu.edu/~calm/data/webforms/r30_f.html",
+   "gtnp_id": "36",
+   "coord_prec_deg": 0.0001,
+   "cell_ky": 6194,
+   "cell_kx": 10023,
+   "n_rows_raw": 11
+  },
+  {
+   "site_id": "CALM_R1",
+   "site_name": "Nadym; West Siberia",
+   "lat": "65.314861",
+   "lon": "72.864194",
+   "lat_matrix": "65.3149",
+   "lon_matrix": "72.8642",
+   "elev_m": "7.0",
+   "country": "Russia",
+   "country_raw": "Russia",
+   "area": "West Siberia",
+   "macro": "Russia_W",
+   "method_raw": "Spatially-oriented mechanical probing at 100 m Grid or Transect",
+   "grid_m": "100",
+   "pi": "Andrey Gravis",
+   "uri": "https://www2.gwu.edu/~calm/data/webforms/r1_f.html",
+   "gtnp_id": "117",
+   "coord_prec_deg": 1e-06,
+   "cell_ky": 7257,
+   "cell_kx": 3380,
+   "n_rows_raw": 28
+  },
+  {
+   "site_id": "CALM_N3",
+   "site_name": "UNISCALM",
+   "lat": "78.200956",
+   "lon": "15.836412",
+   "lat_matrix": "78.2010",
+   "lon_matrix": "15.8364",
+   "elev_m": "38.0",
+   "country": "Norway",
+   "country_raw": "Norway/Svalbard",
+   "area": "Svalbard",
+   "macro": "NAtlantic",
+   "method_raw": "Spatially-oriented mechanical probing at 100 m Grid or Transect",
+   "grid_m": "100",
+   "pi": "Hanne Hvidtfeldt Christiansen",
+   "uri": "https://www2.gwu.edu/~calm/data/webforms/n3_f.html",
+   "gtnp_id": "49",
+   "coord_prec_deg": 1e-06,
+   "cell_ky": 8688,
+   "cell_kx": 359,
+   "n_rows_raw": 24
+  },
+  {
+   "site_id": "CALM_IT1",
+   "site_name": "Ecogrid, Svalbard",
+   "lat": "78.92",
+   "lon": "11.86",
+   "lat_matrix": "78.9200",
+   "lon_matrix": "11.8600",
+   "elev_m": "53.0",
+   "country": "Norway",
+   "country_raw": "Italy/Svalbard",
+   "area": "Svalbard",
+   "macro": "NAtlantic",
+   "method_raw": "Spatially-oriented mechanical probing at 60 m Grid or Transect",
+   "grid_m": "60",
+   "pi": "Stefano Ponti, Mauro Guglielmin",
+   "uri": "https://www2.gwu.edu/~calm/data/webforms/it1_f.htm",
+   "gtnp_id": "",
+   "coord_prec_deg": 0.01,
+   "cell_ky": 8768,
+   "cell_kx": 253,
+   "n_rows_raw": 6
+  },
+  {
+   "site_id": "CALM_C3B",
+   "site_name": "North Head (grid)",
+   "lat": "69.71972",
+   "lon": "-134.4619",
+   "lat_matrix": "69.7197",
+   "lon_matrix": "-134.4619",
+   "elev_m": "12.0",
+   "country": "Canada",
+   "country_raw": "Canada",
+   "area": "",
+   "macro": "Canada",
+   "method_raw": "Spatially-oriented mechanical probing at 100 m Grid or Transect",
+   "grid_m": "100",
+   "pi": "Caroline Duchesne, Sharon Smith",
+   "uri": "https://www2.gwu.edu/~calm/data/webforms/MT_f.html",
+   "gtnp_id": "28",
+   "coord_prec_deg": 1e-05,
+   "cell_ky": 7746,
+   "cell_kx": -5179,
+   "n_rows_raw": 15
+  },
+  {
+   "site_id": "CALM_U5",
+   "site_name": "West Dock 1 km grid",
+   "lat": "70.36667",
+   "lon": "-148.5667",
+   "lat_matrix": "70.3667",
+   "lon_matrix": "-148.5667",
+   "elev_m": "8.0",
+   "country": "United States",
+   "country_raw": "United States (Alaska)",
+   "area": "Alaska North Slope",
+   "macro": "Alaska",
+   "method_raw": "Spatially-oriented mechanical probing at 1000 m Grid or Transect",
+   "grid_m": "1000",
+   "pi": "Nikolay Shiklomanov",
+   "uri": "https://www2.gwu.edu/~calm/data/webforms/u5_f.htm",
+   "gtnp_id": "9",
+   "coord_prec_deg": 0.0167,
+   "cell_ky": 7818,
+   "cell_kx": -5547,
+   "n_rows_raw": 31
+  },
+  {
+   "site_id": "CALM_U4",
+   "site_name": "West Dock 1 ha grid",
+   "lat": "70.3745",
+   "lon": "-148.5522",
+   "lat_matrix": "70.3745",
+   "lon_matrix": "-148.5522",
+   "elev_m": "4.0",
+   "country": "United States",
+   "country_raw": "United States (Alaska)",
+   "area": "Alaska North Slope",
+   "macro": "Alaska",
+   "method_raw": "Spatially-oriented mechanical probing at 100 m Grid or Transect",
+   "grid_m": "100",
+   "pi": "Vladimir E. Romanowsky",
+   "uri": "https://www2.gwu.edu/~calm/data/webforms/u4_f.htm",
+   "gtnp_id": "13",
+   "coord_prec_deg": 0.0001,
+   "cell_ky": 7819,
+   "cell_kx": -5544,
+   "n_rows_raw": 28
+  }
+ ],
+ "v3_relation": {
+  "per_site": [
+   {
+    "site_id": "CALM_R27",
+    "nearest_f4_direct_km": 255.2,
+    "nearest_f4_direct_km_macro": "Alaska",
+    "nearest_other_macro_f4_direct_km": 255.2,
+    "nearest_other_macro": "Alaska",
+    "within_100km_of_other_macro": false,
+    "nearest_f4_direct_cheb_deg": 5.0763,
+    "nearest_f4_direct_loc_id": 12916,
+    "nearest_f4_direct_region": "ABoVE_AK",
+    "dropped_by_v3_f4_rule": false,
+    "v3_cells_within_0p01": []
+   },
+   {
+    "site_id": "CALM_R41",
+    "nearest_f4_direct_km": 278.6,
+    "nearest_f4_direct_km_macro": "Alaska",
+    "nearest_other_macro_f4_direct_km": 278.6,
+    "nearest_other_macro": "Alaska",
+    "within_100km_of_other_macro": false,
+    "nearest_f4_direct_cheb_deg": 5.6565,
+    "nearest_f4_direct_loc_id": 12916,
+    "nearest_f4_direct_region": "ABoVE_AK",
+    "dropped_by_v3_f4_rule": false,
+    "v3_cells_within_0p01": []
+   },
+   {
+    "site_id": "CALM_R30A",
+    "nearest_f4_direct_km": 2.5,
+    "nearest_f4_direct_km_macro": "Russia_E",
+    "nearest_other_macro_f4_direct_km": 1871.2,
+    "nearest_other_macro": "Russia_C",
+    "within_100km_of_other_macro": false,
+    "nearest_f4_direct_cheb_deg": 0.031,
+    "nearest_f4_direct_loc_id": 17488,
+    "nearest_f4_direct_region": "CALM_Russia_E",
+    "dropped_by_v3_f4_rule": false,
+    "v3_cells_within_0p01": [
+     {
+      "loc_id": 17405,
+      "region": "GTNPenv_RU",
+      "source_id": "F2_gtnp_env",
+      "alt_cm": 98.0,
+      "cheb_deg": 0.0001
+     }
+    ]
+   },
+   {
+    "site_id": "CALM_R1",
+    "nearest_f4_direct_km": 18.4,
+    "nearest_f4_direct_km_macro": "Russia_W",
+    "nearest_other_macro_f4_direct_km": 1308.4,
+    "nearest_other_macro": "Russia_C",
+    "within_100km_of_other_macro": false,
+    "nearest_f4_direct_cheb_deg": 0.3458,
+    "nearest_f4_direct_loc_id": 17502,
+    "nearest_f4_direct_region": "CALM_Russia_W",
+    "dropped_by_v3_f4_rule": false,
+    "v3_cells_within_0p01": [
+     {
+      "loc_id": 17400,
+      "region": "GTNPenv_RU",
+      "source_id": "F2_gtnp_env",
+      "alt_cm": 286.8,
+      "cheb_deg": 0.0051
+     }
+    ]
+   },
+   {
+    "site_id": "CALM_N3",
+    "nearest_f4_direct_km": 53.5,
+    "nearest_f4_direct_km_macro": "NAtlantic",
+    "nearest_other_macro_f4_direct_km": 1290.7,
+    "nearest_other_macro": "Russia_W",
+    "within_100km_of_other_macro": false,
+    "nearest_f4_direct_cheb_deg": 2.2197,
+    "nearest_f4_direct_loc_id": 17569,
+    "nearest_f4_direct_region": "CALM_Svalbard",
+    "dropped_by_v3_f4_rule": false,
+    "v3_cells_within_0p01": [
+     {
+      "loc_id": 17399,
+      "region": "GTNPenv_SJ",
+      "source_id": "F2_gtnp_env",
+      "alt_cm": 95.3,
+      "cheb_deg": 0.0018
+     }
+    ]
+   },
+   {
+    "site_id": "CALM_IT1",
+    "nearest_f4_direct_km": 104.3,
+    "nearest_f4_direct_km_macro": "NAtlantic",
+    "nearest_other_macro_f4_direct_km": 1407.8,
+    "nearest_other_macro": "Russia_W",
+    "within_100km_of_other_macro": false,
+    "nearest_f4_direct_cheb_deg": 1.7567,
+    "nearest_f4_direct_loc_id": 17569,
+    "nearest_f4_direct_region": "CALM_Svalbard",
+    "dropped_by_v3_f4_rule": false,
+    "v3_cells_within_0p01": [
+     {
+      "loc_id": 17423,
+      "region": "GTNPenv_SJ",
+      "source_id": "F2_gtnp_env",
+      "alt_cm": 144.8,
+      "cheb_deg": 0.0058
+     }
+    ]
+   },
+   {
+    "site_id": "CALM_C3B",
+    "nearest_f4_direct_km": 43.3,
+    "nearest_f4_direct_km_macro": "Canada",
+    "nearest_other_macro_f4_direct_km": 327.4,
+    "nearest_other_macro": "Alaska",
+    "within_100km_of_other_macro": false,
+    "nearest_f4_direct_cheb_deg": 0.4867,
+    "nearest_f4_direct_loc_id": 14336,
+    "nearest_f4_direct_region": "Canada",
+    "dropped_by_v3_f4_rule": false,
+    "v3_cells_within_0p01": []
+   },
+   {
+    "site_id": "CALM_U5",
+    "nearest_f4_direct_km": 14.6,
+    "nearest_f4_direct_km_macro": "Alaska",
+    "nearest_other_macro_f4_direct_km": 443.7,
+    "nearest_other_macro": "Canada",
+    "within_100km_of_other_macro": false,
+    "nearest_f4_direct_cheb_deg": 0.1792,
+    "nearest_f4_direct_loc_id": 11605,
+    "nearest_f4_direct_region": "ABoVE_AK",
+    "dropped_by_v3_f4_rule": false,
+    "v3_cells_within_0p01": []
+   },
+   {
+    "site_id": "CALM_U4",
+    "nearest_f4_direct_km": 15.5,
+    "nearest_f4_direct_km_macro": "Alaska",
+    "nearest_other_macro_f4_direct_km": 443.7,
+    "nearest_other_macro": "Canada",
+    "within_100km_of_other_macro": false,
+    "nearest_f4_direct_cheb_deg": 0.187,
+    "nearest_f4_direct_loc_id": 11605,
+    "nearest_f4_direct_region": "ABoVE_AK",
+    "dropped_by_v3_f4_rule": false,
+    "v3_cells_within_0p01": [
+     {
+      "loc_id": 17398,
+      "region": "GTNPenv_US",
+      "source_id": "F2_gtnp_env",
+      "alt_cm": 31.9,
+      "cheb_deg": 0.0
+     }
+    ]
+   }
+  ],
+  "target_set_check": {
+   "rule": "ALD 유효 값(0 < ALT <= 600, 1990년 이후)이 있는 탐침 이벤트 가운데 v3 F4_direct 셀과 체비쇼프 0.01° 이내가 아닌 이벤트(자료 행렬 좌표 기준)",
+   "found": [
+    "CALM_C3B",
+    "CALM_IT1",
+    "CALM_N3",
+    "CALM_R1",
+    "CALM_R27",
+    "CALM_R30A",
+    "CALM_R41",
+    "CALM_U4",
+    "CALM_U5"
+   ],
+   "target": [
+    "CALM_C3B",
+    "CALM_IT1",
+    "CALM_N3",
+    "CALM_R1",
+    "CALM_R27",
+    "CALM_R30A",
+    "CALM_R41",
+    "CALM_U4",
+    "CALM_U5"
+   ],
+   "identical": true
+  }
+ },
+ "unverified_items": [
+  "행별 관측 날짜와 월. 자료 행렬에는 연도만 있다",
+  "격자 노드 수. 자료에 없어 n_obs 는 1 로 두었다",
+  "행 안 표준편차(alt_sd_cm). 자료에 없다",
+  "좌표의 실제 위치 정확도. coord_prec_deg 는 표기 자릿수에서 추정했다. R27 과 U5 는 분 단위 표기다",
+  "격자 중심과 표기 좌표의 관계(격자 모서리인지 중심인지)",
+  "ERA5-Land 육지 폴백, CCI ALT 유효 여부, 공변량 부착 결과. v4 조립 단계의 일이다",
+  "R1 2009년 'Early measurement' 의 실제 관측일"
+ ]
+}

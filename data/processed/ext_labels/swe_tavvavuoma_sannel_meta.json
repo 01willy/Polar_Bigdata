@@ -1,0 +1,312 @@
+{
+ "src_id": "swe_tavvavuoma_sannel",
+ "name": "Sannel 2020, Tavvavuoma 이탄지 지온, 융해 깊이, 적설 깊이(Bolin Centre Database)",
+ "url": "https://doi.org/10.17043/sannel-2020-temperature-1",
+ "download_url": "https://bolin.su.se/data/uploads/sannel-2020.zip",
+ "doi": "10.17043/sannel-2020-temperature-1",
+ "accessed": "2026-09-29",
+ "files": [
+  {
+   "name": "sannel-2020.zip",
+   "size_bytes": 1346737,
+   "sha256": "7ef741320bb3cbe311ecebfab9027c1bd12df12d760b30cedf9410f630f7b761"
+  },
+  {
+   "name": "sannel-2020/sannel-2020-tavvavuoma-snow-and-thaw-depth.xlsx",
+   "size_bytes": 16958,
+   "sha256": "e1c08de02374092892b968dece6fcf90f7eb939691d3f85ae40a2da8639a7734"
+  },
+  {
+   "name": "sannel-2020/sannel-2020-tavvavuoma-ground-temperatures.xlsx",
+   "size_bytes": 1355260,
+   "sha256": "8d30d817ab97b6cc8ae5ff2701982473e6e99ff848b320ac2404c5594b570fed"
+  }
+ ],
+ "license": "CC BY 4.0",
+ "license_basis": "자료 안내 쪽의 License 항목(Creative Commons Attribution 4.0 International License)",
+ "citation": "Sannel, A.B.K. (2020) Ground temperature, thaw depth and snow depth in a permafrost peatland in Tavvavuoma, northern Sweden. Dataset version 1. Bolin Centre Database. https://doi.org/10.17043/sannel-2020-temperature-1",
+ "orig_source": "Sannel, A.B.K. (2020) Ground temperature and snow depth variability within a subarctic peat plateau landscape. Permafrost and Periglacial Processes 31, 255-263, doi:10.1002/ppp.2045",
+ "parser": "scripts/1_data_prep/parse_ext_swe_tavvavuoma_sannel.py",
+ "parser_sha256": "21331c0434ad3b13efca964cca3147d7a93b11c6953927adeec146f953d22e8b",
+ "parser_git_commit": "a112cef1ed17fe2db74898b3861a5f82de753fdd",
+ "parser_git_note": "파서는 커밋하지 않은 작업 트리 파일이다. parser_git_commit 은 실행 시점의 HEAD 다",
+ "schema_version": "1.0",
+ "thaw_sheet": "Thaw depth, 2010-2012",
+ "n_rows_raw": 29,
+ "n_rows_raw_detail": {
+  "table_cells": 27,
+  "footnote_installation_values": 2
+ },
+ "n_rows_points": 17,
+ "n_sites_raw": 9,
+ "n_sites_points": 5,
+ "n_by_label_def": {
+  "direct_eos": 17
+ },
+ "n_by_method": {
+  "other": 17
+ },
+ "n_by_macro": {
+  "NAtlantic": 17
+ },
+ "n_by_subunit": {
+  "Scandinavia": 17
+ },
+ "n_by_eos_basis": {
+  "record_date": 17
+ },
+ "n_by_right_censored": {
+  "0": 11,
+  "1": 6
+ },
+ "n_by_qc_flag": {
+  "ok": 17
+ },
+ "n_by_month": {
+  "8": 5,
+  "9": 12
+ },
+ "n_by_site": {
+  "T1": 4,
+  "T2": 3,
+  "T3": 3,
+  "T4": 4,
+  "T7": 3
+ },
+ "n_excluded_by_reason": {
+  "no_data_in_water": 5,
+  "no_permafrost_site_value_above_probe_limit": 7
+ },
+ "n_duplicate_site_year_date": 0,
+ "year_min": 2005,
+ "year_max": 2012,
+ "main_set": {
+  "definition": "label_def = direct_eos, right_censored = 0, qc_flag = ok",
+  "n_rows": 11,
+  "n_sites": 5,
+  "alt_cm_min": 47.0,
+  "alt_cm_median": 57.0,
+  "alt_cm_max": 115.0,
+  "site_multiyear_mean_cm": {
+   "T1": 75.0,
+   "T2": 55.67,
+   "T3": 52.33,
+   "T4": 115.0,
+   "T7": 68.67
+  },
+  "n_rows_table_2010_2012": 9,
+  "site_multiyear_mean_cm_table_2010_2012": {
+   "T2": 55.67,
+   "T3": 52.33,
+   "T7": 68.67
+  }
+ },
+ "sites": [
+  {
+   "site_id": "T1",
+   "file_code": "T1/S1",
+   "lat_raw": "68°27.720’N",
+   "lon_raw": "20°54.118’E",
+   "lat": 68.462,
+   "lon": 20.901967,
+   "landscape_unit": "Peat plateau edge",
+   "in_points": true,
+   "permafrost_site": true,
+   "criteria": [
+    "b"
+   ],
+   "evidence": "최심 센서 91 cm 의 연평균 -0.44 °C, 최저 -2.91, 최고 0.21(2007년)"
+  },
+  {
+   "site_id": "T2",
+   "file_code": "T2/S2",
+   "lat_raw": "68°27.726’N",
+   "lon_raw": "20°54.123’E",
+   "lat": 68.4621,
+   "lon": 20.90205,
+   "landscape_unit": "Peat plateau",
+   "in_points": true,
+   "permafrost_site": true,
+   "criteria": [
+    "a",
+    "b",
+    "c"
+   ],
+   "evidence": "연중 최고 지온 0 °C 이하 센서 깊이 100 cm, 150 cm, 200 cm(2007년); 최심 센서 200 cm 의 연평균 -0.35 °C, 최저 -0.80, 최고 0.00(2007년); 2010-2012년 계절 말 측정에서 동결면 도달 3회"
+  },
+  {
+   "site_id": "T3",
+   "file_code": "T3/S3",
+   "lat_raw": "68°27.738’N",
+   "lon_raw": "20°54.106’E",
+   "lat": 68.4623,
+   "lon": 20.901767,
+   "landscape_unit": "Peat plateau",
+   "in_points": true,
+   "permafrost_site": true,
+   "criteria": [
+    "a",
+    "b",
+    "c"
+   ],
+   "evidence": "연중 최고 지온 0 °C 이하 센서 깊이 100 cm, 150 cm, 200 cm(2007년); 최심 센서 200 cm 의 연평균 -0.26 °C, 최저 -0.36, 최고 -0.18(2007년); 2010-2012년 계절 말 측정에서 동결면 도달 3회"
+  },
+  {
+   "site_id": "T4",
+   "file_code": "T4/S4",
+   "lat_raw": "68°27.742’N",
+   "lon_raw": "20°54.094’E",
+   "lat": 68.462367,
+   "lon": 20.901567,
+   "landscape_unit": "Depression in the peat plateau",
+   "in_points": true,
+   "permafrost_site": true,
+   "criteria": [
+    "a",
+    "b"
+   ],
+   "evidence": "연중 최고 지온 0 °C 이하 센서 깊이 150 cm, 200 cm(2007년); 최심 센서 200 cm 의 연평균 -0.33 °C, 최저 -0.54, 최고 -0.15(2007년)"
+  },
+  {
+   "site_id": "T5",
+   "file_code": "T5/S5/SX",
+   "lat_raw": "68°27.722’N",
+   "lon_raw": "20°54.115’E",
+   "lat": 68.462033,
+   "lon": 20.901917,
+   "landscape_unit": "Lake shoreline",
+   "in_points": false,
+   "permafrost_site": false,
+   "criteria": [],
+   "evidence": "최심 센서 100 cm 의 연평균 1.57 °C, 최저 -0.03, 최고 6.39(2007년)"
+  },
+  {
+   "site_id": "T6",
+   "file_code": "T6/S6",
+   "lat_raw": "68°27.731’N",
+   "lon_raw": "20°54.099’E",
+   "lat": 68.462183,
+   "lon": 20.90165,
+   "landscape_unit": "Lake shoreline",
+   "in_points": false,
+   "permafrost_site": false,
+   "criteria": [],
+   "evidence": "최심 센서 100 cm 의 연평균 0.99 °C, 최저 -0.06, 최고 4.48(2007년)"
+  },
+  {
+   "site_id": "T7",
+   "file_code": "T7/S7",
+   "lat_raw": "68°27.732’N",
+   "lon_raw": "20°54.100’E",
+   "lat": 68.4622,
+   "lon": 20.901667,
+   "landscape_unit": "Peat plateau edge",
+   "in_points": true,
+   "permafrost_site": true,
+   "criteria": [
+    "b",
+    "c"
+   ],
+   "evidence": "최심 센서 96 cm 의 연평균 -0.01 °C, 최저 -0.12, 최고 0.06(2007년); 2010-2012년 계절 말 측정에서 동결면 도달 3회"
+  },
+  {
+   "site_id": "T8",
+   "file_code": "T8/S8",
+   "lat_raw": "68°27.726’N",
+   "lon_raw": "20°54.090’E",
+   "lat": 68.4621,
+   "lon": 20.9015,
+   "landscape_unit": "Lake",
+   "in_points": false,
+   "permafrost_site": false,
+   "criteria": [],
+   "evidence": "최심 센서 230 cm 의 연평균 2.24 °C, 최저 0.98, 최고 3.61(2008년)"
+  },
+  {
+   "site_id": "T9",
+   "file_code": "T9/S9",
+   "lat_raw": "68°27.719’N",
+   "lon_raw": "20°54.153’E",
+   "lat": 68.461983,
+   "lon": 20.90255,
+   "landscape_unit": "Fen",
+   "in_points": false,
+   "permafrost_site": false,
+   "criteria": [],
+   "evidence": "최심 센서 200 cm 의 연평균 1.14 °C, 최저 0.36, 최고 3.42(2008년)"
+  }
+ ],
+ "permafrost_rule": "(a) 연중 최고 지온이 0 °C 이하인 센서가 있다, (b) 최심 센서의 연평균 지온이 0 °C 미만이다, (c) 2010-2012년 계절 말 측정에서 동결면에 닿은 값이 있다. 하나라도 만족하면 영구동토 지점이다",
+ "ground_temp_check": {
+  "max_abs_diff_vs_file_magt": 0.0,
+  "summary_file": "data/raw/swe_tavvavuoma_sannel/derived_ground_temp_summary.csv"
+ },
+ "visits_file": "data/raw/swe_tavvavuoma_sannel/derived_thaw_depth_visits.csv",
+ "coordinate_conversion": "원자료는 도와 소수 분(예: 68°27.720’N, 20°54.118’E)이다. 십진 도 = 도 + 분/60. 북위와 동경이라 부호는 양수다. 소수 6자리로 적었다. 원자료 정밀도는 0.001분(약 0.0000167도)이다. 측지계 기재는 파일에 없고 WGS84 로 가정했다",
+ "units": "원자료 단위는 cm 다(머리글의 '(cm)'). 변환하지 않았다",
+ "missing_codes": "'No data (in water)' 는 결측이다. '>100' 은 측정 한계 초과다",
+ "censoring": {
+  "probe_limit_cm": 100.0,
+  "rule": "'>100' 은 alt_cm = 100, right_censored = 1. 값은 하한이다"
+ },
+ "cell_preview": {
+  "rule": "ky = floor(lat/0.009), kx = floor(lon*cos(phi)/0.009), phi = (ky+0.5)*0.009 도",
+  "cells_all_sites": {
+   "7606_852": [
+    "T1",
+    "T2",
+    "T3",
+    "T4",
+    "T5",
+    "T6",
+    "T7",
+    "T8",
+    "T9"
+   ]
+  },
+  "n_cells_points_sites": 1,
+  "centroid_points_sites": {
+   "lat": 68.462193,
+   "lon": 20.901803
+  },
+  "cell_value_options_cm": {
+   "note": "셀 값은 v4 조립 단계에서 정한다. 아래는 주 집합 행으로 계산한 지점별 다년 평균의 평균이다. T1 과 T4 는 절단되지 않은 값이 설치 시 측정값 1건뿐이고 2010-2012년 값은 모두 절단이다",
+   "all_uncensored_rows": 73.33,
+   "table_2010_2012_rows_only": 58.89,
+   "n_sites_all_uncensored": 5,
+   "n_sites_table_2010_2012": 3
+  }
+ },
+ "v3_proximity": {
+  "nearest_f4_direct": {
+   "loc_id": "17520",
+   "region": "CALM_Scandinavia",
+   "lat": 68.3,
+   "lon": 18.8333,
+   "km": 86.6
+  },
+  "nearest_f4_direct_excluding_natlantic_regions": {
+   "loc_id": "17517",
+   "region": "CALM_Russia_W",
+   "lat": 67.7724,
+   "lon": 34.182,
+   "km": 554.6
+  },
+  "natlantic_region_names_used": [
+   "CALM_Greenland",
+   "CALM_Scandinavia",
+   "CALM_Svalbard"
+  ],
+  "min_chebyshev_deg_to_f4_direct": 2.0685
+ },
+ "unverified_items": [
+  "측정 기기와 방법은 파일에 기재가 없다. '>100' 표기로 보아 측정 한계가 100 cm 인 도구로 보이나 탐침인지는 확인하지 못했다. 원 논문(doi:10.1002/ppp.2045)의 본문은 출판사 누리집이 403 을 돌려주어 읽지 못했다. method 는 other 로 두었다",
+  "T7 의 2011년 값은 파일이 84 cm 로 적었으나 반복값(74, 76, 100)의 평균은 83.33 cm 다. 파일의 지점 값을 alt_cm 으로 썼다. 반복값 100 이 측정 한계에 닿은 값인지는 확인하지 못했다",
+  "T1 은 지온 센서의 최대 깊이가 91 cm 다. 2007년 91 cm 의 연평균은 0 °C 미만이나 연중 최고는 0 °C 를 넘는다. 2010-2012년에 T1 아래에 영구동토가 남아 있었는지는 파일로 확인하지 못했다(세 해 모두 >100)",
+  "T7 의 96 cm 지온은 연중 -0.12 에서 0.06 °C 범위다. 센서 정확도를 파일에서 확인하지 못했다. T7 은 계절 말 측정에서 동결면에 닿은 값이 있어 영구동토 지점으로 두었다",
+  "지온 관측 연도(2007, 2008)와 융해 깊이 관측 연도(2010-2012)가 다르다. 영구동토 판정은 관측 연도가 다른 자료에 근거한다",
+  "설치 시 융해 깊이 2건(T1 2005-09-23, T4 2006-09-04)의 측정 방법과 반복 수는 파일에 없다",
+  "가장자리 지점(T1, T7, 열카르스트 호수 인접)을 교란 지점으로 볼지는 파일에 기준이 없다. disturbed 는 0 으로 두고 경관 단위를 notes 에 적었다",
+  "같은 저자의 다른 자료(Bolin Centre sannel-2018-temperature-1, Tavvavuoma 2006-2013)는 이 작업에서 내려받지 않았다. 같은 1 km 셀의 연도를 늘릴 수 있는지는 확인하지 못했다"
+ ]
+}

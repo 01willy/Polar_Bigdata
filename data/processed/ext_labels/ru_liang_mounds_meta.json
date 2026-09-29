@@ -1,0 +1,1040 @@
+{
+ "src_id": "ru_liang_mounds",
+ "name": "Liang 등 2023, 시베리아 북동부 낙엽송 둔덕 융해 깊이(PANGAEA 961876)",
+ "schema_version": "1.0",
+ "url": "https://doi.org/10.1594/PANGAEA.961876",
+ "url_file": "https://doi.pangaea.de/10.1594/PANGAEA.961876?format=textfile",
+ "doi": "10.1594/PANGAEA.961876",
+ "accessed": "2026-09-29",
+ "parent_bundle": "https://doi.org/10.1594/PANGAEA.926686",
+ "files": [
+  {
+   "name": "PANGAEA_961876.tab",
+   "path": "data/raw/ru_liang_mounds/PANGAEA_961876.tab",
+   "url": "https://doi.pangaea.de/10.1594/PANGAEA.961876?format=textfile",
+   "size_bytes": 24271,
+   "sha256": "ffef8b495b93808dc9d33fdd349e8ac844c019e413527f7a9d71ea83c86b5611",
+   "kind": "원자료(내려받은 파일)"
+  },
+  {
+   "name": "thaw_depth_by_visit.csv",
+   "path": "data/raw/ru_liang_mounds/thaw_depth_by_visit.csv",
+   "url": "",
+   "size_bytes": 2090,
+   "sha256": "a0d7879354c4fab3cf5baf8e83d7c35974c008dfe03c9ef9b8997bb22d1d09e3",
+   "kind": "파서가 만든 방문 단위 요약"
+  },
+  {
+   "name": "PANGAEA_961876_metadata.jsonld",
+   "path": "data/raw/ru_liang_mounds/PANGAEA_961876_metadata.jsonld",
+   "url": "https://doi.pangaea.de/10.1594/PANGAEA.961876?format=metadata_jsonld",
+   "size_bytes": 6599,
+   "sha256": "bb8a811dfeff39b4a6c07bc753797f9ce4eff646a7397f8b6ca28904abb28f2e",
+   "kind": "참고 자료(라벨 값의 출처가 아니다)"
+  },
+  {
+   "name": "PANGAEA_926686_metadata.jsonld",
+   "path": "data/raw/ru_liang_mounds/PANGAEA_926686_metadata.jsonld",
+   "url": "https://doi.pangaea.de/10.1594/PANGAEA.926686?format=metadata_jsonld",
+   "size_bytes": 5508,
+   "sha256": "1e4e363bd1ad850196c5692b4d455b07c28d9faa345dcbae2984438a71aa743e",
+   "kind": "참고 자료(라벨 값의 출처가 아니다)"
+  },
+  {
+   "name": "ref/shingubara2019_bg-16-755.html",
+   "path": "data/raw/ru_liang_mounds/ref/shingubara2019_bg-16-755.html",
+   "url": "https://bg.copernicus.org/articles/16/755/2019/",
+   "size_bytes": 301347,
+   "sha256": "53a68434ba45f58245cc3bf277d4b97cc230441cda21aa57e9eaa144f366cbe0",
+   "kind": "참고 자료(라벨 값의 출처가 아니다)"
+  },
+  {
+   "name": "ref/shingubara2019_bg-16-755_supplement.pdf",
+   "path": "data/raw/ru_liang_mounds/ref/shingubara2019_bg-16-755_supplement.pdf",
+   "url": "https://bg.copernicus.org/articles/16/755/2019/bg-16-755-2019-supplement.pdf",
+   "size_bytes": 634061,
+   "sha256": "df223745bb8377925bcf8b89281b913b5390b51e4f386da7045e58373df90304",
+   "kind": "참고 자료(라벨 값의 출처가 아니다)"
+  },
+  {
+   "name": "ref/shingubara2019_bg-16-755_table1.xlsx",
+   "path": "data/raw/ru_liang_mounds/ref/shingubara2019_bg-16-755_table1.xlsx",
+   "url": "https://bg.copernicus.org/articles/16/755/2019/bg-16-755-2019-t01.xlsx",
+   "size_bytes": 8300,
+   "sha256": "c8904229b1c1473bad5cbd5d505460985f776c8e9343045f3bd9fdb8d8332e27",
+   "kind": "참고 자료(라벨 값의 출처가 아니다)"
+  }
+ ],
+ "license": "CC-BY-4.0",
+ "license_statement": "Creative Commons Attribution 4.0 International (CC-BY-4.0) (URI: https://creativecommons.org/licenses/by/4.0/)",
+ "license_evidence": "원자료 파일 머리말의 License 항목과 PANGAEA 메타(JSON-LD)의 license 항목",
+ "citation": "Liang, Maochang; Sugimoto, Atsuko; Tei, Shunsuke; Takano, Shinya; Morozumi, Tomoki; Shingubara, Ryo; Murase, Jun; Maximov, Trofim C (2023): Thaw depth of tree mounds from northeastern Siberia (S4) [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.961876",
+ "related_paper": "Liang 등 2023, Journal of Geophysical Research: Biogeosciences 128(10), e2022JG007135, https://doi.org/10.1029/2022JG007135",
+ "orig_source_published_data": "Shingubara, R. et al. (2019): Multi-year effect of wetting on CH4 flux at taiga-tundra boundary in northeastern Siberia deduced from stable isotope ratios of CH4. Biogeosciences 16, 755-768, https://doi.org/10.5194/bg-16-755-2019",
+ "parser": "scripts/1_data_prep/parse_ext_ru_liang_mounds.py",
+ "parser_sha256": "c3b1d0716fd7e3675c2b156bdf18a65f75bc2facfa1ecca7d11692e3fcb5685f",
+ "parser_git_commit": "a112cef1ed17fe2db74898b3861a5f82de753fdd",
+ "parser_git_note": "파서는 이 커밋의 작업 트리에서 새로 만든 파일이고 아직 커밋하지 않았다",
+ "parser_options": {
+  "published_as_other": false
+ },
+ "n_rows_raw": 212,
+ "n_rows_points": 17,
+ "n_sites": 5,
+ "n_coordinates": 4,
+ "n_visits": 17,
+ "n_by_label_def": {
+  "direct_dated": 12,
+  "direct_eos": 5
+ },
+ "n_by_method": {
+  "other": 12,
+  "probe": 5
+ },
+ "n_by_macro": {
+  "Russia_E": 17
+ },
+ "n_by_site": {
+  "V": 4,
+  "A": 1,
+  "K_tree_mound": 4,
+  "K_tree_wet": 4,
+  "B": 4
+ },
+ "n_by_qc_flag": {
+  "ok": 17
+ },
+ "n_by_eos_basis": {
+  "none": 12,
+  "record_date": 5
+ },
+ "n_by_label_def_and_method": {
+  "direct_dated|other": 10,
+  "direct_eos|probe": 3,
+  "direct_eos|other": 2,
+  "direct_dated|probe": 2
+ },
+ "n_raw_records_by_sample_method": {
+  "Leveling measurement": 173,
+  "Soil sampling": 15,
+  "Published data": 24
+ },
+ "n_raw_records_by_month": {
+  "07": 181,
+  "08": 31
+ },
+ "n_raw_records_by_site": {
+  "B": 14,
+  "V": 15,
+  "K tree mound": 158,
+  "K tree wet": 19,
+  "A": 6
+ },
+ "year_range": [
+  2010,
+  2013
+ ],
+ "year_range_target": [
+  2012,
+  2013
+ ],
+ "n_target_rows": 5,
+ "target_rows": [
+  {
+   "site_id": "V",
+   "year": 2012,
+   "date": "2012-08-07",
+   "alt_cm": 25.3333,
+   "alt_sd_cm": 3.1411,
+   "n_obs": 6,
+   "method": "probe"
+  },
+  {
+   "site_id": "V",
+   "year": 2013,
+   "date": "2013-08-02",
+   "alt_cm": 23.3333,
+   "alt_sd_cm": 2.8868,
+   "n_obs": 3,
+   "method": "probe"
+  },
+  {
+   "site_id": "K_tree_mound",
+   "year": 2012,
+   "date": "2012-08-02",
+   "alt_cm": 26.75,
+   "alt_sd_cm": 7.1494,
+   "n_obs": 12,
+   "method": "other"
+  },
+  {
+   "site_id": "K_tree_wet",
+   "year": 2012,
+   "date": "2012-08-02",
+   "alt_cm": 45.5,
+   "alt_sd_cm": 3.5119,
+   "n_obs": 4,
+   "method": "other"
+  },
+  {
+   "site_id": "B",
+   "year": 2012,
+   "date": "2012-08-09",
+   "alt_cm": 21.1667,
+   "alt_sd_cm": 2.0412,
+   "n_obs": 6,
+   "method": "probe"
+  }
+ ],
+ "alt_cm_stats_all_rows": {
+  "n": 17,
+  "mean": 27.5271,
+  "sd": 7.9478,
+  "min": 17.6667,
+  "median": 25.3333,
+  "max": 45.5
+ },
+ "alt_cm_stats_target_rows": {
+  "n": 5,
+  "mean": 28.4167,
+  "sd": 9.7792,
+  "min": 21.1667,
+  "median": 25.3333,
+  "max": 45.5
+ },
+ "alt_cm_stats_direct_dated_rows": {
+  "n": 12,
+  "mean": 27.1564,
+  "sd": 7.523,
+  "min": 17.6667,
+  "median": 25.8333,
+  "max": 44.1667
+ },
+ "thaw_cm_stats_raw_records": {
+  "n": 212,
+  "mean": 23.533,
+  "sd": 7.7456,
+  "min": 13.0,
+  "median": 21.5,
+  "max": 50.0
+ },
+ "n_excluded_by_reason": {
+  "_설명": "점 자료에서 지운 행은 없다. 아래는 대상 라벨 규칙(계획서 6B.3)을 통과하지 못하는 행의 수다",
+  "dropped_from_points": 0,
+  "raw_records_not_parsed": 0,
+  "label_def_not_direct_eos_july_visit": 12,
+  "right_censored": 0,
+  "disturbed": 0,
+  "qc_flag_not_ok": 0,
+  "year_pre1990": 0,
+  "raw_records_in_non_target_rows": 181,
+  "raw_records_in_target_rows": 31
+ },
+ "label_rule": "관측 월이 8월 또는 9월인 방문은 direct_eos(eos_basis = record_date), 7월 방문은 direct_dated(eos_basis = none)다. 이 자료의 8월 방문은 2012-08-02, 2012-08-07, 2012-08-09, 2013-08-02 이고 9월 방문은 없다",
+ "label_rule_deviation": [
+  "작업 지시의 라벨 규칙은 method 를 other 로 두라고 했다. 이 파서는 'Published data' 기록(24건, 점 자료 5행)만 probe 로 두었다. 근거는 원 논문 2.2절의 문장 'inserting a steel rod' 이다. 모두 other 로 두려면 --published-as-other 로 다시 실행한다"
+ ],
+ "method_evidence": {
+  "ref_file": "ref/shingubara2019_bg-16-755.html",
+  "ref_file_found": true,
+  "steel_rod_sentence_found": true,
+  "max_thaw_period_sentence_found": true,
+  "published_data_mapped_to": "probe"
+ },
+ "checks": {
+  "thaw_depth_unit": "cm(열 이름 'Thaw depth [cm]', 매개변수 설명 'Thaw depth of active layer [cm]')",
+  "coordinate_sign": "위도와 경도가 모두 양수다(북위, 동경). 지점 4곳이 모두 초쿠르다흐 부근 상자 (위도 69.5-71.5, 경도 146.0-150.0) 안에 있다",
+  "record_checks": {
+   "coord_outside_bbox": 0,
+   "date_end_before_start": 0,
+   "date_range_crosses_month": 0,
+   "duplicate_tree_id_within_visit": 0,
+   "greater_than_notation": 0,
+   "identical_records_beyond_first": 129,
+   "missing_thaw_values": 0,
+   "negative_thaw_values": 0,
+   "nonnumeric_thaw_values": 0,
+   "not_multiple_of_0p5cm": 0,
+   "records_with_date_range": 18,
+   "site_label_not_in_table": 0,
+   "thaw_outside_range": 0,
+   "year_column_differs_from_date": 0
+  },
+  "identical_records_note": "모든 열이 같은 기록이다. 기록에 측정점 식별자가 없어 같은 값의 다른 측정점인지 중복 입력인지 구분할 수 없다. 지우지 않았다",
+  "most_frequent_values_cm": [
+   [
+    18.0,
+    31
+   ],
+   [
+    22.0,
+    16
+   ],
+   [
+    20.0,
+    14
+   ],
+   [
+    19.0,
+    14
+   ],
+   [
+    25.0,
+    13
+   ]
+  ],
+  "largest_values_cm": [
+   [
+    50.0,
+    1
+   ],
+   [
+    49.0,
+    1
+   ],
+   [
+    48.0,
+    2
+   ],
+   [
+    45.0,
+    2
+   ],
+   [
+    44.0,
+    2
+   ]
+  ],
+  "coordinates_per_site_label": {
+   "B": [
+    "70.63743",
+    "148.15483"
+   ],
+   "V": [
+    "70.25190",
+    "147.46887"
+   ],
+   "K tree mound": [
+    "70.56327",
+    "148.26420"
+   ],
+   "K tree wet": [
+    "70.56327",
+    "148.26420"
+   ],
+   "A": [
+    "70.51542",
+    "147.30420"
+   ]
+  },
+  "shingubara2019_table1_coordinate_check": {
+   "B": {
+    "table1": "70°38′N 148°09′E",
+    "abs_diff_deg": [
+     0.0041,
+     0.00483
+    ],
+    "within_half_minute": true
+   },
+   "V": {
+    "table1": "70°15′N 147°28′E",
+    "abs_diff_deg": [
+     0.0019,
+     0.0022
+    ],
+    "within_half_minute": true
+   },
+   "K tree mound": {
+    "table1": "70°34′N 148°16′E",
+    "abs_diff_deg": [
+     0.0034,
+     0.00247
+    ],
+    "within_half_minute": true
+   },
+   "K tree wet": {
+    "table1": "70°34′N 148°16′E",
+    "abs_diff_deg": [
+     0.0034,
+     0.00247
+    ],
+    "within_half_minute": true
+   },
+   "A": "표 1 에 없는 지점이다"
+  },
+  "visits_with_mixed_sample_method": 0,
+  "site_years_with_more_than_one_visit": 0
+ },
+ "visit_summary": [
+  {
+   "site": "V",
+   "site_id": "V",
+   "lat": "70.25190",
+   "lon": "147.46887",
+   "date": "2010-07-16",
+   "date_end": "2010-07-24",
+   "year": 2010,
+   "month": 7,
+   "sample_method": "Leveling measurement",
+   "comment": "",
+   "tree_ids": "",
+   "n": 5,
+   "mean_cm": 23.0,
+   "sd_cm": 2.9791,
+   "min_cm": 20.0,
+   "median_cm": 22.5,
+   "max_cm": 28.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "V",
+   "site_id": "V",
+   "lat": "70.25190",
+   "lon": "147.46887",
+   "date": "2011-07-26",
+   "date_end": "2011-07-28",
+   "year": 2011,
+   "month": 7,
+   "sample_method": "Soil sampling",
+   "comment": "",
+   "tree_ids": "",
+   "n": 1,
+   "mean_cm": 27.0,
+   "sd_cm": "",
+   "min_cm": 27.0,
+   "median_cm": 27.0,
+   "max_cm": 27.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "V",
+   "site_id": "V",
+   "lat": "70.25190",
+   "lon": "147.46887",
+   "date": "2012-08-07",
+   "date_end": "",
+   "year": 2012,
+   "month": 8,
+   "sample_method": "Published data",
+   "comment": "Shingubara et al. (2019)",
+   "tree_ids": "",
+   "n": 6,
+   "mean_cm": 25.3333,
+   "sd_cm": 3.1411,
+   "min_cm": 21.0,
+   "median_cm": 24.5,
+   "max_cm": 29.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "V",
+   "site_id": "V",
+   "lat": "70.25190",
+   "lon": "147.46887",
+   "date": "2013-08-02",
+   "date_end": "",
+   "year": 2013,
+   "month": 8,
+   "sample_method": "Published data",
+   "comment": "Shingubara et al. (2019)",
+   "tree_ids": "",
+   "n": 3,
+   "mean_cm": 23.3333,
+   "sd_cm": 2.8868,
+   "min_cm": 20.0,
+   "median_cm": 25.0,
+   "max_cm": 25.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "A",
+   "site_id": "A",
+   "lat": "70.51542",
+   "lon": "147.30420",
+   "date": "2011-07-25",
+   "date_end": "",
+   "year": 2011,
+   "month": 7,
+   "sample_method": "Soil sampling",
+   "comment": "",
+   "tree_ids": "A1;A2;A3;A4;A5;A6",
+   "n": 6,
+   "mean_cm": 33.1667,
+   "sd_cm": 11.4441,
+   "min_cm": 23.0,
+   "median_cm": 28.0,
+   "max_cm": 50.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "K tree mound",
+   "site_id": "K_tree_mound",
+   "lat": "70.56327",
+   "lon": "148.26420",
+   "date": "2010-07-17",
+   "date_end": "",
+   "year": 2010,
+   "month": 7,
+   "sample_method": "Leveling measurement",
+   "comment": "",
+   "tree_ids": "",
+   "n": 6,
+   "mean_cm": 23.5,
+   "sd_cm": 5.01,
+   "min_cm": 18.0,
+   "median_cm": 24.0,
+   "max_cm": 31.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "K tree mound",
+   "site_id": "K_tree_mound",
+   "lat": "70.56327",
+   "lon": "148.26420",
+   "date": "2011-07-15",
+   "date_end": "2011-07-17",
+   "year": 2011,
+   "month": 7,
+   "sample_method": "Soil sampling",
+   "comment": "",
+   "tree_ids": "K1;K3;K7",
+   "n": 3,
+   "mean_cm": 35.1667,
+   "sd_cm": 6.8981,
+   "min_cm": 30.0,
+   "median_cm": 32.5,
+   "max_cm": 43.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "K tree mound",
+   "site_id": "K_tree_mound",
+   "lat": "70.56327",
+   "lon": "148.26420",
+   "date": "2012-08-02",
+   "date_end": "",
+   "year": 2012,
+   "month": 8,
+   "sample_method": "Leveling measurement",
+   "comment": "",
+   "tree_ids": "",
+   "n": 12,
+   "mean_cm": 26.75,
+   "sd_cm": 7.1494,
+   "min_cm": 20.0,
+   "median_cm": 25.0,
+   "max_cm": 42.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "K tree mound",
+   "site_id": "K_tree_mound",
+   "lat": "70.56327",
+   "lon": "148.26420",
+   "date": "2013-07-14",
+   "date_end": "",
+   "year": 2013,
+   "month": 7,
+   "sample_method": "Leveling measurement",
+   "comment": "",
+   "tree_ids": "",
+   "n": 137,
+   "mean_cm": 21.0438,
+   "sd_cm": 5.2453,
+   "min_cm": 13.0,
+   "median_cm": 19.0,
+   "max_cm": 41.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "K tree wet",
+   "site_id": "K_tree_wet",
+   "lat": "70.56327",
+   "lon": "148.26420",
+   "date": "2010-07-17",
+   "date_end": "",
+   "year": 2010,
+   "month": 7,
+   "sample_method": "Leveling measurement",
+   "comment": "",
+   "tree_ids": "",
+   "n": 6,
+   "mean_cm": 24.6667,
+   "sd_cm": 9.331,
+   "min_cm": 18.0,
+   "median_cm": 21.0,
+   "max_cm": 42.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "K tree wet",
+   "site_id": "K_tree_wet",
+   "lat": "70.56327",
+   "lon": "148.26420",
+   "date": "2011-07-17",
+   "date_end": "2011-07-20",
+   "year": 2011,
+   "month": 7,
+   "sample_method": "Soil sampling",
+   "comment": "",
+   "tree_ids": "K4;K5;K6",
+   "n": 3,
+   "mean_cm": 28.3333,
+   "sd_cm": 5.7735,
+   "min_cm": 25.0,
+   "median_cm": 25.0,
+   "max_cm": 35.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "K tree wet",
+   "site_id": "K_tree_wet",
+   "lat": "70.56327",
+   "lon": "148.26420",
+   "date": "2012-08-02",
+   "date_end": "",
+   "year": 2012,
+   "month": 8,
+   "sample_method": "Leveling measurement",
+   "comment": "",
+   "tree_ids": "",
+   "n": 4,
+   "mean_cm": 45.5,
+   "sd_cm": 3.5119,
+   "min_cm": 42.0,
+   "median_cm": 45.5,
+   "max_cm": 49.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "K tree wet",
+   "site_id": "K_tree_wet",
+   "lat": "70.56327",
+   "lon": "148.26420",
+   "date": "2013-07-25",
+   "date_end": "2013-07-31",
+   "year": 2013,
+   "month": 7,
+   "sample_method": "Published data",
+   "comment": "Shingubara et al. (2019)",
+   "tree_ids": "",
+   "n": 6,
+   "mean_cm": 44.1667,
+   "sd_cm": 2.3166,
+   "min_cm": 41.0,
+   "median_cm": 44.0,
+   "max_cm": 48.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "B",
+   "site_id": "B",
+   "lat": "70.63743",
+   "lon": "148.15483",
+   "date": "2010-07-14",
+   "date_end": "",
+   "year": 2010,
+   "month": 7,
+   "sample_method": "Leveling measurement",
+   "comment": "",
+   "tree_ids": "",
+   "n": 3,
+   "mean_cm": 19.1667,
+   "sd_cm": 1.4434,
+   "min_cm": 17.5,
+   "median_cm": 20.0,
+   "max_cm": 20.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "B",
+   "site_id": "B",
+   "lat": "70.63743",
+   "lon": "148.15483",
+   "date": "2011-07-26",
+   "date_end": "",
+   "year": 2011,
+   "month": 7,
+   "sample_method": "Soil sampling",
+   "comment": "",
+   "tree_ids": "",
+   "n": 2,
+   "mean_cm": 29.0,
+   "sd_cm": 1.4142,
+   "min_cm": 28.0,
+   "median_cm": 29.0,
+   "max_cm": 30.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "B",
+   "site_id": "B",
+   "lat": "70.63743",
+   "lon": "148.15483",
+   "date": "2012-08-09",
+   "date_end": "",
+   "year": 2012,
+   "month": 8,
+   "sample_method": "Published data",
+   "comment": "Shingubara et al. (2019)",
+   "tree_ids": "",
+   "n": 6,
+   "mean_cm": 21.1667,
+   "sd_cm": 2.0412,
+   "min_cm": 18.0,
+   "median_cm": 21.5,
+   "max_cm": 24.0,
+   "n_gt_notation": 0
+  },
+  {
+   "site": "B",
+   "site_id": "B",
+   "lat": "70.63743",
+   "lon": "148.15483",
+   "date": "2013-07-16",
+   "date_end": "",
+   "year": 2013,
+   "month": 7,
+   "sample_method": "Published data",
+   "comment": "Shingubara et al. (2019)",
+   "tree_ids": "",
+   "n": 3,
+   "mean_cm": 17.6667,
+   "sd_cm": 0.5774,
+   "min_cm": 17.0,
+   "median_cm": 18.0,
+   "max_cm": 18.0,
+   "n_gt_notation": 0
+  }
+ ],
+ "cell_preview": {
+  "_설명": "v4 조립 전의 참고 값이다. 셀 색인은 계획서 6B.3 의 식, 블록은 0.5° 다. K_tree_mound 와 K_tree_wet 은 좌표가 같다. 위치를 site_id 로 묶은 값과 좌표로 묶은 값을 함께 적는다",
+  "target_rows": {
+   "n_rows": 5,
+   "n_cells_1km": 3,
+   "n_blocks_0p5deg": 2,
+   "blocks": [
+    14000294,
+    14100296
+   ],
+   "cells_location_by_site_id": [
+    {
+     "cell": [
+      7805,
+      5537
+     ],
+     "block": 14000294,
+     "lat": 70.2519,
+     "lon": 147.46887,
+     "alt_cm": 24.3333,
+     "locations": [
+      "V"
+     ],
+     "years": [
+      2012,
+      2013
+     ],
+     "n_obs": 9
+    },
+    {
+     "cell": [
+      7840,
+      5481
+     ],
+     "block": 14100296,
+     "lat": 70.56327,
+     "lon": 148.2642,
+     "alt_cm": 36.125,
+     "locations": [
+      "K_tree_mound",
+      "K_tree_wet"
+     ],
+     "years": [
+      2012
+     ],
+     "n_obs": 16
+    },
+    {
+     "cell": [
+      7848,
+      5458
+     ],
+     "block": 14100296,
+     "lat": 70.63743,
+     "lon": 148.15483,
+     "alt_cm": 21.1667,
+     "locations": [
+      "B"
+     ],
+     "years": [
+      2012
+     ],
+     "n_obs": 6
+    }
+   ],
+   "cells_location_by_coordinate": [
+    {
+     "cell": [
+      7805,
+      5537
+     ],
+     "block": 14000294,
+     "lat": 70.2519,
+     "lon": 147.46887,
+     "alt_cm": 24.3333,
+     "locations": [
+      "V"
+     ],
+     "years": [
+      2012,
+      2013
+     ],
+     "n_obs": 9
+    },
+    {
+     "cell": [
+      7840,
+      5481
+     ],
+     "block": 14100296,
+     "lat": 70.56327,
+     "lon": 148.2642,
+     "alt_cm": 36.125,
+     "locations": [
+      "K_tree_mound/K_tree_wet"
+     ],
+     "years": [
+      2012
+     ],
+     "n_obs": 16
+    },
+    {
+     "cell": [
+      7848,
+      5458
+     ],
+     "block": 14100296,
+     "lat": 70.63743,
+     "lon": 148.15483,
+     "alt_cm": 21.1667,
+     "locations": [
+      "B"
+     ],
+     "years": [
+      2012
+     ],
+     "n_obs": 6
+    }
+   ]
+  },
+  "all_rows": {
+   "n_rows": 17,
+   "n_cells_1km": 4,
+   "n_blocks_0p5deg": 3,
+   "blocks": [
+    14000294,
+    14100294,
+    14100296
+   ]
+  },
+  "target_rows_L41a_probe_tube_only": {
+   "n_rows": 3,
+   "n_cells_1km": 2,
+   "n_blocks_0p5deg": 2,
+   "blocks": [
+    14000294,
+    14100296
+   ]
+  },
+  "target_rows_L41b_after_excluding_single_visit_before_aug15": {
+   "n_rows": 0,
+   "n_cells_1km": 0
+  },
+  "k_cell_alternatives": {
+   "_설명": "K 지점 셀의 값은 둔덕과 습지를 어떻게 묶는지에 따라 달라진다. 대상 행의 연 값으로 계산했다",
+   "tree_mound_only_cm": 26.75,
+   "wet_area_only_cm": 45.5,
+   "equal_weight_of_two_site_ids_cm": 36.125,
+   "record_weighted_cm": 31.4375,
+   "n_records": {
+    "tree_mound": 12,
+    "wet_area": 4
+   }
+  }
+ },
+ "v3_f4_direct_check": {
+  "n_v3_f4_direct_cells": 17467,
+  "macro_map_source": "src/polar/fidelity.py MACRO_REGION(글로 읽음)",
+  "by_site": {
+   "B": {
+    "nearest_loc_id": 17552,
+    "nearest_region": "CALM_Russia_E",
+    "nearest_lat": 70.5667,
+    "nearest_lon": 147.4167,
+    "nearest_alt_cm": 41.2,
+    "dist_km": 28.37,
+    "chebyshev_deg": 0.73813,
+    "n_v3_f4_direct_within_cheb_0p01deg": 0,
+    "nearest_other_macro_within_3deg_lat": {
+     "dist_km": 658.2,
+     "region": "Lena_RU",
+     "loc_id": 14390
+    }
+   },
+   "V": {
+    "nearest_loc_id": 17551,
+    "nearest_region": "CALM_Russia_E",
+    "nearest_lat": 70.55,
+    "nearest_lon": 147.4333,
+    "nearest_alt_cm": 46.125,
+    "dist_km": 33.17,
+    "chebyshev_deg": 0.2981,
+    "n_v3_f4_direct_within_cheb_0p01deg": 0,
+    "nearest_other_macro_within_3deg_lat": {
+     "dist_km": 648.3,
+     "region": "Lena_RU",
+     "loc_id": 14390
+    }
+   },
+   "K_tree_mound": {
+    "nearest_loc_id": 17551,
+    "nearest_region": "CALM_Russia_E",
+    "nearest_lat": 70.55,
+    "nearest_lon": 147.4333,
+    "nearest_alt_cm": 46.125,
+    "dist_km": 30.79,
+    "chebyshev_deg": 0.8309,
+    "n_v3_f4_direct_within_cheb_0p01deg": 0,
+    "nearest_other_macro_within_3deg_lat": {
+     "dist_km": 664.6,
+     "region": "Lena_RU",
+     "loc_id": 14390
+    }
+   },
+   "K_tree_wet": {
+    "nearest_loc_id": 17551,
+    "nearest_region": "CALM_Russia_E",
+    "nearest_lat": 70.55,
+    "nearest_lon": 147.4333,
+    "nearest_alt_cm": 46.125,
+    "dist_km": 30.79,
+    "chebyshev_deg": 0.8309,
+    "n_v3_f4_direct_within_cheb_0p01deg": 0,
+    "nearest_other_macro_within_3deg_lat": {
+     "dist_km": 664.6,
+     "region": "Lena_RU",
+     "loc_id": 14390
+    }
+   },
+   "A": {
+    "nearest_loc_id": 17551,
+    "nearest_region": "CALM_Russia_E",
+    "nearest_lat": 70.55,
+    "nearest_lon": 147.4333,
+    "nearest_alt_cm": 46.125,
+    "dist_km": 6.14,
+    "chebyshev_deg": 0.1291,
+    "n_v3_f4_direct_within_cheb_0p01deg": 0,
+    "nearest_other_macro_within_3deg_lat": {
+     "dist_km": 632.5,
+     "region": "Lena_RU",
+     "loc_id": 14390
+    }
+   }
+  }
+ },
+ "cross_source_check": {
+  "files_compared": [
+   "calm_pangaea_v4add_points.csv",
+   "calm_web_subsites_points.csv",
+   "cusp_v1_1_points.csv",
+   "firealt_talucci2025_points.csv",
+   "grl_disko_zastruzny_points.csv",
+   "grl_ilulissat_scheer_points.csv",
+   "mythaw_pangaea_points.csv",
+   "nsidc_ggd402_yamal_points.csv",
+   "palmtag2022_pedon_points.csv",
+   "qtp_du_gpr_points.csv",
+   "qtp_fu_temp_points.csv",
+   "qtp_liux_compile_points.csv",
+   "qtp_yang_compile_points.csv",
+   "ru_kwbs_makarieva_points.csv",
+   "ru_mamontovklyk_grosse_points.csv",
+   "ru_syrdakh_obs_points.csv",
+   "swe_tavvavuoma_sannel_points.csv"
+  ],
+  "n_within_cheb_0p01deg": 0,
+  "within_cheb_0p01deg": [],
+  "nearest_within_3deg_lat": {
+   "B": {
+    "dist_km": 31.46,
+    "src_id": "palmtag2022_pedon",
+    "site_id": "KY-T3-05"
+   },
+   "V": {
+    "dist_km": 63.23,
+    "src_id": "palmtag2022_pedon",
+    "site_id": "KY-T3-05"
+   },
+   "K_tree_mound": {
+    "dist_km": 40.06,
+    "src_id": "palmtag2022_pedon",
+    "site_id": "KY-T3-05"
+   },
+   "K_tree_wet": {
+    "dist_km": 40.06,
+    "src_id": "palmtag2022_pedon",
+    "site_id": "KY-T3-05"
+   },
+   "A": {
+    "dist_km": 34.68,
+    "src_id": "palmtag2022_pedon",
+    "site_id": "KY-T3-05"
+   }
+  }
+ },
+ "context_values": {
+  "_설명": "라벨이 아니다. 값의 크기를 읽는 데 쓰는 참고 값이다",
+  "calm_r31_allaiha": {
+   "source": "data/raw/calm/PANGAEA_972777_CALM_ALT_NH.tab 의 이벤트 CALM_R31(격자 탐침, 계절 말 값)",
+   "by_year": {
+    "2010": {
+     "alt_cm": 52.0,
+     "lat": 70.55,
+     "lon": 147.4333
+    },
+    "2011": {
+     "alt_cm": 52.0,
+     "lat": 70.55,
+     "lon": 147.4333
+    },
+    "2012": {
+     "alt_cm": 50.0,
+     "lat": 70.55,
+     "lon": 147.4333
+    },
+    "2013": {
+     "alt_cm": 47.0,
+     "lat": 70.55,
+     "lon": 147.4333
+    }
+   },
+   "dist_km_from_site_A": 6.14
+  },
+  "shingubara2019_table1": "둔덕 20-23 cm, 습지 31-56 cm(2010-2013년 7월 초에서 8월 초 관측의 평균)"
+ },
+ "coordinate_conversion": "변환 없음. 원자료가 WGS84 십진 도(소수 5자리)이고 동경은 양수다. 좌표는 지점 단위다(기록마다 같은 지점 좌표가 반복된다)",
+ "units": "cm. 변환하지 않았다",
+ "missing_value_marks": "값 열에 빈 칸과 결측 부호가 없다. 'Date/time end', 'Tree ID', 'Comment' 는 해당 없는 기록에서 빈 칸이다",
+ "unverified_items": [
+  "'Leveling measurement'(173건)와 'Soil sampling'(15건)의 측정 기기. PANGAEA 자료 설명에 없다. 관련 논문(Liang 등 2023, JGR Biogeosciences)은 출판사 누리집이 HTTP 403 을 돌려주어 본문을 읽지 못했다",
+  "8월 방문(8월 2일, 7일, 9일) 값과 연 최대 융해 깊이의 차이. 자료에 8월 중순 이후 방문이 없다. Shingubara 등 2019 는 최대 융해 깊이 시기를 8월 하순에서 9월 전반으로 적는다. 지점 A 에서 약 6 km, 나머지 지점에서 28-35 km 떨어진 CALM R31 의 계절 말 값(context_values)과 이 자료의 8월 초 값은 지점, 미지형, 시기가 모두 달라 차이의 원인을 나눌 수 없다",
+  "지점 A 의 이름과 경관. Shingubara 등 2019 의 표 1 에 없다. A 는 7월 기록만 있어 대상 행이 없다",
+  "V 와 B 기록의 미지형 구성. 자료 제목은 둔덕(tree mounds)이나 V 의 2012-08-07 기록의 최댓값은 29 cm 이고 Shingubara 등 2019 보충 표 S1 의 2012년 둔덕 범위는 16-27 cm 다. 습지 관측이 섞였는지 확인하지 못했다",
+  "'Published data' 기록과 Shingubara 등 2019 의 개별 관측값의 일대일 대응. 논문과 보충 자료에는 평균과 범위만 있다. 관측일은 보충 표 S2 와 맞는다(V 2012-08-07, 2013-08-02, B 2012-08-09, 2013-07-16, K 2013-07-25 와 07-31). 개별 값은 ADS 자료(A20190211-001)에 있다고 하나 받지 않았다",
+  "모든 열이 같은 기록이 다른 측정점인지 중복 입력인지 여부",
+  "지점 안 측정점의 위치와 배치. 좌표는 지점 단위 하나뿐이다",
+  "2011년 여름의 습윤 사건(큰 강수)이 융해 깊이에 준 영향. 교란으로 표시하지 않았다",
+  "K_tree_wet 의 식생(물이끼, 사초)과 수위. Shingubara 등 2019 는 사초 습지의 수위가 지표보다 10 cm 넘게 높았던 때가 있다고 적는다. 이 자료의 습지 기록이 어느 식생인지 확인하지 못했다. disturbed = 0 으로 두었다"
+ ]
+}

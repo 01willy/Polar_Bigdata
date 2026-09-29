@@ -707,34 +707,34 @@ TabPFN 의 n = 0, n ≥ 160, 전량, 알래스카 전체, 모드 x, D0, R0 은 �
 
 **직접 측정 라벨(대상 셀 후보)**
 
-| id | 자료 | 대상 지역 | 방법 | 계절 말 근거 | 추정 새 셀(블록) | 약관 |
-|---|---|---|---|---|---|---|
-| `qtp_du_gpr` | Du 등 2026, Zenodo 21999366 의 GPR·인력 시추 조사점 | Tibet | GPR 216점, 인력 시추 6점 | 자료 설명(9–10월 최대 융해기). 점별 날짜 없음 | 132(34) | MIT(기록 단위) |
-| `qtp_liux_compile` 의 'Cao, 2020' 기록 | Liu X. 등 2022 집계표(figshare 21444879) 안의 치롄 GPR | Tibet(치롄) | GPR | 조사 월을 확인하지 못했다 | 63(2) | CC BY 4.0 |
-| `grl_ilulissat_scheer` | Scheer 등 2024, PANGAEA 964306 | NAtlantic(그린란드) | 탐침 377지점 | 자료 설명(2020, 2021년 여름 말). 날짜 없음 | 14(1) | CC BY 4.0 |
-| `cusp_v1_1` 의 일부 출처 | CUSP v1.1 의 Jorgenson & Kanevskiy 2025(캉에를루수아크 2024-09-07–12), Petrone 등 2016(2011년 8월) | NAtlantic(그린란드), Canada | 구덩이·오거, GPR·탐침 | 기록 날짜 | 그린란드 6(2) | 확인하지 못했다 |
-| `mythaw_pangaea` | T-MOSAiC myThaw 2021–2023, PANGAEA 956039, 971586, 974461 | NAtlantic(Kevo, Iškoras, Russell Glacier, Bayelva), Canada | 탐침 측선, 반복 방문 | 반복 방문의 최댓값 | 5–6 | CC BY 4.0 |
-| `calm_web_subsites` | CALM 누리집의 지점별 원자료(Abisko S2 하위 지점, Kapp Linné S1 하위 지점) | NAtlantic(스칸디나비아, 스발바르) | 탐침 | CALM 규약 | 15(4) | 확인하지 못했다(인용 요구) |
-| `calm_pangaea_v4add` | PANGAEA 972777 의 v3 미편입 탐침 이벤트 9개(R27, R41, C3B, U5, R1, R30A, N3, IT1, U4) | Russia_E 3, Russia_W 1, NAtlantic(스발바르) 2, Canada 1, Alaska 2 | 탐침 | CALM 규약 | 9 | CC BY 4.0 |
-| `grl_disko_zastruzny` | Zastruzny 등 2024, PANGAEA 967139 | NAtlantic(그린란드) | 탐침 | 반복 방문의 최댓값(2015-08-04, 08-21) | 1 | CC BY 4.0 |
-| `swe_tavvavuoma_sannel` | Sannel 2020, Bolin Centre | NAtlantic(스칸디나비아) | 계절 말 융해 깊이 | 자료 설명. 좌표는 파일에서 확인하지 못했다 | 1 | CC BY 4.0 |
-| `ru_mamontovklyk_grosse` | Grosse 2007, PANGAEA 611409 | Russia_C(랍테프 서부 해안) | 현장 측정(기기 표기는 Visual observation, 탐침 여부 미확인) | 기록 날짜(2003-08-15–28) | 34(3) | CC BY 3.0 |
-| `palmtag2022_pedon` | Palmtag 등 2022, Bolin Centre | Russia_C(Logata, Ary-Mas), Russia_E(Kytalyk, Cherskii, Shalaurovo) | 토양 단면의 영구동토 상한 깊이 | 기록 날짜(8월 1–17일, 2010–2012) | Russia_C 23(2), Russia_E 17 | ODC-By |
-| `firealt_talucci2025` | Talucci 등 2025, Arctic Data Center | Russia_C(중앙 야쿠티아), Russia_W, Canada | 탐침(msrDepth) | 기록 날짜. 8–9월 관측만 | Russia_C 7(2), Russia_W 2(2), Canada 미정 | CC BY 4.0 |
-| `ru_syrdakh_obs` | Syrdakh 관측소, Zenodo 19890671 | Russia_C(중앙 야쿠티아) | 융해 깊이(관, 굴착, 금속봉, 구덩이) | 기록 날짜(9월 6일–10월 7일). 9월 방문만 대상 셀로 쓴다 | 5 이하 | CC BY 4.0 |
-| `ru_kwbs_makarieva` | Makarieva 등 2017, PANGAEA 881754 | Russia_E(콜리마 상류) | 융해층 경계 깊이 시계열(기기 미확인) | 시계열의 연 최대 | 10(1) 이하. 1990–1997년 값만 쓴다 | CC BY 3.0 |
-| `ru_liang_mounds` | Liang 등 2023, PANGAEA 961876 | Russia_E(인디기르카) | 융해 깊이 | 기록 날짜. 8월 관측만 | 3(2) | CC BY 4.0 |
-| `ru_yamal_walker` | Walker 등 2009, PANGAEA 842711, 842691 | Russia_W(Laborovaya, Kharasavey) | 탐침 측선 | 기록 날짜(2007, 2008년 8월) | 5–6(3) | CC BY 3.0 |
-| `nsidc_ggd353_thawtube` | Nixon, NSIDC GGD353 v6 | Canada(매켄지 계곡) | 융해관 | 융해관의 연 최대 | 31 | 확인하지 못했다(인용과 연락 요구) |
+| id | 자료 | 대상 지역 | 방법 | 계절 말 근거 | 추정 새 셀(블록) | 약관 | 확정 대상 셀(블록), 개정 13 |
+|---|---|---|---|---|---|---|---|
+| `qtp_du_gpr` | Du 등 2026, Zenodo 21999366 의 GPR·인력 시추 조사점 | Tibet | GPR 216점, 인력 시추 6점 | 자료 설명(9–10월 최대 융해기). 점별 날짜 없음 | 132(34) | MIT(기록 단위) | Tibet 132(34). WDL02副 를 WDL02 에 합쳐 1셀 줄었다 |
+| `qtp_liux_compile` 의 'Cao, 2020' 기록 | Liu X. 등 2022 집계표(figshare 21444879) 안의 치롄 GPR | Tibet(치롄) | GPR | 조사 월을 확인하지 못했다 | 63(2) | CC BY 4.0 | 0. 조사 월을 확인하지 못해 direct_dated 66셀(2블록)로 서술 집합에만 있다 |
+| `grl_ilulissat_scheer` | Scheer 등 2024, PANGAEA 964306 | NAtlantic(그린란드) | 탐침 377지점 | 자료 설명(2020, 2021년 여름 말). 날짜 없음 | 14(1) | CC BY 4.0 | NAtlantic 13(1). 그 가운데 1셀은 mythaw 와 같은 셀 |
+| `cusp_v1_1` 의 일부 출처 | CUSP v1.1 의 Jorgenson & Kanevskiy 2025(캉에를루수아크 2024-09-07–12), Petrone 등 2016(2011년 8월) | NAtlantic(그린란드), Canada | 구덩이·오거, GPR·탐침 | 기록 날짜 | 그린란드 6(2) | 확인하지 못했다 | NAtlantic 6(2), Canada 5(2). 'all rights reserved' 고지 |
+| `mythaw_pangaea` | T-MOSAiC myThaw 2021–2023, PANGAEA 956039, 971586, 974461 | NAtlantic(Kevo, Iškoras, Russell Glacier, Bayelva), Canada | 탐침 측선, 반복 방문 | 반복 방문의 최댓값 | 5–6 | CC BY 4.0 | NAtlantic 4(4), Canada 2(2). 2셀은 다른 자료원과 같은 셀 |
+| `calm_web_subsites` | CALM 누리집의 지점별 원자료(Abisko S2 하위 지점, Kapp Linné S1 하위 지점) | NAtlantic(스칸디나비아, 스발바르) | 탐침 | CALM 규약 | 15(4) | 확인하지 못했다(인용 요구) | NAtlantic 13(4). CCI ALT 결측 4셀(Abisko 하위 지점)은 채점 불가 |
+| `calm_pangaea_v4add` | PANGAEA 972777 의 v3 미편입 탐침 이벤트 9개(R27, R41, C3B, U5, R1, R30A, N3, IT1, U4) | Russia_E 3, Russia_W 1, NAtlantic(스발바르) 2, Canada 1, Alaska 2 | 탐침 | CALM 규약 | 9 | CC BY 4.0 | Russia_E 3(3), NAtlantic 2(2), Russia_W 1(1), Canada 1(1) |
+| `grl_disko_zastruzny` | Zastruzny 등 2024, PANGAEA 967139 | NAtlantic(그린란드) | 탐침 | 반복 방문의 최댓값(2015-08-04, 08-21) | 1 | CC BY 4.0 | NAtlantic 1(1). 절단 행(하한 120 cm)을 뺀 셀이라 절단 영향 표시 |
+| `swe_tavvavuoma_sannel` | Sannel 2020, Bolin Centre | NAtlantic(스칸디나비아) | 계절 말 융해 깊이 | 자료 설명. 좌표는 파일에서 확인하지 못했다 | 1 | CC BY 4.0 | NAtlantic 1(1). T1·T4 는 대상 연도가 모두 절단이라 셀 값에서 빠졌다 |
+| `ru_mamontovklyk_grosse` | Grosse 2007, PANGAEA 611409 | Russia_C(랍테프 서부 해안) | 현장 측정(기기 표기는 Visual observation, 탐침 여부 미확인) | 기록 날짜(2003-08-15–28) | 34(3) | CC BY 3.0 | Russia_C 27(3). 열침식 지형 21행은 교란 규칙으로 뺐다 |
+| `palmtag2022_pedon` | Palmtag 등 2022, Bolin Centre | Russia_C(Logata, Ary-Mas), Russia_E(Kytalyk, Cherskii, Shalaurovo) | 토양 단면의 영구동토 상한 깊이 | 기록 날짜(8월 1–17일, 2010–2012) | Russia_C 23(2), Russia_E 17 | ODC-By | Russia_C 16(2), Russia_E 17(5). 라벨은 단면 판정의 영구동토 상한(label_subtypes) |
+| `firealt_talucci2025` | Talucci 등 2025, Arctic Data Center | Russia_C(중앙 야쿠티아), Russia_W, Canada | 탐침(msrDepth) | 기록 날짜. 8–9월 관측만 | Russia_C 7(2), Russia_W 2(2), Canada 미정 | CC BY 4.0 | Canada 34(21), Russia_C 6(2), Russia_W 2(2). Russia_E 는 6–7월 관측뿐이라 0 |
+| `ru_syrdakh_obs` | Syrdakh 관측소, Zenodo 19890671 | Russia_C(중앙 야쿠티아) | 융해 깊이(관, 굴착, 금속봉, 구덩이) | 기록 날짜(9월 6일–10월 7일). 9월 방문만 대상 셀로 쓴다 | 5 이하 | CC BY 4.0 | Russia_C 2(1) |
+| `ru_kwbs_makarieva` | Makarieva 등 2017, PANGAEA 881754 | Russia_E(콜리마 상류) | 융해층 경계 깊이 시계열(기기 미확인) | 시계열의 연 최대 | 10(1) 이하. 1990–1997년 값만 쓴다 | CC BY 3.0 | Russia_E 2(1) |
+| `ru_liang_mounds` | Liang 등 2023, PANGAEA 961876 | Russia_E(인디기르카) | 융해 깊이 | 기록 날짜. 8월 관측만 | 3(2) | CC BY 4.0 | Russia_E 3(2) |
+| `ru_yamal_walker` | Walker 등 2009, PANGAEA 842711, 842691 | Russia_W(Laborovaya, Kharasavey) | 탐침 측선 | 기록 날짜(2007, 2008년 8월) | 5–6(3) | CC BY 3.0 | Russia_W 5(3). Kharasavey-1 보고서 값 10행은 약관 미확인 |
+| `nsidc_ggd353_thawtube` | Nixon, NSIDC GGD353 v6 | Canada(매켄지 계곡) | 융해관 | 융해관의 연 최대 | 31 | 확인하지 못했다(인용과 연락 요구) | Canada 33(16) |
 
 **보조 라벨(확인적 풀에 넣지 않는다)**
 
-| id | 자료 | 지역 | 라벨 정의 | 추정 새 셀(블록) | 용도 |
-|---|---|---|---|---|---|
-| `qtp_fu_temp` | Fu 2025, figshare 29206613 | Tibet(회랑) | 지온 유도 | 43(11) | L39 |
-| `qtp_yang_compile` | Yang & Qiu 2026, Zenodo 18150789 와 Chang 등 2024 보충 표 S1 | Tibet | 방법 열 없음(시추공, 센서, GPR 혼합) | 123(37). 같은 시추공의 중복 수록이 있다 | L39 보조, 서술 |
-| `qtp_liux_compile` 의 나머지 기록 | Liu X. 등 2022 집계표 | Tibet | 출처 논문별 확인 전에는 미확인 | 미정 | 서술 |
-| `nsidc_ggd402_yamal` | NSIDC GGD402 야말 시추공 | Russia_W(야말) | 시추 기재의 영구동토 상한 깊이. 산정 방법 미확인. 1976–1989년 | 147(21) | 서술. 연도 규칙으로 주 집합에서 빠진다 |
+| id | 자료 | 지역 | 라벨 정의 | 추정 새 셀(블록) | 용도 | v4 셀(블록), 개정 13 |
+|---|---|---|---|---|---|---|
+| `qtp_fu_temp` | Fu 2025, figshare 29206613 | Tibet(회랑) | 지온 유도 | 43(11) | L39 | 39(11). 600 cm 를 넘는 연도가 있는 5지점(TM1, TG2, AMD1, TT1, AD1)을 위치 범위 규칙으로 뺐다 |
+| `qtp_yang_compile` | Yang & Qiu 2026, Zenodo 18150789 와 Chang 등 2024 보충 표 S1 | Tibet | 방법 열 없음(시추공, 센서, GPR 혼합) | 123(37). 같은 시추공의 중복 수록이 있다 | L39 보조, 서술 | 0. 서술 집합(unknown_other)에 30셀 |
+| `qtp_liux_compile` 의 나머지 기록 | Liu X. 등 2022 집계표 | Tibet | 출처 논문별 확인 전에는 미확인 | 미정 | 서술 | 0. 서술 집합(unknown_other)에 110셀 |
+| `nsidc_ggd402_yamal` | NSIDC GGD402 야말 시추공 | Russia_W(야말) | 시추 기재의 영구동토 상한 깊이. 산정 방법 미확인. 1976–1989년 | 147(21) | 서술. 연도 규칙으로 주 집합에서 빠진다 | 148(23), F2_ext_unknown. 월은 시추 월(drill_months) |
 
 **선정하지 않은 주요 후보**: Schirrmeister 등 2022·2023(수체 바닥 지점), Polaris(7월 8일–8월 3일 관측, 기존 CALM 콜리마 군집 안), Fuchs 등 2026(관측 날짜 없음), GTN-P Yubileynoe(7월 초), ABCFlux v2(방법과 관측일 없음), CUSP 의 Smith & Burgess 기록(방법 불명, 1965–1991년), Nordicana D134(열침식 골짜기, 마지막 관측 7월 29일과 8월 16일), PERMOS·Nordicana D8·PANGAEA 837172·arcss160·GGD332(지온 유도이고 새 셀이 적거나 좌표 정밀도가 0.01–0.1°), 모형 산출 격자 전부.
 
@@ -797,14 +797,17 @@ TabPFN 의 n = 0, n ≥ 160, 전량, 알래스카 전체, 모드 x, D0, R0 은 �
 
 **탐색 단계 추정(확정 값이 아니다)**
 
-| 대상 | v3 의 F4_direct 셀(블록) | 추정 새 대상 셀(블록) | 예상 역할 |
-|---|---|---|---|
-| Tibet | 0(QTP_CN 1셀은 지온 유도라 뺀다) | 132(34). 치롄 63(2)은 조사 월 확인 뒤 | PE2 |
-| NAtlantic | 3(2) | 약 45(새 블록 약 12) | PE1. 블록 조건은 CCI ALT 유효 셀 수에 달려 있다 |
-| Russia_C | 7(6) | 64(7) | PE1 |
-| Russia_E 확충판 | 30(21) | 약 35(약 10) | 민감도 |
-| Russia_W 확충판 | 31(21) | 8–9(5) | 민감도 |
-| Canada 확충판 | 750(39) | GGD353 31, CALM 1, FireALT 미정 | 민감도 |
+| 대상 | v3 의 F4_direct 셀(블록) | 추정 새 대상 셀(블록) | 예상 역할 | 확정 대상 셀(블록) = 새 + v3, 개정 13 | 채점 셀, 채점 블록 합집합, 평균 ALT | 판정(개정 13) |
+|---|---|---|---|---|---|---|
+| Tibet | 0(QTP_CN 1셀은 지온 유도라 뺀다) | 132(34). 치롄 63(2)은 조사 월 확인 뒤 | PE2 | 132(34) = 132(34) + 0 | 132셀, 합집합 34, 261.8 cm | 적격, 심부 레짐, PE2 |
+| NAtlantic | 3(2) | 약 45(새 블록 약 12) | PE1. 블록 조건은 CCI ALT 유효 셀 수에 달려 있다 | 41(13) = 38(12) + 3(2) | 34셀, 합집합 10, 70.9 cm | 적격, 얕은 레짐, PE1·PE2. 사용 분할의 최소 채점 블록 3(소수 블록) |
+| Russia_C | 7(6) | 64(7) | PE1 | 57(13) = 51(8) + 6(5). v3 loc 17557 은 레나 델타 영역이라 뺐다 | 57셀, 합집합 13, 61.2 cm | 적격, 얕은 레짐, PE1·PE2 |
+| Russia_E 확충판 | 30(21) | 약 35(약 10) | 민감도 | 55(28) = 25(11) + 30(21) | 52셀, 합집합 25 | 적격, L40 |
+| Russia_W 확충판 | 31(21) | 8–9(5) | 민감도 | 39(26) = 8(6) + 31(21) | 36셀, 합집합 21 | 적격, L40 |
+| Canada 확충판 | 750(39) | GGD353 31, CALM 1, FireALT 미정 | 민감도 | 825(67) = 75(38) + 750(39) | 820셀, 합집합 62 | 적격, L40 |
+| Tibet 지온 유도(L39) | 0 | 43(11) | 보조 | 39(11) | 39셀, 합집합 11, 279.4 cm | 적격, L39 보조 |
+
+확정 값은 `data/processed/lgd_eligibility_v1.csv`(개정 13)에서 옮겼다. 채점 셀은 `eval_mask`(라벨, CCI ALT, 토양 도일 유효)다. 적격 판정의 근거와 변형별 값은 개정 이력의 개정 13 에 있다.
 
 ### 6B.5 가설과 판정(결과 열람 전 고정)
 
@@ -853,7 +856,7 @@ L1, L4, L8 의 판정(P4, h40 집계)은 어떤 경우에도 그대로 싣는다
 | 2 | 1 km 셀 집계, 중복 제거, 공변량 부착(새 DEM 타일과 SoilGrids 창 내려받기 포함) | 로컬(프로세스 1개, 스레드 1개) |
 | 3 | v4 조립: `fidelity_base_v4.csv`(v3 와 같은 45열), `e5_soil_tdd_v4.csv`, 라벨 부가 표 `fidelity_base_v4_labels.csv`(loc_id, 자료원, 방법, 라벨 정의, 계절 말 근거, 연도 범위, 대상, 하위 단위), 메타 | 로컬 |
 | 4 | 적격 표 작성(`--count-only` 와 분할 구조). v4 해시와 적격 표를 개정 이력에 적는다 | 로컬 |
-| 5 | 사전 점검과 본 실행. 본 실행은 새 범위이므로 사용자 확인 뒤 제출한다 | Rescale |
+| 5 | 사전 점검과 본 실행. 본 실행은 새 범위이므로 사용자 확인 뒤 제출한다 | 로컬 서버(개정 13, 사용자 지시 2026-09-30). 개정 12 까지의 기재는 Rescale |
 | 6 | 확장 풀 집계. 본 실행 조각(읽기 전용)과 LGD 조각을 읽어 P4, PE1, PE2 의 판정을 낸다 | 집계만 로컬 가능 |
 
 - **범위**: 대상은 Tibet, NAtlantic, Russia_C 와 확충판 셋, 보조 라벨 대상이다. 모드는 x 다. CPU 부분의 방법 축(P0–P3, D0, D1, R0–R3, V1, V1r, CatBoost)을 분할 5, n 격자(|A| 미만과 전량), 추출 5, seed 2 로 실행한다. α 축, 배치 축, 학습기 축(GPU)은 이 개정의 등록 범위가 아니다.
@@ -885,14 +888,14 @@ L1, L4, L8 의 판정(P4, h40 집계)은 어떤 경우에도 그대로 싣는다
 | 항목 | 내용 |
 |---|---|
 | 라벨 정의의 혼합 | 새 지역의 직접 라벨은 탐침, GPR, 토양 단면, 융해관이 섞여 있다. 티베트는 전부 GPR 과 인력 시추다. 방법 효과와 지역 효과는 L41 로 일부만 분리된다 |
-| 계절 말 확인 | 티베트 GPR 과 일루리사트는 기록 단위 날짜가 없다. 8월 초·중순의 단일 방문(Palmtag, FireALT 중앙 야쿠티아)은 계절 최대보다 얕을 수 있다 |
+| 계절 말 확인 | 티베트 GPR 과 일루리사트는 기록 단위 날짜가 없다. 8월 초·중순의 단일 방문(Palmtag, FireALT 중앙 야쿠티아)은 계절 최대보다 얕을 수 있다. (개정 13) 티베트 자료의 탐갱 식별자 날짜 18개 가운데 6개가 10월이다(2009-10-02, 10-02, 10-05, 10-10, 10-10, 2010-10-15). 조사 기간이 10월을 포함하지만 GPR 점의 날짜는 없어 6B.3 의 10월 단일 방문 규칙을 점 단위로 적용할 수 없다. Tibet 대상 132셀은 모두 dataset_statement 이고 L41 (a)(c)에서 0셀이라 민감도를 낼 수 없다. PE2 결론에 이 한계를 병기한다 |
 | 관측 연도 | 2003년(Mamontov Klyk), 2010–2012년(Palmtag), 1990–1997년(콜리마) 관측을 2015–2020년 기후값과 짝짓는다. v3 도 다년 평균 라벨과 고정 기후값을 쓰지만 새 자료는 단년 관측의 비중이 크다 |
-| 공간 군집 | 새 셀은 소수의 조사지에 몰려 있다(Russia_C 새 셀 64개가 블록 7개, NAtlantic 은 일루리사트 블록에 14셀). 블록 등가중 값을 함께 읽어야 한다 |
+| 공간 군집 | 새 셀은 소수의 조사지에 몰려 있다(Russia_C 새 셀 64개가 블록 7개, NAtlantic 은 일루리사트 블록에 14셀). 블록 등가중 값을 함께 읽어야 한다. (개정 13) 확정 값: NAtlantic 대상 41셀 가운데 13셀(31.7 %)이 일루리사트 블록 13799897 이고 분할 3, 4 의 채점 셀 가운데 이 블록 비중이 86.7 %, 68.4 % 다. Russia_C 새 51셀 가운데 27셀(53 %)이 Mamontov Klyk 단일 조사(블록 3개)이고 Palmtag 16셀(블록 2개)을 더하면 84 % 다. 대상 셀을 구성 위치 사이 1 km 단일 연결로 묶으면 NAtlantic 41셀이 27묶음, Russia_C 57셀이 26묶음, Tibet 132셀이 109묶음이다 |
 | 지역 묶음 | NAtlantic 과 Russia_C 는 기후와 지형이 다른 조사지를 묶은 단위다. 하위 단위별 값은 셀이 적어 서술에 그친다 |
 | 행 단위 | 새 자료는 1 km 셀, v3 의 ABoVE·ALLena 는 소수 4자리 좌표 단위다. 라벨 수 n 의 뜻이 지역마다 같지 않다 |
-| 레짐 | 티베트는 계수 비가 원천 지역의 범위 밖이다. 원천 셀(v3 의 F4_direct) 고도의 99 백분위는 902 m 이고 티베트 후보 셀의 고도는 v4 조립에서 확인한다. PE2 의 cm 단위 평균은 티베트가 지배할 수 있다 |
+| 레짐 | 티베트는 계수 비가 원천 지역의 범위 밖이다. 원천 셀(v3 의 F4_direct) 고도의 99 백분위는 902 m 이고 티베트 후보 셀의 고도는 v4 조립에서 확인한다. PE2 의 cm 단위 평균은 티베트가 지배할 수 있다. (개정 13) 확인 결과: Tibet 직접 라벨 132셀의 고도는 3,537.5–5,176.0 m(중앙 4,710 m)이고 전부 원천 99 백분위(901.8 m)를 넘는다. 원천 1–99 백분위 밖 비율은 sg_soc_0_5 와 sg_cfvo_5_15 100 %, e5_swe 97.7 %, sg_bdod_5_15 50.8 %, e5_twarm 34.8 %, e5_tdd 33.3 % 다(`fidelity_base_v4_meta.json` 의 by_region) |
 | 좌표 | CALM 하위 지점 좌표는 설명문의 도·분 표기를 해석한 값이다. 집계 자료의 좌표는 0.01° 로 반올림된 것이 있다 |
-| 공변량 | 해안 셀은 ERA5-Land 육지 폴백을 쓴다. 산지와 해안의 CCI ALT 결측으로 채점 셀이 줄 수 있다(Abisko 하위 지점 11개 가운데 2019년 파일에서 유효한 것은 6개였다) |
+| 공변량 | 해안 셀은 ERA5-Land 육지 폴백을 쓴다. 산지와 해안의 CCI ALT 결측으로 채점 셀이 줄 수 있다(Abisko 하위 지점 11개 가운데 2019년 파일에서 유효한 것은 6개였다). (개정 13) ERA5-Land 육지 판정(t2m 유효)은 빙하 격자를 거르지 않는다. 2015–2020년 월 적설 최솟값이 1 m 이상인 격자를 쓰는 셀이 NAtlantic 대상에 6개(새 20080, 20081, 20111, 20112 와 v3 17565, 17566) 있다. ERA5-Land 공변량에는 지점 고도 보정이 없어 격자 상자 평균보다 300 m 이상 낮은 셀(Tibet 5, NAtlantic 3, Russia_E 1)은 TDD 가 낮게 잡힌다. DEM 창 중심이 수면 화소(고도 0, 경사 0)인 셀이 v3 에 54개, 새 행에 3개(매켄지 삼각주) 있다. 값은 v3 규약대로 두고 라벨 부가 표에 표지를 적었다 |
 | 확인하지 못한 것 | 치롄 GPR 의 조사 월, Mamontov Klyk 의 측정 기기, 콜리마 자료의 측정 기기, GGD402 의 산정 방법, Tavvavuoma 와 Syrdakh 의 지점 좌표, CUSP·CALM 누리집·GGD353·GGD402 의 재배포 약관, 새 셀의 SoilGrids 와 토양 도일 유효 여부. NAtlantic 묶음의 문헌 근거는 찾아 확인하지 않았다 |
 
 ## 7. 결과(실행 후 추가)
@@ -958,3 +961,22 @@ L1, L4, L8 의 판정(P4, h40 집계)은 어떤 경우에도 그대로 싣는다
   - 스모크에서 확인한 차이: 같은 적합 모델로 채점 셀을 두 묶음으로 나눠 예측한 값과 한 번에 예측한 값의 차가 최대 0.056 cm 였다(구현의 허용 차 0.001 cm 를 넘는다). tabpfn 의 기본 설정(inference_precision 'auto', CUDA 에서 혼합 정밀도 autocast)과 묶음 크기에 따른 계산 순서 차이로 보이나 실험으로 확인하지는 않았다. GPU 전처리는 학습 행으로만 맞춘다(코드 읽기). 묶음 재예측은 CUDA 메모리 부족 때만 쓰이며 표지(chunk)가 남는다. 결과 절에서 chunk 표지 키의 수를 보고한다. 같은 입력의 반복 예측이 GPU 에서 같은 값을 내는지(재개 때 다시 돈 단위의 재현성)는 확인하지 못했다. 모델 설정(정밀도)은 바꾸지 않았다.
   - GPU 상태(01:29 확인): 계산 프로세스가 없고 사용률 0 % 인 GPU 5, 6, 7, 9 의 메모리 사용 표시는 2 MiB 였다(드라이버 530.41.03, 다른 사용자의 작업이 GPU 0–4 와 8 을 쓰고 있다). 6C.8 의 '0 MiB' 기준을 그대로 두면 빈 GPU 도 빠지므로 스모크는 `--gpu-mem-max-mib 2` 로 돌렸다. 본 실행도 실행 직전의 빈 GPU 표시값을 확인해 이 인자로 준다. 계산 프로세스가 있는 GPU 는 메모리 값과 무관하게 뺀다.
   - 이 개정은 LGT 본 실행 전에 커밋해야 한다(6C.7).
+- 2026-09-30 개정 13(LGD 입력 표 확정과 실행 전 규칙. 결과 열람 전이다. 02:28 에 `results/rescale_lg/` 가 없음을 확인했다. LGD 대상 실험은 한 번도 실행하지 않았다. 이 개정을 쓰면서 NAtlantic, Russia_C 의 계수 비 ALT/√TDD 와 라벨-공변량 관계는 계산하지 않았다(6B.7). 라벨 값은 셀 집계, 절단 점검, 레짐 판정에만 썼다): v4 조립 뒤 검증 지적 27건을 반영하고 6B.4 '판정 시점' 규칙에 따라 v4 해시와 적격 표를 적는다. L1e, L4e, L8e, L38–L42 의 판정 문구, 적격 규칙, 레짐 기준, 풀 정의는 바꾸지 않았다. 더한 것은 L41 변형 (d)–(h), L40 변형 1개, 실행 표 규칙, 라벨 부가 표의 표지 열이다. 6B.2 와 6B.4 의 표에 확정 값 열을 더했고 6B.9 에 확인 결과를 덧붙였다.
+  - 판정 시점 기록(입력 표): `data/processed/fidelity_base_v4.csv` sha256 4c387b2b4fb43ef602d9e0b8fe50054a6699428d5a593425b3d309e798fce52a(18,088행 45열 = v3 17,572 + 새 516, 내용 해시 a60e416fcb16), `e5_soil_tdd_v4.csv` 2ef333b24d60332af1a432ceff5ee7bb73a2154d0fc23659e8e694d6674029f6, `fidelity_base_v4_labels.csv` 9f5af274f4b835045d90e202e35ebdc872e54e0affba218835735a43a87b2247, `lgd_eligibility_v1.csv` 5b23a9a8d7bc79eb663605a142a58e7d1ed6a5fa1555f436e007611c155f364b, `lgd_eligibility_v1_splits.csv` 765b3f25997ae779270da7f726288e9b174f6391be438f23a55253c6b3ba8cfa. v3 행은 region 을 뺀 44열 해시(cdb3fbc676ec)가 v3 와 같고, CALM_Greenland 3행의 region 을 되돌리면 45열 해시가 v3 메타의 3a2eddb38cae 와 같다. v3 두 표(`fidelity_base_v3.csv`, `e5_soil_tdd_v3.csv`)의 sha256 은 작업 전후 같다.
+  - 새 행: 대상 직접 라벨(F4_ext_direct) 329, Tibet 지온 유도 보조(F3_ext_temp, L39) 39, 야말 시추 기재 보조(F2_ext_unknown) 148. 지역별 새 대상 셀(블록)은 Tibet 132(34), NAtlantic 38(12), Russia_C 51(8), Russia_E 25(11), Russia_W 8(6), Canada 75(38)이다. 셀 표 `ext_cells_v1.csv` 는 서술 집합과 범위 밖 지역을 합쳐 1,175셀이다.
+  - 적격 판정(6B.4 규칙 그대로, `lgd_eligibility_v1.csv`): Tibet 적격(132셀, 채점 블록 합집합 34, 평균 261.8 cm, 심부) → PE2. NAtlantic 적격(41셀 = 새 38 + v3 3, 채점 34셀, 합집합 10, 70.9 cm, 얕음) → PE1·PE2. Russia_C 적격(57셀 = 새 51 + v3 6, 채점 57셀, 합집합 13, 61.2 cm, 얕음) → PE1·PE2. 따라서 PE1 은 P4 와 NAtlantic, Russia_C 의 6지역, PE2 는 PE1 과 Tibet 의 7지역이다. 확충판 Russia_W(39셀, 합집합 21), Russia_E(55셀, 25), Canada(825셀, 62)는 적격이고 역할은 L40 민감도다. L39(Tibet 지온 유도 39셀, 합집합 11)는 적격이다. 대상 전체(v3 구성 셀 포함)에서 다른 지리 macro 의 v3 F4_direct 까지 최소 거리는 Russia_C 168.8 km, NAtlantic 362.2 km, Tibet 2,438.7 km 다. 분할 1–5 는 세 새 지역 모두 유효하다. 사용 분할의 최소 채점 블록 수는 Tibet 14, Russia_C 6, NAtlantic 3 이다. NAtlantic 은 5 미만이므로 WRAPUP 7.2 (a)4 에 따라 L38 행에 '소수 블록'을 붙인다.
+  - L41 변형의 적격(대상 셀, 합집합): Tibet 은 (a)·(c)·(h) 0셀로 변형 불가, (b)·(d)·(e)·(f)·(g) 는 주 설정과 같은 132셀(34). NAtlantic 은 (a) 34셀·7 부적격, (b) 41·10, (c) 26·9, (d) 37·9, (e) 33·8, (f) 41·10(평균 72.5 cm), (g) 35·8, (h) 28·9. Russia_C 는 (a) 12·7 부적격, (b) 35·9(유효 분할 4), (c) 57·13, (d) 30·8, (e) 51·12, (f) 57·13(평균 62.1 cm), (g) 57·13(해당 셀 없음), (h) 30·8. L40 변형 Russia_E 확충판 Kytalyk 제외는 48셀·25 로 적격이다.
+  - 절단 처리(검증 지적 1–3, 8). 규칙: 우측 절단 행은 6B.3 대로 셀 값에서 빼되, 뺀 행을 셀에 기록한다. 라벨 부가 표와 셀 표에 n_cens_removed, cens_lb_max, cens_lb_mean, cens_lb_gt_cell(뺀 하한의 최댓값이 셀 값보다 큼), alt_cm_cens_lb(절단 행을 하한값으로 넣어 다시 계산한 셀 값), n_cens_suspect, cens_affected(cens_lb_gt_cell 이거나 절단 의심 행이 있음)를 둔다. 새 변형 (e) 는 cens_affected 셀을 빼고, (f) 는 셀 값을 alt_cm_cens_lb 로 바꾼다(셀 집합은 주 설정과 같다). 절단 의심 판단 목록(원자료 제공자 확인 전의 판단, `ext_cells_v1_meta.json` 의 rules.cens_suspect): calm_web_subsites S2_AB4 2019–2021(150 cm 3년 연속), grl_ilulissat_scheer ILU16013T 2021(107 cm, 이웃 H2 의 'Out of range' 값과 같음), ERT_CALM_43 2021(110 cm, 이웃 ERT_CALM_40–42 와 같음), FireALT CG2-20C 2019-10-04(5건 모두 150 cm), Tavvavuoma T7 2011(반복값에 한계 값 100 cm). mythaw 파서는 연 값을 준 방문에 '완전 융해' 점이 있으면 right_censored = 1 로 둔다. Tavvavuoma T1 2005, T4 2006 의 설치 때 값은 표 값과 다른 측정이라 판단 제외 목록에 넣었다. 그래서 T1·T4 는 절단 행만 남고 셀 값에서 빠진다(셀 73.3 → 58.9 cm). 결과: 대상 셀 가운데 cens_lb_gt_cell 은 NAtlantic 6, Russia_C 6, Canada 5 이고 cens_affected 는 NAtlantic 8, Russia_C 6, Canada 6 이다. Tibet, Russia_W, Russia_E 는 0 이다(Russia_E 는 절단 행을 뺀 셀이 1개 있으나 하한이 셀 값보다 작다).
+  - 10월 연 값 규칙(지적 8). series_max 의 최댓값 방문이 10월 이후이면, 그 방문의 유효 점 수가 8–9월 방문의 최대 유효 점 수와 같고 측정 구성(mythaw 는 측선 점 수, FireALT 는 msrType)이 같을 때만 쓴다. 조건을 채우지 못하면 8–9월 방문의 최댓값을 쓴다. 바뀐 행: mythaw Kevo 2022(2022-11-02, 27/30점 → 2022-09-21, 59.53 cm), FireALT 0052 2017(10-27, 2건, active → 08-27, 59.6 cm, record_date). 유지한 행: Kevo 2021(10-17, 30/30점), FireALT 0122 2019(10-04, 5건, 절단 의심으로 표시). KWBS 는 한 관에서 잰 동결관 시계열이라 조건이 늘 성립하며 바뀐 행이 없다.
+  - 위치와 셀 규칙(지적 4, 9, 17). (1) 1990년 이후 행 가운데 600 cm 를 넘는 연도가 있는 위치는 위치 전체를 뺀다. 남은 연도의 다년 평균이 아래로 치우치기 때문이다. 해당 위치는 qtp_fu_temp 의 TM1, TG2, AMD1, TT1, AD1 이고 L39 대상이 44셀에서 39셀로 줄었다. TG2 는 MAGT 가 +0.66 °C 라 지온 유도 ALT 정의에 맞는지도 불확실했다. (2) qtp_du_gpr 의 WDL02副 는 같은 해 WDL02 와 약 10 m 떨어진 두 번째 기록으로 보고 WDL02 위치에 합쳤다(2018년 값은 두 값의 평균). Tibet 대상이 133셀에서 132셀로 줄었다. '副' 의 뜻은 원자료로 확인하지 못했다. (3) 같은 자료원 안에서 0.0005° 안에 있는 다른 식별자(XDT09·XDT09_43m·XDT09_6m, QTB15_1·_2, BLH_Ivan1·2, Z2·Z6, LD02·LD03)는 식별자가 달라 별도 위치로 두었다. 모두 같은 셀 안이라 셀 수는 늘지 않고 셀 안 가중만 바뀐다. 좌표 기준의 일반 합치기 규칙은 CUSP, Scheer, Syrdakh, Walker 의 위치 구조를 크게 바꾸어 채택하지 않았다. (4) qtp_fu_temp 의 QSH-2 와 QSH-3 은 20년 가운데 12년 값이 같아(상관 0.92) 두 셀에 value_share 표지를 붙였다. L39 서술에 적는다. (5) Scheer CALM 격자가 ky 경계에서 두 셀로 나뉜 것은 같은 블록 안이라 A/B 누설이 없고 한계로 적는다.
+  - Russia_C 대상 정의(지적 10, 13, WRAPUP 7.3 (a)8 채택): v3 loc 17557(CALM R8 Tiksi, 71.58°N, 128.78°E)은 6B.4 의 레나 델타 영역 안이다. Russia_C 의 모든 실행 표(주 설정과 변형)에서 이 행을 뺀다. 그 결과 100 km 버퍼가 레나 셀을 원천에서 빼지 않게 되었다(원천 17,460, 버퍼 제외 0). 뺀 뒤에도 적격 판정은 같다(합집합 13). LG 본 실행의 Russia_C 점 추정(v3 7셀)은 원천에서 레나 셀 1,252개(41 %)가 버퍼로 빠진 조건이었다. 이 사실을 결과 절에 주석으로 단다. build_ext_cells_v1.py 의 v3 지리 macro 는 레나 델타 상자 안의 러시아 행을 Lena 로 붙이고, 적격 표의 거리 열은 v3 구성 셀까지 포함해 계산한다.
+  - 라벨 세부 정의와 품질 표시(지적 6, 7, 11, 12). palmtag2022_pedon 의 라벨은 단면 판정의 영구동토 상한 깊이(label_subtypes = pf_top_profile)이고, Kytalyk 은 같은 날 동결면보다 깊어 pf_top_below_frozen_al 로 표시했다. L40 에 Russia_E 확충판의 Kytalyk 제외 변형(48셀)을 병기한다. GGD353 의 '<' 상한값은 그대로 두었다. 대상 10셀에서 상한값을 뺀 셀 값과의 차가 평균 0.48 cm, 최대 1.85 cm 이기 때문이다(`ext_cells_v1_meta.json` 의 value_bound_check). 원관측 1건 셀(single_measurement)과 Laborovaya2_T18(최솟값 5 cm, 표준편차 60.4 cm)에 q_flags 를 붙였다. Walker 측선 행의 날짜는 relevé 날짜를 빌린 값이라 date_basis 로 표시하고 L41 (b)는 보고서의 조사 시작일로 판정한다(Laborovaya 2007-08-13 이라 두 셀이 8월 15일 이전으로 판정된다. Russia_W 는 L40 이라 L41 을 적용하지 않는다). GGD402 보조 셀의 월은 시추 월이라 obs_months 를 비우고 drill_months 에 적었다. lic_unverified 는 'rights reserved' 도 잡는다(CUSP 가 든 셀이 표시된다).
+  - 공변량(지적 21–25). ERA5-Land 빙하 격자: v3 규약을 지키려고 값은 바꾸지 않았다(검증 지적의 (나)). 사용 격자의 2015–2020년 월 적설 최솟값(e5_grid_sd_min_m)과 1 m 이상 표지(e5_glacier_grid)를 v3 행을 포함한 라벨 부가 표에 두었다. NAtlantic 대상의 해당 셀은 새 20080, 20081, 20111, 20112 와 v3 17565, 17566 이다. 변형 (g) 는 이 6셀을 뺀다(35셀, 합집합 8, 적격). v3 행의 격자 재계산은 17,572행 가운데 17,558행에서 e5_tdd 가 v3 값과 같았다(다른 14행은 ABoVE 행이고 e5_grid_check 로 표시). 격자 고도 차: ERA5-Land 사용 격자 중심 ±0.05° 상자의 Copernicus DEM 평균을 격자 고도의 대리값으로 계산해 elev_minus_e5grid_m 에 적었다. -300 m 이하는 Tibet 5셀, NAtlantic 3셀, Russia_E 1셀이다. 값은 보정하지 않는다. DEM 창 중심이 수면 화소인 셀은 dem_center_flat 으로 표시했다(v3 54행, 새 3행). `ext_cells_v1_cov.csv` 도 토양 도일 0 이하를 결측으로 두어 `e5_soil_tdd_v4.csv` 와 같게 했고, 공변량 단계의 입력 해시, 폴백 수, DEM 타일, SoilGrids 창을 `ext_cells_v1_cov_meta.json` 에 적었다.
+  - 공간 편중(지적 14, 15). 적격 표에 분할별 채점 블록 수와 최대 블록 셀 비중, 사용 분할의 최솟값과 최댓값, 1 km 묶음 수, 자료원별 셀·블록 구성을 더했다. NAtlantic 은 분할 3, 4 에서 일루리사트 블록 비중이 86.7 %, 68.4 % 다. 유의 판정은 §4 대로 두 가중의 CI 를 모두 요구하고, NAtlantic 의 해석은 블록 등가중 결과를 기준으로 한다. Russia_C 새 셀의 53 % 가 Mamontov Klyk 단일 조사다. 이 점을 L38 서술에 붙인다.
+  - L41 변형 (d)–(h)의 정의(결과 열람 전 고정. 판정 문구와 분류는 L41 과 같다): (d) year_max 2010 이후 셀만(v3 구성 셀은 남긴다. WRAPUP 7.3 (a)9 채택), (e) 절단 영향 셀 제외, (f) 절단 하한 대입, (g) ERA5-Land 빙하 격자 셀 제외(v3 구성 셀 포함), (h) 새 셀이 가장 많은 단일 조사 제외(NAtlantic 은 grl_ilulissat_scheer, Russia_C 는 ru_mamontovklyk_grosse. 점 추정으로만 싣는다. WRAPUP (a)9). 검증 지적이 '(d)' 로 예시한 절단 변형은 WRAPUP 의 (d) 와 겹치지 않도록 (e) 로 번호를 매겼다. 변형 뒤 적격이 아니면 '변형 불가'로 적는다.
+  - 실행 표와 래퍼(지적 18, 19, 26, 27, WRAPUP 7.4 (b)2). 호출 방식은 (가)다. 실행 표는 v4 원문 줄을 골라 옮기고 대상 새 행의 source_id 칸만 F4_direct 로 바꾼다(`lgd_eligibility_v1.write_run_table_text`). v3 행만 고른 표는 v3 원문과 region 3줄만 다르다. 새 행은 loc_id(20000 이상), source_id, lgd_role 로 고르고 assert 한다. GGD402 보조 148셀은 어느 실행 표에도 넣지 않고, Tibet 지온 유도 행은 L39 실행 표에서만 F4_direct 로 둔다. L42 에서 NAtlantic 셀을 원천에 더하면 v3 하위 지점 평균 행 17520, 17569 를 원천에서 뺀다. v3 QTP_CN 17389 는 측정과 라벨 정의가 달라 원천에 남기고 표시한다. load_base 의 물리 앙상블 결측 대체 중앙값이 실행 표 전체로 계산되므로 새 행이 든 실행 표에서 v3 행의 p4_ku 는 최대 0.0104 cm, p2_edaphic 는 최대 0.0145 cm 달라진다(v3 행만 든 재현 점검 표에서는 0). 적격 표의 v3 참조 26행은 h40 `--count-only` 산출과 n_A, n_eval, nb_eval, n_src, valid 가 모두 같다.
+  - 기록 정정(지적 20, 25): 통합 보고의 'dup_of 행 426개'는 424개가 맞다(`ext_cells_v1_meta.json` 의 row_disposition). 'NAtlantic CCI 결측 4: Abisko 하위 지점 3·Tavvavuoma 인근 포함' 은 'CCI 결측 4: Abisko 하위 지점 4셀' 이 맞다(Tavvavuoma 셀은 CCI 유효). WRAPUP 7.4 (b)3 의 CCI 불일치(loc 17480)는 xarray 최근접 색인의 float32 규칙을 따르도록 고친 뒤 사라졌다(`cov_validate_meta.json`, v3 CALM 149행 비교에서 차 0).
+  - 계절 말 근거의 기록(지적 5, WRAPUP (a)12): Tibet 의 10월 조사 근거와 한계는 6B.9 와 `qtp_du_gpr_meta.json`(october_survey_limit)에 적었다. Mamontov Klyk 를 direct_eos 로 둔 근거(지점에서 잰 ALD, 기록 날짜 2003-08-15–28, 기기 미확인이라 method other)는 `ru_mamontovklyk_grosse_meta.json` 의 label_def_basis 에 적었다.
+  - 실행 환경(사용자 지시 2026-09-30, WRAPUP 7.5 (c)1 과 8.2 의 6B.6 문안 채택): 6B.6 5단계는 로컬 서버에서 한다. h40 에 `--allow-local --threads 4` 를 주고 워커는 2개 이하, nice 10, 우리 작업의 CPU 스레드 합계 32 이하(WRAPUP 8.5)로 한다. 시작 전에 load average 를 확인하고, 본 실행은 사용자 확인 뒤 시작한다. 재현 점검과 실패 규칙은 WRAPUP 7.5 (c)2 를 따른다. LG 머리말, 6A.9, LGU 의 실행 환경 문구는 이 개정에서 바꾸지 않았다(WRAPUP 8.2 의 문안을 각 개정으로 옮겨야 한다).
+  - WRAPUP 부록 7절 가운데 이 개정이 채택한 것은 (a)8, (a)9, (a)12, (b)2, (b)3·(b)4 의 기록, (c)1 이다. (a)1–7, (a)10, (a)11, (b)1 은 집계기 규칙이며 WRAPUP 문서의 커밋으로 효력이 생긴다. (b)4 의 대조: 적격 표의 대상 셀 수(n_cells)는 모든 대상에서 ext_cells 의 대상 셀 수와 v3 참조 행의 셀 수(Russia_C 는 17557 을 뺀 6, NAtlantic 은 CALM_Greenland 3, Tibet 0)의 합과 같다.
+  - 확인하지 못한 것: 절단 의심 5건과 Abisko 'x' 표기의 뜻(원자료 제공자 확인 전), WDL02副·BLH02_废 의 뜻, Tibet GPR 과 치롄 GPR 의 점별 조사 월, Mamontov Klyk·Tavvavuoma 의 측정 기기, GGD402 의 산정 방법, CUSP·CALM 누리집·GGD353·GGD402·Walker 보고서 행의 재배포 약관, ERA5-Land 격자 고도(대리값만 계산), h40 을 새 실행 표로 끝까지 돌리는 경로(분할 구조와 load_base 까지만 확인했다).

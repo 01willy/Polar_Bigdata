@@ -1,0 +1,329 @@
+{
+ "src_id": "ru_kwbs_makarieva",
+ "name": "Makarieva 등 2017, 콜리마 물수지 관측소 융해 깊이 시계열 1954–1997(PANGAEA 881754)",
+ "url": "https://doi.org/10.1594/PANGAEA.881754",
+ "doi": "10.1594/PANGAEA.881754",
+ "accessed": "2026-09-29",
+ "download_url": "https://doi.pangaea.de/10.1594/PANGAEA.881754?format=textfile",
+ "files": [
+  {
+   "name": "data/raw/ru_kwbs_makarieva/PANGAEA_881754.tab",
+   "size_bytes": 1361993,
+   "sha256": "a805f0fb21b80b109d4e72ccbfb0f3de6213d5960bf8e373f5404208b5106301"
+  },
+  {
+   "name": "data/raw/ru_kwbs_makarieva/KWBS_gauges_details.zip",
+   "size_bytes": 10094,
+   "sha256": "e49f9101090264e4d3263a7aa25e54fa0caeb86a9fc196835f41c200d403044e"
+  },
+  {
+   "name": "data/raw/ru_kwbs_makarieva/essd-10-689-2018.pdf",
+   "size_bytes": 5383554,
+   "sha256": "c995a307171a655176c150a40022e12a1069ec38e9f00137e1d5006c4a8fd732"
+  }
+ ],
+ "license": "CC BY 3.0",
+ "license_basis": "PANGAEA 머리말의 License 항목(Creative Commons Attribution 3.0 Unported)",
+ "citation": "Makarieva, O.; Nesterova, N.; Lebedeva, L.; Sushansky, S. (2017): Thaw depth and snow height time series at different sites within Kolyma Water-Balance Station (KWBS), 1954-1997. PANGAEA, https://doi.org/10.1594/PANGAEA.881754. In supplement to: Makarieva, O. et al. (2018), Earth Syst. Sci. Data, 10, 689-710, https://doi.org/10.5194/essd-10-689-2018",
+ "parser": "scripts/1_data_prep/parse_ext_ru_kwbs_makarieva.py",
+ "parser_sha256": "9bfcd1f3ca663965575c971ae29ecf0917c73277d28e1b074a47d3b9b05d5001",
+ "parser_git_commit": "6799b74281c6bfda959c1267fed0c93262b192fc",
+ "parser_git_note": "파서 파일은 이 커밋에 들어 있지 않다(작업 트리의 새 파일). 값은 실행 시점의 HEAD 다",
+ "points_file": "data/processed/ext_labels/ru_kwbs_makarieva_points.csv",
+ "points_sha256": "2cf2ddcb9182a4b8814530da4943c29a654df5d6dfe8575c0898819dd7306c48",
+ "n_rows_raw": 12582,
+ "n_rows_points": 397,
+ "n_by_label_def": {
+  "direct_eos": 375,
+  "direct_dated": 22
+ },
+ "n_by_method": {
+  "frost_tube": 397
+ },
+ "n_excluded_by_reason": {
+  "year_pre1990": 366,
+  "right_censored": 7
+ },
+ "n_raw_rows_not_used": {
+  "exact_duplicate": 1,
+  "no_lower_value": 497,
+  "no_lower_value_fully_frozen": 355,
+  "no_lower_value_blank": 142
+ },
+ "raw_stats": {
+  "n_rows_raw": 12582,
+  "n_rows_exact_duplicate_dropped": 1,
+  "n_rows_no_lower_value": 497,
+  "n_rows_no_lower_value_fully_frozen": 355,
+  "n_rows_no_lower_value_blank": 142,
+  "n_rows_censored_mark": 998,
+  "n_rows_numeric": 11086,
+  "n_rows_same_station_date": 66,
+  "n_station_years": 398,
+  "n_station_years_no_reading": 1
+ },
+ "coordinate_conversion": "없음. 원자료가 WGS84 십진 도이고 동경 양수다. 자료 행렬의 표기를 그대로 썼다",
+ "coordinate_check": {
+  "lat_range": [
+   61.8398,
+   61.8616
+  ],
+  "lon_range": [
+   147.611,
+   147.671
+  ],
+  "header_mismatch": [],
+  "lon_4th_decimal_all_zero": true,
+  "n_unique_coords": 21
+ },
+ "method_basis": "자료 논문 ESSD 10:689 의 3.6 절: 'Danilin cryopedometers (frost tubes) were installed at permafrost observation sites'. 증류수를 채운 고무관(외경 1 cm, 눈금 1 cm)의 얼음 기둥 아래 끝을 읽는다",
+ "rules": {
+  "annual_value": "달력 연도 안의 하한 경계 값(숫자와 '>' 값)의 최댓값. date 는 처음 기록된 날",
+  "qc_date": "연 최대가 처음 기록된 달이 6–10월 밖",
+  "label_def": "연 최대가 6–10월에 기록되고 8월 1일 이후 읽은 값의 최댓값과 같으면 direct_eos(series_max), 아니면 direct_dated",
+  "right_censored_source_mark": "그 연도에 '>' 값이 하나라도 있다",
+  "right_censored_plateau_rule": "'>' 값이 없는 연도에서 연 최대가 9월 1일 전에 처음 기록되고 같은 값이 10회 이상 기록되었다. 파서의 판단이다",
+  "main_set": "qc_flag = ok, label_def = direct_eos, right_censored = 0, disturbed = 0"
+ },
+ "summary": {
+  "n_sites": 43,
+  "n_rows_points": 397,
+  "year_range_all": [
+   1953,
+   1997
+  ],
+  "alt_cm_all": {
+   "min": 29.0,
+   "median": 109.0,
+   "max": 450.0
+  },
+  "n_by_macro": {
+   "Russia_E": 397
+  },
+  "n_by_method": {
+   "frost_tube": 397
+  },
+  "n_by_label_def": {
+   "direct_eos": 375,
+   "direct_dated": 22
+  },
+  "n_by_eos_basis": {
+   "series_max": 375,
+   "none": 22
+  },
+  "n_by_qc_flag": {
+   "year_pre1990": 352,
+   "ok": 31,
+   "date;year_pre1990": 14
+  },
+  "n_by_censor_basis": {
+   "none": 267,
+   "source_mark": 100,
+   "plateau_rule": 30
+  },
+  "n_by_max_month": {
+   "1": 3,
+   "3": 1,
+   "6": 5,
+   "7": 56,
+   "8": 67,
+   "9": 204,
+   "10": 51,
+   "11": 10
+  },
+  "n_flag_any": {
+   "year_pre1990": 366,
+   "date": 14,
+   "range": 0,
+   "label_def_not_direct_eos": 22,
+   "right_censored": 130
+  },
+  "n_excluded_by_reason": {
+   "year_pre1990": 366,
+   "right_censored": 7
+  },
+  "n_main": 24,
+  "n_main_sites": 3,
+  "post1990": {
+   "n_rows": 31,
+   "n_sites": 4,
+   "sites": [
+    "kwbs_12",
+    "kwbs_17.5",
+    "kwbs_23",
+    "kwbs_8"
+   ],
+   "n_right_censored": 7,
+   "n_by_censor_basis": {
+    "none": 24,
+    "source_mark": 6,
+    "plateau_rule": 1
+   },
+   "n_by_max_month": {
+    "7": 3,
+    "8": 4,
+    "9": 15,
+    "10": 9
+   }
+  },
+  "main": {
+   "year_range": [
+    1990,
+    1997
+   ],
+   "alt_cm": {
+    "min": 50.0,
+    "median": 91.5,
+    "max": 140.0
+   },
+   "n_by_max_month": {
+    "9": 15,
+    "10": 9
+   },
+   "n_max_month_aug_sep": 15,
+   "per_site": [
+    {
+     "site_id": "kwbs_12",
+     "lat": "61.8544",
+     "lon": "147.6580",
+     "n_years": 8,
+     "years": [
+      1990,
+      1991,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996,
+      1997
+     ],
+     "alt_mean_cm": 91.25,
+     "alt_min_cm": 86.0,
+     "alt_max_cm": 99.0,
+     "cell": [
+      6872,
+      7739
+     ],
+     "block_0p5deg": [
+      123,
+      295
+     ]
+    },
+    {
+     "site_id": "kwbs_17.5",
+     "lat": "61.8506",
+     "lon": "147.6520",
+     "n_years": 8,
+     "years": [
+      1990,
+      1991,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996,
+      1997
+     ],
+     "alt_mean_cm": 60.0,
+     "alt_min_cm": 50.0,
+     "alt_max_cm": 70.0,
+     "cell": [
+      6872,
+      7739
+     ],
+     "block_0p5deg": [
+      123,
+      295
+     ]
+    },
+    {
+     "site_id": "kwbs_8",
+     "lat": "61.8609",
+     "lon": "147.6440",
+     "n_years": 8,
+     "years": [
+      1990,
+      1991,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996,
+      1997
+     ],
+     "alt_mean_cm": 129.75,
+     "alt_min_cm": 123.0,
+     "alt_max_cm": 140.0,
+     "cell": [
+      6873,
+      7736
+     ],
+     "block_0p5deg": [
+      123,
+      295
+     ]
+    }
+   ],
+   "cells_1km": [
+    {
+     "cell": [
+      6872,
+      7739
+     ],
+     "n_sites": 2,
+     "sites": [
+      "kwbs_12",
+      "kwbs_17.5"
+     ],
+     "lat": 61.8525,
+     "lon": 147.655,
+     "alt_cm": 75.62
+    },
+    {
+     "cell": [
+      6873,
+      7736
+     ],
+     "n_sites": 1,
+     "sites": [
+      "kwbs_8"
+     ],
+     "lat": 61.8609,
+     "lon": 147.644,
+     "alt_cm": 129.75
+    }
+   ],
+   "n_cells_1km": 2,
+   "n_blocks_0p5deg": 1
+  }
+ },
+ "v3_relation": {
+  "center": [
+   61.853,
+   147.651
+  ],
+  "nearest_v3_any": {
+   "loc_id": 17534,
+   "region": "CALM_Russia_E",
+   "source_id": "F4_direct",
+   "dist_km": 870.0
+  },
+  "nearest_v3_f4_direct": {
+   "loc_id": 17534,
+   "region": "CALM_Russia_E",
+   "dist_km": 870.0
+  },
+  "n_coords_within_cheb_0p01_of_v3_f4_direct": 0
+ },
+ "unverified_items": [
+  "기기 깊이(관의 길이)는 보조 자료 cryopedometer_gauges.txt 에 6개 지점만 적혀 있다. 1990–1997년에 쓰인 지점 8, 17.5, 23 의 기기 깊이는 확인하지 못했다(지점 12 는 1.5 m 로 적혀 있다)",
+  "plateau_rule 로 표시한 연도가 실제로 기기 깊이를 넘었는지는 원자료로 확인할 수 없다",
+  "'>' 표기가 없고 plateau_rule 에도 걸리지 않은 연도 가운데 기기 깊이를 넘은 연도가 있을 수 있다(예: 지점 12 의 1957년은 150 cm 가 9월 2일부터 27회 기록되었다)",
+  "자료 논문은 기기 주변의 지표 훼손이 융해 깊이에 영향을 주기 시작했다고 적는다(Sushansky, 1988). 지점과 시기는 적혀 있지 않아 disturbed 는 모두 0 으로 두었다",
+  "같은 지점과 날짜에 값이 다른 행이 둘인 경우가 있다(날짜 입력 오류로 보이나 확인하지 못했다). 두 행을 모두 읽은 값으로 썼고 notes 에 n_same_date_rows 로 적었다. 1990년 이후에는 없다",
+  "PANGAEA 이벤트 KWBS_cryo_23 은 보조 자료의 22번과 위치 설명이 같다. 번호가 다른 이유는 확인하지 못했다. Station 19(1980년 한 해)와 19.1 의 관계도 확인하지 못했다",
+  "좌표는 위도 소수 4자리, 경도 소수 3자리다(자료 행렬의 경도 넷째 자리는 모두 0). 같은 좌표를 여러 지점이 함께 쓰는 경우가 있다(17–17.7 의 8개 지점 등). coord_prec_deg 는 0.001 로 두었다",
+  "Snow h 열은 머리글이 [m] 이나 값의 크기와 보조 자료의 설명(H, cm)으로 보아 cm 로 보인다. 이 파서는 적설 열을 쓰지 않는다",
+  "관측 연도(1990–1997)와 공변량 기후값 기간(ERA5-Land 2015–2020, CCI 1997–2021)이 겹치지 않는다"
+ ]
+}

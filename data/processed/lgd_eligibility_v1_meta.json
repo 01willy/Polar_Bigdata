@@ -1,0 +1,60 @@
+{
+ "stage": "LGD 6B.6 단계 4(적격 표). 개정 13",
+ "created": "2026-09-30 02:31",
+ "script": "scripts/1_data_prep/lgd_eligibility_v1.py",
+ "script_sha256": "de5db76e5259db2f99aa69ae9638df3a747d29f516489b74ea26a095ff4d1cbc",
+ "inputs": {
+  "fidelity_base_v4.csv": "4c387b2b4fb43ef602d9e0b8fe50054a6699428d5a593425b3d309e798fce52a",
+  "e5_soil_tdd_v4.csv": "2ef333b24d60332af1a432ceff5ee7bb73a2154d0fc23659e8e694d6674029f6",
+  "fidelity_base_v4_labels.csv": "9f5af274f4b835045d90e202e35ebdc872e54e0affba218835735a43a87b2247"
+ },
+ "rules": {
+  "splits": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "buffer_km": 100.0,
+  "min_blocks_union": 8,
+  "deep_cm": 150.0,
+  "few_blocks": 5,
+  "valid": "중복 아님 · 채점 블록 ≥ 2(h40)",
+  "union": "유효 분할(없으면 고유 분할)의 B 채점 블록 합집합(h40 TMx.nb_union)",
+  "source": "finite y 인 F4_direct 행(실행 표 기준) − 대상 셀 − 대상 셀 100 km 버퍼(h40 source_idx, 모드 x)",
+  "run_table": "v4 원문 줄에서 v3 행 전부(대상별 drop_v3 제외) + 그 대상의 새 행(source_id 를 F4_direct 로 바꿈). 다른 새 지역 행은 넣지 않는다(6B.6 주 설정)",
+  "drop_v3": {
+   "Russia_C": [
+    17557
+   ]
+  },
+  "l41": "a = 셀의 모든 위치가 탐침·융해관·동결관, b = 8월 15일 이전 record_date 단일 방문 행이 있는 셀 제외(빌린 날짜는 조사 시작일로 판정), c = dataset_statement 행이 있는 셀 제외, d = year_max >= 2010 셀만(WRAPUP (a)9, v3 구성 셀은 남김), e = 절단 영향 셀(cens_affected) 제외, f = 절단 행을 하한값으로 넣은 셀 값(alt_cm_cens_lb), g = ERA5-Land 빙하 격자 셀(월 적설 최솟값 >= 1 m) 제외(v3 구성 셀 포함), h = 새 셀이 가장 많은 단일 조사의 셀 제외(점 추정만) {'NAtlantic': 'grl_ilulissat_scheer', 'Russia_C': 'ru_mamontovklyk_grosse'}",
+  "l40_variant": "Russia_E 확충판에서 Kytalyk(palmtag, pf_top_below_frozen_al) 셀 제외",
+  "max_block_share": "분할의 B 채점 셀 가운데 가장 큰 블록의 셀 비중. 사용 분할의 최댓값을 적는다",
+  "clusters": "대상 셀을 구성 위치(새 셀) 또는 셀 좌표(v3 셀) 사이 대권 거리로 단일 연결한 묶음 수",
+  "min_dist_other_macro_all_km": "대상의 모든 셀(v3 구성 셀 포함)에서 다른 지리 macro 의 v3 F4_direct 까지 최소 거리"
+ },
+ "run_table_text_check": {
+  "n_lines_run": 17573,
+  "n_lines_v3": 17573,
+  "n_lines_differ_from_v3": 3,
+  "note": "다른 줄은 region 을 CALM_Greenland 에서 NAtlantic 으로 바꾼 3줄이어야 한다"
+ },
+ "h40_count_only_check": {
+  "n_compared": 26,
+  "n_mismatch": {
+   "n_A": 0,
+   "n_eval": 0,
+   "nb_eval": 0,
+   "n_src": 0,
+   "valid": 0
+  },
+  "reference": "data/processed/lg/lg_count_cpu.csv(모드 x, 방법 축 행)"
+ },
+ "outputs": {
+  "lgd_eligibility_v1.csv": "5b23a9a8d7bc79eb663605a142a58e7d1ed6a5fa1555f436e007611c155f364b",
+  "lgd_eligibility_v1_splits.csv": "765b3f25997ae779270da7f726288e9b174f6391be438f23a55253c6b3ba8cfa"
+ },
+ "elapsed_s": 20.2
+}

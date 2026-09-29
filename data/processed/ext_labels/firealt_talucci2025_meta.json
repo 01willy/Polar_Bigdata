@@ -1,0 +1,1748 @@
+{
+ "src_id": "firealt_talucci2025",
+ "name": "Talucci 등 2025, FireALT 연소지·미연소지 융해 깊이(Arctic Data Center)",
+ "url": "https://doi.org/10.18739/A2RN3092P",
+ "download_url_pattern": "https://arcticdata.io/metacat/d1/mn/v2/object/<식별자>",
+ "doi": "10.18739/A2RN3092P",
+ "accessed": "2026-09-29",
+ "files": [
+  {
+   "name": "FireAltEstimatedRawData.csv",
+   "size_bytes": 11192901,
+   "sha256": "1993527ae48b14753513ca7906687764a320d0e5745d29283e7715c58fd9bc98"
+  },
+  {
+   "name": "FireAltEstimatedPlotLevel.csv",
+   "size_bytes": 1593587,
+   "sha256": "8a8789784e00d6c9ca5921aff261f7c1be858a16d76c85053718d7a3c8bb6935"
+  },
+  {
+   "name": "FireALTEstimatedPairsBurnedUnburned.csv",
+   "size_bytes": 27915,
+   "sha256": "9fc8ada8aca104e11ced295f908928d589954c099213030f02ba5e04eb2cbc60"
+  },
+  {
+   "name": "FireALT_eml.xml",
+   "size_bytes": 137924,
+   "sha256": "cc56b931fb38611d7cf98b65bf26d43001b175bc2f05d07d0cd28fa1b232782c"
+  },
+  {
+   "name": "FireALT_eml_prev_urn-dab3aa1f.xml",
+   "size_bytes": 131863,
+   "sha256": "f4cb3b5ab496256cad60525a2b747c02e0bc67864c3f996f336f4ef972a92eb1"
+  },
+  {
+   "name": "DataCleanPointCombine.Rmd",
+   "size_bytes": 44324,
+   "sha256": "4559874e7c7b5db129e73316679ca6405f707f1b3a31cc8bc81b8f241d257a75"
+  },
+  {
+   "name": "ERA5GeeScript.Rmd",
+   "size_bytes": 4878,
+   "sha256": "617a761c3bb753f19c230831d03ffa5626eab93741633a41fb56caa986f799dd"
+  },
+  {
+   "name": "ERA5CleanOrganizeData.Rmd",
+   "size_bytes": 9047,
+   "sha256": "021d44b81f1857eaec5ef5ac77734ca35fb231735c7ad53693c1f65668687174"
+  },
+  {
+   "name": "EstimateALT.Rmd",
+   "size_bytes": 3041,
+   "sha256": "ee6bc6a201cfa1cab855ed1067751fdd8968a5705760021082bbfaf8e2f9ecf5"
+  },
+  {
+   "name": "PlotLevelAggregate.Rmd",
+   "size_bytes": 3815,
+   "sha256": "bf63080dcbea7018198a6badc0c36e41313a4e33a7b383aa5ff9d1a70efc87e5"
+  },
+  {
+   "name": "SpatialAdds.Rmd",
+   "size_bytes": 7047,
+   "sha256": "19c64783df5f683c56ed93d8630193e6511647b96b7dc33e034017e25812fa1f"
+  },
+  {
+   "name": "PairsAggregate.Rmd",
+   "size_bytes": 3510,
+   "sha256": "7d015d5eeed6b81aaca6982f821fdb4c584d6bc6a4e5fff944064eaeead134f9"
+  }
+ ],
+ "license": "CC BY 4.0",
+ "license_basis": "EML 메타자료(FireALT_eml.xml)의 intellectualRights 항목: Creative Commons Attribution 4.0 International License",
+ "citation": "Talucci, A., Loranty, M., Holloway, J., Rogers, B., Alexander, H., et al. (2024) FireALT dataset: estimated active layer thickness for paired burned unburned sites measured from 2001-2023. NSF Arctic Data Center. https://doi.org/10.18739/A2RN3092P. 자료 논문: Talucci, A. C., et al. (2025) Permafrost-wildfire interactions: active layer thickness estimates for paired burned and unburned sites in northern high latitudes. Earth System Science Data 17, 2887-2909, https://doi.org/10.5194/essd-17-2887-2025",
+ "parser": "scripts/1_data_prep/parse_ext_firealt_talucci2025.py",
+ "parser_sha256": "9deb09cbb8966568f3e0b03ee84f76a826767e6963d9820bebfb5b63c026d462",
+ "parser_git_commit": "422c34d7108004bab630b38bc81f7c3de128e6a2",
+ "parser_git_note": "파서는 커밋하지 않은 작업 트리 파일이다. parser_git_commit 은 실행 시점의 HEAD 다",
+ "schema_version": "1.0",
+ "n_rows_raw": 48669,
+ "n_rows_raw_used": 48669,
+ "n_rows_points": 942,
+ "n_sites_points": 710,
+ "n_raw_coordinate_strings": 794,
+ "n_visits": 1307,
+ "n_by_label_def": {
+  "direct_dated": 437,
+  "direct_eos": 505
+ },
+ "n_by_method": {
+  "probe": 942
+ },
+ "n_by_macro": {
+  "Alaska": 500,
+  "Canada": 238,
+  "Russia_C": 52,
+  "Russia_E": 149,
+  "Russia_W": 3
+ },
+ "n_by_country": {
+  "Canada": 238,
+  "Russia": 204,
+  "United States": 500
+ },
+ "n_by_eos_basis": {
+  "none": 437,
+  "record_date": 462,
+  "series_max": 43
+ },
+ "n_by_value_kind": {
+  "annual_value": 118,
+  "single_visit": 824
+ },
+ "n_by_disturbed": {
+  "0": 313,
+  "1": 629
+ },
+ "n_by_right_censored": {
+  "0": 942
+ },
+ "n_by_qc_flag": {
+  "ok": 942
+ },
+ "n_by_month": {
+  "6": 107,
+  "7": 270,
+  "8": 266,
+  "9": 238,
+  "10": 61
+ },
+ "n_by_year": {
+  "2001": 4,
+  "2005": 5,
+  "2006": 1,
+  "2007": 8,
+  "2008": 7,
+  "2009": 4,
+  "2010": 4,
+  "2011": 7,
+  "2012": 51,
+  "2013": 12,
+  "2014": 55,
+  "2015": 83,
+  "2016": 61,
+  "2017": 99,
+  "2018": 206,
+  "2019": 279,
+  "2020": 11,
+  "2023": 45
+ },
+ "n_rows_with_dup_of": 19,
+ "n_excluded_by_reason": {
+  "missing_lat": 0,
+  "missing_lon": 0,
+  "missing_year": 0,
+  "missing_month": 0,
+  "missing_day": 0,
+  "missing_msrDepth": 0,
+  "hit_rock": 0,
+  "invalid_date": 0
+ },
+ "n_excluded_note": "측정 기록 단위의 제외 수다. 공개 파일에는 결측 부호, 날짜 오류, hitRock = y 기록이 없어 모두 0 이다. 연 값으로 뽑히지 않은 방문은 지우지 않고 data/raw/firealt_talucci2025/derived_visits.csv 에 남겼다",
+ "n_visits_not_chosen": 365,
+ "n_records_in_chosen_visits": 23867,
+ "record_checks": {
+  "n_msrDepth_zero": 95,
+  "n_msrDepth_over_600": 0,
+  "n_gtProbe_y": 0,
+  "n_msrDoy_mismatch_with_date": 0,
+  "n_full_row_duplicates": 18350,
+  "n_msrDepth_below_10cm_in_aug_sep": 35,
+  "msrDepth": {
+   "n": 48669,
+   "min": 0.0,
+   "median": 48.0,
+   "mean": 50.23,
+   "max": 372.0
+  },
+  "note": "전 열이 같은 행은 지우지 않았다. 원자료에 측정점 식별자가 없어 같은 plot 의 반복 측정과 복제 기록을 구분할 수 없다. 평균에는 영향이 없거나 작고 n_obs 는 부풀 수 있다"
+ },
+ "year_min": 2001,
+ "year_max": 2023,
+ "alt_cm_all_rows": {
+  "n": 942,
+  "min": 2.5,
+  "median": 57.76,
+  "mean": 65.89,
+  "max": 314.41
+ },
+ "main_set": {
+  "definition": "label_def = direct_eos, disturbed = 0, right_censored = 0, qc_flag = ok, year >= 1990, dup_of 빈 칸",
+  "n_rows": 172,
+  "n_sites": 113,
+  "alt_cm": {
+   "n": 172,
+   "min": 31.0,
+   "median": 58.57,
+   "mean": 65.87,
+   "max": 210.0
+  },
+  "n_rows_by_macro": {
+   "Alaska": 107,
+   "Canada": 56,
+   "Russia_C": 7,
+   "Russia_W": 2
+  },
+  "n_rows_by_eos_basis": {
+   "record_date": 156,
+   "series_max": 16
+  },
+  "n_rows_by_month": {
+   "8": 77,
+   "9": 94,
+   "10": 1
+  }
+ },
+ "by_macro": {
+  "Alaska": {
+   "n_rows": 500,
+   "n_sites": 349,
+   "n_sites_unburned": 113,
+   "n_sites_burned": 236,
+   "n_rows_by_label_def": {
+    "direct_dated": 203,
+    "direct_eos": 297
+   },
+   "n_rows_by_month": {
+    "6": 14,
+    "7": 173,
+    "8": 166,
+    "9": 131,
+    "10": 16
+   },
+   "n_rows_main": 107,
+   "n_sites_main": 62,
+   "years": "2001-2023",
+   "alt_cm_all": {
+    "n": 500,
+    "min": 15.0,
+    "median": 53.95,
+    "mean": 57.09,
+    "max": 314.41
+   },
+   "alt_cm_main": {
+    "n": 107,
+    "min": 31.0,
+    "median": 52.21,
+    "mean": 52.52,
+    "max": 79.1
+   },
+   "contributors": [
+    "Baillargeon",
+    "Breen",
+    "Buma",
+    "Diaz",
+    "Douglas",
+    "Frost",
+    "Gaglioti",
+    "Manies",
+    "Natali",
+    "O'Donnell",
+    "Rocha"
+   ]
+  },
+  "Canada": {
+   "n_rows": 238,
+   "n_sites": 157,
+   "n_sites_unburned": 47,
+   "n_sites_burned": 110,
+   "n_rows_by_label_def": {
+    "direct_dated": 49,
+    "direct_eos": 189
+   },
+   "n_rows_by_month": {
+    "6": 3,
+    "7": 2,
+    "8": 81,
+    "9": 107,
+    "10": 45
+   },
+   "n_rows_main": 56,
+   "n_sites_main": 42,
+   "years": "2015-2020",
+   "alt_cm_all": {
+    "n": 238,
+    "min": 2.5,
+    "median": 90.91,
+    "mean": 96.57,
+    "max": 200.0
+   },
+   "alt_cm_main": {
+    "n": 56,
+    "min": 44.33,
+    "median": 72.08,
+    "mean": 83.98,
+    "max": 187.33
+   },
+   "contributors": [
+    "Dieleman",
+    "Holloway",
+    "Olefeldt"
+   ]
+  },
+  "Russia_C": {
+   "n_rows": 52,
+   "n_sites": 52,
+   "n_sites_unburned": 15,
+   "n_sites_burned": 37,
+   "n_rows_by_label_def": {
+    "direct_dated": 36,
+    "direct_eos": 16
+   },
+   "n_rows_by_month": {
+    "6": 32,
+    "7": 4,
+    "8": 16
+   },
+   "n_rows_main": 7,
+   "n_sites_main": 7,
+   "years": "2019-2019",
+   "alt_cm_all": {
+    "n": 52,
+    "min": 21.2,
+    "median": 67.7,
+    "mean": 78.3,
+    "max": 172.1
+   },
+   "alt_cm_main": {
+    "n": 7,
+    "min": 69.2,
+    "median": 96.6,
+    "mean": 98.15,
+    "max": 141.86
+   },
+   "contributors": [
+    "Delcourt",
+    "Paulson"
+   ]
+  },
+  "Russia_E": {
+   "n_rows": 149,
+   "n_sites": 149,
+   "n_sites_unburned": 43,
+   "n_sites_burned": 106,
+   "n_rows_by_label_def": {
+    "direct_dated": 149
+   },
+   "n_rows_by_month": {
+    "6": 58,
+    "7": 91
+   },
+   "n_rows_main": 0,
+   "n_sites_main": 0,
+   "years": "2012-2019",
+   "alt_cm_all": {
+    "n": 149,
+    "min": 9.5,
+    "median": 33.51,
+    "mean": 39.98,
+    "max": 148.2
+   },
+   "alt_cm_main": {
+    "n": 0
+   },
+   "contributors": [
+    "Loranty",
+    "Paulson"
+   ]
+  },
+  "Russia_W": {
+   "n_rows": 3,
+   "n_sites": 3,
+   "n_sites_unburned": 2,
+   "n_sites_burned": 1,
+   "n_rows_by_label_def": {
+    "direct_eos": 3
+   },
+   "n_rows_by_month": {
+    "8": 3
+   },
+   "n_rows_main": 2,
+   "n_sites_main": 2,
+   "years": "2020-2020",
+   "alt_cm_all": {
+    "n": 3,
+    "min": 110.0,
+    "median": 190.0,
+    "mean": 170.0,
+    "max": 210.0
+   },
+   "alt_cm_main": {
+    "n": 2,
+    "min": 110.0,
+    "median": 160.0,
+    "mean": 160.0,
+    "max": 210.0
+   },
+   "contributors": [
+    "Sizov"
+   ]
+  }
+ },
+ "cell_preview": {
+  "rule": "ky = floor(lat/0.009), kx = floor(lon*cos(phi)/0.009), phi = (ky+0.5)*0.009 도. 셀 값은 지점 다년 평균의 평균, 셀 좌표는 지점 좌표의 평균. block = floor(lat/0.5)*100000 + floor(lon/0.5)",
+  "note": "미리보기다. 확정은 v4 조립 단계에서 한다. 다른 자료원의 셀과 합치기 전의 수다",
+  "note_expected": "탐색 단계의 기대값은 Russia_C 7셀이었다. 6B.3 의 0.009° 규칙으로는 미연소 8월 지점 7곳이 6셀(블록 2개)이다. 셀 크기를 1/111.32° 로 두면 7셀이 되고 ky 가 탐색 사본(ru_unburned_cells_probe.csv)과 같다. kx 는 1 차이가 나는 셀이 있어 탐색 단계의 식은 확인하지 못했다",
+  "v3_dup_rule": "셀 좌표가 v3 F4_direct 셀과 체비쇼프 0.01° 이내이면 v3_dup = 1",
+  "independence_rule": "다른 macro 의 v3 F4_direct 셀에서 100 km 안이면 대상 셀에서 뺀다(6B.4)",
+  "main_set_cells": {
+   "Alaska": {
+    "n_cells": 43,
+    "n_blocks": 23,
+    "n_cells_v3_dup": 20,
+    "n_cells_after_v3_dedup": 23,
+    "n_blocks_after_v3_dedup": 16,
+    "n_cells_after_dedup_and_100km": 23,
+    "n_blocks_after_dedup_and_100km": 16,
+    "min_km_to_other_macro_v3": 146.2,
+    "nearest_other_macro": "Canada",
+    "alt_cm": {
+     "n": 23,
+     "min": 33.0,
+     "median": 56.61,
+     "mean": 58.72,
+     "max": 79.1
+    },
+    "months": "8,9",
+    "years": "2001,2005,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2023",
+    "cells": "40셀 초과라 생략"
+   },
+   "Canada": {
+    "n_cells": 35,
+    "n_blocks": 22,
+    "n_cells_v3_dup": 1,
+    "n_cells_after_v3_dedup": 34,
+    "n_blocks_after_v3_dedup": 21,
+    "n_cells_after_dedup_and_100km": 34,
+    "n_blocks_after_dedup_and_100km": 21,
+    "min_km_to_other_macro_v3": 638.5,
+    "nearest_other_macro": "Alaska",
+    "alt_cm": {
+     "n": 34,
+     "min": 44.33,
+     "median": 76.22,
+     "mean": 89.8,
+     "max": 187.33
+    },
+    "months": "8,9,10",
+    "years": "2015,2016,2017,2018,2019,2020",
+    "cells": [
+     {
+      "ky": 6596,
+      "kx": -6756,
+      "lat": 59.36917,
+      "lon": -119.32111,
+      "alt_cm": 52.89,
+      "n_sites": 1,
+      "block": 11799761,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6609,
+      "kx": -6611,
+      "lat": 59.48444,
+      "lon": -117.17808,
+      "alt_cm": 83.62,
+      "n_sites": 1,
+      "block": 11799765,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6611,
+      "kx": -6609,
+      "lat": 59.5,
+      "lon": -117.2047,
+      "alt_cm": 84.95,
+      "n_sites": 1,
+      "block": 11899765,
+      "months": "8",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6731,
+      "kx": -6332,
+      "lat": 60.58076,
+      "lon": -116.017,
+      "alt_cm": 100.8,
+      "n_sites": 1,
+      "block": 12099767,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6734,
+      "kx": -6339,
+      "lat": 60.60659,
+      "lon": -116.242,
+      "alt_cm": 71.6,
+      "n_sites": 1,
+      "block": 12099767,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6748,
+      "kx": -6258,
+      "lat": 60.73417,
+      "lon": -115.209,
+      "alt_cm": 146.8,
+      "n_sites": 1,
+      "block": 12099769,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6773,
+      "kx": -6325,
+      "lat": 60.96169,
+      "lon": -117.275,
+      "alt_cm": 187.33,
+      "n_sites": 1,
+      "block": 12099765,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6776,
+      "kx": -6319,
+      "lat": 60.98879,
+      "lon": -117.2495,
+      "alt_cm": 95.3,
+      "n_sites": 2,
+      "block": 12099765,
+      "months": "8,9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6784,
+      "kx": -6371,
+      "lat": 61.06403,
+      "lon": -118.482,
+      "alt_cm": 83.0,
+      "n_sites": 1,
+      "block": 12199763,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6784,
+      "kx": -6367,
+      "lat": 61.05873,
+      "lon": -118.406,
+      "alt_cm": 52.8,
+      "n_sites": 1,
+      "block": 12199763,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6784,
+      "kx": -6366,
+      "lat": 61.05917,
+      "lon": -118.403,
+      "alt_cm": 154.0,
+      "n_sites": 1,
+      "block": 12199763,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6784,
+      "kx": -6365,
+      "lat": 61.05614,
+      "lon": -118.374,
+      "alt_cm": 94.0,
+      "n_sites": 1,
+      "block": 12199763,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6786,
+      "kx": -6321,
+      "lat": 61.08139,
+      "lon": -117.62308,
+      "alt_cm": 75.64,
+      "n_sites": 1,
+      "block": 12199764,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6792,
+      "kx": -6326,
+      "lat": 61.13383,
+      "lon": -117.9215,
+      "alt_cm": 113.24,
+      "n_sites": 2,
+      "block": 12199764,
+      "months": "8,9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6792,
+      "kx": -6318,
+      "lat": 61.13375,
+      "lon": -117.772,
+      "alt_cm": 172.4,
+      "n_sites": 1,
+      "block": 12199764,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6799,
+      "kx": -6431,
+      "lat": 61.19972,
+      "lon": -120.11389,
+      "alt_cm": 74.7,
+      "n_sites": 1,
+      "block": 12199759,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6888,
+      "kx": -6333,
+      "lat": 61.99278,
+      "lon": -121.38308,
+      "alt_cm": 65.49,
+      "n_sites": 1,
+      "block": 12299757,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6892,
+      "kx": -6061,
+      "lat": 62.02855,
+      "lon": -116.31495,
+      "alt_cm": 64.39,
+      "n_sites": 2,
+      "block": 12399767,
+      "months": "9",
+      "v3_dup": 1
+     },
+     {
+      "ky": 6916,
+      "kx": -6342,
+      "lat": 62.24611,
+      "lon": -122.57308,
+      "alt_cm": 63.5,
+      "n_sites": 1,
+      "block": 12399754,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6939,
+      "kx": -5885,
+      "lat": 62.45825,
+      "lon": -114.53159,
+      "alt_cm": 66.15,
+      "n_sites": 1,
+      "block": 12399770,
+      "months": "8,9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6956,
+      "kx": -5947,
+      "lat": 62.60683,
+      "lon": -116.3255,
+      "alt_cm": 139.1,
+      "n_sites": 2,
+      "block": 12499767,
+      "months": "9,10",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6962,
+      "kx": -5886,
+      "lat": 62.66273,
+      "lon": -115.348,
+      "alt_cm": 108.6,
+      "n_sites": 1,
+      "block": 12499769,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6965,
+      "kx": -5887,
+      "lat": 62.69086,
+      "lon": -115.47,
+      "alt_cm": 107.0,
+      "n_sites": 1,
+      "block": 12499769,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6967,
+      "kx": -5890,
+      "lat": 62.70866,
+      "lon": -115.601,
+      "alt_cm": 95.6,
+      "n_sites": 1,
+      "block": 12499768,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6969,
+      "kx": -5892,
+      "lat": 62.7295,
+      "lon": -115.698,
+      "alt_cm": 76.8,
+      "n_sites": 1,
+      "block": 12499768,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6969,
+      "kx": -5888,
+      "lat": 62.72734,
+      "lon": -115.629,
+      "alt_cm": 143.5,
+      "n_sites": 1,
+      "block": 12499768,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6970,
+      "kx": -5887,
+      "lat": 62.732,
+      "lon": -115.651,
+      "alt_cm": 54.8,
+      "n_sites": 1,
+      "block": 12499768,
+      "months": "9",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6998,
+      "kx": -5756,
+      "lat": 62.98644,
+      "lon": -114.054,
+      "alt_cm": 68.2,
+      "n_sites": 1,
+      "block": 12499771,
+      "months": "8",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7002,
+      "kx": -5752,
+      "lat": 63.02294,
+      "lon": -114.103,
+      "alt_cm": 55.6,
+      "n_sites": 1,
+      "block": 12599771,
+      "months": "8",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7012,
+      "kx": -5718,
+      "lat": 63.11221,
+      "lon": -113.777,
+      "alt_cm": 44.33,
+      "n_sites": 1,
+      "block": 12599772,
+      "months": "8",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7239,
+      "kx": -5922,
+      "lat": 65.15251,
+      "lon": -126.85,
+      "alt_cm": 63.4,
+      "n_sites": 2,
+      "block": 12999746,
+      "months": "8",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7241,
+      "kx": -5917,
+      "lat": 65.17118,
+      "lon": -126.8135,
+      "alt_cm": 69.6,
+      "n_sites": 2,
+      "block": 12999746,
+      "months": "8",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7288,
+      "kx": -5850,
+      "lat": 65.59224,
+      "lon": -127.412,
+      "alt_cm": 58.6,
+      "n_sites": 1,
+      "block": 13099745,
+      "months": "8",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7291,
+      "kx": -5849,
+      "lat": 65.62686,
+      "lon": -127.542,
+      "alt_cm": 56.2,
+      "n_sites": 1,
+      "block": 13099744,
+      "months": "8",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7293,
+      "kx": -5839,
+      "lat": 65.6423,
+      "lon": -127.4095,
+      "alt_cm": 73.5,
+      "n_sites": 2,
+      "block": 13099745,
+      "months": "8",
+      "v3_dup": 0
+     }
+    ]
+   },
+   "Russia_C": {
+    "n_cells": 6,
+    "n_blocks": 2,
+    "n_cells_v3_dup": 0,
+    "n_cells_after_v3_dedup": 6,
+    "n_blocks_after_v3_dedup": 2,
+    "n_cells_after_dedup_and_100km": 6,
+    "n_blocks_after_dedup_and_100km": 2,
+    "min_km_to_other_macro_v3": 1065.1,
+    "nearest_other_macro": "Lena",
+    "alt_cm": {
+     "n": 6,
+     "min": 69.2,
+     "median": 97.85,
+     "mean": 101.58,
+     "max": 141.86
+    },
+    "months": "8",
+    "years": "2019",
+    "cells": [
+     {
+      "ky": 6881,
+      "kx": 6593,
+      "lat": 61.93153,
+      "lon": 126.119,
+      "alt_cm": 141.86,
+      "n_sites": 1,
+      "block": 12300252,
+      "months": "8",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6882,
+      "kx": 6589,
+      "lat": 61.94,
+      "lon": 126.0829,
+      "alt_cm": 125.2,
+      "n_sites": 1,
+      "block": 12300252,
+      "months": "8",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6884,
+      "kx": 6581,
+      "lat": 61.96198,
+      "lon": 126.0099,
+      "alt_cm": 96.6,
+      "n_sites": 1,
+      "block": 12300252,
+      "months": "8",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6884,
+      "kx": 6582,
+      "lat": 61.95941,
+      "lon": 126.0171,
+      "alt_cm": 99.1,
+      "n_sites": 1,
+      "block": 12300252,
+      "months": "8",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6895,
+      "kx": 6551,
+      "lat": 62.06332,
+      "lon": 125.842,
+      "alt_cm": 77.55,
+      "n_sites": 2,
+      "block": 12400251,
+      "months": "8",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6896,
+      "kx": 6549,
+      "lat": 62.06522,
+      "lon": 125.8492,
+      "alt_cm": 69.2,
+      "n_sites": 1,
+      "block": 12400251,
+      "months": "8",
+      "v3_dup": 0
+     }
+    ]
+   },
+   "Russia_W": {
+    "n_cells": 2,
+    "n_blocks": 2,
+    "n_cells_v3_dup": 0,
+    "n_cells_after_v3_dedup": 2,
+    "n_blocks_after_v3_dedup": 2,
+    "n_cells_after_dedup_and_100km": 2,
+    "n_blocks_after_dedup_and_100km": 2,
+    "min_km_to_other_macro_v3": 1178.2,
+    "nearest_other_macro": "Russia_C",
+    "alt_cm": {
+     "n": 2,
+     "min": 110.0,
+     "median": 160.0,
+     "mean": 160.0,
+     "max": 210.0
+    },
+    "months": "8",
+    "years": "2020",
+    "cells": [
+     {
+      "ky": 7316,
+      "kx": 3381,
+      "lat": 65.85096,
+      "lon": 74.38171,
+      "alt_cm": 210.0,
+      "n_sites": 1,
+      "block": 13100148,
+      "months": "8",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7392,
+      "kx": 3269,
+      "lat": 66.53593,
+      "lon": 73.88074,
+      "alt_cm": 110.0,
+      "n_sites": 1,
+      "block": 13300147,
+      "months": "8",
+      "v3_dup": 0
+     }
+    ]
+   }
+  },
+  "direct_dated_unburned_cells_not_in_main": {
+   "Alaska": {
+    "n_cells": 18,
+    "n_blocks": 8,
+    "n_cells_v3_dup": 6,
+    "n_cells_after_v3_dedup": 12,
+    "n_blocks_after_v3_dedup": 8,
+    "n_cells_after_dedup_and_100km": 12,
+    "n_blocks_after_dedup_and_100km": 8,
+    "min_km_to_other_macro_v3": 300.6,
+    "nearest_other_macro": "Canada",
+    "alt_cm": {
+     "n": 12,
+     "min": 29.25,
+     "median": 41.04,
+     "mean": 40.8,
+     "max": 54.98
+    },
+    "months": "6,7",
+    "years": "2001,2011,2012,2017,2018,2019,2023",
+    "cells": [
+     {
+      "ky": 6794,
+      "kx": -8724,
+      "lat": 61.1516,
+      "lon": -162.7237,
+      "alt_cm": 40.84,
+      "n_sites": 1,
+      "block": 12199674,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6801,
+      "kx": -8720,
+      "lat": 61.2107,
+      "lon": -162.9711,
+      "alt_cm": 41.29,
+      "n_sites": 1,
+      "block": 12199674,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6804,
+      "kx": -8726,
+      "lat": 61.23703,
+      "lon": -163.21833,
+      "alt_cm": 50.39,
+      "n_sites": 3,
+      "block": 12199673,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6806,
+      "kx": -8723,
+      "lat": 61.26069,
+      "lon": -163.2485,
+      "alt_cm": 32.46,
+      "n_sites": 2,
+      "block": 12199673,
+      "months": "7",
+      "v3_dup": 1
+     },
+     {
+      "ky": 6806,
+      "kx": -8722,
+      "lat": 61.2611,
+      "lon": -163.243,
+      "alt_cm": 37.74,
+      "n_sites": 3,
+      "block": 12199673,
+      "months": "6,7",
+      "v3_dup": 1
+     },
+     {
+      "ky": 6807,
+      "kx": -8688,
+      "lat": 61.2696,
+      "lon": -162.637,
+      "alt_cm": 41.76,
+      "n_sites": 1,
+      "block": 12199674,
+      "months": "7",
+      "v3_dup": 1
+     },
+     {
+      "ky": 6808,
+      "kx": -8697,
+      "lat": 61.28,
+      "lon": -162.8636,
+      "alt_cm": 42.95,
+      "n_sites": 1,
+      "block": 12199674,
+      "months": "7",
+      "v3_dup": 1
+     },
+     {
+      "ky": 6809,
+      "kx": -8720,
+      "lat": 61.28393,
+      "lon": -163.348,
+      "alt_cm": 50.96,
+      "n_sites": 3,
+      "block": 12199673,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6813,
+      "kx": -8705,
+      "lat": 61.32074,
+      "lon": -163.244,
+      "alt_cm": 34.44,
+      "n_sites": 1,
+      "block": 12199673,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6814,
+      "kx": -8690,
+      "lat": 61.3321,
+      "lon": -163.016,
+      "alt_cm": 54.98,
+      "n_sites": 3,
+      "block": 12199673,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6900,
+      "kx": -8478,
+      "lat": 62.10717,
+      "lon": -163.0713,
+      "alt_cm": 41.24,
+      "n_sites": 1,
+      "block": 12399673,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7098,
+      "kx": -7128,
+      "lat": 63.88801,
+      "lon": -145.739,
+      "alt_cm": 35.67,
+      "n_sites": 1,
+      "block": 12699708,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7253,
+      "kx": -6810,
+      "lat": 65.28553,
+      "lon": -146.55995,
+      "alt_cm": 45.29,
+      "n_sites": 4,
+      "block": 12999706,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7262,
+      "kx": -7628,
+      "lat": 65.3611,
+      "lon": -164.67748,
+      "alt_cm": 29.25,
+      "n_sites": 3,
+      "block": 12999670,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7270,
+      "kx": -7608,
+      "lat": 65.432,
+      "lon": -164.68575,
+      "alt_cm": 20.38,
+      "n_sites": 2,
+      "block": 12999670,
+      "months": "7",
+      "v3_dup": 1
+     },
+     {
+      "ky": 7270,
+      "kx": -7607,
+      "lat": 65.4337,
+      "lon": -164.67516,
+      "alt_cm": 24.0,
+      "n_sites": 3,
+      "block": 12999670,
+      "months": "7",
+      "v3_dup": 1
+     },
+     {
+      "ky": 7670,
+      "kx": -5945,
+      "lat": 69.03761,
+      "lon": -149.513,
+      "alt_cm": 32.27,
+      "n_sites": 1,
+      "block": 13799700,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7771,
+      "kx": -6054,
+      "lat": 69.94583,
+      "lon": -158.858,
+      "alt_cm": 33.01,
+      "n_sites": 1,
+      "block": 13899682,
+      "months": "7",
+      "v3_dup": 0
+     }
+    ]
+   },
+   "Canada": {
+    "n_cells": 5,
+    "n_blocks": 5,
+    "n_cells_v3_dup": 1,
+    "n_cells_after_v3_dedup": 4,
+    "n_blocks_after_v3_dedup": 4,
+    "n_cells_after_dedup_and_100km": 4,
+    "n_blocks_after_dedup_and_100km": 4,
+    "min_km_to_other_macro_v3": 958.1,
+    "nearest_other_macro": "Alaska",
+    "alt_cm": {
+     "n": 4,
+     "min": 44.0,
+     "median": 83.33,
+     "mean": 90.17,
+     "max": 150.0
+    },
+    "months": "6,7,10",
+    "years": "2015,2019",
+    "cells": [
+     {
+      "ky": 6744,
+      "kx": -6333,
+      "lat": 60.70012,
+      "lon": -116.464,
+      "alt_cm": 109.67,
+      "n_sites": 1,
+      "block": 12099767,
+      "months": "10",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6794,
+      "kx": -6408,
+      "lat": 61.14931,
+      "lon": -119.515,
+      "alt_cm": 150.0,
+      "n_sites": 1,
+      "block": 12199760,
+      "months": "10",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6811,
+      "kx": -6472,
+      "lat": 61.3,
+      "lon": -121.3,
+      "alt_cm": 36.36,
+      "n_sites": 1,
+      "block": 12199757,
+      "months": "6",
+      "v3_dup": 1
+     },
+     {
+      "ky": 6888,
+      "kx": -6395,
+      "lat": 61.99583,
+      "lon": -122.57306,
+      "alt_cm": 44.0,
+      "n_sites": 1,
+      "block": 12299754,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6912,
+      "kx": -6025,
+      "lat": 62.21236,
+      "lon": -116.313,
+      "alt_cm": 57.0,
+      "n_sites": 1,
+      "block": 12399767,
+      "months": "10",
+      "v3_dup": 0
+     }
+    ]
+   },
+   "Russia_C": {
+    "n_cells": 7,
+    "n_blocks": 2,
+    "n_cells_v3_dup": 0,
+    "n_cells_after_v3_dedup": 7,
+    "n_blocks_after_v3_dedup": 2,
+    "n_cells_after_dedup_and_100km": 7,
+    "n_blocks_after_dedup_and_100km": 2,
+    "min_km_to_other_macro_v3": 1065.5,
+    "nearest_other_macro": "Lena",
+    "alt_cm": {
+     "n": 7,
+     "min": 21.2,
+     "median": 36.0,
+     "mean": 37.09,
+     "max": 52.2
+    },
+    "months": "6",
+    "years": "2019",
+    "cells": [
+     {
+      "ky": 6868,
+      "kx": 6834,
+      "lat": 61.82021,
+      "lon": 130.2337,
+      "alt_cm": 52.2,
+      "n_sites": 2,
+      "block": 12300260,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6871,
+      "kx": 6828,
+      "lat": 61.84203,
+      "lon": 130.2463,
+      "alt_cm": 35.4,
+      "n_sites": 1,
+      "block": 12300260,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6872,
+      "kx": 6835,
+      "lat": 61.85692,
+      "lon": 130.4106,
+      "alt_cm": 43.2,
+      "n_sites": 1,
+      "block": 12300260,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6872,
+      "kx": 6836,
+      "lat": 61.85087,
+      "lon": 130.4242,
+      "alt_cm": 32.8,
+      "n_sites": 1,
+      "block": 12300260,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6874,
+      "kx": 6835,
+      "lat": 61.8727,
+      "lon": 130.4798,
+      "alt_cm": 36.0,
+      "n_sites": 1,
+      "block": 12300260,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6883,
+      "kx": 6800,
+      "lat": 61.95553,
+      "lon": 130.1708,
+      "alt_cm": 38.8,
+      "n_sites": 1,
+      "block": 12300260,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 6888,
+      "kx": 6876,
+      "lat": 61.99755,
+      "lon": 131.8193,
+      "alt_cm": 21.2,
+      "n_sites": 1,
+      "block": 12300263,
+      "months": "6",
+      "v3_dup": 0
+     }
+    ]
+   },
+   "Russia_E": {
+    "n_cells": 23,
+    "n_blocks": 11,
+    "n_cells_v3_dup": 0,
+    "n_cells_after_v3_dedup": 23,
+    "n_blocks_after_v3_dedup": 11,
+    "n_cells_after_dedup_and_100km": 23,
+    "n_blocks_after_dedup_and_100km": 11,
+    "min_km_to_other_macro_v3": 1056.3,
+    "nearest_other_macro": "Lena",
+    "alt_cm": {
+     "n": 23,
+     "min": 11.0,
+     "median": 28.7,
+     "mean": 28.88,
+     "max": 46.29
+    },
+    "months": "6,7",
+    "years": "2012,2013,2018,2019",
+    "cells": [
+     {
+      "ky": 7503,
+      "kx": 6578,
+      "lat": 67.52836,
+      "lon": 154.92885,
+      "alt_cm": 31.9,
+      "n_sites": 2,
+      "block": 13500309,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7512,
+      "kx": 6564,
+      "lat": 67.61289,
+      "lon": 155.1117,
+      "alt_cm": 33.4,
+      "n_sites": 2,
+      "block": 13500310,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7516,
+      "kx": 6564,
+      "lat": 67.64954,
+      "lon": 155.36145,
+      "alt_cm": 24.5,
+      "n_sites": 2,
+      "block": 13500310,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7516,
+      "kx": 6566,
+      "lat": 67.65219,
+      "lon": 155.4026,
+      "alt_cm": 22.8,
+      "n_sites": 2,
+      "block": 13500310,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7529,
+      "kx": 6571,
+      "lat": 67.76855,
+      "lon": 156.31,
+      "alt_cm": 33.3,
+      "n_sites": 2,
+      "block": 13500312,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7530,
+      "kx": 6570,
+      "lat": 67.77808,
+      "lon": 156.32885,
+      "alt_cm": 30.6,
+      "n_sites": 2,
+      "block": 13500312,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7534,
+      "kx": 6788,
+      "lat": 67.81397,
+      "lon": 161.77145,
+      "alt_cm": 20.5,
+      "n_sites": 2,
+      "block": 13500323,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7534,
+      "kx": 6793,
+      "lat": 67.81187,
+      "lon": 161.89815,
+      "alt_cm": 31.4,
+      "n_sites": 2,
+      "block": 13500323,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7540,
+      "kx": 6769,
+      "lat": 67.86028,
+      "lon": 161.68405,
+      "alt_cm": 28.7,
+      "n_sites": 2,
+      "block": 13500323,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7554,
+      "kx": 6534,
+      "lat": 67.9931,
+      "lon": 156.92345,
+      "alt_cm": 25.7,
+      "n_sites": 2,
+      "block": 13500313,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7554,
+      "kx": 6536,
+      "lat": 67.99418,
+      "lon": 156.97217,
+      "alt_cm": 24.47,
+      "n_sites": 3,
+      "block": 13500313,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7555,
+      "kx": 6533,
+      "lat": 67.99513,
+      "lon": 156.9752,
+      "alt_cm": 22.6,
+      "n_sites": 1,
+      "block": 13500313,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7567,
+      "kx": 6684,
+      "lat": 68.10885,
+      "lon": 161.3355,
+      "alt_cm": 11.0,
+      "n_sites": 1,
+      "block": 13600322,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7591,
+      "kx": 6593,
+      "lat": 68.32244,
+      "lon": 160.6511,
+      "alt_cm": 22.95,
+      "n_sites": 4,
+      "block": 13600321,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7638,
+      "kx": 6505,
+      "lat": 68.74867,
+      "lon": 161.5286,
+      "alt_cm": 23.1,
+      "n_sites": 2,
+      "block": 13700323,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7639,
+      "kx": 6503,
+      "lat": 68.75271,
+      "lon": 161.536,
+      "alt_cm": 34.9,
+      "n_sites": 2,
+      "block": 13700323,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7642,
+      "kx": 6493,
+      "lat": 68.78191,
+      "lon": 161.47425,
+      "alt_cm": 20.3,
+      "n_sites": 2,
+      "block": 13700322,
+      "months": "6",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7642,
+      "kx": 6494,
+      "lat": 68.7867,
+      "lon": 161.49805,
+      "alt_cm": 23.9,
+      "n_sites": 2,
+      "block": 13700322,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7643,
+      "kx": 6490,
+      "lat": 68.78812,
+      "lon": 161.477,
+      "alt_cm": 37.9,
+      "n_sites": 2,
+      "block": 13700322,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7719,
+      "kx": 6319,
+      "lat": 69.471,
+      "lon": 162.214,
+      "alt_cm": 38.67,
+      "n_sites": 1,
+      "block": 13800324,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7720,
+      "kx": 6314,
+      "lat": 69.487,
+      "lon": 162.157,
+      "alt_cm": 30.75,
+      "n_sites": 1,
+      "block": 13800324,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7722,
+      "kx": 6307,
+      "lat": 69.506,
+      "lon": 162.125,
+      "alt_cm": 44.59,
+      "n_sites": 1,
+      "block": 13900324,
+      "months": "7",
+      "v3_dup": 0
+     },
+     {
+      "ky": 7723,
+      "kx": 6304,
+      "lat": 69.514,
+      "lon": 162.109,
+      "alt_cm": 46.29,
+      "n_sites": 1,
+      "block": 13900324,
+      "months": "7",
+      "v3_dup": 0
+     }
+    ]
+   }
+  }
+ },
+ "special_cases": {
+  "series_max_value_from_month_outside_8_9": {
+   "rule_rev13": "10월 이후 최댓값 방문은 기록 수가 8-9월 방문의 최대 기록 수와 같고 msrType 이 같을 때만 쓴다. 아니면 8-9월 방문의 최댓값을 쓴다(개정 13). 기각한 행은 notes 에 '10월 최댓값 방문 기각' 으로 적었다",
+   "n_rows_rejected_rev13": 1,
+   "n_rows": 1,
+   "n_rows_main": 1,
+   "rows": [
+    {
+     "site_id": "firealt_talucci2025_0122",
+     "year": 2019,
+     "date": "2019-10-04",
+     "alt_cm": 150.0,
+     "macro": "Canada",
+     "disturbed": 0
+    }
+   ]
+  },
+  "late_visits_within_4_days": {
+   "n_rows": 3,
+   "n_rows_main": 1,
+   "rows": [
+    {
+     "site_id": "firealt_talucci2025_0006",
+     "year": 2016,
+     "date": "2016-08-18",
+     "alt_cm": 127.07,
+     "macro": "Canada",
+     "disturbed": 1
+    },
+    {
+     "site_id": "firealt_talucci2025_0593",
+     "year": 2007,
+     "date": "2007-09-12",
+     "alt_cm": 53.0,
+     "macro": "Alaska",
+     "disturbed": 0
+    },
+    {
+     "site_id": "firealt_talucci2025_0598",
+     "year": 2007,
+     "date": "2007-09-11",
+     "alt_cm": 62.5,
+     "macro": "Alaska",
+     "disturbed": 1
+    }
+   ]
+  },
+  "chosen_visit_with_zero_records": {
+   "n_rows": 1,
+   "rows": [
+    {
+     "site_id": "firealt_talucci2025_0005",
+     "year": 2019,
+     "date": "2019-10-19",
+     "alt_cm": 60.63,
+     "n_zero": 18,
+     "label_def": "direct_dated",
+     "disturbed": 0
+    }
+   ]
+  },
+  "identical_value_sets": {
+   "n_rows": 23,
+   "n_rows_with_dup_of": 19,
+   "contributors": [
+    "Natali"
+   ],
+   "rule": "같은 날짜에 값의 다중집합(개수를 최대공약수로 나눈 것)이 같은 지점이 2곳 이상이고 값 수가 3 이상인 경우"
+  }
+ },
+ "site_unit": "위도, 경도를 소수 4자리로 반올림(Decimal ROUND_HALF_UP)한 좌표와 distur 의 조합. site_id 는 (cntryId, 위도, 경도, distur) 순의 일련번호다",
+ "n_sites_with_merged_raw_coordinates": 85,
+ "n_coordinates_with_both_burned_and_unburned": 5,
+ "coordinate_conversion": "원자료는 WGS84 십진 도다(EML 의 lat, lon 설명). 변환하지 않았다. 서경은 음수로 적혀 있다(US, CA 기록의 경도는 모두 음수, RU 기록은 모두 양수). 원좌표 문자열이 하나인 지점은 그 문자열을 그대로 적었고 둘 이상인 지점은 서로 다른 원좌표의 평균을 소수 6자리로 적었다. coord_prec_deg 는 원좌표 문자열의 소수 자리수에서 구했다. 공개 파일은 끝자리 0 을 적지 않으므로 실제 정밀도는 이 값보다 좋을 수 있다",
+ "units": "msrDepth 의 단위는 cm 다(EML 의 단위 centimeter). 변환하지 않았다",
+ "missing_codes": "수치 열 -9999, 문자 열 NA. lat, lon, year, month, day, msrDepth 에는 결측 부호가 없다",
+ "censoring": "공개 파일의 gtProbe 와 hitRock 은 모두 n 이다. 자료 제작 스크립트(DataCleanPointCombine.Rmd)가 gtProbe = y 2,237건과 hitRock = y 853건(스크립트 주석의 수)을 지운 뒤 공개했다. 그래서 right_censored 는 모두 0 이지만, 탐침 길이를 넘은 측정점이 빠진 지점의 평균은 실제보다 얕을 수 있다. 어느 지점에서 몇 건이 빠졌는지는 공개 파일로 알 수 없다",
+ "visits_file": "data/raw/firealt_talucci2025/derived_visits.csv",
+ "sites_file": "data/raw/firealt_talucci2025/derived_sites.csv",
+ "v3_proximity": {
+  "n_sites_within_dup_deg": 176,
+  "n_sites_within_dup_deg_by_macro": {
+   "Alaska": 157,
+   "Canada": 19
+  },
+  "min_km_to_other_macro_by_macro": {
+   "Alaska": 146.2,
+   "Canada": 608.9,
+   "Russia_C": 1062.4,
+   "Russia_E": 1056.3,
+   "Russia_W": 1178.2
+  }
+ },
+ "subunit_rule": "Russia_C 는 Yakutia_C, 나머지는 빈 칸. 자료의 생태지역 이름(resName)은 notes 에 적었다",
+ "unverified_items": [
+  "8-9월 방문 기록 가운데 10 cm 미만인 값이 있다(record_checks.n_msrDepth_below_10cm_in_aug_sep). 입력 오류인지 확인하지 못했고 지우지 않았다",
+  "Russia_W 의 미연소 2지점(Sizov)은 지점마다 측정 기록이 1건이다(n_obs = 1, 110 cm 와 210 cm). 지점 평균이 아니라 단일 측정값이다",
+  "기여자별 원 자료의 인용문과 측정 규약(탐침 길이, plot 안의 측정점 배치)은 확인하지 못했다. 자료 논문(doi:10.5194/essd-17-2887-2025)의 본문은 읽지 않았다. orig_source 에는 lastNm 열의 기여자 이름만 적었다",
+  "탐침 길이 초과 기록과 암석 접촉 기록이 공개 전에 지워졌다. 지점별 제거 수를 알 수 없어 우측 절단에 따른 얕은 쪽 편향의 크기를 확인하지 못했다",
+  "8월 초·중순의 단일 방문 값(direct_eos, record_date)은 계절 최대보다 얕을 수 있다(계획서 6B.9). 기여자가 붙인 msrType 이 thaw 인 8-9월 기록도 규칙에 따라 direct_eos 로 두었다",
+  "미연소 지점은 연소 지점의 대조 지점이다. 과거 화재 이력이 없는지는 기여자 판단(distur 열)을 따랐고 따로 확인하지 못했다",
+  "같은 위치가 정밀도가 다른 좌표 문자열로 적힌 경우를 소수 4자리에서 묶었다. 반올림 경계에 걸려 묶이지 않은 쌍이 남아 있을 수 있다. 1 km 셀 집계에서는 같은 셀에 들어간다",
+  "방문 단위는 관측일이다. 같은 조사 기간에 서로 다른 plot 을 며칠에 나눠 잰 경우 날짜별 평균의 최댓값은 plot 구성의 차이를 포함한다(special_cases.late_visits_within_4_days)",
+  "FireALT 기여 자료와 v3 의 ABoVE 자료, CALM 자료가 같은 현장 조사를 담고 있는지는 좌표 거리로만 보았다(v3_proximity). 원 조사 단위의 대조는 하지 않았다"
+ ]
+}

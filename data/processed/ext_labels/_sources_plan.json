@@ -1,0 +1,403 @@
+{
+ "created": "2026-09-29",
+ "plan_doc": "/home/willy010313/Polar_Bigdata/docs/EXPERIMENT_PLAN_LG_2026-09-29.md",
+ "section": "6B(LGD, 개정 10)",
+ "selected": [
+  {
+   "id": "qtp_du_gpr",
+   "name": "Du 등 2026, 청장고원 활동층 수분 자료 코드 묶음의 GPR·인력 시추 ALT 조사점(Zenodo 21999366)",
+   "url": "https://zenodo.org/records/21999366",
+   "download_how": "로컬 사본 /home/willy010313/Polar_Bigdata/data/raw/qtp_alt_open_2026-09-29/zenodo21999366/ 를 raw_dir 로 복사한다. 없으면 curl -L -o Code_Archive_QTB_ALM_v2s.zip 'https://zenodo.org/api/records/21999366/files/Code_Archive_QTB_ALM_v2s.zip/content' (36.3 MB). zip 안 파일 이름은 name.encode('cp437').decode('utf-8') 로 되돌린다. 대상은 04_sentinel1_gee/探坑_GPR活动层水分调查点.xlsx 의 첫 시트(열 编号, 年份, 数据类型, Lon, Lat, ALT/m, GPR波速, VWC)다.",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/qtp_du_gpr/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_qtp_du_gpr.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/qtp_du_gpr_points.csv",
+   "target_regions": "Tibet(새 지역, 심부 레짐). 하위 단위는 회랑, 황하원·동부, 서부, 치롄",
+   "label_rule": "ALT 값이 있는 행만 쓴다(222점). method 는 GPR 이면 gpr, 인력 시추면 pit_core. label_def = direct_eos, eos_basis = dataset_statement(자료 설명의 9–10월 최대 융해기, 점별 날짜 없음). year 는 年份, month 는 빈 칸. alt_cm = ALT/m × 100. 범위 QC 0–600 cm. 탐갱 37점과 ALT 없는 GPR 5점은 점 자료에 넣지 않는다.",
+   "expected_cells": "새 0.01° 셀 132개, 0.5° 블록 34개(탐색 추정). v3 중복 2셀",
+   "notes": "약관 MIT(기록 단위). 인용은 Zenodo 기록과 원 논문, NCDC DOI 10.12072/ncdc.permafrost.db7703.2026 을 함께 적는다. E = ALT/√TDD 중앙값 11.2 로 주 전이 지역과 다르다."
+  },
+  {
+   "id": "qtp_liux_compile",
+   "name": "Liu X. 등 2022, 칭하이 고원 ALT 관측 문헌 집계표(figshare 21444879)",
+   "url": "https://doi.org/10.6084/m9.figshare.21444879.v1",
+   "download_how": "로컬 사본 /home/willy010313/Polar_Bigdata/data/raw/qtp_alt_open_2026-09-29/figshare21444879/ds01.xlsx 를 복사한다. 없으면 curl -L -o ds01.xlsx https://ndownloader.figshare.com/files/38063142 (31 kB). 머리글은 둘째 행이다.",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/qtp_liux_compile/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_qtp_liux_compile.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/qtp_liux_compile_points.csv",
+   "target_regions": "Tibet(치롄 GPR 은 조사 월 확인 뒤 대상 셀 후보, 나머지는 보조)",
+   "label_rule": "출처 열로 나눈다. 'Cao, 2020'(150기록, 치롄 GPR): method = gpr, label_def = direct_dated(조사 월 미확인). 'CALM network': method = borehole_temp, label_def = temp_derived. 그 밖의 출처(Zhao 2017, Wu 2012, Qin 2017, Luo 2012, Mu 2015 등): method = unknown, label_def = unknown. Du 점과 0.01° 이내이고 값이 같은 기록은 dup_of 에 qtp_du_gpr 의 site_id 를 적는다. year 는 관측 기간 열의 시작과 끝을 year_min, year_max 로 넣는다.",
+   "expected_cells": "치롄 GPR 새 셀 63개(블록 2개). 표 전체는 새 셀 172개(블록 29개)이나 라벨 정의가 섞여 있다",
+   "notes": "약관 CC BY 4.0. 연결 논문은 확인하지 못했다. 치롄 GPR 의 조사 시기가 계절 말로 확인되면 direct_eos(dataset_statement)로 올린다. 실행 제출 전에만 바꿀 수 있다."
+  },
+  {
+   "id": "qtp_fu_temp",
+   "name": "Fu 2025, 청장고원 동토 지온과 ALT 자료 2001–2020(figshare 29206613)",
+   "url": "https://doi.org/10.6084/m9.figshare.29206613.v1",
+   "download_how": "로컬 사본 /home/willy010313/Polar_Bigdata/data/raw/qtp_alt_open_2026-09-29/figshare29206613/ 를 복사한다. 없으면 curl -L -o Permafrost_Profile_QTP_2001-2020.xlsx https://ndownloader.figshare.com/files/55143119 와 README(files/55023443). 시트 SITE, ALT.",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/qtp_fu_temp/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_qtp_fu_temp.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/qtp_fu_temp_points.csv",
+   "target_regions": "Tibet 보조 라벨(지온 유도). L39 의 비교 대상",
+   "label_rule": "method = borehole_temp, label_def = temp_derived, eos_basis = none. 시트 ALT 의 연별 값(m)에 100 을 곱한다(README 의 단위 표기는 모순이고 값은 m 다). 행은 (지점, 연도). 확인적 풀에 넣지 않는다.",
+   "expected_cells": "새 셀 43개(블록 11개), 전부 회랑",
+   "notes": "약관 CC BY 4.0. 2001년부터 값이 있는 지점의 일부 연도가 보간인지는 확인하지 못했다."
+  },
+  {
+   "id": "qtp_yang_compile",
+   "name": "Yang & Qiu 2026, 티베트 고원 ALT·MAGT 현장 관측 집계표(Zenodo 18150789)와 Chang 등 2024 보충 표 S1",
+   "url": "https://zenodo.org/records/18150789",
+   "download_how": "로컬 사본 /home/willy010313/Polar_Bigdata/data/raw/qtp_alt_open_2026-09-29/zenodo18150789/ 와 chang2024_npj_SI/ 를 복사한다. 없으면 curl -L -o insitu.xlsx 'https://zenodo.org/api/records/18150789/files/in-situ%20measurements%20of%20ALT%20and%20MAGT.xlsx/content' 와 curl -L -o SI.pdf 'https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41612-024-00866-0/MediaObjects/41612_2024_866_MOESM1_ESM.pdf' 뒤 pdftotext -layout.",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/qtp_yang_compile/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_qtp_yang_compile.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/qtp_yang_compile_points.csv",
+   "target_regions": "Tibet 보조 라벨(방법 미확인)",
+   "label_rule": "시트 ALT 의 152지점. method = unknown, label_def = unknown. 출처가 CALM 인 6지점은 borehole_temp, temp_derived. 연도는 Chang 표 S1 의 관측 기간이 있는 80지점만 year_min, year_max 를 채운다. 다른 자료원과 0.01° 이내이면 dup_of 를 적는다. 확인적 풀에 넣지 않는다.",
+   "expected_cells": "새 셀 123개(블록 37개). 같은 시추공의 중복 수록이 있어 실제는 더 적다",
+   "notes": "약관 CC BY 4.0. 같은 기록의 nc 3개(각 384 MB)는 받지 않는다."
+  },
+  {
+   "id": "grl_ilulissat_scheer",
+   "name": "Scheer 등 2024, 일루리사트 ALT 탐침 측정 2020–2021(PANGAEA 964306)",
+   "url": "https://doi.org/10.1594/PANGAEA.964306",
+   "download_how": "curl -L -o ILU_ALT.txt 'https://download.pangaea.de/dataset/964306/files/ILU_ALT_measurements_Vegetation_surveys_2020-2021.txt' (63 KB). 처음에 503 이 나오면 1–2분 뒤 다시 요청한다. 탐색 사본: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/b_nordic/pg/ILU_ALT_measurements.txt",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/grl_ilulissat_scheer/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_grl_ilulissat_scheer.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/grl_ilulissat_scheer_points.csv",
+   "target_regions": "NAtlantic(그린란드)",
+   "label_rule": "ALT 값이 있는 377지점. method = probe, label_def = direct_eos, eos_basis = dataset_statement(설명서의 2020, 2021년 여름 말. 파일에 날짜 없음). 연도별 값을 (지점, 연도) 행으로 둔다. month 는 빈 칸.",
+   "expected_cells": "1 km 셀 14개(블록 1개). 지점의 82 % 가 두 셀에 몰려 있다",
+   "notes": "약관 CC BY 4.0. 도시와 기반 시설 주변 지점이다. CUSP 의 Scheer_etal_2023 행과 대조한다."
+  },
+  {
+   "id": "cusp_v1_1",
+   "name": "CUSP v1.1 합성 관측표 가운데 Jorgenson & Kanevskiy 2025, Petrone 등 2016 출처 행",
+   "url": "https://github.com/jonschwenk/cusp/releases/tag/v1.1",
+   "download_how": "curl -L -o cusp_v1.1.csv https://github.com/jonschwenk/cusp/releases/download/v1.1/cusp_v1.1.csv (9.1 MB) ; curl -L -o cusp_sources_v1.1.bib https://github.com/jonschwenk/cusp/releases/download/v1.1/cusp_sources_v1.1.bib. 탐색 사본: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/b_nordic/cusp/",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/cusp_v1_1/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_cusp_v1_1.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/cusp_v1_1_points.csv",
+   "target_regions": "NAtlantic(그린란드 캉에를루수아크), Canada(바일럿섬, 워드헌트섬)",
+   "label_rule": "source 가 Jorgenson_Kanevskiy_2025, Petrone_etal_2016 인 행만 쓴다. CALM, ABoVE, ALLena, FireALT, PERMOS, Scheer 출처 행은 원자료원을 쓰므로 뺀다. Smith_Burgess 행은 방법 불명이라 뺀다. method 는 tp → probe, gp → gpr, pit·pit_aug·aug → pit_core. 단일 방문의 관측 월이 8–9월이면 direct_eos(record_date), 아니면 direct_dated. quality_flags 는 notes 에 옮긴다.",
+   "expected_cells": "그린란드 1 km 셀 6개(블록 2개). 캐나다 고위도 군도 6개는 7월 말–8월 초 관측이라 대부분 direct_dated",
+   "notes": "저장소 약관 미확인(GitHub API 에서 NOASSERTION, Zenodo 기록은 접근 제한). 점 자료는 커밋하지 않는다. 인용은 CUSP 와 원 출처를 함께 적는다."
+  },
+  {
+   "id": "mythaw_pangaea",
+   "name": "T-MOSAiC myThaw 표준 규약 융해 깊이 2021–2023(PANGAEA 956039, 971586, 974461)",
+   "url": "https://doi.org/10.1594/PANGAEA.971787",
+   "download_how": "curl -L -o P956039.tab 'https://doi.pangaea.de/10.1594/PANGAEA.956039?format=textfile' (971586, 974461 도 같은 방식, 1.2–2.2 MB). 탐색 사본: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/synth/mythaw/",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/mythaw_pangaea/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_mythaw_pangaea.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/mythaw_pangaea_points.csv",
+   "target_regions": "NAtlantic(Kevo, Iškoras, Russell Glacier, Bayelva 2곳), Canada(Cambridge Bay, NRC Lake)",
+   "label_rule": "method = probe. 지점과 연도마다 8월 1일 이후 방문의 지점 평균 가운데 최댓값을 연 값으로 쓴다(label_def = direct_eos, eos_basis = series_max). 8월 1일 이후 방문이 없는 연도는 그 해 마지막 방문 값을 direct_dated 로 둔다. 2022년판은 좌표 열이 정수 도로 반올림되어 있으므로 머리말 Event 좌표를 쓴다. Zackenberg, Samoylov, Toolik, Siksik Creek 는 v3 와 같은 지점이라 dup_of 를 적는다.",
+   "expected_cells": "새 셀 5–6개(스칸디나비아 2, 그린란드 1–2, 스발바르는 F2 셀 위치의 탐침 값 2)",
+   "notes": "약관 CC BY 4.0. 2024년판(PANGAEA 997035)은 로그인과 저자 승인이 필요해 보류했다."
+  },
+  {
+   "id": "calm_web_subsites",
+   "name": "CALM 누리집 지점별 원자료(Abisko S2 하위 지점, Kapp Linné S1 하위 지점)",
+   "url": "https://www2.gwu.edu/~calm/data/north.htm",
+   "download_how": "curl -L -O https://www2.gwu.edu/~calm/data/CALM_Data/Europe/Nordic/s02_abisko_area/S2_alt_abisko_78_23.xls 와 같은 폴더의 site_descr.txt, .../s01_kappe_linne/s01_alt_2011.xls, site_descr.txt. 요청 사이에 3초 간격을 둔다. 탐색 사본: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/b_nordic/calm_sites/",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/calm_web_subsites/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_calm_web_subsites.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/calm_web_subsites_points.csv",
+   "target_regions": "NAtlantic(스칸디나비아, 스발바르)",
+   "label_rule": "method = probe, label_def = direct_eos, eos_basis = protocol(CALM). 하위 지점마다 1990년 이후 연 값을 행으로 둔다. 좌표는 설명문의 도와 소수 분 표기를 십진 도로 바꾸고 변환식을 메타에 적는다. Bergfors 는 좌표가 없어 뺀다. UNISCALM(N3), Ecogrid(IT1)의 지점 평균은 calm_pangaea_v4add 에서 가져온다.",
+   "expected_cells": "Abisko 1 km 셀 11개(블록 3개), Kapp Linné 약 4개(블록 1개)",
+   "notes": "약관은 CALM 자료 이용 규정(인용 요구)이고 CC 표기는 확인하지 못했다. 점 자료는 커밋하지 않는다. 좌표 해석은 Åkerman & Johansson 2008 과 대조해야 한다."
+  },
+  {
+   "id": "calm_pangaea_v4add",
+   "name": "CALM PANGAEA 972777 의 v3 미편입 탐침 이벤트 9개",
+   "url": "https://doi.org/10.1594/PANGAEA.972777",
+   "download_how": "내려받기 불필요. /home/willy010313/Polar_Bigdata/data/raw/calm/PANGAEA_972777_CALM_ALT_NH.tab 를 읽는다. 후보 목록: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/local_v4_candidates_calm.csv",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/calm/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_calm_pangaea_v4add.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/calm_pangaea_v4add_points.csv",
+   "target_regions": "Russia_E(R27 Lavrentia, R41 Lorino, R30A), Russia_W(R1 Nadym), NAtlantic(N3 UNISCALM, IT1 Ecogrid), Canada(C3B North Head), Alaska(U5, U4)",
+   "label_rule": "이벤트 Method 가 'Spatially-oriented mechanical probing' 인 9개 이벤트만 쓴다. method = probe, label_def = direct_eos, eos_basis = protocol. 연 값은 ALD 열, 1990년 이후, 범위 QC 0–600 cm. 추코트카 지점의 경도는 서경(음수)이고 macro 는 Russia_E 다. 융해관 이벤트 C3A 와 지온 이벤트(CH6, M3, CN6, U20)는 넣지 않는다.",
+   "expected_cells": "9셀(러시아 E 3, 러시아 W 1, 스발바르 2, 캐나다 1, 알래스카 2)",
+   "notes": "약관 CC BY 4.0. 해안 지점은 ERA5-Land 육지 폴백이 필요하다. R1, R30A, N3, IT1, U4 는 같은 좌표에 v3 의 F2 셀이 있으므로 새 loc_id 로 더한다."
+  },
+  {
+   "id": "grl_disko_zastruzny",
+   "name": "Zastruzny 등 2024, 디스코섬 사면 동결면 깊이 2015(PANGAEA 967139)",
+   "url": "https://doi.org/10.1594/PANGAEA.967139",
+   "download_how": "curl -L -o P967139.tab 'https://doi.pangaea.de/10.1594/PANGAEA.967139?format=textfile' (37 MB) 뒤 Event 가 Disko2015_frost_table 인 행만 남긴다. 탐색에서 추린 사본: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/b_nordic/pg/P967139_frost_table.tsv",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/grl_disko_zastruzny/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_grl_disko_zastruzny.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/grl_disko_zastruzny_points.csv",
+   "target_regions": "NAtlantic(그린란드)",
+   "label_rule": "method = probe. 2015-08-04 와 08-21 두 방문의 점 평균 가운데 최댓값을 연 값으로 쓴다(direct_eos, series_max). 두 방문의 점 구성이 같은지 확인하고 다르면 공통 점만 쓴다.",
+   "expected_cells": "1 km 셀 1개. v3 디스코 CALM 셀에서 약 2.6 km",
+   "notes": "약관 CC BY 4.0."
+  },
+  {
+   "id": "swe_tavvavuoma_sannel",
+   "name": "Sannel 2020, 스웨덴 Tavvavuoma 이탄지 융해 깊이 2010–2012(Bolin Centre)",
+   "url": "https://doi.org/10.17043/sannel-2020-temperature-1",
+   "download_how": "curl -L -O https://bolin.su.se/data/uploads/sannel-2020.zip (1.35 MB). 탐색 사본: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/b_nordic/misc/sannel-2020.zip",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/swe_tavvavuoma_sannel/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_swe_tavvavuoma_sannel.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/swe_tavvavuoma_sannel_points.csv",
+   "target_regions": "NAtlantic(스칸디나비아)",
+   "label_rule": "영구동토가 있는 지점의 계절 말 융해 깊이만 쓴다. method 는 파일의 기재를 따르고 없으면 other. label_def = direct_eos, eos_basis = dataset_statement 또는 record_date. 좌표가 파일에 없으면 점 자료를 만들지 않고 메타에 사유를 적는다.",
+   "expected_cells": "1 km 셀 1개",
+   "notes": "약관 CC BY 4.0. xlsx 는 아직 열어 보지 않았다."
+  },
+  {
+   "id": "ru_mamontovklyk_grosse",
+   "name": "Grosse 2007, Cape Mamontov Klyk 주변 활동층 자료(PANGAEA 611409)",
+   "url": "https://doi.org/10.1594/PANGAEA.611409",
+   "download_how": "curl -L -o PANGAEA_611409.tab 'https://doi.pangaea.de/10.1594/PANGAEA.611409?format=textfile' (6.7 KB). 탐색 사본: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/pangaea/P611409.tab",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/ru_mamontovklyk_grosse/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_ru_mamontovklyk_grosse.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/ru_mamontovklyk_grosse_points.csv",
+   "target_regions": "Russia_C(랍테프 서부 해안)",
+   "label_rule": "ALD 평균 값이 있는 93지점. 관측일 2003-08-15–28. label_def = direct_eos, eos_basis = record_date. method 는 원정 보고서(Reports on Polar and Marine Research 489)에서 탐침으로 확인되면 probe, 아니면 other. n_obs 는 지점당 관측 수.",
+   "expected_cells": "1 km 셀 34개(블록 3개). 레나 지역 셀에서 169 km 이상",
+   "notes": "약관 CC BY 3.0. 단일 조사(2003년)다."
+  },
+  {
+   "id": "palmtag2022_pedon",
+   "name": "Palmtag 등 2022, 북부 영구동토 지역 토양 단면 자료(Bolin Centre)",
+   "url": "https://bolin.su.se/data/palmtag-2022-pedon-1",
+   "download_how": "curl -L -o palmtag-2022-pedon-1.zip https://bolin.su.se/data/uploads/palmtag-2022-pedon-1.zip (721 KB). 탐색 사본: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/palmtag2022/",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/palmtag2022_pedon/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_palmtag2022_pedon.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/palmtag2022_pedon_points.csv",
+   "target_regions": "Russia_C(Logata, Ary-Mas), Russia_E(Kytalyk, Cherskii, Shalaurovo)",
+   "label_rule": "열 'Depth Top Permafrost' 값이 있는 러시아 단면만 쓴다. method = pit_core. 관측 월이 8–9월이면 direct_eos(record_date), 아니면 direct_dated. Ary-Mas 는 UTM 47, Cherskii 와 Shalaurovo 는 UTM 57N 좌표를 십진 도로 바꾼다. Logata 와 Ary-Mas 의 날짜는 dd.mm.yy 다. Lena Delta 단면은 Lena 영역이라 뺀다. Seida, Spasskaya Pad 는 값이 비어 있다.",
+   "expected_cells": "Russia_C 새 셀 23개(블록 2개), Russia_E 새 셀 17개",
+   "notes": "약관 ODC-By. 관측일이 8월 1–17일이라 계절 최대보다 얕을 수 있다(L41 의 변형 b)."
+  },
+  {
+   "id": "firealt_talucci2025",
+   "name": "Talucci 등 2025, FireALT 연소지·미연소지 융해 깊이(Arctic Data Center)",
+   "url": "https://doi.org/10.18739/A2RN3092P",
+   "download_how": "curl -L -o FireAltEstimatedRawData.csv 'https://arcticdata.io/metacat/d1/mn/v2/object/urn:uuid:c424189c-3ef2-4c98-8656-cfb26664ad6a' (11.2 MB). plot 표 urn:uuid:dae1ade6-a03f-40be-aff1-8c4f3731e875, 짝 표 urn:uuid:cd986a9e-e89f-4f4f-a03d-e8812d306f99. 탐색 사본: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/firealt/",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/firealt_talucci2025/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_firealt_talucci2025.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/firealt_talucci2025_points.csv",
+   "target_regions": "Russia_C(중앙 야쿠티아), Russia_W, Russia_E, Canada, Alaska",
+   "label_rule": "라벨은 msrDepth 만 쓴다. estDepth 는 쓰지 않는다. method = probe. 관측 월이 8–9월이면 direct_eos(record_date), 아니면 direct_dated. msrType 열로 거르지 않는다. 연소 지점은 disturbed = 1, disturb_type = burned 로 표시하고 대상 셀에서 뺀다. 한 좌표를 여러 plot 이 공유하면 좌표 단위로 평균한다.",
+   "expected_cells": "미연소이고 8월 관측인 셀: Russia_C 7개(블록 2개), Russia_W 2개. Russia_E 23셀은 6–7월 관측이라 direct_dated. Canada 는 파싱 뒤 확정",
+   "notes": "약관 CC BY 4.0. 기존 빈 폴더 data/raw/firealt 는 그대로 둔다."
+  },
+  {
+   "id": "ru_syrdakh_obs",
+   "name": "Syrdakh 열·수문 관측소 융해 깊이 2012–2018(Zenodo 19890671)",
+   "url": "https://doi.org/10.5281/zenodo.14619854",
+   "download_how": "curl -L -o Syrdakh-DB_without-imagery-dsm.zip 'https://zenodo.org/api/records/19890671/files/Syrdakh-DB_without-imagery-dsm.zip/content' (90 MB). 융해 깊이는 ground/td/ 의 CSV 7개, 좌표는 auxiliary/geopackage/ 에 있다.",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/ru_syrdakh_obs/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_ru_syrdakh_obs.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/ru_syrdakh_obs_points.csv",
+   "target_regions": "Russia_C(중앙 야쿠티아)",
+   "label_rule": "method 는 파일의 method 열을 따른다(관과 금속봉은 probe, 굴착과 구덩이는 pit_core). max_exceed 가 참이면 right_censored = 1. 9월 방문은 direct_eos(record_date), 10월 방문은 direct_dated. 수체 아래와 탈릭 지점은 disturbed = 1, disturb_type = water.",
+   "expected_cells": "1 km 셀 5개 이하",
+   "notes": "약관 CC BY 4.0. zip 전체와 좌표 파일은 아직 받지 않았다. 값의 범위가 79–370 cm 다."
+  },
+  {
+   "id": "ru_kwbs_makarieva",
+   "name": "Makarieva 등 2017, 콜리마 물수지 관측소 융해 깊이 시계열 1954–1997(PANGAEA 881754)",
+   "url": "https://doi.org/10.1594/PANGAEA.881754",
+   "download_how": "curl -L -o PANGAEA_881754.tab 'https://doi.pangaea.de/10.1594/PANGAEA.881754?format=textfile' (1.36 MB). 탐색 사본: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/pangaea/P881754.tab",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/ru_kwbs_makarieva/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_ru_kwbs_makarieva.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/ru_kwbs_makarieva_points.csv",
+   "target_regions": "Russia_E(콜리마 상류 산지)",
+   "label_rule": "지점과 연도마다 융해층 하한 경계 깊이의 연 최대를 연 값으로 쓴다(direct_eos, series_max). 최대가 6–10월 밖에서 잡히는 연도는 qc_flag = date 로 표시하고 뺀다. 1990년 이전 연도는 qc_flag = year_pre1990. method 는 자료 논문(ESSD 10:689)에서 확인하고 확인되지 않으면 other.",
+   "expected_cells": "1 km 셀 10개 이하(블록 1개). 1990–1997년 값이 있는 지점 수는 파싱 뒤 확정",
+   "notes": "약관 CC BY 3.0."
+  },
+  {
+   "id": "ru_liang_mounds",
+   "name": "Liang 등 2023, 시베리아 북동부 낙엽송 둔덕 융해 깊이(PANGAEA 961876)",
+   "url": "https://doi.org/10.1594/PANGAEA.961876",
+   "download_how": "curl -L -o PANGAEA_961876.tab 'https://doi.pangaea.de/10.1594/PANGAEA.961876?format=textfile' (24 KB). 탐색 사본: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/pangaea/P961876.tab",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/ru_liang_mounds/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_ru_liang_mounds.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/ru_liang_mounds_points.csv",
+   "target_regions": "Russia_E(인디기르카 저지)",
+   "label_rule": "관측 월이 8월인 기록만 direct_eos(record_date), 7월 기록은 direct_dated. method 는 표기(Leveling measurement)를 notes 에 적고 other 로 둔다. 961879(Allaiha)는 CALM R31 과 같은 지점이라 쓰지 않는다.",
+   "expected_cells": "1 km 셀 3개(블록 2개)",
+   "notes": "약관 CC BY 4.0."
+  },
+  {
+   "id": "ru_yamal_walker",
+   "name": "Walker 등 2009, 야말 측선 융해 깊이 2007–2008(PANGAEA 842711, 842691)",
+   "url": "https://doi.org/10.1594/PANGAEA.842711",
+   "download_how": "curl -L -o PANGAEA_842711.tab 'https://doi.pangaea.de/10.1594/PANGAEA.842711?format=textfile' 와 같은 방식으로 842691. 탐색 사본: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/pangaea/P842711.tab, P842691.tab",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/ru_yamal_walker/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_ru_yamal_walker.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/ru_yamal_walker_points.csv",
+   "target_regions": "Russia_W(Laborovaya, Kharasavey)",
+   "label_rule": "method = probe. 관측일은 relevé 표(842691)에서 가져온다(2007-08-06–28, 2008-08-21–23). direct_eos(record_date). 융해 깊이 0 은 결측으로 본다. Vaskiny Dachi, Nadym 은 v3 와 같은 지점이라 dup_of 를 적는다.",
+   "expected_cells": "새 1 km 셀 5–6개(블록 3개)",
+   "notes": "약관 CC BY 3.0."
+  },
+  {
+   "id": "nsidc_ggd353_thawtube",
+   "name": "Nixon, NSIDC GGD353 v6 캐나다 매켄지 계곡 융해관 관측망 1991–2007",
+   "url": "https://nsidc.org/data/ggd353/versions/6",
+   "download_how": "curl -O ftp://sidads.colorado.edu/pub/DATASETS/fgdc/ggd353_activlayer_canada/ggd353data_v6.rtf (익명 FTP, 1.13 MB). 탐색 사본: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/b_nordic/ggd353/",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/nsidc_ggd353_thawtube/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_nsidc_ggd353_thawtube.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/nsidc_ggd353_thawtube_points.csv",
+   "target_regions": "Canada(확충판)",
+   "label_rule": "method = thaw_tube, label_def = direct_eos, eos_basis = protocol(연 최대 융해 깊이). RTF 의 연도별 표를 파싱한다. 침하 보정 전후 값이 함께 있으면 자료 설명이 ALT 로 정의한 값을 쓰고 선택을 메타에 적는다. CALM C3–C15 와 같은 10개 지점은 dup_of 를 적는다.",
+   "expected_cells": "새 1 km 셀 31개",
+   "notes": "약관 미확인(인용 요구와 사용 시 연락 문구가 있다). 점 자료는 커밋하지 않는다. 탐색에서는 좌표만 읽었고 값은 추출하지 않았다."
+  },
+  {
+   "id": "nsidc_ggd402_yamal",
+   "name": "NSIDC GGD402 야말 반도 시추공 기재 자료 1976–1989",
+   "url": "https://nsidc.org/data/ggd402/versions/1",
+   "download_how": "curl 로 ftp://sidads.colorado.edu/pub/DATASETS/fgdc/ggd402_boreholes_russia/ 의 yabrhl.txt, yabrhl.dat, yadesc.dat, README 를 받는다. 탐색 사본: /tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/dataprobe/nsidc_ggd402/",
+   "raw_dir": "/home/willy010313/Polar_Bigdata/data/raw/nsidc_ggd402_yamal/",
+   "parser_path": "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/parse_ext_nsidc_ggd402_yamal.py",
+   "points_out": "/home/willy010313/Polar_Bigdata/data/processed/ext_labels/nsidc_ggd402_yamal_points.csv",
+   "target_regions": "Russia_W 보조 라벨(야말 시추 기재)",
+   "label_rule": "열 'Max depth seasonal freeze(thaw), m' 를 쓴다. method = pit_core, label_def = unknown(산정 방법 미확인), qc_flag = year_pre1990. 좌표는 DDMMSS 정수를 십진 도로 바꾸고 coord_prec_deg = 0.0167. 확인적 풀과 대상 셀에 넣지 않는다.",
+   "expected_cells": "새 셀 147개(블록 21개)",
+   "notes": "약관 미확인. 점 자료는 커밋하지 않는다. 서술과 보조 분석에만 쓴다."
+  }
+ ],
+ "deferred": [
+  {
+   "id": "tpdc302540_du_gpr_north",
+   "name": "TPDC 티베트 고원 북부 활동층 GPR 탐사 자료 2019–2022",
+   "reason": "TPDC 계정이 필요하다(공유 정책 A, 로그인 뒤 내려받기). 자동화 경로를 확인하지 못했다",
+   "what_user_must_do": "data.tpdc.ac.cn 에 가입하고 https://doi.org/10.11888/Cryos.tpdc.302540 의 파일을 받아 data/raw/tpdc302540/ 에 둔다. TPDC 자료 가운데 우선순위가 가장 높다"
+  },
+  {
+   "id": "tpdc270324_cao_qilian",
+   "name": "TPDC 치롄산 활동층 두께 2011–2014(Cao Bin) 원본",
+   "reason": "TPDC 계정이 필요하다. 같은 점은 figshare 21444879 에 있으나 조사 날짜가 없다",
+   "what_user_must_do": "https://doi.org/10.11888/Geocry.tpdc.270324 를 받아 data/raw/tpdc270324/ 에 둔다. 조사 월이 들어 있으면 치롄 GPR 을 direct_eos 로 올릴 수 있다"
+  },
+  {
+   "id": "cao2017_survey_month",
+   "name": "Cao 등 2017 JGR Earth Surface 본문의 치롄 GPR 조사 시기",
+   "reason": "Wiley 본문이 이 서버에서 403 이다",
+   "what_user_must_do": "doi:10.1002/2016JF004018 의 방법 절에서 GPR 조사 월을 확인해 알려 준다. 새 지역 실행 제출 전에 확인해야 편입할 수 있다"
+  },
+  {
+   "id": "tpdc271107_zhao2021",
+   "name": "Zhao 등 2021 ESSD 청장고원 동토 열 상태 종합 자료",
+   "reason": "TPDC 계정이 필요하다. 지온 유도 라벨이고 활동층 지점은 12곳이다",
+   "what_user_must_do": "필요하면 https://doi.org/10.11888/Geocry.tpdc.271107 을 받는다. 우선순위는 낮다"
+  },
+  {
+   "id": "tpdc301650_nagqu_gpr",
+   "name": "TPDC 나취 유역 동토 GPR 자료 2024",
+   "reason": "TPDC 계정이 필요하다. ALT 해석값이 들어 있는지 확인하지 못했다",
+   "what_user_must_do": "https://doi.org/10.11888/Cryos.tpdc.301650 을 받아 내용(ALT 열 유무)을 확인한다"
+  },
+  {
+   "id": "ncdc_db7703_du_field",
+   "name": "NCDC 활동층 수분 현장 조사 자료 정본(Du)",
+   "reason": "이 서버에서 www.ncdc.ac.cn 접속이 되지 않는다. 회원 가입이 필요할 수 있다",
+   "what_user_must_do": "브라우저로 https://doi.org/10.12072/ncdc.permafrost.db7703.2026 을 열어 점별 조사 날짜와 ALT 열이 있는지 확인하고, 있으면 받아 data/raw/ncdc_db7703/ 에 둔다"
+  },
+  {
+   "id": "zenodo18320588_xiao_gpr30m",
+   "name": "Xiao, GPR 관측 기반 청장고원 30 m ALT 격자(Zenodo 18320588)",
+   "reason": "Zenodo 접근 제한 기록이다",
+   "what_user_must_do": "기록 페이지에서 접근 요청을 보낸다. 관측 점 자료가 동봉되었는지 확인한다"
+  },
+  {
+   "id": "mythaw2024_pangaea997035",
+   "name": "myThaw 2024년판(PANGAEA 997035)",
+   "reason": "로그인과 저자 승인이 필요하다",
+   "what_user_must_do": "PANGAEA 계정으로 접근을 요청한다. 새 지점이 있을 때만 가치가 있다"
+  },
+  {
+   "id": "gem_zackenberg",
+   "name": "GEM GeoBasis Zackenberg 활동층 자료",
+   "reason": "data.g-e-m.dk 계정이 필요하다. 새 셀은 없다(격자점별 값과 날짜만 더해진다)",
+   "what_user_must_do": "필요하면 가입 뒤 받는다. 우선순위는 낮다"
+  },
+  {
+   "id": "pdc13134_fosheim",
+   "name": "Ward Jones 등 2020, 엘즈미어섬 Fosheim 반도 융해 깊이(Polar Data Catalogue 13134)",
+   "reason": "수동 내려받기만 가능하고 약관이 복제와 배포를 허용하지 않는다. 관측이 7월–8월 중순이다",
+   "what_user_must_do": "필요하면 PDC 화면에서 받아 data/raw 에만 둔다. 우선순위는 낮다"
+  },
+  {
+   "id": "verdonen2023_palsa",
+   "name": "Verdonen 등 2023, 핀란드 북서부 팔사 ALT 2007–2021",
+   "reason": "자료가 공개 저장소에 없다(저자 요청)",
+   "what_user_must_do": "저자에게 자료를 요청한다. 스칸디나비아 셀 2개가 더해진다"
+  },
+  {
+   "id": "yanagiya2022_batagay",
+   "name": "Yanagiya 등 2022, Batagay 부근 미연소 대조 지점 융해 깊이(Zenodo 6782395)",
+   "reason": "파일에 좌표가 없다. 좌표는 논문 본문에서 옮겨야 한다",
+   "what_user_must_do": "논문 본문의 측점 좌표를 확인해 알려 준다. Russia_C 셀 1–2개가 더해진다"
+  },
+  {
+   "id": "jia2022_wang2025_mdpi",
+   "name": "Jia 등 2022(청장 회랑 GPR 단면 57개), Wang G. 등 2025 의 자료 공개 문구",
+   "reason": "MDPI 본문이 이 서버에서 403 이다",
+   "what_user_must_do": "브라우저로 doi:10.3390/rs14215606, doi:10.3390/rs17122006 의 Data Availability 와 Supplementary Materials 를 확인한다"
+  },
+  {
+   "id": "adc_jorgenson_kanevskiy_original",
+   "name": "Jorgenson & Kanevskiy 2025 원본 데이터베이스(Arctic Data Center)",
+   "reason": "원본은 MS Access 형식이고 약관 표시가 없다. 이번에는 CUSP v1.1 의 해당 행을 쓴다",
+   "what_user_must_do": "원본 대조가 필요하면 https://doi.org/10.18739/A27P8TG0G 에서 받는다"
+  },
+  {
+   "id": "license_checks",
+   "name": "재배포 약관 확인(CUSP, CALM 누리집, NSIDC GGD353, GGD402, GTN-P)",
+   "reason": "약관 문서를 확인하지 못했다",
+   "what_user_must_do": "각 자료의 이용 약관을 확인한다. 확인 전에는 해당 점 자료를 커밋하지 않는다(data/processed/ext_labels/.gitignore)"
+  }
+ ],
+ "new_regions": [
+  {
+   "macro": "Tibet",
+   "definition": "청장고원과 치롄산(26–40°N, 73–105°E). 하위 단위는 회랑, 황하원·동부, 서부, 치롄. 대상 셀은 qtp_du_gpr 의 직접 라벨(GPR, 인력 시추)이다. v3 의 QTP_CN 1셀과 CALM_QTP_China 셀은 넣지 않는다",
+   "role": "새 지역. 심부 레짐이므로 적격이면 확장 풀 PE2 의 구성 지역이다(PE1 에는 넣지 않는다). 지온 유도 셀은 보조 라벨 대상(L39)",
+   "expected_cells": "직접 라벨 132셀(탐색 추정). 치롄 GPR 63셀은 조사 월 확인 뒤. 보조: 지온 유도 43셀(Fu)",
+   "expected_blocks": "34(치롄을 더하면 35). 보조 11"
+  },
+  {
+   "macro": "NAtlantic",
+   "definition": "그린란드, 스발바르, 노르웨이·스웨덴·핀란드 본토를 묶은 지역. 하위 단위는 세 곳. v3 의 CALM_Greenland 3행을 포함하고 하위 지점 평균인 v3 의 Abisko S2, Kapp Linné S1 행은 대상 셀에서 뺀다",
+   "role": "새 묶음 지역. 얕은 레짐이므로 적격이면 확장 풀 PE1 과 PE2 의 구성 지역이다. 부적격이면 점 추정",
+   "expected_cells": "v3 3셀과 새 셀 약 45(그린란드 약 24, 스칸디나비아 약 14, 스발바르 약 8)",
+   "expected_blocks": "약 14(v3 2, 새 블록 약 12). CCI ALT 유효 셀 기준으로는 더 적을 수 있다"
+  },
+  {
+   "macro": "Russia_C",
+   "definition": "러시아, 90°E 이상 140°E 미만. 레나 델타 영역(71.5–73.6°N, 123.3–130.1°E)은 제외. 타이미르, 랍테프 서부 해안, 중앙 야쿠티아를 포함한다",
+   "role": "기존 점 추정 지역의 확충. 적격이면 확장 풀 PE1 과 PE2 의 구성 지역",
+   "expected_cells": "v3 7셀과 새 셀 64(Mamontov Klyk 34, Palmtag 23, FireALT 7). Syrdakh 5셀 이하는 별도",
+   "expected_blocks": "13(v3 6, 새 블록 7)"
+  },
+  {
+   "macro": "Russia_E",
+   "definition": "러시아, 140°E 이상과 서경(추코트카)",
+   "role": "기존 확인적 지역의 확충판(민감도 L40). 확장 풀에는 v3 셀의 본 실행 값을 쓴다",
+   "expected_cells": "v3 30셀과 새 셀 약 35(콜리마 10 이하, Palmtag 17, Liang 3, CALM 3 등)",
+   "expected_blocks": "v3 21, 새 블록 약 10"
+  },
+  {
+   "macro": "Russia_W",
+   "definition": "러시아, 90°E 미만",
+   "role": "기존 확인적 지역의 확충판(민감도 L40). 야말 시추 기재 셀(GGD402)은 보조 라벨이며 대상 셀이 아니다",
+   "expected_cells": "v3 31셀과 새 셀 8–9(Walker 5–6, FireALT 2, CALM R1 1). 보조 147셀",
+   "expected_blocks": "v3 21, 새 블록 5. 보조 21"
+  },
+  {
+   "macro": "Canada",
+   "definition": "캐나다",
+   "role": "기존 확인적 지역의 확충판(민감도 L40)",
+   "expected_cells": "v3 750셀과 새 셀(GGD353 융해관 31, CALM C3B 1, myThaw 2, FireALT 는 파싱 뒤 확정)",
+   "expected_blocks": "v3 39. 새 블록 수는 파싱 뒤 확정"
+  }
+ ]
+}

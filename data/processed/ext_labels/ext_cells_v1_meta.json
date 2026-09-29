@@ -1,0 +1,3175 @@
+{
+ "stage": "LGD 6B.6 단계 2(셀 집계). 개정 13 규칙 반영",
+ "created": "2026-09-30 02:27",
+ "git_head": "f2085166acd5e46a1a8eb31ad392362835706d28",
+ "script": "scripts/1_data_prep/build_ext_cells_v1.py",
+ "script_sha256": "a213e6e15254d8c4963c459e133307e8b1c38d5af5c8f51623d9d2a3091d4805",
+ "plan": "docs/EXPERIMENT_PLAN_LG_2026-09-29.md 6B.3, 6B.4, 개정 13",
+ "inputs": {
+  "points": {
+   "calm_pangaea_v4add_points.csv": "b295a103cbc30c126dc48a355635e88c97c08aa6c1825745eea4dee62a23eadd",
+   "calm_web_subsites_points.csv": "058483cd423b3bbe86eb434146ac34510b30865a8316820d659d1ba713c84f1a",
+   "cusp_v1_1_points.csv": "b7e5a0c5619671eb610f97f16ab850b70ae35823f1a7639b93f5cf7b18c54835",
+   "firealt_talucci2025_points.csv": "e2a6bbff921eac5fe1143b23c702b5907b97a4018ddb0c923bd68eaa639005e9",
+   "grl_disko_zastruzny_points.csv": "7830027f87d2a84c92ea0d8755a0c75456cde3196d05a570b99377a977359330",
+   "grl_ilulissat_scheer_points.csv": "bd09fb938265c0e5c14138fc34307903a60590d7e765f75ea4ad89b187f9e085",
+   "mythaw_pangaea_points.csv": "ba013e6fc096b578bc509413657d5013eaabe4ded6b824817264c81d305f7364",
+   "nsidc_ggd353_thawtube_points.csv": "76a026073f190f60aa0ced26c4d0b00a80a6b12e9eea0c5ad584b06a5ea4a748",
+   "nsidc_ggd402_yamal_points.csv": "0cf3613173f071e32a3a3186d1257f877f76053b9376e1e9840fdc88230ce000",
+   "palmtag2022_pedon_points.csv": "c6d79eef620c6e026261f243fdeb1f7d80adb25665ea2adf18e7b4a6d78d0620",
+   "qtp_du_gpr_points.csv": "23f291a3236d779bdb4dcaa2c7b77c79c9a73806dbfc0f5ce7c8a854ac64a5e8",
+   "qtp_fu_temp_points.csv": "3f98cf3950c75e7a5c6f9a7a047b6438729099b01cbe29baa37fc6b706d64f82",
+   "qtp_liux_compile_points.csv": "eddd5dc9214caeffe22020ad085de966d7f32949ecf0244d75a543e85cf9eb66",
+   "qtp_yang_compile_points.csv": "1827e6be4c58f4848826878abac04a78aea91552a58e32b11106fefdabb61dfd",
+   "ru_kwbs_makarieva_points.csv": "2cf2ddcb9182a4b8814530da4943c29a654df5d6dfe8575c0898819dd7306c48",
+   "ru_liang_mounds_points.csv": "eeffd6d2a3e146a599206785e9d4545f43ce570f4e63c0d03a7ef872ca072ea9",
+   "ru_mamontovklyk_grosse_points.csv": "eaf55275630b0180649a0b9497947e90b2faf2f83d42d18ce11736c32323c8e8",
+   "ru_syrdakh_obs_points.csv": "336ffd6d6a9a6f71a559f136190bb5e065c343721ead74a34ba15457dbb70efa",
+   "ru_yamal_walker_points.csv": "85e73bae9bf6f18d69e45413cf589daaff9d8f1d74191ad74839206e932bb3d8",
+   "swe_tavvavuoma_sannel_points.csv": "11c894cbd2a4daad17680e5f34de656aa17660587e1e6e0deb6c781fd1d662be"
+  },
+  "v3": {
+   "file": "data/processed/fidelity_base_v3.csv",
+   "sha256": "71b5d3f6c297770d41aa7215e906e737842a3594005a5b52952bb636c752dc0f"
+  }
+ },
+ "rules": {
+  "cell": "ky = floor(lat/0.009), kx = floor(lon*cos(phi)/0.009), phi = (ky+0.5)*0.009 deg. 위치 좌표로 셀 배정",
+  "location": "(src_id, site_id). 위치 값 = 연도별 평균의 평균, 위치 좌표 = 행 좌표 평균",
+  "cell_value": "셀 안 위치 값의 평균. 셀 좌표 = 위치 좌표 평균",
+  "dup_v3": "셀 좌표와 v3 F4_direct 행의 체비쇼프 거리 <= 0.01 deg 이면 새 셀에서 뺀다",
+  "v3_rel": "v3 F2_gtnp_env·F4_calm_temp 행과 0.01 deg 이내면 새 셀로 두고 v3_rel 에 적는다",
+  "independence": "다른 지리 macro 의 v3 F4_direct 행까지 대권 거리 < 100.0 km 이면 대상 제외. v3 지리 macro: CALM_Greenland·CALM_Scandinavia(Abisko S2)·CALM_Svalbard(Kapp Linné S1) = NAtlantic, QTP_CN = Tibet, 레나 델타 상자 (71.5, 73.6, 123.3, 130.1) 안의 러시아 행 = Lena(개정 13)",
+  "label_sets": {
+   "direct": "direct_eos, qc ok, 연도>=1990, 0<alt<=600, 비검열, 비교란, dup_of 없음, 식별자·판단 제외 목록 밖, 범위 밖 연도가 있는 위치 제외",
+   "temp": "temp_derived, 같은 QC. CALM 망 값을 옮겨 실은 집계 자료 행 제외",
+   "unknown_yamal": "nsidc_ggd402_yamal unknown. 연도 규칙만 면제",
+   "dated": "direct_dated(서술용)",
+   "unknown_other": "그 밖의 unknown(서술용)"
+  },
+  "id_exclude": {
+   "qtp_du_gpr:BLH02_废": "식별자 접미 '废'(무효 표시로 판단, 같은 해 BLH02 기록 있음)"
+  },
+  "row_exclude": {
+   "swe_tavvavuoma_sannel:T1:2005": "설치 때 측정값(2005-09-23, 75 cm). 2010–2012년 표 값(3회 반복, 한계 100 cm)과 다른 측정이고 같은 지점의 이후 하한(>100)·2007년 지온(91 cm 센서 최고 0.21 °C)과 맞지 않는다",
+   "swe_tavvavuoma_sannel:T4:2006": "설치 때 측정값(2006-09-04, 115 cm). 표 값 측정 도구의 한계(100 cm)를 넘으므로 다른 방법으로 잰 값이다"
+  },
+  "alias_merge": {
+   "qtp_du_gpr:WDL02副": {
+    "to": "WDL02",
+    "why": "같은 해(2018) WDL02 기록과 약 10 m 떨어진 두 번째 기록('副' 는 부(副) 기록으로 판단). WDL02 위치로 합치고 2018년 값은 두 값의 평균으로 한다. 뜻은 원자료로 확인하지 못했다"
+   }
+  },
+  "location_range": "1990년 이후 행 가운데 alt_cm > 600 인 연도가 있는 위치는 전체를 뺀다(개정 13)",
+  "cens_suspect": {
+   "calm_web_subsites:S2_AB4:2019": "110–146 cm 로 증가하던 값이 2019–2021년 150 cm 로 같고 2022–2023년은 결측이다. 탐침 한계 값으로 의심",
+   "calm_web_subsites:S2_AB4:2020": "같은 근거(2019–2021년 150 cm 연속)",
+   "calm_web_subsites:S2_AB4:2021": "같은 근거(2019–2021년 150 cm 연속)",
+   "grl_ilulissat_scheer:ILU16013T:2021": "107 cm. 이웃 H2 의 같은 해 값 107 cm 에 'Out of range' 주석이 있다",
+   "grl_ilulissat_scheer:ERT_CALM_43:2021": "110 cm. 이웃 ERT_CALM_40–42 의 같은 해 값 110 cm 에 'Out of range' 주석이 있다",
+   "firealt_talucci2025:firealt_talucci2025_0122:2019": "CG2-20C. 2019-10-04 방문 5건이 모두 150.0 cm 다. 직전 09-28 방문은 118–168 cm",
+   "swe_tavvavuoma_sannel:T7:2011": "반복값(74, 76, 100) 가운데 100 cm 가 측정 한계 값이다"
+  },
+  "cens_suspect_note": "원자료 제공자 확인 전의 판단이다. 셀 값에 넣고 n_cens_suspect 로 표시한다",
+  "censoring": "우측 절단 행은 셀 값에서 뺀다(6B.3). 절단 조건만 뺀 라벨 집합으로 그 행의 위치와 셀을 정해 n_cens_removed, cens_lb_max, cens_lb_mean, cens_lb_gt_cell(cens_lb_max > alt_cm), alt_cm_cens_lb(하한 대입 셀 값)를 적는다. 절단 행만 있는 위치는 대응하는 셀이 있을 때만 alt_cm_cens_lb 에 더하고 셀을 새로 만들지 않는다. cens_affected = cens_lb_gt_cell 또는 n_cens_suspect > 0",
+  "loc_quality": {
+   "ru_yamal_walker:Laborovaya2_T18": "outlier_transect(N=5, 최대 136, 최소 5, 평균 73.5, 표준편차 60.4 cm. 사유 미확인)",
+   "qtp_fu_temp:QSH-2": "value_share(QSH-3 과 20년 가운데 12년 값이 같다, 상관 0.92)",
+   "qtp_fu_temp:QSH-3": "value_share(QSH-2 와 20년 가운데 12년 값이 같다, 상관 0.92)"
+  },
+  "label_subtype": {
+   "src": {
+    "palmtag2022_pedon": "pf_top_profile"
+   },
+   "subunit": {
+    "palmtag2022_pedon:Indigirka_Kytalyk": "pf_top_below_frozen_al"
+   },
+   "note": "palmtag2022_pedon 의 라벨은 'Depth Top Permafrost'(단면 판정의 영구동토 상한)이다. Kytalyk 은 같은 날 동결면(Depth frozen AL)보다 깊다(비교 가능 17행 가운데 15행). 다른 조사지는 비교할 열이 없다"
+  },
+  "date_basis": "ru_yamal_walker 측선 행은 같은 이벤트 relevé 날짜를 빌린 값이다(borrowed_releve_date). L41 (b) 판정에는 보고서의 조사 시작일을 쓴다: {'Nadym': '2007-08-03', 'Laborovaya': '2007-08-13', 'VaskinyDachi': '2007-08-21', 'Kharasavey': '2008-08-18'}",
+  "q_flags": "single_measurement = 셀의 원관측이 1건(n_values 1, n_obs 합 1). 그 밖은 loc_quality 판단 목록",
+  "lic_unverified": "license 에 'unverified' 또는 'rights reserved' 가 있으면 1",
+  "drill_months": "unknown_yamal(GGD402) 셀의 월은 시추 월이다. obs_months 는 비운다",
+  "v3_f4_km": "셀 좌표에서 가장 가까운 v3 F4_direct 행까지 대권 거리(km). v3_f4_lt1p1km = 1.1 km 미만",
+  "l41": "a = 셀의 모든 위치가 probe·thaw_tube·frost_tube, b = 셀에 8월 15일 이전 record_date 단일 방문 행이 있음(빌린 날짜는 조사 시작일로 판정), c = 셀에 dataset_statement 행이 있음, d = year_max >= 2010 셀만(WRAPUP (a)9), e = cens_affected 셀 제외, f = alt_cm_cens_lb 를 셀 값으로 씀(개정 13)"
+ },
+ "n_points_in": 7887,
+ "row_disposition": [
+  {
+   "src_id": "calm_pangaea_v4add",
+   "label_def": "direct_dated",
+   "row_reason": "used",
+   "n": 1
+  },
+  {
+   "src_id": "calm_pangaea_v4add",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 180
+  },
+  {
+   "src_id": "calm_web_subsites",
+   "label_def": "direct_eos",
+   "row_reason": "qc_flag",
+   "n": 87
+  },
+  {
+   "src_id": "calm_web_subsites",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 304
+  },
+  {
+   "src_id": "calm_web_subsites",
+   "label_def": "direct_eos",
+   "row_reason": "year_pre1990",
+   "n": 270
+  },
+  {
+   "src_id": "cusp_v1_1",
+   "label_def": "direct_dated",
+   "row_reason": "disturbed",
+   "n": 148
+  },
+  {
+   "src_id": "cusp_v1_1",
+   "label_def": "direct_dated",
+   "row_reason": "range",
+   "n": 2
+  },
+  {
+   "src_id": "cusp_v1_1",
+   "label_def": "direct_dated",
+   "row_reason": "right_censored",
+   "n": 138
+  },
+  {
+   "src_id": "cusp_v1_1",
+   "label_def": "direct_dated",
+   "row_reason": "used",
+   "n": 287
+  },
+  {
+   "src_id": "cusp_v1_1",
+   "label_def": "direct_eos",
+   "row_reason": "disturbed",
+   "n": 238
+  },
+  {
+   "src_id": "cusp_v1_1",
+   "label_def": "direct_eos",
+   "row_reason": "range",
+   "n": 3
+  },
+  {
+   "src_id": "cusp_v1_1",
+   "label_def": "direct_eos",
+   "row_reason": "right_censored",
+   "n": 76
+  },
+  {
+   "src_id": "cusp_v1_1",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 987
+  },
+  {
+   "src_id": "cusp_v1_1",
+   "label_def": "unknown",
+   "row_reason": "disturbed",
+   "n": 38
+  },
+  {
+   "src_id": "cusp_v1_1",
+   "label_def": "unknown",
+   "row_reason": "range",
+   "n": 12
+  },
+  {
+   "src_id": "cusp_v1_1",
+   "label_def": "unknown",
+   "row_reason": "used",
+   "n": 59
+  },
+  {
+   "src_id": "firealt_talucci2025",
+   "label_def": "direct_dated",
+   "row_reason": "disturbed",
+   "n": 311
+  },
+  {
+   "src_id": "firealt_talucci2025",
+   "label_def": "direct_dated",
+   "row_reason": "used",
+   "n": 126
+  },
+  {
+   "src_id": "firealt_talucci2025",
+   "label_def": "direct_eos",
+   "row_reason": "disturbed",
+   "n": 314
+  },
+  {
+   "src_id": "firealt_talucci2025",
+   "label_def": "direct_eos",
+   "row_reason": "dup_of",
+   "n": 19
+  },
+  {
+   "src_id": "firealt_talucci2025",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 172
+  },
+  {
+   "src_id": "grl_disko_zastruzny",
+   "label_def": "direct_eos",
+   "row_reason": "right_censored",
+   "n": 1
+  },
+  {
+   "src_id": "grl_disko_zastruzny",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 1
+  },
+  {
+   "src_id": "grl_ilulissat_scheer",
+   "label_def": "direct_eos",
+   "row_reason": "dup_of",
+   "n": 76
+  },
+  {
+   "src_id": "grl_ilulissat_scheer",
+   "label_def": "direct_eos",
+   "row_reason": "right_censored",
+   "n": 7
+  },
+  {
+   "src_id": "grl_ilulissat_scheer",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 470
+  },
+  {
+   "src_id": "mythaw_pangaea",
+   "label_def": "direct_dated",
+   "row_reason": "dup_of",
+   "n": 1
+  },
+  {
+   "src_id": "mythaw_pangaea",
+   "label_def": "direct_dated",
+   "row_reason": "right_censored",
+   "n": 1
+  },
+  {
+   "src_id": "mythaw_pangaea",
+   "label_def": "direct_eos",
+   "row_reason": "disturbed",
+   "n": 1
+  },
+  {
+   "src_id": "mythaw_pangaea",
+   "label_def": "direct_eos",
+   "row_reason": "dup_of",
+   "n": 12
+  },
+  {
+   "src_id": "mythaw_pangaea",
+   "label_def": "direct_eos",
+   "row_reason": "right_censored",
+   "n": 3
+  },
+  {
+   "src_id": "mythaw_pangaea",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 12
+  },
+  {
+   "src_id": "nsidc_ggd353_thawtube",
+   "label_def": "direct_dated",
+   "row_reason": "qc_flag",
+   "n": 1
+  },
+  {
+   "src_id": "nsidc_ggd353_thawtube",
+   "label_def": "direct_dated",
+   "row_reason": "used",
+   "n": 14
+  },
+  {
+   "src_id": "nsidc_ggd353_thawtube",
+   "label_def": "direct_eos",
+   "row_reason": "disturbed",
+   "n": 9
+  },
+  {
+   "src_id": "nsidc_ggd353_thawtube",
+   "label_def": "direct_eos",
+   "row_reason": "dup_of",
+   "n": 139
+  },
+  {
+   "src_id": "nsidc_ggd353_thawtube",
+   "label_def": "direct_eos",
+   "row_reason": "qc_flag",
+   "n": 38
+  },
+  {
+   "src_id": "nsidc_ggd353_thawtube",
+   "label_def": "direct_eos",
+   "row_reason": "right_censored",
+   "n": 17
+  },
+  {
+   "src_id": "nsidc_ggd353_thawtube",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 484
+  },
+  {
+   "src_id": "nsidc_ggd402_yamal",
+   "label_def": "unknown",
+   "row_reason": "used",
+   "n": 160
+  },
+  {
+   "src_id": "palmtag2022_pedon",
+   "label_def": "direct_dated",
+   "row_reason": "used",
+   "n": 2
+  },
+  {
+   "src_id": "palmtag2022_pedon",
+   "label_def": "direct_eos",
+   "row_reason": "disturbed",
+   "n": 4
+  },
+  {
+   "src_id": "palmtag2022_pedon",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 116
+  },
+  {
+   "src_id": "qtp_du_gpr",
+   "label_def": "direct_eos",
+   "row_reason": "dup_of",
+   "n": 1
+  },
+  {
+   "src_id": "qtp_du_gpr",
+   "label_def": "direct_eos",
+   "row_reason": "id_exclude",
+   "n": 1
+  },
+  {
+   "src_id": "qtp_du_gpr",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 220
+  },
+  {
+   "src_id": "qtp_fu_temp",
+   "label_def": "temp_derived",
+   "row_reason": "location_has_range_year",
+   "n": 81
+  },
+  {
+   "src_id": "qtp_fu_temp",
+   "label_def": "temp_derived",
+   "row_reason": "qc_flag",
+   "n": 80
+  },
+  {
+   "src_id": "qtp_fu_temp",
+   "label_def": "temp_derived",
+   "row_reason": "range",
+   "n": 19
+  },
+  {
+   "src_id": "qtp_fu_temp",
+   "label_def": "temp_derived",
+   "row_reason": "used",
+   "n": 900
+  },
+  {
+   "src_id": "qtp_liux_compile",
+   "label_def": "direct_dated",
+   "row_reason": "used",
+   "n": 150
+  },
+  {
+   "src_id": "qtp_liux_compile",
+   "label_def": "temp_derived",
+   "row_reason": "calm_copy_in_v3",
+   "n": 5
+  },
+  {
+   "src_id": "qtp_liux_compile",
+   "label_def": "unknown",
+   "row_reason": "dup_of",
+   "n": 13
+  },
+  {
+   "src_id": "qtp_liux_compile",
+   "label_def": "unknown",
+   "row_reason": "qc_flag",
+   "n": 1
+  },
+  {
+   "src_id": "qtp_liux_compile",
+   "label_def": "unknown",
+   "row_reason": "used",
+   "n": 137
+  },
+  {
+   "src_id": "qtp_yang_compile",
+   "label_def": "temp_derived",
+   "row_reason": "dup_of",
+   "n": 6
+  },
+  {
+   "src_id": "qtp_yang_compile",
+   "label_def": "unknown",
+   "row_reason": "dup_of",
+   "n": 112
+  },
+  {
+   "src_id": "qtp_yang_compile",
+   "label_def": "unknown",
+   "row_reason": "used",
+   "n": 32
+  },
+  {
+   "src_id": "qtp_yang_compile",
+   "label_def": "unknown",
+   "row_reason": "year_pre1990",
+   "n": 2
+  },
+  {
+   "src_id": "ru_kwbs_makarieva",
+   "label_def": "direct_dated",
+   "row_reason": "right_censored",
+   "n": 8
+  },
+  {
+   "src_id": "ru_kwbs_makarieva",
+   "label_def": "direct_dated",
+   "row_reason": "year_pre1990",
+   "n": 14
+  },
+  {
+   "src_id": "ru_kwbs_makarieva",
+   "label_def": "direct_eos",
+   "row_reason": "right_censored",
+   "n": 122
+  },
+  {
+   "src_id": "ru_kwbs_makarieva",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 24
+  },
+  {
+   "src_id": "ru_kwbs_makarieva",
+   "label_def": "direct_eos",
+   "row_reason": "year_pre1990",
+   "n": 229
+  },
+  {
+   "src_id": "ru_liang_mounds",
+   "label_def": "direct_dated",
+   "row_reason": "used",
+   "n": 12
+  },
+  {
+   "src_id": "ru_liang_mounds",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 5
+  },
+  {
+   "src_id": "ru_mamontovklyk_grosse",
+   "label_def": "direct_eos",
+   "row_reason": "disturbed",
+   "n": 21
+  },
+  {
+   "src_id": "ru_mamontovklyk_grosse",
+   "label_def": "direct_eos",
+   "row_reason": "right_censored",
+   "n": 7
+  },
+  {
+   "src_id": "ru_mamontovklyk_grosse",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 70
+  },
+  {
+   "src_id": "ru_syrdakh_obs",
+   "label_def": "direct_dated",
+   "row_reason": "right_censored",
+   "n": 1
+  },
+  {
+   "src_id": "ru_syrdakh_obs",
+   "label_def": "direct_dated",
+   "row_reason": "used",
+   "n": 30
+  },
+  {
+   "src_id": "ru_syrdakh_obs",
+   "label_def": "direct_eos",
+   "row_reason": "dup_of",
+   "n": 3
+  },
+  {
+   "src_id": "ru_syrdakh_obs",
+   "label_def": "direct_eos",
+   "row_reason": "qc_flag",
+   "n": 1
+  },
+  {
+   "src_id": "ru_syrdakh_obs",
+   "label_def": "direct_eos",
+   "row_reason": "right_censored",
+   "n": 3
+  },
+  {
+   "src_id": "ru_syrdakh_obs",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 132
+  },
+  {
+   "src_id": "ru_yamal_walker",
+   "label_def": "direct_eos",
+   "row_reason": "dup_of",
+   "n": 42
+  },
+  {
+   "src_id": "ru_yamal_walker",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 45
+  },
+  {
+   "src_id": "swe_tavvavuoma_sannel",
+   "label_def": "direct_eos",
+   "row_reason": "right_censored",
+   "n": 6
+  },
+  {
+   "src_id": "swe_tavvavuoma_sannel",
+   "label_def": "direct_eos",
+   "row_reason": "row_exclude_judgment",
+   "n": 2
+  },
+  {
+   "src_id": "swe_tavvavuoma_sannel",
+   "label_def": "direct_eos",
+   "row_reason": "used",
+   "n": 9
+  }
+ ],
+ "n_rows_dup_of": 424,
+ "n_locations": {
+  "direct": 1995,
+  "dated": 591,
+  "unknown_other": 228,
+  "unknown_yamal": 160,
+  "temp": 45
+ },
+ "location_range_excluded": [
+  "qtp_fu_temp:AD1",
+  "qtp_fu_temp:AMD1",
+  "qtp_fu_temp:TG2",
+  "qtp_fu_temp:TM1",
+  "qtp_fu_temp:TT1"
+ ],
+ "cens_rows_by_set": {
+  "dated": 100,
+  "direct": 78
+ },
+ "cens_only_locations_without_cell": [
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "ARU-RMBF1",
+   "cell_key": "7187_-7045",
+   "n_cens": 1,
+   "lb_max": 130.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "ARU-RMNF1",
+   "cell_key": "7187_-7045",
+   "n_cens": 1,
+   "lb_max": 130.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "ARU-RMTS3",
+   "cell_key": "7187_-7045",
+   "n_cens": 1,
+   "lb_max": 130.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "CVBK-2-db",
+   "cell_key": "7377_-6511",
+   "n_cens": 1,
+   "lb_max": 250.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "CVBK-2-lm",
+   "cell_key": "7377_-6511",
+   "n_cens": 1,
+   "lb_max": 330.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "MarCrk05",
+   "cell_key": "7480_-6432",
+   "n_cens": 1,
+   "lb_max": 100.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "MarCrk07",
+   "cell_key": "7480_-6432",
+   "n_cens": 1,
+   "lb_max": 160.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "Nolan-Asp",
+   "cell_key": "7492_-6402",
+   "n_cens": 1,
+   "lb_max": 140.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-CVK-Exp1",
+   "cell_key": "6835_-8774",
+   "n_cens": 1,
+   "lb_max": 350.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-CVK-Exp2",
+   "cell_key": "6835_-8774",
+   "n_cens": 1,
+   "lb_max": 400.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-LK3-Exp1",
+   "cell_key": "6813_-8764",
+   "n_cens": 1,
+   "lb_max": 600.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T1-042",
+   "cell_key": "6805_-8851",
+   "n_cens": 1,
+   "lb_max": 42.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T1-050",
+   "cell_key": "6805_-8851",
+   "n_cens": 1,
+   "lb_max": 46.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T1-100",
+   "cell_key": "6805_-8851",
+   "n_cens": 1,
+   "lb_max": 55.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T1-175",
+   "cell_key": "6805_-8851",
+   "n_cens": 1,
+   "lb_max": 48.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T1-225",
+   "cell_key": "6805_-8851",
+   "n_cens": 1,
+   "lb_max": 35.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T1-250",
+   "cell_key": "6805_-8851",
+   "n_cens": 1,
+   "lb_max": 80.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T1-G1",
+   "cell_key": "6805_-8851",
+   "n_cens": 1,
+   "lb_max": 35.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T1-G2",
+   "cell_key": "6805_-8851",
+   "n_cens": 1,
+   "lb_max": 38.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T1-G3",
+   "cell_key": "6805_-8851",
+   "n_cens": 1,
+   "lb_max": 37.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T2-010",
+   "cell_key": "6805_-8850",
+   "n_cens": 1,
+   "lb_max": 10.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T2-025",
+   "cell_key": "6805_-8850",
+   "n_cens": 1,
+   "lb_max": 17.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T2-100",
+   "cell_key": "6805_-8850",
+   "n_cens": 1,
+   "lb_max": 50.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T2-183",
+   "cell_key": "6805_-8850",
+   "n_cens": 1,
+   "lb_max": 55.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T2-192",
+   "cell_key": "6805_-8850",
+   "n_cens": 1,
+   "lb_max": 85.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T2-200",
+   "cell_key": "6805_-8850",
+   "n_cens": 1,
+   "lb_max": 53.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T2-G1",
+   "cell_key": "6805_-8850",
+   "n_cens": 1,
+   "lb_max": 120.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T2-G18",
+   "cell_key": "6805_-8851",
+   "n_cens": 1,
+   "lb_max": 35.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T2-G9",
+   "cell_key": "6805_-8850",
+   "n_cens": 1,
+   "lb_max": 34.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T3-000",
+   "cell_key": "6805_-8848",
+   "n_cens": 1,
+   "lb_max": 30.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T3-025",
+   "cell_key": "6805_-8848",
+   "n_cens": 1,
+   "lb_max": 55.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T3-075",
+   "cell_key": "6805_-8848",
+   "n_cens": 1,
+   "lb_max": 52.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T3-150",
+   "cell_key": "6805_-8848",
+   "n_cens": 1,
+   "lb_max": 65.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T3-175",
+   "cell_key": "6805_-8848",
+   "n_cens": 1,
+   "lb_max": 115.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T3-222",
+   "cell_key": "6805_-8848",
+   "n_cens": 1,
+   "lb_max": 30.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T3-238",
+   "cell_key": "6805_-8848",
+   "n_cens": 1,
+   "lb_max": 55.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T3-250",
+   "cell_key": "6805_-8848",
+   "n_cens": 1,
+   "lb_max": 44.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T3-G1",
+   "cell_key": "6805_-8847",
+   "n_cens": 1,
+   "lb_max": 47.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T3-G2",
+   "cell_key": "6805_-8848",
+   "n_cens": 1,
+   "lb_max": 53.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T3-G4",
+   "cell_key": "6805_-8848",
+   "n_cens": 1,
+   "lb_max": 42.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T3-G5",
+   "cell_key": "6805_-8848",
+   "n_cens": 1,
+   "lb_max": 40.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T3-G6",
+   "cell_key": "6805_-8848",
+   "n_cens": 1,
+   "lb_max": 45.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T3-G7",
+   "cell_key": "6805_-8848",
+   "n_cens": 1,
+   "lb_max": 47.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T5-011",
+   "cell_key": "6804_-8854",
+   "n_cens": 1,
+   "lb_max": 30.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T5-018",
+   "cell_key": "6804_-8854",
+   "n_cens": 1,
+   "lb_max": 15.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T5-025",
+   "cell_key": "6804_-8854",
+   "n_cens": 1,
+   "lb_max": 33.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T5-039",
+   "cell_key": "6804_-8854",
+   "n_cens": 1,
+   "lb_max": 15.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T5-100",
+   "cell_key": "6804_-8854",
+   "n_cens": 1,
+   "lb_max": 45.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T5-171",
+   "cell_key": "6804_-8854",
+   "n_cens": 1,
+   "lb_max": 43.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T5-178b",
+   "cell_key": "6804_-8854",
+   "n_cens": 1,
+   "lb_max": 80.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T5-190",
+   "cell_key": "6804_-8854",
+   "n_cens": 1,
+   "lb_max": 37.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T5-Exp1",
+   "cell_key": "6804_-8854",
+   "n_cens": 1,
+   "lb_max": 207.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T5-G1",
+   "cell_key": "6804_-8854",
+   "n_cens": 1,
+   "lb_max": 34.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T5-G61",
+   "cell_key": "6805_-8851",
+   "n_cens": 1,
+   "lb_max": 235.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "dated",
+   "src_id": "mythaw_pangaea",
+   "site_id": "Bayelva",
+   "cell_key": "8768_252",
+   "n_cens": 1,
+   "lb_max": 127.92,
+   "macro": "NAtlantic"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "ARU-lwbfx",
+   "cell_key": "7171_-7025",
+   "n_cens": 1,
+   "lb_max": 150.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "CVBK-11-DB",
+   "cell_key": "7376_-6513",
+   "n_cens": 1,
+   "lb_max": 240.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "CVBK-13-AC",
+   "cell_key": "7375_-6518",
+   "n_cens": 1,
+   "lb_max": 230.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "CVBK-2-DB2",
+   "cell_key": "7377_-6511",
+   "n_cens": 1,
+   "lb_max": 50.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "CVBK-5-DB",
+   "cell_key": "7375_-6519",
+   "n_cens": 1,
+   "lb_max": 100.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "CVBK-5-LM",
+   "cell_key": "7375_-6519",
+   "n_cens": 1,
+   "lb_max": 250.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "CVBK-6-lm",
+   "cell_key": "7377_-6513",
+   "n_cens": 1,
+   "lb_max": 210.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "CVBK-8-es",
+   "cell_key": "7376_-6514",
+   "n_cens": 1,
+   "lb_max": 250.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "NAKN-T2-152",
+   "cell_key": "6520_-9031",
+   "n_cens": 1,
+   "lb_max": 150.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "S2004AK185008",
+   "cell_key": "7487_-6413",
+   "n_cens": 1,
+   "lb_max": 100.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "S2004AK185009",
+   "cell_key": "7481_-6429",
+   "n_cens": 1,
+   "lb_max": 130.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "S2004AK185010",
+   "cell_key": "7474_-6447",
+   "n_cens": 1,
+   "lb_max": 186.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "TMW1-2",
+   "cell_key": "7382_-6464",
+   "n_cens": 1,
+   "lb_max": 100.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "TMW1-3",
+   "cell_key": "7382_-6464",
+   "n_cens": 1,
+   "lb_max": 100.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "TMW2-1",
+   "cell_key": "7382_-6464",
+   "n_cens": 1,
+   "lb_max": 200.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "TMW2-3",
+   "cell_key": "7382_-6464",
+   "n_cens": 1,
+   "lb_max": 80.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "TMW4-2",
+   "cell_key": "7383_-6462",
+   "n_cens": 1,
+   "lb_max": 40.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "TMW4-3",
+   "cell_key": "7383_-6462",
+   "n_cens": 1,
+   "lb_max": 45.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T1-077",
+   "cell_key": "6805_-8851",
+   "n_cens": 1,
+   "lb_max": 60.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "cusp_v1_1",
+   "site_id": "YKDE-T5-G3",
+   "cell_key": "6804_-8853",
+   "n_cens": 1,
+   "lb_max": 190.0,
+   "macro": "Alaska"
+  },
+  {
+   "label_set": "direct",
+   "src_id": "mythaw_pangaea",
+   "site_id": "Bayelva",
+   "cell_key": "8768_252",
+   "n_cens": 2,
+   "lb_max": 139.5,
+   "macro": "NAtlantic"
+  }
+ ],
+ "censoring_target": {
+  "Canada": {
+   "n_target": 75,
+   "n_cells_with_cens_removed": 8,
+   "n_cens_lb_gt_cell": 5,
+   "n_cens_lb_mean_gt_cell": 5,
+   "n_cens_suspect_cells": 1,
+   "n_cens_affected": 6,
+   "alt_mean": 80.99,
+   "alt_mean_cens_lb": 81.26,
+   "cells_cens_lb_gt_cell": [
+    {
+     "cell": "direct|6862_-6371",
+     "alt": 176.0,
+     "lb_max": 199.0,
+     "lb_mean": 199.0,
+     "alt_cens_lb": 183.67,
+     "sources": "nsidc_ggd353_thawtube"
+    },
+    {
+     "cell": "direct|6995_-6224",
+     "alt": 78.08,
+     "lb_max": 89.0,
+     "lb_mean": 89.0,
+     "alt_cens_lb": 78.92,
+     "sources": "nsidc_ggd353_thawtube"
+    },
+    {
+     "cell": "direct|7163_-5976",
+     "alt": 80.0,
+     "lb_max": 89.0,
+     "lb_mean": 89.0,
+     "alt_cens_lb": 81.29,
+     "sources": "nsidc_ggd353_thawtube"
+    },
+    {
+     "cell": "direct|7420_-5700",
+     "alt": 84.75,
+     "lb_max": 86.0,
+     "lb_mean": 86.0,
+     "alt_cens_lb": 84.62,
+     "sources": "nsidc_ggd353_thawtube"
+    },
+    {
+     "cell": "direct|7712_-5269",
+     "alt": 106.5,
+     "lb_max": 141.0,
+     "lb_mean": 135.0,
+     "alt_cens_lb": 117.9,
+     "sources": "nsidc_ggd353_thawtube"
+    }
+   ],
+   "cells_cens_suspect": [
+    {
+     "cell": "direct|6956_-5947",
+     "alt": 139.1,
+     "n": 1,
+     "sources": "firealt_talucci2025"
+    }
+   ]
+  },
+  "NAtlantic": {
+   "n_target": 38,
+   "n_cells_with_cens_removed": 6,
+   "n_cens_lb_gt_cell": 6,
+   "n_cens_lb_mean_gt_cell": 6,
+   "n_cens_suspect_cells": 4,
+   "n_cens_affected": 8,
+   "alt_mean": 71.03,
+   "alt_mean_cens_lb": 72.71,
+   "cells_cens_lb_gt_cell": [
+    {
+     "cell": "direct|7606_852",
+     "alt": 58.89,
+     "lb_max": 100.0,
+     "lb_mean": 100.0,
+     "alt_cens_lb": 75.33,
+     "sources": "swe_tavvavuoma_sannel"
+    },
+    {
+     "cell": "direct|7690_-2014",
+     "alt": 68.08,
+     "lb_max": 110.0,
+     "lb_mean": 95.2,
+     "alt_cens_lb": 68.91,
+     "sources": "grl_ilulissat_scheer"
+    },
+    {
+     "cell": "direct|7690_-2013",
+     "alt": 58.29,
+     "lb_max": 110.0,
+     "lb_mean": 110.0,
+     "alt_cens_lb": 60.08,
+     "sources": "grl_ilulissat_scheer"
+    },
+    {
+     "cell": "direct|7692_-2012",
+     "alt": 63.37,
+     "lb_max": 107.0,
+     "lb_mean": 107.0,
+     "alt_cens_lb": 65.67,
+     "sources": "grl_ilulissat_scheer"
+    },
+    {
+     "cell": "direct|7696_-2104",
+     "alt": 37.74,
+     "lb_max": 120.0,
+     "lb_mean": 120.0,
+     "alt_cens_lb": 78.87,
+     "sources": "grl_disko_zastruzny"
+    },
+    {
+     "cell": "direct|7758_1041",
+     "alt": 58.47,
+     "lb_max": 63.0,
+     "lb_mean": 63.0,
+     "alt_cens_lb": 59.98,
+     "sources": "mythaw_pangaea"
+    }
+   ],
+   "cells_cens_suspect": [
+    {
+     "cell": "direct|7579_813",
+     "alt": 82.84,
+     "n": 3,
+     "sources": "calm_web_subsites"
+    },
+    {
+     "cell": "direct|7606_852",
+     "alt": 58.89,
+     "n": 1,
+     "sources": "swe_tavvavuoma_sannel"
+    },
+    {
+     "cell": "direct|7690_-2014",
+     "alt": 68.08,
+     "n": 1,
+     "sources": "grl_ilulissat_scheer"
+    },
+    {
+     "cell": "direct|7695_-2008",
+     "alt": 90.57,
+     "n": 1,
+     "sources": "grl_ilulissat_scheer"
+    }
+   ]
+  },
+  "Russia_C": {
+   "n_target": 51,
+   "n_cells_with_cens_removed": 6,
+   "n_cens_lb_gt_cell": 6,
+   "n_cens_lb_mean_gt_cell": 6,
+   "n_cens_suspect_cells": 0,
+   "n_cens_affected": 6,
+   "alt_mean": 58.35,
+   "alt_mean_cens_lb": 59.35,
+   "cells_cens_lb_gt_cell": [
+    {
+     "cell": "direct|6950_6705",
+     "alt": 144.27,
+     "lb_max": 200.0,
+     "lb_mean": 179.0,
+     "alt_cens_lb": 145.5,
+     "sources": "ru_syrdakh_obs"
+    },
+    {
+     "cell": "direct|6950_6706",
+     "alt": 127.52,
+     "lb_max": 200.0,
+     "lb_mean": 200.0,
+     "alt_cens_lb": 130.31,
+     "sources": "ru_syrdakh_obs"
+    },
+    {
+     "cell": "direct|8172_3710",
+     "alt": 58.75,
+     "lb_max": 92.0,
+     "lb_mean": 92.0,
+     "alt_cens_lb": 65.4,
+     "sources": "ru_mamontovklyk_grosse"
+    },
+    {
+     "cell": "direct|8176_3681",
+     "alt": 40.75,
+     "lb_max": 110.0,
+     "lb_mean": 102.5,
+     "alt_cens_lb": 71.62,
+     "sources": "ru_mamontovklyk_grosse"
+    },
+    {
+     "cell": "direct|8177_3674",
+     "alt": 42.2,
+     "lb_max": 70.0,
+     "lb_mean": 70.0,
+     "alt_cens_lb": 46.83,
+     "sources": "ru_mamontovklyk_grosse"
+    },
+    {
+     "cell": "direct|8178_3672",
+     "alt": 46.67,
+     "lb_max": 80.0,
+     "lb_mean": 80.0,
+     "alt_cens_lb": 51.43,
+     "sources": "ru_mamontovklyk_grosse"
+    }
+   ],
+   "cells_cens_suspect": []
+  },
+  "Russia_E": {
+   "n_target": 25,
+   "n_cells_with_cens_removed": 1,
+   "n_cens_lb_gt_cell": 0,
+   "n_cens_lb_mean_gt_cell": 0,
+   "n_cens_suspect_cells": 0,
+   "n_cens_affected": 0,
+   "alt_mean": 53.67,
+   "alt_mean_cens_lb": 53.34,
+   "cells_cens_lb_gt_cell": [],
+   "cells_cens_suspect": []
+  },
+  "Russia_W": {
+   "n_target": 8,
+   "n_cells_with_cens_removed": 0,
+   "n_cens_lb_gt_cell": 0,
+   "n_cens_lb_mean_gt_cell": 0,
+   "n_cens_suspect_cells": 0,
+   "n_cens_affected": 0,
+   "alt_mean": 108.99,
+   "alt_mean_cens_lb": 108.99,
+   "cells_cens_lb_gt_cell": [],
+   "cells_cens_suspect": []
+  },
+  "Tibet": {
+   "n_target": 132,
+   "n_cells_with_cens_removed": 0,
+   "n_cens_lb_gt_cell": 0,
+   "n_cens_lb_mean_gt_cell": 0,
+   "n_cens_suspect_cells": 0,
+   "n_cens_affected": 0,
+   "alt_mean": 261.77,
+   "alt_mean_cens_lb": 261.77,
+   "cells_cens_lb_gt_cell": [],
+   "cells_cens_suspect": []
+  }
+ },
+ "value_bound_check": {
+  "rule": "nsidc_ggd353 의 '<' 행(value_bound=upper, 최소 침하로 계산한 상한)을 뺀 셀 값과 넣은 셀 값의 차",
+  "n_target_cells_with_upper": 10,
+  "n_upper_rows_in_target": 11,
+  "n_approx_rows_in_target": 0,
+  "diff_cm": [
+   {
+    "cell": "direct|6995_-6224",
+    "alt": 78.08,
+    "alt_no_upper": 77.91
+   },
+   {
+    "cell": "direct|7051_-6141",
+    "alt": 48.29,
+    "alt_no_upper": 48.0
+   },
+   {
+    "cell": "direct|7255_-5890",
+    "alt": 98.92,
+    "alt_no_upper": 98.64
+   },
+   {
+    "cell": "direct|7420_-5700",
+    "alt": 84.75,
+    "alt_no_upper": 82.9
+   },
+   {
+    "cell": "direct|7690_-5295",
+    "alt": 61.08,
+    "alt_no_upper": 60.86
+   },
+   {
+    "cell": "direct|7716_-5279",
+    "alt": 104.92,
+    "alt_no_upper": 105.18
+   },
+   {
+    "cell": "direct|7719_-5167",
+    "alt": 51.78,
+    "alt_no_upper": 52.3
+   },
+   {
+    "cell": "direct|7720_-5241",
+    "alt": 59.55,
+    "alt_no_upper": 59.4
+   },
+   {
+    "cell": "direct|7746_-5180",
+    "alt": 48.36,
+    "alt_no_upper": 47.6
+   },
+   {
+    "cell": "direct|7746_-5178",
+    "alt": 79.8,
+    "alt_no_upper": 79.5
+   }
+  ],
+  "mean_abs_diff_cm": 0.48,
+  "max_abs_diff_cm": 1.85,
+  "n_cells_all_upper": 0
+ },
+ "cells": {
+  "dated|Alaska": {
+   "all": {
+    "n_cells": 137,
+    "n_blocks": 56,
+    "n_loc": 308,
+    "alt_mean": 50.4
+   },
+   "not_dup": {
+    "n_cells": 117,
+    "n_blocks": 55,
+    "n_loc": 252,
+    "alt_mean": 52.2
+   },
+   "in_v4": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "target": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "by_source": {
+    "cusp_v1_1": 115,
+    "firealt_talucci2025": 22
+   }
+  },
+  "dated|Canada": {
+   "all": {
+    "n_cells": 23,
+    "n_blocks": 18,
+    "n_loc": 44,
+    "alt_mean": 69.6
+   },
+   "not_dup": {
+    "n_cells": 21,
+    "n_blocks": 17,
+    "n_loc": 42,
+    "alt_mean": 71.7
+   },
+   "in_v4": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "target": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "by_source": {
+    "cusp_v1_1": 5,
+    "firealt_talucci2025": 6,
+    "nsidc_ggd353_thawtube": 12
+   }
+  },
+  "dated|Russia_C": {
+   "all": {
+    "n_cells": 9,
+    "n_blocks": 3,
+    "n_loc": 38,
+    "alt_mean": 67.0
+   },
+   "not_dup": {
+    "n_cells": 9,
+    "n_blocks": 3,
+    "n_loc": 38,
+    "alt_mean": 67.0
+   },
+   "in_v4": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "target": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "by_source": {
+    "firealt_talucci2025": 7,
+    "ru_syrdakh_obs": 2
+   }
+  },
+  "dated|Russia_E": {
+   "all": {
+    "n_cells": 27,
+    "n_blocks": 14,
+    "n_loc": 48,
+    "alt_mean": 28.7
+   },
+   "not_dup": {
+    "n_cells": 27,
+    "n_blocks": 14,
+    "n_loc": 48,
+    "alt_mean": 28.7
+   },
+   "in_v4": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "target": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "by_source": {
+    "firealt_talucci2025": 23,
+    "ru_liang_mounds": 4
+   }
+  },
+  "dated|Russia_W": {
+   "all": {
+    "n_cells": 3,
+    "n_blocks": 2,
+    "n_loc": 3,
+    "alt_mean": 76.3
+   },
+   "not_dup": {
+    "n_cells": 3,
+    "n_blocks": 2,
+    "n_loc": 3,
+    "alt_mean": 76.3
+   },
+   "in_v4": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "target": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "by_source": {
+    "calm_pangaea_v4add": 1,
+    "palmtag2022_pedon": 2
+   }
+  },
+  "dated|Tibet": {
+   "all": {
+    "n_cells": 66,
+    "n_blocks": 2,
+    "n_loc": 150,
+    "alt_mean": 272.2
+   },
+   "not_dup": {
+    "n_cells": 66,
+    "n_blocks": 2,
+    "n_loc": 150,
+    "alt_mean": 272.2
+   },
+   "in_v4": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "target": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "by_source": {
+    "qtp_liux_compile": 66
+   }
+  },
+  "direct|Alaska": {
+   "all": {
+    "n_cells": 214,
+    "n_blocks": 65,
+    "n_loc": 422,
+    "alt_mean": 51.7
+   },
+   "not_dup": {
+    "n_cells": 182,
+    "n_blocks": 57,
+    "n_loc": 370,
+    "alt_mean": 51.7
+   },
+   "in_v4": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "target": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "by_source": {
+    "calm_pangaea_v4add": 2,
+    "cusp_v1_1": 170,
+    "firealt_talucci2025": 43
+   }
+  },
+  "direct|Canada": {
+   "all": {
+    "n_cells": 81,
+    "n_blocks": 42,
+    "n_loc": 117,
+    "alt_mean": 80.4
+   },
+   "not_dup": {
+    "n_cells": 75,
+    "n_blocks": 38,
+    "n_loc": 110,
+    "alt_mean": 81.0
+   },
+   "in_v4": {
+    "n_cells": 75,
+    "n_blocks": 38,
+    "n_loc": 110,
+    "alt_mean": 81.0
+   },
+   "target": {
+    "n_cells": 75,
+    "n_blocks": 38,
+    "n_loc": 110,
+    "alt_mean": 81.0
+   },
+   "by_source": {
+    "calm_pangaea_v4add": 1,
+    "cusp_v1_1": 5,
+    "firealt_talucci2025": 35,
+    "mythaw_pangaea": 2,
+    "nsidc_ggd353_thawtube": 38
+   }
+  },
+  "direct|NAtlantic": {
+   "all": {
+    "n_cells": 38,
+    "n_blocks": 12,
+    "n_loc": 955,
+    "alt_mean": 71.0
+   },
+   "not_dup": {
+    "n_cells": 38,
+    "n_blocks": 12,
+    "n_loc": 955,
+    "alt_mean": 71.0
+   },
+   "in_v4": {
+    "n_cells": 38,
+    "n_blocks": 12,
+    "n_loc": 955,
+    "alt_mean": 71.0
+   },
+   "target": {
+    "n_cells": 38,
+    "n_blocks": 12,
+    "n_loc": 955,
+    "alt_mean": 71.0
+   },
+   "by_source": {
+    "calm_pangaea_v4add": 2,
+    "calm_web_subsites": 13,
+    "cusp_v1_1": 6,
+    "grl_disko_zastruzny": 1,
+    "grl_ilulissat_scheer": 13,
+    "mythaw_pangaea": 4,
+    "swe_tavvavuoma_sannel": 1
+   }
+  },
+  "direct|Russia_C": {
+   "all": {
+    "n_cells": 51,
+    "n_blocks": 8,
+    "n_loc": 206,
+    "alt_mean": 58.4
+   },
+   "not_dup": {
+    "n_cells": 51,
+    "n_blocks": 8,
+    "n_loc": 206,
+    "alt_mean": 58.4
+   },
+   "in_v4": {
+    "n_cells": 51,
+    "n_blocks": 8,
+    "n_loc": 206,
+    "alt_mean": 58.4
+   },
+   "target": {
+    "n_cells": 51,
+    "n_blocks": 8,
+    "n_loc": 206,
+    "alt_mean": 58.4
+   },
+   "by_source": {
+    "firealt_talucci2025": 6,
+    "palmtag2022_pedon": 16,
+    "ru_mamontovklyk_grosse": 27,
+    "ru_syrdakh_obs": 2
+   }
+  },
+  "direct|Russia_E": {
+   "all": {
+    "n_cells": 25,
+    "n_blocks": 11,
+    "n_loc": 67,
+    "alt_mean": 53.7
+   },
+   "not_dup": {
+    "n_cells": 25,
+    "n_blocks": 11,
+    "n_loc": 67,
+    "alt_mean": 53.7
+   },
+   "in_v4": {
+    "n_cells": 25,
+    "n_blocks": 11,
+    "n_loc": 67,
+    "alt_mean": 53.7
+   },
+   "target": {
+    "n_cells": 25,
+    "n_blocks": 11,
+    "n_loc": 67,
+    "alt_mean": 53.7
+   },
+   "by_source": {
+    "calm_pangaea_v4add": 3,
+    "palmtag2022_pedon": 17,
+    "ru_kwbs_makarieva": 2,
+    "ru_liang_mounds": 3
+   }
+  },
+  "direct|Russia_W": {
+   "all": {
+    "n_cells": 8,
+    "n_blocks": 6,
+    "n_loc": 48,
+    "alt_mean": 109.0
+   },
+   "not_dup": {
+    "n_cells": 8,
+    "n_blocks": 6,
+    "n_loc": 48,
+    "alt_mean": 109.0
+   },
+   "in_v4": {
+    "n_cells": 8,
+    "n_blocks": 6,
+    "n_loc": 48,
+    "alt_mean": 109.0
+   },
+   "target": {
+    "n_cells": 8,
+    "n_blocks": 6,
+    "n_loc": 48,
+    "alt_mean": 109.0
+   },
+   "by_source": {
+    "calm_pangaea_v4add": 1,
+    "firealt_talucci2025": 2,
+    "ru_yamal_walker": 5
+   }
+  },
+  "direct|Tibet": {
+   "all": {
+    "n_cells": 132,
+    "n_blocks": 34,
+    "n_loc": 180,
+    "alt_mean": 261.8
+   },
+   "not_dup": {
+    "n_cells": 132,
+    "n_blocks": 34,
+    "n_loc": 180,
+    "alt_mean": 261.8
+   },
+   "in_v4": {
+    "n_cells": 132,
+    "n_blocks": 34,
+    "n_loc": 180,
+    "alt_mean": 261.8
+   },
+   "target": {
+    "n_cells": 132,
+    "n_blocks": 34,
+    "n_loc": 180,
+    "alt_mean": 261.8
+   },
+   "by_source": {
+    "qtp_du_gpr": 132
+   }
+  },
+  "temp|Tibet": {
+   "all": {
+    "n_cells": 40,
+    "n_blocks": 11,
+    "n_loc": 45,
+    "alt_mean": 280.0
+   },
+   "not_dup": {
+    "n_cells": 39,
+    "n_blocks": 11,
+    "n_loc": 44,
+    "alt_mean": 279.4
+   },
+   "in_v4": {
+    "n_cells": 39,
+    "n_blocks": 11,
+    "n_loc": 44,
+    "alt_mean": 279.4
+   },
+   "target": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "by_source": {
+    "qtp_fu_temp": 40
+   }
+  },
+  "unknown_other|Alaska": {
+   "all": {
+    "n_cells": 31,
+    "n_blocks": 20,
+    "n_loc": 59,
+    "alt_mean": 71.9
+   },
+   "not_dup": {
+    "n_cells": 27,
+    "n_blocks": 17,
+    "n_loc": 52,
+    "alt_mean": 73.2
+   },
+   "in_v4": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "target": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "by_source": {
+    "cusp_v1_1": 31
+   }
+  },
+  "unknown_other|Tibet": {
+   "all": {
+    "n_cells": 140,
+    "n_blocks": 36,
+    "n_loc": 169,
+    "alt_mean": 230.3
+   },
+   "not_dup": {
+    "n_cells": 139,
+    "n_blocks": 36,
+    "n_loc": 167,
+    "alt_mean": 230.4
+   },
+   "in_v4": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "target": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "by_source": {
+    "qtp_liux_compile": 110,
+    "qtp_yang_compile": 30
+   }
+  },
+  "unknown_yamal|Russia_W": {
+   "all": {
+    "n_cells": 150,
+    "n_blocks": 23,
+    "n_loc": 160,
+    "alt_mean": 73.2
+   },
+   "not_dup": {
+    "n_cells": 148,
+    "n_blocks": 23,
+    "n_loc": 158,
+    "alt_mean": 73.5
+   },
+   "in_v4": {
+    "n_cells": 148,
+    "n_blocks": 23,
+    "n_loc": 158,
+    "alt_mean": 73.5
+   },
+   "target": {
+    "n_cells": 0,
+    "n_blocks": 0,
+    "n_loc": 0,
+    "alt_mean": null
+   },
+   "by_source": {
+    "nsidc_ggd402_yamal": 150
+   }
+  }
+ },
+ "near_pairs_cross_source": [
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_A10",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00031,
+   "dlon": 0.0001,
+   "alt_a": 78.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_A11",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00034,
+   "dlon": 3e-05,
+   "alt_a": 65.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_A5",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00013,
+   "dlon": 0.00045,
+   "alt_a": 57.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_A6",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00017,
+   "dlon": 0.00037,
+   "alt_a": 49.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_A7",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.0002,
+   "dlon": 0.00031,
+   "alt_a": 84.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_A8",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00023,
+   "dlon": 0.00024,
+   "alt_a": 93.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_A9",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00027,
+   "dlon": 0.00017,
+   "alt_a": 64.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_B10",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00028,
+   "dlon": 0.0,
+   "alt_a": 70.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_B11",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00032,
+   "dlon": 7e-05,
+   "alt_a": 66.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_B4",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 6e-05,
+   "dlon": 0.00042,
+   "alt_a": 70.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_B5",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.0001,
+   "dlon": 0.00035,
+   "alt_a": 78.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_B6",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00014,
+   "dlon": 0.00028,
+   "alt_a": 65.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_B7",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00017,
+   "dlon": 0.00021,
+   "alt_a": 80.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_B8",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00021,
+   "dlon": 0.00014,
+   "alt_a": 94.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_B9",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00024,
+   "dlon": 7e-05,
+   "alt_a": 58.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_C10",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00025,
+   "dlon": 0.0001,
+   "alt_a": 83.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_C11",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00029,
+   "dlon": 0.00017,
+   "alt_a": 77.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_C2",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 3e-05,
+   "dlon": 0.00047,
+   "alt_a": 86.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_C3",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.0,
+   "dlon": 0.0004,
+   "alt_a": 76.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_C4",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 4e-05,
+   "dlon": 0.00032,
+   "alt_a": 53.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_C5",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 7e-05,
+   "dlon": 0.00025,
+   "alt_a": 70.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_C6",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.0001,
+   "dlon": 0.00018,
+   "alt_a": 72.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_C7",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00015,
+   "dlon": 0.00011,
+   "alt_a": 82.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_C8",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00018,
+   "dlon": 4e-05,
+   "alt_a": 84.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_C9",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00022,
+   "dlon": 3e-05,
+   "alt_a": 83.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_D1",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 9e-05,
+   "dlon": 0.00044,
+   "alt_a": 63.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_D10",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00023,
+   "dlon": 0.0002,
+   "alt_a": 61.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_D11",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00027,
+   "dlon": 0.00027,
+   "alt_a": 71.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_D2",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 6e-05,
+   "dlon": 0.00037,
+   "alt_a": 80.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_D3",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 2e-05,
+   "dlon": 0.0003,
+   "alt_a": 66.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_D4",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 1e-05,
+   "dlon": 0.00022,
+   "alt_a": 60.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_D5",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 5e-05,
+   "dlon": 0.00015,
+   "alt_a": 68.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_D6",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 8e-05,
+   "dlon": 8e-05,
+   "alt_a": 80.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_D7",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00012,
+   "dlon": 1e-05,
+   "alt_a": 93.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_D8",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00016,
+   "dlon": 6e-05,
+   "alt_a": 89.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_D9",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00019,
+   "dlon": 0.00013,
+   "alt_a": 71.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_E1",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00012,
+   "dlon": 0.00034,
+   "alt_a": 72.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_E10",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.0002,
+   "dlon": 0.0003,
+   "alt_a": 81.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_E11",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00024,
+   "dlon": 0.00037,
+   "alt_a": 78.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_E2",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 9e-05,
+   "dlon": 0.00027,
+   "alt_a": 68.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_E3",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 5e-05,
+   "dlon": 0.0002,
+   "alt_a": 69.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_E4",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 1e-05,
+   "dlon": 0.00012,
+   "alt_a": 68.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_E5",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 2e-05,
+   "dlon": 5e-05,
+   "alt_a": 68.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_E6",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 6e-05,
+   "dlon": 2e-05,
+   "alt_a": 70.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_E7",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 9e-05,
+   "dlon": 9e-05,
+   "alt_a": 77.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_E8",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00013,
+   "dlon": 0.00016,
+   "alt_a": 77.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_E9",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00017,
+   "dlon": 0.00023,
+   "alt_a": 71.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_F1",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00015,
+   "dlon": 0.00024,
+   "alt_a": 81.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_F10",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00018,
+   "dlon": 0.0004,
+   "alt_a": 68.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_F11",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00022,
+   "dlon": 0.00047,
+   "alt_a": 85.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_F2",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00011,
+   "dlon": 0.00017,
+   "alt_a": 79.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_F3",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 7e-05,
+   "dlon": 7e-05,
+   "alt_a": 70.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_F4",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 4e-05,
+   "dlon": 2e-05,
+   "alt_a": 64.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_F5",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.0,
+   "dlon": 5e-05,
+   "alt_a": 72.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_F6",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 3e-05,
+   "dlon": 0.00012,
+   "alt_a": 73.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_F7",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 7e-05,
+   "dlon": 0.00019,
+   "alt_a": 89.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_F8",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.0001,
+   "dlon": 0.00026,
+   "alt_a": 82.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_F9",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00014,
+   "dlon": 0.00033,
+   "alt_a": 64.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_G1",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00017,
+   "dlon": 0.00014,
+   "alt_a": 80.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_G2",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00014,
+   "dlon": 7e-05,
+   "alt_a": 51.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_G3",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.0001,
+   "dlon": 0.0,
+   "alt_a": 63.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_G4",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 7e-05,
+   "dlon": 8e-05,
+   "alt_a": 79.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_G5",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 3e-05,
+   "dlon": 0.00015,
+   "alt_a": 69.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_G6",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 1e-05,
+   "dlon": 0.00022,
+   "alt_a": 68.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_G7",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 4e-05,
+   "dlon": 0.00029,
+   "alt_a": 66.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_G8",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 8e-05,
+   "dlon": 0.00036,
+   "alt_a": 90.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_G9",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00011,
+   "dlon": 0.00043,
+   "alt_a": 70.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_H1",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.0002,
+   "dlon": 4e-05,
+   "alt_a": 90.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_H2",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00016,
+   "dlon": 3e-05,
+   "alt_a": 66.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_H3",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00013,
+   "dlon": 0.0001,
+   "alt_a": 56.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_H4",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 9e-05,
+   "dlon": 0.00017,
+   "alt_a": 72.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_H5",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 6e-05,
+   "dlon": 0.00025,
+   "alt_a": 74.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_H6",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 2e-05,
+   "dlon": 0.00032,
+   "alt_a": 74.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_H7",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 2e-05,
+   "dlon": 0.00039,
+   "alt_a": 76.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_H8",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 5e-05,
+   "dlon": 0.00046,
+   "alt_a": 95.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_I1",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00022,
+   "dlon": 6e-05,
+   "alt_a": 68.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_I2",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00019,
+   "dlon": 0.00013,
+   "alt_a": 70.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_I3",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00013,
+   "dlon": 0.00022,
+   "alt_a": 72.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_I4",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00012,
+   "dlon": 0.00027,
+   "alt_a": 77.25,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_I5",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 8e-05,
+   "dlon": 0.00035,
+   "alt_a": 69.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_I6",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 5e-05,
+   "dlon": 0.00042,
+   "alt_a": 69.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_I7",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 1e-05,
+   "dlon": 0.00049,
+   "alt_a": 68.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_J1",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00025,
+   "dlon": 0.00016,
+   "alt_a": 66.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_J2",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00022,
+   "dlon": 0.00023,
+   "alt_a": 78.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_J3",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00018,
+   "dlon": 0.0003,
+   "alt_a": 82.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_J4",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00014,
+   "dlon": 0.00037,
+   "alt_a": 76.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_J5",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00011,
+   "dlon": 0.00045,
+   "alt_a": 74.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_K1",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00028,
+   "dlon": 0.00025,
+   "alt_a": 74.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_K2",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00024,
+   "dlon": 0.00033,
+   "alt_a": 66.0,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_K3",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00021,
+   "dlon": 0.0004,
+   "alt_a": 79.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_K4",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00017,
+   "dlon": 0.00047,
+   "alt_a": 79.75,
+   "alt_b": 72.2,
+   "years_a": "2020-2021",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:CALM_station",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00037,
+   "dlon": 6e-05,
+   "alt_a": 44.5,
+   "alt_b": 72.2,
+   "years_a": "2020-2020",
+   "years_b": "2022-2023"
+  },
+  {
+   "label_set": "direct",
+   "a": "grl_ilulissat_scheer:ILU2021-02",
+   "b": "mythaw_pangaea:Ilulissat_CALM_site",
+   "dlat": 0.00025,
+   "dlon": 0.00011,
+   "alt_a": 77.4,
+   "alt_b": 72.2,
+   "years_a": "2021-2021",
+   "years_b": "2022-2023"
+  }
+ ],
+ "dup_borderline": [
+  {
+   "cell_uid": "dated|7562_-6209",
+   "v3_f4_cheb_deg": 0.0104,
+   "v3_f4_near_loc": 14288
+  },
+  {
+   "cell_uid": "dated|7715_-5801",
+   "v3_f4_cheb_deg": 0.0103,
+   "v3_f4_near_loc": 14291
+  },
+  {
+   "cell_uid": "dated|6811_-6472",
+   "v3_f4_cheb_deg": 0.00987,
+   "v3_f4_near_loc": 13162
+  },
+  {
+   "cell_uid": "direct|7261_-6808",
+   "v3_f4_cheb_deg": 0.009551,
+   "v3_f4_near_loc": 288
+  },
+  {
+   "cell_uid": "direct|7828_-5851",
+   "v3_f4_cheb_deg": 0.01,
+   "v3_f4_near_loc": 14270
+  },
+  {
+   "cell_uid": "unknown_other|7775_-5824",
+   "v3_f4_cheb_deg": 0.0096,
+   "v3_f4_near_loc": 14294
+  },
+  {
+   "cell_uid": "unknown_other|3914_8448",
+   "v3_f4_cheb_deg": 0.01,
+   "v3_f4_near_loc": 17389
+  }
+ ],
+ "elapsed_s": 18.2
+}

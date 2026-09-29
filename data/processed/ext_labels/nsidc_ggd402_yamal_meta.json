@@ -1,0 +1,429 @@
+{
+ "src_id": "nsidc_ggd402_yamal",
+ "name": "NSIDC GGD402 야말 반도 시추공 기재 자료(Borehole and environmental protection descriptive and numerical data, Yamal Peninsula, Russia, Version 1)",
+ "schema_version": "1.0",
+ "url": "https://nsidc.org/data/ggd402/versions/1",
+ "doi": "10.7265/h303-nt88",
+ "download_dir": "ftp://sidads.colorado.edu/pub/DATASETS/fgdc/ggd402_boreholes_russia/",
+ "accessed": "2026-09-29",
+ "files": [
+  {
+   "name": "yabrhl.txt",
+   "size_bytes": 97885,
+   "sha256": "e1066a2b0aea7df1aba450e4b78edf58e98b88d3780e46e05a45b5ac77260a70",
+   "url": "ftp://sidads.colorado.edu/pub/DATASETS/fgdc/ggd402_boreholes_russia/yabrhl.txt",
+   "role": "parsed"
+  },
+  {
+   "name": "yabrhl.dat",
+   "size_bytes": 14144,
+   "sha256": "025065088de5c27260eaab0c37fde9d8cbbdaf44b1e6b7d74bdef71597b7dc8b",
+   "url": "ftp://sidads.colorado.edu/pub/DATASETS/fgdc/ggd402_boreholes_russia/yabrhl.dat",
+   "role": "parsed"
+  },
+  {
+   "name": "yadesc.dat",
+   "size_bytes": 20262,
+   "sha256": "d8b1dcaad35ba12257c52dd9466e1f065297efaab1f8f4e36462d31e07c2b5d5",
+   "url": "ftp://sidads.colorado.edu/pub/DATASETS/fgdc/ggd402_boreholes_russia/yadesc.dat",
+   "role": "parsed"
+  },
+  {
+   "name": "README.txt",
+   "size_bytes": 766,
+   "sha256": "672707ba34ff43ab03fd8873cb287264108de559c2bb76b4ae52ea80218297e6",
+   "url": "ftp://sidads.colorado.edu/pub/DATASETS/fgdc/ggd402_boreholes_russia/README.txt",
+   "role": "documentation"
+  },
+  {
+   "name": "ggd402-userguide-v1.pdf",
+   "size_bytes": 113237,
+   "sha256": "bbb890d4e8ce8aa5db9ab08b9aef639646371464172fc0d4d7a59277981b5ed4",
+   "url": "https://nsidc.org/sites/default/files/ggd402-userguide-v1.pdf",
+   "role": "documentation"
+  },
+  {
+   "name": "GGD402.001_dif.xml",
+   "size_bytes": 12075,
+   "sha256": "eda5303984c0082bec56f3cde44f167e437ffa17a53a7776c7bd86efb04264a9",
+   "url": "https://nsidc.org/api/dataset/metadata/v2/oai?verb=GetRecord&metadataPrefix=dif&identifier=GGD402.001",
+   "role": "documentation"
+  }
+ ],
+ "derived_files_in_raw_dir": [
+  {
+   "name": "yabrhl_merged.csv",
+   "size_bytes": 32256,
+   "sha256": "aa50e2cea9e7f9d4bc207099ecfc322e23c8f908809959f4940ab1dbccb11eac",
+   "note": "이 파서가 만든 표다. yabrhl.txt 와 yabrhl.dat 의 합집합(시추공 단위, 원문 값)"
+  }
+ ],
+ "license": "unverified",
+ "license_evidence": "자료 누리집과 사용 안내서는 'As a condition of using these data, you must cite the use of this data set' 라는 인용 조건만 적었다. 이용 허락 표시(CC 등)와 재배포 조건은 누리집, 사용 안내서, README.txt, DIF 메타 기록(Use_Constraints, Access_Constraints 요소 없음)에서 찾지 못했다. NSIDC 자료 정책 쪽은 자료 제공자가 조건을 둘 수 있다고만 적었다. 재배포 가능 여부를 확인하지 못했으므로 점 자료를 커밋하지 않는다(data/processed/ext_labels/.gitignore 에 이미 들어 있다)",
+ "access_note": "익명 FTP 다. 계정이 필요 없다(서버 응답 'Only anonymous FTP is allowed here', 'Anonymous user logged in')",
+ "citation": "Minkin, M. & Melnikov, E. (1998). Borehole and environmental protection descriptive and numerical data, Yamal Peninsula, Russia (GGD402, Version 1) [Data Set]. Boulder, Colorado USA. National Snow and Ice Data Center. https://doi.org/10.7265/h303-nt88. Date Accessed 09-29-2026.",
+ "citation_auxiliary": "Minkin, M.A. 1998. Borehole and environmental protection descriptive and numerical data, Yamal Peninsula, Russia. In: International Permafrost Association, Data and Information Working Group, comp. Circumpolar Active-Layer Permafrost System (CAPS), version 1.0. CD-ROM. Boulder, Colorado: NSIDC, University of Colorado at Boulder. (사용 안내서 끝의 인용 표기)",
+ "orig_source": "Fundamentproekt Design Institute (Moscow; PI M. A. Minkin), borehole database 1977-1990, Kharasavey and Bovanenkovo gas fields and the Yamal-Ukhta, Yamal-Uzhgorod pipeline routes; CAPS Version 1.0 CD-ROM (IPA Data and Information Working Group, 1998)",
+ "parser": "scripts/1_data_prep/parse_ext_nsidc_ggd402_yamal.py",
+ "parser_sha256": "a42dab75f5bab5819392006dcdd2da31b66b0f665434b6ff5860fa4e6766563b",
+ "parser_git_commit": "미커밋(실행 시점 HEAD a112cef1ed17fe2db74898b3861a5f82de753fdd)",
+ "points_file": "data/processed/ext_labels/nsidc_ggd402_yamal_points.csv",
+ "points_sha256": "0cf3613173f071e32a3a3186d1257f877f76053b9376e1e9840fdc88230ce000",
+ "n_rows_raw": {
+  "yabrhl.txt": 158,
+  "yabrhl.dat": 124,
+  "union_boreholes": 160,
+  "yadesc.dat_regions": 55
+ },
+ "n_rows_points": 160,
+ "n_sites": 160,
+ "n_by_source_file": {
+  "txt+dat": 122,
+  "txt": 36,
+  "dat": 2
+ },
+ "n_by_label_def": {
+  "unknown": 160
+ },
+ "n_by_method": {
+  "pit_core": 160
+ },
+ "n_by_macro": {
+  "Russia_W": 160
+ },
+ "n_by_subunit": {
+  "Yamal": 160
+ },
+ "n_by_qc_flag": {
+  "year_pre1990": 160
+ },
+ "n_by_coord_prec_deg": {
+  "0.0167": 124,
+  "0.0003": 36
+ },
+ "n_by_year": {
+  "1976": 24,
+  "1977": 12,
+  "1978": 3,
+  "1979": 5,
+  "1980": 22,
+  "1982": 17,
+  "1983": 19,
+  "1985": 6,
+  "1986": 21,
+  "1987": 29,
+  "1989": 2
+ },
+ "n_by_drill_month": {
+  "3": 10,
+  "4": 14,
+  "5": 15,
+  "6": 9,
+  "7": 32,
+  "8": 55,
+  "9": 22,
+  "10": 3
+ },
+ "n_by_nature_protection_region": {
+  "8": 8,
+  "12": 8,
+  "13": 5,
+  "31": 10,
+  "32": 5,
+  "33": 8,
+  "34": 6,
+  "37": 6,
+  "38": 8,
+  "40": 8,
+  "43": 6,
+  "44": 8,
+  "45": 5,
+  "46": 7,
+  "47": 24,
+  "68": 5,
+  "69": 5,
+  "70": 5,
+  "72": 12,
+  "74": 5,
+  "75": 6
+ },
+ "year_range": [
+  1976,
+  1989
+ ],
+ "alt_cm_stats": {
+  "n": 160,
+  "min": 25.0,
+  "median": 70.0,
+  "max": 170.0,
+  "mean": 73.19
+ },
+ "alt_cm_value_counts": {
+  "25": 1,
+  "30": 5,
+  "35": 5,
+  "40": 12,
+  "45": 2,
+  "50": 25,
+  "55": 1,
+  "60": 22,
+  "65": 3,
+  "70": 10,
+  "75": 2,
+  "80": 20,
+  "85": 3,
+  "90": 18,
+  "100": 13,
+  "105": 1,
+  "110": 3,
+  "120": 5,
+  "125": 1,
+  "130": 1,
+  "140": 2,
+  "150": 3,
+  "155": 1,
+  "170": 1
+ },
+ "n_right_censored": 0,
+ "n_excluded_by_reason": {
+  "_설명": "점 자료에서 지운 행은 없다. 아래는 대상 라벨 규칙(6B.3, 6B.4)을 통과하지 못하는 행의 수다. 사유는 겹친다",
+  "dropped_from_points": 0,
+  "year_pre1990": 160,
+  "label_def_not_direct_eos": 160,
+  "qc_range": 0,
+  "qc_coord": 0,
+  "qc_date": 0,
+  "right_censored": 0
+ },
+ "n_target_rows": 0,
+ "use": "확인적 풀과 대상 셀에 넣지 않는다. 서술과 보조 분석에만 쓴다(계획서 6B.2 보조 라벨 표)",
+ "label_semantics": {
+  "column_used": "Max depth seasonal freeze(thaw),m",
+  "equal_to_permafrost_table_column": "160 / 160",
+  "n_thaw_at_coring_date_zero": 44,
+  "n_thaw_at_coring_gt_label": 0,
+  "ratio_thaw_at_coring_to_label_by_drill_month": {
+   "3": {
+    "n": 10,
+    "median": 0.0,
+    "min": 0.0,
+    "max": 0.0
+   },
+   "4": {
+    "n": 14,
+    "median": 0.0,
+    "min": 0.0,
+    "max": 0.0
+   },
+   "5": {
+    "n": 15,
+    "median": 0.0,
+    "min": 0.0,
+    "max": 0.0
+   },
+   "6": {
+    "n": 9,
+    "median": 0.14,
+    "min": 0.0,
+    "max": 0.5
+   },
+   "7": {
+    "n": 32,
+    "median": 0.47,
+    "min": 0.0,
+    "max": 0.69
+   },
+   "8": {
+    "n": 55,
+    "median": 0.75,
+    "min": 0.37,
+    "max": 0.87
+   },
+   "9": {
+    "n": 22,
+    "median": 0.83,
+    "min": 0.6,
+    "max": 0.94
+   },
+   "10": {
+    "n": 3,
+    "median": 1.0,
+    "min": 0.87,
+    "max": 1.0
+   }
+  },
+  "value_resolution_m": "0.05",
+  "comment": "라벨 칸은 'Depth of permafrost upper limit, m' 칸과 모든 시추공에서 같다. 시추일의 융해 깊이('Depth of freeze (thaw)at a coring date') 는 3-5월에 0 이고 달이 늦을수록 라벨 값에 가까워진다. 따라서 라벨 값은 시추일의 관측값이 아니라 계절 최대 융해 깊이(영구동토 상한 깊이)로 적은 값이다. 코어의 동결 구조에서 읽은 값인지 계산값인지는 자료 설명에 없다"
+ },
+ "region_range_check": {
+  "_설명": "yadesc.dat 의 구역별 SEASONAL THAW DEPTH MIN, MAX 범위 안에 시추공의 라벨 값이 드는지 본 것이다. 표시만 하고 qc_flag 에는 쓰지 않았다",
+  "n_inside": 129,
+  "n_outside": 31,
+  "outside_site_ids": [
+   "R43_B000143",
+   "R44_B000111",
+   "R46_B001155",
+   "R47_B820211",
+   "R47_B820216",
+   "R47_B820242",
+   "R47_B820471",
+   "R68_B001272",
+   "R68_B001299",
+   "R68_B001340",
+   "R69_B000006",
+   "R69_B000044",
+   "R69_B000318",
+   "R69_B001392",
+   "R69_B001453",
+   "R70_B000418",
+   "R70_B000424",
+   "R70_B000440",
+   "R70_B000451",
+   "R72_B820107",
+   "R72_B820123",
+   "R72_B820159",
+   "R72_B820325",
+   "R72_B820327",
+   "R72_B820329",
+   "R74_B000610",
+   "R75_B000014",
+   "R75_B000015",
+   "R75_B000018",
+   "R75_B000520",
+   "R75_B000563"
+  ]
+ },
+ "duplicate_check": {
+  "duplicate_site_id": 0,
+  "in_both_files_merged_to_one_row": 122,
+  "fields_differing_between_files": {
+   "topography": 89
+  },
+  "borehole_numbers_used_in_two_regions": {
+   "000306": [
+    12,
+    40
+   ],
+   "000440": [
+    37,
+    70
+   ]
+  },
+  "coordinates_shared_by_two_boreholes": [
+   {
+    "lat": "70.400000",
+    "lon": "68.950000",
+    "site_ids": [
+     "R31_B000657",
+     "R33_B000617"
+    ]
+   }
+  ],
+  "rows_identical_in_coord_date_value": []
+ },
+ "missing_value_marks": {
+  "_설명": "빈 칸과 '-' 를 결측으로 보았다. 라벨, 좌표, 날짜 칸에는 결측이 없다",
+  "n_missing_by_field": {
+   "soil_permafrost_2": 103,
+   "dsal_pct": 17
+  },
+  "n_label_with_gt_or_lt_mark": 0
+ },
+ "coordinate_conversion": "원자료는 DDMMSS 6자리 정수다(예: 685600 은 68도 56분 00초). 십진 도 = DD + MM/60 + SS/3600 으로 바꾸고 소수 6자리로 적었다. 반구 표기는 파일에 없다. 자료 누리집의 공간 범위(북위 66-72.5, 동경 65.5-74) 안에 전부 들어가므로 북위, 동경으로 두었다. 측지계 변환은 하지 않았다",
+ "coordinate_check": {
+  "bbox_from_landing_page": {
+   "lat_min": 66.0,
+   "lat_max": 72.5,
+   "lon_min": 65.5,
+   "lon_max": 74.0
+  },
+  "lat_range": [
+   68.2,
+   71.15
+  ],
+  "lon_range": [
+   67.08333333333333,
+   72.5
+  ],
+  "n_outside_bbox": 0,
+  "n_minute_precision": 124,
+  "n_second_precision": 36
+ },
+ "coord_prec_rule": "_sources_plan.json 의 label_rule 은 coord_prec_deg 를 0.0167 하나로 적었다. 파일을 읽어 보니 124공은 초 자리가 위도와 경도 모두 00 이고 36공(구역 47, 72. yabrhl.txt 에만 있다)은 초 자리에 값이 있다. 앞의 124공은 0.0167, 뒤의 36공은 0.0003(1초는 0.000278도)으로 적었다",
+ "units": "라벨 칸의 단위는 m 다. 100 을 곱해 cm 로 적었다",
+ "cell_preview": {
+  "_설명": "v4 조립 전의 참고 값이다. 이 자료원은 대상 셀에 넣지 않는다. 셀 색인은 계획서 6B.3 의 식, 블록은 0.5도다. 분 단위 좌표(위도 1분은 약 1.85 km)는 1 km 셀보다 거칠어 셀 배정이 확정적이지 않다",
+  "cell_rule": "ky = floor(lat/0.009), kx = floor(lon*cos(phi)/0.009), phi = (ky+0.5)*0.009 도",
+  "n_points": 160,
+  "n_cells_1km": 150,
+  "n_cells_dup_v3_f4_chebyshev_0p01": 2,
+  "n_new_cells": 148,
+  "n_new_cells_from_minute_precision_only": 121,
+  "n_blocks_0p5deg_new_cells": 23,
+  "n_blocks_not_in_v3_f4": 21,
+  "n_new_cells_within_0p01deg_of_v3_f2_or_calm_temp": 0,
+  "n_cells_if_0p01deg_grid": 156,
+  "alt_cm_cell_mean_stats": {
+   "n": 148,
+   "min": 25.0,
+   "median": 70.0,
+   "max": 170.0,
+   "mean": 73.46
+  },
+  "expected_in_plan": "새 셀 147개(블록 21개), 탐색 단계 추정"
+ },
+ "v3_check": {
+  "bbox_compared": "60 <= lat <= 80, 50 <= lon <= 95",
+  "n_ref_rows_compared": 42,
+  "n_ref_f4_direct": 30,
+  "min_distance_km_to_v3_f4": 0.5,
+  "nearest_v3_loc_id": "17549",
+  "nearest_v3_region": "CALM_Russia_W",
+  "nearest_v3_lat_lon": [
+   70.2955,
+   68.8835
+  ],
+  "nearest_site_id": "R34_B000731",
+  "n_point_pairs_chebyshev_0p01": 3,
+  "n_points_within_5km_of_v3_f4": 4,
+  "n_points_within_25km_of_v3_f4": 31,
+  "n_points_within_100km_of_v3_f4": 110,
+  "min_distance_km_to_v3_other_source": 22.24,
+  "nearest_v3_other_loc_id": "17404",
+  "nearest_v3_other_source_id": "F2_gtnp_env"
+ },
+ "other_ext_sources_nearby": {
+  "_설명": "실행 시점에 같은 폴더에 있던 다른 자료원 점 자료 가운데 북위 66-73, 동경 65-75 안의 지점과의 거리다. 자료원 사이의 중복 판정은 v4 조립에서 한다. dup_of 는 채우지 않았다(시추공은 다른 자료원의 지점과 같은 지점으로 확인된 것이 없다)",
+  "by_file": {
+   "firealt_talucci2025_points.csv": {
+    "n_sites_in_bbox": 2,
+    "min_distance_km": 282.09,
+    "nearest_other_site_id": "firealt_talucci2025_0212",
+    "nearest_other_site_name": "Sizov nwsib_p2020_s.7 (unburned)",
+    "nearest_site_id": "R74_B000614",
+    "n_pairs_chebyshev_0p01": 0
+   }
+  }
+ },
+ "temporal_note": "파일의 시추일은 1976-03 에서 1989-05 사이다. 자료 누리집과 DIF 기록의 시간 범위는 1977-01-01 에서 1990-12-31 이다. 두 표기가 다르다",
+ "field_choices": {
+  "date, month": "시추일. 라벨 값의 관측일이 아니다",
+  "value_kind": "빈 칸. 한 해의 값인지 여러 해의 대표값인지 확인하지 못했다",
+  "disturbed": "빈 칸. 시추 위치의 교란 여부는 자료에 없다. Topography 값은 notes 에 옮겼다",
+  "n_obs": "1(시추공 하나)",
+  "dup_of": "빈 칸"
+ },
+ "unverified_items": [
+  "이용 약관과 재배포 조건. 인용 조건만 확인했다",
+  "'Max depth seasonal freeze(thaw),m' 값의 산정 방법(코어의 동결 구조 관찰인지, 계산값인지, 다른 시기의 측정인지)",
+  "라벨 값이 시추 연도의 값인지 여러 해를 대표하는 값인지",
+  "좌표의 측지계. 파일과 사용 안내서에 없다. 조사 시기와 기관으로 보아 WGS84 가 아닐 수 있다. 변환하지 않았다",
+  "초 자리가 00 인 124공의 좌표가 반올림인지 버림인지",
+  "시추 위치가 시설 부지나 교란지인지. 자료는 가스전과 관로 노선의 조사 시추라고만 적었다",
+  "Topography 의 ravine, gully, closed thermokarst bog, deflation 이 계획서 6B.3 의 교란 규칙(열침식 지형, 수체)에 해당하는지",
+  "사용 안내서가 말한 색인 지도(.gif)는 FTP 폴더에 없다. 구역 경계를 확인하지 못했다",
+  "사용 안내서가 말한 두 번째 표(암상 단면 유형의 층별 설명)는 FTP 폴더에 없다",
+  "yabrhl.dat 에만 있는 2공과 yabrhl.txt 에만 있는 36공이 다른 파일에서 빠진 까닭",
+  "자료 누리집의 시간 범위(1977-1990)와 파일의 시추일(1976-1989)이 다른 까닭"
+ ]
+}

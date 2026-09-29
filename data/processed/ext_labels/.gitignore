@@ -1,0 +1,16 @@
+# 약관이 재배포를 허용하는지 확인되지 않은 자료원의 점 자료는 커밋하지 않는다(계획서 6B.2).
+# 약관을 확인한 뒤 해당 줄을 지운다.
+cusp_v1_1_points.csv
+calm_web_subsites_points.csv
+nsidc_ggd402_yamal_points.csv
+nsidc_ggd353_thawtube_points.csv
+# qtp_yang_compile: 앞 80행에 Chang 등 2024 표 S1(논문 CC BY-NC-ND 4.0, 보충 자료 약관 미확인)의 연도와 원출처가 있다
+qtp_yang_compile_points.csv
+# ru_yamal_walker: Kharasavey-1 의 10행이 원 보고서(약관 미확인) 값이다. 보고서 값 사용이 확인되거나 그 10행을 빼면 이 줄을 지운다.
+ru_yamal_walker_points.csv
+# ext_cells_v1_locs.csv: 위치(지점) 단위 다년 평균이라 약관 미확인·재배포 제한 자료원(CUSP, CALM 누리집, GGD353, GGD402, Walker 보고서 행)의 지점 값이 그대로 들어 있다.
+ext_cells_v1_locs.csv
+# ext_cells_v1_cens.csv(개정 13): 위치 단위 절단 행의 하한값 요약이라 같은 자료원(CUSP, GGD353 등)의 지점 값이 들어 있다.
+ext_cells_v1_cens.csv
+ext_cells_v1.csv
+ext_cells_v1_cov.csv

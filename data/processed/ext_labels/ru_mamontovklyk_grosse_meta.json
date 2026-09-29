@@ -1,0 +1,198 @@
+{
+ "src_id": "ru_mamontovklyk_grosse",
+ "name": "Grosse 2007, Cape Mamontov Klyk 주변 활동층 자료(PANGAEA 611409)",
+ "schema_version": "1.0",
+ "url": "https://doi.org/10.1594/PANGAEA.611409",
+ "doi": "10.1594/PANGAEA.611409",
+ "accessed": "2026-09-29",
+ "files": [
+  {
+   "name": "PANGAEA_611409.tab",
+   "size_bytes": 6655,
+   "sha256": "bc61d9068de4566c47721a52df4a49d6697c0705eec7afb38575694dafbb45b7",
+   "url": "https://doi.pangaea.de/10.1594/PANGAEA.611409?format=textfile"
+  },
+  {
+   "name": "PANGAEA_611407.tab",
+   "size_bytes": 32000,
+   "sha256": "089228976ea7dd4b00bdef31ac1fc68bd5d68bf9a1742758679a1a14ca1dd08e",
+   "url": "https://doi.pangaea.de/10.1594/PANGAEA.611407?format=textfile"
+  },
+  {
+   "name": "PANGAEA_611409_metadata.jsonld",
+   "size_bytes": 6358,
+   "sha256": "ff4ae23bdd700e387d2065bd496f640f811de060ce27812ab29e5eb5d60d3fab",
+   "url": "https://doi.pangaea.de/10.1594/PANGAEA.611409?format=metadata_jsonld"
+  },
+  {
+   "name": "BerPolarforsch2004489.pdf",
+   "size_bytes": 34008488,
+   "sha256": "da4c8e9c12802e48475dd7b353ee1fa8c0fd7d8cbc206c3de68267bdbaf0966f",
+   "url": "https://hdl.handle.net/10013/epic.10494.d001"
+  }
+ ],
+ "license": "CC-BY-3.0",
+ "license_evidence": {
+  "PANGAEA_611409.tab": "Creative Commons Attribution 3.0 Unported (CC-BY-3.0) (URI: https://creativecommons.org/licenses/by/3.0/)",
+  "PANGAEA_611407.tab": "Creative Commons Attribution 3.0 Unported (CC-BY-3.0) (URI: https://creativecommons.org/licenses/by/3.0/)",
+  "BerPolarforsch2004489.pdf": "약관을 확인하지 못했다. data/raw 에만 두고 값 대조와 방법 확인에 썼다"
+ },
+ "citation": "Grosse, Guido (2007): Active layer data of the geo-located sites around Cape Mamontov Klyk, Appendix 4.2 [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.611409",
+ "citation_auxiliary": "Grosse, Guido (2007): Surface parameters for the studied geolocated sites around Cape Mamontov Klyk, Appendix 4.1 [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.611407",
+ "orig_source": "Schirrmeister, L.; Grigoriev, M. N.; Kutzbach, L.; Wagner, D.; Bolshiyanov, D. Yu. (2004): Russian-German Cooperation System Laptev Sea: The Expedition Lena-Anabar 2003. Reports on Polar and Marine Research 489, 1-210, hdl:10013/epic.10494.d001 (Appendix 4-1, 4-2)",
+ "parser": "scripts/1_data_prep/parse_ext_ru_mamontovklyk_grosse.py",
+ "parser_sha256": "79051d2e9c57d233e84da383ffe0e8cda054c4e5745810a502abdf75a8763307",
+ "parser_git_commit": "f2085166acd5e46a1a8eb31ad392362835706d28",
+ "parser_git_note": "파서는 실행 시점에 커밋되지 않은 새 파일이다. 위 값은 저장소 HEAD 다",
+ "n_rows_raw": 98,
+ "n_rows_raw_surface_table": 178,
+ "n_rows_points": 98,
+ "n_sites": 98,
+ "n_by_label_def": {
+  "direct_eos": 98
+ },
+ "n_by_method": {
+  "other": 98
+ },
+ "n_by_macro": {
+  "Russia_C": 98
+ },
+ "n_by_qc_flag": {
+  "ok": 98
+ },
+ "n_by_date": {
+  "2003-08-15": 17,
+  "2003-08-18": 1,
+  "2003-08-19": 25,
+  "2003-08-21": 16,
+  "2003-08-23": 13,
+  "2003-08-26": 16,
+  "2003-08-28": 10
+ },
+ "year_range": [
+  2003,
+  2003
+ ],
+ "n_with_mean": 91,
+ "n_right_censored": 7,
+ "n_disturbed": 21,
+ "n_obs_total": 435,
+ "n_obs_with_mean": 424,
+ "alt_cm_stats_with_mean": {
+  "n": 91,
+  "min": 24.0,
+  "median": 42.0,
+  "max": 98.0,
+  "mean": 44.95
+ },
+ "alt_cm_stats_target": {
+  "n": 70,
+  "min": 24.0,
+  "median": 41.0,
+  "max": 98.0,
+  "mean": 43.56
+ },
+ "alt_cm_stats_all_rows_including_lower_bounds": {
+  "n": 98,
+  "min": 24.0,
+  "median": 43.0,
+  "max": 110.0,
+  "mean": 48.39
+ },
+ "n_excluded_by_reason": {
+  "_설명": "점 자료에서 지운 행은 없다. 아래는 대상 라벨 규칙(계획서 6B.3)을 통과하지 못하는 행의 수다. 이 자료에서는 사유가 겹치는 행이 없다",
+  "dropped_from_points": 0,
+  "right_censored_gt_mark": 5,
+  "right_censored_mean_missing_min_only": 2,
+  "disturbed_thermo_erosion": 21,
+  "disturbed_thermo_erosion_among_rows_with_mean": 21,
+  "label_def_not_direct_eos": 0,
+  "qc_flag_not_ok": 0
+ },
+ "n_target_rows": 70,
+ "n_target_rows_if_disturbed_ignored": 91,
+ "cell_preview": {
+  "_설명": "v4 조립 전의 참고 값이다. 셀 색인은 계획서 6B.3 의 식, 블록은 0.5° 다",
+  "rows_with_mean": {
+   "n_rows": 91,
+   "n_cells_1km": 30,
+   "n_blocks_0p5deg": 3
+  },
+  "target_rows": {
+   "n_rows": 70,
+   "n_cells_1km": 27,
+   "n_blocks_0p5deg": 3
+  },
+  "target_rows_if_disturbed_ignored": {
+   "n_rows": 91,
+   "n_cells_1km": 30,
+   "n_blocks_0p5deg": 3
+  }
+ },
+ "relief_counts_all_rows": {
+  "TK depression": 14,
+  "Log": 19,
+  "Edoma": 39,
+  "Elevated plain (no Edoma)": 1,
+  "Marine terrace": 9,
+  "Tidal flat": 3,
+  "River valley": 11,
+  "Ovrag": 2
+ },
+ "relief_counts_rows_with_mean": {
+  "TK depression": 13,
+  "Log": 19,
+  "Edoma": 39,
+  "Elevated plain (no Edoma)": 1,
+  "Marine terrace": 8,
+  "River valley": 9,
+  "Ovrag": 2
+ },
+ "relief_counts_target_rows": {
+  "TK depression": 13,
+  "Edoma": 39,
+  "Elevated plain (no Edoma)": 1,
+  "Marine terrace": 8,
+  "River valley": 9
+ },
+ "label_def_basis": "개정 13(WRAPUP 7.3 (a)12 기록): direct_eos 로 둔 근거는 세 가지다. (1) 원정 조사 중 지점에서 잰 활동층 깊이(ALD, 지점 평균)이고 모형이나 지온에서 유도한 값이 아니다. (2) 기록 날짜가 2003-08-15–28 로 6B.3 의 record_date 창(8–9월)에 든다. (3) 동결면에 닿지 않은 값은 '>' 로 표기되어 절단으로 따로 처리했다. 측정 기기는 원 보고서와 PANGAEA 에 없고(METHOD/DEVICE 'Visual observation'), 그래서 method = other 이며 L41 (a)에서 빠진다. 2003년 단일 조사라 L41 (d)(year_max >= 2010)에서도 빠진다",
+ "disturbed_rule": "PANGAEA 611407 의 Relief type 이 Log(thermo-erosional valley), Ovrag(thermo-erosional ravine), Ovrag (mouth), Thermoerosional terrace 이거나 Comment 에 'disturbed surface' 가 있으면 disturbed = 1, disturb_type = thermo_erosion. 그 밖의 분류(Edoma, Elevated plain (no Edoma), TK depression, River valley, Marine terrace, Tidal flat)는 0. Relief type 은 조사자가 지점마다 적은 경관 단위이고 조사 시점의 활성 침식 여부를 뜻하지 않는다",
+ "surface_table_check": {
+  "used": true,
+  "points_without_surface_row": 0,
+  "coordinate_or_date_mismatch": 0
+ },
+ "report_check": {
+  "report_used": true,
+  "pdf_page_read": 180,
+  "appendix_4-2_sites_parsed": 98,
+  "appendix_4-2_value_match": 98,
+  "appendix_4-2_value_mismatch": 0
+ },
+ "duplicate_check": {
+  "duplicate_site_id": 0,
+  "duplicate_coordinates": 0
+ },
+ "v3_check": {
+  "n_ref_cells_compared": 3045,
+  "bbox_compared": "lat > 60, 90 < lon < 150",
+  "min_distance_km": 168.8,
+  "nearest_v3_region": "Lena_RU",
+  "nearest_v3_loc_id": "17388",
+  "nearest_site_id": "369",
+  "n_chebyshev_0p01_duplicates": 0
+ },
+ "coordinate_conversion": "변환 없음. 원자료가 십진 도(소수 4자리, 동경 양수)다. 문자열 그대로 옮겼다. 측지계 표기는 원자료에 없다",
+ "units": "ALD 는 cm 다. 변환하지 않았다",
+ "missing_value_marks": "PANGAEA 표는 빈 칸, 보고서 부록 4-2 는 '-' 다. '>' 는 하한 표기다",
+ "unverified_items": [
+  "측정 기기. 보고서 4.4.5 절과 표 4.4-3 은 'Active layer depth: Up to 15 measurements per site' 만 적었다. 탐침 사용을 확인하지 못해 method 를 other 로 두었다. 같은 보고서 3.6 절의 강철봉 기술은 레나 델타 Samoylov 섬 조사의 것이다",
+  "평균 없이 ALD min 값만 있는 두 지점(320, 351)의 사유",
+  "'>' 표기 5지점(299, 486, 487, 488, 489)의 측정 한계가 탐침 길이인지 굴착 깊이인지",
+  "보고서 부록 4-2 의 주석은 조사 기간을 2004-08-15 에서 2004-08-28 로 적었다. 보고서 4.1 절은 조사를 2003년 여름으로 적었고 PANGAEA 두 표의 날짜가 2003-08-15 에서 2003-08-28 이므로 2003년으로 두었다",
+  "Relief type 이 Log, Ovrag 인 지점이 계획서 6B.3 의 '열침식 지형' 교란 규칙의 대상인지. 이 파서는 문자 그대로 적용했다",
+  "Water bodies 칸은 지점의 수체 유무와 수심이다. 측정 위치가 수체 바닥인지는 확인하지 못해 water 로 표시하지 않았다",
+  "좌표의 측지계. 원자료에 표기가 없다. GPS 좌표로 보고 WGS84 로 다루었다",
+  "보고서 PDF 의 이용 약관"
+ ]
+}

@@ -1,0 +1,586 @@
+{
+ "src_id": "palmtag2022_pedon",
+ "name": "Palmtag 등 2022, 북부 영구동토 지역 토양 단면 자료(Bolin Centre Database)",
+ "url": "https://bolin.su.se/data/palmtag-2022-pedon-1",
+ "download_url": "https://bolin.su.se/data/uploads/palmtag-2022-pedon-1.zip",
+ "doi": "10.17043/palmtag-2022-pedon-1",
+ "accessed": "2026-09-29",
+ "files": [
+  {
+   "name": "palmtag-2022-pedon-1.zip",
+   "size": 721485,
+   "sha256": "4884d17d653acb1f715e025d02490d3be1bb4d2967a5b8c2d8f9fa6a468f0c6f"
+  },
+  {
+   "name": "palmtag-2022-pedon-1/additional-data-on-soil-carbon-and-nitrogen.csv",
+   "size": 1123542,
+   "sha256": "9bfc1f66eee0c6b38e5caa01e4f4ee7d43fc95b3abe2c0fb5de18a2fa8e7de90"
+  },
+  {
+   "name": "palmtag-2022-pedon-1/coordinates-study-sites.csv",
+   "size": 590,
+   "sha256": "25c2380805f682b46315a6497e6f6c61e6dbcbcf3731036594b8bf0e49fa0c11"
+  },
+  {
+   "name": "palmtag-2022-pedon-1/data-description-soil-variables-separated-by-land-cover-class-and-by-depth-increment.pdf",
+   "size": 66578,
+   "sha256": "9781e63b10601f04d6e21502447e4e5edd2938f82505dbea4466ef5ae744dc66"
+  },
+  {
+   "name": "palmtag-2022-pedon-1/pedon-data-on-soil-carbon-and-nitrogen.csv",
+   "size": 135492,
+   "sha256": "10983f39f7bb9d469c86d0d5e9b0d87efb40fd1b8a822b9a7680da1629249285"
+  },
+  {
+   "name": "palmtag-2022-pedon-1/sample-data-on-soil-carbon-and-nitrogen.csv",
+   "size": 1110884,
+   "sha256": "1608abc7004f1146fbb41233af8ab3a93e4c10da19174706b2ca601ba8f1d417"
+  },
+  {
+   "name": "palmtag-2022-pedon-1/soil-variables-separated-by-land-cover-class-and-depth-increment.csv",
+   "size": 18635,
+   "sha256": "c8d998c4f2b021779c3707f3ec4d3b4c7f281a4f4155403841215106384444fe"
+  }
+ ],
+ "license": "ODC-By",
+ "license_basis": "자료 안내 쪽(url)의 License 항목: Open Data Commons Attribution License (ODC-By). 판 번호는 적혀 있지 않다",
+ "citation": "Palmtag, J., Obu, J., Kuhry, P., Siewert, M., Weiss, N., Hugelius, G. (2022). Detailed pedon data on soil carbon and nitrogen for the northern permafrost region. Dataset version 1. Bolin Centre Database. https://doi.org/10.17043/palmtag-2022-pedon-1",
+ "related_paper": "Palmtag, J. 등 (2022). A high spatial resolution soil carbon and nitrogen dataset for the northern permafrost region based on circumpolar land cover upscaling. Earth Syst. Sci. Data 14, 4095. https://doi.org/10.5194/essd-14-4095-2022",
+ "parser": "scripts/1_data_prep/parse_ext_palmtag2022_pedon.py",
+ "parser_git_commit": "미커밋(작성 시점 HEAD a112cef)",
+ "schema_version": "1.0",
+ "n_rows_raw": 651,
+ "n_rows_points": 122,
+ "n_sites": 122,
+ "n_by_label_def": {
+  "direct_eos": 120,
+  "direct_dated": 2
+ },
+ "n_by_method": {
+  "pit_core": 122
+ },
+ "n_by_macro": {
+  "Russia_C": 62,
+  "Russia_E": 58,
+  "Russia_W": 2
+ },
+ "n_by_subunit": {
+  "Taymyr_AryMas": 33,
+  "Taymyr_Logata": 29,
+  "Indigirka_Kytalyk": 24,
+  "Kolyma_Shalaurovo": 20,
+  "Kolyma_Cherskii": 10,
+  "Kolyma_Shalaurovo-Cherskii": 4,
+  "Altai_Aktru": 2
+ },
+ "n_by_eos_basis": {
+  "record_date": 120,
+  "none": 2
+ },
+ "n_by_qc_flag": {
+  "ok": 120,
+  "date": 2
+ },
+ "n_disturbed": 4,
+ "disturbed_sites": {
+  "AM EXP 1": "하천 노두. 구덩이가 노두 가장자리에서 3 m. 원문: Exposure on the northern side of the river. Permafrost angle ca. 45",
+  "AM EXP 2": "하천 노두. 구덩이가 노두 가장자리에서 3 m. 원문: Exposure on the southern side of the river. PF angle 40",
+  "AM T2-10": "침식 골짜기. 원문: Eroden gully (V-shape) in the forest tundra down to the river bank",
+  "CH T2-8": "교란 사면. 원문: steep, soliflucted/disturbed slope into a river valley (disturbance regime)"
+ },
+ "n_right_censored": 0,
+ "n_excluded_by_reason": {
+  "lena_delta_region_no_value": 2,
+  "lena_delta_region_with_value": 54,
+  "non_russia_no_value": 250,
+  "non_russia_with_value": 99,
+  "russia_no_depth_value_blank": 124
+ },
+ "n_excluded_total": 529,
+ "n_excluded_by_reason_and_area": {
+  "lena_delta_region_no_value": {
+   "Lena Delta": 2
+  },
+  "lena_delta_region_with_value": {
+   "Lena Delta": 54
+  },
+  "non_russia_no_value": {
+   "Abisko": 118,
+   "Adventdalen, Svalbard": 31,
+   "HE": 3,
+   "Ny Ålesund, Svalbard": 28,
+   "Tarfala": 55,
+   "Tulemalu lake, Canada": 1,
+   "Zackenberg": 14
+  },
+  "non_russia_with_value": {
+   "Abisko": 7,
+   "Adventdalen, Svalbard": 17,
+   "HE": 39,
+   "Tulemalu lake, Canada": 15,
+   "Zackenberg": 21
+  },
+  "russia_no_depth_value_blank": {
+   "Aktru, Russia": 37,
+   "Cherskii": 1,
+   "Kytalyk": 3,
+   "Seida": 44,
+   "Shalaurovo": 2,
+   "Spasskaya Pad": 33,
+   "Taymyr, Arymas": 2,
+   "Taymyr, Logata": 2
+  }
+ },
+ "year_range": [
+  2010,
+  2017
+ ],
+ "date_range_direct_eos": [
+  "2010-08-07",
+  "2012-08-06"
+ ],
+ "dates_by_subunit": {
+  "Indigirka_Kytalyk": [
+   "2012-08-01",
+   "2012-08-06"
+  ],
+  "Kolyma_Cherskii": [
+   "2010-08-17",
+   "2010-08-18"
+  ],
+  "Kolyma_Shalaurovo": [
+   "2010-08-07",
+   "2010-08-10"
+  ],
+  "Kolyma_Shalaurovo-Cherskii": [
+   "2010-08-12",
+   "2010-08-12"
+  ],
+  "Taymyr_AryMas": [
+   "2011-08-05",
+   "2011-08-08"
+  ],
+  "Taymyr_Logata": [
+   "2011-08-09",
+   "2011-08-11"
+  ]
+ },
+ "n_direct_eos_before_aug15": 106,
+ "august_day_range_direct_eos": [
+  1,
+  18
+ ],
+ "alt_cm_all": {
+  "n": 122,
+  "min": 22.0,
+  "median": 50.0,
+  "mean": 53.68,
+  "max": 120.0
+ },
+ "alt_cm_by_macro": {
+  "Russia_C": {
+   "n": 62,
+   "min": 23.0,
+   "median": 51.0,
+   "mean": 55.26,
+   "max": 120.0
+  },
+  "Russia_E": {
+   "n": 58,
+   "min": 22.0,
+   "median": 50.0,
+   "mean": 51.64,
+   "max": 104.0
+  },
+  "Russia_W": {
+   "n": 2,
+   "min": 48.0,
+   "median": 64.0,
+   "mean": 64.0,
+   "max": 80.0
+  }
+ },
+ "alt_cm_by_subunit": {
+  "Altai_Aktru": {
+   "n": 2,
+   "min": 48.0,
+   "median": 64.0,
+   "mean": 64.0,
+   "max": 80.0
+  },
+  "Indigirka_Kytalyk": {
+   "n": 24,
+   "min": 22.0,
+   "median": 40.0,
+   "mean": 42.12,
+   "max": 80.0
+  },
+  "Kolyma_Cherskii": {
+   "n": 10,
+   "min": 29.0,
+   "median": 54.5,
+   "mean": 50.5,
+   "max": 68.0
+  },
+  "Kolyma_Shalaurovo": {
+   "n": 20,
+   "min": 37.0,
+   "median": 60.0,
+   "mean": 61.05,
+   "max": 104.0
+  },
+  "Kolyma_Shalaurovo-Cherskii": {
+   "n": 4,
+   "min": 41.0,
+   "median": 64.5,
+   "mean": 64.5,
+   "max": 88.0
+  },
+  "Taymyr_AryMas": {
+   "n": 33,
+   "min": 25.0,
+   "median": 55.0,
+   "mean": 59.94,
+   "max": 120.0
+  },
+  "Taymyr_Logata": {
+   "n": 29,
+   "min": 23.0,
+   "median": 49.0,
+   "mean": 49.93,
+   "max": 71.0
+  }
+ },
+ "n_target_eligible": 116,
+ "target_eligible_rule": "label_def = direct_eos, qc_flag = ok, disturbed = 0, right_censored = 0, year >= 1990",
+ "n_target_eligible_by_macro": {
+  "Russia_C": 59,
+  "Russia_E": 57
+ },
+ "alt_cm_target_eligible_by_macro": {
+  "Russia_C": {
+   "n": 59,
+   "min": 23.0,
+   "median": 50.0,
+   "mean": 54.17,
+   "max": 120.0
+  },
+  "Russia_E": {
+   "n": 57,
+   "min": 22.0,
+   "median": 50.0,
+   "mean": 50.72,
+   "max": 88.0
+  }
+ },
+ "coordinate_conversion": {
+  "Taymyr_Logata": "원자료의 Standardized latitude/longitude(십진 도, 소수 5자리 이하)를 그대로 썼다",
+  "Indigirka_Kytalyk": "원자료의 Standardized latitude/longitude(십진 도)를 그대로 썼다. UTM 55 구역(EPSG:32655) 환산값과 대조했다",
+  "Taymyr_AryMas": "UTM 47 구역(원자료 표기 'UTM 47X', EPSG:32647) 동거, 북거를 pyproj 로 WGS84 십진 도로 바꿨다. 소수 6자리",
+  "Kolyma": "UTM 57 구역(원자료 표기 'UTM zone 57N', EPSG:32657) 동거, 북거를 pyproj 로 WGS84 십진 도로 바꿨다. 소수 6자리",
+  "Altai_Aktru": "Standardized 열의 도와 소수 분(예: '50 04.891')을 십진 도로 바꿨다. 소수 6자리",
+  "column_note": "원자료 열 'Field coordinates, latitude' 의 단위 행은 'text, easting' 이고 값도 동거다. 다음 열은 북거다",
+  "datum": "원자료에 측지 기준계가 없다. WGS84 로 가정했다",
+  "kytalyk_std_vs_utm55_m": {
+   "n": 24,
+   "max": 0.47,
+   "median": 0.21
+  },
+  "distance_to_study_site_km": {
+   "Kytalyk": {
+    "min": 2.3,
+    "max": 5.6
+   },
+   "Shalaurovo": {
+    "min": 17.2,
+    "max": 21.2
+   },
+   "Shalaurovo/Cherskii": {
+    "min": 6.3,
+    "max": 7.2
+   },
+   "Cherskii": {
+    "min": 30.4,
+    "max": 35.6
+   },
+   "Taymyr, Arymas": {
+    "min": 0.4,
+    "max": 9.4
+   },
+   "Taymyr, Logata": {
+    "min": 1.1,
+    "max": 2.9
+   },
+   "Aktru, Russia": {
+    "min": 22.6,
+    "max": 27.9
+   }
+  },
+  "distance_note": "coordinates-study-sites.csv 의 대표 좌표와의 거리다. 100 km 를 넘으면 qc_flag 에 coord 를 붙인다. 대표 좌표는 소수 1-2자리이고 Aktru(50.05, 87.47)는 단면 표의 도와 분(50 05, 87 47)과 숫자가 같아 도.분 표기로 보인다. 거친 점검으로만 쓴다",
+  "pyproj_version": "3.6.1"
+ },
+ "date_formats": {
+  "Kytalyk_Cherskii_Shalaurovo": "dd/mm/yyyy. 17/08/2010 처럼 앞 숫자가 12 를 넘는 값이 같은 열에 있다",
+  "Logata_AryMas": "dd.mm.yy(05.08.11-11.08.11 을 2011-08-05 에서 2011-08-11 로 읽었다)",
+  "Aktru": "'Aug-17'. mmm-yy 로 읽어 2017년 8월로 두었다. 일은 없다"
+ },
+ "label_semantics": {
+  "column_used": "단면 표의 12번째 열 'Depth Top Permafrost'(단위 행 비어 있음, 값은 cm 로 읽었다)",
+  "second_column": "13번째 열도 이름이 'Depth Top Permafrost' 다. 대상 조사지에는 값이 없다",
+  "frozen_al": "Kytalyk 은 'Depth frozen AL'(관측일의 동결면 깊이로 보인다)과 'Depth Top Permafrost' 가 따로 있다. 추가 표의 Major Unit 에서 두 깊이 사이의 시료는 'AL/SI' 로, 그 아래는 'PF' 로 적혀 있다. Kytalyk 의 라벨은 관측일의 융해 깊이가 아니라 단면에서 판정한 영구동토 상한 깊이다",
+  "other_areas": "Logata, Ary-Mas, Cherskii, Shalaurovo 는 'Depth frozen AL' 이 비어 있다. 'Depth Top Permafrost' 가 관측일의 동결면 깊이인지 판정한 영구동토 상한인지는 기록 단위로 구분되지 않는다",
+  "paper_statement": "관련 논문 2.2 절: 조사는 6월 말에서 9월 초이고 8월과 9월이 가장 많다. 활동층 두께는 눈금 있는 강철 탐침 또는 굴착 구덩이의 줄자로 쟀다. 기록 단위의 측정 도구는 표에 없다"
+ },
+ "qc_checks": {
+  "units": "깊이 열의 단위 행은 비어 있다. 시료 표의 깊이(cm)와 같은 크기라 cm 로 읽었다",
+  "missing_codes": "빈 칸, NA, na, no_pf, ? 는 값 없음으로 처리했다",
+  "duplicate_names": "단면 이름 651개에 중복이 없다",
+  "same_coordinate_sites": [
+   "CH T1-2A",
+   "CH T1-2B"
+  ],
+  "pf_flag_crosscheck": {
+   "n_points": 122,
+   "n_compared": 114,
+   "n_abs_diff_le_5cm": 82,
+   "n_abs_diff_gt_5cm": 32,
+   "diff_gt_5cm": {
+    "KY-T1-01": {
+     "alt_cm": 40.0,
+     "pf_top_from_samples_cm": 25.0
+    },
+    "KY-T1-02": {
+     "alt_cm": 40.0,
+     "pf_top_from_samples_cm": 30.0
+    },
+    "KY-T1-03": {
+     "alt_cm": 52.0,
+     "pf_top_from_samples_cm": 25.0
+    },
+    "KY-T1-04": {
+     "alt_cm": 50.0,
+     "pf_top_from_samples_cm": 40.0
+    },
+    "KY-T1-08": {
+     "alt_cm": 35.0,
+     "pf_top_from_samples_cm": 28.0
+    },
+    "KY-T1-09": {
+     "alt_cm": 45.0,
+     "pf_top_from_samples_cm": 25.0
+    },
+    "KY-T1-10": {
+     "alt_cm": 40.0,
+     "pf_top_from_samples_cm": 30.0
+    },
+    "KY-T1-11": {
+     "alt_cm": 55.0,
+     "pf_top_from_samples_cm": 33.0
+    },
+    "KY-T2-01": {
+     "alt_cm": 26.0,
+     "pf_top_from_samples_cm": 20.0
+    },
+    "KY-T2-03": {
+     "alt_cm": 45.0,
+     "pf_top_from_samples_cm": 35.0
+    },
+    "KY-T2-05": {
+     "alt_cm": 50.0,
+     "pf_top_from_samples_cm": 40.0
+    },
+    "KY-T2-07": {
+     "alt_cm": 52.0,
+     "pf_top_from_samples_cm": 40.0
+    },
+    "KY-T3-02": {
+     "alt_cm": 30.0,
+     "pf_top_from_samples_cm": 22.0
+    },
+    "KY-T3-04": {
+     "alt_cm": 40.0,
+     "pf_top_from_samples_cm": 30.0
+    },
+    "KY-T3-05": {
+     "alt_cm": 41.0,
+     "pf_top_from_samples_cm": 25.0
+    },
+    "CH T1-2B": {
+     "alt_cm": 42.0,
+     "pf_top_from_samples_cm": 0.0
+    },
+    "CH T1-4": {
+     "alt_cm": 40.0,
+     "pf_top_from_samples_cm": 25.0
+    },
+    "CH T1-5": {
+     "alt_cm": 64.0,
+     "pf_top_from_samples_cm": 70.0
+    },
+    "CH T1-8": {
+     "alt_cm": 80.0,
+     "pf_top_from_samples_cm": 50.0
+    },
+    "CH T2-7": {
+     "alt_cm": 37.0,
+     "pf_top_from_samples_cm": 45.0
+    },
+    "CH T3-1": {
+     "alt_cm": 88.0,
+     "pf_top_from_samples_cm": 95.0
+    },
+    "CH T6-4": {
+     "alt_cm": 29.0,
+     "pf_top_from_samples_cm": 0.0
+    },
+    "AM T1-7": {
+     "alt_cm": 40.0,
+     "pf_top_from_samples_cm": 50.0
+    },
+    "AM T1-8": {
+     "alt_cm": 26.0,
+     "pf_top_from_samples_cm": 40.0
+    },
+    "AM T2-1": {
+     "alt_cm": 63.0,
+     "pf_top_from_samples_cm": 70.0
+    },
+    "AM T2-2": {
+     "alt_cm": 25.0,
+     "pf_top_from_samples_cm": 35.0
+    },
+    "AM T2-9": {
+     "alt_cm": 46.0,
+     "pf_top_from_samples_cm": 60.0
+    },
+    "AM T2-10": {
+     "alt_cm": 25.0,
+     "pf_top_from_samples_cm": 40.0
+    },
+    "AM T3-1": {
+     "alt_cm": 85.0,
+     "pf_top_from_samples_cm": 95.0
+    },
+    "AM T3-7": {
+     "alt_cm": 60.0,
+     "pf_top_from_samples_cm": 70.0
+    },
+    "AM T3-10": {
+     "alt_cm": 48.0,
+     "pf_top_from_samples_cm": 60.0
+    },
+    "AM T4-3": {
+     "alt_cm": 75.0,
+     "pf_top_from_samples_cm": 90.0
+    }
+   },
+   "note": "차 = 시료 표에서 PF=1 인 시료의 최소 상단 깊이 - 단면 표의 Depth Top Permafrost. 거친 점검이다. 시료는 5-20 cm 간격으로 떠서 첫 PF 시료의 상단이 상한 깊이보다 깊을 수 있다. Kytalyk 은 동결된 활동층 시료에도 PF=1 이 붙어 있어 시료 쪽이 얕다. CH T1-2B 와 CH T6-4 는 시료 표에서 지표(0 cm) 시료부터 PF=1 이다. 이유는 확인하지 못했다"
+  },
+  "frozen_al_vs_top_pf": {
+   "n_with_frozen_al": 17,
+   "by_subunit": {
+    "Indigirka_Kytalyk": 17
+   },
+   "n_top_pf_deeper": 15,
+   "n_equal": 2,
+   "n_top_pf_shallower": 0,
+   "median_diff_cm": 10.0,
+   "max_diff_cm": 22.0,
+   "note": "차 = Depth Top Permafrost - Depth frozen AL"
+  },
+  "range": "0 < alt_cm <= 600 을 벗어난 값 수: 0"
+ },
+ "cell_preview": {
+  "note": "미리 보기다. 확정 셀 수는 v4 조립에서 정한다. 대상 행 조건은 target_eligible_rule 과 같다. n_cells_if_0p01deg_grid 는 위도와 경도를 0.01 도로 나눈 격자의 셀 수다(탐색 단계 추정과 견주기 위한 값)",
+  "cell_rule": "ky = floor(lat/0.009), kx = floor(lon*cos(phi)/0.009), phi = (ky+0.5)*0.009 도",
+  "by_macro": {
+   "Russia_C": {
+    "n_sites": 59,
+    "n_cells": 16,
+    "n_cells_dup_v3_f4": 0,
+    "n_new_cells": 16,
+    "n_blocks_new_cells": 2,
+    "n_blocks_not_in_v3_f4": 2,
+    "n_new_cells_within_0p01deg_of_v3_f2_or_calm_temp": 0,
+    "n_cells_if_0p01deg_grid": 20,
+    "alt_cm_cell_mean": 57.0,
+    "by_subunit": {
+     "Taymyr_AryMas": {
+      "n_sites": 30,
+      "n_new_cells": 10,
+      "n_blocks": 1
+     },
+     "Taymyr_Logata": {
+      "n_sites": 29,
+      "n_new_cells": 6,
+      "n_blocks": 1
+     }
+    },
+    "min_km_to_other_macro_v3_f4": 565.2,
+    "n_new_cells_within_100km_of_other_macro": 0,
+    "nearest_other_macro": "Russia_W",
+    "min_km_to_same_macro_v3_f4": 72.6
+   },
+   "Russia_E": {
+    "n_sites": 57,
+    "n_cells": 17,
+    "n_cells_dup_v3_f4": 0,
+    "n_new_cells": 17,
+    "n_blocks_new_cells": 5,
+    "n_blocks_not_in_v3_f4": 2,
+    "n_new_cells_within_0p01deg_of_v3_f2_or_calm_temp": 2,
+    "n_cells_if_0p01deg_grid": 23,
+    "alt_cm_cell_mean": 50.5,
+    "by_subunit": {
+     "Indigirka_Kytalyk": {
+      "n_sites": 24,
+      "n_new_cells": 7,
+      "n_blocks": 2
+     },
+     "Kolyma_Cherskii": {
+      "n_sites": 10,
+      "n_new_cells": 3,
+      "n_blocks": 2
+     },
+     "Kolyma_Shalaurovo": {
+      "n_sites": 19,
+      "n_new_cells": 5,
+      "n_blocks": 1
+     },
+     "Kolyma_Shalaurovo-Cherskii": {
+      "n_sites": 4,
+      "n_new_cells": 2,
+      "n_blocks": 1
+     }
+    },
+    "min_km_to_other_macro_v3_f4": 626.9,
+    "n_new_cells_within_100km_of_other_macro": 0,
+    "nearest_other_macro": "Lena",
+    "min_km_to_same_macro_v3_f4": 2.4
+   }
+  }
+ },
+ "expected_cells_in_plan": "Russia_C 새 셀 23개(블록 2개), Russia_E 새 셀 17개(탐색 단계 추정)",
+ "not_used_but_available": {
+  "note": "규칙에 따라 러시아 밖 단면과 Lena Delta 단면은 점 자료에 넣지 않았다. 12번째 열에 수치가 있는 단면 수를 조사지별로 적는다(우측 절단 표기 포함)",
+  "counts": {
+   "Abisko": 7,
+   "Adventdalen, Svalbard": 17,
+   "HE": 28,
+   "Lena Delta": 48,
+   "Tulemalu lake, Canada": 15,
+   "Zackenberg": 21
+  }
+ },
+ "unverified_items": [
+  "깊이 열의 단위(단위 행이 비어 있다). cm 로 읽었다",
+  "UTM 좌표의 측지 기준계. WGS84 로 가정했다",
+  "Logata, Ary-Mas, Cherskii, Shalaurovo 의 'Depth Top Permafrost' 가 관측일의 동결면 깊이인지 단면에서 판정한 영구동토 상한인지",
+  "기록 단위의 측정 도구(탐침 또는 구덩이의 줄자). method 는 자료원 규칙에 따라 pit_core 로 두었다",
+  "Aktru 의 날짜 'Aug-17' 의 해석(2017년 8월로 읽었다)과 고산 지점의 계절 말 기준",
+  "조사지별 원 출처 논문(관련 논문의 표 1). orig_source 를 비워 두었다",
+  "ODC-By 의 판 번호",
+  "교란 표시 4건은 현장 기술의 문구로 판단했다. 원 저자의 교란 분류는 표에 없다",
+  "v4 조립 단계의 100 km 독립성 규칙과 공변량 유효 여부는 이 파서에서 판정하지 않았다"
+ ]
+}

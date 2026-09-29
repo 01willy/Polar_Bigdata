@@ -1,0 +1,401 @@
+{
+ "src_id": "ru_yamal_walker",
+ "name": "Walker 등 2009, 야말 측선 융해 깊이 2007–2008(PANGAEA 842711, 842691)",
+ "schema_version": "1.0",
+ "url": "https://doi.org/10.1594/PANGAEA.842711",
+ "doi": "10.1594/PANGAEA.842711",
+ "doi_auxiliary": "10.1594/PANGAEA.842691",
+ "doi_parent": "10.1594/PANGAEA.842707",
+ "accessed": "2026-09-29",
+ "files": [
+  {
+   "name": "PANGAEA_842711.tab",
+   "size_bytes": 7186,
+   "sha256": "e7652a89c3f1f833040d2036a5b230308f671c06df19dc76a64508000846b7d1",
+   "url": "https://doi.pangaea.de/10.1594/PANGAEA.842711?format=textfile"
+  },
+  {
+   "name": "PANGAEA_842691.tab",
+   "size_bytes": 15740,
+   "sha256": "402aa571c64a8675ffa347020b5aaa86ad4400fc798089306ed4cfc51c0b30ea",
+   "url": "https://doi.pangaea.de/10.1594/PANGAEA.842691?format=textfile"
+  },
+  {
+   "name": "PANGAEA_842711_metadata.jsonld",
+   "size_bytes": 7402,
+   "sha256": "72657ba5b8fb438a70bec1a6450c9155c5bc7dcf71f44885a873067f7a42adf7",
+   "url": "https://doi.pangaea.de/10.1594/PANGAEA.842711?format=metadata_jsonld"
+  },
+  {
+   "name": "PANGAEA_842691_metadata.jsonld",
+   "size_bytes": 12318,
+   "sha256": "4d74d6da02400a47b1dd1e37af02aaf9a5201ce291957792d5cdec8d6b4b447b",
+   "url": "https://doi.pangaea.de/10.1594/PANGAEA.842691?format=metadata_jsonld"
+  },
+  {
+   "name": "PANGAEA_842707_parent_metadata.jsonld",
+   "size_bytes": 11492,
+   "sha256": "953898ff3cdf94e4f857c217c2f0ede72ec7773b0630c6c5291f587673ce0bba",
+   "url": "https://doi.pangaea.de/10.1594/PANGAEA.842707?format=metadata_jsonld"
+  },
+  {
+   "name": "WalkerDA2009_yamal_dr090401.pdf",
+   "size_bytes": 9702448,
+   "sha256": "0f4013a0ee81e8f510bedc38d5982e0b2553ea85e581b2a8a563764729bd7799",
+   "url": "https://www.geobotany.uaf.edu/library/reports/WalkerDA2009_yamal_dr090401.pdf"
+  }
+ ],
+ "license": "CC-BY-3.0",
+ "license_by_rows": {
+  "CC-BY-3.0": 77,
+  "unverified": 10
+ },
+ "license_evidence": {
+  "PANGAEA_842711.tab": "Creative Commons Attribution 3.0 Unported (CC-BY-3.0) (URI: https://creativecommons.org/licenses/by/3.0/)",
+  "PANGAEA_842691.tab": "Creative Commons Attribution 3.0 Unported (CC-BY-3.0) (URI: https://creativecommons.org/licenses/by/3.0/)",
+  "WalkerDA2009_yamal_dr090401.pdf": "약관 표기가 없다(보고서 본문에서 copyright, license 를 찾지 못했다). data/raw 에만 둔다. Kharasavey-1 의 10행(license = unverified)이 이 보고서 값이다"
+ },
+ "commit_policy": "점 자료에 약관 미확인 행(보고서 값 10행)이 있어 같은 폴더의 .gitignore 에 이 점 자료 파일을 올렸다. 보고서 값의 사용이 확인되면 그 줄을 지운다. 보고서 행을 빼면 나머지는 모두 CC BY 3.0 이다",
+ "citation": "Walker, Donald A; Epstein, Howard E; Leibman, Marina O; Moskalenko, Nataliya G; Orekhov, Pavel; Kuss, Patrick; Matyshak, George V; Kaarlejärvi, Elina; Forbes, Bruce C; Barbour, E M; Gobroski, K (2009): (Table 20) Thaw depth of active layer at transects and relevés sampled along the Yamal Transect, 2007-2008 [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.842711",
+ "citation_auxiliary": [
+  "Walker, Donald A; Epstein, Howard E; Leibman, Marina O; Moskalenko, Nataliya G; Orekhov, Pavel; Kuss, Patrick; Matyshak, George V; Kaarlejärvi, Elina; Forbes, Bruce C; Barbour, E M; Gobroski, K (2009): (Table 22) Vegetation, soil and site characteristics of all relevés sampled along the Yamal Transect, 2007-2008 [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.842691"
+ ],
+ "orig_source": "Walker, D.A.; Epstein, H.E.; Leibman, M.E.; Moskalenko, N.G.; Orekhov, P.; Kuss, J.P.; Matyshak, G.V.; Kaarlejärvi, E.; Forbes, B.C.; Barbour, E.M.; Gobroski, K. (2009): Data Report of the 2007 and 2008 Yamal Expeditions. Alaska Geobotany Center, Institute of Arctic Biology, University of Alaska Fairbanks, Fairbanks, AK, 121 pp. https://www.geobotany.uaf.edu/library/reports/WalkerDA2009_yamal_dr090401.pdf",
+ "parser": "scripts/1_data_prep/parse_ext_ru_yamal_walker.py",
+ "parser_sha256": "073001b424c2881cb313a3cafaf7c377d38fc6fe1559fab11da5ec309e53df73",
+ "parser_git_commit": "a112cef1ed17fe2db74898b3861a5f82de753fdd",
+ "parser_git_note": "파서는 실행 시점에 커밋되지 않은 새 파일이다. 위 값은 저장소 HEAD 다",
+ "n_rows_raw": 73,
+ "n_rows_raw_releve_table": 49,
+ "n_rows_points": 87,
+ "n_rows_points_by_origin": {
+  "842711": 73,
+  "report_table20_kharasavey1": 10,
+  "842691_only_nadym": 4
+ },
+ "n_sites": 87,
+ "n_events": 9,
+ "n_by_label_def": {
+  "direct_eos": 87
+ },
+ "n_by_method": {
+  "probe": 87
+ },
+ "n_by_macro": {
+  "Russia_W": 87
+ },
+ "n_by_qc_flag": {
+  "ok": 87
+ },
+ "n_by_event": {
+  "Kharasavey1": 18,
+  "Kharasavey2a": 7,
+  "Kharasavey2b": 8,
+  "Laborovaya1": 10,
+  "Laborovaya2": 10,
+  "Nadym2": 4,
+  "VaskinyDachi1": 10,
+  "VaskinyDachi2": 10,
+  "VaskinyDachi3": 10
+ },
+ "n_by_date": {
+  "2007-08-08": 4,
+  "2007-08-15": 10,
+  "2007-08-17": 10,
+  "2007-08-23": 10,
+  "2007-08-26": 10,
+  "2007-08-28": 10,
+  "2008-08-21": 18,
+  "2008-08-22": 7,
+  "2008-08-23": 8
+ },
+ "n_by_unit_kind": {
+  "transect": 45,
+  "releve": 42
+ },
+ "year_range": [
+  2007,
+  2008
+ ],
+ "n_right_censored": 0,
+ "n_disturbed": 0,
+ "n_obs_total": 460,
+ "alt_cm_stats_all_rows": {
+  "n": 87,
+  "min": 36.0,
+  "median": 76.3,
+  "max": 128.0,
+  "mean": 79.9
+ },
+ "alt_cm_stats_target": {
+  "n": 45,
+  "min": 54.0,
+  "median": 77.0,
+  "max": 128.0,
+  "mean": 80.66
+ },
+ "alt_cm_stats_target_transects": {
+  "n": 25,
+  "min": 59.3,
+  "median": 77.4,
+  "max": 117.6,
+  "mean": 79.8
+ },
+ "n_excluded_by_reason": {
+  "_설명": "점 자료에서 지운 행은 없다(842711 의 73행은 모두 점 자료에 있다). 아래 dup_* 는 대상 라벨 규칙에서 빠지는 행의 수이고 사유는 겹치지 않는다. not_in_points 는 842691 에만 있고 융해 깊이가 없어 점 자료 행을 만들지 않은 relevé 수다",
+  "dropped_from_points": 0,
+  "dup_v3_f4_direct_vaskiny_dachi": 30,
+  "dup_calm_pangaea_v4add_nadym": 4,
+  "dup_within_source_kharasavey1_pangaea_block": 8,
+  "label_def_not_direct_eos": 0,
+  "qc_flag_not_ok": 0,
+  "right_censored": 0,
+  "disturbed": 0,
+  "not_in_points_842691_releve_without_thaw": 10,
+  "not_in_points_detail": "Nadym1 relevé 1–5(보고서: no permafrost), Nadym2 relevé 8, 11, 12, 13, 14"
+ },
+ "n_target_rows": 45,
+ "n_target_rows_pangaea_only": 35,
+ "cell_preview": {
+  "_설명": "v4 조립 전의 참고 값이다. 셀 색인은 계획서 6B.3 의 식, 블록은 0.5° 다. 대상 행은 direct_eos, qc ok, 1990년 이후, 검열·교란 아님, dup_of 없음이다. 셀 값은 셀 안 위치(site_id)별 값의 평균이다",
+  "target_rows": {
+   "n_rows": 45,
+   "n_cells_1km": 5,
+   "n_blocks_0p5deg": 3
+  },
+  "target_rows_pangaea_only": {
+   "n_rows": 35,
+   "n_cells_1km": 4,
+   "n_blocks_0p5deg": 3
+  },
+  "cells": [
+   {
+    "cell_ky_kx": [
+     7521,
+     2869
+    ],
+    "lat": 67.69481,
+    "lon": 68.03775,
+    "events": [
+     "Laborovaya2"
+    ],
+    "n_positions": 10,
+    "n_transects": 5,
+    "n_releves": 5,
+    "n_report_rows": 0,
+    "alt_cm_mean_of_positions": 109.57,
+    "block_0p5deg": 13500136,
+    "v3_f4_chebyshev_deg": 1.1067,
+    "v3_f4_nearest_km": 74.9
+   },
+   {
+    "cell_ky_kx": [
+     7522,
+     2866
+    ],
+    "lat": 67.70646,
+    "lon": 67.99943,
+    "events": [
+     "Laborovaya1"
+    ],
+    "n_positions": 10,
+    "n_transects": 5,
+    "n_releves": 5,
+    "n_report_rows": 0,
+    "alt_cm_mean_of_positions": 80.39,
+    "block_0p5deg": 13500135,
+    "v3_f4_chebyshev_deg": 1.1366,
+    "v3_f4_nearest_km": 74.9
+   },
+   {
+    "cell_ky_kx": [
+     7908,
+     2401
+    ],
+    "lat": 71.17864,
+    "lon": 66.97988,
+    "events": [
+     "Kharasavey1"
+    ],
+    "n_positions": 10,
+    "n_transects": 5,
+    "n_releves": 5,
+    "n_report_rows": 10,
+    "alt_cm_mean_of_positions": 60.83,
+    "block_0p5deg": 14200133,
+    "v3_f4_chebyshev_deg": 1.4619,
+    "v3_f4_nearest_km": 119.1
+   },
+   {
+    "cell_ky_kx": [
+     7910,
+     2395
+    ],
+    "lat": 71.19439,
+    "lon": 66.8891,
+    "events": [
+     "Kharasavey2a"
+    ],
+    "n_positions": 7,
+    "n_transects": 5,
+    "n_releves": 2,
+    "n_report_rows": 0,
+    "alt_cm_mean_of_positions": 74.49,
+    "block_0p5deg": 14200133,
+    "v3_f4_chebyshev_deg": 1.4777,
+    "v3_f4_nearest_km": 122.4
+   },
+   {
+    "cell_ky_kx": [
+     7910,
+     2397
+    ],
+    "lat": 71.19433,
+    "lon": 66.92961,
+    "events": [
+     "Kharasavey2b"
+    ],
+    "n_positions": 8,
+    "n_transects": 5,
+    "n_releves": 3,
+    "n_report_rows": 0,
+    "alt_cm_mean_of_positions": 75.04,
+    "block_0p5deg": 14200133,
+    "v3_f4_chebyshev_deg": 1.4776,
+    "v3_f4_nearest_km": 121.5
+   }
+  ]
+ },
+ "kharasavey1_discrepancy": {
+  "_설명": "842711 의 Kharasavey1 블록(측선 T-46..T-50, N=6, relevé RV-47..49)은 원 보고서 표 20 의 Kharasavey-1 블록(측선 T36–T40, N=11, relevé RV-40..44)과 다르다. 842711 의 표준편차 5개만 보고서와 순서대로 같다. 842711 의 relevé RV-47..49 값은 Kharasavey2b 의 같은 번호 행과 같다. 보고서 표 7(GPS)도 Kharasavey-1 의 측선을 T36–T40 으로 적었다. 842711 의 T-49, T-50 은 N=6 에서 (최대 - 최소) 와 표준편차가 양립하지 않는다",
+  "pangaea_rows_sd_inconsistent": 2,
+  "report_rows_added": 10,
+  "report_values": [
+   {
+    "label": "T36",
+    "n": 11,
+    "max_cm": "80",
+    "min_cm": "53",
+    "avg_cm": "62.8",
+    "sd_cm": "8.75"
+   },
+   {
+    "label": "T37",
+    "n": 11,
+    "max_cm": "73",
+    "min_cm": "52",
+    "avg_cm": "59.5",
+    "sd_cm": "5.47"
+   },
+   {
+    "label": "T38",
+    "n": 11,
+    "max_cm": "64",
+    "min_cm": "52",
+    "avg_cm": "59.3",
+    "sd_cm": "3.77"
+   },
+   {
+    "label": "T39",
+    "n": 11,
+    "max_cm": "67",
+    "min_cm": "55",
+    "avg_cm": "61.8",
+    "sd_cm": "3.87"
+   },
+   {
+    "label": "T40",
+    "n": 11,
+    "max_cm": "70",
+    "min_cm": "56",
+    "avg_cm": "62.9",
+    "sd_cm": "4.53"
+   },
+   {
+    "label": "RV-40",
+    "n": 1,
+    "max_cm": "",
+    "min_cm": "",
+    "avg_cm": "67",
+    "sd_cm": ""
+   },
+   {
+    "label": "RV-41",
+    "n": 1,
+    "max_cm": "",
+    "min_cm": "",
+    "avg_cm": "59",
+    "sd_cm": ""
+   },
+   {
+    "label": "RV-42",
+    "n": 1,
+    "max_cm": "",
+    "min_cm": "",
+    "avg_cm": "65",
+    "sd_cm": ""
+   },
+   {
+    "label": "RV-43",
+    "n": 1,
+    "max_cm": "",
+    "min_cm": "",
+    "avg_cm": "54",
+    "sd_cm": ""
+   },
+   {
+    "label": "RV-44",
+    "n": 1,
+    "max_cm": "",
+    "min_cm": "",
+    "avg_cm": "57",
+    "sd_cm": ""
+   }
+  ],
+  "transcription": "보고서 PDF 49쪽(인쇄 쪽 37)에 들어 있는 원해상도 그림(594 × 56 화소 띠 16개)을 이어 붙여 눈으로 읽었다"
+ },
+ "report_visual_check": {
+  "_설명": "842711 의 나머지 이벤트(Laborovaya1, 2, VaskinyDachi1–3, Kharasavey2a, 2b)는 보고서 표 20 과 눈으로 대조해 N, 최대, 최소, 평균, 표준편차, relevé 값이 같음을 확인했다. 자동 대조가 아니다",
+  "releve_table20_vs_table22_status": {
+   "match": 15,
+   "missing_842691": 6,
+   "differ": 14
+  },
+  "_status_설명": "match 는 같은 값, differ 는 다른 값(NSC/Inter 두 값 포함), missing_842691 은 842691 이 빈 칸 또는 0(결측)인 경우다",
+  "releve_table20_vs_table22_rows": 35,
+  "releve_crosscheck_file": "data/raw/ru_yamal_walker/releve_crosscheck.csv",
+  "note_table22": "보고서 표 22(=842691)의 relevé 융해 깊이는 표 20(=842711)과 여러 relevé 에서 다르다(VaskinyDachi1 25, VaskinyDachi2 30–34, Kharasavey 40–44, 47, 48). 보고서 안의 두 표가 다르다. 842691 은 보고서 표 22 와 두 곳에서 다르다(relevé 17 은 보고서 91, 842691 빈 칸. relevé 20 은 보고서 118, 842691 116). 라벨은 융해 깊이 전용 표인 표 20(842711)의 값을 쓴다"
+ },
+ "releve_id_fixes": {
+  "Nadym2:8": "원표기 '8'. Nadym2 에 '8' 이 두 번 나온다. 보고서 표 22 의 06 행(융해 깊이 40, 미세 기복 30)과 표 7 의 ND RV 06 좌표(65°18.883', 72°51.703')와 같아 06 으로 보았다",
+  "VaskinyDachi1:2B": "원표기 '2B'. 보고서 표 22 의 28 행과 표 7 의 VD RV 28 좌표(70°16.547', 68°53.475')와 같아 28 로 보았다"
+ },
+ "v3_check": {
+  "n_v3_f4_ref_compared": 28,
+  "bbox_compared": "lat 60–75, lon 55–90",
+  "n_calm_pangaea_v4add_sites_compared": 1,
+  "rows_dup_v3": 30,
+  "rows_dup_calm_pangaea_v4add": 4
+ },
+ "sampling_periods_report": {
+  "Nadym": "2007-08-03–10",
+  "Laborovaya": "2007-08-13–21",
+  "Vaskiny Dachi": "2007-08-21–30",
+  "Kharasavey": "2008-08-18–25"
+ },
+ "method_evidence": "보고서 방법 절(인쇄 쪽 15): 'The active layer summer thaw depth was measured at 1-m intervals along each transect using a 2-m long steel probe.' 표 7 은 Laborovaya, Vaskiny Dachi 측선을 50 m, Kharasavey 측선을 10 m 로 적었다",
+ "coordinate_conversion": "변환 없음. 측선 행은 842711 머리말의 이벤트 좌표(소수 6자리, 끝자리 0), relevé 행은 842691 의 relevé 좌표(소수 4자리)를 문자열 그대로 옮겼다. 동경 양수다. 측지계 표기는 원자료에 없다",
+ "units": "융해 깊이는 cm 다. 변환하지 않았다",
+ "missing_value_marks": "PANGAEA 표는 빈 칸이다. 842691 의 0 은 결측으로 본다. 보고서 표 22 는 NA 와 '?' 다",
+ "unverified_items": [
+  "측선의 관측일. 원자료는 relevé 날짜만 적었다. 같은 이벤트 relevé 의 날짜를 썼다(모두 8월이고 보고서의 지점별 조사 기간 안이다)",
+  "측선 관측 간격. 방법 절은 1 m 간격이라 적었으나 50 m 측선의 N 은 11(Laborovaya1 T09 는 31, 일부 측선은 5, 8, 10)이다",
+  "Kharasavey-1 의 보고서 값(10행)의 이용 약관. 보고서에 약관 표기가 없다",
+  "842711 의 Kharasavey1 블록 값(N=6, 평균 73.2–81.7 cm)의 출처. 보고서 표 20 어디에도 같은 값이 없다",
+  "보고서 표 20 과 표 22 의 relevé 값이 다른 이유",
+  "Laborovaya2 T18 의 최솟값 5 cm 와 표준편차 60.4 cm(N=5)의 사유",
+  "842711 의 'RV-49*' 에 붙은 '*' 의 의미",
+  "좌표의 측지계. 원자료에 표기가 없다. GPS 좌표로 보고 WGS84 로 다루었다",
+  "교란 표시. relevé 표의 교란 코드(순록 발자국, 차량 흔적 등)는 스키마의 교란 범주(연소, 수체, 열침식, 시설)가 아니라 disturbed = 0 으로 두고 notes 에 적었다. 측선의 교란 정보는 원자료에 없다"
+ ]
+}

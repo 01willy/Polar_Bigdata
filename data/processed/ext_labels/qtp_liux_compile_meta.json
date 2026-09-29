@@ -1,0 +1,1534 @@
+{
+ "src_id": "qtp_liux_compile",
+ "name": "Liu X. 등 2022, 칭하이 고원 ALT 관측 문헌 집계표(figshare 21444879)",
+ "url": "https://doi.org/10.6084/m9.figshare.21444879.v1",
+ "landing_page": "https://figshare.com/articles/dataset/Active_layer_thickness_observations/21444879",
+ "doi": "10.6084/m9.figshare.21444879.v1",
+ "accessed": "2026-09-29",
+ "figshare": {
+  "article_id": 21444879,
+  "title": "Active layer thickness observations",
+  "version": 1,
+  "published_date": "2022-11-02",
+  "defined_type": "dataset",
+  "file_id": 38063142,
+  "file_md5": "b7eed03faa1d6fc45c78f21016574d2f",
+  "checksum_match": true,
+  "api": "https://api.figshare.com/v2/articles/21444879",
+  "description": "Dataset of active layer thickness (ALT) observations on the Qinghai Plateau.",
+  "linked_paper": "기록에 연결 논문(resource_doi, references)이 없다",
+  "linked_paper_candidates_checked": [
+   {
+    "doi": "10.1186/s13021-022-00203-z",
+    "journal": "Carbon Balance and Management (2022)",
+    "result": "저자 목록이 figshare 기록과 다르다. 연결을 확인하지 못했다"
+   },
+   {
+    "doi": "10.1016/j.geoderma.2023.116488",
+    "journal": "Geoderma 434 (2023)",
+    "result": "저자 목록이 figshare 기록과 다르다. 본문을 읽지 못했다. 연결을 확인하지 못했다"
+   }
+  ]
+ },
+ "files": [
+  {
+   "name": "ds01.xlsx",
+   "size": 31302,
+   "sha256": "899d5b6bad71a0582ecbcbb7571224512110583ca6eac710316f99e23b06c0f7",
+   "md5": "b7eed03faa1d6fc45c78f21016574d2f",
+   "url": "https://ndownloader.figshare.com/files/38063142",
+   "origin": "탐색 단계 사본(data/raw/qtp_alt_open_2026-09-29/figshare21444879/ds01.xlsx)을 복사한 파일이다(sha256 같음)"
+  },
+  {
+   "name": "figshare_article_21444879.json",
+   "size": 3673,
+   "sha256": "162dfa8954d1a2de2bb30a132de0a16eac57ebc0ad022a46e3ef6aa2dd18bbfc",
+   "url": "https://api.figshare.com/v2/articles/21444879"
+  }
+ ],
+ "license": "CC BY 4.0",
+ "license_detail": "figshare 기록의 약관 표기는 CC BY 4.0 이다(https://creativecommons.org/licenses/by/4.0/). 재배포를 허용하므로 점 자료를 저장소에 둘 수 있다. 집계표가 옮겨 실은 원 문헌 값의 개별 약관은 확인하지 못했다",
+ "citation": "Liu, X., Zhou, T., Zhang, Y., Luo, H., Yu, P., Zhang, J., Zeng, J., Xu, Y. (2022). Active layer thickness observations. figshare. Dataset. https://doi.org/10.6084/m9.figshare.21444879.v1",
+ "parser": "scripts/1_data_prep/parse_ext_qtp_liux_compile.py",
+ "parser_git_commit": "6799b74 (HEAD, 파서는 아직 커밋되지 않았다)",
+ "schema_version": "1.0",
+ "sheet": {
+  "file": "ds01.xlsx",
+  "sheet_names": [
+   "ALT_Data"
+  ],
+  "sheet_used": "ALT_Data",
+  "title_row": "Data Set S1. Dataset of active layer thickness (ALT) observations (m) on the Qinghai Plateau. The dataset includes the location of each site, observation period information and data source used in the study. ",
+  "header_row": 2,
+  "header": [
+   "ID",
+   "ID_paper",
+   "Site name",
+   "Site Code",
+   "Latitude(°N)",
+   "Longitude(°E)",
+   "Observation period",
+   "ALT(m)",
+   "Soure"
+  ],
+  "merged_cells": [
+   "A1:XFD1"
+  ],
+  "n_rows_with_values_outside_9_columns": 0,
+  "n_formula_cells": 0
+ },
+ "n_rows_raw": 306,
+ "n_rows_points": 306,
+ "n_sites": 306,
+ "n_unique_locations": 290,
+ "n_by_label_def": {
+  "unknown": 151,
+  "direct_dated": 150,
+  "temp_derived": 5
+ },
+ "n_by_method": {
+  "unknown": 151,
+  "gpr": 150,
+  "borehole_temp": 5
+ },
+ "n_by_eos_basis": {
+  "none": 301,
+  "protocol": 5
+ },
+ "n_by_value_kind": {
+  "(빈 칸)": 301,
+  "multiyear_mean": 5
+ },
+ "n_by_macro": {
+  "Tibet": 306
+ },
+ "n_by_subunit": {
+  "Qilian": 158,
+  "QTEC": 102,
+  "YellowSrc_East": 46
+ },
+ "n_by_orig_source": {
+  "Cao, 2020": 150,
+  "Zhao et al., 2017": 66,
+  "Wu et al., 2012": 24,
+  "Qin et al., 2017": 18,
+  "Mu et al., 2015": 9,
+  "Luo et al., 2012": 9,
+  "Cao et al., 2018": 8,
+  "Zhang et al., 2012": 7,
+  "Wu and Zhang, 2010": 7,
+  "CALM network": 5,
+  "Yue et al., 2013": 2,
+  "Cai et al., 2016": 1
+ },
+ "n_by_qc_flag": {
+  "ok": 305,
+  "coord": 1
+ },
+ "n_by_period_kind": {
+  "range": 220,
+  "list": 1,
+  "single": 85
+ },
+ "n_with_year": 85,
+ "n_by_year": {
+  "2008": 2,
+  "2009": 18,
+  "2010": 16,
+  "2011": 24,
+  "2012": 24,
+  "2014": 1
+ },
+ "n_right_censored": 0,
+ "n_with_dup_of": 13,
+ "year_range": [
+  1995,
+  2017
+ ],
+ "n_year_min_pre1990": 0,
+ "alt_cm": {
+  "n": 306,
+  "min": 50.0,
+  "p25": 180.0,
+  "median": 235.5,
+  "mean": 250.64,
+  "p75": 320.75,
+  "max": 586.0
+ },
+ "alt_cm_by_label_def": {
+  "direct_dated": {
+   "n": 150,
+   "min": 107.0,
+   "p25": 195.25,
+   "median": 261.0,
+   "mean": 272.28,
+   "p75": 339.0,
+   "max": 486.0
+  },
+  "temp_derived": {
+   "n": 5,
+   "min": 101.0,
+   "p25": 138.0,
+   "median": 159.0,
+   "mean": 197.2,
+   "p75": 272.0,
+   "max": 316.0
+  },
+  "unknown": {
+   "n": 151,
+   "min": 50.0,
+   "p25": 154.5,
+   "median": 216.0,
+   "mean": 230.91,
+   "p75": 283.5,
+   "max": 586.0
+  }
+ },
+ "alt_cm_by_subunit": {
+  "QTEC": {
+   "n": 102,
+   "min": 86.0,
+   "p25": 180.0,
+   "median": 248.5,
+   "mean": 253.28,
+   "p75": 308.25,
+   "max": 586.0
+  },
+  "Qilian": {
+   "n": 158,
+   "min": 107.0,
+   "p25": 193.5,
+   "median": 261.0,
+   "mean": 272.82,
+   "p75": 339.75,
+   "max": 488.0
+  },
+  "YellowSrc_East": {
+   "n": 46,
+   "min": 50.0,
+   "p25": 120.0,
+   "median": 160.0,
+   "mean": 168.59,
+   "p75": 207.5,
+   "max": 350.0
+  }
+ },
+ "by_orig_source": [
+  {
+   "orig_source": "Cao, 2020",
+   "n": 150,
+   "method": "gpr",
+   "label_def": "direct_dated",
+   "year_min": 2011,
+   "year_max": 2014,
+   "n_single_year": 0,
+   "n_dup_of": 0,
+   "n_qc_not_ok": 0,
+   "subunits": {
+    "Qilian": 150
+   },
+   "alt_cm": {
+    "n": 150,
+    "min": 107.0,
+    "p25": 195.25,
+    "median": 261.0,
+    "mean": 272.28,
+    "p75": 339.0,
+    "max": 486.0
+   }
+  },
+  {
+   "orig_source": "Zhao et al., 2017",
+   "n": 66,
+   "method": "unknown",
+   "label_def": "unknown",
+   "year_min": 2009,
+   "year_max": 2012,
+   "n_single_year": 66,
+   "n_dup_of": 13,
+   "n_qc_not_ok": 1,
+   "subunits": {
+    "QTEC": 39,
+    "YellowSrc_East": 27
+   },
+   "alt_cm": {
+    "n": 66,
+    "min": 90.0,
+    "p25": 160.0,
+    "median": 230.0,
+    "mean": 234.15,
+    "p75": 287.5,
+    "max": 480.0
+   }
+  },
+  {
+   "orig_source": "Wu et al., 2012",
+   "n": 24,
+   "method": "unknown",
+   "label_def": "unknown",
+   "year_min": 2006,
+   "year_max": 2010,
+   "n_single_year": 0,
+   "n_dup_of": 0,
+   "n_qc_not_ok": 0,
+   "subunits": {
+    "QTEC": 24
+   },
+   "alt_cm": {
+    "n": 24,
+    "min": 92.0,
+    "p25": 239.0,
+    "median": 283.5,
+    "mean": 306.04,
+    "p75": 353.75,
+    "max": 586.0
+   }
+  },
+  {
+   "orig_source": "Qin et al., 2017",
+   "n": 18,
+   "method": "unknown",
+   "label_def": "unknown",
+   "year_min": 2009,
+   "year_max": 2012,
+   "n_single_year": 0,
+   "n_dup_of": 0,
+   "n_qc_not_ok": 0,
+   "subunits": {
+    "YellowSrc_East": 9,
+    "QTEC": 9
+   },
+   "alt_cm": {
+    "n": 18,
+    "min": 86.0,
+    "p25": 120.0,
+    "median": 136.5,
+    "mean": 142.06,
+    "p75": 161.5,
+    "max": 210.0
+   }
+  },
+  {
+   "orig_source": "Luo et al., 2012",
+   "n": 9,
+   "method": "unknown",
+   "label_def": "unknown",
+   "year_min": 2010,
+   "year_max": 2010,
+   "n_single_year": 9,
+   "n_dup_of": 0,
+   "n_qc_not_ok": 0,
+   "subunits": {
+    "YellowSrc_East": 9
+   },
+   "alt_cm": {
+    "n": 9,
+    "min": 50.0,
+    "p25": 50.0,
+    "median": 110.0,
+    "mean": 124.44,
+    "p75": 180.0,
+    "max": 270.0
+   }
+  },
+  {
+   "orig_source": "Mu et al., 2015",
+   "n": 9,
+   "method": "unknown",
+   "label_def": "unknown",
+   "year_min": 2009,
+   "year_max": 2013,
+   "n_single_year": 0,
+   "n_dup_of": 0,
+   "n_qc_not_ok": 0,
+   "subunits": {
+    "QTEC": 9
+   },
+   "alt_cm": {
+    "n": 9,
+    "min": 180.0,
+    "p25": 220.0,
+    "median": 280.0,
+    "mean": 291.11,
+    "p75": 340.0,
+    "max": 490.0
+   }
+  },
+  {
+   "orig_source": "Cao et al., 2018",
+   "n": 8,
+   "method": "unknown",
+   "label_def": "unknown",
+   "year_min": 2011,
+   "year_max": 2017,
+   "n_single_year": 0,
+   "n_dup_of": 0,
+   "n_qc_not_ok": 0,
+   "subunits": {
+    "Qilian": 8
+   },
+   "alt_cm": {
+    "n": 8,
+    "min": 158.0,
+    "p25": 185.25,
+    "median": 277.0,
+    "mean": 283.0,
+    "p75": 352.25,
+    "max": 488.0
+   }
+  },
+  {
+   "orig_source": "Wu and Zhang, 2010",
+   "n": 7,
+   "method": "unknown",
+   "label_def": "unknown",
+   "year_min": 1995,
+   "year_max": 2007,
+   "n_single_year": 0,
+   "n_dup_of": 0,
+   "n_qc_not_ok": 0,
+   "subunits": {
+    "QTEC": 7
+   },
+   "alt_cm": {
+    "n": 7,
+    "min": 132.0,
+    "p25": 144.5,
+    "median": 195.0,
+    "mean": 207.86,
+    "p75": 239.5,
+    "max": 360.0
+   }
+  },
+  {
+   "orig_source": "Zhang et al., 2012",
+   "n": 7,
+   "method": "unknown",
+   "label_def": "unknown",
+   "year_min": 2010,
+   "year_max": 2010,
+   "n_single_year": 7,
+   "n_dup_of": 0,
+   "n_qc_not_ok": 0,
+   "subunits": {
+    "QTEC": 7
+   },
+   "alt_cm": {
+    "n": 7,
+    "min": 185.0,
+    "p25": 199.0,
+    "median": 216.0,
+    "mean": 210.43,
+    "p75": 218.0,
+    "max": 238.0
+   }
+  },
+  {
+   "orig_source": "CALM network",
+   "n": 5,
+   "method": "borehole_temp",
+   "label_def": "temp_derived",
+   "year_min": 1998,
+   "year_max": 2009,
+   "n_single_year": 0,
+   "n_dup_of": 0,
+   "n_qc_not_ok": 0,
+   "subunits": {
+    "QTEC": 4,
+    "YellowSrc_East": 1
+   },
+   "alt_cm": {
+    "n": 5,
+    "min": 101.0,
+    "p25": 138.0,
+    "median": 159.0,
+    "mean": 197.2,
+    "p75": 272.0,
+    "max": 316.0
+   }
+  },
+  {
+   "orig_source": "Yue et al., 2013",
+   "n": 2,
+   "method": "unknown",
+   "label_def": "unknown",
+   "year_min": 2008,
+   "year_max": 2008,
+   "n_single_year": 2,
+   "n_dup_of": 0,
+   "n_qc_not_ok": 0,
+   "subunits": {
+    "QTEC": 2
+   },
+   "alt_cm": {
+    "n": 2,
+    "min": 150.0,
+    "p25": 175.0,
+    "median": 200.0,
+    "mean": 200.0,
+    "p75": 225.0,
+    "max": 250.0
+   }
+  },
+  {
+   "orig_source": "Cai et al., 2016",
+   "n": 1,
+   "method": "unknown",
+   "label_def": "unknown",
+   "year_min": 2014,
+   "year_max": 2014,
+   "n_single_year": 1,
+   "n_dup_of": 0,
+   "n_qc_not_ok": 0,
+   "subunits": {
+    "QTEC": 1
+   },
+   "alt_cm": {
+    "n": 1,
+    "min": 180.0,
+    "p25": 180.0,
+    "median": 180.0,
+    "mean": 180.0,
+    "p75": 180.0,
+    "max": 180.0
+   }
+  }
+ ],
+ "lat_range": [
+  32.81988,
+  38.95897
+ ],
+ "lon_range": [
+  91.7525,
+  99.56
+ ],
+ "n_excluded_by_reason": {},
+ "exclusion_reason_desc": {
+  "coord_missing": "좌표가 없거나 범위 밖이다",
+  "alt_missing": "ALT 값이 없다",
+  "alt_unparsed": "ALT 값을 숫자로 읽지 못했다"
+ },
+ "label_rule": {
+  "by_source": {
+   "Cao, 2020": {
+    "method": "gpr",
+    "label_def": "direct_dated",
+    "eos_basis": "none",
+    "value_kind": ""
+   },
+   "CALM network": {
+    "method": "borehole_temp",
+    "label_def": "temp_derived",
+    "eos_basis": "protocol",
+    "value_kind": "multiyear_mean"
+   },
+   "그 밖의 출처": {
+    "method": "unknown",
+    "label_def": "unknown",
+    "eos_basis": "none",
+    "value_kind": ""
+   }
+  },
+  "cao_eos_confirmed": false,
+  "note": "치롄 GPR 의 조사 시기가 계절 말로 확인되면 direct_eos(dataset_statement)로 올린다. 새 지역 실행의 제출 전에만 바꿀 수 있다"
+ },
+ "source_count_check": {
+  "expected": {
+   "Cao, 2020": 150,
+   "Zhao et al., 2017": 66,
+   "Wu et al., 2012": 24,
+   "Qin et al., 2017": 18,
+   "Mu et al., 2015": 9,
+   "Luo et al., 2012": 9,
+   "Cao et al., 2018": 8,
+   "Zhang et al., 2012": 7,
+   "Wu and Zhang, 2010": 7,
+   "CALM network": 5,
+   "Yue et al., 2013": 2,
+   "Cai et al., 2016": 1
+  },
+  "found": {
+   "Cao, 2020": 150,
+   "Qin et al., 2017": 18,
+   "Cao et al., 2018": 8,
+   "CALM network": 5,
+   "Wu and Zhang, 2010": 7,
+   "Wu et al., 2012": 24,
+   "Luo et al., 2012": 9,
+   "Zhang et al., 2012": 7,
+   "Yue et al., 2013": 2,
+   "Cai et al., 2016": 1,
+   "Zhao et al., 2017": 66,
+   "Mu et al., 2015": 9
+  },
+  "unexpected_sources": {},
+  "match": true
+ },
+ "duplicates": {
+  "rule": "qtp_du_gpr 의 점과 체비쇼프 0.01° 이내이고 값의 차이가 0.5 cm 미만이면 dup_of 에 적는다. 후보가 여럿이면 dup_of 가 빈 Du 점, 가까운 점의 순서로 고른다",
+  "reference_file": "data/processed/ext_labels/qtp_du_gpr_points.csv",
+  "reference_sha256": "23f291a3236d779bdb4dcaa2c7b77c79c9a73806dbfc0f5ce7c8a854ac64a5e8",
+  "reference_rows_used": 222,
+  "same_value_within_0p01deg": [
+   {
+    "site_id": "S274",
+    "site_name": "BQ01",
+    "orig_source": "Zhao et al., 2017",
+    "lat": 35.18,
+    "lon": 93.95,
+    "period": "2011",
+    "alt_cm": 210.0,
+    "du_site_id": "R01",
+    "du_year": "2011",
+    "du_method": "gpr",
+    "du_lat": 35.179075,
+    "du_lon": 93.95211,
+    "du_alt_cm": 210.0,
+    "chebyshev_deg": 0.00211,
+    "year_in_period": true,
+    "other_candidates": []
+   },
+   {
+    "site_id": "S275",
+    "site_name": "BQ02",
+    "orig_source": "Zhao et al., 2017",
+    "lat": 35.17,
+    "lon": 93.95,
+    "period": "2011",
+    "alt_cm": 280.0,
+    "du_site_id": "R02",
+    "du_year": "2011",
+    "du_method": "gpr",
+    "du_lat": 35.17426666667,
+    "du_lon": 93.94713666667,
+    "du_alt_cm": 280.0,
+    "chebyshev_deg": 0.00427,
+    "year_in_period": true,
+    "other_candidates": []
+   },
+   {
+    "site_id": "S276",
+    "site_name": "BQ03",
+    "orig_source": "Zhao et al., 2017",
+    "lat": 35.45,
+    "lon": 93.91,
+    "period": "2011",
+    "alt_cm": 330.0,
+    "du_site_id": "R03",
+    "du_year": "2011",
+    "du_method": "gpr",
+    "du_lat": 35.447557,
+    "du_lon": 93.90517,
+    "du_alt_cm": 330.0,
+    "chebyshev_deg": 0.00483,
+    "year_in_period": true,
+    "other_candidates": []
+   },
+   {
+    "site_id": "S277",
+    "site_name": "BQ04",
+    "orig_source": "Zhao et al., 2017",
+    "lat": 35.36,
+    "lon": 93.9,
+    "period": "2011",
+    "alt_cm": 340.0,
+    "du_site_id": "R04",
+    "du_year": "2011",
+    "du_method": "gpr",
+    "du_lat": 35.362997,
+    "du_lon": 93.899048,
+    "du_alt_cm": 340.0,
+    "chebyshev_deg": 0.003,
+    "year_in_period": true,
+    "other_candidates": []
+   },
+   {
+    "site_id": "S278",
+    "site_name": "BQ05",
+    "orig_source": "Zhao et al., 2017",
+    "lat": 35.3,
+    "lon": 93.89,
+    "period": "2011",
+    "alt_cm": 420.0,
+    "du_site_id": "R05",
+    "du_year": "2011",
+    "du_method": "gpr",
+    "du_lat": 35.298513,
+    "du_lon": 93.892492,
+    "du_alt_cm": 420.0,
+    "chebyshev_deg": 0.00249,
+    "year_in_period": true,
+    "other_candidates": []
+   },
+   {
+    "site_id": "S279",
+    "site_name": "BQ06",
+    "orig_source": "Zhao et al., 2017",
+    "lat": 35.24,
+    "lon": 93.91,
+    "period": "2011",
+    "alt_cm": 290.0,
+    "du_site_id": "R06",
+    "du_year": "2011",
+    "du_method": "gpr",
+    "du_lat": 35.237795,
+    "du_lon": 93.907285,
+    "du_alt_cm": 290.0,
+    "chebyshev_deg": 0.00271,
+    "year_in_period": true,
+    "other_candidates": []
+   },
+   {
+    "site_id": "S281",
+    "site_name": "BQ08",
+    "orig_source": "Zhao et al., 2017",
+    "lat": 35.08,
+    "lon": 94.03,
+    "period": "2011",
+    "alt_cm": 280.0,
+    "du_site_id": "R08",
+    "du_year": "2011",
+    "du_method": "gpr",
+    "du_lat": 35.083597,
+    "du_lon": 94.025353,
+    "du_alt_cm": 280.0,
+    "chebyshev_deg": 0.00465,
+    "year_in_period": true,
+    "other_candidates": []
+   },
+   {
+    "site_id": "S282",
+    "site_name": "BQ09",
+    "orig_source": "Zhao et al., 2017",
+    "lat": 35.07,
+    "lon": 94.18,
+    "period": "2011",
+    "alt_cm": 260.0,
+    "du_site_id": "R09",
+    "du_year": "2011",
+    "du_method": "gpr",
+    "du_lat": 35.071605,
+    "du_lon": 94.17931,
+    "du_alt_cm": 260.0,
+    "chebyshev_deg": 0.0016,
+    "year_in_period": true,
+    "other_candidates": []
+   },
+   {
+    "site_id": "S284",
+    "site_name": "BQ11",
+    "orig_source": "Zhao et al., 2017",
+    "lat": 35.01,
+    "lon": 94.43,
+    "period": "2011",
+    "alt_cm": 210.0,
+    "du_site_id": "R11",
+    "du_year": "2011",
+    "du_method": "gpr",
+    "du_lat": 35.014562,
+    "du_lon": 94.428562,
+    "du_alt_cm": 210.0,
+    "chebyshev_deg": 0.00456,
+    "year_in_period": true,
+    "other_candidates": []
+   },
+   {
+    "site_id": "S286",
+    "site_name": "BQ13",
+    "orig_source": "Zhao et al., 2017",
+    "lat": 34.98,
+    "lon": 94.58,
+    "period": "2011",
+    "alt_cm": 320.0,
+    "du_site_id": "R13",
+    "du_year": "2011",
+    "du_method": "gpr",
+    "du_lat": 34.98233,
+    "du_lon": 94.576535,
+    "du_alt_cm": 320.0,
+    "chebyshev_deg": 0.00346,
+    "year_in_period": true,
+    "other_candidates": []
+   },
+   {
+    "site_id": "S287",
+    "site_name": "BQ14",
+    "orig_source": "Zhao et al., 2017",
+    "lat": 34.97,
+    "lon": 94.6,
+    "period": "2011",
+    "alt_cm": 250.0,
+    "du_site_id": "R14",
+    "du_year": "2011",
+    "du_method": "gpr",
+    "du_lat": 34.967485,
+    "du_lon": 94.60342,
+    "du_alt_cm": 250.0,
+    "chebyshev_deg": 0.00342,
+    "year_in_period": true,
+    "other_candidates": []
+   },
+   {
+    "site_id": "S288",
+    "site_name": "BQ15",
+    "orig_source": "Zhao et al., 2017",
+    "lat": 34.9,
+    "lon": 94.79,
+    "period": "2011",
+    "alt_cm": 220.0,
+    "du_site_id": "R15",
+    "du_year": "2011",
+    "du_method": "gpr",
+    "du_lat": 34.902193,
+    "du_lon": 94.789492,
+    "du_alt_cm": 220.0,
+    "chebyshev_deg": 0.00219,
+    "year_in_period": true,
+    "other_candidates": [
+     "R16(2011)"
+    ]
+   },
+   {
+    "site_id": "S295",
+    "site_name": "BQ22",
+    "orig_source": "Zhao et al., 2017",
+    "lat": 34.46,
+    "lon": 95.6,
+    "period": "2011",
+    "alt_cm": 180.0,
+    "du_site_id": "R26",
+    "du_year": "2011",
+    "du_method": "gpr",
+    "du_lat": 34.45856,
+    "du_lon": 95.60441,
+    "du_alt_cm": 180.0,
+    "chebyshev_deg": 0.00441,
+    "year_in_period": true,
+    "other_candidates": []
+   }
+  ],
+  "n_same_value": 13,
+  "n_records_with_du_point_within_0p01deg_different_value": 48,
+  "different_value_by_source": {
+   "Cao, 2020": 7,
+   "Qin et al., 2017": 7,
+   "Cao et al., 2018": 1,
+   "CALM network": 2,
+   "Wu and Zhang, 2010": 1,
+   "Wu et al., 2012": 2,
+   "Zhang et al., 2012": 1,
+   "Yue et al., 2013": 2,
+   "Zhao et al., 2017": 25
+  },
+  "same_coordinate_groups_within_table": [
+   {
+    "lat": 38.903,
+    "lon": 98.963,
+    "site_ids": [
+     "S123",
+     "S174"
+    ],
+    "site_names": [
+     "QS171",
+     "PT7"
+    ],
+    "orig_sources": [
+     "Cao et al., 2018",
+     "Cao, 2020"
+    ],
+    "alt_cm": [
+     241.0,
+     316.0
+    ],
+    "same_value": false
+   },
+   {
+    "lat": 38.9548,
+    "lon": 98.9627,
+    "site_ids": [
+     "S147",
+     "S173"
+    ],
+    "site_names": [
+     "QS195",
+     "PT6"
+    ],
+    "orig_sources": [
+     "Cao et al., 2018",
+     "Cao, 2020"
+    ],
+    "alt_cm": [
+     216.0,
+     238.0
+    ],
+    "same_value": false
+   },
+   {
+    "lat": 35.48,
+    "lon": 99.51,
+    "site_ids": [
+     "S241",
+     "S242"
+    ],
+    "site_names": [
+     "WQ10",
+     "WQ11"
+    ],
+    "orig_sources": [
+     "Zhao et al., 2017"
+    ],
+    "alt_cm": [
+     160.0,
+     160.0
+    ],
+    "same_value": true
+   },
+   {
+    "lat": 35.73,
+    "lon": 94.03,
+    "site_ids": [
+     "S251",
+     "S252"
+    ],
+    "site_names": [
+     "XD02",
+     "XD03"
+    ],
+    "orig_sources": [
+     "Zhao et al., 2017"
+    ],
+    "alt_cm": [
+     300.0,
+     140.0
+    ],
+    "same_value": false
+   },
+   {
+    "lat": 35.72,
+    "lon": 94.06,
+    "site_ids": [
+     "S254",
+     "S255"
+    ],
+    "site_names": [
+     "XD05",
+     "XD06"
+    ],
+    "orig_sources": [
+     "Zhao et al., 2017"
+    ],
+    "alt_cm": [
+     330.0,
+     200.0
+    ],
+    "same_value": false
+   },
+   {
+    "lat": 35.71,
+    "lon": 94.09,
+    "site_ids": [
+     "S256",
+     "S257"
+    ],
+    "site_names": [
+     "XD07",
+     "XD08"
+    ],
+    "orig_sources": [
+     "Zhao et al., 2017"
+    ],
+    "alt_cm": [
+     170.0,
+     120.0
+    ],
+    "same_value": false
+   },
+   {
+    "lat": 35.71,
+    "lon": 94.12,
+    "site_ids": [
+     "S258",
+     "S259",
+     "S260"
+    ],
+    "site_names": [
+     "XD09",
+     "XD10",
+     "XD11"
+    ],
+    "orig_sources": [
+     "Zhao et al., 2017"
+    ],
+    "alt_cm": [
+     150.0,
+     230.0,
+     230.0
+    ],
+    "same_value": false
+   },
+   {
+    "lat": 35.72,
+    "lon": 94.16,
+    "site_ids": [
+     "S263",
+     "S264",
+     "S265"
+    ],
+    "site_names": [
+     "XD14",
+     "XD15",
+     "XD16"
+    ],
+    "orig_sources": [
+     "Zhao et al., 2017"
+    ],
+    "alt_cm": [
+     270.0,
+     250.0,
+     260.0
+    ],
+    "same_value": false
+   },
+   {
+    "lat": 35.71,
+    "lon": 94.2,
+    "site_ids": [
+     "S266",
+     "S267"
+    ],
+    "site_names": [
+     "XD17",
+     "XD18"
+    ],
+    "orig_sources": [
+     "Zhao et al., 2017"
+    ],
+    "alt_cm": [
+     360.0,
+     130.0
+    ],
+    "same_value": false
+   },
+   {
+    "lat": 35.5,
+    "lon": 91.96,
+    "site_ids": [
+     "S269",
+     "S270",
+     "S271"
+    ],
+    "site_names": [
+     "ZhN01",
+     "ZhN02",
+     "ZhN03"
+    ],
+    "orig_sources": [
+     "Zhao et al., 2017"
+    ],
+    "alt_cm": [
+     400.0,
+     270.0,
+     270.0
+    ],
+    "same_value": false
+   },
+   {
+    "lat": 34.68,
+    "lon": 95.19,
+    "site_ids": [
+     "S290",
+     "S291",
+     "S292"
+    ],
+    "site_names": [
+     "BQ17",
+     "BQ18",
+     "BQ19"
+    ],
+    "orig_sources": [
+     "Zhao et al., 2017"
+    ],
+    "alt_cm": [
+     270.0,
+     220.0,
+     342.0
+    ],
+    "same_value": false
+   },
+   {
+    "lat": 35.639,
+    "lon": 94.065,
+    "site_ids": [
+     "S300",
+     "S301"
+    ],
+    "site_names": [
+     "KL300",
+     "HLH–1"
+    ],
+    "orig_sources": [
+     "Mu et al., 2015"
+    ],
+    "alt_cm": [
+     360.0,
+     320.0
+    ],
+    "same_value": false
+   }
+  ],
+  "n_same_coordinate_groups": 12,
+  "n_records_in_same_coordinate_groups": 28,
+  "repeated_site_names": {
+   "KL1": [
+    "S205",
+    "S222"
+   ],
+   "KM2": [
+    "S183",
+    "S189"
+   ],
+   "XDT1": [
+    "S166",
+    "S229"
+   ],
+   "XDT2": [
+    "S162",
+    "S230"
+   ]
+  },
+  "handling": "기록은 지우지 않았다. Du 점과 겹치는 기록은 dup_of 에, 표 안의 같은 좌표 기록과 v3 셀 근접은 notes 에 적었다"
+ },
+ "v3_proximity": {
+  "rule": "v3 의 행과 체비쇼프 0.01° 이내인 기록",
+  "rows": [
+   {
+    "site_id": "S153",
+    "site_name": "KKXL",
+    "orig_source": "Qin et al., 2017",
+    "v3_loc_id": 17430,
+    "v3_region": "CALM_QTP_China",
+    "v3_source_id": "F4_calm_temp",
+    "chebyshev_deg": 3e-05
+   },
+   {
+    "site_id": "S177",
+    "site_name": "CN2",
+    "orig_source": "CALM network",
+    "v3_loc_id": 17427,
+    "v3_region": "CALM_QTP_China",
+    "v3_source_id": "F4_calm_temp",
+    "chebyshev_deg": 3e-05
+   },
+   {
+    "site_id": "S178",
+    "site_name": "CN3",
+    "orig_source": "CALM network",
+    "v3_loc_id": 17429,
+    "v3_region": "CALM_QTP_China",
+    "v3_source_id": "F4_calm_temp",
+    "chebyshev_deg": 3e-05
+   },
+   {
+    "site_id": "S179",
+    "site_name": "CN4",
+    "orig_source": "CALM network",
+    "v3_loc_id": 17430,
+    "v3_region": "CALM_QTP_China",
+    "v3_source_id": "F4_calm_temp",
+    "chebyshev_deg": 3e-05
+   },
+   {
+    "site_id": "S180",
+    "site_name": "CN5",
+    "orig_source": "CALM network",
+    "v3_loc_id": 17428,
+    "v3_region": "CALM_QTP_China",
+    "v3_source_id": "F4_calm_temp",
+    "chebyshev_deg": 3e-05
+   },
+   {
+    "site_id": "S181",
+    "site_name": "CN7",
+    "orig_source": "CALM network",
+    "v3_loc_id": 17431,
+    "v3_region": "CALM_QTP_China",
+    "v3_source_id": "F4_calm_temp",
+    "chebyshev_deg": 3e-05
+   },
+   {
+    "site_id": "S183",
+    "site_name": "KM2",
+    "orig_source": "Wu and Zhang, 2010",
+    "v3_loc_id": 17431,
+    "v3_region": "CALM_QTP_China",
+    "v3_source_id": "F4_calm_temp",
+    "chebyshev_deg": 0.00358
+   },
+   {
+    "site_id": "S186",
+    "site_name": "WD1",
+    "orig_source": "Wu and Zhang, 2010",
+    "v3_loc_id": 17389,
+    "v3_region": "QTP_CN",
+    "v3_source_id": "F4_direct",
+    "chebyshev_deg": 0.01
+   },
+   {
+    "site_id": "S223",
+    "site_name": "KL2",
+    "orig_source": "Zhang et al., 2012",
+    "v3_loc_id": 17431,
+    "v3_region": "CALM_QTP_China",
+    "v3_source_id": "F4_calm_temp",
+    "chebyshev_deg": 0.0033
+   },
+   {
+    "site_id": "S226",
+    "site_name": "WDL1",
+    "orig_source": "Zhang et al., 2012",
+    "v3_loc_id": 17389,
+    "v3_region": "QTP_CN",
+    "v3_source_id": "F4_direct",
+    "chebyshev_deg": 0.01
+   }
+  ],
+  "n_records": 10
+ },
+ "calm_crosscheck": {
+  "reference": "data/raw/calm/PANGAEA_972777_CALM_ALT_NH.tab",
+  "method": "집계표의 관측 기간 안에 있는 CALM 연 값('>' 표기 연도 제외)의 평균과 집계표 값을 견준다",
+  "rows": [
+   {
+    "site_id": "S177",
+    "site_name": "CN2",
+    "event": "CALM_CN2",
+    "period": "1998–2009",
+    "table_alt_cm": 159.0,
+    "calm_mean_uncensored_cm": 157.17,
+    "n_years_uncensored": 12,
+    "n_years_censored": 0,
+    "calm_mean_with_censored_lower_bounds_cm": 157.17,
+    "diff_table_minus_calm_cm": 1.83
+   },
+   {
+    "site_id": "S178",
+    "site_name": "CN3",
+    "event": "CALM_CN3",
+    "period": "1998–2008",
+    "table_alt_cm": 272.0,
+    "calm_mean_uncensored_cm": 268.67,
+    "n_years_uncensored": 6,
+    "n_years_censored": 5,
+    "calm_mean_with_censored_lower_bounds_cm": 266.18,
+    "diff_table_minus_calm_cm": 3.33
+   },
+   {
+    "site_id": "S179",
+    "site_name": "CN4",
+    "event": "CALM_CN4",
+    "period": "2000–2009",
+    "table_alt_cm": 316.0,
+    "calm_mean_uncensored_cm": 316.25,
+    "n_years_uncensored": 4,
+    "n_years_censored": 6,
+    "calm_mean_with_censored_lower_bounds_cm": 282.5,
+    "diff_table_minus_calm_cm": -0.25
+   },
+   {
+    "site_id": "S180",
+    "site_name": "CN5",
+    "event": "CALM_CN5",
+    "period": "2000–2009",
+    "table_alt_cm": 101.0,
+    "calm_mean_uncensored_cm": 102.88,
+    "n_years_uncensored": 8,
+    "n_years_censored": 1,
+    "calm_mean_with_censored_lower_bounds_cm": 104.78,
+    "diff_table_minus_calm_cm": -1.88
+   },
+   {
+    "site_id": "S181",
+    "site_name": "CN7",
+    "event": "CALM_CN7",
+    "period": "2003–2008",
+    "table_alt_cm": 138.0,
+    "calm_mean_uncensored_cm": 138.0,
+    "n_years_uncensored": 6,
+    "n_years_censored": 0,
+    "calm_mean_with_censored_lower_bounds_cm": 138.0,
+    "diff_table_minus_calm_cm": 0.0
+   }
+  ]
+ },
+ "cao2020_identification": {
+  "n": 150,
+  "mean_m": 2.723,
+  "sd_m": 0.882,
+  "min_m": 1.07,
+  "max_m": 4.86,
+  "abstract_yeniugou": "mean 2.72 ± 0.88 m, range 1.07 m to 4.86 m",
+  "abstract_eboling": "mean 1.32 ± 0.29 m, range 0.81 to 2.1 m",
+  "abstract_source": "Cao 등 2017, JGR Earth Surface 122, 574–591, doi:10.1002/2016JF004018 (Crossref 의 초록, 2026-09-29 조회)",
+  "site_name_range": "QS049–QS198",
+  "lat_range": [
+   38.62826,
+   38.95897
+  ],
+  "lon_range": [
+   98.74536,
+   99.068
+  ]
+ },
+ "coordinate_conversion": "변환하지 않았다. 원자료가 십진 도(Latitude(°N), Longitude(°E) 열)다. 측지계 표기는 원자료에 없다(WGS84 로 가정). 북위, 동경이므로 부호는 양수다. 값은 float 의 최단 표현으로 적었다(반올림하지 않았다). 소수 8자리 값은 원 문헌의 도분초를 집계표 작성자가 환산한 것으로 보인다",
+ "coord_prec_rule": "d 는 위도와 경도의 소수 자릿수 가운데 큰 값이다. d 가 5 이하이면 10^-d. d 가 6 이상이면 두 좌표가 모두 분의 정수배일 때 0.0167, 초의 정수배일 때 0.00028, 그 밖에는 0.00001 이다. 측위 정확도는 확인하지 못했다",
+ "n_by_coord_prec_kind": {
+  "decimal_5": 154,
+  "decimal_4": 41,
+  "decimal_3": 8,
+  "dms_second": 19,
+  "decimal_2": 76,
+  "dms_minute": 6,
+  "decimal_6plus": 2
+ },
+ "subunit_rule": [
+  {
+   "subunit": "Qilian",
+   "label": "치롄",
+   "box": {
+    "lat_min": 37.0,
+    "lat_max": 40.0,
+    "lon_min": 96.0,
+    "lon_max": 103.0,
+    "lon_max_incl": true
+   }
+  },
+  {
+   "subunit": "YellowSrc_East",
+   "label": "황하원·동부",
+   "box": {
+    "lat_min": 33.5,
+    "lat_max": 36.5,
+    "lon_min": 95.0,
+    "lon_max": 101.0,
+    "lon_max_incl": true
+   }
+  },
+  {
+   "subunit": "QTEC",
+   "label": "회랑",
+   "box": {
+    "lat_min": 31.0,
+    "lat_max": 36.2,
+    "lon_min": 90.0,
+    "lon_max": 95.0,
+    "lon_max_incl": false
+   }
+  },
+  {
+   "subunit": "West_QTP",
+   "label": "서부",
+   "box": {
+    "lat_min": 30.0,
+    "lat_max": 38.0,
+    "lon_min": 77.0,
+    "lon_max": 90.0,
+    "lon_max_incl": false
+   }
+  },
+  {
+   "subunit": "QTP_other",
+   "label": "그 밖",
+   "box": "위 네 상자 밖의 Tibet 범위"
+  }
+ ],
+ "macro_rule": {
+  "macro": "Tibet",
+  "box": {
+   "lat_min": 26.0,
+   "lat_max": 40.0,
+   "lon_min": 73.0,
+   "lon_max": 105.0
+  }
+ },
+ "unit_conversion": "alt_cm = ALT(m) × 100 (십진 연산). 표 제목에 단위가 m 로 적혀 있다",
+ "missing_value_code": "빈 셀(None). 숫자 결측 부호(-999 등)는 없다. 9개 열에 빈 셀이 없다",
+ "right_censor_code": "'>' 표기는 원자료에 없다(ALT 열은 모두 숫자다)",
+ "disturbed_convention": "disturbed = 0 은 원자료에 교란 표기가 없다는 뜻이다",
+ "eos_evidence": [
+  "점별 관측 날짜와 월이 표에 없다",
+  "치롄 GPR(Cao, 2020)의 조사 월을 확인하지 못했다. Cao 등 2017 의 본문은 이 서버에서 403 이고 초록에는 조사 시기가 없다. TPDC 자료 설명 쪽은 스크립트 렌더링 방식이라 본문을 읽지 못했다"
+ ],
+ "preliminary_cell_estimate": {
+  "rule": "6B.3 의 약 1 km 셀(ky = floor(lat/0.009), kx = floor(lon·cos φ/0.009)). 위치는 site_id 단위. qc_flag 가 ok 이고 dup_of 가 빈 행만 썼다",
+  "status": "예비 추정이다. 확정 값은 v4 조립 단계에서 정한다. label_def 가 direct_eos 가 아닌 행은 대상 셀이 아니다(6B.4)",
+  "subsets": [
+   {
+    "subset": "orig_source = 'Cao, 2020' (치롄 GPR)",
+    "n_rows_used": 150,
+    "n_cells": 66,
+    "n_blocks": 2,
+    "n_cells_dup_v3_F4_direct": 0,
+    "n_cells_near_v3_other_source": 0,
+    "n_new_cells": 66,
+    "n_new_blocks": 2,
+    "n_new_cells_sharing_cell_with_qtp_du_gpr": 1,
+    "n_new_cells_not_in_qtp_du_gpr": 65,
+    "n_new_blocks_not_in_qtp_du_gpr": 2,
+    "new_cells_by_subunit": {
+     "Qilian": 66
+    },
+    "new_blocks_by_subunit": {
+     "Qilian": 2
+    },
+    "cell_alt_cm": {
+     "n": 66,
+     "min": 140.0,
+     "p25": 198.5,
+     "median": 258.33333333333337,
+     "mean": 272.22,
+     "p75": 331.0,
+     "max": 486.0
+    }
+   },
+   {
+    "subset": "label_def = unknown",
+    "n_rows_used": 137,
+    "n_cells": 110,
+    "n_blocks": 28,
+    "n_cells_dup_v3_F4_direct": 1,
+    "n_cells_near_v3_other_source": 2,
+    "n_new_cells": 109,
+    "n_new_blocks": 28,
+    "n_new_cells_sharing_cell_with_qtp_du_gpr": 17,
+    "n_new_cells_not_in_qtp_du_gpr": 92,
+    "n_new_blocks_not_in_qtp_du_gpr": 26,
+    "new_cells_by_subunit": {
+     "QTEC": 66,
+     "YellowSrc_East": 35,
+     "Qilian": 8
+    },
+    "new_blocks_by_subunit": {
+     "QTEC": 16,
+     "Qilian": 2,
+     "YellowSrc_East": 10
+    },
+    "cell_alt_cm": {
+     "n": 109,
+     "min": 50.0,
+     "p25": 154.0,
+     "median": 210.0,
+     "mean": 229.36,
+     "p75": 283.0,
+     "max": 586.0
+    }
+   },
+   {
+    "subset": "label_def = temp_derived",
+    "n_rows_used": 5,
+    "n_cells": 5,
+    "n_blocks": 5,
+    "n_cells_dup_v3_F4_direct": 0,
+    "n_cells_near_v3_other_source": 5,
+    "n_new_cells": 5,
+    "n_new_blocks": 5,
+    "n_new_cells_sharing_cell_with_qtp_du_gpr": 0,
+    "n_new_cells_not_in_qtp_du_gpr": 5,
+    "n_new_blocks_not_in_qtp_du_gpr": 5,
+    "new_cells_by_subunit": {
+     "QTEC": 4,
+     "YellowSrc_East": 1
+    },
+    "new_blocks_by_subunit": {
+     "QTEC": 4,
+     "YellowSrc_East": 1
+    },
+    "cell_alt_cm": {
+     "n": 5,
+     "min": 101.0,
+     "p25": 138.0,
+     "median": 159.0,
+     "mean": 197.2,
+     "p75": 272.0,
+     "max": 316.0
+    }
+   },
+   {
+    "subset": "표 전체",
+    "n_rows_used": 292,
+    "n_cells": 173,
+    "n_blocks": 28,
+    "n_cells_dup_v3_F4_direct": 1,
+    "n_cells_near_v3_other_source": 5,
+    "n_new_cells": 172,
+    "n_new_blocks": 28,
+    "n_new_cells_sharing_cell_with_qtp_du_gpr": 17,
+    "n_new_cells_not_in_qtp_du_gpr": 155,
+    "n_new_blocks_not_in_qtp_du_gpr": 26,
+    "new_cells_by_subunit": {
+     "QTEC": 68,
+     "Qilian": 68,
+     "YellowSrc_East": 36
+    },
+    "new_blocks_by_subunit": {
+     "QTEC": 16,
+     "Qilian": 2,
+     "YellowSrc_East": 10
+    },
+    "cell_alt_cm": {
+     "n": 172,
+     "min": 50.0,
+     "p25": 170.0,
+     "median": 224.25,
+     "mean": 242.27,
+     "p75": 310.8333333333333,
+     "max": 586.0
+    }
+   }
+  ],
+  "exploration_rule_check": [
+   {
+    "subset": "orig_source = 'Cao, 2020'",
+    "n_rows": 150,
+    "n_cells_0p01deg": 63,
+    "n_dup_v3": 0,
+    "n_new_cells": 63,
+    "n_new_blocks": 2
+   },
+   {
+    "subset": "표 전체",
+    "n_rows": 306,
+    "n_cells_0p01deg": 178,
+    "n_dup_v3": 6,
+    "n_new_cells": 172,
+    "n_new_blocks": 29
+   }
+  ],
+  "exploration_estimate": "치롄 GPR 새 셀 63개(블록 2개), 표 전체 새 셀 172개(블록 29개). 탐색 단계 값이고 격자 정의가 다르다(0.01° 반올림 격자)",
+  "v3_rows_in_tibet_box": [
+   {
+    "region": "CALM_QTP_China",
+    "source_id": "F4_calm_temp",
+    "n": 5
+   },
+   {
+    "region": "QTP_CN",
+    "source_id": "F4_direct",
+    "n": 1
+   }
+  ]
+ },
+ "unverified_items": [
+  "치롄 GPR(출처 표기 'Cao, 2020', 150기록)의 조사 월과 조사 연도. 표에는 기간 2011–2014 만 있다",
+  "출처 표기 'Cao, 2020' 이 가리키는 문헌. TPDC 자료(doi:10.11888/Geocry.tpdc.270324)로 보이나 집계표에 참고문헌 목록이 없다",
+  "연결 논문. figshare 기록에 논문 DOI 가 없다. 표 제목의 'Data Set S1' 은 논문 보충 자료임을 뜻한다",
+  "CALM 과 치롄 GPR 을 뺀 10개 출처(151기록)의 측정 방법(시추공 지온, 탐침, 탐갱, GPR 가운데 어느 것인지)",
+  "관측 기간이 여러 해인 기록의 값이 평균인지, 최댓값인지, 단일 조사값인지",
+  "관측 기간이 한 해인 기록의 조사 월",
+  "S237(WQ06)의 위도 34.42 가 오기인지 여부",
+  "표 안에서 좌표가 같은 기록(소수 2자리 좌표의 Zhao et al., 2017 기록 등)이 서로 다른 지점인지 여부",
+  "Zhao et al., 2017 의 66개 기록 가운데 Du 점과 값이 같은 13개(BQ 계열, 2011년)를 뺀 53개 기록이 GPR 조사값인지 여부. 겹치는 Du 점은 모두 GPR 이다",
+  "측지계(WGS84 로 가정)",
+  "교란 지점 여부. 원자료에 표기가 없어 disturbed 는 0 으로 두었다",
+  "행마다의 원관측 수. n_obs 는 1 로 두었다"
+ ]
+}

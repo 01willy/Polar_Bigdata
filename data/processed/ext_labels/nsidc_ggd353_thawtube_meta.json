@@ -1,0 +1,2220 @@
+{
+ "src_id": "nsidc_ggd353_thawtube",
+ "name": "NSIDC GGD353 캐나다 매켄지 계곡 융해관 관측망(Active Layer Monitoring, Arctic and Subarctic Canada, Version 6)",
+ "schema_version": "1.0",
+ "url": "https://nsidc.org/data/ggd353/versions/6",
+ "doi": "10.7265/7m84-k262",
+ "download_dir": "ftp://sidads.colorado.edu/pub/DATASETS/fgdc/ggd353_activlayer_canada/",
+ "accessed": "2026-09-29",
+ "files": [
+  {
+   "name": "ggd353data_v6.rtf",
+   "size_bytes": 1131795,
+   "sha256": "eafeec8093ed99ff8a15c96e5a24849dcd00763661ae81a6a7aab75cc9f16206",
+   "url": "ftp://sidads.colorado.edu/pub/DATASETS/fgdc/ggd353_activlayer_canada/ggd353data_v6.rtf",
+   "role": "parsed"
+  },
+  {
+   "name": "README.txt",
+   "size_bytes": 766,
+   "sha256": "9cb292876154226223d61a347a5b90f5c64944165c47deb25203043b821929fa",
+   "url": "ftp://sidads.colorado.edu/pub/DATASETS/fgdc/ggd353_activlayer_canada/README.txt",
+   "role": "documentation"
+  },
+  {
+   "name": "ggd353-v006-userguide_1.pdf",
+   "size_bytes": 157187,
+   "sha256": "518e4b2d3aef8da3d2156ba5b74a369af9d2aaed8894bd5e6a8bd1e501cd9462",
+   "url": "https://nsidc.org/sites/default/files/ggd353-v006-userguide_1.pdf",
+   "role": "documentation"
+  },
+  {
+   "name": "landing_ggd353_v6.html",
+   "size_bytes": 111946,
+   "sha256": "d20e06e92ad209d9061198909442b35f74c1166f23aa6edee262127494668904",
+   "url": "https://nsidc.org/data/ggd353/versions/6",
+   "role": "documentation"
+  },
+  {
+   "name": "ggd353_dif_metadata.xml",
+   "size_bytes": 14370,
+   "sha256": "40501f96c0f4d6abf9d2a8f996a707a64c3b0782812e4a62e93ec6973a7613f4",
+   "url": "http://nsidc.org/api/dataset/metadata/oai?verb=GetRecord&metadataPrefix=dif&identifier=GGD353.006",
+   "role": "documentation"
+  },
+  {
+   "name": "ggd353_citation.bib",
+   "size_bytes": 284,
+   "sha256": "fddd0c7f94ed0be1eb799d3382b8d0166fc0a2c5dc5f283757b7f2f572a362cc",
+   "url": "https://doi.org/10.7265/7m84-k262 (BibTeX 형식. 받은 경로의 기록이 없어 확인하지 못했다)",
+   "role": "documentation"
+  }
+ ],
+ "derived_files_in_raw_dir": [
+  {
+   "name": "ggd353_table_cells.csv",
+   "size_bytes": 61393,
+   "sha256": "a7d675a14e7a299cd35f8c72888502bbd2dd6d5a705670ee7cc07ef510c40510",
+   "note": "이 파서가 만든 표다. RTF 'Active Layer DATA' 표의 칸 원문(지점 55 x 연도 17 = 935칸)과 칸 분류"
+  },
+  {
+   "name": "ggd353_site_descriptions.csv",
+   "size_bytes": 26069,
+   "sha256": "998f6f48b257ea7b094be3c50c52aadaf1ec4d98fcdfd4fbda0d14c76b948543",
+   "note": "이 파서가 만든 표다. RTF 지점 설명 56개의 항목별 원문"
+  }
+ ],
+ "license": "unverified",
+ "license_evidence": "자료 누리집과 사용 안내서는 'As a condition of using these data, you must cite the use of this data set' 라는 인용 조건을 적었다. 누리집 개요와 RTF 끝의 문구는 'This data is the property of the people of Canada and the responsibility of the Geological Survey of Canada. Please consult prior to use in publication. If published, adequate acknowledgment is expected.' 이다. 이용 허락 표시(CC 등)와 재배포 조건은 누리집, 사용 안내서, README.txt, DIF 메타 기록(Use_Constraints, Access_Constraints 요소 없음)에서 찾지 못했다. 재배포 가능 여부를 확인하지 못했으므로 점 자료를 커밋하지 않는다(data/processed/ext_labels/.gitignore 에 이미 들어 있다). 논문에 쓰기 전에 GSC 담당자와 협의가 필요하다는 문구가 있다",
+ "access_note": "익명 FTP 다. 계정이 필요 없다. 2026-09-29 23:34 KST 의 FTP 폴더 목록은 README.txt(766), ggd353data_v6.rtf(1,131,795) 두 파일이고 로컬 사본과 크기가 같다",
+ "citation": "Nixon, F. M. (2003). Active Layer Monitoring, Arctic and Subarctic Canada. (GGD353, Version 6). [Data Set]. Boulder, Colorado USA. National Snow and Ice Data Center. https://doi.org/10.7265/7m84-k262. Subset: 'Active Layer DATA' tables (CALM and Non-CALM), 1991-2007. Date Accessed 09-29-2026.",
+ "citation_user_guide": "Nixon, F. Mark 2003, updated January 2009. Active Layer Monitoring, Arctic and Subarctic Canada, Version 6. [Indicate subset used]. Boulder, Colorado USA. NSIDC: National Snow and Ice Data Center. doi: https://doi.org/10.7265/7m84-k262",
+ "orig_source": "Geological Survey of Canada, Mackenzie Valley active layer monitoring network (thaw tubes; PI F. M. Nixon); Nixon et al. 2003; Tarnocai et al. 2004",
+ "parser": "scripts/1_data_prep/parse_ext_nsidc_ggd353_thawtube.py",
+ "parser_sha256": "5de2f164222a094d6ff711011c24c1244d7a003356e16b7c4c4967c629dd1f52",
+ "parser_git_commit": "미커밋(실행 시점 HEAD a112cef1ed17fe2db74898b3861a5f82de753fdd)",
+ "points_file": "data/processed/ext_labels/nsidc_ggd353_thawtube_points.csv",
+ "points_sha256": "76a026073f190f60aa0ced26c4d0b00a80a6b12e9eea0c5ad584b06a5ea4a748",
+ "n_rows_raw": {
+  "table_rows": 55,
+  "table_rows_calm": 10,
+  "table_rows_non_calm": 45,
+  "table_cells": 935,
+  "cells_by_kind": {
+   "value": 702,
+   "na": 134,
+   "empty": 97,
+   "text": 2
+  },
+  "site_descriptions": 56
+ },
+ "n_rows_points": 702,
+ "n_sites": 55,
+ "n_sites_calm": 10,
+ "n_by_label_def": {
+  "direct_dated": 15,
+  "direct_eos": 687
+ },
+ "n_by_method": {
+  "other": 15,
+  "thaw_tube": 687
+ },
+ "n_by_eos_basis": {
+  "dataset_statement": 15,
+  "protocol": 687
+ },
+ "n_by_macro": {
+  "Canada": 702
+ },
+ "n_by_subunit": {
+  "Mackenzie": 702
+ },
+ "n_by_qc_flag": {
+  "coord": 38,
+  "date": 1,
+  "ok": 663
+ },
+ "n_by_year": {
+  "1991": 21,
+  "1992": 38,
+  "1993": 51,
+  "1994": 50,
+  "1995": 52,
+  "1996": 50,
+  "1997": 28,
+  "1998": 47,
+  "1999": 44,
+  "2000": 49,
+  "2001": 45,
+  "2002": 45,
+  "2003": 46,
+  "2004": 27,
+  "2005": 32,
+  "2006": 40,
+  "2007": 37
+ },
+ "n_right_censored": 20,
+ "n_disturbed": 9,
+ "n_value_marks": {
+  "gt_lower_bound(>)": 20,
+  "lt_upper_bound(<)": 17,
+  "approx(~)": 2,
+  "late_year_obs(*)": 15,
+  "uncertain(?)": 1
+ },
+ "year_range": [
+  1991,
+  2007
+ ],
+ "alt_cm_stats_all_rows": {
+  "n": 702,
+  "min": 26.0,
+  "median": 72.0,
+  "max": 199.0,
+  "mean": 78.23
+ },
+ "alt_cm_stats_eligible_rows": {
+  "n": 620,
+  "min": 26.0,
+  "median": 71.0,
+  "max": 189.0,
+  "mean": 76.78
+ },
+ "alt_cm_stats_by_label_def": {
+  "direct_dated": {
+   "n": 15,
+   "min": 36.0,
+   "median": 70.0,
+   "max": 178.0,
+   "mean": 75.8
+  },
+  "direct_eos": {
+   "n": 687,
+   "min": 26.0,
+   "median": 72.0,
+   "max": 199.0,
+   "mean": 78.28
+  }
+ },
+ "n_excluded_by_reason": {
+  "_설명": "점 자료에서 지운 값은 없다. 값이 없는 칸(결측 표기, 빈 칸, 글)은 행을 만들지 않았다. target_* 는 대상 라벨 규칙(6B.3, 6B.4)을 통과하지 못하는 행의 수이고 사유는 겹친다",
+  "cells_na_mark": 134,
+  "cells_empty": 97,
+  "cells_text_not_value": 2,
+  "text_cells": [
+   {
+    "site_id": "92TT12",
+    "year": 1994,
+    "text": "Fire in"
+   },
+   {
+    "site_id": "92TT12",
+    "year": 1995,
+    "text": "1995"
+   }
+  ],
+  "dropped_from_points": 0,
+  "target_label_def_not_direct_eos": 15,
+  "target_right_censored": 20,
+  "target_disturbed_burned": 9,
+  "target_qc_coord": 38,
+  "target_qc_date": 1,
+  "target_qc_range": 0,
+  "target_year_pre1990": 0,
+  "n_eligible_rows": 620,
+  "n_eligible_sites": 52
+ },
+ "label_semantics": {
+  "value": "연 최대 활동층 두께(cm, 정수, ±1 cm). 표의 연도는 융해 계절의 연도다",
+  "definition_in_source": "The active layer is defined as the thaw recorded in the thaw tube, minus the height of the tube above the ground surface at maximum surface subsidence, assumed to occur about the time of maximum thaw.",
+  "subsidence_choice": "파일의 표에는 침하 보정을 마친 ALT 하나만 있다. 보정 전 융해 깊이, 융기, 침하 값은 이 파일에 없다(누리집은 관측 항목으로 적었으나 공개 표에는 없다). 자료 설명의 ALT 정의에 맞는 값이므로 그대로 썼다. 최대 침하가 없던 해는 '<' 로 표시되어 참값보다 크거나 같다",
+  "footnote_in_source": "Maximum annual active layer is  reported for each year as integer values, centimeter units and a precision of ±1 cm.   Data is reported as maximum values when the value of maximum subsidence was not available, and the ground surface height measured during mid summer in the year following the record is used as a minimum subsidence at time of maximum thaw.  Minimum values usually result from thaw progressing below the measuring range of the instrument.  Missing values at the beginning of records result from variable start of record for different sites. * indicates value based on late year observation rather than thaw tube measurement. This data is the property of the people of Canada and the responsibility of the Geological Survey of Canada.  Please consult prior to use in publication.  If published, adequate acknowledgment is expected.  The contact(s) would welcome communication with anyone making use of the data or wishing to access the extended data set. -Contact F. Mark Nixon Geological Survey of Canada, 601 Booth St., Ottawa, ON, Canada, K1A 0E8 phone (613)992-2469 fax     (613)992-0190 mnixon@nrcan.gc.ca",
+  "eos": "융해관의 표지 구슬은 융해기 동안 내려가 가을 재동결 때 최대 깊이에 갇힌다(자료 설명). 따라서 연 최대값이고 eos_basis = protocol 이다. 판독 날짜는 파일에 없어 month 와 date 는 비웠다",
+  "late_year_obs": "'*' 값은 융해관 측정이 아니라 늦은 시기 관측에 근거한다. 관측 방법과 날짜가 없다. 누리집 개요는 관측 항목에 'current depth of thaw' 를 적었으나 '*' 값과의 관계는 확인하지 못했다. direct_dated 로 두었다"
+ },
+ "table_notes": {
+  "92TT12": "1994, 1995 칸은 'Fire in', '1995' 라는 글이다. 값으로 읽지 않았다. 지점 설명 '(site burned in 1995 fire)', 이력 'destroyed 1995, reestablished 1996, lost 1996'. 1995년 이후 값에 disturbed = 1, burned",
+  "91TT18": "이력 'not visited 1999 - 2005' 인데 2000년 칸에 89 가 있다. 2000년 값에 qc_flag date 를 붙였다. 2005년 값(79*)은 늦은 시기 관측 표시가 있어 공백의 끝 해로 보고 date 를 붙이지 않았다",
+  "95TT1": "지점 설명(Saline River)만 있고 표에 행이 없다(이력 'Installed 1995, no record')",
+  "missing_then_value": "결측(N.A.) 다음 해의 값은 표지 구슬이 두 해 이상의 최대를 기록했을 가능성이 있다. 자료 설명에 이 경우의 처리가 없어 표시하지 않았다"
+ },
+ "coordinate_conversion": "표의 위도, 경도 칸은 도분초다(예: 69°43'11\"). 십진 도 = 도 + 분/60 + 초/3600, 소수 6자리. 반구 표기는 표에 없고 지점 설명은 N., W. 이다. 경도는 서경이라 음수로 적었다. 측지계 표기는 없고 변환하지 않았다. 두 칸(90TT12 경도 134°21'44, 91TT19 위도 65°39'41)은 초 기호가 빠져 있으나 초 자리로 읽었다",
+ "coordinate_source_choice": "좌표는 값과 같은 행에 있는 표의 좌표를 썼다. 지점 설명(Location)의 좌표와 다른 지점이 있다. 1.0 km(1 km 셀 크기)를 넘게 다르면 qc_flag 에 coord 를 붙였다. CALM 지점은 표 좌표가 PANGAEA 972777 이벤트 좌표와 같다(North Head 69.71972, -134.4619 는 표의 69°43'11\", 134°27'43\" 와 같고 설명의 69°43'15\", 134°27'41\" 와 다르다)",
+ "coordinate_check": {
+  "bbox_from_landing_page": "북 69.717, 남 61.883, 서 -134.95, 동 -121.6(누리집 표기)",
+  "lat_range": [
+   61.766111,
+   69.719722
+  ],
+  "lon_range": [
+   -135.339444,
+   -121.185
+  ],
+  "note": "표의 남쪽 끝(92TT4, 92TT5 Manners Creek, 61°46') 과 서쪽 끝(91TT F Kendel Island, 135°20') 은 누리집의 범위 표기(남 61.883, 서 -134.95) 밖이다. 사용 안내서의 범위는 서쪽 135°20' 로 Kendel Island 를 포함하나 남쪽 61°53' 은 Manners Creek 을 포함하지 않는다. 지점 설명의 Manners Creek 좌표(61°46'12\", 61°45'56\")도 61°53' 보다 남쪽이다. 범위 표기는 포트심프슨 CALM 지점(61°53')을 남쪽 끝으로 적었다. 좌표 부호와 단위의 점검은 BBOX(북위 61-70.5, 서경 136-120.5)로 했다",
+  "n_sites_coord_flag": 3,
+  "table_vs_description": [
+   {
+    "site_id": "92TT3",
+    "site_name": "92TT 3 Tsiigehtchic",
+    "table_lat": 67.495556,
+    "table_lon": -133.763056,
+    "desc_lat": 67.495556,
+    "desc_lon": -134.766111,
+    "dist_km": 42.69
+   },
+   {
+    "site_id": "91TT15",
+    "site_name": "91TT15 Rengleng Lake",
+    "table_lat": 67.766111,
+    "table_lon": -134.245278,
+    "desc_lat": 67.763611,
+    "desc_lon": -134.080556,
+    "dist_km": 6.937
+   },
+   {
+    "site_id": "90TT12",
+    "site_name": "90TT12 North Point",
+    "table_lat": 69.656944,
+    "table_lon": -134.362222,
+    "desc_lat": 69.655556,
+    "desc_lon": -134.39,
+    "dist_km": 1.085
+   },
+   {
+    "site_id": "91TTF",
+    "site_name": "91TT F Kendel Island",
+    "table_lat": 69.448611,
+    "table_lon": -135.339444,
+    "desc_lat": 69.443611,
+    "desc_lon": -135.341667,
+    "dist_km": 0.563
+   },
+   {
+    "site_id": "91TT8",
+    "site_name": "91TT 8 Lousy Point",
+    "table_lat": 69.229167,
+    "table_lon": -134.349444,
+    "desc_lat": 69.225556,
+    "desc_lon": -134.343056,
+    "dist_km": 0.474
+   },
+   {
+    "site_id": "90TT10",
+    "site_name": "90TT10 Mason Bay",
+    "table_lat": 69.528333,
+    "table_lon": -134.0375,
+    "desc_lat": 69.525833,
+    "desc_lon": -134.047222,
+    "dist_km": 0.469
+   },
+   {
+    "site_id": "91TT16",
+    "site_name": "91TT16 Tsiigehtchic",
+    "table_lat": 67.484167,
+    "table_lon": -133.763056,
+    "desc_lat": 67.482778,
+    "desc_lon": -133.773056,
+    "dist_km": 0.453
+   },
+   {
+    "site_id": "90TT8",
+    "site_name": "90TT 8 Mason Bay",
+    "table_lat": 69.53,
+    "table_lon": -134.015833,
+    "desc_lat": 69.528056,
+    "desc_lon": -134.024167,
+    "dist_km": 0.39
+   },
+   {
+    "site_id": "91TT21",
+    "site_name": "91TT21 Francis Creek",
+    "table_lat": 65.191389,
+    "table_lon": -126.459722,
+    "desc_lat": 65.191667,
+    "desc_lon": -126.468056,
+    "dist_km": 0.39
+   },
+   {
+    "site_id": "91TT19",
+    "site_name": "91TT 19 Mountain River",
+    "table_lat": 65.661389,
+    "table_lon": -128.769444,
+    "desc_lat": 65.661944,
+    "desc_lon": -128.777778,
+    "dist_km": 0.387
+   },
+   {
+    "site_id": "92TT8",
+    "site_name": "92TT 8 River Between Two Mountains",
+    "table_lat": 62.961111,
+    "table_lon": -123.208889,
+    "desc_lat": 62.957778,
+    "desc_lon": -123.207222,
+    "dist_km": 0.38
+   },
+   {
+    "site_id": "92TT12",
+    "site_name": "92TT 12 Tulita",
+    "table_lat": 64.911111,
+    "table_lon": -125.575556,
+    "desc_lat": 64.912222,
+    "desc_lon": -125.583056,
+    "dist_km": 0.375
+   },
+   {
+    "site_id": "90TT11",
+    "site_name": "90TT11 North Point",
+    "table_lat": 69.659722,
+    "table_lon": -134.376111,
+    "desc_lat": 69.658889,
+    "desc_lon": -134.384167,
+    "dist_km": 0.325
+   },
+   {
+    "site_id": "90TT9",
+    "site_name": "90TT 9 Mason Bay",
+    "table_lat": 69.530833,
+    "table_lon": -134.005833,
+    "desc_lat": 69.530278,
+    "desc_lon": -134.013889,
+    "dist_km": 0.319
+   },
+   {
+    "site_id": "92TT2",
+    "site_name": "92TT 2 Involuted Hill",
+    "table_lat": 69.474167,
+    "table_lon": -132.634444,
+    "desc_lat": 69.4725,
+    "desc_lon": -132.640278,
+    "dist_km": 0.293
+   },
+   {
+    "site_id": "90TT4",
+    "site_name": "90TT 4 YaYa Lake",
+    "table_lat": 69.144444,
+    "table_lon": -134.698056,
+    "desc_lat": 69.143056,
+    "desc_lon": -134.704167,
+    "dist_km": 0.287
+   },
+   {
+    "site_id": "92TT1",
+    "site_name": "92TT 1 Involuted Hill",
+    "table_lat": 69.472778,
+    "table_lon": -132.626944,
+    "desc_lat": 69.472778,
+    "desc_lon": -132.633889,
+    "dist_km": 0.271
+   },
+   {
+    "site_id": "90TT1",
+    "site_name": "90TT 1 North Head",
+    "table_lat": 69.714722,
+    "table_lon": -134.483889,
+    "desc_lat": 69.713056,
+    "desc_lon": -134.488056,
+    "dist_km": 0.245
+   },
+   {
+    "site_id": "91TT2",
+    "site_name": "91TT 2 Swimming Point",
+    "table_lat": 69.109722,
+    "table_lon": -134.380556,
+    "desc_lat": 69.108611,
+    "desc_lon": -134.385833,
+    "dist_km": 0.243
+   },
+   {
+    "site_id": "91TT9",
+    "site_name": "91TT 9 Lousy Point",
+    "table_lat": 69.216111,
+    "table_lon": -134.294444,
+    "desc_lat": 69.216944,
+    "desc_lon": -134.3,
+    "dist_km": 0.238
+   },
+   {
+    "site_id": "90TT3",
+    "site_name": "90TT 3 YaYa Lake",
+    "table_lat": 69.145556,
+    "table_lon": -134.7125,
+    "desc_lat": 69.144722,
+    "desc_lon": -134.717778,
+    "dist_km": 0.229
+   },
+   {
+    "site_id": "90TT2",
+    "site_name": "90TT 2 North Point",
+    "table_lat": 69.662778,
+    "table_lon": -134.385278,
+    "desc_lat": 69.661667,
+    "desc_lon": -134.39,
+    "dist_km": 0.22
+   },
+   {
+    "site_id": "91TT12",
+    "site_name": "91TT12 Reindeer Station",
+    "table_lat": 68.69,
+    "table_lon": -134.105,
+    "desc_lat": 68.69,
+    "desc_lon": -134.110278,
+    "dist_km": 0.213
+   },
+   {
+    "site_id": "91TT1",
+    "site_name": "91TT 1 Swimming Point",
+    "table_lat": 69.108333,
+    "table_lon": -134.398889,
+    "desc_lat": 69.108889,
+    "desc_lon": -134.402778,
+    "dist_km": 0.166
+   },
+   {
+    "site_id": "92TT5",
+    "site_name": "92TT 5 Manners Creek",
+    "table_lat": 61.766111,
+    "table_lon": -121.185,
+    "desc_lat": 61.765556,
+    "desc_lon": -121.187778,
+    "dist_km": 0.159
+   },
+   {
+    "site_id": "91TTA",
+    "site_name": "91TT A Harry Channel",
+    "table_lat": 69.481389,
+    "table_lon": -134.828611,
+    "desc_lat": 69.48,
+    "desc_lon": -134.828889,
+    "dist_km": 0.155
+   },
+   {
+    "site_id": "91TT3",
+    "site_name": "91TT 3 Swimming Point",
+    "table_lat": 69.108611,
+    "table_lon": -134.348056,
+    "desc_lat": 69.108333,
+    "desc_lon": -134.351667,
+    "dist_km": 0.146
+   },
+   {
+    "site_id": "92TT9",
+    "site_name": "92TT 9 Ochre River",
+    "table_lat": 63.461111,
+    "table_lon": -123.695,
+    "desc_lat": 63.462222,
+    "desc_lon": -123.694167,
+    "dist_km": 0.13
+   },
+   {
+    "site_id": "90TT13",
+    "site_name": "North Head (C3)",
+    "table_lat": 69.719722,
+    "table_lon": -134.461944,
+    "desc_lat": 69.720833,
+    "desc_lon": -134.461389,
+    "dist_km": 0.125
+   },
+   {
+    "site_id": "91TT6",
+    "site_name": "91TT 6 Wolf Lake",
+    "table_lat": 69.241111,
+    "table_lon": -134.418889,
+    "desc_lat": 69.241389,
+    "desc_lon": -134.421944,
+    "dist_km": 0.124
+   },
+   {
+    "site_id": "91TT7",
+    "site_name": "91TT 7 Wolf Lake",
+    "table_lat": 69.240556,
+    "table_lon": -134.403611,
+    "desc_lat": 69.240833,
+    "desc_lon": -134.406389,
+    "dist_km": 0.114
+   },
+   {
+    "site_id": "91TT5",
+    "site_name": "91TT 5 Wolf Lake",
+    "table_lat": 69.240833,
+    "table_lon": -134.431111,
+    "desc_lat": 69.241111,
+    "desc_lon": -134.433611,
+    "dist_km": 0.103
+   },
+   {
+    "site_id": "94TT5",
+    "site_name": "94TT 5 Norman Wells",
+    "table_lat": 65.298333,
+    "table_lon": -126.845278,
+    "desc_lat": 65.298056,
+    "desc_lon": -126.846667,
+    "dist_km": 0.072
+   },
+   {
+    "site_id": "90TT6",
+    "site_name": "90TT 6 Lousy Point",
+    "table_lat": 69.216944,
+    "table_lon": -134.277778,
+    "desc_lat": 69.216944,
+    "desc_lon": -134.279444,
+    "dist_km": 0.066
+   },
+   {
+    "site_id": "92TT4",
+    "site_name": "92TT 4 Manners Creek",
+    "table_lat": 61.770278,
+    "table_lon": -121.1925,
+    "desc_lat": 61.77,
+    "desc_lon": -121.193333,
+    "dist_km": 0.054
+   },
+   {
+    "site_id": "90TT17",
+    "site_name": "90TT17 Rat Channel",
+    "table_lat": 68.416389,
+    "table_lon": -133.786944,
+    "desc_lat": 68.416667,
+    "desc_lon": -133.786944,
+    "dist_km": 0.031
+   },
+   {
+    "site_id": "91TTC",
+    "site_name": "Taglu (C4)",
+    "table_lat": 69.369167,
+    "table_lon": -134.948611,
+    "desc_lat": 69.369167,
+    "desc_lon": -134.948611,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "90TT5",
+    "site_name": "Lousy Point (C5)",
+    "table_lat": 69.218889,
+    "table_lon": -134.291111,
+    "desc_lat": 69.218889,
+    "desc_lon": -134.291111,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "91TT13",
+    "site_name": "Reindeer Depot (C7)",
+    "table_lat": 68.684722,
+    "table_lon": -134.145833,
+    "desc_lat": 68.684722,
+    "desc_lon": -134.145833,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "91TT14",
+    "site_name": "Rengleng River (C8)",
+    "table_lat": 67.795,
+    "table_lon": -134.126111,
+    "desc_lat": 67.795,
+    "desc_lon": -134.126111,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "91TT20",
+    "site_name": "Mountain River (C9)",
+    "table_lat": 65.673611,
+    "table_lon": -128.829167,
+    "desc_lat": 65.673611,
+    "desc_lon": -128.829167,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "91TT22",
+    "site_name": "Norman Wells (C11)",
+    "table_lat": 65.193056,
+    "table_lon": -126.468889,
+    "desc_lat": 65.193056,
+    "desc_lon": -126.468889,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "92TT10",
+    "site_name": "Ochre River (C13)",
+    "table_lat": 63.466389,
+    "table_lon": -123.692778,
+    "desc_lat": 63.466389,
+    "desc_lon": -123.692778,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "92TT7",
+    "site_name": "Willowlake River (C14)",
+    "table_lat": 62.696667,
+    "table_lon": -123.065,
+    "desc_lat": 62.696667,
+    "desc_lon": -123.065,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "92TT6",
+    "site_name": "Fort Simpson (C15)",
+    "table_lat": 61.887778,
+    "table_lon": -121.601667,
+    "desc_lat": 61.887778,
+    "desc_lon": -121.601667,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "90TT14",
+    "site_name": "90TT14 North Head",
+    "table_lat": 69.718611,
+    "table_lon": -134.441389,
+    "desc_lat": 69.718611,
+    "desc_lon": -134.441389,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "94TT1",
+    "site_name": "94TT 1 Illisarvik",
+    "table_lat": 69.4825,
+    "table_lon": -134.565833,
+    "desc_lat": 69.4825,
+    "desc_lon": -134.565833,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "91TTB",
+    "site_name": "91TT B Big Horn Point",
+    "table_lat": 69.41,
+    "table_lon": -134.843056,
+    "desc_lat": 69.41,
+    "desc_lon": -134.843056,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "90TT7",
+    "site_name": "90TT 7 Lousy Point",
+    "table_lat": 69.217778,
+    "table_lon": -134.273611,
+    "desc_lat": 69.217778,
+    "desc_lon": -134.273611,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "91TT11",
+    "site_name": "91TT11 Trail Valley Creek",
+    "table_lat": 68.736944,
+    "table_lon": -133.4875,
+    "desc_lat": 68.736944,
+    "desc_lon": -133.4875,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "93TT2",
+    "site_name": "93TT 2 Havikpak Creek",
+    "table_lat": 68.320278,
+    "table_lon": -133.513333,
+    "desc_lat": 68.320278,
+    "desc_lon": -133.513333,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "93TT1",
+    "site_name": "93TT 1 Cariboo Creek",
+    "table_lat": 68.110833,
+    "table_lon": -133.474722,
+    "desc_lat": 68.110833,
+    "desc_lon": -133.474722,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "91TT17",
+    "site_name": "91TT 17 Grandview",
+    "table_lat": 66.787778,
+    "table_lon": -130.120833,
+    "desc_lat": 66.787778,
+    "desc_lon": -130.120833,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "91TT18",
+    "site_name": "91TT 18 Grandview",
+    "table_lat": 66.786111,
+    "table_lon": -130.118333,
+    "desc_lat": 66.786111,
+    "desc_lon": -130.118333,
+    "dist_km": 0.0
+   },
+   {
+    "site_id": "96TT1",
+    "site_name": "96TT 1 Little Smith",
+    "table_lat": 64.469722,
+    "table_lon": -124.792778,
+    "desc_lat": 64.469722,
+    "desc_lon": -124.792778,
+    "dist_km": 0.0
+   }
+  ]
+ },
+ "coord_prec_rule": "모든 표 좌표가 초 단위라 coord_prec_deg = 0.0003(1초는 0.000278도)",
+ "units": "표의 값은 cm 정수다. 바꾸지 않았다",
+ "calm_duplicates": {
+  "_설명": "CALM 10개 지점의 표 값을 PANGAEA 972777 의 융해관 계열 이벤트(C*A, C13)와 원문 문자열로 대조했다. dup_of 는 같은 CALM 좌표의 v3 행(v3:<loc_id>)이고, v3 에 행이 없는 C3 은 같은 지점의 탐침 격자를 담은 calm_pangaea_v4add:CALM_C3B 다. v3 행의 값이 융해관 이벤트에서 왔는지 탐침 격자 이벤트에서 왔는지는 이 파서에서 확인하지 않았다",
+  "by_calm_id": {
+   "C3": {
+    "site_id": "90TT13",
+    "pangaea_event": "CALM_C3A",
+    "pangaea_event_coord": [
+     69.7197,
+     -134.4619
+    ],
+    "n_years_ggd353": 14,
+    "n_years_pangaea": 22,
+    "n_common": 14,
+    "n_identical_text": 14,
+    "differences": {},
+    "years_only_ggd353": [],
+    "years_only_pangaea_1991_2007": [],
+    "dup_of": "calm_pangaea_v4add:CALM_C3B",
+    "v3_alt_cm": [],
+    "ggd353_mean_eligible_cm": 62.71,
+    "ggd353_n_eligible": 14
+   },
+   "C4": {
+    "site_id": "91TTC",
+    "pangaea_event": "CALM_C4A",
+    "pangaea_event_coord": [
+     69.3692,
+     -134.9486
+    ],
+    "n_years_ggd353": 15,
+    "n_years_pangaea": 18,
+    "n_common": 15,
+    "n_identical_text": 15,
+    "differences": {},
+    "years_only_ggd353": [],
+    "years_only_pangaea_1991_2007": [],
+    "dup_of": "v3:14336",
+    "v3_alt_cm": [
+     108.1
+    ],
+    "ggd353_mean_eligible_cm": 117.5,
+    "ggd353_n_eligible": 12
+   },
+   "C5": {
+    "site_id": "90TT5",
+    "pangaea_event": "CALM_C5A",
+    "pangaea_event_coord": [
+     69.2189,
+     -134.2911
+    ],
+    "n_years_ggd353": 17,
+    "n_years_pangaea": 32,
+    "n_common": 17,
+    "n_identical_text": 17,
+    "differences": {},
+    "years_only_ggd353": [],
+    "years_only_pangaea_1991_2007": [],
+    "dup_of": "v3:14337",
+    "v3_alt_cm": [
+     70.11
+    ],
+    "ggd353_mean_eligible_cm": 76.82,
+    "ggd353_n_eligible": 17
+   },
+   "C7": {
+    "site_id": "91TT13",
+    "pangaea_event": "CALM_C7A",
+    "pangaea_event_coord": [
+     68.6847,
+     -134.1458
+    ],
+    "n_years_ggd353": 16,
+    "n_years_pangaea": 30,
+    "n_common": 16,
+    "n_identical_text": 16,
+    "differences": {},
+    "years_only_ggd353": [],
+    "years_only_pangaea_1991_2007": [],
+    "dup_of": "v3:14339",
+    "v3_alt_cm": [
+     131.08
+    ],
+    "ggd353_mean_eligible_cm": 130.69,
+    "ggd353_n_eligible": 16
+   },
+   "C8": {
+    "site_id": "91TT14",
+    "pangaea_event": "CALM_C8A",
+    "pangaea_event_coord": [
+     67.795,
+     -134.1261
+    ],
+    "n_years_ggd353": 16,
+    "n_years_pangaea": 22,
+    "n_common": 16,
+    "n_identical_text": 16,
+    "differences": {},
+    "years_only_ggd353": [],
+    "years_only_pangaea_1991_2007": [],
+    "dup_of": "v3:14340",
+    "v3_alt_cm": [
+     97.05
+    ],
+    "ggd353_mean_eligible_cm": 109.0,
+    "ggd353_n_eligible": 16
+   },
+   "C9": {
+    "site_id": "91TT20",
+    "pangaea_event": "CALM_C9A",
+    "pangaea_event_coord": [
+     65.6736,
+     -128.8292
+    ],
+    "n_years_ggd353": 14,
+    "n_years_pangaea": 14,
+    "n_common": 14,
+    "n_identical_text": 14,
+    "differences": {},
+    "years_only_ggd353": [],
+    "years_only_pangaea_1991_2007": [],
+    "dup_of": "v3:14341",
+    "v3_alt_cm": [
+     56.57
+    ],
+    "ggd353_mean_eligible_cm": 56.57,
+    "ggd353_n_eligible": 14
+   },
+   "C11": {
+    "site_id": "91TT22",
+    "pangaea_event": "CALM_C11A",
+    "pangaea_event_coord": [
+     65.1931,
+     -126.4689
+    ],
+    "n_years_ggd353": 14,
+    "n_years_pangaea": 14,
+    "n_common": 14,
+    "n_identical_text": 14,
+    "differences": {},
+    "years_only_ggd353": [],
+    "years_only_pangaea_1991_2007": [],
+    "dup_of": "v3:14343",
+    "v3_alt_cm": [
+     55.16
+    ],
+    "ggd353_mean_eligible_cm": 62.29,
+    "ggd353_n_eligible": 14
+   },
+   "C13": {
+    "site_id": "92TT10",
+    "pangaea_event": "CALM_C13",
+    "pangaea_event_coord": [
+     63.5,
+     -123.7
+    ],
+    "n_years_ggd353": 15,
+    "n_years_pangaea": 18,
+    "n_common": 15,
+    "n_identical_text": 15,
+    "differences": {},
+    "years_only_ggd353": [],
+    "years_only_pangaea_1991_2007": [],
+    "dup_of": "v3:14345",
+    "v3_alt_cm": [
+     64.56
+    ],
+    "ggd353_mean_eligible_cm": 63.0,
+    "ggd353_n_eligible": 15
+   },
+   "C14": {
+    "site_id": "92TT7",
+    "pangaea_event": "CALM_C14A",
+    "pangaea_event_coord": [
+     62.6967,
+     -123.065
+    ],
+    "n_years_ggd353": 15,
+    "n_years_pangaea": 20,
+    "n_common": 15,
+    "n_identical_text": 15,
+    "differences": {},
+    "years_only_ggd353": [],
+    "years_only_pangaea_1991_2007": [],
+    "dup_of": "v3:14346",
+    "v3_alt_cm": [
+     85.13
+    ],
+    "ggd353_mean_eligible_cm": 85.6,
+    "ggd353_n_eligible": 15
+   },
+   "C15": {
+    "site_id": "92TT6",
+    "pangaea_event": "CALM_C15A",
+    "pangaea_event_coord": [
+     61.8878,
+     -121.6017
+    ],
+    "n_years_ggd353": 3,
+    "n_years_pangaea": 3,
+    "n_common": 3,
+    "n_identical_text": 3,
+    "differences": {},
+    "years_only_ggd353": [],
+    "years_only_pangaea_1991_2007": [],
+    "dup_of": "v3:14347",
+    "v3_alt_cm": [
+     92.59
+    ],
+    "ggd353_mean_eligible_cm": 108.0,
+    "ggd353_n_eligible": 3
+   }
+  }
+ },
+ "cell_preview": {
+  "_설명": "v4 조립 전의 참고 값이다. 대상 규칙 통과 행(direct_eos, 검열 아님, 교란 아님, qc ok, 1990년 이후)만 썼다. '<' 값(최댓값)과 '~' 값은 포함했다. 셀 값은 위치별 다년 평균의 평균이다. all_eligible 은 CALM 10개 지점(dup_of 있음)을 포함한 것이고 excluding_dup_of 는 뺀 것이다. C13(92TT10)은 v3 행(63.5, -123.7, 소수 1자리 좌표)과 3.8 km 떨어져 체비쇼프 규칙으로는 빠지지 않으나 같은 CALM 지점이다. C3(90TT13)은 calm_pangaea_v4add 의 CALM_C3B 와 같은 좌표다",
+  "cell_rule": "ky = floor(lat/0.009), kx = floor(lon*cos(phi)/0.009), phi = (ky+0.5)*0.009 도",
+  "all_eligible": {
+   "n_sites": 52,
+   "n_cells_1km": 46,
+   "n_cells_dup_v3_f4_chebyshev_0p01": 12,
+   "n_new_cells": 34,
+   "n_new_cells_with_calm_site": 2,
+   "n_blocks_0p5deg_new_cells": 16,
+   "n_blocks_not_in_v3_f4": 9,
+   "new_cell_alt_cm_stats": {
+    "n": 34,
+    "min": 41.27,
+    "median": 72.25,
+    "max": 176.0,
+    "mean": 77.98
+   }
+  },
+  "excluding_dup_of": {
+   "n_sites": 42,
+   "n_cells_1km": 38,
+   "n_cells_dup_v3_f4_chebyshev_0p01": 5,
+   "n_new_cells": 33,
+   "n_new_cells_with_calm_site": 0,
+   "n_blocks_0p5deg_new_cells": 16,
+   "n_blocks_not_in_v3_f4": 9,
+   "new_cell_alt_cm_stats": {
+    "n": 33,
+    "min": 41.27,
+    "median": 72.57,
+    "max": 176.0,
+    "mean": 78.22
+   }
+  },
+  "cells_all_eligible": [
+   {
+    "cell": [
+     7746,
+     -5180
+    ],
+    "lat": 69.714722,
+    "lon": -134.483889,
+    "sites": [
+     "90TT1"
+    ],
+    "calm_sites": [],
+    "alt_cm": 48.36,
+    "n_site_years": 11,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13899731
+   },
+   {
+    "cell": [
+     7746,
+     -5179
+    ],
+    "lat": 69.719722,
+    "lon": -134.461944,
+    "sites": [
+     "90TT13"
+    ],
+    "calm_sites": [
+     "90TT13"
+    ],
+    "alt_cm": 62.71,
+    "n_site_years": 14,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13899731
+   },
+   {
+    "cell": [
+     7746,
+     -5178
+    ],
+    "lat": 69.718611,
+    "lon": -134.441389,
+    "sites": [
+     "90TT14"
+    ],
+    "calm_sites": [],
+    "alt_cm": 79.8,
+    "n_site_years": 5,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13899731
+   },
+   {
+    "cell": [
+     7740,
+     -5190
+    ],
+    "lat": 69.662778,
+    "lon": -134.385278,
+    "sites": [
+     "90TT2"
+    ],
+    "calm_sites": [],
+    "alt_cm": 50.4,
+    "n_site_years": 15,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13899731
+   },
+   {
+    "cell": [
+     7739,
+     -5191
+    ],
+    "lat": 69.659722,
+    "lon": -134.376111,
+    "sites": [
+     "90TT11"
+    ],
+    "calm_sites": [],
+    "alt_cm": 60.23,
+    "n_site_years": 13,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13899731
+   },
+   {
+    "cell": [
+     7725,
+     -5209
+    ],
+    "lat": 69.528333,
+    "lon": -134.0375,
+    "sites": [
+     "90TT10"
+    ],
+    "calm_sites": [],
+    "alt_cm": 82.2,
+    "n_site_years": 15,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13899731
+   },
+   {
+    "cell": [
+     7725,
+     -5208
+    ],
+    "lat": 69.530417,
+    "lon": -134.010833,
+    "sites": [
+     "90TT8",
+     "90TT9"
+    ],
+    "calm_sites": [],
+    "alt_cm": 70.86,
+    "n_site_years": 28,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13899731
+   },
+   {
+    "cell": [
+     7720,
+     -5251
+    ],
+    "lat": 69.481389,
+    "lon": -134.828611,
+    "sites": [
+     "91TTA"
+    ],
+    "calm_sites": [],
+    "alt_cm": 70.31,
+    "n_site_years": 13,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799730
+   },
+   {
+    "cell": [
+     7720,
+     -5241
+    ],
+    "lat": 69.4825,
+    "lon": -134.565833,
+    "sites": [
+     "94TT1"
+    ],
+    "calm_sites": [],
+    "alt_cm": 59.55,
+    "n_site_years": 11,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799730
+   },
+   {
+    "cell": [
+     7719,
+     -5167
+    ],
+    "lat": 69.473472,
+    "lon": -132.630694,
+    "sites": [
+     "92TT1",
+     "92TT2"
+    ],
+    "calm_sites": [],
+    "alt_cm": 51.78,
+    "n_site_years": 24,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799734
+   },
+   {
+    "cell": [
+     7716,
+     -5279
+    ],
+    "lat": 69.448611,
+    "lon": -135.339444,
+    "sites": [
+     "91TTF"
+    ],
+    "calm_sites": [],
+    "alt_cm": 104.92,
+    "n_site_years": 12,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799729
+   },
+   {
+    "cell": [
+     7712,
+     -5269
+    ],
+    "lat": 69.41,
+    "lon": -134.843056,
+    "sites": [
+     "91TTB"
+    ],
+    "calm_sites": [],
+    "alt_cm": 106.5,
+    "n_site_years": 6,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799730
+   },
+   {
+    "cell": [
+     7707,
+     -5284
+    ],
+    "lat": 69.369167,
+    "lon": -134.948611,
+    "sites": [
+     "91TTC"
+    ],
+    "calm_sites": [
+     "91TTC"
+    ],
+    "alt_cm": 117.5,
+    "n_site_years": 12,
+    "n_dup_v3_f4": 1,
+    "dup_v3_f4_first5": [
+     "v3:14336(Canada)"
+    ],
+    "near_v3_other": [],
+    "block": 13799730
+   },
+   {
+    "cell": [
+     7693,
+     -5295
+    ],
+    "lat": 69.240833,
+    "lon": -134.431111,
+    "sites": [
+     "91TT5"
+    ],
+    "calm_sites": [],
+    "alt_cm": 82.67,
+    "n_site_years": 12,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799731
+   },
+   {
+    "cell": [
+     7693,
+     -5294
+    ],
+    "lat": 69.241111,
+    "lon": -134.418889,
+    "sites": [
+     "91TT6"
+    ],
+    "calm_sites": [],
+    "alt_cm": 47.55,
+    "n_site_years": 11,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799731
+   },
+   {
+    "cell": [
+     7693,
+     -5293
+    ],
+    "lat": 69.240556,
+    "lon": -134.403611,
+    "sites": [
+     "91TT7"
+    ],
+    "calm_sites": [],
+    "alt_cm": 60.83,
+    "n_site_years": 12,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799731
+   },
+   {
+    "cell": [
+     7692,
+     -5294
+    ],
+    "lat": 69.229167,
+    "lon": -134.349444,
+    "sites": [
+     "91TT8"
+    ],
+    "calm_sites": [],
+    "alt_cm": 57.8,
+    "n_site_years": 5,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799731
+   },
+   {
+    "cell": [
+     7690,
+     -5296
+    ],
+    "lat": 69.2175,
+    "lon": -134.292778,
+    "sites": [
+     "90TT5",
+     "91TT9"
+    ],
+    "calm_sites": [
+     "90TT5"
+    ],
+    "alt_cm": 56.02,
+    "n_site_years": 31,
+    "n_dup_v3_f4": 1,
+    "dup_v3_f4_first5": [
+     "v3:14337(Canada)"
+    ],
+    "near_v3_other": [],
+    "block": 13799731
+   },
+   {
+    "cell": [
+     7690,
+     -5295
+    ],
+    "lat": 69.217361,
+    "lon": -134.275694,
+    "sites": [
+     "90TT6",
+     "90TT7"
+    ],
+    "calm_sites": [],
+    "alt_cm": 61.08,
+    "n_site_years": 29,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799731
+   },
+   {
+    "cell": [
+     7682,
+     -5330
+    ],
+    "lat": 69.145556,
+    "lon": -134.7125,
+    "sites": [
+     "90TT3"
+    ],
+    "calm_sites": [],
+    "alt_cm": 98.73,
+    "n_site_years": 15,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799730
+   },
+   {
+    "cell": [
+     7682,
+     -5329
+    ],
+    "lat": 69.144444,
+    "lon": -134.698056,
+    "sites": [
+     "90TT4"
+    ],
+    "calm_sites": [],
+    "alt_cm": 87.0,
+    "n_site_years": 15,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799730
+   },
+   {
+    "cell": [
+     7678,
+     -5326
+    ],
+    "lat": 69.108333,
+    "lon": -134.398889,
+    "sites": [
+     "91TT1"
+    ],
+    "calm_sites": [],
+    "alt_cm": 58.13,
+    "n_site_years": 15,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799731
+   },
+   {
+    "cell": [
+     7678,
+     -5325
+    ],
+    "lat": 69.109722,
+    "lon": -134.380556,
+    "sites": [
+     "91TT2"
+    ],
+    "calm_sites": [],
+    "alt_cm": 77.0,
+    "n_site_years": 13,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799731
+   },
+   {
+    "cell": [
+     7678,
+     -5324
+    ],
+    "lat": 69.108611,
+    "lon": -134.348056,
+    "sites": [
+     "91TT3"
+    ],
+    "calm_sites": [],
+    "alt_cm": 41.27,
+    "n_site_years": 15,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13799731
+   },
+   {
+    "cell": [
+     7637,
+     -5379
+    ],
+    "lat": 68.736944,
+    "lon": -133.4875,
+    "sites": [
+     "91TT11"
+    ],
+    "calm_sites": [],
+    "alt_cm": 66.64,
+    "n_site_years": 14,
+    "n_dup_v3_f4": 7,
+    "dup_v3_f4_first5": [
+     "v3:13204(ABoVE_CA)",
+     "v3:13205(ABoVE_CA)",
+     "v3:13206(ABoVE_CA)",
+     "v3:13304(ABoVE_CA)",
+     "v3:13314(ABoVE_CA)"
+    ],
+    "near_v3_other": [],
+    "block": 13699733
+   },
+   {
+    "cell": [
+     7632,
+     -5415
+    ],
+    "lat": 68.69,
+    "lon": -134.105,
+    "sites": [
+     "91TT12"
+    ],
+    "calm_sites": [],
+    "alt_cm": 71.93,
+    "n_site_years": 14,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13699731
+   },
+   {
+    "cell": [
+     7631,
+     -5419
+    ],
+    "lat": 68.684722,
+    "lon": -134.145833,
+    "sites": [
+     "91TT13"
+    ],
+    "calm_sites": [
+     "91TT13"
+    ],
+    "alt_cm": 130.69,
+    "n_site_years": 16,
+    "n_dup_v3_f4": 1,
+    "dup_v3_f4_first5": [
+     "v3:14339(Canada)"
+    ],
+    "near_v3_other": [],
+    "block": 13699731
+   },
+   {
+    "cell": [
+     7601,
+     -5469
+    ],
+    "lat": 68.416389,
+    "lon": -133.786944,
+    "sites": [
+     "90TT17"
+    ],
+    "calm_sites": [],
+    "alt_cm": 140.0,
+    "n_site_years": 9,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13599732
+   },
+   {
+    "cell": [
+     7591,
+     -5480
+    ],
+    "lat": 68.320278,
+    "lon": -133.513333,
+    "sites": [
+     "93TT2"
+    ],
+    "calm_sites": [],
+    "alt_cm": 60.08,
+    "n_site_years": 13,
+    "n_dup_v3_f4": 119,
+    "dup_v3_f4_first5": [
+     "v3:13179(ABoVE_CA)",
+     "v3:13180(ABoVE_CA)",
+     "v3:13181(ABoVE_CA)",
+     "v3:13182(ABoVE_CA)",
+     "v3:13183(ABoVE_CA)"
+    ],
+    "near_v3_other": [],
+    "block": 13599732
+   },
+   {
+    "cell": [
+     7567,
+     -5530
+    ],
+    "lat": 68.110833,
+    "lon": -133.474722,
+    "sites": [
+     "93TT1"
+    ],
+    "calm_sites": [],
+    "alt_cm": 62.93,
+    "n_site_years": 14,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13599733
+   },
+   {
+    "cell": [
+     7532,
+     -5633
+    ],
+    "lat": 67.795,
+    "lon": -134.126111,
+    "sites": [
+     "91TT14"
+    ],
+    "calm_sites": [
+     "91TT14"
+    ],
+    "alt_cm": 109.0,
+    "n_site_years": 16,
+    "n_dup_v3_f4": 1,
+    "dup_v3_f4_first5": [
+     "v3:14340(Canada)"
+    ],
+    "near_v3_other": [],
+    "block": 13499731
+   },
+   {
+    "cell": [
+     7498,
+     -5691
+    ],
+    "lat": 67.484167,
+    "lon": -133.763056,
+    "sites": [
+     "91TT16"
+    ],
+    "calm_sites": [],
+    "alt_cm": 89.31,
+    "n_site_years": 13,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13399732
+   },
+   {
+    "cell": [
+     7420,
+     -5700
+    ],
+    "lat": 66.786944,
+    "lon": -130.119583,
+    "sites": [
+     "91TT17",
+     "91TT18"
+    ],
+    "calm_sites": [],
+    "alt_cm": 84.75,
+    "n_site_years": 9,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13299739
+   },
+   {
+    "cell": [
+     7297,
+     -5896
+    ],
+    "lat": 65.673611,
+    "lon": -128.829167,
+    "sites": [
+     "91TT20"
+    ],
+    "calm_sites": [
+     "91TT20"
+    ],
+    "alt_cm": 56.57,
+    "n_site_years": 14,
+    "n_dup_v3_f4": 1,
+    "dup_v3_f4_first5": [
+     "v3:14341(Canada)"
+    ],
+    "near_v3_other": [],
+    "block": 13099742
+   },
+   {
+    "cell": [
+     7295,
+     -5898
+    ],
+    "lat": 65.661389,
+    "lon": -128.769444,
+    "sites": [
+     "91TT19"
+    ],
+    "calm_sites": [],
+    "alt_cm": 72.57,
+    "n_site_years": 14,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 13099742
+   },
+   {
+    "cell": [
+     7255,
+     -5890
+    ],
+    "lat": 65.298333,
+    "lon": -126.845278,
+    "sites": [
+     "94TT5"
+    ],
+    "calm_sites": [],
+    "alt_cm": 98.92,
+    "n_site_years": 12,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 12999746
+   },
+   {
+    "cell": [
+     7243,
+     -5897
+    ],
+    "lat": 65.193056,
+    "lon": -126.468889,
+    "sites": [
+     "91TT22"
+    ],
+    "calm_sites": [
+     "91TT22"
+    ],
+    "alt_cm": 62.29,
+    "n_site_years": 14,
+    "n_dup_v3_f4": 1,
+    "dup_v3_f4_first5": [
+     "v3:14343(Canada)"
+    ],
+    "near_v3_other": [],
+    "block": 12999747
+   },
+   {
+    "cell": [
+     7243,
+     -5896
+    ],
+    "lat": 65.191389,
+    "lon": -126.459722,
+    "sites": [
+     "91TT21"
+    ],
+    "calm_sites": [],
+    "alt_cm": 160.71,
+    "n_site_years": 7,
+    "n_dup_v3_f4": 1,
+    "dup_v3_f4_first5": [
+     "v3:14343(Canada)"
+    ],
+    "near_v3_other": [],
+    "block": 12999747
+   },
+   {
+    "cell": [
+     7212,
+     -5917
+    ],
+    "lat": 64.911111,
+    "lon": -125.575556,
+    "sites": [
+     "92TT12"
+    ],
+    "calm_sites": [],
+    "alt_cm": 55.0,
+    "n_site_years": 1,
+    "n_dup_v3_f4": 1,
+    "dup_v3_f4_first5": [
+     "v3:14344(Canada)"
+    ],
+    "near_v3_other": [],
+    "block": 12899748
+   },
+   {
+    "cell": [
+     7163,
+     -5976
+    ],
+    "lat": 64.469722,
+    "lon": -124.792778,
+    "sites": [
+     "96TT1"
+    ],
+    "calm_sites": [],
+    "alt_cm": 80.0,
+    "n_site_years": 6,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 12799750
+   },
+   {
+    "cell": [
+     7051,
+     -6141
+    ],
+    "lat": 63.46375,
+    "lon": -123.693889,
+    "sites": [
+     "92TT10",
+     "92TT9"
+    ],
+    "calm_sites": [
+     "92TT10"
+    ],
+    "alt_cm": 55.64,
+    "n_site_years": 29,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 12599752
+   },
+   {
+    "cell": [
+     6995,
+     -6224
+    ],
+    "lat": 62.961111,
+    "lon": -123.208889,
+    "sites": [
+     "92TT8"
+    ],
+    "calm_sites": [],
+    "alt_cm": 78.08,
+    "n_site_years": 12,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 12499753
+   },
+   {
+    "cell": [
+     6966,
+     -6272
+    ],
+    "lat": 62.696667,
+    "lon": -123.065,
+    "sites": [
+     "92TT7"
+    ],
+    "calm_sites": [
+     "92TT7"
+    ],
+    "alt_cm": 85.6,
+    "n_site_years": 15,
+    "n_dup_v3_f4": 1,
+    "dup_v3_f4_first5": [
+     "v3:14346(Canada)"
+    ],
+    "near_v3_other": [],
+    "block": 12499753
+   },
+   {
+    "cell": [
+     6876,
+     -6367
+    ],
+    "lat": 61.887778,
+    "lon": -121.601667,
+    "sites": [
+     "92TT6"
+    ],
+    "calm_sites": [
+     "92TT6"
+    ],
+    "alt_cm": 108.0,
+    "n_site_years": 3,
+    "n_dup_v3_f4": 1,
+    "dup_v3_f4_first5": [
+     "v3:14347(Canada)"
+    ],
+    "near_v3_other": [],
+    "block": 12299756
+   },
+   {
+    "cell": [
+     6863,
+     -6370
+    ],
+    "lat": 61.770278,
+    "lon": -121.1925,
+    "sites": [
+     "92TT4"
+    ],
+    "calm_sites": [],
+    "alt_cm": 121.47,
+    "n_site_years": 15,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 12299757
+   },
+   {
+    "cell": [
+     6862,
+     -6371
+    ],
+    "lat": 61.766111,
+    "lon": -121.185,
+    "sites": [
+     "92TT5"
+    ],
+    "calm_sites": [],
+    "alt_cm": 176.0,
+    "n_site_years": 8,
+    "n_dup_v3_f4": 0,
+    "dup_v3_f4_first5": [],
+    "near_v3_other": [],
+    "block": 12299757
+   }
+  ]
+ },
+ "v3_check": {
+  "bbox_compared": "55 <= lat <= 75, -145 <= lon <= -110",
+  "n_ref_rows_compared": 788,
+  "n_ref_f4_direct": 786,
+  "ref_regions": {
+   "ABoVE_CA": 726,
+   "ABoVE_AK": 36,
+   "United States (Alaska)": 9,
+   "Canada": 15,
+   "GTNPenv_US": 2
+  },
+  "n_sites_within_1km_of_v3_f4": 15,
+  "n_sites_within_5km_of_v3_f4": 21,
+  "n_sites_within_25km_of_v3_f4": 36,
+  "nearest_v3_f4_by_site": {
+   "90TT13": {
+    "loc_id": "14336",
+    "region": "Canada",
+    "km": 43.322
+   },
+   "91TTC": {
+    "loc_id": "14336",
+    "region": "Canada",
+    "km": 0.004
+   },
+   "90TT5": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 0.001
+   },
+   "91TT13": {
+    "loc_id": "14339",
+    "region": "Canada",
+    "km": 0.003
+   },
+   "91TT14": {
+    "loc_id": "14340",
+    "region": "Canada",
+    "km": 0.0
+   },
+   "91TT20": {
+    "loc_id": "14341",
+    "region": "Canada",
+    "km": 0.002
+   },
+   "91TT22": {
+    "loc_id": "14343",
+    "region": "Canada",
+    "km": 0.005
+   },
+   "92TT10": {
+    "loc_id": "14345",
+    "region": "Canada",
+    "km": 3.755
+   },
+   "92TT7": {
+    "loc_id": "14346",
+    "region": "Canada",
+    "km": 0.004
+   },
+   "92TT6": {
+    "loc_id": "14347",
+    "region": "Canada",
+    "km": 0.003
+   },
+   "90TT14": {
+    "loc_id": "14336",
+    "region": "Canada",
+    "km": 43.566
+   },
+   "90TT1": {
+    "loc_id": "14336",
+    "region": "Canada",
+    "km": 42.454
+   },
+   "90TT2": {
+    "loc_id": "14336",
+    "region": "Canada",
+    "km": 39.321
+   },
+   "90TT11": {
+    "loc_id": "14336",
+    "region": "Canada",
+    "km": 39.241
+   },
+   "90TT12": {
+    "loc_id": "14336",
+    "region": "Canada",
+    "km": 39.3
+   },
+   "90TT8": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 36.234
+   },
+   "90TT9": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 36.441
+   },
+   "90TT10": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 35.813
+   },
+   "92TT1": {
+    "loc_id": "14338",
+    "region": "Canada",
+    "km": 67.026
+   },
+   "92TT2": {
+    "loc_id": "14338",
+    "region": "Canada",
+    "km": 66.995
+   },
+   "94TT1": {
+    "loc_id": "14336",
+    "region": "Canada",
+    "km": 19.556
+   },
+   "91TTA": {
+    "loc_id": "14336",
+    "region": "Canada",
+    "km": 13.327
+   },
+   "91TTB": {
+    "loc_id": "14336",
+    "region": "Canada",
+    "km": 6.136
+   },
+   "91TTF": {
+    "loc_id": "14336",
+    "region": "Canada",
+    "km": 17.652
+   },
+   "91TT9": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 0.337
+   },
+   "91TT8": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 2.569
+   },
+   "91TT7": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 5.048
+   },
+   "91TT6": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 5.612
+   },
+   "91TT5": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 6.036
+   },
+   "90TT6": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 0.569
+   },
+   "90TT7": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 0.701
+   },
+   "90TT3": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 18.543
+   },
+   "90TT4": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 18.088
+   },
+   "91TT3": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 12.469
+   },
+   "91TT2": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 12.645
+   },
+   "91TT1": {
+    "loc_id": "14337",
+    "region": "Canada",
+    "km": 13.013
+   },
+   "91TT11": {
+    "loc_id": "13206",
+    "region": "ABoVE_CA",
+    "km": 0.605
+   },
+   "91TT12": {
+    "loc_id": "14339",
+    "region": "Canada",
+    "km": 1.751
+   },
+   "90TT17": {
+    "loc_id": "13285",
+    "region": "ABoVE_CA",
+    "km": 15.239
+   },
+   "93TT2": {
+    "loc_id": "13190",
+    "region": "ABoVE_CA",
+    "km": 0.089
+   },
+   "93TT1": {
+    "loc_id": "13344",
+    "region": "ABoVE_CA",
+    "km": 23.014
+   },
+   "91TT15": {
+    "loc_id": "14340",
+    "region": "Canada",
+    "km": 5.952
+   },
+   "92TT3": {
+    "loc_id": "14340",
+    "region": "Canada",
+    "km": 36.666
+   },
+   "91TT16": {
+    "loc_id": "14340",
+    "region": "Canada",
+    "km": 37.821
+   },
+   "91TT17": {
+    "loc_id": "14341",
+    "region": "Canada",
+    "km": 136.741
+   },
+   "91TT18": {
+    "loc_id": "14341",
+    "region": "Canada",
+    "km": 136.527
+   },
+   "91TT19": {
+    "loc_id": "14341",
+    "region": "Canada",
+    "km": 3.056
+   },
+   "94TT5": {
+    "loc_id": "14342",
+    "region": "Canada",
+    "km": 2.433
+   },
+   "91TT21": {
+    "loc_id": "14343",
+    "region": "Canada",
+    "km": 0.469
+   },
+   "92TT12": {
+    "loc_id": "14344",
+    "region": "Canada",
+    "km": 0.721
+   },
+   "96TT1": {
+    "loc_id": "14344",
+    "region": "Canada",
+    "km": 62.306
+   },
+   "92TT9": {
+    "loc_id": "14345",
+    "region": "Canada",
+    "km": 4.331
+   },
+   "92TT8": {
+    "loc_id": "14346",
+    "region": "Canada",
+    "km": 30.295
+   },
+   "92TT5": {
+    "loc_id": "14347",
+    "region": "Canada",
+    "km": 25.723
+   },
+   "92TT4": {
+    "loc_id": "14347",
+    "region": "Canada",
+    "km": 25.144
+   }
+  }
+ },
+ "other_ext_sources_nearby": {
+  "_설명": "실행 시점에 같은 폴더에 있던 다른 자료원 점 자료 가운데 북위 60-71, 서경 137-120 안의 지점과의 거리다. 자료원 사이의 중복 판정은 v4 조립에서 한다",
+  "by_file": {
+   "calm_pangaea_v4add_points.csv": {
+    "n_sites_in_bbox": 1,
+    "min_distance_km": 0.002,
+    "nearest_other_site_id": "CALM_C3B",
+    "nearest_other_site_name": "North Head (grid)",
+    "nearest_site_id": "90TT13",
+    "pairs_chebyshev_0p01": [
+     {
+      "site_id": "90TT13",
+      "other_site_id": "CALM_C3B",
+      "other_site_name": "North Head (grid)",
+      "distance_km": 0.002
+     }
+    ]
+   },
+   "firealt_talucci2025_points.csv": {
+    "n_sites_in_bbox": 25,
+    "min_distance_km": 14.193,
+    "nearest_other_site_id": "firealt_talucci2025_0148",
+    "nearest_other_site_name": "Dieleman C7-18 (unburned)",
+    "nearest_site_id": "94TT5",
+    "pairs_chebyshev_0p01": []
+   },
+   "mythaw_pangaea_points.csv": {
+    "n_sites_in_bbox": 2,
+    "min_distance_km": 1.342,
+    "nearest_other_site_id": "Siksik_Creek",
+    "nearest_other_site_name": "Siksik Creek (TVC)",
+    "nearest_site_id": "91TT11",
+    "pairs_chebyshev_0p01": []
+   }
+  }
+ },
+ "field_choices": {
+  "site_id": "관 번호(예: 90TT14, 91TTA). CALM 지점은 지점 설명 이력의 관 번호(C3 = 90TT13, C4 = 91TTC 등)",
+  "site_name": "비CALM 지점은 지점 설명 머리('90TT14 North Head'), CALM 지점은 '이름 (Cn)'",
+  "month, date": "빈 칸. 판독 날짜와 최대 융해 날짜가 파일에 없다",
+  "n_obs": "1(관 하나)",
+  "subunit": "Mackenzie(전 지점)",
+  "disturbed": "92TT12 의 1995년 이후만 1(burned). 91TT F Kendel Island 의 토양 설명 'under shallow water' 는 습지의 얕은 물로 보고 수체 바닥으로 표시하지 않았다(notes 없음, 메타에만 적음)"
+ },
+ "unverified_items": [
+  "이용 약관과 재배포 조건. 인용 조건과 '논문에 쓰기 전에 협의' 문구만 확인했다",
+  "'*' 값(늦은 시기 관측)의 관측 방법과 날짜",
+  "'~', '?' 표기의 뜻. 자료 설명에 없다",
+  "좌표의 측지계. 파일과 사용 안내서에 없다. 변환하지 않았다",
+  "표 좌표와 지점 설명 좌표 가운데 어느 쪽이 맞는지. 1 km 넘게 다른 지점은 qc_flag coord 로 표시했다",
+  "결측 다음 해의 값이 두 해 이상의 최대인지",
+  "91TT18 의 2000년 값이 방문 공백(1999-2005) 안에 있는 이유",
+  "관을 다시 설치한 지점(90TT1, 90TT12, 92TT12, 92TT8, 91TT16 등)의 새 관 위치가 원래 위치와 같은지",
+  "91TT F Kendel Island('under shallow water')를 수체 바닥 교란으로 볼지",
+  "v3 의 CALM 좌표 행(C4-C15)이 융해관 이벤트 값인지 탐침 격자 값인지"
+ ]
+}

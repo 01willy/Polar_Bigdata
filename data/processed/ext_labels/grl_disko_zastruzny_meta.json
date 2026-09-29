@@ -1,0 +1,271 @@
+{
+ "src_id": "grl_disko_zastruzny",
+ "name": "Zastruzny 등 2024, 디스코섬 사면 동결면 깊이 2015(PANGAEA 967139)",
+ "url": "https://doi.org/10.1594/PANGAEA.967139",
+ "url_file": "https://doi.pangaea.de/10.1594/PANGAEA.967139?format=textfile",
+ "doi": "10.1594/PANGAEA.967139",
+ "accessed": "2026-09-29",
+ "files": [
+  {
+   "name": "P967139.tab",
+   "path": "data/raw/grl_disko_zastruzny/P967139.tab",
+   "size_bytes": 36973301,
+   "sha256": "06382fa79de004dc4de5fe667ddd18b7b1cef4868862dbbdb6f11d614d77191e",
+   "kind": "원자료(내려받은 파일)"
+  },
+  {
+   "name": "P967139_frost_table.tsv",
+   "path": "data/raw/grl_disko_zastruzny/P967139_frost_table.tsv",
+   "size_bytes": 9930,
+   "sha256": "a00a4d6488ab55b72f55df69a8be1d5f8cc69d97feca2a7e877e9eab9a661cfb",
+   "kind": "파서가 만든 이벤트 추출본"
+  },
+  {
+   "name": "frost_table_by_visit.csv",
+   "path": "data/raw/grl_disko_zastruzny/frost_table_by_visit.csv",
+   "size_bytes": 4533,
+   "sha256": "bbb827d2725b2717c37954b07d432553430180a0bd42bc78bfcbdba670613a75",
+   "kind": "파서가 만든 방문 단위 점 자료"
+  },
+  {
+   "name": "Zastruzny2024_WRR_e2023WR036147.pdf",
+   "path": "data/raw/grl_disko_zastruzny/Zastruzny2024_WRR_e2023WR036147.pdf",
+   "size_bytes": 4771034,
+   "sha256": "73b7448405bdbadfa9b5936ce992640c0a2b8c9f85fad1f0eced2d76e6bd75b5",
+   "kind": "관련 논문 전문(CC BY, DiVA 공개본, 참고용)"
+  }
+ ],
+ "license": "CC-BY-4.0",
+ "license_statement": "Creative Commons Attribution 4.0 International (CC-BY-4.0) (URI: https://creativecommons.org/licenses/by/4.0/)",
+ "citation": "Zastruzny, Sebastian; Elberling, Bo; Jensen, Karsten Høgh; Sjöberg, Ylva; Liu, Yijing (2024): Field data from Disko Island for thermal-hydrological investigations [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.967139",
+ "related_paper": "Zastruzny 등 2024, Water Resources Research 60(11), e2023WR036147, https://doi.org/10.1029/2023WR036147",
+ "related_paper_oa_copy": "https://umu.diva-portal.org/smash/get/diva2:1917379/FULLTEXT01",
+ "paper_evidence": [
+  {
+   "where": "3절, 4쪽",
+   "text": "2015-08-04 와 08-21 에 80 m 측선을 1 m 간격으로 금속 막대로 탐침했고, 막대가 단단한 층에 닿은 깊이를 동결면으로 해석했다"
+  },
+  {
+   "where": "3절, 4쪽",
+   "text": "사면 상부의 피에조미터 #24 는 동결토를 찾지 못해 148 cm 까지 넣었다"
+  },
+  {
+   "where": "3절, 5쪽",
+   "text": "추적자(NaCl) 트렌치는 폭 30 cm, 영구동토 상면까지 팠고 2015-08-06 에 사면 위치 15 m 와 44.4 m 두 곳에 두었다"
+  },
+  {
+   "where": "4.2.3절, 7쪽",
+   "text": "Pedersen 등 2022 는 같은 사면 50-80 m 구간에서 2014, 2018 년 활동층 두께를 측정했고 그 자료는 Pedersen 등 2022 의 보충 자료에 있다"
+  },
+  {
+   "where": "5.1절, 8쪽",
+   "text": "사면 상부는 활동층 두께가 1.2 m 를 넘고, 하부는 0.20-0.60 m 이다"
+  },
+  {
+   "where": "5.3절, 11쪽",
+   "text": "모형 모의에서 2015년 최대 활동층 두께는 9월 20일에서 10월 3일 사이에 나타나고 상부 1.0 m, 하부 0.8 m 이다(모형값이므로 라벨로 쓰지 않는다)"
+  }
+ ],
+ "parser": "scripts/1_data_prep/parse_ext_grl_disko_zastruzny.py",
+ "parser_sha256": "e465e433cbb04a88fa9e2c200f688f082d734fac5fa6a59a3cb5caf087f14d31",
+ "parser_git_commit": "a112cef1ed17fe2db74898b3861a5f82de753fdd",
+ "parser_git_note": "파서는 이 커밋의 작업 트리에서 새로 만든 파일이고 아직 커밋하지 않았다",
+ "schema_version": "1.0",
+ "n_rows_raw": 450538,
+ "n_rows_raw_event": 76,
+ "n_rows_points": 2,
+ "n_by_label_def": {
+  "direct_eos": 2
+ },
+ "n_by_method": {
+  "probe": 2
+ },
+ "n_by_macro": {
+  "NAtlantic": 2
+ },
+ "n_right_censored_rows": 1,
+ "n_excluded_by_reason": {
+  "other_event_without_thaw_depth": 450462,
+  "not_common_to_both_visits": 0,
+  "removed_from_points": 0
+ },
+ "checks": {
+  "thaw_depth_unit": "cm(열 이름 'Thaw depth [cm]')",
+  "thaw_values_outside_event": 0,
+  "missing_thaw_values": 0,
+  "nonnumeric_thaw_values": 0,
+  "greater_than_notation": 0,
+  "duplicate_records": 0,
+  "coord_outside_disko_bbox": 0,
+  "thaw_outside_range": 0,
+  "visits": [
+   "2015-08-04",
+   "2015-08-21"
+  ],
+  "n_points_per_visit": {
+   "2015-08-04": 38,
+   "2015-08-21": 38
+  },
+  "same_point_set_in_all_visits": true,
+  "n_common_points": 38,
+  "censor_suspect_points": [
+   35,
+   36,
+   37,
+   38
+  ],
+  "censor_suspect_same_in_all_visits": true,
+  "transect_length_m": 79.72,
+  "mean_point_spacing_m": 2.155,
+  "tracer_trench_nearest_points": {
+   "15.0": {
+    "nearest_point": 31,
+    "pos_from_top_m": 15.03,
+    "thaw_cm": {
+     "2015-08-04": 27.0,
+     "2015-08-21": 26.0
+    }
+   },
+   "44.4": {
+    "nearest_point": 17,
+    "pos_from_top_m": 45.08,
+    "thaw_cm": {
+     "2015-08-04": 36.0,
+     "2015-08-21": 21.0
+    }
+   }
+  },
+  "recorded_time": "두 방문 모두 14:00:00 으로 적혀 있다. 실제 측정 시각인지 확인하지 못했다"
+ },
+ "visit_stats": {
+  "whole_transect": {
+   "2015-08-04": {
+    "n": 38,
+    "mean": 46.3947,
+    "sd": 27.6019,
+    "min": 23.0,
+    "median": 36.0,
+    "max": 120.0
+   },
+   "2015-08-21": {
+    "n": 38,
+    "mean": 41.0,
+    "sd": 28.543,
+    "min": 21.0,
+    "median": 31.0,
+    "max": 120.0
+   }
+  },
+  "by_segment": {
+   "L": {
+    "2015-08-04": {
+     "n": 34,
+     "mean": 37.7353,
+     "sd": 10.9664,
+     "min": 23.0,
+     "median": 33.0,
+     "max": 58.0
+    },
+    "2015-08-21": {
+     "n": 34,
+     "mean": 31.7059,
+     "sd": 8.2445,
+     "min": 21.0,
+     "median": 30.0,
+     "max": 55.0
+    }
+   },
+   "U": {
+    "2015-08-04": {
+     "n": 4,
+     "mean": 120.0,
+     "sd": 0.0,
+     "min": 120.0,
+     "median": 120.0,
+     "max": 120.0
+    },
+    "2015-08-21": {
+     "n": 4,
+     "mean": 120.0,
+     "sd": 0.0,
+     "min": 120.0,
+     "median": 120.0,
+     "max": 120.0
+    }
+   }
+  },
+  "change_last_minus_first": {
+   "mean_cm": -5.3947,
+   "n_deeper": 6,
+   "n_equal": 8,
+   "n_shallower": 24
+  },
+  "whole_transect_series_max_cm": 46.3947
+ },
+ "alt_distribution_main": {
+  "note": "right_censored = 0 인 행",
+  "n": 1,
+  "min": 37.7353,
+  "median": 37.7353,
+  "max": 37.7353
+ },
+ "year_range": [
+  2015,
+  2015
+ ],
+ "cell_index": {
+  "rule": "ky = floor(lat/0.009), kx = floor(lon*cos(phi)/0.009), phi = (ky+0.5)*0.009",
+  "by_site": {
+   "Disko2015_frost_table_L": [
+    7696,
+    -2104
+   ],
+   "Disko2015_frost_table_U": [
+    7696,
+    -2104
+   ]
+  },
+  "cells_of_38_points": [
+   [
+    7696,
+    -2104
+   ]
+  ]
+ },
+ "v3_f4_direct_check": {
+  "Disko2015_frost_table_L": {
+   "nearest_loc_id": 17535,
+   "nearest_region": "CALM_Greenland",
+   "nearest_lat": 69.25,
+   "nearest_lon": -53.5,
+   "nearest_alt_cm": 67.5,
+   "dist_km": 2.649,
+   "chebyshev_deg": 0.03062,
+   "n_v3_f4_direct_within_cheb_0p01deg": 0
+  },
+  "Disko2015_frost_table_U": {
+   "nearest_loc_id": 17535,
+   "nearest_region": "CALM_Greenland",
+   "nearest_lat": 69.25,
+   "nearest_lon": -53.5,
+   "nearest_alt_cm": 67.5,
+   "dist_km": 2.683,
+   "chebyshev_deg": 0.03051,
+   "n_v3_f4_direct_within_cheb_0p01deg": 0
+  }
+ },
+ "coordinate_conversion": "변환 없음. 원자료가 WGS84 십진 도(소수 8자리, RTK DGPS)이고 서경은 음수다. 행 좌표는 구간 안 점 좌표의 평균이다",
+ "label_rule": "연 값은 8월 1일 이후 방문의 점 평균 가운데 최댓값(평균이 같으면 늦은 방문). 값이 120 cm 이상인 점은 구간 U 로 나누고 right_censored = 1 로 둔다",
+ "unverified_items": [
+  "값 120 cm 가 탐침 막대 길이인지 기록 상한인지. 논문(5.1절)이 상부 활동층을 1.2 m 초과로 적으므로 하한이라는 점은 확인했다. 막대 길이는 논문과 자료 설명에 없다. 상부 피에조미터 #24 가 148 cm 까지 동결토를 만나지 않았으므로(3절) 그 위치의 영구동토 존재 여부도 확인하지 못했다",
+  "늦은 방문(08-21)의 점 평균이 이른 방문(08-04)보다 작은 이유. 논문 본문에서 설명을 찾지 못했다. 측정자, 측정 위치의 미세한 차이, 자갈에 의한 탐침 저항 가운데 무엇인지 확인하지 못했다",
+  "2015-08-04 에 58 cm 가 5점에서 반복되는 이유",
+  "두 방문 뒤(8월 말에서 10월 초)의 융해 깊이. 자료에 없다. 논문의 모형 모의는 최대 융해가 9월 20일에서 10월 3일 사이라고 적으므로 8월 값은 연 최대보다 작을 수 있다. 관측으로는 확인하지 못했다",
+  "기록 시각 14:00:00 이 실제 측정 시각인지 여부",
+  "점 간격. 논문은 1 m 간격 탐침이라고 적으나 자료에는 약 2.15 m 간격 38점이 있다. 공개 과정에서 점을 추렸는지 확인하지 못했다",
+  "추적자 트렌치의 영향. 논문의 사면 위치 축 원점을 상부로 추정했고(그림 6) 확인하지 못했다. 트렌치 부근 점의 08-21 값에 준 영향은 확인하지 못했다. 교란이 두 위치에 국한되고 구간 L 의 연 값은 트렌치 이전 방문(08-04)이므로 disturbed 는 0 으로 두었다"
+ ],
+ "leads": [
+  "Pedersen 등 2022(Journal of Ecology 110(8), 1896-1912, https://doi.org/10.1111/1365-2745.13925) 보충 자료에 같은 사면 50-80 m 구간의 2014, 2018 년 활동층 두께가 있다(논문 4.2.3절). 이 작업에서는 내려받지 않았다"
+ ]
+}

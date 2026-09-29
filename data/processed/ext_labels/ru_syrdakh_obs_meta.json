@@ -1,0 +1,428 @@
+{
+ "src_id": "ru_syrdakh_obs",
+ "name": "Syrdakh 열·수문 관측소 융해 깊이 2012-2018(Zenodo 19890671)",
+ "schema_version": "1.0",
+ "url": "https://doi.org/10.5281/zenodo.14619854",
+ "doi": "10.5281/zenodo.19890671",
+ "doi_all_versions": "10.5281/zenodo.14619854",
+ "doi_article": "10.5194/essd-18-3525-2026",
+ "accessed": "2026-09-29",
+ "files": [
+  {
+   "name": "Syrdakh-DB_without-imagery-dsm.zip",
+   "size_bytes": 89905405,
+   "sha256": "2f277cff3c68f251ad7b7c0b39ae6ab972396631aadaaab840bd7a77e4f5cad2",
+   "url": "https://zenodo.org/api/records/19890671/files/Syrdakh-DB_without-imagery-dsm.zip/content",
+   "md5": "d1d193691d22009e1347c8944828720f",
+   "md5_matches_zenodo": true
+  },
+  {
+   "name": "zenodo_record_19890671.json",
+   "size_bytes": 7267,
+   "sha256": "4475089ef25e171eac7f3ee5b5afe6d2dc6553ce08d969e074b0d07ffc12a4db",
+   "url": "https://zenodo.org/api/records/19890671"
+  },
+  {
+   "name": "essd-18-3525-2026_article.html",
+   "size_bytes": 437355,
+   "sha256": "456855259a4aaaee616a74b546276f718b1b23c7779146f5b885a0908433f786",
+   "url": "https://essd.copernicus.org/articles/18/3525/2026/"
+  },
+  {
+   "name": "Syrdakh-DB_without-imagery-dsm.zip::ground/td/td_Gtest_syrdakh_PVC-TUBE_L1_20160919-mean.csv",
+   "size_bytes": 1078,
+   "sha256": "a64ac21ace5014e40f72915a0f9e39050fbaa22a865b7214208ee48016466d2c"
+  },
+  {
+   "name": "Syrdakh-DB_without-imagery-dsm.zip::ground/td/td_Gtest_syrdakh_multiple_L1_20121007-mean.csv",
+   "size_bytes": 1633,
+   "sha256": "1ac941ee7e932a03ef642f43edd32d0368f3b075366dccf8131e33dbae224c39"
+  },
+  {
+   "name": "Syrdakh-DB_without-imagery-dsm.zip::ground/td/td_Gtest_syrdakh_multiple_L1_20130906-mean.csv",
+   "size_bytes": 1967,
+   "sha256": "edcf2e11747a04a215260417bd263fdb0b1920ec51885bec8337f2fd1c38e874"
+  },
+  {
+   "name": "Syrdakh-DB_without-imagery-dsm.zip::ground/td/td_Gtest_syrdakh_multiple_L1_20140906-mean.csv",
+   "size_bytes": 1289,
+   "sha256": "c05da797ae95ff86f96c421bfb031918a4986e1bb4abff629e935a10834c7441"
+  },
+  {
+   "name": "Syrdakh-DB_without-imagery-dsm.zip::ground/td/td_Gtest_syrdakh_multiple_L1_20150906-mean.csv",
+   "size_bytes": 1486,
+   "sha256": "390f4e519ecb52c83f19a323dcaf928d1c9d32043dd6727d2f4234268f72211e"
+  },
+  {
+   "name": "Syrdakh-DB_without-imagery-dsm.zip::ground/td/td_Gtest_syrdakh_multiple_L1_20170917-mean.csv",
+   "size_bytes": 1666,
+   "sha256": "13f1446739db2e615f36ed25221a0e3a249ab9769b6fb17d1158fa49dafbff55"
+  },
+  {
+   "name": "Syrdakh-DB_without-imagery-dsm.zip::ground/td/td_Gtest_syrdakh_multiple_L1_20180913-mean.csv",
+   "size_bytes": 1422,
+   "sha256": "9603caf24e6a46c4ecbac6d3bcae6da48b4ccc4d1b21f38da7dc88b4120033c2"
+  },
+  {
+   "name": "Syrdakh-DB_without-imagery-dsm.zip::auxiliary/gps/coordinates_2025-09-22.csv",
+   "size_bytes": 20404,
+   "sha256": "ee62a88d4f08e7586d8364ac825131860e3564591100276b11ce6d1dae54b347"
+  }
+ ],
+ "files_not_downloaded": [
+  {
+   "name": "Syrdakh-DB_dsm.zip",
+   "size_bytes": 2629534640,
+   "reason": "수치 표면 모형. 라벨에 쓰지 않는다"
+  },
+  {
+   "name": "Syrdakh-DB_imagery.zip",
+   "size_bytes": 3486939641,
+   "reason": "정사 영상. 라벨에 쓰지 않는다"
+  }
+ ],
+ "license": "Creative Commons Attribution 4.0 International (CC-BY-4.0). Zenodo 기록의 license.id 가 cc-by-4.0 이고 자료 논문 5절이 'CC 4.0 license' 로 적었다",
+ "citation": "Pohl, E., Grenier, C., Séjourné, A., Bouchard, F., Léger, E., Saintenoy, A., Konstantinov, P., Cuynet, A., Ottlé, C., Hatté, C., Noret, A., Danilov, K., Bazhin, K., Khristoforov, I., Fortier, D., Fedorov, A., and Mouche, E. (2026): Thermo-hydrological observatory in a permafrost river valley landscape in Syrdakh, Central Yakutia [dataset]. Zenodo, https://doi.org/10.5281/zenodo.19890671 (all versions: https://doi.org/10.5281/zenodo.14619854). Data description article: Pohl, E. et al.: Thermo-hydrological river valley observatory in Yedoma permafrost from 2012 through 2022 in Syrdakh, Central Yakutia, Earth Syst. Sci. Data, 18, 3525-3557, https://doi.org/10.5194/essd-18-3525-2026, 2026.",
+ "parser": "scripts/1_data_prep/parse_ext_ru_syrdakh_obs.py",
+ "parser_sha256": "c2fb8a1189b381cd2acb28e42ea42a791ae4753d150c03f0428997c52296e9cd",
+ "parser_git_commit": "a112cef1ed17fe2db74898b3861a5f82de753fdd",
+ "parser_git_note": "파서는 실행 시점에 커밋되지 않은 새 파일이다. 위 값은 저장소 HEAD 다",
+ "visits_table": "data/raw/ru_syrdakh_obs/ru_syrdakh_obs_visits.csv",
+ "n_rows_raw": 191,
+ "n_rows_raw_by_file": {
+  "ground/td/td_Gtest_syrdakh_PVC-TUBE_L1_20160919-mean.csv": 13,
+  "ground/td/td_Gtest_syrdakh_multiple_L1_20121007-mean.csv": 31,
+  "ground/td/td_Gtest_syrdakh_multiple_L1_20130906-mean.csv": 42,
+  "ground/td/td_Gtest_syrdakh_multiple_L1_20140906-mean.csv": 21,
+  "ground/td/td_Gtest_syrdakh_multiple_L1_20150906-mean.csv": 25,
+  "ground/td/td_Gtest_syrdakh_multiple_L1_20170917-mean.csv": 33,
+  "ground/td/td_Gtest_syrdakh_multiple_L1_20180913-mean.csv": 26
+ },
+ "n_rows_raw_by_status": {
+  "used": 175,
+  "na_value": 8,
+  "dup_exact": 5,
+  "dup_position": 3
+ },
+ "n_rows_points": 170,
+ "n_sites": 85,
+ "n_sites_by_group": {
+  "Site1": 32,
+  "Site2": 53
+ },
+ "n_by_label_def": {
+  "direct_dated": 31,
+  "direct_eos": 139
+ },
+ "n_by_method": {
+  "probe": 102,
+  "pit_core": 68
+ },
+ "n_raw_by_method_raw": {
+  "PVC-TUBE": 90,
+  "DRILL": 77,
+  "HANDBAR": 22,
+  "PIT": 2
+ },
+ "n_by_macro": {
+  "Russia_C": 170
+ },
+ "n_by_qc_flag": {
+  "ok": 165,
+  "date": 1,
+  "coord": 4
+ },
+ "n_by_year": {
+  "2012": 31,
+  "2013": 35,
+  "2014": 14,
+  "2015": 23,
+  "2016": 10,
+  "2017": 32,
+  "2018": 25
+ },
+ "n_by_date": {
+  "2012-10-07": 31,
+  "2013-09-06": 35,
+  "2014-09-06": 14,
+  "2015-09-06": 23,
+  "2016-09-19": 10,
+  "2017-09-17": 32,
+  "2018-09-13": 25
+ },
+ "year_range": [
+  2012,
+  2018
+ ],
+ "n_right_censored": 4,
+ "n_disturbed": 0,
+ "n_dup_of": 3,
+ "n_obs_total": 177,
+ "alt_cm_stats_all_rows": {
+  "n": 170,
+  "min": 79.0,
+  "median": 131.0,
+  "max": 370.0,
+  "mean": 139.37
+ },
+ "alt_cm_stats_target": {
+  "n": 132,
+  "min": 79.0,
+  "median": 127.0,
+  "max": 237.0,
+  "mean": 132.08
+ },
+ "alt_cm_stats_direct_dated": {
+  "n": 31,
+  "min": 100.0,
+  "median": 160.0,
+  "max": 370.0,
+  "mean": 167.87
+ },
+ "n_excluded_by_reason": {
+  "_설명": "dropped_* 는 점 자료에 넣지 않은 원자료 기록의 수다. 나머지는 점 자료에 남아 있으나 대상 라벨 규칙(6B.3)을 통과하지 못하는 행의 수이고 사유는 겹칠 수 있다",
+  "dropped_value_na": 8,
+  "dropped_exact_duplicate": 5,
+  "merged_into_site_visit_mean": 7,
+  "not_used_in_value_uncensored_beside_censored": 1,
+  "label_def_direct_dated_october_visit": 31,
+  "right_censored": 4,
+  "dup_of_suspected_position_duplicate": 3,
+  "qc_flag_not_ok": 5,
+  "disturbed_water": 0
+ },
+ "n_target_rows": 132,
+ "n_target_sites": 70,
+ "target_rule": "label_def = direct_eos, right_censored = 0, disturbed = 0, qc_flag = ok, dup_of 빈 칸, year >= 1990",
+ "cell_preview": {
+  "_설명": "v4 조립 전의 참고 값이다. 셀 색인은 6B.3 의 식, 블록은 0.5° 다. 셀 값은 셀 안 위치별 다년 평균의 평균이다",
+  "all_rows": {
+   "n_cells_1km": 2,
+   "n_blocks_0p5deg": 1
+  },
+  "target_rows": {
+   "n_cells_1km": 2,
+   "n_blocks_0p5deg": 1
+  },
+  "target_cells": [
+   {
+    "ky": 6950,
+    "kx": 6705,
+    "lat_mean": 62.55752,
+    "lon_mean": 130.933253,
+    "n_sites": 45,
+    "n_site_years": 101,
+    "years": [
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018
+    ],
+    "alt_cm_cell": 144.27,
+    "alt_cm_site_min": 99.38,
+    "alt_cm_site_max": 235.0,
+    "sites_by_group": {
+     "Site2": 45
+    }
+   },
+   {
+    "ky": 6950,
+    "kx": 6706,
+    "lat_mean": 62.556814,
+    "lon_mean": 130.958514,
+    "n_sites": 25,
+    "n_site_years": 31,
+    "years": [
+     2013,
+     2017,
+     2018
+    ],
+    "alt_cm_cell": 127.52,
+    "alt_cm_site_min": 85.0,
+    "alt_cm_site_max": 237.0,
+    "sites_by_group": {
+     "Site1": 25
+    }
+   }
+  ]
+ },
+ "v3_overlap_check": {
+  "checked": true,
+  "n_v3_f4_direct_cells": 17467,
+  "n_sites_within_chebyshev_0p01deg": 0,
+  "min_chebyshev_deg": 1.2761,
+  "nearest_v3_loc_id": "17494",
+  "nearest_v3_region": "CALM_Russia_C",
+  "nearest_km_by_v3_region": [
+   {
+    "v3_region": "CALM_Russia_C",
+    "min_km": 78.5,
+    "v3_loc_id": "17496"
+   },
+   {
+    "v3_region": "Lena_RU",
+    "min_km": 1001.1,
+    "v3_loc_id": "14352"
+   },
+   {
+    "v3_region": "CALM_Russia_E",
+    "min_km": 1118.0,
+    "v3_loc_id": "17559"
+   },
+   {
+    "v3_region": "CALM_Russia_W",
+    "min_km": 2016.2,
+    "v3_loc_id": "17538"
+   }
+  ],
+  "nearest_km_note": "지점 85개 가운데 가장 가까운 지점에서 잰 v3 F4_direct 셀까지의 대권 거리다. CALM_Russia_C 는 같은 macro(Russia_C)다. 다른 macro 의 가장 가까운 셀은 Lena_RU 이고 100 km 규칙에 걸리지 않는다"
+ },
+ "repeat_blocks": {
+  "ground/td/td_Gtest_syrdakh_multiple_L1_20130906-mean.csv": [
+   {
+    "first_row": 24,
+    "repeat_row": 35,
+    "length": 8
+   }
+  ]
+ },
+ "river_transects": {
+  "_설명": "water/levl 의 단면 수심 표에서 읽은 수면 폭(m)과 최대 수심(cm)이다. 하천 기준점(scale-CS*)이 단면의 어디에 있는지는 확인하지 못했다. near_ref_sites 는 기준점에서 5 m 이내인 융해 깊이 지점과 부호 붙인 거리(m)다",
+  "transects": {
+   "scale-CS2": [
+    {
+     "file": "water/levl/wl_Wtest_syrdakh_scale-CS2_L1_2016-avg.csv",
+     "year": 2016,
+     "width_m": 7.4,
+     "max_depth_cm": 100.0
+    },
+    {
+     "file": "water/levl/wl_Wtest_syrdakh_scale-CS2_L1_2018-avg.csv",
+     "year": 2018,
+     "width_m": 7.8,
+     "max_depth_cm": 82.0
+    }
+   ],
+   "scale-CS9": [
+    {
+     "file": "water/levl/wl_Wtest_syrdakh_scale-CS9_L1_2012-avg.csv",
+     "year": 2012,
+     "width_m": 2.5,
+     "max_depth_cm": 34.0
+    },
+    {
+     "file": "water/levl/wl_Wtest_syrdakh_scale-CS9_L1_2016-avg.csv",
+     "year": 2016,
+     "width_m": 3.6,
+     "max_depth_cm": 51.0
+    },
+    {
+     "file": "water/levl/wl_Wtest_syrdakh_scale-CS9_L1_2018-avg.csv",
+     "year": 2018,
+     "width_m": 3.8,
+     "max_depth_cm": 45.0
+    }
+   ]
+  },
+  "near_ref_sites": [
+   {
+    "site_id": "drill-2017-S2-AL7",
+    "site": "Site2",
+    "dist_river_ref_m": -3.37,
+    "in_points": true
+   },
+   {
+    "site_id": "drill-2017-S2-AL8",
+    "site": "Site2",
+    "dist_river_ref_m": 3.41,
+    "in_points": true
+   },
+   {
+    "site_id": "drill-2015-gps2015-06",
+    "site": "Site2",
+    "dist_river_ref_m": -4.19,
+    "in_points": false
+   },
+   {
+    "site_id": "drill-2015-gps2015-08",
+    "site": "Site2",
+    "dist_river_ref_m": 4.25,
+    "in_points": true
+   },
+   {
+    "site_id": "drill-2017-S2-AL6",
+    "site": "Site2",
+    "dist_river_ref_m": -4.38,
+    "in_points": true
+   },
+   {
+    "site_id": "drill-2017-S2-AL9",
+    "site": "Site2",
+    "dist_river_ref_m": 4.38,
+    "in_points": true
+   },
+   {
+    "site_id": "drill-2015-gps2015-07",
+    "site": "Site2",
+    "dist_river_ref_m": 4.4,
+    "in_points": false
+   },
+   {
+    "site_id": "drill-2015-gps2015-05",
+    "site": "Site2",
+    "dist_river_ref_m": -4.91,
+    "in_points": true
+   }
+  ]
+ },
+ "coordinate_conversion": {
+  "source": "Syrdakh-DB_without-imagery-dsm.zip::auxiliary/gps/coordinates_2025-09-22.csv 의 lon, lat 열(WGS84 십진 도)을 자릿수 그대로 썼다",
+  "origin": "자료 저자가 geopackage(EPSG:32652, WGS 84 / UTM zone 52N)의 점 도형을 geopandas 로 EPSG:4326 으로 바꾼 값이다(auxiliary/scripts/coordinates/get_coords_from_shapefiles.py)",
+  "check_pyproj": "pyproj 로 x, y 를 다시 변환해 비교했다",
+  "max_abs_diff_deg_vs_pyproj": 2.842e-14,
+  "check_gpkg": "geopackage 점 도형의 x, y 와 좌표 표의 x, y 를 87개 지점에서 비교했다",
+  "max_abs_diff_m_vs_gpkg": 0.0,
+  "label_match": {
+   "exact": 80,
+   "case_insensitive": 7
+  },
+  "label_match_note": "td 파일의 hobo-F<i> 는 좌표 표와 geopackage 에서 HOBO-F<i> 다. 대소문자를 무시하고 맞췄다. 자료의 파일 이름 규약 표는 hobo-F<i> 를 '위치 i 의 HOBO 서미스터 줄'로 적었다",
+  "coord_prec_deg": 1e-05,
+  "coord_prec_note": "자료의 변수 표는 dGPS(Leica Viva Uno 10) 정확도를 0.5 m 로 적었다. geopackage 의 exact_date = 0 인 지점은 날짜가 정확하지 않다는 표시이고 좌표 정확도 표시는 아니다",
+  "sign_check": "경도 130.93-130.96°E, 위도 62.556-62.558°N. 동경이고 부호 변환은 없다"
+ },
+ "label_rules_applied": {
+  "method": "PVC-TUBE, HANDBAR 는 probe. DRILL, PIT 는 pit_core. 한 행의 기록이 두 분류에 걸치면 기록 수가 많은 분류, 같으면 probe 를 적고 notes 의 method_raw 에 원래 값을 적었다",
+  "right_censored": "max_exceed = 1 인 기록이 있는 행은 1 이고 alt_cm 은 하한 값이다",
+  "label_def": "방문 월 8-9월은 direct_eos(eos_basis = record_date), 10월은 direct_dated(none)",
+  "visit_dates": {
+   "ground/td/td_Gtest_syrdakh_PVC-TUBE_L1_20160919-mean.csv": "2016-09-19",
+   "ground/td/td_Gtest_syrdakh_multiple_L1_20121007-mean.csv": "2012-10-07",
+   "ground/td/td_Gtest_syrdakh_multiple_L1_20130906-mean.csv": "2013-09-06",
+   "ground/td/td_Gtest_syrdakh_multiple_L1_20140906-mean.csv": "2014-09-06",
+   "ground/td/td_Gtest_syrdakh_multiple_L1_20150906-mean.csv": "2015-09-06",
+   "ground/td/td_Gtest_syrdakh_multiple_L1_20170917-mean.csv": "2017-09-17",
+   "ground/td/td_Gtest_syrdakh_multiple_L1_20180913-mean.csv": "2018-09-13"
+  },
+  "disturbed": "자료 저자 스크립트의 하천 띠(기준점에서 부호 붙인 거리 -3 m 에서 3 m) 안이면 1, water. 해당 지점은 없다. 하천 기준점까지의 부호 붙인 거리는 notes 의 dist_river_ref_m 에 있다",
+  "site_group": "scale-CS9(Site 2)와 scale-CS2(Site 1) 가운데 가까운 쪽. 자료 저자 스크립트는 Site 2 를 50 m 이내, Site 1 을 90 m 이내로 잡았고 그 밖의 지점은 그림에 넣지 않았다",
+  "alt_sd_cm": "같은 방문의 기록이 2개 이상일 때 표본 표준편차(n - 1)",
+  "qc_flag": "coord 는 위치 지정을 확인하지 못한 행(반복 구간의 중복 의심 3행, 한 지점 이름에 같은 방법의 다른 값이 둘 붙은 1행). date 는 PIT 기록의 구덩이 날짜와 파일 날짜의 연도가 다른 행"
+ },
+ "unverified_items": [
+  "자료 논문 4.1.3 절은 이 값을 활동층 두께가 아니라 관측 시점의 융해 깊이라고 적었다. 현장 조사는 대개 9월이고 융해는 9월 또는 10월까지 이어진다고 했다. 9월 6일 방문(2013, 2014, 2015년)의 값이 연 최대보다 얼마나 작은지는 확인하지 못했다. direct_eos 는 관측 월 규칙(8-9월)에 따른 분류다",
+  "수체 아래 지점과 탈릭 지점을 표시한 열은 자료에 없다. 자료 논문 서론은 이 관측소의 작은 하천이 겨울에 바닥까지 얼 수 있고 탈릭을 유지할 열을 주지 않는다고 적었다('Here, the water bodies do not provide heat to maintain a talik'). 하천 띠 규칙(기준점에서 -3 m 에서 3 m)에 드는 지점은 없어 disturbed = 1 인 행은 0개다",
+  "단면 수심 표의 수면 폭은 CS9(Site 2) 2.5-3.8 m, CS2(Site 1) 7.4-7.8 m 다(meta 의 river_transects). Site 2 의 굴착 지점 가운데 기준점에서 3.4-4.9 m 인 지점이 6개 있다. 기준점이 수로 가운데에 있으면 이 지점들은 둑이고, 수로 한쪽 끝에 있으면 수로 가장자리일 수 있다. 기준점의 단면 안 위치는 확인하지 못했다. 이 지점들의 대상 행 5개는 120-185 cm 이고 4개가 Site 2 대상 행의 중앙값 127 cm 보다 크다. 하천의 열 영향을 받은 값일 수 있다",
+  "자료 논문은 CS9(Site 2)를 호수의 열 영향이 없는 단면이라 중점 관측했다고 적었다. Site 1(CS2)은 상류 열카르스트 호수 가까이 있다. Site 1 의 값에 호수의 열 영향이 들었는지는 확인하지 못했다. disturbed 는 0 으로 두었다",
+  "hobo-F2 의 2012-10-07 값 370 cm(DRILL)는 같은 지점의 2013-09-06 값 166 cm 의 2.2배다. 설치 직후(2012-10-09)의 300 cm, 400 cm 지온 기록은 -0.20, -0.26 °C 로 센서 정확도(0.25 °C) 안에서 0 °C 부근이다. 탈릭인지 굴착 판독의 오차인지 확인하지 못했다. 이 행은 10월 방문이라 direct_dated 다",
+  "2013년 파일의 반복 구간(기록 24-31 과 35-42)은 값, 방법, 순서가 같고 지점 이름 3개가 다르다. 어느 위치 지정이 맞는지 확인하지 못했다. 앞선 구간을 남기고 뒤 구간의 3개 기록을 dup_of 로 표시했다. 두 지정의 위치 차이는 25 m 이내이고 같은 1 km 셀이다",
+  "td 파일 머리말의 comments 는 'sometimes drill can be metal rod; some uncertainties in the combined xlsx file' 이라고 적었다. DRILL 로 적힌 기록 가운데 금속봉 측정이 섞였을 수 있다",
+  "지점 이름의 연도는 위치를 측량한 해다. 2013년 파일의 drill-2017-* 처럼 관측 연도와 다른 경우가 있다. 관측일은 파일 머리말의 time_start 를 썼다. geopackage 의 2012년 굴착 지점 날짜는 2012-10-05, 2012-10-06 으로 파일의 2012-10-07 과 1-2일 다르다",
+  "2012년 파일(2012-10-07)의 pit-2013-Pit-S1 기록(PIT, 160 cm)은 geopackage 의 구덩이 날짜가 2013-09-07(exact_date = 1)이다. 관측 연도가 2012년인지 2013년인지 확인하지 못했다. 파일 날짜를 쓰고 qc_flag 를 date 로 두었다",
+  "방문일은 파일마다 하나다. 자료 논문은 일부 측정이 여러 날에 걸쳐 이루어졌다고 적었다. 기록 단위 날짜는 확인하지 못했다",
+  "PVC-TUBE 의 측정 범위는 변수 표에 0-200 cm 로 적혀 있다. piezo-CS9-P2 의 2018년 기록은 158 cm 에 max_exceed = 1 이다. 관 길이가 지점마다 다른지 확인하지 못했다",
+  "auxiliary/external 의 GPR, ERT 자료(Léger 등 2023)는 원시 단면과 비저항 표이고 융해 깊이 판독 값이 아니어서 쓰지 않았다"
+ ]
+}

@@ -1,0 +1,1254 @@
+{
+ "stage": "LGD 6B.6 단계 3(v4 조립)",
+ "created": "2026-09-30 02:27",
+ "git_head": "f2085166acd5e46a1a8eb31ad392362835706d28",
+ "script": "scripts/1_data_prep/build_fidelity_base_v4.py",
+ "script_sha256": "ae2b960eee8b3e62d52aca054463bafe2c34d06b3e246e67c2c0a090699d52e9",
+ "plan": "docs/EXPERIMENT_PLAN_LG_2026-09-29.md 6B.3, 6B.4, 6B.6",
+ "inputs": {
+  "v3": {
+   "path": "data/processed/fidelity_base_v3.csv",
+   "sha256": "71b5d3f6c297770d41aa7215e906e737842a3594005a5b52952bb636c752dc0f"
+  },
+  "soil_v3": {
+   "path": "data/processed/e5_soil_tdd_v3.csv",
+   "sha256": "711d0cd3ba0e2e410ee9a973f69db44f543459ffa03a1e6ea935db4a3884ef04"
+  },
+  "ext_cells": {
+   "path": "data/processed/ext_labels/ext_cells_v1.csv",
+   "sha256": "3cc7d72538ca9f1c8f0475d40c6395090594b47d0f173b55b014cbe456a941ae"
+  },
+  "ext_cov": {
+   "path": "data/processed/ext_labels/ext_cells_v1_cov.csv",
+   "sha256": "74039084caeb6c43c8bb0f0262dc6dc7af234f58990ef367402557d98d12a8b0"
+  }
+ },
+ "v3_files_unchanged_after_run": {
+  "v3": true,
+  "soil_v3": true
+ },
+ "outputs": {
+  "fidelity_base_v4.csv": "4c387b2b4fb43ef602d9e0b8fe50054a6699428d5a593425b3d309e798fce52a",
+  "e5_soil_tdd_v4.csv": "2ef333b24d60332af1a432ceff5ee7bb73a2154d0fc23659e8e694d6674029f6",
+  "fidelity_base_v4_labels.csv": "9f5af274f4b835045d90e202e35ebdc872e54e0affba218835735a43a87b2247"
+ },
+ "n_rows": {
+  "v3": 17572,
+  "new": 516,
+  "total": 18088,
+  "new_by_source_id": {
+   "F4_ext_direct": 329,
+   "F2_ext_unknown": 148,
+   "F3_ext_temp": 39
+  },
+  "new_by_region": {
+   "Tibet_LGD": 171,
+   "Russia_W": 156,
+   "Canada": 75,
+   "Russia_C": 51,
+   "NAtlantic": 38,
+   "Russia_E": 25
+  }
+ },
+ "hash_check": {
+  "v3_rows_hash_44cols_v3": "cdb3fbc676ec",
+  "v3_rows_hash_44cols_v4": "cdb3fbc676ec",
+  "v3_rows_hash_45cols_v3": "3a2eddb38cae",
+  "v3_rows_hash_45cols_v4": "12a83fd5ffd6",
+  "region_changed": [
+   {
+    "loc_id": 17535,
+    "region_v3": "CALM_Greenland",
+    "region_v4": "NAtlantic"
+   },
+   {
+    "loc_id": 17565,
+    "region_v3": "CALM_Greenland",
+    "region_v4": "NAtlantic"
+   },
+   {
+    "loc_id": 17566,
+    "region_v3": "CALM_Greenland",
+    "region_v4": "NAtlantic"
+   }
+  ],
+  "v4_full_hash": "a60e416fcb16",
+  "new_rows_hash": "52d53bcce043",
+  "v3_rows_unchanged_except_region": true,
+  "text_lines_differing_in_v3_part": 3,
+  "v3_rows_hash_45cols_after_region_restore": "3a2eddb38cae",
+  "v3_restored_equals_v3": true,
+  "v3_meta_full_hash": "3a2eddb38cae",
+  "soil_v3_rows_hash_v3": "5273e4b7d411",
+  "soil_v3_rows_hash_v4": "5273e4b7d411",
+  "soil_v3_rows_unchanged": true,
+  "soil_text_lines_differing_in_v3_part": 0,
+  "soil_new_tdd_le0_set_nan": 0,
+  "soil_new_tdd_nan_total": 1
+ },
+ "conventions": {
+  "loc_id": "새 행 loc_id = 20000 + 일련번호(direct, temp, unknown_yamal 순, 그 안에서 macro, ky, kx 순)",
+  "region": {
+   "Tibet": "Tibet_LGD",
+   "NAtlantic": "NAtlantic",
+   "Russia_C": "Russia_C",
+   "Russia_W": "Russia_W",
+   "Russia_E": "Russia_E",
+   "Canada": "Canada",
+   "v3 CALM_Greenland(3행)": "NAtlantic"
+  },
+  "macro_mapping": "fidelity.macro_region 은 MACRO_REGION.get(region, region) 이다. 표에 없는 region 은 그 이름이 macro 가 된다. 새 region 이름을 macro 이름과 같게 두어 m1_core 를 고치지 않고 대응한다. Tibet 은 v3 의 'Tibet'(QTP_CN, CALM_QTP_China)과 나누려고 'Tibet_LGD' 로 둔다",
+  "source_id": {
+   "direct": "F4_ext_direct",
+   "temp": "F3_ext_temp",
+   "unknown_yamal": "F2_ext_unknown"
+  },
+  "fidelity_level": {
+   "F4_ext_direct": 4,
+   "F3_ext_temp": 3,
+   "F2_ext_unknown": 2
+  },
+  "spatial_support_m": "새 행 1000(약 1 km 셀). v3 행은 100 그대로",
+  "sigma_prior_cm": "셀 안 연 값 표준편차(alt_sd_all)를 3–40 으로 자름, 없으면 12(E3 규약). 입력 금지 열",
+  "sar": "insar_* · polsar_alt · polsar_std 결측, polsar_valid 0, insar_miss 1(E3 규약)",
+  "soil_tdd": "e5_soil_tdd_v4 의 새 행은 loc_id 로 병합된다(load_base 의 첫 병합). e5_tdd_soil <= 0 이면 tdd·sqrt 결측(v3 규칙)",
+  "wrapper_design": [
+   "실행 표 = v4 의 v3 행 전부 + 그 대상의 새 행(labels 의 lgd_role 로 고른다). 고른 새 행의 source_id 를 F4_direct 로 바꾼다. 다른 새 지역 행은 넣지 않는다(6B.6 주 설정). L42 보조 설정만 다른 새 지역의 target 행을 더한다",
+   "개정 13: 실행 표는 v4 의 원문 줄을 골라 옮기고 대상 새 행의 source_id 칸만 F4_direct 로 바꿔 만든다(pandas 로 읽고 다시 쓰면 v3 행의 부동소수 11개 값이 최대 2.8e-14 달라져 6B.6 재현 점검의 입력이 본 실행과 비트 단위로 같지 않다). 구현은 scripts/1_data_prep/lgd_eligibility_v1.py 의 write_run_table_text 다",
+   "개정 13: 새 행은 region 이 아니라 loc_id(>= 20000), source_id, labels 의 lgd_role 로 고른다. v4 region 'Canada' 에는 v3 CALM 16행과 새 직접 라벨 행이, 'Russia_W' 에는 새 직접 라벨 행과 GGD402 보조 행(F2_ext_unknown)이 함께 있기 때문이다. 래퍼와 집계기는 고른 새 행이 모두 loc_id >= 20000 이고 source_id 가 기대값이며 lgd_role 이 기대값인지 assert 한다",
+   "개정 13: Russia_C 실행 표(주 설정과 모든 변형)에서 v3 loc 17557(CALM R8 Tiksi, 레나 델타 상자 안)을 뺀다. 6B.4 는 레나 델타 영역을 Russia_C 에서 제외한다. 이 행을 대상에 두면 100 km 버퍼가 레나 셀 1,252개를 원천에서 뺀다",
+   "개정 13, L42 원천 규칙: 다른 새 지역의 직접 라벨 셀을 원천에 더할 때 NAtlantic 셀을 더하면 v3 의 하위 지점 평균 행 17520(Abisko S2)과 17569(Kapp Linné S1)을 원천에서 뺀다(같은 지점의 이중 계산). v3 QTP_CN 17389(지온 유도, 좌표 소수 2자리)는 Tibet 셀을 더해도 측정과 라벨 정의가 달라 원천에 남기고 표시한다. 17557 은 v3 행으로 원천에 남는다(새 Russia_C 셀과 168 km 이상)",
+   "후보 (가) 를 권한다: 대상별 디렉터리에 실행 표를 fidelity_base_v3.csv, e5_soil_tdd_v4.csv 내용을 e5_soil_tdd_v3.csv 이름으로 두고 h40 에 --data-dir, --targets <macro>:x, --tag lgd, --out-dir data/processed/lgd 를 준다. h40·m1_core 는 고치지 않는다",
+   "대상 이름: Tibet_LGD, NAtlantic, Russia_C, Russia_W, Russia_E, Canada. L39 는 Tibet_LGD 에 F3_ext_temp 행을 넣은 표로 따로 돌린다",
+   "하위 지역 대응표(lg_subregion_map_v1.csv)는 대상 디렉터리에 두지 않는다. Canada 확충판의 새 블록이 표에 없어 apply_subregion_map 이 중단하기 때문이다. 표가 없으면 h40 은 k-means 하위 지역을 쓰며 macro 대상 실행에는 영향이 없다",
+   "h40 의 집계(--summarize-only)는 주 4지역과 MAIN_POINT(Russia_C 점 추정 고정)를 가정한다. LGD 판정은 새 집계기가 조각을 읽어 계산한다",
+   "scripts/1_data_prep/lgd_eligibility_v1.py 의 run_table 이 위 실행 표를 만들고 load_base 로 읽는 경로를 이미 거쳤다(v3 참조 26행이 h40 --count-only 산출과 일치)"
+  ]
+ },
+ "by_source": {
+  "calm_pangaea_v4add": {
+   "n_cells": 7,
+   "license": [
+    "CC BY 4.0"
+   ],
+   "license_attention": false,
+   "by_set": {
+    "direct": 7
+   },
+   "by_macro": {
+    "Canada": 1,
+    "NAtlantic": 2,
+    "Russia_E": 3,
+    "Russia_W": 1
+   },
+   "n_locations": 7
+  },
+  "calm_web_subsites": {
+   "n_cells": 13,
+   "license": [
+    "unverified"
+   ],
+   "license_attention": true,
+   "by_set": {
+    "direct": 13
+   },
+   "by_macro": {
+    "NAtlantic": 13
+   },
+   "n_locations": 15
+  },
+  "cusp_v1_1": {
+   "n_cells": 11,
+   "license": [
+    " original: CC BY-NC-SA 3.0",
+    " original: CC0 1.0",
+    "CUSP: all rights reserved (LANL notice, LICENSE.txt)"
+   ],
+   "license_attention": true,
+   "by_set": {
+    "direct": 11
+   },
+   "by_macro": {
+    "Canada": 5,
+    "NAtlantic": 6
+   },
+   "n_locations": 629
+  },
+  "firealt_talucci2025": {
+   "n_cells": 42,
+   "license": [
+    "CC BY 4.0"
+   ],
+   "license_attention": false,
+   "by_set": {
+    "direct": 42
+   },
+   "by_macro": {
+    "Canada": 34,
+    "Russia_C": 6,
+    "Russia_W": 2
+   },
+   "n_locations": 49
+  },
+  "grl_disko_zastruzny": {
+   "n_cells": 1,
+   "license": [
+    "CC-BY-4.0"
+   ],
+   "license_attention": false,
+   "by_set": {
+    "direct": 1
+   },
+   "by_macro": {
+    "NAtlantic": 1
+   },
+   "n_locations": 1
+  },
+  "grl_ilulissat_scheer": {
+   "n_cells": 13,
+   "license": [
+    "CC BY 4.0",
+    "CC-BY-4.0"
+   ],
+   "license_attention": false,
+   "by_set": {
+    "direct": 13
+   },
+   "by_macro": {
+    "NAtlantic": 13
+   },
+   "n_locations": 331
+  },
+  "mythaw_pangaea": {
+   "n_cells": 6,
+   "license": [
+    "CC BY 4.0",
+    "CC-BY-4.0"
+   ],
+   "license_attention": false,
+   "by_set": {
+    "direct": 6
+   },
+   "by_macro": {
+    "Canada": 2,
+    "NAtlantic": 4
+   },
+   "n_locations": 6
+  },
+  "nsidc_ggd353_thawtube": {
+   "n_cells": 33,
+   "license": [
+    "unverified"
+   ],
+   "license_attention": true,
+   "by_set": {
+    "direct": 33
+   },
+   "by_macro": {
+    "Canada": 33
+   },
+   "n_locations": 37
+  },
+  "nsidc_ggd402_yamal": {
+   "n_cells": 148,
+   "license": [
+    "unverified"
+   ],
+   "license_attention": true,
+   "by_set": {
+    "unknown_yamal": 148
+   },
+   "by_macro": {
+    "Russia_W": 148
+   },
+   "n_locations": 158
+  },
+  "palmtag2022_pedon": {
+   "n_cells": 33,
+   "license": [
+    "ODC-By"
+   ],
+   "license_attention": false,
+   "by_set": {
+    "direct": 33
+   },
+   "by_macro": {
+    "Russia_C": 16,
+    "Russia_E": 17
+   },
+   "n_locations": 116
+  },
+  "qtp_du_gpr": {
+   "n_cells": 132,
+   "license": [
+    "MIT (Zenodo record 10.5281/zenodo.21999366, archive LICENSE file)"
+   ],
+   "license_attention": false,
+   "by_set": {
+    "direct": 132
+   },
+   "by_macro": {
+    "Tibet": 132
+   },
+   "n_locations": 180
+  },
+  "qtp_fu_temp": {
+   "n_cells": 39,
+   "license": [
+    "CC BY 4.0"
+   ],
+   "license_attention": false,
+   "by_set": {
+    "temp": 39
+   },
+   "by_macro": {
+    "Tibet": 39
+   },
+   "n_locations": 44
+  },
+  "ru_kwbs_makarieva": {
+   "n_cells": 2,
+   "license": [
+    "CC BY 3.0"
+   ],
+   "license_attention": false,
+   "by_set": {
+    "direct": 2
+   },
+   "by_macro": {
+    "Russia_E": 2
+   },
+   "n_locations": 3
+  },
+  "ru_liang_mounds": {
+   "n_cells": 3,
+   "license": [
+    "CC-BY-4.0"
+   ],
+   "license_attention": false,
+   "by_set": {
+    "direct": 3
+   },
+   "by_macro": {
+    "Russia_E": 3
+   },
+   "n_locations": 4
+  },
+  "ru_mamontovklyk_grosse": {
+   "n_cells": 27,
+   "license": [
+    "CC-BY-3.0"
+   ],
+   "license_attention": false,
+   "by_set": {
+    "direct": 27
+   },
+   "by_macro": {
+    "Russia_C": 27
+   },
+   "n_locations": 70
+  },
+  "ru_syrdakh_obs": {
+   "n_cells": 2,
+   "license": [
+    "CC-BY-4.0"
+   ],
+   "license_attention": false,
+   "by_set": {
+    "direct": 2
+   },
+   "by_macro": {
+    "Russia_C": 2
+   },
+   "n_locations": 70
+  },
+  "ru_yamal_walker": {
+   "n_cells": 5,
+   "license": [
+    "CC-BY-3.0",
+    "unverified"
+   ],
+   "license_attention": true,
+   "by_set": {
+    "direct": 5
+   },
+   "by_macro": {
+    "Russia_W": 5
+   },
+   "n_locations": 45
+  },
+  "swe_tavvavuoma_sannel": {
+   "n_cells": 1,
+   "license": [
+    "CC BY 4.0"
+   ],
+   "license_attention": false,
+   "by_set": {
+    "direct": 1
+   },
+   "by_macro": {
+    "NAtlantic": 1
+   },
+   "n_locations": 3
+  }
+ },
+ "by_region": {
+  "direct|Canada": {
+   "new_cells": 75,
+   "new_blocks": 38,
+   "target_cells": 75,
+   "target_blocks": 38,
+   "v3_f4_cells_same_macro": 750,
+   "v3_f4_blocks_same_macro": 39,
+   "union_blocks_with_v3": 67,
+   "alt_mean_new": 81.0,
+   "subunits": {
+    "Mackenzie": 33,
+    "Bylot_Island": 3,
+    "Ward_Hunt_Island": 2,
+    "Nunavut": 1,
+    "Northwest Territories": 1
+   },
+   "dem_elev_m": {
+    "min": 0.0,
+    "median": 116.3,
+    "max": 584.0,
+    "frac_above_src_p99": 0.0
+   },
+   "frac_outside_src_p1_p99": {
+    "dem_elev": 0.067,
+    "dem_slope": 0.08,
+    "dem_aspect_sin": 0.027,
+    "dem_aspect_cos": 0.067,
+    "dem_tpi": 0.013,
+    "dem_rough": 0.04,
+    "e5_maat": 0.08,
+    "e5_tdd": 0.293,
+    "e5_fdd": 0.08,
+    "e5_sqrt_tdd": 0.293,
+    "e5_twarm": 0.387,
+    "e5_tcold": 0.027,
+    "e5_stl1": 0.28,
+    "e5_swe": 0.173,
+    "sg_clay_5_15": 0.096,
+    "sg_sand_5_15": 0.0,
+    "sg_silt_5_15": 0.0,
+    "sg_bdod_5_15": 0.205,
+    "sg_cfvo_5_15": 0.0,
+    "sg_phh2o_5_15": 0.027,
+    "sg_soc_0_5": 0.288,
+    "sg_soc_5_15": 0.247,
+    "sg_soc_15_30": 0.027,
+    "cci_alt": 0.192
+   }
+  },
+  "direct|NAtlantic": {
+   "new_cells": 38,
+   "new_blocks": 12,
+   "target_cells": 38,
+   "target_blocks": 12,
+   "v3_f4_cells_same_macro": 3,
+   "v3_f4_blocks_same_macro": 2,
+   "union_blocks_with_v3": 13,
+   "alt_mean_new": 71.0,
+   "subunits": {
+    "Greenland": 21,
+    "Scandinavia": 9,
+    "Svalbard": 8
+   },
+   "dem_elev_m": {
+    "min": 6.3,
+    "median": 56.8,
+    "max": 985.3,
+    "frac_above_src_p99": 0.0263
+   },
+   "frac_outside_src_p1_p99": {
+    "dem_elev": 0.026,
+    "dem_slope": 0.105,
+    "dem_aspect_sin": 0.026,
+    "dem_aspect_cos": 0.0,
+    "dem_tpi": 0.263,
+    "dem_rough": 0.211,
+    "e5_maat": 0.0,
+    "e5_tdd": 0.053,
+    "e5_fdd": 0.053,
+    "e5_sqrt_tdd": 0.053,
+    "e5_twarm": 0.053,
+    "e5_tcold": 0.342,
+    "e5_stl1": 0.105,
+    "e5_swe": 0.5,
+    "sg_clay_5_15": 0.237,
+    "sg_sand_5_15": 0.184,
+    "sg_silt_5_15": 0.0,
+    "sg_bdod_5_15": 0.0,
+    "sg_cfvo_5_15": 0.184,
+    "sg_phh2o_5_15": 0.0,
+    "sg_soc_0_5": 0.0,
+    "sg_soc_5_15": 0.0,
+    "sg_soc_15_30": 0.0,
+    "cci_alt": 0.0
+   }
+  },
+  "direct|Russia_C": {
+   "new_cells": 51,
+   "new_blocks": 8,
+   "target_cells": 51,
+   "target_blocks": 8,
+   "v3_f4_cells_same_macro": 7,
+   "v3_f4_blocks_same_macro": 6,
+   "union_blocks_with_v3": 14,
+   "alt_mean_new": 58.4,
+   "subunits": {
+    "Laptev_W_coast": 27,
+    "Taymyr_AryMas": 10,
+    "Yakutia_C": 8,
+    "Taymyr_Logata": 6
+   },
+   "dem_elev_m": {
+    "min": 1.1,
+    "median": 21.7,
+    "max": 251.8,
+    "frac_above_src_p99": 0.0
+   },
+   "frac_outside_src_p1_p99": {
+    "dem_elev": 0.0,
+    "dem_slope": 0.0,
+    "dem_aspect_sin": 0.059,
+    "dem_aspect_cos": 0.059,
+    "dem_tpi": 0.039,
+    "dem_rough": 0.0,
+    "e5_maat": 0.392,
+    "e5_tdd": 0.0,
+    "e5_fdd": 0.059,
+    "e5_sqrt_tdd": 0.0,
+    "e5_twarm": 0.157,
+    "e5_tcold": 0.157,
+    "e5_stl1": 0.0,
+    "e5_swe": 0.039,
+    "sg_clay_5_15": 0.0,
+    "sg_sand_5_15": 0.125,
+    "sg_silt_5_15": 0.021,
+    "sg_bdod_5_15": 0.0,
+    "sg_cfvo_5_15": 0.0,
+    "sg_phh2o_5_15": 0.0,
+    "sg_soc_0_5": 0.0,
+    "sg_soc_5_15": 0.229,
+    "sg_soc_15_30": 0.188,
+    "cci_alt": 0.353
+   }
+  },
+  "direct|Russia_E": {
+   "new_cells": 25,
+   "new_blocks": 11,
+   "target_cells": 25,
+   "target_blocks": 11,
+   "v3_f4_cells_same_macro": 30,
+   "v3_f4_blocks_same_macro": 21,
+   "union_blocks_with_v3": 28,
+   "alt_mean_new": 53.7,
+   "subunits": {
+    "Indigirka_Kytalyk": 7,
+    "Kolyma_Shalaurovo": 5,
+    "Kolyma_Cherskii": 3,
+    "Indigirka": 3,
+    "Kolyma_KWBS": 2,
+    "Chukotka": 2,
+    "Kolyma_Shalaurovo-Cherskii": 2,
+    "Kamchatka": 1
+   },
+   "dem_elev_m": {
+    "min": 1.4,
+    "median": 31.5,
+    "max": 1316.3,
+    "frac_above_src_p99": 0.12
+   },
+   "frac_outside_src_p1_p99": {
+    "dem_elev": 0.12,
+    "dem_slope": 0.0,
+    "dem_aspect_sin": 0.0,
+    "dem_aspect_cos": 0.04,
+    "dem_tpi": 0.08,
+    "dem_rough": 0.12,
+    "e5_maat": 0.0,
+    "e5_tdd": 0.0,
+    "e5_fdd": 0.48,
+    "e5_sqrt_tdd": 0.0,
+    "e5_twarm": 0.0,
+    "e5_tcold": 0.48,
+    "e5_stl1": 0.0,
+    "e5_swe": 0.12,
+    "sg_clay_5_15": 0.0,
+    "sg_sand_5_15": 0.36,
+    "sg_silt_5_15": 0.28,
+    "sg_bdod_5_15": 0.4,
+    "sg_cfvo_5_15": 0.12,
+    "sg_phh2o_5_15": 0.0,
+    "sg_soc_0_5": 0.0,
+    "sg_soc_5_15": 0.04,
+    "sg_soc_15_30": 0.0,
+    "cci_alt": 0.0
+   }
+  },
+  "direct|Russia_W": {
+   "new_cells": 8,
+   "new_blocks": 6,
+   "target_cells": 8,
+   "target_blocks": 6,
+   "v3_f4_cells_same_macro": 31,
+   "v3_f4_blocks_same_macro": 21,
+   "union_blocks_with_v3": 26,
+   "alt_mean_new": 109.0,
+   "subunits": {
+    "Yamal": 5,
+    "West Siberia": 1
+   },
+   "dem_elev_m": {
+    "min": 7.2,
+    "median": 33.1,
+    "max": 77.2,
+    "frac_above_src_p99": 0.0
+   },
+   "frac_outside_src_p1_p99": {
+    "dem_elev": 0.0,
+    "dem_slope": 0.0,
+    "dem_aspect_sin": 0.0,
+    "dem_aspect_cos": 0.0,
+    "dem_tpi": 0.0,
+    "dem_rough": 0.0,
+    "e5_maat": 0.0,
+    "e5_tdd": 0.0,
+    "e5_fdd": 0.0,
+    "e5_sqrt_tdd": 0.0,
+    "e5_twarm": 0.0,
+    "e5_tcold": 0.0,
+    "e5_stl1": 0.0,
+    "e5_swe": 0.375,
+    "sg_clay_5_15": 0.0,
+    "sg_sand_5_15": 0.375,
+    "sg_silt_5_15": 0.375,
+    "sg_bdod_5_15": 0.0,
+    "sg_cfvo_5_15": 0.0,
+    "sg_phh2o_5_15": 0.125,
+    "sg_soc_0_5": 0.0,
+    "sg_soc_5_15": 0.0,
+    "sg_soc_15_30": 0.0,
+    "cci_alt": 0.0
+   }
+  },
+  "direct|Tibet": {
+   "new_cells": 132,
+   "new_blocks": 34,
+   "target_cells": 132,
+   "target_blocks": 34,
+   "v3_f4_cells_same_macro": 0,
+   "v3_f4_blocks_same_macro": 0,
+   "union_blocks_with_v3": 34,
+   "alt_mean_new": 261.8,
+   "subunits": {
+    "QTEC": 91,
+    "YellowSrc_East": 27,
+    "West_QTP": 11,
+    "Qilian": 3
+   },
+   "dem_elev_m": {
+    "min": 3537.5,
+    "median": 4710.1,
+    "max": 5176.0,
+    "frac_above_src_p99": 1.0
+   },
+   "frac_outside_src_p1_p99": {
+    "dem_elev": 1.0,
+    "dem_slope": 0.038,
+    "dem_aspect_sin": 0.008,
+    "dem_aspect_cos": 0.015,
+    "dem_tpi": 0.121,
+    "dem_rough": 0.227,
+    "e5_maat": 0.0,
+    "e5_tdd": 0.333,
+    "e5_fdd": 0.0,
+    "e5_sqrt_tdd": 0.333,
+    "e5_twarm": 0.348,
+    "e5_tcold": 0.0,
+    "e5_stl1": 0.098,
+    "e5_swe": 0.977,
+    "sg_clay_5_15": 0.038,
+    "sg_sand_5_15": 0.152,
+    "sg_silt_5_15": 0.114,
+    "sg_bdod_5_15": 0.508,
+    "sg_cfvo_5_15": 1.0,
+    "sg_phh2o_5_15": 0.962,
+    "sg_soc_0_5": 1.0,
+    "sg_soc_5_15": 1.0,
+    "sg_soc_15_30": 0.985,
+    "cci_alt": 0.061
+   }
+  },
+  "temp|Tibet": {
+   "new_cells": 39,
+   "new_blocks": 11,
+   "target_cells": 0,
+   "target_blocks": 0,
+   "v3_f4_cells_same_macro": 0,
+   "v3_f4_blocks_same_macro": 0,
+   "union_blocks_with_v3": null,
+   "alt_mean_new": 279.4,
+   "subunits": {
+    "QTEC": 39
+   },
+   "dem_elev_m": {
+    "min": 4464.0,
+    "median": 4645.9,
+    "max": 5052.0,
+    "frac_above_src_p99": 1.0
+   },
+   "frac_outside_src_p1_p99": {
+    "dem_elev": 1.0,
+    "dem_slope": 0.0,
+    "dem_aspect_sin": 0.0,
+    "dem_aspect_cos": 0.026,
+    "dem_tpi": 0.051,
+    "dem_rough": 0.026,
+    "e5_maat": 0.0,
+    "e5_tdd": 0.282,
+    "e5_fdd": 0.0,
+    "e5_sqrt_tdd": 0.282,
+    "e5_twarm": 0.282,
+    "e5_tcold": 0.0,
+    "e5_stl1": 0.103,
+    "e5_swe": 0.974,
+    "sg_clay_5_15": 0.0,
+    "sg_sand_5_15": 0.179,
+    "sg_silt_5_15": 0.103,
+    "sg_bdod_5_15": 0.667,
+    "sg_cfvo_5_15": 1.0,
+    "sg_phh2o_5_15": 1.0,
+    "sg_soc_0_5": 1.0,
+    "sg_soc_5_15": 1.0,
+    "sg_soc_15_30": 1.0,
+    "cci_alt": 0.077
+   }
+  },
+  "unknown_yamal|Russia_W": {
+   "new_cells": 148,
+   "new_blocks": 23,
+   "target_cells": 0,
+   "target_blocks": 0,
+   "v3_f4_cells_same_macro": 31,
+   "v3_f4_blocks_same_macro": 21,
+   "union_blocks_with_v3": null,
+   "alt_mean_new": 73.5,
+   "subunits": {
+    "Yamal": 148
+   },
+   "dem_elev_m": {
+    "min": -0.8,
+    "median": 18.8,
+    "max": 69.6,
+    "frac_above_src_p99": 0.0
+   },
+   "frac_outside_src_p1_p99": {
+    "dem_elev": 0.014,
+    "dem_slope": 0.007,
+    "dem_aspect_sin": 0.027,
+    "dem_aspect_cos": 0.02,
+    "dem_tpi": 0.0,
+    "dem_rough": 0.0,
+    "e5_maat": 0.0,
+    "e5_tdd": 0.0,
+    "e5_fdd": 0.0,
+    "e5_sqrt_tdd": 0.0,
+    "e5_twarm": 0.0,
+    "e5_tcold": 0.0,
+    "e5_stl1": 0.0,
+    "e5_swe": 0.068,
+    "sg_clay_5_15": 0.0,
+    "sg_sand_5_15": 0.514,
+    "sg_silt_5_15": 0.385,
+    "sg_bdod_5_15": 0.0,
+    "sg_cfvo_5_15": 0.0,
+    "sg_phh2o_5_15": 0.0,
+    "sg_soc_0_5": 0.0,
+    "sg_soc_5_15": 0.0,
+    "sg_soc_15_30": 0.0,
+    "cci_alt": 0.0
+   }
+  }
+ },
+ "ood_reference": {
+  "source": "v3 F4_direct 17,467행",
+  "p01": {
+   "dem_elev": 0.7057,
+   "dem_slope": 0.0498,
+   "dem_aspect_sin": -0.9991,
+   "dem_aspect_cos": -0.9997,
+   "dem_tpi": -11.2231,
+   "dem_rough": 0.3832,
+   "e5_maat": -10.9638,
+   "e5_tdd": 449.5737,
+   "e5_fdd": 1393.9218,
+   "e5_sqrt_tdd": 21.2032,
+   "e5_twarm": 5.659,
+   "e5_tcold": -30.6247,
+   "e5_stl1": -3.4003,
+   "e5_swe": 0.0266,
+   "sg_clay_5_15": 11.6,
+   "sg_sand_5_15": 13.4,
+   "sg_silt_5_15": 26.1,
+   "sg_bdod_5_15": 0.43,
+   "sg_cfvo_5_15": 1.8,
+   "sg_phh2o_5_15": 5.1,
+   "sg_soc_0_5": 72.2,
+   "sg_soc_5_15": 58.2,
+   "sg_soc_15_30": 34.6,
+   "cci_alt": 19.2
+  },
+  "p99": {
+   "dem_elev": 901.8116,
+   "dem_slope": 9.9934,
+   "dem_aspect_sin": 0.999,
+   "dem_aspect_cos": 0.9996,
+   "dem_tpi": 18.8474,
+   "dem_rough": 23.7348,
+   "e5_maat": 1.1028,
+   "e5_tdd": 2073.7747,
+   "e5_fdd": 4834.8526,
+   "e5_sqrt_tdd": 45.5387,
+   "e5_twarm": 17.3804,
+   "e5_tcold": -13.1064,
+   "e5_stl1": 4.2622,
+   "e5_swe": 0.0902,
+   "sg_clay_5_15": 32.4,
+   "sg_sand_5_15": 52.0,
+   "sg_silt_5_15": 73.9,
+   "sg_bdod_5_15": 1.19,
+   "sg_cfvo_5_15": 16.0,
+   "sg_phh2o_5_15": 7.1,
+   "sg_soc_0_5": 416.2,
+   "sg_soc_5_15": 314.3,
+   "sg_soc_15_30": 213.5,
+   "cci_alt": 114.4
+  }
+ },
+ "elev_minus_e5grid": {
+  "direct|Canada": {
+   "n": 75,
+   "median": 1.5,
+   "p05": -91.4,
+   "n_le_m300": 0,
+   "n_abs_gt300": 0,
+   "cells_abs_gt300": []
+  },
+  "direct|NAtlantic": {
+   "n": 38,
+   "median": -21.8,
+   "p05": -388.4,
+   "n_le_m300": 3,
+   "n_abs_gt300": 3,
+   "cells_abs_gt300": [
+    {
+     "loc_id": 20085,
+     "elev_minus_e5grid_m": -422.97
+    },
+    {
+     "loc_id": 20086,
+     "elev_minus_e5grid_m": -488.93
+    },
+    {
+     "loc_id": 20088,
+     "elev_minus_e5grid_m": -382.34
+    }
+   ]
+  },
+  "direct|Russia_C": {
+   "n": 51,
+   "median": 0.5,
+   "p05": -29.8,
+   "n_le_m300": 0,
+   "n_abs_gt300": 0,
+   "cells_abs_gt300": []
+  },
+  "direct|Russia_E": {
+   "n": 25,
+   "median": -1.8,
+   "p05": -274.7,
+   "n_le_m300": 1,
+   "n_abs_gt300": 1,
+   "cells_abs_gt300": [
+    {
+     "loc_id": 20164,
+     "elev_minus_e5grid_m": -548.51
+    }
+   ]
+  },
+  "direct|Russia_W": {
+   "n": 8,
+   "median": -2.0,
+   "p05": -18.5,
+   "n_le_m300": 0,
+   "n_abs_gt300": 0,
+   "cells_abs_gt300": []
+  },
+  "direct|Tibet": {
+   "n": 132,
+   "median": -38.0,
+   "p05": -218.7,
+   "n_le_m300": 5,
+   "n_abs_gt300": 5,
+   "cells_abs_gt300": [
+    {
+     "loc_id": 20321,
+     "elev_minus_e5grid_m": -307.6
+    },
+    {
+     "loc_id": 20322,
+     "elev_minus_e5grid_m": -388.29
+    },
+    {
+     "loc_id": 20323,
+     "elev_minus_e5grid_m": -318.54
+    },
+    {
+     "loc_id": 20324,
+     "elev_minus_e5grid_m": -407.78
+    },
+    {
+     "loc_id": 20325,
+     "elev_minus_e5grid_m": -315.13
+    }
+   ]
+  },
+  "temp|Tibet": {
+   "n": 39,
+   "median": -53.0,
+   "p05": -183.9,
+   "n_le_m300": 0,
+   "n_abs_gt300": 0,
+   "cells_abs_gt300": []
+  },
+  "unknown_yamal|Russia_W": {
+   "n": 148,
+   "median": 0.2,
+   "p05": -12.4,
+   "n_le_m300": 0,
+   "n_abs_gt300": 0,
+   "cells_abs_gt300": []
+  }
+ },
+ "elev_minus_e5grid_note": "ERA5-Land 사용 격자 중심 ±0.05° 상자의 Copernicus DEM 평균을 격자 고도의 대리값으로 쓰고 dem_elev 에서 뺀 값(m). ERA5-Land 공변량에는 지점 고도 보정이 없다(v3 규약과 같다). 값은 보정하지 않는다",
+ "e5_glacier_grid": {
+  "rule": "사용 격자의 2015–2020년 월 적설 수당량 최솟값 >= 1.0 m",
+  "new_rows": [
+   {
+    "loc_id": 20080,
+    "macro_v4": "NAtlantic",
+    "lgd_role": "target",
+    "e5_grid_sd_min_m": 2.9824371337890625
+   },
+   {
+    "loc_id": 20081,
+    "macro_v4": "NAtlantic",
+    "lgd_role": "target",
+    "e5_grid_sd_min_m": 2.9824371337890625
+   },
+   {
+    "loc_id": 20111,
+    "macro_v4": "NAtlantic",
+    "lgd_role": "target",
+    "e5_grid_sd_min_m": 1.0589256286621094
+   },
+   {
+    "loc_id": 20112,
+    "macro_v4": "NAtlantic",
+    "lgd_role": "target",
+    "e5_grid_sd_min_m": 10.0
+   }
+  ],
+  "v3_grid_check": {
+   "n": 17572,
+   "n_tdd_match": 17558,
+   "mismatch_by_region": {
+    "ABoVE_AK": 12,
+    "ABoVE_CA": 2
+   },
+   "glacier_grid_f4_direct": [
+    {
+     "loc_id": 17511,
+     "region": "CALM_Canada"
+    },
+    {
+     "loc_id": 17565,
+     "region": "CALM_Greenland"
+    },
+    {
+     "loc_id": 17566,
+     "region": "CALM_Greenland"
+    },
+    {
+     "loc_id": 17572,
+     "region": "CALM_Canada"
+    }
+   ]
+  },
+  "note": "육지 판정(t2m 유효)이 빙하 격자를 거르지 않는다. v3 규약을 지키려고 값은 바꾸지 않았다. NAtlantic 에는 빙하 격자 셀을 뺀 변형 L41 (g)를 둔다(개정 13)"
+ },
+ "covariate_completeness": {
+  "by_set_macro": {
+   "direct|Canada": {
+    "n": 75,
+    "terrain6": 1.0,
+    "climate8": 1.0,
+    "soil9": 0.9733,
+    "cci_valid": 0.9733,
+    "soil_tdd": 1.0,
+    "x25_all": 0.96,
+    "eval_ready": 0.9733,
+    "n_eval_ready": 73,
+    "n_blocks": 38,
+    "n_blocks_eval_ready": 38
+   },
+   "direct|NAtlantic": {
+    "n": 38,
+    "terrain6": 1.0,
+    "climate8": 1.0,
+    "soil9": 1.0,
+    "cci_valid": 0.8947,
+    "soil_tdd": 0.9737,
+    "x25_all": 0.8947,
+    "eval_ready": 0.8684,
+    "n_eval_ready": 33,
+    "n_blocks": 12,
+    "n_blocks_eval_ready": 10
+   },
+   "direct|Russia_C": {
+    "n": 51,
+    "terrain6": 1.0,
+    "climate8": 1.0,
+    "soil9": 0.9412,
+    "cci_valid": 1.0,
+    "soil_tdd": 1.0,
+    "x25_all": 0.9412,
+    "eval_ready": 1.0,
+    "n_eval_ready": 51,
+    "n_blocks": 8,
+    "n_blocks_eval_ready": 8
+   },
+   "direct|Russia_E": {
+    "n": 25,
+    "terrain6": 1.0,
+    "climate8": 1.0,
+    "soil9": 1.0,
+    "cci_valid": 1.0,
+    "soil_tdd": 1.0,
+    "x25_all": 1.0,
+    "eval_ready": 1.0,
+    "n_eval_ready": 25,
+    "n_blocks": 11,
+    "n_blocks_eval_ready": 11
+   },
+   "direct|Russia_W": {
+    "n": 8,
+    "terrain6": 1.0,
+    "climate8": 1.0,
+    "soil9": 1.0,
+    "cci_valid": 1.0,
+    "soil_tdd": 1.0,
+    "x25_all": 1.0,
+    "eval_ready": 1.0,
+    "n_eval_ready": 8,
+    "n_blocks": 6,
+    "n_blocks_eval_ready": 6
+   },
+   "direct|Tibet": {
+    "n": 132,
+    "terrain6": 1.0,
+    "climate8": 1.0,
+    "soil9": 1.0,
+    "cci_valid": 1.0,
+    "soil_tdd": 1.0,
+    "x25_all": 1.0,
+    "eval_ready": 1.0,
+    "n_eval_ready": 132,
+    "n_blocks": 34,
+    "n_blocks_eval_ready": 34
+   },
+   "temp|Tibet": {
+    "n": 39,
+    "terrain6": 1.0,
+    "climate8": 1.0,
+    "soil9": 1.0,
+    "cci_valid": 1.0,
+    "soil_tdd": 1.0,
+    "x25_all": 1.0,
+    "eval_ready": 1.0,
+    "n_eval_ready": 39,
+    "n_blocks": 11,
+    "n_blocks_eval_ready": 11
+   },
+   "unknown_yamal|Russia_W": {
+    "n": 148,
+    "terrain6": 1.0,
+    "climate8": 1.0,
+    "soil9": 1.0,
+    "cci_valid": 1.0,
+    "soil_tdd": 1.0,
+    "x25_all": 1.0,
+    "eval_ready": 1.0,
+    "n_eval_ready": 148,
+    "n_blocks": 23,
+    "n_blocks_eval_ready": 23
+   }
+  },
+  "target_by_macro": {
+   "Canada": {
+    "n": 75,
+    "terrain6": 1.0,
+    "climate8": 1.0,
+    "soil9": 0.9733,
+    "cci_valid": 0.9733,
+    "soil_tdd": 1.0,
+    "x25_all": 0.96,
+    "eval_ready": 0.9733,
+    "n_eval_ready": 73,
+    "n_blocks": 38,
+    "n_blocks_eval_ready": 38
+   },
+   "NAtlantic": {
+    "n": 38,
+    "terrain6": 1.0,
+    "climate8": 1.0,
+    "soil9": 1.0,
+    "cci_valid": 0.8947,
+    "soil_tdd": 0.9737,
+    "x25_all": 0.8947,
+    "eval_ready": 0.8684,
+    "n_eval_ready": 33,
+    "n_blocks": 12,
+    "n_blocks_eval_ready": 10
+   },
+   "Russia_C": {
+    "n": 51,
+    "terrain6": 1.0,
+    "climate8": 1.0,
+    "soil9": 0.9412,
+    "cci_valid": 1.0,
+    "soil_tdd": 1.0,
+    "x25_all": 0.9412,
+    "eval_ready": 1.0,
+    "n_eval_ready": 51,
+    "n_blocks": 8,
+    "n_blocks_eval_ready": 8
+   },
+   "Russia_E": {
+    "n": 25,
+    "terrain6": 1.0,
+    "climate8": 1.0,
+    "soil9": 1.0,
+    "cci_valid": 1.0,
+    "soil_tdd": 1.0,
+    "x25_all": 1.0,
+    "eval_ready": 1.0,
+    "n_eval_ready": 25,
+    "n_blocks": 11,
+    "n_blocks_eval_ready": 11
+   },
+   "Russia_W": {
+    "n": 8,
+    "terrain6": 1.0,
+    "climate8": 1.0,
+    "soil9": 1.0,
+    "cci_valid": 1.0,
+    "soil_tdd": 1.0,
+    "x25_all": 1.0,
+    "eval_ready": 1.0,
+    "n_eval_ready": 8,
+    "n_blocks": 6,
+    "n_blocks_eval_ready": 6
+   },
+   "Tibet": {
+    "n": 132,
+    "terrain6": 1.0,
+    "climate8": 1.0,
+    "soil9": 1.0,
+    "cci_valid": 1.0,
+    "soil_tdd": 1.0,
+    "x25_all": 1.0,
+    "eval_ready": 1.0,
+    "n_eval_ready": 132,
+    "n_blocks": 34,
+    "n_blocks_eval_ready": 34
+   }
+  },
+  "note": "eval_ready = alt_cm, cci_alt, e5_sqrt_tdd_soil 이 모두 유효(m1_core.eval_mask 조건)"
+ },
+ "e5_fallback": [
+  {
+   "macro": "Canada",
+   "fb": 0.0,
+   "n": 67
+  },
+  {
+   "macro": "Canada",
+   "fb": 0.2,
+   "n": 8
+  },
+  {
+   "macro": "NAtlantic",
+   "fb": 0.0,
+   "n": 34
+  },
+  {
+   "macro": "NAtlantic",
+   "fb": 0.2,
+   "n": 4
+  },
+  {
+   "macro": "Russia_C",
+   "fb": 0.0,
+   "n": 49
+  },
+  {
+   "macro": "Russia_C",
+   "fb": 0.2,
+   "n": 2
+  },
+  {
+   "macro": "Russia_E",
+   "fb": 0.0,
+   "n": 23
+  },
+  {
+   "macro": "Russia_E",
+   "fb": 0.2,
+   "n": 2
+  },
+  {
+   "macro": "Russia_W",
+   "fb": 0.0,
+   "n": 153
+  },
+  {
+   "macro": "Russia_W",
+   "fb": 0.2,
+   "n": 3
+  },
+  {
+   "macro": "Tibet",
+   "fb": 0.0,
+   "n": 171
+  }
+ ],
+ "v3_method_check": {
+  "rule": "v3 region 'Canada', 'United States (Alaska)' 행을 PANGAEA 972777 이벤트 좌표와 체비쇼프 0.005° 이내로 대조",
+  "counts": {
+   "Canada|ambiguous:probe|thaw_tube": 7,
+   "Canada|probe": 3,
+   "Canada|temperature": 4,
+   "Canada|thaw_tube": 1,
+   "Canada|unknown": 1,
+   "United States (Alaska)|probe": 48,
+   "United States (Alaska)|temperature": 15,
+   "United States (Alaska)|thaw_tube": 1
+  }
+ },
+ "elapsed_s": 1.7
+}

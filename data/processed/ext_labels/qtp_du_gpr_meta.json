@@ -1,0 +1,729 @@
+{
+ "src_id": "qtp_du_gpr",
+ "name": "Du 등 2026, 청장고원 활동층 수분 자료 코드 묶음의 GPR·인력 시추 ALT 조사점(Zenodo 21999366)",
+ "url": "https://zenodo.org/records/21999366",
+ "doi": "10.5281/zenodo.21999366",
+ "related_doi": [
+  "10.12072/ncdc.permafrost.db7703.2026"
+ ],
+ "accessed": "2026-09-29",
+ "zenodo": {
+  "version": "2.0.0",
+  "publication_date": "2026-08-19",
+  "resource_type": "software",
+  "license_id": "mit-license",
+  "concept_doi": "10.5281/zenodo.21999365",
+  "file_checksum": "md5:6b1b19d5e0fb04df8f795d4d0fa51913",
+  "checksum_match": true
+ },
+ "files": [
+  {
+   "name": "Code_Archive_QTB_ALM_v2s.zip",
+   "size": 36297128,
+   "sha256": "027c66a0379955aa29a9eb388d1050d4d04d22fe4ebf355a4e12d7aaf6efd538",
+   "md5": "6b1b19d5e0fb04df8f795d4d0fa51913",
+   "url": "https://zenodo.org/api/records/21999366/files/Code_Archive_QTB_ALM_v2s.zip/content"
+  },
+  {
+   "name": "extracted/探坑_GPR活动层水分调查点.xlsx",
+   "size": 30640,
+   "sha256": "83de5eaa36fbc846201079d253f293042d05e694197c0f2069e6f7b666940929",
+   "zip_member": "Code_Archive_QTB_ALM/04_sentinel1_gee/探坑_GPR活动层水分调查点.xlsx"
+  },
+  {
+   "name": "extracted/LICENSE",
+   "size": 1092,
+   "sha256": "6650c52ae602551170142be486a948f0a9d7b31f19ace3927a5284595d1d6c2c",
+   "zip_member": "Code_Archive_QTB_ALM/LICENSE"
+  },
+  {
+   "name": "extracted/README.md",
+   "size": 5875,
+   "sha256": "9da7a4a7a489a67e734365d7f47e7b729c699f3586b2a1e910fd3e7ba8f4443f",
+   "zip_member": "Code_Archive_QTB_ALM/README.md"
+  },
+  {
+   "name": "extracted/Paper14_ESSD_revision_text_draft.md",
+   "size": 14691,
+   "sha256": "e7cc7956081d31c83b27a972cd40668fe5b1f9e48a9c16117c9a6c830eda8fd1",
+   "zip_member": "Code_Archive_QTB_ALM/03_final_pipeline/Tables/Paper14_ESSD_revision_text_draft.md"
+  },
+  {
+   "name": "extracted/all_samples_342.csv",
+   "size": 102288,
+   "sha256": "f54329227c244ad21f930542d5b7ba6612cc4273636eb60ad5137adf74089879",
+   "zip_member": "Code_Archive_QTB_ALM/03_final_pipeline/Results/all_samples_342.csv"
+  }
+ ],
+ "license": "MIT (Zenodo record 10.5281/zenodo.21999366, archive LICENSE file)",
+ "license_detail": "Zenodo 기록의 약관 표기는 MIT 이고 zip 안의 LICENSE 파일도 MIT 다. MIT 는 소프트웨어 약관이며 기록 단위로 붙어 있다. 조사점 표는 코드 묶음에 동봉된 파일이다. 현장 자료 정본(NCDC)의 약관은 확인하지 못했다",
+ "citation": "Du, E., Wu, T., Dai, L., Ran, Y., Min, Y., Zhao, L., Wang, L., Yao, J., Li, Z., Feng, K., Xiao, Y., Hu, G., Zou, D., Liu, G., Xing, Z., Chen, J., Zhu, X. (2026). Code for \"A first 90 m resolution active layer moisture dataset across the Qinghai-Tibet Plateau permafrost region derived from multi-model machine learning fusion\" (version 2.0.0). Zenodo. https://doi.org/10.5281/zenodo.21999366. Field data: https://doi.org/10.12072/ncdc.permafrost.db7703.2026. Manuscript: Earth System Science Data (revision stage, DOI not confirmed).",
+ "parser": "scripts/1_data_prep/parse_ext_qtp_du_gpr.py",
+ "parser_git_commit": "422c34d (HEAD, 파서는 아직 커밋되지 않았다)",
+ "schema_version": "1.0",
+ "sheet": {
+  "file": "Code_Archive_QTB_ALM/04_sentinel1_gee/探坑_GPR活动层水分调查点.xlsx",
+  "sheet_name": "最大融化期GPR+探坑活动层水分数据",
+  "header": [
+   "编号",
+   "年份",
+   "数据类型",
+   "Lon",
+   "Lat",
+   "ALT/m",
+   "GPR波速",
+   "VWC_活动层"
+  ],
+  "n_sheets": 1
+ },
+ "n_rows_raw": 264,
+ "n_rows_points": 222,
+ "n_sites": 183,
+ "n_unique_locations_4dec": 211,
+ "n_raw_by_type": {
+  "探坑": 37,
+  "GPR": 221,
+  "人工钻": 6
+ },
+ "n_by_label_def": {
+  "direct_eos": 222
+ },
+ "n_by_method": {
+  "gpr": 216,
+  "pit_core": 6
+ },
+ "n_by_eos_basis": {
+  "dataset_statement": 222
+ },
+ "n_by_macro": {
+  "Tibet": 222
+ },
+ "n_by_subunit": {
+  "QTEC": 167,
+  "YellowSrc_East": 40,
+  "West_QTP": 12,
+  "Qilian": 3
+ },
+ "n_by_year": {
+  "2010": 10,
+  "2011": 14,
+  "2012": 3,
+  "2013": 11,
+  "2014": 21,
+  "2015": 26,
+  "2017": 7,
+  "2018": 67,
+  "2019": 11,
+  "2020": 46,
+  "2024": 6
+ },
+ "n_by_qc_flag": {
+  "ok": 222
+ },
+ "n_right_censored": 0,
+ "n_with_dup_of": 1,
+ "year_range": [
+  2010,
+  2024
+ ],
+ "alt_cm": {
+  "n": 222,
+  "min": 57.0,
+  "p25": 175.25,
+  "median": 248.5,
+  "mean": 251.0,
+  "p75": 312.0,
+  "max": 560.0
+ },
+ "alt_cm_by_method": {
+  "gpr": {
+   "n": 216,
+   "min": 57.0,
+   "p25": 179.0,
+   "median": 250.5,
+   "mean": 255.17,
+   "p75": 312.5,
+   "max": 560.0
+  },
+  "pit_core": {
+   "n": 6,
+   "min": 81.0,
+   "p25": 88.75,
+   "median": 105.0,
+   "mean": 101.0,
+   "p75": 111.5,
+   "max": 118.0
+  }
+ },
+ "alt_cm_by_subunit": {
+  "QTEC": {
+   "n": 167,
+   "min": 57.0,
+   "p25": 212.5,
+   "median": 260.0,
+   "mean": 267.49,
+   "p75": 315.5,
+   "max": 560.0
+  },
+  "Qilian": {
+   "n": 3,
+   "min": 160.0,
+   "p25": 167.5,
+   "median": 175.0,
+   "mean": 257.67,
+   "p75": 306.5,
+   "max": 438.0
+  },
+  "West_QTP": {
+   "n": 12,
+   "min": 122.0,
+   "p25": 160.25,
+   "median": 266.5,
+   "mean": 259.83,
+   "p75": 336.0,
+   "max": 394.0
+  },
+  "YellowSrc_East": {
+   "n": 40,
+   "min": 81.0,
+   "p25": 120.5,
+   "median": 151.0,
+   "mean": 179.0,
+   "p75": 211.0,
+   "max": 414.0
+  }
+ },
+ "lat_range": [
+  31.81857166667,
+  38.80546666667
+ ],
+ "lon_range": [
+  78.862341667,
+  101.04909833333
+ ],
+ "n_excluded_by_reason": {
+  "pit_no_alt": 37,
+  "gpr_alt_missing": 5
+ },
+ "exclusion_reason_desc": {
+  "pit_no_alt": "탐갱(探坑) 행이고 ALT 값이 없다",
+  "gpr_alt_missing": "GPR 행이지만 ALT 값이 비어 있다(식별자 AEJ01–AEJ05, 2015년)"
+ },
+ "duplicates": {
+  "id_year_duplicates": [],
+  "exact_same_year_coord_value": [
+   [
+    "R15",
+    "R16"
+   ]
+  ],
+  "handling": "좌표와 값이 같은 기록은 지우지 않고 뒤의 행에 dup_of 를 적었다",
+  "repeated_ids_across_years": 24,
+  "repeated_ids_with_coord_shift_gt_0p001deg": {
+   "BLH02": {
+    "n_years": 3,
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "dlat": 0.002203,
+    "dlon": 0.000128
+   }
+  }
+ },
+ "coordinate_conversion": "변환하지 않았다. 원자료가 WGS84 로 보이는 십진 도(Lon, Lat 열)다. 측지계 표기는 원자료에 없다. 동경이므로 부호는 양수다. 값은 float 의 최단 표현으로 적었다(반올림하지 않았다)",
+ "coord_prec_rule": "coord_prec_deg = 10^-min(d, 5), d 는 위도와 경도의 소수 자릿수 가운데 큰 값. 소수 6자리 이상은 도분 환산에서 생긴 자릿수로 보고 0.00001 로 둔다. 측위 정확도는 확인하지 못했다",
+ "subunit_rule": [
+  {
+   "subunit": "Qilian",
+   "label": "치롄",
+   "box": {
+    "lat_min": 37.0,
+    "lat_max": 40.0,
+    "lon_min": 96.0,
+    "lon_max": 103.0,
+    "lon_max_incl": true
+   }
+  },
+  {
+   "subunit": "YellowSrc_East",
+   "label": "황하원·동부",
+   "box": {
+    "lat_min": 33.5,
+    "lat_max": 36.5,
+    "lon_min": 95.0,
+    "lon_max": 101.0,
+    "lon_max_incl": true
+   }
+  },
+  {
+   "subunit": "QTEC",
+   "label": "회랑",
+   "box": {
+    "lat_min": 31.0,
+    "lat_max": 36.2,
+    "lon_min": 90.0,
+    "lon_max": 95.0,
+    "lon_max_incl": false
+   }
+  },
+  {
+   "subunit": "West_QTP",
+   "label": "서부",
+   "box": {
+    "lat_min": 30.0,
+    "lat_max": 38.0,
+    "lon_min": 77.0,
+    "lon_max": 90.0,
+    "lon_max_incl": false
+   }
+  },
+  {
+   "subunit": "QTP_other",
+   "label": "그 밖",
+   "box": "위 네 상자 밖의 Tibet 범위"
+  }
+ ],
+ "macro_rule": {
+  "macro": "Tibet",
+  "box": {
+   "lat_min": 26.0,
+   "lat_max": 40.0,
+   "lon_min": 73.0,
+   "lon_max": 105.0
+  }
+ },
+ "unit_conversion": "alt_cm = ALT/m × 100 (십진 연산)",
+ "missing_value_code": "빈 셀(None). 숫자 결측 부호(-999 등)는 없다",
+ "eos_evidence": [
+  "시트 이름: 最大融化期GPR+探坑活动层水分数据",
+  "동봉 원고 초안(03_final_pipeline/Tables/Paper14_ESSD_revision_text_draft.md)의 초록: '342 field-surveyed observations collected during 2009–2024 peak-thaw seasons (September–October)'",
+  "탐갱 행의 식별자가 날짜 형식이다(2009-09-14 부터 2009-10-10, 2010-09-02 부터 2010-10-15). 이 행은 ALT 가 없어 점 자료에 넣지 않았다. GPR 행의 날짜 근거는 아니다",
+  "탐갱 식별자 가운데 날짜로 읽히는 것은 18개이고 그 가운데 6개가 10월이다(2009-10-02, 2009-10-02, 2009-10-05, 2009-10-10, 2009-10-10, 2010-10-15). 조사 기간이 10월을 포함함을 뒷받침한다. GPR 점의 조사일은 여전히 없다"
+ ],
+ "october_survey_limit": "개정 13(검증 지적 반영): 조사 시기 서술(9–10월)과 탐갱 식별자의 날짜는 조사 기간이 10월을 포함함을 뒷받침한다. 6B.3 은 단일 방문의 10월 이후 값을 direct_dated 로 두지만 GPR 점에는 날짜가 없어 이 규칙을 점 단위로 적용할 수 없다. Tibet 대상 셀은 모두 eos_basis = dataset_statement 이고 L41 (a)와 (c)에서 대상 셀이 0개라 민감도를 낼 수 없다. NCDC db7703 정본에서 점별 날짜를 확보하면 10월 점을 direct_dated 로 내린다. 그 전까지 PE2 결론에 이 한계를 병기한다",
+ "repeat_measurement": {
+  "n_ids": 24,
+  "range_cm": {
+   "min": 0.0,
+   "median": 24.5,
+   "mean": 37.75,
+   "max": 157.0
+  },
+  "note": "같은 식별자를 2–3개 연도에 측정한 값의 최대와 최소의 차이다. 연도 간 변화와 측정 오차, 측선 위치 차이가 섞여 있다",
+  "rows": [
+   {
+    "site_id": "BLH02",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     84.0,
+     157.0,
+     241.0
+    ],
+    "range_cm": 157.0
+   },
+   {
+    "site_id": "QTB03",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     260.0,
+     252.0,
+     376.0
+    ],
+    "range_cm": 124.0
+   },
+   {
+    "site_id": "BLH01",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     251.0,
+     171.0,
+     173.0
+    ],
+    "range_cm": 80.0
+   },
+   {
+    "site_id": "BLH05",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     298.0,
+     329.0,
+     365.0
+    ],
+    "range_cm": 67.0
+   },
+   {
+    "site_id": "XDT03",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     373.0,
+     314.0,
+     310.0
+    ],
+    "range_cm": 63.0
+   },
+   {
+    "site_id": "WDL01",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     246.0,
+     238.0,
+     291.0
+    ],
+    "range_cm": 53.0
+   },
+   {
+    "site_id": "QT14",
+    "years": [
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     294.0,
+     252.0
+    ],
+    "range_cm": 42.0
+   },
+   {
+    "site_id": "TGL01",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     278.0,
+     236.0,
+     271.0
+    ],
+    "range_cm": 42.0
+   },
+   {
+    "site_id": "XDT10",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     170.0,
+     146.0,
+     130.0
+    ],
+    "range_cm": 40.0
+   },
+   {
+    "site_id": "WDL03",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     258.0,
+     272.0,
+     297.0
+    ],
+    "range_cm": 39.0
+   },
+   {
+    "site_id": "QT05",
+    "years": [
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     322.0,
+     288.0
+    ],
+    "range_cm": 34.0
+   },
+   {
+    "site_id": "XDT11",
+    "years": [
+     2014,
+     2018
+    ],
+    "alt_cm": [
+     460.0,
+     433.0
+    ],
+    "range_cm": 27.0
+   },
+   {
+    "site_id": "WDL04",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     238.0,
+     245.0,
+     223.0
+    ],
+    "range_cm": 22.0
+   },
+   {
+    "site_id": "XDT02",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     339.0,
+     319.0,
+     333.0
+    ],
+    "range_cm": 20.0
+   },
+   {
+    "site_id": "WDL02",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     271.0,
+     252.0,
+     260.0
+    ],
+    "range_cm": 19.0
+   },
+   {
+    "site_id": "WDL08",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     295.0,
+     301.0,
+     312.0
+    ],
+    "range_cm": 17.0
+   },
+   {
+    "site_id": "XDT01",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     155.0,
+     147.0,
+     163.0
+    ],
+    "range_cm": 16.0
+   },
+   {
+    "site_id": "WDL05",
+    "years": [
+     2014,
+     2018
+    ],
+    "alt_cm": [
+     297.0,
+     312.0
+    ],
+    "range_cm": 15.0
+   },
+   {
+    "site_id": "WDL07",
+    "years": [
+     2014,
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     176.0,
+     177.0,
+     189.0
+    ],
+    "range_cm": 13.0
+   },
+   {
+    "site_id": "XDT06",
+    "years": [
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     103.0,
+     93.0
+    ],
+    "range_cm": 10.0
+   },
+   {
+    "site_id": "XDT04",
+    "years": [
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     182.0,
+     179.0
+    ],
+    "range_cm": 3.0
+   },
+   {
+    "site_id": "QT13",
+    "years": [
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     378.0,
+     376.0
+    ],
+    "range_cm": 2.0
+   },
+   {
+    "site_id": "WDL06",
+    "years": [
+     2014,
+     2018
+    ],
+    "alt_cm": [
+     179.0,
+     180.0
+    ],
+    "range_cm": 1.0
+   },
+   {
+    "site_id": "XDT05",
+    "years": [
+     2015,
+     2018
+    ],
+    "alt_cm": [
+     115.0,
+     115.0
+    ],
+    "range_cm": 0.0
+   }
+  ]
+ },
+ "rows_not_in_author_training_table": {
+  "site_ids": [
+   "T31",
+   "T47"
+  ],
+  "note": "저자 학습 표(03_final_pipeline/Results/all_samples_342.csv, 활동층 수분 학습용)에 같은 식별자·연도가 없는 행이다. ALT 값은 조사점 표에 있다. 빠진 이유는 확인하지 못했다"
+ },
+ "preliminary_cell_estimate": {
+  "rule": "6B.3 의 약 1 km 셀(ky = floor(lat/0.009), kx = floor(lon·cos φ/0.009)). 위치는 site_id 단위. qc_flag 가 ok 이고 dup_of 가 빈 행만 썼다",
+  "status": "예비 추정이다. 확정 값은 v4 조립 단계에서 정한다",
+  "n_cells": 134,
+  "n_blocks": 34,
+  "n_cells_dup_v3_F4_direct": 0,
+  "n_cells_near_v3_other_source": 2,
+  "n_new_cells": 134,
+  "n_new_blocks": 34,
+  "new_cells_by_subunit": {
+   "QTEC": 93,
+   "YellowSrc_East": 27,
+   "West_QTP": 11,
+   "Qilian": 3
+  },
+  "new_blocks_by_subunit": {
+   "QTEC": 19,
+   "Qilian": 3,
+   "West_QTP": 6,
+   "YellowSrc_East": 6
+  },
+  "cell_alt_cm": {
+   "n": 134,
+   "min": 75.0,
+   "p25": 190.45833333333331,
+   "median": 258.5,
+   "mean": 261.32,
+   "p75": 320.75,
+   "max": 540.0
+  },
+  "v3_rows_in_tibet_box": [
+   {
+    "region": "CALM_QTP_China",
+    "source_id": "F4_calm_temp",
+    "n": 5
+   },
+   {
+    "region": "QTP_CN",
+    "source_id": "F4_direct",
+    "n": 1
+   }
+  ],
+  "exploration_estimate": "새 0.01° 셀 132개, 0.5° 블록 34개, v3 중복 2셀(탐색 단계, 격자 정의가 다르다)",
+  "cells_near_v3_other_source": [
+   {
+    "cell_lat": 34.730065,
+    "cell_lon": 92.890673,
+    "site_ids": [
+     "FHSh"
+    ],
+    "v3_region": "CALM_QTP_China",
+    "v3_source_id": "F4_calm_temp",
+    "v3_lat": 34.7333,
+    "v3_lon": 92.8833,
+    "cheb_deg": 0.00737
+   },
+   {
+    "cell_lat": 35.430768,
+    "cell_lon": 93.600109,
+    "site_ids": [
+     "QT14"
+    ],
+    "v3_region": "CALM_QTP_China",
+    "v3_source_id": "F4_calm_temp",
+    "v3_lat": 35.4333,
+    "v3_lon": 93.6,
+    "cheb_deg": 0.00253
+   }
+  ]
+ },
+ "unverified_items": [
+  "점별 관측 날짜와 월(원자료에 없다). 계절 말 근거는 자료 설명뿐이다",
+  "조사 시기 9–10월은 v3 의 계절 말 창(8–9월)과 다르다. 10월 조사 여부를 점 단위로 가릴 수 없다",
+  "현장 자료 정본(NCDC doi:10.12072/ncdc.permafrost.db7703.2026)의 내용과 약관. 이 서버에서 www.ncdc.ac.cn 접속이 되지 않는다",
+  "원 논문(ESSD, 심사 중)의 DOI 와 방법 절. GPR 전파 속도의 산정 방식(공통 중간점 측정 여부)",
+  "GPR 반사면이 영구동토 상한인지에 대한 점별 검증 여부",
+  "행마다의 원관측 수(GPR 측선의 트레이스 수). n_obs 는 1 로 두었다",
+  "한 해에 한 번 방문했는지 여부. value_kind 는 single_visit 로 두었다",
+  "교란 지점 여부. 원자료에 표기가 없어 disturbed 는 0 으로 두었다",
+  "식별자 접미 '废', '副' 의 뜻(BLH02_废, WDL02副, 2018년)",
+  "R15 와 R16(2011년)은 좌표와 값이 같다. 중복 입력인지 좌표 오기인지 확인하지 못했다",
+  "측지계(WGS84 로 가정)",
+  "Zenodo 설명문의 인용 예시는 버전 1.0.0 이고 기록 메타의 버전은 2.0.0 이다",
+  "T31, T47(2020년)이 저자 학습 표에 없는 이유"
+ ],
+ "unexpected_rows": []
+}

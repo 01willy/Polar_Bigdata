@@ -1,0 +1,1117 @@
+{
+ "src_id": "mythaw_pangaea",
+ "name": "T-MOSAiC myThaw 표준 규약 융해 깊이 2021-2023(PANGAEA 956039, 971586, 974461)",
+ "url": "https://doi.org/10.1594/PANGAEA.971787",
+ "doi": "10.1594/PANGAEA.971787",
+ "accessed": "2026-09-29",
+ "editions": [
+  {
+   "year": 2021,
+   "file": "P956039.tab",
+   "doi": "10.1594/PANGAEA.956039",
+   "citation": "Martin, Julia; Boike, Julia; Chadburn, Sarah; Zwieback, Simon; Anselm, Norbert; Goldau, Maybrit; Hammar, Jennika; Abramova, Ekatarina N; Lisovski, Simeon; Coulombe, Stéphanie; Dakin, Brampton; Wilcox, Evan James; Giamberini, Mariasilvia; Rader, Fieke; Suominen, Otso; Rudd, Daniel Alexander; Mastepanov, Mikhail; Young, Amanda (2023): T-MOSAiC 2021 myThaw data set [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.956039",
+   "license_line": "Creative Commons Attribution 4.0 International (CC-BY-4.0) (URI: https://creativecommons.org/licenses/by/4.0/)",
+   "n_rows": 1824,
+   "n_cols": 92,
+   "n_by_parameter": {
+    "thaw depth": 912,
+    "snow depth": 583,
+    "water level": 183,
+    "vegetation height": 143,
+    "soil texture": 2,
+    "soil pit": 1
+   },
+   "n_thaw_rows": 912,
+   "n_thaw_missing": 0,
+   "sites": [
+    "Bayelva",
+    "CNR@Bayelva",
+    "Cambridge Bay",
+    "Kevo Vaisejaeggi",
+    "Samoylov",
+    "Siksik Creek (TVC)",
+    "Toolik Field Station",
+    "Zackenberg CALM dry transect",
+    "Zackenberg CALM wet transect"
+   ],
+   "thaw_sites": [
+    "Bayelva",
+    "CNR@Bayelva",
+    "Cambridge Bay",
+    "Kevo Vaisejaeggi",
+    "Samoylov",
+    "Siksik Creek (TVC)",
+    "Toolik Field Station",
+    "Zackenberg CALM dry transect",
+    "Zackenberg CALM wet transect"
+   ],
+   "header_event_sites": [
+    "Bayelva",
+    "CNR@Bayelva",
+    "Cambridge Bay",
+    "Kevo Vaisejaeggi",
+    "Samoylov",
+    "Siksik Creek (TVC)",
+    "Toolik Field Station",
+    "Zackenberg CALM dry transect",
+    "Zackenberg CALM wet transect"
+   ]
+  },
+  {
+   "year": 2022,
+   "file": "P971586.tab",
+   "doi": "10.1594/PANGAEA.971586",
+   "citation": "Boike, Julia; Hammar, Jennika; Goldau, Maybrit; Anselm, Norbert; Chadburn, Sarah; Zwieback, Simon; Martin, Julia; Abramova, Ekatarina N; Coulombe, Stéphanie; Giamberini, Mariasilvia; Rader, Fieke; Herment, Guillaume; Suominen, Otso; Rudd, Daniel Alexander; Mastepanov, Mikhail; Meléndez González, Mayra; Hille, Erika; Elias, Greg; Sjöberg, Ylva; Greschkowiak, Anja; Lee, Hanna; Stuenzi, Simone Maria; Marsh, Philip (2024): T-MOSAiC 2022 myThaw data set [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.971586",
+   "license_line": "Creative Commons Attribution 4.0 International (CC-BY-4.0) (URI: https://creativecommons.org/licenses/by/4.0/)",
+   "n_rows": 3655,
+   "n_cols": 100,
+   "n_by_parameter": {
+    "thaw depth": 1596,
+    "snow depth": 1536,
+    "vegetation height": 277,
+    "water level": 213,
+    "tree height": 30,
+    "soil texture": 3
+   },
+   "n_thaw_rows": 1596,
+   "n_thaw_missing": 63,
+   "sites": [
+    "Bayelva",
+    "CNR@Bayelva",
+    "Cambridge Bay",
+    "Ilulissat CALM site",
+    "Iskoras",
+    "Kevo Vaisejaeggi",
+    "NRC Lake Transect",
+    "Northern Border of Russel Glacier",
+    "Samoylov",
+    "Siksik Creek (TVC)",
+    "Toolik Field Station",
+    "Zackenberg CALM dry transect",
+    "Zackenberg CALM wet transect"
+   ],
+   "thaw_sites": [
+    "Bayelva",
+    "CNR@Bayelva",
+    "Cambridge Bay",
+    "Ilulissat CALM site",
+    "Iskoras",
+    "Kevo Vaisejaeggi",
+    "NRC Lake Transect",
+    "Northern Border of Russel Glacier",
+    "Samoylov",
+    "Siksik Creek (TVC)",
+    "Toolik Field Station",
+    "Zackenberg CALM dry transect",
+    "Zackenberg CALM wet transect"
+   ],
+   "header_event_sites": [
+    "Bayelva",
+    "CNR@Bayelva",
+    "Cambridge Bay",
+    "Kevo Vaisejaeggi",
+    "Samoylov",
+    "Siksik Creek (TVC)",
+    "Toolik Field Station",
+    "Zackenberg CALM dry transect",
+    "Zackenberg CALM wet transect"
+   ]
+  },
+  {
+   "year": 2023,
+   "file": "P974461.tab",
+   "doi": "10.1594/PANGAEA.974461",
+   "citation": "Hammar, Jennika; Goldau, Maybrit; Boike, Julia; Rath, Moritz; Anselm, Norbert; Martin, Julia; Chadburn, Sarah; Zwieback, Simon; Carbonnel, Mathilde; Herment, Guillaume; Coulombe, Stéphanie; Giamberini, Mariasilvia; Stuenzi, Simone Maria; Suominen, Otso; Hille, Erika; Elias, Greg; Meléndez González, Mayra; Rudd, Daniel Alexander; Mastepanov, Mikhail; Marsh, Philip (2025): 2023 myThaw data set [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.974461",
+   "license_line": "Creative Commons Attribution 4.0 International (CC-BY-4.0) (URI: https://creativecommons.org/licenses/by/4.0/)",
+   "n_rows": 2867,
+   "n_cols": 85,
+   "n_by_parameter": {
+    "snow depth": 1358,
+    "thaw depth": 1291,
+    "vegetation height": 137,
+    "water level": 81
+   },
+   "n_thaw_rows": 1291,
+   "n_thaw_missing": 82,
+   "sites": [
+    "Bayelva",
+    "CNR@Bayelva",
+    "Cambridge Bay",
+    "Ilulissat CALM site",
+    "Kevo Vaisejaeggi",
+    "NRC Lake Transect",
+    "Toolik Field Station",
+    "Zackenberg CALM dry transect",
+    "Zackenberg CALM wet transect"
+   ],
+   "thaw_sites": [
+    "Bayelva",
+    "CNR@Bayelva",
+    "Ilulissat CALM site",
+    "Kevo Vaisejaeggi",
+    "NRC Lake Transect",
+    "Toolik Field Station",
+    "Zackenberg CALM dry transect",
+    "Zackenberg CALM wet transect"
+   ],
+   "header_event_sites": [
+    "Bayelva",
+    "CNR@Bayelva",
+    "Cambridge Bay",
+    "Ilulissat CALM site",
+    "Kevo Vaisejaeggi",
+    "NRC Lake Transect",
+    "Toolik Field Station",
+    "Zackenberg CALM dry transect",
+    "Zackenberg CALM wet transect"
+   ]
+  }
+ ],
+ "files": [
+  {
+   "name": "data/raw/mythaw_pangaea/P956039.tab",
+   "size_bytes": 1211867,
+   "sha256": "de6464a8d0b62178add5022e312e2297c1958b93dc523345071289044fb35e4e",
+   "source_url": "https://doi.pangaea.de/10.1594/PANGAEA.956039?format=textfile",
+   "kind": "내려받은 원자료"
+  },
+  {
+   "name": "data/raw/mythaw_pangaea/P971586.tab",
+   "size_bytes": 2246079,
+   "sha256": "c5df35f8d0a0eaa39966d95a93db16032ed5c95575d01be4b37d8e7fc8a561f7",
+   "source_url": "https://doi.pangaea.de/10.1594/PANGAEA.971586?format=textfile",
+   "kind": "내려받은 원자료"
+  },
+  {
+   "name": "data/raw/mythaw_pangaea/P974461.tab",
+   "size_bytes": 1324513,
+   "sha256": "7951ddba4167bde5803c36b5a705bb598713e09198a68e42aec324214654019c",
+   "source_url": "https://doi.pangaea.de/10.1594/PANGAEA.974461?format=textfile",
+   "kind": "내려받은 원자료"
+  },
+  {
+   "name": "data/raw/mythaw_pangaea/Pangaea_METADATA_TMOSAiC_2021_myThaw_v2.pdf",
+   "size_bytes": 6408051,
+   "sha256": "577ae76c8095bb951af9bdb512e82ed2d426b9a4ca5725d344c2fb77f9f49e95",
+   "source_url": "https://download.pangaea.de/reference/117389/attachments/Pangaea_METADATA_TMOSAiC_2021_myThaw_v2.pdf",
+   "kind": "자료 설명 문서"
+  },
+  {
+   "name": "data/raw/mythaw_pangaea/Pangaea_METADATA_TMOSAiC_2022_myThaw.pdf",
+   "size_bytes": 7121747,
+   "sha256": "04838d895904ce0f499efe5de5e751f2c6a7c48609a8a3cddb33495b9ea0bd70",
+   "source_url": "https://download.pangaea.de/reference/127187/attachments/Pangaea_METADATA_TMOSAiC_2022_myThaw.pdf",
+   "kind": "자료 설명 문서"
+  },
+  {
+   "name": "data/raw/mythaw_pangaea/Pangaea_METADATA_2023_myThaw.pdf",
+   "size_bytes": 4966847,
+   "sha256": "564a712a7c4497c579b1c5abaaf78177286ae341b95aa4e7321ed8e9e264e164",
+   "source_url": "https://download.pangaea.de/reference/131401/attachments/Pangaea_METADATA_2023_myThaw.pdf",
+   "kind": "자료 설명 문서"
+  },
+  {
+   "name": "data/raw/mythaw_pangaea/mythaw_pangaea_visits.csv",
+   "size_bytes": 44398,
+   "sha256": "53f46601bc7096c02ed58b94f05fbffbc84d5b1e36098a92f968833862dd4ebc",
+   "source_url": "",
+   "kind": "파서가 만든 방문 단위 요약"
+  }
+ ],
+ "license": "CC BY 4.0",
+ "license_basis": "세 판 모두 원자료 머리말의 License 행이 Creative Commons Attribution 4.0 International (CC-BY-4.0) 이다. 파서가 실행할 때마다 확인한다",
+ "citation": "Martin, Julia; Boike, Julia; Chadburn, Sarah; Zwieback, Simon; Anselm, Norbert; Goldau, Maybrit; Hammar, Jennika; Abramova, Ekatarina N; Lisovski, Simeon; Coulombe, Stéphanie; Dakin, Brampton; Wilcox, Evan James; Giamberini, Mariasilvia; Rader, Fieke; Suominen, Otso; Rudd, Daniel Alexander; Mastepanov, Mikhail; Young, Amanda (2023): T-MOSAiC 2021 myThaw data set [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.956039; Boike, Julia; Hammar, Jennika; Goldau, Maybrit; Anselm, Norbert; Chadburn, Sarah; Zwieback, Simon; Martin, Julia; Abramova, Ekatarina N; Coulombe, Stéphanie; Giamberini, Mariasilvia; Rader, Fieke; Herment, Guillaume; Suominen, Otso; Rudd, Daniel Alexander; Mastepanov, Mikhail; Meléndez González, Mayra; Hille, Erika; Elias, Greg; Sjöberg, Ylva; Greschkowiak, Anja; Lee, Hanna; Stuenzi, Simone Maria; Marsh, Philip (2024): T-MOSAiC 2022 myThaw data set [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.971586; Hammar, Jennika; Goldau, Maybrit; Boike, Julia; Rath, Moritz; Anselm, Norbert; Martin, Julia; Chadburn, Sarah; Zwieback, Simon; Carbonnel, Mathilde; Herment, Guillaume; Coulombe, Stéphanie; Giamberini, Mariasilvia; Stuenzi, Simone Maria; Suominen, Otso; Hille, Erika; Elias, Greg; Meléndez González, Mayra; Rudd, Daniel Alexander; Mastepanov, Mikhail; Marsh, Philip (2025): 2023 myThaw data set [dataset]. PANGAEA, https://doi.org/10.1594/PANGAEA.974461",
+ "parser": "scripts/1_data_prep/parse_ext_mythaw_pangaea.py",
+ "parser_sha256": "fdea2b5366963c0c073fee77bf73a0a84c7f5ac1833aaa2f3ea40fbd4a7be22d",
+ "parser_git_commit": "422c34d7108004bab630b38bc81f7c3de128e6a2",
+ "parser_git_note": "파서 파일은 이 커밋에 들어 있지 않다(작업 트리의 새 파일). 값은 실행 시점의 HEAD 다",
+ "schema_version": "1.0",
+ "n_rows_raw": 8346,
+ "n_rows_raw_thaw": 3799,
+ "n_rows_raw_thaw_valid": 3654,
+ "n_visits": 195,
+ "n_visits_eligible": 188,
+ "n_visits_from_aug1": 87,
+ "n_rows_points": 30,
+ "n_by_label_def": {
+  "direct_dated": 2,
+  "direct_eos": 28
+ },
+ "n_by_method": {
+  "probe": 30
+ },
+ "n_excluded_by_reason": {
+  "융해 깊이가 아닌 매개변수 행(적설, 식생, 수위, 토양, 수고)": 4547,
+  "융해 깊이 값이 빈 행(결측)": 145,
+  "연 값으로 쓰지 않은 방문: 8월 1일 이전": 107,
+  "연 값으로 쓰지 않은 방문: 8월 1일 이후 적격이나 최댓값이 아님": 57,
+  "연 값으로 쓰지 않은 방문: 8월 1일 이후이나 값이 있는 점이 부족(부적격)": 1
+ },
+ "label_rule": {
+  "late_from": "MM-DD >= 08-01",
+  "min_valid_frac": 0.5,
+  "min_valid_n": 3,
+  "probe_limit_cm": 150.0,
+  "text": "연 값은 8월 1일 이후 적격 방문의 지점 평균 가운데 최댓값이다. 적격 방문 조건(값이 있는 점이 max(3, 측선 점 수의 절반) 이상)은 이 파서가 더했다. 그 해 적격 방문이 1회뿐이면 eos_basis 를 record_date 로 적는다(8-9월). 10월 이후의 최댓값은 유효 점 수가 8-9월 방문의 최대 유효 점 수와 같고 측선 점 수가 같을 때만 direct_eos(series_max)로 두고, 아니면 8-9월 적격 방문의 최댓값을 쓴다(개정 13). 8-9월 방문의 최댓값은 notes 의 aug_sep_max_cm 에 적는다. 연 값을 준 방문에 '완전 융해' 점이 있으면 right_censored = 1 이다(개정 13)"
+ },
+ "coordinate_conversion": "변환 없음. 원자료가 WGS84 십진 도이고 서경은 음수다. 지점마다 좌표를 하나로 고정했다. 머리말 Event 좌표(2021년판, 2023년판. 자료 행렬의 측선 좌표 열과 1e-6° 안에서 같음을 확인)를 먼저 쓰고, 머리말에 없는 Iskoras 와 Northern Border of Russel Glacier 는 2022년판의 지점 설명 좌표 열을 썼다. 2022년판 머리말의 Event 는 2021년 이벤트 9개뿐이다. 2022년판의 측선 좌표 열은 정수 도이고 고정한 좌표의 반올림 값과 같음을 확인했다",
+ "coord_prec_rule": "위경도가 모두 분 단위 값이면 0.0167, 초 단위 값이면 0.0003, 아니면 10^-(표기 소수 자릿수). 표기에서 추정한 값이다",
+ "units": "Thaw depth [cm]. 단위 변환 없음",
+ "missing_code": "빈 칸. 0 은 결측이 아니라 원자료가 적은 값이다(동결, 적설)",
+ "inequality_marks": "'<', '>' 표기 없음(있으면 파서가 중단한다). 탐침 길이 한계는 방문 설명으로 적혀 있다",
+ "n_visits_ge150_without_limit_comment": 0,
+ "duplicates": "(지점, 날짜, 점 번호) 중복 없음. 같은 지점과 날짜에 Protocol ID 는 하나다(파서가 확인한다)",
+ "disturbance_rule": "자료 제공자의 Disturbance Type 이 natural 이고 설명이 thaw slumps 인 지점(Iskoras)만 disturbed = 1, disturb_type = thermo_erosion 이다. 나머지 기재는 notes 의 provider_disturbance 에 원문으로 적었다",
+ "v3_dup_check": {
+  "expected": [
+   "Samoylov",
+   "Siksik_Creek",
+   "Toolik_Field_Station",
+   "Zackenberg_dry",
+   "Zackenberg_wet"
+  ],
+  "found": [
+   "Samoylov",
+   "Siksik_Creek",
+   "Toolik_Field_Station",
+   "Zackenberg_dry",
+   "Zackenberg_wet"
+  ],
+  "identical": true
+ },
+ "qc_summary": {
+  "n_sites": 13,
+  "n_rows": 30,
+  "n_rows_main": 24,
+  "main_set_rule": "label_def = direct_eos, qc_flag = ok, right_censored = 0, disturbed = 0",
+  "n_sites_new": 8,
+  "n_rows_new": 17,
+  "n_rows_main_new": 12,
+  "new_rule": "dup_of 가 빈 지점(v3 의 F4_direct 셀과 체비쇼프 0.01° 이내가 아니다)",
+  "n_sites_by_macro": {
+   "Alaska": 1,
+   "Canada": 3,
+   "Lena": 1,
+   "NAtlantic": 8
+  },
+  "n_new_sites_by_macro": {
+   "Canada": 2,
+   "NAtlantic": 6
+  },
+  "n_target_sites_by_macro": {
+   "Canada": 2,
+   "NAtlantic": 4
+  },
+  "n_target_sites_by_subunit": {
+   "Greenland": 2,
+   "Northwest Territories": 1,
+   "Nunavut": 1,
+   "Scandinavia": 1,
+   "Svalbard": 1
+  },
+  "n_rows_by_macro": {
+   "Alaska": 3,
+   "Canada": 6,
+   "Lena": 2,
+   "NAtlantic": 19
+  },
+  "n_rows_by_method": {
+   "probe": 30
+  },
+  "n_rows_by_label_def": {
+   "direct_dated": 2,
+   "direct_eos": 28
+  },
+  "n_rows_by_eos_basis": {
+   "none": 2,
+   "record_date": 6,
+   "series_max": 22
+  },
+  "n_rows_by_qc_flag": {
+   "date": 2,
+   "ok": 28
+  },
+  "n_rows_by_month": {
+   "7": 1,
+   "8": 6,
+   "9": 21,
+   "10": 2
+  },
+  "n_right_censored": 4,
+  "n_disturbed": 1,
+  "n_dup_of_v3": 13,
+  "year_range": [
+   2021,
+   2023
+  ],
+  "alt_cm_rows_all": {
+   "n": 30,
+   "min": 32.37,
+   "median": 63.75,
+   "max": 139.5,
+   "mean": 75.7
+  },
+  "alt_cm_rows_main": {
+   "n": 24,
+   "min": 32.37,
+   "median": 63.525,
+   "max": 116.16,
+   "mean": 70.51
+  },
+  "alt_cm_rows_main_new": {
+   "n": 12,
+   "min": 52.8,
+   "median": 82.33,
+   "max": 116.16,
+   "mean": 81.03
+  },
+  "alt_cm_new_target_site_multiyear_mean": {
+   "n": 6,
+   "min": 52.8,
+   "median": 78.4,
+   "max": 110.9
+  },
+  "n_distinct_1km_cells_all": 13,
+  "n_distinct_1km_cells_new": 8,
+  "n_distinct_1km_cells_new_target": 6
+ },
+ "sites": [
+  {
+   "site_id": "Bayelva",
+   "site_name": "Bayelva",
+   "lat": "78.920884",
+   "lon": "11.833222",
+   "coord_source": "event_header_2021_2023",
+   "coord_prec_deg": 1e-06,
+   "site_descr_coords": [
+    [
+     "78.9208283",
+     "11.8332567"
+    ]
+   ],
+   "site_descr_max_dev_m": 6.2,
+   "country": "Norway",
+   "subunit": "Svalbard",
+   "macro": "NAtlantic",
+   "spacing_m_doc": 1,
+   "calm_grid": false,
+   "cell_ky": 8768,
+   "cell_kx": 252,
+   "years": [
+    2021,
+    2022,
+    2023
+   ],
+   "n_rows": 3,
+   "n_main": 0,
+   "alt_by_year_cm": {
+    "2021": 139.5,
+    "2022": 138.5,
+    "2023": 127.92
+   },
+   "alt_mean_main_cm": null,
+   "dup_of": "",
+   "n_right_censored": 3,
+   "n_disturbed": 0,
+   "nearest_f4_direct_cheb_deg": 1.78348,
+   "nearest_f4_direct_loc_id": 17569,
+   "nearest_other_macro_f4_km": 1408.3,
+   "nearest_other_macro_f4_region": "CALM_Russia_W",
+   "within_100km_of_other_macro": false
+  },
+  {
+   "site_id": "CNR_at_Bayelva",
+   "site_name": "CNR@Bayelva",
+   "lat": "78.920902",
+   "lon": "11.855752",
+   "coord_source": "event_header_2021_2023",
+   "coord_prec_deg": 1e-06,
+   "site_descr_coords": [
+    [
+     "78.920902",
+     "11.855752"
+    ]
+   ],
+   "site_descr_max_dev_m": 0.0,
+   "country": "Norway",
+   "subunit": "Svalbard",
+   "macro": "NAtlantic",
+   "spacing_m_doc": 1,
+   "calm_grid": false,
+   "cell_ky": 8768,
+   "cell_kx": 253,
+   "years": [
+    2021,
+    2022,
+    2023
+   ],
+   "n_rows": 3,
+   "n_main": 3,
+   "alt_by_year_cm": {
+    "2021": 93.2,
+    "2022": 96.5,
+    "2023": 64.3
+   },
+   "alt_mean_main_cm": 84.7,
+   "dup_of": "",
+   "n_right_censored": 0,
+   "n_disturbed": 0,
+   "nearest_f4_direct_cheb_deg": 1.76095,
+   "nearest_f4_direct_loc_id": 17569,
+   "nearest_other_macro_f4_km": 1408.0,
+   "nearest_other_macro_f4_region": "CALM_Russia_W",
+   "within_100km_of_other_macro": false
+  },
+  {
+   "site_id": "CambridgeBay",
+   "site_name": "Cambridge Bay",
+   "lat": "69.113047",
+   "lon": "-105.405403",
+   "coord_source": "event_header_2021_2023",
+   "coord_prec_deg": 1e-06,
+   "site_descr_coords": [
+    [
+     "69.113047",
+     "-105.405403"
+    ]
+   ],
+   "site_descr_max_dev_m": 0.0,
+   "country": "Canada",
+   "subunit": "Nunavut",
+   "macro": "Canada",
+   "spacing_m_doc": 1,
+   "calm_grid": false,
+   "cell_ky": 7679,
+   "cell_kx": -4176,
+   "years": [
+    2021,
+    2022
+   ],
+   "n_rows": 2,
+   "n_main": 2,
+   "alt_by_year_cm": {
+    "2021": 105.67,
+    "2022": 116.16
+   },
+   "alt_mean_main_cm": 110.9,
+   "dup_of": "",
+   "n_right_censored": 0,
+   "n_disturbed": 0,
+   "nearest_f4_direct_cheb_deg": 7.5969,
+   "nearest_f4_direct_loc_id": 74,
+   "nearest_other_macro_f4_km": 1442.6,
+   "nearest_other_macro_f4_region": "United States (Alaska)",
+   "within_100km_of_other_macro": false
+  },
+  {
+   "site_id": "Ilulissat_CALM_site",
+   "site_name": "Ilulissat CALM site",
+   "lat": "69.219",
+   "lon": "-51.055",
+   "coord_source": "event_header_2023",
+   "coord_prec_deg": 0.001,
+   "site_descr_coords": [
+    [
+     "69.21885188",
+     "-51.05390159"
+    ],
+    [
+     "69.219",
+     "-51.055"
+    ]
+   ],
+   "site_descr_max_dev_m": 46.4,
+   "country": "Greenland",
+   "subunit": "Greenland",
+   "macro": "NAtlantic",
+   "spacing_m_doc": 1,
+   "calm_grid": true,
+   "cell_ky": 7691,
+   "cell_kx": -2013,
+   "years": [
+    2022,
+    2023
+   ],
+   "n_rows": 2,
+   "n_main": 2,
+   "alt_by_year_cm": {
+    "2022": 70.55,
+    "2023": 73.86
+   },
+   "alt_mean_main_cm": 72.2,
+   "dup_of": "",
+   "n_right_censored": 0,
+   "n_disturbed": 0,
+   "nearest_f4_direct_cheb_deg": 2.445,
+   "nearest_f4_direct_loc_id": 17535,
+   "nearest_other_macro_f4_km": 622.1,
+   "nearest_other_macro_f4_region": "CALM_Canada",
+   "within_100km_of_other_macro": false
+  },
+  {
+   "site_id": "Iskoras",
+   "site_name": "Iskoras",
+   "lat": "69.345556",
+   "lon": "25.299722",
+   "coord_source": "site_descr_2022",
+   "coord_prec_deg": 0.0003,
+   "site_descr_coords": [
+    [
+     "69.345556",
+     "25.299722"
+    ]
+   ],
+   "site_descr_max_dev_m": 0.0,
+   "country": "Norway",
+   "subunit": "Scandinavia",
+   "macro": "NAtlantic",
+   "spacing_m_doc": 1,
+   "calm_grid": false,
+   "cell_ky": 7705,
+   "cell_kx": 991,
+   "years": [
+    2022
+   ],
+   "n_rows": 1,
+   "n_main": 0,
+   "alt_by_year_cm": {
+    "2022": 63.2
+   },
+   "alt_mean_main_cm": null,
+   "dup_of": "",
+   "n_right_censored": 0,
+   "n_disturbed": 1,
+   "nearest_f4_direct_cheb_deg": 6.46642,
+   "nearest_f4_direct_loc_id": 17520,
+   "nearest_other_macro_f4_km": 400.7,
+   "nearest_other_macro_f4_region": "CALM_Russia_W",
+   "within_100km_of_other_macro": false
+  },
+  {
+   "site_id": "Kevo_Vaisejaeggi",
+   "site_name": "Kevo Vaisejaeggi",
+   "lat": "69.8236",
+   "lon": "27.174249",
+   "coord_source": "event_header_2021_2023",
+   "coord_prec_deg": 1e-06,
+   "site_descr_coords": [
+    [
+     "69.8236",
+     "27.174249"
+    ]
+   ],
+   "site_descr_max_dev_m": 0.0,
+   "country": "Finland",
+   "subunit": "Scandinavia",
+   "macro": "NAtlantic",
+   "spacing_m_doc": 1,
+   "calm_grid": false,
+   "cell_ky": 7758,
+   "cell_kx": 1041,
+   "years": [
+    2021,
+    2022,
+    2023
+   ],
+   "n_rows": 3,
+   "n_main": 2,
+   "alt_by_year_cm": {
+    "2021": 57.4,
+    "2022": 59.53,
+    "2023": 63.0
+   },
+   "alt_mean_main_cm": 58.5,
+   "dup_of": "",
+   "n_right_censored": 1,
+   "n_disturbed": 0,
+   "nearest_f4_direct_cheb_deg": 7.00775,
+   "nearest_f4_direct_loc_id": 17517,
+   "nearest_other_macro_f4_km": 362.2,
+   "nearest_other_macro_f4_region": "CALM_Russia_W",
+   "within_100km_of_other_macro": false
+  },
+  {
+   "site_id": "NRC_Lake",
+   "site_name": "NRC Lake Transect",
+   "lat": "68.312357",
+   "lon": "-133.8411",
+   "coord_source": "event_header_2023",
+   "coord_prec_deg": 1e-06,
+   "site_descr_coords": [
+    [
+     "68.312357",
+     "-133.8411"
+    ]
+   ],
+   "site_descr_max_dev_m": 0.0,
+   "country": "Canada",
+   "subunit": "Northwest Territories",
+   "macro": "Canada",
+   "spacing_m_doc": 1,
+   "calm_grid": false,
+   "cell_ky": 7590,
+   "cell_kx": -5496,
+   "years": [
+    2022,
+    2023
+   ],
+   "n_rows": 2,
+   "n_main": 2,
+   "alt_by_year_cm": {
+    "2022": 90.8,
+    "2023": 91.55
+   },
+   "alt_mean_main_cm": 91.2,
+   "dup_of": "",
+   "n_right_censored": 0,
+   "n_disturbed": 0,
+   "nearest_f4_direct_cheb_deg": 0.31674,
+   "nearest_f4_direct_loc_id": 13337,
+   "nearest_other_macro_f4_km": 402.3,
+   "nearest_other_macro_f4_region": "United States (Alaska)",
+   "within_100km_of_other_macro": false
+  },
+  {
+   "site_id": "Russel_Glacier_north",
+   "site_name": "Northern Border of Russel Glacier",
+   "lat": "67.143",
+   "lon": "-50.091",
+   "coord_source": "site_descr_2022",
+   "coord_prec_deg": 0.001,
+   "site_descr_coords": [
+    [
+     "67.143",
+     "-50.091"
+    ]
+   ],
+   "site_descr_max_dev_m": 0.0,
+   "country": "Greenland",
+   "subunit": "Greenland",
+   "macro": "NAtlantic",
+   "spacing_m_doc": 1,
+   "calm_grid": false,
+   "cell_ky": 7460,
+   "cell_kx": -2162,
+   "years": [
+    2022
+   ],
+   "n_rows": 1,
+   "n_main": 1,
+   "alt_by_year_cm": {
+    "2022": 52.8
+   },
+   "alt_mean_main_cm": 52.8,
+   "dup_of": "",
+   "n_right_censored": 0,
+   "n_disturbed": 0,
+   "nearest_f4_direct_cheb_deg": 3.409,
+   "nearest_f4_direct_loc_id": 17535,
+   "nearest_other_macro_f4_km": 633.5,
+   "nearest_other_macro_f4_region": "CALM_Canada",
+   "within_100km_of_other_macro": false
+  },
+  {
+   "site_id": "Samoylov",
+   "site_name": "Samoylov",
+   "lat": "72.369694",
+   "lon": "126.480778",
+   "coord_source": "event_header_2021",
+   "coord_prec_deg": 1e-06,
+   "site_descr_coords": [
+    [
+     "72.369778",
+     "126.480639"
+    ]
+   ],
+   "site_descr_max_dev_m": 10.4,
+   "country": "Russia",
+   "subunit": "Lena Delta",
+   "macro": "Lena",
+   "spacing_m_doc": 1,
+   "calm_grid": true,
+   "cell_ky": 8041,
+   "cell_kx": 4255,
+   "years": [
+    2021,
+    2022
+   ],
+   "n_rows": 2,
+   "n_main": 1,
+   "alt_by_year_cm": {
+    "2021": 59.0,
+    "2022": 46.67
+   },
+   "alt_mean_main_cm": 59.0,
+   "dup_of": "v3:16598",
+   "n_right_censored": 0,
+   "n_disturbed": 0,
+   "nearest_f4_direct_cheb_deg": 2e-05,
+   "nearest_f4_direct_loc_id": 16598,
+   "nearest_other_macro_f4_km": 118.0,
+   "nearest_other_macro_f4_region": "CALM_Russia_C",
+   "within_100km_of_other_macro": false
+  },
+  {
+   "site_id": "Siksik_Creek",
+   "site_name": "Siksik Creek (TVC)",
+   "lat": "68.748488",
+   "lon": "-133.497217",
+   "coord_source": "event_header_2021",
+   "coord_prec_deg": 1e-06,
+   "site_descr_coords": [
+    [
+     "68.7484889",
+     "-133.4972166"
+    ]
+   ],
+   "site_descr_max_dev_m": 0.1,
+   "country": "Canada",
+   "subunit": "Northwest Territories",
+   "macro": "Canada",
+   "spacing_m_doc": 1,
+   "calm_grid": false,
+   "cell_ky": 7638,
+   "cell_kx": -5377,
+   "years": [
+    2021,
+    2022
+   ],
+   "n_rows": 2,
+   "n_main": 2,
+   "alt_by_year_cm": {
+    "2021": 32.37,
+    "2022": 39.0
+   },
+   "alt_mean_main_cm": 35.7,
+   "dup_of": "v3:13215",
+   "n_right_censored": 0,
+   "n_disturbed": 0,
+   "nearest_f4_direct_cheb_deg": 0.0045,
+   "nearest_f4_direct_loc_id": 13215,
+   "nearest_other_macro_f4_km": 393.1,
+   "nearest_other_macro_f4_region": "United States (Alaska)",
+   "within_100km_of_other_macro": false
+  },
+  {
+   "site_id": "Toolik_Field_Station",
+   "site_name": "Toolik Field Station",
+   "lat": "68.62283",
+   "lon": "-149.61179",
+   "coord_source": "event_header_2021_2023",
+   "coord_prec_deg": 1e-05,
+   "site_descr_coords": [
+    [
+     "68.62283",
+     "-149.61179"
+    ]
+   ],
+   "site_descr_max_dev_m": 0.0,
+   "country": "United States",
+   "subunit": "Alaska",
+   "macro": "Alaska",
+   "spacing_m_doc": 1,
+   "calm_grid": false,
+   "cell_ky": 7624,
+   "cell_kx": -6061,
+   "years": [
+    2021,
+    2022,
+    2023
+   ],
+   "n_rows": 3,
+   "n_main": 3,
+   "alt_by_year_cm": {
+    "2021": 52.48,
+    "2022": 54.68,
+    "2023": 59.92
+   },
+   "alt_mean_main_cm": 55.7,
+   "dup_of": "v3:14284",
+   "n_right_censored": 0,
+   "n_disturbed": 0,
+   "nearest_f4_direct_cheb_deg": 0.00549,
+   "nearest_f4_direct_loc_id": 14284,
+   "nearest_other_macro_f4_km": 414.0,
+   "nearest_other_macro_f4_region": "ABoVE_CA",
+   "within_100km_of_other_macro": false
+  },
+  {
+   "site_id": "Zackenberg_dry",
+   "site_name": "Zackenberg CALM dry transect",
+   "lat": "74.466",
+   "lon": "-20.564",
+   "coord_source": "event_header_2021_2023",
+   "coord_prec_deg": 0.001,
+   "site_descr_coords": [
+    [
+     "74.466",
+     "-20.564"
+    ]
+   ],
+   "site_descr_max_dev_m": 0.0,
+   "country": "Greenland",
+   "subunit": "Greenland",
+   "macro": "NAtlantic",
+   "spacing_m_doc": 10,
+   "calm_grid": true,
+   "cell_ky": 8274,
+   "cell_kx": -612,
+   "years": [
+    2021,
+    2022,
+    2023
+   ],
+   "n_rows": 3,
+   "n_main": 3,
+   "alt_by_year_cm": {
+    "2021": 86.0,
+    "2022": 79.31,
+    "2023": 82.44
+   },
+   "alt_mean_main_cm": 82.6,
+   "dup_of": "v3:17565",
+   "n_right_censored": 0,
+   "n_disturbed": 0,
+   "nearest_f4_direct_cheb_deg": 0.0003,
+   "nearest_f4_direct_loc_id": 17565,
+   "nearest_other_macro_f4_km": 1429.1,
+   "nearest_other_macro_f4_region": "CALM_Canada",
+   "within_100km_of_other_macro": false
+  },
+  {
+   "site_id": "Zackenberg_wet",
+   "site_name": "Zackenberg CALM wet transect",
+   "lat": "74.465",
+   "lon": "-20.566",
+   "coord_source": "event_header_2021_2023",
+   "coord_prec_deg": 0.001,
+   "site_descr_coords": [
+    [
+     "74.465",
+     "-20.566"
+    ]
+   ],
+   "site_descr_max_dev_m": 0.0,
+   "country": "Greenland",
+   "subunit": "Greenland",
+   "macro": "NAtlantic",
+   "spacing_m_doc": 10,
+   "calm_grid": true,
+   "cell_ky": 8273,
+   "cell_kx": -613,
+   "years": [
+    2021,
+    2022,
+    2023
+   ],
+   "n_rows": 3,
+   "n_main": 3,
+   "alt_by_year_cm": {
+    "2021": 62.75,
+    "2022": 54.44,
+    "2023": 57.62
+   },
+   "alt_mean_main_cm": 58.3,
+   "dup_of": "v3:17565",
+   "n_right_censored": 0,
+   "n_disturbed": 0,
+   "nearest_f4_direct_cheb_deg": 0.0017,
+   "nearest_f4_direct_loc_id": 17565,
+   "nearest_other_macro_f4_km": 1429.1,
+   "nearest_other_macro_f4_region": "CALM_Canada",
+   "within_100km_of_other_macro": false
+  }
+ ],
+ "v3_relation": {
+  "Bayelva": {
+   "site_id": "Bayelva",
+   "macro": "NAtlantic",
+   "nearest_f4_direct_cheb_deg": 1.78348,
+   "nearest_f4_direct_loc_id": 17569,
+   "nearest_f4_direct_region": "CALM_Svalbard",
+   "n_f4_direct_within_0p01": 0,
+   "dropped_by_v3_f4_rule": false,
+   "v3_non_f4_within_0p01": [
+    {
+     "loc_id": 17419,
+     "region": "GTNPenv_SJ",
+     "source_id": "F2_gtnp_env",
+     "alt_cm": 167.4,
+     "cheb_deg": 0.00018
+    }
+   ],
+   "nearest_other_macro_f4_km": 1408.3,
+   "nearest_other_macro_f4_region": "CALM_Russia_W",
+   "within_100km_of_other_macro": false
+  },
+  "CNR_at_Bayelva": {
+   "site_id": "CNR_at_Bayelva",
+   "macro": "NAtlantic",
+   "nearest_f4_direct_cheb_deg": 1.76095,
+   "nearest_f4_direct_loc_id": 17569,
+   "nearest_f4_direct_region": "CALM_Svalbard",
+   "n_f4_direct_within_0p01": 0,
+   "dropped_by_v3_f4_rule": false,
+   "v3_non_f4_within_0p01": [],
+   "nearest_other_macro_f4_km": 1408.0,
+   "nearest_other_macro_f4_region": "CALM_Russia_W",
+   "within_100km_of_other_macro": false
+  },
+  "CambridgeBay": {
+   "site_id": "CambridgeBay",
+   "macro": "Canada",
+   "nearest_f4_direct_cheb_deg": 7.5969,
+   "nearest_f4_direct_loc_id": 74,
+   "nearest_f4_direct_region": "ABoVE_CA",
+   "n_f4_direct_within_0p01": 0,
+   "dropped_by_v3_f4_rule": false,
+   "v3_non_f4_within_0p01": [],
+   "nearest_other_macro_f4_km": 1442.6,
+   "nearest_other_macro_f4_region": "United States (Alaska)",
+   "within_100km_of_other_macro": false
+  },
+  "Ilulissat_CALM_site": {
+   "site_id": "Ilulissat_CALM_site",
+   "macro": "NAtlantic",
+   "nearest_f4_direct_cheb_deg": 2.445,
+   "nearest_f4_direct_loc_id": 17535,
+   "nearest_f4_direct_region": "CALM_Greenland",
+   "n_f4_direct_within_0p01": 0,
+   "dropped_by_v3_f4_rule": false,
+   "v3_non_f4_within_0p01": [],
+   "nearest_other_macro_f4_km": 622.1,
+   "nearest_other_macro_f4_region": "CALM_Canada",
+   "within_100km_of_other_macro": false
+  },
+  "Iskoras": {
+   "site_id": "Iskoras",
+   "macro": "NAtlantic",
+   "nearest_f4_direct_cheb_deg": 6.46642,
+   "nearest_f4_direct_loc_id": 17520,
+   "nearest_f4_direct_region": "CALM_Scandinavia",
+   "n_f4_direct_within_0p01": 0,
+   "dropped_by_v3_f4_rule": false,
+   "v3_non_f4_within_0p01": [],
+   "nearest_other_macro_f4_km": 400.7,
+   "nearest_other_macro_f4_region": "CALM_Russia_W",
+   "within_100km_of_other_macro": false
+  },
+  "Kevo_Vaisejaeggi": {
+   "site_id": "Kevo_Vaisejaeggi",
+   "macro": "NAtlantic",
+   "nearest_f4_direct_cheb_deg": 7.00775,
+   "nearest_f4_direct_loc_id": 17517,
+   "nearest_f4_direct_region": "CALM_Russia_W",
+   "n_f4_direct_within_0p01": 0,
+   "dropped_by_v3_f4_rule": false,
+   "v3_non_f4_within_0p01": [],
+   "nearest_other_macro_f4_km": 362.2,
+   "nearest_other_macro_f4_region": "CALM_Russia_W",
+   "within_100km_of_other_macro": false
+  },
+  "NRC_Lake": {
+   "site_id": "NRC_Lake",
+   "macro": "Canada",
+   "nearest_f4_direct_cheb_deg": 0.31674,
+   "nearest_f4_direct_loc_id": 13337,
+   "nearest_f4_direct_region": "ABoVE_CA",
+   "n_f4_direct_within_0p01": 0,
+   "dropped_by_v3_f4_rule": false,
+   "v3_non_f4_within_0p01": [],
+   "nearest_other_macro_f4_km": 402.3,
+   "nearest_other_macro_f4_region": "United States (Alaska)",
+   "within_100km_of_other_macro": false
+  },
+  "Russel_Glacier_north": {
+   "site_id": "Russel_Glacier_north",
+   "macro": "NAtlantic",
+   "nearest_f4_direct_cheb_deg": 3.409,
+   "nearest_f4_direct_loc_id": 17535,
+   "nearest_f4_direct_region": "CALM_Greenland",
+   "n_f4_direct_within_0p01": 0,
+   "dropped_by_v3_f4_rule": false,
+   "v3_non_f4_within_0p01": [],
+   "nearest_other_macro_f4_km": 633.5,
+   "nearest_other_macro_f4_region": "CALM_Canada",
+   "within_100km_of_other_macro": false
+  },
+  "Samoylov": {
+   "site_id": "Samoylov",
+   "macro": "Lena",
+   "nearest_f4_direct_cheb_deg": 2e-05,
+   "nearest_f4_direct_loc_id": 16598,
+   "nearest_f4_direct_region": "Lena_RU",
+   "n_f4_direct_within_0p01": 99,
+   "dropped_by_v3_f4_rule": true,
+   "v3_non_f4_within_0p01": [],
+   "nearest_other_macro_f4_km": 118.0,
+   "nearest_other_macro_f4_region": "CALM_Russia_C",
+   "within_100km_of_other_macro": false
+  },
+  "Siksik_Creek": {
+   "site_id": "Siksik_Creek",
+   "macro": "Canada",
+   "nearest_f4_direct_cheb_deg": 0.0045,
+   "nearest_f4_direct_loc_id": 13215,
+   "nearest_f4_direct_region": "ABoVE_CA",
+   "n_f4_direct_within_0p01": 32,
+   "dropped_by_v3_f4_rule": true,
+   "v3_non_f4_within_0p01": [],
+   "nearest_other_macro_f4_km": 393.1,
+   "nearest_other_macro_f4_region": "United States (Alaska)",
+   "within_100km_of_other_macro": false
+  },
+  "Toolik_Field_Station": {
+   "site_id": "Toolik_Field_Station",
+   "macro": "Alaska",
+   "nearest_f4_direct_cheb_deg": 0.00549,
+   "nearest_f4_direct_loc_id": 14284,
+   "nearest_f4_direct_region": "United States (Alaska)",
+   "n_f4_direct_within_0p01": 2,
+   "dropped_by_v3_f4_rule": true,
+   "v3_non_f4_within_0p01": [],
+   "nearest_other_macro_f4_km": 414.0,
+   "nearest_other_macro_f4_region": "ABoVE_CA",
+   "within_100km_of_other_macro": false
+  },
+  "Zackenberg_dry": {
+   "site_id": "Zackenberg_dry",
+   "macro": "NAtlantic",
+   "nearest_f4_direct_cheb_deg": 0.0003,
+   "nearest_f4_direct_loc_id": 17565,
+   "nearest_f4_direct_region": "CALM_Greenland",
+   "n_f4_direct_within_0p01": 1,
+   "dropped_by_v3_f4_rule": true,
+   "v3_non_f4_within_0p01": [],
+   "nearest_other_macro_f4_km": 1429.1,
+   "nearest_other_macro_f4_region": "CALM_Canada",
+   "within_100km_of_other_macro": false
+  },
+  "Zackenberg_wet": {
+   "site_id": "Zackenberg_wet",
+   "macro": "NAtlantic",
+   "nearest_f4_direct_cheb_deg": 0.0017,
+   "nearest_f4_direct_loc_id": 17565,
+   "nearest_f4_direct_region": "CALM_Greenland",
+   "n_f4_direct_within_0p01": 1,
+   "dropped_by_v3_f4_rule": true,
+   "v3_non_f4_within_0p01": [],
+   "nearest_other_macro_f4_km": 1429.1,
+   "nearest_other_macro_f4_region": "CALM_Canada",
+   "within_100km_of_other_macro": false
+  }
+ },
+ "unverified_items": [
+  "측선이 교란 지형 위에 있는지 여부. Iskoras 의 thaw slumps, NRC Lake 2022-09-16 의 침수 기재는 지점 주변(30 m x 30 m) 설명이고 측선 위 상태는 확인하지 못했다",
+  "지점별 탐침 길이. 자료 설명 문서는 1-1.5 m 강철 봉으로 적는다. Bayelva 밖의 지점에서 탐침 길이에 닿은 값이 있는지는 확인하지 못했다",
+  "Kevo Vaisejaeggi 의 '완전 융해' 점(2022-11-02 의 3점, 2023년의 2점)이 영구동토 소멸인지 탐침 길이 초과인지. 값이 없어 평균에서 빠졌다. 개정 13 부터 그런 방문이 연 값을 주면 right_censored = 1 이다",
+  "10월 이후 최댓값 방문의 비교 조건(유효 점 수, 측선 점 수)은 결과 열람 전에 정한 파서 규칙이다. 자료 제공자의 권고는 확인하지 못했다",
+  "CNR@Bayelva 는 암석지라 점마다 3회 측정의 최댓값을 올렸다고 적혀 있다(2023년). 다른 연도의 측정 방식은 확인하지 못했다. 2021-08-31 방문의 3점은 제공자가 80 cm 로 바꿔 올렸다",
+  "Iskoras 와 Northern Border of Russel Glacier 의 좌표는 지점 설명 좌표다. 자료 설명 문서는 지점 좌표가 측선 좌표와 다를 수 있다고 적는다. 두 좌표가 같이 있는 지점의 차이는 sites 의 site_descr_max_dev_m 에 적었다",
+  "Ilulissat CALM site 의 2022년 방문은 21점 가운데 11점에만 값이 있다(설명: CALM grid 1.1-1.11). 2022년과 2023년의 측선이 같은 점 배치인지는 확인하지 못했다",
+  "단일 방문 연도(Siksik Creek, Iskoras, Russel Glacier, Ilulissat)의 값이 그 해 최대 융해 깊이에 얼마나 가까운지",
+  "Ilulissat CALM site 와 grl_ilulissat_scheer 의 CALM 격자 점 사이의 점 대응. 두 자료는 연도가 다르고(2022-2023년과 2020-2021년) 같은 1 km 셀에 있다. 위치 합치기는 v4 조립 단계의 일이다",
+  "2024년판(PANGAEA 997035). 로그인과 저자 승인이 필요해 받지 않았다",
+  "ERA5-Land 육지 폴백, CCI ALT 유효 여부, 공변량 부착 결과. v4 조립 단계의 일이다"
+ ]
+}
