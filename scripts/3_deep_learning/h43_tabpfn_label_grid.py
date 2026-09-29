@@ -60,7 +60,12 @@
 조각(<out-dir>/shards, 기본 data/processed/lgt/shards)
   <tag>__gpu__<대상>__<모드>__s<분할>_{runs.csv, blocksse.npz, cells.npz, unit.json}. 조각 하나에 두 학습기의 결과와 P0, P1 이 함께 들어간다.
   기록 순서는 runs.csv → blocksse.npz → cells.npz → unit.json 이고 모두 임시 파일 뒤 os.replace 다. unit.json 이 완료 표지다.
-  실행 시작 때 이전 unit.json 을 지운다. --resume 은 runs, blocksse, unit 이 있고 cfg_hash 가 같고 status 가 failed 가 아닌 조각만 건너뛴다.
+  실행 시작 때 이전 unit.json 과 cells.npz 를 지운다(--no-cells 재실행에서 세대가 다른 셀 파일이 남지 않게 한다. 셀 단위 자료를 읽는 코드는
+  unit.json 의 has_cells 를 먼저 본다). --resume 은 runs, blocksse, unit 이 있고 cfg_hash 가 같고 status 가 failed 가 아닌 조각만 건너뛴다.
+  status(계획서 §6C.8, 개정 12): 실패가 없으면 ok. 적합을 시도한 학습기 가운데 저장 키가 0 이거나 실패 적합(예외, 비유한 예측, 점검 실패)
+  비율이 FAIL_RATIO_MAX(0.2)를 넘는 학습기가 있으면 failed(unit.json 의 failed_learners). 그 밖의 실패가 있으면 partial.
+  같은 학습기의 학습기 실패(적합·예측 예외, 비유한 예측)가 FAIL_STREAK_MAX(5)회 연속되면 단위를 중단한다(unit.json 을 쓰지 않는다).
+  예외 뒤 CUDA 문맥을 쓸 수 없으면 워커를 끝내 풀을 새로 만들게 한다.
   runs.csv 의 열 = h40 의 열 + ctx_set(main, d3, d10, rid, tgt), n_ctx, n_ctx_src, n_ctx_tgt, fit_s, ctx_sha(컨텍스트 행렬과 목표의 SHA-1 앞 12자).
   cells.npz: y, s, block, loc_id, lat, lon, keys(JSON [method, learner, alpha, placement, n, draw, seed, comp]), P(float32, 키 × 채점 셀),
     E(키별 앵커 계수), E0, coef_keys(JSON [n, draw])와 coef_E(E_n). comp = pred(D0 의 예측) 또는 g(잔차 성분). 예측은 E·s + λ·g 로 복원한다.
@@ -74,13 +79,38 @@
   실행은 --threads 2–4 만 허용한다. 가중치 파일이 없으면 실행하지 않는다(내려받기 시도 방지). --count-only 와 --summarize-only 는
   GPU 없이 스레드 1–2 로 돈다. 실행 순서는 (1) 주 설정·주 4지역 (2) 민감도·주 4지역 (3) 주 설정·Alaska x (4) 주 설정·나머지 학습기 축 대상
   (5) 주 설정·나머지 (6) 민감도·나머지이고 묶음 안에서는 분할 번호, 큰 대상 순이다.
+  검증 지적 반영(개정 12):
+  - CUDA_DEVICE_ORDER = PCI_BUS_ID 를 모듈 최상위와 워커에서 둔다. 부모는 torch.cuda 를 부르지 않는다(CUDA 확인은 짧은 자식 프로세스).
+  - 워커는 단위를 시작할 때마다 배정 GPU 를 nvidia-smi 로 다시 본다. 첫 CUDA 초기화 전에는 메모리 사용이 --gpu-mem-max-mib 이하이고 계산
+    프로세스가 없어야 한다. 그 뒤에는 자기 PID 가 아닌 계산 프로세스가 없어야 한다. 걸리면 점유 표지(run_<tag>/gpu_busy__<번호>.json)를 남기고
+    워커를 끝낸다. 첫 초기화 직후에는 자기 PID(없으면 torch UUID)가 있는 GPU 가 배정 번호의 GPU 와 같은지 확인하고 다르면 실행 전체를 멈춘다.
+  - 풀이 깨지면 표지가 남은 GPU 를 빼고 nvidia-smi 로 다시 확인한 뒤 새 풀을 만든다. 실행 중 표지(run_<tag>/running__*.json)로 원인 단위를
+    가리고 풀을 POOL_CRASH_MAX(2)회 깬 단위만 격리한다. 이번 실행(run_id)에서 이미 완료된 조각은 다시 돌리지 않는다.
+  - 중단: Ctrl-C, SIGTERM, SIGHUP 은 대기 작업을 취소하고 워커를 종료한다. 워커는 SIGINT 를 무시하고 부모가 죽으면 SIGTERM 을 받는다
+    (prctl PR_SET_PDEATHSIG). 적합 사이에 부모 PID 가 바뀌었으면 스스로 끝난다. 워커 PID 와 배정 GPU 는 run_<tag>/worker__<PID>.json 에 남는다.
+  - 실행 잠금(run_<tag>/lock.json): 같은 tag 의 살아 있는 실행이 있으면 거부한다. 완료 조각이 있는데 --resume 도 --overwrite 도 없으면 거부한다
+    (스모크 tag 는 예외).
+  - 종료 코드: 중단 130, 실패(단위 예외, status failed, 집계 실패) 1, partial 만 있으면 2, 그 밖은 0. 실행 상태는 <tag>_run_status.json 에 남는다.
+    본 실행 뒤 두 번째 통과는 --resume --rerun-partial 로 돌린다.
+  - CatBoost 는 학습과 채점의 Pool 을 thread_count = --threads 로 직접 만든다. torch inter-op 스레드 1, TabPFN n_preprocessing_jobs = 1 을 명시한다.
+  - CUDA 메모리 부족 뒤의 묶음 재예측은 except 블록 밖에서 gc.collect() 와 캐시 비우기 뒤에 한다.
 
 집계(--summarize-only)
   lgt, lgts 조각을 읽어 곡선(h40.build_curve + 4분 판정 열), 최소 n(h40.build_minn), 가설 표(L32–L37, h42.TestBook)를 만든다.
   산출: <tag>_curve.csv, _minn.csv, _tests.csv, _cross.csv, _gate.csv, _timing.csv, _failed.csv, _targets.csv, _meta.json, _count.csv.
   실패(저장하지 못한 키, 상태가 ok 가 아닌 조각, 곡선 계산 실패)가 남으면 종료 코드 1 이다.
   교차 비교(--cross-lg)는 본 실행 cpu 조각과 P0·P1 을 대조한 뒤(허용 차 1e-9 cm, <tag>_gate.csv) 통과한 단위에만 catboost_lo 키를 병합한다.
+  LGT 의 P0, P1 키 가운데 기준 조각에 없는 키가 있으면(열 n_missing_ref) 통과로 두지 않는다.
   <tag>_cross.csv 의 모든 행은 '교차 환경(보조)'이고 <tag>_tests.csv 에 넣지 않는다.
+  집계의 조작적 정의(계획서 §6C.6, 개정 12. 가설과 판정 문구는 바꾸지 않았다):
+  - 학습기 짝 대비(L32 의 R1·D0·R0 대비, L37 의 R1[T] − R1[C])는 두 학습기에 모두 있는 (method, alpha, placement, n, draw, seed, lam) 키만
+    쓴다(pair_store). 뺀 키 수는 대비 행의 n_unpaired 열과 <tag>_meta.json 의 n_unpaired_keys 에 적는다. 대비 행의 key_set 열이 키 집합이다.
+  - L37 의 안정성 분류는 주 기준(주 설정의 추출 5개)과 보조 기준(주 설정의 추출 0–1, 민감도 축과 같은 추출 수)으로 함께 계산해
+    stability, stability_d01, stability_same 열에 병기한다. 판정 문구의 분할 완결성 표기에는 기준 행도 넣는다.
+    tgt 의 변형 − 주 설정 대비 문장은 안정성 판정과 따로 판정 행(clause '변형 − 주 설정')에 적는다.
+  - L32 에서 기준 λ 0.25 의 대비가 모두 동등이고 λ 1.0 에 우세 또는 열세가 있으면 '기준 λ 0.25 에서는 동등, λ 1.0 에서는 차이가 있다(n, 방향).
+    동등으로 쓰지 않는다'로 적는다. L32 의 D0, R0 보조 대비는 모든 n 이 맹검이다(계획서 §6C.7: TabPFN 의 D0, R0 은 기존 결과가 없다).
+  - 스모크는 곡선, 최소 n, 판정 표, 교차 표를 쓰지 않고 판정 행과 Δ 를 화면에 내지 않는다. 경로 점검(smoke_report), 적합 시간, 구조 수만 낸다.
 
 명세(implementation_spec)와 다르게 구현한 점
   1. 시험 파일 이름은 tests/test_h43_tabpfn.py 다(과제 지시). 명세는 tests/test_h43_lgt.py 였다.
@@ -99,14 +129,19 @@
       크기와 목표를 확인), --no-cells 를 더했다.
   11. L33 의 '우세인 최소 n' 에서 전량은 격자의 마지막 순서로 두고 'n ≤ 40' 조건에는 넣지 않는다(전량의 실제 라벨 수가 지역마다 다르다).
   12. L37 의 기준 행은 주 설정의 추출 5개를 쓴 대비이고 변형 행은 민감도의 추출 2개를 쓴 대비다. 변형 − 주 설정 대비는 공통 추출 번호로
-      짝짓는다(h40.contrast 의 규칙).
+      짝짓는다(h40.contrast 의 규칙). 추출 수의 차이를 보기 위해 추출 0–1 로 제한한 보조 기준 행을 함께 계산한다(개정 12).
+  13. 검증 지적(2026-09-30)에 따라 실행 제어(잠금, GPU 재확인, 중단 처리, 풀 재생성의 원인 단위 격리, 종료 코드)와 조각 상태 규칙을 더했다.
+      위 '실행 제어'와 '조각' 항목에 적었다.
 
 확인한 것(코드 읽기, tabpfn 8.0.7)
   - 가중치 경로: model_loading.resolve_model_path 는 파일 이름만 받으면 현재 작업 디렉터리, 그다음 캐시 디렉터리를 본다(위 5번).
   - CUDA 메모리 부족 예외: predict 는 torch.OutOfMemoryError 를 tabpfn.errors.TabPFNCUDAOutOfMemoryError 로 바꿔 올린다.
     is_cuda_oom 은 예외 클래스 이름(OutOfMemoryError 계열)과 RuntimeError 의 'out of memory' 문구를 함께 본다.
   - 범주형 추론: categorical_features_indices 를 빈 목록으로 줘도 컨텍스트가 100행을 넘으면 고유값이 4개 미만인 수치 열을 범주형으로
-    추론한다(preprocessing.modality_detection). x25 에 그런 열이 있으면 TabPFN 안에서 범주형으로 처리된다. --count-only 가 해당 열을 출력한다.
+    추론한다(preprocessing.modality_detection, inference_config 의 MIN_NUMBER_SAMPLES_FOR_CATEGORICAL_INFERENCE = 100,
+    MIN_UNIQUE_FOR_NUMERICAL_FEATURES = 4). 고유값 1개 이하인 열은 상수 열로 분류된다. 추론은 적합마다(컨텍스트마다) 다시 정해진다.
+    x25 에 그런 열이 있으면 TabPFN 안에서 범주형으로 처리된다. --count-only 가 해당 열을 출력하고, 실행은 적합 뒤의 분류
+    (inferred_feature_schema_ 의 범주형·상수 열 색인)를 변형과 컨텍스트 크기(100행 이하, 초과)별로 세어 unit.json 의 tabpfn_schema 에 남긴다.
   - h42.TestBook 이 읽는 인자 속성은 delta_eq, delta_eq_aux 다. 재표집 횟수는 TMx 의 nboot 에서 읽는다. h42 는 import 때 파일을 쓰지 않는다.
 
 구현 뒤 --count-only 로 확인한 값(2026-09-29, 스레드 1개, 약 22초. --dry-build 를 더하면 약 25초)
@@ -117,21 +152,36 @@
     0.5·(1 − w) + w·(J − 1)/2 다(w = 그 지역의 비중, J = 원천 지역 수). 규칙은 계획서대로 구현했고 문구만 실제와 다르다.
   - 고유값이 4개 미만인 x25 열은 cci_valid 하나다(TabPFN 이 범주형으로 추론한다. CatBoost 는 수치로 쓴다).
 
+스모크(2026-09-30 01:29–01:36, GPU 9, 스레드 2, --gpu-mem-max-mib 2, 4단위 98적합, 6분 46초, 종료 코드 0)로 확인한 것
+  - 4단위 모두 status ok, 저장하지 못한 키 0, 짝이 없는 키 0. 같은 컨텍스트 행렬(짝 51), n = 0 의 R1 = R0(키 12), CatBoost Pool 경로 차 0.0 cm,
+    장치 대응(자기 PID), 실제 n_estimators 8, 잠금 해제와 GPU 반환. 집계 경로(summarize, build_tests_t)가 끝까지 돌았다(스모크 판정 행 11개는
+    모두 판정 불가: 2대상·분할 1 이라 풀 조건을 채우지 못한다).
+  - 적합 1건: TabPFN 5.6–6.3 s(컨텍스트 9,000–9,400행, 채점 12–393행), tgt 0.75–0.86 s, 워커 첫 적합 12.6–19.4 s. CatBoost 0.33–0.47 s.
+    추정식 대비 실측 비 TabPFN 0.92, CatBoost 1.09. GPU 메모리 최댓값 할당 1,619 MiB, 예약 5,534 MiB.
+  - 묶음 예측과 한 번 예측의 차는 최대 0.056 cm 로 허용 차 0.001 cm 를 넘었다. tabpfn 기본값(inference_precision 'auto' → CUDA 혼합 정밀도)과
+    묶음 크기에 따른 계산 순서 차이로 보이나 실험으로 확인하지 않았다. 묶음 재예측은 CUDA 메모리 부족 때만 쓰이고 표지(chunk)가 남는다.
+  - 빈 GPU 의 nvidia-smi 메모리 표시가 2 MiB 였다(계산 프로세스 없음). 기본값 --gpu-mem-max-mib 0 이면 빈 GPU 도 빠지므로 실행 때 표시값을 준다.
+
 확인하지 못한 것
-  학습, 스모크, pytest 를 이 단계에서 실행하지 않았다(워크플로 규칙). 확인은 py_compile, pyflakes, --count-only 뿐이다.
-  시험 파일(tests/test_h43_tabpfn.py)은 작성만 했고 실행하지 않았다. TabPFN 과 CatBoost 의 실제 적합, 조각 기록, 집계 경로(summarize,
-  build_tests_t, cross_tables)는 실행해 보지 않았다. 적합 1건의 시간, GPU 메모리 최댓값, 묶음 예측과 한 번 예측의 차이는 스모크에서 잰다.
-  CatBoost 의 스레드 수에 따른 재현성(2스레드와 4스레드)과 재표집 10,000회의 집계 시간은 확인하지 못했다.
+  pytest 는 이 단계에서 실행하지 않았다(워크플로 규칙: 로컬 실행은 py_compile, pyflakes, --count-only, 스모크 1회). 시험 파일은 작성만 했다.
+  채점 6,000–7,300행(Alaska x)의 시간과 GPU 메모리, 스레드 4개일 때의 적합 시간, 같은 입력의 GPU 반복 예측이 같은 값을 내는지, 풀 재생성과
+  중단 처리의 실제 동작(워커 비정상 종료, 신호)은 실행으로 확인하지 못했다. CatBoost 의 스레드 수에 따른 재현성(2스레드와 4스레드)과
+  재표집 10,000회의 집계 시간도 확인하지 못했다.
 
 실행(ROOT)
   적합 수:   python3 scripts/3_deep_learning/h43_tabpfn_label_grid.py --count-only --threads 1
-  스모크:    python3 scripts/3_deep_learning/h43_tabpfn_label_grid.py --smoke --gpus 9 --threads 4
-  본 실행:   python3 scripts/3_deep_learning/h43_tabpfn_label_grid.py --gpus 9,7,6,5 --threads 4 --resume --no-summarize
+  스모크:    python3 scripts/3_deep_learning/h43_tabpfn_label_grid.py --smoke --gpus 9 --threads 2
+  본 실행:   python3 scripts/3_deep_learning/h43_tabpfn_label_grid.py --gpus <실행 직전 nvidia-smi 로 확인한 빈 GPU, 예: 9,7,6,5> --threads 4
+             --resume --no-summarize            (첫 실행도 --resume 을 준다. 종료 코드 0 완료, 2 partial 있음, 1 실패, 130 중단)
+  두 번째 통과: 같은 명령에 --rerun-partial 을 더한다(partial 조각과 실패 조각만 다시 돈다)
   집계:      python3 scripts/3_deep_learning/h43_tabpfn_label_grid.py --summarize-only --threads 2
+  호출자는 실행 중에도 nvidia-smi 로 GPU 점유를 주기적으로 확인한다(워커는 단위 시작 때만 확인한다).
 """
 from __future__ import annotations
 
 import argparse
+import copy
+import gc
 import hashlib
 import importlib.util
 import json
@@ -139,6 +189,8 @@ import math
 import multiprocessing
 import os
 import platform
+import re
+import signal
 import subprocess
 import sys
 import time
@@ -177,6 +229,7 @@ def _peek_threads(default=THREADS_DEFAULT):
 
 for _v in THREAD_VARS:
     os.environ[_v] = _peek_threads()                # setdefault 가 아니라 대입이다(부모 환경의 큰 값을 물려받지 않는다)
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"      # CUDA 장치 번호를 nvidia-smi 번호(PCI 버스 순)와 맞춘다(torch 를 부르기 전)
 
 import numpy as np                                                                                   # noqa: E402
 import pandas as pd                                                                                  # noqa: E402
@@ -233,6 +286,13 @@ NB_SEEN = (3, 10, 40)                               # b4 에서 방향을 본 n(
 GATE_TOL = 1e-9                                     # 재현 점검의 허용 차(cm)
 SMOKE_CHUNK_TOL = 1e-3                              # 스모크: 묶음 예측과 한 번 예측의 허용 차(cm)
 TRACE = None                                        # 시험용: 리스트를 넣으면 모든 적합의 컨텍스트 행렬과 정보를 기록한다
+FAIL_STREAK_MAX = 5                                 # 같은 학습기의 연속 실패(적합·예측 예외, 비유한 예측) 상한. 이르면 단위를 중단한다
+FAIL_RATIO_MAX = 0.2                                # 학습기별 실패 적합 비율이 이 값을 넘으면 조각 상태를 failed 로 둔다
+POOL_CRASH_MAX = 2                                  # 실행 중에 풀을 이 횟수만큼 깬 단위는 격리한다(실패로 기록하고 다시 돌리지 않는다)
+GPU_SETTLE_S = 30                                   # 풀을 다시 만들 때 종료한 워커의 GPU 메모리가 풀리기를 기다리는 최대 시간(s)
+AUX_DRAWS = (0, 1)                                  # L37 보조 기준 행의 추출 번호(민감도 축과 같은 추출 수)
+EXIT_FAIL, EXIT_PARTIAL, EXIT_INTERRUPT = 1, 2, 130
+TAG_ABORT, TAG_MISMATCH = "[적합 중단]", "[GPU 불일치]"   # 워커 예외의 문구 표지(워커 밖으로는 내장 예외로만 넘긴다)
 RUN_COLS = ["target", "mode", "parent", "split", "part", "axis", "method", "learner", "alpha", "placement", "n", "n_lab", "draw", "seed", "lam",
             "rmse_cm", "rmse_beq_cm", "bias_cm", "E_used", "alpha_sel", "n_blocks_lab", "n_nonfinite", "fit_flag",
             "ctx_set", "n_ctx", "n_ctx_src", "n_ctx_tgt", "fit_s", "ctx_sha"]
@@ -271,6 +331,7 @@ def parse_args(argv=None):
     ap.add_argument("--lg-dir", default="data/processed/lg", help="본 실행(LG) 산출 디렉터리. 읽기 전용")
     ap.add_argument("--lg-tag", default="lg")
     ap.add_argument("--resume", action="store_true", help="설정 해시가 같고 실패가 아닌 조각은 건너뛴다")
+    ap.add_argument("--overwrite", action="store_true", help="완료 표지가 있는 조각이 있어도 --resume 없이 전부 다시 실행해 덮어쓴다(없으면 거부)")
     ap.add_argument("--rerun-partial", action="store_true", help="--resume 에서 일부 적합이 실패한 조각(status partial)도 다시 실행한다")
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--count-only", action="store_true", help="학습 없이 작업 단위, 칸, 적합 수와 추정 시간만 낸다")
@@ -279,7 +340,7 @@ def parse_args(argv=None):
     ap.add_argument("--no-summarize", action="store_true", help="실행 뒤 집계를 생략한다(조각만 남긴다)")
     ap.add_argument("--no-cells", action="store_true", help="셀 단위 저장(cells.npz)을 생략한다")
     ap.add_argument("--allow-mixed-cfg", action="store_true", help="집계: 조각 사이 설정 해시가 달라도 진행한다(기본은 중단)")
-    ap.add_argument("--pool-retries", type=int, default=2, help="워커 비정상 종료로 풀이 깨졌을 때 남은 단위로 풀을 다시 만드는 횟수")
+    ap.add_argument("--pool-retries", type=int, default=2, help="진전(단위 완료 또는 격리) 없이 풀을 연속으로 다시 만드는 횟수의 상한")
     a = ap.parse_args(argv)
     a.ARGV = list(sys.argv[1:] if argv is None else argv)
     return finalize(a)
@@ -334,6 +395,8 @@ def finalize(a):
     a.LAMS = [float(v) for v in str(a.lams).split(",") if v.strip()]
     a.OUT = _abs(a.out_dir); a.PROC = _abs(a.data_dir); a.LGDIR = _abs(a.lg_dir)
     a.SHARDS = a.OUT / "shards"
+    a.RUN_DIR = a.OUT / f"run_{a.TAG}"                               # 실행 잠금, 워커 PID, 실행 중 표지, GPU 점유 표지
+    a.RUN_ID = ""                                                    # main 이 실행마다 정한다(조각의 unit.json 에 기록)
     a.MODEL = resolve_model(a.model_path)
     a.save_cells = not a.no_cells
     a._ha = {}
@@ -515,6 +578,7 @@ def is_cuda_oom(e):
 
 
 def _free_cuda():
+    """GPU 캐시를 비운다. 참조가 남은 텐서는 반환되지 않으므로 예외 블록 밖에서 gc.collect() 뒤에 부른다."""
     try:
         import torch
         if torch.cuda.is_available():
@@ -528,45 +592,67 @@ def _predict_chunks(m, XB, chunk):
     return np.concatenate([np.asarray(m.predict(XB[k:k + chunk]), float) for k in range(0, len(XB), chunk)])
 
 
+def tabpfn_schema(m):
+    """적합 뒤 TabPFN 이 정한 열 분류(범주형 열과 상수 열의 색인). tabpfn 8.0.7 의 inferred_feature_schema_ 를 읽는다.
+    범주형 추론은 컨텍스트가 100행을 넘을 때만 한다(inference_config.MIN_NUMBER_SAMPLES_FOR_CATEGORICAL_INFERENCE). 읽을 수 없으면 빈 dict."""
+    n_est = getattr(m, "n_estimators_", None)                             # 적합에 실제로 쓴 n_estimators(8.0.7 의 auto_scale_n_estimators 확인용)
+    try:
+        from tabpfn.preprocessing.datamodel import FeatureModality
+        sc = m.inferred_feature_schema_
+        return dict(cat_cols=[int(i) for i in sc.indices_for(FeatureModality.CATEGORICAL)],
+                    const_cols=[int(i) for i in sc.indices_for(FeatureModality.CONSTANT)], n_est_used=int(n_est) if n_est is not None else -1)
+    except Exception:                                                     # noqa: BLE001
+        return {}
+
+
 def tabpfn_fit_predict(a, X, y, XB, seed, cat_idx=None, check_chunk=0):
-    """TabPFN 적합과 예측. 생성자 인자는 h35.tfm_fit_predict 와 같고 범주형 지정만 다르다(기본은 지정 없음, rid 변형은 [25]).
-    반환 (예측, 표지, 정보). 예측은 한 번에 하고 CUDA 메모리 부족 예외에서만 --pred-chunk 행 묶음으로 다시 예측한다(표지 chunk).
-    check_chunk > 0 이면 같은 모델로 묶음 예측을 한 번 더 해 한 번 예측과의 차이(절댓값의 최댓값)를 정보에 남긴다(스모크 전용)."""
+    """TabPFN 적합과 예측. 생성자 인자는 h35.tfm_fit_predict 와 같고 범주형 지정(기본은 지정 없음, rid 변형은 [25])과
+    n_preprocessing_jobs = 1(tabpfn 8.0.7 의 기본값을 명시)만 다르다. 반환 (예측, 표지, 정보).
+    예측은 한 번에 한다. CUDA 메모리 부족 예외는 except 블록에서 표지만 세우고, 블록을 벗어나 예외 객체와 그 traceback 이 잡은 텐서가 풀린 뒤
+    gc.collect() 와 캐시 비우기를 하고 --pred-chunk 행 묶음으로 다시 예측한다(표지 chunk).
+    정보: 열 분류(cat_cols, const_cols). check_chunk > 0 이면 같은 모델로 묶음 예측을 한 번 더 해 한 번 예측과의 차이(절댓값의 최댓값)와
+    그 점검 시간(check_s)을 남긴다(스모크 전용)."""
     os.environ.setdefault("TABPFN_DISABLE_TELEMETRY", "1")
     from tabpfn import TabPFNRegressor
     m = TabPFNRegressor(device="cuda", random_state=int(seed), n_estimators=int(a.n_est), model_path=str(a.MODEL),
                         ignore_pretraining_limits=True, categorical_features_indices=[] if cat_idx is None else [int(cat_idx)],
-                        memory_saving_mode=False)
+                        memory_saving_mode=False, n_preprocessing_jobs=1)
     m.fit(X, y)
-    flag, info = "", {}
+    flag, info = "", tabpfn_schema(m)
+    oom, p = False, None
     try:
         p = np.asarray(m.predict(XB), float)
     except Exception as e:                                                # noqa: BLE001
         if not is_cuda_oom(e):
             raise
+        oom = True                                                        # 처리는 블록 밖에서 한다
+    if oom:
+        gc.collect()
         _free_cuda()
         p = _predict_chunks(m, XB, a.pred_chunk)
         flag = "chunk"
     if check_chunk and flag == "" and len(XB) > int(check_chunk):
+        t0 = time.time()
         q = _predict_chunks(m, XB, check_chunk)
-        info.update(chunk_rows=int(check_chunk), chunk_maxdiff=float(np.max(np.abs(q - p))))
+        info.update(chunk_rows=int(check_chunk), chunk_maxdiff=float(np.max(np.abs(q - p))), check_s=round(time.time() - t0, 3))
     del m
     return p, flag, info
 
 
 def cb_fit_predict(HA, X, y, XB, seed, cat_idx=None):
-    """같은 컨텍스트 행으로 학습하는 CatBoost. 초모수는 catboost_lo(h40.cb_fit)다. rid 변형은 h35.cb_fit_predict 의 cat_idx 경로와
-    같은 방식으로 Pool 에 범주형 열을 지정한다. 반환 (예측, 표지, 정보)."""
+    """같은 컨텍스트 행으로 학습하는 CatBoost. 초모수는 catboost_lo(h40.cb_fit)와 같다(반복 --cb-iters, 학습률 0.05, 깊이 3, l2 3,
+    random_seed = 학습기 seed). h40.cb_fit 은 numpy 배열을 fit 에 넘겨 catboost 가 학습 Pool 을 스레드 제한 없이(Pool 의 기본값
+    thread_count = −1) 만든다. 여기서는 학습과 채점의 Pool 을 thread_count = --threads 로 직접 만든다. rid 변형은 26번째 열을 범주형(정수)으로
+    지정한다(h35.cb_fit_predict 의 cat_idx 경로와 같은 방식). 반환 (예측, 표지, 정보)."""
     th = int(HA.threads)
-    if cat_idx is None:
-        m = H.cb_fit(HA, X, y, seed)
-        return np.asarray(m.predict(XB, thread_count=th), float), "", {}
     from catboost import CatBoostRegressor, Pool
 
     def pool(Z, t=None):
+        if cat_idx is None:
+            return Pool(np.asarray(Z), t, thread_count=th)
         d = pd.DataFrame(np.asarray(Z))
         d[int(cat_idx)] = d[int(cat_idx)].astype(int)
-        return Pool(d, t, cat_features=[int(cat_idx)])
+        return Pool(d, t, cat_features=[int(cat_idx)], thread_count=th)
     m = CatBoostRegressor(iterations=int(HA.cb_iters), learning_rate=0.05, depth=3, l2_leaf_reg=3.0, random_seed=int(seed), verbose=0,
                           allow_writing_files=False, thread_count=th)
     m.fit(pool(X, y))
@@ -580,16 +666,26 @@ def est_fit_s(learner, n_ctx, n_eval):
     return 0.4 * (max(float(n_ctx), 1.0) / 10000.0) ** 0.6
 
 
+class FitAbort(RuntimeError):
+    """같은 학습기의 연속 실패가 FAIL_STREAK_MAX 에 이르렀다. 단위를 중단한다(unit.json 을 쓰지 않는다).
+    워커 밖으로는 _worker_run_t 가 내장 RuntimeError 로 바꿔 넘긴다(주 모듈의 예외 클래스는 부모 프로세스에서 풀 수 없다)."""
+
+
 class FitterT:
-    """적합 실행, 계수, 기록. dry = True 이면 학습 없이 수와 추정 시간만 센다(예측은 0)."""
+    """적합 실행, 계수, 기록. dry = True 이면 학습 없이 수와 추정 시간만 센다(예측은 0).
+    실패의 구분: 점검 실패(컨텍스트 행렬이나 목표가 규칙에 어긋남)는 그 적합만 실패로 남긴다. 학습기 실패(적합·예측 예외, 비유한 예측)는
+    학습기별 연속 횟수를 세고 FAIL_STREAK_MAX 에 이르면 FitAbort 로 단위를 중단한다. 성공한 적합이 그 학습기의 연속 횟수를 0 으로 되돌린다."""
 
     def __init__(self, a, HA, n_eval, dry=False):
         self.a, self.HA, self.n_eval, self.dry = a, HA, int(n_eval), bool(dry)
-        self.n = Counter(); self.sec = Counter(); self.fail = Counter()
+        self.n = Counter(); self.sec = Counter(); self.fail = Counter(); self.nonfin = Counter()       # 키 = "변형:학습기"
         self.nd = Counter(); self.secd = Counter(); self.rowsd = Counter(); self.estd = Counter()      # 키 = "축|학습기|방법"(h40.timing_table 의 형식)
         self.errors: list = []
-        self.smoke: list = []                                             # 스모크의 묶음 예측 점검 기록
+        self.smoke: list = []                                             # 스모크의 묶음 예측 점검과 CatBoost Pool 점검 기록
+        self.schema: dict = {}                                            # TabPFN 열 분류: "변형|ctx<=100" 또는 "변형|ctx>100" → {분류 JSON: 적합 수}
+        self.streak = Counter()                                           # 학습기별 연속 실패 수
         self._checked: set = set()
+        self._cb_checked = False
 
     def check(self, X, y, XB, n_ctx, cat_idx):
         """컨텍스트 행렬과 목표의 점검. 어긋나면 ValueError 다(그 적합만 실패로 남는다)."""
@@ -602,8 +698,24 @@ class FitterT:
         if not np.all(np.isfinite(np.asarray(y, float))):
             raise ValueError("학습 목표에 비유한 값이 있다")
 
+    def _note_schema(self, ctx_set, n_ctx, ex):
+        """TabPFN 이 정한 열 분류를 변형과 컨텍스트 크기(100행 이하, 초과)별로 센다(unit.json 의 tabpfn_schema)."""
+        if "cat_cols" not in ex:
+            return
+        key = f"{ctx_set}|{'ctx<=100' if int(n_ctx) <= 100 else 'ctx>100'}"
+        sig = json.dumps(dict(cat=list(ex["cat_cols"]), const=list(ex["const_cols"]), n_est=int(ex.get("n_est_used", -1))), sort_keys=True)
+        slot = self.schema.setdefault(key, {})
+        slot[sig] = int(slot.get(sig, 0)) + 1
+
+    def _fail(self, k, ctx_set, learner, err):
+        self.fail[f"{ctx_set}:{learner}"] += 1
+        if len(self.errors) < 20:
+            self.errors.append(f"{k}: {err}")
+        print(f"    [warn] 적합 실패({k}): {err[:160]}", flush=True)
+
     def fit(self, ctx_set, learner, method, X, y, XB, seed, cat_idx, n_ctx, info=None):
-        """반환 (예측 또는 잔차 성분, 표지, 시간 s, 컨텍스트 해시). 적합 단위 예외는 그 적합만 실패로 남긴다(예측 NaN, 표지 fail)."""
+        """반환 (예측 또는 잔차 성분, 표지, 시간 s, 컨텍스트 해시). 적합 한 건의 예외는 그 적합만 실패로 남긴다(예측 NaN, 표지 fail).
+        같은 학습기의 연속 실패가 FAIL_STREAK_MAX 에 이르면 FitAbort 를 올린다. 시간에는 스모크 점검(묶음 예측, CatBoost Pool 대조)을 넣지 않는다."""
         k = f"{ctx_set}|{learner}|{method}"
         self.n[f"{ctx_set}:{learner}"] += 1; self.nd[k] += 1; self.rowsd[k] += int(n_ctx)
         self.estd[k] += est_fit_s(learner, n_ctx, self.n_eval)
@@ -616,37 +728,61 @@ class FitterT:
                     if len(self.errors) < 20:
                         self.errors.append(f"{k}: {repr(e)[:200]}")
             return np.zeros(self.n_eval), "", 0.0, ""
-        t0 = time.time(); flag, sha = "", ""
+        _orphan_check()
+        t0 = time.time(); flag, sha, err, oom, lfail, extra_s, p = "", "", "", False, False, 0.0, None
         try:
             if TRACE is not None:
                 TRACE.append(dict(info or {}, ctx_set=ctx_set, learner=learner, method=method, seed=int(seed), cat_idx=cat_idx,
                                   X=np.array(X, copy=True), y=np.array(y, copy=True), XB=np.array(XB, copy=True)))
             self.check(X, y, XB, n_ctx, cat_idx)
-            sha = ctx_sha(X, y)
-            if learner == TP:
-                chk = 0
-                if self.a.smoke and ctx_set not in self._checked and self.n_eval >= 2:
-                    chk = int(math.ceil(self.n_eval / 2.0))               # 스모크: 변형마다 첫 TabPFN 적합에서 채점 셀을 두 묶음으로 나눠 본다
-                p, flag, ex = tabpfn_fit_predict(self.a, X, y, XB, seed, cat_idx, check_chunk=chk)
-                if chk:
-                    self._checked.add(ctx_set)
-                    self.smoke.append(dict(ex, ctx_set=ctx_set, method=method, n_eval=self.n_eval, n_ctx=int(n_ctx)))
-            else:
-                p, flag, ex = cb_fit_predict(self.HA, X, y, XB, seed, cat_idx)
-            p = np.asarray(p, float)
-            if p.shape != (len(XB),):
-                raise ValueError(f"예측의 모양 {p.shape} 이 채점 셀 수 {len(XB)} 와 다르다")
-        except (ImportError, MemoryError):                                # 환경 문제: 조각 전체를 실패로 둔다(재개 때 다시 실행)
-            raise
-        except Exception as e:                                            # noqa: BLE001
-            self.fail[f"{ctx_set}:{learner}"] += 1
-            if len(self.errors) < 20:
-                self.errors.append(f"{k}: {repr(e)[:200]}")
-            print(f"    [warn] 적합 실패({k}): {repr(e)[:160]}", flush=True)
+        except ValueError as e:
+            err = "점검: " + repr(e)[:200]                                   # 점검 실패는 연속 실패에 세지 않는다
+        if not err:
+            try:
+                sha = ctx_sha(X, y)
+                if learner == TP:
+                    chk = 0
+                    if self.a.smoke and ctx_set not in self._checked and self.n_eval >= 2:
+                        chk = int(math.ceil(self.n_eval / 2.0))           # 스모크: 변형마다 첫 TabPFN 적합에서 채점 셀을 두 묶음으로 나눠 본다
+                    p, flag, ex = tabpfn_fit_predict(self.a, X, y, XB, seed, cat_idx, check_chunk=chk)
+                    self._note_schema(ctx_set, n_ctx, ex)
+                    extra_s += float(ex.get("check_s", 0.0) or 0.0)
+                    if chk:
+                        self._checked.add(ctx_set)
+                        self.smoke.append(dict({q: v for q, v in ex.items() if q.startswith("chunk") or q == "check_s"}, ctx_set=ctx_set,
+                                               method=method, n_eval=self.n_eval, n_ctx=int(n_ctx)))
+                else:
+                    p, flag, ex = cb_fit_predict(self.HA, X, y, XB, seed, cat_idx)
+                    if self.a.smoke and cat_idx is None and not self._cb_checked:      # 스모크: Pool 의 스레드 지정이 예측을 바꾸지 않는지 h40.cb_fit 과 대조
+                        t1 = time.time()
+                        q = np.asarray(H.cb_fit(self.HA, X, y, seed).predict(XB, thread_count=int(self.HA.threads)), float)
+                        self._cb_checked = True
+                        self.smoke.append(dict(cb_pool_maxdiff=float(np.max(np.abs(q - np.asarray(p, float)))), ctx_set=ctx_set, method=method,
+                                               n_ctx=int(n_ctx)))
+                        extra_s += time.time() - t1
+                p = np.asarray(p, float)
+                if p.shape != (len(XB),):
+                    raise ValueError(f"예측의 모양 {p.shape} 이 채점 셀 수 {len(XB)} 와 다르다")
+            except (ImportError, MemoryError):                            # 환경 문제: 조각 전체를 실패로 둔다(재개 때 다시 실행)
+                raise
+            except Exception as e:                                        # noqa: BLE001
+                err, oom, lfail = repr(e)[:200], is_cuda_oom(e), True     # 처리는 블록 밖에서 한다(예외 객체가 잡은 텐서를 먼저 놓는다)
+        if err:
+            self._fail(k, ctx_set, learner, err)
             p, flag = np.full(len(XB), np.nan), "fail"
-            if is_cuda_oom(e):
+            if oom:
+                gc.collect()
                 _free_cuda()
-        dt = time.time() - t0
+        elif not np.all(np.isfinite(p)):
+            self.nonfin[f"{ctx_set}:{learner}"] += 1
+            lfail = True
+        if lfail:
+            self.streak[learner] += 1
+            if self.streak[learner] >= FAIL_STREAK_MAX:
+                raise FitAbort(f"{TAG_ABORT} {learner} 적합이 {self.streak[learner]}회 연속 실패했다({k}). 마지막: {err or '비유한 예측'}")
+        elif not err:
+            self.streak[learner] = 0
+        dt = max(time.time() - t0 - extra_s, 0.0)
         self.sec[f"{ctx_set}:{learner}"] += dt; self.secd[k] += dt
         return p, flag, dt, sha
 
@@ -690,7 +826,8 @@ def run_ctx_t(c, axis, a, HA, dry=False, code=None, new_code=0, loc=None):
     F = FitterT(a, HA, len(c.yB), dry)
     empty = dict(n_fit={}, sec={}, fail={}, n_rows=0, status="no_eval", n_fit_detail={}, sec_detail={}, rows_detail={}, est_detail={}, errors=[],
                  n_stored=0, n_stored_ml=0, n_nonfinite_keys=0, ctx={}, ctx_dev_max=0.0, ctx_dev_bound=0.0, n_src_regions=0, n_ctx_max=0, n_ctx_min=0,
-                 flags={}, smoke_check=[])
+                 flags={}, smoke_check=[], tabpfn_schema={}, nonfinite_fits={}, n_fit_learner={}, n_fail_learner={}, n_stored_learner={},
+                 failed_learners=[])
     if len(c.yB) == 0 or len(c.yA) == 0:
         return [], None, empty, None
     st = BlockStore(f"{c.target}|{c.mode}", c.split, c.blkB, meta=dict(target=c.target, mode=c.mode, part="gpu", axis=axis))
@@ -808,16 +945,33 @@ def run_ctx_t(c, axis, a, HA, dry=False, code=None, new_code=0, loc=None):
             run_set(v, SENS_SETS[v], [n for n in sens_grid(a, v) if n in HA.N_GRID], AX_T["sens"]["methods"])
     n_ml = sum(1 for k in st.keys if k[1] != "none")
     n_fail = int(sum(F.fail.values())) + int(n_bad[0])
-    n_fit = int(sum(F.n.values()))
-    status = "ok" if n_fail == 0 else ("failed" if (n_ml == 0 and n_fit > 0) else "partial")      # failed = 학습 결과가 하나도 저장되지 않음
+    lc = learner_counts_t(F, st)
+    status = "ok" if n_fail == 0 else ("failed" if lc["failed_learners"] else "partial")
     stats = dict(n_fit=dict(F.n), sec={k: round(v, 1) for k, v in F.sec.items()}, fail=dict(F.fail), n_rows=int(n_rows[0]), status=status,
                  n_fit_detail=dict(F.nd), sec_detail={k: round(v, 2) for k, v in F.secd.items()}, rows_detail=dict(F.rowsd),
                  est_detail={k: round(v, 2) for k, v in F.estd.items()}, errors=list(F.errors), n_stored=int(len(st)), n_stored_ml=int(n_ml),
                  n_nonfinite_keys=int(n_bad[0]), ctx=ctx_info, ctx_dev_max=round(float(dev_max[0]), 3),
                  ctx_dev_bound=round(region_dev_bound(c.macro_src), 3), n_src_regions=int(len(set(np.asarray(c.macro_src).astype(str).tolist()))),
                  n_ctx_max=int(max(nctx_all)) if nctx_all else 0, n_ctx_min=int(min(nctx_all)) if nctx_all else 0, flags=dict(flags),
-                 smoke_check=list(F.smoke))
+                 smoke_check=list(F.smoke), tabpfn_schema=F.schema, nonfinite_fits=dict(F.nonfin), **lc)
     return rows, st, stats, cells
+
+
+def learner_counts_t(F, st):
+    """학습기별 적합 수, 실패 적합 수(예외와 비유한 예측), 저장 키 수와 조각을 failed 로 두게 하는 학습기(계획서 §6C.8, 개정 12).
+    적합을 시도한 학습기 가운데 저장 키가 0 이거나 실패 적합 비율이 FAIL_RATIO_MAX 를 넘는 학습기가 있으면 조각 상태는 failed 다
+    (--resume 이 다시 실행한다). 그 밖의 실패가 있으면 partial 이다."""
+    fit_by, fail_by, stored_by = Counter(), Counter(), Counter()
+    for kk, v in F.n.items():
+        fit_by[kk.split(":", 1)[-1]] += int(v)
+    for src in (F.fail, F.nonfin):
+        for kk, v in src.items():
+            fail_by[kk.split(":", 1)[-1]] += int(v)
+    for k in (st.keys if st is not None else []):
+        if k[1] != "none":
+            stored_by[k[1]] += 1
+    bad = [lr for lr in LEARNERS_T if fit_by[lr] > 0 and (stored_by[lr] == 0 or fail_by[lr] / fit_by[lr] > FAIL_RATIO_MAX)]
+    return dict(n_fit_learner=dict(fit_by), n_fail_learner=dict(fail_by), n_stored_learner=dict(stored_by), failed_learners=bad)
 
 
 # ================================================================ 조각 입출력
@@ -954,6 +1108,11 @@ def require_cuda():
     return torch
 
 
+def cuda_backend():
+    """GPU 백엔드(torch). CUDA 를 쓸 수 없으면 예외다. 시험에서 GPU 없이 실행 경로를 확인할 때 대체한다."""
+    return require_cuda()
+
+
 def run_unit_t(a, axis, target, mode, split, dry=False):
     t0 = time.time()
     HA = h40_args_t(a, axis)
@@ -962,9 +1121,11 @@ def run_unit_t(a, axis, target, mode, split, dry=False):
     code, new_code = macro_codes(D.df.macro.unique())
     torch = None
     if not dry:
-        torch = require_cuda()
+        torch = cuda_backend()
         torch.cuda.reset_peak_memory_stats()
-        shard_paths_t(a, axis, target, mode, split)["unit"].unlink(missing_ok=True)      # 이전 세대의 완료 표지를 먼저 지운다
+        p_ = shard_paths_t(a, axis, target, mode, split)
+        for k_ in ("unit", "cells"):                                      # 이전 세대의 완료 표지와 셀 파일을 먼저 지운다(--no-cells 재실행에서 세대가 섞이지 않게)
+            p_[k_].unlink(missing_ok=True)
     loc = eval_cells(D, c, target, split) if (a.save_cells and not dry) else None
     rows, st, stats, cells = run_ctx_t(c, axis, a, HA, dry=dry, code=code, new_code=new_code, loc=loc)
     if dry:
@@ -979,7 +1140,9 @@ def run_unit_t(a, axis, target, mode, split, dry=False):
     peak = float(torch.cuda.max_memory_allocated()) / (1024.0 ** 2)          # torch 가 할당한 텐서의 최댓값
     resv = float(torch.cuda.max_memory_reserved()) / (1024.0 ** 2)           # torch 가 잡아 둔 메모리의 최댓값(nvidia-smi 값에 가깝다)
     unit = write_shard_t(a, axis, c, rows, st, stats, cells, time.time() - t0,
-                         extra=dict(env=env_info(gpu=True), gpu_mem_peak_mib=round(peak, 1), gpu_mem_reserved_peak_mib=round(resv, 1)))
+                         extra=dict(env=env_info(gpu=True), gpu_mem_peak_mib=round(peak, 1), gpu_mem_reserved_peak_mib=round(resv, 1),
+                                    run_id=str(getattr(a, "RUN_ID", "") or ""), gpu_uuid=str(_WINFO.get("gpu_uuid", "")),
+                                    device_check=str(_WINFO.get("device_check", ""))))
     del rows, st, cells
     _free_cuda()                                                          # 단위가 끝나면 GPU 캐시를 비운다(모델은 적합마다 지운다)
     return unit
@@ -1024,51 +1187,251 @@ def unit_name_t(u):
 
 # ---------------------------------------------------------------- 워커
 _WT = None
+_WINFO: dict = {}                                                         # 워커 정보(배정 GPU, 부모 PID, 실행 디렉터리). 부모와 시험에서는 비어 있다
+UNIT_KEEP = ("axis", "target", "mode", "split", "n_A", "n_eval", "nb_eval", "n_src", "E0", "n_fit_total", "n_rows", "n_ctx_max", "elapsed_s", "wall_s",
+             "device", "status", "valid", "gpu_mem_peak_mib", "gpu_mem_reserved_peak_mib", "failed_learners", "run_id")
 
 
-def _worker_init_t(argv, gpu_queue, threads):
-    """워커 초기화. 큐에서 GPU 번호 하나를 받아 CUDA_VISIBLE_DEVICES 에 넣는다(torch 를 부르기 전). 스레드 수를 제한한다."""
-    global _WT
+def _now():
+    return time.strftime("%Y-%m-%dT%H:%M:%S")
+
+
+def _write_json(path, obj):
+    """작은 기록 파일(임시 파일 뒤 교체). 쓰지 못해도 실행을 멈추지 않는다."""
+    try:
+        Path(path).parent.mkdir(parents=True, exist_ok=True)
+        H._atomic_text(Path(path), json.dumps(obj, ensure_ascii=False, default=str))
+    except OSError:
+        pass
+
+
+def unit_summary(u):
+    """부모에 돌려주는 단위 요약(워커의 결과, 또는 풀이 깨져 결과를 받지 못한 단위의 unit.json)."""
+    d = {k: u.get(k) for k in UNIT_KEEP}
+    d["n_fail"] = int(sum((u.get("fail") or {}).values())) + int(u.get("n_nonfinite_keys", 0) or 0)
+    return d
+
+
+def _set_pdeathsig(sig=signal.SIGTERM):
+    """부모 프로세스가 죽으면 이 프로세스가 sig 를 받게 한다(리눅스 prctl PR_SET_PDEATHSIG = 1). 성공하면 True."""
+    try:
+        import ctypes
+        libc = ctypes.CDLL("libc.so.6", use_errno=True)
+        return int(libc.prctl(1, int(sig), 0, 0, 0)) == 0
+    except Exception:                                                     # noqa: BLE001
+        return False
+
+
+def _orphan_check():
+    """워커 전용: 부모가 바뀌었으면(부모 종료) 바로 끝낸다. 부모 PID 를 모르면(부모 프로세스, 시험) 아무것도 하지 않는다."""
+    pp = _WINFO.get("ppid")
+    if pp and os.getppid() != int(pp):
+        os._exit(0)
+
+
+def _worker_init_t(argv, gpu_queue, threads, run_dir="", ppid=0, run_id=""):
+    """워커 초기화. SIGINT 는 무시하고(중단은 부모가 처리한다) 부모 종료 때 SIGTERM 을 받도록 한다. 큐에서 GPU 번호 하나를 받아
+    CUDA_DEVICE_ORDER = PCI_BUS_ID 와 CUDA_VISIBLE_DEVICES 를 둔다(torch 를 부르기 전). 스레드 수를 제한하고(torch intra-op = --threads,
+    inter-op = 1) 워커 기록(run_dir/worker__<PID>.json)을 남긴다. run_id 는 부모가 정한 실행 식별자이고 조각의 unit.json 에 적는다
+    (풀이 깨졌을 때 부모가 이번 실행에서 완료된 조각을 가려내는 데 쓴다)."""
+    global _WT, _WINFO
     warnings.filterwarnings("ignore")
-    os.environ["CUDA_VISIBLE_DEVICES"] = str(gpu_queue.get()) if gpu_queue is not None else ""
+    try:
+        signal.signal(signal.SIGINT, signal.SIG_IGN)
+    except (ValueError, OSError):
+        pass
+    pds = _set_pdeathsig()
+    if int(ppid) and os.getppid() != int(ppid):                           # 초기화 전에 부모가 이미 끝났다
+        os._exit(0)
+    gpu = str(gpu_queue.get()) if gpu_queue is not None else ""
+    os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+    os.environ["CUDA_VISIBLE_DEVICES"] = gpu
     for v in THREAD_VARS:
         os.environ[v] = str(int(threads))
     os.environ.setdefault("TABPFN_DISABLE_TELEMETRY", "1")
     _WT = parse_args(argv)
+    _WT.RUN_ID = str(run_id or "")
+    _WINFO = dict(gpu=gpu, ppid=int(ppid) or os.getppid(), run_dir=str(run_dir), cuda_checked=False, pdeathsig=bool(pds))
     try:
         import torch
         torch.set_num_threads(int(threads))
+        try:
+            torch.set_num_interop_threads(1)
+        except RuntimeError:
+            pass
     except Exception:                                                     # noqa: BLE001
         pass
+    if run_dir:
+        _write_json(Path(run_dir) / f"worker__{os.getpid()}.json", dict(pid=os.getpid(), ppid=_WINFO["ppid"], gpu=gpu, start=_now(),
+                                                                        pdeathsig=bool(pds), threads=int(threads)))
+
+
+def cuda_healthy():
+    """CUDA 문맥을 쓸 수 있는지(작은 연산과 동기화). 워커 전용."""
+    try:
+        import torch
+        x = torch.ones(8, device="cuda")
+        v = float((x * 2.0).sum().item())
+        torch.cuda.synchronize()
+        return v == 16.0
+    except Exception:                                                     # noqa: BLE001
+        return False
+
+
+def _norm_uuid(v):
+    s = str(v or "").strip().lower()
+    return s[4:] if s.startswith("gpu-") else s
+
+
+def _gpu_busy_exit(g, why):
+    """배정 GPU 를 다른 프로세스가 쓰고 있다: 표지(run_dir/gpu_busy__<번호>.json)를 남기고 워커를 끝낸다. 부모는 풀이 깨진 것을 보고
+    그 GPU 를 뺀 뒤 풀을 다시 만든다(이때 다른 워커의 실행 중 단위도 끝나며 다시 돈다)."""
+    rd = _WINFO.get("run_dir")
+    if rd:
+        _write_json(Path(rd) / f"gpu_busy__{int(g)}.json", dict(gpu=int(g), pid=os.getpid(), why=str(why), time=_now()))
+    print(f"[worker] GPU {g} 를 쓰지 않는다: {why}. 워커를 끝낸다", flush=True)
+    os._exit(75)
+
+
+def gpu_guard_t():
+    """워커 전용 GPU 확인. 단위를 시작할 때마다 부른다.
+    (1) 첫 CUDA 초기화 전: 배정 GPU 의 메모리 사용이 --gpu-mem-max-mib 이하이고 계산 프로세스가 없어야 한다.
+    (2) 그 뒤: 배정 GPU 에 자기 PID 가 아닌 계산 프로세스가 없어야 한다.
+    (1)(2)에 걸리면 점유 표지를 남기고 워커를 끝낸다. (3) 첫 초기화 직후: nvidia-smi 에서 자기 PID 가 있는 GPU(없으면 torch 장치 0 의 UUID)가
+    배정 번호의 GPU 와 같아야 한다. 어긋나면 TAG_MISMATCH 문구의 RuntimeError 를 올린다(부모가 실행 전체를 멈춘다).
+    nvidia-smi 를 부를 수 없으면 경고하고 확인 없이 진행한다."""
+    gpu = _WINFO.get("gpu")
+    if gpu in (None, ""):
+        return
+    g = int(gpu)
+    try:
+        info, apps = query_gpu_info(), query_gpu_apps()
+    except Exception as e:                                                # noqa: BLE001
+        print(f"[worker] GPU {g}: nvidia-smi 확인 실패({repr(e)[:120]}). 확인 없이 진행한다", flush=True)
+        return
+    me = info.get(g)
+    if me is None:
+        print(f"[worker] GPU {g}: nvidia-smi 목록에 없다. 확인 없이 진행한다", flush=True)
+        return
+    foreign = sorted({int(p) for p, u in apps if u == me["uuid"] and int(p) != os.getpid()})
+    if _WINFO.get("cuda_checked"):
+        if foreign:
+            _gpu_busy_exit(g, f"다른 계산 프로세스 {foreign}")
+        return
+    if int(me["used"]) > int(_WT.gpu_mem_max_mib) or foreign:
+        _gpu_busy_exit(g, f"첫 CUDA 초기화 전 메모리 사용 {int(me['used'])} MiB, 다른 계산 프로세스 {foreign}")
+    import torch
+    torch.zeros(1, device="cuda")
+    torch.cuda.synchronize()
+    tu = _norm_uuid(getattr(torch.cuda.get_device_properties(0), "uuid", ""))
+    try:
+        mine = sorted({u for p, u in query_gpu_apps() if int(p) == os.getpid()})
+    except Exception:                                                     # noqa: BLE001
+        mine = []
+    if mine:
+        ok = mine == [me["uuid"]]
+    elif re.fullmatch(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", tu):
+        ok = tu == _norm_uuid(me["uuid"])
+    else:
+        ok = None
+    if ok is False:
+        raise RuntimeError(f"{TAG_MISMATCH} 배정 GPU {g}(UUID {me['uuid']})와 CUDA 장치가 다르다: 자기 PID 의 GPU {mine or '없음'}, "
+                           f"torch UUID {tu or '없음'}, CUDA_DEVICE_ORDER={os.environ.get('CUDA_DEVICE_ORDER', '')}")
+    if ok is None:
+        print(f"[worker] GPU {g}: 장치 대응을 확인하지 못했다(nvidia-smi 에 자기 PID 가 없고 torch UUID 를 읽지 못했다)", flush=True)
+    _WINFO.update(cuda_checked=True, gpu_uuid=me["uuid"], device_check=("PID" if mine else ("UUID" if ok else "없음")))
+
+
+def _marker_path(name):
+    rd = _WINFO.get("run_dir")
+    return Path(rd) / f"running__{name.replace('|', '__')}__{os.getpid()}.json" if rd else None
 
 
 def _worker_run_t(axis, target, mode, split):
+    """작업 단위 하나(워커). 시작 때 GPU 를 확인하고 실행 중 표지(run_dir/running__*.json)를 쓴다. 단위가 끝나면(성공이든 예외든) 표지를 지운다.
+    예외 뒤 CUDA 문맥을 쓸 수 없으면 표지를 남긴 채 워커를 끝낸다(부모가 풀을 다시 만들고 표지로 원인 단위를 센다).
+    주 모듈에서 정의한 예외는 내장 RuntimeError 로 바꿔 넘긴다(부모 프로세스는 __mp_main__ 의 클래스를 풀 수 없다)."""
+    _orphan_check()
+    name = unit_name_t((axis, target, mode, split))
+    gpu_guard_t()
+    mk = _marker_path(name)
+    if mk is not None:
+        _write_json(mk, dict(unit=name, pid=os.getpid(), gpu=_WINFO.get("gpu"), start=_now()))
     t0 = time.time()
-    u = run_unit_t(_WT, axis, target, mode, split)
+    try:
+        u = run_unit_t(_WT, axis, target, mode, split)
+    except BaseException as e:                                            # noqa: BLE001
+        if _WINFO.get("gpu") not in (None, "") and not cuda_healthy():
+            print(f"[worker] {name}: CUDA 문맥을 쓸 수 없다({repr(e)[:160]}). 워커를 끝낸다", flush=True)
+            os._exit(76)
+        if mk is not None:
+            mk.unlink(missing_ok=True)
+        if type(e).__module__ == "builtins":
+            raise
+        raise RuntimeError(f"{type(e).__name__}: {str(e)[:500]}") from None
+    if mk is not None:
+        mk.unlink(missing_ok=True)
     u["wall_s"] = round(time.time() - t0, 1)
-    u["n_fail"] = int(sum(u.get("fail", {}).values())) + int(u.get("n_nonfinite_keys", 0))
-    keep = ("axis", "target", "mode", "split", "n_A", "n_eval", "nb_eval", "n_src", "E0", "n_fit_total", "n_rows", "n_ctx_max", "elapsed_s", "wall_s",
-            "device", "status", "valid", "n_fail", "gpu_mem_peak_mib", "gpu_mem_reserved_peak_mib")
-    return {k: u.get(k) for k in keep}
+    return unit_summary(u)
 
 
 # ---------------------------------------------------------------- GPU 확인
-def query_gpu_memory():
-    """nvidia-smi 의 GPU 별 메모리 사용(MiB). 부를 수 없으면 예외를 올린다."""
-    out = subprocess.check_output(["nvidia-smi", "--query-gpu=index,memory.used", "--format=csv,noheader,nounits"], text=True, timeout=60)
-    used = {}
-    for line in out.strip().splitlines():
+def _smi(args):
+    return subprocess.check_output(["nvidia-smi"] + list(args), text=True, timeout=60)
+
+
+def parse_gpu_info(text):
+    """nvidia-smi --query-gpu=index,uuid,memory.used --format=csv,noheader,nounits 의 해석. {번호: dict(uuid, used)}."""
+    out = {}
+    for line in str(text).strip().splitlines():
+        p = [v.strip() for v in line.split(",")]
+        if len(p) >= 3:
+            try:
+                out[int(p[0])] = dict(uuid=p[1], used=int(float(p[2])))
+            except ValueError:
+                continue
+    return out
+
+
+def parse_gpu_apps(text):
+    """nvidia-smi --query-compute-apps=pid,gpu_uuid --format=csv,noheader 의 해석. [(PID, UUID)]. 계산 프로세스가 없으면 빈 목록."""
+    out = []
+    for line in str(text).strip().splitlines():
         p = [v.strip() for v in line.split(",")]
         if len(p) >= 2:
             try:
-                used[int(p[0])] = int(float(p[1]))
+                out.append((int(p[0]), p[1]))
             except ValueError:
                 continue
-    return used
+    return out
 
 
-def screen_gpus(gpus, used, mem_max=0, reserved=RESERVED_GPUS):
-    """쓸 수 있는 GPU 목록과 뺀 GPU 의 (번호, 사유) 목록. 남겨 두는 GPU 가 목록에 있으면 거부한다(SystemExit)."""
+def query_gpu_info():
+    return parse_gpu_info(_smi(["--query-gpu=index,uuid,memory.used", "--format=csv,noheader,nounits"]))
+
+
+def query_gpu_apps():
+    return parse_gpu_apps(_smi(["--query-compute-apps=pid,gpu_uuid", "--format=csv,noheader"]))
+
+
+def query_gpu_memory():
+    """nvidia-smi 의 GPU 별 메모리 사용(MiB). 부를 수 없으면 예외를 올린다."""
+    return {g: int(v["used"]) for g, v in query_gpu_info().items()}
+
+
+def gpu_apps_by_index(info, apps):
+    """{GPU 번호: [계산 프로세스 PID]}."""
+    by = {v["uuid"]: g for g, v in info.items()}
+    out: dict = {}
+    for pid, u in apps:
+        if u in by:
+            out.setdefault(by[u], []).append(int(pid))
+    return out
+
+
+def screen_gpus(gpus, used, mem_max=0, reserved=RESERVED_GPUS, apps=None):
+    """쓸 수 있는 GPU 목록과 뺀 GPU 의 (번호, 사유) 목록. 남겨 두는 GPU 가 목록에 있으면 거부한다(SystemExit).
+    apps = {번호: [PID]} 를 주면 계산 프로세스가 있는 GPU 도 뺀다."""
     res = [int(g) for g in gpus if int(g) in set(reserved)]
     if res:
         raise SystemExit(f"[거부] 남겨 두는 GPU {sorted(set(reserved))} 가 --gpus 에 있다: {res}")
@@ -1079,9 +1442,33 @@ def screen_gpus(gpus, used, mem_max=0, reserved=RESERVED_GPUS):
             dropped.append((g, "nvidia-smi 목록에 없음"))
         elif int(used[g]) > int(mem_max):
             dropped.append((g, f"메모리 사용 {int(used[g])} MiB > {int(mem_max)} MiB"))
+        elif apps and apps.get(g):
+            dropped.append((g, f"계산 프로세스 {sorted(apps[g])}"))
         else:
             ok.append(g)
     return ok, dropped
+
+
+def rescreen_gpus(a, cand, excluded=()):
+    """풀을 다시 만들 때의 GPU 재확인. 워커가 점유 표지를 남긴 GPU 를 빼고, 종료한 워커의 메모리가 풀리기를 GPU_SETTLE_S 초까지 기다린 뒤
+    메모리 사용이 --gpu-mem-max-mib 를 넘거나 계산 프로세스가 있는 GPU 를 뺀다. nvidia-smi 를 부를 수 없으면 빈 목록(더 돌리지 않는다)."""
+    cand = [int(g) for g in cand if int(g) not in set(int(x) for x in excluded)]
+    t_end = time.time() + float(GPU_SETTLE_S)
+    while True:
+        try:
+            info, apps = query_gpu_info(), query_gpu_apps()
+        except Exception as e:                                            # noqa: BLE001
+            print(f"[pool] nvidia-smi 확인 실패({repr(e)[:160]}). 풀을 다시 만들지 않는다", flush=True)
+            return []
+        ok, dropped = screen_gpus(cand, {g: v["used"] for g, v in info.items()}, a.gpu_mem_max_mib, apps=gpu_apps_by_index(info, apps))
+        if not dropped or time.time() >= t_end:
+            break
+        time.sleep(3.0)
+    for g_, why in dropped:
+        print(f"[pool] GPU {g_} 를 뺀다: {why}", flush=True)
+    for g_ in sorted(set(int(x) for x in excluded)):
+        print(f"[pool] GPU {g_} 를 뺀다: 워커가 점유 표지를 남겼다", flush=True)
+    return ok
 
 
 def check_run_args(a):
@@ -1093,6 +1480,172 @@ def check_run_args(a):
         raise SystemExit(f"[거부] --threads {a.threads_asked}: 실행은 프로세스당 스레드 {THREADS_RUN_MIN}–{THREADS_MAX}개만 허용한다")
     if not Path(a.MODEL).exists():
         raise SystemExit(f"[거부] TabPFN 가중치 파일이 없다: {a.MODEL}. 내려받기를 시도하지 않는다")
+
+
+def check_overwrite(a, units):
+    """완료 표지(unit.json)가 있는 조각이 있는데 --resume 도 --overwrite 도 없으면 거부한다(스모크 tag 는 예외). 반환 해당 단위 목록."""
+    prev = [u for u in units if shard_paths_t(a, *u)["unit"].exists()]
+    if prev and not (a.resume or a.overwrite or a.smoke):
+        raise SystemExit(f"[거부] 완료 표지가 있는 조각 {len(prev)}개가 있다(예: {unit_name_t(prev[0])}). 이어 돌리려면 --resume, "
+                         "전부 다시 돌려 덮어쓰려면 --overwrite 를 준다")
+    return prev
+
+
+# ---------------------------------------------------------------- 실행 제어(잠금, 풀, 종료 코드)
+def pid_alive(pid):
+    try:
+        os.kill(int(pid), 0)
+        return True
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    except (OSError, ValueError):
+        return False
+
+
+def acquire_lock(a):
+    """실행 잠금(run_<tag>/lock.json, PID 기록). 같은 tag 의 살아 있는 실행이 있으면 거부한다. 죽은 PID 의 잠금은 지우고 다시 만든다."""
+    d = Path(a.RUN_DIR)
+    d.mkdir(parents=True, exist_ok=True)
+    p = d / "lock.json"
+    for _ in range(2):
+        try:
+            fd = os.open(str(p), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
+        except FileExistsError:
+            try:
+                old = json.loads(p.read_text())
+            except (OSError, ValueError):
+                old = {}
+            pid = int(old.get("pid", 0) or 0)
+            if pid and pid_alive(pid):
+                raise SystemExit(f"[거부] 같은 tag 의 실행이 이미 있다(PID {pid}, 잠금 {p}). 끝난 실행이면 잠금 파일을 지운다")
+            p.unlink(missing_ok=True)
+            continue
+        with os.fdopen(fd, "w") as f:
+            json.dump(dict(pid=os.getpid(), start=_now(), run_id=str(a.RUN_ID), argv=list(a.ARGV), host=platform.node()), f, ensure_ascii=False)
+        return p
+    raise SystemExit(f"[거부] 실행 잠금을 만들 수 없다: {p}")
+
+
+def release_lock(p):
+    """자기 PID 의 잠금만 지운다."""
+    try:
+        if p is not None and Path(p).exists() and int(json.loads(Path(p).read_text()).get("pid", 0)) == os.getpid():
+            Path(p).unlink()
+    except (OSError, ValueError):
+        pass
+
+
+def read_run_notes(run_dir, prefix):
+    out = []
+    for p in sorted(Path(run_dir).glob(f"{prefix}__*.json")):
+        try:
+            out.append(json.loads(p.read_text()))
+        except (OSError, ValueError):
+            continue
+    return out
+
+
+def clear_run_notes(run_dir, prefixes=("running", "gpu_busy")):
+    for pre in prefixes:
+        for p in Path(run_dir).glob(f"{pre}__*.json"):
+            p.unlink(missing_ok=True)
+
+
+def culprit_pids(exitcodes):
+    """풀이 깨진 뒤 워커 종료 코드({PID: exitcode})에서 스스로 끝난 워커. 풀이 나머지 워커에 보낸 SIGTERM(−15)과 정상 종료(0)는 뺀다."""
+    return {int(p) for p, c in exitcodes.items() if c is not None and int(c) not in (0, -int(signal.SIGTERM))}
+
+
+def triage_broken(broken, running, crashes, done_fn):
+    """풀이 깨진 뒤 결과를 받지 못한 단위의 분류. running = 원인으로 보는 실행 중 단위 이름의 집합, crashes = 단위 이름별 누적 횟수(갱신한다),
+    done_fn(u) = 이번 실행에서 완료된 조각의 unit dict 또는 None. 반환 (완료 [(단위, unit dict)], 격리할 단위, 다시 돌릴 단위)."""
+    fin, quar, again = [], [], []
+    for u in broken:
+        uj = done_fn(u)
+        if uj is not None:
+            fin.append((u, uj))
+            continue
+        nm = unit_name_t(u)
+        if nm in running:
+            crashes[nm] += 1
+        (quar if crashes[nm] >= POOL_CRASH_MAX else again).append(u)
+    return fin, quar, again
+
+
+def unit_done_run(a, u):
+    """이번 실행(run_id)에서 쓴 완료 조각의 unit dict. 풀이 깨져 결과를 받지 못한 단위를 다시 돌리기 전에 확인한다. 없으면 None."""
+    p = shard_paths_t(a, *u)
+    if not (a.RUN_ID and p["unit"].exists() and p["runs"].exists() and p["npz"].exists()):
+        return None
+    try:
+        uj = json.loads(p["unit"].read_text())
+    except (OSError, ValueError):
+        return None
+    ok = uj.get("run_id") == a.RUN_ID and uj.get("cfg_hash") == H.cfg_hash(unit_cfg_t(a, u[0]))
+    return uj if ok else None
+
+
+def kill_pool(ex):
+    """풀을 바로 멈춘다: 대기 중인 작업을 취소하고 워커 프로세스를 종료한다(부모의 중단, 신호, GPU 불일치)."""
+    procs = list((getattr(ex, "_processes", None) or {}).values())
+    try:
+        ex.shutdown(wait=False, cancel_futures=True)
+    except Exception:                                                     # noqa: BLE001
+        pass
+    for p in procs:
+        try:
+            if p.is_alive():
+                p.terminate()
+        except Exception:                                                 # noqa: BLE001
+            pass
+    t_end = time.time() + 15.0
+    for p in procs:
+        try:
+            p.join(timeout=max(t_end - time.time(), 0.1))
+            if p.is_alive():
+                p.kill()
+                p.join(timeout=5.0)
+        except Exception:                                                 # noqa: BLE001
+            pass
+    return [int(p.pid) for p in procs if p.pid is not None]
+
+
+def _stop_signal(signum, frame):
+    raise KeyboardInterrupt(f"신호 {signum}")
+
+
+def install_stop_handlers():
+    """SIGTERM 과 SIGHUP 을 KeyboardInterrupt 로 바꾼다(주 스레드). nohup 등으로 SIGHUP 을 무시하게 띄운 실행은 그대로 둔다."""
+    old = {}
+    for s in (signal.SIGTERM, signal.SIGHUP):
+        try:
+            if s == signal.SIGHUP and signal.getsignal(s) == signal.SIG_IGN:
+                continue
+            old[s] = signal.signal(s, _stop_signal)
+        except (ValueError, OSError):
+            pass
+    return old
+
+
+def restore_handlers(old):
+    for s, h in (old or {}).items():
+        try:
+            signal.signal(s, h)
+        except (ValueError, OSError):
+            pass
+
+
+def exit_code(res):
+    """종료 코드: 중단 130, 실패(단위 예외, 상태 failed, 집계 실패) 1, 일부 적합 실패(상태 partial)만 있으면 2, 그 밖은 0."""
+    if res.get("interrupted"):
+        return EXIT_INTERRUPT
+    if res.get("n_fail"):
+        return EXIT_FAIL
+    if res.get("n_partial"):
+        return EXIT_PARTIAL
+    return 0
 
 
 # ================================================================ 집계: 조각 읽기와 곡선
@@ -1199,10 +1752,84 @@ def stability(X, r0, r1):
     return "강건"
 
 
+def stab_text(items):
+    """L37 안정성 분류 목록 [(이름, 분류)] → 판정 문구(계획서 §6C.6 의 규칙)."""
+    states = [s_ for _, s_ in items]
+    if any(s_.startswith("판정 불가") for s_ in states):
+        return "판정 불가(" + "; ".join(f"{lab} {s_}" for lab, s_ in items if s_.startswith("판정 불가")) + ")"
+    if "의존" in states:
+        return "의존: " + ", ".join(lab for lab, s_ in items if s_ == "의존") + ". 한계 절에 조건을 적는다"
+    if "약화" in states:
+        return "약화: " + ", ".join(lab for lab, s_ in items if s_ == "약화")
+    return "강건"
+
+
+def _sub_store(st, keep):
+    S, C_ = st.matrices(keep)
+    return BlockStore._from_arrays(st.target, st.split, st.blocks, st.ncell, list(keep), S, C_, dict(st.meta))
+
+
+def pair_store(st):
+    """학습기 짝 대비용 저장소 사본(계획서 §6C.6 실패 처리, 개정 12). 학습기 키(tabpfn, catboost_ctx)는 상대 학습기의 같은
+    (method, alpha, placement, n, draw, seed, lam) 키가 있을 때만 남긴다. 물리식 키(learner none)는 그대로 둔다. 반환 (사본, 뺀 키 목록)."""
+    other = {TP: CBX, CBX: TP}
+    keep, drop = [], []
+    for k in st.keys:
+        if k[1] in other and (tuple(k[:1]) + (other[k[1]],) + tuple(k[2:])) not in st:
+            drop.append(k)
+        else:
+            keep.append(k)
+    return (_sub_store(st, keep), drop) if drop else (st, [])
+
+
+def pair_stores(stores):
+    """{(이름, 분할): 저장소} 전체에 pair_store 를 적용한다. 반환 (사본 dict, {(이름, 분할): 뺀 키 목록})."""
+    out, drop = {}, {}
+    for k, st in stores.items():
+        out[k], dr = pair_store(st)
+        if dr:
+            drop[k] = dr
+    return out, drop
+
+
+def draw_filter(draws):
+    """추출 번호가 draws 에 드는 키만 남기는 저장소 변환(P0 은 추출 0 이므로 남는다)."""
+    keep_d = {int(d) for d in draws}
+
+    def fn(st):
+        drop = [k for k in st.keys if int(k[5]) not in keep_d]
+        return (_sub_store(st, [k for k in st.keys if int(k[5]) in keep_d]), drop) if drop else (st, [])
+    return fn
+
+
+def tm_view(tm, fn):
+    """TMx 사본. 저장소마다 fn(저장소) → (사본, 뺀 키 목록)을 적용하고 키 색인을 h40.TMx 와 같은 규칙으로 다시 만든다. 분할 구조와 속성은
+    그대로다. 반환 (사본, {분할: 뺀 키 목록})."""
+    t2 = copy.copy(tm)
+    new, dropped = {}, {}
+    for sp, st in tm.by_all.items():
+        new[sp], dr = fn(st)
+        if dr:
+            dropped[sp] = dr
+    t2.by_all = new
+    t2.by_valid = {sp: new[sp] for sp in tm.by_valid}
+    t2.used = {sp: new[sp] for sp in tm.used}
+    t2.idx = {}
+    for sp, st in t2.used.items():
+        grp: dict = {}
+        for k in st.keys:
+            grp.setdefault((k[0], k[1], str(k[2]), k[3], int(k[4]), float(k[7])), []).append(k)
+        t2.idx[sp] = grp
+    return t2, dropped
+
+
 def build_tests_t(a, tms, D, floor, X=None):
     """L32–L37 의 대비 행과 판정 행(계획서 §6C.6). LGT 의 가설은 모두 보조다(h42.CONFIRMATORY 에 없다). 분할이 기대보다 적은 대비를 쓴
     판정에는 h42.TestBook.verdict 가 '부분(분할 k/K): '을 붙인다. Holm 묶음(item 'LGT' 의 primary 행)은 L32 의 기준 λ 대비 5개,
-    L33 의 6개, L34 의 2개, L35 의 1개다. L32 의 동등성 p 는 같은 묶음 안에서 따로 보정한다(eq_test)."""
+    L33 의 6개, L34 의 2개, L35 의 1개다. L32 의 동등성 p 는 같은 묶음 안에서 따로 보정한다(eq_test).
+    키 집합(key_set 열, 개정 12): all = 저장된 키 전부, pair = 두 학습기에 모두 있는 키만(pair_store. 학습기 짝 대비 L32, L37 의
+    R1[T] − R1[C]), d01 = 추출 0–1 만(L37 의 보조 기준 행), pair_d01 = 둘 다. 짝 대비 행의 n_unpaired 는 그 대비의 두 곡선 키에서
+    짝이 없어 뺀 키 수다(층화 평균에 든 지역과 사용 분할의 합)."""
     X = X or _load_h42()
     ns = SimpleNamespace(nboot=int(a.nboot), delta_eq=float(a.delta_eq), delta_eq_aux=float(a.delta_eq_aux))
     T = X.TestBook(ns, tms, D, floor)
@@ -1210,37 +1837,73 @@ def build_tests_t(a, tms, D, floor, X=None):
     ITEM, ALL = "LGT", -1
     LB = float(H.LAM_BASE)
     memo: dict = {}
+    views: dict = {"all": tms}
+    unp: dict = {}                                                        # 키 집합 → 이름 → Counter((method, alpha, placement, n, lam) → 뺀 키 수)
 
-    def C(test, label, gA, gB, **kw):
-        k = (test, label, tuple(kw.get("names") or ()))
+    def get_view(name):
+        if name not in views:
+            out, cnt_by = {}, {}
+            for nm, tm in tms.items():
+                t2, cnt = tm, Counter()
+                if "pair" in name:
+                    t2, dr = tm_view(t2, pair_store)
+                    for sp, ks in dr.items():
+                        if sp in tm.used:
+                            for k in ks:
+                                if "d01" not in name or int(k[5]) in AUX_DRAWS:
+                                    cnt[(k[0], str(k[2]), k[3], int(k[4]), float(k[7]))] += 1
+                if "d01" in name:
+                    t2, _ = tm_view(t2, draw_filter(AUX_DRAWS))
+                out[nm], cnt_by[nm] = t2, cnt
+            views[name], unp[name] = out, cnt_by
+        return views[name]
+
+    def n_unpaired(name, gA, gB, names):
+        tab = unp.get(name, {})
+        grp = {(q[0], str(q[2]), q[3], int(q[4]), float(q[5])) for q in (gA, gB)}
+        return int(sum(tab.get(nm, Counter())[q] for nm in names for q in grp))
+
+    def C(test, label, gA, gB, view="all", **kw):
+        k = (test, label, tuple(kw.get("names") or ()), view)
         if k not in memo:
             kw.setdefault("role", "보조")
-            memo[k] = T.contrast(test, ITEM, label, gA, gB, **kw)
+            vw = get_view(view)
+            if view.startswith("pair"):
+                names = list(kw.get("names") or T.m4) + ([T.m3[2]] if kw.get("aux3", True) and not kw.get("names") else [])
+                kw["n_unpaired"] = n_unpaired(view, gA, gB, names)
+            T.tms = vw
+            try:
+                memo[k] = T.contrast(test, ITEM, label, gA, gB, key_set=view, **kw)
+            finally:
+                T.tms = tms
         return memo[k]
 
     def g(method, n, lr=None, lam=None, alpha="1"):
         return X.G(method, n, lam, lr, alpha)
 
-    def single(test, label, nm, gA, gB, **kw):
-        tm = tms.get(nm)
-        return T.single(test, ITEM, label, nm, X.region_stats(tm, gA, gB) if tm is not None else None, **kw)
+    def single(test, label, nm, gA, gB, view="all", **kw):
+        tm = get_view(view).get(nm)
+        if view.startswith("pair"):
+            kw["n_unpaired"] = n_unpaired(view, gA, gB, [nm])
+        return T.single(test, ITEM, label, nm, X.region_stats(tm, gA, gB) if tm is not None else None, key_set=view, **kw)
 
     rows_1000 = ["Lena|x", f"{H.ALASKA}|x"]                                 # n = 1,000 은 층화 평균을 내지 않고 지역 행으로 보고한다
 
     # ---------------- L32 학습기 동등성: R1[T] − R1[C]
     l32_n = (0, 10, 40, 160, ALL)
-    base32 = [(_nt(n), C("L32", f"R1[T]-R1[C]|n{_nl(n)}|lam{LB}", g("R1", n, TP, LB), g("R1", n, CBX, LB), n=n, lam=LB, eq_test=True,
-                         blind=n not in NB_SEEN)) for n in l32_n]
-    lam32 = [(f"{_nt(n)} λ=1.0", C("L32", f"R1[T]-R1[C]|n{_nl(n)}|lam1.0", g("R1", n, TP, 1.0), g("R1", n, CBX, 1.0), n=n, lam=1.0, eq_test=True,
-                                   primary=False, blind=n not in NB_SEEN, role="보조(λ 1.0)", aux3=False)) for n in l32_n]
+    base32 = [(_nt(n), C("L32", f"R1[T]-R1[C]|n{_nl(n)}|lam{LB}", g("R1", n, TP, LB), g("R1", n, CBX, LB), view="pair", n=n, lam=LB,
+                         eq_test=True, blind=n not in NB_SEEN)) for n in l32_n]
+    lam32 = [(f"{_nt(n)} λ=1.0", C("L32", f"R1[T]-R1[C]|n{_nl(n)}|lam1.0", g("R1", n, TP, 1.0), g("R1", n, CBX, 1.0), view="pair", n=n, lam=1.0,
+                                   eq_test=True, primary=False, blind=n not in NB_SEEN, role="보조(λ 1.0)", aux3=False)) for n in l32_n]
     for n in (3, 320):
-        C("L32", f"R1[T]-R1[C]|n{_nl(n)}|lam{LB}", g("R1", n, TP, LB), g("R1", n, CBX, LB), n=n, lam=LB, primary=False, blind=n not in NB_SEEN,
-          role="보조(추가 n)")
+        C("L32", f"R1[T]-R1[C]|n{_nl(n)}|lam{LB}", g("R1", n, TP, LB), g("R1", n, CBX, LB), view="pair", n=n, lam=LB, primary=False,
+          blind=n not in NB_SEEN, role="보조(추가 n)")
     for nm in rows_1000:
-        single("L32", f"R1[T]-R1[C]|n1000|lam{LB}", nm, g("R1", 1000, TP, LB), g("R1", 1000, CBX, LB), n=1000, lam=LB, role="보조(지역 행)")
-    for m_, lam in (("D0", 1.0), ("R0", LB)):
+        single("L32", f"R1[T]-R1[C]|n1000|lam{LB}", nm, g("R1", 1000, TP, LB), g("R1", 1000, CBX, LB), view="pair", n=1000, lam=LB,
+               role="보조(지역 행)")
+    for m_, lam in (("D0", 1.0), ("R0", LB)):                            # TabPFN 의 D0, R0 은 기존 결과가 없다(계획서 §6C.7): 모든 n 이 맹검
         for n in l32_n:
-            C("L32", f"{m_}[T]-{m_}[C]|n{_nl(n)}", g(m_, n, TP, lam), g(m_, n, CBX, lam), n=n, lam=lam, primary=False, blind=n not in NB_SEEN,
+            C("L32", f"{m_}[T]-{m_}[C]|n{_nl(n)}", g(m_, n, TP, lam), g(m_, n, CBX, lam), view="pair", n=n, lam=lam, primary=False, blind=True,
               role=f"보조({m_})", aux3=False)
     vb, v1 = [X._v(r_) for _, r_ in base32], [X._v(r_) for _, r_ in lam32]
     k, m, _ = X.count_valid(base32)
@@ -1259,6 +1922,10 @@ def build_tests_t(a, tms, D, floor, X=None):
     elif all(v == "동등" for v in vb + v1):
         txt = f"동등(한계 {float(a.delta_eq):g} cm, λ {LB:g} 와 1.0)"
         used32 = base32 + lam32
+    elif all(v == "동등" for v in vb) and dom1:                           # 개정 12: 기준 λ 는 동등, λ 1.0 에 우세 또는 열세
+        txt = f"기준 λ {LB:g} 에서는 동등, λ 1.0 에서는 차이가 있다({', '.join(dom1)}). 동등으로 쓰지 않는다"
+        used32 = base32 + [(lab, r_) for (lab, r_), v in zip(lam32, v1) if v in ("우세", "열세")]
+        dom1 = []
     else:
         txt = "차이를 확인하지 못함"
     if dom1 and not txt.startswith("판정 불가"):
@@ -1352,46 +2019,69 @@ def build_tests_t(a, tms, D, floor, X=None):
     # ---------------- L37 컨텍스트 구성 민감도
     variants = [("d3", SENS_SETS["d3"], (10, 40), False), ("d10", SENS_SETS["d10"], (10, 40), True),
                 ("rid", SENS_SETS["rid"], (10, 40), False), ("tgt", SENS_SETS["tgt"], (40,), True)]
+    aux = f"추출 {AUX_DRAWS[0]}–{AUX_DRAWS[-1]}"
     for v, vs, ns_, blind in variants:
         al, mv = str(vs["alpha"]), "R1" + str(vs["sfx"])
-        res, stab, dv = [], [], []
+        res, stab, dv, base_rows = [], [], [], []
         for n in ns_:
-            pairs = [("R1[T]-R1[C]", g("R1", n, TP), g("R1", n, CBX), g(mv, n, TP, alpha=al), g(mv, n, CBX, alpha=al)),
-                     ("R1[T]-P1", g("R1", n, TP), g("P1", n), g(mv, n, TP, alpha=al), g("P1", n))]
-            for lab, a0, b0, a1, b1 in pairs:
-                r0 = C("L37", f"기준|{lab}|n{_nl(n)}", a0, b0, n=n, lam=LB, primary=False, blind=False, role="기준", aux3=False)
-                r1 = C("L37", f"{v}|{lab}|n{_nl(n)}", a1, b1, n=n, lam=LB, primary=False, blind=blind, role="보조(변형)", aux3=False, variant=v)
-                s_ = stability(X, r0, r1)
-                res.append((f"{lab} {_nt(n)}", r1)); stab.append((f"{lab} {_nt(n)}", s_, X._v(r0), X._v(r1)))
+            pairs = [("R1[T]-R1[C]", "pair", g("R1", n, TP), g("R1", n, CBX), g(mv, n, TP, alpha=al), g(mv, n, CBX, alpha=al)),
+                     ("R1[T]-P1", "all", g("R1", n, TP), g("P1", n), g(mv, n, TP, alpha=al), g("P1", n))]
+            for lab, ks, a0, b0, a1, b1 in pairs:
+                ks_aux = "pair_d01" if ks == "pair" else "d01"
+                r0 = C("L37", f"기준|{lab}|n{_nl(n)}", a0, b0, view=ks, n=n, lam=LB, primary=False, blind=False, role="기준", aux3=False)
+                r0b = C("L37", f"기준({aux})|{lab}|n{_nl(n)}", a0, b0, view=ks_aux, n=n, lam=LB, primary=False, blind=False, role=f"기준({aux}, 보조)",
+                        aux3=False)
+                r1 = C("L37", f"{v}|{lab}|n{_nl(n)}", a1, b1, view=ks, n=n, lam=LB, primary=False, blind=blind, role="보조(변형)", aux3=False, variant=v)
+                s_, sb = stability(X, r0, r1), stability(X, r0b, r1)
+                res.append((f"{lab} {_nt(n)}", r1)); base_rows.append((f"기준 {lab} {_nt(n)}", r0))
+                stab.append((f"{lab} {_nt(n)}", s_, X._v(r0), X._v(r1), sb, X._v(r0b)))
                 T.rows.append(dict(test_id="L37", item=ITEM, contrast=f"{v}|{lab}|n{_nl(n)}", scope="stability", variant=v, n=n, lam=LB, role="보조",
-                                   primary=False, blind=bool(blind), verdict4_base=X._v(r0), verdict4_variant=X._v(r1), stability=s_))
+                                   primary=False, blind=bool(blind), verdict4_base=X._v(r0), verdict4_variant=X._v(r1), stability=s_,
+                                   verdict4_base_d01=X._v(r0b), stability_d01=sb, stability_same=bool(s_ == sb)))
             dv.append((_nt(n), C("L37", f"{v}-main|R1[T]|n{_nl(n)}", g(mv, n, TP, alpha=al), g("R1", n, TP), n=n, lam=LB, primary=False,
                                  blind=blind, role="보조(변형 − 주 설정)", aux3=False, variant=v)))
-        states = [s_ for _, s_, _, _ in stab]
-        det = "; ".join(f"{lab}: {s_}(주 설정 {b0}, 변형 {b1})" for lab, s_, b0, b1 in stab)
-        if any(s_.startswith("판정 불가") for s_ in states):
-            txt = "판정 불가(" + "; ".join(f"{lab} {s_}" for lab, s_, _, _ in stab if s_.startswith("판정 불가")) + ")"
-        elif "의존" in states:
-            txt = "의존: " + ", ".join(lab for lab, s_, _, _ in stab if s_ == "의존") + ". 한계 절에 조건을 적는다"
-        elif "약화" in states:
-            txt = "약화: " + ", ".join(lab for lab, s_, _, _ in stab if s_ == "약화")
-        else:
-            txt = "강건"
-        if v == "tgt" and not txt.startswith("판정 불가"):
-            for lab, r_ in dv:
-                if X._v(r_) == "우세":
-                    txt += f". 원천 컨텍스트는 TabPFN 잔차 예측에 기여하지 않는다({lab})"
-                elif X._v(r_) == "열세":
-                    txt += f". 원천 컨텍스트가 기여한다({lab})"
-        V("L37", ITEM, txt, f"{det} | 변형 − 주 설정(R1[T]): {X._fmt(dv)}", role="보조", blind=bool(blind), used=res, variant=v)
+        txt = stab_text([(lab, s_) for lab, s_, _, _, _, _ in stab])
+        txt_b = stab_text([(lab, sb) for lab, _, _, _, sb, _ in stab])
+        det = "; ".join(f"{lab}: {s_}(주 설정 {b0}, 변형 {b1})" for lab, s_, b0, b1, _, _ in stab)
+        det_b = "; ".join(f"{lab}: {sb}(주 설정 {aux} {bb})" for lab, _, _, _, sb, bb in stab)
+        mkb = T.marks(base_rows)                                          # 기준 행의 분할 완결성도 부분 표기에 넣는다(개정 12)
+        part = [f"분할 {mkb['splits'][0]}/{mkb['splits'][1]}(기준 행)"] if mkb["splits"] is not None else []
+        V("L37", ITEM, txt, f"{det} | 보조 기준({aux}): {det_b} · 두 기준의 분류 {'같음' if txt == txt_b else '다름'} | 변형 − 주 설정(R1[T]): "
+          f"{X._fmt(dv)}", role="보조", blind=bool(blind), used=res, partial=part, variant=v, clause="안정성", stability_d01=txt_b,
+          stability_same=bool(txt == txt_b))
+        if v == "tgt":                                                    # 변형 − 주 설정 대비는 안정성 판정과 따로 적는다(개정 12)
+            if X.count_valid(dv)[0] < len(dv):
+                t2 = X.na_text(dv)
+            else:
+                say = dict(우세="원천 컨텍스트는 TabPFN 잔차 예측에 기여하지 않는다", 열세="원천 컨텍스트가 기여한다")
+                t2 = ". ".join(f"{say.get(X._v(r_), '변형 − 주 설정 4분 판정 ' + X._v(r_))}({lab})" for lab, r_ in dv)
+            V("L37", ITEM, t2, f"변형 − 주 설정(R1[T]): {X._fmt(dv)}", role="보조", blind=bool(blind), used=dv, variant=v, clause="변형 − 주 설정",
+              note="tgt 의 n = 40 은 컨텍스트가 40행이라 TabPFN 의 범주형 추론이 꺼진다(100행 이하). 원천 행 제거 외에 입력 처리도 다르다")
     return T.frame()
 
 
 # ================================================================ 집계: 교차 비교(보조)와 재현 점검
+def gate_compare(st, sb):
+    """재현 점검 한 단위. LGT 저장소 st 의 P0, P1 키(학습기 none, cell) 가운데 기준 저장소 sb 에 없는 키 수(n_missing_ref)와 공통 키의
+    셀 가중 RMSE 최대 차. 통과 = 공통 키가 있고, 없는 키가 0 이고, 최대 차가 GATE_TOL 이하이고, 채점 블록 집합이 같다."""
+    mine = [k for k in st.keys if k[0] in ("P0", "P1") and k[1] == "none" and k[3] == "cell"]
+    keys = [k for k in mine if k in sb]
+    worst = (0.0, "")
+    for k in keys:
+        d_ = abs(st.rmse(k) - sb.rmse(k))
+        if d_ >= worst[0]:
+            worst = (float(d_), json.dumps(list(k)))
+    beq = bool(np.array_equal(st.blocks, sb.blocks) and np.array_equal(st.ncell, sb.ncell))
+    miss = len(mine) - len(keys)
+    return dict(n_keys=len(keys), n_missing_ref=int(miss), max_diff=worst[0] if keys else np.nan, worst_key=worst[1], blocks_equal=beq,
+                passed=bool(keys and miss == 0 and worst[0] <= GATE_TOL and beq))
+
+
 def cross_tables(a, X, D, floor, stores):
     """본 실행 cpu 조각(읽기 전용)과의 재현 점검과 교차 비교. 반환 (gate 표, cross 표, 사유).
-    재현 점검은 P0, P1 의 키별 셀 가중 RMSE 를 대조한다(허용 차 1e-9 cm). 통과한 단위만 catboost_lo(alpha '1', cell)의 D0·R0·R1 키를
-    저장소 사본에 병합해 R1[T] − R1[catboost_lo], R1[C] − R1[catboost_lo] 를 계산한다. 가설 판정에 쓰지 않는다."""
+    재현 점검은 P0, P1 의 키별 셀 가중 RMSE 를 대조한다(허용 차 1e-9 cm, gate_compare). LGT 의 P0, P1 키 가운데 기준 조각에 없는 키가
+    있으면 통과로 두지 않는다. 통과한 단위만 catboost_lo(alpha '1', cell)의 D0·R0·R1 키를 저장소 사본에 병합해 R1[T] − R1[catboost_lo],
+    R1[C] − R1[catboost_lo] 를 계산한다. stores 는 짝 맞춘 저장소(pair_stores)를 받는다. 가설 판정에 쓰지 않는다."""
     ref = {(s_["target"], s_["mode"], int(s_["split"])): s_ for s_ in X.find_shards_x(a.LGDIR / "shards", a.lg_tag) if s_["part"] == "cpu"}
     if not ref:
         return pd.DataFrame(), pd.DataFrame(), f"본 실행 조각 없음({a.LGDIR / 'shards'}, tag {a.lg_tag}, 부분 cpu)"
@@ -1399,8 +2089,8 @@ def cross_tables(a, X, D, floor, stores):
     gate, merged = [], {}
     for (nm, sp), st in sorted(stores.items()):
         t, m = nm.split("|")
-        row = dict(target=t, mode=m, split=int(sp), status="", n_keys=0, max_diff=np.nan, worst_key="", blocks_equal=None, passed=False,
-                   code_sha_h40_ref="", code_sha_h40_now=h40_now, tol=GATE_TOL)
+        row = dict(target=t, mode=m, split=int(sp), status="", n_keys=0, n_missing_ref=np.nan, max_diff=np.nan, worst_key="", blocks_equal=None,
+                   passed=False, code_sha_h40_ref="", code_sha_h40_now=h40_now, tol=GATE_TOL)
         s_ = ref.get((t, m, int(sp)))
         if s_ is None:
             row["status"] = "기준 조각 없음"; gate.append(row); continue
@@ -1412,16 +2102,8 @@ def cross_tables(a, X, D, floor, stores):
                 pass
             if sb is None:
                 row["status"] = "저장소 없음"; gate.append(row); continue
-            row["blocks_equal"] = bool(np.array_equal(st.blocks, sb.blocks) and np.array_equal(st.ncell, sb.ncell))
-            keys = [k for k in st.keys if k in sb and k[0] in ("P0", "P1") and k[1] == "none" and k[3] == "cell"]
-            worst = (0.0, "")
-            for k in keys:
-                d_ = abs(st.rmse(k) - sb.rmse(k))
-                if d_ >= worst[0]:
-                    worst = (float(d_), json.dumps(list(k)))
-            row.update(n_keys=len(keys), max_diff=worst[0] if keys else np.nan, worst_key=worst[1])
-            row["passed"] = bool(keys and worst[0] <= GATE_TOL and row["blocks_equal"])
-            row["status"] = "ok" if row["passed"] else "불일치"
+            row.update(gate_compare(st, sb))
+            row["status"] = "ok" if row["passed"] else ("기준에 없는 키" if row["n_missing_ref"] else "불일치")
             if row["passed"]:
                 S, C_ = st.matrices(st.keys)
                 cp = BlockStore._from_arrays(st.target, st.split, st.blocks, st.ncell, list(st.keys), S, C_, dict(st.meta))
@@ -1478,7 +2160,38 @@ def smoke_report(units, runs, stores):
         out["gpu_mem_peak_mib"] = float(max(pk))
     rv = [float(u["gpu_mem_reserved_peak_mib"]) for u in units if u.get("gpu_mem_reserved_peak_mib") is not None]
     out["gpu_mem_reserved_peak_mib"] = float(max(rv)) if rv else None
+    cb = [float(q["cb_pool_maxdiff"]) for u in units for q in (u.get("smoke_check") or []) if "cb_pool_maxdiff" in q]
+    out["cb_pool_maxdiff"] = float(max(cb)) if cb else None               # Pool 스레드 지정(h43) 대 h40.cb_fit 경로의 예측 차(cm)
+    sch: dict = {}
+    for u in units:
+        for k, v in (u.get("tabpfn_schema") or {}).items():
+            slot = sch.setdefault(k, {})
+            for sig, c_ in v.items():
+                slot[sig] = int(slot.get(sig, 0)) + int(c_)
+    out["tabpfn_schema"] = sch
+    out["device_check"] = sorted({str(u.get("device_check", "")) for u in units})
     return out
+
+
+def smoke_timing(runs, units):
+    """스모크: 적합 1건 시간(변형, 학습기, 방법, n 별)과 계획서 §6C.10 추정식 대비 실측 비(학습기별). 키마다 한 번 센다(λ 행의 중복 제거).
+    적합 없이 재사용한 행(n = 0 의 R1, fit_s 0)은 뺀다. 결과 값(RMSE)은 읽지 않는다."""
+    if not len(runs):
+        return pd.DataFrame(), {}
+    ml = runs[(runs.learner != "none") & (runs.fit_s > 0)]
+    ml = ml.drop_duplicates(subset=["target", "mode", "split", "ctx_set", "method", "learner", "alpha", "n", "draw", "seed"]).copy()
+    if not len(ml):
+        return pd.DataFrame(), {}
+    ne = {(str(u["target"]), str(u["mode"]), int(u["split"])): int(u.get("n_eval", 0) or 0) for u in units}
+    ml["n_eval"] = [ne.get((str(t), str(m), int(s)), 0) for t, m, s in zip(ml.target, ml["mode"], ml.split)]
+    ml["est_s"] = [est_fit_s(lr, nc, nv) for lr, nc, nv in zip(ml.learner, ml.n_ctx, ml.n_eval)]
+    tab = ml.groupby(["ctx_set", "learner", "method", "n"], as_index=False).agg(
+        n_fit=("fit_s", "size"), sec_mean=("fit_s", "mean"), sec_max=("fit_s", "max"), n_ctx_mean=("n_ctx", "mean"), n_eval_mean=("n_eval", "mean"),
+        est_mean=("est_s", "mean"))
+    for c_ in ("sec_mean", "sec_max", "n_ctx_mean", "n_eval_mean", "est_mean"):
+        tab[c_] = tab[c_].astype(float).round(3)
+    ratio = {str(lr): round(float(g_.fit_s.sum() / max(float(g_.est_s.sum()), 1e-9)), 3) for lr, g_ in ml.groupby("learner")}
+    return tab, ratio
 
 
 # ================================================================ 집계
@@ -1511,6 +2224,11 @@ def summarize(a, elapsed=0.0, skipped=None):
     cfg_info = check_cfg_t(a, sh, units)
     runs = read_runs_t(sh)
     stores = load_stores([s_["npz"] for s_ in sh])
+    stores_pair, unpaired = pair_stores(stores)                           # 학습기 짝 대비용(개정 12). 판정 표는 build_tests_t 가 같은 규칙으로 만든다
+    unp_lr = Counter(k[1] for ks in unpaired.values() for k in ks)
+    if unpaired:
+        print(f"[summarize] 짝이 없는 학습기 키 {sum(unp_lr.values()):,}개(학습기별 {dict(unp_lr)}, 단위 {len(unpaired)}개)는 학습기 짝 대비에서 뺀다",
+              flush=True)
     D = H.get_data(h40_args_t(a, "main"))
     floor, floor_meta = X.floor_table(D.df)
     tms = {nm: X.make_tm(nm, {sp: st for (n_, sp), st in stores.items() if n_ == nm}, D, a.nboot) for nm in sorted({k[0] for k in stores})}
@@ -1525,7 +2243,7 @@ def summarize(a, elapsed=0.0, skipped=None):
         if a.SUFFIX:
             cross_note = "스모크 조각은 본 실행 조각과 교차 비교하지 않는다"
         else:
-            gate, cross, cross_note = cross_tables(a, X, D, floor, stores)
+            gate, cross, cross_note = cross_tables(a, X, D, floor, stores_pair)
         if cross_note:
             print(f"[summarize] 교차 비교: {cross_note}", flush=True)
     failed = failed_rows(runs)
@@ -1533,13 +2251,19 @@ def summarize(a, elapsed=0.0, skipped=None):
     tg = pd.DataFrame([dict({k: v for k, v in u.items() if not isinstance(v, (dict, list))}, n_fit=json.dumps(u.get("n_fit", {})),
                             sec=json.dumps(u.get("sec", {})), fail=json.dumps(u.get("fail", {})),
                             errors=json.dumps(u.get("errors", []), ensure_ascii=False), env=json.dumps(u.get("env", {}), ensure_ascii=False),
-                            ctx=json.dumps(u.get("ctx", {}), ensure_ascii=False)) for u in units])
+                            ctx=json.dumps(u.get("ctx", {}), ensure_ascii=False), tabpfn_schema=json.dumps(u.get("tabpfn_schema", {})),
+                            failed_learners=",".join(u.get("failed_learners", []) or [])) for u in units])
     if skipped:
         tg = pd.concat([tg, pd.DataFrame(skipped)], ignore_index=True)
     tt = H.timing_table(units)
     O = a.OUT; O.mkdir(parents=True, exist_ok=True)
-    _atomic_csv(cur, O / f"{a.TAG}_curve.csv"); _atomic_csv(mn, O / f"{a.TAG}_minn.csv"); _atomic_csv(tests, O / f"{a.TAG}_tests.csv")
-    _atomic_csv(cross, O / f"{a.TAG}_cross.csv"); _atomic_csv(gate, O / f"{a.TAG}_gate.csv"); _atomic_csv(tt, O / f"{a.TAG}_timing.csv")
+    if a.smoke:                                                           # 스모크: 결과 표(곡선, 최소 n, 판정, 교차)는 쓰지 않는다(개정 12)
+        for nm_ in ("curve", "minn", "tests", "cross", "gate"):
+            (O / f"{a.TAG}_{nm_}.csv").unlink(missing_ok=True)
+    else:
+        _atomic_csv(cur, O / f"{a.TAG}_curve.csv"); _atomic_csv(mn, O / f"{a.TAG}_minn.csv"); _atomic_csv(tests, O / f"{a.TAG}_tests.csv")
+        _atomic_csv(cross, O / f"{a.TAG}_cross.csv"); _atomic_csv(gate, O / f"{a.TAG}_gate.csv")
+    _atomic_csv(tt, O / f"{a.TAG}_timing.csv")
     fa = failed.copy() if len(failed) else pd.DataFrame(columns=list(runs.columns) if len(runs) else RUN_COLS)
     if curve_failed:
         fa = pd.concat([fa, pd.DataFrame([dict(target=q["target"], mode=q["mode"], fit_flag="curve_failed", method=q["reason"]) for q in curve_failed])],
@@ -1557,8 +2281,23 @@ def summarize(a, elapsed=0.0, skipped=None):
     if smoke:
         smoke["sec_per_fit"] = {f"{r_.axis}|{r_.learner}": round(float(r_.sec_per_fit), 3) for r_ in lt.itertuples()} if len(lt) else {}
         print(f"[smoke] 같은 행렬 {smoke['same_matrix']}(짝 {smoke['n_pairs']}) · n = 0 의 R1 = R0 {smoke['r1_eq_r0_n0']}(키 {smoke['n_r1_r0']}) · "
-              f"묶음 예측 차이 {smoke['chunk_maxdiff']} cm(허용 {SMOKE_CHUNK_TOL}) · GPU 메모리 최댓값 할당 {smoke['gpu_mem_peak_mib']} MiB, "
-              f"예약 {smoke['gpu_mem_reserved_peak_mib']} MiB", flush=True)
+              f"묶음 예측 차이 {smoke['chunk_maxdiff']} cm(허용 {SMOKE_CHUNK_TOL}) · CatBoost Pool 경로 차이 {smoke['cb_pool_maxdiff']} cm · "
+              f"GPU 메모리 최댓값 할당 {smoke['gpu_mem_peak_mib']} MiB, 예약 {smoke['gpu_mem_reserved_peak_mib']} MiB · 장치 대응 확인 "
+              f"{smoke['device_check']}", flush=True)
+        print(f"[smoke] TabPFN 열 분류(변형|컨텍스트 크기 → {{분류: 적합 수}}): {json.dumps(smoke['tabpfn_schema'], ensure_ascii=False)}", flush=True)
+        stab_, ratio_ = smoke_timing(runs, units)
+        _atomic_csv(stab_, O / f"{a.TAG}_fit_timing.csv")
+        smoke.update(sec_ratio_to_est=ratio_, fit_timing_rows=int(len(stab_)),
+                     structure=dict(n_curve=int(len(cur)), n_minn=int(len(mn)), n_tests=int(len(tests)),
+                                    n_tests_delta=int(np.isfinite(pd.to_numeric(tests["delta"], errors="coerce")).sum()) if "delta" in tests else 0,
+                                    n_verdict=int(tests.scope.isin(["verdict", "verdict_aux"]).sum()) if "scope" in tests else 0,
+                                    n_verdict_na=int((tests.scope.isin(["verdict", "verdict_aux"])
+                                                      & tests.verdict.astype(str).str.startswith("판정 불가")).sum()) if "verdict" in tests else 0,
+                                    test_ids=sorted({str(v) for v in tests.test_id}) if "test_id" in tests else [],
+                                    n_unpaired_keys=int(sum(unp_lr.values()))))
+        if len(stab_):
+            print("[smoke] 적합 1건 시간(s, 변형·학습기·방법·n 별, 스모크 점검 시간 제외)\n" + stab_.to_string(index=False), flush=True)
+        print(f"[smoke] 실측/추정식(계획서 §6C.10) 비: {ratio_} · 집계 경로: {smoke['structure']}", flush=True)
     fit_tot = Counter()
     for u in units:
         for k, v in (u.get("n_fit") or {}).items():
@@ -1572,6 +2311,8 @@ def summarize(a, elapsed=0.0, skipped=None):
                 n_gate=int(len(gate)), cross_note=cross_note, shard_cfg=cfg_info, unit_status=dict(status), n_failed_keys=int(len(failed)),
                 n_flagged_rows=int(len(flagged)), flags=dict(Counter(flagged.fit_flag.astype(str))) if len(flagged) else {},
                 curve_failed=curve_failed, n_fail=n_fail, skipped=skipped or [], floor=floor_meta, smoke=smoke,
+                n_unpaired_keys=int(sum(unp_lr.values())), n_unpaired_learner=dict(unp_lr),
+                unpaired_units={f"{k[0]}|s{k[1]}": len(v) for k, v in sorted(unpaired.items())},
                 gpu_mem_peak_mib=max([float(u.get("gpu_mem_peak_mib") or 0.0) for u in units] or [0.0]),
                 env=sorted({json.dumps(u.get("env", {}), ensure_ascii=False, sort_keys=True) for u in units}),
                 code_sha=code_sha_t(), code_sha_h40=H.code_sha(), code_sha_h42=file_sha(SCRIPT_DIR / "h42_label_grid_ext.py", 12),
@@ -1590,7 +2331,7 @@ def summarize(a, elapsed=0.0, skipped=None):
     print(f"[summarize] 조각 {len(sh)} · runs {len(runs):,} · curve {len(cur):,} · minn {len(mn):,} · tests {len(tests):,} · cross {len(cross):,} · "
           f"{time.time() - t0:.0f}s → {O}/{a.TAG}_*", flush=True)
     v = tests[tests.scope.isin(["verdict", "verdict_aux"])] if len(tests) else tests
-    if len(v):
+    if len(v) and not a.smoke:                                            # 스모크는 판정 행과 Δ 를 출력하지 않는다(개정 12)
         print(v[[c_ for c_ in ("test_id", "role", "blind", "verdict", "stat") if c_ in v]].to_string(index=False), flush=True)
     return dict(curve=cur, minn=mn, tests=tests, cross=cross, gate=gate, targets=tg, timing=tt, failed=fa, meta=meta, n_fail=n_fail)
 
@@ -1690,10 +2431,14 @@ def count_only(a, D, units, skipped):
 
 
 # ================================================================ 실행
-def cuda_available():
+def cuda_available(gpu):
+    """GPU 하나(nvidia-smi 번호)에서 torch.cuda 를 쓸 수 있는지. 부모 프로세스가 CUDA 를 초기화해 워커의 GPU 에 문맥을 남기지 않도록
+    짧은 자식 프로세스에서 확인한다(자식이 끝나면 문맥도 없어진다). 부모는 torch 를 부르지 않는다."""
+    env = dict(os.environ, CUDA_DEVICE_ORDER="PCI_BUS_ID", CUDA_VISIBLE_DEVICES=str(gpu))
+    code = "import sys, torch; sys.exit(0 if torch.cuda.is_available() else 3)"
     try:
-        import torch
-        return bool(torch.cuda.is_available())
+        return subprocess.run([sys.executable, "-c", code], env=env, timeout=300, stdout=subprocess.DEVNULL,
+                              stderr=subprocess.DEVNULL).returncode == 0
     except Exception:                                                     # noqa: BLE001
         return False
 
@@ -1720,82 +2465,153 @@ def main(argv=None):
     if a.count_only:
         count_only(a, D, units, skipped)
         return dict(executed=[], skipped=skipped, resumed=[], n_fail=0)
+    check_overwrite(a, units)                                             # 완료 조각이 있는데 --resume 도 --overwrite 도 없으면 거부한다
     try:
-        used = query_gpu_memory()
+        info, apps = query_gpu_info(), query_gpu_apps()
     except Exception as e:                                                # noqa: BLE001
         raise SystemExit(f"[거부] nvidia-smi 로 GPU 상태를 확인할 수 없다: {repr(e)[:200]}")
-    gpus, dropped = screen_gpus(a.GPUS, used, a.gpu_mem_max_mib)
+    gpus, dropped = screen_gpus(a.GPUS, {g: v["used"] for g, v in info.items()}, a.gpu_mem_max_mib, apps=gpu_apps_by_index(info, apps))
     for g_, why in dropped:
         print(f"[warn] GPU {g_} 를 뺀다: {why}", flush=True)
     if not gpus:
         raise SystemExit("[거부] 쓸 수 있는 GPU 가 없다(지정한 GPU 가 모두 사용 중이다)")
     if a.smoke:
         gpus = gpus[:1]                                                   # 스모크는 GPU 1장
-    if not cuda_available():
+    os.environ["CUDA_VISIBLE_DEVICES"] = str(gpus[0])                     # 부모 쪽 코드가 다른 GPU 를 건드리지 않게 한다(워커는 자기 값으로 바꾼다)
+    if not cuda_available(gpus[0]):                                       # 자식 프로세스에서 확인한다(부모는 CUDA 문맥을 만들지 않는다)
         raise SystemExit("[거부] torch.cuda 를 쓸 수 없다. TabPFN 을 CPU 로 돌리지 않는다")
     a.SHARDS.mkdir(parents=True, exist_ok=True)
-    resumed, todo = [], []
-    for u in units:
-        ok, why = unit_state_t(a, *u) if a.resume else (False, "")
-        if ok:
-            resumed.append(u)
-            print(f"  [resume] 건너뜀 {unit_name_t(u)} (조각 있음, 상태 {why})", flush=True)
-        else:
-            todo.append(u)
-            if a.resume and why != "조각 없음":
-                print(f"  [resume] 다시 실행 {unit_name_t(u)} ({why})", flush=True)
-    print(f"[plan] 실행 {len(todo)} · 재개로 건너뜀 {len(resumed)} · GPU {gpus}(프로세스 {len(gpus)}개) · 스레드 {a.threads} · 가중치 {a.MODEL.name} "
-          f"SHA-1 {file_sha(a.MODEL, 12)} · tabpfn {pkg_version('tabpfn')} · n_estimators {a.n_est} · 컨텍스트 상한 {a.ctx_max:,}", flush=True)
-    done, failed = [], []
+    a.RUN_ID = f"{os.getpid()}-{time.strftime('%Y%m%dT%H%M%S')}"
+    lock = acquire_lock(a)                                                # 같은 tag 의 두 번째 실행을 거부한다
+    clear_run_notes(a.RUN_DIR, ("running", "gpu_busy", "worker"))
+    done, failed, quarantined, resumed, todo = [], [], [], [], []
+    done_names, failed_names = set(), set()
+    interrupted, abort, handlers, busy_gpus, gpu_all = "", "", {}, set(), list(gpus)
 
     def log(u):
-        done.append(u)
+        done.append(u); done_names.add(unit_name_t((u["axis"], u["target"], u["mode"], int(u["split"]))))
         print(f"  [{u['axis']}|{u['target']}|{u['mode']}|s{u['split']}] 적합 {u['n_fit_total']} · 행 {u['n_rows']} · 컨텍스트 최대 {u['n_ctx_max']} · "
               f"A {u['n_A']} · 채점 {u['n_eval']}/{u['nb_eval']}블록{'' if u['valid'] else '(무효 분할)'} · 원천 {u['n_src']} · {u['elapsed_s']}s · "
-              f"GPU '{u['device']}' 메모리 최댓값 {u['gpu_mem_peak_mib']} MiB(예약 {u['gpu_mem_reserved_peak_mib']} MiB) · 상태 {u['status']}(실패 {u['n_fail']}) · 완료 {len(done)}/{len(todo)} · "
+              f"GPU '{u['device']}' 메모리 최댓값 {u['gpu_mem_peak_mib']} MiB(예약 {u['gpu_mem_reserved_peak_mib']} MiB) · 상태 {u['status']}(실패 {u['n_fail']}"
+              f"{', failed 학습기 ' + ','.join(u['failed_learners']) if u.get('failed_learners') else ''}) · 완료 {len(done)}/{len(todo)} · "
               f"누적 {time.time() - t0:.0f}s", flush=True)
 
     def fail(u, e):
-        failed.append(u)
+        failed.append((u, repr(e)[:300])); failed_names.add(unit_name_t(u))
         print(f"  [FAIL] {unit_name_t(u)}: {repr(e)[:300]}", flush=True)
 
-    if todo:
-        ctx = multiprocessing.get_context("spawn")                        # fork 후 OpenMP·CUDA 충돌 회피
-        remaining, attempt = list(todo), 0
-        while remaining:
-            q = ctx.Queue()
-            for g_ in gpus:
-                q.put(g_)
-            broken = []
-            with ProcessPoolExecutor(max_workers=len(gpus), mp_context=ctx, initializer=_worker_init_t, initargs=(argv, q, a.threads)) as ex:
-                futs = {ex.submit(_worker_run_t, *u): u for u in remaining}
-                for f in as_completed(futs):
-                    try:
-                        log(f.result())
-                    except BrokenProcessPool:                             # 워커 비정상 종료: 남은 단위는 새 풀에서 다시 돈다
-                        broken.append(futs[f])
-                    except Exception as e:                                # noqa: BLE001  한 단위의 실패가 나머지를 막지 않게 한다
-                        fail(futs[f], e)
-            if not broken:
-                break
-            attempt += 1
-            if attempt > int(a.pool_retries):
-                for u in broken:
-                    fail(u, RuntimeError(f"프로세스 풀이 {attempt}회 깨졌다. 재시도 상한 {a.pool_retries}"))
-                break
-            remaining = sorted(broken, key=lambda u: priority_t(a, D, u))
-            print(f"[pool] 워커 비정상 종료. 남은 {len(remaining)} 단위로 풀을 다시 만든다(재시도 {attempt}/{a.pool_retries})", flush=True)
-    n_fail = len(failed) + sum(1 for u in done if u["status"] == "failed")
-    n_part = sum(1 for u in done if u["status"] == "partial")
-    print(f"[done] 완료 {len(done)} · 실패 {n_fail} · 일부 적합 실패 {n_part} · {time.time() - t0:.0f}s", flush=True)
+    try:
+        for u in units:
+            ok, why = unit_state_t(a, *u) if a.resume else (False, "")
+            if ok:
+                resumed.append(u)
+                print(f"  [resume] 건너뜀 {unit_name_t(u)} (조각 있음, 상태 {why})", flush=True)
+            else:
+                todo.append(u)
+                if a.resume and why != "조각 없음":
+                    print(f"  [resume] 다시 실행 {unit_name_t(u)} ({why})", flush=True)
+        print(f"[plan] 실행 {len(todo)} · 재개로 건너뜀 {len(resumed)} · GPU {gpus}(프로세스 {len(gpus)}개) · 스레드 {a.threads} · 가중치 {a.MODEL.name} "
+              f"SHA-1 {file_sha(a.MODEL, 12)} · tabpfn {pkg_version('tabpfn')} · n_estimators {a.n_est} · 컨텍스트 상한 {a.ctx_max:,} · "
+              f"run_id {a.RUN_ID} · 기록 {a.RUN_DIR}", flush=True)
+        if todo:
+            handlers = install_stop_handlers()                            # SIGTERM, SIGHUP → KeyboardInterrupt(워커를 정리하고 끝낸다)
+            ctx = multiprocessing.get_context("spawn")                    # fork 후 OpenMP·CUDA 충돌 회피
+            remaining, stall, rebuilds, crashes = list(todo), 0, 0, Counter()
+            while remaining:
+                if not gpus:
+                    for u in remaining:
+                        fail(u, RuntimeError("쓸 수 있는 GPU 가 없다(풀 재생성 때 재확인)"))
+                    break
+                q = ctx.Queue()
+                for g_ in gpus:
+                    q.put(g_)
+                broken, n_done0, clean, procs = [], len(done), False, {}
+                ex = ProcessPoolExecutor(max_workers=len(gpus), mp_context=ctx, initializer=_worker_init_t,
+                                         initargs=(argv, q, a.threads, str(a.RUN_DIR), os.getpid(), a.RUN_ID))
+                try:
+                    futs = {ex.submit(_worker_run_t, *u): u for u in remaining}
+                    procs = dict(getattr(ex, "_processes", None) or {})
+                    for f in as_completed(futs):
+                        u = futs[f]
+                        try:
+                            log(f.result())
+                        except BrokenProcessPool:                         # 워커 비정상 종료: 원인 단위를 가린 뒤 새 풀에서 다시 돈다
+                            broken.append(u)
+                        except Exception as e:                            # noqa: BLE001  한 단위의 실패가 나머지를 막지 않게 한다
+                            fail(u, e)
+                            if TAG_MISMATCH in str(e):                    # 장치 대응이 어긋났다: 실행 전체를 멈춘다
+                                abort = str(e)
+                                break
+                    clean = not abort
+                finally:
+                    if clean:
+                        ex.shutdown(wait=True)
+                    else:
+                        kill_pool(ex)
+                if abort:
+                    for u in remaining:
+                        if unit_name_t(u) not in done_names | failed_names:
+                            fail(u, RuntimeError(f"GPU 장치 대응 불일치로 실행을 멈췄다: {abort[:160]}"))
+                    break
+                if not broken:
+                    break
+                rebuilds += 1
+                codes = {int(pid): p.exitcode for pid, p in procs.items()}
+                culprit = culprit_pids(codes)
+                notes = read_run_notes(a.RUN_DIR, "running")
+                running = {str(m_.get("unit", "")) for m_ in notes if not culprit or int(m_.get("pid", -1)) in culprit}
+                busy = {int(m_["gpu"]) for m_ in read_run_notes(a.RUN_DIR, "gpu_busy") if "gpu" in m_}
+                clear_run_notes(a.RUN_DIR, ("running", "gpu_busy"))
+                fin, quar, again = triage_broken(broken, running, crashes, lambda u: unit_done_run(a, u))
+                for u, uj in fin:                                         # 결과 전달 전에 풀이 깨졌으나 조각은 이번 실행에서 완료되었다
+                    log(unit_summary(uj))
+                for u in quar:
+                    quarantined.append(unit_name_t(u))
+                    fail(u, RuntimeError(f"실행 중에 풀이 {crashes[unit_name_t(u)]}회 깨졌다(격리, 상한 {POOL_CRASH_MAX})"))
+                busy_gpus |= busy
+                stall = 0 if (len(done) > n_done0 or quar) else stall + 1
+                print(f"[pool] 워커 비정상 종료(재생성 {rebuilds}회째, 진전 없는 연속 {stall}회). 종료 코드 {codes} · 원인으로 본 실행 중 단위 "
+                      f"{sorted(running) or '없음'} · 점유 표지 GPU {sorted(busy) or '없음'} · 완료 확인 {len(fin)} · 격리 {len(quar)} · 남은 {len(again)}",
+                      flush=True)
+                if stall > int(a.pool_retries):
+                    for u in again:
+                        fail(u, RuntimeError(f"진전 없이 풀이 {stall}회 연속 깨졌다(상한 {a.pool_retries})"))
+                    break
+                gpus = rescreen_gpus(a, gpu_all, busy_gpus)
+                if a.smoke:
+                    gpus = gpus[:1]
+                remaining = sorted(again, key=lambda u: priority_t(a, D, u))
+    except KeyboardInterrupt as e:
+        interrupted = str(e) or "KeyboardInterrupt"
+        print(f"[중단] {interrupted}. 워커를 종료했다. 이어 돌리려면 같은 명령에 --resume 을 준다", flush=True)
+    finally:
+        restore_handlers(handlers)
+        n_fail = len(failed) + sum(1 for u in done if u["status"] == "failed")
+        part = [unit_name_t((u["axis"], u["target"], u["mode"], int(u["split"]))) for u in done if u["status"] == "partial"]
+        stat = dict(run_id=a.RUN_ID, tag=a.TAG, argv=argv, start_s=round(t0, 1), elapsed_s=round(time.time() - t0, 1), gpus_first=gpu_all,
+                    gpus_last=gpus, busy_gpus=sorted(busy_gpus), n_todo=len(todo), n_done=len(done), n_resumed=len(resumed), n_fail=n_fail,
+                    n_partial=len(part), partial_units=part, failed_units=[dict(unit=unit_name_t(u), reason=r_) for u, r_ in failed],
+                    failed_status_units=[unit_name_t((u["axis"], u["target"], u["mode"], int(u["split"]))) for u in done if u["status"] == "failed"],
+                    quarantined=quarantined, interrupted=interrupted, abort=abort,
+                    next_step="python3 scripts/3_deep_learning/h43_tabpfn_label_grid.py --gpus <확인한 목록> --threads 4 --resume --rerun-partial --no-summarize")
+        _write_json(a.OUT / f"{a.TAG}_run_status.json", stat)
+        release_lock(lock)
+    print(f"[done] 완료 {len(done)} · 실패 {n_fail} · 일부 적합 실패 {len(part)} · 격리 {len(quarantined)} · {time.time() - t0:.0f}s · "
+          f"상태 기록 {a.OUT / (a.TAG + '_run_status.json')}", flush=True)
+    if part:
+        print(f"[done] 일부 적합이 실패한 조각(partial) {len(part)}개: {part[:10]}{' …' if len(part) > 10 else ''}. "
+              "두 번째 통과는 --resume --rerun-partial 로 돌린다", flush=True)
+    res = dict(executed=[(u["axis"], u["target"], u["mode"], u["split"]) for u in done], skipped=skipped, resumed=list(resumed), n_fail=n_fail,
+               n_partial=len(part), interrupted=interrupted)
+    if interrupted:
+        return res
     if not a.no_summarize:
-        res = summarize(a, time.time() - t0, skipped)
-        if res:
-            n_fail += int(res["n_fail"])
-    return dict(executed=[(u["axis"], u["target"], u["mode"], u["split"]) for u in done], skipped=skipped, resumed=list(resumed), n_fail=n_fail,
-                n_partial=n_part)
+        sres = summarize(a, time.time() - t0, skipped)
+        if sres:
+            res["n_fail"] += int(sres["n_fail"])
+    return res
 
 
 if __name__ == "__main__":
     _res = main()
-    sys.exit(1 if _res.get("n_fail") else 0)
+    sys.exit(exit_code(_res))

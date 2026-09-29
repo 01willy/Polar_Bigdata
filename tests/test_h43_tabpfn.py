@@ -2,6 +2,7 @@
 
 가벼운 시험은 학습을 하지 않는다. 두 학습기 자리에 대체 함수(학습 목표의 평균 + 입력 1열의 선형 항)를 넣어 컨텍스트 행렬, 목표, 저장 경로만
 확인한다. 실자료와 GPU 를 쓰지 않는다. TabPFN 을 실제로 적합하는 시험(표지 GPU)은 환경 변수 LGT_RUN_GPU=1 일 때만 실행한다.
+스레드 환경 변수(OMP, MKL, OpenBLAS, NUMEXPR)는 numpy 를 부르기 전에 2 로 둔다.
 
 가벼운 시험
 (a) ctx_order: 순열, 재현성, 중첩 구조, 지역 비례(이론 상한), 지역 안 순위 순서.
@@ -14,22 +15,38 @@
 (h) 기본값, 스모크 범위, 축별 h40 인자, 실행 순서 묶음.
 (i) 조각 기록과 읽기: runs.csv, blocksse.npz, cells.npz, unit.json. 스모크 점검 함수.
 (j) 학습 없는 계수(dry)의 적합 수가 대체 학습기 실행의 적합 수와 같다.
-(k) 적합 한 건의 예외는 그 키만 실패로 남는다. ImportError 는 조각 전체의 실패다.
+(k) 적합 한 건의 예외는 그 키만 실패로 남는다. 연속 실패 5회는 단위 중단(FitAbort), 학습기 저장 키 0 또는 실패 비율 20 % 초과는 failed,
+    ImportError 는 조각 전체의 실패다.
 (l) 판정 안정성 규칙과 CUDA 메모리 부족 예외의 판별.
-(m) 집계: 합성 저장소에서 L32–L37 의 대비 행과 판정 행이 만들어진다.
+(m) 집계: 합성 저장소에서 L32–L37 의 대비 행과 판정 행이 만들어진다(키 집합 열, L37 보조 기준, L32 의 λ 1.0 문구, D0·R0 맹검 표지).
+(n) 학습기 짝 대비: TabPFN 의 seed 1 키만 실패한 저장소에서 CatBoost 의 같은 키가 대비에서 빠진다(n_unpaired).
+(o) L37 판정 문구의 분할 완결성 표기에 기준 행이 들어간다.
+(p) 실행 경로(GPU 대체): run_unit_t → write_shard_t → unit_state_t, run_id, cells.npz 세대 정리, _worker_run_t 의 단위 중단과 예외 변환.
+(q) nvidia-smi 출력 해석(GPU 메모리, 계산 프로세스)과 계산 프로세스가 있는 GPU 의 제외.
+(r) 실행 제어: 원인 워커와 원인 단위의 판별, 격리, 종료 코드, 덮어쓰기 거부, 실행 잠금.
+(s) CUDA 메모리 부족 뒤의 묶음 재예측이 except 블록 밖에서 일어난다(가짜 tabpfn 모듈).
+(t) 재현 점검: h40.run_ctx(P0, P1 만, 학습 없음)의 저장소와 h43 저장소의 P0, P1 키 집합과 블록 SSE 가 같다. 기준에 없는 키는 통과가 아니다.
 GPU 시험
-(G) TabPFN 실제 적합(합성 자료): 예측이 유한하고 묶음 예측과 한 번 예측의 차이가 1e-3 이하다.
+(G) TabPFN 실제 적합(합성 자료): 예측이 유한하고 묶음 예측과 한 번 예측의 차이가 1e-3 이하다. CUDA_VISIBLE_DEVICES 가 남겨 두는 GPU 가 아닌
+    정수 하나이고 그 GPU 가 비어 있을 때만 돈다.
 실행: python3 -m pytest -q tests/test_h43_tabpfn.py            (가벼운 시험, 스레드 2개)
       LGT_RUN_GPU=1 CUDA_VISIBLE_DEVICES=9 python3 -m pytest -q tests/test_h43_tabpfn.py -k G_
 """
 import os
+for _v in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
+    os.environ[_v] = "2"                                      # numpy 를 부르기 전에 둔다(BLAS 는 적재 시점에 읽는다)
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 RUN_GPU = os.environ.get("LGT_RUN_GPU", "") == "1"
 if not RUN_GPU:
     os.environ["CUDA_VISIBLE_DEVICES"] = ""                  # 가벼운 시험은 GPU 를 쓰지 않는다
 import importlib.util
 import json
+import re
 import sys
+import types
+from collections import Counter
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 import pandas as pd
@@ -485,21 +502,42 @@ def test_k_fit_failure_is_per_key(monkeypatch):
     assert not any(k[1] == T.TP and k[4] == 10 and k[6] == 1 for k in st.keys), "실패한 키는 저장하지 않는다"
     assert any(k[1] == T.CBX and k[4] == 10 and k[6] == 1 for k in st.keys) and any(k[1] == T.TP and k[4] == 10 and k[6] == 0 for k in st.keys)
     assert len(T.failed_rows(r)) == len(bad)
+    assert stats["failed_learners"] == [] and stats["n_fail_learner"] == {T.TP: 6} and stats["n_fit_learner"] == {T.TP: 46, T.CBX: 46}
+    assert stats["n_stored_learner"][T.CBX] == 8 * 2 * 7 and stats["n_stored_learner"][T.TP] == stats["n_stored_learner"][T.CBX] - 14
 
+    # 학습기 실패가 5회 연속이면 단위를 중단한다(비유한 예측도 학습기 실패로 센다)
     def nan_tab(a, X, y, XB, seed, cat_idx=None, check_chunk=0):
         p, fl, ex = stub_tab(a, X, y, XB, seed, cat_idx)
         p[0] = np.nan
         return p, fl, ex
     monkeypatch.setattr(T, "tabpfn_fit_predict", nan_tab)
-    _, _, rows, st, stats, _, _ = run("main")
-    r = pd.DataFrame(rows)
-    assert stats["status"] == "partial" and set(r[r.learner == T.TP].fit_flag) == {"nonfinite"} and not any(k[1] == T.TP for k in st.keys)
+    with pytest.raises(T.FitAbort) as e:
+        run("main")
+    assert T.TAG_ABORT in str(e.value) and T.TP in str(e.value)
 
     def all_bad(a, X, y, XB, seed, cat_idx=None, check_chunk=0):
         raise ValueError("시험용 실패")
     monkeypatch.setattr(T, "tabpfn_fit_predict", all_bad)
     monkeypatch.setattr(T, "cb_fit_predict", lambda *q, **k: all_bad(*q))
-    assert run("main")[4]["status"] == "failed"
+    with pytest.raises(T.FitAbort):
+        run("main")
+
+    # 연속 5회에 이르지 않아도 학습기의 실패 비율이 20 % 를 넘으면 failed(seed 1 적합만 실패: 연속 최대 3회, 비율 1/2)
+    def half_bad(a, X, y, XB, seed, cat_idx=None, check_chunk=0):
+        if seed == 1:
+            raise RuntimeError("시험용 실패")
+        return stub_tab(a, X, y, XB, seed, cat_idx)
+    monkeypatch.setattr(T, "tabpfn_fit_predict", half_bad)
+    monkeypatch.setattr(T, "cb_fit_predict", stub_cb)
+    stats = run("main")[4]
+    assert stats["status"] == "failed" and stats["failed_learners"] == [T.TP] and stats["n_fail_learner"] == {T.TP: 23}
+
+    # TabPFN 의 저장 키가 0 이면 failed(연속 실패 상한을 크게 두고 확인한다)
+    monkeypatch.setattr(T, "FAIL_STREAK_MAX", 10 ** 6)
+    monkeypatch.setattr(T, "tabpfn_fit_predict", all_bad)
+    stats = run("main")[4]
+    assert stats["status"] == "failed" and stats["failed_learners"] == [T.TP] and stats["n_stored_learner"].get(T.TP, 0) == 0
+    monkeypatch.setattr(T, "FAIL_STREAK_MAX", 5)
 
     def imp(a, X, y, XB, seed, cat_idx=None, check_chunk=0):
         raise ImportError("tabpfn 없음")
@@ -516,7 +554,9 @@ def test_k_fit_failure_is_per_key(monkeypatch):
         return y
     _, _, rows, st, stats, _, _ = run("main", make_unit(yA_fn=hole), ["--n-grid", "0,3"])
     r = pd.DataFrame(rows)
-    assert set(r[(r.n == 3) & (r.draw == 0) & (r.learner != "none") & (r.method != "P1")].fit_flag) == {"fail"} and stats["status"] == "partial"
+    assert set(r[(r.n == 3) & (r.draw == 0) & (r.learner != "none") & (r.method != "P1")].fit_flag) == {"fail"}
+    # 점검 실패는 연속 실패에 세지 않지만 실패 비율에는 센다(학습기마다 16적합 가운데 6개 이상 → failed)
+    assert stats["status"] == "failed" and stats["failed_learners"] == list(T.LEARNERS_T) and stats["n_fail_learner"][T.TP] >= 6
 
 
 # ================================================================ (l) 안정성 규칙과 예외 판별
@@ -567,17 +607,22 @@ def _mk_tm(name, nb, seed, specs, splits=(1, 2), nboot=200, p0_sd=6.0):
     return tm
 
 
-def _specs(tp_sd=1.0, cb_sd=1.0, same=True, d0_sd=9.0, ns=(0, 3, 10, 40, 160, 320, 1000, -1)):
+def _specs(tp_sd=1.0, cb_sd=1.0, same=True, d0_sd=9.0, ns=(0, 3, 10, 40, 160, 320, 1000, -1), tp_lam1_sd=None, seeds=(0,)):
+    """합성 저장소의 키 명세. tp_lam1_sd 를 주면 TabPFN R1 의 λ 1.0 키만 독립 잡음 SD 로 둔다. seeds 는 학습기 키의 seed 목록이다
+    (seed 마다 잡음 묶음이 다르다)."""
     sp = {}
     for n in ns:
         sp[K("P1", n, 0.0)] = (3.0, f"p1{n}")
-        for lam in (0.25, 0.5, 1.0):
-            sp[K("R1", n, lam, T.TP)] = (tp_sd, f"r{n}")
-            sp[K("R1", n, lam, T.CBX)] = (cb_sd, f"r{n}" if same else f"rc{n}")
-            sp[K("R0", n, lam, T.TP)] = (tp_sd, f"r{n}")
-            sp[K("R0", n, lam, T.CBX)] = (cb_sd, f"r{n}" if same else f"rc{n}")
-        sp[K("D0", n, 1.0, T.TP)] = (d0_sd, "p0")
-        sp[K("D0", n, 1.0, T.CBX)] = (d0_sd, "p0")
+        for s_ in seeds:
+            q = "" if s_ == 0 else f"s{s_}"
+            for lam in (0.25, 0.5, 1.0):
+                sp[K("R1", n, lam, T.TP, seed=s_)] = ((tp_lam1_sd, f"t1{n}{q}") if (tp_lam1_sd is not None and lam == 1.0)
+                                                      else (tp_sd, f"r{n}{q}"))
+                sp[K("R1", n, lam, T.CBX, seed=s_)] = (cb_sd, f"r{n}{q}" if same else f"rc{n}{q}")
+                sp[K("R0", n, lam, T.TP, seed=s_)] = (tp_sd, f"r{n}{q}")
+                sp[K("R0", n, lam, T.CBX, seed=s_)] = (cb_sd, f"r{n}{q}" if same else f"rc{n}{q}")
+            sp[K("D0", n, 1.0, T.TP, seed=s_)] = (d0_sd, "p0")
+            sp[K("D0", n, 1.0, T.CBX, seed=s_)] = (d0_sd, "p0")
     for n in (10, 40):
         for lam in (0.25, 0.5, 1.0):
             for lr in T.LEARNERS_T:
@@ -621,11 +666,22 @@ def test_m_aggregation_on_synthetic_stores():
     assert _verdict(tests, "L36") == ["TabPFN 에서도 앵커 + 잔차 구조가 직접 구조보다 오차가 작다"]
     v37 = {v: _verdict(tests, "L37", variant=v) for v in ("d3", "d10", "rid", "tgt")}
     assert v37["d3"] == ["강건"] and v37["d10"] == ["강건"] and v37["rid"] == ["강건"], v37
-    assert len(v37["tgt"]) == 1 and "원천 컨텍스트가 기여한다(n=40)" in v37["tgt"][0], v37
+    # tgt: 안정성 판정 행과 변형 − 주 설정 판정 행이 따로 있다(개정 12)
+    assert len(v37["tgt"]) == 2 and not v37["tgt"][0].startswith("판정 불가") and "원천 컨텍스트가 기여한다(n=40)" in v37["tgt"][1], v37
+    cl = tests[(tests.test_id == "L37") & (tests.scope == "verdict_aux") & (tests.variant == "tgt")]
+    assert list(cl.clause) == ["안정성", "변형 − 주 설정"]
     stab = tests[tests.scope == "stability"]
     assert len(stab) == 2 * 2 * 3 + 2 and set(stab.stability) <= {"강건", "약화", "의존"}
+    assert stab.stability_same.all() and (stab.stability == stab.stability_d01).all()        # 합성 저장소는 추출 0 만 있다
+    assert set(tests[(tests.test_id == "L37") & (tests.scope == "verdict_aux") & (tests.clause == "안정성")].stability_same) == {True}
     bl = tests[(tests.test_id == "L32") & (tests.scope == "MEAN") & (tests.role == "보조")]
     assert dict(zip(bl.n, bl.blind)) == {0: True, 10: False, 40: False, 160: True, -1: True}
+    assert set(bl.key_set) == {"pair"} and (bl.n_unpaired == 0).all()
+    dr = tests[(tests.test_id == "L32") & tests.role.isin(["보조(D0)", "보조(R0)"])]
+    assert len(dr) == 2 * 5 * 5 and dr.blind.all(), "L32 의 D0, R0 보조 대비는 모든 n 이 맹검이다"
+    assert set(tests[(tests.test_id == "L33") & (tests.scope == "MEAN")].key_set) == {"all"}
+    b37 = tests[(tests.test_id == "L37") & tests.role.isin(["기준", "기준(추출 0–1, 보조)"])]
+    assert set(b37.key_set) == {"pair", "all", "pair_d01", "d01"}
     assert not tests[(tests.test_id == "L32") & tests.scope.isin(["verdict_aux"])].blind.any()
     assert not tests[(tests.test_id == "L37") & (tests.scope == "verdict_aux") & tests.variant.isin(["d3", "rid"])].blind.any()
     assert tests[(tests.test_id == "L37") & (tests.scope == "verdict_aux") & tests.variant.isin(["d10", "tgt"])].blind.all()
@@ -643,12 +699,298 @@ def test_m_aggregation_on_synthetic_stores():
     assert all(v.startswith("판정 불가") for v in _verdict(t3, "L37", variant="tgt"))
     t4 = T.build_tests_t(ns, {}, None, None)
     assert all(v.startswith("판정 불가") for tid in ("L32", "L33", "L35", "L36") for v in _verdict(t4, tid))
+    # L32: 기준 λ 0.25 는 모두 동등, λ 1.0 에서 TabPFN 열세(개정 12 의 문구)
+    t5 = T.build_tests_t(ns, _tms(tp_lam1_sd=3.0), None, None)
+    v = _verdict(t5, "L32")
+    assert len(v) == 1 and v[0].startswith("기준 λ 0.25 에서는 동등, λ 1.0 에서는 차이가 있다(") and "동등으로 쓰지 않는다" in v[0], v
+    assert "TabPFN 열세" in v[0] and "[λ 1.0 의 대비(병기)" not in v[0], v
+
+
+# ================================================================ (n) 학습기 짝 대비
+def _drop(tm, cond):
+    """cond(키)가 참인 키를 뺀 TMx 사본."""
+    def fn(st):
+        dr = [k for k in st.keys if cond(k)]
+        return (T._sub_store(st, [k for k in st.keys if not cond(k)]), dr) if dr else (st, [])
+    return T.tm_view(tm, fn)[0]
+
+
+def test_n_pair_filter_drops_unpaired_keys():
+    ns = T.SimpleNamespace(nboot=200, delta_eq=0.5, delta_eq_aux=1.0)
+    base = _tms(tp_sd=1.0, cb_sd=1.5, same=False, seeds=(0, 1), ns=(0, 10, 40, 160, -1))
+    tp_s1 = lambda k: k[0] == "R1" and k[1] == T.TP and k[4] == 10 and k[6] == 1                       # noqa: E731
+    both_s1 = lambda k: k[0] == "R1" and k[1] != "none" and k[4] == 10 and k[6] == 1                   # noqa: E731
+    bad, ref = dict(base), dict(base)
+    bad["Lena|x"] = _drop(base["Lena|x"], tp_s1)                  # TabPFN 의 seed 1 키만 실패한 경우
+    ref["Lena|x"] = _drop(base["Lena|x"], both_s1)                # 두 학습기의 seed 1 키를 함께 뺀 경우
+    st = bad["Lena|x"].used[1]
+    st2, dr = T.pair_store(st)
+    assert sorted(dr) == sorted(k for k in st.keys if k[0] == "R1" and k[1] == T.CBX and k[4] == 10 and k[6] == 1) and len(dr) == 3
+    assert set(st2.keys) == set(k for k in st.keys if k not in dr) and T.pair_store(base["Lena|x"].used[1])[1] == []
+    X = T._load_h42()
+    gA, gB = X.G("R1", 10, 0.25, T.TP), X.G("R1", 10, 0.25, T.CBX)
+    r_bad, r_ref = X.region_stats(bad["Lena|x"], gA, gB), X.region_stats(ref["Lena|x"], gA, gB)
+    assert r_bad["delta"] != pytest.approx(r_ref["delta"], abs=1e-9), "짝을 맞추지 않으면 CatBoost 쪽에 seed 1 키가 남는다"
+    tb, tr = T.build_tests_t(ns, bad, None, None), T.build_tests_t(ns, ref, None, None)
+    lab = "R1[T]-R1[C]|n10|lam0.25"
+    rb = tb[(tb.contrast == lab) & (tb.scope == "MEAN")].iloc[0]
+    rr = tr[(tr.contrast == lab) & (tr.scope == "MEAN")].iloc[0]
+    for c_ in ("delta", "ci_lo", "ci_hi", "delta_blockeq", "ci_lo_beq", "ci_hi_beq"):
+        assert rb[c_] == pytest.approx(rr[c_], abs=1e-12), c_
+    assert rb.verdict4 == rr.verdict4 and int(rb.n_unpaired) == 2 and int(rr.n_unpaired) == 0 and rb.key_set == "pair"
+    reg = tb[(tb.contrast == lab) & (tb.scope == "region") & (tb.target == "Lena|x")].iloc[0]
+    assert reg.delta == pytest.approx(tr[(tr.contrast == lab) & (tr.scope == "region") & (tr.target == "Lena|x")].iloc[0].delta, abs=1e-12)
+    # 다른 n 의 대비는 영향을 받지 않는다
+    other = "R1[T]-R1[C]|n40|lam0.25"
+    assert tb[(tb.contrast == other) & (tb.scope == "MEAN")].iloc[0].delta == pytest.approx(
+        tr[(tr.contrast == other) & (tr.scope == "MEAN")].iloc[0].delta, abs=1e-12)
+    # 같은 학습기 안의 대비(R1[T] − P1)는 짝 맞추기를 하지 않는다(key_set all)
+    assert set(tb[(tb.test_id == "L33") & (tb.scope == "MEAN")].key_set) == {"all"}
+
+
+# ================================================================ (o) L37 의 분할 완결성 표기
+def test_o_l37_partial_mark_includes_base_rows():
+    ns = T.SimpleNamespace(nboot=200, delta_eq=0.5, delta_eq_aux=1.0)
+    tms = {}
+    for nm, tm in _tms().items():                                 # 주 설정 R1(α 1)의 n = 10 키를 분할 2 에서 뺀다. 민감도 키는 그대로다
+        def fn(st):
+            if int(st.split) != 2:
+                return st, []
+            dr = [k for k in st.keys if k[0] == "R1" and str(k[2]) == "1" and k[4] == 10]
+            return T._sub_store(st, [k for k in st.keys if k not in dr]), dr
+        t2 = T.tm_view(tm, fn)[0]
+        t2.expected_splits = [1, 2]
+        tms[nm] = t2
+    tests = T.build_tests_t(ns, tms, None, None)
+    base = tests[(tests.test_id == "L37") & (tests.contrast == "기준|R1[T]-R1[C]|n10") & (tests.scope == "MEAN")].iloc[0]
+    assert int(base.splits_min) == 1 and int(base.splits_expected) == 2
+    v = _verdict(tests, "L37", variant="d3")
+    assert len(v) == 1 and v[0].startswith("부분(분할 1/2(기준 행)"), v
+
+
+# ================================================================ (p) 실행 경로(GPU 대체)
+def _fake_backend(peak_mib=5.0, resv_mib=8.0):
+    cuda = SimpleNamespace(reset_peak_memory_stats=lambda: None, max_memory_allocated=lambda: peak_mib * 1024 ** 2,
+                           max_memory_reserved=lambda: resv_mib * 1024 ** 2)
+    return SimpleNamespace(cuda=cuda)
+
+
+@pytest.fixture()
+def fake_run(monkeypatch, stub):
+    """run_unit_t 를 GPU 와 실자료 없이 돌린다: 자료 적재와 작업 단위 구성을 합성 자료로, CUDA 백엔드를 가짜로 바꾼다."""
+    c = make_unit()
+    D = SimpleNamespace(df=pd.DataFrame(dict(macro=list(c.macro_src) + [c.parent])))
+    monkeypatch.setattr(H, "get_data", lambda HA: D)
+    monkeypatch.setattr(H, "build_ctx", lambda D_, HA, t, m, sp: c)
+    monkeypatch.setattr(T, "cuda_backend", _fake_backend)
+    return c
+
+
+def test_p_run_unit_path_without_gpu(fake_run, monkeypatch, tmp_path):
+    a = args([], tmp_path)
+    a.RUN_ID = "rid-1"
+    u = T.run_unit_t(a, "main", "T", "x", 1)
+    p = T.shard_paths_t(a, "main", "T", "x", 1)
+    assert all(p[k].exists() for k in ("runs", "npz", "cells", "unit")) and u["status"] == "ok" and u["failed_learners"] == []
+    assert u["gpu_mem_peak_mib"] == 5.0 and u["gpu_mem_reserved_peak_mib"] == 8.0 and u["run_id"] == "rid-1" and u["has_cells"]
+    assert T.unit_state_t(a, "main", "T", "x", 1) == (True, "ok")
+    assert T.unit_done_run(a, ("main", "T", "x", 1)) is not None
+    a.RUN_ID = "rid-2"
+    assert T.unit_done_run(a, ("main", "T", "x", 1)) is None, "다른 실행(run_id)의 조각은 이번 실행의 완료로 보지 않는다"
+    s_ = T.unit_summary(json.loads(p["unit"].read_text()))
+    assert s_["n_fail"] == 0 and s_["status"] == "ok" and s_["run_id"] == "rid-1"
+    # --no-cells 로 다시 돌리면 이전 세대의 cells.npz 가 지워진다
+    a2 = args(["--no-cells"], tmp_path)
+    u2 = T.run_unit_t(a2, "main", "T", "x", 1)
+    assert not p["cells"].exists() and not u2["has_cells"] and T.unit_state_t(a2, "main", "T", "x", 1) == (True, "ok")
+    # TabPFN 이 연속으로 실패하면 단위를 중단하고 unit.json 을 남기지 않는다. 워커는 내장 RuntimeError 로 넘긴다
+    def boom(a_, X, y, XB, seed, cat_idx=None, check_chunk=0):
+        raise RuntimeError("CUDA error: 시험용")
+    monkeypatch.setattr(T, "tabpfn_fit_predict", boom)
+    monkeypatch.setattr(T, "_WT", a)
+    with pytest.raises(RuntimeError) as e:
+        T._worker_run_t("main", "T", "x", 1)
+    assert type(e.value) is RuntimeError and T.TAG_ABORT in str(e.value) and str(e.value).startswith("FitAbort:")
+    assert not p["unit"].exists() and T.unit_state_t(a, "main", "T", "x", 1) == (False, "조각 없음")
+    # seed 1 적합만 실패하면 status failed 이고 재개가 다시 실행한다
+    def half(a_, X, y, XB, seed, cat_idx=None, check_chunk=0):
+        if seed == 1:
+            raise RuntimeError("시험용")
+        return stub_tab(a_, X, y, XB, seed, cat_idx)
+    monkeypatch.setattr(T, "tabpfn_fit_predict", half)
+    u3 = T.run_unit_t(a, "main", "T", "x", 1)
+    assert u3["status"] == "failed" and u3["failed_learners"] == [T.TP] and T.unit_state_t(a, "main", "T", "x", 1) == (False, "이전 실행 실패")
+    assert T.unit_summary(u3)["n_fail"] > 0
+
+
+# ================================================================ (q) nvidia-smi 출력 해석
+def test_q_nvidia_smi_parsing_and_busy_gpu(monkeypatch):
+    info_txt = "0, GPU-aaaa, 0\n8, GPU-bbbb, 13188\n9, GPU-cccc, 0\n7, GPU-dddd, 3\nbad line\n"
+    apps_txt = "123, GPU-bbbb\n456, GPU-cccc\nNo running processes found\n"
+    info = T.parse_gpu_info(info_txt)
+    assert info == {0: dict(uuid="GPU-aaaa", used=0), 8: dict(uuid="GPU-bbbb", used=13188), 9: dict(uuid="GPU-cccc", used=0),
+                    7: dict(uuid="GPU-dddd", used=3)}
+    apps = T.parse_gpu_apps(apps_txt)
+    assert apps == [(123, "GPU-bbbb"), (456, "GPU-cccc")] and T.parse_gpu_apps("") == []
+    by = T.gpu_apps_by_index(info, apps)
+    assert by == {8: [123], 9: [456]}
+    ok, dropped = T.screen_gpus([9, 7, 6], {g: v["used"] for g, v in info.items()}, 0, apps=by)
+    assert ok == [] and [g for g, _ in dropped] == [9, 7, 6] and "계산 프로세스" in dropped[0][1] and "3 MiB" in dropped[1][1]
+    assert T.screen_gpus([9], {9: 0}, 0, apps={})[0] == [9]
+    seen = []
+
+    def smi(args_):
+        seen.append(list(args_))
+        return info_txt if any("query-gpu" in v for v in args_) else apps_txt
+    monkeypatch.setattr(T, "_smi", smi)
+    assert T.query_gpu_memory() == {0: 0, 8: 13188, 9: 0, 7: 3} and T.query_gpu_apps() == apps
+    assert any("--query-compute-apps=pid,gpu_uuid" in v for v in seen[-1])
+    assert T._norm_uuid("GPU-ABC") == "abc" and T._norm_uuid("abc") == "abc"
+
+
+# ================================================================ (r) 실행 제어
+def test_r_run_control_helpers(tmp_path):
+    assert T.culprit_pids({1: 0, 2: -15, 3: 75, 4: None, 5: -9, 6: 76}) == {3, 5, 6}
+    u1, u2, u3 = ("main", "Lena", "x", 1), ("main", "Lena", "x", 2), ("sens", "Canada", "x", 1)
+    crashes = Counter({T.unit_name_t(u1): 1})
+    fin, quar, again = T.triage_broken([u1, u2, u3], {T.unit_name_t(u1)}, crashes, lambda u: {"status": "ok"} if u == u3 else None)
+    assert fin == [(u3, {"status": "ok"})] and quar == [u1] and again == [u2] and crashes[T.unit_name_t(u1)] == T.POOL_CRASH_MAX
+    fin, quar, again = T.triage_broken([u2], set(), crashes, lambda u: None)
+    assert quar == [] and again == [u2] and crashes[T.unit_name_t(u2)] == 0, "실행 중이 아니던 단위는 원인으로 세지 않는다"
+    assert T.exit_code(dict(interrupted="x", n_fail=1)) == T.EXIT_INTERRUPT == 130
+    assert T.exit_code(dict(n_fail=1, n_partial=3)) == 1 and T.exit_code(dict(n_fail=0, n_partial=3)) == 2 and T.exit_code(dict(n_fail=0)) == 0
+    # 덮어쓰기 거부
+    a = args([], tmp_path)
+    units = [("main", "T", "x", 1)]
+    assert T.check_overwrite(a, units) == []
+    p = T.shard_paths_t(a, "main", "T", "x", 1)
+    p["unit"].parent.mkdir(parents=True, exist_ok=True)
+    p["unit"].write_text("{}")
+    with pytest.raises(SystemExit) as e:
+        T.check_overwrite(a, units)
+    assert "거부" in str(e.value) and "--resume" in str(e.value)
+    assert T.check_overwrite(args(["--resume"], tmp_path), units) == units and T.check_overwrite(args(["--overwrite"], tmp_path), units) == units
+    a.smoke = True
+    assert T.check_overwrite(a, units) == units
+    # 실행 잠금
+    b = args([], tmp_path)
+    b.RUN_ID = "r1"
+    lk = T.acquire_lock(b)
+    assert json.loads(lk.read_text())["pid"] == os.getpid()
+    with pytest.raises(SystemExit):
+        T.acquire_lock(b)
+    T.release_lock(lk)
+    assert not lk.exists()
+    lk.write_text(json.dumps(dict(pid=999999999)))                                          # 죽은 PID 의 잠금은 지우고 다시 만든다
+    assert not T.pid_alive(999999999) and T.pid_alive(os.getpid())
+    lk2 = T.acquire_lock(b)
+    assert json.loads(lk2.read_text())["pid"] == os.getpid()
+    T.release_lock(lk2)
+    # 실행 표지
+    rd = Path(b.RUN_DIR)
+    (rd / "running__main__T__x__s1__11.json").write_text(json.dumps(dict(unit="main|T|x|s1", pid=11)))
+    (rd / "gpu_busy__9.json").write_text(json.dumps(dict(gpu=9)))
+    assert [m["unit"] for m in T.read_run_notes(rd, "running")] == ["main|T|x|s1"] and T.read_run_notes(rd, "gpu_busy")[0]["gpu"] == 9
+    T.clear_run_notes(rd)
+    assert T.read_run_notes(rd, "running") == [] and T.read_run_notes(rd, "gpu_busy") == []
+
+
+# ================================================================ (s) CUDA 메모리 부족 뒤의 묶음 재예측
+def test_s_oom_repredict_outside_except_block(monkeypatch):
+    class OutOfMemoryError(RuntimeError):
+        pass
+
+    class FakeReg:
+        calls: list = []
+        kw: dict = {}
+
+        def __init__(self, **kw):
+            FakeReg.kw = dict(kw)
+
+        def fit(self, X, y):
+            self.mu = float(np.mean(y))
+
+        def predict(self, XB):
+            FakeReg.calls.append((len(XB), sys.exc_info()[0] is not None))
+            if len(XB) > 40:
+                raise OutOfMemoryError("CUDA out of memory. Tried to allocate")
+            return np.full(len(XB), self.mu)
+    fake = types.ModuleType("tabpfn")
+    fake.TabPFNRegressor = FakeReg
+    monkeypatch.setitem(sys.modules, "tabpfn", fake)
+    a = args(["--pred-chunk", "40"])
+    rng = np.random.RandomState(0)
+    X, y, XB = rng.randn(60, D_FEAT).astype(np.float32), rng.randn(60), rng.randn(100, D_FEAT).astype(np.float32)
+    p, fl, info = T.tabpfn_fit_predict(a, X, y, XB, 3)
+    assert fl == "chunk" and p.shape == (100,) and np.allclose(p, y.mean())
+    assert [n for n, _ in FakeReg.calls] == [100, 40, 40, 20]
+    assert not any(inside for _, inside in FakeReg.calls[1:]), "재예측은 except 블록 밖에서 한다(예외 객체가 풀린 뒤)"
+    assert FakeReg.kw["n_preprocessing_jobs"] == 1 and FakeReg.kw["categorical_features_indices"] == [] and FakeReg.kw["device"] == "cuda"
+    assert FakeReg.kw["random_state"] == 3 and FakeReg.kw["n_estimators"] == 8 and FakeReg.kw["ignore_pretraining_limits"] is True
+    assert info == {}                                                                       # 가짜 모듈에는 열 분류가 없다
+    FakeReg.calls = []
+    p, fl, info = T.tabpfn_fit_predict(a, X, y, XB[:30], 0, D_FEAT - 1)
+    assert fl == "" and FakeReg.calls == [(30, False)] and FakeReg.kw["categorical_features_indices"] == [D_FEAT - 1]
+
+    class Bad:
+        def __init__(self, **kw):
+            pass
+
+        def fit(self, X, y):
+            pass
+
+        def predict(self, XB):
+            raise ValueError("shape")
+    fake.TabPFNRegressor = Bad
+    with pytest.raises(ValueError):
+        T.tabpfn_fit_predict(a, X, y, XB, 0)
+
+
+# ================================================================ (t) 재현 점검: h40.run_ctx 의 P0, P1 과 대조
+def test_t_p0_p1_match_h40_run_ctx(stub, tmp_path):
+    c = make_unit()
+    _, _, _, st, _, _, _ = run("main", c, trace=False)
+    HA40 = H.parse_args(["--part", "cpu", "--methods", "P0,P1", "--learners", H.BASE_LEARNER, "--n-grid", "0,3,10,40,all", "--draws", "2",
+                         "--seeds", "2", "--splits", "1", "--threads", "2", "--kappa", "10", "--out-dir", str(tmp_path / "lg")])
+    rows40, st40, stats40 = H.run_ctx(c, "cpu", HA40)
+    assert sum(stats40["n_fit"].values()) == 0, "P0, P1 만 두면 h40 은 학습하지 않는다"
+    mine = [k for k in st.keys if k[0] in ("P0", "P1")]
+    assert len(mine) == 1 + 8 and set(mine) <= set(st40.keys)
+    for k in mine:
+        s43, c43 = st.get(k)
+        s40, c40 = st40.get(k)
+        assert np.array_equal(s43, s40) and np.array_equal(c43, c40), k
+    g = T.gate_compare(st, st40)
+    assert g["passed"] and g["n_missing_ref"] == 0 and g["n_keys"] == len(mine) and g["max_diff"] == 0.0 and g["blocks_equal"]
+    miss = T._sub_store(st40, [k for k in st40.keys if k != mine[-1]])
+    g2 = T.gate_compare(st, miss)
+    assert not g2["passed"] and g2["n_missing_ref"] == 1 and g2["n_keys"] == len(mine) - 1
 
 
 # ================================================================ (G) TabPFN 실제 적합(GPU)
+def _gpu_ready():
+    """GPU 시험의 장치 확인: CUDA_VISIBLE_DEVICES 가 남겨 두는 GPU 가 아닌 정수 하나이고 그 GPU 의 메모리 사용이 0 MiB, 계산 프로세스가 없어야 한다."""
+    v = os.environ.get("CUDA_VISIBLE_DEVICES", "").strip()
+    if not re.fullmatch(r"\d+", v):
+        return False, f"CUDA_VISIBLE_DEVICES='{v}' 는 정수 하나가 아니다"
+    if int(v) in T.RESERVED_GPUS:
+        return False, f"GPU {v} 는 남겨 두는 GPU 다"
+    try:
+        info, apps = T.query_gpu_info(), T.query_gpu_apps()
+    except Exception as e:                                                                  # noqa: BLE001
+        return False, f"nvidia-smi 확인 실패: {e!r}"
+    ok, dropped = T.screen_gpus([int(v)], {g: x["used"] for g, x in info.items()}, 0, apps=T.gpu_apps_by_index(info, apps))
+    return bool(ok), str(dropped)
+
+
 @GPU
 def test_G_tabpfn_real_fit_and_chunks():
-    a = T.parse_args(["--gpus", "9", "--threads", "2"])
+    ok, why = _gpu_ready()
+    if not ok:
+        pytest.skip(why)
+    import torch
+    torch.set_num_threads(2)
+    a = T.parse_args(["--gpus", os.environ["CUDA_VISIBLE_DEVICES"], "--threads", "2"])
     assert a.MODEL.exists(), "가중치 파일이 없다"
     rng = np.random.RandomState(0)
     X = rng.randn(600, D_FEAT).astype(np.float32); X[3, 2] = np.nan
@@ -656,9 +998,9 @@ def test_G_tabpfn_real_fit_and_chunks():
     XB = rng.randn(90, D_FEAT).astype(np.float32)
     p, fl, ex = T.tabpfn_fit_predict(a, X, y, XB, 0, None, check_chunk=45)
     assert p.shape == (90,) and np.isfinite(p).all() and fl == "" and ex["chunk_maxdiff"] <= T.SMOKE_CHUNK_TOL
-    assert np.corrcoef(p, 2.0 * XB[:, 1])[0, 1] > 0.9
+    assert np.corrcoef(p, 2.0 * XB[:, 1])[0, 1] > 0.9 and "cat_cols" in ex and "const_cols" in ex
     Xr = np.c_[X, rng.randint(0, 5, 600)].astype(np.float32); XBr = np.c_[XB, np.full(90, 5)].astype(np.float32)
-    p2, _, _ = T.tabpfn_fit_predict(a, Xr, y, XBr, 0, D_FEAT)
-    assert np.isfinite(p2).all()
+    p2, _, ex2 = T.tabpfn_fit_predict(a, Xr, y, XBr, 0, D_FEAT)
+    assert np.isfinite(p2).all() and D_FEAT in ex2.get("cat_cols", [D_FEAT])
     q, _, _ = T.cb_fit_predict(T.h40_args_t(a, "main"), Xr, y, XBr, 0, D_FEAT)
     assert np.isfinite(q).all() and q.shape == (90,)
