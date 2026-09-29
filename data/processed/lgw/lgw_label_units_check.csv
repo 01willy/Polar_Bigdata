@@ -1,0 +1,5 @@
+file,tag,n_rows,n_keys_draw,n_values,placements,n_mismatch_n_lab,n_mismatch_n_blocks,passed
+lg_precheck__cpu__Canada__x__s1_runs.csv,lg_precheck,88,3,"0,40","block,cell",0,0,True
+lg_smoke__cpu__AL-3__i__s1_runs.csv,lg_smoke,173,5,"-1,0,3,40","block,cell",0,0,True
+lg_smoke__cpu__Canada__x__s1_runs.csv,lg_smoke,185,5,"-1,0,3,40","block,cell",0,0,True
+lg_smoke__cpu__Russia_W__x__s1_runs.csv,lg_smoke,120,3,"-1,0,3",cell,0,0,True

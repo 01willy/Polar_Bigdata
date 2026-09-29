@@ -1,0 +1,101 @@
+{
+ "check": "xenv_i",
+ "local": "python3.9.18 numpy1.26.4 sklearn1.3.0 catboost1.2.10 threads2",
+ "ref": "Rescale qOkSo python3.11.10 numpy2.4.6 sklearn1.9.1 catboost1.2.10 threads4",
+ "n_common": 88,
+ "max_phys": 0.0,
+ "max_ml": 0.4595535655557228,
+ "median_ml": 0.0,
+ "n_ml_over_002": 3,
+ "worst": [
+  [
+   0.4595535655557228,
+   [
+    "V1r",
+    "catboost_lo",
+    "1",
+    "cell",
+    "0",
+    "0",
+    "0",
+    "1.0"
+   ]
+  ],
+  [
+   0.40874032025677565,
+   [
+    "V1r",
+    "catboost_lo",
+    "1",
+    "cell",
+    "0",
+    "0",
+    "0",
+    "0.5"
+   ]
+  ],
+  [
+   0.2412394943170142,
+   [
+    "V1r",
+    "catboost_lo",
+    "1",
+    "cell",
+    "0",
+    "0",
+    "0",
+    "0.25"
+   ]
+  ],
+  [
+   0.006608122438542807,
+   [
+    "R2",
+    "ridge",
+    "1",
+    "cell",
+    "40",
+    "0",
+    "0",
+    "1.0"
+   ]
+  ],
+  [
+   0.0027580341970647737,
+   [
+    "D0",
+    "ridge",
+    "1",
+    "cell",
+    "0",
+    "0",
+    "0",
+    "1.0"
+   ]
+  ],
+  [
+   0.0023526902243027337,
+   [
+    "R2",
+    "ridge",
+    "1",
+    "cell",
+    "0",
+    "0",
+    "0",
+    "1.0"
+   ]
+  ]
+ ],
+ "_provenance": {
+  "copied_from": "/tmp/claude-1025/-home-willy010313-Polar-Bigdata/f184c85e-d6df-480e-b957-632f1f1fdf1d/scratchpad/xenv/xenv_i.json",
+  "copied_at": "2026-09-30 03:31",
+  "source_sha256": "5b1ea62ba60e028be7641a9d17835e8363c04608171d27839991663844e5b8cf",
+  "scope": "WRAPUP 8.4 (i) 가운데 qOkSo 사전 점검 단위(캐나다 x, 분할 1, n {0, 40}, 추출 0)만. 스모크 3단위(러시아 W x, AL-3 i, 캐나다 x)는 하지 않았다",
+  "note": "키별 대조 표(lgw_xenv_gate_i.csv)는 만들지 않았다. 이 파일은 요약(최대 차, 중앙값, 허용 차 초과 키 수, 상위 6키)이다. 로컬 재적합의 스레드는 2 다(8.4 는 4)",
+  "tolerance": {
+   "phys_cm": 1e-09,
+   "catboost_ridge_cm": 0.02
+  }
+ }
+}

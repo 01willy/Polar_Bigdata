@@ -114,3 +114,19 @@ data/processed/lgu/shards/
 data/processed/lgu/.running/
 # 원자적 쓰기가 중단되면 남는 임시 파일(<이름>.tmp<pid>)
 *.tmp[0-9]*
+
+# 결과 전 계산·지도 격자·새 지역 실행의 큰 산출(재생성 가능)과 봉인 산출
+data/processed/lgw/sealed/
+data/processed/lgw/xenv/
+data/processed/map_lena/*.csv.gz
+data/processed/map_lena/cov_parts/
+data/processed/map_lena/lena_grid_cells_v1.csv
+data/processed/ext_labels/cov_parts/
+data/processed/lgd/smoke/
+data/processed/lgd/shards/
+data/processed/lgf/shards/
+data/processed/lgf/nsel/
+data/processed/lgf/run_lgf*/
+data/processed/lgu/shards/
+data/processed/lgu/.running/
+data/processed/lgd/run_tables/

@@ -1,0 +1,712 @@
+{
+ "units": {
+  "inputs": {
+   "data/processed/fidelity_base_v3.csv": "71b5d3f6c297770d41aa7215e906e737842a3594005a5b52952bb636c752dc0f",
+   "data/processed/e5_soil_tdd_v3.csv": "711d0cd3ba0e2e410ee9a973f69db44f543459ffa03a1e6ea935db4a3884ef04",
+   "data/processed/lg_subregion_map_v1.csv": "87bd06f98bb1d141a54e251ed936491d6cb697fffd2e75313e6c0da6a0400e70"
+  },
+  "ref_shards": "results/rescale_lg_smoke/data/processed/lg/shards",
+  "ref_files": [
+   "lg_precheck__cpu__Canada__x__s1_runs.csv",
+   "lg_smoke__cpu__AL-3__i__s1_runs.csv",
+   "lg_smoke__cpu__Canada__x__s1_runs.csv",
+   "lg_smoke__cpu__Russia_W__x__s1_runs.csv"
+  ],
+  "n_detail": 4364,
+  "n_check_files": 4,
+  "n_check_failed": 0,
+  "subregion_src": "map:lg_subregion_map_v1.csv",
+  "subregion_kmeans_diff": 0,
+  "time": "2026-09-30 04:07:53 KST",
+  "argv": [
+   "--out-dir",
+   "data/processed/lgw",
+   "--threads",
+   "1",
+   "--mode",
+   "units"
+  ],
+  "nboot": null,
+  "nboot_asked": null,
+  "nboot_capped": null,
+  "threads": 1,
+  "threads_asked": 1,
+  "env_threads": {
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  },
+  "allow_local": false,
+  "code_sha_h39": "51a18650052e6b2d",
+  "code_sha_h40": "ffd0b3a76d36",
+  "code_sha_h42": "70ec084a1919",
+  "versions": {
+   "python": "3.9.18",
+   "numpy": "1.26.4",
+   "pandas": "2.1.4",
+   "scipy": "1.11.4",
+   "sklearn": "1.3.0"
+  },
+  "max_rss_mb": 217.1,
+  "nice": 10,
+  "resampling": "없음"
+ },
+ "sens-unit": {
+  "inputs": {
+   "data/processed/fidelity_base_v3.csv": "71b5d3f6c297770d41aa7215e906e737842a3594005a5b52952bb636c752dc0f",
+   "data/processed/e5_soil_tdd_v3.csv": "711d0cd3ba0e2e410ee9a973f69db44f543459ffa03a1e6ea935db4a3884ef04",
+   "data/processed/lg_subregion_map_v1.csv": "87bd06f98bb1d141a54e251ed936491d6cb697fffd2e75313e6c0da6a0400e70"
+  },
+  "E0": {
+   "Lena": {
+    "E0": 1.6192971927795523,
+    "n_src": 14429,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 1
+   },
+   "Canada": {
+    "E0": 1.591875052557122,
+    "n_src": 16697,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 20
+   },
+   "Alaska": {
+    "E0": 1.5045949676990291,
+    "n_src": 3860,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 1
+   },
+   "Russia_W": {
+    "E0": 1.589509736802223,
+    "n_src": 17436,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 0
+   }
+  },
+  "n_splits_asked": 200,
+  "draws": 5,
+  "n_splits_used": {
+   "Lena": 197,
+   "Canada": 200,
+   "Alaska": 200
+  },
+  "time": "2026-09-30 04:08:09 KST",
+  "argv": [
+   "--out-dir",
+   "data/processed/lgw",
+   "--threads",
+   "1",
+   "--mode",
+   "sens-unit"
+  ],
+  "nboot": null,
+  "nboot_asked": null,
+  "nboot_capped": null,
+  "threads": 1,
+  "threads_asked": 1,
+  "env_threads": {
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  },
+  "allow_local": false,
+  "code_sha_h39": "51a18650052e6b2d",
+  "code_sha_h40": "ffd0b3a76d36",
+  "code_sha_h42": "70ec084a1919",
+  "versions": {
+   "python": "3.9.18",
+   "numpy": "1.26.4",
+   "pandas": "2.1.4",
+   "scipy": "1.11.4",
+   "sklearn": "1.3.0"
+  },
+  "max_rss_mb": 217.9,
+  "nice": 10,
+  "resampling": "없음"
+ },
+ "sens-year": {
+  "inputs": {
+   "data/processed/fidelity_base_v3.csv": "71b5d3f6c297770d41aa7215e906e737842a3594005a5b52952bb636c752dc0f",
+   "data/processed/e5_soil_tdd_v3.csv": "711d0cd3ba0e2e410ee9a973f69db44f543459ffa03a1e6ea935db4a3884ef04",
+   "data/processed/lg_subregion_map_v1.csv": "87bd06f98bb1d141a54e251ed936491d6cb697fffd2e75313e6c0da6a0400e70",
+   "calm": "4198a0e06b76bb3d764656cc201cda417adfc2b4cfc7c0f67a186cc29ef66045"
+  },
+  "calm": {
+   "n_rows": 3819,
+   "n_ineq": 34,
+   "n_ineq_gt": 24,
+   "n_ineq_lt": 10,
+   "n_inactive": 117,
+   "n_empty": 122,
+   "n_valid": 3663
+  },
+  "match": {
+   "Russia_W": {
+    "n_cells": 31,
+    "n_single": 27,
+    "n_multi": 4,
+    "n_unmatched": 0,
+    "n_no_valid_year": 0,
+    "qa_abs_diff_median": 0.0,
+    "qa_abs_diff_max": 1.4210854715202004e-14,
+    "qa_n_within_1cm": 27,
+    "years_median": 13.0
+   },
+   "Russia_E": {
+    "n_cells": 30,
+    "n_single": 27,
+    "n_multi": 3,
+    "n_unmatched": 0,
+    "n_no_valid_year": 0,
+    "qa_abs_diff_median": 0.0,
+    "qa_abs_diff_max": 7.105427357601002e-15,
+    "qa_n_within_1cm": 27,
+    "years_median": 20.0
+   }
+  },
+  "E0": {
+   "Russia_W": {
+    "E0": 1.589509736802223,
+    "n_src": 17436,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 0
+   },
+   "Russia_E": {
+    "E0": 1.5911764170190192,
+    "n_src": 17437,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 0
+   }
+  },
+  "n_splits_asked": 200,
+  "draws": 5,
+  "time": "2026-09-30 04:08:17 KST",
+  "argv": [
+   "--out-dir",
+   "data/processed/lgw",
+   "--threads",
+   "1",
+   "--mode",
+   "sens-year"
+  ],
+  "nboot": null,
+  "nboot_asked": null,
+  "nboot_capped": null,
+  "threads": 1,
+  "threads_asked": 1,
+  "env_threads": {
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  },
+  "allow_local": false,
+  "code_sha_h39": "51a18650052e6b2d",
+  "code_sha_h40": "ffd0b3a76d36",
+  "code_sha_h42": "70ec084a1919",
+  "versions": {
+   "python": "3.9.18",
+   "numpy": "1.26.4",
+   "pandas": "2.1.4",
+   "scipy": "1.11.4",
+   "sklearn": "1.3.0"
+  },
+  "max_rss_mb": 217.3,
+  "nice": 10,
+  "resampling": "없음"
+ },
+ "sc3": {
+  "inputs": {
+   "data/processed/fidelity_base_v3.csv": "71b5d3f6c297770d41aa7215e906e737842a3594005a5b52952bb636c752dc0f",
+   "data/processed/e5_soil_tdd_v3.csv": "711d0cd3ba0e2e410ee9a973f69db44f543459ffa03a1e6ea935db4a3884ef04",
+   "data/processed/lg_subregion_map_v1.csv": "87bd06f98bb1d141a54e251ed936491d6cb697fffd2e75313e6c0da6a0400e70"
+  },
+  "E0": {
+   "Lena|x": {
+    "E0": 1.6192971927795523,
+    "n_src": 14429,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 1
+   },
+   "Canada|x": {
+    "E0": 1.591875052557122,
+    "n_src": 16697,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 20
+   },
+   "Alaska|x": {
+    "E0": 1.5045949676990291,
+    "n_src": 3860,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 1
+   },
+   "Russia_W|x": {
+    "E0": 1.589509736802223,
+    "n_src": 17436,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 0
+   },
+   "Russia_E|x": {
+    "E0": 1.5911764170190192,
+    "n_src": 17437,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 0
+   },
+   "AL-1|x": {
+    "E0": 1.5044425651145277,
+    "n_src": 3861,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 8452,
+    "n_buffer_excluded": 0
+   },
+   "AL-2|x": {
+    "E0": 1.5044425651145277,
+    "n_src": 3861,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 10115,
+    "n_buffer_excluded": 0
+   },
+   "AL-3|x": {
+    "E0": 1.5044425651145277,
+    "n_src": 3861,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 12955,
+    "n_buffer_excluded": 0
+   },
+   "AL-4|x": {
+    "E0": 1.5044425651145277,
+    "n_src": 3861,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 13135,
+    "n_buffer_excluded": 0
+   },
+   "AL-5|x": {
+    "E0": 1.5045949676990291,
+    "n_src": 3860,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 12987,
+    "n_buffer_excluded": 1
+   },
+   "AL-6|x": {
+    "E0": 1.5044425651145277,
+    "n_src": 3861,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 10386,
+    "n_buffer_excluded": 0
+   },
+   "CA-2|x": {
+    "E0": 1.591279327890019,
+    "n_src": 16717,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 355,
+    "n_buffer_excluded": 0
+   },
+   "CA-3|x": {
+    "E0": 1.591875052557122,
+    "n_src": 16697,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 401,
+    "n_buffer_excluded": 20
+   },
+   "LE-1|x": {
+    "E0": 1.6192971927795523,
+    "n_src": 14429,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 1251,
+    "n_buffer_excluded": 1
+   },
+   "LE-2|x": {
+    "E0": 1.6192971927795523,
+    "n_src": 14429,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 1786,
+    "n_buffer_excluded": 1
+   }
+  },
+  "reps": 20,
+  "taus": [
+   0.05,
+   0.025,
+   0.1,
+   0.2
+  ],
+  "tau_main": 0.05,
+  "splits": {
+   "Lena|x": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "Canada|x": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "Alaska|x": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "Russia_W|x": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "Russia_E|x": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "AL-1|x": [
+    2,
+    3,
+    4,
+    5
+   ],
+   "AL-2|x": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "AL-3|x": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "AL-4|x": [
+    1,
+    4,
+    5
+   ],
+   "AL-5|x": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "AL-6|x": [
+    1,
+    3,
+    4,
+    5
+   ],
+   "CA-2|x": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "CA-3|x": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "LE-1|x": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "LE-2|x": [
+    1,
+    2,
+    3
+   ]
+  },
+  "sealed": {
+   "file": "sealed/lgw_sc3_full.csv",
+   "n_rows": 192,
+   "contrasts_sealed": [
+    "rule-P0",
+    "cap-P0"
+   ],
+   "cols_sealed": [
+    "rmse_A",
+    "rmse_B"
+   ],
+   "cap_all_A": [
+    "Russia_E",
+    "Russia_W"
+   ]
+  },
+  "main": {
+   "file": "lgw_sc3.csv",
+   "n_rows": 64,
+   "contrasts": [
+    "rule-cap"
+   ]
+  },
+  "time": "2026-09-30 04:08:36 KST",
+  "argv": [
+   "--out-dir",
+   "data/processed/lgw",
+   "--threads",
+   "1",
+   "--mode",
+   "sc3",
+   "--allow-local"
+  ],
+  "nboot": 10000,
+  "nboot_asked": 10000,
+  "nboot_capped": false,
+  "threads": 1,
+  "threads_asked": 1,
+  "env_threads": {
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  },
+  "allow_local": true,
+  "code_sha_h39": "51a18650052e6b2d",
+  "code_sha_h40": "ffd0b3a76d36",
+  "code_sha_h42": "70ec084a1919",
+  "versions": {
+   "python": "3.9.18",
+   "numpy": "1.26.4",
+   "pandas": "2.1.4",
+   "scipy": "1.11.4",
+   "sklearn": "1.3.0"
+  },
+  "max_rss_mb": 413.4,
+  "nice": 10
+ },
+ "xenv-gate-ii": {
+  "local": "data/processed/lgw/xenv/lgx",
+  "ref": "results/rescale_lgx_smoke2/data/processed/lgx",
+  "prefix": "lgx_precheck",
+  "summary": {
+   "n_tables": 12,
+   "n_numeric_cols": 204,
+   "n_string_cols": 121,
+   "max_abs_diff": 1.4210854715202004e-14,
+   "n_cols_over_tol": 0,
+   "n_string_mismatch": 0,
+   "n_shape_fail": 0,
+   "n_missing_local": 0,
+   "tables_empty": [
+    "lgx_precheck_failed.csv",
+    "lgx_precheck_lg_aux.csv",
+    "lgx_precheck_region_inference.csv"
+   ],
+   "skipped_cols": [
+    "device",
+    "elapsed_s"
+   ],
+   "n_tables_empty": 3
+  },
+  "time": "2026-09-30 04:08:37 KST",
+  "argv": [
+   "--out-dir",
+   "data/processed/lgw",
+   "--threads",
+   "1",
+   "--mode",
+   "xenv-gate",
+   "--xenv-local",
+   "data/processed/lgw/xenv/lgx",
+   "--xenv-ref",
+   "results/rescale_lgx_smoke2/data/processed/lgx",
+   "--xenv-prefix",
+   "lgx_precheck",
+   "--xenv-name",
+   "ii"
+  ],
+  "nboot": null,
+  "nboot_asked": null,
+  "nboot_capped": null,
+  "threads": 1,
+  "threads_asked": 1,
+  "env_threads": {
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  },
+  "allow_local": false,
+  "code_sha_h39": "51a18650052e6b2d",
+  "code_sha_h40": "ffd0b3a76d36",
+  "code_sha_h42": "70ec084a1919",
+  "versions": {
+   "python": "3.9.18",
+   "numpy": "1.26.4",
+   "pandas": "2.1.4",
+   "scipy": "1.11.4",
+   "sklearn": "1.3.0"
+  },
+  "max_rss_mb": 165.5,
+  "nice": 10,
+  "resampling": "없음"
+ },
+ "xenv-gate-ii_smoke": {
+  "local": "data/processed/lgw/xenv/lgx",
+  "ref": "results/rescale_lgx_smoke2/data/processed/lgx",
+  "prefix": "lgx_smoke",
+  "summary": {
+   "n_tables": 12,
+   "n_numeric_cols": 222,
+   "n_string_cols": 136,
+   "max_abs_diff": 2.1310029296728317e-09,
+   "n_cols_over_tol": 0,
+   "n_string_mismatch": 0,
+   "n_shape_fail": 0,
+   "n_missing_local": 0,
+   "tables_empty": [
+    "lgx_smoke_failed.csv",
+    "lgx_smoke_lg_aux.csv"
+   ],
+   "skipped_cols": [
+    "device",
+    "elapsed_s"
+   ],
+   "n_tables_empty": 2
+  },
+  "time": "2026-09-30 04:08:39 KST",
+  "argv": [
+   "--out-dir",
+   "data/processed/lgw",
+   "--threads",
+   "1",
+   "--mode",
+   "xenv-gate",
+   "--xenv-local",
+   "data/processed/lgw/xenv/lgx",
+   "--xenv-ref",
+   "results/rescale_lgx_smoke2/data/processed/lgx",
+   "--xenv-prefix",
+   "lgx_smoke",
+   "--xenv-name",
+   "ii_smoke"
+  ],
+  "nboot": null,
+  "nboot_asked": null,
+  "nboot_capped": null,
+  "threads": 1,
+  "threads_asked": 1,
+  "env_threads": {
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  },
+  "allow_local": false,
+  "code_sha_h39": "51a18650052e6b2d",
+  "code_sha_h40": "ffd0b3a76d36",
+  "code_sha_h42": "70ec084a1919",
+  "versions": {
+   "python": "3.9.18",
+   "numpy": "1.26.4",
+   "pandas": "2.1.4",
+   "scipy": "1.11.4",
+   "sklearn": "1.3.0"
+  },
+  "max_rss_mb": 172.8,
+  "nice": 10,
+  "resampling": "없음"
+ },
+ "xenv-gate-ii_ladder": {
+  "local": "data/processed/lgw/xenv/lgx/ladder",
+  "ref": "results/rescale_lgx_smoke2/data/processed/lgx/ladder",
+  "prefix": "lgv_smoke",
+  "summary": {
+   "n_tables": 4,
+   "n_numeric_cols": 72,
+   "n_string_cols": 50,
+   "max_abs_diff": 0.0,
+   "n_cols_over_tol": 0,
+   "n_string_mismatch": 0,
+   "n_shape_fail": 0,
+   "n_missing_local": 0,
+   "tables_empty": [],
+   "skipped_cols": [],
+   "n_tables_empty": 0
+  },
+  "time": "2026-09-30 04:08:40 KST",
+  "argv": [
+   "--out-dir",
+   "data/processed/lgw",
+   "--threads",
+   "1",
+   "--mode",
+   "xenv-gate",
+   "--xenv-local",
+   "data/processed/lgw/xenv/lgx/ladder",
+   "--xenv-ref",
+   "results/rescale_lgx_smoke2/data/processed/lgx/ladder",
+   "--xenv-prefix",
+   "lgv_smoke",
+   "--xenv-name",
+   "ii_ladder"
+  ],
+  "nboot": null,
+  "nboot_asked": null,
+  "nboot_capped": null,
+  "threads": 1,
+  "threads_asked": 1,
+  "env_threads": {
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  },
+  "allow_local": false,
+  "code_sha_h39": "51a18650052e6b2d",
+  "code_sha_h40": "ffd0b3a76d36",
+  "code_sha_h42": "70ec084a1919",
+  "versions": {
+   "python": "3.9.18",
+   "numpy": "1.26.4",
+   "pandas": "2.1.4",
+   "scipy": "1.11.4",
+   "sklearn": "1.3.0"
+  },
+  "max_rss_mb": 165.4,
+  "nice": 10,
+  "resampling": "없음"
+ }
+}

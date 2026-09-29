@@ -1,0 +1,524 @@
+{
+ "check": "xenv_i",
+ "plan": "WRAPUP 8.4 (i), LG 개정 14",
+ "script": "scripts/2_evaluation/lgw_xenv_gate_i.py",
+ "script_sha256": "3eee117b630d5b8175a2e2aaa6612314731363580a914f663fbca8fdb91424b7",
+ "created": "2026-09-30 04:04",
+ "local": {
+  "python": "3.9.18",
+  "numpy": "1.26.4",
+  "pandas": "2.1.4",
+  "host": "user",
+  "sklearn": "1.3.0",
+  "catboost": "1.2.10",
+  "scipy": "1.11.4"
+ },
+ "local_threads": 1,
+ "tag": "lgxe",
+ "ref": "Rescale(qOkSo 사전 점검과 스모크 조각) python 3.11.10, numpy 2.4.6, scikit-learn 1.9.1, catboost 1.2.10, 스레드 4(WRAPUP 8.3)",
+ "scope": {
+  "units_expected": 4,
+  "units_done": 4,
+  "units": [
+   "precheck:Canada|x|s1",
+   "smoke:Russia_W|x|s1",
+   "smoke:AL-3|i|s1",
+   "smoke:Canada|x|s1"
+  ],
+  "threads": 1,
+  "registered": "8.4 (i): 네 단위, --threads 4, tag lgxe, 출력 data/processed/lgw/xenv/lg/"
+ },
+ "tolerance": {
+  "phys_cm": 1e-09,
+  "ridge_catboost_cm": 0.02
+ },
+ "key_class_rule": "물리식 = P0–P3(학습기 none), ridge = V1(학습기 none)과 ridge 학습기, CatBoost = catboost_lo",
+ "units": [
+  {
+   "unit": "precheck:Canada|x|s1",
+   "n_keys_local": 88,
+   "n_keys_ref": 88,
+   "n_common": 88,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "cfg_common": [
+    "fc604644f8d9",
+    "fc604644f8d9"
+   ],
+   "code_sha": [
+    "ffd0b3a76d36",
+    "ffd0b3a76d36"
+   ],
+   "threads": [
+    4,
+    4
+   ],
+   "status": [
+    "ok",
+    "ok"
+   ],
+   "elapsed_s": [
+    33.3,
+    22.2
+   ]
+  },
+  {
+   "unit": "smoke:Russia_W|x|s1",
+   "n_keys_local": 120,
+   "n_keys_ref": 120,
+   "n_common": 120,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "cfg_common": [
+    "185071509def",
+    "185071509def"
+   ],
+   "code_sha": [
+    "ffd0b3a76d36",
+    "ffd0b3a76d36"
+   ],
+   "threads": [
+    4,
+    4
+   ],
+   "status": [
+    "ok",
+    "ok"
+   ],
+   "elapsed_s": [
+    25.7,
+    17.9
+   ]
+  },
+  {
+   "unit": "smoke:AL-3|i|s1",
+   "n_keys_local": 173,
+   "n_keys_ref": 173,
+   "n_common": 173,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "cfg_common": [
+    "185071509def",
+    "185071509def"
+   ],
+   "code_sha": [
+    "ffd0b3a76d36",
+    "ffd0b3a76d36"
+   ],
+   "threads": [
+    4,
+    4
+   ],
+   "status": [
+    "ok",
+    "ok"
+   ],
+   "elapsed_s": [
+    32.5,
+    24.1
+   ]
+  },
+  {
+   "unit": "smoke:Canada|x|s1",
+   "n_keys_local": 185,
+   "n_keys_ref": 185,
+   "n_common": 185,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "cfg_common": [
+    "185071509def",
+    "185071509def"
+   ],
+   "code_sha": [
+    "ffd0b3a76d36",
+    "ffd0b3a76d36"
+   ],
+   "threads": [
+    4,
+    4
+   ],
+   "status": [
+    "ok",
+    "ok"
+   ],
+   "elapsed_s": [
+    86.0,
+    57.2
+   ]
+  }
+ ],
+ "refit": {
+  "precheck": {
+   "n_fail": 0,
+   "executed": 1,
+   "resumed": 0,
+   "argv": [
+    "--precheck",
+    "--part",
+    "cpu",
+    "--tag",
+    "lgxe",
+    "--out-dir",
+    "/home/willy010313/Polar_Bigdata/data/processed/lgw/xenv/lg",
+    "--threads",
+    "4",
+    "--workers",
+    "0",
+    "--allow-local",
+    "--no-summarize"
+   ],
+   "unit_elapsed_s": 33.3
+  },
+  "smoke": {
+   "n_fail": 0,
+   "executed": 3,
+   "resumed": 0,
+   "argv": [
+    "--smoke",
+    "--part",
+    "cpu",
+    "--tag",
+    "lgxe",
+    "--out-dir",
+    "/home/willy010313/Polar_Bigdata/data/processed/lgw/xenv/lg",
+    "--threads",
+    "4",
+    "--workers",
+    "0",
+    "--allow-local",
+    "--no-summarize"
+   ],
+   "unit_elapsed_s": {
+    "Canada|x": 86.0,
+    "Russia_W|x": 25.7,
+    "AL-3|i": 32.5
+   }
+  }
+ },
+ "refit_elapsed_s": 179.7,
+ "n_common": 566,
+ "max_phys": 2.842170943040401e-14,
+ "max_ml": 0.4594964609033738,
+ "median_ml": 0.0,
+ "n_ml_over_002": 12,
+ "by_class": {
+  "phys": {
+   "n_keys": 46,
+   "max_diff_cm": 2.842170943040401e-14,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 0,
+   "methods_over_tol": []
+  },
+  "ridge": {
+   "n_keys": 83,
+   "max_diff_cm": 0.02047793942936238,
+   "median_diff_cm": 0.0003932317754689052,
+   "n_over_tol": 1,
+   "methods_over_tol": [
+    "R2"
+   ]
+  },
+  "catboost": {
+   "n_keys": 437,
+   "max_diff_cm": 0.4594964609033738,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 11,
+   "methods_over_tol": [
+    "V1r"
+   ]
+  },
+  "ml": {
+   "n_keys": 520,
+   "max_diff_cm": 0.4594964609033738,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 12
+  }
+ },
+ "by_class_base": {
+  "phys": {
+   "n_keys": 30,
+   "max_diff_cm": 7.105427357601002e-15,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 0,
+   "methods_over_tol": []
+  },
+  "ridge": {
+   "n_keys": 0,
+   "max_diff_cm": null,
+   "median_diff_cm": null,
+   "n_over_tol": 0,
+   "methods_over_tol": []
+  },
+  "catboost": {
+   "n_keys": 143,
+   "max_diff_cm": 1.4210854715202004e-14,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 0,
+   "methods_over_tol": []
+  },
+  "ml": {
+   "n_keys": 143,
+   "max_diff_cm": 1.4210854715202004e-14,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 0
+  }
+ },
+ "blocks_equal": true,
+ "verdict": "물리식 통과, CatBoost·ridge 불통과",
+ "pass_phys": true,
+ "pass_ml": false,
+ "verdict_base": "통과",
+ "pass_phys_base": true,
+ "pass_ml_base": true,
+ "verdict_rule": "주 판정 = 8.4 의 등록 범위(공통 키 전부). 기준 방법 범위는 병기(판정에 쓰지 않는다)",
+ "v1_keys": {
+  "n": 13,
+  "max_diff_cm": 0.004172742914143157,
+  "max_by_unit": {
+   "precheck:Canada|x|s1": 0.0018852692319910602,
+   "smoke:AL-3|i|s1": 0.0008891923180662786,
+   "smoke:Canada|x|s1": 0.0019910873521027384,
+   "smoke:Russia_W|x|s1": 0.004172742914143157
+  }
+ },
+ "catboost_excl_v1r": {
+  "n": 398,
+  "max_diff_cm": 1.4210854715202004e-14
+ },
+ "by_method": {
+  "catboost|D0": {
+   "n": 40,
+   "max_diff_cm": 0.0,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 0
+  },
+  "catboost|D1": {
+   "n": 13,
+   "max_diff_cm": 0.0,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 0
+  },
+  "catboost|R0": {
+   "n": 129,
+   "max_diff_cm": 0.0,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 0
+  },
+  "catboost|R1": {
+   "n": 138,
+   "max_diff_cm": 1.4210854715202004e-14,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 0
+  },
+  "catboost|R2": {
+   "n": 39,
+   "max_diff_cm": 7.105427357601002e-15,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 0
+  },
+  "catboost|R3": {
+   "n": 39,
+   "max_diff_cm": 0.0,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 0
+  },
+  "catboost|V1r": {
+   "n": 39,
+   "max_diff_cm": 0.4594964609033738,
+   "median_diff_cm": 0.002072172938994754,
+   "n_over_tol": 11
+  },
+  "phys|P0": {
+   "n": 4,
+   "max_diff_cm": 0.0,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 0
+  },
+  "phys|P1": {
+   "n": 16,
+   "max_diff_cm": 7.105427357601002e-15,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 0
+  },
+  "phys|P2": {
+   "n": 13,
+   "max_diff_cm": 7.105427357601002e-15,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 0
+  },
+  "phys|P3": {
+   "n": 13,
+   "max_diff_cm": 2.842170943040401e-14,
+   "median_diff_cm": 0.0,
+   "n_over_tol": 0
+  },
+  "ridge|D0": {
+   "n": 10,
+   "max_diff_cm": 0.002304419479145281,
+   "median_diff_cm": 0.0010588880254296384,
+   "n_over_tol": 0
+  },
+  "ridge|R1": {
+   "n": 30,
+   "max_diff_cm": 0.0025185577339215115,
+   "median_diff_cm": 0.0004023007308155968,
+   "n_over_tol": 0
+  },
+  "ridge|R2": {
+   "n": 30,
+   "max_diff_cm": 0.02047793942936238,
+   "median_diff_cm": 0.00017480676569725517,
+   "n_over_tol": 1
+  },
+  "ridge|V1": {
+   "n": 13,
+   "max_diff_cm": 0.004172742914143157,
+   "median_diff_cm": 0.0017679534822505616,
+   "n_over_tol": 0
+  }
+ },
+ "over_tol_keys": [
+  {
+   "unit": "precheck:Canada|x|s1",
+   "key": "[\"V1r\", \"catboost_lo\", \"1\", \"cell\", \"0\", \"0\", \"0\", \"0.25\"]",
+   "key_class": "catboost",
+   "abs_diff_cm": 0.24112156353510272
+  },
+  {
+   "unit": "precheck:Canada|x|s1",
+   "key": "[\"V1r\", \"catboost_lo\", \"1\", \"cell\", \"0\", \"0\", \"0\", \"0.5\"]",
+   "key_class": "catboost",
+   "abs_diff_cm": 0.4086484279564786
+  },
+  {
+   "unit": "precheck:Canada|x|s1",
+   "key": "[\"V1r\", \"catboost_lo\", \"1\", \"cell\", \"0\", \"0\", \"0\", \"1.0\"]",
+   "key_class": "catboost",
+   "abs_diff_cm": 0.4594964609033738
+  },
+  {
+   "unit": "smoke:Russia_W|x|s1",
+   "key": "[\"R2\", \"ridge\", \"1\", \"cell\", \"-1\", \"0\", \"0\", \"1.0\"]",
+   "key_class": "ridge",
+   "abs_diff_cm": 0.02047793942936238
+  },
+  {
+   "unit": "smoke:AL-3|i|s1",
+   "key": "[\"V1r\", \"catboost_lo\", \"1\", \"cell\", \"0\", \"0\", \"0\", \"0.5\"]",
+   "key_class": "catboost",
+   "abs_diff_cm": 0.038662677129480016
+  },
+  {
+   "unit": "smoke:AL-3|i|s1",
+   "key": "[\"V1r\", \"catboost_lo\", \"1\", \"cell\", \"0\", \"0\", \"0\", \"1.0\"]",
+   "key_class": "catboost",
+   "abs_diff_cm": 0.07649854909188036
+  },
+  {
+   "unit": "smoke:Canada|x|s1",
+   "key": "[\"V1r\", \"catboost_lo\", \"1\", \"cell\", \"0\", \"0\", \"0\", \"0.25\"]",
+   "key_class": "catboost",
+   "abs_diff_cm": 0.24112156353510272
+  },
+  {
+   "unit": "smoke:Canada|x|s1",
+   "key": "[\"V1r\", \"catboost_lo\", \"1\", \"cell\", \"0\", \"0\", \"0\", \"0.5\"]",
+   "key_class": "catboost",
+   "abs_diff_cm": 0.4086484279564786
+  },
+  {
+   "unit": "smoke:Canada|x|s1",
+   "key": "[\"V1r\", \"catboost_lo\", \"1\", \"cell\", \"0\", \"0\", \"0\", \"1.0\"]",
+   "key_class": "catboost",
+   "abs_diff_cm": 0.4594964609033738
+  },
+  {
+   "unit": "smoke:Canada|x|s1",
+   "key": "[\"V1r\", \"catboost_lo\", \"1\", \"cell\", \"-1\", \"0\", \"0\", \"0.25\"]",
+   "key_class": "catboost",
+   "abs_diff_cm": 0.06031476042139161
+  },
+  {
+   "unit": "smoke:Canada|x|s1",
+   "key": "[\"V1r\", \"catboost_lo\", \"1\", \"cell\", \"-1\", \"0\", \"0\", \"0.5\"]",
+   "key_class": "catboost",
+   "abs_diff_cm": 0.12148374984335675
+  },
+  {
+   "unit": "smoke:Canada|x|s1",
+   "key": "[\"V1r\", \"catboost_lo\", \"1\", \"cell\", \"-1\", \"0\", \"0\", \"1.0\"]",
+   "key_class": "catboost",
+   "abs_diff_cm": 0.23893838062385697
+  }
+ ],
+ "by_unit": {
+  "precheck:Canada|x|s1": {
+   "n_keys": 88,
+   "max_phys": 0.0,
+   "max_ml": 0.4594964609033738,
+   "n_over_tol": 3
+  },
+  "smoke:AL-3|i|s1": {
+   "n_keys": 173,
+   "max_phys": 1.7763568394002505e-15,
+   "max_ml": 0.07649854909188036,
+   "n_over_tol": 2
+  },
+  "smoke:Canada|x|s1": {
+   "n_keys": 185,
+   "max_phys": 7.105427357601002e-15,
+   "max_ml": 0.4594964609033738,
+   "n_over_tol": 6
+  },
+  "smoke:Russia_W|x|s1": {
+   "n_keys": 120,
+   "max_phys": 2.842170943040401e-14,
+   "max_ml": 0.02047793942936238,
+   "n_over_tol": 1
+  }
+ },
+ "local_ref": {
+  "source": "data/processed/lgw/xenv/lg_threads2/shards:lg_precheck",
+  "role": "병기(판정에 쓰지 않는다): 같은 로컬 환경에서 스레드 수만 다른 재적합과의 차",
+  "units": [
+   {
+    "unit": "local-ref:precheck:Canada|x|s1",
+    "threads": [
+     4,
+     2
+    ],
+    "n_common": 88,
+    "by_class": {
+     "phys": {
+      "n_keys": 8,
+      "max_diff_cm": 0.0,
+      "median_diff_cm": 0.0,
+      "n_over_tol": 0,
+      "methods_over_tol": []
+     },
+     "ridge": {
+      "n_keys": 16,
+      "max_diff_cm": 0.006084699325427323,
+      "median_diff_cm": 0.00020973773731824963,
+      "n_over_tol": 0,
+      "methods_over_tol": []
+     },
+     "catboost": {
+      "n_keys": 64,
+      "max_diff_cm": 0.00019784009352719067,
+      "median_diff_cm": 0.0,
+      "n_over_tol": 0,
+      "methods_over_tol": []
+     },
+     "ml": {
+      "n_keys": 80,
+      "max_diff_cm": 0.006084699325427323,
+      "median_diff_cm": 0.0,
+      "n_over_tol": 0
+     }
+    }
+   }
+  ]
+ },
+ "refit_note": "재적합 기록은 data/processed/lgw/logs/xenv_i_20260930.log(04:00–04:03)에서 옮겼다. 그 뒤 local-ref 대조의 단위 짝 오류를 고쳐 대조만 다시 했다(--compare-only)"
+}

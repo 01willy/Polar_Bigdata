@@ -1,0 +1,613 @@
+{
+ "created": "2026-09-30 03:59 KST",
+ "script": "scripts/1_data_prep/build_map_grid_lena_v1.py",
+ "script_sha256": "b48b2a59a76bf4560f23b249fcf419d0b638e697149b91d1168628db6b61d181",
+ "plan": "docs/EXPERIMENT_PLAN_WRAPUP_2026-09-30.md 6.2–6.5, 6.10 (커밋 316714c)",
+ "out_dir_note": "부록 6.10 의 data/processed/map/ 대신 워크플로 지시의 data/processed/map_lena/ 에 둔다",
+ "grid": {
+  "box": {
+   "lat0": 71.5,
+   "lat1": 73.6,
+   "lon0": 123.3,
+   "lon1": 130.1
+  },
+  "cell_deg": 0.009,
+  "rule": "ky = floor(lat/0.009), kx = floor(lon*cos(phi)/0.009), phi = (ky+0.5)*0.009; 셀 중심 lat_c = (ky+0.5)*0.009, lon_c = (kx+0.5)*0.009/cos(phi); 중심이 영역 안인 셀",
+  "n_cells": 53011,
+  "n_rows_ky": 234,
+  "cell_index_fn": "scripts/1_data_prep/build_ext_cells_v1.py:cell_index"
+ },
+ "covariates": {
+  "module": "scripts/1_data_prep/ext_cells_covariates_v1.py",
+  "module_sha256": "8ba43fe7fd53bb19b7b8e8d51507d2ed17e48a4779931c640d8a1e85e922eed9",
+  "stages": [
+   "stage_dem",
+   "stage_e5",
+   "stage_cci",
+   "stage_sg(allow_download=False)"
+  ],
+  "parts_dir": "data/processed/map_lena/cov_parts",
+  "tags": [
+   "map_lena_grid",
+   "map_lena_qa"
+  ],
+  "era5land": {
+   "path": "data/raw/era5land/nh_monthly_2015-2020.nc",
+   "bytes": 343381638,
+   "sha256": "3558df2aa9b608208b8c213b3b4a8b9396e83677d94f1c6b44cbc4010c4a0692"
+  },
+  "cci_alt_files": {
+   "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1997-fv04.0.nc": "66340e7c17f55aed0824b3b9e2dd3a6f5c306b8f178a14ff0faaf71240476be9",
+   "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1998-fv04.0.nc": "b31b0cb6d5b182f048fed56ae8a0451cc368a1c159a11e60d915cbb32693118f",
+   "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1999-fv04.0.nc": "536d7eeb844be75f181025d963d40718a794a2ad956ef1d3af2cd7427aba6da1",
+   "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2000-fv04.0.nc": "4d4575f7c4689bfb602a4064fdb6672723b0d3150bc9ee8bc4520246b7a0115a",
+   "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2001-fv04.0.nc": "fe36e0b13b5486b5518b14ba39c095949f741182b2312a8a594845b068c21430",
+   "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2002-fv04.0.nc": "65e258d58f83022205fcc056ba7f9c32e1b43add1f87d809b6e7a23c1034e07d",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2003-fv04.0.nc": "0061d5107d47df484ee21f592afaa4677fc6ce11899ce4ee1a7c0bf7f0ef9be7",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2004-fv04.0.nc": "89dacedec58d83ee8411b5af1a19c4db868411ec089c05e5015bd0a1a7d06491",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2005-fv04.0.nc": "4f2608f2a297dbb9e4a8b81f63187102272de421739a1b5563286f2414b60bcd",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2006-fv04.0.nc": "76880460304dbeedd3df03a8aed9ec91189766fe544d63846ba4bc77f78fe961",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2007-fv04.0.nc": "bd7d3004b4300a72f0d33e55777d5d2801917b01b6b7f6555feadf6849d01616",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2008-fv04.0.nc": "d434d9e8eb30e3086fd1077b87d19c5c211c151ac7022991d7f6fc45e550c55d",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2009-fv04.0.nc": "f79b8b014484809aaf0b8494fb9206770c241d4b21dfdaab8f89a0734ddc6dbb",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2010-fv04.0.nc": "894baec86bdca53da50bdfc278b9183118caa1b3d1a1df8653480dddea6ad872",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2011-fv04.0.nc": "9048e7d1830550ea9f85cac292f75f42494b21110ab0bd5078f3f08bca5ed2cb",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2012-fv04.0.nc": "d4ab2165528cb299824c7a236b953cc5342c2c2ab03e0d52d14ea35888872747",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2013-fv04.0.nc": "6321853eabd8626677f11e0caa9b1ac2b70f507330153cffdb8462c729607a72",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2014-fv04.0.nc": "4d9bb2441d97e7a10f6e7e8fc7df32b1c508e14e01a4c211074cf19bfa490122",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2015-fv04.0.nc": "cd1f9bef713d91042510d9af179239191c91d57ac99d153b39e9c794e6efb6e6",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2016-fv04.0.nc": "87947c88f2670270e0fd2f9a7a24911cc0d9542c27720d2c0e12da26071e7b52",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2017-fv04.0.nc": "61cc6b1bbc4d68b250e35ea303f15c18c92587502e1f0f03ebc46afd8f8f0c53",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2018-fv04.0.nc": "ab563010050ab2a905d9a1ca6e4f90768cc2002bb4076614c827ca6648a05f92",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2019-fv04.0.nc": "03f77b97684f534b00130668b24668b39f0549b5499c1dfd2ab8fb6784dde7e2",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2020-fv04.0.nc": "e2b000b2d3ba0de3b2fb2905cd1e4b521c8d818694dc5f704961b46f5ef54bf4",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2021-fv04.0.nc": "0e3fba823495a9703161154e755d135c28de73a3a327ff1716bd46e499c8a5c6"
+  },
+  "soilgrids_windows": [
+   "lena"
+  ],
+  "soilgrids_files": {
+   "lena/bdod_5-15cm_mean.tif": "661e67c25fc43a6e3b45b07f99cc8ec728d360bb087590546783ba61f6fcfea0",
+   "lena/cfvo_5-15cm_mean.tif": "59c3e03baec562d808844318b68db4448882883f3dfb329728ee5514fb168799",
+   "lena/clay_5-15cm_mean.tif": "46dcb0218f061725d6699e0f168f7af570c524d4954b0336687b8f5ad15e935a",
+   "lena/phh2o_5-15cm_mean.tif": "8e068915ec0d6b58987c63c569290fdbeb5067ccf95feb0584efb038af319097",
+   "lena/sand_5-15cm_mean.tif": "b132716226b94077931e5c6ddf6139fbec96cfdcf3bcbab02f6b121162ee1acf",
+   "lena/silt_5-15cm_mean.tif": "81cd2fa65c66f2748a379d447609b6e7fd348b381c06b788ad0404a4349d9f56",
+   "lena/soc_0-5cm_mean.tif": "c2355a85cb29a83b45e598383d51461335e35a08e470280577f2e5781bc0cfc5",
+   "lena/soc_15-30cm_mean.tif": "e7b3c02f556add2afc27a29ddf94fe0e2a0315607165d0e5d7e729dd791c1089",
+   "lena/soc_5-15cm_mean.tif": "6833b21ca3070e688a2ff434ab8858e481d7e939820f5a4131d056eecf09a49d"
+  },
+  "soil_tdd_le0_set_nan": 0,
+  "e5_fallback": {
+   "0.0": 40324,
+   "0.2": 7159,
+   "0.5": 4190,
+   "nan": 1338
+  },
+  "soil_fallback": {
+   "0.0": 40324,
+   "0.1": 5093,
+   "0.2": 2066,
+   "0.3": 1787,
+   "0.4": 1364,
+   "nan": 1338,
+   "0.5": 1039
+  }
+ },
+ "dem_tiles": [
+  {
+   "tlat": 71,
+   "tlon": 123,
+   "tile": "Copernicus_DSM_COG_10_N71_00_E123_00_DEM",
+   "status": "downloaded",
+   "bytes": 15099029.0,
+   "sha256": "341189b82dcca45fdf75208093efe5d31241ac9b6f6cfa4af38a091a3ac49f04"
+  },
+  {
+   "tlat": 71,
+   "tlon": 124,
+   "tile": "Copernicus_DSM_COG_10_N71_00_E124_00_DEM",
+   "status": "downloaded",
+   "bytes": 14639339.0,
+   "sha256": "04f6a40662283f553c9882f236a4040cfe810286b60114bebb57b90b40a44a3e"
+  },
+  {
+   "tlat": 71,
+   "tlon": 125,
+   "tile": "Copernicus_DSM_COG_10_N71_00_E125_00_DEM",
+   "status": "downloaded",
+   "bytes": 14535206.0,
+   "sha256": "544be9010e595f87d18f9a425db87b86c954347e4c62947af6ad8060f3a2117d"
+  },
+  {
+   "tlat": 71,
+   "tlon": 126,
+   "tile": "Copernicus_DSM_COG_10_N71_00_E126_00_DEM",
+   "status": "downloaded",
+   "bytes": 14623880.0,
+   "sha256": "1b8d9835e092a1b17efe1668f572511a231cbfe57a87a82a9747386a5c750db3"
+  },
+  {
+   "tlat": 71,
+   "tlon": 127,
+   "tile": "Copernicus_DSM_COG_10_N71_00_E127_00_DEM",
+   "status": "exists",
+   "bytes": 14927674.0,
+   "sha256": "405c2f7c00a3e900d817816a44cb8228d14903e1a162dbf3fe3624c7ea1497f7"
+  },
+  {
+   "tlat": 71,
+   "tlon": 128,
+   "tile": "Copernicus_DSM_COG_10_N71_00_E128_00_DEM",
+   "status": "exists",
+   "bytes": 14009789.0,
+   "sha256": "9068d1a6e8c7720973d5cd75c4a03488e916939c251b23503cc1da7483844256"
+  },
+  {
+   "tlat": 71,
+   "tlon": 129,
+   "tile": "Copernicus_DSM_COG_10_N71_00_E129_00_DEM",
+   "status": "exists",
+   "bytes": 6383455.0,
+   "sha256": "f6d6c3e75848792db64003b77b842b1962fe1e9b8d0e328007836104e2dba7ac"
+  },
+  {
+   "tlat": 71,
+   "tlon": 130,
+   "tile": "Copernicus_DSM_COG_10_N71_00_E130_00_DEM",
+   "status": "exists",
+   "bytes": 339345.0,
+   "sha256": "56dc38830bb1444bb9e31b66db5d17fc313ce2ab6275ef9ed3b179e4a828ad2a"
+  },
+  {
+   "tlat": 72,
+   "tlon": 123,
+   "tile": "Copernicus_DSM_COG_10_N72_00_E123_00_DEM",
+   "status": "exists",
+   "bytes": 15380029.0,
+   "sha256": "1bc1835a85d841f43107f28ca1b5520bb12bacc5b9e95cbb99c77f250535316e"
+  },
+  {
+   "tlat": 72,
+   "tlon": 124,
+   "tile": "Copernicus_DSM_COG_10_N72_00_E124_00_DEM",
+   "status": "exists",
+   "bytes": 16189920.0,
+   "sha256": "279d0b44aad2dd88547a142d79760e861c437a9f7d8d25eed1a5943d4bb54baa"
+  },
+  {
+   "tlat": 72,
+   "tlon": 125,
+   "tile": "Copernicus_DSM_COG_10_N72_00_E125_00_DEM",
+   "status": "exists",
+   "bytes": 16958986.0,
+   "sha256": "f0ac378b9652600a9db79722c2d77740fabd7393d5763742ab0623f97bf56eb5"
+  },
+  {
+   "tlat": 72,
+   "tlon": 126,
+   "tile": "Copernicus_DSM_COG_10_N72_00_E126_00_DEM",
+   "status": "exists",
+   "bytes": 16584336.0,
+   "sha256": "7be8aaa455b5582f42d4cd0659a7625dd10f9880d94649392d76fc891c6d8cf0"
+  },
+  {
+   "tlat": 72,
+   "tlon": 127,
+   "tile": "Copernicus_DSM_COG_10_N72_00_E127_00_DEM",
+   "status": "exists",
+   "bytes": 14668638.0,
+   "sha256": "0aeb559a72d982697a0a6b4f395789cc2a7d0b69492977d57863c40ea4103a6c"
+  },
+  {
+   "tlat": 72,
+   "tlon": 128,
+   "tile": "Copernicus_DSM_COG_10_N72_00_E128_00_DEM",
+   "status": "exists",
+   "bytes": 15198230.0,
+   "sha256": "4c3263b6e66e10ed05c6d1e9fa010a34fe2d44d271f70b032792d2e130c51715"
+  },
+  {
+   "tlat": 72,
+   "tlon": 129,
+   "tile": "Copernicus_DSM_COG_10_N72_00_E129_00_DEM",
+   "status": "exists",
+   "bytes": 6275691.0,
+   "sha256": "efca2ab8aaffdd33ceeabdadc71c56507f78f9ab8807fb398b4ef98425a9a38d"
+  },
+  {
+   "tlat": 72,
+   "tlon": 130,
+   "tile": "Copernicus_DSM_COG_10_N72_00_E130_00_DEM",
+   "status": "absent_public",
+   "bytes": NaN,
+   "sha256": NaN
+  },
+  {
+   "tlat": 73,
+   "tlon": 123,
+   "tile": "Copernicus_DSM_COG_10_N73_00_E123_00_DEM",
+   "status": "exists",
+   "bytes": 6948403.0,
+   "sha256": "688726fd874996e2d18090c315d81df3dfb655e6d9b486e6a26133f198627e25"
+  },
+  {
+   "tlat": 73,
+   "tlon": 124,
+   "tile": "Copernicus_DSM_COG_10_N73_00_E124_00_DEM",
+   "status": "exists",
+   "bytes": 13151772.0,
+   "sha256": "c32025a86b1d1fd0a9215cf08cddacce0001e7096991e282574de91d3eed1f73"
+  },
+  {
+   "tlat": 73,
+   "tlon": 125,
+   "tile": "Copernicus_DSM_COG_10_N73_00_E125_00_DEM",
+   "status": "downloaded",
+   "bytes": 9831720.0,
+   "sha256": "4d7028ceeee986d86d2a6cb77c8ee6b4e9d8869591a6b7439a48bf0e3ba4beb9"
+  },
+  {
+   "tlat": 73,
+   "tlon": 126,
+   "tile": "Copernicus_DSM_COG_10_N73_00_E126_00_DEM",
+   "status": "downloaded",
+   "bytes": 8270467.0,
+   "sha256": "bedf39a4bef62caec8e840ee16dc3d4a2af84e6e540f8b5756cfe660308bef02"
+  },
+  {
+   "tlat": 73,
+   "tlon": 127,
+   "tile": "Copernicus_DSM_COG_10_N73_00_E127_00_DEM",
+   "status": "downloaded",
+   "bytes": 8535949.0,
+   "sha256": "0dfb264d91e3364e706299c87993efdc63fb3018434a0aaf17622e59d0a411a2"
+  },
+  {
+   "tlat": 73,
+   "tlon": 128,
+   "tile": "Copernicus_DSM_COG_10_N73_00_E128_00_DEM",
+   "status": "downloaded",
+   "bytes": 5270840.0,
+   "sha256": "8cf808f992474a0b7c6dba4ae4a3c24ede9bcec3780032940229dbe22f1c1217"
+  },
+  {
+   "tlat": 73,
+   "tlon": 129,
+   "tile": "Copernicus_DSM_COG_10_N73_00_E129_00_DEM",
+   "status": "downloaded",
+   "bytes": 795189.0,
+   "sha256": "1ebbefa0eda0e37ebd989a1b91647e9334f6ba6342c3d8f496077b6a0c19cb19"
+  },
+  {
+   "tlat": 73,
+   "tlon": 130,
+   "tile": "Copernicus_DSM_COG_10_N73_00_E130_00_DEM",
+   "status": "absent_public",
+   "bytes": NaN,
+   "sha256": NaN
+  }
+ ],
+ "dem_tiles_status_counts": {
+  "exists": 13,
+  "downloaded": 9,
+  "absent_public": 2
+ },
+ "dem_download_script": {
+  "path": "scripts/0_download/copernicus_dem.py",
+  "bytes": 1524,
+  "sha256": "8a31443118a376b36f6cdd4616e2fd0e1a26aed7a329f25f4ec4f32ba22e5f5a"
+ },
+ "phys_fallback_medians": {
+  "values": {
+   "e5_tdd": 915.5215454101562,
+   "e5_fdd": 3248.3079986572266,
+   "e5_sqrt_tdd": 30.25758657609949,
+   "e5_maat": -7.726895809173584,
+   "e5_twarm": 10.64794921875,
+   "e5_tcold": -20.988937377929688,
+   "e5_swe": 0.0452940464019775,
+   "sg_bdod_5_15": 0.67,
+   "sg_sand_5_15": 38.6,
+   "sg_cfvo_5_15": 3.9,
+   "sg_soc_5_15": 253.7
+  },
+  "n_rows": 17467,
+  "source": "polar.m1_core.load_base(data/processed, fidelity_base_v3.csv, e5_soil_tdd_v3.csv, F4_direct)",
+  "note": "p4_ku, p2_edaphic 의 결측 대체 통계(6.7). 격자 셀로 다시 계산하지 않는다"
+ },
+ "masks": {
+  "pfr": {
+   "file": {
+    "path": "data/processed/cci_pfr_mean_1997_2021.nc",
+    "bytes": 1113342,
+    "sha256": "68c307013335ec815b01b2312687e74c561a270dd342dbb2199228f1980b0269"
+   },
+   "rule": "최근접 0.1° 값 < 10 % 이면 회색(pfr_lt10). 값이 없으면 회색(pfr_missing)",
+   "interpretation": "pfr_missing 회색은 6.5 에 없는 추가 규칙이다. 영향은 summary.pfr_missing_rule(확정 전)"
+  },
+  "water": {
+   "files": {
+    "occurrence_120E_80Nv1_4_2021.tif": {
+     "path": "data/raw/gsw/occurrence_120E_80Nv1_4_2021.tif",
+     "bytes": 64563146,
+     "sha256": "e820bb270fbff9c39e49c44fe21baa26b592ee7270ef5bf47fff5a0ba7998954"
+    },
+    "occurrence_130E_80Nv1_4_2021.tif": {
+     "path": "data/raw/gsw/occurrence_130E_80Nv1_4_2021.tif",
+     "bytes": 69474772,
+     "sha256": "5f3edd232ab32d28361d4cb9930ccae074ebad56101922a088558d8936a82be8"
+    }
+   },
+   "rule": "셀 안 30 m 화소(255 제외)의 평균 발생 빈도 ≥ 50 % 이면 회색(water). 중심 화소 값은 참고 열",
+   "interpretation": "6.5 의 '발생 빈도 50 % 이상 셀'을 화소 평균으로 읽었다. 대안 해석과의 차이는 summary.water_rule_alt(확정 전)"
+  },
+  "sea_input": {
+   "rule": "DEM 타일이 공개 저장소에 없음(dem_tile_absent), cci_alt 결측, e5_sqrt_tdd_soil 결측, e5_sqrt_tdd 결측 이면 회색. 그 밖의 x25 결측은 n_x25_missing 에 적고 셀을 빼지 않는다"
+  },
+  "land_rule": "land = DEM 타일 있음 · dem_elev 유효 · GSW 유효 화소 있음 · 수체 아님(보고용)",
+  "gray_reason_order": [
+   "dem_tile_absent",
+   "water",
+   "pfr_missing",
+   "pfr_lt10",
+   "cci_missing",
+   "soil_tdd_missing",
+   "s_missing"
+  ],
+  "summary": {
+   "n_cells": 53011,
+   "n_gray": 14925,
+   "n_shown": 38086,
+   "n_land": 38173,
+   "n_land_gray": 87,
+   "frac_land_gray": 0.0022790977916328295,
+   "by_reason_any": {
+    "dem_tile_absent": 580,
+    "water": 11485,
+    "pfr_missing": 6185,
+    "pfr_lt10": 0,
+    "cci_missing": 10242,
+    "soil_tdd_missing": 1338,
+    "s_missing": 1338
+   },
+   "by_reason_first": {
+    "dem_tile_absent": 580,
+    "water": 11485,
+    "pfr_missing": 2783,
+    "pfr_lt10": 0,
+    "cci_missing": 77,
+    "soil_tdd_missing": 0,
+    "s_missing": 0
+   },
+   "land_by_reason_any": {
+    "dem_tile_absent": 0,
+    "water": 0,
+    "pfr_missing": 10,
+    "pfr_lt10": 0,
+    "cci_missing": 87,
+    "soil_tdd_missing": 0,
+    "s_missing": 0
+   },
+   "land_by_reason_first": {
+    "dem_tile_absent": 0,
+    "water": 0,
+    "pfr_missing": 10,
+    "pfr_lt10": 0,
+    "cci_missing": 77,
+    "soil_tdd_missing": 0,
+    "s_missing": 0
+   },
+   "n_x25_missing_shown": {
+    "0": 37694,
+    "4": 120,
+    "9": 272
+   },
+   "pfr_values_shown": {
+    "min": 100.0,
+    "max": 100.0
+   },
+   "water_rule_alt": {
+    "applied": "평균 발생 빈도 ≥ 50 %(gsw_occ_mean)",
+    "alternative": "발생 빈도 ≥ 50 % 인 30 m 화소가 유효 화소의 절반 이상(gsw_water_frac50 ≥ 0.5)",
+    "n_water_applied": 11485,
+    "n_water_alt": 11861,
+    "n_alt_not_applied": 454,
+    "n_alt_not_applied_shown": 446,
+    "n_alt_not_applied_land": 454,
+    "n_applied_not_alt": 78,
+    "note": "대안 해석이면 n_alt_not_applied_shown 셀이 표시에서 빠지고 n_applied_not_alt 셀은 수체가 아니게 된다. 확정은 예측 전에 한다"
+   },
+   "pfr_missing_rule": {
+    "note": "PFR 결측 셀의 회색 처리는 6.5 에 없는 추가 규칙이다. n_only 는 이 사유만으로 회색이 된 셀 수(0 이면 규칙을 빼도 표시 셀이 같다)",
+    "n_any": 6185,
+    "n_first": 2783,
+    "n_land_first": 10,
+    "n_only": 0,
+    "n_land_only": 0
+   }
+  }
+ },
+ "validity": {
+  "x25_all_valid_frac": 0.7918922487785554,
+  "x25_all_valid_frac_shown": 0.989707504069737,
+  "missing_by_col": {
+   "dem_elev": 580,
+   "dem_slope": 580,
+   "dem_aspect_sin": 580,
+   "dem_aspect_cos": 580,
+   "dem_tpi": 580,
+   "dem_rough": 580,
+   "e5_maat": 1338,
+   "e5_tdd": 1338,
+   "e5_fdd": 1338,
+   "e5_sqrt_tdd": 1338,
+   "e5_twarm": 1338,
+   "e5_tcold": 1338,
+   "e5_stl1": 1338,
+   "e5_swe": 1338,
+   "sg_clay_5_15": 8537,
+   "sg_sand_5_15": 8537,
+   "sg_silt_5_15": 8537,
+   "sg_bdod_5_15": 8972,
+   "sg_cfvo_5_15": 8537,
+   "sg_phh2o_5_15": 8537,
+   "sg_soc_0_5": 8972,
+   "sg_soc_5_15": 8972,
+   "sg_soc_15_30": 8972,
+   "cci_alt": 10242,
+   "cci_valid": 0,
+   "e5_sqrt_tdd_soil": 1338,
+   "p4_ku": 0,
+   "p2_edaphic": 0
+  }
+ },
+ "qa": {
+  "file": "data/processed/map_lena/lena_grid_qa_v1.csv",
+  "tolerance": {
+   "abs": 1e-06,
+   "rel_dem": 0.0001,
+   "pass_frac": 0.01
+  },
+  "n_cols": 27,
+  "n_pass": 27,
+  "passed": true,
+  "max_frac_mismatch": 0.0,
+  "n_v3": 3037,
+  "n_soil_joined": 3037,
+  "timing_s": {
+   "dem": 5.6,
+   "e5": 1.2,
+   "cci": 0.7,
+   "sg": 0.0
+  },
+  "sg_all9_missing_rows": 273,
+  "sg_any_missing_rows": 396,
+  "v3_sg_all9_missing_rows": 273,
+  "v3_rows_in_grid": 3037,
+  "v3_cells_in_grid": 201
+ },
+ "inputs": {
+  "fidelity_base_v3": {
+   "path": "data/processed/fidelity_base_v3.csv",
+   "bytes": 8700509,
+   "sha256": "71b5d3f6c297770d41aa7215e906e737842a3594005a5b52952bb636c752dc0f"
+  },
+  "e5_soil_tdd_v3": {
+   "path": "data/processed/e5_soil_tdd_v3.csv",
+   "bytes": 2487925,
+   "sha256": "711d0cd3ba0e2e410ee9a973f69db44f543459ffa03a1e6ea935db4a3884ef04"
+  }
+ },
+ "outputs": {
+  "grid": {
+   "path": "data/processed/map_lena/lena_grid_x25_v1.csv.gz",
+   "bytes": 4387996,
+   "sha256": "d4c393627ffe0372608ad7e37196030b4f46dc1581746bf38e7654697dbe3ce6"
+  },
+  "cells": {
+   "path": "data/processed/map_lena/lena_grid_cells_v1.csv",
+   "bytes": 2114561,
+   "sha256": "8053c42118793215ddf5839eed6f12ef5502dbb9b5e5618b9ad7f174b251c68b"
+  },
+  "tiles": {
+   "path": "data/processed/map_lena/lena_grid_dem_tiles_v1.csv",
+   "bytes": 3070,
+   "sha256": "e34950b50197054f3b732cb3fb90421e31b180968d63b0d38ea62d7f8385d4cd"
+  },
+  "mask": {
+   "path": "data/processed/map_lena/lena_grid_mask_v1.csv",
+   "bytes": 3353534,
+   "sha256": "8a109e5355a6434d7a0a1c49a969a7cd804d6f14a61fdb766ff2745730cb313b"
+  },
+  "qa": {
+   "path": "data/processed/map_lena/lena_grid_qa_v1.csv",
+   "bytes": 13765,
+   "sha256": "27eac173a3969ab391257bb82167fb01a76cce68922bb43541a69236096549bf"
+  }
+ },
+ "cov_parts": {
+  "map_lena_grid_cci.csv": {
+   "path": "data/processed/map_lena/cov_parts/map_lena_grid_cci.csv",
+   "bytes": 1009043,
+   "sha256": "92238d93883b0aa0b5422b983e11cd8589abec5fdca8f88543629d8f7c7c81f2"
+  },
+  "map_lena_grid_dem.csv": {
+   "path": "data/processed/map_lena/cov_parts/map_lena_grid_dem.csv",
+   "bytes": 5696251,
+   "sha256": "76b7ba177e2842ecd9e58b536a8f7a96f39d6f077bee023f620c2ee12b141521"
+  },
+  "map_lena_grid_e5.csv": {
+   "path": "data/processed/map_lena/cov_parts/map_lena_grid_e5.csv",
+   "bytes": 16456391,
+   "sha256": "fb461124e8a19368b3a93f6d9037eecbc2f39c77970f7b6ab40088f3a59e1279"
+  },
+  "map_lena_grid_sg.csv": {
+   "path": "data/processed/map_lena/cov_parts/map_lena_grid_sg.csv",
+   "bytes": 2818911,
+   "sha256": "34dffb6f3aef959ebda3993d5b2209dac45353aacafb903a0a410e8d49c2a341"
+  },
+  "map_lena_qa_cci.csv": {
+   "path": "data/processed/map_lena/cov_parts/map_lena_qa_cci.csv",
+   "bytes": 48230,
+   "sha256": "18f3d0da386cea050929e4204fc8838987db2a816bef1268dd6c194e24d83571"
+  },
+  "map_lena_qa_dem.csv": {
+   "path": "data/processed/map_lena/cov_parts/map_lena_qa_dem.csv",
+   "bytes": 366218,
+   "sha256": "30ee304fa878cc050d37da29f21f2969bbc868b3eed8db153601f832b3eb161e"
+  },
+  "map_lena_qa_e5.csv": {
+   "path": "data/processed/map_lena/cov_parts/map_lena_qa_e5.csv",
+   "bytes": 970140,
+   "sha256": "875f2b1aa4b091b6f87b60da12a4906c06c8649d19fa81f41fe980965514b5d4"
+  },
+  "map_lena_qa_sg.csv": {
+   "path": "data/processed/map_lena/cov_parts/map_lena_qa_sg.csv",
+   "bytes": 155762,
+   "sha256": "77606dde9cb64a22194ee3a54062f866cb643e9c305b17401dd320f408a67732"
+  }
+ },
+ "timing_s": {
+  "cov": {
+   "dem": 26.2,
+   "e5": 15.7,
+   "cci": 1.5,
+   "sg": 0.5
+  },
+  "qa": 7.9,
+  "mask": 2.8
+ },
+ "max_rss_mb": 750.8,
+ "threads": {
+  "OMP_NUM_THREADS": "1",
+  "nice": 10
+ },
+ "status_note": "6.3–6.5 의 결과 전 산출이다. 예측(h49)과 그림은 LG 집계, LGX L29, LGU-B2 판정 뒤에 한다(6.11)",
+ "stages_run": [
+  "cov",
+  "qa",
+  "mask",
+  "merge"
+ ],
+ "run_note": "2026-09-30 검증 지적 반영 재조립(수체·PFR 결측 해석의 수치 기록, 스레드 명시). 내려받기 없음",
+ "previous_meta": {
+  "sha256": "cd0fcec29ca35f56dc33084a1c181694bfb547770134b91514aefcd7689be615",
+  "created": "2026-09-30 03:17 KST",
+  "timing_s": {
+   "tiles": 35.7,
+   "cov": {
+    "dem": 22.5,
+    "e5": 12.8,
+    "cci": 1.8,
+    "sg": 0.4
+   },
+   "qa": 8.4,
+   "mask": 3.0
+  },
+  "max_rss_mb": 751.8,
+  "stages_run": null,
+  "grid_sha256": "d4c393627ffe0372608ad7e37196030b4f46dc1581746bf38e7654697dbe3ce6",
+  "grid_unchanged": true
+ }
+}
