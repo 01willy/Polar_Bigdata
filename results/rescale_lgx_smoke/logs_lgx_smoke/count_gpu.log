@@ -1,0 +1,26 @@
+[data] 부분 gpu · 축 ['r0', 'g45', 'nn'] · 작업 단위 649(건너뜀 12) · 축별 {'r0': 330, 'g45': 154, 'nn': 165}
+[count-only] 부분 gpu · 축 ['r0', 'g45', 'nn'] · 작업 단위 649 · 건너뜀 12
+      units  targets  fit_total   rows   est_h
+axis                                          
+r0      330       12       4320  15450   35.22
+g45     154       11       8612  23612  181.32
+nn      165       12       6150  12045    7.92
+[count-only] 축·학습기별 적합 수와 추정 누적 시간(프로세스 1개 기준. catboost·rf·catboost_tuned 의 기준 시간은 가정값이다)
+axis learner  n_fit   est_h
+ g45     cfm    876   1.154
+ g45    ddpm    876   1.443
+ g45     ftt    876  10.769
+ g45     mlp   3356   1.897
+ g45   nflow    876   8.269
+ g45 realmlp    876 155.289
+ g45    tabm    876   2.499
+  nn     ftt   2050   5.995
+  nn     mlp   2050   0.536
+  nn    tabm   2050   1.392
+  r0     cfm    720   0.227
+  r0    ddpm    720   0.283
+  r0     ftt    720   2.114
+  r0   nflow    720   1.623
+  r0 realmlp    720  30.486
+  r0    tabm    720   0.491
+[count-only] 총 적합 19,082(선택 단계 0 별도) · 저장 행 51,107 · 추정 누적 224.5 h

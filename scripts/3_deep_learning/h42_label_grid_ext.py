@@ -3784,8 +3784,11 @@ def summarize(a, elapsed=0.0, skipped=None):
         n4 = n4_tables(a, s50, s200, get_data_x(h40_args(a, "n4")) if sh_n4 else None, get_data_x(h40_args(a, "n4a")) if sh_n4a else None)
     tests = build_tests_x(a, tms, D5, floor, runs, conf=conf, n4=n4)
     H4.boot_weights.cache_clear()
-    n4["region"] = pd.concat([v for v in (region_inference_main(tms, a), n4["region"]) if len(v)], ignore_index=True) \
-        if (len(n4["region"]) or len(tms)) else n4["region"]
+    if len(n4["region"]) or len(tms):
+        # 두 표가 모두 비면 pd.concat 이 ValueError 를 낸다(Rescale 사전 점검 nxvpT 에서 확인). 빈 목록이면 기존 값을 둔다.
+        _reg = [v for v in (region_inference_main(tms, a), n4["region"]) if len(v)]
+        if _reg:
+            n4["region"] = pd.concat(_reg, ignore_index=True)
     sh_base = [s_ for s_ in sh_main if s_["tag"] == axis_tag(a, "base")]
     gate = gate_table(a, sh_base, a.GATE_DIR, a.GATE_TAG) if sh_base else pd.DataFrame()
     lg_aux = pd.DataFrame()

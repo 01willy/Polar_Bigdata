@@ -806,7 +806,7 @@ def test_q_missing_contrasts():
     assert len(v) == 1 and v[0].startswith("기각(일부 대비 판정 불가, 대비 2/3): ") and v[0].endswith("우세 학습기 catboost")
     s30b = {K("D0", 0, 1.0, lr="catboost"): (9.0, "a"), K("D0", 0, 1.0, lr="rf"): (9.0, "b")}
     assert _verdicts(_agg(_tms4(s30b)), "L30", "주") == ["판정 불가(대비 2/3; 없는 대비: catboost_tuned)"]
-    s30c = dict(s30b, **{K("D0", 0, 1.0, lr="catboost_tuned"): (9.0, "c")})
+    s30c = {**s30b, K("D0", 0, 1.0, lr="catboost_tuned"): (9.0, "c")}
     assert _verdicts(_agg(_tms4(s30c)), "L30", "주")[0].startswith("지지: 용량을 키우거나")
     # L12: 열세인 대비가 있으면 빠진 대비가 있어도 기각이다
     s12 = {K("RM", 10, 0.25): (3.0, "g"), K("R1", 10, 0.25): (1.0, "g")}

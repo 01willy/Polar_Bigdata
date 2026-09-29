@@ -1,0 +1,57 @@
+[timing] LG 사전 점검의 gpu 조각 7개를 분할 4·5 축(g45)의 실측으로 읽었다
+[timing] 조각 115 · 행 189 → lgx_smoke_timing_by_learner.csv
+harness           tag part    axis        learner  n_fit     sec  sec_full_epochs    est_s  epochs_run  sec_per_fit  calib
+    h41     lgv_smoke  cpu     V-B       catboost     10   14.96           14.960    34.64         NaN        1.496  0.432
+    h41     lgv_smoke  cpu     V-B    catboost_lo     25    6.73            6.730     6.70         NaN        0.269  1.004
+    h41     lgv_smoke  cpu     V-B             rf     10   37.89           37.890    50.22         NaN        3.789  0.754
+    h41     lgv_smoke  cpu  V-C100       catboost      6    9.40            9.400    22.68         NaN        1.567  0.414
+    h41     lgv_smoke  cpu  V-C100    catboost_lo     15    4.26            4.260     4.35         NaN        0.284  0.979
+    h41     lgv_smoke  cpu  V-C100             rf      6   24.53           24.530    33.54         NaN        4.088  0.731
+    h41     lgv_smoke  cpu     V-G       catboost     14   20.90           20.900    50.28         NaN        1.493  0.416
+    h41     lgv_smoke  cpu     V-G    catboost_lo     35    9.48            9.480     9.55         NaN        0.271  0.993
+    h41     lgv_smoke  cpu     V-G             rf     14   57.45           57.450    74.36         NaN        4.104  0.773
+    h41     lgv_smoke  cpu     V-R       catboost     10   15.33           15.330    34.70         NaN        1.533  0.442
+    h41     lgv_smoke  cpu     V-R    catboost_lo     25    6.82            6.820     6.75         NaN        0.273  1.010
+    h41     lgv_smoke  cpu     V-R             rf     10   40.10           40.100    50.20         NaN        4.010  0.799
+    h41     lgv_smoke  cpu W1-Lena       catboost     10    6.14            6.140     8.52         NaN        0.614  0.721
+    h41     lgv_smoke  cpu W1-Lena    catboost_lo     20    1.96            1.960     1.88         NaN        0.098  1.043
+    h41     lgv_smoke  cpu W1-Lena             rf     10   10.17           10.170     8.72         NaN        1.017  1.166
+    h41     lgv_smoke  cpu W2-Lena       catboost     10   16.13           16.130    40.28         NaN        1.613  0.400
+    h41     lgv_smoke  cpu W2-Lena    catboost_lo     50   14.47           14.470    14.96         NaN        0.289  0.967
+    h41     lgv_smoke  cpu W2-Lena             rf     10   46.19           46.190    60.56         NaN        4.619  0.763
+    h42   lg_precheck  gpu     g45            cfm      6   67.52           67.520    43.42       100.0       11.253  1.555
+    h42   lg_precheck  gpu     g45           ddpm      6   77.17           77.170    54.28       100.0       12.862  1.422
+    h42   lg_precheck  gpu     g45            ftt      6 1333.29         1333.290   405.30       100.0      222.215  3.290
+    h42   lg_precheck  gpu     g45            mlp     16   29.08           29.080    47.05       100.0        1.818  0.618
+    h42   lg_precheck  gpu     g45          nflow      6  256.28          256.280   311.20       100.0       42.713  0.824
+    h42   lg_precheck  gpu     g45           tabm      6   26.62           26.620    94.08       100.0        4.437  0.283
+    h42 lgrm_precheck  gpu     g45        realmlp      6   76.48         2447.360  5844.18         8.0       12.747  0.419
+    h42    lgx1_smoke  cpu      x1    catboost_lo    104   29.66           29.660    31.50         NaN        0.285  0.942
+    h42    lgx2_smoke  cpu      x2    catboost_lo    116  158.39          158.390   125.60         NaN        1.365  1.261
+    h42    lgx5_smoke  cpu      x5    catboost_lo    132   37.77           37.770    39.39         NaN        0.286  0.959
+    h42    lgx9_smoke  cpu      x9    catboost_lo    139   39.67           39.670    42.15         NaN        0.285  0.941
+    h42   lgx9f_smoke  cpu     x9f    catboost_lo     60   14.17           14.170    13.89         NaN        0.236  1.020
+    h42    lgxb_smoke  cpu    base    catboost_lo     52   41.13           41.130    37.15         NaN        0.791  1.107
+    h42    lgxg_smoke  gpu     g45            cfm     33    9.37          312.333   242.51         3.0        0.284  1.288
+    h42    lgxg_smoke  gpu     g45           ddpm     33   22.89          763.000   303.15         3.0        0.694  2.517
+    h42    lgxg_smoke  gpu     g45            ftt     33  264.70         8823.333  2263.42         3.0        8.021  3.898
+    h42    lgxg_smoke  gpu     g45            mlp    113   11.50          338.067   303.55         3.0        0.102  1.114
+    h42    lgxg_smoke  gpu     g45          nflow     33   28.56          952.000  1737.97         3.0        0.865  0.548
+    h42    lgxg_smoke  gpu     g45        realmlp     33  205.24        17513.813 32637.52         3.0        6.219  0.537
+    h42    lgxg_smoke  gpu     g45           tabm     33   10.04          334.667   525.43         3.0        0.304  0.637
+    h42   lgxn3_smoke  cpu      n3       catboost     41  111.65          111.650   169.68         NaN        2.723  0.658
+    h42   lgxn3_smoke  cpu      n3 catboost_tuned     30   31.75           31.750    66.77         NaN        1.058  0.476
+    h42   lgxn3_smoke  cpu      n3             rf     30  142.65          142.650   122.29         NaN        4.755  1.166
+    h42   lgxn4_smoke  cpu      n4    catboost_lo     30    8.63            8.630     9.09         NaN        0.288  0.949
+    h42   lgxnn_smoke  gpu      nn            ftt     30   56.80         1893.333   476.54         3.0        1.893  3.973
+    h42   lgxnn_smoke  gpu      nn            mlp     30    1.71           57.000    42.56         3.0        0.057  1.339
+    h42   lgxnn_smoke  gpu      nn           tabm     30    2.29           76.333   110.63         3.0        0.076  0.690
+    h42    lgxp_smoke  cpu    prox    catboost_lo    256   73.53           73.530    78.16         NaN        0.287  0.941
+    h42   lgxr0_smoke  cpu   ridge          ridge     82    3.09            3.090     9.74         NaN        0.038  0.317
+    h42   lgxr0_smoke  gpu      r0            cfm     11    1.76           58.667    18.71         3.0        0.160  3.136
+    h42   lgxr0_smoke  gpu      r0           ddpm     11    5.91          197.000    23.40         3.0        0.537  8.419
+    h42   lgxr0_smoke  gpu      r0            ftt     11   20.19          673.000   174.70         3.0        1.835  3.852
+    h42   lgxr0_smoke  gpu      r0          nflow     11    7.16          238.667   134.14         3.0        0.651  1.779
+    h42   lgxr0_smoke  gpu      r0        realmlp     11   19.41         1656.320  2519.07         3.0        1.765  0.658
+    h42   lgxr0_smoke  gpu      r0           tabm     11    6.29          209.667    40.56         3.0        0.572  5.169
+[timing] 적합 수 표(lgx_count_<부분>_detail.csv, ladder/lgv_count.csv)가 없어 본 실행 환산을 생략한다

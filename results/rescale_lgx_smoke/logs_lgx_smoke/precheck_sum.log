@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/enc/ukrprod_nxvpT/work/scripts/3_deep_learning/h42_label_grid_ext.py", line 4176, in <module>
+    res = main()
+          ^^^^^^
+  File "/enc/ukrprod_nxvpT/work/scripts/3_deep_learning/h42_label_grid_ext.py", line 3998, in main
+    out = summarize(a, 0.0, [])
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/enc/ukrprod_nxvpT/work/scripts/3_deep_learning/h42_label_grid_ext.py", line 3787, in summarize
+    n4["region"] = pd.concat([v for v in (region_inference_main(tms, a), n4["region"]) if len(v)], ignore_index=True) \
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/enc/ukrprod_nxvpT/work/.pydeps/pandas/core/reshape/concat.py", line 382, in concat
+    op = _Concatenator(
+         ^^^^^^^^^^^^^^
+  File "/enc/ukrprod_nxvpT/work/.pydeps/pandas/core/reshape/concat.py", line 445, in __init__
+    objs, keys = self._clean_keys_and_objs(objs, keys)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/enc/ukrprod_nxvpT/work/.pydeps/pandas/core/reshape/concat.py", line 507, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate

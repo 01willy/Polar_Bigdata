@@ -1,0 +1,29 @@
+# LGX(확장 실험) 본 실행 B: GPU 축의 RealMLP(분할 4·5 의 D0·R1·R2, R0). 계획 6A 절.
+# 시간 근거(사전 점검 nxvpT, 256 epoch 실측 환산): 누적 76.6 GPU-h, 워커 12개 6.4 h. 여유 40 % 와 부대 시간을 더해 상한 10 h.
+# 비용: 시간당 5.70 달러. 상한 10 h 기준 최악 56.96 달러, 예상 약 7 h, 약 40 달러.
+# 집계는 하지 않는다. 조각은 통합 집계 작업(lgx_sum.yaml)에서 합친다.
+
+name: polar-lgx-b
+
+hardware:
+  core_type: iolite-4        # GPU 4장(T4). 허용 코어 수 [64] (coretypes 조회 2026-09-29)
+  cores_per_slot: 64
+  slots: 1
+  walltime_hours: 10
+
+max_cost_usd: 60
+low_priority: false          # 선점형 등급은 쓰지 않는다(프로젝트 방침)
+
+analysis:
+  code: pytorch
+  version: "2.4.1"
+
+code_paths:
+  - work/lgx_payload.tar.gz
+
+dataset_file_ids: []
+
+command: |
+  [ -f lgx_payload.tar.gz ] && tar xzf lgx_payload.tar.gz; LGX_PARTS="gpu" LGX_LABEL=gpu_rm LGX_GPU_LEARNERS=realmlp LGX_SUMMARIZE=0 LGX_BUDGET_MIN=555 LGX_SUM_RESERVE_MIN=20 bash scripts/rescale/run_lgx.sh
+
+results_dir: results/rescale_lgx_b

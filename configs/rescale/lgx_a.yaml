@@ -1,0 +1,32 @@
+# LGX(확장 실험) 본 실행 A: CPU 축 11개(h42), 검증 사다리(h41), GPU 축 3개의 학습기 6종(RealMLP 제외). 계획 6A 절.
+# 본 실행(ZovWo)과 같은 노드 종류 iolite-4 를 쓴다(재현 점검과 학습기 5분할 판정에서 하드웨어 차이를 없앤다).
+# 시간 근거(사전 점검 nxvpT 실측 환산, results/rescale_lgx_smoke/lgx_smoke_full_projection.csv):
+#   GPU 6종 누적 98.9 GPU-h(FT-Transformer 76.4), 워커 12개 8.2 h. CPU 누적 36 h, 워커 14개 2.7 h(GPU 와 동시에 돈다).
+#   8.2 h 에 여유 40 % 를 더한 11.5 h, 집계 예비 1 h, 설치와 묶음 0.5 h 를 합쳐 상한 14 h 로 둔다.
+# 비용: 시간당 5.70 달러. 상한 14 h 기준 최악 79.74 달러, 예상 약 10 h, 약 57 달러.
+# 작업 끝의 집계는 RealMLP 조각과 본 실행 조각 없이 돈다. 최종 판정은 통합 집계 작업(lgx_sum.yaml)의 값이다.
+
+name: polar-lgx-a
+
+hardware:
+  core_type: iolite-4        # GPU 4장(T4). 허용 코어 수 [64] (coretypes 조회 2026-09-29)
+  cores_per_slot: 64
+  slots: 1
+  walltime_hours: 14
+
+max_cost_usd: 85
+low_priority: false          # 선점형 등급은 쓰지 않는다(프로젝트 방침)
+
+analysis:
+  code: pytorch
+  version: "2.4.1"
+
+code_paths:
+  - work/lgx_payload.tar.gz
+
+dataset_file_ids: []
+
+command: |
+  [ -f lgx_payload.tar.gz ] && tar xzf lgx_payload.tar.gz; LGX_PARTS="cpu h41 gpu" LGX_LABEL=all LGX_GPU_LEARNERS=mlp,cfm,ddpm,tabm,nflow,ftt LGX_SUMMARIZE=1 LGX_BUDGET_MIN=795 LGX_SUM_RESERVE_MIN=60 bash scripts/rescale/run_lgx.sh
+
+results_dir: results/rescale_lgx_a
