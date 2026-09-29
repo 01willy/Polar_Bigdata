@@ -108,3 +108,9 @@ work/
 
 # LGF 파운데이션 모델 가상환경(전역 환경 보호용)
 .venv_lgf/
+
+# LGU 작업 조각과 실행 중 스레드 등록부(재생성 가능. 집계 표 lgu_*.csv 만 추적한다)
+data/processed/lgu/shards/
+data/processed/lgu/.running/
+# 원자적 쓰기가 중단되면 남는 임시 파일(<이름>.tmp<pid>)
+*.tmp[0-9]*
