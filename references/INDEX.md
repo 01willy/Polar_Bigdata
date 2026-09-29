@@ -306,7 +306,7 @@
 
 ### 📄 `pilyugina2023_pinn_permafrost_risk` — [선례]
 **Assessing the Risk of Permafrost Degradation with Physics-Informed Machine Learning** — Pilyugina, Chernikov, Zaytsev, Bulkin, Burnaev, et al. (2023, arXiv (physics.geo-ph), submitted October 4, 2023). arXiv:2310.02525
-- **무엇**: Physics-informed ML that regularizes a data-driven model with the heat equation, trained over permafrost monitoring data + climate projections to forecast permafrost thaw-degradation risk over a decadal horizon with improved numerical stability. Physics-constrained temporal risk forecasting precedent.
+- **무엇**: (2026-09-29 정정, 본문 확인) Kudryavtsev 모델을 토양 4종 초기값으로 돌려 얻은 ALT·MAGT 값을 기후·식생 자료와 함께 CatBoost 의 입력 특징으로 쓴다. 손실에 물리 항은 없다. ALT(cm, 2,729건)와 MAGT(°C, 961건)를 직접 예측한다. 검증은 시간 분할(2013년 이전 학습)과 무작위 5-fold 다. 이전 기재(열방정식 정칙화, 대상은 위험 지표)는 초록 표현을 따른 오분류였다.
 - **우리와의 차별/활용**: Establishes heat-equation-constrained temporal forecasting for permafrost degradation, so 'physics-informed temporal permafrost DL' is already claimed (reinforces that our novelty cannot be 'PINN for permafrost'). BUT target is a generic degradation-risk metric (not ALT/temperature profiles), no cell-wise calibrated UQ, no explicit region transfer benchmark, and no shallow-3D thermal reconstruction. We differentiate through concrete ALT/thermal targets, transfer, and calibrated UQ. Method/context citation for the physics-constraint design of T1/T2.
 - 파일: `references/06_physics_ml/pilyugina2023_pinn_permafrost_risk.pdf`
 

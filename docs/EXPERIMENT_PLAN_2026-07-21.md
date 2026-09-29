@@ -88,7 +88,7 @@
 - **성공 게이트**: +Stefan-feature가 in-domain RMSE ≥0.5cm 감소(CI 0 제외) **또는** Lena E 미세조정이 frozen-E
   18.24cm를 ≥2cm 개선. 미달 시 negative로 확정 기록(사전확약).
 - **위험·통제**: 다중공선성 무이득 가능 → 부분의존성 점검. 소표본 과적합 → Lena 셀 공간블록 분리.
-- **문헌**: Stefan-CatBoost 2025(특징주입 R² 0.873), PI-LSTM Liu 2023(+27~69%), Pilyugina 2023(열방정식 정규화 20% 이득, in-domain 한정).
+- **문헌**: Stefan-CatBoost 2025(특징주입 R² 0.873), PI-LSTM Liu 2023(+27~69%), Pilyugina 2023(Kudryavtsev 출력을 CatBoost 입력 특징으로 사용, 시간 분할. 2026-09-29 정정: 이전 기재 '열방정식 정규화'는 오분류).
 
 ### E3. 전 지역 pooled 배포 모델 — 유사도 층화 + 정적 임베딩 [effort M]
 

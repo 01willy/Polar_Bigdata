@@ -123,7 +123,7 @@ ALT 30cm에서 12cm=40%, 16.95cm=56%. 우리 중앙값 48.1cm에서는 12cm=25%,
 
 ### 질문 3 — Stefan 검증자료 + DL 보완으로 더 나은 온도장·ALT 예측 후 참값 비교했나
 
-**부분만.** 우리는 Stefan 방정식의 핵심 항 `sqrt(TDD)`(누적 융해도일의 제곱근)를 **피처로만** 넣었다(era5land_covariates.py:55). Stefan 방정식 자체를 물리 baseline으로 돌려 그 출력을 참값과 비교하거나, Stefan 출력을 DL과 blending한 실험은 **아직 없다.** 문헌 QTP SCE(2025)는 정확히 이 구조(Stefan CatBoost-ET 블렌딩)로 R² 0.873을 얻었다. 우리도 (a) 순수 Stefan baseline 채점, (b) Stefan 잔차를 DL로 학습하는 physics-guided residual을 해볼 가치가 있다. §7 실험 항목으로 채택.
+**부분만.** 우리는 Stefan 방정식의 핵심 항 `sqrt(TDD)`(누적 융해도일의 제곱근)를 **피처로만** 넣었다(era5land_covariates.py:55). Stefan 방정식 자체를 물리 baseline으로 돌려 그 출력을 참값과 비교하거나, Stefan 출력을 DL과 blending한 실험은 **아직 없다.** 문헌 QTP SCE(Wang G. 2025)는 Stefan 출력을 입력 특징으로 넣고 CatBoost 와 Extra Trees 를 블렌딩해 R² 0.873을 얻었다(2026-09-29 정정: 블렌딩은 두 ML 사이이고 Stefan 과 ML 의 블렌딩이 아니다). 우리도 (a) 순수 Stefan baseline 채점, (b) Stefan 잔차를 DL로 학습하는 physics-guided residual을 해볼 가치가 있다. §7 실험 항목으로 채택.
 
 ### 질문 7 — 거의 같은 위치인데 ALT가 크게 다른 site 전처리했나
 
