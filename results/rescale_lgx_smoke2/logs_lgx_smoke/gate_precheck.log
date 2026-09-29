@@ -1,0 +1,4 @@
+[gate] 확장 기준 축 조각 1개(tag lgxb_precheck) · 기준 tag lg_precheck · 기준 조각이 있는 단위 1개 · 허용 차 물리식 1e-09 cm, CatBoost 0.02 cm
+target mode  split status  n_keys  n_keys_phys  n_keys_ml  max_diff_phys  max_diff_ml  blocks_equal code_sha_h40_ref code_sha_h40_now                                         worst_key
+Canada    x      1     ok      27            5         22            0.0          0.0          True     ffd0b3a76d36     ffd0b3a76d36 ["R2", "catboost_lo", "1", "cell", 40, 0, 0, 1.0]
+[gate] 통과 1/1 단위 · 물리식 최대 차 0 cm · CatBoost 최대 차 0 cm

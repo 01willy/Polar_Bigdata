@@ -1,0 +1,31 @@
+[data] 부분 cpu · 축 ['base', 'x1', 'x2', 'x9', 'n3', 'prox', 'x5', 'x9f', 'n4', 'n4a', 'ridge'] · 작업 단위 3860(건너뜀 955) · 축별 {'base': 117, 'x1': 117, 'x2': 117, 'x9': 117, 'n3': 55, 'prox': 117, 'x5': 117, 'x9f': 117, 'n4': 620, 'n4a': 2311, 'ridge': 55}
+[count-only] 부분 cpu · 축 ['base', 'x1', 'x2', 'x9', 'n3', 'prox', 'x5', 'x9f', 'n4', 'n4a', 'ridge'] · 작업 단위 3860 · 건너뜀 955
+       units  targets  fit_total    rows  est_h
+axis                                           
+base     117       17      28156   68253   4.21
+x1       117       17      56312  122194   3.69
+x2       117       17      51608  105798  11.89
+x9       117       17      65058  224823   4.33
+n3        55       12       6870   18415   4.82
+prox     117       17      45736   25893   3.10
+x5       117       17      18619   20733   1.23
+x9f      117       17      20466   53121   1.08
+n4       620       15      19880   56940   1.51
+n4a     2311       15          0   90483   0.00
+ridge     55       12       5540   11935   0.12
+[count-only] 축·학습기별 적합 수와 추정 누적 시간(프로세스 1개 기준. catboost·rf·catboost_tuned 의 기준 시간은 가정값이다)
+ axis        learner  n_fit  est_h
+ base    catboost_lo  28156  4.206
+   n3       catboost   2770  2.333
+   n3 catboost_tuned   2050  0.946
+   n3             rf   2050  1.540
+   n4    catboost_lo  19880  1.508
+ prox    catboost_lo  45736  3.098
+ridge          ridge   5540  0.120
+   x1    catboost_lo  56312  3.688
+   x2    catboost_lo  51608 11.888
+   x5    catboost_lo  18619  1.226
+   x9    catboost_lo  65058  4.332
+  x9f    catboost_lo  20466  1.078
+[count-only] catboost_tuned 선택 단계: 대상 12 · 적합 900(본 적합 수에 들어 있지 않다)
+[count-only] 총 적합 318,245(선택 단계 900 별도) · 저장 행 798,588 · 추정 누적 36.0 h

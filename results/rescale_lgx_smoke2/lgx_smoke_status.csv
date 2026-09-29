@@ -1,0 +1,22 @@
+stage,required,rc,sec,note
+inputs,1,0,0,ok
+deps,1,0,66,ok
+deps_versions,0,0,0,사전 점검과 같은 판
+smoke_cpu,1,0,1388,
+smoke_h41,1,0,355,
+smoke_gpu,1,0,1744,
+smoke_sum_h42,1,0,24,
+smoke_sum_h41,1,0,9,
+gate_smoke,0,0,2,
+timing,1,0,0,
+pytest_h42,1,0,218,
+pytest_h41,1,0,82,
+count_cpu,0,0,72,
+count_gpu,0,0,20,
+count_h41,0,0,11,
+precheck_cpu,0,0,302,
+precheck_gpu,0,0,376,
+precheck_realmlp,0,0,175,
+precheck_sum,0,0,7,
+gate_precheck,0,0,1,
+timing_final,0,0,1,

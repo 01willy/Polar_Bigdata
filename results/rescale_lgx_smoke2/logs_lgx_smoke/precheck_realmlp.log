@@ -1,0 +1,22 @@
+[data] 부분 gpu · 축 ['r0'] · 작업 단위 1(건너뜀 0) · 축별 {'r0': 1}
+[plan] 실행 1 · 선택 작업 0 · 재개로 건너뜀 0 · 프로세스 1 · 스레드 4 · 장치 GPU 0 · epochs 100 · RealMLP epochs 256
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+`Trainer.fit` stopped: `max_epochs=256` reached.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+`Trainer.fit` stopped: `max_epochs=256` reached.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+  [r0|Canada|x|s1|realmlp] 적합 2 · 행 9 · A 355 · 채점 393/20블록 · 원천 16697 · 170.2s · 장치 '0' · 상태 ok(실패 0) · 완료 1/1 · 누적 173s
+[done] 완료 1 · 실패 0 · 일부 적합 실패 0 · 선택 설정 없는 n3 조각 0 · 174s

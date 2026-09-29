@@ -105,3 +105,6 @@ data/processed/e5_soil_tdd.csv
 
 # Rescale 업로드 묶음(scripts/rescale/make_payload.sh 로 재생성)
 work/
+
+# LGF 파운데이션 모델 가상환경(전역 환경 보호용)
+.venv_lgf/
