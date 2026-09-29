@@ -1,0 +1,8 @@
+[env] numpy 2.4.6
+[env] pandas 2.3.3
+[env] scipy 1.17.1
+[env] scikit-learn 1.9.1
+[env] catboost 1.2.10
+[env] pytabkit 1.7.3
+[env] torch 2.4.1
+[env] torch 2.4.1+cu121 · CUDA 빌드 12.1 · CUDA 사용 가능 True · GPU 수 4

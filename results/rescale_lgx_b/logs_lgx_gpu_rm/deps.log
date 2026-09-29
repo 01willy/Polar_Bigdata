@@ -1,0 +1,12 @@
+[2026-09-29T13:54:12Z] [deps] 고정 판 설치(--target /enc/ukrprod_ShFtT/work/.pydeps): catboost==1.2.10 scikit-learn==1.9.1 pandas==2.3.3 scipy==1.17.1 · numpy==2.4.6
+[2026-09-29T13:54:48Z] [deps] 필수 패키지가 모두 있다. 설치를 건너뛴다
+[deps] 확인: catboost 1.2.10 · scikit-learn 1.9.1 · pandas 2.3.3 · scipy 1.17.1 · numpy 2.4.6
+[deps] 판 대조: numpy 설치 2.4.6 · 고정 2.4.6 · 같다
+[deps] 판 대조: catboost 설치 1.2.10 · 고정 1.2.10 · 같다
+[deps] 판 대조: scikit-learn 설치 1.9.1 · 고정 1.9.1 · 같다
+[deps] 판 대조: pandas 설치 2.3.3 · 고정 2.3.3 · 같다
+[deps] 판 대조: scipy 설치 1.17.1 · 고정 1.17.1 · 같다
+[2026-09-29T13:54:53Z] [deps] pip install --user pytabkit==1.7.3
+ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-09-29T13:54:53Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+[2026-09-29T13:55:26Z] [deps] 선택 패키지 pytabkit 설치함(pytabkit==1.7.3)

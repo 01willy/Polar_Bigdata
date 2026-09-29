@@ -1,0 +1,9 @@
+stage,rc,sec,note
+inputs,0,24,ok
+deps,0,64,ok
+deps_versions,0,65,사전 점검과 같은 판
+gpu_check,0,109,GPU 0,1,2,3
+restore,0,109,확장 조각 0개 · 재현 점검 기준 'lg_precheck'
+gpu,0,29008,
+summarize,NA,29008,LGX_SUMMARIZE=0. 집계는 통합 집계 작업에서 한다
+timing,0,29008,

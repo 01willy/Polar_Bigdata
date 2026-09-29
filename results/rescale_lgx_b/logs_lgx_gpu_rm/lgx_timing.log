@@ -1,0 +1,13 @@
+[timing] LG 사전 점검의 gpu 조각 7개를 분할 4·5 축(g45)의 실측으로 읽었다
+[timing] 조각 84 · 행 26 → lgx_gpu_rm_timing_by_learner.csv
+harness           tag part axis learner  n_fit       sec  sec_full_epochs     est_s  epochs_run  sec_per_fit  calib
+    h42   lg_precheck  gpu  g45     cfm      6     67.52            67.52     43.42       100.0       11.253  1.555
+    h42   lg_precheck  gpu  g45    ddpm      6     77.17            77.17     54.28       100.0       12.862  1.422
+    h42   lg_precheck  gpu  g45     ftt      6   1333.29          1333.29    405.30       100.0      222.215  3.290
+    h42   lg_precheck  gpu  g45     mlp     16     29.08            29.08     47.05       100.0        1.818  0.618
+    h42   lg_precheck  gpu  g45   nflow      6    256.28           256.28    311.20       100.0       42.713  0.824
+    h42   lg_precheck  gpu  g45    tabm      6     26.62            26.62     94.08       100.0        4.437  0.283
+    h42 lgrm_precheck  gpu  g45 realmlp      6     76.48          2447.36   5844.18         8.0       12.747  0.419
+    h42          lgxg  gpu  g45 realmlp    876 201764.71        201764.71 559041.62       256.0      230.325  0.361
+    h42         lgxr0  gpu   r0 realmlp    720  40622.64         40622.64 109749.82       256.0       56.420  0.370
+[timing] 적합 수 표(lgx_count_<부분>_detail.csv, ladder/lgv_count.csv)가 없어 본 실행 환산을 생략한다
