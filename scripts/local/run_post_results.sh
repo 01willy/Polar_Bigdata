@@ -118,7 +118,10 @@ fetch_lg() {
   mkdir -p "$LGR"
   if [ ! -f "$LGR/results_lg.tar.gz" ]; then
     say "fetch-lg: Rescale 작업 $JOB 회수(내려받기만, 새 작업 없음)"
-    "$PY" tools/rescale_client.py fetch "$JOB" --dest "$LGR" > "$PL/fetch_lg_$TS.log" 2>&1 || die "회수 실패(로그 $PL/fetch_lg_$TS.log)"
+    # 출력 파일이 많으면 전체 목록 조회가 시간 초과된다(09-30 Qjpbeb). 필요한 파일만 이름으로 받는다
+    timeout 1800 "$PY" tools/rescale_fetch_selected.py "$JOB" "$LGR" results_lg.tar.gz > "$PL/fetch_lg_$TS.log" 2>&1 || die "묶음 회수 실패(로그 $PL/fetch_lg_$TS.log)"
+    timeout 600 "$PY" tools/rescale_fetch_selected.py "$JOB" "$LGR" lg_status.csv process_output.log lg_payload_info.txt lg_timing_by_learner.csv >> "$PL/fetch_lg_$TS.log" 2>&1 || say "fetch-lg: 부가 파일 일부를 받지 못했다(로그 $PL/fetch_lg_$TS.log)"
+    gzip -t "$LGR/results_lg.tar.gz" || die "묶음 무결성 실패"
     ev fetch-lg 0 "fetch $JOB → $LGR"
   fi
   need_file "$LGR/results_lg.tar.gz"
