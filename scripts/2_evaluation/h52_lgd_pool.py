@@ -45,7 +45,20 @@ h40 MAIN_POINT 처리(WRAPUP 7.4 (b)1)
   CatBoost 만 불통과면 L40 의 기준값을 로컬 v3(v3local 표)로 바꾼다. 병기 범위(scope = all)의 결과는 메타에 적는다.
   시험 전용 인자 --allow-no-repro-gate 는 환경 변수 LGD_TEST=1 일 때만 받는다(개정 14).
 
-산출(--out-dir, 기본 data/processed/lgd): lgd_curve.csv, lgd_minn.csv, lgd_tests.csv, lgd_region_inference.csv, lgd_pool.csv, lgd_meta.json
+약관 확인분 판과 두 판 병기(LG 개정 15 (m), 실행 계획 A6)
+  전체 판은 위의 규칙 그대로다. 약관 확인분 판은 h51 --count-only --specs lic 의 적격 표(lgd_eligibility_lic.csv)가 있으면 계산한다:
+  약관 확인분 표가 있는 등록 표(NAtlantic 주 표와 L41 변형, Russia_W·Canada 확충판, L42 표)를 그 표로 바꾸고(조각 <lgd-dir>/<표>_lic/shards,
+  저장소 이름 '대상~<표지>~lic|x', manifest 의 표 기록), 적격 표의 해당 행을 약관 확인분 판의 적격(6B.4 규칙)으로 바꾼 뒤 같은 집계를 한다.
+  PE1·PE2 는 각 판의 적격 새 지역으로 따로 정한다((m)1: 부적격이면 그 판의 PE1 에서 빠진다). 부트스트랩 seed 는 h40 규칙(저장소 이름)과
+  개정 14 의 공통 난수(변형 → 그 판의 주 설정 저장소 이름)를 판 안에서 그대로 쓴다. P4 와 L39 는 두 판에서 같다.
+  주 판정 판((m)2): 사용 허락 기록(--lic-permission, 기본 <lgd-dir>/lgd_license_permission.json)에 약관 확인분 판이 뺀 셀의 자료원이 모두
+  granted 로 적혀 있을 때만 전체 판이고, 그 밖에는 약관 확인분 판이다. 결과를 보고 바꾸지 않는다. 모든 표에 lic_version(full, lic),
+  main_verdict(주 판정 판의 행이면 참), version_role('주 판정(LG 개정 15 (m)2)', 'SI: 약관 확인 전 자료 포함', '병기: 약관 확인분 판') 열을
+  붙인다. 약관 확인분 조각이 없는 표가 있으면 그 판의 행은 '행 없음' 이고 version_role 과 메타에 '미완'을 적는다.
+
+산출(--out-dir, 기본 data/processed/lgd): lgd_curve.csv, lgd_minn.csv, lgd_tests.csv, lgd_region_inference.csv, lgd_pool.csv(전체 판),
+  같은 이름에 _lic 를 붙인 약관 확인분 판 표(적격 표가 있을 때만), lgd_versions.csv(판정·비교 행의 두 판 병기와 주 판정 판),
+  lgd_meta.json(전체 판 메타와 lic 항목)
 
 실행(ROOT, LG 본 실행 회수와 LGD 본 실행 뒤):
   nice -n 10 python3 scripts/2_evaluation/h52_lgd_pool.py --lg-dir results/rescale_lg/data/processed/lg --allow-local --threads 4
@@ -138,6 +151,11 @@ def parse_args(argv=None):
     ap.add_argument("--l40-draws", type=int, default=2000)
     ap.add_argument("--threads", type=int, default=1)
     ap.add_argument("--allow-local", action="store_true", help="스레드를 --threads 로 쓴다(없으면 1)")
+    ap.add_argument("--lic-eligibility", default="", help="약관 확인분 적격 표(h51 --count-only --specs lic 산출, LG 개정 15 (m)1). "
+                                                             "기본 = <lgd-dir>/lgd_eligibility_lic.csv. 없으면 약관 확인분 판을 계산하지 않는다")
+    ap.add_argument("--lic-permission", default="", help="자료원 사용 허락 기록(JSON, LG 개정 15 (m)2·(m)3). 기본 = <lgd-dir>/lgd_license_permission.json. "
+                                                           "형식 {\"sources\": {\"<자료원 id>\": {\"granted\": true, \"date\": \"…\", \"evidence\": \"…\"}}}. "
+                                                           "약관 확인분 판이 뺀 셀의 자료원이 모두 granted 일 때만 주 판정이 전체 판이다")
     a = ap.parse_args(argv)
     a.ARGV = list(sys.argv[1:] if argv is None else argv)
     if a.allow_no_repro_gate and os.environ.get("LGD_TEST", "") != "1":
@@ -148,6 +166,8 @@ def parse_args(argv=None):
     a.LG = ab(a.lg_dir); a.LGD = ab(a.lgd_dir); a.OUT = ab(a.out_dir) if a.out_dir else a.LGD
     a.ELIG = ab(a.eligibility); a.SPLITDIST = ab(a.splitdist); a.XENV = ab(a.xenv_gate)
     a.REPRO = ab(a.repro_gate) if a.repro_gate else a.LGD / "lgd_repro_gate.csv"
+    a.LIC_EL = ab(a.lic_eligibility) if a.lic_eligibility else a.LGD / "lgd_eligibility_lic.csv"
+    a.LIC_PERM = ab(a.lic_permission) if a.lic_permission else a.LGD / "lgd_license_permission.json"
     return a
 
 
@@ -163,15 +183,23 @@ def sha256(path: Path):
 
 
 # ================================================================ 풀 정의와 MAIN_POINT(WRAPUP 7.4 (b)1)
+def el_names(rows):
+    """적격 표 행의 저장소 이름. name 열(약관 확인분 판에서 채운다)이 있으면 그 값, 없으면 '대상|x'(등록 적격 표)."""
+    nm = rows["name"] if "name" in rows else pd.Series([None] * len(rows), index=rows.index)
+    return [str(n) if isinstance(n, str) and n else f"{t}|x" for t, n in zip(rows.target, nm)]
+
+
 def pools_from_eligibility(el):
-    """적격 표 → 풀. 새 지역 = kind 가 new_region 으로 시작하는 행. 적격이고 얕은 레짐 → PE1·PE2, 적격이고 심부 → PE2, 부적격 → 점 추정."""
+    """적격 표 → 풀. 새 지역 = kind 가 new_region 으로 시작하는 행. 적격이고 얕은 레짐 → PE1·PE2, 적격이고 심부 → PE2, 부적격 → 점 추정.
+    이름은 el_names(약관 확인분 판은 '대상~lic|x')."""
     nr = el[el.kind.astype(str).str.startswith("new_region")]
-    shallow = [f"{t}|x" for t, e, g in zip(nr.target, nr.eligible, nr.regime) if bool(e) and g == "shallow"]
-    deep = [f"{t}|x" for t, e, g in zip(nr.target, nr.eligible, nr.regime) if bool(e) and g == "deep"]
-    inel = [str(t) for t, e in zip(nr.target, nr.eligible) if not bool(e)]
-    regime = {f"{t}|x": str(g) for t, g in zip(nr.target, nr.regime)}
+    nms = el_names(nr)
+    shallow = [n for n, e, g in zip(nms, nr.eligible, nr.regime) if bool(e) and g == "shallow"]
+    deep = [n for n, e, g in zip(nms, nr.eligible, nr.regime) if bool(e) and g == "deep"]
+    inel = [n.split("|")[0] for n, e in zip(nms, nr.eligible) if not bool(e)]
+    regime = {n: str(g) for n, g in zip(nms, nr.regime)}
     regime.update({nm: "shallow" for nm in P4})
-    few = {f"{t}|x": float(v) for t, v in zip(nr.target, nr.min_nb_eval_used)}
+    few = {n: float(v) for n, v in zip(nms, nr.min_nb_eval_used)}
     return dict(P4=list(P4), PE1=list(P4) + shallow, PE2=list(P4) + shallow + deep, NEW1=shallow, NEW2=shallow + deep, ineligible=inel,
                 regime=regime, min_nb_eval=few)
 
@@ -917,13 +945,14 @@ def split_range_flag(sd, ref_name, ma, mb, n, value, n_draws, subst_note):
                 split_source=f"{key}({q.iloc[0].get('source', '')}, 분할 {len(v)})")
 
 
-def l40(tms10, exp_tms, ref_tms, a, nlab, sd, ref_label, cross_label):
-    """L40: 확충판(로컬)과 v3 기준값(LG 본 실행 또는 로컬 v3)의 지역 단위 판정 비교. 분류는 L28."""
+def l40(tms10, exp_tms, ref_tms, a, nlab, sd, ref_label, cross_label, names=None):
+    """L40: 확충판(로컬)과 v3 기준값(LG 본 실행 또는 로컬 v3)의 지역 단위 판정 비교. 분류는 L28.
+    names = 확충판 표 → 저장소 이름(약관 확인분 판. 없으면 등록 이름 '대상~exp|x')."""
     rows = []
     for spec, ref_name in L40_SPECS.items():
         ex = exp_tms.get(spec)
         rf = ref_tms.get(ref_name)
-        nm_ex = R.tm_name(dict(target=ref_name.split("|")[0], suffix="expnokyt" if spec.endswith("noKytalyk") else "exp"))
+        nm_ex = (names or {}).get(spec) or R.tm_name(dict(target=ref_name.split("|")[0], suffix="expnokyt" if spec.endswith("noKytalyk") else "exp"))
         if ex is None or rf is None:
             rows.append(dict(test_id="L40", item="verdict", scope="verdict", role="보조", target=nm_ex, spec=spec, flags=UNBLIND_REPRO,
                              verdict="행 없음(" + ("확충판 조각 없음" if ex is None else "기준값 조각 없음") + ")", reference=ref_label))
@@ -965,29 +994,148 @@ def l40(tms10, exp_tms, ref_tms, a, nlab, sd, ref_label, cross_label):
     return rows
 
 
-# ================================================================ 주 흐름
-def main(argv=None):
-    a = parse_args(argv)
-    t0 = time.time()
+# ================================================================ 약관 확인분 판(LG 개정 15 (m))
+ROLE_MAIN = "주 판정(LG 개정 15 (m)2)"
+ROLE_FULL_SI = "SI: 약관 확인 전 자료 포함"
+ROLE_LIC_AUX = "병기: 약관 확인분 판"
+LIC_OUT = ("curve", "minn", "tests", "region_inference", "pool")
+
+
+def is_lic_row(k, v):
+    """manifest 의 표 기록이 약관 확인분 표인가(h51 묶음 lic)."""
+    return bool((v or {}).get("lic_of") or (v or {}).get("group") == R.LIC or str(k).endswith(f"_{R.LIC}"))
+
+
+def read_lic_eligibility(a):
+    """h51 --count-only --specs lic 의 적격 표. 없으면 None."""
+    if not a.LIC_EL.exists():
+        return None
+    le = pd.read_csv(a.LIC_EL)
+    need = {"spec", "lic_of", "target", "kind", "name", "eligible", "regime", "min_nb_eval_used"}
+    if not need <= set(le.columns):
+        raise SystemExit(f"[거부] 약관 확인분 적격 표({a.LIC_EL})에 열이 없다: {sorted(need - set(le.columns))}")
+    return le
+
+
+def lic_required_sources(le):
+    """약관 확인분 판이 뺀 셀의 자료원(사용 허락이 필요한 자료원). lic_dropped_sources(JSON)의 키 합집합."""
+    out = set()
+    if le is None or "lic_dropped_sources" not in le:
+        return []
+    for v in le.lic_dropped_sources.fillna(""):
+        try:
+            out |= set(json.loads(v).keys()) if v else set()
+        except ValueError:
+            pass
+    return sorted(out)
+
+
+def lic_main_version(a, required):
+    """(m)2 의 주 판정 판. 허락 기록에 required 의 자료원이 모두 granted(참)로 적혀 있을 때만 'full', 그 밖은 'lic'. 반환 (판, 근거, 기록)."""
+    p = a.LIC_PERM
+    rec = dict(file=str(p), exists=bool(p.exists()), required=list(required), granted=[], missing=list(required))
+    if not p.exists():
+        return "lic", "사용 허락 기록 없음", rec
     try:
-        cur_n = os.nice(0)
-        if cur_n < 10:
-            os.nice(10 - cur_n)
-    except OSError:
-        pass
-    rs, rp, rm = repro_status(a)
-    if rp is False:
-        raise SystemExit("[중단] 재현 점검(WRAPUP 7.5 (c)2)의 물리식 차이가 허용 차를 넘었다. 원인을 고칠 때까지 LGD 집계를 멈춘다")
-    if rp is None and not a.allow_no_repro_gate:
-        raise SystemExit(f"[거부] 재현 점검 기록이 없다({a.REPRO}). h51 --repro-check 를 먼저 한다(LG 본 실행 회수 뒤). "
-                         "시험에서는 --allow-no-repro-gate")
-    xs, xd = xenv_status(a)
-    el = pd.read_csv(a.ELIG)
+        d = json.loads(p.read_text())
+    except ValueError:
+        return "lic", "사용 허락 기록을 읽을 수 없다", rec
+    src = d.get("sources") if isinstance(d, dict) else None
+    src = src if isinstance(src, dict) else {}
+    granted = sorted(k for k, v in src.items() if isinstance(v, dict) and v.get("granted") is True)
+    missing = sorted(set(required) - set(granted))
+    rec.update(granted=granted, missing=missing, sha256=sha256(p))
+    if not required:
+        return "lic", "허락이 필요한 자료원 목록이 없다(약관 확인분 적격 표 없음)", rec
+    if missing:
+        return "lic", f"허락 미확인 자료원 {missing}", rec
+    return "full", "약관 확인분 판이 뺀 셀의 모든 자료원에 사용 허락 기록", rec
+
+
+def version_inputs(el, spec_rows, version, le=None):
+    """판별 입력. full: 등록 적격 표와 manifest 의 등록 표 기록 그대로. lic: 약관 확인분 표가 있는 등록 표를 그 표로 바꾼다(적격 표의 적격·레짐·
+    최소 채점 블록 행, manifest 의 표 기록, 조각 폴더). 반환 dict(el, spec_rows, smap, main_names)."""
+    reg_rows = {k: v for k, v in spec_rows.items() if not is_lic_row(k, v)}
+    if version == "full" or le is None:
+        return dict(version="full", el=el, spec_rows=reg_rows, smap={}, main_names={sp: f"{t}|x" for sp, t in R.NEW_MAIN.items()})
+    el_v = el.copy()
+    el_v["name"] = pd.Series([None] * len(el_v), index=el_v.index, dtype=object)
+    el_v["lic_spec"] = ""
+    smap, rows_v = {}, dict(reg_rows)
+    for r in le.to_dict("records"):
+        reg, lic = str(r["lic_of"]), str(r["spec"])
+        smap[reg] = lic
+        m = (el_v.spec == reg).values
+        if m.any():
+            for c in ("eligible", "regime", "min_nb_eval_used", "n_cells", "nb_union", "n_valid_splits"):
+                if c in r and c in el_v:
+                    el_v.loc[m, c] = r[c]
+            el_v.loc[m, "name"] = str(r["name"]); el_v.loc[m, "lic_spec"] = lic
+        info = dict(spec_rows.get(lic, {}))
+        info.update(tm_name=str(r["name"]), target=str(r["target"]), point_only=bool(r.get("point_only", False)), lic_of=reg)
+        rows_v[reg] = info
+    el_v["eligible"] = el_v["eligible"].astype(bool)
+    mains = {sp: (rows_v[sp]["tm_name"] if sp in smap else f"{t}|x") for sp, t in R.NEW_MAIN.items()}
+    return dict(version="lic", el=el_v, spec_rows=rows_v, smap=smap, main_names=mains)
+
+
+def lic_shard_status(a, le, spec_rows):
+    """실행할 약관 확인분 표(변형 불가·same_as 제외) 가운데 조각이 없는 표."""
+    miss = []
+    for r in le.to_dict("records"):
+        info = spec_rows.get(str(r["spec"]), {})
+        if str(r.get("run_skip", "") or "") not in ("", "nan") or info.get("same_as"):
+            continue
+        if not find_cpu_shards(a.LGD / str(r["spec"]) / "shards", R.TAG):
+            miss.append(str(r["spec"]))
+    return miss
+
+
+def tag_version(df, version, main_version, role):
+    """판 열(lic_version, main_verdict, version_role)을 붙인다."""
+    df = df.copy()
+    df["lic_version"] = version
+    df["main_verdict"] = bool(version == main_version)
+    df["version_role"] = role
+    return df
+
+
+VKEYS = ["test_id", "pool", "item", "scope", "target", "variant", "spec"]
+VCOLS = ("verdict", "stat", "binary", "l28", "aux_l28", "cross_env", "flags")
+
+
+def versions_table(td_full, td_lic, main_version, lic_status):
+    """판정·비교 행(scope verdict, compare)의 두 판 병기. 행 짝은 (test_id, pool, item, scope, target, variant, spec)로 맞추고 target 의
+    '~lic' 표지는 뺀다. verdict_main = 주 판정 판의 판정. differs = 두 판이 모두 있고 판정 문자열이 다르다."""
+    def prep(td, tag):
+        if td is None or not len(td):
+            return pd.DataFrame(columns=VKEYS + ["k"])
+        q = td[td["scope"].astype(str).isin(["verdict", "compare"])].copy()
+        for k in VKEYS:
+            q[k] = q[k].fillna("").astype(str) if k in q else ""
+        q["target"] = q["target"].str.replace(f"~{R.LIC}", "", regex=False)
+        q["k"] = q.groupby(VKEYS).cumcount()
+        cols = {c: f"{c}_{tag}" for c in VCOLS if c in q}
+        return q[VKEYS + ["k"] + list(cols)].rename(columns=cols)
+    m = prep(td_full, "full").merge(prep(td_lic, "lic"), on=VKEYS + ["k"], how="outer")
+    for c in ("verdict_full", "verdict_lic"):
+        if c not in m:
+            m[c] = np.nan
+    m["main_version"] = main_version
+    m["verdict_main"] = m["verdict_lic" if main_version == "lic" else "verdict_full"]
+    m["differs"] = m.verdict_full.notna() & m.verdict_lic.notna() & (m.verdict_full.astype(str) != m.verdict_lic.astype(str))
+    m["lic_status"] = lic_status
+    return m.drop(columns="k")
+
+
+# ================================================================ 한 판의 집계
+def run_version(a, V, st):
+    """한 판(전체 또는 약관 확인분)의 집계. V = version_inputs 의 결과, st = 공통 상태(재현·교차 환경·LG 조각·조각 캐시).
+    MAIN_POINT 는 이 판의 적격 표로 바꾼 뒤 TMx 를 만든다(판마다 다시 정한다). 전체 판은 개정 14 까지의 집계와 같은 계산이다."""
+    el, spec_rows, smap, main_names = V["el"], V["spec_rows"], V["smap"], V["main_names"]
+    rs, rm, xs = st["rs"], st["rm"], st["xs"]
     pools = pools_from_eligibility(el)
-    man_path = a.LGD / "lgd_run_manifest.json"
-    man = json.loads(man_path.read_text()) if man_path.exists() else {"specs": {}}
     specs_all = R.GROUPS
-    spec_rows = man.get("specs", {})
 
     # 점 추정 전용 저장소(부적격 새 지역, (h) 변형, 적격 표에서 부적격인 변형)의 이름. 적격 표에서 정하고 manifest 의 기록을 더한다
     el_by = el.set_index("spec")
@@ -995,28 +1143,30 @@ def main(argv=None):
     for sp_, r_ in el_by.iterrows():
         k_ = str(r_.get("kind", ""))
         if k_.startswith("variant_L41") and (k_ == "variant_L41h" or not bool(r_.get("eligible", False))):
-            po_names.append(R.tm_name(dict(target=str(r_["target"]), suffix=k_.replace("variant_", ""))).split("|")[0])
+            nm_ = r_.get("name")
+            po_names.append(str(nm_).split("|")[0] if isinstance(nm_, str) and nm_ else
+                            R.tm_name(dict(target=str(r_["target"]), suffix=k_.replace("variant_", ""))).split("|")[0])
     for sp_, info_ in spec_rows.items():
         if info_.get("point_only") and info_.get("tm_name"):
             po_names.append(info_["tm_name"].split("|")[0])
     mp_new = set_main_point(pools["ineligible"], sorted(set(po_names)))
 
     # ---------------- 조각 읽기
-    loaded, plat = {}, {}
-    for nm in P4:
-        L = load_group(a.LG / "shards", a.lg_tag, nm.split("|")[0], nm, a.lg_platform)
-        if L is not None:
-            loaded[nm] = L; plat[nm] = a.lg_platform
+    loaded, plat = dict(st["lg_loaded"]), dict(st["lg_plat"])
 
     def lgd_group(spec):
         info_ = spec_rows.get(spec, {})
-        src_spec = info_.get("same_as") or spec
+        src_spec = info_.get("same_as") or smap.get(spec, spec)
         target = info_.get("target") or (R.NEW_MAIN.get(spec) if spec in R.NEW_MAIN else None)
         if target is None:
             return None, None
         name = info_.get("tm_name") or R.tm_name(dict(target=target, suffix=""))
-        L = load_group(a.LGD / src_spec / "shards", R.TAG, target, name, "local")
+        key = (str(src_spec), str(target), str(name))
+        if key not in st["cache"]:
+            st["cache"][key] = load_group(a.LGD / src_spec / "shards", R.TAG, target, name, "local")
+        L = st["cache"][key]
         if L is not None:
+            L = dict(L)
             L["same_as"] = info_.get("same_as")
         return name, L
 
@@ -1040,7 +1190,7 @@ def main(argv=None):
     for spec, (nm, L) in lgd_loaded.items():
         spec_tm1[spec] = method_view(make_tm(nm, L, a.nboot_h40))
         base_ = variant_base(spec, spec_rows)
-        main_nm = f"{R.NEW_MAIN[base_]}|x" if base_ in R.NEW_MAIN else None
+        main_nm = main_names.get(base_) if base_ in R.NEW_MAIN else None
         if main_nm and L.get("same_as") and main_nm in tms10:
             spec_tm10[spec] = tms10[main_nm]                          # same_as: 주 설정의 TMx 를 그대로 쓴다(개정 14)
             crn[spec] = f"same_as → {main_nm} 의 TMx"
@@ -1056,7 +1206,7 @@ def main(argv=None):
         c_ = H.build_curve({nm: tm}, loaded[nm]["runs"]) if len(loaded[nm]["runs"]) else pd.DataFrame()
         if len(c_):
             c_["pool_member"] = nm; c_["platform"] = plat[nm]; c_["spec"] = "LG" if plat[nm] != "local" else next(
-                (s for s, (n2, _) in lgd_loaded.items() if n2 == nm), "")
+                (smap.get(s, s) for s, (n2, _) in lgd_loaded.items() if n2 == nm), "")
             curs.append(c_)
     for spec, tm in spec_tm1.items():
         nm, L = lgd_loaded[spec]
@@ -1064,7 +1214,7 @@ def main(argv=None):
             continue
         c_ = H.build_curve({nm: tm}, L["runs"]) if len(L["runs"]) else pd.DataFrame()
         if len(c_):
-            c_["pool_member"] = ""; c_["platform"] = "local"; c_["spec"] = spec
+            c_["pool_member"] = ""; c_["platform"] = "local"; c_["spec"] = smap.get(spec, spec)
             curs.append(c_)
     cur = pd.concat(curs, ignore_index=True) if curs else pd.DataFrame(columns=["target", "mode", "n", "method"] + H.GRP_COLS)
     mn = H.build_minn(cur) if len(cur) else pd.DataFrame()
@@ -1109,14 +1259,14 @@ def main(argv=None):
     tests += l38_rows
 
     # ---------------- L39
-    main_tib = tms10.get("Tibet_LGD|x")
+    main_tib = tms10.get(main_names.get("Tibet", "Tibet_LGD|x"))
     t39 = spec_tm10.get("Tibet_L39_temp")
     po39 = bool(spec_rows.get("Tibet_L39_temp", {}).get("point_only", False))
     tests += l39(main_tib, t39, a, po39)
 
     # ---------------- L40
     repro_ml_fail = rm is False
-    sd = splitdist_table(a)
+    sd = st["sd"]
     exp_tms = {spec: spec_tm10[spec] for spec in L40_SPECS if spec in spec_tm10}
     if repro_ml_fail:
         ref_tms = {f"{t}|x": spec_tm10.get(f"v3local_{t}") for t in R.V3LOCAL}
@@ -1128,16 +1278,24 @@ def main(argv=None):
         ref_tms = {nm: tms10.get(nm) for nm in ("Russia_W|x", "Russia_E|x", "Canada|x") if tms10.get(nm) is not None}
         ref_label = "LG 본 실행(Rescale)"
         cross_l40 = "교차 환경(보조)" + (f"; {xs}" if xs else "")
-    tests += l40(tms10, exp_tms, ref_tms, a, nlab, sd, ref_label, cross_l40)
+    l40_names = {spec: spec_rows[spec]["tm_name"] for spec in L40_SPECS if spec in smap and spec_rows.get(spec, {}).get("tm_name")}
+    tests += l40(tms10, exp_tms, ref_tms, a, nlab, sd, ref_label, cross_l40, names=l40_names or None)
 
     # ---------------- L41, L42
     def el_few(spec_):
         return float(el_by.loc[spec_, "min_nb_eval_used"]) if spec_ in el_by.index and pd.notna(el_by.loc[spec_, "min_nb_eval_used"]) else np.nan
 
     for sp_main, tgt in R.NEW_MAIN.items():
-        nm_main = f"{tgt}|x"
+        nm_main = main_names.get(sp_main, f"{tgt}|x")
         base_state = l38_state.get(nm_main)
         if base_state is None:
+            if nm_main.split("|")[0] in pools["ineligible"]:             # 주 설정이 이 판의 적격 표에서 부적격(점 추정만)
+                why = "행 없음(주 설정이 이 판의 적격 표에서 부적격: 점 추정만, 6B.4)"
+                for v in R.L41_VARIANTS:
+                    tests.append(dict(test_id="L41", item="verdict", scope="verdict", role="보조", variant=f"({v})", verdict=why,
+                                      target=(spec_rows.get(f"{sp_main}_L41{v}", {}) or {}).get("tm_name") or R.tm_name(dict(target=tgt, suffix=f"L41{v}"))))
+                tests.append(dict(test_id="L42", item="verdict", scope="verdict", role="보조", variant="원천 + 다른 새 지역", verdict=why,
+                                  target=(spec_rows.get(f"{sp_main}_L42", {}) or {}).get("tm_name") or R.tm_name(dict(target=tgt, suffix="L42"))))
             continue
         for v in R.L41_VARIANTS:
             spec = f"{sp_main}_L41{v}"
@@ -1165,34 +1323,114 @@ def main(argv=None):
                                platforms=",".join(sorted({plat.get(nm, "없음") for nm in names})),
                                cross_env=(f"교차 환경; {xs}" if len({plat.get(nm, '') for nm in names if nm in plat}) > 1 else ""),
                                few_blocks=",".join(nm.split("|")[0] for nm in names if pools["min_nb_eval"].get(nm, 99) < FEW_BLOCKS)))
+    if pools["ineligible"]:
+        pool_rows_.append(dict(pool="point_only", n_regions=len(pools["ineligible"]), regions=",".join(pools["ineligible"]),
+                               note="적격 표에서 부적격인 새 지역(점 추정만, 6B.4)"))
     pool_df = pd.DataFrame(pool_rows_)
-
-    # ---------------- 쓰기
-    O = a.OUT; O.mkdir(parents=True, exist_ok=True)
     td = pd.DataFrame(tests)
     front = ["test_id", "pool", "item", "scope", "role", "target", "spec", "variant", "n", "delta", "ci_lo", "ci_hi", "delta_blockeq", "ci_lo_beq",
              "ci_hi_beq", "sig", "verdict4", "verdict4_common", "ci_dependence", "direction", "l28", "flags", "cross_env", "verdict", "stat"]
     td = td[[c for c in front if c in td] + [c for c in td.columns if c not in front]] if len(td) else td
-    cur.to_csv(O / "lgd_curve.csv", index=False)
-    mn.to_csv(O / "lgd_minn.csv", index=False)
-    td.to_csv(O / "lgd_tests.csv", index=False)
-    ri.to_csv(O / "lgd_region_inference.csv", index=False)
-    pool_df.to_csv(O / "lgd_pool.csv", index=False)
-    meta = dict(stage="LGD 확장 풀 집계(h52)", plan="docs/EXPERIMENT_PLAN_LG_2026-09-29.md 6B.5·6B.6(개정 14), WRAPUP 7.2–7.5(커밋 316714c)",
+    return dict(version=V["version"], cur=cur, mn=mn, tests=td, ri=ri, pool=pool_df, pools=pools, main_point=mp_new, plat=plat, crn=crn,
+                cross_txt=cross_txt, loaded=loaded, lgd_loaded=lgd_loaded, ref_label=ref_label, cross_l40=cross_l40, smap=smap)
+
+
+def loaded_meta(res):
+    return dict(lg={nm: dict(dir=L["dir"], code_sha=L["code_sha"], cfg_common=L["cfg_common"], status=L["status"],
+                             splits=sorted(L["by_split"])) for nm, L in res["loaded"].items() if res["plat"].get(nm) != "local"},
+                lgd={spec: dict(name=nm, dir=L["dir"], same_as=L.get("same_as"), code_sha=L["code_sha"], cfg_common=L["cfg_common"],
+                                status=L["status"], splits=sorted(L["by_split"])) for spec, (nm, L) in res["lgd_loaded"].items()})
+
+
+# ================================================================ 주 흐름
+def main(argv=None):
+    a = parse_args(argv)
+    t0 = time.time()
+    try:
+        cur_n = os.nice(0)
+        if cur_n < 10:
+            os.nice(10 - cur_n)
+    except OSError:
+        pass
+    rs, rp, rm = repro_status(a)
+    if rp is False:
+        raise SystemExit("[중단] 재현 점검(WRAPUP 7.5 (c)2)의 물리식 차이가 허용 차를 넘었다. 원인을 고칠 때까지 LGD 집계를 멈춘다")
+    if rp is None and not a.allow_no_repro_gate:
+        raise SystemExit(f"[거부] 재현 점검 기록이 없다({a.REPRO}). h51 --repro-check 를 먼저 한다(LG 본 실행 회수 뒤). "
+                         "시험에서는 --allow-no-repro-gate")
+    xs, xd = xenv_status(a)
+    el = pd.read_csv(a.ELIG)
+    man_path = a.LGD / "lgd_run_manifest.json"
+    man = json.loads(man_path.read_text()) if man_path.exists() else {"specs": {}}
+    spec_rows = man.get("specs", {})
+
+    # ---------------- 공통 상태: LG 조각(P4), 분할 분포, 조각 캐시
+    lg_loaded, lg_plat = {}, {}
+    for nm in P4:
+        L = load_group(a.LG / "shards", a.lg_tag, nm.split("|")[0], nm, a.lg_platform)
+        if L is not None:
+            lg_loaded[nm] = L; lg_plat[nm] = a.lg_platform
+    st = dict(rs=rs, rm=rm, xs=xs, lg_loaded=lg_loaded, lg_plat=lg_plat, sd=splitdist_table(a), cache={})
+
+    # ---------------- 약관 확인분 판의 입력과 주 판정 판(LG 개정 15 (m)2)
+    le = read_lic_eligibility(a)
+    required = lic_required_sources(le)
+    main_version, main_basis, perm = lic_main_version(a, required)
+    V_full = version_inputs(el, spec_rows, "full")
+    V_lic = version_inputs(el, spec_rows, "lic", le) if le is not None else None
+    if le is None:
+        lic_status = "계산하지 않음(약관 확인분 적격 표 없음: h51 --count-only --specs lic 전)"
+        missing = []
+    else:
+        missing = lic_shard_status(a, le, spec_rows)
+        stale = [str(r["spec"]) for r in le.to_dict("records") if "table_sha256" in r and pd.notna(r["table_sha256"])
+                 and (spec_rows.get(str(r["spec"])) or {}).get("table_sha256") not in (None, r["table_sha256"])]
+        lic_status = ("완료" if not missing else f"미완(조각 없는 약관 확인분 표: {', '.join(missing)})") + (
+            f"; 적격 표와 manifest 의 실행 표 해시 불일치 {stale}" if stale else "")
+
+    # ---------------- 두 판의 집계(전체 판을 마지막에 계산해 MAIN_POINT 를 전체 판으로 남긴다)
+    res_lic = run_version(a, V_lic, st) if V_lic is not None else None
+    res = run_version(a, V_full, st)
+    role_full = ROLE_MAIN if main_version == "full" else ROLE_FULL_SI
+    role_lic = (ROLE_MAIN if main_version == "lic" else ROLE_LIC_AUX) + ("" if lic_status == "완료" else f"; {lic_status}")
+    tagged = {k: tag_version(res[k2], "full", main_version, role_full) for k, k2 in
+              (("curve", "cur"), ("minn", "mn"), ("tests", "tests"), ("region_inference", "ri"), ("pool", "pool"))}
+    tagged_lic = ({k: tag_version(res_lic[k2], "lic", main_version, role_lic) for k, k2 in
+                   (("curve", "cur"), ("minn", "mn"), ("tests", "tests"), ("region_inference", "ri"), ("pool", "pool"))}
+                  if res_lic is not None else None)
+    vt = versions_table(res["tests"], res_lic["tests"] if res_lic is not None else None, main_version, lic_status)
+
+    # ---------------- 쓰기
+    O = a.OUT; O.mkdir(parents=True, exist_ok=True)
+    for k in LIC_OUT:
+        tagged[k].to_csv(O / f"lgd_{k}.csv", index=False)
+        if tagged_lic is not None:
+            tagged_lic[k].to_csv(O / f"lgd_{k}_lic.csv", index=False)
+    vt.to_csv(O / "lgd_versions.csv", index=False)
+    pools, cur, mn, td, ri = res["pools"], res["cur"], res["mn"], res["tests"], res["ri"]
+    lic_meta = dict(rule="LG 개정 15 (m): 약관 확인분 판 = lic_unverified 셀을 뺀 표(h51 묶음 lic). 두 판을 병기하고 (m)2 로 주 판정 판을 정한다",
+                    status=lic_status, main_version=main_version, main_basis=main_basis, permission=perm, required_sources=required,
+                    eligibility=dict(file=str(a.LIC_EL), sha256=sha256(a.LIC_EL)) if le is not None else None,
+                    missing_shards=missing, roles=dict(full=role_full, lic=role_lic if le is not None else ""),
+                    outputs=dict(full=[f"lgd_{k}.csv" for k in LIC_OUT], lic=[f"lgd_{k}_lic.csv" for k in LIC_OUT] if res_lic is not None else [],
+                                 versions="lgd_versions.csv"))
+    if res_lic is not None:
+        lic_meta.update(spec_map=res_lic["smap"], pools={k: res_lic["pools"][k] for k in ("P4", "PE1", "PE2", "NEW1", "NEW2", "ineligible")},
+                        regime=res_lic["pools"]["regime"], main_point=res_lic["main_point"], crn=res_lic["crn"], cross_env=res_lic["cross_txt"],
+                        platform=res_lic["plat"], l40_reference=res_lic["ref_label"], l40_cross_env=res_lic["cross_l40"], loaded=loaded_meta(res_lic),
+                        n_rows=dict(curve=int(len(res_lic["cur"])), minn=int(len(res_lic["mn"])), tests=int(len(res_lic["tests"])),
+                                    region_inference=int(len(res_lic["ri"]))))
+    meta = dict(stage="LGD 확장 풀 집계(h52)", plan="docs/EXPERIMENT_PLAN_LG_2026-09-29.md 6B.5·6B.6(개정 14, 15 (m)), WRAPUP 7.2–7.5(커밋 316714c)",
                 script="scripts/2_evaluation/h52_lgd_pool.py", script_sha256=sha256(Path(__file__)), h40_code_sha=H.code_sha(),
                 h42_code_sha=X.code_sha_x() if hasattr(X, "code_sha_x") else "", created=time.strftime("%Y-%m-%d %H:%M"),
                 args={k: (str(v) if isinstance(v, Path) else v) for k, v in vars(a).items() if k.islower()},
                 inputs=dict(eligibility=sha256(a.ELIG), manifest=sha256(man_path), splitdist=sha256(a.SPLITDIST), xenv=sha256(a.XENV),
-                            repro=sha256(a.REPRO)),
-                main_point=dict(original=MAIN_POINT_ORIG, overridden=mp_new, rule="WRAPUP 7.4 (b)1: 적격 표의 부적격 새 지역 + 점 추정 전용 변형 저장소"),
+                            repro=sha256(a.REPRO), lic_eligibility=sha256(a.LIC_EL), lic_permission=sha256(a.LIC_PERM)),
+                main_point=dict(original=MAIN_POINT_ORIG, overridden=res["main_point"], rule="WRAPUP 7.4 (b)1: 적격 표의 부적격 새 지역 + 점 추정 전용 변형 저장소"),
                 pools={k: pools[k] for k in ("P4", "PE1", "PE2", "NEW1", "NEW2", "ineligible")}, regime=pools["regime"],
-                platform=plat, cross_env=cross_txt, xenv_i=xs, xenv_summary={k: v for k, v in (xd or {}).items() if k not in ("over_tol_keys", "by_method")},
-                repro_gate=rs, repro_gate_all_scope=repro_all_scope(a), crn=crn, argv=a.ARGV,
-                l40_reference=ref_label, l40_cross_env=cross_l40,
-                loaded=dict(lg={nm: dict(dir=L["dir"], code_sha=L["code_sha"], cfg_common=L["cfg_common"], status=L["status"],
-                                         splits=sorted(L["by_split"])) for nm, L in loaded.items() if plat.get(nm) != "local"},
-                            lgd={spec: dict(name=nm, dir=L["dir"], same_as=L.get("same_as"), code_sha=L["code_sha"], cfg_common=L["cfg_common"],
-                                            status=L["status"], splits=sorted(L["by_split"])) for spec, (nm, L) in lgd_loaded.items()}),
+                platform=res["plat"], cross_env=res["cross_txt"], xenv_i=xs, xenv_summary={k: v for k, v in (xd or {}).items() if k not in ("over_tol_keys", "by_method")},
+                repro_gate=rs, repro_gate_all_scope=repro_all_scope(a), crn=res["crn"], argv=a.ARGV,
+                l40_reference=res["ref_label"], l40_cross_env=res["cross_l40"], loaded=loaded_meta(res),
                 nboot=dict(L1e_L4e_L8e=a.nboot_h40, four_way=a.nboot, l40_split_draws=a.l40_draws), delta_eq=[a.delta_eq, a.delta_eq_aux],
                 rules=dict(L1e="유의 개선 지역 수 > ⌊N/4⌋ 이면 기각. 전량 행은 실제 라벨 수 ≤ 40 인 지역만",
                            compare="(a)1: L1e 지지·기각, L4e n ≤ 10 성립, L8e 지지·기각. 다르면 풀 4분 판정의 L28 분류와 반전·희석",
@@ -1201,13 +1439,26 @@ def main(argv=None):
                            same_as="실행 표가 주 설정과 같은 변형은 주 설정 조각과 주 설정의 TMx 를 쓴다(모든 행이 주 설정과 같다)",
                            crn="L41·L42 변형의 부트스트랩 seed 는 주 설정 저장소 이름이다(h40 TMx.seed 와 h42 boot_delta_common 의 tm.name)",
                            common_ci="(a)4: L1e 지역, L4e·L8e 지역과 MEAN, L4e-PE2 병기, (a)1 풀 대비, L38–L42 에 공통 재표집 보조 CI",
-                           platform="모든 대비는 한 지역의 한 플랫폼 조각 안에서 닫힌다(WRAPUP 8.6 (1))"),
+                           platform="모든 대비는 한 지역의 한 플랫폼 조각 안에서 닫힌다(WRAPUP 8.6 (1))",
+                           lic="LG 개정 15 (m): 두 판(full, lic)을 같은 규칙으로 집계한다. PE1·PE2 는 판마다 그 판의 적격 새 지역. 주 판정 판은 사용 허락 "
+                               "기록으로만 정한다(결과를 보고 바꾸지 않는다). 판 안의 seed 는 그 판의 저장소 이름"),
                 n_rows=dict(curve=int(len(cur)), minn=int(len(mn)), tests=int(len(td)), region_inference=int(len(ri))),
-                elapsed_s=round(time.time() - t0, 1))
+                lic=lic_meta, elapsed_s=round(time.time() - t0, 1))
     (O / "lgd_meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1, default=str))
     print(f"[h52] 곡선 {len(cur):,} · 판정 표 {len(td):,} · 지역 추론 {len(ri)} · 풀 P4 {len(pools['P4'])}, PE1 {len(pools['PE1'])}, "
           f"PE2 {len(pools['PE2'])} · {rs} · {xs} · {time.time() - t0:.0f}s → {O}/lgd_*", flush=True)
-    return dict(curve=cur, minn=mn, tests=td, region_inference=ri, pool=pool_df, meta=meta)
+    if res_lic is not None:
+        pl = res_lic["pools"]
+        print(f"[h52] 약관 확인분 판: {lic_status} · 풀 PE1 {len(pl['PE1'])}, PE2 {len(pl['PE2'])}(부적격 새 지역 {pl['ineligible'] or '없음'}) · "
+              f"판정 표 {len(res_lic['tests']):,} → {O}/lgd_*_lic.csv", flush=True)
+    else:
+        print(f"[h52] 약관 확인분 판: {lic_status}", flush=True)
+    print(f"[h52] 주 판정 판(LG 개정 15 (m)2): {'약관 확인분 판' if main_version == 'lic' else '전체 판'}({main_basis}) → {O}/lgd_versions.csv", flush=True)
+    out = dict(curve=tagged["curve"], minn=tagged["minn"], tests=tagged["tests"], region_inference=tagged["region_inference"], pool=tagged["pool"],
+               meta=meta, versions=vt, main_version=main_version)
+    if tagged_lic is not None:
+        out["lic"] = dict(tagged_lic, pools=res_lic["pools"], crn=res_lic["crn"], main_point=res_lic["main_point"])
+    return out
 
 
 if __name__ == "__main__":

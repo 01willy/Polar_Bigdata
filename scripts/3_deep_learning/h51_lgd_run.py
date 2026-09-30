@@ -16,7 +16,13 @@ docs/EXPERIMENT_PLAN_WRAPUP_2026-09-30.md 7절(커밋 316714c, 개정 1)의 실�
               v3 하위 지점 평균 행(17520, 17569)을 뺀다(개정 13). v3 QTP_CN(17389)은 원천에 남긴다
   repro       v4 에서 v3 행만 고른 표(러시아 W, 분할 1). WRAPUP 7.5 (c)2 의 재현 점검용(LG 본 실행 조각 회수 뒤)
   v3local     v4 에서 v3 행만 고른 표(러시아 W·E·캐나다, 분할 5). (c)2 에서 CatBoost 만 허용 차를 넘을 때 L40 의 로컬 v3 기준값
-  야말 GGD402 보조 148셀은 어느 표에도 넣지 않는다. 주 설정의 원천은 v3 F4_direct 셀이다(다른 새 지역 셀은 L42 에서만).
+  lic         약관 확인분 판(LG 개정 15 (m), 선택 묶음). lic_unverified = 1 셀(fidelity_base_v4_labels.csv 의 약관 열)이 든 등록 표마다
+              그 셀만 뺀 표. 표 이름은 '<등록 표>_lic', 저장소 이름은 '대상~<표지>~lic|x'(주 설정은 '대상~lic|x'), 조각은
+              <out-dir>/<표 이름>/shards/ 라서 등록 표의 조각과 겹치지 않는다. 해당 표는 NAtlantic 주 표와 L41 변형 8개, Russia_W·Canada
+              확충판(L40), L42 표 3개의 14표다(등록 목록 LIC_BASES 와 자료로 센 목록을 대조하고, 다르면 lic 묶음을 거부한다). 원천, 뺀 v3 행,
+              절단 하한 대입(L41 f), 분할 수, 역할은 등록 표와 같다. L41 변형의 same_as 기준과 L42 의 주 설정은 주 설정의 약관 확인분 표다.
+  야말 GGD402 보조 148셀은 어느 표에도 넣지 않는다((m)4: 들어가면 약관 확인분 판에서 빠진다. 점검이 확인한다).
+  주 설정의 원천은 v3 F4_direct 셀이다(다른 새 지역 셀은 L42 에서만).
 
 범위(6B.6): CPU 방법 축(P0–P3, D0, D1, R0–R3, V1, V1r, CatBoost), 분할 5, n 격자 {0, 3, 10, 40, 160, 320, 1000, 전량}(|A| 미만과 전량),
   추출 5, seed 2, λ {0.25, 0.5, 1.0}. α 축(--alphas 1), 배치 축(--place-n-grid 빈 값), 학습기 축(--learners catboost_lo,
@@ -35,6 +41,18 @@ docs/EXPERIMENT_PLAN_WRAPUP_2026-09-30.md 7절(커밋 316714c, 개정 1)의 실�
 
 같은 실행 표(same_as, 개정 14): L41 변형의 실행 표가 같은 대상의 주 설정 표와 같으면 다시 적합하지 않고 주 설정 조각을 쓴다. '같다'는
   바이트가 같거나, 열 이름·행 수·문자열 열이 같고 수치 열의 최대 절대 차가 1e-9 이하인 경우다(판정 근거는 manifest 의 same_as_basis).
+
+약관 확인분 판 점검(--count-only --specs lic, LG 개정 15 (m)1)
+  표마다 (1) 등록 표에서 lic_unverified 줄만 빠졌는지(원문 줄 대조, 나머지 줄은 바이트와 순서가 같다), (2) 약관 미확인 행이 남지 않았는지
+  (야말 보조 행 포함), (3) (m)1 의 셀 수(NAtlantic 새 셀 19/38, Canada 확충판 37/75, Russia_W 확충판 7/8)를 확인한다. 적격은 6B.4 규칙을
+  그대로 쓴다: h40 분할 구조에서 유효 분할 ≥ 1 이고 사용 분할의 채점 블록 합집합 ≥ 8(MIN_BLOCKS_CI). 사용 분할의 최소 채점 블록 < 5 이면
+  '소수 블록'. 레짐은 등록 적격 표(개정 13)의 전체 판 레짐을 쓰고 라벨 평균을 다시 계산하지 않는다(WRAPUP 7.2 (a)7 과 A6 지시: 대상 라벨로는
+  개수만 센다). 새 지역 표는 값을 쓰지 않는 상한으로 얕은 레짐이 유지됨을 확인한다: 라벨은 0 보다 크므로(6B.3) 약관 확인분 평균 ≤
+  (등록 평균 + 0.05) × 전체 판 유한 라벨 수 / 약관 확인분 유한 라벨 수 이고, 이 값이 150 cm 미만이면 얕은 레짐이다. 확인하지 못하면 레짐을
+  '미정'으로 두고 점검 불통과로 적는다(사용자 확인). 산출 lgd_eligibility_lic.csv(h52 가 읽는다), lgd_count_lic.csv,
+  lgd_count_lic_summary.csv, manifest 의 count_lic 와 표별 기록. 등록 표의 점검 표(lgd_count.csv, lgd_count_summary.csv, manifest 의
+  count)는 lic 표만 점검할 때 바꾸지 않는다. 학습(--specs lic --allow-local)은 점검 통과 기록이 있는 표만 돌고, 약관 확인분 판에서 부적격인
+  L41 변형은 돌지 않는다('변형 불가'). 부적격인 새 지역 표는 점 추정으로 돈다(등록 판과 같은 규칙).
 
 재현 점검(--repro-check, WRAPUP 7.5 (c)2, 개정 14 의 키 범위): repro 표의 조각과 LG 본 실행 조각(--lg-shards, tag lg)을 공통 키(방법 축,
   α 1, 셀 무작위)의 키별 셀 가중 RMSE 로 대조한다. 키 분류(key_class): 물리식 = P0–P3(허용 차 1e-9 cm), ridge = V1(sklearn Ridge 앵커)과
@@ -61,6 +79,7 @@ docs/EXPERIMENT_PLAN_WRAPUP_2026-09-30.md 7절(커밋 316714c, 개정 1)의 실�
   run_tables/<spec>/                 실행 표와 토양 표 연결(약관 미확인 행 포함, .gitignore 로 커밋 제외)
   <spec>/shards/lgd__cpu__<대상>__x__s<분할>_{runs.csv, blocksse.npz, unit.json}
   lgd_count.csv, lgd_count_summary.csv  표·분할별 구조와 적합 수, 점검 결과
+  lgd_count_lic.csv, lgd_count_lic_summary.csv, lgd_eligibility_lic.csv  약관 확인분 판의 점검과 적격(LG 개정 15 (m))
   lgd_run_manifest.json              표 정의, 해시, same_as 와 근거, 점검 결과, 묶음별 추정 시간, 티베트 지지 밖 비율, 판 목록, 실행 인자,
                                      스모크 요약(smoke)
   lgd_repro_gate.csv                 재현 점검(scope = base 주 판정, all 병기)
@@ -75,6 +94,8 @@ docs/EXPERIMENT_PLAN_WRAPUP_2026-09-30.md 7절(커밋 316714c, 개정 1)의 실�
             --threads 4 --repro-check --lg-shards results/rescale_lg/data/processed/lg/shards
   스모크:  OMP_NUM_THREADS=4 nice -n 10 python3 scripts/3_deep_learning/h51_lgd_run.py --smoke --specs NAtlantic,Russia_C --allow-local \
             --workers 1 --threads 4
+  약관 확인분 판: 점검 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=2 nice -n 10 python3 scripts/3_deep_learning/h51_lgd_run.py --count-only \
+            --specs lic --threads 2. 실행(LG 회수 뒤, 파이프라인 lgd-lic) --specs lic --allow-local --workers 2 --threads 4 --resume
 """
 from __future__ import annotations
 
@@ -86,7 +107,9 @@ import os
 import platform
 import resource
 import sys
+import tempfile
 import time
+from collections import Counter
 from pathlib import Path
 
 
@@ -136,6 +159,7 @@ H = _load("h40_label_grid", SCRIPT_DIR / "h40_label_grid.py")
 
 from polar.m1_core import eval_mask, half_split_blocks                                               # noqa: E402
 from polar.h4_common import load_stores, seed_of                                                     # noqa: E402
+from polar.m1_stats import MIN_BLOCKS_CI                                                             # noqa: E402
 
 _ELIG = None
 
@@ -192,6 +216,21 @@ GROUPS = dict(main=["Tibet", "NAtlantic", "Russia_C"],
               repro=["repro_Russia_W"],
               v3local=[f"v3local_{t}" for t in V3LOCAL])
 DEFAULT_GROUPS = ("main", "l40", "l39", "l41", "l42")
+# LG 개정 15 (m): 약관 확인분 판(선택 묶음 "lic"). 등록 표 이름 → '<등록 표>_lic'. 목록은 (m)1 의 표(자료로 센 목록과 대조한다)
+LIC = "lic"
+LIC_BASES = (["NAtlantic"] + [f"NAtlantic_L41{v}" for v in L41_VARIANTS] + ["Russia_W_expanded", "Canada_expanded"]
+             + [f"{t}_L42" for t in NEW_MAIN])
+LIC_M1 = {"NAtlantic": (19, 38), "Canada_expanded": (37, 75), "Russia_W_expanded": (7, 8)}   # (m)1: (약관 확인분 새 대상 셀, 전체 판 새 대상 셀)
+DEEP_CM = 150.0                                                                                # 6B.4 레짐 기준(lgd_eligibility_v1.DEEP_CM)
+FEW_BLOCKS = 5                                                                                 # 소수 블록 기준(lgd_eligibility_v1.FEW_BLOCKS)
+
+
+def lic_name(spec):
+    """등록 표 이름 → 약관 확인분 표 이름(LG 개정 15 (m))."""
+    return f"{spec}_{LIC}"
+
+
+GROUPS[LIC] = [lic_name(s) for s in LIC_BASES]
 
 
 def tm_name(spec):
@@ -205,7 +244,8 @@ def tm_name(spec):
 def parse_args(argv=None):
     ap = argparse.ArgumentParser(description="H51 LGD 실행기(계획서 6B.6, WRAPUP 7절)")
     ap.add_argument("--specs", default=",".join(DEFAULT_GROUPS),
-                    help="쉼표 목록. 묶음 이름(main, l40, l39, l41, l42, repro, v3local, all) 또는 표 이름. 기본 = main,l40,l39,l41,l42")
+                    help="쉼표 목록. 묶음 이름(main, l40, l39, l41, l42, repro, v3local, lic, all) 또는 표 이름. 기본 = main,l40,l39,l41,l42. "
+                         "all 에 선택 묶음(repro, v3local, lic)은 들어가지 않는다")
     ap.add_argument("--count-only", action="store_true", help="학습 없이 실행 표를 만들고 셀 수·분할 구조·적합 수를 점검한다(WRAPUP 7.4 (b)4)")
     ap.add_argument("--allow-local", action="store_true", help="학습을 하는 실행을 허용한다(개정 13: LGD 는 로컬 서버에서 한다)")
     ap.add_argument("--workers", type=int, default=WORKERS_MAX, help=f"CPU 프로세스 수(최대 {WORKERS_MAX}, WRAPUP 8.5)")
@@ -317,6 +357,14 @@ class Tables:
         self.parent_avg = sorted(int(x) for x in parent_avg)
         assert self.parent_avg == [17520, 17569], f"v3 하위 지점 평균 행이 개정 13 기록과 다르다: {self.parent_avg}"
         self.qtp_v3 = sorted(int(x) for x in self.v3lab.index[self.v3lab.lgd_role.astype(str).str.startswith("v3_f4_temp_derived")])
+        # LG 개정 15 (m): 약관 미확인 새 행(대상 셀과 야말 보조 행). v3 행에는 약관 열이 없다(결측)
+        assert not (self.lab[self.lab.part == "v3"].lic_unverified.fillna(0) == 1).any(), "v3 행에 lic_unverified 표지가 있다"
+        lic = new[new.lic_unverified.fillna(0).astype(float) == 1]
+        self.lic_ids = set(int(x) for x in lic.loc_id)
+        self.lic_src = {int(i): str(s) for i, s in zip(lic.loc_id, lic.sources.fillna(""))}
+        self.new_macro = {int(i): str(m) for i, m in zip(new.loc_id, new.macro_v4)}
+        self.lic_tables = []
+        self.lic_set_ok = None
 
     # -- 새 행 선택(lgd_eligibility_v1.main 의 선택과 같은 규칙)
     def ids(self, macro, ok=None):
@@ -394,7 +442,38 @@ class Tables:
         for t in V3LOCAL:
             add(f"v3local_{t}", t, "v3local", [], suffix="v3local", group="v3local", el_name=f"v3ref_{t}",
                 note="v4 에서 v3 행만 고른 표. (c)2 의 CatBoost 불통과 때 L40 의 로컬 v3 기준값")
+        out.update(self.lic_specs(out))                                       # 등록 표 정의는 위에서 끝난다. 약관 확인분 판은 덧붙이기만 한다
         return out
+
+    def lic_specs(self, reg):
+        """LG 개정 15 (m)1: lic_unverified = 1 셀이 든 등록 표(본 묶음 main, l40, l39, l41, l42)마다 그 셀만 뺀 표 정의. 반환 {이름: dict}.
+        원천, 뺀 v3 행, 절단 하한 대입, 역할, 분할 수는 등록 표와 같다. 적격은 --count-only 에서 6B.4 규칙으로 정한다(elig 는 None).
+        자료로 센 표 목록을 self.lic_tables 에, 등록 목록 LIC_BASES 와 같은지를 self.lic_set_ok 에 둔다."""
+        has = [n for n, s in reg.items() if s["group"] in DEFAULT_GROUPS and set(int(x) for x in s["keep"]) & self.lic_ids]
+        self.lic_tables = list(has)
+        self.lic_set_ok = sorted(has) == sorted(LIC_BASES)
+        out = {}
+        for n in has:
+            s = reg[n]
+            dropped = sorted(int(x) for x in s["keep"] if int(x) in self.lic_ids)
+            keep = np.asarray(sorted(int(x) for x in s["keep"] if int(x) not in self.lic_ids), int)
+            base = s.get("base")
+            lic_base = (lic_name(base) if base in has else base) if base else None
+            by_src = dict(sorted(Counter(self.lic_src[i] for i in dropped).items()))
+            alt = None if s["alt"] is None else {int(k): v for k, v in s["alt"].items() if int(k) not in self.lic_ids}
+            out[lic_name(n)] = dict(s, name=lic_name(n), keep=keep, suffix=(f"{s['suffix']}~{LIC}" if s["suffix"] else LIC), alt=alt,
+                                    drop_v3=list(s["drop_v3"]), roles=list(s["roles"]), base=lic_base, group=LIC, elig=None, el_name=None,
+                                    point_only=bool(s["kind"] == "variant_L41h"), lic_of=n, lic_dropped=dropped, lic_dropped_by_source=by_src,
+                                    note=f"약관 확인분 판(LG 개정 15 (m)1): 등록 표 {n} 에서 lic_unverified 셀 {len(dropped)} 제외"
+                                         f"({', '.join(f'{k} {v}' for k, v in by_src.items())})" + (f"; {s['note']}" if s.get("note") else ""))
+        return out
+
+    def target_ids(self, s):
+        """표의 대상 셀 loc_id: 새 행 가운데 대상 macro 인 행(L42 의 원천 셀은 뺀다) + v3 구성 행 − 뺀 v3 행(expected_counts 와 같은 규칙)."""
+        drop = set(int(x) for x in s["drop_v3"])
+        members = [] if s["kind"] == "aux_L39" else [i for i in self.v3_members(s["target"]) if i not in drop]
+        new = [int(i) for i in s["keep"] if self.new_macro.get(int(i)) == s["target"]]
+        return sorted(set(new) | set(members))
 
     # -- (b)4 기대 셀 수: ext_cells_v1 의 대상 셀 수 + v3 셀 수
     def expected_counts(self, s):
@@ -437,7 +516,11 @@ class Tables:
             sel &= ~ex.sources.fillna("").str.split(";").map(lambda L: largest in L) if largest else False
         elif kind == "expanded_L40_variant":
             sel &= ~ex.label_subtypes.fillna("").str.contains("pf_top_below_frozen_al")
-        return dict(expected_new=int(sel.sum()), expected_v3=v3n, ext_source="ext_cells_v1.csv(대상 셀, in_v4 = 1)")
+        src = "ext_cells_v1.csv(대상 셀, in_v4 = 1)"
+        if s.get("lic_of"):                                                   # LG 개정 15 (m)1: 약관 확인분 판은 ext 의 약관 열로도 뺀다
+            sel &= ex.lic_unverified.fillna(0).astype(float) != 1
+            src += ", lic_unverified ≠ 1"
+        return dict(expected_new=int(sel.sum()), expected_v3=v3n, ext_source=src)
 
 
 def write_table(T: Tables, s, root: Path):
@@ -535,6 +618,140 @@ def smoke_table(T: Tables, s, d_src: Path, d_out: Path):
         soil.unlink()
     os.symlink(os.path.relpath(T.soil_path, d_out), soil)
     return dict(n_rows=int(len(df)), n_target_rows_synthetic=int(m.sum()), target_loc_ids=tgt, label_rule="clip(1.4·√TDD·exp(0.2ε), 5, 590)")
+
+
+# ================================================================ 약관 확인분 판 점검(LG 개정 15 (m)1)
+def _id_lines(path):
+    """실행 표 원문 줄을 (loc_id, 줄) 목록으로 읽는다. 반환 (머리줄, 목록, alt_cm 열 번호)."""
+    lines = Path(path).read_text(encoding="utf-8").splitlines()
+    hdr = lines[0].split(",")
+    i_id, i_alt = hdr.index("loc_id"), hdr.index("alt_cm")
+    return lines[0], [(int(ln.split(",")[i_id]), ln) for ln in lines[1:]], i_alt
+
+
+def _n_finite(pairs, i_alt, ids):
+    """ids 에 드는 줄 가운데 alt_cm 칸이 유한한 줄의 수(개수만 센다. 값은 쓰지 않는다)."""
+    ids, n = set(int(x) for x in ids), 0
+    for lid, ln in pairs:
+        if lid in ids:
+            try:
+                n += bool(np.isfinite(float(ln.split(",")[i_alt])))
+            except ValueError:
+                pass
+    return n
+
+
+def lic_text_check(base_tab, lic_tab, lic_ids, tgt_base=(), tgt_lic=()):
+    """약관 확인분 표가 등록 표에서 lic_unverified 줄만 뺀 것인지 원문 줄로 대조한다. 머리줄이 같고, 등록 표에서 lic_ids 줄을 뺀 줄 목록이
+    약관 확인분 표의 줄 목록과 바이트·순서까지 같아야 한다. 약관 확인분 표에 lic_ids 줄이 남으면 불통과다. 대상 셀의 유한 라벨 수(레짐 상한용)는
+    개수만 센다."""
+    lic_ids = set(int(x) for x in lic_ids)
+    hb, pb, ib = _id_lines(base_tab)
+    hl, pl, il = _id_lines(lic_tab)
+    kept = [ln for lid, ln in pb if lid not in lic_ids]
+    removed = [lid for lid, _ in pb if lid in lic_ids]
+    left = [lid for lid, _ in pl if lid in lic_ids]
+    ok = bool(hb == hl and kept == [ln for _, ln in pl] and not left)
+    return dict(ok=ok, header_equal=bool(hb == hl), n_lines_base=len(pb), n_lines_lic=len(pl), n_removed=len(removed),
+                removed_ids=sorted(removed), n_lic_left=len(left), n_finite_target_base=_n_finite(pb, ib, tgt_base),
+                n_finite_target_lic=_n_finite(pl, il, tgt_lic))
+
+
+def lic_eligibility(split_rows, nb_union):
+    """6B.4 적격 규칙(lgd_eligibility_v1 과 같다): 유효 분할(중복 아님 · 채점 블록 ≥ 2, h40 split_structure) ≥ 1 이고 사용 분할(유효 분할,
+    없으면 중복이 아닌 분할)의 채점 블록 합집합 ≥ MIN_BLOCKS_CI(8). 사용 분할의 최소 채점 블록 < 5 이면 소수 블록. split_rows 는 count_spec 의
+    분할 행(dup_of, valid, nb_eval)."""
+    uniq = [r for r in split_rows if pd.notna(r.get("dup_of")) and int(r["dup_of"]) < 0]
+    valid = [r for r in uniq if bool(r.get("valid"))]
+    used = valid or uniq
+    mn = int(min(int(r["nb_eval"]) for r in used)) if used else np.nan
+    return dict(n_unique_splits=len(uniq), n_valid_splits=len(valid), nb_union=int(nb_union), min_nb_eval_used=mn,
+                few_blocks=bool(used and mn < FEW_BLOCKS), eligible=bool(len(valid) >= 1 and int(nb_union) >= MIN_BLOCKS_CI))
+
+
+def regime_bound(regime_reg, alt_mean_reg, n_fin_full, n_fin_lic, deep_cm=DEEP_CM):
+    """얕은 레짐 유지의 값 없는 확인. 라벨은 0 보다 크므로(6B.3) 약관 확인분 합 ≤ 전체 판 합 ≤ (등록 평균 + 0.05) × 전체 판 유한 라벨 수
+    (등록 평균은 소수 1자리 반올림값). 따라서 약관 확인분 평균의 상한 = 그 값 / 약관 확인분 유한 라벨 수. 상한 < 150 cm 이면 얕은 레짐이다.
+    반환 (확인 여부, 상한 cm 또는 nan, 근거 문자열)."""
+    if regime_reg != "shallow" or not np.isfinite(alt_mean_reg) or not n_fin_lic:
+        return False, np.nan, "값 없는 상한으로 확인할 수 없다(등록 레짐이 얕은 레짐이 아니거나 유한 라벨이 없다)"
+    ub = (float(alt_mean_reg) + 0.05) * float(n_fin_full) / float(n_fin_lic)
+    return bool(ub < deep_cm), round(ub, 2), (f"상한 = (등록 평균 {alt_mean_reg} + 0.05) × 유한 라벨 {n_fin_full} / {n_fin_lic}"
+                                                f" {'<' if ub < deep_cm else '≥'} {deep_cm:g} cm")
+
+
+def lic_role(kind, eligible, regime):
+    """적격 표(lgd_eligibility_v1)의 역할 문자열과 같은 규칙. 약관 확인분 판 표지를 붙인다."""
+    if kind.startswith("new_region"):
+        r = ("PE1+PE2" if regime == "shallow" else ("PE2" if regime == "deep" else "레짐 미정")) if eligible else "point_only"
+    elif kind.startswith("expanded_L40"):
+        r = "L40 민감도(풀에는 v3 셀의 본 실행 값)" + ("" if eligible else "; 확충판 부적격")
+    elif kind.startswith("variant_L41"):
+        r = "L41 변형" + ("" if eligible else "; 변형 불가(부적격)") + ("; 점 추정만(WRAPUP 7.3 (a)9)" if kind == "variant_L41h" else "")
+    elif kind == "source_L42":
+        r = "L42 원천 구성"
+    else:
+        r = "참조"
+    return "약관 확인분 판(LG 개정 15 (m)); " + r
+
+
+def lic_summary(T: Tables, s, allspec, d: Path, split_rows, summ, out: Path):
+    """약관 확인분 표 하나의 점검과 적격(LG 개정 15 (m)1). 등록 표를 임시 폴더에 다시 써서 원문 줄로 대조한다(등록 표의 실행 표 파일은
+    건드리지 않는다). 반환 summ 에 더할 dict."""
+    base = allspec[s["lic_of"]]
+    tgt_l, tgt_b = T.target_ids(s), T.target_ids(base)
+    with tempfile.TemporaryDirectory(dir=str(out)) as td:
+        db, recb = write_table(T, base, Path(td))
+        tc = lic_text_check(db / "fidelity_base_v3.csv", d / "fidelity_base_v3.csv", T.lic_ids, tgt_b, tgt_l)
+    el_ = elig_mod()
+    assert el_.MIN_BLOCKS_CI == MIN_BLOCKS_CI and float(el_.DEEP_CM) == DEEP_CM and int(el_.FEW_BLOCKS) == FEW_BLOCKS, "적격 규칙 상수가 다르다"
+    el = lic_eligibility(split_rows, summ.get("nb_union", 0))
+    elr = T.elig_row(base["el_name"]) if base.get("el_name") else None
+    reg_regime = str(elr.get("regime", "")) if elr is not None and pd.notna(elr.get("regime", np.nan)) else ""
+    reg_mean = float(elr["alt_mean"]) if elr is not None and pd.notna(elr.get("alt_mean", np.nan)) else np.nan
+    b_ok, ub, b_txt = regime_bound(reg_regime, reg_mean, tc["n_finite_target_base"], tc["n_finite_target_lic"])
+    is_new = s["kind"].startswith("new_region")
+    if is_new and not b_ok:
+        regime, basis = "미정", f"등록 레짐 {reg_regime or '없음'}; {b_txt}. 라벨 평균을 다시 계산하지 않는다(사용자 확인)"
+    else:
+        regime = reg_regime
+        basis = (f"등록 적격 표(개정 13)의 전체 판 레짐 {reg_regime}; " + (b_txt if is_new else "풀 구성에 쓰지 않는다")
+                 + ". 라벨 평균을 다시 계산하지 않는다")
+    n_new_t = len([i for i in tgt_l if i >= LOC0])
+    n_new_b = len([i for i in tgt_b if i >= LOC0])
+    m1 = LIC_M1.get(s["lic_of"])
+    ok_m1 = bool(m1 is None or (n_new_t, n_new_b) == tuple(m1))
+    n_drop_expected = len(s["lic_dropped"])
+    ok_drop = bool(tc["removed_ids"] == sorted(s["lic_dropped"]))
+    point_only = bool(s["point_only"] or ((is_new or s["kind"].startswith("variant_L41")) and not el["eligible"]))
+    run_skip = ("변형 불가(약관 확인분 판에서 부적격, LG 개정 15 (m)1)" if s["kind"].startswith("variant_L41") and not el["eligible"] else "")
+    ok = bool(tc["ok"] and ok_m1 and ok_drop and regime != "미정")
+    return dict(lic_of=s["lic_of"], lic_group_ok=bool(T.lic_set_ok), n_new_target=n_new_t, n_new_target_full=n_new_b,
+                n_new_source=int(len(s["keep"]) - n_new_t), n_v3_target=int(len(tgt_l) - n_new_t), n_lic_dropped=n_drop_expected,
+                lic_dropped_by_source=s["lic_dropped_by_source"], m1_expected=(list(m1) if m1 else None), ok_m1=ok_m1,
+                text_check=dict({k: v for k, v in tc.items() if k != "removed_ids"}, removed_equals_dropped=ok_drop),
+                base_table_sha256=recb["table_sha256"], regime=regime, regime_basis=basis, regime_bound_ok=bool(b_ok), regime_bound_cm=ub,
+                role=lic_role(s["kind"], el["eligible"], regime), point_only=point_only, run_skip=run_skip, lic_ok=ok, **el)
+
+
+LIC_EL_COLS = ["spec", "lic_of", "target", "kind", "name", "n_cells", "n_new_target", "n_new_target_full", "n_v3_target", "n_new_source",
+               "n_lic_dropped", "lic_dropped_sources", "n_unique_splits", "n_valid_splits", "nb_union", "min_nb_eval_used", "few_blocks",
+               "eligible", "regime", "regime_basis", "regime_bound_ok", "regime_bound_cm", "role", "point_only", "run_skip", "n_src",
+               "n_buffer_excluded", "m1_expected", "ok_m1", "lic_ok", "check_ok", "table_sha256", "base_table_sha256"]
+
+
+def lic_eligibility_table(summs, allspec):
+    """h52 가 읽는 약관 확인분 적격 표(lgd_eligibility_v1.csv 와 같은 열 이름: spec, target, kind, eligible, regime, min_nb_eval_used).
+    name 은 h52 의 저장소 이름(tm_name), lic_of 는 등록 표 이름이다."""
+    rows = []
+    for sm in summs:
+        if not sm.get("lic_of"):
+            continue
+        r = {k: sm.get(k) for k in LIC_EL_COLS}
+        r.update(spec=sm["spec"], name=tm_name(allspec[sm["spec"]]), lic_dropped_sources=json.dumps(sm.get("lic_dropped_by_source", {}), ensure_ascii=False),
+                 m1_expected=json.dumps(sm.get("m1_expected")) if sm.get("m1_expected") else "")
+        rows.append(r)
+    return pd.DataFrame(rows, columns=LIC_EL_COLS)
 
 
 # ================================================================ h40 인자
@@ -758,15 +975,26 @@ def run_spec(argv):
     return H.main(argv)
 
 
-def plan_specs(a, T: Tables):
-    """요청한 표 정의 목록과 실행하지 않는 표(부적격 변형)."""
+def plan_specs(a, T: Tables, man=None):
+    """요청한 표 정의 목록과 실행하지 않는 표(부적격 변형). 약관 확인분 표(lic)는 등록 목록과 자료로 센 목록이 다르면 거부하고, 학습에서는
+    manifest 의 점검 기록(약관 확인분 판의 적격)으로 부적격 L41 변형을 뺀다. 점검(--count-only)에서는 적격을 정하려고 모두 센다."""
     allspec = T.specs()
     bad = [n for n in a.SPEC_NAMES if n not in allspec]
+    if any(allspec.get(n, {}).get("lic_of") or n in GROUPS[LIC] for n in a.SPEC_NAMES) and not T.lic_set_ok:
+        raise SystemExit(f"[거부] 약관 미확인 셀이 든 등록 표 {sorted(T.lic_tables)} 가 LG 개정 15 (m)1 의 목록 {sorted(LIC_BASES)} 와 다르다. "
+                         "lic 묶음을 돌리지 않는다(목록을 고치려면 개정 이력에 먼저 적는다)")
     if bad:
         raise SystemExit(f"알 수 없는 표 이름: {bad}. 가능: {sorted(allspec)}")
     run, skip = [], []
     for n in a.SPEC_NAMES:
         s = allspec[n]
+        if s.get("lic_of"):
+            ms = ((man or {}).get("specs") or {}).get(n, {})
+            if not getattr(a, "count_only", False) and s["kind"].startswith("variant_L41") and ms.get("eligible") is False:
+                skip.append(dict(spec=n, reason=ms.get("run_skip") or "변형 불가(약관 확인분 판에서 부적격, LG 개정 15 (m)1)"))
+                continue
+            run.append(s)
+            continue
         if s["kind"].startswith("variant_L41") and (s["elig"] is None or not bool(s["elig"].get("eligible", False))):
             skip.append(dict(spec=n, reason="변형 불가(적격 표에서 부적격)" + ("; 점 추정 전용 변형" if s["kind"] == "variant_L41h" else "")))
             continue
@@ -777,7 +1005,8 @@ def plan_specs(a, T: Tables):
 def ineligible_variants(allspec):
     """적격 표에서 부적격인 L41 변형(실행하지 않는 표). 요청한 표와 무관하게 전체 등록 표에서 정한다(manifest 의 count.skipped)."""
     return [dict(spec=n, reason="변형 불가(적격 표에서 부적격)" + ("; 점 추정 전용 변형" if s["kind"] == "variant_L41h" else ""))
-            for n, s in allspec.items() if s["kind"].startswith("variant_L41") and (s["elig"] is None or not bool(s["elig"].get("eligible", False)))]
+            for n, s in allspec.items() if s["kind"].startswith("variant_L41") and not s.get("lic_of")
+            and (s["elig"] is None or not bool(s["elig"].get("eligible", False)))]
 
 
 def bundle_estimates(man):
@@ -785,8 +1014,9 @@ def bundle_estimates(man):
     통과한 표. 선택 묶음 = repro, v3local(필요할 때만 돌린다). 추정은 h40.BASE_FIT 환산이다(스모크 실측 비는 smoke 항목에 따로 적는다)."""
     out = {}
     specs = man.get("specs", {})
-    for b, groups in (("main", DEFAULT_GROUPS), ("optional", ("repro", "v3local"))):
-        sel = {k: v for k, v in specs.items() if v.get("group") in groups and "est_h_1proc" in v and not v.get("same_as") and v.get("check_ok")}
+    for b, groups in (("main", DEFAULT_GROUPS), ("optional", ("repro", "v3local")), (LIC, (LIC,))):
+        sel = {k: v for k, v in specs.items() if v.get("group") in groups and "est_h_1proc" in v and not v.get("same_as") and v.get("check_ok")
+               and not v.get("run_skip")}
         h = float(sum(float(v.get("est_h_1proc", 0.0)) for v in sel.values()))
         out[b] = dict(groups=list(groups), n_tables=len(sel), n_fit=int(sum(int(v.get("n_fit", 0)) for v in sel.values())),
                       est_h_1proc=round(h, 2), est_h_workers2=round(h / 2, 2), tables=sorted(sel))
@@ -887,16 +1117,23 @@ def main(argv=None):
         raise SystemExit(f"[거부] 1분 load average {la:.1f} > {a.load_start_max}. 시작하지 않는다(WRAPUP 8.5)")
     reg = check_registered() if not a.skip_hash_check else {}
     T = Tables()
-    allspec, specs, skipped = plan_specs(a, T)
+    man_path = a.OUT / "lgd_run_manifest.json"
+    man = json.loads(man_path.read_text()) if man_path.exists() else {}
+    man.setdefault("specs", {})
+    allspec, specs, skipped = plan_specs(a, T, man)
     a.OUT.mkdir(parents=True, exist_ok=True)
     (a.OUT / "logs").mkdir(exist_ok=True)
     print(f"[plan] 표 {len(specs)} · 실행하지 않는 표 {len(skipped)} · load {la:.1f} · nice {nice} · 스레드 {a.threads} · 워커 {a.workers} · "
           f"{'점검' if a.count_only else ('스모크(합성 대상 라벨)' if a.smoke else '학습')}", flush=True)
-    man_path = a.OUT / "lgd_run_manifest.json"
-    man = json.loads(man_path.read_text()) if man_path.exists() else {}
-    man.setdefault("specs", {})
-    man.update(stage="LGD 6B.6(h51)", plan="docs/EXPERIMENT_PLAN_LG_2026-09-29.md 6B(개정 10, 13, 14), WRAPUP 7절(커밋 316714c)",
-               script="scripts/3_deep_learning/h51_lgd_run.py", script_sha256=sha256(Path(__file__)), h40_code_sha=H.code_sha(),
+    sha_now = sha256(Path(__file__))
+    if man.get("script_sha256") and man["script_sha256"] != sha_now:           # 앞선 실행의 스크립트 해시를 남긴다(덮어쓰지 않는다)
+        hist = man.setdefault("script_sha256_history", [])
+        if not hist or hist[-1].get("script_sha256") != man["script_sha256"]:
+            hist.append(dict(script_sha256=man["script_sha256"], h40_code_sha=man.get("h40_code_sha"),
+                             replaced=time.strftime("%Y-%m-%d %H:%M"), last_run=(man.get("last_run") or {}).get("time"),
+                             count_created=(man.get("count") or {}).get("created")))
+    man.update(stage="LGD 6B.6(h51)", plan="docs/EXPERIMENT_PLAN_LG_2026-09-29.md 6B(개정 10, 13, 14, 15), WRAPUP 7절(커밋 316714c)",
+               script="scripts/3_deep_learning/h51_lgd_run.py", script_sha256=sha_now, h40_code_sha=H.code_sha(),
                registered_inputs=reg or man.get("registered_inputs", {}), versions=versions(), platform="local",
                h40_fixed_args=dict(n_grid=N_GRID, splits=SPLITS, draws=DRAWS, seeds=SEEDS, learners="catboost_lo", alphas="1",
                                    place_n_grid="", nested_targets="NONE:x", learner_targets="NONE:x", tag=TAG, threads=THREADS,
@@ -914,7 +1151,10 @@ def main(argv=None):
                                      "방법, 병기 = 방법 축 전체(개정 14)",
                           load_check="시작 전 64, 표 사이 96(h40 안의 작업 단위 사이에서는 확인하지 않는다. 개정 14)",
                           smoke="대상 셀의 alt_cm 을 합성 라벨로 바꾼 실행 표로 경로와 시간만 확인한다(WRAPUP 7.2 (a)7)",
-                          test_flags="--skip-hash-check, --h40-extra 는 LGD_TEST=1 일 때만 받는다(개정 14)"))
+                          test_flags="--skip-hash-check, --h40-extra 는 LGD_TEST=1 일 때만 받는다(개정 14)",
+                          lic="LG 개정 15 (m): lic_unverified = 1 셀이 든 등록 표마다 그 셀만 뺀 표(표 이름 '<등록 표>_lic', 저장소 '대상~<표지>~lic|x'). "
+                              "적격은 6B.4 규칙(유효 분할 ≥ 1, 채점 블록 합집합 ≥ 8), 레짐은 등록 레짐과 값 없는 상한 확인. 산출 "
+                              "lgd_eligibility_lic.csv, lgd_count_lic*.csv, manifest count_lic"))
     tables = {}
     for s in specs:
         d, rec = write_table(T, s, a.OUT)
@@ -943,31 +1183,73 @@ def main(argv=None):
                 sm["check_ok"] = bool(sm["check_ok"] and sm["v3_text_check"]["ok"])
             sm.update(table_sha256=rec["table_sha256"], same_as=rec.get("same_as"), same_as_basis=(rec.get("same_as_basis") or {}).get("basis", ""),
                       n_new_written=rec["n_new"], n_drop_v3=rec["n_drop_v3"], drop_v3=s["drop_v3"], point_only=s["point_only"], note=s["note"])
+            if s.get("lic_of"):                                                # LG 개정 15 (m)1: 약관 확인분 판의 점검과 적격
+                sm.update(lic_summary(T, s, allspec, d, r_, sm, a.OUT))
+                sm["check_ok"] = bool(sm["check_ok"] and sm["lic_ok"])
             rows += r_; summs.append(sm)
             print(f"  [count] {s['name']:30s} 셀 {sm['n_cells']:4d}(기대 {sm['expected_new']}+{sm['expected_v3']}, 적격 표 "
                   f"{sm['n_cells_eligibility']}) 분할 불일치 {sm['n_split_mismatch']} 단위 {sm['n_units']} 적합 {sm['n_fit']:,} "
                   f"추정 {sm['est_h_1proc']:.2f} h(1프로세스) same_as {sm['same_as']} → {'통과' if sm['check_ok'] else '불일치'}", flush=True)
+            if s.get("lic_of"):
+                m1 = sm["m1_expected"]
+                print(f"  [lic]   {s['name']:30s} 대상 셀 {sm['n_cells']} = 새 {sm['n_new_target']} + v3 {sm['n_v3_target']}"
+                      + (f"(원천에 더한 새 셀 {sm['n_new_source']})" if sm["n_new_source"] else "")
+                      + f" · 뺀 약관 미확인 {sm['n_lic_dropped']}({', '.join(f'{k} {v}' for k, v in sm['lic_dropped_by_source'].items())})"
+                      + (f" · (m)1 기대 {m1[0]}/{m1[1]}, 실제 {sm['n_new_target']}/{sm['n_new_target_full']} "
+                         f"{'일치' if sm['ok_m1'] else '불일치'}" if m1 else "")
+                      + f" · 원문 줄 대조 {'통과' if sm['text_check']['ok'] else '불통과'} · 유효 분할 {sm['n_valid_splits']} · 채점 블록 합집합 "
+                      f"{sm['nb_union']} · 최소 채점 블록 {sm['min_nb_eval_used']}{'(소수 블록)' if sm['few_blocks'] else ''} · 적격 "
+                      f"{sm['eligible']} · 레짐 {sm['regime']}{'(상한 확인)' if sm['regime_bound_ok'] else ''}"
+                      + (f" · {sm['run_skip']}" if sm["run_skip"] else ""), flush=True)
         cdf = pd.DataFrame(rows)
         sdf = pd.DataFrame(summs)
-        cdf.to_csv(a.OUT / "lgd_count.csv", index=False)
-        sdf.drop(columns=[c for c in ("tibet_support", "v3_text_check") if c in sdf], errors="ignore").to_csv(a.OUT / "lgd_count_summary.csv", index=False)
+        is_lic = sdf.spec.isin([n for n in sdf.spec if allspec[n].get("lic_of")]).values if len(sdf) else np.zeros(0, bool)
+        drop_cols = ("tibet_support", "v3_text_check", "text_check", "lic_dropped_by_source", "m1_expected")
+        for sel, stem in ((~is_lic, "lgd_count"), (is_lic, "lgd_count_lic")):
+            if not sel.any():
+                continue                                                      # lic 표만 점검하면 등록 표의 점검 표를 바꾸지 않는다
+            names_ = set(sdf.spec.values[sel])
+            cdf[cdf.spec.isin(names_)].to_csv(a.OUT / f"{stem}.csv", index=False)
+            sdf[sel].drop(columns=[c for c in drop_cols if c in sdf], errors="ignore").to_csv(a.OUT / f"{stem}_summary.csv", index=False)
         for sm in summs:
             man["specs"][sm["spec"]] = dict({k: v for k, v in sm.items() if k not in ("spec",)}, table=tables[sm["spec"]][1],
-                                             tm_name=tm_name(allspec[sm["spec"]]), base=allspec[sm["spec"]].get("base"))
+                                             tm_name=tm_name(allspec[sm["spec"]]), base=allspec[sm["spec"]].get("base"),
+                                             group=allspec[sm["spec"]].get("group"))
         bund = bundle_estimates(man)
-        man["count"] = dict(created=time.strftime("%Y-%m-%d %H:%M"), argv=a.ARGV, n_specs_this_run=int(len(sdf)),
-                            n_check_fail_this_run=int((~sdf.check_ok).sum()) if len(sdf) else 0,
-                            n_check_fail_all=int(sum(1 for v in man["specs"].values() if "check_ok" in v and not v["check_ok"])),
-                            bundles=bund, est_basis="h40.BASE_FIT(CatBoost 4스레드 1배 행 약 0.5 s, LG 스모크 기준)의 행 수 환산. 로컬 실측이 아니다"
-                                                    "(스모크의 실측 비는 manifest 의 smoke 항목)",
-                            skipped=ineligible_variants(allspec), load_avg=la, threads=a.threads)
+        if (~is_lic).any():
+            n_reg = int((~is_lic).sum())
+            man["count"] = dict(created=time.strftime("%Y-%m-%d %H:%M"), argv=a.ARGV, n_specs_this_run=n_reg,
+                                n_check_fail_this_run=int((~sdf.check_ok[~is_lic]).sum()),
+                                n_check_fail_all=int(sum(1 for k, v in man["specs"].items() if "check_ok" in v and not v["check_ok"]
+                                                         and not str(k).endswith(f"_{LIC}"))),
+                                bundles=bund, est_basis="h40.BASE_FIT(CatBoost 4스레드 1배 행 약 0.5 s, LG 스모크 기준)의 행 수 환산. 로컬 실측이 아니다"
+                                                        "(스모크의 실측 비는 manifest 의 smoke 항목)",
+                                skipped=ineligible_variants(allspec), load_avg=la, threads=a.threads)
+        if is_lic.any():
+            lel = lic_eligibility_table(summs, allspec)
+            lel.insert(len(lel.columns), "created", time.strftime("%Y-%m-%d %H:%M"))
+            lel.to_csv(a.OUT / "lgd_eligibility_lic.csv", index=False)
+            man["count_lic"] = dict(created=time.strftime("%Y-%m-%d %H:%M"), argv=a.ARGV, n_specs_this_run=int(is_lic.sum()),
+                                    n_check_fail_this_run=int((~sdf.check_ok[is_lic]).sum()), lic_tables_found=sorted(T.lic_tables),
+                                    lic_group_ok=bool(T.lic_set_ok), bundle=bund[LIC], eligibility_file="lgd_eligibility_lic.csv",
+                                    eligibility_sha256=sha256(a.OUT / "lgd_eligibility_lic.csv"),
+                                    skipped=[dict(spec=r.spec, reason=r.run_skip) for r in lel.itertuples() if r.run_skip],
+                                    rule="LG 개정 15 (m)1: lic_unverified 셀을 뺀 표에 6B.4 적격 규칙(유효 분할 ≥ 1, 채점 블록 합집합 ≥ 8)을 그대로 쓴다. "
+                                         "레짐은 등록 레짐(값 없는 상한 확인). 라벨 평균은 계산하지 않는다", load_avg=la, threads=a.threads)
         man_path.write_text(json.dumps(man, ensure_ascii=False, indent=1, default=str))
-        bm, bo = bund["main"], bund["optional"]
-        print(f"[count] 이번 점검 표 {len(sdf)} · 불일치 {man['count']['n_check_fail_this_run']} · {time.time() - t0:.0f}s → {a.OUT}/lgd_count*.csv", flush=True)
-        print(f"[count] 본 묶음(main·l40·l39·l41·l42, same_as 제외): 표 {bm['n_tables']} · 적합 {bm['n_fit']:,} · 추정 {bm['est_h_1proc']:.2f} h(1프로세스)"
-              f" → 워커 2개 {bm['est_h_workers2']:.2f} h. 같은 표 재사용 {len(bund['same_as'])}", flush=True)
-        print(f"[count] 선택 묶음(repro·v3local, 필요할 때만): 표 {bo['n_tables']} · 적합 {bo['n_fit']:,} · 추정 {bo['est_h_1proc']:.2f} h(1프로세스)",
-              flush=True)
+        n_fail = int((~sdf.check_ok).sum()) if len(sdf) else 0
+        print(f"[count] 이번 점검 표 {len(sdf)} · 불일치 {n_fail} · {time.time() - t0:.0f}s → {a.OUT}/lgd_count*.csv", flush=True)
+        if (~is_lic).any():
+            bm, bo = bund["main"], bund["optional"]
+            print(f"[count] 본 묶음(main·l40·l39·l41·l42, same_as 제외): 표 {bm['n_tables']} · 적합 {bm['n_fit']:,} · 추정 {bm['est_h_1proc']:.2f} h"
+                  f"(1프로세스) → 워커 2개 {bm['est_h_workers2']:.2f} h. 같은 표 재사용 {len(bund['same_as'])}", flush=True)
+            print(f"[count] 선택 묶음(repro·v3local, 필요할 때만): 표 {bo['n_tables']} · 적합 {bo['n_fit']:,} · 추정 {bo['est_h_1proc']:.2f} h(1프로세스)",
+                  flush=True)
+        if is_lic.any():
+            bl = bund[LIC]
+            print(f"[count] 약관 확인분 묶음(lic, LG 개정 15 (m)): 표 {int(is_lic.sum())}(자료로 센 목록과 등록 목록 "
+                  f"{'일치' if T.lic_set_ok else '불일치'}) · 실행할 표(same_as·변형 불가 제외) {bl['n_tables']} · 적합 {bl['n_fit']:,} · 추정 "
+                  f"{bl['est_h_1proc']:.2f} h(1프로세스) → 워커 2개 {bl['est_h_workers2']:.2f} h → {a.OUT}/lgd_eligibility_lic.csv", flush=True)
         return dict(count=cdf, summary=sdf, manifest=man)
 
     if a.smoke:
