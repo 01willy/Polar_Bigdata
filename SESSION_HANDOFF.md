@@ -1,8 +1,18 @@
 # SESSION_HANDOFF — Polar_Bigdata (현재 상태 스냅샷)
 
-**갱신**: 2026-09-29(LG 계획·하네스·Rescale 사전 점검 제출) · 2026-09-26 저녁(통합 실험 실행·감사·논문 그림) · 09-26 오전(통합 계획 확정) · 09-22(H18–H30) · **다음 세션은 이 파일부터 읽으세요.**
+**갱신**: 2026-09-30(로컬 전환·개정 네 건·LGX 해제) · 2026-09-29(LG 계획·하네스·Rescale 사전 점검 제출) · 2026-09-26 저녁(통합 실험 실행·감사·논문 그림) · 09-26 오전(통합 계획 확정) · 09-22(H18–H30) · **다음 세션은 이 파일부터 읽으세요.**
 
-## ★ 최신(2026-09-29): LG(라벨 격자 통합 재실행) 사전 등록·하네스·Rescale 포장, 사전 점검 작업 제출
+## ★ 최신(2026-09-30): 로컬 전환, LGX 회수·해제, 결과 열람 전 개정 네 건, 결과 뒤 파이프라인
+
+정본: 실행 계획 `docs/EXECUTION_PLAN_REMAINING_2026-09-30.md`(3절 작업 id, 10절 진행 기록), 개정 LG 15·LGF 6·LGU 4·WRAPUP 2(커밋 ff1be02).
+- **Rescale**: 추가 지출 중단(08:45 지시). ZovWo 는 14:30 전에 끝난다. 회수는 `scripts/local/run_post_results.sh fetch-lg`, 이어서 `cpu-chain`(gate-lg → ladder → sum-lgx → gate-lgd → pool-lgd → lgu-ab10).
+- **LGX**: 두 묶음 해제 완료(`data/processed/lgx`, 읽기 전용). 남은 FT-T 58조각은 로컬 GPU 8 보조 이어 실행(`scripts/local/run_lgx_local_continue.sh status`).
+- **LGF**: 감시기 `logs/lgf/supervisor.log`. 창 마감 2026-10-02 05:01. GPU 5 를 두 번 잃어 창 여유가 작다.
+- **LGT**: 172단위 가운데 165(11:50). 끝나면 감시기가 상태 표를 보고 두 번째 통과 또는 GPU 넘김을 한다.
+- **판정 기록 순서**: LG(J1) → LGX(J2) → LGD(J5) → LGT(J4) → LGU(J3) → h39(J7) → LGF(J6, 창 마감 뒤) → 지도 → 보조(J9).
+- **사용자 확인 대기**: git push(로컬 main 이 origin 보다 앞서 있다), LGD 약관 제공자 연락(CUSP, GGD353, calm_web_subsites), 문헌 원문 PDF, 자료·코드 기탁 범위.
+
+## ★ 이전(2026-09-29): LG(라벨 격자 통합 재실행) 사전 등록·하네스·Rescale 포장, 사전 점검 작업 제출
 
 정본: 계획 `docs/EXPERIMENT_PLAN_LG_2026-09-29.md`(개정 2), 큰 틀 `docs/RESEARCH_FRAME_2026-09-29.md`, 지역별 행렬 `docs/COVERAGE_MATRIX_BY_REGION_2026-09-29.md`, 실패 원인 `docs/FAILURE_ANALYSIS_2026-09-29.md`, 로그 09-29 항목. 커밋 40be64c(로컬).
 - **실행 환경**: 실험은 CPU 부분까지 Rescale에서 한다. 로컬은 `--count-only`, `--summarize-only`, CSV 읽기만 한다(스레드 1).
