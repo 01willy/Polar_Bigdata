@@ -189,7 +189,7 @@ run() {
   echo $$ > "$RUN/lock"; trap 'rm -f "$RUN/lock"' EXIT
   local -a Q
   mapfile -t Q < <(grep -v '^[[:space:]]*#' "$QUEUE" | awk 'NF>=3')
-  declare -A PID GPU JOB DRN BASE
+  declare -A PID=() GPU=() JOB=() DRN=() BASE=()
   local slot rc g k ax tg lr extra started drained=0
   log "실행 시작($MODE): 큐 ${#Q[@]}개 · 후보 GPU '$CANDS' · 최대 작업 $MAXJ · 스레드 $THR · 출력 $OUT"
   while :; do
