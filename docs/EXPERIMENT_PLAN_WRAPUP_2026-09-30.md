@@ -808,9 +808,9 @@ NEXT §8.3 의 AK1 은 '알래스카 지역 내 모의(1단계)에서 넘은 조
 
 ---
 
-### 결과 판정 기록(J7, 2026-09-30 13:48–14:00)
+### 결과 판정 기록(J7, 2026-09-30 13:48, 커밋 b9f3ec7 13:48:52)
 
-- **원천**: `h39 --mode summarize`(13:45:42–13:47:32, 종료 코드 0)와 `--mode bias-mae`(13:47:36). 산출 `data/processed/lgw/lgw_bundle.csv`, `lgw_tests.csv`, `lgw_scenarios*.csv`, `lgw_l43.csv`, `lgw_ak1.csv`, `lgw_aux4.csv`, `lgw_splitratio.csv`, `lgw_rescore.csv`, `lgw_delta_rel.csv`. LGF 표가 아직 없으므로 δ_rel 의 LGF 행은 비어 있고, LGF 창 마감 뒤 다시 돈다. LGW 표를 처음 연 시각은 13:48 이다(`logs/lgf/viewing_state.txt`). 봉인 폴더 개봉 기록은 `sealed/README_SEALED.txt` 에 있다.
+- **원천**: `h39 --mode summarize`(13:45:42–13:47:32, 종료 코드 0)와 `--mode bias-mae`(13:47:36). 산출 `data/processed/lgw/lgw_bundle.csv`, `lgw_tests.csv`, `lgw_scenarios*.csv`, `lgw_l43.csv`, `lgw_ak1.csv`, `lgw_aux4.csv`, `lgw_splitratio.csv`, `lgw_rescore.csv`, `lgw_delta_rel.csv`. LGF 표가 아직 없으므로 δ_rel 의 LGF 행은 비어 있고, LGF 창 마감 뒤 다시 돈다. LGW 표를 처음 연 시각은 13:47:59 이다(`logs/lgf/viewing_state.txt`). 봉인 폴더 개봉 기록은 `sealed/README_SEALED.txt` 에 있다.
 - **등록 표지**: 0.3 에 따라 이 절의 규칙 가운데 T_res 뒤 개정(개정 2)으로 바뀐 것은 AB10 입력 형식과 재표집 횟수 표기뿐이며 '회수 뒤, 미해제·미열람 상태의 개정' 표지를 단다(개정 2 (g)). AB4·SC1w-P·LGX-N4a 인용에는 S-a 열람 표지를 병기한다.
 
 **1.1 초록용 주 대비 묶음(주 4지역 층화 평균, 재표집 10,000회, Holm m = 10)**
