@@ -1,0 +1,9 @@
+stage,rc,sec,note
+inputs,0,30,ok
+deps,0,72,ok
+deps_versions,0,73,사전 점검과 같은 판
+gpu_check,0,79,GPU 0,1,2,3
+restore,0,79,확장 조각 0개 · 재현 점검 기준 'lg_precheck'
+gate_early,0,1298,허용 차 안 · 기준 lg_precheck
+h41,0,10406,
+cpu,0,32832,

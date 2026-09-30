@@ -130,3 +130,4 @@ data/processed/lgf/run_lgf*/
 data/processed/lgu/shards/
 data/processed/lgu/.running/
 data/processed/lgd/run_tables/
+results/rescale_*/results_*.tar.gz
