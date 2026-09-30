@@ -32,7 +32,7 @@
 #   sum-lgf       (C9) h47·h48 집계(LGF 감시기와 역할이 모두 끝난 뒤)
 #   sum-lgx-aux   (C10) LGX 보조 집계(Rescale 조각 + 로컬 새 조각, data/processed/lgx_aux). 무거운 집계
 #   figs          (C11) fig_map_lena 와 POST_FIGS 에 적은 그림 모듈(예: POST_FIGS="fig2 fig3"). 모듈 재작성(F3) 전에는 지도만
-#   cpu-chain     gate-lg → ladder → sum-lgx → gate-lgd → pool-lgd → lgu-ab10 순으로 돌고 첫 실패에서 멈춘다(회수 뒤 한 번에)
+#   cpu-chain     gate-lg, ladder, sum-lgx, gate-lgd, (조건부 lgd-v3local), lgd-lic, pool-lgd, lgu-ab10 순으로 돌고 첫 실패에서 멈춘다(회수 뒤 한 번에)
 #
 # 환경 변수
 #   POST_LG_JOB           ZovWo(기본). Rescale 작업 id
@@ -339,8 +339,18 @@ status() {
   echo "[무거운 집계 잠금] $(flock -n "$PL/heavy.lock" true 2>/dev/null && echo 비어 있음 || echo 사용 중) · 가용 RAM $(avail_gb) GB · load $(load1)"
 }
 
-cpu_chain() {
-  gate_lg && ladder && sum_lgx && gate_lgd && pool_lgd && lgu_ab10 && say "cpu-chain: 끝. 다음은 sum-lgt(LGT 종료 뒤), scenarios, map"
+lgd_after_gate() {                              # 재현 점검(주 판정 범위 base) 상태에 따라 v3local(조건부)을 돌린다. 물리식 불통과면 멈춘다
+  local st
+  st=$("$PY" -c 'import pandas as pd,sys; d=pd.read_csv(sys.argv[1]); r=d[d.scope=="base"]; print(r.status.iloc[0] if len(r) else "없음")' data/processed/lgd/lgd_repro_gate.csv 2>/dev/null)
+  case "$st" in
+    ok) say "lgd: 재현 점검 base = ok. v3local 은 돌리지 않는다" ;;
+    CatBoost*) say "lgd: 재현 점검 base = CatBoost 불통과. v3local(L40 로컬 v3 기준값)을 돌린다"; lgd_v3local || return $? ;;
+    *) die "lgd: 재현 점검 base 상태 '$st'. 물리식 불통과 또는 조각 없음이면 LGD 집계를 멈춘다(WRAPUP 7.5 (c)2 (1))" ;;
+  esac
+}
+
+cpu_chain() {                                    # lgd-lic 은 pool-lgd 보다 먼저 돈다(두 판 병기, LG 개정 15 (m)·(r))
+  gate_lg && ladder && sum_lgx && gate_lgd && lgd_after_gate && lgd_lic && pool_lgd && lgu_ab10 && say "cpu-chain: 끝. 다음은 sum-lgt, scenarios, map"
 }
 
 case "${1:-}" in
