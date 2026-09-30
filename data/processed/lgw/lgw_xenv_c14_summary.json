@@ -1,0 +1,768 @@
+{
+ "check": "xenv_iii",
+ "plan": "EXECUTION_PLAN_REMAINING_2026-09-30 6.1, LG 개정 15 (d)",
+ "created": "2026-09-30 12:57",
+ "script_version": 2,
+ "local": {
+  "python": "3.9.18",
+  "numpy": "1.26.4",
+  "pandas": "2.1.4",
+  "host": "user"
+ },
+ "dirs": {
+  "ref": "data/processed/lgx/shards",
+  "run1": "data/processed/lgw/xenv/lgx_base_local/shards",
+  "run2": "data/processed/lgw/xenv/lgx_gpu_2/shards"
+ },
+ "units": [
+  "lgxb__cpu__CA-2__x__s1",
+  "lgxb__cpu__CA-2__x__s2",
+  "lgxb__cpu__CA-2__x__s3",
+  "lgxb__cpu__CA-2__x__s4",
+  "lgxb__cpu__CA-2__x__s5",
+  "lgxb__cpu__CA-3__x__s1",
+  "lgxb__cpu__CA-3__x__s2",
+  "lgxb__cpu__CA-3__x__s3",
+  "lgxb__cpu__CA-3__x__s4",
+  "lgxb__cpu__CA-3__x__s5",
+  "lgxb__cpu__Canada__x__s1",
+  "lgxb__cpu__Canada__x__s2",
+  "lgxb__cpu__Canada__x__s3",
+  "lgxb__cpu__Canada__x__s4",
+  "lgxb__cpu__Canada__x__s5",
+  "lgxb__cpu__Lena__x__s1",
+  "lgxb__cpu__Lena__x__s2",
+  "lgxb__cpu__Lena__x__s3",
+  "lgxb__cpu__Lena__x__s4",
+  "lgxb__cpu__Lena__x__s5"
+ ],
+ "eq_cm": 0.5,
+ "ratio_max": 3.0,
+ "det_floor_cm": 1e-06,
+ "med_cm": 0.1,
+ "frac_over_max": 0.05,
+ "supplement": true,
+ "tol_phys_cm": 1e-09,
+ "by_pair": {
+  "local1_vs_rescale": {
+   "phys": {
+    "n_keys": 1030,
+    "median_cm": 0.0,
+    "max_cm": 3.197442310920451e-14
+   },
+   "ml": {
+    "n_keys": 34360,
+    "median_cm": 0.0,
+    "max_cm": 3.552713678800501e-14
+   },
+   "ml_n_over_eq": 0,
+   "phys_n_over_tol": 0,
+   "ml_frac_over_eq": 0.0
+  }
+ },
+ "unit_checks": [
+  {
+   "unit": "lgxb__cpu__CA-2__x__s1",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1729,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 232.6
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 536.7
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__CA-2__x__s2",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1729,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 236.7
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 520.4
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__CA-2__x__s3",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1729,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 232.6
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 605.5
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__CA-2__x__s4",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1729,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 237.7
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 534.7
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__CA-2__x__s5",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1729,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 240.3
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 557.5
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__CA-3__x__s1",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1729,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 233.9
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 618.0
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__CA-3__x__s2",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1729,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 258.6
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 565.3
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__CA-3__x__s3",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1234,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 177.4
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 465.9
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__CA-3__x__s4",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1234,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 176.2
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 419.0
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__CA-3__x__s5",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1729,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 238.3
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 541.8
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__Canada__x__s1",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1849,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 302.8
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 698.4
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__Canada__x__s2",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1849,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 308.3
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 700.1
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__Canada__x__s3",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1849,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 311.4
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 692.6
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__Canada__x__s4",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1849,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 304.3
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 805.4
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__Canada__x__s5",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1849,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 283.1
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 618.7
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__Lena__x__s1",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1969,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 326.4
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 710.1
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__Lena__x__s2",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1969,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 317.2
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 763.1
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__Lena__x__s3",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1969,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 313.7
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 714.7
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__Lena__x__s4",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1969,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 301.5
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 894.8
+    }
+   ]
+  },
+  {
+   "unit": "lgxb__cpu__Lena__x__s5",
+   "pair": "local1_vs_rescale",
+   "n_stores_common": 1,
+   "n_stores": [
+    1,
+    1
+   ],
+   "n_keys_common": 1969,
+   "n_nonfinite_skipped": 0,
+   "blocks_equal": true,
+   "cfg_common_equal": true,
+   "meta": [
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 295.6
+    },
+    {
+     "cfg_hash": "a8d176621af3",
+     "cfg_common": "0e23d32de3f1",
+     "code_sha": "70ec084a1919",
+     "code_sha_h40": "ffd0b3a76d36",
+     "status": "ok",
+     "device": "",
+     "threads": 4,
+     "elapsed_s": 668.0
+    }
+   ]
+  }
+ ],
+ "missing": [],
+ "rule": "보충 대조(계속 규칙 없음)",
+ "output_limit": "키별 절대 차와 분포만. RMSE 값, Δ, 판정 문구 없음"
+}
