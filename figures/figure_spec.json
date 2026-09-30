@@ -4182,7 +4182,7 @@
         "data/processed/alt_aoa_cell_transfer.csv (비유사도 구간 6개의 RMSE·커버리지)",
         "data/processed/s11_conformal_meta.json (보정 커버리지 헤드라인, 콘솔 검증 출력용)"
       ],
-      "style": "polar.plotstyle.use_polar + polar.geomap. 지도창은 관측 분포에 맞춘 (-168, -139, 59.5, 72) 알래스카 창(표준 프리셋은 빈 여백이 넓어 종횡비가 눕는다). 육각 셀 집계(hexbin gridsize 30, 보간 없음), 두 지도 패널이 같은 투영좌표 extent를 공유해 셀이 1:1 대응. 컬러맵은 부호 없는 양수 스칼라용 단조 순차형 2종: (a) cmcrameri oslo_r 0.18-0.88 절단(청→남색), (b) 규약 팔레트 기반 연청록→청록. 양끝 절단으로 과포화 방지, 색축은 p2-p98(a)·0-p98(b)에 컬러바 extend 삼각형으로 절단 표기. 적용가능 영역 밖=사선 해칭(#4a4a4a, lw 0.35), 판정 없는 셀=회색 윤곽(#9a9a9a)+(b)에서만 중립 회색 채움 — 색 단독 부호화 금지. 폰트 위계: 축라벨 10·눈금 9·컬러바라벨 9.5·컬러바눈금 8.5·위경도 8.5·범례 8.6·패널라벨 11 bold, 그 외 bold 미사용. 값 라벨은 연회색(#5a5a5a). 격자 y축만 alpha 0.25, spine 좌·하만. 범례 frameon=False, 그림 내부 제목 없음, 내부 단계코드·내부 명명 미노출(적용가능 영역·환경 비유사도 지수 등 평이한 학술 표현). pdf.fonttype=42, 컬러바 solids 비래스터화.",
+      "style": "polar.plotstyle.use_polar + polar.geomap. 지도창은 관측 분포에 맞춘 (-168, -139, 59.5, 72) 알래스카 창(표준 프리셋은 빈 여백이 넓어 종횡비가 눕는다). 육각 셀 집계(hexbin gridsize 30, 보간 없음), 두 지도 패널이 같은 투영좌표 extent를 공유해 셀이 1:1 대응. 컬러맵은 부호 없는 양수 스칼라용 단조 순차형 2종: (a) cmcrameri oslo_r 0.18-0.88 절단(청→남색), (b) 규약 팔레트 기반 연청록→청록. 양끝 절단으로 과포화 방지, 색축은 p2-p98(a)·0-p98(b)에 컬러바 extend 삼각형으로 절단 표기. 적용가능 영역 밖=사선 해칭(#4a4a4a, lw 0.35), 판정 없는 셀=회색 윤곽(#9a9a9a)+(b)에서만 중립 회색 채움. 색 단독 부호화 금지. 폰트 위계: 축라벨 10·눈금 9·컬러바라벨 9.5·컬러바눈금 8.5·위경도 8.5·범례 8.6·패널라벨 11 bold, 그 외 bold 미사용. 값 라벨은 연회색(#5a5a5a). 격자 y축만 alpha 0.25, spine 좌·하만. 범례 frameon=False, 그림 내부 제목 없음, 내부 단계코드·내부 명명 미노출(적용가능 영역·환경 비유사도 지수 등 평이한 학술 표현). pdf.fonttype=42, 컬러바 solids 비래스터화.",
       "caption": "알래스카 활성층 두께 예측지도의 신뢰 범위. (a) 0.5° 공간블록 교차검증에서 conformal 보정(CQR)한 90% 예측구간의 셀별 폭. 전 지역 평균 폭 53.6 cm, 실제 커버리지 93.4% [88.9, 96.6]. 사선 해칭은 지역 간 전이 시 적용가능 영역 밖(전체 판정 셀의 57.1%)이며, 회색 윤곽 셀은 판정 자료가 없는 셀이다. (b) 같은 격자의 환경 비유사도 지수. (c) 비유사도 구간별 지역 간 전이 RMSE와 90% 예측구간 커버리지. 비유사도 최상위 구간에서 RMSE 30.0 cm·커버리지 49.9%로, 적용가능 영역 밖에서는 점추정과 구간 모두 신뢰할 수 없다. n = 13,606 셀(그중 13,542 셀에 적용가능 영역 판정).",
       "exports": [
         "outputs/maps/alt_uncertainty_aoa_map.png (300 dpi)",
@@ -4209,7 +4209,7 @@
         "data/raw/dem/Copernicus_DSM_COG_10_N{68,69}_00_W{149..152}_00_DEM.tif (30 m DEM 8매, 위도 1\"·경도 2\")",
         "data/raw/era5land/nh_monthly_2015-2020.nc (월 기후값 0.1°, 학습 공변량과 동일 기간)",
         "data/raw/soilgrids_wcs/namerica/*.tif (SoilGrids 9종, 약 5 km, IGH)",
-        "data/processed/fidelity_base.csv (알래스카 13,606 관측셀 — 모델 학습 + 관측 오버레이. region = ABoVE_AK + United States (Alaska), GTNPenv_US 제외)"
+        "data/processed/fidelity_base.csv (알래스카 13,606 관측셀. 모델 학습 + 관측 오버레이. region = ABoVE_AK + United States (Alaska), GTNPenv_US 제외)"
       ],
       "method": [
         "창 = 경도 -152.0~-148.0°, 위도 68.2~70.0° (약 159 x 200 km, 브룩스 산맥 북사면~북극 연안평야). 창 내 관측 3,509셀.",
