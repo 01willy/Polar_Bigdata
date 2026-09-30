@@ -3,6 +3,7 @@
 **작성 경위**: 문헌 재확인 4묶음(18편), 누락 선례 탐색(29편), 내부 근거 정리, 사용자 제공 PDF(`outputs/ALT 예측 선행연구 리뷰 및 그림 분석.pdf`) 대조, 신규성 문장 후보 9개에 대한 심사 3건(Sci Rep 심사자, 영구동토 전문가, ML 방법론 전문가)을 종합했다. 후보 9개 가운데 7개가 한정어와 함께 유지되고 2개는 폐기되었다.
 **쓰임**: 원고의 서론 기여 문장과 관련 연구 절의 근거 문서다. 수치는 LG 통합 격자 결과가 나오면 교체한다.
 **주의**: 확인 수준이 초록 이하인 문헌은 표에 표시되어 있다. 인용 전에 원문을 대조한다.
+**2026-09-30 결과 뒤 정정(J10)**: LG·LGX·LGT·LGD·LGU·WRAPUP 판정 뒤 각 문장의 상태(지지, 한정, 지지하지 않음, 폐기 유지)를 11절에 적었다. 4–7절, 9절, 10절의 해당 문장 옆에 '[2026-09-30 결과 뒤 …]' 표지를 달았다. 원 문장은 2026-09-29 검증본의 기록으로 남긴다.
 
 ---
 
@@ -13,8 +14,8 @@
 - 방법 구성 요소(물리 출력 입력, E의 ML 추정, 물리 유래 라벨, 잔차 학습, 계수 재보정)는 모두 선례가 있다. 기법의 신규성은 주장할 수 없다.
 - 신규성은 두 곳에 있다. 첫째는 ALT에서 학습 제외 지역의 오차를 대상 라벨 수의 함수로, 두 Stefan 기준선 대비로 보고하는 평가 설계다. 둘째는 같은 절차로 얻은 음성 결과(계수 지도의 지역 간 실패, 라벨 0 직접 ML의 열세, 단일 계수 재보정의 비균일 효과)다. 조사 범위(2019–2026, 영문 위주)에서 이 조합의 ALT·MAGT 문헌은 확인되지 않았다.
 - 이전 답변이 기여로 든 "성분 분해 72–95 %"와 "검증 방식에 따른 순위 역전"은 심사에서 기각되었다. 선행 연구가 아니라 연구 자체의 CSV와 맞지 않는다.
-- 수준은 적용과 평가 중심의 점진적 기여다. 효과 크기가 작고(라벨 전량 4지역 평균 −0.68 cm, 러시아 W 제외 시 −0.10 cm), 독립 지역은 4개이며 그중 2개는 27–28셀이다.
-- 현재 수치는 실험마다 원천 정의와 추출 규칙이 달라 같은 양의 부호까지 바뀐다. 문장은 LG 통합 격자 결과로 수치를 교체한 뒤 확정된다.
+- 수준은 적용과 평가 중심의 점진적 기여다. 효과 크기가 작고(라벨 전량 4지역 평균 −0.68 cm, 러시아 W 제외 시 −0.10 cm), 독립 지역은 4개이며 그중 2개는 27–28셀이다. [2026-09-30 결과 뒤 정정: LG 통합 격자의 전량 R1 − P0 는 4지역 −2.64 cm 이고 러시아 W(−13.98)가 지배한다. 재보정 물리식 P1 대비는 −0.40 cm 다. 약관 확인분 판의 독립 지역은 Russia_C 를 더해 5지역이다(LG 7.1 L8, 7.3; WRAPUP AB8·AB9). 11절 N4]
+- 현재 수치는 실험마다 원천 정의와 추출 규칙이 달라 같은 양의 부호까지 바뀐다. 문장은 LG 통합 격자 결과로 수치를 교체한 뒤 확정된다. [2026-09-30 결과 뒤: 문장별 상태와 교체 수치는 11절]
 
 ## 2. 사용자 인용문의 정확성
 
@@ -61,7 +62,7 @@ outcome이 keep_with_qualifier인 7개다. 심사 권고에 따른 배치는 서
 
 - **한국어**: 영구동토 ALT 또는 MAGT 매핑에서, 원천 학습 자료에서 제외한 지역의 예측 오차를 대상 지역 라벨 수의 함수로 보고한 연구는 조사 범위에서 확인되지 않았다. 본 연구는 대상 지역을 100 km 버퍼와 함께 원천에서 제외하고, 대상의 0.5° 블록 절반에서 고정된 규칙으로 라벨 n개를 뽑아 나머지 절반에서 채점한다. 각 n에서 평균과 중앙값, 오차가 커진 대상 수, 최대 증가를 보고한다. 지역 전체를 제외한 4지역과 상위 지역이 원천에 남는 하위 지역 10개는 따로 집계한다.
 - **English**: To our knowledge, no study mapping permafrost active-layer thickness or mean annual ground temperature has reported prediction error for regions excluded from the source training data as a function of the number of labels drawn from the target region. Distance-blocked validation has been used for ALT (Aalto et al., 2018; Karjalainen et al., 2019; Ran et al., 2022), and label-count evaluations for unmonitored targets exist in other fields (Pool et al., 2019; Willard et al., 2021; Portes et al., 2026; O'Malley et al., 2026). We combine the two: the target region is excluded from the source data with a 100-km buffer, n labels are drawn under a fixed rule from half of its 0.5° blocks, and errors are scored on the other half. For each n we report the mean and median change relative to the source-coefficient Stefan model, the number of targets with increased error and the largest increase, separately for four regions excluded entirely (two with fewer than 30 labelled cells, n ≤ 10) and for ten sub-regional targets whose parent region remains in the source data.
-- **근거 상태**: 설계는 확정이다. 수치를 채운 통합 곡선은 LG 실행 뒤 확정된다.
+- **근거 상태**: 설계는 확정이다. 수치를 채운 통합 곡선은 LG 실행 뒤 확정된다. [2026-09-30 결과 뒤: 지지(설계). 곡선 수치는 LG 7.1, 독립 지역 확충은 LG 7.3 약관 확인분 판. 11절]
 - **조건**:
   - "곡선"이라는 말은 LG 결과 뒤에만 쓴다. 그 전에는 출처 실험을 표기한 구간별 결과로 쓴다.
   - 라벨 단위를 명시한다. `fidelity_base_v3.csv`의 `spatial_support_m`은 전 행 100이다(이번에 확인). CALM 행에도 같은 값이므로 이 열이 실제 지지 규모인지 기본값인지는 원고 작성 전에 확인해야 한다.
@@ -72,14 +73,14 @@ outcome이 keep_with_qualifier인 7개다. 심사 권고에 따른 배치는 서
 
 - **한국어**: 호수 수온 분야의 보고 형식을 따라 모든 방법을 두 Stefan 기준선과 비교한다. 하나는 원천 계수이고, 다른 하나는 같은 대상 라벨로 재보정한 계수(κ = 10 수축)다. 재보정 기준선이 원천 계수 기준선보다 나쁜 대상이 있으므로 두 기준선 대비 값을 모두 보고하고, 둘 중 오차가 낮은 쪽을 넘을 때만 학습기의 이득으로 쓴다.
 - **English**: Following the reporting format used for lake temperature (Read et al., 2019; Jia et al., 2021), every method is compared with two Stefan baselines: the source-region coefficient and a coefficient recalibrated with the same target labels (shrinkage toward the source value, κ = 10; the unshrunk least-squares refit is reported as a sensitivity case). Because the recalibrated baseline is less accurate than the source-coefficient baseline in some targets, differences are reported against both, and a gain is attributed to the learner only when it holds against the better of the two.
-- **근거 상태**: 형식은 확정이다. 재보정 기준선 대비 순가치의 4지역 층화 평균은 LG L4 뒤 확정된다.
+- **근거 상태**: 형식은 확정이다. 재보정 기준선 대비 순가치의 4지역 층화 평균은 LG L4 뒤 확정된다. [2026-09-30 결과 뒤: 지지, 기준선 규칙 확장. 라벨 0 은 P0 와 P*(P0@tddm), 라벨 n 은 P1 과 P1*(n = 40·160 은 P1@ed)를 쓴다. R1 은 n = 40·160 에서 P1* 를 넘지 못하므로(미결정) 이 n 에서 학습기 이득을 쓰지 않는다(LG 7.1a, 7.2 L29·결정 2). 11절]
 - **조건**: 독립 기여로 세지 않는다. 현지 관측으로 E를 보정하는 것은 영구동토 분야의 관행이므로 그 출처를 함께 인용한다(Gautam 2025, Nelson 1997. Li C. 2022와 Peng 2018은 검색 요약 수준).
 
 ### N6 라벨 0 직접 ML과 증강 (서론 기여 문장)
 
 - **한국어**: 원천이 알래스카 단독이고 대상 라벨이 없는 조건에서, 초모수를 고정한 학습기 10종은 제외 4지역의 등가중 평균으로 원천 계수 Stefan 식보다 오차가 크다(CatBoost +2.3 cm, 95 % CI 0.8–4.3). 입력에 √TDD와 CCI ALT가 들어 있어도 그렇다. 지역별로는 러시아 W에서만 두 가중 모두 유의하고 캐나다에서는 차이가 없다. 별도의 공변량만 조건 실험에서 Stefan 유사라벨은 직접 ML의 오차를 3.6 cm 줄여 물리식 수준으로 되돌리지만 그보다 낮추지는 못한다. 위약 유사라벨 대비 우위가 가중 규약에 강건하지 않으므로 이 감소를 유사라벨의 물리 내용에 귀속하지 않는다.
 - **English**: With Alaska as the only source region and no target-region labels, ten learners with fixed hyperparameters had larger error than the source-coefficient Stefan model in the equally weighted mean of four excluded regions (gradient boosting +2.3 cm, 95% CI 0.8–4.3; exploratory contrast without multiplicity correction), although their inputs included the square root of thawing degree-days and a model-based ALT product. By region the difference held under both weighting conventions in Russia W only and was absent in Canada (+0.2 cm, −4.6 to 3.4). The direction agrees with random-split comparisons in Alaska (Gautam et al., 2025) and on the Tibetan Plateau (Shen et al., 2023). In a separate covariate-only experiment, Stefan-derived pseudo-labels for target cells reduced the error of direct learning by 3.6 cm (1.9–4.8), to but not below the Stefan error; because the advantage over placebo pseudo-labels was not robust to the weighting convention, we do not attribute the reduction to the physical content of the pseudo-labels.
-- **근거 상태**: 확정(R01, R03, R04). 대조는 탐색 가족이라 Holm 보정이 없다.
+- **근거 상태**: 확정(R01, R03, R04). 대조는 탐색 가족이라 Holm 보정이 없다. [2026-09-30 결과 뒤: 직접 ML 부분은 지지(확장). 다지역 원천(L1), 용량(L30), 과정 모델 출력 입력(L11), TabPFN 직접(L34 a), 확장 풀(L1e)에서 같다. 초록 대비 AB1 +2.25 [1.10, 3.42], Holm p 0.023. 증강 부분은 정정: LGX L15(확인적, 혼재)에서 D1 은 위약 8대비 가운데 7개보다 오차가 작다(AB3 D1 − D1@shuffle n 0 −1.63, Holm p 0.001). LG 규약의 문장은 '증강 이득에는 셀 단위 물리 정보가 기여하나 √TDD 선형 변환 위약과의 차이는 n = 10 에서 사라진다' 이다. '물리 내용에 귀속하지 않는다' 는 원천 정의가 다른 M1 결과의 서술로만 남긴다. 11절]
 - **이번에 확인한 점**: 4지역 평균에서는 10종 모두 셀 가중과 블록 등가중 CI가 0을 제외한다. 심사 두 건의 "CatBoost와 MLP만 확인"은 확인 범위의 차이였다.
 - **조건**:
   - 직접 ML 수치와 증강 수치는 조건과 채점 셀 집합이 다르므로 문장을 나눈다.
@@ -90,7 +91,7 @@ outcome이 keep_with_qualifier인 7개다. 심사 권고에 따른 배치는 서
 
 - **한국어**: 알래스카 한 지역에서 1 km 공변량으로 회귀한 E 계수는 그 지역 안 블록 검증에서는 설명력이 있으나(R² 0.39–0.52) 학습 제외 지역에서는 없다(R² −0.5에서 −3.1). 이를 앵커로 쓰면 제외 4지역 등가중 평균 RMSE가 단일 원천 계수 대비 3.0–6.7 cm 커진다. 지역별로는 러시아 W·E에서만 유의하다. 경험 매개변수가 지역을 넘어 옮겨지지 않는다는 기존 관찰을 ML로 회귀한 계수로 확장한 결과다.
 - **English**: Edaphic-factor regressions on 1-km terrain, climate and soil covariates, fitted in a single source region (Alaska), had skill under block validation within that region (R² 0.39–0.52) but not in regions excluded from training (R² −0.5 to −3.1). Used as the anchor in four excluded regions they increased the equally weighted mean RMSE by 3.0–6.7 cm relative to a single source coefficient (Holm-adjusted p = 0.01); by region the increase was significant in Russia W and Russia E (27–28 cells each) and not in Lena or Canada. This extends to machine-learned coefficients earlier observations that empirically derived parameters do not transfer between regions (Oudin et al., 2008; Hasler et al., 2015; Garibaldi et al., 2026). Among the other zero-label routes, invariance learning increased the error, adding land surface temperature to the inputs left it unchanged (+0.03 cm, −0.12 to 0.12), a Stefan–Kudryavtsev anchor lowered cell-weighted but not block-weighted error, and product blending and coefficient borrowing gave intervals too wide to establish a benefit or its absence.
-- **근거 상태**: 첫 문장은 확정(H10, 확인적 가족, 두 가중)이다. 9개 후보 가운데 통계 처리가 주장 수준에 가장 가깝다. 다지역 원천과 대상 라벨을 쓴 계수 회귀는 LG L7, LGX L13 뒤 확정된다.
+- **근거 상태**: 첫 문장은 확정(H10, 확인적 가족, 두 가중)이다. 9개 후보 가운데 통계 처리가 주장 수준에 가장 가깝다. 다지역 원천과 대상 라벨을 쓴 계수 회귀는 LG L7, LGX L13 뒤 확정된다. [2026-09-30 결과 뒤: 지지(확장). 다지역 원천과 대상 라벨을 쓴 계수 모형도 이득이 없다. L7 기각(캐나다·CA-3 n ≥ 40 의 V1·V1r − P0 점 추정 +2.9 – +8.1), L13 미지지(V2 − P1 +3.94 열세, V2 − R1 +4.12 열세). 7.1 표의 'L7 기각' 분기에 해당한다. 11절]
 - **조건**:
   - Ran 2022 CEE와 Zhang C. 2024의 재현이 아니라 같은 유형의 구현이다.
   - "관계가 지역마다 다르다"는 다지역 원천 결과 전에는 쓰지 않는다.
@@ -101,7 +102,7 @@ outcome이 keep_with_qualifier인 7개다. 심사 권고에 따른 배치는 서
 
 - **한국어**: 대상 라벨로 단일 Stefan 계수를 재보정하는 것(κ = 10 수축)은 모든 대상에서 이득이 아니다. 무작위 추출에서 캐나다는 n ≥ 10에서 두 가중 모두 악화한다(n = 10 +1.7 cm, n = 320 +3.5 cm). 같은 대상에서 원천 계수 앵커 + 잔차는 물리식보다 0.7–0.8 cm 낮게 유지된다. 어느 지역이 악화하는지는 추출 규칙에 따라 달라지며, 블록 분산 추출에서는 레나가 악화한다(n = 10 +3.7 cm). 시험한 풀링 추정기, 3라벨 진단, 선택 규칙은 이 설계에서 악화를 없애거나 미리 가려내지 못했다.
 - **English**: Recalibrating a single Stefan coefficient with target-region labels (shrinkage, κ = 10) was not uniformly beneficial. Under random label draws the Canadian target, which combines four campaigns between 61°N and 69°N with coefficients from 1.06 to 2.16, deteriorated under both weightings at n ≥ 10 (+1.7 cm at n = 10 to +3.5 cm at n = 320), whereas a source-coefficient anchor with residual learning stayed 0.7–0.8 cm below the Stefan model; under block-spread draws the Lena region deteriorated instead (+3.7 cm at n = 10). None of the pooling estimators, three-label diagnostics or selection rules that we tested removed or anticipated the deterioration in this design.
-- **근거 상태**: 캐나다 악화와 추정기·진단·선택 규칙의 실패는 확정이다. 원인 해석(캠페인별 계수 차이, A·B 블록 모집단 차이)은 탐색이다. 배치 축과 L7은 LG 실행 뒤 확정된다.
+- **근거 상태**: 캐나다 악화와 추정기·진단·선택 규칙의 실패는 확정이다. 원인 해석(캠페인별 계수 차이, A·B 블록 모집단 차이)은 탐색이다. 배치 축과 L7은 LG 실행 뒤 확정된다. [2026-09-30 결과 뒤: 지지. 재보정 물리식 단독은 캐나다 n = 3 +0.97 [0.26, 1.30], n = 10 +2.26 [0.71, 2.93]에서 오차를 키운다(SC1w-P 기각, Holm p 0.021·0.008, S-a 열람 표지). 소수 라벨 재보정의 안전성은 확인되지 않았다(SC1w 비열등 칸 4/10). 계수 모형(L7 기각), 순차 멈춤 규칙(SC3w 비작동), 관측 배치(L43 효과 확인 안 됨)도 악화를 없애거나 가려내지 못했다. 원천 계수 앵커 + 잔차 경로의 캐나다 안정성은 CatBoost 한정이다(L27, 4/8). 11절]
 - **이번에 확인한 점**: "유의 개선 4, 유의 악화 4"는 B2 무작위 추출 n = 3의 셀 가중 CI 기준 값이다. 두 가중 기준으로 세면 다음과 같다.
 
 | n | 개선 | 악화 |
@@ -111,8 +112,8 @@ outcome이 keep_with_qualifier인 7개다. 심사 권고에 따른 배치는 서
 
 - 14대상 중 12대상에 유효 블록 5 미만 표시가 있다. 대상 수 집계는 가중 규약과 추출 규칙을 명시해 LG 값으로 다시 낸다.
 - **조건**:
-  - 배치 효과 문장은 뺀다(평균 행에 블록 등가중 CI가 없다).
-  - n = 3의 +0.73 cm는 셀 가중 CI가 0을 포함하므로 시작점을 n = 10으로 쓴다.
+  - 배치 효과 문장은 뺀다(평균 행에 블록 등가중 CI가 없다). [2026-09-30 결과 뒤: L43 에서 배치 효과가 확인되지 않았으므로 계속 뺀다]
+  - n = 3의 +0.73 cm는 셀 가중 CI가 0을 포함하므로 시작점을 n = 10으로 쓴다. [2026-09-30 결과 뒤: LG 규약 값(SC1w-P)에서는 캐나다 n = 3 도 유의하게 나쁘다(+0.97 [0.26, 1.30])]
   - "재보정은 통상 안전한 기준선"이라는 전제는 쓰지 않는다. E가 경관 단위마다 다르다는 것은 Nelson 1997 이래의 지식이다.
   - 가장 방어 가능한 대비는 Jia 2021의 단조 개선과의 차이다.
 
@@ -120,9 +121,9 @@ outcome이 keep_with_qualifier인 7개다. 심사 권고에 따른 배치는 서
 
 - **한국어**: 대상 라벨을 원천 자료와 같은 가중(α = 1)으로 합치고 원천 계수 앵커에 CatBoost 잔차(λ 0.25)를 더한 조건에서, 잔차 학습은 레나와 하위 지역 5개에서 라벨 40개 이하로 물리식을 넘지 못했다. 레나는 셀 가중 기준 320개, 블록 등가중 기준 160개가 필요했고 모든 차이는 ±0.6 cm 안이다. 라벨 전량에서 4지역 등가중 평균은 −0.68 cm이고 러시아 W를 빼면 −0.10 cm다. 두 가중 모두 유의한 지역은 레나 하나다.
 - **English**: With target labels pooled with the source data at equal weight (α = 1), a source-coefficient Stefan anchor and a gradient-boosted residual (λ = 0.25), residual learning did not reduce the error below that of the Stefan model with 40 or fewer labels in the Lena region or in five sub-regional targets; in Lena the cell-weighted interval excluded zero at n = 320 and the block-weighted interval at n = 160, and all differences were within ±0.6 cm. With all available labels the equally weighted mean over four regions was −0.68 cm (95% block-bootstrap CI −1.01 to −0.27; region-level test p = 0.35) and −0.10 cm without Russia W; the gain was significant under both weighting conventions in the Lena region only, and Russia E deteriorated under block weighting.
-- **근거 상태**: 확정(F1, H13). −0.10 cm는 심사에서 지역별 점 추정으로 계산한 값이고 CI가 없다.
+- **근거 상태**: 확정(F1, H13). −0.10 cm는 심사에서 지역별 점 추정으로 계산한 값이고 CI가 없다. [2026-09-30 결과 뒤 정정: 한정. (1) LG 통합 격자(α 1, 셀 무작위)에서 R0 의 n* 는 레나 40, 캐나다 3 이다(LG 7.1 n* 요약). '레나에서 40개 이하로 넘지 못했다' 는 a2 설계(all_blocks) 한정 기록이다. AL-2 1,000, AL-5 도달 못 함(L3). (2) 전량 수치는 LG L8 로 교체한다. R1 − P0 4지역 −2.64 [−3.47, −1.90], 러시아 W −13.98, 캐나다 +3.38(유의하게 나쁨), 알래스카를 넣은 3지역 +0.77(열세), P* 대비 −1.64, P1 대비 −0.40(0.5 cm 미만). 분할 구성 강건성은 지역 의존(L31, 2/4). −0.68 과 −0.10 은 원고에 쓰지 않는다. 11절]
 - **조건**:
-  - 전반부는 α = 1 설계의 귀결일 수 있다. LG L3 결과에 따라 "대상 가중 없이는"으로 한정하거나 강화한다.
+  - 전반부는 α = 1 설계의 귀결일 수 있다. LG L3 결과에 따라 "대상 가중 없이는"으로 한정하거나 강화한다. [2026-09-30 결과 뒤: L3 는 등록 문구상 지지이나 중첩 선택 α 가 α = 1 보다 n* 를 줄인 대상은 0/4 다(LG 7.1). '대상 가중 없이는' 한정도, 가중 효과의 양성 서술도 쓰지 않는다]
   - "한 지역만 유의"는 원천 정의에 의존한다. a2에서는 캐나다도 두 가중 유의다.
   - 효과 크기를 격자 안 변동과 병기한다. 재분석 격자 안 ALT 표준편차 10–17 cm는 심사 집계이므로 LGX N2의 하한 값으로 교체한다.
 
@@ -130,7 +131,7 @@ outcome이 keep_with_qualifier인 7개다. 심사 권고에 따른 배치는 서
 
 - **한국어**: 라벨 0 조건의 ALT 90 % 예측 구간에 대해 학습 제외 지역의 경험 커버리지를 보고한다. 이는 조사 범위(2026년 9월 기준)의 ALT 문헌에서 확인되지 않았다. 셀 풀링 보정은 0.73(평균 폭 56 cm), 지역을 집단으로 둔 근사 계층 conformal 절차는 0.86(81 cm)이다. 지역별로는 0.75(러시아 W)에서 0.93이고 알래스카를 제외 지역으로 두면 0.98이다.
 - **English**: For label-free 90% prediction intervals of active-layer thickness we report empirical coverage in regions excluded from training, which to our knowledge (as of September 2026) has not been reported for ALT. Coverage was 0.73 for pooled-cell calibration (mean width 56 cm) and 0.86 (95% CI 0.80–0.92; 81 cm) for an approximate hierarchical conformal procedure with regions as groups (Dunn et al., 2023), ranging from 0.75 (Russia W, 28 cells) to 0.93 across four regions and 0.98 when Alaska was the excluded region. With four calibration groups no finite-sample guarantee holds at the 90% level, the exact procedure yields unbounded intervals, and interval width is proportional to the prediction (a factor of about two).
-- **근거 상태**: 확정(F10 부분 지지). 라벨이 있는 조건의 구간은 LGX L25 뒤 확정된다.
+- **근거 상태**: 확정(F10 부분 지지). 라벨이 있는 조건의 구간은 LGX L25 뒤 확정된다. [2026-09-30 결과 뒤: 한정. 라벨 0 커버리지 서술은 유지한다. 라벨이 있는 조건은 '라벨이 구간을 좁힌다'(L25, c1 4, c2 4). 계층 예측 분포 구간과 상수 폭 구간의 차이는 확인되지 않았고(LGU-A1 미결정), 조건부 폭의 전이는 쓰지 않으며(LGU-B2 미결정), 폭은 예측값에 비례한다. 원천 셀 교환성으로 보정한 생성 분위 구간은 새 지역에서 0.85 미만이다(LGU-B1, H15 대체). 11절]
 - **조건**:
   - CQR 0.55는 다른 실험의 값이므로 같은 채점 셀로 다시 계산하기 전에는 같은 문장에 넣지 않는다.
   - 블록 등가중 커버리지(레나 0.81, 러시아 W 0.74)와 구간 점수(계층 132, 셀 풀링 153)를 병기한다.
@@ -140,9 +141,9 @@ outcome이 keep_with_qualifier인 7개다. 심사 권고에 따른 배치는 서
 
 | 문장 | 판정 | 이유 | 남길 수 있는 형태 |
 |---|---|---|---|
-| N3: 소수 라벨 이득의 72–95 %는 계수 재보정이고 잔차 순가치는 0과 구분되지 않는다 | 기각 2, 조건부 1 | 아래 참조 | 결과 절의 사례 서술 |
-| N8: 검증 방식에 따라 ML과 물리식의 순위가 뒤집힌다 | 기각 2, 조건부 1 | 아래 참조 | 방법 절의 검증 방식 선택 근거 |
-| N5의 배치 절(분산 대 집중의 부호 변화) | 삭제 | 평균 행에 블록 등가중 CI가 없다. n = 160 값은 대상 구성에 따라 부호가 바뀐다 | LG 배치 축이 두 가중에서 확인되면 별도 문장 |
+| N3: 소수 라벨 이득의 72–95 %는 계수 재보정이고 잔차 순가치는 0과 구분되지 않는다 | 기각 2, 조건부 1 | 아래 참조 | 결과 절의 사례 서술. [2026-09-30 결과 뒤: 폐기 유지. L4 가 n ≤ 40 에서 성립해 7.1 표의 '완전 폐기' 분기다. 순가치 문장은 11절 N3 의 한정어와 함께 쓴다] |
+| N8: 검증 방식에 따라 ML과 물리식의 순위가 뒤집힌다 | 기각 2, 조건부 1 | 아래 참조 | 방법 절의 검증 방식 선택 근거. [2026-09-30 결과 뒤: 폐기 유지. LGX L19 지지하지 않음. 남길 형태는 열화 크기 V-G − V-R +10.34 [7.29, 12.84] 와 단조 열화(L20 지지)] |
+| N5의 배치 절(분산 대 집중의 부호 변화) | 삭제 | 평균 행에 블록 등가중 CI가 없다. n = 160 값은 대상 구성에 따라 부호가 바뀐다 | LG 배치 축이 두 가중에서 확인되면 별도 문장. [2026-09-30 결과 뒤: L43 배치 효과 확인 안 됨, 삭제 유지] |
 | N2를 독립 기여로 세는 것 | 강등 | N1에 종속된 주장이고 형식은 선례가 있다 | 방법 절 |
 
 **N3 기각 사유**
@@ -160,7 +161,7 @@ outcome이 keep_with_qualifier인 7개다. 심사 권고에 따른 배치는 서
 - 직접 ridge는 모든 방식에서 Stefan보다 낮으므로 "직접 ML이 뒤집힌다"도 틀렸다.
 - seed 3개 점 추정이고 CI가 없다.
 - 같은 패턴은 Gautam 2025에 이미 있다.
-- 남길 형태: CatBoost 오차는 무작위 셀 분할 11.6 cm에서 공간 분리 방식 13.4–17.9 cm로 커지고 Stefan은 14.2–14.5 cm로 유지된다.
+- 남길 형태: CatBoost 오차는 무작위 셀 분할 11.6 cm에서 공간 분리 방식 13.4–17.9 cm로 커지고 Stefan은 14.2–14.5 cm로 유지된다. [2026-09-30 결과 뒤: LG 규약 값은 `catboost_lo` D0 RMSE V-R 22.91 < V-B 27.17 < V-C100 30.97 < V-C500 31.13(V-G 33.25)이고 V-G − V-R 은 +10.34 [7.29, 12.84]다(LGX L19·L20)]
 
 쓸 수 없는 표현은 다음과 같다.
 
@@ -174,6 +175,13 @@ outcome이 keep_with_qualifier인 7개다. 심사 권고에 따른 배치는 서
 | 물리 유래 라벨 최초 | Gay 2026, Huang 2025, Li & Jia 2026 |
 | 두 기준선 형식 최초 | Read 2019, Jia 2021, Tahvildari 2026 |
 | 조건 없는 "ML이 물리식을 넘는다" | 자체 결과 |
+| (2026-09-30 추가) 검증 방식에 따른 순위 "역전" | 자체 결과(LGX L19 지지하지 않음) |
+| (2026-09-30 추가) "라벨 3–10개로 재보정하면 안전하다" | 자체 결과(WRAPUP SC1w, SC1w-P) |
+| (2026-09-30 추가) "n = 40·160 에서 잔차 ML 이 재보정 물리식을 넘는다" | 자체 결과(LG 7.1a, P1* 대비 미결정) |
+| (2026-09-30 추가) "TabPFN 은 CatBoost 와 동급이다" | 자체 결과(LGT L32, 차이를 확인하지 못함) |
+| (2026-09-30 추가) "라벨은 여러 블록에 흩어야 한다" | 자체 결과(WRAPUP L43) |
+| (2026-09-30 추가) "계층 모형이 구간을 개선한다", "조건부 폭이 전이된다" | 자체 결과(LGU-A1, LGU-B2) |
+| (2026-09-30 추가) "원천 계수 Stefan 이 가장 강한 물리 기준선이다" | 자체 결과(LGX L29, P* = P0@tddm) |
 
 ## 6. 연구의 의의
 
@@ -181,9 +189,9 @@ outcome이 keep_with_qualifier인 7개다. 심사 권고에 따른 배치는 서
 
 **ML 방법론.** 방법론의 신규성은 없고, 인접 분야의 알려진 결과(Steyerberg 2004, Oudin 2008, Ploton 2020, Staudinger 2025)를 ALT에서 재확인한 것이다. 다른 점은 세 가지다. 보정 대상이 물리 계수이고 원천 계수로 수축한다. 단순 보정도 해로운 대상이 있고 그 대상이 추출 규칙에 따라 바뀐다. 평균 이득과 실패 위험을 같은 표에서 보고한다. 기여는 "ALT 문헌에 없던 전이 평가와 음성 결과의 목록"으로 서술하는 것이 근거와 맞다.
 
-**실용.** 새 지역에서 라벨 수에 따라 무엇을 쓸지의 근거를 준다. 라벨 0이면 원천 계수 Stefan 식과 경험 커버리지를 보고한 구간을 쓴다. 소수 라벨의 재보정은 이득일 수도 악화일 수도 있고 사전 진단 수단은 없다. 잔차 ML의 이득은 수백 개 이상에서 1 cm 미만이다. 전량 평균 0.68 cm는 물리식 RMSE의 2–4 %이고 GPR 유도 ALT의 평균 불확실성 0.14 m(Parsekian 2021)보다 작다.
+**실용.** 새 지역에서 라벨 수에 따라 무엇을 쓸지의 근거를 준다. 라벨 0이면 원천 계수 Stefan 식과 경험 커버리지를 보고한 구간을 쓴다. 소수 라벨의 재보정은 이득일 수도 악화일 수도 있고 사전 진단 수단은 없다. 잔차 ML의 이득은 수백 개 이상에서 1 cm 미만이다. 전량 평균 0.68 cm는 물리식 RMSE의 2–4 %이고 GPR 유도 ALT의 평균 불확실성 0.14 m(Parsekian 2021)보다 작다. [2026-09-30 결과 뒤 정정: 라벨 0 의 물리 기준선은 P0 와 P*(P0@tddm)를 병기한다(L29). 소수 라벨 재보정의 안전성은 확인되지 않았고 캐나다에서는 재보정 단독이 오차를 키운다(SC1w, SC1w-P). 잔차 ML 의 P1 대비 이득은 n = 10 −0.18 cm(0.5 cm 안, Holm 보정 뒤 비유의), n = 40·160·320 −0.56·−0.64·−0.83 cm(레나·캐나다 2지역, n = 40·160 은 P1* 대비 미결정), 전량 −0.40 cm 로 모두 1 cm 미만이다(L4, 7.1a, AB5, AB9). '수백 개 이상에서' 는 LG 결과와 맞지 않는다. 0.68 cm 와 백분율은 M1 H13 값이므로 LG 값으로 다시 쓴다]
 
-**공통 한계.** 확인적 지역은 4개이고 지역 수준 검정 p는 0.35다. 러시아 W·E는 27–28셀이며 주요 평균의 유의성이 대부분 러시아 W에서 나온다. 블록 부트스트랩 CI는 지역을 고정한 조건부 구간이므로 새 지역으로의 일반화 근거가 아니다.
+**공통 한계.** 확인적 지역은 4개이고 지역 수준 검정 p는 0.35다. 러시아 W·E는 27–28셀이며 주요 평균의 유의성이 대부분 러시아 W에서 나온다. 블록 부트스트랩 CI는 지역을 고정한 조건부 구간이므로 새 지역으로의 일반화 근거가 아니다. [2026-09-30 결과 뒤: 전량 평균 개선의 러시아 W 의존은 LG 에서도 같다(L8, AB4, AB8, L31 지역 의존 2/4). 약관 확인분 판의 독립 지역은 5개(Russia_C 추가)이고 새 얕은 지역의 전량 R1 − P0 는 미결정이다(L38). 소수 라벨 순가치는 확장 풀에서 유지되지 않는다(L4e)]
 
 ## 7. 신규성 강화에 필요한 것
 
@@ -201,6 +209,8 @@ outcome이 keep_with_qualifier인 7개다. 심사 권고에 따른 배치는 서
 | L8 전량 | N4 후반부가 통합 규약으로 재확인된다 | 전량 이득을 "M1 설정 한정"으로 쓴다 |
 
 L4에서 n ≥ 40은 레나·캐나다 2지역 평균이므로 "부분(지역 2/4)"으로 표기된다. L7은 사전 점검이 분할 seed 1·2를 미리 보았으므로 seed 3–5 값을 병기한다.
+
+[2026-09-30 결과 뒤: 각 행에서 실제로 적용되는 분기와 한정어는 11.2 표에 적었다. L3 행의 '가중의 효과를 양성 결과로 쓴다' 는 L3 보조 열(0/4) 때문에 쓰지 않는다.]
 
 ### 7.2 LGX(개정 5) 가운데 문장에 직접 걸리는 항목
 
@@ -228,7 +238,7 @@ L4에서 n ≥ 40은 레나·캐나다 2지역 평균이므로 "부분(지역 2/
 
 - 계획서 6.2절과 커밋 19f3f93 기준으로, 본 실행은 사전 등록 범위 전부(학습기 7종, RealMLP 포함)로 이미 제출되었다(작업 ZovWo). 이전 선택지로는 A와 B를 합친 범위다. 계획서 추정은 15–16 h, 약 88달러이고 상한 기준 최악은 125.31달러다.
 - LGX는 계획서에 등록되었으나 하네스(h42, h41)와 보조 입력 표가 아직 없다. 계획서 추정은 약 110달러, 상한 기준 최악 약 172달러다.
-- git 상태 기준으로 개정 5는 아직 커밋되지 않았다(`docs/EXPERIMENT_PLAN_LG_2026-09-29.md` 수정 상태, 270행 추가). 계획서 6A.7은 이 커밋이 본 실행 결과 회수보다 앞서야 한다고 적고 있다. `results/`에는 사전 점검 결과만 있고 본 실행 결과는 회수되지 않았다.
+- git 상태 기준으로 개정 5는 아직 커밋되지 않았다(`docs/EXPERIMENT_PLAN_LG_2026-09-29.md` 수정 상태, 270행 추가). [2026-09-30 정정: 개정 5 는 이 문서의 커밋(d8355d2, 18:18:36)보다 67 s 앞선 8513cc2(18:17:29)에 커밋되었다. 위 문장은 작성 중 git 상태의 기록이다] 계획서 6A.7은 이 커밋이 본 실행 결과 회수보다 앞서야 한다고 적고 있다. `results/`에는 사전 점검 결과만 있고 본 실행 결과는 회수되지 않았다.
 
 LGX에 없는 새 선택지는 다음과 같다. 가치 순이다.
 
@@ -283,13 +293,13 @@ Memiş 2025 리뷰의 "Stefan 정칙화 RF-LSTM, RMSE 약 15 % 감소" 문장은
 
 | PDF의 서술 | 근거가 말하는 것 |
 |---|---|
-| 핵심 기여는 유사라벨 증강과 덧셈 잔차 | 두 기법의 순가치는 작거나 조건부다. 증강은 물리식 수준까지만 되돌리고, 잔차 순가치는 n ≤ 40에서 ±1 cm 안이며 부호가 대상마다 다르다 |
-| 덧셈 잔차가 곱셈 보정보다 낫다는 전제 | 큰 이득이 확인된 성분은 스칼라 재보정(곱셈)이다. 짝 비교는 LGX L12 |
+| 핵심 기여는 유사라벨 증강과 덧셈 잔차 | 두 기법의 순가치는 작거나 조건부다. 증강은 물리식 수준까지만 되돌리고, 잔차 순가치는 n ≤ 40에서 ±1 cm 안이며 부호가 대상마다 다르다. [2026-09-30 결과 뒤: 덧셈 잔차 구조는 라벨 0–10 에서 물리 입력 구조보다 오차가 작다(L10 지지. n = 40·160 보조 행은 반대 방향). 증강은 라벨이 있으면 R1 보다 낫지 않다(L2). 잔차 순가치는 n = 10 −0.18 cm(L4). 판단은 유지한다] |
+| 덧셈 잔차가 곱셈 보정보다 낫다는 전제 | 큰 이득이 확인된 성분은 스칼라 재보정(곱셈)이다. 짝 비교는 LGX L12. [2026-09-30 결과 뒤: L12 기각. 곱셈 잔차 RM 은 덧셈 잔차 R1 보다 나쁘다(n = 10 λ 0.25 +0.35, λ 1.0 +1.09, 전량 λ 0.25 +0.25). 잔차 형식의 비교로는 PDF 의 전제와 방향이 같다. 스칼라 재보정 P1 의 이득 서술은 AB4(러시아 W 지배)와 SC1w-P(캐나다 악화)로 한정한다] |
 | Pilyugina의 "Kudryavtsev 단독 32.4 cm" | 물리 출력만 입력한 CatBoost다 |
 | Wei & Chen 2026은 연결 논문 없음 | ESSD Discussions 프리프린트가 있다 |
 | Li X. 2022가 E 지도 공개 | 첫 저자는 Chuanhua Li다. E 지도 공개 여부와 산정 방식은 미확인 |
 | AOA 마스크가 신뢰성 논의와 이어진다 | 비가중 AOA는 해로운 대상을 식별하지 못했다. 표기용으로만 쓴다 |
-| 픽셀별 예측 구간 | 경험 커버리지를 보고한 구간이다. 보장은 없다 |
+| 픽셀별 예측 구간 | 경험 커버리지를 보고한 구간이다. 보장은 없다. [2026-09-30 결과 뒤: 조건부 폭의 전이는 확인되지 않았고(LGU-B2) 지도 구간의 폭은 예측값에 비례한다. 지도는 SI 에 둔다] |
 | 캐나다·시베리아를 희소 시나리오로 | 캐나다는 재보정이 해로운 사례이고, 러시아는 라벨 상한이 15셀 안팎이다 |
 | 물리항이 기후 민감도를 맡는다 | 시험한 적이 없다. 지점 내 √DDT 계수(1.05 cm, Streletskiy 2026)는 공간 계수 E보다 작다 |
 | SAR를 예측 변수로 | 전이 실험 입력에 SAR가 없다 |
@@ -331,14 +341,61 @@ Memiş 2025 리뷰의 "Stefan 정칙화 RF-LSTM, RMSE 약 15 % 감소" 문장은
 - Tahvildari 2026은 실재한다(Sci Rep 16, 8925, 공극압). 영구동토 문헌은 아니다.
 - Streletskiy 2026의 156지점은 원문에서 확인되었다.
 - LG 계획서 3절의 D0 정의 "물리 없음"은 "물리 앵커 없음"으로 고쳐야 한다.
+- (2026-09-30 결과 뒤 추가) "검증 방식에 따른 순위 역전"은 LGX L19(확인적)에서도 지지되지 않았다. 폐기를 유지하고 열화 크기만 쓴다(11절 N8).
+- (2026-09-30 결과 뒤 추가) "성분 분해 72–95 %"의 철회는 FINAL §10.3·§10.4 와 RESEARCH_FRAME D절에 반영했다(J10).
+- (2026-09-30 결과 뒤 추가) 잔차 ML 이 재보정 물리식을 넘는다는 문장은 n = 10 의 P1 대비(−0.18 cm, 0.5 cm 안, Holm 보정 뒤 비유의)와 전량의 P1 대비(−0.40 cm)에 한정한다. n = 40·160 은 P1* 대비 미결정이다. 전량의 P1* 존재 여부는 LG 7.1a 에 적혀 있지 않으므로 전량 문장은 그 기록을 보완한 뒤 쓴다(LG 7.1a, WRAPUP AB5·AB9).
 
 **내부 문서 정정 대상**(이번에 수정하지 않았다)
+
+[2026-09-30 정정: 아래 다섯 곳 가운데 INDEX.md, 07-21 계획 91행, CONTEST_PLAN 126행, FINAL 52행, LG 3절 D0 정의는 이 문서와 같은 커밋 d8355d2(2026-09-29 18:18:36)에서 정정되었다. '이번에 수정하지 않았다' 는 커밋 내용과 맞지 않는다. FINAL 의 §1 주장 상태표는 그 커밋에서 바뀌지 않았고 2026-09-30 J10 에서 표지를 달았다(FINAL §1, §10.4).]
 
 - `/home/willy010313/Polar_Bigdata/references/INDEX.md` 307–311행
 - `/home/willy010313/Polar_Bigdata/docs/EXPERIMENT_PLAN_2026-07-21.md` 91행
 - `/home/willy010313/Polar_Bigdata/docs/CONTEST_PLAN_2026.md` 126행
 - `/home/willy010313/Polar_Bigdata/docs/EXPERIMENT_PLAN_FINAL_PAPER_2026-09-26.md` 52행, §1 주장 상태표
 - `/home/willy010313/Polar_Bigdata/docs/EXPERIMENT_PLAN_LG_2026-09-29.md` 3절 D0 정의
+
+## 11. 2026-09-30 결과 뒤 상태(J10)
+
+근거는 LG §7.1·7.1a·7.2·7.3·7.4, LGU 11.1, WRAPUP '결과 판정 기록(J7)' 의 기록 문장이다. 판정은 다시 해석하지 않았고 원 결과 표는 열지 않았다. 상태 표기는 지지(판정이 문장을 뒷받침한다), 한정(한정어를 붙여야 한다), 지지하지 않음(쓰지 않는다), 폐기 유지다. 단위는 cm, 음수가 개선이다.
+
+### 11.1 문장별 상태
+
+| 문장 | 요지 | 결과 뒤 상태 | 근거 절 | 원고 조치 |
+|---|---|---|---|---|
+| N1 평가 축 | 학습 제외 지역 오차를 라벨 수 함수로 보고 | 지지(설계) | LG 7.1, 7.3 | '곡선' 을 쓸 수 있다. 수치는 LG 격자 값. 독립 지역은 약관 확인분 판(5지역) |
+| N2 두 기준선 | 원천 계수와 재보정 계수, 낮은 쪽을 넘을 때만 이득 | 지지(규칙 확장) | LG 7.1a, 7.2 L29·결정 1·2 | 라벨 0 은 P0·P*(P0@tddm), 라벨 n 은 P1·P1*(n 40·160 은 P1@ed). n 40·160 에서 R1 의 이득을 쓰지 않는다 |
+| N6 전반 | 라벨 0 직접 ML 은 원천 계수 Stefan 보다 오차가 크다 | 지지(확장) | LG 7.1 L1, 7.2 L11·L30, 7.3 L1e, 7.4 L34 a; WRAPUP AB1 | 다지역 원천, 용량, 과정 모델 입력, TabPFN, 확장 풀에서 같다고 쓴다. 기준 물리식은 P* 병기 |
+| N6 후반 | 증강 감소를 유사라벨의 물리 내용에 귀속하지 않는다 | 한정(정정) | LG 7.2 L15; WRAPUP AB3 | '셀 단위 물리 정보가 기여하나 √TDD 선형 변환 위약과의 차이는 n = 10 에서 사라진다'. 증강은 라벨 0 전용(L2) |
+| N7 | 계수 회귀는 제외 지역에서 설명력이 없고 앵커로 쓰면 악화 | 지지(확장) | LG 7.1 L7, 7.2 L13 | 다지역 원천과 대상 라벨을 쓴 계수 모형도 이득이 없다(V1·V1r − P0 +2.9 – +8.1, V2 − P1 +3.94) |
+| N5 | 단일 계수 재보정은 균일한 이득이 아니다(캐나다 악화) | 지지 | WRAPUP SC1w·SC1w-P·SC3w·L43; LG 7.1 L7, 7.2 L27 | 캐나다 n 3 +0.97, n 10 +2.26. 안전성 미확인(4/10). 캐나다의 R0 안정성은 CatBoost 한정 |
+| N5 배치 절 | 분산 대 집중의 부호 변화 | 삭제 유지 | WRAPUP L43 | 배치 효과 확인 안 됨 |
+| N4 전반 | 잔차 학습은 n ≤ 40 에서 물리식을 넘지 못한다(레나 320) | 한정(설계 의존) | LG 7.1 L3, n* 요약 | LG 격자의 R0 n* 는 레나 40, 캐나다 3. a2 값은 설계 한정 기록. α 효과 서술 없음(L3 보조 0/4) |
+| N4 후반 | 전량 −0.68, 러시아 W 제외 −0.10 | 한정(수치 교체) | LG 7.1 L8, 7.1a, 7.2 L31·결정 3, 7.3 L8e; WRAPUP AB8·AB9 | −2.64(러시아 W −13.98 지배, 캐나다 +3.38 열세, 3지역 +0.77 열세), P* 대비 −1.64, P1 대비 −0.40 |
+| N9 라벨 0 | 제외 지역 경험 커버리지 0.73·0.86 | 한정 | LGU 11.1; LG 7.2 L25 | 커버리지 서술 유지. 계층 모형 구간의 개선, 조건부 폭 전이는 쓰지 않는다. 폭은 예측값에 비례 |
+| N9 생성 구간 | (H15 서술) | 교체 | LGU 11.1 B1, 4.6 | 셀 교환성 보정 생성 분위 구간 커버리지 nflow 0.757 [0.672, 0.826], cfm 0.653 [0.564, 0.764], 0.85 미만 |
+| N9 라벨 있음 | LGX L25 뒤 확정 | 지지 | LG 7.2 L25 | '라벨이 구간을 좁힌다'(c1 4, c2 4, 6칸) |
+| N3 | 72–95 %, 잔차 순가치 0 과 구분 불가 | 폐기 유지(완전 폐기) | LG 7.1 L4; WRAPUP AB5; LG 7.3 L4e | 순가치 문장은 'n = 10 에서 −0.18 cm, 0.5 cm 한계 안, Holm 보정 뒤 비유의, 주 4지역 한정, 확장 풀에서 유지되지 않음' 으로만 쓴다 |
+| N8 | 검증 방식에 따른 순위 역전 | 폐기 유지 | LG 7.2 L19·L20·결정 5 | 열화 크기 +10.34 [7.29, 12.84] 와 단조 열화만 쓴다 |
+| 6절 실용 | 잔차 ML 의 이득은 수백 개 이상에서 1 cm 미만 | 한정(정정) | LG 7.1 L4, 7.1a; WRAPUP AB5·AB9 | n = 10 부터 1 cm 미만의 이득(n 40·160 은 P1* 대비 미결정) |
+
+### 11.2 7.1 표의 분기 적용
+
+| 가설 | 기록된 판정 | 적용 분기 | 한정어 |
+|---|---|---|---|
+| L1 | 지지 | N6 을 다지역 원천으로 확장 | LG 학습기 기준. P* 병기 |
+| L2 | R2 − R1 기각, R3 − R1 부분 | '증강은 라벨 0 전용' 확정 | 적층 결합 R3 은 n 40·160 에서 R1 보다 낫다(2지역, 부분) |
+| L3 | 지지(주: R0, 알래스카 하위 모드 i) | 등록 문구는 '지지' 분기이나 적용하지 않는다 | 중첩 선택 α 가 α = 1 보다 n* 를 줄인 대상 0/4. '대상 가중 없이는' 한정과 가중 효과의 양성 서술을 모두 쓰지 않는다 |
+| L4 | '희소 라벨에서도 ML 순가치 있음'(최소 n 10) | N3 완전 폐기 | 크기 −0.18 cm(0.5 cm 안), AB5 Holm 보정 뒤 비유의, 지역별로는 캐나다만 모든 n 에서 유의, 확장 풀에서 유지되지 않음(L4e), n 40·160 은 P1* 대비 미결정 |
+| L5 | MLP·TabM 동급(부분), 나머지 차이 있음(모두 나쁨) | '결론이 CatBoost 한정이 아니다' 는 쓰지 않는다. 7.1 표가 정한 동등 기준(L26 동등성 한계)에서 MLP·TabM 은 '차이를 확인하지 못함' 이다 | 원고는 'CatBoost 를 넘는 학습기는 없었다'(L5·L26·L32). MLP·TabM 은 L26 의 '차이를 확인하지 못함' 으로 쓴다 |
+| L6 | 판정 불가(통과 조합 없음) | 어느 분기도 적용하지 않는다 | 알래스카 우선 검증의 이전 문장은 쓰지 않는다. AK1w 지지는 다른 질문(알래스카 밖 원천만으로도 같은 하위 지역에서 넘는가, 대상 단위 과반 2/5)이다 |
+| L7 | 기각 | N7 을 다지역 원천 조건까지 강화 | L13 미지지와 함께 쓴다 |
+| L8 | 지지 | N4 후반부 재확인 | 러시아 W 치우침, 알래스카를 넣은 3지역 열세, P* 병기, L31 지역 의존 |
+
+### 11.3 판정 대기
+
+- LGF(F1–F6, N1–N4, N2s)는 창 마감 뒤 J6 에서 기록된다. 신경망 조정 강건성과 관련된 문장은 그 뒤 정한다.
+- L26 FT-T 행의 로컬 보조 판정(J9)은 아직 기록되지 않았다. 원고의 학습기 문장은 L26 이 판정 불가인 FT-T 에 LG L5 3분할 판정을 쓴다(WRAPUP 1.5).
 
 ## 확인 수준과 한계
 
