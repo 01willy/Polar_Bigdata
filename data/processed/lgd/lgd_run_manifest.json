@@ -60,7 +60,71 @@
     "same_as": null
    },
    "tm_name": "Tibet_LGD|x",
-   "base": null
+   "base": null,
+   "runs": [
+    {
+     "time": "2026-09-30 04:30",
+     "wall_s": 646.4,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 9.22,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "Tibet_LGD:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/Tibet",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "NAtlantic": {
    "target": "NAtlantic",
@@ -101,7 +165,71 @@
     "same_as": null
    },
    "tm_name": "NAtlantic|x",
-   "base": null
+   "base": null,
+   "runs": [
+    {
+     "time": "2026-09-30 04:38",
+     "wall_s": 459.4,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 13.16,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "NAtlantic:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/NAtlantic",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "Russia_C": {
    "target": "Russia_C",
@@ -144,7 +272,71 @@
     "same_as": null
    },
    "tm_name": "Russia_C|x",
-   "base": null
+   "base": null,
+   "runs": [
+    {
+     "time": "2026-09-30 04:45",
+     "wall_s": 449.3,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 12.72,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "Russia_C:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/Russia_C",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "Russia_W_expanded": {
    "target": "Russia_W",
@@ -185,7 +377,71 @@
     "same_as": null
    },
    "tm_name": "Russia_W~exp|x",
-   "base": null
+   "base": null,
+   "runs": [
+    {
+     "time": "2026-09-30 04:53",
+     "wall_s": 451.1,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 13.33,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "Russia_W:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/Russia_W_expanded",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_W_expanded",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "Russia_E_expanded": {
    "target": "Russia_E",
@@ -226,7 +482,71 @@
     "same_as": null
    },
    "tm_name": "Russia_E~exp|x",
-   "base": null
+   "base": null,
+   "runs": [
+    {
+     "time": "2026-09-30 05:00",
+     "wall_s": 445.6,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 13.86,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "Russia_E:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/Russia_E_expanded",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_E_expanded",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "Canada_expanded": {
    "target": "Canada",
@@ -267,7 +587,71 @@
     "same_as": null
    },
    "tm_name": "Canada~exp|x",
-   "base": null
+   "base": null,
+   "runs": [
+    {
+     "time": "2026-09-30 05:17",
+     "wall_s": 996.5,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 12.57,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "Canada:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/Canada_expanded",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/Canada_expanded",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "Russia_E_expanded_noKytalyk": {
    "target": "Russia_E",
@@ -308,7 +692,71 @@
     "same_as": null
    },
    "tm_name": "Russia_E~expnokyt|x",
-   "base": null
+   "base": null,
+   "runs": [
+    {
+     "time": "2026-09-30 05:24",
+     "wall_s": 451.4,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 15.4,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "Russia_E:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/Russia_E_expanded_noKytalyk",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_E_expanded_noKytalyk",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "Tibet_L39_temp": {
    "target": "Tibet_LGD",
@@ -349,7 +797,71 @@
     "same_as": null
    },
    "tm_name": "Tibet_LGD~L39|x",
-   "base": "Tibet"
+   "base": "Tibet",
+   "runs": [
+    {
+     "time": "2026-09-30 05:32",
+     "wall_s": 465.3,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 19.04,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "Tibet_LGD:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/Tibet_L39_temp",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet_L39_temp",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "Tibet_L41b": {
    "target": "Tibet_LGD",
@@ -664,7 +1176,71 @@
     "same_as": null
    },
    "tm_name": "NAtlantic~L41c|x",
-   "base": "NAtlantic"
+   "base": "NAtlantic",
+   "runs": [
+    {
+     "time": "2026-09-30 05:39",
+     "wall_s": 450.2,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 20.33,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "NAtlantic:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/NAtlantic_L41c",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L41c",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "NAtlantic_L41d": {
    "target": "NAtlantic",
@@ -708,7 +1284,71 @@
     "same_as": null
    },
    "tm_name": "NAtlantic~L41d|x",
-   "base": "NAtlantic"
+   "base": "NAtlantic",
+   "runs": [
+    {
+     "time": "2026-09-30 05:47",
+     "wall_s": 457.1,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 18.83,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "NAtlantic:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/NAtlantic_L41d",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L41d",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "NAtlantic_L41e": {
    "target": "NAtlantic",
@@ -752,7 +1392,71 @@
     "same_as": null
    },
    "tm_name": "NAtlantic~L41e|x",
-   "base": "NAtlantic"
+   "base": "NAtlantic",
+   "runs": [
+    {
+     "time": "2026-09-30 05:55",
+     "wall_s": 455.2,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 13.47,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "NAtlantic:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/NAtlantic_L41e",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L41e",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "NAtlantic_L41f": {
    "target": "NAtlantic",
@@ -803,7 +1507,71 @@
     "same_as": null
    },
    "tm_name": "NAtlantic~L41f|x",
-   "base": "NAtlantic"
+   "base": "NAtlantic",
+   "runs": [
+    {
+     "time": "2026-09-30 06:02",
+     "wall_s": 462.0,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 13.0,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "NAtlantic:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/NAtlantic_L41f",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L41f",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "NAtlantic_L41g": {
    "target": "NAtlantic",
@@ -850,7 +1618,71 @@
     "same_as": null
    },
    "tm_name": "NAtlantic~L41g|x",
-   "base": "NAtlantic"
+   "base": "NAtlantic",
+   "runs": [
+    {
+     "time": "2026-09-30 06:10",
+     "wall_s": 452.9,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 16.81,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "NAtlantic:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/NAtlantic_L41g",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L41g",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "NAtlantic_L41h": {
    "target": "NAtlantic",
@@ -894,7 +1726,71 @@
     "same_as": null
    },
    "tm_name": "NAtlantic~L41h|x",
-   "base": "NAtlantic"
+   "base": "NAtlantic",
+   "runs": [
+    {
+     "time": "2026-09-30 06:17",
+     "wall_s": 445.5,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 15.22,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "NAtlantic:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/NAtlantic_L41h",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L41h",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "Russia_C_L41b": {
    "target": "Russia_C",
@@ -940,7 +1836,71 @@
     "same_as": null
    },
    "tm_name": "Russia_C~L41b|x",
-   "base": "Russia_C"
+   "base": "Russia_C",
+   "runs": [
+    {
+     "time": "2026-09-30 06:22",
+     "wall_s": 305.5,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 16.97,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "Russia_C:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/Russia_C_L41b",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41b",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "Russia_C_L41c": {
    "target": "Russia_C",
@@ -1032,7 +1992,71 @@
     "same_as": null
    },
    "tm_name": "Russia_C~L41d|x",
-   "base": "Russia_C"
+   "base": "Russia_C",
+   "runs": [
+    {
+     "time": "2026-09-30 06:30",
+     "wall_s": 451.4,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 17.35,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "Russia_C:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/Russia_C_L41d",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41d",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "Russia_C_L41e": {
    "target": "Russia_C",
@@ -1078,7 +2102,71 @@
     "same_as": null
    },
    "tm_name": "Russia_C~L41e|x",
-   "base": "Russia_C"
+   "base": "Russia_C",
+   "runs": [
+    {
+     "time": "2026-09-30 06:37",
+     "wall_s": 449.7,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 12.4,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "Russia_C:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/Russia_C_L41e",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41e",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "Russia_C_L41f": {
    "target": "Russia_C",
@@ -1131,7 +2219,71 @@
     "same_as": null
    },
    "tm_name": "Russia_C~L41f|x",
-   "base": "Russia_C"
+   "base": "Russia_C",
+   "runs": [
+    {
+     "time": "2026-09-30 06:45",
+     "wall_s": 448.5,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 17.16,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "Russia_C:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/Russia_C_L41f",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41f",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "Russia_C_L41g": {
    "target": "Russia_C",
@@ -1223,7 +2375,71 @@
     "same_as": null
    },
    "tm_name": "Russia_C~L41h|x",
-   "base": "Russia_C"
+   "base": "Russia_C",
+   "runs": [
+    {
+     "time": "2026-09-30 06:52",
+     "wall_s": 448.2,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 20.04,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "Russia_C:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/Russia_C_L41h",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41h",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "Tibet_L42": {
    "target": "Tibet_LGD",
@@ -1267,7 +2483,71 @@
     "same_as": null
    },
    "tm_name": "Tibet_LGD~L42|x",
-   "base": "Tibet"
+   "base": "Tibet",
+   "runs": [
+    {
+     "time": "2026-09-30 07:03",
+     "wall_s": 646.7,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 14.03,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "Tibet_LGD:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/Tibet_L42",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet_L42",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "NAtlantic_L42": {
    "target": "NAtlantic",
@@ -1308,7 +2588,71 @@
     "same_as": null
    },
    "tm_name": "NAtlantic~L42|x",
-   "base": "NAtlantic"
+   "base": "NAtlantic",
+   "runs": [
+    {
+     "time": "2026-09-30 07:11",
+     "wall_s": 458.9,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 12.2,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "NAtlantic:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/NAtlantic_L42",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L42",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "Russia_C_L42": {
    "target": "Russia_C",
@@ -1353,7 +2697,71 @@
     "same_as": null
    },
    "tm_name": "Russia_C~L42|x",
-   "base": "Russia_C"
+   "base": "Russia_C",
+   "runs": [
+    {
+     "time": "2026-09-30 07:18",
+     "wall_s": 449.2,
+     "threads": 4,
+     "workers": 2,
+     "platform": "local",
+     "max_rss_children_kb": 2187436,
+     "load_start": 12.55,
+     "argv": [
+      "--specs",
+      "main,l40,l39,l41,l42",
+      "--allow-local",
+      "--workers",
+      "2",
+      "--threads",
+      "4",
+      "--resume"
+     ],
+     "h40_argv": [
+      "--part",
+      "cpu",
+      "--modes",
+      "x",
+      "--targets",
+      "Russia_C:x",
+      "--splits",
+      "5",
+      "--n-grid",
+      "0,3,10,40,160,320,1000,all",
+      "--draws",
+      "5",
+      "--seeds",
+      "2",
+      "--learners",
+      "catboost_lo",
+      "--alphas",
+      "1",
+      "--place-n-grid",
+      "",
+      "--nested-targets",
+      "NONE:x",
+      "--learner-targets",
+      "NONE:x",
+      "--data-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/run_tables/Russia_C_L42",
+      "--out-dir",
+      "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L42",
+      "--tag",
+      "lgd",
+      "--threads",
+      "4",
+      "--workers",
+      "2",
+      "--no-summarize",
+      "--resume",
+      "--allow-local"
+     ],
+     "test_flags": {
+      "skip_hash_check": false,
+      "h40_extra": ""
+     }
+    }
+   ]
   },
   "repro_Russia_W": {
    "target": "Russia_W",
@@ -1715,5 +3123,199 @@
    "NAtlantic": "ok",
    "Russia_C": "ok"
   }
+ },
+ "last_run": {
+  "time": "2026-09-30 07:18",
+  "argv": [
+   "--specs",
+   "main,l40,l39,l41,l42",
+   "--allow-local",
+   "--workers",
+   "2",
+   "--threads",
+   "4",
+   "--resume"
+  ],
+  "done": [
+   {
+    "spec": "Tibet",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 646.4
+   },
+   {
+    "spec": "NAtlantic",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 459.4
+   },
+   {
+    "spec": "Russia_C",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 449.3
+   },
+   {
+    "spec": "Russia_W_expanded",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 451.1
+   },
+   {
+    "spec": "Russia_E_expanded",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 445.6
+   },
+   {
+    "spec": "Canada_expanded",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 996.5
+   },
+   {
+    "spec": "Russia_E_expanded_noKytalyk",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 451.4
+   },
+   {
+    "spec": "Tibet_L39_temp",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 465.3
+   },
+   {
+    "spec": "NAtlantic_L41c",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 450.2
+   },
+   {
+    "spec": "NAtlantic_L41d",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 457.1
+   },
+   {
+    "spec": "NAtlantic_L41e",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 455.2
+   },
+   {
+    "spec": "NAtlantic_L41f",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 462.0
+   },
+   {
+    "spec": "NAtlantic_L41g",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 452.9
+   },
+   {
+    "spec": "NAtlantic_L41h",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 445.5
+   },
+   {
+    "spec": "Russia_C_L41b",
+    "n_fail": 0,
+    "n_executed": 4,
+    "n_resumed": 0,
+    "wall_s": 305.5
+   },
+   {
+    "spec": "Russia_C_L41d",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 451.4
+   },
+   {
+    "spec": "Russia_C_L41e",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 449.7
+   },
+   {
+    "spec": "Russia_C_L41f",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 448.5
+   },
+   {
+    "spec": "Russia_C_L41h",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 448.2
+   },
+   {
+    "spec": "Tibet_L42",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 646.7
+   },
+   {
+    "spec": "NAtlantic_L42",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 458.9
+   },
+   {
+    "spec": "Russia_C_L42",
+    "n_fail": 0,
+    "n_executed": 5,
+    "n_resumed": 0,
+    "wall_s": 449.2
+   }
+  ],
+  "failed": [],
+  "blocked": [],
+  "skipped": [
+   {
+    "spec": "Tibet_L41a",
+    "reason": "변형 불가(적격 표에서 부적격)"
+   },
+   {
+    "spec": "Tibet_L41c",
+    "reason": "변형 불가(적격 표에서 부적격)"
+   },
+   {
+    "spec": "Tibet_L41h",
+    "reason": "변형 불가(적격 표에서 부적격); 점 추정 전용 변형"
+   },
+   {
+    "spec": "NAtlantic_L41a",
+    "reason": "변형 불가(적격 표에서 부적격)"
+   },
+   {
+    "spec": "Russia_C_L41a",
+    "reason": "변형 불가(적격 표에서 부적격)"
+   }
+  ],
+  "elapsed_s": 10754.0
  }
 }
