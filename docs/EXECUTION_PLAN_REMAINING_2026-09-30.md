@@ -617,3 +617,11 @@ Sci Rep 의 본문 표시 항목은 8개다. 현재 틀은 Fig 1–7 과 Table 1
 | 12:20 | A1 보충 | LG 개정 15 (p)(q), LGU 개정 4 보충(σ seed 대체 규칙), 표지 보충, 72–95 % 철회 표지(00ee319) |
 | 12:25 | C14 | L26 보조 대비의 CatBoost 같은 플랫폼 재적합 시작(20단위, 적합 5,010, 워커 2 × 스레드 4, 출력 `data/processed/lgw/xenv/lgx_base_local`). 끝나면 `lgw_xenv_gate_iii.py --supplement` 로 키별 차만 낸다(`lgw_xenv_c14*`) |
 | 12:25 | F1 후속 | 그림 명세가 요구한 새 계산 모듈 두 개(구성 고정 풀 평균 곡선, N1 대상별 요약)를 에이전트에 맡겼다(결과 전 규칙 고정) |
+| 12:25–12:30 | C0 | ZovWo Completed(12:25:16). 선택 회수·해제(12:30:38): CPU 117, GPU 231, 빠진 RealMLP 0, 단계 종료 코드 모두 0. G7 불필요 |
+| 12:30–13:44 | C1–C6, A3 | cpu-chain: gate-lg(`$LGS` = `$LGD`), ladder(36 s), sum-lgx(12:33–12:43, 조각 4,451, 재현 117/117), gate-lgd(base ok, v3local 불필요), lgd-lic(12:46–13:41), pool-lgd(두 판), lgu-ab10(p_cell = p_boot 확인). 모두 종료 코드 0 |
+| 12:31–13:45 | J1, J3, J2, J5, J4 | 판정 기록: LG(0236b89), LGU(869f18c), LGX(aa3b28e), LGD(6e637a1, 주 판정 약관 확인분 판), LGT(8016969). 열람 시각은 `logs/lgf/viewing_state.txt` |
+| 12:57 | C14 | CatBoost 같은 플랫폼 재적합 대조 20단위, 최대 차 3.6e-14 cm(d92e1d9). 외삽 표지 불필요 |
+| 13:01 | J8 | 추출 재생성 대조 ZovWo CPU 조각 117개 불일치 0(0fc2ef5) |
+| 13:45 | F3(1) | Fig 2–4 v2(715814e). L10 보조 행 역전 기록(2fcd492) |
+| 13:45 | C7 | h39 summarize 시작(봉인 폴더 개봉 기록은 `sealed/README_SEALED.txt`) |
+| 조건 판정 | C12, C13, G8 | C12(L4 최소 n 10), C13(실효 범위 < 채점 거리), G8 σ(LGU-B2 미결정) 모두 조건 불성립으로 하지 않는다 |
