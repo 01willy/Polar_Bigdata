@@ -2,7 +2,15 @@
 
 **갱신**: 2026-09-30(로컬 전환·개정 네 건·LGX 해제) · 2026-09-29(LG 계획·하네스·Rescale 사전 점검 제출) · 2026-09-26 저녁(통합 실험 실행·감사·논문 그림) · 09-26 오전(통합 계획 확정) · 09-22(H18–H30) · **다음 세션은 이 파일부터 읽으세요.**
 
-## ★ 최신(2026-09-30): 로컬 전환, LGX 회수·해제, 결과 열람 전 개정 네 건, 결과 뒤 파이프라인
+## ★ 최신(2026-09-30 오후): 판정 기록 완료(LG·LGX·LGD·LGT·LGU·WRAPUP), 그림 v2, 원고 초안
+
+정본: 판정은 `docs/EXPERIMENT_PLAN_LG_2026-09-29.md` 7.1–7.4, `docs/EXPERIMENT_PLAN_LGU_2026-09-29.md` 11.1, `docs/EXPERIMENT_PLAN_WRAPUP_2026-09-30.md` 결과 판정 기록(J7)·지도 잠정판. 남은 작업은 `docs/EXECUTION_PLAN_REMAINING_2026-09-30.md` 10.1.
+- **핵심 결론**: 라벨 0 에서 직접 ML 은 물리식을 넘지 못한다(L1, L30, L34a). 더 강한 물리 기준선 P* = P0@tddm 이 있다(L29). 잔차 ML 은 라벨 전량에서 P0·P* 를 넘으나 러시아 W 에 치우친다. n = 10 순가치는 Holm 뒤 비유의, n = 40·160 은 P1* 를 넘지 못한다. 불확실성 확인적 가설은 미결정. 배포 안전성 미확인.
+- **원고**: 방법·서론(5485688), 결과·초록(34f3f9e), SI 보조(199588b), 그림 v2 Fig 1–5, 7, Table 1(`outputs/figures/paper/v2/`), 지도 SI(`outputs/maps/transfer_lena/`).
+- **남은 계산**: LGF(창 마감 10-02 05:01, 감시기 `logs/lgf/supervisor.log`), LGX FT-T 로컬 보조(GPU 8 대기, `scripts/local/run_lgx_local_continue.sh status`).
+- **Rescale**: 끝. 원장 합 220.26달러(목록가 기준).
+
+## ★ 이전(2026-09-30 오전): 로컬 전환, LGX 회수·해제, 결과 열람 전 개정 네 건, 결과 뒤 파이프라인
 
 정본: 실행 계획 `docs/EXECUTION_PLAN_REMAINING_2026-09-30.md`(3절 작업 id, 10절 진행 기록), 개정 LG 15·LGF 6·LGU 4·WRAPUP 2(커밋 ff1be02).
 - **Rescale**: 추가 지출 중단(08:45 지시). ZovWo 는 14:30 전에 끝난다. 회수는 `scripts/local/run_post_results.sh fetch-lg`, 이어서 `cpu-chain`(gate-lg → ladder → sum-lgx → gate-lgd → pool-lgd → lgu-ab10).
