@@ -20,7 +20,7 @@ docs/EXECUTION_PLAN_REMAINING_2026-09-30.md 3.1 A7 와 6.3, docs/EXPERIMENT_PLAN
     중앙값으로 채운다(실험 B 의 대상 셀과 같은 처리). 회색 셀도 값을 두며 h49 가 그리지 않는다.
   적합 실패: 실험 B 와 같은 규칙(lgu_common.fit_failed: 검증 손실 비유한, 분위 비유한, 표본 밖 중앙값 |로그| > 3 셀 1 % 이상)을 실험 B 와 같은
     예측 셀(지역 k 의 보정 셀, full 은 레나 라벨 셀 3,037개의 99점 분위)에 적용한다. 격자 σ 가 비유한이면 실패다. 한 학습 집합이라도 실패한
-    seed 는 모든 학습 집합에서 뺀다(h45 541–543행과 같다). 유효 seed 가 2개 미만이면 npz 를 쓰지 않고 종료 코드 5 로 끝난다.
+    seed 는 모든 학습 집합에서 뺀다(h45 680–682행과 같다). 유효 seed 가 2개 미만이면 npz 를 쓰지 않고 종료 코드 5 로 끝난다.
 
 산출(h49 --sigma-file 형식. h49 994–996행이 읽는 키는 cal, grid_cell_id, grid_sigma 셋이다)
   <out>.npz  cal = {지역: σ 배열(보정 셀, h49 원천 순서)}(object, allow_pickle 로 읽는다), grid_cell_id(str), grid_sigma(float64).
@@ -521,7 +521,7 @@ def print_plan(C, P, a, synthetic):
         log(f"[설정 대조] 실험 B 조각 없음({C['ref_path']}). 시간 추정은 {P['per_fit_s']} s/건 → 약 {P['est_fit_s']} s")
 
 
-# ---------------------------------------------------------------- 적합(h45 _fit_unit 498–543행과 같은 순서와 규칙)
+# ---------------------------------------------------------------- 적합(h45 _fit_unit 637–682행과 같은 순서와 규칙)
 def fit_all(C, M45, seeds, gpu: dict | None = None) -> dict:
     a45 = C["a45"]; D = C["D"]; df = D.df; bi = C["bi"]; info = C["info"]
     X_all = df[M45.FEATS].values.astype(float)
@@ -589,7 +589,7 @@ def fit_all(C, M45, seeds, gpu: dict | None = None) -> dict:
             if gpu is not None and h is not None and not pidc:
                 pidc = pid_check(gpu)
             del h
-    for si in range(S):                                                    # 한 학습 집합이라도 실패한 seed 는 전부 뺀다(h45 541–543행)
+    for si in range(S):                                                    # 한 학습 집합이라도 실패한 seed 는 전부 뺀다(h45 680–682행)
         if not ok_seed[si]:
             lena[si] = np.nan; grid[si] = np.nan
             for n in cal:
