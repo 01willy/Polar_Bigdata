@@ -1,0 +1,15 @@
+OK  Lena rows: figure 3,037 | source 3,037
+OK  Lena 1 km loc.: figure 201 | source 201
+OK  Lena blocks: figure 20 | source 20
+OK  Canada rows: figure 750 | source 750
+OK  Canada 1 km loc.: figure 86 | source 86
+OK  Canada blocks: figure 39 | source 39
+OK  AL-5 rows: figure 619 | source 619
+OK  AL-5 1 km loc.: figure 27 | source 27
+OK  AL-5 blocks: figure 17 | source 17
+OK  LE-2 rows: figure 1,251 | source 1,251
+OK  LE-2 1 km loc.: figure 66 | source 66
+OK  LE-2 blocks: figure 6 | source 6
+OK  Russia C (expanded) rows vs eligibility n_cells: figure 57 | source 57
+OK  Tibet rows vs eligibility n_cells: figure 132 | source 132
+OK  27 targets: figure 27 | source 27

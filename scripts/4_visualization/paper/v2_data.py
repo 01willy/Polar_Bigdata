@@ -6,7 +6,8 @@
     층화 평균의 점 추정은 지역 점 추정의 등가중 평균이므로(L8·L29 MEAN 행으로 대조) 이 두 값은 lgx_curve 지역 값의
     산술 평균으로 낸다. CI 는 내지 않는다. 등록 대비 R1 − P1@ed 와의 가법 대조를 checks 에 기록한다.
   - 그림 모듈(fig2_label_curve.py, fig3_physics_use.py, fig4_min_labels.py)은 이 모듈의 산출 CSV 만 읽는다.
-  - 열지 않는 표: LGD(lgd_*), LGT(lgt_*), LGF(lgf_*, lgfn_*), h39(lgw_*). 판정 기록 순서가 정해져 있다.
+  - 열지 않는 표: LGT(lgt_*), LGF(lgf_*, lgfn_*). 1부는 LGD·h39(lgw_*)도 열지 않았고, 2부는 판정 기록(LG 7.3 J5, WRAPUP J7)
+    뒤에 lgw_*, lgd 적격 표·단위 JSON, lgu_a_tests(AB10 CI)를 읽는다. LGF 는 창 마감(2026-10-02 05:01) 전이라 열지 않는다.
 
 원천(읽기 전용)
   $LGS = results/rescale_lg/data/processed/lg: lg_curve.csv, lg_tests.csv, lg_minn.csv(Rescale ZovWo, 곡선 CI 1,000회)
@@ -327,6 +328,442 @@ def fig4(checks: dict) -> dict:
     return dict(fig4_a=a, fig4_b=pb, fig4_b_p1star=pstar, fig4_b_verdicts=vbd, fig4_c=c, fig4_c_verdict=l3v, fig4_d=d)
 
 
+# ================================================================ 2부(F3 part 2): AB 묶음, Fig 1, 5, 7, Table 1, Fig 2–4 갱신
+LGW = ROOT / "data" / "processed" / "lgw"
+LGDD = ROOT / "data" / "processed" / "lgd"
+LGU = ROOT / "data" / "processed" / "lgu"
+PROC = ROOT / "data" / "processed"
+MAIN4_W = "MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]"
+AB_RULE = {"(a)": "a", "(b)": "b", "(c)": "c", "(d)": "d"}
+
+
+def _rule_code(s) -> str:
+    s = str(s)
+    for k, v in AB_RULE.items():
+        if s.startswith(k):
+            return v
+    return ""
+
+
+def bundle() -> dict:
+    """lgw_bundle → 초록 묶음 표(MEAN)와 지역 행. 값·판정·규칙 열은 그대로 옮긴다."""
+    B = _read(LGW / "lgw_bundle.csv")
+    m = B[B.scope == "MEAN"].copy()
+    out = pd.DataFrame(dict(ab=m.ab, hypothesis=m.hypothesis, contrast=m.contrast, source=m.source, pool=m.pool,
+                            delta=m.delta, ci_lo=m.ci_lo, ci_hi=m.ci_hi, delta_beq=m.delta_blockeq, ci_lo_beq=m.ci_lo_beq,
+                            ci_hi_beq=m.ci_hi_beq, verdict4=m.verdict4, verdict=m.verdict4.map(v4), small_effect=m.small_note.map(small),
+                            holm_p=m.holm_p, holm_p_eq=m.holm_p_eq, holm_m=m.holm_m, abstract_rule=m.abstract_rule,
+                            rule=m.abstract_rule.map(_rule_code), equiv_note=m.equiv_note, resample_dependence=m.resample_dependence,
+                            h42_verdict4=m.h42_verdict4, verdict4_rel=m.verdict4_rel, delta_rel_margin=m.delta_rel, rmse_p0=m.rmse_p0,
+                            nboot=m.nboot, note=m.note))
+    r = B[B.scope == "region"][["ab", "contrast", "target", "delta", "ci_lo", "ci_hi", "verdict4"]].copy()
+    r["region"] = r.target.str.split("|").str[0]
+    r["verdict"] = r.verdict4.map(v4)
+    return dict(ab_bundle=out.reset_index(drop=True), ab_bundle_regions=r.reset_index(drop=True))
+
+
+def _ab_lookup(ab: pd.DataFrame, code: str) -> pd.Series:
+    q = ab[ab.ab == code]
+    assert len(q) == 1, code
+    return q.iloc[0]
+
+
+def part2_updates(checks: dict, ab: pd.DataFrame) -> dict:
+    """Fig 2–4 갱신 자료: AB 칸 대응, Fig 3b L10 모든 n, Fig 3c SD/SE 표지, Fig 4c L3 4분 보조."""
+    Tx = _read(LGX / "lgx_tests.csv")
+    A = _read(LGX / "lgx_lg_aux.csv")
+    P = _read(OUTD / "pool_fixed_curve.csv")
+    # Fig 2 기호 표의 AB 칸(행, n) 과 Fig 4b, Fig 3 표지 위치
+    cells = [("fig2", "R1-P1", 10, "AB5"), ("fig2", "R1-P1", N_ALL, "AB9"), ("fig2", "R2-R1", 10, "AB6"), ("fig2", "R1-P0", N_ALL, "AB8"),
+             ("fig4b", "R1-P1", 10, "AB5"), ("fig4b", "R1-P1", N_ALL, "AB9"),
+             ("fig3a", "shuffle", 0, "AB3"), ("fig3b", "F1k", 10, "AB7"), ("fig3c", "R1 − P0|P4 mean", N_ALL, "AB8"),
+             ("fig3c", "R1 − P1|P4 mean", N_ALL, "AB9"), ("fig3d", "E1_P4_n_le_10|P1", 10, "AB4")]
+    # 같은 대비의 원천 표 판정(그림 기호)과 lgw_bundle 판정을 대조한다
+    same_src = {"AB5": pick(A, "R1-P1|n10", "MEAN", test_id="L4"), "AB9": pick(A, "R1-P1|n-1", "MEAN", target=MEAN4_T, test_id="L4"),
+                "AB6": pick(A, "R2-R1|n10", "MEAN", test_id="L2"), "AB8": pick(A, "R1-P0|all", "MEAN", target=MEAN4_T, test_id="L8"),
+                "AB3": pick(Tx, "D1-D1@shuffle|n0", "MEAN", test_id="L15"), "AB7": pick(Tx, "R1-F1k|n10", "MEAN", test_id="L10")}
+    rows = []
+    for fig, key, n, code in cells:
+        b = _ab_lookup(ab, code)
+        s = same_src.get(code)
+        fv = str(s.verdict4) if s is not None else ""
+        rows.append(dict(figure=fig, key=key, n=n, ab=code, verdict4_bundle=b.verdict4, verdict_bundle=b.verdict, rule=b.rule,
+                         abstract_rule=b.abstract_rule, holm_p=b.holm_p, holm_p_eq=b.holm_p_eq, delta_bundle=b.delta,
+                         verdict4_figure_source=fv, delta_figure_source=float(s.delta) if s is not None else np.nan,
+                         verdict_agree=(fv == str(b.verdict4)) if s is not None else np.nan))
+    abc = pd.DataFrame(rows)
+    dis = abc[(abc.verdict_agree == False)]  # noqa: E712
+    checks["info_ab_cells_verdict_disagreements"] = dis[["figure", "ab", "verdict4_bundle", "verdict4_figure_source"]].to_dict("records")
+    # AB4 = pool_fixed_curve E1 P1 − P0 n 10 과 같은 대비(점 추정 대조)
+    e1 = P[(P.edition == "E1_P4_n_le_10") & (P.scope == "MEAN") & (P.baseline == "P0") & (P.method == "P1") & (P.n == 10)]
+    checks["fig3d_AB4_vs_pool_E1_P1_n10_abs_diff_cm"] = abs(float(e1.delta.iloc[0]) - float(_ab_lookup(ab, "AB4").delta))
+    checks["fig3c_AB8_vs_L8_mean_abs_diff_cm"] = abs(float(same_src["AB8"].delta) - float(_ab_lookup(ab, "AB8").delta))
+    checks["fig3c_AB9_vs_L4_all_mean_abs_diff_cm"] = abs(float(same_src["AB9"].delta) - float(_ab_lookup(ab, "AB9").delta))
+
+    # Fig 3b(위): L10 모든 n(주 4지역 층화 평균 행; n 40·160 은 풀 지역 2/4)
+    q = Tx[(Tx.test_id == "L10") & (Tx.scope == "MEAN")]
+    q = q[q.contrast.str.match(r"^(R0|R1)-(F1k|F1n|F1a)\|n")].copy()
+    q["series"] = q.contrast.str.extract(r"-(F1[kna])\|")[0]
+    q["n"] = q.n.astype(int)
+    l10 = pd.DataFrame(dict(series=q.series, contrast=q.contrast, n=q.n, registered=q.primary.astype(str).str.lower() == "true",
+                            role=q.role, pool=q.pool, delta=q.delta, ci_lo=q.ci_lo, ci_hi=q.ci_hi, delta_beq=q.delta_blockeq,
+                            ci_lo_beq=q.ci_lo_beq, ci_hi_beq=q.ci_hi_beq, verdict4=q.verdict4, verdict=q.verdict4.map(v4),
+                            small_effect=q.small_note.map(small), nboot=NBOOT_AUX)).sort_values(["series", "n"])
+    l10["n_label"] = [n_label(n) for n in l10.n]
+    l10m3 = Tx[(Tx.test_id == "L10") & (Tx.scope == "MEAN3") & Tx.contrast.str.match(r"^(R0|R1)-(F1k|F1n|F1a)\|n")][
+        ["contrast", "n", "delta", "ci_lo", "ci_hi", "verdict4"]].copy()
+    checks["fig3b_L10_registered_rows_eq4"] = int(l10.registered.sum()) == 4
+    # 1부 fig3_b(L10 주 네 행)와 값 대조
+    b1 = _read(OUTD / "fig3_b.csv")
+    mm = b1[b1.hyp == "L10"].merge(l10, on="contrast", suffixes=("_p1", "_p2"))
+    checks["fig3b_L10_part1_vs_part2_max_abs_diff_cm"] = float(np.max(np.abs(mm.delta_p1 - mm.delta_p2)))
+
+    # Fig 3c: SD/SE 비 표지(WRAPUP 1.6)
+    S = _read(LGW / "lgw_splitratio.csv")
+    sd = S[S.contrast.isin(["R1-P0|all", "R1-P1|all"])][["target", "contrast", "source", "sd_between", "se_within_mean", "R", "R0",
+                                                        "R_over_R0", "flag", "lg5_outside_10_90", "main_switch"]].copy()
+    sd["region"] = sd.target.str.split("|").str[0]
+    sd["flagged"] = sd.flag.astype(str).str.startswith("SD/SE")
+    checks["info_fig3c_sdse_main_switch_any"] = bool(sd.main_switch.astype(str).str.lower().eq("true").any())
+
+    # Fig 4c: L3 4분 보조(lgw_aux4)
+    X = _read(LGW / "lgw_aux4.csv")
+    x3 = X[X.test_id == "L3"][["target", "contrast", "n", "delta", "ci_lo", "ci_hi", "delta_blockeq", "ci_lo_beq", "ci_hi_beq",
+                               "verdict4", "small_note", "ci_dependence", "nboot"]].copy()
+    x3["verdict"] = x3.verdict4.map(v4)
+    x3["small_effect"] = x3.small_note.map(small)
+    x3["kind"] = np.where(x3.contrast.str.contains("R0@a1"), "nested − α1", "nested − P0")
+    return dict(ab_cells=abc, fig3_b_L10_alln=l10, fig3_b_L10_mean3=l10m3, fig3_c_sdse=sd, fig4_c_aux4=x3)
+
+
+# ---------------------------------------------------------------- Fig 5
+def fig5(checks: dict) -> dict:
+    L = _read(LGW / "lgw_l43.csv")
+    Tw = _read(LGW / "lgw_tests.csv")
+    Tx = _read(LGX / "lgx_tests.csv")
+    D = _read(LGX / "lgx_distance.csv")
+    main_t = ["Lena|x", "Canada|x", "Russia_W|x", "Russia_E|x"]
+    a = L[(L.role == "주") & (L.method == "P1") & L.n.isin([10, 40]) & (L.target.isin(main_t) | (L.scope == "MEAN"))].copy()
+    a = a[["method", "n", "ci_kind", "scope", "target", "delta", "ci_lo", "ci_hi", "delta_blockeq", "ci_lo_beq", "ci_hi_beq", "verdict4",
+           "verdict4_draw_conditional", "draw_dependence", "ci_dependence", "pool", "win_rate_mean", "nboot"]]
+    a["verdict"] = a.verdict4.map(v4)
+    a["region"] = [("P4 mean" if int(n) == 10 else "Lena + Canada mean") if s == "MEAN" else t.split("|")[0]
+                   for s, t, n in zip(a.scope, a.target, a.n)]
+    blk = L[L.scope == "n_blocks_lab"][["method", "n", "placement", "n_blocks_lab_mean"]].copy()
+    ver = Tw[Tw.test_id == "L43"][["test_id", "verdict", "stat", "blind"]]
+    # b: L23 주 행(층화 평균)과 지역 행
+    q = Tx[(Tx.test_id == "L23")]
+    prim = q[(q.scope == "MEAN") & (q.primary.astype(str).str.lower() == "true")]
+    keys = list(prim.contrast)
+    reg = q[(q.scope == "region") & q.contrast.isin(keys) & q.target.isin(main_t)]
+    b = pd.concat([prim.assign(kind="mean"), reg.assign(kind="region")])[
+        ["contrast", "kind", "target", "delta", "ci_lo", "ci_hi", "delta_blockeq", "ci_lo_beq", "ci_hi_beq", "verdict4", "small_note", "pool"]].copy()
+    b["verdict"] = b.verdict4.map(v4); b["small_effect"] = b.small_note.map(small)
+    bv = q[q.scope == "verdict_aux"][["verdict"]]
+    # c: L24 대상별 근 − 원 차
+    c = Tx[(Tx.test_id == "L24") & (Tx.scope == "region")][["contrast", "target", "delta", "ci_lo", "ci_hi", "delta_blockeq", "ci_lo_beq",
+                                                           "ci_hi_beq", "verdict4", "small_note"]].copy()
+    c["n"] = c.contrast.str.extract(r"\|n(\d+)")[0].astype(int)
+    c["which"] = np.where(c.contrast.str.startswith("[R1-P1]"), "R1 − P1", "P1 − P0")
+    c["verdict"] = c.verdict4.map(v4); c["small_effect"] = c.small_note.map(small)
+    cv = Tx[(Tx.test_id == "L24") & (Tx.scope == "verdict_aux")][["verdict"]]
+    # d: 거리 층 값(서술), c 와 같은 대상, n = 40·160
+    tg = sorted(set(c.target))
+    d = D[D.target.isin(tg) & D.n.isin([40, 160]) & D.contrast.isin(["R1-P1", "P1-P0"])][
+        ["target", "n", "contrast", "stratum", "delta", "ci_lo", "ci_hi", "verdict4", "n_splits"]].copy()
+    checks["info_fig5_L43_mean_rows"] = int((a.scope == "MEAN").sum())
+    checks["info_fig5_L24_rows"] = int(len(c))
+    return dict(fig5_a=a, fig5_a_blocks=blk, fig5_a_verdict=ver, fig5_b=b, fig5_b_verdict=bv, fig5_c=c, fig5_c_verdict=cv, fig5_d=d)
+
+
+# ---------------------------------------------------------------- Fig 7
+def fig7(checks: dict, ab: pd.DataFrame, abr: pd.DataFrame) -> dict:
+    Tw = _read(LGW / "lgw_tests.csv")
+    S = _read(LGW / "lgw_scenarios.csv")
+    SS = _read(LGW / "lgw_scenarios_summary.csv")
+    K = _read(LGW / "lgw_sc3.csv")
+    U = _read(LGU / "lgu_a_tests.csv")
+    tests = Tw[Tw.test_id.isin(["SC1w", "SC1w-d10", "SC1w-P", "SC2w", "SC2w-n160", "SC3w", "SC3w-tau0.025", "SC3w-tau0.1", "SC3w-tau0.2",
+                                "L43", "AK1w", "S-a", "S-b"])][["test_id", "role", "verdict", "stat", "flags", "blind"]].copy()
+    b = S[S.independent.astype(str).str.lower() == "true"][["stage", "n", "recipe", "reference", "contrast", "target", "delta", "ci_lo", "ci_hi",
+                                                            "delta_blockeq", "ci_lo_beq", "ci_hi_beq", "verdict4", "noninf", "noninf_d10",
+                                                            "worse", "small_note", "n_splits"]].copy()
+    b["region"] = b.target.str.split("|").str[0]
+    b["verdict"] = b.verdict4.map(v4); b["small_effect"] = b.small_note.map(small)
+    bs = SS[["stage", "n", "recipe", "reference", "contrast", "main4_delta", "main4_ci_lo", "main4_ci_hi", "main4_verdict4", "main4_noninf",
+             "main4_pool", "n_independent", "n_noninf", "worst_delta", "worst_target"]].copy()
+    bs["verdict"] = bs.main4_verdict4.map(v4)
+    c = K[((K.scope == "MEAN3") | (K.role == "판정"))][["scope", "role", "target", "tau", "delta", "ci_lo", "ci_hi", "delta_blockeq",
+                                                    "ci_lo_beq", "ci_hi_beq", "verdict4", "label_ratio", "labels_mean",
+                                                    "frac_stop_3", "frac_stop_10", "frac_stop_cap"]].copy()
+    c["region"] = [("3-region mean" if s == "MEAN3" else t.split("|")[0]) for s, t in zip(c.scope, c.target)]
+    # AB10: LGU-A1 n 10 의 셀 가중 2단 CI 와 기준 점수(B4) → % 환산
+    u = U[(U.test == "LGU-A1") & (U.n.astype(str) == "10")].iloc[0]
+    ab10 = dict(ab="AB10", delta_cm=float(u.delta), ci_lo_cm=float(u.ci_lo), ci_hi_cm=float(u.ci_hi), ref_score=float(u.ref_score),
+                delta_pct=100 * float(u.delta) / float(u.ref_score), ci_lo_pct=100 * float(u.ci_lo) / float(u.ref_score),
+                ci_hi_pct=100 * float(u.ci_hi) / float(u.ref_score), verdict4_lgu=u.verdict, nboot=int(u.nboot))
+    checks["fig7_AB10_bundle_vs_lgu_delta_abs_diff"] = abs(float(_ab_lookup(ab, "AB10").delta) - ab10["delta_cm"])
+    checks["fig7_AB10_verdict_agree"] = str(_ab_lookup(ab, "AB10").verdict4) == str(u.verdict)
+    # δ_rel 문장(9.4): AB1–AB9 의 verdict4_rel 과 verdict4 비교
+    m = ab[ab.ab != "AB10"]
+    rel = dict(n_same=int((m.verdict4 == m.verdict4_rel).sum()), n_rows=int(len(m)),
+               margin_cm_P4=float(m.delta_rel_margin.iloc[0]), rmse_p0_P4=float(m.rmse_p0.iloc[0]))
+    checks["info_fig7_delta_rel_all_same"] = rel["n_same"] == rel["n_rows"]
+    # SC1w 칸(10) 과 lgw_tests stat 의 칸 상태 대조
+    st = tests[tests.test_id == "SC1w"].stat.iloc[0]
+    sc = b[(b.recipe == "R1") & (b.reference == "P0") & b.n.isin([3, 10])]
+    mis = []
+    for r in sc.itertuples():
+        want = "비열등" if str(r.noninf).lower() == "true" else ("열세" if r.verdict4 == "열세" else "미확인")
+        tok = f"{r.region} n{int(r.n)}: {want}"
+        if tok not in st:
+            mis.append(tok)
+    checks["fig7_SC1w_cells_vs_stat_mismatch"] = mis
+    return dict(fig7_tests=tests, fig7_b=b, fig7_b_summary=bs, fig7_c=c, fig7_d_ab10=pd.DataFrame([ab10]),
+                fig7_delta_rel=pd.DataFrame([rel]), fig7_d=ab, fig7_d_regions=abr)
+
+
+# ---------------------------------------------------------------- Fig 1 와 Table 1 공통
+def loc1km(lat, lon):
+    """6B.3 셀 색인(1 km 위치). ky = floor(lat/0.009), kx = floor(lon·cos φ/0.009), φ = (ky + 0.5)·0.009°."""
+    lat = np.asarray(lat, float); lon = np.asarray(lon, float)
+    ky = np.floor(lat / 0.009).astype(np.int64)
+    phi = np.deg2rad((ky + 0.5) * 0.009)
+    kx = np.floor(lon * np.cos(phi) / 0.009).astype(np.int64)
+    return ky * 10_000_000 + kx
+
+
+def block05(lat, lon):
+    return np.floor(np.asarray(lat) / 0.5).astype(int) * 100000 + np.floor(np.asarray(lon) / 0.5).astype(int)
+
+
+def _v3_cells() -> pd.DataFrame:
+    sys.path.insert(0, str(ROOT / "src"))
+    from polar.m1_core import load_base
+    d = load_base(PROC)
+    d = d[np.isfinite(d.alt_cm.astype(float))].copy()
+    return pd.DataFrame(dict(loc_id=d.loc_id.values, region=d.macro.values, lat=d.lat.values, lon=d.lon.values,
+                             y=d.alt_cm.astype(float).values, s=d.e5_sqrt_tdd.astype(float).values, part="v3"))
+
+
+def _v4_new() -> pd.DataFrame:
+    B = _read(PROC / "fidelity_base_v4.csv", usecols=["loc_id", "lat", "lon", "alt_cm", "e5_sqrt_tdd", "source_id"])
+    L = _read(PROC / "fidelity_base_v4_labels.csv", usecols=["loc_id", "part", "macro_v4", "lgd_role", "lic_unverified", "method"])
+    d = B.merge(L, on="loc_id", validate="one_to_one")
+    d = d[d.part == "new"].copy()
+    return pd.DataFrame(dict(loc_id=d.loc_id.values, region=d.macro_v4.values, lat=d.lat.values, lon=d.lon.values, y=d.alt_cm.astype(float).values,
+                             s=d.e5_sqrt_tdd.astype(float).values, lgd_role=d.lgd_role.values, lic_unverified=d.lic_unverified.fillna(0).astype(int).values,
+                             method=d.method.values, part="new"))
+
+
+def _lgd_units(target_dir: str) -> pd.DataFrame:
+    import glob
+    rows = []
+    for f in sorted(glob.glob(str(LGDD / target_dir / "shards" / "*__cpu__*_unit.json"))):
+        u = json.loads(Path(f).read_text())
+        rows.append({k: u.get(k) for k in ("target", "mode", "split", "valid", "n_A", "nb_A", "n_eval", "nb_eval", "n_src", "E0", "E_own",
+                                           "n_cells", "n_blocks", "n_valid_splits", "n_buffer_excluded")})
+    return pd.DataFrame(rows)
+
+
+# 원천 구성 대조값: docs/MANUSCRIPT_DRAFT_SUPPORT_2026-09-30.md M3 Table M3-1(원천 셀, 버퍼 제외, 알래스카 셀)
+M3_TABLE = {"Lena": (14429, 1, 13606), "Canada": (16697, 20, 13586), "Russia_W": (17436, 0, 13606), "Russia_E": (17437, 0, 13606),
+            "Russia_C": (16208, 1252, 13606), "Greenland": (17464, 0, 13606), "Alaska": (3860, 1, 0)}
+
+
+def source_pool(v3: pd.DataFrame, target: str, buffer_km: float = 100.0):
+    """h40 source_idx(모드 x, 대상 = macro) 와 같은 규칙: 대상 셀 제외 → 대상 셀과 대권 거리 < buffer_km 인 셀 제외."""
+    from sklearn.neighbors import BallTree
+    t = v3.region.values == target
+    cand = ~t
+    tree = BallTree(np.deg2rad(v3.loc[t, ["lat", "lon"]].values), metric="haversine")
+    dist, _ = tree.query(np.deg2rad(v3.loc[cand, ["lat", "lon"]].values), k=1)
+    near = dist[:, 0] * 6371.0088 < buffer_km
+    idx = np.where(cand)[0]
+    return idx[~near], int(near.sum())
+
+
+def fig1(checks: dict) -> dict:
+    v3 = _v3_cells()
+    new = _v4_new()
+    lic = _read(LGDD / "lgd_eligibility_lic.csv")
+    Tg = _read(LGS / "lg_targets.csv")
+    # 1 km 위치 정의 대조(v3 macro 의 위치 수 = lgw_label_units n_loc_1km)
+    U = _read(LGW / "lgw_label_units.csv")
+    v3["loc1km"] = loc1km(v3.lat, v3.lon); v3["block"] = block05(v3.lat, v3.lon)
+    new["loc1km"] = loc1km(new.lat, new.lon); new["block"] = block05(new.lat, new.lon)
+    mine = v3.groupby("region").loc1km.nunique()
+    ref = U[U.kind == "macro"].set_index("target").n_loc_1km
+    checks["fig1_loc1km_v3_mismatch"] = {k: [int(mine.get(k, -1)), int(v)] for k, v in ref.items() if int(mine.get(k, -1)) != int(v)}
+
+    # a: 블록 원(종류별). v3 = 모든 F4_direct 셀, LGD = 대상 행 중 약관 확인분, NAtlantic 약관 확인분은 SI 표시
+    tgt = new[new.lgd_role == "target"].copy()
+    natl_elig_lic = bool(lic[lic.spec == "NAtlantic_lic"].eligible.astype(str).str.lower().eq("true").any())
+    checks["info_fig1_natlantic_eligible_in_lic_edition"] = natl_elig_lic
+    tgt["kind"] = np.where(tgt.lic_unverified == 1, "not_drawn_licence",
+                           np.where((tgt.region == "NAtlantic") & (not natl_elig_lic), "natl_si", "lgd_added"))
+    v3["kind"] = "v3"
+    cells = pd.concat([v3.assign(lgd_role="v3", lic_unverified=0), tgt], ignore_index=True)
+    drawn = cells[cells.kind != "not_drawn_licence"]
+    blocks = drawn.groupby(["kind", "region", "block"]).agg(lat=("lat", "mean"), lon=("lon", "mean"), n_rows=("y", "size"),
+                                                           n_loc_1km=("loc1km", "nunique")).reset_index()
+    nd = tgt[tgt.kind == "not_drawn_licence"].groupby("region").size().rename("n_cells_not_drawn").reset_index()
+    checks["info_fig1_not_drawn_licence_cells"] = dict(zip(nd.region, nd.n_cells_not_drawn.astype(int)))
+
+    # b: z = ln(ALT/√TDD) 행
+    rows_b = [("Lena", "Lena", "v3"), ("Canada", "Canada", "v3"), ("Russia_W", "Russia W", "v3"), ("Russia_E", "Russia E", "v3"),
+              ("Russia_C", "Russia C", "v3"), ("Greenland", "Greenland", "v3"), ("Alaska", "Alaska (reference)", "v3"),
+              ("Russia_C_LGD", "Russia C, LGD", "lgd"), ("Tibet_LGD", "Tibet, LGD", "lgd")]
+    rng = np.random.default_rng(20260930)
+    zs, zsum = [], []
+    rc_units = _lgd_units("Russia_C"); tb_units = _lgd_units("Tibet")
+    E0_lgd = {"Russia_C_LGD": rc_units, "Tibet_LGD": tb_units}
+    drop_rc = {17557}                                          # lgd_eligibility_v1_meta drop_v3(Russia_C)
+    for key, lab, src in rows_b:
+        if src == "v3":
+            q = v3[v3.region == key]
+            tq = Tg[(Tg.target == key) & (Tg["mode"] == "x") & (Tg.part == "cpu") & Tg.E0.notna()]
+            e0 = tq.E0.unique()
+            checks[f"fig1_E0_unique_{key}"] = int(len(np.unique(np.round(e0, 9)))) == 1
+            E0 = float(e0[0]) if len(e0) else np.nan
+            n_src = int(tq.n_src.iloc[0]) if len(tq) else np.nan
+        else:
+            reg = "Russia_C" if key == "Russia_C_LGD" else "Tibet_LGD"
+            qn = tgt[(tgt.region == reg) & (tgt.kind == "lgd_added")]
+            qv = v3[(v3.region == reg) & ~v3.loc_id.isin(drop_rc)] if reg == "Russia_C" else v3.iloc[0:0]
+            q = pd.concat([qv, qn])
+            un = E0_lgd[key]
+            E0 = float(un.E0.dropna().unique()[0]); n_src = int(un.n_src.dropna().iloc[0])
+            checks[f"fig1_E0_unique_{key}"] = int(len(np.unique(np.round(un.E0.dropna(), 6)))) == 1
+            checks[f"fig1_lgd_cells_{key}_vs_unit"] = int(len(q)) == int(un.n_cells.dropna().iloc[0])
+        z = np.log(q.y.values) - np.log(q.s.values)
+        z = z[np.isfinite(z)]
+        k = min(len(z), 400)
+        sub = rng.choice(z, k, replace=False) if len(z) > k else z
+        zs.append(pd.DataFrame(dict(row=key, label=lab, z=sub)))
+        zsum.append(dict(row=key, label=lab, source=src, n_cells=int(len(z)), z_mean=float(np.mean(z)), z_q25=float(np.percentile(z, 25)),
+                         z_q50=float(np.median(z)), z_q75=float(np.percentile(z, 75)), E_mean=float(np.exp(np.mean(z))), E0=E0,
+                         lnE0=float(np.log(E0)) if np.isfinite(E0) else np.nan, n_src=n_src))
+    zsum = pd.DataFrame(zsum)
+    # d: 원천 구성(모드 x, v3)
+    comp = []
+    for t in ["Lena", "Canada", "Russia_W", "Russia_E", "Russia_C", "Greenland", "Alaska"]:
+        src, nbuf = source_pool(v3, t)
+        r = v3.region.values[src]
+        cnt = pd.Series(r).value_counts()
+        n = len(src)
+        tq = Tg[(Tg.target == t) & (Tg["mode"] == "x") & (Tg.part == "cpu") & Tg.n_src.notna()]
+        row = dict(target=t, n_target=int((v3.region == t).sum()), n_src=n, n_buffer_excluded=nbuf,
+                   n_alaska=int(cnt.get("Alaska", 0)), n_lena=int(cnt.get("Lena", 0)), n_canada=int(cnt.get("Canada", 0)),
+                   n_other=int(n - cnt.get("Alaska", 0) - cnt.get("Lena", 0) - cnt.get("Canada", 0)),
+                   E0=float(tq.E0.iloc[0]), n_src_lg_targets=int(tq.n_src.iloc[0]))
+        for k in ("alaska", "lena", "canada", "other"):
+            row[f"share_{k}"] = row[f"n_{k}"] / n
+        exp = M3_TABLE[t]
+        row["m3_match"] = (n, nbuf, row["n_alaska"]) == exp
+        row["lg_targets_match"] = n == row["n_src_lg_targets"]
+        comp.append(row)
+    comp = pd.DataFrame(comp)
+    checks["fig1_source_vs_M3_all_match"] = bool(comp.m3_match.all())
+    checks["fig1_source_vs_lg_targets_all_match"] = bool(comp.lg_targets_match.all())
+    main_share = comp[comp.target.isin(MAIN4)].share_alaska
+    checks["info_fig1_alaska_share_main4_pct"] = [round(100 * float(main_share.min()), 1), round(100 * float(main_share.max()), 1)]
+    # 레나 지도 영역
+    box = json.loads((PROC / "map_lena" / "lena_grid_x25_v1_meta.json").read_text())["grid"]["box"]
+    meta = pd.DataFrame([dict(lena_lat0=box["lat0"], lena_lat1=box["lat1"], lena_lon0=box["lon0"], lena_lon1=box["lon1"],
+                              n_v3_cells=int(len(v3)), n_lgd_added_drawn=int((tgt.kind == "lgd_added").sum()),
+                              n_natl_si=int((tgt.kind == "natl_si").sum()), n_not_drawn_licence=int((tgt.kind == "not_drawn_licence").sum()),
+                              natl_eligible_lic=natl_elig_lic)])
+    return dict(fig1_blocks=blocks, fig1_not_drawn=nd, fig1_z_points=pd.concat(zs, ignore_index=True), fig1_z_summary=zsum,
+                fig1_source=comp, fig1_meta=meta), dict(v3=v3, new=new, tgt=tgt, units=dict(Russia_C=rc_units, Tibet=tb_units))
+
+
+# ---------------------------------------------------------------- Table 1
+LABEL_TYPE_EN = {"점(ABoVE, GPR 다수), CALM 지점 평균 일부": "Point (ABoVE, mostly GPR); some CALM site means",
+                 "점(ALLena, 대부분 단년 단일 방문)": "Point (ALLena, mostly single-year visits)",
+                 "점(ABoVE), CALM 지점 평균 일부": "Point (ABoVE); some CALM site means",
+                 "CALM 지점 다년 평균": "CALM site, multi-year mean"}
+ROLE = {"Lena": "P4 (confirmatory)", "Canada": "P4 (confirmatory)", "Russia_W": "P4 (confirmatory)", "Russia_E": "P4 (confirmatory)",
+        "Russia_C": "Point estimate only", "Greenland": "Point estimate only", "Alaska": "Reference (not pooled)"}
+
+
+def table1(checks: dict, ctx: dict) -> dict:
+    U = _read(LGW / "lgw_label_units.csv")
+    Tg = _read(LGS / "lg_targets.csv")
+    Tg = Tg[Tg.part == "cpu"]
+    rows = []
+
+    def split_info(t, md):
+        q = Tg[(Tg.target == t) & (Tg["mode"] == md)]
+        v = q[q.valid.astype(str).str.lower() == "true"]
+        use = v if len(v) else q                              # 그린란드: 유효 분할 없음(무효 분할로 점 추정)
+        rng_ = lambda c: (int(use[c].min()), int(use[c].max()))  # noqa: E731
+        e0 = use.E0.dropna().unique()
+        return dict(valid_splits=int(len(v)), A_cells=rng_("n_A"), eval_cells=rng_("n_eval"), eval_blocks=rng_("nb_eval"),
+                    E0=float(e0[0]) if len(e0) else np.nan, n_src=int(use.n_src.dropna().iloc[0]) if use.n_src.notna().any() else np.nan)
+
+    order = [("Lena", "main"), ("Canada", "main"), ("Russia_W", "main"), ("Russia_E", "main"), ("Russia_C", "main"), ("Greenland", "main"),
+             ("Alaska", "ref")] + [(s, "sub") for s in SUBS]
+    for t, grp in order:
+        u = U[U.target == t].iloc[0]
+        modes = ["x"] if grp != "sub" else ["i", "x"]
+        info = {md: split_info(t, md) for md in modes}
+        rr = dict(group={"main": "Main region", "ref": "Reference", "sub": "Sub-region"}[grp], target=t,
+                  name=ps_name(t), modes=",".join(modes), n_targets=len(modes),
+                  role=ROLE.get(t, f"Sub-region of {u.parent} (not independent)"), label_rows=int(u.n_rows), loc_1km=int(u.n_loc_1km),
+                  blocks=int(u.n_block), label_type=LABEL_TYPE_EN.get(u.label_type, u.label_type), licence="v3 inventory", edition="v3")
+        for md in modes:
+            i = info[md]
+            rr[f"valid_splits_{md}"] = i["valid_splits"]; rr[f"A_cells_{md}"] = f"{i['A_cells'][0]}–{i['A_cells'][1]}"
+            rr[f"eval_cells_{md}"] = f"{i['eval_cells'][0]}–{i['eval_cells'][1]}"; rr[f"eval_blocks_{md}"] = f"{i['eval_blocks'][0]}–{i['eval_blocks'][1]}"
+            rr[f"E0_{md}"] = i["E0"]; rr[f"n_src_{md}"] = i["n_src"]
+        rows.append(rr)
+    checks["table1_n_targets_eq27"] = int(sum(r["n_targets"] for r in rows)) == 27
+    # LGD 새 지역(약관 확인분 판)
+    new = ctx["tgt"]; v3 = ctx["v3"]
+    lic = _read(LGDD / "lgd_eligibility_lic.csv")
+    elig = _read(PROC / "lgd_eligibility_v1.csv")
+    for key, reg, units, role in (("Russia_C_LGD", "Russia_C", ctx["units"]["Russia_C"], "PE1, PE2 (independent-region check)"),
+                                  ("Tibet_LGD", "Tibet_LGD", ctx["units"]["Tibet"], "PE2 (deep regime)")):
+        qn = new[(new.region == reg) & (new.kind == "lgd_added")]
+        qv = v3[(v3.region == reg) & (v3.loc_id != 17557)] if reg == "Russia_C" else v3.iloc[0:0]
+        q = pd.concat([qv, qn])
+        v = units[units.valid.astype(bool)]
+        meth = new[(new.region == reg) & (new.kind == "lgd_added")].method.value_counts()
+        rows.append(dict(group="New region (LGD)", target=key, name=("Russia C (expanded)" if reg == "Russia_C" else "Tibet"), modes="x",
+                         n_targets=0, role=role, label_rows=int(len(q)), loc_1km=int(pd.Series(loc1km(q.lat, q.lon)).nunique()),
+                         blocks=int(pd.Series(block05(q.lat, q.lon)).nunique()),
+                         label_type=("~1 km cell means (" + ", ".join(f"{k} {v}" for k, v in meth.items()) + ")" +
+                                     (f"; {len(qv)} v3 CALM cells" if len(qv) else "")),
+                         licence=f"verified {len(qn)}; unverified 0", edition="licence-verified (main)",
+                         valid_splits_x=int(len(v)), A_cells_x=f"{int(v.n_A.min())}–{int(v.n_A.max())}",
+                         eval_cells_x=f"{int(v.n_eval.min())}–{int(v.n_eval.max())}", eval_blocks_x=f"{int(v.nb_eval.min())}–{int(v.nb_eval.max())}",
+                         E0_x=float(v.E0.iloc[0]), n_src_x=int(v.n_src.iloc[0])))
+        e = elig[elig.spec == ("Russia_C" if reg == "Russia_C" else "Tibet")].iloc[0]
+        checks[f"table1_{key}_cells_vs_eligibility"] = int(len(q)) == int(e.n_cells)
+    # NAtlantic: 전체 판만(SI), 약관 확인분 판 부적격
+    nl = lic[lic.spec == "NAtlantic_lic"].iloc[0]
+    ne = elig[elig.spec == "NAtlantic"].iloc[0]
+    qn_all = new[(new.region == "NAtlantic") & (new.lgd_role == "target")]
+    rows.append(dict(group="New region (LGD)", target="NAtlantic", name="North Atlantic", modes="x", n_targets=0,
+                     role="SI only: full edition; ineligible in the licence-verified edition", label_rows=int(ne.n_cells),
+                     loc_1km=np.nan, blocks=int(ne.n_blocks), label_type="~1 km cell means; 3 v3 CALM cells",
+                     licence=f"verified {int((qn_all.lic_unverified == 0).sum())}; unverified {int((qn_all.lic_unverified == 1).sum())} (licence check pending)",
+                     edition="full edition only", valid_splits_x=int(ne.n_valid_splits), A_cells_x="", eval_cells_x=f"{int(ne.n_eval_cells)}",
+                     eval_blocks_x=f"{int(ne.n_eval_blocks)}", E0_x=np.nan, n_src_x=int(ne.n_src)))
+    checks["info_table1_natl_lic_cells"] = [int(nl.n_cells), int(nl.n_lic_dropped)]
+    T = pd.DataFrame(rows)
+    # 확충판(L40) 각주 값
+    ex = elig[elig.kind == "expanded_L40"][["spec", "target", "n_cells", "n_new_cells", "n_v3_cells"]].copy()
+    exl = lic[lic.kind == "expanded_L40"][["lic_of", "n_cells", "n_lic_dropped"]].rename(columns={"lic_of": "spec", "n_cells": "n_cells_lic"})
+    ex = ex.merge(exl, on="spec", how="left")
+    return dict(table1_rows=T, table1_expanded=ex)
+
+
+def ps_name(t: str) -> str:
+    return {"Russia_W": "Russia W", "Russia_E": "Russia E", "Russia_C": "Russia C", "Alaska": "Alaska (x)"}.get(t, t)
+
+
 # ================================================================ 기록
 def sha256(p: Path) -> str:
     h = hashlib.sha256()
@@ -338,7 +775,14 @@ def sha256(p: Path) -> str:
 
 INPUTS = [LGS / "lg_curve.csv", LGS / "lg_tests.csv", LGS / "lg_minn.csv", LGX / "lgx_curve.csv", LGX / "lgx_tests.csv",
           LGX / "lgx_lg_aux.csv", LGX / "lgx_splitdist.csv", LGX / "lgx_floor.csv", OUTD / "pool_fixed_curve.csv",
-          OUTD / "n1_target_summary.csv"]
+          OUTD / "n1_target_summary.csv",
+          # 2부
+          ROOT / "data/processed/lgw/lgw_bundle.csv", ROOT / "data/processed/lgw/lgw_tests.csv", ROOT / "data/processed/lgw/lgw_scenarios.csv",
+          ROOT / "data/processed/lgw/lgw_scenarios_summary.csv", ROOT / "data/processed/lgw/lgw_sc3.csv", ROOT / "data/processed/lgw/lgw_l43.csv",
+          ROOT / "data/processed/lgw/lgw_aux4.csv", ROOT / "data/processed/lgw/lgw_splitratio.csv", ROOT / "data/processed/lgw/lgw_label_units.csv",
+          LGX / "lgx_distance.csv", ROOT / "data/processed/lgu/lgu_a_tests.csv", ROOT / "data/processed/lgd/lgd_eligibility_lic.csv",
+          ROOT / "data/processed/lgd_eligibility_v1.csv", ROOT / "data/processed/fidelity_base_v3.csv", ROOT / "data/processed/fidelity_base_v4.csv",
+          ROOT / "data/processed/fidelity_base_v4_labels.csv", LGS / "lg_targets.csv"]
 
 
 def main():
@@ -347,17 +791,28 @@ def main():
     tables = {}
     for f in (fig2, fig3, fig4):
         tables.update(f(checks))
+    # 2부(F3 part 2)
+    ab = bundle()
+    tables.update(ab)
+    tables.update(part2_updates(checks, ab["ab_bundle"]))
+    tables.update(fig5(checks))
+    tables.update(fig7(checks, ab["ab_bundle"], ab["ab_bundle_regions"]))
+    t1, ctx = fig1(checks)
+    tables.update(t1)
+    tables.update(table1(checks, ctx))
     for k, df in tables.items():
         df.to_csv(OUTD / f"{k}.csv", index=False)
     tol = 1e-6
-    bad = {k: v for k, v in checks.items() if isinstance(v, float) and "ci_lo" not in k and v > tol}
-    bad.update({k: v for k, v in checks.items() if isinstance(v, list)})
+    ck = {k: v for k, v in checks.items() if not k.startswith("info_")}
+    bad = {k: v for k, v in ck.items() if isinstance(v, float) and not isinstance(v, bool) and "ci_lo" not in k and v > tol}
+    bad.update({k: v for k, v in ck.items() if isinstance(v, (list, dict)) and len(v)})
+    bad.update({k: v for k, v in ck.items() if isinstance(v, (bool, np.bool_)) and not bool(v)})
     meta = dict(module="scripts/4_visualization/paper/v2_data.py", created=_dt.datetime.now().isoformat(timespec="seconds"),
                 inputs=[dict(path=str(p.relative_to(ROOT)), sha256=sha256(p)) for p in INPUTS],
                 outputs=sorted(f"{k}.csv" for k in tables), checks=checks, checks_failed=bad,
                 rules=dict(values="원천 열 그대로. 새 재표집·판정 없음", derived_points="E2(레나·캐나다) P* 선과 P1* 점은 lgx_curve 지역 값의 등가중 평균(점 추정)",
                            nboot=dict(lg_curve=NBOOT_CURVE, lgx=NBOOT_AUX, pool_fixed_curve=NBOOT_AUX),
-                           not_opened="lgd_*, lgt_*, lgf_*, lgfn_*, lgw_*(판정 기록 순서)"))
+                           not_opened="lgt_*, lgf_*, lgfn_*(LGF 창 마감 전). lgw_*·lgd_* 는 판정 기록(J5, J7) 뒤 2부에서 연다"))
     (OUTD / "v2_data_meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1, default=float))
     print(f"[v2_data] 표 {len(tables)}개 → {OUTD.relative_to(ROOT)}, 대조 실패 {len(bad)}")
     if bad:

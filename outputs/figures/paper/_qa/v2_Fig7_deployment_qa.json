@@ -1,0 +1,51 @@
+{
+ "width_mm": 180.0,
+ "height_mm": 182.0,
+ "min_font_pt": 6.5,
+ "clipped": [],
+ "overlaps": [],
+ "n_text_overlaps": 0,
+ "has_title_in_axes": false,
+ "delta_axes_have_zero": true,
+ "n_delta_axes": 3,
+ "n_legends": 1,
+ "fonts": [
+  "BGZIHO+LiberationSans-Bold|CID TrueType|yes",
+  "BGZIHO+LiberationSans|CID TrueType|yes"
+ ],
+ "fonts_ok": true,
+ "unicode_minus_ok": true,
+ "caption_words": {
+  "definition": 73,
+  "statistics": 64,
+  "panels": 99,
+  "data": 27,
+  "total": 263
+ },
+ "caption_problems": [],
+ "fails": [],
+ "ok": true,
+ "svg_text_elements": 142,
+ "svg_glyph_defs": 0,
+ "svg_text_ok": true,
+ "png_dpi": 599.9988,
+ "name": "Fig7_deployment",
+ "version": "v2",
+ "time": "2026-09-30T14:48:13",
+ "paths": {
+  "width_mm": 180.0,
+  "height_mm": 182.0,
+  "pdf": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Fig7_deployment.pdf",
+  "svg": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Fig7_deployment.svg",
+  "png": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Fig7_deployment.png"
+ },
+ "source_data": [
+  "outputs/figures/paper/source_data/v2/Fig7_a_texts.csv",
+  "outputs/figures/paper/source_data/v2/Fig7_b_cells.csv",
+  "outputs/figures/paper/source_data/v2/Fig7_b_summary.csv",
+  "outputs/figures/paper/source_data/v2/Fig7_c.csv",
+  "outputs/figures/paper/source_data/v2/Fig7_d.csv",
+  "outputs/figures/paper/source_data/v2/Fig7_d_regions.csv",
+  "outputs/figures/paper/source_data/v2/Fig7_d_ab10.csv"
+ ]
+}

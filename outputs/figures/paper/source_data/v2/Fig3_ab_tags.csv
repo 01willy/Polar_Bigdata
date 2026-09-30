@@ -1,0 +1,6 @@
+figure,key,n,ab,verdict4_bundle,verdict_bundle,rule,abstract_rule,holm_p,holm_p_eq,delta_bundle,verdict4_figure_source,delta_figure_source,verdict_agree
+fig3a,shuffle,0,AB3,우세,superior,a,(a) 방향을 쓴다,0.001,1.0,-1.6290033288317636,우세,-1.6290033288317636,True
+fig3b,F1k,10,AB7,우세,superior,a,(a) 방향을 쓴다,0.001,1.0,-3.7360604490757297,우세,-3.7360604490757297,True
+fig3c,R1 − P0|P4 mean,-1,AB8,우세,superior,a,(a) 방향을 쓴다,0.001,1.0,-2.635747781440557,우세,-2.635747781440554,True
+fig3c,R1 − P1|P4 mean,-1,AB9,우세,superior,a,(a) 방향을 쓴다,0.001,1.0,-0.4041075519834659,우세,-0.4041075519834661,True
+fig3d,E1_P4_n_le_10|P1,10,AB4,우세,superior,a,(a) 방향을 쓴다,0.001,1.0,-2.45450947292788,,,

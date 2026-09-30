@@ -183,13 +183,16 @@ def verdict_key(ax, x0, y, dx_list=None, include_small=True, fontsize=None):
     return x
 
 
-def verdict_key_grid(fig, rect_mm, ncol=2, same_as_p1=True, col_w=None):
-    """판정 기호 설명을 격자로(범례 객체가 아니라 기호 + 글자). rect_mm = (x, y, w, h)."""
+def verdict_key_grid(fig, rect_mm, ncol=2, same_as_p1=True, col_w=None, extra=None, text_dx_mm=6.0, verdicts=True):
+    """판정 기호 설명을 격자로(범례 객체가 아니라 기호 + 글자). rect_mm = (x, y, w, h).
+    extra = [(짧은 글자, 설명)] 는 글자 표지(n.c., AB 번호 등)를 같은 격자에 더한다."""
     ax = ps.axes_mm(fig, *rect_mm)
     ax.set_axis_off(); ax.set_xlim(0, 1); ax.set_ylim(0, 1)
-    items = [(v, VERDICT_TEXT[v]) for v in VERDICT_ORDER] + [("dagger", f"{DAGGER}  |Δ| < 0.5 cm")]
+    items = ([(v, VERDICT_TEXT[v]) for v in VERDICT_ORDER] + [("dagger", f"{DAGGER}  |Δ| < 0.5 cm")]) if verdicts else []
     if same_as_p1:
         items.append(("same as P1", "P1* = P1 at this n"))
+    for sym, lab in (extra or []):
+        items.append((("txt", sym), lab))
     nrow = int(np.ceil(len(items) / ncol))
     cw = col_w or [1.0 / ncol] * ncol
     cx = np.concatenate([[0.0], np.cumsum(cw)[:-1]])
@@ -203,6 +206,9 @@ def verdict_key_grid(fig, rect_mm, ncol=2, same_as_p1=True, col_w=None):
         elif v == "same as P1":
             ax.text(x, y, "=P1", fontsize=ps.FS["annot"], ha="left", va="center", color=ps.GREY["text2"])
             ax.text(x + 6.0 * mm, y, lab, fontsize=ps.FS["annot"], ha="left", va="center")
+        elif isinstance(v, tuple):
+            ax.text(x, y, v[1], fontsize=ps.FS["annot"], ha="left", va="center", color=ps.GREY["text2"])
+            ax.text(x + text_dx_mm * mm, y, lab, fontsize=ps.FS["annot"], ha="left", va="center")
         else:
             draw_verdict(ax, x + 1.2 * mm, y, v)
             ax.text(x + 3.6 * mm, y, lab, fontsize=ps.FS["annot"], ha="left", va="center")
@@ -211,7 +217,7 @@ def verdict_key_grid(fig, rect_mm, ncol=2, same_as_p1=True, col_w=None):
 
 
 def verdict_table(ax, rows, cols, cells, row_labels, col_labels, sub_labels=None, col_x=None, xlim=None,
-                  head_title=None, sub_title=None, row_label_fs=None):
+                  head_title=None, sub_title=None, row_label_fs=None, tags=None):
     """기호 표. rows·cols = 키 목록, cells = {(row, col): (verdict, small)}. 데이터 좌표: 열 x = col_x(기본 0..k−1),
     행 y = m−1..0(첫 행이 위). 머리 두 줄(열 이름 = n, 아래 줄 = 풀 구성)은 첫 행 위에 글자로 둔다.
     head_title·sub_title 은 두 머리 줄의 왼쪽 설명(행 이름 열 자리)."""
@@ -223,6 +229,9 @@ def verdict_table(ax, rows, cols, cells, row_labels, col_labels, sub_labels=None
         for j, c in enumerate(cols):
             v = cells.get((r, c))
             if v is None:
+                continue
+            if v[0] == "not computed":
+                ax.text(xs[j], yy, "n.c.", ha="center", va="center", fontsize=ps.FS["annot"], color=ps.GREY["text2"])
                 continue
             draw_verdict(ax, xs[j], yy, v[0], v[1])
     ax.set_yticks([m - 1 - i for i in range(m)])
@@ -246,6 +255,9 @@ def verdict_table(ax, rows, cols, cells, row_labels, col_labels, sub_labels=None
     else:
         ax.set_xlim(min(xs) - 0.6, max(xs) + 0.6)
     ax.axhline(m - 1 + 0.45, color=ps.GREY["light"], lw=0.5, zorder=0)
+    for (r, c), code in (tags or {}).items():                   # AB 표지: 기호 아래 글자
+        if r in rows and c in cols:
+            ab_tag(ax, xs[cols.index(c)], m - 1 - rows.index(r), code)
     for sp in ax.spines.values():
         sp.set_visible(False)
     ax.set_facecolor("none")
@@ -352,3 +364,31 @@ def pdf_text(path) -> str:
         return subprocess.run(["pdftotext", "-q", str(path), "-"], capture_output=True, text=True, timeout=30).stdout
     except (FileNotFoundError, subprocess.TimeoutExpired):
         return ""
+
+
+# ---------------------------------------------------------------- 2부: 초록 주 대비(AB) 표지
+AB_RULE_TEXT = {"a": "direction holds after Holm correction", "b": "significant before correction only",
+                "c": "equivalent (±0.5 cm) after correction", "d": "no difference established"}
+
+
+def ab_tag(ax, x, y, code: str, dx_pt: float = 0.0, dy_pt: float = -7.2, ha: str = "center", va: str = "center", transform=None,
+           zorder: float = 6):
+    """AB 번호 글자(6.5 pt, 짙은 회색). 기호 아래(dy_pt < 0) 또는 옆에 둔다. 판정은 기호가 나타내고 이 글자는 대비 이름만 준다."""
+    xy_tr = transform or ax.transData
+    t = ax.annotate(code, xy=(x, y), xycoords=xy_tr, xytext=(dx_pt, dy_pt), textcoords="offset points", ha=ha, va=va,
+                    fontsize=ps.FS["annot"], color=ps.GREY["text2"], annotation_clip=False, zorder=zorder)
+    t.set_gid("ab_tag")
+    return t
+
+
+def ab_note(ab_cells: pd.DataFrame, codes) -> str:
+    """AB 표지 설명 한 줄(lgw_bundle abstract_rule 코드 → 영문). 같은 규칙끼리 묶는다."""
+    q = ab_cells.drop_duplicates("ab").set_index("ab")
+    groups: dict = {}
+    for c in sorted(codes, key=lambda x: int(str(x)[2:])):
+        groups.setdefault(q.loc[c, "rule"], []).append(c)
+    parts = []
+    for rule in ("b", "c", "a", "d"):
+        if rule in groups:
+            parts.append(f"{', '.join(groups[rule])}: {AB_RULE_TEXT[rule]}")
+    return "; ".join(parts)

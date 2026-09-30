@@ -1,0 +1,4 @@
+spec,target,n_cells,n_new_cells,n_v3_cells,n_cells_lic,n_lic_dropped
+Russia_W_expanded,Russia_W,39,8.0,31.0,38.0,1.0
+Russia_E_expanded,Russia_E,55,25.0,30.0,,
+Canada_expanded,Canada,825,75.0,750.0,787.0,38.0

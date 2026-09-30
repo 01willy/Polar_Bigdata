@@ -1,0 +1,22 @@
+OK  d Lena Alaskan share % vs M3 Table M3-1: figure 94.300000 | source 94.300000
+OK  d Canada Alaskan share % vs M3 Table M3-1: figure 81.400000 | source 81.400000
+OK  d Russia_W Alaskan share % vs M3 Table M3-1: figure 78.000000 | source 78.000000
+OK  d Russia_E Alaskan share % vs M3 Table M3-1: figure 78.000000 | source 78.000000
+OK  d Russia_C Alaskan share % vs M3 Table M3-1: figure 83.900000 | source 83.900000
+OK  d Greenland Alaskan share % vs M3 Table M3-1: figure 77.900000 | source 77.900000
+OK  d Alaska Alaskan share % vs M3 Table M3-1: figure 0.000000 | source 0.000000
+OK  d Lena E0 vs lg_targets: figure 1.619297 | source 1.619297
+OK  d Lena n_src vs lg_targets: figure 14429.000000 | source 14429.000000
+OK  d Russia_W E0 vs lg_targets: figure 1.589510 | source 1.589510
+OK  d Russia_W n_src vs lg_targets: figure 17436.000000 | source 17436.000000
+OK  d Alaska E0 vs lg_targets: figure 1.504595 | source 1.504595
+OK  d Alaska n_src vs lg_targets: figure 3860.000000 | source 3860.000000
+OK  b Lena n_cells vs lgw_label_units n_rows: figure 3037.000000 | source 3037.000000
+OK  b Canada n_cells vs lgw_label_units n_rows: figure 750.000000 | source 750.000000
+OK  b Russia_W n_cells vs lgw_label_units n_rows: figure 31.000000 | source 31.000000
+OK  b Alaska n_cells vs lgw_label_units n_rows: figure 13606.000000 | source 13606.000000
+OK  a not drawn (licence) Canada: figure 38.000000 | source 38.000000
+OK  a not drawn (licence) NAtlantic: figure 19.000000 | source 19.000000
+OK  a not drawn (licence) Russia_W: figure 1.000000 | source 1.000000
+OK  a v3 cells drawn = 17,467: figure 17467.000000 | source 17467.000000
+OK  a NAtlantic not drawn as LGD target: figure 0 | source 0

@@ -1,0 +1,2 @@
+test_id,verdict,stat,blind
+L43,배치 효과는 확인되지 않았다,"P1 n10: 미결정 (지역 4/4, Holm p 1); P1 n40: 미결정 (부분(지역 2/4), Holm p 1)","비맹검 부분 포함(a2_spread, a2 블록 분산 추출, h29b)"

@@ -1,0 +1,16 @@
+OK  a n10 2단 재표집 MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] delta: figure -0.069003 | source -0.069003
+OK  a n10 2단 재표집 MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] ci_lo: figure -0.856944 | source -0.856944
+OK  a MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] verdict: figure 미결정 | source 미결정
+OK  a n40 추출 조건부 MEAN[Lena|x,Canada|x] delta: figure -0.244910 | source -0.244910
+OK  a n40 추출 조건부 MEAN[Lena|x,Canada|x] ci_lo: figure -1.087290 | source -1.087290
+OK  a MEAN[Lena|x,Canada|x] verdict: figure 미결정 | source 미결정
+OK  a n40 2단 재표집 Canada|x delta: figure -2.586880 | source -2.586880
+OK  a n40 2단 재표집 Canada|x ci_lo: figure -4.010719 | source -4.010719
+OK  a Canada|x verdict: figure 우세 | source 우세
+OK  b D0[S_rand5]-D0[S_block] delta: figure -4.513583 | source -4.513583
+OK  b D0[S_rand5]-D0[S_block] verdict: figure 우세 | source 우세
+OK  b [R1-P1](inblk)-[R1-P1](A)|n10 delta: figure -0.136361 | source -0.136361
+OK  b [R1-P1](inblk)-[R1-P1](A)|n10 verdict: figure 동등 | source 동등
+OK  c Alaska n160 R1-P1 near-far: figure -0.813214 | source -0.813214
+OK  c Alaska n160 verdict: figure 우세 | source 우세
+OK  d Canada n40 P1-P0 mid: figure 4.263448 | source 4.263448

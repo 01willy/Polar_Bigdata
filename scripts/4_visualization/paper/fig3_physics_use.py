@@ -90,35 +90,102 @@ def panel_a(fig, rect, vx):
             _pt(ax, r.delta, y + dy, c, "^")
             vy.append(y + dy); vv.append(r.verdict); vs.append(r.small_effect)
     ax.text(0.99, 1.0, "solid n = 0, dashed n = 10", transform=ax.transAxes, ha="right", va="bottom", fontsize=ps.FS["annot"], color=ps.GREY["text2"])
-    _vcol(fig, ax, vx, 6.0, vy, vv, vs)
+    vax = _vcol(fig, ax, vx, 6.0, vy, vv, vs)
+    ABc = V.rd("ab_cells")
+    for r in ABc[ABc.figure == "fig3a"].itertuples():                     # AB3 = shuffle, n = 0
+        V.ab_tag(vax, 0.35, vy[0], r.ab, dx_pt=8.0, dy_pt=0.0, ha="left")
     return ax, A
 
 
+L10_POS = {0: 0.0, 3: 1.0, 10: 2.0, 40: 3.0, 160: 4.0, -1: 5.35}
+L10_BREAK = 4.68
+SER10 = {  # series → (표시 이름, 선종, 마커, 가로 도지)
+    "F1k": ("R − F1k (R0 at n = 0)", "-", "D", -0.11),
+    "F1n": ("R1 − F1n", DASH, "s", 0.11),
+    "F1a": ("R0 − F1a", "none", "o", 0.22),
+}
+
+
+def panel_b_l10(fig, rect, strip_rect):
+    """b(위): L10 대비를 모든 n 에(결과 뒤 표시 결정). 등록 n(0, 10) = 회색 띠, 그 밖 = 보조 n. 아래 기호 줄."""
+    L = V.rd("fig3_b_L10_alln")
+    ax = ps.axes_mm(fig, *rect)
+    c = ps.COLOR["residual"]
+    reg_n = sorted(set(int(n) for n in L[L.registered.astype(str).str.lower() == "true"].n))
+    for n in reg_n:
+        ax.axvspan(L10_POS[n] - 0.42, L10_POS[n] + 0.42, facecolor=ps.GREY["band"], edgecolor="none", zorder=0.1)
+        ax.text(L10_POS[n], 1.0, "registered", transform=matplotlib.transforms.blended_transform_factory(ax.transData, ax.transAxes),
+                ha="center", va="bottom", fontsize=ps.FS["annot"], color=ps.GREY["text2"])
+    ps.zero_line(ax, "y", better_text=False)
+    pts = {}
+    for key, (lab, ls, mk, dx) in SER10.items():
+        q = L[L.series == key].sort_values("n")
+        g = q[q.n != -1]
+        xs = np.array([L10_POS[int(n)] for n in g.n]) + dx
+        for x, lo, hi in zip(xs, g.ci_lo, g.ci_hi):
+            ax.plot([x, x], [lo, hi], color=c, lw=ps.LW["ci"], zorder=2.4)
+        if ls != "none" and len(g) > 1:
+            ax.plot(xs, g.delta, color=c, ls=ls, lw=ps.LW["main"], zorder=2.6)
+        ax.plot(xs, g.delta, ls="none", marker=mk, ms=ps.MS["main"], mfc=c, mec=c, zorder=3)
+        for r in q[q.n == -1].itertuples():
+            x = L10_POS[-1] + dx
+            ax.plot([x, x], [r.ci_lo, r.ci_hi], color=c, lw=ps.LW["ci"], zorder=2.4)
+            ax.plot([x], [r.delta], ls="none", marker=mk, ms=ps.MS["main"], mfc=c, mec=c, zorder=3)
+        for r in q.itertuples():
+            pts[(key, int(r.n))] = (L10_POS[int(r.n)] + dx, r.delta)
+    ax.set_xlim(-0.55, L10_POS[-1] + 0.5)
+    ax.set_xticks([L10_POS[n] for n in (0, 3, 10, 40, 160, -1)])
+    ax.set_xticklabels(["0", "3", "10", "40", "160", "all"])
+    ax.tick_params(axis="x", length=2.0)
+    V.xbreak(ax, x=L10_BREAK)
+    V.linear_y(ax, lim=(-5.8, 3.9), ticks=(-5, -4, -3, -2, -1, 0, 1, 2, 3))
+    ax.set_ylabel("ΔRMSE, residual −\nphysics input (cm)", linespacing=1.0)
+    ax.set_xlabel("Target labels, n")
+    # 계열 설명(범례 객체 아님, 자료 없는 왼쪽 위)
+    for i, (key, (lab, ls, mk, dx)) in enumerate(SER10.items()):
+        yy = 3.25 - i * 0.95
+        if ls != "none":
+            ax.plot([-0.35, 0.15], [yy, yy], color=c, ls=ls, lw=ps.LW["main"], zorder=3)
+        ax.plot([-0.1], [yy], ls="none", marker=mk, ms=ps.MS["main"], mfc=c, mec=c, zorder=3)
+        ax.text(0.3, yy, lab, ha="left", va="center", fontsize=ps.FS["annot"])
+    ax.text(0.99, 0.03, "n = 40, 160: Lena and Canada", transform=ax.transAxes, ha="right", va="bottom", fontsize=ps.FS["annot"],
+            color=ps.GREY["text2"])
+    ABc = V.rd("ab_cells")
+    for r in ABc[ABc.figure == "fig3b"].itertuples():                     # AB7 = R1 − F1k, n = 10
+        x, y = pts[(r.key, int(r.n))]
+        V.ab_tag(ax, x, y, r.ab, dx_pt=5.0, dy_pt=-1.0, ha="left")
+    # 기호 줄(열 = 위 축의 n 위치)
+    st = ps.axes_mm(fig, *strip_rect)
+    cols = [0, 3, 10, 40, 160, -1]
+    cells = {(r.series, int(r.n)): (r.verdict, bool(r.small_effect)) for r in L.itertuples()}
+    pools = {int(r.n): V.pool_code(r.pool) for r in L.itertuples() if V.pool_code(r.pool)}
+    V.verdict_table(st, list(SER10), cols, cells, [v[0].split(" (")[0] for v in SER10.values()], [""] * len(cols),
+                    sub_labels=[pools.get(c_, "") for c_ in cols], col_x=[L10_POS[c_] for c_ in cols], xlim=ax.get_xlim(), sub_title="pool",
+                    row_label_fs=ps.FS["annot"])
+    for n in reg_n:
+        st.axvspan(L10_POS[n] - 0.42, L10_POS[n] + 0.42, ymin=0.0, ymax=0.72, facecolor=ps.GREY["band"], edgecolor="none", zorder=0.05)
+    st.set_gid("verdict_table")
+    return ax, st, L
+
+
 def panel_b(fig, rect, vx):
+    """b(아래): L12(곱셈 대 덧셈 잔차), L17(대상 라벨 셔플). λ 0.25 실선, 1.0 파선."""
     B = V.rd("fig3_b")
     ax = ps.axes_mm(fig, *rect)
     c = ps.COLOR["residual"]
-    rows = [("L10", "R0-F1k|n0", "L10  R0 − F1k, n = 0"), ("L10", "R0-F1a|n0", "L10  R0 − F1a, n = 0"),
-            ("L10", "R1-F1k|n10", "L10  R1 − F1k, n = 10"), ("L10", "R1-F1n|n10", "L10  R1 − F1n, n = 10"),
-            ("L12", "RM-R1|n10", "L12  RM − R1, n = 10"), ("L12", "RM-R1|n-1", "L12  RM − R1, all labels"),
+    rows = [("L12", "RM-R1|n10", "L12  RM − R1, n = 10"), ("L12", "RM-R1|n-1", "L12  RM − R1, all labels"),
             ("L17", "R1-R1s|n10", "L17  R1 − R1s, n = 10"), ("L17", "R1-R1s|n-1", "L17  R1 − R1s, all labels")]
-    ys = _forest_frame(ax, [lab for *_, lab in rows], (-5.5, 2), (-5, -4, -3, -2, -1, 0, 1, 2), "ΔRMSE, first − second method (cm)")
+    ys = _forest_frame(ax, [lab for *_, lab in rows], (-2.5, 1.5), (-2, -1, 0, 1), "ΔRMSE, first − second method (cm)")
     ax.axvspan(-0.5, 0.5, facecolor=ps.GREY["band"], edgecolor="none", zorder=0.1)
     ps.zero_line(ax, "x", better_text=False)
     vy, vv, vs = [], [], []
     for y, (h, key, _) in zip(ys, rows):
-        if h == "L10":
-            r = B[B.contrast == key].iloc[0]
-            _ci(ax, y, r.ci_lo, r.ci_hi, c); _pt(ax, r.delta, y, c, "D")
-            vy.append(y); vv.append(r.verdict); vs.append(r.small_effect)
-        else:
-            for lam, dy, ls in (("0.25", OFF, "-"), ("1.0", -OFF, DASH)):
-                r = B[B.contrast == f"{key}|lam{lam}"].iloc[0]
-                _ci(ax, y + dy, r.ci_lo, r.ci_hi, c, ls); _pt(ax, r.delta, y + dy, c, "D")
-                vy.append(y + dy); vv.append(r.verdict); vs.append(r.small_effect)
-    for yb in (ys[3] - 0.5, ys[5] - 0.5):
-        ax.axhline(yb, color=ps.GREY["light"], lw=0.5, zorder=0.2)
-    ax.text(0.99, 1.0, "L12, L17: solid λ = 0.25, dashed λ = 1.0; grey band ±0.5 cm", transform=ax.transAxes, ha="right", va="bottom",
+        for lam, dy, ls in (("0.25", OFF, "-"), ("1.0", -OFF, DASH)):
+            r = B[B.contrast == f"{key}|lam{lam}"].iloc[0]
+            _ci(ax, y + dy, r.ci_lo, r.ci_hi, c, ls); _pt(ax, r.delta, y + dy, c, "D")
+            vy.append(y + dy); vv.append(r.verdict); vs.append(r.small_effect)
+    ax.axhline(ys[1] - 0.5, color=ps.GREY["light"], lw=0.5, zorder=0.2)
+    ax.text(0.99, 1.0, "solid λ = 0.25, dashed λ = 1.0; grey band ±0.5 cm", transform=ax.transAxes, ha="right", va="bottom",
             fontsize=ps.FS["annot"], color=ps.GREY["text2"])
     _vcol(fig, ax, vx, 6.0, vy, vv, vs)
     return ax, B
@@ -138,7 +205,7 @@ def panel_c(fig, rect, vx, sx):
             nm = {"P4 mean": "P4 mean", "Lena, Canada, Alaska mean": "Mean incl. Alaska (3)", "Alaska": "Alaska (reference)"}.get(r.target, ps.region_name(r.target))
             lay.append((nm, r))
     labels = [l for l, _ in lay]
-    ys = _forest_frame(ax, labels, (-18, 6), (-15, -5, -2, -1, 0, 1, 2, 5), "ΔRMSE, R1 − baseline (cm)", symlog=True)
+    ys = _forest_frame(ax, labels, (-18, 6), (-15, -5, -2, -1, 0, 1, 2, 5), "ΔRMSE, R1 − baseline (cm;\nlog scale beyond ±2 cm)", symlog=True)
     ax.spines["left"].set_visible(True); ax.spines["left"].set_color(ps.GREY["light"]); ax.spines["left"].set_linewidth(0.5)
     ps.zero_line(ax, "x", better_text=False)
     ticks = ax.get_yticklabels()
@@ -157,12 +224,31 @@ def panel_c(fig, rect, vx, sx):
             ax.plot([fl[r.target]] * 2, [y - 0.38, y + 0.38], color="#8c8c8c", lw=1.6, solid_capstyle="butt", zorder=2.2)
     ax.text(0.0, 1.0, "grey tick: error floor − P0 (LGX-N2)", transform=ax.transAxes, ha="left", va="bottom", fontsize=ps.FS["annot"],
             color=ps.GREY["text2"])
-    _vcol(fig, ax, vx, 5.0, vy, vv, vs)
+    vax = _vcol(fig, ax, vx, 5.0, vy, vv, vs)
+    ABc = V.rd("ab_cells")
+    ab = {r.key.split("|")[0]: r.ab for r in ABc[ABc.figure == "fig3c"].itertuples()}
+    SD = V.rd("fig3_c_sdse")
+    flag = {(r.region, r.contrast) for r in SD.itertuples() if bool(r.flagged)}
+    cmap_sd = {"R1 − P0": "R1-P0|all", "R1 − P1": "R1-P1|all"}
+    j = 0
+    sd_rows = []
+    for (lab, r), y in zip(lay, ys):
+        if r is None:
+            continue
+        if r.kind == "mean4" and r.block in ab:
+            V.ab_tag(vax, 0.35, y, ab[r.block], dx_pt=8.5, dy_pt=0.0, ha="left", zorder=20)
+        if r.kind in ("region", "ref") and (r.target, cmap_sd.get(r.block, "")) in flag:
+            t = vax.annotate("§", xy=(0.35, y), xytext=(4.5, 0.5), textcoords="offset points", ha="left", va="center",
+                             fontsize=ps.FS["annot"], annotation_clip=False)
+            t.set_gid("sdse_flag")
+            sd_rows.append(dict(block=r.block, target=r.target))
+        j += 1
     # 분할 비율 띠
     x0, y0, w, h = ax._box_mm
     sa = ps.axes_mm(fig, sx, y0, 9.5, h)
     sa.set_ylim(ax.get_ylim()); sa.set_xlim(0, 1)
     sa.set_yticks([])
+    sa.set_facecolor("none")
     sa.spines["left"].set_visible(False)
     sa.set_xticks([0, 0.5, 1]); sa.set_xticklabels(["0", "0.5", "1"])
     sa.set_xlabel("Share of splits\nwith Δ < 0", linespacing=1.0)
@@ -206,6 +292,12 @@ def panel_d(fig, x_e, x_f, y, h):
                         mfc=c, mec=c, mew=ps.LW["marker_edge"], zorder=3)
     for r in P1S.itertuples():
         af.plot([NPOS[int(r.n)] + 0.28], [r.p1star], ls="none", marker="s", ms=ps.MS["main"] + 0.4, mfc="white", mec=c, mew=0.9, zorder=3.5)
+    ABc = V.rd("ab_cells")
+    AB = V.rd("ab_bundle")
+    for r in ABc[ABc.figure == "fig3d"].itertuples():                     # AB4 = P1 − P0, n = 10(E1 의 P1 점)
+        v = AB[AB.ab == r.ab].iloc[0]
+        V.draw_verdict(ae, 1.45, -3.05, v.verdict, bool(v.small_effect))
+        V.ab_tag(ae, 1.45, -3.05, r.ab, dx_pt=-4.5, dy_pt=0.0, ha="right")
     V.n_axis(ae, ns=[0, 3, 10], lim=(-0.5, 2.5))
     V.n_axis(af, ns=[0, 3, 10, 40, 160, 320, N_ALL])                       # E2 에는 n = 1,000 이 없다(레나만)
     ae.set_ylabel("ΔRMSE vs P0 (cm)")
@@ -218,26 +310,34 @@ def panel_d(fig, x_e, x_f, y, h):
 
 def build(draft: bool = False):
     ps.use_paper()
-    W, H = 180.0, 140.0
+    W, H = 180.0, 180.0
     fig = ps.paper_figure(W, H)
-    # 왼쪽 열: a(위), c(아래). 오른쪽 열: b(위), d(아래)
-    ax_a, A = panel_a(fig, (33.0, 88.0, 44.0, 26.0), vx=78.0)
-    ax_c, Cc, S, F = panel_c(fig, (30.0, 12.0, 43.0, 60.0), vx=73.5, sx=80.0)
-    ax_b, B = panel_b(fig, (128.0, 76.0, 44.0, 38.0), vx=172.5)
-    ae, af, D, P1S = panel_d(fig, 108.0, 130.0, 12.0, 45.0)
+    ax_a, A = panel_a(fig, (33.0, 124.0, 44.0, 26.0), vx=78.0)
+    ax_c, Cc, S, F = panel_c(fig, (30.0, 12.0, 43.0, 74.0), vx=73.5, sx=80.0)
+    ax_b, st_b, L10 = panel_b_l10(fig, (112.0, 124.0, 62.0, 26.0), (112.0, 104.0, 62.0, 10.0))
+    ax_b2, B = panel_b(fig, (130.0, 77.0, 42.0, 17.0), vx=172.5)
+    ae, af, D, P1S = panel_d(fig, 108.0, 130.0, 12.0, 44.0)
     ps.panel_label(ax_a, "a", dx_mm=-31.0, dy_mm=1.2)
     ps.panel_label(ax_c, "c", dx_mm=-28.0, dy_mm=1.2)
-    ps.panel_label(ax_b, "b", dx_mm=-36.0, dy_mm=1.2)
+    ps.panel_label(ax_b, "b", dx_mm=-15.0, dy_mm=1.2)
     ps.panel_label(ae, "d", dx_mm=-12.0, dy_mm=1.2)
     handles = [Line2D([], [], color=ps.COLOR["refit"], ls=ls, lw=ps.LW["main"], marker=mk, ms=ps.MS["main"], mfc=ps.COLOR["refit"],
                       mec=ps.COLOR["refit"], label=lab) for ls, mk, lab in COEF.values()]
     handles += [V.pstar_handle(), V.p1star_handle()]
     ps.legend_below(fig, handles, (4.0, H - 12.0, W - 8.0, 10.0), ncol=3)
-    # 판정 기호 설명(범례 객체 아님)
-    kax = ps.axes_mm(fig, 4.0, 122.5, 172.0, 4.5)
+    # 판정 기호 설명(범례 객체 아님) + § 와 AB 표지 설명
+    kax = ps.axes_mm(fig, 4.0, H - 18.0, 172.0, 4.5)
     kax.set_axis_off(); kax.set_xlim(0, 1); kax.set_ylim(0, 1)
     V.verdict_key(kax, 0.0, 0.5, include_small=True)
     kax.set_gid("verdict_key")
+    ABc = V.rd("ab_cells")
+    codes = list(dict.fromkeys(ABc[ABc.figure.str.startswith("fig3")].ab))
+    k2 = ps.axes_mm(fig, 4.0, H - 23.0, 172.0, 4.5)
+    k2.set_axis_off(); k2.set_xlim(0, 1); k2.set_ylim(0, 1)
+    k2.text(0.0, 0.5, "§  split SD/SE ratio above 1.5 × its null (R/R0, c; point unchanged)", ha="left", va="center", fontsize=ps.FS["annot"])
+    k2.text(0.47, 0.5, "AB tags (Holm m = 10): " + V.ab_note(ABc, codes), ha="left", va="center", fontsize=ps.FS["annot"],
+            color=ps.GREY["text2"])
+    k2.set_gid("key2")
 
     cap = dict(
         definition=("ΔRMSE is the RMSE difference in cm (first method minus second; negative is lower error for the first). D1 adds "
@@ -246,19 +346,24 @@ def build(draft: bool = False):
                     "with year-matched TDD and P1* the edaphic Stefan re-fit (L29)."),
         statistics=("Points and bars, cell-weighted stratified means with block-bootstrap 95% CI (10,000 resamples), four-region pool P4 "
                     "unless stated. Verdict symbols (right of each forest) are copied from the LGX tables and use both cell-weighted and "
-                    "block-equal-weighted CIs with a 0.5 cm margin; † marks |Δ| < 0.5 cm. Panel d has no verdicts (descriptive)."),
+                    "block-equal-weighted CIs with a 0.5 cm margin; † marks |Δ| < 0.5 cm; § marks a split SD/SE ratio above 1.5 times its null. "
+                    "Panel d is descriptive apart from the AB4 symbol."),
         panels=("a, placebo controls (L15, registered verdict: mixed). b, combination structure: physics as input versus residual (L10, "
-                "supported), multiplicative versus additive residual (L12, rejected), shuffled target labels (L17). c, all target labels: "
+                "supported; registered n = 0 and 10 shaded, other n auxiliary; at n = 40 and 160, Lena and Canada only, the physics-input "
+                "structure had lower error), multiplicative "
+                "versus additive residual (L12, rejected), shuffled target labels (L17). c, all target labels: "
                 "R1 against P0 (L8), P* and P1 (L4) by region, P4 and the three-region mean with Alaska (x); Alaska is shown as a "
                 "reference row and is not pooled with P4. Grey ticks, covariate-conditional error floor minus P0 (LGX-N2). Bars, "
                 "share of 50 splits (49 for Lena) with Δ < 0 (L31, dashed line 0.8). d, coefficient models against P0; the Lena and Canada P* line "
-                "and P1* points are point estimates; CIs are drawn for P1 only (all CIs in Source Data)."),
+                "and P1* points are point estimates; CIs are drawn for P1 only (all CIs in Source Data). AB tags, abstract contrasts "
+                "(Holm over ten)."),
         data=("LG and LGX runs on the Rescale platform; LGX tables are a local re-aggregation of the same shards (cross-environment "
               "check not performed)."),
     )
-    src = dict(a=A, b=B, c=Cc, c_splits=S, c_floor=F, d=D, d_p1star=P1S)
+    src = dict(a=A, b_L10=L10, b=B, c=Cc, c_splits=S, c_floor=F, c_sdse=V.rd("fig3_c_sdse"), d=D, d_p1star=P1S,
+               ab_tags=ABc[ABc.figure.str.startswith("fig3")])
     spec_extra = dict(module="fig3_physics_use.py", panels=4, message="physics as residual anchor; all-label gain depends on Russia W; P* row added",
-                      pending=["AB3, AB4, AB7, AB8, AB9 markers (lgw_bundle not opened)", "SD/SE ratio flag (lgw_splitratio not opened)"])
+                      part2="L10 at all n (registered vs auxiliary), AB3, AB4, AB7, AB8, AB9 tags, § SD/SE ratio flags")
     return V.save_v2(fig, NAME, cap, SPEC_ID, src, title="How physics enters the learner: pseudo-label controls, combination structure, "
                      "all-label effect and coefficient pooling.", spec_extra=spec_extra)
 

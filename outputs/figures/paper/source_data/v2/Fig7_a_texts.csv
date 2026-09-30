@@ -1,0 +1,7 @@
+key,text
+SC1w,"SC1w, R1 − P0: safety not confirmed | non-inferior cells 4/10; no higher-error cell"
+SC1w-P,"SC1w-P, P1 − P0: rejected | higher error in Canada (n = 3: +0.97 cm; n = 10: +2.26 cm)"
+SC2w,"SC2w, R1 − P1: lower error in 2/3 regions (n = 40) | 2/3 regions at n = 160, aux."
+P1star,"R1 − P1* (edaphic re-fit, L29): undecided at n = 40 and 160"
+SC3w,"SC3w stopping rule 3 → 10 → 40 labels (τ = 0.05): rule inactive, label ratio 0.91"
+L43,"L43 placement (block-spread vs cell-random, n = 10 and 40): no placement effect established"

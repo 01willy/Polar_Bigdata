@@ -1,0 +1,3 @@
+figure,key,n,ab,verdict4_bundle,verdict_bundle,rule,abstract_rule,holm_p,holm_p_eq,delta_bundle,verdict4_figure_source,delta_figure_source,verdict_agree
+fig4b,R1-P1,10,AB5,우세,superior,b,"(b) 초록은 '차이를 확인하지 못했다', 본문에 '보정 전 유의'",0.136,0.3303,-0.1777870560166963,우세,-0.1777870560166956,True
+fig4b,R1-P1,-1,AB9,우세,superior,a,(a) 방향을 쓴다,0.001,1.0,-0.4041075519834659,우세,-0.4041075519834661,True

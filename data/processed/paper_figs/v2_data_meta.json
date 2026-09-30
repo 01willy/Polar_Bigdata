@@ -1,6 +1,6 @@
 {
  "module": "scripts/4_visualization/paper/v2_data.py",
- "created": "2026-09-30T13:44:42",
+ "created": "2026-09-30T14:30:18",
  "inputs": [
   {
    "path": "results/rescale_lg/data/processed/lg/lg_curve.csv",
@@ -41,9 +41,86 @@
   {
    "path": "data/processed/paper_figs/n1_target_summary.csv",
    "sha256": "f2198ebf4af85e9f98c421e8e3faf96e9698d773cfe504dfc686d755fbb89069"
+  },
+  {
+   "path": "data/processed/lgw/lgw_bundle.csv",
+   "sha256": "eda4ccac9915ccef957ed07021e23a12b1aa49ab92b14107b68bc4346c17ea4f"
+  },
+  {
+   "path": "data/processed/lgw/lgw_tests.csv",
+   "sha256": "0cab63ae6a128a032ff358356ebccab212d4dca44dff3956a8afbcc4696a37fb"
+  },
+  {
+   "path": "data/processed/lgw/lgw_scenarios.csv",
+   "sha256": "d9a6e15d23facd339d96acbff451ffd761702e1d09a7fac8c4b845adeff830ea"
+  },
+  {
+   "path": "data/processed/lgw/lgw_scenarios_summary.csv",
+   "sha256": "7791ff98e94ddbe1577e3909632b118cce6d10cd1dc904078d9a97b431d9a967"
+  },
+  {
+   "path": "data/processed/lgw/lgw_sc3.csv",
+   "sha256": "215e59402b624ce06e82bd6ebd89faee88e630e5f8c90954bb662e8eecca49ab"
+  },
+  {
+   "path": "data/processed/lgw/lgw_l43.csv",
+   "sha256": "28be062bad7b1fc140a8f7d786bdf19b7b9ac1e2ab30de9a5d60544d86182320"
+  },
+  {
+   "path": "data/processed/lgw/lgw_aux4.csv",
+   "sha256": "d83b9a26c246baca290d2424dc1138397679ec3a13d8fb404fe3eaa6a9f44b68"
+  },
+  {
+   "path": "data/processed/lgw/lgw_splitratio.csv",
+   "sha256": "b4395c08a901734ed661a1cc515d541714a2043f43d227936e7ad3bc3235feb8"
+  },
+  {
+   "path": "data/processed/lgw/lgw_label_units.csv",
+   "sha256": "1091ed8e93e548e32379dd22a308024569f26ff2740b83f0155e17659ee87518"
+  },
+  {
+   "path": "data/processed/lgx/lgx_distance.csv",
+   "sha256": "84541aee76e2fbcfc94e830ec805d932cc931d454b2a5b46f15e61a6334c54d1"
+  },
+  {
+   "path": "data/processed/lgu/lgu_a_tests.csv",
+   "sha256": "674e6f4ba3413b59de70d2f8483f01c71aa8c8655efc01e2395bfd22768c3597"
+  },
+  {
+   "path": "data/processed/lgd/lgd_eligibility_lic.csv",
+   "sha256": "69bab2db311c0ef42d88cac15318395a5f4a96d3e6a51112dc6ff8687d139e16"
+  },
+  {
+   "path": "data/processed/lgd_eligibility_v1.csv",
+   "sha256": "5b23a9a8d7bc79eb663605a142a58e7d1ed6a5fa1555f436e007611c155f364b"
+  },
+  {
+   "path": "data/processed/fidelity_base_v3.csv",
+   "sha256": "71b5d3f6c297770d41aa7215e906e737842a3594005a5b52952bb636c752dc0f"
+  },
+  {
+   "path": "data/processed/fidelity_base_v4.csv",
+   "sha256": "4c387b2b4fb43ef602d9e0b8fe50054a6699428d5a593425b3d309e798fce52a"
+  },
+  {
+   "path": "data/processed/fidelity_base_v4_labels.csv",
+   "sha256": "9f5af274f4b835045d90e202e35ebdc872e54e0affba218835735a43a87b2247"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/lg_targets.csv",
+   "sha256": "194a5b70b3fec950c680d121da6b7a2ab64d4f09d8b3f8c660c40a2c5f93df4d"
   }
  ],
  "outputs": [
+  "ab_bundle.csv",
+  "ab_bundle_regions.csv",
+  "ab_cells.csv",
+  "fig1_blocks.csv",
+  "fig1_meta.csv",
+  "fig1_not_drawn.csv",
+  "fig1_source.csv",
+  "fig1_z_points.csv",
+  "fig1_z_summary.csv",
   "fig2_L1_region.csv",
   "fig2_p1star_pool.csv",
   "fig2_p1star_region.csv",
@@ -56,8 +133,11 @@
   "fig3_L31.csv",
   "fig3_a.csv",
   "fig3_b.csv",
+  "fig3_b_L10_alln.csv",
+  "fig3_b_L10_mean3.csv",
   "fig3_c.csv",
   "fig3_c_floor.csv",
+  "fig3_c_sdse.csv",
   "fig3_c_splits.csv",
   "fig3_d.csv",
   "fig3_d_p1star.csv",
@@ -66,8 +146,27 @@
   "fig4_b_p1star.csv",
   "fig4_b_verdicts.csv",
   "fig4_c.csv",
+  "fig4_c_aux4.csv",
   "fig4_c_verdict.csv",
-  "fig4_d.csv"
+  "fig4_d.csv",
+  "fig5_a.csv",
+  "fig5_a_blocks.csv",
+  "fig5_a_verdict.csv",
+  "fig5_b.csv",
+  "fig5_b_verdict.csv",
+  "fig5_c.csv",
+  "fig5_c_verdict.csv",
+  "fig5_d.csv",
+  "fig7_b.csv",
+  "fig7_b_summary.csv",
+  "fig7_c.csv",
+  "fig7_d.csv",
+  "fig7_d_ab10.csv",
+  "fig7_d_regions.csv",
+  "fig7_delta_rel.csv",
+  "fig7_tests.csv",
+  "table1_expanded.csv",
+  "table1_rows.csv"
  ],
  "checks": {
   "fig2_lgx_vs_lg_P1_max_abs_diff_cm": 4.3021142204224816e-15,
@@ -75,7 +174,51 @@
   "fig2_additivity_R1_P1ed_n40_cm": 1.1102230246251565e-15,
   "fig2_additivity_R1_P1ed_n160_cm": 1.5543122344752192e-15,
   "fig3c_L8_lg_tests_vs_lgx_lg_aux_max_abs_diff_cm": 0.0,
-  "fig4b_pool_vs_lgx_lg_aux_L4_n10_ci_lo_abs_diff": 6.661338147750939e-16
+  "fig4b_pool_vs_lgx_lg_aux_L4_n10_ci_lo_abs_diff": 6.661338147750939e-16,
+  "info_ab_cells_verdict_disagreements": [],
+  "fig3d_AB4_vs_pool_E1_P1_n10_abs_diff_cm": 0.0,
+  "fig3c_AB8_vs_L8_mean_abs_diff_cm": 3.1086244689504383e-15,
+  "fig3c_AB9_vs_L4_all_mean_abs_diff_cm": 2.220446049250313e-16,
+  "fig3b_L10_registered_rows_eq4": true,
+  "fig3b_L10_part1_vs_part2_max_abs_diff_cm": 0.0,
+  "info_fig3c_sdse_main_switch_any": false,
+  "info_fig5_L43_mean_rows": 4,
+  "info_fig5_L24_rows": 16,
+  "fig7_AB10_bundle_vs_lgu_delta_abs_diff": 0.0,
+  "fig7_AB10_verdict_agree": true,
+  "info_fig7_delta_rel_all_same": true,
+  "fig7_SC1w_cells_vs_stat_mismatch": [],
+  "fig1_loc1km_v3_mismatch": {},
+  "info_fig1_natlantic_eligible_in_lic_edition": false,
+  "info_fig1_not_drawn_licence_cells": {
+   "Canada": 38,
+   "NAtlantic": 19,
+   "Russia_W": 1
+  },
+  "fig1_E0_unique_Lena": true,
+  "fig1_E0_unique_Canada": true,
+  "fig1_E0_unique_Russia_W": true,
+  "fig1_E0_unique_Russia_E": true,
+  "fig1_E0_unique_Russia_C": true,
+  "fig1_E0_unique_Greenland": true,
+  "fig1_E0_unique_Alaska": true,
+  "fig1_E0_unique_Russia_C_LGD": true,
+  "fig1_lgd_cells_Russia_C_LGD_vs_unit": true,
+  "fig1_E0_unique_Tibet_LGD": true,
+  "fig1_lgd_cells_Tibet_LGD_vs_unit": true,
+  "fig1_source_vs_M3_all_match": true,
+  "fig1_source_vs_lg_targets_all_match": true,
+  "info_fig1_alaska_share_main4_pct": [
+   78.0,
+   94.3
+  ],
+  "table1_n_targets_eq27": true,
+  "table1_Russia_C_LGD_cells_vs_eligibility": true,
+  "table1_Tibet_LGD_cells_vs_eligibility": true,
+  "info_table1_natl_lic_cells": [
+   22,
+   19
+  ]
  },
  "checks_failed": {},
  "rules": {
@@ -86,6 +229,6 @@
    "lgx": 10000,
    "pool_fixed_curve": 10000
   },
-  "not_opened": "lgd_*, lgt_*, lgf_*, lgfn_*, lgw_*(판정 기록 순서)"
+  "not_opened": "lgt_*, lgf_*, lgfn_*(LGF 창 마감 전). lgw_*·lgd_* 는 판정 기록(J5, J7) 뒤 2부에서 연다"
  }
 }

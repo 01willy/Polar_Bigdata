@@ -1,0 +1,48 @@
+{
+ "width_mm": 180.0,
+ "height_mm": 161.1,
+ "min_font_pt": 6.5,
+ "clipped": [],
+ "overlaps": [],
+ "n_text_overlaps": 0,
+ "has_title_in_axes": false,
+ "delta_axes_have_zero": true,
+ "n_delta_axes": 0,
+ "n_legends": 0,
+ "fonts": [
+  "BGZIHO+LiberationSans-Bold|CID TrueType|yes",
+  "BGZIHO+LiberationSans|CID TrueType|yes",
+  "HEMWJP+LiberationSans-Italic|CID TrueType|yes"
+ ],
+ "fonts_ok": true,
+ "unicode_minus_ok": true,
+ "caption_words": {
+  "definition": 35,
+  "statistics": 3,
+  "panels": 26,
+  "data": 20,
+  "total": 84
+ },
+ "caption_problems": [],
+ "fails": [],
+ "ok": true,
+ "svg_text_elements": 268,
+ "svg_glyph_defs": 0,
+ "svg_text_ok": true,
+ "png_dpi": 599.9988,
+ "name": "Table1_data",
+ "version": "v2",
+ "time": "2026-09-30T14:30:58",
+ "paths": {
+  "width_mm": 180.0,
+  "height_mm": 161.1,
+  "pdf": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Table1_data.pdf",
+  "svg": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Table1_data.svg",
+  "png": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Table1_data.png"
+ },
+ "source_data": [
+  "outputs/figures/paper/source_data/v2/Table1_rows.csv",
+  "outputs/figures/paper/source_data/v2/Table1_display.csv",
+  "outputs/figures/paper/source_data/v2/Table1_expanded.csv"
+ ]
+}

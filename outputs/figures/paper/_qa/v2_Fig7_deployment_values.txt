@@ -1,0 +1,36 @@
+OK  d AB1 delta: figure 2.245922 | source 2.245922
+OK  d AB1 ci_hi: figure 3.421232 | source 3.421232
+OK  d AB1 verdict4: figure 열세 | source 열세
+OK  d AB4 delta: figure -2.454509 | source -2.454509
+OK  d AB4 ci_hi: figure -1.883111 | source -1.883111
+OK  d AB4 verdict4: figure 우세 | source 우세
+OK  d AB5 delta: figure -0.177787 | source -0.177787
+OK  d AB5 ci_hi: figure -0.014938 | source -0.014938
+OK  d AB5 verdict4: figure 우세 | source 우세
+OK  d AB6 delta: figure -0.130848 | source -0.130848
+OK  d AB6 ci_hi: figure 0.223169 | source 0.223169
+OK  d AB6 verdict4: figure 동등 | source 동등
+OK  d AB8 delta: figure -2.635748 | source -2.635748
+OK  d AB8 ci_hi: figure -1.849822 | source -1.849822
+OK  d AB8 verdict4: figure 우세 | source 우세
+OK  d AB9 delta: figure -0.404108 | source -0.404108
+OK  d AB9 ci_hi: figure -0.221612 | source -0.221612
+OK  d AB9 verdict4: figure 우세 | source 우세
+OK  d AB5 holm_p: figure 0.136000 | source 0.136000
+OK  d AB10 delta (cm): figure 9.510333 | source 9.510333
+OK  d AB10 ci_lo (cm): figure -0.752906 | source -0.752906
+OK  d AB10 ci_hi (cm): figure 22.112485 | source 22.112485
+OK  d AB10 nboot: figure 1000 | source 1000
+OK  b T10 P1-P0 Canada|x delta: figure 2.260737 | source 2.260737
+OK  b T10 P1-P0 Canada|x noninf: figure False | source False
+OK  b T3 R1-P0 Russia_W|x delta: figure -4.904347 | source -4.904347
+OK  b T3 R1-P0 Russia_W|x noninf: figure True | source True
+OK  b T40 R1-P1 Lena|x delta: figure -0.133680 | source -0.133680
+OK  b T40 R1-P1 Lena|x noninf: figure True | source True
+OK  c tau 0.05 label_ratio: figure 0.909083 | source 0.909083
+OK  c tau 0.05 delta: figure -0.048370 | source -0.048370
+OK  c tau 0.2 label_ratio: figure 0.184667 | source 0.184667
+OK  c tau 0.2 delta: figure -0.676791 | source -0.676791
+OK  a SC1w text has 4/10: figure True | source True
+OK  a SC3w text has 0.91: figure True | source True
+OK  a SC1w-P text has +0.97 and +2.26: figure True | source True

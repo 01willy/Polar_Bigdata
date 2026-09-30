@@ -1,0 +1,31 @@
+OK  Fig3b L10 R1-F1k|n40 delta: figure 2.377200 | source 2.377200
+OK  Fig3b L10 R1-F1k|n40 verdict: figure 열세 | source 열세
+OK  Fig3b L10 R1-F1k|n40 registered: figure false | source false
+OK  Fig3b L10 R1-F1n|n160 delta: figure 1.980894 | source 1.980894
+OK  Fig3b L10 R1-F1n|n160 verdict: figure 열세 | source 열세
+OK  Fig3b L10 R1-F1n|n160 registered: figure false | source false
+OK  Fig3b L10 R0-F1k|n0 delta: figure -2.720631 | source -2.720631
+OK  Fig3b L10 R0-F1k|n0 verdict: figure 우세 | source 우세
+OK  Fig3b L10 R0-F1k|n0 registered: figure true | source true
+OK  Fig3b L10 R1-F1n|n-1 delta: figure -0.774634 | source -0.774634
+OK  Fig3b L10 R1-F1n|n-1 verdict: figure 미결정 | source 미결정
+OK  Fig3b L10 R1-F1n|n-1 registered: figure false | source false
+OK  Fig3c R/R0 Russia_E|x R1-P0|all: figure 2.210156 | source 2.210156
+OK  Fig3c flag Russia_E|x R1-P0|all: figure SD/SE 비 과대(R/R0 > 1.5) | source SD/SE 비 과대(R/R0 > 1.5)
+OK  Fig3c R/R0 Canada|x R1-P1|all: figure 1.877968 | source 1.877968
+OK  Fig3c flag Canada|x R1-P1|all: figure SD/SE 비 과대(R/R0 > 1.5) | source SD/SE 비 과대(R/R0 > 1.5)
+OK  Fig3c R/R0 Lena|x R1-P0|all: figure 1.064420 | source 1.064420
+OK  Fig3c flag Lena|x R1-P0|all: figure nan | source nan
+OK  Fig4c L3aux Canada|x R0@nested-P0|n10: figure -0.509061 | source -0.509061
+OK  Fig4c L3aux Canada|x verdict: figure 우세 | source 우세
+OK  Fig4c L3aux AL-2|i R0@nested-R0@a1|n10: figure -0.409130 | source -0.409130
+OK  Fig4c L3aux AL-2|i verdict: figure 우세 | source 우세
+OK  Fig4c L3aux AL-5|i R0@nested-R0@a1|n10: figure 0.528208 | source 0.528208
+OK  Fig4c L3aux AL-5|i verdict: figure 열세 | source 열세
+OK  Fig3 tag AB3 verdict vs lgw_bundle: figure 우세 | source 우세
+OK  Fig3 tag AB7 verdict vs lgw_bundle: figure 우세 | source 우세
+OK  Fig3 tag AB8 verdict vs lgw_bundle: figure 우세 | source 우세
+OK  Fig3 tag AB9 verdict vs lgw_bundle: figure 우세 | source 우세
+OK  Fig3 tag AB4 verdict vs lgw_bundle: figure 우세 | source 우세
+OK  Fig4 tag AB5 verdict vs lgw_bundle: figure 우세 | source 우세
+OK  Fig4 tag AB9 verdict vs lgw_bundle: figure 우세 | source 우세

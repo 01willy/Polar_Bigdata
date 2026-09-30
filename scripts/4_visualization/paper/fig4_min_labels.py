@@ -15,7 +15,6 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import numpy as np                                                       # noqa: E402
-import pandas as pd                                                      # noqa: E402
 import matplotlib                                                        # noqa: E402
 from matplotlib.lines import Line2D                                      # noqa: E402
 from matplotlib.patches import Rectangle                                 # noqa: E402
@@ -34,7 +33,7 @@ ALPHA_ST = {"alpha1": dict(marker="o", mfc="#b0b0b0", mec="#000000", label="L3: 
             "nested": dict(marker="D", mfc="#4d4d4d", mec="#000000", label="L3: nested α", dy=-0.22)}
 FILL = [  # (열, 표시 이름, 면 색, 빗금)
     ("n_superior", "Lower error", "#1a1a1a", None),
-    ("n_equivalent", "Equivalent", "#ececec", None),
+    ("n_equivalent", "Equivalent", "#ececec", "...."),
     ("n_undecided", "Undecided", "#bdbdbd", None),
     ("n_inferior", "Higher error", "white", "//////"),
     ("n_na", "Not determinable", "white", "xxxx"),
@@ -133,9 +132,19 @@ def panel_b(fig, rect, strip_rect):
     st = ps.axes_mm(fig, *strip_rect)
     cols = [3, 10, 40, 160, 320, 1000, N_ALL]
     cells = {(r.row, int(r.n)): (r.verdict, bool(r.small_effect)) for r in VB.itertuples()}
+    for n in (3, 320, 1000):                                          # P1* 는 n ∈ {10, 40, 160, all} 에서만 정했다(LG 7.1a 보충)
+        cells.setdefault(("R1-P1*", n), ("not computed", False))
     pools = {int(r.n): V.pool_code(r.pool) for r in VB.itertuples() if V.pool_code(r.pool)}
     V.verdict_table(st, ["R1-P1", "R1-P1*"], cols, cells, ["R1 − P1  (L4)", "R1 − P1*  (L29)"], [""] * len(cols),
                     sub_labels=[pools.get(c_, "") for c_ in cols], col_x=[NPOS[c_] for c_ in cols], xlim=ax.get_xlim(), sub_title="pool")
+    ABc = V.rd("ab_cells")
+    for r in ABc[ABc.figure == "fig4b"].itertuples():                    # AB5(n 10), AB9(전량): P4 점 위(E1 = 실선 계열)
+        q = B[(B.n == int(r.n)) & (B.edition.str.startswith("E1") if int(r.n) != N_ALL else B.edition.str.startswith("P4_all"))]
+        y = float(q.ci_hi.iloc[0])
+        if int(r.n) == N_ALL:
+            V.ab_tag(ax, NPOS[int(r.n)] - 0.09, float(q.delta.iloc[0]), r.ab, dx_pt=-5.0, dy_pt=0.0, ha="right")
+        else:
+            V.ab_tag(ax, NPOS[int(r.n)] - 0.09, y, r.ab, dx_pt=0.0, dy_pt=5.0, ha="center")
     st.set_gid("verdict_table")
     return ax, B, PS1, VB
 
@@ -164,7 +173,26 @@ def panel_c(fig, rect):
     ax.tick_params(axis="y", length=0, pad=2)
     ax.spines["left"].set_visible(False)
     _nstar_axis(ax, xlabel="n* of R0 (L3)")
+    ax.tick_params(axis="x", labelsize=ps.MIN_FONT_PT)
     return ax, Cq
+
+
+def panel_c_aux(fig, rect):
+    """c 오른쪽: L3 4분 보조(lgw_aux4). 열 = (R0@nested − R0@α1, R0@nested − P0) × n ∈ {10, 40}."""
+    X = V.rd("fig4_c_aux4")
+    tg = [("Lena", "x"), ("Canada", "x"), ("AL-2", "i"), ("AL-5", "i")]
+    cols = [("nested − α1", 10), ("nested − α1", 40), ("nested − P0", 10), ("nested − P0", 40)]
+    cells = {}
+    for r in X.itertuples():
+        cells[(r.target, (r.kind, int(r.n)))] = (r.verdict, bool(r.small_effect))
+    ax = ps.axes_mm(fig, *rect)
+    rows = [f"{t}|{m}" for t, m in tg]
+    V.verdict_table(ax, rows, cols, cells, [""] * len(rows), ["vs α1", "", "vs P0", ""], sub_labels=["10", "40", "10", "40"],
+                    col_x=[0, 1, 2.2, 3.2], xlim=(-0.55, 3.75), sub_title="n")
+    ax.set_yticklabels([])
+    ax.axvline(1.6, color=ps.GREY["light"], lw=0.5)
+    ax.set_gid("verdict_table_L3aux")
+    return ax, X
 
 
 def panel_d(fig, x0s, y_rows, w, h):
@@ -225,13 +253,18 @@ def build(draft: bool = False):
     fig = ps.paper_figure(W, H)
     ax_a, A = panel_a(fig, (30.0, 66.0, 54.0, 94.0))
     ax_b, B, PS1, VB = panel_b(fig, (106.0, 128.0, 70.0, 32.0), (106.0, 105.5, 70.0, 9.5))
-    V.verdict_key_grid(fig, (96.0, 90.5, 83.0, 10.0), ncol=3, col_w=[0.36, 0.33, 0.31])
-    ax_c, Cq = panel_c(fig, (118.0, 66.0, 58.0, 18.0))
+    ABc = V.rd("ab_cells")
+    ABc = ABc[ABc.figure == "fig4b"]
+    ab_items = [(r.ab, V.AB_RULE_TEXT[r.rule]) for r in ABc.drop_duplicates("ab").itertuples()]
+    V.verdict_key_grid(fig, (96.0, 90.6, 83.0, 13.5), ncol=2, col_w=[0.42, 0.58],
+                       extra=[("n.c.", "P1* not computed at this n")] + ab_items, text_dx_mm=5.5)
+    ax_c, Cq = panel_c(fig, (116.0, 64.0, 43.0, 18.0))
+    ax_c2, X3 = panel_c_aux(fig, (161.5, 64.0, 17.0, 24.0))
     axd, D = panel_d(fig, [22.0, 75.0, 128.0], [31.0, 11.0], 48.0, 14.0)
     _fill_key(fig, (22.0, 51.5, 154.0, 4.0))
     ps.panel_label(ax_a, "a", dx_mm=-28.0, dy_mm=1.2)
     ps.panel_label(ax_b, "b", dx_mm=-13.0, dy_mm=1.2)
-    ps.panel_label(ax_c, "c", dx_mm=-25.0, dy_mm=1.2)
+    ps.panel_label(ax_c, "c", dx_mm=-25.0, dy_mm=3.0)
     ps.panel_label(axd[0], "d", dx_mm=-20.0, dy_mm=5.0)
     handles = [Line2D([], [], color=ps.COLOR[mc], lw=0.9, marker=mk, ms=ps.MS["main"] + 0.3, mfc=ps.COLOR[mc], mec=ps.COLOR[mc], label=lab)
                for mc, mk, _, lab in SER.values()]
@@ -257,13 +290,15 @@ def build(draft: bool = False):
                 "(L4, registered verdict: net value of ML at sparse labels, minimum n = 10 for the four-region mean) and R1 − P1* at "
                 "n = 40 and 160, where P1* (edaphic Stefan re-fit) outperformed P1 (L29); the pool row gives the regions behind each "
                 "verdict. c, L3 targets, R0 with α = 1 versus nested α (registered verdict: supported; nested α reduced n* for no "
-                "target). d, number of targets per verdict at each n; sub-regions are counted, not averaged."),
+                "target). Right of c, L3 auxiliary four-way verdicts (R0 with nested α against α = 1 and against P0, n = 10 and 40). "
+                "d, number of targets per verdict at each n; sub-regions are counted, not averaged. AB5 and AB9 are abstract "
+                "contrasts (Holm over ten); n.c., P1* not determined at that n."),
         data=("LG and LGX runs on the Rescale platform; LGX tables and the pooled curves are local re-aggregations of the same shards "
               "(cross-environment check not performed). The n = 80 grid point (C12) was not run."),
     )
-    src = dict(a=A, b=B, b_p1star=PS1, b_verdicts=VB, c=Cq, d=D)
+    src = dict(a=A, b=B, b_p1star=PS1, b_verdicts=VB, c=Cq, c_L3aux=X3, d=D, ab_tags=ABc)
     spec_extra = dict(module="fig4_min_labels.py", panels=4, message="n* reported as intervals; R1 − P1* undecided at n = 40, 160",
-                      pending=["AB5, AB9 markers (lgw_bundle not opened)", "L3 four-way auxiliary column (lgw_aux4 not opened)"])
+                      part2="AB5, AB9 tags; L3 four-way auxiliary grid (lgw_aux4); n.c. where P1* was not computed")
     return V.save_v2(fig, NAME, cap, SPEC_ID, src, title="Minimum number of target labels and the distribution of improvement and "
                      "deterioration across targets.", spec_extra=spec_extra)
 

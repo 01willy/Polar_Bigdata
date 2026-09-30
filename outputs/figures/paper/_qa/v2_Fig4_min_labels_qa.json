@@ -18,20 +18,20 @@
  "caption_words": {
   "definition": 74,
   "statistics": 63,
-  "panels": 98,
+  "panels": 135,
   "data": 34,
-  "total": 269
+  "total": 306
  },
  "caption_problems": [],
  "fails": [],
  "ok": true,
- "svg_text_elements": 138,
+ "svg_text_elements": 158,
  "svg_glyph_defs": 0,
  "svg_text_ok": true,
  "png_dpi": 599.9988,
  "name": "Fig4_min_labels",
  "version": "v2",
- "time": "2026-09-30T13:44:55",
+ "time": "2026-09-30T14:48:06",
  "paths": {
   "width_mm": 180.0,
   "height_mm": 180.0,
@@ -45,6 +45,8 @@
   "outputs/figures/paper/source_data/v2/Fig4_b_p1star.csv",
   "outputs/figures/paper/source_data/v2/Fig4_b_verdicts.csv",
   "outputs/figures/paper/source_data/v2/Fig4_c.csv",
-  "outputs/figures/paper/source_data/v2/Fig4_d.csv"
+  "outputs/figures/paper/source_data/v2/Fig4_c_L3aux.csv",
+  "outputs/figures/paper/source_data/v2/Fig4_d.csv",
+  "outputs/figures/paper/source_data/v2/Fig4_ab_tags.csv"
  ]
 }
