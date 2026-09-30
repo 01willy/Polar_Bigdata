@@ -1,0 +1,5 @@
+# 교차 환경 점검 (iii) 재적합 큐. LGXL_MODE=xenv, LGXL_OUT=data/processed/lgw/xenv/lgx_gpu_<회차> 로 두 번 돈다.
+# 대상은 Rescale(Qjpbeb)에서 끝난 FT-T 조각이다. 대조는 scripts/2_evaluation/lgw_xenv_gate_iii.py.
+nn Russia_W:x ftt --splits 1
+r0 Russia_W:x ftt --splits 1
+g45 AL-2:x ftt

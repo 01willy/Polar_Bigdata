@@ -1341,7 +1341,7 @@ def bundle_table(tms_lg, tms_lgx, nboot, h42_tables=None, ab10=None):
         mr = dict(ab="AB10", hypothesis="LGU-A1", contrast="구간 점수(α 0.1) 단 (iii) − B4 | n10", source=f"lgu:{ab10['file']}", scope="MEAN",
                   target="MEAN[레나,캐나다,Alaska(x)]", p_cell=ab10["p_cell"], p_beq=ab10["p_beq"], p_two=max(ab10["p_cell"], ab10["p_beq"]),
                   p_eq=ab10["p_eq"], verdict4=ab10["verdict4"] or "판정 불가", delta=ab10["delta"], pool="지역 3/3",
-                  note="p 분해능 5e-4(2,000회)")
+                  note="p 분해능 1e-3(1,000회)")
     rows.append(mr); mean_rows["AB10"] = mr
     order = [f"AB{i}" for i in range(1, 11)]
 
