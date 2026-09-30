@@ -1,0 +1,4 @@
+OK  c R1-P0 P4 mean vs lg_tests L8 MEAN4: figure -2.635748 | source -2.635748
+OK  c R1-P0 3-region mean vs 7.1a text (+0.77): figure 0.770000 | source 0.770000
+OK  b R0-F1k n0 vs 7.2 text (−2.72): figure -2.720000 | source -2.720000
+OK  a const_src n0 vs 7.2 text (−3.63): figure -3.630000 | source -3.630000

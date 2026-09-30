@@ -1,0 +1,5 @@
+OK  a Lena R1 all d_p0 vs lg_tests L8 Lena: figure -0.779576 | source -0.779576
+OK  d Russia E D0 n0 vs lg_tests L1: figure 4.475759 | source 4.475759
+OK  e R1 n10 vs lg_tests L4? (R1-P0 not registered) -> lg_curve mean of 4 regions: figure -2.632297 | source -2.632297
+OK  table R1-P* all delta vs lgx_tests: figure -1.638900 | source -1.638900
+OK  e P* line vs lgx_tests P0@tddm-P0|n0 MEAN: figure -0.996848 | source -0.996848

@@ -1,0 +1,2 @@
+verdict,note
+지역 의존,"지역 수준 검정(부호, 순열, 임의효과)은 판정에 쓰지 않는다. lgx_region_inference.csv 참조. 캐나다는 재현(비맹검)"

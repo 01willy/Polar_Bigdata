@@ -52,9 +52,11 @@
       "lgw": "data/processed/lgw(h39, h49_map_contrasts)",
       "map": "data/processed/map_lena(WRAPUP 6.10 의 data/processed/map 대신, 코드 기본값)",
       "paper_derived": "data/processed/paper(신규, 그림 전용 파생 집계. derived_modules)",
-      "c12": "data/processed/lg_n80_local(조건부)"
+      "c12": "data/processed/lg_n80_local(조건부)",
+      "paper_figs": "data/processed/paper_figs(F3 v2 그림의 파생 표. 작업 지시 경로. pool_fixed_curve·n1_target_summary 산출도 여기에 둔다)"
     },
-    "registry_note": "figures[] 는 그림 모듈(_common.update_figure_spec, m1_figs.py)이 id 로 갱신하는 생성 기록이다. 계획 블록(spec_meta–superseded)은 모듈이 건드리지 않는다. 새 본문 항목의 figures[] 기록은 F3 에서 spec_id 로 생긴다"
+    "registry_note": "figures[] 는 그림 모듈(_common.update_figure_spec, m1_figs.py)이 id 로 갱신하는 생성 기록이다. 계획 블록(spec_meta–superseded)은 모듈이 건드리지 않는다. 새 본문 항목의 figures[] 기록은 F3 에서 spec_id 로 생긴다",
+    "f3_part1": "2026-09-30: Fig 2–4 v2 구현. display_items 의 f3_v2 블록이 실제 원천 열과 P* 규칙 반영을 적는다"
   },
   "display_items": [
     {
@@ -190,7 +192,7 @@
     {
       "item": "Fig 2",
       "spec_id": "paper_fig2_label_curve",
-      "file_stem": "outputs/figures/paper/Fig2_label_curve",
+      "file_stem": "outputs/figures/paper/v2/Fig2_label_curve",
       "module": "scripts/4_visualization/paper/fig2.py(재작성, F3)",
       "title_ko": "라벨 수 곡선 Δ(n)",
       "caption_first_en": "Error change with the number of target labels, relative to the source-coefficient Stefan model.",
@@ -337,12 +339,86 @@
         "C7(lgw_bundle)",
         "신규 모듈 pool_fixed_curve"
       ],
-      "status": "모듈 재작성 대기(F3)"
+      "status": "F3 1부 구현(2026-09-30). v2 산출. AB6 표지 미반영(lgw_bundle 미열람). 조건부 곡선 추가: L10·L30 불성립, L34(a)·LGF-F1·LGF-N1 은 표 미열람으로 미평가",
+      "f3_v2": {
+        "data_module": "scripts/4_visualization/paper/v2_data.py(원천 표 → data/processed/paper_figs/*.csv, 판정 기호는 원천 표 열을 그대로 옮긴다)",
+        "style_module": "scripts/4_visualization/paper/v2_style.py(paperstyle·_common 재사용, 범주 n 축, 4분 판정 기호, 저장·QA·캡션)",
+        "derived_dir": "data/processed/paper_figs(작업 지시의 경로. path_rules.paper_derived 의 data/processed/paper 대신 쓴다)",
+        "platform": "LG·LGX 값은 모두 Rescale 조각(LG 작업 ZovWo, LGX 조각 4,451개)에서 나왔다. lgx_lg_aux 와 lgx_tests 는 같은 조각을 로컬에서 다시 집계한 표(h42 --summarize-only)이며 lgx_lg_aux 파생 열에는 '교차 환경 미확인' 표지를 캡션에 적는다",
+        "pending": "lgw_bundle(AB 표지)·lgw_aux4·lgw_splitratio 는 h39 산출이고 판정 기록 순서가 정해져 있어 열지 않았다. 해당 표지는 그림에 'pending' 으로 두지 않고 그리지 않으며 캡션과 spec 에 미반영으로 적는다",
+        "exports": "outputs/figures/paper/v2/<이름>.{pdf,svg,png(600 dpi)}, source_data/v2/<Fig>_<패널>.csv, _qa/v2_<이름>_qa.json, CAPTIONS.md 의 v2 절",
+        "module": "scripts/4_visualization/paper/fig2_label_curve.py",
+        "file_stem": "outputs/figures/paper/v2/Fig2_label_curve",
+        "panels": {
+          "a–d": {
+            "curves": "results/rescale_lg/data/processed/lg/lg_curve.csv: target ∈ {Lena, Canada, Russia_W, Russia_E}, mode 'x', method ∈ {P1, R0, R1, R2, D0}, learner ∈ {catboost_lo, none}, alpha '1', placement 'cell', 기준 λ. 열 n, n_lab, d_p0, d_p0_lo, d_p0_hi(셀 가중 1,000회), d_p0_beq, point_only, n_splits_used",
+            "P*_line": "data/processed/lgx/lgx_curve.csv: method 'P0@tddm', n 0, mode 'x'. 열 d_p0(지역 값, 가로 점선)",
+            "P1*_markers": "data/processed/lgx/lgx_curve.csv: method 'P1@ed', learner 'none', alpha '1', placement 'cell', n ∈ {40, 160}(레나·캐나다). 열 d_p0, d_p0_lo, d_p0_hi. 빈 사각형(그림 안 빈 마커의 유일한 의미)"
+          },
+          "e": {
+            "curves": "data/processed/paper_figs/pool_fixed_curve.csv: edition 'E1_P4_n_le_10', baseline 'P0', scope 'MEAN', method ∈ {P1, R0, R1, R2, D0}. 열 n, delta, ci_lo, ci_hi(셀 가중 10,000회), status, composition_complete",
+            "P*_line": "data/processed/lgx/lgx_tests.csv: test_id 'L29', contrast 'P0@tddm-P0|n0', scope 'MEAN'. 열 delta"
+          },
+          "f": {
+            "curves": "pool_fixed_curve.csv: edition 'E2_LenaCanada_all_n', baseline 'P0', scope 'MEAN'",
+            "P*_line": "lgx_curve.csv 레나·캐나다 P0@tddm d_p0 의 평균(점 추정. 층화 평균 점 추정 = 지역 값의 등가중 평균이며 L8·L29 MEAN 행으로 대조)",
+            "P1*_markers": "lgx_curve.csv 레나·캐나다 P1@ed d_p0(n 40, 160)의 평균(점 추정, CI 없음). 대조: (R1 − P0) − (P1@ed − P0) = lgx_tests 'R1-P1@ed|n40', '|n160' 의 delta"
+          },
+          "verdict_matrix": {
+            "place": "f 오른쪽 기호 표(행 = 대비, 열 = n, 열 머리에 풀 구성 P4 또는 L+C)",
+            "rows": [
+              "R1 − P1 (L4): lgx_lg_aux.csv test_id 'L4', scope 'MEAN'. 열 verdict4, small_note, pool",
+              "R1 − P1* (L29 보조): lgx_tests.csv contrast 'R1-P1@ed|n40', 'R1-P1@ed|n160', scope 'MEAN'. 열 verdict4. n 10·전량은 P1* = P1(7.1a)이라 'P1' 글자",
+              "R2 − R1 (L2): lgx_lg_aux.csv contrast 'R2-R1|n10', '|n40', '|n160', scope 'MEAN'",
+              "R1 − P0 (L8): lgx_lg_aux.csv contrast 'R1-P0|all', scope 'MEAN'",
+              "R1 − P* (L29 보조): lgx_tests.csv contrast 'R1-P0@tddm|all', scope 'MEAN'"
+            ],
+            "registered_names": "results/rescale_lg/data/processed/lg/lg_tests.csv 의 verdict 행(scope 'verdict')은 캡션에 등록 이름으로 적는다",
+            "L1": "L1 은 지역 행만 있다(층화 평균 행 없음). 기호 표에 넣지 않고 캡션에 등록 판정과 지역 4분 판정 수를 적는다(lgx_lg_aux L1 region verdict4)"
+          }
+        },
+        "L29_pstar_change": "등록 결과(7.1a, 7.2): P* = P0@tddm(n 0), P1* = P1@ed(n 40·160). 0선은 P0 로 두고(conditional L29_pstar) P* 가로선, P1* 빈 사각형, 기호 표의 R1 − P1*·R1 − P* 행을 더했다. 범례 7항목(P1, R0, R1, R2, D0, P*, P1*)",
+        "conditional_eval": {
+          "fig2_pool_editions": "적용(E1, E2)",
+          "fig2_curve_additions": "L10: 등록 판정 '지지'(주 대비 네 개 모두 우세)라 불성립. 다만 L10 보조 행(n 40·160, 지역 2/4)에서 R1 − F1k, R1 − F1n 이 열세다(스펙 문구 'L10 에 열세가 있으면' 의 해석 문제로 보고). L30: 우세 없음(세 학습기 모두 열세), 불성립. L34(a)·LGF-F1·LGF-N1: 표 미열람, 미평가",
+          "L29_pstar": "성립(P* = P0@tddm). Fig 2 는 0선 P0 유지 + P*·P1* 병기"
+        },
+        "exports_done": [
+          "outputs/figures/paper/v2/Fig2_label_curve.pdf(git 제외, .gitignore 77행)",
+          "outputs/figures/paper/v2/Fig2_label_curve.svg",
+          "outputs/figures/paper/v2/Fig2_label_curve.png(600 dpi)",
+          "outputs/figures/paper/source_data/v2/Fig2_*.csv",
+          "outputs/figures/paper/_qa/v2_Fig2_label_curve_qa.json",
+          "outputs/figures/paper/_qa/v2_Fig2_label_curve_values.txt"
+        ],
+        "size_mm_actual": [
+          180,
+          164
+        ],
+        "qa_auto": "_common.qa_check 통과(글자 겹침 0, 잘림 0, 최소 6.5 pt, 범례 1개, Δ 축 0선, PDF 글꼴 Liberation Sans CID TrueType 내장, U+2212, SVG 글자 텍스트 유지, PNG 600 dpi, 캡션 단어 예산 안)",
+        "qa_review": {
+          "reviewers": "scientific-figure-reviewer, visual-reviewer 1회(2026-09-30 13:4x). 과장·금지 문장 위반 없음, 원천 값 불일치 없음(15개 이상 대조)",
+          "fixed": [
+            "Fig 2 a–d: D0 − P0(L1) 지역 4분 판정 기호 줄 추가(캐나다 D0 점 추정이 P0·P* 아래이나 등록 판정은 미결정)",
+            "Fig 2: 방법별 가로 도지 확대(±0.24), 기호 표를 캡션에서 f 에 묶음",
+            "Fig 3c: 러시아 W 점이 축 밖으로 보이던 문제(−15 눈금, 옅은 왼쪽 축선), 오차 하한을 빗금 대신 회색 세로 눈금 + 패널 안 설명(Fig 2 빗금과 의미 충돌 제거)",
+            "Fig 3d: 패널 문자와 c 의 분할 띠 간격 확보, E2 축의 빈 n = 1,000 눈금 제거",
+            "Fig 4a: 대상 행 묶음 음영, 격자 구간 막대 왼쪽 끝 눈금과 'not a CI' 설명",
+            "Fig 4c: 두 조건 표지 간격 확대와 덤벨 선, Fig 4d: 'Equivalent' 면을 옅은 회색으로(빈 칸과 구분)"
+          ],
+          "accepted_deviations": [
+            "바깥 여백 8 %(design/layout_rules.md)는 적용하지 않았다. 논문 그림은 paperstyle 규격(캔버스 = 180 mm, mm 절대 배치, 조판 여백은 저널)이 우선이며 가장자리 글자 간격 ≥ 1.5 mm 와 qa_check 잘림 0 으로 대신한다",
+            "글꼴 Liberation Sans(Arial 대체)는 paperstyle·export_targets 규격이다. brand_tokens 의 DejaVu Sans 는 일반 그림 규칙",
+            "Fig 3d·4d 의 하위 축은 스펙대로 한 패널 문자(d)에 묶었다"
+          ],
+          "second_round": "수정 뒤 자체 재렌더·재확인(Read). 검토 에이전트 2회차는 돌리지 않았다(qa_checklist.completion_rule 미충족, 남은 위험으로 보고)"
+        }
+      }
     },
     {
       "item": "Fig 3",
       "spec_id": "paper_fig3_physics_use",
-      "file_stem": "outputs/figures/paper/Fig3_physics_use",
+      "file_stem": "outputs/figures/paper/v2/Fig3_physics_use",
       "module": "scripts/4_visualization/paper/fig3.py(재작성, F3)",
       "title_ko": "물리 정보의 사용: 증강, 잔차 구조, 전량, 계수 부분 풀링",
       "caption_first_en": "How physics enters the learner: pseudo-label controls, combination structure, all-label effect and coefficient pooling.",
@@ -516,12 +592,70 @@
         "J2",
         "신규 모듈 pool_fixed_curve"
       ],
-      "status": "모듈 재작성 대기(F3)"
+      "status": "F3 1부 구현(2026-09-30). v2 산출. AB3·AB4·AB7·AB8·AB9 표지와 lgw_splitratio(R/R0) 미반영(h39 미열람)",
+      "f3_v2": {
+        "data_module": "scripts/4_visualization/paper/v2_data.py(원천 표 → data/processed/paper_figs/*.csv, 판정 기호는 원천 표 열을 그대로 옮긴다)",
+        "style_module": "scripts/4_visualization/paper/v2_style.py(paperstyle·_common 재사용, 범주 n 축, 4분 판정 기호, 저장·QA·캡션)",
+        "derived_dir": "data/processed/paper_figs(작업 지시의 경로. path_rules.paper_derived 의 data/processed/paper 대신 쓴다)",
+        "platform": "LG·LGX 값은 모두 Rescale 조각(LG 작업 ZovWo, LGX 조각 4,451개)에서 나왔다. lgx_lg_aux 와 lgx_tests 는 같은 조각을 로컬에서 다시 집계한 표(h42 --summarize-only)이며 lgx_lg_aux 파생 열에는 '교차 환경 미확인' 표지를 캡션에 적는다",
+        "pending": "lgw_bundle(AB 표지)·lgw_aux4·lgw_splitratio 는 h39 산출이고 판정 기록 순서가 정해져 있어 열지 않았다. 해당 표지는 그림에 'pending' 으로 두지 않고 그리지 않으며 캡션과 spec 에 미반영으로 적는다",
+        "exports": "outputs/figures/paper/v2/<이름>.{pdf,svg,png(600 dpi)}, source_data/v2/<Fig>_<패널>.csv, _qa/v2_<이름>_qa.json, CAPTIONS.md 의 v2 절",
+        "module": "scripts/4_visualization/paper/fig3_physics_use.py",
+        "file_stem": "outputs/figures/paper/v2/Fig3_physics_use",
+        "panels": {
+          "a": "lgx_tests.csv test_id 'L15', scope 'MEAN', primary True(지역 4/4): contrast 'D1-D1@{shuffle,const_t,const_src,tddlin}|n{0,10}'. 열 delta, ci_lo, ci_hi, verdict4, small_note. 판정 행(scope 'verdict')의 등록 판정 '혼재'는 캡션",
+          "b": "lgx_tests.csv test_id ∈ {L10, L12, L17}, scope 'MEAN', primary True: R0-F1k|n0, R0-F1a|n0, R1-F1k|n10, R1-F1n|n10, RM-R1|n10|lam0.25, RM-R1|n10|lam1.0, RM-R1|n-1|lam0.25, RM-R1|n-1|lam1.0, R1-R1s|n10|lam0.25, R1-R1s|n10|lam1.0, R1-R1s|n-1|lam0.25, R1-R1s|n-1|lam1.0. 동등성 한계 ±0.5 cm 띠",
+          "c": {
+            "R1−P0 (L8)": "results/rescale_lg/data/processed/lg/lg_tests.csv test_id 'L8'(지역 행과 MEAN4 값, 셀 가중 CI 1,000회) + lgx_lg_aux.csv L8 verdict4(지역, MEAN, MEAN3). 3지역(레나·캐나다·Alaska(x)) 평균 행은 lgx_lg_aux MEAN3 값과 CI(10,000회)",
+            "R1−P* (L29 보조)": "lgx_tests.csv contrast 'R1-P0@tddm|all', scope 'MEAN'(conditional L29_pstar 로 추가)",
+            "R1−P1 (L4 전량, AB9 와 같은 대비)": "results/rescale_lg/data/processed/lg/lg_tests.csv test_id 'L4', n −1(지역, MEAN4) + lgx_lg_aux verdict4",
+            "Alaska(x) 참조 행": "results/rescale_lg/data/processed/lg/lg_curve.csv target 'Alaska', mode 'x', R1, n −1(d_p0, d_p1). 층화 평균에 합치지 않는다(WRAPUP 1.2)",
+            "split_strip": "lgx_splitdist.csv primary_source True(source n4, 분할 50회): contrast 'R1-P0|all', 'R1-P1|all'. 열 frac_neg, n_splits, lg5_outside_10_90. L31 판정 행은 lgx_tests 'L31' verdict_aux",
+            "floor_band": "lgx_floor.csv scope 'eval' floor_rmse_cm − lg_curve rmse_p0(R1, n −1). 레나·캐나다 행에만(러시아는 하한 없음)"
+          },
+          "d": "pool_fixed_curve.csv baseline 'P0', method ∈ {P1, P2, P3, V1}, E1·E2 두 축. P1* 빈 사각형(E2 의 n 40·160, Fig 2f 와 같은 점 추정)"
+        },
+        "L29_pstar_change": "c 에 R1 − P*(전량, P4) 행을 더했다(conditional L29_pstar). d 에 P1* 표시",
+        "conditional_eval": {
+          "L29_pstar": "성립, 적용",
+          "sdse_switch": "불성립: L31 형식 표지(lg5_outside_10_90)가 주 4지역 모두 False 이므로 두 조건을 모두 요구하는 전환은 서지 않는다. R/R0 표(lgw_splitratio)는 h39 산출이라 열지 않았다"
+        },
+        "exports_done": [
+          "outputs/figures/paper/v2/Fig3_physics_use.pdf(git 제외, .gitignore 77행)",
+          "outputs/figures/paper/v2/Fig3_physics_use.svg",
+          "outputs/figures/paper/v2/Fig3_physics_use.png(600 dpi)",
+          "outputs/figures/paper/source_data/v2/Fig3_*.csv",
+          "outputs/figures/paper/_qa/v2_Fig3_physics_use_qa.json",
+          "outputs/figures/paper/_qa/v2_Fig3_physics_use_values.txt"
+        ],
+        "size_mm_actual": [
+          180,
+          140
+        ],
+        "qa_auto": "_common.qa_check 통과(글자 겹침 0, 잘림 0, 최소 6.5 pt, 범례 1개, Δ 축 0선, PDF 글꼴 Liberation Sans CID TrueType 내장, U+2212, SVG 글자 텍스트 유지, PNG 600 dpi, 캡션 단어 예산 안)",
+        "qa_review": {
+          "reviewers": "scientific-figure-reviewer, visual-reviewer 1회(2026-09-30 13:4x). 과장·금지 문장 위반 없음, 원천 값 불일치 없음(15개 이상 대조)",
+          "fixed": [
+            "Fig 2 a–d: D0 − P0(L1) 지역 4분 판정 기호 줄 추가(캐나다 D0 점 추정이 P0·P* 아래이나 등록 판정은 미결정)",
+            "Fig 2: 방법별 가로 도지 확대(±0.24), 기호 표를 캡션에서 f 에 묶음",
+            "Fig 3c: 러시아 W 점이 축 밖으로 보이던 문제(−15 눈금, 옅은 왼쪽 축선), 오차 하한을 빗금 대신 회색 세로 눈금 + 패널 안 설명(Fig 2 빗금과 의미 충돌 제거)",
+            "Fig 3d: 패널 문자와 c 의 분할 띠 간격 확보, E2 축의 빈 n = 1,000 눈금 제거",
+            "Fig 4a: 대상 행 묶음 음영, 격자 구간 막대 왼쪽 끝 눈금과 'not a CI' 설명",
+            "Fig 4c: 두 조건 표지 간격 확대와 덤벨 선, Fig 4d: 'Equivalent' 면을 옅은 회색으로(빈 칸과 구분)"
+          ],
+          "accepted_deviations": [
+            "바깥 여백 8 %(design/layout_rules.md)는 적용하지 않았다. 논문 그림은 paperstyle 규격(캔버스 = 180 mm, mm 절대 배치, 조판 여백은 저널)이 우선이며 가장자리 글자 간격 ≥ 1.5 mm 와 qa_check 잘림 0 으로 대신한다",
+            "글꼴 Liberation Sans(Arial 대체)는 paperstyle·export_targets 규격이다. brand_tokens 의 DejaVu Sans 는 일반 그림 규칙",
+            "Fig 3d·4d 의 하위 축은 스펙대로 한 패널 문자(d)에 묶었다"
+          ],
+          "second_round": "수정 뒤 자체 재렌더·재확인(Read). 검토 에이전트 2회차는 돌리지 않았다(qa_checklist.completion_rule 미충족, 남은 위험으로 보고)"
+        }
+      }
     },
     {
       "item": "Fig 4",
       "spec_id": "paper_fig4_min_labels",
-      "file_stem": "outputs/figures/paper/Fig4_min_labels",
+      "file_stem": "outputs/figures/paper/v2/Fig4_min_labels",
       "module": "scripts/4_visualization/paper/fig4.py(재작성, F3)",
       "title_ko": "최소 라벨 수와 대상별 개선·악화 분포",
       "caption_first_en": "Minimum number of target labels and the distribution of improvement and deterioration across targets.",
@@ -661,7 +795,57 @@
         "신규 모듈 n1_target_summary",
         "조건부 C12"
       ],
-      "status": "모듈 재작성 대기(F3)"
+      "status": "F3 1부 구현(2026-09-30). v2 산출. AB5·AB9 표지와 L3 4분 보조(lgw_aux4) 미반영(h39 미열람)",
+      "f3_v2": {
+        "data_module": "scripts/4_visualization/paper/v2_data.py(원천 표 → data/processed/paper_figs/*.csv, 판정 기호는 원천 표 열을 그대로 옮긴다)",
+        "style_module": "scripts/4_visualization/paper/v2_style.py(paperstyle·_common 재사용, 범주 n 축, 4분 판정 기호, 저장·QA·캡션)",
+        "derived_dir": "data/processed/paper_figs(작업 지시의 경로. path_rules.paper_derived 의 data/processed/paper 대신 쓴다)",
+        "platform": "LG·LGX 값은 모두 Rescale 조각(LG 작업 ZovWo, LGX 조각 4,451개)에서 나왔다. lgx_lg_aux 와 lgx_tests 는 같은 조각을 로컬에서 다시 집계한 표(h42 --summarize-only)이며 lgx_lg_aux 파생 열에는 '교차 환경 미확인' 표지를 캡션에 적는다",
+        "pending": "lgw_bundle(AB 표지)·lgw_aux4·lgw_splitratio 는 h39 산출이고 판정 기록 순서가 정해져 있어 열지 않았다. 해당 표지는 그림에 'pending' 으로 두지 않고 그리지 않으며 캡션과 spec 에 미반영으로 적는다",
+        "exports": "outputs/figures/paper/v2/<이름>.{pdf,svg,png(600 dpi)}, source_data/v2/<Fig>_<패널>.csv, _qa/v2_<이름>_qa.json, CAPTIONS.md 의 v2 절",
+        "module": "scripts/4_visualization/paper/fig4_min_labels.py",
+        "file_stem": "outputs/figures/paper/v2/Fig4_min_labels",
+        "panels": {
+          "a": "results/rescale_lg/data/processed/lg/lg_minn.csv: method ∈ {P1, R1}, learner ∈ {catboost_lo, none}, alpha '1', placement 'cell', 기준 λ, point_only False. 대상 = P4(x), Alaska(x), 하위 지역 10개 모드 i(모드 x 는 SI). 열 n_star, censored, n_max(P1 − P0, R1 − P0), n_star_p1, censored_p1(R1 − P1), n_splits_valid, flag. 구간 'n_lo < n* ≤ n_hi', 미달성 '> n_max'",
+          "b": "pool_fixed_curve.csv baseline 'P1', method 'R1', E1·E2 + lgx_lg_aux.csv contrast 'R1-P1|n-1' scope 'MEAN'(P4 전량 점) + lgx_tests.csv 'R1-P1@ed|n40', '|n160'(R1 − P1*, CI 10,000회). 기호 열: lgx_lg_aux L4 MEAN verdict4, lgx_tests R1-P1@ed verdict4",
+          "c": "results/rescale_lg/data/processed/lg/lg_tests.csv test_id 'L3', role '주'(Lena|x, Canada|x, AL-2|i, AL-5|i): n_star(중첩 선택 α), n_star_alpha1, censored + results/rescale_lg/data/processed/lg/lg_minn.csv(method R0, alpha ∈ {'1', 'nested'}) 의 n_max, censored",
+          "d": "data/processed/paper_figs/n1_target_summary.csv: source 'lg', group ∈ {P4, sub_i}(indep·sub_x 는 SI), (kind, method) ∈ {(d_p0, R1), (d_p0, P1), (d_p1, R1)}. 열 n_superior, n_equivalent, n_undecided, n_inferior, n_na, n_missing, composition_complete"
+        },
+        "L29_pstar_change": "b 에 R1 − P1*(n 40·160) 을 두 번째 표지로 더했다. a 의 n* 는 등록 정의(P0, P1 대비)이며 P*·P1* 대비 n* 는 계산하지 않았다(새 분석). 캡션에 그 한정을 적는다",
+        "conditional_eval": {
+          "fig4_c12": "불성립(L4 최소 n = 10). n = 80 점 없음"
+        },
+        "exports_done": [
+          "outputs/figures/paper/v2/Fig4_min_labels.pdf(git 제외, .gitignore 77행)",
+          "outputs/figures/paper/v2/Fig4_min_labels.svg",
+          "outputs/figures/paper/v2/Fig4_min_labels.png(600 dpi)",
+          "outputs/figures/paper/source_data/v2/Fig4_*.csv",
+          "outputs/figures/paper/_qa/v2_Fig4_min_labels_qa.json",
+          "outputs/figures/paper/_qa/v2_Fig4_min_labels_values.txt"
+        ],
+        "size_mm_actual": [
+          180,
+          180
+        ],
+        "qa_auto": "_common.qa_check 통과(글자 겹침 0, 잘림 0, 최소 6.5 pt, 범례 1개, Δ 축 0선, PDF 글꼴 Liberation Sans CID TrueType 내장, U+2212, SVG 글자 텍스트 유지, PNG 600 dpi, 캡션 단어 예산 안)",
+        "qa_review": {
+          "reviewers": "scientific-figure-reviewer, visual-reviewer 1회(2026-09-30 13:4x). 과장·금지 문장 위반 없음, 원천 값 불일치 없음(15개 이상 대조)",
+          "fixed": [
+            "Fig 2 a–d: D0 − P0(L1) 지역 4분 판정 기호 줄 추가(캐나다 D0 점 추정이 P0·P* 아래이나 등록 판정은 미결정)",
+            "Fig 2: 방법별 가로 도지 확대(±0.24), 기호 표를 캡션에서 f 에 묶음",
+            "Fig 3c: 러시아 W 점이 축 밖으로 보이던 문제(−15 눈금, 옅은 왼쪽 축선), 오차 하한을 빗금 대신 회색 세로 눈금 + 패널 안 설명(Fig 2 빗금과 의미 충돌 제거)",
+            "Fig 3d: 패널 문자와 c 의 분할 띠 간격 확보, E2 축의 빈 n = 1,000 눈금 제거",
+            "Fig 4a: 대상 행 묶음 음영, 격자 구간 막대 왼쪽 끝 눈금과 'not a CI' 설명",
+            "Fig 4c: 두 조건 표지 간격 확대와 덤벨 선, Fig 4d: 'Equivalent' 면을 옅은 회색으로(빈 칸과 구분)"
+          ],
+          "accepted_deviations": [
+            "바깥 여백 8 %(design/layout_rules.md)는 적용하지 않았다. 논문 그림은 paperstyle 규격(캔버스 = 180 mm, mm 절대 배치, 조판 여백은 저널)이 우선이며 가장자리 글자 간격 ≥ 1.5 mm 와 qa_check 잘림 0 으로 대신한다",
+            "글꼴 Liberation Sans(Arial 대체)는 paperstyle·export_targets 규격이다. brand_tokens 의 DejaVu Sans 는 일반 그림 규칙",
+            "Fig 3d·4d 의 하위 축은 스펙대로 한 패널 문자(d)에 묶었다"
+          ],
+          "second_round": "수정 뒤 자체 재렌더·재확인(Read). 검토 에이전트 2회차는 돌리지 않았다(qa_checklist.completion_rule 미충족, 남은 위험으로 보고)"
+        }
+      }
     },
     {
       "item": "Fig 5",
@@ -1303,7 +1487,8 @@
       "method": "h40 을 importlib 로 불러(TMx, strat_mean, _g) $LGD/shards 의 blocksse.npz 를 읽기 전용으로 쓴다. 판 E1(P4, n ∈ {0, 3, 10}), E2(레나·캐나다, 전 n). 방법 {P1, P2, P3, V1, R0, R1, R2, D0} × n, 기준선 P0 와 P1. 두 가중, 재표집 10,000회, seed_of('paper-pool', 판, 방법, n, 기준선)",
       "output": "data/processed/paper/pool_fixed_curve.csv(+ _meta.json: 입력 조각 sha256, 코드 해시, nboot)",
       "status_label": "서술(판정에 쓰지 않는다). 판정 표지는 lg_tests·lgx_lg_aux·lgw_bundle 에서만 가져온다",
-      "resources": "CPU 스레드 2, nice 10"
+      "resources": "CPU 스레드 2, nice 10",
+      "run_2026_09_30": "실제 LG 표로 실행(F3 1부): --out data/processed/paper_figs, CPU, nice 10, 스레드 2. n1 은 LG 곡선만(보조 표 lgt·lgf·lgfn 미열람)"
     },
     "n1_target_summary": {
       "status": "구현(커밋 390db15, 합성 입력 시험 19건 통과). 규칙 확정은 docs/DISPLAY_ITEMS_2026-09-30.md 의 계산 모듈 규칙 확정 절",
@@ -1311,7 +1496,8 @@
       "input": "$LGS/lg_curve.csv(같은 형식의 lgt_curve.csv, lgf_curve.csv, lgfn_curve.csv 는 보조 표)",
       "method": "대비 종류 d_p0, d_p1 과 방법 {P1, R0, R1, D0} × n 마다 대상 묶음(독립 지역: P4 + Alaska(x); 하위 지역 i; 하위 지역 x; point_only 제외)별로 점 추정 평균, 중앙값, 4분 판정 수(h42.verdict4(d_lo, d_hi, d_beq_lo, d_beq_hi, 0.5), 보조 δ 1.0), 최대 증가(값과 대상)를 센다. 새 재표집은 없다(곡선 CI 1,000회를 그대로 쓰고 nboot 열에 적는다)",
       "output": "data/processed/paper/n1_target_summary.csv → Fig 4d, ST_n1_target_summary",
-      "wording": "하위 지역 합산은 CI 평균으로 쓰지 않고 '대상 N개 가운데 우세 k, 열세 m, 동등 e, 미결정 j'로만 쓴다(WRAPUP 1.3)"
+      "wording": "하위 지역 합산은 CI 평균으로 쓰지 않고 '대상 N개 가운데 우세 k, 열세 m, 동등 e, 미결정 j'로만 쓴다(WRAPUP 1.3)",
+      "run_2026_09_30": "실제 LG 표로 실행(F3 1부): --out data/processed/paper_figs, CPU, nice 10, 스레드 2. n1 은 LG 곡선만(보조 표 lgt·lgf·lgfn 미열람)"
     },
     "loaders": {
       "note": "판정 표의 열 이름이 하네스마다 다르다. LG·LGX·LGT·LGF·LGW·LGD 는 test_id, LGU(h44, h45)는 test. 층화 평균 행의 scope 는 LG 'MEAN4', LGT·LGF 'MEAN'. 공통 로더가 이를 맞춘다(_common.py 에 추가)",
@@ -4940,6 +5126,120 @@
       "generated": "2026-09-30",
       "draft": true,
       "caption_facts": "6.8 필수 항목 + 6.5 회색 육지 셀 비율·첫 사유별 수(caption.gray_land 또는 격자 메타) + 6.6 (b) 분할 간 E_n·영역 평균 ALT 범위 + 6.7 GPU 학습기 사실(L5, LGT L32 '등록 시점에 결과 존재, 미열람', LGF-F2, LGF-N3)과 LGT·LGF 표 누락 표지"
+    },
+    {
+      "id": "paper_fig2_label_curve",
+      "version": "v2",
+      "script": "scripts/4_visualization/paper/fig2_label_curve.py",
+      "data": "scripts/4_visualization/paper/v2_data.py → data/processed/paper_figs",
+      "exports": [
+        "outputs/figures/paper/v2/Fig2_label_curve.pdf",
+        "outputs/figures/paper/v2/Fig2_label_curve.svg",
+        "outputs/figures/paper/v2/Fig2_label_curve.png"
+      ],
+      "source_data": [
+        "outputs/figures/paper/source_data/v2/Fig2_a_d.csv",
+        "outputs/figures/paper/source_data/v2/Fig2_a_d_pstar.csv",
+        "outputs/figures/paper/source_data/v2/Fig2_a_d_p1star.csv",
+        "outputs/figures/paper/source_data/v2/Fig2_a_d_L1_verdicts.csv",
+        "outputs/figures/paper/source_data/v2/Fig2_e_f.csv",
+        "outputs/figures/paper/source_data/v2/Fig2_e_f_pstar.csv",
+        "outputs/figures/paper/source_data/v2/Fig2_f_p1star.csv",
+        "outputs/figures/paper/source_data/v2/Fig2_verdicts.csv"
+      ],
+      "layout": {
+        "figsize_mm": [
+          180.0,
+          164.0
+        ]
+      },
+      "units": "cm",
+      "medium": "paper (Sci Rep 2-column 180 mm)",
+      "style": "polar.paperstyle + v2_style(범주 n 축, 4분 판정 기호 모양·채움)",
+      "generated": "2026-09-30",
+      "qa": "pass",
+      "qa_json": "outputs/figures/paper/_qa/v2_Fig2_label_curve_qa.json",
+      "panels": 6,
+      "message": "Δ(n) vs P0 with P* and P1* shown; verdicts from lgx tables only",
+      "pending": [
+        "AB6 marker (lgw_bundle not opened)",
+        "curve additions for L34(a), LGF-F1, LGF-N1 not evaluated"
+      ]
+    },
+    {
+      "id": "paper_fig3_physics_use",
+      "version": "v2",
+      "script": "scripts/4_visualization/paper/fig3_physics_use.py",
+      "data": "scripts/4_visualization/paper/v2_data.py → data/processed/paper_figs",
+      "exports": [
+        "outputs/figures/paper/v2/Fig3_physics_use.pdf",
+        "outputs/figures/paper/v2/Fig3_physics_use.svg",
+        "outputs/figures/paper/v2/Fig3_physics_use.png"
+      ],
+      "source_data": [
+        "outputs/figures/paper/source_data/v2/Fig3_a.csv",
+        "outputs/figures/paper/source_data/v2/Fig3_b.csv",
+        "outputs/figures/paper/source_data/v2/Fig3_c.csv",
+        "outputs/figures/paper/source_data/v2/Fig3_c_splits.csv",
+        "outputs/figures/paper/source_data/v2/Fig3_c_floor.csv",
+        "outputs/figures/paper/source_data/v2/Fig3_d.csv",
+        "outputs/figures/paper/source_data/v2/Fig3_d_p1star.csv"
+      ],
+      "layout": {
+        "figsize_mm": [
+          180.0,
+          140.0
+        ]
+      },
+      "units": "cm",
+      "medium": "paper (Sci Rep 2-column 180 mm)",
+      "style": "polar.paperstyle + v2_style(범주 n 축, 4분 판정 기호 모양·채움)",
+      "generated": "2026-09-30",
+      "qa": "pass",
+      "qa_json": "outputs/figures/paper/_qa/v2_Fig3_physics_use_qa.json",
+      "panels": 4,
+      "message": "physics as residual anchor; all-label gain depends on Russia W; P* row added",
+      "pending": [
+        "AB3, AB4, AB7, AB8, AB9 markers (lgw_bundle not opened)",
+        "SD/SE ratio flag (lgw_splitratio not opened)"
+      ]
+    },
+    {
+      "id": "paper_fig4_min_labels",
+      "version": "v2",
+      "script": "scripts/4_visualization/paper/fig4_min_labels.py",
+      "data": "scripts/4_visualization/paper/v2_data.py → data/processed/paper_figs",
+      "exports": [
+        "outputs/figures/paper/v2/Fig4_min_labels.pdf",
+        "outputs/figures/paper/v2/Fig4_min_labels.svg",
+        "outputs/figures/paper/v2/Fig4_min_labels.png"
+      ],
+      "source_data": [
+        "outputs/figures/paper/source_data/v2/Fig4_a.csv",
+        "outputs/figures/paper/source_data/v2/Fig4_b.csv",
+        "outputs/figures/paper/source_data/v2/Fig4_b_p1star.csv",
+        "outputs/figures/paper/source_data/v2/Fig4_b_verdicts.csv",
+        "outputs/figures/paper/source_data/v2/Fig4_c.csv",
+        "outputs/figures/paper/source_data/v2/Fig4_d.csv"
+      ],
+      "layout": {
+        "figsize_mm": [
+          180.0,
+          180.0
+        ]
+      },
+      "units": "cm",
+      "medium": "paper (Sci Rep 2-column 180 mm)",
+      "style": "polar.paperstyle + v2_style(범주 n 축, 4분 판정 기호 모양·채움)",
+      "generated": "2026-09-30",
+      "qa": "pass",
+      "qa_json": "outputs/figures/paper/_qa/v2_Fig4_min_labels_qa.json",
+      "panels": 4,
+      "message": "n* reported as intervals; R1 − P1* undecided at n = 40, 160",
+      "pending": [
+        "AB5, AB9 markers (lgw_bundle not opened)",
+        "L3 four-way auxiliary column (lgw_aux4 not opened)"
+      ]
     }
   ],
   "m1/m1_sc_main_effects": {

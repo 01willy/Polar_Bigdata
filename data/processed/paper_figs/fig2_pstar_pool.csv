@@ -1,0 +1,3 @@
+edition,pstar,pstar_lo,pstar_hi,source
+E1_P4_n_le_10,-0.9968476850946004,-1.3456073107451172,-0.3199618594812314,lgx_tests L29 P0@tddm-P0|n0 MEAN
+E2_LenaCanada_all_n,-1.2017267455778717,,,lgx_curve P0@tddm d_p0 레나·캐나다 평균(점 추정)

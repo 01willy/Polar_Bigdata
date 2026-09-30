@@ -1,0 +1,10 @@
+block,target,frac_neg,n_splits,lg5_outside_10_90
+R1 − P0,Lena,0.979591836734694,49,False
+R1 − P0,Canada,0.16,50,False
+R1 − P0,Russia_W,1.0,50,False
+R1 − P0,Russia_E,0.06,50,False
+R1 − P0,Alaska,0.82,50,False
+R1 − P1,Lena,0.9591836734693876,49,False
+R1 − P1,Canada,1.0,50,False
+R1 − P1,Russia_W,0.74,50,False
+R1 − P1,Russia_E,0.0,50,False

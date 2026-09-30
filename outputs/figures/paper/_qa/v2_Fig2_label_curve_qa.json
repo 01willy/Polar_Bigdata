@@ -1,0 +1,52 @@
+{
+ "width_mm": 180.0,
+ "height_mm": 164.0,
+ "min_font_pt": 6.5,
+ "clipped": [],
+ "overlaps": [],
+ "n_text_overlaps": 0,
+ "has_title_in_axes": false,
+ "delta_axes_have_zero": true,
+ "n_delta_axes": 6,
+ "n_legends": 1,
+ "fonts": [
+  "BGZIHO+LiberationSans-Bold|CID TrueType|yes",
+  "BGZIHO+LiberationSans|CID TrueType|yes"
+ ],
+ "fonts_ok": true,
+ "unicode_minus_ok": true,
+ "caption_words": {
+  "definition": 75,
+  "statistics": 52,
+  "panels": 110,
+  "data": 27,
+  "total": 264
+ },
+ "caption_problems": [],
+ "fails": [],
+ "ok": true,
+ "svg_text_elements": 132,
+ "svg_glyph_defs": 0,
+ "svg_text_ok": true,
+ "png_dpi": 599.9988,
+ "name": "Fig2_label_curve",
+ "version": "v2",
+ "time": "2026-09-30T13:44:46",
+ "paths": {
+  "width_mm": 180.0,
+  "height_mm": 164.0,
+  "pdf": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Fig2_label_curve.pdf",
+  "svg": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Fig2_label_curve.svg",
+  "png": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Fig2_label_curve.png"
+ },
+ "source_data": [
+  "outputs/figures/paper/source_data/v2/Fig2_a_d.csv",
+  "outputs/figures/paper/source_data/v2/Fig2_a_d_pstar.csv",
+  "outputs/figures/paper/source_data/v2/Fig2_a_d_p1star.csv",
+  "outputs/figures/paper/source_data/v2/Fig2_a_d_L1_verdicts.csv",
+  "outputs/figures/paper/source_data/v2/Fig2_e_f.csv",
+  "outputs/figures/paper/source_data/v2/Fig2_e_f_pstar.csv",
+  "outputs/figures/paper/source_data/v2/Fig2_f_p1star.csv",
+  "outputs/figures/paper/source_data/v2/Fig2_verdicts.csv"
+ ]
+}

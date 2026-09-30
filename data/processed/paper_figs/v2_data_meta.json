@@ -1,0 +1,91 @@
+{
+ "module": "scripts/4_visualization/paper/v2_data.py",
+ "created": "2026-09-30T13:44:42",
+ "inputs": [
+  {
+   "path": "results/rescale_lg/data/processed/lg/lg_curve.csv",
+   "sha256": "bf39776bb60bb93fdef702190c28c78741dc35ff3ee8eb96d79324c320c83925"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/lg_tests.csv",
+   "sha256": "fe80690d82dc56ee203850956f7864a286bafa4be60ef184aa40bf6e613142bb"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/lg_minn.csv",
+   "sha256": "c1ecdc550da02081700b6f8a02d4c557d58ec79608bfbe2eeb0f0ae11e040190"
+  },
+  {
+   "path": "data/processed/lgx/lgx_curve.csv",
+   "sha256": "cc26830eca82a4247bf3db50f3bbfa9f9065d26b8e61adb77eead5dee345f704"
+  },
+  {
+   "path": "data/processed/lgx/lgx_tests.csv",
+   "sha256": "f60b3c6f558d6ae8bba985c99a68733ffcf39536c1fd2b869060fdd75275fa69"
+  },
+  {
+   "path": "data/processed/lgx/lgx_lg_aux.csv",
+   "sha256": "c80f26e45da83aa264f00e2baf07f7fc40c2a779aac1a80bd4ecc9386ef01c1d"
+  },
+  {
+   "path": "data/processed/lgx/lgx_splitdist.csv",
+   "sha256": "8983bf7a05115e290a56873440052851a4f71264ab286581c923942178f9400f"
+  },
+  {
+   "path": "data/processed/lgx/lgx_floor.csv",
+   "sha256": "e8c9cb2bebd6fa0ce9e2faedd52cf8cfa0aaa2fbfce29e97f84c101a1b13c9da"
+  },
+  {
+   "path": "data/processed/paper_figs/pool_fixed_curve.csv",
+   "sha256": "490435f971d561f3bb60afe518337e81bfb3df4c7a93fe025115ef279bfd24c8"
+  },
+  {
+   "path": "data/processed/paper_figs/n1_target_summary.csv",
+   "sha256": "f2198ebf4af85e9f98c421e8e3faf96e9698d773cfe504dfc686d755fbb89069"
+  }
+ ],
+ "outputs": [
+  "fig2_L1_region.csv",
+  "fig2_p1star_pool.csv",
+  "fig2_p1star_region.csv",
+  "fig2_pool_curves.csv",
+  "fig2_pstar_pool.csv",
+  "fig2_pstar_region.csv",
+  "fig2_region_curves.csv",
+  "fig2_registered.csv",
+  "fig2_verdicts.csv",
+  "fig3_L31.csv",
+  "fig3_a.csv",
+  "fig3_b.csv",
+  "fig3_c.csv",
+  "fig3_c_floor.csv",
+  "fig3_c_splits.csv",
+  "fig3_d.csv",
+  "fig3_d_p1star.csv",
+  "fig4_a.csv",
+  "fig4_b.csv",
+  "fig4_b_p1star.csv",
+  "fig4_b_verdicts.csv",
+  "fig4_c.csv",
+  "fig4_c_verdict.csv",
+  "fig4_d.csv"
+ ],
+ "checks": {
+  "fig2_lgx_vs_lg_P1_max_abs_diff_cm": 4.3021142204224816e-15,
+  "fig2_pstar_E1_table_vs_region_mean_cm": 0.0,
+  "fig2_additivity_R1_P1ed_n40_cm": 1.1102230246251565e-15,
+  "fig2_additivity_R1_P1ed_n160_cm": 1.5543122344752192e-15,
+  "fig3c_L8_lg_tests_vs_lgx_lg_aux_max_abs_diff_cm": 0.0,
+  "fig4b_pool_vs_lgx_lg_aux_L4_n10_ci_lo_abs_diff": 6.661338147750939e-16
+ },
+ "checks_failed": {},
+ "rules": {
+  "values": "원천 열 그대로. 새 재표집·판정 없음",
+  "derived_points": "E2(레나·캐나다) P* 선과 P1* 점은 lgx_curve 지역 값의 등가중 평균(점 추정)",
+  "nboot": {
+   "lg_curve": 1000,
+   "lgx": 10000,
+   "pool_fixed_curve": 10000
+  },
+  "not_opened": "lgd_*, lgt_*, lgf_*, lgfn_*, lgw_*(판정 기록 순서)"
+ }
+}

@@ -1,0 +1,4 @@
+OK  b E1 R1-P1 n10 vs lg_tests L4 MEAN4 n10: figure -0.177787 | source -0.177787
+OK  b R1-P1* n40 vs 7.1a text (+1.31): figure 1.310000 | source 1.310000
+OK  a Lena R1-P1 n* vs lg_minn n_star_p1: figure 40.000000 | source 40.000000
+OK  c Canada nested n* vs lg_tests L3: figure 10.000000 | source 10.000000

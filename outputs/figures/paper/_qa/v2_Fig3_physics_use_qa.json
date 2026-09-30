@@ -1,0 +1,51 @@
+{
+ "width_mm": 180.0,
+ "height_mm": 140.0,
+ "min_font_pt": 6.5,
+ "clipped": [],
+ "overlaps": [],
+ "n_text_overlaps": 0,
+ "has_title_in_axes": false,
+ "delta_axes_have_zero": true,
+ "n_delta_axes": 5,
+ "n_legends": 1,
+ "fonts": [
+  "BGZIHO+LiberationSans-Bold|CID TrueType|yes",
+  "BGZIHO+LiberationSans|CID TrueType|yes"
+ ],
+ "fonts_ok": true,
+ "unicode_minus_ok": true,
+ "caption_words": {
+  "definition": 69,
+  "statistics": 52,
+  "panels": 113,
+  "data": 22,
+  "total": 256
+ },
+ "caption_problems": [],
+ "fails": [],
+ "ok": true,
+ "svg_text_elements": 104,
+ "svg_glyph_defs": 0,
+ "svg_text_ok": true,
+ "png_dpi": 599.9988,
+ "name": "Fig3_physics_use",
+ "version": "v2",
+ "time": "2026-09-30T13:44:50",
+ "paths": {
+  "width_mm": 180.0,
+  "height_mm": 140.0,
+  "pdf": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Fig3_physics_use.pdf",
+  "svg": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Fig3_physics_use.svg",
+  "png": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Fig3_physics_use.png"
+ },
+ "source_data": [
+  "outputs/figures/paper/source_data/v2/Fig3_a.csv",
+  "outputs/figures/paper/source_data/v2/Fig3_b.csv",
+  "outputs/figures/paper/source_data/v2/Fig3_c.csv",
+  "outputs/figures/paper/source_data/v2/Fig3_c_splits.csv",
+  "outputs/figures/paper/source_data/v2/Fig3_c_floor.csv",
+  "outputs/figures/paper/source_data/v2/Fig3_d.csv",
+  "outputs/figures/paper/source_data/v2/Fig3_d_p1star.csv"
+ ]
+}

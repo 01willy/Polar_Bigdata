@@ -1,0 +1,17 @@
+target,n,delta,verdict4,verdict
+Lena|x,0,4.016139469144124,미결정,undecided
+Lena|x,3,3.033598328295481,미결정,undecided
+Lena|x,10,2.264559234354788,미결정,undecided
+Lena|x,40,0.604331520319706,미결정,undecided
+Canada|x,0,-1.5564642024890871,미결정,undecided
+Canada|x,3,-2.3421942574836807,미결정,undecided
+Canada|x,10,-2.004731661189469,미결정,undecided
+Canada|x,40,-1.5448841433257718,미결정,undecided
+Russia_W|x,0,2.0482548230676656,미결정,undecided
+Russia_W|x,3,2.476395245417166,미결정,undecided
+Russia_W|x,10,0.6552613118360213,미결정,undecided
+Russia_W|x,40,,행 없음,no row
+Russia_E|x,0,4.475759372631439,열세,inferior
+Russia_E|x,3,4.406351228675163,열세,inferior
+Russia_E|x,10,4.33814989592783,열세,inferior
+Russia_E|x,40,,행 없음,no row

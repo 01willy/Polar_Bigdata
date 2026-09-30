@@ -1,0 +1,102 @@
+{
+ "module": "scripts/4_visualization/paper/n1_target_summary.py",
+ "spec": "figures/figure_spec.json derived_modules.n1_target_summary",
+ "decision": "docs/DISPLAY_ITEMS_2026-09-30.md 6절 2번(커밋 903dce9)",
+ "status_label": "서술(판정에 쓰지 않는다)",
+ "synthetic": false,
+ "created": "2026-09-30T13:07:01",
+ "git_commit": "0fc2ef5",
+ "code_sha256": {
+  "module": "96ec3053b8a23d55ba6c1adc3a583753f42d6c82f3d10c13f51d2ee6d24067d3",
+  "h40": "7098f59dabe2b73f74b9cfa7197b15df5b86f39124eaa60d889e130a892546f9",
+  "h42": "22e215e435e157be25f116ffa29deba915ec40ea157bce072494e0fec1daeabb"
+ },
+ "argv": [
+  "--lgs",
+  "results/rescale_lg/data/processed/lg",
+  "--out",
+  "data/processed/paper_figs",
+  "--threads",
+  "2"
+ ],
+ "threads": 2,
+ "inputs": [
+  {
+   "path": "results/rescale_lg/data/processed/lg/lg_curve.csv",
+   "sha256": "bf39776bb60bb93fdef702190c28c78741dc35ff3ee8eb96d79324c320c83925",
+   "main": true,
+   "source": "lg",
+   "nboot": 1000,
+   "nboot_source": "meta",
+   "meta_path": "results/rescale_lg/data/processed/lg/lg_meta.json",
+   "meta_sha256": "37db020f07d4079d0f0de78222a10e60aec190d7c3f125adae1acd0577557dd9"
+  }
+ ],
+ "groups": {
+  "indep": [
+   "Lena|x",
+   "Canada|x",
+   "Russia_W|x",
+   "Russia_E|x",
+   "Alaska|x"
+  ],
+  "P4": [
+   "Lena|x",
+   "Canada|x",
+   "Russia_W|x",
+   "Russia_E|x"
+  ],
+  "sub_i": [
+   "AL-1|i",
+   "AL-2|i",
+   "AL-3|i",
+   "AL-4|i",
+   "AL-5|i",
+   "AL-6|i",
+   "CA-2|i",
+   "CA-3|i",
+   "LE-1|i",
+   "LE-2|i"
+  ],
+  "sub_x": [
+   "AL-1|x",
+   "AL-2|x",
+   "AL-3|x",
+   "AL-4|x",
+   "AL-5|x",
+   "AL-6|x",
+   "CA-2|x",
+   "CA-3|x",
+   "LE-1|x",
+   "LE-2|x"
+  ]
+ },
+ "methods": [
+  "P1",
+  "R0",
+  "R1",
+  "D0"
+ ],
+ "kinds": {
+  "d_p0": "P0",
+  "d_p1": "P1"
+ },
+ "main_learners": [
+  "catboost_lo",
+  "none"
+ ],
+ "delta_eq": 0.5,
+ "delta_eq_aux": 1.0,
+ "rules": {
+  "select": "방법 {P1, R0, R1, D0}, α '1', 배치 cell, h40.base_lam 기준 λ. 주 표 학습기 {catboost_lo, none}, 보조 표는 학습기별. P1 의 d_p1 제외. point_only 행 제외(n_point_only)",
+  "verdict4": "h42.verdict4(d_lo, d_hi, d_beq_lo, d_beq_hi, δ). δ 0.5 cm(주), 1.0 cm(_d10). 새 재표집 없음(nboot 열 = 곡선 CI 의 횟수)",
+  "mean_median": "행이 있고 Δ 가 유한한 대상의 점 추정 Δ 평균·중앙값(셀 가중 d, 블록 등가중 d_beq). CI 평균이 아니다",
+  "worse": "n_inferior = 열세 대상 수. n_increase_point = 점 추정 Δ > 0 인 대상 수",
+  "max_increase": "대상별 점 추정 Δ(셀 가중)의 최댓값과 대상. 동률이면 묶음 목록 순서의 앞 대상",
+  "composition": "묶음 대상 목록은 n 과 무관하게 고정. 행이 없는 대상 = n_missing, composition_complete = 거짓"
+ },
+ "n_rows": 224,
+ "sources": [
+  "lg"
+ ]
+}

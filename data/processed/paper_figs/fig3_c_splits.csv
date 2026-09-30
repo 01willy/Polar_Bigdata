@@ -1,0 +1,11 @@
+source,target,contrast,n_splits,frac_neg,lg5_outside_10_90
+n4,Alaska,R1-P1|all,50,0.92,False
+n4,Alaska,R1-P0|all,50,0.82,False
+n4,Canada,R1-P1|all,50,1.0,False
+n4,Canada,R1-P0|all,50,0.16,False
+n4,Lena,R1-P1|all,49,0.9591836734693876,False
+n4,Lena,R1-P0|all,49,0.979591836734694,False
+n4,Russia_E,R1-P1|all,50,0.0,False
+n4,Russia_E,R1-P0|all,50,0.06,False
+n4,Russia_W,R1-P1|all,50,0.74,False
+n4,Russia_W,R1-P0|all,50,1.0,False

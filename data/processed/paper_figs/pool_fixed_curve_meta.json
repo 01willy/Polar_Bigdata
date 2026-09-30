@@ -1,0 +1,365 @@
+{
+ "module": "scripts/4_visualization/paper/pool_fixed_curve.py",
+ "spec": "figures/figure_spec.json derived_modules.pool_fixed_curve",
+ "decision": "docs/DISPLAY_ITEMS_2026-09-30.md 6절 1번(커밋 903dce9)",
+ "status_label": "서술(판정에 쓰지 않는다)",
+ "synthetic": false,
+ "created": "2026-09-30T13:07:10",
+ "git_commit": "0fc2ef5",
+ "code_sha256": {
+  "module": "f9d485f231289547ab17699d01fef7eda687ec9afecc3ccde6979ac3fb229be8",
+  "h40": "7098f59dabe2b73f74b9cfa7197b15df5b86f39124eaa60d889e130a892546f9",
+  "h42": "22e215e435e157be25f116ffa29deba915ec40ea157bce072494e0fec1daeabb",
+  "h4_common": "4b6b888275d5f47fa61ba2b176bc37e6023c491f8dcc886d29a560470fdf169c",
+  "m1_stats": "2a910d36299ee2fb904b265fd0b09a136d6bb988647b0c212e4b49cd19262f91"
+ },
+ "argv": [
+  "--lg-shards",
+  "results/rescale_lg/data/processed/lg/shards",
+  "--lgs",
+  "results/rescale_lg/data/processed/lg",
+  "--out",
+  "data/processed/paper_figs",
+  "--threads",
+  "2"
+ ],
+ "threads": 2,
+ "niceness": 10,
+ "shards_dir": "results/rescale_lg/data/processed/lg/shards",
+ "tag": "lg",
+ "parts": [
+  "cpu"
+ ],
+ "n_shards": 20,
+ "inputs": [
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Canada__x__s1_blocksse.npz",
+   "sha256": "102afadd7b7d291d9d93e2608207dbd0730c51a00bfe8bf8d792c58903ede722"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Canada__x__s1_unit.json",
+   "sha256": "0d7e90b2ef1404065bde7bbcf756327b8da64f50ce79642f13e3541451f94733"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Canada__x__s2_blocksse.npz",
+   "sha256": "e428834c818a399f7438753ba566913266578ac376d44bc6fa856e58389bbde0"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Canada__x__s2_unit.json",
+   "sha256": "57677be659945d78b02cfff876bb42b6863fa1e0bb29cf7f6c7cac01ee84155b"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Canada__x__s3_blocksse.npz",
+   "sha256": "68362b0e6143595cb5c290516ba03427bd4fc8b4302c55881c5fffa1c8ae5e40"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Canada__x__s3_unit.json",
+   "sha256": "36c8a9f296939c9bf83014c0f68a2f9f68b68c5f74e36f9f7657659dc67b6aaa"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Canada__x__s4_blocksse.npz",
+   "sha256": "ca8943738b10cf6679b6a8901bc1bb62761aa4413a7d4d2bce9182a06cd672bf"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Canada__x__s4_unit.json",
+   "sha256": "0017eb72e367c550011f107e0dd00a9c4b996aa97b9b27838c4e7e8205234df5"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Canada__x__s5_blocksse.npz",
+   "sha256": "257b58f106de3835b27b9eab98a3adf4fcdbafcbbd21179801fda02203fd1ffc"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Canada__x__s5_unit.json",
+   "sha256": "6c14f7cf3486f42b95f2121b6fc42cf55bd3a0a419e70ebd3bc89d69c629c2e5"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Lena__x__s1_blocksse.npz",
+   "sha256": "19f8c0c7f7727532bc4b44d124c31b880132ed5c52eb123a5dbafa6f919eb151"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Lena__x__s1_unit.json",
+   "sha256": "7fbbd5559db8f4c67a9434ee3451637e97789c0a620f2b96c341b32ed3365c26"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Lena__x__s2_blocksse.npz",
+   "sha256": "fb171ec1b35a3c50fcbb4a7791199b41ff4753e9099a1abe0a7649c67b1dcda1"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Lena__x__s2_unit.json",
+   "sha256": "61c1375a02fa517d05bd81da7e199d8e86f69e428166a5577dea791605e69d95"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Lena__x__s3_blocksse.npz",
+   "sha256": "41164d6197e6f24af85a7a839a308b2cff5ca208223a5e16e02ec85c8e499830"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Lena__x__s3_unit.json",
+   "sha256": "da414ab44436f92d913fd594e8e2851a0a663bf3216d2ba0114fc8ecee136181"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Lena__x__s4_blocksse.npz",
+   "sha256": "3ec7664bd4346dd478ec82132a82285b49c8917d429358fd069409e70ade422f"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Lena__x__s4_unit.json",
+   "sha256": "132f3edb6ee6230513410688f4b334d37e6bc93f8dbfc98568bef6e5a4dd7fc4"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Lena__x__s5_blocksse.npz",
+   "sha256": "804cacc16d68fbc7ca43ffc85b0c5c14d180d2621e1784283a36387a5cd1acad"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Lena__x__s5_unit.json",
+   "sha256": "46c927789f25c4bcb9e2b9fea0da36bf08b8484345557b7498de63161d3d0a7c"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_E__x__s1_blocksse.npz",
+   "sha256": "6907db31db64441449d04e2140f6231c796dd13e464fee31514bff039d2af12a"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_E__x__s1_unit.json",
+   "sha256": "882dcb0e544824f237651dbddd3bd2b2f36e8a8d3a65b3dca06595e729ea7550"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_E__x__s2_blocksse.npz",
+   "sha256": "4425e7dc9dad5a80f570e38c4f122654ac0ac677fbbc6a0e34158c3c7d3fba42"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_E__x__s2_unit.json",
+   "sha256": "55e6a6b493697c57cbee7701754c1f97f5074f12e3a9161ff7cc2d0e66d89073"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_E__x__s3_blocksse.npz",
+   "sha256": "d1d9ba1e44917f2a7b2c4a6481885f478a31fb0a5fdbec57472bbbd7a9463618"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_E__x__s3_unit.json",
+   "sha256": "62aac88e72bbcaafee3c6e122458f8f170f31520d3f9ff056d5991f8f9e0f56e"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_E__x__s4_blocksse.npz",
+   "sha256": "68e82983a8a2c5be442810e1c15dde0fd87e443d4d77a255ec9bd1c484ac019b"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_E__x__s4_unit.json",
+   "sha256": "5962e0f887157f606d48f83395d437e3e10584a78b0a0ad2cb571e55e894c9f6"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_E__x__s5_blocksse.npz",
+   "sha256": "fec7ea2953802f414aa96c40f97b6c8dbbd34802074dad979236028edd4ccdb0"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_E__x__s5_unit.json",
+   "sha256": "fede8ad62ff6889327cbdab37438595bb1446759a56cc2e809be2272681a30e0"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_W__x__s1_blocksse.npz",
+   "sha256": "47a52272cc58c1f041b5d4b2b7f858dfea66b733ba4369342eae5ad8ef563914"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_W__x__s1_unit.json",
+   "sha256": "faade2fa6e6f3e9a8eb4742052ecacb6ea86c00aba21681a995edd1ee21d7655"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_W__x__s2_blocksse.npz",
+   "sha256": "ca9602f0aaf30ada8e5a9d35451d9440e7b082ba4e056436e18440cf7978a3e7"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_W__x__s2_unit.json",
+   "sha256": "bd1735d8f5dc9560bd0575fe795e4e62b521153fe0ea9cfe32054e166de2bfcc"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_W__x__s3_blocksse.npz",
+   "sha256": "228f779d35f5632543f333bb04f3c551ae895563dd382ed344e20d731acf258c"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_W__x__s3_unit.json",
+   "sha256": "4083adb4caf152c22e59ba308169052977facbd4aa49976c1c937da4ffa89977"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_W__x__s4_blocksse.npz",
+   "sha256": "1a30d3c6285a0402fbf01830e920572e044c76c7fd639cba6b2b1d8843dc08d0"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_W__x__s4_unit.json",
+   "sha256": "5cd03308858b810edfc765ecec73562770e920c657eb16e218fafefded513c8d"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_W__x__s5_blocksse.npz",
+   "sha256": "d8a5bbcc43a9fbf3076a164de9a8c36b7479a4b1e072b41f95512c2f09d02e60"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/shards/lg__cpu__Russia_W__x__s5_unit.json",
+   "sha256": "8f3b0c3e95abbc50f1342236d290dbcf7d4f4eaae757206a195a9a7f04678ab7"
+  }
+ ],
+ "lgs_meta": {
+  "path": "results/rescale_lg/data/processed/lg/lg_meta.json",
+  "sha256": "37db020f07d4079d0f0de78222a10e60aec190d7c3f125adae1acd0577557dd9"
+ },
+ "shard_cfg": {
+  "cpu": {
+   "cfg_common": {
+    "dceb5154e35d": 20
+   },
+   "code_sha": {
+    "ffd0b3a76d36": 20
+   }
+  }
+ },
+ "missing_shards": {},
+ "unit_status": [
+  "ok",
+  "partial"
+ ],
+ "nboot": 10000,
+ "delta_eq": 0.5,
+ "delta_eq_aux": 1.0,
+ "editions": {
+  "E1_P4_n_le_10": {
+   "regions": [
+    "Lena|x",
+    "Canada|x",
+    "Russia_W|x",
+    "Russia_E|x"
+   ],
+   "n_rule": "fixed",
+   "n_list": [
+    "0",
+    "3",
+    "10"
+   ],
+   "excluded_n": {},
+   "regions_without_store": []
+  },
+  "E2_LenaCanada_all_n": {
+   "regions": [
+    "Lena|x",
+    "Canada|x"
+   ],
+   "n_rule": "common",
+   "n_list": [
+    "0",
+    "3",
+    "10",
+    "40",
+    "160",
+    "320",
+    "all"
+   ],
+   "excluded_n": {
+    "1000": [
+     "Canada|x"
+    ]
+   },
+   "regions_without_store": []
+  }
+ },
+ "methods": [
+  "P1",
+  "P2",
+  "P3",
+  "V1",
+  "R0",
+  "R1",
+  "R2",
+  "D0"
+ ],
+ "baselines": [
+  "P0",
+  "P1"
+ ],
+ "seeds": {
+  "Canada|x": {
+   "lgboot": 453156231,
+   "lgxboot": 1356571934,
+   "splits_used": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "split_seeds": {
+    "1": 1171194993,
+    "2": 1556501963,
+    "3": 734094685,
+    "4": 900067582,
+    "5": 1117962344
+   },
+   "has_ci": true,
+   "nb_union": 36
+  },
+  "Lena|x": {
+   "lgboot": 156985117,
+   "lgxboot": 1761184626,
+   "splits_used": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "split_seeds": {
+    "1": 596454222,
+    "2": 981760756,
+    "3": 1300449890,
+    "4": 1407705025,
+    "5": 618721111
+   },
+   "has_ci": true,
+   "nb_union": 20
+  },
+  "Russia_E|x": {
+   "lgboot": 1793331719,
+   "lgxboot": 1650839571,
+   "splits_used": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "split_seeds": {
+    "1": 163945386,
+    "2": 281856528,
+    "3": 1741421190,
+    "4": 2041540389,
+    "5": 245915571
+   },
+   "has_ci": true,
+   "nb_union": 17
+  },
+  "Russia_W|x": {
+   "lgboot": 1967547673,
+   "lgxboot": 2110236429,
+   "splits_used": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "split_seeds": {
+    "1": 928619907,
+    "2": 777047097,
+    "3": 1498938543,
+    "4": 1194551564,
+    "5": 808737178
+   },
+   "has_ci": true,
+   "nb_union": 18
+  }
+ },
+ "rules": {
+  "composition": "판 안의 모든 n 에서 풀 지역 집합이 같다. 판의 지역 가운데 대비가 없거나 CI 풀 밖인 지역이 있으면 평균 행은 판정 불가, 평균 값 열 NaN",
+  "e2_n": "E2 의 n = 레나·캐나다 두 저장소 모두에 P1 키(방법 축 칸)가 있는 n. 한 지역에만 있는 n 은 excluded_n",
+  "ci": "h42.region_stats(h40.contrast → h4_common.boot_delta_blocks) + h42.pool_rows(m1_stats.strat). 두 가중(셀 가중, 블록 등가중)",
+  "verdict4": "h42.verdict4: 우세 = 두 가중 CI 상한 < 0, 열세 = 두 가중 CI 하한 > 0, 동등 = 네 끝값 절댓값 ≤ 0.5 cm, 그 밖 미결정, 끝값 비유한 = 판정 불가. verdict4_d10 은 δ 1.0 cm",
+  "seed": "하네스 규칙: TMx.seed = seed_of('lgboot', 이름), 분할 seed = seed_of(TMx.seed, 분할), 공통 재표집 seed_of('lgxboot', 이름)",
+  "split_info": "unit.json 의 dup_of·valid·n_eval·n_A(실행 때 h40.Data.split_structure 값). 기대 분할 수 = n_valid_splits(없으면 n_unique_splits)",
+  "keys": "h40._g(방법, n). 기준선 P0 = h40.P0_GRP, P1 = h40._g('P1', n)"
+ },
+ "n_rows": 540,
+ "n_mean_rows": 150
+}

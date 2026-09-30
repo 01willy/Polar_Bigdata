@@ -1,0 +1,9 @@
+target,mode,cond,n_star,censored,n_max,hit
+Lena,x,nested,40.0,False,1000,True
+Lena,x,alpha1,40.0,False,1000,True
+Canada,x,nested,10.0,False,320,True
+Canada,x,alpha1,3.0,False,320,True
+AL-2,i,nested,1000.0,False,1000,False
+AL-2,i,alpha1,,True,1000,False
+AL-5,i,nested,,True,160,False
+AL-5,i,alpha1,3.0,False,160,False
