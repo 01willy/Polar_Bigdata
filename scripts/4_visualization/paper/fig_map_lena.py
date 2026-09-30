@@ -13,7 +13,7 @@
   배치      LGU-B2 가 '전이'이면 본문 Fig 6c 용 3패널과 SI 6패널을 모두 만든다. 본문 3패널은 SI 의 (a), (d), (e)를 a, b, c 로 다시 붙이고
             캡션에 대응(본문 b = SI d, 본문 c = SI e)을 적는다. 그 밖은 SI 6패널 한 장이고 캡션에 '구간 폭은 예측값에 비례한다'를 쓴다
             (h49 메타의 selection.placement). QA 는 그림의 패널 문자와 캡션 패널 문장의 문자가 같은지도 본다(panel_letters_ok)
-  내보내기  PDF, SVG, 300 dpi PNG. 글꼴은 polar.paperstyle(Liberation Sans, Type 42). QA 는 paper/_common.qa_check(폭 180 mm, 최소 6.5 pt,
+  내보내기  PDF, SVG, 600 dpi PNG. 글꼴은 polar.paperstyle(Liberation Sans, Type 42). QA 는 paper/_common.qa_check(폭 180 mm, 최소 6.5 pt,
             글자 겹침, 잘림, 축 제목 금지, 범례 1개 이하, PDF 글꼴, 유니코드 마이너스, 캡션 규칙)
   캡션      영문(논문 규칙). 6.8 의 필수 항목(정적 지도, 라벨 지지와 1 km 격자의 차이, 영구동토 마스크 정의, 외삽 표시는 오차 위험 지표가
             아니라는 점, 방법과 선택 규칙)을 h49 메타의 caption 사실에서 만든다. 6.5 의 회색 육지 셀 비율과 첫 사유별 수(caption.gray_land,
@@ -230,7 +230,7 @@ def build_figure(pred: pd.DataFrame, meta: dict, layout="all6", synthetic_label=
     sel = meta.get("selection", {}).get("panels", {})
     alt_lo, alt_hi = _round_range(np.r_[pred.pred_a[shown], pred.pred_b[shown], pred.pred_c[shown]])
     alt_norm = Normalize(alt_lo, alt_hi)
-    w_lo, w_hi = 0.0, _round_range(pred.width90_a[shown], step=10.0, lo_q=0, hi_q=98)[1]
+    w_lo, w_hi = _round_range(pred.width90_a[shown], step=5.0, lo_q=2, hi_q=98)   # 폭의 공간 변화가 보이도록 2–98 백분위(09-30 시각 검토)
     w_norm = Normalize(w_lo, w_hi)
     d_norm = ps.shared_diverging_norm([pred.diff_c_minus_a[shown].values], step_cm=5.0)
     cat_cols = [cmc.devon_r(v) for v in (0.15, 0.4, 0.62, 0.88)]     # davos_r 의 중간 색(회녹색)은 마스크 회색과 가까워 devon_r 을 쓴다
@@ -273,7 +273,7 @@ def build_figure(pred: pd.DataFrame, meta: dict, layout="all6", synthetic_label=
         hcbar(fig, (cx - 50.0, cb_y("a"), 100.0, 2.2), sm["a"], "Active layer thickness (cm)", extend="both")
     else:
         hcbar(fig, (pos["a"][0] + 5.0, cb_y("a"), S - 10.0, 2.2), sm["a"], "ALT (cm)", extend="both")
-    hcbar(fig, (pos["d"][0] + 5.0, cb_y("d"), S - 10.0, 2.2), sm["d"], "90% interval width (cm)", extend="max")
+    hcbar(fig, (pos["d"][0] + 5.0, cb_y("d"), S - 10.0, 2.2), sm["d"], "90% interval width (cm)", extend="both")
     hcbar(fig, (pos["e"][0] + 5.0, cb_y("e"), S - 10.0, 2.2), sm["e"], "Covariates outside range (count)", ticks=[0, 1, 2, 3],
           ticklabels=["0", "1", "2", "≥3"])
     if "f" in panels:
@@ -412,7 +412,7 @@ def demo_pred_on_grid(grid_csv: Path, seed=0) -> tuple[pd.DataFrame, dict]:
 # ================================================================ 저장과 QA
 def save_and_qa(fig, stem: Path, caption: dict, qa_width=ps.W2_MM, layout="all6") -> dict:
     C = load_module("paper_common", "scripts/4_visualization/paper/_common.py")
-    paths = ps.save_figure(fig, stem, formats=("pdf", "svg", "png"), dpi=300, expect_width_mm=qa_width)
+    paths = ps.save_figure(fig, stem, formats=("pdf", "svg", "png"), dpi=600, expect_width_mm=qa_width)
     qa = C.qa_check(fig, paths["pdf"], caption, expect_width_mm=qa_width, ignore_overlap_gids=("inset",))
     qa.update(panel_letters_check(fig, caption, layout))
     if not qa["panel_letters_ok"]:

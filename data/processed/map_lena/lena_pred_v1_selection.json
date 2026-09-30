@@ -1,0 +1,467 @@
+{
+ "created": "2026-09-30 13:49",
+ "selection": {
+  "a": {
+   "method": "P0",
+   "default": "P0",
+   "why": "R0 와 P* 가 조건을 만족하지 않아 기본 방법 P0",
+   "R0_minus_P0": {
+    "dominant": {
+     "ok": false,
+     "note": "",
+     "rows": [
+      {
+       "source": "lgw_map_aux",
+       "verdict4": "동등",
+       "delta": -0.0962065529759161,
+       "pool": "지역 4/4"
+      }
+     ],
+     "delta": -0.0962065529759161,
+     "delta_spread": 0.0
+    },
+    "lena": {
+     "ok": true,
+     "note": "",
+     "rows": [
+      {
+       "source": "lgw_map_aux",
+       "verdict4": "동등",
+       "delta": 0.2669801006861128
+      }
+     ]
+    }
+   },
+   "l29": {
+    "n": 0,
+    "base": "P0",
+    "rows": [
+     {
+      "baseline": "B:s_aff",
+      "verdict4": "미결정",
+      "delta": 0.4957083935278192
+     },
+     {
+      "baseline": "B:ed_raw",
+      "verdict4": "열세",
+      "delta": 31.73594348886211
+     },
+     {
+      "baseline": "B:ku_raw",
+      "verdict4": "열세",
+      "delta": 12.16030225961535
+     },
+     {
+      "baseline": "B:cci_raw",
+      "verdict4": "열세",
+      "delta": 0.766203715566349
+     },
+     {
+      "baseline": "B:cci_aff",
+      "verdict4": "미결정",
+      "delta": -0.8457333007049752
+     },
+     {
+      "baseline": "B:ens",
+      "verdict4": "미결정",
+      "delta": -2.7308887003530216
+     },
+     {
+      "baseline": "P0@soil",
+      "verdict4": "열세",
+      "delta": 0.6985637377260197
+     },
+     {
+      "baseline": "P0@ku",
+      "verdict4": "미결정",
+      "delta": -2.30918420774352
+     },
+     {
+      "baseline": "P0@ed",
+      "verdict4": "미결정",
+      "delta": -1.0326232374145758
+     },
+     {
+      "baseline": "P0@cci",
+      "verdict4": "열세",
+      "delta": 1.0939268434621372
+     },
+     {
+      "baseline": "P0@tddm",
+      "verdict4": "우세",
+      "delta": -0.9968476850946004
+     }
+    ],
+    "h42_pick": "P0@tddm",
+    "pick": null,
+    "replaced": true,
+    "note": "L29 의 P0@tddm 는 격자에서 계산할 수 없고 대체할 목록 안 기준선이 없어 P0 를 쓴다"
+   },
+   "Pstar_lena": {
+    "ok": false,
+    "note": "P* 없음",
+    "rows": []
+   },
+   "Pstar_dominant": {
+    "ok": false,
+    "note": "P* 없음",
+    "rows": [],
+    "delta": NaN
+   }
+  },
+  "b": {
+   "method": "R1",
+   "default": "P1",
+   "Pr": "P1",
+   "why": "R1 − P1 우세, 레나 행 열세 아님",
+   "l29": {
+    "n": 10,
+    "base": "P1",
+    "rows": [
+     {
+      "baseline": "B:ens",
+      "verdict4": "미결정",
+      "delta": -1.5547183843151315
+     },
+     {
+      "baseline": "P1@soil",
+      "verdict4": "미결정",
+      "delta": 0.3257716088571765
+     },
+     {
+      "baseline": "P1@ku",
+      "verdict4": "미결정",
+      "delta": -1.7690978780087632
+     },
+     {
+      "baseline": "P1@ed",
+      "verdict4": "미결정",
+      "delta": -1.6118948557409556
+     },
+     {
+      "baseline": "P1@cci",
+      "verdict4": "열세",
+      "delta": 1.868178112434235
+     },
+     {
+      "baseline": "P1@tddm",
+      "verdict4": "미결정",
+      "delta": -0.73007255797622
+     }
+    ],
+    "h42_pick": null,
+    "pick": null,
+    "replaced": false,
+    "note": "L29 가 P1 보다 우세한 기준선을 정하지 않았다"
+   },
+   "R1_minus_P1": {
+    "dominant": {
+     "ok": true,
+     "note": "",
+     "rows": [
+      {
+       "source": "lgx_lg_aux",
+       "verdict4": "우세",
+       "delta": -0.1777870560166956,
+       "pool": "지역 4/4"
+      },
+      {
+       "source": "lgw_bundle",
+       "verdict4": "우세",
+       "delta": -0.1777870560166963,
+       "pool": "지역 4/4"
+      }
+     ],
+     "delta": -0.17778705601669595,
+     "delta_spread": 7.216449660063518e-16
+    },
+    "lena": {
+     "ok": true,
+     "note": "",
+     "rows": [
+      {
+       "source": "lgx_lg_aux",
+       "verdict4": "미결정",
+       "delta": -0.0255572711859969
+      },
+      {
+       "source": "lgw_bundle",
+       "verdict4": "미결정",
+       "delta": -0.0255572711859969
+      }
+     ]
+    }
+   },
+   "R1_minus_P1star": {
+    "dominant": {
+     "ok": true,
+     "note": "P1* 없음(조건 해당 없음)",
+     "rows": []
+    },
+    "lena": {
+     "ok": true,
+     "note": "P1* 없음",
+     "rows": []
+    }
+   }
+  },
+  "c": {
+   "method": "R1",
+   "default": "R1",
+   "Pr": "P1",
+   "why": "R1 − P1 우세, 레나 행 열세 아님",
+   "l29": {
+    "n": -1,
+    "base": "P1",
+    "rows": [
+     {
+      "baseline": "B:ens",
+      "verdict4": "미결정",
+      "delta": -1.3245719130253346
+     },
+     {
+      "baseline": "P1@soil",
+      "verdict4": "동등",
+      "delta": 0.1340471081625419
+     },
+     {
+      "baseline": "P1@ku",
+      "verdict4": "미결정",
+      "delta": -1.7503608289771069
+     },
+     {
+      "baseline": "P1@ed",
+      "verdict4": "미결정",
+      "delta": -1.6895945296744552
+     },
+     {
+      "baseline": "P1@cci",
+      "verdict4": "열세",
+      "delta": 1.668283598006176
+     },
+     {
+      "baseline": "P1@tddm",
+      "verdict4": "미결정",
+      "delta": -0.5525265583268778
+     }
+    ],
+    "h42_pick": null,
+    "pick": null,
+    "replaced": false,
+    "note": "L29 가 P1 보다 우세한 기준선을 정하지 않았다"
+   },
+   "R1_minus_P1": {
+    "dominant": {
+     "ok": true,
+     "note": "",
+     "rows": [
+      {
+       "source": "lgx_lg_aux",
+       "verdict4": "우세",
+       "delta": -0.4041075519834661,
+       "pool": "지역 4/4"
+      },
+      {
+       "source": "lgw_bundle",
+       "verdict4": "우세",
+       "delta": -0.4041075519834659,
+       "pool": "지역 4/4"
+      }
+     ],
+     "delta": -0.404107551983466,
+     "delta_spread": 2.220446049250313e-16
+    },
+    "lena": {
+     "ok": true,
+     "note": "",
+     "rows": [
+      {
+       "source": "lgx_lg_aux",
+       "verdict4": "우세",
+       "delta": -0.8023298255991062
+      },
+      {
+       "source": "lgw_bundle",
+       "verdict4": "우세",
+       "delta": -0.8023298255991062
+      }
+     ]
+    }
+   },
+   "R1_minus_P1star": {
+    "dominant": {
+     "ok": true,
+     "note": "P1* 없음(조건 해당 없음)",
+     "rows": []
+    },
+    "lena": {
+     "ok": true,
+     "note": "P1* 없음",
+     "rows": []
+    }
+   },
+   "L8": {
+    "found": true,
+    "verdict": "지지",
+    "rejected": false,
+    "stat": "Δ -2.64 [-3.47, -1.90], 블록 등가중 [-3.53, -1.67], 지역 4/4"
+   },
+   "caption_L8": false
+  },
+  "d": {
+   "method": "P0",
+   "normalizer": "const",
+   "B2": {
+    "found": true,
+    "verdict": "미결정",
+    "transfer": false,
+    "detail": {
+     "delta": 3.2861019077507656,
+     "ci_hi": 8.155848730156162,
+     "ci_hi_beq": 5.520719175308469,
+     "coverage_pool": 0.891928317280843,
+     "n_neg_regions": 1.0,
+     "seeds_ok": true
+    }
+   }
+  },
+  "placement": "SI 1장(전 패널). 캡션: 구간 폭은 예측값에 비례한다",
+  "gpu_notes": [],
+  "gpu_status": {
+   "lgx_lg_aux": "읽음(학습기 대비 층화 평균 행 40)",
+   "lgt_tests": "읽음(학습기 대비 층화 평균 행 7)",
+   "lgf_tests": "없음",
+   "lgfn_tests": "없음"
+  },
+  "panels": {
+   "a": "P0",
+   "b": "R1",
+   "c": "R1",
+   "d": "P0"
+  },
+  "input_check": {
+   "strict": true,
+   "problems": [],
+   "table_stats": {
+    "lgx_lg_aux": {
+     "present": true,
+     "n_rows": 265,
+     "n_parsed": 265,
+     "n_unparsed_label": 0,
+     "n_mean_main4": 54,
+     "n_mean_not_main4": 0
+    },
+    "lgx_tests": {
+     "present": true,
+     "n_rows": 1851,
+     "n_parsed": 1036,
+     "n_unparsed_label": 815,
+     "n_mean_main4": 188,
+     "n_mean_not_main4": 0
+    },
+    "lgw_bundle": {
+     "present": true,
+     "n_rows": 46,
+     "n_parsed": 45,
+     "n_unparsed_label": 1,
+     "n_mean_main4": 9,
+     "n_mean_not_main4": 0
+    },
+    "lgw_map_aux": {
+     "present": true,
+     "n_rows": 55,
+     "n_parsed": 55,
+     "n_unparsed_label": 0,
+     "n_mean_main4": 11,
+     "n_mean_not_main4": 0
+    },
+    "lgw_aux4": {
+     "present": true,
+     "n_rows": 566,
+     "n_parsed": 566,
+     "n_unparsed_label": 0,
+     "n_mean_main4": 0,
+     "n_mean_not_main4": 0
+    }
+   }
+  },
+  "gpu_missing": [
+   "lgf_tests.csv",
+   "lgfn_tests.csv"
+  ]
+ },
+ "synthetic": false,
+ "grid": {
+  "path": "data/processed/map_lena/lena_grid_x25_v1.csv.gz",
+  "bytes": 4387996,
+  "sha256": "d4c393627ffe0372608ad7e37196030b4f46dc1581746bf38e7654697dbe3ce6"
+ },
+ "grid_meta": {
+  "path": "data/processed/map_lena/lena_grid_x25_v1_meta.json",
+  "bytes": 21162,
+  "sha256": "af4b1aa408c8c90aa45a19dcbb38e3ee2630a4a19c260b65eb115f5692b2170a"
+ },
+ "verdict_inputs": {
+  "lg_tests.csv": {
+   "path": "results/rescale_lg/data/processed/lg/lg_tests.csv",
+   "bytes": 99235,
+   "sha256": "fe80690d82dc56ee203850956f7864a286bafa4be60ef184aa40bf6e613142bb"
+  },
+  "lgx_lg_aux.csv": {
+   "path": "data/processed/lgx/lgx_lg_aux.csv",
+   "bytes": 151538,
+   "sha256": "c80f26e45da83aa264f00e2baf07f7fc40c2a779aac1a80bd4ecc9386ef01c1d"
+  },
+  "lgx_tests.csv": {
+   "path": "data/processed/lgx/lgx_tests.csv",
+   "bytes": 976781,
+   "sha256": "f60b3c6f558d6ae8bba985c99a68733ffcf39536c1fd2b869060fdd75275fa69"
+  },
+  "lgw_bundle.csv": {
+   "path": "data/processed/lgw/lgw_bundle.csv",
+   "bytes": 23853,
+   "sha256": "eda4ccac9915ccef957ed07021e23a12b1aa49ab92b14107b68bc4346c17ea4f"
+  },
+  "lgw_map_aux.csv": {
+   "path": "data/processed/lgw/lgw_map_aux.csv",
+   "bytes": 27518,
+   "sha256": "eb0ce521210eed18109d3511086ca677df861f7fc41a0a867a9279aac34bf1bd"
+  },
+  "lgu_b_tests.csv": {
+   "path": "data/processed/lgu/lgu_b_tests.csv",
+   "bytes": 10905,
+   "sha256": "11066c405053a54383048091b32e04c262a0c003f6c63e39b47b796339f761ff"
+  },
+  "lgw_aux4.csv": {
+   "path": "data/processed/lgw/lgw_aux4.csv",
+   "bytes": 236829,
+   "sha256": "d83b9a26c246baca290d2424dc1138397679ec3a13d8fb404fe3eaa6a9f44b68"
+  },
+  "lgt_tests.csv": {
+   "path": "data/processed/lgt/lgt_tests.csv",
+   "bytes": 202171,
+   "sha256": "beb43652682fd4a9e678caca7efabf5ab7cd735c97264d0286cef19b8620d6dc"
+  },
+  "lgf_tests.csv": {
+   "path": "data/processed/lgf/lgf_tests.csv",
+   "exists": false
+  },
+  "lgfn_tests.csv": {
+   "path": "data/processed/lgf/lgfn_tests.csv",
+   "exists": false
+  }
+ },
+ "verdict_dirs": {
+  "lg": "/home/willy010313/Polar_Bigdata/results/rescale_lg/data/processed/lg",
+  "lgx": "/home/willy010313/Polar_Bigdata/data/processed/lgx",
+  "lgw": "/home/willy010313/Polar_Bigdata/data/processed/lgw",
+  "lgu": "/home/willy010313/Polar_Bigdata/data/processed/lgu",
+  "lgt": "/home/willy010313/Polar_Bigdata/data/processed/lgt",
+  "lgf": "/home/willy010313/Polar_Bigdata/data/processed/lgf"
+ },
+ "gpu_tables_missing": [
+  "lgf_tests.csv",
+  "lgfn_tests.csv"
+ ],
+ "allow_missing_gpu_tables": true
+}

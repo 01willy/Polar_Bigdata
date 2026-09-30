@@ -893,3 +893,10 @@ NEXT §8.3 의 AK1 은 '알래스카 지역 내 모의(1단계)에서 넘은 조
   - (h) NEXT 계획서 기록: SC1–SC3·AK1 의 철회와 WRAPUP 3.1·5절 SC1w–SC3w·AK1w 로의 대체를 NEXT 계획서 개정 이력에 한 줄로 적었다(개정 1 의 후속 기록 (1)의 이행).
   - 열람 상태: LG 미회수(`results/rescale_lg/` 없음), LGX 두 묶음 회수·미해제(`data/processed/lgx/` 없음), LGT 조각 미열람, LGU 판정 표 미열람(접근 시각 = 생성 시각), LGD 조각 미열람, LGF 미열람(11:41 확인).
 - 2026-09-30 결과 추가 3(J8, LG 회수 뒤): 2.3 의 추출 재생성 대조를 LG 본 실행 조각으로 다시 했다(`h39 --mode units --ref-shards results/rescale_lg/data/processed/lg/shards --ref-tags lg`, 13:00–13:01, 스레드 1, 산출 `data/processed/lgw/j8_units_zovwo/`). 대조 조각 117개(CPU 부분 전부), 불일치 조각 0. 키 열과 `n_lab`, `n_blocks_lab` 두 열만 읽었다. 2.3 이 '대조할 조각이 없어 확인하지 못한다' 고 적은 n = 10 의 추출도 이 대조로 확인되었다. 첫 산출(`data/processed/lgw/lgw_label_units*.csv`, 03:34)은 바꾸지 않았다. 봉인 폴더(`data/processed/lgw/sealed/`)는 LG 회수(12:30) 뒤 h39 summarize 단계에서 연다. 여는 시각은 그 단계의 로그와 이 이력에 적는다.
+
+### 지도 잠정판(C8, F2, 2026-09-30 13:49–14:05)
+
+- **실행**: `POST_MAP_PROVISIONAL=1 run_post_results.sh map`(h49_map_contrasts, h49_transfer_map `--check-inputs`·`--allow-run`, fig_map_lena, 13:49:03–13:49:59, 모두 종료 코드 0). LGT·LGF 표가 판정에 쓰이지 않는 잠정판이다(6.7 공통 규칙상 GPU 학습기는 지도에 쓰지 않으므로 최종판에서도 방법 선택은 바뀌지 않는다. LGF 결과는 캡션 문장만 바꾼다).
+- **6.7 선택 결과**(`data/processed/map_lena/lena_pred_v1_selection.json`): (a) P0. R0 − P0(n 0)가 동등이고, L29 의 P* = P0@tddm 은 연도 정합 도일이 필요해 정적 격자에서 정의되지 않으며 격자 계산 가능 목록 안에 P0 보다 우세한 기준선이 없다. (b) R1(R1 − P1 우세, n = 10 의 P1* 없음, 레나 행 열세 아님). (c) R1(R1 − P1 전량 우세, 레나 행 열세 아님). (d) P0 의 구간, 정규화기 const(LGU-B2 미결정).
+- **배치**: LGU-B2 가 미결정이므로 6.8 에 따라 지도 전체를 SI 한 장으로 둔다. 캡션에 '구간 폭은 예측값에 비례한다', 외삽 표시는 오차 위험 지표가 아니라는 점, 선택 규칙, P0@tddm 을 격자에서 쓸 수 없다는 점이 들어 있다.
+- **시각 검토(F2)와 수정**: (1) PNG 가 300 dpi 였다. 그림 명세의 600 dpi 로 바꿨다(6.8 의 300 dpi 이상). (2) 패널 (d)의 색 범위가 0–80 cm 라 폭(62–79 cm)의 공간 변화가 보이지 않았고 최댓값 79.2 cm 인데 상한 화살표가 붙어 있었다. 2–98 백분위(60–80 cm)로 바꾸고 양쪽 화살표로 고쳤다. (3) 패널 (e)는 거의 모든 셀이 원천 범위 밖 공변량 3개 이상이다. 결함이 아니라 레나가 원천(알래스카 중심)보다 추운 데서 온다(가장 자주 벗어나는 열 e5_maat, e5_fdd, e5_tcold). 자동 QA(글자 겹침 0, 잘림 0, 최소 6.5 pt, 글꼴 내장)는 수정 뒤에도 통과했다. 패널 (a)의 가로 띠는 ERA5-Land 격자(약 9 km)에서 온다.
