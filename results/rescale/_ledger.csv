@@ -10,3 +10,4 @@ submitted_at,job_id,name,core_type,cores,slots,walltime_hours,low_priority,usd_p
 2026-10-01T14:36:50,QmToeb,polar-wf2-smoke,elm,96,1,1,False,3.2352,3.24,submitted,,
 2026-10-01T14:52:31,OUZBT,polar-wf2-full,elm,96,1,2,False,3.2352,6.47,submitted,,
 2026-10-02T00:22:10,oCvpT,polar-wf3-full,elm,96,1,2,False,3.2352,6.47,submitted,,
+2026-10-02T01:24:34,Vppbeb,polar-wf3-full-hm,hematite,64,1,2,False,4.2176,8.44,submitted,,

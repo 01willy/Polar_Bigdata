@@ -218,3 +218,4 @@ WF1–WF4 결과(5.1)를 본 뒤 워크플로 표의 근거가 약한 칸을 채
   10. Rescale: `configs/rescale/wf3_full.yaml`(elm 96코어, 상한 2 h, 최악 6.48 달러, max_cost 7 달러). 2차 스모크(QmToeb)와 같은 묶음 구성·환경이고 새 의존성이 없어 Rescale 스모크는 생략한다. 예상 약 0.4 h, 약 1.3 달러.
 - 2026-10-02 00:22: 3차 본 실행 제출 oCvpT(wf3_full.yaml, elm 96코어, 상한 2 h, 최악 6.47 달러, 묶음 BRRCLj, 커밋 6d4c2dd).
 - 2026-10-02 00:23: 기록 시각 정정. 7절 머리와 개정 이력의 등록 시각(00:40 으로 적었다)은 등록 커밋 8180632 의 시각 00:05 로, 구현 시각(01:20 으로 적었다)은 구현 커밋 6d4c2dd 의 시각 00:20 으로 고쳤다. 내용은 바뀌지 않았다.
+- 2026-10-02 01:24: oCvpT(elm)는 제출 뒤 60분 동안 노드를 받지 못했다(Started → Pending 두 번, 계산 없음). 01:23 에 멈추고 hematite(AMD Milan-X 64코어, 4.22 달러/시간, 워커 14개) 설정 `configs/rescale/wf3_full_hematite.yaml` 로 다시 제출했다: Vppbeb(상한 2 h, 최악 8.44 달러, 묶음 BzYQzj, 같은 코드 6d4c2dd). hematite 는 WF6 를 돌린 elm 과 같은 Milan 계열이다. 3차 실험 전체가 이 한 플랫폼에서 돈다.
