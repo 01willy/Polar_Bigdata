@@ -1476,6 +1476,40 @@
     ]
    },
    {
+    "file": "/home/willy010313/Polar_Bigdata/data/processed/lgf/lgf_tests.csv",
+    "source": "lgf:lgf_tests.csv",
+    "n_rows_read": 406,
+    "n_rows_out": 405,
+    "n_unmatched": 10,
+    "cols_read": [
+     "ci_hi",
+     "ci_hi_beq",
+     "ci_lo",
+     "ci_lo_beq",
+     "contrast",
+     "scope",
+     "target",
+     "test_id"
+    ]
+   },
+   {
+    "file": "/home/willy010313/Polar_Bigdata/data/processed/lgf/lgfn_tests.csv",
+    "source": "lgf:lgfn_tests.csv",
+    "n_rows_read": 1571,
+    "n_rows_out": 1570,
+    "n_unmatched": 60,
+    "cols_read": [
+     "ci_hi",
+     "ci_hi_beq",
+     "ci_lo",
+     "ci_lo_beq",
+     "contrast",
+     "scope",
+     "target",
+     "test_id"
+    ]
+   },
+   {
     "file": "/home/willy010313/Polar_Bigdata/data/processed/lgd/lgd_tests.csv",
     "source": "lgd:lgd_tests.csv",
     "n_rows_read": 634,
@@ -1695,8 +1729,8 @@
     910
    ]
   ],
-  "elapsed_s": 105.8,
-  "time": "2026-09-30 13:47:31 KST",
+  "elapsed_s": 107.8,
+  "time": "2026-10-02 00:00:00 KST",
   "argv": [
    "--mode",
    "summarize",
@@ -1717,6 +1751,8 @@
    "data/processed/lgu",
    "--lgt-dir",
    "data/processed/lgt",
+   "--lgf-dir",
+   "data/processed/lgf",
    "--out-dir",
    "data/processed/lgw"
   ],
@@ -1741,13 +1777,13 @@
    "scipy": "1.11.4",
    "sklearn": "1.3.0"
   },
-  "max_rss_mb": 1556.1,
+  "max_rss_mb": 1555.5,
   "nice": 10
  },
  "bias-mae": {
   "n_units": 25,
   "shards": "data/processed/lgx/shards",
-  "time": "2026-09-30 13:47:36 KST",
+  "time": "2026-10-02 00:00:02 KST",
   "argv": [
    "--mode",
    "bias-mae",
@@ -1768,6 +1804,8 @@
    "data/processed/lgu",
    "--lgt-dir",
    "data/processed/lgt",
+   "--lgf-dir",
+   "data/processed/lgf",
    "--out-dir",
    "data/processed/lgw"
   ],
@@ -1792,7 +1830,7 @@
    "scipy": "1.11.4",
    "sklearn": "1.3.0"
   },
-  "max_rss_mb": 179.6,
+  "max_rss_mb": 177.5,
   "nice": 10,
   "resampling": "없음"
  }

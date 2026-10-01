@@ -1,5 +1,5 @@
 {
- "created": "2026-09-30 13:49 KST",
+ "created": "2026-10-02 00:00 KST",
  "script": "scripts/2_evaluation/h49_transfer_map.py",
  "script_sha256": "7afd9fe9b8a087f3f7cd02770dcff461dc049ab5f299172e5ca755128ad12945",
  "plan": "docs/EXPERIMENT_PLAN_WRAPUP_2026-09-30.md 6.6–6.10 (커밋 316714c)",
@@ -57,11 +57,13 @@
   },
   "lgf_tests.csv": {
    "path": "data/processed/lgf/lgf_tests.csv",
-   "exists": false
+   "bytes": 272068,
+   "sha256": "ab363038bcf91a40b85af0cb5b44f3cacfdfe8df4ea94c915207a4690f4e5f17"
   },
   "lgfn_tests.csv": {
    "path": "data/processed/lgf/lgfn_tests.csv",
-   "exists": false
+   "bytes": 1087813,
+   "sha256": "a38c117b2ba7590c89067161b6a11e31365d67d703a73524a896e50f6561159c"
   }
  },
  "verdict_dirs": {
@@ -72,11 +74,8 @@
   "lgt": "/home/willy010313/Polar_Bigdata/data/processed/lgt",
   "lgf": "/home/willy010313/Polar_Bigdata/data/processed/lgf"
  },
- "gpu_tables_missing": [
-  "lgf_tests.csv",
-  "lgfn_tests.csv"
- ],
- "allow_missing_gpu_tables": true,
+ "gpu_tables_missing": [],
+ "allow_missing_gpu_tables": false,
  "selection": {
   "a": {
    "method": "P0",
@@ -403,12 +402,39 @@
    }
   },
   "placement": "SI 1장(전 패널). 캡션: 구간 폭은 예측값에 비례한다",
-  "gpu_notes": [],
+  "gpu_notes": [
+   {
+    "learner": "I",
+    "learner_en": "TabICL",
+    "comparator": "C",
+    "contrast": "R1[I]-R1[C]|n160|lam0.25",
+    "n": 160,
+    "delta": -0.5463444293035897,
+    "source": "lgf_tests",
+    "experiment": "LGF-F2",
+    "mark": "",
+    "test_id": "LGF-F2",
+    "pool": "지역 2/4"
+   },
+   {
+    "learner": "I",
+    "learner_en": "TabICL",
+    "comparator": "C",
+    "contrast": "R1[I]-R1[C]|n320|lam0.25",
+    "n": 320,
+    "delta": -0.5494695625571152,
+    "source": "lgf_tests",
+    "experiment": "LGF-F2",
+    "mark": "",
+    "test_id": "LGF-F2",
+    "pool": "지역 2/4"
+   }
+  ],
   "gpu_status": {
    "lgx_lg_aux": "읽음(학습기 대비 층화 평균 행 40)",
    "lgt_tests": "읽음(학습기 대비 층화 평균 행 7)",
-   "lgf_tests": "없음",
-   "lgfn_tests": "없음"
+   "lgf_tests": "읽음(학습기 대비 층화 평균 행 7)",
+   "lgfn_tests": "읽음(학습기 대비 층화 평균 행 60)"
   },
   "panels": {
    "a": "P0",
@@ -462,10 +488,7 @@
     }
    }
   },
-  "gpu_missing": [
-   "lgf_tests.csv",
-   "lgfn_tests.csv"
-  ]
+  "gpu_missing": []
  },
  "coefs": {
   "P0": {
@@ -715,11 +738,35 @@
   },
   "placement": "SI 1장(전 패널). 캡션: 구간 폭은 예측값에 비례한다",
   "L8_rejected": false,
-  "gpu_notes": [],
-  "gpu_missing": [
-   "lgf_tests.csv",
-   "lgfn_tests.csv"
+  "gpu_notes": [
+   {
+    "learner": "I",
+    "learner_en": "TabICL",
+    "comparator": "C",
+    "contrast": "R1[I]-R1[C]|n160|lam0.25",
+    "n": 160,
+    "delta": -0.5463444293035897,
+    "source": "lgf_tests",
+    "experiment": "LGF-F2",
+    "mark": "",
+    "test_id": "LGF-F2",
+    "pool": "지역 2/4"
+   },
+   {
+    "learner": "I",
+    "learner_en": "TabICL",
+    "comparator": "C",
+    "contrast": "R1[I]-R1[C]|n320|lam0.25",
+    "n": 320,
+    "delta": -0.5494695625571152,
+    "source": "lgf_tests",
+    "experiment": "LGF-F2",
+    "mark": "",
+    "test_id": "LGF-F2",
+    "pool": "지역 2/4"
+   }
   ],
+  "gpu_missing": [],
   "gray_land": {
    "n_land": 38173,
    "n_land_gray": 87,
@@ -1135,31 +1182,31 @@
  },
  "fits": {
   "n": 4,
-  "sec": 4.7,
+  "sec": 7.4,
   "detail": [
    {
     "tag": "grid[R1_n10]:R1",
     "seed": 0,
     "n_train": 14439,
-    "sec": 2.83
+    "sec": 5.44
    },
    {
     "tag": "grid[R1_n10]:R1",
     "seed": 1,
     "n_train": 14439,
-    "sec": 0.59
+    "sec": 0.67
    },
    {
     "tag": "grid[R1_all]:R1",
     "seed": 0,
     "n_train": 17466,
-    "sec": 0.63
+    "sec": 0.65
    },
    {
     "tag": "grid[R1_all]:R1",
     "seed": 1,
     "n_train": 17466,
-    "sec": 0.69
+    "sec": 0.62
    }
   ]
  },
@@ -1187,11 +1234,11 @@
   },
   "selection": {
    "path": "data/processed/map_lena/lena_pred_v1_selection.json",
-   "bytes": 10682,
-   "sha256": "4e81e514715de9f218fda257b4fcfb92ffb0350dfe7abfae90ac67afb246e541"
+   "bytes": 11432,
+   "sha256": "627b501c01e29a3aa9788b9d1f946878c5e6a3010d4526da433d1bbd8e359707"
   }
  },
  "threads": 2,
- "max_rss_mb": 355.5,
- "elapsed_s": 7.4
+ "max_rss_mb": 356.6,
+ "elapsed_s": 9.4
 }
