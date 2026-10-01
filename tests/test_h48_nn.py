@@ -696,6 +696,22 @@ def test_q_shard_state(tmp_path, stubs):
     assert not ps["npz"].exists() and pd.read_csv(ps["runs"]).rmse_cm.isna().all(), "산출 제한: BlockStore 미저장, RMSE NaN"
 
 
+def test_q2_check_cfg_common_across_targets():
+    """집계의 조각 대조: 대상마다 선택 결과(cfg_hash)가 달라도 공통 설정(cfg_common)이 같으면 통과, 공통 설정이 다르거나 한 대상 안에서
+    cfg_hash 가 여러 종이면 거부(2026-10-01 집계 수정, LGF 개정 이력)."""
+    a = SimpleNamespace(allow_mixed_cfg=False)
+    sh = [dict(pass_="cpu", learner="catboost_tuned_loc") for _ in range(4)]
+    us = [dict(target=t, mode="x", cfg_hash=h, cfg_common="c1", code_sha={"h48": "s"})
+          for t, h in (("Lena", "h1"), ("Lena", "h1"), ("Canada", "h2"), ("Canada", "h2"))]
+    info = N.check_cfg_n(a, sh, us)
+    assert info["cpu|catboost_tuned_loc"]["cfg_common"] == {"c1": 4}
+    with pytest.raises(SystemExit):
+        N.check_cfg_n(a, sh, [dict(u, cfg_common=("c2" if i == 0 else "c1")) for i, u in enumerate(us)])
+    with pytest.raises(SystemExit):
+        N.check_cfg_n(a, sh, [dict(u, cfg_hash=("h3" if i == 0 else u["cfg_hash"])) for i, u in enumerate(us)])
+    N.check_cfg_n(SimpleNamespace(allow_mixed_cfg=True), sh, [dict(u, cfg_common=("c2" if i == 0 else "c1")) for i, u in enumerate(us)])
+
+
 # ================================================================ (r) 검증 지적 반영: 창 파일 설정, 조각 선택 기록, 비교 대상, 문구, 실행 제어
 def write_window(a, **kw):
     w = dict(window_h=48.0, gpu_events=[], decisions=[])

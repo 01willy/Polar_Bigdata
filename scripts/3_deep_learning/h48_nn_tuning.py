@@ -3561,17 +3561,24 @@ def read_runs_n(shards):
 
 
 def check_cfg_n(a, shards, units):
-    """(통과, 학습기)마다 설정 해시가 하나여야 한다(--allow-mixed-cfg 로 진행)."""
+    """(통과, 학습기)마다 공통 설정 해시(cfg_common)가 하나이고, (통과, 학습기, 대상, 모드)마다 설정 해시(cfg_hash)가 하나여야 한다
+    (--allow-mixed-cfg 로 진행). cfg_hash 에는 대상별 선택 결과(sel_dec, cb_cfg)가 들어가므로 대상 사이에서는 cfg_common 으로 대조한다(명세 11)."""
     info = {}
     for key in sorted({(s_["pass_"], s_["learner"]) for s_ in shards}):
         us = [u for s_, u in zip(shards, units) if (s_["pass_"], s_["learner"]) == key]
-        hs = Counter(str(u.get("cfg_hash", "legacy")) for u in us)
+        hs = Counter(str(u.get("cfg_common", u.get("cfg_hash", "legacy"))) for u in us)
+        ht = {}
+        for u in us:
+            ht.setdefault((u.get("target"), u.get("mode")), set()).add(str(u.get("cfg_hash", "legacy")))
+        bad_t = {f"{t}|{m}": sorted(v) for (t, m), v in ht.items() if len(v) > 1}
         cs = Counter(str((u.get("code_sha") or {}).get("h48", "legacy")) for u in us)
-        info["|".join(key)] = dict(cfg_hash=dict(hs), code_sha=dict(cs), n=len(us))
+        info["|".join(key)] = dict(cfg_common=dict(hs), cfg_hash_per_target={f"{t}|{m}": sorted(v) for (t, m), v in sorted(ht.items())},
+                                   code_sha=dict(cs), n=len(us))
         if len(cs) > 1:
             print(f"  [warn] {key}: 조각의 코드 해시가 {len(cs)}종이다 {dict(cs)}", flush=True)
-        if len(hs) > 1:
-            msg = f"{key}: 조각의 설정 해시가 {len(hs)}종이다 {dict(hs)}"
+        if len(hs) > 1 or bad_t:
+            msg = (f"{key}: 조각의 공통 설정 해시가 {len(hs)}종이다 {dict(hs)}" if len(hs) > 1
+                   else f"{key}: 한 대상 안에서 조각의 설정 해시가 여러 종이다 {bad_t}")
             if not a.allow_mixed_cfg:
                 raise SystemExit("[summarize] " + msg + " (--allow-mixed-cfg 로 진행할 수 있다)")
             print("  [warn] " + msg, flush=True)
