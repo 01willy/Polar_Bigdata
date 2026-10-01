@@ -280,8 +280,8 @@ sum_lgf() {
   done
   need_file "$PYF" "$LGS"
   th 2; resources 16
-  run_step sum-lgf data/processed/lgf -- "$PYF" -u scripts/3_deep_learning/h47_foundation_models.py --summarize-only --threads 2 || return $?
-  run_step sum-lgfn data/processed/lgf -- "$PYF" -u scripts/3_deep_learning/h48_nn_tuning.py --summarize-only --cross-lg --lg-dir "$LGS" --threads 2
+  run_step sum-lgf data/processed/lgf -- "$PYF" -u scripts/3_deep_learning/h47_foundation_models.py --summarize-only --allow-local --threads 2 || return $?
+  run_step sum-lgfn data/processed/lgf -- "$PYF" -u scripts/3_deep_learning/h48_nn_tuning.py --summarize-only --allow-local --cross-lg --lg-dir "$LGS" --threads 2
   say "sum-lgf: 이어서 scenarios(δ_rel)와 map(최종판)을 다시 돈다"
 }
 
