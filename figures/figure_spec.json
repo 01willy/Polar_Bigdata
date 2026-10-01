@@ -412,13 +412,13 @@
         "C7(lgw_bundle)",
         "신규 모듈 pool_fixed_curve"
       ],
-      "status": "F3 1부 구현, 2부 갱신(2026-09-30). v2 산출(AB 표지, 2부 추가 항목 반영). LGF 조건부 곡선 평가만 남음",
+      "status": "F3 1부 구현, 2부 갱신(2026-09-30). v2 산출(AB 표지, 2부 추가 항목 반영). LGF 조건부 곡선 평가 완료(불성립, 2026-10-02)",
       "f3_v2": {
         "data_module": "scripts/4_visualization/paper/v2_data.py(원천 표 → data/processed/paper_figs/*.csv, 판정 기호는 원천 표 열을 그대로 옮긴다)",
         "style_module": "scripts/4_visualization/paper/v2_style.py(paperstyle·_common 재사용, 범주 n 축, 4분 판정 기호, 저장·QA·캡션)",
         "derived_dir": "data/processed/paper_figs(작업 지시의 경로. path_rules.paper_derived 의 data/processed/paper 대신 쓴다)",
         "platform": "LG·LGX 값은 모두 Rescale 조각(LG 작업 ZovWo, LGX 조각 4,451개)에서 나왔다. lgx_lg_aux 와 lgx_tests 는 같은 조각을 로컬에서 다시 집계한 표(h42 --summarize-only)이며 lgx_lg_aux 파생 열에는 '교차 환경 미확인' 표지를 캡션에 적는다",
-        "pending": "LGF 창 마감 뒤 L34(a)·LGF-F1·LGF-N1 조건부 곡선 평가만 남는다(Fig 2). lgw_bundle·lgw_aux4·lgw_splitratio 는 2부에서 반영",
+        "pending": "L34(a)·LGF-F1·LGF-N1 조건부 곡선 평가는 2026-10-02 에 끝났다(불성립, Fig 2 변경 없음). lgw_bundle·lgw_aux4·lgw_splitratio 는 2부에서 반영",
         "exports": "outputs/figures/paper/v2/<이름>.{pdf,svg,png(600 dpi)}, source_data/v2/<Fig>_<패널>.csv, _qa/v2_<이름>_qa.json, CAPTIONS.md 의 v2 절",
         "module": "scripts/4_visualization/paper/fig2_label_curve.py",
         "file_stem": "outputs/figures/paper/v2/Fig2_label_curve",
@@ -453,7 +453,7 @@
         "L29_pstar_change": "등록 결과(7.1a, 7.2): P* = P0@tddm(n 0), P1* = P1@ed(n 40·160). 0선은 P0 로 두고(conditional L29_pstar) P* 가로선, P1* 빈 사각형, 기호 표의 R1 − P1*·R1 − P* 행을 더했다. 범례 7항목(P1, R0, R1, R2, D0, P*, P1*)",
         "conditional_eval": {
           "fig2_pool_editions": "적용(E1, E2)",
-          "fig2_curve_additions": "L10: 등록 판정 '지지'(주 대비 네 개 모두 우세)라 불성립. 다만 L10 보조 행(n 40·160, 지역 2/4)에서 R1 − F1k, R1 − F1n 이 열세다(스펙 문구 'L10 에 열세가 있으면' 의 해석 문제로 보고). L30: 우세 없음(세 학습기 모두 열세), 불성립. L34(a)·LGF-F1·LGF-N1: 표 미열람, 미평가",
+          "fig2_curve_additions": "L10: 등록 판정 '지지'(주 대비 네 개 모두 우세)라 불성립. 다만 L10 보조 행(n 40·160, 지역 2/4)에서 R1 − F1k, R1 − F1n 이 열세다(스펙 문구 'L10 에 열세가 있으면' 의 해석 문제로 보고). L30: 우세 없음(세 학습기 모두 열세), 불성립. L34(a)·LGF-F1·LGF-N1: 불성립(2026-10-02 평가. L34(a) D0[T] − P0 은 열세(+1.02)로 우세가 아니고, LGF-F1·LGF-N1 은 모두 지지(1갈래)라 기각 조건이 서지 않는다). Fig 2 는 기본 5방법만 그린다",
           "L29_pstar": "성립(P* = P0@tddm). Fig 2 는 0선 P0 유지 + P*·P1* 병기"
         },
         "exports_done": [
@@ -688,13 +688,13 @@
         "J2",
         "신규 모듈 pool_fixed_curve"
       ],
-      "status": "F3 1부 구현, 2부 갱신(2026-09-30). v2 산출(AB 표지, 2부 추가 항목 반영). LGF 조건부 곡선 평가만 남음",
+      "status": "F3 1부 구현, 2부 갱신(2026-09-30). v2 산출(AB 표지, 2부 추가 항목 반영). LGF 조건부 곡선 평가 완료(불성립, 2026-10-02)",
       "f3_v2": {
         "data_module": "scripts/4_visualization/paper/v2_data.py(원천 표 → data/processed/paper_figs/*.csv, 판정 기호는 원천 표 열을 그대로 옮긴다)",
         "style_module": "scripts/4_visualization/paper/v2_style.py(paperstyle·_common 재사용, 범주 n 축, 4분 판정 기호, 저장·QA·캡션)",
         "derived_dir": "data/processed/paper_figs(작업 지시의 경로. path_rules.paper_derived 의 data/processed/paper 대신 쓴다)",
         "platform": "LG·LGX 값은 모두 Rescale 조각(LG 작업 ZovWo, LGX 조각 4,451개)에서 나왔다. lgx_lg_aux 와 lgx_tests 는 같은 조각을 로컬에서 다시 집계한 표(h42 --summarize-only)이며 lgx_lg_aux 파생 열에는 '교차 환경 미확인' 표지를 캡션에 적는다",
-        "pending": "LGF 창 마감 뒤 L34(a)·LGF-F1·LGF-N1 조건부 곡선 평가만 남는다(Fig 2). lgw_bundle·lgw_aux4·lgw_splitratio 는 2부에서 반영",
+        "pending": "L34(a)·LGF-F1·LGF-N1 조건부 곡선 평가는 2026-10-02 에 끝났다(불성립, Fig 2 변경 없음). lgw_bundle·lgw_aux4·lgw_splitratio 는 2부에서 반영",
         "exports": "outputs/figures/paper/v2/<이름>.{pdf,svg,png(600 dpi)}, source_data/v2/<Fig>_<패널>.csv, _qa/v2_<이름>_qa.json, CAPTIONS.md 의 v2 절",
         "module": "scripts/4_visualization/paper/fig3_physics_use.py",
         "file_stem": "outputs/figures/paper/v2/Fig3_physics_use",
@@ -917,13 +917,13 @@
         "신규 모듈 n1_target_summary",
         "조건부 C12"
       ],
-      "status": "F3 1부 구현, 2부 갱신(2026-09-30). v2 산출(AB 표지, 2부 추가 항목 반영). LGF 조건부 곡선 평가만 남음",
+      "status": "F3 1부 구현, 2부 갱신(2026-09-30). v2 산출(AB 표지, 2부 추가 항목 반영). LGF 조건부 곡선 평가 완료(불성립, 2026-10-02)",
       "f3_v2": {
         "data_module": "scripts/4_visualization/paper/v2_data.py(원천 표 → data/processed/paper_figs/*.csv, 판정 기호는 원천 표 열을 그대로 옮긴다)",
         "style_module": "scripts/4_visualization/paper/v2_style.py(paperstyle·_common 재사용, 범주 n 축, 4분 판정 기호, 저장·QA·캡션)",
         "derived_dir": "data/processed/paper_figs(작업 지시의 경로. path_rules.paper_derived 의 data/processed/paper 대신 쓴다)",
         "platform": "LG·LGX 값은 모두 Rescale 조각(LG 작업 ZovWo, LGX 조각 4,451개)에서 나왔다. lgx_lg_aux 와 lgx_tests 는 같은 조각을 로컬에서 다시 집계한 표(h42 --summarize-only)이며 lgx_lg_aux 파생 열에는 '교차 환경 미확인' 표지를 캡션에 적는다",
-        "pending": "LGF 창 마감 뒤 L34(a)·LGF-F1·LGF-N1 조건부 곡선 평가만 남는다(Fig 2). lgw_bundle·lgw_aux4·lgw_splitratio 는 2부에서 반영",
+        "pending": "L34(a)·LGF-F1·LGF-N1 조건부 곡선 평가는 2026-10-02 에 끝났다(불성립, Fig 2 변경 없음). lgw_bundle·lgw_aux4·lgw_splitratio 는 2부에서 반영",
         "exports": "outputs/figures/paper/v2/<이름>.{pdf,svg,png(600 dpi)}, source_data/v2/<Fig>_<패널>.csv, _qa/v2_<이름>_qa.json, CAPTIONS.md 의 v2 절",
         "module": "scripts/4_visualization/paper/fig4_min_labels.py",
         "file_stem": "outputs/figures/paper/v2/Fig4_min_labels",
