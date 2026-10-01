@@ -1,16 +1,18 @@
 #!/bin/bash
-# WF(H54) Rescale 작업. 계획 docs/EXPERIMENT_PLAN_WF_2026-10-01.md §4.
-# 설정: configs/rescale/wf_smoke.yaml(WF_MODE=smoke, 사전 점검), configs/rescale/wf_full.yaml(WF_MODE=full, 본 실행).
+# WF(H54) Rescale 작업. 계획 docs/EXPERIMENT_PLAN_WF_2026-10-01.md §4, 2차 보강 §6.
+# 설정: 1차(wf1–wf4) configs/rescale/wf_smoke.yaml(WF_MODE=smoke, 사전 점검), configs/rescale/wf_full.yaml(WF_MODE=full, 본 실행),
+#       2차 보강(wf6–wf8) configs/rescale/wf2_smoke.yaml, configs/rescale/wf2_full.yaml. 실험은 WF_EXPS 로 고른다.
 # CPU 전용 노드(elm, AMD EPYC Milan 96코어)에서 돈다. 로컬 공유 서버에서는 실행하지 않는다(저장소(.git) 안에서는 거부한다).
 #
 # WF_MODE=smoke (단계마다 종료 코드를 wf_smoke_status.csv 에 남긴다. 필수 = 1 인 단계가 실패하면 종료 코드 1)
 #   1 env, inputs, deps   환경 출력, 입력 확인, 필수 패키지 설치(lg_common.sh 의 lg_install_deps), 선택 패키지 pytest·pykrige
-#   2 smoke               WF_RESCALE=1 h54 --smoke --workers 4 --threads 4 (실험 4종의 모든 경로, 대상 축소, 분할 1)
+#   2 smoke               WF_RESCALE=1 h54 --smoke --exps $WF_EXPS --workers 4 --threads 4 (고른 실험의 모든 경로, 대상 축소, 분할 1)
 #   3 pytest              LG_RUN_HEAVY=1 python3 -m pytest -q tests/test_h54_workflow.py
 #                         (WF_RESCALE·LG_RESCALE 는 지우고 실행한다. 시험 (i)가 허용 표지 없는 본 실행의 거부를 확인한다)
 #   4 count               h54 --count-only (본 실행 범위의 적합 수와 추정 시간. 환산의 분모)
 #   5 precheck            WF_RESCALE=1 h54 --precheck --workers 7 --threads 4 (실험마다 본 실행 크기의 대표 단위, 분할 1)
-#   6 project             사전 점검 단위의 실측 시간과 같은 단위의 추정 시간의 비로 본 실행 누적 시간을 환산한다(wf_smoke_projection.csv)
+#   6 project             사전 점검 단위의 실측 시간과 같은 단위의 추정 시간의 비로 본 실행 누적 시간을 환산한다(wf_smoke_projection.csv).
+#                         적합 수 표는 1차 wf_count.csv, 2차 보강 wf2b_count.csv 이고 WF_EXPS 의 실험만 더한다
 #   결과 묶음 results_wf_smoke.tar.gz 는 단계마다 다시 쓴다(벽시계 상한에 걸려도 앞 단계 결과가 남는다)
 # WF_MODE=full
 #   1 env, inputs, deps
@@ -24,7 +26,8 @@
 #   WF_BUDGET_MIN       스크립트 시작부터 쓸 시간(분). 기본 smoke 50, full 210
 #   WF_SUM_RESERVE_MIN  집계와 묶음에 남길 시간(분, full). 기본 50
 #   WF_THREADS          워커당 스레드. 기본 4         WF_WORKERS   워커 수. 기본 (코어 수 − 8) / 스레드
-#   WF_EXPS             실험 목록. 기본 wf1,wf2,wf3,wf4
+#   WF_EXPS             실험 목록(쉼표). 기본 wf1,wf2,wf3,wf4,wf6,wf7,wf8(전부). 1차 설정은 wf1–wf4, 2차 보강 설정은 wf6,wf7,wf8 을 준다.
+#                       집계 표는 차수마다 따로 쓴다(1차 data/processed/wf/wf_*, 2차 보강 wf2b_*)
 #   WF_KEEP_TREE        1 이면 끝난 뒤 푼 코드와 입력을 지우지 않는다. 기본 0
 # 종료 코드: 0 = 모든 단계 통과, 1 = 필수 단계 실패 또는 시간 한도로 중단, 2 = 선택 단계만 실패
 
@@ -52,7 +55,7 @@ main() {
   THREADS="${WF_THREADS:-4}"
   WORKERS="${WF_WORKERS:-$(( (NCORE - 8) / THREADS ))}"
   [ "$WORKERS" -ge 1 ] || WORKERS=1
-  EXPS="${WF_EXPS:-wf1,wf2,wf3,wf4}"
+  EXPS="${WF_EXPS:-wf1,wf2,wf3,wf4,wf6,wf7,wf8}"
   H54=scripts/3_deep_learning/h54_workflow.py
   WFD=data/processed/wf
   if [ "$MODE" = "smoke" ]; then LOGD=logs_wf_smoke; STATUS=wf_smoke_status.csv; OUTB=results_wf_smoke.tar.gz
@@ -142,13 +145,18 @@ main() {
     run_stage count 1 "$lim" env -u WF_RESCALE -u LG_RESCALE python3 -u "$H54" --count-only --exps "$EXPS" --threads 1
     lim=$(( $(left) - 240 )); [ "$lim" -gt 1800 ] && lim=1800
     run_stage precheck 0 "$lim" env WF_RESCALE=1 python3 -u "$H54" --precheck --exps "$EXPS" --workers 7 --threads "$THREADS" --nboot 1000
-    run_stage project 0 120 python3 - <<'PY'
+    run_stage project 0 120 env WF_EXPS="$EXPS" python3 - <<'PY'
 import json
+import os
 from pathlib import Path
 import pandas as pd
 d = Path("data/processed/wf")
+exps = [v.strip() for v in os.environ.get("WF_EXPS", "").split(",") if v.strip()]
 rows = []
-cnt = pd.read_csv(d / "wf_count.csv") if (d / "wf_count.csv").exists() else None
+parts = [pd.read_csv(d / f) for f in ("wf_count.csv", "wf2b_count.csv") if (d / f).exists()]   # 1차·2차 보강 적합 수 표
+cnt = pd.concat(parts, ignore_index=True) if parts else None
+if cnt is not None and exps:
+    cnt = cnt[cnt.exp.isin(exps)]
 for p in sorted((d / "shards").glob("wf*_precheck__*_unit.json")):
     u = json.loads(p.read_text())
     est = float(sum((u.get("est_detail") or {}).values())) + float(u.get("est_krige_s", 0.0)) + float(u.get("est_kmeans_s", 0.0))

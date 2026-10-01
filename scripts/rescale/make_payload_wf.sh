@@ -12,6 +12,8 @@
 #       LGD 약관 확인분 새 지역 실행 표(약관 미확인 행 0 을 이 스크립트가 다시 확인한다). e5_soil_tdd_v3.csv 는 v4 토양 표로의 상대 기호 연결이다
 #   wf_payload_info.txt                              작성 시각, git 커밋, 파일 해시
 # 기존 결과(data/processed/wf/)는 넣지 않는다. 크기 상한 40 MB 를 넘으면 실패한다.
+# 1차(wf_smoke.yaml, wf_full.yaml)와 2차 보강(wf2_smoke.yaml, wf2_full.yaml)이 같은 묶음을 쓴다(실험은 설정의 WF_EXPS 로 고른다).
+# 2차 보강의 입력은 1차와 같다(v3 자료, 하위 지역 대응표. LGD 실행 표는 wf4 만 쓴다).
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 

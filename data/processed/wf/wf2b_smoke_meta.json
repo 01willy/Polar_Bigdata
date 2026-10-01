@@ -1,0 +1,169 @@
+{
+ "stage": "H54/WF2b",
+ "plan": "docs/EXPERIMENT_PLAN_WF_2026-10-01.md §6",
+ "plan_commit": "1b42b4d",
+ "git_commit": "ed6e244",
+ "tag": "wf2b_smoke",
+ "code_sha": "8d0e283b0693",
+ "code_sha_h40": "ffd0b3a76d36",
+ "code_sha_h42": "70ec084a1919",
+ "exps": [
+  "wf6",
+  "wf7",
+  "wf8"
+ ],
+ "targets": {
+  "wf6": [
+   "Canada"
+  ],
+  "wf7": [
+   "Russia_W:x",
+   "AL-3:i"
+  ],
+  "wf8": [
+   "Russia_W:x",
+   "Canada:x"
+  ]
+ },
+ "strategies": [
+  "S1",
+  "S2",
+  "S4"
+ ],
+ "grids": {
+  "wf6": [
+   200,
+   -1
+  ],
+  "wf7": [
+   0,
+   10,
+   -1
+  ],
+  "wf8": [
+   10,
+   40
+  ]
+ },
+ "splits": {
+  "wf6": [
+   6
+  ],
+  "wf7": [
+   1
+  ],
+  "wf8": [
+   1
+  ]
+ },
+ "seeds": [
+  0
+ ],
+ "lams": [
+  0.25,
+  0.5,
+  1.0
+ ],
+ "nboot": 500,
+ "nboot_capped": null,
+ "delta_eq": 0.5,
+ "ni_margin": 0.5,
+ "n_units": 9,
+ "n_fit_total": 59,
+ "unit_elapsed_s_sum": 17.399999999999995,
+ "elapsed_s": 17.9,
+ "summarize_s": 0.6,
+ "n_curve": 85,
+ "n_tests": 115,
+ "n_failed_keys": 0,
+ "n_krige_fallback": 0,
+ "unit_status": {
+  "ok": 9
+ },
+ "shard_cfg": {
+  "wf6": {
+   "cfg_common": {
+    "85661ccd59cb": 1
+   },
+   "code_sha": {
+    "8d0e283b0693": 1
+   },
+   "n": 1
+  },
+  "wf7": {
+   "cfg_common": {
+    "6df0d6a12822": 2
+   },
+   "code_sha": {
+    "8d0e283b0693": 2
+   },
+   "n": 2
+  },
+  "wf8": {
+   "cfg_common": {
+    "384feeedbc8b": 6
+   },
+   "code_sha": {
+    "8d0e283b0693": 6
+   },
+   "n": 6
+  }
+ },
+ "skipped": [],
+ "choices": {
+  "wf6|Pbest": {
+   "Canada|-1": {
+    "P1": 1
+   },
+   "Canada|200": {
+    "Pk": 1
+   }
+  },
+  "wf6|Pc": {
+   "Canada|-1": {
+    "k=4": 1
+   },
+   "Canada|200": {
+    "k=4": 1
+   }
+  },
+  "wf6|R1": {
+   "Canada|-1": {
+    "lam=1.0": 1
+   },
+   "Canada|200": {
+    "lam=1.0": 1
+   }
+  },
+  "wf6|R2": {
+   "Canada|-1": {
+    "lam=0.25": 1
+   },
+   "Canada|200": {
+    "lam=1.0": 1
+   }
+  },
+  "wf6|Re": {
+   "Canada|-1": {
+    "lam=0.25": 1
+   },
+   "Canada|200": {
+    "lam=0.25": 1
+   }
+  }
+ },
+ "rules": {
+  "verdict4": "h42.verdict4: 우세 = 두 가중 CI 상한 < 0, 열세 = 두 가중 CI 하한 > 0, 동등 = 네 끝값 |·| ≤ 0.5 cm, 그 밖 미결정",
+  "ci": "h40.contrast(h4_common.boot_delta_blocks): 분할 안 채점 블록 재표집, 방법·추출·seed 공통 인덱스, 분할 분포 평균",
+  "mean": "h40.strat_mean·h42.pool_rows(층화 평균, CI 풀 = 유효 분할 ≥ 1 이고 채점 블록 합집합 ≥ 8)",
+  "holm": "h42.TestBook.frame: 항목(가설)마다 주 대비의 양측 부트스트랩 p 에 Holm(보조 열). WF4-a 는 p_ni 에 따로 holm_p_ni"
+ },
+ "implementation": {
+  "wf6_splits": "half_split_blocks split_seed 1–25(LG 1–5 + 새 6–25). h40.Data.split_structure 의 코드를 분할 1–25 에 적용(_SplitView): 중복 분할 제외, 유효 분할이 있으면 채점 블록 2개 미만 분할 제외. 빈 자리를 다른 seed 로 채우지 않는다",
+  "wf6_methods": "wf1 과 같은 지역 내 문맥·추출·교차검증. 물리 보정식 묶음(P1, P2, Pk, Pc, Pbest), R1·R2(λ 0.25·0.5·1.0·교차검증), Re(λ 0.25·교차검증), D0(catboost 600·깊이 6·0.03 만). R1·R2·Re 는 catboost_lo. 추출 3(전량 1), seed 2",
+  "wf7": "LG 27 (대상, 모드), 분할 1–5, n {0, 3, 10, 40, 160, 320, 1000, 전량}, 추출 5, seed 2, 원천·추출 = LG. Pe = 앵커(E_n), Re = 앵커(E_n) + 0.25·ge, ge 의 원천 행 목표 = y − 앵커(E0), 선택 라벨 행 목표 = y − 앵커(E_n). 앵커(E) = 0.5·(E·s + cci_alt)(CCI 유효), 그 밖 E·s. P0·P1·R1(λ 0.25)은 같은 조각에서 다시 적합(같은 플랫폼 대비). n = 0 은 원천 행만",
+  "wf8": "모드 x, 원천 = LG. 전략 S1 = h40.draw_cells, S2 = h40.draw_blocks, S4 = wf2 의 탐욕 k-중심(A 풀 x25 표준화, seed 는 wf2 와 같다). n {10, 40}(|A| 미만), 추출 5, seed 2. 같은 라벨 집합의 추출은 적합을 재사용하고 추출마다 저장",
+  "verdicts": "WF6-a 대상별(레시피 R1·R2·Re 교차검증 λ, D0 catboost; 하나라도 P1 대비 우세면 지지, Pbest 대비는 보조). WF6-b 세 대상 층화 평균 R2(교차검증 λ) − P1, n ∈ {500, 1000, 전량} 모두 우세 = 지지, 일부 = 부분 지지, 열세 또는 우세 없음 = 기각. WF7-a·b 방향 중립 서술(주 4지역 층화 평균, 확인적 가설 아님). WF8-a 레나·캐나다 n 40 R1 의 S4 − S1 우세 지역 ≥ 1. WF8-b 다섯 대상 n 10 R1 의 S2·S4 − S1 에 열세가 없으면 지지",
+  "tables": "2차 보강 표는 <tag>2b_*(1차 <tag>_* 와 따로). 조각 이름 <tag>{6,7,8}__cpu__<대상>__<모드>__s<분할>[__<전략>]"
+ }
+}

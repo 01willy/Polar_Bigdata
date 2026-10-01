@@ -14,6 +14,16 @@
 (i) 허용 표지 없는 본 실행은 자료를 읽기 전에 거부된다.
 (j) [HEAVY] 합성 조각으로 집계(곡선, 가설 표, meta)가 끝까지 돈다. LG_RUN_HEAVY=1 일 때만 실행한다.
 (k) WF5 우선순위 함수는 전략마다 후보 색인 범위 안의 서로 다른 정수를 요청한 수만큼 돌려준다.
+2차 보강(WF6–WF8)
+(l) wf6 의 새 분할(split_seed 6–25)은 결정적이고 서로 다르며, 분할 1–25 안에서 계산한 분할 1–5 의 구조는 분할 1–5 만으로 계산한 것과 같다.
+    중복 분할과 무효 분할은 h40 의 규칙으로 빠진다.
+(m) wf6 의 누설 점검(선택 라벨 밖의 A 라벨과 B 라벨을 바꿔도 모든 예측이 같다)과 방법 구성(D0 은 catboost 만, R1·R2·Re 의 교차검증 λ).
+(n) wf7 은 n = 0 을 포함한 LG 추출을 쓰고, Pe = 앵커(E_n), Re·R1 의 학습 행(원천 목표와 선택 라벨 목표)이 정의와 같으며 라벨 누설이 없다.
+(o) wf8 의 전략(S1, S2, S4)은 전이 모드에서 A 색인 범위 안의 서로 다른 정수를 결정적으로 고르고, S1·S2 = LG 추출, S4 = wf2 의 S4 다.
+    선택과 예측은 선택 라벨만 쓰고, |A| 가 작은 대상은 n = 10 만 두며, 같은 라벨 집합의 추출은 적합을 재사용한다.
+(p) 1차(wf1–wf4)의 설정 해시, 공통 해시, 조각 이름, 기본 대상·격자가 2차 보강 추가 전의 값(커밋 1b42b4d 의 하네스)과 같다.
+(q) [HEAVY] 합성 조각으로 2차 보강의 집계(wf2b_* 표, WF6–WF8 판정 행)가 끝까지 돌고 1차 표를 쓰지 않는다.
+(r) --exp 별칭, 차수별 표 이름, 2차 보강의 기본 대상(wf7 = LG 27)과 n = 0 규칙.
 실행: CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=2 nice -n 10 taskset -c <코어 4개> python3 -m pytest -q tests/test_h54_workflow.py
 (CatBoost 는 thread_count 밖의 고정 비용 부분도 여러 스레드로 돌린다. 공유 서버에서는 taskset 으로 코어를 묶는다)
 """
@@ -41,7 +51,8 @@ H, X = W.H, W.X
 HEAVY = pytest.mark.skipif(os.environ.get("LG_RUN_HEAVY", "") != "1", reason="집계 통합 시험은 LG_RUN_HEAVY=1 일 때만 실행한다(공유 서버 CPU 보호)")
 X.CB_HI = dict(iterations=10, learning_rate=0.1, depth=3, l2_leaf_reg=3.0)        # 시험 속도(설정 해시에 들어가지만 시험 안에서만 쓴다)
 ARGS = ["--threads", "1", "--cb-iters", "10", "--seeds", "1", "--draws-cap", "2", "--wf1-grid", "20,50,all", "--wf2-budgets", "20,40",
-        "--wf3-grid", "40,all", "--wf4-grid", "10,40,all", "--nboot", "200"]
+        "--wf3-grid", "40,all", "--wf4-grid", "10,40,all", "--nboot", "200",
+        "--wf6-grid", "20,40,all", "--wf7-grid", "0,3,10,all", "--wf8-grid", "10,20"]
 
 
 def args(extra=()):
@@ -373,3 +384,387 @@ def test_k_wf5_priority(strat):
     again = W.wf5_priority(strat, Xc, sc, lat, lon, Xl, yl, sl, 1.5, 30, 0, src_X=rng.randn(200, D) * 0 + 1, threads=1, cb_iters=10)
     if strat not in ("S5",):                                                  # S5 만 원천 공변량에 의존한다
         assert np.array_equal(np.sort(o), np.sort(np.asarray(again["order"])))
+
+
+# ================================================================ 2차 보강(WF6–WF8)
+def make_tctx2(seed=0, split=1, target="T", mode="x", nA=80, nB=60, nbA=8, nbB=6, y_shift=None):
+    """CCI 열이 있는 합성 전이 문맥(h40.Ctx). 원천 300행(두 지역), cci_alt ~ 40 ± 10, cci_valid 1, 원천·A·B 의 일부 셀은 CCI 무효(NaN 또는 0)."""
+    rng = np.random.RandomState(seed)
+    D = len(W.FEATS)
+    ns = 300
+    Xs = rng.randn(ns, D); ss = rng.uniform(20, 40, ns); ys = 1.6 * ss + 3 * Xs[:, 1] + 2 * rng.randn(ns)
+    XA = rng.randn(nA, D); sA = rng.uniform(20, 40, nA); yA = 1.3 * sA + 3 * XA[:, 1] + 2 * rng.randn(nA)
+    XB = rng.randn(nB, D); sB = rng.uniform(20, 40, nB); yB = 1.3 * sB + 3 * XB[:, 1] + 2 * rng.randn(nB)
+    for Xm in (Xs, XA, XB):
+        k = len(Xm)
+        Xm[:, W.CCI_COL] = 40 + 10 * rng.randn(k); Xm[:, W.CCIV_COL] = 1.0
+        Xm[: max(2, k // 10), W.CCI_COL] = np.nan                         # 무효: cci_alt 결측
+        Xm[max(2, k // 10): max(4, k // 5), W.CCIV_COL] = 0.0              # 무효: cci_valid < 0.5
+    if y_shift is not None:
+        yA, yB = y_shift(yA.copy(), yB.copy())
+    blkA = np.repeat(np.arange(nbA), int(np.ceil(nA / nbA)))[:nA]
+    blkB = 500 + np.repeat(np.arange(nbB), int(np.ceil(nB / nbB)))[:nB]
+    return H.Ctx(target, mode, split, target, Xs, ys, ss, np.repeat(["r1", "r2"], ns // 2), XA, yA, sA, blkA, XB, yB, sB, blkB,
+                 meta=dict(dup_of=-1, valid=True))
+
+
+def _shift_outside(sel_all, seed):
+    """선택 라벨(sel_all) 밖의 A 라벨과 모든 B 라벨을 바꾸는 y_shift."""
+    rng = np.random.RandomState(seed)
+
+    def shift(yA, yB):
+        m = np.array([i not in sel_all for i in range(len(yA))])
+        yA[m] = rng.uniform(1, 500, m.sum()); yB[:] = rng.uniform(1, 500, len(yB))
+        return yA, yB
+    return shift
+
+
+def _assert_B_only(st, c):
+    """채점은 B 블록 셀만 쓴다: 저장소의 블록 = B 블록(A 블록과 겹치지 않음), P0 의 블록별 SSE·셀 수 = 직접 계산."""
+    blocks = set(st.blocks.tolist())
+    assert blocks == set(np.unique(c.blkB).astype(str).tolist()) and not (set(np.unique(c.blkA).astype(str).tolist()) & blocks)
+    sse, cnt = st.get(H.P0_KEY)
+    for b, s_, n_ in zip(st.blocks, sse, cnt):
+        m = c.blkB.astype(str) == b
+        assert np.isclose(s_, float(np.sum((c.E0 * c.sB[m] - c.yB[m]) ** 2))) and n_ == int(m.sum())
+
+
+def _assert_same_preds(p1, p2, what):
+    assert set(p1) == set(p2) and len(p1) > 3, f"{what}: 저장 키가 다르다"
+    for k in p1:
+        assert np.allclose(p1[k], p2[k], rtol=0, atol=1e-9), f"{what}: 선택 밖 라벨이 예측 {k} 에 영향을 준다"
+
+
+# ---------------------------------------------------------------- (l) wf6 분할
+def _split_df(n_blocks, cells_per_block=6, seed=0):
+    import pandas as pd
+    rng = np.random.RandomState(seed)
+    blk = np.repeat(np.arange(n_blocks), cells_per_block)
+    n = len(blk)
+    return pd.DataFrame({"block": blk, "alt_cm": rng.uniform(30, 120, n), "cci_alt": rng.uniform(30, 120, n),
+                         "e5_sqrt_tdd_soil": rng.uniform(20, 40, n)})
+
+
+def test_l_wf6_splits_deterministic_distinct():
+    from types import SimpleNamespace
+    from polar.m1_core import half_split_blocks
+    df = _split_df(40)
+    idx = np.arange(len(df))
+    D = SimpleNamespace(df=df, target_idx=lambda t: idx)
+    sp25 = list(range(1, 26))
+    info = W.split_structure_ext(D, "T", sp25)
+    again = W.H.Data.split_structure(W._SplitView(D, sp25), "T")
+    assert info == again, "같은 분할 목록에서 구조가 다르다(결정성)"
+    first5 = W.H.Data.split_structure(W._SplitView(D, range(1, 6)), "T")
+    for sp in range(1, 6):                                                # 분할 1–5 의 구조는 LG(분할 1–5 만)와 같다
+        drop = ("n_unique_splits", "n_valid_splits")
+        assert {k: v for k, v in info[sp].items() if k not in drop} == {k: v for k, v in first5[sp].items() if k not in drop}
+    A_sets = []
+    for sp in sp25:
+        A1, B1 = half_split_blocks(df, idx, sp)
+        A2, B2 = half_split_blocks(df, idx, sp)
+        assert np.array_equal(A1, A2) and np.array_equal(B1, B2), "새 분할이 결정적이지 않다"
+        assert not (set(df.block.values[A1]) & set(df.block.values[B1])), "A·B 블록이 겹친다"
+        A_sets.append(frozenset(df.block.values[A1]))
+    assert len(set(A_sets)) == 25, "분할 1–25 의 A 블록 집합이 서로 다르지 않다"
+    keep, skip, _ = W.split_plan(D, "T", sp25, info)
+    assert keep == sp25 and not skip
+    # 블록이 3개인 작은 지역: 중복 분할은 빠지고 남은 분할의 A 집합은 서로 다르다
+    df3 = _split_df(3)
+    idx3 = np.arange(len(df3))
+    D3 = SimpleNamespace(df=df3, target_idx=lambda t: idx3)
+    info3 = W.split_structure_ext(D3, "T3", sp25)
+    keep3, skip3, _ = W.split_plan(D3, "T3", sp25, info3)
+    dups = [sp for sp, st_, _ in skip3 if st_.startswith("dup_of")]
+    assert dups and len(keep3) < 25
+    kept_sets = [frozenset(df3.block.values[half_split_blocks(df3, idx3, sp)[0]]) for sp in keep3]
+    assert len(set(kept_sets)) == len(kept_sets), "남은 분할에 중복이 있다"
+    for sp in dups:
+        assert info3[sp]["dup_of"] in sp25 and info3[sp]["dup_of"] < sp
+    # 채점 블록 2개 미만(무효) 분할은 유효 분할이 있으면 빠진다
+    inval = [sp for sp in keep3 if not info3[sp]["valid"]]
+    if any(info3[sp]["valid"] for sp in sp25):
+        assert not inval
+
+
+# ---------------------------------------------------------------- (m) wf6 누설과 방법 구성
+def test_m_wf6_no_leakage_and_methods():
+    a = args(["--wf6-grid", "20,40"])
+    W.WF_TRACE = []; W.PRED_TRACE = {}
+    try:
+        U, rows, st, stats = run_r(a, make_rctx(), "wf6")
+        tr, p1 = list(W.WF_TRACE), dict(W.PRED_TRACE)
+    finally:
+        W.WF_TRACE = None; W.PRED_TRACE = None
+    _assert_B_only(st, make_rctx())
+    sets = sel_sets(tr)
+    allsel = set().union(*sets.values())
+    assert len(allsel) < len(make_rctx().yA), "선택 밖 A 라벨이 있어야 시험이 의미가 있다"
+    for e in tr:
+        idx = set(int(v) for v in e["idx"])
+        if e["kind"] in ("fit", "cv", "krige"):
+            key = (int(e["n"]), str(e["draw"]).split(".")[0])
+            assert idx <= sets[key], f"{e['kind']} {e.get('method')}: 그 추출의 선택 라벨 밖을 썼다"
+        if e["kind"] == "cv":
+            assert not (set(int(v) for v in e["held"]) & idx), "교차검증 묶음이 겹친다"
+    W.PRED_TRACE = {}
+    try:
+        run_r(a, make_rctx(y_shift=_shift_outside(allsel, 11)), "wf6")
+        p2 = dict(W.PRED_TRACE)
+    finally:
+        W.PRED_TRACE = None
+    _assert_same_preds(p1, p2, "wf6")
+    keys = set(st.keys)
+    meth = {(k[0], k[1]) for k in keys}
+    assert ("D0", W.HI) in meth and ("D0", W.LO) not in meth, "wf6 의 D0 은 catboost 만이다"
+    assert not any(k[0] in ("D1", "RK") or k[0].startswith("R1c") for k in keys)
+    for m in ("R1", "R2", "Re"):
+        assert any(k[0] == m and k[1] == W.LO and k[7] == W.LAM_CV for k in keys), f"{m} 의 교차검증 λ 키가 없다"
+    for m in ("P1", "Pk", "Pbest", "P2", "Pc"):
+        assert any(k[0] == m for k in keys), f"{m} 키가 없다"
+    lam_sel = {r["alpha_sel"] for r in rows if r["method"] in ("R1", "R2", "Re") and r["lam"] == W.LAM_CV}
+    assert lam_sel and lam_sel <= {f"lam={v}" for v in W.LAMS}
+    assert stats["status"] == "ok"
+
+
+# ---------------------------------------------------------------- (n) wf7
+def test_n_wf7_anchor_rows_and_no_leakage():
+    a = args(["--wf7-grid", "0,3,10"])
+    c = make_tctx2()
+    W.WF_TRACE = []; W.PRED_TRACE = {}; H.TRACE = []
+    try:
+        U = W.T7Unit(a, c, "T").run()
+        rows, st, stats = U.finish()
+        tr, p1, ht = list(W.WF_TRACE), dict(W.PRED_TRACE), list(H.TRACE)
+    finally:
+        W.WF_TRACE = None; W.PRED_TRACE = None; H.TRACE = None
+    assert stats["status"] == "ok"
+    _assert_B_only(st, c)
+    sets = sel_sets(tr)
+    assert set(sets) == {(0, "0"), (3, "0"), (3, "1"), (10, "0"), (10, "1")}, "n = 0 과 LG 추출(추출 상한 2)이어야 한다"
+    for (n, d), s_ in sets.items():                                        # 추출 = LG 의 h40.draw_cells
+        assert s_ == set(H.draw_cells("T", "x", 1, n, int(d), len(c.yA)).tolist())
+    nsrc = len(c.y_src)
+    re_src = W.re_src_resid(c)
+    cci_ok = np.isfinite(c.X_src[:, W.CCI_COL]) & (c.X_src[:, W.CCIV_COL] >= 0.5)
+    assert np.allclose(re_src[~cci_ok], c.r0_src[~cci_ok]) and not np.allclose(re_src[cci_ok], c.r0_src[cci_ok])
+    seen = set()
+    for h in ht:                                                          # 학습 행: 원천(목표 = y − 앵커(E0)) ∪ 선택 라벨(목표 = y − 앵커(E_n))
+        sel = np.asarray(h["sel"], int)
+        E_n = W.X.shrink(H.ls_E(c.yA[sel], c.sA[sel]), c.E0, len(sel), W.KAPPA) if len(sel) else c.E0
+        assert len(h["ytr"]) == nsrc + len(sel)
+        if h["method"] == "Re":
+            assert np.allclose(h["ytr"][:nsrc], re_src)
+            want = c.yA[sel] - W.re_anchor(E_n * c.sA[sel], c.XA[sel, W.CCI_COL], c.XA[sel, W.CCIV_COL])
+        else:
+            assert h["method"] == "R1" and np.allclose(h["ytr"][:nsrc], c.r0_src)
+            want = c.yA[sel] - E_n * c.sA[sel]
+        assert np.allclose(h["ytr"][nsrc:], want)
+        seen.add((h["method"], int(h["n"])))
+    assert ("Re", 0) in seen and ("R1", 0) in seen, "n = 0 의 적합(원천 행만)이 없다"
+    pre = ("wf7", "T|x", 1, "")
+    p0 = p1[pre + ("P0", "none", "1", "cell", 0, 0, -1, 0.0)]
+    assert np.allclose(p1[pre + ("P1", "none", "1", "cell", 0, 0, -1, 0.0)], p0), "n = 0 의 P1 은 P0 이다"
+    for (n, d), s_ in sets.items():
+        sel = np.array(sorted(s_), int)
+        E_n = W.X.shrink(H.ls_E(c.yA[sel], c.sA[sel]), c.E0, len(sel), W.KAPPA) if len(sel) else c.E0
+        pe = p1[pre + ("Pe", "none", "1", "cell", n, int(d), -1, 0.0)]
+        assert np.allclose(pe, W.re_anchor(E_n * c.sB, c.XB[:, W.CCI_COL], c.XB[:, W.CCIV_COL]))
+        okB = np.isfinite(c.XB[:, W.CCI_COL]) & (c.XB[:, W.CCIV_COL] >= 0.5)
+        assert np.allclose(pe[~okB], E_n * c.sB[~okB]) and np.allclose(pe[okB], 0.5 * (E_n * c.sB[okB] + c.XB[okB, W.CCI_COL]))
+        for m in ("R1", "Re"):
+            assert pre + (m, W.LO, "1", "cell", n, int(d), 0, 0.25) in p1
+    allsel = set().union(*sets.values())
+    W.PRED_TRACE = {}
+    try:
+        W.T7Unit(a, make_tctx2(y_shift=_shift_outside(allsel, 5)), "T").run()
+        p2 = dict(W.PRED_TRACE)
+    finally:
+        W.PRED_TRACE = None
+    _assert_same_preds(p1, p2, "wf7")
+
+
+# ---------------------------------------------------------------- (o) wf8
+@pytest.mark.parametrize("strat", list(W.WF8_STRATEGIES))
+def test_o_wf8_strategies_transfer(strat):
+    a = args()
+    c = make_tctx2()
+    nA = len(c.yA)
+    rc = W.RCtx("T", 1, "T", c.XA, c.yA, c.sA, c.blkA, np.zeros(nA), np.zeros(nA), c.XB, c.yB, c.sB, c.blkB, np.zeros(len(c.yB)),
+                np.zeros(len(c.yB)), c.E0)
+    for d in range(3):
+        sets = W.T8Unit(a, c, "T", strat).strategy_sets(strat, [10, 20], d)
+        again = W.T8Unit(a, make_tctx2(), "T", strat).strategy_sets(strat, [10, 20], d)
+        for n in (10, 20):
+            s_ = np.sort(np.asarray(sets[n]))
+            assert len(s_) == n and len(np.unique(s_)) == n and s_.dtype.kind in "iu" and s_.min() >= 0 and s_.max() < nA
+            assert np.array_equal(s_, np.sort(np.asarray(again[n]))), f"{strat}: 같은 seed 에서 결과가 다르다"
+            if strat == "S1":
+                assert np.array_equal(s_, H.draw_cells("T", "x", 1, n, d, nA)), "S1 은 LG 셀 추출이다"
+            if strat == "S2":
+                assert np.array_equal(s_, H.draw_blocks("T", "x", 1, n, d, c.blkA)), "S2 는 LG 블록 분산 추출이다"
+            if strat == "S4":
+                w2 = W.RUnit(a, rc, "wf2", "S4").strategy_sets("S4", [10, 20], d)
+                assert np.array_equal(s_, np.sort(np.asarray(w2[n]))), "S4 는 wf2 의 S4 와 같다"
+    with pytest.raises(ValueError):
+        W.T8Unit(a, c, "T", "S6")
+
+
+def test_o2_wf8_run_no_leakage_small_A_and_dup_reuse():
+    a = args(["--wf8-grid", "10,20"])
+    for strat in W.WF8_STRATEGIES:
+        W.WF_TRACE = []; W.PRED_TRACE = {}
+        try:
+            U = W.T8Unit(a, make_tctx2(), "T", strat).run()
+            rows, st, stats = U.finish()
+            tr, p1 = list(W.WF_TRACE), dict(W.PRED_TRACE)
+        finally:
+            W.WF_TRACE = None; W.PRED_TRACE = None
+        assert stats["status"] == "ok" and {k[3] for k in st.keys if k[0] != "P0"} == {strat}
+        _assert_B_only(st, make_tctx2())
+        sets = sel_sets(tr)
+        for e in tr:
+            if e["kind"] == "fit":
+                assert set(int(v) for v in e["idx"]) <= sets[(int(e["n"]), str(e["draw"]))]
+        allsel = set().union(*sets.values())
+        W.WF_TRACE = []; W.PRED_TRACE = {}
+        try:
+            W.T8Unit(a, make_tctx2(y_shift=_shift_outside(allsel, 7)), "T", strat).run()
+            tr2, p2 = list(W.WF_TRACE), dict(W.PRED_TRACE)
+        finally:
+            W.WF_TRACE = None; W.PRED_TRACE = None
+        assert sel_sets(tr2) == sets, f"{strat}: 선택이 라벨에 의존한다"
+        _assert_same_preds(p1, p2, f"wf8 {strat}")
+    # |A| 가 작은 대상(15셀): n = 40 은 |A| 이상이라 빠지고 n = 10 만 남는다(LG 규칙)
+    a40 = args(["--wf8-grid", "10,40"])
+    U = W.T8Unit(a40, make_tctx2(nA=15, nbA=10), "T", "S4").run()
+    _, st, _ = U.finish()
+    assert {k[4] for k in st.keys if k[0] == "R1"} == {10}
+    # 같은 라벨 집합이 여러 추출에서 나오면 적합은 한 번이고 예측은 추출마다 저장한다
+
+    class Same(W.T8Unit):
+        def strategy_sets(self, strat, budgets, d):
+            return {n: np.arange(n) for n in budgets}
+    W.PRED_TRACE = {}
+    try:
+        U = Same(a, make_tctx2(), "T", "S4").run()
+        _, st, stats = U.finish()
+        pt = dict(W.PRED_TRACE)
+    finally:
+        W.PRED_TRACE = None
+    assert stats["n_fit"]["wf8"] == 2 * len(a.SEEDS), "중복 집합에서 다시 적합했다"
+    assert stats["notes"].get("dup_draws")
+    pre = ("wf8", "T|x", 1, "S4")
+    for n in (10, 20):
+        k0 = pre + ("R1", W.LO, "1", "S4", n, 0, 0, 0.25); k1 = pre + ("R1", W.LO, "1", "S4", n, 1, 0, 0.25)
+        assert k0 in pt and k1 in pt and np.allclose(pt[k0], pt[k1])
+
+
+# ---------------------------------------------------------------- (p) 1차 설정 불변
+R1_CFG_HASH = {                                                           # 2차 보강 추가 전(커밋 1b42b4d)의 h54 로 계산한 값, data_sha = "TEST"
+    "default|wf1|": ("79f292c0b60d", "a9eecca296b8"), "default|wf1|x34": ("83e93a56ae3e", "a9eecca296b8"),
+    "default|wf2|S1": ("a9d38454c770", "dc02ac9e0bf0"), "default|wf2|S2": ("8cc280d55100", "dc02ac9e0bf0"),
+    "default|wf2|S3": ("ef7e6b523368", "dc02ac9e0bf0"), "default|wf2|S4": ("fd09b3da0f43", "dc02ac9e0bf0"),
+    "default|wf2|S5": ("8c626350356d", "dc02ac9e0bf0"), "default|wf2|S6": ("b9be964d2fc1", "dc02ac9e0bf0"),
+    "default|wf2|S7": ("05cf228d6c14", "dc02ac9e0bf0"), "default|wf3|": ("f3ff92566e23", "511def187d71"),
+    "default|wf4|": ("2c160dd13ee1", "fb6ab8550b07"),
+    "smoke|wf1|": ("2f14f2a5893b", "627863625321"), "smoke|wf1|x34": ("de31a2edc947", "627863625321"),
+    "smoke|wf2|S1": ("c53ba338dc9f", "07575e618415"), "smoke|wf2|S2": ("5920a1a19601", "07575e618415"),
+    "smoke|wf2|S3": ("00d978d6a592", "07575e618415"), "smoke|wf2|S4": ("99778a35aaa1", "07575e618415"),
+    "smoke|wf2|S5": ("346c156db714", "07575e618415"), "smoke|wf2|S6": ("d77e714bd610", "07575e618415"),
+    "smoke|wf2|S7": ("7768f014f21f", "07575e618415"), "smoke|wf3|": ("8b7047c7617b", "ea738b0210e9"),
+    "smoke|wf4|": ("f4a6844af492", "dc6967779768"),
+    "precheck|wf1|": ("79f292c0b60d", "a9eecca296b8"), "precheck|wf1|x34": ("83e93a56ae3e", "a9eecca296b8"),
+    "precheck|wf2|S1": ("a9d38454c770", "dc02ac9e0bf0"), "precheck|wf2|S2": ("8cc280d55100", "dc02ac9e0bf0"),
+    "precheck|wf2|S3": ("ef7e6b523368", "dc02ac9e0bf0"), "precheck|wf2|S4": ("fd09b3da0f43", "dc02ac9e0bf0"),
+    "precheck|wf2|S5": ("8c626350356d", "dc02ac9e0bf0"), "precheck|wf2|S6": ("b9be964d2fc1", "dc02ac9e0bf0"),
+    "precheck|wf2|S7": ("05cf228d6c14", "dc02ac9e0bf0"), "precheck|wf3|": ("f3ff92566e23", "511def187d71"),
+    "precheck|wf4|": ("2c160dd13ee1", "fb6ab8550b07"),
+}
+R1_WF4_DEFAULT = [("Lena", "x"), ("Canada", "x"), ("Russia_W", "x"), ("Russia_E", "x"), ("Russia_C", "x"), ("Greenland", "x"), ("Alaska", "x")] + \
+    [(f"AL-{i}", "i") for i in range(1, 7)] + [(f"AL-{i}", "x") for i in range(1, 7)] + \
+    [(t, m) for t in ("CA-2", "CA-3", "LE-1", "LE-2") for m in ("i", "x")] + [("Tibet_LGD", "x"), ("NAtlantic~lic", "x"), ("Russia_C~lgd", "x")]
+
+
+def test_p_round1_config_unchanged(monkeypatch):
+    monkeypatch.setattr(X, "CB_HI", dict(iterations=600, learning_rate=0.03, depth=6, l2_leaf_reg=3.0))   # 본 실행 값(시험 모듈이 줄인 값을 되돌린다)
+    variants = {"wf1": ["", "x34"], "wf2": list(W.STRATEGIES), "wf3": [""], "wf4": [""]}
+    for label, argv, suf in (("default", [], ""), ("smoke", ["--smoke"], "_smoke"), ("precheck", ["--precheck"], "_precheck")):
+        a = W.parse_args(argv)
+        assert a.TAG == f"wf{suf}" and a.TAG2 == f"wf2b{suf}"
+        for exp, vs in variants.items():
+            assert W.exp_tag(a, exp) == f"{exp}{suf}"
+            for v in vs:
+                cfg = W.unit_cfg(a, exp, v, "TEST")
+                assert (W.wf_cfg_hash(cfg), W.wf_cfg_hash(cfg, common=True)) == R1_CFG_HASH[f"{label}|{exp}|{v}"], f"{label}|{exp}|{v}: 설정 해시가 바뀌었다"
+                mode = "x" if exp == "wf4" else "r"
+                assert W.shard_base(a, exp, "Alaska", mode, 3, v).name == f"{exp}{suf}__cpu__Alaska__{mode}__s3" + (f"__{v}" if v else "")
+    a = W.parse_args([])
+    assert a.T["wf1"] == ["Alaska", "Lena", "Canada", "AL-1", "AL-2", "AL-6"] and a.T["wf2"] == ["Alaska", "Lena", "Canada", "AL-1", "AL-2"]
+    assert a.T["wf3"] == ["Alaska", "Lena"] and [tuple(v) for v in a.T["wf4"]] == R1_WF4_DEFAULT
+    assert {k: a.G[k] for k in W.EXPS_R1} == {"wf1": [20, 50, 100, 200, 500, 1000, 2000, 5000, -1], "wf2": [20, 50, 100, 200, 500],
+                                              "wf3": [100, 500, 2000, -1], "wf4": [10, 40, 160, -1]}
+    assert a.SPLITS == [1, 2, 3, 4, 5] and a.SEEDS == [0, 1] and a.STRAT == list(W.STRATEGIES) and a.X34 == ["Alaska"]
+    s = W.parse_args(["--smoke"])
+    assert {k: s.G[k] for k in W.EXPS_R1} == {"wf1": [20, 50, -1], "wf2": [20, 50], "wf3": [100, -1], "wf4": [10, -1]}
+    assert s.T["wf1"] == ["Canada", "AL-3"] and s.T["wf4"] == [("Russia_W", "x"), ("Tibet_LGD", "x")] and s.SPLITS == [1] and s.nboot == 500
+    p = W.parse_args(["--precheck"])
+    assert p.T["wf4"] == [("Lena", "x"), ("AL-2", "i")] and p.STRAT == ["S1", "S6"] and p.SPLITS == [1]
+    for exp in W.EXPS_R1:                                                 # 1차 실험의 (n, 추출) 규칙(0 은 넣지 않는다)
+        assert (0, 0) not in W.cells_for(a, exp, 100, grid=[0, 20, -1])
+
+
+# ---------------------------------------------------------------- (q) 2차 보강 집계(HEAVY)
+@HEAVY
+def test_q_summarize_round2_end_to_end(tmp_path):
+    a = args(["--out-dir", str(tmp_path)])
+    for split in (1, 2):
+        for tgt in ("Alaska", "Lena", "Canada"):
+            c = make_rctx(seed=split * 10 + len(tgt), split=split, target=tgt)
+            U, rows, st, stats = run_r(a, c, "wf6")
+            W.write_shard(a, "wf6", tgt, "r", split, "", c, rows, st, stats, 1.0, [1, 2])
+        for tgt, m in (("Lena", "x"), ("Canada", "x"), ("Russia_W", "x"), ("Russia_E", "x"), ("AL-2", "i")):
+            c = make_tctx2(seed=split * 7 + len(tgt), split=split, target=tgt, mode=m)
+            U = W.T7Unit(a, c, tgt).run()
+            rows, st, stats = U.finish()
+            W.write_shard(a, "wf7", tgt, m, split, "", c, rows, st, stats, 1.0, [1, 2])
+        for tgt in ("Lena", "Canada", "Russia_W", "Russia_E", "Alaska"):
+            c = make_tctx2(seed=split * 5 + len(tgt), split=split, target=tgt)
+            for s in W.WF8_STRATEGIES:
+                U = W.T8Unit(a, c, tgt, s).run()
+                rows, st, stats = U.finish()
+                W.write_shard(a, "wf8", tgt, "x", split, s, c, rows, st, stats, 1.0, [1, 2])
+    out = W.summarize(a)
+    assert out is not None
+    t = out["tests"]
+    for hyp in ("WF6-a", "WF6-b", "WF7-a", "WF7-b", "WF8-a", "WF8-b"):
+        v = t[(t.test_id == hyp) & t.scope.isin(["verdict", "verdict_aux"])]
+        assert len(v), f"{hyp} 판정 행이 없다"
+        assert not v.verdict.astype(str).str.contains("계산 실패").any()
+    assert len(t[(t.test_id == "WF6-a") & (t.scope == "verdict")]) == 3, "WF6-a 는 대상별 판정이다"
+    assert not t[t.test_id.isin(["WF7-a", "WF7-b"])].hypothesis.any() and t[t.test_id == "WF8-a"].hypothesis.all()
+    for f in ("wf2b_curve.csv", "wf2b_tests.csv", "wf2b_meta.json", "wf2b_timing.csv", "wf2b_targets.csv", "wf2b_failed.csv"):
+        assert (tmp_path / f).exists(), f
+    assert not (tmp_path / "wf_tests.csv").exists() and not (tmp_path / "wf_curve.csv").exists(), "1차 표를 쓰면 안 된다"
+    meta = json.loads((tmp_path / "wf2b_meta.json").read_text())
+    assert meta["plan_commit"] == "1b42b4d" and set(meta["exps"]) == {"wf6", "wf7", "wf8"}
+    assert set(out["curve"].exp) == {"wf6", "wf7", "wf8"}
+    cur = out["curve"]
+    assert set(cur[cur.exp == "wf8"].placement) >= {"S1", "S2", "S4"} and (cur[cur.exp == "wf7"].n == 0).any()
+
+
+# ---------------------------------------------------------------- (r) CLI·차수·n = 0
+def test_r_cli_rounds_and_zero_n():
+    a = W.parse_args(["--exp", "wf6,wf8"])
+    assert a.EXPS == ["wf6", "wf8"]
+    assert W.rounds_of(a) == [("r2", ["wf6", "wf8"], "wf2b")]
+    b = W.parse_args([])
+    assert b.EXPS == list(W.EXPS_ALL) and [r for r, _, _ in W.rounds_of(b)] == ["r1", "r2"]
+    assert [tuple(v) for v in b.T["wf7"]] == [tuple(v) for v in H.default_targets(["i", "x"])] and len(b.T["wf7"]) == 27
+    assert b.T["wf8"] == [(t, "x") for t in W.WF8_TARGETS] and b.T["wf6"] == list(W.WF6_TARGETS)
+    assert b.SPLITS6 == list(range(1, 26)) and b.G["wf7"] == [0, 3, 10, 40, 160, 320, 1000, -1] and b.G["wf8"] == [10, 40]
+    cells = W.cells_for(b, "wf7", 50)
+    assert cells[0] == (0, 0) and (-1, 0) in cells and sum(1 for n, _ in cells if n == 10) == 5 and not any(n >= 50 for n, _ in cells)
+    assert {n for n, _ in W.cells_for(b, "wf6", 600)} == {200, 500, -1} and sum(1 for n, _ in W.cells_for(b, "wf6", 600) if n == 200) == 3
+    s = W.parse_args(["--smoke", "--exp", "wf6,wf7,wf8"])
+    assert s.SPLITS6 == [6] and s.TAG2 == "wf2b_smoke" and W.exp_tag(s, "wf7") == "wf7_smoke"

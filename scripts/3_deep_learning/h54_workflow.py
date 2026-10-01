@@ -1,6 +1,8 @@
 """H54 · 희소·충분 라벨 워크플로 하네스(WF). 계획 docs/EXPERIMENT_PLAN_WF_2026-10-01.md(커밋 4168331, 결과 열람 뒤 설계)의 구현.
+2차 보강 실험 WF6–WF8 은 같은 계획서 §6(커밋 1b42b4d, 결과 열람 뒤 설계)의 구현이다.
 
-실험(--exps, 기본 wf1,wf2,wf3,wf4. WF0 은 재분석이라 계산이 없고, WF5 지도는 wf5_priority 함수와 --wf5-map 으로 따로 만든다)
+실험(--exps 또는 --exp, 기본 wf1,wf2,wf3,wf4,wf6,wf7,wf8. WF0 은 재분석이라 계산이 없고, WF5 지도는 wf5_priority 함수와 --wf5-map 으로
+따로 만든다. 1차 = wf1–wf4(계획서 §2), 2차 보강 = wf6–wf8(계획서 §6))
   wf1  충분 라벨 지역 안의 라벨 수 곡선. 지역 내 모드(모드 이름 r): 학습 라벨 = 대상 A 블록에서 뽑은 n 개뿐이고 다른 지역 원천 행이 없다.
        P0 과 κ 수축의 사전값만 LG 의 원천 계수 E0(모드 x 원천, 100 km 버퍼)을 쓴다.
        대상 Alaska, Lena, Canada, AL-1, AL-2, AL-6. Alaska 는 x34(x25 + SAR 9열) 조각을 따로 둔다(--x34-targets).
@@ -17,6 +19,20 @@
        방법 P0, P1, P2, R1(λ 0.25·0.5·1.0), R2(같은 λ), D1, W. W 는 선택한 n 개 라벨 안 5겹 블록 교차검증(seed 0 적합)으로
        {P0, P1, P2, R1(0.25), R1(1.0), R2(0.25), D1} 가운데 오차가 가장 작은 방법이고, 라벨이 10개 미만이면 P1 이다.
        n = 10 의 추출마다 편향 진단값(선택 라벨 위치의 P0 평균 오차, E0·s − y 의 평균)을 unit.json 의 diag 에 남긴다.
+  wf6  검정력 보강(계획서 §6 WF6). 지역 내 모드 r(wf1 과 같다). 대상 Alaska(x25), Lena, Canada. n {200, 500, 1000, 전량}(|A| 미만과 전량),
+       추출 3(전량 1), seed 2. 분할 = half_split_blocks 의 split_seed 1–25(LG 분할 1–5 에 새 분할 6–25. --wf6-splits). 중복·무효 분할은
+       h40.Data.split_structure 의 규칙을 분할 1–25 에 그대로 적용해 뺀다(분할 1–5 의 구조는 LG 와 같다).
+       방법 P1, Pk, R1(λ 0.25·0.5·1.0·교차검증), R2(같은 λ), Re(λ 0.25·교차검증), D0(catboost 기본 용량만). R1·R2·Re 는 catboost_lo 다.
+       WF6-a 의 보조 대비(Pbest)를 위해 wf1 과 같은 물리 보정식 묶음(P2, Pc@c2·c4·c8, Pc, Pbest)도 계산해 저장한다(학습 적합 없음).
+  wf7  Stefan·CCI 평균 앵커의 전이 성능(계획서 §6 WF7). 전이 모드(h40.build_ctx). 대상 = LG 의 27 (대상, 모드)(러시아 C·그린란드는 점 추정만),
+       분할 1–5, n {0, 3, 10, 40, 160, 320, 1000, 전량}(0·전량과 |A| 미만), 추출 5(0·전량 1), seed 2, 추출은 h40.draw_cells(LG 와 같다).
+       방법 P0, P1, Pe(앵커만), R1(λ 0.25), Re(앵커 + 잔차 λ 0.25, catboost_lo). P0·P1·R1 은 같은 플랫폼 대비를 위해 이 조각에서 다시 적합한다.
+       앵커(E) = 0.5·(E·s + cci_alt)(cci_alt 유한이고 cci_valid ≥ 0.5 인 셀), 그 밖 E·s. Pe = 앵커(E_n). Re 의 잔차 모형 학습 행은
+       h40 의 R1 과 같은 구성이다: 원천 행의 목표 = y − 앵커(E0)(원천 계수), 선택 라벨 행의 목표 = y − 앵커(E_n).
+  wf8  전이 조건의 라벨 위치 선택(계획서 §6 WF8). 대상 Lena, Canada, Russia_W, Russia_E, Alaska(모드 x, 원천 = LG). n {10, 40}(|A| 미만.
+       러시아 W·E 는 |A| 14–17 이라 10 만), 분할 1–5, 추출 5, seed 2. 전략 S1(셀 무작위 = h40.draw_cells), S2(블록 층화 = h40.draw_blocks),
+       S4(대상 A 풀 x25 표준화의 탐욕 k-중심)는 wf2 의 구현(RUnit.strategy_sets·s4_order·std_stats)을 그대로 빌려 쓴다.
+       방법 P1, R1(λ 0.25, 원천 행 + 선택 라벨). 조각은 (대상, 분할, 전략) 단위이고 키의 placement 가 전략이다.
 
 기호와 공통 규약
   s = e5_sqrt_tdd. E_ls = Σ s·y / Σ s². E_n = (n·E_ls + κ·E0)/(n + κ), κ = 10(h42.shrink). x25 = h40.FEATS, x34 = x25 + SAR 9열.
@@ -68,6 +84,28 @@
      진단값의 (분할, 추출) 재표집을 같은 번호로 묶은 Spearman 분포의 2.5–97.5 백분위다.
   9. 대상 30 은 LG 와 같이 하위 지역의 모드 i·x 를 모두 둔다(WF0 의 30대상과 같은 구성). --wf4-modes x 로 모드 x 만 쓰면 20대상이다.
 
+구현 결정(2차 보강 WF6–WF8. 계획서 개정 이력에 '구현 결정, 결과 실행 전'으로 적었다)
+  10. wf6 분할: split_seed 1–25 의 구조를 h40.Data.split_structure 의 코드로 계산한다(분할 목록만 1–25 로 바꾼 얇은 보기, _SplitView).
+      중복(A 블록 집합이 앞 분할과 같음)은 빼고, 채점 블록 2개 미만 분할은 유효 분할이 있으면 뺀다(h40 과 같다). 빈 자리를 다른 seed 로
+      채우지 않는다. 계획서의 '분할 1–5 에 새 분할 6–25 를 더한 20회' 는 seed 목록(1–25, 25개)과 횟수(20)가 맞지 않는다. 명시한 seed 목록을
+      따라 1–25 를 쓰고 '20' 은 새 분할의 수(6–25)로 읽었다(--wf6-splits 20 이면 1–20). 자료 v3 에서 알래스카·캐나다 25회, 레나 24회
+      (분할 24 의 채점 블록 1개)이고 분할 1–25 사이에 중복 분할은 없다.
+  11. wf6 방법: 교차검증 λ 는 wf1 과 같은 함수(lam_cv: h42.cv_folds_of 블록 5묶음, seed 0 적합, 묶음마다 E_n 재계산)다. 고정 λ 키(R1·R2 의
+      0.25·0.5·1.0, Re 의 0.25)는 사후 적용이라 함께 저장한다(보조). D0 은 catboost(600, 깊이 6, 0.03)만 적합한다.
+  12. wf7 Re 의 원천 행 목표는 원천 계수 E0 로 만든 앵커의 잔차 y − 앵커(E0)다(h40 의 R1 이 원천 행에 E0 앵커를 쓰는 것과 같은 구성이고,
+      대회 구성 S12 도 원천 계수 앵커를 썼다). n = 0 에서 P1 = P0, R1·Re 는 원천 행만으로 적합한다. R1·Re 는 λ 0.25 만 저장한다.
+  13. wf8 전략은 RUnit 의 함수를 그대로 쓴다. S4 의 seed 는 wf2 와 같은 seed_of('wf-s4', 대상, 분할, 추출)라 같은 A 풀에서 wf2 의 S4 와 같은
+      순서를 낸다. S1·S2 는 모드 x 의 LG 추출(셀, 블록 분산)과 같다. 같은 라벨 집합이 여러 추출에서 나오면 적합은 한 번만 하고 예측을
+      추출마다 저장한다(wf2 는 첫 추출만 저장했다. wf8 은 S1 과 추출 번호를 맞추고 중복 집합의 가중을 보존한다).
+  14. 판정 정의. WF6-a(대상별): (레시피 ∈ {R1, R2, Re(교차검증 λ), D0(catboost)}, n) 대비 가운데 하나라도 P1 보다 우세(두 가중)면 지지.
+      Pbest 대비는 보조 판정 행(verdict_aux)이다. WF6-b: 세 대상 층화 평균의 R2(교차검증 λ) − P1 을 n ∈ {500, 1000, 전량}(전량은
+      n ≥ 500 에 넣는다. wf1 과 같은 규약)에서 보고 모두 우세면 지지, 열세가 없고 일부 우세면 부분 지지, 열세가 있거나 우세가 없으면 기각이다.
+      WF7-a·b 는 방향 중립 서술이다(주 4지역 층화 평균의 4분 판정, 확인적 가설로 세지 않는다. tests 의 hypothesis 열 False).
+      WF8-a: 레나·캐나다의 n = 40 R1 에서 S4 − S1 이 우세인 지역이 하나 이상이면 지지. WF8-b: 다섯 대상의 n = 10 R1 에서 S2 − S1,
+      S4 − S1 가운데 열세가 하나라도 있으면 기각, 판정할 수 없는 대비가 있으면 판정 불가, 그 밖은 지지다.
+  15. 2차 보강의 집계 표는 1차 표를 덮어쓰지 않게 <tag>2b_* 에 따로 쓴다(아래 산출). 1차(wf1–wf4)의 조각 이름, 설정 해시, 표 이름은 바뀌지 않는다
+      (시험 (p)가 1차 설정 해시와 조각 이름을 고정값과 대조한다).
+
 누설 규약
   대상 라벨은 선택된 n 개만 계수, 학습, 크리깅, 교차검증, 전략(S6)에 쓴다. 표준화와 군집은 A 풀의 공변량(라벨 미사용)으로만 정한다.
   B 블록 셀의 라벨은 채점 전용이다. 시험이 B 라벨과 비선택 A 라벨을 바꿔도 예측과 선택이 같음을 확인한다.
@@ -77,17 +115,22 @@
     unit.json 이 완료 표지다(마지막에 원자적으로 쓴다). --resume 은 cfg_hash 가 같고 status 가 failed 가 아닌 조각만 건너뛴다.
   <tag>_curve.csv(h40.build_curve 형식 + exp, verdict4_p0·p1), <tag>_tests.csv(WF1-a·b·c, WF2-a·b, WF3-a·b, WF4-a·b·c 와 서술 대비),
   <tag>_meta.json, <tag>_targets.csv, <tag>_timing.csv, <tag>_failed.csv, <tag>_count.csv, <tag>_count_detail.csv(--count-only).
+  2차 보강(wf6–wf8): 조각은 shards/<tag>{6,7,8}__cpu__… (wf8 은 변형 = 전략), 표는 <tag>2b_curve.csv, <tag>2b_tests.csv(WF6-a·b, WF7-a·b 서술,
+  WF8-a·b 와 서술 대비), <tag>2b_meta.json, <tag>2b_targets.csv, <tag>2b_timing.csv, <tag>2b_failed.csv, <tag>2b_count.csv, <tag>2b_count_detail.csv.
+  두 차수를 한 번에 집계하면 차수마다 자기 표에 쓴다. 스모크는 wf_smoke_*, wf2b_smoke_* 다.
 
 실행 환경
   로컬 공유 서버에서는 --count-only, --summarize-only(재표집 1,000회 상한), --smoke(스레드 2, 워커 0)만 한다. 본 실행과 사전 점검은
   Rescale CPU 노드에서 한다(WF_RESCALE=1 또는 LG_RESCALE=1 또는 --allow-local 이 없으면 거부). 스레드 상한은 허용 표지가 없으면 4다.
   CatBoost 는 thread_count 밖의 고정 비용 부분도 여러 스레드로 돌려 프로세스 CPU 사용이 thread_count 의 약 1.5–3배다(로컬 측정, 작은 적합일수록
   크다. 명시적 Pool 의 thread_count 로도 줄지 않았다). 로컬 스모크와 시험은 taskset 으로 코어 4개에 묶어 공유 서버의 상한을 지킨다.
-  적합 수:  CUDA_VISIBLE_DEVICES= nice -n 10 python3 scripts/3_deep_learning/h54_workflow.py --count-only --threads 1
+  적합 수:  CUDA_VISIBLE_DEVICES= nice -n 10 python3 scripts/3_deep_learning/h54_workflow.py --count-only --threads 1 [--exp wf6,wf7,wf8]
   스모크:   CUDA_VISIBLE_DEVICES= nice -n 10 taskset -c <코어 4개> python3 scripts/3_deep_learning/h54_workflow.py --smoke --threads 2 --workers 0
+            [--exp wf6,wf7,wf8]
   본 실행:  WF_RESCALE=1 python3 scripts/3_deep_learning/h54_workflow.py --workers 22 --threads 4 --resume --no-summarize
   집계:     WF_RESCALE=1 python3 scripts/3_deep_learning/h54_workflow.py --summarize-only --workers 22 --threads 4
-  Rescale:  scripts/rescale/run_wf.sh(WF_MODE=smoke|full), configs/rescale/wf_smoke.yaml, wf_full.yaml, 묶음 scripts/rescale/make_payload_wf.sh
+  Rescale:  scripts/rescale/run_wf.sh(WF_MODE=smoke|full, WF_EXPS), configs/rescale/wf_smoke.yaml, wf_full.yaml(1차, WF_EXPS=wf1,wf2,wf3,wf4),
+            wf2_smoke.yaml, wf2_full.yaml(2차 보강, WF_EXPS=wf6,wf7,wf8), 묶음 scripts/rescale/make_payload_wf.sh
   WF5 지도: python3 scripts/3_deep_learning/h54_workflow.py --wf5-map --wf5-strategy S4 --wf5-n 50,200 --threads 2 (WF2 판정 뒤)
 """
 from __future__ import annotations
@@ -102,6 +145,7 @@ import sys
 import time
 import warnings
 from collections import Counter
+from types import SimpleNamespace
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from concurrent.futures.process import BrokenProcessPool
 from pathlib import Path
@@ -198,7 +242,11 @@ DIAG_N = 10
 NI_MARGIN = 0.5
 PBEST_CANDS = ("P1", "P2", "Pk", "Pc")
 STRATEGIES = ("S1", "S2", "S3", "S4", "S5", "S6", "S7")
-EXPS_ALL = ("wf1", "wf2", "wf3", "wf4")
+EXPS_R1 = ("wf1", "wf2", "wf3", "wf4")                                      # 1차(계획서 §2)
+EXPS_R2 = ("wf6", "wf7", "wf8")                                             # 2차 보강(계획서 §6)
+EXPS_ALL = EXPS_R1 + EXPS_R2
+TRANSFER_EXPS = ("wf4", "wf7", "wf8")                                       # 전이 모드(원천 = LG, h40.build_ctx)
+PLAN_COMMIT = {"r1": "4168331", "r2": "1b42b4d"}                            # 차수별 사전 등록 커밋
 WF1_TARGETS = ("Alaska", "Lena", "Canada", "AL-1", "AL-2", "AL-6")
 WF1_X34 = ("Alaska",)
 WF1_GRID = (20, 50, 100, 200, 500, 1000, 2000, 5000, -1)
@@ -209,6 +257,21 @@ WF3_TARGETS = ("Alaska", "Lena")
 WF3_GRID = (100, 500, 2000, -1)
 WF4_GRID = (10, 40, 160, -1)
 WF4_DRAWS = 5
+# 2차 보강(계획서 §6). 바꾸면 사전 등록에서 벗어난다
+WF6_TARGETS = ("Alaska", "Lena", "Canada")                                  # 지역 내(모드 r), x25
+WF6_GRID = (200, 500, 1000, -1)
+WF6_SPLITS = 25                                                             # split_seed 1–25 = LG 분할 1–5 + 새 분할 6–25
+WF6_DRAWS = 3
+WF7_GRID = (0, 3, 10, 40, 160, 320, 1000, -1)                               # LG 의 n 격자
+WF7_DRAWS = 5
+WF7_TEST_N = (0, 10, 40, 160, -1)                                           # WF7-a·b 를 보고하는 n
+WF8_TARGETS = ("Lena", "Canada", "Russia_W", "Russia_E", "Alaska")          # 모드 x
+WF8_GRID = (10, 40)
+WF8_DRAWS = 5
+WF8_STRATEGIES = ("S1", "S2", "S4")
+ZERO_N_EXPS = ("wf7",)                                                      # n = 0(라벨 없음)을 격자에 두는 실험
+# 1차 Rescale 스모크(nyFtT) 사전 점검 대표 단위 7개의 실측/추정 비(계획서 개정 이력 2026-10-01 13:20). --count-only 의 환산 출력에만 쓴다
+RESCALE_RATIO = 0.62
 # LGD 약관 확인분 새 지역: 저장소 이름 → (실행 표 디렉터리, 표 안의 대상 이름, 점 추정만)
 LGD_SPECS = {"Tibet_LGD": ("Tibet", "Tibet_LGD", False), "NAtlantic~lic": ("NAtlantic_lic", "NAtlantic", True),
              "Russia_C~lgd": ("Russia_C", "Russia_C", False)}
@@ -239,7 +302,8 @@ def _grid_txt(g):
 
 def parse_args(argv=None):
     ap = argparse.ArgumentParser(description="H54 희소·충분 라벨 워크플로 하네스(WF)")
-    ap.add_argument("--exps", default=",".join(EXPS_ALL), help="실행·집계할 실험(wf1, wf2, wf3, wf4)")
+    ap.add_argument("--exps", "--exp", dest="exps", default=",".join(EXPS_ALL),
+                    help="실행·집계할 실험(쉼표 목록. 1차 wf1, wf2, wf3, wf4, 2차 보강 wf6, wf7, wf8)")
     ap.add_argument("--wf1-targets", default=",".join(WF1_TARGETS))
     ap.add_argument("--x34-targets", default=",".join(WF1_X34), help="wf1 에서 x34 조각을 둘 대상(SAR 열이 있는 알래스카 계열)")
     ap.add_argument("--wf2-targets", default=",".join(WF2_TARGETS))
@@ -252,6 +316,14 @@ def parse_args(argv=None):
     ap.add_argument("--wf2-budgets", default=_grid_txt(WF2_BUDGETS))
     ap.add_argument("--wf3-grid", default=_grid_txt(WF3_GRID))
     ap.add_argument("--wf4-grid", default=_grid_txt(WF4_GRID))
+    ap.add_argument("--wf6-targets", default=",".join(WF6_TARGETS))
+    ap.add_argument("--wf6-grid", default=_grid_txt(WF6_GRID))
+    ap.add_argument("--wf6-splits", type=int, default=WF6_SPLITS, help="wf6 의 half_split_blocks split_seed 1..K(LG 분할 1–5 + 새 분할)")
+    ap.add_argument("--wf7-targets", default="", help="'이름:모드' 쉼표 목록. 기본 = LG 27 (대상, 모드)")
+    ap.add_argument("--wf7-grid", default=_grid_txt(WF7_GRID))
+    ap.add_argument("--wf8-targets", default=",".join(WF8_TARGETS), help="'이름' 또는 '이름:모드' 쉼표 목록(모드 생략 = x)")
+    ap.add_argument("--wf8-grid", default=_grid_txt(WF8_GRID))
+    ap.add_argument("--wf8-strategies", default=",".join(WF8_STRATEGIES))
     ap.add_argument("--splits", type=int, default=5, help="half_split_blocks split_seed 1..K")
     ap.add_argument("--seeds", type=int, default=len(SEEDS))
     ap.add_argument("--draws-cap", type=int, default=0, help="추출 수 상한(0 = 설계값). 스모크·시험용")
@@ -296,6 +368,11 @@ def default_wf4_targets(modes):
     return out
 
 
+def _pair(v, mode="x"):
+    """'이름:모드' → (이름, 모드). 모드를 생략하면 mode."""
+    return tuple(v.split(":", 1)) if ":" in v else (v, mode)
+
+
 def finalize(a):
     if a.smoke and a.precheck:
         raise SystemExit("--smoke 와 --precheck 는 함께 쓰지 않는다")
@@ -314,6 +391,13 @@ def finalize(a):
     a.T["wf4"] = [tuple(v.split(":")) if ":" in v else (v, "x") for v in t4]
     a.STRAT = [v for v in _list(a.strategies) if v in STRATEGIES]
     a.G = {"wf1": _n_list(a.wf1_grid), "wf2": _n_list(a.wf2_budgets), "wf3": _n_list(a.wf3_grid), "wf4": _n_list(a.wf4_grid)}
+    # 2차 보강(wf6–wf8)
+    a.SPLITS6 = list(range(1, int(a.wf6_splits) + 1))
+    a.T["wf6"] = _list(a.wf6_targets)
+    a.T["wf7"] = [_pair(v) for v in (_list(a.wf7_targets) if a.wf7_targets else [f"{t}:{m}" for t, m in H.default_targets(["i", "x"])])]
+    a.T["wf8"] = [_pair(v) for v in _list(a.wf8_targets)]
+    a.STRAT8 = [v for v in _list(a.wf8_strategies) if v in WF8_STRATEGIES]
+    a.G.update(wf6=_n_list(a.wf6_grid), wf7=_n_list(a.wf7_grid), wf8=_n_list(a.wf8_grid))
     if a.smoke:                                                    # 스모크: 모든 경로를 작은 대상으로 한 번씩 지난다
         a.SPLITS = [1]; a.SEEDS = [0]; a.draws_cap = a.draws_cap or 1
         a.T = {"wf1": ["Canada", "AL-3"], "wf2": ["Canada"], "wf3": ["Canada"],
@@ -321,10 +405,18 @@ def finalize(a):
         a.X34 = ["AL-3"]
         a.G = {"wf1": [20, 50, -1], "wf2": [20, 50], "wf3": [100, -1], "wf4": [10, -1]}
         a.nboot = min(int(a.nboot), 500)
+        # 2차 보강: wf6 은 새 분할(6)을 지나고, wf7 은 n = 0 과 하위 지역 모드 i, wf8 은 |A| 가 작은 대상(n = 10 만)을 지난다
+        a.SPLITS6 = [6]
+        a.T.update(wf6=["Canada"], wf7=[("Russia_W", "x"), ("AL-3", "i")], wf8=[("Russia_W", "x"), ("Canada", "x")])
+        a.G.update(wf6=[200, -1], wf7=[0, 10, -1], wf8=[10, 40])
     if a.precheck:                                                 # 사전 점검: 실험마다 본 실행 크기의 대표 단위(분할 1)
         a.SPLITS = [1]
         a.T = {"wf1": ["Alaska"], "wf2": ["Alaska"], "wf3": ["Alaska"], "wf4": [("Lena", "x"), ("AL-2", "i")]}
         a.STRAT = ["S1", "S6"]
+        a.SPLITS6 = [1]
+        a.T.update(wf6=["Alaska"], wf7=[("Alaska", "x"), ("Lena", "x")], wf8=[("Alaska", "x")])
+        a.STRAT8 = ["S1", "S4"]
+    a.TAG2 = f"{a.tag}2b{a.SUFFIX}"                                # 2차 보강의 집계 표 이름(1차 표를 덮어쓰지 않는다)
     a.OUT = _abs(a.out_dir); a.PROC = _abs(a.data_dir); a.LGD = _abs(a.lgd_dir)
     a.SHARDS = a.OUT / "shards"
     a._ha = None
@@ -335,23 +427,39 @@ def exp_tag(a, exp):
     return f"{a.tag}{exp[2:]}{a.SUFFIX}"
 
 
+def rounds_of(a, exps=None):
+    """실험 목록을 차수로 나눈다. 반환 [(차수, 실험 목록, 집계 표 이름)]. 1차 = wf1–wf4(<tag>_*), 2차 보강 = wf6–wf8(<tag>2b_*)."""
+    exps = list(a.EXPS if exps is None else exps)
+    out = []
+    for rnd, members, tag in (("r1", EXPS_R1, a.TAG), ("r2", EXPS_R2, a.TAG2)):
+        ex = [e for e in exps if e in members]
+        if ex:
+            out.append((rnd, ex, tag))
+    return out
+
+
 def draws_for(a, exp, n):
-    """(n 의 추출 수). wf1·wf3 은 n ≤ 1000 에서 5, 그 밖 3, 전량 1. wf2·wf4 는 5(전량 1). --draws-cap 이 있으면 그 값 이하."""
-    if n == -1:
+    """(n 의 추출 수). wf1·wf3 은 n ≤ 1000 에서 5, 그 밖 3, 전량 1. wf2·wf4 는 5(전량 1). wf6 은 3, wf7·wf8 은 5(n = 0·전량 1).
+    --draws-cap 이 있으면 그 값 이하."""
+    if n == -1 or (n == 0 and exp in ZERO_N_EXPS):
         k = 1
     elif exp in ("wf1", "wf3"):
         k = DRAWS_SMALL if n <= DRAW_SPLIT_N else DRAWS_LARGE
+    elif exp in EXPS_R2:
+        k = {"wf6": WF6_DRAWS, "wf7": WF7_DRAWS, "wf8": WF8_DRAWS}[exp]
     else:
         k = WF2_DRAWS if exp == "wf2" else WF4_DRAWS
     return max(1, min(k, int(a.draws_cap))) if int(a.draws_cap) > 0 else k
 
 
 def cells_for(a, exp, nA, grid=None):
-    """(n, 추출) 목록. 양수 n 은 |A| 미만만, 전량은 n = −1 하나(h40.cells_of 와 같은 규칙)."""
+    """(n, 추출) 목록. 양수 n 은 |A| 미만만, 전량은 n = −1 하나(h40.cells_of 와 같은 규칙). n = 0 은 ZERO_N_EXPS(wf7)에서만 하나 둔다."""
     out = []
     for n in (a.G[exp] if grid is None else grid):
         if n == -1:
             out.append((-1, 0))
+        elif n == 0 and exp in ZERO_N_EXPS:
+            out.append((0, 0))
         elif 0 < n < nA:
             out += [(n, d) for d in range(draws_for(a, exp, n))]
     return out
@@ -428,9 +536,41 @@ class RCtx:
         return self.XB if xs == "x25" else self.XB34
 
 
-def split_plan(D, target, splits):
-    """실행할 분할과 건너뛴 분할(h40.enumerate_units 와 같은 규칙: 중복 분할, 채점·A 셀 없음, 유효 분할이 있을 때의 무효 분할을 뺀다)."""
-    info = D.split_structure(target)
+class _SplitView:
+    """h40.Data.split_structure 를 다른 분할 목록으로 부르기 위한 얇은 보기. 같은 df, 같은 대상 색인, 같은 코드(중복·채점 블록 규칙)를 쓰고
+    h40.Data 의 분할 캐시(분할 1–5)는 건드리지 않는다. wf6 의 분할 1–25 에 쓴다."""
+
+    def __init__(self, D, splits):
+        self.df, self.target_idx = D.df, D.target_idx
+        self.args = SimpleNamespace(SPLITS=[int(v) for v in splits])
+        self._split: dict = {}
+
+
+_SPLIT_EXT: dict = {}
+
+
+def split_structure_ext(D, target, splits):
+    """분할 목록 splits 의 구조(h40.Data.split_structure 와 같은 dict). 앞선 분할과 A 블록 집합이 같으면 dup_of, 채점 블록 2개 미만은 무효."""
+    key = (id(D), str(target), tuple(int(v) for v in splits))
+    if key not in _SPLIT_EXT:
+        _SPLIT_EXT[key] = H.Data.split_structure(_SplitView(D, splits), target)
+    return _SPLIT_EXT[key]
+
+
+def splits_of(a, exp):
+    """실험의 분할 목록. wf6 은 split_seed 1–25(--wf6-splits), 그 밖은 1–5(--splits)."""
+    return list(a.SPLITS6) if exp == "wf6" else list(a.SPLITS)
+
+
+def split_info_of(a, D, exp, target):
+    """실험의 분할 구조. wf6 은 분할 1–25 안에서 다시 계산하고, 그 밖은 h40.Data 의 분할 1–5 구조(기존과 같다)."""
+    return split_structure_ext(D, target, splits_of(a, exp)) if exp == "wf6" else D.split_structure(target)
+
+
+def split_plan(D, target, splits, info=None):
+    """실행할 분할과 건너뛴 분할(h40.enumerate_units 와 같은 규칙: 중복 분할, 채점·A 셀 없음, 유효 분할이 있을 때의 무효 분할을 뺀다).
+    info 를 주지 않으면 h40.Data 의 분할 구조를 쓴다(wf1–wf4, wf7, wf8)."""
+    info = D.split_structure(target) if info is None else info
     any_valid = any(v["valid"] for v in info.values())
     keep, skip = [], []
     for sp in splits:
@@ -446,8 +586,9 @@ def split_plan(D, target, splits):
     return keep, skip, info
 
 
-def build_rctx(a, target, split):
-    """지역 내 문맥. A·B 색인과 채점 셀은 h40.build_ctx 와 같은 규칙(half_split_blocks, eval_mask)으로 만든다."""
+def build_rctx(a, target, split, info=None):
+    """지역 내 문맥. A·B 색인과 채점 셀은 h40.build_ctx 와 같은 규칙(half_split_blocks, eval_mask)으로 만든다.
+    info = 분할 구조 dict(wf6 의 분할 1–25). 주지 않으면 h40.Data 의 분할 1–5 구조를 쓴다."""
     HA, D = get_data(a)
     df = D.df
     t_idx = D.target_idx(target)
@@ -457,7 +598,7 @@ def build_rctx(a, target, split):
     ok = np.isfinite(df.y.values[src_idx]) & np.isfinite(df.s.values[src_idx])
     src = src_idx[ok]
     E0 = H.ls_E(df.y.values[src], df.s.values[src])
-    info = D.split_structure(target)[split]
+    info = D.split_structure(target)[split] if info is None else info
     has34 = all(c_ in df.columns for c_ in SAR_COLS)
 
     def cols(idx, names):
@@ -1051,6 +1192,37 @@ class RUnit(UnitBase):
         for n, d in cells_for(self.a, "wf1", self.nA):
             self.wf1_cell(n, d, xs)
 
+    # ------------------------------------------------------------ wf6(검정력 보강, 계획서 §6)
+    def run_wf6(self):
+        """wf1 과 같은 지역 내 문맥·추출·교차검증에서 WF6 의 방법만 적합한다. 물리 보정식은 wf1 의 묶음 그대로(Pbest 는 보조 대비),
+        R1·R2·Re 는 catboost_lo(교차검증 λ 와 고정 λ 키), D0 은 catboost(기본 용량)만이다."""
+        c = self.c
+        for n, d in cells_for(self.a, "wf6", self.nA):
+            sel = self.draw(n, d); nl, nb = len(sel), self.nb(sel)
+            self.trace("select", sel, n=n, draw=str(d))
+            E1, E2 = self.coefs(sel)
+            self.physics(n, d, sel, E1, E2)
+            lam = {m: self.lam_cv(m, LO, "x25", sel, n, d) for m in ("R1", "R2", "Re")}
+            a1A, a1B = E1 * c.sA[sel], E1 * c.sB
+            aeA, aeB = self.anchor_A("Re", E1, sel), self.anchor_B("Re", E1)
+            nps = int(round(R_PS * nl))
+            for seed in self.seeds:
+                (p,) = self.fit_direct(HI, "D0", sel, seed, n, d)
+                self.add("D0", HI, "cell", n, d, seed, 1.0, p, np.nan, nl, nb, flag=self.F.last_flag, nrow=nl)
+                (g,) = self.fit_resid(LO, "R1", sel, a1A, seed, n, d)
+                lcv, K, cf = lam["R1"]
+                self.emit("R1", LO, n, d, seed, a1B, g, E1, nl, nb, lcv, K, cf, self.F.last_flag, nrow=nl)
+                (g,) = self.fit_resid(LO, "R2", sel, a1A, seed, n, d, pseudo_E=E1)
+                lcv, K, cf = lam["R2"]
+                self.emit("R2", LO, n, d, seed, a1B, g, E1, nl, nb, lcv, K, cf, self.F.last_flag, nrow=nl + nps)
+                (g,) = self.fit_resid(LO, "Re", sel, aeA, seed, n, d)
+                fl = self.F.last_flag
+                g = np.asarray(g, float)
+                lcv, K, cf = lam["Re"]
+                self.add("Re", LO, "cell", n, d, seed, LAM_BASE, aeB + LAM_BASE * g, E1, nl, nb, flag=fl, nrow=nl)
+                self.add("Re", LO, "cell", n, d, seed, LAM_CV, aeB + lcv * g, E1, nl, nb, flag=fl, sel_info=f"lam={lcv}", cv_folds=K, cv_flag=cf,
+                         nrow=nl)
+
     # ------------------------------------------------------------ wf3
     def run_wf3(self):
         c = self.c
@@ -1200,16 +1372,19 @@ class RUnit(UnitBase):
             self.run_wf2()
         elif self.exp == "wf3":
             self.run_wf3()
+        elif self.exp == "wf6":
+            self.run_wf6()
         else:
             raise ValueError(self.exp)
         return self
 
 
 class TUnit(UnitBase):
-    """전이 작업 단위(wf4). 학습 행 = 원천 행 + 선택 라벨(+ 유사라벨 행). 행렬과 추출은 LG(h40)와 같다."""
+    """전이 작업 단위(wf4). 학습 행 = 원천 행 + 선택 라벨(+ 유사라벨 행). 행렬과 추출은 LG(h40)와 같다.
+    exp·variant 는 2차 보강의 전이 실험(T7Unit = wf7, T8Unit = wf8)이 같은 문맥과 행렬 함수를 쓰려고 둔 인자다(wf4 는 기본값)."""
 
-    def __init__(self, a, c, alias, dry=False):
-        self._init_base(a, c, "wf4", f"{alias}|{c.mode}", "", dry)
+    def __init__(self, a, c, alias, dry=False, exp="wf4", variant=""):
+        self._init_base(a, c, exp, f"{alias}|{c.mode}", variant, dry)
         self.alias = alias
         self.nsrc = len(c.y_src)
         self.n_ps = int(round(R_PS * self.nsrc))
@@ -1308,6 +1483,96 @@ class TUnit(UnitBase):
         return rows, st, stats
 
 
+def re_src_resid(c):
+    """wf7 Re 의 원천 행 목표: y − 앵커(E0). 앵커(E0) = 0.5·(E0·s + cci_alt)(CCI 유효 셀), 그 밖 E0·s(h40 R1 의 원천 E0 앵커와 같은 구성)."""
+    return np.asarray(c.y_src, float) - re_anchor(c.E0 * np.asarray(c.s_src, float), c.X_src[:, CCI_COL], c.X_src[:, CCIV_COL])
+
+
+class T7Unit(TUnit):
+    """wf7(계획서 §6 WF7): Stefan·CCI 평균 앵커의 전이 성능. 문맥·원천·추출·seed 는 LG(h40.build_ctx, h40.draw_cells)와 같다.
+    방법 P0, P1, Pe = 앵커(E_n), R1 = E_n·s + 0.25·g1, Re = 앵커(E_n) + 0.25·ge. g1 의 학습 행 = 원천(y − E0·s) ∪ 선택 라벨(y − E_n·s),
+    ge 의 학습 행 = 원천(y − 앵커(E0)) ∪ 선택 라벨(y − 앵커(E_n)). n = 0 은 E_n = E0 이고 원천 행만으로 적합한다."""
+
+    def __init__(self, a, c, alias, dry=False):
+        super().__init__(a, c, alias, dry, exp="wf7")
+        self.re_src = re_src_resid(c)
+        ok = np.isfinite(c.X_src[:, CCI_COL]) & np.isfinite(c.X_src[:, CCIV_COL]) & (c.X_src[:, CCIV_COL] >= 0.5)
+        okB = np.isfinite(c.XB[:, CCI_COL]) & np.isfinite(c.XB[:, CCIV_COL]) & (c.XB[:, CCIV_COL] >= 0.5)
+        self.notes["cci_valid_frac"] = dict(src=float(ok.mean()) if len(ok) else np.nan, B=float(okB.mean()) if len(okB) else np.nan)
+
+    def rows_Re(self, idx, anchor_lab):
+        c = self.c
+        return X.stack_rows(c.X_src, self.re_src, c.XA[idx], c.yA[idx] - np.asarray(anchor_lab, float), None, None)
+
+    def run(self):
+        c = self.c
+        for n, d in cells_for(self.a, "wf7", self.nA):
+            sel = self.draw(n, d); nl, nb = len(sel), self.nb(sel)
+            E1, _ = self.coefs(sel)
+            self.trace("coef", sel, n=n, draw=str(d))
+            a1A, a1B = E1 * c.sA[sel], E1 * c.sB
+            aeA = re_anchor(a1A, c.XA[sel, CCI_COL], c.XA[sel, CCIV_COL])
+            aeB = re_anchor(a1B, c.XB[:, CCI_COL], c.XB[:, CCIV_COL])
+            self.add("P1", "none", "cell", n, d, -1, 0.0, a1B, E1, nl, nb)
+            self.add("Pe", "none", "cell", n, d, -1, 0.0, aeB, E1, nl, nb)
+            for seed in self.seeds:
+                (g1,) = self.fit(LO, "R1", lambda: self.rows_R(sel, a1A), self.nsrc + nl, seed, [c.XB], n, d, sel)
+                self.add("R1", LO, "cell", n, d, seed, LAM_BASE, a1B + LAM_BASE * np.asarray(g1, float), E1, nl, nb, flag=self.F.last_flag,
+                         nrow=self.nsrc + nl)
+                (ge,) = self.fit(LO, "Re", lambda: self.rows_Re(sel, aeA), self.nsrc + nl, seed, [c.XB], n, d, sel)
+                self.add("Re", LO, "cell", n, d, seed, LAM_BASE, aeB + LAM_BASE * np.asarray(ge, float), E1, nl, nb, flag=self.F.last_flag,
+                         nrow=self.nsrc + nl)
+        return self
+
+
+class T8Unit(TUnit):
+    """wf8(계획서 §6 WF8): 전이 조건(모드 x)의 라벨 위치 선택. 전략 S1·S2·S4 는 wf2 의 구현(RUnit 의 함수)을 그대로 빌려 쓴다.
+    S1 = h40.draw_cells(대상, x, 분할, n, 추출), S2 = h40.draw_blocks(같은 인자, A 블록), S4 = A 풀 x25 표준화(라벨 미사용)의 탐욕 k-중심.
+    방법 P1, R1(λ 0.25, 원천 행 + 선택 라벨). 같은 라벨 집합이 다른 추출에서 다시 나오면 적합을 다시 하지 않고 같은 예측을 그 추출 번호로 저장한다."""
+
+    std_stats = RUnit.std_stats                                            # wf2 의 구현을 그대로 쓴다(표준화 = A 풀 공변량)
+    s4_order = RUnit.s4_order
+    strategy_sets = RUnit.strategy_sets
+
+    def __init__(self, a, c, alias, variant, dry=False):
+        if variant not in WF8_STRATEGIES:
+            raise ValueError(f"wf8 전략은 {WF8_STRATEGIES} 가운데 하나다: {variant}")
+        super().__init__(a, c, alias, dry, exp="wf8", variant=variant)
+        self._std = None
+
+    def run(self):
+        c = self.c; strat = self.variant
+        budgets = [b for b in self.a.G["wf8"] if 0 < b < self.nA]
+        if not budgets:
+            return self
+        seen: dict = {}
+        for d in range(draws_for(self.a, "wf8", budgets[0])):
+            sets = self.strategy_sets(strat, budgets, d)
+            for n in budgets:
+                sel = np.sort(np.asarray(sets[n], int))
+                nl, nb = len(sel), self.nb(sel)
+                key = (n, tuple(sel.tolist()))
+                self.trace("select", sel, n=n, draw=str(d), strategy=strat)
+                E1, _ = self.coefs(sel)
+                self.trace("coef", sel, n=n, draw=str(d))
+                self.add("P1", "none", strat, n, d, -1, 0.0, E1 * c.sB, E1, nl, nb)
+                a1A, a1B = E1 * c.sA[sel], E1 * c.sB
+                dup = key in seen
+                if dup:                                                   # 같은 라벨 집합: 앞 추출의 g 를 그대로 쓴다(같은 행렬·seed)
+                    self.notes.setdefault("dup_draws", []).append([int(n), int(d), int(seen[key][0])])
+                else:
+                    seen[key] = (d, {})
+                for seed in self.seeds:
+                    if dup:
+                        g, fl = seen[key][1][seed]
+                    else:
+                        (g,) = self.fit(LO, "R1", lambda: self.rows_R(sel, a1A), self.nsrc + nl, seed, [c.XB], n, d, sel, placement=strat)
+                        g, fl = np.asarray(g, float), self.F.last_flag
+                        seen[key][1][seed] = (g, fl)
+                    self.add("R1", LO, strat, n, d, seed, LAM_BASE, a1B + LAM_BASE * g, E1, nl, nb, flag=fl, nrow=self.nsrc + nl)
+        return self
+
+
 # ================================================================ 조각 입출력
 def shard_base(a, exp, target, mode, split, variant=""):
     return a.SHARDS / (f"{exp_tag(a, exp)}__cpu__{target}__{mode}__s{int(split)}" + (f"__{variant}" if variant else ""))
@@ -1352,6 +1617,13 @@ def unit_cfg(a, exp, variant="", data_sha=""):
         d.update(r1c_min=R1C_MIN)
     if exp == "wf4":
         d.update(draws=[WF4_DRAWS], w_cands=list(W_CANDS), w_min_n=W_MIN_N, diag_n=DIAG_N)
+    if exp == "wf6":                                                       # 2차 보강. 분할 목록(1–25)은 조각마다 하나라 넣지 않는다(원칙 같음)
+        d.update(draws=[WF6_DRAWS], clusters=list(CLUSTER_KS), krige=[KRIGE_K, KRIGE_MIN, VARIO_MAX_PTS, VARIO_NLAGS, VARIO_NRANGE],
+                 pbest=list(PBEST_CANDS), learners=dict(D0=HI, R1=LO, R2=LO, Re=LO), mode=MODE_R)
+    if exp == "wf7":
+        d.update(draws=[WF7_DRAWS], methods=["P0", "P1", "Pe", "R1", "Re"], lam=LAM_BASE, re_src="y-anchor(E0)", zero_n=True)
+    if exp == "wf8":
+        d.update(draws=[WF8_DRAWS], methods=["P1", "R1"], lam=LAM_BASE, s4="wf2", dup="reuse_fit_store_all")
     return d
 
 
@@ -1404,23 +1676,24 @@ def enumerate_units(a):
     """작업 단위 (실험, 대상, 모드, 분할, 변형)과 건너뛴 기록. 기대 분할(split_plan 의 keep)을 함께 돌려준다."""
     units, skipped, expected = [], [], {}
     for exp in a.EXPS:
-        if exp == "wf4":
-            for alias, mode in a.T["wf4"]:
+        if exp in TRANSFER_EXPS:
+            for alias, mode in a.T[exp]:
                 spec, tgt, _ = resolve4(a, alias)
                 if spec is not None and not lgd_available(a, alias):
                     skipped.append(dict(exp=exp, target=alias, mode=mode, split=-1, status="lgd_table_missing"))
                     continue
                 HA, D = get_data(a, spec)
                 if mode not in H.valid_modes(tgt):
-                    raise SystemExit(f"wf4 대상 {alias} 에 모드 {mode} 는 없다")
+                    raise SystemExit(f"{exp} 대상 {alias} 에 모드 {mode} 는 없다")
                 keep, skip, _ = split_plan(D, tgt, a.SPLITS)
                 expected[(exp, alias, mode)] = keep
                 skipped += [dict(exp=exp, target=alias, mode=mode, split=sp, status=st_, **v) for sp, st_, v in skip]
-                units += [(exp, alias, mode, sp, "") for sp in keep]
+                variants = list(a.STRAT8) if exp == "wf8" else [""]
+                units += [(exp, alias, mode, sp, v) for sp in keep for v in variants]
             continue
         HA, D = get_data(a)
         for t in a.T[exp]:
-            keep, skip, _ = split_plan(D, t, a.SPLITS)
+            keep, skip, _ = split_plan(D, t, splits_of(a, exp), split_info_of(a, D, exp, t) if exp == "wf6" else None)
             expected[(exp, t, MODE_R)] = keep
             skipped += [dict(exp=exp, target=t, mode=MODE_R, split=sp, status=st_, **v) for sp, st_, v in skip]
             variants = [""]
@@ -1436,22 +1709,23 @@ def cost_hint(a, u):
     """실행 순서용 대략의 비용(긴 단위 먼저). 값은 순서에만 쓰고 결과에 영향이 없다."""
     exp, t, m, sp, v = u
     try:
-        spec, tgt, _ = resolve4(a, t) if exp == "wf4" else (None, t, False)
+        spec, tgt, _ = resolve4(a, t) if exp in TRANSFER_EXPS else (None, t, False)
         _, D = get_data(a, spec)
-        nA = D.split_structure(tgt)[sp]["n_A"]
+        nA = split_info_of(a, D, exp, tgt)[sp]["n_A"]
     except Exception:                                                     # noqa: BLE001
         nA = 1000
-    w = dict(wf1=4.0 if v != "x34" else 1.5, wf2=0.6 if v != "S6" else 1.2, wf3=2.0, wf4=6.0).get(exp, 1.0)
-    return w * (1.0 + nA / 2000.0) * (3.0 if exp == "wf4" else 1.0)
+    w = dict(wf1=4.0 if v != "x34" else 1.5, wf2=0.6 if v != "S6" else 1.2, wf3=2.0, wf4=6.0, wf6=3.0, wf7=1.5, wf8=0.4).get(exp, 1.0)
+    return w * (1.0 + nA / 2000.0) * (3.0 if exp in ("wf4", "wf7") else 1.0)
 
 
 def run_unit(a, exp, target, mode, split, variant="", dry=False, expected=None):
     t0 = time.time()
-    if exp == "wf4":
+    if exp in TRANSFER_EXPS:
         c = build_tctx(a, target, mode, split)
-        U = TUnit(a, c, target, dry)
+        U = T7Unit(a, c, target, dry) if exp == "wf7" else (T8Unit(a, c, target, variant, dry) if exp == "wf8" else TUnit(a, c, target, dry))
     else:
-        c = build_rctx(a, target, split)
+        info = split_info_of(a, get_data(a)[1], exp, target)[split] if exp == "wf6" else None
+        c = build_rctx(a, target, split, info)
         U = RUnit(a, c, exp, variant, dry)
     if not dry:
         shard_paths(a, exp, target, mode, split, variant)["unit"].unlink(missing_ok=True)
@@ -1613,8 +1887,11 @@ def check_cfg(a, exp, units):
 
 
 def is_point_only(exp, name):
+    """점 추정만 내는 대상. wf4 는 LG 의 러시아 C·그린란드와 LGD 의 NAtlantic~lic, wf7·wf8 은 LG 와 같이 러시아 C·그린란드다."""
     t = name.split("|")[0]
-    return bool(exp == "wf4" and ((t in LGD_SPECS and LGD_SPECS[t][2]) or t in H.MAIN_POINT))
+    if exp == "wf4":
+        return bool((t in LGD_SPECS and LGD_SPECS[t][2]) or t in H.MAIN_POINT)
+    return bool(exp in ("wf7", "wf8") and t in H.MAIN_POINT)
 
 
 def make_tm(name, by_split, units, nboot, point_only):
@@ -2042,7 +2319,160 @@ def tests_wf4(a, tms, runs, units):
     return T.frame()
 
 
-WF_HYP = ("WF1-a", "WF1-b", "WF1-c", "WF2-a", "WF2-b", "WF3-a", "WF4-a", "WF4-b", "WF4-c")
+# ================================================================ 집계: 2차 보강 판정(계획서 §6)
+WF6_RECIPES = (("R1", LO, LAM_CV), ("R2", LO, LAM_CV), ("Re", LO, LAM_CV), ("D0", HI, 1.0))     # WF6-a 의 레시피(교차검증 λ, D0 = catboost)
+
+
+def _rlab(m, lr, lam):
+    return f"{m}(λ cv)" if lam == LAM_CV else (f"{m}({lr})" if m.startswith("D") else f"{m}(λ {lam})")
+
+
+def tests_wf6(a, tms, runs):
+    """WF6-a(대상별: R1·R2·Re(교차검증 λ)·D0(catboost) 가운데 하나라도 P1 보다 우세인 n 이 있다. Pbest 대비는 보조),
+    WF6-b(세 대상 층화 평균의 R2(교차검증 λ) − P1 이 n ≥ 500 에서 우세)."""
+    T = X.TestBook(a, tms, None, None)
+    names = [f"{t}|{MODE_R}" for t in a.T["wf6"]]
+    for nm in sorted(tms):
+        tm = tms[nm]
+        ns = ns_of(tm, "P1", "none")
+        res, res_pb = [], []
+        for n in ns:
+            for m, lr, lam in WF6_RECIPES:
+                gA = gk(m, n, lr, lam)
+                res.append((f"{_rlab(m, lr, lam)} n={nlab(n)}", T.single("WF6-a", "WF6-a", f"{_rlab(m, lr, lam)}-P1|n{nlab(n)}", nm,
+                                                                         X.region_stats(tm, gA, gk("P1", n, "none")), primary=True, n=n, method=m,
+                                                                         learner=lr, lam=lam)))
+                res_pb.append((f"{_rlab(m, lr, lam)} n={nlab(n)}", T.single("WF6-a", "WF6-a(Pbest)", f"{_rlab(m, lr, lam)}-Pbest|n{nlab(n)}", nm,
+                                                                            X.region_stats(tm, gA, gk("Pbest", n, "none")), role="보조", n=n,
+                                                                            method=m, learner=lr, lam=lam)))
+            for m in ("Pk", "Pbest"):                                       # 서술: 물리 보정식 사이의 대비
+                T.single("WF6-a", "WF6-a(물리)", f"{m}-P1|n{nlab(n)}", nm, X.region_stats(tm, gk(m, n, "none"), gk("P1", n, "none")), role="서술",
+                         n=n, method=m)
+            for m, lam in (("R1", LAM_BASE), ("R2", LAM_BASE), ("Re", LAM_BASE)):   # 보조: 고정 λ 0.25
+                T.single("WF6-a", "WF6-a(λ 0.25)", f"{m}(λ 0.25)-P1|n{nlab(n)}", nm, X.region_stats(tm, gk(m, n, LO, lam), gk("P1", n, "none")),
+                         role="보조", n=n, method=m, lam=lam)
+        win = [k for k, r in res if _v(r) == "우세"]
+        kv, km, _ = X.count_valid(res)
+        if not res:
+            txt = "판정 불가(행 없음)"
+        elif win:
+            txt = f"지지: P1 보다 우세인 (레시피, n) = {', '.join(win)}"
+        elif kv < km:
+            txt = X.na_text(res)
+        else:
+            txt = "기각: R1·R2·Re(교차검증 λ)와 D0(catboost) 가운데 P1 보다 우세인 n 이 없다"
+        sel = choice_freq(runs[runs.target == nm.split("|")[0]], "Pbest", ("n",)) if len(runs) else {}
+        T.verdict("WF6-a", "WF6-a", txt, X._fmt(res), role="주", used=res, target=nm)
+        win_pb = [k for k, r in res_pb if _v(r) == "우세"]
+        kv, km, _ = X.count_valid(res_pb)
+        txt = ("판정 불가(행 없음)" if not res_pb else f"보조 지지: Pbest 보다 우세인 (레시피, n) = {', '.join(win_pb)}" if win_pb else
+               X.na_text(res_pb) if kv < km else "보조 기각: Pbest 보다 우세인 (레시피, n) 이 없다")
+        T.verdict("WF6-a", "WF6-a(Pbest)", txt, X._fmt(res_pb) + f" | Pbest 선택 {json.dumps(sel, ensure_ascii=False)}", role="보조", used=res_pb,
+                  target=nm)
+    # ---------------- WF6-b: 세 대상 층화 평균의 R2(교차검증 λ) − P1 이 n ≥ 500 에서 우세
+    res = []
+    for n in (200, 500, 1000, -1):
+        main = n == -1 or n >= 500
+        mr = T.contrast("WF6-b", "WF6-b", f"R2(λ cv)-P1|n{nlab(n)}", gk("R2", n, LO, LAM_CV), gk("P1", n, "none"), names=names, primary=main,
+                        role="주" if main else "서술", aux3=False, n=n, lam=LAM_CV)
+        if main:
+            res.append((f"n={nlab(n)}", mr))
+        for m, lr, lam in (("R1", LO, LAM_CV), ("Re", LO, LAM_CV), ("D0", HI, 1.0)):   # 서술: 다른 레시피의 층화 평균
+            T.contrast("WF6-b", "WF6-b(서술)", f"{_rlab(m, lr, lam)}-P1|n{nlab(n)}", gk(m, n, lr, lam), gk("P1", n, "none"), names=names, primary=False,
+                       role="서술", aux3=False, n=n, method=m, lam=lam)
+    vs = [_v(r) for _, r in res]
+    kv, km, _ = X.count_valid(res)
+    up = [k for (k, _), v in zip(res, vs) if v == "우세"]
+    down = [k for (k, _), v in zip(res, vs) if v == "열세"]
+    if not any(r is not None for _, r in res):
+        txt = "판정 불가(행 없음)"
+    elif down:
+        txt = f"기각: R2(교차검증 λ)가 P1 보다 열세인 n 이 있다({', '.join(down)})"
+    elif kv < km:
+        txt = X.na_text(res)
+    elif len(up) == len(res):
+        txt = "지지: n ≥ 500 의 모든 n 에서 R2(교차검증 λ)가 P1 보다 우세(세 대상 층화 평균)"
+    elif up:
+        txt = f"부분 지지: 우세인 n = {', '.join(up)}"
+    else:
+        txt = "기각: n ≥ 500 에서 R2(교차검증 λ)가 P1 보다 우세인 n 이 없다"
+    T.verdict("WF6-b", "WF6-b", txt, X._fmt(res) + f" | 층화 대상 {', '.join(names)}", used=res)
+    return T.frame()
+
+
+def tests_wf7(a, tms, runs):
+    """WF7(방향 중립 서술, 확인적 가설 아님): 주 4지역 층화 평균의 Re − R1(λ 0.25)(WF7-a), Pe − P1(WF7-b)을 n ∈ {0, 10, 40, 160, 전량}에서
+    4분 판정으로 보고한다. 주 4지역 밖 대상의 지역 행과 Re − P0(보조)을 함께 둔다."""
+    T = X.TestBook(a, tms, None, None)
+    main4 = [f"{t}|x" for t in MAIN4]
+    items = (("WF7-a", "WF7-a", "Re-R1(0.25)", lambda n: gk("Re", n, LO, LAM_BASE), lambda n: gk("R1", n, LO, LAM_BASE)),
+             ("WF7-b", "WF7-b", "Pe-P1", lambda n: gk("Pe", n, "none"), lambda n: gk("P1", n, "none")),
+             ("WF7-a", "WF7-a(P0)", "Re(0.25)-P0", lambda n: gk("Re", n, LO, LAM_BASE), lambda n: H.P0_GRP))
+    for test, item, lbl, fA, fB in items:
+        res = []
+        role = "서술" if item in ("WF7-a", "WF7-b") else "보조"
+        for n in WF7_TEST_N:
+            mr = T.contrast(test, item, f"{lbl}|n{nlab(n)}", fA(n), fB(n), names=main4, primary=False, role=role, aux3=False, n=n)
+            res.append((f"n={nlab(n)}", mr))
+            for nm in sorted(tms):                                            # 주 4지역 밖 대상의 지역 행
+                if nm in main4:
+                    continue
+                T.single(test, item, f"{lbl}|n{nlab(n)}", nm, X.region_stats(tms[nm], fA(n), fB(n)), role=f"{role}(지역)", n=n)
+        pre = "서술(방향 중립, 확인적 가설 아님)" if role == "서술" else f"보조 서술({lbl}, 방향 중립)"
+        txt = f"{pre}: " + ", ".join(f"{k} {_v(r)}" for k, r in res)
+        T.verdict(test, item, txt, X._fmt(res), role=role, used=res, note="방향 중립")
+    return T.frame()
+
+
+def tests_wf8(a, tms, runs):
+    """WF8-a(레나·캐나다의 n = 40 R1 에서 S4 − S1 이 우세인 지역이 하나 이상), WF8-b(다섯 대상의 n = 10 R1 에서 S2·S4 가 S1 보다 열세인
+    지역이 없다). 그 밖의 (전략, n, 레시피) 대비는 서술 행이다."""
+    T = X.TestBook(a, tms, None, None)
+    regions = [f"{t}|{m}" for t, m in a.T["wf8"]]
+    strat = [s for s in a.STRAT8 if s != "S1"]
+    for nm in sorted(tms):
+        tm = tms[nm]
+        for s in strat:
+            for n in ns_of(tm, "R1", LO, "S1"):
+                for m, gA, gB in (("R1", gk("R1", n, LO, LAM_BASE, s), gk("R1", n, LO, LAM_BASE, "S1")),
+                                  ("P1", gk("P1", n, "none", placement=s), gk("P1", n, "none", placement="S1"))):
+                    T.single("WF8", "WF8(서술)", f"{s}-S1|{m}{'(0.25)' if m == 'R1' else ''}|n{nlab(n)}", nm, X.region_stats(tm, gA, gB), role="서술",
+                             n=n, strategy=s, method=m)
+    # ---------------- WF8-a
+    res = []
+    for nm in ("Lena|x", "Canada|x"):
+        tm = tms.get(nm)
+        s_ = X.region_stats(tm, gk("R1", 40, LO, LAM_BASE, "S4"), gk("R1", 40, LO, LAM_BASE, "S1")) if tm is not None else None
+        res.append((nm.split("|")[0], T.single("WF8-a", "WF8-a", "S4-S1|R1(0.25)|n40", nm, s_, primary=True, n=40, strategy="S4")))
+    win = [k for k, r in res if _v(r) == "우세"]
+    kv, km, _ = X.count_valid(res)
+    if win:
+        txt = f"지지: n = 40 의 R1 에서 S4 가 S1 보다 우세인 지역 = {', '.join(win)}"
+    elif kv < km:
+        txt = X.na_text(res)
+    else:
+        txt = "기각: 레나·캐나다 모두 n = 40 의 R1 에서 S4 가 S1 보다 우세가 아니다"
+    T.verdict("WF8-a", "WF8-a", txt, X._fmt(res), used=res)
+    # ---------------- WF8-b(안전성)
+    res = []
+    for nm in regions:
+        tm = tms.get(nm)
+        for s in ("S2", "S4"):
+            s_ = X.region_stats(tm, gk("R1", 10, LO, LAM_BASE, s), gk("R1", 10, LO, LAM_BASE, "S1")) if tm is not None else None
+            res.append((f"{nm.split('|')[0]} {s}", T.single("WF8-b", "WF8-b", f"{s}-S1|R1(0.25)|n10", nm, s_, primary=True, n=10, strategy=s)))
+    down = [k for k, r in res if _v(r) == "열세"]
+    kv, km, _ = X.count_valid(res)
+    if down:
+        txt = f"기각: n = 10 의 R1 에서 S1 보다 열세인 (지역, 전략) = {', '.join(down)}"
+    elif kv < km:
+        txt = X.na_text(res)
+    else:
+        txt = "지지: n = 10 의 R1 에서 S2·S4 가 S1 보다 열세인 지역이 없다"
+    T.verdict("WF8-b", "WF8-b", txt, X._fmt(res), used=res)
+    return T.frame()
+
+
+WF_HYP = ("WF1-a", "WF1-b", "WF1-c", "WF2-a", "WF2-b", "WF3-a", "WF4-a", "WF4-b", "WF4-c", "WF6-a", "WF6-b", "WF8-a", "WF8-b")
 
 
 def git_commit():
@@ -2057,16 +2487,37 @@ LOCAL_NBOOT_MAX = 1000
 
 
 def summarize(a, elapsed=0.0, skipped=None):
-    """실험별로 조각을 읽어 곡선(h40.build_curve)과 가설 표(h42.TestBook)를 만든다. 실험 사이 저장소는 섞지 않는다."""
-    t0 = time.time()
+    """차수마다 조각을 읽어 곡선(h40.build_curve)과 가설 표(h42.TestBook)를 만든다. 1차(wf1–wf4)는 <tag>_*, 2차 보강(wf6–wf8)은 <tag>2b_* 에
+    쓴다(1차 표를 덮어쓰지 않는다). 실험 사이 저장소는 섞지 않는다. 반환: 차수가 하나면 그 차수의 dict, 둘이면 이어 붙인 표와 rounds."""
     warnings.filterwarnings("ignore", message="Mean of empty slice")
     warnings.filterwarnings("ignore", message="All-NaN slice encountered")
     if not a.PERMIT and int(a.nboot) > LOCAL_NBOOT_MAX:
         print(f"[local] 허용 표지가 없다: --nboot {a.nboot} → {LOCAL_NBOOT_MAX}. 이 집계의 CI 는 등록한 재표집 횟수(10,000)의 값이 아니다", flush=True)
         a.nboot_asked, a.nboot = int(a.nboot), LOCAL_NBOOT_MAX
+    outs = {}
+    for rnd, exps, tag in rounds_of(a):
+        o = summarize_round(a, rnd, exps, tag, elapsed, [s_ for s_ in (skipped or []) if s_.get("exp") in exps])
+        if o is not None:
+            outs[rnd] = o
+    if not outs:
+        print("[summarize] 조각이 하나도 없다", flush=True)
+        return None
+    if len(outs) == 1:
+        return next(iter(outs.values()))
+
+    def cat(k):
+        fr = [o[k] for o in outs.values() if o.get(k) is not None and len(o[k])]
+        return pd.concat(fr, ignore_index=True) if fr else pd.DataFrame()
+    return dict(curve=cat("curve"), tests=cat("tests"), meta={r: o["meta"] for r, o in outs.items()}, timing=cat("timing"), failed=cat("failed"),
+                rounds=outs)
+
+
+def summarize_round(a, rnd, exps, tag, elapsed=0.0, skipped=None):
+    """한 차수(rnd = r1 또는 r2)의 집계. exps = 그 차수의 실험, tag = 표 이름(<tag>_curve.csv 등)."""
+    t0 = time.time()
     O = a.OUT; O.mkdir(parents=True, exist_ok=True)
     tasks, tests, units_all, runs_all, cfg_info, tms_by = [], [], [], [], {}, {}
-    for exp in a.EXPS:
+    for exp in exps:
         sh = find_shards(a, exp)
         if not sh:
             print(f"[summarize] {exp}: 조각 없음({a.SHARDS}/{exp_tag(a, exp)}__*)", flush=True)
@@ -2089,14 +2540,14 @@ def summarize(a, elapsed=0.0, skipped=None):
             tasks.append((exp, nm, tm, rs))
         units_all += units; runs_all.append(runs)
     if not tasks:
-        print("[summarize] 조각이 하나도 없다", flush=True)
+        print(f"[summarize] {'1차(wf1–wf4)' if rnd == 'r1' else '2차 보강(wf6–wf8)'}: 조각이 하나도 없다", flush=True)
         return None
     curves = [c_ for c_ in build_curves(a, tasks) if len(c_)]
     curve = pd.concat(curves, ignore_index=True) if curves else pd.DataFrame()
     if len(curve):
         curve = curve.sort_values(["exp", "target", "mode", "method", "learner", "placement", "lam", "n"]).reset_index(drop=True)
     runs = pd.concat([r_ for r_ in runs_all if len(r_)], ignore_index=True) if any(len(r_) for r_ in runs_all) else pd.DataFrame()
-    fn = dict(wf1=tests_wf1, wf2=tests_wf2, wf3=tests_wf3)
+    fn = dict(wf1=tests_wf1, wf2=tests_wf2, wf3=tests_wf3, wf6=tests_wf6, wf7=tests_wf7, wf8=tests_wf8)
     for exp, tms in tms_by.items():
         rx = runs[runs.exp == exp] if len(runs) else runs
         try:
@@ -2119,21 +2570,29 @@ def summarize(a, elapsed=0.0, skipped=None):
     if skipped:
         tg = pd.concat([tg, pd.DataFrame(skipped)], ignore_index=True)
     tt = timing_table(units_all)
-    curve.to_csv(O / f"{a.TAG}_curve.csv", index=False)
-    tests.to_csv(O / f"{a.TAG}_tests.csv", index=False)
-    tg.to_csv(O / f"{a.TAG}_targets.csv", index=False)
-    tt.to_csv(O / f"{a.TAG}_timing.csv", index=False)
-    failed.to_csv(O / f"{a.TAG}_failed.csv", index=False)
+    curve.to_csv(O / f"{tag}_curve.csv", index=False)
+    tests.to_csv(O / f"{tag}_tests.csv", index=False)
+    tg.to_csv(O / f"{tag}_targets.csv", index=False)
+    tt.to_csv(O / f"{tag}_timing.csv", index=False)
+    failed.to_csv(O / f"{tag}_failed.csv", index=False)
     choices = {}
     if len(runs):
-        for exp, m in (("wf1", "Pbest"), ("wf1", "Pc"), ("wf3", "Pc"), ("wf1", "R1"), ("wf1", "R2"), ("wf1", "Re"), ("wf1", "R1@x34"), ("wf4", "W")):
+        ch = ((("wf1", "Pbest"), ("wf1", "Pc"), ("wf3", "Pc"), ("wf1", "R1"), ("wf1", "R2"), ("wf1", "Re"), ("wf1", "R1@x34"), ("wf4", "W")) if rnd == "r1"
+              else (("wf6", "Pbest"), ("wf6", "Pc"), ("wf6", "R1"), ("wf6", "R2"), ("wf6", "Re")))
+        for exp, m in ch:
             q = runs[runs.exp == exp]
             if len(q):
                 choices[f"{exp}|{m}"] = choice_freq(q, m)
-    meta = dict(stage="H54/WF", plan="docs/EXPERIMENT_PLAN_WF_2026-10-01.md", plan_commit="4168331", git_commit=git_commit(), tag=a.TAG,
+    r2 = rnd == "r2"
+    keep = exps if r2 else EXPS_R1                                         # meta 의 대상·격자 = 그 차수의 실험(1차는 기존과 같이 wf1–wf4 전부)
+    meta = dict(stage="H54/WF2b" if r2 else "H54/WF", plan="docs/EXPERIMENT_PLAN_WF_2026-10-01.md" + (" §6" if r2 else ""),
+                plan_commit=PLAN_COMMIT[rnd], git_commit=git_commit(), tag=tag,
                 code_sha=code_sha(), code_sha_h40=H.code_sha(), code_sha_h42=X.code_sha_x(), exps=list(tms_by),
-                targets={k: [f"{t}:{m}" for t, m in v] if k == "wf4" else list(v) for k, v in a.T.items()}, x34_targets=a.X34, strategies=a.STRAT,
-                grids={k: list(v) for k, v in a.G.items()}, splits=a.SPLITS, seeds=a.SEEDS, lams=list(LAMS), nboot=int(a.nboot),
+                targets={k: [f"{t}:{m}" for t, m in v] if k in TRANSFER_EXPS else list(v) for k, v in a.T.items() if k in keep})
+    if not r2:
+        meta.update(x34_targets=a.X34)
+    meta.update(strategies=a.STRAT8 if r2 else a.STRAT, grids={k: list(v) for k, v in a.G.items() if k in keep},
+                splits=dict(wf6=a.SPLITS6, wf7=a.SPLITS, wf8=a.SPLITS) if r2 else a.SPLITS, seeds=a.SEEDS, lams=list(LAMS), nboot=int(a.nboot),
                 nboot_capped=getattr(a, "nboot_asked", None), delta_eq=a.delta_eq, ni_margin=a.ni_margin, n_units=len(units_all),
                 n_fit_total=int(sum(int(u.get("n_fit_total", 0)) for u in units_all)), unit_elapsed_s_sum=float(sum(u.get("elapsed_s", 0) for u in units_all)),
                 elapsed_s=round(float(elapsed), 1), summarize_s=round(time.time() - t0, 1), n_curve=int(len(curve)), n_tests=int(len(tests)),
@@ -2143,10 +2602,10 @@ def summarize(a, elapsed=0.0, skipped=None):
                            ci="h40.contrast(h4_common.boot_delta_blocks): 분할 안 채점 블록 재표집, 방법·추출·seed 공통 인덱스, 분할 분포 평균",
                            mean="h40.strat_mean·h42.pool_rows(층화 평균, CI 풀 = 유효 분할 ≥ 1 이고 채점 블록 합집합 ≥ 8)",
                            holm="h42.TestBook.frame: 항목(가설)마다 주 대비의 양측 부트스트랩 p 에 Holm(보조 열). WF4-a 는 p_ni 에 따로 holm_p_ni"),
-                implementation=IMPL_NOTES)
-    (O / f"{a.TAG}_meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1, default=float))
+                implementation=IMPL_NOTES2 if r2 else IMPL_NOTES)
+    (O / f"{tag}_meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1, default=float))
     print(f"[summarize] 실험 {list(tms_by)} · 조각 {len(units_all)} · runs {len(runs):,} · curve {len(curve):,} · tests {len(tests):,} · "
-          f"{time.time() - t0:.0f}s → {O}/{a.TAG}_*", flush=True)
+          f"{time.time() - t0:.0f}s → {O}/{tag}_*", flush=True)
     if len(tests):
         v = tests[tests.scope.isin(["verdict", "verdict_aux"])]
         cols = [c_ for c_ in ("exp", "test_id", "role", "target", "verdict") if c_ in v]
@@ -2171,6 +2630,23 @@ IMPL_NOTES = {
     "cv": "h42.cv_folds_of(블록 5묶음, 블록 1개면 셀 묶음), seed 0 적합으로 선택, 묶음마다 E_n 재계산, 동률은 작은 λ·앞 후보·작은 k",
     "p0_ref": "지역 내 실험의 P0·κ 수축 사전값 E0 = LG 원천(모드 x, 100 km 버퍼) 최소제곱. 알래스카 하위 지역도 모드 x",
     "wf4_targets": "LG 27 (대상, 모드) + LGD 새 지역 3 = 30. 추출과 유사라벨 색인은 LG 와 같다",
+}
+
+IMPL_NOTES2 = {
+    "wf6_splits": "half_split_blocks split_seed 1–25(LG 1–5 + 새 6–25). h40.Data.split_structure 의 코드를 분할 1–25 에 적용(_SplitView): "
+                  "중복 분할 제외, 유효 분할이 있으면 채점 블록 2개 미만 분할 제외. 빈 자리를 다른 seed 로 채우지 않는다",
+    "wf6_methods": "wf1 과 같은 지역 내 문맥·추출·교차검증. 물리 보정식 묶음(P1, P2, Pk, Pc, Pbest), R1·R2(λ 0.25·0.5·1.0·교차검증), "
+                   "Re(λ 0.25·교차검증), D0(catboost 600·깊이 6·0.03 만). R1·R2·Re 는 catboost_lo. 추출 3(전량 1), seed 2",
+    "wf7": "LG 27 (대상, 모드), 분할 1–5, n {0, 3, 10, 40, 160, 320, 1000, 전량}, 추출 5, seed 2, 원천·추출 = LG. Pe = 앵커(E_n), "
+           "Re = 앵커(E_n) + 0.25·ge, ge 의 원천 행 목표 = y − 앵커(E0), 선택 라벨 행 목표 = y − 앵커(E_n). 앵커(E) = 0.5·(E·s + cci_alt)(CCI 유효), "
+           "그 밖 E·s. P0·P1·R1(λ 0.25)은 같은 조각에서 다시 적합(같은 플랫폼 대비). n = 0 은 원천 행만",
+    "wf8": "모드 x, 원천 = LG. 전략 S1 = h40.draw_cells, S2 = h40.draw_blocks, S4 = wf2 의 탐욕 k-중심(A 풀 x25 표준화, seed 는 wf2 와 같다). "
+           "n {10, 40}(|A| 미만), 추출 5, seed 2. 같은 라벨 집합의 추출은 적합을 재사용하고 추출마다 저장",
+    "verdicts": "WF6-a 대상별(레시피 R1·R2·Re 교차검증 λ, D0 catboost; 하나라도 P1 대비 우세면 지지, Pbest 대비는 보조). "
+                "WF6-b 세 대상 층화 평균 R2(교차검증 λ) − P1, n ∈ {500, 1000, 전량} 모두 우세 = 지지, 일부 = 부분 지지, 열세 또는 우세 없음 = 기각. "
+                "WF7-a·b 방향 중립 서술(주 4지역 층화 평균, 확인적 가설 아님). WF8-a 레나·캐나다 n 40 R1 의 S4 − S1 우세 지역 ≥ 1. "
+                "WF8-b 다섯 대상 n 10 R1 의 S2·S4 − S1 에 열세가 없으면 지지",
+    "tables": "2차 보강 표는 <tag>2b_*(1차 <tag>_* 와 따로). 조각 이름 <tag>{6,7,8}__cpu__<대상>__<모드>__s<분할>[__<전략>]",
 }
 
 
@@ -2213,13 +2689,16 @@ def count_only(a, units, skipped):
         print("[count-only] 작업 단위 없음", flush=True)
         return df
     df["est_total_s"] = df.est_s + df.est_krige_s + df.est_kmeans_s
-    df.to_csv(a.OUT / f"{a.TAG}_count.csv", index=False)
     tab = []
     for k in det:
         exp, _, lr, m = (k.split("|") + ["", "", ""])[:4]
         tab.append(dict(exp=exp, learner=lr, method=m, n_fit=int(det[k]), est_h=est[k] / 3600))
     tab = pd.DataFrame(tab).sort_values(["exp", "learner", "method"])
-    tab.to_csv(a.OUT / f"{a.TAG}_count_detail.csv", index=False)
+    for rnd, exps, tag in rounds_of(a):                                   # 차수마다 자기 표에 쓴다(다른 차수의 표를 덮어쓰지 않는다)
+        if df.exp.isin(exps).any():
+            df[df.exp.isin(exps)].to_csv(a.OUT / f"{tag}_count.csv", index=False)
+        if len(tab) and tab.exp.isin(exps).any():
+            tab[tab.exp.isin(exps)].to_csv(a.OUT / f"{tag}_count_detail.csv", index=False)
     by = df.groupby("exp").agg(units=("split", "size"), targets=("target", "nunique"), fits=("fit_total", "sum"), krige=("n_krige", "sum"),
                                kmeans=("n_kmeans", "sum"), est_fit_h=("est_s", "sum"), est_krige_h=("est_krige_s", "sum"), est_all_h=("est_total_s", "sum"))
     for c_ in ("est_fit_h", "est_krige_h", "est_all_h"):
@@ -2235,6 +2714,15 @@ def count_only(a, units, skipped):
           f"추정 누적 {tot_h:.1f} CPU-h(4스레드 프로세스 기준)", flush=True)
     for w in (15, 22, 43):
         print(f"  워커 {w}개(4스레드) → 약 {tot_h / w:.2f} h(단위 크기 불균형과 감속 제외)", flush=True)
+    for rnd, exps, tag in rounds_of(a):                                   # 차수별 합계와 1차 Rescale 실측 비(0.62)의 환산
+        q = df[df.exp.isin(exps)]
+        if not len(q):
+            continue
+        h = float(q.est_total_s.sum()) / 3600
+        hx = float(q.est_total_s.max()) / 3600
+        print(f"[count-only] {'1차' if rnd == 'r1' else '2차 보강'} {exps}: 단위 {len(q)} · 적합 {int(q.fit_total.sum()):,} · 크리깅 {int(q.n_krige.sum()):,} · "
+              f"추정 누적 {h:.2f} CPU-h · 실측 비 {RESCALE_RATIO} 적용 {h * RESCALE_RATIO:.2f} CPU-h · 워커 22개 약 {h * RESCALE_RATIO / 22:.2f} h · "
+              f"가장 긴 단위 {hx:.2f} h(비 적용 {hx * RESCALE_RATIO:.2f} h) → {tag}_count.csv", flush=True)
     if skipped:
         print(f"[count-only] 건너뛴 분할·대상: {dict(Counter(s_['status'] for s_ in skipped))}", flush=True)
     return df

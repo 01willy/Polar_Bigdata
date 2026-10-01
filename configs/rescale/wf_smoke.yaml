@@ -41,8 +41,9 @@ code_paths:
 
 dataset_file_ids: []
 
-# 환경 변수는 scripts/rescale/run_wf.sh 상단에 설명이 있다.
+# 환경 변수는 scripts/rescale/run_wf.sh 상단에 설명이 있다. run_wf.sh 의 WF_EXPS 기본값이 2차 보강(wf6–wf8)을 포함하게 바뀌어
+# (2026-10-01, 2차 보강 구현) 이 1차 설정은 WF_EXPS=wf1,wf2,wf3,wf4 를 명시한다(제출 당시의 기본값과 같은 범위).
 command: |
-  [ -f wf_payload.tar.gz ] && tar xzf wf_payload.tar.gz; WF_MODE=smoke WF_BUDGET_MIN=50 bash scripts/rescale/run_wf.sh
+  [ -f wf_payload.tar.gz ] && tar xzf wf_payload.tar.gz; WF_MODE=smoke WF_EXPS=wf1,wf2,wf3,wf4 WF_BUDGET_MIN=50 bash scripts/rescale/run_wf.sh
 
 results_dir: results/rescale_wf_smoke

@@ -42,8 +42,9 @@ code_paths:
 # 이어서 실행할 때: 이전 작업의 results_wf.tar.gz 를 results_wf_prev.tar.gz 로 이름을 바꿔 올리고(rescale_client.py upload) 그 파일 id 를 넣는다.
 dataset_file_ids: []
 
-# 환경 변수는 scripts/rescale/run_wf.sh 상단에 설명이 있다.
+# 환경 변수는 scripts/rescale/run_wf.sh 상단에 설명이 있다. run_wf.sh 의 WF_EXPS 기본값이 2차 보강(wf6–wf8)을 포함하게 바뀌어
+# (2026-10-01, 2차 보강 구현) 이 1차 설정은 WF_EXPS=wf1,wf2,wf3,wf4 를 명시한다(제출 당시의 기본값과 같은 범위).
 command: |
-  [ -f wf_payload.tar.gz ] && tar xzf wf_payload.tar.gz; WF_MODE=full WF_BUDGET_MIN=210 WF_SUM_RESERVE_MIN=50 bash scripts/rescale/run_wf.sh
+  [ -f wf_payload.tar.gz ] && tar xzf wf_payload.tar.gz; WF_MODE=full WF_EXPS=wf1,wf2,wf3,wf4 WF_BUDGET_MIN=210 WF_SUM_RESERVE_MIN=50 bash scripts/rescale/run_wf.sh
 
 results_dir: results/rescale_wf
