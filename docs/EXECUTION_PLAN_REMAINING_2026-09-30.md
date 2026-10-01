@@ -663,7 +663,7 @@ Sci Rep 의 본문 표시 항목은 8개다. 현재 틀은 Fig 1–7 과 Table 1
 
 | id | 내용 | 조건 |
 |---|---|---|
-| WF3 | Vppbeb 회수, WF9 재현 점검(`scripts/2_evaluation/wf9_repro_check.py`), WF9·WF10 판정 기록(WF 계획서 5.3), 주장 문서 C8 과 워크플로 표 | 작업 끝 |
+| WF3 | 끝남(10-02 01:40–02:00): Vppbeb 회수, 재현 점검 74/74 일치, 판정 기록(WF 계획서 5.3, b8fbd01), 주장 문서 C8(8e29ecc) | 해당 없음 |
 | M10 | 원고 재구성(결과 절 순서, Fig 5·7 교체 여부, 초록. `docs/MANUSCRIPT_RESTRUCTURE_PLAN_2026-10-02.md` 8절) | 사용자 결정 |
 | M9, O8 | SI 조립과 투고 형식 점검, 자료·코드 기탁 준비(약관 미확인 행 제외) | M10 뒤 |
 | 사용자 | git push, LGD 약관 제공자 네 곳 연락, 문헌 원문 PDF, 개정 표지 판단(WRAPUP 개정 2 (g)), 원고 [DECISION] 7건, 재구성안 결정 3건 | 사용자 |
