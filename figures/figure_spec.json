@@ -1361,7 +1361,7 @@
           "encoding": "ALT cmc.oslo_r(0.12–0.90, 고정 범위), 폭 cmc.acton(0.05–0.95), 외삽 cmc.devon_r 순서형 4색, 마스크 회색 + 범례. 지도 격자는 PDF 안 래스터, 글자는 벡터"
         }
       ],
-      "ci": "a: 10,000회(h39·h42·h43·h47·h48, 두 가중). b: 없음(수준 값) 또는 LGU 1단 CI. c: LGU 2단 CI 2,000회. d: h42 10,000회",
+      "ci": "a: 10,000회(h39·h42·h43·h47·h48, 두 가중). b: 없음(수준 값) 또는 LGU 1단 CI. c: LGU 2단 CI 1,000회(2026-10-02 정정: 원래 '2,000회'. LGU 계획서 2.6 개정 2 와 lgu_a_tests·lgu_b_tests 의 nboot = 1,000). d: h42 10,000회",
       "layouts": {
         "layout_A": "a(왼쪽 전체 높이) + b·c·d(오른쪽) + e(아래 행 3지도). 조건부 규칙 fig6_map_merge 를 모두 만족할 때",
         "layout_B": "a–d 만. 지도는 SI 1장(fig_map_lena all6)"
@@ -1391,7 +1391,57 @@
         "조건부 G8(격자 σ)",
         "C8(지도)"
       ],
-      "status": "모듈 재작성 대기(F3)"
+      "status": "F3 3부 구현(2026-10-02). v2 산출(layout_B, 지도는 SI)",
+      "f3_v2": {
+        "data_module": "scripts/4_visualization/paper/v2_data.py(3부 함수 fig6, 실행 --only fig6. 원천 표 → data/processed/paper_figs/fig6_*.csv 와 v2_data_fig6_meta.json. 다른 그림의 표와 v2_data_meta.json 은 건드리지 않는다. 값·CI·4분 판정·등록 문구·지지 갈래는 원천 열을 옮기고 새 재표집·판정은 없다. 산술은 6c 의 % 환산과 6d 의 폭 비뿐)",
+        "style_module": "scripts/4_visualization/paper/v2_style.py(변경 없음). 판정 기호 설명 줄은 그림 모듈의 verdict_key6(동등성 한계를 패널별로 적는다: a ±0.5 cm, c ±5 %)",
+        "module": "scripts/4_visualization/paper/fig6_label0_uncertainty.py(신규. 옛 fig6.py(09-26 설계)는 그대로 둔다)",
+        "file_stem": "outputs/figures/paper/v2/Fig6_label0_uncertainty",
+        "layout": "layout_B(a 전체 폭, b·c·d 아래 한 줄). fig6_map_merge 불성립(LGU-B2 미결정, LGU 11.1) → 레나 지도는 SI(fig_map_lena)",
+        "size_mm_actual": [
+          180.0,
+          183.0
+        ],
+        "conditional_eval": {
+          "fig6_map_merge": "불성립(LGU-B2 미결정). 패널 e 없음",
+          "fig6a_rows_fixed": "적용. 고정 행 15개(선 21개: TabICL·같은 컨텍스트 CatBoost·신경망 4종은 두 조건). 판정과 무관하게 지운 행 없음",
+          "L29_pstar": "성립(P* = P0@tddm, lgx_tests L29 verdict). P* − P0 행을 넣었다"
+        },
+        "panels": {
+          "a": "선 21개: lgw_bundle MEAN AB2(B:ens − P0), AB1(D0[catboost_lo] − P0); lgx_tests MEAN L29 'P0@tddm-P0|n0', L30 'D0[catboost|rf|catboost_tuned]-P0|n0', L11 'F1k-P0|n0'; lgt_tests MEAN L34 'D0[T]-P0|n0', 'D0[C]-P0|n0'; lgf_tests MEAN LGF-F1 'D0[I]-P0|n0'(실선), 'D0@full[I]-P0|n0'(파선), 'D0[C]-P0|n0', 'D0@full[C]-P0|n0'; lgfn_tests MEAN LGF-N1 'D0[<l>*]-P0|n0'(조정판 실선), 'D0[<l>]-P0|n0'(로컬 기본판 파선, 보조 (a)). 모든 행 target = P4 층화 평균. 플랫폼 묶음(Rescale: 기준선·LG·LGX, 로컬 GPU: LGT·LGF-F·LGF-N) 사이 틈과 괄호 이름, 플랫폼 사이 차는 계산하지 않는다. 오른쪽: 4분 판정 두 열(실선·파선), 지지 갈래 열(A·B), 머리 행 = 등록 판정(lgx_tests L29·L30·L11, $LGS/lg_tests L1, lgt_tests L34(a), lgf_tests·lgfn_tests 의 verdict 와 support_class)",
+          "b": "lgu_b_intervals n 0, 범위 all, 정규화기 const·phys·cfm·nflow·nflow#placebo(perm.)·cbq, MEAN4(큰 검정 마커) + 지역 4곳(작은 회색, 같은 모양). 열 wid10·cov10. C2 참조 = h4/c2_coverage label0 hier2_cdf MEAN 행(빈 회색 원, CI 없음). 거의 겹치는 cfm·perm.·nflow 평균은 확대 삽도",
+          "c": "lgu_b_tests 'LGU-B2', lgu_a_tests 'LGU-A1' n 10·40. x = 100·Δ/ref_score(셀 가중 기준 점수, CI 도 같은 나눗셈). ±5 % 띠. 기호 = verdict(2단). note_cal '보정 불확실성 의존' → ‡. AB10 표지(lgw_bundle AB10 과 A1 n 10 대조)",
+          "d": "lgx_conformal R1(catboost_lo, λ 0.25, level 90, 모드 x) 레나·캐나다·Alaska × n 40·160. x = 폭 / R0(n 0) 폭(점 추정), y = 커버리지와 CI. lgx_tests L25 의 지역 행·verdict_aux 와 대조(c1 4, c2 4)"
+        },
+        "ci": "a: 10,000회(h39·h42·h43·h47·h48, 두 가중; 그림은 셀 가중). b: 그리지 않음(1단·2단 CI 는 Source Data). c: LGU 2단 1,000회. d: h42 10,000회(커버리지)",
+        "changes": [
+          "c 의 재표집 횟수: 스펙 'ci' 의 '2,000회' 대신 1,000회. LGU 계획서 2.6(개정 2 로 1,000회)과 표의 nboot = 1,000 이 근거. DISPLAY_ITEMS 8절 14:20 정정과 같다"
+        ],
+        "decisions": [
+          "AB1·AB2 값은 lgw_bundle(h39) 행을 쓴다(Fig 7d 와 같은 원천). B:ens 는 lgx_tests L29 행(h42)과 점 추정이 같고 CI 만 재표집 차로 조금 다르다",
+          "등록 판정은 머리 행 오른쪽 열에 표에서 생성한 영문(접두 사전 FIG6_REG_EN)으로 적고, 묶음 범위는 오른쪽 열의 옅은 괄호로 보인다. LGF 2.2 의 두 갈래(h47·h48 support_class A·B)는 'class' 열의 1·2 글자와 기호 설명 줄로 구분한다(AB 표지와 겹치지 않게 숫자. 이번 결과는 F1, N1 4종 모두 1 = '지지(물리식보다 오차가 크거나 구별되지 않음)')",
+          "AB1·AB2 표지는 해당 행의 판정 기호 바로 오른쪽에 둔다(행 단위)",
+          "두 조건 행의 4분 판정은 실선·파선 두 기호 열로 나눈다(Fig 5a 형식). 선종의 뜻은 해당 행 옆 오른쪽 열에 적는다",
+          "LGF-N 묶음의 로컬 catboost_lo 병기 행(lgfn_tests '병기(catboost_lo)')은 고정 행 목록에 없어 넣지 않았다(SI)",
+          "b 는 CI 를 그리지 않는다(스펙 '없음(수준 값)' 선택). C2 참조는 범례 항목. 지역 값 점은 P4 4지역만(Alaska(x) 는 Source Data). 거의 겹치는 P4 평균 두 무리(cfm·perm.·nflow, const·phys·C2 참조)는 오른쪽 아래 빈 자리의 확대 삽도 두 개(눈금 없음, 창 안 지역 값 포함)와 본 축 창 사각형·연결선 한 줄로 푼다",
+          "c 는 2단 CI 만 그리고 1단 판정이 다르면 ‡ 를 붙인다(1단 CI 는 Source Data). 정밀도 미달(A1)은 Source Data 의 eq_state. 두 풀(B2 P4, A1 레나·캐나다·Alaska(x))은 패널 머리 글자로 적는다",
+          "d 의 폭 비에는 CI 를 그리지 않는다(분모 R0 폭의 결합 재표집 없음). L25 등록 문장 '라벨이 구간을 좁힌다'는 쓰지 않고 c1·c2 와 비교 값만 쓴다(WRAPUP 14:20 결정)",
+          "색: 물리 기준선 검정, 직접 ML 은 direct 회색(x), b·c 는 검정(방법 색 재사용 금지, REDESIGN 개정 30), d 는 R1 구간이라 residual 보라 + 지역 마커",
+          "파선 CI 는 양 끝이 대시로 끝나도록 무늬 배율을 고른다(dash_fit, 0.75–1.25배)",
+          "학습기 이름: tabm → 'Multi-head MLP', ftt → 'FT-T-type (reduced)'(LGF 9.2). 캡션에 공개 모델과 같지 않음을 적는다"
+        ],
+        "exports_done": [
+          "outputs/figures/paper/v2/Fig6_label0_uncertainty.pdf(git 제외)",
+          "outputs/figures/paper/v2/Fig6_label0_uncertainty.svg",
+          "outputs/figures/paper/v2/Fig6_label0_uncertainty.png(600 dpi)",
+          "outputs/figures/paper/_qa/v2_Fig6_label0_uncertainty_qa.json",
+          "outputs/figures/paper/_qa/v2_Fig6_label0_uncertainty_values.txt",
+          "outputs/figures/paper/source_data/v2/Fig6_{a,a_drawn,a_registered,b,b_ref,c,c_registered,d,d_registered}.csv"
+        ],
+        "qa_auto": "_common.qa_check 통과(글자 겹침 0, 잘림 0, 최소 6.5 pt, 범례 1개, PDF 글꼴 내장 TrueType(Liberation Sans), U+2212 정상, SVG 글자 텍스트 유지, PNG 600 dpi, Δ 축 0선 2개, 캡션 319 단어)",
+        "values_check": "outputs/figures/paper/_qa/v2_Fig6_label0_uncertainty_values.txt(scripts/4_visualization/paper/v2_values_check.py --only fig6, 원천 표 직접 대조 252항목, 전부 통과)",
+        "qa_review": "자체 시각 검토(Read: 300 dpi 확인 시트, 600 dpi 부분 확대, SVG 를 cairosvg 로 다시 래스터화) 뒤 scientific-figure-reviewer, visual-reviewer 각 1회. 과학 검토: 10개 이상 값 원천 표 대조 불일치 없음, 플랫폼 분리·학습기 이름·L25 금지 문장 준수 확인. 지적 반영: b 의 const·phys·C2 참조 겹침(두 번째 확대 삽도), a 오른쪽 열의 범위 모호(AB 표지를 기호 옆으로, 묶음 괄호), 지지 갈래 글자 A·B 와 AB 표지 충돌(1·2 로), c 의 풀 차이 표시와 빈 공간(머리 글자 세 줄, 축 높이 33 mm), d 주석의 c1·c2 구분, 스펙 c 재표집 횟수 정정. 미반영: 최소 글자 6.5 pt 여유(집 규격과 같다), 위 기호 설명 세 줄(다른 v2 그림과 같은 형식). 그림 안 선 좌표를 다시 읽어 원천 표와 대조(a 21선, c 3선, d 6선 일치). 색각 시뮬레이션 패널 안 색 쌍 ΔE00 최소 12.1. 검토 에이전트 2회차는 돌리지 않았고 수정 뒤 자체 재렌더·재확인만 했다"
+      }
     },
     {
       "item": "Fig 7",
@@ -5625,6 +5675,43 @@
         "outputs/figures/paper/v2/Table1_data.tex",
         "outputs/figures/paper/v2/Table1_data.md"
       ]
+    },
+    {
+      "id": "paper_fig6_label0_uncertainty",
+      "version": "v2",
+      "script": "scripts/4_visualization/paper/fig6_label0_uncertainty.py",
+      "data": "scripts/4_visualization/paper/v2_data.py → data/processed/paper_figs",
+      "exports": [
+        "outputs/figures/paper/v2/Fig6_label0_uncertainty.pdf",
+        "outputs/figures/paper/v2/Fig6_label0_uncertainty.svg",
+        "outputs/figures/paper/v2/Fig6_label0_uncertainty.png"
+      ],
+      "source_data": [
+        "outputs/figures/paper/source_data/v2/Fig6_a.csv",
+        "outputs/figures/paper/source_data/v2/Fig6_a_registered.csv",
+        "outputs/figures/paper/source_data/v2/Fig6_a_drawn.csv",
+        "outputs/figures/paper/source_data/v2/Fig6_b.csv",
+        "outputs/figures/paper/source_data/v2/Fig6_b_ref.csv",
+        "outputs/figures/paper/source_data/v2/Fig6_c.csv",
+        "outputs/figures/paper/source_data/v2/Fig6_c_registered.csv",
+        "outputs/figures/paper/source_data/v2/Fig6_d.csv",
+        "outputs/figures/paper/source_data/v2/Fig6_d_registered.csv"
+      ],
+      "layout": {
+        "figsize_mm": [
+          180.0,
+          183.0
+        ]
+      },
+      "units": "cm",
+      "medium": "paper (Sci Rep 2-column 180 mm)",
+      "style": "polar.paperstyle + v2_style(범주 n 축, 4분 판정 기호 모양·채움)",
+      "generated": "2026-10-02",
+      "qa": "pass",
+      "qa_json": "outputs/figures/paper/_qa/v2_Fig6_label0_uncertainty_qa.json",
+      "panels": 4,
+      "layout_variant": "layout_B(지도 없음, LGU-B2 미결정)",
+      "message": "no tested direct learner has lower error than P0 at n = 0 (the physics baseline P* has); region-held-out intervals: conditional width not established (LGU-B2), hierarchical model not established (LGU-A1)"
     }
   ],
   "m1/m1_sc_main_effects": {

@@ -1,0 +1,252 @@
+OK  a lines drawn = fixed rows: figure 21 | source 21
+OK  a baselines/B:ens/solid drawn once: figure 1 | source 1
+OK  a baselines/B:ens/solid [lgw_bundle.csv AB2] delta: figure -2.730889 | source -2.730889
+OK  a baselines/B:ens/solid [lgw_bundle.csv AB2] ci_lo: figure -3.326689 | source -3.326689
+OK  a baselines/B:ens/solid [lgw_bundle.csv AB2] ci_hi: figure -0.914722 | source -0.914722
+OK  a baselines/B:ens/solid [lgw_bundle.csv AB2] verdict: figure undecided | source undecided
+OK  a baselines/B:ens/solid [lgw_bundle.csv AB2] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a baselines/P*/solid drawn once: figure 1 | source 1
+OK  a baselines/P*/solid [lgx_tests.csv P0@tddm-P0|n0] delta: figure -0.996848 | source -0.996848
+OK  a baselines/P*/solid [lgx_tests.csv P0@tddm-P0|n0] ci_lo: figure -1.345607 | source -1.345607
+OK  a baselines/P*/solid [lgx_tests.csv P0@tddm-P0|n0] ci_hi: figure -0.319962 | source -0.319962
+OK  a baselines/P*/solid [lgx_tests.csv P0@tddm-P0|n0] verdict: figure superior | source superior
+OK  a baselines/P*/solid [lgx_tests.csv P0@tddm-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a direct_rescale/catboost_lo/solid drawn once: figure 1 | source 1
+OK  a direct_rescale/catboost_lo/solid [lgw_bundle.csv AB1] delta: figure 2.245922 | source 2.245922
+OK  a direct_rescale/catboost_lo/solid [lgw_bundle.csv AB1] ci_lo: figure 1.100411 | source 1.100411
+OK  a direct_rescale/catboost_lo/solid [lgw_bundle.csv AB1] ci_hi: figure 3.421232 | source 3.421232
+OK  a direct_rescale/catboost_lo/solid [lgw_bundle.csv AB1] verdict: figure inferior | source inferior
+OK  a direct_rescale/catboost_lo/solid [lgw_bundle.csv AB1] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a direct_rescale/catboost/solid drawn once: figure 1 | source 1
+OK  a direct_rescale/catboost/solid [lgx_tests.csv D0[catboost]-P0|n0] delta: figure 1.936825 | source 1.936825
+OK  a direct_rescale/catboost/solid [lgx_tests.csv D0[catboost]-P0|n0] ci_lo: figure 0.879421 | source 0.879421
+OK  a direct_rescale/catboost/solid [lgx_tests.csv D0[catboost]-P0|n0] ci_hi: figure 3.434500 | source 3.434500
+OK  a direct_rescale/catboost/solid [lgx_tests.csv D0[catboost]-P0|n0] verdict: figure inferior | source inferior
+OK  a direct_rescale/catboost/solid [lgx_tests.csv D0[catboost]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a direct_rescale/rf/solid drawn once: figure 1 | source 1
+OK  a direct_rescale/rf/solid [lgx_tests.csv D0[rf]-P0|n0] delta: figure 2.628285 | source 2.628285
+OK  a direct_rescale/rf/solid [lgx_tests.csv D0[rf]-P0|n0] ci_lo: figure 1.474846 | source 1.474846
+OK  a direct_rescale/rf/solid [lgx_tests.csv D0[rf]-P0|n0] ci_hi: figure 3.955266 | source 3.955266
+OK  a direct_rescale/rf/solid [lgx_tests.csv D0[rf]-P0|n0] verdict: figure inferior | source inferior
+OK  a direct_rescale/rf/solid [lgx_tests.csv D0[rf]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a direct_rescale/catboost_tuned/solid drawn once: figure 1 | source 1
+OK  a direct_rescale/catboost_tuned/solid [lgx_tests.csv D0[catboost_tuned]-P0|n0] delta: figure 1.594279 | source 1.594279
+OK  a direct_rescale/catboost_tuned/solid [lgx_tests.csv D0[catboost_tuned]-P0|n0] ci_lo: figure 0.648788 | source 0.648788
+OK  a direct_rescale/catboost_tuned/solid [lgx_tests.csv D0[catboost_tuned]-P0|n0] ci_hi: figure 2.690582 | source 2.690582
+OK  a direct_rescale/catboost_tuned/solid [lgx_tests.csv D0[catboost_tuned]-P0|n0] verdict: figure inferior | source inferior
+OK  a direct_rescale/catboost_tuned/solid [lgx_tests.csv D0[catboost_tuned]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a direct_rescale/F1k/solid drawn once: figure 1 | source 1
+OK  a direct_rescale/F1k/solid [lgx_tests.csv F1k-P0|n0] delta: figure 2.624425 | source 2.624425
+OK  a direct_rescale/F1k/solid [lgx_tests.csv F1k-P0|n0] ci_lo: figure 1.375961 | source 1.375961
+OK  a direct_rescale/F1k/solid [lgx_tests.csv F1k-P0|n0] ci_hi: figure 4.358345 | source 4.358345
+OK  a direct_rescale/F1k/solid [lgx_tests.csv F1k-P0|n0] verdict: figure inferior | source inferior
+OK  a direct_rescale/F1k/solid [lgx_tests.csv F1k-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a lgt/tabpfn/solid drawn once: figure 1 | source 1
+OK  a lgt/tabpfn/solid [lgt_tests.csv D0[T]-P0|n0] delta: figure 1.019408 | source 1.019408
+OK  a lgt/tabpfn/solid [lgt_tests.csv D0[T]-P0|n0] ci_lo: figure 0.230082 | source 0.230082
+OK  a lgt/tabpfn/solid [lgt_tests.csv D0[T]-P0|n0] ci_hi: figure 2.353595 | source 2.353595
+OK  a lgt/tabpfn/solid [lgt_tests.csv D0[T]-P0|n0] verdict: figure inferior | source inferior
+OK  a lgt/tabpfn/solid [lgt_tests.csv D0[T]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a lgt/catboost_ctx/solid drawn once: figure 1 | source 1
+OK  a lgt/catboost_ctx/solid [lgt_tests.csv D0[C]-P0|n0] delta: figure 2.638307 | source 2.638307
+OK  a lgt/catboost_ctx/solid [lgt_tests.csv D0[C]-P0|n0] ci_lo: figure 1.357715 | source 1.357715
+OK  a lgt/catboost_ctx/solid [lgt_tests.csv D0[C]-P0|n0] ci_hi: figure 3.716875 | source 3.716875
+OK  a lgt/catboost_ctx/solid [lgt_tests.csv D0[C]-P0|n0] verdict: figure inferior | source inferior
+OK  a lgt/catboost_ctx/solid [lgt_tests.csv D0[C]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a lgf_f/tabicl/solid drawn once: figure 1 | source 1
+OK  a lgf_f/tabicl/solid [lgf_tests.csv D0[I]-P0|n0] delta: figure 0.928150 | source 0.928150
+OK  a lgf_f/tabicl/solid [lgf_tests.csv D0[I]-P0|n0] ci_lo: figure 0.280009 | source 0.280009
+OK  a lgf_f/tabicl/solid [lgf_tests.csv D0[I]-P0|n0] ci_hi: figure 3.124993 | source 3.124993
+OK  a lgf_f/tabicl/solid [lgf_tests.csv D0[I]-P0|n0] verdict: figure inferior | source inferior
+OK  a lgf_f/tabicl/solid [lgf_tests.csv D0[I]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a lgf_f/tabicl/dashed drawn once: figure 1 | source 1
+OK  a lgf_f/tabicl/dashed [lgf_tests.csv D0@full[I]-P0|n0] delta: figure 0.852532 | source 0.852532
+OK  a lgf_f/tabicl/dashed [lgf_tests.csv D0@full[I]-P0|n0] ci_lo: figure 0.074508 | source 0.074508
+OK  a lgf_f/tabicl/dashed [lgf_tests.csv D0@full[I]-P0|n0] ci_hi: figure 3.194550 | source 3.194550
+OK  a lgf_f/tabicl/dashed [lgf_tests.csv D0@full[I]-P0|n0] verdict: figure inferior | source inferior
+OK  a lgf_f/tabicl/dashed [lgf_tests.csv D0@full[I]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a lgf_f/catboost_ctx/solid drawn once: figure 1 | source 1
+OK  a lgf_f/catboost_ctx/solid [lgf_tests.csv D0[C]-P0|n0] delta: figure 2.638307 | source 2.638307
+OK  a lgf_f/catboost_ctx/solid [lgf_tests.csv D0[C]-P0|n0] ci_lo: figure 1.357715 | source 1.357715
+OK  a lgf_f/catboost_ctx/solid [lgf_tests.csv D0[C]-P0|n0] ci_hi: figure 3.716875 | source 3.716875
+OK  a lgf_f/catboost_ctx/solid [lgf_tests.csv D0[C]-P0|n0] verdict: figure inferior | source inferior
+OK  a lgf_f/catboost_ctx/solid [lgf_tests.csv D0[C]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a lgf_f/catboost_ctx/dashed drawn once: figure 1 | source 1
+OK  a lgf_f/catboost_ctx/dashed [lgf_tests.csv D0@full[C]-P0|n0] delta: figure 2.260611 | source 2.260611
+OK  a lgf_f/catboost_ctx/dashed [lgf_tests.csv D0@full[C]-P0|n0] ci_lo: figure 1.094176 | source 1.094176
+OK  a lgf_f/catboost_ctx/dashed [lgf_tests.csv D0@full[C]-P0|n0] ci_hi: figure 3.325235 | source 3.325235
+OK  a lgf_f/catboost_ctx/dashed [lgf_tests.csv D0@full[C]-P0|n0] verdict: figure inferior | source inferior
+OK  a lgf_f/catboost_ctx/dashed [lgf_tests.csv D0@full[C]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a lgf_n/mlp/solid drawn once: figure 1 | source 1
+OK  a lgf_n/mlp/solid [lgfn_tests.csv D0[mlp*]-P0|n0] delta: figure 2.451820 | source 2.451820
+OK  a lgf_n/mlp/solid [lgfn_tests.csv D0[mlp*]-P0|n0] ci_lo: figure 1.624332 | source 1.624332
+OK  a lgf_n/mlp/solid [lgfn_tests.csv D0[mlp*]-P0|n0] ci_hi: figure 4.105508 | source 4.105508
+OK  a lgf_n/mlp/solid [lgfn_tests.csv D0[mlp*]-P0|n0] verdict: figure inferior | source inferior
+OK  a lgf_n/mlp/solid [lgfn_tests.csv D0[mlp*]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a lgf_n/mlp/dashed drawn once: figure 1 | source 1
+OK  a lgf_n/mlp/dashed [lgfn_tests.csv D0[mlp]-P0|n0] delta: figure 0.942669 | source 0.942669
+OK  a lgf_n/mlp/dashed [lgfn_tests.csv D0[mlp]-P0|n0] ci_lo: figure 0.102293 | source 0.102293
+OK  a lgf_n/mlp/dashed [lgfn_tests.csv D0[mlp]-P0|n0] ci_hi: figure 2.511230 | source 2.511230
+OK  a lgf_n/mlp/dashed [lgfn_tests.csv D0[mlp]-P0|n0] verdict: figure inferior | source inferior
+OK  a lgf_n/mlp/dashed [lgfn_tests.csv D0[mlp]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a lgf_n/tabm/solid drawn once: figure 1 | source 1
+OK  a lgf_n/tabm/solid [lgfn_tests.csv D0[tabm*]-P0|n0] delta: figure 2.435923 | source 2.435923
+OK  a lgf_n/tabm/solid [lgfn_tests.csv D0[tabm*]-P0|n0] ci_lo: figure 1.580621 | source 1.580621
+OK  a lgf_n/tabm/solid [lgfn_tests.csv D0[tabm*]-P0|n0] ci_hi: figure 4.731302 | source 4.731302
+OK  a lgf_n/tabm/solid [lgfn_tests.csv D0[tabm*]-P0|n0] verdict: figure inferior | source inferior
+OK  a lgf_n/tabm/solid [lgfn_tests.csv D0[tabm*]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a lgf_n/tabm/dashed drawn once: figure 1 | source 1
+OK  a lgf_n/tabm/dashed [lgfn_tests.csv D0[tabm]-P0|n0] delta: figure 1.108857 | source 1.108857
+OK  a lgf_n/tabm/dashed [lgfn_tests.csv D0[tabm]-P0|n0] ci_lo: figure 0.211736 | source 0.211736
+OK  a lgf_n/tabm/dashed [lgfn_tests.csv D0[tabm]-P0|n0] ci_hi: figure 3.415619 | source 3.415619
+OK  a lgf_n/tabm/dashed [lgfn_tests.csv D0[tabm]-P0|n0] verdict: figure inferior | source inferior
+OK  a lgf_n/tabm/dashed [lgfn_tests.csv D0[tabm]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a lgf_n/ftt/solid drawn once: figure 1 | source 1
+OK  a lgf_n/ftt/solid [lgfn_tests.csv D0[ftt*]-P0|n0] delta: figure 4.129612 | source 4.129612
+OK  a lgf_n/ftt/solid [lgfn_tests.csv D0[ftt*]-P0|n0] ci_lo: figure 3.282907 | source 3.282907
+OK  a lgf_n/ftt/solid [lgfn_tests.csv D0[ftt*]-P0|n0] ci_hi: figure 5.634567 | source 5.634567
+OK  a lgf_n/ftt/solid [lgfn_tests.csv D0[ftt*]-P0|n0] verdict: figure inferior | source inferior
+OK  a lgf_n/ftt/solid [lgfn_tests.csv D0[ftt*]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a lgf_n/ftt/dashed drawn once: figure 1 | source 1
+OK  a lgf_n/ftt/dashed [lgfn_tests.csv D0[ftt]-P0|n0] delta: figure 4.948786 | source 4.948786
+OK  a lgf_n/ftt/dashed [lgfn_tests.csv D0[ftt]-P0|n0] ci_lo: figure 3.969847 | source 3.969847
+OK  a lgf_n/ftt/dashed [lgfn_tests.csv D0[ftt]-P0|n0] ci_hi: figure 6.642273 | source 6.642273
+OK  a lgf_n/ftt/dashed [lgfn_tests.csv D0[ftt]-P0|n0] verdict: figure inferior | source inferior
+OK  a lgf_n/ftt/dashed [lgfn_tests.csv D0[ftt]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a lgf_n/realmlp/solid drawn once: figure 1 | source 1
+OK  a lgf_n/realmlp/solid [lgfn_tests.csv D0[realmlp*]-P0|n0] delta: figure 5.214119 | source 5.214119
+OK  a lgf_n/realmlp/solid [lgfn_tests.csv D0[realmlp*]-P0|n0] ci_lo: figure 4.069698 | source 4.069698
+OK  a lgf_n/realmlp/solid [lgfn_tests.csv D0[realmlp*]-P0|n0] ci_hi: figure 7.167985 | source 7.167985
+OK  a lgf_n/realmlp/solid [lgfn_tests.csv D0[realmlp*]-P0|n0] verdict: figure inferior | source inferior
+OK  a lgf_n/realmlp/solid [lgfn_tests.csv D0[realmlp*]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a lgf_n/realmlp/dashed drawn once: figure 1 | source 1
+OK  a lgf_n/realmlp/dashed [lgfn_tests.csv D0[realmlp]-P0|n0] delta: figure 4.704686 | source 4.704686
+OK  a lgf_n/realmlp/dashed [lgfn_tests.csv D0[realmlp]-P0|n0] ci_lo: figure 3.436199 | source 3.436199
+OK  a lgf_n/realmlp/dashed [lgfn_tests.csv D0[realmlp]-P0|n0] ci_hi: figure 5.791924 | source 5.791924
+OK  a lgf_n/realmlp/dashed [lgfn_tests.csv D0[realmlp]-P0|n0] verdict: figure inferior | source inferior
+OK  a lgf_n/realmlp/dashed [lgfn_tests.csv D0[realmlp]-P0|n0] P4 target: figure MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x] | source MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]
+OK  a B:ens bundle vs L29 point: figure -2.730889 | source -2.730889
+OK  a L29 registered starts 'P0 보다 우세인 기준선이 있다' and P*: figure True | source True
+OK  a L1 registered 지지 → 'supported': figure True | source True
+OK  a L30 registered 지지 → 'supported': figure True | source True
+OK  a L11 registered 지지 → 'supported': figure True | source True
+OK  a L34(a) registered 지지 → 'supported': figure True | source True
+OK  a LGF-F1 support_class (figure 'A'): figure A | source A
+OK  a LGF-F1 verdict text first class: figure True | source True
+OK  a LGF-N1 support classes per learner: figure {"ftt": "A", "mlp": "A", "realmlp": "A", "tabm": "A"} | source {"ftt": "A", "mlp": "A", "realmlp": "A", "tabm": "A"}
+OK  a AB1 abstract rule (a): figure True | source True
+OK  a AB2 abstract rule (d): figure True | source True
+OK  b points = 30: figure 30 | source 30
+OK  b cbq Lena width: figure 126.222979 | source 126.222979
+OK  b cbq Lena coverage: figure 0.972053 | source 0.972053
+OK  b cfm Lena width: figure 73.442166 | source 73.442166
+OK  b cfm Lena coverage: figure 0.890692 | source 0.890692
+OK  b const Lena width: figure 73.254652 | source 73.254652
+OK  b const Lena coverage: figure 0.889790 | source 0.889790
+OK  b nflow Lena width: figure 71.091177 | source 71.091177
+OK  b nflow Lena coverage: figure 0.866464 | source 0.866464
+OK  b nflow#placebo Lena width: figure 70.156865 | source 70.156865
+OK  b nflow#placebo Lena coverage: figure 0.864221 | source 0.864221
+OK  b phys Lena width: figure 76.646394 | source 76.646394
+OK  b phys Lena coverage: figure 0.893171 | source 0.893171
+OK  b cbq Canada width: figure 126.116364 | source 126.116364
+OK  b cbq Canada coverage: figure 0.949576 | source 0.949576
+OK  b cfm Canada width: figure 99.000845 | source 99.000845
+OK  b cfm Canada coverage: figure 0.900937 | source 0.900937
+OK  b const Canada width: figure 96.496356 | source 96.496356
+OK  b const Canada coverage: figure 0.890228 | source 0.890228
+OK  b nflow Canada width: figure 109.335491 | source 109.335491
+OK  b nflow Canada coverage: figure 0.904953 | source 0.904953
+OK  b nflow#placebo Canada width: figure 108.484104 | source 108.484104
+OK  b nflow#placebo Canada coverage: figure 0.910933 | source 0.910933
+OK  b phys Canada width: figure 95.738777 | source 95.738777
+OK  b phys Canada coverage: figure 0.884873 | source 0.884873
+OK  b cbq Russia_W width: figure 122.896383 | source 122.896383
+OK  b cbq Russia_W coverage: figure 0.928571 | source 0.928571
+OK  b cfm Russia_W width: figure 89.814123 | source 89.814123
+OK  b cfm Russia_W coverage: figure 0.797619 | source 0.797619
+OK  b const Russia_W width: figure 72.329509 | source 72.329509
+OK  b const Russia_W coverage: figure 0.750000 | source 0.750000
+OK  b nflow Russia_W width: figure 86.744089 | source 86.744089
+OK  b nflow Russia_W coverage: figure 0.833333 | source 0.833333
+OK  b nflow#placebo Russia_W width: figure 87.240867 | source 87.240867
+OK  b nflow#placebo Russia_W coverage: figure 0.814286 | source 0.814286
+OK  b phys Russia_W width: figure 75.258367 | source 75.258367
+OK  b phys Russia_W coverage: figure 0.785714 | source 0.785714
+OK  b cbq Russia_E width: figure 154.505754 | source 154.505754
+OK  b cbq Russia_E coverage: figure 0.962963 | source 0.962963
+OK  b cfm Russia_E width: figure 115.119293 | source 115.119293
+OK  b cfm Russia_E coverage: figure 0.950617 | source 0.950617
+OK  b const Russia_E width: figure 83.077024 | source 83.077024
+OK  b const Russia_E coverage: figure 0.925926 | source 0.925926
+OK  b nflow Russia_E width: figure 116.882631 | source 116.882631
+OK  b nflow Russia_E coverage: figure 0.962963 | source 0.962963
+OK  b nflow#placebo Russia_E width: figure 113.899998 | source 113.899998
+OK  b nflow#placebo Russia_E coverage: figure 0.959259 | source 0.959259
+OK  b phys Russia_E width: figure 84.265486 | source 84.265486
+OK  b phys Russia_E coverage: figure 0.925926 | source 0.925926
+OK  b cbq MEAN4 width: figure 132.435370 | source 132.435370
+OK  b cbq MEAN4 coverage: figure 0.953291 | source 0.953291
+OK  b cfm MEAN4 width: figure 94.344107 | source 94.344107
+OK  b cfm MEAN4 coverage: figure 0.884966 | source 0.884966
+OK  b const MEAN4 width: figure 81.289385 | source 81.289385
+OK  b const MEAN4 coverage: figure 0.863986 | source 0.863986
+OK  b nflow MEAN4 width: figure 96.013347 | source 96.013347
+OK  b nflow MEAN4 coverage: figure 0.891928 | source 0.891928
+OK  b nflow#placebo MEAN4 width: figure 94.945458 | source 94.945458
+OK  b nflow#placebo MEAN4 coverage: figure 0.887175 | source 0.887175
+OK  b phys MEAN4 width: figure 82.977256 | source 82.977256
+OK  b phys MEAN4 coverage: figure 0.872421 | source 0.872421
+OK  b C2 hier2_cdf MEAN coverage: figure 0.862813 | source 0.862813
+OK  b C2 hier2_cdf MEAN width: figure 80.538399 | source 80.538399
+OK  c LGU-B2 n0 delta_pct = 100·delta/ref_score: figure 2.495668 | source 2.495668
+OK  c LGU-B2 n0 ci_lo_pct = 100·ci_lo/ref_score: figure -3.165949 | source -3.165949
+OK  c LGU-B2 n0 ci_hi_pct = 100·ci_hi/ref_score: figure 6.194055 | source 6.194055
+OK  c LGU-B2 n0 verdict (two-stage): figure undecided | source undecided
+OK  c LGU-B2 n0 ‡ flag = 보정 불확실성 의존: figure False | source False
+OK  c LGU-B2 n0 nboot: figure 1000 | source 1000
+OK  c LGU-A1 n10 delta_pct = 100·delta/ref_score: figure 9.603694 | source 9.603694
+OK  c LGU-A1 n10 ci_lo_pct = 100·ci_lo/ref_score: figure -0.760297 | source -0.760297
+OK  c LGU-A1 n10 ci_hi_pct = 100·ci_hi/ref_score: figure 22.329560 | source 22.329560
+OK  c LGU-A1 n10 verdict (two-stage): figure undecided | source undecided
+OK  c LGU-A1 n10 ‡ flag = 보정 불확실성 의존: figure True | source True
+OK  c LGU-A1 n10 nboot: figure 1000 | source 1000
+OK  c LGU-A1 n40 delta_pct = 100·delta/ref_score: figure -2.659667 | source -2.659667
+OK  c LGU-A1 n40 ci_lo_pct = 100·ci_lo/ref_score: figure -11.848550 | source -11.848550
+OK  c LGU-A1 n40 ci_hi_pct = 100·ci_hi/ref_score: figure 7.480200 | source 7.480200
+OK  c LGU-A1 n40 verdict (two-stage): figure undecided | source undecided
+OK  c LGU-A1 n40 ‡ flag = 보정 불확실성 의존: figure True | source True
+OK  c LGU-A1 n40 nboot: figure 1000 | source 1000
+OK  c AB10 tag row delta (cm) = lgw_bundle AB10: figure 9.510333 | source 9.510333
+OK  c AB10 verdict = lgw_bundle: figure undecided | source undecided
+OK  d Alaska n160 width ratio = R1 width / R0(n 0) width: figure 0.555991 | source 0.555991
+OK  d Alaska n160 coverage: figure 0.898235 | source 0.898235
+OK  d Alaska n160 cov_lo: figure 0.829660 | source 0.829660
+OK  d Alaska n160 cov_hi: figure 0.919848 | source 0.919848
+OK  d Alaska n40 width ratio = R1 width / R0(n 0) width: figure 0.607272 | source 0.607272
+OK  d Alaska n40 coverage: figure 0.891390 | source 0.891390
+OK  d Alaska n40 cov_lo: figure 0.823511 | source 0.823511
+OK  d Alaska n40 cov_hi: figure 0.915322 | source 0.915322
+OK  d Canada n160 width ratio = R1 width / R0(n 0) width: figure 0.820283 | source 0.820283
+OK  d Canada n160 coverage: figure 0.835054 | source 0.835054
+OK  d Canada n160 cov_lo: figure 0.794603 | source 0.794603
+OK  d Canada n160 cov_hi: figure 0.910967 | source 0.910967
+OK  d Canada n40 width ratio = R1 width / R0(n 0) width: figure 0.881228 | source 0.881228
+OK  d Canada n40 coverage: figure 0.847531 | source 0.847531
+OK  d Canada n40 cov_lo: figure 0.807536 | source 0.807536
+OK  d Canada n40 cov_hi: figure 0.917883 | source 0.917883
+OK  d Lena n160 width ratio = R1 width / R0(n 0) width: figure 0.973532 | source 0.973532
+OK  d Lena n160 coverage: figure 0.898422 | source 0.898422
+OK  d Lena n160 cov_lo: figure 0.815297 | source 0.815297
+OK  d Lena n160 cov_hi: figure 0.918584 | source 0.918584
+OK  d Lena n40 width ratio = R1 width / R0(n 0) width: figure 0.909735 | source 0.909735
+OK  d Lena n40 coverage: figure 0.894017 | source 0.894017
+OK  d Lena n40 cov_lo: figure 0.813782 | source 0.813782
+OK  d Lena n40 cov_hi: figure 0.914619 | source 0.914619
+OK  d c1 (L25 stat): figure 4 | source 4
+OK  d c2 (L25 stat): figure 4 | source 4
+OK  caption B:ens CI: figure True | source True
+OK  caption P4 coverage range: figure True | source True
+OK  caption C2 interval values: figure True | source True
+OK  caption L25 counts: figure True | source True
+OK  caption has no registered L25 sentence: figure True | source True

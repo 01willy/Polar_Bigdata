@@ -1,10 +1,13 @@
 """F3 2부 그림 값 대조(스펙 QA 6단계). 그림에 찍힌 값(source_data/v2)을 원천 표에서 다시 읽어 비교하고
 _qa/v2_<이름>_values.txt 에 쓴다. 파생 층(data/processed/paper_figs)을 거치지 않고 원천 표를 직접 읽는다.
 대상: Fig 1, Fig 5, Fig 7, Table 1 과 Fig 2–4 의 2부 추가분(AB 표지, L10 모든 n, SD/SE 표지, L3 보조).
+      3부: Fig 6(라벨 0 포레스트 21선, 정규화기 30점과 C2 참조, 구간 점수 % 환산, L25 6칸, 캡션 수치). --only fig6 로 따로 돈다.
 실행: CUDA_VISIBLE_DEVICES= nice -n 10 python3 scripts/4_visualization/paper/v2_values_check.py
 """
 from __future__ import annotations
 
+import json
+import re
 import sys
 from pathlib import Path
 
@@ -160,8 +163,141 @@ def part2_fig2_4():
     return L.write("Fig2_4_part2")
 
 
+# ---------------------------------------------------------------- Fig 6(3부, LGF 창 마감 뒤)
+V4 = {"우세": "superior", "동등": "equivalent", "미결정": "undecided", "열세": "inferior", "판정 불가": "not determinable"}
+# 그림 선 → 원천 표 행(그림 모듈·v2_data 와 독립으로 다시 적는다). (묶음, 행 키, 선종): (파일, 필터)
+FIG6_SRC = {
+    ("baselines", "B:ens", "solid"): ("lgw/lgw_bundle.csv", dict(scope="MEAN", ab="AB2")),
+    ("baselines", "P*", "solid"): ("lgx/lgx_tests.csv", dict(scope="MEAN", test_id="L29", contrast="P0@tddm-P0|n0")),
+    ("direct_rescale", "catboost_lo", "solid"): ("lgw/lgw_bundle.csv", dict(scope="MEAN", ab="AB1")),
+    ("direct_rescale", "catboost", "solid"): ("lgx/lgx_tests.csv", dict(scope="MEAN", test_id="L30", contrast="D0[catboost]-P0|n0")),
+    ("direct_rescale", "rf", "solid"): ("lgx/lgx_tests.csv", dict(scope="MEAN", test_id="L30", contrast="D0[rf]-P0|n0")),
+    ("direct_rescale", "catboost_tuned", "solid"): ("lgx/lgx_tests.csv", dict(scope="MEAN", test_id="L30", contrast="D0[catboost_tuned]-P0|n0")),
+    ("direct_rescale", "F1k", "solid"): ("lgx/lgx_tests.csv", dict(scope="MEAN", test_id="L11", contrast="F1k-P0|n0")),
+    ("lgt", "tabpfn", "solid"): ("lgt/lgt_tests.csv", dict(scope="MEAN", test_id="L34", contrast="D0[T]-P0|n0")),
+    ("lgt", "catboost_ctx", "solid"): ("lgt/lgt_tests.csv", dict(scope="MEAN", test_id="L34", contrast="D0[C]-P0|n0")),
+    ("lgf_f", "tabicl", "solid"): ("lgf/lgf_tests.csv", dict(scope="MEAN", test_id="LGF-F1", contrast="D0[I]-P0|n0")),
+    ("lgf_f", "tabicl", "dashed"): ("lgf/lgf_tests.csv", dict(scope="MEAN", test_id="LGF-F1", contrast="D0@full[I]-P0|n0")),
+    ("lgf_f", "catboost_ctx", "solid"): ("lgf/lgf_tests.csv", dict(scope="MEAN", test_id="LGF-F1", contrast="D0[C]-P0|n0")),
+    ("lgf_f", "catboost_ctx", "dashed"): ("lgf/lgf_tests.csv", dict(scope="MEAN", test_id="LGF-F1", contrast="D0@full[C]-P0|n0")),
+}
+for _lr in ("mlp", "tabm", "ftt", "realmlp"):
+    FIG6_SRC[("lgf_n", _lr, "solid")] = ("lgf/lgfn_tests.csv", dict(scope="MEAN", test_id="LGF-N1", contrast=f"D0[{_lr}*]-P0|n0"))
+    FIG6_SRC[("lgf_n", _lr, "dashed")] = ("lgf/lgfn_tests.csv", dict(scope="MEAN", test_id="LGF-N1", contrast=f"D0[{_lr}]-P0|n0"))
+FIG6_P4 = "MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]"
+
+
+def _row(df, **flt):
+    q = df
+    for k, v in flt.items():
+        q = q[q[k].astype(str) == str(v)]
+    if len(q) != 1:
+        raise ValueError(f"{len(q)} rows for {flt}")
+    return q.iloc[0]
+
+
+def fig6():
+    L = Log()
+    P = ROOT / "data" / "processed"
+    cache = {}
+    tab = lambda f: cache.setdefault(f, rd(P / f))                       # noqa: E731
+    # a: 그려진 선(위치·CI·기호) 21개 전부
+    Dw = rd(SRC / "Fig6_a_drawn.csv")
+    L.eq("a lines drawn = fixed rows", len(Dw), len(FIG6_SRC))
+    for (blk, key, var), (f, flt) in FIG6_SRC.items():
+        q = Dw[(Dw.block == blk) & (Dw.key == key) & (Dw.variant == var)]
+        L.eq(f"a {blk}/{key}/{var} drawn once", len(q), 1)
+        if len(q) != 1:
+            continue
+        g, s_ = q.iloc[0], _row(tab(f), **flt)
+        lab = f"a {blk}/{key}/{var} [{f.split('/')[-1]} {flt.get('contrast', flt.get('ab'))}]"
+        L.num(lab + " delta", g.delta, s_.delta); L.num(lab + " ci_lo", g.ci_lo, s_.ci_lo); L.num(lab + " ci_hi", g.ci_hi, s_.ci_hi)
+        L.eq(lab + " verdict", g.verdict, V4[str(s_.verdict4)])
+        L.eq(lab + " P4 target", s_.target, FIG6_P4)
+    # 같은 대비 두 원천(B:ens: lgw_bundle h39 와 lgx_tests h42)의 점 추정
+    L.num("a B:ens bundle vs L29 point", _row(tab("lgw/lgw_bundle.csv"), scope="MEAN", ab="AB2").delta,
+          _row(tab("lgx/lgx_tests.csv"), scope="MEAN", test_id="L29", contrast="B:ens-P0|n0").delta)
+    # a: 등록 판정 글자와 지지 갈래
+    Rg = rd(SRC / "Fig6_a_registered.csv").set_index("hypothesis")
+    X = tab("lgx/lgx_tests.csv")
+    L.eq("a L29 registered starts 'P0 보다 우세인 기준선이 있다' and P*", str(_row(X, test_id="L29", scope="verdict").verdict).startswith(
+        "P0 보다 우세인 기준선이 있다. P* = P0@tddm") and Rg.loc["L29", "verdict_en"] == "lower-error baseline found", True)
+    Lg = rd(LGS / "lg_tests.csv")
+    for h, v in (("L1", _row(Lg, test_id="L1", scope="verdict").verdict), ("L30", _row(X, test_id="L30", scope="verdict").verdict),
+                 ("L11", _row(X, test_id="L11", scope="verdict_aux").verdict),
+                 ("L34(a)", _row(tab("lgt/lgt_tests.csv"), test_id="L34", scope="verdict_aux", clause="(a) 직접 예측").verdict)):
+        L.eq(f"a {h} registered 지지 → 'supported'", str(v).startswith("지지") and Rg.loc[h, "verdict_en"] == "supported", True)
+    F = _row(tab("lgf/lgf_tests.csv"), test_id="LGF-F1", scope="verdict")
+    L.eq("a LGF-F1 support_class (figure 'A')", F.support_class, json.loads(Rg.loc["LGF-F1", "support_detail"])["tabicl"])
+    L.eq("a LGF-F1 verdict text first class", str(F.verdict).startswith("지지(물리식보다 오차가 크거나 구별되지 않음)"), True)
+    N = _row(tab("lgf/lgfn_tests.csv"), test_id="LGF-N1", scope="verdict")
+    code = {"지지(물리식보다 오차가 크거나 구별되지 않음)": "A", "지지(우세 근거 없음)": "B"}
+    src_cls = {k: code.get(v, v) for k, v in json.loads(N.support_class).items()}
+    L.eq("a LGF-N1 support classes per learner", json.dumps(src_cls, sort_keys=True), json.dumps(json.loads(Rg.loc["LGF-N1", "support_detail"]), sort_keys=True))
+    B = tab("lgw/lgw_bundle.csv")
+    for ab, rule in (("AB1", "(a)"), ("AB2", "(d)")):
+        L.eq(f"a {ab} abstract rule {rule}", str(_row(B, scope="MEAN", ab=ab).abstract_rule).startswith(rule), True)
+    # b: 정규화기 6종 × (P4 평균 + 지역 4) 30점과 C2 참조
+    Fb = rd(SRC / "Fig6_b.csv")
+    I = tab("lgu/lgu_b_intervals.csv")
+    L.eq("b points = 30", len(Fb), 30)
+    for r in Fb.itertuples():
+        s_ = _row(I[(I.n == 0) & (I.scope == "all")], target=r.target, method=r.method)
+        L.num(f"b {r.method} {r.target} width", r.wid10, s_.wid10); L.num(f"b {r.method} {r.target} coverage", r.cov10, s_.cov10)
+    C2 = tab("h4/c2_coverage.csv")
+    c2 = C2[(C2.test == "label0") & (C2.method == "hier2_cdf") & C2.target.astype(str).str.startswith("MEAN")].iloc[0]
+    rf = rd(SRC / "Fig6_b_ref.csv"); rf = rf[rf.kind == "mean4"].iloc[0]
+    L.num("b C2 hier2_cdf MEAN coverage", rf.coverage, c2.coverage); L.num("b C2 hier2_cdf MEAN width", rf.width_cm, c2.width_cm)
+    # c: % 환산과 판정(2단, 1단), AB10
+    Fc = rd(SRC / "Fig6_c.csv")
+    Ub, Ua = tab("lgu/lgu_b_tests.csv"), tab("lgu/lgu_a_tests.csv")
+    for r in Fc.itertuples():
+        s_ = _row(Ub, test="LGU-B2") if r.test == "LGU-B2" else _row(Ua, test="LGU-A1", n=str(int(r.n)))
+        ref = float(s_.ref_score)
+        for c_fig, c_src in (("delta_pct", "delta"), ("ci_lo_pct", "ci_lo"), ("ci_hi_pct", "ci_hi")):
+            L.num(f"c {r.test} n{int(r.n)} {c_fig} = 100·{c_src}/ref_score", getattr(r, c_fig), 100.0 * float(s_[c_src]) / ref)
+        L.eq(f"c {r.test} n{int(r.n)} verdict (two-stage)", r.verdict, V4[str(s_.verdict)])
+        L.eq(f"c {r.test} n{int(r.n)} ‡ flag = 보정 불확실성 의존", bool(r.calib_dependent), str(s_.note_cal) == "보정 불확실성 의존")
+        L.eq(f"c {r.test} n{int(r.n)} nboot", int(r.nboot), int(s_.nboot))
+    ab10 = _row(B, scope="MEAN", ab="AB10")
+    a10 = Fc[Fc.ab == "AB10"].iloc[0]
+    L.num("c AB10 tag row delta (cm) = lgw_bundle AB10", a10.delta_cm, ab10.delta)
+    L.eq("c AB10 verdict = lgw_bundle", a10.verdict, V4[str(ab10.verdict4)])
+    # d: 칸 6개(폭 비, 커버리지, CI)와 c1·c2
+    Fd = rd(SRC / "Fig6_d.csv")
+    Cf = tab("lgx/lgx_conformal.csv")
+    base = Cf[(Cf["mode"] == "x") & (Cf.level == 90) & (Cf.learner == "catboost_lo")]
+    for r in Fd.itertuples():
+        s1 = _row(base, target=r.target, method="R1", n=int(r.n))
+        s0 = _row(base, target=r.target, method="R0", n=0)
+        L.num(f"d {r.target} n{int(r.n)} width ratio = R1 width / R0(n 0) width", r.width_ratio, float(s1.width_cm) / float(s0.width_cm))
+        L.num(f"d {r.target} n{int(r.n)} coverage", r.coverage, s1.coverage)
+        L.num(f"d {r.target} n{int(r.n)} cov_lo", r.cov_lo, s1.cov_lo); L.num(f"d {r.target} n{int(r.n)} cov_hi", r.cov_hi, s1.cov_hi)
+    lv = _row(X, test_id="L25", scope="verdict_aux")
+    m = re.search(r"c1 = (\d+)\(판정한 칸 \d+\), c2 = (\d+)", str(lv.stat))
+    Dr = rd(SRC / "Fig6_d_registered.csv").iloc[0]
+    L.eq("d c1 (L25 stat)", int(Dr.c1), int(m.group(1))); L.eq("d c2 (L25 stat)", int(Dr.c2), int(m.group(2)))
+    # 캡션 수치(CAPTIONS.md 의 v2/Fig6 절)
+    cap = (ROOT / "outputs/figures/paper/CAPTIONS.md").read_text()
+    sec = cap[cap.index("## v2/Fig6_label0_uncertainty"):]
+    sec = sec[:sec.index("<!-- words")]
+    be = _row(B, scope="MEAN", ab="AB2")
+    fm = lambda v: (f"{v:.2f}".replace("-", "−"))                         # noqa: E731
+    L.eq("caption B:ens CI", f"({fm(be.delta)} [{fm(be.ci_lo)}, {fm(be.ci_hi)}] cm)" in sec, True)
+    m4 = I[(I.n == 0) & (I.scope == "all") & (I.target == "MEAN4") & I.method.isin(["const", "phys", "cfm", "nflow", "nflow#placebo", "cbq"])]
+    L.eq("caption P4 coverage range", f"P4 coverage {m4.cov10.min():.2f}–{m4.cov10.max():.2f}" in sec, True)
+    L.eq("caption C2 interval values", f"C2 interval {c2.coverage:.2f}, {c2.width_cm:.0f} cm" in sec, True)
+    L.eq("caption L25 counts", f"in {int(m.group(1))} of 6 cells, all {int(m.group(2))} narrower" in sec, True)
+    L.eq("caption has no registered L25 sentence", "narrow the interval" not in sec, True)
+    return L.write("Fig6_label0_uncertainty")
+
+
 def main():
-    ok = all([fig1(), fig5(), fig7(), table1(), part2_fig2_4()])
+    if "--only" in sys.argv[1:]:                                   # 한 그림만(다른 그림의 _values.txt 는 다시 쓰지 않는다)
+        k = sys.argv[sys.argv.index("--only") + 1]
+        ok = {"fig6": fig6}[k]()
+    else:
+        ok = all([fig1(), fig5(), fig6(), fig7(), table1(), part2_fig2_4()])
     sys.exit(0 if ok else 1)
 
 

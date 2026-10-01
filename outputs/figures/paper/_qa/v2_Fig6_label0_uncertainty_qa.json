@@ -1,0 +1,53 @@
+{
+ "width_mm": 180.0,
+ "height_mm": 183.0,
+ "min_font_pt": 6.5,
+ "clipped": [],
+ "overlaps": [],
+ "n_text_overlaps": 0,
+ "has_title_in_axes": false,
+ "delta_axes_have_zero": true,
+ "n_delta_axes": 2,
+ "n_legends": 1,
+ "fonts": [
+  "BGZIHO+LiberationSans-Bold|CID TrueType|yes",
+  "BGZIHO+LiberationSans|CID TrueType|yes"
+ ],
+ "fonts_ok": true,
+ "unicode_minus_ok": true,
+ "caption_words": {
+  "definition": 76,
+  "statistics": 77,
+  "panels": 137,
+  "data": 29,
+  "total": 319
+ },
+ "caption_problems": [],
+ "fails": [],
+ "ok": true,
+ "svg_text_elements": 128,
+ "svg_glyph_defs": 0,
+ "svg_text_ok": true,
+ "png_dpi": 599.9988,
+ "name": "Fig6_label0_uncertainty",
+ "version": "v2",
+ "time": "2026-10-02T01:19:28",
+ "paths": {
+  "width_mm": 180.0,
+  "height_mm": 183.0,
+  "pdf": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Fig6_label0_uncertainty.pdf",
+  "svg": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Fig6_label0_uncertainty.svg",
+  "png": "/home/willy010313/Polar_Bigdata/outputs/figures/paper/v2/Fig6_label0_uncertainty.png"
+ },
+ "source_data": [
+  "outputs/figures/paper/source_data/v2/Fig6_a.csv",
+  "outputs/figures/paper/source_data/v2/Fig6_a_registered.csv",
+  "outputs/figures/paper/source_data/v2/Fig6_a_drawn.csv",
+  "outputs/figures/paper/source_data/v2/Fig6_b.csv",
+  "outputs/figures/paper/source_data/v2/Fig6_b_ref.csv",
+  "outputs/figures/paper/source_data/v2/Fig6_c.csv",
+  "outputs/figures/paper/source_data/v2/Fig6_c_registered.csv",
+  "outputs/figures/paper/source_data/v2/Fig6_d.csv",
+  "outputs/figures/paper/source_data/v2/Fig6_d_registered.csv"
+ ]
+}
