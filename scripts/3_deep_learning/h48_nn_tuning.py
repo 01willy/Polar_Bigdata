@@ -235,7 +235,7 @@ RMLP_KEYS = ("num_emb_type", "add_front_scale", "lr", "p_drop", "wd", "plr_sigma
 RMLP_DEFAULT = dict(num_emb_type="pbld", add_front_scale=True, hidden_sizes=[256, 256, 256])
 ALLOWED_GPUS = (2, 3, 4, 5, 6, 7, 8, 9)   # LGF 개정 7(2026-10-01): GPU 8 추가
 GPU01 = (0, 1)
-NEVER = (8,)
+NEVER = ()   # LGF 개정 7(2026-10-01): GPU 8 을 거부 목록에서 뺐다(허용 목록과 함께)
 LGT_GPUS = (6, 7, 9)
 H43_SHA = "13148bb899e92c49ba24f2f9cb6463e56da26a2a"
 H40_SHA = "ffd0b3a76d36472cef15ac625eeeee344f948a8f"
