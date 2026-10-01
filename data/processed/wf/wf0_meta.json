@@ -1,0 +1,19 @@
+{
+ "created": "2026-10-01 12:58",
+ "plan": "docs/EXPERIMENT_PLAN_WF_2026-10-01.md WF0",
+ "label": "사후 서술(판정어 없음)",
+ "inputs": [
+  "results/rescale_lg/data/processed/lg/lg_curve.csv",
+  "data/processed/lgd/lgd_curve_lic.csv"
+ ],
+ "n_targets": 30,
+ "spearman_recal_gain_vs_ml_gain": {
+  "rho": 0.6565072302558399,
+  "p": 8.153361633776811e-05
+ },
+ "spearman_p0_vs_ml_gain": {
+  "rho": 0.5145717463848721,
+  "p": 0.0036222733733917564
+ },
+ "note": "최선 ML 은 다섯 레시피 가운데 사후 선택이라 낙관적이다"
+}
