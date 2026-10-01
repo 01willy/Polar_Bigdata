@@ -117,6 +117,8 @@
   <tag>_meta.json, <tag>_targets.csv, <tag>_timing.csv, <tag>_failed.csv, <tag>_count.csv, <tag>_count_detail.csv(--count-only).
   2차 보강(wf6–wf8): 조각은 shards/<tag>{6,7,8}__cpu__… (wf8 은 변형 = 전략), 표는 <tag>2b_curve.csv, <tag>2b_tests.csv(WF6-a·b, WF7-a·b 서술,
   WF8-a·b 와 서술 대비), <tag>2b_meta.json, <tag>2b_targets.csv, <tag>2b_timing.csv, <tag>2b_failed.csv, <tag>2b_count.csv, <tag>2b_count_detail.csv.
+  3차 보강(--exp wf9,wf9x,wf10, 계획서 §7): <tag>3b_curve.csv, <tag>3b_tests.csv(WF9-a·c, WF10-a·b·c 와 서술 WF9-b·d, WF10-d), <tag>3b_meta.json,
+  <tag>3b_targets.csv, <tag>3b_timing.csv, <tag>3b_failed.csv, <tag>3b_rmse.csv(저장소별 RMSE), <tag>3b_decomp.csv(격자 안·사이 분해), <tag>3b_count.csv.
   두 차수를 한 번에 집계하면 차수마다 자기 표에 쓴다. 스모크는 wf_smoke_*, wf2b_smoke_* 다.
 
 실행 환경
@@ -244,9 +246,11 @@ PBEST_CANDS = ("P1", "P2", "Pk", "Pc")
 STRATEGIES = ("S1", "S2", "S3", "S4", "S5", "S6", "S7")
 EXPS_R1 = ("wf1", "wf2", "wf3", "wf4")                                      # 1차(계획서 §2)
 EXPS_R2 = ("wf6", "wf7", "wf8")                                             # 2차 보강(계획서 §6)
-EXPS_ALL = EXPS_R1 + EXPS_R2
-TRANSFER_EXPS = ("wf4", "wf7", "wf8")                                       # 전이 모드(원천 = LG, h40.build_ctx)
-PLAN_COMMIT = {"r1": "4168331", "r2": "1b42b4d"}                            # 차수별 사전 등록 커밋
+EXPS_R3 = ("wf9", "wf9x", "wf10")                                           # 3차 보강(계획서 §7). 기본 실행 목록에는 넣지 않는다(--exp 로 지정)
+EXPS_ALL = EXPS_R1 + EXPS_R2                                                # --exps 의 기본값(1·2차)
+EXPS_KNOWN = EXPS_ALL + EXPS_R3
+TRANSFER_EXPS = ("wf4", "wf7", "wf8", "wf9x")                               # 전이 모드(원천 = LG, h40.build_ctx)
+PLAN_COMMIT = {"r1": "4168331", "r2": "1b42b4d", "r3": "8180632"}           # 차수별 사전 등록 커밋
 WF1_TARGETS = ("Alaska", "Lena", "Canada", "AL-1", "AL-2", "AL-6")
 WF1_X34 = ("Alaska",)
 WF1_GRID = (20, 50, 100, 200, 500, 1000, 2000, 5000, -1)
@@ -269,7 +273,21 @@ WF8_TARGETS = ("Lena", "Canada", "Russia_W", "Russia_E", "Alaska")          # �
 WF8_GRID = (10, 40)
 WF8_DRAWS = 5
 WF8_STRATEGIES = ("S1", "S2", "S4")
-ZERO_N_EXPS = ("wf7",)                                                      # n = 0(라벨 없음)을 격자에 두는 실험
+# 3차 보강(계획서 §7). 바꾸면 사전 등록에서 벗어난다
+WF9_TARGETS = ("Alaska", "Lena", "Canada")                                  # 지역 내(모드 r), x25, WF6 와 같은 대상
+WF9_GRID = (200, 500, 1000, -1)
+WF9_SPLITS = 25                                                             # split_seed 1–25(WF6 와 같다)
+WF9_DRAWS = 3
+WF9X_TARGETS = ("Lena", "Canada", "Russia_W", "Russia_E", "Alaska")         # 전이(모드 x)
+WF9X_GRID = (0, 10, 40, 160, -1)
+WF9X_DRAWS = 5
+WF10_TARGETS = ("Alaska", "Canada")                                         # 지역 내, 블록 평균 √TDD 범위가 넓은 대상
+WF10_GRID = (100, 500, -1)
+WF10_SPLITS = 10                                                            # I 블록 순열 seed 1–10
+WF10_DRAWS = 3
+WF10_FRAC = 0.25                                                            # W·I 의 대상 셀 비율 하한
+WF10_VARIANTS = ("warm", "cold")
+ZERO_N_EXPS = ("wf7", "wf9x")                                               # n = 0(라벨 없음)을 격자에 두는 실험
 # 1차 Rescale 스모크(nyFtT) 사전 점검 대표 단위 7개의 실측/추정 비(계획서 개정 이력 2026-10-01 13:20). --count-only 의 환산 출력에만 쓴다
 RESCALE_RATIO = 0.62
 # LGD 약관 확인분 새 지역: 저장소 이름 → (실행 표 디렉터리, 표 안의 대상 이름, 점 추정만)
@@ -303,7 +321,7 @@ def _grid_txt(g):
 def parse_args(argv=None):
     ap = argparse.ArgumentParser(description="H54 희소·충분 라벨 워크플로 하네스(WF)")
     ap.add_argument("--exps", "--exp", dest="exps", default=",".join(EXPS_ALL),
-                    help="실행·집계할 실험(쉼표 목록. 1차 wf1, wf2, wf3, wf4, 2차 보강 wf6, wf7, wf8)")
+                    help="실행·집계할 실험(쉼표 목록. 1차 wf1, wf2, wf3, wf4, 2차 보강 wf6, wf7, wf8, 3차 보강 wf9, wf9x, wf10. 기본 = 1·2차)")
     ap.add_argument("--wf1-targets", default=",".join(WF1_TARGETS))
     ap.add_argument("--x34-targets", default=",".join(WF1_X34), help="wf1 에서 x34 조각을 둘 대상(SAR 열이 있는 알래스카 계열)")
     ap.add_argument("--wf2-targets", default=",".join(WF2_TARGETS))
@@ -324,6 +342,15 @@ def parse_args(argv=None):
     ap.add_argument("--wf8-targets", default=",".join(WF8_TARGETS), help="'이름' 또는 '이름:모드' 쉼표 목록(모드 생략 = x)")
     ap.add_argument("--wf8-grid", default=_grid_txt(WF8_GRID))
     ap.add_argument("--wf8-strategies", default=",".join(WF8_STRATEGIES))
+    ap.add_argument("--wf9-targets", default=",".join(WF9_TARGETS))
+    ap.add_argument("--wf9-grid", default=_grid_txt(WF9_GRID))
+    ap.add_argument("--wf9-splits", type=int, default=WF9_SPLITS, help="wf9 의 half_split_blocks split_seed 1..K(WF6 와 같은 25)")
+    ap.add_argument("--wf9x-targets", default=",".join(WF9X_TARGETS), help="'이름' 또는 '이름:모드' 쉼표 목록(모드 생략 = x)")
+    ap.add_argument("--wf9x-grid", default=_grid_txt(WF9X_GRID))
+    ap.add_argument("--wf10-targets", default=",".join(WF10_TARGETS))
+    ap.add_argument("--wf10-grid", default=_grid_txt(WF10_GRID))
+    ap.add_argument("--wf10-splits", type=int, default=WF10_SPLITS, help="wf10 의 I 블록 순열 seed 1..K")
+    ap.add_argument("--wf10-variants", default=",".join(WF10_VARIANTS))
     ap.add_argument("--splits", type=int, default=5, help="half_split_blocks split_seed 1..K")
     ap.add_argument("--seeds", type=int, default=len(SEEDS))
     ap.add_argument("--draws-cap", type=int, default=0, help="추출 수 상한(0 = 설계값). 스모크·시험용")
@@ -381,7 +408,7 @@ def finalize(a):
     a.PERMIT = run_permitted_env(a.ARGV)
     a.threads_asked = int(a.threads)
     a.threads = max(1, int(a.threads) if a.PERMIT else min(int(a.threads), LOCAL_MAX_THREADS))
-    a.EXPS = [v for v in _list(a.exps) if v in EXPS_ALL]
+    a.EXPS = [v for v in _list(a.exps) if v in EXPS_KNOWN]
     a.SPLITS = list(range(1, int(a.splits) + 1))
     a.SEEDS = list(range(int(a.seeds)))
     a.T = {"wf1": _list(a.wf1_targets), "wf2": _list(a.wf2_targets), "wf3": _list(a.wf3_targets)}
@@ -398,6 +425,13 @@ def finalize(a):
     a.T["wf8"] = [_pair(v) for v in _list(a.wf8_targets)]
     a.STRAT8 = [v for v in _list(a.wf8_strategies) if v in WF8_STRATEGIES]
     a.G.update(wf6=_n_list(a.wf6_grid), wf7=_n_list(a.wf7_grid), wf8=_n_list(a.wf8_grid))
+    # 3차 보강(wf9, wf9x, wf10)
+    a.SPLITS9 = list(range(1, int(a.wf9_splits) + 1))
+    a.SPLITS10 = list(range(1, int(a.wf10_splits) + 1))
+    a.VAR10 = [v for v in _list(a.wf10_variants) if v in WF10_VARIANTS]
+    t3 = dict(wf9=_list(a.wf9_targets), wf9x=[_pair(v) for v in _list(a.wf9x_targets)], wf10=_list(a.wf10_targets))
+    a.T.update(t3)
+    a.G.update(wf9=_n_list(a.wf9_grid), wf9x=_n_list(a.wf9x_grid), wf10=_n_list(a.wf10_grid))
     if a.smoke:                                                    # 스모크: 모든 경로를 작은 대상으로 한 번씩 지난다
         a.SPLITS = [1]; a.SEEDS = [0]; a.draws_cap = a.draws_cap or 1
         a.T = {"wf1": ["Canada", "AL-3"], "wf2": ["Canada"], "wf3": ["Canada"],
@@ -409,6 +443,10 @@ def finalize(a):
         a.SPLITS6 = [6]
         a.T.update(wf6=["Canada"], wf7=[("Russia_W", "x"), ("AL-3", "i")], wf8=[("Russia_W", "x"), ("Canada", "x")])
         a.G.update(wf6=[200, -1], wf7=[0, 10, -1], wf8=[10, 40])
+        # 3차 보강: wf9 는 새 분할(7), wf9x 는 n = 0 과 |A| 가 작은 대상, wf10 은 warm 변형 하나
+        a.SPLITS9 = [7]; a.SPLITS10 = [1]; a.VAR10 = ["warm"]
+        a.T.update(wf9=["Canada"], wf9x=[("Russia_W", "x"), ("Canada", "x")], wf10=["Canada"])
+        a.G.update(wf9=[200, -1], wf9x=[0, 10, -1], wf10=[100, -1])
     if a.precheck:                                                 # 사전 점검: 실험마다 본 실행 크기의 대표 단위(분할 1)
         a.SPLITS = [1]
         a.T = {"wf1": ["Alaska"], "wf2": ["Alaska"], "wf3": ["Alaska"], "wf4": [("Lena", "x"), ("AL-2", "i")]}
@@ -416,7 +454,10 @@ def finalize(a):
         a.SPLITS6 = [1]
         a.T.update(wf6=["Alaska"], wf7=[("Alaska", "x"), ("Lena", "x")], wf8=[("Alaska", "x")])
         a.STRAT8 = ["S1", "S4"]
+        a.SPLITS9 = [1]; a.SPLITS10 = [1]; a.VAR10 = ["warm"]
+        a.T.update(wf9=["Alaska"], wf9x=[("Alaska", "x"), ("Lena", "x")], wf10=["Alaska"])
     a.TAG2 = f"{a.tag}2b{a.SUFFIX}"                                # 2차 보강의 집계 표 이름(1차 표를 덮어쓰지 않는다)
+    a.TAG3 = f"{a.tag}3b{a.SUFFIX}"                                # 3차 보강의 집계 표 이름
     a.OUT = _abs(a.out_dir); a.PROC = _abs(a.data_dir); a.LGD = _abs(a.lgd_dir)
     a.SHARDS = a.OUT / "shards"
     a._ha = None
@@ -428,10 +469,11 @@ def exp_tag(a, exp):
 
 
 def rounds_of(a, exps=None):
-    """실험 목록을 차수로 나눈다. 반환 [(차수, 실험 목록, 집계 표 이름)]. 1차 = wf1–wf4(<tag>_*), 2차 보강 = wf6–wf8(<tag>2b_*)."""
+    """실험 목록을 차수로 나눈다. 반환 [(차수, 실험 목록, 집계 표 이름)]. 1차 = wf1–wf4(<tag>_*), 2차 보강 = wf6–wf8(<tag>2b_*),
+    3차 보강 = wf9, wf9x, wf10(<tag>3b_*)."""
     exps = list(a.EXPS if exps is None else exps)
     out = []
-    for rnd, members, tag in (("r1", EXPS_R1, a.TAG), ("r2", EXPS_R2, a.TAG2)):
+    for rnd, members, tag in (("r1", EXPS_R1, a.TAG), ("r2", EXPS_R2, a.TAG2), ("r3", EXPS_R3, a.TAG3)):
         ex = [e for e in exps if e in members]
         if ex:
             out.append((rnd, ex, tag))
@@ -447,6 +489,8 @@ def draws_for(a, exp, n):
         k = DRAWS_SMALL if n <= DRAW_SPLIT_N else DRAWS_LARGE
     elif exp in EXPS_R2:
         k = {"wf6": WF6_DRAWS, "wf7": WF7_DRAWS, "wf8": WF8_DRAWS}[exp]
+    elif exp in EXPS_R3:
+        k = {"wf9": WF9_DRAWS, "wf9x": WF9X_DRAWS, "wf10": WF10_DRAWS}[exp]
     else:
         k = WF2_DRAWS if exp == "wf2" else WF4_DRAWS
     return max(1, min(k, int(a.draws_cap))) if int(a.draws_cap) > 0 else k
@@ -558,13 +602,20 @@ def split_structure_ext(D, target, splits):
 
 
 def splits_of(a, exp):
-    """실험의 분할 목록. wf6 은 split_seed 1–25(--wf6-splits), 그 밖은 1–5(--splits)."""
-    return list(a.SPLITS6) if exp == "wf6" else list(a.SPLITS)
+    """실험의 분할 목록. wf6 은 split_seed 1–25(--wf6-splits), wf9 는 1–25(--wf9-splits), wf10 은 I 순열 seed 1–10(--wf10-splits),
+    그 밖은 1–5(--splits)."""
+    if exp == "wf6":
+        return list(a.SPLITS6)
+    if exp == "wf9":
+        return list(a.SPLITS9)
+    if exp == "wf10":
+        return list(a.SPLITS10)
+    return list(a.SPLITS)
 
 
 def split_info_of(a, D, exp, target):
-    """실험의 분할 구조. wf6 은 분할 1–25 안에서 다시 계산하고, 그 밖은 h40.Data 의 분할 1–5 구조(기존과 같다)."""
-    return split_structure_ext(D, target, splits_of(a, exp)) if exp == "wf6" else D.split_structure(target)
+    """실험의 분할 구조. wf6·wf9 는 분할 1–25 안에서 다시 계산하고, 그 밖은 h40.Data 의 분할 1–5 구조(기존과 같다). wf10 은 wf10_plan 을 쓴다."""
+    return split_structure_ext(D, target, splits_of(a, exp)) if exp in ("wf6", "wf9") else D.split_structure(target)
 
 
 def split_plan(D, target, splits, info=None):
@@ -620,6 +671,120 @@ def build_tctx(a, alias, mode, split):
     HA, D = get_data(a, spec)
     c = H.build_ctx(D, HA, tgt, mode, split)
     c.meta.update(alias=alias, data_spec=spec or "v3")
+    return c
+
+
+def wf10_split(D, target, variant, split):
+    """WF10 분할(계획서 §7): 대상 셀의 0.5° 블록을 블록 평균 √TDD(토양 도일, 유한 셀의 셀 수 가중, 공변량만 사용)로 정렬해, warm 은 가장
+    따뜻한 블록부터, cold 는 가장 추운 블록부터 대상 셀 수의 25 % 이상이 될 때까지 W 로 둔다(동률은 블록 이름 순). 남은 블록을
+    seed_of('wf10-I', 대상, 변형, 분할) 순열로 섞어 셀 수 25 % 이상이 될 때까지 I 로 둔다. 나머지가 A. 반환 dict(A, W, I = df 색인, 블록 목록, 블록 평균)."""
+    if variant not in WF10_VARIANTS:
+        raise ValueError(f"wf10 변형은 {WF10_VARIANTS} 가운데 하나다: {variant}")
+    df = D.df
+    t_idx = np.asarray(D.target_idx(target))
+    blk = df.block.values[t_idx].astype(str)
+    sv = df.s.values[t_idx].astype(float)
+    ub, inv = np.unique(blk, return_inverse=True)
+    nbk = len(ub)
+    ncell = np.bincount(inv, minlength=nbk).astype(float)
+    ok = np.isfinite(sv)
+    ssum = np.bincount(inv[ok], weights=sv[ok], minlength=nbk)
+    scnt = np.bincount(inv[ok], minlength=nbk).astype(float)
+    bmean = np.full(nbk, np.nan)
+    bmean[scnt > 0] = ssum[scnt > 0] / scnt[scnt > 0]
+    quota = WF10_FRAC * float(len(t_idx))
+    sign = -1.0 if variant == "warm" else 1.0
+    order = sorted([j for j in range(nbk) if np.isfinite(bmean[j])], key=lambda j: (sign * bmean[j], ub[j]))
+    W_b, cum = [], 0.0
+    for j in order:
+        if cum >= quota:
+            break
+        W_b.append(j); cum += ncell[j]
+    wset = set(W_b)
+    rest = [j for j in range(nbk) if j not in wset]
+    perm = np.random.RandomState(seed_of("wf10-I", target, variant, int(split))).permutation(len(rest))
+    I_b, cum = [], 0.0
+    for q in perm:
+        if cum >= quota:
+            break
+        I_b.append(rest[q]); cum += ncell[rest[q]]
+    iset = set(I_b)
+    A_b = [j for j in rest if j not in iset]
+    pick = lambda js: t_idx[np.isin(inv, np.asarray(sorted(js), int))] if js else np.zeros(0, int)   # noqa: E731
+    return dict(A=pick(A_b), W=pick(W_b), I=pick(I_b), W_blocks=sorted(ub[W_b].tolist()), I_blocks=sorted(ub[I_b].tolist()),
+                A_blocks=sorted(ub[A_b].tolist()), block_mean=dict(zip(ub.tolist(), [float(v) for v in bmean])))
+
+
+_WF10_PLAN: dict = {}
+
+
+def wf10_plan(a, D, target, variant):
+    """WF10 분할 1..K 의 (실행, 건너뜀, 구조). 앞선 분할과 I 블록 집합이 같으면 중복(dup_of), W·I 의 채점 블록이 2개 미만이거나 A 가 비면 무효."""
+    key = (id(D), str(target), str(variant), tuple(a.SPLITS10))
+    if key not in _WF10_PLAN:
+        df = D.df
+        info, seen = {}, {}
+        for sp in a.SPLITS10:
+            q = wf10_split(D, target, variant, sp)
+            evW = q["W"][eval_mask(df.iloc[q["W"]])] if len(q["W"]) else q["W"]
+            evI = q["I"][eval_mask(df.iloc[q["I"]])] if len(q["I"]) else q["I"]
+            nbW, nbI = len(np.unique(df.block.values[evW])), len(np.unique(df.block.values[evI]))
+            ks = frozenset(q["I_blocks"])
+            dup = seen.get(ks, -1)
+            seen.setdefault(ks, sp)
+            info[sp] = dict(n_A=int(len(q["A"])), n_eval=int(len(evW) + len(evI)), n_eval_W=int(len(evW)), n_eval_I=int(len(evI)), nb_eval_W=int(nbW),
+                            nb_eval_I=int(nbI), dup_of=int(dup), valid=bool(nbW >= 2 and nbI >= 2 and len(q["A"]) > 0))
+        nu = sum(1 for v in info.values() if v["dup_of"] < 0)
+        nv = sum(1 for v in info.values() if v["dup_of"] < 0 and v["valid"])
+        for v in info.values():
+            v.update(n_unique_splits=int(nu), n_valid_splits=int(nv))
+        _WF10_PLAN[key] = info
+    info = _WF10_PLAN[key]
+    keep, skip = [], []
+    for sp in a.SPLITS10:
+        v = info[sp]
+        if v["dup_of"] >= 0:
+            skip.append((sp, f"dup_of_{v['dup_of']}", v))
+        elif v["n_eval_W"] == 0 or v["n_eval_I"] == 0 or v["n_A"] == 0 or not v["valid"]:
+            skip.append((sp, "invalid_wf10", v))
+        else:
+            keep.append(sp)
+    return keep, skip, info
+
+
+def build_rctx10(a, target, split, variant):
+    """WF10 문맥: A = 라벨 후보 블록, 채점 B = W 의 eval_mask 셀 다음 I 의 eval_mask 셀(c.maskW 로 구분). E0 는 build_rctx 와 같다."""
+    HA, D = get_data(a)
+    df = D.df
+    q = wf10_split(D, target, variant, split)
+    A_idx, W_idx, I_idx = q["A"], q["W"], q["I"]
+    evW = W_idx[eval_mask(df.iloc[W_idx])]
+    evI = I_idx[eval_mask(df.iloc[I_idx])]
+    evB = np.concatenate([evW, evI]).astype(int)
+    _, parent, src_idx, comp = D.source_idx(target, "x")
+    ok = np.isfinite(df.y.values[src_idx]) & np.isfinite(df.s.values[src_idx])
+    src = src_idx[ok]
+    E0 = H.ls_E(df.y.values[src], df.s.values[src])
+    _, _, info = wf10_plan(a, D, target, variant)
+    inf = info.get(int(split), dict(dup_of=-1, valid=True, n_valid_splits=1, n_unique_splits=1))
+    sA, sW, sI = df.s.values[A_idx], df.s.values[evW], df.s.values[evI]
+    outside = (sW > np.nanmax(sA)) if variant == "warm" else (sW < np.nanmin(sA))
+
+    def cols(idx, names):
+        return df[names].values[idx].astype(np.float32)
+    meta = dict(n_A=int(len(A_idx)), nb_A=int(len(np.unique(df.block.values[A_idx]))), n_eval=int(len(evB)), n_eval_W=int(len(evW)),
+                n_eval_I=int(len(evI)), nb_eval=int(len(np.unique(df.block.values[evB]))), nb_eval_W=int(len(np.unique(df.block.values[evW]))),
+                nb_eval_I=int(len(np.unique(df.block.values[evI]))), n_src=int(len(src)), E0=float(E0), n_cells=int(len(D.target_idx(target))),
+                dup_of=int(inf["dup_of"]), valid=bool(inf["valid"]), n_valid_splits=int(inf["n_valid_splits"]),
+                n_unique_splits=int(inf["n_unique_splits"]), src_mode="x", n_src_parent=int(comp.get("n_src_parent", 0)), wf10_variant=variant,
+                s_A_mean=float(np.nanmean(sA)), s_A_min=float(np.nanmin(sA)), s_A_max=float(np.nanmax(sA)), s_W_mean=float(np.nanmean(sW)),
+                s_I_mean=float(np.nanmean(sI)), frac_W_outside_A=float(np.mean(outside)) if len(sW) else np.nan,
+                W_blocks=";".join(q["W_blocks"]), I_blocks=";".join(q["I_blocks"]))
+    c = RCtx(target, split, parent, cols(A_idx, FEATS), df.y.values[A_idx], df.s.values[A_idx], df.block.values[A_idx], df.lat.values[A_idx],
+             df.lon.values[A_idx], cols(evB, FEATS), df.y.values[evB], df.s.values[evB], df.block.values[evB], df.lat.values[evB],
+             df.lon.values[evB], E0, src_X=cols(src, FEATS), meta=meta)
+    c.maskW = np.r_[np.ones(len(evW), bool), np.zeros(len(evI), bool)]
+    c.variant = str(variant)
     return c
 
 
@@ -863,6 +1028,11 @@ class UnitBase:
         self.seeds = list(a.SEEDS)
         self.base_row = dict(exp=exp, target=name.split("|")[0], mode=c.mode, parent=c.parent, split=int(c.split), variant=self.variant, part="cpu",
                              axis=exp)
+        self.xstores = self._make_xstores()
+
+    def _make_xstores(self):
+        """같은 예측을 다른 채점 부분집합·변환으로 함께 저장할 저장소 [(BlockStore, fn(y, pred) → (y', pred'))]. 기본은 없다(wf1–wf8)."""
+        return []
 
     # ------------------------------------------------------------ 저장
     def add(self, method, learner, placement, n, d, seed, lam, pred, E_used=np.nan, n_lab=0, nb_lab=0, flag="", sel_info="", **kw):
@@ -881,6 +1051,9 @@ class UnitBase:
             return None
         key = (method, learner, "1", placement, int(n), int(d), int(seed), float(lam))
         self.st.add(key, y, pred)
+        for st_x, fn in self.xstores:                                    # 3차 보강: 격자 안·사이(wf9, wf9x), W·I(wf10)
+            yy, pp = fn(y, pred)
+            st_x.add(key, yy, pp)
         if PRED_TRACE is not None:
             PRED_TRACE[(self.exp, self.name, int(self.c.split), self.variant) + key] = pred.copy()
         sse, cnt = self.st.get(key)
@@ -941,6 +1114,9 @@ class UnitBase:
                      n_stored_ml=int(n_ml), n_nonfinite_keys=int(self.n_bad), notes=self.notes, n_krige=int(self.n_krige),
                      krige_s=round(self.krige_s, 2), est_krige_s=round(self.est_krige, 2), n_kmeans=int(self.n_km), kmeans_s=round(self.km_s, 2),
                      est_kmeans_s=round(self.n_km * EST_KMEANS, 2))
+        if self.xstores:
+            stats["store_names"] = [self.st.target] + [st_x.target for st_x, _ in self.xstores]
+            return self.rows, [self.st] + [st_x for st_x, _ in self.xstores], stats
         return self.rows, self.st, stats
 
 
@@ -1573,6 +1749,168 @@ class T8Unit(TUnit):
         return self
 
 
+# ================================================================ 3차 보강(계획서 §7): 격자 안 분해(wf9, wf9x)와 기후 외삽(wf10)
+def grid_groups(sB, blkB):
+    """격자 묶음(계획서 §7 WF9): 채점 셀의 (√TDD(토양 도일) 값, 블록)이 같은 셀. √TDD 가 비유한인 셀은 혼자 묶음이다.
+    반환 (묶음 번호, 2셀 이상 묶음에 속한 셀의 마스크)."""
+    sB = np.asarray(sB, float); blkB = np.asarray(blkB).astype(str)
+    if not len(sB):
+        return np.zeros(0, np.int64), np.zeros(0, bool)
+    key = [f"{b}|{v:.12g}" if np.isfinite(v) else f"{b}|nan{i}" for i, (b, v) in enumerate(zip(blkB, sB))]
+    gid = pd.factorize(pd.Series(key))[0].astype(np.int64)
+    cnt = np.bincount(gid)
+    return gid, cnt[gid] >= 2
+
+
+def decomp_fns(gid, multi):
+    """격자 안·격자 사이 변환. within(y, p) = 2셀 이상 묶음 셀의 (y − ȳ_g, p − p̄_g), between(y, p) = 모든 셀의 (ȳ_g, p̄_g).
+    묶음이 블록 안에 있으므로 블록마다 총 SSE = 격자 안 SSE + 격자 사이 SSE 다."""
+    gid = np.asarray(gid, np.int64); multi = np.asarray(multi, bool)
+    G = int(gid.max()) + 1 if len(gid) else 0
+    cnt = np.maximum(np.bincount(gid, minlength=G).astype(float), 1.0)
+
+    def means(v):
+        return (np.bincount(gid, weights=np.asarray(v, float), minlength=G) / cnt)[gid]
+
+    def within(y, p):
+        return (np.asarray(y, float) - means(y))[multi], (np.asarray(p, float) - means(p))[multi]
+
+    def between(y, p):
+        return means(y), means(p)
+    return within, between
+
+
+class GridDecompMixin:
+    """총 저장소와 함께 격자 안(<대상>~w, 2셀 이상 묶음의 셀)·격자 사이(<대상>~b, 모든 셀) 저장소를 채운다(wf9, wf9x)."""
+
+    def _make_xstores(self):
+        c = self.c
+        gid, multi = grid_groups(c.sB, c.blkB)
+        t, m = self.name.split("|")
+        G = int(gid.max()) + 1 if len(gid) else 0
+        self.notes["grid"] = dict(n_groups=G, n_multi_groups=int(np.sum(np.bincount(gid, minlength=G) >= 2)) if G else 0,
+                                  n_multi_cells=int(multi.sum()), n_cells=int(len(gid)))
+        w_fn, b_fn = decomp_fns(gid, multi)
+        meta = dict(target=t, mode=c.mode, exp=self.exp, variant=self.variant)
+        out = []
+        if multi.any():
+            out.append((BlockStore(f"{t}~w|{m}", c.split, np.asarray(c.blkB)[multi], meta=dict(meta, part="within")), w_fn))
+        out.append((BlockStore(f"{t}~b|{m}", c.split, c.blkB, meta=dict(meta, part="between")), b_fn))
+        return out
+
+
+class R9Unit(GridDecompMixin, RUnit):
+    """wf9 지역 내(계획서 §7 WF9): WF6 와 같은 문맥·분할·추출·교차검증. 방법 P1, Pk, Pc(교차검증 k), R1(교차검증 λ, λ 0.25·0.5·1.0),
+    Re(교차검증 λ, λ 0.25), D0(catboost). 같은 예측을 총·격자 안·격자 사이 저장소에 함께 저장한다."""
+
+    def run(self):
+        c = self.c
+        for n, d in cells_for(self.a, "wf9", self.nA):
+            sel = self.draw(n, d); nl, nb = len(sel), self.nb(sel)
+            self.trace("select", sel, n=n, draw=str(d))
+            E1, E2 = self.coefs(sel)
+            self.physics(n, d, sel, E1, E2, which=("P1", "Pk", "Pc"))
+            lam = {m: self.lam_cv(m, LO, "x25", sel, n, d) for m in ("R1", "Re")}
+            a1A, a1B = E1 * c.sA[sel], E1 * c.sB
+            aeA, aeB = self.anchor_A("Re", E1, sel), self.anchor_B("Re", E1)
+            for seed in self.seeds:
+                (p,) = self.fit_direct(HI, "D0", sel, seed, n, d)
+                self.add("D0", HI, "cell", n, d, seed, 1.0, p, np.nan, nl, nb, flag=self.F.last_flag, nrow=nl)
+                (g,) = self.fit_resid(LO, "R1", sel, a1A, seed, n, d)
+                lcv, K, cf = lam["R1"]
+                self.emit("R1", LO, n, d, seed, a1B, g, E1, nl, nb, lcv, K, cf, self.F.last_flag, nrow=nl)
+                (g,) = self.fit_resid(LO, "Re", sel, aeA, seed, n, d)
+                fl = self.F.last_flag
+                g = np.asarray(g, float)
+                lcv, K, cf = lam["Re"]
+                self.add("Re", LO, "cell", n, d, seed, LAM_BASE, aeB + LAM_BASE * g, E1, nl, nb, flag=fl, nrow=nl)
+                self.add("Re", LO, "cell", n, d, seed, LAM_CV, aeB + lcv * g, E1, nl, nb, flag=fl, sel_info=f"lam={lcv}", cv_folds=K, cv_flag=cf,
+                         nrow=nl)
+        return self
+
+
+class T9Unit(GridDecompMixin, TUnit):
+    """wf9x 전이(계획서 §7 WF9): LG 문맥·원천·추출·seed. 방법 P0, P1, R1(λ 0.25·0.5·1.0), R2(λ 0.25·0.5·1.0), D0(catboost_lo, 원천 행 +
+    선택 라벨), D1(catboost_lo). n = 0 은 E_n = E0 이고 선택 라벨 없이 적합한다. 같은 예측을 총·격자 안·격자 사이 저장소에 함께 저장한다."""
+
+    def __init__(self, a, c, alias, dry=False):
+        super().__init__(a, c, alias, dry, exp="wf9x")
+
+    def run(self):
+        c = self.c
+        for n, d in cells_for(self.a, "wf9x", self.nA):
+            sel = self.draw(n, d); nl, nb = len(sel), self.nb(sel)
+            E1, _ = self.coefs(sel)
+            self.trace("coef", sel, n=n, draw=str(d))
+            a1A, a1B = E1 * c.sA[sel], E1 * c.sB
+            self.add("P1", "none", "cell", n, d, -1, 0.0, a1B, E1, nl, nb)
+            for seed in self.seeds:
+                (g1,) = self.fit(LO, "R1", lambda: self.rows_R(sel, a1A), self.nsrc + nl, seed, [c.XB], n, d, sel)
+                self.emit("R1", LO, n, d, seed, a1B, g1, E1, nl, nb, flag=self.F.last_flag, nrow=self.nsrc + nl)
+                (g2,) = self.fit(LO, "R2", lambda: self.rows_R(sel, a1A, seed, E1), self.nsrc + nl + self.n_ps, seed, [c.XB], n, d, sel)
+                self.emit("R2", LO, n, d, seed, a1B, g2, E1, nl, nb, flag=self.F.last_flag, nrow=self.nsrc + nl + self.n_ps)
+                (p0,) = self.fit(LO, "D0", lambda: self.rows_D(sel), self.nsrc + nl, seed, [c.XB], n, d, sel)
+                self.add("D0", LO, "cell", n, d, seed, 1.0, p0, np.nan, nl, nb, flag=self.F.last_flag, nrow=self.nsrc + nl)
+                (p1,) = self.fit(LO, "D1", lambda: self.rows_D(sel, seed, E1), self.nsrc + nl + self.n_ps, seed, [c.XB], n, d, sel)
+                self.add("D1", LO, "cell", n, d, seed, 1.0, p1, E1, nl, nb, flag=self.F.last_flag, nrow=self.nsrc + nl + self.n_ps)
+        return self
+
+
+class R10Unit(RUnit):
+    """wf10(계획서 §7 WF10): 블록 평균 √TDD 로 나눈 W(외삽 채점)·I(보간 채점). 같은 적합으로 W 와 I 를 따로 채점한다
+    (저장소 <대상>~<변형>W, <대상>~<변형>I. 총 저장소 <대상>~<변형> 은 W ∪ I). 방법 P1, P2, R1(교차검증 λ, λ 0.25·0.5·1.0),
+    R2(교차검증 λ, 고정 λ), D0(catboost 와 catboost_lo), D1(catboost_lo). 추출 seed 는 h40.draw_cells(대상, 'r10' + 변형 첫 글자, …)."""
+
+    def __init__(self, a, c, exp, variant="", dry=False):
+        if variant not in WF10_VARIANTS:
+            raise ValueError(f"wf10 변형은 {WF10_VARIANTS} 가운데 하나다: {variant}")
+        self._init_base(a, c, exp, f"{c.target}~{variant}|{c.mode}", variant, dry)
+        self._km: dict = {}
+        self._std = None
+        self._di = None
+        self.add("P0", "none", "cell", 0, 0, -1, 0.0, c.E0 * c.sB, c.E0, 0)
+
+    def _make_xstores(self):
+        c = self.c
+        mW = np.asarray(c.maskW, bool)
+        mI = ~mW
+        t, m = self.name.split("|")
+        meta = dict(target=c.target, mode=c.mode, exp=self.exp, variant=self.variant)
+        out = []
+        for part, mk in (("W", mW), ("I", mI)):
+            if mk.any():
+                out.append((BlockStore(f"{t}{part}|{m}", c.split, np.asarray(c.blkB)[mk], meta=dict(meta, part=part)),
+                            (lambda mk_: (lambda y, p: (np.asarray(y, float)[mk_], np.asarray(p, float)[mk_])))(mk)))
+        return out
+
+    def draw(self, n, d):
+        return H.draw_cells(self.c.target, "r10" + self.variant[0], self.c.split, n, d, self.nA)
+
+    def run(self):
+        c = self.c
+        for n, d in cells_for(self.a, "wf10", self.nA):
+            sel = self.draw(n, d); nl, nb = len(sel), self.nb(sel)
+            self.trace("select", sel, n=n, draw=str(d))
+            E1, E2 = self.coefs(sel)
+            self.physics(n, d, sel, E1, E2, which=("P1", "P2"))
+            lam = {m: self.lam_cv(m, LO, "x25", sel, n, d) for m in ("R1", "R2")}
+            a1A, a1B = E1 * c.sA[sel], E1 * c.sB
+            nps = int(round(R_PS * nl))
+            for seed in self.seeds:
+                for lr in (HI, LO):
+                    (p,) = self.fit_direct(lr, "D0", sel, seed, n, d)
+                    self.add("D0", lr, "cell", n, d, seed, 1.0, p, np.nan, nl, nb, flag=self.F.last_flag, nrow=nl)
+                (p,) = self.fit_direct(LO, "D1", sel, seed, n, d, pseudo_E=E1)
+                self.add("D1", LO, "cell", n, d, seed, 1.0, p, E1, nl, nb, flag=self.F.last_flag, nrow=nl + nps)
+                (g,) = self.fit_resid(LO, "R1", sel, a1A, seed, n, d)
+                lcv, K, cf = lam["R1"]
+                self.emit("R1", LO, n, d, seed, a1B, g, E1, nl, nb, lcv, K, cf, self.F.last_flag, nrow=nl)
+                (g,) = self.fit_resid(LO, "R2", sel, a1A, seed, n, d, pseudo_E=E1)
+                lcv, K, cf = lam["R2"]
+                self.emit("R2", LO, n, d, seed, a1B, g, E1, nl, nb, lcv, K, cf, self.F.last_flag, nrow=nl + nps)
+        return self
+
+
 # ================================================================ 조각 입출력
 def shard_base(a, exp, target, mode, split, variant=""):
     return a.SHARDS / (f"{exp_tag(a, exp)}__cpu__{target}__{mode}__s{int(split)}" + (f"__{variant}" if variant else ""))
@@ -1624,6 +1962,15 @@ def unit_cfg(a, exp, variant="", data_sha=""):
         d.update(draws=[WF7_DRAWS], methods=["P0", "P1", "Pe", "R1", "Re"], lam=LAM_BASE, re_src="y-anchor(E0)", zero_n=True)
     if exp == "wf8":
         d.update(draws=[WF8_DRAWS], methods=["P1", "R1"], lam=LAM_BASE, s4="wf2", dup="reuse_fit_store_all")
+    if exp == "wf9":                                                       # 3차 보강(계획서 §7)
+        d.update(draws=[WF9_DRAWS], clusters=list(CLUSTER_KS), krige=[KRIGE_K, KRIGE_MIN, VARIO_MAX_PTS, VARIO_NLAGS, VARIO_NRANGE],
+                 physics=["P1", "Pk", "Pc"], learners=dict(D0=HI, R1=LO, Re=LO), mode=MODE_R, grid_group="sqrt_tdd_soil|block", decomp=["w", "b"])
+    if exp == "wf9x":
+        d.update(draws=[WF9X_DRAWS], methods=["P0", "P1", "R1", "R2", "D0", "D1"], learner=LO, zero_n=True, grid_group="sqrt_tdd_soil|block",
+                 decomp=["w", "b"])
+    if exp == "wf10":
+        d.update(draws=[WF10_DRAWS], frac=WF10_FRAC, methods=["P1", "P2", "R1", "R2", "D0", "D1"], learners=dict(D0=[HI, LO], R1=LO, R2=LO, D1=LO),
+                 mode=MODE_R, draw_mode="r10+variant[0]", split_rule="block_mean_sqrt_tdd_soil, I = seed_of('wf10-I', target, variant, split)")
     return d
 
 
@@ -1659,7 +2006,7 @@ def write_shard(a, exp, target, mode, split, variant, c, rows, st, stats, elapse
     p["runs"].parent.mkdir(parents=True, exist_ok=True)
     tmp = p["runs"].with_name(p["runs"].name + f".tmp{os.getpid()}")
     pd.DataFrame(rows).to_csv(tmp, index=False); os.replace(tmp, p["runs"])
-    save_stores([st], p["npz"])
+    save_stores(st if isinstance(st, list) else [st], p["npz"])
     cfg = unit_cfg(a, exp, variant, data_sha(a, exp, target))
     unit = {**stats, **{k: v for k, v in c.meta.items() if not isinstance(v, (dict, list))}}
     unit.update(exp=exp, target=target, mode=mode, parent=c.parent, split=int(split), variant=variant, tag=exp_tag(a, exp), elapsed_s=round(elapsed, 1),
@@ -1693,7 +2040,14 @@ def enumerate_units(a):
             continue
         HA, D = get_data(a)
         for t in a.T[exp]:
-            keep, skip, _ = split_plan(D, t, splits_of(a, exp), split_info_of(a, D, exp, t) if exp == "wf6" else None)
+            if exp == "wf10":                                              # 변형(warm, cold)마다 분할 구조가 다르다
+                for v in a.VAR10:
+                    keep, skip, _ = wf10_plan(a, D, t, v)
+                    expected[(exp, t, MODE_R, v)] = keep
+                    skipped += [dict(exp=exp, target=t, mode=MODE_R, split=sp, variant=v, status=st_, **iv) for sp, st_, iv in skip]
+                    units += [(exp, t, MODE_R, sp, v) for sp in keep]
+                continue
+            keep, skip, _ = split_plan(D, t, splits_of(a, exp), split_info_of(a, D, exp, t) if exp in ("wf6", "wf9") else None)
             expected[(exp, t, MODE_R)] = keep
             skipped += [dict(exp=exp, target=t, mode=MODE_R, split=sp, status=st_, **v) for sp, st_, v in skip]
             variants = [""]
@@ -1714,19 +2068,26 @@ def cost_hint(a, u):
         nA = split_info_of(a, D, exp, tgt)[sp]["n_A"]
     except Exception:                                                     # noqa: BLE001
         nA = 1000
-    w = dict(wf1=4.0 if v != "x34" else 1.5, wf2=0.6 if v != "S6" else 1.2, wf3=2.0, wf4=6.0, wf6=3.0, wf7=1.5, wf8=0.4).get(exp, 1.0)
-    return w * (1.0 + nA / 2000.0) * (3.0 if exp in ("wf4", "wf7") else 1.0)
+    w = dict(wf1=4.0 if v != "x34" else 1.5, wf2=0.6 if v != "S6" else 1.2, wf3=2.0, wf4=6.0, wf6=3.0, wf7=1.5, wf8=0.4, wf9=2.5, wf9x=2.0,
+             wf10=2.5).get(exp, 1.0)
+    return w * (1.0 + nA / 2000.0) * (3.0 if exp in ("wf4", "wf7", "wf9x") else 1.0)
 
 
 def run_unit(a, exp, target, mode, split, variant="", dry=False, expected=None):
     t0 = time.time()
     if exp in TRANSFER_EXPS:
         c = build_tctx(a, target, mode, split)
-        U = T7Unit(a, c, target, dry) if exp == "wf7" else (T8Unit(a, c, target, variant, dry) if exp == "wf8" else TUnit(a, c, target, dry))
+        if exp == "wf9x":
+            U = T9Unit(a, c, target, dry)
+        else:
+            U = T7Unit(a, c, target, dry) if exp == "wf7" else (T8Unit(a, c, target, variant, dry) if exp == "wf8" else TUnit(a, c, target, dry))
+    elif exp == "wf10":
+        c = build_rctx10(a, target, split, variant)
+        U = R10Unit(a, c, exp, variant, dry)
     else:
-        info = split_info_of(a, get_data(a)[1], exp, target)[split] if exp == "wf6" else None
+        info = split_info_of(a, get_data(a)[1], exp, target)[split] if exp in ("wf6", "wf9") else None
         c = build_rctx(a, target, split, info)
-        U = RUnit(a, c, exp, variant, dry)
+        U = R9Unit(a, c, exp, variant, dry) if exp == "wf9" else RUnit(a, c, exp, variant, dry)
     if not dry:
         shard_paths(a, exp, target, mode, split, variant)["unit"].unlink(missing_ok=True)
     U.run()
@@ -1772,7 +2133,7 @@ def _worker_init(argv, expected_items, core_queue=None):
 
 def _worker_run(exp, target, mode, split, variant):
     t0 = time.time()
-    u = run_unit(_WA, exp, target, mode, split, variant, expected=_WEXP.get((exp, target, mode)))
+    u = run_unit(_WA, exp, target, mode, split, variant, expected=_WEXP.get((exp, target, mode, variant), _WEXP.get((exp, target, mode))))
     return {k: u.get(k) for k in ("exp", "target", "mode", "split", "variant", "n_A", "n_eval", "n_fit_total", "n_rows", "elapsed_s", "status")} | dict(
         wall_s=round(time.time() - t0, 1), n_fail=int(sum((u.get("fail") or {}).values())) + int(u.get("n_nonfinite_keys", 0)))
 
@@ -1886,12 +2247,18 @@ def check_cfg(a, exp, units):
     return dict(cfg_common=dict(hs), code_sha=dict(cs), n=len(units))
 
 
+def units_for(units, nm):
+    """저장소 이름 nm 에 해당하는 조각 unit. 3차 보강 조각은 unit 의 store_names(총, 격자 안·사이, W·I 저장소 이름)로 찾고,
+    그 밖은 '<대상>|<모드>' 로 찾는다(기존과 같다)."""
+    return [u for u in units if nm in (u.get("store_names") or [f"{u['target']}|{u['mode']}"])]
+
+
 def is_point_only(exp, name):
     """점 추정만 내는 대상. wf4 는 LG 의 러시아 C·그린란드와 LGD 의 NAtlantic~lic, wf7·wf8 은 LG 와 같이 러시아 C·그린란드다."""
     t = name.split("|")[0]
     if exp == "wf4":
         return bool((t in LGD_SPECS and LGD_SPECS[t][2]) or t in H.MAIN_POINT)
-    return bool(exp in ("wf7", "wf8") and t in H.MAIN_POINT)
+    return bool(exp in ("wf7", "wf8", "wf9x") and t in H.MAIN_POINT)
 
 
 def make_tm(name, by_split, units, nboot, point_only):
@@ -2472,7 +2839,249 @@ def tests_wf8(a, tms, runs):
     return T.frame()
 
 
-WF_HYP = ("WF1-a", "WF1-b", "WF1-c", "WF2-a", "WF2-b", "WF3-a", "WF4-a", "WF4-b", "WF4-c", "WF6-a", "WF6-b", "WF8-a", "WF8-b")
+WF_HYP = ("WF1-a", "WF1-b", "WF1-c", "WF2-a", "WF2-b", "WF3-a", "WF4-a", "WF4-b", "WF4-c", "WF6-a", "WF6-b", "WF8-a", "WF8-b",
+          "WF9-a", "WF9-c", "WF10-a", "WF10-b", "WF10-c")
+
+
+# ---------------------------------------------------------------- 3차 보강 판정(계획서 §7)
+def _rule3(res, kind="우세"):
+    """WF9-a·c, WF10-a·b 의 판정 문구. 모든 대비가 kind 면 지지, 반대 판정 없이 일부면 부분 지지, 반대 판정이 있거나 kind 가 없으면 기각.
+    판정할 수 없는 대비가 있고 kind 가 없으면 판정 불가."""
+    other = "열세" if kind == "우세" else "우세"
+    if not any(r is not None for _, r in res):
+        return "판정 불가(행 없음)"
+    vs = [_v(r) for _, r in res]
+    kv, km, _ = X.count_valid(res)
+    hit = [k for (k, _), v in zip(res, vs) if v == kind]
+    bad = [k for (k, _), v in zip(res, vs) if v == other]
+    if bad:
+        return f"기각: {other}인 대비가 있다({', '.join(bad)})"
+    if not hit:
+        return X.na_text(res) if kv < km else f"기각: {kind}인 대비가 없다"
+    if len(hit) == len(res):
+        return f"지지: 모든 대비가 {kind}({', '.join(hit)})"
+    return f"부분 지지: {kind}인 대비 = {', '.join(hit)}" + (f"; {X.na_text(res)}" if kv < km else "")
+
+
+def _ni_text(res, margin):
+    """WF10-c 비열등(두 가중 95 % CI 상한 < margin) 문구. 모두면 지지, 일부면 부분 지지, 없으면 기각."""
+    if not any(r is not None for _, r in res):
+        return "판정 불가(행 없음)"
+    ok, no, na = [], [], []
+    for k, r in res:
+        if not X.valid_row(r):
+            na.append(k)
+            continue
+        hi = np.nanmax([float(r.get("ci_hi", np.nan)), float(r.get("ci_hi_beq", np.nan))])
+        (ok if np.isfinite(hi) and hi < margin else no).append(k)
+    if len(ok) == len(res):
+        return f"지지: 모든 n 에서 두 가중 CI 상한 < {margin:g} cm({', '.join(ok)})"
+    if ok:
+        return f"부분 지지: 비열등인 n = {', '.join(ok)}" + (f"; 판정 불가 {', '.join(na)}" if na else "")
+    if na and not no:
+        return X.na_text(res)
+    return "기각: 비열등인 n 이 없다"
+
+
+def _plab(m, lr, lam):
+    return m if lr == "none" else _rlab(m, lr, lam)
+
+
+def tests_wf9(a, tms, runs):
+    """WF9-a(세 대상 층화 평균의 격자 안 RMSE: R1(교차검증 λ) − P1, n ∈ {500, 1,000, 전량}, 모두 우세 = 지지), WF9-b(대상별 격자 안 대비는 보조,
+    격자 사이 대비와 총 RMSE 대비는 서술)."""
+    T = X.TestBook(a, tms, None, None)
+    tg = list(a.T["wf9"])
+    wn = [f"{t}~w|{MODE_R}" for t in tg]
+    res = []
+    for n in a.G["wf9"]:
+        main = n == -1 or n >= 500
+        mr = T.contrast("WF9-a", "WF9-a", f"R1(λ cv)-P1[격자 안]|n{nlab(n)}", gk("R1", n, LO, LAM_CV), gk("P1", n, "none"), names=wn, primary=main,
+                        role="주" if main else "서술", aux3=False, n=n, lam=LAM_CV, part="w")
+        if main:
+            res.append((f"n={nlab(n)}", mr))
+    T.verdict("WF9-a", "WF9-a", _rule3(res, "우세"), X._fmt(res) + f" | 층화 대상 {', '.join(wn)}", used=res)
+    recipes = (("R1", LO, LAM_CV), ("R1", LO, LAM_BASE), ("Re", LO, LAM_CV), ("D0", HI, 1.0), ("Pk", "none", None), ("Pc", "none", None))
+    for t in tg:
+        for part, role, word in (("w", "보조", "격자 안"), ("b", "서술", "격자 사이"), ("", "서술", "총")):
+            nm = f"{t}~{part}|{MODE_R}" if part else f"{t}|{MODE_R}"
+            tm = tms.get(nm)
+            if tm is None:
+                continue
+            for n in ns_of(tm, "P1", "none"):
+                for m, lr, lam in recipes:
+                    T.single("WF9-b", f"WF9-b({word})", f"{_plab(m, lr, lam)}-P1[{word}]|n{nlab(n)}", nm,
+                             X.region_stats(tm, gk(m, n, lr, lam), gk("P1", n, "none")), role=role, n=n, method=m, learner=lr,
+                             lam=np.nan if lam is None else lam, part=part or "total")
+    for n in a.G["wf9"]:                                                 # 서술: 다른 레시피의 격자 안 층화 평균
+        for m, lr, lam in recipes[1:]:
+            T.contrast("WF9-b", "WF9-b(층화 평균, 서술)", f"{_plab(m, lr, lam)}-P1[격자 안]|n{nlab(n)}", gk(m, n, lr, lam), gk("P1", n, "none"),
+                       names=wn, primary=False, role="서술", aux3=False, n=n, method=m, part="w")
+    return T.frame()
+
+
+def tests_wf9x(a, tms, runs):
+    """WF9-c(주 4지역 층화 평균의 격자 안 RMSE: R1(λ 0.25) − P1, n ∈ {0, 10, 전량}, 모두 우세 = 지지), WF9-d(서술: 대상별·방법별 격자 안·사이 대비,
+    다른 레시피의 층화 평균)."""
+    T = X.TestBook(a, tms, None, None)
+    w4 = [f"{t}~w|x" for t in MAIN4]
+    res = []
+    for n in a.G["wf9x"]:
+        main = n in (0, 10, -1)
+        mr = T.contrast("WF9-c", "WF9-c", f"R1(λ 0.25)-P1[격자 안]|n{nlab(n)}", gk("R1", n, LO, LAM_BASE), gk("P1", n, "none"), names=w4,
+                        primary=main, role="주" if main else "서술", aux3=False, n=n, lam=LAM_BASE, part="w")
+        if main:
+            res.append((f"n={nlab(n)}", mr))
+    T.verdict("WF9-c", "WF9-c", _rule3(res, "우세"), X._fmt(res) + f" | 층화 대상 {', '.join(w4)}", used=res)
+    recipes = (("R1", LO, LAM_BASE), ("R1", LO, 1.0), ("R2", LO, LAM_BASE), ("D0", LO, 1.0), ("D1", LO, 1.0))
+    for nm in sorted(tms):
+        t, m = nm.split("|")
+        part = "w" if t.endswith("~w") else "b" if t.endswith("~b") else ""
+        word = {"w": "격자 안", "b": "격자 사이", "": "총"}[part]
+        tm = tms[nm]
+        for n in ns_of(tm, "P1", "none"):
+            for meth, lr, lam in recipes:
+                T.single("WF9-d", f"WF9-d({word})", f"{_plab(meth, lr, lam)}-P1[{word}]|n{nlab(n)}", nm,
+                         X.region_stats(tm, gk(meth, n, lr, lam), gk("P1", n, "none")), role="서술", n=n, method=meth, learner=lr, lam=lam,
+                         part=part or "total")
+    for n in a.G["wf9x"]:
+        for meth, lr, lam in recipes[1:]:
+            T.contrast("WF9-d", "WF9-d(층화 평균, 서술)", f"{_plab(meth, lr, lam)}-P1[격자 안]|n{nlab(n)}", gk(meth, n, lr, lam), gk("P1", n, "none"),
+                       names=w4, primary=False, role="서술", aux3=False, n=n, method=meth, part="w")
+    return T.frame()
+
+
+def region_ep(tmW, tmI, gA, gB):
+    """외삽 손실 EP = Δ_W(A − B) − Δ_I(A − B). W·I 는 블록이 겹치지 않고 재표집이 서로 독립(저장소 이름별 seed)이라 두 분포를 같은 번호끼리 뺀다.
+    rmse_A·rmse_B 자리에는 Δ_W·Δ_I 를 둔다(h42.region_dd 와 같은 형식)."""
+    if tmW is None or tmI is None:
+        return None
+    w, i = X.region_stats(tmW, gA, gB), X.region_stats(tmI, gA, gB)
+    if w is None or i is None:
+        return None
+    ok = bool(w["ok"] and i["ok"])
+
+    def sub(k):
+        return (w[k] - i[k]) if (ok and w[k] is not None and i[k] is not None and len(w[k]) == len(i[k])) else None
+    return dict(delta=w["delta"] - i["delta"], delta_beq=w["delta_beq"] - i["delta_beq"], rmse_A=w["delta"], rmse_B=i["delta"],
+                n_splits=min(w["n_splits"], i["n_splits"]), n_splits_expected=max(w["n_splits_expected"], i["n_splits_expected"]),
+                n_blocks_min=min(w["n_blocks_min"], i["n_blocks_min"]), ok=ok, dist=sub("dist"), dist_beq=sub("dist_beq"), cdist=sub("cdist"),
+                cdist_beq=sub("cdist_beq"))
+
+
+def ep_contrast(T, test, item, label, var, targets, gA, gB, primary=True, role="주", **kw):
+    """외삽 손실의 대상별 행과 층화 평균 행(h42.pool_rows). 층화 평균의 이름 = <대상>~<변형>|r(W ∪ I 저장소, 효과 크기 표기용)."""
+    names = [f"{t}~{var}|{MODE_R}" for t in targets]
+    per = {}
+    for t, nm in zip(targets, names):
+        s_ = region_ep(T.tms.get(f"{t}~{var}W|{MODE_R}"), T.tms.get(f"{t}~{var}I|{MODE_R}"), gA, gB)
+        if s_ is not None:
+            per[nm] = s_
+    rows = X.pool_rows(per, names, T.a, label)
+    if not rows:
+        T._missing(test, item, label, "MEAN", role, True, kw)
+        return None
+    return T._emit(rows, test, item, label, names, primary, True, role, kind="외삽 손실", **kw)
+
+
+def tests_wf10(a, tms, runs):
+    """WF10-a(warm: EP(D0, catboost) 열세), WF10-b(warm: EP(R1 교차검증 λ) − EP(D0) = Δ_W(R1 − D0) − Δ_I(R1 − D0) 우세), WF10-c(warm: W 에서
+    R1(교차검증 λ) − P1 의 두 가중 CI 상한 < 0.5 cm). 두 대상 층화 평균, n ∈ {100, 전량}. WF10-d 는 cold 변형과 다른 레시피의 서술."""
+    T = X.TestBook(a, tms, None, None)
+    tg = list(a.T["wf10"])
+    others = (("D0", LO, 1.0), ("D1", LO, 1.0), ("R2", LO, LAM_CV), ("R1", LO, LAM_BASE), ("R1", LO, 1.0), ("P2", "none", None))
+    for var in a.VAR10:
+        warm = var == "warm"
+        res = {"a": [], "b": [], "c": []}
+        for n in a.G["wf10"]:
+            prim = warm and n in (100, -1)
+            role = "주" if prim else "서술"
+            ids = (("WF10-a", "WF10-b", "WF10-c") if warm else ("WF10-d", "WF10-d", "WF10-d"))
+            ra = ep_contrast(T, ids[0], f"WF10-a({var})", f"EP[D0(catboost)-P1]|{var}|n{nlab(n)}", var, tg, gk("D0", n, HI, 1.0), gk("P1", n, "none"),
+                             primary=prim, role=role, n=n, variant=var)
+            rb = ep_contrast(T, ids[1], f"WF10-b({var})", f"EP[R1(λ cv)-D0(catboost)]|{var}|n{nlab(n)}", var, tg, gk("R1", n, LO, LAM_CV),
+                             gk("D0", n, HI, 1.0), primary=prim, role=role, n=n, variant=var)
+            rc = T.contrast(ids[2], f"WF10-c({var})", f"R1(λ cv)-P1[W]|{var}|n{nlab(n)}", gk("R1", n, LO, LAM_CV), gk("P1", n, "none"),
+                            names=[f"{t}~{var}W|{MODE_R}" for t in tg], primary=prim, role=role, aux3=False, n=n, variant=var, part="W")
+            if prim:
+                res["a"].append((f"n={nlab(n)}", ra)); res["b"].append((f"n={nlab(n)}", rb)); res["c"].append((f"n={nlab(n)}", rc))
+            for part in ("W", "I"):                                       # 서술: W·I 각각의 Δ(물리식 기준)
+                for m, lr, lam in (("R1", LO, LAM_CV), ("D0", HI, 1.0)) + others:
+                    T.contrast("WF10-d", f"WF10-d(Δ_{part}, {var})", f"{_plab(m, lr, lam)}-P1[{part}]|{var}|n{nlab(n)}", gk(m, n, lr, lam),
+                               gk("P1", n, "none"), names=[f"{t}~{var}{part}|{MODE_R}" for t in tg], primary=False, role="서술", aux3=False, n=n,
+                               variant=var, part=part, method=m)
+            for m, lr, lam in others:                                      # 서술: 다른 레시피의 외삽 손실
+                ep_contrast(T, "WF10-d", f"WF10-d(EP, {var})", f"EP[{_plab(m, lr, lam)}-P1]|{var}|n{nlab(n)}", var, tg, gk(m, n, lr, lam),
+                            gk("P1", n, "none"), primary=False, role="서술", n=n, variant=var, method=m)
+        if warm:
+            T.verdict("WF10-a", "WF10-a", _rule3(res["a"], "열세"), X._fmt(res["a"]), used=res["a"])
+            T.verdict("WF10-b", "WF10-b", _rule3(res["b"], "우세"), X._fmt(res["b"]), used=res["b"])
+            T.verdict("WF10-c", "WF10-c", _ni_text(res["c"], a.ni_margin), X._fmt(res["c"]), used=res["c"])
+        else:
+            txt = "서술(cold 변형, 판정어 대신 4분 판정): " + "; ".join(f"{h} " + ", ".join(f"{k} {_v(r)}" for k, r in res_)
+                                                         for h, res_ in (("EP(D0)", res["a"]), ("EP(R1) − EP(D0)", res["b"]),
+                                                                         ("Δ_W(R1 − P1)", res["c"])))
+            T.verdict("WF10-d", "WF10-d(cold)", txt, "", role="서술", used=[])
+    return T.frame()
+
+
+def store_rmse_table(tms_by):
+    """3차 보강 저장소별 RMSE 서술 표: (실험, 저장소, 방법, 학습기, 배치, n, λ)마다 분할 안에서 키(추출·seed) 평균 MSE 를 구하고 분할 평균한 값의
+    제곱근, 분할 평균 SSE 와 셀 수. WF9-d 의 분해 표와 WF10 의 W·I RMSE 에 쓴다."""
+    rows = []
+    for exp, tms in tms_by.items():
+        for nm, tm in tms.items():
+            acc: dict = {}
+            for sp, st in tm.used.items():
+                per: dict = {}
+                for k in st.keys:
+                    s_, c_ = st.get(k)
+                    tot_c = float(c_.sum())
+                    if tot_c > 0:
+                        per.setdefault((k[0], k[1], str(k[3]), int(k[4]), float(k[7])), []).append((float(s_.sum()), tot_c))
+                for g, v in per.items():
+                    acc.setdefault(g, []).append((float(np.mean([q[0] for q in v])), float(np.mean([q[1] for q in v]))))
+            for (m, lr, pl, n, lam), v in acc.items():
+                sse = float(np.mean([q[0] for q in v])); cnt = float(np.mean([q[1] for q in v]))
+                mse = float(np.mean([q[0] / q[1] for q in v]))
+                rows.append(dict(exp=exp, store=nm, method=m, learner=lr, placement=pl, n=n, lam=lam, rmse=float(np.sqrt(mse)), mse=mse, sse_mean=sse,
+                                 cells_mean=cnt, n_splits=len(v)))
+    return pd.DataFrame(rows)
+
+
+def decomp_table(rt):
+    """WF9-d 서술: 대상·방법·n 별 총·격자 안·격자 사이 RMSE, 격자 안 설명 비율 1 − MSE_w(M)/MSE_w(P1), 총 SSE 가운데 격자 안 SSE 비율,
+    총 SSE 차(P1 − M) 가운데 격자 안 성분 비율. 분할 평균 SSE 로 계산한다(판정에 쓰지 않는다)."""
+    if not len(rt):
+        return pd.DataFrame()
+    q = rt[rt.exp.isin(["wf9", "wf9x"])].copy()
+    if not len(q):
+        return pd.DataFrame()
+    q["base"] = q.store.str.replace(r"~[wb]\|", "|", regex=True)
+    q["part"] = np.where(q.store.str.contains(r"~w\|", regex=True), "w", np.where(q.store.str.contains(r"~b\|", regex=True), "b", "tot"))
+    key = ["exp", "base", "method", "learner", "placement", "n", "lam"]
+    wide = q.pivot_table(index=key, columns="part", values=["rmse", "sse_mean", "cells_mean"], aggfunc="first")
+    wide.columns = [f"{a_}_{b_}" for a_, b_ in wide.columns]
+    wide = wide.reset_index()
+    ref = wide[(wide.method == "P1") & (wide.learner == "none")].set_index(["exp", "base", "placement", "n"])
+    out = []
+    for r in wide.to_dict("records"):
+        k = (r["exp"], r["base"], r["placement"], r["n"])
+        if k not in ref.index:
+            continue
+        p1 = ref.loc[k]
+        p1 = p1.iloc[0] if isinstance(p1, pd.DataFrame) else p1
+        g = lambda d, c_: float(d.get(c_, np.nan)) if hasattr(d, "get") else np.nan   # noqa: E731
+        mse_w, mse_w0 = g(r, "rmse_w") ** 2, g(p1, "rmse_w") ** 2
+        sw, sb, st_ = g(r, "sse_mean_w"), g(r, "sse_mean_b"), g(r, "sse_mean_tot")
+        sw0, st0 = g(p1, "sse_mean_w"), g(p1, "sse_mean_tot")
+        den = st0 - st_
+        out.append(dict(r, expl_within=1.0 - mse_w / mse_w0 if mse_w0 > 0 else np.nan, share_within_of_sse=sw / st_ if st_ > 0 else np.nan,
+                        gain_total_sse=den, share_gain_within=(sw0 - sw) / den if np.isfinite(den) and abs(den) > 1e-9 else np.nan,
+                        check_tot_eq_w_plus_b=(st_ - (np.nan_to_num(sw) + sb)) if np.isfinite(st_) and np.isfinite(sb) else np.nan))
+    return pd.DataFrame(out)
+
+
 
 
 def git_commit():
@@ -2531,8 +3140,7 @@ def summarize_round(a, rnd, exps, tag, elapsed=0.0, skipped=None):
         by_name: dict = {}
         for (nm, sp), st in stores.items():
             by_name.setdefault(nm, {})[int(sp)] = st
-        tms = {nm: make_tm(nm, bs, [u for u in units if f"{u['target']}|{u['mode']}" == nm], a.nboot, is_point_only(exp, nm))
-               for nm, bs in sorted(by_name.items())}
+        tms = {nm: make_tm(nm, bs, units_for(units, nm), a.nboot, is_point_only(exp, nm)) for nm, bs in sorted(by_name.items())}
         tms_by[exp] = tms
         for nm, tm in tms.items():
             t, m = nm.split("|")
@@ -2540,14 +3148,14 @@ def summarize_round(a, rnd, exps, tag, elapsed=0.0, skipped=None):
             tasks.append((exp, nm, tm, rs))
         units_all += units; runs_all.append(runs)
     if not tasks:
-        print(f"[summarize] {'1차(wf1–wf4)' if rnd == 'r1' else '2차 보강(wf6–wf8)'}: 조각이 하나도 없다", flush=True)
+        print(f"[summarize] {dict(r1='1차(wf1–wf4)', r2='2차 보강(wf6–wf8)', r3='3차 보강(wf9, wf9x, wf10)')[rnd]}: 조각이 하나도 없다", flush=True)
         return None
     curves = [c_ for c_ in build_curves(a, tasks) if len(c_)]
     curve = pd.concat(curves, ignore_index=True) if curves else pd.DataFrame()
     if len(curve):
         curve = curve.sort_values(["exp", "target", "mode", "method", "learner", "placement", "lam", "n"]).reset_index(drop=True)
     runs = pd.concat([r_ for r_ in runs_all if len(r_)], ignore_index=True) if any(len(r_) for r_ in runs_all) else pd.DataFrame()
-    fn = dict(wf1=tests_wf1, wf2=tests_wf2, wf3=tests_wf3, wf6=tests_wf6, wf7=tests_wf7, wf8=tests_wf8)
+    fn = dict(wf1=tests_wf1, wf2=tests_wf2, wf3=tests_wf3, wf6=tests_wf6, wf7=tests_wf7, wf8=tests_wf8, wf9=tests_wf9, wf9x=tests_wf9x, wf10=tests_wf10)
     for exp, tms in tms_by.items():
         rx = runs[runs.exp == exp] if len(runs) else runs
         try:
@@ -2575,24 +3183,36 @@ def summarize_round(a, rnd, exps, tag, elapsed=0.0, skipped=None):
     tg.to_csv(O / f"{tag}_targets.csv", index=False)
     tt.to_csv(O / f"{tag}_timing.csv", index=False)
     failed.to_csv(O / f"{tag}_failed.csv", index=False)
+    extra_tables = {}
+    if rnd == "r3":                                                       # 3차 보강 서술 표(판정에 쓰지 않는다)
+        rt = store_rmse_table(tms_by)
+        dt = decomp_table(rt)
+        rt.to_csv(O / f"{tag}_rmse.csv", index=False)
+        dt.to_csv(O / f"{tag}_decomp.csv", index=False)
+        extra_tables = dict(rmse=int(len(rt)), decomp=int(len(dt)))
     choices = {}
     if len(runs):
-        ch = ((("wf1", "Pbest"), ("wf1", "Pc"), ("wf3", "Pc"), ("wf1", "R1"), ("wf1", "R2"), ("wf1", "Re"), ("wf1", "R1@x34"), ("wf4", "W")) if rnd == "r1"
-              else (("wf6", "Pbest"), ("wf6", "Pc"), ("wf6", "R1"), ("wf6", "R2"), ("wf6", "Re")))
+        ch = {"r1": (("wf1", "Pbest"), ("wf1", "Pc"), ("wf3", "Pc"), ("wf1", "R1"), ("wf1", "R2"), ("wf1", "Re"), ("wf1", "R1@x34"), ("wf4", "W")),
+              "r2": (("wf6", "Pbest"), ("wf6", "Pc"), ("wf6", "R1"), ("wf6", "R2"), ("wf6", "Re")),
+              "r3": (("wf9", "Pc"), ("wf9", "R1"), ("wf9", "Re"), ("wf10", "R1"), ("wf10", "R2"))}[rnd]
         for exp, m in ch:
             q = runs[runs.exp == exp]
             if len(q):
                 choices[f"{exp}|{m}"] = choice_freq(q, m)
     r2 = rnd == "r2"
-    keep = exps if r2 else EXPS_R1                                         # meta 의 대상·격자 = 그 차수의 실험(1차는 기존과 같이 wf1–wf4 전부)
-    meta = dict(stage="H54/WF2b" if r2 else "H54/WF", plan="docs/EXPERIMENT_PLAN_WF_2026-10-01.md" + (" §6" if r2 else ""),
+    r3 = rnd == "r3"
+    keep = EXPS_R1 if rnd == "r1" else exps                                # meta 의 대상·격자 = 그 차수의 실험(1차는 기존과 같이 wf1–wf4 전부)
+    meta = dict(stage={"r1": "H54/WF", "r2": "H54/WF2b", "r3": "H54/WF3b"}[rnd],
+                plan="docs/EXPERIMENT_PLAN_WF_2026-10-01.md" + {"r1": "", "r2": " §6", "r3": " §7"}[rnd],
                 plan_commit=PLAN_COMMIT[rnd], git_commit=git_commit(), tag=tag,
                 code_sha=code_sha(), code_sha_h40=H.code_sha(), code_sha_h42=X.code_sha_x(), exps=list(tms_by),
                 targets={k: [f"{t}:{m}" for t, m in v] if k in TRANSFER_EXPS else list(v) for k, v in a.T.items() if k in keep})
-    if not r2:
+    if rnd == "r1":
         meta.update(x34_targets=a.X34)
-    meta.update(strategies=a.STRAT8 if r2 else a.STRAT, grids={k: list(v) for k, v in a.G.items() if k in keep},
-                splits=dict(wf6=a.SPLITS6, wf7=a.SPLITS, wf8=a.SPLITS) if r2 else a.SPLITS, seeds=a.SEEDS, lams=list(LAMS), nboot=int(a.nboot),
+    splits_meta = (dict(wf6=a.SPLITS6, wf7=a.SPLITS, wf8=a.SPLITS) if r2 else
+                   dict(wf9=a.SPLITS9, wf9x=a.SPLITS, wf10=a.SPLITS10, wf10_variants=a.VAR10) if r3 else a.SPLITS)
+    meta.update(strategies=a.STRAT8 if r2 else ([] if r3 else a.STRAT), grids={k: list(v) for k, v in a.G.items() if k in keep},
+                splits=splits_meta, seeds=a.SEEDS, lams=list(LAMS), nboot=int(a.nboot), extra_tables=extra_tables,
                 nboot_capped=getattr(a, "nboot_asked", None), delta_eq=a.delta_eq, ni_margin=a.ni_margin, n_units=len(units_all),
                 n_fit_total=int(sum(int(u.get("n_fit_total", 0)) for u in units_all)), unit_elapsed_s_sum=float(sum(u.get("elapsed_s", 0) for u in units_all)),
                 elapsed_s=round(float(elapsed), 1), summarize_s=round(time.time() - t0, 1), n_curve=int(len(curve)), n_tests=int(len(tests)),
@@ -2602,7 +3222,7 @@ def summarize_round(a, rnd, exps, tag, elapsed=0.0, skipped=None):
                            ci="h40.contrast(h4_common.boot_delta_blocks): 분할 안 채점 블록 재표집, 방법·추출·seed 공통 인덱스, 분할 분포 평균",
                            mean="h40.strat_mean·h42.pool_rows(층화 평균, CI 풀 = 유효 분할 ≥ 1 이고 채점 블록 합집합 ≥ 8)",
                            holm="h42.TestBook.frame: 항목(가설)마다 주 대비의 양측 부트스트랩 p 에 Holm(보조 열). WF4-a 는 p_ni 에 따로 holm_p_ni"),
-                implementation=IMPL_NOTES2 if r2 else IMPL_NOTES)
+                implementation={"r1": IMPL_NOTES, "r2": IMPL_NOTES2, "r3": IMPL_NOTES3}[rnd])
     (O / f"{tag}_meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1, default=float))
     print(f"[summarize] 실험 {list(tms_by)} · 조각 {len(units_all)} · runs {len(runs):,} · curve {len(curve):,} · tests {len(tests):,} · "
           f"{time.time() - t0:.0f}s → {O}/{tag}_*", flush=True)
@@ -2647,6 +3267,26 @@ IMPL_NOTES2 = {
                 "WF7-a·b 방향 중립 서술(주 4지역 층화 평균, 확인적 가설 아님). WF8-a 레나·캐나다 n 40 R1 의 S4 − S1 우세 지역 ≥ 1. "
                 "WF8-b 다섯 대상 n 10 R1 의 S2·S4 − S1 에 열세가 없으면 지지",
     "tables": "2차 보강 표는 <tag>2b_*(1차 <tag>_* 와 따로). 조각 이름 <tag>{6,7,8}__cpu__<대상>__<모드>__s<분할>[__<전략>]",
+}
+
+
+IMPL_NOTES3 = {
+    "wf9_grid": "격자 묶음 = 채점 셀의 (√TDD(토양 도일) 값을 유효숫자 12자리로 적은 문자열, 블록). 비유한 √TDD 셀은 혼자 묶음. "
+                "격자 안 저장소(<대상>~w) = 2셀 이상 묶음 셀의 (y − ȳ_g, ŷ − ŷ̄_g), 격자 사이 저장소(<대상>~b) = 모든 셀의 (ȳ_g, ŷ̄_g). "
+                "블록마다 총 SSE = 격자 안 SSE + 격자 사이 SSE",
+    "wf9_inregion": "WF6 와 같은 문맥·분할(1–25, split_structure_ext)·추출(3, 전량 1)·교차검증. 방법 P1, Pk, Pc(교차검증 k), R1(교차검증 λ, λ 0.25·0.5·1.0), "
+                    "Re(교차검증 λ, λ 0.25), D0(catboost). R2, P2, Pbest 는 뺐다",
+    "wf9x": "LG 문맥(h40.build_ctx)·원천·추출(5, n 0·전량 1)·seed. 방법 P0, P1, R1·R2(λ 0.25·0.5·1.0, 원천 행 + 선택 라벨, R2 는 유사라벨 행 포함), "
+            "D0(catboost_lo, 원천 행 + 선택 라벨), D1(catboost_lo, 유사라벨 행 포함). n = 0 은 E_n = E0",
+    "wf10_split": "블록 평균 √TDD(유한 셀의 셀 수 가중). warm 은 큰 순, cold 는 작은 순(동률 블록 이름)으로 대상 셀 25 % 이상까지 W, 나머지를 "
+                  "seed_of('wf10-I', 대상, 변형, 분할) 순열로 25 % 이상까지 I, 나머지 A. 앞선 분할과 I 블록 집합이 같으면 중복, W·I 채점 블록 2개 미만이면 무효",
+    "wf10_methods": "P1, P2, R1(교차검증 λ, λ 0.25·0.5·1.0), R2(교차검증 λ, 고정 λ), D0(catboost, catboost_lo), D1(catboost_lo). 같은 적합으로 W·I 를 "
+                    "따로 채점(저장소 <대상>~<변형>W·I, 총 <대상>~<변형>). 추출 seed = h40.draw_cells(대상, 'r10' + 변형 첫 글자, 분할, n, 추출)",
+    "wf10_ep": "EP = Δ_W − Δ_I. W·I 의 재표집은 저장소 이름별 seed 로 독립이고 두 분포를 같은 번호끼리 뺀다. 층화 평균은 h42.pool_rows",
+    "verdicts": "WF9-a(세 대상 격자 안 R1(교차검증 λ) − P1, n 500·1,000·전량), WF9-c(주 4지역 격자 안 R1(λ 0.25) − P1, n 0·10·전량): 모두 우세 지지, "
+                "열세 없이 일부 우세 부분 지지, 열세 또는 우세 없음 기각. WF10-a(EP(D0 catboost) 열세), WF10-b(EP(R1 교차검증 λ) − EP(D0) 우세), "
+                "WF10-c(W 의 R1 − P1 두 가중 CI 상한 < 0.5 cm): warm, 두 대상 층화 평균, n 100·전량",
+    "tables": "3차 보강 표는 <tag>3b_*(curve, tests, meta, targets, timing, failed, rmse, decomp). 조각 이름 <tag>{9,9x,10}__cpu__<대상>__<모드>__s<분할>[__<변형>]",
 }
 
 
@@ -2720,7 +3360,7 @@ def count_only(a, units, skipped):
             continue
         h = float(q.est_total_s.sum()) / 3600
         hx = float(q.est_total_s.max()) / 3600
-        print(f"[count-only] {'1차' if rnd == 'r1' else '2차 보강'} {exps}: 단위 {len(q)} · 적합 {int(q.fit_total.sum()):,} · 크리깅 {int(q.n_krige.sum()):,} · "
+        print(f"[count-only] {dict(r1='1차', r2='2차 보강', r3='3차 보강')[rnd]} {exps}: 단위 {len(q)} · 적합 {int(q.fit_total.sum()):,} · 크리깅 {int(q.n_krige.sum()):,} · "
               f"추정 누적 {h:.2f} CPU-h · 실측 비 {RESCALE_RATIO} 적용 {h * RESCALE_RATIO:.2f} CPU-h · 워커 22개 약 {h * RESCALE_RATIO / 22:.2f} h · "
               f"가장 긴 단위 {hx:.2f} h(비 적용 {hx * RESCALE_RATIO:.2f} h) → {tag}_count.csv", flush=True)
     if skipped:

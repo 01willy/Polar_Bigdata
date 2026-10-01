@@ -24,6 +24,15 @@
 (p) 1차(wf1–wf4)의 설정 해시, 공통 해시, 조각 이름, 기본 대상·격자가 2차 보강 추가 전의 값(커밋 1b42b4d 의 하네스)과 같다.
 (q) [HEAVY] 합성 조각으로 2차 보강의 집계(wf2b_* 표, WF6–WF8 판정 행)가 끝까지 돌고 1차 표를 쓰지 않는다.
 (r) --exp 별칭, 차수별 표 이름, 2차 보강의 기본 대상(wf7 = LG 27)과 n = 0 규칙.
+3차 보강(WF9·WF10)
+(s) 격자 분해: 블록마다 총 SSE = 격자 안 SSE + 격자 사이 SSE, 묶음 안 상수 예측(P1)의 격자 안 SSE = 묶음 안 실측 제곱합, 혼자 묶음은 격자 안에서 빠진다.
+(t) wf10 분할: W 는 블록 평균 √TDD 의 가장 따뜻한(cold 는 가장 추운) 블록이고 셀 25 % 이상, W·I·A 는 겹치지 않고 대상 셀을 덮는다.
+    W 는 분할 사이에 같고 I 는 분할마다 다르며 같은 분할은 결정적이다.
+(u) wf9 지역 내 단위(R9Unit): 세 저장소(총, ~w, ~b)의 키가 같고 분해 항등식이 모든 키에서 성립한다. 방법 구성과 누설 점검(선택 밖 라벨을 바꿔도 예측이 같다).
+(v) wf9x 전이 단위(T9Unit): n = 0 을 포함하고 R1·R2·D0·D1 키가 있으며 분해 항등식이 성립한다.
+(w) wf10 단위(R10Unit): W·I 저장소는 채점 셀을 나눈 것이고 SSE 의 합이 총 저장소와 같다. 외삽 손실 EP = Δ_W − Δ_I(점 추정과 분포).
+(x) [HEAVY] 합성 조각으로 3차 집계(wf3b_* 표, WF9·WF10 판정 행, 서술 표)가 끝까지 돌고 1·2차 표를 쓰지 않는다.
+(y) --exp wf9,wf9x,wf10 의 차수(r3)와 표 이름, 기본 실행 목록(1·2차)은 그대로이고, 스모크·사전 점검 설정.
 실행: CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=2 nice -n 10 taskset -c <코어 4개> python3 -m pytest -q tests/test_h54_workflow.py
 (CatBoost 는 thread_count 밖의 고정 비용 부분도 여러 스레드로 돌린다. 공유 서버에서는 taskset 으로 코어를 묶는다)
 """
@@ -768,3 +777,241 @@ def test_r_cli_rounds_and_zero_n():
     assert {n for n, _ in W.cells_for(b, "wf6", 600)} == {200, 500, -1} and sum(1 for n, _ in W.cells_for(b, "wf6", 600) if n == 200) == 3
     s = W.parse_args(["--smoke", "--exp", "wf6,wf7,wf8"])
     assert s.SPLITS6 == [6] and s.TAG2 == "wf2b_smoke" and W.exp_tag(s, "wf7") == "wf7_smoke"
+
+
+# ---------------------------------------------------------------- (s) 격자 분해 항등식
+def test_s_grid_decomposition_identity():
+    rng = np.random.RandomState(3)
+    n = 400
+    blk = 100 + rng.randint(0, 12, n)
+    sv = np.round(rng.choice([25.0, 27.5, 30.25, 33.0, 36.5], n) + 0.0, 6)
+    sv[:3] = np.nan                                                       # 비유한 √TDD 는 혼자 묶음
+    y = rng.uniform(20, 120, n)
+    gid, multi = W.grid_groups(sv, blk)
+    assert len(gid) == n and not multi[:3].any(), "비유한 √TDD 셀은 혼자 묶음이라 격자 안에서 빠진다"
+    within, between = W.decomp_fns(gid, multi)
+    for pred in (rng.uniform(20, 120, n), np.where(np.isfinite(sv), 1.5 * np.nan_to_num(sv), 50.0)):
+        st_t = H.BlockStore("T|r", 1, blk); st_w = H.BlockStore("T~w|r", 1, blk[multi]); st_b = H.BlockStore("T~b|r", 1, blk)
+        st_t.add(("k",), y, pred)
+        yw, pw = within(y, pred); st_w.add(("k",), yw, pw)
+        yb, pb = between(y, pred); st_b.add(("k",), yb, pb)
+        tot = dict(zip(st_t.blocks, st_t.get(("k",))[0])); wi = dict(zip(st_w.blocks, st_w.get(("k",))[0])); be = dict(zip(st_b.blocks, st_b.get(("k",))[0]))
+        for b in tot:
+            assert np.isclose(tot[b], wi.get(b, 0.0) + be[b], rtol=1e-10, atol=1e-8), f"블록 {b}: 총 SSE ≠ 격자 안 + 격자 사이"
+    const = np.zeros(n)                                                   # 묶음 안 상수 예측: 격자 안 SSE = 묶음 안 실측 제곱합
+    for g in np.unique(gid):
+        const[gid == g] = rng.uniform(0, 100)
+    yw, pw = within(y, const)
+    assert np.allclose(pw, 0.0)
+    ss = sum(float(np.sum((y[(gid == g)] - y[(gid == g)].mean()) ** 2)) for g in np.unique(gid) if (gid == g).sum() >= 2)
+    assert np.isclose(float(np.sum((yw - pw) ** 2)), ss)
+
+
+# ---------------------------------------------------------------- (t) wf10 분할
+def _wf10_D(n_blocks=24, cells=10, seed=0):
+    import pandas as pd
+    from types import SimpleNamespace
+    rng = np.random.RandomState(seed)
+    blk = np.repeat(np.arange(n_blocks), cells)
+    s_b = rng.uniform(20, 45, n_blocks)
+    sv = s_b[blk] + 0.3 * rng.randn(len(blk))
+    sv[5] = np.nan
+    df = pd.DataFrame({"block": blk, "s": sv, "alt_cm": rng.uniform(30, 120, len(blk)), "cci_alt": 50.0, "e5_sqrt_tdd_soil": sv})
+    idx = np.arange(len(df))
+    return SimpleNamespace(df=df, target_idx=lambda t: idx), s_b
+
+
+def test_t_wf10_split_rules():
+    D, _ = _wf10_D()
+    df = D.df
+    N = len(df)
+    bm = df.groupby("block").s.mean()
+    for var in W.WF10_VARIANTS:
+        outs = [W.wf10_split(D, "T", var, k) for k in (1, 2, 3)]
+        again = W.wf10_split(D, "T", var, 2)
+        assert all(np.array_equal(outs[1][k_], again[k_]) for k_ in ("A", "W", "I")), "같은 분할이 결정적이지 않다"
+        for o in outs:
+            A_, W_, I_ = set(o["A"].tolist()), set(o["W"].tolist()), set(o["I"].tolist())
+            assert not (A_ & W_) and not (A_ & I_) and not (W_ & I_) and len(A_ | W_ | I_) == N, "W·I·A 가 겹치거나 대상 셀을 덮지 않는다"
+            assert len(W_) >= W.WF10_FRAC * N and len(I_) >= W.WF10_FRAC * N
+            wb = {int(b) for b in o["W_blocks"]}
+            rest = [int(b) for b in bm.index if int(b) not in wb]
+            if var == "warm":
+                assert min(bm[list(wb)]) >= max(bm[rest]) - 1e-12, "W 가 가장 따뜻한 블록이 아니다"
+            else:
+                assert max(bm[list(wb)]) <= min(bm[rest]) + 1e-12, "W 가 가장 추운 블록이 아니다"
+            wb_less = sorted(wb, key=lambda b: (-bm[b] if var == "warm" else bm[b]))[:-1]   # 마지막 블록을 빼면 25 % 미만(최소 집합)
+            assert df.block.isin(wb_less).sum() < W.WF10_FRAC * N
+        assert outs[0]["W_blocks"] == outs[1]["W_blocks"] == outs[2]["W_blocks"], "W 는 분할 사이에 같아야 한다"
+        assert len({tuple(o["I_blocks"]) for o in outs}) == 3, "I 는 분할마다 달라야 한다"
+
+
+# ---------------------------------------------------------------- (u) wf9 지역 내 단위
+def _check_decomp(sts, name):
+    by = {st.target: st for st in sts}
+    t, m = name.split("|")
+    tot, wi, be = by[name], by.get(f"{t}~w|{m}"), by[f"{t}~b|{m}"]
+    assert wi is not None and set(tot.keys) == set(wi.keys) == set(be.keys), "세 저장소의 키가 다르다"
+    for k in tot.keys:
+        s_t = dict(zip(tot.blocks, tot.get(k)[0])); s_w = dict(zip(wi.blocks, wi.get(k)[0])); s_b = dict(zip(be.blocks, be.get(k)[0]))
+        for b in s_t:
+            assert np.isclose(s_t[b], s_w.get(b, 0.0) + s_b[b], rtol=1e-9, atol=1e-6), f"{k} 블록 {b}: 분해 항등식 불성립"
+    return tot, wi, be
+
+
+def _grid_rctx(**kw):
+    c = make_rctx(**kw)
+    c.sB = np.round(c.sB / 4.0) * 4.0                                     # 채점 셀의 √TDD 를 격자처럼 묶는다(블록 안 2셀 이상 묶음이 생긴다)
+    return c
+
+
+def test_u_wf9_inregion_unit():
+    a = args(["--wf9-grid", "20,40,all"])
+    W.WF_TRACE = []; W.PRED_TRACE = {}
+    try:
+        U = W.R9Unit(a, _grid_rctx(), "wf9").run()
+        rows, sts, stats = U.finish()
+        tr, p1 = list(W.WF_TRACE), dict(W.PRED_TRACE)
+    finally:
+        W.WF_TRACE = None; W.PRED_TRACE = None
+    assert isinstance(sts, list) and stats["store_names"] == ["T|r", "T~w|r", "T~b|r"]
+    tot, wi, be = _check_decomp(sts, "T|r")
+    meth = {(k[0], k[1]) for k in tot.keys}
+    assert {("P1", "none"), ("Pk", "none"), ("Pc", "none"), ("D0", W.HI), ("R1", W.LO), ("Re", W.LO)} <= meth
+    assert not any(k[0] in ("R2", "P2", "Pbest", "D1") for k in tot.keys), "wf9 는 R2·P2·Pbest·D1 을 두지 않는다"
+    k1 = next(k for k in tot.keys if k[0] == "P1")
+    c = _grid_rctx()
+    gid, multi = W.grid_groups(c.sB, c.blkB)
+    ss = sum(float(np.sum((c.yB[gid == g] - c.yB[gid == g].mean()) ** 2)) for g in np.unique(gid) if (gid == g).sum() >= 2)
+    assert np.isclose(wi.get(k1)[0].sum(), ss), "P1 의 격자 안 SSE 가 묶음 안 실측 제곱합과 다르다"
+    sets = sel_sets(tr)
+    allsel = set().union(*sets.values())
+    W.PRED_TRACE = {}
+    try:
+        W.R9Unit(a, _grid_rctx(y_shift=_shift_outside(allsel, 5)), "wf9").run()
+        p2 = dict(W.PRED_TRACE)
+    finally:
+        W.PRED_TRACE = None
+    _assert_same_preds(p1, p2, "wf9")
+
+
+# ---------------------------------------------------------------- (v) wf9x 전이 단위
+def test_v_wf9x_transfer_unit():
+    a = args(["--wf9x-grid", "0,10,all"])
+    c = make_tctx2()
+    c.sB = np.round(c.sB / 4.0) * 4.0
+    U = W.T9Unit(a, c, "T").run()
+    rows, sts, stats = U.finish()
+    tot, wi, be = _check_decomp(sts, "T|x")
+    ks = set(tot.keys)
+    assert any(k[0] == "P1" and k[4] == 0 for k in ks) and any(k[0] == "R1" and k[4] == 0 for k in ks), "n = 0 의 P1·R1 키가 없다"
+    for m in ("R1", "R2", "D0", "D1"):
+        assert any(k[0] == m and k[1] == W.LO for k in ks), f"{m} 키가 없다"
+    assert {k[7] for k in ks if k[0] == "R1"} == set(W.LAMS)
+
+
+# ---------------------------------------------------------------- (w) wf10 단위와 외삽 손실
+def _w10_ctx(seed=0, split=1):
+    c = make_rctx(seed=seed, split=split, target="T")
+    nW = len(c.yB) // 2
+    c.maskW = np.r_[np.ones(nW, bool), np.zeros(len(c.yB) - nW, bool)]
+    c.sB = c.sB + 8.0 * c.maskW                                           # W 는 더 따뜻하다
+    c.yB = c.yB + 1.4 * 8.0 * c.maskW
+    c.variant = "warm"
+    return c
+
+
+def test_w_wf10_unit_and_ep():
+    a = args(["--wf10-grid", "20,all", "--nboot", "200"])
+    sts_by = {}
+    for split in (1, 2):
+        c = _w10_ctx(seed=split, split=split)
+        U = W.R10Unit(a, c, "wf10", "warm").run()
+        rows, sts, stats = U.finish()
+        assert stats["store_names"] == ["T~warm|r", "T~warmW|r", "T~warmI|r"]
+        by = {st.target: st for st in sts}
+        tot, sw, si = by["T~warm|r"], by["T~warmW|r"], by["T~warmI|r"]
+        assert set(sw.blocks) == set(np.unique(c.blkB[c.maskW]).astype(str)) and set(si.blocks) == set(np.unique(c.blkB[~c.maskW]).astype(str))
+        for k in tot.keys:
+            assert np.isclose(tot.get(k)[0].sum(), sw.get(k)[0].sum() + si.get(k)[0].sum()), "W·I SSE 의 합이 총 SSE 와 다르다"
+        meth = {(k[0], k[1]) for k in tot.keys}
+        assert {("P1", "none"), ("P2", "none"), ("D0", W.HI), ("D0", W.LO), ("D1", W.LO), ("R1", W.LO), ("R2", W.LO)} <= meth
+        assert any(k[0] == "R1" and k[7] == W.LAM_CV for k in tot.keys) and any(k[0] == "R2" and k[7] == W.LAM_CV for k in tot.keys)
+        for nm, st in by.items():
+            sts_by.setdefault(nm, {})[split] = st
+    units = [dict(split=sp, dup_of=-1, valid=True, expected_splits=[1, 2]) for sp in (1, 2)]
+    tms = {nm: W.make_tm(nm, bs, units, 200, False) for nm, bs in sts_by.items()}
+    gA, gB = W.gk("D0", -1, W.HI, 1.0), W.gk("P1", -1, "none")
+    w_, i_ = X.region_stats(tms["T~warmW|r"], gA, gB), X.region_stats(tms["T~warmI|r"], gA, gB)
+    ep = W.region_ep(tms["T~warmW|r"], tms["T~warmI|r"], gA, gB)
+    assert np.isclose(ep["delta"], w_["delta"] - i_["delta"]) and np.isclose(ep["rmse_A"], w_["delta"]) and np.isclose(ep["rmse_B"], i_["delta"])
+    if ep["dist"] is not None:
+        assert np.allclose(ep["dist"], w_["dist"] - i_["dist"])
+    assert W.region_ep(None, tms["T~warmI|r"], gA, gB) is None
+
+
+# ---------------------------------------------------------------- (x) 3차 집계(HEAVY)
+@HEAVY
+def test_x_summarize_round3_end_to_end(tmp_path):
+    a = args(["--out-dir", str(tmp_path), "--wf9-grid", "20,40,all", "--wf9x-grid", "0,10,all", "--wf10-grid", "20,all"])
+    for split in (1, 2):
+        for tgt in ("Alaska", "Lena", "Canada"):
+            c = _grid_rctx(seed=split * 10 + len(tgt), split=split, target=tgt)
+            U = W.R9Unit(a, c, "wf9").run()
+            rows, sts, stats = U.finish()
+            W.write_shard(a, "wf9", tgt, "r", split, "", c, rows, sts, stats, 1.0, [1, 2])
+        for tgt in ("Lena", "Canada", "Russia_W", "Russia_E", "Alaska"):
+            c = make_tctx2(seed=split * 7 + len(tgt), split=split, target=tgt)
+            c.sB = np.round(c.sB / 4.0) * 4.0
+            U = W.T9Unit(a, c, tgt).run()
+            rows, sts, stats = U.finish()
+            W.write_shard(a, "wf9x", tgt, "x", split, "", c, rows, sts, stats, 1.0, [1, 2])
+        for tgt in ("Alaska", "Canada"):
+            for var in W.WF10_VARIANTS:
+                c = _w10_ctx(seed=split * 3 + len(tgt) + len(var), split=split)
+                c.target = tgt
+                U = W.R10Unit(a, c, "wf10", var).run()
+                rows, sts, stats = U.finish()
+                W.write_shard(a, "wf10", tgt, "r", split, var, c, rows, sts, stats, 1.0, [1, 2])
+    b = W.parse_args(ARGS + ["--out-dir", str(tmp_path), "--exp", "wf9,wf9x,wf10", "--wf9-grid", "20,40,all", "--wf9x-grid", "0,10,all",
+                             "--wf10-grid", "20,all"])
+    out = W.summarize(b)
+    assert out is not None
+    t = out["tests"]
+    for hyp in ("WF9-a", "WF9-c", "WF10-a", "WF10-b", "WF10-c", "WF10-d"):
+        v = t[(t.test_id == hyp) & t.scope.isin(["verdict", "verdict_aux"])]
+        assert len(v), f"{hyp} 판정 행이 없다"
+        assert not v.verdict.astype(str).str.contains("계산 실패").any(), v.verdict.tolist()
+    for f in ("wf3b_curve.csv", "wf3b_tests.csv", "wf3b_meta.json", "wf3b_rmse.csv", "wf3b_decomp.csv"):
+        assert (tmp_path / f).exists(), f
+    assert not (tmp_path / "wf_tests.csv").exists() and not (tmp_path / "wf2b_tests.csv").exists(), "1·2차 표를 쓰면 안 된다"
+    meta = json.loads((tmp_path / "wf3b_meta.json").read_text())
+    assert meta["plan_commit"] == "8180632" and set(meta["exps"]) == {"wf9", "wf9x", "wf10"}
+    import pandas as pd
+    dt = pd.read_csv(tmp_path / "wf3b_decomp.csv")
+    assert len(dt) and np.nanmax(np.abs(dt.check_tot_eq_w_plus_b.values)) < 1e-6, "분해 표의 총 = 격자 안 + 격자 사이 점검 실패"
+    p1 = dt[(dt.method == "P1")]
+    assert np.allclose(p1.expl_within.values, 0.0, atol=1e-9)
+
+
+# ---------------------------------------------------------------- (y) 3차 CLI·차수
+def test_y_cli_round3():
+    a = W.parse_args(["--exp", "wf9,wf9x,wf10"])
+    assert a.EXPS == ["wf9", "wf9x", "wf10"] and W.rounds_of(a) == [("r3", ["wf9", "wf9x", "wf10"], "wf3b")]
+    assert a.SPLITS9 == list(range(1, 26)) and a.SPLITS10 == list(range(1, 11)) and a.VAR10 == ["warm", "cold"]
+    assert a.T["wf9"] == list(W.WF9_TARGETS) and a.T["wf9x"] == [(t, "x") for t in W.WF9X_TARGETS] and a.T["wf10"] == list(W.WF10_TARGETS)
+    assert a.G["wf9"] == [200, 500, 1000, -1] and a.G["wf9x"] == [0, 10, 40, 160, -1] and a.G["wf10"] == [100, 500, -1]
+    cells = W.cells_for(a, "wf9x", 50)
+    assert cells[0] == (0, 0) and sum(1 for n, _ in cells if n == 10) == 5 and (-1, 0) in cells
+    assert sum(1 for n, _ in W.cells_for(a, "wf9", 600) if n == 200) == 3 and sum(1 for n, _ in W.cells_for(a, "wf10", 600) if n == 100) == 3
+    assert W.exp_tag(a, "wf9x") == "wf9x" and W.exp_tag(a, "wf10") == "wf10"
+    assert W.shard_base(a, "wf10", "Alaska", "r", 3, "warm").name == "wf10__cpu__Alaska__r__s3__warm"
+    b = W.parse_args([])
+    assert b.EXPS == list(W.EXPS_ALL) and not (set(b.EXPS) & set(W.EXPS_R3)), "기본 실행 목록에 3차를 넣으면 안 된다"
+    s = W.parse_args(["--smoke", "--exp", "wf9,wf9x,wf10"])
+    assert s.SPLITS9 == [7] and s.VAR10 == ["warm"] and s.TAG3 == "wf3b_smoke" and s.T["wf10"] == ["Canada"]
+    q = W.parse_args(["--precheck", "--exp", "wf9,wf9x,wf10"])
+    assert q.SPLITS9 == [1] and q.T["wf9x"] == [("Alaska", "x"), ("Lena", "x")]
+    for v in W.WF10_VARIANTS:
+        c1, c2 = W.unit_cfg(a, "wf10", v, "S"), W.unit_cfg(a, "wf10", "cold" if v == "warm" else "warm", "S")
+        assert W.wf_cfg_hash(c1, common=True) == W.wf_cfg_hash(c2, common=True), "변형은 공통 설정 해시에 들어가지 않는다"
