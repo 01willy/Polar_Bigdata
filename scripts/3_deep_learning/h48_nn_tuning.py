@@ -233,7 +233,7 @@ STAGE2_TOP_DEFAULT = "mlp=3,tabm=3,ftt=2,realmlp=2"
 FTT_PAPER = dict(transform="qnorm", loss="mse", blocks=3, d_token=192, heads=8, ffn=256, dropout=0.1, lr=1e-4, wd=1e-5, batch=512)
 RMLP_KEYS = ("num_emb_type", "add_front_scale", "lr", "p_drop", "wd", "plr_sigma", "act", "hidden_sizes")
 RMLP_DEFAULT = dict(num_emb_type="pbld", add_front_scale=True, hidden_sizes=[256, 256, 256])
-ALLOWED_GPUS = (2, 3, 4, 5, 6, 7, 9)
+ALLOWED_GPUS = (2, 3, 4, 5, 6, 7, 8, 9)   # LGF 개정 7(2026-10-01): GPU 8 추가
 GPU01 = (0, 1)
 NEVER = (8,)
 LGT_GPUS = (6, 7, 9)
