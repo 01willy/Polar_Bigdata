@@ -1,0 +1,283 @@
+{
+ "stage": "H54/WF",
+ "plan": "docs/EXPERIMENT_PLAN_WF_2026-10-01.md",
+ "plan_commit": "4168331",
+ "git_commit": "4168331",
+ "tag": "wf_smoke",
+ "code_sha": "731d119c0c69",
+ "code_sha_h40": "ffd0b3a76d36",
+ "code_sha_h42": "70ec084a1919",
+ "exps": [
+  "wf1",
+  "wf2",
+  "wf3",
+  "wf4"
+ ],
+ "targets": {
+  "wf1": [
+   "Canada",
+   "AL-3"
+  ],
+  "wf2": [
+   "Canada"
+  ],
+  "wf3": [
+   "Canada"
+  ],
+  "wf4": [
+   "Russia_W:x",
+   "Tibet_LGD:x"
+  ]
+ },
+ "x34_targets": [
+  "AL-3"
+ ],
+ "strategies": [
+  "S1",
+  "S2",
+  "S3",
+  "S4",
+  "S5",
+  "S6",
+  "S7"
+ ],
+ "grids": {
+  "wf1": [
+   20,
+   50,
+   -1
+  ],
+  "wf2": [
+   20,
+   50
+  ],
+  "wf3": [
+   100,
+   -1
+  ],
+  "wf4": [
+   10,
+   -1
+  ]
+ },
+ "splits": [
+  1
+ ],
+ "seeds": [
+  0
+ ],
+ "lams": [
+  0.25,
+  0.5,
+  1.0
+ ],
+ "nboot": 500,
+ "nboot_capped": null,
+ "delta_eq": 0.5,
+ "ni_margin": 0.5,
+ "n_units": 13,
+ "n_fit_total": 322,
+ "unit_elapsed_s_sum": 161.60000000000002,
+ "elapsed_s": 162.4,
+ "summarize_s": 2.0,
+ "n_curve": 372,
+ "n_tests": 119,
+ "n_failed_keys": 0,
+ "n_krige_fallback": 0,
+ "unit_status": {
+  "ok": 13
+ },
+ "shard_cfg": {
+  "wf1": {
+   "cfg_common": {
+    "627863625321": 3
+   },
+   "code_sha": {
+    "731d119c0c69": 3
+   },
+   "n": 3
+  },
+  "wf2": {
+   "cfg_common": {
+    "07575e618415": 7
+   },
+   "code_sha": {
+    "731d119c0c69": 7
+   },
+   "n": 7
+  },
+  "wf3": {
+   "cfg_common": {
+    "ea738b0210e9": 1
+   },
+   "code_sha": {
+    "731d119c0c69": 1
+   },
+   "n": 1
+  },
+  "wf4": {
+   "cfg_common": {
+    "dc6967779768": 2
+   },
+   "code_sha": {
+    "731d119c0c69": 2
+   },
+   "n": 2
+  }
+ },
+ "skipped": [],
+ "choices": {
+  "wf1|Pbest": {
+   "AL-3|-1": {
+    "P2": 1
+   },
+   "AL-3|20": {
+    "Pc": 1
+   },
+   "AL-3|50": {
+    "Pk": 1
+   },
+   "Canada|-1": {
+    "Pk": 1
+   },
+   "Canada|20": {
+    "P2": 1
+   },
+   "Canada|50": {
+    "Pc": 1
+   }
+  },
+  "wf1|Pc": {
+   "AL-3|-1": {
+    "k=4": 1
+   },
+   "AL-3|20": {
+    "k=2": 1
+   },
+   "AL-3|50": {
+    "k=2": 1
+   },
+   "Canada|-1": {
+    "k=2": 1
+   },
+   "Canada|20": {
+    "k=2": 1
+   },
+   "Canada|50": {
+    "k=2": 1
+   }
+  },
+  "wf3|Pc": {
+   "Canada|-1": {
+    "k=2": 1
+   },
+   "Canada|100": {
+    "k=2": 1
+   }
+  },
+  "wf1|R1": {
+   "AL-3|-1": {
+    "lam=0.25": 2
+   },
+   "AL-3|20": {
+    "lam=0.5": 2
+   },
+   "AL-3|50": {
+    "lam=0.25": 2
+   },
+   "Canada|-1": {
+    "lam=0.25": 2
+   },
+   "Canada|20": {
+    "lam=0.25": 2
+   },
+   "Canada|50": {
+    "lam=0.25": 2
+   }
+  },
+  "wf1|R2": {
+   "AL-3|-1": {
+    "lam=0.25": 1
+   },
+   "AL-3|20": {
+    "lam=0.25": 1
+   },
+   "AL-3|50": {
+    "lam=0.25": 1
+   },
+   "Canada|-1": {
+    "lam=1.0": 1
+   },
+   "Canada|20": {
+    "lam=0.25": 1
+   },
+   "Canada|50": {
+    "lam=1.0": 1
+   }
+  },
+  "wf1|Re": {
+   "AL-3|-1": {
+    "lam=1.0": 1
+   },
+   "AL-3|20": {
+    "lam=1.0": 1
+   },
+   "AL-3|50": {
+    "lam=1.0": 1
+   },
+   "Canada|-1": {
+    "lam=0.25": 1
+   },
+   "Canada|20": {
+    "lam=0.25": 1
+   },
+   "Canada|50": {
+    "lam=0.25": 1
+   }
+  },
+  "wf1|R1@x34": {
+   "AL-3|-1": {
+    "lam=0.25": 1
+   },
+   "AL-3|20": {
+    "lam=0.5": 1
+   },
+   "AL-3|50": {
+    "lam=0.25": 1
+   }
+  },
+  "wf4|W": {
+   "Russia_W|-1": {
+    "P2": 1
+   },
+   "Russia_W|10": {
+    "P2": 1
+   },
+   "Tibet_LGD|-1": {
+    "R1@1.0": 1
+   },
+   "Tibet_LGD|10": {
+    "R1@1.0": 1
+   }
+  }
+ },
+ "rules": {
+  "verdict4": "h42.verdict4: 우세 = 두 가중 CI 상한 < 0, 열세 = 두 가중 CI 하한 > 0, 동등 = 네 끝값 |·| ≤ 0.5 cm, 그 밖 미결정",
+  "ci": "h40.contrast(h4_common.boot_delta_blocks): 분할 안 채점 블록 재표집, 방법·추출·seed 공통 인덱스, 분할 분포 평균",
+  "mean": "h40.strat_mean·h42.pool_rows(층화 평균, CI 풀 = 유효 분할 ≥ 1 이고 채점 블록 합집합 ≥ 8)",
+  "holm": "h42.TestBook.frame: 항목(가설)마다 주 대비의 양측 부트스트랩 p 에 Holm(보조 열). WF4-a 는 p_ni 에 따로 holm_p_ni"
+ },
+ "implementation": {
+  "krige": "자체 국소 정규 크리깅(구면 3차원 좌표 km, 최근접 32, 지수 변이도 실용 범위 모수화, 경험 변이도 12구간·최대 거리 절반·√쌍수 가중, 범위 60개 로그 격자 + 비음수 최소제곱, 부분표본 1,500). 라벨 < 10 또는 구간 < 3 이면 P1 대체(fit_flag). RK = 표본 안 잔차 크리깅",
+  "cluster": "A 풀 x25 중앙값 대체·표준화(라벨 미사용), k-평균 n_init 10, B 는 가장 가까운 중심. Pc = 군집 계수의 전체 E_n 으로의 κ 10 수축. R1c 는 군집 라벨 ≥ 20 만 따로 적합(그 밖 전체 g). R1i = 원핫 k 열 입력",
+  "s6": "20개 무작위(S1 n = 20 과 같다) → 예산 경계까지 최대 20개씩. 선택 모형 = R1 잔차 CatBoost(catboost_lo, posterior_sampling), VirtEnsembles 10개 분산이 큰 셀. 실패하면 그 단계만 무작위(notes.s6_fallback)",
+  "s4_s5_s7": "S4 표준화 x25 탐욕 k-중심(첫 점 무작위), S5 LG 원천(모드 x) 기준 AOA 비유사도 큰 순(결정적, 추출 0 만 저장), S7 √TDD 큰 순(동률 seed)",
+  "x34": "SAR 결측은 CatBoost 결측 처리에 맡긴다. x34 조각은 catboost_lo 의 D0·D1·R1·R2 만",
+  "lgd": "run_tables/{Tibet, NAtlantic_lic, Russia_C} 를 h40.Data 로 읽는다(약관 미확인 행 0). NAtlantic~lic 은 점 추정만",
+  "inregion_pseudo": "지역 내 D1·R2 의 유사라벨 행 = round(10 × 학습 라벨 수), A 풀 복원 추출",
+  "re_anchor": "0.5·(E_n·s + cci_alt)(CCI 유효 셀), 그 밖 E_n·s",
+  "cv": "h42.cv_folds_of(블록 5묶음, 블록 1개면 셀 묶음), seed 0 적합으로 선택, 묶음마다 E_n 재계산, 동률은 작은 λ·앞 후보·작은 k",
+  "p0_ref": "지역 내 실험의 P0·κ 수축 사전값 E0 = LG 원천(모드 x, 100 km 버퍼) 최소제곱. 알래스카 하위 지역도 모드 x",
+  "wf4_targets": "LG 27 (대상, 모드) + LGD 새 지역 3 = 30. 추출과 유사라벨 색인은 LG 와 같다"
+ }
+}

@@ -1,0 +1,49 @@
+# WF(H54) 본 실행. 계획 docs/EXPERIMENT_PLAN_WF_2026-10-01.md §2(WF1–WF4), §4.
+# 실험 wf1(지역 내 라벨 수 곡선, x25·x34), wf2(라벨 위치 전략 S1–S7), wf3(하위 군집), wf4(규칙 W 와 편향 진단, 30대상)를 한 작업에서 돌리고
+# 끝에 집계(재표집 10,000회)까지 한다. 한 작업 안에서 한 플랫폼만 쓴다(계획서 §1).
+#
+# 선행 조건: wf_smoke.yaml 작업이 통과하고(단위 시험 포함) 시간 환산(wf_smoke_projection.csv)을 확인한 뒤 제출한다.
+#   환산 누적이 아래 추정보다 크면 walltime_hours, max_cost_usd, WF_BUDGET_MIN 을 다시 정하고 계획서 개정 이력에 적는다.
+# 묶음 작성:   bash scripts/rescale/make_payload_wf.sh
+# 제출 전 확인: python3 tools/rescale_client.py run configs/rescale/wf_full.yaml --dry-run
+# 제출:        python3 tools/rescale_client.py run configs/rescale/wf_full.yaml --yes --no-wait   (사용자 확인 뒤)
+#
+# 노드: elm(AMD EPYC Milan 96코어, GPU 없음), 0.0337 달러/코어·시간 × 96 = 3.24 달러/시간(coretypes 조회 2026-10-01). 대안 hematite 는
+#   wf_smoke.yaml 의 설명을 본다. 워커 22개 × 4스레드(run_wf.sh 기본: (코어 − 8)/4).
+#
+# 벽시계 근거(추정, 2026-10-01)
+#   --count-only: 작업 단위 343(wf1 33, wf2 168, wf3 10, wf4 132), 적합 83,544건, 크리깅 11,131회, 추정 누적 13.6 CPU-h(4스레드 프로세스 기준,
+#   LG BASE_FIT 모형: catboost_lo 0.5 s @ 16,700행, 지수 0.6, 소표본 하한 0.08 s). wf4 가 11.3 h 로 대부분이다(유사라벨 약 19만 행의 R2·D1
+#   적합과 그 교차검증). 로컬 스모크(2스레드)의 실측/추정 비는 wf4 대형 적합 1.5, 소형 적합 2–3 이었다.
+#   비 1.5 를 적용하면 약 20 CPU-h, 워커 22개면 약 0.9 h 다. CatBoost 는 thread_count 의 약 1.6배 CPU 를 써서 22 × 4 스레드는 96코어를 넘게
+#   요구하므로 감속 1.5배를 더해 약 1.4 h, 가장 긴 단위(약 15분)와 집계(약 0.5 h, 재지 않았다), 설치 0.1 h 를 더하면 약 2.1 h 다.
+#   상한은 그 약 2배인 4 h 로 둔다. 스크립트는 3.5 h 에 맞춰 스스로 끝나고(WF_BUDGET_MIN 210) 실행은 그보다 50분 앞서 멈춘다(집계 예비).
+#   예상 비용 약 7 달러(2.1 h), 최악 12.94 달러(4 h). 시간 한도로 중단되면 결과 묶음을 results_wf_prev.tar.gz 로 올려 다시 제출한다
+#   (--resume 이 끝난 조각을 건너뛴다).
+
+name: polar-wf-full
+
+hardware:
+  core_type: elm             # GPU 없음, x86(AMD EPYC Milan). 허용 코어 수 [96] (coretypes 조회 2026-10-01)
+  cores_per_slot: 96
+  slots: 1
+  walltime_hours: 4
+
+max_cost_usd: 14
+low_priority: false          # 선점형 등급은 쓰지 않는다(프로젝트 방침)
+
+analysis:
+  code: pytorch
+  version: "2.4.1"
+
+code_paths:
+  - work/wf_payload.tar.gz
+
+# 이어서 실행할 때: 이전 작업의 results_wf.tar.gz 를 results_wf_prev.tar.gz 로 이름을 바꿔 올리고(rescale_client.py upload) 그 파일 id 를 넣는다.
+dataset_file_ids: []
+
+# 환경 변수는 scripts/rescale/run_wf.sh 상단에 설명이 있다.
+command: |
+  [ -f wf_payload.tar.gz ] && tar xzf wf_payload.tar.gz; WF_MODE=full WF_BUDGET_MIN=210 WF_SUM_RESERVE_MIN=50 bash scripts/rescale/run_wf.sh
+
+results_dir: results/rescale_wf

@@ -131,3 +131,6 @@ data/processed/lgu/shards/
 data/processed/lgu/.running/
 data/processed/lgd/run_tables/
 results/rescale_*/results_*.tar.gz
+
+# WF(H54) 작업 조각(재생성 가능. 집계 표 wf_*.csv·json 만 추적한다)
+data/processed/wf/shards/

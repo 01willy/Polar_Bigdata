@@ -1,0 +1,48 @@
+# WF(H54) 스모크·사전 점검 작업. 계획 docs/EXPERIMENT_PLAN_WF_2026-10-01.md §4(스모크를 먼저 하고 실측 시간으로 비용을 정한다).
+#
+# 목적: 본 실행(wf_full.yaml) 전에 같은 노드 종류에서 환경, 의존성, 코드 경로를 확인하고 적합 시간을 잰다.
+#   h54 --smoke(실험 4종, 대상 축소) → 단위 시험(tests/test_h54_workflow.py, LG_RUN_HEAVY=1) → 본 실행 범위의 적합 수 표(--count-only)
+#   → 사전 점검(--precheck: 실험마다 본 실행 크기의 대표 단위, 분할 1, 워커 7) → 실측/추정 비로 본 실행 환산(wf_smoke_projection.csv).
+#   이 작업의 산출은 경로 확인과 시간 측정용이다. 가설 판정에 쓰지 않는다.
+#
+# 묶음 작성:   bash scripts/rescale/make_payload_wf.sh
+# 제출 전 확인: python3 tools/rescale_client.py run configs/rescale/wf_smoke.yaml --dry-run
+# 제출:        python3 tools/rescale_client.py run configs/rescale/wf_smoke.yaml --yes --no-wait   (사용자 확인 뒤)
+#
+# 노드: elm(AMD EPYC Milan, x86, GPU 없음). 허용 코어 수 [96], 메모리 코어당 4 GB(384 GB).
+#   coretypes 조회(2026-10-01)에서 GPU 가 없는 x86 노드 가운데 코어·시간 단가가 가장 낮다: elm 0.0337, redbud-bundle 0.0540, tenorite 0.0588,
+#   redbud 0.0600, hematite 0.0659 달러/코어·시간(ARM 인 gallium, antimony, lavender 는 뺐다). 96코어 × 0.0337 = 3.24 달러/시간.
+#   이 계정에서 elm 을 쓴 적이 없다. 노드가 배정되지 않거나 실패하면 hematite(64코어, 4.22 달러/시간, LGX 에서 쓴 노드)로 바꾼다
+#   (core_type: hematite, cores_per_slot: 64, max_cost_usd 5).
+#   스모크와 본 실행은 같은 노드 종류를 쓴다(시간 환산의 전제. WF 의 대비는 모두 WF 조각 안에서 닫히므로 LG 노드와 같을 필요는 없다).
+#
+# 비용: 3.24 달러/시간 × 벽시계 1 h = 최악 3.24 달러(max_cost_usd 4). 과금은 실제 사용 시간 기준이다.
+# 벽시계 근거(추정): 설치 5분 · 스모크 3–4분(로컬 2스레드 실측 3분 45초) · 단위 시험 약 4분(로컬 2스레드 실측: 가벼운 시험 80초, 통합 시험 144초)
+#   · 적합 수 표 1분(로컬 실측 33초) · 사전 점검 대표 단위 7개 병렬 약 15분(가장 긴 단위 Alaska wf1 x25, Lena wf4 x 의 추정) · 환산 1분.
+#   합계 약 30분. 스크립트는 시작 50분에 맞춰 스스로 끝난다(WF_BUDGET_MIN). 사전 점검이 남은 시간 안에 끝나지 않으면 그 단계만 중단된다.
+
+name: polar-wf-smoke
+
+hardware:
+  core_type: elm             # GPU 없음, x86(AMD EPYC Milan). 허용 코어 수 [96] (coretypes 조회 2026-10-01)
+  cores_per_slot: 96
+  slots: 1
+  walltime_hours: 1
+
+max_cost_usd: 4
+low_priority: false          # 선점형 등급은 쓰지 않는다(프로젝트 방침)
+
+analysis:
+  code: pytorch              # LG·LGX 와 같은 이미지(python 3.11). WF 는 torch 를 쓰지 않는다
+  version: "2.4.1"
+
+code_paths:
+  - work/wf_payload.tar.gz
+
+dataset_file_ids: []
+
+# 환경 변수는 scripts/rescale/run_wf.sh 상단에 설명이 있다.
+command: |
+  [ -f wf_payload.tar.gz ] && tar xzf wf_payload.tar.gz; WF_MODE=smoke WF_BUDGET_MIN=50 bash scripts/rescale/run_wf.sh
+
+results_dir: results/rescale_wf_smoke

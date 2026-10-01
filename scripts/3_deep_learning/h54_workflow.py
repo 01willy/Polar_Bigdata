@@ -1,0 +1,2374 @@
+"""H54 · 희소·충분 라벨 워크플로 하네스(WF). 계획 docs/EXPERIMENT_PLAN_WF_2026-10-01.md(커밋 4168331, 결과 열람 뒤 설계)의 구현.
+
+실험(--exps, 기본 wf1,wf2,wf3,wf4. WF0 은 재분석이라 계산이 없고, WF5 지도는 wf5_priority 함수와 --wf5-map 으로 따로 만든다)
+  wf1  충분 라벨 지역 안의 라벨 수 곡선. 지역 내 모드(모드 이름 r): 학습 라벨 = 대상 A 블록에서 뽑은 n 개뿐이고 다른 지역 원천 행이 없다.
+       P0 과 κ 수축의 사전값만 LG 의 원천 계수 E0(모드 x 원천, 100 km 버퍼)을 쓴다.
+       대상 Alaska, Lena, Canada, AL-1, AL-2, AL-6. Alaska 는 x34(x25 + SAR 9열) 조각을 따로 둔다(--x34-targets).
+       n {20, 50, 100, 200, 500, 1000, 2000, 5000, 전량}(|A| 미만과 전량), 추출 5(n ≤ 1000)·3(그 밖)·1(전량), seed 2.
+       방법 P0, P1, P2, Pk, Pc@c2·c4·c8, Pc(교차검증 k), Pbest(P1·P2·Pk·Pc 가운데 교차검증), D0, D1, R1(λ 0.25·0.5·1.0·교차검증),
+       R2(같은 λ), Re(λ 0.25·교차검증), RK(λ 0.25·0.5·1.0·교차검증). D0·R1 은 catboost_lo 와 catboost(기본 용량) 둘 다,
+       그 밖의 학습 방법은 catboost_lo. x34 조각은 catboost_lo 의 D0, D1, R1, R2(λ 격자와 교차검증 λ)만 둔다.
+  wf2  라벨 위치 선택. 대상 Alaska, Lena, Canada, AL-1, AL-2(지역 내, 후보 = A 셀). 전략 S1–S7, 예산 {20, 50, 100, 200, 500}(|A| 미만),
+       추출 5, seed 2. 방법 P1, R1(λ 0.25·0.5·1.0, 판정 λ 0.25), D1. 조각은 (대상, 분할, 전략) 단위이고 키의 placement 가 전략이다.
+  wf3  하위 군집. 대상 Alaska, Lena(지역 내). n {100, 500, 2000, 전량}, 추출 규칙은 wf1 과 같다. 방법 P1, Pc@c2·c4·c8, Pc(교차검증 k),
+       R1(전체 잔차), R1c@c{k}(군집별 잔차), R1i@c{k}(군집 원핫 입력을 더한 R1). λ 0.25·0.5·1.0.
+  wf4  방법 선택 규칙 W 와 편향 진단. 대상 30 = LG 의 27 (대상, 모드)와 LGD 약관 확인분 새 지역 3(Tibet_LGD, NAtlantic~lic, Russia_C~lgd).
+       전이 모드(원천 = LG 와 같은 다른 지역 셀, h40.build_ctx). n {10, 40, 160, 전량}, 추출 5, seed 2, 추출과 유사라벨 색인은 LG 와 같다.
+       방법 P0, P1, P2, R1(λ 0.25·0.5·1.0), R2(같은 λ), D1, W. W 는 선택한 n 개 라벨 안 5겹 블록 교차검증(seed 0 적합)으로
+       {P0, P1, P2, R1(0.25), R1(1.0), R2(0.25), D1} 가운데 오차가 가장 작은 방법이고, 라벨이 10개 미만이면 P1 이다.
+       n = 10 의 추출마다 편향 진단값(선택 라벨 위치의 P0 평균 오차, E0·s − y 의 평균)을 unit.json 의 diag 에 남긴다.
+
+기호와 공통 규약
+  s = e5_sqrt_tdd. E_ls = Σ s·y / Σ s². E_n = (n·E_ls + κ·E0)/(n + κ), κ = 10(h42.shrink). x25 = h40.FEATS, x34 = x25 + SAR 9열.
+  분할 = m1_core.half_split_blocks(분할 1–5), 채점 = B 블록의 eval_mask 셀(h40 과 같다). 중복 분할과 채점 블록 2개 미만 분할의 규칙도 h40 과 같다.
+  지역 내 추출 seed = seed_of(대상, 'r', 분할, n, 추출)(h40.draw_cells 에 모드 'r' 를 넣는다). wf2 의 S1 은 같은 추출이다.
+  키 = (method, learner, alpha, placement, n, draw, seed, lam)(h40 의 BlockStore 키). alpha 는 항상 '1'. 교차검증 λ 의 키는 lam = −1.0 이고
+  고른 λ 는 runs 의 alpha_sel 에 'lam=0.5' 형식으로 적는다. 선택형 방법(Pc, Pbest, W)의 고른 값도 alpha_sel 에 적는다.
+  교차검증은 h42.cv_folds_of(선택 라벨의 A 블록을 순열해 5묶음, 블록이 하나면 셀 묶음)를 쓰고 seed 0 적합으로 고른 값을 모든 seed 에 쓴다.
+  묶음마다 E_n 을 학습 쪽 라벨로 다시 구한다. 동률이면 λ 는 작은 값, 방법은 후보 순서의 앞, k 는 작은 값이다.
+  통계: h40.contrast(분할 안 채점 블록 재표집, 셀 가중·블록 등가중), h42 의 verdict4(우세, 열세, 동등 ±0.5 cm, 미결정), region_stats,
+  pool_rows, TestBook(층화 평균, Holm 보조 열). 재표집 10,000회(--nboot).
+
+구현 결정(계획서가 정하지 않은 세부. 계획서 개정 이력에 '구현 결정, 결과 실행 전'으로 적었다)
+  1. 크리깅(Pk, RK): 자체 구현 국소 정규 크리깅이다. 좌표는 구면 위 3차원 직교 좌표(km), 최근접 라벨 32개, 지수 변이도
+     γ(h) = c0 + c·(1 − exp(−3h/a))(pykrige 'exponential' 과 같은 모수화, a = 실용 범위). 변이도는 라벨(최대 1,500개 무작위 부분표본)의
+     경험 변이도(12구간, 최대 거리의 절반까지)에 구간 쌍 수의 제곱근 가중 최소제곱으로 맞춘다. a 는 60개 로그 격자에서 고르고
+     (c, c0) 는 비음수 최소제곱이다. 라벨이 10개 미만이거나 구간이 3개 미만이면 크리깅하지 않고 P1(E_n)으로 대체하고 fit_flag 에 적는다.
+     pykrige 1.7.3 이 로컬에 있으나 Rescale 이미지에는 없어 계산 경로가 플랫폼마다 달라질 수 있으므로 쓰지 않는다.
+     시험 (k)가 같은 변이도 모수에서 pykrige 의 국소 크리깅(backend loop, n_closest_points)과 예측이 같은지 확인한다.
+     Pk 는 라벨 위치의 E = y/s 를 크리깅해 Ê·s 로 예측한다. RK 는 R1(λ) 의 표본 안 잔차 y − (E_n·s + λ·g) 를 크리깅해 더한다
+     (교차 적합 잔차가 아니다). RK 의 교차검증 λ 는 R1 의 교차검증 λ 를 그대로 쓴다.
+  2. 군집(Pc, R1c, R1i, S3): A 풀 셀의 x25 를 중앙값 대체 뒤 A 풀의 평균·표준편차로 표준화하고(h40._prep_stats, 라벨 미사용)
+     k-평균(n_init 10, random_state = seed_of('wf-km', 대상, 분할, k))을 A 풀에 맞춘다. B 셀은 가장 가까운 중심에 배정한다.
+     Pc 는 군집 c 의 라벨로 구한 E_ls,c 를 전체 E_n 으로 κ = 10 수축한다(E_c = (n_c·E_ls,c + κ·E_n)/(n_c + κ), 라벨 없는 군집은 E_n).
+     R1c 는 군집 라벨이 20개 이상인 군집만 따로 잔차 모형을 맞추고 그 밖의 군집은 전체 R1 의 g 를 쓴다. 앵커는 전체 E_n·s 다.
+     R1i 는 군집 번호를 원핫 k 열로 입력에 더한다. S3 는 k = 8 군집에 예산을 군집 크기 비례(최대 나머지 방식)로 나누고 군집 안에서 무작위로 뽑는다.
+  3. S6(순차 능동 선택): 20개 무작위(S1 의 n = 20 추출과 같다)에서 시작해 다음 예산 경계를 넘지 않게 최대 20개씩 더한다(20, 40, 50, 70,
+     90, 100, 120, …, 500). 선택 모형은 R1 잔차 모형(목표 y − E_n·s, E_n 은 현재 라벨로 다시 구한다)이고 catboost_lo 설정에
+     posterior_sampling = True 를 준 CatBoost 다. virtual_ensembles_predict(prediction_type = 'VirtEnsembles', virtual_ensembles_count = 10)
+     의 성분 사이 분산이 큰 A 풀 셀을 고른다(동률은 seed 로 섞는다). seed = seed_of('wf-s6', 대상, 분할, 추출, 현재 라벨 수).
+     선택 적합은 학습기 이름 catboost_ve, 방법 이름 S6sel 로 센다.
+     S4 는 표준화 x25 에서 탐욕 k-중심(첫 점은 추출 seed 로 무작위)이고, S5 는 LG 원천(모드 x) 셀의 표준화 x25 까지의 최근접 거리를 원천 안
+     평균 쌍 거리(부분표본 2,000)로 나눈 값(AOA 비유사도, 변수 가중 없음)이 큰 순서, S7 은 √TDD 가 큰 순서(동률은 추출 seed 로 섞는다)다.
+     S5 는 결정적이라 추출이 모두 같다. 같은 라벨 집합이 앞 추출과 겹치면 그 추출은 적합하지 않는다(S5 는 추출 0 만 저장된다).
+  4. x34 의 SAR 결측(PolSAR 은 알래스카 셀의 74 % 만 유한)은 CatBoost 의 기본 결측 처리(Min)에 맡긴다. 대체하지 않는다.
+  5. LGD 새 지역은 data/processed/lgd/run_tables/{Tibet, NAtlantic_lic, Russia_C}/ 의 실행 표(약관 미확인 행 0)를 h40.Data 로 읽어
+     LGD 와 같은 방식으로 돌린다(대상 이름 Tibet_LGD, NAtlantic, Russia_C, 저장소 이름 Tibet_LGD|x, NAtlantic~lic|x, Russia_C~lgd|x).
+     NAtlantic~lic 은 LGD 와 같이 점 추정만이다. 표가 없으면 그 대상을 건너뛰고 meta 의 skipped 에 적는다(--no-lgd 로 끌 수 있다).
+  6. 지역 내 D1·R2 의 유사라벨 행 수는 round(r × 학습 라벨 수), r = 10 이다(LG 는 r × 원천 행 수. 지역 내 모드에는 원천 행이 없다).
+     색인은 A 풀에서 복원 추출(seed_of('wf-ps', 대상, 'r', 분할, n, 추출, seed, 묶음))이고 라벨 셀은 실측으로 바꾼다(h40 과 같은 규칙).
+  7. Re 의 앵커 = 0.5·(E_n·s + cci_alt)(cci_alt 유한이고 cci_valid ≥ 0.5 인 셀), 그 밖은 E_n·s 다. 채점 셀은 eval_mask 상 모두 CCI 가 있다.
+  8. 판정 정의. WF1-b 는 교차검증 λ 의 R1@x34 − R1(catboost_lo)이다(고정 λ 행은 보조). WF1-a·c 의 R1, R2 는 교차검증 λ 다.
+     WF2-a 는 (전략, n) 18개 대비 가운데 하나 이상이 우세이면 지지다. 세 n 모두 우세인 전략은 보조로 적는다.
+     WF2-b 의 '가장 좋은 전략' 은 알래스카 n = 100 의 R1(λ 0.25) 점 추정 RMSE 가 가장 작은 S2–S7 이고, 레나·캐나다의 n = 100 대비로 판정한다.
+     WF3-a 는 두 대상 × n {500, 2000, 전량} 이 모두 우세이면 지지, 일부면 부분 지지, 우세가 없거나 열세가 있으면 기각이다.
+     WF4-a 의 비열등은 주 4지역 층화 평균 W − R1(0.25) 의 두 가중 CI 상한이 모두 0.5 cm 미만인 것이다. WF4-b 는 n 160, 전량 각각에서
+     W − P1 이 우세인 대상 수가 R1(0.25) − P1 이 우세인 대상 수보다 많은지 본다(두 n 모두면 지지). WF4-c 의 진단값은 편향의 크기
+     |mean(E0·s − y)|(추출·분할 평균), ML 이득은 전량 라벨의 RMSE(P0) − RMSE(W)이고, CI 는 이득의 블록 재표집 분포(h40.contrast)와
+     진단값의 (분할, 추출) 재표집을 같은 번호로 묶은 Spearman 분포의 2.5–97.5 백분위다.
+  9. 대상 30 은 LG 와 같이 하위 지역의 모드 i·x 를 모두 둔다(WF0 의 30대상과 같은 구성). --wf4-modes x 로 모드 x 만 쓰면 20대상이다.
+
+누설 규약
+  대상 라벨은 선택된 n 개만 계수, 학습, 크리깅, 교차검증, 전략(S6)에 쓴다. 표준화와 군집은 A 풀의 공변량(라벨 미사용)으로만 정한다.
+  B 블록 셀의 라벨은 채점 전용이다. 시험이 B 라벨과 비선택 A 라벨을 바꿔도 예측과 선택이 같음을 확인한다.
+
+산출(<out-dir>, 기본 data/processed/wf)
+  shards/<tag><실험번호>__cpu__<대상>__<모드>__s<분할>[__<변형>]_{runs.csv, blocksse.npz, unit.json}. 변형 = x34(wf1), 전략(wf2).
+    unit.json 이 완료 표지다(마지막에 원자적으로 쓴다). --resume 은 cfg_hash 가 같고 status 가 failed 가 아닌 조각만 건너뛴다.
+  <tag>_curve.csv(h40.build_curve 형식 + exp, verdict4_p0·p1), <tag>_tests.csv(WF1-a·b·c, WF2-a·b, WF3-a·b, WF4-a·b·c 와 서술 대비),
+  <tag>_meta.json, <tag>_targets.csv, <tag>_timing.csv, <tag>_failed.csv, <tag>_count.csv, <tag>_count_detail.csv(--count-only).
+
+실행 환경
+  로컬 공유 서버에서는 --count-only, --summarize-only(재표집 1,000회 상한), --smoke(스레드 2, 워커 0)만 한다. 본 실행과 사전 점검은
+  Rescale CPU 노드에서 한다(WF_RESCALE=1 또는 LG_RESCALE=1 또는 --allow-local 이 없으면 거부). 스레드 상한은 허용 표지가 없으면 4다.
+  CatBoost 는 thread_count 밖의 고정 비용 부분도 여러 스레드로 돌려 프로세스 CPU 사용이 thread_count 의 약 1.5–3배다(로컬 측정, 작은 적합일수록
+  크다. 명시적 Pool 의 thread_count 로도 줄지 않았다). 로컬 스모크와 시험은 taskset 으로 코어 4개에 묶어 공유 서버의 상한을 지킨다.
+  적합 수:  CUDA_VISIBLE_DEVICES= nice -n 10 python3 scripts/3_deep_learning/h54_workflow.py --count-only --threads 1
+  스모크:   CUDA_VISIBLE_DEVICES= nice -n 10 taskset -c <코어 4개> python3 scripts/3_deep_learning/h54_workflow.py --smoke --threads 2 --workers 0
+  본 실행:  WF_RESCALE=1 python3 scripts/3_deep_learning/h54_workflow.py --workers 22 --threads 4 --resume --no-summarize
+  집계:     WF_RESCALE=1 python3 scripts/3_deep_learning/h54_workflow.py --summarize-only --workers 22 --threads 4
+  Rescale:  scripts/rescale/run_wf.sh(WF_MODE=smoke|full), configs/rescale/wf_smoke.yaml, wf_full.yaml, 묶음 scripts/rescale/make_payload_wf.sh
+  WF5 지도: python3 scripts/3_deep_learning/h54_workflow.py --wf5-map --wf5-strategy S4 --wf5-n 50,200 --threads 2 (WF2 판정 뒤)
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import importlib.util
+import json
+import multiprocessing
+import os
+import sys
+import time
+import warnings
+from collections import Counter
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from concurrent.futures.process import BrokenProcessPool
+from pathlib import Path
+
+LOCAL_MAX_THREADS = 4                             # 허용 표지 없는 실행의 스레드 상한(공유 서버)
+
+
+def run_permitted_env(argv=None):
+    """본 실행 허용 표지: 환경 변수 WF_RESCALE=1 또는 LG_RESCALE=1, 또는 --allow-local."""
+    av = sys.argv if argv is None else argv
+    return os.environ.get("WF_RESCALE", "") == "1" or os.environ.get("LG_RESCALE", "") == "1" or "--allow-local" in av
+
+
+def _peek_threads():
+    """numpy 를 부르기 전에 스레드 수를 정한다(--threads 를 미리 읽는다). 허용 표지가 없으면 상한 LOCAL_MAX_THREADS."""
+    val = None
+    av = sys.argv
+    for i, v in enumerate(av):
+        if v == "--threads" and i + 1 < len(av):
+            val = av[i + 1]
+        elif v.startswith("--threads="):
+            val = v.split("=", 1)[1]
+    try:
+        t = int(val) if val is not None else 1
+    except ValueError:
+        t = 1
+    if not run_permitted_env():
+        t = min(t, LOCAL_MAX_THREADS)
+    return str(max(t, 1))
+
+
+for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
+    os.environ.setdefault(_v, _peek_threads())
+warnings.filterwarnings("ignore", module="threadpoolctl")
+warnings.filterwarnings("ignore", message=".*glibc.*")
+
+import numpy as np                                                                                   # noqa: E402
+import pandas as pd                                                                                  # noqa: E402
+
+ROOT = Path(__file__).resolve().parents[2]
+SCRIPT_DIR = Path(__file__).resolve().parent
+for _p in (str(SCRIPT_DIR), str(ROOT / "src")):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
+
+
+def _load(name, fname):
+    """동결 하네스(h40, h42)를 파일 경로에서 읽어 sys.modules 에 등록한다(h42 와 같은 방식). 이미 있으면 그 모듈을 쓴다."""
+    if name in sys.modules:
+        return sys.modules[name]
+    spec = importlib.util.spec_from_file_location(name, SCRIPT_DIR / fname)
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[name] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+
+H = _load("h40_label_grid", "h40_label_grid.py")
+X = _load("h42_label_grid_ext", "h42_label_grid_ext.py")
+
+from polar.m1_core import INPUT_SETS, eval_mask, half_split_blocks                                   # noqa: E402
+import polar.h4_common as H4                                                                         # noqa: E402
+from polar.h4_common import BlockStore, save_stores, load_stores, seed_of                             # noqa: E402
+from polar import m1_stats as MS                                                                     # noqa: E402
+
+# ================================================================ 고정 설계값(계획서 §1–§2. 바꾸면 사전 등록에서 벗어난다)
+FEATS = list(H.FEATS)                                                       # x25
+SAR_COLS = [v for v in INPUT_SETS["x34"] if v not in FEATS]                 # insar 5, polsar 3, insar_miss
+FEATS34 = FEATS + SAR_COLS                                                  # x34 = x25 다음에 SAR 9열
+CCI_COL, CCIV_COL = FEATS.index("cci_alt"), FEATS.index("cci_valid")
+MODE_R = "r"                                                                # 지역 내 모드
+KAPPA = 10.0
+R_PS = 10.0
+LAMS = (0.25, 0.5, 1.0)
+LAM_BASE = 0.25
+LAM_CV = -1.0                                                               # 교차검증으로 고른 λ 의 키
+CV_K = 5
+DRAWS_SMALL, DRAWS_LARGE, DRAW_SPLIT_N = 5, 3, 1000                         # n ≤ 1000 은 추출 5, 그 밖은 3
+SEEDS = (0, 1)
+LO, HI = "catboost_lo", "catboost"
+KRIGE_K = 32
+KRIGE_MIN = 10
+VARIO_MAX_PTS = 1500
+VARIO_NLAGS = 12
+VARIO_NRANGE = 60
+CLUSTER_KS = (2, 4, 8)
+S3_K = 8
+R1C_MIN = 20
+S6_START, S6_BATCH, VE_COUNT = 20, 20, 10
+AOA_SUB = 2000
+W_CANDS = ("P0", "P1", "P2", "R1@0.25", "R1@1.0", "R2@0.25", "D1")       # 규칙 W 의 후보(계획서 순서 = 동률 순서)
+W_MIN_N = 10
+DIAG_N = 10
+NI_MARGIN = 0.5
+PBEST_CANDS = ("P1", "P2", "Pk", "Pc")
+STRATEGIES = ("S1", "S2", "S3", "S4", "S5", "S6", "S7")
+EXPS_ALL = ("wf1", "wf2", "wf3", "wf4")
+WF1_TARGETS = ("Alaska", "Lena", "Canada", "AL-1", "AL-2", "AL-6")
+WF1_X34 = ("Alaska",)
+WF1_GRID = (20, 50, 100, 200, 500, 1000, 2000, 5000, -1)
+WF2_TARGETS = ("Alaska", "Lena", "Canada", "AL-1", "AL-2")
+WF2_BUDGETS = (20, 50, 100, 200, 500)
+WF2_DRAWS = 5
+WF3_TARGETS = ("Alaska", "Lena")
+WF3_GRID = (100, 500, 2000, -1)
+WF4_GRID = (10, 40, 160, -1)
+WF4_DRAWS = 5
+# LGD 약관 확인분 새 지역: 저장소 이름 → (실행 표 디렉터리, 표 안의 대상 이름, 점 추정만)
+LGD_SPECS = {"Tibet_LGD": ("Tibet", "Tibet_LGD", False), "NAtlantic~lic": ("NAtlantic_lic", "NAtlantic", True),
+             "Russia_C~lgd": ("Russia_C", "Russia_C", False)}
+MAIN4 = list(H.MAIN4)
+# 적합 시간 추정(--count-only 전용, 결과에는 쓰지 않는다). LG 의 BASE_FIT 모형(h40): 1건 = b·(행 수/기준 행 수)^지수.
+# catboost 는 h42.BASE_FIT_X 의 가정값(재지 않았다). 소표본 하한(고정 비용)은 로컬 스모크(2스레드, 2026-10-01)의 실측
+# (catboost_lo 0.10 s, catboost 0.5 s, 가상 앙상블 0.09 s)을 4스레드로 줄여 잡은 가정값이다. Rescale 스모크의 실측으로 바꿔 읽는다.
+EST_BASE = {LO: H.BASE_FIT[LO], HI: X.BASE_FIT_X[HI], "catboost_ve": H.BASE_FIT[LO]}
+EST_FLOOR = {LO: 0.08, HI: 0.35, "catboost_ve": 0.09}
+EST_KRIGE = (0.02, 1.0e-5)                                                  # 크리깅 1회 = a + b·(예측 셀 수) s(스모크 실측 0.02 s 근처)
+EST_KMEANS = 0.05                                                           # k-평균 1회(스모크 실측 0.03–0.04 s)
+PRED_TRACE = None                                                           # 시험용: dict 를 넣으면 저장한 모든 키의 예측을 기록한다
+WF_TRACE = None                                                             # 시험용: 리스트를 넣으면 적합·계수·선택이 쓴 라벨 색인을 기록한다
+
+
+# ================================================================ 인자
+def _list(txt, cast=str):
+    return [cast(v.strip()) for v in str(txt).split(",") if v.strip()]
+
+
+def _n_list(txt):
+    return [-1 if v.strip() == "all" else int(v) for v in str(txt).split(",") if v.strip()]
+
+
+def _grid_txt(g):
+    return ",".join("all" if int(v) == -1 else str(int(v)) for v in g)
+
+
+def parse_args(argv=None):
+    ap = argparse.ArgumentParser(description="H54 희소·충분 라벨 워크플로 하네스(WF)")
+    ap.add_argument("--exps", default=",".join(EXPS_ALL), help="실행·집계할 실험(wf1, wf2, wf3, wf4)")
+    ap.add_argument("--wf1-targets", default=",".join(WF1_TARGETS))
+    ap.add_argument("--x34-targets", default=",".join(WF1_X34), help="wf1 에서 x34 조각을 둘 대상(SAR 열이 있는 알래스카 계열)")
+    ap.add_argument("--wf2-targets", default=",".join(WF2_TARGETS))
+    ap.add_argument("--wf3-targets", default=",".join(WF3_TARGETS))
+    ap.add_argument("--wf4-targets", default="", help="'이름:모드' 쉼표 목록. 기본 = LG 27 (대상, 모드) + LGD 새 지역 3")
+    ap.add_argument("--wf4-modes", default="i,x", help="기본 대상 목록에 쓰는 모드(하위 지역). x 만 주면 20대상")
+    ap.add_argument("--no-lgd", action="store_true", help="wf4 에서 LGD 새 지역을 뺀다")
+    ap.add_argument("--strategies", default=",".join(STRATEGIES))
+    ap.add_argument("--wf1-grid", default=_grid_txt(WF1_GRID))
+    ap.add_argument("--wf2-budgets", default=_grid_txt(WF2_BUDGETS))
+    ap.add_argument("--wf3-grid", default=_grid_txt(WF3_GRID))
+    ap.add_argument("--wf4-grid", default=_grid_txt(WF4_GRID))
+    ap.add_argument("--splits", type=int, default=5, help="half_split_blocks split_seed 1..K")
+    ap.add_argument("--seeds", type=int, default=len(SEEDS))
+    ap.add_argument("--draws-cap", type=int, default=0, help="추출 수 상한(0 = 설계값). 스모크·시험용")
+    ap.add_argument("--workers", type=int, default=1, help="프로세스 수. 0 = 풀 없이 차례로")
+    ap.add_argument("--threads", type=int, default=1, help="프로세스당 스레드(BLAS·CatBoost). 허용 표지가 없으면 상한 4")
+    ap.add_argument("--cb-iters", type=int, default=200, help="catboost_lo 반복 수(LG 와 같은 200)")
+    ap.add_argument("--nboot", type=int, default=10000)
+    ap.add_argument("--delta-eq", type=float, default=0.5, help="4분 판정의 동등 한계(cm)")
+    ap.add_argument("--delta-eq-aux", type=float, default=1.0)
+    ap.add_argument("--ni-margin", type=float, default=NI_MARGIN, help="WF4-a 비열등 한계(cm)")
+    ap.add_argument("--out-dir", default="data/processed/wf")
+    ap.add_argument("--data-dir", default="data/processed")
+    ap.add_argument("--lgd-dir", default="data/processed/lgd/run_tables")
+    ap.add_argument("--subregion-map", default="lg_subregion_map_v1.csv")
+    ap.add_argument("--tag", default="wf")
+    ap.add_argument("--resume", action="store_true")
+    ap.add_argument("--smoke", action="store_true", help="작은 설정(분할 1, 추출 1, seed 1, 대상 축소). 로컬 허용(스레드 2 권장)")
+    ap.add_argument("--precheck", action="store_true", help="Rescale 사전 점검: 실험마다 본 실행 크기의 대표 단위 하나씩(시간 측정)")
+    ap.add_argument("--count-only", action="store_true")
+    ap.add_argument("--summarize-only", action="store_true")
+    ap.add_argument("--no-summarize", action="store_true")
+    ap.add_argument("--allow-local", action="store_true", help="본 실행을 로컬에서 허용한다(WF_RESCALE=1 과 같은 효과)")
+    ap.add_argument("--allow-mixed-cfg", action="store_true")
+    ap.add_argument("--pool-retries", type=int, default=2)
+    ap.add_argument("--no-pin-cores", action="store_true", help="워커를 코어 묶음에 고정하지 않는다(기본: 허용 표지가 있고 코어가 충분하면 워커마다 "
+                                                              "스레드 수만큼의 코어에 고정)")
+    ap.add_argument("--wf5-map", action="store_true", help="WF5: 레나 격자에 전략을 적용해 다음 관측 우선순위를 쓴다(학습 적합 포함)")
+    ap.add_argument("--wf5-strategy", default="", help="WF5 전략(WF2-b 규칙으로 정한 전략. S1–S7, S2 는 격자 좌표의 0.5° 블록)")
+    ap.add_argument("--wf5-n", default="50,200")
+    ap.add_argument("--wf5-grid", default="data/processed/map_lena/lena_grid_x25_v1.csv.gz")
+    a = ap.parse_args(argv)
+    a.ARGV = list(sys.argv[1:] if argv is None else argv)
+    return finalize(a)
+
+
+def _abs(p, base=ROOT):
+    return Path(p) if os.path.isabs(str(p)) else Path(base) / str(p)
+
+
+def default_wf4_targets(modes):
+    out = [f"{t}:{m}" for t, m in H.default_targets(["i", "x"]) if m in modes or t in H.MAIN4 + H.MAIN_POINT + [H.ALASKA]]
+    return out
+
+
+def finalize(a):
+    if a.smoke and a.precheck:
+        raise SystemExit("--smoke 와 --precheck 는 함께 쓰지 않는다")
+    a.SUFFIX = ("_smoke" if a.smoke else "") + ("_precheck" if a.precheck else "")
+    a.TAG = a.tag + a.SUFFIX
+    a.PERMIT = run_permitted_env(a.ARGV)
+    a.threads_asked = int(a.threads)
+    a.threads = max(1, int(a.threads) if a.PERMIT else min(int(a.threads), LOCAL_MAX_THREADS))
+    a.EXPS = [v for v in _list(a.exps) if v in EXPS_ALL]
+    a.SPLITS = list(range(1, int(a.splits) + 1))
+    a.SEEDS = list(range(int(a.seeds)))
+    a.T = {"wf1": _list(a.wf1_targets), "wf2": _list(a.wf2_targets), "wf3": _list(a.wf3_targets)}
+    a.X34 = _list(a.x34_targets)
+    modes = _list(a.wf4_modes)
+    t4 = _list(a.wf4_targets) if a.wf4_targets else default_wf4_targets(modes) + ([] if a.no_lgd else [f"{k}:x" for k in LGD_SPECS])
+    a.T["wf4"] = [tuple(v.split(":")) if ":" in v else (v, "x") for v in t4]
+    a.STRAT = [v for v in _list(a.strategies) if v in STRATEGIES]
+    a.G = {"wf1": _n_list(a.wf1_grid), "wf2": _n_list(a.wf2_budgets), "wf3": _n_list(a.wf3_grid), "wf4": _n_list(a.wf4_grid)}
+    if a.smoke:                                                    # 스모크: 모든 경로를 작은 대상으로 한 번씩 지난다
+        a.SPLITS = [1]; a.SEEDS = [0]; a.draws_cap = a.draws_cap or 1
+        a.T = {"wf1": ["Canada", "AL-3"], "wf2": ["Canada"], "wf3": ["Canada"],
+               "wf4": [("Russia_W", "x")] + ([] if a.no_lgd else [("Tibet_LGD", "x")])}
+        a.X34 = ["AL-3"]
+        a.G = {"wf1": [20, 50, -1], "wf2": [20, 50], "wf3": [100, -1], "wf4": [10, -1]}
+        a.nboot = min(int(a.nboot), 500)
+    if a.precheck:                                                 # 사전 점검: 실험마다 본 실행 크기의 대표 단위(분할 1)
+        a.SPLITS = [1]
+        a.T = {"wf1": ["Alaska"], "wf2": ["Alaska"], "wf3": ["Alaska"], "wf4": [("Lena", "x"), ("AL-2", "i")]}
+        a.STRAT = ["S1", "S6"]
+    a.OUT = _abs(a.out_dir); a.PROC = _abs(a.data_dir); a.LGD = _abs(a.lgd_dir)
+    a.SHARDS = a.OUT / "shards"
+    a._ha = None
+    return a
+
+
+def exp_tag(a, exp):
+    return f"{a.tag}{exp[2:]}{a.SUFFIX}"
+
+
+def draws_for(a, exp, n):
+    """(n 의 추출 수). wf1·wf3 은 n ≤ 1000 에서 5, 그 밖 3, 전량 1. wf2·wf4 는 5(전량 1). --draws-cap 이 있으면 그 값 이하."""
+    if n == -1:
+        k = 1
+    elif exp in ("wf1", "wf3"):
+        k = DRAWS_SMALL if n <= DRAW_SPLIT_N else DRAWS_LARGE
+    else:
+        k = WF2_DRAWS if exp == "wf2" else WF4_DRAWS
+    return max(1, min(k, int(a.draws_cap))) if int(a.draws_cap) > 0 else k
+
+
+def cells_for(a, exp, nA, grid=None):
+    """(n, 추출) 목록. 양수 n 은 |A| 미만만, 전량은 n = −1 하나(h40.cells_of 와 같은 규칙)."""
+    out = []
+    for n in (a.G[exp] if grid is None else grid):
+        if n == -1:
+            out.append((-1, 0))
+        elif 0 < n < nA:
+            out += [(n, d) for d in range(draws_for(a, exp, n))]
+    return out
+
+
+def h40_args(a):
+    """적합기(h40.Fitter, h42.FitterX)에 넘기는 h40 형식 인자. 스레드와 catboost_lo 반복 수만 쓴다."""
+    if a._ha is None:
+        a._ha = H.parse_args(["--threads", str(a.threads), "--cb-iters", str(a.cb_iters), "--kappa", str(KAPPA), "--r", str(R_PS),
+                              "--lams", ",".join(str(v) for v in LAMS)])
+    return a._ha
+
+
+# ================================================================ 자료와 작업 단위 문맥
+_DATA: dict = {}
+
+
+def data_args(a, data_dir):
+    """h40.Data 를 만드는 h40 형식 인자(자료 디렉터리별). 분할 범위는 a.SPLITS 다."""
+    HA = H.parse_args(["--threads", str(a.threads), "--data-dir", str(data_dir), "--subregion-map", a.subregion_map,
+                       "--splits", str(max(a.SPLITS))])
+    HA.SPLITS = list(a.SPLITS)
+    return HA
+
+
+def get_data(a, spec=None):
+    """(h40 인자, h40.Data). spec = None 은 v3 자료(data/processed), 그 밖은 LGD 실행 표 디렉터리 이름이다. 프로세스마다 한 번 적재한다."""
+    key = (str(a.PROC), str(a.LGD), spec, tuple(a.SPLITS))
+    if key not in _DATA:
+        d = a.PROC if spec is None else a.LGD / spec
+        if spec is not None and not (d / "fidelity_base_v3.csv").exists():
+            raise FileNotFoundError(f"LGD 실행 표가 없다: {d}/fidelity_base_v3.csv")
+        HA = data_args(a, d)
+        _DATA[key] = (HA, H.Data(HA))
+    return _DATA[key]
+
+
+def lgd_available(a, alias):
+    spec = LGD_SPECS[alias][0]
+    return (a.LGD / spec / "fidelity_base_v3.csv").exists() and (a.LGD / spec / "e5_soil_tdd_v3.csv").exists()
+
+
+def resolve4(a, alias):
+    """wf4 대상 이름 → (자료 spec, 표 안의 대상 이름, 점 추정만)."""
+    if alias in LGD_SPECS:
+        spec, tgt, po = LGD_SPECS[alias]
+        return spec, tgt, po
+    return None, alias, alias in H.MAIN_POINT
+
+
+class RCtx:
+    """지역 내 작업 단위(대상, 분할). 라벨 후보 = A 블록의 모든 셀, 채점 = B 블록의 eval_mask 셀. 원천 행은 없다.
+    E0 = LG 원천(모드 x) 최소제곱 계수(P0 과 κ 수축의 사전값). src_X = LG 원천 셀의 x25(S5 의 AOA 거리 전용, 라벨 미사용).
+    시험에서는 합성 자료로 직접 만든다."""
+
+    def __init__(self, target, split, parent, XA, yA, sA, blkA, latA, lonA, XB, yB, sB, blkB, latB, lonB, E0, XA34=None, XB34=None,
+                 src_X=None, meta=None, mode=MODE_R):
+        self.target, self.mode, self.split, self.parent = str(target), str(mode), int(split), str(parent)
+        self.XA = np.asarray(XA, np.float32); self.yA = np.asarray(yA, float); self.sA = np.asarray(sA, float); self.blkA = np.asarray(blkA)
+        self.XB = np.asarray(XB, np.float32); self.yB = np.asarray(yB, float); self.sB = np.asarray(sB, float); self.blkB = np.asarray(blkB)
+        self.latA, self.lonA = np.asarray(latA, float), np.asarray(lonA, float)
+        self.latB, self.lonB = np.asarray(latB, float), np.asarray(lonB, float)
+        self.XA34 = None if XA34 is None else np.asarray(XA34, np.float32)
+        self.XB34 = None if XB34 is None else np.asarray(XB34, np.float32)
+        self.E0 = float(E0)
+        self.src_X = None if src_X is None else np.asarray(src_X, np.float32)
+        self.meta = dict(meta or {})
+        self.PA, self.PB = xyz_km(self.latA, self.lonA), xyz_km(self.latB, self.lonB)
+
+    def XAf(self, xs):
+        return self.XA if xs == "x25" else self.XA34
+
+    def XBf(self, xs):
+        return self.XB if xs == "x25" else self.XB34
+
+
+def split_plan(D, target, splits):
+    """실행할 분할과 건너뛴 분할(h40.enumerate_units 와 같은 규칙: 중복 분할, 채점·A 셀 없음, 유효 분할이 있을 때의 무효 분할을 뺀다)."""
+    info = D.split_structure(target)
+    any_valid = any(v["valid"] for v in info.values())
+    keep, skip = [], []
+    for sp in splits:
+        v = info[sp]
+        if v["dup_of"] >= 0:
+            skip.append((sp, f"dup_of_{v['dup_of']}", v))
+        elif v["n_eval"] == 0 or v["n_A"] == 0:
+            skip.append((sp, "no_eval", v))
+        elif not v["valid"] and any_valid:
+            skip.append((sp, "invalid_nb_eval<2", v))
+        else:
+            keep.append(sp)
+    return keep, skip, info
+
+
+def build_rctx(a, target, split):
+    """지역 내 문맥. A·B 색인과 채점 셀은 h40.build_ctx 와 같은 규칙(half_split_blocks, eval_mask)으로 만든다."""
+    HA, D = get_data(a)
+    df = D.df
+    t_idx = D.target_idx(target)
+    A_idx, B_idx = half_split_blocks(df, t_idx, split)
+    evB = B_idx[eval_mask(df.iloc[B_idx])]
+    _, parent, src_idx, comp = D.source_idx(target, "x")
+    ok = np.isfinite(df.y.values[src_idx]) & np.isfinite(df.s.values[src_idx])
+    src = src_idx[ok]
+    E0 = H.ls_E(df.y.values[src], df.s.values[src])
+    info = D.split_structure(target)[split]
+    has34 = all(c_ in df.columns for c_ in SAR_COLS)
+
+    def cols(idx, names):
+        return df[names].values[idx].astype(np.float32)
+    meta = dict(n_A=int(len(A_idx)), nb_A=int(len(np.unique(df.block.values[A_idx]))),
+                n_eval=int(len(evB)), nb_eval=int(len(np.unique(df.block.values[evB]))), n_src=int(len(src)), E0=float(E0),
+                E_A=float(H.ls_E(df.y.values[A_idx], df.s.values[A_idx])), n_cells=int(len(t_idx)), dup_of=int(info["dup_of"]),
+                valid=bool(info["valid"]), n_valid_splits=int(info["n_valid_splits"]), n_unique_splits=int(info["n_unique_splits"]),
+                src_mode="x", n_src_parent=int(comp.get("n_src_parent", 0)), subregion_src=getattr(D, "sub_src", ""))
+    return RCtx(target, split, parent, cols(A_idx, FEATS), df.y.values[A_idx], df.s.values[A_idx], df.block.values[A_idx], df.lat.values[A_idx],
+                df.lon.values[A_idx], cols(evB, FEATS), df.y.values[evB], df.s.values[evB], df.block.values[evB], df.lat.values[evB],
+                df.lon.values[evB], E0, XA34=cols(A_idx, FEATS34) if has34 else None, XB34=cols(evB, FEATS34) if has34 else None,
+                src_X=cols(src, FEATS), meta=meta)
+
+
+def build_tctx(a, alias, mode, split):
+    """전이 문맥(h40.build_ctx 그대로). LGD 새 지역은 그 실행 표의 h40.Data 로 만든다. 반환 (Ctx, 저장소 이름의 대상)."""
+    spec, tgt, _ = resolve4(a, alias)
+    HA, D = get_data(a, spec)
+    c = H.build_ctx(D, HA, tgt, mode, split)
+    c.meta.update(alias=alias, data_spec=spec or "v3")
+    return c
+
+
+# ================================================================ 순수 함수: 크리깅
+R_EARTH_KM = 6371.0
+
+
+def xyz_km(lat, lon):
+    """구면 위 3차원 직교 좌표(km). 두 점의 직선 거리는 대권 거리와 짧은 거리에서 같다."""
+    la, lo = np.radians(np.asarray(lat, float)), np.radians(np.asarray(lon, float))
+    return R_EARTH_KM * np.c_[np.cos(la) * np.cos(lo), np.cos(la) * np.sin(lo), np.sin(la)]
+
+
+def vario_exp(h, psill, rng, nugget):
+    """지수 변이도. pykrige 의 'exponential' 과 같은 모수화(rng = 실용 범위): γ(h) = nugget + psill·(1 − exp(−3h/rng))."""
+    return float(nugget) + float(psill) * (1.0 - np.exp(-3.0 * np.asarray(h, float) / float(rng)))
+
+
+def fit_variogram(P, z, seed, max_pts=VARIO_MAX_PTS, nlags=VARIO_NLAGS, nrange=VARIO_NRANGE):
+    """경험 변이도에 지수 모형을 맞춘다. 반환 dict(psill, range, nugget, n_fit, n_bins, sse) 또는 None(라벨 < KRIGE_MIN, 구간 < 3).
+    점이 max_pts 보다 많으면 seed 로 부분표본을 뽑는다. 거리는 최대 거리의 절반까지 nlags 구간, 가중 = √(구간 쌍 수).
+    범위는 로그 격자(nrange 개)에서 고르고 (psill, nugget)은 비음수 최소제곱으로 구한다."""
+    from scipy.optimize import nnls
+    from scipy.spatial.distance import pdist
+    P = np.asarray(P, float); z = np.asarray(z, float)
+    ok = np.isfinite(z) & np.all(np.isfinite(P), 1)
+    P, z = P[ok], z[ok]
+    if len(z) < KRIGE_MIN:
+        return None
+    if len(z) > max_pts:
+        idx = np.sort(np.random.RandomState(int(seed) % (2 ** 31 - 1)).choice(len(z), int(max_pts), replace=False))
+        P, z = P[idx], z[idx]
+    d = pdist(P)
+    g = 0.5 * pdist(z[:, None], "sqeuclidean")
+    dmax = 0.5 * float(d.max()) if len(d) else 0.0
+    if not np.isfinite(dmax) or dmax <= 0:
+        return None
+    m = d <= dmax
+    d, g = d[m], g[m]
+    edges = np.linspace(0.0, dmax, int(nlags) + 1)
+    b = np.clip(np.searchsorted(edges, d, side="right") - 1, 0, int(nlags) - 1)
+    cnt = np.bincount(b, minlength=int(nlags)).astype(float)
+    gs = np.bincount(b, weights=g, minlength=int(nlags)); ds = np.bincount(b, weights=d, minlength=int(nlags))
+    k = cnt > 0
+    if k.sum() < 3:
+        return None
+    hc, gc, w = ds[k] / cnt[k], gs[k] / cnt[k], np.sqrt(cnt[k])
+    best = None
+    for rg in np.geomspace(max(float(hc.min()), 1e-3), 2.0 * dmax, int(nrange)):
+        f = 1.0 - np.exp(-3.0 * hc / rg)
+        A = np.c_[f, np.ones_like(f)] * w[:, None]
+        coef, _ = nnls(A, gc * w)
+        sse = float(np.sum((A @ coef - gc * w) ** 2))
+        if best is None or sse < best[0] - 1e-12 * max(1.0, abs(best[0])):
+            best = (sse, float(rg), coef)
+    sse, rg, (psill, nug) = best
+    if psill <= 0 and nug <= 0:                                           # 평탄한 자료: 순수 너깃(국소 평균이 된다)
+        nug = max(float(np.var(z)), 1e-9)
+    return dict(psill=float(psill), range=float(rg), nugget=float(nug), n_fit=int(len(z)), n_bins=int(k.sum()), sse=sse)
+
+
+def ok_predict(P_lab, z_lab, P_new, vp, k=KRIGE_K, chunk=1024):
+    """국소 정규 크리깅(최근접 k 개). pykrige 의 이동 창 계산(backend loop, n_closest_points)과 같은 연립식이다:
+    [Γ 1; 1ᵀ 0][w; μ] = [γ0; 1], Γ_ii = 0, 거리 0 인 이웃은 γ0 = 0. 특이 행렬이면 유사역행렬을 쓴다."""
+    from scipy.spatial import cKDTree
+    P_lab = np.asarray(P_lab, float); z = np.asarray(z_lab, float); P_new = np.asarray(P_new, float)
+    m = len(P_new)
+    if m == 0:
+        return np.zeros(0)
+    kk = int(min(int(k), len(z)))
+    dist, idx = cKDTree(P_lab).query(P_new, k=kk)
+    if kk == 1:
+        dist, idx = dist[:, None], idx[:, None]
+    ps, rg, nu = vp["psill"], vp["range"], vp["nugget"]
+    out = np.empty(m)
+    ar = np.arange(kk)
+    for s0 in range(0, m, int(chunk)):
+        ii, dd = idx[s0:s0 + chunk], dist[s0:s0 + chunk]
+        Q = P_lab[ii]
+        Dm = np.sqrt(((Q[:, :, None, :] - Q[:, None, :, :]) ** 2).sum(-1))
+        G = vario_exp(Dm, ps, rg, nu)
+        G[:, ar, ar] = 0.0
+        c_ = len(ii)
+        A = np.ones((c_, kk + 1, kk + 1)); A[:, :kk, :kk] = G; A[:, kk, kk] = 0.0
+        bvec = np.ones((c_, kk + 1)); bvec[:, :kk] = np.where(dd < 1e-9, 0.0, vario_exp(dd, ps, rg, nu))
+        try:
+            wv = np.linalg.solve(A, bvec[..., None])[..., 0]
+        except np.linalg.LinAlgError:
+            wv = np.einsum("cij,cj->ci", np.linalg.pinv(A), bvec)
+        out[s0:s0 + chunk] = (wv[:, :kk] * z[ii]).sum(1)
+    return out
+
+
+def krige(P_lab, z_lab, P_new, seed):
+    """변이도 적합 + 국소 크리깅. 반환 (예측 또는 None, 변이도 dict 또는 None). None 이면 호출한 쪽이 대체값을 쓴다."""
+    vp = fit_variogram(P_lab, z_lab, seed)
+    if vp is None:
+        return None, None
+    p = ok_predict(P_lab, z_lab, P_new, vp)
+    if not np.all(np.isfinite(p)):
+        return None, vp
+    return p, vp
+
+
+# ================================================================ 순수 함수: 표준화·군집·전략
+def standardize_fit(X):
+    """중앙값 대체 + 평균·표준편차(h40._prep_stats). 라벨을 쓰지 않는다."""
+    return H._prep_stats(np.asarray(X, float))
+
+
+def standardize(X, stats):
+    return H._prep_apply(X, stats).astype(float)
+
+
+def kmeans_labels(ZA, ZB, k, seed):
+    """A 풀 표준화 공변량에 k-평균을 맞추고 A·B 의 군집 번호를 돌려준다. k 는 A 풀 셀 수를 넘지 않는다."""
+    from sklearn.cluster import KMeans
+    k = int(max(1, min(int(k), len(ZA))))
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        km = KMeans(n_clusters=k, n_init=10, random_state=int(seed) % (2 ** 31 - 1)).fit(ZA)
+    labB = km.predict(ZB) if len(ZB) else np.zeros(0, int)
+    return np.asarray(km.labels_, int), np.asarray(labB, int)
+
+
+def proportional_alloc(sizes, n):
+    """군집 크기 비례 배분(최대 나머지 방식). 군집 크기를 넘지 않게 남는 몫은 여유 있는 군집에 차례로 준다."""
+    sizes = np.asarray(sizes, int)
+    n = int(min(n, sizes.sum()))
+    q = n * sizes / max(sizes.sum(), 1)
+    alloc = np.minimum(np.floor(q).astype(int), sizes)
+    rem = q - np.floor(q)
+    for j in np.argsort(-rem, kind="stable"):
+        if alloc.sum() >= n:
+            break
+        if alloc[j] < sizes[j]:
+            alloc[j] += 1
+    while alloc.sum() < n:                                                # 몫이 군집 크기에 막힌 경우
+        j = int(np.argmax(sizes - alloc))
+        alloc[j] += 1
+    return alloc
+
+
+def kcenter_order(Z, n_max, seed, init=None):
+    """탐욕 k-중심 순서. init(이미 고른 점의 좌표)가 있으면 그 집합에서 시작하고, 없으면 첫 점을 seed 로 무작위로 고른다.
+    그 뒤 기존 집합까지의 최소 거리가 가장 큰 점을 차례로 더한다(동률은 작은 색인)."""
+    Z = np.asarray(Z, float)
+    N = len(Z)
+    n_max = int(min(n_max, N))
+    order = []
+    if init is not None and len(init):
+        from scipy.spatial import cKDTree
+        mind = cKDTree(np.asarray(init, float)).query(Z, k=1)[0]
+    else:
+        j0 = int(np.random.RandomState(int(seed) % (2 ** 31 - 1)).randint(N))
+        order.append(j0)
+        mind = np.sqrt(((Z - Z[j0]) ** 2).sum(1)); mind[j0] = -1.0
+    while len(order) < n_max:
+        j = int(np.argmax(mind))
+        order.append(j)
+        mind = np.minimum(mind, np.sqrt(((Z - Z[j]) ** 2).sum(1))); mind[j] = -1.0       # 고른 점은 −1 로 남는다(min 이 유지한다)
+    return np.array(order, int)
+
+
+def aoa_di(Zc, Zsrc, seed, sub=AOA_SUB):
+    """AOA 비유사도(Meyer·Pebesma 2021, 변수 가중 없음): 후보 셀의 원천 최근접 거리 / 원천 안 평균 쌍 거리(부분표본 sub)."""
+    from scipy.spatial import cKDTree
+    from scipy.spatial.distance import pdist
+    Zsrc = np.asarray(Zsrc, float)
+    dmin = cKDTree(Zsrc).query(np.asarray(Zc, float), k=1)[0]
+    S = Zsrc
+    if len(S) > sub:
+        S = S[np.sort(np.random.RandomState(int(seed) % (2 ** 31 - 1)).choice(len(S), int(sub), replace=False))]
+    dbar = float(np.mean(pdist(S))) if len(S) > 1 else 1.0
+    return dmin / max(dbar, 1e-12)
+
+
+def rank_desc(score, seed):
+    """점수가 큰 순서의 색인(동률은 seed 로 섞는다)."""
+    score = np.asarray(score, float)
+    tie = np.random.RandomState(int(seed) % (2 ** 31 - 1)).rand(len(score))
+    return np.lexsort((tie, -score))
+
+
+def ve_variance(Xtr, ytr, Xc, seed, iters, threads):
+    """CatBoost 가상 앙상블 분산(posterior_sampling = True, catboost_lo 설정). 반환 = 후보 셀별 성분 사이 분산.
+    가상 앙상블 10개에는 트리가 충분해야 하므로 반복 수의 하한을 10 × VE_COUNT 로 둔다(설계값 200 에는 영향이 없다)."""
+    from catboost import CatBoostRegressor
+    m = CatBoostRegressor(iterations=max(int(iters), 10 * VE_COUNT), learning_rate=0.05, depth=3, l2_leaf_reg=3.0, random_seed=int(seed) % (2 ** 31 - 1), verbose=0,
+                          allow_writing_files=False, thread_count=int(threads), posterior_sampling=True)
+    m.fit(np.asarray(Xtr, np.float32), np.asarray(ytr, float))
+    p = np.asarray(m.virtual_ensembles_predict(np.asarray(Xc, np.float32), prediction_type="VirtEnsembles",
+                                               virtual_ensembles_count=VE_COUNT, thread_count=int(threads)), float)
+    return p.reshape(len(Xc), VE_COUNT, -1)[:, :, 0].var(1)
+
+
+def re_anchor(base, cci, ccv):
+    """Re 앵커: CCI 가 유효한 셀은 Stefan(E_n·s)과 CCI ALT 의 평균, 그 밖은 Stefan."""
+    base = np.asarray(base, float); cci = np.asarray(cci, float); ccv = np.asarray(ccv, float)
+    ok = np.isfinite(cci) & np.isfinite(ccv) & (ccv >= 0.5)
+    return np.where(ok, 0.5 * (base + np.where(ok, cci, 0.0)), base)
+
+
+def onehot(lab, k):
+    return np.eye(int(k), dtype=np.float32)[np.asarray(lab, int)]
+
+
+def est_fit_s(learner, nrow):
+    """적합 1건의 추정 시간(s, 4스레드 기준). LG BASE_FIT 모형에 소표본 하한을 둔다."""
+    b, ref, ex = EST_BASE.get(learner, EST_BASE[LO])
+    return float(max(b * (max(int(nrow), 1) / ref) ** ex, EST_FLOOR.get(learner, 0.05)))
+
+
+# ================================================================ 적합기와 작업 단위
+class WFFitter(X.FitterX):
+    """h42.FitterX(catboost_lo = h40.cb_fit, catboost = CB_HI 600·깊이 6·0.03)에 WF 의 시간 추정을 붙인다."""
+
+    def _count(self, axis, learner, info):
+        k = f"{axis}|{learner}|{(info or {}).get('method', '')}"
+        self.n[axis] += 1; self.nd[k] += 1; self.last_flag = ""
+        nr = max(int((info or {}).get("nrow", 1)), 1)
+        self.rowsd[k] += nr
+        self.estd[k] += est_fit_s(learner, nr)
+        return k
+
+
+class UnitBase:
+    """작업 단위의 공용 부분: 저장(BlockStore 와 runs 행), 추적, 적합 호출, 마무리."""
+
+    def _init_base(self, a, c, exp, name, variant, dry):
+        self.a, self.c, self.exp, self.variant, self.dry = a, c, exp, str(variant or ""), bool(dry)
+        self.F = WFFitter(h40_args(a), dry)
+        self.F.nrow_fn = lambda ax, lr, info: int(info.get("nrow", 1))
+        self.name = name
+        self.st = BlockStore(name, c.split, c.blkB, meta=dict(target=name.split("|")[0], mode=c.mode, exp=exp, variant=self.variant))
+        self.rows, self.n_rows, self.n_bad = [], 0, 0
+        self.notes: dict = {}
+        self.n_krige, self.krige_s, self.est_krige = 0, 0.0, 0.0
+        self.n_km, self.km_s = 0, 0.0
+        self.nA, self.nB = len(c.yA), len(c.yB)
+        self.seeds = list(a.SEEDS)
+        self.base_row = dict(exp=exp, target=name.split("|")[0], mode=c.mode, parent=c.parent, split=int(c.split), variant=self.variant, part="cpu",
+                             axis=exp)
+
+    # ------------------------------------------------------------ 저장
+    def add(self, method, learner, placement, n, d, seed, lam, pred, E_used=np.nan, n_lab=0, nb_lab=0, flag="", sel_info="", **kw):
+        self.n_rows += 1
+        if self.dry:
+            return None
+        pred = np.asarray(pred, float); y = self.c.yB
+        nf = int((~np.isfinite(pred)).sum())
+        row = dict(self.base_row, method=method, learner=learner, alpha="1", placement=placement, n=int(n), n_lab=int(n_lab), draw=int(d),
+                   seed=int(seed), lam=float(lam), rmse_cm=np.nan, rmse_beq_cm=np.nan, bias_cm=np.nan, E_used=float(E_used), alpha_sel=str(sel_info),
+                   n_blocks_lab=int(nb_lab), n_nonfinite=nf, fit_flag=str(flag) if nf == 0 else (str(flag) or "nonfinite"),
+                   n_train_rows=int(kw.get("nrow", 0)), cv_folds=int(kw.get("cv_folds", 0)), cv_flag=str(kw.get("cv_flag", "")))
+        if nf > 0:                                                       # 비유한 예측이 있는 키는 저장하지 않는다(h40 과 같다)
+            self.n_bad += 1
+            self.rows.append(row)
+            return None
+        key = (method, learner, "1", placement, int(n), int(d), int(seed), float(lam))
+        self.st.add(key, y, pred)
+        if PRED_TRACE is not None:
+            PRED_TRACE[(self.exp, self.name, int(self.c.split), self.variant) + key] = pred.copy()
+        sse, cnt = self.st.get(key)
+        with np.errstate(invalid="ignore", divide="ignore"):
+            beq = float(np.nanmean(np.where(cnt > 0, np.sqrt(sse / np.maximum(cnt, 1)), np.nan))) if cnt.sum() else np.nan
+            rm = float(np.sqrt(sse.sum() / cnt.sum())) if cnt.sum() else np.nan
+        row.update(rmse_cm=rm, rmse_beq_cm=beq, bias_cm=float(np.mean(pred - y)) if len(y) else np.nan)
+        self.rows.append(row)
+        return key
+
+    def emit(self, method, lr, n, d, seed, anchorB, g, E_used, nl, nb, lcv=None, K=0, cf="", flag="", placement="cell", sel_info="", nrow=0):
+        """잔차 방법의 저장: λ 0.25·0.5·1.0 과(lcv 가 있으면) 교차검증 λ(키 lam = −1)."""
+        anchorB = np.asarray(anchorB, float); g = np.asarray(g, float)
+        for lam in LAMS:
+            self.add(method, lr, placement, n, d, seed, lam, anchorB + lam * g, E_used, nl, nb, flag=flag, sel_info=sel_info, nrow=nrow)
+        if lcv is not None:
+            self.add(method, lr, placement, n, d, seed, LAM_CV, anchorB + float(lcv) * g, E_used, nl, nb, flag=flag, sel_info=f"lam={lcv}",
+                     cv_folds=K, cv_flag=cf, nrow=nrow)
+
+    def trace(self, kind, idx, **kw):
+        if WF_TRACE is not None:
+            WF_TRACE.append(dict(kind=kind, exp=self.exp, name=self.name, split=int(self.c.split), variant=self.variant,
+                                 idx=np.array(idx, int).copy(), **kw))
+
+    def fit(self, lr, method, build, nrow, seed, preds, n, d, lab_idx, placement="cell", **tr):
+        """build() → (Xtr, ytr, None). lab_idx = 학습에 들어간 대상 라벨의 A 색인(추적용). preds 의 예측 목록을 돌려준다."""
+        self.trace("fit", lab_idx, method=method, learner=lr, n=int(n), draw=str(d), seed=int(seed), **tr)
+        inf = dict(method=method, n=int(n) if not isinstance(n, str) else n, draw=d, alpha="1", placement=placement,
+                   sel=np.asarray(lab_idx, int), nrow=int(nrow))
+        _, out = self.F.fit(lr, self.exp, build, seed, list(preds), info=inf)
+        return out
+
+    def nb(self, idx):
+        return int(len(np.unique(self.c.blkA[idx]))) if len(idx) else 0
+
+    def coefs(self, idx):
+        """(E_n, E_ls). 라벨이 없거나 E_ls 가 비유한이면 둘 다 E0(h40·h42 와 같다)."""
+        c = self.c
+        if len(idx) == 0:
+            return float(c.E0), float(c.E0)
+        E_ls = H.ls_E(c.yA[idx], c.sA[idx])
+        if not np.isfinite(E_ls):
+            return float(c.E0), float(c.E0)
+        return X.shrink(E_ls, c.E0, len(idx), KAPPA), float(E_ls)
+
+    def folds(self, idx, n, d):
+        """교차검증 묶음(h42.cv_folds_of: 라벨의 A 블록 순열 5묶음, 블록이 하나면 셀 묶음)."""
+        return X.cv_folds_of(self.c.blkA[idx], self.c.target, self.c.mode, self.c.split, n, d)
+
+    def finish(self):
+        F = self.F
+        n_ml = sum(1 for k in self.st.keys if k[1] != "none")
+        n_fail = int(sum(F.fail.values())) + int(self.n_bad)
+        status = "ok" if n_fail == 0 else ("failed" if n_ml == 0 else "partial")
+        stats = dict(n_fit=dict(F.n), sec={k: round(v, 1) for k, v in F.sec.items()}, fail=dict(F.fail), n_rows=int(self.n_rows), status=status,
+                     n_fit_detail=dict(F.nd), sec_detail={k: round(v, 3) for k, v in F.secd.items()}, rows_detail=dict(F.rowsd),
+                     est_detail={k: round(v, 3) for k, v in F.estd.items()}, errors=list(F.errors), n_stored=int(len(self.st)),
+                     n_stored_ml=int(n_ml), n_nonfinite_keys=int(self.n_bad), notes=self.notes, n_krige=int(self.n_krige),
+                     krige_s=round(self.krige_s, 2), est_krige_s=round(self.est_krige, 2), n_kmeans=int(self.n_km), kmeans_s=round(self.km_s, 2),
+                     est_kmeans_s=round(self.n_km * EST_KMEANS, 2))
+        return self.rows, self.st, stats
+
+
+class RUnit(UnitBase):
+    """지역 내 작업 단위(wf1, wf2, wf3). 학습 행 = 선택 라벨(과 유사라벨 행)뿐이다."""
+
+    def __init__(self, a, c, exp, variant="", dry=False):
+        self._init_base(a, c, exp, f"{c.target}|{c.mode}", variant, dry)
+        self._km: dict = {}
+        self._std = None
+        self._di = None
+        self.add("P0", "none", "cell", 0, 0, -1, 0.0, c.E0 * c.sB, c.E0, 0)          # P0 은 모든 비교의 기준이라 항상 저장한다
+
+    # ------------------------------------------------------------ 추출·행렬
+    def draw(self, n, d):
+        return H.draw_cells(self.c.target, self.c.mode, self.c.split, n, d, self.nA)
+
+    def ps_idx(self, n, d, seed, tag, n_lab):
+        """유사라벨 행 색인: A 풀에서 round(r × 학습 라벨 수) 개 복원 추출."""
+        n_ps = int(round(R_PS * int(n_lab)))
+        if n_ps <= 0:
+            return np.zeros(0, int)
+        return np.random.RandomState(seed_of("wf-ps", self.c.target, self.c.mode, self.c.split, n, d, seed, tag)).choice(self.nA, n_ps, replace=True)
+
+    def fit_direct(self, lr, method, idx, seed, n, d, xs="x25", pseudo_E=None, preds=None, tag="", placement="cell"):
+        c = self.c; XA = c.XAf(xs)
+        ps = self.ps_idx(n, d, seed, tag, len(idx)) if pseudo_E is not None else np.zeros(0, int)
+
+        def build():
+            Xr, yr = [XA[idx]], [c.yA[idx]]
+            if len(ps):
+                Xr.append(XA[ps]); yr.append(X.pseudo_values(float(pseudo_E) * c.sA, ps, idx, c.yA))
+            return np.vstack(Xr), np.concatenate(yr), None
+        return self.fit(lr, method, build, len(idx) + len(ps), seed, [c.XBf(xs)] if preds is None else preds, n, d, idx, placement=placement,
+                        tag=tag)
+
+    def fit_resid(self, lr, method, idx, anchor_lab, seed, n, d, xs="x25", pseudo_E=None, preds=None, tag="", placement="cell"):
+        c = self.c; XA = c.XAf(xs)
+        ps = self.ps_idx(n, d, seed, tag, len(idx)) if pseudo_E is not None else np.zeros(0, int)
+        anchor_lab = np.asarray(anchor_lab, float)
+
+        def build():
+            Xr, yr = [XA[idx]], [c.yA[idx] - anchor_lab]
+            if len(ps):
+                Xr.append(XA[ps]); yr.append(X.pseudo_values(None, ps, idx, c.yA, float(pseudo_E) * c.sA))
+            return np.vstack(Xr), np.concatenate(yr), None
+        return self.fit(lr, method, build, len(idx) + len(ps), seed, [c.XBf(xs)] if preds is None else preds, n, d, idx, placement=placement,
+                        tag=tag)
+
+    def anchor_A(self, kind, E, idx):
+        base = float(E) * self.c.sA[idx]
+        return re_anchor(base, self.c.XA[idx, CCI_COL], self.c.XA[idx, CCIV_COL]) if kind == "Re" else base
+
+    def anchor_B(self, kind, E):
+        base = float(E) * self.c.sB
+        return re_anchor(base, self.c.XB[:, CCI_COL], self.c.XB[:, CCIV_COL]) if kind == "Re" else base
+
+    # ------------------------------------------------------------ 크리깅·군집
+    def _krige(self, idx, z, P_new, n, d, tag):
+        self.n_krige += 1
+        self.est_krige += EST_KRIGE[0] + EST_KRIGE[1] * len(P_new)
+        self.trace("krige", idx, n=n, draw=str(d), tag=tag)
+        if self.dry:
+            return np.zeros(len(P_new)), ""
+        if len(idx) < KRIGE_MIN:
+            return None, f"krige_fallback(n<{KRIGE_MIN})"
+        t0 = time.time()
+        p, vp = krige(self.c.PA[idx], z, P_new, seed_of("wf-vario", self.c.target, self.c.split, n, d, tag))
+        self.krige_s += time.time() - t0
+        return (p, "") if p is not None else (None, "krige_fallback(variogram)")
+
+    def krige_E(self, idx, P_new, n, d, tag):
+        """라벨 위치의 E = y/s 를 크리깅한다. 반환 (Ê 또는 None, 표지)."""
+        with np.errstate(invalid="ignore", divide="ignore"):
+            z = self.c.yA[idx] / self.c.sA[idx]
+        return self._krige(idx, z, P_new, n, d, tag)
+
+    def std_stats(self):
+        if self._std is None:
+            self._std = standardize_fit(self.c.XA)
+        return self._std
+
+    def clusters(self, k):
+        """(A 군집 번호, B 군집 번호). 표준화와 k-평균은 A 풀 공변량만 쓴다(라벨 미사용)."""
+        if k not in self._km:
+            self.n_km += 1
+            if self.dry:
+                labs = (np.random.RandomState(k).randint(0, k, self.nA), np.random.RandomState(k + 7).randint(0, k, self.nB))
+            else:
+                t0 = time.time(); st = self.std_stats()
+                labs = kmeans_labels(standardize(self.c.XA, st), standardize(self.c.XB, st), k, seed_of("wf-km", self.c.target, self.c.split, k))
+                self.km_s += time.time() - t0
+            self._km[k] = labs
+        return self._km[k]
+
+    def pc_E(self, idx, k, labs_target):
+        """군집 계수: 군집 c 의 E_ls,c 를 학습 라벨의 전체 E_n 으로 κ 수축. 라벨이 없는 군집은 E_n."""
+        c = self.c
+        labA, _ = self.clusters(k)
+        E_n, _ = self.coefs(idx)
+        Ec = np.full(int(k), float(E_n))
+        li = labA[idx]
+        for cl in range(int(k)):
+            m = idx[li == cl]
+            if len(m):
+                Ec[cl] = X.shrink(H.ls_E(c.yA[m], c.sA[m]), E_n, len(m), KAPPA)
+        return Ec[np.asarray(labs_target, int)]
+
+    def pc_choose_k(self, idx, n, d):
+        """Pc 의 k 를 학습 라벨 안 블록 교차검증으로 고른다(동률이면 작은 k). 묶음이 2개 미만이면 k = 2."""
+        c = self.c
+        fid, K, flag = self.folds(idx, n, d)
+        if K < 2:
+            return CLUSTER_KS[0], int(K), flag or "folds<2"
+        sse = {k: 0.0 for k in CLUSTER_KS}
+        for j in range(K):
+            tr, te = idx[fid != j], idx[fid == j]
+            self.trace("cv", tr, method="Pc", n=n, draw=str(d), fold=j, held=te)
+            for k in CLUSTER_KS:
+                labA, _ = self.clusters(k)
+                sse[k] += float(np.sum((self.pc_E(tr, k, labA[te]) * c.sA[te] - c.yA[te]) ** 2))
+        return min(CLUSTER_KS, key=lambda v: (sse[v] if np.isfinite(sse[v]) else np.inf, v)), int(K), flag
+
+    def pbest_choose(self, sel, n, d):
+        """최선 물리 보정식: P1, P2, Pk, Pc(안쪽 교차검증 k) 가운데 블록 교차검증 오차가 가장 작은 것(동률은 후보 순서)."""
+        c = self.c
+        fid, K, flag = self.folds(sel, n, d)
+        if K < 2:
+            return "P1", int(K), flag or "folds<2"
+        sse = {m: 0.0 for m in PBEST_CANDS}
+        for j in range(K):
+            tr, te = sel[fid != j], sel[fid == j]
+            self.trace("cv", tr, method="Pbest", n=n, draw=str(d), fold=j, held=te)
+            E1, E2 = self.coefs(tr)
+            s, y = c.sA[te], c.yA[te]
+            Ek, _ = self.krige_E(tr, c.PA[te], n, d, f"pb{j}")
+            kj, _, _ = self.pc_choose_k(tr, n, f"{d}.{j}")
+            labA, _ = self.clusters(kj)
+            pr = dict(P1=E1 * s, P2=E2 * s, Pk=(Ek if Ek is not None else np.full(len(te), E1)) * s, Pc=self.pc_E(tr, kj, labA[te]) * s)
+            for m in PBEST_CANDS:
+                sse[m] += float(np.sum((pr[m] - y) ** 2))
+        if self.dry:
+            return "P1", int(K), flag
+        return min(PBEST_CANDS, key=lambda m: (sse[m] if np.isfinite(sse[m]) else np.inf, PBEST_CANDS.index(m))), int(K), flag
+
+    def lam_cv(self, kind, lr, xs, sel, n, d, suf=""):
+        """잔차 방법(R1, R2, Re)의 λ 교차검증(seed 0 적합). 반환 (λ, 묶음 수, 표지). 묶음이 2개 미만이면 λ 0.25."""
+        c = self.c
+        fid, K, flag = self.folds(sel, n, d)
+        if K < 2:
+            return LAM_BASE, int(K), flag or "folds<2"
+        sse = {lam: 0.0 for lam in LAMS}
+        seed0 = self.seeds[0]
+        for j in range(K):
+            tr, te = sel[fid != j], sel[fid == j]
+            E_tr, _ = self.coefs(tr)
+            a_tr, a_te = self.anchor_A(kind, E_tr, tr), self.anchor_A(kind, E_tr, te)
+            (g,) = self.fit_resid(lr, f"{kind}{suf}cv", tr, a_tr, seed0, n, d, xs=xs, pseudo_E=E_tr if kind == "R2" else None,
+                                  preds=[c.XAf(xs)[te]], tag=f"cv{j}")
+            for lam in LAMS:
+                sse[lam] += float(np.sum((a_te + lam * np.asarray(g, float) - c.yA[te]) ** 2))
+        if self.dry:
+            return LAM_BASE, int(K), flag
+        if not any(np.isfinite(sse[lam]) for lam in LAMS):
+            return LAM_BASE, int(K), "cv_failed"
+        return float(min(LAMS, key=lambda lam: (sse[lam] if np.isfinite(sse[lam]) else np.inf, lam))), int(K), flag
+
+    # ------------------------------------------------------------ 물리 보정식(wf1, wf3)
+    def physics(self, n, d, sel, E1, E2, which=("P1", "P2", "Pk", "Pc", "Pbest"), placement="cell"):
+        c = self.c; nl, nb = len(sel), self.nb(sel)
+        self.trace("coef", sel, n=n, draw=str(d))
+        out = dict(P1=E1 * c.sB, P2=E2 * c.sB)
+        for m in ("P1", "P2"):
+            if m in which:
+                self.add(m, "none", placement, n, d, -1, 0.0, out[m], E1 if m == "P1" else E2, nl, nb)
+        if "Pk" in which or "Pbest" in which:
+            Ek, fl = self.krige_E(sel, c.PB, n, d, "full")
+            out["Pk"] = (Ek if Ek is not None else np.full(self.nB, E1)) * c.sB
+            if "Pk" in which:
+                self.add("Pk", "none", placement, n, d, -1, 0.0, out["Pk"], np.nan, nl, nb, flag=fl)
+        if "Pc" in which or "Pbest" in which:
+            for k in CLUSTER_KS:
+                _, labB = self.clusters(k)
+                out[f"Pc@c{k}"] = self.pc_E(sel, k, labB) * c.sB
+                self.add(f"Pc@c{k}", "none", placement, n, d, -1, 0.0, out[f"Pc@c{k}"], np.nan, nl, nb)
+            kc, K, fl = self.pc_choose_k(sel, n, d)
+            out["Pc"] = out[f"Pc@c{kc}"]
+            self.add("Pc", "none", placement, n, d, -1, 0.0, out["Pc"], np.nan, nl, nb, sel_info=f"k={kc}", cv_folds=K, cv_flag=fl)
+        if "Pbest" in which:
+            best, K, fl = self.pbest_choose(sel, n, d)
+            self.add("Pbest", "none", placement, n, d, -1, 0.0, out[best], np.nan, nl, nb, sel_info=best, cv_folds=K, cv_flag=fl)
+        return out
+
+    # ------------------------------------------------------------ wf1
+    def wf1_cell(self, n, d, xs):
+        c = self.c
+        sel = self.draw(n, d); nl, nb = len(sel), self.nb(sel)
+        self.trace("select", sel, n=n, draw=str(d))
+        E1, E2 = self.coefs(sel)
+        if xs == "x25":
+            self.physics(n, d, sel, E1, E2)
+        suf = "" if xs == "x25" else "@x34"
+        lrs = (LO, HI) if xs == "x25" else (LO,)
+        lam = {("R1", lr): self.lam_cv("R1", lr, xs, sel, n, d, suf) for lr in lrs}
+        lam[("R2", LO)] = self.lam_cv("R2", LO, xs, sel, n, d, suf)
+        if xs == "x25":
+            lam[("Re", LO)] = self.lam_cv("Re", LO, xs, sel, n, d)
+        a1A, a1B = E1 * c.sA[sel], E1 * c.sB
+        nps = int(round(R_PS * nl))
+        for seed in self.seeds:
+            for lr in lrs:
+                (p,) = self.fit_direct(lr, "D0" + suf, sel, seed, n, d, xs=xs)
+                self.add("D0" + suf, lr, "cell", n, d, seed, 1.0, p, np.nan, nl, nb, flag=self.F.last_flag, nrow=nl)
+                gB, gA = self.fit_resid(lr, "R1" + suf, sel, a1A, seed, n, d, xs=xs, preds=[c.XBf(xs), c.XAf(xs)[sel]])
+                fl = self.F.last_flag
+                lcv, K, cf = lam[("R1", lr)]
+                self.emit("R1" + suf, lr, n, d, seed, a1B, gB, E1, nl, nb, lcv, K, cf, fl, nrow=nl)
+                if lr == LO and xs == "x25":
+                    self.rk(n, d, seed, sel, a1A, gA, a1B, gB, lcv, E1, nl, nb)
+            (p,) = self.fit_direct(LO, "D1" + suf, sel, seed, n, d, xs=xs, pseudo_E=E1)
+            self.add("D1" + suf, LO, "cell", n, d, seed, 1.0, p, E1, nl, nb, flag=self.F.last_flag, nrow=nl + nps)
+            (g,) = self.fit_resid(LO, "R2" + suf, sel, a1A, seed, n, d, xs=xs, pseudo_E=E1)
+            lcv, K, cf = lam[("R2", LO)]
+            self.emit("R2" + suf, LO, n, d, seed, a1B, g, E1, nl, nb, lcv, K, cf, self.F.last_flag, nrow=nl + nps)
+            if xs == "x25":
+                aeA, aeB = self.anchor_A("Re", E1, sel), self.anchor_B("Re", E1)
+                (g,) = self.fit_resid(LO, "Re", sel, aeA, seed, n, d)
+                fl = self.F.last_flag
+                lcv, K, cf = lam[("Re", LO)]
+                self.add("Re", LO, "cell", n, d, seed, LAM_BASE, aeB + LAM_BASE * np.asarray(g, float), E1, nl, nb, flag=fl, nrow=nl)
+                self.add("Re", LO, "cell", n, d, seed, LAM_CV, aeB + lcv * np.asarray(g, float), E1, nl, nb, flag=fl, sel_info=f"lam={lcv}",
+                         cv_folds=K, cv_flag=cf, nrow=nl)
+
+    def rk(self, n, d, seed, sel, a1A, gA, a1B, gB, lcv, E1, nl, nb):
+        """RK = R1(λ) + 표본 안 잔차의 국소 크리깅. λ 0.25·0.5·1.0 과 R1 의 교차검증 λ."""
+        c = self.c
+        gA, gB = np.asarray(gA, float), np.asarray(gB, float)
+        for lam in list(LAMS) + [LAM_CV]:
+            lv = float(lcv) if lam == LAM_CV else float(lam)
+            r_lab = c.yA[sel] - (a1A + lv * gA)
+            rB, fl = self._krige(sel, r_lab, c.PB, n, d, f"rk{seed}_{lam}")
+            pred = a1B + lv * gB + (rB if rB is not None else 0.0)
+            self.add("RK", LO, "cell", n, d, seed, lam, pred, E1, nl, nb, flag=fl, sel_info=f"lam={lv}" if lam == LAM_CV else "", nrow=nl)
+
+    def run_wf1(self):
+        xs = "x34" if self.variant == "x34" else "x25"
+        if xs == "x34" and self.c.XA34 is None:
+            raise RuntimeError(f"{self.c.target}: x34 열(SAR)이 자료에 없다")
+        for n, d in cells_for(self.a, "wf1", self.nA):
+            self.wf1_cell(n, d, xs)
+
+    # ------------------------------------------------------------ wf3
+    def run_wf3(self):
+        c = self.c
+        for n, d in cells_for(self.a, "wf3", self.nA):
+            sel = self.draw(n, d); nl, nb = len(sel), self.nb(sel)
+            self.trace("select", sel, n=n, draw=str(d))
+            E1, E2 = self.coefs(sel)
+            self.physics(n, d, sel, E1, E2, which=("P1", "Pc"))
+            a1A, a1B = E1 * c.sA[sel], E1 * c.sB
+            for seed in self.seeds:
+                (g,) = self.fit_resid(LO, "R1", sel, a1A, seed, n, d)
+                g = np.asarray(g, float)
+                self.emit("R1", LO, n, d, seed, a1B, g, E1, nl, nb, flag=self.F.last_flag, nrow=nl)
+                for k in CLUSTER_KS:
+                    labA, labB = self.clusters(k)
+                    gc, own, fl = g.copy(), 0, ""
+                    for cl in range(int(k)):
+                        m_lab = sel[labA[sel] == cl]
+                        mB = labB == cl
+                        if len(m_lab) < R1C_MIN or not mB.any():
+                            continue
+                        (gcl,) = self.fit_resid(LO, f"R1c@c{k}", m_lab, E1 * c.sA[m_lab], seed, n, d, preds=[c.XB[mB]], tag=f"c{cl}")
+                        gc[mB] = np.asarray(gcl, float); own += 1; fl = fl or self.F.last_flag
+                    self.emit(f"R1c@c{k}", LO, n, d, seed, a1B, gc, E1, nl, nb, flag=fl, sel_info=f"own={own}/{k}", nrow=nl)
+                    OA, OB = onehot(labA, k), onehot(labB, k)
+                    (gi,) = self.fit(LO, f"R1i@c{k}", lambda OA=OA: (np.hstack([c.XA[sel], OA[sel]]), c.yA[sel] - a1A, None), nl, seed,
+                                     [np.hstack([c.XB, OB])], n, d, sel)
+                    self.emit(f"R1i@c{k}", LO, n, d, seed, a1B, gi, E1, nl, nb, flag=self.F.last_flag, nrow=nl)
+
+    # ------------------------------------------------------------ wf2(라벨 위치 선택)
+    def s3_set(self, n, d):
+        labA, _ = self.clusters(S3_K)
+        K = int(labA.max()) + 1 if len(labA) else 1
+        sizes = np.bincount(labA, minlength=K)
+        alloc = proportional_alloc(sizes, n)
+        rng = np.random.RandomState(seed_of("wf-s3", self.c.target, self.c.mode, self.c.split, n, d))
+        out = [rng.choice(np.where(labA == cl)[0], int(alloc[cl]), replace=False) for cl in range(K) if alloc[cl] > 0]
+        return np.sort(np.concatenate(out).astype(int)) if out else np.zeros(0, int)
+
+    def s4_order(self, nmax, d):
+        if self.dry:
+            return np.random.RandomState(d).permutation(self.nA)[:nmax]
+        Z = standardize(self.c.XA, self.std_stats())
+        return kcenter_order(Z, nmax, seed_of("wf-s4", self.c.target, self.c.split, d))
+
+    def s5_order(self, d):
+        if self.dry:
+            return np.random.RandomState(d + 11).permutation(self.nA)
+        if self._di is None:
+            if self.c.src_X is None or not len(self.c.src_X):
+                raise RuntimeError("S5: 원천 공변량(src_X)이 없다")
+            st = standardize_fit(self.c.src_X)
+            self._di = aoa_di(standardize(self.c.XA, st), standardize(self.c.src_X, st), seed_of("wf-aoa", self.c.target, self.c.split))
+            self.notes["s5_di"] = dict(min=float(np.min(self._di)), median=float(np.median(self._di)), max=float(np.max(self._di)))
+        return rank_desc(self._di, seed_of("wf-s5", self.c.target, self.c.split, d))
+
+    def s6_var(self, cur, cand, d):
+        """S6 의 선택 점수: R1 잔차 모형의 가상 앙상블 분산. 학습 = 현재 라벨(cur)뿐."""
+        c = self.c
+        E_n, _ = self.coefs(cur)
+        self.trace("s6", cur, n=len(cur), draw=str(d))
+        k = self.F._count(self.exp, "catboost_ve", dict(method="S6sel", nrow=len(cur)))
+        if self.dry:
+            return np.random.RandomState(len(cur) + d).rand(len(cand))
+        t0 = time.time()
+        try:
+            v = ve_variance(c.XA[cur], c.yA[cur] - E_n * c.sA[cur], c.XA[cand], seed_of("wf-s6", c.target, c.split, d, len(cur)), self.a.cb_iters,
+                            self.a.threads)
+        except Exception as e:                                            # noqa: BLE001  선택 적합 실패: 그 단계만 무작위(표지)
+            self.F.fail[self.exp] += 1
+            self.F.errors.append(f"{k}: {repr(e)[:160]}")
+            self.notes.setdefault("s6_fallback", []).append([int(d), int(len(cur))])
+            v = np.random.RandomState(seed_of("wf-s6f", c.target, c.split, d, len(cur))).rand(len(cand))
+        dt = time.time() - t0
+        self.F.sec[self.exp] += dt; self.F.secd[k] += dt
+        return v
+
+    def s6_sets(self, budgets, d):
+        bset = sorted(budgets)
+        start = min(S6_START, bset[0])
+        cur = list(self.draw(start, d))
+        out = {start: np.sort(np.array(cur, int))} if start in bset else {}
+        while len(cur) < bset[-1]:
+            nxt = min(b for b in bset if b > len(cur))
+            k = min(S6_BATCH, nxt - len(cur))
+            ca = np.sort(np.array(cur, int))
+            cand = np.setdiff1d(np.arange(self.nA), ca)
+            v = self.s6_var(ca, cand, d)
+            pick = cand[rank_desc(v, seed_of("wf-s6t", self.c.target, self.c.split, d, len(cur)))[:k]]
+            cur += [int(v_) for v_ in pick]
+            if len(cur) in bset:
+                out[len(cur)] = np.sort(np.array(cur, int))
+        return out
+
+    def strategy_sets(self, strat, budgets, d):
+        c = self.c
+        if strat == "S1":
+            return {n: self.draw(n, d) for n in budgets}
+        if strat == "S2":
+            return {n: H.draw_blocks(c.target, c.mode, c.split, n, d, c.blkA) for n in budgets}
+        if strat == "S3":
+            return {n: self.s3_set(n, d) for n in budgets}
+        if strat == "S4":
+            order = self.s4_order(max(budgets), d)
+            return {n: np.sort(order[:n]) for n in budgets}
+        if strat == "S5":
+            order = self.s5_order(d)
+            return {n: np.sort(order[:n]) for n in budgets}
+        if strat == "S6":
+            return self.s6_sets(budgets, d)
+        if strat == "S7":
+            order = rank_desc(c.sA, seed_of("wf-s7", c.target, c.split, d))
+            return {n: np.sort(order[:n]) for n in budgets}
+        raise ValueError(f"알 수 없는 전략 {strat}")
+
+    def run_wf2(self):
+        c = self.c; strat = self.variant
+        budgets = [b for b in self.a.G["wf2"] if 0 < b < self.nA]
+        if not budgets:
+            return
+        seen: dict = {}
+        for d in range(draws_for(self.a, "wf2", budgets[0])):
+            sets = self.strategy_sets(strat, budgets, d)
+            for n in budgets:
+                sel = np.sort(np.asarray(sets[n], int))
+                key = (n, tuple(sel.tolist()))
+                if key in seen:                                           # 같은 라벨 집합(결정적 전략): 첫 추출만 적합·저장한다
+                    self.notes.setdefault("dup_draws", []).append([int(n), int(d), int(seen[key])])
+                    continue
+                seen[key] = d
+                self.trace("select", sel, n=n, draw=str(d), strategy=strat)
+                nl, nb = len(sel), self.nb(sel)
+                E1, _ = self.coefs(sel)
+                self.trace("coef", sel, n=n, draw=str(d))
+                self.add("P1", "none", strat, n, d, -1, 0.0, E1 * c.sB, E1, nl, nb)
+                a1A, a1B = E1 * c.sA[sel], E1 * c.sB
+                for seed in self.seeds:
+                    (g,) = self.fit_resid(LO, "R1", sel, a1A, seed, n, d, placement=strat)
+                    self.emit("R1", LO, n, d, seed, a1B, g, E1, nl, nb, flag=self.F.last_flag, placement=strat, nrow=nl)
+                    (p,) = self.fit_direct(LO, "D1", sel, seed, n, d, pseudo_E=E1, placement=strat)
+                    self.add("D1", LO, strat, n, d, seed, 1.0, p, E1, nl, nb, flag=self.F.last_flag, nrow=nl + int(round(R_PS * nl)))
+
+    def run(self):
+        if self.exp == "wf1":
+            self.run_wf1()
+        elif self.exp == "wf2":
+            self.run_wf2()
+        elif self.exp == "wf3":
+            self.run_wf3()
+        else:
+            raise ValueError(self.exp)
+        return self
+
+
+class TUnit(UnitBase):
+    """전이 작업 단위(wf4). 학습 행 = 원천 행 + 선택 라벨(+ 유사라벨 행). 행렬과 추출은 LG(h40)와 같다."""
+
+    def __init__(self, a, c, alias, dry=False):
+        self._init_base(a, c, "wf4", f"{alias}|{c.mode}", "", dry)
+        self.alias = alias
+        self.nsrc = len(c.y_src)
+        self.n_ps = int(round(R_PS * self.nsrc))
+        self._ps: dict = {}
+        self.diag: list = []
+        self.add("P0", "none", "cell", 0, 0, -1, 0.0, c.E0 * c.sB, c.E0, 0)
+
+    def draw(self, n, d):
+        return H.draw_cells(self.c.target, self.c.mode, self.c.split, n, d, self.nA)       # LG 와 같은 추출(대상 이름은 표 안의 이름)
+
+    def ps(self, seed):
+        if seed not in self._ps:
+            c = self.c
+            self._ps[seed] = X.ps_index(c.target, c.mode, c.split, seed, self.nA, self.nsrc, R_PS)
+        return self._ps[seed]
+
+    def rows_R(self, idx, anchor_lab, seed=None, pseudo_E=None):
+        c = self.c
+        pseudo = None
+        if pseudo_E is not None:
+            ps = self.ps(seed)
+            pseudo = (c.XA[ps], X.pseudo_values(None, ps, idx, c.yA, float(pseudo_E) * c.sA))
+        return X.stack_rows(c.X_src, c.r0_src, c.XA[idx], c.yA[idx] - np.asarray(anchor_lab, float), None, pseudo)
+
+    def rows_D(self, idx, seed=None, pseudo_E=None):
+        c = self.c
+        pseudo = None
+        if pseudo_E is not None:
+            ps = self.ps(seed)
+            pseudo = (c.XA[ps], X.pseudo_values(float(pseudo_E) * c.sA, ps, idx, c.yA))
+        return X.stack_rows(c.X_src, c.y_src, c.XA[idx], c.yA[idx], None, pseudo)
+
+    def select_w(self, sel, n, d):
+        """규칙 W: 선택 라벨 안 5겹 블록 교차검증(seed 0 적합)으로 후보 가운데 오차가 가장 작은 방법. 라벨 < 10 이면 P1."""
+        c = self.c
+        if len(sel) < W_MIN_N:
+            return "P1", 0, f"n<{W_MIN_N}", {}
+        fid, K, flag = self.folds(sel, n, d)
+        if K < 2:
+            return "P1", int(K), flag or "folds<2", {}
+        seed0 = self.seeds[0]
+        sse = {m: 0.0 for m in W_CANDS}
+        for j in range(K):
+            tr, te = sel[fid != j], sel[fid == j]
+            self.trace("cv", tr, method="W", n=n, draw=str(d), fold=j, held=te)
+            E1, E2 = self.coefs(tr)
+            s, y = c.sA[te], c.yA[te]
+            a_tr, a_te = E1 * c.sA[tr], E1 * s
+            nl = len(tr)
+            (g1,) = self.fit(LO, "R1cv", lambda: self.rows_R(tr, a_tr), self.nsrc + nl, seed0, [c.XA[te]], n, d, tr, fold=j)
+            (g2,) = self.fit(LO, "R2cv", lambda: self.rows_R(tr, a_tr, seed0, E1), self.nsrc + nl + self.n_ps, seed0, [c.XA[te]], n, d, tr, fold=j)
+            (pd1,) = self.fit(LO, "D1cv", lambda: self.rows_D(tr, seed0, E1), self.nsrc + nl + self.n_ps, seed0, [c.XA[te]], n, d, tr, fold=j)
+            g1, g2 = np.asarray(g1, float), np.asarray(g2, float)
+            pr = {"P0": c.E0 * s, "P1": E1 * s, "P2": E2 * s, "R1@0.25": a_te + 0.25 * g1, "R1@1.0": a_te + g1, "R2@0.25": a_te + 0.25 * g2,
+                  "D1": np.asarray(pd1, float)}
+            for m in W_CANDS:
+                sse[m] += float(np.sum((pr[m] - y) ** 2))
+        if self.dry:
+            return "P1", int(K), flag, {}
+        best = min(W_CANDS, key=lambda m: (sse[m] if np.isfinite(sse[m]) else np.inf, W_CANDS.index(m)))
+        return best, int(K), flag, {m: float(np.sqrt(v / max(len(sel), 1))) for m, v in sse.items()}
+
+    def run(self):
+        c = self.c
+        for n, d in cells_for(self.a, "wf4", self.nA):
+            sel = self.draw(n, d); nl, nb = len(sel), self.nb(sel)
+            E1, E2 = self.coefs(sel)
+            self.trace("coef", sel, n=n, draw=str(d))
+            pB = {"P0": c.E0 * c.sB, "P1": E1 * c.sB, "P2": E2 * c.sB}
+            self.add("P1", "none", "cell", n, d, -1, 0.0, pB["P1"], E1, nl, nb)
+            self.add("P2", "none", "cell", n, d, -1, 0.0, pB["P2"], E2, nl, nb)
+            a1A, a1B = E1 * c.sA[sel], E1 * c.sB
+            preds = {}
+            for seed in self.seeds:
+                (g1,) = self.fit(LO, "R1", lambda: self.rows_R(sel, a1A), self.nsrc + nl, seed, [c.XB], n, d, sel)
+                self.emit("R1", LO, n, d, seed, a1B, g1, E1, nl, nb, flag=self.F.last_flag, nrow=self.nsrc + nl)
+                (g2,) = self.fit(LO, "R2", lambda: self.rows_R(sel, a1A, seed, E1), self.nsrc + nl + self.n_ps, seed, [c.XB], n, d, sel)
+                self.emit("R2", LO, n, d, seed, a1B, g2, E1, nl, nb, flag=self.F.last_flag, nrow=self.nsrc + nl + self.n_ps)
+                (p1,) = self.fit(LO, "D1", lambda: self.rows_D(sel, seed, E1), self.nsrc + nl + self.n_ps, seed, [c.XB], n, d, sel)
+                self.add("D1", LO, "cell", n, d, seed, 1.0, p1, E1, nl, nb, flag=self.F.last_flag, nrow=self.nsrc + nl + self.n_ps)
+                g1, g2 = np.asarray(g1, float), np.asarray(g2, float)
+                preds[seed] = dict(pB, **{"R1@0.25": a1B + 0.25 * g1, "R1@1.0": a1B + g1, "R2@0.25": a1B + 0.25 * g2, "D1": np.asarray(p1, float)})
+            choice, K, flag, cv = self.select_w(sel, n, d)
+            for seed in self.seeds:
+                self.add("W", LO, "cell", n, d, seed, 0.0, preds[seed][choice], np.nan, nl, nb, sel_info=choice, cv_folds=K, cv_flag=flag)
+            if cv:
+                self.notes.setdefault("w_cv_rmse", {})[f"{n}|{d}"] = {m: round(v, 4) for m, v in cv.items()}
+            if n == DIAG_N and nl > 0 and not self.dry:
+                bias = float(np.mean(c.E0 * c.sA[sel] - c.yA[sel]))
+                self.diag.append(dict(n=int(n), draw=int(d), n_lab=int(nl), bias=bias, abs_bias=abs(bias)))
+        return self
+
+    def finish(self):
+        rows, st, stats = super().finish()
+        stats["diag"] = list(self.diag)
+        return rows, st, stats
+
+
+# ================================================================ 조각 입출력
+def shard_base(a, exp, target, mode, split, variant=""):
+    return a.SHARDS / (f"{exp_tag(a, exp)}__cpu__{target}__{mode}__s{int(split)}" + (f"__{variant}" if variant else ""))
+
+
+def shard_paths(a, exp, target, mode, split, variant=""):
+    b = str(shard_base(a, exp, target, mode, split, variant))
+    return dict(runs=Path(b + "_runs.csv"), npz=Path(b + "_blocksse.npz"), unit=Path(b + "_unit.json"))
+
+
+_SHA: dict = {}
+
+
+def file_sha(path):
+    k = str(path)
+    if k not in _SHA:
+        try:
+            _SHA[k] = hashlib.sha1(Path(path).read_bytes()).hexdigest()[:12]
+        except OSError:
+            _SHA[k] = "none"
+    return _SHA[k]
+
+
+def code_sha():
+    return file_sha(__file__)
+
+
+CFG_UNIT_KEYS = ("variant", "data_sha")                              # 조각마다 달라도 되는 항목(공통 해시에서 뺀다)
+
+
+def unit_cfg(a, exp, variant="", data_sha=""):
+    """결과에 영향을 주는 설정 요약. 대상·분할·tag·워커는 넣지 않는다(h40 의 unit_cfg 와 같은 원칙)."""
+    d = dict(exp=exp, variant=str(variant), grid=[int(v) for v in a.G[exp]], draws_cap=int(a.draws_cap), seeds=list(a.SEEDS), lams=list(LAMS),
+             kappa=KAPPA, r=R_PS, cv_k=CV_K, cb_iters=int(a.cb_iters), cb_hi=dict(X.CB_HI), data_sha=str(data_sha))
+    if exp in ("wf1", "wf3"):
+        d.update(draws=[DRAWS_SMALL, DRAWS_LARGE, DRAW_SPLIT_N], clusters=list(CLUSTER_KS))
+    if exp == "wf1":
+        d.update(krige=[KRIGE_K, KRIGE_MIN, VARIO_MAX_PTS, VARIO_NLAGS, VARIO_NRANGE], pbest=list(PBEST_CANDS), learners=[LO, HI])
+    if exp == "wf2":
+        d.update(draws=[WF2_DRAWS], s3_k=S3_K, s6=[S6_START, S6_BATCH, VE_COUNT], aoa_sub=AOA_SUB)
+    if exp == "wf3":
+        d.update(r1c_min=R1C_MIN)
+    if exp == "wf4":
+        d.update(draws=[WF4_DRAWS], w_cands=list(W_CANDS), w_min_n=W_MIN_N, diag_n=DIAG_N)
+    return d
+
+
+def wf_cfg_hash(cfg, common=False):
+    d = {k: v for k, v in cfg.items() if not (common and k in CFG_UNIT_KEYS)}
+    return hashlib.sha1(json.dumps(d, sort_keys=True, ensure_ascii=False, default=str).encode()).hexdigest()[:12]
+
+
+def data_sha(a, exp, target):
+    if exp == "wf4" and target in LGD_SPECS:
+        d = a.LGD / LGD_SPECS[target][0]
+        return f"{file_sha(d / 'fidelity_base_v3.csv')}:{file_sha(d / 'e5_soil_tdd_v3.csv')}"
+    return f"{file_sha(a.PROC / 'fidelity_base_v3.csv')}:{file_sha(a.PROC / 'e5_soil_tdd_v3.csv')}:{file_sha(a.PROC / a.subregion_map)}"
+
+
+def unit_state(a, exp, target, mode, split, variant=""):
+    p = shard_paths(a, exp, target, mode, split, variant)
+    if not (p["unit"].exists() and p["runs"].exists() and p["npz"].exists()):
+        return False, "조각 없음"
+    try:
+        u = json.loads(p["unit"].read_text())
+    except (OSError, ValueError):
+        return False, "unit.json 을 읽을 수 없음"
+    if u.get("cfg_hash") != wf_cfg_hash(unit_cfg(a, exp, variant, data_sha(a, exp, target))):
+        return False, "설정 불일치(cfg_hash)"
+    if u.get("status") == "failed":
+        return False, "이전 실행 실패"
+    return True, str(u.get("status", "ok"))
+
+
+def write_shard(a, exp, target, mode, split, variant, c, rows, st, stats, elapsed, expected):
+    p = shard_paths(a, exp, target, mode, split, variant)
+    p["runs"].parent.mkdir(parents=True, exist_ok=True)
+    tmp = p["runs"].with_name(p["runs"].name + f".tmp{os.getpid()}")
+    pd.DataFrame(rows).to_csv(tmp, index=False); os.replace(tmp, p["runs"])
+    save_stores([st], p["npz"])
+    cfg = unit_cfg(a, exp, variant, data_sha(a, exp, target))
+    unit = {**stats, **{k: v for k, v in c.meta.items() if not isinstance(v, (dict, list))}}
+    unit.update(exp=exp, target=target, mode=mode, parent=c.parent, split=int(split), variant=variant, tag=exp_tag(a, exp), elapsed_s=round(elapsed, 1),
+                n_fit_total=int(sum(stats["n_fit"].values())), n_A=int(len(c.yA)), n_eval=int(len(c.yB)), E0=float(c.E0),
+                expected_splits=[int(v) for v in expected], cfg=cfg, cfg_hash=wf_cfg_hash(cfg), cfg_common=wf_cfg_hash(cfg, common=True),
+                code_sha=code_sha(), code_sha_h40=H.code_sha(), code_sha_h42=X.code_sha_x(), threads=int(a.threads),
+                device=os.environ.get("CUDA_VISIBLE_DEVICES", ""))
+    H._atomic_text(p["unit"], json.dumps(unit, ensure_ascii=False, indent=1, default=float))      # 완료 표지는 마지막에 쓴다
+    return unit
+
+
+# ================================================================ 작업 단위 목록·실행
+def enumerate_units(a):
+    """작업 단위 (실험, 대상, 모드, 분할, 변형)과 건너뛴 기록. 기대 분할(split_plan 의 keep)을 함께 돌려준다."""
+    units, skipped, expected = [], [], {}
+    for exp in a.EXPS:
+        if exp == "wf4":
+            for alias, mode in a.T["wf4"]:
+                spec, tgt, _ = resolve4(a, alias)
+                if spec is not None and not lgd_available(a, alias):
+                    skipped.append(dict(exp=exp, target=alias, mode=mode, split=-1, status="lgd_table_missing"))
+                    continue
+                HA, D = get_data(a, spec)
+                if mode not in H.valid_modes(tgt):
+                    raise SystemExit(f"wf4 대상 {alias} 에 모드 {mode} 는 없다")
+                keep, skip, _ = split_plan(D, tgt, a.SPLITS)
+                expected[(exp, alias, mode)] = keep
+                skipped += [dict(exp=exp, target=alias, mode=mode, split=sp, status=st_, **v) for sp, st_, v in skip]
+                units += [(exp, alias, mode, sp, "") for sp in keep]
+            continue
+        HA, D = get_data(a)
+        for t in a.T[exp]:
+            keep, skip, _ = split_plan(D, t, a.SPLITS)
+            expected[(exp, t, MODE_R)] = keep
+            skipped += [dict(exp=exp, target=t, mode=MODE_R, split=sp, status=st_, **v) for sp, st_, v in skip]
+            variants = [""]
+            if exp == "wf1" and t in a.X34:
+                variants.append("x34")
+            if exp == "wf2":
+                variants = list(a.STRAT)
+            units += [(exp, t, MODE_R, sp, v) for sp in keep for v in variants]
+    return units, skipped, expected
+
+
+def cost_hint(a, u):
+    """실행 순서용 대략의 비용(긴 단위 먼저). 값은 순서에만 쓰고 결과에 영향이 없다."""
+    exp, t, m, sp, v = u
+    try:
+        spec, tgt, _ = resolve4(a, t) if exp == "wf4" else (None, t, False)
+        _, D = get_data(a, spec)
+        nA = D.split_structure(tgt)[sp]["n_A"]
+    except Exception:                                                     # noqa: BLE001
+        nA = 1000
+    w = dict(wf1=4.0 if v != "x34" else 1.5, wf2=0.6 if v != "S6" else 1.2, wf3=2.0, wf4=6.0).get(exp, 1.0)
+    return w * (1.0 + nA / 2000.0) * (3.0 if exp == "wf4" else 1.0)
+
+
+def run_unit(a, exp, target, mode, split, variant="", dry=False, expected=None):
+    t0 = time.time()
+    if exp == "wf4":
+        c = build_tctx(a, target, mode, split)
+        U = TUnit(a, c, target, dry)
+    else:
+        c = build_rctx(a, target, split)
+        U = RUnit(a, c, exp, variant, dry)
+    if not dry:
+        shard_paths(a, exp, target, mode, split, variant)["unit"].unlink(missing_ok=True)
+    U.run()
+    rows, st, stats = U.finish()
+    if dry:
+        return dict(exp=exp, target=target, mode=mode, split=int(split), variant=variant, n_A=len(c.yA), n_eval=len(c.yB), n_rows=stats["n_rows"],
+                    fit_total=int(sum(stats["n_fit"].values())), est_s=round(float(sum(stats["est_detail"].values())), 2),
+                    n_krige=stats["n_krige"], est_krige_s=stats["est_krige_s"], n_kmeans=stats["n_kmeans"], est_kmeans_s=stats["est_kmeans_s"],
+                    _detail=stats["n_fit_detail"], _rows=stats["rows_detail"], _est=stats["est_detail"])
+    if expected is None:
+        expected = [int(split)]
+    return write_shard(a, exp, target, mode, split, variant, c, rows, st, stats, time.time() - t0, expected)
+
+
+_WA = None
+_WEXP = None
+
+
+def core_blocks(a):
+    """워커별 코어 묶음(스레드 수만큼). CatBoost 는 thread_count 밖에서도 여러 스레드를 돌리므로 Rescale 노드에서는 워커를 서로 겹치지 않는
+    코어 묶음에 고정해 과다 구독을 막는다. 허용 표지가 없거나, --no-pin-cores 이거나, 코어가 모자라면 None."""
+    if a.no_pin_cores or not a.PERMIT or not hasattr(os, "sched_getaffinity") or int(a.workers) <= 0:
+        return None
+    avail = sorted(os.sched_getaffinity(0))
+    T, Wn = int(a.threads), int(a.workers)
+    if Wn * T > len(avail):
+        return None
+    return [avail[i * T:(i + 1) * T] for i in range(Wn)]
+
+
+def _worker_init(argv, expected_items, core_queue=None):
+    global _WA, _WEXP
+    warnings.filterwarnings("ignore")
+    os.environ["CUDA_VISIBLE_DEVICES"] = ""
+    if core_queue is not None:
+        try:
+            os.sched_setaffinity(0, set(core_queue.get(timeout=30)))
+        except Exception:                                                 # noqa: BLE001  고정에 실패하면 고정 없이 돈다
+            pass
+    _WA = parse_args(argv)
+    _WEXP = {tuple(k): v for k, v in expected_items}
+
+
+def _worker_run(exp, target, mode, split, variant):
+    t0 = time.time()
+    u = run_unit(_WA, exp, target, mode, split, variant, expected=_WEXP.get((exp, target, mode)))
+    return {k: u.get(k) for k in ("exp", "target", "mode", "split", "variant", "n_A", "n_eval", "n_fit_total", "n_rows", "elapsed_s", "status")} | dict(
+        wall_s=round(time.time() - t0, 1), n_fail=int(sum((u.get("fail") or {}).values())) + int(u.get("n_nonfinite_keys", 0)))
+
+
+def unit_name(u):
+    return f"{u[0]}|{u[1]}|{u[2]}|s{u[3]}" + (f"|{u[4]}" if u[4] else "")
+
+
+def execute(a, units, expected, argv):
+    """작업 단위를 실행한다(--workers 0 은 이 프로세스에서 차례로, 그 밖은 spawn 프로세스 풀). 반환 (완료 목록, 실패 목록)."""
+    t0 = time.time()
+    done, failed = [], []
+    exp_items = [(list(k), v) for k, v in expected.items()]
+
+    def log(r):
+        done.append(r)
+        print(f"  [{r['exp']}|{r['target']}|{r['mode']}|s{r['split']}{'|' + r['variant'] if r['variant'] else ''}] 적합 {r['n_fit_total']} · "
+              f"행 {r['n_rows']} · A {r['n_A']} · 채점 {r['n_eval']} · {r['elapsed_s']}s · 상태 {r['status']}(실패 {r['n_fail']}) · "
+              f"완료 {len(done)}/{len(units)} · 누적 {time.time() - t0:.0f}s", flush=True)
+
+    def fail(u, e):
+        failed.append(u)
+        print(f"  [FAIL] {unit_name(u)}: {repr(e)[:300]}", flush=True)
+
+    if not units:
+        return done, failed
+    if int(a.workers) <= 0:
+        _worker_init(argv, exp_items)
+        for u in units:
+            try:
+                log(_worker_run(*u))
+            except Exception as e:                                       # noqa: BLE001
+                fail(u, e)
+        return done, failed
+    ctx = multiprocessing.get_context("spawn")
+    blocks = core_blocks(a)
+    print(f"[pool] 워커 {a.workers} · 스레드 {a.threads} · 코어 고정 {'예(워커마다 ' + str(a.threads) + '코어)' if blocks else '아니오'}", flush=True)
+    remaining, attempt = list(units), 0
+    while remaining:
+        broken = []
+        q = None
+        if blocks:
+            q = ctx.Queue()
+            for b_ in blocks:
+                q.put(b_)
+        with ProcessPoolExecutor(max_workers=int(a.workers), mp_context=ctx, initializer=_worker_init, initargs=(argv, exp_items, q)) as ex:
+            futs = {ex.submit(_worker_run, *u): u for u in remaining}
+            for f in as_completed(futs):
+                try:
+                    log(f.result())
+                except BrokenProcessPool:
+                    broken.append(futs[f])
+                except Exception as e:                                   # noqa: BLE001
+                    fail(futs[f], e)
+        if not broken:
+            break
+        attempt += 1
+        if attempt > int(a.pool_retries):
+            for u in broken:
+                fail(u, RuntimeError(f"프로세스 풀이 {attempt}회 깨졌다"))
+            break
+        remaining = broken
+        print(f"[pool] 워커 비정상 종료. 남은 {len(remaining)} 단위로 풀을 다시 만든다({attempt}/{a.pool_retries})", flush=True)
+    return done, failed
+
+
+# ================================================================ 집계: 조각·저장소·곡선
+def find_shards(a, exp):
+    tag = exp_tag(a, exp)
+    out = []
+    if not a.SHARDS.exists():
+        return out
+    for p in sorted(a.SHARDS.glob(f"{tag}__*_unit.json")):
+        parts = p.name[:-len("_unit.json")].split("__")
+        if len(parts) not in (5, 6) or parts[0] != tag:
+            continue
+        b = str(p)[:-len("_unit.json")]
+        if Path(b + "_runs.csv").exists() and Path(b + "_blocksse.npz").exists():
+            out.append(dict(unit=p, runs=Path(b + "_runs.csv"), npz=Path(b + "_blocksse.npz"), exp=exp, target=parts[2], mode=parts[3],
+                            split=int(parts[4][1:]), variant=parts[5] if len(parts) == 6 else ""))
+    return out
+
+
+def read_runs(shards):
+    frames = []
+    for s_ in shards:
+        if s_["runs"].stat().st_size > 1:
+            f = pd.read_csv(s_["runs"], dtype=dict(alpha=str, alpha_sel=str, fit_flag=str, variant=str, cv_flag=str, placement=str, target=str,
+                                                   mode=str, method=str, learner=str), keep_default_na=False, na_values=["", "nan", "NaN"])
+            if len(f):
+                frames.append(f)
+    if not frames:
+        return pd.DataFrame()
+    runs = pd.concat(frames, ignore_index=True)
+    for c_ in ("alpha_sel", "fit_flag", "variant", "cv_flag"):
+        runs[c_] = runs[c_].fillna("").astype(str) if c_ in runs else ""
+    runs["n_nonfinite"] = runs.n_nonfinite.fillna(0).astype(int)
+    return runs
+
+
+def check_cfg(a, exp, units):
+    hs = Counter(str(u.get("cfg_common", "legacy")) for u in units)
+    cs = Counter(str(u.get("code_sha", "legacy")) for u in units)
+    if len(cs) > 1:
+        print(f"  [warn] {exp}: 조각의 코드 해시가 {len(cs)}종이다 {dict(cs)}", flush=True)
+    if len(hs) > 1:
+        msg = f"{exp}: 조각의 공통 설정 해시가 {len(hs)}종이다 {dict(hs)}. 설정이 다른 실행이 섞였다"
+        if not a.allow_mixed_cfg:
+            raise SystemExit("[summarize] " + msg + " (--allow-mixed-cfg 로 진행할 수 있다)")
+        print("  [warn] " + msg, flush=True)
+    return dict(cfg_common=dict(hs), code_sha=dict(cs), n=len(units))
+
+
+def is_point_only(exp, name):
+    t = name.split("|")[0]
+    return bool(exp == "wf4" and ((t in LGD_SPECS and LGD_SPECS[t][2]) or t in H.MAIN_POINT))
+
+
+def make_tm(name, by_split, units, nboot, point_only):
+    """h40.TMx. 분할 구조(dup_of, valid)와 기대 분할은 조각의 unit.json 에서 읽는다(LGD 표의 자료를 다시 읽지 않는다)."""
+    info, exp_sp = {}, set()
+    for u in units:
+        info[int(u["split"])] = dict(dup_of=int(u.get("dup_of", -1)), valid=bool(u.get("valid", True)))
+        exp_sp |= {int(v) for v in u.get("expected_splits", [])}
+    tm = H.TMx(name, by_split, info, nboot)
+    tm.point_only = bool(point_only)
+    tm.has_ci = len(tm.by_valid) > 0 and not tm.point_only
+    tm.nboot = int(nboot) if tm.has_ci else 0
+    tm.expected_splits = sorted(exp_sp) if exp_sp else sorted(tm.used)
+    return tm
+
+
+def _curve_task(exp, name, tm, runs_sub, delta_eq):
+    warnings.filterwarnings("ignore")
+    try:
+        cur = H.build_curve({name: tm}, runs_sub) if len(runs_sub) else pd.DataFrame()
+    finally:
+        H4.boot_weights.cache_clear()
+    if len(cur):
+        cur.insert(0, "exp", exp)
+        for kind in ("p0", "p1"):
+            cur[f"verdict4_{kind}"] = [X.verdict4(r_[f"d_{kind}_lo"], r_[f"d_{kind}_hi"], r_[f"d_{kind}_beq_lo"], r_[f"d_{kind}_beq_hi"], delta_eq)
+                                       for r_ in cur.to_dict("records")]
+    return cur
+
+
+def build_curves(a, tasks):
+    """tasks = [(exp, name, tm, runs_sub)]. --workers > 1 이면 프로세스 풀로 나눈다(값은 프로세스 수와 무관하다)."""
+    out = []
+    if int(a.workers) <= 1 or len(tasks) <= 1:
+        for exp, nm, tm, rs in tasks:
+            out.append(_curve_task(exp, nm, tm, rs, a.delta_eq))
+        return out
+    ctx = multiprocessing.get_context("spawn")
+    with ProcessPoolExecutor(max_workers=min(int(a.workers), len(tasks)), mp_context=ctx) as ex:
+        futs = {ex.submit(_curve_task, exp, nm, tm, rs, a.delta_eq): (exp, nm) for exp, nm, tm, rs in tasks}
+        for f in as_completed(futs):
+            try:
+                out.append(f.result())
+            except Exception as e:                                       # noqa: BLE001  워커 실패: 주 프로세스에서 다시 계산
+                exp, nm = futs[f]
+                print(f"  [warn] 곡선 워커 실패 {exp}|{nm}: {repr(e)[:160]}. 주 프로세스에서 다시 계산한다", flush=True)
+                t = next(t_ for t_ in tasks if t_[0] == exp and t_[1] == nm)
+                out.append(_curve_task(*t, a.delta_eq))
+    return out
+
+
+# ================================================================ 집계: 가설 판정
+def gk(method, n, learner=LO, lam=None, placement="cell"):
+    """곡선 키 (method, learner, alpha, placement, n, lam). 물리식은 learner none, lam 0. P0 은 n = 0 의 한 키."""
+    if method == "P0":
+        return H.P0_GRP
+    if learner == "none":
+        return (method, "none", "1", placement, int(n), 0.0)
+    return (method, learner, "1", placement, int(n), float(LAM_BASE if lam is None else lam))
+
+
+def nlab(n):
+    return "전량" if int(n) == -1 else f"{int(n)}"
+
+
+def ns_of(tm, method, learner=None, placement="cell"):
+    out = set()
+    for gd in tm.idx.values():
+        for g in gd:
+            if g[0] == method and g[3] == placement and (learner is None or g[1] == learner):
+                out.add(int(g[4]))
+    return sorted(out, key=lambda v: (v == -1, v))
+
+
+def _v(r):
+    return X._v(r)
+
+
+def _counts(res):
+    c_ = Counter(_v(r) for _, r in res)
+    return ", ".join(f"{k} {v}" for k, v in sorted(c_.items()))
+
+
+def choice_freq(runs, method, by=("target", "n")):
+    """선택형 방법(Pbest, Pc, W, 교차검증 λ)의 선택 분포. runs 의 alpha_sel 을 센다(seed 0 행만)."""
+    if not len(runs):
+        return {}
+    q = runs[(runs.method == method) & (runs.seed.isin([-1, 0]))]
+    if method in ("R1", "R2", "Re", "RK", "R1@x34", "R2@x34"):
+        q = q[np.isclose(q.lam.astype(float), LAM_CV)]
+    out = {}
+    for key, g in q.groupby(list(by)):
+        key = key if isinstance(key, tuple) else (key,)
+        out["|".join(str(v) for v in key)] = dict(Counter(g.alpha_sel.astype(str)))
+    return out
+
+
+def tests_wf1(a, tms, runs):
+    T = X.TestBook(a, tms, None, None)
+    for nm in sorted(tms):
+        tm = tms[nm]
+        main = nm == "Alaska|r"
+        role = "주" if main else "서술"
+        ns_all = ns_of(tm, "Pbest", "none")
+        # ---------------- WF1-a: n ≥ 1,000 에서 R1(교차검증 λ) 또는 R2(교차검증 λ)가 Pbest 보다 우세인 n 이 있다
+        ns = [n for n in ns_all if n == -1 or n >= 1000]
+        res = []
+        for n in ns:
+            for m in ("R1", "R2"):
+                s_ = X.region_stats(tm, gk(m, n, LO, LAM_CV), gk("Pbest", n, "none"))
+                res.append((f"{m} n={nlab(n)}", T.single("WF1-a", "WF1-a", f"{m}(λ cv)-Pbest|n{nlab(n)}", nm, s_, primary=main, role=role, n=n,
+                                                       method=m, lam=LAM_CV)))
+            for m in ("R1", "R2"):
+                for lam in LAMS:
+                    T.single("WF1-a", "WF1-a", f"{m}(λ {lam})-Pbest|n{nlab(n)}", nm, X.region_stats(tm, gk(m, n, LO, lam), gk("Pbest", n, "none")),
+                             role="보조", n=n, method=m, lam=lam)
+        win = [k for k, r in res if _v(r) == "우세"]
+        kv, km, _ = X.count_valid(res)
+        if not res:
+            txt = "판정 불가(행 없음: n ≥ 1,000 인 라벨 수가 없다)"
+        elif win:
+            txt = f"지지: 최선 물리 보정식보다 우세인 n 이 있다({', '.join(win)})"
+        elif kv < km:
+            txt = X.na_text(res)
+        else:
+            txt = "기각: n ≥ 1,000 에서 R1·R2(교차검증 λ)가 최선 물리 보정식보다 우세인 n 이 없다"
+        sel = choice_freq(runs[runs.target == nm.split("|")[0]], "Pbest", ("n",)) if len(runs) else {}
+        T.verdict("WF1-a", "WF1-a", txt, X._fmt(res) + f" | Pbest 선택 {json.dumps(sel, ensure_ascii=False)}", role=role, used=res, target=nm)
+        # ---------------- WF1-b: n ≥ 500 에서 x34 의 R1 이 x25 의 R1 보다 우세(교차검증 λ)
+        ns_b = [n for n in ns_of(tm, "R1@x34", LO) if n == -1 or n >= 500]
+        if ns_b or main:
+            res = []
+            for n in ns_b:
+                s_ = X.region_stats(tm, gk("R1@x34", n, LO, LAM_CV), gk("R1", n, LO, LAM_CV))
+                res.append((f"n={nlab(n)}", T.single("WF1-b", "WF1-b", f"R1@x34-R1|n{nlab(n)}|λ cv", nm, s_, primary=main, role=role, n=n, lam=LAM_CV)))
+                for lam in LAMS:
+                    T.single("WF1-b", "WF1-b", f"R1@x34-R1|n{nlab(n)}|λ {lam}", nm, X.region_stats(tm, gk("R1@x34", n, LO, lam), gk("R1", n, LO, lam)),
+                             role="보조", n=n, lam=lam)
+                for m, lam in (("D0", 1.0), ("D1", 1.0), ("R2", LAM_CV)):
+                    T.single("WF1-b", "WF1-b", f"{m}@x34-{m}|n{nlab(n)}", nm, X.region_stats(tm, gk(f"{m}@x34", n, LO, lam), gk(m, n, LO, lam)),
+                             role="보조", n=n, lam=lam)
+            vs = [_v(r) for _, r in res]
+            kv, km, _ = X.count_valid(res)
+            up = [k for (k, _), v in zip(res, vs) if v == "우세"]
+            down = [k for (k, _), v in zip(res, vs) if v == "열세"]
+            if not res:
+                txt = "판정 불가(x34 행 없음)"
+            elif down:
+                txt = f"기각: x34 의 R1 이 열세인 n 이 있다({', '.join(down)})"
+            elif kv < km:
+                txt = X.na_text(res)
+            elif len(up) == len(res):
+                txt = "지지: n ≥ 500 의 모든 n 에서 x34 의 R1 이 우세(SAR 정보의 가치)"
+            elif up:
+                txt = f"부분 지지: 우세인 n = {', '.join(up)}"
+            else:
+                txt = "기각: 우세인 n 이 없다(SAR 열의 추가 가치를 확인하지 못했다)"
+            T.verdict("WF1-b", "WF1-b", txt, X._fmt(res), role=role, used=res, target=nm)
+        # ---------------- WF1-c: 물리 기반 레시피(R1·R2·D1)가 Pbest 대비 열세인 n 의 수가 D0 보다 적다
+        cnt = {}
+        for m, lr, lam in (("R1", LO, LAM_CV), ("R2", LO, LAM_CV), ("D1", LO, 1.0), ("D0", LO, 1.0)):
+            res_m = [(f"{m} n={nlab(n)}", T.single("WF1-c", "WF1-c", f"{m}-Pbest|n{nlab(n)}", nm, X.region_stats(tm, gk(m, n, lr, lam),
+                                                                                                                gk("Pbest", n, "none")),
+                                                  role=role, n=n, method=m, lam=lam)) for n in ns_all]
+            kv, km, miss = X.count_valid(res_m)
+            cnt[m] = (sum(_v(r) == "열세" for _, r in res_m), kv, km, res_m)
+        for m in ("R1", "R2"):                                             # 보조: 고정 λ 0.25 의 열세 수
+            res_m = [(f"{m}(0.25) n={nlab(n)}", T.single("WF1-c", "WF1-c", f"{m}(λ 0.25)-Pbest|n{nlab(n)}", nm,
+                                                         X.region_stats(tm, gk(m, n, LO, LAM_BASE), gk("Pbest", n, "none")), role="보조", n=n,
+                                                         method=m, lam=LAM_BASE)) for n in ns_all]
+            cnt[f"{m}(0.25)"] = (sum(_v(r) == "열세" for _, r in res_m), *X.count_valid(res_m)[:2], res_m)
+        d0 = cnt["D0"]
+        incomplete = [m for m in ("R1", "R2", "D1", "D0") if cnt[m][1] < cnt[m][2]]
+        fewer = [m for m in ("R1", "R2", "D1") if cnt[m][0] < d0[0]]
+        stat = "; ".join(f"{m} 열세 {v[0]}/{v[1]}(등록 {v[2]})" for m, v in cnt.items())
+        if not ns_all:
+            txt = "판정 불가(행 없음)"
+        elif incomplete:
+            txt = f"판정 불가(판정할 수 없는 대비가 있다: {', '.join(incomplete)})"
+        elif len(fewer) == 3:
+            txt = "지지: R1·R2·D1 모두 열세인 n 의 수가 D0 보다 적다"
+        elif fewer:
+            txt = f"부분 지지: 열세인 n 의 수가 D0 보다 적은 레시피 = {', '.join(fewer)}"
+        else:
+            txt = "기각: 열세인 n 의 수가 D0 보다 적은 물리 기반 레시피가 없다"
+        T.verdict("WF1-c", "WF1-c", txt, stat, role=role, used=[(k, r) for m in ("R1", "R2", "D1", "D0") for k, r in cnt[m][3]], target=nm)
+    return T.frame()
+
+
+def tests_wf2(a, tms, runs):
+    T = X.TestBook(a, tms, None, None)
+    strat = [s for s in a.STRAT if s != "S1"]
+    main_n = (50, 100, 200)
+    for nm in sorted(tms):
+        tm = tms[nm]
+        main = nm == "Alaska|r"
+        role = "주" if main else "서술"
+        ns = ns_of(tm, "R1", LO, "S1")
+        res, by_s = [], {}
+        for s in strat:
+            for n in ns:
+                r = T.single("WF2-a", "WF2-a", f"{s}-S1|R1(0.25)|n{nlab(n)}", nm,
+                             X.region_stats(tm, gk("R1", n, LO, LAM_BASE, s), gk("R1", n, LO, LAM_BASE, "S1")),
+                             primary=bool(main and n in main_n), role=role if n in main_n else "서술", n=n, strategy=s)
+                if n in main_n:
+                    res.append((f"{s} n={nlab(n)}", r)); by_s.setdefault(s, []).append(r)
+                for m, lam in (("P1", None), ("D1", 1.0)):
+                    gA = gk("P1", n, "none", placement=s) if m == "P1" else gk("D1", n, LO, 1.0, s)
+                    gB = gk("P1", n, "none", placement="S1") if m == "P1" else gk("D1", n, LO, 1.0, "S1")
+                    T.single("WF2-a", "WF2-a", f"{s}-S1|{m}|n{nlab(n)}", nm, X.region_stats(tm, gA, gB), role="보조", n=n, strategy=s, method=m)
+        win = [k for k, r in res if _v(r) == "우세"]
+        all3 = [s for s, rs in by_s.items() if len(rs) == len(main_n) and all(_v(r) == "우세" for r in rs)]
+        kv, km, _ = X.count_valid(res)
+        if not res:
+            txt = "판정 불가(행 없음)"
+        elif win:
+            txt = f"지지: S1 보다 우세인 (전략, n) = {', '.join(win)}" + (f". 세 n 모두 우세인 전략 = {', '.join(all3)}" if all3 else "")
+        elif kv < km:
+            txt = X.na_text(res)
+        else:
+            txt = "기각: n {50, 100, 200} 의 R1 에서 S1 보다 우세인 전략이 없다"
+        T.verdict("WF2-a", "WF2-a", txt, X._fmt(res), role=role, used=res, target=nm)
+    # ---------------- WF2-b: 알래스카 n = 100 의 R1 점 추정으로 고른 전략이 레나·캐나다에서 S1 보다 열세가 아니다
+    tmA = tms.get("Alaska|r")
+    if tmA is not None and strat:
+        sc = {s: X.grp_rmse(tmA, gk("R1", 100, LO, LAM_BASE, s)) for s in strat}
+        sc = {s: v for s, v in sc.items() if np.isfinite(v)}
+        if sc:
+            best = min(sc, key=lambda s: (sc[s], s))
+            res = []
+            for nm in ("Lena|r", "Canada|r"):
+                tm = tms.get(nm)
+                s_ = X.region_stats(tm, gk("R1", 100, LO, LAM_BASE, best), gk("R1", 100, LO, LAM_BASE, "S1")) if tm is not None else None
+                res.append((nm, T.single("WF2-b", "WF2-b", f"{best}-S1|R1(0.25)|n100", nm, s_, primary=True, n=100, strategy=best)))
+                if tm is not None:
+                    for n in [v for v in ns_of(tm, "R1", LO, best) if v != 100]:
+                        T.single("WF2-b", "WF2-b", f"{best}-S1|R1(0.25)|n{nlab(n)}", nm,
+                                 X.region_stats(tm, gk("R1", n, LO, LAM_BASE, best), gk("R1", n, LO, LAM_BASE, "S1")), role="보조", n=n, strategy=best)
+            vs = [_v(r) for _, r in res]
+            kv, km, _ = X.count_valid(res)
+            if "열세" in vs:
+                txt = f"기각: {best} 가 S1 보다 열세인 대상이 있다({', '.join(k for (k, _), v in zip(res, vs) if v == '열세')})"
+            elif kv < km:
+                txt = X.na_text(res)
+            else:
+                txt = f"지지: 알래스카에서 고른 {best} 는 레나·캐나다에서 S1 보다 열세가 아니다"
+            stat = "알래스카 n = 100 R1(0.25) RMSE: " + ", ".join(f"{s} {v:.2f}" for s, v in sorted(sc.items(), key=lambda kv_: kv_[1])) + " | " + X._fmt(res)
+            T.verdict("WF2-b", "WF2-b", txt, stat, used=res, strategy=best)
+    return T.frame()
+
+
+def tests_wf3(a, tms, runs):
+    T = X.TestBook(a, tms, None, None)
+    res = []
+    for nm in ("Alaska|r", "Lena|r"):
+        tm = tms.get(nm)
+        if tm is None:
+            continue
+        for n in [v for v in ns_of(tm, "Pc", "none") if v == -1 or v >= 500]:
+            res.append((f"{nm.split('|')[0]} n={nlab(n)}", T.single("WF3-a", "WF3-a", f"Pc(k cv)-P1|n{nlab(n)}", nm,
+                                                                    X.region_stats(tm, gk("Pc", n, "none"), gk("P1", n, "none")), primary=True, n=n)))
+            for k in CLUSTER_KS:
+                T.single("WF3-a", "WF3-a", f"Pc@c{k}-P1|n{nlab(n)}", nm, X.region_stats(tm, gk(f"Pc@c{k}", n, "none"), gk("P1", n, "none")),
+                         role="보조", n=n)
+    vs = [_v(r) for _, r in res]
+    kv, km, _ = X.count_valid(res)
+    up = [k for (k, _), v in zip(res, vs) if v == "우세"]
+    down = [k for (k, _), v in zip(res, vs) if v == "열세"]
+    if not res:
+        txt = "판정 불가(행 없음)"
+    elif down:
+        txt = f"기각: Pc 가 P1 보다 열세인 대비가 있다({', '.join(down)})"
+    elif kv < km:
+        txt = X.na_text(res)
+    elif len(up) == len(res):
+        txt = "지지: n ≥ 500 의 모든 대비에서 Pc(교차검증 k)가 P1 보다 우세"
+    elif up:
+        txt = f"부분 지지: 우세인 대비 = {', '.join(up)}"
+    else:
+        txt = "기각: n ≥ 500 에서 Pc 가 P1 보다 우세인 대비가 없다"
+    T.verdict("WF3-a", "WF3-a", txt, X._fmt(res) + f" | k 선택 {json.dumps(choice_freq(runs, 'Pc'), ensure_ascii=False)}", used=res)
+    # ---------------- WF3-b(방향 중립): 군집별 잔차·군집 입력 대 전체 잔차
+    for nm in ("Alaska|r", "Lena|r"):
+        tm = tms.get(nm)
+        if tm is None:
+            continue
+        out = {}
+        for kind in ("R1c", "R1i"):
+            lst = []
+            for n in ns_of(tm, "R1", LO):
+                for k in CLUSTER_KS:
+                    for lam in (LAM_BASE, 1.0):
+                        lst.append((f"{kind}@c{k} n={nlab(n)} λ {lam}",
+                                    T.single("WF3-b", "WF3-b", f"{kind}@c{k}-R1|n{nlab(n)}|λ {lam}", nm,
+                                             X.region_stats(tm, gk(f"{kind}@c{k}", n, LO, lam), gk("R1", n, LO, lam)), role="서술", n=n, lam=lam,
+                                             method=f"{kind}@c{k}")))
+            out[kind] = lst
+        T.verdict("WF3-b", "WF3-b", "서술(방향 중립): " + "; ".join(f"{kind} {_counts(lst)}" for kind, lst in out.items()),
+                  "; ".join(X._fmt(lst) for lst in out.values()), role="서술", target=nm, used=[r for lst in out.values() for r in lst])
+    return T.frame()
+
+
+def _spearman_rows(Dm, Gm):
+    """행마다 Spearman ρ(순위의 Pearson, 동률 평균 순위)."""
+    from scipy.stats import rankdata
+    rd, rg = rankdata(Dm, axis=1), rankdata(Gm, axis=1)
+    rd = rd - rd.mean(1, keepdims=True); rg = rg - rg.mean(1, keepdims=True)
+    den = np.sqrt((rd ** 2).sum(1) * (rg ** 2).sum(1))
+    with np.errstate(invalid="ignore", divide="ignore"):
+        return (rd * rg).sum(1) / den
+
+
+def ni_p(tms, names, gA, gB, margin):
+    """비열등 p: 층화 평균 분포(지역 분포의 비가중 평균, m1_stats.strat)에서 max(P(Δ ≥ 한계)) 를 두 가중에 대해 구한다."""
+    dc, db = [], []
+    for nm in names:
+        tm = tms.get(nm)
+        if tm is None:
+            continue
+        s_ = X.region_stats(tm, gA, gB)
+        if s_ is not None and s_.get("dist") is not None:
+            dc.append(s_["dist"]); db.append(s_["dist_beq"])
+    if len(dc) < H.MIN_POOL_REGIONS:
+        return np.nan
+    sc, sb = MS.strat(dc), MS.strat(db)
+    return float(max(np.mean(sc >= margin), np.mean(sb >= margin)))
+
+
+def tests_wf4(a, tms, runs, units):
+    T = X.TestBook(a, tms, None, None)
+    main4 = [f"{t}|x" for t in MAIN4]
+    gW = lambda n: gk("W", n, LO, 0.0)                                     # noqa: E731
+    gR = lambda n: gk("R1", n, LO, LAM_BASE)                              # noqa: E731
+    # ---------------- WF4-a: W 는 R1(0.25)보다 열세가 아니다(주 4지역 평균, 두 가중, 한계 0.5 cm)
+    res = []
+    for n in (10, 40, 160, -1):
+        mr = T.contrast("WF4-a", "WF4-a", f"W-R1(0.25)|n{nlab(n)}", gW(n), gR(n), names=main4, primary=True, aux3=False, n=n)
+        if mr is not None:
+            mr["p_ni"] = ni_p(tms, main4, gW(n), gR(n), a.ni_margin)
+            mr["ni"] = bool(X.valid_row(mr) and not mr.get("undetermined", False) and mr["ci_hi"] < a.ni_margin and mr["ci_hi_beq"] < a.ni_margin)
+        res.append((f"n={nlab(n)}", mr))
+    hp = MS.holm([r["p_ni"] if (r is not None and np.isfinite(r.get("p_ni", np.nan))) else np.nan for _, r in res])
+    for (_, r), h in zip(res, hp):
+        if r is not None:
+            r["holm_p_ni"] = float(h)
+    kv, km, _ = X.count_valid(res)
+    ok_n = [k for k, r in res if r is not None and r.get("ni")]
+    if kv < km:
+        txt = X.na_text(res)
+    elif len(ok_n) == km:
+        txt = f"지지: 모든 n 에서 비열등(두 가중 CI 상한 < {a.ni_margin} cm)"
+    elif ok_n:
+        txt = f"부분 지지: 비열등인 n = {', '.join(ok_n)}"
+    else:
+        txt = f"기각: 어느 n 에서도 비열등(한계 {a.ni_margin} cm)을 보이지 못했다"
+    T.verdict("WF4-a", "WF4-a", txt, "; ".join(f"{k}: Δ {r['delta']:.2f}, CI 상한 {r['ci_hi']:.2f}·{r['ci_hi_beq']:.2f}, p_ni {r.get('p_ni', np.nan):.4f}"
+                                               for k, r in res if r is not None), used=res)
+    # ---------------- WF4-b: n ≥ 160 에서 P1 보다 우세인 대상 수가 W > R1(0.25)
+    per_n = {}
+    for n in (160, -1):
+        cw = cr = det = 0
+        for nm in sorted(tms):
+            tm = tms[nm]
+            rW = T.single("WF4-b", "WF4-b", f"W-P1|n{nlab(n)}", nm, X.region_stats(tm, gW(n), gk("P1", n, "none")), role="집계", n=n, method="W")
+            rR = T.single("WF4-b", "WF4-b", f"R1(0.25)-P1|n{nlab(n)}", nm, X.region_stats(tm, gR(n), gk("P1", n, "none")), role="집계", n=n,
+                          method="R1")
+            cw += _v(rW) == "우세"; cr += _v(rR) == "우세"; det += bool(X.valid_row(rW) and X.valid_row(rR))
+        per_n[n] = (cw, cr, det)
+    more = [nlab(n) for n, (cw, cr, _) in per_n.items() if cw > cr]
+    none_det = [nlab(n) for n, (_, _, det) in per_n.items() if det == 0]
+    stat = "; ".join(f"n={nlab(n)}: W 우세 {cw} · R1 우세 {cr}(두 대비 모두 판정 가능한 대상 {det}/{len(tms)})" for n, (cw, cr, det) in per_n.items())
+    if none_det:
+        txt = f"판정 불가(판정 가능한 대상이 없는 n: {', '.join(none_det)})"
+    else:
+        txt = ("지지: n 160·전량 모두 W 의 우세 대상 수가 더 많다" if len(more) == 2 else
+               f"부분 지지: W 의 우세 대상 수가 더 많은 n = {', '.join(more)}" if more else "기각: W 의 우세 대상 수가 R1(0.25)보다 많지 않다")
+    T.verdict("WF4-b", "WF4-b", txt, stat, point=True, used=[])
+    # ---------------- WF4-c(진단): 편향 진단값(라벨 10개) 과 전량 라벨 ML 이득(P0 − W)의 순위상관
+    diag = {}
+    for u in units:
+        nm = f"{u['target']}|{u['mode']}"
+        diag.setdefault(nm, []).extend(u.get("diag") or [])
+    rows, names = [], []
+    for nm in sorted(tms):
+        tm = tms[nm]
+        dv = diag.get(nm, [])
+        r = H.contrast(tm, gW(-1), H.P0_GRP, return_dist=True)
+        rR1 = H.contrast(tm, gR(-1), H.P0_GRP, return_dist=False)
+        if not dv or r is None or not np.isfinite(r["delta"]):
+            continue
+        names.append(nm)
+        rows.append(dict(name=nm, abs_vals=np.array([v["abs_bias"] for v in dv], float), sgn_vals=np.array([v["bias"] for v in dv], float),
+                         gain=-float(r["delta"]), dist=(-np.asarray(r["dist"], float)) if "dist" in r else None,
+                         gain_r1=-float(rR1["delta"]) if rR1 is not None else np.nan))
+    if len(rows) >= 3:
+        B = int(max(a.nboot, 1))
+        rng = np.random.RandomState(seed_of("wf4c", len(rows)))
+        Dabs = np.zeros((B, len(rows))); Dsgn = np.zeros((B, len(rows))); Gm = np.zeros((B, len(rows)))
+        for j, q in enumerate(rows):
+            k = len(q["abs_vals"])
+            pick = rng.randint(0, k, size=(B, k))
+            Dabs[:, j] = q["abs_vals"][pick].mean(1); Dsgn[:, j] = q["sgn_vals"][pick].mean(1)
+            Gm[:, j] = q["dist"][:B] if (q["dist"] is not None and len(q["dist"]) >= B) else q["gain"]
+        d0 = np.array([q["abs_vals"].mean() for q in rows]); s0 = np.array([q["sgn_vals"].mean() for q in rows])
+        g0 = np.array([q["gain"] for q in rows]); g1 = np.array([q["gain_r1"] for q in rows])
+        rho = float(_spearman_rows(d0[None], g0[None])[0]); rho_b = _spearman_rows(Dabs, Gm)
+        lo, hi = (float(np.nanpercentile(rho_b, 2.5)), float(np.nanpercentile(rho_b, 97.5)))
+        rho_s = float(_spearman_rows(s0[None], g0[None])[0]); rb_s = _spearman_rows(Dsgn, Gm)
+        ok1 = np.isfinite(g1)
+        rho_r1 = float(_spearman_rows(d0[ok1][None], g1[ok1][None])[0]) if ok1.sum() >= 3 else np.nan
+        for q, dm, sm in zip(rows, d0, s0):
+            T.rows.append(dict(test_id="WF4-c", item="WF4-c", contrast="진단값-이득", scope="region", role="진단", target=q["name"], diag_abs=float(dm),
+                               diag_signed=float(sm), n_diag=int(len(q["abs_vals"])), gain_w=q["gain"], gain_r1=q["gain_r1"],
+                               ci_flag="" if q["dist"] is not None else "점 추정(분포 없음)"))
+        T.rows.append(dict(test_id="WF4-c", item="WF4-c", contrast="Spearman(|편향|, P0 − W)", scope="MEAN", role="진단", n_targets=len(rows), rho=rho,
+                           ci_lo=lo, ci_hi=hi, p_one=float(np.mean(rho_b <= 0)), rho_signed=rho_s,
+                           ci_lo_signed=float(np.nanpercentile(rb_s, 2.5)), ci_hi_signed=float(np.nanpercentile(rb_s, 97.5)), rho_gain_r1=rho_r1,
+                           nboot=B))
+        txt = (f"지지: 양의 순위상관(ρ {rho:.2f}, CI [{lo:.2f}, {hi:.2f}])" if lo > 0 else
+               f"미지지: ρ {rho:.2f}, CI [{lo:.2f}, {hi:.2f}] 가 0 을 포함하거나 음수다")
+        T.verdict("WF4-c", "WF4-c", txt, f"대상 {len(rows)}(진단값과 이득이 모두 있는 대상) · 부호 있는 편향 ρ {rho_s:.2f} · R1(0.25) 이득 ρ {rho_r1:.2f}",
+                  used=[], note="진단")
+    else:
+        T.verdict("WF4-c", "WF4-c", f"판정 불가(대상 {len(rows)} < 3)", "", used=[], note="진단")
+    return T.frame()
+
+
+WF_HYP = ("WF1-a", "WF1-b", "WF1-c", "WF2-a", "WF2-b", "WF3-a", "WF4-a", "WF4-b", "WF4-c")
+
+
+def git_commit():
+    try:
+        import subprocess
+        return subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, text=True, stderr=subprocess.DEVNULL).strip()
+    except Exception:                                                     # noqa: BLE001
+        return "NA"
+
+
+LOCAL_NBOOT_MAX = 1000
+
+
+def summarize(a, elapsed=0.0, skipped=None):
+    """실험별로 조각을 읽어 곡선(h40.build_curve)과 가설 표(h42.TestBook)를 만든다. 실험 사이 저장소는 섞지 않는다."""
+    t0 = time.time()
+    warnings.filterwarnings("ignore", message="Mean of empty slice")
+    warnings.filterwarnings("ignore", message="All-NaN slice encountered")
+    if not a.PERMIT and int(a.nboot) > LOCAL_NBOOT_MAX:
+        print(f"[local] 허용 표지가 없다: --nboot {a.nboot} → {LOCAL_NBOOT_MAX}. 이 집계의 CI 는 등록한 재표집 횟수(10,000)의 값이 아니다", flush=True)
+        a.nboot_asked, a.nboot = int(a.nboot), LOCAL_NBOOT_MAX
+    O = a.OUT; O.mkdir(parents=True, exist_ok=True)
+    tasks, tests, units_all, runs_all, cfg_info, tms_by = [], [], [], [], {}, {}
+    for exp in a.EXPS:
+        sh = find_shards(a, exp)
+        if not sh:
+            print(f"[summarize] {exp}: 조각 없음({a.SHARDS}/{exp_tag(a, exp)}__*)", flush=True)
+            continue
+        units = [json.loads(s_["unit"].read_text()) for s_ in sh]
+        cfg_info[exp] = check_cfg(a, exp, units)
+        runs = read_runs(sh)
+        if len(runs):
+            runs = runs.drop_duplicates(subset=["target", "mode", "split", "variant"] + H.KEY_COLS, keep="first")
+        stores = load_stores([s_["npz"] for s_ in sh])
+        by_name: dict = {}
+        for (nm, sp), st in stores.items():
+            by_name.setdefault(nm, {})[int(sp)] = st
+        tms = {nm: make_tm(nm, bs, [u for u in units if f"{u['target']}|{u['mode']}" == nm], a.nboot, is_point_only(exp, nm))
+               for nm, bs in sorted(by_name.items())}
+        tms_by[exp] = tms
+        for nm, tm in tms.items():
+            t, m = nm.split("|")
+            rs = runs[(runs.target == t) & (runs["mode"] == m)] if len(runs) else runs
+            tasks.append((exp, nm, tm, rs))
+        units_all += units; runs_all.append(runs)
+    if not tasks:
+        print("[summarize] 조각이 하나도 없다", flush=True)
+        return None
+    curves = [c_ for c_ in build_curves(a, tasks) if len(c_)]
+    curve = pd.concat(curves, ignore_index=True) if curves else pd.DataFrame()
+    if len(curve):
+        curve = curve.sort_values(["exp", "target", "mode", "method", "learner", "placement", "lam", "n"]).reset_index(drop=True)
+    runs = pd.concat([r_ for r_ in runs_all if len(r_)], ignore_index=True) if any(len(r_) for r_ in runs_all) else pd.DataFrame()
+    fn = dict(wf1=tests_wf1, wf2=tests_wf2, wf3=tests_wf3)
+    for exp, tms in tms_by.items():
+        rx = runs[runs.exp == exp] if len(runs) else runs
+        try:
+            df = tests_wf4(a, tms, rx, [u for u in units_all if u.get("exp") == "wf4"]) if exp == "wf4" else fn[exp](a, tms, rx)
+        except Exception as e:                                            # noqa: BLE001  한 실험의 판정 실패가 나머지 집계를 막지 않게 한다
+            print(f"  [warn] {exp} 판정 계산 실패: {repr(e)[:300]}", flush=True)
+            df = pd.DataFrame([dict(test_id=exp.upper(), item="error", scope="verdict", verdict=f"판정 불가(계산 실패: {repr(e)[:160]})")])
+        if len(df):
+            df.insert(0, "exp", exp)
+            tests.append(df)
+        H4.boot_weights.cache_clear()
+    tests = pd.concat(tests, ignore_index=True) if tests else pd.DataFrame()
+    if len(tests):
+        tests["hypothesis"] = tests.test_id.isin(WF_HYP)
+        tests["design_note"] = "결과 열람 뒤 설계"
+        tests["nboot"] = int(a.nboot)
+    failed = runs[(runs.n_nonfinite > 0) | runs.fit_flag.isin(["fail", "nonfinite", "fallback"])] if len(runs) else runs
+    krige_fb = int(runs.fit_flag.str.startswith("krige_fallback").sum()) if len(runs) else 0
+    tg = pd.DataFrame([{k: v for k, v in u.items() if not isinstance(v, (dict, list))} for u in units_all])
+    if skipped:
+        tg = pd.concat([tg, pd.DataFrame(skipped)], ignore_index=True)
+    tt = timing_table(units_all)
+    curve.to_csv(O / f"{a.TAG}_curve.csv", index=False)
+    tests.to_csv(O / f"{a.TAG}_tests.csv", index=False)
+    tg.to_csv(O / f"{a.TAG}_targets.csv", index=False)
+    tt.to_csv(O / f"{a.TAG}_timing.csv", index=False)
+    failed.to_csv(O / f"{a.TAG}_failed.csv", index=False)
+    choices = {}
+    if len(runs):
+        for exp, m in (("wf1", "Pbest"), ("wf1", "Pc"), ("wf3", "Pc"), ("wf1", "R1"), ("wf1", "R2"), ("wf1", "Re"), ("wf1", "R1@x34"), ("wf4", "W")):
+            q = runs[runs.exp == exp]
+            if len(q):
+                choices[f"{exp}|{m}"] = choice_freq(q, m)
+    meta = dict(stage="H54/WF", plan="docs/EXPERIMENT_PLAN_WF_2026-10-01.md", plan_commit="4168331", git_commit=git_commit(), tag=a.TAG,
+                code_sha=code_sha(), code_sha_h40=H.code_sha(), code_sha_h42=X.code_sha_x(), exps=list(tms_by),
+                targets={k: [f"{t}:{m}" for t, m in v] if k == "wf4" else list(v) for k, v in a.T.items()}, x34_targets=a.X34, strategies=a.STRAT,
+                grids={k: list(v) for k, v in a.G.items()}, splits=a.SPLITS, seeds=a.SEEDS, lams=list(LAMS), nboot=int(a.nboot),
+                nboot_capped=getattr(a, "nboot_asked", None), delta_eq=a.delta_eq, ni_margin=a.ni_margin, n_units=len(units_all),
+                n_fit_total=int(sum(int(u.get("n_fit_total", 0)) for u in units_all)), unit_elapsed_s_sum=float(sum(u.get("elapsed_s", 0) for u in units_all)),
+                elapsed_s=round(float(elapsed), 1), summarize_s=round(time.time() - t0, 1), n_curve=int(len(curve)), n_tests=int(len(tests)),
+                n_failed_keys=int(len(failed)), n_krige_fallback=int(krige_fb), unit_status=dict(Counter(str(u.get("status")) for u in units_all)),
+                shard_cfg=cfg_info, skipped=skipped or [], choices=choices,
+                rules=dict(verdict4="h42.verdict4: 우세 = 두 가중 CI 상한 < 0, 열세 = 두 가중 CI 하한 > 0, 동등 = 네 끝값 |·| ≤ 0.5 cm, 그 밖 미결정",
+                           ci="h40.contrast(h4_common.boot_delta_blocks): 분할 안 채점 블록 재표집, 방법·추출·seed 공통 인덱스, 분할 분포 평균",
+                           mean="h40.strat_mean·h42.pool_rows(층화 평균, CI 풀 = 유효 분할 ≥ 1 이고 채점 블록 합집합 ≥ 8)",
+                           holm="h42.TestBook.frame: 항목(가설)마다 주 대비의 양측 부트스트랩 p 에 Holm(보조 열). WF4-a 는 p_ni 에 따로 holm_p_ni"),
+                implementation=IMPL_NOTES)
+    (O / f"{a.TAG}_meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1, default=float))
+    print(f"[summarize] 실험 {list(tms_by)} · 조각 {len(units_all)} · runs {len(runs):,} · curve {len(curve):,} · tests {len(tests):,} · "
+          f"{time.time() - t0:.0f}s → {O}/{a.TAG}_*", flush=True)
+    if len(tests):
+        v = tests[tests.scope.isin(["verdict", "verdict_aux"])]
+        cols = [c_ for c_ in ("exp", "test_id", "role", "target", "verdict") if c_ in v]
+        if len(v):
+            with pd.option_context("display.max_colwidth", 140, "display.width", 250):
+                print(v[cols].to_string(index=False), flush=True)
+    return dict(curve=curve, tests=tests, meta=meta, timing=tt, failed=failed)
+
+
+IMPL_NOTES = {
+    "krige": "자체 국소 정규 크리깅(구면 3차원 좌표 km, 최근접 32, 지수 변이도 실용 범위 모수화, 경험 변이도 12구간·최대 거리 절반·√쌍수 가중, "
+             "범위 60개 로그 격자 + 비음수 최소제곱, 부분표본 1,500). 라벨 < 10 또는 구간 < 3 이면 P1 대체(fit_flag). RK = 표본 안 잔차 크리깅",
+    "cluster": "A 풀 x25 중앙값 대체·표준화(라벨 미사용), k-평균 n_init 10, B 는 가장 가까운 중심. Pc = 군집 계수의 전체 E_n 으로의 κ 10 수축. "
+               "R1c 는 군집 라벨 ≥ 20 만 따로 적합(그 밖 전체 g). R1i = 원핫 k 열 입력",
+    "s6": "20개 무작위(S1 n = 20 과 같다) → 예산 경계까지 최대 20개씩. 선택 모형 = R1 잔차 CatBoost(catboost_lo, posterior_sampling), "
+          "VirtEnsembles 10개 분산이 큰 셀. 실패하면 그 단계만 무작위(notes.s6_fallback)",
+    "s4_s5_s7": "S4 표준화 x25 탐욕 k-중심(첫 점 무작위), S5 LG 원천(모드 x) 기준 AOA 비유사도 큰 순(결정적, 추출 0 만 저장), S7 √TDD 큰 순(동률 seed)",
+    "x34": "SAR 결측은 CatBoost 결측 처리에 맡긴다. x34 조각은 catboost_lo 의 D0·D1·R1·R2 만",
+    "lgd": "run_tables/{Tibet, NAtlantic_lic, Russia_C} 를 h40.Data 로 읽는다(약관 미확인 행 0). NAtlantic~lic 은 점 추정만",
+    "inregion_pseudo": "지역 내 D1·R2 의 유사라벨 행 = round(10 × 학습 라벨 수), A 풀 복원 추출",
+    "re_anchor": "0.5·(E_n·s + cci_alt)(CCI 유효 셀), 그 밖 E_n·s",
+    "cv": "h42.cv_folds_of(블록 5묶음, 블록 1개면 셀 묶음), seed 0 적합으로 선택, 묶음마다 E_n 재계산, 동률은 작은 λ·앞 후보·작은 k",
+    "p0_ref": "지역 내 실험의 P0·κ 수축 사전값 E0 = LG 원천(모드 x, 100 km 버퍼) 최소제곱. 알래스카 하위 지역도 모드 x",
+    "wf4_targets": "LG 27 (대상, 모드) + LGD 새 지역 3 = 30. 추출과 유사라벨 색인은 LG 와 같다",
+}
+
+
+def timing_table(units):
+    rows = []
+    for u in units:
+        for k, nf in (u.get("n_fit_detail") or {}).items():
+            ax, lr, m = (k.split("|") + ["", ""])[:3]
+            sec = float((u.get("sec_detail") or {}).get(k, 0.0)); nr = float((u.get("rows_detail") or {}).get(k, 0.0))
+            rows.append(dict(exp=u.get("exp", ""), target=u.get("target", ""), mode=u.get("mode", ""), split=u.get("split", -1), variant=u.get("variant", ""),
+                             learner=lr, method=m, n_fit=int(nf), sec=sec, sec_per_fit=sec / max(int(nf), 1), rows_per_fit=nr / max(int(nf), 1),
+                             est_s=float((u.get("est_detail") or {}).get(k, np.nan)), threads=u.get("threads", "")))
+        rows.append(dict(exp=u.get("exp", ""), target=u.get("target", ""), mode=u.get("mode", ""), split=u.get("split", -1), variant=u.get("variant", ""),
+                         learner="krige", method="krige", n_fit=int(u.get("n_krige", 0)), sec=float(u.get("krige_s", 0.0)),
+                         sec_per_fit=float(u.get("krige_s", 0.0)) / max(int(u.get("n_krige", 0)), 1), rows_per_fit=np.nan,
+                         est_s=float(u.get("est_krige_s", 0.0)), threads=u.get("threads", "")))
+        rows.append(dict(exp=u.get("exp", ""), target=u.get("target", ""), mode=u.get("mode", ""), split=u.get("split", -1), variant=u.get("variant", ""),
+                         learner="kmeans", method="kmeans", n_fit=int(u.get("n_kmeans", 0)), sec=float(u.get("kmeans_s", 0.0)),
+                         sec_per_fit=float(u.get("kmeans_s", 0.0)) / max(int(u.get("n_kmeans", 0)), 1), rows_per_fit=np.nan,
+                         est_s=float(u.get("est_kmeans_s", 0.0)), threads=u.get("threads", ""), elapsed_s=u.get("elapsed_s", np.nan)))
+    return pd.DataFrame(rows)
+
+
+# ================================================================ 적합 수 세기
+def count_only(a, units, skipped):
+    """학습 없이(dry) 적합 수와 추정 시간을 센다. 추정 = LG BASE_FIT 모형(h40, catboost 는 h42 가정값) + 소표본 하한, 크리깅·k-평균은 가정값."""
+    t0 = time.time()
+    rows, det, est = [], Counter(), Counter()
+    for u in units:
+        r = run_unit(a, *u, dry=True)
+        for k, v in r.pop("_detail").items():
+            det[f"{u[0]}|{k}"] += v
+        r.pop("_rows")
+        for k, v in r.pop("_est").items():
+            est[f"{u[0]}|{k}"] += v
+        rows.append(r)
+    df = pd.DataFrame(rows)
+    a.OUT.mkdir(parents=True, exist_ok=True)
+    if not len(df):
+        print("[count-only] 작업 단위 없음", flush=True)
+        return df
+    df["est_total_s"] = df.est_s + df.est_krige_s + df.est_kmeans_s
+    df.to_csv(a.OUT / f"{a.TAG}_count.csv", index=False)
+    tab = []
+    for k in det:
+        exp, _, lr, m = (k.split("|") + ["", "", ""])[:4]
+        tab.append(dict(exp=exp, learner=lr, method=m, n_fit=int(det[k]), est_h=est[k] / 3600))
+    tab = pd.DataFrame(tab).sort_values(["exp", "learner", "method"])
+    tab.to_csv(a.OUT / f"{a.TAG}_count_detail.csv", index=False)
+    by = df.groupby("exp").agg(units=("split", "size"), targets=("target", "nunique"), fits=("fit_total", "sum"), krige=("n_krige", "sum"),
+                               kmeans=("n_kmeans", "sum"), est_fit_h=("est_s", "sum"), est_krige_h=("est_krige_s", "sum"), est_all_h=("est_total_s", "sum"))
+    for c_ in ("est_fit_h", "est_krige_h", "est_all_h"):
+        by[c_] = (by[c_] / 3600).round(2)
+    with pd.option_context("display.width", 200, "display.max_rows", 200):
+        print(f"[count-only] 작업 단위 {len(units)} · 건너뜀 {len(skipped)} · 세기 {time.time() - t0:.0f}s", flush=True)
+        print(by.to_string(), flush=True)
+        tb = tab.copy(); tb["est_h"] = tb.est_h.round(3)
+        print("[count-only] 실험·학습기·방법별 적합 수와 추정 누적 시간(프로세스 1개, 스레드 4 기준)", flush=True)
+        print(tb.to_string(index=False), flush=True)
+    tot_h = float(df.est_total_s.sum()) / 3600
+    print(f"[count-only] 총 적합 {int(df.fit_total.sum()):,} · 크리깅 {int(df.n_krige.sum()):,} · k-평균 {int(df.n_kmeans.sum()):,} · "
+          f"추정 누적 {tot_h:.1f} CPU-h(4스레드 프로세스 기준)", flush=True)
+    for w in (15, 22, 43):
+        print(f"  워커 {w}개(4스레드) → 약 {tot_h / w:.2f} h(단위 크기 불균형과 감속 제외)", flush=True)
+    if skipped:
+        print(f"[count-only] 건너뛴 분할·대상: {dict(Counter(s_['status'] for s_ in skipped))}", flush=True)
+    return df
+
+
+# ================================================================ WF5 다음 관측 우선순위(지도)
+def wf5_priority(strategy, cand_X, cand_s, cand_lat, cand_lon, lab_X, lab_y, lab_s, E0, n_next, seed, src_X=None, threads=1, cb_iters=200):
+    """WF5: 후보 셀(격자)에서 다음 관측 n_next 개의 순서(후보 색인)와 점수를 전략으로 정한다. lab_* = 이미 관측된 라벨 셀.
+    S1 무작위, S2 0.5° 블록 순환(h40.draw_blocks), S3 군집 크기 비례(k = 8), S4 기존 라벨에서 시작한 탐욕 k-중심, S5 원천(src_X) 대비 AOA
+    비유사도, S6 기존 라벨로 맞춘 R1 잔차 모형의 가상 앙상블 분산(새 셀의 라벨이 없으므로 순차 갱신 없이 한 번에 고른다), S7 √TDD 큰 순.
+    표준화는 후보 셀의 공변량으로 한다(S5 는 원천 통계). 반환 dict(order, score)."""
+    cand_X = np.asarray(cand_X, float); N = len(cand_X)
+    n_next = int(min(n_next, N))
+    rs = int(seed) % (2 ** 31 - 1)
+    if strategy == "S1":
+        return dict(order=np.random.RandomState(rs).permutation(N)[:n_next], score=None)
+    if strategy == "S2":
+        blk = np.floor(np.asarray(cand_lat) / 0.5).astype(int) * 100000 + np.floor(np.asarray(cand_lon) / 0.5).astype(int)
+        sel = H.draw_blocks("wf5", "map", 0, n_next, rs, blk)
+        return dict(order=np.asarray(sel, int), score=None)
+    st = standardize_fit(cand_X)
+    Zc = standardize(cand_X, st)
+    if strategy == "S3":
+        labA, _ = kmeans_labels(Zc, Zc[:0], S3_K, rs)
+        alloc = proportional_alloc(np.bincount(labA, minlength=int(labA.max()) + 1), n_next)
+        rng = np.random.RandomState(rs)
+        out = [rng.choice(np.where(labA == cl)[0], int(k), replace=False) for cl, k in enumerate(alloc) if k > 0]
+        return dict(order=np.concatenate(out).astype(int), score=None)
+    if strategy == "S4":
+        init = standardize(lab_X, st) if lab_X is not None and len(lab_X) else None
+        return dict(order=kcenter_order(Zc, n_next, rs, init=init), score=None)
+    if strategy == "S5":
+        if src_X is None or not len(src_X):
+            raise ValueError("S5 는 원천 공변량(src_X)이 필요하다")
+        ss = standardize_fit(src_X)
+        di = aoa_di(standardize(cand_X, ss), standardize(src_X, ss), rs)
+        return dict(order=rank_desc(di, rs)[:n_next], score=di)
+    if strategy == "S6":
+        lab_y = np.asarray(lab_y, float); lab_s = np.asarray(lab_s, float)
+        E_ls = H.ls_E(lab_y, lab_s)
+        E_n = X.shrink(E_ls, E0, len(lab_y), KAPPA)
+        v = ve_variance(np.asarray(lab_X, np.float32), lab_y - E_n * lab_s, cand_X.astype(np.float32), rs, cb_iters, threads)
+        return dict(order=rank_desc(v, rs)[:n_next], score=v)
+    if strategy == "S7":
+        return dict(order=rank_desc(np.asarray(cand_s, float), rs)[:n_next], score=np.asarray(cand_s, float))
+    raise ValueError(f"알 수 없는 전략 {strategy}")
+
+
+def run_wf5(a):
+    """WF5 지도: 레나 격자(육지 셀, x25 결측 없음)에 --wf5-strategy 를 적용해 다음 --wf5-n 개 관측 위치의 우선순위를 쓴다.
+    기대 오차 감소는 WF2 모의 결과(<tag>_curve.csv 의 전략별 곡선)에서 가져온다(아직 연결하지 않았다. 계획서 개정 이력의 TODO)."""
+    strat = a.wf5_strategy
+    if strat not in STRATEGIES:
+        raise SystemExit("--wf5-strategy 를 S1–S7 가운데 하나로 준다(WF2-b 규칙으로 정한 전략)")
+    g = pd.read_csv(_abs(a.wf5_grid))
+    keep = (g.get("land", 1) == 1) & np.all(np.isfinite(g[FEATS].values.astype(float)), 1) & np.isfinite(g.e5_sqrt_tdd.values.astype(float))
+    g = g[keep].reset_index(drop=True)
+    HA, D = get_data(a)
+    df = D.df
+    li = D.target_idx("Lena")
+    _, _, src_idx, _ = D.source_idx("Lena", "x")
+    ok = np.isfinite(df.y.values[src_idx]) & np.isfinite(df.s.values[src_idx])
+    src = src_idx[ok]
+    E0 = H.ls_E(df.y.values[src], df.s.values[src])
+    ns = sorted(_n_list(a.wf5_n))
+    res = wf5_priority(strat, g[FEATS].values, g.e5_sqrt_tdd.values, g.lat.values, g.lon.values, df[FEATS].values[li], df.y.values[li],
+                       df.s.values[li], E0, max(ns), seed_of("wf5", strat), src_X=df[FEATS].values[src], threads=a.threads, cb_iters=a.cb_iters)
+    order = np.asarray(res["order"], int)
+    out = pd.DataFrame(dict(cell_id=g.cell_id.values[order] if "cell_id" in g else order, lat=g.lat.values[order], lon=g.lon.values[order],
+                            rank=np.arange(1, len(order) + 1), score=(np.asarray(res["score"])[order] if res["score"] is not None else np.nan)))
+    for n in ns:
+        out[f"next_{n}"] = out["rank"] <= n
+    a.OUT.mkdir(parents=True, exist_ok=True)
+    path = a.OUT / f"wf5_priority_{strat}.csv"
+    out.to_csv(path, index=False)
+    meta = dict(strategy=strat, n=ns, n_candidates=int(len(g)), n_labels=int(len(li)), E0=float(E0), grid=str(a.wf5_grid), code_sha=code_sha(),
+                expected_error_reduction="TODO: WF2 의 전략별 곡선(<tag>_curve.csv, placement = 전략)에서 예산별 Δ 를 붙인다")
+    (a.OUT / f"wf5_priority_{strat}_meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1, default=float))
+    print(f"[wf5] 전략 {strat} · 후보 {len(g):,} · 라벨 {len(li):,} · 상위 {max(ns)} → {path}", flush=True)
+    return dict(executed=[], skipped=[], resumed=[])
+
+
+# ================================================================ 실행
+def main(argv=None):
+    a = parse_args(argv)
+    argv = list(sys.argv[1:] if argv is None else argv)
+    t0 = time.time()
+    for v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
+        os.environ[v] = str(a.threads)                                     # 워커(spawn)가 물려받는다
+    os.environ["CUDA_VISIBLE_DEVICES"] = ""                               # CPU 전용(GPU 학습기를 쓰지 않는다. 계획서 §1)
+    if a.threads_asked > a.threads:
+        print(f"[local] 허용 표지가 없다: --threads {a.threads_asked} → {a.threads}", flush=True)
+    if a.wf5_map:
+        return run_wf5(a)
+    will_run = not (a.count_only or a.summarize_only)
+    if will_run and not a.smoke and not a.PERMIT:                         # 자료를 읽기 전에 거부한다
+        raise SystemExit("[거부] 스모크가 아닌 실행(사전 점검, 본 실행)은 Rescale 작업에서 한다. WF_RESCALE=1(또는 LG_RESCALE=1) 또는 "
+                         "--allow-local 을 준다(공유 서버 보호)")
+    if will_run and not a.PERMIT and int(a.workers) > 1:
+        print(f"[local] 허용 표지 없는 스모크: --workers {a.workers} → 1", flush=True)
+        a.workers = 1
+    if a.summarize_only:
+        if not a.PERMIT and int(a.workers) > 1:
+            a.workers = 1
+        out = summarize(a, 0.0, [])
+        return dict(executed=[], skipped=[], resumed=[], n_fail=0 if out is not None else 1)
+    units, skipped, expected = enumerate_units(a)
+    print(f"[data] 실험 {a.EXPS} · 작업 단위 {len(units)}(건너뜀 {len(skipped)}) · 실험별 {dict(Counter(u[0] for u in units))} · 분할 {a.SPLITS} · "
+          f"seed {a.SEEDS} · 스레드 {a.threads} · 워커 {a.workers}", flush=True)
+    if a.count_only:
+        count_only(a, units, skipped)
+        return dict(executed=[], skipped=skipped, resumed=[])
+    a.SHARDS.mkdir(parents=True, exist_ok=True)
+    resumed, todo = [], []
+    for u in units:
+        ok, why = unit_state(a, *u) if a.resume else (False, "")
+        if ok:
+            resumed.append(u)
+        else:
+            todo.append(u)
+            if a.resume and why != "조각 없음":
+                print(f"  [resume] 다시 실행 {unit_name(u)} ({why})", flush=True)
+    todo.sort(key=lambda u: -cost_hint(a, u))
+    print(f"[plan] 실행 {len(todo)} · 재개로 건너뜀 {len(resumed)} · 프로세스 {max(int(a.workers), 1)} · 스레드 {a.threads}", flush=True)
+    done, failed = execute(a, todo, expected, argv)
+    n_fail = len(failed) + sum(1 for u in done if u["status"] == "failed")
+    n_part = sum(1 for u in done if u["status"] == "partial")
+    print(f"[done] 완료 {len(done)} · 실패 {n_fail} · 일부 적합 실패 {n_part} · {time.time() - t0:.0f}s", flush=True)
+    if not a.no_summarize:
+        summarize(a, time.time() - t0, skipped)
+    return dict(executed=[(u["exp"], u["target"], u["mode"], u["split"], u["variant"]) for u in done], skipped=skipped, resumed=resumed,
+                n_fail=n_fail, n_partial=n_part)
+
+
+if __name__ == "__main__":
+    res = main()
+    sys.exit(1 if res.get("n_fail") else 0)
