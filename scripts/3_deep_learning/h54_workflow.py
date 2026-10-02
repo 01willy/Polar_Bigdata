@@ -351,6 +351,8 @@ def parse_args(argv=None):
     ap.add_argument("--wf10-grid", default=_grid_txt(WF10_GRID))
     ap.add_argument("--wf10-splits", type=int, default=WF10_SPLITS, help="wf10 의 I 블록 순열 seed 1..K")
     ap.add_argument("--wf10-variants", default=",".join(WF10_VARIANTS))
+    ap.add_argument("--wf9-group", default="air", choices=["air", "soil"],
+                    help="WF9 격자 묶음의 √TDD 열. air = 물리식이 쓰는 e5_sqrt_tdd(기본, 3차 본 실행), soil = e5_sqrt_tdd_soil(2026-10-02 민감도)")
     ap.add_argument("--splits", type=int, default=5, help="half_split_blocks split_seed 1..K")
     ap.add_argument("--seeds", type=int, default=len(SEEDS))
     ap.add_argument("--draws-cap", type=int, default=0, help="추출 수 상한(0 = 설계값). 스모크·시험용")
@@ -659,10 +661,13 @@ def build_rctx(a, target, split, info=None):
                 E_A=float(H.ls_E(df.y.values[A_idx], df.s.values[A_idx])), n_cells=int(len(t_idx)), dup_of=int(info["dup_of"]),
                 valid=bool(info["valid"]), n_valid_splits=int(info["n_valid_splits"]), n_unique_splits=int(info["n_unique_splits"]),
                 src_mode="x", n_src_parent=int(comp.get("n_src_parent", 0)), subregion_src=getattr(D, "sub_src", ""))
-    return RCtx(target, split, parent, cols(A_idx, FEATS), df.y.values[A_idx], df.s.values[A_idx], df.block.values[A_idx], df.lat.values[A_idx],
-                df.lon.values[A_idx], cols(evB, FEATS), df.y.values[evB], df.s.values[evB], df.block.values[evB], df.lat.values[evB],
-                df.lon.values[evB], E0, XA34=cols(A_idx, FEATS34) if has34 else None, XB34=cols(evB, FEATS34) if has34 else None,
-                src_X=cols(src, FEATS), meta=meta)
+    c = RCtx(target, split, parent, cols(A_idx, FEATS), df.y.values[A_idx], df.s.values[A_idx], df.block.values[A_idx], df.lat.values[A_idx],
+             df.lon.values[A_idx], cols(evB, FEATS), df.y.values[evB], df.s.values[evB], df.block.values[evB], df.lat.values[evB],
+             df.lon.values[evB], E0, XA34=cols(A_idx, FEATS34) if has34 else None, XB34=cols(evB, FEATS34) if has34 else None,
+             src_X=cols(src, FEATS), meta=meta)
+    if "e5_sqrt_tdd_soil" in df.columns:                                   # WF9 민감도(--wf9-group soil)의 격자 묶음 열
+        c.sB_soil = df.e5_sqrt_tdd_soil.values[evB].astype(float)
+    return c
 
 
 def build_tctx(a, alias, mode, split):
@@ -671,6 +676,13 @@ def build_tctx(a, alias, mode, split):
     HA, D = get_data(a, spec)
     c = H.build_ctx(D, HA, tgt, mode, split)
     c.meta.update(alias=alias, data_spec=spec or "v3")
+    if "e5_sqrt_tdd_soil" in D.df.columns:                                 # WF9 민감도: h40.build_ctx 와 같은 규칙으로 채점 셀 색인을 다시 구한다
+        t_idx = D.source_idx(tgt, mode)[0]
+        _, B_idx = half_split_blocks(D.df, t_idx, split)
+        evB = B_idx[eval_mask(D.df.iloc[B_idx])]
+        if len(evB) == len(c.yB) and np.allclose(D.df.y.values[evB].astype(float), c.yB, equal_nan=True) \
+                and np.allclose(D.df.s.values[evB].astype(float), c.sB, equal_nan=True):
+            c.sB_soil = D.df.e5_sqrt_tdd_soil.values[evB].astype(float)
     return c
 
 
@@ -1785,11 +1797,15 @@ class GridDecompMixin:
 
     def _make_xstores(self):
         c = self.c
-        gid, multi = grid_groups(c.sB, c.blkB)
+        col = getattr(self.a, "wf9_group", "air")
+        sB = c.sB if col == "air" else getattr(c, "sB_soil", None)
+        if sB is None:
+            raise RuntimeError("--wf9-group soil: 문맥에 토양 √TDD(sB_soil)가 없다")
+        gid, multi = grid_groups(sB, c.blkB)
         t, m = self.name.split("|")
         G = int(gid.max()) + 1 if len(gid) else 0
         self.notes["grid"] = dict(n_groups=G, n_multi_groups=int(np.sum(np.bincount(gid, minlength=G) >= 2)) if G else 0,
-                                  n_multi_cells=int(multi.sum()), n_cells=int(len(gid)))
+                                  n_multi_cells=int(multi.sum()), n_cells=int(len(gid)), col="e5_sqrt_tdd" if col == "air" else "e5_sqrt_tdd_soil")
         w_fn, b_fn = decomp_fns(gid, multi)
         meta = dict(target=t, mode=c.mode, exp=self.exp, variant=self.variant)
         out = []
@@ -1968,6 +1984,8 @@ def unit_cfg(a, exp, variant="", data_sha=""):
     if exp == "wf9x":
         d.update(draws=[WF9X_DRAWS], methods=["P0", "P1", "R1", "R2", "D0", "D1"], learner=LO, zero_n=True, grid_group="sqrt_tdd_soil|block",
                  decomp=["w", "b"])
+    if exp in ("wf9", "wf9x") and getattr(a, "wf9_group", "air") == "soil":
+        d["grid_col"] = "e5_sqrt_tdd_soil"                                  # 2026-10-02 민감도(기본 판에는 이 키가 없다)
     if exp == "wf10":
         d.update(draws=[WF10_DRAWS], frac=WF10_FRAC, methods=["P1", "P2", "R1", "R2", "D0", "D1"], learners=dict(D0=[HI, LO], R1=LO, R2=LO, D1=LO),
                  mode=MODE_R, draw_mode="r10+variant[0]", split_rule="block_mean_sqrt_tdd_soil, I = seed_of('wf10-I', target, variant, split)")

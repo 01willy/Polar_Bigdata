@@ -33,6 +33,7 @@
 (w) wf10 단위(R10Unit): W·I 저장소는 채점 셀을 나눈 것이고 SSE 의 합이 총 저장소와 같다. 외삽 손실 EP = Δ_W − Δ_I(점 추정과 분포).
 (x) [HEAVY] 합성 조각으로 3차 집계(wf3b_* 표, WF9·WF10 판정 행, 서술 표)가 끝까지 돌고 1·2차 표를 쓰지 않는다.
 (y) --exp wf9,wf9x,wf10 의 차수(r3)와 표 이름, 기본 실행 목록(1·2차)은 그대로이고, 스모크·사전 점검 설정.
+(z) --wf9-group soil: 격자 묶음이 토양 √TDD(sB_soil)를 쓰고, 기본(air)의 설정 해시는 바뀌지 않는다.
 실행: CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=2 nice -n 10 taskset -c <코어 4개> python3 -m pytest -q tests/test_h54_workflow.py
 (CatBoost 는 thread_count 밖의 고정 비용 부분도 여러 스레드로 돌린다. 공유 서버에서는 taskset 으로 코어를 묶는다)
 """
@@ -1015,3 +1016,26 @@ def test_y_cli_round3():
     for v in W.WF10_VARIANTS:
         c1, c2 = W.unit_cfg(a, "wf10", v, "S"), W.unit_cfg(a, "wf10", "cold" if v == "warm" else "warm", "S")
         assert W.wf_cfg_hash(c1, common=True) == W.wf_cfg_hash(c2, common=True), "변형은 공통 설정 해시에 들어가지 않는다"
+
+
+# ---------------------------------------------------------------- (z) WF9 토양 √TDD 민감도
+def test_z_wf9_soil_grouping():
+    a_air = args(["--wf9-grid", "20,all"])
+    a_soil = args(["--wf9-grid", "20,all", "--wf9-group", "soil"])
+    assert a_air.wf9_group == "air" and a_soil.wf9_group == "soil"
+    c_air = _grid_rctx()
+    c_soil = _grid_rctx()
+    rng = np.random.RandomState(9)
+    c_soil.sB_soil = np.round(c_soil.sB / 2.0) * 2.0 + (rng.rand(len(c_soil.sB)) < 0.3)   # 기온과 다른 토양 묶음
+    U1 = W.R9Unit(a_soil, c_soil, "wf9")
+    gid_s, multi_s = W.grid_groups(c_soil.sB_soil, c_soil.blkB)
+    gid_a, multi_a = W.grid_groups(c_air.sB, c_air.blkB)
+    assert U1.notes["grid"]["col"] == "e5_sqrt_tdd_soil" and U1.notes["grid"]["n_multi_cells"] == int(multi_s.sum())
+    assert int(multi_s.sum()) != int(multi_a.sum()) or len(np.unique(gid_s)) != len(np.unique(gid_a)), "시험 자료의 두 묶음이 같다"
+    c_none = _grid_rctx()
+    with pytest.raises(RuntimeError):
+        W.R9Unit(a_soil, c_none, "wf9")                                    # sB_soil 이 없으면 멈춘다
+    U0 = W.R9Unit(a_air, c_air, "wf9")
+    assert U0.notes["grid"]["col"] == "e5_sqrt_tdd"
+    h_air = W.wf_cfg_hash(W.unit_cfg(a_air, "wf9", "", "S")); h_soil = W.wf_cfg_hash(W.unit_cfg(a_soil, "wf9", "", "S"))
+    assert h_air != h_soil and "grid_col" not in W.unit_cfg(a_air, "wf9", "", "S"), "기본 판의 설정은 그대로여야 한다"
