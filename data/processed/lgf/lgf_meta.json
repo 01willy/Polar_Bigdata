@@ -1,0 +1,426 @@
+{
+ "stage": "H47/LGF-F",
+ "plan": "docs/EXPERIMENT_PLAN_LGF_2026-09-29.md §3(개정 1)",
+ "git_commit": "08ec693",
+ "tag": "lgf",
+ "tags": {
+  "main": "lgf",
+  "full": "lgfs"
+ },
+ "args": {
+  "jobs": "f_n0,f_t1,f_full,f_t2ak,f_t2",
+  "reduce": "",
+  "targets": "",
+  "splits": 5,
+  "n_grid": "0,3,10,40,160,320,1000,all",
+  "draws": 0,
+  "seeds": 2,
+  "lams": "0.25,0.5,1.0",
+  "kappa": 10.0,
+  "ctx_max": 10000,
+  "ctx_reserve": 1000,
+  "ctx_src_min": 1000,
+  "n_est": 8,
+  "tabicl_batch_size": 8,
+  "model_path": "/home/willy010313/.cache/huggingface/hub/models--jingang--TabICL/snapshots/4dcd344ece2c00be9e831fdd35bed57b5ad83e19/tabicl-regressor-v2-20260212.ckpt",
+  "model_sha1": "95c81f65469aae055d8b98993959c42f5110c58c",
+  "tabicl_stock": false,
+  "pred_chunk": 4096,
+  "cb_iters": 200,
+  "gpus": "",
+  "allow_gpus_01": false,
+  "gpu_mem_max_mib": 50,
+  "threads": 2,
+  "allow_local": true,
+  "load_max_start": 64.0,
+  "load_max_run": 96.0,
+  "out_dir": "data/processed/lgf",
+  "data_dir": "data/processed",
+  "subregion_map": "lg_subregion_map_v1.csv",
+  "tag": "lgf",
+  "lgt_dir": "data/processed/lgt",
+  "lgt_tag": "lgt",
+  "nboot": 10000,
+  "delta_eq": 0.5,
+  "delta_eq_aux": 1.0,
+  "h43_sha": "",
+  "h40_sha": "",
+  "resume": false,
+  "overwrite": false,
+  "rerun_partial": false,
+  "smoke": false,
+  "precheck": false,
+  "count_only": false,
+  "dry_build": false,
+  "summarize_only": true,
+  "no_summarize": false,
+  "no_cells": false,
+  "allow_mixed_cfg": false,
+  "pool_retries": 2,
+  "force_interim": false,
+  "n_jobs_done": false,
+  "window_set": false,
+  "window_status": false,
+  "gpu_event": "",
+  "e1": null,
+  "cbt": null,
+  "restore": "",
+  "viewing_state": "",
+  "threads_asked": 2,
+  "save_cells": true
+ },
+ "key_fields": [
+  "method",
+  "learner",
+  "alpha",
+  "placement",
+  "n",
+  "draw",
+  "seed",
+  "lam"
+ ],
+ "p0_key": [
+  "P0",
+  "none",
+  "1",
+  "cell",
+  0,
+  0,
+  -1,
+  0.0
+ ],
+ "all_n": -1,
+ "learners": [
+  "tabicl",
+  "catboost_ctx",
+  "tabpfn(LGT 조각, 읽기 전용)"
+ ],
+ "n_units": 115,
+ "n_fit": {
+  "main:tabicl": 7180,
+  "main:catboost_ctx": 7180,
+  "full:tabicl": 480,
+  "full:catboost_ctx": 480
+ },
+ "n_rows": 37210,
+ "n_curve": 1506,
+ "n_minn": 197,
+ "n_tests": 406,
+ "n_gate": 55,
+ "n_gate_passed": 29,
+ "n_missing_desc": 101,
+ "shard_cfg": {
+  "lgf|all|f_t2": {
+   "cfg_hash": {
+    "e9648beaf6c8": 30
+   },
+   "n": 30,
+   "code_sha_h47": {
+    "537e7473dd1d7020c535c6adb8ed08c6ee2490fa": 30
+   }
+  },
+  "lgf|all|f_t2ak": {
+   "cfg_hash": {
+    "e9648beaf6c8": 5
+   },
+   "n": 5,
+   "code_sha_h47": {
+    "537e7473dd1d7020c535c6adb8ed08c6ee2490fa": 5
+   }
+  },
+  "lgf|n0|f_n0": {
+   "cfg_hash": {
+    "fd74b2ae726c": 20
+   },
+   "n": 20,
+   "code_sha_h47": {
+    "537e7473dd1d7020c535c6adb8ed08c6ee2490fa": 20
+   }
+  },
+  "lgf|pos|f_t1": {
+   "cfg_hash": {
+    "12209e0ea799": 20
+   },
+   "n": 20,
+   "code_sha_h47": {
+    "537e7473dd1d7020c535c6adb8ed08c6ee2490fa": 20
+   }
+  },
+  "lgfs|n0|f_n0": {
+   "cfg_hash": {
+    "7127defeffec": 20
+   },
+   "n": 20,
+   "code_sha_h47": {
+    "537e7473dd1d7020c535c6adb8ed08c6ee2490fa": 20
+   }
+  },
+  "lgfs|pos|f_full": {
+   "cfg_hash": {
+    "cc157e6a142c": 20
+   },
+   "n": 20,
+   "code_sha_h47": {
+    "537e7473dd1d7020c535c6adb8ed08c6ee2490fa": 20
+   }
+  }
+ },
+ "unit_status": {
+  "ok": 115
+ },
+ "n_failed_keys": 0,
+ "curve_failed": [],
+ "n_fail": 0,
+ "skipped": [],
+ "floor": {
+  "n_bundles_total": 736,
+  "n_bundles_ge5": 314,
+  "columns": [
+   "e5_maat",
+   "e5_tdd",
+   "e5_fdd",
+   "e5_sqrt_tdd",
+   "e5_twarm",
+   "e5_tcold",
+   "e5_stl1",
+   "e5_swe",
+   "sg_clay_5_15",
+   "sg_sand_5_15",
+   "sg_silt_5_15",
+   "sg_bdod_5_15",
+   "sg_cfvo_5_15",
+   "sg_phh2o_5_15",
+   "sg_soc_0_5",
+   "sg_soc_5_15",
+   "sg_soc_15_30",
+   "cci_alt",
+   "cci_valid"
+  ],
+  "rule": "소수 6자리 반올림, 결측은 표지값 −9999, 5셀 이상 묶음의 합동 분산(ddof 1)"
+ },
+ "pins": {
+  "h43": "13148bb899e92c49ba24f2f9cb6463e56da26a2a",
+  "h40": "ffd0b3a76d36472cef15ac625eeeee344f948a8f",
+  "h42": "70ec084a1919d35a1526728957e3d20e206bfac6",
+  "want_h43": "13148bb899e92c49ba24f2f9cb6463e56da26a2a",
+  "want_h40": "ffd0b3a76d36472cef15ac625eeeee344f948a8f",
+  "h42_ref": "70ec084a1919d35a1526728957e3d20e206bfac6",
+  "h42_same": true,
+  "revision_needed": false,
+  "note": ""
+ },
+ "code_sha": "afc35c8def85",
+ "delta_eq": 0.5,
+ "delta_eq_aux": 1.0,
+ "nboot": 10000,
+ "platform": "local-3090-torch2.6.0-numpy1.26.4",
+ "interim": false,
+ "not_for_judgement": false,
+ "lgt_tests_used": true,
+ "window": {
+  "window_h": 48.0,
+  "reduce": [],
+  "restored": [],
+  "gpu_events": [
+   {
+    "time": "2026-09-30T11:40:57+09:00",
+    "gpu": 5,
+    "event": "remove",
+    "viewing_state": "사후 기록: 08:32 다른 사용자 점유로 GPU 5 상실. LGX-B 회수 07:20·LGX-A 회수 10:55(미해제·미열람), LG 미회수, LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람"
+   },
+   {
+    "time": "2026-09-30T11:40:58+09:00",
+    "gpu": 5,
+    "event": "add",
+    "viewing_state": "사후 기록: 09:04:55 GPU 5 재개. LGX-B 회수 07:20·LGX-A 회수 10:55(미해제·미열람), LG 미회수, LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람"
+   },
+   {
+    "time": "2026-09-30T12:09:13+09:00",
+    "gpu": 9,
+    "event": "add",
+    "viewing_state": "LGX-B 회수 07:20·LGX-A 회수 10:55(미해제·미열람), LG 미회수, LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람"
+   },
+   {
+    "time": "2026-09-30T12:09:14+09:00",
+    "gpu": 7,
+    "event": "add",
+    "viewing_state": "LGX-B 회수 07:20·LGX-A 회수 10:55(미해제·미열람), LG 미회수, LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람"
+   },
+   {
+    "time": "2026-09-30T12:09:15+09:00",
+    "gpu": 6,
+    "event": "add",
+    "viewing_state": "LGX-B 회수 07:20·LGX-A 회수 10:55(미해제·미열람), LG 미회수, LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람"
+   },
+   {
+    "time": "2026-09-30T12:09:17+09:00",
+    "gpu": 5,
+    "event": "remove",
+    "viewing_state": "LGX-B 회수 07:20·LGX-A 회수 10:55(미해제·미열람), LG 미회수, LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람"
+   },
+   {
+    "time": "2026-09-30T17:32:47+09:00",
+    "gpu": 5,
+    "event": "add",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T02:44:10+09:00",
+    "gpu": 5,
+    "event": "remove",
+    "viewing_state": "사후 기록: 09-30 20:25 이후 다른 사용자 점유로 h48 이 GPU 5 를 뺐다(N 역할은 9·7·6). LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시"
+   },
+   {
+    "time": "2026-10-01T10:44:47+09:00",
+    "gpu": 9,
+    "event": "remove",
+    "viewing_state": "사후 기록: 10-01 09:02 다른 사용자(supergood) 5장 작업이 GPU 5–9 를 잡아 h48 이 GPU 9 를 뺐다. LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정"
+   },
+   {
+    "time": "2026-10-01T10:44:48+09:00",
+    "gpu": 7,
+    "event": "remove",
+    "viewing_state": "사후 기록: 10-01 09:02 다른 사용자(supergood) 5장 작업이 GPU 5–9 를 잡아 h48 이 GPU 7 를 뺐다. LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정"
+   },
+   {
+    "time": "2026-10-01T10:44:50+09:00",
+    "gpu": 6,
+    "event": "remove",
+    "viewing_state": "사후 기록: 10-01 09:02 다른 사용자(supergood) 5장 작업이 GPU 5–9 를 잡아 h48 이 GPU 6 를 뺐다. LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정"
+   },
+   {
+    "time": "2026-10-01T12:57:50+09:00",
+    "gpu": 9,
+    "event": "add",
+    "viewing_state": "사후 기록: 10-01 12:07:56 감시기가 N 역할을 GPU 9·7·6·5 로 재개. LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정"
+   },
+   {
+    "time": "2026-10-01T12:57:51+09:00",
+    "gpu": 7,
+    "event": "add",
+    "viewing_state": "사후 기록: 10-01 12:07:56 감시기가 N 역할을 GPU 9·7·6·5 로 재개. LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정"
+   },
+   {
+    "time": "2026-10-01T12:57:53+09:00",
+    "gpu": 6,
+    "event": "add",
+    "viewing_state": "사후 기록: 10-01 12:07:56 감시기가 N 역할을 GPU 9·7·6·5 로 재개. LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정"
+   },
+   {
+    "time": "2026-10-01T12:57:54+09:00",
+    "gpu": 5,
+    "event": "add",
+    "viewing_state": "사후 기록: 10-01 12:07:56 감시기가 N 역할을 GPU 9·7·6·5 로 재개. LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정"
+   },
+   {
+    "time": "2026-10-01T15:48:36+09:00",
+    "gpu": 8,
+    "event": "add",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T18:43:50+09:00",
+    "gpu": 9,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T18:43:52+09:00",
+    "gpu": 7,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T18:43:54+09:00",
+    "gpu": 6,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T18:43:55+09:00",
+    "gpu": 5,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T21:58:03+09:00",
+    "gpu": 9,
+    "event": "add",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T21:58:04+09:00",
+    "gpu": 7,
+    "event": "add",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T21:58:06+09:00",
+    "gpu": 6,
+    "event": "add",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T21:58:07+09:00",
+    "gpu": 5,
+    "event": "add",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T23:35:43+09:00",
+    "gpu": 9,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T23:35:45+09:00",
+    "gpu": 7,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T23:35:46+09:00",
+    "gpu": 6,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T23:35:47+09:00",
+    "gpu": 5,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   }
+  ],
+  "decisions": [
+   {
+    "time": "2026-09-30T05:00:42+09:00",
+    "what": "B 172.5, E1 1, cbt 1, 축소 없음",
+    "viewing_state": "LG 미회수, LGX 미회수, LGT 조각 미열람, LGU 완료·판정 표 미열람, LGF 사전 점검만"
+   },
+   {
+    "time": "2026-09-30T05:01:04+09:00",
+    "what": "t0 설정(h48 tag lgfn 의 첫 본 단위)",
+    "viewing_state": ""
+   },
+   {
+    "time": "2026-10-01T23:35:45+09:00",
+    "what": "J12 미실행: 여유 5.4 GPU-h(GPU [8]) ≤ J12 추정 5.7 GPU-h",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   }
+  ],
+  "B": 172.5,
+  "E1": true,
+  "cbt_enabled": true,
+  "t0": "2026-09-30T05:01:04+09:00",
+  "deadline": "2026-10-02T05:01:04+09:00"
+ },
+ "elapsed_s": 0.0,
+ "summarize_s": 67.6,
+ "rules": {
+  "holm": "conf = F1 의 2개, aux = F2 기준 λ 5 + F3 6 + F4 6 + 전량 R1[I]−P0 1 + F5 1 + F6 6 + @full 보조 2(27개). eq = F2·F3·F6 의 동등성 p(17개). 층화 평균 행만 묶음에 넣는다",
+  "precision": "halfwidth = max(셀 가중 CI 폭, 블록 등가중 CI 폭)/2. 반폭 > 0.5 cm 이고 미결정이면 '정밀도 미달(동등성 판정 불가)'",
+  "l1_form": "지역 행의 4분 판정이 우세인 지역을 n ∈ {0, 3, 10, 40} 에 걸쳐 센다",
+  "gate": "LGT 조각 상태, 설정(ctx·dup·κ·seed·추출·n 격자·대응표), P0·P1 1e-9 cm, 키별 ctx_sha 전부 일치, 채점 블록 일치",
+  "missing_desc": "셀 수 = 사용 분할의 부분집합 셀 수 합, 30 미만이면 비움"
+ }
+}

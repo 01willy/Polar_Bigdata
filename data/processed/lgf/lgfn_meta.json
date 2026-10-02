@@ -1,0 +1,565 @@
+{
+ "stage": "H48/LGF-N",
+ "plan": "docs/EXPERIMENT_PLAN_LGF_2026-09-29.md 4절(개정 1)",
+ "tag": "lgfn",
+ "n_units": 250,
+ "unit_status": {
+  "ok": 250
+ },
+ "shard_cfg": {
+  "cpu|catboost_lo": {
+   "cfg_common": {
+    "e7d36e4b25c2": 25
+   },
+   "cfg_hash_per_target": {
+    "Alaska|x": [
+     "e7d36e4b25c2"
+    ],
+    "Canada|x": [
+     "e7d36e4b25c2"
+    ],
+    "Lena|x": [
+     "e7d36e4b25c2"
+    ],
+    "Russia_E|x": [
+     "e7d36e4b25c2"
+    ],
+    "Russia_W|x": [
+     "e7d36e4b25c2"
+    ]
+   },
+   "code_sha": {
+    "47eebfc686e27b371856657ab1e4db348a6c6e1b": 25
+   },
+   "n": 25
+  },
+  "cpu|catboost_tuned_loc": {
+   "cfg_common": {
+    "21cd9fcd5644": 25
+   },
+   "cfg_hash_per_target": {
+    "Alaska|x": [
+     "05c455ab3f79"
+    ],
+    "Canada|x": [
+     "dec72db78018"
+    ],
+    "Lena|x": [
+     "05c455ab3f79"
+    ],
+    "Russia_E|x": [
+     "05c455ab3f79"
+    ],
+    "Russia_W|x": [
+     "dec72db78018"
+    ]
+   },
+   "code_sha": {
+    "47eebfc686e27b371856657ab1e4db348a6c6e1b": 25
+   },
+   "n": 25
+  },
+  "p0|ftt": {
+   "cfg_common": {
+    "9f4b2d755a9a": 25
+   },
+   "cfg_hash_per_target": {
+    "Alaska|x": [
+     "4319fd394088"
+    ],
+    "Canada|x": [
+     "7367e2dda3d3"
+    ],
+    "Lena|x": [
+     "b7e7bc762ebc"
+    ],
+    "Russia_E|x": [
+     "085d79e2d10f"
+    ],
+    "Russia_W|x": [
+     "d58893826481"
+    ]
+   },
+   "code_sha": {
+    "27470b6ba6ebccb37e9163976e0070ca5a8c320f": 5,
+    "47eebfc686e27b371856657ab1e4db348a6c6e1b": 20
+   },
+   "n": 25
+  },
+  "p0|mlp": {
+   "cfg_common": {
+    "2258d938bdc6": 25
+   },
+   "cfg_hash_per_target": {
+    "Alaska|x": [
+     "02b42111dbb6"
+    ],
+    "Canada|x": [
+     "0103a984844a"
+    ],
+    "Lena|x": [
+     "954b2fef5cc2"
+    ],
+    "Russia_E|x": [
+     "80125301329a"
+    ],
+    "Russia_W|x": [
+     "45756a488da6"
+    ]
+   },
+   "code_sha": {
+    "27470b6ba6ebccb37e9163976e0070ca5a8c320f": 5,
+    "47eebfc686e27b371856657ab1e4db348a6c6e1b": 20
+   },
+   "n": 25
+  },
+  "p0|realmlp": {
+   "cfg_common": {
+    "58abc983abe0": 25
+   },
+   "cfg_hash_per_target": {
+    "Alaska|x": [
+     "e36de5896ab1"
+    ],
+    "Canada|x": [
+     "105ed222ac39"
+    ],
+    "Lena|x": [
+     "f2c4bed2e2bb"
+    ],
+    "Russia_E|x": [
+     "7aaf0e4b31cf"
+    ],
+    "Russia_W|x": [
+     "7fa8e70db7d7"
+    ]
+   },
+   "code_sha": {
+    "27470b6ba6ebccb37e9163976e0070ca5a8c320f": 5,
+    "47eebfc686e27b371856657ab1e4db348a6c6e1b": 20
+   },
+   "n": 25
+  },
+  "p0|tabm": {
+   "cfg_common": {
+    "c87b3b187acb": 25
+   },
+   "cfg_hash_per_target": {
+    "Alaska|x": [
+     "4e95d08ced98"
+    ],
+    "Canada|x": [
+     "a95bf89598ac"
+    ],
+    "Lena|x": [
+     "3d593c9ab392"
+    ],
+    "Russia_E|x": [
+     "d9025bccfcaa"
+    ],
+    "Russia_W|x": [
+     "3aff86675e83"
+    ]
+   },
+   "code_sha": {
+    "27470b6ba6ebccb37e9163976e0070ca5a8c320f": 5,
+    "47eebfc686e27b371856657ab1e4db348a6c6e1b": 20
+   },
+   "n": 25
+  },
+  "p1|ftt": {
+   "cfg_common": {
+    "847c2f429f57": 25
+   },
+   "cfg_hash_per_target": {
+    "Alaska|x": [
+     "321f29a32048"
+    ],
+    "Canada|x": [
+     "169509649508"
+    ],
+    "Lena|x": [
+     "d45916d8bc2f"
+    ],
+    "Russia_E|x": [
+     "b0f3b9e95b58"
+    ],
+    "Russia_W|x": [
+     "1bf59d5d5c98"
+    ]
+   },
+   "code_sha": {
+    "27470b6ba6ebccb37e9163976e0070ca5a8c320f": 5,
+    "47eebfc686e27b371856657ab1e4db348a6c6e1b": 20
+   },
+   "n": 25
+  },
+  "p1|mlp": {
+   "cfg_common": {
+    "580fba08fae9": 25
+   },
+   "cfg_hash_per_target": {
+    "Alaska|x": [
+     "fd1411b25d98"
+    ],
+    "Canada|x": [
+     "287595053f6c"
+    ],
+    "Lena|x": [
+     "ecbaf92b0e9c"
+    ],
+    "Russia_E|x": [
+     "f8286e89e423"
+    ],
+    "Russia_W|x": [
+     "c25acac5e34d"
+    ]
+   },
+   "code_sha": {
+    "27470b6ba6ebccb37e9163976e0070ca5a8c320f": 5,
+    "47eebfc686e27b371856657ab1e4db348a6c6e1b": 20
+   },
+   "n": 25
+  },
+  "p1|realmlp": {
+   "cfg_common": {
+    "380f82fe059d": 25
+   },
+   "cfg_hash_per_target": {
+    "Alaska|x": [
+     "d999b6a66fb5"
+    ],
+    "Canada|x": [
+     "c0cb95072c69"
+    ],
+    "Lena|x": [
+     "c200f312d03e"
+    ],
+    "Russia_E|x": [
+     "20c0d7ad4d8f"
+    ],
+    "Russia_W|x": [
+     "3b282fb5fed0"
+    ]
+   },
+   "code_sha": {
+    "27470b6ba6ebccb37e9163976e0070ca5a8c320f": 17,
+    "47eebfc686e27b371856657ab1e4db348a6c6e1b": 8
+   },
+   "n": 25
+  },
+  "p1|tabm": {
+   "cfg_common": {
+    "c14c39cb7149": 25
+   },
+   "cfg_hash_per_target": {
+    "Alaska|x": [
+     "647eb4786f38"
+    ],
+    "Canada|x": [
+     "eef0eaa2bee5"
+    ],
+    "Lena|x": [
+     "31fbca6a3f1e"
+    ],
+    "Russia_E|x": [
+     "eb2283d0fc27"
+    ],
+    "Russia_W|x": [
+     "cb158f80f005"
+    ]
+   },
+   "code_sha": {
+    "27470b6ba6ebccb37e9163976e0070ca5a8c320f": 5,
+    "47eebfc686e27b371856657ab1e4db348a6c6e1b": 20
+   },
+   "n": 25
+  }
+ },
+ "n_rows": 14385,
+ "n_curve": 1006,
+ "n_tests": 1571,
+ "n_failed_keys": 0,
+ "curve_failed": [],
+ "n_fail": 0,
+ "floor": {
+  "n_bundles_total": 736,
+  "n_bundles_ge5": 314,
+  "columns": [
+   "e5_maat",
+   "e5_tdd",
+   "e5_fdd",
+   "e5_sqrt_tdd",
+   "e5_twarm",
+   "e5_tcold",
+   "e5_stl1",
+   "e5_swe",
+   "sg_clay_5_15",
+   "sg_sand_5_15",
+   "sg_silt_5_15",
+   "sg_bdod_5_15",
+   "sg_cfvo_5_15",
+   "sg_phh2o_5_15",
+   "sg_soc_0_5",
+   "sg_soc_5_15",
+   "sg_soc_15_30",
+   "cci_alt",
+   "cci_valid"
+  ],
+  "rule": "소수 6자리 반올림, 결측은 표지값 −9999, 5셀 이상 묶음의 합동 분산(ddof 1)"
+ },
+ "nboot": 10000,
+ "delta_eq": 0.5,
+ "delta_eq_aux": 1.0,
+ "local_note": "",
+ "interim": "",
+ "scope_missing": [],
+ "n_scope_missing": 0,
+ "window": {
+  "window_h": 48.0,
+  "reduce": [],
+  "restored": [],
+  "gpu_events": [
+   {
+    "time": "2026-09-30T11:40:57+09:00",
+    "gpu": 5,
+    "event": "remove",
+    "viewing_state": "사후 기록: 08:32 다른 사용자 점유로 GPU 5 상실. LGX-B 회수 07:20·LGX-A 회수 10:55(미해제·미열람), LG 미회수, LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람"
+   },
+   {
+    "time": "2026-09-30T11:40:58+09:00",
+    "gpu": 5,
+    "event": "add",
+    "viewing_state": "사후 기록: 09:04:55 GPU 5 재개. LGX-B 회수 07:20·LGX-A 회수 10:55(미해제·미열람), LG 미회수, LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람"
+   },
+   {
+    "time": "2026-09-30T12:09:13+09:00",
+    "gpu": 9,
+    "event": "add",
+    "viewing_state": "LGX-B 회수 07:20·LGX-A 회수 10:55(미해제·미열람), LG 미회수, LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람"
+   },
+   {
+    "time": "2026-09-30T12:09:14+09:00",
+    "gpu": 7,
+    "event": "add",
+    "viewing_state": "LGX-B 회수 07:20·LGX-A 회수 10:55(미해제·미열람), LG 미회수, LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람"
+   },
+   {
+    "time": "2026-09-30T12:09:15+09:00",
+    "gpu": 6,
+    "event": "add",
+    "viewing_state": "LGX-B 회수 07:20·LGX-A 회수 10:55(미해제·미열람), LG 미회수, LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람"
+   },
+   {
+    "time": "2026-09-30T12:09:17+09:00",
+    "gpu": 5,
+    "event": "remove",
+    "viewing_state": "LGX-B 회수 07:20·LGX-A 회수 10:55(미해제·미열람), LG 미회수, LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람"
+   },
+   {
+    "time": "2026-09-30T17:32:47+09:00",
+    "gpu": 5,
+    "event": "add",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T02:44:10+09:00",
+    "gpu": 5,
+    "event": "remove",
+    "viewing_state": "사후 기록: 09-30 20:25 이후 다른 사용자 점유로 h48 이 GPU 5 를 뺐다(N 역할은 9·7·6). LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시"
+   },
+   {
+    "time": "2026-10-01T10:44:47+09:00",
+    "gpu": 9,
+    "event": "remove",
+    "viewing_state": "사후 기록: 10-01 09:02 다른 사용자(supergood) 5장 작업이 GPU 5–9 를 잡아 h48 이 GPU 9 를 뺐다. LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정"
+   },
+   {
+    "time": "2026-10-01T10:44:48+09:00",
+    "gpu": 7,
+    "event": "remove",
+    "viewing_state": "사후 기록: 10-01 09:02 다른 사용자(supergood) 5장 작업이 GPU 5–9 를 잡아 h48 이 GPU 7 를 뺐다. LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정"
+   },
+   {
+    "time": "2026-10-01T10:44:50+09:00",
+    "gpu": 6,
+    "event": "remove",
+    "viewing_state": "사후 기록: 10-01 09:02 다른 사용자(supergood) 5장 작업이 GPU 5–9 를 잡아 h48 이 GPU 6 를 뺐다. LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정"
+   },
+   {
+    "time": "2026-10-01T12:57:50+09:00",
+    "gpu": 9,
+    "event": "add",
+    "viewing_state": "사후 기록: 10-01 12:07:56 감시기가 N 역할을 GPU 9·7·6·5 로 재개. LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정"
+   },
+   {
+    "time": "2026-10-01T12:57:51+09:00",
+    "gpu": 7,
+    "event": "add",
+    "viewing_state": "사후 기록: 10-01 12:07:56 감시기가 N 역할을 GPU 9·7·6·5 로 재개. LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정"
+   },
+   {
+    "time": "2026-10-01T12:57:53+09:00",
+    "gpu": 6,
+    "event": "add",
+    "viewing_state": "사후 기록: 10-01 12:07:56 감시기가 N 역할을 GPU 9·7·6·5 로 재개. LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정"
+   },
+   {
+    "time": "2026-10-01T12:57:54+09:00",
+    "gpu": 5,
+    "event": "add",
+    "viewing_state": "사후 기록: 10-01 12:07:56 감시기가 N 역할을 GPU 9·7·6·5 로 재개. LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정"
+   },
+   {
+    "time": "2026-10-01T15:48:36+09:00",
+    "gpu": 8,
+    "event": "add",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T18:43:50+09:00",
+    "gpu": 9,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T18:43:52+09:00",
+    "gpu": 7,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T18:43:54+09:00",
+    "gpu": 6,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T18:43:55+09:00",
+    "gpu": 5,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T21:58:03+09:00",
+    "gpu": 9,
+    "event": "add",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T21:58:04+09:00",
+    "gpu": 7,
+    "event": "add",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T21:58:06+09:00",
+    "gpu": 6,
+    "event": "add",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T21:58:07+09:00",
+    "gpu": 5,
+    "event": "add",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T23:35:43+09:00",
+    "gpu": 9,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T23:35:45+09:00",
+    "gpu": 7,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T23:35:46+09:00",
+    "gpu": 6,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   },
+   {
+    "time": "2026-10-01T23:35:47+09:00",
+    "gpu": 5,
+    "event": "remove",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   }
+  ],
+  "decisions": [
+   {
+    "time": "2026-09-30T05:00:42+09:00",
+    "what": "B 172.5, E1 1, cbt 1, 축소 없음",
+    "viewing_state": "LG 미회수, LGX 미회수, LGT 조각 미열람, LGU 완료·판정 표 미열람, LGF 사전 점검만"
+   },
+   {
+    "time": "2026-09-30T05:01:04+09:00",
+    "what": "t0 설정(h48 tag lgfn 의 첫 본 단위)",
+    "viewing_state": ""
+   },
+   {
+    "time": "2026-10-01T23:35:45+09:00",
+    "what": "J12 미실행: 여유 5.4 GPU-h(GPU [8]) ≤ J12 추정 5.7 GPU-h",
+    "viewing_state": "LG 표 열람 시작 12:31:39(lg_tests, lg_minn, lg_curve). LGX-B 회수 07:20·LGX-A 회수 10:55(해제 11:44, 표 미생성·미열람), LGT 조각 미열람, LGU 판정 표 미열람, LGF 미열람; LGU 판정 표 열람 시작 12:34:22; LGX 표 열람 시작 12:58:28; LGD 표 열람 시작 13:44:16; LGT 표 열람 시작 13:45:09; LGW(h39) 표 열람 시작 13:47:59"
+   }
+  ],
+  "B": 172.5,
+  "E1": true,
+  "cbt_enabled": true,
+  "t0": "2026-09-30T05:01:04+09:00",
+  "deadline": "2026-10-02T05:01:04+09:00"
+ },
+ "cross_note": "",
+ "code_sha": {
+  "h48": "707302ffb75e97b5c40168307861680fdbf7f62d",
+  "h43": "13148bb899e92c49ba24f2f9cb6463e56da26a2a",
+  "h40": "ffd0b3a76d36472cef15ac625eeeee344f948a8f",
+  "h42": "70ec084a1919d35a1526728957e3d20e206bfac6"
+ },
+ "revision_needed": [],
+ "platform": "local-3090-torch2.6.0-numpy1.26.4",
+ "sel_sig": {
+  "mlp": "f28a40c27f69",
+  "tabm": "cd3aefd9119a",
+  "ftt": "5d083c8de4b7",
+  "realmlp": "2eb7ca429092"
+ },
+ "cfg_sig": "4b6074dbf0ef564ed6658c3e7c9009a27e7aaa2d",
+ "comparator_n3": "catboost_tuned_loc",
+ "cbt_enabled": true,
+ "settings": {
+  "E1": true,
+  "reduce_n": [],
+  "k": {
+   "mlp": 32,
+   "tabm": 32,
+   "ftt": 32,
+   "realmlp": 32
+  },
+  "draws_p1": 2,
+  "p1_splits": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "t2": [
+   "Alaska|x"
+  ],
+  "source": "창 파일"
+ },
+ "decision_problems": [],
+ "n_decision_problems": 0,
+ "rules": {
+  "verdict4": "우세 = 두 가중의 CI 상한 < 0, 열세 = 두 가중의 CI 하한 > 0, 동등 = 네 끝값의 절댓값 ≤ 0.5 cm, 그 밖은 미결정",
+  "precision": "반폭 = max(셀 가중, 블록 등가중 CI 폭)/2 > 0.5 cm 이고 미결정이면 '정밀도 미달(동등성 판정 불가)'",
+  "holm": "conf = N1 4개, aux = N2 기준 λ 24 + N3 12(p_boot), eq = 같은 대비의 동등성 p. 판정에 쓰지 않는다",
+  "pair": "학습기 짝 대비는 두 쪽에 모두 있는 키만(n_unpaired)",
+  "confirmatory": "LGF-N1(분할 미완결이면 판정 불가)"
+ },
+ "summarize_s": 81.3
+}
