@@ -57,7 +57,8 @@
     },
     "registry_note": "figures[] 는 그림 모듈(_common.update_figure_spec, m1_figs.py)이 id 로 갱신하는 생성 기록이다. 계획 블록(spec_meta–superseded)은 모듈이 건드리지 않는다. 새 본문 항목의 figures[] 기록은 F3 에서 spec_id 로 생긴다",
     "f3_part1": "2026-09-30: Fig 2–4 v2 구현. display_items 의 f3_v2 블록이 실제 원천 열과 P* 규칙 반영을 적는다",
-    "f3_part2": "2026-09-30: Fig 1, 5, 7, Table 1 v2 와 Fig 2–4 갱신(AB 표지, L3 4분 보조, 분할 분산 비, Fig 3b L10 모든 n). display_items 의 f3_v2 블록(Fig 1, 5, 7, Table 1)과 f3_v2.part2(Fig 2–4). LGF 표는 열지 않았고 Fig 6 은 만들지 않았다. 상태: 구현·자동 QA·값 대조 통과(2026-09-30)"
+    "f3_part2": "2026-09-30: Fig 1, 5, 7, Table 1 v2 와 Fig 2–4 갱신(AB 표지, L3 4분 보조, 분할 분산 비, Fig 3b L10 모든 n). display_items 의 f3_v2 블록(Fig 1, 5, 7, Table 1)과 f3_v2.part2(Fig 2–4). LGF 표는 열지 않았고 Fig 6 은 만들지 않았다. 상태: 구현·자동 QA·값 대조 통과(2026-09-30)",
+    "f3_part3": "2026-10-02: Fig 6 v2(라벨 0 전이와 예측 구간, layout B, LGF-F1·N1 행 포함, 커밋 ccdd7cd). 자동 QA·값 대조 252항목 통과. Fig 2 조건부 곡선 불성립(eaad89e)"
   },
   "display_items": [
     {
@@ -5465,7 +5466,7 @@
       "message": "Δ(n) vs P0 with P* and P1* shown; verdicts from lgx tables only",
       "part2": "AB5, AB6, AB8, AB9 tags from lgw_bundle; n.c. where P1* was not computed",
       "pending": [
-        "curve additions for L34(a), LGF-F1, LGF-N1 not evaluated (LGF window)"
+        "curve additions for L34(a), LGF-F1, LGF-N1 evaluated 2026-10-02: none triggered (L34(a) inferior, LGF-F1/N1 supported), Fig 2 unchanged"
       ]
     },
     {

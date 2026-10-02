@@ -1,7 +1,7 @@
 # Manuscript draft: Abstract, Results and Discussion skeleton (2026-09-30)
 
 **작성** 2026-09-30. **과업** `docs/EXECUTION_PLAN_REMAINING_2026-09-30.md` 3.5 의 M2.
-**상태** 초안. 결과 수치는 아래 '원천' 의 판정 기록 절에서 옮겼고 다시 계산하거나 해석을 바꾸지 않았다. 원천 절에 없는 값은 `[MISSING: …]`, LGF 결과 자리는 `[RESULT: LGF-…]`, 저자 결정이 필요한 곳은 `[DECISION: …]` 로 표시했다. LGF 창은 2026-10-02 05:01 에 닫힌다.
+**상태** 초안. 결과 수치는 아래 '원천' 의 판정 기록 절에서 옮겼고 다시 계산하거나 해석을 바꾸지 않았다. 원천 절에 없는 값은 `[MISSING: …]`, LGF 결과 자리는 `[RESULT: LGF-…]`, 저자 결정이 필요한 곳은 `[DECISION: …]` 로 표시했다. LGF 창은 2026-10-02 05:01 에 닫힌다. [2026-10-02 갱신: LGF 자리는 LGF 계획서 10절로 채웠다. 남은 [MISSING] 과 [DECISION] 은 원고 재구성(`docs/MANUSCRIPT_RESTRUCTURE_PLAN_2026-10-02.md`) 때 함께 처리한다. 새 연구 주제(워크플로)와 WF 결과는 아직 이 초안에 반영하지 않았다.]
 **원천(결과 정본)** LG 계획서 7.1, 7.1a, 7.2(원고 문장에 주는 결정 1–5 포함), 7.3(주 판정 = 약관 확인분 판), 7.4. LGU 계획서 11.1. WRAPUP '결과 판정 기록(J7)'(AB1–AB10, SC1w–SC3w, L43, AK1w, S-a, S-b)과 1.1 초록 문장 규칙 (a)–(e).
 **문장 제약** RESEARCH_FRAME A.1·A.7 의 쓰지 않을 문장, WRAPUP 1.2–1.5·3–5절·11.2, NOVELTY 4절(유지 문장의 조건)과 5절, LGU 10절, LGF 9.2.
 **기호와 표시 항목** 기호는 `docs/MANUSCRIPT_DRAFT_METHODS_INTRO_2026-09-30.md`(P0–P3, D0, D1, R0–R3, F1a·F1k·F1n, RM, V1, V2, κ, λ, α)를, 그림 번호와 패널은 `figures/figure_spec.json` 과 `docs/DISPLAY_ITEMS_2026-09-30.md`(Fig 1–7, Table 1)를 따른다. 이 초안은 방법 초안의 `[RESULT: Table 3 result columns …]` 자리를 Fig 7d 표로 채운다.
@@ -286,7 +286,7 @@ Every abstract sentence and every Results claim group, with its recorded source 
 | R6.1 | Fig 5a | L43: placement effect not established | J7 L43 | WRAPUP 4 sentence; method-level guidance only |
 | R6.2 | Fig 5b | L23 components (a)–(c); proximity sentence for (b) | LG 7.2 L23 | LGX registered wording for (b) |
 | R6.3 | Fig 5c | L24: distance dependence not confirmed; recalibration gain independent of distance | LG 7.2 L24 | LGX registered wording |
-| R7.1 | Fig 6a | AB1; L30 values and sentence; L11; L34 (a); LGF-F1 and LGF-N1 placeholders; L34 (b) | J7 AB1; LG 7.2 L30, L11; LG 7.4 L34 | Rule 1.4 (a) for the L1 part; registered wording for L30 ('did not surpass') and L34 (b) ('indistinguishable within 0.5 cm') |
+| R7.1 | Fig 6a | AB1; L30 values and sentence; L11; L34 (a); LGF-F1 and LGF-N1 (filled 2026-10-02); L34 (b) | J7 AB1; LG 7.2 L30, L11; LG 7.4 L34 | Rule 1.4 (a) for the L1 part; registered wording for L30 ('did not surpass') and L34 (b) ('indistinguishable within 0.5 cm') |
 | R7.2 | Fig 6a | L29: P* = P0@tddm lower error than P0; other baselines; three-region mean; AB2 | LG 7.2 L29 and decision 1; J7 AB2 | L29 rule; rule 1.1 (d) |
 | R7.3 | SI, Fig 6c | LGU-B1 under-coverage; LGU-B2 not determined; LGU-B3, B4 | LGU 11.1 | LGU §10 (no transfer of width, no coverage guarantee) |
 | R7.4 | Fig 6c | LGU-A1 values and registered sentence; AB10; LGU-A3 | LGU 11.1; J7 AB10 | LGU-A1 registered sentence |

@@ -158,3 +158,5 @@ Scientific Reports 의 본문 표시 항목 상한은 8개다. 구성은 Fig 1�
 - Fig 4a 의 n* 는 등록 정의(P0, P1 대비)만 그린다. P*·P1* 대비 n* 는 계산하지 않았고 캡션에 한정을 적는다.
 - Fig 3c 의 CI 는 판정 기호와 같은 원천(`lgx_lg_aux`, 재표집 10,000회)을 쓴다. 등록 판정 이름은 `lg_tests`(1,000회) 기준으로 캡션에 적는다.
 - LGW(h39) 판정 기록 뒤 AB3–AB9 표지, L3 4분 보조, 분할 분산 비를 그림에 더하는 갱신을 한 번 더 한다. LGF 창 마감 뒤 L34(a)·LGF-F1·N1 의 조건부 곡선을 평가한다.
+
+**2026-10-02 기록**: Fig 6 v2 를 만들었다(`outputs/figures/paper/v2/Fig6_label0_uncertainty.*`, 커밋 ccdd7cd, layout B, 지도는 SI). Fig 2 의 조건부 곡선은 L34(a)·LGF-F1·LGF-N1 모두 조건이 서지 않아 더하지 않았다(eaad89e). Fig 5·7 의 교체 여부는 원고 재구성안의 사용자 결정 대기다.
