@@ -1,0 +1,337 @@
+{
+ "stage": "H54/WF3b",
+ "plan": "docs/EXPERIMENT_PLAN_WF_2026-10-01.md §7",
+ "plan_commit": "8180632",
+ "git_commit": "7da0064",
+ "tag": "wf3b",
+ "code_sha": "d37f07ebdc96",
+ "code_sha_h40": "ffd0b3a76d36",
+ "code_sha_h42": "70ec084a1919",
+ "exps": [
+  "wf9",
+  "wf9x"
+ ],
+ "targets": {
+  "wf9": [
+   "Alaska",
+   "Lena",
+   "Canada"
+  ],
+  "wf9x": [
+   "Lena:x",
+   "Canada:x",
+   "Russia_W:x",
+   "Russia_E:x",
+   "Alaska:x"
+  ]
+ },
+ "strategies": [],
+ "grids": {
+  "wf9": [
+   200,
+   500,
+   1000,
+   -1
+  ],
+  "wf9x": [
+   0,
+   10,
+   40,
+   160,
+   -1
+  ]
+ },
+ "splits": {
+  "wf9": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25
+  ],
+  "wf9x": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "wf10": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "wf10_variants": [
+   "warm",
+   "cold"
+  ]
+ },
+ "seeds": [
+  0,
+  1
+ ],
+ "lams": [
+  0.25,
+  0.5,
+  1.0
+ ],
+ "nboot": 10000,
+ "extra_tables": {
+  "rmse": 981,
+  "decomp": 324
+ },
+ "nboot_capped": null,
+ "delta_eq": 0.5,
+ "ni_margin": 0.5,
+ "n_units": 99,
+ "n_fit_total": 11838,
+ "unit_elapsed_s_sum": 3914.6000000000004,
+ "elapsed_s": 497.1,
+ "summarize_s": 42.0,
+ "n_curve": 327,
+ "n_tests": 686,
+ "n_failed_keys": 0,
+ "n_krige_fallback": 1,
+ "unit_status": {
+  "ok": 99
+ },
+ "shard_cfg": {
+  "wf9": {
+   "cfg_common": {
+    "d2b3435b06f4": 74
+   },
+   "code_sha": {
+    "d37f07ebdc96": 74
+   },
+   "n": 74
+  },
+  "wf9x": {
+   "cfg_common": {
+    "7ae42b1d6b9c": 25
+   },
+   "code_sha": {
+    "d37f07ebdc96": 25
+   },
+   "n": 25
+  }
+ },
+ "skipped": [
+  {
+   "exp": "wf9",
+   "target": "Lena",
+   "mode": "r",
+   "split": 24,
+   "status": "invalid_nb_eval<2",
+   "dup_of": -1,
+   "mirror_of": -1,
+   "nb_eval": 1,
+   "n_eval": 1180,
+   "n_A": 1854,
+   "nb_A": 19,
+   "valid": false,
+   "n_unique_splits": 25,
+   "n_valid_splits": 24
+  }
+ ],
+ "choices": {
+  "wf9|Pc": {
+   "Alaska|-1": {
+    "k=4": 3,
+    "k=2": 17,
+    "k=8": 5
+   },
+   "Alaska|200": {
+    "k=4": 25,
+    "k=2": 20,
+    "k=8": 30
+   },
+   "Alaska|500": {
+    "k=4": 20,
+    "k=8": 32,
+    "k=2": 23
+   },
+   "Alaska|1000": {
+    "k=8": 34,
+    "k=4": 14,
+    "k=2": 27
+   },
+   "Canada|-1": {
+    "k=2": 15,
+    "k=4": 9,
+    "k=8": 1
+   },
+   "Canada|200": {
+    "k=2": 41,
+    "k=4": 31,
+    "k=8": 3
+   },
+   "Lena|-1": {
+    "k=4": 7,
+    "k=8": 12,
+    "k=2": 5
+   },
+   "Lena|200": {
+    "k=4": 22,
+    "k=2": 21,
+    "k=8": 29
+   },
+   "Lena|500": {
+    "k=8": 28,
+    "k=4": 22,
+    "k=2": 22
+   },
+   "Lena|1000": {
+    "k=4": 23,
+    "k=8": 26,
+    "k=2": 20
+   }
+  },
+  "wf9|R1": {
+   "Alaska|-1": {
+    "lam=0.5": 15,
+    "lam=0.25": 8,
+    "lam=1.0": 2
+   },
+   "Alaska|200": {
+    "lam=0.25": 43,
+    "lam=0.5": 21,
+    "lam=1.0": 11
+   },
+   "Alaska|500": {
+    "lam=0.5": 33,
+    "lam=0.25": 35,
+    "lam=1.0": 7
+   },
+   "Alaska|1000": {
+    "lam=0.5": 40,
+    "lam=0.25": 28,
+    "lam=1.0": 7
+   },
+   "Canada|-1": {
+    "lam=0.5": 1,
+    "lam=1.0": 16,
+    "lam=0.25": 8
+   },
+   "Canada|200": {
+    "lam=0.5": 14,
+    "lam=1.0": 39,
+    "lam=0.25": 22
+   },
+   "Lena|-1": {
+    "lam=1.0": 13,
+    "lam=0.25": 4,
+    "lam=0.5": 7
+   },
+   "Lena|200": {
+    "lam=1.0": 16,
+    "lam=0.25": 29,
+    "lam=0.5": 27
+   },
+   "Lena|500": {
+    "lam=0.5": 22,
+    "lam=0.25": 19,
+    "lam=1.0": 31
+   },
+   "Lena|1000": {
+    "lam=0.25": 12,
+    "lam=1.0": 40,
+    "lam=0.5": 17
+   }
+  },
+  "wf9|Re": {
+   "Alaska|-1": {
+    "lam=0.5": 17,
+    "lam=0.25": 3,
+    "lam=1.0": 5
+   },
+   "Alaska|200": {
+    "lam=0.25": 26,
+    "lam=0.5": 31,
+    "lam=1.0": 18
+   },
+   "Alaska|500": {
+    "lam=0.5": 33,
+    "lam=0.25": 27,
+    "lam=1.0": 15
+   },
+   "Alaska|1000": {
+    "lam=1.0": 20,
+    "lam=0.5": 39,
+    "lam=0.25": 16
+   },
+   "Canada|-1": {
+    "lam=0.25": 17,
+    "lam=1.0": 4,
+    "lam=0.5": 4
+   },
+   "Canada|200": {
+    "lam=0.5": 11,
+    "lam=0.25": 55,
+    "lam=1.0": 9
+   },
+   "Lena|-1": {
+    "lam=0.25": 11,
+    "lam=1.0": 7,
+    "lam=0.5": 6
+   },
+   "Lena|200": {
+    "lam=0.5": 22,
+    "lam=0.25": 45,
+    "lam=1.0": 5
+   },
+   "Lena|500": {
+    "lam=0.5": 33,
+    "lam=0.25": 29,
+    "lam=1.0": 10
+   },
+   "Lena|1000": {
+    "lam=0.25": 23,
+    "lam=1.0": 12,
+    "lam=0.5": 34
+   }
+  }
+ },
+ "rules": {
+  "verdict4": "h42.verdict4: 우세 = 두 가중 CI 상한 < 0, 열세 = 두 가중 CI 하한 > 0, 동등 = 네 끝값 |·| ≤ 0.5 cm, 그 밖 미결정",
+  "ci": "h40.contrast(h4_common.boot_delta_blocks): 분할 안 채점 블록 재표집, 방법·추출·seed 공통 인덱스, 분할 분포 평균",
+  "mean": "h40.strat_mean·h42.pool_rows(층화 평균, CI 풀 = 유효 분할 ≥ 1 이고 채점 블록 합집합 ≥ 8)",
+  "holm": "h42.TestBook.frame: 항목(가설)마다 주 대비의 양측 부트스트랩 p 에 Holm(보조 열). WF4-a 는 p_ni 에 따로 holm_p_ni"
+ },
+ "implementation": {
+  "wf9_grid": "격자 묶음 = 채점 셀의 (√TDD(토양 도일) 값을 유효숫자 12자리로 적은 문자열, 블록). 비유한 √TDD 셀은 혼자 묶음. 격자 안 저장소(<대상>~w) = 2셀 이상 묶음 셀의 (y − ȳ_g, ŷ − ŷ̄_g), 격자 사이 저장소(<대상>~b) = 모든 셀의 (ȳ_g, ŷ̄_g). 블록마다 총 SSE = 격자 안 SSE + 격자 사이 SSE",
+  "wf9_inregion": "WF6 와 같은 문맥·분할(1–25, split_structure_ext)·추출(3, 전량 1)·교차검증. 방법 P1, Pk, Pc(교차검증 k), R1(교차검증 λ, λ 0.25·0.5·1.0), Re(교차검증 λ, λ 0.25), D0(catboost). R2, P2, Pbest 는 뺐다",
+  "wf9x": "LG 문맥(h40.build_ctx)·원천·추출(5, n 0·전량 1)·seed. 방법 P0, P1, R1·R2(λ 0.25·0.5·1.0, 원천 행 + 선택 라벨, R2 는 유사라벨 행 포함), D0(catboost_lo, 원천 행 + 선택 라벨), D1(catboost_lo, 유사라벨 행 포함). n = 0 은 E_n = E0",
+  "wf10_split": "블록 평균 √TDD(유한 셀의 셀 수 가중). warm 은 큰 순, cold 는 작은 순(동률 블록 이름)으로 대상 셀 25 % 이상까지 W, 나머지를 seed_of('wf10-I', 대상, 변형, 분할) 순열로 25 % 이상까지 I, 나머지 A. 앞선 분할과 I 블록 집합이 같으면 중복, W·I 채점 블록 2개 미만이면 무효",
+  "wf10_methods": "P1, P2, R1(교차검증 λ, λ 0.25·0.5·1.0), R2(교차검증 λ, 고정 λ), D0(catboost, catboost_lo), D1(catboost_lo). 같은 적합으로 W·I 를 따로 채점(저장소 <대상>~<변형>W·I, 총 <대상>~<변형>). 추출 seed = h40.draw_cells(대상, 'r10' + 변형 첫 글자, 분할, n, 추출)",
+  "wf10_ep": "EP = Δ_W − Δ_I. W·I 의 재표집은 저장소 이름별 seed 로 독립이고 두 분포를 같은 번호끼리 뺀다. 층화 평균은 h42.pool_rows",
+  "verdicts": "WF9-a(세 대상 격자 안 R1(교차검증 λ) − P1, n 500·1,000·전량), WF9-c(주 4지역 격자 안 R1(λ 0.25) − P1, n 0·10·전량): 모두 우세 지지, 열세 없이 일부 우세 부분 지지, 열세 또는 우세 없음 기각. WF10-a(EP(D0 catboost) 열세), WF10-b(EP(R1 교차검증 λ) − EP(D0) 우세), WF10-c(W 의 R1 − P1 두 가중 CI 상한 < 0.5 cm): warm, 두 대상 층화 평균, n 100·전량",
+  "tables": "3차 보강 표는 <tag>3b_*(curve, tests, meta, targets, timing, failed, rmse, decomp). 조각 이름 <tag>{9,9x,10}__cpu__<대상>__<모드>__s<분할>[__<변형>]"
+ }
+}
