@@ -4858,4 +4858,245 @@ d,label_cell,Lena,,14400252.0,72.3746,126.2535,,,"n = 40, draw index 0, seed 180
 d,label_cell,Lena,,14400252.0,72.3756,126.478,,,"n = 40, draw index 0, seed 1806365431"
 d,label_cell,Lena,,14400253.0,72.3765,126.5276,,,"n = 40, draw index 0, seed 1806365431"
 d,label_cell,Lena,,14400253.0,72.3908,126.8041,,,"n = 40, draw index 0, seed 1806365431"
-e,placeholder,,,,,,,,validation ladder awaits registered experiment results; axes only
+e,nnd_median_km,Alaska,D0w|catboost_lo|Block,,,,26.05787201321408,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Alaska,D0w|catboost_lo|Block,,,,16.20764742305156,cm,drawn
+e,rmse_cw_lo95,Alaska,D0w|catboost_lo|Block,,,,13.626264944759017,cm,drawn
+e,rmse_cw_hi95,Alaska,D0w|catboost_lo|Block,,,,18.62067636104144,cm,drawn
+e,rmse_block_equal,Alaska,D0w|catboost_lo|Block,,,,14.01815843353402,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Alaska,D0w|catboost_lo|Block,,,,11.957978967458663,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Alaska,D0w|catboost_lo|Block,,,,16.472720391829387,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Alaska,PSw|none|Block,,,,26.05787201321408,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Alaska,PSw|none|Block,,,,14.406248153240332,cm,drawn
+e,rmse_cw_lo95,Alaska,PSw|none|Block,,,,12.353138194696212,cm,drawn
+e,rmse_cw_hi95,Alaska,PSw|none|Block,,,,18.644345722836945,cm,drawn
+e,rmse_block_equal,Alaska,PSw|none|Block,,,,15.43145140402438,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Alaska,PSw|none|Block,,,,13.33715303586398,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Alaska,PSw|none|Block,,,,17.85134619559215,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Alaska,D0w|catboost_lo|kNNDM,,,,58.73146589060067,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Alaska,D0w|catboost_lo|kNNDM,,,,17.300862697730185,cm,drawn
+e,rmse_cw_lo95,Alaska,D0w|catboost_lo|kNNDM,,,,14.152337546123832,cm,drawn
+e,rmse_cw_hi95,Alaska,D0w|catboost_lo|kNNDM,,,,19.676692319914597,cm,drawn
+e,rmse_block_equal,Alaska,D0w|catboost_lo|kNNDM,,,,14.11601772868093,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Alaska,D0w|catboost_lo|kNNDM,,,,12.116524004449593,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Alaska,D0w|catboost_lo|kNNDM,,,,16.466531909739956,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Alaska,PSw|none|kNNDM,,,,58.73146589060067,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Alaska,PSw|none|kNNDM,,,,14.533759622236202,cm,drawn
+e,rmse_cw_lo95,Alaska,PSw|none|kNNDM,,,,12.430630269187215,cm,drawn
+e,rmse_cw_hi95,Alaska,PSw|none|kNNDM,,,,18.83949393695016,cm,drawn
+e,rmse_block_equal,Alaska,PSw|none|kNNDM,,,,15.696115553149385,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Alaska,PSw|none|kNNDM,,,,13.568596920082651,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Alaska,PSw|none|kNNDM,,,,18.12469294799934,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Alaska,D0w|catboost_lo|Random,,,,0.0041441294416504,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Alaska,D0w|catboost_lo|Random,,,,11.542581754643376,cm,drawn
+e,rmse_cw_lo95,Alaska,D0w|catboost_lo|Random,,,,9.614251328137485,cm,drawn
+e,rmse_cw_hi95,Alaska,D0w|catboost_lo|Random,,,,14.993684180132089,cm,drawn
+e,rmse_block_equal,Alaska,D0w|catboost_lo|Random,,,,11.940603341490387,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Alaska,D0w|catboost_lo|Random,,,,10.104582710144207,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Alaska,D0w|catboost_lo|Random,,,,14.302757603902275,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Alaska,PSw|none|Random,,,,0.0041441294416504,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Alaska,PSw|none|Random,,,,14.24004479086505,cm,drawn
+e,rmse_cw_lo95,Alaska,PSw|none|Random,,,,12.077533930877683,cm,drawn
+e,rmse_cw_hi95,Alaska,PSw|none|Random,,,,18.597789649208877,cm,drawn
+e,rmse_block_equal,Alaska,PSw|none|Random,,,,15.372046897161573,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Alaska,PSw|none|Random,,,,13.283868715000562,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Alaska,PSw|none|Random,,,,17.796089505711404,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Alaska,D0w|catboost_lo|Site,,,,0.8801400194259033,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Alaska,D0w|catboost_lo|Site,,,,13.279585716211328,cm,drawn
+e,rmse_cw_lo95,Alaska,D0w|catboost_lo|Site,,,,10.982530917702825,cm,drawn
+e,rmse_cw_hi95,Alaska,D0w|catboost_lo|Site,,,,17.329388706058054,cm,drawn
+e,rmse_block_equal,Alaska,D0w|catboost_lo|Site,,,,13.65141999753873,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Alaska,D0w|catboost_lo|Site,,,,11.576396882850313,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Alaska,D0w|catboost_lo|Site,,,,16.151454702619365,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Alaska,PSw|none|Site,,,,0.8801400194259033,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Alaska,PSw|none|Site,,,,14.30337641921501,cm,drawn
+e,rmse_cw_lo95,Alaska,PSw|none|Site,,,,12.14653448550761,cm,drawn
+e,rmse_cw_hi95,Alaska,PSw|none|Site,,,,18.653785919906277,cm,drawn
+e,rmse_block_equal,Alaska,PSw|none|Site,,,,15.382578309006831,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Alaska,PSw|none|Site,,,,13.281090256820054,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Alaska,PSw|none|Site,,,,17.817556844423827,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Canada,D0w|catboost_lo|Block,,,,25.33486457349357,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Canada,D0w|catboost_lo|Block,,,,24.48286187710587,cm,drawn
+e,rmse_cw_lo95,Canada,D0w|catboost_lo|Block,,,,17.934630837109225,cm,drawn
+e,rmse_cw_hi95,Canada,D0w|catboost_lo|Block,,,,29.781394641319345,cm,drawn
+e,rmse_block_equal,Canada,D0w|catboost_lo|Block,,,,21.46468072843725,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Canada,D0w|catboost_lo|Block,,,,17.213249531347255,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Canada,D0w|catboost_lo|Block,,,,26.077834140424244,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Canada,PSw|none|Block,,,,25.33486457349357,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Canada,PSw|none|Block,,,,29.531154365771783,cm,drawn
+e,rmse_cw_lo95,Canada,PSw|none|Block,,,,18.98815962520432,cm,drawn
+e,rmse_cw_hi95,Canada,PSw|none|Block,,,,37.57042447426654,cm,drawn
+e,rmse_block_equal,Canada,PSw|none|Block,,,,21.22307121925504,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Canada,PSw|none|Block,,,,16.6097483831915,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Canada,PSw|none|Block,,,,26.435207998416782,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Canada,D0w|catboost_lo|kNNDM,,,,236.5317050038928,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Canada,D0w|catboost_lo|kNNDM,,,,33.15653587921183,cm,drawn
+e,rmse_cw_lo95,Canada,D0w|catboost_lo|kNNDM,,,,22.516605400480344,cm,drawn
+e,rmse_cw_hi95,Canada,D0w|catboost_lo|kNNDM,,,,39.093833288201466,cm,drawn
+e,rmse_block_equal,Canada,D0w|catboost_lo|kNNDM,,,,28.484393667736157,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Canada,D0w|catboost_lo|kNNDM,,,,23.09477312790127,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Canada,D0w|catboost_lo|kNNDM,,,,34.28135012054707,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Canada,PSw|none|kNNDM,,,,236.5317050038928,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Canada,PSw|none|kNNDM,,,,30.77952122677597,cm,drawn
+e,rmse_cw_lo95,Canada,PSw|none|kNNDM,,,,20.188422713613644,cm,drawn
+e,rmse_cw_hi95,Canada,PSw|none|kNNDM,,,,39.064008028568594,cm,drawn
+e,rmse_block_equal,Canada,PSw|none|kNNDM,,,,23.40094045091373,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Canada,PSw|none|kNNDM,,,,18.73300242925248,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Canada,PSw|none|kNNDM,,,,28.62205122686209,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Canada,D0w|catboost_lo|Random,,,,0.0139380228736651,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Canada,D0w|catboost_lo|Random,,,,18.956430512881767,cm,drawn
+e,rmse_cw_lo95,Canada,D0w|catboost_lo|Random,,,,14.011701291587896,cm,drawn
+e,rmse_cw_hi95,Canada,D0w|catboost_lo|Random,,,,24.139900310180263,cm,drawn
+e,rmse_block_equal,Canada,D0w|catboost_lo|Random,,,,20.90295078469752,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Canada,D0w|catboost_lo|Random,,,,15.990179042635765,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Canada,D0w|catboost_lo|Random,,,,26.779595533132014,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Canada,PSw|none|Random,,,,0.0139380228736651,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Canada,PSw|none|Random,,,,26.49936992955374,cm,drawn
+e,rmse_cw_lo95,Canada,PSw|none|Random,,,,18.429220877380107,cm,drawn
+e,rmse_cw_hi95,Canada,PSw|none|Random,,,,33.131434146905846,cm,drawn
+e,rmse_block_equal,Canada,PSw|none|Random,,,,20.99199270234746,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Canada,PSw|none|Random,,,,16.38887974043921,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Canada,PSw|none|Random,,,,26.30743017209423,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Canada,D0w|catboost_lo|Site,,,,3.863124830219524,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Canada,D0w|catboost_lo|Site,,,,23.902135415094577,cm,drawn
+e,rmse_cw_lo95,Canada,D0w|catboost_lo|Site,,,,16.954702960864353,cm,drawn
+e,rmse_cw_hi95,Canada,D0w|catboost_lo|Site,,,,30.187383129652563,cm,drawn
+e,rmse_block_equal,Canada,D0w|catboost_lo|Site,,,,20.07904034061168,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Canada,D0w|catboost_lo|Site,,,,16.270906071990137,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Canada,D0w|catboost_lo|Site,,,,24.27514949074468,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Canada,PSw|none|Site,,,,3.863124830219524,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Canada,PSw|none|Site,,,,27.984992723795443,cm,drawn
+e,rmse_cw_lo95,Canada,PSw|none|Site,,,,18.961441528480695,cm,drawn
+e,rmse_cw_hi95,Canada,PSw|none|Site,,,,35.33745596665205,cm,drawn
+e,rmse_block_equal,Canada,PSw|none|Site,,,,21.308513359232023,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Canada,PSw|none|Site,,,,16.70493118708362,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Canada,PSw|none|Site,,,,26.647999149479872,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Lena,D0w|catboost_lo|Block,,,,9.545668406293554,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Lena,D0w|catboost_lo|Block,,,,19.773078347932355,cm,drawn
+e,rmse_cw_lo95,Lena,D0w|catboost_lo|Block,,,,15.753512457592858,cm,drawn
+e,rmse_cw_hi95,Lena,D0w|catboost_lo|Block,,,,30.627308547875376,cm,drawn
+e,rmse_block_equal,Lena,D0w|catboost_lo|Block,,,,24.50990929554187,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Lena,D0w|catboost_lo|Block,,,,18.015879263545425,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Lena,D0w|catboost_lo|Block,,,,31.891096337109257,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Lena,PSw|none|Block,,,,9.545668406293554,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Lena,PSw|none|Block,,,,21.176396818343964,cm,drawn
+e,rmse_cw_lo95,Lena,PSw|none|Block,,,,13.656397035687604,cm,drawn
+e,rmse_cw_hi95,Lena,PSw|none|Block,,,,37.85620689172027,cm,drawn
+e,rmse_block_equal,Lena,PSw|none|Block,,,,26.233428888225184,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Lena,PSw|none|Block,,,,17.17576808120254,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Lena,PSw|none|Block,,,,36.783288836362686,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Lena,D0w|catboost_lo|kNNDM,,,,26.41821313302453,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Lena,D0w|catboost_lo|kNNDM,,,,22.10384640826179,cm,drawn
+e,rmse_cw_lo95,Lena,D0w|catboost_lo|kNNDM,,,,17.255386797989978,cm,drawn
+e,rmse_cw_hi95,Lena,D0w|catboost_lo|kNNDM,,,,37.012742450767625,cm,drawn
+e,rmse_block_equal,Lena,D0w|catboost_lo|kNNDM,,,,26.41579985577961,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Lena,D0w|catboost_lo|kNNDM,,,,20.10810618972086,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Lena,D0w|catboost_lo|kNNDM,,,,33.90237981598495,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Lena,PSw|none|kNNDM,,,,26.41821313302453,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Lena,PSw|none|kNNDM,,,,21.401078367642345,cm,drawn
+e,rmse_cw_lo95,Lena,PSw|none|kNNDM,,,,13.66617472388153,cm,drawn
+e,rmse_cw_hi95,Lena,PSw|none|kNNDM,,,,38.009474759509565,cm,drawn
+e,rmse_block_equal,Lena,PSw|none|kNNDM,,,,26.37408941497519,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Lena,PSw|none|kNNDM,,,,17.40257024626205,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Lena,PSw|none|kNNDM,,,,36.81072413316877,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Lena,D0w|catboost_lo|Random,,,,0.0130562874065543,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Lena,D0w|catboost_lo|Random,,,,13.93728261418498,cm,drawn
+e,rmse_cw_lo95,Lena,D0w|catboost_lo|Random,,,,10.858468462477626,cm,drawn
+e,rmse_cw_hi95,Lena,D0w|catboost_lo|Random,,,,21.119684706358267,cm,drawn
+e,rmse_block_equal,Lena,D0w|catboost_lo|Random,,,,21.441674199378717,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Lena,D0w|catboost_lo|Random,,,,15.064210537487146,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Lena,D0w|catboost_lo|Random,,,,28.81195714748314,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Lena,PSw|none|Random,,,,0.0130562874065543,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Lena,PSw|none|Random,,,,20.89243389566851,cm,drawn
+e,rmse_cw_lo95,Lena,PSw|none|Random,,,,13.4244281423805,cm,drawn
+e,rmse_cw_hi95,Lena,PSw|none|Random,,,,37.21743799100664,cm,drawn
+e,rmse_block_equal,Lena,PSw|none|Random,,,,25.919479384185244,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Lena,PSw|none|Random,,,,16.939797338134394,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Lena,PSw|none|Random,,,,36.35850890997692,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Lena,D0w|catboost_lo|Site,,,,1.0175518772076446,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Lena,D0w|catboost_lo|Site,,,,18.27764875764967,cm,drawn
+e,rmse_cw_lo95,Lena,D0w|catboost_lo|Site,,,,13.31194266560579,cm,drawn
+e,rmse_cw_hi95,Lena,D0w|catboost_lo|Site,,,,28.224627888732925,cm,drawn
+e,rmse_block_equal,Lena,D0w|catboost_lo|Site,,,,23.24554771392708,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Lena,D0w|catboost_lo|Site,,,,16.56269343573732,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Lena,D0w|catboost_lo|Site,,,,30.92513461148648,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Lena,PSw|none|Site,,,,1.0175518772076446,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Lena,PSw|none|Site,,,,21.114612665189924,cm,drawn
+e,rmse_cw_lo95,Lena,PSw|none|Site,,,,13.609447777014257,cm,drawn
+e,rmse_cw_hi95,Lena,PSw|none|Site,,,,37.43552483772215,cm,drawn
+e,rmse_block_equal,Lena,PSw|none|Site,,,,26.066403531360454,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Lena,PSw|none|Site,,,,17.116771731130378,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Lena,PSw|none|Site,,,,36.49801379612797,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Alaska,D0w|catboost_lo|Region holdout,,,,751.4115990248798,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Alaska,D0w|catboost_lo|Region holdout,,,,35.56392958616232,cm,drawn
+e,rmse_cw_lo95,Alaska,D0w|catboost_lo|Region holdout,,,,26.48995819329638,cm,drawn
+e,rmse_cw_hi95,Alaska,D0w|catboost_lo|Region holdout,,,,46.06179281286615,cm,drawn
+e,rmse_block_equal,Alaska,D0w|catboost_lo|Region holdout,,,,31.906927893081853,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Alaska,D0w|catboost_lo|Region holdout,,,,28.185565847509583,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Alaska,D0w|catboost_lo|Region holdout,,,,35.89467961084127,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Alaska,PSw|none|Region holdout,,,,751.4115990248798,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Alaska,PSw|none|Region holdout,,,,14.678722952976848,cm,drawn
+e,rmse_cw_lo95,Alaska,PSw|none|Region holdout,,,,12.77736109791878,cm,drawn
+e,rmse_cw_hi95,Alaska,PSw|none|Region holdout,,,,18.76526068730295,cm,drawn
+e,rmse_block_equal,Alaska,PSw|none|Region holdout,,,,14.31246102443496,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Alaska,PSw|none|Region holdout,,,,12.16237279395883,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Alaska,PSw|none|Region holdout,,,,16.77732330385509,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Lena,D0w|catboost_lo|Region holdout,,,,446.1917945622846,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Lena,D0w|catboost_lo|Region holdout,,,,25.309295365681606,cm,drawn
+e,rmse_cw_lo95,Lena,D0w|catboost_lo|Region holdout,,,,21.86385240198467,cm,drawn
+e,rmse_cw_hi95,Lena,D0w|catboost_lo|Region holdout,,,,36.69028832533424,cm,drawn
+e,rmse_block_equal,Lena,D0w|catboost_lo|Region holdout,,,,24.60304155061852,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Lena,D0w|catboost_lo|Region holdout,,,,18.029723728054165,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Lena,D0w|catboost_lo|Region holdout,,,,31.7990364146358,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Lena,PSw|none|Region holdout,,,,446.1917945622846,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Lena,PSw|none|Region holdout,,,,21.644199044062216,cm,drawn
+e,rmse_cw_lo95,Lena,PSw|none|Region holdout,,,,15.15068340498942,cm,drawn
+e,rmse_cw_hi95,Lena,PSw|none|Region holdout,,,,35.661527560197705,cm,drawn
+e,rmse_block_equal,Lena,PSw|none|Region holdout,,,,24.94943415561466,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Lena,PSw|none|Region holdout,,,,16.5845355660423,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Lena,PSw|none|Region holdout,,,,34.41186133676108,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Canada,D0w|catboost_lo|Region holdout,,,,413.4525032700822,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Canada,D0w|catboost_lo|Region holdout,,,,25.24372708418504,cm,drawn
+e,rmse_cw_lo95,Canada,D0w|catboost_lo|Region holdout,,,,17.92267056526087,cm,drawn
+e,rmse_cw_hi95,Canada,D0w|catboost_lo|Region holdout,,,,32.340014078244806,cm,drawn
+e,rmse_block_equal,Canada,D0w|catboost_lo|Region holdout,,,,20.217577913153683,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Canada,D0w|catboost_lo|Region holdout,,,,15.784165597265917,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Canada,D0w|catboost_lo|Region holdout,,,,25.417113833950637,cm,not drawn (block-equal; source data only)
+e,nnd_median_km,Canada,PSw|none|Region holdout,,,,413.4525032700822,km,x; median distance scoring cell to nearest training cell
+e,rmse_cell_weighted,Canada,PSw|none|Region holdout,,,,26.47952764874024,cm,drawn
+e,rmse_cw_lo95,Canada,PSw|none|Region holdout,,,,18.550450247077386,cm,drawn
+e,rmse_cw_hi95,Canada,PSw|none|Region holdout,,,,33.315163405456886,cm,drawn
+e,rmse_block_equal,Canada,PSw|none|Region holdout,,,,20.96341244925567,cm,not drawn (block-equal; source data only)
+e,rmse_be_lo95,Canada,PSw|none|Region holdout,,,,16.31885441300717,cm,not drawn (block-equal; source data only)
+e,rmse_be_hi95,Canada,PSw|none|Region holdout,,,,26.402867321614345,cm,not drawn (block-equal; source data only)
+e,x_geometric_mean_km,"MEAN3[Alaska,Lena,Canada]",D0w|Region holdout,,,,517.5373526223151,km,geometric mean of the three regions
+e,rmse_mean_equal_weight,"MEAN3[Alaska,Lena,Canada]",D0w|Region holdout,,,,28.70565067867632,cm,equal-weight mean of cell-weighted RMSE; no CI in table
+e,x_geometric_mean_km,"MEAN3[Alaska,Lena,Canada]",D0w|Block,,,,18.470895838779786,km,geometric mean of the three regions
+e,rmse_mean_equal_weight,"MEAN3[Alaska,Lena,Canada]",D0w|Block,,,,20.15452921602993,cm,equal-weight mean of cell-weighted RMSE; no CI in table
+e,x_geometric_mean_km,"MEAN3[Alaska,Lena,Canada]",D0w|kNNDM,,,,71.59585517206996,km,geometric mean of the three regions
+e,rmse_mean_equal_weight,"MEAN3[Alaska,Lena,Canada]",D0w|kNNDM,,,,24.1870816617346,cm,equal-weight mean of cell-weighted RMSE; no CI in table
+e,x_geometric_mean_km,"MEAN3[Alaska,Lena,Canada]",D0w|Random,,,,0.009102305246970371,km,geometric mean of the three regions
+e,rmse_mean_equal_weight,"MEAN3[Alaska,Lena,Canada]",D0w|Random,,,,14.812098293903375,cm,equal-weight mean of cell-weighted RMSE; no CI in table
+e,x_geometric_mean_km,"MEAN3[Alaska,Lena,Canada]",D0w|Site,,,,1.5124546335133042,km,geometric mean of the three regions
+e,rmse_mean_equal_weight,"MEAN3[Alaska,Lena,Canada]",D0w|Site,,,,18.486456629651858,cm,equal-weight mean of cell-weighted RMSE; no CI in table
+e,x_geometric_mean_km,"MEAN3[Alaska,Lena,Canada]",PSw|Region holdout,,,,517.5373526223151,km,geometric mean of the three regions
+e,rmse_mean_equal_weight,"MEAN3[Alaska,Lena,Canada]",PSw|Region holdout,,,,20.934149881926434,cm,equal-weight mean of cell-weighted RMSE; no CI in table
+e,x_geometric_mean_km,"MEAN3[Alaska,Lena,Canada]",PSw|Block,,,,18.470895838779786,km,geometric mean of the three regions
+e,rmse_mean_equal_weight,"MEAN3[Alaska,Lena,Canada]",PSw|Block,,,,21.704599779118695,cm,equal-weight mean of cell-weighted RMSE; no CI in table
+e,x_geometric_mean_km,"MEAN3[Alaska,Lena,Canada]",PSw|kNNDM,,,,71.59585517206996,km,geometric mean of the three regions
+e,rmse_mean_equal_weight,"MEAN3[Alaska,Lena,Canada]",PSw|kNNDM,,,,22.238119738884837,cm,equal-weight mean of cell-weighted RMSE; no CI in table
+e,x_geometric_mean_km,"MEAN3[Alaska,Lena,Canada]",PSw|Random,,,,0.009102305246970371,km,geometric mean of the three regions
+e,rmse_mean_equal_weight,"MEAN3[Alaska,Lena,Canada]",PSw|Random,,,,20.543949538695767,cm,equal-weight mean of cell-weighted RMSE; no CI in table
+e,x_geometric_mean_km,"MEAN3[Alaska,Lena,Canada]",PSw|Site,,,,1.5124546335133042,km,geometric mean of the three regions
+e,rmse_mean_equal_weight,"MEAN3[Alaska,Lena,Canada]",PSw|Site,,,,21.134327269400128,cm,equal-weight mean of cell-weighted RMSE; no CI in table
+e,vg_n_scoring_cells,Alaska,V-G,,,,13606.0,cells,"region holdout distance from coordinates only (h41 V-G definition, cv_schemes.nnd_km), no refit"
+e,vg_n_training_cells,Alaska,V-G,,,,3860.0,cells,"region holdout distance from coordinates only (h41 V-G definition, cv_schemes.nnd_km), no refit"
+e,vg_n_buffer_excluded,Alaska,V-G,,,,1.0,cells,"region holdout distance from coordinates only (h41 V-G definition, cv_schemes.nnd_km), no refit"
+e,vg_nnd_min_km,Alaska,V-G,,,,152.77143137368142,km,"region holdout distance from coordinates only (h41 V-G definition, cv_schemes.nnd_km), no refit"
+e,vg_n_scoring_cells,Lena,V-G,,,,2958.0,cells,"region holdout distance from coordinates only (h41 V-G definition, cv_schemes.nnd_km), no refit"
+e,vg_n_training_cells,Lena,V-G,,,,14429.0,cells,"region holdout distance from coordinates only (h41 V-G definition, cv_schemes.nnd_km), no refit"
+e,vg_n_buffer_excluded,Lena,V-G,,,,1.0,cells,"region holdout distance from coordinates only (h41 V-G definition, cv_schemes.nnd_km), no refit"
+e,vg_nnd_min_km,Lena,V-G,,,,383.8706675197118,km,"region holdout distance from coordinates only (h41 V-G definition, cv_schemes.nnd_km), no refit"
+e,vg_n_scoring_cells,Canada,V-G,,,,747.0,cells,"region holdout distance from coordinates only (h41 V-G definition, cv_schemes.nnd_km), no refit"
+e,vg_n_training_cells,Canada,V-G,,,,16697.0,cells,"region holdout distance from coordinates only (h41 V-G definition, cv_schemes.nnd_km), no refit"
+e,vg_n_buffer_excluded,Canada,V-G,,,,20.0,cells,"region holdout distance from coordinates only (h41 V-G definition, cv_schemes.nnd_km), no refit"
+e,vg_nnd_min_km,Canada,V-G,,,,131.63986782397038,km,"region holdout distance from coordinates only (h41 V-G definition, cv_schemes.nnd_km), no refit"

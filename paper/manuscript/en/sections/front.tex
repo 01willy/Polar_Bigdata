@@ -32,9 +32,15 @@
 % 빌드 주의: 자리표시에 한글이 있어 자리표시가 남은 동안은 xelatex(kotex)로 조립한다.
 %   pdflatex 빌드는 자리표시를 모두 바꾼 뒤에 한다(지침 M-11).
 
+% 조립(2026-10-05): main.tex 가 \frontblock 을 1, 3, 4 로 정한 뒤 이 파일을 블록마다 \input 한다.
+%   각 블록은 \ifnum\frontblock=N ... \fi 로 감쌌다(0 이면 아무것도 내지 않는다). 블록 2 는
+%   methods.tex 의 Code availability(M15)와 같은 소절이라 main.tex 가 부르지 않는다(위 블록 2 지시: 하나만 남긴다).
+\providecommand{\frontblock}{0}
+
 % =====================================================================
 % 블록 1. 제목 쪽, 초록, 핵심어
 % =====================================================================
+\ifnum\frontblock=1\relax
 
 % 임시 제목(사용자 결정 2026-10-04: 대회 제목의 영역, 나중에 바꾼다). 14단어, 콜론·의문문·금지어 없음.
 % [DECISION: 최종 제목]
@@ -55,7 +61,11 @@
 % 단어 수(wc -w, 자리표시 제외): 199. 판정어는 S4(AB3 규칙 (a), AB4 규칙 (a)와 지역 수, AB5 규칙 (b))에만 있다.
 % [DECISION: 초록 판 A 또는 B]  [DECISION: 판 B 의 WF 수치 개수 허용 여부]
 % S8 의 두 자리표시는 결과가 나오면 FINAL_BATCH 의 해당 문장으로 바꾸고, XC 수치를 넣으면 S7 이나 S8 을 대신해 200단어를 지킨다.
-\abstract{We provide a label-count workflow for mapping active-layer thickness in sparsely measured permafrost regions with the Stefan model and machine learning (ML). ML models are mostly tested within training regions at one label count, without recalibrated baselines. We held out five regions with 100~km buffers and compared root-mean-square error (RMSE) from zero to all labels against Stefan models with source and recalibrated coefficients (internally pre-registered). Without labels, Stefan pseudo-labels gave lower error than shuffled ones ($-1.6$~cm; 95\% confidence interval $-2.0$ to $-1.0$); with ten labels, recalibration gave lower four-region mean error than the source coefficient ($-2.5$~cm; $-3.0$ to $-1.9$; lower in one region), with no further difference established for residual ML. In analyses designed after these results, method selection by within-target cross-validation with 40 and 160 labels changed RMSE by $-0.87$ and $-1.3$~cm against a fixed residual recipe (two regions, change from Canada). Within Alaska, residual ML reached 13.9 against 14.4~cm RMSE for recalibrated Stefan (1000 labels); about 99\% of the squared-error reduction (all labels) lay between climate grid cells. Spreading 100 labels over blocks changed RMSE against random sampling by $-2.5$~cm (Canada) and $+1.7$~cm (Lena Delta). Sub-grid covariates are needed next. [XE: Abstract S8 | 결과 열람 뒤 설계 | 2.5 사전 고정 해석 문장(첫째 또는 넷째 갈래)] [XC: Abstract S8 | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 초록 규칙: 수치만, '개발에 쓴 지역을 다시 나눈 분할', 지역 2곳, 지역별 방향(우세 k, 열세 m)]}
+\abstract{We provide a label-count workflow for mapping active-layer thickness in sparsely measured permafrost regions with the Stefan model and machine learning (ML). ML models are mostly tested within training regions at one label count, without recalibrated baselines. We held out five regions with 100~km buffers and compared root-mean-square error (RMSE) from zero to all labels against Stefan models with source and recalibrated coefficients (internally pre-registered). Without labels, Stefan pseudo-labels gave lower error than shuffled ones ($-1.6$~cm; 95\% confidence interval $-2.0$ to $-1.0$); with ten labels, recalibration gave lower four-region mean error than the source coefficient ($-2.5$~cm; $-3.0$ to $-1.9$; lower in one region), with no further difference established for residual ML. In analyses designed after these results, method selection by within-target cross-validation with 40 and 160 labels changed RMSE by $-0.87$ and $-1.3$~cm against a fixed residual recipe (two regions, change from Canada). Within Alaska, residual ML reached 13.9 against 14.4~cm RMSE for recalibrated Stefan (1000 labels); about 99\% of the squared-error reduction (all labels) lay between climate grid cells. Spreading 100 labels over blocks changed RMSE against random sampling by $-2.5$~cm (Canada) and $+1.7$~cm (Lena Delta). Sub-grid covariates are needed next. \textcolor{blue}{[PENDING: XE-a, XE-b, satellite inputs (stage 2); registered deadline 8 October 2026, 14:22 KST]}}
+% [DECISION: abstract XC sentence] XC is left out of the abstract (FINAL_BATCH 7.1 allows numbers only or exclusion; a numbers-only
+% sentence replaces S7 (19 words) and makes the abstract 214 words). Candidate (34 words; would need 14 further words cut):
+%   In new random splits of the same regions, the workflow changed RMSE by -1.51 cm against recalibrated Stefan at 160 labels
+%   (pooled across regions; over 0.5 cm larger error in 2 of 3 regions).
 
 % 비교판(판 A, WF 제외). 명세 2.3 문안에 같은 약어 수정('95% confidence interval')만 했다. 197단어.
 % 판 A 를 고르면 위 \abstract{} 의 내용을 아래 문단으로 바꾼다. 판정어 근거는 명세 2.3 끝 문단.
@@ -77,9 +87,12 @@
 % 핵심어 6개(Sci Rep 상한 6). 명세 1.3 제안. [DECISION: 핵심어]
 \keywords{Active-layer thickness, Permafrost, Stefan model, Physics-guided machine learning, Spatial transfer, Sampling design}
 
+\fi
+
 % =====================================================================
 % 블록 2. Code availability(Methods 마지막 소절, 명세 6.15 M15)
 % =====================================================================
+\ifnum\frontblock=2\relax
 % 코드 서체(\texttt)는 이 소절의 실제 저장소 경로에만 쓴다(지침 4.1, M-10).
 % 경로는 2026-10-04 에 저장소에서 확인했다. 패키지 판은 FINAL_BATCH 1절 '패키지 판' 행,
 %   이전 실행의 판은 방법 초안 Table 4(Supplementary Table S16 으로 옮길 예정).
@@ -90,9 +103,12 @@
 
 The code for data assembly, experiments, aggregation, figures and tests is available at [DECISION: 공개 저장소 주소와 공개 시점] and will be archived under the release tag of the reported analyses at [DECISION: Zenodo DOI]. The experiment scripts under \texttt{scripts/} are \texttt{h40\_label\_grid.py} and \texttt{h42\_label\_grid\_ext.py} (transfer), \texttt{h41\_validation\_ladder.py} (validation ladder), \texttt{h54\_workflow.py} (within-region tests), \texttt{h39\_scenarios.py} (aggregation), \texttt{wf0\_reanalysis.py} (post hoc reanalysis) and \texttt{x\_*.py} (additional analyses). The repository also holds the unit tests (\texttt{tests/}), the cloud job configurations (\texttt{configs/rescale/}) and the registration documents with their revision histories. Each output file of a run records the code hash, the configuration hash and the package versions, and the aggregate metadata record the git commit. The cloud runs of the additional analyses use CatBoost 1.2.10, scikit-learn 1.9.1, pandas 2.3.3, SciPy 1.17.1 and NumPy 2.1.1; the versions of earlier runs are listed in Supplementary Table S16. The pretrained weights of TabPFN v2 and TabICL v2 are not redistributed and are obtained from their providers.
 
+\fi
+
 % =====================================================================
 % 블록 3. Data availability(본문 끝, References 앞, 명세 6.16)
 % =====================================================================
+\ifnum\frontblock=3\relax
 % 확인 기록(2026-10-04):
 %   - 자료 인용 19건은 방법 초안 References 표(67행)와 references/INDEX.md 12.4 표에 있고,
 %     DOI 와 제목·연도·저장소를 DataCite API 로 다시 대조했다(refs_front.bib 각 항목 주석).
@@ -122,9 +138,12 @@ The covariates were derived from ERA5-Land monthly averaged data\cite{munozsabat
 
 The assembled label and covariate tables, the run outputs, the aggregate and verdict tables, the cell-level predictions and the source data of all figures will be deposited at [DECISION: 저장소와 DOI]. Rows from sources without a confirmed licence are excluded from the deposited tables. [DECISION: KPDC 자료, SI 포함 여부와 식별자, 이용 조건]
 
+\fi
+
 % =====================================================================
 % 블록 4. \bibliography 뒤(\backmatter)
 % =====================================================================
+\ifnum\frontblock=4\relax
 % Sci Rep: 감사의 글은 짧게, 저자 기여는 참고문헌 뒤에 모든 저자별로, 이해상충은 'Additional information' 아래.
 % 세 문구 모두 [DECISION: Acknowledgements, Author contributions, Competing interests 문구](명세 13.1 의 5번).
 
@@ -152,3 +171,4 @@ Competing interests: [DECISION: Acknowledgements, Author contributions, Competin
 Correspondence and requests for materials should be addressed to [DECISION: 저자, 소속, 교신 저자].
 
 % Competing interests 문안(결정 뒤, 해당 없을 때 Sci Rep 예시 문구): 'The authors declare no competing interests.'
+\fi

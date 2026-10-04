@@ -1,0 +1,134 @@
+{
+ "alaska": {
+  "resolution": {
+   "r": 0.9828011576087888,
+   "r2": 0.9658981153971754,
+   "within_sd": 1.7603491793482666,
+   "total_sd": 9.532561852939601
+  },
+  "paper": {
+   "top_range": [
+    0.0,
+    240.0
+   ],
+   "prod_diff_max": 190.0,
+   "stefan_diff_max": 10.0,
+   "scale_bar": {
+    "place": "below",
+    "length_mm": 9.88
+   },
+   "size_mm": [
+    170.0,
+    95.4
+   ]
+  },
+  "slide": {
+   "top_range": [
+    0.0,
+    240.0
+   ],
+   "prod_diff_max": 190.0,
+   "stefan_diff_max": 10.0,
+   "scale_bar": {
+    "place": "below",
+    "length_mm": 14.02
+   },
+   "size_mm": [
+    304.8,
+    120.5
+   ]
+  }
+ },
+ "lena": {
+  "resolution": {
+   "r": 0.7828667743925413,
+   "r2": 0.6128803864477821,
+   "within_sd": 1.1316384391617929,
+   "total_sd": 1.8188006604791929
+  },
+  "paper": {
+   "top_range": [
+    25.0,
+    75.0
+   ],
+   "prod_diff_max": 35.0,
+   "stefan_diff_max": 10.0,
+   "scale_bar": {
+    "place": "below",
+    "length_mm": 7.85
+   },
+   "size_mm": [
+    170.0,
+    113.4
+   ]
+  },
+  "slide": {
+   "top_range": [
+    25.0,
+    75.0
+   ],
+   "prod_diff_max": 35.0,
+   "stefan_diff_max": 10.0,
+   "scale_bar": {
+    "place": "below",
+    "length_mm": 9.6
+   },
+   "size_mm": [
+    304.8,
+    131.1
+   ]
+  }
+ },
+ "display_resolution": {
+  "paper": {
+   "zoom": {
+    "lat": 69.11166930619298,
+    "lon": -148.81398035275245,
+    "block": "13799702",
+    "n_labels_block": 1644,
+    "shown_cover": 0.99,
+    "half_km": 25.0,
+    "n_cells": 2892
+   },
+   "ranges": {
+    "alaska": [
+     42.0,
+     54.0
+    ],
+    "lena": [
+     38.0,
+     48.0
+    ]
+   },
+   "size_mm": [
+    170.0,
+    56.9
+   ]
+  },
+  "slide": {
+   "zoom": {
+    "lat": 69.11166930619298,
+    "lon": -148.81398035275245,
+    "block": "13799702",
+    "n_labels_block": 1644,
+    "shown_cover": 0.99,
+    "half_km": 25.0,
+    "n_cells": 2892
+   },
+   "ranges": {
+    "alaska": [
+     42.0,
+     54.0
+    ],
+    "lena": [
+     38.0,
+     48.0
+    ]
+   },
+   "size_mm": [
+    304.8,
+    109.7
+   ]
+  }
+ }
+}

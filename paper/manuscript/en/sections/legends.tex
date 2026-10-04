@@ -18,6 +18,7 @@
 % character for character. They contain Korean text, so a build that keeps them
 % needs xeCJK. [미확인: ...] marks facts not yet confirmed (spec, figure spec 14).
 % Citation keys: paper/manuscript/en/refs_legends.bib (keys follow references/INDEX.md).
+% Assembly 2026-10-05: linnenbrink2024_knndm unified to Linnenbrink2024 (merged references.bib).
 
 \section*{Figure legends}
 
@@ -27,16 +28,20 @@
 % elements); final batch plan 2.8 (validation ladder: three regions, Stefan fitted
 % on the training fold). Central meridian of panel a: fig1.py uses the Lena Delta zoom centre
 % (LON0_A = None -> lon_c 126.698 E, Fig1_values.txt), not 45 W (checked 2026-10-04).
+% Synced 2026-10-05 with outputs/figures/paper/v3_restructure/Fig1_legend.md (04:12:36; Fig1.pdf 04:15:15); the panel e
+% sentence carries the XH numbers (FINAL_BATCH 8.3, cell-weighted) instead of the three-region means of the md (14.8 to
+% 28.7 cm, 20.5 to 22.2 cm), which the figure script computed and the registered sources do not list.
 \noindent Figure 1. Study regions, Stefan coefficients and evaluation design.
-(a) Labelled cells aggregated to 0.5° blocks; circle area is proportional to the number of 1~km label locations per block, and white circles mark regions added after the label tables were fixed (Central Russia, expanded edition; Tibetan Plateau, inset; Table~1).
-Shading marks continuous (permafrost fraction $\geq$90\%) and discontinuous (50--90\%) permafrost [미확인: 영구동토 구역 자료 이름과 판]; the rectangle marks panels c and d.
-(b) Stefan coefficient $E = \mathrm{ALT}/\sqrt{\mathrm{TDD}}$ of each labelled cell on a logarithmic axis, where ALT is the active-layer thickness and TDD the thawing degree-days of 2~m air temperature (ERA5-Land\cite{munozsabater2021_era5_land}, 2015--2020 mean); at most 400 cells are shown per region, and Source coefficient marks the coefficient $E_0$ fitted on the source pool when the region is held out.
-(c) Region holdout: the Lena Delta cells and all cells within 100~km of them are removed from the training data.
-(d) Label blocks and scoring blocks of one of five splits, with 40 label cells drawn from the label blocks; errors are scored only in scoring blocks.
-Within-region tests use such splits without source data and were designed after the transfer results had been viewed.
-(e) Root-mean-square error (RMSE) of direct machine learning (ML) and of the Stefan model fitted to the training cells (Recalibrated Stefan) under random-cell, site, 0.5° block, $k$-fold nearest-neighbour distance matching (kNNDM)\cite{linnenbrink2024_knndm} and region-holdout validation, against the median distance from scoring cells to the nearest training cell (mean of Alaska, the Lena Delta and Canada, with regional values); [XH: Fig 1e | 결과 열람 뒤 설계, 서술(판정어 없음) | 2.8 사전 고정 서술 규칙].
+(a) Labelled cells of the licence-verified label tables in 0.5° blocks; circle area is proportional to the number of 1~km label locations in a block, and New regions marks the regions added after the label tables were fixed (Central Russia, expanded edition; Tibetan Plateau, inset; Table~1).
+Shading shows continuous (permafrost fraction $\geq$90\%) and discontinuous (50--90\%) permafrost (ESA CCI Permafrost fraction v4.0, 1997--2021 mean); the rectangle marks the area of c and d.
+(b) Stefan coefficient $E = \mathrm{ALT}/\sqrt{\mathrm{TDD}}$ of labelled cells by region (logarithmic axis), where ALT is the active-layer thickness and TDD the ERA5-Land\cite{munozsabater2021_era5_land} air thawing index (°C~d, 2015--2020 mean); up to 400 cells per region with median and interquartile range; Source coefficient is the coefficient fitted on the source pool when that region is held out.
+(c) Region holdout: the labelled cells of the Lena Delta and all cells within 100~km of them (Buffer) are removed from the training data.
+(d) Split of the same region into label blocks and scoring blocks (one of five splits) with 40 label cells drawn from the label blocks; errors are scored only in the scoring blocks.
+The within-region tests use the same block split without source data and were designed after the transfer results had been inspected.
+(e) RMSE against median distance from scoring to nearest training cell, from random-cell to region-holdout validation (lines, three-region means; symbols, regions with cell-weighted 95\% intervals; open, Stefan with source coefficient).
+From random-cell to kNNDM splits, direct-ML RMSE increased by 5.76, 8.17 and 14.20~cm and recalibrated-Stefan RMSE by 0.29, 0.51 and 4.28~cm (Alaska, Lena Delta, Canada; cell-weighted; descriptive, designed after earlier results were viewed).
 Cells without a verified licence (Canada 38, North Atlantic 19, W Russia 1) are not drawn.
-Polar stereographic projection (central meridian 127°~E), scale bar true at 70°~N; Tibetan Plateau inset in a Lambert azimuthal equal-area projection; coastlines, Natural Earth 50~m; Cartopy [미확인: 판].
+Polar stereographic projection (central meridian 127°~E), scale bar true at 70°~N; c and d share this projection; Tibetan Plateau inset in a Lambert azimuthal equal-area projection with its own scale bar. Coastlines, Natural Earth 50~m (10~m in c and d); Cartopy 0.23.
 
 \medskip
 % ---- Figure 2 -------------------------------------------------------------
@@ -82,16 +87,21 @@ The placebo and structure analyses were internally pre-registered.
 % (selection minus fixed recipe at 10, 40, 160 and all labels; regional rows);
 % 1.2 N4 (40-label reduction and all-label non-inferiority depend on the
 % split-independence assumption). Placeholder: spec section 11.
+% Synced 2026-10-05 with outputs/figures/paper/v3_restructure/Fig4_legend.md (redrawn figure with the XA
+% panel d, 02:49:59). Values rounded with style guide 4.5 as in the Results (1.32 -> 1.3; 2.10, 2.72 -> 2.1, 2.7;
+% 227.71 -> 227.7; -159.55 -> -159.6; -135.65 -> -135.7; -5.89 -> -5.9). XA numbers: sealed/xa_hyp.csv (cell-weighted).
 \noindent Figure 4. The error reduction of label-based correction was rank-correlated with the source-coefficient bias measured with ten labels.
-Intervals in panels b and c are 95\% block-bootstrap confidence intervals (CIs; 10,000 resamples of 0.5° scoring blocks), weighted by cell and by block as indicated in the key; the grey band marks ±0.5~cm.
-(a) Smallest tested label count $n^{*}$ (line from the previous grid value; Methods) at which recalibration lowered error relative to the source-coefficient Stefan model (Recalibration) and residual ML relative to the recalibrated model (Residual ML); Not reached marks targets without $n^{*}$.
-Rows follow the ten-label bias; sub-regions are not independent.
-(b) Error change with all labels, relative to the source-coefficient Stefan model, of the method chosen by cross-validation within the target labels, against the absolute mean bias of that model at ten labels (Spearman $\rho = 0.38$; 95\% CI 0.17 to 0.55; 28 targets; signed bias, $\rho = -0.01$); the Tibetan Plateau lies outside the axes (bias 227.7~cm, error change −159.6~cm).
-(c) Cross-validation selection minus a fixed residual recipe (residual weight 0.25), four main regions at 10 and all labels, the Lena Delta and Canada at 40 and 160 labels.
-The selection was non-inferior (margin 0.5~cm) at 40 and 160 labels and had 1.3~cm lower error at 160 labels (95\% CI 0.7 to 1.7~cm); the 0.87~cm reduction at 40 labels and the all-label non-inferiority depend on the split-independence assumption, and non-inferiority did not hold at ten labels.
-The change came from Canada (−2.1 and −2.7~cm; Lena Delta +0.35 and +0.07~cm).
-(d) Error change from recalibration and from residual ML beyond recalibration with all labels, against the same bias; [XA: Fig 4d | 사후 분석(재현(비맹검)) | 2.1 결과 범주(양, 확인하지 못함, 음)와 CE1, CE2 판].
-Panels b and c were designed after earlier results had been viewed; panel d is post hoc.
+(a) Smallest tested number of labels $n^{*}$ (interval from the previous grid value) at which recalibration lowered error relative to the source-coefficient Stefan model (Recalibration) and residual ML lowered error relative to the recalibrated model (Residual ML), under three registered conditions (Methods); Not reached marks targets without $n^{*}$ up to the largest tested count.
+Rows follow the ten-label bias of b; sub-regions are not independent.
+(b) Error change of the method chosen by cross-validation within the target labels, relative to the source-coefficient Stefan model with all labels, against the absolute mean bias of that model at the first ten labels (Spearman $\rho = 0.38$; 95\% CI 0.17 to 0.55; 28 targets; signed bias, $\rho = -0.01$).
+The Tibetan Plateau lies outside the axes (bias 227.7~cm; error change −159.6~cm in b, −135.7 and −5.9~cm in d); the North Atlantic is a point estimate.
+(c) Cross-validation selection minus a fixed residual recipe ($\lambda = 0.25$).
+The selection was non-inferior (margin 0.5~cm) at 40 and 160 labels in the mean of the Lena Delta and Canada, with 1.3~cm lower error at 160 labels; the 0.87~cm reduction at 40 labels and non-inferiority with all labels depend on the split-independence assumption, and non-inferiority did not hold at ten labels.
+The gain came from Canada (2.1 and 2.7~cm); the Lena Delta changed by +0.35 and +0.07~cm.
+(d) Error change from recalibration and from residual ML beyond the better recalibrated Stefan model with all labels, against the same bias.
+Relations of the bias with the error reduction from recalibration ($\rho = 0.37$; 95\% CI −0.11 to 0.93) and beyond recalibration ($\rho = 0.28$; −0.19 to 0.80; 0.18 to 0.54 with targets fixed) were not established (post hoc analysis).
+Intervals are 95\% confidence intervals (CIs) from 10,000 resamples of 0.5° scoring blocks (plus target families in d), weighted as in the key; the grey band marks ±0.5~cm.
+Analyses in b and c were designed after earlier results had been inspected.
 
 \medskip
 % ---- Figure 5 -------------------------------------------------------------
@@ -120,23 +130,33 @@ Polar stereographic projection centred on Canada, scale bar in panel a; coastlin
 
 \medskip
 % ---- Figure 6 -------------------------------------------------------------
-% Sources: C1 README 1.3, 2.1 (learner rows; five learners with agreeing CIs),
-% 2.5 (post hoc counts 18 and 2 of 30; 17 + 10 + 3 targets), 2.7 (year-matched
-% baseline); abstract bundle row for the main CatBoost learner (2.2459, rounded
-% 2.2). Interval resamples: c 10,000 (v2 figure meta), d 1000 with calibration
-% fixed (interval plan; one-stage columns chosen in figure spec 8.3), e 10,000.
-% Placeholder: spec section 11.
+% Synced 2026-10-05 with outputs/figures/paper/v3_restructure/Fig6_legend.md (rendered figure, 02:19:52):
+% panels, map layout (Alaska enlargement, Lena Delta leader lines, end colour below -40 cm), learner list
+% (physics-output CatBoost among the higher-error learners), anchor-ensemble definition, interval resamples
+% (d 1000, c and e 10,000), projections (central meridian 127 E, Alaska enlargement 157 W), permafrost
+% zones (ESA CCI Permafrost fraction v4.0, 1997-2021 mean) and Cartopy 0.23.0. Values are rounded with
+% style guide 4.5 as in the Results (2.44-5.21 -> 2.4-5.2; 2.25 [1.10, 3.42] -> 2.2 [1.1, 3.4]; 1.00 -> 1.0;
+% -59.98 -> -60.0). Placeholder: spec section 11.
+% Synced 2026-10-05 05:3x with outputs/figures/paper/v3_restructure/Fig6_legend.md (04:59:09; Fig6.pdf 05:00:10, panel c now has
+% the existing-ALT-map rows). Wording harmonized with the registered XG flags: 'added post hoc' -> 'registration deviation,
+% designed after earlier results were viewed'; 'was not resolved' -> 'no difference was established'; '47% of cells gap-filled'
+% -> '47.4% of product values imputed' (sealed xg_tests.csv fill note). Older values rounded as in the Results (style guide 4.5).
 \noindent Figure 6. Without target labels, 2 of 30 targets lost over 2~cm with physics pseudo-labels and 18 with direct ML.
-Intervals in panel c are 95\% block-bootstrap confidence intervals (CIs; 10,000 resamples of 0.5° scoring blocks), weighted by cell and by block as indicated in the key, with the grey band at ±0.5~cm; bars in panels d and e are cell-weighted 95\% CIs (d, 1000 resamples, calibration fixed; e, 10,000 resamples).
-(a, b) Error change relative to the source-coefficient Stefan model for direct ML (a) and direct ML trained with physics pseudo-labels (b) at each held-out target whose source excludes the parent region (17 targets); shared colour scale.
-The title counts are a post hoc description of 30 targets (adding 10 sub-regions held out within their region and 3 expanded-label editions; threshold on point estimates).
-(c) Error change of direct ML by learner and of two physics baselines, four-region mean.
-The random forest and four neural networks configured by leave-one-source-region-out cross-validation had 2.4--5.2~cm higher error.
-The other five learners, including the main CatBoost learner (2.2~cm; 95\% CI 1.1 to 3.4~cm; Holm-adjusted $P = 0.023$), gave the same verdict under the primary intervals, but this verdict depends on the split-independence assumption, as does the 1.0~cm lower error of Year-matched Stefan.
-[XG: Fig 6c | 결과 열람 뒤 설계, 등록 이탈(WRAPUP 10) | 2.7 XG-1 행]
-(d) Coverage of 90\% prediction intervals against mean width without labels for five interval scalings, four-region mean and regional values; the line marks nominal 0.90.
-(e) Coverage of anchor plus residual ML intervals with 40 and 160 labels against width relative to zero labels; the grey band marks 0.85 to 0.95.
-Polar stereographic projection (45°~W; scale true at 70°~N) with a Lambert azimuthal equal-area Tibetan inset; coastlines, Natural Earth 50~m; permafrost zones [미확인: 자료 이름과 판]; Cartopy [미확인: 판].
+(a, b) Error change relative to the source-coefficient Stefan model for direct ML (a) and direct ML with physics pseudo-labels (b), at each target's labelled-cell centre (17 targets; source excludes the parent region).
+Values below −40~cm take the end colour (Tibetan Plateau in a, −60.0~cm).
+Alaska targets enlarged; Lena Delta targets offset with leader lines.
+Title counts are post hoc over 30 targets (adding within-region sub-regions and three expanded-label editions; point-estimate threshold).
+(c) Direct ML by learner and two physics baselines, four-region mean.
+The random forest, CatBoost with physics-model inputs, and four neural networks configured by leave-one-source-region-out cross-validation had higher error (2.4--5.2~cm).
+The other five learners, including the main CatBoost learner (2.2~cm; 95\% CI 1.1 to 3.4~cm; Holm-adjusted $P = 0.023$), had higher error under the primary intervals, dependent on the split-independence assumption.
+Year-matched Stefan had 1.0~cm lower error, also dependent on that assumption.
+Anchor ensemble, mean of scale-calibrated Stefan, Kudryavtsev and ESA CCI anchors.
+Existing ALT maps (registration deviation; designed after earlier results were viewed; 5~km training-site blocks removed): CCI v5 had higher error (+23.79~cm; 95\% CI 15.34 to 30.16; arrow); for Wei v2 (Lena Delta and Canada; 47.4\% imputed) no difference was established.
+(d) Coverage of 90\% prediction intervals against mean width without labels for five interval scalings: four-region mean (95\% bootstrap intervals, 1000 resamples) and regional values; stacked labels, two near-coincident means (upper, higher coverage); line, nominal 0.90.
+(e) Coverage of residual-model intervals with 40 and 160 labels against width relative to zero labels; band, 0.85 to 0.95.
+Intervals in c and e: 95\% block-bootstrap confidence intervals (CIs; 10,000 resamples of 0.5° scoring blocks), in c weighted by cell and by block (key); ±0.5~cm band, equivalence margin.
+Polar stereographic projections (central meridian 127°~E; Alaska enlargement, 157°~W), scale bars true at 70°~N; Tibetan Plateau inset, Lambert azimuthal equal-area projection.
+Permafrost zones, ESA CCI Permafrost fraction v4.0 (1997--2021 mean); coastlines, Natural Earth 50~m; Cartopy 0.23.0.
 
 \medskip
 % ---- Figure 7 -------------------------------------------------------------
@@ -146,16 +166,24 @@ Polar stereographic projection (45°~W; scale true at 70°~N) with a Lambert azi
 % common-resampling verdict undetermined in the source table); Canadian floor
 % line = 17.90 - 28.55 and 17.90 - 28.66 cm (figure spec 9.6); panel b mask and
 % 343 locations from figure spec 9.3. Placeholder: spec section 11.
+% Synced 2026-10-05 05:3x with outputs/figures/paper/v3_restructure/Fig7_legend.md (05:27:56; Fig7.pdf 05:29:47, panel e = XC).
+% Panel e adds the registered qualifier 'in new random splits of the same regions', 'partly unblinded' and the fact that the
+% placement step reduced to random sampling (FINAL_BATCH 8.10); 'designed after results were inspected' harmonized. To stay
+% within 350 words, panel a omits the md's Alaska RMSE pair and CI (14.41 to 13.87 cm; 0.32 to 0.69 cm; in the Results) and the
+% 19% share (Supplementary Table S7). md re-checked 05:40 (file 05:27:56; Fig7.pdf re-rendered 05:37:28).
 \noindent Figure 7. Within Alaska, residual ML gains over recalibrated Stefan were below 1~cm and came from climate-grid-scale bias correction.
-Intervals are 95\% block-bootstrap confidence intervals (CIs; 10,000 resamples of 0.5° scoring blocks), weighted by cell and by block as indicated in the key; the grey band marks ±0.5~cm.
-(a) Within-region tests (half of the 0.5° blocks scored, up to 25 splits): error change of Anchor + residual ML (cross-validated residual weight) and Direct ML relative to the Stefan model recalibrated on the same labels; Error floor is the covariate-conditional floor minus the recalibrated Stefan RMSE, and the Canadian line (−10.8 to −10.6~cm) is off the axis.
-In Alaska with 1000 labels, Anchor + residual ML had 0.54~cm lower error (95\% CI 0.32 to 0.69~cm), removing 19\% of the squared error above the floor; the reductions with 500 and all labels (0.39 and 0.52~cm) did not hold under common resampling, and no difference was established in the Lena Delta or Canada.
-(b) Alaska, all labels: error change per 0.5° scoring block, with label locations; hatching marks blocks with fewer than 10 scoring cells summed over the 25 splits.
-(c) Error change split between and within ERA5-Land climate cells; in Alaska about 99\% of the squared-error reduction lay between cells (within cells −0.01~cm, equivalent), and in the three-region mean the within-cell predictions increased error by 0.09~cm (depends on the split-independence assumption).
-(d) Recommended method per label interval at its error change relative to the source-coefficient Stefan model (Lena Delta and Canada transfer mean; 320 and 1000 labels untested), with placement and diagnosis steps below; selection from 40 labels rests on non-inferiority to a fixed recipe (Fig.~4c).
-(e) [XC: Fig 7e | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 XC-1, XC-2 포레스트].
-Panels a to d were designed after viewing the transfer results.
-Polar stereographic projection centred on Alaska (scale true at 70°~N); coastlines, Natural Earth 50~m; Cartopy [미확인: 판].
+(a) Within-region tests (half of the 0.5° blocks scored, 25 splits): error change of Anchor + residual ML (cross-validated residual weight) and Direct ML relative to Stefan recalibrated on the same labels.
+Error floor: covariate-conditional floor (Alaska 11.31, Lena Delta 14.83, Canada 17.90~cm) minus recalibrated Stefan RMSE; the Canadian line (−10.6 to −10.8~cm) lies below the axis.
+In Alaska with 1000 labels the residual model had 0.54~cm lower error; reductions with 500 and all labels (0.39 and 0.52~cm) did not hold under the common-resampling interval.
+No difference was established in the Lena Delta or Canada.
+(b) Alaska with all labels: error change by scoring block (25 splits summed) and the 343 label locations; blocks with under ten scored cells masked.
+(c) Error change split between and within ERA5-Land climate cells.
+In Alaska about 99\% of the squared-error reduction came from the between-cell component (−1.03~cm; within-cell −0.01~cm); in the three-region mean, within-cell predictions increased error by 0.09~cm.
+(d) Recommended method per label interval: error change relative to the source-coefficient Stefan model, Lena Delta and Canada transfer pool (two-region mean of point estimates; 320 and 1000 labels not tested); placement and diagnosis steps below; selection from 40 labels rests on non-inferiority to a fixed recipe (Fig.~4c).
+(e) Workflow (d; placement reduced to random) in new random splits of the same regions versus random placement with the fixed recipe (−0.86, −0.93~cm; 40, 160 labels) and versus recalibrated Stefan (+0.08, −1.35, −1.51~cm; 10, 40, 160 labels); symbols, regions over 0.5~cm worse than recalibrated Stefan; designed after earlier results were viewed; re-test in reused regions, partly unblinded.
+Intervals: 95\% block-bootstrap confidence intervals (10,000 resamples of 0.5° scoring blocks), weighted by cell and by block (key); ±0.5~cm band, equivalence margin.
+Panels a to d were designed after the transfer results were viewed.
+Polar stereographic projection centred on Alaska, scale bar true at 70°~N; coastlines, Natural Earth 50~m; Cartopy 0.23.0.
 
 % ---- Table 1 caption ------------------------------------------------------
 % Sources: figure spec 10.2 to 10.4; D README 2 (row counts, source coefficient, Alaska share

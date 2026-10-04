@@ -19,72 +19,69 @@
 
 \subsection{Evaluation design and validation ladder}\label{sec:results-design}
 
-All methods were compared on one protocol in which each target region and a 100~km buffer were removed from the source data, labels were drawn from half of the target's 0.5° blocks, and errors were scored on the other half, for label counts from zero to all available rows (30 to 13,606 rows per region) (Fig.~1c,d; Table~1).
-Every method was compared with two Stefan baselines that used the same target labels: the source-coefficient Stefan model, whose coefficient $E_0$ was estimated from the source cells (1.59--1.62~cm~(°C~d)$^{-1/2}$ for the main regions, whose source cells were 78--94\% Alaskan, and 1.50 for the Alaskan reference target), and the Stefan model recalibrated with the target labels by shrinkage towards $E_0$ ($\kappa = 10$).
+On the holdout protocol described above (Fig.~1c,d; Table~1), every method was compared with two Stefan baselines that used the same target labels, as in lake-temperature studies\cite{Read2019,Jia2021}: the source-coefficient Stefan model, whose coefficient $E_0$ was estimated from the source cells (Table~1), and the Stefan model recalibrated with the target labels by shrinkage towards $E_0$ ($\kappa = 10$)\cite{Steyerberg2004}.
 Four-region means weight the Lena Delta, Canada, W Russia and E Russia equally and exclude Alaska, which is a held-out reference target.
-The transfer comparisons were internally pre-registered, intervals are cell-weighted unless marked block-equal, and error floors used to scale effect sizes were 11.3, 14.8 and 17.9~cm in Alaska, the Lena Delta and Canada (Methods).
+Intervals are cell-weighted unless marked block-equal.
 
 Averaged over five regions with equal weight, the RMSE of direct ML increased from 22.9~cm under random cell splits to 33.3~cm under region holdout (difference 10.3~cm; 95\% confidence interval (CI) 7.3 to 12.8; block-equal 6.1~cm, 4.7 to 7.6), whereas a Stefan model with the coefficient fitted by least squares to the training cells stayed between 26.8 and 27.0~cm (Fig.~1e).
 The 10.3~cm increase is reported as an effect size rather than a confirmatory result, and the registered contrast between cluster holdout with a 500~km buffer and random cells was 8.2~cm (95\% CI 5.6 to 10.4; Supplementary Table S2).
-Within Alaska, the median distance from test cells to the nearest training cell was 0.004~km under random splits and 53.5~km under k-fold nearest-neighbour distance matching (kNNDM) cross-validation, which mimics the 81.6~km from map cells to the nearest label\cite{Linnenbrink2024}; the RMSE of direct ML rose from 11.6 to 17.9~cm, and that of the Stefan model stayed at 14.2 to 14.5~cm (means of three seeds).
-Random validation of clustered samples can overstate model accuracy\cite{Ploton2020}, and model-free, unbiased estimates of map accuracy have been argued to require probability sampling\cite{Wadoux2021}.
-Our labels are a clustered non-probability sample, so the errors below are prediction errors on held-out blocks.
-[XH: R1 | 결과 열람 뒤 설계, 서술(판정어 없음). L19, L20 은 등록 | 2.8 사전 고정 서술 규칙]
+Moving from random-cell to $k$-fold nearest-neighbour distance matching (kNNDM) splits\cite{Linnenbrink2024} increased the RMSE of direct ML by 5.76, 8.17 and 14.20~cm and that of the Stefan model fitted to the training cells by 0.29, 0.51 and 4.28~cm in Alaska, the Lena Delta and Canada (cell-weighted; descriptive, designed after earlier results were viewed; Fig.~1e; Supplementary Table S13).
+Random validation has been argued to estimate map accuracy validly for probability samples\cite{Wadoux2021}, but our labels are a clustered non-probability sample, so the errors below are prediction errors on held-out blocks.
 
 \subsection{Transfer without target labels}\label{sec:results-label0}
 
 Without target labels, pseudo-labels from the Stefan model reduced RMSE relative to shuffled pseudo-labels by 1.6~cm (95\% CI 1.0 to 2.0; block-equal 0.6 to 1.5; four regions; Holm-adjusted \textit{P} = 0.001), and in a post hoc count, fewer of 30 targets lost more than 2~cm against the source-coefficient Stefan model with physics pseudo-label augmentation (2 targets) than with direct ML (18 targets) (Fig.~3b; Fig.~6a,b).
-Relative to two constant placebos the reductions were 1.7 and 3.6~cm, and relative to a placebo linear in the square root of thawing degree-days 0.48~cm without labels (below 0.5~cm), with equivalence within ±0.5~cm at ten labels (registered verdict: mixed).
-The 2~cm threshold was set after the transfer results had been viewed, and the 30 targets comprise seven regions and 23 sub-regions or label-expanded versions of them; counted by intervals above zero under both weightings, 14 targets had higher error with direct ML and 8 with physics pseudo-labels (post hoc computation; Supplementary Table S5).
+Against two constant placebos the reductions were 1.7 and 3.6~cm, and against a placebo linear in $\sqrt{\mathrm{TDD}}$ 0.48~cm (registered verdict: mixed).
+The 2~cm threshold was set after the transfer results had been viewed, the 30 targets include 23 sub-regions or label-expanded versions, and counts based on intervals give the same order (post hoc; Supplementary Table S5).
 
-For the five learners whose primary and common-resampling intervals agreed, direct ML had higher four-region mean error than the source-coefficient Stefan model: a random forest (2.6~cm) and four neural networks configured by leave-one-source-region-out cross-validation (2.4 to 5.2~cm) (Fig.~6c).
-For the main learner, CatBoost, the difference was 2.2~cm (95\% CI 1.1 to 3.4; block-equal 1.6~cm, 0.5 to 2.7; Holm-adjusted \textit{P} = 0.023), and for two further CatBoost settings, TabPFN v2 and TabICL v2 it was 0.85 to 1.9~cm.
+For the five learners whose primary and common-resampling intervals agreed, direct ML had higher four-region mean error than the source-coefficient Stefan model (Fig.~6c).
+For the main learner, CatBoost, the difference was 2.2~cm (95\% CI 1.1 to 3.4; Holm-adjusted \textit{P} = 0.023), and for two further CatBoost settings, TabPFN v2 and TabICL v2 it was 0.85 to 1.9~cm.
 These five verdicts depend on the split-independence assumption, and the TabPFN v2 verdict was significant before correction only (Holm-adjusted \textit{P} = 0.117).
-Direct CatBoost also had 3.2~cm higher error than the Stefan model driven by year-matched thawing degree-days (95\% CI 1.9 to 4.3; block-equal 2.0~cm, 0.9 to 3.1; auxiliary hypothesis with an unblinded anchor variant).
-Residual models with a low weight ($\lambda = 0.25$) on the source-coefficient anchor were equivalent to that model within ±0.5~cm for CatBoost, TabPFN v2 and TabICL v2, a verdict that depends on the split-independence assumption.
+Residual models with a low weight ($\lambda = 0.25$) on the source-coefficient anchor were equivalent to that model within ±0.5~cm for three learners (depends on the split-independence assumption).
 
-Three results depart from this pattern.
 With Alaska held out, physics pseudo-labels had 1.8~cm higher error than the source-coefficient model (95\% CI 0.4 to 2.6).
-On the Tibetan Plateau, where the source coefficient is far from the regional value (Fig.~1b), direct ML had 60.0~cm lower error (95\% CI 57.1 to 62.9; an expected result from an unblinded, cross-environment comparison).
+On the Tibetan Plateau, where the source coefficient is far from the regional value (Fig.~1b), direct ML had 60.0~cm lower error (an expected result from an unblinded, cross-environment comparison).
 With ten labels, direct TabICL v2 had 2.9~cm lower four-region mean error (95\% CI 1.1 to 3.6; depends on the split-independence assumption) but 6.0~cm higher error in the three-region mean that includes Alaska.
-[XG: R2 | 결과 열람 뒤 설계, 등록 이탈(WRAPUP 10) | 2.7 사전 고정 해석 문장 XG-1, XG-2, XG-3, 공통 문장]
-We next asked what the first ten labels changed.
+
+On the same blocks, after masking blocks within 5 or 25~km of product training sites (registration deviation; designed after earlier results were viewed), the existing CCI v5 map without labels had 23.79~cm higher error than the source-coefficient Stefan model (Holm-adjusted \textit{P} = 0.0006; higher in the Lena Delta, Canada and E Russia), and residual ML had 8.37 and 7.51~cm lower error than CCI v5 recalibrated with the same 10 and all labels (CCI v5 contrasts partly unblinded); no difference was established for the Wei v2 map (47.4\% of product values imputed), trained partly on CALM sites in the target regions (ALT definitions differ; Supplementary Table S13).
 
 \subsection{Coefficient recalibration with three to ten labels}\label{sec:results-recal}
 
 With ten target labels, recalibrating the Stefan coefficient reduced the four-region mean RMSE relative to the source coefficient by 2.5~cm (95\% CI 1.9 to 3.0; block-equal 1.9 to 3.3; Holm-adjusted \textit{P} = 0.001), with lower error in one of four regions (W Russia, 12.0~cm), higher error in Canada (2.3~cm; 95\% CI 0.7 to 2.9) and no difference established in the Lena Delta and E Russia (Fig.~2; Fig.~3a).
 [MISSING: 중앙값과 러시아 서부 제외 값, build\_numbers.py 에서 lgw\_bundle.csv 지역 행으로 생성]
 Adding residual ML to the recalibrated anchor changed RMSE by a further −0.18~cm (95\% CI −0.53 to −0.01; Holm-adjusted \textit{P} = 0.136), a difference significant before correction only, below 0.5~cm and dependent on the split-independence assumption.
-In W Russia, 13.5~cm of the 14.0~cm reduction relative to the source coefficient with all labels came from recalibration (post hoc decomposition).
 
-The error reduction of label-based correction (recalibration plus residual) was rank-correlated with the source-coefficient bias measured with ten labels (Spearman $\rho = 0.38$; 95\% CI 0.17 to 0.55; 28 targets; one-sided \textit{P} = 0.0002; designed after the label-grid results had been viewed), where the reduction is that of the method selected within the target labels (next section) relative to the source-coefficient model with all labels.
-The sign of the bias was not related to the reduction ($\rho = -0.01$; 95\% CI −0.17 to 0.18) (Fig.~4a,b; Supplementary Table S8).
-We could not establish a relation between coefficient error and the gain of ML beyond recalibration (post hoc rank correlations −0.08 to 0.39 depending on the definition; Supplementary Table S13).
-[XA: R3 | 사후 분석(재현(비맹검)) | 2.1 해석 조각]
+The error reduction of label-based correction with all labels (selection rule of the next section) was rank-correlated with the source-coefficient bias measured with ten labels (Spearman $\rho = 0.38$; 95\% CI 0.17 to 0.55; 28 targets; one-sided \textit{P} = 0.0002; designed after the label-grid results had been viewed).
+The sign of the bias was not related to the reduction ($\rho = -0.01$; Fig.~4a,b; Supplementary Table S8).
+% XA (2026-10-05): the temporary sentence of spec 4.3 and the placeholder [XA: R3 | 사후 분석(재현(비맹검)) | 2.1 해석 조각]
+% were replaced by the registered fragments XA-1, XA-2, XA-3 (all 'not established'), FINAL_BATCH 8.1 and
+% paper/claims/C2_bias_diagnosis/XA_result_2026-10-04.md section 7 (sealed/xa_hyp.csv sentence column).
+In a post hoc analysis, no relationship with the size of this bias was established for the recalibration gain, for the share added by the selection rule, or for the ML share beyond recalibration (for the last, positive only with the auxiliary target-fixed interval; the weaker category is reported) (Fig.~4d; Supplementary Table S13).
 
-With ten or fewer labels, the residual structure had lower four-region mean error than ML that receives Stefan outputs as inputs (physics-input ML), by 2.7~cm without labels (95\% CI 1.7 to 4.3) and 3.7~cm with ten labels (95\% CI 2.8 to 5.2; Holm-adjusted \textit{P} = 0.001) (Fig.~3c).
+With ten or fewer labels, the residual structure had lower four-region mean error than ML that receives Stefan outputs as inputs (physics-input ML), by 2.7~cm without labels and 3.7~cm with ten labels (95\% CI 2.8 to 5.2; Holm-adjusted \textit{P} = 0.001) (Fig.~3c).
 [MISSING: 중앙값과 러시아 서부 제외 값, build\_numbers.py 에서 lgw\_bundle.csv 지역 행으로 생성]
-The physics-input model of the ten-label contrast does not receive the recalibrated coefficient; in the contrast that supplies recalibrated Stefan values as inputs, the residual structure still had 2.5~cm lower error (95\% CI 1.6 to 3.3), with lower error in W and E Russia, 3.1~cm higher error in Canada (95\% CI 1.4 to 4.0; the E Russia and Canada verdicts depend on the split-independence assumption) and no difference established in the Lena Delta.
+With recalibrated Stefan values as physics inputs, the residual structure still had 2.5~cm lower error but 3.1~cm higher error in Canada, regional verdicts that depend on the split-independence assumption (Supplementary Table S6).
 
-Adding physics pseudo-labels to residual ML was equivalent within ±0.5~cm with ten labels (−0.13~cm; 95\% CI −0.31 to 0.22; Holm-adjusted equivalence \textit{P} = 0.002) and increased error with 40 labels in the Lena Delta and Canada by 0.34~cm (95\% CI 0.25 to 0.49), a difference below 0.5~cm.
-With three labels, the Stefan model fitted to the target labels by least squares had higher error than the recalibrated model in the Lena Delta (2.9~cm), Canada (5.4~cm) and E Russia (3.7~cm), and lower error in W Russia (5.0~cm) and on the Tibetan Plateau (81.8~cm), where the source coefficient was far from the regional value (descriptive comparison; Fig.~3d).
-[XB: SI, R3 지시 문장 | 결과 열람 뒤 설계, 실행 전 등록(비맹검 부분 포함) | 2.2 사전 고정 해석 문장 XB-1, XB-2(라벨 10개 행)]
+Adding physics pseudo-labels to residual ML was equivalent within ±0.5~cm with ten labels and increased error by 0.34~cm, below 0.5~cm, with 40 labels in the Lena Delta and Canada (Supplementary Table S6).
+Label-weighted stacking of physics models and products established no difference from recalibration or residual ML at ten labels, where it fell back to recalibration in 36\% of draws (designed after earlier results were viewed, partly unblinded; Supplementary Table S13).
 
 \subsection{Method selection with tens to hundreds of labels}\label{sec:results-selection}
 
 Selecting the method by five-fold block cross-validation within the target labels reduced RMSE relative to a fixed residual recipe ($\lambda = 0.25$) by 1.3~cm with 160 labels (95\% CI 0.7 to 1.7; block-equal 0.8 to 1.8; Lena Delta and Canada; unchanged under common resampling) and was non-inferior at 40 and 160 labels (margin 0.5~cm), with both results arising in Canada; this rule was designed after the label-grid results had been viewed (Fig.~4c; Fig.~7d).
 With 40 labels, the reduction of 0.87~cm (95\% CI 0.27 to 1.20) depends on the split-independence assumption.
-In Canada the rule reduced RMSE by 2.1 and 2.7~cm with 40 and 160 labels; in the Lena Delta no difference was established.
-With ten labels in the four main regions, non-inferiority was not established (−0.25~cm; 95\% CI −1.11 to 0.73), and the rule had 0.70~cm higher error in the Lena Delta (95\% CI 0.56 to 1.03); with all labels, non-inferiority depends on the split-independence assumption.
-The rule did not increase the number of targets with lower error than the recalibrated Stefan model (3 against 4 for the fixed recipe with 160 labels, 2 against 8 with all labels; Supplementary Table S8).
+In the Lena Delta no difference was established (Fig.~4c).
+With ten labels in the four main regions, non-inferiority was not established, and the rule had 0.70~cm higher error in the Lena Delta; with all labels, non-inferiority depends on the split-independence assumption.
+The rule did not increase the number of targets with lower error than the recalibrated Stefan model (Supplementary Table S8).
 
-In Canada, the rule chose residual ML with $\lambda = 1.0$ in 22 of 25 draws with 40 labels and in 24 of 25 with 160 labels, and no difference from the source-coefficient Stefan model was established.
-With Alaska held out, the rule had higher error than the source-coefficient model with 10, 40 and 160 labels (0.91, 0.98 and 2.1~cm; descriptive curve contrasts).
+In Canada, no difference from the source-coefficient Stefan model was established (Supplementary Table S8).
+With Alaska held out, the rule had higher error than the source-coefficient model with 10, 40 and 160 labels (descriptive curve contrasts; Supplementary Table S8).
 
 At 40 and 160 labels, residual ML had 1.9 to 2.4~cm higher error than physics-input ML in the Lena Delta and Canada (the 2.4~cm contrast depends on the split-independence assumption) (Fig.~3c).
-This difference arose in Canada (4.5 to 5.1~cm); no difference was established in the Lena Delta, and with Alaska held out residual ML had lower error.
+This difference arose in Canada; with Alaska held out residual ML had lower error.
 At these label counts no difference was established between residual ML and a stronger recalibrated baseline (the soil-property Stefan model recalibrated with $\kappa = 10$).
 
-Hyperparameter selection for neural networks by leave-one-source-region-out cross-validation gave learner-specific results (Supplementary Table S4): where both intervals agreed, it increased the error of direct ML for the MLP and the multi-head MLP (1.3 to 3.0~cm), no learner met the registered condition for a learner-general statement, and this selection was not compared with selection within the target labels.
-[XC: R4 | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 사전 고정 해석 문장 XC-1, XC-2(+XC-2s), 뒤에 S-XC4 (b) 지역 손해 문장]
-[XB: SI, R4 지시 문장 | 결과 열람 뒤 설계, 실행 전 등록(비맹검 부분 포함) | 2.2 사전 고정 해석 문장 XB-1, XB-2(라벨 40, 160 행, 레나·캐나다 2지역)]
+Leave-one-source-region-out tuning of neural networks gave learner-specific results, no learner met the registered condition for a learner-general statement, and this tuning was not compared with selection within the target labels (Supplementary Table S8).
+In new random splits of the same regions (re-test in reused regions, designed after earlier results were viewed, partly unblinded), the sequential workflow had 0.93~cm lower error than random placement with the fixed residual recipe at 160 labels (Lena Delta and Canada; Canada −2.41~cm, Lena Delta +0.54~cm, undetermined) and no established difference at 40 labels (minimum detectable effect about 0.5~cm; Lena Delta +0.21~cm); because its placement step reduced to random sampling, this compares the method rule with the fixed recipe on the same labels.
+In these splits the workflow was non-inferior to the recalibrated Stefan model at 10, 40 and 160 labels (five-region mean, then Lena Delta and Canada), with 1.35 and 1.51~cm lower error at 40 and 160 labels, but only for the pooled mean: it was more than 0.5~cm worse in E Russia at 10 labels (+1.34~cm), in Alaska, the selection family, at 40 and 160 labels (+1.51 and +2.34~cm) and in the Lena Delta at 160 labels (+0.53~cm) (Fig.~7e; Supplementary Table S13).
+Within regions (auxiliary arm), the rule was equivalent to residual ML at 200 labels, with no difference established at 500 and 1000 labels.
+Stacking also established no difference at 40 and 160 labels (Lena Delta and Canada; designed after earlier results were viewed, partly unblinded; Supplementary Table S13).

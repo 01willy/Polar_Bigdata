@@ -1,0 +1,134 @@
+[
+ {
+  "file": "Alaska_ALT_map_v3_c_slide.png",
+  "pages": "1 (title)",
+  "replaces": "crops/f1a.png on the title slide",
+  "size_in": [
+   5.5,
+   5.0
+  ],
+  "how": "S",
+  "note": "Alaska residual ML ALT (panel c of Alaska_ALT_map_v3), no graticule, thin coastline; text sizes [14.0] pt"
+ },
+ {
+  "file": "Fig1_a_slide.png",
+  "pages": "5, 24 (also 1, 2, 37 if wanted)",
+  "replaces": "crops/f1a.png",
+  "size_in": [
+   5.02,
+   5.2
+  ],
+  "how": "S",
+  "note": "Lena Delta zoom rectangle and connector to c and d omitted (c, d are not on these slides); text sizes [14.0] pt"
+ },
+ {
+  "file": "Fig1_b_slide.png",
+  "pages": "5",
+  "replaces": "crops/f1b.png",
+  "size_in": [
+   4.05,
+   5.2
+  ],
+  "how": "S",
+  "note": "x ticks 0.1, 1, 10 (paper also 0.3, 3, 30); text sizes [14.0] pt"
+ },
+ {
+  "file": "Fig1_e_slide.png",
+  "pages": "8",
+  "replaces": "deck/assets/paper_report/S08_validation_ladder.png (old five-region chart)",
+  "size_in": [
+   7.5,
+   4.6
+  ],
+  "how": "S",
+  "note": "Fig 1e data and encodings (XH 24 rows + region holdout 6 rows); stage and method names as direct labels; region symbols alpha 0.5; one-line note on the open symbol; text sizes [13.0, 14.0] pt"
+ },
+ {
+  "file": "Fig5_c_slide.png",
+  "pages": "36",
+  "replaces": "crops/f5c.png",
+  "size_in": [
+   3.39,
+   3.41
+  ],
+  "how": "P",
+  "note": "map only, no text inside the deck crop box; same framing as the crop, lines at least 2.1 pt at slide size (deck magnification 2.14)"
+ },
+ {
+  "file": "Fig6_a_slide.png",
+  "pages": "11",
+  "replaces": "crops/f6a.png",
+  "size_in": [
+   4.26,
+   3.91
+  ],
+  "how": "S",
+  "note": "circle 3.96 mm (paper 3.0), map circle 86 mm; column head left to the deck; key, inset names, latitude labels and scale bars only in a (as in the paper); text sizes [13.0] pt"
+ },
+ {
+  "file": "Fig6_b_slide.png",
+  "pages": "11",
+  "replaces": "crops/f6b.png",
+  "size_in": [
+   4.26,
+   3.91
+  ],
+  "how": "S",
+  "note": "circle 3.96 mm (paper 3.0), map circle 86 mm; column head left to the deck; no text in this panel (as in the paper)"
+ },
+ {
+  "file": "Fig6_cbar_slide.png",
+  "pages": "11",
+  "replaces": "crops/f6_cbar.png",
+  "size_in": [
+   9.95,
+   0.79
+  ],
+  "how": "S",
+  "note": "bar 180 mm centred at 5.21 in from the left edge (midpoint of the two map images at COL[0] and COL[3]); extend min, ±40 cm as in the paper; text sizes [14.0] pt"
+ },
+ {
+  "file": "Fig7_b_slide.png",
+  "pages": "21",
+  "replaces": "crops/f7b.png",
+  "size_in": [
+   5.4,
+   4.29
+  ],
+  "how": "S",
+  "note": "same blocks, colour scale ±5 cm; text sizes [14.0] pt"
+ },
+ {
+  "file": "Fig7_b_small_slide.png",
+  "pages": "36",
+  "replaces": "crops/f7b.png",
+  "size_in": [
+   3.8,
+   3.02
+  ],
+  "how": "S",
+  "note": "same blocks, colour scale ±5 cm; text sizes [12.0] pt"
+ },
+ {
+  "file": "Fig7_c_slide.png",
+  "pages": "21",
+  "replaces": "crops/f7c.png",
+  "size_in": [
+   4.92,
+   4.8
+  ],
+  "how": "S",
+  "note": "weighting key under the panel; block-equal bar 1.6 mm below the cell-weighted bar (paper 0.8 mm); text sizes [14.0] pt"
+ },
+ {
+  "file": "Fig7_e_slide.png",
+  "pages": "new slide (XC workflow contrast; no deck page yet)",
+  "replaces": "none (Fig 7e was a placeholder)",
+  "size_in": [
+   6.0,
+   4.0
+  ],
+  "how": "S",
+  "note": "Fig 7e data and encodings (XC-1 n 40, 160; XC-2 n 10, 40, 160; regions worse than recalibrated Stefan by > 0.5 cm as faint region symbols); weighting key and region key above the panel; text sizes [14.0] pt"
+ }
+]

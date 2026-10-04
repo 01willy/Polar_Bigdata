@@ -1,0 +1,33 @@
+panel,pool_or_region,series,target_labels_n,x_axis,error_change_cm,ci95_low_cm,ci95_high_cm,ci_drawn,estimate,ci_type,resamples
+a,Four main regions,Year-matched Stefan,0,n = 0 axis,-0.9968,-1.3456,-0.32,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+a,Four main regions,Recalibrated Stefan,0,n = 0 axis,0.0,0.0,0.0,no,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+a,Four main regions,Recalibrated Stefan,3,log axis,-0.9018,-1.159,-0.5059,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+a,Four main regions,Recalibrated Stefan,10,log axis,-2.4545,-3.0377,-1.8624,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+a,Four main regions,Anchor + residual ML,0,n = 0 axis,-0.0962,-0.4478,0.1337,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+a,Four main regions,Anchor + residual ML,3,log axis,-0.9857,-1.3881,-0.5877,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+a,Four main regions,Anchor + residual ML,10,log axis,-2.6323,-3.3176,-2.082,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+a,Four main regions,Direct ML,0,n = 0 axis,2.2459,1.0983,3.3997,no,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+a,Four main regions,Direct ML,3,log axis,1.8935,0.7864,2.9051,no,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+a,Four main regions,Direct ML,10,log axis,1.3133,0.1598,2.1599,no,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Year-matched Stefan,0,n = 0 axis,-1.2017,,,no,mean of the two region values (point estimate),,
+b,Lena Delta and Canada,Recalibrated Stefan,0,n = 0 axis,0.0,0.0,0.0,no,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Recalibrated Stefan,3,log axis,0.5609,0.1745,0.8066,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Recalibrated Stefan,10,log axis,1.241,0.4428,1.7239,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Recalibrated Stefan,40,log axis,1.9853,0.8861,2.7105,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Recalibrated Stefan,160,log axis,2.1434,0.9489,2.9253,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Recalibrated Stefan,320,log axis,2.2805,0.9968,3.127,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Recalibrated Stefan,All,All axis,2.3305,1.0539,3.1854,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Anchor + residual ML,0,n = 0 axis,-0.338,-0.522,-0.1482,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Anchor + residual ML,3,log axis,0.1768,-0.2141,0.3752,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Anchor + residual ML,10,log axis,0.7814,-0.0293,1.1967,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Anchor + residual ML,40,log axis,1.4269,0.3929,2.0656,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Anchor + residual ML,160,log axis,1.5055,0.3937,2.1867,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Anchor + residual ML,320,log axis,1.4482,0.2673,2.1515,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Anchor + residual ML,All,All axis,1.2992,0.1404,1.9402,yes,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Direct ML,0,n = 0 axis,1.2298,0.137,2.8674,no,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Direct ML,3,log axis,0.3457,-0.637,1.5376,no,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Direct ML,10,log axis,0.1299,-0.7386,0.9828,no,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Direct ML,40,log axis,-0.4703,-1.2179,0.2276,no,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Direct ML,160,log axis,-0.616,-1.4229,0.1268,no,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Direct ML,320,log axis,-1.0992,-1.9825,-0.1392,no,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0
+b,Lena Delta and Canada,Direct ML,All,All axis,-1.2676,-2.6674,-0.1959,no,fixed-composition stratified mean of cell-weighted region values,"95% block bootstrap, cell-weighted",10000.0

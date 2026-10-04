@@ -42,3 +42,9 @@
 - 자료: data/processed/map_alaska/{alaska_grid_x25_v1.csv.gz, alaska_grid_x25_v1_meta.json, alaska_pred_v1.csv.gz, alaska_pred_v1_meta.json, alaska_cv_oof_v1.csv}, data/processed/map_lena/{lena_final_extras_v1.csv.gz, lena_final_extras_v1_meta.json, lena_cv_oof_v1.csv}
 - 그림: outputs/figures/paper/v3_restructure/maps/{Alaska_ALT_map_v3, Lena_ALT_map_v3}.{pdf,svg,png} 와 _legend.md, deck/assets/paper_report/maps/*_slide.png
 - 명세: figures/figure_spec_maps_v3.json
+
+## 6. 그림 개정 2(2026-10-05 검토 반영, 예측 재실행 없음)
+
+- 지도 구성: a 재보정 Stefan ALT, b 잔차 ML 보정량(±10 cm), c 잔차 ML ALT(최종, a 와 같은 색 범위), d 학습 범위와 라벨 셀. ERA5 확대는 XL_display_resolution 으로 옮겼고 레나의 원천 Stefan 구간 패널은 뺐다(최종 구간 ±25.4 cm, 알래스카 ±20.2 cm 는 설명문에 한계와 함께).
+- 그리기: 원 1 km 격자 셀을 사각형 그대로 QuadMesh 로 그린다(재표집 없음). 래스터는 메시와 해칭 층만(600 dpi), 글자·선은 벡터. 지도 SVG 는 내보내지 않는다.
+- 슬라이드: 12.0 in 폭, 5.2 in 높이 이하, 범례·라벨은 캔버스 안. 축척 막대는 빈 모서리(자동 검사) 또는 좌표 글이 없는 패널 틀 아래.

@@ -419,8 +419,8 @@ def draw_maps(fig, T, proj, ext, geoms):
         ax = S.axes_mm(fig, x0, L["map_y"], L["map_w"], L["map_w"], projection=proj)
         ax.set_extent(ext, crs=proj)
         ax.spines["geo"].set_visible(False)
-        ax.add_geometries(land, pc, facecolor=S.BASEMAP["land"], edgecolor="none", zorder=0)
-        ax.add_geometries(lakes, pc, facecolor=S.BASEMAP["sea"], edgecolor="none", zorder=0.1)
+        ax.add_geometries(land, pc, facecolor=S.BASEMAP["land"], edgecolor="none", zorder=0).set_rasterized(True)       # 밀집 지도 층: 600 dpi 래스터
+        ax.add_geometries(lakes, pc, facecolor=S.BASEMAP["sea"], edgecolor="none", zorder=0.1).set_rasterized(True)
         lon_s = np.linspace(-180, 0, 361)
         for la in (60, 70, 80):        # 경위선: 위도 3개, 경도 5개(지침 2.3 상한)
             ax.plot(lon_s, np.full_like(lon_s, la), color=S.BASEMAP["graticule"], lw=S.LW["grid_map"], transform=pc, zorder=0.5)
@@ -428,7 +428,7 @@ def draw_maps(fig, T, proj, ext, geoms):
         for lo in (-140, -120, -100, -80, -60):
             ax.plot(np.full_like(lat_s, lo), lat_s, color=S.BASEMAP["graticule"], lw=S.LW["grid_map"], transform=pc, zorder=0.5)
         c = cells[cells.code == s]
-        ax.plot(c.lon.values, c.lat.values, "o", ms=2.0, color=S.BASEMAP["candidate"], mew=0, transform=pc, zorder=2)
+        ax.plot(c.lon.values, c.lat.values, "o", ms=2.0, color=S.BASEMAP["candidate"], mew=0, transform=pc, zorder=2)[0].set_rasterized(True)
         z = zones[(zones.code == s) & (zones.n_selected > 0)].sort_values("n_selected", ascending=False)
         ax.scatter(z.lon.values, z.lat.values, s=_circle_pts(z.n_selected.values) ** 2, facecolor=(0, 0, 0, 0.35), edgecolor=S.INK,
                    linewidth=S.LW["marker_edge_open"], transform=pc, zorder=3)
@@ -476,7 +476,7 @@ def map_furniture(fig, ax, proj, ext, mm_to_m, geoms):
     axi = S.axes_mm(fig, L["map_x"][0] + L["map_w"] - iw - 0.5, L["map_y"] + 0.5, iw, iw, projection=proj)
     axi.set_extent([-4.7e6, 4.7e6, -4.7e6, 4.7e6], crs=proj)
     import cartopy.crs as ccrs
-    axi.add_geometries(geoms[2], crs=ccrs.PlateCarree(), facecolor="#d9d9d9", edgecolor="none", linewidth=0, zorder=0.4)
+    axi.add_geometries(geoms[2], crs=ccrs.PlateCarree(), facecolor="#d9d9d9", edgecolor="none", linewidth=0, zorder=0.4).set_rasterized(True)
     axi.set_facecolor("white")
     axi.spines["geo"].set_linewidth(1.0); axi.spines["geo"].set_edgecolor(S.INK_AUX)
     rect = Rectangle((x0, y0), x1 - x0, y1 - y0, transform=axi.transData, facecolor="none", edgecolor=S.INK, lw=1.0, zorder=3)

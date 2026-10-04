@@ -107,6 +107,23 @@ Fig 7 v3 값 대조와 점검 기록
   within: Alaska -0.01 [-0.03, +0.04] / +0.04 [+0.01, +0.06] 동등; Lena +0.05 [-0.18, +0.92] / +0.87 [+0.51, +1.24] 미결정; Canada +0.23 [+0.16, +0.34] / +0.21 [+0.12, +0.31] 열세; Mean3 +0.09 [+0.02, +0.40] / +0.37 [+0.25, +0.50] 열세
   OK  SSE 이득의 격자 안 몫 0.86% → 격자 사이 약 99.1% (설명문 'about 99%', C8 README B4)
 
+[4b] 패널 e: XC 등록 주 가설(풀 행, 셀 가중 delta [lo, hi] / 블록 등가중 delta [lo, hi] cm)과 재보정 Stefan 대비 지역 예외
+  OK  XC-1b A1-A2 n 40: -0.8643, -1.0311, -0.3859, -0.3567, -0.7170, +0.0034 | 조정 담당 값 (-0.86, -1.03, -0.39, -0.36, -0.72, 0.003) | data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_hyp.csv | hypothesis == 'XC-1b' (contrast A1-A2, n 40); 4분 판정 미결정(그림에 판정 기호 없음), Holm p 0.2096, 풀 'pooled mean of 2 regions: Lena Delta, Canada' (부분(지역 2/5)), 설계 '결과 열람 뒤 설계, 재사용 지역의 재검정', 맹검 '비맹검 부분 포함(WF2·WF4·WF8, LGX-N4)', 재표집 10000
+  OK  XC-1c A1-A2 n 160: -0.9322, -1.2516, -0.3951, -0.5370, -0.9405, -0.1335 | 조정 담당 값 (-0.93, -1.25, -0.4, -0.54, -0.94, -0.13) | data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_hyp.csv | hypothesis == 'XC-1c' (contrast A1-A2, n 160); 4분 판정 우세(그림에 판정 기호 없음), Holm p 0.0400, 풀 'pooled mean of 2 regions: Lena Delta, Canada' (부분(지역 2/5)), 설계 '결과 열람 뒤 설계, 재사용 지역의 재검정', 맹검 '비맹검 부분 포함(WF2·WF4·WF8, LGX-N4)', 재표집 10000
+  OK  XC-2a A1-A3 n 10: +0.0789, -0.0682, +0.1999, -0.0050, -0.1492, +0.1377 | 조정 담당 값 (0.08, -0.07, 0.2, -0.005, -0.15, 0.14) | data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_hyp.csv | hypothesis == 'XC-2a' (contrast A1-A3, n 10); 4분 판정 동등(그림에 판정 기호 없음), Holm p 0.0000, 풀 'pooled mean of 5 regions: Lena Delta, Canada, W Russia, E Russia, Central Russia (expanded)' (지역 5/5), 설계 '결과 열람 뒤 설계, 재사용 지역의 재검정', 맹검 '비맹검 부분 포함(WF2·WF4·WF8, LGX-N4)', 재표집 10000
+  OK  XC-2b A1-A3 n 40: -1.3534, -1.6448, -0.8047, -0.9967, -1.4213, -0.5876 | 조정 담당 값 (-1.35, -1.64, -0.8, -1.0, -1.42, -0.59) | data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_hyp.csv | hypothesis == 'XC-2b' (contrast A1-A3, n 40); 4분 판정 우세(그림에 판정 기호 없음), Holm p 0.0000, 풀 'pooled mean of 2 regions: Lena Delta, Canada' (부분(지역 2/5)), 설계 '결과 열람 뒤 설계, 재사용 지역의 재검정', 맹검 '비맹검 부분 포함(WF2·WF4·WF8, LGX-N4)', 재표집 10000
+  OK  XC-2c A1-A3 n 160: -1.5136, -1.9911, -0.8820, -1.2860, -1.7843, -0.7970 | 조정 담당 값 (-1.51, -1.99, -0.88, -1.29, -1.78, -0.8) | data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_hyp.csv | hypothesis == 'XC-2c' (contrast A1-A3, n 160); 4분 판정 우세(그림에 판정 기호 없음), Holm p 0.0000, 풀 'pooled mean of 2 regions: Lena Delta, Canada' (부분(지역 2/5)), 설계 '결과 열람 뒤 설계, 재사용 지역의 재검정', 맹검 '비맹검 부분 포함(WF2·WF4·WF8, LGX-N4)', 재표집 10000
+  OK  재보정 Stefan 대비 라벨 10: 평가 지역 7곳, Δ > 0.5 cm 지역 ['Russia_E'] | 기대 ['Russia_E'](xc_sentences.json, 조정 담당 목록); 지역 값 Lena +0.0831 (안 그림; xc_contrasts_main.csv); Canada -0.8445 (안 그림; xc_contrasts_main.csv); Russia_W -0.2770 (안 그림; xc_contrasts_main.csv); Russia_E +1.3375 (그림; xc_contrasts_main.csv); Russia_C_LGD +0.0951 (안 그림; xc_contrasts_main.csv); Tibet_LGD -20.9959 (안 그림; xc_contrasts_aux.csv); Alaska +0.0457 (안 그림; xc_contrasts_aux.csv)
+  OK  재보정 Stefan 대비 라벨 40: 평가 지역 4곳, Δ > 0.5 cm 지역 ['Alaska'] | 기대 ['Alaska'](xc_sentences.json, 조정 담당 목록); 지역 값 Lena +0.2522 (안 그림; xc_contrasts_main.csv); Canada -2.9591 (안 그림; xc_contrasts_main.csv); Tibet_LGD -29.6835 (안 그림; xc_contrasts_aux.csv); Alaska +1.5110 (그림; xc_contrasts_aux.csv)
+  OK  재보정 Stefan 대비 라벨 160: 평가 지역 3곳, Δ > 0.5 cm 지역 ['Alaska', 'Lena'] | 기대 ['Alaska', 'Lena'](xc_sentences.json, 조정 담당 목록); 지역 값 Lena +0.5274 (그림; xc_contrasts_main.csv); Canada -3.5545 (안 그림; xc_contrasts_main.csv); Alaska +2.3396 (그림; xc_contrasts_aux.csv)
+  OK  봉인 문장 XC-2a 의 지역 예외 문자열 ['Russia_E|x Δ +1.34']
+  OK  봉인 문장 XC-2b 의 지역 예외 문자열 ['Alaska|x(선택 계열) Δ +1.51']
+  OK  봉인 문장 XC-2c 의 지역 예외 문자열 ['Lena|x Δ +0.53', 'Alaska|x(선택 계열) Δ +2.34']
+  XC-5b·5c(무작위 대비, 교차검증 선정)와 XC-F3 은 '시험하지 않음(Algorithm P = S1)'이라 행이 없다. 그림 명세 9.3 e 의 셋째 묶음 'vs random, CV selection' 을 두지 않았다.
+  [판단] 0선과 ±0.5 cm 띠는 묶음 행에만 그렸다. 묶음 머리(7 pt, 최대 약 37 mm)가 이름 열(약 13 mm)보다 길어 축 위를 지나가기 때문이다.
+  [판단] 지역 기호는 재보정 Stefan 대비 묶음에만 둔다(등록 비열등 문장의 지역 규칙). 무작위 대비 묶음의 지역 값(레나 +0.21·+0.54, 알래스카 +1.26·+2.26 cm, 보조 표)은 Source Data 와 이 기록에만 둔다. 알래스카 값은 Algorithm P 를 고른 알래스카 계열(선택 계열)이다.
+  묶음 머리 문구는 조정 담당 지시('vs random placement, fixed recipe', 'vs recalibrated Stefan')를 따랐다(명세의 4단어 한도보다 1단어 길다).
+
 [5] 패널 d: 경로 값(서술, 판정 아님)
   anchor_residual  path         pool_Lena_Canada   n    3: +0.1768  (fig2_pool_curves.csv)
   anchor_residual  path         pool_Lena_Canada   n   10: +0.7814  (fig2_pool_curves.csv)
@@ -133,10 +150,10 @@ Fig 7 v3 값 대조와 점검 기록
 [5b] F-17 패널 위계(그림 명세 2절 표의 슬롯 기준: 축 라벨 포함 슬롯 폭 × 높이)
   a 슬롯 3 × 52 × 42 = 6552 mm2, b 슬롯 84 × 63.4 = 5326 mm2, 합 11878 / 28050 = 42% (명세 41%, 기준 35% 이상); 축 자체 면적은 a 3 × 48.8 × 28, b 84 × 61.4 mm. 가장 큰 패널 b
 
-[6] audit_v3(지침 부록 A.1) 결과
+[6] audit_v3(지침 부록 A.1) 결과. 문자 수 한도 760: 그림 명세 9.5 의 600 자에 e(XC)의 묶음 머리 2, 행 이름 5, 지역 열쇠 3, 축 이름을 더했다(Fig 6 의 800 자와 같은 사유 기록)
   fails: []
   sizes: {7.0}
-  chars: 597
+  chars: 725
   thin_lines: []
   titles: []
   boxed_text: 0
@@ -144,12 +161,14 @@ Fig 7 v3 값 대조와 점검 기록
   comma4: []
   long_labels: []
   loose_numbers: []
+  text_overlaps: {'n_texts': 102, 'overlap_pairs': [], 'outside': []}
+  (수치 검사 제외 gid: scale, sizekey, rowname_n(e 의 행 이름 '10 labels' 등, 명세 9.3 e 가 지정한 범주 이름))
 
 [7] pdf_audit(지침 부록 A.2)와 pdffonts
   width_mm: 170.0
   height_mm: 165.0
-  chars: 591
-  sizes: {7.0: 591}
+  chars: 719
+  sizes: {7.0: 719}
   off_size: {}
   lt5: 0
   families: ['LiberationSans']
@@ -163,9 +182,9 @@ Fig 7 v3 값 대조와 점검 기록
   PNG: {'size_px': (4015, 3897), 'dpi': (599.9988, 599.9988)}
 
 [8] 설명문 Fig7_legend.md 점검
-  words 350 (limit 350; without the XC placeholder 333); first sentence words 18
+  words 348 (limit 350; without the XC placeholder 348); first sentence words 18
   dash []; banned []; middot-number []; comma4 []; internal codes []; colour/shape words []; 'This figure' start: False
-  XC placeholder verbatim: True
+  XC placeholder removed: True; e sentence words 45 (limit 45); flag 'designed after results were inspected; re-test in reused regions' present: True
   contains 'Natural Earth': True
   contains 'Cartopy': True
   contains 'stereographic': True

@@ -599,11 +599,13 @@
    },
    "sources": [
     "paper/claims/C1_label0_safety/tables/lgx_tests.csv",
-    "paper/claims/C1_label0_safety/tables/lgw_bundle.csv"
+    "paper/claims/C1_label0_safety/tables/lgw_bundle.csv",
+    "data/processed/xbatch/XG_product_comparison/sealed/xg_tests.csv"
    ],
    "notes": [
     "행을 비교 기준 두 묶음으로 나누었다(행 이름 4단어 이하). 스펙의 4행과 같은 대비",
-    "기존 ALT 지도 행은 값 없이 '결과 대기' 표지(추가 실험 자리표시는 CSV 의 filter 열)"
+    "기존 지도 행은 기존 ALT 지도 비교의 CCI v5 대비(XG-1c, 주 4지역). 값이 +15 cm 이상이라 가로축을 끊어 오른쪽 축(13–32 cm)에 그림",
+    "Wei 지도 대비는 레나델타·캐나다 2지역에서만 있어(미결정) 이 4지역 평균 그림에 넣지 않음(노트)"
    ],
    "audit": {
     "fails": [],
@@ -615,8 +617,8 @@
      "Pretendard-Medium.otf",
      "Pretendard-SemiBold.otf"
     ],
-    "n_text": 16,
-    "chars": 106,
+    "n_text": 19,
+    "chars": 112,
     "overlaps": [],
     "clipped": [],
     "loose_numbers": [],

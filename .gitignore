@@ -134,3 +134,9 @@ results/rescale_*/results_*.tar.gz
 
 # WF(H54) 작업 조각(재생성 가능. 집계 표 wf_*.csv·json 만 추적한다)
 data/processed/wf/shards/
+
+# --- 재생성 가능한 렌더·빌드 산출물(2026-10-05) ---
+paper/manuscript/*/build/
+deck/render/paper_report_pages/
+outputs/figures/paper/_qa/
+*.lock

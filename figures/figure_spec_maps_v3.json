@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "created": "2026-10-05",
+    "revision": "2 (2026-10-05 review: map narrative a P1, b correction, c R1, d training range; native-grid cell mesh; slide size 12.0 x <=5.2 in; XL two-row comparison; XK categorical support axis)",
+    "scope": "ALT 1 km maps (Alaska, Lena Delta), XK support-scale error, XL product comparison and display-resolution figures. Paper v3 comparison folder and report deck assets",
+    "style_refs": ["design/journal_grade_style_guide.md 2.6, 2.7, 2.8, 2.11, 2.13, 5.3", "design/brand_tokens.json", "scripts/4_visualization/paper_v3/style.py"],
+    "scripts": ["scripts/4_visualization/paper_v3/maps_alt_v3.py", "scripts/4_visualization/paper_v3/xl_map_products_fig.py", "scripts/4_visualization/paper_v3/xk_support_scale_fig.py"],
+    "inputs_not_recomputed": "figures reuse the saved prediction and summary tables; no prediction was rerun for revision 2"
+  },
+  "common": {
+    "paper": {"width_mm": 170, "max_height_mm": 180, "font": "Liberation Sans 7 pt", "min_line_pt": 1.0,
+              "labels": "panel letters only on map figures; short noun labels where a figure is a matrix (XL product names, XK region names)",
+              "export": ["pdf (fonttype 42, text vector, only cell meshes and hatch layers rasterised at 600 dpi)", "png 600 dpi", "svg only for XK (map SVGs dropped, 34-40 MB each)"]},
+    "slide": {"max_size_in": [12.0, 5.2], "dpi": 300, "font": "Pretendard Medium; ticks and titles 16 pt, colour-bar labels 16 pt (14 pt for vertical XL bars), grey annotations 12-14 pt",
+              "rules": "all legends and labels inside the canvas, colour bars directly under or beside their panels, coordinates once per row"},
+    "colormaps": {"alt": "cmcrameri oslo_r truncated 0.12-0.90, 250 levels; range = 1st-99th percentile of the panels sharing it, rounded outward to 5 cm (XL top row: pooled 2nd-98th percentile)",
+                  "difference": "cmcrameri broc, TwoSlopeNorm(vcenter=0), symmetric; vmax = 99th percentile of |values| rounded up to 5 cm (XL product differences: pooled 98th percentile)",
+                  "levels_note": "250-level LUT keeps each PDF raster at <=256 colours (indexed image)"},
+    "cells": "native 0.009 deg x 0.009/cos(phi) deg rectangles drawn as one QuadMesh per panel (rows stacked, zero-height gap rows transparent); no resampling",
+    "masks": {"water_sea": "#ffffff", "no_data_land": "#B8BEC6", "outside_domain_land": "#f4f4f4", "mapped_cells_in_range_panel": "#e6e6e6",
+              "extrapolation": "hatching by number of covariates outside the 0.5-99.5 percentile range of the training rows: '//' 1, '////' 2, 'xxx' 3 or more (#9a9a9a, 1.0 pt), key drawn as a hatched colour bar"},
+    "basemap": "Natural Earth 10 m land #f4f4f4 and coastline #bdbdbd 1.0 pt, clipped to the region and simplified (Alaska 0.01 deg, Lena 0.002 deg); graticule #e0e0e0 1.0 pt",
+    "scale_bar": "placed in a map corner with no coloured cells and no coastline points (automatic check); otherwise below a panel frame that has no coordinate labels",
+    "location_inset": "pan-Arctic inset in an empty map corner, otherwise outside the maps (paper: above the shared ALT colour bar); omitted on slides when no corner is empty",
+    "label_cells": "black dots in the training-range panel only"
+  },
+  "Alaska_ALT_map_v3": {
+    "message": "a + b = c: the residual ML correction is a few cm and varies at the ERA5-Land grid scale; 73 % of the mapped area lies outside the training covariate range",
+    "projection": "NAD83 / Alaska Albers (EPSG:3338)",
+    "panels": {"a": "recalibrated Stefan ALT (P1, E 1.617)", "b": "ML correction R1 - P1 (+/-10 cm)", "c": "residual ML ALT (R1, lambda 0.5), shared scale with a (35-75 cm)",
+               "d": "training range (covariates outside range, label cells)"},
+    "layout_paper": "2 x 2, 170 x 130.5 mm; vertical colour bar for a and c between the columns, vertical bar for b and hatched key for d on the right",
+    "layout_slide": "1 x 4, 12.0 x 4.1 in, colour bars under panels, scale bar under b, legend entries under d",
+    "interval": "constant +/-20.2 cm stated in the legend with its limitation, not mapped",
+    "inputs": ["data/processed/map_alaska/alaska_pred_v1.csv.gz", "data/processed/map_alaska/alaska_pred_v1_meta.json"]
+  },
+  "Lena_ALT_map_v3": {
+    "message": "same structure as Alaska; climate-row banding visible in a; 84 % of the mapped area outside the training range",
+    "projection": "polar stereographic, central meridian 126.7 deg E, true scale 70 deg N",
+    "panels": {"a": "recalibrated Stefan ALT (P1_all, E 1.435)", "b": "ML correction R1_all - P1_all (+/-10 cm)", "c": "residual ML ALT (h49 panel c), shared scale with a (35-50 cm)",
+               "d": "training range (training rows = source cells and Lena labels)"},
+    "dropped": "source Stefan interval panel (h49 panels a, d); the final constant +/-25.4 cm interval is stated in the legend",
+    "inputs": ["data/processed/map_lena/lena_pred_v1.csv.gz", "data/processed/map_lena/lena_final_extras_v1.csv.gz"]
+  },
+  "XL_product_differences": {
+    "message": "product levels on one scale (top) and product minus residual ML on one diverging scale (bottom); Stefan minus residual ML on its own +/-10 cm scale",
+    "top_row": "residual ML, CCI v5, Wei 2026, Aalto 2018, Yi-Kimball (Alaska); grey text under each map: area mean and Pearson r against the residual ML map (from xl_summary_v1.csv; numbers in the figure by explicit review request)",
+    "bottom_row": "Stefan - residual ML, product - residual ML; titles use U+2212",
+    "ranges": {"alaska": {"top": [0, 240], "product_diff": 190, "stefan_diff": 10}, "lena": {"top": [25, 75], "product_diff": 35, "stefan_diff": 10}},
+    "layout_paper": "2 rows, horizontal colour bars (top row shared, bottom row: Stefan own + products shared), scale bar below the last panel",
+    "layout_slide": "2 rows, vertical colour bars, two-line bottom titles, 12.0 x 4.8 in (Alaska) and 12.0 x 5.2 in (Lena)",
+    "inputs": ["data/processed/xbatch/XL_map_products/xl_{alaska,lena}_products_v1.csv.gz", "data/processed/xbatch/XL_map_products/xl_summary_v1.csv"]
+  },
+  "XL_display_resolution": {
+    "message": "the 1 km map is nearly constant within ERA5-Land 0.1 deg cells (Alaska) and carries weak within-cell detail (Lena)",
+    "panels": "a Alaska 1 km, b Alaska 0.1 deg mean (50 x 50 km around the label-richest block, ERA5 cell boundaries in white), c Lena 1 km, d Lena 0.1 deg mean; equal square panels; native-cell mesh",
+    "colour": "one bar per region, 1st-99th percentile of both panels in 2 cm steps (Alaska 42-54, Lena 38-48 cm)"
+  },
+  "XK_support_scale": {
+    "message": "RMSE versus aggregation size; Stefan minus residual ML difference by size (descriptive, no verdict words)",
+    "layout": "2 rows x 3 regions; x = categorical, evenly spaced (1 km, 0.05, 0.1, 0.25 deg) with grey grid-cell counts under the ticks",
+    "top": "cell-weighted RMSE, log axis 8-100 cm shared; CI bands (alpha 0.15) for recalibrated Stefan and residual ML only; cell sets with_yk (Alaska), common (Lena, Canada)",
+    "bottom": "RMSE(Stefan) - RMSE(residual ML) with 95 % block bootstrap CIs, cell-weighted (filled, 2.0 pt) and block-equal (open, 1.0 pt), zero line; cell set models; shared y -5 to 6 cm",
+    "colours": {"P1": "#2b5c8f", "R1": "#9a7bc9", "CCI v4": "#a6761d dashed", "CCI v5": "#a6761d", "Wei 2026": "#1b7f79", "Yi-Kimball": "#5f6b2f dash-dot"},
+    "inputs": ["data/processed/xbatch/XK_support_scale/xk_support_scale_v1.csv"]
+  }
+}

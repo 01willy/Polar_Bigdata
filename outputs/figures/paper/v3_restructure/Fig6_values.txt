@@ -1,0 +1,266 @@
+Fig 6 v3 수치·점검 기록
+
+작성: scripts/4_visualization/paper_v3/fig6.py 실행 때 자동 생성. 그림 명세 FIGURE_SPEC_v3.md 8절, 지침 2절·6.6절·7.1절.
+
+[1] 원천 파일(등록)과 sha256
+- results/rescale_lg/data/processed/lg/lg_curve.csv  bf39776bb60bb93f…
+- data/processed/lgd/lgd_curve_lic.csv  06a5c71a5832b224…
+- data/processed/wf/wf0_risk.csv  a2b6656fa97d566f…
+- data/processed/paper_figs/fig6_a.csv  35a8efc870daabb3…
+- data/processed/paper_figs/fig6_b.csv  d8dd463033366751…
+- data/processed/paper_figs/fig6_d.csv  bb19f8a9cd06c4cb…
+- data/processed/lgw/lgw_bundle.csv  eda4ccac9915ccef…
+- data/processed/lgx/lgx_tests.csv  f60b3c6f558d6ae8…
+- data/processed/lgt/lgt_tests.csv  beb43652682fd4a9…
+- data/processed/lgf/lgf_tests.csv  ab363038bcf91a40…
+- data/processed/lgf/lgfn_tests.csv  a38c117b2ba7590c…
+- data/processed/lgu/lgu_b_intervals.csv  08beb3497c92e972…
+- data/processed/lgx/lgx_conformal.csv  13d3926cce3bf1fd…
+- data/processed/paper_figs/table1_rows.csv  15ab95ad2f55eee2…
+- data/processed/cci_pfr_mean_1997_2021.nc  68c307013335ec81…
+- data/processed/fidelity_base_v3.csv  71b5d3f6c297770d…
+- data/processed/lg_subregion_map_v1.csv  87bd06f98bb1d141…
+- data/processed/lgu/lgu_b_meta.json  26b53d24490a068f…
+- data/processed/lgx/lgx_meta.json  fcd577215496d653…
+- outputs/figures/paper/CAPTIONS.md  d4fd466c9ed59453…
+- data/processed/xbatch/XG_product_comparison/sealed/xg_tests.csv  20240b322e05615b…
+- data/processed/xbatch/XG_product_comparison/sealed/xg_summary_meta.json  e32032ac12610436…
+- data/processed/lgd/run_tables/Russia_C/fidelity_base_v3.csv  6a8ab259d10f3c07…
+- data/processed/lgd/run_tables/Tibet/fidelity_base_v3.csv  58e4db50f71b96a9…
+- a·b 행 필터: wf0_reanalysis.load()(placement == cell, alpha == 1, learner ∈ {catboost_lo, none}, point_only != True, LGD 는 KEEP_LGD),
+  deltas() 의 n == 0 행에서 D0_1.0, D1_1.0 (= 방법 rmse − rmse_p0, cm). 지도는 target ∈ {독립 7, 하위 지역 10} × 모드 x(D-9).
+- 대상 중심: 지역은 fidelity_base_v3.csv 의 macro == 지역, 하위 지역은 lg_subregion_map_v1.csv 의 sub == ID, LGD 대상은 실행 표의 macro.
+- c 행 필터: fig6_a.csv (block, key, variant) 14쌍(모듈 FOREST) + 봉인 xg_tests.csv 의 hypothesis XG-1c, XG-1w 2행(모듈 FOREST_XG; 주 열 delta·ci_lo·ci_hi·delta_blockeq·ci_lo_beq·ci_hi_beq = 5 km 블록 마스크). d: fig6_b.csv method ∈ 5종, kind ∈ {region, mean4}. e: fig6_d.csv 6행.
+- 계열 대응(코드 안에서만): D0 = Direct ML, D1 = Physics pseudo-labels, P* = Year-matched Stefan, B:ens = Anchor ensemble, F1k = CatBoost, physics inputs,
+  R1 λ 0.25 = Anchor + residual ML(e), 구간 척도화 const/phys/nflow/nflow#placebo/cbq = Constant/Physics prior/Normalizing flow/Permuted flow/CatBoost quantile.
+
+[2] 그린 수치 전수 대조(그림 객체 → 자료 표; 자료 표 → 원천 표는 [3])
+- 그림 객체에서 읽은 수치 206개, 요소 128개, 불일치 0개 (통과)
+- 통과 | a | main map circle colour | CA-2 | 값 -5.4816 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'CA-2|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | main map circle colour | CA-3 | 값 2.3116 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'CA-3|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | main map circle colour | Canada | 값 -1.5565 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'Canada|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | main map circle colour | LE-1 | 값 1.8307 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'LE-1|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | main map circle colour | LE-2 | 값 6.9998 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'LE-2|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | main map circle colour | Lena | 값 4.0161 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'Lena|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | main map circle colour | Russia_C | 값 2.7478 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'Russia_C|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | main map circle colour | Russia_E | 값 4.4758 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'Russia_E|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | main map circle colour | Russia_W | 값 2.0483 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'Russia_W|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | Tibet inset circle colour | Tibet_LGD | 값 -59.9836 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'Tibet_LGD|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | Alaska enlargement circle colour | Alaska | 값 20.7931 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'Alaska|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | Alaska enlargement circle colour | AL-1 | 값 6.1590 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'AL-1|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | Alaska enlargement circle colour | AL-2 | 값 2.6365 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'AL-2|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | Alaska enlargement circle colour | AL-3 | 값 11.8347 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'AL-3|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | Alaska enlargement circle colour | AL-4 | 값 38.4617 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'AL-4|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | Alaska enlargement circle colour | AL-5 | 값 20.6312 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'AL-5|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | a | Alaska enlargement circle colour | AL-6 | 값 36.7546 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'AL-6|x', column D0_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | main map circle colour | CA-2 | 값 -0.7570 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'CA-2|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | main map circle colour | CA-3 | 값 0.3357 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'CA-3|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | main map circle colour | Canada | 값 -0.2224 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'Canada|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | main map circle colour | LE-1 | 값 -0.0052 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'LE-1|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | main map circle colour | LE-2 | 값 -0.1285 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'LE-2|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | main map circle colour | Lena | 값 0.1828 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'Lena|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | main map circle colour | Russia_C | 값 2.4932 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'Russia_C|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | main map circle colour | Russia_E | 값 0.7022 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'Russia_E|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | main map circle colour | Russia_W | 값 -1.8170 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'Russia_W|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | Tibet inset circle colour | Tibet_LGD | 값 -2.4192 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'Tibet_LGD|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | Alaska enlargement circle colour | Alaska | 값 1.7902 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'Alaska|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | Alaska enlargement circle colour | AL-1 | 값 0.3957 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'AL-1|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | Alaska enlargement circle colour | AL-2 | 값 -0.0193 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'AL-2|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | Alaska enlargement circle colour | AL-3 | 값 0.2009 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'AL-3|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | Alaska enlargement circle colour | AL-4 | 값 3.8865 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'AL-4|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | Alaska enlargement circle colour | AL-5 | 값 1.7244 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'AL-5|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | b | Alaska enlargement circle colour | AL-6 | 값 1.3348 | wf0_reanalysis.load()+deltas() ← results/rescale_lg/data/processed/lg/lg_curve.csv, data/processed/lgd/lgd_curve_lic.csv | n == 0, target == 'AL-6|x', column D1_1.0 (= rmse − rmse_p0; placement cell, alpha 1, learner catboost_lo, lam 1.0)
+- 통과 | c | cell-weighted 95% CI | Year-matched Stefan | 값 -1.3456, -0.3200 | data/processed/paper_figs/fig6_a.csv | block == 'baselines', key == 'P*', variant == 'solid' → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | Year-matched Stefan | 값 -0.7401, -0.0819 | data/processed/paper_figs/fig6_a.csv | block == 'baselines', key == 'P*', variant == 'solid' → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | Year-matched Stefan | 값 -0.9968 | data/processed/paper_figs/fig6_a.csv | block == 'baselines', key == 'P*', variant == 'solid' → delta
+- 통과 | c | cell-weighted 95% CI | Anchor ensemble | 값 -3.3267, -0.9147 | data/processed/paper_figs/fig6_a.csv | block == 'baselines', key == 'B:ens', variant == 'solid' → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | Anchor ensemble | 값 -0.9385, 1.0133 | data/processed/paper_figs/fig6_a.csv | block == 'baselines', key == 'B:ens', variant == 'solid' → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | Anchor ensemble | 값 -2.7309 | data/processed/paper_figs/fig6_a.csv | block == 'baselines', key == 'B:ens', variant == 'solid' → delta
+- 통과 | c | cell-weighted 95% CI | CatBoost, main | 값 1.1004, 3.4212 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'catboost_lo', variant == 'solid' → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | CatBoost, main | 값 0.5155, 2.6878 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'catboost_lo', variant == 'solid' → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | CatBoost, main | 값 2.2459 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'catboost_lo', variant == 'solid' → delta
+- 통과 | c | cell-weighted 95% CI | CatBoost, larger | 값 0.8794, 3.4345 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'catboost', variant == 'solid' → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | CatBoost, larger | 값 0.2952, 2.7556 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'catboost', variant == 'solid' → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | CatBoost, larger | 값 1.9368 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'catboost', variant == 'solid' → delta
+- 통과 | c | cell-weighted 95% CI | CatBoost, tuned | 값 0.6488, 2.6906 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'catboost_tuned', variant == 'solid' → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | CatBoost, tuned | 값 0.5623, 2.6412 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'catboost_tuned', variant == 'solid' → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | CatBoost, tuned | 값 1.5943 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'catboost_tuned', variant == 'solid' → delta
+- 통과 | c | cell-weighted 95% CI | Random forest | 값 1.4748, 3.9553 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'rf', variant == 'solid' → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | Random forest | 값 0.9914, 3.0611 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'rf', variant == 'solid' → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | Random forest | 값 2.6283 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'rf', variant == 'solid' → delta
+- 통과 | c | cell-weighted 95% CI | CatBoost, physics inputs | 값 1.3760, 4.3583 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'F1k', variant == 'solid' → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | CatBoost, physics inputs | 값 1.5740, 3.8484 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'F1k', variant == 'solid' → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | CatBoost, physics inputs | 값 2.6244 | data/processed/paper_figs/fig6_a.csv | block == 'direct_rescale', key == 'F1k', variant == 'solid' → delta
+- 통과 | c | cell-weighted 95% CI | TabPFN v2 | 값 0.2301, 2.3536 | data/processed/paper_figs/fig6_a.csv | block == 'lgt', key == 'tabpfn', variant == 'solid' → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | TabPFN v2 | 값 0.2719, 2.1460 | data/processed/paper_figs/fig6_a.csv | block == 'lgt', key == 'tabpfn', variant == 'solid' → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | TabPFN v2 | 값 1.0194 | data/processed/paper_figs/fig6_a.csv | block == 'lgt', key == 'tabpfn', variant == 'solid' → delta
+- 통과 | c | cell-weighted 95% CI | TabICL v2 | 값 0.2800, 3.1250 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_f', key == 'tabicl', variant == 'solid' → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | TabICL v2 | 값 1.3526, 3.5456 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_f', key == 'tabicl', variant == 'solid' → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | TabICL v2 | 값 0.9282 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_f', key == 'tabicl', variant == 'solid' → delta
+- 통과 | c | cell-weighted 95% CI | TabICL v2, full context | 값 0.0745, 3.1945 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_f', key == 'tabicl', variant == 'dashed' → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | TabICL v2, full context | 값 1.0856, 3.4451 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_f', key == 'tabicl', variant == 'dashed' → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | TabICL v2, full context | 값 0.8525 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_f', key == 'tabicl', variant == 'dashed' → delta
+- 통과 | c | cell-weighted 95% CI | MLP | 값 1.6243, 4.1055 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_n', key == 'mlp', variant == 'solid' → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | MLP | 값 0.9464, 3.1868 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_n', key == 'mlp', variant == 'solid' → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | MLP | 값 2.4518 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_n', key == 'mlp', variant == 'solid' → delta
+- 통과 | c | cell-weighted 95% CI | Multi-head MLP | 값 1.5806, 4.7313 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_n', key == 'tabm', variant == 'solid' → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | Multi-head MLP | 값 2.6803, 5.2899 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_n', key == 'tabm', variant == 'solid' → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | Multi-head MLP | 값 2.4359 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_n', key == 'tabm', variant == 'solid' → delta
+- 통과 | c | cell-weighted 95% CI | FT-Transformer, reduced | 값 3.2829, 5.6346 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_n', key == 'ftt', variant == 'solid' → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | FT-Transformer, reduced | 값 3.4390, 5.7584 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_n', key == 'ftt', variant == 'solid' → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | FT-Transformer, reduced | 값 4.1296 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_n', key == 'ftt', variant == 'solid' → delta
+- 통과 | c | cell-weighted 95% CI | RealMLP | 값 4.0697, 7.1680 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_n', key == 'realmlp', variant == 'solid' → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | RealMLP | 값 4.6048, 7.2507 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_n', key == 'realmlp', variant == 'solid' → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | RealMLP | 값 5.2141 | data/processed/paper_figs/fig6_a.csv | block == 'lgf_n', key == 'realmlp', variant == 'solid' → delta
+- 통과 | c | cell-weighted 95% CI | Wei v2, two regions | 값 -0.0155, 4.2998 | data/processed/xbatch/XG_product_comparison/sealed/xg_tests.csv | hypothesis == 'XG-1w' (main columns = 5 km block mask) → ci_lo, ci_hi
+- 통과 | c | block-equal 95% CI | Wei v2, two regions | 값 2.0990, 6.1220 | data/processed/xbatch/XG_product_comparison/sealed/xg_tests.csv | hypothesis == 'XG-1w' (main columns = 5 km block mask) → ci_lo_beq, ci_hi_beq
+- 통과 | c | point estimate | Wei v2, two regions | 값 1.4373 | data/processed/xbatch/XG_product_comparison/sealed/xg_tests.csv | hypothesis == 'XG-1w' (main columns = 5 km block mask) → delta
+- 통과 | d | regional value (x, y) | cbq / Lena | 값 126.2230, 0.9721 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'cbq', target == 'Lena' → wid10, cov10
+- 통과 | d | regional value (x, y) | const / Lena | 값 73.2547, 0.8898 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'const', target == 'Lena' → wid10, cov10
+- 통과 | d | regional value (x, y) | nflow / Lena | 값 71.0912, 0.8665 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'nflow', target == 'Lena' → wid10, cov10
+- 통과 | d | regional value (x, y) | nflow#placebo / Lena | 값 70.1569, 0.8642 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'nflow#placebo', target == 'Lena' → wid10, cov10
+- 통과 | d | regional value (x, y) | phys / Lena | 값 76.6464, 0.8932 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'phys', target == 'Lena' → wid10, cov10
+- 통과 | d | regional value (x, y) | cbq / Canada | 값 126.1164, 0.9496 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'cbq', target == 'Canada' → wid10, cov10
+- 통과 | d | regional value (x, y) | const / Canada | 값 96.4964, 0.8902 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'const', target == 'Canada' → wid10, cov10
+- 통과 | d | regional value (x, y) | nflow / Canada | 값 109.3355, 0.9050 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'nflow', target == 'Canada' → wid10, cov10
+- 통과 | d | regional value (x, y) | nflow#placebo / Canada | 값 108.4841, 0.9109 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'nflow#placebo', target == 'Canada' → wid10, cov10
+- 통과 | d | regional value (x, y) | phys / Canada | 값 95.7388, 0.8849 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'phys', target == 'Canada' → wid10, cov10
+- 통과 | d | regional value (x, y) | cbq / Russia_W | 값 122.8964, 0.9286 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'cbq', target == 'Russia_W' → wid10, cov10
+- 통과 | d | regional value (x, y) | const / Russia_W | 값 72.3295, 0.7500 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'const', target == 'Russia_W' → wid10, cov10
+- 통과 | d | regional value (x, y) | nflow / Russia_W | 값 86.7441, 0.8333 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'nflow', target == 'Russia_W' → wid10, cov10
+- 통과 | d | regional value (x, y) | nflow#placebo / Russia_W | 값 87.2409, 0.8143 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'nflow#placebo', target == 'Russia_W' → wid10, cov10
+- 통과 | d | regional value (x, y) | phys / Russia_W | 값 75.2584, 0.7857 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'phys', target == 'Russia_W' → wid10, cov10
+- 통과 | d | regional value (x, y) | cbq / Russia_E | 값 154.5058, 0.9630 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'cbq', target == 'Russia_E' → wid10, cov10
+- 통과 | d | regional value (x, y) | const / Russia_E | 값 83.0770, 0.9259 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'const', target == 'Russia_E' → wid10, cov10
+- 통과 | d | regional value (x, y) | nflow / Russia_E | 값 116.8826, 0.9630 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'nflow', target == 'Russia_E' → wid10, cov10
+- 통과 | d | regional value (x, y) | nflow#placebo / Russia_E | 값 113.9000, 0.9593 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'nflow#placebo', target == 'Russia_E' → wid10, cov10
+- 통과 | d | regional value (x, y) | phys / Russia_E | 값 84.2655, 0.9259 | data/processed/paper_figs/fig6_b.csv | kind == 'region', method == 'phys', target == 'Russia_E' → wid10, cov10
+- 통과 | d | width 95% interval | const | 값 79.0745, 83.3809 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'const' → wid10_lo1, wid10_hi1
+- 통과 | d | coverage 95% interval | const | 값 0.8058, 0.9183 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'const' → cov10_lo1, cov10_hi1
+- 통과 | d | four-region mean (x, y) | const | 값 81.2894, 0.8640 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'const' → wid10, cov10
+- 통과 | d | width 95% interval | phys | 값 80.5135, 85.4322 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'phys' → wid10_lo1, wid10_hi1
+- 통과 | d | coverage 95% interval | phys | 값 0.8143, 0.9263 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'phys' → cov10_lo1, cov10_hi1
+- 통과 | d | four-region mean (x, y) | phys | 값 82.9773, 0.8724 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'phys' → wid10, cov10
+- 통과 | d | width 95% interval | nflow | 값 93.4136, 98.7328 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'nflow' → wid10_lo1, wid10_hi1
+- 통과 | d | coverage 95% interval | nflow | 값 0.8515, 0.9296 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'nflow' → cov10_lo1, cov10_hi1
+- 통과 | d | four-region mean (x, y) | nflow | 값 96.0133, 0.8919 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'nflow' → wid10, cov10
+- 통과 | d | width 95% interval | nflow#placebo | 값 92.2639, 97.3652 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'nflow#placebo' → wid10_lo1, wid10_hi1
+- 통과 | d | coverage 95% interval | nflow#placebo | 값 0.8458, 0.9258 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'nflow#placebo' → cov10_lo1, cov10_hi1
+- 통과 | d | four-region mean (x, y) | nflow#placebo | 값 94.9455, 0.8872 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'nflow#placebo' → wid10, cov10
+- 통과 | d | width 95% interval | cbq | 값 125.3893, 139.4696 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'cbq' → wid10_lo1, wid10_hi1
+- 통과 | d | coverage 95% interval | cbq | 값 0.9276, 0.9763 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'cbq' → cov10_lo1, cov10_hi1
+- 통과 | d | four-region mean (x, y) | cbq | 값 132.4354, 0.9533 | data/processed/paper_figs/fig6_b.csv | kind == 'mean4', method == 'cbq' → wid10, cov10
+- 통과 | e | coverage 95% interval | Alaska n=160 | 값 0.8297, 0.9198 | data/processed/paper_figs/fig6_d.csv | target == 'Alaska', n == 160 → cov_lo, cov_hi
+- 통과 | e | point (x, y) | Alaska n=160 | 값 0.5560, 0.8982 | data/processed/paper_figs/fig6_d.csv | target == 'Alaska', n == 160 → width_ratio, coverage
+- 통과 | e | coverage 95% interval | Alaska n=40 | 값 0.8235, 0.9153 | data/processed/paper_figs/fig6_d.csv | target == 'Alaska', n == 40 → cov_lo, cov_hi
+- 통과 | e | point (x, y) | Alaska n=40 | 값 0.6073, 0.8914 | data/processed/paper_figs/fig6_d.csv | target == 'Alaska', n == 40 → width_ratio, coverage
+- 통과 | e | coverage 95% interval | Canada n=160 | 값 0.7946, 0.9110 | data/processed/paper_figs/fig6_d.csv | target == 'Canada', n == 160 → cov_lo, cov_hi
+- 통과 | e | point (x, y) | Canada n=160 | 값 0.8203, 0.8351 | data/processed/paper_figs/fig6_d.csv | target == 'Canada', n == 160 → width_ratio, coverage
+- 통과 | e | coverage 95% interval | Canada n=40 | 값 0.8075, 0.9179 | data/processed/paper_figs/fig6_d.csv | target == 'Canada', n == 40 → cov_lo, cov_hi
+- 통과 | e | point (x, y) | Canada n=40 | 값 0.8812, 0.8475 | data/processed/paper_figs/fig6_d.csv | target == 'Canada', n == 40 → width_ratio, coverage
+- 통과 | e | coverage 95% interval | Lena n=160 | 값 0.8153, 0.9186 | data/processed/paper_figs/fig6_d.csv | target == 'Lena', n == 160 → cov_lo, cov_hi
+- 통과 | e | point (x, y) | Lena n=160 | 값 0.9735, 0.8984 | data/processed/paper_figs/fig6_d.csv | target == 'Lena', n == 160 → width_ratio, coverage
+- 통과 | e | coverage 95% interval | Lena n=40 | 값 0.8138, 0.9146 | data/processed/paper_figs/fig6_d.csv | target == 'Lena', n == 40 → cov_lo, cov_hi
+- 통과 | e | point (x, y) | Lena n=40 | 값 0.9097, 0.8940 | data/processed/paper_figs/fig6_d.csv | target == 'Lena', n == 40 → width_ratio, coverage
+- 통과 | c | off-axis point estimate (printed, 0.1 cm) | ESA CCI v5 | 값 23.8000 | data/processed/xbatch/XG_product_comparison/sealed/xg_tests.csv | hypothesis == 'XG-1c' → delta
+- 통과 | c | off-axis: both 95% CI lower bounds > axis end | ESA CCI v5 | 값 15.3439, 14.8298 | data/processed/xbatch/XG_product_comparison/sealed/xg_tests.csv | ci_lo, ci_lo_beq > 7.6 cm
+- 기준선·띠(자료 아님): c 0선 0 cm 와 ±0.5 cm 띠(지침 2.3), d 명목 포함률 0.90 선, e 명목 띠 0.85–0.95(그림 명세 8.3), 컬러바 눈금 [-40, -20, 0, 20, 40] cm, 축척 1000 km(본 지도)·500 km(알래스카 확대도)·200 km(티베트 삽도), 위도 라벨 60·70·80° N.
+
+[3] 원천 대조와 설명문 수치
+- 통과: 지도 Δ = 원천 곡선 직접 필터(rmse − rmse_p0). 17대상 × 2방법 = 34개, 최대 차 0 cm
+- 통과: 설명문 '18 with direct ML', '2 with physics pseudo-labels' = wf0_risk.csv n_worse_2cm = 30대상 재집계. wf0_risk n==0: D0_1.0 18/30, D1_1.0 2/30; 재집계 {'D0_1.0': 18, 'D1_1.0': 2}, 30대상 30
+- 통과: 지도 17대상 = 모드 x 독립 7 + 하위 지역 10(D-9), 나머지 13 은 모드 i 10 + 확충판 3. 지도 밖 13: ['AL-1|i', 'AL-2|i', 'AL-3|i', 'AL-4|i', 'AL-5|i', 'AL-6|i', 'CA-2|i', 'CA-3|i', 'Canada~exp~lic|x', 'LE-1|i', 'LE-2|i', 'Russia_E~exp|x', 'Russia_W~exp~lic|x']
+- 통과: 대상 중심 셀 수 = Table 1 label_rows(주 지역 5). Lena 3037/3037; Canada 750/750; Russia_W 31/31; Russia_E 30/30; Alaska 13606/13606
+- 통과: LGD 대상 중심(실행 표) 대 fidelity_base_v4 직접 집계(기록용). Russia_C: 실행 표 57셀 / v4 58셀 (70.79, 114.096); Tibet_LGD: 실행 표 132셀 / v4 132셀 (34.522, 93.03). 러시아 중부는 1셀 차(실행 표가 LGD 입력이므로 실행 표 값을 쓴다)
+- 통과: 알래스카 하위 지역 6개 셀 수 합 = 알래스카 셀 수. AL-1–AL-6 합 13606, Alaska 13606; 하위 지역 셀 수 {'AL-1': 5154, 'AL-2': 3491, 'AL-3': 651, 'AL-4': 471, 'AL-5': 619, 'AL-6': 3220, 'CA-2': 395, 'CA-3': 349, 'LE-1': 1786, 'LE-2': 1251}
+- 통과: 포레스트 16행 = 원천 판정 표(6값씩 96개). 최대 차 4.4e-16 cm; Year-matched Stefan: lgx_tests.csv [test_id == 'L29', contrast == 'P0@tddm-P0|n0', target == MEAN4] 차 0.0e+00; Anchor ensemble: lgw_bundle.csv [ab == 'AB2', target == MEAN4] 차 0.0e+00; CatBoost, main: lgw_bundle.csv [ab == 'AB1', target == MEAN4] 차 0.0e+00; CatBoost, larger: lgx_tests.csv [test_id == 'L30', contrast == 'D0[catboost]-P0|n0', target == MEAN4] 차 0.0e+00; CatBoost, tuned: lgx_tests.csv [test_id == 'L30', contrast == 'D0[catboost_tuned]-P0|n0', target == MEAN4] 차 0.0e+00; Random forest: lgx_tests.csv [test_id == 'L30', contrast == 'D0[rf]-P0|n0', target == MEAN4] 차 4.4e-16; CatBoost, physics inputs: lgx_tests.csv [test_id == 'L11', contrast == 'F1k-P0|n0', target == MEAN4] 차 0.0e+00; TabPFN v2: lgt_tests.csv [test_id == 'L34', contrast == 'D0[T]-P0|n0', target == MEAN4] 차 0.0e+00; TabICL v2: lgf_tests.csv [test_id == 'LGF-F1', contrast == 'D0[I]-P0|n0', target == MEAN4] 차 0.0e+00; TabICL v2, full context: lgf_tests.csv [test_id == 'LGF-F1', contrast == 'D0@full[I]-P0|n0', target == MEAN4] 차 0.0e+00; MLP: lgfn_tests.csv [test_id == 'LGF-N1', contrast == 'D0[mlp*]-P0|n0', target == MEAN4] 차 0.0e+00; Multi-head MLP: lgfn_tests.csv [test_id == 'LGF-N1', contrast == 'D0[tabm*]-P0|n0', target == MEAN4] 차 0.0e+00; FT-Transformer, reduced: lgfn_tests.csv [test_id == 'LGF-N1', contrast == 'D0[ftt*]-P0|n0', target == MEAN4] 차 0.0e+00; RealMLP: lgfn_tests.csv [test_id == 'LGF-N1', contrast == 'D0[realmlp*]-P0|n0', target == MEAN4] 차 0.0e+00; ESA CCI v5: xg_tests.csv [hypothesis == 'XG-1c'] 차 0.0e+00; Wei v2, two regions: xg_tests.csv [hypothesis == 'XG-1w'] 차 0.0e+00
+- 통과: 포레스트 재표집 10000회, 4지역 층화 평균. nboot [10000]
+- 통과: 설명문 CatBoost 2.25 [1.10, 3.42], Holm P 0.023. fig6_a catboost_lo 2.2459 [1.1004, 3.4212]; lgw_bundle AB1 holm_p 0.023
+- 통과: 설명문 '2.44–5.21 cm' = 두 CI 판정이 같은 6행(rf, 물리 출력 입력 CatBoost(F1k, C1 README 2.1 보조), mlp, tabm, ftt, realmlp)의 Δ 범위, 6행 모두 두 가중 CI 하한 > 0 이고 분할 독립 가정 의존 표지 없음. Random forest 2.6283 [1.47, 3.96] / [0.99, 3.06]; CatBoost, physics inputs 2.6244 [1.38, 4.36] / [1.57, 3.85]; MLP 2.4518 [1.62, 4.11] / [0.95, 3.19]; Multi-head MLP 2.4359 [1.58, 4.73] / [2.68, 5.29]; FT-Transformer, reduced 4.1296 [3.28, 5.63] / [3.44, 5.76]; RealMLP 5.2141 [4.07, 7.17] / [4.60, 7.25]
+- 통과: 설명문 'The other five learners ... gave the same verdict under the primary intervals' = 6행(TabICL 두 조건) 모두 주 CI 의 두 가중 하한 > 0. CatBoost, main [1.10, 3.42] / [0.52, 2.69]; CatBoost, larger [0.88, 3.43] / [0.30, 2.76]; CatBoost, tuned [0.65, 2.69] / [0.56, 2.64]; TabPFN v2 [0.23, 2.35] / [0.27, 2.15]; TabICL v2 [0.28, 3.12] / [1.35, 3.55]; TabICL v2, full context [0.07, 3.19] / [1.09, 3.45]
+- 통과: 설명문 연도 정합 Stefan 'lower error' = 두 가중 CI 상한 < 0. [-1.35, -0.32] / [-0.74, -0.08]
+- 통과: 설명문 앙상블 정의 'mean of scale-calibrated Stefan, Kudryavtsev and ESA CCI anchors' = CAPTIONS.md v2/Fig6 의 B:ens 정의. outputs/figures/paper/CAPTIONS.md 문자열 포함 여부
+- 통과: 분할 독립 가정 의존 행 = CatBoost 3설정, TabPFN v2, TabICL v2 두 조건, 연도 정합 Stefan(7행). ci_dependence 행 ['Year-matched Stefan', 'CatBoost, main', 'CatBoost, larger', 'CatBoost, tuned', 'TabPFN v2', 'TabICL v2', 'TabICL v2, full context']
+- 통과: 설명문 연도 정합 Stefan −1.00 cm. -0.9968 [-1.3456, -0.3200], 분할 독립 가정 의존
+- 통과: C1 README 1.3 문자열(+2.44 – +5.21, +2.25 cm [1.10, 3.42], 18개, 2개). 문자열 포함 여부
+- 통과: d 25행 = lgu_b_intervals.csv(scope == 'all', n == 0, target, method; 6값씩 150개). 최대 차 0
+- 통과: d 1단 CI 종류 '2단+1단' 표의 1단 열, 지역 재표집 단위 블록 수 18–39. ci_kind {'2단+1단'}; n_blocks [18, 19, 20, 36]
+- 통과: e 6행 = lgx_conformal.csv(mode x, R1 λ 0.25 level 90; 폭 비 = width_cm / R0 n 0 width_cm). 최대 차 0
+- 통과: e 값 = lgx_tests.csv L25 지역 행(coverage, width_cm, width_n0_r0). 최대 차 0
+- 통과: 지도 중심 경도 = Fig 1a 기록값(Fig1_values.txt). Fig 1 126.698°, Fig 6 126.698°; 50° N 원, 진척 위도 70° N
+- 통과: XG-1c(CCI v5, 주 4지역) 두 마스크 판정 '열세', Holm p ≤ 0.05, 5 km·25 km 값 같음(학습 지점 없음) → 설명문 'higher error (+23.79 cm; 95% CI 15.34 to 30.16'. Δ 23.7948 [15.3439, 30.1620] / 블록 19.1663 [14.8298, 23.7195]; Holm p 0.0006/0.0006; 비맹검 부분 포함(LGX L29 의 CCI v4 원값 − P0, 블록 등가중 +4.99 – +13.93 cm, 러시아 W +0.41 미결정, data/processed/lgx/lgx_curve.csv); 등록 이탈(WRAPUP 10); 결과 열람 뒤 설계
+- 통과: XG-1w(Wei v2, 레나·캐나다) 두 마스크 판정 '미결정' → 설명문 'difference (Lena Delta and Canada; 47% of cells gap-filled) was not resolved'. Δ 1.4373 [-0.0155, 4.2998] / 블록 4.0850 [2.0990, 6.1220]; 25 km Δ 0.9691; Holm p 0.156/0.3828; 제품 결측 대체(ρ·s) 5 km 0.4739, 25 km 0.2649; 마스크 뒤 P0 RMSE 25.28 cm; 맹검; 등록 이탈(WRAPUP 10)
+- 통과: XG 행 재표집 = xg_summary_meta.json nboot 10000. nboot [10000]
+- 통과: 설명문 'Tibetan Plateau in a, −59.98 cm' = 티베트 직접 ML Δ 이고 범위 밖 값은 이것 하나. Tibet_LGD D0_1.0 -59.9836 cm, vmax 40, 범위 밖 {'D0_1.0': 1, 'D1_1.0': 0}
+- 통과: 설명문 투영 중심 경도 '127° E'(본 지도 126.698°), 알래스카 확대도 '157° W'(대상 7개 경도 평균 -156.626°). 확대도 중심 위도 66.65° N
+- 통과: 설명문 재표집 'd 1000 resamples'(lgu_b_meta.json nboot), 'c and e 10,000 resamples'(fig6_a nboot, lgx_meta.json nboot). lgu_b nboot 1000, lgx nboot 10000; e 의 포함률 CI 는 h42_label_grid_ext.conformal_table 의 boot_mean_blocks(채점 블록 재표집)
+- 통과: 설명문 영구동토 자료 'ESA CCI Permafrost fraction v4.0 (1997–2021 mean)' = netCDF title. title 'ESA CCI Permafrost PFR v4.0, mean of 1997-2021 (25 annual files), aggregated to 0.1 deg'
+- 통과: 설명문 'Cartopy 판' = 실행 판. cartopy 0.23.0
+- 통과: 컬러바 ±vmax = 티베트 뺀 |Δ| 99 백분위를 5 cm 단위로 올림. 값 32개(16대상 × 2; 명세 8.3 의 '34값' 은 티베트를 빼면 32값), p99 37.93, vmax 40; 범위 밖 {'D0_1.0': 1, 'D1_1.0': 0}(티베트 D0 -59.98), 컬러바 연장 'min'
+- 통과: 설명문 350단어 이하(자리표시 포함). 349단어(자리표시 제외 349), 파일 전체 410단어
+- 통과: 설명문 문장 점검(대시·금지어·가운뎃점 숫자·네 자리 쉼표·내부 약호; 자리표시 제외). 0건
+- 통과: 설명문 첫 문장이 'This figure' 로 시작하지 않고 그림 명세 8.6·원고 명세 7절의 제목 문장과 같음. Without target labels, 2 of 30 targets lost over 2 cm with physics pseudo-labels and 18 with direct ML. a, b, 
+- 통과: 설명문 자리표시 0개(XG 자리표시를 수치 문장으로 바꿈, 그림 명세 12절). 0개
+- 통과: XG 문장(Existing ALT maps … resolved.) 50단어 이하(그림 명세 13절). 44단어
+- 통과: 설명문 필수 요소(재표집·띠·축척 위도·자료 출처·소프트웨어·사후 서술·의존 표지·대상 수). 빠짐 없음
+- 통과: 설명문에 색 이름·모양 서술 없음(F-15). 0건
+
+[4] 그림 점검(지침 부록 A.1 audit_v3, A.2 pdf_audit, 7.1)
+- audit_v3: 글자 크기 [7.0] pt, 문자 수 741(한도 800, 그림 명세 8.5 사유: 포레스트 행 이름), 얇은 선 0, 제목 0, 글씨 상자 0, 내부 약호 0, 네 자리 쉼표 0, 긴 라벨 0, 그림 안 수치 0; 실패 항목 없음
+  (그림 안 수치 검사 제외 gid: scale(축척 길이), sizekey(열쇠 값 '±0.5 cm', '40 labels', '160 labels'), graticule(위도 라벨 3개), offaxis(축 밖 행의 점 추정값 '+23.8', 조정 담당 요청 '가장자리 화살표와 값'). 앞의 셋은 명세 8.3 이 허용한 수치다)
+- pdf_audit: 170.0 × 169.1 mm, 문자 741, 크기 분포 {7.0: 741}, 5 pt 미만 0, 글꼴 계열 ['LiberationSans'], Type 3 없음
+- pdffonts: BGZIHO+LiberationSans-Bold CID 내장 yes
+- pdffonts: BGZIHO+LiberationSans CID 내장 yes
+- pdfimages(내장 래스터 ppi): ['1 1297 1509 index 600 600', '1 1297 1509 gray 600 600', '1 402 307 index 600 601', '1 402 307 gray 600 601', '1 472 549 index 600 600', '1 472 549 gray 600 600', '1 1297 1509 index 600 600', '1 1297 1509 gray 600 600', '1 401 307 index 600 601', '1 401 307 gray 600 601', '1 472 549 index 600 600', '1 472 549 gray 600 600', '1 2523 59 index 600 600']
+- 글자 겹침·글자와 자료 겹침(직접 라벨은 자료 표지에서 0.5 mm 이상): 0건
+- style.text_overlaps: 글자 87개, 겹침 쌍 0, 캔버스 밖 0
+- 지도 원 테두리와 다른 선·틀 사이 0.5 mm 미만, d 지시선과 다른 방법의 자료 표지 사이 0.5 mm 미만: 0건; 지도 종류별 최소 간격(mm) {'leader': 0.98, 'zoom_rectangle': 0.65, 'zoom_connector': 4.9, 'frame': 3.07}, d 지시선별 최소 간격(mm) {'phys': 4.1, 'nflow': 0.93, 'cbq': 9.57}
+- 지도 원 밖 글자가 원 안으로 들어옴: 0건
+- 눈금 라벨 간격 1.5 mm 미만: 0건
+- 캔버스 밖 글자: 0건
+- 지역 모양 열쇠 오른쪽 끝 169.4 mm(캔버스 170 mm)
+- 주 패널 면적(F-17, 슬롯 기준): a 6232, b 6232 mm², 합 43%(기준 35% 이상), 가장 큰 패널 a, b (같음)
+- 지도: 북극 평사 투영(중심 경도 126.698°, 진척 위도 70.0° N), 50° N 원 지름 70.0 mm, 1 mm = 128.9 km(70° N 기준), 축척 막대 1000 km 의 측지 길이 996 km(축척 계수 1.000); 내장 래스터 지도 {'nx': 1303, 'ny': 1303, 'ppi': 473.0}; 영구동토 바탕 'ESA CCI Permafrost PFR v4.0, mean of 1997-2021 (25 annual files), aggregated to 0.1 deg'; 해안선 Natural Earth 50 m; Cartopy 0.23.0
+- 티베트 삽도: Lambert 방위 등적(중심 = 대상 중심), 17.0 × 13.0 mm, 1 mm = 61 km, 축척 200 km 의 측지 길이 200 km, 래스터 {'nx': 317, 'ny': 242, 'ppi': 474.0}
+- 알래스카 확대도: 북극 평사(중심 경도 -156.63°, 진척 위도 70° N), 20.0 × 25.0 mm, 범위 1072 × 1340 km, 1 mm = 53.6 km(본 지도의 2.4배), 축척 500 km 의 측지 길이 482 km, 원 최소 중심 간격 3.50 mm, 옮긴 거리(mm) {'Alaska': 0.22, 'AL-3': 0.22}, 래스터 {'nx': 373, 'ny': 466, 'ppi': 474.0}; 본 지도 확대 사각형 꼭짓점(표시 mm) [[70.8, 119.5], [72.7, 127.6], [62.6, 130.0], [60.7, 121.9]]
+- 본 지도 대상 원: 지름 3.0 mm 고정, 최소 중심 간격 3.50 mm(기준 3.5), 가장 바깥 원 반지름 25.8 mm(원 반지름 35.0); 겹침 묶음 {3: ['LE-1', 'LE-2', 'Lena']}; 옮긴 거리(mm) {'LE-1': 5.28, 'LE-2': 4.78, 'Lena': 5.29}(이 원들은 실제 위치 점과 지시선으로 이었다. 0.5 mm 이하로 옮긴 원 1개)
+- c 행 이름 사이 최소 간격 {'c y': 0.43} mm(행 간격 약 2.7 mm = 7 pt 글자 높이 2.5 mm + 0.4 mm). 지침 2.12 의 1.5 mm 는 숫자 눈금 라벨 규칙이고 범주 행 이름은 표 행 간격(약 1.1배)으로 두었다 [판단]. 14행 + 묶음 머리 4줄을 명세의 64 mm 슬롯에 넣으려면 이 간격이 필요하다. XG 묶음(머리 1줄 + 2행)을 더하면서 같은 간격을 지키려고 c 슬롯을 73.1 mm 로 늘렸다(행 간격 2.715 mm 유지).
+- 컬러바: ±40 cm(TwoSlopeNorm vcenter 0, cmc.broc), 연장 표지 'min', 범위 밖 값 {'D0_1.0': 1, 'D1_1.0': 0}
+
+[5] 판단과 명세에서 바꾼 점([판단])
+- 지도 범위를 Fig 1a 와 같게(50° N 원, 중심 경도 126.698° E) 두었다(그림 명세 8.3). 원 지름은 70.0 mm 로 슬롯(82 × 76 mm)에서 열 머리를 뺀 72.4 mm 보다 조금 작게 하고 오른쪽에 맞췄다. 왼쪽 아래 구석에 티베트 삽도(17 × 13 mm), 오른쪽 아래 구석에 알래스카 확대도(20 × 25 mm), 왼쪽 위 구석에 영구동토 견본 2줄을 두기 위해서다.
+- 알래스카 확대도 폭은 23 mm(1차 렌더)에서 20 mm 로 줄였다. 23 mm 에서는 확대도 틀이 동시베리아 원 테두리에 0.07 mm, 본 지도의 확대 사각형이 캐나다 하위 지역 원 테두리에 0.03 mm 까지 붙었다. 확대 배율은 남북 방향이 정하므로 바뀌지 않는다. 확대도 축척 막대는 오른쪽 아래 구석에 두었다(왼쪽 아래 구석에 하위 지역 원이 있다). 축척 막대 길이는 진척 위도 70° N 기준 투영 길이이고 측지 길이는 위 [4] 에 적었다.
+- 알래스카 7대상(지역 + 하위 지역 6)은 본 지도에서 9 × 7 mm 안에 모여 명세 8.3 의 지시선 부채꼴로는 지시선이 엇갈리고 원이 최대 8 mm(약 1000 km) 옮겨져 읽을 수 없었다(1차 렌더). 지침 2.11 '밀집 구역은 확대도'(Hjort 2018 Fig 1)와 Fig 1a 의 확대 문법을 따라 확대도로 바꾸고, 본 지도에는 확대 범위 사각형(1.0 pt 검정)과 확대도 틀로 가는 연결선 2개(1.0 pt #bdbdbd)만 두었다. 레나델타 3대상은 명세대로 지시선 부채꼴이다.
+- 삽도·확대도 이름('Tibetan Plateau', 'Alaska')은 a 의 각 틀 아래에 한 번씩 두었다(틀 위쪽은 지도 원과 겹친다). b 의 삽도·확대도는 같은 범위이고 축척·이름을 반복하지 않는다(H13).
+- 위도 라벨 경선은 -10.0°(Fig 1a 는 −20°), 축척 막대 중심은 (12.0° E, 70.0° N)(Fig 1a 는 5° E)이다. 72 mm 보다 작은 지도에서 80° N 표지와 축척 글자를 바다 위 빈 곳에 두기 위해서다.
+- 대상 원이 겹치는 묶음(세 원 이상)은 묶음 중심에서 극 반대쪽으로 연 부채꼴(묶음 크기에 따라 반지름 5.3–7.8 mm)에 두고 실제 위치의 작은 점과 1.0 pt 회색 지시선으로 이었다(그림 명세 8.3 '지시선 부채꼴'). 두 원 묶음은 잇는 선 위에서 맞선 방향으로 최소 이동했다. 0.5 mm 넘게 옮긴 원은 모두 지시선을 그렸다.
+- 컬러바 연장 표지는 'min' 이다. 명세 8.3 의 '양끝 연장 표지 [판단]' 과 달리, 범위를 넘는 값은 음의 끝(티베트 직접 ML)뿐이라 양의 끝에는 표지를 두지 않았다.
+- vmax 계산의 값 수는 32(티베트를 뺀 16대상 × 2)이다. 명세 8.3 의 '34값(17대상 × 2)' 은 티베트를 빼면 32값이 된다.
+- 포레스트 행 이름 'CatBoost, larger' 는 명세의 'CatBoost, default' 를 바꾼 것이다. catboost 는 기본 설정이 아니라 600회·깊이 6 으로 주 학습기(200회·깊이 3)보다 용량이 크다(polar.m1_core 287–295행, C1 README 2.1 '용량 확대').
+- 컬러바 라벨과 c 의 x 축 이름은 같은 문구 'Error change vs source Stefan (cm)' 이다. 그림 명세 8.3 이 두 축에 같은 이름을 지정했고(지침 2.12 의 Δ 축 기준 표기) 두 축은 같은 양이다. H13 의 '같은 문구 반복' 은 요소 라벨에 대한 규칙으로 보고 축 이름은 명세대로 두었다.
+- d 의 거의 겹치는 두 평균(상수·물리 사전, 정규화 흐름·순열 흐름)은 두 줄로 쌓은 라벨 한 묶음과 지시선 하나로 가리킨다(위 줄 = 포함률이 높은 쪽). 읽는 법은 설명문에 적었다.
+- d 라벨 위치(1차 렌더에서 고침): 상수·물리 사전 묶음은 x 67 cm, y 0.993·0.958. x 65 cm 에서는 물리 사전 지시선이 동시베리아 지역 점을 0.24 mm 로 스쳤고 'Constant' 가 상수 CI 위끝에 0.44 mm 로 붙었다. 위 줄 글상자가 축 위끝을 약 0.6 mm 넘지만 위 테두리가 없고 지역 모양 열쇠와 1 mm 이상 떨어진다. 정규화 흐름 지시선은 평균 2.0 mm 앞에서 멈춘다(평균 옆 캐나다 지역 점 두 개와 0.5 mm 이상 띄우기 위해).
+- d 의 검정은 '구간 방법 추정' 한 역할이다(그림 명세 D-17, 지침 2.4 검정 역할 목록 밖이라 사용자 확인 필요).
+- e 는 관측 대 예측(지침 6.6)이 아니라 라벨 있는 잔차 구간(그림 명세 D-16)이다. 셀 단위 구간 파일이 없다.
+- 예측 지도 행(ALT 예측, 구간 폭, 외삽 영역)은 본문에 두지 않았다(LGU-B2 미결정, 그림 명세 8.3). a·b 가 본문 결과 지도이다.
+- 지도의 관측 위치(F-12)는 대상 중심 원으로 보인다. 개별 라벨 셀은 Fig 1a 에 있고 이 지도에는 그리지 않았다(결과 지도의 주제가 대상별 Δ 이기 때문).
+- 슬라이드판(medium='slide')은 이 비교판에서 만들지 않았다(그림 명세 1.7 의 두 매체 규칙은 채택 뒤 구현).
+- SVG 는 내지 않았다(이 폴더의 다른 v3 그림과 같이 PDF 정본 + PNG 600 dpi 검토용).
+- 기존 ALT 지도 묶음(2026-10-05, 조정 담당 요청): c 마지막에 'Existing ALT maps' 두 행(ESA CCI v5 = XG-1c 주 4지역, Wei v2 = XG-1w 레나델타·캐나다 2지역)을 더했다. 값은 봉인 xg_tests.csv 의 주 열(5 km 블록 마스크)이고 25 km 마스크 판정도 같다([3] 10). 결과 열람 뒤 설계·등록 이탈(WRAPUP 10)이라 설명문에 'added post hoc' 로 적었다. Wei 풀이 2지역이라 행 이름에 'two regions' 를 넣었다(덱 부록 3 은 4지역 평균 그림이라 Wei 를 뺐다).
+- ESA CCI v5 의 두 가중 CI(셀 15.34–30.16 cm, 블록 14.83–23.72 cm)는 축 끝 7.6 cm 보다 오른쪽이다. 다른 행을 줄이지 않으려고 축을 넓히지 않고 축 끝에 1.0 pt 화살표(3.2 mm)와 점 추정값 '+23.8'(7 pt)을 두었다. 덱 부록 3 은 가로축을 끊어 둘째 축에 그렸으나 c 슬롯 폭(96 mm, 이름 열 40 mm) 안에는 둘째 축을 같은 축척으로 둘 자리가 없다. 정확한 값과 CI 는 설명문과 Source Data 에 있다.
+- 그림 높이 169.1 mm(명세 160 mm, 지침 상한 180 mm): c 에 3줄을 더한 높이 9.1 mm. 오른쪽 d·e 슬롯은 아래 빈 띠가 생기지 않게 그 높이를 반씩 나눠 가졌다(d 높이 38.05 mm, e 위끝 133.05 mm·높이 32.05 mm). a·b·컬러바 위치는 그대로다(덱 자르기 f6a, f6b, f6_cbar 상자 유효). 덱 자르기 f6c 는 아래쪽이 늘어난 만큼 상자를 늘려야 한다.
+
+[6] 색각·흑백(F-09)
+- 연속 색표 cmc.broc(Crameri, 색각 이상에서도 단조로운 명도) ±vmax 공유, 0 중심. 대상 원 테두리 검정, 지시선 #737373, 영구동토 바탕 #d0d0d0·#e6e6e6, 육지 #f4f4f4.
+- 방법 색은 e 의 Anchor + residual ML #9a7bc9 하나뿐이다(흰 바탕 대비 3.47:1, 기준 3:1 이상). c·d 의 자료 표지는 검정이다.
+- 흑백 렌더(사람 판정): a·b 는 broc 의 명도가 0 에서 가장 밝고 양끝에서 어두워 부호를 명도만으로 구분할 수 없다. 부호는 컬러바 위치와 설명문의 대상 수로 읽는다. e 의 40·160 라벨은 채움·빈 마커로 구분된다.
+
+[7] 설명문(Fig6_legend.md, 손으로 작성)
+- 단어 수 349(자리표시 제외 349), 자리표시 []
+
+[8] 산출 파일
+- /home/willy010313/Polar_Bigdata/outputs/figures/paper/v3_restructure/Fig6.pdf
+- /home/willy010313/Polar_Bigdata/outputs/figures/paper/v3_restructure/Fig6.png
+- /home/willy010313/Polar_Bigdata/outputs/figures/paper/v3_restructure/Fig6_source_data.csv
+- /home/willy010313/Polar_Bigdata/outputs/figures/paper/v3_restructure/Fig6_legend.md(손으로 작성)
+

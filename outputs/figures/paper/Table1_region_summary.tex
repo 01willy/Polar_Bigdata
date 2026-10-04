@@ -1,0 +1,57 @@
+% Table 1 (자동 생성: scripts/4_visualization/paper/table1.py; 수정은 생성기에서)
+% requires \usepackage{booktabs}
+\begin{table*}[t]
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}l r@{\hspace{2pt}} l c r@{\hspace{2pt}} l r@{\hspace{2pt}} l r c c c r@{\hspace{2pt}} l@{}}
+\toprule
+ &  &  &  & \multicolumn{5}{c}{No target labels ($\mathit{n}$ = 0)} & \multicolumn{3}{c}{Few labels: $\mathit{n}^*$} & \multicolumn{2}{c}{All labels} \\
+\cmidrule(lr){5-9}\cmidrule(lr){10-12}\cmidrule(lr){13-14}
+ & \multicolumn{2}{c}{} & $\mathit{E}_\mathrm{own}/\mathit{E}_0$ & \multicolumn{2}{c}{Residual $\Delta$RMSE} & \multicolumn{2}{c}{90 \% interval} & Width & \multicolumn{2}{c}{Shrunk $\mathit{E}$ (H25)} & $\mathit{E}_0$ fixed & \multicolumn{2}{c}{Recipe $\Delta$RMSE} \\
+\cmidrule(lr){10-11}
+Target (No.) & \multicolumn{2}{c}{Cells / blocks\textsuperscript{a}} & ($|$log$|$) & \multicolumn{2}{c}{(cm) [95 \% CI]} & \multicolumn{2}{c}{coverage [95 \% CI]} & (cm) & k-medoid & random & (A2) & \multicolumn{2}{c}{(cm) [95 \% CI]\textsuperscript{b}} \\
+\midrule
+\multicolumn{14}{@{}l}{\textit{Level error ($|$log$|$ $\geq$ 0.20)}} \\
+Russia W (4) & 31 & / 21 & 1.66 (0.51) & $-$0.36 & [$-$1.34, 0.51] & 0.75 & [0.59, 0.88] & 71 & 3 & 3 & $>$ 10\rlap{\textsuperscript{c}} & $-$2.41 & [$-$3.45, $-$1.50] \\
+AL-3 (1)\textsuperscript{d} & 651 & / 16 & 0.74 (0.30) & $-$0.45 & [$-$0.57, $-$0.28]\textsuperscript{e} & \multicolumn{2}{c}{--} & \multicolumn{1}{c}{--} & 3 & 3 & 3 & \multicolumn{2}{c}{--} \\
+CA-2 (3)\textsuperscript{d} & 395 & / 14 & 0.77 (0.26) & $-$1.42 & [$-$1.54, $-$0.23]\textsuperscript{e} & \multicolumn{2}{c}{--} & \multicolumn{1}{c}{--} & 3 & 3 & 3 & \multicolumn{2}{c}{--} \\
+AL-1 (1)\textsuperscript{d} & 5,154 & / 10 & 1.23 (0.21) & $-$1.50 & [$-$1.84, $-$0.78]\textsuperscript{e} & \multicolumn{2}{c}{--} & \multicolumn{1}{c}{--} & 3 & 5 & 3 & \multicolumn{2}{c}{--} \\
+\addlinespace
+\multicolumn{14}{@{}l}{\textit{Intermediate (0.15 $\leq$ $|$log$|$ $<$ 0.20)}} \\
+Russia E (5) & 30 & / 21 & 1.19 (0.17) & 0.32 & [$-$1.51, 1.05] & 0.93 & [0.80, 1.00] & 83 & $>$ 10\rlap{\textsuperscript{c}} & $>$ 10\rlap{\textsuperscript{c}} & $>$ 10\rlap{\textsuperscript{c}} & 0.33 & [$-$0.28, 1.07] \\
+CA-3 (3)\textsuperscript{d} & 349 & / 19 & 1.18 (0.17) & $-$0.30 & [$-$1.12, $-$0.03] & \multicolumn{2}{c}{--} & \multicolumn{1}{c}{--} & $>$ 160 & $>$ 160 & 3 & \multicolumn{2}{c}{--} \\
+\addlinespace
+\multicolumn{14}{@{}l}{\textit{Structure error ($|$log$|$ $<$ 0.15)}} \\
+LE-1 (2)\textsuperscript{d} & 1,786 & / 14 & 0.88 (0.13) & 0.00 & [$-$0.46, 0.22] & \multicolumn{2}{c}{--} & \multicolumn{1}{c}{--} & $>$ 320 & $>$ 320 & $>$ 320 & \multicolumn{2}{c}{--} \\
+Lena (2) & 3,037 & / 20 & 0.89 (0.12) & 0.54 & [0.16, 0.68] & 0.89 & [0.80, 0.96] & 73 & 3 & 3 & 320 & $-$0.62 & [$-$0.98, $-$0.37] \\
+LE-2 (2)\textsuperscript{d} & 1,251 & / 6 & 0.89 (0.11) & 0.48 & [$-$0.55, 1.07] & \multicolumn{2}{c}{--} & \multicolumn{1}{c}{--} & $>$ 320 & $>$ 320 & $>$ 320 & \multicolumn{2}{c}{--} \\
+AL-4 (1)\textsuperscript{d} & 471 & / 4 & 0.93 (0.07) & 0.49 & [0.11, 1.70] & \multicolumn{2}{c}{--} & \multicolumn{1}{c}{--} & $>$ 160\rlap{\textsuperscript{f}} & $>$ 160\rlap{\textsuperscript{f}} & $>$ 160 & \multicolumn{2}{c}{--} \\
+AL-2 (1) & 3,491 & / 20 & 1.06 (0.06) & 1.62 & [1.42, 1.86] & \multicolumn{2}{c}{--} & \multicolumn{1}{c}{--} & $>$ 320 & $>$ 320 & $>$ 320 & \multicolumn{2}{c}{--} \\
+AL-5 (1) & 619 & / 17 & 0.97 (0.03) & $-$0.53 & [$-$0.73, $-$0.38]\textsuperscript{e} & \multicolumn{2}{c}{--} & \multicolumn{1}{c}{--} & $>$ 320\rlap{\textsuperscript{g}} & $>$ 320\rlap{\textsuperscript{g}} & 3 & \multicolumn{2}{c}{--} \\
+AL-6 (1)\textsuperscript{d} & 3,220 & / 7 & 0.98 (0.02) & 6.02 & [4.95, 8.74]\textsuperscript{h} & \multicolumn{2}{c}{--} & \multicolumn{1}{c}{--} & $>$ 320 & $>$ 320 & $>$ 320 & \multicolumn{2}{c}{--} \\
+Canada (3) & 750 & / 39 & 1.00 (0.00) & $-$0.95 & [$-$1.18, $-$0.57]\textsuperscript{e} & 0.89 & [0.80, 0.97] & 95 & 3 & $>$ 320\rlap{\textsuperscript{g}} & 3 & $-$0.01 & [$-$0.48, 1.19] \\
+\addlinespace
+\multicolumn{14}{@{}l}{\textit{Label-free evaluation only}} \\
+Russia C (6) & 7 & / 6 & -- & \multicolumn{2}{c}{--} & 0.86 & [--]\textsuperscript{i} & 96 & -- & -- & -- & \multicolumn{2}{c}{--} \\
+Greenland (7) & 3 & / 2 & -- & \multicolumn{2}{c}{--} & 1.00 & [--]\textsuperscript{i} & 55 & -- & -- & -- & \multicolumn{2}{c}{--} \\
+\midrule
+Mean of 4 regions\textsuperscript{j} &  &  &  &  &  & 0.86 & [0.80, 0.92] & 81 &  &  &  & $-$0.68 & [$-$1.01, $-$0.27] \\
+Targets reaching $\mathit{n}^*$ &  &  &  &  &  &  &  &  & 6 of 14 & 5 of 14 & 7 of 14 &  &  \\
+\bottomrule
+\end{tabular}
+
+\vspace{2pt}
+\begin{minipage}{\linewidth}\scriptsize
+\textsuperscript{a}All labelled cells and blocks of the target. Scored cell sets differ by analysis (Supplementary Table 1).\\
+\textsuperscript{b}Scored on M1 B-block cells summed over three splits (Lena 4,661; Canada 1,152; Russia W 41; Russia E 37), hence more than Cells.\\
+\textsuperscript{c}Range-limited: largest tested $\mathit{n}$ $<$ 40 (about 30 labelled cells).\\
+\textsuperscript{d}Fewer than 5 scoring blocks in at least one split; block CIs are approximate.\\
+\textsuperscript{e}All three $\mathit{n}^*$ criteria are already met at $\mathit{n}$ = 0 (source residual only).\\
+\textsuperscript{f}Fewer than two valid splits in H25; $\mathit{n}^*$ cannot be reached by rule.\\
+\textsuperscript{g}Criteria met at $\mathit{n}$ = 0 fail at every tested $\mathit{n}$ $\geq$ 3 under this rule (split or repeat win rate, or CI upper bound).\\
+\textsuperscript{h}Physics-anchor RMSE 10.4 cm, lowest of the 14 targets; the source-trained residual gives 16.4 cm and is worse in all 3 splits (+3.8 to +7.1 cm).\\
+\textsuperscript{i}Fewer than 8 scoring blocks (Russia C: 7 scored cells; Greenland: 1 scored cell): point estimate without CI.\\
+\textsuperscript{j}Equal-weight mean over Lena, Canada, Russia W and Russia E; stratified block-bootstrap CI.\\
+\end{minipage}
+\end{table*}

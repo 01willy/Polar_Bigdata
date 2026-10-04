@@ -2,6 +2,7 @@
 
 근거
   outputs/figures/paper/v3_restructure/FIGURE_SPEC_v3.md 8절(역할, 배치 170 × 160 mm, 패널 명세, 설명문 초안), 1절(공통 규격),
+  12절 XG 자리표시(c 의 묶음 'Existing ALT maps'; 높이는 그 묶음 3줄만큼 늘려 170 × 169.1 mm),
   11절(판정 기호 대체), 14절(D-9, D-10, D-16, D-17)
   design/journal_grade_style_guide.md 2절(그림), 6.6절(Fig 6 계획), 7.1절(점검), 부록 A.1 audit_v3, A.2 pdf_audit
   공용 양식: scripts/4_visualization/paper_v3/style.py(다른 그림 모듈과 공유, 이 파일은 고치지 않는다)
@@ -9,7 +10,8 @@
 패널
   a, b  라벨 0 대상별 오차 변화 지도(직접 ML, 물리 유사라벨 증강), 원천 계수 Stefan 대비, 사후 서술. 범북극 평사 투영,
         Fig 1a 와 같은 범위(50° N 원, 중심 경도 126.698° E), 대상 원 지름 3 mm 고정, 겹치는 원은 지시선 부채꼴
-  c     라벨 0 직접 ML 학습기와 물리 기준선의 원천 계수 Stefan 대비, 주 4지역 층화 평균, 두 가중 95 % CI 와 ±0.5 cm 띠
+  c     라벨 0 직접 ML 학습기와 물리 기준선의 원천 계수 Stefan 대비, 주 4지역 층화 평균, 두 가중 95 % CI 와 ±0.5 cm 띠.
+        묶음 'Existing ALT maps'(XG-1c CCI v5 주 4지역, XG-1w Wei v2 레나·캐나다, 5 km 블록 마스크). 축 밖 값은 가장자리 화살표와 값
   d     라벨 0 90 % 예측 구간의 포함률 대 평균 폭, 구간 척도화 5종(주 4지역 평균과 지역 값)
   e     라벨 40개와 160개 앵커 + 잔차 구간의 포함률 대 라벨 0 대비 폭 비
 
@@ -22,7 +24,7 @@
         data/processed/lgd/run_tables/<spec>/fidelity_base_v3.csv 의 macro.
         바탕: 영구동토 구역 data/processed/cci_pfr_mean_1997_2021.nc(ESA CCI Permafrost PFR v4.0, 1997–2021 평균),
         육지 Natural Earth 50 m(cartopy 내장 자료).
-  c     data/processed/paper_figs/fig6_a.csv(본문 14행)
+  c     data/processed/paper_figs/fig6_a.csv(본문 14행) + data/processed/xbatch/XG_product_comparison/sealed/xg_tests.csv(2행, 계획 8.7)
   d     data/processed/paper_figs/fig6_b.csv(method ∈ const, phys, nflow, nflow#placebo, cbq; kind ∈ region, mean4; 1단 CI 열 *_lo1, *_hi1)
   e     data/processed/paper_figs/fig6_d.csv
 
@@ -80,17 +82,22 @@ warnings.filterwarnings("ignore", category=matplotlib.MatplotlibDeprecationWarni
 PROC = ROOT / "data" / "processed"
 OUT = S.OUT
 STEM = "Fig6"
-W_MM, H_MM = S.W2_MM, 160.0
+XG_EXTRA_MM = 9.1          # c 에 묶음 'Existing ALT maps'(머리 1줄 + 행 2개 + 묶음 간격 0.35)를 기존 행 간격(2.715 mm)으로 더한 높이
+W_MM, H_MM = S.W2_MM, 160.0 + XG_EXTRA_MM
 
 # ---------------------------------------------------------------- 배치(그림 명세 8.2, mm, 그림 왼쪽 위 원점: x, 위끝 y, 폭, 높이)
 SLOT = dict(a=(0.0, 0.0, 82.0, 76.0), b=(88.0, 0.0, 82.0, 76.0), cbar=(30.0, 80.0, 110.0, 2.5),
-            c=(0.0, 92.0, 96.0, 64.0), d=(104.0, 92.0, 66.0, 33.5), e=(104.0, 128.5, 66.0, 27.5))
+            c=(0.0, 92.0, 96.0, 64.0 + XG_EXTRA_MM), d=(104.0, 92.0, 66.0, 33.5 + XG_EXTRA_MM / 2),
+            e=(104.0, 128.5 + XG_EXTRA_MM / 2, 66.0, 27.5 + XG_EXTRA_MM / 2))
+# c 의 행 간격을 그대로 두려고 c 슬롯을 XG_EXTRA_MM 만큼 늘렸고, 오른쪽 d·e 는 아래 빈 띠가 생기지 않게 그 높이를 반씩 나눠 가진다[판단]
 # d, e 높이는 명세(각 30 mm)에서 d 33.5, e 27.5 mm 로 바꿨다[판단]: d 의 두 줄 직접 라벨(상수·물리 사전)이 CI 막대 위에 들어가려면 축 높이 22 mm 가 필요하다
 EDGE_MM = 0.3               # 캔버스 가장자리에서 글자를 띄우는 거리(패널 문자, 묶음 머리, 열 머리)
 HEAD_MM = 3.6               # 지도 열 머리(7 pt 한 줄) 높이
 MAP_D_MM = 70.0             # 지도 원(50° N) 지름 [판단]: 슬롯 82 × 76 에서 열 머리를 빼고 왼쪽 아래 구석(티베트 삽도)과 왼쪽 위 구석(영구동토 견본)을 비운다
 INSET_W_MM, INSET_H_MM = 17.0, 13.0       # 티베트 삽도(슬롯 왼쪽 아래 구석)
-AK_INSET_W_MM, AK_INSET_H_MM = 23.0, 25.0  # 알래스카 확대도(슬롯 오른쪽 아래 구석) [판단: 지침 2.11 '밀집 구역은 확대도', Hjort 2018 Fig 1]
+AK_INSET_W_MM, AK_INSET_H_MM = 20.0, 25.0  # 알래스카 확대도(슬롯 오른쪽 아래 구석) [판단: 지침 2.11 '밀집 구역은 확대도', Hjort 2018 Fig 1]
+# 폭 20 mm: 23 mm 에서는 확대도 틀이 동시베리아 원에 0.07 mm, 확대 사각형이 캐나다 하위 지역 원에 0.03 mm 까지 붙었다(1차 렌더).
+# 축척은 남북 방향(대상 범위 20.6 mm)이 정하므로 폭을 줄여도 확대 배율은 같다
 AK_PAD_MM = 2.2             # 확대도 안 가장 바깥 대상 중심과 틀 사이 여백
 FOREST_NAME_MM = 40.0       # c 행 이름 열 폭(그림 명세 8.2)
 
@@ -114,6 +121,8 @@ CIRCLE_D_MM = 3.0           # 대상 원 지름 고정(그림 명세 8.3)
 CIRCLE_GAP_MM = 3.5         # 원 중심 사이 최소 거리(겹침 해소 기준)
 LEADER_MIN_MM = 0.5         # 이보다 많이 옮긴 원은 지시선과 실제 위치 점을 그린다
 LEADER = "#737373"          # 지시선 회색(1.0 pt)
+MAP_CLEAR_MM = 0.5          # 대상 원 테두리와 다른 선(확대 사각형, 틀, 연결선, 다른 원의 지시선) 사이 최소 간격
+LABEL_PAD_MM = 0.5          # 직접 라벨 글상자와 자료 표지 사이 최소 간격
 MAP_COLS = {"a": ("D0_1.0", "Direct ML"), "b": ("D1_1.0", "Physics pseudo-labels")}
 
 # ---------------------------------------------------------------- c 포레스트 행(그림 명세 8.3; 행 이름은 4 단어 이하)
@@ -136,6 +145,10 @@ FOREST = [
                          ("lgf_n", "realmlp", "solid", "RealMLP")]),
 ]
 FOREST_XLIM, FOREST_XTICKS = (-3.6, 7.6), (-2, 0, 2, 4, 6)
+# 기존 ALT 지도 묶음(그림 명세 8.3·12절 'Existing ALT maps', 계획 2.7 XG-1 행, 결과 8.7). 판정 표 xg_tests.csv 의 주 열(5 km 블록 마스크).
+# (block, key, variant, 행 이름): key = 가설 ID. Wei v2 는 레나델타·캐나다 2지역 풀이라 행 이름에 적는다
+FOREST_XG = ("Existing ALT maps", [("xg", "XG-1c", "solid", "ESA CCI v5"), ("xg", "XG-1w", "solid", "Wei v2, two regions")])
+XG_POOL_NAME = {"Lena|x,Canada|x,Russia_W|x,Russia_E|x": "four-region stratified mean", "Lena|x,Canada|x": "two-region mean (Lena Delta, Canada)"}
 
 # ---------------------------------------------------------------- d, e(그림 명세 8.3)
 D_METHODS = [("const", "Constant"), ("phys", "Physics prior"), ("nflow", "Normalizing flow"),
@@ -146,16 +159,21 @@ COV_YLIM, COV_YTICKS = (0.70, 1.00), (0.7, 0.8, 0.9, 1.0)
 D_XLIM, D_XTICKS = (64.0, 160.0), (80, 100, 120, 140)
 E_XLIM, E_XTICKS = (0.52, 1.02), (0.6, 0.7, 0.8, 0.9, 1.0)
 NOMINAL = 0.90
+D_NBOOT, E_NBOOT = 1000, 10000   # d 1단 CI(lgu_b_meta.json nboot), e 포함률 CI(lgx_meta.json nboot). source_checks 9 에서 대조
 E_BAND = (0.85, 0.95)
 KEY_REGIONS = ["Alaska", "Canada", "Lena", "Russia_W", "Russia_E"]
 # d 직접 라벨 위치(자료 좌표: 폭 cm, 포함률, 정렬). 거의 겹치는 두 평균(상수·물리 사전, 정규화 흐름·순열 흐름)은
 # 두 줄로 쌓은 라벨 한 묶음과 지시선 하나로 가리킨다(위 줄 = 포함률이 높은 쪽)
-D_LABEL_POS = {"phys": (65.0, 0.980, "left"), "const": (65.0, 0.940, "left"),
+D_LABEL_POS = {"phys": (67.0, 0.993, "left"), "const": (67.0, 0.958, "left"),
                "nflow": (101.0, 0.800, "left"), "nflow#placebo": (101.0, 0.760, "left"),
                "cbq": (143.0, 0.845, "center")}
 # 지시선 시작점: 라벨 글상자의 모서리·변 위 위치(가로 비율, 세로 비율; 0 = 왼쪽/아래, 1 = 오른쪽/위)와 가리키는 평균.
-# CI 막대 십자와 겹치지 않게 대각선으로 들어간다
-D_LEADERS = [("phys", (1.0, 0.0), "phys"), ("nflow", (0.0, 1.0), "nflow"), ("cbq", (0.55, 1.0), "cbq")]
+# CI 막대 십자와 겹치지 않게 대각선으로 들어간다. 상수·물리 사전 묶음은 x 67 cm 에서 시작한다[판단]: 65 cm 이면 물리 사전 지시선이
+# 동시베리아 지역 점(84.3 cm, 0.926)을 0.24 mm 로 스치고, 묶음 위 줄이 축 위끝을 0.5 mm 남짓 넘는 것은 위 테두리가 없어 보이지 않는다
+D_LEADERS = [("phys", (1.0, 0.0), "phys", 1.0), ("nflow", (0.0, 1.0), "nflow", 2.0), ("cbq", (0.55, 1.0), "cbq", 1.0)]
+# 지시선 끝과 평균 중심 사이(mm). 정규화 흐름은 2.0 mm[판단]: 평균 0.3–0.5 mm 옆에 캐나다 지역 점 두 개(상수, 물리 사전)가 있어
+# 1.0 mm 에서 멈추면 지시선 끝이 그 점에 0.1 mm 까지 붙는다. 2.0 mm 는 CI 십자의 바깥 끝 근처다
+D_PAIR = {"phys": "const", "nflow": "nflow#placebo"}     # 두 줄 라벨 묶음(지시선 하나가 두 평균을 함께 가리킨다)
 COV_LABEL_X_MM = 100.2      # 공유 y 축 이름("Coverage")의 x(c 의 축 오른쪽 끝 94 mm 와 d 패널 문자 104 mm 사이)
 
 # ---------------------------------------------------------------- 원천 파일(값 대조용)
@@ -172,11 +190,16 @@ LGX_CONFORMAL = PROC / "lgx" / "lgx_conformal.csv"
 TABLE1_ROWS = S.PAPER_FIGS / "table1_rows.csv"
 PFR_NC = PROC / "cci_pfr_mean_1997_2021.nc"
 C1_README = ROOT / "paper" / "claims" / "C1_label0_safety" / "README.md"
+CAPTIONS_V2 = ROOT / "outputs" / "figures" / "paper" / "CAPTIONS.md"
+LGU_B_META = PROC / "lgu" / "lgu_b_meta.json"
+LGX_META = PROC / "lgx" / "lgx_meta.json"
 FIG1_VALUES = OUT / "Fig1_values.txt"
 LEGEND_MD = OUT / f"{STEM}_legend.md"
 MEAN4 = "MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]"
+XG_TESTS = PROC / "xbatch" / "XG_product_comparison" / "sealed" / "xg_tests.csv"
+XG_META = PROC / "xbatch" / "XG_product_comparison" / "sealed" / "xg_summary_meta.json"
 FOREST_SOURCE = {"lgw_bundle.csv": LGW_BUNDLE, "lgx_tests.csv": LGX_TESTS, "lgt_tests.csv": LGT_TESTS,
-                 "lgf_tests.csv": LGF_TESTS, "lgfn_tests.csv": LGFN_TESTS}
+                 "lgf_tests.csv": LGF_TESTS, "lgfn_tests.csv": LGFN_TESTS, "xg_tests.csv": XG_TESTS}
 
 
 # ================================================================ 공용
@@ -287,6 +310,33 @@ def load_forest() -> pd.DataFrame:
                              delta=r.delta, ci_lo=r.ci_lo, ci_hi=r.ci_hi,
                              delta_beq=r.delta_beq, ci_lo_beq=r.ci_lo_beq, ci_hi_beq=r.ci_hi_beq, verdict4=r.verdict4,
                              ci_dependence=r.ci_dependence if isinstance(r.ci_dependence, str) else "", nboot=int(r.nboot)))
+    return pd.DataFrame(rows)
+
+
+def load_xg() -> pd.DataFrame:
+    """기존 ALT 지도 행(FOREST_XG): 봉인 판정 표 xg_tests.csv(계획 8.7, 첫 열람 2026-10-05 03:45:02)의 주 열(5 km 블록 마스크).
+    delta·ci_lo·ci_hi = 셀 가중, delta_blockeq·ci_lo_beq·ci_hi_beq = 블록 등가중. 25 km 마스크 값과 판정, 제품 결측 대체 비율은 기록용."""
+    x = pd.read_csv(XG_TESTS)
+    nboot = int(json.loads(XG_META.read_text(encoding="utf-8"))["nboot"])
+    head, items = FOREST_XG
+    rows = []
+    for block, key, variant, label in items:
+        q = x[x.hypothesis == key]
+        if len(q) != 1:
+            raise SystemExit(f"xg_tests: {key} 행 {len(q)}")
+        r = q.iloc[0]
+        if abs(float(r.delta) - float(r.delta_blk5)) > 1e-9:
+            raise SystemExit(f"xg_tests: {key} 주 열 delta 가 5 km 마스크 값과 다르다")
+        rows.append(dict(group=head, row_label=label, block=block, key=key, variant=variant, source="xg_tests.csv",
+                         hypothesis=key, contrast=f"B:{r['product']}_raw − P0, n 0", ab="",
+                         delta=float(r.delta), ci_lo=float(r.ci_lo), ci_hi=float(r.ci_hi),
+                         delta_beq=float(r.delta_blockeq), ci_lo_beq=float(r.ci_lo_beq), ci_hi_beq=float(r.ci_hi_beq),
+                         verdict4=str(r.verdict4_blk5), ci_dependence="", nboot=nboot,
+                         product=str(r["product"]), pool=str(r.pool), pool_name=XG_POOL_NAME[str(r.pool)],
+                         verdict4_blk25=str(r.verdict4_blk25), p_holm_blk5=float(r.p_holm_blk5), p_holm_blk25=float(r.p_holm_blk25),
+                         delta_blk25=float(r.delta_blk25), fill_frac_blk5=float(r.fill_frac_B_blk5), fill_frac_blk25=float(r.fill_frac_B_blk25),
+                         rmse_p0_postmask_blk5=float(r.rmse_p0_postmask_blk5), blind=str(r.blind), deviation=str(r.deviation),
+                         design=str(r.design)))
     return pd.DataFrame(rows)
 
 
@@ -552,14 +602,17 @@ def inset_axes(fig, rect_mm, proj, ext, P):
     return ax, ras
 
 
-def inset_scale_bar(ax, proj, ext, w_mm, km, gid):
-    """삽도 왼쪽 아래 구석의 축척 막대. 글자는 막대 왼쪽 끝에 맞춘다(캔버스 가장자리 삽도에서 글자가 밖으로 나가지 않게)."""
+def inset_scale_bar(ax, proj, ext, w_mm, km, gid, corner="left"):
+    """삽도 아래 구석의 축척 막대. 글자는 막대의 바깥쪽 끝에 맞춘다(캔버스 가장자리 삽도에서 글자가 밖으로 나가지 않게).
+    corner='right' 는 오른쪽 아래 구석(알래스카 확대도: 왼쪽 아래 구석에 하위 지역 원이 있다)."""
     m_per_mm = (ext[1] - ext[0]) / w_mm
-    X0, Y0 = ext[0] + 1.6 * m_per_mm, ext[2] + 1.6 * m_per_mm
+    Y0 = ext[2] + 1.6 * m_per_mm
+    X0 = ext[0] + 1.6 * m_per_mm if corner == "left" else ext[1] - 1.6 * m_per_mm - km * 1000.0
     ln = ax.plot([X0, X0 + km * 1000.0], [Y0, Y0], color=S.INK, lw=S.LW["scale_bar"], transform=proj, zorder=8,
                  solid_capstyle="butt")[0]
     ln.set_gid(gid)
-    t = ax.text(X0, Y0 + 0.5 * m_per_mm, f"{km} km", transform=proj, ha="left", va="bottom", fontsize=S.FONT_PT, zorder=8)
+    tx, ha = (X0, "left") if corner == "left" else (X0 + km * 1000.0, "right")
+    t = ax.text(tx, Y0 + 0.5 * m_per_mm, f"{km} km", transform=proj, ha=ha, va="bottom", fontsize=S.FONT_PT, zorder=8)
     t.set_gid("scale")
     ll = PC.transform_points(proj, np.array([X0, X0 + km * 1e3]), np.array([Y0, Y0]))
     return dict(km=km, geodesic_km=float(haversine(ll[0, 1], ll[0, 0], ll[1, 1], ll[1, 0])), km_per_mm=m_per_mm / 1e3, text=t)
@@ -618,7 +671,7 @@ def alaska_inset(fig, rect_mm, M_ak, col, norm, cmap, P, G, panel):
     info = dict(raster=ras, km_per_mm=s / 1e3, disp_mm=dict(zip(names, np.round(disp, 2))),
                 min_pair_gap_mm=float(min(np.hypot(*(Q_mm[i] - Q_mm[j])) for i, j in itertools.combinations(range(len(Q_mm)), 2))))
     if panel == "a":
-        info["scale"] = inset_scale_bar(ax, G["proj"], G["ext"], rect_mm[2], 500, "scale_bar_inset_alaska")
+        info["scale"] = inset_scale_bar(ax, G["proj"], G["ext"], rect_mm[2], 500, "scale_bar_inset_alaska", corner="right")
     return ax, info
 
 
@@ -659,7 +712,7 @@ def build(medium: str = "paper"):
     R30, M = load_target_deltas()
     C = target_centroids()
     M = M.merge(C, on="name", how="left", validate="one_to_one")
-    F = load_forest()
+    F = pd.concat([load_forest(), load_xg()], ignore_index=True)
     B, E = load_intervals()
     P = pfr_classes()
 
@@ -777,7 +830,9 @@ def build(medium: str = "paper"):
     clean_axes(axc, left=False)
     ypos, ylab, heads = [], [], []
     yv = 0.0
-    for gi, (head, items) in enumerate(FOREST):
+    groups = FOREST + [FOREST_XG]
+    assert [lab for _, items in groups for *_, lab in items] == F.row_label.tolist()
+    for gi, (head, items) in enumerate(groups):
         if gi:
             yv += 0.35
         heads.append((yv, head))
@@ -791,7 +846,19 @@ def build(medium: str = "paper"):
     equiv_band(axc, "x")
     zero_line(axc, "x")
     dy = mm_to_data_y(axc, S.FOREST_BLOCK_OFFSET_MM)
+    offaxis = []
+    x_hi = FOREST_XLIM[1]
     for yy, (_, r) in zip(ypos, F.iterrows()):
+        if min(r.ci_lo, r.ci_lo_beq) > x_hi:
+            # 두 가중 CI 가 모두 축 오른쪽 밖(ESA CCI v5): 다른 행을 줄이지 않도록 축을 넓히지 않고, 축 끝 화살표와 점 추정값을 적는다
+            # (덱 부록 3 은 축을 끊었다. 이 패널은 c 슬롯 폭 안에 둘째 축을 둘 자리가 없어 명세 요청의 다른 갈래인 가장자리 화살표를 썼다)
+            L_arr = mm_to_data_x(axc, 3.2)
+            axc.annotate("", xy=(x_hi, yy), xytext=(x_hi - L_arr, yy), annotation_clip=False,
+                         arrowprops=dict(arrowstyle="-|>,head_length=0.35,head_width=0.18", lw=1.0, color=S.INK, shrinkA=0, shrinkB=0))
+            t = axc.text(x_hi - L_arr - mm_to_data_x(axc, 0.8), yy, f"+{r.delta:.1f}", ha="right", va="center", fontsize=S.FONT_PT, zorder=6)
+            t.set_gid("offaxis")
+            offaxis.append((r.row_label, t))
+            continue
         axc.plot([r.ci_lo, r.ci_hi], [yy, yy], color=S.INK, lw=S.LW["ci_forest_cell"], solid_capstyle="round", zorder=3,
                  gid=f"data|c|cell|{r.row_label}")
         axc.plot([r.ci_lo_beq, r.ci_hi_beq], [yy + dy, yy + dy], color=S.INK, lw=S.LW["ci_forest_block"], solid_capstyle="butt",
@@ -850,7 +917,7 @@ def build(medium: str = "paper"):
         t.set_gid("direct_label")
         d_texts[m] = t
     fig.canvas.draw()
-    for m_from, (fx, fy), m_to in D_LEADERS:
+    for m_from, (fx, fy), m_to, stop in D_LEADERS:
         t = d_texts[m_from]
         bb = t.get_window_extent().transformed(axd.transData.inverted())
         r = pool.loc[m_to]
@@ -861,7 +928,7 @@ def build(medium: str = "paper"):
         L = math.hypot(ux, uy)
         sx += 0.4 * ux / L * mm_to_data_x(axd, 1.0)
         sy += 0.4 * uy / L * mm_to_data_y(axd, 1.0)
-        leader_to(axd, (sx, sy), (r.wid10, r.cov10), stop_mm=1.0, gid=f"leader|d|{m_to}")
+        leader_to(axd, (sx, sy), (r.wid10, r.cov10), stop_mm=stop, gid=f"leader|d|{m_to}")
     axd.xaxis.set_major_locator(FixedLocator(D_XTICKS))
     axd.xaxis.set_major_formatter(FuncFormatter(lambda v, _p: f"{v:.0f}"))
     axd.yaxis.set_major_locator(FixedLocator(COV_YTICKS))
@@ -919,7 +986,12 @@ def build(medium: str = "paper"):
     yl_y = ((d_top + d_bot) / 2 + (e_top + e_bot) / 2) / 2
     ov.text(COV_LABEL_X_MM, yl_y, "Coverage", rotation=90, ha="left", va="center", fontsize=S.FONT_PT)
 
-    data = dict(R30=R30, M=M, arc=arc, main=main, ak=ak, F=F, B=B, E=E, C=C)
+    # 축을 끈 덮개 축과 지도(GeoAxes)의 눈금 라벨은 그려지지 않지만 Text 객체로 남아 style.text_overlaps·audit_v3 의 글자 수에 잡힌다.
+    # 라벨 자체를 끈다(그림에는 변화 없음)
+    for a_ in fig.axes:
+        if (not a_.axison) or hasattr(a_, "projection"):
+            a_.tick_params(axis="both", which="both", labelbottom=False, labeltop=False, labelleft=False, labelright=False)
+    data = dict(R30=R30, M=M, arc=arc, main=main, ak=ak, F=F, B=B, E=E, C=C, offaxis=offaxis)
     geom = dict(P_mm=P_mm, Q_mm=Q_mm, disp=disp, cluster=cluster, rho=rho, m_per_mm=m_per_mm,
                 axes=dict(c=axc, d=axd, e=axe, maps=axes_map, cbar=cax, ov=ov), texts_a=texts_a, d_texts=d_texts, key_texts=key_texts)
     return fig, data, info, geom
@@ -968,8 +1040,12 @@ def plotted_numbers(fig, data) -> tuple[list[dict], int, int]:
         if panel == "c":
             label = parts[3]
             r = Fi.loc[label]
-            filt = f"block == '{r.block}', key == '{r.key}', variant == '{r.variant}'"
-            src = "data/processed/paper_figs/fig6_a.csv"
+            if r.source == "xg_tests.csv":
+                filt = f"hypothesis == '{r.hypothesis}' (main columns = 5 km block mask)"
+                src = _rel(XG_TESTS)
+            else:
+                filt = f"block == '{r.block}', key == '{r.key}', variant == '{r.variant}'"
+                src = "data/processed/paper_figs/fig6_a.csv"
             if kind == "cell":
                 add("c", "cell-weighted 95% CI", label, xs, [r.ci_lo, r.ci_hi], src, filt + " → ci_lo, ci_hi")
             elif kind == "block":
@@ -1002,6 +1078,14 @@ def plotted_numbers(fig, data) -> tuple[list[dict], int, int]:
                     f"target == '{t}', n == {n} → width_ratio, coverage")
             else:
                 add("e", "coverage 95% interval", f"{t} n={n}", ys, [r.cov_lo, r.cov_hi], src, f"target == '{t}', n == {n} → cov_lo, cov_hi")
+    for label, t in data.get("offaxis", []):                 # 축 밖 행: 적은 점 추정값(0.1 cm)과 두 CI 하한이 모두 축 밖인지
+        r = Fi.loc[label]
+        src = _rel(XG_TESTS) if r.source == "xg_tests.csv" else "data/processed/paper_figs/fig6_a.csv"
+        v = float(t.get_text().replace("+", "").replace("\u2212", "-"))
+        add("c", "off-axis point estimate (printed, 0.1 cm)", label, v, round(float(r.delta), 1), src, f"hypothesis == '{r.hypothesis}' → delta")
+        add("c", "off-axis: both 95% CI lower bounds > axis end", label, [r.ci_lo, r.ci_lo_beq],
+            [r.ci_lo, r.ci_lo_beq] if min(r.ci_lo, r.ci_lo_beq) > FOREST_XLIM[1] else [np.nan, np.nan], src,
+            f"ci_lo, ci_lo_beq > {FOREST_XLIM[1]} cm")
     return rows, n_num, n_bad
 
 
@@ -1063,6 +1147,9 @@ def source_checks(data, info, geom) -> list[dict]:
         if r.source == "lgw_bundle.csv":
             q = src[(src.ab == r.ab) & (src.target == MEAN4)]
             filt = f"ab == '{r.ab}', target == MEAN4"
+        elif r.source == "xg_tests.csv":
+            q = src[src.hypothesis == r.hypothesis]
+            filt = f"hypothesis == '{r.hypothesis}'"
         else:
             tid = r.hypothesis.split("(")[0]
             q = src[(src.test_id == tid) & (src.contrast == r.contrast) & (src.target == MEAN4)]
@@ -1076,7 +1163,8 @@ def source_checks(data, info, geom) -> list[dict]:
                 abs(q.ci_lo_beq - r.ci_lo_beq), abs(q.ci_hi_beq - r.ci_hi_beq))
         diffs.append(d)
         details.append(f"{r.row_label}: {r.source} [{filt}] 차 {d:.1e}")
-    out.append(_chk("포레스트 14행 = 원천 판정 표(6값씩 84개)", max(diffs) < 1e-9, f"최대 차 {max(diffs):.2g} cm; " + "; ".join(details)))
+    out.append(_chk(f"포레스트 {len(F)}행 = 원천 판정 표(6값씩 {6 * len(F)}개)", max(diffs) < 1e-9 and len(F) == 16,
+                    f"최대 차 {max(diffs):.2g} cm; " + "; ".join(details)))
     out.append(_chk("포레스트 재표집 10000회, 4지역 층화 평균", set(F.nboot) == {10000}, f"nboot {sorted(set(F.nboot))}"))
     # 설명문 수치(c)
     cb = F.set_index("row_label").loc["CatBoost, main"]
@@ -1085,9 +1173,25 @@ def source_checks(data, info, geom) -> list[dict]:
     ab1 = lgw[(lgw.ab == "AB1") & (lgw.target == MEAN4)].iloc[0]
     out.append(_chk("설명문 CatBoost 2.25 [1.10, 3.42], Holm P 0.023", (f"{cb.delta:.2f}", f"{cb.ci_lo:.2f}", f"{cb.ci_hi:.2f}", f"{ab1.holm_p:.3f}")
                     == ("2.25", "1.10", "3.42", "0.023"), f"fig6_a catboost_lo {cb.delta:.4f} [{cb.ci_lo:.4f}, {cb.ci_hi:.4f}]; lgw_bundle AB1 holm_p {ab1.holm_p}"))
-    five = [F.set_index("row_label").loc[k, "delta"] for k in ("Random forest", "MLP", "Multi-head MLP", "FT-Transformer, reduced", "RealMLP")]
-    out.append(_chk("설명문 '2.44–5.21 cm' = 두 CI 판정이 같은 5종(rf, mlp, tabm, ftt, realmlp)의 Δ 범위",
-                    (f"{min(five):.2f}", f"{max(five):.2f}") == ("2.44", "5.21"), f"{[round(v, 4) for v in five]}"))
+    Fl = F.set_index("row_label")
+    six = ["Random forest", "CatBoost, physics inputs", "MLP", "Multi-head MLP", "FT-Transformer, reduced", "RealMLP"]
+    five = [Fl.loc[k, "delta"] for k in six]
+    out.append(_chk("설명문 '2.44–5.21 cm' = 두 CI 판정이 같은 6행(rf, 물리 출력 입력 CatBoost(F1k, C1 README 2.1 보조), mlp, tabm, ftt, realmlp)의 Δ 범위,"
+                    " 6행 모두 두 가중 CI 하한 > 0 이고 분할 독립 가정 의존 표지 없음",
+                    (f"{min(five):.2f}", f"{max(five):.2f}") == ("2.44", "5.21") and all(Fl.loc[k, "ci_lo"] > 0 and Fl.loc[k, "ci_lo_beq"] > 0
+                                                                                      and Fl.loc[k, "ci_dependence"] == "" for k in six),
+                    "; ".join(f"{k} {Fl.loc[k, 'delta']:.4f} [{Fl.loc[k, 'ci_lo']:.2f}, {Fl.loc[k, 'ci_hi']:.2f}] / [{Fl.loc[k, 'ci_lo_beq']:.2f}, {Fl.loc[k, 'ci_hi_beq']:.2f}]"
+                              for k in six)))
+    other5 = ["CatBoost, main", "CatBoost, larger", "CatBoost, tuned", "TabPFN v2", "TabICL v2", "TabICL v2, full context"]
+    out.append(_chk("설명문 'The other five learners ... gave the same verdict under the primary intervals' = 6행(TabICL 두 조건) 모두 주 CI 의 두 가중 하한 > 0",
+                    all(Fl.loc[k, "ci_lo"] > 0 and Fl.loc[k, "ci_lo_beq"] > 0 for k in other5),
+                    "; ".join(f"{k} [{Fl.loc[k, 'ci_lo']:.2f}, {Fl.loc[k, 'ci_hi']:.2f}] / [{Fl.loc[k, 'ci_lo_beq']:.2f}, {Fl.loc[k, 'ci_hi_beq']:.2f}]" for k in other5)))
+    out.append(_chk("설명문 연도 정합 Stefan 'lower error' = 두 가중 CI 상한 < 0", Fl.loc["Year-matched Stefan", "ci_hi"] < 0 and Fl.loc["Year-matched Stefan", "ci_hi_beq"] < 0,
+                    f"[{Fl.loc['Year-matched Stefan', 'ci_lo']:.2f}, {Fl.loc['Year-matched Stefan', 'ci_hi']:.2f}] / "
+                    f"[{Fl.loc['Year-matched Stefan', 'ci_lo_beq']:.2f}, {Fl.loc['Year-matched Stefan', 'ci_hi_beq']:.2f}]"))
+    cap = CAPTIONS_V2.read_text(encoding="utf-8") if CAPTIONS_V2.exists() else ""
+    out.append(_chk("설명문 앙상블 정의 'mean of scale-calibrated Stefan, Kudryavtsev and ESA CCI anchors' = CAPTIONS.md v2/Fig6 의 B:ens 정의",
+                    "B:ens averages the scale-calibrated Stefan, Kudryavtsev and CCI anchors" in cap, f"{_rel(CAPTIONS_V2)} 문자열 포함 여부"))
     dep = F[F.ci_dependence != ""].row_label.tolist()
     out.append(_chk("분할 독립 가정 의존 행 = CatBoost 3설정, TabPFN v2, TabICL v2 두 조건, 연도 정합 Stefan(7행)",
                     set(dep) == {"CatBoost, main", "CatBoost, larger", "CatBoost, tuned", "TabPFN v2", "TabICL v2", "TabICL v2, full context", "Year-matched Stefan"},
@@ -1137,6 +1241,42 @@ def source_checks(data, info, geom) -> list[dict]:
     else:
         out.append(_chk("지도 중심 경도 = Fig 1a 기록값", False, "Fig1_values.txt 없음"))
     # 8. vmax 규칙(D-10)
+    # 9. 설명문의 지도·구간 수치(티베트 끝 색 값, 알래스카 확대도 중심 경도, 재표집 횟수, 영구동토 자료 판)
+    leg = LEGEND_MD.read_text(encoding="utf-8") if LEGEND_MD.exists() else ""
+    # 10. 기존 ALT 지도 행(XG, 계획 8.7): 판정과 설명문 문장
+    X = F[F.source == "xg_tests.csv"].set_index("key")
+    c5, w5 = X.loc["XG-1c"], X.loc["XG-1w"]
+    out.append(_chk("XG-1c(CCI v5, 주 4지역) 두 마스크 판정 '열세', Holm p ≤ 0.05, 5 km·25 km 값 같음(학습 지점 없음) → 설명문 'higher error (+23.79 cm; 95% CI 15.34 to 30.16'",
+                    c5.verdict4 == "열세" and c5.verdict4_blk25 == "열세" and max(c5.p_holm_blk5, c5.p_holm_blk25) <= 0.05
+                    and abs(c5.delta - c5.delta_blk25) < 1e-9 and c5.pool_name == "four-region stratified mean"
+                    and f"higher error (+{c5.delta:.2f} cm; 95% CI {c5.ci_lo:.2f} to {c5.ci_hi:.2f}" in leg,
+                    f"Δ {c5.delta:.4f} [{c5.ci_lo:.4f}, {c5.ci_hi:.4f}] / 블록 {c5.delta_beq:.4f} [{c5.ci_lo_beq:.4f}, {c5.ci_hi_beq:.4f}]; Holm p {c5.p_holm_blk5}/{c5.p_holm_blk25};"
+                    f" {c5.blind}; {c5.deviation}; {c5.design}"))
+    out.append(_chk("XG-1w(Wei v2, 레나·캐나다) 두 마스크 판정 '미결정' → 설명문 'difference (Lena Delta and Canada; 47% of cells gap-filled) was not resolved'",
+                    w5.verdict4 == "미결정" and w5.verdict4_blk25 == "미결정" and w5.pool_name.startswith("two-region")
+                    and f"(Lena Delta and Canada; {100 * w5.fill_frac_blk5:.0f}% of cells gap-filled) was not resolved" in leg,
+                    f"Δ {w5.delta:.4f} [{w5.ci_lo:.4f}, {w5.ci_hi:.4f}] / 블록 {w5.delta_beq:.4f} [{w5.ci_lo_beq:.4f}, {w5.ci_hi_beq:.4f}]; 25 km Δ {w5.delta_blk25:.4f};"
+                    f" Holm p {w5.p_holm_blk5}/{w5.p_holm_blk25}; 제품 결측 대체(ρ·s) 5 km {w5.fill_frac_blk5:.4f}, 25 km {w5.fill_frac_blk25:.4f};"
+                    f" 마스크 뒤 P0 RMSE {w5.rmse_p0_postmask_blk5:.2f} cm; {w5.blind}; {w5.deviation}"))
+    out.append(_chk("XG 행 재표집 = xg_summary_meta.json nboot 10000", set(X.nboot) == {10000}, f"nboot {sorted(set(X.nboot))}"))
+    tib = float(M.set_index("name").loc["Tibet_LGD", "D0_1.0"])
+    out.append(_chk("설명문 'Tibetan Plateau in a, −59.98 cm' = 티베트 직접 ML Δ 이고 범위 밖 값은 이것 하나",
+                    _minus(f"{tib:.2f}") + " cm" in leg and info["over"] == {"D0_1.0": 1, "D1_1.0": 0} and tib < -info["vmax"],
+                    f"Tibet_LGD D0_1.0 {tib:.4f} cm, vmax {info['vmax']:.0f}, 범위 밖 {info['over']}"))
+    lon_c = info["alaska_inset"]["lon_c"]
+    ak_txt = f"{abs(lon_c):.0f}° {'W' if lon_c < 0 else 'E'}"
+    out.append(_chk(f"설명문 투영 중심 경도 '127° E'(본 지도 {LON0}°), 알래스카 확대도 '{ak_txt}'(대상 7개 경도 평균 {lon_c:.3f}°)",
+                    "central meridian 127° E" in leg and f"Alaska enlargement, {ak_txt}" in leg and f"{LON0:.0f}" == "127", f"확대도 중심 위도 {info['alaska_inset']['lat_c']:.2f}° N"))
+    mb = json.loads(LGU_B_META.read_text(encoding="utf-8"))
+    mx = json.loads(LGX_META.read_text(encoding="utf-8"))
+    out.append(_chk("설명문 재표집 'd 1000 resamples'(lgu_b_meta.json nboot), 'c and e 10,000 resamples'(fig6_a nboot, lgx_meta.json nboot)",
+                    int(mb["nboot"]) == D_NBOOT == 1000 and int(mx["nboot"]) == E_NBOOT == 10000 and set(F.nboot) == {10000}
+                    and "1000 resamples" in leg and "10,000 resamples" in leg,
+                    f"lgu_b nboot {mb['nboot']}, lgx nboot {mx['nboot']}; e 의 포함률 CI 는 h42_label_grid_ext.conformal_table 의 boot_mean_blocks(채점 블록 재표집)"))
+    out.append(_chk("설명문 영구동토 자료 'ESA CCI Permafrost fraction v4.0 (1997–2021 mean)' = netCDF title", "v4.0" in info["pfr_title"] and "1997" in info["pfr_title"]
+                    and "2021" in info["pfr_title"] and "ESA CCI Permafrost fraction v4.0 (1997–2021 mean)" in leg, f"title '{info['pfr_title']}'"))
+    import cartopy
+    out.append(_chk("설명문 'Cartopy 판' = 실행 판", f"Cartopy {cartopy.__version__}" in leg, f"cartopy {cartopy.__version__}"))
     out.append(_chk("컬러바 ±vmax = 티베트 뺀 |Δ| 99 백분위를 5 cm 단위로 올림", info["vmax"] == 5.0 * math.ceil(info["p99"] / 5.0),
                     f"값 {info['n_vmax_values']}개(16대상 × 2; 명세 8.3 의 '34값' 은 티베트를 빼면 32값), p99 {info['p99']:.2f}, vmax {info['vmax']:.0f}; "
                     f"범위 밖 {info['over']}(티베트 D0 {M.set_index('name').loc['Tibet_LGD', 'D0_1.0']:.2f}), 컬러바 연장 '{info['ext_kind']}'"))
@@ -1161,9 +1301,13 @@ def legend_checks() -> tuple[list[dict], dict]:
     out.append(_chk("설명문 첫 문장이 'This figure' 로 시작하지 않고 그림 명세 8.6·원고 명세 7절의 제목 문장과 같음",
                     legend.startswith("Without target labels, 2 of 30 targets lost over 2 cm with physics pseudo-labels and 18 with direct ML."),
                     legend[:110]))
-    out.append(_chk("설명문에 XG 자리표시 1개(그림 명세 12절 문자열)", placeholders == ["[XG: Fig 6c | 결과 열람 뒤 설계, 등록 이탈(WRAPUP 10) | 2.7 XG-1 행]"],
-                    f"{placeholders}"))
-    need = ["10,000 resamples", "±0.5 cm", "70° N", "Natural Earth", "ESA CCI", "Cartopy", "post hoc", "split-independence", "17 targets", "30 targets"]
+    out.append(_chk("설명문 자리표시 0개(XG 자리표시를 수치 문장으로 바꿈, 그림 명세 12절)", placeholders == [], f"{placeholders or '0개'}"))
+    m_xg = re.search(r"Existing ALT maps.*?resolved\.", legend)
+    n_xg = len(m_xg.group(0).split()) if m_xg else -1
+    meta["xg_sentence_words"] = n_xg
+    out.append(_chk("XG 문장(Existing ALT maps … resolved.) 50단어 이하(그림 명세 13절)", 0 < n_xg <= 50, f"{n_xg}단어"))
+    need = ["10,000 resamples", "±0.5 cm", "70° N", "Natural Earth", "ESA CCI", "Cartopy", "post hoc", "split-independence", "17 targets", "30 targets",
+            "Existing ALT maps", "5 km of product training sites", "arrow"]
     miss = [s for s in need if s not in legend]
     out.append(_chk("설명문 필수 요소(재표집·띠·축척 위도·자료 출처·소프트웨어·사후 서술·의존 표지·대상 수)", not miss, f"빠짐 {miss or '없음'}"))
     color_words = [w for w in ("blue", "brown", "purple", "grey ", "gray ", "black", "triangle", "square", "diamond", "circle") if w in legend.lower()]
@@ -1206,15 +1350,98 @@ def overlap_check(fig, geom) -> list[str]:
         for x, y, r, g in circles:
             if b.x0 - r <= x <= b.x1 + r and b.y0 - r <= y <= b.y1 + r:
                 issues.append(f"글자-원 겹침: '{t.get_text()}' / {g}")
-        if gid in ("direct_label", "direction_label", "scale", "graticule", "key_label", "sizekey"):
+        if gid in ("direct_label", "direction_label", "scale", "graticule", "key_label", "sizekey", "offaxis"):
             for ln in data_lines:
                 xy = ln.get_transform().transform(np.column_stack([ln.get_xdata(), ln.get_ydata()]))
                 seg = xy if len(xy) == 1 else np.vstack([np.linspace(xy[i], xy[i + 1], 60) for i in range(len(xy) - 1)])
-                r_px = (ln.get_markersize() / 2 + ln.get_linewidth() / 2) * fig.dpi / 72.0
+                has_marker = ln.get_marker() not in (None, "None", "none", "", " ")
+                # 점 하나짜리 표지는 선이 그려지지 않으므로 표지 반지름만, 선은 굵기의 반을 더한다
+                r_pt = ln.get_markersize() / 2 if (has_marker and len(xy) == 1) else (ln.get_markersize() / 2 if has_marker else 0.0) + ln.get_linewidth() / 2
+                r_px = r_pt * fig.dpi / 72.0
+                if gid == "direct_label" and (ln.get_gid() or "").startswith("data|"):
+                    r_px += LABEL_PAD_MM / S.MM_PER_IN * fig.dpi        # 직접 라벨은 자료 표지에서 0.5 mm 이상 띄운다
                 inside = ((seg[:, 0] >= b.x0 - r_px) & (seg[:, 0] <= b.x1 + r_px) & (seg[:, 1] >= b.y0 - r_px) & (seg[:, 1] <= b.y1 + r_px))
                 if inside.any() and not (gid == "scale" and (ln.get_gid() or "").startswith("scale_bar")):
                     issues.append(f"글자-자료 겹침: '{t.get_text()}' / {ln.get_gid()}")
     return issues
+
+
+def _seg_dist(p, A) -> float:
+    """점 p 와 꺾은선 A(n × 2) 사이 최소 거리."""
+    A = np.atleast_2d(A)
+    if len(A) == 1:
+        return float(np.hypot(*(p - A[0])))
+    d = []
+    for a, b in zip(A[:-1], A[1:]):
+        ab = b - a
+        t = np.clip(np.dot(p - a, ab) / max(float(np.dot(ab, ab)), 1e-12), 0.0, 1.0)
+        d.append(float(np.hypot(*(p - a - t * ab))))
+    return min(d)
+
+
+def map_clearance_check(fig, geom, data, min_mm=MAP_CLEAR_MM) -> tuple[list[str], dict]:
+    """본 지도 대상 원(지름 3 mm)의 테두리와 확대 사각형, 확대도·삽도 틀, 연결선, 다른 원의 지시선 사이 간격(mm).
+    min_mm 미만이거나 원 중심이 확대도·삽도 틀 안이면 보고한다. 반환 (문제 목록, 요소 종류별 최소 간격)."""
+    fig.canvas.draw()
+    rend = fig.canvas.get_renderer()
+    px2mm = S.MM_PER_IN / fig.dpi
+    ov = geom["axes"]["ov"]
+    names = list(data["main"].name)
+    out, gmin = [], {}
+    for panel in MAP_COLS:
+        ax = geom["axes"]["maps"][panel]
+        sc = [c for c in ax.collections if (c.get_gid() or "") == f"data|{panel}|targets"][0]
+        xy = sc.get_offset_transform().transform(sc.get_offsets()) * px2mm
+        polys = []
+        for ln in list(ax.lines) + list(ov.lines):
+            g = ln.get_gid() or ""
+            if g.startswith(f"zoom_rectangle|{panel}") or g.startswith(f"leader|{panel}|") or g == f"zoom_connector|{panel}":
+                polys.append((g, ln.get_transform().transform(np.column_stack([ln.get_xdata(), ln.get_ydata()])) * px2mm))
+        frames = {}
+        for key in (f"inset_alaska_{panel}", f"inset_tibet_{panel}"):
+            bb = geom["axes"]["maps"][key].get_window_extent(rend)
+            x0, y0, x1, y1 = np.array([bb.x0, bb.y0, bb.x1, bb.y1]) * px2mm
+            frames[key] = (x0, y0, x1, y1)
+            polys.append((f"frame|{key}", np.array([[x0, y0], [x1, y0], [x1, y1], [x0, y1], [x0, y0]])))
+        for n, p in zip(names, xy):
+            for g, A in polys:
+                if g.startswith("leader|") and g.split("|")[2] == n:
+                    continue
+                d = _seg_dist(p, A) - CIRCLE_D_MM / 2
+                kind = g.split("|")[0]
+                gmin[kind] = min(gmin.get(kind, np.inf), round(d, 2))
+                if d < min_mm:
+                    out.append(f"{panel}: '{n}' 원 테두리와 {g} 간격 {d:.2f} mm")
+            for key, (x0, y0, x1, y1) in frames.items():
+                if x0 <= p[0] <= x1 and y0 <= p[1] <= y1:
+                    out.append(f"{panel}: '{n}' 원 중심이 {key} 틀 안")
+    return out, gmin
+
+
+def leader_clearance_check(fig, min_mm=LABEL_PAD_MM) -> tuple[list[str], dict]:
+    """d 의 지시선(gid 'leader|d|<방법>')과 다른 방법의 자료 표지(지역 점, 평균, CI 막대) 사이 간격(mm). 자기 방법과 두 줄 묶음 짝
+    (D_PAIR)의 평균·CI·지역 점은 뺀다(지시선이 그 평균을 가리킨다). 반환 (문제 목록, 지시선별 최소 간격)."""
+    fig.canvas.draw()
+    px2mm = S.MM_PER_IN / fig.dpi
+    lines = [ln for ln in fig.findobj(Line2D) if (ln.get_gid() or "").startswith(("data|d|", "leader|d|"))]
+    leaders = [ln for ln in lines if ln.get_gid().startswith("leader|")]
+    out, gmin = [], {}
+    for ld in leaders:
+        own = ld.get_gid().split("|")[2]
+        L = ld.get_transform().transform(np.column_stack([ld.get_xdata(), ld.get_ydata()])) * px2mm
+        for ln in lines:
+            parts = ln.get_gid().split("|")
+            if parts[0] == "leader" or parts[3] in (own, D_PAIR.get(own)):
+                continue
+            xy = ln.get_transform().transform(np.column_stack([ln.get_xdata(), ln.get_ydata()])) * px2mm
+            pts = xy if len(xy) == 1 else np.vstack([np.linspace(xy[i], xy[i + 1], 40) for i in range(len(xy) - 1)])
+            has_marker = ln.get_marker() not in (None, "None", "none", "", " ")
+            r = ((ln.get_markersize() / 2 if has_marker else ln.get_linewidth() / 2) + ld.get_linewidth() / 2) / 72.0 * S.MM_PER_IN
+            d = min(_seg_dist(p, L) for p in pts) - r
+            gmin[own] = min(gmin.get(own, np.inf), round(d, 2))
+            if d < min_mm:
+                out.append(f"d 지시선 {own} 과 {ln.get_gid()} 간격 {d:.2f} mm")
+    return out, gmin
 
 
 def tick_spacing_check(fig, axes: dict, category_axes: dict) -> tuple[list[str], dict]:
@@ -1247,7 +1474,7 @@ def extent_check(fig) -> list[str]:
     fig.canvas.draw()
     rend = fig.canvas.get_renderer()
     W, H = fig.bbox.width, fig.bbox.height
-    m = 0.3 / 25.4 * fig.dpi
+    m = 0.3 / 25.4 * fig.dpi - 0.01         # 0.01 px: 축 좌표 변환의 부동소수 오차(가장자리 0.3 mm 에 맞춘 글자)
     out = []
     for t in drawn_texts(fig):
         b = t.get_window_extent(rend)
@@ -1279,8 +1506,15 @@ def main_panel_area(info) -> dict:
     return dict(a=a, b=b, share=100 * (a + b) / (W_MM * H_MM), largest="a, b (같음)")
 
 
+# 대상별 Δ 의 두 가중 95 % CI 요약(LG 하네스 h40_label_grid._sig: 셀 가중·블록 등가중 CI 가 모두 0 의 같은 쪽이면
+# improve/worse, 그 밖은 ns). 지도에는 그리지 않고 Source Data 에만 둔다(지도는 사후 서술)
+SIG_NOTE = {"worse": "95% CIs of both weightings above zero", "improve": "95% CIs of both weightings below zero",
+            "ns": "95% CI of at least one weighting includes zero"}
+
+
 def source_data_table(data, info, geom) -> pd.DataFrame:
-    """제출용 Source Data(내부 약호·경로 없음, 그림에 그린 값)."""
+    """제출용 Source Data(내부 약호·경로 없음, 그림에 그린 값). drawn_in 은 a·b 대상 원이 그려진 곳
+    (본 지도, 알래스카 확대도, 티베트 고원 삽도)이고 c·d·e 행은 비운다."""
     M, arc, F, B, E = data["M"], data["arc"], data["F"], data["B"], data["E"]
     rows = []
     disp = dict(info["disp_mm"])
@@ -1293,16 +1527,25 @@ def source_data_table(data, info, geom) -> pd.DataFrame:
                              label=r.display_name, region=r.region_name, target_kind=r.kind, latitude=round(r.lat, 4), longitude=round(r.lon, 4),
                              label_cells=int(r.n_cells), n_labels=0, x_name="", x="", y_name="error change vs source Stefan (cm)",
                              y=round(float(v), 4), lo="", hi="", lo_block_equal="", hi_block_equal="",
-                             note=("both weightings above zero" if M.loc[r.Index, f"sig_{col}"] == "worse" else
-                                   "both weightings below zero" if M.loc[r.Index, f"sig_{col}"] == "improve" else "intervals include zero")
+                             note=SIG_NOTE.get(str(M.loc[r.Index, f"sig_{col}"]), "no interval (point estimate only)")
                              + (f"; drawn {disp[r.name]:.1f} mm from its centre with a leader line" if r.name in disp and disp[r.name] > LEADER_MIN_MM else "")))
+    off = {lab for lab, _ in data.get("offaxis", [])}
     for r in F.itertuples():
-        rows.append(dict(panel="c", element="forest row", drawn_in="", method=r.row_label, label=r.group, region="four-region stratified mean",
+        xg = r.source == "xg_tests.csv"
+        note = (f"lo, hi: cell-weighted 95% CI; lo_block_equal, hi_block_equal: block-equal 95% CI; block bootstrap, {int(r.nboot):,} resamples"
+                + ("; verdict depends on the split-independence assumption" if r.ci_dependence else ""))
+        if xg:
+            note += ("; existing map without target labels, scored after removing 0.5° scoring blocks within 5 km of product training sites"
+                     " (post hoc comparison)")
+            if r.fill_frac_blk5 >= 0.0005:
+                note += f"; product value missing for {100 * r.fill_frac_blk5:.1f}% of scored cells, gap-filled"
+        if r.row_label in off:
+            note += "; beyond the x axis in the figure (edge arrow with the point estimate)"
+        rows.append(dict(panel="c", element="forest row", drawn_in="", method=r.row_label, label=r.group,
+                         region=r.pool_name if xg else "four-region stratified mean",
                          target_kind="", latitude="", longitude="", label_cells="", n_labels=0, x_name="error change vs source Stefan (cm)",
                          x=round(r.delta, 4), y_name="", y="", lo=round(r.ci_lo, 4), hi=round(r.ci_hi, 4),
-                         lo_block_equal=round(r.ci_lo_beq, 4), hi_block_equal=round(r.ci_hi_beq, 4),
-                         note=f"95% block bootstrap, {r.nboot} resamples; cell-weighted and block-equal"
-                              + ("; verdict depends on the split-independence assumption" if r.ci_dependence else "")))
+                         lo_block_equal=round(r.ci_lo_beq, 4), hi_block_equal=round(r.ci_hi_beq, 4), note=note))
     lab = dict(D_METHODS)
     for r in B.sort_values(["kind", "method", "target"]).itertuples():
         rows.append(dict(panel="d", element="four-region mean" if r.kind == "mean4" else "regional value", drawn_in="", method=lab[r.method],
@@ -1310,24 +1553,29 @@ def source_data_table(data, info, geom) -> pd.DataFrame:
                          label_cells="", n_labels=0, x_name="interval width (cm)", x=round(r.wid10, 4), y_name="coverage of 90% interval",
                          y=round(r.cov10, 4), lo=round(r.wid10_lo1, 4) if r.kind == "mean4" else "", hi=round(r.wid10_hi1, 4) if r.kind == "mean4" else "",
                          lo_block_equal="", hi_block_equal="",
-                         note=(f"coverage 95% interval {r.cov10_lo1:.4f} to {r.cov10_hi1:.4f}" if r.kind == "mean4" else f"{int(r.n_blocks)} scoring blocks")))
+                         note=(f"lo, hi: width 95% interval; coverage 95% interval {r.cov10_lo1:.4f} to {r.cov10_hi1:.4f}; bootstrap, {D_NBOOT:,} resamples"
+                               if r.kind == "mean4" else f"{int(r.n_blocks)} scoring blocks")))
     for r in E.sort_values(["target", "n"]).itertuples():
         rows.append(dict(panel="e", element="labelled interval", drawn_in="", method="Anchor + residual ML", label="", region=S.REGION_NAME[r.target], target_kind="",
                          latitude="", longitude="", label_cells="", n_labels=int(r.n), x_name="width relative to no labels", x=round(r.width_ratio, 4),
                          y_name="coverage of 90% interval", y=round(r.coverage, 4), lo=round(r.cov_lo, 4), hi=round(r.cov_hi, 4),
-                         lo_block_equal="", hi_block_equal="", note=f"width {r.width_cm:.2f} cm; zero-label width {r.width_r0_n0:.2f} cm; {int(r.n_splits)} splits"))
+                         lo_block_equal="", hi_block_equal="",
+                         note=f"lo, hi: coverage 95% interval (block bootstrap, {E_NBOOT:,} resamples); width {r.width_cm:.2f} cm; zero-label width {r.width_r0_n0:.2f} cm;"
+                              f" {int(r.n_splits)} splits"))
     return pd.DataFrame(rows)
 
 
 def values_report(summary: dict, checks: list[dict], plotted: list[dict], data, info, geom, legend_meta: dict) -> list[str]:
     aud = summary["audit"]
     M = data["M"]
+    _c5 = data["F"].set_index("key").loc["XG-1c"]
+    F_CI_TXT = (f"{_c5.ci_lo:.2f}–{_c5.ci_hi:.2f} cm", f"{_c5.ci_lo_beq:.2f}–{_c5.ci_hi_beq:.2f} cm")
     L = ["Fig 6 v3 수치·점검 기록", "",
          "작성: scripts/4_visualization/paper_v3/fig6.py 실행 때 자동 생성. 그림 명세 FIGURE_SPEC_v3.md 8절, 지침 2절·6.6절·7.1절.", ""]
     L += ["[1] 원천 파일(등록)과 sha256"]
     for p in (LG_CURVE, LGD_CURVE, WF0_RISK, S.PAPER_FIGS / "fig6_a.csv", S.PAPER_FIGS / "fig6_b.csv", S.PAPER_FIGS / "fig6_d.csv",
               LGW_BUNDLE, LGX_TESTS, LGT_TESTS, LGF_TESTS, LGFN_TESTS, LGU_B, LGX_CONFORMAL, TABLE1_ROWS, PFR_NC,
-              PROC / "fidelity_base_v3.csv", PROC / "lg_subregion_map_v1.csv"):
+              PROC / "fidelity_base_v3.csv", PROC / "lg_subregion_map_v1.csv", LGU_B_META, LGX_META, CAPTIONS_V2, XG_TESTS, XG_META):
         L.append(f"- {_rel(p)}  {sha256(p)[:16]}…")
     for spec in LGD_RUN_TABLE.values():
         p = PROC / "lgd" / "run_tables" / spec / "fidelity_base_v3.csv"
@@ -1335,7 +1583,8 @@ def values_report(summary: dict, checks: list[dict], plotted: list[dict], data, 
     L += ["- a·b 행 필터: wf0_reanalysis.load()(placement == cell, alpha == 1, learner ∈ {catboost_lo, none}, point_only != True, LGD 는 KEEP_LGD),",
           "  deltas() 의 n == 0 행에서 D0_1.0, D1_1.0 (= 방법 rmse − rmse_p0, cm). 지도는 target ∈ {독립 7, 하위 지역 10} × 모드 x(D-9).",
           "- 대상 중심: 지역은 fidelity_base_v3.csv 의 macro == 지역, 하위 지역은 lg_subregion_map_v1.csv 의 sub == ID, LGD 대상은 실행 표의 macro.",
-          "- c 행 필터: fig6_a.csv (block, key, variant) 14쌍(모듈 FOREST). d: fig6_b.csv method ∈ 5종, kind ∈ {region, mean4}. e: fig6_d.csv 6행.",
+          "- c 행 필터: fig6_a.csv (block, key, variant) 14쌍(모듈 FOREST) + 봉인 xg_tests.csv 의 hypothesis XG-1c, XG-1w 2행(모듈 FOREST_XG; 주 열 delta·ci_lo·ci_hi·"
+          "delta_blockeq·ci_lo_beq·ci_hi_beq = 5 km 블록 마스크). d: fig6_b.csv method ∈ 5종, kind ∈ {region, mean4}. e: fig6_d.csv 6행.",
           "- 계열 대응(코드 안에서만): D0 = Direct ML, D1 = Physics pseudo-labels, P* = Year-matched Stefan, B:ens = Anchor ensemble, F1k = CatBoost, physics inputs,",
           "  R1 λ 0.25 = Anchor + residual ML(e), 구간 척도화 const/phys/nflow/nflow#placebo/cbq = Constant/Physics prior/Normalizing flow/Permuted flow/CatBoost quantile.", ""]
     L += ["[2] 그린 수치 전수 대조(그림 객체 → 자료 표; 자료 표 → 원천 표는 [3])"]
@@ -1344,7 +1593,8 @@ def values_report(summary: dict, checks: list[dict], plotted: list[dict], data, 
     for r in plotted:
         L.append(f"- {'통과' if r['ok'] else '실패'} | {r['panel']} | {r['element']} | {r['label']} | 값 {r['plotted']} | {r['source']} | {r['filter']}")
     L.append("- 기준선·띠(자료 아님): c 0선 0 cm 와 ±0.5 cm 띠(지침 2.3), d 명목 포함률 0.90 선, e 명목 띠 0.85–0.95(그림 명세 8.3), 컬러바 눈금 "
-             f"{[int(v) for v in np.linspace(-info['vmax'], info['vmax'], 5)]} cm, 축척 1000 km(지도)·200 km(삽도), 위도 라벨 60·70·80° N.")
+             f"{[int(v) for v in np.linspace(-info['vmax'], info['vmax'], 5)]} cm, 축척 1000 km(본 지도)·500 km(알래스카 확대도)·200 km(티베트 삽도),"
+             " 위도 라벨 60·70·80° N.")
     L.append("")
     L += ["[3] 원천 대조와 설명문 수치"]
     for c in checks:
@@ -1354,14 +1604,19 @@ def values_report(summary: dict, checks: list[dict], plotted: list[dict], data, 
     L.append(f"- audit_v3: 글자 크기 {sorted(aud['sizes'])} pt, 문자 수 {aud['chars']}(한도 800, 그림 명세 8.5 사유: 포레스트 행 이름), 얇은 선 {aud['thin_lines'] or '0'},"
              f" 제목 {aud['titles'] or '0'}, 글씨 상자 {aud['boxed_text']}, 내부 약호 {aud['codes'] or '0'}, 네 자리 쉼표 {aud['comma4'] or '0'},"
              f" 긴 라벨 {aud['long_labels'] or '0'}, 그림 안 수치 {aud['loose_numbers'] or '0'}; 실패 항목 {aud['fails'] or '없음'}")
-    L.append("  (그림 안 수치 검사 제외 gid: scale(축척 길이), sizekey(열쇠 값 '±0.5 cm', '40 labels', '160 labels'), graticule(위도 라벨 3개). 명세 8.3 이 허용한 수치다)")
+    L.append("  (그림 안 수치 검사 제외 gid: scale(축척 길이), sizekey(열쇠 값 '±0.5 cm', '40 labels', '160 labels'), graticule(위도 라벨 3개), offaxis(축 밖 행의"
+             " 점 추정값 '+23.8', 조정 담당 요청 '가장자리 화살표와 값'). 앞의 셋은 명세 8.3 이 허용한 수치다)")
     pa = summary["pdf"]
     L.append(f"- pdf_audit: {pa['width_mm']} × {pa['height_mm']} mm, 문자 {pa['chars']}, 크기 분포 {pa['sizes']}, 5 pt 미만 {pa['lt5']},"
              f" 글꼴 계열 {pa['families']}, Type 3 {'있음' if pa['type3'] else '없음'}")
     for ln in summary["fonts"].strip().splitlines()[2:]:
         L.append(f"- pdffonts: {' '.join(ln.split()[:2])} 내장 {ln.split()[-5]}")
     L.append(f"- pdfimages(내장 래스터 ppi): {summary['pdfimages'] or '없음'}")
-    L.append(f"- 글자 겹침·글자와 자료 겹침: {summary['overlaps'] or '0건'}")
+    L.append(f"- 글자 겹침·글자와 자료 겹침(직접 라벨은 자료 표지에서 {LABEL_PAD_MM} mm 이상): {summary['overlaps'] or '0건'}")
+    to = summary["text_overlaps"]
+    L.append(f"- style.text_overlaps: 글자 {to['n_texts']}개, 겹침 쌍 {to['overlap_pairs'] or '0'}, 캔버스 밖 {to['outside'] or '0'}")
+    L.append(f"- 지도 원 테두리와 다른 선·틀 사이 {MAP_CLEAR_MM} mm 미만, d 지시선과 다른 방법의 자료 표지 사이 {LABEL_PAD_MM} mm 미만: {summary['clearance'] or '0건'};"
+             f" 지도 종류별 최소 간격(mm) {info['map_clearance_min_mm']}, d 지시선별 최소 간격(mm) {info['leader_clearance_min_mm']}")
     L.append(f"- 지도 원 밖 글자가 원 안으로 들어옴: {summary['circle_text'] or '0건'}")
     L.append(f"- 눈금 라벨 간격 1.5 mm 미만: {summary['tick_spacing'] or '0건'}")
     L.append(f"- 캔버스 밖 글자: {summary['extent'] or '0건'}")
@@ -1382,12 +1637,17 @@ def values_report(summary: dict, checks: list[dict], plotted: list[dict], data, 
              f" 겹침 묶음 {info['clusters']}; 옮긴 거리(mm) {dict((k, float(v)) for k, v in info['disp_mm'].items() if v > LEADER_MIN_MM)}"
              f"(이 원들은 실제 위치 점과 지시선으로 이었다. {LEADER_MIN_MM} mm 이하로 옮긴 원 {sum(1 for v in info['disp_mm'].values() if 0 < v <= LEADER_MIN_MM)}개)")
     L.append(f"- c 행 이름 사이 최소 간격 {info.get('category_row_gap_mm')} mm(행 간격 약 2.7 mm = 7 pt 글자 높이 2.5 mm + 0.4 mm). 지침 2.12 의 1.5 mm 는 숫자 눈금 라벨 규칙이고"
-             " 범주 행 이름은 표 행 간격(약 1.1배)으로 두었다 [판단]. 14행 + 묶음 머리 4줄을 명세의 64 mm 슬롯에 넣으려면 이 간격이 필요하다.")
+             " 범주 행 이름은 표 행 간격(약 1.1배)으로 두었다 [판단]. 14행 + 묶음 머리 4줄을 명세의 64 mm 슬롯에 넣으려면 이 간격이 필요하다."
+          f" XG 묶음(머리 1줄 + 2행)을 더하면서 같은 간격을 지키려고 c 슬롯을 {SLOT['c'][3]:.1f} mm 로 늘렸다(행 간격 2.715 mm 유지).")
     L.append(f"- 컬러바: ±{info['vmax']:.0f} cm(TwoSlopeNorm vcenter 0, cmc.broc), 연장 표지 '{info['ext_kind']}', 범위 밖 값 {info['over']}")
     L.append("")
     L += ["[5] 판단과 명세에서 바꾼 점([판단])",
           f"- 지도 범위를 Fig 1a 와 같게(50° N 원, 중심 경도 {LON0}° E) 두었다(그림 명세 8.3). 원 지름은 {MAP_D_MM} mm 로 슬롯(82 × 76 mm)에서 열 머리를 뺀 72.4 mm 보다"
-          " 조금 작게 하고 오른쪽에 맞췄다. 왼쪽 아래 구석에 티베트 삽도(17 × 13 mm), 오른쪽 아래 구석에 알래스카 확대도(23 × 25 mm), 왼쪽 위 구석에 영구동토 견본 2줄을 두기 위해서다.",
+          f" 조금 작게 하고 오른쪽에 맞췄다. 왼쪽 아래 구석에 티베트 삽도({INSET_W_MM:.0f} × {INSET_H_MM:.0f} mm), 오른쪽 아래 구석에 알래스카 확대도"
+          f"({AK_INSET_W_MM:.0f} × {AK_INSET_H_MM:.0f} mm), 왼쪽 위 구석에 영구동토 견본 2줄을 두기 위해서다.",
+          "- 알래스카 확대도 폭은 23 mm(1차 렌더)에서 20 mm 로 줄였다. 23 mm 에서는 확대도 틀이 동시베리아 원 테두리에 0.07 mm, 본 지도의 확대 사각형이"
+          " 캐나다 하위 지역 원 테두리에 0.03 mm 까지 붙었다. 확대 배율은 남북 방향이 정하므로 바뀌지 않는다. 확대도 축척 막대는 오른쪽 아래 구석에 두었다"
+          "(왼쪽 아래 구석에 하위 지역 원이 있다). 축척 막대 길이는 진척 위도 70° N 기준 투영 길이이고 측지 길이는 위 [4] 에 적었다.",
           "- 알래스카 7대상(지역 + 하위 지역 6)은 본 지도에서 9 × 7 mm 안에 모여 명세 8.3 의 지시선 부채꼴로는 지시선이 엇갈리고 원이 최대 8 mm(약 1000 km) 옮겨져 읽을 수 없었다"
           "(1차 렌더). 지침 2.11 '밀집 구역은 확대도'(Hjort 2018 Fig 1)와 Fig 1a 의 확대 문법을 따라 확대도로 바꾸고, 본 지도에는 확대 범위 사각형(1.0 pt 검정)과"
           " 확대도 틀로 가는 연결선 2개(1.0 pt #bdbdbd)만 두었다. 레나델타 3대상은 명세대로 지시선 부채꼴이다.",
@@ -1403,12 +1663,25 @@ def values_report(summary: dict, checks: list[dict], plotted: list[dict], data, 
           "- 컬러바 라벨과 c 의 x 축 이름은 같은 문구 'Error change vs source Stefan (cm)' 이다. 그림 명세 8.3 이 두 축에 같은 이름을 지정했고(지침 2.12 의 Δ 축 기준 표기)"
           " 두 축은 같은 양이다. H13 의 '같은 문구 반복' 은 요소 라벨에 대한 규칙으로 보고 축 이름은 명세대로 두었다.",
           "- d 의 거의 겹치는 두 평균(상수·물리 사전, 정규화 흐름·순열 흐름)은 두 줄로 쌓은 라벨 한 묶음과 지시선 하나로 가리킨다(위 줄 = 포함률이 높은 쪽). 읽는 법은 설명문에 적었다.",
+          f"- d 라벨 위치(1차 렌더에서 고침): 상수·물리 사전 묶음은 x {D_LABEL_POS['phys'][0]:.0f} cm, y {D_LABEL_POS['phys'][1]}·{D_LABEL_POS['const'][1]}."
+          " x 65 cm 에서는 물리 사전 지시선이 동시베리아 지역 점을 0.24 mm 로 스쳤고 'Constant' 가 상수 CI 위끝에 0.44 mm 로 붙었다."
+          " 위 줄 글상자가 축 위끝을 약 0.6 mm 넘지만 위 테두리가 없고 지역 모양 열쇠와 1 mm 이상 떨어진다. 정규화 흐름 지시선은 평균 2.0 mm 앞에서 멈춘다"
+          "(평균 옆 캐나다 지역 점 두 개와 0.5 mm 이상 띄우기 위해).",
           "- d 의 검정은 '구간 방법 추정' 한 역할이다(그림 명세 D-17, 지침 2.4 검정 역할 목록 밖이라 사용자 확인 필요).",
           "- e 는 관측 대 예측(지침 6.6)이 아니라 라벨 있는 잔차 구간(그림 명세 D-16)이다. 셀 단위 구간 파일이 없다.",
           "- 예측 지도 행(ALT 예측, 구간 폭, 외삽 영역)은 본문에 두지 않았다(LGU-B2 미결정, 그림 명세 8.3). a·b 가 본문 결과 지도이다.",
           "- 지도의 관측 위치(F-12)는 대상 중심 원으로 보인다. 개별 라벨 셀은 Fig 1a 에 있고 이 지도에는 그리지 않았다(결과 지도의 주제가 대상별 Δ 이기 때문).",
           "- 슬라이드판(medium='slide')은 이 비교판에서 만들지 않았다(그림 명세 1.7 의 두 매체 규칙은 채택 뒤 구현).",
-          "- SVG 는 내지 않았다(이 폴더의 다른 v3 그림과 같이 PDF 정본 + PNG 600 dpi 검토용).", ""]
+          "- SVG 는 내지 않았다(이 폴더의 다른 v3 그림과 같이 PDF 정본 + PNG 600 dpi 검토용).",
+          f"- 기존 ALT 지도 묶음(2026-10-05, 조정 담당 요청): c 마지막에 'Existing ALT maps' 두 행(ESA CCI v5 = XG-1c 주 4지역, Wei v2 = XG-1w 레나델타·캐나다 2지역)을"
+          " 더했다. 값은 봉인 xg_tests.csv 의 주 열(5 km 블록 마스크)이고 25 km 마스크 판정도 같다([3] 10). 결과 열람 뒤 설계·등록 이탈(WRAPUP 10)이라 설명문에 'added post hoc' 로 적었다."
+          " Wei 풀이 2지역이라 행 이름에 'two regions' 를 넣었다(덱 부록 3 은 4지역 평균 그림이라 Wei 를 뺐다).",
+          f"- ESA CCI v5 의 두 가중 CI(셀 {F_CI_TXT[0]}, 블록 {F_CI_TXT[1]})는 축 끝 {FOREST_XLIM[1]} cm 보다 오른쪽이다. 다른 행을 줄이지 않으려고 축을 넓히지 않고"
+          " 축 끝에 1.0 pt 화살표(3.2 mm)와 점 추정값 '+23.8'(7 pt)을 두었다. 덱 부록 3 은 가로축을 끊어 둘째 축에 그렸으나 c 슬롯 폭(96 mm, 이름 열 40 mm) 안에는"
+          " 둘째 축을 같은 축척으로 둘 자리가 없다. 정확한 값과 CI 는 설명문과 Source Data 에 있다.",
+          f"- 그림 높이 {H_MM:.1f} mm(명세 160 mm, 지침 상한 {S.HMAX_MM:.0f} mm): c 에 3줄을 더한 높이 {XG_EXTRA_MM} mm. 오른쪽 d·e 슬롯은 아래 빈 띠가 생기지 않게"
+          f" 그 높이를 반씩 나눠 가졌다(d 높이 {SLOT['d'][3]:.2f} mm, e 위끝 {SLOT['e'][1]:.2f} mm·높이 {SLOT['e'][3]:.2f} mm). a·b·컬러바 위치는 그대로다(덱 자르기 f6a, f6b,"
+          " f6_cbar 상자 유효). 덱 자르기 f6c 는 아래쪽이 늘어난 만큼 상자를 늘려야 한다.", ""]
     L += ["[6] 색각·흑백(F-09)",
           "- 연속 색표 cmc.broc(Crameri, 색각 이상에서도 단조로운 명도) ±vmax 공유, 0 중심. 대상 원 테두리 검정, 지시선 #737373, 영구동토 바탕 #d0d0d0·#e6e6e6, 육지 #f4f4f4.",
           "- 방법 색은 e 의 Anchor + residual ML #9a7bc9 하나뿐이다(흰 바탕 대비 " + f"{summary['purple_contrast']:.2f}" + ":1, 기준 3:1 이상). c·d 의 자료 표지는 검정이다.",
@@ -1435,9 +1708,15 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
     fig, data, info, geom = build("paper")
 
-    aud = S.audit_v3(fig, max_chars=800, allowed_num_gids=("scale", "sizekey", "graticule"))
+    aud = S.audit_v3(fig, max_chars=800, allowed_num_gids=("scale", "sizekey", "graticule", "offaxis"))
     plotted, n_num, n_bad = plotted_numbers(fig, data)
     ovl = overlap_check(fig, geom)
+    tov = S.text_overlaps(fig)
+    clr, clr_min = map_clearance_check(fig, geom, data)
+    info["map_clearance_min_mm"] = clr_min
+    lcl, lcl_min = leader_clearance_check(fig)
+    info["leader_clearance_min_mm"] = lcl_min
+    clr += lcl
     circ = map_text_inside_circle(fig, geom)
     tsp, cat_gap = tick_spacing_check(fig, dict(c=geom["axes"]["c"], d=geom["axes"]["d"], e=geom["axes"]["e"], cbar=geom["axes"]["cbar"]),
                                       category_axes={("c", "y")})
@@ -1450,6 +1729,9 @@ def main():
         print("audit_v3:", {k: (sorted(v) if isinstance(v, set) else v) for k, v in aud.items()})
         print("plotted numbers:", n_num, "bad:", n_bad)
         print("overlaps:", ovl)
+        print("text_overlaps:", tov)
+        print("drawn texts:", len(drawn_texts(fig)))
+        print("map clearance:", clr, clr_min, lcl_min)
         print("circle_text:", circ)
         print("tick spacing:", tsp)
         print("extent:", ext)
@@ -1468,7 +1750,8 @@ def main():
     import cartopy
     sys.path.insert(0, str(ROOT / "src"))
     from polar import cvd
-    summary = dict(audit=aud, n_numbers=n_num, n_bad=n_bad, overlaps=ovl, circle_text=circ, tick_spacing=tsp, extent=ext, pdf=pa, fonts=fonts,
+    summary = dict(audit=aud, n_numbers=n_num, n_bad=n_bad, overlaps=ovl, text_overlaps=tov, clearance=clr, circle_text=circ, tick_spacing=tsp,
+                   extent=ext, pdf=pa, fonts=fonts,
                    pdfimages=img_lines, cartopy=cartopy.__version__, purple_contrast=float(cvd.contrast(S.METHOD["anchor_residual"]["color"])),
                    paths=[str(p) for p in paths] + [str(sd_path)])
     checks = source_checks(data, info, geom)

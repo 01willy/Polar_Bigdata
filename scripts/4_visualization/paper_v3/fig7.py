@@ -9,7 +9,9 @@
   b  알래스카 라벨 전량, 채점 블록별 오차 변화 지도(2안, 그림 명세 D-11 기본값). 관측 위치 검정 점.
   c  총·격자 사이·격자 안 성분(라벨 전량, 교차검증 잔차 가중) 작은 다중 포레스트.
   d  워크플로 경로(원천 계수 Stefan 대비, 레나델타·캐나다 전이 풀, D-13 기본값)와 배치·진단 띠(별도 축).
-  e  워크플로 대비(XC) 자리표시: 결과 전이므로 빈 축과 축 이름만(그림 명세 12절).
+  e  워크플로 대비(XC, 2026-10-05 봉인 해제): XC-1(무작위 배치·고정 잔차 레시피 대비, 라벨 40·160)과 XC-2(재보정 Stefan 대비,
+     라벨 10·40·160)의 풀 값 포레스트(점 + 두 가중 CI, 0선, ±0.5 cm 띠). 재보정 Stefan 대비 0.5 cm 넘게 나빴던 지역은 지역 모양 작은 기호.
+     XC-5(무작위 대비, 교차검증 선정)는 시험하지 않음(Algorithm P = S1)이라 묶음을 두지 않는다.
 
 원천(읽기만 한다. 그림 명세 9.3 의 경로와 필터)
   a  results/rescale_wf2/data/processed/wf/wf2b_tests.csv, data/processed/lgx/lgx_floor.csv
@@ -18,6 +20,8 @@
   c  results/rescale_wf3/data/processed/wf/wf3b_tests.csv, wf3b_decomp.csv(설명문 수치 대조만)
   d  data/processed/paper_figs/fig2_pool_curves.csv, fig2_region_curves.csv,
      results/rescale_wf/data/processed/wf/wf_curve.csv
+  e  data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_hyp.csv(등록 주 가설), xc_contrasts_main.csv(PE1 지역 행),
+     xc_contrasts_aux.csv(Tibet S-XC8|PE2, Alaska S-XC8|AUX3 지역 행), xc_meta.json(재표집 횟수)
 
 산출(작업 지시가 정한 파일만)
   outputs/figures/paper/v3_restructure/Fig7.pdf(벡터, 글꼴 내장), Fig7.png(600 dpi),
@@ -65,6 +69,11 @@ SRC = dict(
     region_curves=S.PAPER_FIGS / "fig2_region_curves.csv",
     wf_curve=ROOT / "results/rescale_wf/data/processed/wf/wf_curve.csv",
     base=ROOT / "data/processed/fidelity_base_v3.csv",
+    xc_hyp=ROOT / "data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_hyp.csv",
+    xc_main=ROOT / "data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_contrasts_main.csv",
+    xc_aux=ROOT / "data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_contrasts_aux.csv",
+    xc_meta=ROOT / "data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_meta.json",
+    xc_sent=ROOT / "data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_sentences.json",
 )
 
 REGIONS_A = ["Alaska", "Lena", "Canada"]
@@ -82,8 +91,24 @@ L = dict(
     c_key=(117.6, 118.7),
     d_letter=(0.0, 124.0), d_top=125.6, d_h=17.0, d_n0=(13.2, 6.0), d_main=(21.2, 77.8), d_all=(101.0, 6.0),
     d_band=(0.0, 149.6, 110.0, 13.8), d_head_right=11.8,
-    e_letter=(118.0, 124.0), e_ax=(132.0, 127.0, 38.0, 30.0),
+    e_letter=(118.0, 124.0), e_ax=(132.0, 128.8, 37.6, 27.4), e_name_right=131.0, e_head_x=118.3, e_key=(121.6, 125.5),
 )
+
+# ---------------------------------------------------------------- 패널 e(XC, 등록 문서 2.3 주 가설; 그림 명세 9.3 e)
+# (묶음 머리, 대비, [(가설, 라벨 수)]). 묶음 머리 문구는 조정 담당 지시(2026-10-05 05:20)
+E_GROUPS = [("vs random placement, fixed recipe", "A1-A2", [("XC-1b", 40), ("XC-1c", 160)]),
+            ("vs recalibrated Stefan", "A1-A3", [("XC-2a", 10), ("XC-2b", 40), ("XC-2c", 160)])]
+E_XLIM, E_XT = (-2.3, 2.7), [-2, -1, 0, 1, 2]
+E_WORSE_CM = 0.5            # 재보정 Stefan 대비 지역 예외: 셀 가중 Δ > 0.5 cm(등록 비열등 문장의 지역 규칙)
+E_REGION_FROM_TARGET = {"Lena|x": "Lena", "Canada|x": "Canada", "Russia_W|x": "Russia_W", "Russia_E|x": "Russia_E",
+                        "Russia_C~lgd|x": "Russia_C_LGD", "Tibet_LGD|x": "Tibet_LGD", "Alaska|x": "Alaska"}
+# 봉인 문장(xc_sentences.json)의 지역 예외(라벨 수: 지역)와 조정 담당 목록(러시아 E 10, 알래스카 40·160, 레나 160)
+E_WORSE_EXPECT = {10: {"Russia_E"}, 40: {"Alaska"}, 160: {"Lena", "Alaska"}}
+# 조정 담당이 준 값(셀 가중 delta [lo, hi] / 블록 등가중 delta [lo, hi]), 대조용
+E_EXPECT = {"XC-1b": (-0.86, -1.03, -0.39, -0.36, -0.72, 0.003), "XC-1c": (-0.93, -1.25, -0.40, -0.54, -0.94, -0.13),
+            "XC-2a": (0.08, -0.07, 0.20, -0.005, -0.15, 0.14), "XC-2b": (-1.35, -1.64, -0.80, -1.00, -1.42, -0.59),
+            "XC-2c": (-1.51, -1.99, -0.88, -1.29, -1.78, -0.80)}
+MAX_CHARS = 760             # 그림 명세 9.5 의 600 자에 e 의 묶음 머리 2, 행 이름 5, 지역 열쇠 3, 축 이름을 더한 값(Fig 6 의 800 자와 같은 사유 기록)
 
 
 # ================================================================ 작은 도우미(이 그림 전용)
@@ -335,6 +360,60 @@ def load_d():
 
 
 # ================================================================ 패널 a
+def load_e():
+    """e: XC 등록 주 가설의 풀 행(xc_hyp.csv)과 재보정 Stefan 대비 지역 행(독립 지역 7곳 = 주 표 PE1 5곳 + 보조 표 Tibet·Alaska).
+    지역 행 가운데 셀 가중 Δ > 0.5 cm 인 행만 그린다(shown). 반환 (풀 행, 지역 행)."""
+    h = pd.read_csv(SRC["xc_hyp"])
+    nboot = int(json.loads(SRC["xc_meta"].read_text(encoding="utf-8"))["nboot"])
+    mm_ = pd.read_csv(SRC["xc_main"])
+
+    def pool_desc(con, n):
+        """풀 평균 행(xc_contrasts_main.csv scope MEAN)의 지역 목록을 영문 서술로(Source Data 용)."""
+        q = mm_[(mm_.contrast == con) & (mm_.n == n) & (mm_.scope == "MEAN")]
+        assert len(q) == 1, (con, n, len(q))
+        regs = [E_REGION_FROM_TARGET[t] for t in str(q.target.iloc[0])[5:-1].split(",")]
+        return f"pooled mean of {len(regs)} regions: " + ", ".join(S.REGION_NAME[r] for r in regs)
+    rows = []
+    for head, con, items in E_GROUPS:
+        for hid, n in items:
+            q = h[h.hypothesis == hid]
+            assert len(q) == 1, (hid, len(q))
+            r = q.iloc[0]
+            assert r.contrast == con and int(r.n) == n, (hid, r.contrast, r.n)
+            rows.append(dict(panel="e", element="pooled", group=head, hypothesis=hid, contrast=con, n=n, region=pool_desc(con, n),
+                             pool_label=str(r.pool_label),
+                             delta=float(r.delta), ci_lo=float(r.ci_lo), ci_hi=float(r.ci_hi), delta_blockeq=float(r.delta_beq),
+                             delta_blockeq_lo=float(r.ci_lo_beq), delta_blockeq_hi=float(r.ci_hi_beq), verdict4=str(r.verdict4),
+                             p_holm=float(r.p_holm), kind=str(r.kind), design=str(r.design), blind=str(r.blind), nboot=nboot,
+                             source="data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_hyp.csv",
+                             filter=f"hypothesis == '{hid}' (contrast {con}, n {n})"))
+    E = pd.DataFrame(rows)
+    m = pd.read_csv(SRC["xc_main"])
+    a = pd.read_csv(SRC["xc_aux"])
+    reg = []
+    for hid, n in E_GROUPS[1][2]:
+        rm = m[(m.contrast == "A1-A3") & (m.n == n) & (m.scope == "region")].assign(
+            source="data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_contrasts_main.csv", filter_label="main")
+        ra = a[(a.contrast == "A1-A3") & (a.n == n) & (a.scope == "region") & a.label.isin(["S-XC8|PE2", "S-XC8|AUX3"])].assign(
+            source="data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_contrasts_aux.csv")
+        ra["filter_label"] = ra.label
+        both = pd.concat([rm, ra], ignore_index=True)
+        dup = both[both.duplicated("target", keep=False)]
+        for t_, g in dup.groupby("target"):                          # 주 표와 보조 표에 같이 있는 지역(러시아 E)은 값이 같아야 한다
+            assert np.allclose(g.delta.astype(float), float(g.delta.iloc[0]), atol=1e-12), t_
+        both = both.drop_duplicates("target", keep="first")
+        for _, r in both.iterrows():
+            rg = E_REGION_FROM_TARGET[str(r.target)]
+            reg.append(dict(panel="e", element="region_value", group=E_GROUPS[1][0], hypothesis=hid, contrast="A1-A3", n=n, region=rg,
+                            delta=float(r.delta), ci_lo=float(r.ci_lo), ci_hi=float(r.ci_hi), delta_blockeq=float(r.delta_blockeq),
+                            delta_blockeq_lo=float(r.ci_lo_beq), delta_blockeq_hi=float(r.ci_hi_beq), verdict4=str(r.verdict4),
+                            shown=bool(float(r.delta) > E_WORSE_CM), source=r.source,
+                            filter=f"contrast == 'A1-A3', n == {n}, scope == 'region', target == '{r.target}'"
+                                   + ("" if r.filter_label == "main" else f", label == '{r.filter_label}'")))
+    ER = pd.DataFrame(reg)
+    return E, ER
+
+
 def a_positions():
     out = []
     for i in range(3):
@@ -719,13 +798,70 @@ def draw_d_bands(fig, axes_d):
     return axb
 
 
-# ================================================================ 패널 e(자리표시)
-def draw_e(fig):
+# ================================================================ 패널 e(XC 포레스트)
+def e_rows():
+    """묶음 머리와 행의 y(자료 좌표, 아래로 증가)와 묶음별 행 범위."""
+    pos, heads, spans = {}, [], []
+    yv = 0.0
+    for gi, (head, _con, items) in enumerate(E_GROUPS):
+        if gi:
+            yv += 0.35
+        heads.append((yv, head))
+        yv += 1.0
+        g0 = yv
+        for hid, _n in items:
+            pos[hid] = yv
+            yv += 1.0
+        spans.append((g0 - 0.5, yv - 0.5))
+    return pos, heads, spans, yv
+
+
+def draw_e(fig, E, ER, fs=None, key_xy=None, ms_region=None, name_right=None, head_x=None, key_gap_mm=None, key_sep_mm=2.6):
+    """XC 포레스트. 0선과 ±0.5 cm 띠는 묶음 행에만 그린다(묶음 머리 줄을 비워 머리 글자가 축 위를 지나가게) [판단].
+    지역 기호: 재보정 Stefan 대비 0.5 cm 넘게 나빴던 지역의 셀 가중 Δ(지역 모양, 2.5 pt, alpha 0.5; 패널 d 의 지역 값과 같은 부호화)."""
+    fs = fs or FS
     x, y, w, h = L["e_ax"]
     ax = S.axes_mm(fig, x, y, w, h)
-    strip_axis(ax, left=True, bottom=True)
-    ax.tick_params(axis="both", which="both", left=False, bottom=False, labelleft=False, labelbottom=False)
-    ax.set_xlabel("Error change (cm)", labelpad=2.0)
+    pos, heads, spans, yv = e_rows()
+    ax.set_xlim(*E_XLIM)
+    ax.set_ylim(yv - 0.5, -0.6)
+    strip_axis(ax, left=False, bottom=True)
+    ax.yaxis.set_major_locator(NullLocator())
+    set_fixed_ticks(ax.xaxis, E_XT, [num_tick(v) for v in E_XT])
+    hb = S.EQUIV_HALF_WIDTH_CM
+    for y0, y1 in spans:
+        ax.fill_betweenx([y0, y1], -hb, hb, facecolor=S.EQUIV_BAND, edgecolor="none", lw=0, zorder=0.5)
+        ax.plot([0.0, 0.0], [y0, y1], color=S.ZERO_LINE["color"], lw=S.ZERO_LINE["lw"], solid_capstyle="butt", zorder=1.5)
+    for _, r in E.iterrows():
+        ci_pair(ax, pos[r.hypothesis], r, INK, orient="h")
+    msr = ms_region or S.MS["region_point"]
+    for _, r in ER[ER.shown].iterrows():
+        ax.plot([r.delta], [pos[r.hypothesis]], ls="none", marker=S.REGION_MARKER[r.region], ms=msr, mfc=INK, mec="none",
+                alpha=0.5, zorder=2.8, gid=f"e_region|{r.hypothesis}|{r.region}")
+    W, H = fig_wh(fig)
+    nr = name_right if name_right is not None else L["e_name_right"]
+    hx = head_x if head_x is not None else L["e_head_x"]
+    for hid, yy in pos.items():
+        n = int(E.set_index("hypothesis").loc[hid, "n"])
+        t = text_mm(fig, nr, float(data_y_to_fig_mm(ax, yy)), f"{n} labels", ha="right", va="center", fontsize=fs)
+        t.set_gid("rowname_n")                                   # 범주 이름(명세 9.3 e 의 행 이름). audit_v3 수치 검사에서 뺀다
+    for yy, head in heads:
+        t = text_mm(fig, hx, float(data_y_to_fig_mm(ax, yy)), head, ha="left", va="center", fontsize=fs)
+        t.set_gid("category")
+    ax.set_xlabel("Workflow error change (cm)", labelpad=1.6, fontsize=fs)
+    # 지역 모양 열쇠(그린 지역만, 한 줄)
+    kx, ky = key_xy or L["e_key"]
+    shown = [rg for rg in ("Alaska", "Lena", "Russia_E", "Russia_W", "Canada", "Russia_C_LGD") if rg in set(ER[ER.shown].region)]
+    rend = None
+    r_mm = msr / 72.0 * 25.4 / 2
+    cx_off, tx_off = (0.9, 2.0) if key_gap_mm is None else (r_mm, 2 * r_mm + key_gap_mm)   # 기본값 = 패널 d 열쇠와 같은 간격
+    for rg in shown:
+        fig.add_artist(Line2D([(kx + cx_off) / W], [1 - ky / H], transform=fig.transFigure, ls="none", marker=S.REGION_MARKER[rg], ms=msr,
+                              mfc=INK, mec="none", alpha=0.5))
+        tt = text_mm(fig, kx + tx_off, ky, S.REGION_NAME[rg], ha="left", va="center", fontsize=fs)
+        fig.canvas.draw()
+        rend = rend or fig.canvas.get_renderer()
+        kx = kx + tx_off + tt.get_window_extent(rend).width / fig.dpi / MM + key_sep_mm
     return ax
 
 
@@ -739,23 +875,24 @@ def build(medium="paper"):
     obs, ochk = load_obs()
     C = load_c()
     D, dchk = load_d()
+    E, ER = load_e()
     fig = S.fig_mm(FIG_W, FIG_H)
     axes_a = draw_a(fig, A)
     axb, binfo = draw_b(fig, B, obs)
     axes_c = draw_c(fig, C)
     axes_d = draw_d(fig, D)
     draw_d_bands(fig, axes_d)
-    draw_e(fig)
+    draw_e(fig, E, ER)
     key_right = key_line(fig, *L["c_key"])
     for k in ("a", "b", "c", "d", "e"):
         S.panel_letter(fig, *L[f"{k}_letter"], k)
     meta = dict(floor=floor, bchk=bchk, ochk=ochk, dchk=dchk, binfo=binfo, key_right=key_right)
-    return fig, dict(A=A, B=B, obs=obs, C=C, D=D), meta
+    return fig, dict(A=A, B=B, obs=obs, C=C, D=D, E=E, ER=ER), meta
 
 
 # ================================================================ 기록
 def write_source_data(data, path):
-    A, B, obs, C, D = (data[k] for k in ("A", "B", "obs", "C", "D"))
+    A, B, obs, C, D, E, ER = (data[k] for k in ("A", "B", "obs", "C", "D", "E", "ER"))
     parts = []
     a = A.copy()
     a["n_label"] = np.where(a.n < 0, "all", a.n.astype(str))
@@ -773,6 +910,13 @@ def write_source_data(data, path):
     c = C.copy(); c["source"] = "results/rescale_wf3/data/processed/wf/wf3b_tests.csv"
     parts.append(c)
     parts.append(D.copy())
+    e = E.drop(columns=["design", "blind", "kind", "pool_label"]).copy()      # 국문 설계·맹검 서술은 Fig7_values.txt [4b] 에만
+    e["n_label"] = e.n.astype(str)
+    parts.append(e)
+    er = ER.copy()
+    er["n_label"] = er.n.astype(str)
+    er["note"] = np.where(er.shown, "drawn: worse than recalibrated Stefan by more than 0.5 cm (cell-weighted)", "not drawn")
+    parts.append(er)
     out = pd.concat(parts, ignore_index=True, sort=False)
     lead = ["panel", "element", "region", "method", "component", "n", "n_label", "delta", "ci_lo", "ci_hi", "delta_blockeq",
             "delta_blockeq_lo", "delta_blockeq_hi"]
@@ -915,6 +1059,36 @@ def write_values(path, data, meta, audit, pdfa, fonts_txt, png_info):
     nbad += (not ok99)
     P(f"  {'OK ' if ok99 else 'BAD'} SSE 이득의 격자 안 몫 {sgw*100:.2f}% → 격자 사이 약 {(1-sgw)*100:.1f}% (설명문 'about 99%', C8 README B4)")
     P("")
+    P("[4b] 패널 e: XC 등록 주 가설(풀 행, 셀 가중 delta [lo, hi] / 블록 등가중 delta [lo, hi] cm)과 재보정 Stefan 대비 지역 예외")
+    E, ER = data["E"], data["ER"]
+    for _, r in E.iterrows():
+        exp = E_EXPECT[r.hypothesis]
+        got = (r.delta, r.ci_lo, r.ci_hi, r.delta_blockeq, r.delta_blockeq_lo, r.delta_blockeq_hi)
+        ok = all(abs(round(g, 2 if abs(round(e_, 2) - e_) < 1e-12 else 3) - e_) < 1e-9 for g, e_ in zip(got, exp))
+        nbad += (not ok)
+        P(f"  {'OK ' if ok else 'BAD'} {r.hypothesis} {r.contrast} n {r.n}: " + ", ".join(f"{g:+.4f}" for g in got)
+          + f" | 조정 담당 값 {exp} | {r['source']} | {r['filter']}; 4분 판정 {r.verdict4}(그림에 판정 기호 없음), Holm p {r.p_holm:.4f},"
+          f" 풀 '{r.region}' ({r.pool_label}), 설계 '{r.design}', 맹검 '{r.blind}', 재표집 {r.nboot}")
+    for n, grp in ER.groupby("n"):
+        shown = set(grp[grp.shown].region)
+        ok = shown == E_WORSE_EXPECT[int(n)]
+        nbad += (not ok)
+        P(f"  {'OK ' if ok else 'BAD'} 재보정 Stefan 대비 라벨 {int(n)}: 평가 지역 {len(grp)}곳, Δ > {E_WORSE_CM} cm 지역 {sorted(shown)} | 기대 "
+          f"{sorted(E_WORSE_EXPECT[int(n)])}(xc_sentences.json, 조정 담당 목록); 지역 값 "
+          + "; ".join(f"{r.region} {r.delta:+.4f} ({'그림' if r.shown else '안 그림'}; {r.source.split('/')[-1]})" for _, r in grp.iterrows()))
+    sent = json.loads(SRC["xc_sent"].read_text(encoding="utf-8"))["hypotheses"]
+    for hid, needles in (("XC-2a", ["Russia_E|x Δ +1.34"]), ("XC-2b", ["Alaska|x(선택 계열) Δ +1.51"]),
+                         ("XC-2c", ["Lena|x Δ +0.53", "Alaska|x(선택 계열) Δ +2.34"])):
+        ok = all(nd in sent[hid] for nd in needles)
+        nbad += (not ok)
+        P(f"  {'OK ' if ok else 'BAD'} 봉인 문장 {hid} 의 지역 예외 문자열 {needles}")
+    P("  XC-5b·5c(무작위 대비, 교차검증 선정)와 XC-F3 은 '시험하지 않음(Algorithm P = S1)'이라 행이 없다. 그림 명세 9.3 e 의 셋째 묶음"
+      " 'vs random, CV selection' 을 두지 않았다.")
+    P("  [판단] 0선과 ±0.5 cm 띠는 묶음 행에만 그렸다. 묶음 머리(7 pt, 최대 약 37 mm)가 이름 열(약 13 mm)보다 길어 축 위를 지나가기 때문이다.")
+    P("  [판단] 지역 기호는 재보정 Stefan 대비 묶음에만 둔다(등록 비열등 문장의 지역 규칙). 무작위 대비 묶음의 지역 값(레나 +0.21·+0.54,"
+      " 알래스카 +1.26·+2.26 cm, 보조 표)은 Source Data 와 이 기록에만 둔다. 알래스카 값은 Algorithm P 를 고른 알래스카 계열(선택 계열)이다.")
+    P("  묶음 머리 문구는 조정 담당 지시('vs random placement, fixed recipe', 'vs recalibrated Stefan')를 따랐다(명세의 4단어 한도보다 1단어 길다).")
+    P("")
     P("[5] 패널 d: 경로 값(서술, 판정 아님)")
     for _, r in D.sort_values(["method", "element", "n"]).iterrows():
         P(f"  {r.method:16s} {r.element:12s} {r.region:18s} n {('all' if r.n < 0 else int(r.n)):>4}: {r.delta:+.4f}  ({r.source})")
@@ -936,9 +1110,11 @@ def write_values(path, data, meta, audit, pdfa, fonts_txt, png_info):
       f"{FIG_W * FIG_H:.0f} = {(slot_a + slot_b) / (FIG_W * FIG_H):.0%} (명세 41%, 기준 35% 이상); 축 자체 면적은 a 3 × {L['a_wm'] + L['a_gap_all'] + L['a_wa']:.1f} × {L['a_h']:.0f}, "
       f"b {L['b_map'][2]:.0f} × {L['b_map'][3]:.1f} mm. 가장 큰 패널 b")
     P("")
-    P("[6] audit_v3(지침 부록 A.1) 결과")
-    for k in ("fails", "sizes", "chars", "thin_lines", "titles", "boxed_text", "codes", "comma4", "long_labels", "loose_numbers"):
-        P(f"  {k}: {audit[k]}")
+    P(f"[6] audit_v3(지침 부록 A.1) 결과. 문자 수 한도 {MAX_CHARS}: 그림 명세 9.5 의 600 자에 e(XC)의 묶음 머리 2, 행 이름 5, 지역 열쇠 3, 축 이름을"
+      " 더했다(Fig 6 의 800 자와 같은 사유 기록)")
+    for k in ("fails", "sizes", "chars", "thin_lines", "titles", "boxed_text", "codes", "comma4", "long_labels", "loose_numbers", "text_overlaps"):
+        P(f"  {k}: {audit.get(k)}")
+    P("  (수치 검사 제외 gid: scale, sizekey, rowname_n(e 의 행 이름 '10 labels' 등, 명세 9.3 e 가 지정한 범주 이름))")
     P("")
     P("[7] pdf_audit(지침 부록 A.2)와 pdffonts")
     for k, v in pdfa.items():
@@ -957,6 +1133,26 @@ def write_values(path, data, meta, audit, pdfa, fonts_txt, png_info):
     return nbad
 
 
+def drawn_text_overlaps(fig) -> dict:
+    """style.text_overlaps 와 같되, 그려지지 않는 GeoAxes·축을 끈 축의 기본 눈금 라벨 객체(보이는 값으로 남는다)는 뺀다(fig6.drawn_texts 와 같은 규칙)."""
+    import itertools
+    from matplotlib.text import Text
+    fig.canvas.draw()
+    rend = fig.canvas.get_renderer()
+    hidden = set()
+    for a in fig.axes:
+        if (not a.axison) or hasattr(a, "projection"):
+            for axis in (a.xaxis, a.yaxis):
+                hidden.update(axis.get_ticklabels(which="both"))
+                hidden.add(axis.label)
+    texts = [t for t in fig.findobj(Text) if t.get_visible() and t.get_text().strip() and t not in hidden]
+    bbs = [(t.get_text().strip(), t.get_window_extent(rend)) for t in texts]
+    pairs = [(a_[:25], b_[:25]) for (a_, ba), (b_, bb) in itertools.combinations(bbs, 2) if ba.overlaps(bb)]
+    W, H = fig.get_size_inches() * fig.dpi
+    outside = [s_[:25] for s_, b in bbs if b.x0 < -0.5 or b.y0 < -0.5 or b.x1 > W + 0.5 or b.y1 > H + 0.5]
+    return dict(n_texts=len(bbs), overlap_pairs=pairs, outside=outside)
+
+
 XC_PLACEHOLDER = "[XC: Fig 7e | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 XC-1, XC-2 포레스트]"   # 그림 명세 12절
 
 
@@ -972,10 +1168,13 @@ def legend_check():
     words_wo = len(body.replace(XC_PLACEHOLDER, "").split())
     ta = S.text_audit(body.replace(XC_PLACEHOLDER, ""))
     colour = re.findall(r"\b(grey|gray|black|white|blue|red|green|open|filled|thick|thin|dashed|dotted|solid|circle)\b", body, re.I)
+    m_e = re.search(r"\be, (.*?) Intervals", body)
+    n_e = len(m_e.group(1).split()) if m_e else -1
+    flag = "designed after results were inspected; re-test in reused regions"
     out = [f"words {words} (limit 350; without the XC placeholder {words_wo}); first sentence words {len(body.split('. ')[0].split())}",
            f"dash {ta['dash']}; banned {ta['banned']}; middot-number {ta['middot_num']}; comma4 {ta['comma4']}; internal codes {ta['codes']}; "
            f"colour/shape words {colour}; 'This figure' start: {body.lstrip().lower().startswith('this figure')}",
-           f"XC placeholder verbatim: {XC_PLACEHOLDER in body}"]
+           f"XC placeholder removed: {XC_PLACEHOLDER not in body}; e sentence words {n_e} (limit 45); flag '{flag}' present: {flag in body}"]
     for must in ("Natural Earth", "Cartopy", "stereographic", "10,000", "25 splits"):
         out.append(f"contains '{must}': {must in body}")
     return out
@@ -995,7 +1194,9 @@ def main():
     if avail is not None and (avail < 30 or load > 40):
         raise SystemExit("shared server busy: available < 30 GB or load > 40; wait and rerun")
     fig, data, meta = build("paper")
-    audit = S.audit_v3(fig, max_chars=600)
+    audit = S.audit_v3(fig, max_chars=MAX_CHARS, allowed_num_gids=("scale", "sizekey", "rowname_n"))
+    audit["text_overlaps"] = drawn_text_overlaps(fig)
+    print("text_overlaps:", audit["text_overlaps"])
     print("audit_v3 fails:", audit["fails"], "chars", audit["chars"], "sizes", audit["sizes"])
     for k in ("thin_lines", "titles", "boxed_text", "codes", "comma4", "long_labels", "loose_numbers"):
         if audit[k]:

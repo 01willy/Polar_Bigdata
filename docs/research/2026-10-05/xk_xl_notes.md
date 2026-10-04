@@ -30,3 +30,9 @@
 - 차이가 큰 지역(이름만, 원인 단정 없음): 알래스카 내륙(CCI v5, Yi·Kimball, 50 cm 이상), 약 61–63°N·141–150°W(Wei), 약 62–64°N·148°W 서쪽(Aalto 보다 우리가 깊음). 레나 북·동부 델타(CCI v5 보다 깊음), 대부분 영역(Wei, Aalto 보다 얕음).
 - 주의: 차이 색 범위는 지침 규칙(|차| 99 백분위)으로 알래스카 ±215 cm 이다. 그래서 Stefan 차이(±10 cm)는 거의 흰색으로 보인다. 지도에는 정확도 주장을 붙이지 않았다.
 - 산출: data/processed/xbatch/XL_map_products/{xl_alaska_products_v1.csv.gz, xl_lena_products_v1.csv.gz, xl_summary_v1.csv, xl_meta.json}, 그림 XL_Alaska_product_differences, XL_Lena_product_differences, XL_display_resolution(.pdf, .svg, .png, _legend.md), 덱 자산 *_slide.png.
+
+## 그림 개정 2(2026-10-05 검토 반영)
+
+- XL 제품 비교: 두 행(위: 잔차 ML·제품 ALT 한 색 범위(합동 2–98 백분위), 회색 글로 영역 평균과 r; 아래: 제품 − 잔차 ML 한 발산 범위(|차| 합동 98 백분위), Stefan − 잔차 ML 은 자체 ±10 cm). 부호는 개정 1 과 반대(제품 − 우리)다.
+- XL 표시 해상도: 원 1 km 셀 메시(육각형 모자이크 제거), 같은 크기 정사각 패널 4개, 지역마다 색 막대 하나.
+- XK: 같은 간격의 범주 x(1 km, 0.05°, 0.1°, 0.25°)와 눈금 아래 격자 수, 위 행 RMSE(로그, 공유), 아래 행 Stefan − 잔차 ML 차와 CI(셀 가중·블록 등가중), 0 선. Wei 마스크 판은 원천 표에만.

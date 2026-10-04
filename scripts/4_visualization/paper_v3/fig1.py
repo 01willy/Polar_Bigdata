@@ -329,7 +329,7 @@ def panel_a(fig, D, vals, P, lon0):
     theta = np.linspace(0, 2 * np.pi, 361)
     ax.set_boundary(mpath.Path(np.c_[np.sin(theta), np.cos(theta)] * 0.5 + 0.5), transform=ax.transAxes)
     ax.spines["geo"].set_edgecolor(S.BASEMAP["coast"]); ax.spines["geo"].set_linewidth(1.0)
-    ax.add_feature(cfeature.LAND.with_scale("50m"), facecolor=S.BASEMAP["land"], edgecolor="none", linewidth=0, zorder=0)
+    ax.add_feature(cfeature.LAND.with_scale("50m"), facecolor=S.BASEMAP["land"], edgecolor="none", linewidth=0, zorder=0).set_rasterized(True)
     vals["a_pfr_raster"] = draw_pfr(ax, proj, dia, dia, P)
     ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=False, linewidth=S.LW["grid_map"], color=S.BASEMAP["graticule"],
                  xlocs=np.arange(-180, 180, 30), ylocs=[60, 70, 80], zorder=0.5)
@@ -424,7 +424,7 @@ def panel_tibet(fig, D, vals, P, ax_a=None, proj_a=None):
         cy = (Pq[:, 1].min() + Pq[:, 1].max()) / 2
         y_top, y_bot = cy + half_h, cy - half_h
     ax.set_xlim(cx - half_w, cx + half_w); ax.set_ylim(y_bot, y_top)
-    ax.add_feature(cfeature.LAND.with_scale("50m"), facecolor=S.BASEMAP["land"], edgecolor="none", linewidth=0, zorder=0)
+    ax.add_feature(cfeature.LAND.with_scale("50m"), facecolor=S.BASEMAP["land"], edgecolor="none", linewidth=0, zorder=0).set_rasterized(True)
     vals["tibet_pfr_raster"] = draw_pfr(ax, proj, w, h, P)
     ax.spines["geo"].set_edgecolor(S.BASEMAP["coast"]); ax.spines["geo"].set_linewidth(1.0)
     q = q.sort_values("n_loc_1km", ascending=False)
@@ -534,7 +534,7 @@ def panel_b(fig, D, vals):
         jit = rng.uniform(0.14, 0.66, len(E))
         mk = TIBET_MARKER if key == "Tibet_LGD" else S.REGION_MARKER[key]
         ax.scatter(E, yy + jit, s=S.MS["region_point"] ** 2, marker=mk, color=S.INK, alpha=0.5, linewidths=0, zorder=2,
-                   rasterized=False)
+                   rasterized=True)                                        # 밀집 점 층(최대 400 × 7): PDF 크기(600 dpi 래스터)
         q25, q50, q75 = np.exp(r.z_q25), np.exp(r.z_q50), np.exp(r.z_q75)
         ax.plot([q25, q75], [yy, yy], color=S.INK, lw=S.LW["ci_forest_cell"], solid_capstyle="round", zorder=4)
         ax.plot([q50], [yy], "o", ms=S.MS["main"], color=S.INK, mew=0, zorder=5)
@@ -569,7 +569,7 @@ def zoom_base(fig, rect, proj, ext):
     import cartopy.feature as cfeature
     ax = S.axes_mm(fig, *rect, projection=proj)
     ax.set_xlim(ext[0], ext[1]); ax.set_ylim(ext[2], ext[3])
-    ax.add_feature(cfeature.LAND.with_scale("10m"), facecolor=S.BASEMAP["land"], edgecolor="none", linewidth=0, zorder=0)
+    ax.add_feature(cfeature.LAND.with_scale("10m"), facecolor=S.BASEMAP["land"], edgecolor="none", linewidth=0, zorder=0).set_rasterized(True)
     ax.spines["geo"].set_edgecolor(S.BASEMAP["coast"]); ax.spines["geo"].set_linewidth(1.0)
     return ax
 
@@ -579,7 +579,8 @@ def panel_c(fig, L, proj, ext, vals):
     from sklearn.neighbors import BallTree
     ax = zoom_base(fig, C_AX, proj, ext)
     d = L["df"].iloc[L["t_idx"]]
-    ax.scatter(d.lon.values, d.lat.values, s=2.0 ** 2, color=S.INK, linewidths=0, transform=ccrs.PlateCarree(), zorder=3)
+    ax.scatter(d.lon.values, d.lat.values, s=2.0 ** 2, color=S.INK, linewidths=0, transform=ccrs.PlateCarree(), zorder=3,
+               rasterized=True)                                            # 밀집 점 층(대상 셀 3,037)
     # 100 km 거리 등치선(대상 셀 위치 합집합의 측지 거리, 구면 R 6371 km)
     ng = 360
     X, Y = np.meshgrid(np.linspace(ext[0], ext[1], ng), np.linspace(ext[2], ext[3], ng))
@@ -729,13 +730,122 @@ def panel_d(fig, L, proj, ext, vals):
     return ax
 
 
-def panel_e(fig):
-    """XH 결과 전 자리: 빈 축과 축 이름만(명세 12절). 눈금은 자료가 없어 두지 않는다."""
+XH_DIR = ROOT / "data" / "processed" / "xbatch" / "XH_validation_ladder" / "sealed"
+XH_REGIONS = ("Alaska", "Lena", "Canada")
+XH_STAGES = (("W1R", "Random"), ("W1S", "Site"), ("W1B", "Block"), ("W1K", "kNNDM"), ("V-G", "Region holdout"))
+XH_METHODS = (("D0w", "catboost_lo", "direct_ml", "Direct ML"), ("PSw", "none", "recalibrated_stefan", "Recalibrated Stefan"))
+XH_XOFF = {"D0w": 0.86, "PSw": 1.16}                                        # 지역 점의 방법별 가로 비율(로그 축, CI 막대가 겹치지 않게)
+XH_XLIM, XH_YLIM = (0.002, 2000.0), (5.0, 50.0)
+VG_LGV = ROOT / "data" / "processed" / "lgx" / "ladder" / "lgv_metrics.csv"          # 지역 홀드아웃(V-G) RMSE(h41, 계획 8.3)
+VG_METHOD = {"D0w": ("D0", "catboost_lo", 1.0), "PSw": ("PS", "none", 0.0)}           # V-G 의 직접 ML, 학습 셀(원천) 최소제곱 계수 Stefan
+REG7_H41 = ["Alaska", "Lena", "Canada", "Russia_W", "Russia_E", "Russia_C", "Greenland"]
+
+
+def region_holdout_rows():
+    """지역 홀드아웃(V-G) 행. 거리는 좌표만으로 h41 과 같은 정의로 계산한다(새 적합 없음):
+    채점 셀 = 대상 지역 셀 ∩ eval_mask(h41 VData.score), 학습 셀 = h40.Data.source_idx(지역, 'x')(대상 제외, 100 km 버퍼) ∩ y·s 유한,
+    거리 = 채점 셀마다 가장 가까운 학습 셀까지 대원 거리(cv_schemes.nnd_km, XH 와 같은 함수)의 중앙값. RMSE 는 lgv_metrics.csv 의 V-G 지역 행."""
+    from polar.m1_core import eval_mask
+    from polar import cv_schemes as CV
+    h40 = load_h40()
+    HA = h40.parse_args(["--threads", "1", "--splits", "5"])
+    D = h40.get_data(HA)
+    df = D.df
+    score = np.asarray(eval_mask(df), bool) & np.isin(df.macro.values, REG7_H41)
+    trainable = np.isfinite(df.y.values) & np.isfinite(df.s.values)
+    lgv = pd.read_csv(VG_LGV)
+    lgv = lgv[(lgv.scheme == "V-G") & (lgv.scope == "region")]
+    rows, geo = [], {}
+    for R in XH_REGIONS:
+        t_idx, _, s_idx, comp = D.source_idx(R, "x")
+        tr = np.asarray(s_idx, np.int64); tr = tr[trainable[tr]]
+        te = np.asarray(t_idx, np.int64); te = te[score[te]]
+        d = CV.nnd_km(CV.to_rad(df.lon.values[te], df.lat.values[te]), CV.to_rad(df.lon.values[tr], df.lat.values[tr]))
+        geo[R] = dict(n_score=int(len(te)), n_train=int(len(tr)), n_buffer_excluded=int(comp["n_buffer_excluded"]), nnd_median_km=float(np.median(d)),
+                      nnd_min_km=float(d.min()), buffer_km=float(HA.buffer_km))
+        for mth, (m_lgv, lr, lam) in VG_METHOD.items():
+            q = lgv[(lgv.target == R) & (lgv.method == m_lgv) & (lgv.learner == lr) & np.isclose(lgv.lam.astype(float), lam)]
+            assert len(q) == 1, (R, mth, len(q))
+            q = q.iloc[0]
+            rows.append(dict(region=R, variant=np.nan, stage="V-G", method=mth, learner=lr, lam=lam, rmse=q.rmse, rmse_lo=q.rmse_lo,
+                             rmse_hi=q.rmse_hi, rmse_beq=q.rmse_beq, rmse_beq_lo=q.rmse_beq_lo, rmse_beq_hi=q.rmse_beq_hi, n_rows=np.nan,
+                             n_blocks=q.n_blocks, nnd_median_km=geo[R]["nnd_median_km"], source=f"lgv_metrics.csv V-G {m_lgv}|{lr}",
+                             n_cells_lgv=int(q.n_cells)))
+    return pd.DataFrame(rows), geo
+
+
+def load_xh():
+    """봉인 해제된 xh_ladder.csv(계획 8.3)에서 두 방법 × 네 단 × 세 지역 24행. variant 가 비어 있는 행만(캐나다 W1K 'pm2' 제외).
+    지역 홀드아웃(V-G) 6행을 region_holdout_rows 로 더한다(30행)."""
+    d = pd.read_csv(XH_DIR / "xh_ladder.csv")
+    keep = d.variant.isna() & d.region.isin(XH_REGIONS) & d.stage.isin([s for s, _ in XH_STAGES if s != "V-G"])
+    sel = ((d.method == "D0w") & (d.learner == "catboost_lo") & np.isclose(d.lam.astype(float), 1.0)) | ((d.method == "PSw") & (d.learner == "none"))
+    x = d[keep & sel].copy()
+    assert len(x) == 24, len(x)
+    vg, geo = region_holdout_rows()
+    x = pd.concat([x, vg], ignore_index=True)
+    m = (x.groupby(["method", "stage"]).agg(rmse_mean=("rmse", "mean"), n_reg=("region", "nunique"),
+                                            x_geo=("nnd_median_km", lambda v: float(np.exp(np.mean(np.log(np.asarray(v, float))))))).reset_index())
+    assert (m.n_reg == 3).all()
+    return x, m, dict(n_pm2_excluded=int((d.variant == "pm2").sum()), file=str((XH_DIR / "xh_ladder.csv").relative_to(ROOT)), vg_geo=geo,
+                      vg_file=str(VG_LGV.relative_to(ROOT)))
+
+
+def panel_e(fig, vals):
+    """검증 사다리(XH, 계획 8.3). x = 채점 셀에서 가장 가까운 학습 셀까지 거리 중앙값(log10), y = 셀 가중 RMSE.
+    선과 큰 점: 세 지역 등가중 평균(x 는 세 지역 거리의 기하 평균). 작은 기호: 지역 값(2.5 pt, alpha 0.5)과 셀 가중 95 % 블록 재표집 CI.
+    표에 평균 행의 CI 는 없다. 블록 등가중 값과 CI 는 원천 자료에만 둔다(겹침). 지역 홀드아웃(V-G)은 lgv_metrics.csv 의 RMSE 와 좌표만으로
+    다시 계산한 거리(region_holdout_rows)로 그린다. 그 단의 Stefan 은 원천 계수라 빈 기호와 점선으로 구분한다."""
+    X, Mn, info = load_xh()
     ax = S.axes_mm(fig, *E_AX)
-    ax.set_xticks([]); ax.set_yticks([])
+    ax.set_xscale("log")
+    stages = [s_ for s_, _ in XH_STAGES]
+    for mth, lr, key, name in XH_METHODS:
+        st = S.METHOD[key]
+        r = X[X.method == mth]
+        src_open = mth == "PSw"                                             # 지역 홀드아웃의 Stefan 은 원천 계수: 빈 기호
+        for reg in XH_REGIONS:
+            q = r[r.region == reg].set_index("stage").reindex(stages)
+            xx = q.nnd_median_km.values * XH_XOFF[mth]
+            ax.vlines(xx, q.rmse_lo.values, q.rmse_hi.values, color=st["color"], lw=1.0, alpha=0.4, zorder=2)   # 지역 CI: 평균 선이 앞서도록 가늘게
+            for j, s_ in enumerate(stages):
+                op = src_open and s_ == "V-G"
+                ax.plot([xx[j]], [q.rmse.values[j]], ls="none", marker=S.REGION_MARKER[reg], ms=S.MS["region_point"],
+                        mfc="white" if op else st["color"], mec=st["color"], mew=1.0 if op else 0, alpha=0.5, zorder=3)
+        mm = Mn[Mn.method == mth].set_index("stage").reindex(stages)
+        xs_, ys_ = mm.x_geo.values, mm.rmse_mean.values
+        if src_open:
+            ax.plot(xs_[:-1], ys_[:-1], color=st["color"], ls=st["ls"], lw=S.LW["main"], zorder=4)
+            ax.plot(xs_[-2:], ys_[-2:], color=st["color"], ls=(0, (1.2, 1.4)), lw=S.LW["main"], zorder=4)   # 원천 계수로 바뀌는 구간: 점선
+            ax.plot(xs_[:-1], ys_[:-1], ls="none", marker="o", ms=S.MS["main"], color=st["color"], mew=0, zorder=5)
+            ax.plot(xs_[-1:], ys_[-1:], ls="none", marker="o", ms=S.MS["main"], mfc="white", mec=st["color"], mew=1.0, zorder=5)
+        else:
+            ax.plot(xs_, ys_, color=st["color"], ls=st["ls"], lw=S.LW["main"], zorder=4)
+            ax.plot(xs_, ys_, ls="none", marker="o", ms=S.MS["main"], color=st["color"], mew=0, zorder=5)
+    ax.set_xlim(*XH_XLIM); ax.set_ylim(*XH_YLIM)
+    ax.xaxis.set_major_locator(mticker.FixedLocator([0.01, 0.1, 1, 10, 100, 1000]))
+    ax.xaxis.set_major_formatter(mticker.FixedFormatter(["0.01", "0.1", "1", "10", "100", "1000"]))
+    ax.xaxis.set_minor_locator(mticker.NullLocator())
+    ax.yaxis.set_major_locator(mticker.FixedLocator([10, 20, 30, 40, 50]))
     ax.set_xlabel("Distance to nearest training cell (km)")
     ax.set_ylabel("RMSE (cm)")
-    ax.set_gid("placeholder_XH")
+    # 단 이름(5개): 축 아래쪽 띠. 오른쪽 세 단(Block, kNNDM, Region holdout)은 간격이 좁아 두 높이로 나눈다
+    xg = Mn[Mn.method == "D0w"].set_index("stage").x_geo
+    pos = {"W1R": (1.0, 7.0, "center"), "W1S": (1.0, 7.0, "center"), "W1B": (1.12, 7.0, "right"), "W1K": (1.25, 10.4, "right"),
+           "V-G": (None, 7.8, "right")}                                      # V-G: 축 오른쪽 끝에 맞춘 두 줄
+    for stg, lab in XH_STAGES:
+        fx, y_, ha = pos[stg]
+        x_ = XH_XLIM[1] * 0.97 if fx is None else xg[stg] * fx
+        t = ax.text(x_, y_, lab.replace(" ", "\n") if stg == "V-G" else lab, ha=ha, va="center", fontsize=S.FONT_PT, zorder=6,
+                    linespacing=1.0, multialignment="center")
+        t.set_gid("direct_label")
+    # 방법 이름: 무작위 단과 지점 단 사이 빈 곳(점이 없는 거리 0.02–0.6 km)
+    t = ax.text(0.15, 12.0, "Direct ML", ha="center", va="center", fontsize=S.FONT_PT, color=S.INK, zorder=6)
+    t.set_gid("direct_label")
+    t = ax.text(0.15, 29.0, "Recalibrated\nStefan", ha="center", va="center", fontsize=S.FONT_PT, color=S.INK, zorder=6, linespacing=1.0)
+    t.set_gid("direct_label")
+    ax.set_gid("XH_ladder")
+    vals["xh"] = dict(rows=X, means=Mn, info=info)
     return ax
 
 
@@ -760,7 +870,7 @@ def build(medium="paper"):
     ax_b = panel_b(fig, D, vals)
     ax_c = panel_c(fig, L, proj_z, ext, vals)
     ax_d = panel_d(fig, L, proj_z, ext, vals)
-    ax_e = panel_e(fig)
+    ax_e = panel_e(fig, vals)
     corners = zoom_rectangle(ax_a, proj_a, proj_z, ext)
     connect(fig, ax_a, ax_c, corners)
     for let, x, y in LETTERS:
@@ -803,8 +913,24 @@ def source_data(ctx):
     for la, lo, b in L["lab"][["lat", "lon", "block"]].values:
         rows.append(dict(panel="d", element="label_cell", region="Lena", block=int(b), lat=la, lon=lo, value=np.nan, unit="",
                          detail=f"n = {DEMO['n']}, draw index {DEMO['draw']}, seed {ctx['vals']['draw_seed']}"))
-    rows.append(dict(panel="e", element="placeholder", region="", value=np.nan, unit="",
-                     detail="validation ladder awaits registered experiment results; axes only"))
+    xh = ctx["vals"]["xh"]
+    lab = dict(XH_STAGES)
+    for r in xh["rows"].itertuples():
+        base = dict(panel="e", region=r.region, kind=f"{r.method}|{r.learner}|{lab[r.stage]}")
+        rows.append(dict(base, element="nnd_median_km", value=float(r.nnd_median_km), unit="km", detail="x; median distance scoring cell to nearest training cell"))
+        for nm, v in (("rmse_cell_weighted", r.rmse), ("rmse_cw_lo95", r.rmse_lo), ("rmse_cw_hi95", r.rmse_hi), ("rmse_block_equal", r.rmse_beq),
+                      ("rmse_be_lo95", r.rmse_beq_lo), ("rmse_be_hi95", r.rmse_beq_hi)):
+            rows.append(dict(base, element=nm, value=float(v), unit="cm",
+                             detail="drawn" if nm.startswith("rmse_c") else "not drawn (block-equal; source data only)"))
+    for r in xh["means"].itertuples():
+        base = dict(panel="e", region="MEAN3[Alaska,Lena,Canada]", kind=f"{r.method}|{lab[r.stage]}")
+        rows.append(dict(base, element="x_geometric_mean_km", value=float(r.x_geo), unit="km", detail="geometric mean of the three regions"))
+        rows.append(dict(base, element="rmse_mean_equal_weight", value=float(r.rmse_mean), unit="cm", detail="equal-weight mean of cell-weighted RMSE; no CI in table"))
+    for reg, g in xh["info"]["vg_geo"].items():
+        for nm, v, u in (("vg_n_scoring_cells", g["n_score"], "cells"), ("vg_n_training_cells", g["n_train"], "cells"),
+                         ("vg_n_buffer_excluded", g["n_buffer_excluded"], "cells"), ("vg_nnd_min_km", g["nnd_min_km"], "km")):
+            rows.append(dict(panel="e", element=nm, region=reg, kind="V-G", value=float(v), unit=u,
+                             detail="region holdout distance from coordinates only (h41 V-G definition, cv_schemes.nnd_km), no refit"))
     out = pd.DataFrame(rows, columns=["panel", "element", "region", "kind", "block", "lat", "lon", "value", "unit", "detail"])
     return out
 
@@ -907,9 +1033,45 @@ def value_checks(ctx, aud, pa, fonts_txt, res, paths):
     sc = vals["c_scale"]
     chk("c 축척 막대 100 km 의 측지 길이", round(sc["geodesic_km"], 1), 100, ok=abs(sc["geodesic_km"] - 100) < 2)
     lines.append("")
-    lines.append("## e 검증 사다리")
-    lines.append("[정보] XH 결과 없음(data/processed/xbatch/XH_validation_ladder/ 에 smoke 만 있다). 빈 축과 축 이름만 그렸다(명세 12절). "
-                 "미리보기 자료(cv_scheme_comparison.csv)는 쓰지 않았다")
+    lines.append("## e 검증 사다리(XH, 계획 8.3)")
+    xh = vals["xh"]
+    X = xh["rows"].set_index(["region", "method", "stage"])
+    lines.append(f"[정보] 원천 {xh['info']['file']} (sha256 앞 16자 dedef96fd096d2e4 는 계획 8.3 기록), 그린 행 30(XH 24 = 두 방법 × 네 단 × 세 지역, V-G 6), "
+                 f"variant 'pm2' 행 {xh['info']['n_pm2_excluded']}개 제외")
+    plan = {("Alaska", "D0w", "W1R"): 11.54, ("Lena", "D0w", "W1R"): 13.94, ("Canada", "D0w", "W1R"): 18.96,
+            ("Alaska", "PSw", "W1R"): 14.24, ("Lena", "PSw", "W1R"): 20.89, ("Canada", "PSw", "W1R"): 26.50,
+            ("Alaska", "D0w", "W1K"): 17.30, ("Lena", "D0w", "W1K"): 22.10, ("Canada", "D0w", "W1K"): 33.16,
+            ("Alaska", "PSw", "W1K"): 14.53, ("Lena", "PSw", "W1K"): 21.40, ("Canada", "PSw", "W1K"): 30.78}
+    for k, v in plan.items():
+        chk(f"{k[0]} {k[1]} {k[2]} 셀 가중 RMSE 대 계획 8.3 표", round(float(X.loc[k, "rmse"]), 2), v)
+    for reg, dd, dp in (("Alaska", 5.76, 0.29), ("Lena", 8.17, 0.51), ("Canada", 14.20, 4.28)):
+        g_d = float(X.loc[(reg, "D0w", "W1K"), "rmse"] - X.loc[(reg, "D0w", "W1R"), "rmse"])
+        g_p = float(X.loc[(reg, "PSw", "W1K"), "rmse"] - X.loc[(reg, "PSw", "W1R"), "rmse"])
+        chk(f"{reg} 무작위 → kNNDM 증가(직접 ML, 재보정 Stefan) 대 계획 8.3 문장", (round(g_d, 2), round(g_p, 2)), (dd, dp),
+            ok=abs(g_d - dd) < 0.006 and abs(g_p - dp) < 0.006)
+    for reg, v in (("Alaska", (0.00, 0.88, 26.06, 58.73)), ("Lena", (0.01, 1.02, 9.55, 26.42)), ("Canada", (0.01, 3.86, 25.33, 236.53))):
+        got = tuple(round(float(X.loc[(reg, "D0w", s_), "nnd_median_km"]), 2) for s_ in ("W1R", "W1S", "W1B", "W1K"))
+        chk(f"{reg} 거리 중앙값(km) 대 계획 8.3 표", got, v)
+    Mn = xh["means"]
+    lines.append("[정보] 세 지역 등가중 평균(선, 셀 가중 RMSE, cm): " + "; ".join(
+        f"{m_} {dict(XH_STAGES)[s_]} {v:.2f} at {xg:.3g} km" for m_, s_, v, xg in Mn[["method", "stage", "rmse_mean", "x_geo"]].values))
+    lo = float(xh["rows"][["rmse_lo"]].min().iloc[0]); hi = float(xh["rows"][["rmse_hi"]].max().iloc[0])
+    chk("y 축 범위가 지역 CI 를 모두 담음", (XH_YLIM[0] <= lo, hi <= XH_YLIM[1]), (True, True))
+    xmin = float(xh["rows"].nnd_median_km.min()) * min(XH_XOFF.values()); xmax = float(xh["rows"].nnd_median_km.max()) * max(XH_XOFF.values())
+    chk("x 축 범위가 지역 점을 모두 담음", (XH_XLIM[0] <= xmin, xmax <= XH_XLIM[1]), (True, True))
+    lines.append("[정보] 그리지 않음: 블록 등가중 값과 CI(원천 자료에 있음, 셀 가중 CI 와 겹쳐 지역 점에도 그리지 않았다), 평균의 CI(표에 없음)")
+    lines.append(f"[정보] 지역 홀드아웃(V-G): RMSE 는 {xh['info']['vg_file']} 의 지역 행(D0 catboost_lo λ 1.0 = 직접 ML, PS = 학습 셀(원천) 최소제곱 "
+                 "계수 Stefan, 곧 원천 계수. 빈 기호와 점선으로 구분). 거리는 좌표만으로 h41 정의(채점 = 대상 ∩ eval_mask, 학습 = source_idx(지역, x) "
+                 "∩ y·s 유한, 100 km 버퍼)와 XH 의 cv_schemes.nnd_km 으로 계산했다(새 적합 없음)")
+    lgv_n = {"Alaska": 13606, "Lena": 2958, "Canada": 747}
+    for reg, g in xh["info"]["vg_geo"].items():
+        chk(f"{reg} V-G 채점 셀 수(좌표 재현) 대 lgv_metrics n_cells", g["n_score"], int(X.loc[(reg, "D0w", "V-G"), "n_cells_lgv"]))
+        chk(f"{reg} V-G 채점 셀 수 대 계획 기록(h41 채점 집합)", g["n_score"], lgv_n[reg])
+        chk(f"{reg} V-G 최근접 학습 셀 최소 거리 > 버퍼 100 km", round(g["nnd_min_km"], 1), "> 100", ok=g["nnd_min_km"] > g["buffer_km"])
+        lines.append(f"[정보] {reg} V-G: 학습 셀 {g['n_train']}, 버퍼 제외 {g['n_buffer_excluded']}, 거리 중앙값 {g['nnd_median_km']:.2f} km")
+    for (reg, mth), v in {("Alaska", "D0w"): 35.56, ("Lena", "D0w"): 25.31, ("Canada", "D0w"): 25.24,
+                          ("Alaska", "PSw"): 14.68, ("Lena", "PSw"): 21.64, ("Canada", "PSw"): 26.48}.items():
+        chk(f"{reg} {mth} V-G 셀 가중 RMSE 대 계획 8.3 표(V-G 열)", round(float(X.loc[(reg, mth, "V-G"), "rmse"]), 2), v)
     lines.append("")
     lines.append("## 설명문(Fig1_legend.md, 손으로 작성)")
     leg = S.OUT / f"{STEM}_legend.md"

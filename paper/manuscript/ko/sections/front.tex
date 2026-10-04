@@ -1,0 +1,57 @@
+% front.tex : 국문판 제목 쪽, 초록, 핵심어(블록 1), 자료 가용성(블록 3), 감사의 글·저자 기여·추가 정보(블록 4).
+% 영문판 paper/manuscript/en/sections/front.tex 의 같은 블록을 옮겼다(영문판 블록 2, Code availability 는
+% 방법의 '코드 가용성' 소절을 쓴다). ko/main.tex 가 \frontblock 을 1, 3, 4 로 정한 뒤 블록마다 \input 한다.
+% 제목·핵심어: MANUSCRIPT_SPEC 1.3 국문 열. 수치, 인용 키, 자리표시 문자열은 영문판과 같다.
+\providecommand{\frontblock}{0}
+
+% =====================================================================
+% 블록 1. 제목 쪽, 초록, 핵심어
+% =====================================================================
+\ifnum\frontblock=1\relax
+\title{희소 관측 조건에서 물리경험식 유사라벨 증강과 기계학습을 이용한 영구동토 활동층 두께 예측}
+\author{[DECISION: 저자, 소속, 교신 저자]\\{\small 교신 저자 전자우편: [DECISION: 교신 저자 전자우편]}}
+\date{}
+\maketitle
+
+\begin{abstract}
+\noindent 관측이 드문 영구동토 지역에서 Stefan 식과 기계학습(ML)으로 활동층 두께 지도를 만드는 라벨 수별 워크플로를 제시한다. ML 모델은 대개 학습 지역 안에서, 라벨 수 하나로, 재보정 기준선 없이 시험되어 왔다. 이 연구는 다섯 지역을 100~km 완충 구역과 함께 학습에서 빼고, 라벨 0개부터 전량까지 평균 제곱근 오차(RMSE)를 원천 계수와 재보정 계수의 Stefan 식과 비교하였다(내부 사전 등록). 라벨이 없을 때 Stefan 유사라벨은 섞은 유사라벨보다 오차가 낮았다($-1.6$~cm, 95\% 신뢰구간 [$-2.0$, $-1.0$]). 라벨 10개에서는 재보정이 원천 계수보다 4지역 평균 오차를 낮추었고($-2.5$~cm, [$-3.0$, $-1.9$], 오차가 낮아진 지역 1곳), 잔차 ML의 추가 차이는 확인하지 못했다. 이 결과를 본 뒤 설계한 분석에서 대상 라벨 안 교차검증으로 방법을 고르면 고정 잔차 레시피에 대한 RMSE 변화가 라벨 40개와 160개에서 $-0.87$~cm와 $-1.3$~cm였다(2지역, 변화는 캐나다에서 옴). 알래스카 안에서 잔차 ML의 RMSE는 13.9~cm, 재보정 Stefan 식은 14.4~cm였고(라벨 1000개), 오차 제곱 감소의 약 99\%(라벨 전량)는 기후 격자 셀 사이에 있었다. 라벨 100개를 블록에 흩어 놓을 때 무작위 추출에 대한 RMSE 변화는 캐나다 $-2.5$~cm, 레나델타 $+1.7$~cm였다. 다음으로 필요한 것은 격자 안 공변량이다. \textcolor{blue}{[PENDING: XE-a, XE-b, satellite inputs (stage 2); registered deadline 8 October 2026, 14:22 KST]}
+% [DECISION: abstract XC sentence] 초록에서 XC 는 뺐다(FINAL_BATCH 7.1 은 수치만 쓰거나 빼는 것을 허용한다. 수치 문장은 S7 을 대신해도 영문 214단어가 된다).
+% 후보 문장(영문판 후보와 같은 내용): 같은 지역을 다시 무작위로 나눈 분할에서 워크플로의 RMSE 변화는 라벨 160개에서 재보정 Stefan 식 대비
+% −1.51 cm였다(지역 풀 평균; 3지역 가운데 2지역은 0.5 cm 넘게 오차가 컸다).
+\end{abstract}
+
+% 핵심어 6개(MANUSCRIPT_SPEC 1.3 국문 열). [DECISION: 핵심어]
+\noindent\textbf{핵심어}: 활동층 두께, 영구동토, Stefan 식, 물리 기반 기계학습, 공간 전이, 라벨 배치
+\fi
+
+% =====================================================================
+% 블록 3. 자료 가용성(본문 끝, 참고문헌 앞)
+% =====================================================================
+\ifnum\frontblock=3\relax
+\section*{자료 가용성}
+
+주 지역의 활동층 라벨은 GTN-P/CALM 자료\cite{Streletskiy2025}(PANGAEA, \url{https://doi.org/10.1594/PANGAEA.972777}), 레나강 삼각주의 ALLena 자료\cite{Veremeeva2025}(PANGAEA, \url{https://doi.org/10.1594/PANGAEA.973813}), ABoVE 토양 수분·활동층 두께 자료 2판\cite{Moore2025}(ORNL DAAC, \url{https://doi.org/10.3334/ORNLDAAC/2369})에서 받을 수 있다. 추가 지역의 라벨은 공개된 자료\cite{DuE2026,Grosse2007,Palmtag2022,Talucci2024,Pohl2026,Makarieva2017,Liang2023,Walker2009,Scheer2024,Martin2023,Boike2024,Hammar2025,Zastruzny2024,Sannel2020}에서, 라벨 정의 시험에만 쓴 지온 유도 라벨은 티베트 고원 자료\cite{Fu2025}에서 가져왔다. 식별자와 약관은 보충 표~S17에 있다. 재배포 약관이 확인되지 않은 자료의 라벨은 주 결과에 쓴 약관 확인판에서 뺐고 재배포하지 않으며, 보충 표~S17에 적은 원 제공처에서 받을 수 있다. 이런 라벨을 포함한 북대서양 전체 판은 보충 정보에만 보고한다.
+
+공변량은 ERA5-Land 월평균 자료\cite{munozsabater2021_era5_land}(Copernicus Climate Data Store, \url{https://doi.org/10.24381/cds.68d2bb30}), SoilGrids 2.0\cite{Poggio2021} [미확인: 접근 시점의 SoilGrids 판 표지], Copernicus DEM GLO-30(\url{https://doi.org/10.5270/ESA-c5d3d65}) [미확인: Copernicus DEM 인용 형식], ESA CCI Permafrost 활동층 두께 제품 4.0판\cite{Westermann2024}(CEDA, \url{https://doi.org/10.5285/d34330ce3f604e368c06d76de1987ce5})에서 만들었다. 알래스카 지역 내 시험의 합성 개구 레이더(SAR) 공변량은 2017년 ABoVE 항공 L·P 밴드 SAR 활동층 추정(ORNL DAAC, \url{https://doi.org/10.3334/ORNLDAAC/2004})과 알래스카 북부의 P 밴드 편파 SAR 활동층 상향 지도\cite{Whitcomb2024}에서 가져왔다 [미확인: PolSAR 상향 ALT 자료의 DOI, 후보 10.3334/ORNLDAAC/2332]. 지도 가림에는 ESA CCI Permafrost 범위 제품 [미확인: 영구동토 범위 자료의 DOI와 판]과 JRC Global Surface Water 출현 빈도 층\cite{Pekel2016}을 썼다.
+
+조립한 라벨·공변량 표, 실행 산출물, 집계·판정 표, 셀 단위 예측, 모든 그림의 원자료는 [DECISION: 저장소와 DOI]에 올릴 예정이다. 약관이 확인되지 않은 자료의 행은 올리는 표에서 뺀다. [DECISION: KPDC 자료, SI 포함 여부와 식별자, 이용 조건]
+\fi
+
+% =====================================================================
+% 블록 4. 참고문헌 뒤
+% =====================================================================
+\ifnum\frontblock=4\relax
+\subsection*{감사의 글}
+
+[DECISION: Acknowledgements, Author contributions, Competing interests 문구] 자료 가용성에 적은 자료 제공처에 감사한다. 활동층 두께 공변량은 ESA Climate Change Initiative Permafrost\_cci 과제의 자료를 썼다. 지형 공변량은 Copernicus WorldDEM-30 \textcopyright{} DLR e.V. 2010--2014와 \textcopyright{} Airbus Defence and Space GmbH 2014--2018로 만들었으며, 이 자료는 유럽연합과 ESA가 COPERNICUS로 제공하고 모든 권리는 보유자에게 있다. [미확인: Copernicus DEM 사용 허가가 요구하는 귀속 문구의 원문 대조] [미확인: ERA5-Land(Copernicus Climate Change Service) 사용 허가가 요구하는 귀속 문구] [DECISION: KPDC 자료, SI 포함 여부와 식별자, 이용 조건] [DECISION: 대회 보고서 인용 여부] [DECISION: 연구비 지원 기관과 과제 번호, 또는 지원 없음]
+
+\subsection*{저자 기여}
+
+[DECISION: Acknowledgements, Author contributions, Competing interests 문구] [DECISION: 저자, 소속, 교신 저자]
+
+\subsection*{추가 정보}
+
+이해 상충: [DECISION: Acknowledgements, Author contributions, Competing interests 문구]
+
+교신과 자료 요청은 [DECISION: 저자, 소속, 교신 저자]에게 한다.
+\fi

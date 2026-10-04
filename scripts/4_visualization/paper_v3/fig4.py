@@ -11,9 +11,11 @@
   b  라벨 10개 편향(x, log10) 대 대상 라벨 교차검증 선정의 원천 계수 Stefan 대비 오차 변화(y, 라벨 전량), 28대상.
      원천 results/rescale_wf/data/processed/wf/wf_tests.csv(WF4-c 지역 행)와 wf_curve.csv(exp wf4, method W, n −1).
   c  대상 라벨 교차검증 선정 − 고정 잔차 레시피(λ 0.25). 원천 wf_tests.csv(WF4-a 풀 평균과 지역 행).
-  d  이득 분해(XA) 자리. XA 결과 전에는 빈 축과 축 이름만 그린다(명세 12절).
-     --preview 는 사후 미리보기(paper/claims/C2_bias_diagnosis/tables/derived_c2_wf4c_split.csv)를 그리고
-     파일 이름에 _preview 를 붙인다. 미리보기 판은 제출하지 않으며 --out 으로 지정한 폴더에만 쓴다.
+  d  이득 분해(XA, 사후 분석, 2026-10-04 실행): 왼쪽 하위 축 재보정 몫(재보정 Stefan − 원천 계수 Stefan = −G_recal),
+     오른쪽 하위 축 재보정을 넘어선 ML 몫(앵커 + 잔차 − 두 재보정 가운데 나은 쪽 = −G_ML2), x 는 b 와 같은 편향.
+     원천 data/processed/xbatch/XA_c2_gain_decomposition/sealed/(xa_targets.csv in_main, xa_gains.csv n −1 의 g_cell,
+     ρ 와 CI 는 xa_spearman.csv·xa_hyp.csv). 부호는 b 와 같은 오차 변화 규약(음수 = 오차 감소)으로 바꿔 그린다.
+     --preview(사후 미리보기, derived_c2_wf4c_split.csv)는 XA 결과 전 비교용으로 남긴 선택지이며 정본에 쓰지 않는다.
 
 명세와 다르게 둔 것([판단], 결과 보고에 적는다)
   1. 북대서양 대상의 모양: 지침 목록에 없다(명세 D-15). 이 그림은 빈 오각형으로 그리고 직접 라벨을 단다.
@@ -21,7 +23,9 @@
      지침 2.5('모양의 뜻은 그림 안 열쇠 한 줄')와 범례 6항목 상한을 함께 지키는 배치다.
   3. d 의 두 하위 축은 y 를 공유하므로(간격 4 mm) y 축 이름은 하나("Error change (cm)")이고, 두 몫의 이름은 하위 축 머리
      "Recalibration", "Beyond recalibration"이 맡는다. 하위 축 폭은 y 눈금 자리를 두려고 33 mm 로 줄였다.
-  4. d 의 y 범위는 b 와 같다(티베트를 뺀 값으로 정한 b 범위, 두 몫이 b 이득의 분해이므로 같은 척도로 비교한다).
+  4. d 의 y 범위는 두 하위 축 공통이며 티베트를 뺀 d 의 값(−13.50 – +4.64 cm)으로 정했다(명세 6.3 d [판단]).
+     대상별 CI 는 그리지 않고 Source Data 에 둔다(명세 6.3 d). b 의 직접 라벨(중앙 러시아, 북대서양)은 d 에서 되풀이하지
+     않는다(지침 H13, 모양 열쇠는 b 에 한 번).
   5. 그림 높이는 122 mm 이다(명세 표제의 '약 150 mm' 보다 작다). 아래 행을 명세 슬롯(y 82)보다 7.5 mm 올려 두 행 사이
      빈 띠(약 11 mm)를 없앴다. 위 행 슬롯(0–70 mm)과 패널 폭은 명세 그대로다.
 
@@ -64,6 +68,9 @@ SRC = {
     "wf_meta": ROOT / "results/rescale_wf/data/processed/wf/wf_meta.json",
 }
 MANIFEST = ROOT / "paper/claims/C2_bias_diagnosis/tables/MANIFEST.csv"
+XA_DIR = ROOT / "data/processed/xbatch/XA_c2_gain_decomposition/sealed"      # XA 봉인 표(2026-10-04 21:07 첫 열람)
+XA_SRC = {k: XA_DIR / f"{k}.csv" for k in ("xa_targets", "xa_gains", "xa_spearman", "xa_hyp")}
+XA_MANIFEST = XA_DIR / "sealed_manifest.json"
 PREVIEW_SRC = ROOT / "paper/claims/C2_bias_diagnosis/tables/derived_c2_wf4c_split.csv"
 STEM = "Fig4"
 INK, AUX = S.INK, S.INK_AUX
@@ -130,6 +137,7 @@ N_GRID = [3, 10, 40, 160, 320, 1000]  # 명세 1.5 전이 격자
 XLIM_A = (2.2, 2000.0)                # 오른쪽 끝 = 미도달 화살표 머리가 닿는 축 끝
 XLIM_B, XT_B = (2.5, 50.0), [3, 10, 30]
 YLIM_B, YT_B = (-20.0, 13.0), [-20, -10, 0, 10]
+YLIM_D, YT_D = (-16.0, 6.5), [-15, -10, -5, 0, 5]   # d: 두 하위 축 공통, 티베트를 뺀 d 값 −13.50 – +4.64 cm
 XLIM_C, XT_C = (-3.5, 1.5), [-3, -2, -1, 0, 1]
 C_ROWS = [("head", "Four main regions"), (10, "10 labels"), (-1, "All labels"),
           ("head", "Lena Delta and Canada"), (40, "40 labels"), (160, "160 labels")]
@@ -187,8 +195,45 @@ def load():
     Cr = a4[a4.scope == "region"].copy()
     Cr[["tname", "mode"]] = Cr.target.str.split("|", expand=True)
     verdict_a = a4[a4.scope == "verdict"].iloc[0]
+    X, XS = load_xa()
     return dict(A=A, order=order, B=B, reg=reg, mean_c=mean_c, verdict_c=verdict_c, Cm=Cm, Cr=Cr,
-                verdict_a=verdict_a, meta=meta)
+                verdict_a=verdict_a, meta=meta, X=X, XS=XS)
+
+
+XA_GAINS = {"G_recal": "y_recal", "G_ML2": "y_ml"}     # d 의 두 하위 축(명세 6.3 d, XA 의 G_recal, G_ML2)
+XA_HYP = {"XA-1": "G_recal", "XA-2": "G_W", "XA-3": "G_ML2"}   # 등록 가설(Holm 가족 m 3)
+
+
+def load_xa():
+    """XA 봉인 표에서 d 의 점(주 묶음 28대상, 라벨 전량, 셀 가중 점 추정)과 설명문 통계(ρ, 두 CI, 범주)를 읽는다.
+    y 는 b 와 같은 오차 변화 규약: y_recal = −G_recal = RMSE(P1) − RMSE(P0), y_ml = −G_ML2 = RMSE(R1) − min(RMSE(P1), RMSE(P2))."""
+    t = pd.read_csv(XA_SRC["xa_targets"])
+    t = t[t.in_main].copy()
+    g = pd.read_csv(XA_SRC["xa_gains"])
+    g = g[(g.n == -1) & g.gain.isin(list(XA_GAINS)) & g.target.isin(t.target)]
+    X = t[["target", "family", "mode", "point_only", "CE2"]].copy()
+    X["tname"] = X.target.str.split("|").str[0]
+    for gain, col in XA_GAINS.items():
+        r = g[g.gain == gain].set_index("target")
+        X[col] = -X.target.map(r.g_cell)                       # 셀 가중 점 추정, 부호 반전
+        X[col + "_beq"] = -X.target.map(r.g_beq)
+        X[col + "_lo"] = -X.target.map(r.ci_hi_cell)           # 부호 반전이므로 끝값을 바꾼다
+        X[col + "_hi"] = -X.target.map(r.ci_lo_cell)
+        X[col + "_beq_lo"] = -X.target.map(r.ci_hi_beq)
+        X[col + "_beq_hi"] = -X.target.map(r.ci_lo_beq)
+        X[col + "_has_dist"] = X.target.map(r.has_dist)
+    X = X.rename(columns={"CE2": "diag_abs"}).sort_values("diag_abs").reset_index(drop=True)
+    sp = pd.read_csv(XA_SRC["xa_spearman"])
+    hy = pd.read_csv(XA_SRC["xa_hyp"])
+    XS = {}
+    for h, gain in XA_HYP.items():
+        r = sp[(sp.hyp == h) & (sp.gain == gain) & (sp.x == "CE2") & (sp.scale == "cm") & (sp.n == -1)
+               & (sp.subset == "main")]
+        q = hy[hy.hyp == h]
+        assert len(r) == 1 and len(q) == 1, f"XA: {h} 행"
+        XS[h] = dict(r.iloc[0]) | {k: q.iloc[0][k] for k in ("category", "cat_cluster", "cat_fixed", "holm_p",
+                                                              "sentence", "definition_robust", "scale_robust")}
+    return X, XS
 
 
 def checks(D) -> list[str]:
@@ -212,6 +257,26 @@ def checks(D) -> list[str]:
         regs = Cr[Cr.n == n]
         assert sorted(regs.target) == sorted(pool.split(",")), f"c: n {n} 지역 행"
     out.append("c: 풀 구성(n 10, 전량 = 주 4지역, n 40, 160 = 레나델타·캐나다)과 지역 행 일치")
+
+    # d: XA 봉인 표
+    X, XS = D["X"], D["XS"]
+    man = {e["file"]: e["sha256"] for e in json.loads(XA_MANIFEST.read_text())["entries"]}
+    for k, p in XA_SRC.items():
+        assert sha256(p) == man[p.name], f"d: {p.name} sha256 이 봉인 기록과 다르다"
+    out.append(f"d: 봉인 표 {len(XA_SRC)}개 sha256 = sealed_manifest.json(기록 2026-10-04 21:06:57)")
+    assert len(X) == 28 and set(X.target) == set(B.target), "d: 주 묶음 28대상 = b 의 WF4-c 28대상"
+    dx = float((X.set_index("target").diag_abs - B.set_index("target").diag_abs).abs().max())
+    assert dx < 1e-9, f"d: CE2 ≠ WF4-c diag_abs {dx}"
+    out.append(f"d: x(CE2, xa_targets.csv) = b 의 x(WF4-c diag_abs) 28대상 최대 절대 차 {dx:.2e} cm")
+    assert X[[c for c in XA_GAINS.values()]].notna().all().all(), "d: 모든 대상에 두 이득"
+    for h, col in (("XA-1", "y_recal"), ("XA-3", "y_ml")):
+        rho = pd.concat([X.diag_abs, -X[col]], axis=1).rank().corr().iloc[0, 1]
+        assert abs(rho - XS[h]["rho_cell"]) < 1e-9, f"d: {h} ρ 재계산 불일치"
+        out.append(f"d: {h} ρ(CE2, 셀 가중 이득) 재계산 {rho:.6f} = xa_spearman.csv {XS[h]['rho_cell']:.6f}")
+    for h in XA_HYP:
+        assert XS[h]["category"] == "확인하지 못함", f"d: {h} 범주가 바뀌었다. 설명문 문장을 다시 정한다"
+    out.append("d: 등록 가설 XA-1, XA-2, XA-3 의 최종 범주 = '확인하지 못함'(xa_hyp.csv category). XA-3 은 주 CI "
+               f"'{XS['XA-3']['cat_cluster']}', 보조 CI(대상 고정) '{XS['XA-3']['cat_fixed']}'")
     return out
 
 
@@ -462,13 +527,16 @@ def ci_key(fig, x0_mm, y_bottom_mm, T):
 
 # ---------------------------------------------------------------- d(자리표시)
 def draw_d(axL, axR, D, T, preview=None):
+    """이득 분해(XA): 대상마다 점 하나, b 와 같은 모양·채움 규칙, 왼쪽 재보정 색, 오른쪽 잔차 ML 색(명세 6.3 d).
+    맞춤선·대상별 CI 없음(CI 는 Source Data). 축 밖 대상(티베트)은 하위 축마다 검정 삼각 표지 1개(명세 1.5)."""
     s = T["scale"]
+    P = D["X"] if preview is None else preview
     for ax in (axL, axR):
         ax.set_xscale("log")
         ax.set_xlim(*XLIM_B)
         set_ticks(ax.xaxis, XT_B, [str(v) for v in XT_B])
-        ax.set_ylim(*YLIM_B)
-        set_ticks(ax.yaxis, YT_B)
+        ax.set_ylim(*YLIM_D)
+        set_ticks(ax.yaxis, YT_D)
         ax.axhspan(-S.EQUIV_HALF_WIDTH_CM, S.EQUIV_HALF_WIDTH_CM, color=S.EQUIV_BAND, lw=0, zorder=0)
         ax.axhline(0.0, color=S.ZERO_LINE["color"], lw=T["lw_ref"], ls="-", zorder=1)
     axR.yaxis.set_major_formatter(NullFormatter())     # y 공유: 눈금은 두고 숫자는 왼쪽 하위 축에만
@@ -479,20 +547,29 @@ def draw_d(axL, axR, D, T, preview=None):
     for ax, head in ((axL, "Recalibration"), (axR, "Beyond recalibration")):
         _, fy = ax_frac(ax, 0, 0.6 * s)
         ax.text(0.5, 1.0 + fy, head, transform=ax.transAxes, ha="center", va="bottom", gid="category")
-    if preview is not None:        # 사후 미리보기(제출 불가)
-        P = preview
-        for ax, col, ycol in ((axL, S.METHOD["recalibrated_stefan"]["color"], "y_recal"),
-                              (axR, S.METHOD["anchor_residual"]["color"], "y_ml")):
-            inx = P.diag_abs.between(*XLIM_B) & P[ycol].between(*YLIM_B)
-            for _, r in P[inx].iterrows():
-                h = hollow(r.tname)
-                mk = region_marker(r.tname)
-                ax.plot([r.diag_abs], [r[ycol]], ls="none", marker=mk, ms=msz(mk, T["ms"]),
-                        mfc="white" if h else col, mec=col, mew=T["mew_open"] if h else 0.0, zorder=4)
-            if (~inx).any():
-                fx, fy = ax_frac(ax, 1.3 * s, 1.3 * s)
-                ax.plot([1 - fx], [fy], transform=ax.transAxes, ls="none", marker=(3, 0, -135), ms=T["ms_tri"],
-                        mfc=INK, mec=INK, mew=0, clip_on=False, zorder=5)
+    for ax, col, ycol in ((axL, S.METHOD["recalibrated_stefan"]["color"], "y_recal"),
+                          (axR, S.METHOD["anchor_residual"]["color"], "y_ml")):
+        inx = P.diag_abs.between(*XLIM_B) & P[ycol].between(*YLIM_D)
+        # 채운 점을 먼저, 빈 점을 위에 그려 빈 모양의 테두리가 가려지지 않게 한다(같은 자료, 그리는 순서만)
+        for _, r in P[inx].assign(_h=P[inx].tname.map(hollow)).sort_values("_h").iterrows():
+            h = bool(r._h)
+            mk = region_marker(r.tname)
+            ax.plot([r.diag_abs], [r[ycol]], ls="none", marker=mk, ms=msz(mk, T["ms"]),
+                    mfc="white" if h else col, mec=col, mew=T["mew_open"] if h else 0.0, zorder=4 + h,
+                    gid="d_point")
+        out = P[~inx]
+        assert len(out) == 1 and out.iloc[0].tname == "Tibet_LGD", f"d: 축 밖 대상은 티베트 하나({ycol})"
+        o = out.iloc[0]
+        fx, fy = ax_frac(ax, 1.3 * s, 1.3 * s)
+        if o.diag_abs > XLIM_B[1] and o[ycol] < YLIM_D[0]:          # x, y 모두 밖: 오른쪽 아래 모서리(b 와 같은 표지)
+            ax.plot([1 - fx], [fy], transform=ax.transAxes, ls="none", marker=(3, 0, -135), ms=T["ms_tri"],
+                    mfc=INK, mec=INK, mew=0, clip_on=False, zorder=6, gid="offscale")
+        elif o.diag_abs > XLIM_B[1] and YLIM_D[0] <= o[ycol] <= YLIM_D[1]:   # x 만 밖: 오른쪽 끝, 그 y 에서 오른쪽을 가리킴
+            tr = mtrans.blended_transform_factory(ax.transAxes, ax.transData)
+            ax.plot([1 - fx], [o[ycol]], transform=tr, ls="none", marker=">", ms=T["ms_tri"], mfc=INK, mec=INK,
+                    mew=0, clip_on=False, zorder=6, gid="offscale")
+        else:
+            raise AssertionError(f"d: 예상하지 않은 축 밖 위치 {o.diag_abs}, {o[ycol]}")
 
 
 def load_preview():
@@ -596,10 +673,36 @@ def source_table(D) -> pd.DataFrame:
                              y_var="error change vs fixed recipe (cm)", y=r.delta, ci_cell_lo=r.ci_lo,
                              ci_cell_hi=r.ci_hi, y_block=r.delta_blockeq, ci_block_lo=r.ci_lo_beq,
                              ci_block_hi=r.ci_hi_beq, drawn="point only", source=sc))
-    for part in ("Recalibration", "Beyond recalibration"):
-        rows.append(dict(panel="d", element=part, x_var="bias at ten labels (cm)",
-                         y_var="error change (cm)", drawn="empty axes", note="placeholder; XA result pending",
-                         source="data/processed/xbatch/XA_c2_gain_decomposition/ (not yet produced)"))
+    X, XS = D["X"], D["XS"]
+    xa = "data/processed/xbatch/XA_c2_gain_decomposition/sealed/"
+    parts = (("Recalibration", "y_recal", "G_recal", "error change, recalibrated minus source-coefficient Stefan (cm)"),
+             ("Beyond recalibration", "y_ml", "G_ML2",
+              "error change, anchor plus residual ML minus the better recalibrated Stefan (cm)"))
+    for part, col, gain, yvar in parts:
+        for _, r in X.iterrows():
+            inside = XLIM_B[0] <= r.diag_abs <= XLIM_B[1] and YLIM_D[0] <= r[col] <= YLIM_D[1]
+            rows.append(dict(panel="d", element=part, target=r.tname, mode=r["mode"], label=disp(r.tname),
+                             region=parent(r.tname), sub_region=is_sub(r.tname),
+                             point_estimate=bool(r.point_only), x_var="bias at ten labels (cm)", x=r.diag_abs,
+                             y_var=yvar, y=r[col], ci_cell_lo=r[col + "_lo"], ci_cell_hi=r[col + "_hi"],
+                             y_block=r[col + "_beq"], ci_block_lo=r[col + "_beq_lo"], ci_block_hi=r[col + "_beq_hi"],
+                             drawn="in axes, no interval drawn" if inside else "outside axes (edge or corner marker)",
+                             note=f"y = -{gain}; target-level CI not drawn (Source Data only)",
+                             source=f"{xa}xa_gains.csv n == -1 & gain == '{gain}' & target == '{r.target}' "
+                                    f"(y = -g_cell); x = {xa}xa_targets.csv CE2 (in_main)"))
+    for h, part in (("XA-1", "Recalibration"), ("XA-3", "Beyond recalibration")):
+        q = XS[h]
+        rows.append(dict(panel="d", element=f"Spearman rho, bias vs gain ({part}); legend only", x_var="statistic",
+                         y=q["rho_cell"], ci_cell_lo=q["cluster_lo_cell"], ci_cell_hi=q["cluster_hi_cell"],
+                         y_block=q["rho_beq"], ci_block_lo=q["cluster_lo_beq"], ci_block_hi=q["cluster_hi_beq"],
+                         ci_fixed_cell_lo=q["fixed_lo_cell"], ci_fixed_cell_hi=q["fixed_hi_cell"],
+                         ci_fixed_block_lo=q["fixed_lo_beq"], ci_fixed_block_hi=q["fixed_hi_beq"],
+                         drawn="legend only",
+                         note=("ci_cell/ci_block = family-cluster joint resampling (10,000, primary); ci_fixed_* = "
+                               f"target-fixed joint resampling (auxiliary); category '{q['category']}' (cluster "
+                               f"'{q['cat_cluster']}', fixed '{q['cat_fixed']}'); post hoc"),
+                         source=f"{xa}xa_spearman.csv hyp == '{h}' & x == 'CE2' & scale == 'cm' & n == -1 & "
+                                f"subset == 'main'; category from {xa}xa_hyp.csv"))
     T = pd.DataFrame(rows)
     T.loc[T.panel == "a", "x"] = T.loc[T.panel == "a", "x"]
     return T
@@ -610,18 +713,24 @@ LEGEND_TITLE = ("The error reduction of label-based correction was rank-correlat
 
 
 def legend_text(D) -> str:
-    """설명문 본문(제목 문장 뒤). 문장 틀은 명세 6.6 초안이고 수치는 원천에서 채운다. 초안에 더한 것은 하위 지역 표의
-    참조, 북대서양의 점 추정 표지, 고정 레시피의 λ 뿐이다(단어 예산: 명세 16절 310, XA 치환 뒤 345 이하)."""
-    mc, Cm, Cr, B = D["mean_c"], D["Cm"], D["Cr"], D["B"]
+    """설명문 본문(제목 문장 뒤). 문장 틀은 명세 6.6 초안이고 수치는 모두 원천에서 채운다.
+    d 는 XA 등록 조각(계획 2.1, '확인하지 못함' 칸)의 영문 수치 문장이다(명세 16절: 설명문에는 수치 문장만, 해석 조각
+    전문은 결과 절 R3). 그림에 있는 두 몫(XA-1 재보정, XA-3 재보정을 넘어선 ML)만 쓴다. XA-3 은 주 CI 와 보조 CI(대상 고정)의
+    범주가 달라 두 구간을 모두 적고 약한 범주('확인하지 못함')로 쓴다. 모든 XA 문장에 'post hoc analysis'.
+    350 단어를 맞추려고 고정 레시피의 정의(재보정 앵커 + 잔차 ML)는 Methods 로 넘겼다(명세 16절 규칙)."""
+    mc, Cm, Cr, B, X, XS = D["mean_c"], D["Cm"], D["Cr"], D["B"], D["X"], D["XS"]
     f2 = lambda v: S.fmt_num(v, 2)  # noqa: E731
     tib = B[B.tname == "Tibet_LGD"].iloc[0]
+    tx = X[X.tname == "Tibet_LGD"].iloc[0]
     m40, m160 = Cm[Cm.n == 40].iloc[0], Cm[Cm.n == 160].iloc[0]
     ca = Cr[Cr.tname == "Canada"].set_index("n").delta
     le = Cr[Cr.tname == "Lena"].set_index("n").delta
     margin = D["meta"]["ni_margin"]
     nboot = int(mc.nboot)
+    assert all(int(XS[h]["nboot"]) == nboot for h in XS), "재표집 횟수가 b·c 와 d 에서 다르다"
     lam = re.search(r"R1\(([\d.]+)\)", Cm.iloc[0].contrast).group(1)
     sgn = lambda v: ("+" if v > 0 else "") + f2(v)  # noqa: E731
+    x1, x3 = XS["XA-1"], XS["XA-3"]
     a = ("a, Smallest tested number of labels n* (interval from the previous grid value) at which recalibration "
          "lowered error relative to the source-coefficient Stefan model (Recalibration) and residual ML lowered error "
          "relative to the recalibrated model (Residual ML), under three registered conditions (Methods); Not reached "
@@ -631,20 +740,23 @@ def legend_text(D) -> str:
          f"source-coefficient Stefan model with all labels, against the absolute mean bias of that model at the "
          f"first ten labels (Spearman ρ = {f2(mc.rho)}, 95% CI {f2(mc.ci_lo)} to {f2(mc.ci_hi)}, "
          f"{int(mc.n_targets)} targets; signed bias ρ = {f2(mc.rho_signed)}). The Tibetan Plateau lies outside the "
-         f"axes (bias {f2(tib.diag_abs)} cm, error change {f2(tib.d_p0)} cm); the North Atlantic has no interval "
-         f"(point estimate).")
-    c = (f"c, Cross-validation selection minus a fixed residual recipe (recalibrated anchor plus residual ML, "
-         f"λ = {lam}). The selection was non-inferior (margin {S.fmt_num(margin, 1)} cm) at 40 and 160 labels in "
-         f"the mean of the Lena Delta and Canada, with {f2(-m160.delta)} cm lower error at 160 labels; the "
-         f"{f2(-m40.delta)} cm reduction at 40 labels and non-inferiority with all labels depend on the "
-         f"split-independence assumption, and non-inferiority did not hold at ten labels. The gain came from Canada "
-         f"({f2(-ca[40])} and {f2(-ca[160])} cm); the Lena Delta changed by {sgn(le[40])} and {sgn(le[160])} cm.")
-    d = ("d, Error change from recalibration and from residual ML beyond recalibration with all labels, against the "
-         f"same bias; {XA_PLACEHOLDER}.")
-    tail = (f"Intervals in b and c are 95% block-bootstrap confidence intervals ({S.fmt_int(nboot)} resamples of "
-            f"0.5° scoring blocks), weighted as in the key; the grey band marks "
-            f"±{S.fmt_num(margin, 1)} cm. Analyses in b and c were designed after earlier results had been "
-            f"inspected; d is post hoc.")
+         f"axes (bias {f2(tib.diag_abs)} cm; error change {f2(tib.d_p0)} cm in b, {f2(tx.y_recal)} and "
+         f"{f2(tx.y_ml)} cm in d); the North Atlantic is a point estimate.")
+    c = (f"c, Cross-validation selection minus a fixed residual recipe (λ = {lam}). The selection was non-inferior "
+         f"(margin {S.fmt_num(margin, 1)} cm) at 40 and 160 labels in the mean of the Lena Delta and Canada, with "
+         f"{f2(-m160.delta)} cm lower error at 160 labels; the {f2(-m40.delta)} cm reduction at 40 labels and "
+         f"non-inferiority with all labels depend on the split-independence assumption, and non-inferiority did not "
+         f"hold at ten labels. The gain came from Canada ({f2(-ca[40])} and {f2(-ca[160])} cm); the Lena Delta "
+         f"changed by {sgn(le[40])} and {sgn(le[160])} cm.")
+    d = ("d, Error change from recalibration and from residual ML beyond the better recalibrated Stefan model with all "
+         "labels, against the same bias. Relations of the bias with the error reduction from recalibration "
+         f"(ρ = {f2(x1['rho_cell'])}, 95% CI {f2(x1['cluster_lo_cell'])} to {f2(x1['cluster_hi_cell'])}) and beyond "
+         f"recalibration (ρ = {f2(x3['rho_cell'])}, {f2(x3['cluster_lo_cell'])} to {f2(x3['cluster_hi_cell'])}; "
+         f"{f2(x3['fixed_lo_cell'])} to {f2(x3['fixed_hi_cell'])} with targets fixed) were not established "
+         "(post hoc analysis).")
+    tail = (f"Intervals are 95% confidence intervals from {S.fmt_int(nboot)} resamples of 0.5° scoring blocks (plus "
+            f"target families in d), weighted as in the key; the grey band marks ±{S.fmt_num(margin, 1)} cm. "
+            "Analyses in b and c were designed after earlier results had been inspected.")
     return " ".join([a, b, c, d, tail])
 
 
@@ -713,15 +825,17 @@ def main():
     body = legend_text(D)
     leg = LEGEND_TITLE + " " + body                      # 단어 수 = 제목 문장 + 본문('# Fig. 4' 머리 제외)
     nwords = len(leg.split())
-    nwords_ph = len(leg.replace(XA_PLACEHOLDER, "").split())
+    nwords_ph = nwords                                   # XA 결과로 채워 자리표시가 없다
+    assert XA_PLACEHOLDER not in leg and "[XA" not in leg, "설명문에 XA 자리표시가 남았다"
     if nwords > 350:
         raise SystemExit(f"설명문 {nwords} 단어 > 350")
-    ta = S.text_audit(leg.replace(XA_PLACEHOLDER, ""))
+    ta = S.text_audit(leg)
     (S.OUT / f"{STEM}_legend.md").write_text(
         legend_md(body) + "\n"
-        f"<!-- words: {nwords} (without placeholder {nwords_ph}); limit 350, XA replacement budget 50 words "
-        "(FIGURE_SPEC_v3 section 16). Generated by scripts/4_visualization/paper_v3/fig4.py from the registered "
-        "sources; XA placeholder per FIGURE_SPEC_v3 sections 6.3 and 12. -->\n", encoding="utf-8")
+        f"<!-- words: {nwords}; limit 350. Generated by scripts/4_visualization/paper_v3/fig4.py from the registered "
+        "sources. Panel d sentence = registered XA fragments (plan 2.1, category 'not established') rendered as "
+        "numbers from data/processed/xbatch/XA_c2_gain_decomposition/sealed/ (FIGURE_SPEC_v3 6.3 d, 12, 16). -->\n",
+        encoding="utf-8")
     write_values(D, ST, au, pa, nwords, nwords_ph, ta, log, extra)
     print("\n".join(log))
     print("audit_v3 fails:", au["fails"], "chars", au["chars"])
@@ -741,6 +855,10 @@ def write_values(D, ST, au, pa, nwords, nwords_ph, ta, log, extra=None):
         tag = ("claims MANIFEST 사본과 같음" if len(mm_) and mm_.iloc[0].sha256 == h
                else ("claims MANIFEST 에 없음" if not len(mm_) else "claims MANIFEST 사본과 다름"))
         L.append(f"- {rel}: {h} ({tag})")
+    xman = {e["file"]: e["sha256"] for e in json.loads(XA_MANIFEST.read_text())["entries"]}
+    for k, p in XA_SRC.items():
+        h = sha256(p)
+        L.append(f"- {p.relative_to(ROOT)}: {h} (sealed_manifest.json {'과 같음' if xman.get(p.name) == h else '과 다름'})")
     L += ["", "## 2. 자동 대조(스크립트 assert 통과)"] + [f"- {x}" for x in log[1:]]
     L += ["", "## 3. 패널 a(n*, 행 순서 = 라벨 10개 편향 내림차순)"]
     for k in D["order"]:
@@ -788,8 +906,22 @@ def write_values(D, ST, au, pa, nwords, nwords_ph, ta, log, extra=None):
           f"{Cr[(Cr.tname == 'Canada') & (Cr.n == 160)].delta.iloc[0]:.4f}, "
           f"{Cr[(Cr.tname == 'Lena') & (Cr.n == 40)].delta.iloc[0]:.4f}, "
           f"{Cr[(Cr.tname == 'Lena') & (Cr.n == 160)].delta.iloc[0]:.4f} (C5 README E6, E7, E10, E11)",
-          f"- 한계 0.5 cm: wf_meta.json ni_margin {D['meta']['ni_margin']}; 재표집 10,000: WF4-c·WF4-a nboot",
-          f"- 설명문 단어 수 {nwords}(자리표시 제외 {nwords_ph}), 한도 350. text_audit(자리표시 제외): {ta}"]
+          f"- 한계 0.5 cm: wf_meta.json ni_margin {D['meta']['ni_margin']}; 재표집 10,000: WF4-c·WF4-a nboot, "
+          "XA xa_spearman.csv nboot(같음, assert)",
+          f"- 티베트 d 값 {D['X'].set_index('tname').loc['Tibet_LGD', 'y_recal']:.4f}, "
+          f"{D['X'].set_index('tname').loc['Tibet_LGD', 'y_ml']:.4f} cm: xa_gains.csv target 'Tibet_LGD|x' n −1 "
+          "gain G_recal, G_ML2 의 −g_cell(XA 요약 6절 표: 135.65, 5.89)",
+          f"- d 의 ρ 0.37 [−0.11, 0.93]: xa_spearman.csv hyp 'XA-1' CE2 cm n −1 main, rho_cell "
+          f"{D['XS']['XA-1']['rho_cell']:.6f}, cluster_lo_cell {D['XS']['XA-1']['cluster_lo_cell']:.6f}, cluster_hi_cell "
+          f"{D['XS']['XA-1']['cluster_hi_cell']:.6f} (XA 요약 4절 표, 계획 8.1)",
+          f"- d 의 ρ 0.28 [−0.19, 0.80], 대상 고정 0.18 to 0.54: xa_spearman.csv hyp 'XA-3' 같은 필터, rho_cell "
+          f"{D['XS']['XA-3']['rho_cell']:.6f}, cluster [{D['XS']['XA-3']['cluster_lo_cell']:.6f}, "
+          f"{D['XS']['XA-3']['cluster_hi_cell']:.6f}], fixed [{D['XS']['XA-3']['fixed_lo_cell']:.6f}, "
+          f"{D['XS']['XA-3']['fixed_hi_cell']:.6f}]",
+          "- 'not established' = xa_hyp.csv category '확인하지 못함'(XA-1, XA-3; XA-2 도 같음. XA-2 의 G_W 는 d 에 그리지 않아 "
+          "설명문에서 빼고 결과 절 R3 자리표시로 둔다). XA-3 은 cat_cluster '확인하지 못함', cat_fixed '양(벗어남)' 이라 "
+          "두 구간을 모두 적고 약한 범주로 썼다(계획 2.1 공통 규칙). 블록 등가중 ρ 와 CI 는 Source Data 와 12절",
+          f"- 설명문 단어 수 {nwords}, 한도 350. text_audit: {ta}"]
     L += ["", "## 7. audit_v3(저장 직전 그림)"]
     for k in ("fails", "sizes", "chars", "thin_lines", "titles", "boxed_text", "codes", "comma4", "long_labels",
               "loose_numbers"):
@@ -804,8 +936,16 @@ def write_values(D, ST, au, pa, nwords, nwords_ph, ta, log, extra=None):
           "- 중앙 러시아와 북대서양은 직접 라벨, 나머지 5지역 모양은 b 안 열쇠(6항목, 지침 2.8 상한)로 보인다.",
           "- d 의 두 하위 축은 y 를 공유하므로 y 축 이름은 하나('Error change (cm)'), 두 몫의 이름은 하위 축 머리가 맡는다."
           " 하위 축 폭 33 mm(명세 36 mm, y 눈금 자리).",
-          "- d 의 y 범위는 b 와 같다(티베트를 뺀 값으로 정한 b 범위). d 는 XA 결과 전이라 빈 축 + 축 이름만 그린다(명세 12절)."
-          " 자리표시 문자열은 설명문 d 문장에 둔다(명세 6.3 d, 12절. 결과 절 R3 용 문자열 '[XA: R3 | …]' 은 원고 본문용).",
+          f"- d 의 y 범위 {YLIM_D}(두 하위 축 공통)는 티베트를 뺀 d 의 값 범위(재보정 −13.50 – +4.64 cm, 재보정 너머"
+          " −1.26 – +0.93 cm)로 정했다(명세 6.3 d [판단]). b 의 범위(−20, 13)보다 좁혀 오른쪽 하위 축의 0 근처 점을 펼쳤다.",
+          "- d 의 부호: 봉인 표의 이득 G(양수 = 개선)를 −G 로 바꿔 b 와 같은 오차 변화 규약(음수 = 오차 감소)으로 그렸다"
+          "(명세 6.3 d 의 축 이름 'Error change …'). 설명문의 ρ 는 봉인 표 그대로 편향과 이득 G 의 순위상관이다.",
+          "- d 의 점: b 와 같은 모양·채움 규칙(빈 모양 = 하위 지역 또는 점 추정), 색은 왼쪽 #2b5c8f, 오른쪽 #9a7bc9(명세)."
+          " 맞춤선 없음, 대상별 CI 는 Source Data 만. 티베트 표지: 왼쪽은 x·y 모두 밖이라 b 와 같은 모서리 표지, 오른쪽은"
+          " x 만 밖(y −5.89 cm)이라 그 높이의 오른쪽 끝 표지. b 의 직접 라벨 두 개는 d 에서 되풀이하지 않는다(H13).",
+          "- d 의 설명문은 등록 조각(계획 2.1 '확인하지 못함' 칸)의 영문 수치 문장이다. 등록 문서에 영문 조각이 없어 국문 조각을"
+          " 옮겼다('…의 관계는 확인하지 못했다(사후 분석)' → 'Relations … were not established (post hoc analysis)'). 해석 조각"
+          " 전문과 XA-2 문장은 결과 절 R3 에 둔다(명세 16절).",
           f"- 그림 높이 {FIG_H:g} mm(명세 '약 150 mm'). 아래 행을 명세 슬롯(y 82)보다 위로 올려 행 사이 빈 띠를 없앴다."
           " 위 행 슬롯과 패널 폭은 명세 그대로.",
           "- b 의 대상별 CI 막대는 검정 대신 #a0a0a0(27개 막대가 x 5–15 cm 에 몰려 검정이면 점을 가린다. 지침 2.3 '굵기 대신"
@@ -816,8 +956,9 @@ def write_values(D, ST, au, pa, nwords, nwords_ph, ta, log, extra=None):
           " 'v2/Fig4_min_labels' 에서 옮겼다. fig4_a.csv 는 v2 등록 표(scripts/4_visualization/paper/v2_data.py)로"
           " claims MANIFEST 에는 없다.",
           "- 설명문은 Fig2_legend.md 형식('# Fig. 4' 머리, 굵은 제목 문장, 평문 패널 문자). 명세 6.6 초안에 더한 것은"
-          " 하위 지역 표 참조, 북대서양 점 추정 표지, 고정 레시피의 λ 뿐이다. XA 치환 문장은 350 − 308 = 42 단어 이내,"
-          " 넘으면 λ 정의 문장을 Methods 로 옮긴다(명세 16절 규칙)."]
+          " 하위 지역 표 참조, 북대서양 점 추정 표지, 고정 레시피의 λ 뿐이다. XA 치환 뒤 350 단어를 맞추려고 고정 레시피의"
+          " 정의(재보정 앵커 + 잔차 ML)를 Methods 로 넘기고, 티베트의 d 값을 b 문장에 합치고, 구간 문장을 b·c·d 하나로"
+          " 묶었다(명세 16절 규칙)."]
     if extra:
         L += ["", "## 11. 추가 점검(저장 뒤)",
               f"- 글자끼리 겹침 {len(extra['overlaps']['overlap_pairs'])}쌍 {extra['overlaps']['overlap_pairs']}, 캔버스 밖"
@@ -826,7 +967,30 @@ def write_values(D, ST, au, pa, nwords, nwords_ph, ta, log, extra=None):
               f" {len(extra['pdf_dashes'])}건",
               f"- pdfimages 래스터 요소 {extra['n_raster']}개",
               "- 사람 점검(600 dpi PNG 100 % 잘라 보기): a 행 이름·직접 라벨 3개·화살표 머리 축 끝 닿음, b 직접 라벨 2개와 막대"
-              " 분리, c 겹친 지역 점의 단 간격 1.6 mm, d 빈 축. 겹침·잘림 없음(2026-10-04)."]
+              " 분리, c 겹친 지역 점의 단 간격 1.6 mm(2026-10-04). d(XA, 2026-10-05): 왼쪽 W Russia 점과 티베트 모서리 표지"
+              " 분리, 오른쪽 0 근처 점 겹침은 자료 그대로(빈 모양을 위에 그려 테두리가 보임), 티베트 오른쪽 끝 표지 y −5.89 cm."
+              " 글자 겹침·잘림 없음."]
+    X, XS = D["X"], D["XS"]
+    L += ["", "## 12. 패널 d(XA, 사후 분석; 원천 data/processed/xbatch/XA_c2_gain_decomposition/sealed/)",
+          "- 필터: x = xa_targets.csv in_main 의 CE2(= WF4-c diag_abs, 2절 대조), y = xa_gains.csv n == -1 & gain ∈"
+          " {G_recal, G_ML2} & target 의 g_cell 에 −1 을 곱한 값. 대상 28(계열 8). 아래 값은 그림 값(x, y_recal, y_ml) 그대로.",
+          "- 형식: 대상: x | 재보정 y(셀) [대상 CI] / 블록 등가중 y | 재보정 너머 y(셀) [대상 CI] / 블록 등가중 y | 그림 상태"]
+    for _, r in X.sort_values("diag_abs", ascending=False).iterrows():
+        def part(c):
+            ci = (f"[{r[c + '_lo']:.2f}, {r[c + '_hi']:.2f}]" if bool(r[c + "_has_dist"]) else "CI 없음(점 추정)")
+            return f"{r[c]:.4f} {ci} / {r[c + '_beq']:.4f}"
+        inside = all(XLIM_B[0] <= r.diag_abs <= XLIM_B[1] and YLIM_D[0] <= r[c] <= YLIM_D[1] for c in ("y_recal", "y_ml"))
+        L.append(f"- {r.target}: x {r.diag_abs:.4f} | {part('y_recal')} | {part('y_ml')} | "
+                 f"{'축 안' if inside else '축 밖(삼각 표지)'}")
+    for h in ("XA-1", "XA-2", "XA-3"):
+        q = XS[h]
+        L.append(f"- {h} ({XA_HYP[h]}): ρ 셀 {q['rho_cell']:.6f} / 블록 {q['rho_beq']:.6f}; 계열 군집 CI 셀 "
+                 f"[{q['cluster_lo_cell']:.4f}, {q['cluster_hi_cell']:.4f}] / 블록 [{q['cluster_lo_beq']:.4f}, "
+                 f"{q['cluster_hi_beq']:.4f}]; 대상 고정 CI 셀 [{q['fixed_lo_cell']:.4f}, {q['fixed_hi_cell']:.4f}] / 블록 "
+                 f"[{q['fixed_lo_beq']:.4f}, {q['fixed_hi_beq']:.4f}]; 대상 {int(q['n_targets'])}, 계열 {int(q['n_families'])},"
+                 f" 재표집 {int(q['nboot'])}; 범주 '{q['category']}'(주 '{q['cat_cluster']}', 보조 '{q['cat_fixed']}'), "
+                 f"Holm p {q['holm_p']}; 정의 강건 {q['definition_robust']}, 척도 강건 {q['scale_robust']}")
+    L.append("- 등록 조각(xa_hyp.csv sentence): " + " / ".join(str(XS[h]["sentence"]) for h in ("XA-1", "XA-2", "XA-3")))
     (S.OUT / f"{STEM}_values.txt").write_text("\n".join(L) + "\n", encoding="utf-8")
 
 
