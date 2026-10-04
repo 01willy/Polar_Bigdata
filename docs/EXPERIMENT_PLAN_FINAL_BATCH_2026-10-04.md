@@ -1108,3 +1108,9 @@
   - 결과: **Algorithm P = S1**. 2.3절 고정 규칙에서 S2, S4, S8 계열 후보가 모두 제외되었다(각 후보가 알래스카 계열의 한 행 이상에서 한 가중이라도 손해. 예: S2 는 AL-3 모드 x 라벨 10개). 규칙 5에 따라 XC-5b·5c 와 S-XC3 은 '시험하지 않음'이다.
   - 작업 구성 변경(등록 규칙 불변): 사용자 지시(2026-10-05 02시 '로컬 GPU 서버가 비어 있으면 Rescale 대신 로컬 사용')로 XC(R2a)와 이후 작업은 로컬 CPU(우리 작업 합계 32스레드 이하, nice 10)에서 돈다. 대비는 한 플랫폼 안에서 닫고, 재현 관문은 local_rescale 허용 오차를 쓴다(1절).
   - 작업 A 는 계획 R0·R1a·R1b 의 내용(XE xh0·xt2 제외)을 한 노드에서 차례로 돌렸다. XE 1단계는 로컬에서 돈다. 원격 단위 시험 단계(선택)는 로컬 전용 파일이 없어 실패했고, 같은 시험 전부(321건)가 로컬에서 통과했다.
+- 2026-10-05 03:20 **S9* 동결(XD-learn, 2.4 '동결', 가설·판정·해석 문장 불변)**
+  - 선택: `x_placement_policy.py --freeze`(개발 교차검증 효용, 접는 단위 'AL-k 와 알래스카 x 함께 제외'). 두 변형 가운데 효용이 작은 **S9-DS** 가 S9* 이다. 동결 기록 `data/processed/xbatch/XD_placement_policy/freeze/s9_freeze_manifest.json`(sha256 2751fecf49b8bcbd).
+  - S9-DS: 모형 `policy/s9_ds.pt` sha256 e5db0a89e17099df, 기록 `policy/s9_ds_meta.json` sha256 9cdda75fa06bd29f, 시험 과제 색인 `policy/s9_ds_index.json` sha256 c1cdee5905c027ad(과제·분할 27, 정책 seed 5). 학습 seed 0·1·2, 특징 원소 29개·문맥 6개(ctx_ncand, ctx_nblocks, ctx_effblocks, ctx_cov_between, ctx_src_diff, n).
+  - 환경: 로컬 GPU 0(NVIDIA GeForce RTX 3090, 드라이버 530.41.03), torch 2.6.0+cu124, CUDA 12.4, cuDNN 90100, CUBLAS_WORKSPACE_CONFIG=:4096:8, torch.use_deterministic_algorithms(True), CUDA_DEVICE_ORDER=PCI_BUS_ID. 코드 sha256 b2ef7464df799ee3.
+  - S9-GBM 은 작업 A(Rescale elm)에서 학습했다(`policy/s9_gbm.cbm`, `policy/s9_gbm_meta.json`).
+  - 다음 순서: 이 커밋 → `--attest-freeze` → 다른 로컬 GPU 에서 선택 재생성(Jaccard 서술) → XD-alg 비알래스카 행 열람(열람 순서 3) → R2b(xd_test)를 로컬 CPU 에서 실행(사용자 지시 2026-10-05 02시, 로컬 우선).
