@@ -1,0 +1,7 @@
+pool,n_regions,regions,loaded,regimes,platforms,cross_env,few_blocks,note,lic_version,main_verdict,version_role
+P4,4,"Lena|x,Canada|x,Russia_W|x,Russia_E|x","Lena|x,Canada|x,Russia_W|x,Russia_E|x","Lena:shallow,Canada:shallow,Russia_W:shallow,Russia_E:shallow",rescale,,,,lic,True,주 판정(LG 개정 15 (m)2)
+PE1,5,"Lena|x,Canada|x,Russia_W|x,Russia_E|x,Russia_C|x","Lena|x,Canada|x,Russia_W|x,Russia_E|x,Russia_C|x","Lena:shallow,Canada:shallow,Russia_W:shallow,Russia_E:shallow,Russia_C:shallow","local,rescale",교차 환경; (i) CatBoost 불통과,,,lic,True,주 판정(LG 개정 15 (m)2)
+PE2,6,"Lena|x,Canada|x,Russia_W|x,Russia_E|x,Russia_C|x,Tibet_LGD|x","Lena|x,Canada|x,Russia_W|x,Russia_E|x,Russia_C|x,Tibet_LGD|x","Lena:shallow,Canada:shallow,Russia_W:shallow,Russia_E:shallow,Russia_C:shallow,Tibet_LGD:deep","local,rescale",교차 환경; (i) CatBoost 불통과,,,lic,True,주 판정(LG 개정 15 (m)2)
+NEW1,1,Russia_C|x,Russia_C|x,Russia_C:shallow,local,,,,lic,True,주 판정(LG 개정 15 (m)2)
+NEW2,2,"Russia_C|x,Tibet_LGD|x","Russia_C|x,Tibet_LGD|x","Russia_C:shallow,Tibet_LGD:deep",local,,,,lic,True,주 판정(LG 개정 15 (m)2)
+point_only,1,NAtlantic~lic,,,,,,"적격 표에서 부적격인 새 지역(점 추정만, 6B.4)",lic,True,주 판정(LG 개정 15 (m)2)

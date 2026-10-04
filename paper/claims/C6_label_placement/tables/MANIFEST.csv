@@ -1,0 +1,8 @@
+orig_path,copy_path,sha256,rows,bytes
+results/rescale_wf/data/processed/wf/wf_tests.csv,paper/claims/C6_label_placement/tables/wf_tests.csv,90a485feef92c3dbf0ae053f4d977a3744d3f7ca51e152fd4b5832c3e0503a8c,1140,548699
+results/rescale_wf/data/processed/wf/wf_meta.json,paper/claims/C6_label_placement/tables/wf_meta.json,e78e39119801a6d1ad3a137bcf227b0cebad01ae52365db1ee319353a41d5e4b,NA,26464
+results/rescale_wf2/data/processed/wf/wf2b_tests.csv,paper/claims/C6_label_placement/tables/wf2b_tests.csv,83a97be8de147db119c299f8efe1354c88bd284329436917fc7a51dccebe4186,650,302623
+results/rescale_wf2/data/processed/wf/wf2b_meta.json,paper/claims/C6_label_placement/tables/wf2b_meta.json,e9e3b1c88bca814eab0a31b91994a6f7e220ed9e7dfd14a0790d5dcd09e26922,NA,8651
+data/processed/lgw/lgw_l43.csv,paper/claims/C6_label_placement/tables/lgw_l43.csv,28be062bad7b1fc140a8f7d786bdf19b7b9ac1e2ab30de9a5d60544d86182320,151,61790
+data/processed/lgw/lgw_tests.csv,paper/claims/C6_label_placement/tables/lgw_tests.csv,0cab63ae6a128a032ff358356ebccab212d4dca44dff3956a8afbcc4696a37fb,13,6672
+data/processed/wf/wf0_misspec.csv,paper/claims/C6_label_placement/tables/wf0_misspec.csv,ba5415df75ab88b9a5a2790052dc33b3a1b9cf19a170a616f49bbd45eb49e959,30,7437

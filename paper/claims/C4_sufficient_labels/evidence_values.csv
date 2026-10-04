@@ -1,0 +1,1009 @@
+id,kind,source,filter,column,value,verdict
+E1.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n200",delta,-0.18,동등
+E1.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n200",ci_lo,-0.34,동등
+E1.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n200",ci_hi,0.01,동등
+E1.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n200",delta_blockeq,-0.25,동등
+E1.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n200",ci_lo_beq,-0.42,동등
+E1.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n200",ci_hi_beq,-0.07,동등
+E1.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n200",rmse_A,14.22,동등
+E1.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n200",rmse_B,14.4,동등
+E1.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n200",n_splits,25.0,동등
+E1.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n200",verdict4_common,미결정,동등
+E1.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n200",ci_dependence,분할 독립 가정 의존,동등
+E1.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n200",delta,-0.2,우세
+E1.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n200",ci_lo,-0.24,우세
+E1.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n200",ci_hi,-0.11,우세
+E1.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n200",delta_blockeq,-0.07,우세
+E1.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n200",ci_lo_beq,-0.14,우세
+E1.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n200",ci_hi_beq,-0.01,우세
+E1.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n200",rmse_A,14.2,우세
+E1.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n200",rmse_B,14.4,우세
+E1.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n200",n_splits,25.0,우세
+E1.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n200",verdict4_common,동등,우세
+E1.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n200",ci_dependence,분할 독립 가정 의존,우세
+E1.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n200",small_note,통계적으로 구별되나 크기는 0.5 cm 미만,우세
+E1.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n200",delta,1.11,열세
+E1.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n200",ci_lo,0.78,열세
+E1.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n200",ci_hi,1.44,열세
+E1.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n200",delta_blockeq,1.3,열세
+E1.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n200",ci_lo_beq,0.88,열세
+E1.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n200",ci_hi_beq,1.75,열세
+E1.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n200",rmse_A,15.51,열세
+E1.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n200",rmse_B,14.4,열세
+E1.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n200",n_splits,25.0,열세
+E1.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n200",verdict4_common,열세,열세
+E1.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n200",delta,3.51,미결정
+E1.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n200",ci_lo,1.71,미결정
+E1.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n200",ci_hi,3.56,미결정
+E1.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n200",delta_blockeq,-0.21,미결정
+E1.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n200",ci_lo_beq,-0.71,미결정
+E1.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n200",ci_hi_beq,0.3,미결정
+E1.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n200",rmse_A,17.91,미결정
+E1.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n200",rmse_B,14.4,미결정
+E1.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n200",n_splits,25.0,미결정
+E1.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n200",verdict4_common,미결정,미결정
+E1.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n500",delta,-0.39,우세
+E1.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n500",ci_lo,-0.54,우세
+E1.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n500",ci_hi,-0.21,우세
+E1.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n500",delta_blockeq,-0.39,우세
+E1.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n500",ci_lo_beq,-0.57,우세
+E1.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n500",ci_hi_beq,-0.21,우세
+E1.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n500",rmse_A,13.99,우세
+E1.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n500",rmse_B,14.38,우세
+E1.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n500",n_splits,25.0,우세
+E1.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n500",verdict4_common,미결정,우세
+E1.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n500",ci_dependence,분할 독립 가정 의존,우세
+E1.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n500",small_note,통계적으로 구별되나 크기는 0.5 cm 미만,우세
+E1.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n500",delta,-0.31,우세
+E1.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n500",ci_lo,-0.38,우세
+E1.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n500",ci_hi,-0.18,우세
+E1.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n500",delta_blockeq,-0.17,우세
+E1.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n500",ci_lo_beq,-0.26,우세
+E1.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n500",ci_hi_beq,-0.07,우세
+E1.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n500",rmse_A,14.07,우세
+E1.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n500",rmse_B,14.38,우세
+E1.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n500",n_splits,25.0,우세
+E1.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n500",verdict4_common,동등,우세
+E1.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n500",ci_dependence,분할 독립 가정 의존,우세
+E1.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n500",small_note,통계적으로 구별되나 크기는 0.5 cm 미만,우세
+E1.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n500",delta,0.8,열세
+E1.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n500",ci_lo,0.53,열세
+E1.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n500",ci_hi,1.17,열세
+E1.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n500",delta_blockeq,1.05,열세
+E1.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n500",ci_lo_beq,0.63,열세
+E1.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n500",ci_hi_beq,1.48,열세
+E1.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n500",rmse_A,15.19,열세
+E1.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n500",rmse_B,14.38,열세
+E1.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n500",n_splits,25.0,열세
+E1.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n500",verdict4_common,미결정,열세
+E1.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n500",ci_dependence,분할 독립 가정 의존,열세
+E1.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n500",delta,3.16,미결정
+E1.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n500",ci_lo,1.46,미결정
+E1.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n500",ci_hi,3.2,미결정
+E1.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n500",delta_blockeq,-0.56,미결정
+E1.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n500",ci_lo_beq,-1.08,미결정
+E1.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n500",ci_hi_beq,-0.04,미결정
+E1.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n500",rmse_A,17.55,미결정
+E1.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n500",rmse_B,14.38,미결정
+E1.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n500",n_splits,25.0,미결정
+E1.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n500",verdict4_common,미결정,미결정
+E1.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n1000",delta,-0.54,우세
+E1.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n1000",ci_lo,-0.69,우세
+E1.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n1000",ci_hi,-0.32,우세
+E1.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n1000",delta_blockeq,-0.6,우세
+E1.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n1000",ci_lo_beq,-0.8,우세
+E1.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n1000",ci_hi_beq,-0.4,우세
+E1.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n1000",rmse_A,13.87,우세
+E1.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n1000",rmse_B,14.41,우세
+E1.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n1000",n_splits,25.0,우세
+E1.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n1000",verdict4_common,우세,우세
+E1.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n1000",delta,-0.42,우세
+E1.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n1000",ci_lo,-0.51,우세
+E1.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n1000",ci_hi,-0.26,우세
+E1.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n1000",delta_blockeq,-0.33,우세
+E1.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n1000",ci_lo_beq,-0.44,우세
+E1.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n1000",ci_hi_beq,-0.21,우세
+E1.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n1000",rmse_A,13.99,우세
+E1.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n1000",rmse_B,14.41,우세
+E1.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n1000",n_splits,25.0,우세
+E1.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n1000",verdict4_common,우세,우세
+E1.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n1000",small_note,통계적으로 구별되나 크기는 0.5 cm 미만,우세
+E1.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n1000",delta,0.48,열세
+E1.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n1000",ci_lo,0.2,열세
+E1.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n1000",ci_hi,0.87,열세
+E1.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n1000",delta_blockeq,0.52,열세
+E1.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n1000",ci_lo_beq,0.12,열세
+E1.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n1000",ci_hi_beq,0.94,열세
+E1.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n1000",rmse_A,14.89,열세
+E1.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n1000",rmse_B,14.41,열세
+E1.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n1000",n_splits,25.0,열세
+E1.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n1000",verdict4_common,미결정,열세
+E1.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n1000",ci_dependence,분할 독립 가정 의존,열세
+E1.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n1000",small_note,통계적으로 구별되나 크기는 0.5 cm 미만,열세
+E1.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n1000",delta,2.76,미결정
+E1.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n1000",ci_lo,1.16,미결정
+E1.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n1000",ci_hi,2.78,미결정
+E1.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n1000",delta_blockeq,-0.65,미결정
+E1.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n1000",ci_lo_beq,-1.15,미결정
+E1.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n1000",ci_hi_beq,-0.14,미결정
+E1.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n1000",rmse_A,17.17,미결정
+E1.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n1000",rmse_B,14.41,미결정
+E1.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n1000",n_splits,25.0,미결정
+E1.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n1000",verdict4_common,미결정,미결정
+E1.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n전량",delta,-0.52,우세
+E1.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n전량",ci_lo,-0.7,우세
+E1.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n전량",ci_hi,-0.31,우세
+E1.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n전량",delta_blockeq,-0.68,우세
+E1.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n전량",ci_lo_beq,-0.91,우세
+E1.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n전량",ci_hi_beq,-0.44,우세
+E1.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n전량",rmse_A,13.88,우세
+E1.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n전량",rmse_B,14.4,우세
+E1.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n전량",n_splits,25.0,우세
+E1.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n전량",verdict4_common,미결정,우세
+E1.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n전량",ci_dependence,분할 독립 가정 의존,우세
+E1.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n전량",delta,0.7,미결정
+E1.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n전량",ci_lo,0.06,미결정
+E1.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n전량",ci_hi,0.9,미결정
+E1.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n전량",delta_blockeq,-0.48,미결정
+E1.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n전량",ci_lo_beq,-0.88,미결정
+E1.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n전량",ci_hi_beq,-0.08,미결정
+E1.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n전량",rmse_A,15.1,미결정
+E1.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n전량",rmse_B,14.4,미결정
+E1.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n전량",n_splits,25.0,미결정
+E1.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R2(λ cv)-P1|n전량",verdict4_common,미결정,미결정
+E1.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n전량",delta,0.5,미결정
+E1.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n전량",ci_lo,0.22,미결정
+E1.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n전량",ci_hi,0.85,미결정
+E1.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n전량",delta_blockeq,0.35,미결정
+E1.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n전량",ci_lo_beq,-0.07,미결정
+E1.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n전량",ci_hi_beq,0.77,미결정
+E1.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n전량",rmse_A,14.9,미결정
+E1.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n전량",rmse_B,14.4,미결정
+E1.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n전량",n_splits,25.0,미결정
+E1.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=Re(λ cv)-P1|n전량",verdict4_common,미결정,미결정
+E1.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n전량",delta,1.27,미결정
+E1.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n전량",ci_lo,0.3,미결정
+E1.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n전량",ci_hi,1.37,미결정
+E1.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n전량",delta_blockeq,-1.06,미결정
+E1.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n전량",ci_lo_beq,-1.56,미결정
+E1.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n전량",ci_hi_beq,-0.58,미결정
+E1.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n전량",rmse_A,15.66,미결정
+E1.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n전량",rmse_B,14.4,미결정
+E1.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n전량",n_splits,25.0,미결정
+E1.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=D0(catboost)-P1|n전량",verdict4_common,미결정,미결정
+E1.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast=R1(λ cv)-P1|n1000",delta_pct_p0,-3.71,우세
+E1.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,같은 행,holm_p,0.0,우세
+E1.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,같은 행,design_note,결과 열람 뒤 설계,우세
+E2.Lena.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n200",delta,0.22,미결정
+E2.Lena.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n200",ci_lo,-0.79,미결정
+E2.Lena.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n200",ci_hi,0.64,미결정
+E2.Lena.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n200",delta_blockeq,-0.2,미결정
+E2.Lena.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n200",ci_lo_beq,-0.75,미결정
+E2.Lena.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n200",ci_hi_beq,0.34,미결정
+E2.Lena.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n200",rmse_A,20.39,미결정
+E2.Lena.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n200",rmse_B,20.17,미결정
+E2.Lena.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n200",n_splits,24.0,미결정
+E2.Lena.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n200",verdict4_common,미결정,미결정
+E2.Lena.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n200",delta,0.42,미결정
+E2.Lena.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n200",ci_lo,-0.11,미결정
+E2.Lena.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n200",ci_hi,0.65,미결정
+E2.Lena.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n200",delta_blockeq,-0.16,미결정
+E2.Lena.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n200",ci_lo_beq,-0.53,미결정
+E2.Lena.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n200",ci_hi_beq,0.19,미결정
+E2.Lena.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n200",rmse_A,20.59,미결정
+E2.Lena.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n200",rmse_B,20.17,미결정
+E2.Lena.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n200",n_splits,24.0,미결정
+E2.Lena.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n200",verdict4_common,미결정,미결정
+E2.Lena.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n200",delta,-1.03,미결정
+E2.Lena.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n200",ci_lo,-1.8,미결정
+E2.Lena.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n200",ci_hi,-0.43,미결정
+E2.Lena.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n200",delta_blockeq,0.37,미결정
+E2.Lena.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n200",ci_lo_beq,-0.12,미결정
+E2.Lena.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n200",ci_hi_beq,0.86,미결정
+E2.Lena.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n200",rmse_A,19.14,미결정
+E2.Lena.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n200",rmse_B,20.17,미결정
+E2.Lena.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n200",n_splits,24.0,미결정
+E2.Lena.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n200",verdict4_common,미결정,미결정
+E2.Lena.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n200",delta,0.32,미결정
+E2.Lena.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n200",ci_lo,-1.05,미결정
+E2.Lena.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n200",ci_hi,0.88,미결정
+E2.Lena.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n200",delta_blockeq,-0.55,미결정
+E2.Lena.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n200",ci_lo_beq,-1.28,미결정
+E2.Lena.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n200",ci_hi_beq,0.14,미결정
+E2.Lena.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n200",rmse_A,20.48,미결정
+E2.Lena.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n200",rmse_B,20.17,미결정
+E2.Lena.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n200",n_splits,24.0,미결정
+E2.Lena.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n200",verdict4_common,미결정,미결정
+E2.Lena.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n500",delta,0.34,미결정
+E2.Lena.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n500",ci_lo,-0.76,미결정
+E2.Lena.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n500",ci_hi,0.78,미결정
+E2.Lena.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n500",delta_blockeq,-0.36,미결정
+E2.Lena.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n500",ci_lo_beq,-1.16,미결정
+E2.Lena.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n500",ci_hi_beq,0.38,미결정
+E2.Lena.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n500",rmse_A,20.49,미결정
+E2.Lena.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n500",rmse_B,20.15,미결정
+E2.Lena.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n500",n_splits,24.0,미결정
+E2.Lena.R1.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n500",verdict4_common,미결정,미결정
+E2.Lena.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n500",delta,0.35,미결정
+E2.Lena.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n500",ci_lo,-0.3,미결정
+E2.Lena.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n500",ci_hi,0.74,미결정
+E2.Lena.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n500",delta_blockeq,-0.33,미결정
+E2.Lena.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n500",ci_lo_beq,-0.92,미결정
+E2.Lena.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n500",ci_hi_beq,0.21,미결정
+E2.Lena.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n500",rmse_A,20.5,미결정
+E2.Lena.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n500",rmse_B,20.15,미결정
+E2.Lena.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n500",n_splits,24.0,미결정
+E2.Lena.R2.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n500",verdict4_common,미결정,미결정
+E2.Lena.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n500",delta,-0.88,미결정
+E2.Lena.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n500",ci_lo,-1.63,미결정
+E2.Lena.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n500",ci_hi,-0.35,미결정
+E2.Lena.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n500",delta_blockeq,0.12,미결정
+E2.Lena.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n500",ci_lo_beq,-0.47,미결정
+E2.Lena.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n500",ci_hi_beq,0.7,미결정
+E2.Lena.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n500",rmse_A,19.27,미결정
+E2.Lena.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n500",rmse_B,20.15,미결정
+E2.Lena.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n500",n_splits,24.0,미결정
+E2.Lena.Re.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n500",verdict4_common,미결정,미결정
+E2.Lena.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n500",delta,-0.45,미결정
+E2.Lena.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n500",ci_lo,-1.62,미결정
+E2.Lena.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n500",ci_hi,0.24,미결정
+E2.Lena.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n500",delta_blockeq,-1.0,미결정
+E2.Lena.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n500",ci_lo_beq,-1.84,미결정
+E2.Lena.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n500",ci_hi_beq,-0.21,미결정
+E2.Lena.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n500",rmse_A,19.7,미결정
+E2.Lena.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n500",rmse_B,20.15,미결정
+E2.Lena.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n500",n_splits,24.0,미결정
+E2.Lena.D0.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n500",verdict4_common,미결정,미결정
+E2.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n1000",delta,0.61,미결정
+E2.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n1000",ci_lo,-0.57,미결정
+E2.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n1000",ci_hi,1.38,미결정
+E2.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n1000",delta_blockeq,-0.08,미결정
+E2.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n1000",ci_lo_beq,-1.04,미결정
+E2.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n1000",ci_hi_beq,0.81,미결정
+E2.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n1000",rmse_A,20.6,미결정
+E2.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n1000",rmse_B,19.99,미결정
+E2.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n1000",n_splits,23.0,미결정
+E2.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n1000",verdict4_common,미결정,미결정
+E2.Lena.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n1000",delta,0.39,미결정
+E2.Lena.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n1000",ci_lo,-0.67,미결정
+E2.Lena.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n1000",ci_hi,1.48,미결정
+E2.Lena.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n1000",delta_blockeq,0.26,미결정
+E2.Lena.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n1000",ci_lo_beq,-0.73,미결정
+E2.Lena.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n1000",ci_hi_beq,1.18,미결정
+E2.Lena.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n1000",rmse_A,20.37,미결정
+E2.Lena.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n1000",rmse_B,19.99,미결정
+E2.Lena.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n1000",n_splits,23.0,미결정
+E2.Lena.R2.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n1000",verdict4_common,미결정,미결정
+E2.Lena.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n1000",delta,-0.71,미결정
+E2.Lena.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n1000",ci_lo,-1.57,미결정
+E2.Lena.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n1000",ci_hi,0.01,미결정
+E2.Lena.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n1000",delta_blockeq,0.02,미결정
+E2.Lena.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n1000",ci_lo_beq,-0.74,미결정
+E2.Lena.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n1000",ci_hi_beq,0.74,미결정
+E2.Lena.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n1000",rmse_A,19.28,미결정
+E2.Lena.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n1000",rmse_B,19.99,미결정
+E2.Lena.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n1000",n_splits,23.0,미결정
+E2.Lena.Re.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n1000",verdict4_common,미결정,미결정
+E2.Lena.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n1000",delta,-0.78,미결정
+E2.Lena.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n1000",ci_lo,-1.94,미결정
+E2.Lena.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n1000",ci_hi,0.17,미결정
+E2.Lena.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n1000",delta_blockeq,-1.08,미결정
+E2.Lena.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n1000",ci_lo_beq,-2.0,미결정
+E2.Lena.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n1000",ci_hi_beq,-0.21,미결정
+E2.Lena.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n1000",rmse_A,19.21,미결정
+E2.Lena.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n1000",rmse_B,19.99,미결정
+E2.Lena.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n1000",n_splits,23.0,미결정
+E2.Lena.D0.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n1000",verdict4_common,미결정,미결정
+E2.Lena.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n전량",delta,0.47,미결정
+E2.Lena.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n전량",ci_lo,-0.56,미결정
+E2.Lena.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n전량",ci_hi,1.28,미결정
+E2.Lena.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n전량",delta_blockeq,-0.14,미결정
+E2.Lena.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n전량",ci_lo_beq,-1.07,미결정
+E2.Lena.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n전량",ci_hi_beq,0.72,미결정
+E2.Lena.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n전량",rmse_A,20.63,미결정
+E2.Lena.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n전량",rmse_B,20.16,미결정
+E2.Lena.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n전량",n_splits,24.0,미결정
+E2.Lena.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R1(λ cv)-P1|n전량",verdict4_common,미결정,미결정
+E2.Lena.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n전량",delta,0.31,미결정
+E2.Lena.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n전량",ci_lo,-0.86,미결정
+E2.Lena.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n전량",ci_hi,2.09,미결정
+E2.Lena.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n전량",delta_blockeq,1.08,미결정
+E2.Lena.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n전량",ci_lo_beq,-0.27,미결정
+E2.Lena.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n전량",ci_hi_beq,2.37,미결정
+E2.Lena.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n전량",rmse_A,20.47,미결정
+E2.Lena.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n전량",rmse_B,20.16,미결정
+E2.Lena.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n전량",n_splits,24.0,미결정
+E2.Lena.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=R2(λ cv)-P1|n전량",verdict4_common,미결정,미결정
+E2.Lena.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n전량",delta,-0.39,미결정
+E2.Lena.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n전량",ci_lo,-1.3,미결정
+E2.Lena.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n전량",ci_hi,0.39,미결정
+E2.Lena.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n전량",delta_blockeq,0.39,미결정
+E2.Lena.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n전량",ci_lo_beq,-0.47,미결정
+E2.Lena.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n전량",ci_hi_beq,1.2,미결정
+E2.Lena.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n전량",rmse_A,19.77,미결정
+E2.Lena.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n전량",rmse_B,20.16,미결정
+E2.Lena.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n전량",n_splits,24.0,미결정
+E2.Lena.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=Re(λ cv)-P1|n전량",verdict4_common,미결정,미결정
+E2.Lena.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n전량",delta,-0.93,미결정
+E2.Lena.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n전량",ci_lo,-1.92,미결정
+E2.Lena.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n전량",ci_hi,0.21,미결정
+E2.Lena.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n전량",delta_blockeq,-0.96,미결정
+E2.Lena.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n전량",ci_lo_beq,-1.92,미결정
+E2.Lena.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n전량",ci_hi_beq,-0.05,미결정
+E2.Lena.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n전량",rmse_A,19.23,미결정
+E2.Lena.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n전량",rmse_B,20.16,미결정
+E2.Lena.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n전량",n_splits,24.0,미결정
+E2.Lena.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast=D0(catboost)-P1|n전량",verdict4_common,미결정,미결정
+E2.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n200",delta,-0.4,미결정
+E2.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n200",ci_lo,-1.05,미결정
+E2.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n200",ci_hi,0.19,미결정
+E2.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n200",delta_blockeq,-0.84,미결정
+E2.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n200",ci_lo_beq,-1.36,미결정
+E2.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n200",ci_hi_beq,-0.28,미결정
+E2.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n200",rmse_A,28.15,미결정
+E2.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n200",rmse_B,28.55,미결정
+E2.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n200",n_splits,25.0,미결정
+E2.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n200",verdict4_common,미결정,미결정
+E2.Canada.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n200",delta,-0.7,미결정
+E2.Canada.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n200",ci_lo,-1.36,미결정
+E2.Canada.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n200",ci_hi,0.3,미결정
+E2.Canada.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n200",delta_blockeq,-0.91,미결정
+E2.Canada.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n200",ci_lo_beq,-1.53,미결정
+E2.Canada.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n200",ci_hi_beq,-0.25,미결정
+E2.Canada.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n200",rmse_A,27.85,미결정
+E2.Canada.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n200",rmse_B,28.55,미결정
+E2.Canada.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n200",n_splits,25.0,미결정
+E2.Canada.R2.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n200",verdict4_common,미결정,미결정
+E2.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n200",delta,-2.13,미결정
+E2.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n200",ci_lo,-2.72,미결정
+E2.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n200",ci_hi,-0.23,미결정
+E2.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n200",delta_blockeq,2.17,미결정
+E2.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n200",ci_lo_beq,1.29,미결정
+E2.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n200",ci_hi_beq,3.06,미결정
+E2.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n200",rmse_A,26.42,미결정
+E2.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n200",rmse_B,28.55,미결정
+E2.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n200",n_splits,25.0,미결정
+E2.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n200",verdict4_common,미결정,미결정
+E2.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n200",delta,-1.5,미결정
+E2.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n200",ci_lo,-1.99,미결정
+E2.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n200",ci_hi,-0.24,미결정
+E2.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n200",delta_blockeq,-0.03,미결정
+E2.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n200",ci_lo_beq,-1.03,미결정
+E2.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n200",ci_hi_beq,1.01,미결정
+E2.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n200",rmse_A,27.05,미결정
+E2.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n200",rmse_B,28.55,미결정
+E2.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n200",n_splits,25.0,미결정
+E2.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n200",verdict4_common,미결정,미결정
+E2.Canada.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n전량",delta,0.45,미결정
+E2.Canada.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n전량",ci_lo,-0.73,미결정
+E2.Canada.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n전량",ci_hi,1.24,미결정
+E2.Canada.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n전량",delta_blockeq,-0.23,미결정
+E2.Canada.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n전량",ci_lo_beq,-1.09,미결정
+E2.Canada.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n전량",ci_hi_beq,0.65,미결정
+E2.Canada.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n전량",rmse_A,29.11,미결정
+E2.Canada.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n전량",rmse_B,28.66,미결정
+E2.Canada.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n전량",n_splits,25.0,미결정
+E2.Canada.R1.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R1(λ cv)-P1|n전량",verdict4_common,미결정,미결정
+E2.Canada.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n전량",delta,-0.08,미결정
+E2.Canada.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n전량",ci_lo,-1.27,미결정
+E2.Canada.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n전량",ci_hi,1.69,미결정
+E2.Canada.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n전량",delta_blockeq,-0.45,미결정
+E2.Canada.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n전량",ci_lo_beq,-1.65,미결정
+E2.Canada.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n전량",ci_hi_beq,0.83,미결정
+E2.Canada.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n전량",rmse_A,28.58,미결정
+E2.Canada.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n전량",rmse_B,28.66,미결정
+E2.Canada.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n전량",n_splits,25.0,미결정
+E2.Canada.R2.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=R2(λ cv)-P1|n전량",verdict4_common,미결정,미결정
+E2.Canada.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n전량",delta,-1.73,미결정
+E2.Canada.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n전량",ci_lo,-2.45,미결정
+E2.Canada.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n전량",ci_hi,0.09,미결정
+E2.Canada.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n전량",delta_blockeq,1.86,미결정
+E2.Canada.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n전량",ci_lo_beq,0.92,미결정
+E2.Canada.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n전량",ci_hi_beq,2.83,미결정
+E2.Canada.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n전량",rmse_A,26.93,미결정
+E2.Canada.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n전량",rmse_B,28.66,미결정
+E2.Canada.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n전량",n_splits,25.0,미결정
+E2.Canada.Re.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=Re(λ cv)-P1|n전량",verdict4_common,미결정,미결정
+E2.Canada.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n전량",delta,-1.5,미결정
+E2.Canada.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n전량",ci_lo,-2.19,미결정
+E2.Canada.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n전량",ci_hi,-0.12,미결정
+E2.Canada.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n전량",delta_blockeq,-0.3,미결정
+E2.Canada.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n전량",ci_lo_beq,-1.44,미결정
+E2.Canada.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n전량",ci_hi_beq,0.86,미결정
+E2.Canada.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n전량",rmse_A,27.16,미결정
+E2.Canada.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n전량",rmse_B,28.66,미결정
+E2.Canada.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n전량",n_splits,25.0,미결정
+E2.Canada.D0.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast=D0(catboost)-P1|n전량",verdict4_common,미결정,미결정
+E3.Alaska,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Alaska|r, contrast 결측",verdict,"지지: P1 보다 우세인 (레시피, n) = R2(λ cv) n=200, R1(λ cv) n=500, R2(λ cv) n=500, R1(λ cv) n=1000, R2(λ cv) n=1000, R1(λ cv) n=전량 [통계적으로 구별되나 크기는 0.5 cm 미만: R2(λ cv) n=200, R1(λ cv) n=500, R2(λ cv) n=500, R2(λ cv) n=1000, Re(λ cv) n=1000]",
+E3.Lena,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Lena|r, contrast 결측",verdict,부분(분할 23/24): 기각: R1·R2·Re(교차검증 λ)와 D0(catboost) 가운데 P1 보다 우세인 n 이 없다,
+E3.Canada,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a, target=Canada|r, contrast 결측",verdict,기각: R1·R2·Re(교차검증 λ)와 D0(catboost) 가운데 P1 보다 우세인 n 이 없다,
+E3.WF6-b,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, contrast 결측",verdict,"부분(지역 2/3, 분할 23/24): 기각: n ≥ 500 에서 R2(교차검증 λ)가 P1 보다 우세인 n 이 없다",
+E3.WF6-b.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n500",delta,0.02,미결정
+E3.WF6-b.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n500",ci_lo,-0.3,미결정
+E3.WF6-b.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n500",ci_hi,0.23,미결정
+E3.WF6-b.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n500",delta_blockeq,-0.25,미결정
+E3.WF6-b.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n500",ci_lo_beq,-0.55,미결정
+E3.WF6-b.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n500",ci_hi_beq,0.03,미결정
+E3.WF6-b.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n500",rmse_A,17.29,미결정
+E3.WF6-b.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n500",rmse_B,17.27,미결정
+E3.WF6-b.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n500",n_splits,,미결정
+E3.WF6-b.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n500",verdict4_common,미결정,미결정
+E3.WF6-b.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n1000",delta,-0.02,미결정
+E3.WF6-b.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n1000",ci_lo,-0.53,미결정
+E3.WF6-b.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n1000",ci_hi,0.54,미결정
+E3.WF6-b.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n1000",delta_blockeq,-0.03,미결정
+E3.WF6-b.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n1000",ci_lo_beq,-0.53,미결정
+E3.WF6-b.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n1000",ci_hi_beq,0.43,미결정
+E3.WF6-b.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n1000",rmse_A,17.18,미결정
+E3.WF6-b.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n1000",rmse_B,17.2,미결정
+E3.WF6-b.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n1000",n_splits,,미결정
+E3.WF6-b.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r], contrast=R2(λ cv)-P1|n1000",verdict4_common,미결정,미결정
+E3.WF6-b.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r,Canada|r], contrast=R2(λ cv)-P1|n전량",delta,0.31,미결정
+E3.WF6-b.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r,Canada|r], contrast=R2(λ cv)-P1|n전량",ci_lo,-0.28,미결정
+E3.WF6-b.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r,Canada|r], contrast=R2(λ cv)-P1|n전량",ci_hi,1.16,미결정
+E3.WF6-b.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r,Canada|r], contrast=R2(λ cv)-P1|n전량",delta_blockeq,0.05,미결정
+E3.WF6-b.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r,Canada|r], contrast=R2(λ cv)-P1|n전량",ci_lo_beq,-0.57,미결정
+E3.WF6-b.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r,Canada|r], contrast=R2(λ cv)-P1|n전량",ci_hi_beq,0.65,미결정
+E3.WF6-b.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r,Canada|r], contrast=R2(λ cv)-P1|n전량",rmse_A,21.38,미결정
+E3.WF6-b.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r,Canada|r], contrast=R2(λ cv)-P1|n전량",rmse_B,21.07,미결정
+E3.WF6-b.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r,Canada|r], contrast=R2(λ cv)-P1|n전량",n_splits,,미결정
+E3.WF6-b.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-b, item=WF6-b, target=MEAN[Alaska|r,Lena|r,Canada|r], contrast=R2(λ cv)-P1|n전량",verdict4_common,미결정,미결정
+E4.Pbest.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(Pbest), target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",delta,-0.92,우세
+E4.Pbest.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(Pbest), target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",ci_lo,-1.04,우세
+E4.Pbest.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(Pbest), target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",ci_hi,-0.64,우세
+E4.Pbest.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(Pbest), target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",delta_blockeq,-0.3,우세
+E4.Pbest.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(Pbest), target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",ci_lo_beq,-0.5,우세
+E4.Pbest.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(Pbest), target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",ci_hi_beq,-0.1,우세
+E4.Pbest.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(Pbest), target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",rmse_A,13.87,우세
+E4.Pbest.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(Pbest), target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",rmse_B,14.78,우세
+E4.Pbest.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(Pbest), target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",n_splits,25.0,우세
+E4.Pbest.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(Pbest), target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",verdict4_common,우세,우세
+E4.lam025.Lena.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n200",delta,-0.4,우세
+E4.lam025.Lena.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n200",ci_lo,-0.84,우세
+E4.lam025.Lena.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n200",ci_hi,-0.21,우세
+E4.lam025.Lena.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n200",delta_blockeq,-0.75,우세
+E4.lam025.Lena.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n200",ci_lo_beq,-1.01,우세
+E4.lam025.Lena.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n200",ci_hi_beq,-0.49,우세
+E4.lam025.Lena.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n200",rmse_A,19.77,우세
+E4.lam025.Lena.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n200",rmse_B,20.17,우세
+E4.lam025.Lena.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n200",n_splits,24.0,우세
+E4.lam025.Lena.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n200",verdict4_common,미결정,우세
+E4.lam025.Lena.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n200",ci_dependence,분할 독립 가정 의존,우세
+E4.lam025.Lena.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n200",small_note,통계적으로 구별되나 크기는 0.5 cm 미만,우세
+E4.lam025.Lena.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n500",delta,-0.57,우세
+E4.lam025.Lena.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n500",ci_lo,-0.99,우세
+E4.lam025.Lena.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n500",ci_hi,-0.4,우세
+E4.lam025.Lena.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n500",delta_blockeq,-1.05,우세
+E4.lam025.Lena.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n500",ci_lo_beq,-1.33,우세
+E4.lam025.Lena.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n500",ci_hi_beq,-0.79,우세
+E4.lam025.Lena.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n500",rmse_A,19.59,우세
+E4.lam025.Lena.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n500",rmse_B,20.15,우세
+E4.lam025.Lena.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n500",n_splits,24.0,우세
+E4.lam025.Lena.n500,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n500",verdict4_common,우세,우세
+E4.lam025.Lena.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n1000",delta,-0.63,우세
+E4.lam025.Lena.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n1000",ci_lo,-1.07,우세
+E4.lam025.Lena.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n1000",ci_hi,-0.4,우세
+E4.lam025.Lena.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n1000",delta_blockeq,-1.05,우세
+E4.lam025.Lena.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n1000",ci_lo_beq,-1.35,우세
+E4.lam025.Lena.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n1000",ci_hi_beq,-0.76,우세
+E4.lam025.Lena.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n1000",rmse_A,19.36,우세
+E4.lam025.Lena.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n1000",rmse_B,19.99,우세
+E4.lam025.Lena.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n1000",n_splits,23.0,우세
+E4.lam025.Lena.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n1000",verdict4_common,우세,우세
+E4.lam025.Lena.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n전량",delta,-0.68,우세
+E4.lam025.Lena.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n전량",ci_lo,-1.08,우세
+E4.lam025.Lena.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n전량",ci_hi,-0.44,우세
+E4.lam025.Lena.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n전량",delta_blockeq,-1.09,우세
+E4.lam025.Lena.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n전량",ci_lo_beq,-1.39,우세
+E4.lam025.Lena.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n전량",ci_hi_beq,-0.8,우세
+E4.lam025.Lena.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n전량",rmse_A,19.48,우세
+E4.lam025.Lena.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n전량",rmse_B,20.16,우세
+E4.lam025.Lena.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n전량",n_splits,24.0,우세
+E4.lam025.Lena.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Lena|r, contrast=R1(λ 0.25)-P1|n전량",verdict4_common,우세,우세
+E4.lam025.Canada.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n200",delta,-0.84,우세
+E4.lam025.Canada.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n200",ci_lo,-1.09,우세
+E4.lam025.Canada.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n200",ci_hi,-0.51,우세
+E4.lam025.Canada.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n200",delta_blockeq,-1.07,우세
+E4.lam025.Canada.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n200",ci_lo_beq,-1.28,우세
+E4.lam025.Canada.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n200",ci_hi_beq,-0.85,우세
+E4.lam025.Canada.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n200",rmse_A,27.71,우세
+E4.lam025.Canada.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n200",rmse_B,28.55,우세
+E4.lam025.Canada.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n200",n_splits,25.0,우세
+E4.lam025.Canada.n200,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n200",verdict4_common,우세,우세
+E4.lam025.Canada.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n전량",delta,-0.67,우세
+E4.lam025.Canada.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n전량",ci_lo,-1.02,우세
+E4.lam025.Canada.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n전량",ci_hi,-0.31,우세
+E4.lam025.Canada.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n전량",delta_blockeq,-1.24,우세
+E4.lam025.Canada.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n전량",ci_lo_beq,-1.52,우세
+E4.lam025.Canada.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n전량",ci_hi_beq,-0.94,우세
+E4.lam025.Canada.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n전량",rmse_A,27.99,우세
+E4.lam025.Canada.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n전량",rmse_B,28.66,우세
+E4.lam025.Canada.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n전량",n_splits,25.0,우세
+E4.lam025.Canada.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n전량",verdict4_common,미결정,우세
+E4.lam025.Canada.n전량,source,results/rescale_wf2/data/processed/wf/wf2b_tests.csv,"test_id=WF6-a, item=WF6-a(λ 0.25), target=Canada|r, contrast=R1(λ 0.25)-P1|n전량",ci_dependence,분할 독립 가정 의존,우세
+E5.Alaska.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=1000, lam=-1.0",rmse,13.87,미결정
+E5.Alaska.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=1000, lam=-1.0",rmse_p0,14.56,미결정
+E5.Alaska.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=1000, lam=-1.0",d_p0,-0.7,미결정
+E5.Alaska.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=1000, lam=-1.0",d_p0_lo,-0.81,미결정
+E5.Alaska.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=1000, lam=-1.0",d_p0_hi,-0.27,미결정
+E5.Alaska.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=1000, lam=-1.0",d_p0_beq,0.58,미결정
+E5.Alaska.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=1000, lam=-1.0",d_p0_beq_lo,0.32,미결정
+E5.Alaska.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=1000, lam=-1.0",d_p0_beq_hi,0.83,미결정
+E5.Alaska.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=1000, lam=-1.0",split_win_p1,0.84,미결정
+E5.Alaska.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=1000, lam=-1.0",n_lab,1000.0,미결정
+E5.Alaska.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=1000, lam=-1.0",n_splits_valid,25.0,미결정
+E5.Alaska.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=-1, lam=-1.0",rmse,13.88,미결정
+E5.Alaska.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=-1, lam=-1.0",rmse_p0,14.56,미결정
+E5.Alaska.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=-1, lam=-1.0",d_p0,-0.68,미결정
+E5.Alaska.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=-1, lam=-1.0",d_p0_lo,-0.81,미결정
+E5.Alaska.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=-1, lam=-1.0",d_p0_hi,-0.27,미결정
+E5.Alaska.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=-1, lam=-1.0",d_p0_beq,0.48,미결정
+E5.Alaska.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=-1, lam=-1.0",d_p0_beq_lo,0.21,미결정
+E5.Alaska.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=-1, lam=-1.0",d_p0_beq_hi,0.75,미결정
+E5.Alaska.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=-1, lam=-1.0",split_win_p1,0.84,미결정
+E5.Alaska.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=-1, lam=-1.0",n_lab,7044.2,미결정
+E5.Alaska.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=R1, n=-1, lam=-1.0",n_splits_valid,25.0,미결정
+E5.Alaska.P1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=P1, n=1000, lam=0.0",rmse,14.41,미결정
+E5.Alaska.P1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=P1, n=1000, lam=0.0",rmse_p0,14.56,미결정
+E5.Alaska.P1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=P1, n=1000, lam=0.0",d_p0,-0.15,미결정
+E5.Alaska.P1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=P1, n=1000, lam=0.0",d_p0_lo,-0.23,미결정
+E5.Alaska.P1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=P1, n=1000, lam=0.0",d_p0_hi,0.18,미결정
+E5.Alaska.P1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=P1, n=1000, lam=0.0",d_p0_beq,1.18,미결정
+E5.Alaska.P1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=P1, n=1000, lam=0.0",d_p0_beq_lo,0.94,미결정
+E5.Alaska.P1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=P1, n=1000, lam=0.0",d_p0_beq_hi,1.41,미결정
+E5.Alaska.P1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=P1, n=1000, lam=0.0",split_win_p1,0.0,미결정
+E5.Alaska.P1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=P1, n=1000, lam=0.0",n_lab,1000.0,미결정
+E5.Alaska.P1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Alaska, method=P1, n=1000, lam=0.0",n_splits_valid,25.0,미결정
+E5.Canada.P1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=P1, n=200, lam=0.0",rmse,28.55,열세
+E5.Canada.P1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=P1, n=200, lam=0.0",rmse_p0,24.68,열세
+E5.Canada.P1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=P1, n=200, lam=0.0",d_p0,3.86,열세
+E5.Canada.P1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=P1, n=200, lam=0.0",d_p0_lo,2.72,열세
+E5.Canada.P1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=P1, n=200, lam=0.0",d_p0_hi,4.07,열세
+E5.Canada.P1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=P1, n=200, lam=0.0",d_p0_beq,1.84,열세
+E5.Canada.P1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=P1, n=200, lam=0.0",d_p0_beq_lo,1.32,열세
+E5.Canada.P1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=P1, n=200, lam=0.0",d_p0_beq_hi,2.36,열세
+E5.Canada.P1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=P1, n=200, lam=0.0",split_win_p1,0.0,열세
+E5.Canada.P1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=P1, n=200, lam=0.0",n_lab,200.0,열세
+E5.Canada.P1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=P1, n=200, lam=0.0",n_splits_valid,25.0,열세
+E5.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=200, lam=-1.0",rmse,28.15,열세
+E5.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=200, lam=-1.0",rmse_p0,24.68,열세
+E5.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=200, lam=-1.0",d_p0,3.46,열세
+E5.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=200, lam=-1.0",d_p0_lo,2.2,열세
+E5.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=200, lam=-1.0",d_p0_hi,3.74,열세
+E5.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=200, lam=-1.0",d_p0_beq,1.01,열세
+E5.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=200, lam=-1.0",d_p0_beq_lo,0.33,열세
+E5.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=200, lam=-1.0",d_p0_beq_hi,1.7,열세
+E5.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=200, lam=-1.0",split_win_p1,0.48,열세
+E5.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=200, lam=-1.0",n_lab,200.0,열세
+E5.Canada.R1.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=200, lam=-1.0",n_splits_valid,25.0,열세
+E5.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=200, lam=-1.0",rmse,26.42,열세
+E5.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=200, lam=-1.0",rmse_p0,24.68,열세
+E5.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=200, lam=-1.0",d_p0,1.74,열세
+E5.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=200, lam=-1.0",d_p0_lo,1.07,열세
+E5.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=200, lam=-1.0",d_p0_hi,2.84,열세
+E5.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=200, lam=-1.0",d_p0_beq,4.01,열세
+E5.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=200, lam=-1.0",d_p0_beq_lo,3.14,열세
+E5.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=200, lam=-1.0",d_p0_beq_hi,4.9,열세
+E5.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=200, lam=-1.0",split_win_p1,0.68,열세
+E5.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=200, lam=-1.0",n_lab,200.0,열세
+E5.Canada.Re.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=200, lam=-1.0",n_splits_valid,25.0,열세
+E5.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=D0, n=200, lam=1.0",rmse,27.05,열세
+E5.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=D0, n=200, lam=1.0",rmse_p0,24.68,열세
+E5.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=D0, n=200, lam=1.0",d_p0,2.37,열세
+E5.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=D0, n=200, lam=1.0",d_p0_lo,1.59,열세
+E5.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=D0, n=200, lam=1.0",d_p0_hi,2.92,열세
+E5.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=D0, n=200, lam=1.0",d_p0_beq,1.82,열세
+E5.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=D0, n=200, lam=1.0",d_p0_beq_lo,0.79,열세
+E5.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=D0, n=200, lam=1.0",d_p0_beq_hi,2.85,열세
+E5.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=D0, n=200, lam=1.0",split_win_p1,0.64,열세
+E5.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=D0, n=200, lam=1.0",n_lab,200.0,열세
+E5.Canada.D0.n200,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=D0, n=200, lam=1.0",n_splits_valid,25.0,열세
+E5.Canada.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=-1, lam=-1.0",rmse,29.11,열세
+E5.Canada.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=-1, lam=-1.0",rmse_p0,24.68,열세
+E5.Canada.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=-1, lam=-1.0",d_p0,4.43,열세
+E5.Canada.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=-1, lam=-1.0",d_p0_lo,2.63,열세
+E5.Canada.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=-1, lam=-1.0",d_p0_hi,4.86,열세
+E5.Canada.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=-1, lam=-1.0",d_p0_beq,1.65,열세
+E5.Canada.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=-1, lam=-1.0",d_p0_beq_lo,0.69,열세
+E5.Canada.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=-1, lam=-1.0",d_p0_beq_hi,2.64,열세
+E5.Canada.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=-1, lam=-1.0",split_win_p1,0.6,열세
+E5.Canada.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=-1, lam=-1.0",n_lab,375.88,열세
+E5.Canada.R1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=R1, n=-1, lam=-1.0",n_splits_valid,25.0,열세
+E5.Canada.Re.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=-1, lam=-1.0",rmse,26.93,열세
+E5.Canada.Re.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=-1, lam=-1.0",rmse_p0,24.68,열세
+E5.Canada.Re.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=-1, lam=-1.0",d_p0,2.24,열세
+E5.Canada.Re.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=-1, lam=-1.0",d_p0_lo,1.31,열세
+E5.Canada.Re.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=-1, lam=-1.0",d_p0_hi,3.31,열세
+E5.Canada.Re.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=-1, lam=-1.0",d_p0_beq,3.73,열세
+E5.Canada.Re.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=-1, lam=-1.0",d_p0_beq_lo,2.77,열세
+E5.Canada.Re.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=-1, lam=-1.0",d_p0_beq_hi,4.77,열세
+E5.Canada.Re.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=-1, lam=-1.0",split_win_p1,0.68,열세
+E5.Canada.Re.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=-1, lam=-1.0",n_lab,375.88,열세
+E5.Canada.Re.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Canada, method=Re, n=-1, lam=-1.0",n_splits_valid,25.0,열세
+E5.Lena.P1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=P1, n=-1, lam=0.0",rmse,20.16,미결정
+E5.Lena.P1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=P1, n=-1, lam=0.0",rmse_p0,20.66,미결정
+E5.Lena.P1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=P1, n=-1, lam=0.0",d_p0,-0.5,미결정
+E5.Lena.P1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=P1, n=-1, lam=0.0",d_p0_lo,-0.74,미결정
+E5.Lena.P1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=P1, n=-1, lam=0.0",d_p0_hi,0.14,미결정
+E5.Lena.P1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=P1, n=-1, lam=0.0",d_p0_beq,0.84,미결정
+E5.Lena.P1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=P1, n=-1, lam=0.0",d_p0_beq_lo,0.51,미결정
+E5.Lena.P1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=P1, n=-1, lam=0.0",d_p0_beq_hi,1.16,미결정
+E5.Lena.P1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=P1, n=-1, lam=0.0",split_win_p1,0.0,미결정
+E5.Lena.P1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=P1, n=-1, lam=0.0",n_lab,1477.0,미결정
+E5.Lena.P1.n-1,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=P1, n=-1, lam=0.0",n_splits_valid,24.0,미결정
+E5.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=R1, n=1000, lam=-1.0",rmse,20.6,미결정
+E5.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=R1, n=1000, lam=-1.0",rmse_p0,20.49,미결정
+E5.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=R1, n=1000, lam=-1.0",d_p0,0.11,미결정
+E5.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=R1, n=1000, lam=-1.0",d_p0_lo,-0.73,미결정
+E5.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=R1, n=1000, lam=-1.0",d_p0_hi,1.01,미결정
+E5.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=R1, n=1000, lam=-1.0",d_p0_beq,0.74,미결정
+E5.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=R1, n=1000, lam=-1.0",d_p0_beq_lo,-0.11,미결정
+E5.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=R1, n=1000, lam=-1.0",d_p0_beq_hi,1.56,미결정
+E5.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=R1, n=1000, lam=-1.0",split_win_p1,0.35,미결정
+E5.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=R1, n=1000, lam=-1.0",n_lab,1000.0,미결정
+E5.Lena.R1.n1000,source,results/rescale_wf2/data/processed/wf/wf2b_curve.csv,"exp=wf6, target=Lena, method=R1, n=1000, lam=-1.0",n_splits_valid,24.0,미결정
+E6.Alaska.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",delta,-0.49,미결정
+E6.Alaska.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",ci_lo,-0.82,미결정
+E6.Alaska.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",ci_hi,-0.01,미결정
+E6.Alaska.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",delta_blockeq,0.24,미결정
+E6.Alaska.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",ci_lo_beq,-0.23,미결정
+E6.Alaska.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",ci_hi_beq,0.72,미결정
+E6.Alaska.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",rmse_A,14.26,미결정
+E6.Alaska.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",rmse_B,14.75,미결정
+E6.Alaska.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",n_splits,5.0,미결정
+E6.Alaska.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n1000",verdict4_common,미결정,미결정
+E6.Alaska.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n1000",delta,-0.5,미결정
+E6.Alaska.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n1000",ci_lo,-0.74,미결정
+E6.Alaska.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n1000",ci_hi,-0.06,미결정
+E6.Alaska.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n1000",delta_blockeq,0.29,미결정
+E6.Alaska.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n1000",ci_lo_beq,-0.2,미결정
+E6.Alaska.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n1000",ci_hi_beq,0.79,미결정
+E6.Alaska.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n1000",rmse_A,14.25,미결정
+E6.Alaska.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n1000",rmse_B,14.75,미결정
+E6.Alaska.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n1000",n_splits,5.0,미결정
+E6.Alaska.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n1000",verdict4_common,미결정,미결정
+E6.Alaska.R1.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n2000",delta,-0.58,미결정
+E6.Alaska.R1.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n2000",ci_lo,-0.89,미결정
+E6.Alaska.R1.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n2000",ci_hi,-0.22,미결정
+E6.Alaska.R1.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n2000",delta_blockeq,-0.1,미결정
+E6.Alaska.R1.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n2000",ci_lo_beq,-0.57,미결정
+E6.Alaska.R1.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n2000",ci_hi_beq,0.41,미결정
+E6.Alaska.R1.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n2000",rmse_A,14.13,미결정
+E6.Alaska.R1.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n2000",rmse_B,14.71,미결정
+E6.Alaska.R1.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n2000",n_splits,5.0,미결정
+E6.Alaska.R1.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n2000",verdict4_common,미결정,미결정
+E6.Alaska.R2.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n2000",delta,-0.49,미결정
+E6.Alaska.R2.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n2000",ci_lo,-0.79,미결정
+E6.Alaska.R2.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n2000",ci_hi,-0.13,미결정
+E6.Alaska.R2.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n2000",delta_blockeq,0.02,미결정
+E6.Alaska.R2.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n2000",ci_lo_beq,-0.44,미결정
+E6.Alaska.R2.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n2000",ci_hi_beq,0.5,미결정
+E6.Alaska.R2.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n2000",rmse_A,14.22,미결정
+E6.Alaska.R2.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n2000",rmse_B,14.71,미결정
+E6.Alaska.R2.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n2000",n_splits,5.0,미결정
+E6.Alaska.R2.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n2000",verdict4_common,미결정,미결정
+E6.Alaska.R1.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n5000",delta,-0.37,미결정
+E6.Alaska.R1.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n5000",ci_lo,-0.66,미결정
+E6.Alaska.R1.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n5000",ci_hi,0.03,미결정
+E6.Alaska.R1.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n5000",delta_blockeq,0.26,미결정
+E6.Alaska.R1.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n5000",ci_lo_beq,-0.22,미결정
+E6.Alaska.R1.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n5000",ci_hi_beq,0.74,미결정
+E6.Alaska.R1.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n5000",rmse_A,14.14,미결정
+E6.Alaska.R1.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n5000",rmse_B,14.51,미결정
+E6.Alaska.R1.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n5000",n_splits,5.0,미결정
+E6.Alaska.R1.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n5000",verdict4_common,미결정,미결정
+E6.Alaska.R2.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n5000",delta,0.36,미결정
+E6.Alaska.R2.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n5000",ci_lo,-0.14,미결정
+E6.Alaska.R2.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n5000",ci_hi,0.81,미결정
+E6.Alaska.R2.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n5000",delta_blockeq,0.6,미결정
+E6.Alaska.R2.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n5000",ci_lo_beq,-0.06,미결정
+E6.Alaska.R2.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n5000",ci_hi_beq,1.27,미결정
+E6.Alaska.R2.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n5000",rmse_A,14.87,미결정
+E6.Alaska.R2.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n5000",rmse_B,14.51,미결정
+E6.Alaska.R2.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n5000",n_splits,5.0,미결정
+E6.Alaska.R2.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n5000",verdict4_common,미결정,미결정
+E6.Alaska.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n전량",delta,-0.77,미결정
+E6.Alaska.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n전량",ci_lo,-2.18,미결정
+E6.Alaska.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n전량",ci_hi,0.08,미결정
+E6.Alaska.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n전량",delta_blockeq,0.28,미결정
+E6.Alaska.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n전량",ci_lo_beq,-0.52,미결정
+E6.Alaska.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n전량",ci_hi_beq,1.12,미결정
+E6.Alaska.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n전량",rmse_A,14.17,미결정
+E6.Alaska.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n전량",rmse_B,14.93,미결정
+E6.Alaska.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n전량",n_splits,5.0,미결정
+E6.Alaska.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R1(λ cv)-Pbest|n전량",verdict4_common,미결정,미결정
+E6.Alaska.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n전량",delta,1.05,미결정
+E6.Alaska.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n전량",ci_lo,-0.66,미결정
+E6.Alaska.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n전량",ci_hi,2.05,미결정
+E6.Alaska.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n전량",delta_blockeq,1.0,미결정
+E6.Alaska.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n전량",ci_lo_beq,0.18,미결정
+E6.Alaska.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n전량",ci_hi_beq,1.89,미결정
+E6.Alaska.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n전량",rmse_A,15.98,미결정
+E6.Alaska.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n전량",rmse_B,14.93,미결정
+E6.Alaska.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n전량",n_splits,5.0,미결정
+E6.Alaska.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast=R2(λ cv)-Pbest|n전량",verdict4_common,미결정,미결정
+E6.AL-2.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n1000",delta,-1.35,우세
+E6.AL-2.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n1000",ci_lo,-1.64,우세
+E6.AL-2.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n1000",ci_hi,-0.47,우세
+E6.AL-2.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n1000",delta_blockeq,-0.85,우세
+E6.AL-2.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n1000",ci_lo_beq,-1.53,우세
+E6.AL-2.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n1000",ci_hi_beq,-0.19,우세
+E6.AL-2.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n1000",rmse_A,12.38,우세
+E6.AL-2.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n1000",rmse_B,13.73,우세
+E6.AL-2.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n1000",n_splits,5.0,우세
+E6.AL-2.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n1000",verdict4_common,우세,우세
+E6.AL-2.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n1000",delta,-1.42,우세
+E6.AL-2.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n1000",ci_lo,-1.7,우세
+E6.AL-2.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n1000",ci_hi,-0.54,우세
+E6.AL-2.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n1000",delta_blockeq,-0.99,우세
+E6.AL-2.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n1000",ci_lo_beq,-1.73,우세
+E6.AL-2.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n1000",ci_hi_beq,-0.29,우세
+E6.AL-2.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n1000",rmse_A,12.31,우세
+E6.AL-2.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n1000",rmse_B,13.73,우세
+E6.AL-2.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n1000",n_splits,5.0,우세
+E6.AL-2.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n1000",verdict4_common,우세,우세
+E6.AL-2.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n전량",delta,-0.83,우세
+E6.AL-2.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n전량",ci_lo,-1.31,우세
+E6.AL-2.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n전량",ci_hi,-0.18,우세
+E6.AL-2.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n전량",delta_blockeq,-0.99,우세
+E6.AL-2.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n전량",ci_lo_beq,-1.7,우세
+E6.AL-2.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n전량",ci_hi_beq,-0.29,우세
+E6.AL-2.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n전량",rmse_A,12.32,우세
+E6.AL-2.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n전량",rmse_B,13.15,우세
+E6.AL-2.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n전량",n_splits,5.0,우세
+E6.AL-2.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n전량",verdict4_common,미결정,우세
+E6.AL-2.R1.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R1(λ cv)-Pbest|n전량",ci_dependence,분할 독립 가정 의존,우세
+E6.AL-2.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n전량",delta,-0.74,미결정
+E6.AL-2.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n전량",ci_lo,-1.2,미결정
+E6.AL-2.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n전량",ci_hi,0.04,미결정
+E6.AL-2.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n전량",delta_blockeq,-0.75,미결정
+E6.AL-2.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n전량",ci_lo_beq,-1.47,미결정
+E6.AL-2.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n전량",ci_hi_beq,-0.04,미결정
+E6.AL-2.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n전량",rmse_A,12.41,미결정
+E6.AL-2.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n전량",rmse_B,13.15,미결정
+E6.AL-2.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n전량",n_splits,5.0,미결정
+E6.AL-2.R2.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast=R2(λ cv)-Pbest|n전량",verdict4_common,미결정,미결정
+E6.verdict.Alaska,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Alaska|r, contrast 결측",verdict,"기각: n ≥ 1,000 에서 R1·R2(교차검증 λ)가 최선 물리 보정식보다 우세인 n 이 없다",
+E6.verdict.AL-2,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-2|r, contrast 결측",verdict,"지지: 최선 물리 보정식보다 우세인 n 이 있다(R1 n=1000, R2 n=1000, R1 n=전량)",
+E6.verdict.Lena,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Lena|r, contrast 결측",verdict,"기각: n ≥ 1,000 에서 R1·R2(교차검증 λ)가 최선 물리 보정식보다 우세인 n 이 없다",
+E6.verdict.Canada,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=Canada|r, contrast 결측",verdict,"기각: n ≥ 1,000 에서 R1·R2(교차검증 λ)가 최선 물리 보정식보다 우세인 n 이 없다",
+E6.verdict.AL-1,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-1|r, contrast 결측",verdict,"부분(분할 2/4): 기각: n ≥ 1,000 에서 R1·R2(교차검증 λ)가 최선 물리 보정식보다 우세인 n 이 없다",
+E6.verdict.AL-6,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-a, target=AL-6|r, contrast 결측",verdict,"판정 불가(대비 0/4; 없는 대비: R1 n=1000, R2 n=1000, R1 n=전량, R2 n=전량)",
+E6.AL-2.curve.P1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=P1, learner=none, n=1000, lam=0.0",rmse,13.03,동등
+E6.AL-2.curve.P1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=P1, learner=none, n=1000, lam=0.0",d_p1,0.0,동등
+E6.AL-2.curve.P1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=P1, learner=none, n=1000, lam=0.0",d_p1_lo,0.0,동등
+E6.AL-2.curve.P1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=P1, learner=none, n=1000, lam=0.0",d_p1_hi,0.0,동등
+E6.AL-2.curve.P1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=P1, learner=none, n=1000, lam=0.0",d_p1_beq,0.0,동등
+E6.AL-2.curve.P1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=P1, learner=none, n=1000, lam=0.0",d_p1_beq_lo,0.0,동등
+E6.AL-2.curve.P1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=P1, learner=none, n=1000, lam=0.0",d_p1_beq_hi,0.0,동등
+E6.AL-2.curve.P1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=P1, learner=none, n=-1, lam=0.0",rmse,13.01,동등
+E6.AL-2.curve.P1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=P1, learner=none, n=-1, lam=0.0",d_p1,0.0,동등
+E6.AL-2.curve.P1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=P1, learner=none, n=-1, lam=0.0",d_p1_lo,0.0,동등
+E6.AL-2.curve.P1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=P1, learner=none, n=-1, lam=0.0",d_p1_hi,0.0,동등
+E6.AL-2.curve.P1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=P1, learner=none, n=-1, lam=0.0",d_p1_beq,0.0,동등
+E6.AL-2.curve.P1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=P1, learner=none, n=-1, lam=0.0",d_p1_beq_lo,0.0,동등
+E6.AL-2.curve.P1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=P1, learner=none, n=-1, lam=0.0",d_p1_beq_hi,0.0,동등
+E6.AL-2.curve.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R1, learner=catboost_lo, n=1000, lam=-1.0",rmse,12.38,우세
+E6.AL-2.curve.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R1, learner=catboost_lo, n=1000, lam=-1.0",d_p1,-0.65,우세
+E6.AL-2.curve.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R1, learner=catboost_lo, n=1000, lam=-1.0",d_p1_lo,-0.88,우세
+E6.AL-2.curve.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R1, learner=catboost_lo, n=1000, lam=-1.0",d_p1_hi,-0.46,우세
+E6.AL-2.curve.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R1, learner=catboost_lo, n=1000, lam=-1.0",d_p1_beq,-0.59,우세
+E6.AL-2.curve.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R1, learner=catboost_lo, n=1000, lam=-1.0",d_p1_beq_lo,-0.94,우세
+E6.AL-2.curve.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R1, learner=catboost_lo, n=1000, lam=-1.0",d_p1_beq_hi,-0.22,우세
+E6.AL-2.curve.R1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R1, learner=catboost_lo, n=-1, lam=-1.0",rmse,12.32,우세
+E6.AL-2.curve.R1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R1, learner=catboost_lo, n=-1, lam=-1.0",d_p1,-0.69,우세
+E6.AL-2.curve.R1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R1, learner=catboost_lo, n=-1, lam=-1.0",d_p1_lo,-1.05,우세
+E6.AL-2.curve.R1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R1, learner=catboost_lo, n=-1, lam=-1.0",d_p1_hi,-0.41,우세
+E6.AL-2.curve.R1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R1, learner=catboost_lo, n=-1, lam=-1.0",d_p1_beq,-0.75,우세
+E6.AL-2.curve.R1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R1, learner=catboost_lo, n=-1, lam=-1.0",d_p1_beq_lo,-1.36,우세
+E6.AL-2.curve.R1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R1, learner=catboost_lo, n=-1, lam=-1.0",d_p1_beq_hi,-0.15,우세
+E6.AL-2.curve.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R2, learner=catboost_lo, n=1000, lam=-1.0",rmse,12.31,우세
+E6.AL-2.curve.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R2, learner=catboost_lo, n=1000, lam=-1.0",d_p1,-0.73,우세
+E6.AL-2.curve.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R2, learner=catboost_lo, n=1000, lam=-1.0",d_p1_lo,-0.97,우세
+E6.AL-2.curve.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R2, learner=catboost_lo, n=1000, lam=-1.0",d_p1_hi,-0.4,우세
+E6.AL-2.curve.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R2, learner=catboost_lo, n=1000, lam=-1.0",d_p1_beq,-0.73,우세
+E6.AL-2.curve.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R2, learner=catboost_lo, n=1000, lam=-1.0",d_p1_beq_lo,-1.15,우세
+E6.AL-2.curve.R2.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R2, learner=catboost_lo, n=1000, lam=-1.0",d_p1_beq_hi,-0.32,우세
+E6.AL-2.curve.R2.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R2, learner=catboost_lo, n=-1, lam=-1.0",rmse,12.41,미결정
+E6.AL-2.curve.R2.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R2, learner=catboost_lo, n=-1, lam=-1.0",d_p1,-0.6,미결정
+E6.AL-2.curve.R2.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R2, learner=catboost_lo, n=-1, lam=-1.0",d_p1_lo,-0.96,미결정
+E6.AL-2.curve.R2.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R2, learner=catboost_lo, n=-1, lam=-1.0",d_p1_hi,-0.15,미결정
+E6.AL-2.curve.R2.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R2, learner=catboost_lo, n=-1, lam=-1.0",d_p1_beq,-0.51,미결정
+E6.AL-2.curve.R2.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R2, learner=catboost_lo, n=-1, lam=-1.0",d_p1_beq_lo,-1.15,미결정
+E6.AL-2.curve.R2.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=AL-2, mode=r, method=R2, learner=catboost_lo, n=-1, lam=-1.0",d_p1_beq_hi,0.13,미결정
+E6.Alaska.curve.P1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=P1, learner=none, lam=0.0, n=-1",rmse,14.61,
+E6.Alaska.curve.P1.n20,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=P1, learner=none, lam=0.0, n=20",rmse,14.62,
+E6.Alaska.curve.P1.n50,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=P1, learner=none, lam=0.0, n=50",rmse,14.53,
+E6.Alaska.curve.P1.n100,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=P1, learner=none, lam=0.0, n=100",rmse,14.62,
+E6.Alaska.curve.P1.n200,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=P1, learner=none, lam=0.0, n=200",rmse,14.48,
+E6.Alaska.curve.P1.n500,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=P1, learner=none, lam=0.0, n=500",rmse,14.57,
+E6.Alaska.curve.P1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=P1, learner=none, lam=0.0, n=1000",rmse,14.6,
+E6.Alaska.curve.P1.n2000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=P1, learner=none, lam=0.0, n=2000",rmse,14.58,
+E6.Alaska.curve.P1.n5000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=P1, learner=none, lam=0.0, n=5000",rmse,14.61,
+E6.Alaska.curve.R1.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=R1, learner=catboost_lo, lam=-1.0, n=-1",rmse,14.17,
+E6.Alaska.curve.R1.n20,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=R1, learner=catboost_lo, lam=-1.0, n=20",rmse,14.9,
+E6.Alaska.curve.R1.n50,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=R1, learner=catboost_lo, lam=-1.0, n=50",rmse,14.57,
+E6.Alaska.curve.R1.n100,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=R1, learner=catboost_lo, lam=-1.0, n=100",rmse,14.41,
+E6.Alaska.curve.R1.n200,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=R1, learner=catboost_lo, lam=-1.0, n=200",rmse,14.18,
+E6.Alaska.curve.R1.n500,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=R1, learner=catboost_lo, lam=-1.0, n=500",rmse,14.08,
+E6.Alaska.curve.R1.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=R1, learner=catboost_lo, lam=-1.0, n=1000",rmse,14.26,
+E6.Alaska.curve.R1.n2000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=R1, learner=catboost_lo, lam=-1.0, n=2000",rmse,14.13,
+E6.Alaska.curve.R1.n5000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=R1, learner=catboost_lo, lam=-1.0, n=5000",rmse,14.14,
+E6.Alaska.curve.D0.n-1,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=D0, learner=catboost, lam=1.0, n=-1",rmse,15.36,
+E6.Alaska.curve.D0.n20,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=D0, learner=catboost, lam=1.0, n=20",rmse,18.67,
+E6.Alaska.curve.D0.n50,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=D0, learner=catboost, lam=1.0, n=50",rmse,18.14,
+E6.Alaska.curve.D0.n100,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=D0, learner=catboost, lam=1.0, n=100",rmse,17.57,
+E6.Alaska.curve.D0.n200,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=D0, learner=catboost, lam=1.0, n=200",rmse,17.28,
+E6.Alaska.curve.D0.n500,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=D0, learner=catboost, lam=1.0, n=500",rmse,16.78,
+E6.Alaska.curve.D0.n1000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=D0, learner=catboost, lam=1.0, n=1000",rmse,16.49,
+E6.Alaska.curve.D0.n2000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=D0, learner=catboost, lam=1.0, n=2000",rmse,16.54,
+E6.Alaska.curve.D0.n5000,source,results/rescale_wf/data/processed/wf/wf_curve.csv,"exp=wf1, target=Alaska, mode=r, method=D0, learner=catboost, lam=1.0, n=5000",rmse,15.53,
+E7.R1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n500|λ cv",delta,0.07,동등
+E7.R1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n500|λ cv",ci_lo,-0.04,동등
+E7.R1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n500|λ cv",ci_hi,0.18,동등
+E7.R1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n500|λ cv",delta_blockeq,0.2,동등
+E7.R1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n500|λ cv",ci_lo_beq,0.04,동등
+E7.R1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n500|λ cv",ci_hi_beq,0.36,동등
+E7.R1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n500|λ cv",rmse_A,14.15,동등
+E7.R1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n500|λ cv",rmse_B,14.08,동등
+E7.R1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n500|λ cv",n_splits,5.0,동등
+E7.R1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n500|λ cv",verdict4_common,동등,동등
+E7.D1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n500",delta,0.24,열세
+E7.D1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n500",ci_lo,0.01,열세
+E7.D1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n500",ci_hi,0.35,열세
+E7.D1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n500",delta_blockeq,0.11,열세
+E7.D1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n500",ci_lo_beq,0.01,열세
+E7.D1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n500",ci_hi_beq,0.22,열세
+E7.D1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n500",rmse_A,14.51,열세
+E7.D1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n500",rmse_B,14.28,열세
+E7.D1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n500",n_splits,5.0,열세
+E7.D1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n500",verdict4_common,동등,열세
+E7.D1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n500",ci_dependence,분할 독립 가정 의존,열세
+E7.D1x34.n500,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n500",small_note,통계적으로 구별되나 크기는 0.5 cm 미만,열세
+E7.R1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n1000|λ cv",delta,-0.11,동등
+E7.R1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n1000|λ cv",ci_lo,-0.21,동등
+E7.R1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n1000|λ cv",ci_hi,0.05,동등
+E7.R1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n1000|λ cv",delta_blockeq,0.06,동등
+E7.R1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n1000|λ cv",ci_lo_beq,-0.15,동등
+E7.R1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n1000|λ cv",ci_hi_beq,0.28,동등
+E7.R1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n1000|λ cv",rmse_A,14.15,동등
+E7.R1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n1000|λ cv",rmse_B,14.26,동등
+E7.R1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n1000|λ cv",n_splits,5.0,동등
+E7.R1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n1000|λ cv",verdict4_common,동등,동등
+E7.D1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n1000",delta,0.38,열세
+E7.D1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n1000",ci_lo,0.03,열세
+E7.D1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n1000",ci_hi,0.53,열세
+E7.D1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n1000",delta_blockeq,0.16,열세
+E7.D1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n1000",ci_lo_beq,0.01,열세
+E7.D1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n1000",ci_hi_beq,0.32,열세
+E7.D1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n1000",rmse_A,14.54,열세
+E7.D1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n1000",rmse_B,14.16,열세
+E7.D1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n1000",n_splits,5.0,열세
+E7.D1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n1000",verdict4_common,미결정,열세
+E7.D1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n1000",ci_dependence,분할 독립 가정 의존,열세
+E7.D1x34.n1000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n1000",small_note,통계적으로 구별되나 크기는 0.5 cm 미만,열세
+E7.R1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n2000|λ cv",delta,-0.09,동등
+E7.R1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n2000|λ cv",ci_lo,-0.21,동등
+E7.R1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n2000|λ cv",ci_hi,0.15,동등
+E7.R1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n2000|λ cv",delta_blockeq,0.08,동등
+E7.R1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n2000|λ cv",ci_lo_beq,-0.23,동등
+E7.R1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n2000|λ cv",ci_hi_beq,0.37,동등
+E7.R1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n2000|λ cv",rmse_A,14.05,동등
+E7.R1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n2000|λ cv",rmse_B,14.13,동등
+E7.R1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n2000|λ cv",n_splits,5.0,동등
+E7.R1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n2000|λ cv",verdict4_common,동등,동등
+E7.D1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n2000",delta,0.41,열세
+E7.D1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n2000",ci_lo,0.1,열세
+E7.D1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n2000",ci_hi,0.55,열세
+E7.D1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n2000",delta_blockeq,0.34,열세
+E7.D1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n2000",ci_lo_beq,0.07,열세
+E7.D1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n2000",ci_hi_beq,0.62,열세
+E7.D1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n2000",rmse_A,14.69,열세
+E7.D1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n2000",rmse_B,14.28,열세
+E7.D1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n2000",n_splits,5.0,열세
+E7.D1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n2000",verdict4_common,열세,열세
+E7.D1x34.n2000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n2000",small_note,통계적으로 구별되나 크기는 0.5 cm 미만,열세
+E7.R1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n5000|λ cv",delta,-0.08,동등
+E7.R1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n5000|λ cv",ci_lo,-0.18,동등
+E7.R1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n5000|λ cv",ci_hi,0.08,동등
+E7.R1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n5000|λ cv",delta_blockeq,0.15,동등
+E7.R1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n5000|λ cv",ci_lo_beq,-0.09,동등
+E7.R1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n5000|λ cv",ci_hi_beq,0.41,동등
+E7.R1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n5000|λ cv",rmse_A,14.06,동등
+E7.R1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n5000|λ cv",rmse_B,14.14,동등
+E7.R1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n5000|λ cv",n_splits,5.0,동등
+E7.R1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n5000|λ cv",verdict4_common,동등,동등
+E7.D1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n5000",delta,0.81,열세
+E7.D1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n5000",ci_lo,0.05,열세
+E7.D1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n5000",ci_hi,1.08,열세
+E7.D1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n5000",delta_blockeq,0.61,열세
+E7.D1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n5000",ci_lo_beq,0.04,열세
+E7.D1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n5000",ci_hi_beq,1.25,열세
+E7.D1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n5000",rmse_A,15.74,열세
+E7.D1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n5000",rmse_B,14.94,열세
+E7.D1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n5000",n_splits,5.0,열세
+E7.D1x34.n5000,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n5000",verdict4_common,열세,열세
+E7.R1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n전량|λ cv",delta,-0.04,미결정
+E7.R1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n전량|λ cv",ci_lo,-0.2,미결정
+E7.R1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n전량|λ cv",ci_hi,0.21,미결정
+E7.R1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n전량|λ cv",delta_blockeq,0.23,미결정
+E7.R1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n전량|λ cv",ci_lo_beq,-0.08,미결정
+E7.R1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n전량|λ cv",ci_hi_beq,0.56,미결정
+E7.R1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n전량|λ cv",rmse_A,14.12,미결정
+E7.R1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n전량|λ cv",rmse_B,14.17,미결정
+E7.R1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n전량|λ cv",n_splits,5.0,미결정
+E7.R1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=R1@x34-R1|n전량|λ cv",verdict4_common,미결정,미결정
+E7.D1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n전량",delta,0.53,미결정
+E7.D1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n전량",ci_lo,-0.21,미결정
+E7.D1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n전량",ci_hi,0.82,미결정
+E7.D1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n전량",delta_blockeq,0.57,미결정
+E7.D1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n전량",ci_lo_beq,-0.12,미결정
+E7.D1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n전량",ci_hi_beq,1.28,미결정
+E7.D1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n전량",rmse_A,16.88,미결정
+E7.D1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n전량",rmse_B,16.36,미결정
+E7.D1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n전량",n_splits,5.0,미결정
+E7.D1x34.n전량,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, target=Alaska|r, contrast=D1@x34-D1|n전량",verdict4_common,미결정,미결정
+E7.verdict,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-b, contrast 결측",verdict,기각: 우세인 n 이 없다(SAR 열의 추가 가치를 확인하지 못했다),
+E7.WF1-c,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-c, target=Alaska|r, contrast 결측",verdict,"부분 지지: 열세인 n 의 수가 D0 보다 적은 레시피 = R2, D1 [통계적으로 구별되나 크기는 0.5 cm 미만: R1 n=20, R1 n=100, D1 n=2000]",
+E7.WF1-c,source,results/rescale_wf/data/processed/wf/wf_tests.csv,"test_id=WF1-c, target=Alaska|r, contrast 결측",stat,R1 열세 1/9(등록 9); R2 열세 0/9(등록 9); D1 열세 0/9(등록 9); D0 열세 1/9(등록 9); R1(0.25) 열세 0/9(등록 9); R2(0.25) 열세 0/9(등록 9),
+E8.floor,source,data/processed/lgx/lgx_floor.csv,"region=Alaska, scope=eval",floor_rmse_cm,11.31,
+E8.floor,source,data/processed/lgx/lgx_floor.csv,"region=Alaska, scope=eval",n_cells_used,13333.0,
+E8.floor.Lena,source,data/processed/lgx/lgx_floor.csv,"region=Lena, scope=eval",floor_rmse_cm,14.83,
+E8.floor.Canada,source,data/processed/lgx/lgx_floor.csv,"region=Canada, scope=eval",floor_rmse_cm,17.9,
+E8.contest.stefan,source,data/processed/s4_residual_results.csv,"part=D_indomain, cv=spatial_block_AK, model=ridge, featset=shared25, lam=0.0, seed=0",rmse_cm,14.46,
+E8.contest.resid,source,data/processed/s4_residual_results.csv,"part=D_indomain, cv=spatial_block_AK, model=ridge, featset=shared25, lam=0.75, seed=0",rmse_cm,13.33,
+E8.contest.min,derived,data/processed/s4_residual_results.csv,part=D_indomain(70행) 의 최솟값,rmse_cm,13.33,
+E8.contest.nrows_lam_pos,derived,data/processed/s4_residual_results.csv,"part=D_indomain, lam>0 행 수",count,56.0,
+E8.cv.block_canonical.catboost_lo,derived,data/processed/m1/cv_scheme_comparison.csv,"scheme=block_0.5_canonical, model=catboost_lo, seed 0–2 평균",rmse_cm,16.12,
+E8.cv.block_canonical.ridge,derived,data/processed/m1/cv_scheme_comparison.csv,"scheme=block_0.5_canonical, model=ridge, seed 0–2 평균",rmse_cm,13.62,
+E8.cv.block_canonical.stefan,derived,data/processed/m1/cv_scheme_comparison.csv,"scheme=block_0.5_canonical, model=stefan, seed 0–2 평균",rmse_cm,14.46,
+E8.cv.block_canonical.stefan_ridge_l075,derived,data/processed/m1/cv_scheme_comparison.csv,"scheme=block_0.5_canonical, model=stefan_ridge_l075, seed 0–2 평균",rmse_cm,13.33,
+E8.cv.block_canonical.nnd,source,data/processed/m1/cv_scheme_comparison.csv,scheme=block_0.5_canonical,nnd_median_km,28.37,
+D1.wf6.reducible_P1,derived,derived,"rmse_B² − floor²(WF6 R1−P1 n1000, Alaska eval floor)",cm²,79.71,
+D1.wf6.reducible_R1,derived,derived,rmse_A² − floor²,cm²,64.42,
+D1.wf6.reducible_cut_pct,derived,derived,(P1 몫 − R1 몫)/P1 몫 × 100,%,19.17,
+D1.wf6.rmse_rel_P1_pct,derived,derived,(rmse_B − rmse_A)/rmse_B × 100,%,3.75,
+D2.contest.reducible_stefan,derived,derived,Stefan² − floor²,cm²,81.13,
+D2.contest.reducible_resid,derived,derived,residual² − floor²,cm²,49.82,
+D2.contest.reducible_cut_pct,derived,derived,(Stefan 몫 − residual 몫)/Stefan 몫 × 100,%,38.6,
+D2.contest.rmse_rel_pct,derived,derived,(Stefan − residual)/Stefan × 100,%,7.8,
+D3.c2.rho_recal_vs_mlvsp1,derived,data/processed/wf/wf0_misspec.csv,"30행, Spearman(recal_gain, ml_vs_p1)",rho,0.08,
+D3.c2.rho_recal_vs_mlvsp1,derived,data/processed/wf/wf0_misspec.csv,같음,p,0.67,
+D3.c2.rho_recal_vs_mlbest,derived,data/processed/wf/wf0_misspec.csv,"30행, Spearman(recal_gain, ml_best_delta)",rho,-0.66,
+O7.transfer.alpha1,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=method, method=R1, learner=catboost_lo, alpha=1, n=-1, lam=0.25",rmse,14.26,"sig_p1=ns(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha1,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=method, method=R1, learner=catboost_lo, alpha=1, n=-1, lam=0.25",rmse_p0,14.54,"sig_p1=ns(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha1,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=method, method=R1, learner=catboost_lo, alpha=1, n=-1, lam=0.25",rmse_p1,14.61,"sig_p1=ns(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha1,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=method, method=R1, learner=catboost_lo, alpha=1, n=-1, lam=0.25",d_p1,-0.35,"sig_p1=ns(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha1,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=method, method=R1, learner=catboost_lo, alpha=1, n=-1, lam=0.25",d_p1_lo,-0.61,"sig_p1=ns(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha1,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=method, method=R1, learner=catboost_lo, alpha=1, n=-1, lam=0.25",d_p1_hi,0.06,"sig_p1=ns(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha1,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=method, method=R1, learner=catboost_lo, alpha=1, n=-1, lam=0.25",d_p1_beq,-0.17,"sig_p1=ns(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha1,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=method, method=R1, learner=catboost_lo, alpha=1, n=-1, lam=0.25",d_p1_beq_lo,-0.42,"sig_p1=ns(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha1,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=method, method=R1, learner=catboost_lo, alpha=1, n=-1, lam=0.25",d_p1_beq_hi,0.13,"sig_p1=ns(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha10,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=10, n=-1, lam=0.25",rmse,14.07,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha10,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=10, n=-1, lam=0.25",rmse_p0,14.54,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha10,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=10, n=-1, lam=0.25",rmse_p1,14.61,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha10,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=10, n=-1, lam=0.25",d_p1,-0.53,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha10,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=10, n=-1, lam=0.25",d_p1_lo,-0.71,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha10,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=10, n=-1, lam=0.25",d_p1_hi,-0.23,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha10,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=10, n=-1, lam=0.25",d_p1_beq,-0.3,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha10,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=10, n=-1, lam=0.25",d_p1_beq_lo,-0.5,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha10,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=10, n=-1, lam=0.25",d_p1_beq_hi,-0.1,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha100,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=100, n=-1, lam=0.25",rmse,14.09,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha100,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=100, n=-1, lam=0.25",rmse_p0,14.54,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha100,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=100, n=-1, lam=0.25",rmse_p1,14.61,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha100,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=100, n=-1, lam=0.25",d_p1,-0.52,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha100,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=100, n=-1, lam=0.25",d_p1_lo,-0.7,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha100,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=100, n=-1, lam=0.25",d_p1_hi,-0.28,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha100,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=100, n=-1, lam=0.25",d_p1_beq,-0.38,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha100,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=100, n=-1, lam=0.25",d_p1_beq_lo,-0.57,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alpha100,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=100, n=-1, lam=0.25",d_p1_beq_hi,-0.19,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alphacont,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=cont, n=-1, lam=0.25",rmse,13.94,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alphacont,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=cont, n=-1, lam=0.25",rmse_p0,14.54,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alphacont,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=cont, n=-1, lam=0.25",rmse_p1,14.61,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alphacont,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=cont, n=-1, lam=0.25",d_p1,-0.67,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alphacont,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=cont, n=-1, lam=0.25",d_p1_lo,-0.94,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alphacont,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=cont, n=-1, lam=0.25",d_p1_hi,-0.16,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alphacont,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=cont, n=-1, lam=0.25",d_p1_beq,-0.54,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alphacont,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=cont, n=-1, lam=0.25",d_p1_beq_lo,-0.9,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.alphacont,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=alpha, method=R1, learner=catboost_lo, alpha=cont, n=-1, lam=0.25",d_p1_beq_hi,-0.18,"sig_p1=improve(곡선 열, 4분 판정 아님)"
+O7.transfer.P1,source,results/rescale_lg/data/processed/lg/lg_curve.csv,"target=Alaska, mode=x, axis=method, method=P1, learner=none, alpha=1, n=-1, lam=0.0",rmse,14.61,

@@ -1,0 +1,81 @@
+old_id,new_name,description_ko,main_paths
+LG,T1_transfer_label_grid,"전이 라벨 수 격자(주 실험, 지역 홀드아웃 + 100 km 완충, n 0–전량, P0·P1 비교)",scripts/3_deep_learning/h40_label_grid.py; results/rescale_lg/data/processed/lg/
+LGX,T2_transfer_structure_placebo_baselines,"결합 구조, 위약, 물리 기준선 11종, 검증 사다리, 용량",scripts/3_deep_learning/h42_label_grid_ext.py; scripts/2_evaluation/h41_validation_ladder.py; data/processed/lgx/
+LGT,T3_learners_foundation_and_nn,TabPFN v2 라벨 격자,scripts/3_deep_learning/h43_tabpfn_label_grid.py; data/processed/lgt/
+LGF,T3_learners_foundation_and_nn,"TabICL v2, 원천 교차검증 조정 신경망 4종",scripts/3_deep_learning/h47_foundation_models.py; scripts/3_deep_learning/h48_nn_tuning.py; data/processed/lgf/
+LGD,T4_new_regions,"새 독립 지역(티베트, 러시아 C, 북대서양)",scripts/3_deep_learning/h51_lgd_run.py; scripts/2_evaluation/h52_lgd_pool.py; data/processed/lgd/
+LGU,T5_prediction_intervals,새 지역 예측 구간,scripts/2_evaluation/h44_hier_predictive_ladder.py; scripts/2_evaluation/h45_normalized_conformal.py; scripts/2_evaluation/h46_spatial_diagnostics.py; data/processed/lgu/
+LGW,T6_abstract_contrasts_and_map,"초록 대비 AB1–AB10, 배포 시나리오, 배치 L43, 레나 지도",scripts/2_evaluation/h39_scenarios.py; scripts/2_evaluation/h49_transfer_map.py; data/processed/lgw/; data/processed/map_lena/; outputs/maps/transfer_lena/
+WRAPUP,T6_abstract_contrasts_and_map,"보고 규칙, 라벨 단위, 교차 환경 점검(T6 에 덧붙임)",docs/EXPERIMENT_PLAN_WRAPUP_2026-09-30.md; scripts/2_evaluation/lgw_xenv_gate_iii.py; data/processed/lgw/lgw_xenv_gate_iii.csv
+WF0,W1_label0_risk_table,"라벨 0 위험표, 계수 오차 대 ML 이득(재분석)",scripts/2_evaluation/wf0_reanalysis.py; data/processed/wf/wf0_risk.csv; data/processed/wf/wf0_misspec.csv
+WF1,W2_within_region_label_curve,"지역 내 충분 라벨 곡선(분할 5), SAR",scripts/3_deep_learning/h54_workflow.py; results/rescale_wf/data/processed/wf/wf_tests.csv
+WF6,W2_within_region_label_curve,지역 내 충분 라벨 검정력 보강(분할 25),scripts/3_deep_learning/h54_workflow.py; results/rescale_wf2/data/processed/wf/wf2b_tests.csv
+WF2,W3_label_placement,관측 위치 전략 7종(지역 내),scripts/3_deep_learning/h54_workflow.py; results/rescale_wf/data/processed/wf/wf_tests.csv
+WF8,W3_label_placement,관측 위치 전략(전이 조건),scripts/3_deep_learning/h54_workflow.py; results/rescale_wf2/data/processed/wf/wf2b_tests.csv
+WF3,W4_subcluster_coefficients,하위 군집 계수와 잔차,scripts/3_deep_learning/h54_workflow.py; results/rescale_wf/data/processed/wf/wf_tests.csv
+WF4,W5_method_selection_and_bias_diagnosis,"규칙 W, 라벨 10개 편향 진단",scripts/3_deep_learning/h54_workflow.py; results/rescale_wf/data/processed/wf/wf_tests.csv
+WF5,WF5_not_issued,다음 관측 우선순위 지도(등록 규칙상 미발행),scripts/3_deep_learning/h54_workflow.py(--wf5-map)
+WF7,W6_stefan_cci_anchor,Stefan·CCI 평균 앵커 전이,scripts/3_deep_learning/h54_workflow.py; results/rescale_wf2/data/processed/wf/wf2b_tests.csv
+WF9,W7_gain_decomposition_grid,격자 안·격자 사이 이득 분해,scripts/3_deep_learning/h54_workflow.py; results/rescale_wf3/data/processed/wf/wf3b_tests.csv; results/rescale_wf3/data/processed/wf/wf3b_decomp.csv
+WF9-soil,W7_gain_decomposition_grid,WF9 토양 √TDD 묶음 민감도,data/processed/wf_soil/wf3b_tests.csv
+WF10,W8_climate_extrapolation,기후 외삽(판정 불가),scripts/3_deep_learning/h54_workflow.py; results/rescale_wf3/data/processed/wf/wf3b_tests.csv
+PRE-A,H0_contest,06-30–07-06 모델 토너먼트·정확도 하한·큐레이션,data/processed/model_tournament_results.csv
+PRE-B,H0_contest,07-06–07-13 정직 평가·재구조화·T-lite,data/processed/apparent_floor_diagnosis.csv; data/processed/restructure_gate_results.csv
+P0/P1(07-14),H0_contest,07-14 자료 목록·다지역 통합(기준선 P0·P1 과 다른 실험명),data/processed/unified_tournament_results.csv
+P2(07-14),H0_contest,07-14 물리·데이터 3트랙(기준선 P2 와 다른 실험명),data/processed/p2b_stefan_results.csv
+PH1,H0_contest,07-20 회의적 재검증,docs/EXPERIMENT_PHASE1_2026-07-20.md
+W2.1,H0_contest,07-20 SoilGrids + KPDC,docs/EXPERIMENT_W21_KPDC_2026-07-20.md
+W3(07-20),H0_contest,07-20 물리 결합 엔진(새 이름 W3_label_placement 와 다름),scripts/3_deep_learning/w3_physics_ml.py; data/processed/w3_physics_ml_results.csv
+AK-AUG,H0_contest,07-20 알래스카 지역 내 증강,data/processed/aug_within_alaska_results.csv
+TL/S9,H0_contest,타임랩스(연도별 지도),data/processed/timelapse_alaska_results.csv
+SH3D/S10,H0_contest,얕은 3D 온도장,data/processed/shallow3d_alaska_results.csv
+S0,H0_contest,자료 스키마·누설 시험,src/polar/fidelity.py; tests/test_leakage.py
+S1(07-23),H0_contest,실측 라벨 다모델(WF2 전략 S1 과 다름),data/processed/s1_baseline_results.csv
+S2(07-23),H0_contest,물리식 5종(WF2 전략 S2 와 다름),data/processed/s2_physics_results.csv
+S3(07-24),H0_contest,증강 비율 곡선,data/processed/s3_aug_curve_results.csv
+S4(07-24),H0_contest,Stefan 앵커 + 잔차(대회 13.33 cm),data/processed/s4_residual_results.csv
+S5(07-24),H0_contest,유사라벨 사전학습,data/processed/s5_pretrain_results.csv
+S6(07-27),H0_contest,출처 인식 다중 충실도,data/processed/s6_source_aware_results.csv
+S7(07-27),H0_contest,KPDC 콘슬 지온 유도 ALT,data/processed/s7_kpdc_results.csv
+S8,H0_contest,물리식 혼합,data/processed/s8_mixture_results.csv
+S11,H0_contest,결과 요약 + CQR,data/processed/s11_conformal_results.csv
+E1-K(07-27),H0_contest,co-kriging 기준선(09-08 E1 과 다름),data/processed/e1_kriging_comparison_table.csv
+E2-D(07-27),H0_contest,계절 안 D(t)(09-08 E2 와 다름),data/processed/e2_seasonal_dt_summary.csv
+S12,H0_contest,물리 + 위성 전이(22.92 cm 철회),data/processed/s12_hybrid_gate.csv
+S13,H0_contest,통합 세 조건(폐기),data/processed/s13_unified_shard0.csv
+S14/MAP,H0_contest,"연별 재설계, 지도 모델 게이트",data/processed/s14_annual_results.csv; data/processed/map_model_gate_results.csv
+E1(09-08),H1_prereg_E1-E4,같은 셀 요인 설계,data/processed/e1_prereg_tests.csv
+E2(09-08),H1_prereg_E1-E4,물리식 사다리,data/processed/e2_physics_ladder_results_v2main.csv
+E3(09-08),H1_prereg_E1-E4,"전이 지역 확충, 지역 적응 계수",data/processed/e3_adaptive_E.csv; data/processed/e1_prereg_tests_e3.csv
+E4(09-08),H1_prereg_E1-E4,"중첩 선택, 구간 점수, 라벨 정의",data/processed/e4_nested_selection.csv; data/processed/e4_label_sensitivity.csv
+RECON(09-14),H1_prereg_E1-E4,기존 주장 대조 감사,docs/RESULTS_RECONCILIATION_2026-09-14.md
+TRANSFER(09-15),H1_prereg_E1-E4,완전 전이 시험 계획(M1 로 이어짐),docs/EXPERIMENT_PLAN_TRANSFER_2026-09-15.md
+M1,H2_master_M1,마스터 요인 실험(S-A–S-F),src/polar/m1_core.py; data/processed/m1/
+H18,H3_transfer_fixes_H18-24,MODIS LST 강제력,data/processed/h2/h_tests_all.csv
+H19,H3_transfer_fixes_H18-24,수문·단열·지반 확장 공변량 23종,data/processed/covariates_ext_v1.csv; data/processed/h2/h_tests_all.csv
+H20,H3_transfer_fixes_H18-24,CCI 블록 계수,data/processed/h2/h_tests_all.csv
+H21,H3_transfer_fixes_H18-24,지역 간 계수 대여,scripts/3_deep_learning/h21_coef_borrow.py
+H22,H3_transfer_fixes_H18-24,불변 관계 학습,scripts/3_deep_learning/h22_invariant.py
+H23,H3_transfer_fixes_H18-24,메타학습(FOMAML),scripts/3_deep_learning/h23_maml.py
+H24,H3_transfer_fixes_H18-24,관측 설계(k-중심),scripts/3_deep_learning/h24_obs_design.py; data/processed/h2/h24_tests.csv
+H25–H30,H4_label_budget_H25-30,"손익분기 라벨, 규칙, 블록 가치, 배포 규칙",data/processed/h3/
+A2(09-26),H5_final_A2-D1,잔차 최소 라벨 수,scripts/3_deep_learning/h31_min_labels_residual.py; data/processed/h4/a2_minn.csv
+B1(09-26),H5_final_A2-D1,2단계 프로토콜,scripts/2_evaluation/h32_two_stage_protocol.py; data/processed/h4/b1_summary.csv
+B2(09-26),H5_final_A2-D1,부분 풀링,scripts/3_deep_learning/h33_partial_pooling.py; data/processed/h4/b2_minn.csv
+B3(09-26),H5_final_A2-D1,라벨 선택 규칙,scripts/3_deep_learning/h34_label_design.py; data/processed/h4/b3_summary.csv
+B4(09-26),H5_final_A2-D1,TFM few-shot,scripts/3_deep_learning/h35_tfm_fewshot.py; data/processed/h4/b4_tests.csv
+C1(09-26 실험),H5_final_A2-D1,CCI 다층 앵커(주장 C1 과 다름),scripts/2_evaluation/h36_cci_layers.py; data/processed/h4/c1_tests.csv
+C2(09-26 실험),H5_final_A2-D1,계층 conformal(주장 C2 와 다름),scripts/2_evaluation/h37_conformal_hier.py; data/processed/h4/c2_coverage.csv
+D1(09-26),H5_final_A2-D1,외부 홀드아웃(몽골·중앙아시아),scripts/2_evaluation/h38_external_holdout.py; data/processed/h4/d1_summary.csv
+NEXT P1–P6,H5_final_A2-D1,"잔여 과제(미실행, 흡수)",docs/EXPERIMENT_PLAN_NEXT_2026-09-28.md
+FA,H5_final_A2-D1,실패 원인 분석(캐나다 재보정),scripts/2_evaluation/fa_failure_analysis.py; data/processed/h4/fa_gate.csv
+C2 재분석,XA_c2_gain_decomposition,재보정 몫과 ML 몫 분리(계획),[예정] scripts/2_evaluation/xa_c2_decomposition.py
+X1,XB_multisource_stacking,다중 소스 라벨 가중 적층(계획),[예정] data/processed/xb/
+워크플로 통합 검증,XC_workflow_end_to_end,라벨 수 구간별 절차의 순차 모의(계획),[예정] data/processed/xc/
+관측 위치 알고리즘·정책 학습,XD_placement_policy,배치 규칙 명시와 샘플링 정책 학습(계획),[예정] data/processed/xd/
+격자 안 해상도 입력,XE_hires_covariates,고해상 토양수분·유기층·식생·적설·미지형(계획),[예정] data/processed/xe/
+독립 지역 추가,XF_new_regions,"LGD 확장, 약관 회신·GTN-P·계정 자료(계획)",[예정] data/processed/fidelity_base_v5.csv
+기존 ALT 제품 비교,XG_product_comparison,WRAPUP 10절 등록분(계획),[예정] scripts/2_evaluation/h50_product_compare.py; data/processed/lgw/lgw_products.csv
+검증 사다리 그림,XH_validation_ladder,무작위–지역 홀드아웃 채점 정리(계획),data/processed/m1/cv_scheme_comparison.csv; data/processed/lgx/ladder/lgv_tests.csv
+WF10 재시험,XI_climate_extrapolation_retest,외삽 영역 블록 8개 이상 조건의 재시험(계획),[예정] data/processed/xi/
+지온 유도 보조 라벨,XJ_tempderived_aux_labels,다중 충실도 보조 라벨(계획),[예정] data/processed/xj/

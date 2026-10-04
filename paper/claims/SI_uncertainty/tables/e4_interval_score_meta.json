@@ -1,0 +1,12 @@
+{
+ "stage": "E4.3",
+ "input": "s11_conformal_oof.csv",
+ "alpha": 0.1,
+ "n": 13606,
+ "const_width_reference": {
+  "half_width_cm": 21.728501991980902,
+  "note": "pred_med ± |y−pred_med|의 90% 분위(marginal 90% 참조)"
+ },
+ "plan": "docs/EXPERIMENT_PLAN_PAPER_2026-09-08.md §4 E4.3",
+ "caveat": "S11 OOF는 3 seed 중 파일에 저장된 단일 세트. 블록 부트스트랩 1000회 95% CI."
+}

@@ -1,0 +1,280 @@
+# C3 결합 구조와 라벨 수: 근거 색인
+
+**성격**: 주장 C3 의 근거를 모은 색인이다(2026-10-04 작성). 원본 스크립트·자료·문서는 옮기거나 고치지 않았다. 근거 표(2절)의 수치는 모두 원천 CSV 를 pandas 로 읽어(`OMP_NUM_THREADS=1`) 소수 둘째 자리로 반올림한 값이다. 문서 문장에서 옮긴 수치는 없다. p 값은 파일의 자릿수 그대로 적었다. 판정은 바꾸지 않는다. 1.3 절과 5 절의 지역 분해는 이번 작성에서 원천 표의 지역 행을 읽어 정리한 사후 서술이다. 같은 날 점검 지적 15건을 원천 표와 계획서 원문으로 다시 확인해 고쳤다(8절). 6절의 조각 키 확인은 numpy 로 npz 의 `u0_keys` 를 읽은 결과다.
+
+**이름 체계**: 사용자 승인(2026-10-04) 색인 이름을 쓴다. 옛 id 는 괄호에 둔다(T1 = LG, T2 = LGX, T3 = LGT + LGF, T4 = LGD, T6 = LGW + WRAPUP, W5 = WF4). 기존 경로는 그대로다.
+
+## 0. 기호와 읽는 법
+
+| 기호 | 뜻(QA_FINAL_REVIEW 0절, LG 계획서 3절·6A.3) |
+|---|---|
+| P0 | 원천 계수 Stefan, E0·√TDD |
+| P1 | 대상 라벨 n 개로 E 를 다시 맞추되 원천 계수 쪽으로 수축(κ = 10) |
+| P2 | 대상 라벨 n 개의 현지 최소제곱 E |
+| P1* | L29 절차로 정한 더 강한 재보정 기준선. n = 40·160 에서 P1@ed(토양 물성 Stefan 앵커의 κ = 10 재보정), n = 10·전량에서 P1 과 같다(LG 7.1a). n = 3·320 에는 P1* 를 정하지 않았다 |
+| P* | L29 절차로 정한 라벨 0 의 더 강한 물리 기준선. P0@tddm(연도 정합 도일 √TDD 앵커, 원천 계수)이다(LG 7.1a). R0@tddm, R1@tddm 은 앵커를 P0@tddm, P1@tddm 으로 바꾼 R0, R1 이다(LG 6A.3 X9 '앵커 종류') |
+| R0, R1 | 앵커(P0, P1) + λ × 잔차 학습(CatBoost `catboost_lo`, 기준 λ 0.25) |
+| R2 | R1 + 대상 A 풀 유사 잔차 행(증강 + 앵커 + 잔차) |
+| R3 | 적층. 증강 직접 ML(D1)의 예측을 앵커로 두고 잔차를 다시 배운다 |
+| F1a, F1k, F1n | 물리 입력 구조. 직접 ML 의 입력에 물리식 출력 열을 더한다(F1a: E0·s, F1k: `p4_ku`·`p2_edaphic` 두 열, F1n: 원천 E0·s, 대상 E_n·s) |
+| RM | 곱셈 잔차 ŷ = E_n·s·exp(λ·ĥ) |
+| R1s | 선택 라벨 n 개의 y 를 순열한 뒤 R1 과 같은 절차(라벨 셔플 음성 대조) |
+| [T], [I], [C] | TabPFN v2, TabICL v2, 같은 컨텍스트의 CatBoost(로컬 GPU 서버) |
+
+- Δ 는 RMSE(앞 방법) − RMSE(뒤 방법), 단위 cm 이다. 음수면 앞 방법의 오차가 작다.
+- **값 형식**: `delta` [`ci_lo`, `ci_hi`] / [`ci_lo_beq`, `ci_hi_beq`]. 앞 괄호는 셀 가중 95 % CI, 뒤 괄호는 블록 등가중 95 % CI 다.
+- **열 묶음**: A = `delta`, `ci_lo`, `ci_hi`, `ci_lo_beq`, `ci_hi_beq`, `verdict4`. B = 같은 수치 열 + `sig`(LG·LGD 작업 안 집계, 재표집 1,000회; improve·worse·ns 는 두 가중 CI 가 모두 0 을 제외하는지만 본다).
+- **4분 판정**(`verdict4`): 우세·열세는 두 가중 CI 가 모두 같은 쪽, 동등은 두 CI 가 모두 ±0.5 cm 안, 미결정은 그 밖이다.
+- **풀**: P4 = 주 4지역(레나, 캐나다, 러시아 W, 러시아 E, 모드 x) 층화 평균(`scope` = MEAN 또는 MEAN4). 러시아 W·E 는 |A| 가 14–17셀이라 n = 40·160 의 평균은 레나·캐나다 2지역이다(LG 계획서 4절 판정 세부 규칙). MEAN3 = 레나·캐나다·알래스카(x) 보조 열이며 P4 와 합치지 않는다(WRAPUP 1.2).
+- **지역 k/4(풀 지역 수)**: 판정어 뒤의 '(지역 k/4)', '(풀 k/4)', 'improve(k/4)', '우세(2/4)' 의 k/4 는 층화 평균의 CI 풀에 들어간 지역 수다(원천 표 `n_ci_regions`/`n_regions_target`, verdict 행 `stat` 의 '지역 k/4', LG 4절 판정 세부 규칙 '풀 지역 수'). 그 판정이 나온 지역의 수가 아니다. 지역별 판정의 수는 '지역 행 우세 k/4' 처럼 따로 적는다. 예: R0 − F1k(n 0)와 R1 − F1k(n 10)는 풀 4/4 이고 지역 행 우세는 2/4(러시아 W·E)다(E07, E08).
+- **‡**: 원천 표 `ci_dependence` 열의 '분할 독립 가정 의존' 표지다. 행에 이미 문구로 적은 경우와 뜻이 같다.
+- **P1* 표지**(LG 7.1a 'P1* 를 정한 n', LG 7.4 'L29 와의 관계'): n 3·320 에는 P1* 대비가 없으므로 그 n 의 P1 대비 행에 'P1* 를 확인하지 않은 n' 을 단다. n 40·160 에서 P1* 대비를 만들지 않은 구조·학습기의 행에는 'P1* 대비 미계산(P1 대비만 보조)' 을 단다. n 10·전량은 P1* = P1 이다.
+- **교차 환경 표지**: 원천 표 `cross_env` 열의 '교차 환경; (i) CatBoost 불통과' 다. T4 의 PE1·PE2 풀 행(Rescale P4 조각 + 로컬 새 지역 조각)에 붙는다(LG 7.3 '표지').
+
+## 1. 주장 문장
+
+### 1.1 현행 문장
+
+`docs/RESEARCH_CLAIMS_WORKFLOW_2026-10-01.md` 3절 C3 의 원문이다.
+
+> **C3. 결합 구조는 라벨 수에 따라 다르다.**
+> - 라벨 10개 이하에서 잔차 구조가 물리 출력을 입력으로 준 구조보다 2.5–3.7 cm 낫다(L10, AB7 Holm 뒤 유의).
+> - 라벨 40–160개에서는 물리 입력 구조가 1.9–2.4 cm 낫다(L10 보조 행).
+> - 잔차 구조의 이득은 학습기 종류에 묶이지 않는다. 같은 라벨로 재보정한 물리식 대비 순가치는 TabICL v2 잔차에서 라벨 10개부터(−0.55 cm, 전량 −1.00 cm), TabPFN v2 잔차에서 라벨 3개부터(−0.32 cm) 나타났다(LGF-F4, LGT L33). 크기는 학습기마다 다르다.
+> - 재보정은 라벨이 적을 때 원천 계수 쪽으로 수축하는 편이 현지 최소제곱보다 안전하다. 라벨 3개에서 레나 21.8 대 24.8 cm 다. 원천 계수가 크게 틀린 곳(티베트)은 예외다.
+
+작업 지시가 요약한 범위(적층 R3 의 n = 40·160 우위, 라벨이 생긴 뒤 증강 무익 L2·AB6, 덧셈 대 곱셈 L12)도 이 색인에 포함한다. 위 수치는 2절의 원천 값과 반올림 범위 안에서 일치한다(E01–E04, E12–E15, E38–E39, E41).
+
+**대상 문서 범위**: 위 인용은 `RESEARCH_CLAIMS_WORKFLOW_2026-10-01.md` 판이다. 더 최근 판인 `docs/RESEARCH_OVERVIEW_2026-10-02.md` 의 C3 절(108–121행)은 같은 수치에 두 문장을 더했다. 119행 '라벨이 적으면 물리 입력 ML 은 원천 지역의 관계를 그대로 쓰는데, 새 지역에서는 그 관계가 맞지 않는다. 라벨이 40개를 넘으면 새 지역 관계를 직접 배울 자료가 생긴다'(기전, 시험하지 않음)와 120행 '재보정은 원천 계수 쪽으로 수축하는 쪽(P1)이 현지 최소제곱(P2)보다 안전하다' 다. 같은 문서의 질의응답 표 255행('라벨이 적으면 수축 재보정(P1)이 안전')과 264행('라벨 10개 이하는 잔차, 40–160개는 물리 입력이 나음')도 같은 표현을 쓴다. 두 판의 문장은 5.2 에서 함께 다룬다.
+
+**셋째 문장의 표지**: 'TabPFN v2 잔차에서 라벨 3개부터(−0.32 cm)' 는 LGT 항목 안 Holm 보조 열에서 '보정 전 유의'(holm_p 0.2366)이고, '크기 0.5 cm 미만', 재현(비맹검) 행이다(E38). LGT 의 가설은 모두 보조이고 Holm 묶음은 판정에 쓰지 않는 보조 열이다(LG 6C.6 머리말과 판정 세부 규칙 'Holm 묶음'). n 3 은 'P1* 를 확인하지 않은 n' 이다(LG 7.1a). 문장에 쓸 때는 '보정 전 유의, 크기 0.5 cm 미만' 을 병기한다. TabICL v2 잔차의 n 3 은 4지역 평균에서 미결정이다(E39).
+
+### 1.2 QA_FINAL_REVIEW 에서 온 좁힘
+
+`docs/QA_FINAL_REVIEW_2026-10-02.md` 의 지적 가운데 C3 에 닿는 것이다.
+
+1. **C2 좁힘과의 연결(Q1 C2 점검, Q4 표)**: QA 는 '라벨이 생긴 뒤 이득의 대부분은 E 재보정에서 온다' 고 적었다(QA_FINAL_REVIEW 40행). 라벨 10개에서 P1 − P0 는 4지역 평균 −2.45 cm, R1 − P1 은 −0.18 cm 다(E36). AB4 는 J7 규칙대로 평균과 지역 수를 함께 쓴다. 우세 지역은 1/4(러시아 W −11.96)이고 캐나다는 열세(+2.26), 레나·러시아 E 는 미결정이다(E36a. S-a 열람 뒤 인용). 따라서 '이득의 대부분은 재보정' 은 4지역 평균의 서술이며 지역 일반의 문장이 아니다. 워크플로 표의 '1–10: 계수 재보정(수축) + 저가중 잔차' 는 C3 를 근거로 들지만, 잔차의 몫은 0.5 cm 한계 안이고(‡) 초록 규칙으로는 '차이를 확인하지 못했다'(AB5 Holm p 0.136)다. C3 문장에서 잔차 구조의 우위(대 물리 입력 구조)와 잔차의 순가치(대 재보정 물리식)를 구별해 쓴다. 구조 우위 쪽에도 같은 좁힘이 닿는다. AB7 의 F1k 는 입력에 재보정 계수 E_n 이 없으므로(입력 열 `p4_ku`, `p2_edaphic`, LG 6A.3) AB7 의 −3.74 cm 에는 재보정 몫이 섞일 수 있다(해석상 지적. 분해는 계산하지 않았다). 대상 행에 E_n·s 를 입력으로 주는 F1n 과의 대비 R1 − F1n(n 10, −2.52 cm, E04)이 구조 차이만 보는 대비에 가깝다.
+2. **'안전' 표현**: 넷째 문장의 '수축이 현지 최소제곱보다 안전하다' 는 등록된 비열등 판정이 아니다. P2 − P1 대비는 `pool_fixed_curve.csv` 의 '서술(판정에 쓰지 않는다)' 행이다(E40–E42). 배포 시나리오 SC1w 의 판정도 '안전성 미확인'이다(WRAPUP J7). '오차가 작았다(서술)' 로 바꾼다.
+3. **WF 사후 설계 표지**: C3 의 근거(LG, LGX, LGT, LGF, LGD, LGW)는 사전 등록 실험이다. 다만 워크플로 표의 '10–160: 규칙 W' 행은 C5(WF4-a. WF4 는 결과 열람 뒤 설계, WF 계획서 개정 이력 초판), C6(WF2, WF8)와 L10 보조 행(C3 의 근거)을 함께 인용한다(`RESEARCH_CLAIMS_WORKFLOW_2026-10-01.md` 4절 표. `RESEARCH_OVERVIEW_2026-10-02.md` 184행의 같은 행은 C5, C6 만 인용한다). 그 행에는 사후 설계 표지를 단다. 또 규칙 W 의 후보 집합은 {P0, P1, P2, R1(λ 0.25, 1.0), R2, D1} 이고 F1 계열과 R3 가 없다(WF 계획서 2절 WF4). 'n 40–160 에서는 물리 입력 구조가 낫다' 는 C3 문장과 '규칙 W 로 고른다' 는 워크플로 문장이 같은 후보를 다루지 않는다.
+
+### 1.3 이번 점검에서 확인한 추가 좁힘(원천 표의 지역 행, 사후 서술)
+
+1. **n ≤ 10 의 잔차 우위는 4지역 평균의 결론이다.** 등록 주 대비 네 개(R0 − F1k·R0 − F1a n 0, R1 − F1k·R1 − F1n n 10)의 지역 행에서 러시아 W·E 는 모두 우세이고 레나는 모두 미결정이다(E07, E08, E08a, E08b). 캐나다는 주 대비 R1 − F1n(n 10)에서 열세(+3.12 [1.42, 3.97] / [0.07, 2.74] ‡, 물리 입력 구조의 오차가 작음)이고 나머지 세 대비에서 미결정이다(E08a). AB7(R1 − F1k, n 10)의 지역 행은 러시아 W −13.98, 러시아 E −3.33 이 우세이고 레나 −1.09, 캐나다 +3.44 는 미결정이다(E07). '라벨 10개 이하' 에 드는 보조 n 3 의 R1 − F1k 에서는 러시아 E 도 미결정이다(−3.44 [−5.01, −0.78] / [−3.91, 0.11], E09a). 평균 −3.74 cm 에는 러시아 W 한 지역의 기여가 크다. 지역 문장은 AB7 과 n 0 대비로 한정하거나 'R1 − F1n 에서는 캐나다 열세' 를 병기한다.
+2. **n 40–160 의 역전은 캐나다 한 지역에서 나온다.** 2지역 평균의 열세(+1.85 – +2.38)는 캐나다 행(+4.46 – +5.14, 열세)에서 오고 레나 행은 미결정(−0.76 – −0.38)이다. 알래스카(x) 보조 대상에서는 방향이 반대로 잔차 구조가 우세했다(−7.46 – −6.06). 알래스카를 넣은 3지역 평균은 네 대비 모두 미결정이다(E16–E18).
+3. **적층 R3 와 TabPFN 직접 예측도 같은 형태다.** R3 − R1 의 n 40·160 우세는 캐나다 행(−2.46, −3.86)에서 오고 레나는 미결정, 알래스카(x)는 점 추정 +3.35·+3.59(미결정)다. 3지역 평균은 미결정이다(E27–E28). LGT L36 의 'n 40·160 에서 TabPFN 직접 예측이 앵커 + 잔차보다 낫다' 도 캐나다 우세, 레나 미결정, 알래스카(x) 열세다(E20).
+4. **n 40·160 에서 R1 은 P1* 를 넘지 못했다.** P1@ed − P1 은 −1.87·−1.93 우세(두 행 모두 ‡), R1 − P1@ed 는 +1.31·+1.30 미결정이다(E19). F1k·F1n·R3 의 P1* 대비는 계산되지 않았다. `lgx_tests`·`lgx_lg_aux`·`lgt_tests`·`lgf_tests` 의 `contrast` 열에서 P1@ed 를 포함하는 대비는 R1 − P1@ed 와 P1@* − P1 뿐이고, 원고 초안도 이 칸을 '[MISSING: R3 − P1* at n = 40 and 160 …]' 로 둔다(`docs/MANUSCRIPT_DRAFT_RESULTS_ABSTRACT_2026-09-30.md` 42행). 따라서 'n 40–160 에서 물리 입력 구조나 적층이 재보정 물리식보다 낫다' 는 지금 근거로 쓸 수 없다.
+5. **곱셈 잔차의 열세는 약하다.** L12 의 열세 세 행은 항목 안 Holm 보조 열에서 '보정 전 유의'(holm_p 0.0768, 0.1904, 0.0900)이고 '분할 독립 가정 의존' 표지가 붙어 있다. λ 0.25 의 두 행은 크기 0.5 cm 미만이다. 3지역 보조 열의 n 10 λ 1.0 에서는 곱셈 잔차가 우세했다(−0.94)(E29–E33).
+6. **증강 무익은 n 10 의 평균 결론이다.** AB6(R2 − R1, n 10)은 4지역 평균 동등(Holm 뒤 동등성 p 0.002)이나, 지역 행은 캐나다 열세 +0.76, 알래스카(x) 우세 −0.76 이다(E23–E24). n 40 은 레나·캐나다 2지역 평균 열세(+0.34 [0.25, 0.49] / [0.21, 0.50], `lg` sig worse, 크기 0.5 cm 미만)이고 n 160 은 2지역 평균 동등(+0.08 ‡)이다(E21–E22). '라벨이 생긴 뒤 무익' 으로 일반화하면 n 40 의 열세가 빠진다.
+7. **수축 재보정의 예외는 티베트 하나가 아니다.** 라벨 3개에서 P2 − P1 은 레나·캐나다·러시아 E 에서 열세(수축이 나음)이고 러시아 W 에서 우세(−4.97, 현지 최소제곱이 나음)다. 티베트는 −81.77 이다(E41, E43). 두 예외 지역은 라벨 10개 재보정이 원천 계수 물리식의 오차를 크게 줄인 곳이다(러시아 W: P0 42.98 → P1 31.01 cm, `lg_curve.csv`, 7절. 티베트: P0 244.51 → P1 148.14 cm, E43).
+8. **학습기 일반성의 범위**: n ≤ 10 에서 P1 대비 순가치가 4지역 평균 우세인 행은 TabPFN 잔차 n 3·10 과 TabICL 잔차 n 10 이다. TabICL 잔차 n 3 은 4지역 평균에서도 미결정이다(−0.42 [−0.59, 0.01] / [−0.40, 0.11], E39). TabPFN 의 n 3·10 은 크기 0.5 cm 미만이고 n 3 은 항목 안 Holm 보조 열에서 보정 전 유의다(E38). 알래스카를 넣은 3지역 평균에서는 n 10 에서 둘 다 동등이다(E38–E39). 기준선은 P1 이며 n 3 은 'P1* 를 확인하지 않은 n' 이다(LG 7.1a). 새 얕은 지역 러시아 C 를 더한 확장 풀(PE1)에서 CatBoost R1 − P1(n 10)은 동등이다(L28 분류 '약화', 교차 환경 표지. E37, LG 7.3 '4지역의 판정은 확장 풀에서 유지되지 않는다').
+
+### 1.4 권고 문장(초안)
+
+**한글**: 라벨 10개 이하에서 덧셈 잔차 구조는 물리식 출력을 입력으로 준 구조보다 오차가 작았다(등록 주 대비 네 개, 라벨 0·10, 주 4지역 평균 −2.49 – −3.74 cm, 두 가중 모두 우세. 초록 대비 AB7 Holm 보정 p 0.001). 이는 4지역 평균의 결론이다. 지역 행에서 러시아 서부·동부는 네 대비 모두 우세였고 레나는 네 대비 모두 차이를 확인하지 못했다. 캐나다는 대상 라벨 행에 재보정 물리식 값을 입력으로 준 구조와의 대비(R1 − F1n, 라벨 10)에서 물리 입력 구조의 오차가 3.12 cm 작았고(열세), 나머지 세 대비에서는 차이를 확인하지 못했다. 보조 행인 라벨 3의 R1 − F1k 에서는 러시아 동부도 차이를 확인하지 못했다. 초록 대비 AB7 의 물리 입력 구조(F1k)는 재보정 계수를 입력으로 받지 않으므로, 구조 차이만 보는 대비로 R1 − F1n(라벨 10, −2.52 cm, 우세)을 함께 쓴다. 라벨 40–160개에서는 방향이 지역마다 달랐다. 캐나다에서는 물리 입력 구조와 적층 구조의 오차가 작았고, 레나에서는 차이를 확인하지 못했으며, 알래스카를 새 지역으로 둔 보조 대상에서는 잔차 구조의 오차가 작았다. 이 라벨 수에서 어느 구조도 더 강한 재보정 기준선(토양 물성 Stefan 재보정)을 넘는다는 근거는 없다. 라벨 10개에서 증강 결합의 효과는 4지역 평균 ±0.5 cm 안이었다(AB6, Holm 뒤 동등성 p 0.002). 라벨 40개(레나·캐나다 2지역 평균)에서는 증강 결합의 오차가 0.34 cm 컸다(열세, 크기 0.5 cm 미만). 주 4지역 평균에서 곱셈 잔차는 덧셈 잔차보다 오차가 0.25–1.09 cm 컸다(열세 세 행, 보정 전 유의, 두 행은 크기 0.5 cm 미만. 전량 λ 1.0 은 미결정). 알래스카를 넣은 3지역 보조 열의 라벨 10개 λ 1.0 에서는 곱셈 잔차의 오차가 0.94 cm 작았다. 라벨 3개의 재보정에서 원천 계수 쪽 수축은 레나·캐나다·러시아 동부에서 현지 최소제곱보다 오차가 작았고, 원천 계수가 크게 틀린 러시아 서부·티베트에서는 반대였다(서술).
+
+**English draft**: With ten or fewer target labels, the additive residual structure had lower error than the structure that feeds physics outputs as inputs (four registered primary contrasts at 0 and 10 labels; four-region mean −2.49 to −3.74 cm, lower under both weightings; abstract contrast AB7, Holm-adjusted p = 0.001). This is a conclusion about the four-region mean. In the region rows, the difference held in Russia W and Russia E for all four contrasts and was not established in Lena for any of them. In Canada, the physics-input structure that receives the re-fitted physics value for target rows (R1 − F1n, ten labels) had 3.12 cm lower error than the residual structure, and no difference was established for the other three contrasts. In the auxiliary three-label row of R1 − F1k, no difference was established in Russia E either. Because the physics-input structure in AB7 (F1k) does not receive the re-fitted coefficient, the contrast closer to a pure structure comparison, R1 − F1n at ten labels (−2.52 cm, lower error), is reported with it. With 40–160 labels the direction depended on the region: the physics-input and stacked structures had lower error in Canada, no difference was established in Lena, and the residual structure had lower error in the auxiliary Alaska (x) target. At these label counts no structure was shown to have lower error than the stronger re-fitted baseline (soil-property Stefan re-fit). At ten labels, adding pseudo-labels to the residual model changed the four-region mean error by less than 0.5 cm (AB6, equivalence p = 0.002 after Holm correction); at 40 labels (Lena and Canada) it increased error by 0.34 cm (higher error, below 0.5 cm). In the four-region mean, multiplicative residuals had 0.25–1.09 cm higher error than additive residuals in three rows (significant before correction only; two rows below 0.5 cm; the all-label λ = 1.0 row was undetermined), whereas in the auxiliary three-region column including Alaska (x) at ten labels and λ = 1.0 they had 0.94 cm lower error. At three labels, shrinking the re-fitted coefficient toward the source coefficient gave lower error than local least squares in Lena, Canada and Russia E, and higher error in Russia W and Tibet, where the source coefficient was far off (descriptive).
+
+## 2. 근거 표
+
+원천 경로의 약칭: `lgx` = `data/processed/lgx/lgx_tests.csv`, `aux` = `data/processed/lgx/lgx_lg_aux.csv`, `lg` = `results/rescale_lg/data/processed/lg/lg_tests.csv`, `lgw` = `data/processed/lgw/lgw_bundle.csv`, `lgt` = `data/processed/lgt/lgt_tests.csv`, `lgf` = `data/processed/lgf/lgf_tests.csv`, `pfc` = `data/processed/paper_figs/pool_fixed_curve.csv`, `lgdt` = `data/processed/lgd/lgd_tests_lic.csv`, `lgdc` = `data/processed/lgd/lgd_curve_lic.csv`. 사본은 `tables/` 에 있다(7절).
+
+판정 문서 약칭: LG 7.1·7.1a·7.2·7.3·7.4 = `docs/EXPERIMENT_PLAN_LG_2026-09-29.md` 7절, J7 = `docs/EXPERIMENT_PLAN_WRAPUP_2026-09-30.md` '결과 판정 기록(J7)', LGF 10.2 = `docs/EXPERIMENT_PLAN_LGF_2026-09-29.md` 10.2, DI 6-1 = `docs/DISPLAY_ITEMS_2026-09-30.md` 6절 1번(서술 산출).
+
+### 2.1 잔차 구조 대 물리 입력 구조, 라벨 0–10(T2 L10·L29, T6 AB7)
+
+| # | 대비 | 원천 | 행 필터 | 열 | 값 | 판정어 | 판정 문서 |
+|---|---|---|---|---|---|---|---|
+| E01 | R0 − F1k, n 0 | lgx | test_id=L10, contrast=`R0-F1k\|n0`, scope=MEAN | A | −2.72 [−4.34, −1.73] / [−3.93, −1.97] | 우세(풀 4/4. 지역 행 우세 2/4, E08) | LG 7.2 L10 지지 |
+| E02 | R0 − F1a, n 0 | lgx | test_id=L10, contrast=`R0-F1a\|n0`, scope=MEAN | A | −2.49 [−3.35, −1.56] / [−2.97, −1.11] | 우세(풀 4/4. 지역 행 우세 2/4, E08b) | LG 7.2 L10 |
+| E03 | R1 − F1k, n 10 | lgx | test_id=L10, contrast=`R1-F1k\|n10`, scope=MEAN | A | −3.74 [−5.18, −2.70] / [−5.12, −2.96] | 우세(풀 4/4. 지역 행 우세 2/4, E07) | LG 7.2 L10 |
+| E04 | R1 − F1n, n 10 | lgx | test_id=L10, contrast=`R1-F1n\|n10`, scope=MEAN | A | −2.52 [−3.26, −1.56] / [−2.90, −1.16] | 우세(풀 4/4. 지역 행 우세 2/4, 열세 1/4 캐나다, E08a) | LG 7.2 L10. 구조 차이만 보는 대비에 가깝다(F1n 은 대상 행에 E_n·s 를 받는다, LG 6A.3) |
+| E05 | L10 가설 판정 | lgx | test_id=L10, scope=verdict | `verdict`; 주 네 행의 `holm_p` | '지지: 잔차 구조는 물리 입력 구조보다 오차가 작다'; holm_p 0.0023(항목 안 보조 열) | 지지(맹검) | LG 7.2 |
+| E06 | AB7 = R1 − F1k, n 10 | lgw | ab=AB7, scope=MEAN | A + `holm_p`, `abstract_rule` | −3.74 [−5.23, −2.75] / [−5.14, −2.98]; holm_p 0.001; '(a) 방향을 쓴다'. 해석 주의: F1k 의 입력에는 재보정 계수 E_n 이 없다(LG 6A.3). 같은 n 의 P1 − P0 는 −2.45(E36) | 우세 | J7 1.1 |
+| E07 | AB7 지역 행 | lgw | ab=AB7, scope=region, target=각 지역 | A + `ci_dependence` | 레나 −1.09 [−2.37, 0.19] / [−0.24, 2.27]; 캐나다 +3.44 [−1.57, 5.38] / [−1.67, 1.90]; 러시아 W −13.98 [−16.60, −11.22] / [−18.68, −12.13]; 러시아 E −3.33 [−4.78, −0.76] / [−3.92, −0.12] ‡ | 미결정, 미결정, 우세, 우세 | 지역 행(서술) |
+| E08 | R0 − F1k, n 0 지역 행 | lgx | test_id=L10, contrast=`R0-F1k\|n0`, scope=region | A + `ci_dependence` | 레나 −3.00 [−4.28, −1.60] / [−1.63, 1.22]; 캐나다 −0.31 [−6.00, 2.11] / [−6.30, −1.90]; 러시아 W −3.96 [−5.81, −1.73] / [−6.54, −2.57] ‡; 러시아 E −3.61 [−5.53, −1.20] / [−5.12, −0.75] ‡ | 미결정, 미결정, 우세, 우세 | 지역 행(서술) |
+| E08a | R1 − F1n, n 10 지역 행 | lgx | test_id=L10, contrast=`R1-F1n\|n10`, scope=region | A + `ci_dependence` | 레나 −1.86 [−3.26, −0.22] / [−0.60, 2.11]; 캐나다 +3.12 [1.42, 3.97] / [0.07, 2.74] ‡; 러시아 W −7.50 [−9.08, −5.83] / [−10.45, −6.14]; 러시아 E −3.83 [−5.27, −0.72] / [−3.97, −0.03] ‡ | 미결정, 열세, 우세, 우세 | 지역 행(서술) |
+| E08b | R0 − F1a, n 0 지역 행 | lgx | test_id=L10, contrast=`R0-F1a\|n0`, scope=region | A + `ci_dependence` | 레나 −2.83 [−4.12, −1.61] / [−1.59, 1.18]; 캐나다 +1.53 [−0.04, 2.29] / [−1.09, 1.58]; 러시아 W −4.12 [−6.16, −1.57] / [−6.84, −2.24] ‡; 러시아 E −4.55 [−6.27, −1.90] / [−5.86, −1.40] | 미결정, 미결정, 우세, 우세 | 지역 행(서술) |
+| E09 | R1 − F1k, R1 − F1n, n 3(보조) | lgx | test_id=L10, contrast=`R1-F1k\|n3`·`R1-F1n\|n3`, scope=MEAN | A | −3.02 [−4.65, −1.93] / [−4.14, −2.16]; −3.17 [−4.00, −2.10] / [−3.39, −1.51] | 우세, 우세(둘 다 풀 4/4) | LG 7.2 결정 4 |
+| E09a | 같은 대비의 n 3 지역 행(보조) | lgx | test_id=L10, contrast=`R1-F1k\|n3`·`R1-F1n\|n3`, scope=region | A + `ci_dependence` | R1 − F1k: 레나 −2.05 [−3.25, −0.70] / [−0.88, 1.73]; 캐나다 +1.40 [−4.62, 3.83] / [−4.73, −0.52]; 러시아 W −7.96 [−10.07, −5.50] / [−10.88, −6.18]; 러시아 E −3.44 [−5.01, −0.78] / [−3.91, 0.11]. R1 − F1n: 레나 −2.61 [−3.92, −1.07] / [−1.11, 1.68]; 캐나다 +2.02 [0.55, 2.81] / [−0.57, 1.98]; 러시아 W −7.95 [−10.14, −5.35] / [−10.96, −5.98]; 러시아 E −4.13 [−5.79, −1.05] / [−4.41, −0.20] ‡ | F1k: 미결정, 미결정, 우세, 미결정. F1n: 미결정, 미결정, 우세, 우세 | 지역 행(서술) |
+| E10 | R1 − F1k, R1 − F1n, 전량(보조) | lgx | test_id=L10, contrast=`R1-F1k\|n-1`·`R1-F1n\|n-1`, scope=MEAN | A | −2.93 [−3.90, −1.73] / [−3.88, −1.80]; −0.77 [−1.60, 0.37] / [−1.21, 0.48] | 우세, 미결정 | LG 7.2 결정 4 |
+| E11 | 결측 대체 민감도 R1 − F1k@tr, n 10 | lgx | test_id=L10, contrast=`R1-F1k@tr\|n10`, scope=MEAN | A; scope=verdict_aux 의 `verdict` | −3.75 [−5.21, −2.71] / [−5.16, −2.99]; '결측 대체 통계를 학습 쪽 중앙값으로 바꿔도 4분 판정이 같다' | 우세 | LG 6A.3 X9(보조) |
+| E11a | L29 의 P* 병기: R0@tddm − F1k(n 0), R1@tddm − F1k(n 10) | lgx | test_id=L29, contrast=`R0@tddm-F1k\|n0`·`R1@tddm-F1k\|n10`, scope=MEAN·region; scope=verdict 의 `verdict`, `stat` | A | −3.45 [−4.73, −2.37] / [−3.98, −2.09]; −4.37 [−5.63, −3.29] / [−5.16, −3.01]. 지역 행: R0@tddm − F1k 레나 −3.92, 캐나다 −1.28, 러시아 W −4.61, 러시아 E −3.98; R1@tddm − F1k 레나 −2.29, 캐나다 +1.88, 러시아 W −13.44, 러시아 E −3.61. verdict: 'P* = P0@tddm. L4, L8, L10 의 대비를 P* 대비로 병기한다' | 우세, 우세(보조 행, 풀 4/4. 지역 행 우세 2/4, 러시아 W·E) | LG 7.2 L29, LG 7.1a P* 병기. 방향은 E01·E03 과 같아 결론을 바꾸지 않는다 |
+
+### 2.2 라벨 40–160개: 역전과 지역 분해(T2 L10 보조 행, T2 L29, T3 L36)
+
+| # | 대비 | 원천 | 행 필터 | 열 | 값 | 판정어 | 판정 문서 |
+|---|---|---|---|---|---|---|---|
+| E12 | R1 − F1k, n 40 | lgx | test_id=L10, contrast=`R1-F1k\|n40`, scope=MEAN | A + `ci_dependence` | +2.38 [0.52, 3.25] / [1.17, 2.95]; '분할 독립 가정 의존' | 열세(풀 2/4: 레나·캐나다. 지역 행 열세 1/2, 캐나다) | LG 7.2 결정 4(보조) |
+| E13 | R1 − F1n, n 40 | lgx | 같음, `R1-F1n\|n40` | A | +1.85 [0.73, 2.61] / [1.34, 3.09] | 열세(풀 2/4. 지역 행 열세 1/2, 캐나다) | 같음 |
+| E14 | R1 − F1k, n 160 | lgx | 같음, `R1-F1k\|n160` | A | +2.23 [0.75, 3.04] / [1.30, 3.09] | 열세(풀 2/4. 지역 행 열세 1/2, 캐나다) | 같음 |
+| E15 | R1 − F1n, n 160 | lgx | 같음, `R1-F1n\|n160` | A | +1.98 [0.80, 2.73] / [1.35, 3.12] | 열세(풀 2/4. 지역 행 열세 1/2, 캐나다) | 같음 |
+| E16 | 위 넷의 지역 행, n 40 | lgx | test_id=L10, scope=region, target ∈ {Lena\|x, Canada\|x, Alaska\|x} | A + `ci_dependence` | F1k: 레나 −0.38 [−1.38, 0.73] / [0.64, 2.71], 캐나다 +5.14 [1.58, 6.60] / [0.97, 3.91] ‡, 알래스카(x) −7.46 [−9.21, −3.03] / [−3.66, −1.83]. F1n: 레나 −0.76, 캐나다 +4.46 [2.54, 5.41] / [1.50, 4.09], 알래스카(x) −7.12 [−8.73, −3.31] / [−4.38, −2.62] | 레나 미결정, 캐나다 열세, 알래스카(x) 우세 | 지역 행(서술). 알래스카(x)는 보조(3지역) |
+| E17 | 같은 지역 행, n 160 | lgx | 같음 | A | F1k: 레나 −0.39, 캐나다 +4.86 [2.04, 6.10] / [1.28, 4.17], 알래스카(x) −7.20 [−9.12, −2.07] / [−2.37, −0.54]. F1n: 레나 −0.71, 캐나다 +4.67 [2.52, 5.72] / [1.52, 4.16], 알래스카(x) −6.06 [−7.64, −1.95] / [−2.59, −0.91] | 레나 미결정, 캐나다 열세, 알래스카(x) 우세 | 같음 |
+| E18 | 3지역 평균(알래스카 포함), n 40·160 | lgx | test_id=L10, scope=MEAN3 | A | F1k n 40 −0.90 [−2.19, 0.63] / [−0.22, 1.12]; F1n n 40 −1.14; F1k n 160 −0.91; F1n n 160 −0.70 | 모두 미결정 | 보조(3지역) |
+| E19 | P1* 대비, n 40·160 | lgx | test_id=L29, contrast=`P1@ed-P1\|n40`·`R1-P1@ed\|n40`·`P1@ed-P1\|n160`·`R1-P1@ed\|n160`, scope=MEAN | A + `ci_dependence` | P1@ed − P1: −1.87 [−2.64, −0.34] / [−1.32, −0.13] ‡, −1.93 [−2.63, −0.56] / [−1.20, −0.07] ‡. R1 − P1@ed: +1.31 [−0.13, 1.96] / [−0.54, 0.57], +1.30 [0.01, 1.86] / [−0.68, 0.41] | P1@ed 우세(풀 2/4); R1 − P1@ed 미결정(풀 2/4) | LG 7.1a, LG 7.2 결정 2 |
+| E20 | TabPFN 직접 − TabPFN 잔차(L36) | lgt | test_id=L36, contrast=`D0[T]-R1[T]\|n…`, scope=MEAN·region | A | n 0 +1.33 [0.63, 2.39] / [0.63, 2.23]; n 10 +0.97; n 40 −1.79 [−2.49, −0.86] / [−2.98, −1.19]; n 160 −2.45 [−3.48, −0.97] / [−3.41, −1.42]; 전량 −0.60. 지역 n 40: 레나 −0.10, 캐나다 −3.47, 알래스카(x) +8.57; n 160: 레나 −0.57, 캐나다 −4.33, 알래스카(x) +6.52 | 열세, 열세, 우세(풀 2/4), 우세(풀 2/4), 미결정. 지역: 미결정, 우세, 열세 | LG 7.4 L36 부분(지역 2/4) |
+
+### 2.3 증강 결합과 적층(T1 L2, T6 AB6)
+
+| # | 대비 | 원천 | 행 필터 | 열 | 값 | 판정어 | 판정 문서 |
+|---|---|---|---|---|---|---|---|
+| E21 | R2 − R1, n 10·40·160 | lg | test_id=L2, item=R2-R1, scope=MEAN4, n ∈ {10, 40, 160} | B | n 10 −0.13 [−0.31, 0.24] / [−0.32, 0.20]; n 40 +0.34 [0.25, 0.49] / [0.21, 0.50]; n 160 +0.08 [−0.09, 0.42] / [0.02, 0.31] | ns, worse, ns. 가설 판정 행(scope=verdict): '기각(증강은 라벨 0 전용)' | LG 7.1 L2 |
+| E22 | 같은 대비의 4분 보조 열 | aux | test_id=L2, contrast=`R2-R1\|n…`, scope=MEAN·MEAN3 | A + `small_note`, `ci_dependence` | P4: n 10 −0.13 동등, n 40 +0.34 열세('크기는 0.5 cm 미만'), n 160 +0.08 동등 ‡. MEAN3: +0.01, +0.04, −0.09 모두 동등 | 위와 같음 | LG 7.1a |
+| E23 | AB6 = R2 − R1, n 10 | lgw | ab=AB6, scope=MEAN | A + `holm_p_eq`, `abstract_rule` | −0.13 [−0.31, 0.22] / [−0.31, 0.20]; holm_p_eq 0.002; '(c) 한계를 명시한다('0.5 cm 안에서 같다')' | 동등(맹검) | J7 1.1 |
+| E24 | AB6 지역 행 | lgw; aux(알래스카) | ab=AB6, scope=region; aux test_id=L2, contrast=`R2-R1\|n10`, target=Alaska\|x | A | 레나 +0.02 [−0.08, 0.19] / [0.04, 0.35]; 캐나다 +0.76 [0.56, 1.00] / [0.48, 0.98]; 러시아 W −0.25; 러시아 E −1.05 [−1.53, 0.15] / [−1.31, −0.06]; 알래스카(x) −0.76 [−1.30, −0.34] / [−1.68, −0.76] | 동등, 열세, 미결정, 미결정, 우세 | 지역 행(서술) |
+| E25 | R3 − R1, n 10·40·160 | lg | test_id=L2, item=R3-R1, scope=MEAN4 | B | n 10 +0.49 [−0.17, 1.41] / [−0.39, 1.38]; n 40 −1.23 [−1.63, −0.50] / [−1.90, −0.79]; n 160 −1.83 [−2.59, −0.40] / [−2.10, −0.61] | ns, improve(2지역), improve(2지역). 가설 판정 행: '부분' | LG 7.1 L2 |
+| E26 | 같은 대비의 4분 보조 열 | aux | test_id=L2, contrast=`R3-R1\|n…`, scope=MEAN | A | n 10 +0.49 / n 40 −1.23 / n 160 −1.83 | 미결정, 우세, 우세 | LG 7.1a |
+| E27 | R3 − R1, 3지역 평균 | aux | 같음, scope=MEAN3 | A | n 40 +0.30 [−0.67, 0.84] / [−1.23, −0.37]; n 160 −0.02 [−1.17, 0.92] / [−1.29, −0.24] | 미결정, 미결정 | 보조(3지역) |
+| E28 | R3 − R1 지역 행 | aux | 같음, scope=region | A | n 40: 레나 −0.00, 캐나다 −2.46 [−3.19, −1.03] / [−2.82, −1.00], 알래스카(x) +3.35 [0.56, 4.25] / [−0.42, 0.91]. n 160: 레나 +0.20, 캐나다 −3.86 [−5.22, −1.02] / [−3.03, −0.66], 알래스카(x) +3.59 [0.53, 4.57] / [−0.29, 1.02] | 레나 미결정, 캐나다 우세, 알래스카(x) 미결정 | 지역 행(서술) |
+
+### 2.4 곱셈 잔차와 라벨 셔플(T2 L12, L17)
+
+| # | 대비 | 원천 | 행 필터 | 열 | 값 | 판정어 | 판정 문서 |
+|---|---|---|---|---|---|---|---|
+| E29 | RM − R1, n 10, λ 0.25 | lgx | test_id=L12, contrast=`RM-R1\|n10\|lam0.25`, scope=MEAN | A + `small_effect`, `ci_dependence`, `holm_p`, `holm_note` | +0.35 [0.08, 0.46] / [0.12, 0.44]; small_effect True; '분할 독립 가정 의존'; holm_p 0.0768 '보정 전 유의' | 열세 | LG 7.2 L12 기각 |
+| E30 | RM − R1, n 10, λ 1.0 | lgx | 같음, `RM-R1\|n10\|lam1.0` | 같음 | +1.09 [0.19, 1.38] / [0.43, 1.62]; '분할 독립 가정 의존'; holm_p 0.1904 '보정 전 유의' | 열세 | 같음 |
+| E31 | RM − R1, 전량, λ 0.25 | lgx | 같음, `RM-R1\|n-1\|lam0.25` | 같음 | +0.25 [0.07, 0.37] / [0.18, 0.55]; small_effect True; '분할 독립 가정 의존'; holm_p 0.0900 '보정 전 유의' | 열세 | 같음 |
+| E32 | RM − R1, 전량, λ 1.0 | lgx | 같음, `RM-R1\|n-1\|lam1.0` | A | +0.70 [−0.12, 1.13] / [0.45, 1.78] | 미결정 | 같음 |
+| E33 | RM − R1, 3지역 평균 | lgx | test_id=L12, scope=MEAN3 | A + `ci_dependence` | n 10 λ 0.25 +0.04 동등; n 10 λ 1.0 −0.94 [−2.19, −0.07] / [−1.06, −0.18] 우세 ‡; 전량 λ 0.25 +0.13 열세 ‡('크기는 0.5 cm 미만'); 전량 λ 1.0 +0.16 미결정 | 행별 | 보조(3지역) |
+| E34 | R1 − R1s(라벨 셔플) | lgx | test_id=L17, contrast=`R1-R1s\|n10\|lam0.25`·`…lam1.0`·`R1-R1s\|n-1\|lam0.25`·`…lam1.0`, scope=MEAN | A; scope=verdict_aux 의 `verdict` | n 10: −0.12, −0.26; 전량: −0.60 [−0.80, −0.36] / [−0.64, −0.32], −1.69 [−2.48, −0.84] / [−2.01, −0.94]. '대상 라벨의 공변량과 잔차의 관계가 기여한다: n=-1 λ=0.25' | 동등, 동등, 우세, 우세 | LG 7.2 L17(보조) |
+
+### 2.5 잔차의 재보정 물리식 대비 순가치(T1 L4, T6 AB4·AB5, T3 L33·LGF-F4, T4 L4e)
+
+| # | 대비 | 원천 | 행 필터 | 열 | 값 | 판정어 | 판정 문서 |
+|---|---|---|---|---|---|---|---|
+| E35 | R1 − P1(CatBoost, Rescale) | lg | test_id=L4, scope=MEAN4, n ∈ {3, 10, 40, 160, 320, −1} | B; scope=verdict 의 `verdict` | n 3 −0.08 [−0.43, 0.11] / [−0.47, −0.00]; n 10 −0.18 [−0.52, −0.02] / [−0.52, −0.09]; n 40 −0.56; n 160 −0.64; n 320 −0.83; 전량 −0.40 [−0.76, −0.23] / [−0.76, −0.30]. '희소 라벨에서도 ML 순가치 있음' | ns, improve(풀 4/4), improve(풀 2/4) ×3, improve(풀 4/4). P1* 표지: n 3·320 'P1* 를 확인하지 않은 n', n 40·160 은 E19 의 R1 − P1@ed(미결정)를 병기 | LG 7.1 L4, LG 7.1a |
+| E36 | AB4 = P1 − P0, AB5 = R1 − P1(n 10) | lgw | ab=AB4·AB5, scope=MEAN | A + `holm_p`, `abstract_rule`, `ci_dependence`, `small_note` | AB4 −2.45 [−3.04, −1.88] / [−3.30, −1.87], holm_p 0.001, 'S-a 열람 뒤 인용'. AB5 −0.18 [−0.53, −0.01] / [−0.51, −0.08] ‡, '통계적으로 구별되나 크기는 0.5 cm 미만', holm_p 0.136, '(b) 초록은 '차이를 확인하지 못했다', 본문에 '보정 전 유의'' | AB4 우세(풀 4/4. 지역 행 우세 1/4, E36a), AB5 우세 | J7 1.1, J7 등록 표지(AB4 인용에 S-a 열람 표지 병기), J7 1.1 아래 '평균과 지역 수를 함께 쓴다' |
+| E36a | AB4 지역 행 | lgw | ab=AB4, scope=region, target=각 지역 | A | 레나 +0.22 [−0.32, 0.92] / [0.25, 1.14]; 캐나다 +2.26 [0.71, 2.94] / [0.67, 2.15]; 러시아 W −11.96 [−13.62, −10.53] / [−15.71, −10.54]; 러시아 E −0.34 [−0.90, 1.30] / [−0.08, 1.48] | 미결정, 열세, 우세, 미결정(우세 지역 1/4) | J7 1.1 AB4 행. 표지 'S-a 열람 뒤 인용'(S-a 계산에서 같은 양의 해석식 P1 − P0 분할 분포를 보았다, 2026-09-30 03:25. WRAPUP 2.4 열람 기록) |
+| E37 | 확장 풀의 R1 − P1, n 10 | lgdt | test_id=L4e, item=`(a)1 풀 대비 R1-P1\|n10`, pool ∈ {P4, PE1, PE1-new} | A + `cross_env`, `l28`, `ci_dependence` | P4 −0.18 [−0.52, −0.02] / [−0.51, −0.08] ‡; PE1 −0.13 [−0.42, 0.01] / [−0.41, 0.01] ‡, l28 '약화', 교차 환경 표지; 러시아 C(PE1-new) +0.06 [−0.40, 0.51] / [−0.39, 0.81], 교차 환경 표지 | 우세, 동등, 미결정 | LG 7.3 L4e, LG 7.3 '표지'. PE1·PE1-new 는 Rescale P4 조각 + 로컬 새 지역 조각 |
+| E38 | TabPFN 잔차 R1[T] − P1 | lgt | test_id=L33, contrast=`R1[T]-P1\|n…`, scope=MEAN·MEAN3; 병기 `R1[C]-P1\|n10` | A + `small_note`, `blind`, `holm_p`, `holm_note`, `ci_dependence` | n 3 −0.32 [−0.46, −0.02] / [−0.38, −0.00] ‡, holm_p 0.2366 '보정 전 유의'; n 10 −0.42 [−0.54, −0.18] / [−0.47, −0.14], holm_p 0.0036; n 40 −0.62; n 160 −0.93; n 320 −1.10; 전량 −0.80. MEAN3: n 3 −0.18, n 10 −0.18. 병기 R1[C] − P1 n 10 −0.16 ‡ | 우세(n 3·10 은 '크기는 0.5 cm 미만', blind False 재현(비맹검); n 3 은 항목 안 Holm 보조 열 '보정 전 유의'). P1* 표지: n 3·320 'P1* 를 확인하지 않은 n', n 40·160 'P1* 대비 미계산(P1 대비만 보조)'. MEAN3 동등·동등 | LG 7.4 L33, LG 7.4 'L29 와의 관계', LG 6C.6 'Holm 묶음'(보조 열) |
+| E39 | TabICL 잔차 R1[I] − P1 | lgf | test_id=LGF-F4, contrast=`R1[I]-P1\|n…`, scope=MEAN·MEAN3; 병기 `R1[C]-P1\|n10` | A + `platform`, `holm_p`, `ci_dependence` | n 3 −0.42 [−0.59, 0.01] / [−0.40, 0.11]; n 10 −0.55 [−0.71, −0.21] / [−0.63, −0.10] ‡, holm_p 0.0180(LGF 보조 묶음); n 40 −0.79; n 160 −1.18; n 320 −1.43; 전량 −1.00 [−1.23, −0.63] / [−1.15, −0.60]. MEAN3: n 10 −0.02, n 40 −0.32 ‡. 병기 R1[C] − P1 n 10 −0.16 ‡. platform `local-3090-torch2.6.0-numpy1.26.4` | n 3 미결정, n ≥ 10 우세. P1* 표지: n 3·320 'P1* 를 확인하지 않은 n', n 40·160 'P1* 대비 미계산(P1 대비만 보조)'. MEAN3 n 10 동등, n 40 우세('크기는 0.5 cm 미만') | LGF 10.2 F4, LG 7.1a |
+
+### 2.6 재보정 방식: 수축(P1) 대 현지 최소제곱(P2)(T1 서술, T4 서술)
+
+| # | 대비 | 원천 | 행 필터 | 열 | 값 | 판정어 | 판정 문서 |
+|---|---|---|---|---|---|---|---|
+| E40 | P2 − P1, n 3·10, 4지역 평균 | pfc | edition=E1_P4_n_le_10, contrast=`P2-P1\|n3`·`P2-P1\|n10`, scope=MEAN | A + `rmse_A`, `rmse_B`, `role` | n 3 +1.76 [0.90, 3.05] / [1.62, 3.55]; n 10 +0.84 [0.03, 1.91] / [0.42, 2.33]; role '서술(판정에 쓰지 않는다)' | 열세, 열세 | DI 6-1(서술) |
+| E41 | P2 − P1, n 3, 지역 행 | pfc | 같음, scope=region | A + `rmse_A`(P2), `rmse_B`(P1) | 레나 +2.91 [2.17, 3.87] / [3.03, 4.47], RMSE 24.76 대 21.84; 캐나다 +5.40 [3.91, 6.23] / [4.04, 5.76], 34.54 대 29.14; 러시아 W −4.97 [−7.99, −1.62] / [−8.82, −1.78], 33.36 대 38.33; 러시아 E +3.69 [2.58, 7.18] / [5.83, 7.97], 33.32 대 29.64 | 열세, 열세, 우세, 열세 | 서술 |
+| E42 | P2 − P1, n 10, 지역 행 | pfc | 같음, `P2-P1\|n10`, scope=region | A | 레나 +1.01; 캐나다 +3.25; 러시아 W −1.44 [−4.62, 2.35] / [−4.41, 2.93]; 러시아 E +0.55 | 열세, 열세, 미결정, 미결정 | 서술 |
+| E43 | 티베트 P2 − P1 | lgdt; lgdc | lgdt: test_id=L4e, item=P2-P1, pool=PE2, scope=region, target=Tibet_LGD\|x, n ∈ {3, 10}. lgdc: target=Tibet_LGD, mode=x, axis=method, method ∈ {P1, P2}, n ∈ {3, 10} | lgdt B + `cross_env`, `ci_dependence`; lgdc `rmse`, `rmse_p0` | n 3 −81.77 [−96.22, −64.75] / [−81.01, −42.14]; n 10 −40.02 [−53.74, −24.18] / [−35.99, −0.51] ‡. 두 행 모두 교차 환경 표지. RMSE n 3: P2 119.28, P1 201.05, P0 244.51. n 10: P2 108.12, P1 148.14 | improve, improve | LG 7.3 L4e 표의 보조 행(서술), LG 7.3 '표지' |
+| E44 | 러시아 C P2 − P1 | lgdt | 같음, target=Russia_C\|x | B + `cross_env` | n 3 +2.32 [−0.43, 4.72] / [0.82, 5.95]; n 10 −0.57 [−2.14, 1.00] / [−1.14, 1.95]. 두 행 모두 교차 환경 표지 | ns, ns | 서술 |
+
+### 2.7 같은 대비가 두 표에 있을 때
+
+- AB7 과 L10 R1 − F1k(n 10)는 점 추정이 같고(−3.74) CI 끝값이 조금 다르다(`lgx` [−5.18, −2.70], `lgw` [−5.23, −2.75]). `lgw` 는 h39 가 seed_of("lgw", 대상, 대비)로 10,000회 다시 재표집한 값이다(WRAPUP 1.1 'p 값'). 초록 문장에는 `lgw`, 가설 문장에는 `lgx` 를 쓴다.
+- L2·L4 의 등록 판정은 `lg`(1,000회)이고 4분 판정어는 `aux`(10,000회)다(LG 7.1a). 두 표의 CI 끝값이 소수 둘째 자리에서 다를 수 있다.
+
+## 3. 근거 실험
+
+| 새 이름 | 옛 id(하네스) | 실행 환경 | 이 주장에 쓴 가설·대비 | 판정 문서 | 맹검 표지 |
+|---|---|---|---|---|---|
+| T1_transfer_label_grid | LG(`h40_label_grid.py`, Rescale 작업 ZovWo) | Rescale | L2(R2·R3 − R1), L4(R1 − P1), P2 − P1(서술, `pool_fixed_curve.py` 가 LG 조각에서 재집계) | LG 7.1, 7.1a | L2·L4 비맹검 부분 포함(LG 7.1 표). AB6 는 맹검 |
+| T2_transfer_structure_placebo_baselines | LGX(`h42_label_grid_ext.py`, 항목 X1·X2·N1) | Rescale 조각, 로컬 재집계 | L10, L12, L17, L29(P1*), L2·L4 4분 보조 열 | LG 7.2, 7.1a | L10·L12 맹검(LG 7.2 머리말) |
+| T3_learners_foundation_and_nn | LGT(`h43_tabpfn_label_grid.py`), LGF(`h47_foundation_models.py`) | 로컬 RTX 3090 | L33, L36, LGF-F4 | LG 7.4, LGF 10.2 | L33 의 n ≤ 40 행은 재현(비맹검), n 160·320·전량 행과 L36(D0 대비)은 맹검(LG 7.4 표지). LGF-F4 의 TabICL 행 맹검 |
+| T4_new_regions | LGD(`h51_lgd_run.py`, `scripts/2_evaluation/h52_lgd_pool.py`) | 새 지역 조각은 로컬. PE1·PE2 풀은 Rescale P4 조각과 섞은 교차 환경 | L4e(확장 풀), P2 − P1 티베트·러시아 C(서술) | LG 7.3 | 티베트 대비 비맹검(LG 7.3 표지). PE1·PE2 행 교차 환경 표지 |
+| T6_abstract_contrasts_and_map | LGW(`scripts/2_evaluation/h39_scenarios.py --mode summarize`) + WRAPUP | 로컬 재집계 | AB4, AB5, AB6, AB7 | J7 | AB6·AB7 맹검(CAPTIONS v2 Fig7) |
+| W5_method_selection_and_bias_diagnosis | WF4(`h54_workflow.py`) | Rescale CPU | 근거가 아니다. 규칙 W 후보 집합에 F1·R3 가 없다는 점만 관련(1.2 의 3) | WF 5.1 | 결과 열람 뒤 설계 |
+
+- 플랫폼 규칙: T1·T2·T6 은 Rescale 조각(T2·T6 은 그 조각의 로컬 재집계)이고 T3 는 로컬이다. T3 의 학습기 대비(R1[T]·R1[I] 대 P1)와 병기 R1[C] 는 같은 로컬 플랫폼 안의 비교다. T4 의 새 지역 조각은 로컬이고, PE1·PE2 풀은 Rescale P4 조각과 로컬 새 지역 조각을 섞은 교차 환경 풀이다. 원천 표 `lgd_tests_lic.csv` 의 PE1·PE1-new·PE2 행에는 '교차 환경; (i) CatBoost 불통과' 표지가 있다(LG 7.3 '표지'). E37 의 PE1·PE1-new 행과 E43·E44 는 이 표지를 단 채 인용한다. 이 색인은 플랫폼을 넘는 차이를 새로 계산하지 않았다.
+
+## 4. 그림
+
+| 그림·패널(현행 v2) | 내용 | Source Data | 비고 |
+|---|---|---|---|
+| `outputs/figures/paper/v2/Fig3_physics_use.{pdf,svg,png}` 패널 b(위) | L10 의 R − F1k, R1 − F1n, R0 − F1a 를 n 0·3·10·40·160·전량에 걸쳐 그린 곡선. 등록 n(0, 10)은 음영, n 40·160 은 '레나·캐나다' 표기. 아래에 풀(P4, L+C)과 4분 기호 | `outputs/figures/paper/source_data/v2/Fig3_b_L10.csv`; 계산 표 `data/processed/paper_figs/fig3_b_L10_alln.csv`, `fig3_b_L10_mean3.csv` | n 40·160 역전을 본문에 보이기로 한 결정은 DISPLAY_ITEMS '결과 뒤 표시 결정(13:50)' |
+| 같은 그림 패널 b(아래 숲 그림) | L12 RM − R1(n 10, 전량; λ 0.25 실선, 1.0 점선), L17 R1 − R1s | `source_data/v2/Fig3_b.csv`; `paper_figs/fig3_b.csv` | |
+| 같은 그림 패널 d | P1, P2, P3, V1 − P0(P4 n ≤ 10, 레나·캐나다 모든 n). P2 와 P1 의 차이를 읽는 패널. 서술(AB4 기호 제외) | `source_data/v2/Fig3_d.csv`; `paper_figs/fig3_d.csv` | P2 − P1 자체는 그리지 않는다(E40–E42 는 `pool_fixed_curve.csv`) |
+| `v2/Fig2_label_curve` 패널 f 오른쪽 표 | L2 R2 − R1(n 10·40·160), L4 R1 − P1, R1 − P1* | `source_data/v2/Fig2_verdicts.csv` | R3 곡선은 그리지 않는다(원고 초안 R2.4 에서 SI) |
+| `v2/Fig4_min_labels` 패널 b | R1 − P1(L4)과 n 40·160 의 R1 − P1* | `source_data/v2/Fig4_b.csv`, `Fig4_b_p1star.csv` | |
+| `v2/Fig7_deployment` 패널 d | AB 묶음 표(AB6 동등, AB7 우세) | `source_data/v2/Fig7_d.csv` | |
+| SI | LGT L33·L36, LGF-F4, L2 의 R3 행, L12 의 RMc 행 | `lgt_tests.csv`, `lgf_tests.csv`, `lg_tests.csv`, `lgx_tests.csv` | MANUSCRIPT_RESTRUCTURE 6절이 학습기 비교를 SI 로 둔다 |
+
+**재구성안(`docs/MANUSCRIPT_RESTRUCTURE_PLAN_2026-10-02.md`)과의 관계**
+- 5절: Fig 3 은 '그대로(C1 기전, C3 구조)' 이고 변경이 없다.
+- 4절: C3 는 R3(라벨 1–10, L10·AB7)과 R4(라벨 40–1,000, L10 보조 행, LGF-F4)에 나뉘어 쓰인다.
+- 이 색인에서 제안하는 그림 보완(미실행): Fig 3b 의 n 40·160 점은 레나·캐나다 2지역 평균이다. 1.3 의 2·3 항을 보이려면 지역 표지(캐나다 열세, 레나 미결정)와 알래스카(x) 보조 점을 더하거나 캡션에 적는다. 값은 E16–E18 에 있다.
+
+## 5. 단서와 쓰지 않을 문장
+
+### 5.1 단서
+
+1. 확인적 독립 지역은 주 4지역이고, n ≥ 40 에서는 레나·캐나다 2지역뿐이다(러시아 W·E 는 |A| 14–17셀). n 40–160 의 결론은 사실상 캐나다 한 지역의 결과다(E16–E17, E28, E20).
+2. L10 의 n 40·160·전량 행은 등록상 보조 행이다(LG 6A.5 L10: 'n ∈ {3, 40, 160, 전량}은 보조'). 가설 판정(지지)은 n 0·10 의 네 대비로만 정했다.
+3. 알래스카(x)는 원천이 알래스카 밖(대부분 레나)인 보조 대상이고 P4 평균과 합치지 않는다(WRAPUP 1.2). 알래스카(x) 행이 방향을 뒤집는다는 것은 서술이다.
+4. n 40·160 의 비교 상대는 P1 이다. 더 강한 재보정 기준선 P1*(P1@ed) 대비로는 R1 이 미결정이고(E19), F1k·F1n·R3 와 학습기 잔차 R1[T]·R1[I] 의 P1* 대비는 계산되지 않았다(`lgx_tests`·`lgx_lg_aux`·`lgt_tests`·`lgf_tests` 에 해당 대비 행이 없다). 이 n 의 R1[T]·R1[I] − P1 은 P1 대비 결과만 보조로 쓴다(LG 7.4 'L29 와의 관계'). n 3·320 에는 P1* 대비가 없으므로 그 n 의 P1 대비 문장(E35, E38, E39)은 'P1* 를 확인하지 않은 n' 이다(LG 7.1a).
+5. L12 의 방향(덧셈이 나음)은 보정 전 유의, 분할 독립 가정 의존 표지, 0.5 cm 미만 행 두 개를 포함한다(E29–E31).
+6. P2 − P1 은 판정에 쓰지 않는 서술 대비다(E40). 수축 강도 κ = 10 은 등록 고정값이다. LGX L28 에서는 대상 하나 제외로 고른 κ·λ 의 결과가 고정값과 0.5 cm 넘게 달랐다(LG 7.2 보조 L28). P2 − P1 비교가 κ 에 얼마나 의존하는지는 이 색인에서 계산하지 않았다[미확인].
+7. T3(LGT, LGF)는 로컬 GPU 결과이고 신경망 결과는 계산 환경에 따라 달라질 수 있다(RESEARCH_CLAIMS 6절 재현성). TabPFN 행 일부는 재현(비맹검)이다.
+8. 원천은 알래스카 셀이 78.0–94.3 % 다(CAPTIONS v2 Fig1 패널 d). 결합 구조의 우열이 원천 구성에 의존하는지는 시험하지 않았다[미확인].
+9. T4 의 PE1·PE2 풀 행(E37 의 PE1·PE1-new, E43, E44)은 Rescale P4 조각과 로컬 새 지역 조각을 섞은 교차 환경 행이고 '교차 환경; (i) CatBoost 불통과' 표지가 있다(LG 7.3). PE1 의 R1 − P1(n 10)은 L28 분류 '약화' 다.
+10. 이 색인의 E01–E04 는 등록 주 대비이고 L10 판정은 맹검이다(LG 7.2 머리말). 다만 AB7(F1k)의 −3.74 cm 는 재보정 몫과 구조 몫을 나누지 않은 값이다(1.2 의 1). 이 분해는 계산하지 않았다.
+
+### 5.2 쓰지 않을 문장
+
+| 쓰지 않을 문장 | 사유 | 대신 쓸 형식 |
+|---|---|---|
+| '잔차 구조가 물리 입력 구조보다 낫다'(라벨 수 조건 없이) | n 40·160 에서 2지역 평균 열세(E12–E15). LG 7.2 결정 4 | '주 4지역 평균에서 n ≤ 10 과 라벨 전량(F1k)에서 오차가 작았다' + 같은 문단에 n 40·160 의 역전 |
+| '라벨 10개 이하에서는 잔차 구조가 낫다'(지역 조건 없이) | 지역 행 우세는 러시아 W·E 2/4 이고 레나는 모두 미결정, 캐나다는 R1 − F1n(n 10)에서 열세다(E07, E08, E08a, E08b). 보조 n 3 의 R1 − F1k 에서 러시아 E 미결정(E09a) | '주 4지역 평균에서 오차가 작았다' + 지역 행. AB7 만 인용하면 'R1 − F1n 에서는 캐나다 열세' 를 병기 |
+| AB7(R1 − F1k)만으로 '결합 구조 차이' 를 말하는 문장 | F1k 의 입력에는 재보정 계수 E_n 이 없어 −3.74 cm 에 재보정 몫이 섞일 수 있다(1.2 의 1, 해석상 지적) | AB7 에 'F1k 는 재보정 계수를 받지 않는다' 를 병기하고 R1 − F1n(n 10) −2.52 cm(E04)를 함께 쓴다 |
+| '라벨 40–160개에서는 물리 입력 구조가 낫다'(지역 조건 없이. RESEARCH_CLAIMS C3 둘째 문장, RESEARCH_OVERVIEW C3 표와 264행 '40–160개는 물리 입력이 나음') | 캐나다 한 지역 열세, 레나 미결정, 알래스카(x) 반대 방향, 3지역 평균 미결정(E16–E18) | '레나·캐나다 2지역 평균에서 물리 입력 구조의 오차가 작았고, 이 차이는 캐나다에서 왔다' |
+| '적층(R3)이 잔차보다 낫다'(지역 조건 없이) | 캐나다 행만 우세(E28), 3지역 평균 미결정(E27), L2 판정 '부분' | '레나·캐나다 2지역 평균(부분, 지역 2/4)' |
+| 'ML 이 재보정 물리식을 넘는다'(n 40·160) | R1 − P1* 미결정(E19). LG 7.2 결정 2 | 'κ = 10 수축 재보정(P1)보다 오차가 작았다' + P1* 비교를 같은 문단에 |
+| '수축 재보정이 현지 최소제곱보다 안전하다'(RESEARCH_CLAIMS C3 넷째 문장), 'P1 이 P2 보다 안전하다'(RESEARCH_OVERVIEW 120행 '수축하는 쪽(P1)이 현지 최소제곱(P2)보다 안전하다', 255행 '라벨이 적으면 수축 재보정(P1)이 안전') | 비열등 등록 없음, 서술 대비(E40), SC1w 안전성 미확인 | '오차가 작았다(서술)' + 러시아 W·티베트의 반대 방향 |
+| '라벨이 적으면 물리 입력 ML 은 원천 지역의 관계를 그대로 쓰는데, 새 지역에서는 그 관계가 맞지 않는다. 라벨이 40개를 넘으면 새 지역 관계를 직접 배울 자료가 생긴다'(RESEARCH_OVERVIEW 119행) | 기전을 시험한 실험이 없다(사후 해석). n 40·160 의 역전은 캐나다 한 지역에서 왔고 알래스카(x)는 반대 방향이다(E16–E18) | 결과 문장만 쓴다. 기전은 고찰에 '해석(시험하지 않음)' 표지와 함께 둔다 |
+| '원천 계수가 크게 틀린 티베트만 예외다' | 러시아 W 도 n 3 에서 P2 우세(E41) | '러시아 W·티베트' |
+| '증강은 라벨이 생기면 효과가 없다'(지역 일반, 라벨 수 일반) | AB6 지역 행: 캐나다 열세, 알래스카(x) 우세(E24). n 40 은 2지역 평균 열세(+0.34, 크기 0.5 cm 미만, E21–E22) | '라벨 10개의 4지역 평균에서 차이가 ±0.5 cm 안이었다(AB6)' + '라벨 40개(레나·캐나다)에서는 오차가 0.34 cm 컸다' |
+| '덧셈 잔차가 곱셈 잔차보다 Holm 보정 뒤에도 낫다', 범위 한정 없는 '곱셈 잔차는 오차가 0.25–1.09 cm 컸다' | 항목 안 Holm 보조 열이 보정 전 유의(E29–E31). 3지역 보조 열 n 10 λ 1.0 은 반대 방향(−0.94 우세, E33). 전량 λ 1.0 미결정(E32) | '주 4지역 평균에서 오차가 컸다(보정 전 유의)' + 3지역 보조 열의 반대 방향 |
+| '잔차 구조의 이득은 학습기 종류와 무관하다' | 시험한 학습기는 CatBoost, TabPFN v2, TabICL v2 이고 크기가 다르며 3지역 평균 n 10 은 동등(E38–E39). TabICL n 3 은 4지역 평균 미결정. n 40·160 은 P1* 대비 미계산 | '주 4지역 평균, P1 대비로 시험한 세 학습기에서 같은 방향이었다(크기는 다르다)' |
+| '희소 라벨에서도 잔차 ML 의 순가치가 있다'(지역 일반) | 확장 풀 PE1 에서 n 10 동등(E37). LG 7.3 | 주 4지역 한정 + '확장 풀에서는 유지되지 않았다' 병기 |
+| L1–L8 결과 문장의 '넘지 못한다', '구별되지 않는다' | WRAPUP 1.4 (a) | '오차가 작다·크다', '차이가 ±0.5 cm 안이다', '차이를 확인하지 못했다' |
+
+## 6. 이 주장을 바꿀 수 있는 계획 실험(X 묶음, XG 외 미등록)
+
+XG 를 뺀 X 묶음은 등록 문서가 없다(2026-10-04 기준, `paper/registry/experiments.csv` 의 상태 '2026-10-04 등록 예정'). XG 는 WRAPUP 10절에 등록만 되어 있고 실행 전이다(`docs/EXPERIMENT_PLAN_WRAPUP_2026-09-30.md` 10절 '기존 제품 비교(등록만)'). 아래 '바뀔 수 있는 점' 은 이 색인의 판단이며 결과가 아니다.
+
+| 실험 | 관련 내용(정의 출처) | C3 에서 바뀔 수 있는 점 | 제안 |
+|---|---|---|---|
+| XB_multisource_stacking | 대상 라벨로 가중한 물리식·제품 적층 + 저가중 잔차(QA Q11 X1) | 새 결합 구조가 생긴다. n 40–160 의 최선 구조(F1, R3 대 R1)의 순위가 바뀔 수 있다 | 비교 대상에 F1n·R3 를 넣고 P1* 대비를 함께 낸다 |
+| XC_workflow_end_to_end | 라벨 수별 워크플로를 처음부터 끝까지 시험(사용자 요청 2026-10-04 의 실험 범위) | 규칙 W 후보에 F1n·R3 를 넣으면 'n 40–160 은 구조를 라벨로 고른다' 의 직접 근거가 생긴다(1.2 의 3) | 후보 집합을 결과 전에 등록한다 |
+| XF_new_regions | 독립 지역 추가(QA Q9·Q12, 약관 회신) | n ≥ 40 이 가능한 독립 지역은 레나·캐나다 2곳이다. 라벨 40개 이상인 새 지역이 생기면 n 40–160 문장이 바뀔 수 있다 | 새 지역에서 L10 의 n 40·160 대비를 주 대비로 등록한다 |
+| XA_c2_gain_decomposition | 재보정 몫과 ML 몫 분리(QA Q1 C2 점검, Q6 2번) | '1–10: 재보정 + 저가중 잔차' 에서 잔차 몫의 크기를 정한다. 수축 강도를 편향 진단으로 고르는 규칙이 러시아 W·티베트 예외(E41, E43)를 다룰 수 있다[미확인] | κ 선택(고정 10 대 라벨 안 교차검증)을 함께 본다 |
+| XE_hires_covariates | 격자 안 해상도 입력(QA Q8·Q9) | 물리 입력 구조와 잔차 구조의 차이는 공변량 정보량에 따라 달라질 수 있다[미확인] | 알래스카 지역 내에서 F1 대 R1 을 함께 적합한다 |
+| XJ_tempderived_aux_labels | 지온 유도 라벨을 보조 라벨로 쓰는 다중 충실도(QA Q9) | 라벨 수가 늘면 대상이 n 40–160 영역으로 옮겨 간다. 정의 차이 보정 모형의 결합 방식(잔차 대 입력)이 C3 의 연장이다 | 보조 라벨의 결합을 잔차형과 입력형으로 나눠 비교한다 |
+| XH_validation_ladder | 무작위·지점·블록·kNNDM·지역 홀드아웃 사다리(QA Q12·Q15) | 선행 연구의 물리 입력 구조(Pilyugina, Wang G.)는 무작위 분할을 썼다. 사다리 위에서 F1 대 잔차의 순위가 바뀌는지 보이면 C3 와 선행 연구가 이어진다 | 기존 `data/processed/lgx/ladder/lgv_metrics.csv` 에 F1k·RS 의 체계별 RMSE 행이 있다. `lgv_contrasts.csv` 의 F1k 대비는 F1k − PS, F1k − P0, F1k − P1w, 체계 간 열화(V-x − V-R), W2.F1k − W1.F1kw 이고 F1k − RS 짝 대비는 0행이다. 짝 대비 CI 는 새로 계산해야 한다 |
+| XG_product_comparison, XI_climate_extrapolation_retest, XD_placement_policy | 제품 비교, 기후 외삽 재시험, 관측 위치 정책 | C3 와 직접 관련이 작다 | 없음 |
+
+**새 적합 없이 할 수 있는 확인(등록 후보)**
+1. F1k·F1n·R3 − P1@ed(n 40·160). L29 규칙상 n 40·160 의 문장에 필요하다. 원천 표에는 이 대비 행이 없다(1.3 의 4). 레나 x 분할 1 조각 하나만 열어 본 결과, `data/processed/lgx/shards/lgx1__cpu__Lena__x__s1_blocksse.npz` 의 `u0_keys` 에 F1k·F1n, `data/processed/lgx/shards/lgx9__cpu__Lena__x__s1_blocksse.npz` 의 `u0_keys` 에 P1@ed 가 있고(세 방법 모두 n 40·160 키 포함), R3 는 LG 조각 `results/rescale_lg/data/processed/lg/shards/lg__cpu__Lena__x__s1_blocksse.npz` 에 있다(n 40·160 키 포함). 다른 대상·분할 조각, 세 조각 사이의 키(분할·추출·seed) 정합, LGT·LGF 조각의 P1@ed 키 유무는 확인하지 않았다[미확인].
+2. L10·L2 의 n 40·160 대비를 지역 행 기준으로 본문 표에 싣는 것(E16–E17, E28). 값은 이미 있다.
+
+## 7. 복사한 표(`tables/`)
+
+- `tables/MANIFEST.csv`: 열은 orig_path, copy_path, sha256, rows, bytes 다. rows 는 머리행을 뺀 자료 행 수(pandas)다. 복사 뒤 원본과 사본의 sha256 이 같음을 확인했다. 모두 집계 결과 표이고 셀 단위 라벨 자료는 없다.
+- 복사한 표(14개): `lgx_tests.csv`, `lg_tests.csv`, `lgx_lg_aux.csv`, `lgw_bundle.csv`, `fig3_b.csv`, `fig3_b_L10_alln.csv`, `fig3_b_L10_mean3.csv`, `fig3_d.csv`, `pool_fixed_curve.csv`, `lgt_tests.csv`, `lgf_tests.csv`, `lgd_tests_lic.csv`, `lgd_curve_lic.csv`, `lgv_contrasts.csv`(2026-10-04 개정에서 추가, 원본 `data/processed/lgx/ladder/lgv_contrasts.csv`, 3,587행, 6절 XH 행의 근거). 13개 표의 원본 sha256 이 개정 시점에도 MANIFEST 와 같음을 다시 확인했다.
+- 복사하지 않은 파일
+  - `results/rescale_lg/data/processed/lg/lg_curve.csv`: 7,072,630 B 로 5 MB 상한을 넘는다. sha256 bf39776bb60bb93fdef702190c28c78741dc35ff3ee8eb96d79324c320c83925. 이 표에서 읽은 값은 러시아 W 의 P0 RMSE 42.98 cm(target=Russia_W, mode=x, axis=method, method=P1, learner=none, placement=cell, alpha=1, n=10, 열 `rmse_p0`), 같은 행의 P1 RMSE 31.01 cm(열 `rmse`), 레나 P1·P2 RMSE(같은 필터, target=Lena, method=P1·P2, n=3, 열 `rmse`: 21.84, 24.76)다. 레나 값은 `pool_fixed_curve.csv` 의 `rmse_B`·`rmse_A` 와 같다(E41).
+  - `data/processed/paper_figs/pool_fixed_curve_meta.json`: 표가 아니라 생성 기록이다(모듈 `scripts/4_visualization/paper/pool_fixed_curve.py`, status_label '서술(판정에 쓰지 않는다)', git_commit 0fc2ef5). sha256 0ebb404aae831492d6b88f2160613f195bb1aedb37739b779b350cf101452409.
+  - 블록 SSE 조각 3개(표가 아닌 npz, 6절 '새 적합 없이 할 수 있는 확인' 1의 근거): `data/processed/lgx/shards/lgx1__cpu__Lena__x__s1_blocksse.npz`(118,490 B, sha256 ee966ba0001421c6ecda29d2580388ddcf9ecf53ff5e4904c6be830c0c66b3d9), `data/processed/lgx/shards/lgx9__cpu__Lena__x__s1_blocksse.npz`(189,772 B, sha256 84cb4be23a1a3eef2aadae3d03c7b7189e75b2bd0bf9044edfe564b4ce9f5bba), `results/rescale_lg/data/processed/lg/shards/lg__cpu__Lena__x__s1_blocksse.npz`(241,964 B, sha256 19f8c0c7f7727532bc4b44d124c31b880132ed5c52eb123a5dbafa6f919eb151). 읽은 것은 `u0_keys` 의 방법 이름과 n 뿐이다.
+  - 문서(표가 아니다): `docs/EXPERIMENT_PLAN_LG_2026-09-29.md`(4절, 6A.3, 6C.6, 7.1a, 7.3, 7.4), `docs/EXPERIMENT_PLAN_WRAPUP_2026-09-30.md`(J7, 2.4 열람 기록, 10절), `docs/RESEARCH_CLAIMS_WORKFLOW_2026-10-01.md`(3·4절), `docs/RESEARCH_OVERVIEW_2026-10-02.md`(108–121, 184, 255, 264행), `docs/QA_FINAL_REVIEW_2026-10-02.md`(40행), `docs/MANUSCRIPT_DRAFT_RESULTS_ABSTRACT_2026-09-30.md`(42행), `paper/registry/experiments.csv`(X 행).
+
+## 8. 개정 기록
+
+**2026-10-04 개정(점검 지적 15건)**. 지적마다 원천 표의 행과 계획서 원문을 다시 읽고 고쳤다. 판정은 바꾸지 않았다.
+
+| # | 위치 | 고친 내용 | 확인한 원천 |
+|---|---|---|---|
+| 1 | 1.3 의 1, 1.4, 5.2, E08a·E09a 추가 | n ≤ 10 지역 문장을 네 주 대비 기준으로 고치고 R1 − F1n(n 10) 캐나다 열세(+3.12 ‡), 보조 n 3 R1 − F1k 러시아 E 미결정(−3.44)을 더했다 | `lgx_tests` L10 scope=region |
+| 2 | 1.1, E38 | TabPFN n 3 의 holm_p 0.2366 '보정 전 유의', n 10 holm_p 0.0036, LGT 가설은 보조라는 표지 | `lgt_tests` L33 MEAN, LG 6C.6 |
+| 3 | E35, E38, E39, 1.3 의 8, 5.1 의 4, 5.2 | P1* 표지(n 3·320 'P1* 를 확인하지 않은 n', n 40·160 'P1* 대비 미계산'), TabICL n 3 미결정으로 학습기 문장 축소, '주 4지역 평균, P1 대비' 한정어 | LG 7.1a, 7.4, `lgf_tests` LGF-F4 |
+| 4 | E11a 추가, 0절 P* | L29 의 P* 병기 R0@tddm − F1k −3.45, R1@tddm − F1k −4.37(보조 행, 우세) | `lgx_tests` L29 MEAN·region·verdict |
+| 5 | 1.2 의 1, E36, E36a 추가 | AB4 의 지역 행(우세 지역 1/4)과 'S-a 열람 뒤 인용' 표지 | `lgw_bundle` AB4 region, WRAPUP J7 |
+| 6 | 3절, E37, E43, E44, 5.1 의 9 | T4 PE1·PE2 풀의 교차 환경 표지, PE1 의 L28 '약화', ‡ | `lgd_tests_lic` L4e, LG 7.3 '표지' |
+| 7 | E19, E36 | P1@ed − P1(n 40·160)과 AB5 의 ‡, AB5 의 '크기 0.5 cm 미만' | `lgx_tests` L29, `lgw_bundle` AB5 |
+| 8 | 1.3 의 6, 1.4, 5.2 | 증강 결합 문장을 n 10(4지역 동등)과 n 40(2지역 열세 +0.34)으로 나눴다 | `lg_tests` L2 MEAN4, `lgx_lg_aux` L2 |
+| 9 | 1.4, 5.2, E33 | 곱셈 잔차 문장에 '주 4지역 평균' 과 3지역 보조 열 반대 방향(−0.94)을 더했다 | `lgx_tests` L12 MEAN3 |
+| 10 | 0절, E01–E04, E12–E15, E19–E20, E35 | '지역 k/4' 를 CI 풀 지역 수로 정의하고 지역 행 우세 수와 구별했다 | `lgx_tests` L10 verdict `stat`, LG 4절 |
+| 11 | 1.2 의 3 | '10–160' 행이 인용하는 주장을 C5(WF4-a), C6, L10 보조 행으로 바로잡았다 | RESEARCH_CLAIMS 4절, RESEARCH_OVERVIEW 184행 |
+| 12 | 1.1, 5.2 | RESEARCH_OVERVIEW 판 C3 절의 기전 문장(119행)과 '안전' 문장(120·255행)을 범위에 넣었다 | RESEARCH_OVERVIEW 108–121, 255, 264행 |
+| 13 | 1.3 의 4, 5.1 의 4, 6절 확인 1, XH 행, 7절 | [미확인] 세 건을 파일로 확인해 고쳤다. `lgv_contrasts.csv` 사본을 더했다 | 원천 표 4개의 `contrast` 열, npz 조각 3개, `lgv_contrasts.csv`, 원고 초안 42행 |
+| 14 | 6절 머리말 | XG 는 WRAPUP 10절에 등록만 되어 있다 | `paper/registry/experiments.csv`, WRAPUP 10절 |
+| 15 | 1.2 의 1, E04, E06, 1.4, 5.1 의 10, 5.2 | AB7 의 F1k 는 재보정 계수를 받지 않는다는 해석상 지적과 R1 − F1n 병기 | LG 6A.3, `lgx_tests` L10 R1-F1n\|n10 |

@@ -1,0 +1,381 @@
+{
+ "stage": "H41/LGX ladder",
+ "plan": "docs/EXPERIMENT_PLAN_LG_2026-09-29.md §6A",
+ "git_commit": "5ffaaac",
+ "tag": "lgv",
+ "args": {
+  "part": "all",
+  "schemes": "V-R,V-P,V-S,V-B,V-C0,V-C100,V-C500,V-G",
+  "within_regions": "Alaska,Lena,Canada",
+  "reps": 3,
+  "within_reps": 5,
+  "folds": 5,
+  "seeds": 2,
+  "learners": "catboost_lo,catboost,rf",
+  "lams": "0.25,0.5,1.0",
+  "workers": 1,
+  "threads": 4,
+  "nboot": 10000,
+  "delta_eq": 0.5,
+  "delta_eq_aux": 1.0,
+  "cluster_map": "lgx_cluster_map_v1.csv",
+  "write_cluster_map": false,
+  "tdd_matched": "lgx_tdd_matched_v1.csv",
+  "subregion_map": "lg_subregion_map_v1.csv",
+  "out_dir": "data/processed/lgx/ladder",
+  "data_dir": "data/processed",
+  "tag": "lgv",
+  "resume": false,
+  "smoke": false,
+  "count_only": false,
+  "summarize_only": true,
+  "no_summarize": false,
+  "allow_local": true,
+  "allow_partial": false,
+  "allow_mixed_cfg": false,
+  "pool_retries": 2,
+  "kappa": 10.0,
+  "buffer_km": 100.0,
+  "n_clusters": 30,
+  "nest_folds": 4,
+  "threads_asked": 4
+ },
+ "schemes": [
+  "V-B",
+  "V-C0",
+  "V-C100",
+  "V-C500",
+  "V-G",
+  "V-P",
+  "V-R",
+  "V-S",
+  "W1-Alaska",
+  "W1-Canada",
+  "W1-Lena",
+  "W2-Alaska",
+  "W2-Canada",
+  "W2-Lena"
+ ],
+ "n_units": 292,
+ "n_cells": 17467,
+ "n_score": 17374,
+ "n_blocks_score": 174,
+ "regions": {
+  "Alaska": {
+   "n_cells": 13606,
+   "n_blocks": 74,
+   "has_ci": true
+  },
+  "Lena": {
+   "n_cells": 2958,
+   "n_blocks": 20,
+   "has_ci": true
+  },
+  "Canada": {
+   "n_cells": 747,
+   "n_blocks": 36,
+   "has_ci": true
+  },
+  "Russia_W": {
+   "n_cells": 28,
+   "n_blocks": 18,
+   "has_ci": true
+  },
+  "Russia_E": {
+   "n_cells": 27,
+   "n_blocks": 19,
+   "has_ci": true
+  },
+  "Russia_C": {
+   "n_cells": 7,
+   "n_blocks": 6,
+   "has_ci": false
+  },
+  "Greenland": {
+   "n_cells": 1,
+   "n_blocks": 1,
+   "has_ci": false
+  }
+ },
+ "n_groups": {
+  "V_P": 736,
+  "V_S": 437,
+  "V_B": 185
+ },
+ "cluster_map": {
+  "path": "/home/willy010313/Polar_Bigdata/data/processed/lgx_cluster_map_v1.csv",
+  "exists": true,
+  "sha": "65f232e4077d",
+  "n_clusters": 30
+ },
+ "train_cells": {
+  "V-B": {
+   "units": 15,
+   "n_train_min": 10640,
+   "n_train_median": 14376.0,
+   "n_train_max": 15193,
+   "n_buffer_excluded_max": 0,
+   "n_units_train_lt_1000": 0
+  },
+  "V-C0": {
+   "units": 25,
+   "n_train_min": 12343,
+   "n_train_median": 17350.0,
+   "n_train_max": 17465,
+   "n_buffer_excluded_max": 0,
+   "n_units_train_lt_1000": 0
+  },
+  "V-C100": {
+   "units": 25,
+   "n_train_min": 10044,
+   "n_train_median": 17323.0,
+   "n_train_max": 17465,
+   "n_buffer_excluded_max": 5461,
+   "n_units_train_lt_1000": 0
+  },
+  "V-C500": {
+   "units": 25,
+   "n_train_min": 6888,
+   "n_train_median": 17119.0,
+   "n_train_max": 17465,
+   "n_buffer_excluded_max": 9930,
+   "n_units_train_lt_1000": 0
+  },
+  "V-G": {
+   "units": 7,
+   "n_train_min": 3860,
+   "n_train_median": 16697.0,
+   "n_train_max": 17464,
+   "n_buffer_excluded_max": 1252,
+   "n_units_train_lt_1000": 0
+  },
+  "V-P": {
+   "units": 15,
+   "n_train_min": 13758,
+   "n_train_median": 14011.0,
+   "n_train_max": 14116,
+   "n_buffer_excluded_max": 0,
+   "n_units_train_lt_1000": 0
+  },
+  "V-R": {
+   "units": 15,
+   "n_train_min": 13973,
+   "n_train_median": 13974.0,
+   "n_train_max": 13974,
+   "n_buffer_excluded_max": 0,
+   "n_units_train_lt_1000": 0
+  },
+  "V-S": {
+   "units": 15,
+   "n_train_min": 13590,
+   "n_train_median": 13979.0,
+   "n_train_max": 14221,
+   "n_buffer_excluded_max": 0,
+   "n_units_train_lt_1000": 0
+  },
+  "W1-Alaska": {
+   "units": 25,
+   "n_train_min": 7843,
+   "n_train_median": 11400.0,
+   "n_train_max": 11911,
+   "n_buffer_excluded_max": 0,
+   "n_units_train_lt_1000": 0
+  },
+  "W1-Canada": {
+   "units": 25,
+   "n_train_min": 519,
+   "n_train_median": 613.0,
+   "n_train_max": 652,
+   "n_buffer_excluded_max": 0,
+   "n_units_train_lt_1000": 25
+  },
+  "W1-Lena": {
+   "units": 25,
+   "n_train_min": 1667,
+   "n_train_median": 2682.0,
+   "n_train_max": 2862,
+   "n_buffer_excluded_max": 0,
+   "n_units_train_lt_1000": 0
+  },
+  "W2-Alaska": {
+   "units": 25,
+   "n_train_min": 11703,
+   "n_train_median": 15260.0,
+   "n_train_max": 15771,
+   "n_buffer_excluded_max": 1,
+   "n_units_train_lt_1000": 0
+  },
+  "W2-Canada": {
+   "units": 25,
+   "n_train_min": 17216,
+   "n_train_median": 17310.0,
+   "n_train_max": 17349,
+   "n_buffer_excluded_max": 20,
+   "n_units_train_lt_1000": 0
+  },
+  "W2-Lena": {
+   "units": 25,
+   "n_train_min": 16096,
+   "n_train_median": 17111.0,
+   "n_train_max": 17291,
+   "n_buffer_excluded_max": 1,
+   "n_units_train_lt_1000": 0
+  }
+ },
+ "shard_cfg": {
+  "cfg_common": {
+   "2d9a598c5663": 292
+  },
+  "code_sha": {
+   "365b4d00f678": 292
+  },
+  "code_sha_h40": {
+   "ffd0b3a76d36": 292
+  }
+ },
+ "unit_status": {
+  "ok": 292
+ },
+ "n_failed": 0,
+ "excluded": [],
+ "reps_short": {},
+ "nboot_capped": false,
+ "nboot_asked": 10000,
+ "tdd_matched": {
+  "path": "/home/willy010313/Polar_Bigdata/data/processed/lgx_tdd_matched_v1.csv",
+  "exists": true,
+  "src": "lgx_tdd_matched_v1.csv:54f132e461ea"
+ },
+ "skipped": [
+  {
+   "scheme": "V-C0",
+   "rep": 1,
+   "fold": 1,
+   "status": "no_eval",
+   "n_held": 1
+  },
+  {
+   "scheme": "V-C0",
+   "rep": 1,
+   "fold": 2,
+   "status": "no_eval",
+   "n_held": 2
+  },
+  {
+   "scheme": "V-C0",
+   "rep": 1,
+   "fold": 14,
+   "status": "no_eval",
+   "n_held": 2
+  },
+  {
+   "scheme": "V-C0",
+   "rep": 1,
+   "fold": 28,
+   "status": "no_eval",
+   "n_held": 1
+  },
+  {
+   "scheme": "V-C0",
+   "rep": 1,
+   "fold": 29,
+   "status": "no_eval",
+   "n_held": 1
+  },
+  {
+   "scheme": "V-C100",
+   "rep": 1,
+   "fold": 1,
+   "status": "no_eval",
+   "n_held": 1
+  },
+  {
+   "scheme": "V-C100",
+   "rep": 1,
+   "fold": 2,
+   "status": "no_eval",
+   "n_held": 2
+  },
+  {
+   "scheme": "V-C100",
+   "rep": 1,
+   "fold": 14,
+   "status": "no_eval",
+   "n_held": 2
+  },
+  {
+   "scheme": "V-C100",
+   "rep": 1,
+   "fold": 28,
+   "status": "no_eval",
+   "n_held": 1
+  },
+  {
+   "scheme": "V-C100",
+   "rep": 1,
+   "fold": 29,
+   "status": "no_eval",
+   "n_held": 1
+  },
+  {
+   "scheme": "V-C500",
+   "rep": 1,
+   "fold": 1,
+   "status": "no_eval",
+   "n_held": 1
+  },
+  {
+   "scheme": "V-C500",
+   "rep": 1,
+   "fold": 2,
+   "status": "no_eval",
+   "n_held": 2
+  },
+  {
+   "scheme": "V-C500",
+   "rep": 1,
+   "fold": 14,
+   "status": "no_eval",
+   "n_held": 2
+  },
+  {
+   "scheme": "V-C500",
+   "rep": 1,
+   "fold": 28,
+   "status": "no_eval",
+   "n_held": 1
+  },
+  {
+   "scheme": "V-C500",
+   "rep": 1,
+   "fold": 29,
+   "status": "no_eval",
+   "n_held": 1
+  }
+ ],
+ "key_fields": [
+  "method",
+  "learner",
+  "seed",
+  "lam"
+ ],
+ "n_metrics": 1687,
+ "n_contrasts": 3587,
+ "n_tests": 231,
+ "elapsed_s": 0.0,
+ "summarize_s": 33.8,
+ "unit_elapsed_s_sum": 20604.100000000002,
+ "nboot": 10000,
+ "rules": {
+  "score": "채점 집합 = eval_mask ∩ macro 7지역. 모든 단이 같은 집합을 쓴다",
+  "ci": "지역 r 의 W_r = boot_weights(블록 수, nboot, seed_of('lgvboot', r))를 모든 단·모델·반복이 공유한다. 키 묶음(반복·seed) 평균 RMSE 의 차. 층화 평균은 m1_stats.strat, 블록 8개 미만 지역은 점 추정만",
+  "pool": "전체 셀 풀의 CI 는 지역 안 블록 재표집 다중도를 이어 붙인다(블록 8개 미만 지역도 지역 안에서 재표집)",
+  "verdict4": "우세 = 두 가중 CI 상한 < 0, 열세 = 두 가중 CI 하한 > 0, 동등 = 네 끝값 절댓값 ≤ 0.5(보조 1.0), 그 밖 미결정. CI 풀 지역 2개 미만·CI 없음·점 추정치가 CI 밖이면 판정 불가",
+  "holm": "두 묶음에 따로 m1_stats.holm 을 적용한다. X3a = L19(V-R, V-G), L20(V-C500 − V-R), L21(λ 0.25)의 5지역 평균 대비, X3b = L22 의 기준 λ 지역 대비 3개. 판정 불가 행은 묶음에 넣지 않는다. 보조 열이며 판정에 쓰지 않는다",
+  "p_equiv": "동등성 p = max(P(Δ* ≤ −δ), P(Δ* ≥ +δ)), 두 가중 가운데 큰 값(h42 와 같다). '동등'은 p_equiv ≤ 0.025 에 대응한다",
+  "partial": "판정 문구의 부분 표기: 풀 지역 수 < 대상 지역 수이면 '부분(지역 k/N)', 대비의 행(반복·seed)이 기대보다 적으면 '부분(반복·seed 행 k/K)'(확인적 가설 L19 는 판정 불가). 채점 범위가 부분인 (단, 반복)은 집계에서 뺀다(--allow-partial 이면 넣는다). 비유한 예측은 지역 단위로 뺀다(전체 셀 풀은 모든 지역에서 유한한 행만 쓴다)",
+  "base_lam": "물리식·V2 0.0, 직접 계열 1.0, 잔차·곱셈 계열 0.25, R1w@nest −1.0(고른 값은 unit.json 의 model.nest)",
+  "ex": "'#ex' 키는 p4_ku 결측 셀을 채점에서 뺀다. 이 키가 든 대비는 모든 항을 같은 셀로 제한한다",
+  "leakage": "계수·대체 통계는 단위의 학습 셀에서만 구한다. 버퍼 단은 버퍼 안 학습 셀 0 개를 haversine 으로 단언한다. 예외: p4_ku, p2_edaphic 은 load_base 가 공변량 결측을 전체 셀 중앙값으로 채워 계산한 열이다(라벨 미사용. 토양 열 결측 399셀 가운데 396셀이 레나). 영향을 받는 키는 F1k 계열과 N1 의 ku·ed 기준선, B:ens 다"
+ }
+}

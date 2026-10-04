@@ -1,0 +1,85 @@
+{
+ "stage": "H45/LGU-B",
+ "plan": "docs/EXPERIMENT_PLAN_LGU_2026-09-29.md 4절",
+ "prefix": "lgu_b",
+ "tag": "lgub",
+ "targets": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_E",
+  "Alaska"
+ ],
+ "ok_targets": [
+  "Lena",
+  "Canada",
+  "Russia_W",
+  "Russia_E",
+  "Alaska"
+ ],
+ "normalizers": [
+  "nflow",
+  "cfm",
+  "cbq",
+  "phys"
+ ],
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "perms": 10,
+ "lams": [
+  0.0,
+  0.25,
+  1.0
+ ],
+ "n_aux": [
+  10,
+  40,
+  160
+ ],
+ "aux_targets": [
+  "Lena",
+  "Canada",
+  "Alaska"
+ ],
+ "splits": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "draws": 5,
+ "nboot": 1000,
+ "precision_only": false,
+ "n_unit_fail": 0,
+ "blind": {
+  "LGU-B1": "재현(비맹검)",
+  "LGU-B2": "맹검",
+  "LGU-B3": "맹검",
+  "LGU-B4": "맹검(const 는 C2 hier2_cdf 와 규약이 다르다)",
+  "LGU-B5": "진단",
+  "LGU-B6": "맹검"
+ },
+ "inputs": {
+  "fidelity_base_v3.csv": "214abe489347",
+  "e5_soil_tdd_v3.csv": "f8c4b4f0b505",
+  "lg_subregion_map_v1.csv": "f79eeb64564c",
+  "lgx_label_flags_v1.csv": "d1d453052b46"
+ },
+ "code_sha": "cb1dd2991f18",
+ "code_sha_common": "88ecdc5e7f60",
+ "code_sha_h40": "ffd0b3a76d36",
+ "n_nan_boot": {
+  "Canada": 0,
+  "Lena": 0,
+  "Russia_W": 0,
+  "Russia_E": 0,
+  "Alaska": 0
+ },
+ "n_rows_intervals": 237,
+ "n_rows_tests": 19,
+ "elapsed_s": 598.1
+}

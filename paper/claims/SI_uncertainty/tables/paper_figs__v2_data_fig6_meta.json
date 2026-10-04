@@ -1,0 +1,118 @@
+{
+ "module": "scripts/4_visualization/paper/v2_data.py --only fig6",
+ "created": "2026-10-02T00:43:34",
+ "inputs": [
+  {
+   "path": "data/processed/lgw/lgw_bundle.csv",
+   "sha256": "eda4ccac9915ccef957ed07021e23a12b1aa49ab92b14107b68bc4346c17ea4f"
+  },
+  {
+   "path": "data/processed/lgx/lgx_tests.csv",
+   "sha256": "f60b3c6f558d6ae8bba985c99a68733ffcf39536c1fd2b869060fdd75275fa69"
+  },
+  {
+   "path": "results/rescale_lg/data/processed/lg/lg_tests.csv",
+   "sha256": "fe80690d82dc56ee203850956f7864a286bafa4be60ef184aa40bf6e613142bb"
+  },
+  {
+   "path": "data/processed/lgt/lgt_tests.csv",
+   "sha256": "beb43652682fd4a9e678caca7efabf5ab7cd735c97264d0286cef19b8620d6dc"
+  },
+  {
+   "path": "data/processed/lgf/lgf_tests.csv",
+   "sha256": "ab363038bcf91a40b85af0cb5b44f3cacfdfe8df4ea94c915207a4690f4e5f17"
+  },
+  {
+   "path": "data/processed/lgf/lgfn_tests.csv",
+   "sha256": "a38c117b2ba7590c89067161b6a11e31365d67d703a73524a896e50f6561159c"
+  },
+  {
+   "path": "data/processed/lgu/lgu_b_intervals.csv",
+   "sha256": "08beb3497c92e97294f196091a34b78633fdaad53076b3a83a6b4b1c5bb8fb99"
+  },
+  {
+   "path": "data/processed/lgu/lgu_b_tests.csv",
+   "sha256": "11066c405053a54383048091b32e04c262a0c003f6c63e39b47b796339f761ff"
+  },
+  {
+   "path": "data/processed/lgu/lgu_a_tests.csv",
+   "sha256": "674e6f4ba3413b59de70d2f8483f01c71aa8c8655efc01e2395bfd22768c3597"
+  },
+  {
+   "path": "data/processed/h4/c2_coverage.csv",
+   "sha256": "ca74a5dacee92b2bbab68e82c404d51b3643280ee581ec9aab6b2e922baeb119"
+  },
+  {
+   "path": "data/processed/lgx/lgx_conformal.csv",
+   "sha256": "13d3926cce3bf1fd070d6b9686a257475dee6a5fe044da32b8df2531a6e65295"
+  }
+ ],
+ "outputs": [
+  "fig6_a.csv",
+  "fig6_a_registered.csv",
+  "fig6_b.csv",
+  "fig6_b_ref.csv",
+  "fig6_c.csv",
+  "fig6_c_registered.csv",
+  "fig6_d.csv",
+  "fig6_d_registered.csv"
+ ],
+ "checks": {
+  "fig6a_rows_eq_fixed": true,
+  "fig6a_all_P4_mean": true,
+  "fig6a_local_platform_tag": true,
+  "fig6a_AB2_bundle_vs_L29_delta_abs_diff_cm": 4.440892098500626e-15,
+  "info_fig6a_AB2_bundle_vs_L29_ci": [
+   [
+    -3.326688839562292,
+    -0.9147222332177476
+   ],
+   [
+    -3.2797393628745635,
+    -0.9220043896371573
+   ]
+  ],
+  "info_fig6a_catboost_ctx_LGT_vs_LGF_identical": true,
+  "fig6a_F1_class_consistent_with_rows": true,
+  "fig6a_N1_class_consistent_with_rows": true,
+  "fig6b_rows_eq_30": true,
+  "fig6b_const_MEAN4_cov_vs_region_mean": 0.0,
+  "fig6b_const_MEAN4_wid_vs_region_mean_cm": 0.0,
+  "fig6b_phys_MEAN4_cov_vs_region_mean": 0.0,
+  "fig6b_phys_MEAN4_wid_vs_region_mean_cm": 0.0,
+  "fig6b_cfm_MEAN4_cov_vs_region_mean": 0.0,
+  "fig6b_cfm_MEAN4_wid_vs_region_mean_cm": 0.0,
+  "fig6b_nflow_MEAN4_cov_vs_region_mean": 0.0,
+  "fig6b_nflow_MEAN4_wid_vs_region_mean_cm": 0.0,
+  "fig6b_nflow#placebo_MEAN4_cov_vs_region_mean": 0.0,
+  "fig6b_nflow#placebo_MEAN4_wid_vs_region_mean_cm": 0.0,
+  "fig6b_cbq_MEAN4_cov_vs_region_mean": 1.1102230246251565e-16,
+  "fig6b_cbq_MEAN4_wid_vs_region_mean_cm": 0.0,
+  "fig6b_C2_one_mean_row": true,
+  "fig6b_C2_MEAN_cov_vs_region_mean": 0.0,
+  "fig6b_C2_MEAN_wid_vs_region_mean_cm": 0.0,
+  "fig6c_B2_margin_is_5pct": 0.0,
+  "fig6c_A1_n10_margin_is_5pct": 6.938893903907228e-18,
+  "fig6c_A1_n40_margin_is_5pct": 0.0,
+  "fig6c_AB10_bundle_vs_A1_n10_delta_abs_diff_cm": 0.0,
+  "fig6c_AB10_verdict_agree": true,
+  "fig6d_rows_eq_6": true,
+  "fig6d_conformal_vs_L25_cov_max_abs_diff": 0.0,
+  "fig6d_conformal_vs_L25_width_max_abs_diff_cm": 0.0,
+  "fig6d_R0n0_vs_L25_width_n0_max_abs_diff_cm": 0.0,
+  "fig6d_c1_eq_in_band_count": true,
+  "fig6d_c2_eq_narrower_count": true
+ },
+ "checks_failed": {},
+ "rules": {
+  "values": "원천 열 그대로. 새 재표집·판정 없음. 6c 의 % 는 Δ/기준 점수, 6d 의 폭 비는 R1 폭/R0(n = 0) 폭(산술, CI 없음)",
+  "rows_fixed": "6a 행은 figure_spec display_items 'Fig 6' rows_fixed(결과 전 고정)를 그대로 쓴다. P* 행은 L29_pstar 조건(성립)",
+  "platform": "Rescale 행(lgw_bundle h39, lgx_tests h42)과 로컬 GPU 행(lgt h43, lgf h47, lgfn h48) 사이의 차는 계산하지 않는다(LGF 2.2)",
+  "nboot": {
+   "a": 10000,
+   "b_c_lgu": 1000,
+   "d": 10000
+  },
+  "not_opened": "data/processed/wf/*, results/rescale_wf3/*(진행 중 실험)"
+ }
+}

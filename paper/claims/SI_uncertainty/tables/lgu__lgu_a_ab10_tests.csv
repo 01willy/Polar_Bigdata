@@ -1,0 +1,2 @@
+test_id,scope,contrast,n,metric,pool,delta,p_cell,p_beq,p_eq,verdict4,nboot,source
+LGU-A1,MEAN,iii − B4 | n10 | is10,10,is10,"Lena,Canada,Alaska",9.510332928251708,0.07214428857715431,0.09218436873747494,0.8046092184368737,미결정,1000,"lgu_a_tests.csv(verdict, delta, margin) + lgua_boot__*__x.npz(dist)"

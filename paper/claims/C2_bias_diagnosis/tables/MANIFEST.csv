@@ -1,0 +1,14 @@
+orig_path,copy_path,sha256,rows,bytes
+derived: paper/claims/C2_bias_diagnosis/posthoc_c2_split.py,paper/claims/C2_bias_diagnosis/tables/derived_c2_posthoc_rho.csv,b24e99f8d1ec16a4fe07d08c2a6e0fb206cda151fd24d1ebf5f6a9afba49f2e0,17,1788
+derived: paper/claims/C2_bias_diagnosis/posthoc_c2_split.py (tables/wf0_misspec.csv + tables/lg_targets.csv),paper/claims/C2_bias_diagnosis/tables/derived_c2_wf0_split.csv,d9936143d9612dd9526910fe3a3cfaefbf8b5847ed636840683fe072f11876d8,30,10955
+"derived: paper/claims/C2_bias_diagnosis/posthoc_c2_split.py (tables/wf_tests.csv WF4-b, WF4-c)",paper/claims/C2_bias_diagnosis/tables/derived_c2_wf4c_split.csv,055807abe3aa3c277c9df803f85381e607dc01f05744b430f19e0f47f89119bd,28,6983
+results/rescale_lg/data/processed/lg/lg_targets.csv,paper/claims/C2_bias_diagnosis/tables/lg_targets.csv,194a5b70b3fec950c680d121da6b7a2ab64d4f09d8b3f8c660c40a2c5f93df4d,366,192362
+results/rescale_lg/data/processed/lg/lg_tests.csv,paper/claims/C2_bias_diagnosis/tables/lg_tests.csv,fe80690d82dc56ee203850956f7864a286bafa4be60ef184aa40bf6e613142bb,354,99235
+data/processed/lgd/lgd_tests_lic.csv,paper/claims/C2_bias_diagnosis/tables/lgd_tests_lic.csv,9d18deee2b19ef077a3328527917fd8b6a164e83cc2a7ab021b851bff96afcbe,546,259441
+data/processed/lgw/lgw_bundle.csv,paper/claims/C2_bias_diagnosis/tables/lgw_bundle.csv,eda4ccac9915ccef957ed07021e23a12b1aa49ab92b14107b68bc4346c17ea4f,46,23853
+data/processed/paper_figs/fig3_c.csv,paper/claims/C2_bias_diagnosis/tables/paper_figs_fig3_c.csv,618e552412e753128337e74c1a419f0183e731d386befc2c0d9ba703db54241f,13,2398
+data/processed/wf/wf0_meta.json,paper/claims/C2_bias_diagnosis/tables/wf0_meta.json,192a79ce619e9920f047ee491939721fec02aa112666a9288e36dde64f53fe63,1,543
+data/processed/wf/wf0_misspec.csv,paper/claims/C2_bias_diagnosis/tables/wf0_misspec.csv,ba5415df75ab88b9a5a2790052dc33b3a1b9cf19a170a616f49bbd45eb49e959,30,7437
+results/rescale_wf2/data/processed/wf/wf2b_tests.csv,paper/claims/C2_bias_diagnosis/tables/wf2b_tests.csv,83a97be8de147db119c299f8efe1354c88bd284329436917fc7a51dccebe4186,650,302623
+results/rescale_wf/data/processed/wf/wf_curve.csv,paper/claims/C2_bias_diagnosis/tables/wf_curve.csv,e124c299a0e5c4eb2878273aeb7224562db73baac5eff842fbaf9438e9bae956,3452,1950113
+results/rescale_wf/data/processed/wf/wf_tests.csv,paper/claims/C2_bias_diagnosis/tables/wf_tests.csv,90a485feef92c3dbf0ae053f4d977a3744d3f7ca51e152fd4b5832c3e0503a8c,1140,548699

@@ -1,0 +1,6 @@
+orig_path,copy_path,sha256,rows,bytes
+results/rescale_wf/data/processed/wf/wf_tests.csv,paper/claims/C5_method_selection/tables/wf_tests.csv,90a485feef92c3dbf0ae053f4d977a3744d3f7ca51e152fd4b5832c3e0503a8c,1140,548699
+results/rescale_wf/data/processed/wf/wf_curve.csv,paper/claims/C5_method_selection/tables/wf_curve.csv,e124c299a0e5c4eb2878273aeb7224562db73baac5eff842fbaf9438e9bae956,3452,1950113
+results/rescale_wf/data/processed/wf/wf_meta.json,paper/claims/C5_method_selection/tables/wf_meta.json,e78e39119801a6d1ad3a137bcf227b0cebad01ae52365db1ee319353a41d5e4b,NA,26464
+data/processed/lgf/lgfn_tests.csv,paper/claims/C5_method_selection/tables/lgfn_tests.csv,a38c117b2ba7590c89067161b6a11e31365d67d703a73524a896e50f6561159c,1571,1087813
+data/processed/wf/wf0_misspec.csv,paper/claims/C5_method_selection/tables/wf0_misspec.csv,ba5415df75ab88b9a5a2790052dc33b3a1b9cf19a170a616f49bbd45eb49e959,30,7437
