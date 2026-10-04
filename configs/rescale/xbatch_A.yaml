@@ -1,0 +1,32 @@
+# xbatch 작업 A: 계획 R0(환경·시험)·R1a(XD-alg, XD 학습 자료, S9-GBM, XI, XJ)·R1b(XB, XH)의 내용을 한 노드에서 차례로 돈다.
+# XE xh0·xt2 는 로컬 1c 추출(4–5 h)이 끝난 뒤 작업 E 로 옮겼다(작업 구성 변경, 등록 규칙 불변. 개정 이력에 적는다).
+# 근거: docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 4·5절, 사용자 승인(2026-10-04, 비용 표 안의 제출).
+# 적합 수(--count-only, 로컬): XD xd_r·xd_t·xd_learn 46,771, XI 6,980, XJ 0(원천 쪽 시험하지 않음), XB 42,452, XH 2,514.
+# 추정: 누적 약 5 워커·시간, 워커 22개면 약 15–20 min + 설치·집계. 상한 3 h(elm 최악 9.72 달러).
+# 묶음: bash scripts/rescale/make_payload_xbatch.sh
+# 제출: python3 tools/rescale_client.py run configs/rescale/xbatch_A.yaml --yes --no-wait
+
+name: polar-xbatch-A
+
+hardware:
+  core_type: elm
+  cores_per_slot: 96
+  slots: 1
+  walltime_hours: 3
+
+max_cost_usd: 10
+low_priority: false
+
+analysis:
+  code: pytorch
+  version: "2.4.1"
+
+code_paths:
+  - work/xbatch_payload.tar.gz
+
+dataset_file_ids: []
+
+command: |
+  [ -f xbatch_payload.tar.gz ] && tar xzf xbatch_payload.tar.gz; XBATCH_JOB=A XBATCH_BUDGET_MIN=170 bash scripts/rescale/run_xbatch.sh
+
+results_dir: results/rescale_xbatch_A
