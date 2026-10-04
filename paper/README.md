@@ -14,7 +14,7 @@
 | 경로 | 내용 | 상태(2026-10-04) |
 |---|---|---|
 | `paper/README.md` | 이 문서 | 작성 |
-| `paper/registry/experiments.csv` | 실험 등록부. 47묶음을 64행(계획 X 10행 포함)으로 등록, 18열 | 작성 |
+| `paper/registry/experiments.csv` | 실험 등록부. 47묶음과 X 12묶음을 66행으로 등록, 18열(2026-10-05 갱신) | 작성 |
 | `paper/registry/naming_map.csv` | 옛 id → 새 이름(80행) | 작성 |
 | `paper/registry/README.md` | 열 정의, 상태 표기, 갱신 방법 | 작성 |
 | `paper/claims/C1_label0_safety/` … `C8_gain_source/` | 주장별 README, 판정 근거 표 사본(`tables/`), `MANIFEST.csv` | 별도 작업에서 작성 중 |
@@ -71,6 +71,8 @@
 | XH_validation_ladder | 무작위 분할부터 지역 홀드아웃까지의 검증 사다리 그림 | QA Q12·Q15 |
 | XI_climate_extrapolation_retest | WF10 재시험(외삽 영역 블록 8개 이상) | 연구 개요 12절 |
 | XJ_tempderived_aux_labels | 지온 유도 라벨의 보조 학습 | QA Q9 |
+| XK_support_scale | 격자 크기별 오차(1 km–0.25°, 서술) | 사용자 지시(2026-10-05), 추가 등록 `docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XK_XL_2026-10-05.md` |
+| XL_map_products | 지역별 1 km ALT 지도와 물리식·제품 지도 비교(서술) | 같음 |
 
 ### 3.4 이름 충돌 주의
 

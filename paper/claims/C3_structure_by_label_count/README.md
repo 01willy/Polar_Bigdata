@@ -247,6 +247,17 @@ XG 를 뺀 X 묶음은 등록 문서가 없다(2026-10-04 기준, `paper/registr
 1. F1k·F1n·R3 − P1@ed(n 40·160). L29 규칙상 n 40·160 의 문장에 필요하다. 원천 표에는 이 대비 행이 없다(1.3 의 4). 레나 x 분할 1 조각 하나만 열어 본 결과, `data/processed/lgx/shards/lgx1__cpu__Lena__x__s1_blocksse.npz` 의 `u0_keys` 에 F1k·F1n, `data/processed/lgx/shards/lgx9__cpu__Lena__x__s1_blocksse.npz` 의 `u0_keys` 에 P1@ed 가 있고(세 방법 모두 n 40·160 키 포함), R3 는 LG 조각 `results/rescale_lg/data/processed/lg/shards/lg__cpu__Lena__x__s1_blocksse.npz` 에 있다(n 40·160 키 포함). 다른 대상·분할 조각, 세 조각 사이의 키(분할·추출·seed) 정합, LGT·LGF 조각의 P1@ed 키 유무는 확인하지 않았다[미확인].
 2. L10·L2 의 n 40·160 대비를 지역 행 기준으로 본문 표에 싣는 것(E16–E17, E28). 값은 이미 있다.
 
+### 6.1 X 묶음 결과 근거(2026-10-05 열람)
+
+판정 정본은 `docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md` 8절(추가 등록 XK·XL 은 `docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XK_XL_2026-10-05.md` 결과 절)이다. 수치는 cm 이고 셀 가중 / 블록 등가중, 대괄호는 95 % CI 다. Δ 는 음수면 앞 방법의 오차가 작다. 이 표는 근거 색인이며 1절의 주장 문장은 고치지 않았다(원고 작업에서 정한다).
+
+| 실험·가설 | 판정 | 수치 | 근거 표(원래 경로) | 이 주장과의 관계 |
+|---|---|---|---|---|
+| XB-1: Stack − P1, 전이, n 10·40·160·전량(계획 8.2) | 모두 미결정, 기각 | 전량 −1.54 [−2.28, −0.47] / −0.39 [−1.13, +0.35], n 40 −1.86 / +0.10, n 10 −0.28 / +1.42(적층 대체 0.36) | `data/processed/xbatch/XB_multisource_stacking/sealed/xb_tests.csv` | 여러 물리식·제품의 라벨 가중 적층이 재보정 Stefan 과 다르다는 근거가 없다. 결합 이득은 지역 조건부라는 서술(WF7, L29)을 유지한다 |
+| XB-2: StackR(0.25) − R1(0.25) | 모두 미결정, 기각 | 전량 −1.38 [−2.00, −0.41] / −0.43 [−1.05, +0.20], n 160 −2.27 / −0.35 | 같음 | 적층 잔차와 재보정 앵커 잔차의 차이를 확인하지 못했다 |
+| XB-5: P* − P1(서술) | 주 4지역 n 0·3·40·160 우세, n 10·전량 미결정 | n 0 −1.00 [−1.35, −0.32] / −0.41 [−0.74, −0.08], n 40 −1.34 / −0.88(부분 지역 2/4) | 같음 | 연도 정합 도일 Stefan 은 소수 라벨에서 재보정 Stefan 보다 오차가 작았다(서술, 확인적으로 세지 않음) |
+| XJ-3: 티베트 P1_aux(w) − P1, n 3·10(계획 8.5) | 우세 6행 | w 0.1: n 3 −20.85 / −21.81, n 10 −8.14 / −5.94 | `data/processed/xbatch/XJ_tempderived_aux_labels/sealed/xj_hyp.csv` | 라벨 0–10 구간의 계수 보정 보조 정보(대상 하나, 일반화하지 않음) |
+
 ## 7. 복사한 표(`tables/`)
 
 - `tables/MANIFEST.csv`: 열은 orig_path, copy_path, sha256, rows, bytes 다. rows 는 머리행을 뺀 자료 행 수(pandas)다. 복사 뒤 원본과 사본의 sha256 이 같음을 확인했다. 모두 집계 결과 표이고 셀 단위 라벨 자료는 없다.

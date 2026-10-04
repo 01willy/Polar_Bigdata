@@ -79,3 +79,5 @@ X1,XB_multisource_stacking,다중 소스 라벨 가중 적층(계획),[예정] d
 검증 사다리 그림,XH_validation_ladder,무작위–지역 홀드아웃 채점 정리(계획),data/processed/m1/cv_scheme_comparison.csv; data/processed/lgx/ladder/lgv_tests.csv
 WF10 재시험,XI_climate_extrapolation_retest,외삽 영역 블록 8개 이상 조건의 재시험(계획),[예정] data/processed/xi/
 지온 유도 보조 라벨,XJ_tempderived_aux_labels,다중 충실도 보조 라벨(계획),[예정] data/processed/xj/
+격자 크기별 오차,XK_support_scale,"블록 밖 예측의 격자 크기별 RMSE(서술, 2026-10-05 추가 등록)",scripts/2_evaluation/xk_support_scale_v1.py; data/processed/xbatch/XK_support_scale/
+지역별 고해상 ALT 지도 비교,XL_map_products,"1 km 지도와 물리식·제품 지도 비교(서술, 2026-10-05 추가 등록)",scripts/2_evaluation/xl_map_products_v1.py; data/processed/xbatch/XL_map_products/

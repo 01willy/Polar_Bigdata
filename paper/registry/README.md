@@ -6,8 +6,8 @@
 
 | 파일 | 내용 |
 |---|---|
-| `experiments.csv` | 실험 묶음 등록부. 64행(헤더 제외), 18열, UTF-8 |
-| `naming_map.csv` | 옛 실험 id 와 새 이름의 대응. 80행(헤더 제외), 4열 |
+| `experiments.csv` | 실험 묶음 등록부. 66행(헤더 제외), 18열, UTF-8 |
+| `naming_map.csv` | 옛 실험 id 와 새 이름의 대응. 82행(헤더 제외), 4열 |
 | `README.md` | 이 문서. 열 정의와 갱신 방법 |
 
 ## 2. 행 구성
@@ -24,7 +24,7 @@
 | H5 | 3 | 09-26 통합 실험, NEXT P1–P6(미실행), FA |
 | T | 8 | LG, LGX, LGT, LGF, LGD, LGU, WRAPUP, LGW(J7)+레나 지도 |
 | W | 12 | WF0, WF1, WF6, WF2, WF8, WF3, WF4, WF5(미발행), WF7, WF9, WF9-soil, WF10 |
-| X | 10 | 새 묶음(계획) XA–XJ |
+| X | 12 | 새 묶음 XA–XJ(2026-10-04 등록)와 추가 등록 XK·XL(2026-10-05) |
 
 - 47묶음 표의 'WF1–WF5', 'WF6–WF8', 'WF9–WF10' 은 새 이름이 서로 달라 실험별 행으로 나눴다. `old_ids` 열에 원래 묶음 이름을 괄호로 적었다(예: `WF2(WF1–WF5 묶음)`).
 - 같은 새 이름을 여러 행이 쓸 수 있다(T3 = LGT·LGF, T6 = WRAPUP·LGW, W2 = WF1·WF6, W3 = WF2·WF8, W7 = WF9·WF9-soil, H0 = 대회기 25묶음). 행의 고유 키는 `(new_name, old_ids)` 다.
@@ -96,3 +96,4 @@ git check-ignore -v <경로>          # 제외 여부
 ## 개정 이력
 
 - 2026-10-04: 초판. 47묶음을 64행(계획 X 10행 포함)으로 등록. 경로 점검에서 존재하지 않는 경로는 없었다. 이전 표의 와일드카드 경로(`e4_*.py`, `h31_*` 등, `h44_*.py`–`h46_*.py`)를 실제 파일 이름으로 펼쳤고, M1 의 `cv_scheme_comparison.csv` 를 만든 `scripts/3_deep_learning/m1_cv_scheme_comparison.py`, H25–H30 의 `h29_block_label_value.py`·`h29_resummary.py`, H18–H24 의 `h19_blockE.py`·공변량 확장 스크립트, S7 의 `scripts/1_data_prep/s7_parse_kpdc_council.py` 를 더했다.
+- 2026-10-05: X 묶음 봉인 표 열람 결과 반영(계획 `docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md` 8.2–8.9, 추가 등록 문서 결과 절). XB, XD, XE, XG, XH, XI, XJ 행의 실행 상태·판정 요약·근거 경로를 고쳤고, XK_support_scale·XL_map_products 행을 더했다(experiments.csv 66행, naming_map.csv 82행). 경로 점검에서 없는 경로는 없었다. XA 행은 이번에 고치지 않았다(판정 기록은 계획 8.1).
