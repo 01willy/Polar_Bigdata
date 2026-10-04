@@ -1102,3 +1102,9 @@
   - 7.2-6, 7.2-7(로컬 대체 경로): 위 지시로 허용한다. 조건은 1절 로컬 자원 규약(4스레드, nice 10, 메모리 상한) 그대로다.
   - 7.2-3: 기본값(진행). 7.2-1·2·8·10: 기본값. 7.2-4(BNZ 브라우저 확인, LGD 약관 회신)는 사용자 행동으로 남긴다.
   - 초록에서 XC 의 쓰임(수치만 또는 제외)은 사용자가 WF·XC 결과 설명을 듣고 정한다(7.1 기본값 유지).
+- 2026-10-05 03:10 **부록 XC-0(Algorithm P 고정, 가설·판정·해석 문장 불변)**
+  - 원천: 작업 A(Rescale QoeTd, elm, 2026-10-05 02:18–02:38 KST 실행, 묶음 sha256 0a9d84949497b89f, git 6cfe741). 재현 관문 5개 통과(XD 공통 키 17,037 · XI 10,890 · XB 2,935+14,312 · XJ 60 · XH 117+36, 불일치 0).
+  - 선택: `x_placement_policy.py --select-p --allow-local`(로컬, 알래스카 계열 저장소 10개만 읽음, 재표집 10,000회). 표 `data/processed/xbatch/XD_placement_policy/selection/algorithm_p_alaska_table.csv`(174행, sha256 8eabb67da8072d69), 선택 파일 `data/processed/xbatch/XD_placement_policy/selection/algorithm_p_selection.json`(sha256 09b9b184c4db86960575e8f9abbee3b157f1bdd24e1f2ae765aafd954de33103), 선택 함수 sha256 7b837ff5af195df6, 스크립트 sha256 b2ef7464df799ee3.
+  - 결과: **Algorithm P = S1**. 2.3절 고정 규칙에서 S2, S4, S8 계열 후보가 모두 제외되었다(각 후보가 알래스카 계열의 한 행 이상에서 한 가중이라도 손해. 예: S2 는 AL-3 모드 x 라벨 10개). 규칙 5에 따라 XC-5b·5c 와 S-XC3 은 '시험하지 않음'이다.
+  - 작업 구성 변경(등록 규칙 불변): 사용자 지시(2026-10-05 02시 '로컬 GPU 서버가 비어 있으면 Rescale 대신 로컬 사용')로 XC(R2a)와 이후 작업은 로컬 CPU(우리 작업 합계 32스레드 이하, nice 10)에서 돈다. 대비는 한 플랫폼 안에서 닫고, 재현 관문은 local_rescale 허용 오차를 쓴다(1절).
+  - 작업 A 는 계획 R0·R1a·R1b 의 내용(XE xh0·xt2 제외)을 한 노드에서 차례로 돌렸다. XE 1단계는 로컬에서 돈다. 원격 단위 시험 단계(선택)는 로컬 전용 파일이 없어 실패했고, 같은 시험 전부(321건)가 로컬에서 통과했다.
