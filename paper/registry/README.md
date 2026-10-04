@@ -97,3 +97,4 @@ git check-ignore -v <경로>          # 제외 여부
 
 - 2026-10-04: 초판. 47묶음을 64행(계획 X 10행 포함)으로 등록. 경로 점검에서 존재하지 않는 경로는 없었다. 이전 표의 와일드카드 경로(`e4_*.py`, `h31_*` 등, `h44_*.py`–`h46_*.py`)를 실제 파일 이름으로 펼쳤고, M1 의 `cv_scheme_comparison.csv` 를 만든 `scripts/3_deep_learning/m1_cv_scheme_comparison.py`, H25–H30 의 `h29_block_label_value.py`·`h29_resummary.py`, H18–H24 의 `h19_blockE.py`·공변량 확장 스크립트, S7 의 `scripts/1_data_prep/s7_parse_kpdc_council.py` 를 더했다.
 - 2026-10-05: X 묶음 봉인 표 열람 결과 반영(계획 `docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md` 8.2–8.9, 추가 등록 문서 결과 절). XB, XD, XE, XG, XH, XI, XJ 행의 실행 상태·판정 요약·근거 경로를 고쳤고, XK_support_scale·XL_map_products 행을 더했다(experiments.csv 66행, naming_map.csv 82행). 경로 점검에서 없는 경로는 없었다. XA 행은 이번에 고치지 않았다(판정 기록은 계획 8.1).
+- 2026-10-05 05:40: XC_workflow_end_to_end 행을 봉인 표 열람 결과로 고쳤다(계획 8.10. 실행 상태, 판정 요약, 근거 경로, 주장 C5·C6·C2·C1). 경로 점검에서 없는 경로는 없었다.

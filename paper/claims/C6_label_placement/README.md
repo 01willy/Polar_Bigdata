@@ -428,6 +428,9 @@ W 의 `exp=wf2, test_id=WF2-a`, `contrast` 에 'R1(0.25)' 를 포함하는 144�
 | XD-4: S9*(S9-DS) − Algorithm P(= S1), 알래스카 밖 시험 과제 5개(계획 8.9, 서술) | 판정어·p 없음 | 2개(계열 3개 가운데 0개)에서 오차가 작았고 2개(계열 2개)에서 컸다. 티베트 n 20 +21.72 [+16.47, +26.48] cm | 계획 8.9(`xd4_*` 봉인 표는 조정 담당 열람) | 알래스카 하위 지역에서 학습해 동결한 배치 정책의 결과는 시험 과제마다 방향이 달랐다(검정 없음) |
 | XD-6(서술) | 판정어 없음 | 레나 x 유효 블록 1.72, S8a − S1 n 10 +1.70 / +1.02; 캐나다 x 3.89, −0.81 / +0.52 | `data/processed/xbatch/XD_placement_policy/sealed/xd6_traits.csv` | 지역 특성과 배치 효과의 서술(상관은 계산하지 않음) |
 | 등록 밖 사후 서술: S8c − S1, PE1 | 4분 판정 우세, 2단 공통 CI 판정 미결정('분할 독립 가정 의존') | n 10 −1.01 [−1.69, −0.33] / −0.77 [−1.42, −0.16], n 40 −1.20 / −1.24 | `xd_alg_contrasts.csv` | 확인적으로 쓰지 않는다. S8c 는 알래스카 계열 규칙에서 제외되었다 |
+| XC-5b·XC-5c: A1 − A5(규칙 W 아래 배치 효과), n 40·160(계획 8.10) | 시험하지 않음(Algorithm P = S1, 규칙 5), Holm p 1 | | `data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_hyp.csv` | 알래스카 계열에서 고정한 배치 절차가 무작위였으므로 워크플로 안의 배치 효과는 시험되지 않았다 |
+| XC-F3·S-XC0·S-XC3(n 10 의 A1 − A2, A4 − A2) | 시험하지 않음(n 10 에서 A1 = A2) | 부록 XC-F3 은 XF 마감(2026-10-11 14:22 KST) 뒤 확정, 현재 적격 0곳 | 같음 | 외부 계열 확인 시험은 아직 없다 |
+| XC-r rA4(지역 내 Algorithm P + R1) | 시험하지 않음 | | `data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_xcr_contrasts.csv` | 지역 내 배치 효과도 시험되지 않았다 |
 
 ---
 

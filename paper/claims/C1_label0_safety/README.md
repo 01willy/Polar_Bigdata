@@ -345,6 +345,8 @@
 | XB-5: Stack0 − P0, n 0(보조, 계획 8.2) | 주 4지역 미결정, PE1 열세, PE2 우세(확인적으로 세지 않음) | 주 4지역 +0.51 [+0.09, +0.69] / +0.09 [−0.14, +0.31], PE1 +0.75 / +0.35, PE2 −1.32 / −1.64 | `data/processed/xbatch/XB_multisource_stacking/sealed/xb_tests.csv` | 라벨 0 적층(원천 지역 하나 제외 가중)의 P0 대비 이득은 풀에 따라 달랐다 |
 | XJ-1·XJ-2: 원천 쪽 지온 유도 보조 행, n 0·10(계획 8.5) | 시험하지 않음 | 약관 근거 미기록 | `data/processed/xbatch/XJ_tempderived_aux_labels/sealed/xj_hyp.csv` | 라벨 0 직접 ML 에 보조 행을 더한 효과는 시험하지 않았다 |
 | XJ-3: 티베트 P1_aux(w) − P1, n 3·10 | 우세 6행(Holm p ≤ 0.004) | w 1: n 3 −83.17 [−90.21, −73.41] / −66.86, n 10 −37.50 [−43.30, −28.88] / −20.57 | 같음, `xj_tests.csv` | 지온 유도 보조 라벨이 소수 라벨 계수 보정의 전이 오차를 줄였다. 정의가 달라(L39) 라벨 확충 근거로 일반화하지 않는다 |
+| XC S-XC10: A1(워크플로) − P0, 비열등 0.5 cm(계획 8.10) | n 10 우세·비열등, n 40·160 미결정·비열등 | n 10 −1.87 [−2.24, −1.33] / −1.58; n 40 −0.22 / −0.14; n 160 −0.06 / −0.20. 러시아 E 의 n 10 행 열세 +2.30 | `data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_contrasts_aux.csv` | 워크플로의 오차 증가는 원천 계수 Stefan 대비 0.5 cm 안이었다(보조, 확인적으로 세지 않음) |
+| XC S-XC4 (a): P0 보다 2 cm 넘게 나빠진 대상 수(A1 / A2 / A3, 독립 지역 7곳) | 사전 고정 보고 항목 | n 10 1 / 1 / 0(러시아 E), 전량 1(알래스카 x) / 2 / 1; 21대상 전량 1 / 4 / 3 | `data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_harm_a.csv` | 손해 대상 수 서술 |
 
 ---
 

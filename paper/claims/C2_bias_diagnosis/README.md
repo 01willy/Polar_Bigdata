@@ -281,6 +281,16 @@ X* 이름과 계획은 `docs/research/2026-10-04/harness_implementation_plan.md`
 | XG_product_comparison | 기존 ALT 제품과 같은 시험지 비교 | 직접 영향은 작다. 제품의 지역 편향을 같은 진단값으로 잴 수 있다(서술 후보) |
 | XD_placement_policy, XH_validation_ladder, XI_climate_extrapolation_retest | 관측 위치 정책, 검증 사다리, 기후 외삽 재시험 | 직접 영향 없음 |
 
+### 6.1 X 묶음 결과 근거(2026-10-05 열람)
+
+판정 정본은 `docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md` 8절이다. 수치는 cm 이고 셀 가중 / 블록 등가중, 대괄호는 95 % CI 다. Δ 는 음수면 앞 방법의 오차가 작다. 이 표는 근거 색인이며 1절의 주장 문장은 고치지 않았다(원고 작업에서 정한다).
+
+| 실험·가설 | 판정 | 수치 | 근거 표(원래 경로) | 이 주장과의 관계 |
+|---|---|---|---|---|
+| S-XC6: \|b10\| ≥ 8 cm 대상과 미만 대상의 RMSE(P0) − RMSE(A1@최대 n)(계획 8.10, 사후 임계값(WF4-c 관찰)) | 서술 | 중앙값 16대상 0.37 / 0.21, 5대상 −1.81 / −0.57(평균은 티베트 158 cm 가 지배) | `data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_diag.csv` | 진단값이 8 cm 이상인 대상에서 워크플로의 P0 대비 이득의 중앙값이 컸다(서술, 판정 아님) |
+| S-XC12: ρ(\|b10\|, (P1 − A1@전량)/P0), 계열 군집 CI | 수치만 | 셀 0.17 [−0.30, 0.86], 블록 −0.06 [−0.49, 0.65](21대상, 7계열) | `data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_s12.csv` | 두 가중 모두 CI 가 0 을 포함한다(판정어 없음) |
+| S-XC7: b10 의 추출 사이 표준편차 | 서술 | Algorithm P = S1 이라 A1 과 A2 가 같다 | `data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_diag.csv` | 배치에 따른 진단 안정성 차이는 시험되지 않았다 |
+
 ---
 
 ## 7. 파일
