@@ -1,0 +1,148 @@
+{
+ "slide": "S31",
+ "page": 31,
+ "title": "초록의 시험 결과 표기",
+ "subtitle": "9부 · 결정 사항 · 지역 내·워크플로 시험과 추가 실험 결과를 초록에 쓰는 방식",
+ "takeaway": "초록의 지역 내 시험 결과는 판정어 없이 수치만 표기(기본안)",
+ "archetype": "A7",
+ "kind": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+ "geometry_in": {
+  "x": 0.667,
+  "y": 1.35,
+  "w": 12.0,
+  "row_h": 1.0,
+  "col_w": [
+   2.4,
+   3.4,
+   2.9,
+   3.3
+  ]
+ },
+ "columns": [
+  "선택지",
+  "초록 표기",
+  "장점",
+  "단점"
+ ],
+ "rows": [
+  [
+   "제외",
+   "해당 문장 없음",
+   "등록 규칙 그대로",
+   "주제와 초록이 어긋남"
+  ],
+  [
+   "수치만(기본안)",
+   "수치와 조건, 판정어 없음",
+   "주제 반영, 규칙 유지",
+   "차이의 의미 판단이 어려움"
+  ],
+  [
+   "판정어 포함",
+   "'오차가 작았다' 표현",
+   "가장 읽기 쉬움",
+   "결과 열람 뒤 규칙 개정 필요"
+  ]
+ ],
+ "align": [
+  "l",
+  "l",
+  "l",
+  "l"
+ ],
+ "accent_cells": [
+  [
+   1,
+   0
+  ]
+ ],
+ "support_line": {
+  "lead": "예문(수치만)",
+  "text": "Within Alaska, residual ML reached 13.9 against 14.4 cm RMSE for recalibrated Stefan (1000 labels)."
+ },
+ "changes_from_spec": [],
+ "style": {
+  "header_h": 0.5,
+  "top_lw": 1.25,
+  "top_c": "4A4A4A",
+  "mid_lw": 0.75,
+  "mid_c": "DDDDDD",
+  "head_pt": 18,
+  "cell_pt": 18,
+  "head_font": "Pretendard SemiBold",
+  "cell_font": "Pretendard Medium",
+  "head_color": "4A4A4A",
+  "cell_color": "111111",
+  "accent": "EA851B",
+  "col_gap": 0.18,
+  "line_h": 0.3,
+  "safety": 0.95
+ },
+ "data_sources": [
+  "docs/QA_FOLLOWUP_2026-10-04.md 5절(5.1–5.5)",
+  "design/journal_grade_style_guide.md 4.2",
+  "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 7.1",
+  "docs/EXPERIMENT_PLAN_WRAPUP_2026-09-30.md 1.1"
+ ],
+ "wrapped_header": [
+  [
+   "선택지"
+  ],
+  [
+   "초록 표기"
+  ],
+  [
+   "장점"
+  ],
+  [
+   "단점"
+  ]
+ ],
+ "wrapped_rows": [
+  [
+   [
+    "제외"
+   ],
+   [
+    "해당 문장 없음"
+   ],
+   [
+    "등록 규칙 그대로"
+   ],
+   [
+    "주제와 초록이 어긋남"
+   ]
+  ],
+  [
+   [
+    "수치만(기본안)"
+   ],
+   [
+    "수치와 조건, 판정어 없음"
+   ],
+   [
+    "주제 반영, 규칙 유지"
+   ],
+   [
+    "차이의 의미 판단이 어려움"
+   ]
+  ],
+  [
+   [
+    "판정어 포함"
+   ],
+   [
+    "'오차가 작았다' 표현"
+   ],
+   [
+    "가장 읽기 쉬움"
+   ],
+   [
+    "결과 열람 뒤 규칙 개정 필요"
+   ]
+  ]
+ ],
+ "height_in": 3.5,
+ "max_lines_per_cell": 3,
+ "issues": []
+}

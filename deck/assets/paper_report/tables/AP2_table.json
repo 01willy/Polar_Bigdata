@@ -1,0 +1,130 @@
+{
+ "slide": "AP2",
+ "page": "부록 2",
+ "title": "판정 단어와 표지",
+ "subtitle": "부록 · 4분 판정 · 두 가중 95% 신뢰구간 · 블록 재표집",
+ "takeaway": "두 가중 CI가 같은 쪽일 때만 오차 감소와 오차 증가로 표기",
+ "archetype": "A7",
+ "kind": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+ "geometry_in": {
+  "x": 0.667,
+  "y": 1.35,
+  "w": 12.0,
+  "row_h": 0.75,
+  "col_w": [
+   2.8,
+   9.2
+  ]
+ },
+ "columns": [
+  "표기",
+  "조건"
+ ],
+ "rows": [
+  [
+   "오차 감소",
+   "셀 가중과 블록 등가중 95% 신뢰구간이 모두 0 아래"
+  ],
+  [
+   "오차 증가",
+   "두 신뢰구간이 모두 0 위"
+  ],
+  [
+   "동등",
+   "두 신뢰구간이 모두 ±0.5 cm 안"
+  ],
+  [
+   "미결정",
+   "그 밖의 경우, 차이를 확인하지 못함"
+  ],
+  [
+   "사후 서술",
+   "결과를 본 뒤 계산한 값, 판정 단어 없음"
+  ]
+ ],
+ "align": [
+  "l",
+  "l"
+ ],
+ "accent_cells": [],
+ "support_line": {
+  "lead": "분할 독립 가정 의존",
+  "text": "지역 블록 공통 재표집 신뢰구간에서 판정이 달라지는 대비"
+ },
+ "changes_from_spec": [],
+ "style": {
+  "header_h": 0.5,
+  "top_lw": 1.25,
+  "top_c": "4A4A4A",
+  "mid_lw": 0.75,
+  "mid_c": "DDDDDD",
+  "head_pt": 18,
+  "cell_pt": 18,
+  "head_font": "Pretendard SemiBold",
+  "cell_font": "Pretendard Medium",
+  "head_color": "4A4A4A",
+  "cell_color": "111111",
+  "accent": "EA851B",
+  "col_gap": 0.18,
+  "line_h": 0.3,
+  "safety": 0.95
+ },
+ "data_sources": [
+  "docs/QA_FINAL_REVIEW_2026-10-02.md 머리말",
+  "paper/claims/C1_label0_safety/README.md 수치 규칙",
+  "design/journal_grade_style_guide.md 4.5"
+ ],
+ "wrapped_header": [
+  [
+   "표기"
+  ],
+  [
+   "조건"
+  ]
+ ],
+ "wrapped_rows": [
+  [
+   [
+    "오차 감소"
+   ],
+   [
+    "셀 가중과 블록 등가중 95% 신뢰구간이 모두 0 아래"
+   ]
+  ],
+  [
+   [
+    "오차 증가"
+   ],
+   [
+    "두 신뢰구간이 모두 0 위"
+   ]
+  ],
+  [
+   [
+    "동등"
+   ],
+   [
+    "두 신뢰구간이 모두 ±0.5 cm 안"
+   ]
+  ],
+  [
+   [
+    "미결정"
+   ],
+   [
+    "그 밖의 경우, 차이를 확인하지 못함"
+   ]
+  ],
+  [
+   [
+    "사후 서술"
+   ],
+   [
+    "결과를 본 뒤 계산한 값, 판정 단어 없음"
+   ]
+  ]
+ ],
+ "height_in": 4.25,
+ "max_lines_per_cell": 2,
+ "issues": []
+}

@@ -1,0 +1,126 @@
+{
+ "slide": "AP10",
+ "page": "부록 10",
+ "title": "기타 결정 사항",
+ "subtitle": "부록 · 원고 작성 중 결정 · 기본값",
+ "takeaway": "참고문헌, 지역 표기, 구간 이름, 전망 계산, KPDC 자료의 결정 필요",
+ "archetype": "A7",
+ "kind": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+ "geometry_in": {
+  "x": 0.667,
+  "y": 1.35,
+  "w": 12.0,
+  "row_h": 0.8,
+  "col_w": [
+   4.6,
+   7.4
+  ]
+ },
+ "columns": [
+  "결정",
+  "기본값"
+ ],
+ "rows": [
+  [
+   "참고문헌 71–72편(권고 60편)",
+   "그대로 두고 새 지역 자료 인용의 보충 이동 검토"
+  ],
+  [
+   "지역 영문 표기, 레나델타 범위",
+   "확인 전 현재 표기"
+  ],
+  [
+   "워크플로 구간 이름",
+   "시험한 라벨 수(0, 3–10, 40–160, 320–1000, 전량)"
+  ],
+  [
+   "전망 쪽 면적 계산",
+   "계산 전에는 관측 지도와 리드 줄로 대신"
+  ],
+  [
+   "KPDC 지온 자료의 보충 수록",
+   "결정 전 보류"
+  ]
+ ],
+ "align": [
+  "l",
+  "l"
+ ],
+ "accent_cells": [],
+ "support_line": null,
+ "changes_from_spec": [],
+ "style": {
+  "header_h": 0.5,
+  "top_lw": 1.25,
+  "top_c": "4A4A4A",
+  "mid_lw": 0.75,
+  "mid_c": "DDDDDD",
+  "head_pt": 18,
+  "cell_pt": 18,
+  "head_font": "Pretendard SemiBold",
+  "cell_font": "Pretendard Medium",
+  "head_color": "4A4A4A",
+  "cell_color": "111111",
+  "accent": "EA851B",
+  "col_gap": 0.18,
+  "line_h": 0.3,
+  "safety": 0.95
+ },
+ "data_sources": [
+  "docs/research/2026-10-04/scirep_format_and_drafts.md 6절",
+  "design/journal_grade_style_guide.md 8절 7, 13, 14, 15"
+ ],
+ "wrapped_header": [
+  [
+   "결정"
+  ],
+  [
+   "기본값"
+  ]
+ ],
+ "wrapped_rows": [
+  [
+   [
+    "참고문헌 71–72편(권고 60편)"
+   ],
+   [
+    "그대로 두고 새 지역 자료 인용의 보충 이동 검토"
+   ]
+  ],
+  [
+   [
+    "지역 영문 표기, 레나델타 범위"
+   ],
+   [
+    "확인 전 현재 표기"
+   ]
+  ],
+  [
+   [
+    "워크플로 구간 이름"
+   ],
+   [
+    "시험한 라벨 수(0, 3–10, 40–160, 320–1000, 전량)"
+   ]
+  ],
+  [
+   [
+    "전망 쪽 면적 계산"
+   ],
+   [
+    "계산 전에는 관측 지도와 리드 줄로 대신"
+   ]
+  ],
+  [
+   [
+    "KPDC 지온 자료의 보충 수록"
+   ],
+   [
+    "결정 전 보류"
+   ]
+  ]
+ ],
+ "height_in": 4.5,
+ "max_lines_per_cell": 2,
+ "issues": []
+}

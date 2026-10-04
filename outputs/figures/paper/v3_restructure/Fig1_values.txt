@@ -1,0 +1,118 @@
+Fig 1 v3 값 점검(자동 생성, fig1.py). 그림 값은 Fig1_source_data.csv, 원천은 각 줄의 표.
+생성 시각 2026-10-04 21:36:05, 자원 확인 {'avail_gb': 43.6, 'load1': 13.08}
+값 점검 실패 0건
+
+## a 지도
+[OK] Lena 블록 원 값의 합(fig1_blocks v3 n_loc_1km) 대 table1 loc_1km + 블록 경계에 걸친 1 km 셀 4개: 그림 205 / 원천 205
+[OK] Canada 블록 원 값의 합(fig1_blocks v3 n_loc_1km) 대 table1 loc_1km + 블록 경계에 걸친 1 km 셀 1개: 그림 87 / 원천 87
+[OK] Russia_W 블록 원 값의 합(fig1_blocks v3 n_loc_1km) 대 table1 loc_1km + 블록 경계에 걸친 1 km 셀 0개: 그림 29 / 원천 29
+[OK] Russia_E 블록 원 값의 합(fig1_blocks v3 n_loc_1km) 대 table1 loc_1km + 블록 경계에 걸친 1 km 셀 0개: 그림 30 / 원천 30
+[OK] Russia_C 블록 원 값의 합(fig1_blocks v3 n_loc_1km) 대 table1 loc_1km + 블록 경계에 걸친 1 km 셀 0개: 그림 7 / 원천 7
+[OK] Greenland 블록 원 값의 합(fig1_blocks v3 n_loc_1km) 대 table1 loc_1km + 블록 경계에 걸친 1 km 셀 0개: 그림 2 / 원천 2
+[OK] Alaska 블록 원 값의 합(fig1_blocks v3 n_loc_1km) 대 table1 loc_1km + 블록 경계에 걸친 1 km 셀 3개: 그림 346 / 원천 346
+[정보] 블록 경계에 걸친 1 km 셀(블록 합 − 지역 수): {'Lena': 4, 'Canada': 1, 'Russia_W': 0, 'Russia_E': 0, 'Russia_C': 0, 'Greenland': 0, 'Alaska': 3}. 원 면적은 블록 안 위치 수를 따른다(설명문과 같음)
+[OK] Lena v3 블록 수(fig1_blocks) 대 table1 blocks: 그림 20 / 원천 20
+[OK] Canada v3 블록 수(fig1_blocks) 대 table1 blocks: 그림 39 / 원천 39
+[OK] Russia_W v3 블록 수(fig1_blocks) 대 table1 blocks: 그림 21 / 원천 21
+[OK] Russia_E v3 블록 수(fig1_blocks) 대 table1 blocks: 그림 21 / 원천 21
+[OK] Alaska v3 블록 수(fig1_blocks) 대 table1 blocks: 그림 74 / 원천 74
+[OK] 새 지역 Russia_C_LGD 1 km 위치(LGD 51 + v3 6, 흰 원 51 + 검정 원 v3 Russia_C 블록) 대 table1 loc_1km 57: 그림 57 / 원천 57
+[OK] Tibet_LGD 1 km 위치 합(흰 원) 대 table1 loc_1km: 그림 132 / 원천 132
+[OK] Tibet_LGD 블록 수 대 table1 blocks: 그림 34 / 원천 34
+[OK] 그리지 않은 North Atlantic 블록(natl_si) 1 km 위치 합 대 fig1_meta n_natl_si: 그림 19 / 원천 19
+[정보] 약관 미확인으로 그리지 않은 셀(fig1_not_drawn): Canada 38, NAtlantic 19, Russia_W 1 (설명문과 같음)
+[정보] a 에 그린 블록 234개 + 삽도 35개 = 269, fig1_blocks 전체 276 − natl_si 7
+[OK] a·삽도 블록 수 합: 그림 269 / 원천 269
+[정보] 1 km 위치 수 최댓값 75, 중앙값 1, 99 백분위 31.5 → 크기 열쇠 1, 10, 50(명세 값 유지). 원 면적 = 5.0 pt² × 위치 수 [판단]
+[정보] 지도 축척: 지름 84.0 mm 가 위도 50.0° N 원, 1 mm = 107.4 km(70° N 기준)
+[정보] 투영: 북극 평사, 진척 위도 70° N, 중심 경도 126.698° (레나델타 중앙 경도) [판단]. 명세 3.3 의 −45°(EPSG:3413 형식)에서는 레나델타 사각형이 지도 위끝에 놓여 c 로 가는 연결선(지침 2.11)이 극·캐나다·그린란드를 가로질렀다. 이 선택으로 사각형이 지도 아래끝에 오고 연결선이 c 의 위 모서리로 곧게 내려간다. Fig 6a·b(−45°)와 방향이 다르다(사용자 확인 필요)
+[OK] a 축척 막대 1000 km 의 측지 길이(구면 근사, 70° N): 그림 996 / 원천 1000
+[OK] 삽도 축척 막대 500 km 의 측지 길이: 그림 499 / 원천 500
+[OK] 삽도 축척 막대·길이 글자와 겹치는 블록 원 수: 그림 0 / 원천 0
+[OK] 삽도 틀 밖으로 잘린 티베트 블록 원 수: 그림 0 / 원천 0
+[OK] 삽도 틀(이름 줄 포함)이 가리는 본 지도 블록 원 수: 그림 0 / 원천 0
+[정보] 삽도 축척 1 mm = 97.3 km(Lambert 방위 등적, 중심 부근); 본 지도 1 mm = 107.4 km
+[정보] 영구동토 바탕: ESA CCI Permafrost PFR v4.0, mean of 1997-2021 (25 annual files), aggregated to 0.1 deg; 내장 래스터 a {'nx': 1563, 'ny': 1563, 'ppi': 473.0}, 삽도 {'nx': 438, 'ny': 270, 'ppi': 473.0}
+[정보] 열쇠 2줄(지도 아래 오른쪽): 줄 1 끝 41.2 mm, 줄 2 끝 36.9 mm, 칸 폭 43.5 mm
+
+## b Stefan 계수 분포
+[OK] Lena 셀 수(fig1_z_summary n_cells) 대 table1 label_rows: 그림 3037 / 원천 3037
+[OK] Lena 원천 계수 E0 (fig1_z_summary) 대 table1 E0_x: 그림 1.6193 / 원천 1.6193
+[OK] Lena 원천 계수 E0 대 fig1_source E0: 그림 1.6193 / 원천 1.6193
+    Lena: 표시 점 400, 중앙값 1.28, 사분위 1.04–1.64, 표시 점 범위 0.066–5.99
+[OK] Canada 셀 수(fig1_z_summary n_cells) 대 table1 label_rows: 그림 750 / 원천 750
+[OK] Canada 원천 계수 E0 (fig1_z_summary) 대 table1 E0_x: 그림 1.5919 / 원천 1.5919
+[OK] Canada 원천 계수 E0 대 fig1_source E0: 그림 1.5919 / 원천 1.5919
+    Canada: 표시 점 400, 중앙값 1.39, 사분위 1.08–1.91, 표시 점 범위 0.022–3.93
+[OK] Russia_W 셀 수(fig1_z_summary n_cells) 대 table1 label_rows: 그림 31 / 원천 31
+[OK] Russia_W 원천 계수 E0 (fig1_z_summary) 대 table1 E0_x: 그림 1.5895 / 원천 1.5895
+[OK] Russia_W 원천 계수 E0 대 fig1_source E0: 그림 1.5895 / 원천 1.5895
+    Russia_W: 표시 점 31, 중앙값 2.55, 사분위 2.14–3.05, 표시 점 범위 1.071–4.36
+[OK] Russia_E 셀 수(fig1_z_summary n_cells) 대 table1 label_rows: 그림 30 / 원천 30
+[OK] Russia_E 원천 계수 E0 (fig1_z_summary) 대 table1 E0_x: 그림 1.5912 / 원천 1.5912
+[OK] Russia_E 원천 계수 E0 대 fig1_source E0: 그림 1.5912 / 원천 1.5912
+    Russia_E: 표시 점 30, 중앙값 1.60, 사분위 1.36–1.82, 표시 점 범위 1.141–4.35
+[OK] Alaska 셀 수(fig1_z_summary n_cells) 대 table1 label_rows: 그림 13606 / 원천 13606
+[OK] Alaska 원천 계수 E0 (fig1_z_summary) 대 table1 E0_x: 그림 1.5046 / 원천 1.5046
+[OK] Alaska 원천 계수 E0 대 fig1_source E0: 그림 1.5046 / 원천 1.5046
+    Alaska: 표시 점 400, 중앙값 1.62, 사분위 1.38–1.97, 표시 점 범위 0.279–4.61
+[OK] Russia_C_LGD 셀 수(fig1_z_summary n_cells) 대 table1 label_rows: 그림 57 / 원천 57
+[OK] Russia_C_LGD 원천 계수 E0 (fig1_z_summary) 대 table1 E0_x: 그림 1.5913 / 원천 1.5913
+    Russia_C_LGD: 표시 점 57, 중앙값 1.73, 사분위 1.48–2.29, 표시 점 범위 0.780–4.43
+[OK] Tibet_LGD 셀 수(fig1_z_summary n_cells) 대 table1 label_rows: 그림 132 / 원천 132
+[OK] Tibet_LGD 원천 계수 E0 (fig1_z_summary) 대 table1 E0_x: 그림 1.5914 / 원천 1.5914
+    Tibet_LGD: 표시 점 132, 중앙값 11.84, 사분위 8.08–15.04, 표시 점 범위 2.832–25.51
+[OK] b 축 범위 밖 점 수(삼각 표지 대상): 그림 0 / 원천 0
+[정보] b 행: Table 1 의 7행(주 4지역, Alaska, 새 지역 2)만 그린다. v3 의 Russia_C(7셀)와 Greenland(3셀)는 Table 1 처럼 Supplementary Table S1 로 옮긴다 [판단, 명세 10.3]
+[정보] b 눈금 (0.1, 0.3, 1, 3, 10, 30), 범위 (0.018, 36.0): 명세의 1, 2, 5, 10, 20 은 표시 점 최솟값(캐나다 0.022)을 담지 못해 바꿨다 [판단]
+
+## c·d 레나델타 설계 확대도
+[OK] 대상 셀 수(load_base macro == Lena) 대 table1 label_rows: 그림 3037 / 원천 3037
+[OK] 대상 0.5° 블록 수 대 table1 blocks: 그림 20 / 원천 20
+[OK] 분할 1 A 셀 수 대 lg_targets n_A: 그림 1505 / 원천 1505
+[OK] 분할 1 A 블록 수 대 lg_targets nb_A: 그림 9 / 원천 9
+[OK] 분할 1 채점 셀 수 대 lg_targets n_eval: 그림 1478 / 원천 1478
+[OK] 분할 1 채점 블록 수 대 lg_targets nb_eval: 그림 11 / 원천 11
+[정보] 분할 1 B 블록 11개 가운데 채점 셀이 없는 블록 0개
+[OK] 라벨 셀 수: 그림 40 / 원천 40
+[OK] 라벨 셀이 모두 라벨 블록 안: 그림 True / 원천 True
+[정보] 라벨 추출 seed = seed_of('Lena', 'x', 1, 40, 0) = 1806365431; 라벨 셀이 든 블록 3개
+[OK] 원천 셀 가운데 대상 100 km 안(버퍼 제외) 수 대 fig1_source n_buffer_excluded: 그림 1 / 원천 1
+[정보] 그 셀: CALM_Russia_C. c·d 범위 안 원천 셀 1개 (CALM_Russia_C@71.583,128.783(d=3.8 km)). 버퍼 안이라 원천에서 빠졌고 c 에는 그리지 않았다 [판단]
+[정보] 확대 투영: 북극 평사(중심 경도 126.698°, 진척 위도 70° N), 범위 450.0 km 정사각형
+[OK] d 블록 경도 폭(mm, 지침 2.11 의 1.0 mm 이상): 그림 1.67 / 원천 >= 1.0
+[OK] d 지시선 'Label blocks' 위반(다른 종류 블록 가로지름·라벨 셀 점 근접) 0: 그림 0 / 원천 0
+[정보] d 지시선 'Label blocks': 길이 11.6 mm, 글자 자리 시도 4회
+[OK] d 지시선 'Scoring blocks' 위반(다른 종류 블록 가로지름·라벨 셀 점 근접) 0: 그림 0 / 원천 0
+[정보] d 지시선 'Scoring blocks': 길이 9.2 mm, 글자 자리 시도 1회
+[OK] c 축척 막대 100 km 의 측지 길이: 그림 99.6 / 원천 100
+
+## e 검증 사다리
+[정보] XH 결과 없음(data/processed/xbatch/XH_validation_ladder/ 에 smoke 만 있다). 빈 축과 축 이름만 그렸다(명세 12절). 미리보기 자료(cv_scheme_comparison.csv)는 쓰지 않았다
+
+## 설명문(Fig1_legend.md, 손으로 작성)
+[OK] 설명문 350단어 이하(자리표시 포함): 그림 337 / 원천 <= 350
+[정보] 설명문 단어 수: 자리표시 포함 337, 제외 322; 자리표시 1개(등록 문서 형식, 원고 조립 때 XH 수치 문장으로 치환)
+[OK] 설명문 문장 점검(연결어 대시·금지어·가운뎃점 숫자·네 자리 쉼표·내부 약호, 자리표시 제외): 그림 0건 / 원천 0건
+[OK] 설명문 첫 문장이 'This figure' 로 시작하지 않음(명사구 제목): 그림 Study regions, Stefan coefficients and evaluation design / 원천 명사구
+[OK] 설명문 지도 기재 사항 'central meridian': 그림 True / 원천 True
+[OK] 설명문 지도 기재 사항 'true at 70': 그림 True / 원천 True
+[OK] 설명문 지도 기재 사항 'Natural Earth': 그림 True / 원천 True
+[OK] 설명문 지도 기재 사항 'Cartopy': 그림 True / 원천 True
+[OK] 설명문 지도 기재 사항 'ESA CCI': 그림 True / 원천 True
+
+## 점검 함수(지침 부록 A)
+audit_v3: fails = [], 글자 크기 [7.0], 문자 수 339, 얇은 선 [], 제목 [], 글씨 상자 0, 내부 코드 [], 네 자리 쉼표 [], 긴 라벨 [], 그림 안 수치 []
+  (위도 라벨 3개는 gid 'graticule' 로 그림 안 수치 검사에서 뺐다. 명세 3.3 a 가 위도 라벨 3개를 허용한다)
+[OK] digest 5.3 audit_fig: 글씨 상자·곡선 화살표·사선 화살표 0(지시선은 Line2D): 그림 (0, 0, 0) / 원천 (0, 0, 0)
+  audit_fig 긴 라벨(3단어 초과, 사람 판정): ['Stefan coefficient, $E$ (cm per √(°C d))', 'Distance to nearest training cell (km)']; 제목 0
+[OK] 글자끼리 겹침 쌍(style.text_overlaps): 그림 0 / 원천 0
+[OK] 캔버스 밖 글자: 그림 0 / 원천 0
+pdf_audit: {'width_mm': 170.0, 'height_mm': 155.0, 'chars': 337, 'sizes': {7.0: 337}, 'off_size': {}, 'lt5': 0, 'families': ['LiberationSans'], 'type3': False}
+pdffonts:
+  name                                 type              encoding         emb sub uni object ID
+  ------------------------------------ ----------------- ---------------- --- --- --- ---------
+  BGZIHO+LiberationSans-Bold           CID TrueType      Identity-H       yes yes yes     26  0
+  BGZIHO+LiberationSans                CID TrueType      Identity-H       yes yes yes     33  0
+  HEMWJP+LiberationSans-Italic         CID TrueType      Identity-H       yes yes yes     40  0
+산출: outputs/figures/paper/v3_restructure/Fig1.pdf, outputs/figures/paper/v3_restructure/Fig1.png, outputs/figures/paper/v3_restructure/Fig1_source_data.csv

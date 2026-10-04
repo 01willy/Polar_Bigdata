@@ -1,0 +1,173 @@
+덱 전용 차트 수치 대조 2026-10-04 21:26  일치 47  불일치 0
+스펙 deck/deck_spec_paper_report.json 의 numbers 와 원천 CSV(다시 열어 계산)의 대조. 허용 오차 0.005(반올림 두 자리)
+
+[OK] S03 등록부 행 수(스펙 '47 묶음(등록부 64행)')
+    spec: [64]
+    csv : 64.0000
+    from: paper/registry/experiments.csv 행 수
+[OK] S03 H0 25행: done 21, superseded 3, discarded 1
+    spec: [25, 21, 3, 1]
+    csv : 25.0000, 21.0000, 3.0000, 1.0000
+    from: experiments.csv phase, status 첫 낱말
+[OK] S03 T 8행 done, W 12행(done 11, not run 1), X 10행 planned
+    spec: [8, 8, 12, 11, 1, 10, 10]
+    csv : 8.0000, 8.0000, 12.0000, 11.0000, 1.0000, 10.0000, 10.0000
+    from: experiments.csv
+[OK] S03 paper_use main 행 17
+    spec: [17]
+    csv : 17.0000
+    from: experiments.csv paper_use
+[OK] S06 17,423 / 17,572 / 17,572 / 18,088
+    spec: [17423, 17572, 17572, 18088]
+    csv : 17423.0000, 17572.0000, 17572.0000, 18088.0000
+    from: fidelity_base_v{2,3,4}_meta.json
+[OK] S06 17,467 본 실험 직접 라벨 셀
+    spec: [17467]
+    csv : 17467.0000
+    from: paper_figs/fig1_meta.csv n_v3_cells
+[OK] S06 약관 미확인 셀 38, 19, 1(캐나다, 북대서양, 러시아 서부)
+    spec: [38, 19, 1]
+    csv : 38.0000, 19.0000, 1.0000
+    from: paper_figs/fig1_not_drawn.csv
+[OK] S08 직접 ML RMSE 22.91, 24.28, 25.61, 27.17, 30.31, 30.97, 31.13, 33.25
+    spec: 22.91, 24.28, 25.61, 27.17, 30.31, 30.97, 31.13, 33.25
+    csv : 22.9083, 24.2799, 25.6139, 27.1691, 30.3092, 30.9655, 31.1328, 33.2509
+    from: lgv_tests.csv L20 rmse_A MEAN5
+[OK] S08 지역 홀드아웃 − 셀 무작위 +10.34 [7.29, 12.84], 블록 등가중 +6.15 [4.70, 7.57]
+    spec: 10.34, 7.29, 12.84, 6.15, 4.70, 7.57
+    csv : 10.3426, 7.2945, 12.8436, 6.1477, 4.7033, 7.5653
+    from: lgv_tests.csv L19 MEAN5
+[OK] S08 500 km 군집 − 셀 무작위 +8.22 [5.65, 10.38]
+    spec: 8.22, 5.65, 10.38
+    csv : 8.2245, 5.6471, 10.3768
+    from: lgv_tests.csv L20 MEAN5
+[OK] S08 Stefan 최소제곱 26.81–26.96
+    spec: 26.81, 26.96
+    csv : 26.8086, 26.9552
+    from: lgv_metrics.csv PS MEAN5
+[OK] S09 레나델타 원천 계수 E0 1.62
+    spec: 1.62
+    csv : 1.6193
+    from: paper_figs/fig1_source.csv target Lena
+[OK] S20 대회 14.46 → 13.33 cm (7.80%)
+    spec: 14.46, 13.33, 7.80
+    csv : 14.4570, 13.3300, 7.7955
+    from: s4_residual_results.csv
+[OK] S20 대회 줄일 수 있는 오차 제곱 81.13 → 49.82 cm², 38.60%
+    spec: 81.13, 49.82, 38.60
+    csv : 81.1317, 49.8158, 38.5989
+    from: 파생(rmse² − 11.31²)
+[OK] S20 이번 79.71 → 64.42 cm², 19.17% (재보정 Stefan 14.41 → 13.87, 3.75%)
+    spec: 79.71, 64.42, 19.17, 14.41, 13.87, 3.75
+    csv : 79.7061, 64.4247, 19.1722, 14.4076, 13.8672, 3.7512
+    from: wf2b_curve.csv, lgx_floor.csv
+[OK] S20 오차 하한 11.31
+    spec: 11.31
+    csv : 11.3081
+    from: lgx_floor.csv Alaska eval
+[OK] S24 5지역 풀 직접 ML 유의 개선 지역 0/5
+    spec: [0, 5]
+    csv : 0.0000, 5.0000
+    from: lgd_tests_lic.csv L1e verdict PE1
+[OK] S24 5지역 전량 −3.19 [−4.19, −2.22], 블록 −2.62 [−3.71, −1.53]
+    spec: -3.19, -4.19, -2.22, -2.62, -3.71, -1.53
+    csv : -3.1921, -4.1901, -2.2165, -2.6225, -3.7118, -1.5312
+    from: lgd_tests_lic.csv L8e PE1 MEAN n -1
+[OK] S24 5지역 라벨 10 −0.13
+    spec: -0.13
+    csv : -0.1308
+    from: lgd_tests_lic.csv L4e compare_pool PE1 n 10
+[OK] S24 러시아 중부 전량 −5.42 [−8.96, −1.64], 블록 −2.55 [−6.83, 1.48]
+    spec: -5.42, -8.96, -1.64, -2.55, -6.83, 1.48
+    csv : -5.4173, -8.9650, -1.6351, -2.5469, -6.8311, 1.4832
+    from: lgd_tests_lic.csv L38 (b) Russia_C|x
+[OK] S24 티베트 원천 계수 Stefan RMSE 244.51
+    spec: 244.51
+    csv : 244.5110
+    from: lgd_tests_lic.csv L8e Tibet_LGD|x rmse_B
+[OK] S25 계층 conformal 0.86 [0.80, 0.92], 러시아 서부 0.75
+    spec: 0.86, 0.80, 0.92, 0.75
+    csv : 0.8628, 0.8021, 0.9172, 0.7500
+    from: h4__c2_coverage.csv
+[OK] S25 알래스카 보정 CQR 포함률 0.32–0.73
+    spec: 0.32, 0.73
+    csv : 0.3214, 0.7284
+    from: m1__transfer_uq_summary.csv cqr_ak
+[OK] S25 생성 분위 구간 0.76, 0.65
+    spec: 0.76, 0.65
+    csv : 0.7568, 0.6529
+    from: lgu__lgu_b_tests.csv LGU-B1
+[OK] S25 알래스카 지역 내 CQR 0.45 → 0.93, 구간 점수 68.85 대 65.39(그림 밖, 노트)
+    spec: 0.45, 0.93, 68.85, 65.39
+    csv : 0.4456, 0.9344, 68.8521, 65.3896
+    from: e4_interval_score.csv
+[OK] S26 3–10 구간 +0.18, +0.78
+    spec: 0.18, 0.78
+    csv : 0.1768, 0.7814
+    from: pool_fixed_curve.csv E2_LenaCanada_all_n R1 0.25 MEAN
+[OK] S26 교차검증 선정 +0.55, +0.18, 0.00(레나델타 +0.20, +0.02, −0.32, 캐나다 +0.90, +0.35, +0.32)
+    spec: 0.55, 0.18, 0.00, 0.20, 0.02, -0.32, 0.90, 0.35, 0.32
+    csv : 0.5539, 0.1849, -0.0009, 0.2041, 0.0235, -0.3215, 0.9037, 0.3463, 0.3196
+    from: wf_curve.csv wf4 W x d_p0
+[OK] S26 대안 (c) 혼합 풀 −0.99, −2.63
+    spec: -0.99, -2.63
+    csv : -0.9857, -2.6323
+    from: pool_fixed_curve.csv E1_P4_n_le_10 R1 0.25 MEAN
+[OK] S29 현재 초안 단어 수 797
+    from: scirep_format_and_drafts.md 3.2 표 검색
+[OK] S29 현재 초안 단어 수 7500
+    from: scirep_format_and_drafts.md 3.2 표 검색
+[OK] S29 현재 초안 단어 수 2012
+    from: scirep_format_and_drafts.md 3.2 표 검색
+[OK] S29 현재 초안 단어 수 6998
+    from: scirep_format_and_drafts.md 3.2 표 검색
+[OK] S29 목표 단어 수 700
+    from: MANUSCRIPT_SPEC.md·scirep_format_and_drafts.md 본문 검색
+[OK] S29 목표 단어 수 2800
+    from: MANUSCRIPT_SPEC.md·scirep_format_and_drafts.md 본문 검색
+[OK] S29 목표 단어 수 850
+    from: MANUSCRIPT_SPEC.md·scirep_format_and_drafts.md 본문 검색
+[OK] S29 목표 단어 수 4240
+    from: MANUSCRIPT_SPEC.md·scirep_format_and_drafts.md 본문 검색
+[OK] S32 추가 실험 10묶음, 본문 4, 보충 6
+    spec: [10, 4, 6]
+    csv : 10.0000, 4.0000, 6.0000
+    from: source_data/S32_registered_order.csv(문서 0.1·6절 옮김)
+[OK] AP3 연도 정합 − 원천 −1.00 [−1.35, −0.32], 블록 −0.41
+    spec: -1.00, -1.35, -0.32, -0.41
+    csv : -0.9968, -1.3456, -0.3200, -0.4085
+    from: lgx_tests.csv L29 MEAN
+[OK] AP3 앙상블 −2.73 [−3.33, −0.91], 블록 +0.05
+    spec: -2.73, -3.33, -0.91, 0.05
+    csv : -2.7309, -3.3267, -0.9147, 0.0536
+    from: lgw_bundle.csv AB2 MEAN
+[OK] AP3 직접 ML − 연도 정합 +3.24 [1.86, 4.29]
+    spec: 3.24, 1.86, 4.29
+    csv : 3.2428, 1.8562, 4.2888
+    from: lgx_tests.csv L28 MEAN
+[OK] AP5 직접 CatBoost 11.55 → 17.91
+    spec: 11.55, 17.91
+    csv : 11.5523, 17.9113
+    from: cv_scheme_comparison.csv seed 평균
+[OK] AP5 Stefan 14.24–14.46
+    spec: 14.24, 14.46
+    csv : 14.2403, 14.4570
+    from: cv_scheme_comparison.csv
+[OK] AP5 물리 잔차 결합 12.77–13.70
+    spec: 12.77, 13.70
+    csv : 12.7680, 13.6980
+    from: cv_scheme_comparison.csv
+[OK] AP5 선형 ML 12.65–14.11
+    spec: 12.65, 14.11
+    csv : 12.6523, 14.1060
+    from: cv_scheme_comparison.csv
+[OK] AP8 두 CI 일치 오차 증가 +2.96(MLP 10), +1.33, +2.56, +1.67(다중 헤드 0, 10, 전량)
+    spec: 2.96, 1.33, 2.56, 1.67
+    csv : 2.9605, 1.3271, 2.5582, 1.6705
+    from: lgfn_tests.csv LGF-N2 MEAN aux
+[OK] AP8 축소 FT-Transformer 전량 잔차 −0.19(λ 0.25), −0.76(λ 1.0)
+    spec: -0.19, -0.76
+    csv : -0.1945, -0.7650
+    from: lgfn_tests.csv LGF-N2 MEAN aux
+[OK] AP8 14/20(조정이 설정을 바꾼 점 가운데 대상 오차가 커진 점)
+    from: lgfn_tests.csv LGF-N4 행 문자열 검색

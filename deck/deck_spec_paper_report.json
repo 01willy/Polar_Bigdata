@@ -1,0 +1,4820 @@
+{
+ "meta": {
+  "deck_id": "paper_report",
+  "spec_version": "1.1(2026-10-04, 빌드 전, 원고 명세·그림 명세와 교차 검토 반영)",
+  "status": "스펙만 작성. 그림·PPTX·PDF 는 만들지 않았다. v3 재구성 그림은 아직 없다(비교 폴더 outputs/figures/paper/v3_restructure/ 에 그림 명세 FIGURE_SPEC_v3.md 만 있음, 2026-10-04 확인)",
+  "deliverable": "논문 작성 전 최종 보고 덱(국문, 16:9)",
+  "audience": "사용자와 공동 연구자·지도교수. 결과를 처음 듣는 사람도 따라올 수 있게 동기, 도구, 이름 순서로 설명한다(DG-06, explain-before-decision)",
+  "purpose": [
+   "전체 결과와 연구 의의를 논문 흐름(결과 절 R1–R8) 순서로 보고한다",
+   "실험 묶음별 목적, 입력, 산출 상태, 결과, 의미를 정리한다",
+   "자료 처리와 평가 설계, 라벨 수별 새 지역 워크플로를 보인다",
+   "원고 작성 계획(구성, 분량, 그림, 임시 제목, 남은 결정)을 보인다",
+   "추가 실험 10묶음(XA–XJ)의 등록 상태와 원고 자리를 보인다. 결과는 아직 없다"
+  ],
+  "request_basis": "사용자 2026-10-02 요청(전체 결과, 연구 의의, 실험별 입출력 현황, 데이터 처리, 실험별 목적·결과·의미, 전체 워크플로, 논문 작성 방향)과 2026-10-04 작업 지시(추가 실험 XA–XJ 현황 포함)",
+  "language": "국어. 보이는 글은 자연스러운 명사형 종결, 노트 대본은 ~이다/~한다. 연결어 대시 금지, 숫자 범위의 en dash 만 허용",
+  "title_ko_temporary": "희소 관측 조건에서 물리경험식 유사라벨 증강과 기계학습을 이용한 영구동토 활동층 두께 예측",
+  "title_en_temporary": "Permafrost active-layer thickness prediction under sparse observations using physics-based pseudo-label augmentation and machine learning",
+  "title_note": "임시 제목은 대회 제목의 영문 번역이다(사용자 결정, 나중에 바꿀 수 있음). 14단어, Sci Rep 한도 20단어 안(docs/research/2026-10-04/scirep_format_and_drafts.md 4.2)",
+  "authors": "[DECISION] 저자·소속 미정. 주 저자 후보 Seungwon Baek. KOPRI 김승희·정윤택 박사는 공동 작업 가능성만 있으며 저자로 표기하지 않는다",
+  "llm_statement": "[DECISION] 원고의 대형 언어 모델 사용 진술 문구 미정(docs/research/2026-10-04/scirep_format_and_drafts.md 4.11)",
+  "binding_rules": [
+   "design/journal_grade_style_guide.md (특히 0.3, 1.1–1.4, 4.6–4.8, 5.0–5.9, 7.4)",
+   "design/slide_archetypes.md (1.1–1.4 격자·머리·차트 규격, 2절 원형 A1–A10, 3절 배치 예시, 4절 공통 점검)",
+   "design/user_feedback_digest.md (SL, PF, DG, TY, CO, WT, KO, MS, PR 규칙)",
+   "design/baseline_audit_2026-10-04.md (넘어야 할 결함 목록과 우선순위 15)",
+   "~/.claude/rules/writing-tone.md, ~/.claude/rules/visual-artifacts.md"
+  ],
+  "content_sources": [
+   "paper/claims/*/README.md (1.3 축소판 문장, 2절 근거 표, 5.2 쓰지 않을 문장)",
+   "paper/README.md, paper/registry/experiments.csv",
+   "docs/RESEARCH_OVERVIEW_2026-10-02.md",
+   "docs/RESEARCH_CLAIMS_WORKFLOW_2026-10-01.md (C2 는 '라벨을 쓰는 보정(재보정 + 잔차)'으로 좁힘)",
+   "docs/QA_FINAL_REVIEW_2026-10-02.md, docs/QA_FOLLOWUP_2026-10-04.md",
+   "docs/MANUSCRIPT_RESTRUCTURE_PLAN_2026-10-02.md (결과 절 R1–R8. 절 구성은 지침 4.3 표를 따른다)",
+   "docs/research/2026-10-04/scirep_format_and_drafts.md (한도, 4.4 결과 절 예산, 4.9 자리표시 형식)",
+   "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md (XA–XJ 등록, 6절 원고 자리, 7절 결정)",
+   "data/processed/paper_figs/*.csv (v2 그림 값 표, 덱 차트의 원천)",
+   "paper/manuscript/MANUSCRIPT_SPEC.md (원고 명세. 초록 판 A·B, 결과 절 첫 문장, 자리표시 정본 목록 11절)",
+   "outputs/figures/paper/v3_restructure/FIGURE_SPEC_v3.md (그림 명세. 패널 문자, 설명문, 결정 D-1–D-21)"
+  ],
+  "narrowing_rules_applied": [
+   "C2: 'ML 이득은 계수 오차에 비례' 대신 '라벨을 쓰는 보정(재보정 + 잔차)의 이득과 라벨 10개 편향 크기의 순위상관'. 재보정을 넘어선 ML 몫의 관계는 '확인하지 못함'이며 XA 자리표시로 둔다",
+   "'안전', '손해 없는 선택', '오차를 키우지 않음'은 등록 비열등 판정이 있을 때만 쓴다. 비열등이 등록된 대비는 규칙 선정(라벨 40개와 160개, 한계 0.5 cm)과 실행 전인 추가 실험 두 대비(XB-4, XC-2)뿐이다",
+   "지역 내 시험과 워크플로 시험(WF)은 부제와 노트에 '결과 열람 뒤 설계'를 단다",
+   "초록 판정어는 초록 대비 10개(AB1–AB10)에만 쓴다. WF 와 XC 결과는 초록에서 수치만 쓴다(사용자 선택지 B, 원고 명세 2.2절 판 B, 결정 대기)",
+   "'학습기 10종 모두'를 단정형으로 쓰지 않는다. 두 CI 판정이 같은 학습기는 5종(랜덤 포레스트, 조정 신경망 4종)이다",
+   "관측 위치는 방법 수준 서술만 쓴다. 특정 지점의 관측 우선순위 지도는 내지 않는다",
+   "C6 정정: 전이 조건에서 두 가중 모두 열세인 지역은 없었으나 레나델타 셀 가중 오차는 1.9–2.2 cm 컸다. 지역 내에서는 레나델타 라벨 100개 블록 층화가 두 가중 모두 열세",
+   "C8 범위: '이득이 격자 사이 성분에서 온다'는 알래스카 지역 내 라벨 전량에 한정"
+  ],
+  "grammar": {
+   "name": "V(사용자 확정 문법, 기본)",
+   "header": "주황 ExtraBold 제목 26 pt(명사구, 한 줄) + 회색 부제 14 pt Medium 한 줄(부 표지, 범위, 조건) + 우상단 쪽 번호 12 pt",
+   "takeaway": "헤어라인(0.9 pt #DDDDDD, y 6.82) 위 한 줄, 15 pt ExtraBold #111111, 중앙 정렬, 공백 포함 45자 이하, 라벨 없음, '다'로 끝나지 않음",
+   "body_area_in": {
+    "x": 0.667,
+    "y0": 1.3,
+    "w": 12.0,
+    "H": 5.2
+   },
+   "grammar_N": "제안(지침 5.1, 8절 1). 사용자 확인 전에는 쓰지 않는다"
+  },
+  "style_tokens": {
+   "canvas_in": [
+    13.333,
+    7.5
+   ],
+   "background": "#FFFFFF",
+   "accent": "#EA851B(제목 런과 쪽당 1곳, 3단어 이하 핵심어 또는 수식·지표 라벨)",
+   "ink": "#111111",
+   "gray": "#6B6B6B",
+   "gray2": "#4A4A4A",
+   "hairline": "#DDDDDD",
+   "font": "Pretendard 한 계열, 모든 런에 latin·ea·cs 지정, 합성 볼드 금지",
+   "margin_in": "0.667(변경(보고): 확정 문법 0.52. 사용자가 되돌리면 열 폭 1.799 로 재계산)",
+   "columns_in": {
+    "C1": [
+     0.667,
+     2.417
+    ],
+    "C2": [
+     2.717,
+     4.467
+    ],
+    "C3": [
+     4.767,
+     6.517
+    ],
+    "C4": [
+     6.817,
+     8.567
+    ],
+    "C5": [
+     8.867,
+     10.617
+    ],
+    "C6": [
+     10.917,
+     12.667
+    ]
+   },
+   "sizes_pt": {
+    "title": 26,
+    "subtitle": 14,
+    "takeaway": 15,
+    "body_and_table": "18(변경(보고): 확정 12.5)",
+    "chart_axis": 18,
+    "chart_tick_and_direct_label": 16,
+    "source_and_page": 12,
+    "cover": [
+     32,
+     18,
+     16,
+     14
+    ]
+   },
+   "allowed_size_set": "문법 V {26, 18, 16, 15, 14, 12}, 표지 {32, 18, 16, 14}",
+   "chart_lines_pt": {
+    "main": 3.0,
+    "aux": 2.0,
+    "axis": 1.5,
+    "zero": 2.0,
+    "marker": 8
+   },
+   "verdict_word_colors": "표 안에서만 단어와 함께: 채택 #2F6B33, 제외 #96382C",
+   "forbidden": "글씨 상자·카드·색 구역·연회색 패널·외곽 프레임·제목 밴드, 통계 카드와 24 pt 이상 숫자 런, 'Takeaway' 라벨, 4개 이상 목록·하위 불릿·주황 글머리, 아이콘·그라데이션·그림자·둥근 사각형·번호 원·체크, 곡선·사선 화살표, 쪽 번호 상호참조, 내부 코드·방법 약호·파일 경로, 애니메이션, 논문 그림을 그대로 붙인 쪽"
+  },
+  "chart_spec": "slide_archetypes 1.3: 축·컬러바 라벨 18 pt, 눈금·직접 라벨 16 pt, 방향 표지 쪽당 1개, 그림 안 수치는 눈금·컬러바·축척·크기 열쇠만, 배치 크기 그대로 300 dpi PNG(경로 B), 배율 1.00 ± 0.02, 배경 격자선 없음",
+  "method_style": [
+   {
+    "deck_name": "원천 계수 Stefan",
+    "color": "#4d4d4d",
+    "line": "Δ 패널 0선(실선 2.0 pt), 절대값 패널 수평 기준선, 측정점 없음"
+   },
+   {
+    "deck_name": "연도 정합 Stefan",
+    "color": "#4d4d4d",
+    "line": "점선(1.2, 1.4)"
+   },
+   {
+    "deck_name": "재보정 Stefan",
+    "color": "#2b5c8f",
+    "line": "실선"
+   },
+   {
+    "deck_name": "토양 보정 Stefan",
+    "color": "#2b5c8f",
+    "line": "점선, SI 전용"
+   },
+   {
+    "deck_name": "물리 잔차 결합(재보정 앵커)",
+    "color": "#9a7bc9",
+    "line": "실선"
+   },
+   {
+    "deck_name": "원천 물리 잔차 결합",
+    "color": "#9a7bc9",
+    "line": "파선(4, 2)"
+   },
+   {
+    "deck_name": "물리 유사라벨 증강",
+    "color": "#568f72",
+    "line": "일점쇄선(5, 1.5, 1.5, 1.5)"
+   },
+   {
+    "deck_name": "직접 ML",
+    "color": "#6b7280",
+    "line": "파선(2, 1.5)"
+   },
+   {
+    "deck_name": "물리 입력 ML",
+    "color": "#ad921a",
+    "line": "긴 파선(7, 2)"
+   },
+   {
+    "deck_name": "Stefan·CCI 평균 앵커",
+    "color": "#84480c",
+    "line": "이점쇄선"
+   },
+   {
+    "deck_name": "교차검증 선정",
+    "color": "고유 색 없음",
+    "line": "대비 포레스트의 검정 점, 워크플로 경로"
+   },
+   {
+    "deck_name": "오차 하한",
+    "color": "#b0b0b0 띠",
+    "line": "없음"
+   }
+  ],
+  "colormaps": {
+   "ALT (cm)": "cmc.oslo_r 0.12–0.90, 모든 ALT 패널 공통 고정",
+   "오차 변화 ΔRMSE (cm)": "cmc.broc, ±vmax(같은 컬러바 패널 |값| 99 백분위를 5 cm 단위로 올림), TwoSlopeNorm(0), 파랑 = 오차 감소",
+   "예측 차이(보정량, cm)": "cmc.broc, 부호 정의를 노트에 적는다(물리 잔차 결합 예측 − 재보정 Stefan 예측, 양수 = 더 깊음)",
+   "구간 폭·오차 크기·계수 오차": "cmc.acton_r 0.05–0.95",
+   "관측 위치": "검정 테두리 원 1.0 pt, 채움 #000000 alpha 0.35, 면적 ∝ 블록의 1 km 라벨 위치 수(그림 명세 3.3 a). 새 지역은 흰 채움 원",
+   "영구동토 바탕": "연속 #d0d0d0, 불연속 #e6e6e6, 그 밖 육지 #f4f4f4, 바다 흰색",
+   "외삽 영역·자료 없음": "#B8BEC6 + // 해칭",
+   "금지": "jet, rainbow, turbo, Spectral, RdYlGn, 붉은 계열 ALT"
+  },
+  "region_names": {
+   "Alaska": "알래스카",
+   "Lena": "레나델타(정본 용어, 범위 [미확인: 델타 밖 포함 여부])",
+   "Canada": "캐나다",
+   "Russia_W": "러시아 서부",
+   "Russia_E": "러시아 동부",
+   "Russia_C": "러시아 중부",
+   "Tibet": "티베트",
+   "NAtlantic": "북대서양",
+   "Greenland": "그린란드",
+   "note": "영문 표기(W Russia 등)는 사용자 확인 대기(지침 2.5, 8절 7). 하위 지역 ID 는 보이는 글에 쓰지 않는다"
+  },
+  "name_map_spec_only": {
+   "P0": "원천 계수 Stefan",
+   "P*(P0@tddm)": "연도 정합 Stefan",
+   "P1": "재보정 Stefan",
+   "P2": "현지 최소제곱 재보정 Stefan",
+   "P1*(P1@ed)": "토양 물성 Stefan 재보정",
+   "R0": "원천 물리 잔차 결합",
+   "R1": "재보정 물리 잔차 결합(덱 본문에서는 '물리 잔차 결합')",
+   "R2": "증강·앵커·잔차 결합",
+   "R3": "적층 잔차 결합",
+   "D0": "직접 ML",
+   "D1": "물리 유사라벨 증강",
+   "F1, F1k, F1n": "물리 입력 ML",
+   "Re": "Stefan·CCI 평균 앵커 잔차 결합",
+   "W(규칙 W)": "대상 라벨 교차검증 선정 규칙(덱: '교차검증 선정')",
+   "S1": "셀 무작위",
+   "S2": "블록 층화",
+   "S3": "공변량 군집 층화",
+   "S4": "공변량 최대 최소 거리(덱: '공변량 분산')",
+   "S5": "원천 대비 외삽 우선",
+   "S6": "예측 분산 능동 선정",
+   "S7": "물리 불확실성 우선",
+   "Algorithm P(S8 계열)": "사전 지정 배치 절차",
+   "LG": "전이 라벨 수 격자 시험",
+   "LGX": "결합 구조·위약·기준선 시험",
+   "LGT, LGF": "학습기 확장 시험",
+   "LGD": "새 독립 지역 시험",
+   "LGU": "예측 구간 시험",
+   "LGW, WRAPUP": "초록 대비 묶음, 보고 규칙",
+   "AB1–AB10": "초록 대비 10개",
+   "WF0": "라벨 0 위험표",
+   "WF1, WF6": "지역 내 라벨 수 곡선",
+   "WF2, WF8": "라벨 위치 전략",
+   "WF3": "하위 군집 계수",
+   "WF4": "선정 규칙과 편향 진단",
+   "WF5": "관측 우선순위 지도(등록 규칙상 미발행)",
+   "WF7": "Stefan·CCI 평균 앵커",
+   "WF9": "격자 안·사이 이득 분해",
+   "WF10": "기후 외삽",
+   "MEAN": "주 4지역 층화 평균",
+   "MEAN3": "레나델타·캐나다·알래스카 3지역 보조 평균",
+   "PE1": "얕은 레짐 5지역 풀(주 4지역 + 러시아 중부)",
+   "PE2": "6지역 확장 풀(PE1 + 티베트)",
+   "Alaska(x)": "알래스카(새 지역으로 둔 참조 대상)",
+   "AL-1–AL-6, CA-2, CA-3, LE-1, LE-2": "하위 지역(덱 보이는 글에서는 '알래스카 하위 지역' 등 일반 명칭)",
+   "Russia_W, Russia_E, Russia_C": "러시아 서부, 러시아 동부, 러시아 중부",
+   "Lena": "레나델타",
+   "v1–v4 자료 표": "초기 통합 표, 라벨 추가 표, 라벨 정의 정제 표(본 실험), 새 지역 추가 표",
+   "x25": "공변량 25종(지형 6, ERA5-Land 기후 8, SoilGrids 토양 9, CCI 2)",
+   "XA–XJ": "추가 실험(평이한 이름은 placeholders 항목)"
+  },
+  "number_format": "네 자리 수는 쉼표 없이(1000, 4500), 다섯 자리 이상은 쉼표(13,606). 음수는 U+2212(−). 숫자와 단위 사이 한 칸(0.54 cm). 백분율은 정수. 숫자 나열은 '와/과'나 쉼표, 가운뎃점 금지(H14). 수치는 모두 원천 표에서 옮기고 손으로 만든 수치는 0개",
+  "placeholder_policy": "추가 실험 결과가 들어갈 자리는 원고 명세 11절의 위치별 자리표시 문자열을 글자 하나까지 같게 tracking.placeholders 와 placeholders_registry.forms 에 둔다. 보이는 쪽에는 실험 코드를 쓰지 않고 평이한 이름과 '결과 대기' 표지만 둔다. 결과가 나오면 FB 2.x 의 사전 고정 해석 문장으로 채운다",
+  "build": {
+   "library": "deck/final_lib.py(header, pagenum, takeaway(accent=True), hline, vline, text, image, mini_table 의 헤어라인 표). 쓰지 않는 것: rect(fill=PANEL), stat_card(), PANEL2, bullets()의 주황 점",
+   "library_gap": "final_lib.py 는 여백 0.52 in(ML, MR)과 결론 줄 y 7.02 를 상수로 쓴다. 지침 여백 0.667 in 와 헤어라인 y 6.82 에 맞춘 래퍼가 필요하다(이 작업은 코드를 고치지 않았다)",
+   "chart_path": "경로 B: Pretendard 로 그린 PNG 를 배치 크기에서 300 dpi 로 저장. 차트 함수는 v3 논문 그림 함수의 medium='slide' 판을 쓴다(지침 5.6)",
+   "pdf_export": "PPTX → ODP → styles.xml·content.xml 의 문단 속성에 style:text-autospace='none' → PDF(제안 경로 deck/export_pdf.py, 미구현)",
+   "output_dir_proposal": "deck/paper_report/(지침 0.1 은 deck/<보고 행사명>/. 행사명 [DECISION])",
+   "script_pdf": "낭독 대본을 PDF 로도 낸다(PR-04)"
+  },
+  "time_budget_min": {
+   "main": 34,
+   "appendix": "질의응답용"
+  },
+  "changed_vs_confirmed_grammar": [
+   "여백 0.52 → 0.667 in(변경(보고))",
+   "본문·표 12.5 → 18 pt(변경(보고))",
+   "A7 표 행 높이 0.50 → 0.75–1.00 in(이 스펙의 조정, 두 줄 셀 허용과 근거 블록 4.5 in 확보를 위해. 사용자에게 보고)",
+   "결론 줄 강조형 15 pt ExtraBold 를 기본으로(지침 5.0 표 '유지(강조형을 기본으로)')"
+  ]
+ },
+ "parts": [
+  {
+   "label": "표지와 개요",
+   "pages": "1–4",
+   "content": "표지, 연구 의의, 연구 흐름, 라벨 수 구간별 결과 요지"
+  },
+  {
+   "label": "1부 · 자료와 설계",
+   "pages": "5–10",
+   "results_section": "R1",
+   "content": "연구 지역과 계수, 입력 자료와 처리 단위, 평가 설계, 검증 설계에 따른 오차, Stefan 개념, 비교한 방법"
+  },
+  {
+   "label": "2부 · 라벨 0개",
+   "pages": "11–12",
+   "results_section": "R2",
+   "content": "대상별 전이 오차 변화 지도, 물리 유사라벨의 정보 출처"
+  },
+  {
+   "label": "3부 · 라벨 3–10개",
+   "pages": "13–17",
+   "results_section": "R3",
+   "content": "라벨 수 곡선 3단계, 계수 오차와 보정 이득, 결합 구조"
+  },
+  {
+   "label": "4부 · 라벨 40–160개",
+   "pages": "18",
+   "results_section": "R4",
+   "content": "대상 라벨 교차검증 선정"
+  },
+  {
+   "label": "5부 · 라벨이 많은 지역",
+   "pages": "19–21",
+   "results_section": "R5",
+   "content": "지역 내 라벨 수 곡선, 대회 결과와 줄일 수 있는 오차, 보정량의 공간 분포"
+  },
+  {
+   "label": "6부 · 관측 위치",
+   "pages": "22–23",
+   "results_section": "R6",
+   "content": "라벨 위치 전략 지도, 예산별 전략 비교"
+  },
+  {
+   "label": "7부 · 독립 지역과 예측 구간",
+   "pages": "24–25",
+   "results_section": "R7, R8",
+   "content": "독립 지역, 예측 구간"
+  },
+  {
+   "label": "8부 · 워크플로",
+   "pages": "26–28",
+   "content": "라벨 수별 워크플로, 결론, 전망"
+  },
+  {
+   "label": "9부 · 논문 작성 계획",
+   "pages": "29–34",
+   "content": "원고 구성과 분량, 결과 절과 표시 항목, 초록 표기, 추가 실험의 원고 자리, 본문 자리 추가 실험, 남은 결정"
+  },
+  {
+   "label": "참고문헌과 부록",
+   "pages": "35, 부록 1–10",
+   "content": "참고문헌, 학습기, 판정 단어, 라벨 0 기준선, 한계, 알래스카 검증 방식, 실험 묶음 입출력, 원천 교차검증, 보충 자리 추가 실험, 기타 결정"
+  }
+ ],
+ "slides": [
+  {
+   "id": "S01",
+   "page": 1,
+   "part": "표지",
+   "archetype": "A1",
+   "title": "연구 결과 종합과 논문 작성 계획",
+   "subtitle": "희소 관측 조건에서 물리경험식 유사라벨 증강과 기계학습을 이용한 영구동토 활동층 두께 예측",
+   "takeaway": null,
+   "visible_text": {
+    "presenter": "[DECISION: 발표자 표기. 기본안 Seungwon Baek, 사용자 정본 확인 뒤 표기]",
+    "affiliation": "[DECISION: 소속 표기]",
+    "date_event": "2026년 10월 · 논문 작성 전 보고 · [DECISION: 보고 행사명]",
+    "logos": "[DECISION] deck/assets/final/logos/ 의 sail.png, snu.png, kopri.png 가운데 확정 소속에 해당하는 것만. KOPRI 공동 작업은 가능성 단계이므로 소속 확정 전에는 넣지 않는 것을 기본안으로 둔다"
+   },
+   "evidence": {
+    "kind": "v3 그림 패널 슬라이드판",
+    "ref": "Fig 1a(범북극 관측 위치 지도), medium='slide'",
+    "geometry_in": {
+     "x": 8.867,
+     "y": 1.8,
+     "w": 3.8,
+     "h": 3.8
+    },
+    "encoding": "북극 평사 투영, 관측 원 검정 테두리·채움 alpha 0.35·면적 ∝ 블록의 1 km 라벨 위치 수, 영구동토 2단계 회색 바탕, 지역 이름 3개 이하(알래스카, 캐나다, 레나델타)",
+    "data_sources": [
+     "data/processed/paper_figs/fig1_blocks.csv(kind, region, block, lat, lon, n_loc_1km)",
+     "data/processed/paper_figs/table1_rows.csv",
+     "data/processed/paper_figs/fig1_meta.csv"
+    ],
+    "status": "v3 미생성(비교 폴더 outputs/figures/paper/v3_restructure/). 슬라이드판은 배치 크기 3.80 in 로 다시 그린다"
+   },
+   "intent": "보고의 범위(결과 종합과 논문 계획)와 자료의 공간 범위를 한 쪽에 보인다",
+   "notes": {
+    "script": "이 보고는 논문을 쓰기 전에 연구 결과와 원고 계획을 한 번에 점검하려는 것이다. 주제는 새 영구동토 지역에서 라벨 수에 따라 물리 유사라벨 증강과 물리 잔차 결합 기계학습이 어떤 능력을 보이는지, 그리고 그 결과로 정한 학습, 평가, 추가 관측의 워크플로이다. 오른쪽 지도는 이 연구가 쓴 활동층 두께 관측 위치이고 원의 면적은 1 km 라벨 위치 수에 비례한다. 앞부분은 의의와 자료, 가운데는 라벨 수 구간별 결과, 뒷부분은 원고 구성과 추가 실험 현황이다.",
+    "reference_line": "부제는 국문 임시 제목. 영문 임시 제목은 9부 초록 쪽 노트와 원고 계획에 있다.",
+    "script_chars": 259
+   },
+   "numbers": [],
+   "tracking": {
+    "claims": [],
+    "experiments": [],
+    "placeholders": [],
+    "docs": [
+     "docs/research/2026-10-04/scirep_format_and_drafts.md 4.2",
+     "design/slide_archetypes.md A1"
+    ]
+   },
+   "flags": [
+    "표지 제목: 국문 임시 제목(약 40 em)은 32 pt·폭 7.90 in 에서 세 줄이 되어 A1 의 '2줄 이하'를 넘는다. 그래서 표지 제목은 보고 이름으로 두고 국문 임시 제목을 18 pt 부제(두 줄)로 둔다. 문구는 [DECISION]",
+    "SL-12: 표지의 제목·저자·소속·로고는 사용자 정본만 쓴다"
+   ],
+   "time_min": 0.5
+  },
+  {
+   "id": "S02",
+   "page": 2,
+   "part": "연구 의의",
+   "archetype": "A7",
+   "title": "연구 의의와 차별성",
+   "subtitle": "연구 의의 · 조사 범위 2019–2026 · 영문 문헌 위주",
+   "takeaway": "새 지역의 라벨 수에 따른 학습·평가·추가 관측 워크플로 제시",
+   "visible_text": {
+    "table": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.45,
+      "w": 7.9,
+      "row_h": 0.75,
+      "col_w": [
+       1.7,
+       3.1,
+       3.1
+      ]
+     },
+     "columns": [
+      "항목",
+      "확인한 선행 연구",
+      "이 연구"
+     ],
+     "rows": [
+      [
+       "평가 지역",
+       "학습 지역 안, 무작위 교차검증",
+       "지역 홀드아웃, 100 km 완충"
+      ],
+      [
+       "라벨 수",
+       "한 조건(0개 또는 전량)",
+       "0개부터 전량까지"
+      ],
+      [
+       "물리 기준선",
+       "없음 또는 고정 계수 하나",
+       "원천 계수와 같은 라벨 재보정 계수"
+      ]
+     ]
+    },
+    "support_line": "약어  ALT 활동층 두께, TDD 융해 도일, ML 기계학습, CI 신뢰구간",
+    "orange_spot": "제목 런만"
+   },
+   "evidence": {
+    "kind": "헤어라인 표 + 보조 그림",
+    "ref": "표(C1–C4) + Fig 1a 슬라이드판(C5–C6, 3.80 in, 표 높이 이상)",
+    "data_sources": [
+     "docs/NOVELTY_POSITIONING_2026-09-29.md 3절 비교표, 4절 N1",
+     "docs/RESEARCH_CLAIMS_WORKFLOW_2026-10-01.md 2절 표",
+     "docs/RESEARCH_OVERVIEW_2026-10-02.md 7절",
+     "data/processed/paper_figs/fig1_blocks.csv(보조 지도)"
+    ],
+    "status": "표는 문구 확정. 보조 지도는 v3 Fig 1a 슬라이드판"
+   },
+   "intent": "표지 바로 다음에 의의와 차별성을 둔다(S-11, MS-02). 기법의 새로움이 아니라 평가 설계·결과·워크플로가 기여임을 밝힌다",
+   "notes": {
+    "script": "이 쪽은 선행 연구와 다른 점을 평가 조건 세 가지로 정리한 것이다. 활동층 두께 기계학습 연구의 대부분은 학습 지역 안이나 무작위 교차검증으로 평가했고, 라벨 수는 한 조건이었으며, 물리 기준선이 없거나 고정 계수 하나였다. 이 연구는 대상 지역을 통째로 빼고 라벨 수를 0개부터 전량까지 바꾸며, 같은 라벨로 재보정한 Stefan 식과 비교한다. 방법 하나하나에는 선례가 있다. 이 연구의 기여는 이 평가 설계와 음성 결과를 포함한 결과, 그리고 결과를 묶은 워크플로이다.",
+    "reference_line": "근거: 선행 연구 대비표(10편, 확인 수준 본문·요약), 조사 범위 2019–2026. 세 설계 요소를 함께 갖춘 ALT 문헌은 확인 범위에 없음. '최초' 표현 쓰지 않음. 가장 가까운 선례는 지중 온도 대상 O'Malley et al. 2026(arXiv).",
+    "script_chars": 266
+   },
+   "numbers": [],
+   "tracking": {
+    "claims": [
+     "D_data_and_design",
+     "C7_evaluation_design"
+    ],
+    "experiments": [],
+    "placeholders": [],
+    "docs": [
+     "docs/NOVELTY_POSITIONING_2026-09-29.md 3, 4(N1), 5",
+     "docs/RESEARCH_OVERVIEW_2026-10-02.md 7"
+    ]
+   },
+   "flags": [
+    "A7 행 높이 0.75 in(두 줄 셀). 근거 블록 높이는 보조 지도로 4.5 in 이상을 맞춘다"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 34
+  },
+  {
+   "id": "S03",
+   "page": 3,
+   "part": "연구 흐름",
+   "archetype": "A2",
+   "title": "연구 흐름과 실험 묶음",
+   "subtitle": "연구 흐름 · 2026-06-30부터 2026-10-04까지 · 실험 묶음 47개와 추가 등록 10묶음",
+   "takeaway": "대회 결과에서 지역 홀드아웃 전이 시험과 워크플로 시험으로 확장",
+   "visible_text": {
+    "row_labels": [
+     "대회 탐색",
+     "사전 등록 실험",
+     "통합 실험",
+     "전이 시험",
+     "지역 내·워크플로 시험",
+     "추가 실험"
+    ],
+    "key_line": "채운 원 판정 기록, 빈 원 결과 대기, 회색 원 대체·폐기",
+    "event_label": "추가 실험 등록"
+   },
+   "evidence": {
+    "kind": "덱 전용 차트(타임라인 점 그림)",
+    "ref": "실험 묶음 날짜 점 그림",
+    "chart": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.3,
+      "w": 12.0,
+      "h": 5.2
+     },
+     "x": "날짜(2026-06-30에서 2026-10-11, 눈금 월 단위 4–6개)",
+     "y": "단계 6행(위 행이 이른 단계)",
+     "marks": "묶음마다 실행 기간 수평 선분(2.0 pt 검정) + 끝 원 8 pt(채운 원 = done, 빈 원 = planned, #b0b0b0 채운 원 = superseded·discarded·not run). 2026-10-04 14:22 사전 등록 시각에 수직선 1개(1.5 pt #4d4d4d)와 라벨 하나",
+     "row_mapping": {
+      "대회 탐색": "phase H0",
+      "사전 등록 실험": "phase H1",
+      "통합 실험": "phase H2–H5",
+      "전이 시험": "phase T",
+      "지역 내·워크플로 시험": "phase W",
+      "추가 실험": "phase X"
+     },
+     "colors": "검정 계열만(방법 색 쓰지 않음, 검정은 '실험 묶음' 한 역할)"
+    },
+    "data_sources": [
+     "paper/registry/experiments.csv (열 phase, dates, status)",
+     "paper/README.md 3절(이름 체계)",
+     "git log 2678100(2026-10-04 14:22:39 +0900, 추가 실험 사전 등록 T0)"
+    ],
+    "status": "덱 전용 계산 필요(등록부 날짜 문자열 파싱). 범위 날짜는 시작·끝으로, 'YYYY-MM(≤…)'처럼 모호한 날짜는 끝점만 찍는다"
+   },
+   "intent": "연구 전체 흐름과 각 단계의 산출 상태를 한 쪽에 보이고, 실험별 입출력 표는 부록(AP6, AP7, AP9)으로 넘긴다",
+   "notes": {
+    "script": "연구는 7월 극지 대회의 알래스카 지역 내 결과에서 시작했다. 대회에서는 물리 잔차 결합이 Stefan 식보다 나았다. 그러나 지역을 넘는 전이에서는 Stefan 식이 가장 좋았다. 9월에는 사전 등록 실험과 통합 실험으로 원인을 좁혔고, 9월 말부터 지역 홀드아웃 전이 시험을 라벨 수 격자로 수행하였다. 10월 초에는 검토 의견을 반영해 지역 내 시험과 워크플로 시험을 더했다. 10월 4일에는 추가 실험 10묶음을 사전 등록하였고 결과는 아직 없다. 실험별 입력과 산출 상태는 부록 표에 정리하였다.",
+    "reference_line": "등록부 상태: 대회 탐색 25행(판정 21, 대체 3, 폐기 1), 전이 시험 8행 판정, 지역 내·워크플로 시험 12행(판정 11, 미발행 1), 추가 실험 10행 계획. 본문 사용 행 17.",
+    "script_chars": 282
+   },
+   "numbers": [
+    {
+     "value": "47",
+     "meaning": "실험 묶음 수(등록부 64행)",
+     "source": "paper/README.md 2절, paper/registry/README.md 2절"
+    },
+    {
+     "value": "H0 25행: done 21, superseded 3, discarded 1",
+     "meaning": "대회 탐색 단계 상태",
+     "source": "paper/registry/experiments.csv (phase, status 첫 낱말 집계, 2026-10-04 계산)"
+    },
+    {
+     "value": "T 8행 done, W 12행(done 11, not run 1), X 10행 planned",
+     "meaning": "단계별 상태",
+     "source": "paper/registry/experiments.csv"
+    },
+    {
+     "value": "17",
+     "meaning": "paper_use 가 main 으로 시작하는 행",
+     "source": "paper/registry/experiments.csv"
+    },
+    {
+     "value": "2026-10-04 14:22:39 +0900",
+     "meaning": "추가 실험 사전 등록 커밋(T0)",
+     "source": "git log 2678100"
+    }
+   ],
+   "tracking": {
+    "claims": [],
+    "experiments": [
+     "H0–H5",
+     "T1–T6",
+     "W1–W8",
+     "WF5_not_issued",
+     "XA–XJ"
+    ],
+    "placeholders": [],
+    "docs": [
+     "paper/registry/experiments.csv",
+     "paper/README.md",
+     "docs/RESEARCH_OVERVIEW_2026-10-02.md 3절"
+    ]
+   },
+   "flags": [
+    "단계 이름은 평이한 이름만 쓴다(H0, LG, WF 등 코드 금지)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 35
+  },
+  {
+   "id": "S04",
+   "page": 4,
+   "part": "연구 개요",
+   "archetype": "A7",
+   "title": "라벨 수 구간별 결과 요지",
+   "subtitle": "연구 개요 · 전이 시험과 지역 내 시험 · 각 행의 근거는 해당 부",
+   "takeaway": "라벨 수에 따라 물리 정보의 역할과 권고 방법이 달라짐",
+   "visible_text": {
+    "table": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.4,
+      "w": 12.0,
+      "row_h": 0.75,
+      "col_w": [
+       2.4,
+       8.1,
+       1.5
+      ]
+     },
+     "columns": [
+      "라벨 수",
+      "결과 요지",
+      "근거"
+     ],
+     "rows": [
+      [
+       "0개",
+       "2 cm 넘게 악화된 대상, 물리 유사라벨 증강 2개와 직접 ML 18개(사후 서술)",
+       "2부"
+      ],
+      [
+       "3–10개",
+       "주 4지역 평균 이득의 대부분이 계수 재보정",
+       "3부"
+      ],
+      [
+       "40–160개",
+       "교차검증 선정 규칙이 고정 레시피에 비열등",
+       "4부"
+      ],
+      [
+       "수백–수천 개",
+       "알래스카 0.54 cm 감소, 기후 격자 단위 보정",
+       "5부"
+      ],
+      [
+       "관측 위치",
+       "분산 배치 효과는 지역에 따라 다름",
+       "6부"
+      ]
+     ]
+    },
+    "orange_spot": "없음"
+   },
+   "evidence": {
+    "kind": "헤어라인 표(12.00 폭)",
+    "ref": "전체 결과 요지 표",
+    "data_sources": [
+     "paper/claims/C1_label0_safety/README.md 1.3",
+     "paper/claims/C2_bias_diagnosis/README.md 2.1 A6–A9",
+     "paper/claims/C5_method_selection/README.md 1.3",
+     "paper/claims/C4_sufficient_labels/README.md 1.3",
+     "paper/claims/C8_gain_source/README.md 1.3",
+     "paper/claims/C6_label_placement/README.md 1.3"
+    ],
+    "status": "문구 확정 후보. 각 행은 결과 쪽 결론 줄과 같은 원천"
+   },
+   "intent": "사용자가 요청한 '전체 결과'를 앞에서 한 번 보이고, 각 부에서 근거를 보인다. 첫 행은 '직접 ML 실패'가 아니라 물리 정보를 쓴 방법의 대상별 결과(사후 서술 수)로 쓴다",
+   "notes": {
+    "script": "전체 결과를 라벨 수 구간별로 먼저 정리한다. 라벨이 없을 때는 물리 정보를 쓴 방법에서 크게 나빠진 대상이 적었다. 라벨 3–10개에서는 주 4지역 평균 이득의 대부분이 Stefan 계수 재보정에서 왔다. 라벨 40–160개에서는 대상 라벨 교차검증으로 방법을 고르는 규칙이 고정 레시피에 비열등이었다. 라벨이 수천 개인 알래스카에서는 이득이 0.54 cm로 작았고 기후 격자 단위 보정에서 왔다. 관측 위치 전략의 효과는 지역마다 달랐다. 각 행의 근거는 오른쪽 열의 부에서 다룬다.",
+    "reference_line": "2부 사후 서술 18/30 대 2/30(C1). 3부 재보정 −2.45 cm, 잔차 추가 −0.18 cm(C2, 주 4지역 평균, 라벨 10개). 4부 비열등 한계 0.5 cm, 레나델타·캐나다(C5). 5부 알래스카 라벨 1000개(C4, C8). 6부 캐나다 오차 감소, 레나델타 오차 증가(C6).",
+    "script_chars": 272
+   },
+   "numbers": [
+    {
+     "value": "18/30, 2/30",
+     "meaning": "라벨 0에서 원천 계수 Stefan 보다 2 cm 넘게 나빠진 대상(직접 ML, 물리 유사라벨 증강)",
+     "source": "paper/claims/C1_label0_safety/tables/wf0_risk.csv (n=0, D0_1.0, D1_1.0, n_worse_2cm)",
+     "doc": "paper/claims/C1_label0_safety/README.md 2.5",
+     "label": "사후 서술"
+    },
+    {
+     "value": "−2.45 cm, −0.18 cm",
+     "meaning": "라벨 10개 재보정 Stefan − 원천 계수 Stefan, 물리 잔차 결합 − 재보정 Stefan(주 4지역 평균)",
+     "source": "paper/claims/C2_bias_diagnosis/tables/lgw_bundle.csv (ab=AB4, AB5, MEAN)",
+     "doc": "paper/claims/C2_bias_diagnosis/README.md 2.1 A6, A7"
+    },
+    {
+     "value": "−0.54 cm",
+     "meaning": "알래스카 지역 내 라벨 1000개 물리 잔차 결합 − 재보정 Stefan",
+     "source": "paper/claims/C4_sufficient_labels/tables/wf2b_tests.csv (WF6-a, R1(λ cv)-P1|n1000, Alaska|r)",
+     "doc": "paper/claims/C4_sufficient_labels/README.md 1.3, E1.R1.n1000",
+     "label": "결과 열람 뒤 설계"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C1",
+     "C2",
+     "C4",
+     "C5",
+     "C6",
+     "C8"
+    ],
+    "experiments": [
+     "WF0",
+     "AB4",
+     "AB5",
+     "WF4-a",
+     "WF6-a",
+     "WF9",
+     "WF2",
+     "WF8"
+    ],
+    "placeholders": [],
+    "docs": [
+     "docs/RESEARCH_OVERVIEW_2026-10-02.md 1절",
+     "docs/RESEARCH_CLAIMS_WORKFLOW_2026-10-01.md 3–4절"
+    ]
+   },
+   "flags": [
+    "A7 행 높이 0.75 in, 표 높이 약 4.25 in",
+    "같은 문구 반복 0(H13) 확인"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 30
+  },
+  {
+   "id": "S05",
+   "page": 5,
+   "part": "1부 · 자료와 설계",
+   "archetype": "A5",
+   "title": "연구 지역과 Stefan 계수",
+   "subtitle": "1부 · 자료와 설계 · 주 4지역, 참조 대상 알래스카, 새 독립 지역",
+   "takeaway": "지역마다 라벨 수와 Stefan 계수가 다름",
+   "visible_text": {
+    "map_labels": "지역 이름(알래스카, 캐나다, 레나델타, 러시아 서부, 러시아 동부, 러시아 중부), 티베트는 별도 투영 삽도",
+    "graph_axis": "Stefan 계수 E (cm per √(°C·일)), 로그 축",
+    "key_line": "원 면적 ∝ 1 km 라벨 위치 수, 흰 원은 새 지역"
+   },
+   "evidence": {
+    "kind": "v3 그림 패널 슬라이드판(지도 + 연결 그래프)",
+    "ref": "Fig 1a(지도, C1–C3) + Fig 1b(지역별 E 분포, C4–C6), medium='slide'",
+    "encoding": "지도: 북극 평사 투영, 영구동토 2단계 회색, 축척 막대(70° N 기준), 위도 라벨 16 pt. 그래프: 지역별 개별 점(alpha 0.5) + 기하 평균, 원천 계수 E0 수직 기준선 #4d4d4d, 지역은 모양으로(알래스카 ●, 캐나다 ■, 레나델타 ◆, 러시아 서부 ▲, 러시아 동부 ▼, 러시아 중부 ✚)",
+    "data_sources": [
+     "data/processed/paper_figs/fig1_blocks.csv",
+     "data/processed/paper_figs/table1_rows.csv",
+     "data/processed/paper_figs/fig1_z_points.csv",
+     "data/processed/paper_figs/fig1_z_summary.csv(E_mean, E0)",
+     "data/processed/paper_figs/fig1_source.csv(E0)"
+    ],
+    "status": "v3 미생성. Liberation Sans 7 pt 논문판과 별도로 Pretendard 16–18 pt 슬라이드판"
+   },
+   "intent": "새 지역 문제의 두 전제(라벨 수의 차이, 계수의 차이)를 실제 자료로 보인다",
+   "notes": {
+    "script": "새 지역 문제의 전제는 두 가지이다. 첫째, 지역마다 라벨 수가 크게 다르다. 알래스카는 라벨이 1 km 위치 343곳에 몰려 있고, 러시아 서부와 동부는 라벨이 30개 안팎이다. 둘째, Stefan 계수 E가 지역마다 다르다. 오른쪽은 지역별 E의 분포이며 로그 축이다. 러시아 서부와 티베트는 원천 지역에서 정한 계수에서 크게 벗어난다. 원천 계수를 그대로 옮기면 이런 지역에서 오차가 커진다. 그래서 라벨이 생기면 계수부터 다시 맞추는 기준선이 필요하다. 다음 쪽은 입력 자료의 처리 단위이다.",
+    "reference_line": "라벨 행/1 km 위치/0.5° 블록: 알래스카 13,606/343/74, 레나델타 3037/201/20, 캐나다 750/86/39, 러시아 서부 31/29/21, 러시아 동부 30/30/21. 지역 E 기하 평균: 레나델타 1.31, 캐나다 1.41, 러시아 서부 2.51, 러시아 동부 1.73, 알래스카 1.62, 티베트 11.03. 원천 계수 E0 1.50–1.62.",
+    "script_chars": 279
+   },
+   "numbers": [
+    {
+     "value": "13,606 / 343 / 74",
+     "meaning": "알래스카 라벨 행 / 1 km 위치 / 0.5° 블록",
+     "source": "data/processed/paper_figs/table1_rows.csv (target=Alaska)",
+     "doc": "paper/claims/D_data_and_design/README.md E10"
+    },
+    {
+     "value": "3037 / 201 / 20",
+     "meaning": "레나델타",
+     "source": "data/processed/paper_figs/table1_rows.csv (target=Lena)",
+     "doc": "paper/claims/D_data_and_design/README.md E11"
+    },
+    {
+     "value": "750 / 86 / 39",
+     "meaning": "캐나다",
+     "source": "data/processed/paper_figs/table1_rows.csv (target=Canada)",
+     "doc": "paper/claims/D_data_and_design/README.md E12"
+    },
+    {
+     "value": "31 / 29 / 21, 30 / 30 / 21",
+     "meaning": "러시아 서부, 러시아 동부",
+     "source": "data/processed/paper_figs/table1_rows.csv",
+     "doc": "paper/claims/D_data_and_design/README.md E13, E14"
+    },
+    {
+     "value": "1.31, 1.41, 2.51, 1.73, 1.62, 11.03",
+     "meaning": "지역 E 기하 평균(레나델타, 캐나다, 러시아 서부, 러시아 동부, 알래스카, 티베트)",
+     "source": "data/processed/paper_figs/fig1_z_summary.csv (E_mean)",
+     "doc": "paper/claims/D_data_and_design/README.md E38"
+    },
+    {
+     "value": "1.50–1.62",
+     "meaning": "원천 계수 E0 범위(대상별)",
+     "source": "data/processed/paper_figs/fig1_source.csv (E0)",
+     "doc": "paper/claims/D_data_and_design/README.md E37"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "D_data_and_design"
+    ],
+    "experiments": [
+     "LG(대상 정의)",
+     "LGD"
+    ],
+    "placeholders": [
+     "[XF: R7 | 결과 열람 뒤 설계, 새 지역은 맹검(독립 지역 확인), NAtlantic v5 는 민감도 | 2.6 사전 고정 해석 문장]"
+    ],
+    "docs": [
+     "design/journal_grade_style_guide.md 6.1",
+     "paper/claims/D_data_and_design/README.md 1.3"
+    ]
+   },
+   "flags": [
+    "북대서양은 약관 미확인 셀 포함이라 그리지 않거나 SI 전체 판에만(지도 안 문장 금지, 설명은 노트)",
+    "E_mean(기하 평균)과 E0(최소제곱)는 정의가 달라 빼지 않는다"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 24
+  },
+  {
+   "id": "S06",
+   "page": 6,
+   "part": "1부 · 자료와 설계",
+   "archetype": "A3",
+   "title": "입력 자료와 처리 단위",
+   "subtitle": "1부 · 공변량 25종(지형 6, 기후 8, 토양 9, 위성 ALT 2) · 라벨은 1 km 셀 단위",
+   "takeaway": "입력은 1 km 셀 단위, 정보 해상도는 기후 격자 단위",
+   "visible_text": {
+    "chart_row_labels": [
+     "라벨",
+     "지형 고도·경사·향",
+     "지형 TPI·거칠기",
+     "기후 ERA5-Land",
+     "토양 SoilGrids",
+     "위성 ALT CCI",
+     "SAR(알래스카만)"
+    ],
+    "chart_key_line": "빈 원 원자료 해상도, 채운 원 모형 입력 단위",
+    "support_table": {
+     "geometry_in": {
+      "x": 8.867,
+      "y": 1.3,
+      "w": 3.8,
+      "row_h": 0.75,
+      "col_w": [
+       2.6,
+       1.2
+      ]
+     },
+     "columns": [
+      "자료 표",
+      "행 수"
+     ],
+     "rows": [
+      [
+       "초기 통합",
+       "17,423"
+      ],
+      [
+       "라벨 추가",
+       "17,572"
+      ],
+      [
+       "라벨 정의 정제(본 실험)",
+       "17,572"
+      ],
+      [
+       "새 지역 추가",
+       "18,088"
+      ],
+      [
+       "본 실험 직접 라벨 셀",
+       "17,467"
+      ]
+     ]
+    }
+   },
+   "evidence": {
+    "kind": "덱 전용 차트(공간 규모 범위 점 그림) + 헤어라인 표",
+    "ref": "입력별 원자료 해상도와 처리 단위",
+    "chart": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.3,
+      "w": 7.9,
+      "h": 5.1
+     },
+     "x": "공간 규모 (m), log10 축 10–20,000, 눈금 10, 100, 1000, 10,000",
+     "y": "입력 7행",
+     "marks": "행마다 원자료 해상도(빈 원 8 pt)와 모형 입력 단위(채운 원 8 pt)를 수평 선분 2.0 pt 검정으로 잇는다(화살표 없음). 1 km 출력 셀 위치에 수직 기준선 1.5 pt #4d4d4d 와 라벨 '출력 셀'",
+     "values": {
+      "라벨": "원자료 점(수 m; 좌표 소수점 4자리 약 11 m 로 묶어 평균) → 1 km 셀. CALM 은 100 m–1 km 지점 격자 다년 평균",
+      "지형 고도·경사·향": "Copernicus DEM 30 m → 점 화소 값",
+      "지형 TPI·거칠기": "30 m → 33 × 33 화소 창(약 1 km)",
+      "기후 ERA5-Land": "0.1°(남북 약 11 km) → 가장 가까운 격자값, 2015–2020 월 기후값",
+      "토양 SoilGrids": "250 m 제품 → 약 5 km 로 요청해 추출",
+      "위성 ALT CCI": "약 1 km → 가장 가까운 화소, 1997–2021 평균",
+      "SAR(알래스카만)": "30 m(PolSAR 는 150 m 창, InSAR 창 [미확인])"
+     }
+    },
+    "data_sources": [
+     "docs/QA_FINAL_REVIEW_2026-10-02.md Q8 입력별 해상도 표",
+     "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.4(지형·SAR 창 정정 행)",
+     "docs/QA_FOLLOWUP_2026-10-04.md 3.4",
+     "paper/registry/README.md 3절(x25 구성)",
+     "paper/claims/D_data_and_design/README.md E01–E07(fidelity_base_v2·v3·v4 meta), E04·E05(직접 라벨 17,467)"
+    ],
+    "status": "덱 전용 차트. 수치는 문서 표에서 옮긴다(CSV 없음). InSAR 창 [미확인]"
+   },
+   "intent": "사용자가 요청한 '데이터 처리'를 실제 해상도 축 위에서 보이고, 5부(격자 단위 보정)의 복선을 둔다",
+   "notes": {
+    "script": "모든 입력은 라벨과 같은 1 km 셀 단위로 맞추었다. 라벨은 점 관측을 셀로 평균했고, 지형은 30 m 고도 자료에서 점 값과 약 1 km 창 통계를 뽑았다. 기후는 ERA5-Land 0.1° 격자를, 토양은 SoilGrids를 약 5 km로 추출했다. 따라서 출력이 1 km여도 정보의 실제 해상도는 가장 거친 기후 입력에 묶인다. 이 점은 5부의 이득 분해에서 다시 나온다. 오른쪽 표는 자료 표의 판이다. 본 실험은 라벨 정의를 정제한 판을 쓰고, 새 지역 시험만 새 지역 추가 판을 쓴다.",
+    "reference_line": "공변량 25종 = 지형 6 + ERA5-Land 기후 8 + SoilGrids 토양 9 + CCI 2. 라벨 정의 정제 판에서 출처 표지 68행, 지역 3행 변경. 새 지역 추가 판은 직접 측정 329, 지온 유도 39, 미상 148행. 약관 미확인으로 그리지 않은 셀: 캐나다 38, 북대서양 19, 러시아 서부 1.",
+    "script_chars": 278
+   },
+   "numbers": [
+    {
+     "value": "17,423 / 17,572 / 17,572 / 18,088",
+     "meaning": "자료 표 판별 행 수",
+     "source": "data/processed/fidelity_base_v2_meta.json(n_old, n_total), fidelity_base_v3_meta.json(n_rows), fidelity_base_v4_meta.json(n_rows)",
+     "doc": "paper/claims/D_data_and_design/README.md E01–E03, E06"
+    },
+    {
+     "value": "17,467",
+     "meaning": "본 실험 직접 라벨 셀",
+     "source": "data/processed/paper_figs/fig1_meta.csv (n_v3_cells)",
+     "doc": "paper/claims/D_data_and_design/README.md E04, E05"
+    },
+    {
+     "value": "68, 3",
+     "meaning": "정제 판에서 출처 표지·지역이 바뀐 행",
+     "source": "data/processed/fidelity_base_v3_meta.json",
+     "doc": "paper/claims/D_data_and_design/README.md E03"
+    },
+    {
+     "value": "329 / 39 / 148",
+     "meaning": "새 지역 추가 행의 라벨 등급(직접, 지온 유도, 미상)",
+     "source": "data/processed/fidelity_base_v4_meta.json (n_rows.new_by_source_id)",
+     "doc": "paper/claims/D_data_and_design/README.md E07"
+    },
+    {
+     "value": "38, 19, 1",
+     "meaning": "약관 미확인으로 그림·주 판정에서 뺀 셀(캐나다, 북대서양, 러시아 서부)",
+     "source": "data/processed/paper_figs/fig1_not_drawn.csv",
+     "doc": "paper/claims/D_data_and_design/README.md E20"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "D_data_and_design",
+     "C8_gain_source"
+    ],
+    "experiments": [
+     "S0(스키마)",
+     "v1–v4 자료 표"
+    ],
+    "placeholders": [],
+    "docs": [
+     "docs/QA_FINAL_REVIEW_2026-10-02.md Q8",
+     "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.4"
+    ]
+   },
+   "flags": [
+    "A3 사용 1/2(덱당 2쪽 이하, 연속 금지)",
+    "자료 표 판 이름(v3 등)은 보이는 글에 쓰지 않는다(지침 3.1 내부 코드)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 34
+  },
+  {
+   "id": "S07",
+   "page": 7,
+   "part": "1부 · 자료와 설계",
+   "archetype": "A4",
+   "title": "평가 설계",
+   "subtitle": "1부 · 레나델타 예시 · 0.5° 블록 절반 분할 5회 · 라벨 0, 3, 10, 40, 160, 320, 1000개와 전량",
+   "takeaway": "모든 방법을 같은 채점 블록에서 같은 라벨로 비교",
+   "visible_text": {
+    "panel_heads": [
+     "지역 홀드아웃",
+     "지역 안 블록 홀드아웃"
+    ],
+    "direct_labels": [
+     "100 km 완충",
+     "라벨 블록",
+     "채점 블록"
+    ],
+    "key_line": "없음(직접 라벨로 대체)"
+   },
+   "evidence": {
+    "kind": "v3 그림 패널 슬라이드판(같은 척도 비교 쌍)",
+    "ref": "Fig 1c·d 확대도 2개(레나델타, c 지역 홀드아웃, d 블록 홀드아웃), medium='slide'",
+    "encoding": "왼쪽: 지역 경계 1.0 pt 검정, 100 km 완충 파선, 원천 쪽 셀. 오른쪽: 실제 0.5° 블록(라벨 블록 #bdbdbd, 채점 블록 #737373), 라벨 점 검정. 두 패널 같은 축척, 축척 막대 각각",
+    "data_sources": [
+     "data/processed/paper_figs/fig1_blocks.csv (region=Lena)",
+     "data/processed/paper_figs/fig1_meta.csv (lena_lat0, lena_lat1, lena_lon0, lena_lon1)",
+     "results/rescale_lg/data/processed/lg/lg_meta.json (n_grid, splits)",
+     "src/polar/m1_core.py half_split_blocks(라벨 값 미사용 분할 재계산)"
+    ],
+    "status": "v3 미생성. [미확인: 저장된 분할 블록 배정 표 없음, 라벨 값 없이 재계산 필요]. 레나델타는 블록 폭 조건(1.0 mm 이상)을 만족하는 확대 지역(지침 2.11)"
+   },
+   "intent": "공정한 시험지(같은 라벨, 같은 채점 셀, 두 물리 기준선)를 실제 지도 확대로 보인다. 글씨 상자 도식 대신 지도",
+   "notes": {
+    "script": "모든 비교는 같은 시험지에서 했다. 왼쪽은 지역 홀드아웃이다. 대상 지역과 주변 100 km를 학습 원천에서 뺀다. 오른쪽은 대상 지역 안의 블록 홀드아웃이다. 0.5° 블록을 두 반쪽으로 나누어 한쪽에서 라벨을 뽑고 다른 쪽에서만 채점한다. 기계학습이 라벨을 쓰면 Stefan 식도 같은 라벨로 계수를 다시 맞춘다. 판정은 두 가지 가중의 신뢰구간이 같은 쪽일 때만 오차 감소나 증가로 쓴다. 지역 안 시험은 전이 결과를 본 뒤 설계했으므로 그 표지를 단다.",
+    "reference_line": "레나델타: 유효 분할 5, 라벨 반쪽 1120–1737셀, 채점 1278–1860셀, 채점 블록 5–16. 재표집 10,000회(전이 본 판정 8개 가설은 1000회). 재보정은 원천 계수 쪽 수축(κ 10). 지역 내 시험 분할 25회.",
+    "script_chars": 257
+   },
+   "numbers": [
+    {
+     "value": "0, 3, 10, 40, 160, 320, 1000, 전량",
+     "meaning": "라벨 수 격자",
+     "source": "results/rescale_lg/data/processed/lg/lg_meta.json (n_grid)",
+     "doc": "paper/claims/D_data_and_design/README.md E24"
+    },
+    {
+     "value": "5",
+     "meaning": "전이 분할 수",
+     "source": "results/rescale_lg/data/processed/lg/lg_meta.json (splits)",
+     "doc": "paper/claims/D_data_and_design/README.md E25"
+    },
+    {
+     "value": "1120–1737 / 1278–1860 / 5–16",
+     "meaning": "레나델타 라벨 반쪽 셀 / 채점 셀 / 채점 블록",
+     "source": "results/rescale_lg/data/processed/lg/lg_targets.csv (Lena, x, valid)",
+     "doc": "paper/claims/D_data_and_design/README.md E27"
+    },
+    {
+     "value": "25",
+     "meaning": "지역 내 시험 분할 수(알래스카, 캐나다. 레나델타 24)",
+     "source": "paper/claims/C4_sufficient_labels/tables/wf2b_tests.csv (WF6-a n_splits_expected)",
+     "doc": "paper/claims/D_data_and_design/README.md E48",
+     "label": "결과 열람 뒤 설계"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "D_data_and_design",
+     "C7_evaluation_design"
+    ],
+    "experiments": [
+     "LG §1–3",
+     "WF6"
+    ],
+    "placeholders": [],
+    "docs": [
+     "design/journal_grade_style_guide.md 6.1, 2.11",
+     "paper/claims/D_data_and_design/README.md 1.3"
+    ]
+   },
+   "flags": [
+    "판정 단어 정의는 부록 AP2",
+    "확대도에 강조 사각형을 두면 두 패널 같은 좌표(SL-10)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 27
+  },
+  {
+   "id": "S08",
+   "page": 8,
+   "part": "1부 · 자료와 설계",
+   "archetype": "A2",
+   "title": "검증 설계에 따른 오차",
+   "subtitle": "1부 · 다섯 지역 등가중 평균 · 직접 ML(CatBoost)과 Stefan 최소제곱 · 검증 단계 8개",
+   "takeaway": "직접 ML 오차만 검증 설계에 따라 10.34 cm 증가",
+   "visible_text": {
+    "row_labels": [
+     "셀 무작위",
+     "공변량 묶음",
+     "0.05° 격자",
+     "0.5° 블록",
+     "공간 군집",
+     "군집 + 100 km",
+     "군집 + 500 km",
+     "지역 홀드아웃"
+    ],
+    "direct_labels": [
+     "직접 ML",
+     "Stefan 최소제곱"
+    ],
+    "x_axis": "RMSE (cm)"
+   },
+   "evidence": {
+    "kind": "덱 전용 차트(검증 사다리 점 그림). v3 Fig 1e(검증 사다리)의 슬라이드판 후보",
+    "ref": "검증 단계별 RMSE 점 그림",
+    "chart": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.3,
+      "w": 12.0,
+      "h": 5.1
+     },
+     "y": "검증 단계 8행(위에서 아래로 분리가 커지는 순서)",
+     "x": "RMSE (cm), 20–35, 눈금 4–6개",
+     "marks": "행마다 직접 ML 점(#6b7280, 8 pt)과 Stefan 최소제곱 점(#4d4d4d, 8 pt), 계열마다 행 사이를 잇는 선(직접 ML 파선 2.0 pt, Stefan 실선 2.0 pt). 직접 라벨은 마지막 행 오른쪽에 한 번"
+    },
+    "data_sources": [
+     "paper/claims/C7_evaluation_design/tables/lgv_tests.csv (test_id=L20, item='D0[catboost_lo] RMSE@V-*', scope=MEAN5, rmse_A)",
+     "paper/claims/C7_evaluation_design/tables/lgv_metrics.csv (Stefan 최소제곱 PS 단별 RMSE)",
+     "paper/claims/C7_evaluation_design/tables/lgv_tests.csv (test_id=L19, contrast='D0[catboost_lo]:V-G-V-R', scope=MEAN5)"
+    ],
+    "status": "덱 전용 계산(원천 표 필터만). 추가 실험 검증 사다리 결과가 나오면 지역별 판으로 교체"
+   },
+   "intent": "왜 지역 홀드아웃으로 평가하는지를 수치로 보인다. 무작위 분할 과대평가는 중심 주장이 아니라 설계의 근거로 둔다(지침 1.1)",
+   "notes": {
+    "script": "평가 설계가 왜 중요한지를 보이는 쪽이다. 다섯 지역에서 같은 직접 기계학습을 여덟 가지 검증 단계로 채점했다. 셀 무작위 분할에서 지역 홀드아웃으로 갈수록 직접 기계학습의 오차는 단조롭게 커졌고, 그 차이는 10.34 cm였다. 같은 단계에서 Stefan 식의 오차는 거의 변하지 않았다. 무작위 분할에서는 학습 셀이 시험 셀 바로 옆에 놓이기 때문이다. 그래서 이 연구는 지역 홀드아웃으로 성능을 보고하고, 방법 선정은 대상 라벨 안의 공간 분리 교차검증으로 한다. 지역별 검증 사다리는 추가 실험으로 보강한다.",
+    "reference_line": "C7(보조). 셀 무작위 22.91 → 지역 홀드아웃 33.25 cm, 차 +10.34 [7.29, 12.84], 블록 등가중 +6.15 [4.70, 7.57](보조 열화 크기, 확인적 판정 아님). 500 km 군집 − 셀 무작위 +8.22 [5.65, 10.38]. Stefan 최소제곱 26.81–26.96 cm. 등록 판정은 '지지하지 않음'이라 '역전' 표현 쓰지 않음.",
+    "script_chars": 288
+   },
+   "numbers": [
+    {
+     "value": "22.91, 24.28, 25.61, 27.17, 30.31, 30.97, 31.13, 33.25 cm",
+     "meaning": "직접 ML RMSE, 검증 단계 순(다섯 지역 등가중)",
+     "source": "paper/claims/C7_evaluation_design/tables/lgv_tests.csv (L20 rmse_A)",
+     "doc": "paper/claims/C7_evaluation_design/README.md 2.3 B1–B8"
+    },
+    {
+     "value": "+10.34 [7.29, 12.84] cm, 블록 등가중 +6.15 [4.70, 7.57]",
+     "meaning": "지역 홀드아웃 − 셀 무작위(직접 ML)",
+     "source": "paper/claims/C7_evaluation_design/tables/lgv_tests.csv (L19, V-G-V-R, MEAN5)",
+     "doc": "paper/claims/C7_evaluation_design/README.md 2.2 A1",
+     "label": "보조(열화 크기)"
+    },
+    {
+     "value": "+8.22 [5.65, 10.38] cm",
+     "meaning": "500 km 완충 공간 군집 − 셀 무작위(등록 대비)",
+     "source": "paper/claims/C7_evaluation_design/tables/lgv_tests.csv (L20, V-C500-V-R)",
+     "doc": "paper/claims/C7_evaluation_design/README.md 2.3 B9",
+     "label": "오차 증가, 보조 열 Holm p 0.0004"
+    },
+    {
+     "value": "26.81–26.96 cm",
+     "meaning": "Stefan 최소제곱 RMSE 범위(같은 사다리)",
+     "source": "paper/claims/C7_evaluation_design/tables/lgv_metrics.csv",
+     "doc": "paper/claims/C7_evaluation_design/README.md 1.3"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C7_evaluation_design"
+    ],
+    "experiments": [
+     "LGX L19, L20"
+    ],
+    "placeholders": [
+     "[XH: R1 | 결과 열람 뒤 설계, 서술(판정어 없음). L19, L20 은 등록 | 2.8 사전 고정 서술 규칙]"
+    ],
+    "docs": [
+     "paper/claims/C7_evaluation_design/README.md 1.2–1.3"
+    ]
+   },
+   "flags": [
+    "'가장 정직한 추정', '역전' 쓰지 않음(docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.4, docs/research/2026-10-04/scirep_format_and_drafts.md 4.8)",
+    "방향 표지 쓰지 않음(차트가 단순)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 31
+  },
+  {
+   "id": "S09",
+   "page": 9,
+   "part": "1부 · 자료와 설계",
+   "archetype": "A8",
+   "title": "Stefan 기준선과 물리 잔차 결합",
+   "subtitle": "1부 · 레나델타 실제 라벨 · 라벨 10개 재보정 예시",
+   "takeaway": "라벨로 고치는 대상은 Stefan 계수와 잔차의 두 가지",
+   "visible_text": {
+    "direct_labels": [
+     "원천 계수 Stefan",
+     "재보정 Stefan",
+     "잔차"
+    ],
+    "formula_in_figure": "ALT = E √TDD",
+    "symbol_key_line": "E Stefan 계수, TDD 융해 도일",
+    "axes": [
+     "√TDD (√(°C·일))",
+     "ALT (cm), 아래로 깊어짐"
+    ]
+   },
+   "evidence": {
+    "kind": "개념 좌표도(실제 자료 위)",
+    "ref": "Fig 3a 개념 좌표도 슬라이드판",
+    "chart": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.3,
+      "w": 12.0,
+      "h": 4.75
+     },
+     "marks": "레나델타 라벨 점(검정 3.5–8 pt, alpha 0.35), 원천 계수 직선(#4d4d4d 2.0 pt), 라벨 10개로 재보정한 직선(#2b5c8f 3.0 pt), 잔차 수직 선분 3–5개(#9a7bc9 2.0 pt), 재보정에 쓴 라벨 10개는 검정 채운 원으로 구분",
+     "rule": "보정 대상(계수, 잔차)만 방법 색. 상자·화살표 없음"
+    },
+    "data_sources": [
+     "data/processed/fidelity_base_v3.csv (Lena 행의 ALT, TDD)",
+     "data/processed/paper_figs/fig1_source.csv (target=Lena, E0 1.62)",
+     "docs/EXPERIMENT_PLAN_LG_2026-09-29.md §3(재보정 정의, κ 10)"
+    ],
+    "status": "덱 전용 계산. [미확인: 예시 라벨 10개 추출 seed 지정 필요. 판정과 무관한 예시 그림]"
+   },
+   "intent": "방법 개념을 상자 흐름도 없이 실제 축과 자료로 설명한다(A8). 이후 쪽의 '재보정', '잔차' 용어를 정의한다",
+   "notes": {
+    "script": "방법을 설명하기 전에 Stefan 식이 무엇을 맞추는지 보인다. 가로축은 융해 도일의 제곱근, 세로축은 활동층 두께이고 점은 레나델타의 실제 라벨이다. 원천 계수 Stefan은 다른 지역에서 정한 기울기 하나를 쓴다. 대상 라벨 10개가 생기면 그 기울기를 원천 계수 쪽으로 당기며 다시 맞춘다. 이것이 재보정 Stefan이다. 그래도 남는 실측과의 차이가 잔차이고, 물리 잔차 결합은 기계학습이 이 잔차만 배우게 한다. 라벨로 고치는 대상은 결국 계수와 잔차의 두 가지이다.",
+    "reference_line": "레나델타 원천 계수 E0 1.62(최소제곱, 원천 셀). 재보정은 κ 10 수축. 잔차 가중 λ 는 0.25 기본, 교차검증 λ 는 지역 내 시험에서 사용.",
+    "script_chars": 266
+   },
+   "numbers": [
+    {
+     "value": "1.62",
+     "meaning": "레나델타 대상의 원천 계수 E0",
+     "source": "data/processed/paper_figs/fig1_source.csv (target=Lena, E0)",
+     "doc": "paper/claims/D_data_and_design/README.md E37"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "D_data_and_design",
+     "C3_structure_by_label_count"
+    ],
+    "experiments": [],
+    "placeholders": [],
+    "docs": [
+     "design/journal_grade_style_guide.md 2.10, 6.3",
+     "design/slide_archetypes.md A8"
+    ]
+   },
+   "flags": [
+    "직접 라벨 3개 이하(지침 6.3 점검)",
+    "내부 약호(P0, P1, R1) 금지"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 31
+  },
+  {
+   "id": "S10",
+   "page": 10,
+   "part": "1부 · 자료와 설계",
+   "archetype": "A7",
+   "title": "비교한 방법",
+   "subtitle": "1부 · 방법 5계열 · 학습기 10종(주 학습기 CatBoost)",
+   "takeaway": "물리 정보를 쓰는 위치에 따라 방법을 5계열로 구분",
+   "visible_text": {
+    "table": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.35,
+      "w": 12.0,
+      "row_h": 0.75,
+      "col_w": [
+       3.0,
+       4.2,
+       4.8
+      ]
+     },
+     "columns": [
+      "방법",
+      "물리 정보의 위치",
+      "ML이 배우는 대상"
+     ],
+     "rows": [
+      [
+       "Stefan 기준선",
+       "예측 자체(E √TDD)",
+       "없음, 계수만 라벨로 보정"
+      ],
+      [
+       "물리 유사라벨 증강",
+       "학습 자료의 유사라벨",
+       "실측과 유사라벨에서 ALT"
+      ],
+      [
+       "물리 잔차 결합",
+       "기본 답(앵커)",
+       "실측과 Stefan의 차이"
+      ],
+      [
+       "물리 입력 ML",
+       "입력 열 하나",
+       "물리 열을 포함한 ALT"
+      ],
+      [
+       "직접 ML",
+       "쓰지 않음",
+       "공변량에서 ALT"
+      ]
+     ]
+    },
+    "support_line": "물리 잔차 결합의 예측은 Stefan + λ × 잔차이고, 배운 잔차가 없으면 Stefan으로 돌아감 (λ 잔차 가중)",
+    "orange_spot": "'기본 답(앵커)' 셀 한 곳"
+   },
+   "evidence": {
+    "kind": "헤어라인 표(12.00 폭)",
+    "ref": "방법 계열 정의 표",
+    "data_sources": [
+     "docs/RESEARCH_OVERVIEW_2026-10-02.md 5절 C3(두 구조의 차이)",
+     "docs/QA_FINAL_REVIEW_2026-10-02.md 0절 기호 표",
+     "paper/claims/C1_label0_safety/README.md 2.1(학습기 10종)"
+    ],
+    "status": "문구 확정 후보"
+   },
+   "intent": "이후 결과 쪽의 방법 이름을 한 번 정의한다(용어 첫 등장 정의, WT-07). 방법 색과 같은 이름을 쓴다",
+   "notes": {
+    "script": "비교한 방법은 물리 정보를 어디에 쓰는지로 다섯 계열이다. Stefan 기준선은 계수 하나로 예측한다. 물리 유사라벨 증강은 Stefan 식으로 만든 유사라벨을 실측과 함께 학습한다. 물리 잔차 결합은 Stefan 값을 기본 답으로 두고 차이만 배우므로 배운 것이 없으면 Stefan으로 돌아간다. 물리 입력 기계학습은 Stefan 출력을 입력 열 하나로 넣으므로 그 열을 무시할 수 있다. 직접 기계학습은 물리 정보를 쓰지 않는다. 학습기는 CatBoost를 주로 쓰고 표형 파운데이션 모델 2종과 신경망 4종을 포함해 10종을 시험했다.",
+    "reference_line": "학습기 10종: CatBoost 3설정(기본, 용량 확대, 원천 교차검증 조정), 랜덤 포레스트, TabPFN v2, TabICL v2(두 컨텍스트 조건을 한 학습기로), 원천 지역 하나 제외 교차검증으로 고른 신경망 4종(MLP, 다중 헤드 MLP, 축소 FT-Transformer, RealMLP). 그 밖 Stefan·CCI 평균 앵커, 적층은 보충.",
+    "script_chars": 302
+   },
+   "numbers": [
+    {
+     "value": "10",
+     "meaning": "라벨 0 비교 학습기 수",
+     "source": "paper/claims/C1_label0_safety/README.md 2.1 표(1–10번)"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C1",
+     "C3"
+    ],
+    "experiments": [
+     "LG",
+     "LGX",
+     "LGT",
+     "LGF"
+    ],
+    "placeholders": [],
+    "docs": [
+     "docs/RESEARCH_OVERVIEW_2026-10-02.md 5절 C3"
+    ]
+   },
+   "flags": [
+    "표 셀 같은 문구 반복 0(H13)",
+    "λ, E, TDD 는 기호 열쇠 줄로 정의(DG-06)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 28
+  },
+  {
+   "id": "S11",
+   "page": 11,
+   "part": "2부 · 라벨 0개",
+   "archetype": "A4",
+   "title": "대상별 전이 오차 변화",
+   "subtitle": "2부 · 라벨 0개 · 30개 대상(독립 지역 7) · 원천 계수 Stefan 대비 · 사후 서술",
+   "takeaway": "2 cm 넘게 악화된 대상, 물리 유사라벨 증강 2개와 직접 ML 18개",
+   "visible_text": {
+    "panel_heads": [
+     "직접 ML",
+     "물리 유사라벨 증강"
+    ],
+    "colorbar_label": "오차 변화 (cm)",
+    "key_line": "원 하나가 대상 하나, 파랑이 오차 감소"
+   },
+   "evidence": {
+    "kind": "v3 결과 지도 슬라이드판(같은 척도 비교 쌍)",
+    "ref": "Fig 6a·b 대상별 오차 변화 지도, medium='slide'",
+    "encoding": "범북극 평사 투영, 같은 범위. 대상 중심 원(지름 고정, 검정 테두리 1.0 pt), cmc.broc ±vmax 공유 정규화, 공유 컬러바 1개(C3–C4). 겹친 대상은 지시선 부채꼴. 지도 위 수치 없음",
+    "data_sources": [
+     "results/rescale_lg/data/processed/lg/lg_curve.csv (mode=x, n=0, learner=catboost_lo, placement=cell, alpha=1; D0·D1 lam=1.0)",
+     "paper/claims/C1_label0_safety/tables/lgd_curve_lic.csv",
+     "scripts/2_evaluation/wf0_reanalysis.py load(), deltas()(읽기 전용 호출)",
+     "paper/claims/C1_label0_safety/tables/wf0_risk.csv(대상 수)"
+    ],
+    "status": "v3 미생성. [미확인: 대상 중심 좌표 파일. 하위 지역 대상의 중심은 lg_subregion_map_v1.csv 와 fig1_blocks.csv 로 계산해야 함]"
+   },
+   "intent": "첫 결과 쪽. 결론 줄은 '직접 ML 실패'가 아니라 대상별 결과의 사후 서술 수(S-11). 공간 분포를 지도로 보인다(H5)",
+   "notes": {
+    "script": "라벨이 하나도 없는 새 지역에서 물리 정보를 쓴 방법과 직접 기계학습의 대상별 오차 변화를 비교하는 쪽이다. 두 지도는 같은 색 범위이고, 원 하나가 대상 하나, 파랑은 원천 계수 Stefan보다 오차가 작음을 뜻한다. 30개 대상 가운데 2 cm 넘게 나빠진 대상은 물리 유사라벨 증강 2개, 직접 기계학습 18개였다. 이 수는 결과를 본 뒤 계산한 사후 서술이고, 신뢰구간 기준으로 세면 8개와 14개이다. 알래스카에서는 증강도 Stefan보다 1.79 cm 나빴다. 다음 쪽은 이 차이가 물리 정보에서 오는지를 위약으로 확인한다.",
+    "reference_line": "C1(사후 서술, 판정어 없음). 2 cm 문턱 대상 수: 직접 ML 18, 잔차 가중 1.0 13, 저가중 잔차 5, 증강 2, 증강·앵커·잔차 1. CI 기준 악화 대상: 14, 10, 6, 8, 5. 알래스카: 직접 ML 35.33, 증강 16.33, 원천 계수 Stefan 14.54 cm(증강 +1.79 [0.37, 2.57]). 30개 대상 중 독립 지역 7개.",
+    "script_chars": 299
+   },
+   "numbers": [
+    {
+     "value": "18, 13, 5, 2, 1 (30개 중)",
+     "meaning": "라벨 0에서 원천 계수 Stefan 보다 2 cm 넘게 나빠진 대상(직접 ML, 잔차 λ 1.0, 저가중 잔차 λ 0.25, 증강, 증강·앵커·잔차 λ 1.0)",
+     "source": "paper/claims/C1_label0_safety/tables/wf0_risk.csv (n=0, n_worse_2cm)",
+     "doc": "paper/claims/C1_label0_safety/README.md 2.5",
+     "label": "사후 서술"
+    },
+    {
+     "value": "14, 10, 6, 8, 5",
+     "meaning": "두 가중 CI 가 모두 0 을 넘은 대상 수(같은 순서는 직접 ML, 잔차 1.0, 저가중 잔차, 증강, 증강·앵커·잔차)",
+     "source": "wf0_reanalysis.py 읽기 전용 재계산",
+     "doc": "paper/claims/C1_label0_safety/README.md 2.8 항목 3",
+     "label": "사후 계산"
+    },
+    {
+     "value": "35.33, 16.33, 14.54 cm",
+     "meaning": "알래스카 대상 RMSE(직접 ML, 증강, 원천 계수 Stefan)",
+     "source": "results/rescale_lg/data/processed/lg/lg_curve.csv",
+     "doc": "paper/claims/C1_label0_safety/README.md 2.6"
+    },
+    {
+     "value": "7",
+     "meaning": "30개 대상 가운데 독립 지역 수",
+     "source": "paper/claims/C1_label0_safety/tables/wf0_misspec.csv (target, src)",
+     "doc": "paper/claims/C1_label0_safety/README.md 2.5"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C1_label0_safety"
+    ],
+    "experiments": [
+     "WF0",
+     "LG",
+     "LGD"
+    ],
+    "placeholders": [
+     "[XG: R2 | 결과 열람 뒤 설계, 등록 이탈(WRAPUP 10) | 2.7 사전 고정 해석 문장 XG-1, XG-2, XG-3, 공통 문장]"
+    ],
+    "docs": [
+     "paper/claims/C1_label0_safety/README.md 1.3, 5.2"
+    ]
+   },
+   "flags": [
+    "'안전', '손해 없는' 쓰지 않음(C1 5.2)",
+    "부제에 '사후 서술' 필수",
+    "지도 위에 수를 쓰지 않는다"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 40
+  },
+  {
+   "id": "S12",
+   "page": 12,
+   "part": "2부 · 라벨 0개",
+   "archetype": "A2",
+   "title": "물리 유사라벨의 정보 출처",
+   "subtitle": "2부 · 라벨 0개와 10개 · 주 4지역 평균 · 위약 4종",
+   "takeaway": "물리 유사라벨이 순서를 섞은 유사라벨보다 오차 1.63 cm 감소",
+   "visible_text": {
+    "row_labels": [
+     "순서를 섞은 유사라벨",
+     "풀 평균 상수",
+     "원천 평균 상수",
+     "선형 융해 지수"
+    ],
+    "x_axis": "물리 유사라벨 − 위약 (cm)",
+    "key_line": "굵은 막대 셀 가중 CI, 가는 막대 블록 등가중 CI, 회색 띠 ±0.5 cm",
+    "direction_marker": "물리 유사라벨 오차 낮음"
+   },
+   "evidence": {
+    "kind": "v3 그림 패널 슬라이드판(포레스트)",
+    "ref": "Fig 3b 위약 포레스트, medium='slide'",
+    "encoding": "행 = 위약 4종, 묶음 머리 '라벨 0개'와 '라벨 10개'(Fig 3b 와 같음). 점 검정(대비 점추정), 셀 가중 CI 2.0 pt, 블록 등가중 CI 1.0 pt, 0선 2.0 pt #4d4d4d, 동등 띠 #ededed. 판정 기호·판정표 없음",
+    "data_sources": [
+     "data/processed/paper_figs/fig3_a.csv (placebo, n, delta, ci_lo, ci_hi, delta_beq, ci_lo_beq, ci_hi_beq)",
+     "paper/claims/C1_label0_safety/tables/lgw_bundle.csv (ab=AB3, scope=MEAN)",
+     "paper/claims/C1_label0_safety/tables/lgx_tests.csv (test_id=L15)"
+    ],
+    "status": "v3 미생성(v2 Fig 3a 값 재사용 가능)"
+   },
+   "intent": "증강 이득이 물리 정보에서 온다는 위약 대조를 보인다. 단정형 가능 대비(두 CI 판정 일치, Holm 뒤 유의)",
+   "notes": {
+    "script": "증강의 이득이 Stefan 식의 정보에서 오는지, 단지 유사라벨을 더한 효과인지를 위약으로 가렸다. 위약은 유사라벨의 순서를 섞은 것, 상수로 바꾼 것 두 가지, 선형 융해 지수로 바꾼 것이다. 가운데 세로선이 위약과 같은 오차이고 왼쪽이 물리 유사라벨의 오차가 작은 쪽이다. 순서를 섞은 위약보다 오차가 1.63 cm 작았고, 이 대비는 사전 등록한 초록 대비이다. 다만 선형 융해 지수 위약과의 차이는 0.5 cm 미만이었다. 라벨 10개에서는 증강을 더한 결합이 재보정 앵커 결합과 0.5 cm 안에서 같았다.",
+    "reference_line": "C1. 섞은 유사라벨 대비 −1.63 [−1.98, −1.04], 블록 등가중 −1.05 [−1.51, −0.57], Holm p 0.001(초록 묶음 m 10), 공통 CI 도 같은 판정. 위약 8대비 가운데 7 오차 감소. 선형 융해 지수: 라벨 0 −0.48(0.5 cm 미만), 라벨 10 동등. 라벨 10개 증강 결합은 동등(Holm 뒤 동등성 p 0.002).",
+    "script_chars": 288
+   },
+   "numbers": [
+    {
+     "value": "−1.63 [−1.98, −1.04] cm, 블록 등가중 −1.05 [−1.51, −0.57], Holm p 0.001",
+     "meaning": "물리 유사라벨 − 순서를 섞은 유사라벨(라벨 0, 주 4지역 평균)",
+     "source": "paper/claims/C1_label0_safety/tables/lgw_bundle.csv (ab=AB3, scope=MEAN)",
+     "doc": "paper/claims/C1_label0_safety/README.md 2.3",
+     "label": "오차 감소(초록 대비)"
+    },
+    {
+     "value": "−0.48 [−0.62, −0.27] cm (라벨 0), −0.08 [−0.18, 0.05] (라벨 10)",
+     "meaning": "물리 유사라벨 − 선형 융해 지수 위약",
+     "source": "paper/claims/C1_label0_safety/tables/lgx_tests.csv (L15, tddlin)",
+     "doc": "paper/claims/C1_label0_safety/README.md 2.3",
+     "label": "라벨 0 오차 감소(0.5 cm 미만), 라벨 10 동등"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C1_label0_safety"
+    ],
+    "experiments": [
+     "AB3",
+     "LGX L15",
+     "AB6"
+    ],
+    "placeholders": [],
+    "docs": [
+     "paper/claims/C1_label0_safety/README.md 2.3, 5.1(8)"
+    ]
+   },
+   "flags": [
+    "방향 표지 쪽당 1개",
+    "'증강 이득은 물리 정보에서만 온다' 쓰지 않음(C1 5.2)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 36
+  },
+  {
+   "id": "S13",
+   "page": 13,
+   "part": "3부 · 라벨 3–10개",
+   "archetype": "A6",
+   "a6_stage": "1/3",
+   "title": "라벨 수에 따른 오차 변화",
+   "subtitle": "3부 · 라벨 3–10개 · 왼쪽 주 4지역 평균, 오른쪽 레나델타·캐나다 평균 · 1단계 직접 ML",
+   "takeaway": "라벨 40개까지 직접 ML 오차가 유의하게 작은 지역 없음",
+   "visible_text": {
+    "direct_labels": [
+     "직접 ML",
+     "연도 정합 Stefan"
+    ],
+    "y_axis": "원천 계수 Stefan 대비 오차 변화 (cm)",
+    "x_axis": "대상 라벨 수, n"
+   },
+   "evidence": {
+    "kind": "v3 그림 패널 슬라이드판(순차 공개 3단계, 모든 단계 같은 위치·크기·축 범위)",
+    "ref": "Fig 2a(주 4지역 평균, 라벨 10개까지)와 Fig 2b(레나델타·캐나다 평균, 전 구간), medium='slide'",
+    "encoding": "x 라벨 수: n = 0 별도 좁은 축 + n ≥ 3 log10 축(눈금 3, 10, 40, 160, 320, 1000) + 전량 별도 좁은 축(2b 만). y 원천 계수 Stefan 대비 오차 변화 (cm), 0선 2.0 pt #4d4d4d, 연도 정합 Stefan 점선. 패널당 CI 띠 2개 이하(alpha 0.20). 계열 이름은 선 끝 직접 라벨. 판정 기호·판정표·symlog 없음",
+    "data_sources": [
+     "data/processed/paper_figs/fig2_pool_curves.csv (edition E1_P4_n_le_10, E2_LenaCanada_all_n)",
+     "data/processed/paper_figs/pool_fixed_curve.csv (baseline=P0, scope=MEAN)",
+     "data/processed/paper_figs/fig2_pstar_pool.csv",
+     "data/processed/paper_figs/fig2_registered.csv"
+    ],
+    "status": "v3 미생성. 세 단계 그림을 같은 축으로 미리 고정",
+    "series_this_stage": [
+     "0선(원천 계수 Stefan)",
+     "연도 정합 Stefan(점선)",
+     "직접 ML(#6b7280 파선)"
+    ]
+   },
+   "intent": "A6 첫 단계. 라벨이 적을 때 기준이 물리식이어야 하는 이유를 보인다",
+   "notes": {
+    "script": "3부는 라벨이 3–10개일 때이다. 같은 그림을 세 단계로 보인다. 가로축은 라벨 수, 세로축은 원천 계수 Stefan 대비 오차 변화이고 0선이 원천 계수 Stefan이다. 왼쪽은 주 4지역 평균의 라벨 10개까지, 오른쪽은 레나델타와 캐나다 평균의 전 구간이다. 첫 단계는 직접 기계학습이다. 라벨 40개까지 직접 기계학습의 오차가 원천 계수 Stefan보다 유의하게 작은 지역은 없었다. 이 결과는 라벨이 적을 때 기준이 물리식이어야 하는 근거이다. 다음 단계에서 재보정 Stefan을 더한다.",
+    "reference_line": "C1. 라벨 0–40, 주 4지역 가운데 직접 ML이 원천 계수 Stefan보다 유의하게 나은 지역 0/4(사전 등록 가설 지지). 주 4지역 평균 직접 ML − 원천 계수 Stefan: 라벨 0 +2.25, 3 +1.89, 10 +1.31 cm(라벨 10은 미결정).",
+    "script_chars": 279
+   },
+   "numbers": [
+    {
+     "value": "0/4",
+     "meaning": "라벨 0–40에서 직접 ML 이 원천 계수 Stefan 을 유의하게 넘은 지역",
+     "source": "paper/claims/C1_label0_safety/tables/lg_tests.csv (test_id=L1, scope=verdict)",
+     "doc": "paper/registry/experiments.csv T1 verdict_summary_ko",
+     "label": "지지"
+    },
+    {
+     "value": "+2.25, +1.89, +1.31 cm",
+     "meaning": "주 4지역 평균 직접 ML − 원천 계수 Stefan(라벨 0, 3, 10)",
+     "source": "data/processed/paper_figs/pool_fixed_curve.csv (edition E1_P4_n_le_10, method D0, lam 1.0, scope MEAN)",
+     "label": "라벨 0과 3 오차 증가(공통 CI 미결정), 라벨 10 미결정"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C1_label0_safety"
+    ],
+    "experiments": [
+     "LG L1"
+    ],
+    "placeholders": [],
+    "docs": [
+     "design/slide_archetypes.md A6",
+     "design/journal_grade_style_guide.md 6.2"
+    ]
+   },
+   "flags": [
+    "앞 계열 색을 회색으로 낮추지 않는다(A6 금지)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 32
+  },
+  {
+   "id": "S14",
+   "page": 14,
+   "part": "3부 · 라벨 3–10개",
+   "archetype": "A6",
+   "a6_stage": "2/3",
+   "title": "라벨 수에 따른 오차 변화",
+   "subtitle": "3부 · 라벨 3–10개 · 2단계 재보정 Stefan · 지역별 유의 감소 1/4",
+   "takeaway": "라벨 10개 계수 재보정으로 4지역 평균 오차 2.45 cm 감소",
+   "visible_text": {
+    "direct_labels": [
+     "재보정 Stefan"
+    ]
+   },
+   "evidence": {
+    "kind": "v3 그림 패널 슬라이드판(순차 공개 3단계, 모든 단계 같은 위치·크기·축 범위)",
+    "ref": "Fig 2a(주 4지역 평균, 라벨 10개까지)와 Fig 2b(레나델타·캐나다 평균, 전 구간), medium='slide'",
+    "encoding": "x 라벨 수: n = 0 별도 좁은 축 + n ≥ 3 log10 축(눈금 3, 10, 40, 160, 320, 1000) + 전량 별도 좁은 축(2b 만). y 원천 계수 Stefan 대비 오차 변화 (cm), 0선 2.0 pt #4d4d4d, 연도 정합 Stefan 점선. 패널당 CI 띠 2개 이하(alpha 0.20). 계열 이름은 선 끝 직접 라벨. 판정 기호·판정표·symlog 없음",
+    "data_sources": [
+     "data/processed/paper_figs/fig2_pool_curves.csv (edition E1_P4_n_le_10, E2_LenaCanada_all_n)",
+     "data/processed/paper_figs/pool_fixed_curve.csv (baseline=P0, scope=MEAN)",
+     "data/processed/paper_figs/fig2_pstar_pool.csv",
+     "data/processed/paper_figs/fig2_registered.csv"
+    ],
+    "status": "v3 미생성. 세 단계 그림을 같은 축으로 미리 고정",
+    "series_this_stage": [
+     "재보정 Stefan(#2b5c8f 실선, CI 띠)"
+    ]
+   },
+   "intent": "라벨의 첫 쓰임이 계수 재보정임을 보이고, 그 효과가 지역에 따라 다름을 단서로 단다",
+   "notes": {
+    "script": "두 번째 단계는 같은 라벨로 계수만 다시 맞춘 재보정 Stefan이다. 라벨 10개에서 주 4지역 평균 오차가 2.45 cm 줄었다. 다만 이 평균은 러시아 서부가 지배한다. 지역별로 유의하게 줄어든 곳은 러시아 서부 하나였고, 캐나다는 오히려 나빠졌고, 그 원인은 라벨 위치의 이질성으로 해석한다. 오른쪽의 레나델타와 캐나다 평균에서도 재보정 Stefan은 원천 계수보다 나빴다. 따라서 라벨의 첫 쓰임은 계수 재보정이다. 그러나 그 효과는 지역의 계수 오차와 라벨 위치에 따라 다르다. 다음 단계에서 재보정 위에 잔차 기계학습을 더한다.",
+    "reference_line": "C2. 라벨 10개 재보정 Stefan − 원천 계수 Stefan −2.45 [−3.04, −1.88], 블록 등가중 −2.62, Holm p 0.001(초록 대비). 지역: 러시아 서부 −11.96 오차 감소, 캐나다 +2.26 [0.71, 2.94] 오차 증가, 레나델타·러시아 동부 미결정. 레나델타·캐나다 평균은 라벨 3개부터 오차 증가(+0.56, +1.24 cm, 라벨 3개는 분할 독립 가정 의존). 캐나다 원인은 해석(C2 README 5.1 의 7).",
+    "script_chars": 302
+   },
+   "numbers": [
+    {
+     "value": "−2.45 [−3.04, −1.88] cm, 블록 등가중 −2.62, Holm p 0.001",
+     "meaning": "라벨 10개 재보정 Stefan − 원천 계수 Stefan, 주 4지역 평균",
+     "source": "paper/claims/C2_bias_diagnosis/tables/lgw_bundle.csv (ab=AB4, MEAN)",
+     "doc": "paper/claims/C2_bias_diagnosis/README.md 2.1 A6",
+     "label": "오차 감소(초록 대비)"
+    },
+    {
+     "value": "−11.96, +2.26 [0.71, 2.94] cm",
+     "meaning": "같은 대비의 러시아 서부, 캐나다 지역 행",
+     "source": "paper/claims/C2_bias_diagnosis/tables/lgw_bundle.csv (ab=AB4, target=Russia_W|x, Canada|x)",
+     "doc": "paper/claims/C2_bias_diagnosis/README.md 2.2 RW4, CA1",
+     "label": "러시아 서부 오차 감소, 캐나다 오차 증가"
+    },
+    {
+     "value": "+0.56, +1.24 cm",
+     "meaning": "레나델타·캐나다 평균 재보정 Stefan − 원천 계수 Stefan(라벨 3, 10)",
+     "source": "data/processed/paper_figs/pool_fixed_curve.csv (edition E2_LenaCanada_all_n, method P1, scope MEAN, baseline P0)",
+     "label": "오차 증가(라벨 3개는 분할 독립 가정 의존)"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C2_bias_diagnosis"
+    ],
+    "experiments": [
+     "AB4"
+    ],
+    "placeholders": [],
+    "docs": [
+     "paper/claims/C2_bias_diagnosis/README.md 1.2–1.3"
+    ]
+   },
+   "flags": [
+    "평균의 판정을 지역 판정처럼 쓰지 않는다(지역 수 병기)",
+    "S-a 열람 표지(AB4 는 같은 양의 분포를 앞서 봄)는 노트 참고 줄에만"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 36
+  },
+  {
+   "id": "S15",
+   "page": 15,
+   "part": "3부 · 라벨 3–10개",
+   "archetype": "A6",
+   "a6_stage": "3/3",
+   "title": "라벨 수에 따른 오차 변화",
+   "subtitle": "3부 · 라벨 3–10개 · 3단계 물리 잔차 결합(재보정 앵커, 잔차 가중 0.25)",
+   "takeaway": "재보정 위 잔차 ML의 추가 이득, 라벨 10개에서 확인되지 않음",
+   "visible_text": {
+    "direct_labels": [
+     "물리 잔차 결합"
+    ]
+   },
+   "evidence": {
+    "kind": "v3 그림 패널 슬라이드판(순차 공개 3단계, 모든 단계 같은 위치·크기·축 범위)",
+    "ref": "Fig 2a(주 4지역 평균, 라벨 10개까지)와 Fig 2b(레나델타·캐나다 평균, 전 구간), medium='slide'",
+    "encoding": "x 라벨 수: n = 0 별도 좁은 축 + n ≥ 3 log10 축(눈금 3, 10, 40, 160, 320, 1000) + 전량 별도 좁은 축(2b 만). y 원천 계수 Stefan 대비 오차 변화 (cm), 0선 2.0 pt #4d4d4d, 연도 정합 Stefan 점선. 패널당 CI 띠 2개 이하(alpha 0.20). 계열 이름은 선 끝 직접 라벨. 판정 기호·판정표·symlog 없음",
+    "data_sources": [
+     "data/processed/paper_figs/fig2_pool_curves.csv (edition E1_P4_n_le_10, E2_LenaCanada_all_n)",
+     "data/processed/paper_figs/pool_fixed_curve.csv (baseline=P0, scope=MEAN)",
+     "data/processed/paper_figs/fig2_pstar_pool.csv",
+     "data/processed/paper_figs/fig2_registered.csv"
+    ],
+    "status": "v3 미생성. 세 단계 그림을 같은 축으로 미리 고정",
+    "series_this_stage": [
+     "물리 잔차 결합(#9a7bc9 실선, CI 띠)"
+    ]
+   },
+   "intent": "재보정을 넘어선 ML 몫이 작음을 보이고 C2 축소와 연결한다",
+   "notes": {
+    "script": "세 번째 단계는 재보정 Stefan 위에 잔차 기계학습을 더한 물리 잔차 결합이다. 라벨 10개에서 재보정 Stefan 대비 추가 이득은 0.18 cm였고, 초록 대비의 다중 비교 보정 뒤에는 차이를 확인하지 못했다. 라벨 전량에서는 0.40 cm 작았고 크기는 0.5 cm 미만이다. 표형 파운데이션 모델의 잔차도 비슷한 크기였다. 따라서 라벨 10개까지 이득의 대부분은 재보정에서 왔고, 잔차 기계학습의 추가 몫은 라벨 10개에서 확인하지 못했다. 다음 쪽은 라벨을 쓰는 보정의 이득이 어디서 큰지를 대상별로 본다.",
+    "reference_line": "C2, C3. 물리 잔차 결합 − 재보정 Stefan: 라벨 10개 −0.18 [−0.53, −0.01], Holm p 0.136(초록 규칙상 '차이를 확인하지 못했다'); 전량 −0.40 [−0.76, −0.22](0.5 cm 미만). TabPFN v2 잔차 라벨 3개 −0.32(보정 전 유의), TabICL v2 잔차 라벨 10개 −0.55. 확장 5지역 풀 라벨 10개 −0.13 동등.",
+    "script_chars": 290
+   },
+   "numbers": [
+    {
+     "value": "−0.18 [−0.53, −0.01] cm, Holm p 0.136",
+     "meaning": "물리 잔차 결합 − 재보정 Stefan, 라벨 10개, 주 4지역 평균",
+     "source": "paper/claims/C2_bias_diagnosis/tables/lgw_bundle.csv (ab=AB5, MEAN)",
+     "doc": "paper/claims/C2_bias_diagnosis/README.md 2.1 A7",
+     "label": "초록 규칙 (b) 차이를 확인하지 못함"
+    },
+    {
+     "value": "−0.40 [−0.76, −0.22] cm",
+     "meaning": "같은 대비, 라벨 전량",
+     "source": "paper/claims/C2_bias_diagnosis/tables/lgw_bundle.csv (ab=AB9, MEAN)",
+     "doc": "paper/claims/C2_bias_diagnosis/README.md 2.1 A9",
+     "label": "오차 감소, 0.5 cm 미만"
+    },
+    {
+     "value": "−0.32, −0.55 cm",
+     "meaning": "TabPFN v2 잔차(라벨 3개), TabICL v2 잔차(라벨 10개) − 재보정 Stefan",
+     "source": "paper/claims/C3_structure_by_label_count/tables/lgt_tests.csv (L33), paper/claims/C3_structure_by_label_count/tables/lgf_tests.csv (LGF-F4)",
+     "doc": "paper/claims/C3_structure_by_label_count/README.md 1.3 항목 8, E38–E39",
+     "label": "TabPFN 은 보정 전 유의"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C2_bias_diagnosis",
+     "C3_structure_by_label_count",
+     "SI_learners_new_regions"
+    ],
+    "experiments": [
+     "AB5",
+     "AB9",
+     "LGT L33",
+     "LGF-F4"
+    ],
+    "placeholders": [
+     "[XA: R3 | 사후 분석(재현(비맹검)) | 2.1 해석 조각]"
+    ],
+    "docs": [
+     "paper/claims/C2_bias_diagnosis/README.md 1.3, 5.2"
+    ]
+   },
+   "flags": [
+    "'ML 이득이 계수 오차에 비례' 쓰지 않음"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 36
+  },
+  {
+   "id": "S16",
+   "page": 16,
+   "part": "3부 · 라벨 3–10개",
+   "archetype": "A5",
+   "title": "계수 오차와 보정 이득",
+   "subtitle": "3부 · 라벨 10개 편향 진단 · 28개 대상 · 라벨 전량 이득 · 결과 열람 뒤 설계",
+   "takeaway": "라벨 10개로 잰 편향 크기와 보정 이득의 순위상관 0.38",
+   "visible_text": {
+    "map_colorbar_label": "원천 계수 오차",
+    "graph_axes": [
+     "라벨 10개 편향 크기 (cm), 로그 축",
+     "원천 계수 Stefan 대비 오차 변화 (cm)"
+    ],
+    "key_line": "모양은 지역, 빈 모양은 하위 지역과 점 추정 대상"
+   },
+   "evidence": {
+    "kind": "지도와 연결 그래프(SI 지도 슬라이드판 + v3 Fig 4b 슬라이드판)",
+    "ref": "왼쪽: 대상별 원천 계수 오차 지도(SI 슬라이드판). 오른쪽: Fig 4b 슬라이드판(같은 부호, 음수 = 오차 감소)",
+    "encoding": "지도: 대상 중심 원, cmc.acton_r(크기), 컬러바 C1–C2. 그래프: 점 = 대상, 모양 = 지역(지침 2.5 모양표), 같은 채움, 대상별 두 CI 세로 막대, 0선과 ±0.5 cm 띠. 티베트(진단 227.71 cm, 오차 변화 −159.55 cm)는 축 밖이므로 오른쪽 아래 모서리 삼각 표지 1개(Fig 4b 와 같다), 값은 노트 참고 줄. 지도 색(|log(E_own/E0)|)과 그래프 x(라벨 10개 편향)는 정의가 다르다",
+    "data_sources": [
+     "paper/claims/C2_bias_diagnosis/tables/derived_c2_wf4c_split.csv (target, diag_abs, gain_w)",
+     "paper/claims/C2_bias_diagnosis/tables/wf_tests.csv (test_id=WF4-c, scope=MEAN: rho, ci_lo, ci_hi, rho_signed)",
+     "paper/claims/C2_bias_diagnosis/tables/lg_targets.csv (part=cpu, mode=x, logE_ratio_own: 지도 색)"
+    ],
+    "status": "v3 미생성. [미확인: 대상 중심 좌표 파일]. 재보정 몫과 ML 몫의 분해 패널은 추가 실험 결과 뒤(자리표시)"
+   },
+   "intent": "C2 를 좁힌 형태로 보인다: 라벨을 쓰는 보정의 이득은 10개 라벨 진단으로 순위를 가늠할 수 있다. ML 몫의 관계는 미확인임을 밝힌다",
+   "notes": {
+    "script": "라벨을 쓰는 보정이 어디서 크게 이득인지 미리 알 수 있는지를 보았다. 왼쪽 지도는 대상별 원천 계수 오차이다. 오른쪽은 라벨 10개로 잰 Stefan 식 편향의 크기와, 라벨 전량에서 교차검증으로 고른 보정 방법이 원천 계수 Stefan보다 줄인 오차의 관계이다. 세로축은 원천 계수 Stefan 대비 오차 변화라 아래로 갈수록 크게 줄인 대상이다. 두 값의 순위상관은 0.38이었다. 편향의 방향은 이득을 예측하지 않았다. 이 이득에는 재보정 몫이 섞여 있고, 재보정을 넘어선 기계학습 몫과 계수 오차의 관계는 아직 확인하지 못했다. 이 분리는 등록한 추가 분석으로 채운다.",
+    "reference_line": "C2(좁힘). 순위상관 0.38 [0.17, 0.55], 28개 대상, 결과 열람 뒤 설계(확인적 아님), 부호 있는 편향 −0.01 [−0.17, 0.18]. 티베트 제외 사후 0.31(p 0.116). 러시아 서부: 원천 계수 대비 감소 13.98 cm 가운데 13.50 cm가 재보정 몫. 티베트: 라벨 10개 잔차가 수축 재보정보다 20.90 cm 작으나 현지 최소제곱 재보정과 구별되지 않음. 그래프의 티베트는 축 밖 삼각 표지(진단 227.71, 오차 변화 −159.55).",
+    "script_chars": 323
+   },
+   "numbers": [
+    {
+     "value": "ρ 0.38 [0.17, 0.55], 28개 대상",
+     "meaning": "라벨 10개 편향 크기와 규칙 선정 보정의 원천 계수 Stefan 대비 이득(라벨 전량)의 순위상관",
+     "source": "paper/claims/C2_bias_diagnosis/tables/wf_tests.csv (WF4-c, MEAN)",
+     "doc": "paper/claims/C2_bias_diagnosis/README.md 2.1 A3",
+     "label": "지지(결과 열람 뒤 설계)"
+    },
+    {
+     "value": "ρ −0.01 [−0.17, 0.18]",
+     "meaning": "부호 있는 편향과 이득의 순위상관",
+     "source": "paper/claims/C2_bias_diagnosis/tables/wf_tests.csv (WF4-c, rho_signed)",
+     "doc": "paper/claims/C2_bias_diagnosis/README.md 2.1 A4",
+     "label": "보조"
+    },
+    {
+     "value": "ρ −0.08에서 0.39",
+     "meaning": "재보정을 넘어선 ML 몫과 계수 오차의 순위상관(정의별 범위, CI 없음)",
+     "source": "paper/claims/C2_bias_diagnosis/tables/derived_c2_posthoc_rho.csv",
+     "doc": "paper/claims/C2_bias_diagnosis/README.md 2.3",
+     "label": "사후 점검, 판정 아님"
+    },
+    {
+     "value": "13.98 중 13.50 cm",
+     "meaning": "러시아 서부 원천 계수 대비 감소 가운데 재보정 몫",
+     "source": "paper/claims/C2_bias_diagnosis/tables/lg_tests.csv (L8), wf0_misspec.csv (Russia_W|x)",
+     "doc": "paper/claims/C2_bias_diagnosis/README.md 2.2 RW1, RW5"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C2_bias_diagnosis"
+    ],
+    "experiments": [
+     "WF4-c",
+     "WF0",
+     "LGD L4e, L38"
+    ],
+    "placeholders": [
+     "[XA: R3 | 사후 분석(재현(비맹검)) | 2.1 해석 조각]"
+    ],
+    "docs": [
+     "paper/claims/C2_bias_diagnosis/README.md 1.3, 4.3, 5.2",
+     "design/journal_grade_style_guide.md 6.4"
+    ]
+   },
+   "flags": [
+    "'비례' 쓰지 않음(순위상관)",
+    "'라벨 10개로 ML 을 더할 가치를 진단' 쓰지 않음",
+    "결과 지도 쪽(3부)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 33
+  },
+  {
+   "id": "S17",
+   "page": 17,
+   "part": "3부 · 라벨 3–10개",
+   "archetype": "A2",
+   "title": "결합 구조와 라벨 수",
+   "subtitle": "3부 · 잔차 구조 − 물리 입력 구조 · 주 4지역 평균(라벨 10개까지), 레나델타·캐나다 평균(40개부터)",
+   "takeaway": "라벨 10개 이하에서 잔차 구조가 물리 입력 구조보다 오차 작음",
+   "visible_text": {
+    "y_axis": "잔차 구조 − 물리 입력 구조 (cm)",
+    "x_axis": "대상 라벨 수, n",
+    "direction_marker": "잔차 구조 오차 낮음",
+    "key_line": "채운 원 등록 라벨 수, 빈 원 보조 라벨 수"
+   },
+   "evidence": {
+    "kind": "v3 그림 패널 슬라이드판(단일 근거 그림)",
+    "ref": "Fig 3c 결합 구조 곡선, medium='slide'",
+    "encoding": "x 라벨 수(n = 0 별도 축 + log 축), y 잔차 − 물리 입력(cm), 0선, ±0.5 cm 띠, 등록 n(0, 10) 채운 원, 보조 n 빈 원, 두 가중 CI 막대. 방향 표지 1개(아래쪽)",
+    "data_sources": [
+     "data/processed/paper_figs/fig3_b_L10_alln.csv (series, n, registered, delta, CI)",
+     "data/processed/paper_figs/fig3_b.csv",
+     "paper/claims/C3_structure_by_label_count/tables/lgx_tests.csv (test_id=L10)",
+     "paper/claims/C3_structure_by_label_count/tables/lgw_bundle.csv (ab=AB7)"
+    ],
+    "status": "v3 미생성"
+   },
+   "intent": "결합 구조의 우열이 라벨 수에 따라 바뀜을 보이고, 라벨 수십 개 이상에서 대상 라벨로 방법을 고르는 규칙을 시험한 4부로 잇는다",
+   "notes": {
+    "script": "물리 정보를 잔차로 쓸지 입력으로 쓸지에 따라 결과가 라벨 수와 함께 바뀌는지 보았다. 세로축은 잔차 구조에서 물리 입력 구조를 뺀 오차이고 0 아래가 잔차 구조의 오차가 작은 쪽이다. 라벨 10개 이하에서는 주 4지역 평균으로 잔차 구조의 오차가 작았고, 라벨 10개 초록 대비에서 3.74 cm였다. 라벨 40–160개에서는 지역마다 방향이 달랐다. 캐나다는 물리 입력 구조가 나았고 레나델타는 차이를 확인하지 못했다. 그래서 4부에서는 라벨이 수십 개를 넘을 때 대상 라벨로 방법을 고르는 규칙을 시험했다.",
+    "reference_line": "C3. 등록 주 대비 4개(라벨 0, 10): −2.49에서 −3.74 cm, 두 가중 오차 감소, 초록 대비 Holm p 0.001. 구조만 비교하는 대비(재보정 계수 입력 포함) 라벨 10개 −2.52. 지역 행: 러시아 서부·동부 오차 감소, 레나델타 미결정, 캐나다 해당 대비 +3.12 오차 증가. 라벨 40–160: 캐나다 +4.46에서 +5.14, 레나델타 미결정, 알래스카 반대.",
+    "script_chars": 286
+   },
+   "numbers": [
+    {
+     "value": "−2.49에서 −3.74 cm",
+     "meaning": "잔차 구조 − 물리 입력 구조, 등록 주 대비 4개, 주 4지역 평균",
+     "source": "paper/claims/C3_structure_by_label_count/tables/lgx_tests.csv (L10), lgw_bundle.csv (AB7)",
+     "doc": "paper/claims/C3_structure_by_label_count/README.md 1.4",
+     "label": "오차 감소"
+    },
+    {
+     "value": "−3.74 cm, Holm p 0.001",
+     "meaning": "라벨 10개 초록 대비",
+     "source": "paper/claims/C3_structure_by_label_count/tables/lgw_bundle.csv (ab=AB7, MEAN)",
+     "doc": "paper/claims/C3_structure_by_label_count/README.md 1.1–1.4"
+    },
+    {
+     "value": "−2.52 cm",
+     "meaning": "재보정 계수를 입력으로 준 물리 입력 구조와의 대비(라벨 10개)",
+     "source": "paper/claims/C3_structure_by_label_count/tables/lgx_tests.csv (L10, R1-F1n|n10)",
+     "doc": "paper/claims/C3_structure_by_label_count/README.md 1.2 항목 1, E04"
+    },
+    {
+     "value": "+4.46에서 +5.14 cm",
+     "meaning": "캐나다 라벨 40–160 잔차 − 물리 입력(물리 입력 구조가 나음)",
+     "source": "paper/claims/C3_structure_by_label_count/tables/lgx_tests.csv (test_id=L10, scope=region, Canada|x, n 40과 160)",
+     "doc": "paper/claims/C3_structure_by_label_count/README.md 1.3 항목 2, E16–E17",
+     "label": "오차 증가"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C3_structure_by_label_count"
+    ],
+    "experiments": [
+     "LGX L10",
+     "AB7"
+    ],
+    "placeholders": [
+     "[XB: SI, R3 지시 문장 | 결과 열람 뒤 설계, 실행 전 등록(비맹검 부분 포함) | 2.2 사전 고정 해석 문장 XB-1, XB-2(라벨 10개 행)]",
+     "[XB: SI, R4 지시 문장 | 결과 열람 뒤 설계, 실행 전 등록(비맹검 부분 포함) | 2.2 사전 고정 해석 문장 XB-1, XB-2(라벨 40, 160 행, 레나·캐나다 2지역)]"
+    ],
+    "docs": [
+     "paper/claims/C3_structure_by_label_count/README.md 1.3–1.4"
+    ]
+   },
+   "flags": [
+    "라벨 40–160 에서 어느 구조도 토양 물성 Stefan 재보정보다 낫다는 근거 없음(노트 단서)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 35
+  },
+  {
+   "id": "S18",
+   "page": 18,
+   "part": "4부 · 라벨 40–160개",
+   "archetype": "A5",
+   "title": "대상 라벨 교차검증 선정",
+   "subtitle": "4부 · 라벨 40개와 160개 · 레나델타·캐나다 평균 · 비열등 한계 0.5 cm · 결과 열람 뒤 설계",
+   "takeaway": "라벨 40개와 160개에서 교차검증 선정 규칙의 비열등 확인",
+   "visible_text": {
+    "map_legend": "고른 방법(가장 자주 고른 계열): 원천 계수 Stefan, 재보정 Stefan, 물리 잔차 결합, 물리 유사라벨 증강",
+    "forest_rows": [
+     "라벨 10개, 주 4지역",
+     "라벨 40개, 레나델타·캐나다",
+     "라벨 160개, 레나델타·캐나다",
+     "전량, 주 4지역"
+    ],
+    "x_axis": "선정 규칙 − 고정 레시피 (cm)",
+    "key_line": "굵은 막대 셀 가중 CI, 가는 막대 블록 등가중 CI, 회색 띠 ±0.5 cm"
+   },
+   "evidence": {
+    "kind": "지도와 연결 그래프(SI 지도 슬라이드판 + v3 Fig 4c 슬라이드판)",
+    "ref": "왼쪽: 대상별 규칙 선정 결과 지도. 오른쪽: 규칙 − 고정 잔차 레시피 포레스트와 지역별 점",
+    "encoding": "지도: 대상 중심 원을 가장 자주 고른 방법 계열의 방법 색으로(원천 #4d4d4d, 재보정 #2b5c8f, 잔차 #9a7bc9, 증강 #568f72), 라벨 160개 기준. 포레스트: 검정 점, 두 CI, 0선, ±0.5 cm 띠, 지역별 점(계열 색 아님, 모양으로)",
+    "data_sources": [
+     "paper/claims/C5_method_selection/tables/wf_tests.csv (test_id=WF4-a: W-R1(0.25)|n10, n40, n160, n전량; scope MEAN, region)",
+     "paper/claims/C5_method_selection/tables/wf_meta.json (choices['wf4|W']: 대상·라벨 수별 선정 횟수)",
+     "paper/claims/C5_method_selection/tables/wf_curve.csv"
+    ],
+    "status": "v3 미생성. [미확인: 대상 중심 좌표 파일]. 선정 계열 묶기(P2 → 재보정, R2 → 잔차)는 덱 정의"
+   },
+   "intent": "라벨 수십–수백 개에서 방법을 대상 라벨로 고르는 규칙의 근거를 보인다. 비열등과 우세를 n 과 풀을 밝혀 쓴다",
+   "notes": {
+    "script": "라벨이 수십에서 수백 개일 때는 대상 라벨 안에서 교차검증으로 방법을 고르는 규칙을 시험했다. 후보는 Stefan 3종, 잔차 가중 두 가지, 증강 결합, 물리 증강이다. 오른쪽 그림은 이 규칙에서 고정 잔차 레시피를 뺀 오차이다. 라벨 40개와 160개에서 규칙은 0.5 cm 한계 안에서 비열등이었고, 160개에서는 1.32 cm 작았다. 이 이득은 캐나다에서 왔고 레나델타는 차이를 확인하지 못했다. 왼쪽 지도는 대상마다 규칙이 가장 자주 고른 방법이다. 이 시험은 결과를 본 뒤 설계했다.",
+    "reference_line": "C5. 라벨 160 −1.32 [−1.70, −0.68](두 가중과 공통 재표집 모두 오차 감소), 라벨 40 −0.87 [−1.20, −0.27](분할 독립 가정 의존), 라벨 10 비열등 불성립(CI 상한 0.73, 0.69), 전량 비열등은 분할 독립 가정 의존. 캐나다 −2.10, −2.72, 레나델타 +0.35, +0.07. 풀 밖 알래스카에서 규칙은 원천 계수 Stefan보다 나빴음(라벨 10–160).",
+    "script_chars": 277
+   },
+   "numbers": [
+    {
+     "value": "−1.32 [−1.70, −0.68] cm",
+     "meaning": "선정 규칙 − 고정 잔차 레시피, 라벨 160, 레나델타·캐나다 평균",
+     "source": "paper/claims/C5_method_selection/tables/wf_tests.csv (WF4-a, W-R1(0.25)|n160, MEAN)",
+     "doc": "paper/claims/C5_method_selection/README.md 1.3",
+     "label": "오차 감소(공통 재표집 포함)"
+    },
+    {
+     "value": "−0.87 [−1.20, −0.27] cm",
+     "meaning": "같은 대비, 라벨 40",
+     "source": "paper/claims/C5_method_selection/tables/wf_tests.csv (WF4-a, n40, MEAN)",
+     "doc": "paper/claims/C5_method_selection/README.md 1.2 N4",
+     "label": "오차 감소, 분할 독립 가정 의존"
+    },
+    {
+     "value": "CI 상한 0.73(셀), 0.69(블록)",
+     "meaning": "라벨 10 비열등 불성립",
+     "source": "paper/claims/C5_method_selection/tables/wf_tests.csv (WF4-a, n10)",
+     "doc": "paper/claims/C5_method_selection/README.md 1.2 N2"
+    },
+    {
+     "value": "−2.10, −2.72 / +0.35, +0.07 cm",
+     "meaning": "지역 행: 캐나다 / 레나델타(라벨 40, 160)",
+     "source": "paper/claims/C5_method_selection/tables/wf_tests.csv (WF4-a, region)",
+     "doc": "paper/claims/C5_method_selection/README.md 1.1",
+     "label": "캐나다 오차 감소, 레나델타 미결정"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C5_method_selection"
+    ],
+    "experiments": [
+     "WF4-a",
+     "WF4-b"
+    ],
+    "placeholders": [
+     "[XC: R4 | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 사전 고정 해석 문장 XC-1, XC-2(+XC-2s), 뒤에 S-XC4 (b) 지역 손해 문장]",
+     "[XB: SI, R4 지시 문장 | 결과 열람 뒤 설계, 실행 전 등록(비맹검 부분 포함) | 2.2 사전 고정 해석 문장 XB-1, XB-2(라벨 40, 160 행, 레나·캐나다 2지역)]"
+    ],
+    "docs": [
+     "paper/claims/C5_method_selection/README.md 1.2–1.4"
+    ]
+   },
+   "flags": [
+    "'안전', '지역 일반', '4지역' 표현 금지(C5 N2, N5)",
+    "'대상 라벨 교차검증이 원천 교차검증보다 낫다' 단정 금지(C5 N10)",
+    "결과 지도 쪽(4부)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 33
+  },
+  {
+   "id": "S19",
+   "page": 19,
+   "part": "5부 · 라벨이 많은 지역",
+   "archetype": "A4",
+   "title": "지역 내 라벨 수 곡선",
+   "subtitle": "5부 · 알래스카와 캐나다 · 지역 안 블록 홀드아웃 · 분할 25회 · 결과 열람 뒤 설계",
+   "takeaway": "물리 잔차 결합으로 재보정 Stefan 대비 오차 0.54 cm 감소",
+   "visible_text": {
+    "panel_heads": [
+     "알래스카",
+     "캐나다"
+    ],
+    "direct_labels": [
+     "재보정 Stefan",
+     "물리 잔차 결합",
+     "오차 하한"
+    ],
+    "y_axis": "RMSE (cm)",
+    "x_axis": "대상 라벨 수, n (로그)"
+   },
+   "evidence": {
+    "kind": "v3 그림 패널 슬라이드판(같은 척도 비교 쌍)",
+    "ref": "Fig 7a 의 절대 RMSE 짝 그림(SI, 그림 명세 D-21. 본문 Fig 7a 는 재보정 Stefan 대비 오차 변화와 하한 선), 알래스카와 캐나다, medium='slide'",
+    "encoding": "두 패널 같은 y 범위. 재보정 Stefan #2b5c8f 실선, 물리 잔차 결합(교차검증 λ) #9a7bc9 실선, CI 띠 2개 이하, 오차 하한 #b0b0b0 띠(알래스카 11.31, 캐나다 17.90 cm), 직접 라벨은 왼쪽 패널에만",
+    "data_sources": [
+     "paper/claims/C4_sufficient_labels/tables/wf2b_curve.csv (WF6, mode r, Alaska, Canada)",
+     "paper/claims/C4_sufficient_labels/tables/wf2b_tests.csv (test_id=WF6-a)",
+     "paper/claims/C4_sufficient_labels/tables/lgx_floor.csv (scope=eval, floor_rmse_cm)"
+    ],
+    "status": "v3 미생성"
+   },
+   "intent": "라벨이 많은 지역 안에서의 이득 크기를 보인다(작지만 알래스카에서 유의). 대회 결론과의 연결을 다음 쪽에 둔다",
+   "notes": {
+    "script": "5부는 라벨이 많은 지역 안의 결과이다. 알래스카에서 0.5° 블록 절반을 채점에 남기고 분할을 25회 반복했다. 라벨 1000개에서 물리 잔차 결합은 재보정 Stefan보다 오차가 0.54 cm 작았다. 회색 띠는 지금 공변량으로 줄일 수 없는 오차 하한이다. 캐나다와 레나델타에서는 재보정 Stefan과 차이를 확인하지 못했다. 이 시험은 분할 5회의 첫 시험이 기각된 뒤 비교 상대, 분할 수, 레시피, 라벨 범위를 바꿔 설계한 것이다. 다음 쪽은 이 결과와 대회 결과의 관계이다.",
+    "reference_line": "C4. 알래스카 라벨 1000: 14.41 → 13.87 cm, −0.54 [−0.69, −0.32], 블록 등가중 −0.60(공통 CI 도 오차 감소). 라벨 500 −0.39, 전량 −0.52(공통 CI 미결정). 레나델타(라벨 약 1477개), 캐나다(약 376개) 미결정(C4 README O6). SAR 9열 추가는 ±0.5 cm 안. 첫 시험 대비 바꾼 것: 비교 상대, 분할 수, 레시피, 라벨 범위.",
+    "script_chars": 272
+   },
+   "numbers": [
+    {
+     "value": "14.41 → 13.87 cm, −0.54 [−0.69, −0.32]",
+     "meaning": "알래스카 라벨 1000 재보정 Stefan → 물리 잔차 결합",
+     "source": "paper/claims/C4_sufficient_labels/tables/wf2b_tests.csv (WF6-a, R1(λ cv)-P1|n1000, Alaska|r)",
+     "doc": "paper/claims/C4_sufficient_labels/README.md 2절 E1.R1.n1000",
+     "label": "오차 감소(두 가중, 공통 CI)"
+    },
+    {
+     "value": "−0.39, −0.52 cm",
+     "meaning": "라벨 500, 전량",
+     "source": "paper/claims/C4_sufficient_labels/tables/wf2b_tests.csv (WF6-a)",
+     "doc": "paper/claims/C4_sufficient_labels/README.md E1.R1.n500, E1.R1.n전량",
+     "label": "오차 감소, 공통 CI 미결정"
+    },
+    {
+     "value": "11.31, 17.90 cm",
+     "meaning": "오차 하한(알래스카, 캐나다)",
+     "source": "paper/claims/C4_sufficient_labels/tables/lgx_floor.csv (scope=eval)",
+     "doc": "paper/claims/D_data_and_design/README.md E44"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C4_sufficient_labels"
+    ],
+    "experiments": [
+     "WF1-a",
+     "WF6-a",
+     "WF1-b"
+    ],
+    "placeholders": [],
+    "docs": [
+     "paper/claims/C4_sufficient_labels/README.md 1.2–1.3"
+    ]
+   },
+   "flags": [
+    "'계수가 맞는 지역일수록 작다' 쓰지 않음(C4 1.2 (a))",
+    "'안전' 쓰지 않음"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 38
+  },
+  {
+   "id": "S20",
+   "page": 20,
+   "part": "5부 · 라벨이 많은 지역",
+   "archetype": "A2",
+   "title": "대회 결과와 줄일 수 있는 오차",
+   "subtitle": "5부 · 알래스카 지역 안 · 오차 하한 11.31 cm 위의 오차 제곱 · 대회 설정과 이번 시험",
+   "takeaway": "줄일 수 있는 오차 제곱 감소, 대회 설정 39%와 이번 시험 19%",
+   "visible_text": {
+    "row_labels": [
+     "대회 설정",
+     "이번 시험"
+    ],
+    "direct_labels": [
+     "Stefan",
+     "물리 잔차 결합",
+     "오차 하한"
+    ],
+    "x_axis": "RMSE (cm)"
+   },
+   "evidence": {
+    "kind": "덱 전용 차트(덤벨 점 그림)",
+    "ref": "두 조건의 Stefan 기준과 물리 잔차 결합 RMSE, 오차 하한 띠",
+    "chart": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.3,
+      "w": 12.0,
+      "h": 4.6
+     },
+     "y": "2행(대회 설정: 알래스카 6겹 0.5° 블록 교차검증, 같은 교차검증에서 고른 최선 설정 / 이번 시험: 블록 절반 채점, 라벨 1000개, 분할 25회)",
+     "x": "RMSE (cm), 10–15",
+     "marks": "행마다 기준 점(대회 Stefan #4d4d4d, 이번 재보정 Stefan #2b5c8f)과 물리 잔차 결합 점(#9a7bc9)을 2.0 pt 검정 선으로 잇는다. x ≤ 11.31 영역에 오차 하한 띠 #b0b0b0. 그림 안 수치 없음"
+    },
+    "data_sources": [
+     "paper/claims/C4_sufficient_labels/tables/s4_residual_results.csv (part=D_indomain, cv=spatial_block_AK; Stefan 14.457, 물리 잔차 13.330)",
+     "paper/claims/C4_sufficient_labels/tables/wf2b_curve.csv (WF6, Alaska, n 1000)",
+     "paper/claims/C4_sufficient_labels/tables/lgx_floor.csv (Alaska 11.31)"
+    ],
+    "status": "덱 전용 계산(원천 표 필터만)"
+   },
+   "intent": "사용자가 반복해 물은 '대회 7.8% 와 이번 결과의 관계'를 같은 축에서 보인다. 두 결과가 같은 방향임을 보인다",
+   "notes": {
+    "script": "대회 결과와 이번 결과가 맞는지 확인하는 쪽이다. 대회는 같은 교차검증에서 고른 최선 설정으로 RMSE 약 8% 개선을 보고했고, 이번 시험은 설정을 라벨 안에서 고른 뒤 블록 밖에서 채점해 약 4%였다. RMSE 개선률은 줄일 수 없는 오차를 고려하지 않는다. 오차 하한 11.31 cm 위의 줄일 수 있는 오차 제곱으로 보면 대회 설정은 39%, 이번 시험은 19%를 줄였다. 두 결과는 같은 방향이고 엄격한 조건에서 크기가 작다. 하한은 다른 셀 집합에서 추정했으므로 대회 값의 비율은 근사이다.",
+    "reference_line": "C4. 대회: Stefan 14.46 → 물리 잔차 13.33 cm(7.80%), 줄일 수 있는 오차 제곱 81.13 → 49.82(38.60%). 이번: 재보정 Stefan 14.41 → 13.87(3.75%), 79.71 → 64.42(19.17%). 대회 값은 같은 교차검증에서 고른 최선 설정이라 낙관적.",
+    "script_chars": 280
+   },
+   "numbers": [
+    {
+     "value": "14.46 → 13.33 cm (7.80%)",
+     "meaning": "대회 설정 RMSE(Stefan, 물리 잔차)",
+     "source": "paper/claims/C4_sufficient_labels/tables/s4_residual_results.csv",
+     "doc": "paper/claims/C4_sufficient_labels/README.md E8.contest.stefan, D2"
+    },
+    {
+     "value": "81.13 → 49.82 cm², 38.60%",
+     "meaning": "대회 설정 줄일 수 있는 오차 제곱",
+     "source": "파생: rmse² − 11.31²",
+     "doc": "paper/claims/C4_sufficient_labels/README.md D2",
+     "label": "파생값"
+    },
+    {
+     "value": "79.71 → 64.42 cm², 19.17%",
+     "meaning": "이번 시험 줄일 수 있는 오차 제곱",
+     "source": "파생: rmse² − 11.31²",
+     "doc": "paper/claims/C4_sufficient_labels/README.md D1",
+     "label": "파생값"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C4_sufficient_labels"
+    ],
+    "experiments": [
+     "H0 S4",
+     "WF6"
+    ],
+    "placeholders": [],
+    "docs": [
+     "paper/claims/C4_sufficient_labels/README.md 1.1",
+     "docs/RESEARCH_OVERVIEW_2026-10-02.md C4",
+     "docs/QA_FINAL_REVIEW_2026-10-02.md Q14"
+    ]
+   },
+   "flags": [
+    "백분율 정수 표기(39%, 19%), 노트 참고 줄은 원천 자릿수",
+    "결론 줄 숫자 나열은 '와'로(H14)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 38
+  },
+  {
+   "id": "S21",
+   "page": 21,
+   "part": "5부 · 라벨이 많은 지역",
+   "archetype": "A5",
+   "title": "보정량의 공간 분포",
+   "subtitle": "5부 · 알래스카 · 라벨 전량 · 오차 제곱 기준 · 결과 열람 뒤 설계",
+   "takeaway": "알래스카 오차 제곱 감소의 약 99%가 기후 격자 단위 보정에서 발생",
+   "visible_text": {
+    "map_colorbar_label": "재보정 Stefan 대비 오차 변화 (cm)",
+    "graph_rows": [
+     "알래스카",
+     "레나델타",
+     "캐나다"
+    ],
+    "graph_direct_labels": [
+     "격자 사이",
+     "격자 안"
+    ],
+    "graph_axis": "재보정 Stefan 대비 오차 변화 (cm)",
+    "explanation_block_v9": {
+     "text": "0.5° 채점 블록별 오차 변화, 기후 격자 단위 보정의 공간 분포",
+     "placement_rule_spec_only": "지도 안 빈 구역, 무테, 2줄 이하"
+    },
+    "map_colorbar_label_alt_1km": "ALT 변화 (cm)(1 km 판 승인 시)"
+   },
+   "evidence": {
+    "kind": "v3 결과 지도 슬라이드판 + 분해 점 그림",
+    "ref": "왼쪽 Fig 7b 알래스카 지도(기본판: 채점 블록별 오차 변화, 그림 명세 D-11), 오른쪽 Fig 7c 이득 분해 점 그림, medium='slide'",
+    "encoding": "지도(기본판): 0.5° 채점 블록별 물리 잔차 결합 − 재보정 Stefan 의 RMSE 차를 cmc.broc ±vmax, 관측 위치 검정 점, 축척, 위치 삽도. 1 km 판(새 적합·예측 실행 승인 뒤): '물리 잔차 결합 예측 − 재보정 Stefan 예측'(양수 = 더 깊음)을 1 km 셀로. 그래프: 지역별 격자 사이·격자 안 성분 점 두 개, 0선, ±0.5 cm 띠, 쌓지 않음",
+    "data_sources": [
+     "paper/claims/C8_gain_source/tables/rescale_wf3__wf3b_decomp.csv",
+     "paper/claims/C8_gain_source/tables/wf_soil__wf3b_decomp.csv",
+     "paper/claims/C8_gain_source/tables/rescale_wf3__wf3b_tests.csv",
+     "results/rescale_wf3/data/processed/wf/shards/wf9__cpu__Alaska__r__s*_blocksse.npz(기본판 블록별 SSE, 그림 명세 9.3 b)"
+    ],
+    "status": "v3 미생성. 셀 단위 예측 파일이 없어 기본판은 채점 블록 지도다(그림 명세 D-11). 1 km 판은 사용자 승인 뒤 새 실행"
+   },
+   "intent": "확정 덱의 '증강 효과 공간 분포' 쪽을 잇는 변화량 지도 쪽. ML 이득의 공간 규모(격자 단위)를 보이고 '고해상 지도' 오해를 막는다",
+   "notes": {
+    "script": "알래스카에서 기계학습이 고친 것이 무엇인지 오차를 기후 격자 사이 성분과 격자 안 성분으로 나눠 보았다. Stefan 식은 같은 기후 격자 안에서 값이 같으므로 격자 안 변동을 설명하지 못한다. 왼쪽 지도는 0.5° 채점 블록마다 물리 잔차 결합이 재보정 Stefan보다 오차를 얼마나 바꾸었는지 보인다. 오른쪽에서 이득은 격자 사이 성분에서 나왔고 격자 안 성분은 0.5 cm 안에서 같았다. 알래스카에서 오차 제곱 감소의 약 99%가 격자 사이 성분이다. 따라서 결과를 1 km로 그려도 그 내용은 기후 격자 단위 보정이다.",
+    "reference_line": "C8(알래스카 지역 내 한정). 총 −0.52 cm 가운데 격자 사이 −1.03 오차 감소, 격자 안 −0.01 동등(두 격자 정의에서 같음). 격자 안 변동은 Stefan 오차 제곱의 72%. ML 설명 비율 알래스카 1% 미만(최대 0.7%), 세 지역 8% 미만(최대 레나델타 7.8%). 지역 내 층화 평균에서 격자 안 예측은 오차를 늘림(+0.09, 토양 정의 +0.27에서 +0.42). 기후 외삽은 판정 불가.",
+    "script_chars": 295
+   },
+   "numbers": [
+    {
+     "value": "−1.03 cm(격자 사이), −0.01 cm(격자 안)",
+     "meaning": "알래스카 지역 내 라벨 전량 성분별 오차 변화",
+     "source": "paper/claims/C8_gain_source/tables/rescale_wf3__wf3b_tests.csv, wf_soil__wf3b_tests.csv",
+     "doc": "paper/claims/C8_gain_source/README.md 1.3 (A2, A3, A5, A6)",
+     "label": "격자 사이 오차 감소, 격자 안 동등"
+    },
+    {
+     "value": "약 99%",
+     "meaning": "오차 제곱 감소 가운데 격자 사이 몫(1 − 0.9%, 토양 정의 1 − 1.0%)",
+     "source": "paper/claims/C8_gain_source/tables/rescale_wf3__wf3b_decomp.csv",
+     "doc": "paper/claims/C8_gain_source/README.md 1.2 항목 1 (B4, B10)",
+     "label": "사후 서술"
+    },
+    {
+     "value": "72%",
+     "meaning": "Stefan 오차 제곱 가운데 격자 안 변동",
+     "source": "paper/claims/C8_gain_source/tables/rescale_wf3__wf3b_decomp.csv",
+     "doc": "paper/claims/C8_gain_source/README.md B1"
+    },
+    {
+     "value": "최대 0.7%, 최대 7.8%",
+     "meaning": "ML 이 설명한 격자 안 변동(알래스카, 세 지역)",
+     "source": "paper/claims/C8_gain_source/tables/rescale_wf3__wf3b_decomp.csv",
+     "doc": "paper/claims/C8_gain_source/README.md 1.2 항목 3 (C2, C12)"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C8_gain_source",
+     "C4_sufficient_labels"
+    ],
+    "experiments": [
+     "WF9",
+     "WF9-soil",
+     "WF10"
+    ],
+    "placeholders": [
+     "[XE: R5 SI 지시 문장 | 결과 열람 뒤 설계 | 2.5 사전 고정 해석 문장(6갈래)과 공통 문장]",
+     "[XI: R5 SI 지시 문장 | 결과 열람 뒤 설계 | 2.9 다섯 갈래, 공간 대용과 외삽 폭]"
+    ],
+    "docs": [
+     "paper/claims/C8_gain_source/README.md 1.2–1.3",
+     "design/journal_grade_style_guide.md 6.7"
+    ]
+   },
+   "flags": [
+    "'고해상 ALT 지도', 'ML 이 공간 상세도를 더한다' 쓰지 않음",
+    "결과 지도 쪽(5부), 해설 블록(v9) 허용",
+    "C8 문장은 '물리식과 총 오차가 비슷한 지역' 일반이 아니라 알래스카 지역 내로 한정"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 38
+  },
+  {
+   "id": "S22",
+   "page": 22,
+   "part": "6부 · 관측 위치",
+   "archetype": "A4",
+   "title": "라벨 위치 전략",
+   "subtitle": "6부 · 캐나다 · 지역 안 라벨 50–100개 · 셀 무작위와 공변량 분산 배치 · 결과 열람 뒤 설계",
+   "takeaway": "캐나다에서 분산 배치가 무작위보다 오차 2.54–3.21 cm 감소",
+   "visible_text": {
+    "panel_heads": [
+     "셀 무작위",
+     "공변량 분산"
+    ],
+    "direct_labels": [
+     "후보 위치",
+     "선정 지점"
+    ]
+   },
+   "evidence": {
+    "kind": "v3 결과 지도 슬라이드판(같은 척도 비교 쌍)",
+    "ref": "Fig 5a·c(캐나다, 같은 예산의 전략별 선정 지점 지도 2개), medium='slide'",
+    "encoding": "같은 범위와 축척, 지역 경계 1.0 pt 검정, 후보 위치 #bdbdbd, 선정 지점 검정. 0.5° 블록 격자는 그리지 않음(블록 폭 0.26 mm 문제, 지침 6.5)",
+    "data_sources": [
+     "data/processed/fidelity_base_v3.csv (캐나다 후보 셀 좌표)",
+     "scripts/3_deep_learning/h40*.py draw_blocks, h54_workflow.py kcenter_order(라벨 값 미사용 선정 재현)",
+     "paper/claims/C6_label_placement/tables/wf_tests.csv (WF2-a, Canada)"
+    ],
+    "status": "v3 미생성. [미확인: 선정 지점 좌표 저장 파일 없음, 같은 seed 로 재현 필요]"
+   },
+   "intent": "배치 전략의 차이를 실제 지도로 보이고 캐나다 이득을 결론으로 둔다. 특정 지점의 관측 우선순위는 보이지 않는다",
+   "notes": {
+    "script": "6부는 다음 라벨을 어디에 둘지이다. 같은 예산에서 셀을 무작위로 뽑은 경우와 공변량 공간에서 가장 덜 덮인 곳을 차례로 고른 경우의 선정 지점을 캐나다 지도에 보였다. 회색은 후보 위치, 검정은 선정 지점이다. 캐나다에서 라벨 50–100개일 때 분산 배치는 무작위보다 오차가 2.54–3.21 cm 작았다. 전이 조건의 라벨 40개에서도 2.39 cm 작았다. 이 시험은 결과를 본 뒤 설계했고, 방법 수준의 규칙만 다루며 특정 지점의 관측 우선순위는 제시하지 않는다. 다음 쪽은 다른 지역의 결과이다.",
+    "reference_line": "C6. 캐나다 지역 내 라벨 50–100: 블록 층화와 공변량 최대 최소 거리 −2.54에서 −3.21 cm, 라벨 200: −1.25에서 −1.44. 전이 라벨 40 공변량 분산 −2.39(블록 등가중 −1.64). 알래스카 하위 지역 0.32–0.77 cm 이득.",
+    "script_chars": 283
+   },
+   "numbers": [
+    {
+     "value": "−2.54에서 −3.21 cm",
+     "meaning": "캐나다 지역 내 라벨 50–100, 분산 배치 − 무작위",
+     "source": "paper/claims/C6_label_placement/tables/wf_tests.csv (WF2-a, Canada, S2·S4, n 50과 100)",
+     "doc": "paper/claims/C6_label_placement/README.md 1.3 (A2, A3, A6, A7)",
+     "label": "오차 감소"
+    },
+    {
+     "value": "−1.25에서 −1.44 cm",
+     "meaning": "같은 대비, 라벨 200",
+     "source": "paper/claims/C6_label_placement/tables/wf_tests.csv",
+     "doc": "paper/claims/C6_label_placement/README.md 1.2 (c)"
+    },
+    {
+     "value": "−2.39 cm, 블록 등가중 −1.64",
+     "meaning": "전이 라벨 40, 공변량 분산 − 무작위(캐나다)",
+     "source": "paper/claims/C6_label_placement/tables/wf2b_tests.csv (WF8-a)",
+     "doc": "paper/claims/C6_label_placement/README.md 1.3 D1; docs/QA_FOLLOWUP_2026-10-04.md 2.2",
+     "label": "오차 감소"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C6_label_placement"
+    ],
+    "experiments": [
+     "WF2-a",
+     "WF8-a"
+    ],
+    "placeholders": [
+     "[XD: R6 SI 지시 문장 | 결과 열람 뒤 설계, 탐색(SI), XD-2 사후 설계(지역 표적) | 2.4 사전 고정 해석 문장(SI) XD-1, XD-3, 공통 한계 문장]",
+     "[XC: R6 | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 사전 고정 해석 문장 XC-5와 공통 문장]"
+    ],
+    "docs": [
+     "paper/claims/C6_label_placement/README.md 1.2–1.4",
+     "design/journal_grade_style_guide.md 6.5"
+    ]
+   },
+   "flags": [
+    "관측 우선순위 지도 0개(WRAPUP 11.1, 11.2)",
+    "결과 지도 쪽(6부)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 37
+  },
+  {
+   "id": "S23",
+   "page": 23,
+   "part": "6부 · 관측 위치",
+   "archetype": "A2",
+   "title": "예산별 전략 비교",
+   "subtitle": "6부 · 지역 안 라벨 20–500개 · 셀 무작위 대비 · 캐나다, 레나델타, 알래스카 · 결과 열람 뒤 설계",
+   "takeaway": "블록 층화는 캐나다에서 오차 감소, 레나델타에서 오차 증가",
+   "visible_text": {
+    "panel_heads": [
+     "캐나다",
+     "레나델타",
+     "알래스카"
+    ],
+    "direct_labels": [
+     "블록 층화",
+     "공변량 분산",
+     "능동 선정"
+    ],
+    "y_axis": "셀 무작위 대비 오차 변화 (cm)",
+    "x_axis": "라벨 수, n (로그)"
+   },
+   "evidence": {
+    "kind": "v3 그림 패널 슬라이드판(작은 다중 그림 3개, 같은 y)",
+    "ref": "Fig 5e 예산별 곡선의 지역별 판, medium='slide'",
+    "encoding": "무작위가 0선. 블록 층화 검정 실선, 공변량 분산 검정 파선, 능동 선정 #4d4d4d 점선(방법 색 쓰지 않음, 검정은 배치 전략 한 역할). 직접 라벨은 첫 패널 선 끝, 위아래 순서를 지도 열 순서와 맞춤. CI 띠 패널당 2개 이하",
+    "data_sources": [
+     "paper/claims/C6_label_placement/tables/wf_tests.csv (WF2-a: S2, S4, S6 − S1; target Canada, Lena, Alaska; n 20–500)",
+     "results/rescale_wf/data/processed/wf/wf_curve.csv"
+    ],
+    "status": "v3 미생성"
+   },
+   "intent": "분산 배치 효과의 지역 의존을 숨기지 않고 보인다(C6 정정 반영). 능동 선정 무익을 함께 보인다",
+   "notes": {
+    "script": "분산 배치의 효과가 지역마다 같은지 보았다. 세로축은 셀 무작위 대비 오차 변화이고 0 아래가 이득이다. 캐나다에서는 블록 층화와 공변량 분산이 모두 이득이었다. 레나델타에서는 블록 층화의 셀 가중 오차가 모든 라벨 수에서 컸고 라벨 100개에서는 두 가중 모두 나빴다. 레나델타는 셀이 몇 블록에 몰려 있어 블록마다 고르게 뽑으면 계수 추정이 치우친다고 해석한다. 이것은 결과를 본 뒤의 해석이다. 예측 분산이 큰 곳을 고르는 능동 선정은 알래스카와 레나델타에서 오차가 컸고 캐나다에서는 작았다.",
+    "reference_line": "C6. 레나델타 블록 층화 +1.47에서 +1.98 cm(셀 가중 CI 모두 0 위), 라벨 100 +1.65 [0.90, 2.40] 두 가중 오차 증가. 알래스카 전체 미결정(블록 등가중 −1.08에서 −1.73, 셀 가중 +0.28에서 +0.74). 능동 선정: 알래스카·레나델타·하위 지역 0.12–2.79 cm 오차 증가, 캐나다 라벨 100과 200에서 1.50, 0.68 cm 감소. 전이 라벨 10: 열세 판정 지역 없음, 레나델타 셀 가중 +1.89.",
+    "script_chars": 278
+   },
+   "numbers": [
+    {
+     "value": "+1.47에서 +1.98 cm",
+     "meaning": "레나델타 블록 층화 − 무작위(라벨 20–500)",
+     "source": "paper/claims/C6_label_placement/tables/wf_tests.csv (WF2-a, Lena, S2)",
+     "doc": "paper/claims/C6_label_placement/README.md 1.3 (G1, A16–A19)",
+     "label": "셀 가중 CI 모두 0 위"
+    },
+    {
+     "value": "+1.65 [0.90, 2.40] cm, 블록 등가중 +0.88 [0.15, 1.57]",
+     "meaning": "레나델타 라벨 100 블록 층화",
+     "source": "paper/claims/C6_label_placement/tables/wf_tests.csv (WF2-a)",
+     "doc": "docs/QA_FOLLOWUP_2026-10-04.md 2.2; docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.4",
+     "label": "오차 증가(두 가중)"
+    },
+    {
+     "value": "+0.12에서 +2.79 cm",
+     "meaning": "능동 선정 − 무작위(알래스카, 레나델타, 하위 지역, 라벨 50–200)",
+     "source": "paper/claims/C6_label_placement/tables/wf_tests.csv (WF2-a, S6)",
+     "doc": "paper/claims/C6_label_placement/README.md 1.2 (a), B1–B9",
+     "label": "오차 증가"
+    },
+    {
+     "value": "−1.50, −0.68 cm",
+     "meaning": "캐나다 능동 선정(라벨 100, 200)",
+     "source": "paper/claims/C6_label_placement/tables/wf_tests.csv (WF2-a, Canada, S6)",
+     "doc": "paper/claims/C6_label_placement/README.md B14, B15",
+     "label": "오차 감소"
+    },
+    {
+     "value": "+1.89 [0.30, 3.08] cm",
+     "meaning": "전이 라벨 10 레나델타 블록 층화(셀 가중)",
+     "source": "paper/claims/C6_label_placement/tables/wf2b_tests.csv (WF8)",
+     "doc": "paper/claims/C6_label_placement/README.md 1.2 (d), D3",
+     "label": "미결정"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C6_label_placement"
+    ],
+    "experiments": [
+     "WF2-a",
+     "WF2-b",
+     "WF8-b"
+    ],
+    "placeholders": [
+     "[XD: R6 SI 지시 문장 | 결과 열람 뒤 설계, 탐색(SI), XD-2 사후 설계(지역 표적) | 2.4 사전 고정 해석 문장(SI) XD-1, XD-3, 공통 한계 문장]",
+     "[XC: R6 | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 사전 고정 해석 문장 XC-5와 공통 문장]"
+    ],
+    "docs": [
+     "paper/claims/C6_label_placement/README.md 1.2–1.3",
+     "docs/QA_FOLLOWUP_2026-10-04.md 2.2–2.4"
+    ]
+   },
+   "flags": [
+    "'어디서도 나빠지지 않음', '안전', '모든 대상에서', '1–3 cm' 쓰지 않음(C6 1.2)",
+    "'이질적 지역' 일반화 대신 '캐나다'"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 26
+  },
+  {
+   "id": "S24",
+   "page": 24,
+   "part": "7부 · 독립 지역과 예측 구간",
+   "archetype": "A5",
+   "title": "독립 지역",
+   "subtitle": "7부 · 약관 확인분 · 얕은 레짐 5지역(주 4지역과 러시아 중부) · 티베트는 따로 · 교차 환경",
+   "takeaway": "러시아 중부를 더한 5지역에서도 라벨 40개까지 직접 ML 개선 지역 없음",
+   "visible_text": {
+    "map_labels": "주 4지역(검정 원), 러시아 중부·티베트(흰 원, 티베트는 별도 투영 삽도)",
+    "forest_rows": [
+     "5지역, 전량, 물리 잔차 결합",
+     "5지역, 라벨 10개, 잔차 추가 몫",
+     "러시아 중부, 전량",
+     "러시아 중부, 라벨 10개"
+    ],
+    "x_axis": "오차 변화 (cm)"
+   },
+   "evidence": {
+    "kind": "지도와 연결 그래프",
+    "ref": "왼쪽: Table 1·Fig 1a 기반 독립 지역 지도. 오른쪽: 확장 풀 핵심 대비 포레스트",
+    "encoding": "포레스트 행 4개: (1) 물리 잔차 결합 − 원천 계수 Stefan(5지역, 전량), (2) 물리 잔차 결합 − 재보정 Stefan(5지역, 라벨 10), (3)·(4) 러시아 중부 단독. 0선, ±0.5 cm 띠, 두 CI. 티베트는 축 범위 밖이라 그리지 않고 노트에",
+    "data_sources": [
+     "paper/claims/SI_learners_new_regions/tables/lgd_tests_lic.csv (L1e, L4e, L8e; pool PE1·PE2; region Russia_C|x, Tibet_LGD|x)",
+     "paper/claims/SI_learners_new_regions/tables/lgd_pool_lic.csv",
+     "paper/claims/SI_learners_new_regions/tables/Table1_rows.csv",
+     "data/processed/paper_figs/fig1_blocks.csv"
+    ],
+    "status": "덱 전용 포레스트(원천 표 필터만). 지도는 v3 Fig 1a 판 재사용"
+   },
+   "intent": "결론이 학습에 쓰지 않은 새 지역에서 유지되는지 보이고, 독립 지역 수의 한계를 함께 밝힌다(결과 절 R7)",
+   "notes": {
+    "script": "결론이 다른 지역에서도 유지되는지 약관이 확인된 새 지역으로 보았다. 얕은 레짐의 러시아 중부를 더한 5지역에서 라벨 40개까지 직접 기계학습의 오차가 유의하게 작은 지역은 없었고, 라벨 전량에서 물리 잔차 결합은 원천 계수 Stefan보다 3.19 cm 작았다. 다만 라벨 10개 이하의 재보정 대비 추가 이득은 유지되지 않았다. 티베트는 원천 계수 Stefan의 오차가 약 245 cm인 심부 레짐이라 독립 지역 검증에 쓰지 않고 따로 보고한다. 공개 자료로 새 독립 지역을 더하는 추가 실험은 등록되어 있다.",
+    "reference_line": "SI 학습기·새 지역. 5지역 라벨 0–40 직접 ML 유의 개선 0/5. 전량 −3.19 [−4.19, −2.22], 블록 등가중 −2.62(교차 환경 표지). 라벨 10 −0.13 동등. 러시아 중부 전량 −5.42 [−8.96, −1.64], 블록 등가중 −2.55 [−6.83, 1.48] 미결정. 티베트 원천 계수 Stefan RMSE 244.51 cm, 직접 ML 라벨 0 −59.98(비맹검). 북대서양은 보충 전체 판만.",
+    "script_chars": 287
+   },
+   "numbers": [
+    {
+     "value": "0/5",
+     "meaning": "5지역 풀에서 라벨 0–40 직접 ML 이 원천 계수 Stefan 을 유의하게 넘은 지역",
+     "source": "paper/claims/SI_learners_new_regions/tables/lgd_tests_lic.csv (L1e, PE1)",
+     "doc": "paper/claims/SI_learners_new_regions/README.md 1.3",
+     "label": "지지 유지"
+    },
+    {
+     "value": "−3.19 [−4.19, −2.22] cm, 블록 등가중 −2.62 [−3.71, −1.53]",
+     "meaning": "5지역 전량 물리 잔차 결합 − 원천 계수 Stefan",
+     "source": "paper/claims/SI_learners_new_regions/tables/lgd_tests_lic.csv (L8e, PE1)",
+     "doc": "paper/claims/SI_learners_new_regions/README.md 1.3",
+     "label": "오차 감소, 교차 환경"
+    },
+    {
+     "value": "−0.13 cm",
+     "meaning": "5지역 라벨 10 물리 잔차 결합 − 재보정 Stefan",
+     "source": "paper/claims/SI_learners_new_regions/tables/lgd_tests_lic.csv (L4e, PE1)",
+     "doc": "paper/claims/SI_learners_new_regions/README.md 1.3",
+     "label": "동등, 교차 환경"
+    },
+    {
+     "value": "−5.42 [−8.96, −1.64] cm, 블록 등가중 −2.55 [−6.83, 1.48]",
+     "meaning": "러시아 중부 전량 물리 잔차 결합 − 원천 계수 Stefan",
+     "source": "paper/claims/SI_learners_new_regions/tables/lgd_tests_lic.csv (test_id=L38, item='(b) R1-P0', target=Russia_C|x. L8e 행은 재표집 판이 달라 CI 가 [−8.98, −1.84] / [−6.46, 1.49])",
+     "doc": "paper/claims/SI_learners_new_regions/README.md 1.3, D-L38-RussiaC-R1-P0-n-1",
+     "label": "미결정"
+    },
+    {
+     "value": "244.51 cm",
+     "meaning": "티베트 원천 계수 Stefan RMSE",
+     "source": "paper/claims/SI_learners_new_regions/tables/lgd_tests_lic.csv (L8e, Tibet_LGD|x, rmse_B)",
+     "doc": "paper/claims/C2_bias_diagnosis/README.md TB6"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "SI_learners_new_regions",
+     "C1_label0_safety",
+     "C4_sufficient_labels"
+    ],
+    "experiments": [
+     "LGD L1e, L4e, L8e, L38"
+    ],
+    "placeholders": [
+     "[XF: R7 | 결과 열람 뒤 설계, 새 지역은 맹검(독립 지역 확인), NAtlantic v5 는 민감도 | 2.6 사전 고정 해석 문장]",
+     "[XJ: R7 SI 한 줄 | 결과 열람 뒤 설계, 서술 | 2.10 사전 고정 해석 문장]"
+    ],
+    "docs": [
+     "paper/claims/SI_learners_new_regions/README.md 1.3",
+     "docs/research/2026-10-04/open_regions.md 1절"
+    ]
+   },
+   "flags": [
+    "'30개 독립 지역' 금지(독립 지역 7)",
+    "티베트를 독립 지역 검증 근거로 쓰지 않음",
+    "결과 지도 쪽(7부)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 41
+  },
+  {
+   "id": "S25",
+   "page": 25,
+   "part": "7부 · 독립 지역과 예측 구간",
+   "archetype": "A2",
+   "title": "예측 구간",
+   "subtitle": "7부 · 라벨 0개 · 학습에서 뺀 주 4지역 · 목표 포함률 90% · 보조 결과",
+   "takeaway": "라벨 0개 포함률, 지역 단위 보정 0.86과 보통 ML 구간 0.32–0.73",
+   "visible_text": {
+    "direct_labels": [
+     "지역 단위 보정",
+     "알래스카 보정 구간",
+     "생성 모델 구간"
+    ],
+    "x_axis": "포함률",
+    "y_axis": "구간 종류(행 3개)",
+    "reference_label": "목표 0.90"
+   },
+   "evidence": {
+    "kind": "덱 전용 차트(포함률 점 그림)",
+    "ref": "규약이 다른 세 구간의 라벨 0 포함률 점추정(계층 conformal 은 09-26 규약 참조값, CQR 전이는 범위, 생성 분위 구간 2종). Fig 6d(구간 척도화 5종)와 자료 구성이 다르다",
+    "encoding": "x 포함률, 행 = 구간 종류, 목표 0.90 세로선(#4d4d4d 점선). 점추정만 그리고 CI 를 나란히 두지 않는다(`fig6_b_ref.csv` 의 use 열 'LGU 와 CI 를 나란히 비교하지 않는다'). 알래스카 보정 CQR 전이는 지역 8행의 범위 선(0.32–0.73)",
+    "data_sources": [
+     "data/processed/paper_figs/fig6_b.csv",
+     "data/processed/paper_figs/fig6_b_ref.csv",
+     "data/processed/paper_figs/fig6_d.csv",
+     "paper/claims/SI_uncertainty/tables/h4__c2_coverage.csv",
+     "paper/claims/SI_uncertainty/tables/s11_conformal_results.csv",
+     "paper/claims/SI_uncertainty/tables/lgu__lgu_b_tests.csv"
+    ],
+    "status": "v3 미생성. 예측 지도 행은 지침 6.6 의 세 조건 충족 전에는 본문에 넣지 않음"
+   },
+   "intent": "결과 절 R8(보조). 새 지역에서 보통 ML 구간이 과소 포함되고 지역 단위 보정이 필요함을 보인다. 물리식보다 나은 불확실성은 주장하지 않는다",
+   "notes": {
+    "script": "예측 구간이 새 지역에서 맞는지는 보조 결과로 보고한다. 가로축은 구간 폭, 세로축은 실제 포함률이고 점선은 목표 90%이다. 알래스카에서 보정한 보통의 기계학습 구간을 학습에서 뺀 지역에 쓰면 포함률이 0.32–0.73으로 떨어졌다. 지역을 집단으로 보정한 계층 conformal 구간의 포함률은 라벨 0에서 평균 0.86이었고 러시아 서부는 0.75였다. 보정 집단이 4개라 유한표본 보장은 없다. 셀마다 폭을 바꾸는 구간이 상수 폭 구간보다 낫다는 근거는 없었다. 따라서 불확실성에서 물리식보다 낫다고 쓰지 않는다.",
+    "reference_line": "SI 불확실성. 계층 conformal 0.86 [0.80, 0.92](주 4지역 평균, 러시아 서부 0.75, 9월 26일 규약). CQR 알래스카 지역 내 0.45 → 0.93, 구간 점수 68.85 대 상수 폭 65.39 cm. 생성 분위 구간 0.76, 0.65. 정규화기 위약 대비 +3.29 [−4.17, 8.16] 미결정.",
+    "script_chars": 291
+   },
+   "numbers": [
+    {
+     "value": "0.86 [0.80, 0.92], 러시아 서부 0.75",
+     "meaning": "계층 conformal 라벨 0 포함률",
+     "source": "paper/claims/SI_uncertainty/tables/h4__c2_coverage.csv",
+     "doc": "paper/claims/SI_uncertainty/README.md 1.3"
+    },
+    {
+     "value": "0.32–0.73",
+     "meaning": "알래스카 보정 CQR 구간의 주 4지역 포함률",
+     "source": "paper/claims/SI_uncertainty/tables/m1__transfer_uq_summary.csv",
+     "doc": "paper/claims/SI_uncertainty/README.md 1.3"
+    },
+    {
+     "value": "0.76, 0.65",
+     "meaning": "생성 분위 구간 포함률(정규화 흐름, 흐름 정합)",
+     "source": "paper/claims/SI_uncertainty/tables/lgu__lgu_b_tests.csv",
+     "doc": "paper/claims/SI_uncertainty/README.md 1.3"
+    },
+    {
+     "value": "0.45 → 0.93, 68.85 대 65.39 cm",
+     "meaning": "알래스카 지역 내 CQR 포함률과 구간 점수(상수 폭 참조)",
+     "source": "paper/claims/SI_uncertainty/tables/s11_conformal_results.csv, e4_interval_score.csv",
+     "doc": "paper/claims/SI_uncertainty/README.md 1.3"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "SI_uncertainty"
+    ],
+    "experiments": [
+     "H5 C2(09-26 계층 conformal)",
+     "LGU-A1, B1, B2, B4",
+     "H0 S11"
+    ],
+    "placeholders": [],
+    "docs": [
+     "paper/claims/SI_uncertainty/README.md 1.2–1.3",
+     "design/journal_grade_style_guide.md 6.6"
+    ]
+   },
+   "flags": [
+    "09-26 실험 'C2' 이름을 쓰지 않고 '계층 conformal(9월 26일 규약)'",
+    "'물리식보다 나은 불확실성' 쓰지 않음"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 44
+  },
+  {
+   "id": "S26",
+   "page": 26,
+   "part": "8부 · 워크플로",
+   "archetype": "A9",
+   "title": "라벨 수별 워크플로",
+   "subtitle": "8부 · 워크플로 · 구간별 근거 풀 표시 · 지역 내·워크플로 시험은 결과 열람 뒤 설계",
+   "takeaway": "라벨 수 구간마다 권고 방법과 진단이 다름",
+   "visible_text": {
+    "interval_names": [
+     "0",
+     "3–10",
+     "40–160",
+     "320–1000",
+     "전량"
+    ],
+    "method_labels": [
+     "원천 계수 Stefan",
+     "재보정과 저가중 잔차",
+     "교차검증 선정"
+    ],
+    "band_heads": [
+     "다음 관측",
+     "진단"
+    ],
+    "placement_band": [
+     "분산 배치"
+    ],
+    "diagnosis_band": [
+     "외삽 영역 표시",
+     "계수 편향 진단"
+    ],
+    "text_object_count": 13
+   },
+   "evidence": {
+    "kind": "워크플로 경로(실제 결과 위)",
+    "ref": "Fig 7d 워크플로 경로 슬라이드판(A9), medium='slide'. 경로 정의는 그림 명세 9.3 d 와 같다",
+    "geometry_in": {
+     "path": {
+      "x": 0.667,
+      "y": 1.3,
+      "w": 12.0,
+      "h": 3.3
+     },
+     "placement_band_y": 4.9,
+     "diagnosis_band_y": 5.65
+    },
+    "encoding": "x 라벨 수(n = 0 별도 축, n ≥ 3 로그 축, 전량 별도 축), y 구간 권고 방법의 오차 변화(cm), 0선. 구간마다 권고 방법의 실제 값 선분(그 방법의 색과 선, 3.0 pt), 선분 옆 직접 라벨 1회. 구간 경계는 x축 아래 긴 눈금. 아래 두 띠는 검정 구간 선 2.0 pt 와 라벨 하나. 칸 테두리·채움·셰브런·화살표·신호등 색 없음",
+    "path_values_sources": {
+     "0": "정의상 0(원천 계수 Stefan, 0선에 직접 라벨)",
+     "3–10": "data/processed/paper_figs/pool_fixed_curve.csv (edition=E2_LenaCanada_all_n, method=R1, lam=0.25, baseline=P0, scope=MEAN, n 3과 10)",
+     "40–160": "results/rescale_wf/data/processed/wf/wf_curve.csv (exp=wf4, method=W, mode=x, target Lena와 Canada, n 40과 160, 열 d_p0; 두 지역 단순 평균, 새 집계, 판정 없음)",
+     "320–1000": "레나델타·캐나다 전이 풀에서 시험하지 않음. 선분 없이 구간 눈금만",
+     "전량": "같은 wf_curve.csv 의 n = −1(규칙 W). 라벨이 많은 지역 안의 물리 잔차 결합 권고는 5부(S19–S21, Fig 7a–c)의 근거"
+    },
+    "data_sources": [
+     "docs/RESEARCH_CLAIMS_WORKFLOW_2026-10-01.md 4절 워크플로 표",
+     "outputs/figures/paper/v3_restructure/FIGURE_SPEC_v3.md 9.3 d, D-13, D-14",
+     "design/slide_archetypes.md A9",
+     "design/journal_grade_style_guide.md 6.7 d"
+    ],
+    "status": "v3 미생성. 경로의 y 기준과 풀은 사용자 결정(그림 명세 D-13). 세 명세가 같은 기본값을 쓴다"
+   },
+   "intent": "결과를 라벨 수 구간별 권고로 묶어 실제 값 위의 경로로 보인다(글자 격자·순서도 대신)",
+   "notes": {
+    "script": "지금까지의 결과를 라벨 수 구간별 권고로 묶었다. 가로축은 라벨 수이고 세로축은 각 구간 권고 방법의 원천 계수 Stefan 대비 오차 변화이며, 값은 레나델타와 캐나다의 전이 시험에서 읽었다. 라벨 0개에서는 원천 계수 Stefan을 쓰고 원천 범위 밖 영역을 표시한다. 3–10개에서는 계수를 재보정하고 저가중 잔차를 더하며 라벨 10개로 편향을 진단한다. 40개부터는 대상 라벨 교차검증으로 방법을 고른다. 이 풀에서는 캐나다의 재보정 오차가 커서 경로가 0선 위에 놓인다. 선정 권고의 근거는 고정 레시피 대비 비열등이다.",
+    "reference_line": "워크플로 표(라벨 0, 1–10, 10–160, 160–1000, 1000 이상)를 시험 격자 이름으로 바꿈(지침 8절 14 결정 대기). 전량 점은 규칙 W 값이다. 라벨이 많은 지역 안에서는 교차검증 잔차 가중의 물리 잔차 결합이 재보정 Stefan보다 0.54 cm 작았다(5부). 배치 띠는 방법 수준 서술이며 관측 우선순위 지도가 아님. 레나델타에서 블록 층화의 오차 증가가 있어 배치 띠는 추가 실험 결과로 다시 본다.",
+    "script_chars": 296
+   },
+   "numbers": [
+    {
+     "value": "+0.18, +0.78 cm",
+     "meaning": "레나델타·캐나다 평균 재보정과 저가중 잔차 − 원천 계수 Stefan, 라벨 3과 10(경로 3–10 구간)",
+     "source": "data/processed/paper_figs/pool_fixed_curve.csv (E2_LenaCanada_all_n, R1, 0.25, MEAN)",
+     "label": "라벨 3 동등, 라벨 10 미결정"
+    },
+    {
+     "value": "+0.55, +0.18, 0.00 cm",
+     "meaning": "레나델타·캐나다 단순 평균 교차검증 선정 − 원천 계수 Stefan, 라벨 40, 160, 전량(지역 값: 레나델타 +0.20, +0.02, −0.32, 캐나다 +0.90, +0.35, +0.32)",
+     "source": "results/rescale_wf/data/processed/wf/wf_curve.csv (exp=wf4, method=W, mode=x, n 40, 160, −1, d_p0)",
+     "label": "새 집계, 판정 없음"
+    },
+    {
+     "value": "−0.99, −2.63 cm",
+     "meaning": "대안 (c) 혼합 풀의 라벨 3과 10 값: 주 4지역 평균 재보정과 저가중 잔차 − 원천 계수 Stefan",
+     "source": "data/processed/paper_figs/pool_fixed_curve.csv (E1_P4_n_le_10, R1, 0.25, MEAN)",
+     "label": "오차 감소(공통 CI 도 같음)"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C1",
+     "C2",
+     "C3",
+     "C4",
+     "C5",
+     "C6"
+    ],
+    "experiments": [
+     "LG",
+     "WF4",
+     "WF6",
+     "WF2",
+     "WF8"
+    ],
+    "placeholders": [
+     "[XC: Fig 7e | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 XC-1, XC-2 포레스트]",
+     "[XD: R6 SI 지시 문장 | 결과 열람 뒤 설계, 탐색(SI), XD-2 사후 설계(지역 표적) | 2.4 사전 고정 해석 문장(SI) XD-1, XD-3, 공통 한계 문장]"
+    ],
+    "docs": [
+     "design/journal_grade_style_guide.md 2.10, 6.7",
+     "design/slide_archetypes.md A9"
+    ]
+   },
+   "flags": [
+    "[확인 필요] 경로 정의는 그림 명세 9.3 d 와 같다(지침 6.7 d: 레나델타·캐나다 풀, 방법은 claims 4절). 이 풀에서는 캐나다에서 재보정의 오차가 커져 라벨 3–160 의 권고 방법이 0 위에 놓인다. 대안: (b) y 를 재보정 Stefan 또는 고정 레시피 대비로, (c) 라벨 10개까지 주 4지역 풀을 쓰는 혼합 풀(이 스펙 초판의 기본안). 사용자 결정(그림 명세 D-13). 원고 명세 5절 D1 도 같은 기본값을 쓴다",
+    "A9 위쪽 빈 공간 없음, 텍스트 객체 13개(15 이하), 같은 문구 1회",
+    "구간 이름은 시험 격자 값('1–10' 쓰지 않음)"
+   ],
+   "time_min": 1.5,
+   "takeaway_chars": 23
+  },
+  {
+   "id": "S27",
+   "page": 27,
+   "part": "8부 · 워크플로",
+   "archetype": "A10",
+   "title": "결론",
+   "subtitle": "결론 · 근거 그림 3개",
+   "takeaway": "라벨이 늘수록 물리식, 재보정, 교차검증 선정, 물리 잔차 결합으로 전환",
+   "visible_text": {
+    "columns": [
+     {
+      "figure": "워크플로 경로 축소판(배치 크기로 다시 그림, 눈금 16 pt)",
+      "claim": "라벨 수가 늘면 재보정에서 교차검증 선정으로 전환",
+      "evidence_tag": "주 4지역과 레나델타·캐나다 · 라벨 0–160개"
+     },
+     {
+      "figure": "알래스카 기후 격자 단위 보정 지도(Fig 7b 판)",
+      "claim": "라벨이 많아도 이득은 격자 단위 보정에서 발생",
+      "evidence_tag": "알래스카 · 라벨 전량"
+     },
+     {
+      "figure": "캐나다 선정 지점 지도 한 장(Fig 5 판)",
+      "claim": "분산 배치의 이득은 지역에 따라 다름",
+      "evidence_tag": "캐나다와 레나델타 · 라벨 20–500개"
+     }
+    ]
+   },
+   "evidence": {
+    "kind": "실제 근거 그림 3열(A10)",
+    "ref": "S26, S21, S22 의 그림을 3.80 × 3.40 in 로 다시 그린 판",
+    "data_sources": [
+     "S26, S21, S22 의 원천과 같음"
+    ],
+    "status": "v3 미생성"
+   },
+   "intent": "결론 세 개를 판독 가능한 근거 그림과 함께 보인다. 한계와 전망은 쓰지 않는다",
+   "notes": {
+    "script": "결론은 세 가지이다. 첫째, 라벨 수가 늘면 쓸 방법이 물리식에서 재보정으로, 다시 교차검증 선정으로 바뀐다. 둘째, 라벨이 많은 알래스카에서도 이득은 작고 그 이득은 기후 격자 단위의 편향 보정에서 왔다. 셋째, 라벨을 블록과 공변량 공간에 퍼뜨리는 배치는 캐나다에서 오차를 줄였고 레나델타에서는 오차를 키웠으므로 지역 조건과 함께 보아야 한다. 이 세 가지가 새 지역에서 학습, 평가, 추가 관측의 순서를 정하는 워크플로의 근거이다. 다음 쪽은 전망이다.",
+    "reference_line": "근거: C1, C2(좁힘), C5(비열등, 2지역), C4·C8(알래스카 지역 내), C6(정정본). 결론 줄 문구는 워크플로 표 확정본으로 바꿀 수 있음.",
+    "script_chars": 256
+   },
+   "numbers": [],
+   "tracking": {
+    "claims": [
+     "C1",
+     "C2",
+     "C4",
+     "C5",
+     "C6",
+     "C8"
+    ],
+    "experiments": [],
+    "placeholders": [],
+    "docs": [
+     "design/slide_archetypes.md A10"
+    ]
+   },
+   "flags": [
+    "번호 원·체크·큰 숫자·'Takeaway' 금지",
+    "폭 2 in 미만 썸네일 금지"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 40
+  },
+  {
+   "id": "S28",
+   "page": 28,
+   "part": "8부 · 워크플로",
+   "archetype": "A5",
+   "title": "전망",
+   "subtitle": "전망 · 적용 조건과 다음에 필요한 자료",
+   "takeaway": "독립 지역과 격자 안 해상도 입력이 다음에 필요한 자료",
+   "visible_text": {
+    "map_legend": "영구동토 구역(연속, 불연속)과 현재 라벨 밀도",
+    "lead_lines": [
+     "관측 계획  라벨 10개 편향 진단을 라벨 투자 우선순위의 참고 지표로 사용",
+     "독립 지역  현재 확인용 독립 지역 4–5개",
+     "격자 안 입력  토양 수분, 유기층, 식생, 적설, 미지형(30–500 m)"
+    ]
+   },
+   "evidence": {
+    "kind": "지도와 연결 그래프(기본안) 또는 지도와 굵은 리드 줄(대체안)",
+    "ref": "왼쪽: 범북극 라벨 밀도와 영구동토 구역 지도(관측 우선순위 아님). 오른쪽: 영구동토 구역의 라벨 수 계급별 면적 비율 [계산 필요]",
+    "data_sources": [
+     "data/processed/paper_figs/fig1_blocks.csv",
+     "영구동토 구역 자료 [미확인: 자료 이름과 판, 지침 8절 15]",
+     "docs/RESEARCH_CLAIMS_WORKFLOW_2026-10-01.md 5–6절",
+     "docs/RESEARCH_OVERVIEW_2026-10-02.md 8절"
+    ],
+    "status": "[DECISION] 면적 비율은 새 계산이라 사용자 확인 뒤 정한다(지침 8절 13). 계산하지 않으면 Fig 1a 슬라이드판 + 굵은 리드 줄 3줄로 대신한다(대체안이 기본)"
+   },
+   "intent": "결론 다음에 전망을 따로 둔다(MS-02). 적용 조건과 다음 자료를 쓰고 한계 나열로 끝내지 않는다",
+   "notes": {
+    "script": "이 워크플로를 현장에 쓰려면 두 가지 자료가 더 필요하다. 하나는 독립 지역이다. 지금 확인에 쓰는 독립 지역은 4–5개이고 학습 원천의 대부분이 알래스카이다. 다른 하나는 기후 격자 안의 변동을 설명할 입력이다. 토양 수분, 유기층, 식생, 적설, 미지형을 30–500 m 규모로 넣어야 격자 안 상세도를 시험할 수 있다. 두 가지 모두 추가 실험으로 등록하였다. 관측 계획에서는 라벨 10개로 잰 편향을 라벨 투자 우선순위의 참고 지표로 쓸 수 있다. 지도는 관측 우선순위를 뜻하지 않는다.",
+    "reference_line": "기대 효과(연구 주장 문서 5절): 현장 관측 계획, 물리 기반 ML 사용 지침, 평가 관행, 지도·제품 사용. 남은 근거(6절): 원천 편중 78–94%, 새 얕은 지역 1곳, 격자 안 상세도 미확인, 기후 외삽 판정 불가.",
+    "script_chars": 276
+   },
+   "numbers": [
+    {
+     "value": "4–5",
+     "meaning": "확인적 독립 지역 수(주 4지역 + 러시아 중부)",
+     "source": "paper/claims/D_data_and_design/README.md 1.2 항목 4",
+     "doc": "docs/QA_FINAL_REVIEW_2026-10-02.md Q1"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "D_data_and_design",
+     "C8_gain_source",
+     "C2_bias_diagnosis"
+    ],
+    "experiments": [],
+    "placeholders": [
+     "[XF: Discussion D6 | 결과 열람 뒤 설계, 새 지역은 맹검(독립 지역 확인) | 2.6 해석 문장]",
+     "[XE: Discussion D6 | 결과 열람 뒤 설계 | 2.5 해석 문장]"
+    ],
+    "docs": [
+     "docs/RESEARCH_CLAIMS_WORKFLOW_2026-10-01.md 5–6절",
+     "design/slide_archetypes.md 3절 20쪽"
+    ]
+   },
+   "flags": [
+    "관측 우선순위를 순위로 보이는 지도 금지",
+    "전망 쪽에 한계 나열 금지"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 30
+  },
+  {
+   "id": "S29",
+   "page": 29,
+   "part": "9부 · 논문 작성 계획",
+   "archetype": "A3",
+   "title": "원고 구성과 분량",
+   "subtitle": "9부 · Scientific Reports · 본문(서론, 결과, 고찰) 4500단어 이하 · 영문판과 국문판",
+   "takeaway": "결과 절을 약 2800단어로 줄이고 고찰 약 850단어를 새로 작성",
+   "visible_text": {
+    "chart_rows": [
+     "서론",
+     "결과",
+     "고찰",
+     "방법"
+    ],
+    "chart_key_line": "빈 원 현재 초안, 채운 원 목표",
+    "x_axis": "단어 수",
+    "support_table": {
+     "geometry_in": {
+      "x": 8.867,
+      "y": 1.3,
+      "w": 3.8,
+      "row_h": 0.8,
+      "col_w": [
+       1.2,
+       2.6
+      ]
+     },
+     "columns": [
+      "항목",
+      "한도와 현재"
+     ],
+     "rows": [
+      [
+       "초록",
+       "200단어 이하, 계획 199(판 B)와 196(판 A)"
+      ],
+      [
+       "표시 항목",
+       "8개 이하, 현재 8"
+      ],
+      [
+       "참고문헌",
+       "60편 권고, 계획 71–72"
+      ],
+      [
+       "조판 쪽수",
+       "11쪽 권고, 16–17쪽 추정"
+      ],
+      [
+       "그림 설명",
+       "350단어 이하, v3 초안 268–343"
+      ]
+     ]
+    }
+   },
+   "evidence": {
+    "kind": "덱 전용 차트(덤벨 점 그림) + 헤어라인 표",
+    "ref": "절별 현재 초안 단어 수와 목표",
+    "chart": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.3,
+      "w": 7.9,
+      "h": 4.3
+     },
+     "y": "절 4행",
+     "x": "단어 수 0–8000, 눈금 0, 2000, 4000, 6000, 8000",
+     "marks": "현재 초안 빈 원 8 pt 검정, 목표 채운 원 8 pt 검정, 두 점을 2.0 pt 회색 선으로 잇는다. 고찰의 현재 값은 골격 판임을 직접 라벨 '골격'으로 한 번 표시",
+     "values": {
+      "서론": [
+       797,
+       700
+      ],
+      "결과": [
+       7500,
+       2800
+      ],
+      "고찰": [
+       2012,
+       850
+      ],
+      "방법": [
+       6998,
+       4240
+      ]
+     }
+    },
+    "data_sources": [
+     "docs/research/2026-10-04/scirep_format_and_drafts.md 3.2(절별 단어 수), 3.3(한도 비교), 4.4(결과 절 예산), 4.5(Methods 목표)",
+     "design/journal_grade_style_guide.md 4.1",
+     "docs/QA_FOLLOWUP_2026-10-04.md 4.3",
+     "paper/manuscript/MANUSCRIPT_SPEC.md 1.1, 6절, 10절(절별 목표와 초록 단어 수), outputs/figures/paper/v3_restructure/FIGURE_SPEC_v3.md 16절(설명문 단어 수)"
+    ],
+    "status": "덱 전용 차트. 수치는 문서 표에서 옮긴다(현재 초안은 마크다운 공백 토큰 기준)"
+   },
+   "intent": "사용자가 요청한 '논문 작성 방향'의 구조와 분량을 보인다",
+   "notes": {
+    "script": "9부는 논문 작성 계획이다. 대상 학술지는 Scientific Reports이고 서론, 결과, 고찰을 합쳐 4500단어 이하, 표시 항목 8개 이하이다. 왼쪽 그림은 현재 초안과 목표 분량이다. 결과 초안은 9월 말의 가설 순서로 쓴 약 7500단어라서 약 2800단어로 줄이고 라벨 수 순서로 다시 쓴다. 고찰은 약 850단어로 새로 쓰고, 방법은 약 4240단어로 줄여 나머지를 보충 자료로 옮긴다. 영문판과 국문판을 함께 만들며 결과 수치는 원천 표에서 생성한 매크로로 넣는다.",
+    "reference_line": "결과 절 예산(영문): 평가 설계 300, 라벨 0개 400, 라벨 3–10개 450, 라벨 수십–수백 개 350, 라벨이 많은 지역 450, 새 라벨의 위치 400, 독립 지역 250, 예측 구간 200(합 2800). 서론 700, 고찰 850, 본문 합 4350. 템플릿 sn-jnl은 로컬에 없음.",
+    "script_chars": 270
+   },
+   "numbers": [
+    {
+     "value": "797, 7500, 2012, 6998",
+     "meaning": "현재 초안 단어 수(서론, 결과, 고찰 골격, 방법)",
+     "source": "docs/research/2026-10-04/scirep_format_and_drafts.md 3.2"
+    },
+    {
+     "value": "700, 2800, 850, 4240",
+     "meaning": "목표 단어 수",
+     "source": "paper/manuscript/MANUSCRIPT_SPEC.md 1.1, 6절(Methods 소절 합 4240, 지침 4.1 목표 약 4100)"
+    },
+    {
+     "value": "199와 196, 8, 71–72, 268–343",
+     "meaning": "초록 단어(판 B, 판 A), 표시 항목, 참고문헌 편수 계획, v3 그림 설명 초안 단어 범위",
+     "source": "paper/manuscript/MANUSCRIPT_SPEC.md 2절, 9.4절, outputs/figures/paper/v3_restructure/FIGURE_SPEC_v3.md 16절"
+    },
+    {
+     "value": "16–17쪽",
+     "meaning": "현재 계획의 조판 쪽수 추정",
+     "source": "design/journal_grade_style_guide.md 4.1",
+     "label": "검토 보고·판단 값"
+    }
+   ],
+   "tracking": {
+    "claims": [],
+    "experiments": [],
+    "placeholders": [],
+    "docs": [
+     "docs/research/2026-10-04/scirep_format_and_drafts.md 3–4",
+     "design/journal_grade_style_guide.md 4.1–4.3"
+    ]
+   },
+   "flags": [
+    "A3 사용 2/2",
+    "네 자리 수 쉼표 없음(4500, 7500)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 37
+  },
+  {
+   "id": "S30",
+   "page": 30,
+   "part": "9부 · 논문 작성 계획",
+   "archetype": "A7",
+   "title": "결과 절과 본문 표시 항목",
+   "subtitle": "9부 · 결과 절 8개를 라벨 수 순서로 · 그림 7개와 표 1개 · 현재 그림판은 그대로 두고 재구성판은 비교 폴더",
+   "takeaway": "본문 표시 항목 8개 안에서 결과 절마다 결과 지도 배치",
+   "visible_text": {
+    "table": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.35,
+      "w": 12.0,
+      "row_h": 0.75,
+      "col_w": [
+       2.8,
+       3.9,
+       2.0,
+       3.3
+      ]
+     },
+     "columns": [
+      "결과 절",
+      "다루는 내용",
+      "표시 항목",
+      "결과 지도"
+     ],
+     "rows": [
+      [
+       "평가 설계",
+       "자료, 시험지, 검증 사다리",
+       "그림 1, 표 1",
+       "자료·설계 지도"
+      ],
+      [
+       "라벨 0–10개",
+       "물리 정보, 재보정, 결합 구조",
+       "그림 2, 3, 6",
+       "대상별 오차 변화 지도"
+      ],
+      [
+       "라벨 수십–수백 개",
+       "방법 선정과 이득의 조건",
+       "그림 4",
+       "선정 결과 지도(보충)"
+      ],
+      [
+       "라벨이 많은 지역",
+       "이득의 크기와 출처, 워크플로",
+       "그림 7",
+       "보정량 지도"
+      ],
+      [
+       "위치, 독립 지역, 구간",
+       "배치 전략, 일반화, 예측 구간",
+       "그림 5, 6, 표 1",
+       "선정 지점 지도"
+      ]
+     ]
+    }
+   },
+   "evidence": {
+    "kind": "헤어라인 표(12.00 폭)",
+    "ref": "결과 절 R1–R8 과 표시 항목의 대응",
+    "data_sources": [
+     "design/journal_grade_style_guide.md 1.2(결과 지도 계획 표), 4.3(결과 소제목), 6.1–6.8(그림별 계획)",
+     "docs/MANUSCRIPT_RESTRUCTURE_PLAN_2026-10-02.md 4–5절",
+     "docs/research/2026-10-04/scirep_format_and_drafts.md 4.6"
+    ],
+    "status": "재구성판(v3) 그림은 아직 없다. 비교 폴더는 outputs/figures/paper/v3_restructure/(사용자 결정, 2026-10-04)"
+   },
+   "intent": "결과 절 순서와 그림 배치 계획을 한 표로 보이고, 결과 지도 의무(PF-02, H5)를 어떻게 채우는지 보인다",
+   "notes": {
+    "script": "결과 절은 여덟 개이고 라벨 수 순서를 따른다. 평가 설계, 라벨 0개, 라벨 3–10개, 라벨 수십–수백 개, 라벨이 많은 지역, 새 라벨의 위치, 독립 지역, 예측 구간 순이다. 표시 항목 8개 안에서 결과를 다루는 절마다 결과 지도를 둔다. 현재 그림판은 그대로 두고 재구성판은 별도 비교 폴더에서 만든다. 재구성판은 판정 기호와 내부 표지를 빼고 신뢰구간과 동등 띠로 판정을 보이며, 그림 안 글자를 7 pt 하나로 맞춘다. 어느 판을 쓸지는 결정 사항이다.",
+    "reference_line": "결과 소제목(영문 초안): Evaluation design and validation ladder, Transfer without target labels, Coefficient recalibration with three to ten labels, Method selection with tens to hundreds of labels, Gains within label-rich regions, Placement of new labels, Independent regions, Prediction intervals. 본문 결과 지도 그림: Fig 5, 6, 7.",
+    "script_chars": 260
+   },
+   "numbers": [],
+   "tracking": {
+    "claims": [
+     "C1–C8"
+    ],
+    "experiments": [],
+    "placeholders": [
+     "[XH: Fig 1e | 결과 열람 뒤 설계, 서술(판정어 없음) | 2.8 사전 고정 서술 규칙]",
+     "[XG: Fig 6c | 결과 열람 뒤 설계, 등록 이탈(WRAPUP 10) | 2.7 XG-1 행]",
+     "[XA: Fig 4d | 사후 분석(재현(비맹검)) | 2.1 결과 범주(양, 확인하지 못함, 음)와 CE1, CE2 판]",
+     "[XC: Fig 7e | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 XC-1, XC-2 포레스트]"
+    ],
+    "docs": [
+     "design/journal_grade_style_guide.md 1.2, 4.3, 6",
+     "docs/MANUSCRIPT_RESTRUCTURE_PLAN_2026-10-02.md"
+    ]
+   },
+   "flags": [
+    "표 안 '그림 N' 은 원고 그림 번호이며 쪽 상호참조가 아님"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 31
+  },
+  {
+   "id": "S31",
+   "page": 31,
+   "part": "9부 · 논문 작성 계획",
+   "archetype": "A7",
+   "title": "초록의 시험 결과 표기",
+   "subtitle": "9부 · 결정 사항 · 지역 내·워크플로 시험과 추가 실험 결과를 초록에 쓰는 방식",
+   "takeaway": "초록의 지역 내 시험 결과는 판정어 없이 수치만 표기(기본안)",
+   "visible_text": {
+    "table": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.35,
+      "w": 12.0,
+      "row_h": 1.0,
+      "col_w": [
+       2.4,
+       3.4,
+       2.9,
+       3.3
+      ]
+     },
+     "columns": [
+      "선택지",
+      "초록 표기",
+      "장점",
+      "단점"
+     ],
+     "rows": [
+      [
+       "제외",
+       "해당 문장 없음",
+       "등록 규칙 그대로",
+       "주제와 초록이 어긋남"
+      ],
+      [
+       "수치만(기본안)",
+       "수치와 조건, 판정어 없음",
+       "주제 반영, 규칙 유지",
+       "차이의 의미 판단이 어려움"
+      ],
+      [
+       "판정어 포함",
+       "'오차가 작았다' 표현",
+       "가장 읽기 쉬움",
+       "결과 열람 뒤 규칙 개정 필요"
+      ]
+     ]
+    },
+    "support_line": "예문(수치만)  Within Alaska, residual ML reached 13.9 against 14.4 cm RMSE for recalibrated Stefan (1000 labels).",
+    "orange_spot": "'수치만(기본안)' 한 곳"
+   },
+   "evidence": {
+    "kind": "헤어라인 표(12.00 폭) + 예문 한 줄",
+    "ref": "초록 표기 선택지 표",
+    "data_sources": [
+     "docs/QA_FOLLOWUP_2026-10-04.md 5절(5.1–5.5)",
+     "design/journal_grade_style_guide.md 4.2",
+     "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 7.1",
+     "docs/EXPERIMENT_PLAN_WRAPUP_2026-09-30.md 1.1"
+    ],
+    "status": "문구 확정 후보. 사용자 결정 전 기본값은 (나) 수치만"
+   },
+   "intent": "결정을 묻기 전에 규칙과 선택지별 영향을 먼저 설명한다(explain-before-decision). 임시 제목은 노트와 S34 에서 다룬다",
+   "notes": {
+    "script": "초록에 지역 내 시험과 워크플로 시험의 결과를 어떻게 넣을지가 남은 결정이다. 결과를 보기 전에 초록의 판정어는 사전 등록한 초록 대비 10개에만 쓰기로 정했다. 지역 내 시험은 그 뒤에 설계했으므로 이 묶음에 없다. 선택지는 빼기, 수치만 쓰기, 판정어 포함이다. 판정어를 넣으려면 결과를 본 뒤 규칙을 고쳐야 해 심사에서 지적될 수 있다. 그래서 현재는 수치만 쓰는 안을 기본으로 두고 두 판의 초록을 함께 만든다. 추가 실험의 워크플로 결과도 수치만 쓰거나 뺀다.",
+    "reference_line": "초록 7문장 틀(지침 4.2): 워크플로와 의의, 평가의 빈틈, 설계, 라벨 0–10, 라벨 수십–수천, 새 라벨의 위치, 적용 조건과 전망. 결과 수치는 핵심 2개 이하(사용자 확인 대기). 영문 임시 제목: Permafrost active-layer thickness prediction under sparse observations using physics-based pseudo-label augmentation and machine learning. 초록 판 B 는 8문장 199단어, 판 A 는 196단어(원고 명세 2절).",
+    "script_chars": 262
+   },
+   "numbers": [
+    {
+     "value": "13.9, 14.4 cm(원천 13.87, 14.41)",
+     "meaning": "예문의 알래스카 라벨 1000개 RMSE(물리 잔차 결합, 재보정 Stefan). 초록 판 B 와 같은 문장, 지침 4.5 자릿수",
+     "source": "paper/claims/C4_sufficient_labels/tables/wf2b_tests.csv (WF6-a, n1000)",
+     "doc": "paper/claims/C4_sufficient_labels/README.md E1.R1.n1000"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C4",
+     "C5",
+     "C6",
+     "C8"
+    ],
+    "experiments": [
+     "WRAPUP 1.1",
+     "WF",
+     "XC"
+    ],
+    "placeholders": [
+     "[XC: Abstract S8 | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 초록 규칙: 수치만, '개발에 쓴 지역을 다시 나눈 분할', 지역 2곳, 지역별 방향(우세 k, 열세 m)]"
+    ],
+    "docs": [
+     "docs/QA_FOLLOWUP_2026-10-04.md 5",
+     "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 7.1"
+    ]
+   },
+   "flags": [
+    "XC 판정어를 초록에 쓰는 개정안은 철회됨(FB 7.1)",
+    "A7 행 높이 1.00 in(세 줄 셀)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 34
+  },
+  {
+   "id": "S32",
+   "page": 32,
+   "part": "9부 · 논문 작성 계획",
+   "archetype": "A2",
+   "title": "추가 실험의 원고 자리",
+   "subtitle": "9부 · 추가 실험 10묶음 · 2026-10-04 사전 등록 · 모두 결과 열람 뒤 설계 · 결과 대기",
+   "takeaway": "본문 자리 4묶음과 보충 자료 6묶음, 결과 전에 배치 고정",
+   "visible_text": {
+    "row_labels": [
+     "재보정 몫 분리",
+     "배치 절차 결정",
+     "워크플로 순차 적용",
+     "기존 ALT 지도 비교",
+     "검증 사다리",
+     "다중 물리식 적층",
+     "격자 안 해상도 입력",
+     "독립 지역 추가",
+     "기후 외삽 재시험",
+     "지온 유도 보조 라벨"
+    ],
+    "x_axis": "등록 실행 순서",
+    "key_line": "채운 원 본문, 빈 원 보충 자료",
+    "right_labels": [
+     "결과 3절",
+     "결과 6절",
+     "결과 4절과 6절",
+     "결과 2절",
+     "결과 1절",
+     "결과 3절과 4절",
+     "결과 5절",
+     "결과 7절",
+     "보충",
+     "보충 한 줄"
+    ]
+   },
+   "evidence": {
+    "kind": "덱 전용 차트(순서 점 그림)",
+    "ref": "추가 실험의 등록 실행 순서와 원고 자리",
+    "chart": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.3,
+      "w": 12.0,
+      "h": 5.2
+     },
+     "y": "실험 10행(평이한 이름, 위에서 아래로 첫 실행 순서)",
+     "x": "등록 실행 순서 1–12(FB 6절의 가치 순서: 재보정 몫 분리 → 배치 절차 결정 → 워크플로 순차 적용 → 기존 지도 비교 → 검증 사다리 → 다중 물리식 적층 → 격자 안 해상도 입력 1단계 → 독립 지역 추가 → 학습형 배치 정책 → 격자 안 해상도 입력 2단계 → 기후 외삽 재시험 → 지온 유도 보조 라벨)",
+     "marks": "점 8 pt 검정(본문 채운 원, 보충 빈 원). 두 번 나오는 실험(배치 절차 결정과 학습형 정책 2와 9, 격자 안 해상도 입력 1단계와 2단계 7과 10)은 같은 행의 두 점을 2.0 pt 선으로 잇는다. 오른쪽 끝 열에 원고 자리 라벨(16 pt)"
+    },
+    "data_sources": [
+     "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.1(실험 목록과 본문/SI), 5(실행 순서·마감), 6(원고 자리)",
+     "paper/registry/experiments.csv (X 행)",
+     "git log 2678100"
+    ],
+    "status": "덱 전용 차트(문서 표에서 옮김). 결과 없음"
+   },
+   "intent": "추가 실험 묶음의 상태(등록 완료, 결과 대기)와 원고 자리를 한 쪽에 보인다. 본문·보충 배치는 결과 전에 고정했음을 밝힌다",
+   "notes": {
+    "script": "10월 4일에 추가 실험 10묶음을 사전 등록하였다. 모두 앞선 결과를 본 뒤 설계했으므로 그 표지를 단다. 그림은 등록한 실행 순서와 원고 자리이다. 채운 점은 본문, 빈 점은 보충 자료이다. 본문에 들어가는 것은 재보정 몫 분리, 워크플로 순차 적용, 기존 ALT 지도 비교, 검증 사다리의 4묶음이다. 본문과 보충 자료의 배치는 결과 전에 고정했고 결과가 좋거나 나빠도 옮기지 않는다. 결과는 아직 없으며 원고와 이 덱에는 등록한 자리표시로 둔다.",
+    "reference_line": "등록 시각 2026-10-04 14:22. 워크플로 순차 적용은 같은 지역을 다시 나눈 재검정, 새 독립 지역이 2곳 이상일 때만 실행 전 등록 확인 시험. 새 독립 지역은 0곳으로 예상. 자료 마감은 등록 뒤 7일.",
+    "script_chars": 253
+   },
+   "numbers": [
+    {
+     "value": "10, 4, 6",
+     "meaning": "추가 실험 묶음 수, 본문 자리, 보충 자리",
+     "source": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.1, 6"
+    }
+   ],
+   "tracking": {
+    "claims": [],
+    "experiments": [
+     "XA",
+     "XB",
+     "XC",
+     "XD",
+     "XE",
+     "XF",
+     "XG",
+     "XH",
+     "XI",
+     "XJ"
+    ],
+    "placeholders": [
+     "[XA: R3 | 사후 분석(재현(비맹검)) | 2.1 해석 조각]",
+     "[XB: SI, R3 지시 문장 | 결과 열람 뒤 설계, 실행 전 등록(비맹검 부분 포함) | 2.2 사전 고정 해석 문장 XB-1, XB-2(라벨 10개 행)]",
+     "[XC: R4 | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 사전 고정 해석 문장 XC-1, XC-2(+XC-2s), 뒤에 S-XC4 (b) 지역 손해 문장]",
+     "[XD: R6 SI 지시 문장 | 결과 열람 뒤 설계, 탐색(SI), XD-2 사후 설계(지역 표적) | 2.4 사전 고정 해석 문장(SI) XD-1, XD-3, 공통 한계 문장]",
+     "[XE: R5 SI 지시 문장 | 결과 열람 뒤 설계 | 2.5 사전 고정 해석 문장(6갈래)과 공통 문장]",
+     "[XF: R7 | 결과 열람 뒤 설계, 새 지역은 맹검(독립 지역 확인), NAtlantic v5 는 민감도 | 2.6 사전 고정 해석 문장]",
+     "[XG: R2 | 결과 열람 뒤 설계, 등록 이탈(WRAPUP 10) | 2.7 사전 고정 해석 문장 XG-1, XG-2, XG-3, 공통 문장]",
+     "[XH: R1 | 결과 열람 뒤 설계, 서술(판정어 없음). L19, L20 은 등록 | 2.8 사전 고정 서술 규칙]",
+     "[XI: R5 SI 지시 문장 | 결과 열람 뒤 설계 | 2.9 다섯 갈래, 공간 대용과 외삽 폭]",
+     "[XJ: R7 SI 한 줄 | 결과 열람 뒤 설계, 서술 | 2.10 사전 고정 해석 문장]"
+    ],
+    "docs": [
+     "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.1, 5, 6, 7"
+    ]
+   },
+   "flags": [
+    "실험 코드(XA–XJ)는 보이는 글에 쓰지 않는다",
+    "비용·계산 자원 수치는 대본에 쓰지 않는다(5.7)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 33
+  },
+  {
+   "id": "S33",
+   "page": 33,
+   "part": "9부 · 논문 작성 계획",
+   "archetype": "A7",
+   "title": "본문 자리 추가 실험",
+   "subtitle": "9부 · 본문 자리 4묶음 · 등록 완료, 결과 대기 · 결과 문장은 등록한 해석 문장으로 채움",
+   "takeaway": "본문 자리 4묶음의 결과에 따라 결과 1–4절과 6절 문장 확정",
+   "visible_text": {
+    "table": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.35,
+      "w": 12.0,
+      "row_h": 1.0,
+      "col_w": [
+       3.0,
+       5.6,
+       3.4
+      ]
+     },
+     "columns": [
+      "실험",
+      "질문",
+      "원고 자리"
+     ],
+     "rows": [
+      [
+       "재보정 몫 분리",
+       "재보정 너머 ML 몫과 계수 오차의 관계",
+       "결과 3절, 그림 4d"
+      ],
+      [
+       "워크플로 순차 적용",
+       "배치·진단·선정 순차 적용과 고정 레시피의 오차 비교",
+       "결과 4절과 6절, 그림 7e"
+      ],
+      [
+       "기존 ALT 지도 비교",
+       "라벨 0에서 기존 지도와 원천 계수 Stefan 비교",
+       "결과 2절, 그림 6c"
+      ],
+      [
+       "검증 사다리",
+       "지역별 검증 방식에 따른 오차",
+       "결과 1절, 그림 1e"
+      ]
+     ]
+    }
+   },
+   "evidence": {
+    "kind": "헤어라인 표(12.00 폭)",
+    "ref": "본문 자리 추가 실험의 질문과 원고 위치",
+    "data_sources": [
+     "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.1, 2.3, 2.7, 2.8, 6",
+     "docs/research/2026-10-04/scirep_format_and_drafts.md 4.9"
+    ],
+    "status": "결과 없음. 각 행의 결과 문장은 tracking.placeholders 의 등록 형식 자리표시"
+   },
+   "intent": "본문 문장이 어떤 결과에 기대는지 보이고, 결과가 나오면 어떤 문장이 바뀌는지 설명한다",
+   "notes": {
+    "script": "본문 자리 4묶음의 질문과 원고 위치이다. 재보정 몫 분리는 라벨을 쓰는 보정의 이득에서 재보정 몫과 그 너머의 기계학습 몫을 나누어, 계수 오차가 어느 몫과 관계있는지를 신뢰구간으로 정한다. 그 결과에 따라 결과 3절의 마지막 문장이 바뀐다. 워크플로 순차 적용은 배치, 진단, 선정을 차례로 적용한 결과를 무작위 배치와 고정 레시피에 비교한다. 같은 지역을 다시 나눈 재검정이므로 초록에는 수치만 쓴다. 기존 지도 비교와 검증 사다리는 라벨 0의 비교 기준과 평가 설계를 보강한다.",
+    "reference_line": "재보정 몫 분리: 사후 분석(재현(비맹검)), 판정어 대신 'CI가 0을 벗어났다'. 워크플로 순차 적용: Holm 가족 m 8, 배치 절차는 알래스카 계열에서만 고름. 기존 지도 비교: 등록 이탈 표지, 누설 마스크 5 km와 25 km. 검증 사다리: 서술(판정어 없음), '역전' 금지.",
+    "script_chars": 271
+   },
+   "numbers": [],
+   "tracking": {
+    "claims": [
+     "C2",
+     "C5",
+     "C6",
+     "C1",
+     "C7"
+    ],
+    "experiments": [
+     "XA",
+     "XC",
+     "XG",
+     "XH"
+    ],
+    "placeholders": [
+     "[XA: R3 | 사후 분석(재현(비맹검)) | 2.1 해석 조각]",
+     "[XC: R4 | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 사전 고정 해석 문장 XC-1, XC-2(+XC-2s), 뒤에 S-XC4 (b) 지역 손해 문장]",
+     "[XG: R2 | 결과 열람 뒤 설계, 등록 이탈(WRAPUP 10) | 2.7 사전 고정 해석 문장 XG-1, XG-2, XG-3, 공통 문장]",
+     "[XH: R1 | 결과 열람 뒤 설계, 서술(판정어 없음). L19, L20 은 등록 | 2.8 사전 고정 서술 규칙]"
+    ],
+    "docs": [
+     "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.1, 2.3, 2.7, 2.8"
+    ]
+   },
+   "flags": [
+    "같은 상태 문구를 칸마다 반복하지 않고 부제에 한 번(H13)"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 35
+  },
+  {
+   "id": "S34",
+   "page": 34,
+   "part": "9부 · 논문 작성 계획",
+   "archetype": "A7",
+   "title": "남은 결정 사항",
+   "subtitle": "9부 · 원고 작성 전 결정 · 사용자 결정 전 기본값",
+   "takeaway": "제목, 그림 배치, 초록 표기, 저자 정보의 결정이 원고 작성 전 필요",
+   "visible_text": {
+    "table": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.35,
+      "w": 12.0,
+      "row_h": 0.8,
+      "col_w": [
+       3.2,
+       5.0,
+       3.8
+      ]
+     },
+     "columns": [
+      "결정",
+      "선택지",
+      "결정 전 기본값"
+     ],
+     "rows": [
+      [
+       "논문 제목",
+       "임시 제목 유지, 주장형 한 문장",
+       "임시 제목(대회 제목의 영문 번역)"
+      ],
+      [
+       "그림 배치",
+       "현재판, 재구성판",
+       "두 판 비교 뒤 결정"
+      ],
+      [
+       "초록 표기",
+       "제외, 수치만, 판정어 포함",
+       "수치만"
+      ],
+      [
+       "저자·소속, LLM 사용 진술",
+       "미정",
+       "자리표시로 비움"
+      ],
+      [
+       "덱 여백과 본문 글자",
+       "확정값 0.52 in와 12.5 pt, 지침값 0.667 in와 18 pt",
+       "지침값으로 시안"
+      ]
+     ]
+    }
+   },
+   "evidence": {
+    "kind": "헤어라인 표(12.00 폭)",
+    "ref": "결정 사항 표",
+    "data_sources": [
+     "docs/research/2026-10-04/scirep_format_and_drafts.md 6절",
+     "design/journal_grade_style_guide.md 8절",
+     "docs/MANUSCRIPT_RESTRUCTURE_PLAN_2026-10-02.md 8절",
+     "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 7.2"
+    ],
+    "status": "기본값은 문서의 기본값을 옮김. 나머지 결정은 부록 AP10"
+   },
+   "intent": "원고 작성 전에 사용자가 정할 것을 기본값과 함께 보인다",
+   "notes": {
+    "script": "원고 작성 전에 정할 것을 다섯 가지로 모았다. 제목은 대회 제목을 영문으로 옮긴 임시 제목이다. 이 제목은 증강을 앞세운다. 결과에서 증강의 이득은 라벨 0에서만 확인되었으므로 바꿀지 검토가 필요하다. 그림 배치는 현재판과 재구성판을 나란히 본 뒤 정한다. 초록 표기는 앞 쪽의 세 안 가운데 하나이다. 저자, 소속, 대형 언어 모델 사용 진술은 자리표시로 두었다. 덱은 확정 문법을 유지하되 여백과 본문 글자 크기를 지침 값으로 바꾸었으므로 확인이 필요하다. 나머지 결정은 부록 표에 있다.",
+    "reference_line": "임시 제목 14단어(한도 20). 제목 후보 3개는 원고 재구성안 2절. 저자: 주 저자 후보 Seungwon Baek, KOPRI 공동 작업은 가능성 단계(저자 표기 안 함).",
+    "script_chars": 276
+   },
+   "numbers": [
+    {
+     "value": "14",
+     "meaning": "임시 영문 제목 단어 수(한도 20)",
+     "source": "docs/research/2026-10-04/scirep_format_and_drafts.md 4.2"
+    }
+   ],
+   "tracking": {
+    "claims": [],
+    "experiments": [],
+    "placeholders": [],
+    "docs": [
+     "docs/research/2026-10-04/scirep_format_and_drafts.md 4.2, 6",
+     "design/journal_grade_style_guide.md 8"
+    ]
+   },
+   "flags": [
+    "[DECISION] 항목은 보이는 글에서 '미정'으로 쓴다"
+   ],
+   "time_min": 1.0,
+   "takeaway_chars": 39
+  },
+  {
+   "id": "S35",
+   "page": 35,
+   "part": "참고문헌",
+   "archetype": "원형 밖 예외(참고문헌 쪽)",
+   "title": "참고문헌",
+   "subtitle": null,
+   "takeaway": null,
+   "visible_text": {
+    "layout": "본문 영역 2단(C1–C3, C4–C6), 12 pt Medium, 내어쓰기 0.25 in, 저자 알파벳순, 번호 없음",
+    "keys": [
+     "Aalto et al. 2018",
+     "Feng et al. 2023",
+     "Gautam et al. 2025",
+     "Hollmann et al. 2025",
+     "Jia et al. 2021",
+     "Karjalainen et al. 2019",
+     "Linnenbrink et al. 2024",
+     "Meyer & Pebesma 2022",
+     "Moore et al. 2025",
+     "Muñoz-Sabater et al. 2021",
+     "Nelson et al. 1997",
+     "O'Malley et al. 2026",
+     "Pilyugina et al. 2025",
+     "Ploton et al. 2020",
+     "Poggio et al. 2021",
+     "Qu et al. 2026",
+     "Ran et al. 2022a",
+     "Ran et al. 2022b",
+     "Read et al. 2019",
+     "Stefan 1891",
+     "Streletskiy et al. 2025",
+     "Veremeeva et al. 2025",
+     "Wadoux et al. 2021",
+     "Wang et al. 2025",
+     "Westermann et al. 2024",
+     "Willard et al. 2021",
+     "Zhang et al. 2024"
+    ]
+   },
+   "evidence": {
+    "kind": "텍스트 쪽(허용 예외)",
+    "data_sources": [
+     "docs/MANUSCRIPT_DRAFT_METHODS_INTRO_2026-09-30.md 225–297행 참고문헌 표(서지 전문과 확인 상태)",
+     "docs/research/2026-10-04/scirep_format_and_drafts.md 4.10(Ploton 2020, Meyer & Pebesma 2022, Wadoux 2021, Linnenbrink 2024 서지)"
+    ],
+    "status": "서지 전문은 위 표에서 그대로 옮긴다. Stefan 1891 은 [verify], Qu et al. 2026 의 학회 표기는 [verify]"
+   },
+   "intent": "덱에서 인용한 문헌을 원고 참고문헌과 대조할 수 있게 둔다(SL-09)",
+   "notes": {
+    "script": null,
+    "reference_line": "덱 인용 키와 원고 참고문헌 표의 차집합 0을 확인한다"
+   },
+   "numbers": [],
+   "tracking": {
+    "claims": [],
+    "experiments": [],
+    "placeholders": [],
+    "docs": []
+   },
+   "flags": [
+    "한 쪽을 넘으면 두 쪽으로 나눈다"
+   ],
+   "time_min": 0
+  }
+ ],
+ "appendix": [
+  {
+   "id": "AP1",
+   "page": "부록 1",
+   "part": "부록",
+   "archetype": "A2",
+   "title": "학습기별 전이 오차",
+   "subtitle": "부록 · 라벨 0개 · 주 4지역 평균 · 학습기 10종 · 5종은 분할 독립 가정 의존",
+   "takeaway": "두 CI가 일치한 학습기 5종에서 직접 ML 오차가 원천 계수 Stefan보다 큼",
+   "visible_text": {
+    "row_groups": [
+     "물리 기준선",
+     "부스팅과 랜덤 포레스트",
+     "표형 파운데이션 모델",
+     "신경망"
+    ],
+    "x_axis": "원천 계수 Stefan 대비 오차 변화 (cm)",
+    "key_line": "굵은 막대 셀 가중 CI, 가는 막대 블록 등가중 CI, 회색 띠 ±0.5 cm"
+   },
+   "evidence": {
+    "kind": "v3 그림 패널 슬라이드판(포레스트)",
+    "ref": "Fig 6c 학습기 포레스트, medium='slide'",
+    "encoding": "행 이름은 학습기 이름(계산 환경 이름 없음), 계열 묶음 머리와 여백. 점 검정, 두 CI, 0선, 동등 띠. 판정 기호·지지 등급 숫자 없음",
+    "data_sources": [
+     "paper/claims/C1_label0_safety/tables/fig6_a.csv (ci_dependence 열 포함)",
+     "paper/claims/C1_label0_safety/tables/fig6_a_registered.csv",
+     "paper/claims/C1_label0_safety/tables/lgx_tests.csv (L30)",
+     "paper/claims/C1_label0_safety/tables/lgt_tests.csv (L34)",
+     "paper/claims/C1_label0_safety/tables/lgf_tests.csv (LGF-F1)",
+     "paper/claims/C1_label0_safety/tables/lgfn_tests.csv (LGF-N1)"
+    ],
+    "status": "v3 미생성(v2 Fig 6a 값 재사용)"
+   },
+   "intent": "C1 의 학습기 일반성을 한정어와 함께 보인다. 본편 첫 결과 쪽에 두지 않는다(지침 1.1)",
+   "notes": {
+    "script": "라벨 0에서 학습기를 바꿔도 결론이 같은지를 보는 부록이다. 행은 학습기 계열로 묶었다. 랜덤 포레스트와 원천 지역 교차검증으로 고른 신경망 4종은 두 신뢰구간 모두에서 원천 계수 Stefan보다 오차가 컸다. CatBoost 세 설정과 두 표형 파운데이션 모델도 주 신뢰구간에서는 같은 판정이었다. 다만 이 판정은 분할 독립 가정에 의존한다. 따라서 두 신뢰구간의 판정이 일치한 학습기는 5종이다. 원천 계수가 크게 틀린 티베트에서는 직접 기계학습이 훨씬 나았다. TabICL v2는 라벨 10개에서 주 4지역 평균으로 원천 계수 Stefan보다 나았다. 이 판정도 분할 독립 가정에 의존한다.",
+    "reference_line": "C1. 두 CI 일치: 랜덤 포레스트 +2.63, MLP +2.45, 다중 헤드 MLP +2.44, 축소 FT-Transformer +4.13, RealMLP +5.21 cm. 분할 독립 가정 의존: CatBoost +2.25 [1.10, 3.42](Holm p 0.023), +1.94, +1.59, TabPFN v2 +1.02(Holm p 0.1168, 보정 전 유의), TabICL v2 +0.93, +0.85. TabICL v2 라벨 10개 −2.91(3지역 열은 +5.98).",
+    "script_chars": 333
+   },
+   "numbers": [
+    {
+     "value": "+2.44에서 +5.21 cm",
+     "meaning": "두 CI 판정이 같은 학습기 5종의 직접 ML − 원천 계수 Stefan(라벨 0, 주 4지역 평균)",
+     "source": "paper/claims/C1_label0_safety/tables/lgx_tests.csv (L30 rf), lgfn_tests.csv (LGF-N1)",
+     "doc": "paper/claims/C1_label0_safety/README.md 1.3, 2.1",
+     "label": "오차 증가"
+    },
+    {
+     "value": "+2.25 [1.10, 3.42] cm, Holm p 0.023",
+     "meaning": "주 학습기 CatBoost",
+     "source": "paper/claims/C1_label0_safety/tables/lgw_bundle.csv (AB1, MEAN)",
+     "doc": "paper/claims/C1_label0_safety/README.md 2.1 #1",
+     "label": "오차 증가, 분할 독립 가정 의존"
+    },
+    {
+     "value": "+1.02 cm, Holm p 0.1168",
+     "meaning": "TabPFN v2",
+     "source": "paper/claims/C1_label0_safety/tables/lgt_tests.csv (L34)",
+     "doc": "paper/claims/C1_label0_safety/README.md 2.1 #5",
+     "label": "보정 전 유의, 분할 독립 가정 의존"
+    },
+    {
+     "value": "−2.91 cm(주 4지역), +5.98 cm(3지역)",
+     "meaning": "TabICL v2 직접 ML 라벨 10개",
+     "source": "paper/claims/C1_label0_safety/tables/lgf_tests.csv (LGF-F1, n10)",
+     "doc": "paper/claims/C1_label0_safety/README.md 2.2 한계 행"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C1_label0_safety",
+     "SI_learners_new_regions"
+    ],
+    "experiments": [
+     "AB1",
+     "L30",
+     "L34",
+     "LGF-F1",
+     "LGF-N1"
+    ],
+    "placeholders": [],
+    "docs": [
+     "paper/claims/C1_label0_safety/README.md 2.1, 5.2",
+     "design/journal_grade_style_guide.md 6.6"
+    ]
+   },
+   "flags": [
+    "'all ten learners', '시험한 학습기 10종 모두' 단정 금지",
+    "'표형 파운데이션 모델은 물리식을 넘지 못한다' 계열 일반화 금지",
+    "A3 대신 A2(덱 A3 2쪽 한도)"
+   ],
+   "time_min": 0,
+   "takeaway_chars": 45
+  },
+  {
+   "id": "AP2",
+   "page": "부록 2",
+   "part": "부록",
+   "archetype": "A7",
+   "title": "판정 단어와 표지",
+   "subtitle": "부록 · 4분 판정 · 두 가중 95% 신뢰구간 · 블록 재표집",
+   "takeaway": "두 가중 CI가 같은 쪽일 때만 오차 감소와 오차 증가로 표기",
+   "visible_text": {
+    "table": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.35,
+      "w": 12.0,
+      "row_h": 0.75,
+      "col_w": [
+       2.8,
+       9.2
+      ]
+     },
+     "columns": [
+      "표기",
+      "조건"
+     ],
+     "rows": [
+      [
+       "오차 감소",
+       "셀 가중과 블록 등가중 95% 신뢰구간이 모두 0 아래"
+      ],
+      [
+       "오차 증가",
+       "두 신뢰구간이 모두 0 위"
+      ],
+      [
+       "동등",
+       "두 신뢰구간이 모두 ±0.5 cm 안"
+      ],
+      [
+       "미결정",
+       "그 밖의 경우, 차이를 확인하지 못함"
+      ],
+      [
+       "사후 서술",
+       "결과를 본 뒤 계산한 값, 판정 단어 없음"
+      ]
+     ]
+    },
+    "support_line": "분할 독립 가정 의존  지역 블록 공통 재표집 신뢰구간에서 판정이 달라지는 대비"
+   },
+   "evidence": {
+    "kind": "헤어라인 표",
+    "ref": "판정 규칙 표",
+    "data_sources": [
+     "docs/QA_FINAL_REVIEW_2026-10-02.md 머리말",
+     "paper/claims/C1_label0_safety/README.md 수치 규칙",
+     "design/journal_grade_style_guide.md 4.5"
+    ],
+    "status": "문구 확정 후보"
+   },
+   "intent": "덱 전체의 판정 단어를 한 번 정의한다(질의응답용)",
+   "notes": {
+    "script": "덱 전체에서 쓰는 판정 단어의 정의이다. 두 가중 신뢰구간은 셀마다 같은 무게를 준 것과 블록마다 같은 무게를 준 것이다. 둘이 모두 0 아래면 오차 감소, 모두 0 위면 오차 증가, 모두 ±0.5 cm 안이면 동등, 그 밖은 미결정이다. 미결정은 효과가 없다는 뜻이 아니라 차이를 확인하지 못했다는 뜻이다. 결과를 본 뒤 계산한 값은 사후 서술로 표시하고 판정 단어를 붙이지 않는다. 분할 독립 가정에 기대는 판정은 그 사실을 함께 적는다.",
+    "reference_line": "재표집: 채점 블록 재표집 10,000회(전이 본 판정 8개 가설은 1000회). 다중 비교: 초록 대비 10개 묶음 Holm. 결과 열람 뒤 설계 묶음은 확인적 가설로 세지 않음.",
+    "script_chars": 247
+   },
+   "numbers": [],
+   "tracking": {
+    "claims": [
+     "D_data_and_design"
+    ],
+    "experiments": [],
+    "placeholders": [],
+    "docs": [
+     "docs/QA_FINAL_REVIEW_2026-10-02.md",
+     "docs/RESEARCH_OVERVIEW_2026-10-02.md 4절"
+    ]
+   },
+   "flags": [],
+   "time_min": 0,
+   "takeaway_chars": 34
+  },
+  {
+   "id": "AP3",
+   "page": "부록 3",
+   "part": "부록",
+   "archetype": "A2",
+   "title": "라벨 0의 물리 기준선",
+   "subtitle": "부록 · 라벨 0개 · 주 4지역 평균 · 기준선 강도 점검 · 주 CI 기준, 분할 독립 가정 의존",
+   "takeaway": "연도 정합 Stefan이 원천 계수 Stefan보다 오차 1.00 cm 작음",
+   "visible_text": {
+    "rows": [
+     "연도 정합 Stefan − 원천 계수 Stefan",
+     "Stefan·위성 제품 앙상블 − 원천 계수 Stefan",
+     "직접 ML − 연도 정합 Stefan",
+     "기존 ALT 지도 − 원천 계수 Stefan(결과 대기)"
+    ],
+    "x_axis": "오차 변화 (cm)"
+   },
+   "evidence": {
+    "kind": "덱 전용 포레스트",
+    "ref": "라벨 0 기준선 대비 포레스트(마지막 행은 결과 대기 표지만, 값 없음)",
+    "data_sources": [
+     "paper/claims/C1_label0_safety/tables/lgx_tests.csv (L29 P0@tddm-P0|n0; L28 앵커 tddm D0-P0|n0)",
+     "paper/claims/C1_label0_safety/tables/lgw_bundle.csv (AB2)"
+    ],
+    "status": "덱 전용(원천 표 필터만). 기존 지도 행은 추가 실험 결과 뒤"
+   },
+   "intent": "비교 상대가 충분히 강한지에 대한 질의에 답한다",
+   "notes": {
+    "script": "라벨 0의 비교 기준이 충분히 강한지를 보았다. 라벨 연도의 융해 도일을 쓴 연도 정합 Stefan은 원천 계수 Stefan보다 오차가 1.00 cm 작았다. 다만 이 판정은 분할 독립 가정에 의존한다. Stefan과 위성 제품의 앙상블은 셀 가중으로는 오차가 작았다. 그러나 블록 등가중에서는 차이가 없어 미결정이었다. 주 학습기의 직접 기계학습은 연도 정합 Stefan보다도 오차가 3.24 cm 컸고 이 판정은 두 신뢰구간에서 같았다. 기존 ALT 지도와의 비교는 추가 실험으로 등록해 결과를 기다린다.",
+    "reference_line": "C1. 연도 정합 − 원천 −1.00 [−1.35, −0.32], 블록 −0.41, Holm p 0.0056(분할 독립 가정 의존). 앙상블 −2.73 [−3.33, −0.91], 블록 +0.05 미결정. 직접 ML − 연도 정합 +3.24 [1.86, 4.29], Holm p 0.0050(보조 가설, 앵커 변형 비맹검).",
+    "script_chars": 284
+   },
+   "numbers": [
+    {
+     "value": "−1.00 [−1.35, −0.32] cm",
+     "meaning": "연도 정합 Stefan − 원천 계수 Stefan",
+     "source": "paper/claims/C1_label0_safety/tables/lgx_tests.csv (L29)",
+     "doc": "paper/claims/C1_label0_safety/README.md 2.7",
+     "label": "오차 감소, 분할 독립 가정 의존"
+    },
+    {
+     "value": "−2.73 [−3.33, −0.91], 블록 등가중 +0.05",
+     "meaning": "앙상블 − 원천 계수 Stefan",
+     "source": "paper/claims/C1_label0_safety/tables/lgw_bundle.csv (AB2)",
+     "doc": "paper/claims/C1_label0_safety/README.md 2.7",
+     "label": "미결정"
+    },
+    {
+     "value": "+3.24 [1.86, 4.29] cm",
+     "meaning": "직접 ML − 연도 정합 Stefan",
+     "source": "paper/claims/C1_label0_safety/tables/lgx_tests.csv (L28, X9)",
+     "doc": "paper/claims/C1_label0_safety/README.md 2.7",
+     "label": "오차 증가(두 CI 일치, 보조 가설)"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C1_label0_safety"
+    ],
+    "experiments": [
+     "L29",
+     "L28",
+     "AB2"
+    ],
+    "placeholders": [
+     "[XG: R2 | 결과 열람 뒤 설계, 등록 이탈(WRAPUP 10) | 2.7 사전 고정 해석 문장 XG-1, XG-2, XG-3, 공통 문장]"
+    ],
+    "docs": [
+     "paper/claims/C1_label0_safety/README.md 2.7, 5.1(9)"
+    ]
+   },
+   "flags": [
+    "'원천 계수 Stefan 이 가장 강한 물리 기준선' 쓰지 않음"
+   ],
+   "time_min": 0,
+   "takeaway_chars": 42
+  },
+  {
+   "id": "AP4",
+   "page": "부록 4",
+   "part": "부록",
+   "archetype": "A7",
+   "title": "한계",
+   "subtitle": "부록 · 결과 해석의 범위",
+   "takeaway": "주장의 범위는 주 4지역과 알래스카 지역 안 결과로 한정",
+   "visible_text": {
+    "table": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.35,
+      "w": 12.0,
+      "row_h": 1.0,
+      "col_w": [
+       5.0,
+       7.0
+      ]
+     },
+     "columns": [
+      "한계",
+      "결과 해석에 주는 영향"
+     ],
+     "rows": [
+      [
+       "학습 원천의 78–94%가 알래스카 셀",
+       "주 4지역 평균과 지역별 행을 함께 보고"
+      ],
+      [
+       "확인적 독립 지역 4–5개",
+       "지역 일반 문장 대신 지역 수를 밝힘"
+      ],
+      [
+       "지역 내 시험은 결과 열람 뒤 설계",
+       "초록에는 판정어 없이 수치만, 본문에 표지"
+      ]
+     ]
+    }
+   },
+   "evidence": {
+    "kind": "헤어라인 표",
+    "ref": "한계 3행",
+    "data_sources": [
+     "docs/RESEARCH_CLAIMS_WORKFLOW_2026-10-01.md 6절",
+     "docs/RESEARCH_OVERVIEW_2026-10-02.md 10절",
+     "paper/claims/D_data_and_design/README.md E35"
+    ],
+    "status": "문구 확정 후보"
+   },
+   "intent": "본편에 한계 전용 쪽을 두지 않고 부록에 3행으로 둔다(지침 5.8)",
+   "notes": {
+    "script": "본편에는 한계 쪽을 두지 않고 여기에 모았다. 첫째, 학습 원천의 78–94%가 알래스카 셀이다. 그래서 결과를 주 4지역 평균과 지역별 행으로 함께 보고한다. 둘째, 확인적 독립 지역이 4–5개이다. 지역 일반 문장은 쓰지 않고 지역 수를 밝힌다. 셋째, 지역 내 시험과 워크플로 시험은 전이 결과를 본 뒤 설계했다. 그 결과는 초록에 판정어 없이 수치로 쓰고 본문에 표지를 단다. 효과 크기가 작다는 점은 오차 하한과 함께 보고한다.",
+    "reference_line": "그 밖: 효과 크기 작음(알래스카 0.4–0.5 cm), 기후 외삽 판정 불가, 격자 안 설명력은 공변량 해상도에 막힘.",
+    "script_chars": 244
+   },
+   "numbers": [
+    {
+     "value": "0.78–0.94",
+     "meaning": "원천 가운데 알래스카 셀 비율(주 6지역 대상)",
+     "source": "data/processed/paper_figs/fig1_source.csv (share_alaska)",
+     "doc": "paper/claims/D_data_and_design/README.md E35"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "D_data_and_design"
+    ],
+    "experiments": [],
+    "placeholders": [],
+    "docs": [
+     "docs/RESEARCH_CLAIMS_WORKFLOW_2026-10-01.md 6절"
+    ]
+   },
+   "flags": [
+    "'정직하게', '과한 정직' 표현 금지"
+   ],
+   "time_min": 0,
+   "takeaway_chars": 31
+  },
+  {
+   "id": "AP5",
+   "page": "부록 5",
+   "part": "부록",
+   "archetype": "A2",
+   "title": "알래스카 검증 방식 비교",
+   "subtitle": "부록 · 알래스카 지역 안 · 6겹 · seed 3개 점 추정 · 무작위 셀, 지점, 0.5° 블록, kNNDM",
+   "takeaway": "직접 CatBoost 오차만 검증 방식에 따라 11.55–17.91 cm로 변화",
+   "visible_text": {
+    "row_labels": [
+     "무작위 셀",
+     "지점 묶음",
+     "0.5° 블록",
+     "kNNDM"
+    ],
+    "direct_labels": [
+     "직접 CatBoost",
+     "선형 ML",
+     "Stefan",
+     "물리 잔차 결합"
+    ],
+    "x_axis": "RMSE (cm)"
+   },
+   "evidence": {
+    "kind": "덱 전용 차트(점 그림)",
+    "ref": "검증 방식 4개 × 방법 4개",
+    "data_sources": [
+     "paper/claims/C7_evaluation_design/tables/cv_scheme_comparison.csv",
+     "paper/claims/C7_evaluation_design/tables/cv_scheme_comparison_meta.json",
+     "docs/QA_FINAL_REVIEW_2026-10-02.md Q15 표"
+    ],
+    "status": "덱 전용(원천 표 필터만)"
+   },
+   "intent": "'무작위 분할이 맞는 것 아닌가' 질의(Q15)에 답한다",
+   "notes": {
+    "script": "평가 설계 쪽의 알래스카 세부이다. 같은 모형을 무작위 셀, 지점 묶음, 0.5° 블록, kNNDM의 네 방식으로 채점했다. 무작위 셀에서는 학습 셀이 시험 셀 바로 옆에 있다. 직접 CatBoost의 오차는 11.55 cm에서 17.91 cm로 커졌고 Stefan은 14.24–14.46 cm로 거의 같았다. 물리 잔차 결합은 네 방식 모두에서 Stefan보다 낮았다. 무작위 분할만 보면 직접 기계학습이 가장 좋아 보인다. 그러나 예측 격자와 라벨 사이 거리를 흉내 낸 kNNDM에서는 Stefan보다 나빴다.",
+    "reference_line": "C7. 가장 가까운 학습 셀 중앙값: 무작위 0 km, 지점 1.1, 블록 약 28, kNNDM 약 54 km. 물리 잔차 12.77–13.70 cm, 선형 ML 12.65–14.11 cm. 문헌 양쪽 입장: Ploton 2020, Meyer & Pebesma 2022 대 Wadoux 2021.",
+    "script_chars": 287
+   },
+   "numbers": [
+    {
+     "value": "11.55 → 17.91 cm",
+     "meaning": "직접 CatBoost RMSE(무작위 셀 → kNNDM)",
+     "source": "paper/claims/C7_evaluation_design/tables/cv_scheme_comparison.csv",
+     "doc": "paper/claims/C7_evaluation_design/README.md 1.3; docs/QA_FINAL_REVIEW_2026-10-02.md Q15"
+    },
+    {
+     "value": "14.24–14.46 cm",
+     "meaning": "Stefan RMSE 범위",
+     "source": "paper/claims/C7_evaluation_design/tables/cv_scheme_comparison.csv",
+     "doc": "paper/claims/C7_evaluation_design/README.md 1.3"
+    },
+    {
+     "value": "12.77–13.70 cm",
+     "meaning": "물리 잔차 결합 RMSE 범위(대회 최선 설정)",
+     "source": "paper/claims/C7_evaluation_design/tables/cv_scheme_comparison.csv",
+     "doc": "docs/QA_FINAL_REVIEW_2026-10-02.md Q15"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C7_evaluation_design"
+    ],
+    "experiments": [
+     "M1 채점 방식 비교"
+    ],
+    "placeholders": [
+     "[XH: R1 | 결과 열람 뒤 설계, 서술(판정어 없음). L19, L20 은 등록 | 2.8 사전 고정 서술 규칙]"
+    ],
+    "docs": [
+     "docs/QA_FINAL_REVIEW_2026-10-02.md Q15"
+    ]
+   },
+   "flags": [
+    "'kNNDM 이 가장 정직한 추정' 쓰지 않음"
+   ],
+   "time_min": 0,
+   "takeaway_chars": 44
+  },
+  {
+   "id": "AP6",
+   "page": "부록 6",
+   "part": "부록",
+   "archetype": "A7",
+   "title": "전이 시험 묶음의 목적과 결과",
+   "subtitle": "부록 · 전이 시험 · 목적, 입력과 산출, 결과와 의미 · 경로는 스펙 파일",
+   "takeaway": "전이 시험 묶음 모두 판정 기록 완료, 새 지역과 예측 구간은 보충 자료",
+   "visible_text": {
+    "table": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.35,
+      "w": 12.0,
+      "row_h": 0.9,
+      "col_w": [
+       2.4,
+       3.2,
+       2.8,
+       3.6
+      ]
+     },
+     "columns": [
+      "시험 묶음",
+      "목적",
+      "입력과 산출",
+      "결과와 의미"
+     ],
+     "rows": [
+      [
+       "전이 라벨 수 격자",
+       "라벨 수별 방법 비교",
+       "정제 표, 대상 27개 / 판정 표",
+       "직접 ML 개선 지역 0/4, 물리식 기준"
+      ],
+      [
+       "결합 구조·위약·기준선",
+       "물리 정보의 출처와 위치",
+       "라벨 수 격자 / 판정 표",
+       "위약 8대비 중 7개 오차 감소"
+      ],
+      [
+       "학습기 확장",
+       "학습기 의존 점검",
+       "같은 분할 / 학습기별 판정 표",
+       "두 CI 일치 5종 오차 증가"
+      ],
+      [
+       "새 독립 지역",
+       "새 지역에서 결론 유지",
+       "새 지역 표 / 약관 확인분 판정",
+       "5지역에서 라벨 0–40 판정 유지"
+      ],
+      [
+       "예측 구간·초록 대비",
+       "구간 포함률, 초록 문구",
+       "전이 산출 / 구간·초록 표",
+       "계층 구간 평균 0.86, 보장 없음"
+      ]
+     ]
+    }
+   },
+   "evidence": {
+    "kind": "헤어라인 표(12.00 폭)",
+    "ref": "전이 시험 묶음 입출력 표",
+    "experiment_io_spec_only": [
+     {
+      "name": "T1_transfer_label_grid(LG)",
+      "input": "data/processed/fidelity_base_v3.csv; data/processed/e5_soil_tdd_v3.csv",
+      "output": "results/rescale_lg/data/processed/lg/lg_tests.csv; lg_curve.csv; lg_minn.csv",
+      "output_status": "untracked",
+      "status": "done(J1)",
+      "paper_use": "main"
+     },
+     {
+      "name": "T2_transfer_structure_placebo_baselines(LGX)",
+      "input": "LG 격자",
+      "output": "data/processed/lgx/lgx_tests.csv; lgx_floor.csv; lgx_lg_aux.csv; ladder/lgv_tests.csv",
+      "output_status": "untracked",
+      "status": "done(J2)",
+      "paper_use": "main"
+     },
+     {
+      "name": "T3_learners_foundation_and_nn(LGT, LGF)",
+      "input": "LG 규약",
+      "output": "data/processed/lgt/lgt_tests.csv; data/processed/lgf/lgf_tests.csv; lgfn_tests.csv",
+      "output_status": "lgt untracked, lgf·lgfn exists",
+      "status": "done(J4, J6; J12 미실행)",
+      "paper_use": "main;SI"
+     },
+     {
+      "name": "T4_new_regions(LGD)",
+      "input": "data/processed/fidelity_base_v4.csv(18,088행); e5_soil_tdd_v4.csv",
+      "output": "data/processed/lgd/lgd_tests_lic.csv; lgd_curve_lic.csv; lgd_tests.csv",
+      "output_status": "untracked",
+      "status": "done(J5)",
+      "paper_use": "SI"
+     },
+     {
+      "name": "T5_prediction_intervals(LGU), T6(WRAPUP, LGW)",
+      "input": "LG 분할·산출",
+      "output": "data/processed/lgu/lgu_a_tests.csv; lgu_b_tests.csv; data/processed/lgw/lgw_bundle.csv; lgw_tests.csv; lgw_l43.csv; outputs/maps/transfer_lena/fig_map_lena.pdf",
+      "output_status": "lgu·lgw_bundle untracked, 레나 지도 exists",
+      "status": "done(J3, J7)",
+      "paper_use": "SI; main(초록 대비)"
+     }
+    ],
+    "data_sources": [
+     "paper/registry/experiments.csv (T 행: input_data, main_outputs, output_status, status, verdict_summary_ko, paper_use)"
+    ],
+    "status": "문구 확정 후보"
+   },
+   "intent": "사용자가 요청한 실험별 입출력 현황과 목적·결과를 질의응답용으로 남긴다",
+   "notes": {
+    "script": "전이 시험 묶음의 목적, 입력과 산출, 결과와 그 의미이다. 모든 묶음은 같은 자료 표와 같은 분할을 쓴다. 라벨 수 격자는 라벨 0에서 물리식을 기준으로 삼는 근거이고, 위약 시험은 증강의 이득이 물리 정보에서 온다는 근거이다. 학습기 확장은 결론이 학습기 하나에 묶이지 않는지 점검했다. 판정 표는 모두 있고 일부는 아직 저장소에 커밋되지 않았다. 새 지역과 예측 구간은 보충 자료이고, 파일 경로와 실험 번호는 스펙 파일에 적었다.",
+    "reference_line": "판정 정본: 전이 시험 계획서 7.1–7.4, 예측 구간 계획서 11.1, 학습기 확장 계획서 10절, 보고 규칙 결과 판정 기록. 목적 열은 paper/registry/experiments.csv 의 purpose_ko 를 줄인 것이다.",
+    "script_chars": 244
+   },
+   "numbers": [
+    {
+     "value": "27",
+     "meaning": "전이 시험 대상 수",
+     "source": "results/rescale_lg/data/processed/lg/lg_meta.json",
+     "doc": "paper/claims/D_data_and_design/README.md E25"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C1",
+     "C3",
+     "C7",
+     "SI_uncertainty",
+     "SI_learners_new_regions"
+    ],
+    "experiments": [
+     "LG",
+     "LGX",
+     "LGT",
+     "LGF",
+     "LGD",
+     "LGU",
+     "WRAPUP",
+     "LGW"
+    ],
+    "placeholders": [],
+    "docs": [
+     "paper/registry/experiments.csv"
+    ]
+   },
+   "flags": [
+    "'오차 감소' 등 판정 단어는 원천 판정 그대로",
+    "열 4개, 행 5개(A7 한도 안). 셀 두 줄을 넘으면 문구를 줄인다(렌더 확인)",
+    "사용자 요청(실험별 목적·결과·의미)에 맞춰 목적과 의미 열을 둠"
+   ],
+   "time_min": 0,
+   "takeaway_chars": 40
+  },
+  {
+   "id": "AP7",
+   "page": "부록 7",
+   "part": "부록",
+   "archetype": "A7",
+   "title": "지역 내·워크플로 시험의 목적과 결과",
+   "subtitle": "부록 · 모두 결과 열람 뒤 설계 · 관측 우선순위 지도는 등록 규칙상 미발행 · 경로는 스펙 파일",
+   "takeaway": "지역 내·워크플로 시험 8묶음 가운데 기후 외삽만 판정 불가",
+   "visible_text": {
+    "table": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.35,
+      "w": 12.0,
+      "row_h": 0.9,
+      "col_w": [
+       2.6,
+       3.0,
+       2.8,
+       3.6
+      ]
+     },
+     "columns": [
+      "시험 묶음",
+      "목적",
+      "입력과 산출",
+      "결과와 의미"
+     ],
+     "rows": [
+      [
+       "라벨 0 위험표",
+       "대상별 악화 분포 서술",
+       "전이 곡선 / 위험표(사후)",
+       "2 cm 넘게 악화 2개와 18개"
+      ],
+      [
+       "지역 내 곡선·하위 군집",
+       "라벨이 많을 때 ML 이득",
+       "세 지역, 분할 25회 / 판정 표",
+       "알래스카 라벨 1000개 0.54 cm 감소"
+      ],
+      [
+       "라벨 위치 전략",
+       "다음 라벨 배치 비교",
+       "지역 내·전이 대상 / 판정 표",
+       "캐나다 오차 감소, 레나델타 오차 증가"
+      ],
+      [
+       "선정 규칙과 편향 진단",
+       "라벨 수십 개 이상 방법 선정",
+       "대상 30개 / 선정 횟수와 판정 표",
+       "라벨 40개와 160개 비열등"
+      ],
+      [
+       "앵커·이득 분해·외삽",
+       "이득의 공간 규모와 외삽",
+       "지역 내·전이 분할 / 분해 표",
+       "격자 사이 약 99%, 외삽 판정 불가"
+      ]
+     ]
+    }
+   },
+   "evidence": {
+    "kind": "헤어라인 표(12.00 폭)",
+    "ref": "지역 내·워크플로 시험 묶음 입출력 표",
+    "experiment_io_spec_only": [
+     {
+      "name": "W1_label0_risk_table(WF0)",
+      "input": "results/rescale_lg/data/processed/lg/lg_curve.csv; data/processed/lgd/lgd_curve_lic.csv",
+      "output": "data/processed/wf/wf0_risk.csv; wf0_misspec.csv; wf0_meta.json",
+      "output_status": "exists",
+      "status": "done(사후 서술)",
+      "paper_use": "main"
+     },
+     {
+      "name": "W2_within_region_label_curve(WF1, WF6), W4_subcluster_coefficients(WF3)",
+      "input": "data/processed/fidelity_base_v3.csv; e5_soil_tdd_v3.csv",
+      "output": "results/rescale_wf/data/processed/wf/wf_tests.csv; wf_curve.csv; results/rescale_wf2/data/processed/wf/wf2b_tests.csv; wf2b_curve.csv",
+      "output_status": "tests exists, curve untracked",
+      "status": "done",
+      "paper_use": "main; WF3 SI"
+     },
+     {
+      "name": "W3_label_placement(WF2, WF8)",
+      "input": "fidelity_base_v3.csv(알래스카, 레나, 캐나다, AL-1, AL-2); LG 원천 + 주 4지역·알래스카 대상",
+      "output": "results/rescale_wf/data/processed/wf/wf_tests.csv; results/rescale_wf2/data/processed/wf/wf2b_tests.csv",
+      "output_status": "exists",
+      "status": "done",
+      "paper_use": "main"
+     },
+     {
+      "name": "W5_method_selection_and_bias_diagnosis(WF4)",
+      "input": "LG 27 (대상, 모드) + LGD 약관 확인분 3",
+      "output": "results/rescale_wf/data/processed/wf/wf_tests.csv",
+      "output_status": "exists",
+      "status": "done",
+      "paper_use": "main"
+     },
+     {
+      "name": "W6(WF7), W7(WF9, WF9-soil), W8(WF10), WF5_not_issued",
+      "input": "LG 27 + cci_alt; WF6 추출; fidelity_base_v3.csv",
+      "output": "results/rescale_wf2/data/processed/wf/wf2b_tests.csv; results/rescale_wf3/data/processed/wf/wf3b_tests.csv; wf3b_decomp.csv; data/processed/wf_soil/wf3b_tests.csv; data/processed/wf/wf9_repro_check.csv",
+      "output_status": "exists(WF5 missing: 등록 규칙상 미발행)",
+      "status": "done(WF7 서술, WF10 판정 불가), WF5 not run",
+      "paper_use": "main; SI"
+     }
+    ],
+    "data_sources": [
+     "paper/registry/experiments.csv (W 행)"
+    ],
+    "status": "문구 확정 후보"
+   },
+   "intent": "WF 묶음의 입출력과 결과를 질의응답용으로 남긴다",
+   "notes": {
+    "script": "지역 내 시험과 워크플로 시험 묶음의 목적, 입력과 산출, 결과와 의미이다. 모두 전이 결과를 본 뒤 설계했다. 라벨 0 위험표는 기존 곡선에서 다시 센 사후 서술이다. 지역 내 곡선은 라벨이 많을 때 ML 이득이 작다는 근거이고, 이득 분해는 그 이득이 기후 격자 단위 보정이라는 근거이다. 관측 우선순위 지도는 등록 규칙에 따라 내지 않았다. 기후 외삽은 외삽 영역의 블록이 3개뿐이라 판정할 수 없었다.",
+    "reference_line": "판정 정본: 워크플로 시험 계획서 2절, 5.1–5.3, 개정 이력(토양 √TDD 민감도). 하위 군집 계수는 이득 없음(보충). 목적 열은 paper/registry/experiments.csv 의 purpose_ko 를 줄인 것이다. 이득 분해의 약 99% 는 알래스카 지역 내 라벨 전량 값이다.",
+    "script_chars": 228
+   },
+   "numbers": [
+    {
+     "value": "74/74",
+     "meaning": "격자 분해 실행의 지역 내 곡선 재현 조각 일치",
+     "source": "data/processed/wf/wf9_repro_check.csv",
+     "doc": "paper/registry/experiments.csv W7 verdict_summary_ko"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C1",
+     "C2",
+     "C4",
+     "C5",
+     "C6",
+     "C8"
+    ],
+    "experiments": [
+     "WF0–WF10"
+    ],
+    "placeholders": [],
+    "docs": [
+     "paper/registry/experiments.csv"
+    ]
+   },
+   "flags": [
+    "AP6 와 연속 A7 2쪽(한도 안)",
+    "열 4개, 행 5개(A7 한도 안). 셀 두 줄을 넘으면 문구를 줄인다(렌더 확인)",
+    "사용자 요청(실험별 목적·결과·의미)에 맞춰 목적과 의미 열을 둠"
+   ],
+   "time_min": 0,
+   "takeaway_chars": 33
+  },
+  {
+   "id": "AP8",
+   "page": "부록 8",
+   "part": "부록",
+   "archetype": "A2",
+   "title": "원천 교차검증 조정",
+   "subtitle": "부록 · 신경망 4종 · 조정판 − 기본판 · 라벨 0, 10개와 전량",
+   "takeaway": "원천 교차검증 조정은 신경망 전이 오차를 줄이지 않음",
+   "visible_text": {
+    "row_groups": [
+     "MLP",
+     "다중 헤드 MLP",
+     "축소 FT-Transformer",
+     "RealMLP"
+    ],
+    "x_axis": "조정판 − 기본판 (cm)",
+    "direction_marker": "조정판 오차 낮음"
+   },
+   "evidence": {
+    "kind": "덱 전용 포레스트",
+    "ref": "학습기 × 라벨 수 × 구조(직접, 잔차) 대비",
+    "data_sources": [
+     "paper/claims/C5_method_selection/tables/lgfn_tests.csv (LGF-N2, LGF-N4)",
+     "paper/claims/C7_evaluation_design/tables/lgfn_tests.csv"
+    ],
+    "status": "덱 전용(원천 표 필터만)"
+   },
+   "intent": "방법을 원천이 아니라 대상 라벨로 골라야 한다는 해석의 근거를 보인다(직접 비교 실험은 아님)",
+   "notes": {
+    "script": "신경망 초모수를 원천 지역 교차검증으로 고르면 새 지역 오차가 줄어드는지 보았다. 조정판에서 기본판을 뺀 오차이고 0 아래가 조정판의 오차가 작은 쪽이다. MLP와 다중 헤드 MLP의 직접 기계학습은 조정 뒤 오차가 커졌다. 축소 FT-Transformer의 라벨 전량 잔차만 작게 나아졌다. 라벨 0에서 조정이 기본 설정을 바꾼 20점 가운데 14점에서 대상 오차가 커졌다. 방법 선정을 대상 라벨 안에서 하는 것과 부합하는 결과이나 두 방식을 직접 비교한 실험은 아니다.",
+    "reference_line": "C5, C7. 두 CI 일치 오차 증가: MLP 라벨 10 +2.96, 다중 헤드 MLP 라벨 0, 10과 전량 +1.33, +2.56, +1.67 cm. 분할 독립 가정 의존: MLP 라벨 0 +1.51, 전량 +1.10. 축소 FT-Transformer 전량 잔차 −0.19(0.5 cm 미만), −0.76.",
+    "script_chars": 265
+   },
+   "numbers": [
+    {
+     "value": "+2.96, +1.33, +2.56, +1.67 cm",
+     "meaning": "두 CI 판정이 같은 조정판 − 기본판 직접 ML 오차 증가",
+     "source": "paper/claims/C5_method_selection/tables/lgfn_tests.csv (LGF-N2)",
+     "doc": "paper/claims/C5_method_selection/README.md 1.3 신경망 조정",
+     "label": "오차 증가"
+    },
+    {
+     "value": "−0.19, −0.76 cm",
+     "meaning": "축소 FT-Transformer 전량 잔차(λ 0.25, 1.0)",
+     "source": "paper/claims/C5_method_selection/tables/lgfn_tests.csv (LGF-N2)",
+     "doc": "paper/claims/C5_method_selection/README.md 1.2 N8",
+     "label": "오차 감소, 분할 독립 가정 의존"
+    },
+    {
+     "value": "14/20",
+     "meaning": "조정이 기본 설정을 바꾼 점 가운데 대상 오차가 커진 점",
+     "source": "paper/claims/C5_method_selection/tables/lgfn_tests.csv (LGF-N4)",
+     "doc": "paper/claims/C5_method_selection/README.md 1.2 N9",
+     "label": "서술, 검정 없음"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C5_method_selection",
+     "C7_evaluation_design"
+    ],
+    "experiments": [
+     "LGF-N2",
+     "LGF-N4"
+    ],
+    "placeholders": [],
+    "docs": [
+     "paper/claims/C5_method_selection/README.md 1.2 N8–N10"
+    ]
+   },
+   "flags": [
+    "'신경망을 충분히 조정했다' 쓰지 않음",
+    "'대상 라벨 교차검증이 원천 교차검증보다 낫다' 단정 금지"
+   ],
+   "time_min": 0,
+   "takeaway_chars": 29
+  },
+  {
+   "id": "AP9",
+   "page": "부록 9",
+   "part": "부록",
+   "archetype": "A7",
+   "title": "보충 자료 자리 추가 실험",
+   "subtitle": "부록 · 보충 자료 6묶음 · 등록 완료, 결과 대기",
+   "takeaway": "보충 자료 6묶음은 결과와 관계없이 보충 자료에 수록",
+   "visible_text": {
+    "table": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.35,
+      "w": 12.0,
+      "row_h": 0.8,
+      "col_w": [
+       3.4,
+       5.6,
+       3.0
+      ]
+     },
+     "columns": [
+      "실험",
+      "질문",
+      "원고 자리"
+     ],
+     "rows": [
+      [
+       "다중 물리식 적층",
+       "라벨 가중 적층과 재보정 Stefan 비교",
+       "결과 3절과 4절 보충"
+      ],
+      [
+       "배치 절차 결정과 학습형 정책",
+       "배치 매개변수 결정, 학습 정책 탐색",
+       "결과 6절, 방법"
+      ],
+      [
+       "격자 안 해상도 입력",
+       "30–500 m 입력의 격자 안 설명 비율",
+       "결과 5절 보충"
+      ],
+      [
+       "독립 지역 추가",
+       "공개 자료 새 지역의 핵심 대비",
+       "결과 7절 보충"
+      ],
+      [
+       "기후 외삽·지온 보조 라벨",
+       "따뜻한 블록 외삽, 보조 라벨 가중",
+       "보충 자료"
+      ]
+     ]
+    }
+   },
+   "evidence": {
+    "kind": "헤어라인 표(12.00 폭)",
+    "ref": "보충 자리 추가 실험 표",
+    "data_sources": [
+     "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.2, 2.4, 2.5, 2.6, 2.9, 2.10, 6"
+    ],
+    "status": "결과 없음"
+   },
+   "intent": "보충 자리 실험의 질문과 위치를 질의응답용으로 둔다",
+   "notes": {
+    "script": "보충 자료에 들어갈 추가 실험 6묶음의 질문과 위치이다. 다중 물리식 적층은 여러 물리식과 위성 제품을 대상 라벨로 가중해 재보정 Stefan보다 나은지 본다. 배치 절차 결정은 블록과 공변량을 함께 쓰는 배치의 매개변수를 알래스카에서 정하고, 학습형 배치 정책은 탐색으로만 본다. 격자 안 해상도 입력은 격자 안 변동을 다시 시험한다. 독립 지역 추가는 새 지역이 없을 가능성이 크다. 기후 외삽 재시험과 지온 유도 보조 라벨은 우선순위가 낮다.",
+    "reference_line": "학습형 배치 정책은 독립 계열 3개라 p값과 판정어 없이 방향이 맞은 과제 수만 보고. 격자 안 해상도 입력의 사전 기대는 '작은 이득 또는 차이 없음'. 기후 외삽 재시험은 캐나다 확충판 외삽 영역 11블록.",
+    "script_chars": 250
+   },
+   "numbers": [
+    {
+     "value": "11",
+     "meaning": "기후 외삽 재시험의 외삽 영역 블록 수(캐나다 확충판)",
+     "source": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.9"
+    }
+   ],
+   "tracking": {
+    "claims": [
+     "C3",
+     "C4",
+     "C6",
+     "C8",
+     "SI_learners_new_regions"
+    ],
+    "experiments": [
+     "XB",
+     "XD",
+     "XE",
+     "XF",
+     "XI",
+     "XJ"
+    ],
+    "placeholders": [
+     "[XB: SI, R3 지시 문장 | 결과 열람 뒤 설계, 실행 전 등록(비맹검 부분 포함) | 2.2 사전 고정 해석 문장 XB-1, XB-2(라벨 10개 행)]",
+     "[XB: SI, R4 지시 문장 | 결과 열람 뒤 설계, 실행 전 등록(비맹검 부분 포함) | 2.2 사전 고정 해석 문장 XB-1, XB-2(라벨 40, 160 행, 레나·캐나다 2지역)]",
+     "[XB: SI, R5 지시 문장 | 결과 열람 뒤 설계, 실행 전 등록(비맹검 부분 포함) | 2.2 사전 고정 해석 문장 XB-3, XB-4]",
+     "[XD: R6 SI 지시 문장 | 결과 열람 뒤 설계, 탐색(SI), XD-2 사후 설계(지역 표적) | 2.4 사전 고정 해석 문장(SI) XD-1, XD-3, 공통 한계 문장]",
+     "[XD: Methods M7 | 결과 열람 뒤 설계, 부록 XC-0 의 기계적 선택(알래스카 계열) | 2.4 고른 후보 이름과 γ]",
+     "[XE: R5 SI 지시 문장 | 결과 열람 뒤 설계 | 2.5 사전 고정 해석 문장(6갈래)과 공통 문장]",
+     "[XF: R7 | 결과 열람 뒤 설계, 새 지역은 맹검(독립 지역 확인), NAtlantic v5 는 민감도 | 2.6 사전 고정 해석 문장]",
+     "[XI: R5 SI 지시 문장 | 결과 열람 뒤 설계 | 2.9 다섯 갈래, 공간 대용과 외삽 폭]",
+     "[XJ: R7 SI 한 줄 | 결과 열람 뒤 설계, 서술 | 2.10 사전 고정 해석 문장]"
+    ],
+    "docs": [
+     "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 6"
+    ]
+   },
+   "flags": [],
+   "time_min": 0,
+   "takeaway_chars": 29
+  },
+  {
+   "id": "AP10",
+   "page": "부록 10",
+   "part": "부록",
+   "archetype": "A7",
+   "title": "기타 결정 사항",
+   "subtitle": "부록 · 원고 작성 중 결정 · 기본값",
+   "takeaway": "참고문헌, 지역 표기, 구간 이름, 전망 계산, KPDC 자료의 결정 필요",
+   "visible_text": {
+    "table": {
+     "geometry_in": {
+      "x": 0.667,
+      "y": 1.35,
+      "w": 12.0,
+      "row_h": 0.8,
+      "col_w": [
+       4.6,
+       7.4
+      ]
+     },
+     "columns": [
+      "결정",
+      "기본값"
+     ],
+     "rows": [
+      [
+       "참고문헌 71–72편(권고 60편)",
+       "그대로 두고 새 지역 자료 인용의 보충 이동 검토"
+      ],
+      [
+       "지역 영문 표기, 레나델타 범위",
+       "확인 전 현재 표기"
+      ],
+      [
+       "워크플로 구간 이름",
+       "시험한 라벨 수(0, 3–10, 40–160, 320–1000, 전량)"
+      ],
+      [
+       "전망 쪽 면적 계산",
+       "계산 전에는 관측 지도와 리드 줄로 대신"
+      ],
+      [
+       "KPDC 지온 자료의 보충 수록",
+       "결정 전 보류"
+      ]
+     ]
+    }
+   },
+   "evidence": {
+    "kind": "헤어라인 표",
+    "ref": "기타 결정 표",
+    "data_sources": [
+     "docs/research/2026-10-04/scirep_format_and_drafts.md 6절",
+     "design/journal_grade_style_guide.md 8절 7, 13, 14, 15"
+    ],
+    "status": "문구 확정 후보"
+   },
+   "intent": "남은 결정을 빠짐없이 기록한다",
+   "notes": {
+    "script": "앞의 다섯 결정 외에 원고 작성 중에 정할 것들이다. 참고문헌은 71–72편으로 권고 60편을 넘는다. 지역 이름의 영문 표기와 레나델타의 범위를 확정해야 한다. 워크플로 구간 이름은 시험한 라벨 수로 쓸지 문서의 구간 이름으로 쓸지 정한다. 전망 쪽의 영구동토 구역별 라벨 밀도 면적은 새로 계산해야 한다. KPDC 지온 자료를 보충 자료에 남길지도 정한다.",
+    "reference_line": "그 밖: TeX 패키지 설치 위치, 덱 머리 문법 N 채택 여부, 워크플로 경로 y 값의 풀(본편 S26 flags).",
+    "script_chars": 201
+   },
+   "numbers": [
+    {
+     "value": "71–72, 60",
+     "meaning": "현재 참고문헌 수, 권고 수",
+     "source": "paper/manuscript/MANUSCRIPT_SPEC.md 9.4절"
+    }
+   ],
+   "tracking": {
+    "claims": [],
+    "experiments": [],
+    "placeholders": [],
+    "docs": [
+     "docs/research/2026-10-04/scirep_format_and_drafts.md 6",
+     "design/journal_grade_style_guide.md 8"
+    ]
+   },
+   "flags": [
+    "AP9 와 연속 A7 2쪽(한도 안)"
+   ],
+   "time_min": 0,
+   "takeaway_chars": 39
+  }
+ ],
+ "placeholders_registry": [
+  {
+   "id_spec_only": "XA",
+   "plain_name": "재보정 몫 분리",
+   "question_ko": "라벨을 쓰는 보정 이득을 재보정 몫, 수축 잔여, 재보정을 넘어선 ML 몫으로 나누고 각 몫과 계수 오차의 순위상관에 CI 를 붙인다",
+   "manuscript": "결과 절 R3, 고찰 D2. Fig 4d(XA 결과가 없으면 SI). 초록은 수치만",
+   "main_or_si": "본문",
+   "registered_source": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.4(자리표시 문자열), 2.1, 6",
+   "used_on": [
+    "S15",
+    "S16",
+    "S30",
+    "S32",
+    "S33"
+   ],
+   "status": "등록 완료(2026-10-04 14:22 T0 커밋 2678100), 결과 없음",
+   "forms": [
+    "[XA: R3 | 사후 분석(재현(비맹검)) | 2.1 해석 조각]",
+    "[XA: Fig 4d | 사후 분석(재현(비맹검)) | 2.1 결과 범주(양, 확인하지 못함, 음)와 CE1, CE2 판]",
+    "[XA: Discussion D2 | 사후 분석(재현(비맹검)) | 2.1 해석 조각 XA-3]"
+   ]
+  },
+  {
+   "id_spec_only": "XB",
+   "plain_name": "다중 물리식 적층",
+   "question_ko": "여러 물리식과 위성 제품의 라벨 가중 적층이 재보정 Stefan 과 재보정 앵커 잔차보다 오차가 작은가",
+   "manuscript": "결과 절 R3, R4, R5 의 SI 지시 문장(SI 표)",
+   "main_or_si": "보충",
+   "registered_source": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.2, 6",
+   "used_on": [
+    "AP9",
+    "S17",
+    "S18",
+    "S32"
+   ],
+   "status": "등록 완료(2026-10-04 14:22 T0 커밋 2678100), 결과 없음",
+   "forms": [
+    "[XB: SI, R3 지시 문장 | 결과 열람 뒤 설계, 실행 전 등록(비맹검 부분 포함) | 2.2 사전 고정 해석 문장 XB-1, XB-2(라벨 10개 행)]",
+    "[XB: SI, R4 지시 문장 | 결과 열람 뒤 설계, 실행 전 등록(비맹검 부분 포함) | 2.2 사전 고정 해석 문장 XB-1, XB-2(라벨 40, 160 행, 레나·캐나다 2지역)]",
+    "[XB: SI, R5 지시 문장 | 결과 열람 뒤 설계, 실행 전 등록(비맹검 부분 포함) | 2.2 사전 고정 해석 문장 XB-3, XB-4]"
+   ]
+  },
+  {
+   "id_spec_only": "XC",
+   "plain_name": "워크플로 순차 적용",
+   "question_ko": "배치 절차, 라벨 10개 편향 진단, 라벨 수별 방법 규칙의 순차 적용이 무작위 배치 + 고정 레시피, 재보정 Stefan, 무작위 배치 + 규칙보다 어떤가",
+   "manuscript": "결과 절 R4, R6, R7(XC-F3), 고찰 D6, Fig 7e. 초록은 수치만 또는 제외(FB 7.1)",
+   "main_or_si": "본문",
+   "registered_source": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.3, 6, 7.1",
+   "used_on": [
+    "S18",
+    "S22",
+    "S23",
+    "S26",
+    "S30",
+    "S31",
+    "S32",
+    "S33"
+   ],
+   "status": "등록 완료(2026-10-04 14:22 T0 커밋 2678100), 결과 없음",
+   "forms": [
+    "[XC: R4 | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 사전 고정 해석 문장 XC-1, XC-2(+XC-2s), 뒤에 S-XC4 (b) 지역 손해 문장]",
+    "[XC: R6 | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 사전 고정 해석 문장 XC-5와 공통 문장]",
+    "[XC: R7 | 실행 전 등록 확인 시험(맹검) | 2.3 XC-F3 갈래]",
+    "[XC: Fig 7e | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 XC-1, XC-2 포레스트]",
+    "[XC: Discussion D6 | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 XC-1, XC-2]",
+    "[XC: Abstract S8 | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 초록 규칙: 수치만, '개발에 쓴 지역을 다시 나눈 분할', 지역 2곳, 지역별 방향(우세 k, 열세 m)]"
+   ]
+  },
+  {
+   "id_spec_only": "XD",
+   "plain_name": "배치 절차 결정과 학습형 정책",
+   "question_ko": "블록 배분과 공변량 덮임을 합친 배치의 매개변수 결정, 레나델타형 오차 증가의 교정, 학습형 배치 정책의 알래스카 밖 시험",
+   "manuscript": "결과 절 R6 SI 지시 문장, Methods M7(배치 절차 정의), SI(학습형 정책)",
+   "main_or_si": "보충",
+   "registered_source": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.4, 6",
+   "used_on": [
+    "AP9",
+    "S22",
+    "S23",
+    "S26",
+    "S32"
+   ],
+   "status": "등록 완료(2026-10-04 14:22 T0 커밋 2678100), 결과 없음",
+   "forms": [
+    "[XD: R6 SI 지시 문장 | 결과 열람 뒤 설계, 탐색(SI), XD-2 사후 설계(지역 표적) | 2.4 사전 고정 해석 문장(SI) XD-1, XD-3, 공통 한계 문장]",
+    "[XD: Methods M7 | 결과 열람 뒤 설계, 부록 XC-0 의 기계적 선택(알래스카 계열) | 2.4 고른 후보 이름과 γ]"
+   ]
+  },
+  {
+   "id_spec_only": "XE",
+   "plain_name": "격자 안 해상도 입력",
+   "question_ko": "공개 고해상 입력(10–500 m)을 더하면 ERA5 격자 안 RMSE 가 줄어드는가(격자 안 분해의 재시험)",
+   "manuscript": "결과 절 R5 SI 지시 문장, 고찰 D6, 초록 S8 해석",
+   "main_or_si": "보충",
+   "registered_source": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.5, 6",
+   "used_on": [
+    "AP9",
+    "S21",
+    "S28",
+    "S32"
+   ],
+   "status": "등록 완료(2026-10-04 14:22 T0 커밋 2678100), 결과 없음",
+   "forms": [
+    "[XE: R5 SI 지시 문장 | 결과 열람 뒤 설계 | 2.5 사전 고정 해석 문장(6갈래)과 공통 문장]",
+    "[XE: Discussion D6 | 결과 열람 뒤 설계 | 2.5 해석 문장]",
+    "[XE: Abstract S8 | 결과 열람 뒤 설계 | 2.5 사전 고정 해석 문장(첫째 또는 넷째 갈래)]"
+   ]
+  },
+  {
+   "id_spec_only": "XF",
+   "plain_name": "독립 지역 추가",
+   "question_ko": "공개 자료로 독립 지역을 더하면 핵심 대비의 결론이 유지되는가. 적격 새 지역은 0곳으로 예상",
+   "manuscript": "결과 절 R7, 고찰 D6. 결과 표는 Supplementary Table S18(Table 1 에 행을 더하지 않음)",
+   "main_or_si": "보충",
+   "registered_source": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.6, 6",
+   "used_on": [
+    "AP9",
+    "S05",
+    "S24",
+    "S28",
+    "S32"
+   ],
+   "status": "등록 완료(2026-10-04 14:22 T0 커밋 2678100), 결과 없음",
+   "forms": [
+    "[XF: R7 | 결과 열람 뒤 설계, 새 지역은 맹검(독립 지역 확인), NAtlantic v5 는 민감도 | 2.6 사전 고정 해석 문장]",
+    "[XF: Discussion D6 | 결과 열람 뒤 설계, 새 지역은 맹검(독립 지역 확인) | 2.6 해석 문장]"
+   ]
+  },
+  {
+   "id_spec_only": "XG",
+   "plain_name": "기존 ALT 지도 비교",
+   "question_ko": "라벨이 없을 때 기존 ALT 지도와 원천 계수 Stefan 의 비교, 같은 라벨로 지도를 재보정했을 때 재보정 앵커 잔차와의 비교",
+   "manuscript": "결과 절 R2, Fig 6c 의 묶음 행, 고찰 D6",
+   "main_or_si": "본문",
+   "registered_source": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.4(등록 이탈), 2.7, 6",
+   "used_on": [
+    "AP3",
+    "S11",
+    "S30",
+    "S32",
+    "S33"
+   ],
+   "status": "등록 완료(2026-10-04 14:22 T0 커밋 2678100), 결과 없음",
+   "forms": [
+    "[XG: R2 | 결과 열람 뒤 설계, 등록 이탈(WRAPUP 10) | 2.7 사전 고정 해석 문장 XG-1, XG-2, XG-3, 공통 문장]",
+    "[XG: Fig 6c | 결과 열람 뒤 설계, 등록 이탈(WRAPUP 10) | 2.7 XG-1 행]",
+    "[XG: Discussion D6 | 결과 열람 뒤 설계, 등록 이탈(WRAPUP 10) | 2.7 공통 문장]"
+   ]
+  },
+  {
+   "id_spec_only": "XH",
+   "plain_name": "검증 사다리",
+   "question_ko": "같은 모형을 무작위 셀, 지점, 0.5° 블록, kNNDM, 지역 홀드아웃으로 채점하면 오차가 어떻게 바뀌는가(알래스카, 레나델타, 캐나다)",
+   "manuscript": "결과 절 R1, Fig 1e",
+   "main_or_si": "본문",
+   "registered_source": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.8, 6",
+   "used_on": [
+    "AP5",
+    "S08",
+    "S30",
+    "S32",
+    "S33"
+   ],
+   "status": "등록 완료(2026-10-04 14:22 T0 커밋 2678100), 결과 없음",
+   "forms": [
+    "[XH: R1 | 결과 열람 뒤 설계, 서술(판정어 없음). L19, L20 은 등록 | 2.8 사전 고정 서술 규칙]",
+    "[XH: Fig 1e | 결과 열람 뒤 설계, 서술(판정어 없음) | 2.8 사전 고정 서술 규칙]"
+   ]
+  },
+  {
+   "id_spec_only": "XI",
+   "plain_name": "기후 외삽 재시험",
+   "question_ko": "학습 범위보다 따뜻한 블록에서 직접 ML 의 외삽 손실이 물리 잔차보다 큰가(캐나다 확충판, 외삽 영역 11블록)",
+   "manuscript": "결과 절 R5 SI 지시 문장",
+   "main_or_si": "보충",
+   "registered_source": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.9, 6",
+   "used_on": [
+    "AP9",
+    "S21",
+    "S32"
+   ],
+   "status": "등록 완료(2026-10-04 14:22 T0 커밋 2678100), 결과 없음",
+   "forms": [
+    "[XI: R5 SI 지시 문장 | 결과 열람 뒤 설계 | 2.9 다섯 갈래, 공간 대용과 외삽 폭]"
+   ]
+  },
+  {
+   "id_spec_only": "XJ",
+   "plain_name": "지온 유도 보조 라벨",
+   "question_ko": "정의가 다른 지온 유도 라벨을 낮은 가중의 보조 행으로 쓰면 라벨이 적은 단계의 전이 오차가 줄어드는가",
+   "manuscript": "결과 절 R7 SI 한 줄",
+   "main_or_si": "보충",
+   "registered_source": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.10, 6",
+   "used_on": [
+    "AP9",
+    "S24",
+    "S32"
+   ],
+   "status": "등록 완료(2026-10-04 14:22 T0 커밋 2678100), 결과 없음",
+   "forms": [
+    "[XJ: R7 SI 한 줄 | 결과 열람 뒤 설계, 서술 | 2.10 사전 고정 해석 문장]"
+   ]
+  }
+ ],
+ "qa_plan": {
+  "S-01 머리": "내용 쪽마다 명사구 제목, 부제 한 줄, 결론 줄 45자 이하(이 스펙 생성기에서 길이 점검 완료, 렌더 한 줄 여부는 빌드 뒤)",
+  "S-02 상자": "채움 도형 0, 글씨 든 상자 0(v7 셰브런 미사용), 24 pt 이상 숫자 런 0",
+  "S-03 글자": "Pretendard 만, 크기 집합 안, 차트 글자 16 pt 이상",
+  "S-04 차트 배율": "1.00 ± 0.02, 300 dpi",
+  "S-05 격자": "폭 1 in 넘는 요소의 왼쪽 끝이 열 끝 ±0.02 in",
+  "S-06 색": "흰 배경, 주황은 제목과 쪽당 1곳, 차트 색은 방법 색 코드",
+  "S-07 글 양": "보조 글 2줄 이하, 대본 250–350자(본편)",
+  "S-08 문장": "대시·금지 어휘·내부 명칭·가운뎃점 숫자 0(보이는 글과 노트). 이 스펙 생성기의 정규식 점검 결과는 qa_precheck",
+  "S-09 렌더": "자동 간격을 끈 PDF 경로, 글자 넘침·고아 줄·하단 빈 여백 10% 초과 0",
+  "S-10 리듬": "같은 원형 연속 3쪽 0(A6 예외), A3 2쪽(S06, S29) 비연속",
+  "S-11 의의와 서술": "2쪽 의의, 첫 결과 쪽(S11) 결론 줄이 대상별 결과의 사후 서술 수('직접 ML 실패' 아님), 결론(S27) 다음 전망(S28), 본편 한계 쪽 0(부록 AP4)",
+  "S-12 결과 지도": "결과 부마다 지도 쪽: 2부 S11, 3부 S16, 4부 S18, 5부 S21, 6부 S22, 7부 S24",
+  "tools": "design/journal_grade_style_guide.md 부록 A.3 pptx_audit(grammar='V'), user_feedback_digest 5.1 검색, 렌더 PNG 육안 검토"
+ },
+ "open_issues": [
+  "v3 재구성 그림이 아직 없다(비교 폴더 outputs/figures/paper/v3_restructure/). 덱 근거 그림 대부분은 v3 그림 함수의 medium='slide' 판을 전제로 하므로 v3 그림 작업이 먼저 필요하다",
+  "[미확인] 결과 지도 자료: 대상 중심 좌표(S11, S16, S18), 배치 전략별 선정 지점 좌표(S22), 평가 설계 분할 블록 배정(S07). 모두 라벨 값 없이 재계산할 수 있으나 파일은 없다. 알래스카 셀 단위 예측 파일은 없어 S21 기본판은 채점 블록 지도다(그림 명세 D-11)",
+  "[확인 필요] 워크플로 경로(S26, Fig 7d)의 y 기준과 풀: 기본값은 지침 6.7 d 의 레나델타·캐나다 풀(라벨 3–160 의 권고 방법이 0 위에 놓임). 대안은 y 를 재보정 Stefan 또는 고정 레시피 대비로, 또는 라벨 10개까지 주 4지역 풀을 쓰는 혼합 풀. 원고 명세 D1, 그림 명세 D-13 과 같은 결정이다",
+  "[확인 필요] 워크플로 배치 띠의 '분산 배치'는 레나델타의 블록 층화 오차 증가 때문에 추가 실험(사전 지정 배치 절차) 결과 뒤 다시 본다",
+  "표지 제목: 국문 임시 제목이 32 pt 두 줄에 들어가지 않아 보고 이름을 제목으로, 임시 제목을 부제로 두었다([DECISION])",
+  "A7 표 행 높이를 0.75–1.00 in로 늘렸다(근거 블록 4.5 in 확보, 두 줄 셀). 원형 A7 의 0.50 in 와 다르므로 첫 시안과 함께 보고한다",
+  "final_lib.py 는 여백 0.52 in, 결론 줄 y 7.02 를 상수로 쓴다. 지침 여백 0.667 in·헤어라인 y 6.82 용 래퍼가 필요하다(코드 미수정)",
+  "덱 출력 폴더 이름(deck/<행사명>/)과 PDF 내보내기 스크립트(deck/export_pdf.py)는 미정·미구현",
+  "부록 AP6, AP7 의 대본은 250자 하한보다 짧다(질의응답용 부록이라 허용 범위로 둠)"
+ ],
+ "revision_log": [
+  "2026-10-04 v1.0: 초판(빌드 전 스펙). 본편 34쪽 + 참고문헌 1쪽 + 부록 10쪽. 근거 수치는 paper/claims/*/README.md 의 근거 표와 그 원천 CSV 에서 옮김. 추가 실험(XA–XJ)은 등록 형식 자리표시",
+  "2026-10-04 v1.1: 원고 명세·그림 명세와 교차 검토 반영. 내용은 끝의 검토_반영 항목"
+ ],
+ "qa_precheck": [
+  "생성 단계 정규식 점검 지적 0건(2026-10-04)",
+  "2026-10-04 v1.1 교차 검토 뒤 재점검: 보이는 글·대본에서 금지 어휘, 내부 코드, 가운뎃점 숫자, 음수 범위 en dash 0건(참고 줄의 '쓰지 않음' 인용 제외). 본편 대본 253–323자, 결론 줄 23–45자"
+ ],
+ "검토 반영": [
+  "2026-10-04 원고 명세(paper/manuscript/MANUSCRIPT_SPEC.md)·그림 명세(outputs/figures/paper/v3_restructure/FIGURE_SPEC_v3.md)와 교차 검토. 수치는 원천 CSV 42개 값을 다시 열어 확인했다(원고 명세 14절 목록). 모두 일치했고 아래 두 곳만 고쳤다",
+  "S24: 러시아 중부 R1 − P0 의 원천 필터를 L8e 에서 L38 '(b) R1-P0' 행으로 고쳤다. 적힌 CI [−8.96, −1.64] / [−6.83, 1.48]는 L38 행 값이고 L8e 행은 [−8.98, −1.84] / [−6.46, 1.49]다",
+  "S26: 교차검증 선정의 라벨 160개 2지역 평균을 반올림 전 값으로 +0.18 cm 로 적었다",
+  "S26 워크플로 경로를 그림 명세 9.3 d 와 같게 바꿨다. 기본값은 지침 6.7 d 의 레나델타·캐나다 전이 풀이고 방법 라벨은 원천 계수 Stefan(0), 재보정과 저가중 잔차(3–10), 교차검증 선정(40–전량) 3개, 관측 띠 1개, 텍스트 객체 13개다. 초판의 혼합 풀(라벨 10개까지 주 4지역)은 대안 (c)로 남겼다. 이 풀에서 경로가 0 위에 놓이는 점을 대본에 적었다",
+  "그림·패널 참조를 그림 명세와 맞췄다: S07 Fig 1c·d, S08 Fig 1e, S16 Fig 4b(세로축 '오차 변화', 음수 = 감소, 티베트는 축 밖 삼각 표지), S19 Fig 7a 의 절대 RMSE 짝 그림(SI, D-21), S21 Fig 7b 기본판(채점 블록 지도, D-11, 컬러바 '재보정 Stefan 대비 오차 변화'), S25 는 Fig 6d 가 아닌 덱 전용 점 그림(규약이 달라 CI 를 나란히 두지 않음), S33 그림 4d, 7e, 6c, 1e",
+  "관측 원 면적의 기준을 그림 명세와 같은 '블록의 1 km 라벨 위치 수'로 바꿨다(S01, S05, meta.colormaps). S05 의 흰 원은 '새 지역'으로 바꿨다",
+  "주장 문구 좁힘: S11 대본·의도의 '물리 정보가 줄인 손해', S12·S34 의 '라벨 0 전용', S15 의 '잔차 ML 은 작은 몫을 더한다', S17 의 '라벨로 골라야 한다'(처방), S23 결론 줄과 S04·S26·S27·AP7 의 '손해', S25 의 '회복했다', S28 의 '우선순위 판단', AP5 의 '지도를 그리는 조건'을 claims README 5.2 와 SI_uncertainty README 의 허용 문구로 바꿨다. S14 의 캐나다 원인은 해석으로 표시하고 라벨 3개 값의 분할 독립 가정 의존을 적었다",
+  "'~지만'·'~으나' 연결(S03, S06 결론 줄, S15, S23, S34, AP1, AP3, AP6), 가운뎃점 숫자 나열(S12, S13, S17, S22, S23, S32, S33, AP8), 음수가 든 범위의 en dash 를 고쳤다. AP10 의 내부 은어 '콘슬'을 'KPDC'로 바꿨다. S32, AP9 의 '고해상 격자 안 입력'을 등록 문서 제목인 '격자 안 해상도 입력'으로 바꿨다",
+  "사용자 요청 '실험별 목적·결과·의미'에 맞춰 AP6, AP7 표를 '시험 묶음, 목적, 입력과 산출, 결과와 의미' 4열로 바꿨다(목적은 paper/registry/experiments.csv 의 purpose_ko 요약)",
+  "원고 계획 수치를 원고 명세와 맞췄다: S29 초록 199(판 B)와 196(판 A), 참고문헌 71–72, 설명문 268–343, Methods 약 4240. S31 예문을 초록 판 B 의 자릿수(13.9, 14.4)로. S30 비교 폴더는 outputs/figures/paper/v3_restructure/",
+  "모든 tracking.placeholders 와 placeholders_registry.forms 를 원고 명세 11절의 위치별 문자열과 글자 하나까지 같게 바꿨다. XF 는 Table 1 이 아니라 Supplementary Table S18, XG 는 Fig 6c, XH 는 Fig 1e 로 적었다",
+  "쪽 수와 시간(본편 34쪽 + 참고문헌, 34분), 의의 쪽(S02), 첫 결과 쪽(S11), 결과 부마다 지도 쪽, 결론 다음 전망 쪽, 사용자 요청 주제(전체 결과, 의의, 실험별 입출력·목적·결과·의미, 데이터 처리, 워크플로, 논문 방향, 추가 실험 현황)의 대응은 바뀌지 않았다. 대본 250–350자와 결론 줄 45자 이하를 다시 쟀다"
+ ]
+}

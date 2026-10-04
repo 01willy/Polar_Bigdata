@@ -1,0 +1,8 @@
+row,raw_m,model_unit_m,basis,source
+라벨,11,1000,점 관측(수 m)을 좌표 소수점 4자리(약 11 m)로 묶어 평균한 뒤 1 km 셀,docs/QA_FINAL_REVIEW_2026-10-02.md Q8 표
+지형 고도·경사·향,30,30,Copernicus DEM 30 m 의 점 화소 값,docs/QA_FOLLOWUP_2026-10-04.md 3.4 표(지형·SAR 정정)
+지형 TPI·거칠기,30,990,30 m 화소 33 × 33 창(약 1 km),docs/QA_FOLLOWUP_2026-10-04.md 3.4 표(지형·SAR 정정)
+기후 ERA5-Land,11100,11100,"ERA5-Land 0.1°(남북 약 11 km), 가장 가까운 격자값",docs/QA_FINAL_REVIEW_2026-10-02.md Q8 표
+토양 SoilGrids,250,5000,SoilGrids 250 m 제품을 약 5 km 로 요청해 추출,docs/QA_FINAL_REVIEW_2026-10-02.md Q8 표
+위성 ALT CCI,1000,1000,"ESA CCI 약 1 km, 가장 가까운 화소",docs/QA_FINAL_REVIEW_2026-10-02.md Q8 표
+SAR(알래스카만),30,150,"30 m, PolSAR 150 m 창(InSAR 창 [미확인])",docs/QA_FOLLOWUP_2026-10-04.md 3.4 표(지형·SAR 정정)

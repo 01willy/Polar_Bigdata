@@ -11,6 +11,9 @@
 |---|---|---|---|
 | 1 | SoilGrids 부족 창을 WCS 로 취득 | O 군 주 경로는 'ISRIC SoilGrids VRT 창 읽기(부족 창)', 대체 경로 없음 | VRT 창 읽기로 받았다. WCS(SCALESIZE 없는 GetCoverage)는 같은 250 m 값을 주지만 등록 경로가 아니므로 쓰지 않았다 |
 | 2 | AppEEARS 시험 요청은 MOD13Q1·MOD10A2 | S 군 주 경로는 AppEEARS MOD10A1 점 요청, 대체 순서는 earthaccess MOD10A1 → MOD10A2 | 시험 요청에 MOD10A1 을 더해 제품별 1건, 3건을 냈다(MOD13Q1, MOD10A1, MOD10A2). 주 경로와 대체 경로의 대기 시간을 함께 잰다. 전체 요청 JSON 은 MOD10A1(주)과 MOD10A2(대체 준비) 둘 다 만들었다. 등록 문서는 MOD10A2 의 취득 경로를 정하지 않았으므로 AppEEARS MOD10A2 JSON 은 준비물일 뿐이다 |
+| 3(저녁 세션) | 전체 요청은 MOD13Q1·MOD10A2 를 라벨 위치와 레나 격자 중심에 제출 | S 군 주 경로는 MOD10A1 | 지시대로 MOD13Q1·MOD10A2 를 두 집합에 냈고, 등록 주 경로를 지키기 위해 라벨 위치 MOD10A1(1,234화소, 출력 약 0.5 GB 추정)도 함께 냈다. 레나 육지 MOD10A1(출력 약 16 GB 추정)은 내지 않았다. 지도는 해석 규칙 1·2 에서만 다시 만들고(within_grid_inputs.md 5.9) 그때 MOD10A2 대체 정의(등록 문서 2.5절에 고정)를 쓴다. 이 선택이 등록 이탈인지는 추출 단계에서 S 군 정의를 고정할 때 개정 이력에 적는다 |
+| 4(저녁 세션) | WorldCover 는 v3·v4 의 모든 라벨 위치를 덮을 것 | V 군 대상은 XE 3지역 | 1차(14:36) 43타일은 XE 대상만 덮었다. 2차(21:24, `--scope all_labels`)에서 v3 ∪ v4 모든 지역 라벨 위치까지 넓혀 131타일로 완료했다. XE 추출은 1차 43타일만 쓰면 되고, 나머지 89타일은 XF 등 다른 실험의 참고용이다. 라벨 값은 읽지 않았다(좌표 열만) |
+| 5(저녁 세션) | SoilGrids 250 m 부족 창을 `data/raw/soilgrids_wcs` 와 비교 | O 군 출처는 `data/raw/soilgrids_multi/`(250 m 창) + 부족 창 | `soilgrids_wcs/` 는 x25 의 약 5 km WCS 추출(지역 상자 31개, 9층)이며 250 m 창이 아니다. 부족 창 판정의 기준은 등록 문서대로 `soilgrids_multi/` 로 두었다(3절). 기준 차이만 기록한다 |
 
 ## 2. 등록 문서 안의 미정 사항과 이번 구현의 가정
 
@@ -44,15 +47,23 @@
 - CAVM 은 캐나다 라벨(ABoVE_CA 북방림)에서 거의 모두 99(비북극 육지)다. 결측은 아니지만 정보가 없다. within_grid_inputs.md 5.10 의 '툰드라만 분류' 한계와 같다.
 - SoilGrids 정렬 창 포함률은 `data/raw/soilgrids_xe250/coverage_meta.json` 에 적는다(취득 완료 뒤).
 
-## 5. 마감
+## 5. 마감(2026-10-04 21:30 +0900 갱신)
 
-| 군 | 마감 | 상태(이 기록 시점) |
-|---|---|---|
-| V(WorldCover) | T0 + 72 h(2026-10-07 14:22:39 +0900) | 43타일 완료 |
-| V(CAVM) | T0 + 72 h | 완료 |
-| O(NCSCD) | T0 + 72 h | 완료 |
-| O(SoilGrids 부족 창) | T0 + 72 h | 진행(정렬 재취득 포함 57칸) |
-| V(MOD13Q1)·S | T0 + 96 h(2026-10-08 14:22:39 +0900) | 시험 요청 3건 완료(아래 6절), 전체 요청 JSON 준비(미제출) |
+T0 = 2026-10-04 14:22:39 +0900. 마감 A = T0 + 72 h = 2026-10-07 14:22:39, 마감 B = T0 + 96 h = 2026-10-08 14:22:39, xe_feat 최종판 = T0 + 100 h = 2026-10-08 18:22:39.
+
+| 군 | 마감 | 상태 | 완료 시각(T0 기준) | 마감까지 남은 시간 |
+|---|---|---|---|---|
+| V(WorldCover) | A | 완료. 1차 43타일(XE 대상+레나 상자), 2차 131타일(v3 ∪ v4 모든 라벨 위치, 7.45 GB). 제품 범위 밖 1타일(S63W063, 남극 GTN-P 1점) | 1차 14:36:50(T0 + 0.24 h), 2차 21:24:40(T0 + 7.03 h) | 65.0 h |
+| V(CAVM) | A | 완료(판 2 주, 판 1 대조, zip sha256 = Mendeley API) | 14:33(T0 + 0.17 h) | 71.8 h |
+| O(NCSCD) | A | 완료(0.012° 래스터 zip 97.6 MB, 73파일 해제) | 14:35(T0 + 0.21 h) | 71.8 h |
+| O(SoilGrids 250 m 창) | A | 완료. 57칸 × 7층 모두 ok(부족 창 36 + 정렬 재취득 21). XE 라벨 17,385점·레나 육지 38,173셀 모두 창 경계 안 | 16:48:55(T0 + 2.44 h) | 69.6 h |
+| V(MOD13Q1) | B | 제출 완료, 처리 대기. 라벨 위치 3건·레나 육지 39건(task_id 는 `appeears_xe/requests/submitted_full.json`) | 제출 21:11:01–21:13:34(T0 + 6.8 h) | 89.0 h |
+| S(MOD10A1 주 경로, 라벨 위치) | B | 제출 완료, 처리 대기. 4건(1,000점 요청 1건이 값 수 상한으로 거절되어 3조각으로 재제출, 8절) | 제출 21:11:13–21:21:44(T0 + 7.0 h) | 89.0 h |
+| S(MOD10A2 대체 준비) | B | 제출 완료, 처리 대기. 라벨 위치 2건·레나 육지 39건 | 제출 21:11:16–21:15:48(T0 + 6.9 h) | 89.0 h |
+| S(MOD10A1, 레나 육지) | B | 미제출(출력 약 16 GB 추정, 지도용은 해석 규칙 1·2 에서만 필요). JSON 39건 보존 | | |
+| M(ArcticDEM 10 m) | A | 이 세션 범위 밖. 디스크 상태만 기록: 색인 JSON(10 m·32 m) 과 스모크 창 8개(10 m ok 6, 타일 없음 2, 1.1 MB), SOURCE.md 없음(`arcticdem_xe/fetch_meta.json`) | 15:58(스모크) | 65 h |
+
+상태 조회 1회(21:23:08, T0 + 7.01 h): 87건 가운데 pending 86, processing 1(`appeears_xe/requests/status_summary.json`, `status_log_full.csv`). 시험 요청에서 대기열 약 16분·처리 2–4분이었으므로 87건이 순차 처리되면 수 시간이 걸릴 수 있다[추정]. 결과 내려받기는 `appeears-status --fetch`(9절).
 
 ## 6. AppEEARS 시험 요청 결과(대기 시간)
 
@@ -62,3 +73,36 @@
 - 결과 행 수: MOD13Q1 30행(10점 × 합성 3), MOD10A2 50행(10점 × 합성 5), MOD10A1 300행(10점 × 30일). 행당 크기는 MOD13Q1 약 440 B, MOD10A2 약 84 B, MOD10A1 약 168 B 다.
 - 전체 요청 출력 크기 추정(행당 크기 × 점 × 날짜 수)[추정]: 라벨 위치 MOD10A1 약 0.5 GB, MOD13Q1 약 30 MB, MOD10A2 약 30 MB. 레나 육지 MOD10A1 약 16 GB, MOD13Q1 약 0.6 GB, MOD10A2 약 1 GB. 처리 시간은 점 × 날짜 수에 따라 늘 것이므로 시험 결과만으로는 추정하지 못했다[미확인].
 - 제출 권고 순서(마감 T0 + 96 h 안): 라벨 위치 MOD13Q1·MOD10A1(주 경로) → 라벨 위치 MOD10A2(대체 대비) → 레나 지도용 요청(해석 규칙 1·2 에서만 쓰므로 마지막).
+
+- 확인(21:10, 저녁 세션): API 재조회에서 3건 모두 `done`, 묶음 5파일씩(결과 CSV, granule 목록, metadata XML, request JSON, README) 디스크에 있고 `result_*.json` 의 sha256 과 같다. 계정에는 이 3건 외 과제가 없었다.
+
+## 7. 저녁 세션(2026-10-04 20:58–21:30 +0900) 디스크 재고 조사
+
+앞 세션은 세션 한도로 중단됐다. 다시 시작하며 `data/raw/` 아래 2단계 폴더를 조사했다. 체크섬 검증은 기존 SOURCE.md 표의 sha256 과 크기를 파일마다 다시 계산해 비교한 것이다.
+
+| 폴더 | 파일 | 크기 | SOURCE.md | 체크섬 검증(조사 시점) | 판정 |
+|---|---:|---:|---|---|---|
+| `worldcover_v200/` | 49(타일 43) | 2.46 GB | 있음(14:58) | 타일 43 sha256 일치(2차 실행의 cached 재해시) | XE 범위 완료, 전 라벨 범위는 미완(7절 뒤 2차 실행) |
+| `cavm_raster/` | 19 | 310 MB | 있음(14:58) | 19/19 일치 | 완료, 변경 없음 |
+| `ncscd_v2/` | 73 | 187 MB | 있음(14:58) | 73/73 일치 | 완료. SOURCE.md 약관 문구만 보강(인용 요구 문장 인용) |
+| `soilgrids_xe250/` | 404(57칸 × 7층 + 메타 4) | 341 MB | 있음이나 낡음(14:58, 4칸 32행만) | 표의 자료 파일 30/30 일치, 로그·메타 2건은 갱신됨 | 취득은 16:48 완료였으나 SOURCE.md 가 중간 상태. 다시 썼다(403행) |
+| `appeears_xe/` | 143 | 20 MB | 있음(14:58) | 159/159 일치 | 시험 요청 완료, 전체 요청 미제출 → 8절 |
+| `arcticdem_xe/` | 11 | 1.1 MB | 없음 | (표 없음) | M 군 스모크만. 이 세션 범위 밖 |
+
+자원: `/` 97 %(여유 59 GB), `/home` 96 %(여유 583 GB), RAM 251 GB 가운데 가용 43 GB·스왑 0 여유. 모든 산출은 `/home` 의 `data/raw/<source>/` 에만 썼고, 압축 해제·대용량 처리는 하지 않았다(WorldCover 는 스트리밍 저장, SoilGrids 는 창 단위). 메모리 사용은 10 GB 미만이다.
+
+## 8. 저녁 세션에서 한 작업
+
+1. **WorldCover 2차 범위**(`worldcover --scope all_labels`): `fidelity_base_v3.csv` ∪ `fidelity_base_v4.csv` 의 좌표 열(loc_id, lat, lon, region)만 읽어 모든 지역 라벨 18,088점(v4 가 v3 를 포함, 좌표 동일)을 덮는 타일을 구했다. 필요 132타일(라벨 131 + 레나 상자 포함), 격자에 없음 1(S63W063), 디스크에 없음 88. 88타일을 받아 131/131 로 끝냈다(7.45 GB, 그 가운데 XE 밖 지역 전용 89타일 4.99 GB). 1회차 실행은 86타일 뒤 HEAD 요청의 원격 연결 끊김 예외로 중단됐고(manifest 미작성), HEAD 재시도와 타일별 예외 격리를 더한 2회차가 남은 2타일을 받고 129타일을 재해시했다. `manifest_tiles.csv` 의 `used_by` 로 XE 용(`labels_<대상>`, `lena_box`)과 그 밖(`v3:<region>`, `v4:<region>`)을 구분한다. `download_meta.json` 은 `history` 에 1차 메타를 남겼다.
+2. **SoilGrids 250 m**: 취득 완료 확인(57칸 × 7층 ok, `windows_meta.json`). 포함률(`coverage_meta.json`, 좌표만 사용): 창 경계 안 비율은 네 집합 모두 100 %, 7층 유효 비율은 알래스카 13,123/13,606, 캐나다 692/742, 레나 라벨 2,099/3,037, 레나 육지 33,079/38,173. 90 % 규칙 판단은 추출 단계의 몫이다. v3 ∪ v4 의 XE 밖 라벨 703점은 250 m 창이 없다(2° 칸 127개, 기존 칸과 겹침 18. 칸당 약 2.3분이면 약 5 h[추정]). O 군 범위가 XE 3지역이므로 받지 않았다.
+3. **AppEEARS 전체 요청 제출**(`appeears-submit`, 21:10:58–21:21:46): 준비된 JSON 85건을 라벨 MOD13Q1 → 라벨 MOD10A1 → 라벨 MOD10A2 → 레나 MOD13Q1 → 레나 MOD10A2 순으로 냈다. 84건 HTTP 202, 1건 HTTP 400. 거절 사유는 요청이 만드는 값의 총수 상한이다: `xe_mod10a1_labels_p01of02`(1,000점 × 2,557일 × 3층 = 7,671,000값)에 'The total number of values that this request will generate exceeds the maximum allowed by 119.2%' → 상한 약 3.5 × 10⁶ 값(역산). 이 상한은 API 문서·LP DAAC 안내에 없다. 다른 요청 종류는 MOD13Q1 약 2.9 × 10⁵, MOD10A2 약 6.4 × 10⁵, MOD10A1 234점 약 1.8 × 10⁶ 값으로 상한 아래다. 거절 요청은 같은 좌표 순서로 3조각(333·333·334점, 조각당 약 2.6 × 10⁶ 값)으로 나눠(`appeears-split`) 다시 냈고 모두 202 였다(21:21:38–21:21:44). 원 요청 행은 `requests_index.csv` 의 `superseded_by` 로 표시했다. 합계 87건 수락.
+4. **상태 조회 1회**(`appeears-status`, 21:22:06–21:23:08): pending 86, processing 1(`xe_mod13q1_labels_p01of03`). 기록은 `requests/status_log_full.csv`, `requests/status_summary.json`.
+5. **SOURCE.md 갱신**: `worldcover_v200`(136파일), `soilgrids_xe250`(403파일), `ncscd_v2`(약관 문구 보강), `appeears_xe`(167파일, 제출·상한 기록) 를 `source-md --only` 로 다시 썼다. `cavm_raster` 는 바뀐 것이 없어 두었다.
+6. **코드**(`scripts/0_download/xe_stage2_acquire.py`): `hashes_file`(sha256·md5 한 번에), `all_label_points`, `worldcover --scope/--dry-run`, HEAD 재시도·예외 격리, `appeears-submit`(제출마다 저장, 재실행 시 건너뜀), `appeears-split`, `appeears-status [--fetch]`, `source-md --only`. 라벨 값 열은 어디서도 읽지 않는다.
+
+## 9. 남은 작업(다음 세션)
+
+- AppEEARS 처리 대기: `python3 scripts/0_download/xe_stage2_acquire.py appeears-status --fetch` 를 주기적으로 실행해 `done` 과제의 결과 묶음을 `data/raw/appeears_xe/results/<task_name>/` 에 받는다(API 가 준 sha256 과 대조, `bundle_meta.json`). 마감 B(2026-10-08 14:22:39 +0900)까지 끝나지 않은 과제는 등록 문서 2.5절의 대체 경로 순서(earthaccess → MOD10A2 → 군 제외)로 간다. 모두 받은 뒤 `source-md --only appeears_xe` 로 체크섬 표를 다시 쓴다.
+- 결과 묶음을 받은 뒤 추출 단계(`xe_point_covariates.py`)에서 S 군 수문년 범위, V 군 6–8월 합성 기준, MOD10A1 대 MOD10A2 선택을 라벨 결합 전에 고정하고, 선택 결과를 개정 이력에 적는다(2절 1·2 항, 1절 3 항).
+- M 군(ArcticDEM 10 m)은 스모크 창 8개 상태다. 마감 A 까지 본 취득이 필요하다(이 세션 범위 밖).
+- 이 세션은 git 커밋을 하지 않았다. 바뀐 파일: 이 문서, `scripts/0_download/xe_stage2_acquire.py`, `data/raw/{worldcover_v200,soilgrids_xe250,ncscd_v2,appeears_xe}/SOURCE.md`, `worldcover_v200/{manifest_tiles.csv,download_meta.json,download.log,tiles/*(88타일)}`, `appeears_xe/requests/{submitted_full.json,requests_index.csv,requests_meta.json,status_log_full.csv,status_summary.json,submit_full.log,status_poll.log,xe_mod10a1_labels_p01of02_s[1-3]of3.json}`.

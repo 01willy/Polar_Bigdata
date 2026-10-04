@@ -1,0 +1,53 @@
+% =====================================================================
+% Discussion (English manuscript). Body text only, no preamble.
+% Written 2026-10-04 from paper/manuscript/MANUSCRIPT_SPEC.md section 5
+% (paragraphs D1-D6, no subheadings, target 850 words).
+% Bibliography keys: paper/manuscript/en/refs_discussion.bib.
+%
+% Number provenance (to be replaced by numbers.tex macros once
+% build_numbers.py exists; rounding follows style guide 4.5):
+%  D1  2.5 cm (95% CI 1.9 to 3.0), 1 of 4 regions (Holm P 0.001 in Results)
+%        = AB4, C2 README 2.1 A6; C3 README E36a
+%      non-inferior at 40 and 160 labels, gain in Canada
+%        = WF4-a, C5 README 2.1 E2, E3; 2.2 E6, E7
+%      point estimates above source Stefan, 3 to 160 labels, pool
+%        = FIGURE_SPEC_v3 9.3 content risk; C5 README 2.4 E21-E25
+%      about 99% between-grid share = C8 README 2.2 B4 (0.9% within)
+%  D2  78-94% Alaskan source cells = D README E35
+%      85% of four-region mean reduction = C2 README 2.3 ratio table
+%      13.5 of 14.0 cm, W Russia = C2 README RW5, RW1
+%      E 1.60 vs 1.59 = C2 README CA6
+%      +2.3 cm Canada, ten labels = C2 README CA1 (AB4 region row)
+%      residual weight 1.0 in 22 of 25 runs (40 labels) = C5 README E29, N6
+%      rho 0.38 (0.17 to 0.55), 28 targets = C2 README A3 (WF4-c)
+%  D3  8%, 39%, best of 56 settings (earlier analysis, 14.46 -> 13.33 cm)
+%        = C4 README 2.6 E8.contest.*, D2.contest.* (7.80%, 38.60%), 5.1-6
+%      4%, 19% (14.41 -> 13.87 cm) = C4 README E1.R1.n1000, D1.wf6.*
+%        (3.75%, 19.17%)
+%      structure comparison = C3 README 1.3 items 1-2, 1.4
+%      13,606 rows, 343 locations = D README E10
+%  D4  placebo contrasts, 0.48 cm linear thaw index = C1 README 2.3 (L15)
+%      0.86 cm label unit (median, Canada, ten labels) = D README E46
+%      single-year labels = D README E47
+%      3.6e-14 cm, 5.6 cm = SI_learners README 1.3, 2.6 (R-C14, R-gate-iii)
+%  D5  10.3 cm (7.3 to 12.8) = C7 README A1
+%      0.39 to 0.54 cm = C4 README 5.1 item 5
+%      <1% within-grid explained in Alaska = C8 README 2.3 (C2 max 0.7%)
+%      1990-2024 vs 2015-2020 = D README 5 item 5
+%  D6  0.70 cm Lena Delta, ten labels = C5 README 2.2 E12
+%      72% within-grid share of recalibrated Stefan SSE = C8 README B1
+% =====================================================================
+
+\section{Discussion}\label{sec:discussion}
+
+The results define a label-count workflow for a new permafrost region (Fig.~7d). Without target labels, the reference is the source-coefficient (or year-matched) Stefan model, and ML enters only through physics pseudo-labels or a low-weight residual. With three to ten labels, the coefficient is recalibrated and a low-weight residual added; ten-label recalibration lowered the four-region mean RMSE of the Stefan model by 2.5~cm (95\% CI 1.9 to 3.0; lower error in one of four regions), and no further difference was established for the residual. From 40 labels, the method is selected by cross-validation within the target labels, which was non-inferior to a fixed residual recipe at 40 and 160 labels in the Lena Delta and Canada (margin 0.5~cm), with the gain arising in Canada. In this pool, the methods recommended from 3 to 160 labels had higher point-estimate error than the source-coefficient model [DECISION: Fig 7d 경로의 y 기준과 풀, 그림 명세 D-13]. Within regions with thousands of labels, residual ML follows; in Alaska about 99\% of its squared-error reduction lay between climate grid cells (Fig.~7a--c). Placement enters only as a pre-specified procedure, as spreading labels lowered error in Canada but not in the Lena Delta (Fig.~5).
+
+The gains came from correcting the level of the Stefan coefficient $E$ and bias at the climate-grid scale. $E$ lumps soil thermal conductivity, the n-factor and the latent heat of soil water and ice~\cite{Riseborough2008}, and regional Stefan maps have therefore used land-cover-specific coefficients~\cite{Nelson1997,ShiklomanovNelson2002}; here it also absorbs thawing-index bias from grid and year mismatch and the label definition. With all labels, recalibration made up 85\% of the four-region mean reduction by residual ML relative to the source coefficient, a mean dominated by W Russia (recalibration 13.5 of 14.0~cm; post hoc arithmetic). The regional coefficient of Canada was the closest of the main regions to the source value but varied between label and scoring blocks; ten-label recalibration increased error there by 2.3~cm, and the selection rule mostly chose a residual weight of 1.0, which we read as correcting label-location heterogeneity. With all labels, the gain of label-based correction (recalibration plus residual) was rank-correlated with the magnitude of the ten-label bias (Spearman $\rho = 0.38$; 95\% CI 0.17 to 0.55; 28 targets). [XA: Discussion D2 | 사후 분석(재현(비맹검)) | 2.1 해석 조각 XA-3]
+
+The zero-label results agree in direction with an Alaskan random-split comparison in which a random forest generalized less well than the Stefan model~\cite{Gautam2025}. An earlier within-Alaska analysis [DECISION: 대회 보고서 인용 여부] found 8\% lower RMSE and 39\% lower reducible squared error with a physics residual (best of 56 settings), and the stricter test here found 4\% and 19\%. In our tests, feeding physics outputs to ML~\cite{Pilyugina2025,WangG2025} gave higher four-region mean error than the residual structure with ten or fewer labels, and lower error in Canada with 40 and 160 labels. Random cross-validation is optimistic for spatial mapping~\cite{Ploton2020,MeyerPebesma2022}, but only probability samples give design-unbiased map accuracy~\cite{Wadoux2021}; our labels are a clustered non-probability sample (13,606 Alaskan rows at 343 locations), so our scores are prediction errors on held-out blocks, and kNNDM~\cite{Linnenbrink2024} only mimics map-to-label distances. Label-count designs exist outside ALT, for lake temperature against calibrated process models~\cite{Read2019,Jia2021} and for borehole temperature from 1 to 40 local observations in new regions~\cite{OMalley2026}.
+
+Alternative explanations are unlikely. Stefan pseudo-labels had lower error than shuffled and constant pseudo-labels (Fig.~3b), whereas a linear thawing-index placebo was 0.48~cm worse without labels and equivalent with ten labels, so the gain reflects cell-level thawing-index information more than the square-root form. Recalibration gains held with single-year labels in W and E Russia and were 0.86~cm smaller with point labels than with 1~km location means in Canada (median, ten labels), which sets the label unit of the workflow. Physics and CatBoost results of the workflow methods agreed between computing environments (maximum difference $3.6\times10^{-14}$~cm), whereas a neural network differed by up to 5.6~cm, so the workflow is built from these deterministic methods.
+
+The workflow does not rank sites for measurement or predict variation within climate grid cells, so 1~km maps display a climate-grid-scale correction; its conclusions are restricted to source data that include ground-penetrating radar labels, and climates warmer than the training range could not be evaluated. The Alaskan dominance of the source data (78--94\% of source cells) matters most at small label counts, because the source coefficient carries the weight of ten labels in the recalibrated coefficient. Confirmatory evidence comes from four re-used main regions and one new shallow region; the unblinded Tibetan Plateau is the only deep-regime region and is reported separately, so results are not generalized beyond these regions. Values depend on the test design: the RMSE of direct ML differed by 10.3~cm between random cell splits and region holdout (five-region mean; 95\% CI 7.3 to 12.8), so randomly split studies are not directly comparable. Soil moisture, organic-layer thickness, snow duration and microtopography within grid cells are nearly absent from the covariates, so the within-grid share explained in Alaska (below 1\%) describes these inputs, not a physical limit. Method selection, placement, the label-rich tests (gains of 0.39 to 0.54~cm), the bias correlation and the gain decomposition were designed after earlier results were viewed and are weaker evidence than the internally pre-registered contrasts.
+
+Each step carries a condition: labels are 1~km location means, recalibration rests on the ten-label contrast, and selection by cross-validation within the target labels depends on the number of 0.5$^{\circ}$ blocks covered by the labels and increased error relative to the fixed recipe in the Lena Delta with ten labels (0.70~cm). [XC: Discussion D6 | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 XC-1, XC-2] The data needed next are independent regions not used in development [XF: Discussion D6 | 결과 열람 뒤 설계, 새 지역은 맹검(독립 지역 확인) | 2.6 해석 문장], existing ALT maps scored on the same blocks~\cite{Ran2022a,Wei2026} [XG: Discussion D6 | 결과 열람 뒤 설계, 등록 이탈(WRAPUP 10) | 2.7 공통 문장], and above all covariates that vary within climate grid cells, because 72\% of the recalibrated Stefan squared error in Alaska lay within those cells while the gain of ML lay between them. [XE: Discussion D6 | 결과 열람 뒤 설계 | 2.5 해석 문장]

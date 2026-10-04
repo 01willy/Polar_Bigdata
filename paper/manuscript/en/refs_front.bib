@@ -1,0 +1,268 @@
+% refs_front.bib : sections/front.tex 의 인용(Data availability)
+% 작성 2026-10-04. 모든 항목은 아래 두 원천 가운데 하나 이상에 있다.
+%   (T) docs/MANUSCRIPT_DRAFT_METHODS_INTRO_2026-09-30.md 225-297행 References 표(67행)
+%   (I) references/INDEX.md(12.3절, 12.4절, 08절)
+% 그 위에 DataCite API(https://api.datacite.org/dois/<DOI>)로 제목, 연도, 저장소, 저작자 수를
+% 2026-10-04 에 대조했다(자료 항목). 논문 항목은 INDEX 의 서지(PDF 또는 Crossref 확인 기록)를 따랐다.
+% 저자 표기: Nature 양식은 저자 6명 이상이면 첫 저자 + et al. 이다. DataCite 저작자가 6명 이상인 항목은
+%   'and others'로 적었고, 5명 이하인 항목은 모두 적었다.
+% sn-nature.bst 는 misc 유형에서 publisher 와 doi 를 출력하지 않으므로 자료 항목에는 howpublished 와 url 을 함께 둔다.
+% 주의: BibTeX 는 % 주석 안의 at 기호도 항목 시작으로 읽으므로 이 파일의 주석에는 그 기호를 쓰지 않는다.
+% 키는 다른 절의 FirstAuthorYear 규칙을 따른다. Streletskiy2025 는 refs_intro.bib, munozsabater2021_era5_land 는
+%   refs_results_b.bib·refs_legends.bib 와 같은 키다(여기 항목은 howpublished·url 을 더한 판이다).
+
+% ---------------------------------------------------------------------
+% 주 지역 라벨
+% ---------------------------------------------------------------------
+
+% (T)(I) web+meta. DataCite: 저작자 6(Streletskiy; CALM; GTN-P; Wieczorek; Heim; Bartsch), 2025, PANGAEA.
+%   명세 9.3 의 '저자 목록 5명 대 6명'은 DataCite 기준 6명이다.
+@misc{Streletskiy2025,
+  author       = {Streletskiy, Dmitry A. and {CALM} and {GTN-P} and Wieczorek, Mareike and Heim, Birgit and Bartsch, Annett},
+  title        = {{GTN-P CALM}: 35 years of {Active Layer Thickness (ALT)} across latitudinal and elevational gradients in the {Northern Hemisphere}},
+  howpublished = {PANGAEA},
+  publisher    = {PANGAEA},
+  year         = {2025},
+  doi          = {10.1594/PANGAEA.972777},
+  url          = {https://doi.org/10.1594/PANGAEA.972777}
+}
+
+% (T)(I) web. DataCite: 저작자 42, 2025, PANGAEA.
+@misc{Veremeeva2025,
+  author       = {Veremeeva, A. and others},
+  title        = {{ALLena}: Thaw depth measurements of the active layer in the {Lena River Delta} region from 1998 to 2022, {Northeastern Siberia}},
+  howpublished = {PANGAEA},
+  year         = {2025},
+  doi          = {10.1594/PANGAEA.973813},
+  url          = {https://doi.org/10.1594/PANGAEA.973813}
+}
+
+% (T)(I) web. DataCite: 저작자 67, 판 2, 연도 2026(2026-05-28 갱신 뒤 표기). 명세 9.3 에 따라 ORNL DAAC 인용 형식의 2025 를 쓴다.
+@misc{Moore2025,
+  author       = {Moore, M. A. and others},
+  title        = {{ABoVE}: Soil Moisture and Active Layer Thickness in {Alaska, USA} and {Canada}, 2005--2024, Version 2},
+  howpublished = {ORNL Distributed Active Archive Center},
+  year         = {2025},
+  doi          = {10.3334/ORNLDAAC/2369},
+  url          = {https://doi.org/10.3334/ORNLDAAC/2369}
+}
+
+% ---------------------------------------------------------------------
+% 추가 지역 라벨(약관 확인분. data/processed/fidelity_base_v4_meta.json by_source)
+% ---------------------------------------------------------------------
+
+% (T)(I) meta. DataCite: 'Code for "A first 90 m resolution active layer moisture dataset across the Qinghai–Tibet
+%   Plateau permafrost region derived from multi-model machine learning fusion"', 판 2.0.0, 2026, Zenodo, 저작자 17.
+%   티베트 GPR·시추 ALT 조사점. 관련 논문 DOI(10.5194/essd-2026-330)는 게재 확정 미확인이라 쓰지 않았다(INDEX 12.4 끝 문단).
+%   제목의 en dash 는 본문 대시 점검(M-01)과 겹치지 않게 하이픈으로 적었다((T) 표기와 같다).
+@misc{DuE2026,
+  author       = {Du, E. and others},
+  title        = {Code for ``{A} first 90 m resolution active layer moisture dataset across the {Qinghai-Tibet Plateau} permafrost region derived from multi-model machine learning fusion'', v2.0.0},
+  howpublished = {Zenodo},
+  year         = {2026},
+  doi          = {10.5281/zenodo.21999366},
+  url          = {https://doi.org/10.5281/zenodo.21999366}
+}
+
+% (T)(I) meta. DataCite: 저작자 1(Fu, Ziteng), 2025, figshare. 지온 유도 라벨(라벨 정의 시험에만 사용).
+@misc{Fu2025,
+  author       = {Fu, Z.},
+  title        = {Permafrost ground temperature and active layer thickness data on the {Qinghai-Tibet Plateau} (2001--2020)},
+  howpublished = {figshare},
+  year         = {2025},
+  doi          = {10.6084/m9.figshare.29206613.v1},
+  url          = {https://doi.org/10.6084/m9.figshare.29206613.v1}
+}
+
+% (T)(I) meta. DataCite: 저작자 1, 2007, PANGAEA. 약관 CC BY 3.0.
+@misc{Grosse2007,
+  author       = {Grosse, G.},
+  title        = {Active layer data of the geo-located sites around {Cape Mamontov Klyk}, {Appendix} 4.2},
+  howpublished = {PANGAEA},
+  year         = {2007},
+  doi          = {10.1594/PANGAEA.611409},
+  url          = {https://doi.org/10.1594/PANGAEA.611409}
+}
+
+% (T)(I) meta. DataCite: 저작자 6, 2022, Bolin Centre Database. 약관 ODC-By. 제목의 'version 1'은 (T) 표기.
+@misc{Palmtag2022,
+  author       = {Palmtag, J. and others},
+  title        = {Detailed pedon data on soil carbon and nitrogen for the northern permafrost region, version 1},
+  howpublished = {Bolin Centre Database},
+  year         = {2022},
+  doi          = {10.17043/palmtag-2022-pedon-1},
+  url          = {https://doi.org/10.17043/palmtag-2022-pedon-1}
+}
+
+% (T)(I) meta. DataCite: 저작자 38, 2024, NSF Arctic Data Center. 측정 깊이만 썼다. 자료 논문은 ESSD 17, 2887-2909(2025).
+@misc{Talucci2024,
+  author       = {Talucci, A. and others},
+  title        = {{FireALT} dataset: estimated active layer thickness for paired burned unburned sites measured from 2001--2023},
+  howpublished = {NSF Arctic Data Center},
+  year         = {2024},
+  doi          = {10.18739/A2RN3092P},
+  url          = {https://doi.org/10.18739/A2RN3092P}
+}
+
+% (T)(I) meta. DataCite: Zenodo 기록 제목과 같다, 2026, 저작자 17. INDEX 12.3 의 게재 논문
+%   (Pohl et al. 2026, ESSD 18, 3525-3557, 다른 제목)은 논문 인용일 때 쓴다. 여기서는 자료 기록을 인용한다.
+@misc{Pohl2026,
+  author       = {Pohl, E. and others},
+  title        = {Thermo-hydrological observatory in a permafrost river valley landscape in {Syrdakh}, {Central Yakutia}},
+  howpublished = {Zenodo},
+  year         = {2026},
+  doi          = {10.5281/zenodo.19890671},
+  url          = {https://doi.org/10.5281/zenodo.19890671}
+}
+
+% (T)(I) meta. DataCite: 저작자 4(Makarieva; Nesterova; Lebedeva; Sushansky), 2017, PANGAEA. 4명이라 모두 적었다.
+@misc{Makarieva2017,
+  author       = {Makarieva, O. and Nesterova, N. and Lebedeva, L. and Sushansky, S.},
+  title        = {Thaw depth and snow height time series at different sites within {Kolyma Water-Balance Station (KWBS)}, 1954--1997},
+  howpublished = {PANGAEA},
+  year         = {2017},
+  doi          = {10.1594/PANGAEA.881754},
+  url          = {https://doi.org/10.1594/PANGAEA.881754}
+}
+
+% (T)(I) meta. DataCite: 저작자 8, 2023, PANGAEA.
+@misc{Liang2023,
+  author       = {Liang, M. and others},
+  title        = {Thaw depth of tree mounds from northeastern {Siberia} ({S4})},
+  howpublished = {PANGAEA},
+  year         = {2023},
+  doi          = {10.1594/PANGAEA.961876},
+  url          = {https://doi.org/10.1594/PANGAEA.961876}
+}
+
+% (T)(I) meta. DataCite: 저작자 11, 2009, PANGAEA. PANGAEA 행은 CC BY 3.0, 보고서 유래 10행은 약관 미확인(주 판 제외).
+@misc{Walker2009,
+  author       = {Walker, D. A. and others},
+  title        = {({Table} 20) {Thaw} depth of active layer at transects and relev{\'e}s sampled along the {Yamal Transect}, 2007--2008},
+  howpublished = {PANGAEA},
+  year         = {2009},
+  doi          = {10.1594/PANGAEA.842711},
+  url          = {https://doi.org/10.1594/PANGAEA.842711}
+}
+
+% (T)(I) meta. DataCite: 저작자 7, 2024, PANGAEA.
+@misc{Scheer2024,
+  author       = {Scheer, J. and others},
+  title        = {Mapping the frost susceptibility of the ground from thaw-season {InSAR} surface displacements and extrapolated active layer thicknesses, {Ilulissat}, {West-Greenland}},
+  howpublished = {PANGAEA},
+  year         = {2024},
+  doi          = {10.1594/PANGAEA.964306},
+  url          = {https://doi.org/10.1594/PANGAEA.964306}
+}
+
+% (T)(I) meta. DataCite: 저작자 18, 2023, PANGAEA.
+@misc{Martin2023,
+  author       = {Martin, J. and others},
+  title        = {{T-MOSAiC} 2021 {myThaw} data set},
+  howpublished = {PANGAEA},
+  year         = {2023},
+  doi          = {10.1594/PANGAEA.956039},
+  url          = {https://doi.org/10.1594/PANGAEA.956039}
+}
+
+% (T)(I) meta. DataCite: 저작자 23, 2024, PANGAEA.
+@misc{Boike2024,
+  author       = {Boike, J. and others},
+  title        = {{T-MOSAiC} 2022 {myThaw} data set},
+  howpublished = {PANGAEA},
+  year         = {2024},
+  doi          = {10.1594/PANGAEA.971586},
+  url          = {https://doi.org/10.1594/PANGAEA.971586}
+}
+
+% (T)(I) meta. DataCite: 저작자 20, 2025, PANGAEA.
+@misc{Hammar2025,
+  author       = {Hammar, J. and others},
+  title        = {2023 {myThaw} data set},
+  howpublished = {PANGAEA},
+  year         = {2025},
+  doi          = {10.1594/PANGAEA.974461},
+  url          = {https://doi.org/10.1594/PANGAEA.974461}
+}
+
+% (T)(I) meta. DataCite: 저작자 5(Zastruzny; Elberling; Jensen, Karsten Høgh; Sjöberg; Liu, Yijing), 2024, PANGAEA. 5명이라 모두 적었다.
+@misc{Zastruzny2024,
+  author       = {Zastruzny, S. and Elberling, B. and Jensen, K. H. and Sj{\"o}berg, Y. and Liu, Y.},
+  title        = {Field data from {Disko Island} for thermal-hydrological investigations},
+  howpublished = {PANGAEA},
+  year         = {2024},
+  doi          = {10.1594/PANGAEA.967139},
+  url          = {https://doi.org/10.1594/PANGAEA.967139}
+}
+
+% (T)(I) meta. DataCite: 저작자 1('Sannel, Britta'), 2020, Bolin Centre Database. 이니셜은 (T) 표기. 'version 1'은 (T) 표기.
+@misc{Sannel2020,
+  author       = {Sannel, A. B. K.},
+  title        = {Ground temperature, thaw depth and snow depth in a permafrost peatland in {Tavvavuoma}, northern {Sweden}, version 1},
+  howpublished = {Bolin Centre Database},
+  year         = {2020},
+  doi          = {10.17043/sannel-2020-temperature-1},
+  url          = {https://doi.org/10.17043/sannel-2020-temperature-1}
+}
+
+% ---------------------------------------------------------------------
+% 공변량과 지도 마스크
+% ---------------------------------------------------------------------
+
+% (T)(I) web, INDEX 12.3 munozsabater2021_era5_land(PDF). refs_results_b.bib 와 같은 키·같은 서지.
+@article{munozsabater2021_era5_land,
+  author  = {Mu{\~n}oz-Sabater, J. and others},
+  title   = {{ERA5-Land}: a state-of-the-art global reanalysis dataset for land applications},
+  journal = {Earth Syst. Sci. Data},
+  volume  = {13},
+  pages   = {4349--4383},
+  year    = {2021},
+  doi     = {10.5194/essd-13-4349-2021}
+}
+
+% (T)(I) web, INDEX 12.3 poggio2021_soilgrids2(PDF).
+@article{Poggio2021,
+  author  = {Poggio, L. and others},
+  title   = {{SoilGrids} 2.0: producing soil information for the globe with quantified spatial uncertainty},
+  journal = {SOIL},
+  volume  = {7},
+  pages   = {217--240},
+  year    = {2021},
+  doi     = {10.5194/soil-7-217-2021}
+}
+
+% (T) web, (I) 12.4. DataCite: 제목 'ESA Permafrost Climate Change Initiative (Permafrost_cci): Permafrost active layer
+%   thickness for the Northern Hemisphere, v4.0', 2024, NERC EDS Centre for Environmental Data Analysis, 저작자 17.
+%   INDEX 01절 esa_cci_permafrost_v4 의 다른 DOI(7479606004...)는 DataCite 에 없다(명세 9.3 불일치 항목).
+@misc{Westermann2024,
+  author       = {Westermann, S. and others},
+  title        = {{ESA Permafrost Climate Change Initiative} ({Permafrost\_cci}): {Permafrost} active layer thickness for the {Northern Hemisphere}, v4.0},
+  howpublished = {NERC EDS Centre for Environmental Data Analysis},
+  year         = {2024},
+  doi          = {10.5285/d34330ce3f604e368c06d76de1987ce5},
+  url          = {https://doi.org/10.5285/d34330ce3f604e368c06d76de1987ce5}
+}
+
+% (I) 08절 whitcomb2023_pband_polsar_alt_alaska_erl(링크, 서지 Whitcomb, J., Chen, R., Clewley, D. et al.,
+%   Environ. Res. Lett. 19, 014046, 2024, 온라인 2023). Crossref: 저자 7명, 19권 014046. (T)에는 없다. PolSAR 상향 ALT 공변량의 방법 논문으로 인용한다.
+%   공변량 래스터가 이 논문의 자료판(후보 ORNL DAAC 2332)에서 왔는지는 front.tex 에 [미확인]으로 표시했다.
+@article{Whitcomb2024,
+  author  = {Whitcomb, J. and others},
+  title   = {Maps of active layer thickness in northern {Alaska} by upscaling {P}-band polarimetric synthetic aperture radar retrievals},
+  journal = {Environ. Res. Lett.},
+  volume  = {19},
+  pages   = {014046},
+  year    = {2024},
+  doi     = {10.1088/1748-9326/ad127f}
+}
+
+% (T) [verify] 였으나 (I) 12.3 pekel2016_global_surface_water 에서 권·쪽·DOI 확인(명세 9.3, INDEX 12.4 끝 문단).
+@article{Pekel2016,
+  author  = {Pekel, J.-F. and Cottam, A. and Gorelick, N. and Belward, A. S.},
+  title   = {High-resolution mapping of global surface water and its long-term changes},
+  journal = {Nature},
+  volume  = {540},
+  pages   = {418--422},
+  year    = {2016},
+  doi     = {10.1038/nature20584}
+}

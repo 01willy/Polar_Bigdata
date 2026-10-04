@@ -1,0 +1,154 @@
+% front.tex : 영문 원고의 제목 쪽, 초록, 핵심어, Code availability, Data availability,
+%             Acknowledgements, Author contributions, Additional information(Competing interests)
+% 작성 2026-10-04. LaTeX 본문 조각이다(프리앰블 없음). 명세: paper/manuscript/MANUSCRIPT_SPEC.md
+%   1.1(순서), 1.3(제목·핵심어), 1.5(서술 방향), 2.1-2.4(초록), 6.15(M15 Code availability),
+%   6.16(Data availability), 13.1(사용자 결정 대기).
+% 서식: Springer Nature 템플릿 sn-jnl(sn-nature 선택지)의 명령(\title, \author, \affil, \abstract,
+%   \keywords, \bmhead)을 쓴다. 블록 1-4 는 원고 조립 때 아래 표시한 자리로 옮긴다.
+%   블록 1: \begin{document} 뒤, \maketitle 앞
+%   블록 2: Methods 마지막 소절(M15). methods.tex 에 같은 소절이 있으면 하나만 남긴다.
+%           M14 Use of large language models 는 methods.tex 의 몫이고 문구는
+%           [DECISION: LLM 사용 기재 문구] 다(이 파일에는 본문을 쓰지 않았다).
+%   블록 3: 본문 끝, \bibliography 앞(Sci Rep 점검표: Data availability 는 References 앞)
+%   블록 4: \bibliography 뒤(\backmatter). Acknowledgements, Author contributions, Additional information
+% 인용 키: paper/manuscript/en/refs_front.bib. 키 이름은 다른 절의 FirstAuthorYear 규칙을 따르고,
+%   Streletskiy2025 와 munozsabater2021_era5_land 는 refs_intro.bib, refs_results_b.bib 와 같은 키다.
+%
+% 수치 출처(원고 조립 때 shared/numbers.tex 매크로로 바꾼다. 자릿수는 지침 4.5):
+%   -1.6 cm, 95% 신뢰구간 -2.0 to -1.0 .... C1 README 2.3 AB3(-1.63 [-1.98, -1.04], Holm P 0.001)
+%   -2.5 cm, -3.0 to -1.9, 1지역 ......... C2 README 2.1 A6(AB4 -2.45 [-3.04, -1.88]), 지역 행 C3 README E36a
+%   잔차 ML 추가 차이 확인 못함 ............ C2 README 2.1 A7(AB5 -0.18, Holm P 0.136, 초록 규칙 (b))
+%   -0.87, -1.3 cm, 2지역, 캐나다 ......... C5 README 2.1 E2, E3, 2.2 E6, E7(WF4-a, 결과 열람 뒤 설계)
+%   13.9, 14.4 cm(라벨 1000개) ............. C4 README 2.1 E1.R1.n1000(13.87 / 14.41)
+%   약 99% ................................ C8 README 2.2 B4(격자 안 몫 0.9%, 알래스카 지역 내, 라벨 전량)
+%   -2.5, +1.7 cm(라벨 100개) .............. C6 README 2.1 A3, A17(WF2-a 서술 행)
+%   다섯 지역, 100 km, 라벨 0-전량 ......... D README 1.3, E24, E25
+%   원천 CSV 로 다시 확인한 값(2026-10-04): lgw_bundle.csv(AB3 -1.629003, AB4 -2.454509, AB5 -0.177787),
+%   wf_tests.csv(WF4-a -0.873044, -1.320595; WF2-a -2.538178, +1.651555), wf2b_tests.csv(13.86715, 14.40761),
+%   wf3b_decomp.csv(share_gain_within 0.008612).
+%
+% 이 파일의 자리표시: [DECISION: ...] 사용자 결정, [미확인: ...] 확인하지 못한 사실,
+%   [XC: ...] [XE: ...] 새 실험(명세 11절 등록부의 문자열 그대로). 제출 전 점검에서 0건이어야 한다.
+% 빌드 주의: 자리표시에 한글이 있어 자리표시가 남은 동안은 xelatex(kotex)로 조립한다.
+%   pdflatex 빌드는 자리표시를 모두 바꾼 뒤에 한다(지침 M-11).
+
+% =====================================================================
+% 블록 1. 제목 쪽, 초록, 핵심어
+% =====================================================================
+
+% 임시 제목(사용자 결정 2026-10-04: 대회 제목의 영역, 나중에 바꾼다). 14단어, 콜론·의문문·금지어 없음.
+% [DECISION: 최종 제목]
+\title{Permafrost active-layer thickness prediction under sparse observations using physics-based pseudo-label augmentation and machine learning}
+
+% 저자 후보 기록(명세 13.1 의 3번): 제1 저자 후보 백승원(Seungwon Baek), KOPRI 공동 연구 가능자
+% 김승희(Seung Hee Kim), 정윤택(Yoon Taek Jung). 저자 자격은 이 파일이 정하지 않는다.
+% 형식(템플릿): \author*[1]{\fnm{이름} \sur{성}}\email{...}, \affil*[1]{\orgdiv{}, \orgname{}, \orgaddress{...}}
+\author*[1]{\fnm{[DECISION: 저자, 소속, 교신 저자]}}\email{[DECISION: 교신 저자 전자우편]}
+
+\affil*[1]{\orgname{[DECISION: 저자, 소속, 교신 저자]}}
+
+% 초록: 판 B(사용자 잠정 선택, WF 결과는 판정어 없는 수치). 명세 2.2 문안에서 바꾼 곳은 셋이다.
+%   (1) 약어 첫 등장 풀이(지침 M-07): RMSE 를 S3 에서 풀어 쓰고, '95% CI' 를 '95% confidence interval' 로 썼다.
+%   (2) WF 결과 앞에 '결과 열람 뒤 설계' 표지를 넣었다(명세 1.5, 지침 4.5 끝 항목).
+%   (3) 200단어를 지키려고 S2('ML models ... without recalibrated baselines'), S3('Stefan models'),
+%       S7(지역을 괄호로), S8('Sub-grid covariates are needed next.')을 줄였다.
+% 단어 수(wc -w, 자리표시 제외): 199. 판정어는 S4(AB3 규칙 (a), AB4 규칙 (a)와 지역 수, AB5 규칙 (b))에만 있다.
+% [DECISION: 초록 판 A 또는 B]  [DECISION: 판 B 의 WF 수치 개수 허용 여부]
+% S8 의 두 자리표시는 결과가 나오면 FINAL_BATCH 의 해당 문장으로 바꾸고, XC 수치를 넣으면 S7 이나 S8 을 대신해 200단어를 지킨다.
+\abstract{We provide a label-count workflow for mapping active-layer thickness in sparsely measured permafrost regions with the Stefan model and machine learning (ML). ML models are mostly tested within training regions at one label count, without recalibrated baselines. We held out five regions with 100~km buffers and compared root-mean-square error (RMSE) from zero to all labels against Stefan models with source and recalibrated coefficients (internally pre-registered). Without labels, Stefan pseudo-labels gave lower error than shuffled ones ($-1.6$~cm; 95\% confidence interval $-2.0$ to $-1.0$); with ten labels, recalibration gave lower four-region mean error than the source coefficient ($-2.5$~cm; $-3.0$ to $-1.9$; lower in one region), with no further difference established for residual ML. In analyses designed after these results, method selection by within-target cross-validation with 40 and 160 labels changed RMSE by $-0.87$ and $-1.3$~cm against a fixed residual recipe (two regions, change from Canada). Within Alaska, residual ML reached 13.9 against 14.4~cm RMSE for recalibrated Stefan (1000 labels); about 99\% of the squared-error reduction (all labels) lay between climate grid cells. Spreading 100 labels over blocks changed RMSE against random sampling by $-2.5$~cm (Canada) and $+1.7$~cm (Lena Delta). Sub-grid covariates are needed next. [XE: Abstract S8 | 결과 열람 뒤 설계 | 2.5 사전 고정 해석 문장(첫째 또는 넷째 갈래)] [XC: Abstract S8 | 결과 열람 뒤 설계, 재사용 지역의 재검정(비맹검 부분 포함) | 2.3 초록 규칙: 수치만, '개발에 쓴 지역을 다시 나눈 분할', 지역 2곳, 지역별 방향(우세 k, 열세 m)]}
+
+% 비교판(판 A, WF 제외). 명세 2.3 문안에 같은 약어 수정('95% confidence interval')만 했다. 197단어.
+% 판 A 를 고르면 위 \abstract{} 의 내용을 아래 문단으로 바꾼다. 판정어 근거는 명세 2.3 끝 문단.
+%   We provide a label-count workflow for mapping active-layer thickness (ALT) in sparsely measured
+%   permafrost regions with the Stefan thaw model and machine learning (ML). ML models of ALT are usually
+%   evaluated within training regions, at one label count and without a recalibrated physical baseline.
+%   We held out four Arctic regions with 100~km buffers and compared errors from zero to all target labels
+%   against the Stefan model with source and recalibrated coefficients, in an internally pre-registered
+%   analysis. Without labels, Stefan pseudo-labels gave lower error than shuffled ones ($-1.6$~cm; 95\%
+%   confidence interval $-2.0$ to $-1.0$), and no difference was established between a physics-model
+%   ensemble and the source-coefficient model. With ten labels, coefficient recalibration gave lower
+%   four-region mean error ($-2.5$~cm; $-3.0$ to $-1.9$; one of four regions), no further difference was
+%   established for residual ML, and residual learning gave lower error than physics outputs used as ML
+%   inputs. With all labels, residual ML gave lower four-region mean error than the source-coefficient
+%   model, mainly from one region, and lower error than the recalibrated model by less than 0.5~cm. The
+%   workflow therefore uses physics at every label count and assigns ML a small correction once labels
+%   allow recalibration.
+
+% 핵심어 6개(Sci Rep 상한 6). 명세 1.3 제안. [DECISION: 핵심어]
+\keywords{Active-layer thickness, Permafrost, Stefan model, Physics-guided machine learning, Spatial transfer, Sampling design}
+
+% =====================================================================
+% 블록 2. Code availability(Methods 마지막 소절, 명세 6.15 M15)
+% =====================================================================
+% 코드 서체(\texttt)는 이 소절의 실제 저장소 경로에만 쓴다(지침 4.1, M-10).
+% 경로는 2026-10-04 에 저장소에서 확인했다. 패키지 판은 FINAL_BATCH 1절 '패키지 판' 행,
+%   이전 실행의 판은 방법 초안 Table 4(Supplementary Table S16 으로 옮길 예정).
+% 저장소 후보: git 원격 git@github.com:01willy/Polar_Bigdata(현재 공개 여부와 공개 시점은 결정 대기).
+% TabPFN 판 8.0.7 의 Prior Labs License(v1.2) 10항은 가중치나 원본을 배포할 때 'Built with PriorLabs-TabPFN'
+%   표시를 요구한다. 가중치를 재배포하지 않으므로 본문에는 넣지 않았다. 저장소 README 에 넣을지는 공개 때 판단한다.
+\subsection*{Code availability}
+
+The code for data assembly, experiments, aggregation, figures and tests is available at [DECISION: 공개 저장소 주소와 공개 시점] and will be archived under the release tag of the reported analyses at [DECISION: Zenodo DOI]. The experiment scripts under \texttt{scripts/} are \texttt{h40\_label\_grid.py} and \texttt{h42\_label\_grid\_ext.py} (transfer), \texttt{h41\_validation\_ladder.py} (validation ladder), \texttt{h54\_workflow.py} (within-region tests), \texttt{h39\_scenarios.py} (aggregation), \texttt{wf0\_reanalysis.py} (post hoc reanalysis) and \texttt{x\_*.py} (additional analyses). The repository also holds the unit tests (\texttt{tests/}), the cloud job configurations (\texttt{configs/rescale/}) and the registration documents with their revision histories. Each output file of a run records the code hash, the configuration hash and the package versions, and the aggregate metadata record the git commit. The cloud runs of the additional analyses use CatBoost 1.2.10, scikit-learn 1.9.1, pandas 2.3.3, SciPy 1.17.1 and NumPy 2.1.1; the versions of earlier runs are listed in Supplementary Table S16. The pretrained weights of TabPFN v2 and TabICL v2 are not redistributed and are obtained from their providers.
+
+% =====================================================================
+% 블록 3. Data availability(본문 끝, References 앞, 명세 6.16)
+% =====================================================================
+% 확인 기록(2026-10-04):
+%   - 자료 인용 19건은 방법 초안 References 표(67행)와 references/INDEX.md 12.4 표에 있고,
+%     DOI 와 제목·연도·저장소를 DataCite API 로 다시 대조했다(refs_front.bib 각 항목 주석).
+%   - 새 지역 자료원의 약관은 data/processed/fidelity_base_v4_meta.json 의 by_source 를 따랐다.
+%     약관 확인분(license_attention False): calm_pangaea_v4add, firealt, Disko, Ilulissat, myThaw,
+%     Palmtag pedon, Du(Zenodo, MIT), Fu(figshare, 지온 유도, 라벨 정의 시험), Kolyma, Indigirka,
+%     Mamontov Klyk, Syrdakh, Tavvavuoma, Yamal(PANGAEA 행). 약관 미확인: CALM 누리집 하위 지점(Abisko,
+%     Kapp Linné), CUSP v1.1, NSIDC GGD353, Yamal 보고서 유래 행, NSIDC GGD402(기술 통계만).
+%     약관 미확인 자료의 인용(Åkerman 1998, Åkerman and Johansson 2008, Jorgenson and Kanevskiy 2025,
+%     Petrone 2016, Nixon 2003)은 Supplementary Table S17 과 SI 참고문헌에 둔다. [DECISION: 참고문헌 처리]
+%   - CCI ALT v4.0 의 DOI 는 DataCite 에서 제목 'Permafrost active layer thickness for the Northern
+%     Hemisphere, v4.0'(2024, CEDA)으로 확인했다. INDEX 01절 esa_cci_permafrost_v4 의 DOI(7479606004...)는
+%     DataCite 에 없다. 명세 9.3 의 불일치는 ALT 자료 인용 쪽에서는 d34330ce... 로 정리된다.
+%   - SAR: 10.3334/ORNLDAAC/2004 는 DataCite 제목이 'ABoVE: Active Layer Thickness from Airborne L- and
+%     P- band SAR, Alaska, 2017, Ver. 3'(Chen et al., 2022)이고, 내려받기 스크립트
+%     scripts/0_download/resalt_insar.py 가 이 DOI 로 받은 파일(PDO_ReSALT_*_2017_03.nc4)이 명세의 'ReSALT' 다.
+%     PolSAR 상향 ALT(data/raw/polsar_alt/upscaled_alt_{2014,2015,2017}.tif)의 출처는 내려받기 기록이 없다.
+%     DataCite 10.3334/ORNLDAAC/2332 의 제목('ABoVE: Upscaled Active Layer Thickness in Northern Alaska,
+%     2014-2017', Whitcomb et al., 2025)이 같은 자료로 보이나 확인하지 못했다.
+%   - Copernicus DEM DOI 10.5270/ESA-c5d3d65 는 doi.org 에서 COP-DEM 자료 설명 쪽으로 연결된다(인용 형식은 미확인).
+%   - 지도 마스크(CCI 영구동토 범위 평균, JRC 지표수)는 방법 초안 Data availability 의 문장을 따랐다.
+\section*{Data availability}
+
+The active-layer labels of the main regions are available from the GTN-P/CALM compilation\cite{Streletskiy2025} (PANGAEA, \url{https://doi.org/10.1594/PANGAEA.972777}), the ALLena compilation for the Lena River Delta\cite{Veremeeva2025} (PANGAEA, \url{https://doi.org/10.1594/PANGAEA.973813}) and the ABoVE soil moisture and active-layer thickness data set, version~2\cite{Moore2025} (ORNL DAAC, \url{https://doi.org/10.3334/ORNLDAAC/2369}). The labels of the additional regions come from published data sets\cite{DuE2026,Grosse2007,Palmtag2022,Talucci2024,Pohl2026,Makarieva2017,Liang2023,Walker2009,Scheer2024,Martin2023,Boike2024,Hammar2025,Zastruzny2024,Sannel2020}, and the temperature-derived labels used only in the label-definition test come from a Tibetan Plateau compilation\cite{Fu2025}. Their identifiers and licences are listed in Supplementary Table S17. Labels from sources without a confirmed redistribution licence were excluded from the licence-verified edition used for the main results and are not redistributed; they can be obtained from the original providers listed in Supplementary Table S17. The full North Atlantic edition, which includes such labels, is reported in the Supplementary Information only.
+
+The covariates were derived from ERA5-Land monthly averaged data\cite{munozsabater2021_era5_land} (Copernicus Climate Data Store, \url{https://doi.org/10.24381/cds.68d2bb30}), SoilGrids 2.0\cite{Poggio2021} [미확인: 접근 시점의 SoilGrids 판 표지], the Copernicus DEM GLO-30 (\url{https://doi.org/10.5270/ESA-c5d3d65}) [미확인: Copernicus DEM 인용 형식] and the ESA CCI Permafrost active-layer thickness product, version 4.0\cite{Westermann2024} (CEDA, \url{https://doi.org/10.5285/d34330ce3f604e368c06d76de1987ce5}). The synthetic-aperture radar (SAR) covariates of the within-Alaska test came from the ABoVE airborne L- and P-band SAR active-layer retrievals for 2017 (ORNL DAAC, \url{https://doi.org/10.3334/ORNLDAAC/2004}) and from upscaled P-band polarimetric SAR active-layer maps of northern Alaska\cite{Whitcomb2024} [미확인: PolSAR 상향 ALT 자료의 DOI, 후보 10.3334/ORNLDAAC/2332]. The map masks use the ESA CCI Permafrost extent product [미확인: 영구동토 범위 자료의 DOI와 판] and the JRC Global Surface Water occurrence layer\cite{Pekel2016}.
+
+The assembled label and covariate tables, the run outputs, the aggregate and verdict tables, the cell-level predictions and the source data of all figures will be deposited at [DECISION: 저장소와 DOI]. Rows from sources without a confirmed licence are excluded from the deposited tables. [DECISION: KPDC 자료, SI 포함 여부와 식별자, 이용 조건]
+
+% =====================================================================
+% 블록 4. \bibliography 뒤(\backmatter)
+% =====================================================================
+% Sci Rep: 감사의 글은 짧게, 저자 기여는 참고문헌 뒤에 모든 저자별로, 이해상충은 'Additional information' 아래.
+% 세 문구 모두 [DECISION: Acknowledgements, Author contributions, Competing interests 문구](명세 13.1 의 5번).
+
+\bmhead{Acknowledgements}
+
+[DECISION: Acknowledgements, Author contributions, Competing interests 문구] We thank the providers of the data sets listed under Data availability. The active-layer thickness covariate uses data of the ESA Climate Change Initiative Permafrost\_cci project. Terrain covariates were produced using Copernicus WorldDEM-30 \textcopyright{} DLR e.V. 2010--2014 and \textcopyright{} Airbus Defence and Space GmbH 2014--2018, provided under COPERNICUS by the European Union and ESA; all rights reserved. [미확인: Copernicus DEM 사용 허가가 요구하는 귀속 문구의 원문 대조] [미확인: ERA5-Land(Copernicus Climate Change Service) 사용 허가가 요구하는 귀속 문구] [DECISION: KPDC 자료, SI 포함 여부와 식별자, 이용 조건] [DECISION: 대회 보고서 인용 여부] [DECISION: 연구비 지원 기관과 과제 번호, 또는 지원 없음]
+
+% KPDC 자료를 SI 에 두면 KPDC 감사 문구를 더한다(앞부분 초안 3절의 문안. 식별자 2707, 2955 확인 뒤).
+% 대회: '2026 극지 빅데이터-인공지능 활용 경진대회'(주최 극지연구소, 주관 KPDC). 공식 영문 명칭 [미확인].
+%   선행 공개 사실은 표지 편지에 적고 사본을 첨부한다(명세 13.1 의 12번).
+
+\bmhead{Author contributions}
+
+[DECISION: Acknowledgements, Author contributions, Competing interests 문구] [DECISION: 저자, 소속, 교신 저자]
+
+% 형식(결정 뒤): 모든 저자에 대해 CRediT 역할(Conceptualization, Methodology, Software, Validation,
+%   Formal analysis, Investigation, Resources, Data curation, Writing (original draft), Writing (review and
+%   editing), Visualization, Supervision, Project administration, Funding acquisition)을 이름과 함께 적고,
+%   끝에 'All authors reviewed the manuscript.' 같은 문장을 둔다. 저자 자격은 이 파일이 정하지 않는다.
+
+\bmhead{Additional information}
+
+Competing interests: [DECISION: Acknowledgements, Author contributions, Competing interests 문구]
+
+Correspondence and requests for materials should be addressed to [DECISION: 저자, 소속, 교신 저자].
+
+% Competing interests 문안(결정 뒤, 해당 없을 때 Sci Rep 예시 문구): 'The authors declare no competing interests.'

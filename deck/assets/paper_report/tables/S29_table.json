@@ -1,0 +1,136 @@
+{
+ "slide": "S29",
+ "page": 29,
+ "title": "원고 구성과 분량",
+ "subtitle": "9부 · Scientific Reports · 본문(서론, 결과, 고찰) 4500단어 이하 · 영문판과 국문판",
+ "takeaway": "결과 절을 약 2800단어로 줄이고 고찰 약 850단어를 새로 작성",
+ "archetype": "A3",
+ "kind": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+ "geometry_in": {
+  "x": 8.867,
+  "y": 1.8,
+  "w": 3.8,
+  "row_h": 0.76,
+  "col_w": [
+   1.2,
+   2.6
+  ]
+ },
+ "columns": [
+  "항목",
+  "한도와 현재"
+ ],
+ "rows": [
+  [
+   "초록",
+   "200단어 이하, 계획 196–199"
+  ],
+  [
+   "표시 항목",
+   "8개 이하, 현재 8"
+  ],
+  [
+   "참고문헌",
+   "60편 권고, 계획 71–72"
+  ],
+  [
+   "조판 쪽수",
+   "11쪽 권고, 16–17쪽 추정"
+  ],
+  [
+   "그림 설명",
+   "350단어 이하, 초안 268–343"
+  ]
+ ],
+ "align": [
+  "l",
+  "l"
+ ],
+ "accent_cells": [],
+ "support_line": null,
+ "changes_from_spec": [
+  "'200단어 이하, 계획 199(판 B)와 196(판 A)' → '200단어 이하, 계획 196–199'(18 pt, 열 2.6 in 에서 두 줄 안. 'v3' 는 보이는 글의 내부 판 이름이라 뺌, 지침 H3. 판 A·B 구분은 노트)",
+  "'350단어 이하, v3 초안 268–343' → '350단어 이하, 초안 268–343'(18 pt, 열 2.6 in 에서 두 줄 안. 'v3' 는 보이는 글의 내부 판 이름이라 뺌, 지침 H3. 판 A·B 구분은 노트)",
+  "y 1.30 → 1.80, 행 높이 0.80 → 0.76 in(A3 높이 일치, 차트 4.75 in)"
+ ],
+ "style": {
+  "header_h": 0.5,
+  "top_lw": 1.25,
+  "top_c": "4A4A4A",
+  "mid_lw": 0.75,
+  "mid_c": "DDDDDD",
+  "head_pt": 18,
+  "cell_pt": 18,
+  "head_font": "Pretendard SemiBold",
+  "cell_font": "Pretendard Medium",
+  "head_color": "4A4A4A",
+  "cell_color": "111111",
+  "accent": "EA851B",
+  "col_gap": 0.18,
+  "line_h": 0.3,
+  "safety": 0.95
+ },
+ "data_sources": [
+  "docs/research/2026-10-04/scirep_format_and_drafts.md 3.2(절별 단어 수), 3.3(한도 비교), 4.4(결과 절 예산), 4.5(Methods 목표)",
+  "design/journal_grade_style_guide.md 4.1",
+  "docs/QA_FOLLOWUP_2026-10-04.md 4.3",
+  "paper/manuscript/MANUSCRIPT_SPEC.md 1.1, 6절, 10절(절별 목표와 초록 단어 수), outputs/figures/paper/v3_restructure/FIGURE_SPEC_v3.md 16절(설명문 단어 수)"
+ ],
+ "wrapped_header": [
+  [
+   "항목"
+  ],
+  [
+   "한도와 현재"
+  ]
+ ],
+ "wrapped_rows": [
+  [
+   [
+    "초록"
+   ],
+   [
+    "200단어 이하,",
+    "계획 196–199"
+   ]
+  ],
+  [
+   [
+    "표시 항목"
+   ],
+   [
+    "8개 이하, 현재 8"
+   ]
+  ],
+  [
+   [
+    "참고문헌"
+   ],
+   [
+    "60편 권고,",
+    "계획 71–72"
+   ]
+  ],
+  [
+   [
+    "조판 쪽수"
+   ],
+   [
+    "11쪽 권고,",
+    "16–17쪽 추정"
+   ]
+  ],
+  [
+   [
+    "그림 설명"
+   ],
+   [
+    "350단어 이하,",
+    "초안 268–343"
+   ]
+  ]
+ ],
+ "height_in": 4.3,
+ "max_lines_per_cell": 2,
+ "issues": []
+}

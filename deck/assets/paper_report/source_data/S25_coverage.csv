@@ -1,0 +1,16 @@
+row,item,coverage,source
+지역 단위 보정,주 4지역 평균(지역 등가중),0.8628129262599191,"paper/claims/SI_uncertainty/tables/h4__c2_coverage.csv test label0, method hier2_cdf, MEAN6"
+지역 단위 보정,Lena,0.8891142663962136,"paper/claims/SI_uncertainty/tables/h4__c2_coverage.csv label0, hier2_cdf, Lena"
+지역 단위 보정,Canada,0.8862115127175368,"paper/claims/SI_uncertainty/tables/h4__c2_coverage.csv label0, hier2_cdf, Canada"
+지역 단위 보정,Russia_W,0.75,"paper/claims/SI_uncertainty/tables/h4__c2_coverage.csv label0, hier2_cdf, Russia_W"
+지역 단위 보정,Russia_E,0.925925925925926,"paper/claims/SI_uncertainty/tables/h4__c2_coverage.csv label0, hier2_cdf, Russia_E"
+알래스카 보정 구간,"Canada, covonly",0.5292274855813248,paper/claims/SI_uncertainty/tables/m1__transfer_uq_summary.csv method cqr_ak
+알래스카 보정 구간,"Canada, noinfo",0.5952699687639447,paper/claims/SI_uncertainty/tables/m1__transfer_uq_summary.csv method cqr_ak
+알래스카 보정 구간,"Lena, covonly",0.5748426136007166,paper/claims/SI_uncertainty/tables/m1__transfer_uq_summary.csv method cqr_ak
+알래스카 보정 구간,"Lena, noinfo",0.5699797160243407,paper/claims/SI_uncertainty/tables/m1__transfer_uq_summary.csv method cqr_ak
+알래스카 보정 구간,"Russia_E, covonly",0.6596921596921597,paper/claims/SI_uncertainty/tables/m1__transfer_uq_summary.csv method cqr_ak
+알래스카 보정 구간,"Russia_E, noinfo",0.7283950617283951,paper/claims/SI_uncertainty/tables/m1__transfer_uq_summary.csv method cqr_ak
+알래스카 보정 구간,"Russia_W, covonly",0.3415032679738561,paper/claims/SI_uncertainty/tables/m1__transfer_uq_summary.csv method cqr_ak
+알래스카 보정 구간,"Russia_W, noinfo",0.3214285714285714,paper/claims/SI_uncertainty/tables/m1__transfer_uq_summary.csv method cqr_ak
+생성 분위 구간,"정규화 흐름(nflow, λ 1.0)",0.756813946708413,paper/claims/SI_uncertainty/tables/lgu__lgu_b_tests.csv LGU-B1 cqr_pool:nflow@lam1.0
+생성 분위 구간,"흐름 정합(cfm, λ 1.0)",0.6528901944535066,paper/claims/SI_uncertainty/tables/lgu__lgu_b_tests.csv LGU-B1 cqr_pool:cfm@lam1.0

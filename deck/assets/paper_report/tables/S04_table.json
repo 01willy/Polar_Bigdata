@@ -1,0 +1,156 @@
+{
+ "slide": "S04",
+ "page": 4,
+ "title": "라벨 수 구간별 결과 요지",
+ "subtitle": "연구 개요 · 전이 시험과 지역 내 시험 · 각 행의 근거는 해당 부",
+ "takeaway": "라벨 수에 따라 물리 정보의 역할과 권고 방법이 달라짐",
+ "archetype": "A7",
+ "kind": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+ "geometry_in": {
+  "x": 0.667,
+  "y": 1.4,
+  "w": 12.0,
+  "row_h": 0.75,
+  "col_w": [
+   2.4,
+   8.1,
+   1.5
+  ]
+ },
+ "columns": [
+  "라벨 수",
+  "결과 요지",
+  "근거"
+ ],
+ "rows": [
+  [
+   "0개",
+   "2 cm 넘게 악화된 대상, 물리 유사라벨 증강 2개와 직접 ML 18개(사후 서술)",
+   "2부"
+  ],
+  [
+   "3–10개",
+   "주 4지역 평균 이득의 대부분이 계수 재보정",
+   "3부"
+  ],
+  [
+   "40–160개",
+   "교차검증 선정 규칙이 고정 레시피에 비열등",
+   "4부"
+  ],
+  [
+   "수백–수천 개",
+   "알래스카 0.54 cm 감소, 기후 격자 단위 보정",
+   "5부"
+  ],
+  [
+   "관측 위치",
+   "분산 배치 효과는 지역에 따라 다름",
+   "6부"
+  ]
+ ],
+ "align": [
+  "l",
+  "l",
+  "l"
+ ],
+ "accent_cells": [],
+ "support_line": null,
+ "changes_from_spec": [],
+ "style": {
+  "header_h": 0.5,
+  "top_lw": 1.25,
+  "top_c": "4A4A4A",
+  "mid_lw": 0.75,
+  "mid_c": "DDDDDD",
+  "head_pt": 18,
+  "cell_pt": 18,
+  "head_font": "Pretendard SemiBold",
+  "cell_font": "Pretendard Medium",
+  "head_color": "4A4A4A",
+  "cell_color": "111111",
+  "accent": "EA851B",
+  "col_gap": 0.18,
+  "line_h": 0.3,
+  "safety": 0.95
+ },
+ "data_sources": [
+  "paper/claims/C1_label0_safety/README.md 1.3",
+  "paper/claims/C2_bias_diagnosis/README.md 2.1 A6–A9",
+  "paper/claims/C5_method_selection/README.md 1.3",
+  "paper/claims/C4_sufficient_labels/README.md 1.3",
+  "paper/claims/C8_gain_source/README.md 1.3",
+  "paper/claims/C6_label_placement/README.md 1.3"
+ ],
+ "wrapped_header": [
+  [
+   "라벨 수"
+  ],
+  [
+   "결과 요지"
+  ],
+  [
+   "근거"
+  ]
+ ],
+ "wrapped_rows": [
+  [
+   [
+    "0개"
+   ],
+   [
+    "2 cm 넘게 악화된 대상, 물리 유사라벨 증강 2개와 직접 ML 18개(사후 서술)"
+   ],
+   [
+    "2부"
+   ]
+  ],
+  [
+   [
+    "3–10개"
+   ],
+   [
+    "주 4지역 평균 이득의 대부분이 계수 재보정"
+   ],
+   [
+    "3부"
+   ]
+  ],
+  [
+   [
+    "40–160개"
+   ],
+   [
+    "교차검증 선정 규칙이 고정 레시피에 비열등"
+   ],
+   [
+    "4부"
+   ]
+  ],
+  [
+   [
+    "수백–수천 개"
+   ],
+   [
+    "알래스카 0.54 cm 감소, 기후 격자 단위 보정"
+   ],
+   [
+    "5부"
+   ]
+  ],
+  [
+   [
+    "관측 위치"
+   ],
+   [
+    "분산 배치 효과는 지역에 따라 다름"
+   ],
+   [
+    "6부"
+   ]
+  ]
+ ],
+ "height_in": 4.25,
+ "max_lines_per_cell": 2,
+ "issues": []
+}

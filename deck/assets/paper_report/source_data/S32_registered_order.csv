@@ -1,0 +1,11 @@
+row,experiment_spec_only,order,main_or_si,manuscript_place,source
+재보정 몫 분리,XA,1,본문,결과 3절,"docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.1(본문/SI), 6(가치 순서, 원고 절)"
+배치 절차 결정,XD,2;9,보충,결과 6절,"docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.1(본문/SI), 6(가치 순서, 원고 절)"
+워크플로 순차 적용,XC,3,본문,결과 4절과 6절,"docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.1(본문/SI), 6(가치 순서, 원고 절)"
+기존 ALT 지도 비교,XG,4,본문,결과 2절,"docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.1(본문/SI), 6(가치 순서, 원고 절)"
+검증 사다리,XH,5,본문,결과 1절,"docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.1(본문/SI), 6(가치 순서, 원고 절)"
+다중 물리식 적층,XB,6,보충,결과 3절과 4절,"docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.1(본문/SI), 6(가치 순서, 원고 절)"
+격자 안 해상도 입력,XE,7;10,보충,결과 5절,"docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.1(본문/SI), 6(가치 순서, 원고 절)"
+독립 지역 추가,XF,8,보충,결과 7절,"docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.1(본문/SI), 6(가치 순서, 원고 절)"
+기후 외삽 재시험,XI,11,보충,보충,"docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.1(본문/SI), 6(가치 순서, 원고 절)"
+지온 유도 보조 라벨,XJ,12,보충,보충 한 줄,"docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.1(본문/SI), 6(가치 순서, 원고 절)"

@@ -1,0 +1,132 @@
+{
+ "slide": "S06",
+ "page": 6,
+ "title": "입력 자료와 처리 단위",
+ "subtitle": "1부 · 공변량 25종(지형 6, 기후 8, 토양 9, 위성 ALT 2) · 라벨은 1 km 셀 단위",
+ "takeaway": "입력은 1 km 셀 단위, 정보 해상도는 기후 격자 단위",
+ "archetype": "A3",
+ "kind": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+ "geometry_in": {
+  "x": 8.867,
+  "y": 1.8,
+  "w": 3.8,
+  "row_h": 0.79,
+  "col_w": [
+   2.6,
+   1.2
+  ]
+ },
+ "columns": [
+  "자료 표",
+  "행 수"
+ ],
+ "rows": [
+  [
+   "초기 통합",
+   "17,423"
+  ],
+  [
+   "라벨 추가",
+   "17,572"
+  ],
+  [
+   "라벨 정의 정제(본 실험)",
+   "17,572"
+  ],
+  [
+   "새 지역 추가",
+   "18,088"
+  ],
+  [
+   "본 실험 직접 라벨 셀",
+   "17,467"
+  ]
+ ],
+ "align": [
+  "l",
+  "r"
+ ],
+ "accent_cells": [],
+ "support_line": null,
+ "changes_from_spec": [
+  "y 1.30 → 1.80, 행 높이 0.75 → 0.79 in(A3: 보조 요소를 주 그림 자료 영역 위끝과 아래끝에 맞춤)"
+ ],
+ "style": {
+  "header_h": 0.5,
+  "top_lw": 1.25,
+  "top_c": "4A4A4A",
+  "mid_lw": 0.75,
+  "mid_c": "DDDDDD",
+  "head_pt": 18,
+  "cell_pt": 18,
+  "head_font": "Pretendard SemiBold",
+  "cell_font": "Pretendard Medium",
+  "head_color": "4A4A4A",
+  "cell_color": "111111",
+  "accent": "EA851B",
+  "col_gap": 0.18,
+  "line_h": 0.3,
+  "safety": 0.95
+ },
+ "data_sources": [
+  "docs/QA_FINAL_REVIEW_2026-10-02.md Q8 입력별 해상도 표",
+  "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.4(지형·SAR 창 정정 행)",
+  "docs/QA_FOLLOWUP_2026-10-04.md 3.4",
+  "paper/registry/README.md 3절(x25 구성)",
+  "paper/claims/D_data_and_design/README.md E01–E07(fidelity_base_v2·v3·v4 meta), E04·E05(직접 라벨 17,467)"
+ ],
+ "wrapped_header": [
+  [
+   "자료 표"
+  ],
+  [
+   "행 수"
+  ]
+ ],
+ "wrapped_rows": [
+  [
+   [
+    "초기 통합"
+   ],
+   [
+    "17,423"
+   ]
+  ],
+  [
+   [
+    "라벨 추가"
+   ],
+   [
+    "17,572"
+   ]
+  ],
+  [
+   [
+    "라벨 정의",
+    "정제(본 실험)"
+   ],
+   [
+    "17,572"
+   ]
+  ],
+  [
+   [
+    "새 지역 추가"
+   ],
+   [
+    "18,088"
+   ]
+  ],
+  [
+   [
+    "본 실험 직접 라벨 셀"
+   ],
+   [
+    "17,467"
+   ]
+  ]
+ ],
+ "height_in": 4.45,
+ "max_lines_per_cell": 2,
+ "issues": []
+}

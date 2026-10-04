@@ -1,0 +1,148 @@
+Table 1 v3 값 대조와 점검 기록(2026-10-04 16:41, scripts/4_visualization/paper_v3/table1.py 생성)
+
+원천: data/processed/paper_figs/table1_rows.csv, fig1_source.csv, fig1_meta.csv(D README E10–E19, E33–E37).
+대조용: LGD 단위 파일(data/processed/lgd/{Russia_C,Tibet}/shards/*__cpu__*_unit.json), fidelity_base_v3.csv,
+fidelity_base_v4.csv, fidelity_base_v4_labels.csv, paper/claims/D_data_and_design/README.md 근거 표.
+
+표기: [OK] 통과, [FAIL] 실패. '이번 계산'은 등록 근거 표에 없는 값을 등록 수치로 유도한 것이다.
+
+== 1. 원천 대조 ==
+대조 전체: 모두 통과
+[OK] sha256 data/processed/paper_figs/table1_rows.csv = MANIFEST: 15ab95ad2f55eee2
+[OK] sha256 data/processed/paper_figs/fig1_source.csv = MANIFEST: 5c163b93220ea09d
+[OK] sha256 data/processed/paper_figs/fig1_meta.csv = MANIFEST: 6e64329d44823b2d
+[OK] Lena Delta: Labels 3037 = table1_rows.label_rows
+[OK] Lena Delta: 1 km locations 201 = table1_rows.loc_1km
+[OK] Lena Delta: 0.5° blocks 20 = table1_rows.blocks
+[OK] Lena Delta: Splits 5 = table1_rows.valid_splits_x
+[OK] Lena Delta: E0 1.619297 = table1_rows.E0_x
+[OK] Lena Delta: E0 table1_rows = fig1_source.E0
+[OK] Lena Delta: Labels = fig1_source.n_target
+[OK] Lena Delta: n_src_x 14429 = fig1_source.n_src
+[OK] Lena Delta: Alaska share 0.9430 = fig1_source.share_alaska
+[OK] Lena Delta: Label source 'Points (ALLena)' <- 'Point (ALLena, mostly single-year visits)'
+[OK] Canada: Labels 750 = table1_rows.label_rows
+[OK] Canada: 1 km locations 86 = table1_rows.loc_1km
+[OK] Canada: 0.5° blocks 39 = table1_rows.blocks
+[OK] Canada: Splits 5 = table1_rows.valid_splits_x
+[OK] Canada: E0 1.591875 = table1_rows.E0_x
+[OK] Canada: E0 table1_rows = fig1_source.E0
+[OK] Canada: Labels = fig1_source.n_target
+[OK] Canada: n_src_x 16697 = fig1_source.n_src
+[OK] Canada: Alaska share 0.8137 = fig1_source.share_alaska
+[OK] Canada: Label source 'Points (ABoVE)' <- 'Point (ABoVE); some CALM site means'
+[OK] W Russia: Labels 31 = table1_rows.label_rows
+[OK] W Russia: 1 km locations 29 = table1_rows.loc_1km
+[OK] W Russia: 0.5° blocks 21 = table1_rows.blocks
+[OK] W Russia: Splits 5 = table1_rows.valid_splits_x
+[OK] W Russia: E0 1.589510 = table1_rows.E0_x
+[OK] W Russia: E0 table1_rows = fig1_source.E0
+[OK] W Russia: Labels = fig1_source.n_target
+[OK] W Russia: n_src_x 17436 = fig1_source.n_src
+[OK] W Russia: Alaska share 0.7803 = fig1_source.share_alaska
+[OK] W Russia: Label source 'CALM site means' <- 'CALM site, multi-year mean'
+[OK] E Russia: Labels 30 = table1_rows.label_rows
+[OK] E Russia: 1 km locations 30 = table1_rows.loc_1km
+[OK] E Russia: 0.5° blocks 21 = table1_rows.blocks
+[OK] E Russia: Splits 5 = table1_rows.valid_splits_x
+[OK] E Russia: E0 1.591176 = table1_rows.E0_x
+[OK] E Russia: E0 table1_rows = fig1_source.E0
+[OK] E Russia: Labels = fig1_source.n_target
+[OK] E Russia: n_src_x 17437 = fig1_source.n_src
+[OK] E Russia: Alaska share 0.7803 = fig1_source.share_alaska
+[OK] E Russia: Label source 'CALM site means' <- 'CALM site, multi-year mean'
+[OK] Alaska: Labels 13,606 = table1_rows.label_rows
+[OK] Alaska: 1 km locations 343 = table1_rows.loc_1km
+[OK] Alaska: 0.5° blocks 74 = table1_rows.blocks
+[OK] Alaska: Splits 5 = table1_rows.valid_splits_x
+[OK] Alaska: E0 1.504595 = table1_rows.E0_x
+[OK] Alaska: E0 table1_rows = fig1_source.E0
+[OK] Alaska: Labels = fig1_source.n_target
+[OK] Alaska: n_src_x 3860 = fig1_source.n_src
+[OK] Alaska: Alaska share 0.0000 = fig1_source.share_alaska
+[OK] Alaska: Label source 'Points (ABoVE)' <- 'Point (ABoVE, mostly GPR); some CALM site means'
+[OK] Central Russia (expanded): Labels 57 = table1_rows.label_rows
+[OK] Central Russia (expanded): 1 km locations 57 = table1_rows.loc_1km
+[OK] Central Russia (expanded): 0.5° blocks 13 = table1_rows.blocks
+[OK] Central Russia (expanded): Splits 5 = table1_rows.valid_splits_x
+[OK] Central Russia (expanded): E0 1.591316 = table1_rows.E0_x
+[OK] Central Russia (expanded): Label source '1 km cell means' <- '~1 km cell means (other 27, pit_core 16, probe 6, pit_core;probe 2); 6 v3 CALM cells'
+[OK] Tibetan Plateau: Labels 132 = table1_rows.label_rows
+[OK] Tibetan Plateau: 1 km locations 132 = table1_rows.loc_1km
+[OK] Tibetan Plateau: 0.5° blocks 34 = table1_rows.blocks
+[OK] Tibetan Plateau: Splits 5 = table1_rows.valid_splits_x
+[OK] Tibetan Plateau: E0 1.591381 = table1_rows.E0_x
+[OK] Tibetan Plateau: Label source '1 km cell means' <- '~1 km cell means (gpr 131, pit_core 1)'
+[OK] Lena Delta: Labels/1 km locations/blocks = D README E11 3,037 / 201 / 20
+[OK] Canada: Labels/1 km locations/blocks = D README E12 750 / 86 / 39
+[OK] W Russia: Labels/1 km locations/blocks = D README E13 31 / 29 / 21
+[OK] E Russia: Labels/1 km locations/blocks = D README E14 30 / 30 / 21
+[OK] Alaska: Labels/1 km locations/blocks = D README E10 13,606 / 343 / 74
+[OK] Central Russia (expanded): Labels/1 km locations/blocks = D README E17 57 / 57 / 13 / licence-verified (main)
+[OK] Tibetan Plateau: Labels/1 km locations/blocks = D README E18 132 / 132 / 34 / licence-verified (main)
+[OK] Lena Delta: E0 1.62 = D README E37 1.62
+[OK] Lena Delta: Alaska share 0.94 = D README E35 0.94
+[OK] Canada: E0 1.59 = D README E37 1.59
+[OK] Canada: Alaska share 0.81 = D README E35 0.81
+[OK] W Russia: E0 1.59 = D README E37 1.59
+[OK] W Russia: Alaska share 0.78 = D README E35 0.78
+[OK] E Russia: E0 1.59 = D README E37 1.59
+[OK] E Russia: Alaska share 0.78 = D README E35 0.78
+[OK] Alaska: E0 1.50 = D README E37 1.50
+[OK] Central Russia (expanded): LGD 단위 파일 5개, E0 한 값 = 표 값
+[OK] Central Russia (expanded): LGD 단위 n_src [17460] = table1_rows.n_src_x 17460
+[OK] Central Russia (expanded): LGD 단위 n_cells, n_blocks, n_valid_splits = 표 값
+       Central Russia (expanded): n_buffer_excluded [0], v3 직접 라벨 셀 17467 − 원천 17460 = 7
+[OK] Tibetan Plateau: LGD 단위 파일 5개, E0 한 값 = 표 값
+[OK] Tibetan Plateau: LGD 단위 n_src [17466] = table1_rows.n_src_x 17466
+[OK] Tibetan Plateau: LGD 단위 n_cells, n_blocks, n_valid_splits = 표 값
+       Tibetan Plateau: n_buffer_excluded [1], v3 직접 라벨 셀 17467 − 원천 17466 = 1
+[OK] v3 직접 라벨 셀 17467 = fig1_meta.n_v3_cells 17467
+[OK] v3 알래스카 직접 라벨 셀 13606 = Alaska Labels 13606 = max fig1_source.n_alaska 13606
+[OK] Central Russia (expanded): 알래스카 셀과 대상 셀(51개)의 최소 거리 2605 km > 완충 100 km
+[OK] Central Russia (expanded): Alaska share = 13606 / 17460 = 0.7793 -> 78 %  [이번 계산, 등록 근거 표에 없는 값]
+[OK] Tibetan Plateau: 알래스카 셀과 대상 셀(132개)의 최소 거리 6341 km > 완충 100 km
+[OK] Tibetan Plateau: Alaska share = 13606 / 17466 = 0.7790 -> 78 %  [이번 계산, 등록 근거 표에 없는 값]
+[OK] Lena Delta: 표시 ['Lena Delta', 'Points (ALLena)', '3037', '201', '20', '5', '1.62', '94']
+[OK] Canada: 표시 ['Canada', 'Points (ABoVE)', '750', '86', '39', '5', '1.59', '81']
+[OK] W Russia: 표시 ['W Russia', 'CALM site means', '31', '29', '21', '5', '1.59', '78']
+[OK] E Russia: 표시 ['E Russia', 'CALM site means', '30', '30', '21', '5', '1.59', '78']
+[OK] Alaska: 표시 ['Alaska', 'Points (ABoVE)', '13,606', '343', '74', '5', '1.50', '0']
+[OK] Central Russia (expanded): 표시 ['Central Russia (expanded)', '1 km cell means', '57', '57', '13', '5', '1.59', '78']
+[OK] Tibetan Plateau: 표시 ['Tibetan Plateau', '1 km cell means', '132', '132', '34', '5', '1.59', '78']
+
+== 2. 형식 점검(지침 7.2 T-01–T-05, 부록 A.1, A.2, 7.3 M-01·M-02) ==
+점검 전체: 모두 통과
+[OK] T-01 booktabs 세 줄(\toprule, \midrule, \bottomrule)
+[OK] T-01 이미지 아님(\includegraphics 0)
+[OK] T-01 한 쪽 이내: 조판 1쪽, 표+설명문 높이 84.6 mm, 표 폭 152.9 mm: 기준[판단]: A4 본문 160 × 247 mm
+[OK] T-02 세로선 0(열 지정 '@{}l@{\hspace{10pt}}lrrrrrr@{}')
+[OK] T-02 \hline·셀 채움·색 글자 0
+[OK] T-03 각주 0
+[OK] T-04 내부 코드 0(CODE_RE + PE·v3·LGD·Point est.·밑줄): [] []
+[OK] T-05 수치는 원천에서 생성(대조는 Table1_values.txt 1–5절)
+[OK] T-05 범위 표기 없음(대시 범위·대괄호 0)
+[OK] M-01 연결어 대시 0: []
+[OK] M-02 금지 어휘 0: []
+[OK] F-14 네 자리 쉼표 0, 가운뎃점 숫자 나열 0: [] []
+[OK] 음수 부호 U+2212(하이픈 음수 0)
+[OK] 설명문 단어 수 147 <= 150(그림 명세 10.4, 지침 3.1)
+[OK] 설명문 첫 문장 명사구, 'This table' 시작 0
+[OK] A.2 pdf_audit 쪽 162.9 × 99.5 mm, 글자 1154자, Type 3 False
+[OK] A.2 글꼴 모두 내장(6종): []
+       글꼴 계열 ['LMMathItalic8', 'LMRoman6', 'LMRoman8']
+       글자 크기 분포(pt: 자수) {6.0: 2, 8.0: 1152}, 5 pt 미만 0자
+[OK] A.1 audit_v3(표 글자 대리 그림, 글자열 73개) fails=[]: codes=[] comma4=[] long=[] numbers=[]
+[OK] 범주 라벨(묶음 머리, 지역, 라벨 출처) 4 단어 이하(R-28). 열 머리는 축 이름처럼 변수와 단위: []
+
+== 3. 남은 확인 사항 ==
+- 새 지역 2행의 알래스카 비율(78 %)은 이번 계산이다. 알래스카 직접 라벨 셀 13,606개(Alaska Labels = fig1_source.n_alaska 최댓값)를 LGD 단위 파일의 원천 셀 수(n_src)로 나눴다. 알래스카 셀이 대상이나 100 km 완충 안에 없음을 거리로 확인했다(1절 '최소 거리' 행). D README 근거 표(E35)에 행을 더할지는 사용자 확인 사항이다.
+- 명세와 다르게 둔 것: (가) E0 열 머리를 'Source coefficient $E_0$ (cm per √(°C d))'로 썼다(그림 명세 10.2 는 '$E_0$ (cm per √(°C d))', 지침 6.8 과 원고 명세 7절은 'Source coefficient'). (나) 백분율 기호를 값이 아닌 열 머리 '(%)'에 두었다(지침 3.1 '단위는 열 머리 괄호에'). (다) 설명문은 그림 명세 10.4 초안의 내용을 따르되 150단어 안에 라벨 단위 문장을 더하려고 문장을 줄였다. (라) 표 글자는 8 pt(\footnotesize, v2 와 같음), 열 간격 4 pt 로 표 폭을 152.9 mm 로 맞췄다. 9 pt 에서는 열 간격 3 pt 에도 160.4 mm 로 160 mm 를 넘었다(2026-10-04 시험 조판).
+- 행 구성은 그림 명세 10.3(D-5, D-15 기본값)을 따랐다. 하위 지역, 점 추정 전용 대상(Central Russia v3 7셀, Greenland 3셀), North Atlantic 은 Supplementary Table S1 로 옮긴다. XF 행은 더하지 않았다(등록 문서 6절).
+- 라벨 출처 이름: ALLena 는 Veremeeva et al. 2025(PANGAEA 973813) 자료명 'ALLena: Thaw depth measurements ...',
+  ABoVE 는 Moore et al. 2025(ORNL DAAC 2369) 자료명 'ABoVE: Soil Moisture and Active Layer Thickness ...'와 같다
+  (docs/MANUSCRIPT_DRAFT_METHODS_INTRO_2026-09-30.md 참고문헌 표 263, 289행). CALM 은 GTN-P/CALM(Streletskiy et al. 2025).
+- 지역 이름 'W Russia', 'E Russia', 'Lena Delta'의 표기와 레나델타 범위는 사용자 확인 사항이다(지침 2.5, 8절 7, 원고 명세 [DECISION]).
+- 짧은 라벨 출처 이름은 원천 label_type 의 첫 자료원만 보인다. 알래스카·캐나다의 CALM 지점 평균 일부와 Central Russia (expanded)의 v3 CALM 6셀은 설명문 둘째 문장에 적었다.
+- 검토용 조판은 Latin Modern(원고 sn-jnl 의 Computer Modern 계열)으로 했다. 원고 안 최종 글꼴과 크기는 템플릿과 출판사 조판을 따른다. 7 pt 단일 크기 규칙(지침 2.2)은 그림 규칙이라 표에 적용하지 않았다.
+- Table1_data.tex 는 그림 명세 1.7이 정한 Table 1 정본 경로이다(지침 R-14: 편집 가능한 LaTeX 표).

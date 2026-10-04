@@ -1,0 +1,155 @@
+{
+ "slide": "S34",
+ "page": 34,
+ "title": "남은 결정 사항",
+ "subtitle": "9부 · 원고 작성 전 결정 · 사용자 결정 전 기본값",
+ "takeaway": "제목, 그림 배치, 초록 표기, 저자 정보의 결정이 원고 작성 전 필요",
+ "archetype": "A7",
+ "kind": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+ "geometry_in": {
+  "x": 0.667,
+  "y": 1.35,
+  "w": 12.0,
+  "row_h": 0.8,
+  "col_w": [
+   3.2,
+   5.0,
+   3.8
+  ]
+ },
+ "columns": [
+  "결정",
+  "선택지",
+  "결정 전 기본값"
+ ],
+ "rows": [
+  [
+   "논문 제목",
+   "임시 제목 유지, 주장형 한 문장",
+   "임시 제목(대회 제목의 영문 번역)"
+  ],
+  [
+   "그림 배치",
+   "현재판, 재구성판",
+   "두 판 비교 뒤 결정"
+  ],
+  [
+   "초록 표기",
+   "제외, 수치만, 판정어 포함",
+   "수치만"
+  ],
+  [
+   "저자·소속, LLM 사용 진술",
+   "미정",
+   "자리표시로 비움"
+  ],
+  [
+   "덱 여백과 본문 글자",
+   "확정값 0.52 in와 12.5 pt, 지침값 0.667 in와 18 pt",
+   "지침값으로 시안"
+  ]
+ ],
+ "align": [
+  "l",
+  "l",
+  "l"
+ ],
+ "accent_cells": [],
+ "support_line": null,
+ "changes_from_spec": [],
+ "style": {
+  "header_h": 0.5,
+  "top_lw": 1.25,
+  "top_c": "4A4A4A",
+  "mid_lw": 0.75,
+  "mid_c": "DDDDDD",
+  "head_pt": 18,
+  "cell_pt": 18,
+  "head_font": "Pretendard SemiBold",
+  "cell_font": "Pretendard Medium",
+  "head_color": "4A4A4A",
+  "cell_color": "111111",
+  "accent": "EA851B",
+  "col_gap": 0.18,
+  "line_h": 0.3,
+  "safety": 0.95
+ },
+ "data_sources": [
+  "docs/research/2026-10-04/scirep_format_and_drafts.md 6절",
+  "design/journal_grade_style_guide.md 8절",
+  "docs/MANUSCRIPT_RESTRUCTURE_PLAN_2026-10-02.md 8절",
+  "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 7.2"
+ ],
+ "wrapped_header": [
+  [
+   "결정"
+  ],
+  [
+   "선택지"
+  ],
+  [
+   "결정 전 기본값"
+  ]
+ ],
+ "wrapped_rows": [
+  [
+   [
+    "논문 제목"
+   ],
+   [
+    "임시 제목 유지, 주장형 한 문장"
+   ],
+   [
+    "임시 제목(대회 제목의 영문 번역)"
+   ]
+  ],
+  [
+   [
+    "그림 배치"
+   ],
+   [
+    "현재판, 재구성판"
+   ],
+   [
+    "두 판 비교 뒤 결정"
+   ]
+  ],
+  [
+   [
+    "초록 표기"
+   ],
+   [
+    "제외, 수치만, 판정어 포함"
+   ],
+   [
+    "수치만"
+   ]
+  ],
+  [
+   [
+    "저자·소속, LLM 사용 진술"
+   ],
+   [
+    "미정"
+   ],
+   [
+    "자리표시로 비움"
+   ]
+  ],
+  [
+   [
+    "덱 여백과 본문 글자"
+   ],
+   [
+    "확정값 0.52 in와 12.5 pt,",
+    "지침값 0.667 in와 18 pt"
+   ],
+   [
+    "지침값으로 시안"
+   ]
+  ]
+ ],
+ "height_in": 4.5,
+ "max_lines_per_cell": 2,
+ "issues": []
+}

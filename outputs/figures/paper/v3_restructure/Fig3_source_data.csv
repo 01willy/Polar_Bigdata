@@ -1,0 +1,73 @@
+panel,element,series,region,n,registered,x,y,lat,lon,label_block,delta,ci_lo,ci_hi,delta_beq,ci_lo_beq,ci_hi_beq,nboot,pool,source
+a,"label cell, drawn label",W Russia,W Russia,,,39.2095,118.333,65.2338,72.5184,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,37.9823,163.25,66.05,76.6449,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,37.6827,92.7647,66.3132,76.9035,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,37.9818,65.3333,66.5439,66.7313,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,37.6541,79.6667,66.5699,66.8809,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,36.9045,48.5556,66.6967,66.3589,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,37.4113,84.1111,66.7092,66.5678,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,36.6644,107.571,66.7235,66.0805,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,36.0876,57.1538,67.0656,62.9251,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,"label cell, drawn label",W Russia,W Russia,,,35.4623,138.125,67.3333,63.7333,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,"label cell, drawn label",W Russia,W Russia,,,36.7289,95.3125,67.4779,76.6953,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,"label cell, drawn label",W Russia,W Russia,,,38.1361,84.3125,67.4814,86.4347,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,34.6303,82.8966,67.5833,64.1833,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,37.061,161.667,67.7724,34.182,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,34.8683,92.6,68.2253,69.1444,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,35.8136,91.2667,68.2333,53.85,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,35.0806,110.739,68.3,54.5,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,"label cell, drawn label",W Russia,W Russia,,,35.7136,98.2105,69.4333,88.4667,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,29.2811,111.862,69.7167,66.85,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,33.0784,89,70.1167,75.5833,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,"label cell, drawn label",W Russia,W Russia,,,32.0006,46.6667,70.2742,68.8908,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,32.0006,72,70.2755,68.8916,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,32.0006,93.8276,70.2833,68.9,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,32.0006,75.9375,70.2955,68.8835,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,"label cell, drawn label",W Russia,W Russia,,,32.0172,118.5,70.3014,68.8413,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,32.7572,70.3333,70.8699,78.5478,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,"label cell, drawn label",W Russia,W Russia,,,32.7562,100.714,70.8893,78.4171,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,"label cell, drawn label",W Russia,W Russia,,,32.7562,65.1429,70.8906,78.4308,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,"label cell, drawn label",W Russia,W Russia,,,29.6952,31.8,71.7855,71.4192,True,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,26.1802,55.7333,73.3269,70.0853,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,label cell,W Russia,W Russia,,,26.1802,111.8,73.3286,70.0883,False,,,,,,,,,data/processed/fidelity_base_v3.csv via polar.m1_core.load_base (macro == 'Russia_W')
+a,Source Stefan coefficient,W Russia,,,,,1.58951,,,,,,,,,,,,paper_figs/table1_rows.csv E0_x
+a,Recalibrated Stefan coefficient,W Russia,,,,,2.10958,,,,,,,,,,,,"(n·E_ls + κ·E0)/(n + κ), n = 10, κ = 10; split 1, draw 1, seed 1988953180"
+a,Least-squares coefficient of the drawn labels,W Russia,,,,,2.62965,,,,,,,,,,,,"(n·E_ls + κ·E0)/(n + κ), n = 10, κ = 10; split 1, draw 1, seed 1988953180"
+b,physics pseudo-labels minus placebo,Shuffled physics labels,,0,,,,,,,-1.629,-1.98513,-1.03556,-1.0471,-1.51894,-0.577459,,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_a.csv contrast=D1-D1@shuffle|n0
+b,physics pseudo-labels minus placebo,Shuffled physics labels,,10,,,,,,,-1.15018,-1.42829,-0.726869,-0.680249,-1.06043,-0.291117,,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_a.csv contrast=D1-D1@shuffle|n10
+b,physics pseudo-labels minus placebo,Constant at pool mean,,0,,,,,,,-1.6821,-2.06403,-1.11541,-1.05501,-1.55385,-0.562532,,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_a.csv contrast=D1-D1@const_t|n0
+b,physics pseudo-labels minus placebo,Constant at pool mean,,10,,,,,,,-1.16378,-1.46336,-0.764043,-0.741065,-1.11258,-0.37236,,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_a.csv contrast=D1-D1@const_t|n10
+b,physics pseudo-labels minus placebo,Constant at source mean,,0,,,,,,,-3.62694,-4.33278,-2.43756,-2.80525,-3.49283,-2.11086,,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_a.csv contrast=D1-D1@const_src|n0
+b,physics pseudo-labels minus placebo,Constant at source mean,,10,,,,,,,-2.20927,-2.89096,-1.27281,-1.54391,-2.22625,-0.862017,,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_a.csv contrast=D1-D1@const_src|n10
+b,physics pseudo-labels minus placebo,Linear thaw index,,0,,,,,,,-0.476863,-0.618106,-0.272764,-0.406695,-0.607073,-0.211509,,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_a.csv contrast=D1-D1@tddlin|n0
+b,physics pseudo-labels minus placebo,Linear thaw index,,10,,,,,,,-0.0801293,-0.18434,0.0545286,-0.0289291,-0.148325,0.0911268,,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_a.csv contrast=D1-D1@tddlin|n10
+c,residual structure minus physics-input structure,Physics inputs,,All,False,,,,,,-2.92896,-3.90309,-1.72827,-2.86461,-3.87598,-1.79742,10000,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_b_L10_alln.csv contrast=R1-F1k|n-1
+c,residual structure minus physics-input structure,Physics inputs,,0,True,,,,,,-2.72063,-4.33927,-1.72795,-2.95044,-3.9343,-1.97069,10000,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_b_L10_alln.csv contrast=R0-F1k|n0
+c,residual structure minus physics-input structure,Physics inputs,,3,False,,,,,,-3.01547,-4.6526,-1.92874,-3.15893,-4.14115,-2.16033,10000,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_b_L10_alln.csv contrast=R1-F1k|n3
+c,residual structure minus physics-input structure,Physics inputs,,10,True,,,,,,-3.73606,-5.18295,-2.69897,-4.0698,-5.12257,-2.96192,10000,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_b_L10_alln.csv contrast=R1-F1k|n10
+c,residual structure minus physics-input structure,Physics inputs,,40,False,,,,,,2.3772,0.521643,3.25274,2.0392,1.166,2.94926,10000,"Lena Delta, Canada",paper_figs/fig3_b_L10_alln.csv contrast=R1-F1k|n40
+c,residual structure minus physics-input structure,Physics inputs,,160,False,,,,,,2.23421,0.754202,3.04198,2.1824,1.30102,3.09368,10000,"Lena Delta, Canada",paper_figs/fig3_b_L10_alln.csv contrast=R1-F1k|n160
+c,residual structure minus physics-input structure,Recalibrated inputs,,All,False,,,,,,-0.774634,-1.5999,0.366422,-0.36745,-1.21114,0.482909,10000,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_b_L10_alln.csv contrast=R1-F1n|n-1
+c,residual structure minus physics-input structure,Recalibrated inputs,,3,False,,,,,,-3.16657,-3.9999,-2.10376,-2.46446,-3.3878,-1.51187,10000,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_b_L10_alln.csv contrast=R1-F1n|n3
+c,residual structure minus physics-input structure,Recalibrated inputs,,10,True,,,,,,-2.51653,-3.26333,-1.55997,-2.03689,-2.89542,-1.16097,10000,"Lena Delta, Canada, W Russia, E Russia",paper_figs/fig3_b_L10_alln.csv contrast=R1-F1n|n10
+c,residual structure minus physics-input structure,Recalibrated inputs,,40,False,,,,,,1.85106,0.726495,2.61457,2.19387,1.33597,3.08924,10000,"Lena Delta, Canada",paper_figs/fig3_b_L10_alln.csv contrast=R1-F1n|n40
+c,residual structure minus physics-input structure,Recalibrated inputs,,160,False,,,,,,1.98089,0.802468,2.73053,2.22662,1.34701,3.11737,10000,"Lena Delta, Canada",paper_figs/fig3_b_L10_alln.csv contrast=R1-F1n|n160
+d,least squares minus shrinkage recalibration (descriptive),pool mean,,3,,,,,,,1.75638,0.903096,3.048,2.56568,1.61916,3.55116,10000,"Lena Delta, Canada, W Russia, E Russia",paper_figs/pool_fixed_curve.csv edition=E1_P4_n_le_10 contrast=P2-P1|n3 scope=MEAN
+d,least squares minus shrinkage recalibration (descriptive),pool mean,,10,,,,,,,0.841563,0.0281851,1.90627,1.36445,0.42305,2.32926,10000,"Lena Delta, Canada, W Russia, E Russia",paper_figs/pool_fixed_curve.csv edition=E1_P4_n_le_10 contrast=P2-P1|n10 scope=MEAN
+d,least squares minus shrinkage recalibration (descriptive),pool mean,,40,,,,,,,0.755394,0.573256,0.899544,0.840011,0.702824,0.975464,10000,"Lena Delta, Canada",paper_figs/pool_fixed_curve.csv edition=E2_LenaCanada_all_n contrast=P2-P1|n40 scope=MEAN
+d,least squares minus shrinkage recalibration (descriptive),pool mean,,160,,,,,,,0.19177,0.139986,0.232475,0.204897,0.164972,0.243706,10000,"Lena Delta, Canada",paper_figs/pool_fixed_curve.csv edition=E2_LenaCanada_all_n contrast=P2-P1|n160 scope=MEAN
+d,least squares minus shrinkage recalibration (descriptive),pool mean,,320,,,,,,,0.10214,0.0740476,0.124276,0.107887,0.0856634,0.129195,10000,"Lena Delta, Canada",paper_figs/pool_fixed_curve.csv edition=E2_LenaCanada_all_n contrast=P2-P1|n320 scope=MEAN
+d,least squares minus shrinkage recalibration (descriptive),Lena Delta,Lena Delta,3,,,,,,,2.9129,,,3.76015,,,10000,,paper_figs/pool_fixed_curve.csv edition=E1_P4_n_le_10 contrast=P2-P1|n3 scope=region
+d,least squares minus shrinkage recalibration (descriptive),Canada,Canada,3,,,,,,,5.40165,,,4.90754,,,10000,,paper_figs/pool_fixed_curve.csv edition=E1_P4_n_le_10 contrast=P2-P1|n3 scope=region
+d,least squares minus shrinkage recalibration (descriptive),W Russia,W Russia,3,,,,,,,-4.9748,,,-5.41352,,,10000,,paper_figs/pool_fixed_curve.csv edition=E1_P4_n_le_10 contrast=P2-P1|n3 scope=region
+d,least squares minus shrinkage recalibration (descriptive),E Russia,E Russia,3,,,,,,,3.68577,,,7.00856,,,10000,,paper_figs/pool_fixed_curve.csv edition=E1_P4_n_le_10 contrast=P2-P1|n3 scope=region
+d,least squares minus shrinkage recalibration (descriptive),Lena Delta,Lena Delta,10,,,,,,,1.00573,,,1.63946,,,10000,,paper_figs/pool_fixed_curve.csv edition=E1_P4_n_le_10 contrast=P2-P1|n10 scope=region
+d,least squares minus shrinkage recalibration (descriptive),Canada,Canada,10,,,,,,,3.2544,,,2.89266,,,10000,,paper_figs/pool_fixed_curve.csv edition=E1_P4_n_le_10 contrast=P2-P1|n10 scope=region
+d,least squares minus shrinkage recalibration (descriptive),W Russia,W Russia,10,,,,,,,-1.44246,,,-0.85308,,,10000,,paper_figs/pool_fixed_curve.csv edition=E1_P4_n_le_10 contrast=P2-P1|n10 scope=region
+d,least squares minus shrinkage recalibration (descriptive),E Russia,E Russia,10,,,,,,,0.548582,,,1.77876,,,10000,,paper_figs/pool_fixed_curve.csv edition=E1_P4_n_le_10 contrast=P2-P1|n10 scope=region
+d,least squares minus shrinkage recalibration (descriptive),Lena Delta,Lena Delta,40,,,,,,,0.229975,,,0.5878,,,10000,,paper_figs/pool_fixed_curve.csv edition=E2_LenaCanada_all_n contrast=P2-P1|n40 scope=region
+d,least squares minus shrinkage recalibration (descriptive),Canada,Canada,40,,,,,,,1.28081,,,1.09222,,,10000,,paper_figs/pool_fixed_curve.csv edition=E2_LenaCanada_all_n contrast=P2-P1|n40 scope=region
+d,least squares minus shrinkage recalibration (descriptive),Lena Delta,Lena Delta,160,,,,,,,0.0568991,,,0.148257,,,10000,,paper_figs/pool_fixed_curve.csv edition=E2_LenaCanada_all_n contrast=P2-P1|n160 scope=region
+d,least squares minus shrinkage recalibration (descriptive),Canada,Canada,160,,,,,,,0.326641,,,0.261536,,,10000,,paper_figs/pool_fixed_curve.csv edition=E2_LenaCanada_all_n contrast=P2-P1|n160 scope=region
+d,least squares minus shrinkage recalibration (descriptive),Lena Delta,Lena Delta,320,,,,,,,0.0220707,,,0.0714008,,,10000,,paper_figs/pool_fixed_curve.csv edition=E2_LenaCanada_all_n contrast=P2-P1|n320 scope=region
+d,least squares minus shrinkage recalibration (descriptive),Canada,Canada,320,,,,,,,0.18221,,,0.144374,,,10000,,paper_figs/pool_fixed_curve.csv edition=E2_LenaCanada_all_n contrast=P2-P1|n320 scope=region

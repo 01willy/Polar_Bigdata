@@ -1,0 +1,6 @@
+row,method,rmse_cm,source,reducible_sq_cm2
+대회 설정,"Stefan(대회, 지역 내 0.5° 블록 6겹)",14.457,"paper/claims/C4_sufficient_labels/tables/s4_residual_results.csv part D_indomain, cv spatial_block_AK, ridge, shared25, seed 0, lam 0",81.13170550632312
+대회 설정,물리 잔차 결합(대회 최선 설정),13.33,"paper/claims/C4_sufficient_labels/tables/s4_residual_results.csv 같은 조건, lam 0.75",49.8157565063231
+이번 시험,"재보정 Stefan(라벨 1000개, 분할 25회)",14.407609787730689,"paper/claims/C4_sufficient_labels/tables/wf2b_curve.csv exp wf6, Alaska, n 1000, method P1",79.70607630183623
+이번 시험,물리 잔차 결합(교차검증 λ),13.867150068298317,"paper/claims/C4_sufficient_labels/tables/wf2b_curve.csv exp wf6, Alaska, n 1000, method R1, lam −1(교차검증)",64.42470752302911
+오차 하한,알래스카 오차 하한,11.308100790746291,"paper/claims/C4_sufficient_labels/tables/lgx_floor.csv Alaska, eval",

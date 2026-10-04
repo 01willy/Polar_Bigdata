@@ -1,0 +1,161 @@
+{
+ "slide": "S10",
+ "page": 10,
+ "title": "비교한 방법",
+ "subtitle": "1부 · 방법 5계열 · 학습기 10종(주 학습기 CatBoost)",
+ "takeaway": "물리 정보를 쓰는 위치에 따라 방법을 5계열로 구분",
+ "archetype": "A7",
+ "kind": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+ "geometry_in": {
+  "x": 0.667,
+  "y": 1.35,
+  "w": 12.0,
+  "row_h": 0.75,
+  "col_w": [
+   3.0,
+   4.2,
+   4.8
+  ]
+ },
+ "columns": [
+  "방법",
+  "물리 정보의 위치",
+  "ML이 배우는 대상"
+ ],
+ "rows": [
+  [
+   "Stefan 기준선",
+   "예측 자체(E √TDD)",
+   "없음, 계수만 라벨로 보정"
+  ],
+  [
+   "물리 유사라벨 증강",
+   "학습 자료의 유사라벨",
+   "실측과 유사라벨에서 ALT"
+  ],
+  [
+   "물리 잔차 결합",
+   "기본 답(앵커)",
+   "실측과 Stefan의 차이"
+  ],
+  [
+   "물리 입력 ML",
+   "입력 열 하나",
+   "물리 열을 포함한 ALT"
+  ],
+  [
+   "직접 ML",
+   "쓰지 않음",
+   "공변량에서 ALT"
+  ]
+ ],
+ "align": [
+  "l",
+  "l",
+  "l"
+ ],
+ "accent_cells": [
+  [
+   2,
+   1
+  ]
+ ],
+ "support_line": {
+  "lead": "",
+  "text": "물리 잔차 결합의 예측은 Stefan + λ × 잔차이고, 배운 잔차가 없으면 Stefan으로 돌아감 (λ 잔차 가중)"
+ },
+ "changes_from_spec": [],
+ "style": {
+  "header_h": 0.5,
+  "top_lw": 1.25,
+  "top_c": "4A4A4A",
+  "mid_lw": 0.75,
+  "mid_c": "DDDDDD",
+  "head_pt": 18,
+  "cell_pt": 18,
+  "head_font": "Pretendard SemiBold",
+  "cell_font": "Pretendard Medium",
+  "head_color": "4A4A4A",
+  "cell_color": "111111",
+  "accent": "EA851B",
+  "col_gap": 0.18,
+  "line_h": 0.3,
+  "safety": 0.95
+ },
+ "data_sources": [
+  "docs/RESEARCH_OVERVIEW_2026-10-02.md 5절 C3(두 구조의 차이)",
+  "docs/QA_FINAL_REVIEW_2026-10-02.md 0절 기호 표",
+  "paper/claims/C1_label0_safety/README.md 2.1(학습기 10종)"
+ ],
+ "wrapped_header": [
+  [
+   "방법"
+  ],
+  [
+   "물리 정보의 위치"
+  ],
+  [
+   "ML이 배우는 대상"
+  ]
+ ],
+ "wrapped_rows": [
+  [
+   [
+    "Stefan 기준선"
+   ],
+   [
+    "예측 자체(E √TDD)"
+   ],
+   [
+    "없음, 계수만 라벨로 보정"
+   ]
+  ],
+  [
+   [
+    "물리 유사라벨 증강"
+   ],
+   [
+    "학습 자료의 유사라벨"
+   ],
+   [
+    "실측과 유사라벨에서 ALT"
+   ]
+  ],
+  [
+   [
+    "물리 잔차 결합"
+   ],
+   [
+    "기본 답(앵커)"
+   ],
+   [
+    "실측과 Stefan의 차이"
+   ]
+  ],
+  [
+   [
+    "물리 입력 ML"
+   ],
+   [
+    "입력 열 하나"
+   ],
+   [
+    "물리 열을 포함한 ALT"
+   ]
+  ],
+  [
+   [
+    "직접 ML"
+   ],
+   [
+    "쓰지 않음"
+   ],
+   [
+    "공변량에서 ALT"
+   ]
+  ]
+ ],
+ "height_in": 4.25,
+ "max_lines_per_cell": 2,
+ "issues": []
+}

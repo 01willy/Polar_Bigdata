@@ -1,0 +1,7 @@
+interval,method,n,value_cm,verdict4,source,ci_lo,ci_hi,lena_cm,canada_cm
+0,원천 계수 Stefan,0,0.0,정의상 0,기준 방법 자체,,,,
+3–10,재보정과 저가중 잔차,3,0.1768307216745633,동등,"data/processed/paper_figs/pool_fixed_curve.csv edition E2_LenaCanada_all_n, method R1, lam 0.25, baseline P0, scope MEAN, n 3",-0.2141351179499151,0.3752373573363199,,
+3–10,재보정과 저가중 잔차,10,0.7814106448779916,미결정,"data/processed/paper_figs/pool_fixed_curve.csv edition E2_LenaCanada_all_n, method R1, lam 0.25, baseline P0, scope MEAN, n 10",-0.0292799619752128,1.1967182915084056,,
+40–160,교차검증 선정,40,0.5538919413713634,"새 집계, 판정 없음","results/rescale_wf/data/processed/wf/wf_curve.csv exp wf4, method W, mode x, target Lena·Canada, n 40, d_p0 두 지역 단순 평균",,,0.2041198972633036,0.9036639854794232
+40–160,교차검증 선정,160,0.18489426837861214,"새 집계, 판정 없음","results/rescale_wf/data/processed/wf/wf_curve.csv exp wf4, method W, mode x, target Lena·Canada, n 160, d_p0 두 지역 단순 평균",,,0.023461720987834,0.3463268157693903
+전량,교차검증 선정,-1,-0.0009480440567902482,"새 집계, 판정 없음","results/rescale_wf/data/processed/wf/wf_curve.csv exp wf4, method W, mode x, target Lena·Canada, n -1, d_p0 두 지역 단순 평균",,,-0.3214973488988349,0.3196012607852544

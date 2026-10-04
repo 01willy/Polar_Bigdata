@@ -1,0 +1,1091 @@
+{
+ "charts": {
+  "S03": {
+   "file": "deck/assets/paper_report/S03_timeline.png",
+   "source_data": "deck/assets/paper_report/source_data/S03_timeline.csv",
+   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "size_in": [
+    12.0,
+    5.2
+   ],
+   "size_px": [
+    3600,
+    1560
+   ],
+   "slide": "S03",
+   "page": 3,
+   "archetype": "A2",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.3,
+    "w": 12.0,
+    "h": 5.2
+   },
+   "sources": [
+    "paper/registry/experiments.csv",
+    "git log 2678100(2026-10-04 14:22:39 +0900)"
+   ],
+   "notes": [
+    "줄 간격 0.084 in, 원 5.5 pt(8 pt 원 지름 0.111 in 는 같은 날 묶음 12개를 겹침 없이 쌓지 못해 줄임)",
+    "행별 줄 수 {'H0': 9, 'H1': 2, 'H2-5': 3, 'T': 8, 'W': 12, 'X': 10}",
+    "범위·나열 날짜는 시작과 끝, '2026-08(≤2026-08-31)'은 끝점만, 추가 실험은 등록 시각",
+    "대체·폐기·미실행(superseded, discarded, not run)은 회색 선과 회색 원"
+   ],
+   "audit": {
+    "fails": [],
+    "sizes": [
+     16.0,
+     18.0
+    ],
+    "fonts": [
+     "Pretendard-Medium.otf"
+    ],
+    "n_text": 15,
+    "chars": 73,
+    "overlaps": [],
+    "clipped": [],
+    "loose_numbers": [],
+    "codes": [],
+    "dash": [],
+    "thin": [],
+    "boxed": 0,
+    "tick_gap": []
+   }
+  },
+  "S06": {
+   "file": "deck/assets/paper_report/S06_spatial_scale.png",
+   "source_data": "deck/assets/paper_report/source_data/S06_spatial_scale.csv",
+   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "size_in": [
+    7.9,
+    4.9
+   ],
+   "size_px": [
+    2370,
+    1470
+   ],
+   "slide": "S06",
+   "page": 6,
+   "archetype": "A3",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.3,
+    "w": 7.9,
+    "h": 4.9
+   },
+   "sources": [
+    "docs/QA_FINAL_REVIEW_2026-10-02.md Q8 표",
+    "docs/QA_FOLLOWUP_2026-10-04.md 3.4 표(지형·SAR 정정)",
+    "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.4"
+   ],
+   "notes": [
+    "값은 문서 표에서 옮겼다(원천 CSV 없음). 라벨 원자료는 '점(수 m)'이라 문서의 묶음 단위 11 m 로 찍었다",
+    "ERA5-Land 0.1° 는 남북 11,100 m 로 찍었다. SAR 은 PolSAR 150 m 창(InSAR 창 미확인)",
+    "스펙 높이 5.1 in 를 4.9 in 로 줄여 보조 표와 높이를 맞췄다(A3 규칙, tables/S06_table.json)"
+   ],
+   "audit": {
+    "fails": [],
+    "sizes": [
+     16.0,
+     18.0
+    ],
+    "fonts": [
+     "Pretendard-Medium.otf"
+    ],
+    "n_text": 15,
+    "chars": 97,
+    "overlaps": [],
+    "clipped": [],
+    "loose_numbers": [],
+    "codes": [],
+    "dash": [],
+    "thin": [],
+    "boxed": 0,
+    "tick_gap": []
+   }
+  },
+  "S08": {
+   "file": "deck/assets/paper_report/S08_validation_ladder.png",
+   "source_data": "deck/assets/paper_report/source_data/S08_validation_ladder.csv",
+   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "size_in": [
+    12.0,
+    5.1
+   ],
+   "size_px": [
+    3600,
+    1530
+   ],
+   "slide": "S08",
+   "page": 8,
+   "archetype": "A2",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.3,
+    "w": 12.0,
+    "h": 5.1
+   },
+   "sources": [
+    "paper/claims/C7_evaluation_design/tables/lgv_tests.csv",
+    "paper/claims/C7_evaluation_design/tables/lgv_metrics.csv"
+   ],
+   "notes": [
+    "다섯 지역 등가중 평균(MEAN5). 직접 ML = CatBoost(catboost_lo)",
+    "Stefan 최소제곱은 원천 계수 Stefan 의 색과 선(#4d4d4d 실선)"
+   ],
+   "audit": {
+    "fails": [],
+    "sizes": [
+     16.0,
+     18.0
+    ],
+    "fonts": [
+     "Pretendard-Medium.otf",
+     "Pretendard-SemiBold.otf"
+    ],
+    "n_text": 15,
+    "chars": 78,
+    "overlaps": [],
+    "clipped": [],
+    "loose_numbers": [],
+    "codes": [],
+    "dash": [],
+    "thin": [],
+    "boxed": 0,
+    "tick_gap": []
+   }
+  },
+  "S09": {
+   "file": "deck/assets/paper_report/S09_stefan_concept.png",
+   "source_data": "deck/assets/paper_report/source_data/S09_stefan_concept.csv",
+   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "size_in": [
+    12.0,
+    4.75
+   ],
+   "size_px": [
+    3600,
+    1425
+   ],
+   "slide": "S09",
+   "page": 9,
+   "archetype": "A8",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.3,
+    "w": 12.0,
+    "h": 4.75
+   },
+   "sources": [
+    "data/processed/fidelity_base_v3.csv",
+    "data/processed/paper_figs/fig1_source.csv",
+    "docs/EXPERIMENT_PLAN_LG_2026-09-29.md §3(E_n = (n·E_ls + κ·E0)/(n + κ), κ = 10)"
+   ],
+   "notes": [
+    "예시 라벨 10개는 레나델타 행 3037개에서 RandomState(0) 추출(판정과 무관한 예시). E_ls 1.352, 재보정 E 1.486, 원천 E0 1.619",
+    "세로축 0–120 cm(아래로 깊어짐). 범위 밖 행 35개는 아래 축 끝 삼각 표지",
+    "잔차 선분은 서로 다른 √TDD 를 가진 라벨 가운데 4개. '잔차' 라벨은 가장 긴 선분 옆",
+    "기호 열쇠 줄('E Stefan 계수, TDD 융해 도일')은 그림 밖 슬라이드 글(A8, y 6.10)"
+   ],
+   "audit": {
+    "fails": [],
+    "sizes": [
+     16.0,
+     18.0
+    ],
+    "fonts": [
+     "Pretendard-Medium.otf",
+     "Pretendard-SemiBold.otf"
+    ],
+    "n_text": 15,
+    "chars": 71,
+    "overlaps": [],
+    "clipped": [],
+    "loose_numbers": [],
+    "codes": [],
+    "dash": [],
+    "thin": [],
+    "boxed": 0,
+    "tick_gap": []
+   }
+  },
+  "S20": {
+   "file": "deck/assets/paper_report/S20_contest_vs_strict.png",
+   "source_data": "deck/assets/paper_report/source_data/S20_contest_vs_strict.csv",
+   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "size_in": [
+    12.0,
+    4.6
+   ],
+   "size_px": [
+    3600,
+    1380
+   ],
+   "slide": "S20",
+   "page": 20,
+   "archetype": "A2",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.3,
+    "w": 12.0,
+    "h": 4.6
+   },
+   "sources": [
+    "paper/claims/C4_sufficient_labels/tables/s4_residual_results.csv",
+    "paper/claims/C4_sufficient_labels/tables/wf2b_curve.csv",
+    "paper/claims/C4_sufficient_labels/tables/lgx_floor.csv"
+   ],
+   "notes": [
+    "줄일 수 있는 오차 제곱 감소 대회 38.60%, 이번 19.17%(결론 줄 39%, 19% 와 일치 확인)",
+    "직접 라벨은 '재보정 Stefan'을 더했다(스펙의 'Stefan' 하나로는 두 기준 점의 색이 구분되지 않음)"
+   ],
+   "audit": {
+    "fails": [],
+    "sizes": [
+     16.0,
+     18.0
+    ],
+    "fonts": [
+     "Pretendard-Medium.otf",
+     "Pretendard-SemiBold.otf"
+    ],
+    "n_text": 12,
+    "chars": 51,
+    "overlaps": [],
+    "clipped": [],
+    "loose_numbers": [],
+    "codes": [],
+    "dash": [],
+    "thin": [],
+    "boxed": 0,
+    "tick_gap": []
+   }
+  },
+  "S24": {
+   "file": "deck/assets/paper_report/S24_independent_forest.png",
+   "source_data": "deck/assets/paper_report/source_data/S24_independent_forest.csv",
+   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "size_in": [
+    5.85,
+    4.8
+   ],
+   "size_px": [
+    1755,
+    1440
+   ],
+   "slide": "S24",
+   "page": 24,
+   "archetype": "A5(오른쪽 그래프)",
+   "geometry_in": {
+    "x": 6.817,
+    "y": 1.55,
+    "w": 5.85,
+    "h": 4.8
+   },
+   "sources": [
+    "paper/claims/SI_learners_new_regions/tables/lgd_tests_lic.csv"
+   ],
+   "notes": [
+    "행을 비교 기준·라벨 수 두 묶음 머리와 지역 행으로 나누었다(같은 문구 반복 줄임, 행 이름 4단어 이하). 스펙 행 4개와 같은 대비",
+    "러시아 중부 전량은 L38 (b) 판 CI(스펙 numbers 지시)",
+    "5지역 라벨 10개는 compare_pool 행(판정어 '동등'이 붙은 판)",
+    "왼쪽 지도는 v3 Fig 1a 판 재사용(이 스크립트 범위 밖)"
+   ],
+   "audit": {
+    "fails": [],
+    "sizes": [
+     16.0,
+     18.0
+    ],
+    "fonts": [
+     "Pretendard-Medium.otf",
+     "Pretendard-SemiBold.otf"
+    ],
+    "n_text": 16,
+    "chars": 107,
+    "overlaps": [],
+    "clipped": [],
+    "loose_numbers": [],
+    "codes": [],
+    "dash": [],
+    "thin": [],
+    "boxed": 0,
+    "tick_gap": []
+   }
+  },
+  "S25": {
+   "file": "deck/assets/paper_report/S25_coverage.png",
+   "source_data": "deck/assets/paper_report/source_data/S25_coverage.csv",
+   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "size_in": [
+    12.0,
+    4.8
+   ],
+   "size_px": [
+    3600,
+    1440
+   ],
+   "slide": "S25",
+   "page": 25,
+   "archetype": "A2",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.3,
+    "w": 12.0,
+    "h": 4.8
+   },
+   "sources": [
+    "paper/claims/SI_uncertainty/tables/h4__c2_coverage.csv",
+    "paper/claims/SI_uncertainty/tables/m1__transfer_uq_summary.csv",
+    "paper/claims/SI_uncertainty/tables/lgu__lgu_b_tests.csv"
+   ],
+   "notes": [
+    "점추정만 그린다(LGU 와 CI 를 나란히 두지 않음)",
+    "행 이름 '생성 모델 구간'을 '생성 분위 구간'으로 바꾸었다(SI_uncertainty README 1.2 용어 축소)",
+    "목표 0.90 은 눈금 0.9 와 '목표' 표지로 보인다(그림 안 수치 0개)",
+    "스펙 노트 대본의 '가로축은 구간 폭, 세로축은 실제 포함률'은 이 차트와 맞지 않는다(가로축 포함률, 세로 구간 종류)"
+   ],
+   "audit": {
+    "fails": [],
+    "sizes": [
+     16.0,
+     18.0
+    ],
+    "fonts": [
+     "Pretendard-Medium.otf",
+     "Pretendard-SemiBold.otf"
+    ],
+    "n_text": 14,
+    "chars": 58,
+    "overlaps": [],
+    "clipped": [],
+    "loose_numbers": [],
+    "codes": [],
+    "dash": [],
+    "thin": [],
+    "boxed": 0,
+    "tick_gap": []
+   }
+  },
+  "S26": {
+   "file": "deck/assets/paper_report/S26_workflow_path.png",
+   "source_data": "deck/assets/paper_report/source_data/S26_workflow_path.csv",
+   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "size_in": [
+    12.0,
+    5.2
+   ],
+   "size_px": [
+    3600,
+    1560
+   ],
+   "slide": "S26",
+   "page": 26,
+   "archetype": "A9",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.3,
+    "w": 12.0,
+    "h": 5.2
+   },
+   "sources": [
+    "data/processed/paper_figs/pool_fixed_curve.csv",
+    "results/rescale_wf/data/processed/wf/wf_curve.csv",
+    "docs/RESEARCH_CLAIMS_WORKFLOW_2026-10-01.md 4절",
+    "FIGURE_SPEC_v3.md 9.3 d"
+   ],
+   "notes": [
+    "경로 그림(12.00 × 3.30)과 띠 머리·관측 띠·진단 띠를 한 PNG(12.00 × 5.20)에 그려 x 기준을 공유한다",
+    "세로축은 원천 계수 Stefan 대비 오차 변화(cm). 축 이름에 기준 방법을 넣지 않은 이유는 n = 0 직접 라벨과의 문구 반복(H13)을 피하기 위함",
+    "라벨 3·10 은 레나델타·캐나다 풀 층화 평균(동등, 미결정). 40·160·전량은 교차검증 선정의 두 지역 단순 평균(새 집계, 판정 없음). 320–1000 은 이 풀에서 시험하지 않아 선분 없음",
+    "이 풀에서는 경로가 0 위에 놓인다(캐나다 재보정 오차 증가). y 기준·풀 선택은 사용자 결정(그림 명세 D-13)",
+    "텍스트 객체 13개(구간 이름 5, 방법 라벨 3, 관측 1, 진단 2, 띠 머리 2). 축 제목 2개와 눈금은 별도",
+    "배치 띠 '분산 배치'는 추가 실험(사전 지정 배치 절차) 결과 뒤 다시 본다(스펙 flags)"
+   ],
+   "audit": {
+    "fails": [],
+    "sizes": [
+     16.0,
+     18.0
+    ],
+    "fonts": [
+     "Pretendard-Medium.otf",
+     "Pretendard-SemiBold.otf"
+    ],
+    "n_text": 19,
+    "chars": 90,
+    "overlaps": [],
+    "clipped": [],
+    "loose_numbers": [],
+    "codes": [],
+    "dash": [],
+    "thin": [],
+    "boxed": 0,
+    "tick_gap": []
+   }
+  },
+  "S27": {
+   "file": "deck/assets/paper_report/S27_workflow_small.png",
+   "source_data": "deck/assets/paper_report/source_data/S27_workflow_small.csv",
+   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "size_in": [
+    3.8,
+    3.4
+   ],
+   "size_px": [
+    1140,
+    1020
+   ],
+   "slide": "S27",
+   "page": 27,
+   "archetype": "A10(열 1 그림)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.3,
+    "w": 3.8,
+    "h": 3.4
+   },
+   "sources": [
+    "data/processed/paper_figs/pool_fixed_curve.csv",
+    "results/rescale_wf/data/processed/wf/wf_curve.csv"
+   ],
+   "notes": [
+    "S26 과 같은 값·같은 색. 눈금 라벨은 3, 10, 40, 1000(160·320 은 눈금만, 라벨 간격 0.10 in 규칙)과 0·전량",
+    "띠(다음 관측, 진단)는 축소판에 두지 않는다. 열 2(알래스카 보정 지도)·열 3(캐나다 선정 지점 지도)은 v3 그림 범위"
+   ],
+   "audit": {
+    "fails": [],
+    "sizes": [
+     16.0,
+     18.0
+    ],
+    "fonts": [
+     "Pretendard-Medium.otf",
+     "Pretendard-SemiBold.otf"
+    ],
+    "n_text": 14,
+    "chars": 58,
+    "overlaps": [],
+    "clipped": [],
+    "loose_numbers": [],
+    "codes": [],
+    "dash": [],
+    "thin": [],
+    "boxed": 0,
+    "tick_gap": []
+   }
+  },
+  "S29": {
+   "file": "deck/assets/paper_report/S29_word_budget.png",
+   "source_data": "deck/assets/paper_report/source_data/S29_word_budget.csv",
+   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "size_in": [
+    7.9,
+    4.75
+   ],
+   "size_px": [
+    2370,
+    1425
+   ],
+   "slide": "S29",
+   "page": 29,
+   "archetype": "A3",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.3,
+    "w": 7.9,
+    "h": 4.75
+   },
+   "sources": [
+    "docs/research/2026-10-04/scirep_format_and_drafts.md 3.2",
+    "paper/manuscript/MANUSCRIPT_SPEC.md 1.1"
+   ],
+   "notes": [
+    "스펙 높이 4.3 in 를 4.75 in 로 늘렸다(근거 블록 4.5 in 이상, 보조 표와 높이 일치)",
+    "고찰 현재 값은 골격 판이라 직접 라벨 '골격'"
+   ],
+   "audit": {
+    "fails": [],
+    "sizes": [
+     16.0,
+     18.0
+    ],
+    "fonts": [
+     "Pretendard-Medium.otf",
+     "Pretendard-SemiBold.otf"
+    ],
+    "n_text": 13,
+    "chars": 36,
+    "overlaps": [],
+    "clipped": [],
+    "loose_numbers": [],
+    "codes": [],
+    "dash": [],
+    "thin": [],
+    "boxed": 0,
+    "tick_gap": []
+   }
+  },
+  "S32": {
+   "file": "deck/assets/paper_report/S32_registered_order.png",
+   "source_data": "deck/assets/paper_report/source_data/S32_registered_order.csv",
+   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "size_in": [
+    12.0,
+    5.2
+   ],
+   "size_px": [
+    3600,
+    1560
+   ],
+   "slide": "S32",
+   "page": 32,
+   "archetype": "A2",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.3,
+    "w": 12.0,
+    "h": 5.2
+   },
+   "sources": [
+    "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 0.1, 5, 6"
+   ],
+   "notes": [
+    "실험 코드(XA–XJ)는 CSV 의 experiment_spec_only 열에만 둔다(보이는 글 0)",
+    "두 번 실행되는 묶음의 두 번째 점에 '학습형 정책', '2단계', 첫 점에 '1단계' 표지"
+   ],
+   "audit": {
+    "fails": [],
+    "sizes": [
+     16.0,
+     18.0
+    ],
+    "fonts": [
+     "Pretendard-Medium.otf",
+     "Pretendard-SemiBold.otf"
+    ],
+    "n_text": 39,
+    "chars": 156,
+    "overlaps": [],
+    "clipped": [],
+    "loose_numbers": [],
+    "codes": [],
+    "dash": [],
+    "thin": [],
+    "boxed": 0,
+    "tick_gap": []
+   }
+  },
+  "AP3": {
+   "file": "deck/assets/paper_report/AP3_label0_baselines.png",
+   "source_data": "deck/assets/paper_report/source_data/AP3_label0_baselines.csv",
+   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "size_in": [
+    12.0,
+    5.2
+   ],
+   "size_px": [
+    3600,
+    1560
+   ],
+   "slide": "AP3",
+   "page": "부록 3",
+   "archetype": "A2",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.3,
+    "w": 12.0,
+    "h": 5.2
+   },
+   "sources": [
+    "paper/claims/C1_label0_safety/tables/lgx_tests.csv",
+    "paper/claims/C1_label0_safety/tables/lgw_bundle.csv"
+   ],
+   "notes": [
+    "행을 비교 기준 두 묶음으로 나누었다(행 이름 4단어 이하). 스펙의 4행과 같은 대비",
+    "기존 ALT 지도 행은 값 없이 '결과 대기' 표지(추가 실험 자리표시는 CSV 의 filter 열)"
+   ],
+   "audit": {
+    "fails": [],
+    "sizes": [
+     16.0,
+     18.0
+    ],
+    "fonts": [
+     "Pretendard-Medium.otf",
+     "Pretendard-SemiBold.otf"
+    ],
+    "n_text": 16,
+    "chars": 106,
+    "overlaps": [],
+    "clipped": [],
+    "loose_numbers": [],
+    "codes": [],
+    "dash": [],
+    "thin": [],
+    "boxed": 0,
+    "tick_gap": []
+   }
+  },
+  "AP5": {
+   "file": "deck/assets/paper_report/AP5_cv_schemes.png",
+   "source_data": "deck/assets/paper_report/source_data/AP5_cv_schemes.csv",
+   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "size_in": [
+    12.0,
+    5.2
+   ],
+   "size_px": [
+    3600,
+    1560
+   ],
+   "slide": "AP5",
+   "page": "부록 5",
+   "archetype": "A2",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.3,
+    "w": 12.0,
+    "h": 5.2
+   },
+   "sources": [
+    "paper/claims/C7_evaluation_design/tables/cv_scheme_comparison.csv",
+    "docs/QA_FINAL_REVIEW_2026-10-02.md Q15 표"
+   ],
+   "notes": [
+    "계열 4개가 0.1–0.3 cm 안에 몰린 행이 있어 직접 라벨 대신 열쇠 한 줄(4항목)과 행 안 세로 어긋남을 썼다",
+    "직접 CatBoost 와 선형 ML 은 직접 ML 색(#6b7280)을 공유하고 선 모양(파선, 점선)으로 구분한다",
+    "Stefan 은 지역 내 최소제곱 계수, 원천 계수 Stefan 의 색(#4d4d4d)"
+   ],
+   "audit": {
+    "fails": [],
+    "sizes": [
+     16.0,
+     18.0
+    ],
+    "fonts": [
+     "Pretendard-Medium.otf"
+    ],
+    "n_text": 15,
+    "chars": 65,
+    "overlaps": [],
+    "clipped": [],
+    "loose_numbers": [],
+    "codes": [],
+    "dash": [],
+    "thin": [],
+    "boxed": 0,
+    "tick_gap": []
+   }
+  },
+  "AP8": {
+   "file": "deck/assets/paper_report/AP8_nn_tuning.png",
+   "source_data": "deck/assets/paper_report/source_data/AP8_nn_tuning.csv",
+   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "size_in": [
+    12.0,
+    5.2
+   ],
+   "size_px": [
+    3600,
+    1560
+   ],
+   "slide": "AP8",
+   "page": "부록 8",
+   "archetype": "A2(작은 다중 그림 4개, 같은 x)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.3,
+    "w": 12.0,
+    "h": 5.2
+   },
+   "sources": [
+    "paper/claims/C5_method_selection/tables/lgfn_tests.csv"
+   ],
+   "notes": [
+    "학습기 4패널 × 라벨 수 3행 × 구조 2계열(직접 ML, 물리 잔차 결합 λ 0.25 주 대비)",
+    "점 색은 대비가 속한 방법(직접 ML, 물리 잔차 결합)을 뜻한다. λ 1.0 보조 대비는 CSV 밖(스펙 노트 참고 줄에 FT-T −0.76)",
+    "N4 의 20점 가운데 14점은 그림에 넣지 않는다(서술, 노트)"
+   ],
+   "audit": {
+    "fails": [],
+    "sizes": [
+     16.0,
+     18.0
+    ],
+    "fonts": [
+     "Pretendard-Medium.otf",
+     "Pretendard-SemiBold.otf"
+    ],
+    "n_text": 30,
+    "chars": 116,
+    "overlaps": [],
+    "clipped": [],
+    "loose_numbers": [],
+    "codes": [],
+    "dash": [],
+    "thin": [],
+    "boxed": 0,
+    "tick_gap": []
+   }
+  }
+ },
+ "tables": {
+  "S02": {
+   "file": "deck/assets/paper_report/tables/S02_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.45,
+    "w": 7.9,
+    "row_h": 0.75,
+    "col_w": [
+     1.7,
+     3.1,
+     3.1
+    ]
+   },
+   "height_in": 2.75,
+   "issues": [],
+   "changes_from_spec": []
+  },
+  "S04": {
+   "file": "deck/assets/paper_report/tables/S04_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.4,
+    "w": 12.0,
+    "row_h": 0.75,
+    "col_w": [
+     2.4,
+     8.1,
+     1.5
+    ]
+   },
+   "height_in": 4.25,
+   "issues": [],
+   "changes_from_spec": []
+  },
+  "S06": {
+   "file": "deck/assets/paper_report/tables/S06_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 8.867,
+    "y": 1.8,
+    "w": 3.8,
+    "row_h": 0.79,
+    "col_w": [
+     2.6,
+     1.2
+    ]
+   },
+   "height_in": 4.45,
+   "issues": [],
+   "changes_from_spec": [
+    "y 1.30 → 1.80, 행 높이 0.75 → 0.79 in(A3: 보조 요소를 주 그림 자료 영역 위끝과 아래끝에 맞춤)"
+   ]
+  },
+  "S10": {
+   "file": "deck/assets/paper_report/tables/S10_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.35,
+    "w": 12.0,
+    "row_h": 0.75,
+    "col_w": [
+     3.0,
+     4.2,
+     4.8
+    ]
+   },
+   "height_in": 4.25,
+   "issues": [],
+   "changes_from_spec": []
+  },
+  "S29": {
+   "file": "deck/assets/paper_report/tables/S29_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 8.867,
+    "y": 1.8,
+    "w": 3.8,
+    "row_h": 0.76,
+    "col_w": [
+     1.2,
+     2.6
+    ]
+   },
+   "height_in": 4.3,
+   "issues": [],
+   "changes_from_spec": [
+    "'200단어 이하, 계획 199(판 B)와 196(판 A)' → '200단어 이하, 계획 196–199'(18 pt, 열 2.6 in 에서 두 줄 안. 'v3' 는 보이는 글의 내부 판 이름이라 뺌, 지침 H3. 판 A·B 구분은 노트)",
+    "'350단어 이하, v3 초안 268–343' → '350단어 이하, 초안 268–343'(18 pt, 열 2.6 in 에서 두 줄 안. 'v3' 는 보이는 글의 내부 판 이름이라 뺌, 지침 H3. 판 A·B 구분은 노트)",
+    "y 1.30 → 1.80, 행 높이 0.80 → 0.76 in(A3 높이 일치, 차트 4.75 in)"
+   ]
+  },
+  "S30": {
+   "file": "deck/assets/paper_report/tables/S30_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.35,
+    "w": 12.0,
+    "row_h": 0.75,
+    "col_w": [
+     2.8,
+     3.9,
+     2.0,
+     3.3
+    ]
+   },
+   "height_in": 4.25,
+   "issues": [],
+   "changes_from_spec": []
+  },
+  "S31": {
+   "file": "deck/assets/paper_report/tables/S31_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.35,
+    "w": 12.0,
+    "row_h": 1.0,
+    "col_w": [
+     2.4,
+     3.4,
+     2.9,
+     3.3
+    ]
+   },
+   "height_in": 3.5,
+   "issues": [],
+   "changes_from_spec": []
+  },
+  "S33": {
+   "file": "deck/assets/paper_report/tables/S33_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.35,
+    "w": 12.0,
+    "row_h": 1.0,
+    "col_w": [
+     3.0,
+     5.6,
+     3.4
+    ]
+   },
+   "height_in": 4.5,
+   "issues": [],
+   "changes_from_spec": []
+  },
+  "S34": {
+   "file": "deck/assets/paper_report/tables/S34_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.35,
+    "w": 12.0,
+    "row_h": 0.8,
+    "col_w": [
+     3.2,
+     5.0,
+     3.8
+    ]
+   },
+   "height_in": 4.5,
+   "issues": [],
+   "changes_from_spec": []
+  },
+  "AP2": {
+   "file": "deck/assets/paper_report/tables/AP2_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.35,
+    "w": 12.0,
+    "row_h": 0.75,
+    "col_w": [
+     2.8,
+     9.2
+    ]
+   },
+   "height_in": 4.25,
+   "issues": [],
+   "changes_from_spec": []
+  },
+  "AP4": {
+   "file": "deck/assets/paper_report/tables/AP4_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.35,
+    "w": 12.0,
+    "row_h": 1.0,
+    "col_w": [
+     5.0,
+     7.0
+    ]
+   },
+   "height_in": 3.5,
+   "issues": [],
+   "changes_from_spec": []
+  },
+  "AP6": {
+   "file": "deck/assets/paper_report/tables/AP6_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.35,
+    "w": 12.0,
+    "row_h": 0.9,
+    "col_w": [
+     2.4,
+     3.2,
+     2.8,
+     3.6
+    ]
+   },
+   "height_in": 5.0,
+   "issues": [],
+   "changes_from_spec": []
+  },
+  "AP7": {
+   "file": "deck/assets/paper_report/tables/AP7_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.35,
+    "w": 12.0,
+    "row_h": 0.9,
+    "col_w": [
+     2.6,
+     3.0,
+     2.8,
+     3.6
+    ]
+   },
+   "height_in": 5.0,
+   "issues": [],
+   "changes_from_spec": []
+  },
+  "AP9": {
+   "file": "deck/assets/paper_report/tables/AP9_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.35,
+    "w": 12.0,
+    "row_h": 0.8,
+    "col_w": [
+     3.4,
+     5.6,
+     3.0
+    ]
+   },
+   "height_in": 4.5,
+   "issues": [],
+   "changes_from_spec": []
+  },
+  "AP10": {
+   "file": "deck/assets/paper_report/tables/AP10_table.json",
+   "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+   "geometry_in": {
+    "x": 0.667,
+    "y": 1.35,
+    "w": 12.0,
+    "row_h": 0.8,
+    "col_w": [
+     4.6,
+     7.4
+    ]
+   },
+   "height_in": 4.5,
+   "issues": [],
+   "changes_from_spec": []
+  }
+ },
+ "values_check": {
+  "file": "deck/assets/paper_report/values_check.txt",
+  "ok": 47,
+  "mismatch": 0
+ },
+ "meta": {
+  "generated": "2026-10-04 21:26",
+  "script": "deck/mk_paper_report_figs.py",
+  "spec": "deck/deck_spec_paper_report.json",
+  "chart_rule": "지침 5.6 경로 B, 배치 크기 그대로 300 dpi, Pretendard Medium·SemiBold, 축 18 pt, 눈금·직접 라벨 16 pt",
+  "format_choice": "차트 14개 모두 경로 B PNG(한글 포함, 지침 5.6: 경로 A EMF 는 한글이 Noto Sans CJK 로 대체되어 쓰지 않음). 표 15개는 python-pptx 원어 헤어라인 표(편집 가능). python-pptx 원어 차트는 쓰지 않음(Pretendard 축·눈금 글자와 방법 색·선 모양·두 CI 막대를 원어 차트 객체로 재현할 수 없음)",
+  "table_rule": "지침 3.2, 원형 A7: 원어 헤어라인 표, 18 pt, 채움 0, 세로선 0",
+  "not_made": {
+   "S28": "오른쪽 '라벨 수 계급별 면적 비율'은 [DECISION](지침 8절 13). 대체안(Fig 1a 슬라이드판 + 굵은 리드 줄)이 기본이라 차트를 만들지 않았다",
+   "S27_col2_col3": "결론 쪽 열 2(알래스카 보정 지도, Fig 7b 판)·열 3(캐나다 선정 지점 지도, Fig 5 판)은 v3 그림 범위. 열 1 축소판만 S27_workflow_small.png",
+   "S16_S18": "왼쪽 SI 지도 슬라이드판(대상 중심 좌표 [미확인])과 오른쪽 Fig 4b·4c 는 v3 그림 범위",
+   "v3_panels": "S01, S02 보조, S05, S07, S11–S15, S17, S19, S21–S23, AP1 의 근거는 v3 논문 그림 패널의 슬라이드판(medium='slide')으로 이 스크립트 범위 밖"
+  }
+ },
+ "preview": {
+  "pptx": "deck/assets/paper_report/preview_evidence.pptx",
+  "pdf": "deck/assets/paper_report/preview/preview_evidence.pdf",
+  "pages": [
+   "S02",
+   "S03",
+   "S04",
+   "S06",
+   "S08",
+   "S09",
+   "S10",
+   "S20",
+   "S24",
+   "S25",
+   "S26",
+   "S27",
+   "S29",
+   "S30",
+   "S31",
+   "S32",
+   "S33",
+   "S34",
+   "AP2",
+   "AP3",
+   "AP4",
+   "AP5",
+   "AP6",
+   "AP7",
+   "AP8",
+   "AP9",
+   "AP10"
+  ],
+  "png": [
+   "deck/assets/paper_report/preview/page-01.png",
+   "deck/assets/paper_report/preview/page-02.png",
+   "deck/assets/paper_report/preview/page-03.png",
+   "deck/assets/paper_report/preview/page-04.png",
+   "deck/assets/paper_report/preview/page-05.png",
+   "deck/assets/paper_report/preview/page-06.png",
+   "deck/assets/paper_report/preview/page-07.png",
+   "deck/assets/paper_report/preview/page-08.png",
+   "deck/assets/paper_report/preview/page-09.png",
+   "deck/assets/paper_report/preview/page-10.png",
+   "deck/assets/paper_report/preview/page-11.png",
+   "deck/assets/paper_report/preview/page-12.png",
+   "deck/assets/paper_report/preview/page-13.png",
+   "deck/assets/paper_report/preview/page-14.png",
+   "deck/assets/paper_report/preview/page-15.png",
+   "deck/assets/paper_report/preview/page-16.png",
+   "deck/assets/paper_report/preview/page-17.png",
+   "deck/assets/paper_report/preview/page-18.png",
+   "deck/assets/paper_report/preview/page-19.png",
+   "deck/assets/paper_report/preview/page-20.png",
+   "deck/assets/paper_report/preview/page-21.png",
+   "deck/assets/paper_report/preview/page-22.png",
+   "deck/assets/paper_report/preview/page-23.png",
+   "deck/assets/paper_report/preview/page-24.png",
+   "deck/assets/paper_report/preview/page-25.png",
+   "deck/assets/paper_report/preview/page-26.png",
+   "deck/assets/paper_report/preview/page-27.png"
+  ]
+ }
+}

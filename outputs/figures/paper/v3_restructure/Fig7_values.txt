@@ -1,0 +1,175 @@
+Fig 7 v3 값 대조와 점검 기록
+생성: scripts/4_visualization/paper_v3/fig7.py, 그림 명세 FIGURE_SPEC_v3.md 9절, 2026-10-04
+규칙: 기대값은 paper/claims/*/README.md 의 소수 둘째 자리 값이다. 계산값을 둘째 자리로 반올림해 같으면 OK.
+
+[1] 패널 a, c: 원천 값과 claims README 대조(delta, 셀 가중 CI, 블록 등가중 delta, 블록 등가중 CI)
+  OK  a Alaska R1 n200 delta / cell CI / block CI: 계산 -0.1754, -0.3435, +0.0144, -0.2462, -0.4214, -0.0690 | 기대 (-0.18, -0.34, 0.01, -0.25, -0.42, -0.07) | C4 README 2.1 E1.R1.n200
+  OK  a Alaska R1 n500: 계산 -0.3897, -0.5447, -0.2125, -0.3933, -0.5724, -0.2111 | 기대 (-0.39, -0.54, -0.21, -0.39, -0.57, -0.21) | C4 README 2.1 E1.R1.n500
+  OK  a Alaska R1 n1000: 계산 -0.5405, -0.6926, -0.3244, -0.5982, -0.7977, -0.4027 | 기대 (-0.54, -0.69, -0.32, -0.6, -0.8, -0.4) | C4 README 2.1 E1.R1.n1000
+  OK  a Alaska R1 all: 계산 -0.5153, -0.6984, -0.3056, -0.6761, -0.9106, -0.4440 | 기대 (-0.52, -0.7, -0.31, -0.68, -0.91, -0.44) | C4 README 2.1 E1.R1.n전량
+  OK  a Alaska D0 n200: 계산 +3.5127, +1.7139, +3.5602, -0.2083, -0.7085, +0.2952 | 기대 (3.51, 1.71, 3.56, -0.21, -0.71, 0.3) | C4 README 2.1 E1.D0.n200
+  OK  a Alaska D0 n500: 계산 +3.1639, +1.4580, +3.1953, -0.5649, -1.0796, -0.0436 | 기대 (3.16, 1.46, 3.2, -0.56, -1.08, -0.04) | C4 README 2.1 E1.D0.n500
+  OK  a Alaska D0 n1000: 계산 +2.7599, +1.1640, +2.7803, -0.6525, -1.1523, -0.1383 | 기대 (2.76, 1.16, 2.78, -0.65, -1.15, -0.14) | C4 README 2.1 E1.D0.n1000
+  OK  a Alaska D0 all: 계산 +1.2684, +0.2969, +1.3652, -1.0650, -1.5555, -0.5821 | 기대 (1.27, 0.3, 1.37, -1.06, -1.56, -0.58) | C4 README 2.1 E1.D0.n전량
+  OK  a Lena R1 n200: 계산 +0.2201, -0.7924, +0.6357, -0.1950, -0.7485, +0.3364 | 기대 (0.22, -0.79, 0.64, -0.2, -0.75, 0.34) | C4 README 2.2 E2.Lena.R1.n200
+  OK  a Lena R1 n500: 계산 +0.3366, -0.7560, +0.7789, -0.3611, -1.1584, +0.3779 | 기대 (0.34, -0.76, 0.78, -0.36, -1.16, 0.38) | C4 README 2.2 E2.Lena.R1.n500
+  OK  a Lena R1 n1000: 계산 +0.6103, -0.5658, +1.3796, -0.0777, -1.0350, +0.8109 | 기대 (0.61, -0.57, 1.38, -0.08, -1.04, 0.81) | C4 README 2.2 E2.Lena.R1.n1000
+  OK  a Lena R1 all: 계산 +0.4691, -0.5630, +1.2774, -0.1403, -1.0679, +0.7241 | 기대 (0.47, -0.56, 1.28, -0.14, -1.07, 0.72) | C4 README 2.2 E2.Lena.R1.n전량
+  OK  a Lena D0 n1000: 계산 -0.7758, -1.9379, +0.1739, -1.0779, -2.0011, -0.2085 | 기대 (-0.78, -1.94, 0.17, -1.08, -2.0, -0.21) | C4 README 2.2 E2.Lena.D0.n1000
+  OK  a Canada R1 n200: 계산 -0.4026, -1.0493, +0.1929, -0.8379, -1.3603, -0.2767 | 기대 (-0.4, -1.05, 0.19, -0.84, -1.36, -0.28) | C4 README 2.2 E2.Canada.R1.n200
+  OK  a Canada R1 all: 계산 +0.4479, -0.7309, +1.2413, -0.2311, -1.0929, +0.6536 | 기대 (0.45, -0.73, 1.24, -0.23, -1.09, 0.65) | C4 README 2.2 E2.Canada.R1.n전량
+  OK  a Canada D0 n200: 계산 -1.4952, -1.9943, -0.2447, -0.0268, -1.0271, +1.0120 | 기대 (-1.5, -1.99, -0.24, -0.03, -1.03, 1.01) | C4 README 2.2 E2.Canada.D0.n200
+  OK  a Canada D0 all: 계산 -1.5049, -2.1923, -0.1158, -0.2983, -1.4382, +0.8579 | 기대 (-1.5, -2.19, -0.12, -0.3, -1.44, 0.86) | C4 README 2.2 E2.Canada.D0.n전량
+  OK  c Alaska total: 계산 -0.5153, -0.6984, -0.3056, -0.6761, -0.9106, -0.4440 | 기대 (-0.52, -0.7, -0.31, -0.68, -0.91, -0.44) | C8 README 2.1 A1
+  OK  c Alaska between: 계산 -1.0261, -1.2963, -0.5880, -0.8899, -1.1572, -0.6118 | 기대 (-1.03, -1.3, -0.59, -0.89, -1.16, -0.61) | C8 README 2.1 A2
+  OK  c Alaska within: 계산 -0.0091, -0.0323, +0.0424, +0.0383, +0.0119, +0.0645 | 기대 (-0.01, -0.03, 0.04, 0.04, 0.01, 0.06) | C8 README 2.1 A3
+  OK  c three-region mean within: 계산 +0.0911, +0.0171, +0.3951, +0.3735, +0.2498, +0.5014 | 기대 (0.09, 0.02, 0.4, 0.37, 0.25, 0.5) | C8 README 2.4 D3
+  OK  c Lena within: 계산 +0.0493, -0.1843, +0.9247, +0.8687, +0.5109, +1.2391 | 기대 (0.05, -0.18, 0.92, 0.87, 0.51, 1.24) | C8 README 2.4 D4
+  OK  c Canada within: 계산 +0.2332, +0.1578, +0.3359, +0.2134, +0.1168, +0.3129 | 기대 (0.23, 0.16, 0.34, 0.21, 0.12, 0.31) | C8 README 2.4 D5
+  OK  c Lena total (= C4 E2.Lena.R1.n전량): 계산 +0.4691, -0.5630, +1.2774, -0.1403, -1.0679, +0.7241 | 기대 (0.47, -0.56, 1.28, -0.14, -1.07, 0.72) | C4 README 2.2
+  OK  c Canada total (= C4 E2.Canada.R1.n전량): 계산 +0.4479, -0.7309, +1.2413, -0.2311, -1.0929, +0.6536 | 기대 (0.45, -0.73, 1.24, -0.23, -1.09, 0.65) | C4 README 2.2
+
+[1b] 그림의 모든 수치와 원천 경로·행 필터(패널 a, c: delta [ci_lo, ci_hi] / delta_blockeq [lo, hi] cm)
+  a Alaska  anchor_residual  n  all: -0.5153 [-0.6984, -0.3056] / -0.6761 [-0.9106, -0.4440]; floor − recal -3.0884 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Alaska|r', contrast == 'R1(λ cv)-P1|n전량'; data/processed/lgx/lgx_floor.csv | region == 'Alaska', scope == 'eval'
+  a Alaska  anchor_residual  n  200: -0.1754 [-0.3435, +0.0144] / -0.2462 [-0.4214, -0.0690]; floor − recal -3.0892 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Alaska|r', contrast == 'R1(λ cv)-P1|n200'; data/processed/lgx/lgx_floor.csv | region == 'Alaska', scope == 'eval'
+  a Alaska  anchor_residual  n  500: -0.3897 [-0.5447, -0.2125] / -0.3933 [-0.5724, -0.2111]; floor − recal -3.0735 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Alaska|r', contrast == 'R1(λ cv)-P1|n500'; data/processed/lgx/lgx_floor.csv | region == 'Alaska', scope == 'eval'
+  a Alaska  anchor_residual  n 1000: -0.5405 [-0.6926, -0.3244] / -0.5982 [-0.7977, -0.4027]; floor − recal -3.0995 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Alaska|r', contrast == 'R1(λ cv)-P1|n1000'; data/processed/lgx/lgx_floor.csv | region == 'Alaska', scope == 'eval'
+  a Alaska  direct_ml        n  all: +1.2684 [+0.2969, +1.3652] / -1.0650 [-1.5555, -0.5821]; floor − recal -3.0884 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Alaska|r', contrast == 'D0(catboost)-P1|n전량'; data/processed/lgx/lgx_floor.csv | region == 'Alaska', scope == 'eval'
+  a Alaska  direct_ml        n  200: +3.5127 [+1.7139, +3.5602] / -0.2083 [-0.7085, +0.2952]; floor − recal -3.0892 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Alaska|r', contrast == 'D0(catboost)-P1|n200'; data/processed/lgx/lgx_floor.csv | region == 'Alaska', scope == 'eval'
+  a Alaska  direct_ml        n  500: +3.1639 [+1.4580, +3.1953] / -0.5649 [-1.0796, -0.0436]; floor − recal -3.0735 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Alaska|r', contrast == 'D0(catboost)-P1|n500'; data/processed/lgx/lgx_floor.csv | region == 'Alaska', scope == 'eval'
+  a Alaska  direct_ml        n 1000: +2.7599 [+1.1640, +2.7803] / -0.6525 [-1.1523, -0.1383]; floor − recal -3.0995 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Alaska|r', contrast == 'D0(catboost)-P1|n1000'; data/processed/lgx/lgx_floor.csv | region == 'Alaska', scope == 'eval'
+  a Canada  anchor_residual  n  all: +0.4479 [-0.7309, +1.2413] / -0.2311 [-1.0929, +0.6536]; floor − recal -10.7603 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Canada|r', contrast == 'R1(λ cv)-P1|n전량'; data/processed/lgx/lgx_floor.csv | region == 'Canada', scope == 'eval'
+  a Canada  anchor_residual  n  200: -0.4026 [-1.0493, +0.1929] / -0.8379 [-1.3603, -0.2767]; floor − recal -10.6478 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Canada|r', contrast == 'R1(λ cv)-P1|n200'; data/processed/lgx/lgx_floor.csv | region == 'Canada', scope == 'eval'
+  a Canada  direct_ml        n  all: -1.5049 [-2.1923, -0.1158] / -0.2983 [-1.4382, +0.8579]; floor − recal -10.7603 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Canada|r', contrast == 'D0(catboost)-P1|n전량'; data/processed/lgx/lgx_floor.csv | region == 'Canada', scope == 'eval'
+  a Canada  direct_ml        n  200: -1.4952 [-1.9943, -0.2447] / -0.0268 [-1.0271, +1.0120]; floor − recal -10.6478 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Canada|r', contrast == 'D0(catboost)-P1|n200'; data/processed/lgx/lgx_floor.csv | region == 'Canada', scope == 'eval'
+  a Lena    anchor_residual  n  all: +0.4691 [-0.5630, +1.2774] / -0.1403 [-1.0679, +0.7241]; floor − recal -5.3338 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Lena|r', contrast == 'R1(λ cv)-P1|n전량'; data/processed/lgx/lgx_floor.csv | region == 'Lena', scope == 'eval'
+  a Lena    anchor_residual  n  200: +0.2201 [-0.7924, +0.6357] / -0.1950 [-0.7485, +0.3364]; floor − recal -5.3394 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Lena|r', contrast == 'R1(λ cv)-P1|n200'; data/processed/lgx/lgx_floor.csv | region == 'Lena', scope == 'eval'
+  a Lena    anchor_residual  n  500: +0.3366 [-0.7560, +0.7789] / -0.3611 [-1.1584, +0.3779]; floor − recal -5.3247 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Lena|r', contrast == 'R1(λ cv)-P1|n500'; data/processed/lgx/lgx_floor.csv | region == 'Lena', scope == 'eval'
+  a Lena    anchor_residual  n 1000: +0.6103 [-0.5658, +1.3796] / -0.0777 [-1.0350, +0.8109]; floor − recal -5.1621 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Lena|r', contrast == 'R1(λ cv)-P1|n1000'; data/processed/lgx/lgx_floor.csv | region == 'Lena', scope == 'eval'
+  a Lena    direct_ml        n  all: -0.9274 [-1.9196, +0.2082] / -0.9557 [-1.9182, -0.0458]; floor − recal -5.3338 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Lena|r', contrast == 'D0(catboost)-P1|n전량'; data/processed/lgx/lgx_floor.csv | region == 'Lena', scope == 'eval'
+  a Lena    direct_ml        n  200: +0.3165 [-1.0487, +0.8785] / -0.5482 [-1.2751, +0.1438]; floor − recal -5.3394 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Lena|r', contrast == 'D0(catboost)-P1|n200'; data/processed/lgx/lgx_floor.csv | region == 'Lena', scope == 'eval'
+  a Lena    direct_ml        n  500: -0.4512 [-1.6168, +0.2356] / -1.0035 [-1.8394, -0.2062]; floor − recal -5.3247 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Lena|r', contrast == 'D0(catboost)-P1|n500'; data/processed/lgx/lgx_floor.csv | region == 'Lena', scope == 'eval'
+  a Lena    direct_ml        n 1000: -0.7758 [-1.9379, +0.1739] / -1.0779 [-2.0011, -0.2085]; floor − recal -5.1621 | results/rescale_wf2/data/processed/wf/wf2b_tests.csv | test_id == 'WF6-a', item == 'WF6-a', target == 'Lena|r', contrast == 'D0(catboost)-P1|n1000'; data/processed/lgx/lgx_floor.csv | region == 'Lena', scope == 'eval'
+  c Alaska  total   : -0.5153 [-0.6984, -0.3056] / -0.6761 [-0.9106, -0.4440] | results/rescale_wf3/data/processed/wf/wf3b_tests.csv | test_id == 'WF9-b', contrast == 'R1(λ cv)-P1[총]|n전량', target == 'Alaska|r'
+  c Lena    total   : +0.4691 [-0.5630, +1.2774] / -0.1403 [-1.0679, +0.7241] | results/rescale_wf3/data/processed/wf/wf3b_tests.csv | test_id == 'WF9-b', contrast == 'R1(λ cv)-P1[총]|n전량', target == 'Lena|r'
+  c Canada  total   : +0.4479 [-0.7309, +1.2413] / -0.2311 [-1.0929, +0.6536] | results/rescale_wf3/data/processed/wf/wf3b_tests.csv | test_id == 'WF9-b', contrast == 'R1(λ cv)-P1[총]|n전량', target == 'Canada|r'
+  c Alaska  between : -1.0261 [-1.2963, -0.5880] / -0.8899 [-1.1572, -0.6118] | results/rescale_wf3/data/processed/wf/wf3b_tests.csv | test_id == 'WF9-b', contrast == 'R1(λ cv)-P1[격자 사이]|n전량', target == 'Alaska~b|r'
+  c Lena    between : +0.7322 [-0.7802, +1.3314] / -0.7295 [-1.7695, +0.2837] | results/rescale_wf3/data/processed/wf/wf3b_tests.csv | test_id == 'WF9-b', contrast == 'R1(λ cv)-P1[격자 사이]|n전량', target == 'Lena~b|r'
+  c Canada  between : +0.1294 [-1.2399, +1.0160] / -0.4408 [-1.3225, +0.4811] | results/rescale_wf3/data/processed/wf/wf3b_tests.csv | test_id == 'WF9-b', contrast == 'R1(λ cv)-P1[격자 사이]|n전량', target == 'Canada~b|r'
+  c Alaska  within  : -0.0091 [-0.0323, +0.0424] / +0.0383 [+0.0119, +0.0645] | results/rescale_wf3/data/processed/wf/wf3b_tests.csv | test_id == 'WF9-a', contrast == 'R1(λ cv)-P1[격자 안]|n전량', target == 'Alaska~w|r', item == 'WF9-a'
+  c Lena    within  : +0.0493 [-0.1843, +0.9247] / +0.8687 [+0.5109, +1.2391] | results/rescale_wf3/data/processed/wf/wf3b_tests.csv | test_id == 'WF9-a', contrast == 'R1(λ cv)-P1[격자 안]|n전량', target == 'Lena~w|r', item == 'WF9-a'
+  c Canada  within  : +0.2332 [+0.1578, +0.3359] / +0.2134 [+0.1168, +0.3129] | results/rescale_wf3/data/processed/wf/wf3b_tests.csv | test_id == 'WF9-a', contrast == 'R1(λ cv)-P1[격자 안]|n전량', target == 'Canada~w|r', item == 'WF9-a'
+  c Mean3   within  : +0.0911 [+0.0171, +0.3951] / +0.3735 [+0.2498, +0.5014] | results/rescale_wf3/data/processed/wf/wf3b_tests.csv | test_id == 'WF9-a', contrast == 'R1(λ cv)-P1[격자 안]|n전량', target == 'MEAN[Alaska~w|r,Lena~w|r,Canada~w|r]', item == 'WF9-a'
+  b (블록별 RMSE 차, cm; 블록 id: 값; m = 자료 없음 마스크) | results/rescale_wf3/data/processed/wf/shards/wf9__cpu__Alaska__r__s*_blocksse.npz | unit target == 'Alaska|r'; keys [R1, catboost_lo, 1, cell, -1, 0, seed 0 and 1, -1.0] (seed mean) vs [P1, none, 1, cell, -1, 0, -1, 0.0]; SSE and cell counts summed over the 25 splits
+    12199673: -0.38, 12199674: +0.34, 12299668: -0.67, 12299675: -2.63m, 12399673: +1.80, 12499670: +0.61
+    12499713: +3.06, 12499717: -2.52, 12599672: -0.74, 12699701: -0.95, 12699708: -2.25, 12699709: +2.68
+    12699710: -0.14, 12699711: +1.29, 12799706: +0.31, 12899668: +1.68, 12899672: -2.64, 12899686: -1.96m
+    12899689: -1.76, 12899701: -0.29, 12899703: -0.74, 12899704: +1.40, 12899717: -3.10, 12999670: -0.39
+    12999704: -4.67, 12999705: -2.86m, 12999706: -2.18, 13099701: -1.07m, 13099702: -3.12, 13099711: +0.70
+    13199698: -2.44, 13299694: -0.97, 13299709: +1.54m, 13399699: -2.18, 13399707: -0.48m, 13499676: -2.13
+    13499678: -3.99, 13499679: -3.30, 13599676: -4.00, 13599677: -4.20, 13599680: -3.51, 13599681: -2.05
+    13599682: -2.27, 13599688: +1.47m, 13599700: +0.34, 13599701: +0.08, 13599708: -0.08, 13699698: -0.29
+    13699699: +0.69, 13699700: -0.33, 13699701: +0.23, 13699702: +0.10, 13699710: -0.69, 13799683: -0.39
+    13799695: -1.47, 13799697: -0.88, 13799698: +1.45, 13799699: -0.21, 13799702: +0.17, 13799703: -1.23
+    13899690: +0.36, 13899693: +3.21, 13899702: +1.77, 13899710: -0.57, 13899714: +1.08m, 13999677: +0.29
+    13999685: +0.45, 13999695: +1.18, 13999702: -1.20, 13999703: -0.90, 14099686: +1.10, 14099692: +1.90
+    14099694: +1.65, 14199686: -1.29
+  b 관측 위치 343곳 | data/processed/fidelity_base_v3.csv | macro == 'Alaska', source_id == 'F4_direct', finite alt_cm; 1 km 위치 = floor(lat/0.009), floor(lon·cos φ/0.009)
+
+[2] 패널 a: 오차 하한과 '하한 − 재보정 Stefan RMSE'(그림 명세 9.3 a, 설명문)
+  OK  floor Alaska = 11.3081 cm | 기대 11.31 | C4 README 2.6 E8.floor
+  OK  floor Lena = 14.8274 cm | 기대 14.83 | C4 README 2.6 E8.floor
+  OK  floor Canada = 17.9007 cm | 기대 17.9 | C4 README 2.6 E8.floor
+  Alaska: n all: recal RMSE 14.40, floor − recal -3.09, n 200: recal RMSE 14.40, floor − recal -3.09, n 500: recal RMSE 14.38, floor − recal -3.07, n 1000: recal RMSE 14.41, floor − recal -3.10
+  Lena: n all: recal RMSE 20.16, floor − recal -5.33, n 200: recal RMSE 20.17, floor − recal -5.34, n 500: recal RMSE 20.15, floor − recal -5.32, n 1000: recal RMSE 19.99, floor − recal -5.16
+  Canada: n all: recal RMSE 28.66, floor − recal -10.76, n 200: recal RMSE 28.55, floor − recal -10.65
+  캐나다 하한선 범위 -10.65 에서 -10.76 cm(축 [−6, 4] 밖, 삼각 표지 1개, 설명문 '−10.6 to −10.8 cm')
+  알래스카 n 1000: 재보정 Stefan 14.41 → 잔차 ML 13.87 cm, 줄일 수 있는 오차 제곱 감소 19.17% (설명문 19%, C4 README D1.wf6.reducible_cut_pct 19.17%)
+  알래스카 n 500: delta -0.3897, verdict4 우세, verdict4_common 미결정
+  알래스카 n all: delta -0.5153, verdict4 우세, verdict4_common 미결정
+  알래스카 n 1000 verdict4 우세, verdict4_common 우세
+
+[3] 패널 b: 블록 지도(2안)
+  저장소 조각 25개, 분할 1–25
+  OK  조각에서 다시 계산한 셀 가중 Δ(분할 평균) -0.515289 = wf3b/wf2b 시험 값 −0.515289 (RMSE 잔차 ML 13.8812, 재보정 Stefan 14.3965; C8 README A1)
+  블록 74개(표시 66, 자료 없음 마스크 8: 25분할 합산 채점 셀 < 10, 그림 명세 9.3 b [판단])
+  블록 Δ 범위(표시 블록) -4.67 에서 +3.21 cm, |Δ| 99 백분위 4.37 → vmax 5 cm(5 cm 단위 올림)
+  참고: 블록의 고유 채점 셀 수(ncell) < 10 인 블록은 39개다. 마스크 규칙은 명세대로 '분할 합산' 셀 수를 쓴다(같은 셀이 분할마다 다시 센다).
+  관측 위치: 라벨 행 13606, 1 km 위치 343(그림 명세 343), 블록 74(시험 저장소 블록 74)
+  지도 범위 1654 × 1209 km, 19.69 km/mm
+  블록 경도 폭(최종 크기): 중앙 위도 66.9° N 에서 1.12 mm, 블록별 0.91–1.41 mm, 1.0 mm 미만 블록 14개(북쪽 사면)
+  위도 라벨 ['65° N', '70° N'], 경도 라벨 ['170° W', '150° W', '130° W'](경선은 10° 간격 5개, 라벨은 3개), 축척 막대 200 km(왼쪽 끝 69.7° N, 172.7° W; 투영 기준 위도 70° N)
+
+[4] 패널 c: 등록 행과 행 구성
+  층화 평균 행은 격자 안 등록 대비(WF9-a 주 행)에만 있다. 총·격자 사이의 교차검증 λ 3지역 평균 행은 원천에 없어 그리지 않았다(새 집계 안 함).
+  total: Alaska -0.52 [-0.70, -0.31] / -0.68 [-0.91, -0.44] 우세; Lena +0.47 [-0.56, +1.28] / -0.14 [-1.07, +0.72] 미결정; Canada +0.45 [-0.73, +1.24] / -0.23 [-1.09, +0.65] 미결정
+  between: Alaska -1.03 [-1.30, -0.59] / -0.89 [-1.16, -0.61] 우세; Lena +0.73 [-0.78, +1.33] / -0.73 [-1.77, +0.28] 미결정; Canada +0.13 [-1.24, +1.02] / -0.44 [-1.32, +0.48] 미결정
+  within: Alaska -0.01 [-0.03, +0.04] / +0.04 [+0.01, +0.06] 동등; Lena +0.05 [-0.18, +0.92] / +0.87 [+0.51, +1.24] 미결정; Canada +0.23 [+0.16, +0.34] / +0.21 [+0.12, +0.31] 열세; Mean3 +0.09 [+0.02, +0.40] / +0.37 [+0.25, +0.50] 열세
+  OK  SSE 이득의 격자 안 몫 0.86% → 격자 사이 약 99.1% (설명문 'about 99%', C8 README B4)
+
+[5] 패널 d: 경로 값(서술, 판정 아님)
+  anchor_residual  path         pool_Lena_Canada   n    3: +0.1768  (fig2_pool_curves.csv)
+  anchor_residual  path         pool_Lena_Canada   n   10: +0.7814  (fig2_pool_curves.csv)
+  anchor_residual  region_point Canada             n    3: +0.1162  (fig2_region_curves.csv)
+  anchor_residual  region_point Lena               n    3: +0.2375  (fig2_region_curves.csv)
+  anchor_residual  region_point Canada             n   10: +1.3671  (fig2_region_curves.csv)
+  anchor_residual  region_point Lena               n   10: +0.1957  (fig2_region_curves.csv)
+  cv_selection     path         mean_Lena_Canada   n  all: -0.0009  (wf_curve.csv)
+  cv_selection     path         mean_Lena_Canada   n   40: +0.5539  (wf_curve.csv)
+  cv_selection     path         mean_Lena_Canada   n  160: +0.1849  (wf_curve.csv)
+  cv_selection     region_point Canada             n  all: +0.3196  (wf_curve.csv)
+  cv_selection     region_point Lena               n  all: -0.3215  (wf_curve.csv)
+  cv_selection     region_point Canada             n   40: +0.9037  (wf_curve.csv)
+  cv_selection     region_point Lena               n   40: +0.2041  (wf_curve.csv)
+  cv_selection     region_point Canada             n  160: +0.3463  (wf_curve.csv)
+  cv_selection     region_point Lena               n  160: +0.0235  (wf_curve.csv)
+  OK  R1 n3 pool - mean(regions) = -1.05e-15(풀 점추정 = 지역 단순 평균, h42.pool_rows 의 delta 정의와 같다)
+  OK  R1 n10 pool - mean(regions) = -1.11e-15(풀 점추정 = 지역 단순 평균, h42.pool_rows 의 delta 정의와 같다)
+  OK  규칙 선정 2지역 평균 n 40 = +0.5539 | 그림 명세 9.3 내용 위험 문단 +0.55
+  OK  규칙 선정 2지역 평균 n 160 = +0.1849 | 그림 명세 9.3 내용 위험 문단 +0.18
+  규칙 선정 2지역 평균 전량 = -0.0009(레나델타 −0.32, 캐나다 +0.32)
+  경로는 라벨 3–160 에서 0 위에 놓인다(그림 명세 9.3 내용 위험, D-13 결정 대기). 설명문 d 에 비열등 근거(Fig 4c) 문장을 둔다.
+
+[5b] F-17 패널 위계(그림 명세 2절 표의 슬롯 기준: 축 라벨 포함 슬롯 폭 × 높이)
+  a 슬롯 3 × 52 × 42 = 6552 mm2, b 슬롯 84 × 63.4 = 5326 mm2, 합 11878 / 28050 = 42% (명세 41%, 기준 35% 이상); 축 자체 면적은 a 3 × 48.8 × 28, b 84 × 61.4 mm. 가장 큰 패널 b
+
+[6] audit_v3(지침 부록 A.1) 결과
+  fails: []
+  sizes: {7.0}
+  chars: 597
+  thin_lines: []
+  titles: []
+  boxed_text: 0
+  codes: []
+  comma4: []
+  long_labels: []
+  loose_numbers: []
+
+[7] pdf_audit(지침 부록 A.2)와 pdffonts
+  width_mm: 170.0
+  height_mm: 165.0
+  chars: 591
+  sizes: {7.0: 591}
+  off_size: {}
+  lt5: 0
+  families: ['LiberationSans']
+  type3: False
+  pdffonts:
+    name                                 type              encoding         emb sub uni object ID
+    ------------------------------------ ----------------- ---------------- --- --- --- ---------
+    BGZIHO+LiberationSans-Bold           CID TrueType      Identity-H       yes yes yes     19  0
+    BGZIHO+LiberationSans                CID TrueType      Identity-H       yes yes yes     26  0
+    HEMWJP+LiberationSans-Italic         CID TrueType      Identity-H       yes yes yes     33  0
+  PNG: {'size_px': (4015, 3897), 'dpi': (599.9988, 599.9988)}
+
+[8] 설명문 Fig7_legend.md 점검
+  words 350 (limit 350; without the XC placeholder 333); first sentence words 18
+  dash []; banned []; middot-number []; comma4 []; internal codes []; colour/shape words []; 'This figure' start: False
+  XC placeholder verbatim: True
+  contains 'Natural Earth': True
+  contains 'Cartopy': True
+  contains 'stereographic': True
+  contains '10,000': True
+  contains '25 splits': True
+
+[9] 요약: 값 대조 불일치 0건

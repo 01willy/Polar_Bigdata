@@ -1,0 +1,65 @@
+row,new_name,old_ids,dates,status,cls,start,end,lane,row_label,source
+H0,H0_contest,PRE-A(모델 토너먼트·정확도 하한·큐레이션),2026-06-30–2026-07-06,superseded,gray,2026-06-30 12:00,2026-07-06 12:00,0,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,PRE-B(정직 평가·재구조화·T-lite),2026-07-06–2026-07-13,done,done,2026-07-06 12:00,2026-07-13 12:00,1,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,"P0/P1(자료 목록·다지역 통합, 07-14 실험명)",2026-07-14,done(통합 미채택),done,2026-07-14 12:00,2026-07-14 12:00,0,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,P2(물리·데이터 3트랙),2026-07-14,done(일부 뒤집힘),done,2026-07-14 12:00,2026-07-14 12:00,2,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,PH1(회의적 재검증),2026-07-20,done,done,2026-07-20 12:00,2026-07-20 12:00,0,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,"W2.1(SoilGrids + KPDC, 07-20 실험명)",2026-07-20,done(미채택),done,2026-07-20 12:00,2026-07-20 12:00,1,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,"W3(물리 결합 엔진, 07-20 실험명. 새 이름 W3_label_placement 와 다름)",2026-07-20,done(기각),done,2026-07-20 12:00,2026-07-20 12:00,2,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,AK-AUG(알래스카 지역 내 증강),2026-07-20,done(헤드라인 기각),done,2026-07-20 12:00,2026-07-20 12:00,3,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,TL→S9(타임랩스),"2026-07-20, 2026-07-27",done(대회),done,2026-07-20 12:00,2026-07-27 12:00,4,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,SH3D→S10(얕은 3D 온도장),"2026-07-20, 2026-07-27",done(대회),done,2026-07-20 12:00,2026-07-27 12:00,5,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,S0(스키마·누설 시험·중복 게이트),2026-07-23,done,done,2026-07-23 12:00,2026-07-23 12:00,0,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,S1(실측 라벨 다모델),2026-07-23,done,done,2026-07-23 12:00,2026-07-23 12:00,1,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,S2(물리식 5종),2026-07-23,done,done,2026-07-23 12:00,2026-07-23 12:00,2,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,S3(증강 비율 곡선),2026-07-24,done(버그 수정),done,2026-07-24 12:00,2026-07-24 12:00,3,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,S4(Stefan 앵커 + 잔차),2026-07-24,done,done,2026-07-24 12:00,2026-07-24 12:00,6,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,S5(유사라벨 사전학습 → 미세조정),2026-07-24,done(음성),done,2026-07-24 12:00,2026-07-24 12:00,7,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,S6(출처 인식 다중 충실도),2026-07-27,done(음성),done,2026-07-27 12:00,2026-07-27 12:00,0,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,S7(KPDC 콘슬 검증),2026-07-27,done(대회),done,2026-07-27 12:00,2026-07-27 12:00,1,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,S8(물리식 혼합),2026-07-27,done(음성),done,2026-07-27 12:00,2026-07-27 12:00,2,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,S11(결과 요약 + CQR),2026-07-27,superseded(불확실성),gray,2026-07-27 12:00,2026-07-27 12:00,3,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,"E1-K(co-kriging, 07월. 09-08 E1 과 다름)",2026-07-27,done,done,2026-07-27 12:00,2026-07-27 12:00,6,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,"E2-D(계절 안 융해 진행 D(t), 07월)",2026-07-27,done(부분),done,2026-07-27 12:00,2026-07-27 12:00,7,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,S12(물리 + 위성 전이),2026-07-28,superseded,gray,2026-07-28 12:00,2026-07-28 12:00,8,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,S13(통합 세 조건),2026-07-29,discarded,gray,2026-07-29 12:00,2026-07-29 12:00,0,대회 탐색,paper/registry/experiments.csv
+H0,H0_contest,"S14 + MAP(연별 재설계, 지도 모델 게이트)",2026-08(≤2026-08-31),done,done,2026-08-31 12:00,2026-08-31 12:00,0,대회 탐색,paper/registry/experiments.csv
+H1,H1_prereg_E1-E4,E1·E3(09-08),2026-09-08,superseded(M1),gray,2026-09-08 12:00,2026-09-08 12:00,0,사전 등록 실험,paper/registry/experiments.csv
+H1,H1_prereg_E1-E4,E2·E4(09-08),2026-09-08,done,done,2026-09-08 12:00,2026-09-08 12:00,1,사전 등록 실험,paper/registry/experiments.csv
+H1,H1_prereg_E1-E4,RECON(09-14 대조 감사)·TRANSFER(09-15 계획),2026-09-14–2026-09-15,done,done,2026-09-14 12:00,2026-09-15 12:00,0,사전 등록 실험,paper/registry/experiments.csv
+H2-5,H2_master_M1,M1(마스터 요인 실험 S-A–S-F),2026-09-16–2026-09-21,"superseded(LG 로 대체, S-D 미실행)",gray,2026-09-16 12:00,2026-09-21 12:00,0,통합 실험,paper/registry/experiments.csv
+H2-5,H3_transfer_fixes_H18-24,H18–H24,2026-09-22,done(전부 기각),done,2026-09-22 12:00,2026-09-22 12:00,1,통합 실험,paper/registry/experiments.csv
+H2-5,H4_label_budget_H25-30,H25–H30,2026-09-22(09-26 감사 정정),superseded,gray,2026-09-22 12:00,2026-09-22 12:00,2,통합 실험,paper/registry/experiments.csv
+H2-5,H5_final_A2-D1,"A2, B1–B4, C1, C2, D1(09-26 실험명. 주장 C1·C2 와 다름)",2026-09-26,superseded,gray,2026-09-26 12:00,2026-09-26 12:00,0,통합 실험,paper/registry/experiments.csv
+H2-5,H5_final_A2-D1,NEXT P1–P6,2026-09-28,not run(LG·WRAPUP 으로 흡수),gray,2026-09-28 12:00,2026-09-28 12:00,0,통합 실험,paper/registry/experiments.csv
+H2-5,H5_final_A2-D1,FA(실패 원인 분석),2026-09-29,done(탐색),done,2026-09-29 12:00,2026-09-29 12:00,1,통합 실험,paper/registry/experiments.csv
+T,T1_transfer_label_grid,LG,2026-09-29–2026-09-30,done(J1),done,2026-09-29 12:00,2026-09-30 12:00,0,전이 시험,paper/registry/experiments.csv
+T,T2_transfer_structure_placebo_baselines,LGX,2026-09-29–2026-09-30,done(J2),done,2026-09-29 12:00,2026-09-30 12:00,1,전이 시험,paper/registry/experiments.csv
+T,T3_learners_foundation_and_nn,LGT,2026-09-30,done(J4),done,2026-09-30 12:00,2026-09-30 12:00,3,전이 시험,paper/registry/experiments.csv
+T,T3_learners_foundation_and_nn,LGF,2026-09-30–2026-10-01,"done(J6, J12 미실행)",done,2026-09-30 12:00,2026-10-01 12:00,6,전이 시험,paper/registry/experiments.csv
+T,T4_new_regions,LGD,2026-09-30,done(J5),done,2026-09-30 12:00,2026-09-30 12:00,4,전이 시험,paper/registry/experiments.csv
+T,T5_prediction_intervals,LGU,2026-09-29–2026-09-30,done(J3),done,2026-09-29 12:00,2026-09-30 12:00,2,전이 시험,paper/registry/experiments.csv
+T,T6_abstract_contrasts_and_map,WRAPUP,2026-09-30,done,done,2026-09-30 12:00,2026-09-30 12:00,5,전이 시험,paper/registry/experiments.csv
+T,T6_abstract_contrasts_and_map,LGW(J7 판정) + 레나 지도,2026-09-30; 2026-10-02(지도 최종판),done(J7),done,2026-09-30 12:00,2026-10-02 12:00,7,전이 시험,paper/registry/experiments.csv
+W,W1_label0_risk_table,WF0,2026-10-01,done(사후 서술),done,2026-10-01 12:00,2026-10-01 12:00,0,지역 내·워크플로 시험,paper/registry/experiments.csv
+W,W2_within_region_label_curve,WF1(WF1–WF5 묶음),2026-10-01,done,done,2026-10-01 12:00,2026-10-01 12:00,1,지역 내·워크플로 시험,paper/registry/experiments.csv
+W,W2_within_region_label_curve,WF6(WF6–WF8 묶음),2026-10-01,done,done,2026-10-01 12:00,2026-10-01 12:00,2,지역 내·워크플로 시험,paper/registry/experiments.csv
+W,W3_label_placement,WF2(WF1–WF5 묶음),2026-10-01,done,done,2026-10-01 12:00,2026-10-01 12:00,3,지역 내·워크플로 시험,paper/registry/experiments.csv
+W,W3_label_placement,WF8(WF6–WF8 묶음),2026-10-01,done,done,2026-10-01 12:00,2026-10-01 12:00,4,지역 내·워크플로 시험,paper/registry/experiments.csv
+W,W4_subcluster_coefficients,WF3(WF1–WF5 묶음),2026-10-01,done,done,2026-10-01 12:00,2026-10-01 12:00,5,지역 내·워크플로 시험,paper/registry/experiments.csv
+W,W5_method_selection_and_bias_diagnosis,WF4(WF1–WF5 묶음),2026-10-01,done,done,2026-10-01 12:00,2026-10-01 12:00,6,지역 내·워크플로 시험,paper/registry/experiments.csv
+W,WF5_not_issued,WF5(WF1–WF5 묶음),2026-10-01,not run,gray,2026-10-01 12:00,2026-10-01 12:00,7,지역 내·워크플로 시험,paper/registry/experiments.csv
+W,W6_stefan_cci_anchor,WF7(WF6–WF8 묶음),2026-10-01,done(서술),done,2026-10-01 12:00,2026-10-01 12:00,8,지역 내·워크플로 시험,paper/registry/experiments.csv
+W,W7_gain_decomposition_grid,WF9(WF9–WF10 묶음),2026-10-02,done,done,2026-10-02 12:00,2026-10-02 12:00,9,지역 내·워크플로 시험,paper/registry/experiments.csv
+W,W7_gain_decomposition_grid,WF9-soil(토양 √TDD 민감도),2026-10-02,done,done,2026-10-02 12:00,2026-10-02 12:00,10,지역 내·워크플로 시험,paper/registry/experiments.csv
+W,W8_climate_extrapolation,WF10(WF9–WF10 묶음),2026-10-02,done(판정 불가),done,2026-10-02 12:00,2026-10-02 12:00,11,지역 내·워크플로 시험,paper/registry/experiments.csv
+X,XA_c2_gain_decomposition,C2 재분석(QA Q1·Q6 2순위),2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,0,추가 실험,paper/registry/experiments.csv
+X,XB_multisource_stacking,X1(QA Q3·Q5·Q11),2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,1,추가 실험,paper/registry/experiments.csv
+X,XC_workflow_end_to_end,워크플로 통합 검증(사용자 2026-10-04 질문 2),2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,2,추가 실험,paper/registry/experiments.csv
+X,XD_placement_policy,"관측 위치 알고리즘·샘플링 정책 학습(QA Q7, 사용자 2026-10-04 질문 1·2)",2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,3,추가 실험,paper/registry/experiments.csv
+X,XE_hires_covariates,"격자 안 해상도 입력(사용자 2026-10-04 질문 3, QA Q8·Q9)",2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,4,추가 실험,paper/registry/experiments.csv
+X,XF_new_regions,"독립 지역 추가(사용자 2026-10-04 질문 1, QA Q9·Q12)",2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,5,추가 실험,paper/registry/experiments.csv
+X,XG_product_comparison,"기존 ALT 제품 비교(WRAPUP 10절 등록, QA Q9)",2026-10-04 등록 예정(WRAPUP 10절에 등록만 되어 있음),planned,planned,2026-10-04 14:22,2026-10-04 14:22,6,추가 실험,paper/registry/experiments.csv
+X,XH_validation_ladder,"검증 사다리 그림(QA Q12 강화 4, Q15)",2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,7,추가 실험,paper/registry/experiments.csv
+X,XI_climate_extrapolation_retest,WF10 재시험,2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,8,추가 실험,paper/registry/experiments.csv
+X,XJ_tempderived_aux_labels,지온 유도 라벨 보조 학습(QA Q9),2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,9,추가 실험,paper/registry/experiments.csv

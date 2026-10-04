@@ -1,0 +1,103 @@
+{
+ "slide": "AP4",
+ "page": "부록 4",
+ "title": "한계",
+ "subtitle": "부록 · 결과 해석의 범위",
+ "takeaway": "주장의 범위는 주 4지역과 알래스카 지역 안 결과로 한정",
+ "archetype": "A7",
+ "kind": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
+ "geometry_in": {
+  "x": 0.667,
+  "y": 1.35,
+  "w": 12.0,
+  "row_h": 1.0,
+  "col_w": [
+   5.0,
+   7.0
+  ]
+ },
+ "columns": [
+  "한계",
+  "결과 해석에 주는 영향"
+ ],
+ "rows": [
+  [
+   "학습 원천의 78–94%가 알래스카 셀",
+   "주 4지역 평균과 지역별 행을 함께 보고"
+  ],
+  [
+   "확인적 독립 지역 4–5개",
+   "지역 일반 문장 대신 지역 수를 밝힘"
+  ],
+  [
+   "지역 내 시험은 결과 열람 뒤 설계",
+   "초록에는 판정어 없이 수치만, 본문에 표지"
+  ]
+ ],
+ "align": [
+  "l",
+  "l"
+ ],
+ "accent_cells": [],
+ "support_line": null,
+ "changes_from_spec": [],
+ "style": {
+  "header_h": 0.5,
+  "top_lw": 1.25,
+  "top_c": "4A4A4A",
+  "mid_lw": 0.75,
+  "mid_c": "DDDDDD",
+  "head_pt": 18,
+  "cell_pt": 18,
+  "head_font": "Pretendard SemiBold",
+  "cell_font": "Pretendard Medium",
+  "head_color": "4A4A4A",
+  "cell_color": "111111",
+  "accent": "EA851B",
+  "col_gap": 0.18,
+  "line_h": 0.3,
+  "safety": 0.95
+ },
+ "data_sources": [
+  "docs/RESEARCH_CLAIMS_WORKFLOW_2026-10-01.md 6절",
+  "docs/RESEARCH_OVERVIEW_2026-10-02.md 10절",
+  "paper/claims/D_data_and_design/README.md E35"
+ ],
+ "wrapped_header": [
+  [
+   "한계"
+  ],
+  [
+   "결과 해석에 주는 영향"
+  ]
+ ],
+ "wrapped_rows": [
+  [
+   [
+    "학습 원천의 78–94%가 알래스카 셀"
+   ],
+   [
+    "주 4지역 평균과 지역별 행을 함께 보고"
+   ]
+  ],
+  [
+   [
+    "확인적 독립 지역 4–5개"
+   ],
+   [
+    "지역 일반 문장 대신 지역 수를 밝힘"
+   ]
+  ],
+  [
+   [
+    "지역 내 시험은 결과 열람 뒤 설계"
+   ],
+   [
+    "초록에는 판정어 없이 수치만, 본문에 표지"
+   ]
+  ]
+ ],
+ "height_in": 3.5,
+ "max_lines_per_cell": 3,
+ "issues": []
+}

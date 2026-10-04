@@ -1,0 +1,120 @@
+Fig3 v3 값 대조와 점검 기록 (생성 2026-10-04 21:17, 스크립트 scripts/4_visualization/paper_v3/fig3.py)
+렌더 전 자원: available 41 GB, load average 15.79
+
+[1] 원천 표 sha256 대 claims MANIFEST
+  data/processed/paper_figs/fig3_a.csv: 89420c820375e229… manifest 일치 (1개 사본 기록)
+  data/processed/paper_figs/fig3_b_L10_alln.csv: 8e55d65e691d0d55… manifest 일치 (1개 사본 기록)
+  data/processed/paper_figs/pool_fixed_curve.csv: 490435f971d561f3… manifest 일치 (1개 사본 기록)
+[2] 패널 b: fig3_a.csv 대 lgx_tests.csv(test_id L15, scope MEAN), 셀 가중·블록 등가중 6열
+  D1-D1@shuffle|n0       Δ -1.6290 [-1.9851, -1.0356] / [-1.5189, -0.5775]  verdict4 우세  lgx nboot 10000
+  D1-D1@shuffle|n10      Δ -1.1502 [-1.4283, -0.7269] / [-1.0604, -0.2911]  verdict4 우세  lgx nboot 10000
+  D1-D1@const_t|n0       Δ -1.6821 [-2.0640, -1.1154] / [-1.5538, -0.5625]  verdict4 우세  lgx nboot 10000
+  D1-D1@const_t|n10      Δ -1.1638 [-1.4634, -0.7640] / [-1.1126, -0.3724]  verdict4 우세  lgx nboot 10000
+  D1-D1@const_src|n0     Δ -3.6269 [-4.3328, -2.4376] / [-3.4928, -2.1109]  verdict4 우세  lgx nboot 10000
+  D1-D1@const_src|n10    Δ -2.2093 [-2.8910, -1.2728] / [-2.2262, -0.8620]  verdict4 우세  lgx nboot 10000
+  D1-D1@tddlin|n0        Δ -0.4769 [-0.6181, -0.2728] / [-0.6071, -0.2115]  verdict4 우세  lgx nboot 10000
+  D1-D1@tddlin|n10       Δ -0.0801 [-0.1843, +0.0545] / [-0.1483, +0.0911]  verdict4 동등  lgx nboot 10000
+  최대 절대 차 0.00e+00
+[3] 패널 c: fig3_b_L10_alln.csv 대 lgx_tests.csv(test_id L10, scope MEAN)
+  R1-F1k|n-1     n   -1 registered False pool 지역 4/4  Δ -2.9290 [-3.9031, -1.7283] / [-3.8760, -1.7974]  우세  nboot 10000
+  R0-F1k|n0      n    0 registered True  pool 지역 4/4  Δ -2.7206 [-4.3393, -1.7279] / [-3.9343, -1.9707]  우세  nboot 10000
+  R1-F1k|n3      n    3 registered False pool 지역 4/4  Δ -3.0155 [-4.6526, -1.9287] / [-4.1412, -2.1603]  우세  nboot 10000
+  R1-F1k|n10     n   10 registered True  pool 지역 4/4  Δ -3.7361 [-5.1830, -2.6990] / [-5.1226, -2.9619]  우세  nboot 10000
+  R1-F1k|n40     n   40 registered False pool 지역 2/4  Δ +2.3772 [+0.5216, +3.2527] / [+1.1660, +2.9493]  열세  nboot 10000
+  R1-F1k|n160    n  160 registered False pool 지역 2/4  Δ +2.2342 [+0.7542, +3.0420] / [+1.3010, +3.0937]  열세  nboot 10000
+  R1-F1n|n-1     n   -1 registered False pool 지역 4/4  Δ -0.7746 [-1.5999, +0.3664] / [-1.2111, +0.4829]  미결정  nboot 10000
+  R1-F1n|n3      n    3 registered False pool 지역 4/4  Δ -3.1666 [-3.9999, -2.1038] / [-3.3878, -1.5119]  우세  nboot 10000
+  R1-F1n|n10     n   10 registered True  pool 지역 4/4  Δ -2.5165 [-3.2633, -1.5600] / [-2.8954, -1.1610]  우세  nboot 10000
+  R1-F1n|n40     n   40 registered False pool 지역 2/4  Δ +1.8511 [+0.7265, +2.6146] / [+1.3360, +3.0892]  열세  nboot 10000
+  R1-F1n|n160    n  160 registered False pool 지역 2/4  Δ +1.9809 [+0.8025, +2.7305] / [+1.3470, +3.1174]  열세  nboot 10000
+  최대 절대 차 0.00e+00
+  설명문용 지역 행: R1-F1n|n10 Canada Δ +3.1192 [+1.4232, +3.9742] / [+0.0711, +2.7428] verdict4 열세 ci_dependence 분할 독립 가정 의존 (C3 README E08a +3.12)
+  지역 행 R0-F1k|n0: Lena|x 미결정; Canada|x 미결정; Russia_W|x 우세; Russia_E|x 우세; Alaska|x 우세
+  지역 행 R1-F1k|n10: Lena|x 미결정; Canada|x 미결정; Russia_W|x 우세; Russia_E|x 우세; Alaska|x 우세
+  지역 행 R1-F1n|n10: Lena|x 미결정; Canada|x 열세; Russia_W|x 우세; Russia_E|x 우세; Alaska|x 우세
+  지역 행 R1-F1k|n40: Lena|x -0.38 미결정; Canada|x +5.14 열세; Alaska|x -7.46 우세
+  지역 행 R1-F1n|n40: Lena|x -0.76 미결정; Canada|x +4.46 열세; Alaska|x -7.12 우세
+  지역 행 R1-F1k|n160: Lena|x -0.39 미결정; Canada|x +4.86 열세; Alaska|x -7.20 우세
+  지역 행 R1-F1n|n160: Lena|x -0.71 미결정; Canada|x +4.67 열세; Alaska|x -6.06 우세
+[4] Holm 보정 P(lgw_bundle.csv, scope MEAN, holm_m 10)
+  AB3 D1-D1@shuffle|n0: Δ -1.6290 [-1.9837, -1.0436] holm_p 0.001 holm_m 10.0 nboot 10000. 그림 값은 lgx 판(같은 점 추정, CI 끝값은 재표집 구현 차로 소수 둘째 자리에서 다를 수 있다. C3 README 2.7)
+  AB7 R1-F1k|n10: Δ -3.7361 [-5.2264, -2.7543] holm_p 0.001 holm_m 10.0 nboot 10000. 그림 값은 lgx 판(같은 점 추정, CI 끝값은 재표집 구현 차로 소수 둘째 자리에서 다를 수 있다. C3 README 2.7)
+[5] 패널 d: pool_fixed_curve.csv(method P2, baseline P1, learner none), role '서술(판정에 쓰지 않는다)'
+  mean   MEAN      n   3 E1_P4_n_le_10        Δ +1.7564 [+0.9031, +3.0480] beq +2.5657 role 서술(판정에 쓰지 않는다)
+  mean   MEAN      n  10 E1_P4_n_le_10        Δ +0.8416 [+0.0282, +1.9063] beq +1.3645 role 서술(판정에 쓰지 않는다)
+  mean   MEAN      n  40 E2_LenaCanada_all_n  Δ +0.7554 [+0.5733, +0.8995] beq +0.8400 role 서술(판정에 쓰지 않는다)
+  mean   MEAN      n 160 E2_LenaCanada_all_n  Δ +0.1918 [+0.1400, +0.2325] beq +0.2049 role 서술(판정에 쓰지 않는다)
+  mean   MEAN      n 320 E2_LenaCanada_all_n  Δ +0.1021 [+0.0740, +0.1243] beq +0.1079 role 서술(판정에 쓰지 않는다)
+  region Canada    n   3 E1_P4_n_le_10        Δ +5.4017 [+3.9110, +6.2300] beq +4.9075 role 서술(판정에 쓰지 않는다)
+  region Canada    n  10 E1_P4_n_le_10        Δ +3.2544 [+2.3169, +3.7537] beq +2.8927 role 서술(판정에 쓰지 않는다)
+  region Canada    n  40 E2_LenaCanada_all_n  Δ +1.2808 [+0.9225, +1.4768] beq +1.0922 role 서술(판정에 쓰지 않는다)
+  region Canada    n 160 E2_LenaCanada_all_n  Δ +0.3266 [+0.2214, +0.3828] beq +0.2615 role 서술(판정에 쓰지 않는다)
+  region Canada    n 320 E2_LenaCanada_all_n  Δ +0.1822 [+0.1255, +0.2132] beq +0.1444 role 서술(판정에 쓰지 않는다)
+  region Lena      n   3 E1_P4_n_le_10        Δ +2.9129 [+2.1747, +3.8690] beq +3.7601 role 서술(판정에 쓰지 않는다)
+  region Lena      n  10 E1_P4_n_le_10        Δ +1.0057 [+0.7221, +1.4790] beq +1.6395 role 서술(판정에 쓰지 않는다)
+  region Lena      n  40 E2_LenaCanada_all_n  Δ +0.2300 [+0.1013, +0.4506] beq +0.5878 role 서술(판정에 쓰지 않는다)
+  region Lena      n 160 E2_LenaCanada_all_n  Δ +0.0569 [+0.0265, +0.1178] beq +0.1483 role 서술(판정에 쓰지 않는다)
+  region Lena      n 320 E2_LenaCanada_all_n  Δ +0.0221 [+0.0052, +0.0542] beq +0.0714 role 서술(판정에 쓰지 않는다)
+  region Russia_E  n   3 E1_P4_n_le_10        Δ +3.6858 [+2.5756, +7.1777] beq +7.0086 role 서술(판정에 쓰지 않는다)
+  region Russia_E  n  10 E1_P4_n_le_10        Δ +0.5486 [-0.0573, +1.8888] beq +1.7788 role 서술(판정에 쓰지 않는다)
+  region Russia_W  n   3 E1_P4_n_le_10        Δ -4.9748 [-7.9947, -1.6249] beq -5.4135 role 서술(판정에 쓰지 않는다)
+  region Russia_W  n  10 E1_P4_n_le_10        Δ -1.4425 [-4.6188, +2.3494] beq -0.8531 role 서술(판정에 쓰지 않는다)
+[6] 패널 a: 개념 좌표도
+  지역 Russia_W(W Russia), 라벨 셀 31개, 분할 1 라벨 블록 셀 16개, 채점 쪽 셀 15개
+  추출: seed_of('Russia_W', 'x', 1, 10, 1) = 1988953180, 라벨 블록 안 위치 [0, 2, 3, 4, 7, 8, 12, 13, 14, 15]
+  원천 계수 E0 = 1.589510(table1_rows.csv E0_x, n_src 17436); 다시 계산 1.589510(원천 셀 17436개, 100 km 완충 제외), 차 2.22e-16
+  라벨 10개 최소제곱 E = 2.629650, 재보정 E = (10·E_ls + 10·E0)/20 = 2.109580
+  뽑힌 라벨(√TDD, ALT cm): (39.21, 118.3), (35.46, 138.1), (36.73, 95.3), (38.14, 84.3), (35.71, 98.2), (32.00, 46.7), (32.02, 118.5), (32.76, 100.7), (32.76, 65.1), (29.70, 31.8)
+
+[7] 명세와 다른 점과 근거
+  (1) 패널 a 의 지역을 레나델타에서 서부 러시아로 바꾸었다. 같은 분할·추출·κ 로 계산한 값:
+  Lena: 셀 3037, √TDD 26.0–30.4, 고유 √TDD 값 52개, E0 1.619, 재보정 1.579(-2.5%), 최대 √TDD 에서 두 직선 간격 1.2 cm
+  Russia_W: 셀 31, √TDD 26.2–39.2, 고유 √TDD 값 26개, E0 1.590, 재보정 2.110(+32.7%), 최대 √TDD 에서 두 직선 간격 20.4 cm
+      레나델타는 두 직선의 간격이 그림 높이에서 0.5 mm 미만이라 'Source Stefan'과 'Recalibrated Stefan' 이
+      한 선으로 보인다(지침 2.10 의 개념, SL-10 의 시각적 자명성 위반). 서부 러시아는 재보정이 계수를 크게
+      옮긴 지역(AB4 지역 행 우세 1/4)이며 셀 31개라 점이 겹치지 않는다. 되돌리려면 CONCEPT_REGION = 'Lena'.
+  (2) 패널 b 는 라벨 0개와 10개를 좌우 두 열로 둔다. 위아래 묶음이면 행 이름 4개가 두 번씩 나온다(지침 H13).
+  (3) 패널 d 에 직접 라벨 'Least squares' 하나를 두고 y 축 이름을 'Error change vs shrinkage (cm)' 로 줄였다.
+  (4) 패널 c 의 y 축 이름은 'Error change vs physics input (cm)'(명세 문구는 축 높이보다 길다). 방향 표지
+      'Residual lower' 는 본 축 오른쪽 아래(축 왼쪽은 y 축 이름이 차지한다).
+  (5) c, d 의 x 축 이름 'Target labels, n' 은 아래 행 가운데 한 번만 둔다(같은 문구 반복 0).
+  (6) c, d 의 선은 라벨 10개와 40개 사이에서 잇지 않는다(풀이 4지역에서 2지역으로 바뀐다).
+  (7) '±0.5 cm' 열쇠 글자는 gid 'sizekey' 로 표시해 audit_v3 의 그림 안 수치 검사에서 뺐다(명세 1.2 가
+      정한 열쇠 견본의 값).
+  (8) 설명문 c 의 등록 대비 범위는 그림에 있는 등록 대비 3개(R0 − F1k n 0, R1 − F1k n 10, R1 − F1n n 10)의
+      값 2.52–3.74 cm 다. 명세 5.6 초안의 2.49–3.74 는 SI 로 보낸 넷째 등록 대비 R0 − F1a(n 0, −2.49)를
+      포함한 C3 README 1.4 의 범위라 그림과 맞지 않아 쓰지 않았다.
+  (9) 설명문 첫 문장은 명세 5.6 초안 그대로(원고 명세 7절과 한 문장). 파일 형식은 Fig2_legend.md 와 같다
+      ('# Fig. 3' 머리, 굵은 제목 문장, 평문 패널 문자). 단어 수는 제목 + 본문.
+  (10) 변수 n 은 기울임(지침 2.2 '기울임은 한 글자 변수에만'). mathtext 글꼴은 style.mathtext_liberation()
+      으로 Liberation Sans 계열에 맞췄다(pdffonts 계열 1개).
+  (11) 패널 b 의 CI 는 fig3_a.csv(L15 재집계) 값이다. 초록 대비 AB3(lgw_bundle)의 CI 끝값과 소수 둘째 자리에서
+      다를 수 있다([4]).
+
+[8] audit_v3(지침 부록 A.1)
+  sizes [7.0], chars 496, thin_lines [], titles [],
+  boxed_text 0, codes [], comma4 [],
+  long_labels [], loose_numbers []
+  fails []
+
+[9] pdf_audit(지침 부록 A.2)
+  {"width_mm": 170.0, "height_mm": 120.0, "chars": 494, "sizes": {"7.0": 494}, "off_size": {}, "lt5": 0, "families": ["LiberationSans"], "type3": false}
+  pdffonts:
+    name                                 type              encoding         emb sub uni object ID
+    ------------------------------------ ----------------- ---------------- --- --- --- ---------
+    BGZIHO+LiberationSans-Bold           CID TrueType      Identity-H       yes yes yes     22  0
+    BGZIHO+LiberationSans                CID TrueType      Identity-H       yes yes yes     29  0
+    HEMWJP+LiberationSans-Italic         CID TrueType      Identity-H       yes yes yes     36  0
+
+[10] 그림 내장 글자(pdftotext)
+  연결어 대시 0건, 내부 코드 정규식 0건
+  a                                                                                                                   b                                                                         Cell-weighted           Block-equal        ±0.5 cm | 0 | Source Stefan | No labels                     Ten labels | Active-layer thickness (cm) | Shuffled physics labels | 50 | Recalibrated Stefan | Constant at pool mean | 100 | Constant at source mean | Residual | 150                                                                                    Linear thaw index | −4       −3     −2    −1    0   1      −4 −3 −2       −1   0         1 | 0         10         20         30         40 | Error change vs placebo (cm) | Square root of thaw index (√(°C d)) | c                                                                                                                                              d | 4                   Registered     Auxiliary                                                                                  6 | Error change vs physics input (cm) | Error change vs shrinkage (cm) | 4 | 2 | 2                                        Least squares | 0 | 0 | −2 | Recalibrated inputs                                                                       −2 | −4                                  Physics inputs | −4                                      Lena Delta       Canada | Residual lower                                                                                                   W Russia         E Russia | −6                                                                                                                            −6 | 0      3             10               40            160        All                                                            3                10             40              160       320 | Target labels, n
+  글자끼리 겹침 0쌍 [], 캔버스 밖 글자 [] (글자 77개), pdfimages 래스터 요소 0개
+  사람 점검(600 dpi PNG 100 % 잘라 보기): a 직접 라벨 3개와 선·점 분리, b 두 열 행 이름 한 번, c 열쇠·직접 라벨·방향 표지가 자료와 떨어짐, d 지역 열쇠 4개. 겹침·잘림 없음(2026-10-04).
+
+[11] 설명문(Fig3_legend.md)
+  단어 수 347(상한 350)
+  text_audit {'dash': [], 'banned': [], 'middot_num': [], 'comma4': [], 'codes': []}
+  수치 출처: 1.63 과 CI = fig3_a.csv shuffle n 0(lgx L15); 0.48 = fig3_a.csv tddlin n 0; Holm P = lgw_bundle AB3, AB7(Holm 10개); 등록 대비 범위 = fig3_b_L10_alln.csv F1k n 0, F1k n 10, F1n n 10(그림의 등록 대비 3개, [7] (8)); 40·160 범위 = fig3_b_L10_alln.csv F1k·F1n n 40, 160; '캐나다에서 왔다' 의 지역 행 근거는 [3]; d 의 값 = pool_fixed_curve.csv(MEAN n 3, Russia_W n 3); 재표집 횟수 = fig3_b_L10_alln.csv nboot, pool_fixed_curve.csv nboot, lgx L15 nboot [10000]; a 의 계수와 셀 수 = [6]
+
+[12] 렌더 시간 5.4 s

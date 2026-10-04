@@ -1,0 +1,196 @@
+% methods.tex : Methods (English manuscript, body text only, no preamble).
+% 작성 2026-10-04. 명세: paper/manuscript/MANUSCRIPT_SPEC.md 6절(M1-M15, 약 4240단어 목표), 1.4절(방법 이름),
+% 1.5절(서술 방향), 8절(Supplementary Methods 번호), 11절(자리표시 등록부), 12절(QA).
+% 구속 지침: design/journal_grade_style_guide.md 4절. 인용 키: paper/manuscript/en/refs_methods.bib
+% (refs_discussion.bib 와 같은 FirstAuthorYear 규칙).
+% 방법 약호(P0, P1, R1, D0, D1, W)는 쓰지 않는다. 실험·가설 번호(LG, LGX, WF, XA-XJ, L1-L43, AB1-AB10)는
+% 등록 소절(Internal pre-registration and deviations, Additional registered analyses)에만 둔다.
+% 코드 서체(\texttt)는 Code availability 안에만 쓴다. 세부는 명세 8절의 Supplementary Methods 1-9 로 보냈다.
+%
+% 수치 출처(원고 조립 때 shared/numbers.tex 매크로로 바꾼다. 자릿수는 지침 4.5):
+%   17,572 / 17,467 / 68 .............. claims/D_data_and_design/README.md E03, E04 (68 = v3 출처 표지 변경 행 = F4_calm_temp)
+%   20 (15 / 4 / 1) ................... D README E08, E50
+%   30 / 13,606 / 343 / 74 ............ D README E14, E10
+%   39.7 / 15.1 / 8.7 rows per 1 km ... D README E21-E23 (39.67, 15.11, 8.72)
+%   57 rows, 13 blocks / 132, 34 / 41 . D README E17-E19
+%   78-94 % / 1.59-1.62 (E0, main targets; Alaska(x) 1.50 has a Lena-dominated source) ... D README E35, E37
+%   14-17 cells in A .................. D README E29, E30
+%   21.7-43.0 cm (P0 RMSE, cell) ...... D README E39 (21.69-42.98); '이번 계산' 1.2-2.3 % -> '약 1-2 %'(명세 6.9)
+%   13,333 cells (error floor) ........ D README E45
+%   13-74 blocks ...................... D README E10-E14, E17 (Russia C expanded 13; 2026-10-04 check)
+%   27 targets, 5 splits, 5 draws, 2 seeds, 12 methods ... D README E24, E25
+%   adjusted Rand 0.999 / 0.997 / 0.832  claims/C8_gain_source/README.md 5.1 의 1
+%   3.6e-14 cm (34,360 keys); 11,814 keys; 43 of 288, 5.61 cm; 0.46 cm ... claims/SI_learners_new_regions/README.md 2.6
+%   commit hashes and times ........... git log (committer time, KST); docs/MANUSCRIPT_DRAFT_SUPPORT_2026-09-30.md M4.2
+%   selection rule (7 candidates) ..... claims/C5_method_selection/README.md 1.4
+%   Algorithm P ....................... docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.3, 2.4; docs/QA_FOLLOWUP_2026-10-04.md 2.4
+%   placement strategies .............. claims/C6_label_placement/README.md 3.1
+%   within-region retest (four changes)  claims/C4_sufficient_labels/README.md 1.2 (c)
+%   XA-XJ designs ..................... EXPERIMENT_PLAN_FINAL_BATCH 0.1, 1, 2.1-2.10, 6
+% 자리표시: [DECISION: ...] 6개, [미확인: ...] 4개, [XD: Methods M7 | ...] 1개(명세 11절 문자열 그대로).
+% 자리표시에 한글과 γ 가 있으므로 초안 컴파일은 xelatex(+xeCJK 또는 kotex)로 한다. 제출 전 점검에서 0건이어야 한다.
+
+\section{Methods}\label{sec:methods}
+
+\subsection{Study regions and labels}\label{sec:m-labels}
+
+Active-layer thickness (ALT) labels of the main regions came from the GTN-P/CALM records\cite{Streletskiy2025}, the ALLena compilation for the Lena River Delta region\cite{Veremeeva2025} and version 2 of the ABoVE data set for Alaska and Canada\cite{Moore2025}. Records were aggregated to cells so that repeated measurements at one location do not enter as independent labels. A cell is a coordinate rounded to four decimal places (ABoVE and ALLena) or a CALM site, and its label is the mean of its observations (Supplementary Methods 1). The cell table has 17,572 rows, of which 17,467 carry a direct label from mechanical probing or ground-penetrating radar (GPR). Sixty-eight CALM cells whose metadata name ground temperature or thaw tubes are not used as labels. Twenty temperature-derived cells (15 in Alaska, 4 in Canada and 1 on the Tibetan Plateau) were found after the table had been frozen and remain in the direct class with a flag. Label years span 1990 to 2024, so predictions are static and refer to the 2015--2020 covariate climatology.
+
+Macro-regions were defined geographically before the analysis, namely Alaska, the Lena Delta, Canada, W Russia, E Russia, Central Russia and Greenland [DECISION: 지역 이름 표기] [DECISION: 러시아 중부의 영문 표기]. Among Alaska and the four main regions, label rows range from 30 in E Russia to 13,606 in Alaska (Table~1). Ten sub-regions (Supplementary Table S1) were defined by $k$-means clustering of 0.5$^{\circ}$ block centroids without labels and were fixed before the main run.
+
+The label count $n$ is a row count, and the meaning of a row differs between regions. A row is the multi-year mean of a CALM site in W Russia and E Russia, usually a single-visit observation in the Lena Delta, mostly a point observation in Alaska and Canada, and a mean over about 1~km in the additional regions. Alaska, the Lena Delta and Canada have 39.7, 15.1 and 8.7 rows per 1~km location, and the 13,606 Alaskan rows lie at 343 locations in 74 blocks.
+
+Additional regions were assembled from public archives under rules fixed before any fit (Supplementary Methods 2). A label had to be a direct end-of-season thaw depth from 1990 or later, at least 100~km from existing labelled regions, and was aggregated to a cell of about 1~km. A region was eligible for confidence intervals if the scoring blocks of its valid splits formed a union of at least eight blocks. Sources without a confirmed redistribution licence were removed in a licence-verified edition that defines the main verdicts (Supplementary Table S17). In this edition, Central Russia (57 rows, 13 blocks, shallow regime) and the Tibetan Plateau (132 rows, 34 blocks, deep regime) are eligible. A North Atlantic group (41 rows) is eligible only in the full edition and is reported in the Supplementary Information.
+
+\subsection{Covariates}\label{sec:m-covariates}
+
+All learning methods use 25 covariates that are available in every region. The six terrain covariates are elevation, slope, the sine and cosine of aspect, and the topographic position index and roughness in windows of $33 \times 33$ pixels, from the Copernicus DEM GLO-30 [미확인: Copernicus DEM GLO-30 인용 형식]. The eight climate covariates are mean annual air temperature, thawing degree-days (TDD), freezing degree-days, $\sqrt{\mathrm{TDD}}$, warmest- and coldest-month air temperature, level-1 soil temperature and snow water equivalent, from ERA5-Land monthly means for 2015--2020\cite{MunozSabater2021}. The nine soil covariates are clay, sand and silt content, bulk density, coarse fragments and pH at 5--15~cm and soil organic carbon at three depths, extracted from the 250~m SoilGrids 2.0 layers\cite{Poggio2021} resampled to about 5~km. The two model-based covariates are the 1997--2021 mean of the ESA CCI Permafrost ALT product, version 4.0, and its validity flag\cite{Westermann2024}. This product is model output forced partly by the same reanalysis and is not treated as an observation.
+
+TDD and the Stefan solution\cite{Stefan1891} are
+\begin{equation}
+\mathrm{TDD} = \sum_{m} \max(\bar{T}_m, 0)\, d_m, \qquad \mathrm{ALT} \approx E\, s, \qquad s = \sqrt{\mathrm{TDD}},
+\label{eq:stefan}
+\end{equation}
+where $\bar{T}_m$ is the monthly mean 2~m air temperature of month $m$, $d_m$ is its number of days and $E$ is in cm\,($^{\circ}$C\,d)$^{-1/2}$. A cell is scored only if its label, its CCI value and its TDD from level-1 soil temperature are valid, and all methods share the scoring cells. Quantities derived from labels, such as the count and years of observations, are excluded from the inputs, and unit tests enforce this. The information resolution of the inputs is about 0.1$^{\circ}$ for climate and about 5~km for soil.
+
+\subsection{Stefan baselines and coefficient recalibration}\label{sec:m-stefan}
+
+The coefficient $E$ absorbs soil thermal properties, water content and surface conditions, and regional applications calibrate it against local measurements\cite{Nelson1997}. The source set $S$ of a target contains all labelled cells outside the target region and a 100~km buffer around it, and the source coefficient is the least-squares slope through the origin,
+\begin{equation}
+E_0 = \frac{\sum_{i \in S} s_i\, y_i}{\sum_{i \in S} s_i^2},
+\label{eq:e0}
+\end{equation}
+where $y_i$ is the observed ALT. The source-coefficient Stefan model predicts $E_0 s$. Alaskan cells form 78--94\% of the source sets of the main targets, so $E_0$ varies little between these targets (1.59--1.62~cm\,($^{\circ}$C\,d)$^{-1/2}$; Table~1). With $E_{\mathrm{ls}}$ the same estimator computed from the $n$ target labels, the recalibrated Stefan model predicts $E_n s$ with
+\begin{equation}
+E_n = \frac{n\, E_{\mathrm{ls}} + \kappa\, E_0}{n + \kappa}, \qquad \kappa = 10.
+\label{eq:en}
+\end{equation}
+The source coefficient thus carries the weight of ten labels, because recalibration with few labels can increase error\cite{Steyerberg2004}. The value of $\kappa$ was fixed from earlier experiments of this project and is not blind, and $\kappa = 3$ and $\kappa = 30$ are sensitivity cases. The local least-squares Stefan model uses $E_{\mathrm{ls}}$ without shrinkage. A gain of machine learning (ML) is stated only against the recalibrated model fitted to the same labels, because the gain over the source coefficient includes the gain of recalibration.
+
+A registered comparison of physics models and ALT products added two stronger baselines. The year-matched Stefan model applies $E_0$ to $\sqrt{\mathrm{TDD}}$ averaged over the observation years of each label within 2010--2024 (2010--2014 for earlier labels) and is reported at zero and at all labels. At 40 and 160 labels, the output of a soil-property Stefan model (Supplementary Methods 3), recalibrated with equations~(\ref{eq:e0}) and~(\ref{eq:en}), is reported as the stronger recalibrated baseline.
+
+\subsection{Machine-learning methods and combination structures}\label{sec:m-ml}
+
+In the transfer design, training rows are the source cells and the $n$ target labels with equal weight. Anchored methods have the form
+\begin{equation}
+\hat{y}(x) = a(x) + \lambda\, g(x),
+\label{eq:anchor}
+\end{equation}
+where $a$ is a physics anchor and $g$ is a learner trained on residuals from it. Direct ML regresses ALT on the covariates, which include $\sqrt{\mathrm{TDD}}$ and the CCI value. Physics pseudo-label augmentation adds rows with value $E_n s$ at cells of the label half of the target, ten per source row, while drawn cells keep their observed value. Source anchor plus residual ML uses $a = E_0 s$. Recalibrated anchor plus residual ML (residual ML) uses $a = E_n s$ and residual targets $y - E_0 s$ for source rows and $y - E_n s$ for target rows. Augmentation plus anchor plus residual adds zero-valued residual rows at label-half cells. Physics-input ML adds the outputs of a Kudryavtsev-type model [미확인: Kudryavtsev 1974 서지] and of the soil-property Stefan model, or the anchor value, to the inputs of direct ML. The Stefan-CCI anchor is the mean of $E_n s$ and the CCI value where that value is valid. Four further methods of the main experiment are described in Supplementary Methods 3. The residual weight $\lambda \in \{0.25, 0.5, 1.0\}$ is applied after fitting. The reference weight for verdicts, fixed before the main run, is 0.25 for residual structures and 1.0 for direct and physics-input structures, and the source anchor plus residual at 0.25 is called the low-weight residual.
+
+Four placebos tested whether the gain of augmentation comes from the cell-level Stefan values. They replaced the pseudo-labels by the same values shuffled among cells, by their target-level mean, by the mean source ALT, or by a function linear in TDD fitted to the source.
+
+The learner of the method comparisons is CatBoost\cite{Prokhorenkova2018} (200 iterations, learning rate 0.05, depth 3, two seeds). For direct ML without target labels, ten learners were compared. They were this setting, a larger CatBoost, CatBoost tuned by leave-one-source-region-out cross-validation, a random forest, TabPFN v2\cite{Hollmann2025} and TabICL v2\cite{Qu2026} without fine-tuning, and four neural networks with hyperparameters selected by leave-one-source-region-out cross-validation on source data\cite{BergstraBengio2012,CawleyTalbot2010}. The networks are a multilayer perceptron, a multi-head perceptron (not TabM\cite{Gorishniy2025}), a reduced FT-Transformer-type model\cite{Gorishniy2021} and RealMLP\cite{Holzmuller2024} (settings in Supplementary Methods 5). In the figures these methods are labelled Source Stefan, Year-matched Stefan, Recalibrated Stefan, Anchor + residual ML, Source anchor + residual, Physics pseudo-labels, Direct ML, Physics-input ML, Stefan-CCI anchor and, for the rule described below, Target-label CV selection.
+
+\subsection{Transfer design}\label{sec:m-transfer}
+
+To prevent information leakage from nearby labelled cells, the source of a target excludes the target region and a 100~km buffer. Sub-regions were evaluated with the parent region excluded from the source and, as a simulated new area inside a labelled region, with the rest of the parent kept. The 27 targets are the six version-3 regions other than Alaska, Alaska and the ten sub-regions in both modes.
+
+The 0.5$^{\circ}$ blocks of each target were split five times into halves A and B by assigning randomly permuted blocks to the half with fewer cells, so that labelled and scored cells are separated by block boundaries\cite{Roberts2017}. Labels were drawn from A and errors were scored on the masked cells of B. For each $n$ in $\{0, 3, 10, 40, 160, 320, 1000\}$ below the size of A, and for all cells of A, five random draws were made with seeds fixed by target, mode, split, $n$ and draw, so that all methods used the same labels. W Russia and E Russia have 14--17 cells in A, so pooled means at 40 and 160 labels contain only the Lena Delta and Canada.
+
+The four main regions (the Lena Delta, Canada, W Russia and E Russia) form the confirmatory pool. They were used in earlier experiments of this project, so their verdicts are re-tests of re-used regions. Alaska is a reference target, reported separately and in an auxiliary three-region mean with the Lena Delta and Canada. Central Russia and Greenland of the version-3 table are reported as point estimates, and sub-regions, which share cells with their parent, are counted by verdict class. The additional regions enter extended pools of five shallow regions and of six regions including the Tibetan Plateau. All Tibetan scored cells lie above the 99.5th percentile of source-cell elevation, so Tibetan contrasts are not used as evidence for independent regions.
+
+A validation ladder scored direct ML and a Stefan model fitted to the training folds on Alaska and the four main regions under eight schemes of increasing designed separation, from random cells to region holdout (Supplementary Methods 3). An earlier Alaskan analysis added $k$-fold nearest-neighbour distance matching (kNNDM)\cite{Linnenbrink2024}, which matches test-to-training distances to those between a prediction grid and the labels.
+
+\subsection{Within-region design and gain decomposition}\label{sec:m-within}
+
+Within-region tests ask what ML adds where hundreds to thousands of labels exist, and they were designed after the transfer results had been viewed. In Alaska, the Lena Delta and Canada, labels were drawn from half A and were the only training rows. The source coefficient of the transfer design served as prior, $\lambda$ was chosen from $\{0.25, 0.5, 1.0\}$ by block cross-validation within the drawn labels, and augmentation used ten pseudo-labels per label. A first test (5 splits, 1000 or more labels, comparator the best cross-validated physics calibration, nine SAR covariates added in Alaska) was rejected. A second test changed four elements, namely the comparator (the recalibrated Stefan model), the splits (25, of which 24 were valid in the Lena Delta), the recipes (Stefan-CCI anchor and direct ML added) and the label range (200, 500, 1000 and all labels). Both tests are reported.
+
+The gain decomposition asks at which spatial scale ML reduces error. Scoring cells were grouped by 0.5$^{\circ}$ block and air $\sqrt{\mathrm{TDD}}$, so that Stefan predictions and the eight climate covariates are constant within a group. With $N_g$ cells and means $\bar{y}_g$ and $\bar{\hat{y}}_g$ in group $g$,
+\begin{equation}
+\mathrm{SSE} = \sum_g \sum_{i \in g} \left[(y_i - \bar{y}_g) - (\hat{y}_i - \bar{\hat{y}}_g)\right]^2 + \sum_g N_g \left(\bar{y}_g - \bar{\hat{y}}_g\right)^2,
+\label{eq:decomp}
+\end{equation}
+where the terms are the within-grid and between-grid components. The within-grid RMSE uses groups with at least two cells, and for a Stefan model it equals the within-group standard deviation of the observations. Shares of the reduction are computed from the SSE because RMSE differences of components are not additive. The registration named soil $\sqrt{\mathrm{TDD}}$ for the grouping, whereas the run used the air $\sqrt{\mathrm{TDD}}$ of the Stefan predictions. A soil-grouping sensitivity analysis was therefore registered and run (adjusted Rand index between groupings 0.999 in Alaska, 0.997 in Canada and 0.832 in the Lena Delta).
+
+\subsection{Label placement procedures}\label{sec:m-placement}
+
+Placement strategies select cells of half A without using label values, except for active selection. Besides cell-random sampling, they were block stratification, covariate-cluster stratification, covariate max-min distance sampling, source-extrapolation priority, active selection by the prediction variance of the residual learner and $\sqrt{\mathrm{TDD}}$ priority (Supplementary Methods 8). They were compared within regions at 20 to 500 labels and, for block and max-min sampling, in transfer at 10 and 40 labels. These tests were designed after results had been viewed, whereas a block-spread contrast of the main experiment was registered before results.
+
+Algorithm P combines block allocation with covariate coverage and is the pre-specified placement procedure tested in the workflow analysis. It uses the standardized covariates of candidate cells (no label values), block sizes $N_b$, a nested budget of 10, 40 and 160 labels, an allocation exponent $\gamma$ and a seed.
+\begin{enumerate}
+\item Order blocks by farthest-first traversal of their covariate centroids $\mu_b$, starting from a seeded block or the block of existing labels.
+\item At budget $n_k$, allocate $q_b = n_k N_b^{\gamma} / \sum_{b'} N_{b'}^{\gamma}$ labels to block $b$ by largest remainders, capped at $N_b$.
+\item Fill the block with the largest remaining deficit, with its cell nearest to $\mu_b$ if it has no label and otherwise with its cell farthest from all chosen labels.
+\item Keep earlier labels when the budget grows.
+\end{enumerate}
+The candidate settings are $\gamma = 0$, 0.5 and 1, a variant with farthest-first choice of the first cell in a block, block stratification and max-min sampling. One candidate is selected by a mechanical rule from Alaskan targets only, so that the evaluation regions do not inform the choice. [XD: Methods M7 | 결과 열람 뒤 설계, 부록 XC-0 의 기계적 선택(알래스카 계열) | 2.4 고른 후보 이름과 γ] Following the registered reporting rule, no map that ranks measurement locations was produced.
+
+\subsection{Method-selection rule and bias diagnosis}\label{sec:m-selection}
+
+The selection rule chooses a method from the target labels alone.
+\begin{enumerate}
+\item With fewer than ten labels, use the recalibrated Stefan model.
+\item Assign the blocks of the labels at random to at most five folds (cell folds if one block). With fewer than two folds, use the recalibrated Stefan model.
+\item In each fold, recompute $E_n$ and fit seven candidates, namely the source-coefficient, recalibrated and local least-squares Stefan models, residual ML with $\lambda = 0.25$ and 1.0, augmentation plus anchor plus residual and physics pseudo-labels.
+\item Choose the candidate with the lowest cross-validated RMSE (ties to the smaller $\lambda$ and the earlier candidate).
+\item Refit it on all labels.
+\end{enumerate}
+The rule was registered after the label-grid results had been viewed and was applied at 10, 40, 160 and all labels to 30 targets (the 27 transfer targets and three licence-verified additional-region targets). It was compared with a fixed residual recipe with a non-inferiority margin of 0.5~cm.
+
+The bias diagnostic is the absolute mean error of the source-coefficient Stefan model at the ten labels of a draw, averaged over draws and splits. It uses only labels that recalibration also uses, so it is known before any learner is fitted. Its Spearman correlation with the gain of the selection rule over the source-coefficient model at all labels was computed over 28 targets. This gain includes recalibration, so the correlation concerns label-based correction (recalibration plus residual). The part of the gain beyond recalibration was examined in a separate post hoc analysis (Additional registered analyses).
+
+\subsection{Statistical analysis}\label{sec:m-stats}
+
+With $\mathrm{SSE}_b$ and $N_b$ the sum of squared errors and the number of scoring cells in block $b$ of half B, two root-mean-square errors (RMSE, cm) were computed,
+\begin{equation}
+\mathrm{RMSE}_{\mathrm{cell}} = \left(\frac{\sum_b \mathrm{SSE}_b}{\sum_b N_b}\right)^{1/2}, \qquad \mathrm{RMSE}_{\mathrm{block}} = \frac{1}{|B|}\sum_b \left(\frac{\mathrm{SSE}_b}{N_b}\right)^{1/2},
+\label{eq:rmse}
+\end{equation}
+where $|B|$ is the number of scoring blocks. The cell-weighted value is primary, and the block-equal value limits the influence of densely sampled blocks. A contrast $\Delta$ is the RMSE of the first method minus that of the second, paired by split, draw and seed and averaged over splits, so that negative values mean lower error for the first method. Stratified means weight regions equally.
+
+Confidence intervals (CIs) are 95\% percentile intervals of a bootstrap of the scoring blocks within each split, with the same resampled blocks for both methods. The hypotheses aggregated by the label-grid harness (the main experiment and the additional-region runs) and the prediction-interval experiment used 1000 replicates, and all other contrasts used 10,000. The registered block-spread contrast of the main experiment and the workflow analysis, whose arms use different label sets, used a two-stage bootstrap that also resamples draws; the placement tests report intervals conditional on the label draws. An auxiliary interval resampled the union of a region's blocks once for all splits. Where it changes the verdict, the result is described as depending on the split-independence assumption, and statements without this qualification require both verdicts to agree. A region entered a pooled interval if its valid splits had at least eight scoring blocks in their union.
+
+A contrast is lower error if the upper limits of both the cell-weighted and block-equal CIs are below zero, higher error if both lower limits are above zero, equivalent if neither holds and all four limits lie within $\pm 0.5$~cm (two one-sided tests at 2.5\%\cite{Schuirmann1987}), and undetermined otherwise (``no difference was established''). The margin was fixed before any result. It is about 1--2\% of the cell-weighted RMSE of the source-coefficient Stefan model in the main regions (21.7--43.0~cm) and is a convention, not a measurement error. Margins of 1.0~cm and of 2\% of that RMSE are sensitivity cases. A lower- or higher-error contrast with $|\Delta| < 0.5$~cm is reported as distinguishable with a magnitude below 0.5~cm. Non-inferiority is one-sided and requires both upper limits to be below $+0.5$~cm. The minimum label count $n^{*}$ of a contrast is the smallest $n$ at which the upper limit of the cell-weighted CI is below zero and at least two thirds of splits and 75\% of draws have $\Delta < 0$.
+
+The significance level is $\alpha = 0.05$ two-sided, corresponding to 0.025 one-sided. A $P$ value is the larger of the two-sided bootstrap $P$ values of the two weightings, and unadjusted and Holm-adjusted $P$ values of all registered contrasts are listed in Supplementary Table S2. Ten contrasts fixed before the results are the only ones that may carry verdict words in the abstract. Their $P$ values were adjusted by Holm's procedure\cite{Holm1979} with the family size fixed at ten, and a direction is stated in the abstract only if the adjusted $P$ is below 0.05. Otherwise the abstract states that no difference was established and the main text adds ``significant before correction only''. Results of the within-region, placement and selection tests and of the additional analyses appear in the abstract as numbers only. Within other registered families, Holm-adjusted $P$ values are auxiliary, except in the workflow test and the product comparison, where they set the wording.
+
+Pooled contrasts rest on four to seven regions, so the resampling unit is the 0.5$^{\circ}$ block (13 to 74 per region), and region values and ranges accompany every pooled mean. For statements about regions in general, key contrasts were recomputed over 50 splits in the four main regions and Alaska and summarized by a sign test, a sign-flip permutation test and a Hartung-Knapp random-effects mean\cite{HartungKnapp2001}. Such statements are made only if the Hartung-Knapp interval excludes zero, and with four regions the smallest two-sided sign-test $P$ is 0.125. Rank correlations are Spearman coefficients with intervals from joint resampling of blocks and draws. An error floor, the pooled variance of observations within groups of at least five cells sharing coarse non-terrain covariates (13,333 cells in Alaska), serves only as a denominator of effect sizes.
+
+Analyses designed after earlier results had been viewed are labelled as such, and post hoc descriptions carry no verdict words. Each registered hypothesis carries one of four blinding labels. These are blind, partly unblinded (direction seen under another protocol), replication (unblinded) (direction seen for the same contrast) and results existed at registration (unopened). Prediction intervals were evaluated by empirical coverage and by the interval score $(U - L) + (2/a)(L - y)_{+} + (2/a)(y - U)_{+}$ of a central interval $[L, U]$ with $a = 0.1$\cite{GneitingRaftery2007}. Hierarchical conformal intervals used source regions as groups\cite{Dunn2023} and, with two to four groups, carry no finite-sample guarantee (Supplementary Methods 4). No values are given after $\pm$.
+
+\subsection{Internal pre-registration and deviations}\label{sec:m-registration}
+
+Hypotheses, contrasts, decision rules and permitted sentences were committed to the project's git repository before the results they govern were retrieved (internal pre-registration). The commits were not time-stamped by a third party, and times are committer times in Korea Standard Time (full table in Supplementary Methods 6). The label-grid experiment (LG, L1--L8) was registered in commit 40be64c on 29 September 2026 at 15:45:46. Its extension (LGX), the foundation-model and additional-region runs (LGT, LGD), the interval experiment (LGU), the TabICL and tuned-network runs (LGF) and the reporting rules with the abstract bundle AB1--AB10 (WRAPUP, 316714c, 30 September 2026, 03:02:42) followed, all before the first retrieval of results at 07:20:22 that day.
+
+The workflow experiments were designed after these results had been viewed and were registered before running, WF0--WF5 in 4168331 (1 October 2026), WF6--WF8 in 1b42b4d (1 October 2026), WF9 and WF10 in 8180632 (2 October 2026) and the soil-grouping sensitivity in 7da0064 (2 October 2026). WF0 is a post hoc description, and the priority map planned as WF5 was not produced. The analyses XA to XJ were registered in commit 2678100 (4 October 2026, 14:22:39) before any fit. Only XC-F3 is labelled a confirmatory test registered before running, and XA is a post hoc analysis. The placement of each analysis in the main text or the Supplementary Information was fixed before its results.
+
+Deviations and post hoc changes are as follows.
+\begin{enumerate}
+\item The gain decomposition (WF9) grouped cells by air rather than the registered soil $\sqrt{\mathrm{TDD}}$, and a soil-grouping sensitivity analysis was added.
+\item After the first within-region test (WF1-a) was rejected, the second test (WF6) changed comparator, splits, recipes and label range.
+\item The product comparison (XG) was registered as a descriptive table conditional on an interval hypothesis (LGU-B2). After that hypothesis was undetermined, XG was re-registered with six Holm-adjusted contrasts and carries a registration-deviation label.
+\item The workflow splits (XC) moved from seeds 6--15 to 201--210 because seeds 1--200 had been used (LGX-N4), and a proposal to use XC verdict words in the abstract was withdrawn.
+\item AB4 carries a note that a pre-result sensitivity calculation had displayed the split distribution of the same quantity.
+\item Twenty temperature-derived cells found after the table had been frozen remain in the direct class with a flag.
+\item Four technical amendments (ff1be02, 30 September 2026, 11:44:30) were committed after the first retrieval but before any result was unpacked or opened, and they change no hypothesis, contrast or verdict rule. [DECISION: 수용 여부, 방법 초안 183행]
+\item CatBoost did not pass cross-environment check (i), so extended-pool rows that combine platforms carry a cross-environment flag.
+\item No map of measurement priorities was produced, following the registered rule.
+\item The climate-extrapolation test (WF10) was not decidable because its extrapolation set had three blocks in Canada.
+\end{enumerate}
+
+\subsection{Additional registered analyses}\label{sec:m-xbatch}
+
+The ten analyses XA to XJ follow the conventions above, and their placement in the main text or the Supplementary Information was fixed before results (Supplementary Methods 9; results in Supplementary Table S13).
+
+XA (main text, post hoc) splits the gain over the source-coefficient model into the shares of recalibration, of remaining shrinkage and of ML beyond recalibration, and estimates their rank correlations with coefficient error under two definitions, with intervals from resampling seven target families and blocks. Results are stated only as an interval excluding zero or as not established. XB (Supplementary) learns convex weights of physics models and ALT products from the target labels by cross-fitting, with and without a residual learner. XC (main text) applies Algorithm P, the ten-label diagnostic and the method rule in sequence on new splits of the five shallow regions. Its eight Holm-adjusted hypotheses compare the workflow with random placement and a fixed residual recipe at 40 and 160 labels, test non-inferiority to the recalibrated Stefan model at 10, 40 and 160 labels, compare Algorithm P with random placement under the selection rule, and test the workflow at ten labels in newly obtained regions. The evaluation cells were used in designing the components, so all but the last hypothesis are partly unblinded.
+
+XD (Supplementary) selects the setting of Algorithm P on Alaskan targets, tests alternative coefficient estimators and evaluates a learned placement policy once outside Alaska without $P$ values. XE (Supplementary) adds public inputs at 10--500~m to residual ML within regions and compares within-grid RMSE with the 25-covariate model and the recalibrated Stefan model. XF (Supplementary, blind) applies the eligibility rules to new public data and repeats core contrasts in each eligible region. XG (main text) scores existing ALT maps on the same blocks after masking blocks within 5 or 25~km of product training sites, raw against the source-coefficient model and recalibrated against residual ML. XH (main text) describes, without verdict words, the errors of the recalibrated Stefan model, residual ML and direct ML under random-cell, site, block, kNNDM and region-holdout validation in three regions. XI repeats the climate-extrapolation test on the licence-verified expanded Canadian table, and XJ tests temperature-derived labels as low-weight auxiliary rows (both Supplementary).
+
+\subsection{Computing environments and reproducibility}\label{sec:m-computing}
+
+Physics models and CatBoost run deterministically on CPUs. The label-grid experiment and its extension ran on cloud nodes (Rescale) with 64 CPU cores and four NVIDIA T4 GPUs, and the workflow experiments and additional analyses on cloud CPU nodes of one processor family (AMD EPYC Milan, 96 cores, and Milan-X, 64 cores). The foundation models, tuned networks, interval experiment and additional-region runs used a shared local server with NVIDIA RTX 3090 GPUs. Package versions were pinned (CatBoost 1.2.10 on all platforms; Supplementary Table S16), and each output records code hash, configuration hash, package versions and device.
+
+Physics and CatBoost results agreed between cloud and local runs to within $3.6 \times 10^{-14}$~cm over 34,360 keys, and the two cloud node types gave identical errors over 11,814 common keys. Neural networks did not reproduce across platforms. Of 288 FT-Transformer keys, 43 differed by more than 0.5~cm (maximum 5.61~cm) although refits within a platform were identical, and CatBoost on a ridge anchor differed by up to 0.46~cm. Both sides of a contrast therefore come from one platform, pooled means across platforms carry a cross-environment flag, and the workflow uses only CatBoost and closed-form physics.
+
+\subsection{Maps and colour scales}\label{sec:m-maps}
+
+Maps use a north polar stereographic projection with true scale at 70$^{\circ}$~N and the central meridian stated in each legend, and the Tibetan Plateau appears in a Lambert azimuthal equal-area inset. Land is from Natural Earth (1:50m), permafrost zones from [미확인: 영구동토 구역 자료의 이름과 판], and maps were drawn with Cartopy [미확인: Cartopy 판]. Scientific colour maps\cite{Crameri2018Zenodo,Crameri2020} were used, oslo reversed and restricted to 0.12--0.90 for ALT, broc centred on zero for error differences, bam for residuals and acton reversed and restricted to 0.05--0.95 for interval width.
+
+\subsection{Use of large language models}\label{sec:m-llm}
+
+[DECISION: LLM 사용 기재 문구]
+
+\subsection{Code availability}\label{sec:m-code}
+
+Code for data preparation, experiments, statistics, figures and tests is available at [DECISION: 공개 저장소 주소와 공개 시점] and archived with a version DOI [DECISION: Zenodo DOI]. The main components are the label-grid experiment (\texttt{scripts/3\_deep\_learning/h40\_label\_grid.py}), the validation ladder (\texttt{scripts/2\_evaluation/h41\_validation\_ladder.py}), the extension experiment (\texttt{scripts/3\_deep\_learning/h42\_label\_grid\_ext.py}), the workflow experiments (\texttt{scripts/3\_deep\_learning/h54\_workflow.py}), the abstract-contrast aggregator (\texttt{scripts/2\_evaluation/h39\_scenarios.py}), the post hoc reanalysis (\texttt{scripts/2\_evaluation/wf0\_reanalysis.py}), the additional analyses (\texttt{x\_*.py}), the unit tests (\texttt{tests/}) and the cloud job configurations (\texttt{configs/rescale/}), together with the registration documents and their revision histories. The additional analyses pin catboost 1.2.10, scikit-learn 1.9.1, pandas 2.3.3, scipy 1.17.1 and numpy 2.1.1. The pretrained weights of TabPFN v2 and TabICL v2 are not redistributed and are obtained from their providers.

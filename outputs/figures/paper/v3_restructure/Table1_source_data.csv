@@ -1,0 +1,8 @@
+group,region,label_source,labels,locations_1km,blocks_0p5deg,valid_splits,source_coefficient_E0_cm_per_sqrt_degC_d,source_cells,alaska_share_fraction,alaska_share_pct,alaska_share_basis,labels_shown,locations_1km_shown,blocks_0p5deg_shown,valid_splits_shown,source_coefficient_shown,alaska_share_pct_shown
+Main regions,Lena Delta,Points (ALLena),3037,201,20,5,1.6192971927795523,14429,0.9429620902349436,94,registered value,3037,201,20,5,1.62,94
+Main regions,Canada,Points (ABoVE),750,86,39,5,1.591875052557122,16697,0.8136791040306642,81,registered value,750,86,39,5,1.59,81
+Main regions,W Russia,CALM site means,31,29,21,5,1.5895097368022233,17436,0.7803395274145446,78,registered value,31,29,21,5,1.59,78
+Main regions,E Russia,CALM site means,30,30,21,5,1.591176417019019,17437,0.7802947754774331,78,registered value,30,30,21,5,1.59,78
+Reference,Alaska,Points (ABoVE),13606,343,74,5,1.504594967699029,3860,0.0,0,registered value,"13,606",343,74,5,1.50,0
+New regions,Central Russia (expanded),1 km cell means,57,57,13,5,1.5913158901189328,17460,0.7792668957617411,78,derived: Alaska cells / source cells,57,57,13,5,1.59,78
+New regions,Tibetan Plateau,1 km cell means,132,132,34,5,1.5913805231261562,17466,0.7789991984426886,78,derived: Alaska cells / source cells,132,132,34,5,1.59,78
