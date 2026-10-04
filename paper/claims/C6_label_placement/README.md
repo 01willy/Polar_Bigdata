@@ -431,6 +431,7 @@ W 의 `exp=wf2, test_id=WF2-a`, `contrast` 에 'R1(0.25)' 를 포함하는 144�
 | XC-5b·XC-5c: A1 − A5(규칙 W 아래 배치 효과), n 40·160(계획 8.10) | 시험하지 않음(Algorithm P = S1, 규칙 5), Holm p 1 | | `data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_hyp.csv` | 알래스카 계열에서 고정한 배치 절차가 무작위였으므로 워크플로 안의 배치 효과는 시험되지 않았다 |
 | XC-F3·S-XC0·S-XC3(n 10 의 A1 − A2, A4 − A2) | 시험하지 않음(n 10 에서 A1 = A2) | 부록 XC-F3 은 XF 마감(2026-10-11 14:22 KST) 뒤 확정, 현재 적격 0곳 | 같음 | 외부 계열 확인 시험은 아직 없다 |
 | XC-r rA4(지역 내 Algorithm P + R1) | 시험하지 않음 | | `data/processed/xbatch/XC_workflow_end_to_end/sealed/xc_xcr_contrasts.csv` | 지역 내 배치 효과도 시험되지 않았다 |
+| XD-5: 오라클 대비 후회와 계열 하나 제외 교차검증(계획 8.11, 서술) | 판정어·p 없음 | 후회 S9* / Algorithm P: CA-2 0.084 / 0.089, CA-3 0.061 / 0.085, LE-1 0.344 / 0.069, LE-2 0.034 / 0.051, 티베트 0.195 / 0.090(상대 U). 계열 하나 제외 효용 S9-DS 2/5 과제 음수, S9-GBM 5/5 음수(−0.044 에서 −0.004) | `data/processed/xbatch/XD_placement_policy/sealed/xd5_regret.csv`, `xd5_cv_ds.csv`, `xd5_cv_gbm.csv` | 학습된 배치 정책의 후회는 과제마다 달랐다. S9-GBM 과 S9-DS 의 차이는 사후 비교다 |
 
 ---
 

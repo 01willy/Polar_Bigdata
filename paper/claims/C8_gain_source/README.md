@@ -286,6 +286,7 @@ X 묶음은 2026-10-04 계획 단계다. 이 폴더 작성 시점(13:03)에는 `
 | XK: 격자 크기별 P1 − R1(추가 등록, 서술) | 판정어 없음 | 알래스카 1 km 0.50, 0.05° 1.67, 0.1° 1.54, 0.25° 1.61(셀 가중) | `data/processed/xbatch/XK_support_scale/xk_support_scale_v1.csv` | 해석 규칙 2 는 두 가중이 다른 격자를 골라 갈래 문장을 쓰지 않고 사실만 기록했다 |
 | XL: 지도 비교(추가 등록, 서술) | 판정 없음 | 0.1° 셀 평균이 1 km 지도 분산의 97 %(알래스카)·61 %(레나)를 설명 | `data/processed/xbatch/XL_map_products/xl_summary_v1.csv` | 지도 설명문: '1 km 지도는 표시 해상도이고 정보 해상도는 기후 입력(약 10 km)과 토양 입력(약 5 km)에 묶인다' |
 | XB-6: 적층 가중(서술) | 판정어 없음 | 전량 평균 가중: 알래스카 Ss 0.82, 캐나다 Ku 0.57, 레나 P* 0.77, 티베트 Ca 0.92 | `data/processed/xbatch/XB_multisource_stacking/sealed/xb_weights_summary.csv` | 가중의 원인 문장은 쓰지 않는다(계획 2.2) |
+| XE-e: 현장 VWC 상한 진단(계획 8.6, 진단(탐색)) | 판정을 바꾸지 않는다 | P1 격자 안 잔차 설명 비율(블록 교차검증): 알래스카 −3.54 %(1차 회귀)·−4.89 %(catboost_lo), 캐나다 −4.58 %·−4.48 %; 민감도 −6.59 에서 +2.55 %; 0.5 cm 등가 7.9 %·5.0 % | `data/processed/xbatch/XE_hires_covariates/sealed/xe_e_xe_e.csv` | 현장에서 잰 토양 수분은 격자 안 잔차를 설명하지 못했다 |
 
 ## 7. 파일
 
