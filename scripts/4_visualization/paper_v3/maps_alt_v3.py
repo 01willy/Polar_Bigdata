@@ -67,10 +67,8 @@ PROC = ROOT / "data" / "processed"
 PC = ccrs.PlateCarree()
 GEOD = Geod(ellps="WGS84")
 CELL_DEG = 0.009
-NODATA = S.BASEMAP["nodata"]           # #B8BEC6
-LAND = S.BASEMAP["land"]               # #f4f4f4
-COAST = S.BASEMAP["coast"]             # #bdbdbd
-GRAT = S.BASEMAP["graticule"]          # #e0e0e0
+NODATA = S.BASEMAP["nodata"]           # #C9CDD3
+# 육지·해안·경위선 색은 v4 토큰 color.map_base(매체별)이며 그릴 때 S.BASEMAP 에서 읽는다(use_medium 이 바꾼다)
 MAPPED = "#e6e6e6"                     # 학습 범위 패널의 표시 셀 바탕
 WATER = "#ffffff"
 GRAY_TXT = "#6b6b6b"
@@ -326,9 +324,9 @@ def base_map(ax, d, ext, M, coast=True):
     ax.set_extent(ext, crs=d["proj"])
     ax.set_facecolor("#ffffff")
     ne = ne_layers(d["key"])
-    ax.add_geometries(ne["land"], crs=PC, facecolor=LAND, edgecolor="none", zorder=0)
+    ax.add_geometries(ne["land"], crs=PC, facecolor=S.BASEMAP["land"], edgecolor="none", zorder=0)
     if coast:
-        ax.add_geometries(ne["coastline"], crs=PC, facecolor="none", edgecolor=COAST, linewidth=M.lw_coast, zorder=4)
+        ax.add_geometries(ne["coastline"], crs=PC, facecolor="none", edgecolor=S.BASEMAP["coast"], linewidth=M.lw_coast, zorder=4)
     ax.spines["geo"].set_linewidth(M.lw)
     ax.spines["geo"].set_edgecolor("#000000")
 
@@ -339,7 +337,7 @@ def graticule(ax, xlocs, ylocs, M, left=False, bottom=False):
         lab["left"] = "y"
     if bottom:
         lab["bottom"] = "x"
-    gl = ax.gridlines(crs=PC, draw_labels=lab if lab else False, linewidth=M.lw_grat, color=GRAT, xlocs=mticker.FixedLocator(xlocs),
+    gl = ax.gridlines(crs=PC, draw_labels=lab if lab else False, linewidth=M.lw_grat, color=S.BASEMAP["graticule"], xlocs=mticker.FixedLocator(xlocs),
                       ylocs=mticker.FixedLocator(ylocs), x_inline=False, y_inline=False, zorder=3)
     if lab:
         gl.rotate_labels = False
@@ -427,7 +425,7 @@ def location_inset(fig, rect, box, M):
     ia.set_extent([-180, 180, 52, 90], crs=PC)
     ia.set_facecolor("#ffffff")
     ia.add_geometries(list(shpreader.Reader(shpreader.natural_earth(resolution="110m", category="physical", name="land")).geometries()),
-                      crs=PC, facecolor="#d0d0d0", edgecolor="none")
+                      crs=PC, facecolor=S.BASEMAP["land"], edgecolor=S.BASEMAP["coast"], linewidth=M.lw_coast)
     lon = np.r_[np.linspace(box["lon0"], box["lon1"], 30), np.linspace(box["lon1"], box["lon0"], 30), box["lon0"]]
     lat = np.r_[np.full(30, box["lat0"]), np.full(30, box["lat1"]), box["lat0"]]
     ia.plot(lon, lat, color="#000000", lw=M.lw_coast, transform=PC)

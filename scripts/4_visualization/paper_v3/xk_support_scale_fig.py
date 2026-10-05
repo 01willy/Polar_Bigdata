@@ -38,11 +38,12 @@ SUP_LAB = {"1km": "1 km", "0.05deg": "0.05°", "0.1deg": "0.1°", "0.25deg": "0.
 STY = {
     "p1": dict(label="Recalibrated Stefan", color=S.METHOD["recalibrated_stefan"]["color"], ls="-", band=True),
     "r1": dict(label="Anchor + residual ML", color=S.METHOD["anchor_residual"]["color"], ls="-", band=True),
-    "cci4": dict(label="CCI v4", color="#a6761d", ls=(0, (4, 2)), band=False),
-    "cci5": dict(label="CCI v5", color="#a6761d", ls="-", band=False),
-    "wei": dict(label="Wei 2026", color="#1b7f79", ls="-", band=False),
-    "yk": dict(label="Yi-Kimball", color="#5f6b2f", ls=(0, (5, 1.5, 1.5, 1.5)), band=False),
+    "cci4": dict(label="CCI v4", color=S.PRODUCT["CCI"]["color"], ls=(0, (4, 2)), band=False),      # v4 토큰 color.products
+    "cci5": dict(label="CCI v5", color=S.PRODUCT["CCI"]["color"], ls="-", band=False),
+    "wei": dict(label="Wei 2026", color=S.PRODUCT["Wei"]["color"], ls="-", band=False),
+    "yk": dict(label="Yi-Kimball", color=S.PRODUCT["YK"]["color"], ls=(0, (5, 1.5, 1.5, 1.5)), band=False),
 }
+D_COLOR = S.METHOD["anchor_residual"]["color"]      # d–f 의 차(Stefan − 잔차 ML)는 잔차 ML 의 이득이라 제안 방법 색(v4: 검정만 쓰는 계열 없음)
 BAND_ALPHA = 0.15
 GRAY = "#6b6b6b"
 
@@ -87,10 +88,10 @@ def bottom_panel(ax, d, M, ylim):
     x = np.arange(len(SUPS))
     ax.axhline(0.0, color=S.INK_AUX, lw=M.lw, zorder=1)
     off = 0.12
-    ax.vlines(x - off, r.d_rmse_vs_r1_cw_lo.values, r.d_rmse_vs_r1_cw_hi.values, color="#000000", lw=2.0 if M.paper else 4.0, zorder=3)
-    ax.plot(x - off, r.d_rmse_vs_r1_cw.values, ls="none", marker="o", ms=S.MS["main"] if M.paper else 8.0, color="#000000", zorder=4)
-    ax.vlines(x + off, r.d_rmse_vs_r1_be_lo.values, r.d_rmse_vs_r1_be_hi.values, color=S.INK_AUX, lw=1.0 if M.paper else 2.0, zorder=3)
-    ax.plot(x + off, r.d_rmse_vs_r1_be.values, ls="none", marker="o", ms=S.MS["main"] if M.paper else 8.0, mfc="#ffffff", mec=S.INK_AUX,
+    ax.vlines(x - off, r.d_rmse_vs_r1_cw_lo.values, r.d_rmse_vs_r1_cw_hi.values, color=D_COLOR, lw=2.0 if M.paper else 4.0, zorder=3)
+    ax.plot(x - off, r.d_rmse_vs_r1_cw.values, ls="none", marker="o", ms=S.MS["main"] if M.paper else 8.0, color=D_COLOR, zorder=4)
+    ax.vlines(x + off, r.d_rmse_vs_r1_be_lo.values, r.d_rmse_vs_r1_be_hi.values, color=D_COLOR, lw=1.0 if M.paper else 2.0, zorder=3)
+    ax.plot(x + off, r.d_rmse_vs_r1_be.values, ls="none", marker="o", ms=S.MS["main"] if M.paper else 8.0, mfc="#ffffff", mec=D_COLOR,
             mew=1.0 if M.paper else 2.0, zorder=4)
     ax.set_ylim(*ylim)
     ax.yaxis.set_major_locator(mticker.MultipleLocator(2.0))
@@ -141,9 +142,9 @@ def build(medium):
             ax2.set_yticklabels([])
         MV.letter(fig, xs[j], y2 - (1.2 if M.paper else 2.0), "def"[j], M, None if (M.paper or j > 0) else f"Stefan {MV.MINUS} residual ML")
         if j == 0:
-            hw = [Line2D([], [], color="#000000", lw=2.0 if M.paper else 4.0, marker="o", ms=S.MS["main"] if M.paper else 8.0, label="Cell-weighted"),
-                  Line2D([], [], color=S.INK_AUX, lw=1.0 if M.paper else 2.0, marker="o", ms=S.MS["main"] if M.paper else 8.0, mfc="#ffffff",
-                         mec=S.INK_AUX, mew=1.0 if M.paper else 2.0, label="Block-equal")]
+            hw = [Line2D([], [], color=D_COLOR, lw=2.0 if M.paper else 4.0, marker="o", ms=S.MS["main"] if M.paper else 8.0, label="Cell-weighted"),
+                  Line2D([], [], color=D_COLOR, lw=1.0 if M.paper else 2.0, marker="o", ms=S.MS["main"] if M.paper else 8.0, mfc="#ffffff",
+                         mec=D_COLOR, mew=1.0 if M.paper else 2.0, label="Block-equal")]
             ax2.legend(handles=hw, loc="lower right", frameon=False, fontsize=M.fs if M.paper else 14.0, handlelength=1.4, borderaxespad=0.3,
                        labelspacing=0.3)
     hs = [Line2D([], [], color=st["color"], ls=st["ls"], lw=(S.LW["main"] if M.paper else 3.0) if st["band"] else (S.LW["aux"] if M.paper else 2.0),

@@ -23,7 +23,7 @@
    5.2
   ],
   "min_font_pt": 12.0,
-  "texts": 75,
+  "texts": 79,
   "outside": [],
   "overlaps": [],
   "small": [],
@@ -78,7 +78,7 @@
   "outside": [],
   "overlaps": [],
   "small": [],
-  "arrows": 0,
+  "arrows": 5,
   "png_px": [
    3600,
    1560
@@ -91,7 +91,7 @@
    5.2
   ],
   "min_font_pt": 12.0,
-  "texts": 25,
+  "texts": 27,
   "outside": [],
   "overlaps": [],
   "small": [],
@@ -108,7 +108,7 @@
    5.2
   ],
   "min_font_pt": 12.0,
-  "texts": 69,
+  "texts": 71,
   "outside": [],
   "overlaps": [],
   "small": [],
@@ -147,6 +147,108 @@
   "overlaps": [],
   "small": [],
   "arrows": 8,
+  "png_px": [
+   3600,
+   1380
+  ]
+ },
+ "M10_stefan_physics": {
+  "name": "M10_stefan_physics",
+  "size_in": [
+   12.0,
+   5.2
+  ],
+  "min_font_pt": 12.0,
+  "texts": 66,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 0,
+  "png_px": [
+   3600,
+   1560
+  ]
+ },
+ "B1_background": {
+  "name": "B1_background",
+  "size_in": [
+   12.0,
+   5.2
+  ],
+  "min_font_pt": 12.0,
+  "texts": 58,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 0,
+  "png_px": [
+   3600,
+   1560
+  ]
+ },
+ "B2_prior_work": {
+  "name": "B2_prior_work",
+  "size_in": [
+   12.0,
+   4.6
+  ],
+  "min_font_pt": 12.0,
+  "texts": 68,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 0,
+  "png_px": [
+   3600,
+   1380
+  ]
+ },
+ "R0_summary_ladder": {
+  "name": "R0_summary_ladder",
+  "size_in": [
+   12.0,
+   5.2
+  ],
+  "min_font_pt": 12.0,
+  "texts": 43,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 0,
+  "png_px": [
+   3600,
+   1560
+  ]
+ },
+ "M6b_models_detail": {
+  "name": "M6b_models_detail",
+  "size_in": [
+   12.0,
+   5.2
+  ],
+  "min_font_pt": 12.0,
+  "texts": 66,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 3,
+  "png_px": [
+   3600,
+   1560
+  ]
+ },
+ "E1_evidence_scope": {
+  "name": "E1_evidence_scope",
+  "size_in": [
+   12.0,
+   4.6
+  ],
+  "min_font_pt": 12.0,
+  "texts": 40,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 0,
   "png_px": [
    3600,
    1380

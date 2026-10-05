@@ -1,0 +1,99 @@
+{
+ "region": "Lena Delta",
+ "alt_range": [
+  35.0,
+  50.0
+ ],
+ "coef": {
+  "E_n": 1.4345920057067902,
+  "lam": 0.25
+ },
+ "n_shown": 38086,
+ "hillshade": {
+  "azimuth_deg": 315.0,
+  "altitude_deg": 45.0,
+  "vertical_exaggeration": 2.0,
+  "weight": 0.35,
+  "res_m": 250.0
+ },
+ "dem": {
+  "shape": [
+   968,
+   983
+  ],
+  "n_tiles": 22,
+  "missing_tiles": [
+   "Copernicus_DSM_COG_10_N72_00_E130_00_DEM",
+   "Copernicus_DSM_COG_10_N73_00_E130_00_DEM"
+  ],
+  "seconds": 10.3,
+  "res_m": 250.0,
+  "crs": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"Unknown based on WGS 84 ellipsoid\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",70],PARAMETER[\"central_meridian\",126.7],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",SOUTH],AXIS[\"Northing\",SOUTH]]",
+  "dem_stats": {
+   "min": -5.080600738525391,
+   "p50": 6.451340675354004,
+   "p99": 373.55695037841764,
+   "max": 581.6339721679688,
+   "frac_finite": 0.9478741918397888
+  }
+ },
+ "drape": {
+  "n_hit_px": 797393,
+  "frac_land_px": 0.7368298260511338,
+  "shape": [
+   968,
+   983
+  ],
+  "w_shade": 0.35,
+  "alt_range": [
+   35.0,
+   50.0
+  ],
+  "extent": [
+   -122854.99558332807,
+   122895.00441667193,
+   -2024159.7506564334,
+   -1782159.7506564334
+  ]
+ },
+ "layout": {
+  "paper": {
+   "size_mm": [
+    170.0,
+    153.9
+   ],
+   "map_mm": [
+    145.2,
+    142.9
+   ],
+   "scale_bar": {
+    "corner": "tr",
+    "counts": {
+     "tl": 463,
+     "tr": 0,
+     "bl": 590,
+     "br": 334
+    }
+   }
+  },
+  "slide": {
+   "size_in": [
+    12.0,
+    5.2
+   ],
+   "map_mm": [
+    118.0,
+    116.1
+   ],
+   "scale_bar": {
+    "corner": "tr",
+    "counts": {
+     "tl": 1010,
+     "tr": 0,
+     "bl": 1250,
+     "br": 583
+    }
+   }
+  }
+ }
+}

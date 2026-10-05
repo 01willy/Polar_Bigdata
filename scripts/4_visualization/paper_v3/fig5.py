@@ -420,7 +420,7 @@ def draw_maps(fig, T, proj, ext, geoms):
         ax = S.axes_mm(fig, x0, L["map_y"], L["map_w"], L["map_w"], projection=proj)
         ax.set_extent(ext, crs=proj)
         ax.spines["geo"].set_visible(False)
-        ax.add_geometries(land, pc, facecolor=S.BASEMAP["land"], edgecolor="none", zorder=0).set_rasterized(True)       # 밀집 지도 층: 600 dpi 래스터
+        ax.add_geometries(land, pc, facecolor=S.BASEMAP["land"], edgecolor=S.BASEMAP["coast"], linewidth=S.LW["coast"], zorder=0).set_rasterized(True)       # 밀집 지도 층: 600 dpi 래스터
         ax.add_geometries(lakes, pc, facecolor=S.BASEMAP["sea"], edgecolor="none", zorder=0.1).set_rasterized(True)
         lon_s = np.linspace(-180, 0, 361)
         for la in (60, 70, 80):        # 경위선: 위도 3개, 경도 5개(지침 2.3 상한)
@@ -470,7 +470,7 @@ def map_furniture(fig, ax, proj, ext, mm_to_m, geoms):
         y = _edge_crossing(proj, la, ext, side)
         if y is not None:
             xx = x0 + 0.8 * mm_to_m if side == "left" else x1 - 0.8 * mm_to_m
-            ax.text(xx, y + 0.6 * mm_to_m, f"{la}° N", ha="left" if side == "left" else "right", va="bottom", fontsize=S.FONT_PT,
+            ax.text(xx, y + 0.6 * mm_to_m, f"{la}°N", ha="left" if side == "left" else "right", va="bottom", fontsize=S.FONT_PT,
                     transform=proj, zorder=5).set_gid("scale")
             info["lat_labels"].append(la)
     # 위치 삽도(범북극 윤곽과 대상 사각형), 오른쪽 위
@@ -478,15 +478,21 @@ def map_furniture(fig, ax, proj, ext, mm_to_m, geoms):
     axi = S.axes_mm(fig, L["map_x"][0] + L["map_w"] - iw - 0.5, L["map_y"] + 0.5, iw, iw, projection=proj)
     axi.set_extent([-4.7e6, 4.7e6, -4.7e6, 4.7e6], crs=proj)
     import cartopy.crs as ccrs
-    axi.add_geometries(geoms[2], crs=ccrs.PlateCarree(), facecolor="#d9d9d9", edgecolor="none", linewidth=0, zorder=0.4).set_rasterized(True)
+    axi.add_geometries(geoms[2], crs=ccrs.PlateCarree(), facecolor=S.BASEMAP["land"], edgecolor=S.BASEMAP["coast"], linewidth=S.LW["coast"],
+                       zorder=0.4).set_rasterized(True)
     axi.set_facecolor("white")
     axi.spines["geo"].set_linewidth(1.0); axi.spines["geo"].set_edgecolor(S.INK_AUX)
     rect = Rectangle((x0, y0), x1 - x0, y1 - y0, transform=axi.transData, facecolor="none", edgecolor=S.INK, lw=1.0, zorder=3)
     rect.set_gid("allowed_frame")
     axi.add_patch(rect)
-    # 열쇠(오른쪽 아래): 1줄 후보 셀, 2줄 원 크기(값은 크기 열쇠 값, 명세 1.6)
+    # 열쇠(오른쪽 아래): 1줄 후보 셀, 2줄 원 크기(값은 크기 열쇠 값, 명세 1.6).
+    # v4 map_base 로 육지·해안이 진해져 허드슨만 해안 위의 열쇠 글자가 읽기 어려워, 열쇠 뒤에 흰 바탕(테두리 없음)을 깐다
     kx = x1 - 19.5 * mm_to_m
     ky1, ky2 = y0 + 9.0 * mm_to_m, y0 + 2.8 * mm_to_m
+    back = Rectangle((kx - 1.2 * mm_to_m, y0 + 0.8 * mm_to_m), (x1 - kx) + 0.4 * mm_to_m, 10.4 * mm_to_m, transform=proj,
+                     facecolor=S.BASEMAP["sea"], edgecolor="none", alpha=0.85, zorder=4.5)
+    back.set_gid("key_backing")
+    ax.add_patch(back)
     ax.plot([kx + 0.5 * mm_to_m], [ky1], "o", ms=2.0, color=S.BASEMAP["candidate"], mew=0, transform=proj, zorder=5)
     ax.text(kx + 1.6 * mm_to_m, ky1, "Candidate cells", ha="left", va="center", fontsize=S.FONT_PT, transform=proj, zorder=5)
     cx = kx

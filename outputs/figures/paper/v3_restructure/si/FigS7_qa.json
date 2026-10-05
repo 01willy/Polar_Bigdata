@@ -1,6 +1,6 @@
 {
  "stem": "FigS7",
- "created": "2026-10-05 14:43:24",
+ "created": "2026-10-05 17:20:15",
  "size_mm": [
   170.0,
   134.0
@@ -25,7 +25,7 @@
   "liberation": false,
   "ok": true
  },
- "pdf_bytes": 300630,
+ "pdf_bytes": 300627,
  "sources": [
   "data/processed/m1/cv_scheme_comparison.csv",
   "data/processed/m1/cv_scheme_distances.csv",

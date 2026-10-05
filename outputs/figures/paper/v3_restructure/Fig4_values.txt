@@ -1,5 +1,5 @@
 Fig 4 v3 값 대조 기록
-생성: 2026-10-05 13:47, scripts/4_visualization/paper_v3/fig4.py
+생성: 2026-10-05 17:33, scripts/4_visualization/paper_v3/fig4.py
 
 ## 1. 원천 파일(sha256)
 - data/processed/paper_figs/fig4_a.csv: 3cfd184acf9ee32e3635996a8f5e9279f67ecb48e13591a8c81cb19c4d68c106 (claims MANIFEST 에 없음)

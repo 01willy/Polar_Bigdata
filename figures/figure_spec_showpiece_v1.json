@@ -1,0 +1,355 @@
+{
+  "meta": {
+    "created": "2026-10-05",
+    "purpose": "Lab-presentation showpiece maps (descriptive products; no verdict words, no accuracy claims beyond the registered map records)",
+    "style_refs": [
+      "design/style_tokens_v4.json",
+      "scripts/4_visualization/paper_v3/style.py",
+      "scripts/4_visualization/paper_v3/maps_alt_v3.py (ALT and difference colormaps, native-cell mesh, basemap)"
+    ],
+    "frozen_modules_read_only": [
+      "scripts/3_deep_learning/h54_workflow.py",
+      "scripts/3_deep_learning/h40_label_grid.py",
+      "scripts/3_deep_learning/h42_label_grid_ext.py",
+      "scripts/2_evaluation/map_alaska_v1.py",
+      "scripts/4_visualization/paper_v3/maps_alt_v3.py"
+    ],
+    "compute": "CPU only (CatBoost CPU through h54 WFFitter, 4 threads, nice 10); no GPU is needed for any product",
+    "scripts_new": [
+      "scripts/2_evaluation/label_sequence_v1.py",
+      "scripts/4_visualization/paper_v3/label_sequence_fig.py",
+      "scripts/4_visualization/paper_v3/hillshade_maps_v1.py",
+      "scripts/4_visualization/paper_v3/cover_bg_v1.py",
+      "scripts/4_visualization/paper_v3/lena_3d_v1.py",
+      "scripts/4_visualization/paper_v3/showpiece_contact_sheet.py"
+    ]
+  },
+  "label_sequence": {
+    "message": "How the 1 km ALT map of a region changes as the number of label cells used by the workflow grows from 0 to all",
+    "regions": {
+      "lena": {
+        "target": "Lena",
+        "labels": 3037,
+        "blocks_0p5deg": 20
+      },
+      "alaska": {
+        "target": "Alaska",
+        "labels": 13606,
+        "blocks_0p5deg": 74
+      }
+    },
+    "n_values": [
+      0,
+      10,
+      40,
+      160,
+      "all"
+    ],
+    "draw": "nested block-dispersed order with seed 0: blocks permuted (RandomState(0)), cells within each block permuted, round-robin over blocks; the first n cells of this one order are the n label cells, so each step keeps the previous cells",
+    "method_by_n": {
+      "0": "source-coefficient Stefan P0 = E0 * sqrt(TDD); E0 = least squares on the source pool (all other regions, 100 km buffer; h54.build_rctx rule via map_alaska_v1.region_context)",
+      "10": "recalibrated Stefan P1 = E_n * sqrt(TDD); E_n = (n E_ls + kappa E0)/(n + kappa), kappa = 10 (h54 RUnit.coefs)",
+      "40,160,all": "recalibrated anchor + residual CatBoost R1 = E_n * sqrt(TDD) + lambda * mean_g(seeds 0, 1); lambda in {0.25, 0.5, 1.0} by within-label 0.5 deg block 5-fold CV (h54 RUnit.lam_cv through map_alaska_v1.fit_r1); if fewer than 2 blocks the rule returns 0.25 and the flag is recorded"
+    },
+    "outputs_data": "data/processed/map_<region>/label_sequence_v1/pred_n<N>.csv.gz (cell_id, pred, p1, corr) + label_sequence_v1_meta.json (seed, cells, E0, E_ls, E_n, lambda, K, flag, fit time, sha256)",
+    "figure_paper": {
+      "size_mm": [
+        170,
+        "auto <= 90"
+      ],
+      "layout": "row 1: five ALT maps on one shared scale (same range as the registered v3 map of the region); row 2: change versus the all-label map, zero-centred diverging scale shared across the row; label cells as black points on every map; label count under each column; panel letters a-e / f-j",
+      "colormaps": {
+        "alt": "cmcrameri oslo_r 0.12-0.90 (approved)",
+        "change": "cmcrameri broc, TwoSlopeNorm(0) (approved)"
+      },
+      "numbers_in_figure": "label counts only (category labels); no RMSE"
+    },
+    "figure_slide": {
+      "size_in": [
+        12.0,
+        5.2
+      ],
+      "font_pt_min": 12,
+      "layout": "same 2 x 5 matrix, vertical colour bars at the right"
+    },
+    "gif": {
+      "path": "deck/assets/paper_report/maps/<Region>_label_sequence.gif",
+      "frames": "one per n: ALT map (left) and change versus all-label map (right), fixed colour limits, label cells drawn",
+      "frame_s": 1.2,
+      "encoder": "ffmpeg palettegen/paletteuse (imageio_ffmpeg static binary 7.0.2)",
+      "max_mb": 8,
+      "frames_png": "deck/assets/paper_report/maps/<Region>_label_sequence_frames/frame_<k>_n<N>.png"
+    }
+  },
+  "hillshade": {
+    "message": "The residual-ML 1 km ALT map draped on terrain relief; relief is display context only",
+    "dem": "Copernicus DEM GLO-30 tiles listed in <region>_grid_dem_tiles_v1.csv, reprojected and averaged to 250 m in the map projection (rasterio reproject, Resampling.average)",
+    "hillshade": {
+      "azimuth_deg": 315,
+      "altitude_deg": 45,
+      "vertical_exaggeration": 2,
+      "normalisation": "shade / sin(altitude), clipped to [0, 1] (flat ground = 1)"
+    },
+    "drape": "multiply blend: rgb * ((1 - w) + w * shade), w = 0.35; ALT colour from the nearest 1 km cell within 1 km (water and no-data cells keep the basemap colours)",
+    "outputs": [
+      "outputs/figures/paper/v3_restructure/maps/<Region>_ALT_hillshade_v1.{pdf,png} (170 mm)",
+      "deck/assets/paper_report/maps/<Region>_ALT_hillshade_slide.png (12.0 x 5.2 in)"
+    ],
+    "annotations": "slim colour bar, scale bar, one grey note line: '1 km ALT on 250 m hillshade; information resolution ~10 km (climate input)'"
+  },
+  "cover_bg": {
+    "path": "deck/assets/paper_report/cover_bg_v1.png",
+    "size_in": [
+      13.333,
+      7.5
+    ],
+    "dpi": 300,
+    "content": "Alaska hillshade-draped ALT map (no basemap text) filling the right ~60 % of the canvas; horizontal alpha gradient to white across the left 40 % (alpha 0 for x <= 0.30 W, smoothstep to 1 at x = 0.52 W); no text; background behind the title zone (x <= 0.30 W) >= 95 % white",
+    "check": "measure mean luminance of the left 30 % band in the exported PNG"
+  },
+  "lena_3d": {
+    "optional": true,
+    "renderer": "matplotlib plot_surface (DEM at 500 m, vertical exaggeration stated in the note) or pyvista off-screen if the EGL/OSMesa context works",
+    "output": "deck/assets/paper_report/maps/Lena_ALT_3d_slide.png"
+  },
+  "qa": {
+    "contact_sheet": "deck/assets/paper_report/maps/showpiece_contact_sheet.png",
+    "checks": [
+      "view every PNG at 100 %",
+      "no text overlaps (style.text_overlaps)",
+      "no clipping at canvas edges",
+      "GIF <= 8 MB and frame delay 120 cs",
+      "cover left band luminance >= 0.95"
+    ]
+  },
+  "results_2026-10-05": {
+    "label_sequence": {
+      "model": {
+        "lena": {
+          "E0": 1.6193,
+          "steps": {
+            "0": {
+              "method": "P0",
+              "n_blocks": 0,
+              "E_ls": null,
+              "E_n": 1.6193,
+              "lam": 0.0,
+              "lam_cv_folds": 0,
+              "lam_cv_flag": "",
+              "fit_s": 0.4,
+              "change_vs_all_mean_cm": 0.57
+            },
+            "10": {
+              "method": "P1",
+              "n_blocks": 10,
+              "E_ls": 2.4614,
+              "E_n": 2.0403,
+              "lam": 0.0,
+              "lam_cv_folds": 0,
+              "lam_cv_flag": "",
+              "fit_s": 0.3,
+              "change_vs_all_mean_cm": 12.63
+            },
+            "40": {
+              "method": "R1",
+              "n_blocks": 20,
+              "E_ls": 1.9895,
+              "E_n": 1.9154,
+              "lam": 1.0,
+              "lam_cv_folds": 5,
+              "lam_cv_flag": "",
+              "fit_s": 1.8,
+              "change_vs_all_mean_cm": 11.08
+            },
+            "160": {
+              "method": "R1",
+              "n_blocks": 20,
+              "E_ls": 1.7494,
+              "E_n": 1.7418,
+              "lam": 1.0,
+              "lam_cv_folds": 5,
+              "lam_cv_flag": "",
+              "fit_s": 1.1,
+              "change_vs_all_mean_cm": 7.72
+            },
+            "all": {
+              "method": "R1",
+              "n_blocks": 20,
+              "E_ls": 1.434,
+              "E_n": 1.4346,
+              "lam": 0.5,
+              "lam_cv_folds": 5,
+              "lam_cv_flag": "",
+              "fit_s": 1.9,
+              "change_vs_all_mean_cm": 0.0
+            }
+          },
+          "elapsed_s": 8.3,
+          "max_rss_mb": 326.2
+        },
+        "alaska": {
+          "E0": 1.5046,
+          "steps": {
+            "0": {
+              "method": "P0",
+              "n_blocks": 0,
+              "E_ls": null,
+              "E_n": 1.5046,
+              "lam": 0.0,
+              "lam_cv_folds": 0,
+              "lam_cv_flag": "",
+              "fit_s": 5.7,
+              "change_vs_all_mean_cm": -2.61
+            },
+            "10": {
+              "method": "P1",
+              "n_blocks": 10,
+              "E_ls": 1.2827,
+              "E_n": 1.3936,
+              "lam": 0.0,
+              "lam_cv_folds": 0,
+              "lam_cv_flag": "",
+              "fit_s": 5.7,
+              "change_vs_all_mean_cm": -6.55
+            },
+            "40": {
+              "method": "R1",
+              "n_blocks": 40,
+              "E_ls": 1.5408,
+              "E_n": 1.5336,
+              "lam": 0.5,
+              "lam_cv_folds": 5,
+              "lam_cv_flag": "",
+              "fit_s": 10.1,
+              "change_vs_all_mean_cm": -2.25
+            },
+            "160": {
+              "method": "R1",
+              "n_blocks": 74,
+              "E_ls": 1.4402,
+              "E_n": 1.444,
+              "lam": 0.5,
+              "lam_cv_folds": 5,
+              "lam_cv_flag": "",
+              "fit_s": 9.0,
+              "change_vs_all_mean_cm": -5.24
+            },
+            "all": {
+              "method": "R1",
+              "n_blocks": 74,
+              "E_ls": 1.6167,
+              "E_n": 1.6166,
+              "lam": 0.5,
+              "lam_cv_folds": 5,
+              "lam_cv_flag": "",
+              "fit_s": 11.1,
+              "change_vs_all_mean_cm": 0.0
+            }
+          },
+          "elapsed_s": 52.3,
+          "max_rss_mb": 1746.1
+        }
+      },
+      "colour_ranges": {
+        "lena": {
+          "alt": [
+            35.0,
+            70.0
+          ],
+          "change": [
+            -35.0,
+            35.0
+          ]
+        },
+        "alaska": {
+          "alt": [
+            35.0,
+            75.0
+          ],
+          "change": [
+            -15.0,
+            15.0
+          ]
+        }
+      },
+      "gif": {
+        "lena_bytes": 1270654,
+        "alaska_bytes": 1341983,
+        "frames": 5,
+        "frame_ms": 1200,
+        "size_px": [
+          1600,
+          896
+        ]
+      },
+      "paper_size_mm": {
+        "lena": [
+          170,
+          75.7
+        ],
+        "alaska": [
+          170,
+          73.2
+        ]
+      },
+      "slide_size_in": {
+        "lena": [
+          12.0,
+          5.07
+        ],
+        "alaska": [
+          12.0,
+          4.9
+        ]
+      }
+    },
+    "hillshade": {
+      "lena": {
+        "dem_shape": [
+          968,
+          983
+        ],
+        "n_tiles": 22,
+        "missing_tiles": [
+          "Copernicus_DSM_COG_10_N72_00_E130_00_DEM",
+          "Copernicus_DSM_COG_10_N73_00_E130_00_DEM"
+        ],
+        "dem_seconds": 10.3,
+        "elapsed_s": 7.0,
+        "paper_size_mm": [
+          170.0,
+          153.9
+        ]
+      },
+      "alaska": {
+        "dem_shape": [
+          5927,
+          6303
+        ],
+        "n_tiles": 256,
+        "missing_tiles": [],
+        "dem_seconds": 205.9,
+        "elapsed_s": 30.4,
+        "paper_size_mm": [
+          170.0,
+          147.5
+        ]
+      }
+    },
+    "cover_bg": {
+      "left30_mean_luminance": 1.0,
+      "left30_min_luminance": 1.0,
+      "left40_mean_luminance": 0.9997552037037036,
+      "right60_mean_luminance": 0.6990530137981121
+    },
+    "lena_3d": {
+      "ve": 12,
+      "renderer": "pyvista off-screen (OSMesa/EGL context available)"
+    },
+    "notes": [
+      "no GPU used; CatBoost CPU 4 threads; max RSS 1.75 GB (Alaska)",
+      "Lena n = 40 and 160 choose lambda = 1.0 and the residual model pushes the north-east delta beyond the 70 cm scale end (shown with the arrow)",
+      "the all-label Lena map here is the in-region R1 (labels only, lambda 0.5), not the registered Lena final map (source-pooled h49 R1, lambda 0.25)"
+    ]
+  }
+}

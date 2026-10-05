@@ -149,12 +149,35 @@ def fig1_key(fig, F1, x_mm, y_mm, font):
     x += 1.0
     ax.scatter([x + r], [base - r], s=F1.size_pt2(F1.SIZE_KEY[1]), facecolors="white", edgecolors=S.INK, linewidths=F1.EDGE_LW, zorder=3)
     put(x + 2 * r + 1.0, base - 1.8, "New regions")
-    y2, sw = base + 6.0, 3.6
+    y2, sw = base + 5.6, 3.6
+    put(x_mm, y2, "Permafrost zone")                                           # 줄 2 = 구역 이름, 줄 3 = 견본 2개(v4 map_base.rule)
+    y3 = y2 + 5.4
     x = x_mm
     for lab, col in (("Continuous", S.BASEMAP["continuous"]), ("Discontinuous", S.BASEMAP["discontinuous"])):
-        ax.add_patch(Rectangle((x, y2 - sw / 2), sw, sw, facecolor=col, edgecolor="none", linewidth=0, zorder=2))
-        x = put(x + sw + 1.2, y2, lab) + 4.0
+        ax.add_patch(Rectangle((x, y3 - sw / 2), sw, sw, facecolor=col, edgecolor="none", linewidth=0, zorder=2))
+        x = put(x + sw + 1.2, y3, lab) + 4.0
     return ax
+
+
+_LAND_PREP = None
+
+
+def _land_hits(ax, proj, bbox, n=3):
+    """글자 상자(표시 px)의 격자 표본점(n × n) 가운데 Natural Earth 50 m 육지 위에 놓인 수(v4 map_base: 육지가 진해져 글자는 바다 위에 둔다)."""
+    global _LAND_PREP
+    import cartopy.crs as ccrs
+    if _LAND_PREP is None:
+        import cartopy.feature as cfeature
+        from shapely.ops import unary_union
+        from shapely.prepared import prep
+        _LAND_PREP = prep(unary_union(list(cfeature.LAND.with_scale("50m").geometries())))
+    from shapely.geometry import Point
+    xs = np.linspace(bbox.x0, bbox.x1, n)
+    ys = np.linspace(bbox.y0, bbox.y1, n)
+    pts = np.array([(x_, y_) for x_ in xs for y_ in ys])
+    data = ax.transData.inverted().transform(pts)
+    ll = ccrs.PlateCarree().transform_points(proj, data[:, 0], data[:, 1])
+    return int(sum(_LAND_PREP.contains(Point(lo, la)) for lo, la in ll[:, :2] if np.isfinite(lo) and np.isfinite(la)))
 
 
 def _circles_px(ax):
@@ -197,7 +220,7 @@ def free_lat_labels_and_scale(fig, ax, proj, F1, vals):
         for lon in (-40, -30, -50, -20, -60, -10, -70, 0, -80, 10, 20):
             t.xy = proj.transform_point(lon, la, pc)
             b = bbs([t])[0]
-            hits = _box_hits(b, C, R) + sum(b.overlaps(f) for f in fixed_bb)
+            hits = _box_hits(b, C, R) + sum(b.overlaps(f) for f in fixed_bb) + 0.1 * _land_hits(ax, proj, b)   # 육지 위는 낮은 비용
             if best_l is None or hits < best_l[0]:
                 best_l = (hits, lon)
             if hits == 0:
@@ -222,7 +245,8 @@ def free_lat_labels_and_scale(fig, ax, proj, F1, vals):
             bt, bl_ = t.get_window_extent(rend), ln.get_window_extent(rend)
             axbb = ax.get_window_extent(rend)
             inside = bt.x0 > axbb.x0 and bt.x1 < axbb.x1 and bt.y1 < axbb.y1
-            hits = _box_hits(bt, C, R) + _box_hits(bl_, C, R) + sum(bt.overlaps(f) or bl_.overlaps(f) for f in fixed_bb)
+            hits = (_box_hits(bt, C, R) + _box_hits(bl_, C, R) + sum(bt.overlaps(f) or bl_.overlaps(f) for f in fixed_bb)
+                    + _land_hits(ax, proj, bt) + _land_hits(ax, proj, bl_))
             if hits == 0 and inside:
                 best = (lon, la); break
             t.remove(); ln.remove()
@@ -521,11 +545,15 @@ def _f6_free_labels(fig, ax, F6, vals):
     chosen = {}
     for t, la in zip(labs, (60, 70, 80)):
         best = None
-        for lon in (F6.LAT_LABEL_LON, -20, 0, -30, 10, -40, -50):
+        for lon in (F6.LAT_LABEL_LON, -20, 0, -30, -40, -50, -60, 10, 20):
             t.xy = F6.PROJ.transform_point(lon, la, pc)
             fig.canvas.draw()
             b = t.get_window_extent(rend)
-            hits = _box_hits(b, C, R, pad=4.0) + sum(b.overlaps(f) for f in fixed)
+            hits = _box_hits(b, C, R, pad=4.0) + sum(b.overlaps(f) for f in fixed) + 0.1 * _land_hits(ax, F6.PROJ, b)
+            if la == 70 and lon in (10, 20):            # 70° N 표지는 그린란드 동쪽 바다(−10 ~ −30°)가 아니면 스발바르 근처로 밀리지 않게
+                hits += 10
+            if la == 80 and lon in (10, 20):
+                hits += 10
             if best is None or hits < best[0]:
                 best = (hits, lon)
             if hits == 0:
@@ -541,14 +569,16 @@ def _f6_free_labels(fig, ax, F6, vals):
         t.remove()
     best = None
     from matplotlib.transforms import offset_copy
-    for lon, la in [(F6.SCALE["lon"], F6.SCALE["lat"])] + [(lo, la_) for la_ in (70, 65, 75, 60) for lo in range(-60, 61, 6)]:
+    for lon, la in [(F6.SCALE["lon"], F6.SCALE["lat"])] + [(lo, la_) for la_ in (70, 65, 60) for lo in range(-60, 61, 6)] \
+            + [(lo, 75) for lo in range(-60, 61, 6)]:
         info = F6.scale_bar(ax, F6.PROJ, lon, la, F6.SCALE["km"])
         t = info["text"]
         t.set_transform(offset_copy(t.get_transform(), fig=fig, y=2.5, units="points"))   # 13 pt 글자를 막대에서 2.5 pt 띄운다
         ln = [l_ for l_ in ax.lines if l_.get_gid() == "scale_bar"][-1]
         fig.canvas.draw()
         bt, bl = t.get_window_extent(rend), ln.get_window_extent(rend)
-        hits = _box_hits(bt, C, R, pad=4.0) + _box_hits(bl, C, R, pad=4.0) + sum(bt.overlaps(f) or bl.overlaps(f) for f in fixed)
+        hits = (_box_hits(bt, C, R, pad=4.0) + _box_hits(bl, C, R, pad=4.0) + sum(bt.overlaps(f) or bl.overlaps(f) for f in fixed)
+                + _land_hits(ax, F6.PROJ, bt) + _land_hits(ax, F6.PROJ, bl))
         if hits == 0:
             best = (lon, la)
             break
@@ -612,8 +642,9 @@ def fig6_map(F6, Dd, letter):
         ov.text(irect[0] + 0.3, y_bot + 0.4, "Tibetan Plateau", ha="left", va="top", fontsize=F6_FONT)
         ov.text(arect[0], y_bot + 0.4, "Alaska", ha="left", va="top", fontsize=F6_FONT)
         sw_w, sw_h = 4.0, 2.6
+        ov.text(0.6, 3.0, "Permafrost zone", ha="left", va="center", fontsize=F6_FONT, zorder=6)      # 구역 이름(v4 map_base.rule)
         for k_, (lab, colr) in enumerate((("Continuous", S.BASEMAP["continuous"]), ("Discontinuous", S.BASEMAP["discontinuous"]))):
-            yy = 3.0 + k_ * 5.6
+            yy = 3.0 + (k_ + 1) * 5.6
             ov.add_patch(Rectangle((0.6, yy - sw_h / 2), sw_w, sw_h, facecolor=colr, edgecolor="none", zorder=6))
             ov.text(0.6 + sw_w + 1.2, yy, lab, ha="left", va="center", fontsize=F6_FONT, zorder=6)
         _inset_scale_beside(fig, "scale_bar_inset_tibet", lift_mm=3.0)      # 13 pt '200 km' 이 삽도 가운데 원에 닿지 않게 막대 오른쪽으로
@@ -679,7 +710,15 @@ def fig5c():
     import fig5 as F5
     m = (3.39 * MM) / ((1492 - 1018) / 2000 * F5.L["W"])
     T = F5.prepare([])
-    fig, _, _ = F5.draw(T, "paper")
+
+    def _use_v3_slide_base(medium):                 # 논문 기하로 그리되 바탕 지도 색은 슬라이드 토큰(map_base.slide)으로
+        _USE_V3(medium)
+        S.set_basemap("slide")
+    S.use_v3 = _use_v3_slide_base
+    try:
+        fig, _, _ = F5.draw(T, "paper")
+    finally:
+        S.use_v3 = _USE_V3
     tmp = OUT / "_tmp_fig5_full.png"
     check_text(fig, "Fig5(full, paper geometry)")
     fig.savefig(tmp, dpi=600)

@@ -104,8 +104,8 @@ FOREST_NAME_MM = 40.0       # c 행 이름 열 폭(그림 명세 8.2)
 # ---------------------------------------------------------------- 지도(지침 2.11, Fig 1a 와 같은 범위)
 TRUE_LAT, LAT_MIN = 70.0, 50.0
 LON0 = 126.698              # Fig 1a 의 중심 경도(fig1.py zoom_projection: 레나델타 라벨 셀 경도 범위의 중앙값. Fig1_values.txt 에 기록된 값)
-LAT_LABEL_LON = -10.0       # 위도 라벨을 다는 경선 [판단: Fig 1a 는 −20°. 이 크기에서는 80° N 표지가 그린란드 육지 위에 놓여 그린란드해 쪽으로 옮겼다]
-SCALE = dict(lon=12.0, lat=70.0, km=1000)      # 축척 막대 중심(노르웨이해, 70° N) [판단: Fig 1a 의 5° E 는 70° N 표지와 가까워 동쪽으로 옮겼다]
+LAT_LABEL_LON = -22.0       # 위도 라벨을 다는 경선 [판단: v4 map_base 로 육지가 진해져 −10°(그린란드 동해안)에서 그린란드해(−22°)로 옮겼다]
+SCALE = dict(lon=-2.0, lat=66.0, km=1000)      # 축척 막대 중심(노르웨이해 남부, 66° N) [판단: 70° N·12° E 는 v4 에서 아이슬란드·노르웨이 해안과 겹쳐 보여 옮겼다]
 PFR_MIN_PPI = 450
 PC = ccrs.PlateCarree()
 PROJ = ccrs.NorthPolarStereo(central_longitude=LON0, true_scale_latitude=TRUE_LAT)
@@ -446,6 +446,7 @@ def polar_axes(fig, rect_mm):
     ax.spines["geo"].set_linewidth(1.0)
     ax.patch.set_facecolor(S.BASEMAP["sea"])
     ax.add_feature(cfeature.LAND.with_scale("50m"), facecolor=S.BASEMAP["land"], edgecolor="none", linewidth=0, zorder=0)
+    ax.add_feature(cfeature.COASTLINE.with_scale("50m"), edgecolor=S.BASEMAP["coast"], facecolor="none", linewidth=S.LW["coast"], zorder=0.4)
     return ax, rho
 
 
@@ -481,7 +482,7 @@ def graticule(ax):
 def lat_labels(ax):
     out = []
     for la in (60, 70, 80):
-        t = ax.annotate(f"{la}° N", xy=PROJ.transform_point(LAT_LABEL_LON, la, PC), xycoords="data",
+        t = ax.annotate(f"{la}°N", xy=PROJ.transform_point(LAT_LABEL_LON, la, PC), xycoords="data",
                         xytext=(2.0, 1.0), textcoords="offset points", ha="left", va="bottom", fontsize=S.FONT_PT, zorder=6)
         t.set_gid("graticule")
         out.append(t)
@@ -605,6 +606,7 @@ def inset_axes(fig, rect_mm, proj, ext, P):
     ax.patch.set_facecolor(S.BASEMAP["sea"])
     ax.add_feature(cfeature.LAND.with_scale("50m"), facecolor=S.BASEMAP["land"], edgecolor="none", linewidth=0, zorder=0)
     ras = draw_pfr(ax, proj, rect_mm[2], rect_mm[3], P)
+    ax.add_feature(cfeature.COASTLINE.with_scale("50m"), edgecolor=S.BASEMAP["coast"], facecolor="none", linewidth=S.LW["coast"], zorder=0.4)
     ax.spines["geo"].set_visible(True)
     ax.spines["geo"].set_linewidth(1.0)
     ax.spines["geo"].set_edgecolor(S.BASEMAP["coast"])
@@ -803,9 +805,9 @@ def build(medium: str = "paper"):
     texts_a["scale"] = info["scale_a"].pop("text")
     xa, ya, wa, ha = SLOT["a"]
     key_rows = (("Continuous", S.BASEMAP["continuous"]), ("Discontinuous", S.BASEMAP["discontinuous"]))
-    texts_a["pf_key"] = []
-    for k, (lab, colr) in enumerate(key_rows):
-        yy = ya + HEAD_MM + 1.8 + k * 3.2
+    texts_a["pf_key"] = [ov.text(xa + EDGE_MM, ya + HEAD_MM + 1.8, "Permafrost zone", ha="left", va="center", fontsize=S.FONT_PT, zorder=6)]
+    for k, (lab, colr) in enumerate(key_rows):                      # 줄 1 = 구역 이름(머리), 줄 2·3 = 견본(v4 map_base.rule)
+        yy = ya + HEAD_MM + 1.8 + (k + 1) * 3.2
         ov.add_patch(Rectangle((xa + EDGE_MM, yy - 0.9), 3.0, 1.8, facecolor=colr, edgecolor="none", zorder=6, gid="key_swatch"))
         texts_a["pf_key"].append(ov.text(xa + 4.1, yy, lab, ha="left", va="center", fontsize=S.FONT_PT, zorder=6))
 

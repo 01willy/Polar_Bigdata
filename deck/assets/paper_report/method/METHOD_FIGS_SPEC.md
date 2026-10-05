@@ -91,3 +91,21 @@
 - 글꼴: matplotlib PDF 가 CFF(OTF) 글꼴을 묻지 못해 Pretendard Regular·Bold 를 TrueType 으로 바꿔(`~/.cache/polar_fonts/`, 생성기가 없으면 만든다) 등록했다. font.family = [FreeSans, Pretendard] 목록으로 글리프 대체를 쓰고, 한 Text 안에 한글과 수식을 섞지 않는다(RT 함수).
 - 실자료 축소 그림의 원천: 범북극 지도 `fig1_blocks.csv`, 레나델타 설계 `fig1.lena_design`, Stefan 산점도 `fig3.load_concept`, 알래스카 지도 `slide_panels/Alaska_ALT_map_v3_c_slide.png`·`maps/Alaska_ALT_map_v3_slide.png`(패널 a–d 테두리 자동 검출), 검증 설계별 오차 `Fig1_source_data.csv`(panel e, MEAN3), 위약 대비 `fig3_a.csv`, 자료 표 `table1_rows.csv`.
 - 점검 결과: `method_figs_qa.json`(그림마다 글자 수, 최소 글자 크기 12.0 pt, 그림 밖 글자 0, 글자 상자 겹침 0, 화살표 수). 화살표 함수는 사선을 거부한다.
+
+## 4. 2차 묶음(2026-10-05 17시, 조정 지시)
+
+| 그림 | 파일 | 메시지 | 자료 출처 |
+|---|---|---|---|
+| M10 | `M10_stefan_physics_slide` (12.0 × 5.2) | Stefan 해: 여름 열 유입으로 융해 전선이 √TDD 에 비례해 깊어지고, 계수 E 가 토양·수분·지표 조건을 묶는다. 재보정은 E 만 바꾼다 | ERA5-Land `data/raw/era5land/nh_monthly_2015-2020.nc`(러시아 서부 라벨 셀 월 기후값, TDD 검산 = 자료 표 e5_tdd), `fig3.load_concept`(31셀, E0 1.59, E_n 2.11), methods.tex 식 1–3 |
+| B1 | `B1_background_slide` (12.0 × 5.2) | ALT 의 뜻, 관측 공백(라벨 7개 지역, 출처별 행 수), 기존 제품의 불일치(알래스카 영역 평균 56–105 cm) | 토양 기둥(M10), `fig1_blocks.csv`, `table1_rows.csv`, `maps/XL_Alaska_product_differences_slide.png` 패널 a–d, `xbatch/XL_map_products/xl_summary_v1.csv`(mean) |
+| B2 | `B2_prior_work_slide` (12.0 × 4.6) | 선행 ALT ML 연구는 학습 지역 안 또는 거리 블록 검증, 라벨 한 조건, 재보정 기준선 없음. 본 연구만 세 요소를 갖춘다 | `docs/NOVELTY_POSITIONING_2026-09-29.md` 3절, `references/INDEX.md`(gautam2025, pilyugina2023, wang2025, ran2022b, zhang2024, aalto2018, karjalainen2019, ran2022_panarctic, wei2026) |
+| R0 | `R0_summary_ladder_slide` (12.0 × 5.2) | 라벨 수에 따른 원천 계수 Stefan 대비 오차 변화와 권고 방법(물리식 → 재보정 + 잔차 → 교차검증 선정) | `data/processed/paper_figs/fig2_pool_curves.csv`(E1 주 4지역, E2 레나·캐나다; P1·R1·D0, 두 가중 CI), `Fig7_source_data.csv` panel d path(교차검증 선정 점 추정, wf_curve) |
+| E1 | `E1_evidence_scope_slide` (12.0 × 4.6) + `E1_evidence_scope_source_values.json` | 시험 규모: 지역 7, 전이 대상 27, 라벨 수 8단계, 방법 12·학습기 10, 등록 가설 174, 초록 대비 10 판정, 모형 적합 최소 863,229건, 재표집 10,000회 | JSON 에 항목별 원천 파일. 적합 수는 lg/lgx/lgt/lgd/lgf/wf/wf2b/wf3b meta 와 X 묶음 단위 파일 합(탐색 보고) |
+| M6 | `M6_models_slide` (갱신) | 공변량 25종 헤어라인 목록, 잔차 목표 y − a 와 λ 수축, CatBoost 설정 | methods.tex Covariates·ML methods |
+| M6b | `M6b_models_detail_slide` (신규, 12.0 × 5.2) | 잔차 결합 4단계 절차, λ 선택 규칙(전이 0.25 고정, 지역 내 블록 CV, 지도 0.5), 학습기 10종과 설정, 증강·물리 입력·Stefan·CCI 앵커 | methods.tex, Alaska_ALT_map_v3 설명문(λ 0.5) |
+| M8 | `M8_label_workflow_slide` (재작성) | 좌→우 결정 흐름: n = 0 원천 Stefan → n ≥ 3 재보정 → n ≥ 10 편향 진단 → n ≥ 40 교차검증 선정 → 지도 + 90 % 구간; 미충족 시 현재 단계 모형으로 출력 | methods.tex 선정 규칙·배치 절차, 지도 설명문 |
+
+- 기저 지도는 토큰 `color.map_base.slide`(육지 #DEDEDE, 해안 #8A8A8A, 영구동토 연속 #AABFD6·불연속 #CDD9E7)로 바꾸고 열쇠에 이름을 적었다(M1, M3, B1, M2·M4 축소 지도는 육지·해안만).
+- 17:05–17:14 에 다시 만들어진 기저 지도 PNG(알래스카 지도, XL 제품 지도)로 모든 축소 그림을 다시 잘랐다(전체 재렌더 17:2x).
+- R0 에는 물리 유사라벨 증강 계열을 넣지 않았다. 등록 풀 값은 위약 대비(Fig 3b)뿐이고 원천 계수 Stefan 대비 풀 곡선은 그림 원천 표에 없다.
+- B2 의 Pilyugina 2023 지역은 색인에 기재가 없어 '—' 로 두었다.

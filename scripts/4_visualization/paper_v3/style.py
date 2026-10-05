@@ -128,9 +128,22 @@ ACCENT_FORBIDDEN = _C["deck"]["title_orange"]   # 덱 제목 주황, 자료 표�
 # 연속 색표 이름(cmcrameri), 지침 2.6(사용자 승인, v4 에서도 그대로)
 CMAP = dict(alt="oslo_r", delta="broc", pred_change="broc", residual="bam", width="acton_r",
             density="davos_r", ground_temp="vik")
-BASEMAP = dict(continuous="#d0d0d0", discontinuous="#e6e6e6", land=_N["land"], sea="#ffffff",
-               label_block="#bdbdbd", score_block="#737373", graticule=_N["grid"], coast=_N["coast"],
+# 바탕 지도 색: v4 토큰 color.map_base(2026-10-05 15:50, 매체별). use_v3(medium) 이 BASEMAP 을 제자리에서 갱신한다
+# (모듈이 S.BASEMAP[...] 을 그릴 때 읽으므로 매체 전환이 모든 지도에 적용된다).
+MAP_BASE = _C["map_base"]
+BASEMAP = dict(continuous=MAP_BASE["paper"]["pf_continuous"], discontinuous=MAP_BASE["paper"]["pf_discontinuous"],
+               land=MAP_BASE["paper"]["land"], sea=MAP_BASE["paper"]["ocean"],
+               label_block="#bdbdbd", score_block="#737373", graticule=MAP_BASE["paper"]["graticule"], coast=MAP_BASE["paper"]["coast"],
+               buffer_line=MAP_BASE["paper"]["buffer_line"],
                candidate="#bdbdbd", selected="#000000", nodata=_N["no_data"], hatch="#9a9a9a")
+PF_KEY_LABELS = (("continuous", "Continuous permafrost"), ("discontinuous", "Discontinuous permafrost"))   # 열쇠에 구역 이름을 적는다
+
+
+def set_basemap(medium: str = "paper") -> None:
+    """BASEMAP 의 바탕 지도 항목을 매체 토큰으로 바꾼다(제자리 갱신)."""
+    m = MAP_BASE["slide" if medium == "slide" else "paper"]
+    BASEMAP.update(continuous=m["pf_continuous"], discontinuous=m["pf_discontinuous"], land=m["land"], sea=m["ocean"],
+                   graticule=m["graticule"], coast=m["coast"], buffer_line=m["buffer_line"])
 
 # ---------------------------------------------------------------- 지역 이름과 모양(지침 2.5, 그림 명세 D-14)
 # 키는 원천 표의 target 값이다. 이름은 Table 1 에서 한 번 정하고 모든 그림이 같게 쓴다.
@@ -171,6 +184,7 @@ def use_v3(medium: str = "paper") -> None:
     if medium not in ("paper", "slide"):
         raise ValueError(medium)
     register_fonts()
+    set_basemap(medium)
     paper = medium == "paper"
     L_ = LW if paper else LW_SLIDE
     M_ = MS if paper else MS_SLIDE
@@ -271,7 +285,7 @@ def audit_v3(fig, size_pt=7.0, min_lw=MIN_LW_PT, max_chars=600, max_words=3, all
         if not is_tick_or_axis and NUM_RE.search(s) and t.get_gid() not in allowed_num_gids:
             out["loose_numbers"].append(s[:30])         # 그림 안 수치(R-25)
     rects = [p for p in fig.findobj(Patch) if isinstance(p, (Rectangle, FancyBboxPatch)) and p.get_visible()
-             and p not in [a.patch for a in fig.axes] and p is not fig.patch and p.get_gid() not in ("allowed_frame",)]
+             and p not in [a.patch for a in fig.axes] and p is not fig.patch and p.get_gid() not in ("allowed_frame", "key_backing")]
     for p in rects:
         pb = p.get_window_extent(rend)
         if pb.width < 2 or pb.height < 2:

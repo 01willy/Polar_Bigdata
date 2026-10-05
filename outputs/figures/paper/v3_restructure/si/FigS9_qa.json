@@ -1,6 +1,6 @@
 {
  "stem": "FigS9",
- "created": "2026-10-05 14:43:47",
+ "created": "2026-10-05 17:20:39",
  "size_mm": [
   170.0,
   214.0
@@ -10,7 +10,7 @@
   7.0,
   8.0
  ],
- "chars": 736,
+ "chars": 750,
  "thin_lines": [],
  "codes": [],
  "loose_numbers": [],
@@ -25,7 +25,7 @@
   "liberation": false,
   "ok": true
  },
- "pdf_bytes": 1461242,
+ "pdf_bytes": 1915503,
  "sources": [
   "results/rescale_lg/data/processed/lg/lg_curve.csv",
   "data/processed/lgd/lgd_curve_lic.csv",

@@ -928,8 +928,9 @@ def _draw_target_panels(fig, M, panels, norm, cm_, slots, P, F6, ov, rho, main, 
             F6.lat_labels(ax)
             F6.scale_bar(ax, F6.PROJ, F6.SCALE["lon"], F6.SCALE["lat"], F6.SCALE["km"])
             if pf_key:
+                ov.text(x + F6.EDGE_MM, y + F6.HEAD_MM + 1.8, "Permafrost zone", ha="left", va="center", fontsize=FS, zorder=6)
                 for k, (lab, colr) in enumerate((("Continuous", S.BASEMAP["continuous"]), ("Discontinuous", S.BASEMAP["discontinuous"]))):
-                    yy = y + F6.HEAD_MM + 1.8 + k * 3.2
+                    yy = y + F6.HEAD_MM + 1.8 + (k + 1) * 3.2
                     ov.add_patch(Rectangle((x + F6.EDGE_MM, yy - 0.9), 3.0, 1.8, facecolor=colr, edgecolor="none", zorder=6, gid="key_swatch"))
                     ov.text(x + 4.1, yy, lab, ha="left", va="center", fontsize=FS, zorder=6)
 

@@ -1,0 +1,3 @@
+# Cover background v1
+
+Background image for the deck title slide, 13.333 × 7.5 in at 300 dpi, no text. Right part: the Alaska 1 km residual-ML ALT map draped on a 250 m Copernicus DEM hillshade (same rendering as Alaska_ALT_hillshade_v1; ALT colour scale 35–75 cm, blue sequential; land outside the mapped domain grey with relief; sea white). The map is scaled to 112 % of the canvas height and anchored at the right edge (left edge at 0.33 of the width). Left part: a horizontal smoothstep alpha ramp from fully white at 0.30 of the width to the full map at 0.55, so the title zone stays white (mean luminance of the left 30 %: 1.000).

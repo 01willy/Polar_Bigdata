@@ -77,12 +77,51 @@ def text(sl, x, y, w, h, paras, **kw):
 
 
 # ---------------------------------------------------------------- 머리와 결론 줄(원형 1.2)
-def header(sl, title, subtitle=None, page=None):
-    text(sl, ML, 0.24, 11.25, 0.55, [run(title, 26, ACC, F_X)])
+# ---------------------------------------------------------------- 로고(2026-10-05 조정 지시 11–12)
+LOGO_DIR = DECK / "assets" / "final" / "logos"
+LOGOS = ["sail.png", "snu.png", "kopri.png"]          # SAI'L, 서울대, 극지연구소(RGBA)
+LOGO_H_PAGE, LOGO_H_COVER = 0.28, 0.45
+LOGO_GAP_PAGE, LOGO_GAP_COVER = 0.18, 0.35
+TITLE_BASELINE_Y = 0.24 + 0.93 * 26 / 72              # 제목 26 pt 의 기준선(약 0.58 in)
+
+
+def _logo_w(name, h):
+    iw, ih = img_size(LOGO_DIR / name)
+    return h * iw / ih
+
+
+def logos_row(sl, x_right=None, x_left=None, y_bottom=None, h=LOGO_H_PAGE, gap=LOGO_GAP_PAGE):
+    """로고 3개를 한 줄로. x_right 를 주면 오른쪽 끝 정렬, x_left 를 주면 왼쪽 끝 정렬. 아래끝을 y_bottom 에 맞춘다."""
+    ws = [_logo_w(n, h) for n in LOGOS]
+    total = sum(ws) + gap * (len(ws) - 1)
+    x = x_left if x_left is not None else x_right - total
+    for n, w in zip(LOGOS, ws):
+        pic = sl.shapes.add_picture(str(LOGO_DIR / n), Inches(x), Inches(y_bottom - h), Inches(w), Inches(h))
+        pic.shadow.inherit = False
+        pic.name = f"logo {n}"
+        x += w + gap
+    return total
+
+
+def logos_topright(sl):
+    """내용 쪽 공통: 오른쪽 위, 높이 0.28 in, 제목 기준선에 아래끝 정렬."""
+    return logos_row(sl, x_right=COLR[5], y_bottom=TITLE_BASELINE_Y)
+
+
+def pagenum_bottomright(sl, page):
+    if page is None:
+        return
+    text(sl, COLR[5] - 1.0, 7.12, 1.0, 0.25, [run(str(page), 12, GRAY, F_M)], align=PP_ALIGN.RIGHT)
+
+
+def header(sl, title, subtitle=None, page=None, logos=True):
+    """제목(폭 9.3 in, 로고 영역 앞에서 끝남) + 부제 + 오른쪽 위 로고 3개 + 오른쪽 아래 쪽 번호."""
+    text(sl, ML, 0.24, 9.30, 0.55, [run(title, 26, ACC, F_X)])
     if subtitle:
         text(sl, ML, 0.80, BODY_W, 0.34, [run(subtitle, 14, GRAY, F_M)])
-    if page is not None:
-        text(sl, COLR[5] - 1.0, 0.22, 1.0, 0.30, [run(str(page), 12, GRAY, F_M)], align=PP_ALIGN.RIGHT)
+    if logos:
+        logos_topright(sl)
+    pagenum_bottomright(sl, page)
 
 
 def takeaway(sl, msg):
@@ -222,10 +261,12 @@ CROPS = {
         ((890, 1345, 1110, 1392), (397, 557)),    # 가로축 이름(패널 c 축 가운데로)
     ]),
     "f4b": dict(src="Fig4", box=(1040, 28, 1895, 832)),
-    "f4c": dict(src="Fig4", box=(0, 900, 925, 1436)),
+    "f4c": dict(src="Fig4", canvas=(925, 533), pieces=[    # 패널 c: 행 이름은 x 0 부터, 패널 문자(y 883–902)는 흰 조각으로 덮지 않고 잘라냄
+        ((0, 903, 925, 1436), (0, 0)),                        # 열쇠 줄(y 903 부터)과 본문
+    ]),
     "f4d": dict(src="Fig4", box=(1040, 902, 2000, 1436)),   # 재보정 몫 분리(2026-10-05 갱신판 Fig 4 패널 d)
-    "f5a": dict(src="Fig5", box=(0, 44, 472, 520)),
-    "f5c": dict(src="Fig5", box=(1018, 44, 1492, 520)),
+    "f5a": dict(src="Fig5", box=(0, 50, 478, 526)),      # 재채색판(2026-10-05 17:29) 패널 a
+    "f5c": dict(src="Fig5", box=(1010, 50, 1488, 526)),  # 패널 c
     "f5e": dict(src="Fig5", box=(0, 662, 1242, 1398)),
     "f7a_ak": dict(src="Fig7", box=(0, 40, 698, 455)),
     "f7a_ca": dict(src="Fig7", box=(1380, 40, 2000, 455)),
@@ -670,7 +711,7 @@ def table_def(columns, rows, geo, align=None, accent=(), support=None, emph=None
 EMU = 914400
 COL_X = COL
 SIZES = {"V": {26, 18, 16, 15, 14, 12}, "N": {22, 18, 16, 12}}
-COVER = {32, 18, 16, 14}
+COVER = {32, 28, 18, 16, 14}        # 28: 표지 제목 두 줄(사용자 요청, 2026-10-05 보고 항목)
 TITLE_PT = {"V": 26, "N": 18}
 ACCENT = "EA851B"
 NUM = re.compile(r"^[\s\d.,+\-−%×~]+(cm|°C|%|m)?$")
@@ -717,15 +758,17 @@ def pptx_audit(path, grammar="V", tol=0.03, cover_index=1):
                     and has_fill(sh):
                 v["fill_shapes"] += 1
             if sh.shape_type == MSO_SHAPE_TYPE.PICTURE:
+                if sh.height is not None and sh.height / EMU <= 0.5 and str(sh.name).startswith("logo"):
+                    continue                                   # 로고는 배율 점검 대상이 아님(조정 지시 11–12)
                 try:
                     im = Image.open(io.BytesIO(sh.image.blob))
                     dpi = (im.info.get("dpi") or (300, 300))[0]
                     v["pic_scale"].append(round((sh.width / EMU) / (im.size[0] / dpi), 2))
                 except Exception:
                     pass
-            if x is not None and sh.width is not None and sh.width / EMU > 1.0 and \
+            if x is not None and sh.width is not None and sh.width / EMU > 1.0 and sh.width / EMU < 13.0 and \
                     not any(abs(x - c) < tol for c in COL_X):
-                v["off_grid"] += 1
+                v["off_grid"] += 1                          # 전면 바탕 그림(폭 13.3 in)은 격자 점검 대상이 아님
             for r in _runs(sh):
                 f = r.font
                 if f.name and not f.name.startswith("Pretendard"):
@@ -736,7 +779,7 @@ def pptx_audit(path, grammar="V", tol=0.03, cover_index=1):
                     col = str(f.color.rgb) if f.color and f.color.type is not None else ""
                 except Exception:
                     col = ""
-                is_title = f.size is not None and round(f.size.pt) in (TITLE_PT[grammar], 32)
+                is_title = f.size is not None and round(f.size.pt) in (TITLE_PT[grammar], 32, 28)   # 28: 표지 제목 두 줄
                 if col.upper() == ACCENT and not is_title:
                     v["accent_outside_title"] += 1
                 if f.size is not None and f.size.pt >= 24 and NUM.match(r.text.strip()):

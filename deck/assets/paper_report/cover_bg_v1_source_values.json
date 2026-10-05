@@ -1,0 +1,32 @@
+{
+ "created": "2026-10-05 17:28 KST",
+ "script": "scripts/4_visualization/paper_v3/cover_bg_v1.py",
+ "source": "data/processed/map_alaska/hillshade_v1/drape_rgb.npz",
+ "size_px": [
+  4000,
+  2250
+ ],
+ "size_in": [
+  13.333,
+  7.5
+ ],
+ "dpi": 300,
+ "map_px": [
+  2680,
+  2520
+ ],
+ "map_left_frac": 0.33,
+ "fade": {
+  "x_white": 0.3,
+  "x_full": 0.55,
+  "kind": "smoothstep"
+ },
+ "check": {
+  "left30_mean_luminance": 1.0,
+  "left30_min_luminance": 1.0,
+  "left40_mean_luminance": 0.9997552037037036,
+  "right60_mean_luminance": 0.6990530137981121
+ },
+ "bytes": 5982140,
+ "elapsed_s": 3.8
+}

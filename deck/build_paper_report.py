@@ -22,6 +22,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from PIL import Image  # noqa: E402
+from pptx.util import Inches  # noqa: E402
 from pptx.enum.text import MSO_ANCHOR, PP_ALIGN  # noqa: E402
 
 import final_lib as fl  # noqa: E402
@@ -111,15 +112,25 @@ def gap(sl, sid, x, y, w, h, lines, what):
 
 # ================================================================ 쪽별 본문
 def b_S01(sl, s):
-    """표지: 글 열 C1–C3(5.85 in), 오른쪽 알래스카 물리 잔차 결합 ALT 지도 5.50 × 5.00 in(C4 에서 시작, 세로 가운데)."""
+    """표지(조정 지시 2차 1, 2, 11, 12): 바탕 그림이 있으면 전면(13.333 × 7.5), 없으면 오른쪽 알래스카 지도 슬라이드판.
+    제목 32 pt 두 줄, 부제 18 pt, 발표자 16 pt, 소속 14 pt 는 왼쪽(폭 7.3 in), 로고 3개는 왼쪽 아래(높이 0.45 in)."""
     vt = s["visible_text"]
-    text(sl, L.ML, 1.90, 5.85, 1.40, [run(s["title"], 32, ACC, F_X)], anchor=MSO_ANCHOR.BOTTOM, line_spacing=1.05)
-    text(sl, L.ML, 3.40, 5.85, 0.80, [run(s["subtitle"], 18, GRAY2, F_M)], line_spacing=1.15)
-    text(sl, L.ML, 4.45, 5.85, 0.36, [run(vt["presenter"], 16, INK, F_S)])
-    text(sl, L.ML, 4.85, 5.85, 0.30, [run(vt["date_event"], 14, GRAY, F_M)])
-    g = s["evidence"]["geometry_in"]
-    L.place(sl, panel("Alaska_ALT_map_v3_c_slide.png"), g["x"], g["y"], g["w"], g["h"])
-    STATUS.setdefault("S01", []).append("알래스카 ALT 지도 슬라이드판(5.50 × 5.00 in), 로고 없음(소속 미정 기본안)")
+    bg = ROOT / "deck/assets/paper_report/cover_bg_v1.png"
+    if bg.exists():
+        pic = sl.shapes.add_picture(str(bg), 0, 0, Inches(13.333), Inches(7.5))
+        pic.shadow.inherit = False
+        STATUS.setdefault("S01", []).append("표지 바탕 그림 cover_bg_v1.png(전면)")
+    else:
+        L.place(sl, panel("Alaska_ALT_map_v3_c_slide.png"), 7.3, 1.25, 5.5, 5.0)
+        STATUS.setdefault("S01", []).append("바탕 그림 없음, 알래스카 ALT 지도 슬라이드판(오른쪽)")
+    # 제목 두 줄(사용자 요청). 32 pt 두 줄은 8.8 in 이라 흰 영역(5.7 in)을 넘으므로 28 pt, 구 경계에서 직접 나눔(보고 항목)
+    title = s["title"].replace(" 위한 ", " 위한\n", 1)
+    tw = 7.9 if bg.exists() else 6.3
+    L.break_runs(text(sl, L.ML, 0.95, tw, 1.30, [run(title, 28, ACC, F_X)], anchor=MSO_ANCHOR.TOP, line_spacing=1.1))
+    text(sl, L.ML, 2.45, 5.0, 0.40, [run(s["subtitle"], 18, GRAY2, F_M)])
+    text(sl, L.ML, 3.30, 5.0, 0.36, [run(vt["presenter"], 16, INK, F_S)])
+    text(sl, L.ML, 3.70, 5.0, 0.30, [run(vt["affiliation"], 14, GRAY2, F_M)])
+    L.logos_row(sl, x_left=L.ML, y_bottom=6.90, h=L.LOGO_H_COVER, gap=L.LOGO_GAP_COVER)
 
 
 def b_S02(sl, s):
@@ -159,10 +170,11 @@ def b_S07(sl, s):
 
 def b_S08(sl, s):
     """검증 사다리: 왼쪽 Fig 1e 슬라이드판 7.50 × 4.60 in, 오른쪽 C5–C6 굵은 리드 줄 3줄."""
-    yc = L.Y0 + (L.H - 4.60) / 2                     # 본문 영역 세로 가운데
-    L.place(sl, panel("Fig1_e_slide.png"), L.ML, yc, 7.50, 4.60)
+    w, h = 7.0, 7.0 * 4.6 / 7.5                        # 7.00 × 4.29(글자 약 12 pt), 오른쪽 열을 4.7 in 로 넓힘
+    yc = L.Y0 + (L.H - h) / 2
+    L.place(sl, panel("Fig1_e_slide.png"), L.ML, yc, w, h)
     items = [tuple(x.split("  ", 1)) for x in s["visible_text"]["lead_lines"]]
-    L.lead_lines(sl, L.COL[4], yc + 0.15, 3.80, items, gap_pt=14, line_spacing=1.08)
+    L.lead_lines(sl, L.ML + w + 0.30, yc + 0.10, 12.0 - w - 0.30, items, gap_pt=14, line_spacing=1.08)
     STATUS.setdefault("S08", []).append("Fig 1e 슬라이드판(3지역, 5단계)과 근거 줄 3줄")
 
 
@@ -358,7 +370,8 @@ def b_S34(sl, s):
 
 
 def b_map(sl, s):
-    """8부 지도 슬라이드판 PNG: 경로만 참조(크롭·복사 없음). 배치 크기 12.00 × 5.20 in 를 넘지 않게 맞춘다."""
+    """지도 슬라이드판 PNG: 경로만 참조(크롭·복사 없음). 배치 크기 12.00 × 5.20 in 를 넘지 않게 맞춘다.
+    알래스카 지도 쪽은 음영 지도(Alaska_ALT_hillshade_slide.png)가 있으면 그것을 쓴다."""
     p = ROOT / s["evidence"]["ref"]
     w, h = L.fit(p, 12.0, 5.2)
     x = L.ML if w > 11.9 else L.ML + (12.0 - w) / 2
@@ -415,15 +428,122 @@ def b_method(sl, s):
     STATUS.setdefault(s["id"], []).append(f"방법 도식 {p.name}({w:.2f} × {h:.2f} in)")
 
 
-b_N03 = b_N05 = b_N06 = b_N08 = b_N09 = b_N10 = b_N12 = b_method
+b_N03 = b_N05 = b_N06 = b_N09 = b_N10 = b_N12 = b_method
+
+
+def b_N08(sl, s):
+    alt = ROOT / s["evidence"].get("ref_alt", "")
+    if alt.exists():
+        s = dict(s, evidence=dict(s["evidence"], ref=s["evidence"]["ref_alt"]))
+    b_method(sl, s)
+
+
+def fig_lines(sl, s, p, lines, label):
+    """그림 + 굵은 리드 줄 3줄 이하. 그림 폭이 7.9 in 이하이면 왼쪽에 두고 줄은 오른쪽 열(C4–C6 또는 C5–C6),
+    그보다 넓으면 12.0 in 폭으로 줄이고 아래 높이가 남을 때만 줄을 둔다(없으면 노트에만)."""
+    with Image.open(p) as im:
+        dpi = (im.info.get("dpi") or (300, 300))[0]
+        w, h = im.size[0] / dpi, im.size[1] / dpi
+    items = [tuple(x.split("  ", 1)) for x in lines]
+    if w <= 7.95:
+        w, h = L.fit(p, min(w, 7.9), 5.2)
+        L.place(sl, p, L.ML, L.Y0 + (L.H - h) / 2, w, h)
+        xl = L.COL[3] if w <= 5.9 else L.COL[4]
+        wl = L.COLR[5] - xl
+        L.lead_lines(sl, xl, L.Y0 + 0.9 if w <= 5.9 else L.Y0 + 0.3, wl, items, gap_pt=14, line_spacing=1.08)
+        STATUS.setdefault(s["id"], []).append(f"{label} {p.name}({w:.2f} × {h:.2f} in), 리드 줄 {len(items)}줄 오른쪽")
+        return
+    w, h = L.fit(p, 12.0, 5.2)
+    if h <= 3.6:
+        L.place(sl, p, L.ML, L.Y0, w, h)
+        L.lead_lines(sl, L.ML, L.Y0 + h + 0.25, 12.0, items, gap_pt=4, line_spacing=1.0)
+        STATUS.setdefault(s["id"], []).append(f"{label} {p.name}(전폭, 높이 {h:.2f}), 리드 줄 아래")
+    else:
+        L.place(sl, p, L.ML + (12.0 - w) / 2, L.Y0 + (5.2 - h) / 2, w, h)
+        STATUS.setdefault(s["id"], []).append(f"{label} {p.name}(전폭, 높이 {h:.2f}), 리드 줄은 노트에만")
 
 
 def b_N01(sl, s):
-    """활동층 두께와 관측 공백: 왼쪽 범북극 관측 지도(Fig 1a 슬라이드판, 높이 5.2), 오른쪽 C4–C6 굵은 리드 줄 3줄."""
-    w, h = L.place(sl, panel("Fig1_a_slide.png"), L.ML, L.Y0, h=5.20)
-    items = [tuple(x.split("  ", 1)) for x in s["visible_text"]["lead_lines"]]
-    L.lead_lines(sl, L.COL[3], L.Y0 + 1.25, 5.85, items, gap_pt=16, line_spacing=1.1)
-    STATUS.setdefault("N01", []).append("Fig 1a 슬라이드판과 리드 줄 3줄")
+    p = method_fig("N01")
+    if p is None:
+        p = panel("Fig1_a_slide.png")
+        STATUS.setdefault("N01", []).append("B1 없음, Fig 1a 슬라이드판")
+    fig_lines(sl, s, p, s["visible_text"]["lead_lines"], "배경 그림")
+
+
+def b_NB2(sl, s):
+    fig_lines(sl, s, ROOT / s["evidence"]["ref"], s["visible_text"]["lead_lines"], "배경 그림")
+
+
+def b_NR0(sl, s):
+    fig_lines(sl, s, ROOT / s["evidence"]["ref"], s["visible_text"]["lead_lines"], "결과 요약 그림")
+
+
+def b_NE1(sl, s):
+    lines = list(s["visible_text"]["lead_lines"])
+    if "[N]" in lines[-1]:
+        vals = e1_values()
+        if vals:
+            lines[-1] = lines[-1].replace("사전 등록 가설 [N]", f"사전 등록 가설 {vals[0]}").replace("적합 최소 [N]건", f"적합 최소 {vals[1]}건")
+        else:
+            lines[-1] = lines[-1].split(", 사전 등록 가설")[0]      # 원천값이 없으면 가설·적합 수는 적지 않는다
+            STATUS.setdefault("NE1", []).append("E1 원천값 없음, 가설·적합 수 생략")
+    fig_lines(sl, s, ROOT / s["evidence"]["ref"], lines, "근거 범위 그림")
+
+
+def e1_values():
+    """E1 원천값(사전 등록 가설 수, 적합 건수). method/E1_*values*.json 또는 .csv 에서 찾는다."""
+    for p in sorted((ROOT / "deck/assets/paper_report/method").glob("E1*value*")):
+        try:
+            if p.suffix == ".json":
+                v = json.loads(p.read_text(encoding="utf-8"))
+                flat = {}
+                def walk(x, k=""):
+                    if isinstance(x, dict):
+                        for kk, vv in x.items():
+                            walk(vv, kk)
+                    elif isinstance(x, (int, float)):
+                        flat[k] = x
+                walk(v)
+                hyp = next((flat[k] for k in flat if "hyp" in k.lower()), None)
+                fit = next((flat[k] for k in flat if "fit" in k.lower()), None)
+                if hyp and fit:
+                    return int(hyp), int(fit)
+        except Exception:
+            continue
+    return None
+
+
+def b_NGL(sl, s):
+    vt = s["visible_text"]["table"]
+    g = vt["geometry_in"]
+    t = L.table_def(vt["columns"], vt["rows"], g, emph=vt.get("emph"))
+    if vt.get("compact"):                      # 용어 표(9행): 줄 수에 맞춘 낮은 행
+        rh = [max(g["row_h"], 0.3 * max(len(c) for c in r) + 0.14) for r in t["wrapped_rows"]]
+    else:
+        rh = max(g["row_h"], *L.row_heights(t))
+    L.hairline_table(sl, t, y=g["y"], row_h=rh, header_h=g.get("header_h"))
+
+
+b_NCL = b_NLM = b_NGL
+b_NST = b_method
+
+
+def b_NLS(sl, s):
+    """라벨 수에 따른 지도 변화: PPTX 에는 GIF(발표용, PowerPoint 가 재생), PDF 용 빌드에는 정지 5패널 PNG."""
+    p = ROOT / s["evidence"]["ref"]
+    gif = ROOT / s["evidence"].get("gif", "")
+    use_gif = gif.exists() and not STATIC_MEDIA
+    src = gif if use_gif else p
+    w, h = L.fit(p, 12.0, 5.2)
+    pic = sl.shapes.add_picture(str(src), Inches(L.ML + (12.0 - w) / 2), Inches(L.Y0 + (5.2 - h) / 2), Inches(w), Inches(h))
+    pic.shadow.inherit = False
+    STATUS.setdefault(s["id"], []).append(f"{'GIF' if use_gif else '정지 PNG'} {src.name}({w:.2f} × {h:.2f} in)")
+
+
+b_NLSA = b_NLS
+b_NL3 = b_SMH = b_SM1A = b_map
+b_NM6B = b_method
 
 
 def b_N02(sl, s):
@@ -479,7 +599,8 @@ b_N30 = b_N31 = two_tables
 def b_NTY(sl, s, label):
     text(sl, L.ML, 2.75, 12.0, 0.70, [run(s["title"], 26, ACC, F_X)], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
     text(sl, L.ML, 3.55, 12.0, 0.50, [run(s["subtitle"], 18, GRAY, F_M)], align=PP_ALIGN.CENTER)
-    text(sl, L.COLR[5] - 1.0, 0.22, 1.0, 0.30, [run(str(label), 12, GRAY, F_M)], align=PP_ALIGN.RIGHT)
+    L.logos_topright(sl)
+    L.pagenum_bottomright(sl, label)
 
 
 def b_AP1(sl, s):
@@ -602,6 +723,7 @@ def ref_column(sl, x, y, refs):
 
 # ================================================================ 조립(스펙의 쪽 순서, 쪽 번호는 그린 순서대로)
 SKIPPED = []
+STATIC_MEDIA = False         # True 이면 GIF 대신 정지 PNG(PDF 용 빌드)
 
 
 def ready(x):
@@ -627,7 +749,10 @@ ORDER = deck_order()
 MAIN_IDS = {x["id"] for x in SPEC_D["slides"]}
 
 
-def build():
+def build(static_media=False, out=None):
+    global STATIC_MEDIA
+    STATIC_MEDIA = static_media
+    out = out or PPTX
     prs = fl.new_deck()
     rcols = ref_columns()
     if len(rcols) > 4:
@@ -670,19 +795,19 @@ def build():
             if s.get("takeaway"):
                 L.takeaway(sl, s["takeaway"])
         n = s["notes"]
-        extra = [f"[제작 상태] {x}" for x in STATUS.get(sid, [])]
+        extra = [] if sid in MAIN_IDS else [f"[제작 상태] {x}" for x in STATUS.get(sid, [])]   # 본편 노트에는 파일 이름 없음
         L.notes(sl, n.get("script"), n.get("reference_line"), extra or None)
     RENDER.mkdir(parents=True, exist_ok=True)
-    prs.save(PPTX)
-    print(f"[pptx] {PPTX.relative_to(ROOT)}  {len(prs.slides)} 쪽(본편 {n_main + 1}, 부록 {n_app})")
+    prs.save(out)
+    print(f"[pptx] {out.relative_to(ROOT) if out.is_relative_to(ROOT) else out}  {len(prs.slides)} 쪽(본편 {n_main + 1}, 부록 {n_app})")
     for sid, title, req in SKIPPED:
         print(f"  [대기] {sid} {title}: {req} 없음")
     (RENDER / "paper_report_page_map.json").write_text(json.dumps(labels, ensure_ascii=False, indent=1), encoding="utf-8")
     return prs
 
 
-def render():
-    L.export_pdf(PPTX, PDF, SCRATCH / "lo")
+def render(src=None):
+    L.export_pdf(src or PPTX, PDF, SCRATCH / "lo")
     PAGES.mkdir(parents=True, exist_ok=True)
     for old in PAGES.glob("page-*.png"):
         old.unlink()
@@ -747,4 +872,11 @@ if __name__ == "__main__":
             print(f"  [status] {k}: {' / '.join(v)}")
     audit()
     if not a.no_pdf and not a.audit_only:
-        render()
+        has_gif = any((ROOT / SPEC[k]["evidence"].get("gif", "")).exists() for k in ORDER if k in SPEC and SPEC[k]["evidence"].get("gif"))
+        if has_gif:
+            STATUS.clear()
+            tmp = SCRATCH / "permafrost_paper_report_static.pptx"
+            build(static_media=True, out=tmp)          # PDF 는 정지 5패널
+            render(tmp)
+        else:
+            render()

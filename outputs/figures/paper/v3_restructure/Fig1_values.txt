@@ -1,5 +1,5 @@
 Fig 1 v3 값 점검(자동 생성, fig1.py). 그림 값은 Fig1_source_data.csv, 원천은 각 줄의 표.
-생성 시각 2026-10-05 15:31:07, 자원 확인 {'avail_gb': 64.7, 'load1': 6.15}
+생성 시각 2026-10-05 17:28:04, 자원 확인 {'avail_gb': 60.7, 'load1': 7.39}
 값 점검 실패 0건
 
 ## a 지도
@@ -33,7 +33,7 @@ Fig 1 v3 값 점검(자동 생성, fig1.py). 그림 값은 Fig1_source_data.csv,
 [OK] 삽도 틀(이름 줄 포함)이 가리는 본 지도 블록 원 수: 그림 0 / 원천 0
 [정보] 삽도 축척 1 mm = 97.3 km(Lambert 방위 등적, 중심 부근); 본 지도 1 mm = 107.4 km
 [정보] 영구동토 바탕: ESA CCI Permafrost PFR v4.0, mean of 1997-2021 (25 annual files), aggregated to 0.1 deg; 내장 래스터 a {'nx': 1563, 'ny': 1563, 'ppi': 473.0}, 삽도 {'nx': 438, 'ny': 270, 'ppi': 473.0}
-[정보] 열쇠 2줄(지도 아래 오른쪽): 줄 1 끝 40.9 mm, 줄 2 끝 36.3 mm, 칸 폭 43.5 mm
+[정보] 열쇠 3줄(지도 아래 오른쪽, 줄 2 = 영구동토 머리): 줄 1 끝 40.9 mm, 줄 3 끝 36.3 mm, 칸 폭 43.5 mm
 
 ## b Stefan 계수 분포
 [OK] Lena 셀 수(fig1_z_summary n_cells) 대 table1 label_rows: 그림 3037 / 원천 3037
@@ -132,8 +132,8 @@ Fig 1 v3 값 점검(자동 생성, fig1.py). 그림 값은 Fig1_source_data.csv,
 [OK] Canada PSw V-G 셀 가중 RMSE 대 계획 8.3 표(V-G 열): 그림 26.48 / 원천 26.48
 
 ## 설명문(Fig1_legend.md, 손으로 작성)
-[OK] 설명문 350단어 이하(자리표시 포함): 그림 329 / 원천 <= 350
-[정보] 설명문 단어 수: 자리표시 포함 329, 제외 329; 자리표시 0개(등록 문서 형식, 원고 조립 때 XH 수치 문장으로 치환)
+[OK] 설명문 350단어 이하(자리표시 포함): 그림 341 / 원천 <= 350
+[정보] 설명문 단어 수: 자리표시 포함 341, 제외 341; 자리표시 0개(등록 문서 형식, 원고 조립 때 XH 수치 문장으로 치환)
 [OK] 설명문 문장 점검(연결어 대시·금지어·가운뎃점 숫자·네 자리 쉼표·내부 약호, 자리표시 제외): 그림 0건 / 원천 0건
 [OK] 설명문 첫 문장이 'This figure' 로 시작하지 않음(명사구 제목): 그림 Study regions, Stefan coefficients and evaluation design / 원천 명사구
 [OK] 설명문 지도 기재 사항 'central meridian': 그림 True / 원천 True
@@ -143,13 +143,13 @@ Fig 1 v3 값 점검(자동 생성, fig1.py). 그림 값은 Fig1_source_data.csv,
 [OK] 설명문 지도 기재 사항 'ESA CCI': 그림 True / 원천 True
 
 ## 점검 함수(지침 부록 A)
-audit_v3: fails = [], 글자 크기 [7.0, 8.0], 문자 수 427, 얇은 선 [], 제목 [], 글씨 상자 0, 내부 코드 [], 네 자리 쉼표 [], 긴 라벨 [], 그림 안 수치 []
+audit_v3: fails = [], 글자 크기 [7.0, 8.0], 문자 수 441, 얇은 선 [], 제목 [], 글씨 상자 0, 내부 코드 [], 네 자리 쉼표 [], 긴 라벨 [], 그림 안 수치 []
   (위도 라벨 3개는 gid 'graticule' 로 그림 안 수치 검사에서 뺐다. 명세 3.3 a 가 위도 라벨 3개를 허용한다)
 [OK] digest 5.3 audit_fig: 글씨 상자·곡선 화살표·사선 화살표 0(지시선은 Line2D): 그림 (0, 0, 0) / 원천 (0, 0, 0)
   audit_fig 긴 라벨(3단어 초과, 사람 판정): ['Stefan coefficient, $E$ (cm per √(°C d))', 'Distance to nearest training cell (km)']; 제목 0
 [OK] 글자끼리 겹침 쌍(style.text_overlaps): 그림 0 / 원천 0
 [OK] 캔버스 밖 글자: 그림 0 / 원천 0
-pdf_audit: {'width_mm': 170.0, 'height_mm': 155.0, 'chars': 423, 'sizes': {8.0: 5, 7.0: 418}, 'off_size': {8.0: 5}, 'lt5': 0, 'families': ['FreeSans', 'FreeSansBold', 'FreeSansOblique'], 'type3': False}
+pdf_audit: {'width_mm': 170.0, 'height_mm': 155.0, 'chars': 437, 'sizes': {8.0: 5, 7.0: 432}, 'off_size': {8.0: 5}, 'lt5': 0, 'families': ['FreeSans', 'FreeSansBold', 'FreeSansOblique'], 'type3': False}
 pdffonts:
   name                                 type              encoding         emb sub uni object ID
   ------------------------------------ ----------------- ---------------- --- --- --- ---------

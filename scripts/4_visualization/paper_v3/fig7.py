@@ -531,7 +531,7 @@ def frame_crossings(proj, ext):
         for j in i:
             y = p[j, 1]
             if y0 < y < y1:
-                lat_ticks.append((y, f"{lat}° N"))
+                lat_ticks.append((y, f"{lat}°N"))
     for lon in (-170, -150, -130):
         la = np.linspace(50, 89.9, 20001)
         p = proj.transform_points(pc, np.full_like(la, lon), la)
@@ -540,7 +540,7 @@ def frame_crossings(proj, ext):
         for j in i:
             x = p[j, 0]
             if x0 < x < x1:
-                lon_ticks.append((x, f"{abs(lon)}° W"))
+                lon_ticks.append((x, f"{abs(lon)}°W"))
     return lat_ticks, lon_ticks
 
 
@@ -556,7 +556,7 @@ def draw_b(fig, B, obs):
     ax.set_extent(ext, crs=proj)
     ax.spines["geo"].set_linewidth(1.0); ax.spines["geo"].set_edgecolor(INK)
     land = list(shpreader.Reader(shpreader.natural_earth(resolution="50m", category="physical", name="land")).geometries())
-    ax.add_geometries(land, crs=pc, facecolor=S.BASEMAP["land"], edgecolor="none", linewidth=0, zorder=0.4)
+    ax.add_geometries(land, crs=pc, facecolor=S.BASEMAP["land"], edgecolor=S.BASEMAP["coast"], linewidth=S.LW["coast"], zorder=0.4)
     for lat in (60, 65, 70):
         lo = np.linspace(-200, -100, 600)
         ax.plot(lo, np.full_like(lo, lat), color=S.BASEMAP["graticule"], lw=S.LW["grid_map"], transform=pc, zorder=0.6)
@@ -590,7 +590,7 @@ def draw_b(fig, B, obs):
     axi = S.axes_mm(fig, x + w - iw - 0.6, y + 0.6, iw, iw, projection=proj)
     axi.set_extent([-3.6e6, 3.6e6, -3.6e6, 3.6e6], crs=proj)
     land110 = list(shpreader.Reader(shpreader.natural_earth(resolution="110m", category="physical", name="land")).geometries())
-    axi.add_geometries(land110, crs=pc, facecolor="#d9d9d9", edgecolor="none", linewidth=0, zorder=0.4)
+    axi.add_geometries(land110, crs=pc, facecolor=S.BASEMAP["land"], edgecolor=S.BASEMAP["coast"], linewidth=S.LW["coast"], zorder=0.4)
     axi.set_facecolor("white")
     axi.spines["geo"].set_linewidth(1.0); axi.spines["geo"].set_edgecolor(INK2)
     rect = Rectangle((x0, y0), x1 - x0, y1 - y0, transform=axi.transData, facecolor="none", edgecolor=INK, lw=1.0, zorder=3)

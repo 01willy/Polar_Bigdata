@@ -1,0 +1,46 @@
+{
+ "dem_shape": [
+  968,
+  983
+ ],
+ "res_m": 250.0,
+ "ve": 12.0,
+ "camera": [
+  [
+   36845.00441667193,
+   -2234584.7506564334,
+   233225.0
+  ],
+  [
+   20.004416671927377,
+   -1903159.7506564334,
+   0.0
+  ],
+  [
+   0.0,
+   0.0,
+   1.0
+  ]
+ ],
+ "window": [
+  3000,
+  1700
+ ],
+ "z_max_m": 581.6339721679688,
+ "extent_km": [
+  245.5,
+  241.8
+ ],
+ "alt_range": [
+  35.0,
+  50.0
+ ],
+ "out": "deck/assets/paper_report/maps/Lena_ALT_3d_slide.png",
+ "bytes": 3822722,
+ "elapsed_s": 4.5,
+ "script": "scripts/4_visualization/paper_v3/lena_3d_v1.py",
+ "source": [
+  "data/processed/map_lena/hillshade_v1/dem_250m.tif",
+  "data/processed/map_lena/hillshade_v1/drape_rgb.npz"
+ ]
+}

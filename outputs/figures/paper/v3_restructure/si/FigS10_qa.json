@@ -1,6 +1,6 @@
 {
  "stem": "FigS10",
- "created": "2026-10-05 14:43:56",
+ "created": "2026-10-05 17:20:49",
  "size_mm": [
   170.0,
   200.0
@@ -10,7 +10,7 @@
   7.0,
   8.0
  ],
- "chars": 672,
+ "chars": 686,
  "thin_lines": [],
  "codes": [],
  "loose_numbers": [],
@@ -25,7 +25,7 @@
   "liberation": false,
   "ok": true
  },
- "pdf_bytes": 1455446,
+ "pdf_bytes": 1910036,
  "sources": [
   "results/rescale_wf/data/processed/wf/wf_meta.json",
   "results/rescale_wf/data/processed/wf/wf_curve.csv",

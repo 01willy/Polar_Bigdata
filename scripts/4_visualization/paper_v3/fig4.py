@@ -416,8 +416,29 @@ def draw_b(ax, D, T):
     for t in DIRECT_LABEL:
         r = B[B.tname == t].iloc[0]
         gap = 1.5 * s
-        if t == "Russia_C~lgd":    # 왼쪽(오른쪽은 다른 대상의 막대가 가깝다)
-            ax.text(r.diag_abs, r.d_p0, disp(t), transform=off(ax, -gap, 0.0), ha="right", va="center")
+        if t == "Russia_C~lgd":    # 왼쪽 아래 + 지시선(왼쪽 같은 높이에는 이웃 하위 지역의 CI 막대가 지나간다; 2026-10-05 100 % 점검)
+            tx, ty = -3.5, -4.5                                              # 글자 끝(mm, 화면 어긋남)
+            tt = ax.text(r.diag_abs, r.d_p0, disp(t), transform=off(ax, tx, ty), ha="right", va="top")
+            tt.set_gid("direct_label")
+            # 지시선(화살촉 없음): 표지 가장자리(1.2 mm)에서 글자 쪽(0.6 mm 전)까지. 자료 좌표 한 점에 화면 mm 어긋남을 더한
+            # 변환 두 개를 쓰지 않고, 두 끝을 같은 자료 점의 offset_copy 로 각각 그린다(해상도와 무관)
+            L_ = float(np.hypot(tx, ty))
+            u = (tx / L_, ty / L_)
+            from matplotlib.lines import Line2D as _L2
+            for (ax_, ay_), (bx_, by_) in [((u[0] * 1.2, u[1] * 1.2), (tx - u[0] * 0.6, ty - u[1] * 0.6))]:
+                # Line2D 는 변환 하나만 받으므로, 끝점 차를 자료 좌표가 아니라 화면 mm 로 두기 위해 두 점을 같은 자료 점에 두고
+                # 선 자체를 offset 변환 위의 '길이 0' 선분이 아닌 blended 방식으로 그린다: 시작점 offset 변환 + 끝점은 그 변환 안에서
+                # 자료 단위 변위 0 이므로, 대신 두 점의 화면 변위 차를 dx, dy(mm)로 가진 변환을 쓴다
+                tr = off(ax, ax_, ay_)
+                dx_mm, dy_mm = bx_ - ax_, by_ - ay_
+                # 화면 mm 변위를 자료 좌표 변위로 바꾼다(현재 축 범위 기준; 로그 x 축은 표시 변환으로 처리)
+                import matplotlib.transforms as _mt
+                p0 = ax.transData.transform((r.diag_abs, r.d_p0))
+                p1 = p0 + np.array([dx_mm, dy_mm]) / 25.4 * ax.figure.dpi
+                d1 = ax.transData.inverted().transform(p1)
+                ln = _L2([r.diag_abs, d1[0]], [r.d_p0, d1[1]], color=S.INK_AUX, lw=S.LW["ref"], solid_capstyle="butt", zorder=4,
+                         transform=tr)
+                ax.add_line(ln)
         else:
             ax.text(r.diag_abs, r.d_p0, disp(t), transform=off(ax, gap, 0.0), ha="left", va="center")
 

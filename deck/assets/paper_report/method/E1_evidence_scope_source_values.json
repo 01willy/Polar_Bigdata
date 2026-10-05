@@ -1,0 +1,101 @@
+{
+ "평가 지역": {
+  "value": "7곳 (주 4지역, 알래스카, 새 지역 2곳)",
+  "source": "outputs/figures/paper/v3_restructure/Table1_data.tex"
+ },
+ "전이 대상": {
+  "value": "27개 (지역 7 + 하위 지역 10 × 2모드)",
+  "source": "results/rescale_lg/data/processed/lg/lg_meta.json targets; paper/claims/D_data_and_design/README.md E25"
+ },
+ "라벨 수 격자": {
+  "value": "8단계 (0, 3, 10, 40, 160, 320, 1000, 전량)",
+  "source": "results/rescale_lg/data/processed/lg/lg_meta.json n_grid; D README E24"
+ },
+ "방법·학습기": {
+  "value": "방법 계열 5, 방법 12종, 학습기 10종",
+  "source": "deck/deck_spec_paper_report.json S10(5계열); lg_meta.json methods(12); methods.tex(학습기 10종)"
+ },
+ "분할·추출·seed": {
+  "value": "블록 절반 분할 5회 × 라벨 추출 5회 × 학습 seed 2",
+  "source": "lg_meta.json splits, draws, seeds; D README E25"
+ },
+ "등록 가설": {
+  "value": "174개 (실행 전 등록 문서 7종)",
+  "source": "docs/EXPERIMENT_PLAN_{LG,LGF,LGU,WRAPUP,WF,FINAL_BATCH,FINAL_BATCH_ADDENDUM_XM}: 45+11+17+15+24+58+4"
+ },
+ "초록 대비 10개": {
+  "value": "Holm 보정 뒤 방향 확정 6 (감소 5, 증가 1) · 동등 1 · 보정 전만 유의 1 · 미결정 2",
+  "source": "data/processed/paper_figs/fig7_d_ab10.csv abstract_rule a/b/c/d and verdict4 (AB1–AB10); methods.tex Statistical analysis (Holm, m = 10)"
+ },
+ "모형 적합": {
+  "value": "최소 863,229건 (실행 기록의 합)",
+  "source": "lg_meta.json 129,887; lgx_meta.json 335,089; ladder 5,556; lgt_meta.json 43,544; lgd shards 27,770; lgf_meta.json 15,320; wf_meta 81,836; wf2b_meta 25,794; wf3b_meta 14,818; XB 40,376; XC 59,073; XD 46,104; XE r1b 19,650; XG 280; XI 5,380; XM 10,412"
+ },
+ "신뢰구간": {
+  "value": "0.5° 블록 재표집 10,000회 (라벨 수 격자 집계 1000회)",
+  "source": "methods.tex Statistical analysis"
+ },
+ "환경 간 재현": {
+  "value": "물리식·CatBoost 차 3.6e-14 cm (34,360 키)",
+  "source": "methods.tex Computing environments"
+ },
+ "matrix": {
+  "source": "results/rescale_lg/data/processed/lg/lg_curve.csv (method axis, mode x); data/processed/lgd/lgd_curve_lic.csv (Russia_C expanded, Tibet_LGD)",
+  "cells": {
+   "알래스카": [
+    "0",
+    "3",
+    "10",
+    "40",
+    "160",
+    "320",
+    "1000",
+    "전량"
+   ],
+   "레나델타": [
+    "0",
+    "3",
+    "10",
+    "40",
+    "160",
+    "320",
+    "1000",
+    "전량"
+   ],
+   "캐나다": [
+    "0",
+    "3",
+    "10",
+    "40",
+    "160",
+    "320",
+    "전량"
+   ],
+   "러시아 서부": [
+    "0",
+    "3",
+    "10",
+    "전량"
+   ],
+   "러시아 동부": [
+    "0",
+    "3",
+    "10",
+    "전량"
+   ],
+   "러시아 중부": [
+    "0",
+    "3",
+    "10",
+    "전량"
+   ],
+   "티베트 고원": [
+    "0",
+    "3",
+    "10",
+    "40",
+    "전량"
+   ]
+  }
+ }
+}

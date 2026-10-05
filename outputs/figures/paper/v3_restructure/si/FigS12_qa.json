@@ -1,6 +1,6 @@
 {
  "stem": "FigS12",
- "created": "2026-10-05 14:47:33",
+ "created": "2026-10-05 17:21:08",
  "size_mm": [
   170.0,
   206.0
@@ -10,7 +10,7 @@
   7.0,
   8.0
  ],
- "chars": 1079,
+ "chars": 1093,
  "thin_lines": [],
  "codes": [],
  "loose_numbers": [],
@@ -25,7 +25,7 @@
   "liberation": false,
   "ok": true
  },
- "pdf_bytes": 1456097,
+ "pdf_bytes": 1910075,
  "sources": [
   "data/processed/xbatch/XD_placement_policy/sealed/xd_alg_contrasts.csv",
   "data/processed/paper_figs/fig5_b.csv",

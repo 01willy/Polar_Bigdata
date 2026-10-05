@@ -120,7 +120,7 @@ REGION_LABELS = {
 LEADER_ANCHOR = {"Canada": "largest"}
 LAT_LABEL_LON = -20.0                                  # 위도 라벨을 다는 경선(북대서양·그린란드해)
 SCALE_A = dict(lon=5.0, lat=70.0, km=1000)             # 축척 막대 중심(노르웨이해, 70° N)
-KEY_AX = (54.5, 92.0, 43.5, 11.0)                      # a 의 열쇠 2줄: 원 아래 오른쪽 띠(왼쪽 아래는 c 로 가는 연결선 자리) [판단]
+KEY_AX = (54.5, 90.5, 43.5, 14.5)                      # a 의 열쇠 3줄(크기, 영구동토 머리, 구역 견본): 원 아래 오른쪽 띠(왼쪽 아래는 c 로 가는 연결선 자리) [판단]
 RECT_HALO_LW = 2.5                                     # 확대 사각형의 흰 바탕 선(밀집 원 위에서 보이게), 검정 1.0 pt 아래
 
 
@@ -364,13 +364,14 @@ def panel_a(fig, D, vals, P, lon0):
     ax.spines["geo"].set_edgecolor(S.BASEMAP["coast"]); ax.spines["geo"].set_linewidth(1.0)
     ax.add_feature(cfeature.LAND.with_scale("50m"), facecolor=S.BASEMAP["land"], edgecolor="none", linewidth=0, zorder=0).set_rasterized(True)
     vals["a_pfr_raster"] = draw_pfr(ax, proj, dia, dia, P)
+    ax.add_feature(cfeature.COASTLINE.with_scale("50m"), edgecolor=S.BASEMAP["coast"], facecolor="none", linewidth=S.LW["coast"], zorder=0.4)
     ax.gridlines(crs=ccrs.PlateCarree(), draw_labels=False, linewidth=S.LW["grid_map"], color=S.BASEMAP["graticule"],
                  xlocs=np.arange(-180, 180, 30), ylocs=[60, 70, 80], zorder=0.5)
     vals["a_km_per_mm"] = round(rho / 1000.0 / (dia / 2), 2)
     vals["a_central_lon"] = round(float(lon0), 3)
     # 위도 라벨(경선 LAT_LABEL_LON 과 위선의 교점 오른쪽)
     for la in (60, 70, 80):
-        t = ax.annotate(f"{la}° N", xy=proj.transform_point(LAT_LABEL_LON, la, ccrs.PlateCarree()), xycoords="data",
+        t = ax.annotate(f"{la}°N", xy=proj.transform_point(LAT_LABEL_LON, la, ccrs.PlateCarree()), xycoords="data",
                         xytext=(2.0, 1.0), textcoords="offset points", ha="left", va="bottom", fontsize=S.FONT_PT, zorder=6)
         t.set_gid("graticule")
     # 블록 원
@@ -459,6 +460,7 @@ def panel_tibet(fig, D, vals, P, ax_a=None, proj_a=None):
     ax.set_xlim(cx - half_w, cx + half_w); ax.set_ylim(y_bot, y_top)
     ax.add_feature(cfeature.LAND.with_scale("50m"), facecolor=S.BASEMAP["land"], edgecolor="none", linewidth=0, zorder=0).set_rasterized(True)
     vals["tibet_pfr_raster"] = draw_pfr(ax, proj, w, h, P)
+    ax.add_feature(cfeature.COASTLINE.with_scale("50m"), edgecolor=S.BASEMAP["coast"], facecolor="none", linewidth=S.LW["coast"], zorder=0.4)
     ax.spines["geo"].set_edgecolor(S.BASEMAP["coast"]); ax.spines["geo"].set_linewidth(1.0)
     q = q.sort_values("n_loc_1km", ascending=False)
     fc, ec, lw = circle_style(q.fill)
@@ -544,11 +546,14 @@ def key_a(fig):
     x += 0.8
     ax.scatter([x + r], [base - r], s=size_pt2(SIZE_KEY[1]), facecolors="white", edgecolors=S.INK, linewidths=EDGE_LW, zorder=3)
     x_end1 = put_text(x + 2 * r + 0.7, base - 1.2, "New regions")
+    # 줄 2 = 영구동토 머리, 줄 3 = 구역 견본 2개(v4 토큰 map_base.rule: 열쇠에 구역 이름을 적는다)
     y2, sw = 9.4, 2.4
+    put_text(0.4, y2, "Permafrost zone", gid="key")
+    y3 = 12.6
     x = 0.4
     for lab, col in (("Continuous", S.BASEMAP["continuous"]), ("Discontinuous", S.BASEMAP["discontinuous"])):
-        ax.add_patch(Rectangle((x, y2 - sw / 2), sw, sw, facecolor=col, edgecolor="none", linewidth=0, zorder=2))
-        x = put_text(x + sw + 0.8, y2, lab) + 2.2
+        ax.add_patch(Rectangle((x, y3 - sw / 2), sw, sw, facecolor=col, edgecolor="none", linewidth=0, zorder=2))
+        x = put_text(x + sw + 0.8, y3, lab) + 2.2
     ax.set_gid("key_a")
     return ax, dict(row1_end_mm=round(x_end1, 1), row2_end_mm=round(x - 2.2, 1), width_mm=w)
 
@@ -606,6 +611,7 @@ def zoom_base(fig, rect, proj, ext):
     ax = S.axes_mm(fig, *rect, projection=proj)
     ax.set_xlim(ext[0], ext[1]); ax.set_ylim(ext[2], ext[3])
     ax.add_feature(cfeature.LAND.with_scale("10m"), facecolor=S.BASEMAP["land"], edgecolor="none", linewidth=0, zorder=0).set_rasterized(True)
+    ax.add_feature(cfeature.COASTLINE.with_scale("10m"), edgecolor=S.BASEMAP["coast"], facecolor="none", linewidth=S.LW["coast"], zorder=0.4)
     ax.spines["geo"].set_edgecolor(S.BASEMAP["coast"]); ax.spines["geo"].set_linewidth(1.0)
     return ax
 
@@ -625,7 +631,7 @@ def panel_c(fig, L, proj, ext, vals):
     tree = BallTree(np.radians(uq), metric="haversine")
     dist, _ = tree.query(np.radians(np.c_[ll[..., 1].ravel(), ll[..., 0].ravel()]), k=1)
     Dkm = dist[:, 0].reshape(X.shape) * 6371.0
-    cs = ax.contour(X, Y, Dkm, levels=[BUFFER_KM], colors=[S.INK], linewidths=[1.0], linestyles=[(0, (3, 2))], zorder=4)
+    cs = ax.contour(X, Y, Dkm, levels=[BUFFER_KM], colors=[S.BASEMAP["buffer_line"]], linewidths=[1.0], linestyles=[(0, (3, 2))], zorder=4)
     vals["c_contour_paths"] = int(sum(len(p.vertices) > 0 for p in cs.get_paths()))
     # 라벨 "Buffer": 등치선 위 가장 북서쪽 점에서 안쪽(오른쪽 아래)으로. 패널 밖으로 나가지 않는다
     verts = np.vstack([p.vertices for p in cs.get_paths() if len(p.vertices)])
@@ -680,10 +686,9 @@ def panel_d(fig, L, proj, ext, vals):
     sco_b = [b for b in L["score_blocks"]]
     pa, ca = block_polys(lab_b, proj)
     pb, cb = block_polys(sco_b, proj)
-    ax.add_collection(PolyCollection(pa, facecolors=S.BASEMAP["label_block"], edgecolors=S.BASEMAP["graticule"], linewidths=1.0,
-                                     zorder=2))
-    ax.add_collection(PolyCollection(pb, facecolors=S.BASEMAP["score_block"], edgecolors=S.BASEMAP["graticule"], linewidths=1.0,
-                                     zorder=2))
+    # 블록 테두리: 흰색(v4 map_base 로 육지가 #E6E6E6 이 되어 회색 경위선 색 테두리가 라벨 블록과 구분되지 않는다)
+    ax.add_collection(PolyCollection(pa, facecolors=S.BASEMAP["label_block"], edgecolors="white", linewidths=0.8, zorder=2))
+    ax.add_collection(PolyCollection(pb, facecolors=S.BASEMAP["score_block"], edgecolors="white", linewidths=0.8, zorder=2))
     lab = L["lab"]
     ax.scatter(lab.lon.values, lab.lat.values, s=3.0 ** 2, color=S.INK, linewidths=0, transform=ccrs.PlateCarree(), zorder=4)
     # 블록 경도 폭(최종 크기 mm), 지침 2.11 의 1.0 mm 조건
@@ -707,7 +712,8 @@ def panel_d(fig, L, proj, ext, vals):
         return np.hypot(*(Q - (p0 + t[:, None] * d)).T)
 
     def leader(start, kind):
-        """비용 최소 끝점: 다른 종류 블록 가로지름(1000), 라벨 셀 점 1.5 mm 안 통과(100), 끝점이 라벨 셀 점 3 mm 안(50), 길이(mm)."""
+        """비용 최소 끝점: 다른 종류 블록 가로지름(1000), 같은 종류의 다른 블록 가로지름(300, 끝점 블록이 아닌 블록 위를 지나면
+        '중간' 블록을 가리키는 것처럼 보인다), 라벨 셀 점 1.5 mm 안 통과(100), 끝점이 라벨 셀 점 3 mm 안(50), 길이(mm)."""
         best = None
         for j, (pp, kd) in enumerate(zip(allp, kinds)):
             if kd != kind:
@@ -719,6 +725,8 @@ def panel_d(fig, L, proj, ext, vals):
                 viol = 0
                 if any(o.intersects_path(seg, filled=True) for i, o in enumerate(allp) if kinds[i] != kind):
                     viol += 1000
+                if any(o.intersects_path(seg, filled=True) for i, o in enumerate(allp) if kinds[i] == kind and i != j):
+                    viol += 300
                 if seg_point_dist(start, end, Pl).min() < 1.5 * m_per_mm:
                     viol += 100
                 if np.hypot(*(Pl - end).T).min() < 3.0 * m_per_mm:
@@ -762,7 +770,7 @@ def panel_d(fig, L, proj, ext, vals):
         return t
 
     labelled_leader("Label blocks", [(0.05, 0.07), (0.05, 0.22), (0.05, 0.40), (0.30, 0.07)], "left", "A", "below")
-    labelled_leader("Scoring blocks", [(0.95, 0.93), (0.95, 0.80), (0.95, 0.66), (0.70, 0.93)], "right", "B", "above")
+    labelled_leader("Scoring blocks", [(0.95, 0.93), (0.95, 0.80), (0.95, 0.66), (0.70, 0.93), (0.95, 0.55), (0.60, 0.93)], "right", "B", "above")
     return ax
 
 
@@ -867,8 +875,8 @@ def panel_e(fig, vals):
     ax.set_ylabel("RMSE (cm)")
     # 단 이름(5개): 축 아래쪽 띠. 오른쪽 세 단(Block, kNNDM, Region holdout)은 간격이 좁아 두 높이로 나눈다
     xg = Mn[Mn.method == "D0w"].set_index("stage").x_geo
-    pos = {"W1R": (1.0, 7.0, "center"), "W1S": (1.0, 7.0, "center"), "W1B": (1.12, 7.0, "right"), "W1K": (1.25, 10.4, "right"),
-           "V-G": (None, 7.8, "right")}                                      # V-G: 축 오른쪽 끝에 맞춘 두 줄
+    pos = {"W1R": (1.0, 7.0, "center"), "W1S": (1.0, 7.0, "center"), "W1B": (1.12, 7.0, "right"), "W1K": (1.0, 11.6, "center"),
+           "V-G": (None, 7.0, "right")}                                      # V-G: 축 오른쪽 끝에 맞춘 두 줄. kNNDM 은 점 아래 가운데(두 줄 사이 높이)
     for stg, lab in XH_STAGES:
         fx, y_, ha = pos[stg]
         x_ = XH_XLIM[1] * 0.97 if fx is None else xg[stg] * fx
@@ -1027,7 +1035,7 @@ def value_checks(ctx, aud, pa, fonts_txt, res, paths):
     chk("삽도 틀(이름 줄 포함)이 가리는 본 지도 블록 원 수", vals.get("tibet_inset_hides_main_blocks", -1), 0)
     lines.append(f"[정보] 삽도 축척 1 mm = {vals['tibet_km_per_mm']} km(Lambert 방위 등적, 중심 부근); 본 지도 1 mm = {vals['a_km_per_mm']} km")
     lines.append(f"[정보] 영구동토 바탕: {vals['pfr_title']}; 내장 래스터 a {vals['a_pfr_raster']}, 삽도 {vals['tibet_pfr_raster']}")
-    lines.append(f"[정보] 열쇠 2줄(지도 아래 오른쪽): 줄 1 끝 {vals['key_a']['row1_end_mm']} mm, 줄 2 끝 {vals['key_a']['row2_end_mm']} mm, 칸 폭 {vals['key_a']['width_mm']} mm")
+    lines.append(f"[정보] 열쇠 3줄(지도 아래 오른쪽, 줄 2 = 영구동토 머리): 줄 1 끝 {vals['key_a']['row1_end_mm']} mm, 줄 3 끝 {vals['key_a']['row2_end_mm']} mm, 칸 폭 {vals['key_a']['width_mm']} mm")
     lines.append("")
     lines.append("## b Stefan 계수 분포")
     for r in vals["b_rows"]:
