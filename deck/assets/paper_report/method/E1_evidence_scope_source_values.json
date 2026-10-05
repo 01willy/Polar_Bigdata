@@ -23,8 +23,8 @@
   "value": "174개 (실행 전 등록 문서 7종)",
   "source": "docs/EXPERIMENT_PLAN_{LG,LGF,LGU,WRAPUP,WF,FINAL_BATCH,FINAL_BATCH_ADDENDUM_XM}: 45+11+17+15+24+58+4"
  },
- "초록 대비 10개": {
-  "value": "Holm 보정 뒤 방향 확정 6 (감소 5, 증가 1) · 동등 1 · 보정 전만 유의 1 · 미결정 2",
+ "주 가설 10개": {
+  "value": "다중 비교 보정 뒤 방향 확정 6(감소 5, 증가 1) · 동등 1 · 미결정 3",
   "source": "data/processed/paper_figs/fig7_d_ab10.csv abstract_rule a/b/c/d and verdict4 (AB1–AB10); methods.tex Statistical analysis (Holm, m = 10)"
  },
  "모형 적합": {
@@ -35,8 +35,8 @@
   "value": "0.5° 블록 재표집 10,000회 (라벨 수 격자 집계 1000회)",
   "source": "methods.tex Statistical analysis"
  },
- "환경 간 재현": {
-  "value": "물리식·CatBoost 차 3.6e-14 cm (34,360 키)",
+ "두 계산 환경 재현": {
+  "value": "물리식·CatBoost 결과 차 3.6e-14 cm (34,360개 값)",
   "source": "methods.tex Computing environments"
  },
  "matrix": {

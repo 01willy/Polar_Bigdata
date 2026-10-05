@@ -15,6 +15,7 @@
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -148,7 +149,12 @@ def b_S03(sl, s):
 
 
 def b_S04(sl, s):
+    p = method_fig("S04")
+    if p is not None:
+        fig_lines(sl, s, p, s["visible_text"]["lead_lines"], "결과 요약 그림")
+        return
     table_slide(sl, "S04")
+    STATUS.setdefault("S04", []).append("R1 없음, 요지 표")
 
 
 def b_S05(sl, s):
@@ -432,9 +438,9 @@ b_N03 = b_N05 = b_N06 = b_N09 = b_N10 = b_N12 = b_method
 
 
 def b_N08(sl, s):
-    alt = ROOT / s["evidence"].get("ref_alt", "")
-    if alt.exists():
-        s = dict(s, evidence=dict(s["evidence"], ref=s["evidence"]["ref_alt"]))
+    alt = s["evidence"].get("ref_alt")
+    if alt and (ROOT / alt).exists():
+        s = dict(s, evidence=dict(s["evidence"], ref=alt))
     b_method(sl, s)
 
 
@@ -454,10 +460,14 @@ def fig_lines(sl, s, p, lines, label):
         STATUS.setdefault(s["id"], []).append(f"{label} {p.name}({w:.2f} × {h:.2f} in), 리드 줄 {len(items)}줄 오른쪽")
         return
     w, h = L.fit(p, 12.0, 5.2)
-    if h <= 3.6:
-        L.place(sl, p, L.ML, L.Y0, w, h)
-        L.lead_lines(sl, L.ML, L.Y0 + h + 0.25, 12.0, items, gap_pt=4, line_spacing=1.0)
-        STATUS.setdefault(s["id"], []).append(f"{label} {p.name}(전폭, 높이 {h:.2f}), 리드 줄 아래")
+    n_lines = len(items)
+    need = 0.25 + 0.36 * n_lines                   # 리드 줄 한 줄 0.36 in(18 pt, 줄 간격 1.0)
+    if n_lines and h > 5.2 - need and s.get("shrink_for_lines", True):
+        w, h = L.fit(p, 12.0, 5.2 - need)           # 전폭 그림을 줄여 리드 줄 자리를 만든다(글자 12 pt 이상 유지 여부는 보고)
+    if n_lines and h <= 5.2 - need:
+        L.place(sl, p, L.ML + (12.0 - w) / 2, L.Y0, w, h)
+        L.lead_lines(sl, L.ML, L.Y0 + h + 0.22, 12.0, items, gap_pt=3, line_spacing=1.0)
+        STATUS.setdefault(s["id"], []).append(f"{label} {p.name}(전폭, {w:.2f} × {h:.2f}), 리드 줄 {n_lines}줄 아래")
     else:
         L.place(sl, p, L.ML + (12.0 - w) / 2, L.Y0 + (5.2 - h) / 2, w, h)
         STATUS.setdefault(s["id"], []).append(f"{label} {p.name}(전폭, 높이 {h:.2f}), 리드 줄은 노트에만")
@@ -468,7 +478,14 @@ def b_N01(sl, s):
     if p is None:
         p = panel("Fig1_a_slide.png")
         STATUS.setdefault("N01", []).append("B1 없음, Fig 1a 슬라이드판")
-    fig_lines(sl, s, p, s["visible_text"]["lead_lines"], "배경 그림")
+        fig_lines(sl, s, p, s["visible_text"]["lead_lines"], "배경 그림")
+        return
+    # B1 은 12.0 × 5.2 전폭 그림이고 오른쪽 아래(x 7.75–11.9, 아래에서 0.2–2.1 in)를 비워 두었다. 리드 줄은 그 자리에 둔다
+    w, h = L.fit(p, 12.0, 5.2)
+    L.place(sl, p, L.ML, L.Y0, w, h)
+    items = [tuple(x.split("  ", 1)) for x in s["visible_text"]["lead_lines"]]
+    L.lead_lines(sl, L.ML + 7.75, L.Y0 + h - 2.05, 4.15, items, gap_pt=4, line_spacing=1.0)
+    STATUS.setdefault("N01", []).append(f"B1 전폭({w:.2f} × {h:.2f}) + 리드 줄 {len(items)}줄 오른쪽 아래 빈 자리")
 
 
 def b_NB2(sl, s):
@@ -479,8 +496,56 @@ def b_NR0(sl, s):
     fig_lines(sl, s, ROOT / s["evidence"]["ref"], s["visible_text"]["lead_lines"], "결과 요약 그림")
 
 
+def fallback_table(sl, s):
+    vt = s["fallback_table"]
+    t, rh = table_from(vt)
+    L.hairline_table(sl, t, y=vt["geometry_in"]["y"], row_h=rh)
+    STATUS.setdefault(s["id"], []).append("그림 없음, 대체 표")
+
+
+def b_NR2(sl, s):
+    p = method_fig("NR2")
+    if p is None:
+        fb = ROOT / s["evidence"].get("fallback", "")
+        if fb.exists():
+            fig_lines(sl, s, fb, s["visible_text"]["lead_lines"], "결과 요약 그림(R0 대체)")
+            return
+        fallback_table(sl, s)
+        return
+    fig_lines(sl, s, p, s["visible_text"]["lead_lines"], "결과 요약 그림")
+
+
+def b_NS1(sl, s):
+    p = method_fig("NS1")
+    if p is None:
+        fallback_table(sl, s)
+        return
+    fig_lines(sl, s, p, s["visible_text"]["lead_lines"], "강점 그림")
+
+
+def b_NTM(sl, s):
+    """방법별 전이 지도: 그림 + 설명문(.md)의 RMSE 한 줄(있을 때만)."""
+    p = ROOT / s["evidence"]["ref"]
+    leg = ROOT / s["evidence"].get("legend", "")
+    lines = []
+    if leg.exists():
+        txt = leg.read_text(encoding="utf-8")
+        m = re.findall(r"RMSE[^.\n]*", txt)
+        if m:
+            lines = ["RMSE  " + m[0].strip()[:90]]
+    if lines:
+        fig_lines(sl, s, p, lines, "전이 지도")
+    else:
+        b_map(sl, s)
+
+
+b_NOP = b_NTM
+b_SM1H = b_map
+b_NTM = b_NOP = b_map          # 설명문 파일 없음: 수치는 스펙 결론 줄·노트에 둔다(2026-10-05 조정 지시)
+
+
 def b_NE1(sl, s):
-    lines = list(s["visible_text"]["lead_lines"])
+    lines = list(s["visible_text"]["lead_lines"])[:3]
     if "[N]" in lines[-1]:
         vals = e1_values()
         if vals:

@@ -351,5 +351,99 @@
       "Lena n = 40 and 160 choose lambda = 1.0 and the residual model pushes the north-east delta beyond the 70 cm scale end (shown with the arrow)",
       "the all-label Lena map here is the in-region R1 (labels only, lambda 0.5), not the registered Lena final map (source-pooled h49 R1, lambda 0.25)"
     ]
+  },
+  "lena_transfer_methods": {
+    "message": "Why physics matters at zero labels: three source-only methods on the Lena grid and their residuals at the honest label cells",
+    "scripts": [
+      "scripts/2_evaluation/lena_transfer_methods_v1.py",
+      "scripts/4_visualization/paper_v3/lena_transfer_fig.py"
+    ],
+    "recipe": "h54.build_tctx(Lena, x, split) + h54.TUnit.rows_D: P0 = E0·s; D0 = catboost_lo on source rows; D1 = source rows + round(10 × n_src) pseudo rows from the A-half cells (h42.ps_index), value E0·s; seeds 0·1 averaged; figure split 1, all five registered splits computed",
+    "layout": "2 × 4: a–c ALT maps (shared scale), d observed vs predicted scatter (1:1), e–g residual points at label cells (broc, shared), h residual histograms; method key as one row above the right column; RMSE in the legend only",
+    "results": {
+      "E0": 1.6192971927795523,
+      "n_src": 14429,
+      "n_pseudo": 144290,
+      "rmse_all_label_cells": {
+        "P0": 21.699065621300246,
+        "D0": 25.507021583040974,
+        "D1": 21.914175914278548
+      },
+      "bias_all_label_cells": {
+        "P0": 5.487013533091868,
+        "D0": 14.023746756667764,
+        "D1": 6.0979661837339485
+      },
+      "rmse_registered_scoring_half_mean_over_splits": {
+        "P0": 21.694280538290847,
+        "D0": 25.676590724872614,
+        "D1": 21.875629022123775
+      },
+      "registered_lg_curve_n0": {
+        "D0|catboost_lo|lam1.0": {
+          "rmse": 25.71042000743496,
+          "rmse_beq": 24.0072608506271,
+          "n_splits_valid": 5
+        },
+        "D1|catboost_lo|lam1.0": {
+          "rmse": 21.87709238418352,
+          "rmse_beq": 23.361563597788148,
+          "n_splits_valid": 5
+        },
+        "P0|none|lam0.0": {
+          "rmse": 21.694280538290837,
+          "rmse_beq": 23.81009185749444,
+          "n_splits_valid": 5
+        }
+      },
+      "ranges": {
+        "alt": [
+          40.0,
+          65.0
+        ],
+        "residual": [
+          -75.0,
+          75.0
+        ]
+      },
+      "paper_size_mm": [
+        170.0,
+        90.7
+      ],
+      "slide_size_mm": [
+        304.79999999999995,
+        132.1
+      ]
+    }
+  },
+  "alaska_obs_vs_pred": {
+    "message": "Out-of-block predictions against observations in Alaska and the block-wise change in mean |residual| (residual ML minus recalibrated Stefan)",
+    "scripts": [
+      "scripts/4_visualization/paper_v3/alaska_obs_vs_pred_fig.py"
+    ],
+    "input": "data/processed/map_alaska/alaska_cv_oof_v1.csv",
+    "layout": "paper: a, b stacked at left (density-coloured points, log colour scale, 1:1 line), c block map at right; slide: one row",
+    "results": {
+      "n_cells": 13606,
+      "n_blocks": 74,
+      "rmse": {
+        "p1": 14.300327921435098,
+        "r1": 13.79770276655458
+      },
+      "bias": {
+        "p1": -1.3360560473320604,
+        "r1": -1.3856731280317507
+      },
+      "mean_abs": {
+        "p1": 10.518816949875054,
+        "r1": 10.06460676319271
+      },
+      "blocks_delta_negative": 47,
+      "blocks_lt5_cells": 38,
+      "delta_range": [
+        -8.0,
+        8.0
+      ]
+    }
   }
 }

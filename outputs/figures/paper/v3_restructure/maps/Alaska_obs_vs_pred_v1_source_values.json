@@ -1,0 +1,74 @@
+{
+ "n_cells": 13606,
+ "n_blocks": 74,
+ "rmse": {
+  "p1": 14.300327921435098,
+  "r1": 13.79770276655458
+ },
+ "bias": {
+  "p1": -1.3360560473320604,
+  "r1": -1.3856731280317507
+ },
+ "mean_abs": {
+  "p1": 10.518816949875054,
+  "r1": 10.06460676319271
+ },
+ "blocks_delta_negative": 47,
+ "blocks_lt5_cells": 38,
+ "delta_range": [
+  -8.0,
+  8.0
+ ],
+ "dens_max": 340.0,
+ "axis_max": 210.0,
+ "source": "data/processed/map_alaska/alaska_cv_oof_v1.csv",
+ "layout": {
+  "paper": {
+   "size_mm": [
+    170.0,
+    94.2
+   ],
+   "scatter_mm": [
+    36.0,
+    36.0
+   ],
+   "map_mm": [
+    84.5,
+    79.5
+   ],
+   "audit": {
+    "sizes": [
+     7.0,
+     8.0
+    ],
+    "chars": 172,
+    "thin": [],
+    "overlaps": [],
+    "outside": [
+     "250"
+    ]
+   }
+  },
+  "slide": {
+   "size_mm": [
+    304.79999999999995,
+    96.6
+   ],
+   "scatter_mm": [
+    58.0,
+    58.0
+   ],
+   "map_mm": [
+    78.3,
+    73.6
+   ],
+   "overlaps": [
+    [
+     "300",
+     "0"
+    ]
+   ],
+   "outside": []
+  }
+ }
+}

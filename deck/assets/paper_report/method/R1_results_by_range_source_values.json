@@ -1,0 +1,11 @@
+{
+ "n0_pseudo_vs_shuffle": "data/processed/paper_figs/fig3_a.csv shuffle n0",
+ "n0_direct_vs_source": "data/processed/paper_figs/fig2_pool_curves.csv E1 D0 n0",
+ "n10_recal": "fig2_pool_curves.csv E1 P1 n10",
+ "n10_resid_vs_recal": "results/rescale_lg/data/processed/lg/lg_tests.csv L4 MEAN4 n10 λ 0.25",
+ "n40_160_cv_vs_recal": "outputs/figures/paper/v3_restructure/Fig7_source_data.csv panel e A1-A3 (XC-2b, XC-2c)",
+ "alaska_1000": "Fig7_source_data.csv panel a Alaska anchor_residual n 1000 (rmse_recal 14.41, rmse_method 13.87)",
+ "lena_xm": "data/processed/xbatch/XM_landcover_vegetation/sealed/xm_tests.csv XM-b n -1 Lena|r",
+ "risk_table": "docs/RESEARCH_OVERVIEW_2026-10-02.md 9절(직접 ML 18/30 대 증강 2/30, WF0 사후 서술); paper/claims/C1_label0_safety/README.md",
+ "canada_40": "Fig7_source_data.csv panel e region_value Canada n 40 (−2.96)"
+}

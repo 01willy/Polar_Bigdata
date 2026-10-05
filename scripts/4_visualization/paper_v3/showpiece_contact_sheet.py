@@ -19,6 +19,8 @@ ITEMS = [
     PAPER / "Lena_ALT_hillshade_v1.png", PAPER / "Alaska_ALT_hillshade_v1.png",
     MAPS / "Lena_ALT_hillshade_slide.png", MAPS / "Alaska_ALT_hillshade_slide.png",
     ROOT / "deck" / "assets" / "paper_report" / "cover_bg_v1.png", MAPS / "Lena_ALT_3d_slide.png",
+    PAPER / "Lena_transfer_methods_v1.png", MAPS / "Lena_transfer_methods_v1_slide.png",
+    PAPER / "Alaska_obs_vs_pred_v1.png", MAPS / "Alaska_obs_vs_pred_v1_slide.png",
 ]
 TW, PAD, CAP, NCOL = 1100, 30, 70, 3
 FONT = "/usr/share/fonts/truetype/freefont/FreeSans.ttf"

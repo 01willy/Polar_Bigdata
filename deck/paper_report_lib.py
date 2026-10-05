@@ -631,7 +631,7 @@ def table_support(sl, t, x, y, w):
 
 # ---------------------------------------------------------------- 스펙 표 → 표 정의(낱말 단위 줄 나눔, 지침 5.9)
 TBL_STYLE = {"header_h": 0.5, "col_gap": 0.18, "safety": 0.95, "line_h": 0.3}
-NBSP_UNITS = r"(cm|단어|in|pt|km|m|%|쪽|편|개|종|곳)"
+NBSP_UNITS = r"(cm에서|cm로|cm|단어|in|pt|km|m|%|쪽|편|개|종|곳)"
 
 
 def nbsp(s):
