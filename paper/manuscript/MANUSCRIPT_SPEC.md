@@ -59,7 +59,8 @@
 
 | 항목 | 영문 | 국문 |
 |---|---|---|
-| 임시 제목 | Permafrost active-layer thickness prediction under sparse observations using physics-based pseudo-label augmentation and machine learning | 희소 관측 조건에서 물리경험식 유사라벨 증강과 기계학습을 이용한 영구동토 활동층 두께 예측 |
+| 제목(2026-10-05 사용자 확정, 16단어) | A label-count workflow of physics-based machine learning for active-layer thickness prediction in sparsely observed permafrost regions | 희소 관측 영구동토 지역의 활동층 두께 예측을 위한 물리 기반 기계학습의 라벨 수별 워크플로 |
+| (이전 임시 제목) | Permafrost active-layer thickness prediction under sparse observations using physics-based pseudo-label augmentation and machine learning | 희소 관측 조건에서 물리경험식 유사라벨 증강과 기계학습을 이용한 영구동토 활동층 두께 예측 |
 | 단어 수 | 14(하이픈 단어를 한 단어로 셈, `wc -w` 측정) | |
 | 규칙 점검 | 콜론, 의문문, 금지어('how many', 'beat', 'novel') 없음 | |
 
