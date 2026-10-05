@@ -11,6 +11,7 @@ cp_if() { [ -e "$1" ] && cp -p "$1" "$2" || echo "[sync] 없음(건너뜀): $1";
 # 01 발표 자료
 cp_if deck/render/permafrost_paper_report.pptx "$D/01_발표자료/연구결과_보고덱.pptx"
 cp_if deck/render/permafrost_paper_report.pdf  "$D/01_발표자료/연구결과_보고덱.pdf"
+cp_if "deck/render/발표대본_연구결과보고_2026-10-06.pdf" "$D/01_발표자료/발표대본과_배경지식.pdf"
 
 # 02 논문 초안(검토용 = 그림이 본문 안, 제출형식 = 그림이 끝)
 cp_if paper/manuscript/en/main_review.pdf "$D/02_논문초안/영문_본문_검토용.pdf"

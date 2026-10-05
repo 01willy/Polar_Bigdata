@@ -1,0 +1,169 @@
+% !TEX program = xelatex
+%% presentation_script.tex : 발표 대본(1부)과 발표자 배경 지식(2부). 2026-10-06 연구실 보고용.
+%% 컴파일: ./build.sh (xelatex 2회, nice -n 10). 출력 deck/render/발표대본_연구결과보고_2026-10-06.pdf
+%% 글꼴: Pretendard(본문·제목, paper/manuscript/ko/main.tex 의 제목 글꼴과 같음), DejaVu Sans Mono(경로).
+%% 구성: 1부 = part1_script.tex(슬라이드별 대본), 2부 = part2_background.tex(배경 지식).
+\documentclass[11pt,a4paper]{article}
+
+% ---------- 레이아웃 ----------
+\usepackage[a4paper,top=24mm,bottom=26mm,left=24mm,right=24mm,footskip=13mm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fontspec}
+\usepackage{kotex}   % xetexko: 한글·라틴 사이에 자동 공백을 넣지 않고 입력한 공백을 지킨다
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage[most]{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+
+% ---------- 글꼴 ----------
+\setmainfont{Pretendard}[
+  UprightFont={Pretendard}, BoldFont={Pretendard Bold},
+  ItalicFont={Pretendard}, ItalicFeatures={FakeSlant=0.15},
+  BoldItalicFont={Pretendard Bold}, BoldItalicFeatures={FakeSlant=0.15}]
+\setsansfont{Pretendard}[BoldFont={Pretendard Bold}]
+\setmonofont{DejaVu Sans Mono}[Scale=0.86]
+\setmainhangulfont{Pretendard}[
+  UprightFont={Pretendard}, BoldFont={Pretendard Bold},
+  ItalicFont={Pretendard}, ItalicFeatures={FakeSlant=0.15},
+  BoldItalicFont={Pretendard Bold}, BoldItalicFeatures={FakeSlant=0.15}]
+\setsanshangulfont{Pretendard}[BoldFont={Pretendard Bold}]
+\setmonohangulfont{Pretendard}[Scale=0.9]
+\newfontfamily\semibold{Pretendard SemiBold}
+\newhangulfontfamily\cjksemibold{Pretendard SemiBold}
+
+\linespread{1.32}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlength{\emergencystretch}{2em}
+\raggedbottom
+
+% ---------- 색 ----------
+\definecolor{accent}{HTML}{C8651B}
+\definecolor{rulegray}{HTML}{9A9A9A}
+\definecolor{textgray}{HTML}{555555}
+\definecolor{boxbg}{HTML}{F4F4F2}
+\definecolor{boxframe}{HTML}{BDBDBD}
+
+% ---------- 절 서식 ----------
+\setcounter{secnumdepth}{2}
+\titleformat{\section}{\semibold\cjksemibold\Large}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\semibold\cjksemibold\large}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\semibold\cjksemibold\normalsize}{\thesubsubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{2.4ex plus 0.6ex}{1.0ex}
+\titlespacing*{\subsection}{0pt}{1.8ex plus 0.4ex}{0.6ex}
+\titlespacing*{\subsubsection}{0pt}{1.4ex plus 0.3ex}{0.4ex}
+
+% ---------- 머리글·쪽 번호 ----------
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[L]{\small\color{textgray}\leftmark}
+\fancyhead[R]{\small\color{textgray}연구 결과 종합 보고 · 2026-10-06}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\small\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- 1부 대본용 명령 ----------
+\newcommand{\needlines}[1]{\par\vskip 0pt plus #1\penalty-100\vskip 0pt plus -#1\relax}
+\newcommand{\slideheading}[3]{%
+  \par\needlines{7\baselineskip}\vspace{1.6em plus 0.4em}\penalty-600
+  \noindent{\semibold\cjksemibold\color{accent}\large 슬라이드 #1 · #2}\hfill{\small\color{textgray}#3분}\par
+  \vspace{0.2em}\noindent{\color{rulegray}\rule{\textwidth}{0.4pt}}\par
+  \vspace{0.2em}\markboth{1부 발표 대본}{}}
+\newcommand{\pointat}[1]{\par\vspace{-0.1em}\noindent{\small\color{textgray}▶ 이 쪽에서 가리킬 것: #1}\par}
+\newtcolorbox{optbox}{enhanced, breakable, colback=boxbg, colframe=boxframe, boxrule=0.4pt, arc=1pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt, before skip=5pt, after skip=7pt,
+  fontupper=\small, title={시간이 있으면}, fonttitle=\small\semibold\cjksemibold, coltitle=black,
+  colbacktitle=boxbg, attach boxed title to top left={xshift=6pt, yshift=-2.2mm},
+  boxed title style={boxrule=0pt, arc=0pt, colback=boxbg, left=2pt, right=2pt, top=0pt, bottom=0pt}}
+
+% ---------- 2부용 표 서식 ----------
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\tabsmall}{\small\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.18}}
+\newcommand{\pth}[1]{{\ttfamily\small #1}}
+\setlength{\LTleft}{0pt}\setlength{\LTright}{\fill}\setlength{\LTpre}{0.6em}\setlength{\LTpost}{0.8em}
+
+% ---------- 부 표지 ----------
+\newcommand{\partpage}[3]{%
+  \clearpage\thispagestyle{empty}
+  \vspace*{0.30\textheight}
+  {\noindent\color{accent}\semibold\cjksemibold\Huge #1\par}
+  \vspace{1.2em}
+  {\noindent\semibold\cjksemibold\Large #2\par}
+  \vspace{1.2em}
+  {\noindent\color{textgray}#3\par}
+  \clearpage}
+
+\begin{document}
+
+% ---------- 표지 ----------
+\thispagestyle{empty}
+\vspace*{0.16\textheight}
+{\noindent\color{accent}\semibold\cjksemibold\huge 발표 대본과 발표자 배경 지식\par}
+\vspace{1.0em}
+{\noindent\semibold\cjksemibold\Large 희소 관측 영구동토 지역의 활동층 두께 예측을 위한\\물리 기반 기계학습의 라벨 수별 워크플로\par}
+\vspace{1.0em}
+{\noindent\large 연구 결과 종합 보고 · 2026년 10월 6일 · 연구실 세미나(20–30분)\par}
+\vspace{2.2em}
+{\noindent 발표 백승원 · 서울대학교 에너지시스템공학부 석박통합과정\par}
+\vspace{2.6em}
+{\noindent\color{textgray}\small
+덱: \pth{deck/render/permafrost\_paper\_report.pdf}(본편 1–38쪽, 마무리 39쪽, 참고문헌 2쪽, 부록 30쪽).\\
+1부는 본편 슬라이드마다 말할 내용(계획 시간 합 25분)이고, 2부는 말하지 않는 배경 지식(경과, 코드, 자료, 방법, 결과 해석, 예상 질문, 수치 요약)이다.\\
+수치는 덱 스펙(\pth{deck/deck\_spec\_paper\_report.json}), 최종 묶음 계획서 8절과 추가 등록 두 건, \pth{paper/claims/*/README.md}에서 옮겼고 새로 계산한 값은 없다.\par}
+\vfill
+{\noindent\color{textgray}\small 작성 2026-10-05. 저장소에는 커밋하지 않았다.\par}
+\clearpage
+
+% ---------- 차례 ----------
+\thispagestyle{plain}
+{\noindent\semibold\cjksemibold\Large 차례\par}
+\vspace{0.6em}
+{\noindent\semibold\cjksemibold 1부 발표 대본\par}
+\begin{itemize}[leftmargin=1.4em, itemsep=0.1em]
+  \item 표지, 1부 연구 배경(슬라이드 1–3), 2부 연구 목적(4–5): 3.8분
+  \item 3부 연구 방법(6–15): 7.5분
+  \item 4부 연구 결과(16–28): 7.0분
+  \item 5부 ALT 지도(29–33): 3.0분
+  \item 6부 결론과 계획(34–38), 마무리(39): 3.7분
+\end{itemize}
+{\noindent\semibold\cjksemibold 2부 발표자 배경 지식\par}
+\begin{enumerate}[leftmargin=1.8em, itemsep=0.1em]
+  \item 연구 수행 경과
+  \item 코드 구성
+  \item 자료
+  \item 방법 상세
+  \item 결과가 왜 이렇게 나왔는가
+  \item 발표에서 말하지 않은 것
+  \item 예상 질문과 답
+  \item 수치 요약표
+  \item 출처를 찾지 못해 뺀 수치
+\end{enumerate}
+
+\vspace{1em}
+{\noindent\semibold\cjksemibold 대본 읽는 법\par}
+\begin{itemize}[leftmargin=1.4em, itemsep=0.1em]
+  \item 머리글의 분 수는 계획 시간이다. 합이 25.0분이며 질의응답은 포함하지 않는다.
+  \item 회색 상자 '시간이 있으면'은 선택 문장이다. 시간이 부족하면 건너뛴다.
+  \item '이 쪽에서 가리킬 것'은 레이저 포인터로 짚을 요소다.
+  \item 판정어(오차 감소, 오차 증가, 동등, 미결정)와 근거 종류(사전 등록, 사후 분석, 사후 서술)는 덱과 같은 뜻으로 쓴다.
+\end{itemize}
+
+% ---------- 1부 ----------
+\partpage{1부}{발표 대본}{본편 슬라이드 39쪽 · 계획 시간 25분 · 자연스러운 구어체 존댓말}
+\markboth{1부 발표 대본}{}
+\input{part1_script}
+
+% ---------- 2부 ----------
+\partpage{2부}{발표자 배경 지식}{말하지 않는 내용 · 질문에 답할 때 참고 · 문어체}
+\markboth{2부 발표자 배경 지식}{}
+\input{part2_background}
+
+\end{document}
