@@ -1,5 +1,5 @@
 section,current_words,target_words,source
-서론,797,700,"docs/research/2026-10-04/scirep_format_and_drafts.md 3.2(현재, 마크다운 공백 토큰), paper/manuscript/MANUSCRIPT_SPEC.md 1.1·6절(목표)"
-결과,7500,2800,"docs/research/2026-10-04/scirep_format_and_drafts.md 3.2(현재, 마크다운 공백 토큰), paper/manuscript/MANUSCRIPT_SPEC.md 1.1·6절(목표)"
-고찰,2012,850,"docs/research/2026-10-04/scirep_format_and_drafts.md 3.2(현재, 마크다운 공백 토큰), paper/manuscript/MANUSCRIPT_SPEC.md 1.1·6절(목표)"
-방법,6998,4240,"docs/research/2026-10-04/scirep_format_and_drafts.md 3.2(현재, 마크다운 공백 토큰), paper/manuscript/MANUSCRIPT_SPEC.md 1.1·6절(목표)"
+서론,633,700,"paper/manuscript/en/COMPLIANCE.md 3절(현재, 렌더 PDF 단어 수, 자리표시 제외, 5차 수정 뒤), paper/manuscript/MANUSCRIPT_SPEC.md 1.1·6절(계획)"
+결과,2999,2800,"paper/manuscript/en/COMPLIANCE.md 3절(현재, 렌더 PDF 단어 수, 자리표시 제외, 5차 수정 뒤), paper/manuscript/MANUSCRIPT_SPEC.md 1.1·6절(계획)"
+고찰,808,850,"paper/manuscript/en/COMPLIANCE.md 3절(현재, 렌더 PDF 단어 수, 자리표시 제외, 5차 수정 뒤), paper/manuscript/MANUSCRIPT_SPEC.md 1.1·6절(계획)"
+방법,4930,4240,"paper/manuscript/en/COMPLIANCE.md 3절(현재, 렌더 PDF 단어 수, 자리표시 제외, 5차 수정 뒤), paper/manuscript/MANUSCRIPT_SPEC.md 1.1·6절(계획)"

@@ -321,8 +321,11 @@ def b_S28(sl, s):
 
 
 def b_S29(sl, s):
+    """원고 구성과 분량: 왼쪽 절별 단어 수 차트(7.90 × 4.75), 오른쪽 보조 표(스펙 support_table, 2026-10-05 원고 상태)."""
     chart(sl, "S29")
-    L.hairline_table(sl, TAB["S29"])
+    st = s["visible_text"]["support_table"]
+    t = L.table_def(st["columns"], st["rows"], st["geometry_in"], align=["l", "l"])
+    L.hairline_table(sl, t, y=st["geometry_in"]["y"], row_h=st["geometry_in"]["row_h"])
 
 
 def b_S30(sl, s):

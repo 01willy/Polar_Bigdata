@@ -497,12 +497,12 @@
     "h": 4.75
    },
    "sources": [
-    "docs/research/2026-10-04/scirep_format_and_drafts.md 3.2",
+    "paper/manuscript/en/COMPLIANCE.md 3절",
     "paper/manuscript/MANUSCRIPT_SPEC.md 1.1"
    ],
    "notes": [
     "스펙 높이 4.3 in 를 4.75 in 로 늘렸다(근거 블록 4.5 in 이상, 보조 표와 높이 일치)",
-    "고찰 현재 값은 골격 판이라 직접 라벨 '골격'"
+    "2026-10-05 원고 조립 상태로 갱신: 현재 값은 렌더 PDF 단어 수(자리표시 제외), 가로축 0–6000"
    ],
    "audit": {
     "fails": [],
@@ -511,11 +511,10 @@
      18.0
     ],
     "fonts": [
-     "Pretendard-Medium.otf",
-     "Pretendard-SemiBold.otf"
+     "Pretendard-Medium.otf"
     ],
-    "n_text": 13,
-    "chars": 36,
+    "n_text": 11,
+    "chars": 30,
     "overlaps": [],
     "clipped": [],
     "loose_numbers": [],

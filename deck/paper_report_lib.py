@@ -559,6 +559,8 @@ def wrap_text(s, width_in, pt=18, weight="Medium"):
     """공백에서만 나누는 낱말 단위 줄바꿈(지침 5.9). 용어(KEEP)와 숫자·단위는 묶는다.
     두 줄이면 쉼표 뒤 구 경계를 우선하는 균형 분할, 관형어(두, 각 …)로 줄을 끝내지 않음.
     세 줄 이상이면 두 글자 이하 마지막 줄을 앞 줄 끝 낱말과 합친다."""
+    if "\n" in s:                                   # 칸 문구의 줄바꿈 문자는 직접 나눈 구 경계로 따른다
+        return [ln for part in s.split("\n") for ln in wrap_text(part, width_in, pt, weight)]
     maxw = width_in * TBL_STYLE["safety"]
     W = lambda x: text_w_in(x, pt, weight)  # noqa: E731
     t = nbsp(s)
