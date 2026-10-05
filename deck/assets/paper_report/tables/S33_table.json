@@ -1,8 +1,8 @@
 {
  "slide": "S33",
- "page": 33,
+ "page": "부록 22",
  "title": "본문 자리 추가 실험",
- "subtitle": "9부 · 본문 자리 4묶음 · 등록 완료, 결과 대기 · 결과 문장은 등록한 해석 문장으로 채움",
+ "subtitle": "부록 · 본문 자리 4묶음 · 결과 확정 · 판정은 추가 실험 결과 요약 표",
  "takeaway": "본문 자리 4묶음의 결과에 따라 결과 1–4절과 6절 문장 확정",
  "archetype": "A7",
  "kind": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",

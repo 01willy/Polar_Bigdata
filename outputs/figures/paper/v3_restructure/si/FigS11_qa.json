@@ -1,0 +1,57 @@
+{
+ "stem": "FigS11",
+ "created": "2026-10-05 14:44:04",
+ "size_mm": [
+  170.0,
+  198.0
+ ],
+ "audit_fails": [],
+ "sizes": [
+  7.0,
+  8.0
+ ],
+ "chars": 980,
+ "thin_lines": [],
+ "codes": [],
+ "loose_numbers": [],
+ "text_overlap_pairs": [],
+ "text_outside": [],
+ "pdffonts": {
+  "fonts": [
+   "FreeSans",
+   "FreeSansBold"
+  ],
+  "type3": false,
+  "liberation": false,
+  "ok": true
+ },
+ "pdf_bytes": 1238784,
+ "sources": [
+  "results/rescale_wf3/data/processed/wf/shards/wf9__cpu__Lena__r__s*_blocksse.npz",
+  "results/rescale_wf3/data/processed/wf/shards/wf9__cpu__Canada__r__s*_blocksse.npz",
+  "data/processed/fidelity_base_v3.csv",
+  "data/processed/xbatch/XE_hires_covariates/sealed/xe_r1b_xh0_tests.csv",
+  "data/processed/xbatch/XI_climate_extrapolation_retest/sealed/xi_tests.csv",
+  "data/processed/xbatch/XB_multisource_stacking/sealed/xb_tests.csv"
+ ],
+ "vmax": 20.0,
+ "lena": {
+  "n_shards": 24,
+  "n_splits": 24,
+  "delta_cell_weighted_mean": 0.4690724114048956
+ },
+ "canada": {
+  "n_shards": 25,
+  "n_splits": 25,
+  "delta_cell_weighted_mean": 0.44789401438676435
+ },
+ "n_blocks": {
+  "lena": 20,
+  "canada": 36
+ },
+ "masked": {
+  "lena": 0,
+  "canada": 0
+ },
+ "yend": 193.0
+}

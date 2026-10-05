@@ -34,16 +34,16 @@ Fig 2 v3 수치·점검 기록
 - 축 범위 밖 값(삼각 표지 필요): 0건
 
 [3] 그림 점검(지침 부록 A.1 audit_v3, A.2 pdf_audit, 7.1)
-- audit_v3: 글자 크기 [7.0] pt, 문자 수 281(한도 600), 얇은 선 0, 제목 0, 글씨 상자 0, 내부 약호 0, 네 자리 쉼표 0, 긴 라벨 0, 그림 안 수치 0; 실패 항목 없음
-- pdf_audit: 170.0 × 135.0 mm, 문자 279, 크기 분포 {7.0: 279}, 5 pt 미만 0, 글꼴 계열 ['LiberationSans'], Type 3 없음
-- pdffonts: BGZIHO+LiberationSans-Bold CID 내장 yes
-- pdffonts: BGZIHO+LiberationSans CID 내장 yes
-- pdffonts: HEMWJP+LiberationSans-Italic CID 내장 yes
+- audit_v3: 글자 크기 [7.0, 8.0] pt, 문자 수 271(한도 600), 얇은 선 0, 제목 0, 글씨 상자 0, 내부 약호 0, 네 자리 쉼표 0, 긴 라벨 0, 그림 안 수치 0; 실패 항목 없음
+- pdf_audit: 170.0 × 135.0 mm, 문자 269, 크기 분포 {8.0: 6, 7.0: 263}, 5 pt 미만 0, 글꼴 계열 ['FreeSans', 'FreeSansBold', 'FreeSansOblique'], Type 3 없음
+- pdffonts: BICWAS+FreeSans CID 내장 yes
+- pdffonts: FITYBK+FreeSansBold CID 내장 yes
+- pdffonts: DGJNOP+FreeSansOblique CID 내장 yes
 - digest 5.3 audit_fig: 글씨 상자 0, 곡선 화살표 0, 사선 화살표 0(방향 표지 화살표 1개는 수직), 긴 라벨 ['Error change vs source Stefan (cm)', 'Anchor + residual ML'], 제목 0
 - 글자 겹침·글자와 자료 겹침: 0건
 - 눈금 라벨 간격 1.5 mm 미만: 0건
 - 캔버스 밖 글자: 0건
-- 직접 라벨 실측 폭(mm): Recalibrated Stefan 21.7, Anchor + residual ML 23.4, Direct ML 10.5, Year-matched Stefan 23.1; 라벨 열 오른쪽 끝 168.9 mm(캔버스 170 mm)
+- 직접 라벨 실측 폭(mm): Recalibrated Stefan 21.2, Anchor + residual ML 22.8, Direct ML 10.4, Year-matched Stefan 22.8; 라벨 열 오른쪽 끝 168.3 mm(캔버스 170 mm)
 - 주 패널 면적(F-17, 슬롯 기준, 직접 라벨 열 제외): a 4256, b 6498 mm², 합 47%(기준 35% 이상), 가장 큰 패널 b
 
 [4] 판단과 명세에서 바꾼 점([판단])
@@ -62,13 +62,13 @@ Fig 2 v3 수치·점검 기록
 - 그림 a 의 재보정 n 10 CI(풀 곡선 표, [−3.04, −1.86])와 설명문의 AB4 CI([−3.04, −1.88], lgw_bundle)는 끝값이 최대 0.02 cm 다르다. 같은 점추정에 재표집 표가 다르다. 설명문은 초록 대비(AB4)의 값을 쓴다.
 
 [5] 색각·흑백(F-09)
-- Recalibrated Stefan #2b5c8f / Anchor + residual ML #9a7bc9: normal 25.6, prot 17.1, deut 20.4, tritan 36.0
-- Recalibrated Stefan #2b5c8f / Direct ML #6b7280: normal 15.6, prot 14.1, deut 16.4, tritan 15.6
-- Recalibrated Stefan #2b5c8f / Source Stefan #4d4d4d: normal 19.5, prot 19.6, deut 20.2, tritan 20.4
-- Anchor + residual ML #9a7bc9 / Direct ML #6b7280: normal 17.6, prot 16.9, deut 16.3, tritan 18.5
-- Anchor + residual ML #9a7bc9 / Source Stefan #4d4d4d: normal 33.0, prot 31.2, deut 30.8, tritan 26.0
-- Direct ML #6b7280 / Source Stefan #4d4d4d: normal 15.2, prot 15.6, deut 15.1, tritan 15.1
-- 최소 ΔE00 14.1(기준 12 이상). 흰 바탕 대비: Recalibrated Stefan 6.93, Anchor + residual ML 3.47, Direct ML 4.83, Source Stefan 8.45(기준 3:1 이상)
+- Recalibrated Stefan #1F5A99 / Anchor + residual ML #D55E00: normal 49.6, prot 50.2, deut 58.3, tritan 61.8
+- Recalibrated Stefan #1F5A99 / Direct ML #A3478A: normal 32.3, prot 3.9, deut 14.8, tritan 51.1
+- Recalibrated Stefan #1F5A99 / Source Stefan #8A9BB0: normal 27.5, prot 26.2, deut 29.4, tritan 24.7
+- Anchor + residual ML #D55E00 / Direct ML #A3478A: normal 41.5, prot 45.8, deut 41.8, tritan 15.1
+- Anchor + residual ML #D55E00 / Source Stefan #8A9BB0: normal 38.6, prot 39.4, deut 39.4, tritan 42.2
+- Direct ML #A3478A / Source Stefan #8A9BB0: normal 31.2, prot 24.3, deut 15.3, tritan 36.9
+- 최소 ΔE00 3.9(기준 12 이상). 흰 바탕 대비: Recalibrated Stefan 7.05, Anchor + residual ML 3.87, Direct ML 5.49, Source Stefan 2.84(기준 3:1 이상)
 - 흑백 렌더(사람 판정): Direct ML 은 파선으로 구분된다. Recalibrated Stefan 과 Anchor + residual ML 은 지침 2.4 에서 둘 다 실선이라 명도(L* 38, 57)와 선 끝 직접 라벨로만 구분된다. Year-matched Stefan 은 점선이다.
 
 [6] 마스크와 후보 수

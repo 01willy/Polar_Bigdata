@@ -12,7 +12,7 @@
 
 산출(outputs/figures/paper/v3_restructure/)
 - Table1_data.tex        편집 가능한 booktabs 표(원고에 넣는 정본, 지침 R-14, 그림 명세 1.7)
-- Table1.pdf, Table1.png 검토용 조판본(Table1_data.tex 를 pdflatex 로 조판, PNG 600 dpi)
+- Table1.pdf, Table1.png 검토용 조판본(Table1_data.tex 를 xelatex·FreeSans 로 조판(v4 토큰), PNG 600 dpi)
 - Table1_source_data.csv 표 값(원값과 표시값)
 - Table1_legend.md       표 설명문(150단어 이하, 그림 명세 10.4)
 - Table1_values.txt      원천 대조와 점검 기록
@@ -230,8 +230,13 @@ def table_env_tex(df: pd.DataFrame) -> str:
 
 
 REVIEW_PREAMBLE = r"""\documentclass[10pt]{article}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
+\usepackage{fontspec}
+\setmainfont{FreeSans}[Path=/usr/share/fonts/truetype/freefont/, Extension=.ttf, UprightFont=*, BoldFont=*Bold, ItalicFont=*Oblique, BoldItalicFont=*BoldOblique]
+\setsansfont{FreeSans}[Path=/usr/share/fonts/truetype/freefont/, Extension=.ttf, UprightFont=*, BoldFont=*Bold, ItalicFont=*Oblique, BoldItalicFont=*BoldOblique]
+\usepackage{unicode-math}
+\setmathfont{latinmodern-math.otf}
+\setmathfont{FreeSans}[range={up/{Latin,latin,num}}, Path=/usr/share/fonts/truetype/freefont/, Extension=.ttf]
+\setmathfont{FreeSansOblique}[range={it/{Latin,latin}}, Path=/usr/share/fonts/truetype/freefont/, Extension=.ttf]
 \usepackage{textcomp}
 \usepackage{booktabs}
 \usepackage[labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=false,skip=6pt,font=footnotesize]{caption}
@@ -275,7 +280,7 @@ def compile_review(df: pd.DataFrame, tex_path: Path, build: Path) -> Path:
 
 
 def _pdflatex(build: Path, name: str) -> str:
-    p = subprocess.run(["pdflatex", "-interaction=nonstopmode", "-halt-on-error", f"{name}.tex"], cwd=build,
+    p = subprocess.run(["xelatex", "-interaction=nonstopmode", "-halt-on-error", f"{name}.tex"], cwd=build,   # v4: FreeSans(fontspec)
                        capture_output=True, text=True)
     log = (build / f"{name}.log").read_text(errors="replace") if (build / f"{name}.log").exists() else p.stdout
     if p.returncode != 0:
@@ -544,7 +549,7 @@ def main(argv=None):
         "- 지역 이름 'W Russia', 'E Russia', 'Lena Delta'의 표기와 레나델타 범위는 사용자 확인 사항이다(지침 2.5, 8절 7, 원고 명세 [DECISION]).",
         "- 짧은 라벨 출처 이름은 원천 label_type 의 첫 자료원만 보인다. 알래스카·캐나다의 CALM 지점 평균 일부와 "
         "Central Russia (expanded)의 v3 CALM 6셀은 설명문 둘째 문장에 적었다.",
-        "- 검토용 조판은 Latin Modern(원고 sn-jnl 의 Computer Modern 계열)으로 했다. 원고 안 최종 글꼴과 크기는 템플릿과 "
+        "- 검토용 조판은 v4 토큰의 FreeSans(xelatex, 수식 글자도 FreeSans)로 했다. 원고 안 최종 글꼴과 크기는 템플릿과 "
         "출판사 조판을 따른다. 7 pt 단일 크기 규칙(지침 2.2)은 그림 규칙이라 표에 적용하지 않았다.",
         "- Table1_data.tex 는 그림 명세 1.7이 정한 Table 1 정본 경로이다(지침 R-14: 편집 가능한 LaTeX 표).",
     ]

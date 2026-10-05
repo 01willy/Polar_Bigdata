@@ -271,7 +271,14 @@ def make_crop(name, spec=None):
 
 
 # ---------------------------------------------------------------- S13–S15 순차 공개 차트(경로 B)
-METHOD = {"source": "#4d4d4d", "recal": "#2b5c8f", "resid": "#9a7bc9", "direct": "#6b7280"}
+# v4 토큰(design/style_tokens_v4.json): 방법 색, Pretendard Regular, 슬라이드 선 굵기. 차트 양식 부분만 바꿨다(배치 코드는 그대로)
+import json as _json
+_TOK = _json.loads((Path(__file__).resolve().parent.parent / "design" / "style_tokens_v4.json").read_text(encoding="utf-8"))
+_TMc, _TLs, _TFs = _TOK["color"]["methods"], _TOK["lines"]["slide"], _TOK["font"]["slide"]
+METHOD = {"source": _TMc["P0"]["hex"], "recal": _TMc["P1"]["hex"], "resid": _TMc["R1"]["hex"], "direct": _TMc["D0"]["hex"],
+          "ym": _TMc["Pstar"]["hex"]}
+_INK = _TOK["color"]["neutral"]["text_slide"]
+EMPH = RGBColor.from_string(_TMc["R1"]["hex"].lstrip("#"))     # 제안 방법 글자 강조(주홍 #D55E00), 쪽당 한 곳 이하
 
 
 def _setup_mpl():
@@ -279,16 +286,16 @@ def _setup_mpl():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
     from matplotlib import font_manager as fm
-    for w in ("Medium", "SemiBold"):
-        fm.fontManager.addfont(str(FONT_DIR / f"Pretendard-{w}.otf"))
+    fm.fontManager.addfont(str(FONT_DIR / "Pretendard-Regular.otf"))
     plt.rcParams.update({
-        "font.family": "Pretendard", "font.weight": 500, "font.size": 16,
-        "text.color": "#111111", "axes.labelcolor": "#111111", "axes.edgecolor": "#111111",
-        "axes.labelsize": 18, "axes.labelweight": 500, "axes.linewidth": 1.5,
+        "font.family": "Pretendard", "font.weight": "normal", "font.size": _TFs["direct_label_pt"],
+        "text.color": _INK, "axes.labelcolor": _INK, "axes.edgecolor": _INK,
+        "axes.labelsize": _TFs["axis_label_pt"], "axes.labelweight": "normal", "axes.linewidth": _TLs["axis_pt"],
         "axes.spines.top": False, "axes.spines.right": False, "axes.grid": False,
         "axes.unicode_minus": True, "axes.facecolor": "white", "figure.facecolor": "white",
-        "xtick.labelsize": 16, "ytick.labelsize": 16, "xtick.color": "#111111", "ytick.color": "#111111",
-        "xtick.major.width": 1.5, "ytick.major.width": 1.5, "xtick.major.size": 5, "ytick.major.size": 5,
+        "xtick.labelsize": _TFs["tick_pt"], "ytick.labelsize": _TFs["tick_pt"], "xtick.color": _INK, "ytick.color": _INK,
+        "xtick.major.width": _TLs["tick_pt"], "ytick.major.width": _TLs["tick_pt"], "xtick.major.size": _TLs["tick_len_pt"],
+        "ytick.major.size": _TLs["tick_len_pt"],
         "xtick.major.pad": 6, "ytick.major.pad": 8, "xtick.minor.visible": False, "ytick.minor.visible": False,
         "savefig.dpi": 300, "figure.dpi": 300, "lines.solid_capstyle": "butt",
     })
@@ -331,7 +338,7 @@ def make_label_curve_stages(out_dir=ASSET):
                 if a is None:
                     continue
                 a.set_ylim(*YL)
-                a.axhline(0, color=METHOD["source"], lw=2.0, zorder=1)
+                a.axhline(0, color=METHOD["source"], lw=_TLs["data_pt"], zorder=1)
             for a in (am, aa):
                 if a is None:
                     continue
@@ -356,10 +363,10 @@ def make_label_curve_stages(out_dir=ASSET):
                 aa.set_xticklabels(["전량"])
             axes[p] = (a0, am, aa)
             fig.text(((L["n0"][0]) + (L["all"][0] + L["all"][1] if L["all"] else L["log"][0] + L["log"][1])) / 2 / W,
-                     (yb + yh + 0.38) / Hh, head[p], ha="center", va="center", fontsize=18, fontweight=600)
+                     (yb + yh + 0.38) / Hh, head[p], ha="center", va="center", fontsize=_TFs["direct_label_pt"])
         fig.text(0.42 / W, (yb + yh / 2) / Hh, "원천 계수 Stefan 대비\n오차 변화 (cm)", rotation=90,
-                 ha="center", va="center", fontsize=18, linespacing=1.25)
-        fig.text(5.55 / W, 0.22 / Hh, "대상 라벨 수, n", ha="center", va="center", fontsize=18)
+                 ha="center", va="center", fontsize=_TFs["axis_label_pt"], linespacing=1.25)
+        fig.text(5.55 / W, 0.22 / Hh, "대상 라벨 수, n", ha="center", va="center", fontsize=_TFs["axis_label_pt"])
 
         def rows(p, s):
             r = d[(d.panel == p) & (d.series.map(ser) == s)]
@@ -380,29 +387,29 @@ def make_label_curve_stages(out_dir=ASSET):
                 if band and str(rr.ci_drawn.iloc[0]) == "yes":
                     ax.fill_between([0.5 + off - 0.09, 0.5 + off + 0.09], [lo, lo], [hi, hi], color=color,
                                     alpha=0.20, lw=0, zorder=2)
-                ax.plot([0.5 + off], [v], marker="o", ms=8, mfc=color, mec=color, ls="none", zorder=4)
+                ax.plot([0.5 + off], [v], marker="o", ms=_TLs["marker_pt"], mfc=color, mec=color, ls="none", zorder=4)
             if not rl.empty:
                 x = rl.target_labels_n.astype(float).values
                 y = rl.error_change_cm.values
                 if band and (rl.ci_drawn == "yes").all():
                     am.fill_between(x, rl.ci95_low_cm.values, rl.ci95_high_cm.values, color=color, alpha=0.20,
                                     lw=0, zorder=2)
-                am.plot(x, y, color=color, lw=3.0, ls=ls, zorder=3, dash_capstyle="butt")
-                am.plot(x, y, marker="o", ms=8, mfc=color, mec=color, ls="none", zorder=4)
+                am.plot(x, y, color=color, lw=_TLs["data_pt"], ls=ls, zorder=3, dash_capstyle="butt")
+                am.plot(x, y, marker="o", ms=_TLs["marker_pt"], mfc=color, mec=color, ls="none", zorder=4)
 
         def ym(p, label):
             a0 = axes[p][0]
             r = rows(p, "ym")
             v = float(r.error_change_cm.iloc[0])
-            a0.plot([0.12, 0.88], [v, v], color=METHOD["source"], lw=3.0, ls=(0, (1.2, 1.4)), zorder=3)
+            a0.plot([0.12, 0.88], [v, v], color=METHOD["ym"], lw=_TLs["data_pt"], ls=(0, (1.0, 1.4)), zorder=3)
             lo, hi = r.ci95_low_cm.iloc[0], r.ci95_high_cm.iloc[0]
             if str(r.ci_drawn.iloc[0]) == "yes" and np.isfinite(lo):
-                a0.plot([0.5, 0.5], [lo, hi], color=METHOD["source"], lw=2.0, zorder=3)
+                a0.plot([0.5, 0.5], [lo, hi], color=METHOD["ym"], lw=_TLs["data_aux_pt"], zorder=3)
             if label:
                 yy = a0.transData.transform((0, v))[1] / fig.dpi
                 xx = a0.get_window_extent(fig.canvas.get_renderer()).x1 / fig.dpi + 0.12
-                fig.text(xx / W, yy / Hh, "연도 정합 Stefan", ha="left", va="center", fontsize=16,
-                         fontweight=600, color="#111111")
+                fig.text(xx / W, yy / Hh, "연도 정합 Stefan", ha="left", va="center", fontsize=_TFs["direct_label_pt"],
+                         color=METHOD["ym"])
 
         fig.canvas.draw()
         for p in ("a", "b"):
@@ -424,7 +431,7 @@ def make_label_curve_stages(out_dir=ASSET):
             r = rows("b", s)
             v = float(r[r.x_axis == "All axis"].error_change_cm.iloc[0])
             yy = aa.transData.transform((0, v))[1] / fig.dpi
-            fig.text(xl / W, yy / Hh, name, ha="left", va="center", fontsize=16, fontweight=600)
+            fig.text(xl / W, yy / Hh, name, ha="left", va="center", fontsize=_TFs["direct_label_pt"], color=METHOD[s])
         out = out_dir / f"S{12 + stage}_label_curve_stage{stage}.png"
         fig.savefig(out, dpi=300, facecolor="white")
         plt.close(fig)
@@ -469,6 +476,45 @@ def _cell_props(cell, top=None, bottom=None, marL=0.0, marR=0.0, marT=0.03, marB
     _ln(tcPr, "a:lnT", *(top or (None, None)))
     _ln(tcPr, "a:lnB", *(bottom or (None, None)))
     etree.SubElement(tcPr, qn("a:noFill"))
+
+
+def _split_emph(line, words):
+    """줄을 강조 낱말(줄바꿈 없는 공백 판 포함)과 나머지 조각으로 나눈다."""
+    segs = [(line, False)]
+    for w in words:
+        for form in (w, w.replace(" ", "\u00a0")):
+            out = []
+            for seg, e in segs:
+                if e or form not in seg:
+                    out.append((seg, e))
+                    continue
+                parts = seg.split(form)
+                for k, part in enumerate(parts):
+                    if part:
+                        out.append((part, False))
+                    if k < len(parts) - 1:
+                        out.append((form, True))
+            segs = out
+    return segs
+
+
+def equation(sl, x, y, w, parts, size=18, h=0.40, align=PP_ALIGN.LEFT):
+    """수식 한 줄: parts = [(글자, 'sub'|'lead'|'')]. 아래 첨자는 baseline −25%, 리드는 SemiBold."""
+    tb = sl.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h))
+    tf = tb.text_frame
+    tf.word_wrap = True
+    tf.margin_left = tf.margin_right = tf.margin_top = tf.margin_bottom = 0
+    p = tf.paragraphs[0]
+    p.alignment = align
+    for t, kind in parts:
+        r = p.add_run()
+        r.text = t
+        r.font.size = Pt(size)
+        r.font.color.rgb = INK
+        fl._set_fonts(r, F_S if kind == "lead" else F_M)
+        if kind == "sub":
+            r._r.get_or_add_rPr().set("baseline", "-25000")
+    return tb
 
 
 def hairline_table(sl, t, x=None, y=None, row_h=None, header_h=None):
@@ -518,17 +564,19 @@ def hairline_table(sl, t, x=None, y=None, row_h=None, header_h=None):
             else:
                 font, colr = F_M, (ACC if (i - 1, j) in acc else INK)
             lines = lines_row[j]
+            emph = [] if i == 0 else t.get("emph", [])
             for k, ln in enumerate(lines):
                 p = tf.paragraphs[0] if k == 0 else tf.add_paragraph()
                 p.alignment = PP_ALIGN.RIGHT if al == "r" else PP_ALIGN.LEFT
                 p.line_spacing = 1.0
                 p.space_after = Pt(0)
                 p.space_before = Pt(0)
-                r = p.add_run()
-                r.text = ln
-                r.font.size = Pt(18)
-                r.font.color.rgb = colr
-                fl._set_fonts(r, font)
+                for seg, is_emph in _split_emph(ln, emph):
+                    r = p.add_run()
+                    r.text = seg
+                    r.font.size = Pt(18)
+                    r.font.color.rgb = EMPH if is_emph else colr
+                    fl._set_fonts(r, font)
     return y + total_h
 
 
@@ -607,12 +655,12 @@ def row_heights(t, min_h=0.70, line_h=0.30, pad=0.12):
     return [max(min_h, max(len(c) for c in r) * line_h + pad) for r in t["wrapped_rows"]]
 
 
-def table_def(columns, rows, geo, align=None, accent=(), support=None):
+def table_def(columns, rows, geo, align=None, accent=(), support=None, emph=None):
     """스펙 표(columns, rows, geometry_in)로 hairline_table 이 받는 정의를 만든다."""
     cw = geo["col_w"]
     gap = TBL_STYLE["col_gap"]
     align = align or ["l"] * len(columns)
-    return dict(geometry_in=dict(geo), columns=columns, rows=rows, align=align,
+    return dict(geometry_in=dict(geo), columns=columns, rows=rows, align=align, emph=list(emph or []),
                 accent_cells=[list(a) for a in accent], style=dict(TBL_STYLE), support_line=support,
                 wrapped_header=[wrap_text(c, cw[j] - gap, 18, "SemiBold") for j, c in enumerate(columns)],
                 wrapped_rows=[[wrap_text(c, cw[j] - gap) for j, c in enumerate(r)] for r in rows])

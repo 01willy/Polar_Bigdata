@@ -1,5 +1,5 @@
 Fig 1 v3 값 점검(자동 생성, fig1.py). 그림 값은 Fig1_source_data.csv, 원천은 각 줄의 표.
-생성 시각 2026-10-05 04:15:18, 자원 확인 {'avail_gb': 34.0, 'load1': 37.53}
+생성 시각 2026-10-05 15:31:07, 자원 확인 {'avail_gb': 64.7, 'load1': 6.15}
 값 점검 실패 0건
 
 ## a 지도
@@ -33,7 +33,7 @@ Fig 1 v3 값 점검(자동 생성, fig1.py). 그림 값은 Fig1_source_data.csv,
 [OK] 삽도 틀(이름 줄 포함)이 가리는 본 지도 블록 원 수: 그림 0 / 원천 0
 [정보] 삽도 축척 1 mm = 97.3 km(Lambert 방위 등적, 중심 부근); 본 지도 1 mm = 107.4 km
 [정보] 영구동토 바탕: ESA CCI Permafrost PFR v4.0, mean of 1997-2021 (25 annual files), aggregated to 0.1 deg; 내장 래스터 a {'nx': 1563, 'ny': 1563, 'ppi': 473.0}, 삽도 {'nx': 438, 'ny': 270, 'ppi': 473.0}
-[정보] 열쇠 2줄(지도 아래 오른쪽): 줄 1 끝 41.2 mm, 줄 2 끝 36.9 mm, 칸 폭 43.5 mm
+[정보] 열쇠 2줄(지도 아래 오른쪽): 줄 1 끝 40.9 mm, 줄 2 끝 36.3 mm, 칸 폭 43.5 mm
 
 ## b Stefan 계수 분포
 [OK] Lena 셀 수(fig1_z_summary n_cells) 대 table1 label_rows: 그림 3037 / 원천 3037
@@ -82,9 +82,9 @@ Fig 1 v3 값 점검(자동 생성, fig1.py). 그림 값은 Fig1_source_data.csv,
 [정보] 확대 투영: 북극 평사(중심 경도 126.698°, 진척 위도 70° N), 범위 450.0 km 정사각형
 [OK] d 블록 경도 폭(mm, 지침 2.11 의 1.0 mm 이상): 그림 1.67 / 원천 >= 1.0
 [OK] d 지시선 'Label blocks' 위반(다른 종류 블록 가로지름·라벨 셀 점 근접) 0: 그림 0 / 원천 0
-[정보] d 지시선 'Label blocks': 길이 11.6 mm, 글자 자리 시도 4회
+[정보] d 지시선 'Label blocks': 길이 11.5 mm, 글자 자리 시도 4회
 [OK] d 지시선 'Scoring blocks' 위반(다른 종류 블록 가로지름·라벨 셀 점 근접) 0: 그림 0 / 원천 0
-[정보] d 지시선 'Scoring blocks': 길이 9.2 mm, 글자 자리 시도 1회
+[정보] d 지시선 'Scoring blocks': 길이 9.3 mm, 글자 자리 시도 1회
 [OK] c 축척 막대 100 km 의 측지 길이: 그림 99.6 / 원천 100
 
 ## e 검증 사다리(XH, 계획 8.3)
@@ -143,17 +143,17 @@ Fig 1 v3 값 점검(자동 생성, fig1.py). 그림 값은 Fig1_source_data.csv,
 [OK] 설명문 지도 기재 사항 'ESA CCI': 그림 True / 원천 True
 
 ## 점검 함수(지침 부록 A)
-audit_v3: fails = [], 글자 크기 [7.0], 문자 수 427, 얇은 선 [], 제목 [], 글씨 상자 0, 내부 코드 [], 네 자리 쉼표 [], 긴 라벨 [], 그림 안 수치 []
+audit_v3: fails = [], 글자 크기 [7.0, 8.0], 문자 수 427, 얇은 선 [], 제목 [], 글씨 상자 0, 내부 코드 [], 네 자리 쉼표 [], 긴 라벨 [], 그림 안 수치 []
   (위도 라벨 3개는 gid 'graticule' 로 그림 안 수치 검사에서 뺐다. 명세 3.3 a 가 위도 라벨 3개를 허용한다)
 [OK] digest 5.3 audit_fig: 글씨 상자·곡선 화살표·사선 화살표 0(지시선은 Line2D): 그림 (0, 0, 0) / 원천 (0, 0, 0)
   audit_fig 긴 라벨(3단어 초과, 사람 판정): ['Stefan coefficient, $E$ (cm per √(°C d))', 'Distance to nearest training cell (km)']; 제목 0
 [OK] 글자끼리 겹침 쌍(style.text_overlaps): 그림 0 / 원천 0
 [OK] 캔버스 밖 글자: 그림 0 / 원천 0
-pdf_audit: {'width_mm': 170.0, 'height_mm': 155.0, 'chars': 423, 'sizes': {7.0: 423}, 'off_size': {}, 'lt5': 0, 'families': ['LiberationSans'], 'type3': False}
+pdf_audit: {'width_mm': 170.0, 'height_mm': 155.0, 'chars': 423, 'sizes': {8.0: 5, 7.0: 418}, 'off_size': {8.0: 5}, 'lt5': 0, 'families': ['FreeSans', 'FreeSansBold', 'FreeSansOblique'], 'type3': False}
 pdffonts:
   name                                 type              encoding         emb sub uni object ID
   ------------------------------------ ----------------- ---------------- --- --- --- ---------
-  BGZIHO+LiberationSans-Bold           CID TrueType      Identity-H       yes yes yes     24  0
-  BGZIHO+LiberationSans                CID TrueType      Identity-H       yes yes yes     31  0
-  HEMWJP+LiberationSans-Italic         CID TrueType      Identity-H       yes yes yes     38  0
+  BICWAS+FreeSans                      CID TrueType      Identity-H       yes yes yes     24  0
+  FITYBK+FreeSansBold                  CID TrueType      Identity-H       yes yes yes     31  0
+  DGJNOP+FreeSansOblique               CID TrueType      Identity-H       yes yes yes     38  0
 산출: outputs/figures/paper/v3_restructure/Fig1.pdf, outputs/figures/paper/v3_restructure/Fig1.png, outputs/figures/paper/v3_restructure/Fig1_source_data.csv

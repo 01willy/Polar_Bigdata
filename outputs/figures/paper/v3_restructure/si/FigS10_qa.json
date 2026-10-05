@@ -1,0 +1,44 @@
+{
+ "stem": "FigS10",
+ "created": "2026-10-05 14:43:56",
+ "size_mm": [
+  170.0,
+  200.0
+ ],
+ "audit_fails": [],
+ "sizes": [
+  7.0,
+  8.0
+ ],
+ "chars": 672,
+ "thin_lines": [],
+ "codes": [],
+ "loose_numbers": [],
+ "text_overlap_pairs": [],
+ "text_outside": [],
+ "pdffonts": {
+  "fonts": [
+   "FreeSans",
+   "FreeSansBold"
+  ],
+  "type3": false,
+  "liberation": false,
+  "ok": true
+ },
+ "pdf_bytes": 1455446,
+ "sources": [
+  "results/rescale_wf/data/processed/wf/wf_meta.json",
+  "results/rescale_wf/data/processed/wf/wf_curve.csv",
+  "data/processed/lgf/lgfn_tests.csv"
+ ],
+ "spearman": -0.3164410058027079,
+ "n_points": 32,
+ "n_tie": 12,
+ "modal_categories": {
+  "P0": 8,
+  "P2": 3,
+  "R1@0.25": 1,
+  "R1@1.0": 5
+ },
+ "vmax_b": 3.0
+}

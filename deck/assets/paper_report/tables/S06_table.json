@@ -1,8 +1,8 @@
 {
  "slide": "S06",
- "page": 6,
+ "page": "부록 3",
  "title": "입력 자료와 처리 단위",
- "subtitle": "1부 · 공변량 25종(지형 6, 기후 8, 토양 9, 위성 ALT 2) · 라벨은 1 km 셀 단위",
+ "subtitle": "부록 · 공변량 25종(지형 6, 기후 8, 토양 9, 위성 ALT 2) · 라벨은 1 km 셀 단위",
  "takeaway": "입력은 1 km 셀 단위, 정보 해상도는 기후 격자 단위",
  "archetype": "A3",
  "kind": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",

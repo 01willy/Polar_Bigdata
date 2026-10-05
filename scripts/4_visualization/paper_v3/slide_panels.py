@@ -45,7 +45,7 @@ import maps_alt_v3 as MV                                                        
 
 OUT = ROOT / "deck" / "assets" / "paper_report" / "slide_panels"
 DPI = 300
-FONT = 14.0
+FONT = S.SLIDE_FONT["direct"]          # v4 토큰: 직접 라벨 13 pt, 눈금 12 pt, 축 이름 14 pt(최소 11 pt)
 MM = 25.4
 SLIDE_BLOCK_OFFSET_MM = 1.6     # 포레스트 블록 등가중 막대의 어긋남(슬라이드, 논문 0.8 mm): 3 pt 셀 막대와 1.5 pt 막대 사이 약 0.8 mm
 _LW0, _MS0, _FONT0, _TICK0 = dict(S.LW), dict(S.MS), S.FONT_PT, S.TICK_LEN_PT
@@ -58,25 +58,24 @@ CROP = {"f6a": (0, 40, 965, 927), "f6b": (1025, 40, 1995, 927), "f6_cbar": (105,
 
 # ================================================================ 공용
 def slide_rc(font=FONT, paper_geometry=False):
-    """Pretendard, 글자 font pt, 축선 1.5 pt. paper_geometry=True 는 (P) 방식(논문 배치에 키운 글자, 선은 S.LW 로)."""
-    MV.register_pretendard()
+    """v4 토큰 슬라이드판: FreeSans Regular(한글은 Pretendard Regular), 직접 라벨 font pt(기본 13), 눈금 12 pt, 축 이름 14 pt,
+    선은 lines.slide(축 1.0, 자료 2.2 pt). paper_geometry 인자는 호환용(쓰지 않는다)."""
     _USE_V3("slide")
-    lw_ax = 1.5 if not paper_geometry else max(1.0, 1.5 / 1.3)
     matplotlib.rcParams.update({
-        "font.size": font, "axes.labelsize": font, "xtick.labelsize": font, "ytick.labelsize": font, "legend.fontsize": font,
-        "axes.titlesize": font, "font.weight": "medium", "axes.linewidth": lw_ax, "xtick.major.width": lw_ax, "ytick.major.width": lw_ax,
-        "xtick.major.size": 5.0 if not paper_geometry else 3.0, "ytick.major.size": 5.0 if not paper_geometry else 3.0,
-        "mathtext.fontset": "custom", "mathtext.rm": "Pretendard", "mathtext.it": "Pretendard", "mathtext.bf": "Pretendard:bold",
-        "mathtext.sf": "Pretendard", "axes.unicode_minus": True, "hatch.linewidth": 1.5 if not paper_geometry else 1.2,
-        "xtick.major.pad": 2.5, "ytick.major.pad": 2.5, "axes.labelpad": 3.0, "lines.solid_capstyle": "butt",
+        "font.size": font, "legend.fontsize": font, "axes.titlesize": font,
+        "axes.labelsize": max(font, S.SLIDE_FONT["axis_label"]) if font >= S.SLIDE_FONT["direct"] else font + 1.0,
+        "xtick.labelsize": min(font, S.SLIDE_FONT["tick"]), "ytick.labelsize": min(font, S.SLIDE_FONT["tick"]),
+        "axes.unicode_minus": True, "xtick.major.pad": 2.5, "ytick.major.pad": 2.5, "axes.labelpad": 3.0,
+        "lines.solid_capstyle": "butt",
     })
     S.FONT_PT = font
 
 
-def slide_scales(lw_mult=1.5, lw_min=1.5, ms_mult=1.6):
-    S.LW.clear(); S.LW.update({k: max(lw_min, v * lw_mult) for k, v in _LW0.items()})
-    S.MS.clear(); S.MS.update({k: v * ms_mult for k, v in _MS0.items()})
-    S.TICK_LEN_PT = 5.0
+def slide_scales(lw_mult=None, lw_min=None, ms_mult=None):
+    """v4 토큰 lines.slide 값으로 S.LW·S.MS·눈금 길이를 바꾼다(인자는 호환용, 쓰지 않는다)."""
+    S.LW.clear(); S.LW.update(S.LW_SLIDE)
+    S.MS.clear(); S.MS.update(S.MS_SLIDE)
+    S.TICK_LEN_PT = S.TICK_LEN_SLIDE
 
 
 def record(name, pages, replaces, size_in, how, note=""):
@@ -143,7 +142,8 @@ def fig1_key(fig, F1, x_mm, y_mm, font):
     x = x_mm
     for v in F1.SIZE_KEY:
         r = F1.pt2mm(np.sqrt(F1.size_pt2(v)) / 2)
-        ax.scatter([x + r], [base - r], s=F1.size_pt2(v), facecolors=[F1.FILL_OBS], edgecolors=S.INK, linewidths=F1.EDGE_LW, zorder=3)
+        ax.scatter([x + r], [base - r], s=F1.size_pt2(v), facecolors=[F1.KEY_FILL], edgecolors=F1.KEY_EDGE, linewidths=F1.REGION_EDGE_LW,
+                   zorder=3)
         x = put(x + 2 * r + 1.0, base - 1.8, f"{v}") + 2.6
     r = F1.pt2mm(np.sqrt(F1.size_pt2(F1.SIZE_KEY[1])) / 2)
     x += 1.0
@@ -241,6 +241,7 @@ def fig1a():
     F1.A_MAP = ((Wm - dia) / 2, 7.0, dia)
     F1.SIZE_K = 5.0 * (dia / 84.0) ** 2
     F1.EDGE_LW = 1.5
+    F1.REGION_EDGE_LW = 0.8                                                    # 지역 색 원의 흰 테두리(슬라이드 굵기)
     F1.TIBET_AX = (Wm - 27.5 - 0.6, Hm - 20.5 - 3.6, 27.5, 20.5)            # 오른쪽 아래 빈 구석(원 밖, 열쇠 오른쪽)
     F1.LAT_LABEL_LON = -40.0                                                   # 위도 라벨: 그린란드 빙상 위(라벨 셀 없음)
     F1.SCALE_A = dict(lon=-28.0, lat=61.0, km=1000)                            # 축척 막대: 아이슬란드 남서 바다(라벨 셀 없음)
@@ -310,12 +311,13 @@ def fig1e():
     for stg, lab in F1.XH_STAGES:
         ax.text(xg[stg], y_lab[stg], "Region\nholdout" if stg == "V-G" else lab, ha="center", va="center", fontsize=FONT,
                 linespacing=1.0, gid="direct_label", zorder=6)
-    ax.text(0.15, 12.2, "Direct ML", ha="center", va="center", fontsize=FONT, gid="direct_label", zorder=6)
-    ax.text(0.15, 25.6, "Recalibrated Stefan", ha="center", va="center", fontsize=FONT, gid="direct_label", zorder=6)
+    ax.text(0.15, 12.2, "Direct ML", ha="center", va="center", fontsize=FONT, gid="direct_label", zorder=6, color=S.METHOD["direct_ml"]["color"])
+    ax.text(0.15, 25.6, "Recalibrated Stefan", ha="center", va="center", fontsize=FONT, gid="direct_label", zorder=6,
+            color=S.METHOD["recalibrated_stefan"]["color"])
     W, H = fig.get_size_inches() * MM
     x_ax = F1.E_AX[0]
     fig.text(x_ax / W, 0.8 / H, "Open symbol: Stefan with source coefficient (region holdout)", ha="left", va="bottom",
-             fontsize=13.0, color=S.INK)
+             fontsize=FONT, color=S.INK_SLIDE)
     # 지역 기호 열쇠(옅은 기호의 모양 = 지역, 논문 S.REGION_MARKER): 축 왼쪽 위 빈 곳, 13 pt
     rend = fig.canvas.get_renderer()
     aw = F1.E_AX[2]
@@ -324,14 +326,13 @@ def fig1e():
         ax.plot([(x_mm + 1.2) / aw], [y_fr], ls="none", marker=S.REGION_MARKER[reg], ms=S.MS["region_point"], color=S.INK_AUX,
                 alpha=0.6, mew=0, transform=ax.transAxes, clip_on=False, zorder=6)
         t = ax.text((x_mm + 3.4) / aw, y_fr, S.REGION_NAME.get(reg, reg), transform=ax.transAxes, ha="left", va="center",
-                    fontsize=13.0, zorder=6, gid="region_key")
+                    fontsize=FONT, zorder=6, gid="region_key")
         fig.canvas.draw()
         bb = t.get_window_extent(rend)
         x_mm = (bb.x1 / fig.dpi * MM - F1.E_AX[0]) + 4.0
-    _thicken(fig)
-    for ln in ax.lines:                                                      # 빈 기호(원천 계수 Stefan) 테두리: 평균 2.0 pt, 지역 1.5 pt
+    for ln in ax.lines:                                                      # 빈 기호(원천 계수 Stefan) 테두리: 평균 = 자료 선, 지역 = 보조 선(v4)
         if ln.get_markerfacecolor() == "white":
-            ln.set_markeredgewidth(2.0 if ln.get_markersize() >= S.MS["main"] - 1e-9 else 1.5)
+            ln.set_markeredgewidth(S.LW_SLIDE["main"] if ln.get_markersize() >= S.MS["main"] - 1e-9 else S.LW_SLIDE["aux"])
     save_s(fig, "Fig1_e_slide.png", (W_in, H_in), "8", "deck/assets/paper_report/S08_validation_ladder.png (old five-region chart)",
            "Fig 1e data and encodings (XH 24 rows + region holdout 6 rows); stage and method names as direct labels; region symbols "
            "alpha 0.5; one-line note on the open symbol")
@@ -428,7 +429,6 @@ def fig7e():
     finally:
         F7.L.clear(); F7.L.update(L0)
         S.FOREST_BLOCK_OFFSET_MM = off0
-    _thicken(fig)
     save_s(fig, "Fig7_e_slide.png", (W_in, H_in), "new slide (XC workflow contrast; no deck page yet)", "none (Fig 7e was a placeholder)",
            "Fig 7e data and encodings (XC-1 n 40, 160; XC-2 n 10, 40, 160; regions worse than recalibrated Stefan by > 0.5 cm as faint "
            "region symbols); weighting key and region key above the panel")
@@ -620,7 +620,6 @@ def fig6_map(F6, Dd, letter):
         F6.lat_labels(ax)
         F6.scale_bar(ax, F6.PROJ, F6.SCALE["lon"], F6.SCALE["lat"], F6.SCALE["km"])
         _f6_free_labels(fig, ax, F6, vals)
-    _thicken(fig)
     print(f"  [fig6{letter}] {vals}", flush=True)
     save_s(fig, f"Fig6_{letter}_slide.png", (W_in, H_in), "11", f"crops/f6{letter}.png",
            f"circle {F6.CIRCLE_D_MM:.2f} mm (paper 3.0), map circle {D:.0f} mm; column head left to the deck"
@@ -628,7 +627,7 @@ def fig6_map(F6, Dd, letter):
 
 
 def fig6_cbar(F6, Dd, font=FONT):
-    """공유 컬러바(가로)와 방향 표지 'Lower error' + 왼쪽 화살표. 막대 가운데 = 두 지도 그림 사이 가운데(덱 11쪽에서 이 띠를
+    """공유 컬러바(가로). v4: 방향은 라벨 괄호 안에, 화살표 없음. 막대 가운데 = 두 지도 그림 사이 가운데(덱 11쪽에서 이 띠를
     COL[0] = 0.667 in 에 두면 5.87 in), 논문(두 슬롯 가운데)과 같은 규칙."""
     W_in, H_in = F6_CBAR_BOX
     Wm, Hm = W_in * MM, H_in * MM
@@ -644,21 +643,16 @@ def fig6_cbar(F6, Dd, font=FONT):
     ticks = np.linspace(-Dd["vmax"], Dd["vmax"], 5)
     cb.set_ticks(ticks)
     cb.set_ticklabels([S.fmt_int(v) for v in ticks])
-    cb.outline.set_linewidth(1.5); cb.outline.set_edgecolor(S.INK)
-    cb.dividers.set_linewidth(1.5)
-    cax.tick_params(width=1.5, length=5.0, pad=2.5, labelsize=font)
+    cb.outline.set_linewidth(S.LW_SLIDE["axis"]); cb.outline.set_edgecolor(S.INK_SLIDE)
+    cb.dividers.set_linewidth(S.LW_SLIDE["axis"])
+    cax.tick_params(width=S.LW_SLIDE["tick"], length=S.TICK_LEN_SLIDE, pad=2.5, labelsize=font)
     from matplotlib.ticker import NullLocator
     cax.xaxis.set_minor_locator(NullLocator())
-    cb.set_label("Error change vs source Stefan (cm)", labelpad=2.0, fontsize=font)
-    t = ov.text(x0 - 2.0, y0 + bar_h / 2, "Lower error", ha="right", va="center", fontsize=font, color=S.INK_AUX)
-    fig.canvas.draw()
-    bb = t.get_window_extent().transformed(ov.transData.inverted())
-    xl = min(bb.x0, bb.x1)
-    ov.annotate("", xy=(xl - 8.0, y0 + bar_h / 2), xytext=(xl - 1.2, y0 + bar_h / 2),
-                arrowprops=dict(arrowstyle="-|>,head_length=0.5,head_width=0.25", lw=1.5, color=S.INK_AUX, shrinkA=0, shrinkB=0))
+    cb.set_label("Error change vs source Stefan (cm; negative = lower error)", labelpad=2.0, fontsize=S.SLIDE_FONT["axis_label"])
+    cax.tick_params(labelsize=S.SLIDE_FONT["tick"])
     save_s(fig, "Fig6_cbar_slide.png", (W_in, H_in), "11", "crops/f6_cbar.png",
            f"bar {L_bar:.0f} mm centred at {mid / MM:.2f} in from the left edge (midpoint of the two map images at COL[0] and COL[3]); "
-           f"extend {Dd['ext']}, ±{Dd['vmax']:g} cm as in the paper")
+           f"extend {Dd['ext']}, ±{Dd['vmax']:g} cm as in the paper; v4: direction in the label, no arrow")
 
 
 def fig6():
@@ -680,24 +674,18 @@ def fig6():
 
 
 def fig5c():
+    """(P) 방식: 논문판 Fig 5 를 그대로(v4 논문 선 굵기) 그려 덱 자르기 상자로 자른다. 자르기 안에 글자가 없다(지도만).
+    덱 배율 약 2.1 이라 슬라이드에서 선은 논문 굵기의 약 2.1 배다(경위선 0.4 pt → 약 0.9 pt)."""
     import fig5 as F5
     m = (3.39 * MM) / ((1492 - 1018) / 2000 * F5.L["W"])
-    font = max(S.FONT_PT, 12.5 / m)
-    orig_use = S.use_v3
-    S.use_v3 = lambda medium="paper": slide_rc(font, paper_geometry=True)
-    slide_scales(lw_mult=1.0, lw_min=max(1.0, 1.5 / m), ms_mult=1.0)
-    try:
-        T = F5.prepare([])
-        fig, _, _ = F5.draw(T, "paper")
-    finally:
-        S.use_v3 = orig_use
+    T = F5.prepare([])
+    fig, _, _ = F5.draw(T, "paper")
     tmp = OUT / "_tmp_fig5_full.png"
     check_text(fig, "Fig5(full, paper geometry)")
     fig.savefig(tmp, dpi=600)
     plt.close(fig)
     crop_resize(tmp, CROP["f5c"], (3.39, 3.40), "Fig5_c_slide.png", "36", "crops/f5c.png", None,
-                f"map only, no text inside the deck crop box; same framing as the crop, lines at least {max(1.0, 1.5 / m) * m:.1f} pt "
-                f"at slide size (deck magnification {m:.2f})")
+                f"map only, no text inside the deck crop box; same framing as the crop; paper v4 line widths x {m:.2f} at slide size")
     tmp.unlink()
     restore()
 
@@ -718,13 +706,12 @@ def title_map():
         mw = Wm - 2.0; mh = mw * asp
     fig = plt.figure(figsize=(W_in, H_in))
     ax = S.axes_mm(fig, (Wm - mw) / 2, 1.5, mw, mh, projection=d["proj"])
-    Mt = MV.Med("slide")
-    Mt.lw = 1.0                                                              # 얇은 해안선(표지)
+    Mt = MV.Med("slide")                                                     # 얇은 해안선(v4 슬라이드 0.8 pt)
     MV.base_map(ax, d, ext, Mt)
     lo, hi = d["rng"]["alt"]
     MV.add_cells(ax, d["mesh"], MV.cell_rgba(d, d["r1"], MV.CM_ALT, Normalize(lo, hi)))
     ax.spines["geo"].set_visible(False)
-    M.fs_lab = 14.0; M.fs = 14.0
+    M.fs_lab = S.SLIDE_FONT["axis_label"]; M.fs = S.SLIDE_FONT["tick"]
     cax = S.axes_mm(fig, Wm * 0.2, 1.5 + mh + 3.0, Wm * 0.6, 2.6)
     MV.colorbar(fig, cax, MV.CM_ALT, Normalize(lo, hi), "ALT (cm)", MV.ticks_between(lo, hi), M,
                 MV.extend_of(d["r1"][d["shown"]], lo, hi))
@@ -746,9 +733,11 @@ def write_readme():
     recs = sorted(old.values(), key=lambda r: r["file"])
     p.write_text(json.dumps(recs, ensure_ascii=False, indent=1))
     lines = ["# 슬라이드용 패널(2026-10-05)", "",
-             "논문 그림의 그리기 함수와 자료를 그대로 쓰고 글자(Pretendard, 슬라이드 크기에서 12 pt 이상), 선(1.5 pt 이상), 표지 크기만 슬라이드 배치에 "
+             "논문 그림의 그리기 함수와 자료를 그대로 쓰고 글자(v4: FreeSans, 슬라이드 크기에서 12 pt 이상), 선(v4 lines.slide), 표지 크기만 슬라이드 배치에 "
              "맞춘 재렌더다. 새 자료와 새 주장은 없다. 만든 스크립트: `scripts/4_visualization/paper_v3/slide_panels.py`.",
-             "방식 S = 슬라이드 배치 상자 크기로 패널을 단독으로 다시 그림, P = 논문 배치에 큰 글자로 다시 그린 뒤 덱과 같은 상자로 자름.", "",
+             "방식 S = 슬라이드 배치 상자 크기로 패널을 단독으로 다시 그림, P = 논문 배치에 큰 글자로 다시 그린 뒤 덱과 같은 상자로 자름.",
+             "v4 토큰(2026-10-05 오후, design/style_tokens_v4.json): FreeSans Regular(한글 Pretendard Regular), 직접 라벨 13 pt, 눈금 12 pt, "
+             "축 이름 14 pt, 축 1.0 pt, 자료 2.2 pt, 방법마다 색(제안 방법 주홍 #D55E00 하나만 강조), 화살촉·삼각 표지 없음. 지도 색표는 그대로.", "",
              "| 덱 쪽 | 대체하는 자르기 | 새 파일 | 크기(in, 300 dpi) | 방식 | 비고 |", "|---|---|---|---|---|---|"]
     for r in recs:
         lines.append(f"| {r['pages']} | `{r['replaces']}` | `{r['file']}` | {r['size_in'][0]:.2f} × {r['size_in'][1]:.2f} | {r['how']} | {r['note']} |")

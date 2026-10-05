@@ -8,7 +8,7 @@
    5.0
   ],
   "how": "S",
-  "note": "Alaska residual ML ALT (panel c of Alaska_ALT_map_v3), no graticule, thin coastline; text sizes [14.0] pt"
+  "note": "Alaska residual ML ALT (panel c of Alaska_ALT_map_v3), no graticule, thin coastline; text sizes [12.0, 14.0] pt"
  },
  {
   "file": "Fig1_a_slide.png",
@@ -19,7 +19,7 @@
    5.2
   ],
   "how": "S",
-  "note": "Lena Delta zoom rectangle and connector to c and d omitted (c, d are not on these slides); text sizes [14.0] pt"
+  "note": "Lena Delta zoom rectangle and connector to c and d omitted (c, d are not on these slides); text sizes [13.0] pt"
  },
  {
   "file": "Fig1_b_slide.png",
@@ -30,7 +30,7 @@
    5.2
   ],
   "how": "S",
-  "note": "x ticks 0.1, 1, 10 (paper also 0.3, 3, 30); text sizes [14.0] pt"
+  "note": "x ticks 0.1, 1, 10 (paper also 0.3, 3, 30); text sizes [12.0, 13.0, 14.0] pt"
  },
  {
   "file": "Fig1_e_slide.png",
@@ -41,7 +41,7 @@
    4.6
   ],
   "how": "S",
-  "note": "Fig 1e data and encodings (XH 24 rows + region holdout 6 rows); stage and method names as direct labels; region symbols alpha 0.5; one-line note on the open symbol; text sizes [13.0, 14.0] pt"
+  "note": "Fig 1e data and encodings (XH 24 rows + region holdout 6 rows); stage and method names as direct labels; region symbols alpha 0.5; one-line note on the open symbol; text sizes [12.0, 13.0, 14.0] pt"
  },
  {
   "file": "Fig5_c_slide.png",
@@ -52,7 +52,7 @@
    3.41
   ],
   "how": "P",
-  "note": "map only, no text inside the deck crop box; same framing as the crop, lines at least 2.1 pt at slide size (deck magnification 2.14)"
+  "note": "map only, no text inside the deck crop box; same framing as the crop; paper v4 line widths x 2.14 at slide size"
  },
  {
   "file": "Fig6_a_slide.png",
@@ -85,7 +85,7 @@
    0.79
   ],
   "how": "S",
-  "note": "bar 180 mm centred at 5.21 in from the left edge (midpoint of the two map images at COL[0] and COL[3]); extend min, ±40 cm as in the paper; text sizes [14.0] pt"
+  "note": "bar 180 mm centred at 5.21 in from the left edge (midpoint of the two map images at COL[0] and COL[3]); extend min, ±40 cm as in the paper; v4: direction in the label, no arrow; text sizes [12.0, 14.0] pt"
  },
  {
   "file": "Fig7_b_slide.png",
@@ -96,7 +96,7 @@
    4.29
   ],
   "how": "S",
-  "note": "same blocks, colour scale ±5 cm; text sizes [14.0] pt"
+  "note": "same blocks, colour scale ±5 cm; text sizes [12.0, 13.0, 14.0] pt"
  },
  {
   "file": "Fig7_b_small_slide.png",
@@ -107,7 +107,7 @@
    3.02
   ],
   "how": "S",
-  "note": "same blocks, colour scale ±5 cm; text sizes [12.0] pt"
+  "note": "same blocks, colour scale ±5 cm; text sizes [12.0, 13.0] pt"
  },
  {
   "file": "Fig7_c_slide.png",
@@ -118,7 +118,7 @@
    4.8
   ],
   "how": "S",
-  "note": "weighting key under the panel; block-equal bar 1.6 mm below the cell-weighted bar (paper 0.8 mm); text sizes [14.0] pt"
+  "note": "weighting key under the panel; block-equal bar 1.6 mm below the cell-weighted bar (paper 0.8 mm); text sizes [12.0, 13.0, 14.0] pt"
  },
  {
   "file": "Fig7_e_slide.png",
@@ -129,6 +129,6 @@
    4.0
   ],
   "how": "S",
-  "note": "Fig 7e data and encodings (XC-1 n 40, 160; XC-2 n 10, 40, 160; regions worse than recalibrated Stefan by > 0.5 cm as faint region symbols); weighting key and region key above the panel; text sizes [14.0] pt"
+  "note": "Fig 7e data and encodings (XC-1 n 40, 160; XC-2 n 10, 40, 160; regions worse than recalibrated Stefan by > 0.5 cm as faint region symbols); weighting key and region key above the panel; text sizes [12.0, 13.0] pt"
  }
 ]

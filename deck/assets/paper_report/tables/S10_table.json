@@ -1,8 +1,8 @@
 {
  "slide": "S10",
- "page": 10,
+ "page": "부록 5",
  "title": "비교한 방법",
- "subtitle": "1부 · 방법 5계열 · 학습기 10종(주 학습기 CatBoost)",
+ "subtitle": "부록 · 방법 5계열 · 학습기 10종(주 학습기 CatBoost)",
  "takeaway": "물리 정보를 쓰는 위치에 따라 방법을 5계열로 구분",
  "archetype": "A7",
  "kind": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",

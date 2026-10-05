@@ -53,13 +53,15 @@ W,W6_stefan_cci_anchor,WF7(WF6–WF8 묶음),2026-10-01,done(서술),done,2026-1
 W,W7_gain_decomposition_grid,WF9(WF9–WF10 묶음),2026-10-02,done,done,2026-10-02 12:00,2026-10-02 12:00,9,지역 내·워크플로 시험,paper/registry/experiments.csv
 W,W7_gain_decomposition_grid,WF9-soil(토양 √TDD 민감도),2026-10-02,done,done,2026-10-02 12:00,2026-10-02 12:00,10,지역 내·워크플로 시험,paper/registry/experiments.csv
 W,W8_climate_extrapolation,WF10(WF9–WF10 묶음),2026-10-02,done(판정 불가),done,2026-10-02 12:00,2026-10-02 12:00,11,지역 내·워크플로 시험,paper/registry/experiments.csv
-X,XA_c2_gain_decomposition,C2 재분석(QA Q1·Q6 2순위),2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,0,추가 실험,paper/registry/experiments.csv
-X,XB_multisource_stacking,X1(QA Q3·Q5·Q11),2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,1,추가 실험,paper/registry/experiments.csv
-X,XC_workflow_end_to_end,워크플로 통합 검증(사용자 2026-10-04 질문 2),2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,2,추가 실험,paper/registry/experiments.csv
-X,XD_placement_policy,"관측 위치 알고리즘·샘플링 정책 학습(QA Q7, 사용자 2026-10-04 질문 1·2)",2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,3,추가 실험,paper/registry/experiments.csv
-X,XE_hires_covariates,"격자 안 해상도 입력(사용자 2026-10-04 질문 3, QA Q8·Q9)",2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,4,추가 실험,paper/registry/experiments.csv
-X,XF_new_regions,"독립 지역 추가(사용자 2026-10-04 질문 1, QA Q9·Q12)",2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,5,추가 실험,paper/registry/experiments.csv
-X,XG_product_comparison,"기존 ALT 제품 비교(WRAPUP 10절 등록, QA Q9)",2026-10-04 등록 예정(WRAPUP 10절에 등록만 되어 있음),planned,planned,2026-10-04 14:22,2026-10-04 14:22,6,추가 실험,paper/registry/experiments.csv
-X,XH_validation_ladder,"검증 사다리 그림(QA Q12 강화 4, Q15)",2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,7,추가 실험,paper/registry/experiments.csv
-X,XI_climate_extrapolation_retest,WF10 재시험,2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,8,추가 실험,paper/registry/experiments.csv
-X,XJ_tempderived_aux_labels,지온 유도 라벨 보조 학습(QA Q9),2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,9,추가 실험,paper/registry/experiments.csv
+X,XA_c2_gain_decomposition,C2 재분석(QA Q1·Q6 2순위),2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,8,추가 실험,paper/registry/experiments.csv
+X,XB_multisource_stacking,X1(QA Q3·Q5·Q11),"2026-10-04 등록(T0 2678100), 2026-10-05 실행·열람","done(XB-1·XB-2 기각, XB-3 부분 지지, XB-4 지지)",done,2026-10-04 12:00,2026-10-05 12:00,0,추가 실험,paper/registry/experiments.csv
+X,XC_workflow_end_to_end,워크플로 통합 검증(사용자 2026-10-04 질문 2),"2026-10-04 등록, 2026-10-05 부록 XC-0(03:10), 로컬 실행 03:16–05:19, 열람 05:20","done(XC-1c·XC-2a·2b·2c 기준 충족, XC-1b 미결정, XC-5b·5c·XC-F3 시험하지 않음, 부록 XC-F3 대기)",done,2026-10-04 12:00,2026-10-05 12:00,1,추가 실험,paper/registry/experiments.csv
+X,XD_placement_policy,"관측 위치 알고리즘·샘플링 정책 학습(QA Q7, 사용자 2026-10-04 질문 1·2)","2026-10-04 등록, 2026-10-05 XD-alg 실행(작업 A)·Algorithm P 고정(03:10)·S9* 동결(03:17)·XD-4 실행(03:18–03:29)",done(XD-1–XD-6 기록. XD-4·XD-5 는 서술),done,2026-10-04 12:00,2026-10-05 12:00,2,추가 실험,paper/registry/experiments.csv
+X,XE_hires_covariates,"격자 안 해상도 입력(사용자 2026-10-04 질문 3, QA Q8·Q9)","2026-10-04 등록, 2026-10-05 r1b(xh0·xt2) 로컬 실행·xh0 열람, 2단계 취득 진행 중","planned(부분: xh0·XE-e 열람 2026-10-05, XE-a·XE-b(xh)·XE-a0(xt2) 대기)",planned,2026-10-04 12:00,2026-10-05 12:00,3,추가 실험,paper/registry/experiments.csv
+X,XF_new_regions,"독립 지역 추가(사용자 2026-10-04 질문 1, QA Q9·Q12)",2026-10-04 등록 예정,planned,planned,2026-10-04 14:22,2026-10-04 14:22,9,추가 실험,paper/registry/experiments.csv
+X,XG_product_comparison,"기존 ALT 제품 비교(WRAPUP 10절 등록, QA Q9)","2026-10-04 등록(WRAPUP 10 이탈), 2026-10-04 1c, 2026-10-05 2단계 추출(02:13)·집계(03:34)","done(XG-1c 열세, XG-2c·XG-3c 우세, XG-1w·2w·3w 미결정)",done,2026-10-04 12:00,2026-10-05 12:00,4,추가 실험,paper/registry/experiments.csv
+X,XH_validation_ladder,"검증 사다리 그림(QA Q12 강화 4, Q15)","2026-10-04 등록·1c(kNNDM 색인), 2026-10-05 실행(작업 A)·열람",done(서술),done,2026-10-04 12:00,2026-10-05 12:00,5,추가 실험,paper/registry/experiments.csv
+X,XI_climate_extrapolation_retest,WF10 재시험,"2026-10-04 등록, 2026-10-05 실행(작업 A)·열람","done(XI-a·XI-b 기각, XI-c 지지)",done,2026-10-04 12:00,2026-10-05 12:00,6,추가 실험,paper/registry/experiments.csv
+X,XJ_tempderived_aux_labels,지온 유도 라벨 보조 학습(QA Q9),"2026-10-04 등록, 2026-10-05 실행(작업 A 마지막 순서)·열람","done(XJ-1·XJ-2 시험하지 않음, XJ-3 우세 6행)",done,2026-10-04 12:00,2026-10-05 12:00,7,추가 실험,paper/registry/experiments.csv
+X,XK_support_scale,격자 크기별 오차(사용자 2026-10-05 02시 지시),"2026-10-05(등록 d721d24, 실행 02:42–02:44)",done(서술),done,2026-10-05 12:00,2026-10-05 12:00,10,추가 실험,paper/registry/experiments.csv
+X,XL_map_products,지역별 고해상 ALT 지도 비교(사용자 2026-10-05 02시 지시),"2026-10-05(등록 d721d24, 실행 02:45–02:46)",done(서술),done,2026-10-05 12:00,2026-10-05 12:00,11,추가 실험,paper/registry/experiments.csv

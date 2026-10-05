@@ -1,0 +1,42 @@
+{
+ "stem": "FigS9",
+ "created": "2026-10-05 14:43:47",
+ "size_mm": [
+  170.0,
+  214.0
+ ],
+ "audit_fails": [],
+ "sizes": [
+  7.0,
+  8.0
+ ],
+ "chars": 736,
+ "thin_lines": [],
+ "codes": [],
+ "loose_numbers": [],
+ "text_overlap_pairs": [],
+ "text_outside": [],
+ "pdffonts": {
+  "fonts": [
+   "FreeSans",
+   "FreeSansBold"
+  ],
+  "type3": false,
+  "liberation": false,
+  "ok": true
+ },
+ "pdf_bytes": 1461242,
+ "sources": [
+  "results/rescale_lg/data/processed/lg/lg_curve.csv",
+  "data/processed/lgd/lgd_curve_lic.csv",
+  "scripts/2_evaluation/wf0_reanalysis.py",
+  "results/rescale_lg/data/processed/lg/lg_targets.csv",
+  "data/processed/lgx/lgx_curve.csv",
+  "data/processed/lgw/lgw_bundle.csv"
+ ],
+ "vmax_a": 0.6000000000000001,
+ "vmax_b": 15.0,
+ "logE_missing": [
+  "Tibet_LGD"
+ ]
+}

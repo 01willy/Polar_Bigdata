@@ -6,13 +6,13 @@ Values are copied, not recomputed, from (round 3, 5 October 2026):
     8.7 (XG), 8.8 (XD-alg) and 8.9 (XD-4); registered interpretation sentences of the same sections, rendered in English;
   * docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XK_XL_2026-10-05.md, results section (XK, XL);
   * paper/claims/*/README.md section 6.1 (evidence index; same values).
-XC rows come from section 8.10 (sealed tables opened 5 October 2026, 05:20:39 KST); XD-5 from 8.11, the XB CCI v5 sensitivity from 8.12 and XE-e from the end of 8.6; XF, XE-a/XE-b and XC-F3 carry [PENDING] markers.
+XM rows come from docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XM_2026-10-05.md, results section (sealed tables first opened
+5 October 2026, 14:20:47 KST; commit e454a71). XC rows come from section 8.10 (sealed tables opened 5 October 2026, 05:20:39 KST); XD-5 from 8.11, the XB CCI v5 sensitivity from 8.12 and XE-e from the end of 8.6; XF, XE-a/XE-b and XC-F3 carry [PENDING] markers.
 Minus signs are U+2212. Cell entries are LaTeX-ready (no escaping by the caller).
 """
 
-PEND_XF = ("\\textcolor{blue}{[PENDING: XF, new public regions; registered data deadline 11 October 2026, 14:22 KST; "
-           "no eligible new macro region found so far]}")
-PEND_XE = "\\textcolor{blue}{[PENDING: XE-a, XE-b, XE-a0, satellite inputs (stage 2) and the xt2 table; registered deadline 8 October 2026, 14:22 KST]}"
+PEND_XF = "Pending: registered data deadline 11 October 2026 (XF)."   # round 10: plain sentence, no tag
+PEND_XE = "Pending: registered data deadline 8 October 2026 (XE stage 2: XE-a, XE-b, XE-a0 and the xt2 table)."
 
 
 def note(text):
@@ -388,6 +388,33 @@ XEE_NOTE = (
     "sensitivities −6.59\\% to +2.55\\%). Run locally on 5 October 2026 (05:41, 8 s); sealed table first opened 05:42:35 KST. Source: data/processed/xbatch/XE\\_hires\\_covariates/"
     "sealed/xe\\_e\\_xe\\_e.csv and xe\\_e\\_xe\\_e\\_meta.json; plan 8.6.")
 
+# ---------------------------------------------------------------------------------------------- XM (addendum XM, results)
+XM_H = ["Hypothesis", "Component", "$n$", "Pool or target", "$\\Delta$ cell [95\\% CI]", "$\\Delta$ block-equal [95\\% CI]", "Four-way verdict"]
+XM = [
+    ["XM-a (main)", "within-grid", "all", "three-target mean (3/3)", "−0.15 [−0.25, −0.05]", "−0.25 [−0.35, −0.14]", "lower error (size below 0.5 cm); Holm $P$ 0.019"],
+    ["", "within-grid", "all", "Alaska / Lena Delta / Canada", "−0.03 / −0.52 / +0.09", "−0.05 / −0.72 / +0.03", "lower error / lower error / equivalent"],
+    ["", "within-grid", "1,000", "Alaska and Lena Delta mean (partial, 2/3)", "−0.21 [−0.28, −0.03]", "−0.25 [−0.39, −0.11]", "lower error (size below 0.5 cm); Holm $P$ 0.04"],
+    ["", "within-grid", "500", "Alaska and Lena Delta mean (partial, 2/3)", "−0.17 [−0.20, +0.03]", "−0.13 [−0.25, −0.01]", "equivalent; Holm $P$ 0.135"],
+    ["XM-b (auxiliary)", "total", "all", "three-target mean (3/3)", "−0.70 [−0.93, −0.44]", "−0.74 [−1.03, −0.44]", "lower error"],
+    ["", "total", "all", "Alaska / Lena Delta / Canada", "−0.12 / −1.50 / −0.49", "+0.03 / −2.08 / −0.16", "equivalent / lower error / undetermined"],
+    ["XM-c (auxiliary)", "between-grid", "all", "Lena Delta", "−1.80 [−2.35, −1.10]", "−2.11 [−2.96, −1.25]", "lower error"],
+]
+XM_NOTE = (
+    "XM, added registration (docs/EXPERIMENT\\_PLAN\\_FINAL\\_BATCH\\_ADDENDUM\\_XM\\_2026-10-05.md; commit ff7c97f, 5 October 2026, 13:23 KST, before feature extraction). "
+    "Flags: designed after earlier results were viewed (XE xh0 and XE-e tables); exploratory (Supplementary Information); partly unblinded (the tree-cover and water-occurrence "
+    "inputs of xh0 overlap with the WorldCover tree and water fractions, and the xh0 within-grid contrast had been viewed); outside the XE Holm family. Inputs: xw = the 25 "
+    "covariates plus the fractions of 11 ESA WorldCover 2021 v200 classes (10 m) in the 1 km label cell and three Sentinel-2 L2A (20 m) summer indices (July and August 2019 to "
+    "2023; cell median NDVI, median NDMI and NDVI standard deviation); the WorldCover-only variant xw\\_lc is auxiliary and not shown. Contrast: R1 with $\\lambda$ chosen by block "
+    "cross-validation, xw minus x25, on the same labels, splits and seeds; components as in Methods. Holm family: XM-a at $n$ 500, 1,000 and all ($m$ = 3). Verdict: XM-a partially "
+    "supported (lower error at 1,000 and all labels, equivalent at 500). Registered sentence (rendered): `Adding the WorldCover 10 m land-cover fractions and the Sentinel-2 20 m "
+    "summer vegetation indices of the 1 km cell reduced the ERA5-Land within-grid error of R1 by 0.15 cm (within-grid share explained 1.2\\%) (statistically distinguishable, size "
+    "below 0.5 cm). As an exploratory result it does not change the within-grid statement or the map wording of the main text and is reported as a candidate for a confirmatory "
+    "test. XM does not distinguish the causes of the remaining variation.' Facts, without interpretation: the total RMSE gain was concentrated in the Lena Delta (−1.50 cm), mostly "
+    "in the between-grid component (−1.80 cm); in Alaska and Canada the total RMSE change was within 0.5 cm or undetermined. Coverage of label rows: WorldCover 100\\% in all three "
+    "targets; Sentinel-2 100\\% (Alaska), 99.28\\% (Lena Delta) and 99.87\\% (Canada); no group was dropped by the 90\\% rule, so xw is the main variant. Sealed tables first opened "
+    "5 October 2026, 14:20:47 KST, after the reproduction gate of the re-used x25 shards passed (35,442 keys, no failure). Source: data/processed/xbatch/XM\\_landcover\\_vegetation/"
+    "sealed/ (xm\\_tests.csv, xm\\_hypotheses.csv, xm\\_holm.csv); addendum XM, results.")
+
 # ---------------------------------------------------------------------------------------------- XD-5 (8.11)
 XD5_H = ["Test task", "U(S9*)", "U(Algorithm P = S1)", "U(oracle)", "Median of 200 candidate sets", "Regret, S9*", "Regret, Algorithm P"]
 XD5 = [
@@ -428,7 +455,7 @@ XC = [
     ["XC-2c A1 $-$ A3", "160", "partial (2/5)", "−1.51 [−1.99, −0.88]", "−1.29 [−1.78, −0.80]", "lower error", "$<$0.0001 (3, 6)", "non-inferior and superior (XC-2s adjusted $P$ 0.0008)"],
     ["XC-5b A1 $-$ A5 (placement under the selection rule)", "40", "", "", "", "not tested", "1.00 (6, 3)", "not decidable (Algorithm P = S1, rule 5)"],
     ["XC-5c A1 $-$ A5", "160", "", "", "", "not tested", "1.00 (7, 2)", "not decidable (Algorithm P = S1, rule 5)"],
-    ["XC-F3 A1 $-$ A2, external family F3", "10", "F3", "", "", "not tested", "1.00 (8, 1)", "not decidable ($A1 = A2$ at $n$ 10); \\textcolor{blue}{[PENDING: appendix XC-F3 after the XF data deadline, 11 October 2026, 14:22 KST]}"],
+    ["XC-F3 A1 $-$ A2, external family F3", "10", "F3", "", "", "not tested", "1.00 (8, 1)", "not decidable ($A1 = A2$ at $n$ 10); appendix pending: registered data deadline 11 October 2026 (XC-F3, after XF)"],
 ]
 XCR_H = ["Contrast", "$n$", "Region", "Cell-weighted [95\\% CI]", "Block-equal [95\\% CI]", "Verdict"]
 XCR = [
@@ -544,4 +571,7 @@ def build(longtable):
     out.append(note(XC_NOTE))
     out.append(longtable(["Analysis", "Status"], [["XF new independent regions", PEND_XF]], ws=[0.5, 0.5],
                          title="p. XF"))
+    out.append(longtable(XM_H, XM, ws=[0.11, 0.09, 0.05, 0.15, 0.185, 0.185, 0.23],
+                         title="q. XM open 10 to 20 m land-cover and vegetation inputs of the 1 km label cell, within regions (added registration; exploratory; R1 with CV $\\lambda$, xw $-$ x25, cm)"))
+    out.append(note(XM_NOTE))
     return "\n".join(out)

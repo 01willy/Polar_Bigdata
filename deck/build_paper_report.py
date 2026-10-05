@@ -21,6 +21,7 @@ import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from PIL import Image  # noqa: E402
 from pptx.enum.text import MSO_ANCHOR, PP_ALIGN  # noqa: E402
 
 import final_lib as fl  # noqa: E402
@@ -72,12 +73,20 @@ def fill_row_h(t, y, support=False, bottom=6.35):
     return max(g["row_h"], min(1.0, round(avail / n, 3)))
 
 
-SPEC_TABLES = {"S34", "AP10"}      # 2026-10-05 행을 바꾼 표는 스펙에서 다시 줄을 나눈다
+SPEC_TABLES = {"S04", "S34", "AP10"}      # 2026-10-05 행을 바꾼 표는 스펙에서 다시 줄을 나눈다
 
 
 def spec_table(sid, rows=None):
     vt = SPEC[sid]["visible_text"]["table"]
-    return L.table_def(vt["columns"], rows if rows is not None else vt["rows"], vt["geometry_in"])
+    return L.table_def(vt["columns"], rows if rows is not None else vt["rows"], vt["geometry_in"], emph=vt.get("emph"))
+
+
+def table_from(vt, row_h=None):
+    """스펙 표 정의(columns, rows, geometry_in, emph)로 표를 그린다. 아래끝 y 를 돌려준다."""
+    g = vt["geometry_in"]
+    t = L.table_def(vt["columns"], vt["rows"], g, emph=vt.get("emph"))
+    rh = row_h if row_h is not None else max(g["row_h"], *L.row_heights(t))
+    return t, rh
 
 
 def table_slide(sl, sid, y=None, support_w=12.0):
@@ -388,6 +397,91 @@ def b_SW1(sl, s):
     STATUS.setdefault("SW1", []).append("Fig 7e 슬라이드판과 근거 줄 3줄")
 
 
+# ================================================================ 발표 구조 개편(v2.0) 새 쪽
+def method_fig(sid):
+    p = ROOT / SPEC[sid]["evidence"]["ref"]
+    return p if p.exists() else None
+
+
+def b_method(sl, s):
+    """방법 도식(12.0 × 5.2 in 이하, 300 dpi): 배치 크기 그대로, 본문 영역 가운데. 근거 줄은 두지 않는다(그림이 본문 영역을 채움)."""
+    p = ROOT / s["evidence"]["ref"]
+    with Image.open(p) as im:
+        dpi = (im.info.get("dpi") or (300, 300))[0]
+        w, h = im.size[0] / dpi, im.size[1] / dpi
+    if w > 12.0 or h > 5.2:
+        w, h = L.fit(p, 12.0, 5.2)
+    L.place(sl, p, L.ML + (12.0 - w) / 2, L.Y0 + (5.2 - h) / 2, w, h)
+    STATUS.setdefault(s["id"], []).append(f"방법 도식 {p.name}({w:.2f} × {h:.2f} in)")
+
+
+b_N03 = b_N05 = b_N06 = b_N08 = b_N09 = b_N10 = b_N12 = b_method
+
+
+def b_N01(sl, s):
+    """활동층 두께와 관측 공백: 왼쪽 범북극 관측 지도(Fig 1a 슬라이드판, 높이 5.2), 오른쪽 C4–C6 굵은 리드 줄 3줄."""
+    w, h = L.place(sl, panel("Fig1_a_slide.png"), L.ML, L.Y0, h=5.20)
+    items = [tuple(x.split("  ", 1)) for x in s["visible_text"]["lead_lines"]]
+    L.lead_lines(sl, L.COL[3], L.Y0 + 1.25, 5.85, items, gap_pt=16, line_spacing=1.1)
+    STATUS.setdefault("N01", []).append("Fig 1a 슬라이드판과 리드 줄 3줄")
+
+
+def b_N02(sl, s):
+    """기존 연구의 한계와 이 연구의 개선: M2_gap(12.0 × 3.4) 이 있으면 그림, 없으면 옛 2쪽 표(12.00 폭). 아래에 약어 줄."""
+    p = method_fig("N02")
+    sup = s["visible_text"].get("support_line", "")
+    lead, body = sup.split("  ", 1) if "  " in sup else ("", sup)
+    if p is not None:
+        # M2_gap 은 12.0 × 5.2 in 전폭 그림이다. 약어 줄은 사양에 있을 때만, 결론 줄 위에 자리가 남을 때만 둔다
+        w, h = L.place(sl, p, L.ML, L.Y0, h=5.20)
+        if body and h <= 4.6:
+            L.support_line(sl, L.ML, L.Y0 + h + 0.30, 12.0, body, lead=lead)
+        STATUS.setdefault("N02", []).append(f"방법 도식 {p.name}({w:.2f} × {h:.2f} in)")
+        return
+    vt = SPEC["S02"]["visible_text"]
+    g = vt["table"]["geometry_in"]
+    t = L.table_def(vt["table"]["columns"], vt["table"]["rows"], g)
+    yb = L.hairline_table(sl, t, y=g["y"], row_h=g["row_h"])
+    L.support_line(sl, L.ML, yb + 0.22, 12.0, body, lead=lead)
+    STATUS.setdefault("N02", []).append("M2_gap 없음, 옛 2쪽 표로 대신")
+
+
+def b_N04(sl, s):
+    t, rh = table_from(s["visible_text"]["table"])
+    L.hairline_table(sl, t, row_h=rh)
+
+
+def b_N07(sl, s):
+    """Stefan 물리 모델과 계수 재보정: 개념 좌표도(12.00 × 4.15) + 재보정 수식 줄 + 기호 열쇠 줄."""
+    p = ROOT / s["evidence"]["ref"]
+    figs = ROOT / "deck" / "mk_paper_report_figs.py"
+    if not p.exists() or p.stat().st_mtime < figs.stat().st_mtime:      # 그림 함수(색·글자)가 바뀌면 다시 그림
+        subprocess.run([sys.executable, str(DECK / "mk_paper_report_n07.py")], check=True, capture_output=True,
+                       env=dict(os.environ, OMP_NUM_THREADS="2"))
+    w, h = L.place(sl, p, L.ML, L.Y0, 12.0, 4.15)
+    y = L.Y0 + h + 0.12
+    L.equation(sl, L.ML, y, 12.0, [("재보정 계수  ", "lead"), ("E", ""), ("n", "sub"), (" = (n E", ""), ("ls", "sub"),
+                                   (" + κ E", ""), ("0", "sub"), (") / (n + κ),  κ = 10", "")])
+    L.equation(sl, L.ML, y + 0.46, 12.0, [("E Stefan 계수, TDD 융해 도일, n 대상 라벨 수, E", ""), ("ls", "sub"),
+                                          (" 대상 라벨 최소제곱 계수, E", ""), ("0", "sub"), (" 원천 계수", "")], size=16)
+    STATUS.setdefault("N07", []).append("개념 좌표도 12.00 × 4.15(옛 9쪽 그림의 낮은 판)와 수식 줄")
+
+
+def two_tables(sl, s):
+    for vt in s["visible_text"]["tables"]:
+        t, rh = table_from(vt)
+        L.hairline_table(sl, t, x=vt["geometry_in"]["x"], y=vt["geometry_in"]["y"], row_h=rh)
+
+
+b_N30 = b_N31 = two_tables
+
+
+def b_NTY(sl, s, label):
+    text(sl, L.ML, 2.75, 12.0, 0.70, [run(s["title"], 26, ACC, F_X)], align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE)
+    text(sl, L.ML, 3.55, 12.0, 0.50, [run(s["subtitle"], 18, GRAY, F_M)], align=PP_ALIGN.CENTER)
+    text(sl, L.COLR[5] - 1.0, 0.22, 1.0, 0.30, [run(str(label), 12, GRAY, F_M)], align=PP_ALIGN.RIGHT)
+
+
 def b_AP1(sl, s):
     if FIG6.exists() and "f6c" in L.FIG6_CROPS:
         p = crop("f6c")
@@ -506,18 +600,31 @@ def ref_column(sl, x, y, refs):
         pPr.set("indent", str(-int(Inches(0.25))))
 
 
-# ================================================================ 조립(스펙의 쪽 순서와 쪽 번호)
+# ================================================================ 조립(스펙의 쪽 순서, 쪽 번호는 그린 순서대로)
+SKIPPED = []
+
+
+def ready(x):
+    if x.get("render") is False:
+        return False
+    req = x.get("requires")
+    if req and not (ROOT / req).exists():
+        SKIPPED.append((x["id"], x["title"], req))
+        return False
+    return True
+
+
 def deck_order():
     keys = []
     for x in SPEC_D["slides"]:
-        if x["id"] == "S35":
-            keys += ["S35a", "S35b"]
-        else:
-            keys.append(x["id"])
-    return keys + [x["id"] for x in SPEC_D["appendix"]]
+        if not ready(x):
+            continue
+        keys += ["S35a", "S35b"] if x["id"] == "S35" else [x["id"]]
+    return keys + [x["id"] for x in SPEC_D["appendix"] if ready(x)]
 
 
 ORDER = deck_order()
+MAIN_IDS = {x["id"] for x in SPEC_D["slides"]}
 
 
 def build():
@@ -525,24 +632,35 @@ def build():
     rcols = ref_columns()
     if len(rcols) > 4:
         raise SystemExit(f"참고문헌이 2쪽(4단)을 넘음: {len(rcols)}단")
-    ref_pages = [int(v) for v in str(SPEC["S35"]["page"]).replace("–", "-").split("-")]
-    ref_pages = list(range(ref_pages[0], ref_pages[-1] + 1))
+    n_main, n_app = 0, 0
+    labels = {}
     for key in ORDER:
         sid = key.split("+")[0]
         sid = "S35" if sid.startswith("S35") else sid
         s = SPEC[sid]
         sl = fl.blank(prs)
         if sid == "S01":
+            label = None
+        elif sid in MAIN_IDS:
+            n_main += 1
+            label = n_main
+        else:
+            n_app += 1
+            label = f"부록 {n_app}"
+        labels[key] = label
+        if sid == "S01":
             b_S01(sl, s)
+        elif sid == "NTY":
+            b_NTY(sl, s, label)
         elif sid == "S35":
             k = 0 if key == "S35a" else 1
-            L.header(sl, s["title"], None, ref_pages[k])
+            L.header(sl, s["title"], None, label)
             for x, refs in zip((L.COL[0], L.COL[3]), rcols[2 * k: 2 * k + 2]):
                 ref_column(sl, x, L.Y0, refs)
             L.notes(sl, None, s["notes"].get("reference_line"), [REF_NOTES] if k == 0 else None)
             continue
         else:
-            L.header(sl, s["title"], s.get("subtitle"), s["page"])
+            L.header(sl, s["title"], s.get("subtitle"), label)
             if sid.startswith("SM"):
                 b_map(sl, s)
             elif sid.startswith("SX"):
@@ -556,7 +674,10 @@ def build():
         L.notes(sl, n.get("script"), n.get("reference_line"), extra or None)
     RENDER.mkdir(parents=True, exist_ok=True)
     prs.save(PPTX)
-    print(f"[pptx] {PPTX.relative_to(ROOT)}  {len(prs.slides)} 쪽")
+    print(f"[pptx] {PPTX.relative_to(ROOT)}  {len(prs.slides)} 쪽(본편 {n_main + 1}, 부록 {n_app})")
+    for sid, title, req in SKIPPED:
+        print(f"  [대기] {sid} {title}: {req} 없음")
+    (RENDER / "paper_report_page_map.json").write_text(json.dumps(labels, ensure_ascii=False, indent=1), encoding="utf-8")
     return prs
 
 

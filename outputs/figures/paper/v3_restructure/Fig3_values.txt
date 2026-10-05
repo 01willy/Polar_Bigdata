@@ -1,5 +1,5 @@
-Fig3 v3 값 대조와 점검 기록 (생성 2026-10-04 21:17, 스크립트 scripts/4_visualization/paper_v3/fig3.py)
-렌더 전 자원: available 41 GB, load average 15.79
+Fig3 v3 값 대조와 점검 기록 (생성 2026-10-05 13:47, 스크립트 scripts/4_visualization/paper_v3/fig3.py)
+렌더 전 자원: available 25 GB, load average 7.69
 
 [1] 원천 표 sha256 대 claims MANIFEST
   data/processed/paper_figs/fig3_a.csv: 89420c820375e229… manifest 일치 (1개 사본 기록)
@@ -92,24 +92,24 @@ Fig3 v3 값 대조와 점검 기록 (생성 2026-10-04 21:17, 스크립트 scrip
       다를 수 있다([4]).
 
 [8] audit_v3(지침 부록 A.1)
-  sizes [7.0], chars 496, thin_lines [], titles [],
+  sizes [7.0, 8.0], chars 483, thin_lines [], titles [],
   boxed_text 0, codes [], comma4 [],
   long_labels [], loose_numbers []
   fails []
 
 [9] pdf_audit(지침 부록 A.2)
-  {"width_mm": 170.0, "height_mm": 120.0, "chars": 494, "sizes": {"7.0": 494}, "off_size": {}, "lt5": 0, "families": ["LiberationSans"], "type3": false}
+  {"width_mm": 170.0, "height_mm": 120.0, "chars": 481, "sizes": {"7.0": 477, "8.0": 4}, "off_size": {"8.0": 4}, "lt5": 0, "families": ["FreeSans", "FreeSansBold", "FreeSansOblique"], "type3": false}
   pdffonts:
     name                                 type              encoding         emb sub uni object ID
     ------------------------------------ ----------------- ---------------- --- --- --- ---------
-    BGZIHO+LiberationSans-Bold           CID TrueType      Identity-H       yes yes yes     22  0
-    BGZIHO+LiberationSans                CID TrueType      Identity-H       yes yes yes     29  0
-    HEMWJP+LiberationSans-Italic         CID TrueType      Identity-H       yes yes yes     36  0
+    BICWAS+FreeSans                      CID TrueType      Identity-H       yes yes yes     22  0
+    FITYBK+FreeSansBold                  CID TrueType      Identity-H       yes yes yes     29  0
+    DGJNOP+FreeSansOblique               CID TrueType      Identity-H       yes yes yes     36  0
 
 [10] 그림 내장 글자(pdftotext)
   연결어 대시 0건, 내부 코드 정규식 0건
-  a                                                                                                                   b                                                                         Cell-weighted           Block-equal        ±0.5 cm | 0 | Source Stefan | No labels                     Ten labels | Active-layer thickness (cm) | Shuffled physics labels | 50 | Recalibrated Stefan | Constant at pool mean | 100 | Constant at source mean | Residual | 150                                                                                    Linear thaw index | −4       −3     −2    −1    0   1      −4 −3 −2       −1   0         1 | 0         10         20         30         40 | Error change vs placebo (cm) | Square root of thaw index (√(°C d)) | c                                                                                                                                              d | 4                   Registered     Auxiliary                                                                                  6 | Error change vs physics input (cm) | Error change vs shrinkage (cm) | 4 | 2 | 2                                        Least squares | 0 | 0 | −2 | Recalibrated inputs                                                                       −2 | −4                                  Physics inputs | −4                                      Lena Delta       Canada | Residual lower                                                                                                   W Russia         E Russia | −6                                                                                                                            −6 | 0      3             10               40            160        All                                                            3                10             40              160       320 | Target labels, n
-  글자끼리 겹침 0쌍 [], 캔버스 밖 글자 [] (글자 77개), pdfimages 래스터 요소 0개
+  a                                                                                                                 b                                                                       Cell-weighted          Block-equal         ±0.5 cm | 0 | Source Stefan | No labels                     Ten labels | Active-layer thickness (cm) | Shuffled physics labels | 50 | Recalibrated Stefan | Constant at pool mean | 100 | Constant at source mean | Residual | 150                                                                              Linear thaw index | −4       −3     −2   −1     0   1      −4 −3 −2       −1   0         1 | 0          10        20         30         40 | Error change vs placebo (cm) | Square root of thaw index (√(°C d)) | c                                                                                                                                          d | 4                   Registered     Auxiliary                                                                            6 | Error change vs physics input (cm) | Error change vs shrinkage (cm) | 4 | 2 | 2                                       Least squares | 0 | 0 | −2 | Recalibrated inputs                                                                 −2 | Physics inputs | −4 | −4                                      Lena Delta       Canada | W Russia         E Russia | −6                                                                                                                      −6 | 0      3             10               40        160      All                                                            3                10            40               160       320 | Target labels, n
+  글자끼리 겹침 0쌍 [], 캔버스 밖 글자 [] (글자 76개), pdfimages 래스터 요소 0개
   사람 점검(600 dpi PNG 100 % 잘라 보기): a 직접 라벨 3개와 선·점 분리, b 두 열 행 이름 한 번, c 열쇠·직접 라벨·방향 표지가 자료와 떨어짐, d 지역 열쇠 4개. 겹침·잘림 없음(2026-10-04).
 
 [11] 설명문(Fig3_legend.md)
@@ -117,4 +117,4 @@ Fig3 v3 값 대조와 점검 기록 (생성 2026-10-04 21:17, 스크립트 scrip
   text_audit {'dash': [], 'banned': [], 'middot_num': [], 'comma4': [], 'codes': []}
   수치 출처: 1.63 과 CI = fig3_a.csv shuffle n 0(lgx L15); 0.48 = fig3_a.csv tddlin n 0; Holm P = lgw_bundle AB3, AB7(Holm 10개); 등록 대비 범위 = fig3_b_L10_alln.csv F1k n 0, F1k n 10, F1n n 10(그림의 등록 대비 3개, [7] (8)); 40·160 범위 = fig3_b_L10_alln.csv F1k·F1n n 40, 160; '캐나다에서 왔다' 의 지역 행 근거는 [3]; d 의 값 = pool_fixed_curve.csv(MEAN n 3, Russia_W n 3); 재표집 횟수 = fig3_b_L10_alln.csv nboot, pool_fixed_curve.csv nboot, lgx L15 nboot [10000]; a 의 계수와 셀 수 = [6]
 
-[12] 렌더 시간 5.4 s
+[12] 렌더 시간 6.0 s

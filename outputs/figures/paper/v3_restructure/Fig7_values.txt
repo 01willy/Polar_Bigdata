@@ -151,10 +151,10 @@ Fig 7 v3 값 대조와 점검 기록
   a 슬롯 3 × 52 × 42 = 6552 mm2, b 슬롯 84 × 63.4 = 5326 mm2, 합 11878 / 28050 = 42% (명세 41%, 기준 35% 이상); 축 자체 면적은 a 3 × 48.8 × 28, b 84 × 61.4 mm. 가장 큰 패널 b
 
 [6] audit_v3(지침 부록 A.1) 결과. 문자 수 한도 760: 그림 명세 9.5 의 600 자에 e(XC)의 묶음 머리 2, 행 이름 5, 지역 열쇠 3, 축 이름을 더했다(Fig 6 의 800 자와 같은 사유 기록)
-  fails: []
-  sizes: {7.0}
-  chars: 725
-  thin_lines: []
+  fails: ['thin']
+  sizes: {8.0, 7.0}
+  chars: 720
+  thin_lines: ['_child1', '_child2', '_child3', '_child4', '_child5', '_child6', '_child7', '_child8']
   titles: []
   boxed_text: 0
   codes: []
@@ -167,18 +167,18 @@ Fig 7 v3 값 대조와 점검 기록
 [7] pdf_audit(지침 부록 A.2)와 pdffonts
   width_mm: 170.0
   height_mm: 165.0
-  chars: 719
-  sizes: {7.0: 719}
-  off_size: {}
+  chars: 714
+  sizes: {7.0: 709, 8.0: 5}
+  off_size: {8.0: 5}
   lt5: 0
-  families: ['LiberationSans']
+  families: ['FreeSans', 'FreeSansBold', 'FreeSansOblique']
   type3: False
   pdffonts:
     name                                 type              encoding         emb sub uni object ID
     ------------------------------------ ----------------- ---------------- --- --- --- ---------
-    BGZIHO+LiberationSans-Bold           CID TrueType      Identity-H       yes yes yes     19  0
-    BGZIHO+LiberationSans                CID TrueType      Identity-H       yes yes yes     26  0
-    HEMWJP+LiberationSans-Italic         CID TrueType      Identity-H       yes yes yes     33  0
+    BICWAS+FreeSans                      CID TrueType      Identity-H       yes yes yes     19  0
+    FITYBK+FreeSansBold                  CID TrueType      Identity-H       yes yes yes     26  0
+    DGJNOP+FreeSansOblique               CID TrueType      Identity-H       yes yes yes     33  0
   PNG: {'size_px': (4015, 3897), 'dpi': (599.9988, 599.9988)}
 
 [8] 설명문 Fig7_legend.md 점검

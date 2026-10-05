@@ -140,3 +140,7 @@ paper/manuscript/*/build/
 deck/render/paper_report_pages/
 outputs/figures/paper/_qa/
 *.lock
+
+# --- 최종 산출물 복사본(tools/sync_deliverables.sh 로 재생성) ---
+deliverables/
+catboost_info/

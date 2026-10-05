@@ -1,3 +1,4 @@
+% SI numbering: first-citation order (tools/si_numbering.py, round 6, 2026-10-05)
 % results_b.tex : Results, subsections R5 to R8 (body text only, no preamble).
 % Spec: paper/manuscript/MANUSCRIPT_SPEC.md sections 4.5 to 4.8 and 11.
 % Order follows the binding style guide 4.3: R5 joins the label-rich gains and
@@ -18,20 +19,20 @@
 \subsection{Gains within label-rich regions}
 \label{sec:results-label-rich}
 
-Within Alaska, residual ML on the recalibrated Stefan anchor reduced RMSE relative to the Stefan model recalibrated on the same labels by 0.54~cm with 1000 labels (95\% CI 0.32 to 0.69; block-equal 0.40 to 0.80; 14.4 to 13.9~cm; unchanged under common resampling), and with all labels about 99\% of the reduction in squared error lay between ERA5-Land climate grid cells\cite{munozsabater2021_era5_land} (Fig.~7a,c).
+Within Alaska, residual ML on the recalibrated Stefan anchor reduced RMSE relative to the Stefan model recalibrated on the same labels by 0.54~cm with 1000 labels (95\% CI 0.32 to 0.69; 14.4 to 13.9~cm; unchanged under common resampling), and with all labels about 99\% of the reduction in squared error lay between ERA5-Land climate grid cells\cite{munozsabater2021_era5_land} (Fig.~6a,c).
 This test was designed after earlier results were viewed and registered before running (Methods).
 
-Reductions with 500 and all labels (0.39 and 0.52~cm) depend on the split-independence assumption, and no difference from the source-coefficient Stefan model was established with 1000 or all labels (Supplementary Table S7).
-In the Lena Delta and Canada, no difference was established for the same contrast at any tested label count (Supplementary Table S7).
+Reductions with 500 and all labels (0.39 and 0.52~cm) depend on the split-independence assumption, and no difference from the source-coefficient Stefan model was established with 1000 or all labels (Supplementary Table S6).
+In the Lena Delta and Canada, no difference was established for the same contrast at any tested label count (Supplementary Table S6).
 
-With the error split between and within climate grid cells (proxy: 0.5° block and ERA5-Land TDD; Methods; designed after earlier results were viewed and registered before running), residual ML with all labels reduced the between-grid RMSE relative to the recalibrated model by 1.0~cm (95\% CI 0.6 to 1.3), and the within-grid RMSE was equivalent within ±0.5~cm (−0.01~cm; 95\% CI −0.03 to 0.04), also under a soil-temperature grid definition (Fig.~7c).
+With the error split between and within climate grid cells (proxy: 0.5° block and ERA5-Land TDD; Methods; designed after earlier results were viewed and registered before running), residual ML with all labels reduced the between-grid RMSE relative to the recalibrated model by 1.0~cm (95\% CI 0.6 to 1.3), and the within-grid RMSE was equivalent within ±0.5~cm (−0.01~cm; 95\% CI −0.03 to 0.04), also under a soil-temperature grid definition (Fig.~6c).
 Within-grid variation made up 72\% of the squared error of the recalibrated Stefan model, of which residual ML explained less than 1\% in Alaska and less than 8\% in any configuration of the three regions.
-Attributing the gain to grid-scale bias correction is a post hoc description (error change by scoring block in Fig.~7b).
+Attributing the gain to grid-scale bias correction is a post hoc description (error change by scoring block in Fig.~6b).
 
-In the registered within-grid hypothesis, the within-grid predictions of residual ML increased the error in the stratified regional mean with all labels (+0.09~cm; 95\% CI 0.02 to 0.40), also under the soil-temperature definition and in Canada, all statistically distinguishable but below 0.5~cm in size (Supplementary Table S10).
+In the registered within-grid hypothesis, the within-grid predictions of residual ML increased the error in the stratified regional mean with all labels (+0.09~cm; 95\% CI 0.02 to 0.40), also under the soil-temperature definition and in Canada, all statistically distinguishable but below 0.5~cm in size (Supplementary Table S7).
 In transfer, there was no evidence that within-grid predictions matched the observed variation.
-The registered test of extrapolation to warmer blocks could not be decided (three scoring blocks in Canada; Supplementary Table S10).
-Three further analyses were designed after earlier results were viewed (Supplementary Table S13).
+The registered test of extrapolation to warmer blocks could not be decided (three scoring blocks in Canada; Supplementary Table S7).
+Three further analyses were designed after earlier results were viewed (Supplementary Table S2).
 In a spatial proxy with warmer blocks of the same period (extrapolation width 0.97~($^{\circ}$C~d)$^{1/2}$ in $\sqrt{\mathrm{TDD}}$), which is not a true extrapolation test, residual ML had 2.44 and 2.41~cm lower error than the recalibrated Stefan model at 100 and all labels (non-inferior), and no difference in extrapolation loss was established between direct ML and either model.
 Ten terrain, water and tree-cover inputs left the within-grid error of residual ML equivalent within ±0.5~cm at every label count (auxiliary contrast, partly unblinded). \textcolor{blue}{[PENDING: XE-a, XE-b, satellite inputs (stage 2); registered deadline 8 October 2026, 14:22 KST]}
 Stacked residuals had 0.55 and 0.498~cm lower error than recalibrated-anchor residuals at 500 and 1000 labels (two of three regions; the latter below 0.5~cm; not retained when CCI v5 was added), no difference was established at 200 or all labels, and in Alaska stacking was non-inferior to the recalibrated Stefan model (partly unblinded).
@@ -39,16 +40,16 @@ Stacked residuals had 0.55 and 0.498~cm lower error than recalibrated-anchor res
 \subsection{Placement of new labels}
 \label{sec:results-placement}
 
-In Canada, spreading labels over 0.5° blocks or covariate space reduced RMSE relative to random cell sampling by 2.4~cm with 40 transfer labels (95\% CI 0.5 to 3.4; block-equal 0.8 to 2.5; covariate max-min distance sampling) and by 2.5 to 3.2~cm with 50 to 100 within-region labels, whereas in the Lena Delta block stratification increased RMSE by 1.7~cm with 100 labels (95\% CI 0.9 to 2.4; block-equal 0.1 to 1.6) (Fig.~5).
+In Canada, spreading labels over 0.5° blocks or covariate space reduced RMSE relative to random cell sampling by 2.4~cm with 40 transfer labels (95\% CI 0.5 to 3.4; covariate max-min distance sampling) and by 2.5 to 3.2~cm with 50 to 100 within-region labels, whereas in the Lena Delta block stratification increased RMSE by 1.7~cm with 100 labels (95\% CI 0.9 to 2.4) (Fig.~7a--e).
 All contrasts used residual ML ($\lambda = 0.25$) on the same splits and were designed after earlier results were viewed and registered before running.
 
-With ten transfer labels, neither strategy had higher error in any of five regions, which is not a non-inferiority result, because one weighting showed higher error for block stratification in the Lena Delta (+1.9~cm) and for covariate spreading in E Russia (+0.36~cm) (Fig.~5f; Supplementary Table S9).
+With ten transfer labels, neither strategy had higher error in any of five regions, which is not a non-inferiority result, because one weighting showed higher error for block stratification in the Lena Delta (+1.9~cm) and for covariate spreading in E Russia (+0.36~cm) (Fig.~7f; Supplementary Table S8).
 
 The best Alaskan strategy at 100 labels, covariate-cluster stratification, increased RMSE in the Lena Delta (+0.33~cm, below 0.5~cm).
-The internally pre-registered contrast of block stratification against random cell sampling, averaged over regions, was undetermined at 10 and 40 labels (two-stage resampling; partly unblinded; same label sets as the transfer contrasts; Supplementary Table S9).
-We also tested a placement procedure fixed before evaluation (Methods) within the sequential workflow (Fig.~7e).
+The internally pre-registered contrast of block stratification against random cell sampling, averaged over regions, was undetermined at 10 and 40 labels (two-stage resampling; partly unblinded; same label sets as the transfer contrasts; Supplementary Table S8).
+We also tested a placement procedure fixed before evaluation (Methods) within the sequential workflow (Fig.~6e).
 In the new random splits of the same regions this procedure reduced to cell-random sampling, so the placement step contributed nothing and its effect was not tested (Methods); it was chosen in the Alaska family, the cells of the evaluation regions were used to design the placement and the method rule, and the evaluation splits are new partitions of the same cells.
-Block allocation with covariate coverage established no difference from random placement at 10 or 40 labels, its four settings were non-inferior to block or covariate spreading in 8 of 16 comparisons (2 significant before correction only) and had higher error in 2 (below 0.5~cm), and design-weighted coefficients, a post hoc design aimed at the Lena Delta, increased error in Alaska and Canada (exploratory; designed after earlier results were viewed, partly unblinded; Supplementary Table S13).
+Block allocation with covariate coverage established no difference from random placement at 10 or 40 labels, its four settings were non-inferior to block or covariate spreading in 8 of 16 comparisons (2 significant before correction only) and had higher error in 2 (below 0.5~cm), and design-weighted coefficients, a post hoc design aimed at the Lena Delta, increased error in Alaska and Canada (exploratory; designed after earlier results were viewed, partly unblinded; Supplementary Table S2).
 The candidates were measured cells, so gains are not guaranteed to transfer to field candidates.
 
 \subsection{Independent regions}
@@ -56,26 +57,25 @@ The candidates were measured cells, so gains are not guaranteed to transfer to f
 % [DECISION: 러시아 중부의 영문 표기] (spec 4.7, 13.1 item 9)
 % [DECISION: 지역 이름 표기] (W Russia, E Russia, Lena Delta; spec 1.4, 13.1 item 7)
 
-In Central Russia, a licence-verified new region with a shallow active layer (57 labels), direct ML without target labels increased RMSE relative to the source-coefficient Stefan model by 2.7~cm (95\% CI 2.1 to 4.1; block-equal 3.2 to 6.6; unchanged under common resampling), and in the five-region shallow pool that includes it, residual ML with all labels reduced RMSE relative to the same model by 3.2~cm (95\% CI 2.2 to 4.2; block-equal 1.5 to 3.7) (Table~1).
-[MISSING: 5지역 풀 대비(라벨 전량 잔차 ML − 원천 계수 Stefan, 라벨 10개 잔차 ML − 재보정 Stefan)의 지역 중앙값, 오차 감소·증가 지역 수, 러시아 서부 제외 값. 새 지역 판정표(약관 확인분 판)의 지역 행에서 수치 생성 스크립트로 만든다]
-These results carry a cross-environment flag, because the pools combine regions fitted on two computing platforms (Methods).
+In Central Russia, a licence-verified new region with a shallow active layer (57 labels), direct ML without target labels increased RMSE relative to the source-coefficient Stefan model by 2.7~cm (95\% CI 2.1 to 4.1; unchanged under common resampling), and in the five-region shallow pool that includes it, residual ML with all labels reduced RMSE relative to the same model by 3.2~cm (95\% CI 2.2 to 4.2; regional median change −0.78~cm, −0.49~cm without W Russia; lower error in W Russia only, higher in Canada) (Table~1).
+These results carry a cross-environment flag (the pools combine regions fitted on two computing platforms; Methods).
 No region in the four-region or the five-region pool had lower error with direct ML than with the source-coefficient model at 0 to 40 labels.
-With ten labels, residual ML and the recalibrated Stefan model were equivalent within ±0.5~cm in the five-region pool (−0.13~cm), so the four-region result at this label count did not hold there.
-In Central Russia alone, no difference was established for residual ML with all labels, because the two weightings disagreed (Supplementary Table S11).
+With ten labels, residual ML and the recalibrated Stefan model were equivalent within ±0.5~cm in the five-region pool (−0.13~cm; regional median change −0.03~cm), so the four-region result at this label count did not hold there.
+In Central Russia alone the two weightings disagreed, so no difference was established (Supplementary Table S9).
 
 The Tibetan Plateau, with a deep active layer, is reported separately and not used as independent-region evidence (scored cells outside the source elevation range; unblinded contrasts).
-There, residual ML with ten labels had a 20.9~cm lower RMSE than the shrunk recalibration but was not better than a least-squares Stefan fit to the same labels (+19.1~cm; Supplementary Table S11).
-The North Atlantic region, with partly unconfirmed data licences, appears only in Supplementary Table S11.
+There, residual ML with ten labels had a 20.9~cm lower RMSE than the shrunk recalibration but was not better than a least-squares Stefan fit to the same labels (+19.1~cm; Supplementary Table S9).
+The North Atlantic region, with partly unconfirmed data licences, appears only in Supplementary Table S9.
 \textcolor{blue}{[PENDING: XF, new public regions; registered data deadline 11 October 2026, 14:22 KST; no eligible new macro region found so far]}
 \textcolor{blue}{[PENDING: XC-F3, external-family test of the workflow; not tested so far, because placement reduced to random sampling makes its ten-label contrast identical, and no eligible new region; registered sentence after the XF data deadline, 11 October 2026, 14:22 KST]}
-On the Tibetan Plateau, temperature-derived auxiliary rows reduced the transfer error of recalibration with 3 and 10 labels by 8.14 to 83.17~cm (designed after earlier results were viewed, partly unblinded), a result not generalized because these labels differ in definition from direct measurements; the source-side design was not tested (licence basis not recorded; Supplementary Table S13).
+On the Tibetan Plateau, temperature-derived auxiliary rows reduced the transfer error of recalibration with 3 and 10 labels by 8.14 to 83.17~cm (designed after earlier results were viewed, partly unblinded), a result not generalized because these labels differ in definition from direct measurements; the source-side design was not tested (licence basis not recorded; Supplementary Table S2).
 
 \subsection{Prediction intervals}
 \label{sec:results-intervals}
 
-Without target labels, hierarchical conformal intervals\cite{Dunn2023} calibrated with regions as groups covered on average 0.86 of held-out observations (95\% CI 0.80 to 0.92; nominal 0.90; four regions), and with four calibration regions they carry no finite-sample guarantee (internally pre-registered under an earlier protocol; Supplementary Table S12).
-Quantile intervals calibrated in Alaska by conformalized quantile regression\cite{romano2019_conformalized_quantile_regression} covered 0.32 to 0.73 in the four held-out regions (Supplementary Table S12).
-Across five ways of scaling the width of the hierarchical interval, coverage was 0.86 to 0.95 and mean width 81.3 to 132.4~cm (Fig.~6d).
+Without target labels, hierarchical conformal intervals\cite{Dunn2023} calibrated with regions as groups covered on average 0.86 of held-out observations (95\% CI 0.80 to 0.92; nominal 0.90; four regions), and with four calibration regions they carry no finite-sample guarantee (internally pre-registered under an earlier protocol; Supplementary Table S10).
+Quantile intervals calibrated in Alaska by conformalized quantile regression\cite{romano2019_conformalized_quantile_regression} covered 0.32 to 0.73 in the four held-out regions (Supplementary Table S10).
+Across five ways of scaling the width of the hierarchical interval, coverage was 0.86 to 0.95 and mean width 81.3 to 132.4~cm (Fig.~4d).
 For the interval score\cite{GneitingRaftery2007}, no difference was established between cell-specific flow scaling and a placebo with widths permuted within regions, or between any scaling and constant width.
 With ten labels, no difference in interval score was established between hierarchical predictive distributions and calibrated constant-width intervals (+9.5~cm; Holm-adjusted \textit{P} = 0.277).
-With 40 and 160 labels, residual-ML intervals covered 0.84 to 0.90 in the Lena Delta, Canada and Alaska (Fig.~6e).
+With 40 and 160 labels, residual-ML intervals covered 0.84 to 0.90 in the Lena Delta, Canada and Alaska (Fig.~4e).

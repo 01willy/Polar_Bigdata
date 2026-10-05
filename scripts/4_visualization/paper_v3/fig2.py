@@ -89,10 +89,11 @@ TEXT = {
 
 # 매체별 크기(지침 2.2–2.3 논문, slide_archetypes 1.3 슬라이드)
 TOK = {
-    "paper": dict(fs=7.0, fs_axis=7.0, fs_head=7.0, lw_main=1.25, lw_aux=1.0, lw_zero=1.0, ms=3.5, arrow_ms=5.0, pad=1.5,
-                  font="Liberation Sans"),
-    "slide": dict(fs=16.0, fs_axis=18.0, fs_head=18.0, lw_main=3.0, lw_aux=2.0, lw_zero=2.0, ms=8.0, arrow_ms=10.0, pad=4.0,
-                  font="Pretendard"),
+    # v4 토큰(design/style_tokens_v4.json): 논문 FreeSans 7 pt, 선 1.2/0.8/0.6 pt, 표지 4 pt; 슬라이드 13/14 pt, 선 2.2/1.4/1.0 pt, 표지 7 pt
+    "paper": dict(fs=7.0, fs_axis=7.0, fs_head=7.0, lw_main=S.LW["main"], lw_aux=S.LW["aux"], lw_zero=S.LW["ref"], ms=S.MS["main"],
+                  arrow_ms=5.0, pad=1.5, font=S.FONT_LATIN),
+    "slide": dict(fs=S.SLIDE_FONT["direct"], fs_axis=S.SLIDE_FONT["axis_label"], fs_head=S.SLIDE_FONT["direct"], lw_main=S.LW_SLIDE["main"],
+                  lw_aux=S.LW_SLIDE["aux"], lw_zero=S.LW_SLIDE["ref"], ms=S.MS_SLIDE["main"], arrow_ms=10.0, pad=4.0, font="Pretendard"),
 }
 
 
@@ -294,8 +295,9 @@ def build(medium: str = "paper"):
             except Exception:                                            # noqa: BLE001
                 pass
         if not any(f.name == "Pretendard" for f in font_manager.fontManager.ttflist):
-            T["font"] = "Liberation Sans"
+            T["font"] = S.FONT_LATIN
         matplotlib.rcParams["font.sans-serif"] = [T["font"]]
+        matplotlib.rcParams["font.weight"] = "normal"
     matplotlib.rcParams["axes.labelpad"] = 2.0 if medium == "paper" else 6.0
     D, masks = load()
     G = geometry(medium)
@@ -358,26 +360,16 @@ def build(medium: str = "paper"):
     for key in ("recalibrated_stefan", "anchor_residual", "direct_ml"):
         r = D[(D.panel == "b") & (D.series == key) & (D.n == N_ALL)].iloc[0]
         t = fig.text(fx(G["label_x"]), r.value, X["method"][key], transform=tr_all, ha="left", va="center",
-                     fontsize=T["fs"], color=S.INK)
+                     fontsize=T["fs"], color=S.METHOD[key]["color"])              # v4: 직접 라벨은 계열 색
         t.set_gid("direct_label")
         labels[key] = t
     tr_b0 = blended_transform_factory(fig.transFigure, ax["b0"].transData)
     t = fig.text(fx(G["b0"] + G["w0"] + (1.2 if medium == "paper" else 2.5)), rb.value, X["method"]["year_matched_stefan"],
-                 transform=tr_b0, ha="left", va="center", fontsize=T["fs"], color=S.INK)
+                 transform=tr_b0, ha="left", va="center", fontsize=T["fs"], color=S.METHOD["year_matched_stefan"]["color"])
     t.set_gid("direct_label")
     labels["year_matched_stefan"] = t
 
-    # ---- 방향 표지(그림당 1개): a 본 축 왼쪽 아래, 아래 방향 화살표 + "Lower error"
-    tr_aL = blended_transform_factory(ax["aL"].transAxes, ax["aL"].transData)
-    x_arrow = (1.2 if medium == "paper" else 3.0) / G["aL"][1]
-    y_top_arrow, y_bot_arrow = (-2.75, -3.85)
-    arr = FancyArrowPatch((x_arrow, y_top_arrow), (x_arrow, y_bot_arrow), transform=tr_aL, arrowstyle="-|>",
-                          mutation_scale=T["arrow_ms"], lw=T["lw_aux"], color=S.INK_AUX, shrinkA=0, shrinkB=0, zorder=4)
-    arr.set_gid("direction_arrow")
-    ax["aL"].add_patch(arr)
-    td = ax["aL"].text(x_arrow + (1.3 if medium == "paper" else 3.0) / G["aL"][1], (y_top_arrow + y_bot_arrow) / 2,
-                       X["direction"], transform=tr_aL, ha="left", va="center", fontsize=T["fs"], color=S.INK_AUX)
-    td.set_gid("direction_label")
+    # ---- 방향 표지: v4 토큰에서 화살촉 주석을 쓰지 않는다(방향은 설명문과 0선의 뜻으로 읽는다)
 
     # ---- 축 이름(그림 전체에 한 번씩)
     ax["a0"].set_ylabel(X["ylabel"], fontsize=T["fs_axis"])
@@ -423,7 +415,7 @@ def build(medium: str = "paper"):
         spans = dict(a=(G["a0"], G["aL"][0] + G["aL"][1]), b=(G["b0"], G["bA"][0] + G["bA"][1]))
         for p, (x0, x1) in spans.items():
             heads[p] = fig.text(fx((x0 + x1) / 2.0), fy(2.0), X["head_a" if p == "a" else "head_b"], ha="center", va="top",
-                                fontsize=T["fs_head"], fontweight="semibold")
+                                fontsize=T["fs_head"])
     return fig, D, masks, ax, dict(labels=labels, heads=heads, G=G, T=T)
 
 

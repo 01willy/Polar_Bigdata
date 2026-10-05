@@ -1,0 +1,38 @@
+{
+ "stem": "FigS15",
+ "created": "2026-10-05 14:48:09",
+ "size_mm": [
+  170.0,
+  166.0
+ ],
+ "audit_fails": [],
+ "sizes": [
+  7.0,
+  8.0
+ ],
+ "chars": 1434,
+ "thin_lines": [],
+ "codes": [],
+ "loose_numbers": [],
+ "text_overlap_pairs": [],
+ "text_outside": [],
+ "pdffonts": {
+  "fonts": [
+   "FreeSans",
+   "FreeSansBold"
+  ],
+  "type3": false,
+  "liberation": false,
+  "ok": true
+ },
+ "pdf_bytes": 29486,
+ "sources": [
+  "data/processed/paper_figs/fig7_b.csv",
+  "data/processed/paper_figs/fig7_b_summary.csv",
+  "data/processed/paper_figs/fig7_c.csv",
+  "data/processed/paper_figs/fig7_d.csv",
+  "data/processed/paper_figs/fig7_d_regions.csv",
+  "data/processed/paper_figs/fig7_d_ab10.csv",
+  "data/processed/paper_figs/v2_data_meta.json"
+ ]
+}

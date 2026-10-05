@@ -70,6 +70,7 @@ GREY = S.INK_AUX
 C_SRC = S.METHOD["source_stefan"]["color"]
 C_RECAL = S.METHOD["recalibrated_stefan"]["color"]
 C_RESID = S.METHOD["anchor_residual"]["color"]
+C_PHYS = S.METHOD["physics_pseudo"]["color"]       # v4: b(물리 유사라벨 − 위약 대비)의 색
 PLACEBO_ROWS = [("shuffle", "Shuffled physics labels"), ("const_t", "Constant at pool mean"),
                 ("const_src", "Constant at source mean"), ("tddlin", "Linear thaw index")]
 REGIONS4 = ["Lena", "Canada", "Russia_W", "Russia_E"]
@@ -77,7 +78,8 @@ MM_PT = 72.0 / 25.4             # pt per mm
 
 
 # ================================================================ 자원 확인
-def wait_resources(min_gb: float = 30.0, max_load: float = 40.0, max_wait_s: int = 1800) -> str:
+def wait_resources(min_gb: float | None = None, max_load: float = 40.0, max_wait_s: int = 1800) -> str:
+    min_gb = float(os.environ.get("PAPER_MIN_AVAIL_GB", "30")) if min_gb is None else min_gb   # 기본 30 GB(작업 지시), 조정 담당이 정한 값은 환경 변수로
     """공유 서버: 가용 메모리 30 GB 미만이거나 1분 부하 40 초과면 기다린다(작업 지시)."""
     t0 = time.time()
     while True:
@@ -230,11 +232,11 @@ def panel_a(fig, ax, C: dict):
     ax.set_xlabel("Square root of thaw index (√(°C d))")
     ax.set_ylabel("Active-layer thickness (cm)")
     # 직접 라벨 3개(요소 옆)
-    ax.text(15.0, C["E0"] * 15.0 - 9.0, "Source Stefan", ha="left", va="bottom", fontsize=S.FONT_PT)
-    ax.text(0.8, C["E1"] * 21.0 + 14.2, "Recalibrated Stefan", ha="left", va="top", fontsize=S.FONT_PT)
+    ax.text(15.0, C["E0"] * 15.0 - 9.0, "Source Stefan", ha="left", va="bottom", fontsize=S.FONT_PT, color=C_SRC)
+    ax.text(0.8, C["E1"] * 21.0 + 14.2, "Recalibrated Stefan", ha="left", va="top", fontsize=S.FONT_PT, color=C_RECAL)
     k = int(np.argmax(np.abs(C["y_sel"] - C["E1"] * C["s_sel"])))          # 가장 긴 잔차 선분 왼쪽
     s_k, y_k = C["s_sel"][k], C["y_sel"][k]
-    ax.text(s_k - 1.0, y_k - 6.0, "Residual", ha="right", va="center", fontsize=S.FONT_PT)
+    ax.text(s_k - 1.0, y_k - 6.0, "Residual", ha="right", va="center", fontsize=S.FONT_PT, color=C_RESID)
     return dict(residual_label_point=(float(s_k), float(y_k)))
 
 
@@ -248,10 +250,10 @@ def panel_b(fig, axL, axR, P: pd.DataFrame):
         ys = np.arange(len(rows), dtype=float)
         tr_blk = offset(ax, dy_mm=-S.FOREST_BLOCK_OFFSET_MM)
         for y, (_, r) in zip(ys, d.iterrows()):
-            ax.plot([r.ci_lo, r.ci_hi], [y, y], color=BLACK, lw=S.LW["ci_forest_cell"], solid_capstyle="round", zorder=3)
-            ax.plot([r.ci_lo_beq, r.ci_hi_beq], [y, y], color=BLACK, lw=S.LW["ci_forest_block"],
+            ax.plot([r.ci_lo, r.ci_hi], [y, y], color=C_PHYS, lw=S.LW["ci_forest_cell"], solid_capstyle="round", zorder=3)
+            ax.plot([r.ci_lo_beq, r.ci_hi_beq], [y, y], color=C_PHYS, lw=S.LW["ci_forest_block"],
                     solid_capstyle="butt", transform=tr_blk, zorder=3)
-        ax.scatter(d.delta.values, ys, s=ms_area(S.MS["main"]), c=BLACK, linewidths=0, zorder=4)
+        ax.scatter(d.delta.values, ys, s=ms_area(S.MS["main"]), c=C_PHYS, linewidths=0, zorder=4)
         ax.set_xlim(*xlim)
         ax.set_ylim(len(rows) - 0.45, -0.55)
         ax.xaxis.set_major_locator(FixedLocator([-4, -3, -2, -1, 0, 1]))
@@ -286,22 +288,22 @@ def panel_c(fig, ax0, axM, axA, B: pd.DataFrame):
     def draw_pt(ax, x, r, ser):
         tr = offset(ax, dx_mm=dodge[ser])
         trb = offset(ax, dx_mm=dodge[ser] + S.FOREST_BLOCK_OFFSET_MM)
-        ax.plot([x, x], [r.ci_lo, r.ci_hi], color=BLACK, lw=S.LW["ci_forest_cell"], solid_capstyle="round",
+        ax.plot([x, x], [r.ci_lo, r.ci_hi], color=C_RESID, lw=S.LW["ci_forest_cell"], solid_capstyle="round",
                 transform=tr, zorder=3)
-        ax.plot([x, x], [r.ci_lo_beq, r.ci_hi_beq], color=BLACK, lw=S.LW["ci_forest_block"], solid_capstyle="butt",
+        ax.plot([x, x], [r.ci_lo_beq, r.ci_hi_beq], color=C_RESID, lw=S.LW["ci_forest_block"], solid_capstyle="butt",
                 transform=trb, zorder=3)
         if bool(r.registered):
-            ax.plot([x], [r.delta], marker="o", ms=S.MS["main"], mfc=BLACK, mec=BLACK, mew=0, ls="none",
+            ax.plot([x], [r.delta], marker="o", ms=S.MS["main"], mfc=C_RESID, mec=C_RESID, mew=0, ls="none",
                     transform=tr, zorder=5)
         else:
-            ax.plot([x], [r.delta], marker="o", ms=S.MS["main"], mfc="white", mec=BLACK,
+            ax.plot([x], [r.delta], marker="o", ms=S.MS["main"], mfc="white", mec=C_RESID,
                     mew=S.LW["marker_edge_open"], ls="none", transform=tr, zorder=5)
     for ser in ("F1k", "F1n"):
         d = B[B.series == ser].set_index("n")
         tr = offset(axM, dx_mm=dodge[ser])
         for seg in ([3, 10], [40, 160]):                     # 풀이 바뀌는 10 과 40 사이는 잇지 않는다
             seg = [n for n in seg if n in d.index]
-            axM.plot(seg, d.loc[seg, "delta"].values, color=BLACK, lw=S.LW["main"], ls=ls[ser], transform=tr, zorder=2)
+            axM.plot(seg, d.loc[seg, "delta"].values, color=C_RESID, lw=S.LW["main"], ls=ls[ser], transform=tr, zorder=2)
         for n, r in d.iterrows():
             if n == 0:
                 draw_pt(ax0, 0.0, r, ser)
@@ -332,8 +334,8 @@ def panel_c(fig, ax0, axM, axA, B: pd.DataFrame):
     dk = B[(B.series == "F1k") & (B.n == 10)].iloc[0]
     dn = B[(B.series == "F1n") & (B.n == 10)].iloc[0]
     trl = offset(axM, dx_mm=3.4)
-    axM.text(10.0, dn.delta, "Recalibrated inputs", ha="left", va="center", transform=trl, fontsize=S.FONT_PT)
-    axM.text(10.0, dk.delta, "Physics inputs", ha="left", va="center", transform=trl, fontsize=S.FONT_PT)
+    axM.text(10.0, dn.delta, "Recalibrated inputs", ha="left", va="center", transform=trl, fontsize=S.FONT_PT, color=C_RESID)
+    axM.text(10.0, dk.delta, "Physics inputs", ha="left", va="center", transform=trl, fontsize=S.FONT_PT, color=C_RESID)
 
 
 def panel_d(fig, ax, R: pd.DataFrame):
@@ -360,7 +362,7 @@ def panel_d(fig, ax, R: pd.DataFrame):
     ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: fmt_tick(v)))
     ax.set_ylabel("Error change vs shrinkage (cm)")
     g40 = m[m.n == 40].iloc[0]
-    ax.text(40.0, g40.ci_hi + 1.0, "Least squares", ha="left", va="bottom", fontsize=S.FONT_PT,
+    ax.text(40.0, g40.ci_hi + 1.0, "Least squares", ha="left", va="bottom", fontsize=S.FONT_PT, color=C_RECAL,
             transform=offset(ax, dx_mm=-1.0))
 
 
@@ -420,12 +422,7 @@ def build(medium: str = "paper"):
     ov.plot([kx2], [ky2], marker="o", ms=S.MS["main"], mfc="white", mec=BLACK, mew=S.LW["marker_edge_open"], ls="none")
     ov.text(kx2 + 1.6, ky2, "Auxiliary", ha="left", va="center", fontsize=fs)
 
-    # 방향 표지(그림에 하나): 패널 c 본 축 오른쪽 아래, y 가 작을수록 잔차 구조의 오차가 작다
-    dx_, dy_ = 51.0, 104.6
-    ov.annotate("", xy=(dx_, dy_ + 2.4), xytext=(dx_, dy_ - 2.4),
-                arrowprops=dict(arrowstyle="-|>,head_length=0.35,head_width=0.18", color=GREY, lw=1.0,
-                                shrinkA=0, shrinkB=0))
-    ov.text(dx_ + 1.4, dy_, "Residual lower", ha="left", va="center", fontsize=fs, color=GREY)
+    # 방향 표지: v4 토큰에서 화살촉 주석을 쓰지 않는다(축 이름과 설명문으로 읽는다)
 
     # 열쇠 3(패널 d 오른쪽 아래): 지역 모양
     rx, ry = 133.0, 100.6

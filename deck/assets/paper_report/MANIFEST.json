@@ -3,7 +3,7 @@
   "S03": {
    "file": "deck/assets/paper_report/S03_timeline.png",
    "source_data": "deck/assets/paper_report/source_data/S03_timeline.csv",
-   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "format": "PNG(경로 B, Pretendard Regular, v4 토큰, 300 dpi, 배치 크기 그대로)",
    "size_in": [
     12.0,
     5.2
@@ -26,19 +26,20 @@
     "git log 2678100(2026-10-04 14:22:39 +0900)"
    ],
    "notes": [
-    "줄 간격 0.084 in, 원 5.5 pt(8 pt 원 지름 0.111 in 는 같은 날 묶음 12개를 겹침 없이 쌓지 못해 줄임)",
-    "행별 줄 수 {'H0': 9, 'H1': 2, 'H2-5': 3, 'T': 8, 'W': 12, 'X': 10}",
+    "줄 간격 0.081 in, 원 5.3 pt(8 pt 원 지름 0.111 in 는 같은 날 묶음 12개를 겹침 없이 쌓지 못해 줄임)",
+    "행별 줄 수 {'H0': 9, 'H1': 2, 'H2-5': 3, 'T': 8, 'W': 12, 'X': 12}",
     "범위·나열 날짜는 시작과 끝, '2026-08(≤2026-08-31)'은 끝점만, 추가 실험은 등록 시각",
     "대체·폐기·미실행(superseded, discarded, not run)은 회색 선과 회색 원"
    ],
    "audit": {
     "fails": [],
     "sizes": [
-     16.0,
-     18.0
+     12.0,
+     13.0,
+     14.0
     ],
     "fonts": [
-     "Pretendard-Medium.otf"
+     "Pretendard-Regular.otf"
     ],
     "n_text": 15,
     "chars": 73,
@@ -55,7 +56,7 @@
   "S06": {
    "file": "deck/assets/paper_report/S06_spatial_scale.png",
    "source_data": "deck/assets/paper_report/source_data/S06_spatial_scale.csv",
-   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "format": "PNG(경로 B, Pretendard Regular, v4 토큰, 300 dpi, 배치 크기 그대로)",
    "size_in": [
     7.9,
     4.9
@@ -86,11 +87,12 @@
    "audit": {
     "fails": [],
     "sizes": [
-     16.0,
-     18.0
+     12.0,
+     13.0,
+     14.0
     ],
     "fonts": [
-     "Pretendard-Medium.otf"
+     "Pretendard-Regular.otf"
     ],
     "n_text": 15,
     "chars": 97,
@@ -158,7 +160,7 @@
   "S09": {
    "file": "deck/assets/paper_report/S09_stefan_concept.png",
    "source_data": "deck/assets/paper_report/source_data/S09_stefan_concept.csv",
-   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "format": "PNG(경로 B, Pretendard Regular, v4 토큰, 300 dpi, 배치 크기 그대로)",
    "size_in": [
     12.0,
     4.75
@@ -190,15 +192,15 @@
    "audit": {
     "fails": [],
     "sizes": [
-     16.0,
-     18.0
+     12.0,
+     13.0,
+     14.0
     ],
     "fonts": [
-     "Pretendard-Medium.otf",
-     "Pretendard-SemiBold.otf"
+     "Pretendard-Regular.otf"
     ],
     "n_text": 15,
-    "chars": 71,
+    "chars": 82,
     "overlaps": [],
     "clipped": [],
     "loose_numbers": [],
@@ -212,7 +214,7 @@
   "S20": {
    "file": "deck/assets/paper_report/S20_contest_vs_strict.png",
    "source_data": "deck/assets/paper_report/source_data/S20_contest_vs_strict.csv",
-   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "format": "PNG(경로 B, Pretendard Regular, v4 토큰, 300 dpi, 배치 크기 그대로)",
    "size_in": [
     12.0,
     4.6
@@ -242,12 +244,12 @@
    "audit": {
     "fails": [],
     "sizes": [
-     16.0,
-     18.0
+     12.0,
+     13.0,
+     14.0
     ],
     "fonts": [
-     "Pretendard-Medium.otf",
-     "Pretendard-SemiBold.otf"
+     "Pretendard-Regular.otf"
     ],
     "n_text": 12,
     "chars": 51,
@@ -264,7 +266,7 @@
   "S24": {
    "file": "deck/assets/paper_report/S24_independent_forest.png",
    "source_data": "deck/assets/paper_report/source_data/S24_independent_forest.csv",
-   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "format": "PNG(경로 B, Pretendard Regular, v4 토큰, 300 dpi, 배치 크기 그대로)",
    "size_in": [
     5.85,
     4.8
@@ -294,12 +296,12 @@
    "audit": {
     "fails": [],
     "sizes": [
-     16.0,
-     18.0
+     12.0,
+     13.0,
+     14.0
     ],
     "fonts": [
-     "Pretendard-Medium.otf",
-     "Pretendard-SemiBold.otf"
+     "Pretendard-Regular.otf"
     ],
     "n_text": 16,
     "chars": 107,
@@ -316,7 +318,7 @@
   "S25": {
    "file": "deck/assets/paper_report/S25_coverage.png",
    "source_data": "deck/assets/paper_report/source_data/S25_coverage.csv",
-   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "format": "PNG(경로 B, Pretendard Regular, v4 토큰, 300 dpi, 배치 크기 그대로)",
    "size_in": [
     12.0,
     4.8
@@ -348,12 +350,12 @@
    "audit": {
     "fails": [],
     "sizes": [
-     16.0,
-     18.0
+     12.0,
+     13.0,
+     14.0
     ],
     "fonts": [
-     "Pretendard-Medium.otf",
-     "Pretendard-SemiBold.otf"
+     "Pretendard-Regular.otf"
     ],
     "n_text": 14,
     "chars": 58,
@@ -370,7 +372,7 @@
   "S26": {
    "file": "deck/assets/paper_report/S26_workflow_path.png",
    "source_data": "deck/assets/paper_report/source_data/S26_workflow_path.csv",
-   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "format": "PNG(경로 B, Pretendard Regular, v4 토큰, 300 dpi, 배치 크기 그대로)",
    "size_in": [
     12.0,
     5.2
@@ -405,12 +407,12 @@
    "audit": {
     "fails": [],
     "sizes": [
-     16.0,
-     18.0
+     12.0,
+     13.0,
+     14.0
     ],
     "fonts": [
-     "Pretendard-Medium.otf",
-     "Pretendard-SemiBold.otf"
+     "Pretendard-Regular.otf"
     ],
     "n_text": 19,
     "chars": 90,
@@ -427,7 +429,7 @@
   "S27": {
    "file": "deck/assets/paper_report/S27_workflow_small.png",
    "source_data": "deck/assets/paper_report/source_data/S27_workflow_small.csv",
-   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "format": "PNG(경로 B, Pretendard Regular, v4 토큰, 300 dpi, 배치 크기 그대로)",
    "size_in": [
     3.8,
     3.4
@@ -456,12 +458,12 @@
    "audit": {
     "fails": [],
     "sizes": [
-     16.0,
-     18.0
+     12.0,
+     13.0,
+     14.0
     ],
     "fonts": [
-     "Pretendard-Medium.otf",
-     "Pretendard-SemiBold.otf"
+     "Pretendard-Regular.otf"
     ],
     "n_text": 14,
     "chars": 58,
@@ -478,7 +480,7 @@
   "S29": {
    "file": "deck/assets/paper_report/S29_word_budget.png",
    "source_data": "deck/assets/paper_report/source_data/S29_word_budget.csv",
-   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "format": "PNG(경로 B, Pretendard Regular, v4 토큰, 300 dpi, 배치 크기 그대로)",
    "size_in": [
     7.9,
     4.75
@@ -507,11 +509,12 @@
    "audit": {
     "fails": [],
     "sizes": [
-     16.0,
-     18.0
+     12.0,
+     13.0,
+     14.0
     ],
     "fonts": [
-     "Pretendard-Medium.otf"
+     "Pretendard-Regular.otf"
     ],
     "n_text": 11,
     "chars": 30,
@@ -528,7 +531,7 @@
   "S32": {
    "file": "deck/assets/paper_report/S32_registered_order.png",
    "source_data": "deck/assets/paper_report/source_data/S32_registered_order.csv",
-   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "format": "PNG(경로 B, Pretendard Regular, v4 토큰, 300 dpi, 배치 크기 그대로)",
    "size_in": [
     12.0,
     5.2
@@ -556,12 +559,12 @@
    "audit": {
     "fails": [],
     "sizes": [
-     16.0,
-     18.0
+     12.0,
+     13.0,
+     14.0
     ],
     "fonts": [
-     "Pretendard-Medium.otf",
-     "Pretendard-SemiBold.otf"
+     "Pretendard-Regular.otf"
     ],
     "n_text": 39,
     "chars": 156,
@@ -578,7 +581,7 @@
   "AP3": {
    "file": "deck/assets/paper_report/AP3_label0_baselines.png",
    "source_data": "deck/assets/paper_report/source_data/AP3_label0_baselines.csv",
-   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "format": "PNG(경로 B, Pretendard Regular, v4 토큰, 300 dpi, 배치 크기 그대로)",
    "size_in": [
     12.0,
     5.2
@@ -609,12 +612,12 @@
    "audit": {
     "fails": [],
     "sizes": [
-     16.0,
-     18.0
+     12.0,
+     13.0,
+     14.0
     ],
     "fonts": [
-     "Pretendard-Medium.otf",
-     "Pretendard-SemiBold.otf"
+     "Pretendard-Regular.otf"
     ],
     "n_text": 19,
     "chars": 112,
@@ -631,7 +634,7 @@
   "AP5": {
    "file": "deck/assets/paper_report/AP5_cv_schemes.png",
    "source_data": "deck/assets/paper_report/source_data/AP5_cv_schemes.csv",
-   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "format": "PNG(경로 B, Pretendard Regular, v4 토큰, 300 dpi, 배치 크기 그대로)",
    "size_in": [
     12.0,
     5.2
@@ -661,11 +664,12 @@
    "audit": {
     "fails": [],
     "sizes": [
-     16.0,
-     18.0
+     12.0,
+     13.0,
+     14.0
     ],
     "fonts": [
-     "Pretendard-Medium.otf"
+     "Pretendard-Regular.otf"
     ],
     "n_text": 15,
     "chars": 65,
@@ -682,7 +686,7 @@
   "AP8": {
    "file": "deck/assets/paper_report/AP8_nn_tuning.png",
    "source_data": "deck/assets/paper_report/source_data/AP8_nn_tuning.csv",
-   "format": "PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+   "format": "PNG(경로 B, Pretendard Regular, v4 토큰, 300 dpi, 배치 크기 그대로)",
    "size_in": [
     12.0,
     5.2
@@ -711,15 +715,15 @@
    "audit": {
     "fails": [],
     "sizes": [
-     16.0,
-     18.0
+     12.0,
+     13.0,
+     14.0
     ],
     "fonts": [
-     "Pretendard-Medium.otf",
-     "Pretendard-SemiBold.otf"
+     "Pretendard-Regular.otf"
     ],
-    "n_text": 30,
-    "chars": 116,
+    "n_text": 29,
+    "chars": 120,
     "overlaps": [],
     "clipped": [],
     "loose_numbers": [],
@@ -737,16 +741,16 @@
    "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
    "geometry_in": {
     "x": 0.667,
-    "y": 1.45,
-    "w": 7.9,
-    "row_h": 0.75,
+    "y": 1.8,
+    "w": 12.0,
+    "row_h": 1.0,
     "col_w": [
-     1.7,
-     3.1,
-     3.1
+     2.4,
+     4.8,
+     4.8
     ]
    },
-   "height_in": 2.75,
+   "height_in": 3.5,
    "issues": [],
    "changes_from_spec": []
   },
@@ -755,16 +759,15 @@
    "format": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",
    "geometry_in": {
     "x": 0.667,
-    "y": 1.4,
+    "y": 1.45,
     "w": 12.0,
-    "row_h": 0.75,
+    "row_h": 0.85,
     "col_w": [
-     2.4,
-     8.1,
-     1.5
+     2.6,
+     9.4
     ]
    },
-   "height_in": 4.25,
+   "height_in": 4.75,
    "issues": [],
    "changes_from_spec": []
   },
@@ -821,8 +824,6 @@
    "height_in": 4.3,
    "issues": [],
    "changes_from_spec": [
-    "'200단어 이하, 계획 199(판 B)와 196(판 A)' → '200단어 이하, 계획 196–199'(18 pt, 열 2.6 in 에서 두 줄 안. 'v3' 는 보이는 글의 내부 판 이름이라 뺌, 지침 H3. 판 A·B 구분은 노트)",
-    "'350단어 이하, v3 초안 268–343' → '350단어 이하, 초안 268–343'(18 pt, 열 2.6 in 에서 두 줄 안. 'v3' 는 보이는 글의 내부 판 이름이라 뺌, 지침 H3. 판 A·B 구분은 노트)",
     "y 1.30 → 1.80, 행 높이 0.80 → 0.76 in(A3 높이 일치, 차트 4.75 in)"
    ]
   },
@@ -1010,14 +1011,14 @@
  },
  "values_check": {
   "file": "deck/assets/paper_report/values_check.txt",
-  "ok": 47,
-  "mismatch": 0
+  "ok": 44,
+  "mismatch": 3
  },
  "meta": {
-  "generated": "2026-10-04 21:26",
+  "generated": "2026-10-05 13:55",
   "script": "deck/mk_paper_report_figs.py",
   "spec": "deck/deck_spec_paper_report.json",
-  "chart_rule": "지침 5.6 경로 B, 배치 크기 그대로 300 dpi, Pretendard Medium·SemiBold, 축 18 pt, 눈금·직접 라벨 16 pt",
+  "chart_rule": "v4 토큰(design/style_tokens_v4.json): 경로 B, 배치 크기 그대로 300 dpi, Pretendard Regular, 축 14 pt, 눈금 12 pt, 직접 라벨 13 pt, 방법 색",
   "format_choice": "차트 14개 모두 경로 B PNG(한글 포함, 지침 5.6: 경로 A EMF 는 한글이 Noto Sans CJK 로 대체되어 쓰지 않음). 표 15개는 python-pptx 원어 헤어라인 표(편집 가능). python-pptx 원어 차트는 쓰지 않음(Pretendard 축·눈금 글자와 방법 색·선 모양·두 CI 막대를 원어 차트 객체로 재현할 수 없음)",
   "table_rule": "지침 3.2, 원형 A7: 원어 헤어라인 표, 18 pt, 채움 0, 세로선 0",
   "not_made": {
@@ -1026,67 +1027,5 @@
    "S16_S18": "왼쪽 SI 지도 슬라이드판(대상 중심 좌표 [미확인])과 오른쪽 Fig 4b·4c 는 v3 그림 범위",
    "v3_panels": "S01, S02 보조, S05, S07, S11–S15, S17, S19, S21–S23, AP1 의 근거는 v3 논문 그림 패널의 슬라이드판(medium='slide')으로 이 스크립트 범위 밖"
   }
- },
- "preview": {
-  "pptx": "deck/assets/paper_report/preview_evidence.pptx",
-  "pdf": "deck/assets/paper_report/preview/preview_evidence.pdf",
-  "pages": [
-   "S02",
-   "S03",
-   "S04",
-   "S06",
-   "S08",
-   "S09",
-   "S10",
-   "S20",
-   "S24",
-   "S25",
-   "S26",
-   "S27",
-   "S29",
-   "S30",
-   "S31",
-   "S32",
-   "S33",
-   "S34",
-   "AP2",
-   "AP3",
-   "AP4",
-   "AP5",
-   "AP6",
-   "AP7",
-   "AP8",
-   "AP9",
-   "AP10"
-  ],
-  "png": [
-   "deck/assets/paper_report/preview/page-01.png",
-   "deck/assets/paper_report/preview/page-02.png",
-   "deck/assets/paper_report/preview/page-03.png",
-   "deck/assets/paper_report/preview/page-04.png",
-   "deck/assets/paper_report/preview/page-05.png",
-   "deck/assets/paper_report/preview/page-06.png",
-   "deck/assets/paper_report/preview/page-07.png",
-   "deck/assets/paper_report/preview/page-08.png",
-   "deck/assets/paper_report/preview/page-09.png",
-   "deck/assets/paper_report/preview/page-10.png",
-   "deck/assets/paper_report/preview/page-11.png",
-   "deck/assets/paper_report/preview/page-12.png",
-   "deck/assets/paper_report/preview/page-13.png",
-   "deck/assets/paper_report/preview/page-14.png",
-   "deck/assets/paper_report/preview/page-15.png",
-   "deck/assets/paper_report/preview/page-16.png",
-   "deck/assets/paper_report/preview/page-17.png",
-   "deck/assets/paper_report/preview/page-18.png",
-   "deck/assets/paper_report/preview/page-19.png",
-   "deck/assets/paper_report/preview/page-20.png",
-   "deck/assets/paper_report/preview/page-21.png",
-   "deck/assets/paper_report/preview/page-22.png",
-   "deck/assets/paper_report/preview/page-23.png",
-   "deck/assets/paper_report/preview/page-24.png",
-   "deck/assets/paper_report/preview/page-25.png",
-   "deck/assets/paper_report/preview/page-26.png",
-   "deck/assets/paper_report/preview/page-27.png"
-  ]
  }
 }

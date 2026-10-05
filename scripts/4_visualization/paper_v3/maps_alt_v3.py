@@ -111,13 +111,9 @@ def register_pretendard():
 
 
 def use_medium(medium):
-    if medium == "slide":
-        register_pretendard()
+    """v4 토큰: 두 매체 모두 FreeSans Regular(한글은 Pretendard Regular 로 대체), 선은 lines.paper·lines.slide."""
     S.use_v3(medium)
-    if medium == "paper":
-        S.mathtext_liberation()
-    else:
-        matplotlib.rcParams["font.weight"] = "medium"
+    S.mathtext_liberation()
 
 
 class Med:
@@ -125,14 +121,19 @@ class Med:
 
     def __init__(self, medium):
         self.paper = medium == "paper"
-        self.fs = 7.0 if self.paper else 16.0           # 눈금, 제목, 열쇠
-        self.fs_lab = 7.0 if self.paper else 16.0       # 색 막대 라벨(슬라이드 16 pt: 12.0 in 폭 4패널에서 가장 긴 라벨이 패널 폭 안)
-        self.fs_small = 7.0 if self.paper else 14.0     # 회색 부가 글
-        self.lw = 1.0 if self.paper else 1.5
-        self.lw_scale = 1.5 if self.paper else 3.0
+        F, Lp, Ls = S.TOK["font"], S.TOK["lines"]["paper"], S.TOK["lines"]["slide"]
+        self.fs = F["paper"]["text_pt"] if self.paper else F["slide"]["tick_pt"]                # 눈금, 열쇠, 축척(v4: 7 / 12 pt)
+        self.fs_head = F["paper"]["text_pt"] if self.paper else F["slide"]["direct_label_pt"]   # 패널 제목(7 / 13 pt)
+        self.fs_lab = F["paper"]["text_pt"] if self.paper else F["slide"]["axis_label_pt"]     # 색 막대 라벨(7 / 14 pt)
+        self.fs_small = F["paper"]["text_pt"] if self.paper else F["slide"]["tick_pt"]         # 회색 부가 글(7 / 12 pt)
+        self.fs_letter = F["paper"]["panel_letter_pt"] if self.paper else F["slide"]["panel_letter_pt"]   # 패널 문자 굵게(8 / 14 pt)
+        self.lw = (Lp if self.paper else Ls)["axis_pt"]                  # 틀, 색 막대 테두리, 눈금(0.6 / 1.0 pt)
+        self.lw_coast = (Lp if self.paper else Ls)["map_coast_pt"]       # 해안선(0.5 / 0.8 pt)
+        self.lw_grat = (Lp if self.paper else Ls)["graticule_pt"]        # 경위선(0.4 / 0.6 pt)
+        self.lw_scale = (Lp if self.paper else Ls)["data_pt"]            # 축척 막대(1.2 / 2.2 pt)
         self.dot = 0.9 if self.paper else 5.0           # 라벨 점 면적(pt²)
         self.cbar = 2.5 if self.paper else 4.0          # 색 막대 두께(mm)
-        self.tick_len = 3.0 if self.paper else 6.0
+        self.tick_len = (Lp if self.paper else Ls)["tick_len_pt"]
 
 
 # ================================================================ 자료
@@ -327,7 +328,7 @@ def base_map(ax, d, ext, M, coast=True):
     ne = ne_layers(d["key"])
     ax.add_geometries(ne["land"], crs=PC, facecolor=LAND, edgecolor="none", zorder=0)
     if coast:
-        ax.add_geometries(ne["coastline"], crs=PC, facecolor="none", edgecolor=COAST, linewidth=M.lw, zorder=4)
+        ax.add_geometries(ne["coastline"], crs=PC, facecolor="none", edgecolor=COAST, linewidth=M.lw_coast, zorder=4)
     ax.spines["geo"].set_linewidth(M.lw)
     ax.spines["geo"].set_edgecolor("#000000")
 
@@ -338,7 +339,7 @@ def graticule(ax, xlocs, ylocs, M, left=False, bottom=False):
         lab["left"] = "y"
     if bottom:
         lab["bottom"] = "x"
-    gl = ax.gridlines(crs=PC, draw_labels=lab if lab else False, linewidth=M.lw, color=GRAT, xlocs=mticker.FixedLocator(xlocs),
+    gl = ax.gridlines(crs=PC, draw_labels=lab if lab else False, linewidth=M.lw_grat, color=GRAT, xlocs=mticker.FixedLocator(xlocs),
                       ylocs=mticker.FixedLocator(ylocs), x_inline=False, y_inline=False, zorder=3)
     if lab:
         gl.rotate_labels = False
@@ -429,7 +430,7 @@ def location_inset(fig, rect, box, M):
                       crs=PC, facecolor="#d0d0d0", edgecolor="none")
     lon = np.r_[np.linspace(box["lon0"], box["lon1"], 30), np.linspace(box["lon1"], box["lon0"], 30), box["lon0"]]
     lat = np.r_[np.full(30, box["lat0"]), np.full(30, box["lat1"]), box["lat0"]]
-    ia.plot(lon, lat, color="#000000", lw=M.lw, transform=PC)
+    ia.plot(lon, lat, color="#000000", lw=M.lw_coast, transform=PC)
     ia.spines["geo"].set_linewidth(M.lw)
     return ia
 
@@ -547,9 +548,9 @@ def nodata_label_legend(ax_or_fig, M, loc, ncol=1, dots=True, bbox=None, small=F
 
 def letter(fig, x_mm, y_mm, k, M, title=None):
     W, H = fig.get_size_inches() * 25.4
-    fig.text(x_mm / W, 1 - y_mm / H, k, fontsize=M.fs, fontweight="bold", ha="left", va="bottom")
+    fig.text(x_mm / W, 1 - y_mm / H, k, fontsize=M.fs_letter, fontweight="bold", ha="left", va="bottom")
     if title:
-        fig.text((x_mm + (2.6 if M.paper else 5.5)) / W, 1 - y_mm / H, title, fontsize=M.fs, ha="left", va="bottom")
+        fig.text((x_mm + (3.0 if M.paper else 5.5)) / W, 1 - y_mm / H, title, fontsize=M.fs_head, ha="left", va="bottom")
 
 
 # ================================================================ 지도 그림

@@ -67,10 +67,11 @@ E_REGIONS = [("Canada|r", "Canada"), ("Lena|r", "Lena Delta"), ("Alaska|r", "Ala
 F_ROWS = [("head", "Ten labels"), ("Lena|x", 10), ("Canada|x", 10), ("Russia_W|x", 10), ("Russia_E|x", 10), ("Alaska|x", 10),
           ("head", "Forty labels"), ("Lena|x", 40), ("Canada|x", 40), ("Alaska|x", 40)]
 STRAT = {   # 그림 짧은 이름과 선 모양(지침 6.5: 검정은 배치 전략 역할 하나, 방법 색 없음)
-    "S1": dict(name="Random", color=S.INK, dashes=None),
-    "S2": dict(name="Block stratified", color=S.INK, dashes=None),
-    "S4": dict(name="Covariate spread", color=S.INK, dashes=(3.0, 1.5)),
-    "S6": dict(name="Variance-based active", color=S.INK_AUX, dashes=(1.2, 1.4)),
+    # v4 토큰 color.placement: 무작위 진회색, 블록 층화 청색, 공변량 분산(워크플로가 고른 배치) 주홍, 분산 기반 능동 분홍
+    "S1": dict(name="Random", color=S.PLACEMENT["Random"], dashes=None),
+    "S2": dict(name="Block stratified", color=S.PLACEMENT["Block stratified"], dashes=None),
+    "S4": dict(name="Covariate spread", color=S.PLACEMENT["Covariate spread"], dashes=(3.0, 1.5)),
+    "S6": dict(name="Variance-based active", color=S.PLACEMENT["Variance-based active"], dashes=(1.2, 1.4)),
 }
 MAP_STRATS = ["S1", "S2", "S4", "S6"]
 E_STRATS = ["S2", "S4", "S6"]
@@ -430,7 +431,8 @@ def draw_maps(fig, T, proj, ext, geoms):
         c = cells[cells.code == s]
         ax.plot(c.lon.values, c.lat.values, "o", ms=2.0, color=S.BASEMAP["candidate"], mew=0, transform=pc, zorder=2)[0].set_rasterized(True)
         z = zones[(zones.code == s) & (zones.n_selected > 0)].sort_values("n_selected", ascending=False)
-        ax.scatter(z.lon.values, z.lat.values, s=_circle_pts(z.n_selected.values) ** 2, facecolor=(0, 0, 0, 0.35), edgecolor=S.INK,
+        _rgb = matplotlib.colors.to_rgb(STRAT[s]["color"])                  # v4: 지점 원은 그 전략의 색(채움 alpha 0.35, 테두리 같은 색)
+        ax.scatter(z.lon.values, z.lat.values, s=_circle_pts(z.n_selected.values) ** 2, facecolor=(*_rgb, 0.35), edgecolor=STRAT[s]["color"],
                    linewidth=S.LW["marker_edge_open"], transform=pc, zorder=3)
         _ftext(fig, x0 + L["map_w"] / 2, L["map_y"] - 0.7, STRAT[s]["name"], ha="center", va="bottom").set_gid("category")
         S.panel_letter(fig, x0, 0.0, "abcd"[j])
@@ -492,7 +494,8 @@ def map_furniture(fig, ax, proj, ext, mm_to_m, geoms):
         dmm = CIRCLE_MM_PER_SQRT * np.sqrt(v)
         cx += max(dmm, 1.0) / 2 * mm_to_m
         cy = ky2 + dmm / 2 * mm_to_m          # 아래끝 정렬
-        ax.scatter([cx], [cy], s=_circle_pts(v) ** 2, facecolor=(0, 0, 0, 0.35), edgecolor=S.INK, linewidth=S.LW["marker_edge_open"],
+        _rgb = matplotlib.colors.to_rgb(STRAT["S1"]["color"])                # 크기 열쇠는 a(무작위)의 색
+        ax.scatter([cx], [cy], s=_circle_pts(v) ** 2, facecolor=(*_rgb, 0.35), edgecolor=STRAT["S1"]["color"], linewidth=S.LW["marker_edge_open"],
                    transform=proj, zorder=5)
         cx += max(dmm, 1.0) / 2 * mm_to_m + 0.5 * mm_to_m
         t = ax.text(cx, ky2, str(v), ha="left", va="bottom", fontsize=S.FONT_PT, transform=proj, zorder=5)
@@ -653,7 +656,7 @@ def draw(T, medium="paper"):
     eaxes, offs = draw_budget(fig, T, L["ax_top"])
     strategy_key(fig, eaxes[1])
     ci_key(fig, eaxes[2])
-    direction_marker(fig, eaxes[0])
+    # v4 토큰: 화살촉 방향 표지를 쓰지 않는다(direction_marker 는 남겨 두되 부르지 않는다)
     fax = draw_transfer(fig, T, L["ax_top"])
     S.panel_letter(fig, 0.0, L["letter2_y"], "e")
     S.panel_letter(fig, L["f_slot"], L["letter2_y"], "f")

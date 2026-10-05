@@ -1,21 +1,21 @@
-덱 전용 차트 수치 대조 2026-10-04 21:26  일치 47  불일치 0
+덱 전용 차트 수치 대조 2026-10-05 13:55  일치 44  불일치 3
 스펙 deck/deck_spec_paper_report.json 의 numbers 와 원천 CSV(다시 열어 계산)의 대조. 허용 오차 0.005(반올림 두 자리)
 
-[OK] S03 등록부 행 수(스펙 '47 묶음(등록부 64행)')
+[MISMATCH] S03 등록부 행 수(스펙 '47 묶음(등록부 64행)')
     spec: [64]
-    csv : 64.0000
+    csv : 66.0000
     from: paper/registry/experiments.csv 행 수
 [OK] S03 H0 25행: done 21, superseded 3, discarded 1
     spec: [25, 21, 3, 1]
     csv : 25.0000, 21.0000, 3.0000, 1.0000
     from: experiments.csv phase, status 첫 낱말
-[OK] S03 T 8행 done, W 12행(done 11, not run 1), X 10행 planned
+[MISMATCH] S03 T 8행 done, W 12행(done 11, not run 1), X 10행 planned
     spec: [8, 8, 12, 11, 1, 10, 10]
-    csv : 8.0000, 8.0000, 12.0000, 11.0000, 1.0000, 10.0000, 10.0000
+    csv : 8.0000, 8.0000, 12.0000, 11.0000, 1.0000, 12.0000, 3.0000
     from: experiments.csv
-[OK] S03 paper_use main 행 17
+[MISMATCH] S03 paper_use main 행 17
     spec: [17]
-    csv : 17.0000
+    csv : 16.0000
     from: experiments.csv paper_use
 [OK] S06 17,423 / 17,572 / 17,572 / 18,088
     spec: [17423, 17572, 17572, 18088]

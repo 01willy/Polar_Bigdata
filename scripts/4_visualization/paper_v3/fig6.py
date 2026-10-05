@@ -148,11 +148,20 @@ FOREST_XLIM, FOREST_XTICKS = (-3.6, 7.6), (-2, 0, 2, 4, 6)
 # 기존 ALT 지도 묶음(그림 명세 8.3·12절 'Existing ALT maps', 계획 2.7 XG-1 행, 결과 8.7). 판정 표 xg_tests.csv 의 주 열(5 km 블록 마스크).
 # (block, key, variant, 행 이름): key = 가설 ID. Wei v2 는 레나델타·캐나다 2지역 풀이라 행 이름에 적는다
 FOREST_XG = ("Existing ALT maps", [("xg", "XG-1c", "solid", "ESA CCI v5"), ("xg", "XG-1w", "solid", "Wei v2, two regions")])
+# v4 토큰: 포레스트 행 색(행 이름 → 색). 직접 ML 학습기는 직접 ML 색, 물리 입력 CatBoost 는 물리 입력 ML 색, 기준선과 제품은 각자의 색
+FOREST_COLOR = {"Year-matched Stefan": S.METHOD["year_matched_stefan"]["color"], "Anchor ensemble": S.METHOD["stefan_cci_anchor"]["color"],
+                "CatBoost, physics inputs": S.METHOD["physics_input"]["color"],
+                "ESA CCI v5": S.PRODUCT["CCI"]["color"], "Wei v2, two regions": S.PRODUCT["Wei"]["color"]}
+for _g, _items in FOREST:
+    for *_x, _lab in _items:
+        FOREST_COLOR.setdefault(_lab, S.METHOD["direct_ml"]["color"])
 XG_POOL_NAME = {"Lena|x,Canada|x,Russia_W|x,Russia_E|x": "four-region stratified mean", "Lena|x,Canada|x": "two-region mean (Lena Delta, Canada)"}
 
 # ---------------------------------------------------------------- d, e(그림 명세 8.3)
 D_METHODS = [("const", "Constant"), ("phys", "Physics prior"), ("nflow", "Normalizing flow"),
              ("nflow#placebo", "Permuted flow"), ("cbq", "CatBoost quantile")]
+D_COLOR = {m: S.INTERVALS[name] for m, name in D_METHODS}                  # v4 토큰 color.intervals(구간 방법마다 색)
+E_COLOR = S.INTERVALS["Conformal"]
 D_REGIONS = ["Lena", "Canada", "Russia_W", "Russia_E"]
 E_REGIONS = ["Alaska", "Canada", "Lena"]
 COV_YLIM, COV_YTICKS = (0.70, 1.00), (0.7, 0.8, 0.9, 1.0)
@@ -203,7 +212,8 @@ FOREST_SOURCE = {"lgw_bundle.csv": LGW_BUNDLE, "lgx_tests.csv": LGX_TESTS, "lgt_
 
 
 # ================================================================ 공용
-def check_resources(min_gb=30.0, max_load=40.0, wait_s=60, max_wait_s=3600):
+def check_resources(min_gb=None, max_load=40.0, wait_s=60, max_wait_s=3600):
+    min_gb = float(os.environ.get("PAPER_MIN_AVAIL_GB", "30")) if min_gb is None else min_gb   # 기본 30 GB(작업 지시), 조정 담당이 정한 값은 환경 변수로
     """공유 서버 자원 확인(작업 지시). 가용 메모리 < 30 GB 또는 1분 부하 > 40 이면 기다린다."""
     t0 = time.time()
     while True:
@@ -808,20 +818,13 @@ def build(medium: str = "paper"):
     ticks = np.linspace(-vmax, vmax, 5)
     cb.set_ticks(ticks)
     cb.set_ticklabels([S.fmt_int(v) for v in ticks])
-    cb.outline.set_linewidth(1.0)
+    cb.outline.set_linewidth(S.LW["axis"])
     cb.outline.set_edgecolor(S.INK)
-    cb.dividers.set_linewidth(1.0)                      # 비어 있는 구분선 집합의 기본 0.5 pt 를 1.0 pt 규칙에 맞춘다
+    cb.dividers.set_linewidth(S.LW["axis"])
     cax.tick_params(width=S.LW["tick"], length=S.TICK_LEN_PT, pad=1.5)
     cax.xaxis.set_minor_locator(NullLocator())
-    cb.set_label("Error change vs source Stefan (cm)", labelpad=1.5)
-    # 방향 표지 1개(그림 전체, R-11): 컬러바 음의 끝 왼쪽에 "Lower error" 와 왼쪽 화살표 하나
-    t_dir = ov.text(cx - 2.0, cy + ch / 2, "Lower error", ha="right", va="center", fontsize=S.FONT_PT, color=S.INK_AUX)
-    t_dir.set_gid("direction_label")
-    fig.canvas.draw()
-    bb = t_dir.get_window_extent().transformed(ov.transData.inverted())
-    x_left = min(bb.x0, bb.x1)
-    ov.annotate("", xy=(x_left - 5.8, cy + ch / 2), xytext=(x_left - 0.8, cy + ch / 2),
-                arrowprops=dict(arrowstyle="-|>,head_length=0.35,head_width=0.18", lw=1.0, color=S.INK_AUX, shrinkA=0, shrinkB=0))
+    # v4 토큰: 방향 표지(화살표)를 쓰지 않고 방향은 라벨 괄호 안에 적는다
+    cb.set_label("Error change vs source Stefan (cm; negative = lower error)", labelpad=1.5)
 
     # ------------------------------------------------ c 포레스트
     xc, yc, wc, hc = SLOT["c"]
@@ -852,18 +855,18 @@ def build(medium: str = "paper"):
         if min(r.ci_lo, r.ci_lo_beq) > x_hi:
             # 두 가중 CI 가 모두 축 오른쪽 밖(ESA CCI v5): 다른 행을 줄이지 않도록 축을 넓히지 않고, 축 끝 화살표와 점 추정값을 적는다
             # (덱 부록 3 은 축을 끊었다. 이 패널은 c 슬롯 폭 안에 둘째 축을 둘 자리가 없어 명세 요청의 다른 갈래인 가장자리 화살표를 썼다)
-            L_arr = mm_to_data_x(axc, 3.2)
-            axc.annotate("", xy=(x_hi, yy), xytext=(x_hi - L_arr, yy), annotation_clip=False,
-                         arrowprops=dict(arrowstyle="-|>,head_length=0.35,head_width=0.18", lw=1.0, color=S.INK, shrinkA=0, shrinkB=0))
-            t = axc.text(x_hi - L_arr - mm_to_data_x(axc, 0.8), yy, f"+{r.delta:.1f}", ha="right", va="center", fontsize=S.FONT_PT, zorder=6)
+            # v4 토큰: 축 밖 값은 화살표 없이 축 끝에 값을 숫자로 적는다(행 색)
+            t = axc.text(x_hi, yy, f"+{r.delta:.1f}", ha="right", va="center", fontsize=S.FONT_PT, zorder=6,
+                         color=FOREST_COLOR.get(r.row_label, S.INK))
             t.set_gid("offaxis")
             offaxis.append((r.row_label, t))
             continue
-        axc.plot([r.ci_lo, r.ci_hi], [yy, yy], color=S.INK, lw=S.LW["ci_forest_cell"], solid_capstyle="round", zorder=3,
+        col = FOREST_COLOR.get(r.row_label, S.INK)                         # v4: 행마다 방법·제품 색
+        axc.plot([r.ci_lo, r.ci_hi], [yy, yy], color=col, lw=S.LW["ci_forest_cell"], solid_capstyle="round", zorder=3,
                  gid=f"data|c|cell|{r.row_label}")
-        axc.plot([r.ci_lo_beq, r.ci_hi_beq], [yy + dy, yy + dy], color=S.INK, lw=S.LW["ci_forest_block"], solid_capstyle="butt",
+        axc.plot([r.ci_lo_beq, r.ci_hi_beq], [yy + dy, yy + dy], color=col, lw=S.LW["ci_forest_block"], solid_capstyle="butt",
                  zorder=3, gid=f"data|c|block|{r.row_label}")
-        axc.plot([r.delta], [yy], "o", ms=S.MS["main"], color=S.INK, mew=0, zorder=4, gid=f"data|c|point|{r.row_label}")
+        axc.plot([r.delta], [yy], "o", ms=S.MS["main"], color=col, mew=0, zorder=4, gid=f"data|c|point|{r.row_label}")
     axc.yaxis.set_major_locator(FixedLocator(ypos))
     axc.set_yticklabels(ylab)
     axc.tick_params(axis="y", length=0, pad=2.0)
@@ -903,17 +906,17 @@ def build(medium: str = "paper"):
     pool = B[B.kind == "mean4"].set_index("method")
     reg = B[B.kind == "region"]
     for _, r in reg.iterrows():
-        axd.plot([r.wid10], [r.cov10], S.REGION_MARKER[r.target], ms=S.MS["region_point"], color=S.INK, alpha=0.5, mew=0, zorder=2,
+        axd.plot([r.wid10], [r.cov10], S.REGION_MARKER[r.target], ms=S.MS["region_point"], color=D_COLOR[r.method], alpha=0.5, mew=0, zorder=2,
                  gid=f"data|d|region|{r.method}|{r.target}")
     for m, _lab in D_METHODS:
         r = pool.loc[m]
-        axd.plot([r.wid10_lo1, r.wid10_hi1], [r.cov10, r.cov10], color=S.INK, lw=1.0, zorder=3, solid_capstyle="butt", gid=f"data|d|cix|{m}")
-        axd.plot([r.wid10, r.wid10], [r.cov10_lo1, r.cov10_hi1], color=S.INK, lw=1.0, zorder=3, solid_capstyle="butt", gid=f"data|d|ciy|{m}")
-        axd.plot([r.wid10], [r.cov10], "o", ms=S.MS["main"], color=S.INK, mew=0, zorder=4, gid=f"data|d|mean|{m}")
+        axd.plot([r.wid10_lo1, r.wid10_hi1], [r.cov10, r.cov10], color=D_COLOR[m], lw=S.LW["main"], zorder=3, solid_capstyle="butt", gid=f"data|d|cix|{m}")
+        axd.plot([r.wid10, r.wid10], [r.cov10_lo1, r.cov10_hi1], color=D_COLOR[m], lw=S.LW["main"], zorder=3, solid_capstyle="butt", gid=f"data|d|ciy|{m}")
+        axd.plot([r.wid10], [r.cov10], "o", ms=S.MS["main"], color=D_COLOR[m], mew=0, zorder=4, gid=f"data|d|mean|{m}")
     lab = dict(D_METHODS)
     d_texts = {}
     for m, (tx, ty, ha) in D_LABEL_POS.items():
-        t = axd.text(tx, ty, lab[m], ha=ha, va="center", fontsize=S.FONT_PT, zorder=6)
+        t = axd.text(tx, ty, lab[m], ha=ha, va="center", fontsize=S.FONT_PT, zorder=6, color=D_COLOR[m])   # v4: 직접 라벨은 방법 색
         t.set_gid("direct_label")
         d_texts[m] = t
     fig.canvas.draw()
@@ -940,7 +943,7 @@ def build(medium: str = "paper"):
     ky = yd + 1.3
     key_texts = []
     for rname in KEY_REGIONS:
-        ov.plot([kx + 0.62], [ky], S.REGION_MARKER[rname], ms=S.MS["main"], color=S.INK, mew=0, gid="key|region")
+        ov.plot([kx + 0.62], [ky], S.REGION_MARKER[rname], ms=S.MS["main"], color=S.INK_AUX, mew=0, gid="key|region")
         t = ov.text(kx + 1.7, ky, S.REGION_NAME[rname], ha="left", va="center", fontsize=S.FONT_PT)
         t.set_gid("key_label")
         key_texts.append(t)
@@ -958,7 +961,7 @@ def build(medium: str = "paper"):
     axe.set_xlim(*E_XLIM)
     axe.set_ylim(*COV_YLIM)
     axe.axhspan(*E_BAND, color=S.EQUIV_BAND, lw=0, zorder=0.5).set_gid("band|e|nominal")
-    purple = S.METHOD["anchor_residual"]["color"]
+    purple = E_COLOR                                    # v4 토큰 color.intervals["Conformal"](잔차 모형의 conformal 구간)
     for _, r in E.iterrows():
         mk = S.REGION_MARKER[r.target]
         filled = int(r.n) == 40
@@ -1249,7 +1252,7 @@ def source_checks(data, info, geom) -> list[dict]:
     out.append(_chk("XG-1c(CCI v5, 주 4지역) 두 마스크 판정 '열세', Holm p ≤ 0.05, 5 km·25 km 값 같음(학습 지점 없음) → 설명문 'higher error (+23.79 cm; 95% CI 15.34 to 30.16'",
                     c5.verdict4 == "열세" and c5.verdict4_blk25 == "열세" and max(c5.p_holm_blk5, c5.p_holm_blk25) <= 0.05
                     and abs(c5.delta - c5.delta_blk25) < 1e-9 and c5.pool_name == "four-region stratified mean"
-                    and f"higher error (+{c5.delta:.2f} cm; 95% CI {c5.ci_lo:.2f} to {c5.ci_hi:.2f}" in leg,
+                    and f"higher error (+{c5.delta:.2f} cm at axis end; 95% CI {c5.ci_lo:.2f} to {c5.ci_hi:.2f}" in leg,
                     f"Δ {c5.delta:.4f} [{c5.ci_lo:.4f}, {c5.ci_hi:.4f}] / 블록 {c5.delta_beq:.4f} [{c5.ci_lo_beq:.4f}, {c5.ci_hi_beq:.4f}]; Holm p {c5.p_holm_blk5}/{c5.p_holm_blk25};"
                     f" {c5.blind}; {c5.deviation}; {c5.design}"))
     out.append(_chk("XG-1w(Wei v2, 레나·캐나다) 두 마스크 판정 '미결정' → 설명문 'difference (Lena Delta and Canada; 47% of cells gap-filled) was not resolved'",
@@ -1307,7 +1310,7 @@ def legend_checks() -> tuple[list[dict], dict]:
     meta["xg_sentence_words"] = n_xg
     out.append(_chk("XG 문장(Existing ALT maps … resolved.) 50단어 이하(그림 명세 13절)", 0 < n_xg <= 50, f"{n_xg}단어"))
     need = ["10,000 resamples", "±0.5 cm", "70° N", "Natural Earth", "ESA CCI", "Cartopy", "post hoc", "split-independence", "17 targets", "30 targets",
-            "Existing ALT maps", "5 km of product training sites", "arrow"]
+            "Existing ALT maps", "5 km of product training sites", "at axis end"]
     miss = [s for s in need if s not in legend]
     out.append(_chk("설명문 필수 요소(재표집·띠·축척 위도·자료 출처·소프트웨어·사후 서술·의존 표지·대상 수)", not miss, f"빠짐 {miss or '없음'}"))
     color_words = [w for w in ("blue", "brown", "purple", "grey ", "gray ", "black", "triangle", "square", "diamond", "circle") if w in legend.lower()]
@@ -1540,7 +1543,7 @@ def source_data_table(data, info, geom) -> pd.DataFrame:
             if r.fill_frac_blk5 >= 0.0005:
                 note += f"; product value missing for {100 * r.fill_frac_blk5:.1f}% of scored cells, gap-filled"
         if r.row_label in off:
-            note += "; beyond the x axis in the figure (edge arrow with the point estimate)"
+            note += "; beyond the x axis in the figure (point estimate printed at the axis end)"
         rows.append(dict(panel="c", element="forest row", drawn_in="", method=r.row_label, label=r.group,
                          region=r.pool_name if xg else "four-region stratified mean",
                          target_kind="", latitude="", longitude="", label_cells="", n_labels=0, x_name="error change vs source Stefan (cm)",
@@ -1684,7 +1687,8 @@ def values_report(summary: dict, checks: list[dict], plotted: list[dict], data, 
           " f6_cbar 상자 유효). 덱 자르기 f6c 는 아래쪽이 늘어난 만큼 상자를 늘려야 한다.", ""]
     L += ["[6] 색각·흑백(F-09)",
           "- 연속 색표 cmc.broc(Crameri, 색각 이상에서도 단조로운 명도) ±vmax 공유, 0 중심. 대상 원 테두리 검정, 지시선 #737373, 영구동토 바탕 #d0d0d0·#e6e6e6, 육지 #f4f4f4.",
-          "- 방법 색은 e 의 Anchor + residual ML #9a7bc9 하나뿐이다(흰 바탕 대비 " + f"{summary['purple_contrast']:.2f}" + ":1, 기준 3:1 이상). c·d 의 자료 표지는 검정이다.",
+          "- v4 토큰 색: c 는 행마다 방법·제품 색, d 는 구간 방법마다 color.intervals, e 는 conformal 색 " + E_COLOR + "(흰 바탕 대비 "
+          + f"{summary['purple_contrast']:.2f}" + ":1). 지도 색표는 그대로다.",
           "- 흑백 렌더(사람 판정): a·b 는 broc 의 명도가 0 에서 가장 밝고 양끝에서 어두워 부호를 명도만으로 구분할 수 없다. 부호는 컬러바 위치와 설명문의 대상 수로 읽는다."
           " e 의 40·160 라벨은 채움·빈 마커로 구분된다.", ""]
     L += ["[7] 설명문(Fig6_legend.md, 손으로 작성)",
@@ -1752,7 +1756,7 @@ def main():
     from polar import cvd
     summary = dict(audit=aud, n_numbers=n_num, n_bad=n_bad, overlaps=ovl, text_overlaps=tov, clearance=clr, circle_text=circ, tick_spacing=tsp,
                    extent=ext, pdf=pa, fonts=fonts,
-                   pdfimages=img_lines, cartopy=cartopy.__version__, purple_contrast=float(cvd.contrast(S.METHOD["anchor_residual"]["color"])),
+                   pdfimages=img_lines, cartopy=cartopy.__version__, purple_contrast=float(cvd.contrast(E_COLOR)),
                    paths=[str(p) for p in paths] + [str(sd_path)])
     checks = source_checks(data, info, geom)
     lchk, lmeta = legend_checks()

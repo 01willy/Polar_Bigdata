@@ -92,6 +92,7 @@ DIRECT_LABEL = ("Russia_C~lgd", "NAtlantic~lic")   # b 에서 직접 라벨을 �
 KEY_REGIONS = ("Alaska", "Canada", "Lena", "Russia_W", "Russia_E")
 # b 의 대상별 CI 막대: 27개 막대가 x 5–15 cm 에 몰려 검정이면 점을 가린다. 굵기 대신 색을 옅게 한다(지침 2.3, R-07).
 CI_GREY_B = "#a0a0a0"
+COL_W = S.METHOD["target_cv_selection"]["color"]   # v4: b·c 의 대상 라벨 교차검증 선정 색(#A33E0B)
 # 모양별 크기 보정: 같은 ms 에서 삼각형·십자는 원보다 작게, 사각·마름모는 크게 보인다(면적을 원에 맞춘 [판단] 값)
 MS_SCALE = {"o": 1.0, "s": 0.9, "D": 0.85, "^": 1.15, "v": 1.15, "P": 1.25, "p": 1.05}
 DODGE_CM, DODGE_MM = 0.15, 1.6        # c: 같은 행 지역 점이 0.15 cm 안이면 1.6 mm 위 단으로 올린다(1.1 mm 는 삼각형끼리 닿았다)
@@ -115,10 +116,13 @@ def disp(t: str) -> str:
 
 # ---------------------------------------------------------------- 매체별 크기(지침 2.3, 5.3, slide_archetypes 1.3)
 TOK = {
-    "paper": dict(lw_main=1.25, lw_aux=1.0, lw_cell=2.0, lw_block=1.0, lw_ref=1.0, ms=3.5, ms_reg=2.5, ms_tri=3.0,
-                  mew_open=1.0, off_ci=0.8, off_series=0.8, off_region=1.3, arrow_ms=6.0, key_len=3.0, scale=1.0),
-    "slide": dict(lw_main=3.0, lw_aux=2.0, lw_cell=4.0, lw_block=2.0, lw_ref=2.0, ms=8.0, ms_reg=6.0, ms_tri=7.0,
-                  mew_open=2.0, off_ci=1.8, off_series=1.8, off_region=3.0, arrow_ms=13.0, key_len=7.0, scale=16 / 7),
+    # v4 토큰(design/style_tokens_v4.json lines.paper / lines.slide)
+    "paper": dict(lw_main=S.LW["main"], lw_aux=S.LW["aux"], lw_cell=S.LW["ci_forest_cell"], lw_block=S.LW["ci_forest_block"], lw_ref=S.LW["ref"],
+                  ms=S.MS["main"], ms_reg=S.MS["region_point"], ms_tri=3.0,
+                  mew_open=S.LW["aux"], off_ci=0.8, off_series=0.8, off_region=1.3, arrow_ms=6.0, key_len=3.0, scale=1.0),
+    "slide": dict(lw_main=S.LW_SLIDE["main"], lw_aux=S.LW_SLIDE["aux"], lw_cell=S.LW_SLIDE["ci_forest_cell"], lw_block=S.LW_SLIDE["ci_forest_block"],
+                  lw_ref=S.LW_SLIDE["ref"], ms=S.MS_SLIDE["main"], ms_reg=S.MS_SLIDE["region_point"], ms_tri=7.0,
+                  mew_open=S.LW_SLIDE["aux"], off_ci=1.8, off_series=1.8, off_region=3.0, arrow_ms=13.0, key_len=7.0, scale=16 / 7),
 }
 
 # ---------------------------------------------------------------- 배치(mm, 그림 왼쪽 위 원점, 명세 6.2 슬롯 안)
@@ -348,10 +352,9 @@ def draw_a(ax, D, T):
             ax.plot([r.n_star], [y], ls="none", marker="o", ms=T["ms"], mfc=col, mec=col, mew=0, transform=tr,
                     zorder=4)
         else:
-            ax.annotate("", xy=(XLIM_A[1], y), xytext=(float(r.n_max), y), xycoords=tr, textcoords=tr,
-                        annotation_clip=False, zorder=3,
-                        arrowprops=dict(arrowstyle="-|>", color=col, lw=T["lw_aux"], shrinkA=0, shrinkB=0,
-                                        mutation_scale=T["arrow_ms"], joinstyle="miter"))
+            # v4 토큰: 화살촉 없이, 시험한 최대 라벨 수에서 축 끝까지 파선(도달하지 않음)
+            ax.plot([float(r.n_max), XLIM_A[1]], [y, y], color=col, lw=T["lw_aux"], ls=(0, (2.0, 1.4)), transform=tr,
+                    zorder=3, clip_on=False, gid="nstar_censored")
 
     # 직접 라벨 3개(각 1회). 위치는 자료에서 고른다.
     rec = A[A.contrast == "P1 − P0"].set_index("row")
@@ -386,23 +389,28 @@ def draw_b(ax, D, T):
         if pd.notna(r.d_p0_lo):
             ci = [r.d_p0_lo, r.d_p0_hi, r.d_p0_beq_lo, r.d_p0_beq_hi]
             assert all(YLIM_B[0] < v < YLIM_B[1] for v in ci), f"b: CI 가 축 밖 {r.target}"
-            ax.plot([x, x], [r.d_p0_lo, r.d_p0_hi], color=CI_GREY_B, lw=T["lw_cell"], solid_capstyle="round",
+            ax.plot([x, x], [r.d_p0_lo, r.d_p0_hi], color=COL_W, alpha=0.35, lw=T["lw_cell"], solid_capstyle="round",
                     zorder=2)
-            ax.plot([x, x], [r.d_p0_beq_lo, r.d_p0_beq_hi], color=CI_GREY_B, lw=T["lw_block"],
+            ax.plot([x, x], [r.d_p0_beq_lo, r.d_p0_beq_hi], color=COL_W, alpha=0.35, lw=T["lw_block"],
                     solid_capstyle="butt", transform=off(ax, T["off_ci"], 0.0), zorder=2)
         h = hollow(r.tname)
         mk = region_marker(r.tname)
-        ax.plot([x], [r.d_p0], ls="none", marker=mk, ms=msz(mk, T["ms"]), mfc="white" if h else INK,
-                mec=INK, mew=T["mew_open"] if h else 0.0, zorder=4)
+        ax.plot([x], [r.d_p0], ls="none", marker=mk, ms=msz(mk, T["ms"]), mfc="white" if h else COL_W,
+                mec=COL_W, mew=T["mew_open"] if h else 0.0, zorder=4)
 
     # 축 밖 대상(티베트): 오른쪽 아래 모서리 삼각 표지 1개(명세 6.3 b). 값은 설명문.
     out = B[~inx]
     assert len(out) == 1 and out.iloc[0].tname == "Tibet_LGD", "b: 축 밖 대상은 티베트 하나"
     o = out.iloc[0]
     assert o.diag_abs > XLIM_B[1] and o.d_p0 < YLIM_B[0]
-    fx, fy = ax_frac(ax, 1.3 * s, 1.3 * s)
-    ax.plot([1 - fx], [fy], transform=ax.transAxes, ls="none", marker=(3, 0, -135), ms=T["ms_tri"], mfc=INK,
-            mec=INK, mew=0, clip_on=False, zorder=5, gid="offscale")
+    fx, fy = ax_frac(ax, 1.0 * s, 1.0 * s)                                   # v4: 삼각 표지 대신 축 끝에 y 값을 숫자로
+    x_end = 1 - fx
+    near = B[inx & (B.diag_abs > XLIM_B[1] / 1.6)]                         # 오른쪽 아래 구석 가까운 CI 막대(서부 러시아)와 겹치지 않게 그 왼쪽에
+    if len(near):
+        x_ci = ax.transAxes.inverted().transform(ax.transData.transform((float(near.diag_abs.min()), 0.0)))[0]
+        x_end = min(x_end, x_ci - ax_frac(ax, 1.6 * s, 0.0)[0])
+    ax.text(x_end, fy, S.fmt_num(o.d_p0, 1), transform=ax.transAxes, ha="right", va="bottom", color=COL_W,
+            clip_on=False, zorder=5, gid="offscale")
 
     # 직접 라벨: 열쇠 밖 지역 두 곳
     for t in DIRECT_LABEL:
@@ -426,14 +434,7 @@ def draw_b(ax, D, T):
                 mec=INK, mew=T["mew_open"] if h else 0.0, clip_on=False, zorder=5)
         ax.text(tx, my, name, transform=ax.transAxes, ha="left", va="center")
 
-    # 방향 표지 1개(그림 전체 1개): 왼쪽 위, 아래 방향
-    ax0, ay0 = ax_frac(ax, 2.0 * s, ax.get_position().height * ax.figure.get_size_inches()[1] * 25.4 - 1.6 * s)
-    _, ay1 = ax_frac(ax, 0, ax.get_position().height * ax.figure.get_size_inches()[1] * 25.4 - 8.4 * s)
-    ax.annotate("", xy=(ax0, ay1), xytext=(ax0, ay0), xycoords="axes fraction", textcoords="axes fraction",
-                arrowprops=dict(arrowstyle="-|>", color=AUX, lw=T["lw_aux"], shrinkA=0, shrinkB=0,
-                                mutation_scale=T["arrow_ms"], joinstyle="miter"))
-    tx, _ = ax_frac(ax, 3.3 * s, 0)
-    ax.text(tx, (ay0 + ay1) / 2, "Lower error", transform=ax.transAxes, ha="left", va="center", color=AUX)
+    # 방향 표지: v4 토큰에서 화살촉 주석을 쓰지 않는다
 
 
 # ---------------------------------------------------------------- c
@@ -469,10 +470,10 @@ def draw_c(ax, D, T):
         yt.append(y)
         yl.append(lab)
         m = Cm[Cm.n == n].iloc[0]
-        ax.plot([m.ci_lo, m.ci_hi], [y, y], color=INK, lw=T["lw_cell"], solid_capstyle="round", zorder=3)
-        ax.plot([m.ci_lo_beq, m.ci_hi_beq], [y, y], color=INK, lw=T["lw_block"], solid_capstyle="butt",
+        ax.plot([m.ci_lo, m.ci_hi], [y, y], color=COL_W, lw=T["lw_cell"], solid_capstyle="round", zorder=3)
+        ax.plot([m.ci_lo_beq, m.ci_hi_beq], [y, y], color=COL_W, lw=T["lw_block"], solid_capstyle="butt",
                 transform=off(ax, 0.0, -T["off_ci"]), zorder=3)
-        ax.plot([m.delta], [y], ls="none", marker="o", ms=T["ms"], mfc=INK, mec=INK, mew=0, zorder=4)
+        ax.plot([m.delta], [y], ls="none", marker="o", ms=T["ms"], mfc=COL_W, mec=COL_W, mew=0, zorder=4)
         placed = []                                    # (x, 단) 겹침 피하기
         for _, r in Cr[Cr.n == n].sort_values("delta").iterrows():
             tier = 0
@@ -480,7 +481,7 @@ def draw_c(ax, D, T):
                 tier += 1
             placed.append((r.delta, tier))
             mk = region_marker(r.tname)
-            ax.plot([r.delta], [y], ls="none", marker=mk, ms=msz(mk, T["ms_reg"]), mfc=INK, mec=INK,
+            ax.plot([r.delta], [y], ls="none", marker=mk, ms=msz(mk, T["ms_reg"]), mfc=COL_W, mec=COL_W,
                     mew=0, alpha=0.5, transform=off(ax, 0.0, T["off_region"] + tier * DODGE_MM * T["scale"]),
                     zorder=4)
     ax.yaxis.set_major_locator(FixedLocator(yt))
@@ -560,14 +561,19 @@ def draw_d(axL, axR, D, T, preview=None):
         out = P[~inx]
         assert len(out) == 1 and out.iloc[0].tname == "Tibet_LGD", f"d: 축 밖 대상은 티베트 하나({ycol})"
         o = out.iloc[0]
-        fx, fy = ax_frac(ax, 1.3 * s, 1.3 * s)
-        if o.diag_abs > XLIM_B[1] and o[ycol] < YLIM_D[0]:          # x, y 모두 밖: 오른쪽 아래 모서리(b 와 같은 표지)
-            ax.plot([1 - fx], [fy], transform=ax.transAxes, ls="none", marker=(3, 0, -135), ms=T["ms_tri"],
-                    mfc=INK, mec=INK, mew=0, clip_on=False, zorder=6, gid="offscale")
-        elif o.diag_abs > XLIM_B[1] and YLIM_D[0] <= o[ycol] <= YLIM_D[1]:   # x 만 밖: 오른쪽 끝, 그 y 에서 오른쪽을 가리킴
+        fx, fy = ax_frac(ax, 1.0 * s, 1.0 * s)
+        if o.diag_abs > XLIM_B[1] and o[ycol] < YLIM_D[0]:          # x, y 모두 밖: 오른쪽 아래 모서리에 y 값(v4: 삼각 표지 대신 숫자)
+            x_end = 1 - fx
+            near = P[inx & (P.diag_abs > XLIM_B[1] / 1.6) & (P[ycol] < YLIM_D[0] + 0.35 * (YLIM_D[1] - YLIM_D[0]))]
+            if len(near):                                                   # 구석 가까운 점(서부 러시아)과 겹치지 않게 그 왼쪽에
+                x_pt = ax.transAxes.inverted().transform(ax.transData.transform((float(near.diag_abs.min()), 0.0)))[0]
+                x_end = min(x_end, x_pt - ax_frac(ax, 2.2 * s, 0.0)[0])
+            ax.text(x_end, fy, S.fmt_num(o[ycol], 1), transform=ax.transAxes, ha="right", va="bottom", color=col,
+                    clip_on=False, zorder=6, gid="offscale")
+        elif o.diag_abs > XLIM_B[1] and YLIM_D[0] <= o[ycol] <= YLIM_D[1]:   # x 만 밖: 오른쪽 끝, 그 y 에 x 값
             tr = mtrans.blended_transform_factory(ax.transAxes, ax.transData)
-            ax.plot([1 - fx], [o[ycol]], transform=tr, ls="none", marker=">", ms=T["ms_tri"], mfc=INK, mec=INK,
-                    mew=0, clip_on=False, zorder=6, gid="offscale")
+            ax.text(1 - fx, o[ycol], S.fmt_num(o.diag_abs, 0), transform=tr, ha="right", va="center", color=col,
+                    clip_on=False, zorder=6, gid="offscale")
         else:
             raise AssertionError(f"d: 예상하지 않은 축 밖 위치 {o.diag_abs}, {o[ycol]}")
 
@@ -765,7 +771,8 @@ def legend_md(body: str) -> str:
     return f"# Fig. 4\n\n**{LEGEND_TITLE}** {body}\n"
 
 
-def resource_guard(min_gb=30.0, max_load=40.0, wait_s=60, max_wait_s=1800) -> str:
+def resource_guard(min_gb=None, max_load=40.0, wait_s=60, max_wait_s=1800) -> str:
+    min_gb = float(os.environ.get("PAPER_MIN_AVAIL_GB", "30")) if min_gb is None else min_gb   # 기본 30 GB(작업 지시), 조정 담당이 정한 값은 환경 변수로
     """공유 서버 규칙: 가용 메모리 30 GB 미만이거나 부하 40 초과면 기다린다."""
     t0 = time.time()
     while True:
@@ -810,7 +817,7 @@ def main():
         return
 
     fig = build_paper(D)
-    au = S.audit_v3(fig)
+    au = S.audit_v3(fig, allowed_num_gids=("scale", "sizekey", "offscale"))
     ov = S.text_overlaps(fig)                           # 글자끼리 겹침 0곳(지침 2.2)
     pdf, png = S.save_fig(fig, STEM, S.OUT, formats=("pdf", "png"))
     pa = S.pdf_audit(pdf)

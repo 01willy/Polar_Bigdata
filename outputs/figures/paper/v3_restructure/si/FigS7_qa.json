@@ -1,0 +1,86 @@
+{
+ "stem": "FigS7",
+ "created": "2026-10-05 14:43:24",
+ "size_mm": [
+  170.0,
+  134.0
+ ],
+ "audit_fails": [],
+ "sizes": [
+  7.0,
+  8.0
+ ],
+ "chars": 356,
+ "thin_lines": [],
+ "codes": [],
+ "loose_numbers": [],
+ "text_overlap_pairs": [],
+ "text_outside": [],
+ "pdffonts": {
+  "fonts": [
+   "FreeSans",
+   "FreeSansBold"
+  ],
+  "type3": false,
+  "liberation": false,
+  "ok": true
+ },
+ "pdf_bytes": 300630,
+ "sources": [
+  "data/processed/m1/cv_scheme_comparison.csv",
+  "data/processed/m1/cv_scheme_distances.csv",
+  "data/processed/m1/cv_scheme_comparison_meta.json",
+  "scripts/3_deep_learning/m1_cv_scheme_comparison.py"
+ ],
+ "split_check": {
+  "random_cell": {
+   "n": 13606,
+   "max_abs_diff_km": 0.0,
+   "fold_sizes": [
+    2268,
+    2268,
+    2268,
+    2268,
+    2267,
+    2267
+   ]
+  },
+  "site_0.05": {
+   "n": 13606,
+   "max_abs_diff_km": 0.0,
+   "fold_sizes": [
+    2034,
+    2066,
+    2353,
+    2033,
+    2152,
+    2968
+   ]
+  },
+  "block_0.5": {
+   "n": 13606,
+   "max_abs_diff_km": 0.0,
+   "fold_sizes": [
+    4716,
+    1753,
+    1758,
+    1774,
+    1819,
+    1786
+   ]
+  },
+  "knndm": {
+   "n": 13606,
+   "max_abs_diff_km": 0.0,
+   "fold_sizes": [
+    4723,
+    3483,
+    1965,
+    573,
+    952,
+    1910
+   ],
+   "q_selected": 13
+  }
+ }
+}

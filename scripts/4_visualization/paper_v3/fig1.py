@@ -70,7 +70,20 @@ LON0_A = None                                          # None = 확대도 중심
 SIZE_K = 5.0                                           # 원 면적(pt², 지름²) = SIZE_K × 1 km 위치 수 [판단]
 SIZE_KEY = (1, 10, 50)                                 # 명세 3.3 a 의 크기 열쇠 값
 EDGE_LW = 1.0
-FILL_OBS = (0.0, 0.0, 0.0, 0.35)                       # 관측 위치 = 검정 alpha 0.35(R-18)
+FILL_OBS = (0.0, 0.0, 0.0, 0.35)                       # (v3 판) 관측 위치 = 검정 alpha 0.35(R-18). v4 지역 색 판에서는 쓰지 않는다
+# v4 토큰 color.regions(2026-10-05 조정 지시): a 의 블록 원 = 지역 색. 이 패널은 지역이 주 부호화라 지역 색을 쓴다(덱 M3_data a 와 같은 대응).
+# 테두리는 같은 색상의 어두운 선(채움 RGB × 0.6): 흰 테두리 판과 비교한 결과 작은 원이 줄어 보이지 않고, 밝은 지역 색(레나델타, 러시아 중부)도
+# 회색 영구동토 바탕에서 경계를 갖는다[판단, scratchpad f1a_var/compare.png]. 새 지역(러시아 중부 확충판, 티베트 고원 추가분)은 흰 원 그대로.
+# 토큰에 지역 색이 없는 블록(그린란드 2, 스발바르 1, 스칸디나비아 1)과 원 면적 열쇠는 중립 회색(지역을 뜻하지 않음).
+BLOCK_REGION = {"Alaska": "Alaska", "Canada": "Canada", "Lena": "Lena Delta", "Russia_W": "W Russia", "Russia_E": "E Russia",
+                "Russia_C": "Central Russia", "Tibet": "Tibetan Plateau", "Tibet_LGD": "Tibetan Plateau"}
+REGION_FILL_ALPHA = 0.9
+REGION_EDGE = "darker"
+REGION_EDGE_LW = 0.5
+REGION_EDGE_DARK = 0.6                                 # REGION_EDGE == "darker" 일 때 테두리 = 채움 RGB × 0.6
+OTHER_FILL = "#8C8C8C"
+KEY_FILL = OTHER_FILL
+KEY_EDGE = tuple(v * REGION_EDGE_DARK for v in matplotlib.colors.to_rgb(OTHER_FILL))   # 열쇠 원도 같은 테두리 규칙
 BUFFER_KM = 100.0
 DEMO = dict(target="Lena", mode="x", split=1, n=40, draw=0)   # 명세 '분할 1, 추출 1' = 분할 seed 1, 첫 추출(h40 번호 0) [판단]
 JITTER_SEED = 20261004                                 # b 의 세로 흩뿌림 seed
@@ -112,7 +125,8 @@ RECT_HALO_LW = 2.5                                     # 확대 사각형의 흰
 
 
 # ================================================================ 공용
-def check_resources(min_gb=30.0, max_load=40.0, wait_s=60, max_wait_s=3600):
+def check_resources(min_gb=None, max_load=40.0, wait_s=60, max_wait_s=3600):
+    min_gb = float(os.environ.get("PAPER_MIN_AVAIL_GB", "30")) if min_gb is None else min_gb   # 기본 30 GB(작업 지시), 조정 담당이 정한 값은 환경 변수로
     """공유 서버 자원 확인(작업 지시). 가용 메모리 < 30 GB 또는 1분 부하 > 40 이면 기다린다."""
     t0 = time.time()
     while True:
@@ -227,12 +241,31 @@ def load_all():
 
 
 def block_kind_fill(r):
-    """명세 3.3 a: lgd_added 의 Russia_C, Tibet_LGD 만 흰 채움. 나머지 lgd_added 와 v3 는 검정 채움. natl_si 는 그리지 않는다."""
+    """명세 3.3 a: lgd_added 의 Russia_C, Tibet_LGD 만 흰 채움(새 지역). 나머지 lgd_added 와 v3 는 지역 색(v4 토큰 color.regions),
+    토큰에 없는 지역은 중립 회색. natl_si 는 그리지 않는다."""
     if r.kind == "natl_si":
         return None
     if r.kind == "lgd_added" and r.region in ("Russia_C", "Tibet_LGD"):
         return "white"
-    return "black"
+    reg = BLOCK_REGION.get(r.region)
+    return S.REGION_COLOR[reg] if reg else OTHER_FILL
+
+
+def circle_style(fills):
+    """채움 목록 → (면 색, 테두리 색, 테두리 굵기). 새 지역 = 흰 채움 + 검정 테두리(EDGE_LW), 그 밖 = 지역 색(alpha) + 흰 테두리."""
+    fc, ec, lw = [], [], []
+    for f in fills:
+        if f == "white":
+            fc.append((1.0, 1.0, 1.0, 1.0)); ec.append(S.INK); lw.append(EDGE_LW)
+        else:
+            fc.append(matplotlib.colors.to_rgba(f, REGION_FILL_ALPHA))
+            if REGION_EDGE == "darker":                     # 같은 색상의 어두운 테두리(밝은 지역 색이 회색 바탕에서도 원 경계를 갖게)
+                r_, g_, b_, _ = matplotlib.colors.to_rgba(f)
+                ec.append((r_ * REGION_EDGE_DARK, g_ * REGION_EDGE_DARK, b_ * REGION_EDGE_DARK, 1.0))
+            else:
+                ec.append(REGION_EDGE)
+            lw.append(REGION_EDGE_LW)
+    return fc, ec, lw
 
 
 def lena_design(vals):
@@ -345,9 +378,9 @@ def panel_a(fig, D, vals, P, lon0):
     B["fill"] = [block_kind_fill(r) for r in B.itertuples()]
     main = B[B.fill.notna() & ~B.region.isin(["Tibet_LGD", "Tibet"])].copy()
     main = main.sort_values("n_loc_1km", ascending=False)
-    fc = [FILL_OBS if f == "black" else (1, 1, 1, 1) for f in main.fill]
-    ax.scatter(main.lon.values, main.lat.values, s=size_pt2(main.n_loc_1km.values), facecolors=fc, edgecolors=S.INK,
-               linewidths=EDGE_LW, transform=ccrs.PlateCarree(), zorder=3)
+    fc, ec, lw = circle_style(main.fill)
+    ax.scatter(main.lon.values, main.lat.values, s=size_pt2(main.n_loc_1km.values), facecolors=fc, edgecolors=ec,
+               linewidths=lw, transform=ccrs.PlateCarree(), zorder=3)
     vals["a_blocks_drawn_main"] = int(len(main))
     vals["a_blocks_not_drawn_natl"] = int((B.kind == "natl_si").sum())
     # 지역 이름과 지시선(글자 위치는 원 중심 기준 반지름 비율 → 그림 mm)
@@ -428,8 +461,8 @@ def panel_tibet(fig, D, vals, P, ax_a=None, proj_a=None):
     vals["tibet_pfr_raster"] = draw_pfr(ax, proj, w, h, P)
     ax.spines["geo"].set_edgecolor(S.BASEMAP["coast"]); ax.spines["geo"].set_linewidth(1.0)
     q = q.sort_values("n_loc_1km", ascending=False)
-    fc = [FILL_OBS if f == "black" else (1, 1, 1, 1) for f in q.fill]
-    ax.scatter(q.lon.values, q.lat.values, s=size_pt2(q.n_loc_1km.values), facecolors=fc, edgecolors=S.INK, linewidths=EDGE_LW,
+    fc, ec, lw = circle_style(q.fill)
+    ax.scatter(q.lon.values, q.lat.values, s=size_pt2(q.n_loc_1km.values), facecolors=fc, edgecolors=ec, linewidths=lw,
                transform=ccrs.PlateCarree(), zorder=3)
     t = ax.text(0.0, 1.0, "Tibetan Plateau", transform=ax.transAxes, ha="left", va="bottom", fontsize=S.FONT_PT, zorder=6)
     t.set_gid("region_label")
@@ -505,7 +538,7 @@ def key_a(fig):
     x = 0.4
     for v in SIZE_KEY:
         r = pt2mm(np.sqrt(size_pt2(v)) / 2)
-        ax.scatter([x + r], [base - r], s=size_pt2(v), facecolors=[FILL_OBS], edgecolors=S.INK, linewidths=EDGE_LW, zorder=3)
+        ax.scatter([x + r], [base - r], s=size_pt2(v), facecolors=[KEY_FILL], edgecolors=KEY_EDGE, linewidths=REGION_EDGE_LW, zorder=3)
         x = put_text(x + 2 * r + 0.7, base - 1.2, f"{v}", gid="sizekey") + 1.8
     r = pt2mm(np.sqrt(size_pt2(SIZE_KEY[1])) / 2)
     x += 0.8
@@ -533,12 +566,15 @@ def panel_b(fig, D, vals):
         E = np.exp(zp[zp.row == key].z.values)
         jit = rng.uniform(0.14, 0.66, len(E))
         mk = TIBET_MARKER if key == "Tibet_LGD" else S.REGION_MARKER[key]
-        ax.scatter(E, yy + jit, s=S.MS["region_point"] ** 2, marker=mk, color=S.INK, alpha=0.5, linewidths=0, zorder=2,
+        _rn = S.REGION_NAME.get(key, key).split("\n")[0].replace("(expanded)", "").strip()
+        rcol = S.REGION_COLOR.get(_rn, S.INK)                                # v4: 지역이 행(주 부호화)이라 지역 색
+        ax.scatter(E, yy + jit, s=S.MS["region_point"] ** 2, marker=mk, color=rcol, alpha=0.55, linewidths=0, zorder=2,
                    rasterized=True)                                        # 밀집 점 층(최대 400 × 7): PDF 크기(600 dpi 래스터)
         q25, q50, q75 = np.exp(r.z_q25), np.exp(r.z_q50), np.exp(r.z_q75)
         ax.plot([q25, q75], [yy, yy], color=S.INK, lw=S.LW["ci_forest_cell"], solid_capstyle="round", zorder=4)
         ax.plot([q50], [yy], "o", ms=S.MS["main"], color=S.INK, mew=0, zorder=5)
-        ax.plot([r.E0, r.E0], [yy - 0.22, yy + 0.72], color=S.INK_AUX, lw=1.0, solid_capstyle="butt", zorder=3)
+        ax.plot([r.E0, r.E0], [yy - 0.22, yy + 0.72], color=S.METHOD["source_stefan"]["color"], lw=S.LW["main"], solid_capstyle="butt",
+                zorder=3)                                            # 원천 계수 = 원천 계수 Stefan 의 색(v4)
         rows_out.append(dict(row=key, y=yy, n_cells=int(r.n_cells), n_points=int(len(E)), E_q25=q25, E_q50=q50, E_q75=q75,
                              E0=float(r.E0), E_min_shown=float(E.min()), E_max_shown=float(E.max())))
     ax.set_yticks([ytop - y0 for _, y0 in B_ROWS])
@@ -555,9 +591,9 @@ def panel_b(fig, D, vals):
     ax.set_xlabel("Stefan coefficient, $E$ (cm per √(°C d))")
     # 원천 계수 직접 라벨(첫 행 위 한 번)
     r0 = zs.loc[B_ROWS[0][0]]
-    t = ax.text(r0.E0, ytop + 0.80, "Source coefficient", ha="center", va="bottom", fontsize=S.FONT_PT, color=S.INK)
+    t = ax.text(r0.E0, ytop + 0.80, "Source coefficient", ha="center", va="bottom", fontsize=S.FONT_PT, color=S.METHOD["source_stefan"]["color"])
     t.set_gid("direct_label")
-    ax.plot([r0.E0, r0.E0], [ytop + 0.72, ytop + 0.80], color=S.INK_AUX, lw=1.0, solid_capstyle="butt", zorder=3)
+    ax.plot([r0.E0, r0.E0], [ytop + 0.72, ytop + 0.80], color=S.METHOD["source_stefan"]["color"], lw=S.LW["main"], solid_capstyle="butt", zorder=3)
     out_lo = int((np.exp(zp[zp.row.isin([k for k, _ in B_ROWS])].z) < E_LIM[0]).sum())
     out_hi = int((np.exp(zp[zp.row.isin([k for k, _ in B_ROWS])].z) > E_LIM[1]).sum())
     vals["b_points_outside_axis"] = out_lo + out_hi
@@ -807,18 +843,18 @@ def panel_e(fig, vals):
         for reg in XH_REGIONS:
             q = r[r.region == reg].set_index("stage").reindex(stages)
             xx = q.nnd_median_km.values * XH_XOFF[mth]
-            ax.vlines(xx, q.rmse_lo.values, q.rmse_hi.values, color=st["color"], lw=1.0, alpha=0.4, zorder=2)   # 지역 CI: 평균 선이 앞서도록 가늘게
+            ax.vlines(xx, q.rmse_lo.values, q.rmse_hi.values, color=st["color"], lw=S.LW["aux"], alpha=0.4, zorder=2)   # 지역 CI: 평균 선이 앞서도록 가늘게
             for j, s_ in enumerate(stages):
                 op = src_open and s_ == "V-G"
                 ax.plot([xx[j]], [q.rmse.values[j]], ls="none", marker=S.REGION_MARKER[reg], ms=S.MS["region_point"],
-                        mfc="white" if op else st["color"], mec=st["color"], mew=1.0 if op else 0, alpha=0.5, zorder=3)
+                        mfc="white" if op else st["color"], mec=st["color"], mew=S.LW["aux"] if op else 0, alpha=0.5, zorder=3)
         mm = Mn[Mn.method == mth].set_index("stage").reindex(stages)
         xs_, ys_ = mm.x_geo.values, mm.rmse_mean.values
         if src_open:
             ax.plot(xs_[:-1], ys_[:-1], color=st["color"], ls=st["ls"], lw=S.LW["main"], zorder=4)
             ax.plot(xs_[-2:], ys_[-2:], color=st["color"], ls=(0, (1.2, 1.4)), lw=S.LW["main"], zorder=4)   # 원천 계수로 바뀌는 구간: 점선
             ax.plot(xs_[:-1], ys_[:-1], ls="none", marker="o", ms=S.MS["main"], color=st["color"], mew=0, zorder=5)
-            ax.plot(xs_[-1:], ys_[-1:], ls="none", marker="o", ms=S.MS["main"], mfc="white", mec=st["color"], mew=1.0, zorder=5)
+            ax.plot(xs_[-1:], ys_[-1:], ls="none", marker="o", ms=S.MS["main"], mfc="white", mec=st["color"], mew=S.LW["main"], zorder=5)
         else:
             ax.plot(xs_, ys_, color=st["color"], ls=st["ls"], lw=S.LW["main"], zorder=4)
             ax.plot(xs_, ys_, ls="none", marker="o", ms=S.MS["main"], color=st["color"], mew=0, zorder=5)
@@ -840,9 +876,10 @@ def panel_e(fig, vals):
                     linespacing=1.0, multialignment="center")
         t.set_gid("direct_label")
     # 방법 이름: 무작위 단과 지점 단 사이 빈 곳(점이 없는 거리 0.02–0.6 km)
-    t = ax.text(0.15, 12.0, "Direct ML", ha="center", va="center", fontsize=S.FONT_PT, color=S.INK, zorder=6)
+    t = ax.text(0.15, 12.0, "Direct ML", ha="center", va="center", fontsize=S.FONT_PT, color=S.METHOD["direct_ml"]["color"], zorder=6)
     t.set_gid("direct_label")
-    t = ax.text(0.15, 29.0, "Recalibrated\nStefan", ha="center", va="center", fontsize=S.FONT_PT, color=S.INK, zorder=6, linespacing=1.0)
+    t = ax.text(0.15, 29.0, "Recalibrated\nStefan", ha="center", va="center", fontsize=S.FONT_PT, color=S.METHOD["recalibrated_stefan"]["color"],
+                zorder=6, linespacing=1.0)
     t.set_gid("direct_label")
     ax.set_gid("XH_ladder")
     vals["xh"] = dict(rows=X, means=Mn, info=info)

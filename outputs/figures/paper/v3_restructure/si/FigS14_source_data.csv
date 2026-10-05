@@ -1,0 +1,9 @@
+panel,quantity,n_cells,p2,median,p98,color_lo,color_hi,source,total,land,land_gray,q90
+a,"Source Stefan, no target labels",38086,41.6171,46.4791,50.689,40.0,55.0,data/processed/map_lena/lena_pred_v1.csv.gz,,,,
+b,Width of 90% interval,38086,63.873,71.3351,77.7964,60.0,80.0,data/processed/map_lena/lena_pred_v1.csv.gz,,,,
+c,Covariates outside source range,38086,3.0,3.0,3.0,-0.5,3.5,data/processed/map_lena/lena_pred_v1.csv.gz,,,,
+c,extrap_cat=0,0,,,,,,data/processed/map_lena/lena_pred_v1.csv.gz,,,,
+c,extrap_cat=1,0,,,,,,data/processed/map_lena/lena_pred_v1.csv.gz,,,,
+c,extrap_cat=2,0,,,,,,data/processed/map_lena/lena_pred_v1.csv.gz,,,,
+c,extrap_cat=3+,38086,,,,,,data/processed/map_lena/lena_pred_v1.csv.gz,,,,
+all,cells shown,38086,,,,,,data/processed/map_lena/lena_pred_v1_meta.json,53011.0,38173.0,87.0,0.707000639131762

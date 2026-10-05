@@ -1,8 +1,8 @@
 {
  "slide": "S31",
- "page": 31,
+ "page": "부록 20",
  "title": "초록의 시험 결과 표기",
- "subtitle": "9부 · 결정 사항 · 지역 내·워크플로 시험과 추가 실험 결과를 초록에 쓰는 방식",
+ "subtitle": "부록 · 결정 사항 · 지역 내·워크플로 시험과 추가 실험 결과를 초록에 쓰는 방식",
  "takeaway": "초록의 지역 내 시험 결과는 판정어 없이 수치만 표기(기본안)",
  "archetype": "A7",
  "kind": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",

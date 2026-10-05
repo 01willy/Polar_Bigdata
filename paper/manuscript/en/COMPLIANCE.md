@@ -1,6 +1,6 @@
-# 영문 원고 조립 점검표 (Scientific Reports, 2026-10-05, 5차: XC 채움, 마지막 추가 결과)
+# 영문 원고 조립 점검표 (Scientific Reports, 2026-10-05, 6차: 검토판, 완결성 점검)
 
-조립 대상은 `main.tex`(본문 PDF)와 `si_main.tex`(Supplementary Information PDF)이다. 단어 수는 명세 10절 규칙대로 렌더 PDF 를 `pdftotext` 로 읽어 절 경계로 자른 뒤 공백 단위로 셌다(`tools/count_words.py`, 결과 `build/wordcount.json`). 위첨자 인용 번호 토큰은 뺐다. 자리표시를 포함한 값과 뺀 값을 함께 적는다(자리표시 정규식에 `[PENDING: ...]` 을 더했다). 2차 수정 내용은 6절, 3차 수정(결과 채움) 내용은 9절, 4차 수정(XC 채움) 내용은 10절, 5차(XB 민감도, XD-5, XE-e) 내용은 11절에 모았다.
+조립 대상은 `main.tex`(본문 PDF)와 `si_main.tex`(Supplementary Information PDF)이다. 단어 수는 명세 10절 규칙대로 렌더 PDF 를 `pdftotext` 로 읽어 절 경계로 자른 뒤 공백 단위로 셌다(`tools/count_words.py`, 결과 `build/wordcount.json`). 위첨자 인용 번호 토큰은 뺐다. 자리표시를 포함한 값과 뺀 값을 함께 적는다(자리표시 정규식에 `[PENDING: ...]` 을 더했다). 2차 수정 내용은 6절, 3차 수정(결과 채움) 내용은 9절, 4차 수정(XC 채움) 내용은 10절, 5차(XB 민감도, XD-5, XE-e) 내용은 11절, 6차(검토판, 그림 번호, 완결성 점검) 내용은 12절에 모았다.
 
 ## 1. 산출물
 
@@ -104,7 +104,7 @@ TinyTeX 에 설치한 패키지: threeparttable, ncctools, jknapltx, rsfs, appen
 
 ## 7. 남은 자리표시(주석 제외, 컴파일되는 본문만, 4차 뒤)
 
-본문 41건: DECISION 21(front 13, methods 6, discussion 2), 미확인 11(front 6, methods 4, legends 1), MISSING 3(results_a 2, results_b 1), PENDING 6(초록 XE, R5 XE, R7 XF·XC-F3, 고찰 D6 XF·XE). X 자리표시는 0건이다(XC 6건을 채웠다). 초록의 XC 결정은 주석 `[DECISION: abstract XC sentence]` 로 남겼다(컴파일 본문에는 없다).
+본문 35건(6차 뒤, 같은 문구를 묶으면 25항목, 검토판 첫 쪽 표): DECISION 21(front 13, methods 6, discussion 2), 미확인 5(front 4, methods 1), MISSING 3(results_a 2, results_b 1), PENDING 6(초록 XE, R5 XE, R7 XF·XC-F3, 고찰 D6 XF·XE). X 자리표시는 0건이다. 초록의 XC 결정은 주석 `[DECISION: abstract XC sentence]` 로 남겼다(검토판 목록 4번).
 
 SI: PENDING 15(XF, XE-a·XE-b, XD-5, XC-F3 의 표 행·주석·S2 판정 열), RESULT 30, VERIFY 10, SI 그림 9(S1–S9 자리 상자), 미확인 5, UPDATE 3, verify 3, CITE 3, S1·S2·S16·S17 표 칸 8, DECISION 1(S17 KPDC 행. 제목 쪽 저자 자리는 si_main.tex 에 따로 1건).
 
@@ -197,4 +197,95 @@ R3·R5 를 먼저, 다음에 고찰을 줄였다. 옮긴 수치는 SI 표에 있
 길이: 위 두 문장(약 20단어)을 넣고 R1 의 'as in lake-temperature studies'(인용은 서론에 남음), 서론의 러시아 서부 $E$ 값(그림 1b 에 있음), R4 의 라벨 40개 CI(S8), R4 의 레나델타 문장 그림 지시를 줄였다. 본문 4,447단어.
 
 SI Supplementary Methods 9 의 실행 문단에 세 실행(시각, 열람 시각)과 'XB 등록 판정은 핵심 판, XB-3 은 민감도 판에서 유지되지 않음', 'XE-e 는 판정을 바꾸지 않음'을 더했다.
+
+## 12. 6차(2026-10-05): 검토판과 완결성 점검
+
+### 12.1 검토판
+
+- `main_review.tex` → `main_review.pdf`(24쪽), 국문 `../ko/main_review.tex` → `main_review.pdf`(25쪽). 만드는 법: `./build_review.sh`(국문은 `../ko/build_review.sh`). 두 판 모두 오류 0.
+- `tools/make_review.py en|ko` 가 같은 절 파일을 `build/review/sections/` 에 복사하며 [DECISION]·[PENDING]·[미확인]·[MISSING] 표지를 회색 위첨자 번호 `[N]` 로 바꾸고(같은 문구는 같은 번호), 첫 쪽 '검토 메모 / Open items' 표(번호, 종류, 위치, 내용; 25항목)를 만든다. 주석과 front.tex 블록 2 는 처리하지 않는다. 초록 XC 결정(주석)은 목록에 넣고 초록 끝에 번호를 단다.
+- 그림마다 본문 폭 그림과 바로 아래 설명문을 한 float 으로 묶어 처음 인용한 문단 뒤에 넣었다. 표 1 도 처음 인용한 문단 뒤에 넣었다. 본문 폭은 170 mm(검토판만).
+- 제출판(`main.tex`, 그림은 끝)은 아래 수정 외에는 바꾸지 않았다.
+
+### 12.2 그림 번호(처음 인용 순서)
+
+본문의 처음 인용 순서가 1, 3, 6, 2, 4, 7, 5 였다. 순서를 맞추려면 번호를 바꿔야 해서 원고 안에서만 바꿨다(그림 파일과 `*_legend.md` 의 번호는 그대로). 원고 그림 4 = 파일 Fig6, 그림 5 = Fig4, 그림 6 = Fig7, 그림 7 = Fig5. 본문·설명문·SI 의 인용, 설명문 순서, `\PlaceFigure` 의 파일 대응을 함께 바꿨다(영문·국문). 그림 작업이 보내는 설명문 변경은 파일 번호이므로 이 대응으로 옮긴다. 이제 처음 인용 순서는 그림 1–7, 표 1 이 차례대로다.
+
+### 12.3 패널 인용
+
+빠진 패널을 인용했다: 그림 1a(서론, 지역과 라벨 수), 그림 2a,b(R1, 두 기준선), 그림 2c–f 와 3d(R3), 그림 7a–e(R6 첫 문장). 모든 그림의 모든 패널이 본문에서 인용된다. 늘어난 단어는 R1 의 표 1 반복 인용과 R7 문장 압축으로 맞췄다(본문 4,449단어).
+
+### 12.4 확인한 것과 고친 것
+
+- '??', 정의되지 않은 인용·참조: 세 PDF 모두 0건.
+- Methods 식: 식 (1)–(6)의 기호를 모두 본문에서 정의한다. 앵커 식의 $x$ 정의를 더했다.
+- 수치 추적: 서론·결과·고찰의 소수 수치 전부가 계획 8절, 추가 등록 결과 절, claims README·표, 원고 명세, 그림 값 파일 가운데 하나에 같은 표기로 있다(문자열 대조, 반올림 값은 명세의 근거 표에 있음).
+- [미확인] 해결(프로젝트 기록 근거): Copernicus DEM 인용 형식과 귀속 문구(`docs/PAPER_SCIREP_FRONTMATTER_DRAFT.md` 1.1 의 9행, 확인 상태 '확정(웹)'), 영구동토 범위·구역 자료의 이름과 판(ESA CCI Permafrost extent v4.0, netCDF 속성 product_version 04.0, 1997–2021 연별 파일), Cartopy 0.23.0(설치 판과 그림 설명문), S17 의 JRC 지표수 인용(Pekel et al. 2016).
+- 남긴 [미확인](파일로 확인할 수 없음): SoilGrids 취득 시점 판 표지, PolSAR 상향 ALT 자료 DOI, CCI 영구동토 범위 v4.0 DOI, ERA5-Land 귀속 문구, Kudryavtsev 1974 서지(참고문헌 색인이 미확인으로 표시), SI 의 S5 동률 수와 티베트 현장 자료 약관.
+
+### 12.5 아직 끝나지 않은 것
+
+1. 사용자 결정: 저자·소속·교신 저자와 전자우편, 감사의 글·저자 기여·이해상충 문구, 연구비, LLM 사용 문구, 저장소와 DOI, 코드 공개 시점, KPDC 자료 사용, 대회 보고서 인용, 지역 이름 표기, 러시아 중부 영문 표기, 방법 초안 183행 수용, Fig 7d(파일 번호) 경로의 y 기준, 초록 XC 문장.
+2. 대기 결과: XE-a·XE-b(10월 8일), XF·XC-F3(10월 11일).
+3. 빠진 값: 없음(12.6절에서 채움).
+4. SI(12.6절의 새 번호): 보충 그림 S7–S15 는 자리 상자, 보충 표 S17 b 부분의 [RESULT]·[VERIFY] 틀, 보충 표 S1 의 가설별 Δ·CI·P 열, 보충 표 S12 의 약관·DOI 칸(S13 의 판 칸은 채워짐), Supplementary Methods 1–7 의 [verify]·[UPDATE] 표지가 남는다. [CITE] 3곳은 12.6절에서 인용으로 바꿨다.
+5. 보충 표·그림 번호는 12.6절에서 처음 인용 순서로 바꿨다. 본문에서 인용하지 않는 보충 표 5개(S14–S18)가 남는다.
+6. 그림 재양식(그림 작업 진행 중): 색·기호를 말하는 설명문 문구가 바뀌면 파일 번호 대응(12.2)으로 옮기고 두 판을 다시 컴파일한다.
+
+### 12.6 6차 추가(2026-10-05): 빠진 값, 참고문헌, 보충 번호
+
+**빠진 값(M-04)**: `tools/build_numbers.py`(읽기 전용, pandas)가 `build/numbers_m04.json` 을 쓴다. 정의: 지역 중앙값은 지역별 셀 가중 Δ 의 중앙값, 러시아 서부 제외 값은 나머지 지역 Δ 의 등가중 평균(풀 평균 행이 지역 행의 단순 평균과 같음을 스크립트가 확인), 오차 감소·증가 지역 수는 등록 4분 규칙(두 95 % CI). 원천: R3 은 `paper/claims/C1_label0_safety/tables/lgw_bundle.csv`(AB4 P1 − P0, AB7 R1 − F1k, 라벨 10개), R7 은 `data/processed/lgd/lgd_tests_lic.csv`(약관 확인분 판, 풀 PE1, L8e R1 − P0 전량, L4e R1 − P1 라벨 10개; 지역 판정은 저장 열이 비어 CI 열에서 같은 규칙으로 만들었고, 같은 지역의 초록 묶음 판정과 일치). 값: AB4 중앙값 −0.06 cm, 러시아 서부 제외 +0.72 cm; AB7 중앙값 −2.2 cm, 러시아 서부 제외 −0.32 cm, 4지역 가운데 2지역 오차 감소; PE1 전량 중앙값 −0.78 cm, 러시아 서부 제외 −0.49 cm, 감소 1(러시아 서부)·증가 1(캐나다); PE1 라벨 10개 중앙값 −0.03 cm. [MISSING] 3건을 모두 채웠다. 늘어난 단어는 R5·R6·R7 첫 문장의 블록 등가중 구간(보충 표에 있음), 고찰의 캐나다 문장과 D6 워크플로 절, 서론의 지역 나열(R1 에서 정의)로 맞췄다(본문 4,442단어). 이어서 D6 압축에서 빠졌던 XC 지역 단서(러시아 동부·알래스카·레나델타에서는 비열등이 성립하지 않음, XC 필수 사항 3)를 되살리고, 늘어난 5단어는 R4 선정 규칙 문장의 블록 등가중 구간(보충 표 S4 의 E3 행에 있음)으로 맞췄다(본문 4,447단어, 국문 같은 자리).
+
+**참고문헌**: 웹에서 확인한 서지로 세 항목을 `refs_methods.bib` 에 더했다. Klene et al. 2001(Crossref, doi:10.1080/15230430.2001.12003416, AAAR 33(2) 140–148), Romanovsky & Osterkamp 1997(Crossref, doi:10.1002/(SICI)1099-1530(199701)8:1<1::AID-PPP243>3.0.CO;2-U, PPP 8(1) 1–22), Kudryavtsev et al. 1974(DOI 없음; 영구동토 백과 항목의 참고문헌과 PPP 논문 참고문헌 검색 요약: MSU 1974, CRREL Draft Translation 606, Hanover NH, 1977). Methods 의 [미확인: Kudryavtsev 1974 서지]와 SI 의 [CITE] 3곳을 인용으로 바꿨다. 본문 참고문헌 68편, SI 15편.
+
+**보충 표·그림 번호(처음 인용 순서)**: `tools/si_numbering.py` 의 대응으로 바꿨다. 표: 옛 2→1, 13→2, 5→3, 8→4, 6→5, 7→6, 10→7, 9→8, 11→9, 12→10, 1→11, 17→12, 16→13, 3→14, 4→15, 14→16, 15→17, 18→18. 그림: 옛 S10–S15(지도·XK)→S1–S6, 옛 S1–S9(자리 상자)→S7–S15. 손으로 쓴 절 파일(영문·국문, si.tex)은 한 번 변환하고 머리에 표지 주석을 달았다. 생성기(`make_si_tables.py`, `si_x_results.py`, `make_si_maps.py`)는 옛 번호로 쓰고 출력에서 대응을 적용하며, 표는 새 번호 순서로 낸다. si.tex 에서 지도 그림을 자리 상자 앞에 두었다. 점검: 영문·국문 본문의 보충 표 첫 인용 순서 1–13, 보충 그림 1–5, SI 의 표 머리 1–18 과 그림 1–15 가 차례대로다. 본문에서 인용하지 않는 보충 표는 S14(초록 묶음), S15(라벨 0 학습기), S16(배치 시나리오), S17(선택 이력), S18(XF 조사)로 SI 안에서만 인용된다. 이 문서의 앞 절(9–11절)의 보충 표 번호는 옛 번호다.
+
+## 13. 7차 수정(2026-10-05, 그림 v4 양식 반영)
+
+- 그림 4(파일 Fig6) 설명문을 `Fig6_legend.md`(13:01)와 맞췄다: '(+23.79 cm at axis end; 95% CI 15.34 to 30.16)', 'weighted by cell and block', 'arrow' 삭제. 늘어난 1단어는 md 와 같이 구간 괄호의 '(CIs;' 를 빼서 맞췄다(350단어). 국문판 같은 자리(축 끝에 표시, CI 약어 삭제).
+- 화살표·삼각형 서술: 단어 경계 검색으로 본문, 설명문, SI, 생성기에 다른 곳이 없음을 확인했다. 다시 그린 그림 4d 의 지역 기호에는 삼각형(러시아 서부 ▲, 러시아 동부 ▼)이 남아 있으나 그림 안 범례로 표시되고 설명문은 기호를 말하지 않는다.
+- SI 그림 S7–S15: `tools/make_si_figs.py` 가 `outputs/figures/paper/v3_restructure/si/FigS<n>.pdf` 와 `FigS<n>_legend.md` 를 찾아, 있으면 그림과 설명문(새 번호 그대로, 다시 매기지 않음)을 넣고, PDF 만 있으면 계획 설명문에 [SI legend: to be written] 표지를 달고, 없으면 자리 상자를 둔다. si.tex 의 자리 상자 9개는 생성 파일 `sections/si_figs.tex` 로 옮겼다(설명문 문자열 같음). 13:58 현재 si 폴더는 없다.
+- `make_si_maps.py` 를 다시 실행했다(지도 PDF 13:03–13:04, 설명 md 03:55, 내용 변화 없음).
+- 다시 컴파일(13:5x): 영문 본문 40쪽, SI 77쪽, 국문 본문 29쪽, 영문 검토판 24쪽, 국문 검토판 25쪽, 오류 0, 미정의 참조 0. 본문 4,447단어, 초록 199단어, 설명문 최대 350단어, 표 1 제목 142단어. 검토 메모 22항목.
+
+## 14. 8차 수정(2026-10-05, XM 추가)
+
+- 원천: `docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XM_2026-10-05.md` 결과 절(14:20 열람, 커밋 e454a71). 수치는 그 표에서 옮겼고 봉인 표는 열지 않았다.
+- 보충 표 S2: 'q. XM' 부분을 더했다(XM-a 격자 안 3대상 평균·지역·1,000·500 행, XM-b 총 RMSE 평균·지역 행, XM-c 레나 격자 사이 행, 두 가중 CI, 4분 판정, Holm P). 주석에 설계 표지(결과 열람 뒤 설계, 탐색(SI), 비맹검 부분 포함, XE Holm 가족 밖), 입력 정의, 등록 해석 문장(우세 갈래, '통계적으로 구별되나 0.5 cm 미만', 격자 안 설명 비율 1.2 %, C8·지도 문구 불변, 확인 시험 후보, 원인 구별 안 함), 사실 기록(레나 총 RMSE −1.50 cm, 대부분 격자 사이 −1.80 cm), 덮음 비율, 열람 시각, 재현 관문을 적었다. 표 제목은 'XA to XM', 머리 설명은 'Parts c to q' 와 XM 등록 문장으로 고쳤다.
+- 보충 표 S1(가설 등록부): XM 행(addendum XM, exploratory, ff7c97f 10-05, PU; designed after viewing, 'XM-a partially supported').
+- 보충 표 S12(자료와 약관): WorldCover 2021 v200(CC BY 4.0, 표기 문구, Zanaga et al. 2022 doi)과 Sentinel-2 L2A(Copernicus Sentinel 약관, 표기 문구) 두 행을 'XM only' 로 더했다(추가 등록 문서 8절).
+- Supplementary Methods 9: 제목을 'XA to XM' 으로 고치고 XM 문단(등록 커밋, 표지, 입력, WorldCover 51타일, Sentinel-2 534장면, 반사도 offset 정정을 적합 전 등록 이탈로 기록한 커밋 31e19f7, 특징 표 sha256 고정, 148단위, 재현 관문, 열람 시각)을 더했다.
+- 고찰 D5: XM 문장을 넣지 않았다. 본문이 4,447단어라 3단어 여유뿐이고, 예시 문구를 넣으면 약 14단어가 늘어 4,450단어를 넘는다. 국문판 본문도 바꾸지 않았다(SI 는 영문판만 있음).
+- SI 그림: `make_si_figs.py` 로 S7, S14, S15 를 넣었다(14:28–14:29 파일, 설명 md 없음, 계획 설명문과 [SI legend: to be written] 표지). S15 계획 설명문의 'earlier Fig. 7' 을 'an earlier draft of the main figures' 로 고쳤다.
+- 다시 컴파일: 영문 본문 40쪽, SI 82쪽, 국문 본문 29쪽, 검토판 24·25쪽, 오류 0. 본문 4,447단어, 검토 메모 22항목(변화 없음).
+
+## 15. 9차 수정(2026-10-05, SI 그림 배치)
+
+- SI 그림: 그림 담당이 만든 `outputs/figures/paper/v3_restructure/si/FigS7–S12, S14, S15`(PDF, PNG, _legend.md, 14:43–14:48)를 `tools/make_si_figs.py` 로 넣었다. 설명문은 `tools/si_fig_captions.py` 에 SI 설명 양식(굵은 제목 문장, 패널 글자, 공통 표기는 S8 참조)으로 줄여 두었고, 범례 파일의 모든 수치가 설명문에 있는지와 범례 파일 sha256 앞 16자를 생성 때마다 대조한다(현재 통과). 단어 수(범례 → 설명문): S7 197 → 180, S8 206 → 182, S9 212 → 176, S10 192 → 179, S11 235 → 230, S12 238 → 216, S13 151 → 149, S14 228 → 214. S11 에는 본문과 같은 표지(XE 보조 대비·비맹검 부분 포함, XI '진짜 외삽 시험 아님', XB 비맹검 부분 포함)를, S12 e 에는 'XD, exploratory' 를 더했다.
+- S7: 제목과 첫 문장을 'M1 6겹 채점 방식 비교(보충 노트 2 인용)이며 XH 5단계 검증 사다리(Fig. 1e)가 아니다'로 고쳤다.
+- S13(독립 지역 예측 지도): 격자 예측 산출이 없어 뺐다. 이 그림은 본문과 SI 어디에서도 인용되지 않았으므로 빼고 뒤 번호를 당겼다(S13 = 파일 FigS14, S14 = 파일 FigS15). `si_numbering.py` 의 그림 대응도 옛 S8 → S13, 옛 S9 → S14 로 고쳤고 옛 S7 을 가리키면 오류가 나게 했다. 파일 FigS15 범례의 'Supplementary Table S3'(초록 묶음의 옛 번호)은 새 번호 S14 로 썼다.
+- 첫 인용 순서: S1–S5 본문(고찰), S6 Supplementary Methods 9, S7 보충 노트 2, S8–S14 는 Supplementary Figures 첫 문단에서만 인용된다. 첫 문단 문장을 생성 파일 `sections/si_figs_lead.tex` 로 옮겨 S1–S6 문장 뒤에 붙였다(문장 하나만 있는 쪽 제거).
+- SI 표의 내부 표지 접두를 새 번호로 고쳤다: [S1: per-hypothesis …], [S11: from lg_targets …], [S12: licence] 3곳, [S13: Python version …].
+- 다시 컴파일: 영문 본문 40쪽, SI 84쪽, 국문 본문 29쪽, 검토판 24·25쪽, 오류 0, 미정의 참조 0. SI 그림 자리 상자 0. 검토 메모 22항목.
+- SI 에 남은 표지: PENDING 12, RESULT 30, VERIFY 10, verify 3, UPDATE 3, 미확인 3, DECISION 2, 내부 표지 6([S1:] 1, [S11:] 1, [S12:] 3, [S13:] 1).
+
+## 16. 10차 수정(2026-10-05, SI 표지 정리)
+
+SI 에 남은 표지를 (a) 기록으로 채움, (b) 등록 마감 문장, (c) 검토 메모 항목으로 나눠 처리했다. SI 본문과 표에는 표지가 없다(남은 것은 사용자 결정 DECISION 2개: SI 표지의 저자, 보충 표 S12 의 KPDC).
+
+- (a) 채운 것: Supplementary Methods 6 의 교차 환경 점검 (i)(LG 개정 14), (ii)(WRAPUP 8.4 (ii)), (iii)(LG 개정 15 (u)) 결과와 계속 결정, 집계 출처(본 실행 작업 완료, 12:25)와 RealMLP 조각 완결(231/231, LG 개정 15 (s)); 'GPU training is not bitwise deterministic' 문장은 점검 (iii) 결과(로컬 반복 동일, 플랫폼 사이 차이)에 맞춰 고쳤다. Supplementary Methods 5 의 설정 수(MLP·TabM·RealMLP 33, FT-T 34; LGF 개정 5 의 E1). Supplementary Methods 2 의 융해관 규칙 사실(자료 README D 단서 3; v2 에서 더한 CALM 지점만 제외, 그 밖의 v3 직접 셀 가운데 융해관 대응 2, 모호 7)과 Supplementary Methods 1 의 같은 범위 문구. Supplementary Methods 1 의 GPR 비율(실험 기록 E4.4: ABoVE 알래스카 점관측 219,089개의 86 %, 탐침 7.7 %, GPR 우세 셀 10,835/13,606; 옛 표지의 '셀의 86 %'는 단위가 틀렸다). Supplementary Note 1 의 L7(기각), L13(미지지), AB4, AB5, AB9, L4(LG 7.1·7.2, 보충 표 S14). 보충 표 S17 b 의 [RESULT] 23·[VERIFY] 10: `tools/build_reclass_summary.py`(읽기 전용)가 `data/processed/lgw/lgw_rescore.csv`(M4.4 가 지정한 원천) 행을 CI 종류와 4분 판정별로 센 값, H30·M1 의 감사 이력과 관련 시험(AUDIT stats:F4, RESEARCH_FRAME). 보충 표 S11 North Atlantic 행(LGD 전체 판 조각 기록: 분할 5, A 19–24, 채점 12–19(블록 3–7), E0 1.59). 보충 표 S12 약관 3칸(ABoVE, ERA5-Land, CCI ALT; 서지 초안 1.1 의 '확정(웹)'). 보충 표 S13 의 WF·X 작업 A 판(Python 3.11.10, PyTorch 2.4.1 CUDA 12.1 빌드·CPU, pytabkit 미설치; 실행 기록 env.log·deps.log).
+- (b) 등록 마감 문장: PENDING 12곳을 'Pending: registered data deadline 8 October 2026 (XE stage 2 …)' 또는 '… 11 October 2026 (XF / XC-F3 …)' 문장으로 바꿨다.
+- (c) 검토 메모: 새 항목 4개([23] CALM·ALLena 파서 범위 규칙, [24] 티베트 현장 자료 약관, [25] 네 자료원 이용 허락 요청, [26] 부분 번역 칸 17개)와 기존 항목에 SI 위치를 붙였다([1], [3], [5], [6], [15], [17], [19]). `tools/make_review.py` 의 SI_MERGE·SI_ITEMS. Supplementary Methods 8 의 동률 수는 '세지 않았다'는 사실 문장으로 바꿨다. Supplementary Methods 2 의 허락 상태는 '허락 기록 없음(10월 5일), 약관 확인분 판이 주 판정' 문장으로 바꿨다.
+- 내부 표지 삭제: [S1:], [S11:], [S12:]×3, [S13:], [S16]×2, [old result, recheck].
+- 표지 수(SI PDF): 이전 RESULT 30, PENDING 12, VERIFY 10, verify 3, UPDATE 3, 미확인 3(소스 4), 내부 9, DECISION 2 → 이후 DECISION 2 만. 검토 메모 22 → 26항목. SI 85쪽, 검토판 24·25쪽, 오류 0.
+
+## 17. 11차 수정(2026-10-05, 부분 번역 칸)
+
+- 용어집으로 옮기지 못한 SI 표 칸 17개(원문 15종)를 `make_si_tables.py` 의 MANUAL_EN 에 영문으로 옮겼다(같은 뜻, 새 주장 없음). 단검표와 표 설명의 단검표 주석을 지웠다. XA 표의 '가족 밖', '음 방향 … 최대 0.31' 두 칸(용어집을 거치지 않던 칸)도 옮겼다. SI 에 남은 한글은 사용자 결정 표지 두 개뿐이고, 남은 단검표 7개는 보충 그림 S14 그림 안의 기호(설명문에 풀이)다.
+- 검토 메모 [26] 을 지웠다(25항목). SI 85쪽, 검토판 24·25쪽, 오류 0.
+
+## 18. 12차 수정(2026-10-05, Fig 1 a 지역 색)
+
+- 그림 1 a(파일 Fig1, 15:31 재렌더)에 그림 담당 문구 'colour marks the region as in b (grey, Greenland, Svalbard and Scandinavia),' 를 'in a block,' 뒤에 넣었다(영문, 국문, Fig1_legend.md). 늘어난 단어는 c, d, 투영 문장, b 의 표기 압축과 'rectangle, area of c and d' 로 맞췄다(정보 삭제 없음, 349단어).
+- 다섯 문서 다시 컴파일: 영문 본문 40쪽, SI 85쪽, 국문 본문 29쪽, 검토판 24·25쪽, 오류 0. 본문 4,447단어, 설명문 최대 350단어, 검토 메모 25항목.
 

@@ -1,0 +1,45 @@
+{
+ "stem": "FigS8",
+ "created": "2026-10-05 14:43:36",
+ "size_mm": [
+  170.0,
+  168.0
+ ],
+ "audit_fails": [],
+ "sizes": [
+  7.0,
+  8.0
+ ],
+ "chars": 565,
+ "thin_lines": [],
+ "codes": [],
+ "loose_numbers": [],
+ "text_overlap_pairs": [],
+ "text_outside": [],
+ "pdffonts": {
+  "fonts": [
+   "FreeSans",
+   "FreeSansBold"
+  ],
+  "type3": false,
+  "liberation": false,
+  "ok": true
+ },
+ "pdf_bytes": 1461899,
+ "sources": [
+  "results/rescale_lg/data/processed/lg/lg_curve.csv",
+  "data/processed/lgd/lgd_curve_lic.csv",
+  "scripts/2_evaluation/wf0_reanalysis.py",
+  "data/processed/lgx/lgx_tests.csv",
+  "data/processed/lgt/lgt_tests.csv",
+  "data/processed/lgf/lgf_tests.csv",
+  "data/processed/lgf/lgfn_tests.csv",
+  "data/processed/lgw/lgw_bundle.csv"
+ ],
+ "vmax": 40.0,
+ "n_map_targets": 17,
+ "missing_map_values": {
+  "R1_0.25": [],
+  "R1_1.0": []
+ }
+}

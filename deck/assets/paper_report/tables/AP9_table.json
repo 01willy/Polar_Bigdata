@@ -1,8 +1,8 @@
 {
  "slide": "AP9",
- "page": "부록 9",
+ "page": "부록 30",
  "title": "보충 자료 자리 추가 실험",
- "subtitle": "부록 · 보충 자료 6묶음 · 등록 완료, 결과 대기",
+ "subtitle": "부록 · 보충 자료 6묶음 · 결과 확정, 격자 안 입력 2단계는 자료 대기",
  "takeaway": "보충 자료 6묶음은 결과와 관계없이 보충 자료에 수록",
  "archetype": "A7",
  "kind": "native_hairline_table(python-pptx 텍스트 상자 + 규칙선)",

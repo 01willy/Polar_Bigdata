@@ -197,28 +197,28 @@ Fig 6 v3 수치·점검 기록
 - 통과: 설명문 영구동토 자료 'ESA CCI Permafrost fraction v4.0 (1997–2021 mean)' = netCDF title. title 'ESA CCI Permafrost PFR v4.0, mean of 1997-2021 (25 annual files), aggregated to 0.1 deg'
 - 통과: 설명문 'Cartopy 판' = 실행 판. cartopy 0.23.0
 - 통과: 컬러바 ±vmax = 티베트 뺀 |Δ| 99 백분위를 5 cm 단위로 올림. 값 32개(16대상 × 2; 명세 8.3 의 '34값' 은 티베트를 빼면 32값), p99 37.93, vmax 40; 범위 밖 {'D0_1.0': 1, 'D1_1.0': 0}(티베트 D0 -59.98), 컬러바 연장 'min'
-- 통과: 설명문 350단어 이하(자리표시 포함). 349단어(자리표시 제외 349), 파일 전체 410단어
+- 통과: 설명문 350단어 이하(자리표시 포함). 350단어(자리표시 제외 350), 파일 전체 411단어
 - 통과: 설명문 문장 점검(대시·금지어·가운뎃점 숫자·네 자리 쉼표·내부 약호; 자리표시 제외). 0건
 - 통과: 설명문 첫 문장이 'This figure' 로 시작하지 않고 그림 명세 8.6·원고 명세 7절의 제목 문장과 같음. Without target labels, 2 of 30 targets lost over 2 cm with physics pseudo-labels and 18 with direct ML. a, b, 
 - 통과: 설명문 자리표시 0개(XG 자리표시를 수치 문장으로 바꿈, 그림 명세 12절). 0개
-- 통과: XG 문장(Existing ALT maps … resolved.) 50단어 이하(그림 명세 13절). 44단어
+- 통과: XG 문장(Existing ALT maps … resolved.) 50단어 이하(그림 명세 13절). 46단어
 - 통과: 설명문 필수 요소(재표집·띠·축척 위도·자료 출처·소프트웨어·사후 서술·의존 표지·대상 수). 빠짐 없음
 - 통과: 설명문에 색 이름·모양 서술 없음(F-15). 0건
 
 [4] 그림 점검(지침 부록 A.1 audit_v3, A.2 pdf_audit, 7.1)
-- audit_v3: 글자 크기 [7.0] pt, 문자 수 741(한도 800, 그림 명세 8.5 사유: 포레스트 행 이름), 얇은 선 0, 제목 0, 글씨 상자 0, 내부 약호 0, 네 자리 쉼표 0, 긴 라벨 0, 그림 안 수치 0; 실패 항목 없음
+- audit_v3: 글자 크기 [7.0, 8.0] pt, 문자 수 751(한도 800, 그림 명세 8.5 사유: 포레스트 행 이름), 얇은 선 0, 제목 0, 글씨 상자 0, 내부 약호 0, 네 자리 쉼표 0, 긴 라벨 0, 그림 안 수치 0; 실패 항목 없음
   (그림 안 수치 검사 제외 gid: scale(축척 길이), sizekey(열쇠 값 '±0.5 cm', '40 labels', '160 labels'), graticule(위도 라벨 3개), offaxis(축 밖 행의 점 추정값 '+23.8', 조정 담당 요청 '가장자리 화살표와 값'). 앞의 셋은 명세 8.3 이 허용한 수치다)
-- pdf_audit: 170.0 × 169.1 mm, 문자 741, 크기 분포 {7.0: 741}, 5 pt 미만 0, 글꼴 계열 ['LiberationSans'], Type 3 없음
-- pdffonts: BGZIHO+LiberationSans-Bold CID 내장 yes
-- pdffonts: BGZIHO+LiberationSans CID 내장 yes
+- pdf_audit: 170.0 × 169.1 mm, 문자 751, 크기 분포 {8.0: 5, 7.0: 746}, 5 pt 미만 0, 글꼴 계열 ['FreeSans', 'FreeSansBold'], Type 3 없음
+- pdffonts: BICWAS+FreeSans CID 내장 yes
+- pdffonts: FITYBK+FreeSansBold CID 내장 yes
 - pdfimages(내장 래스터 ppi): ['1 1297 1509 index 600 600', '1 1297 1509 gray 600 600', '1 402 307 index 600 601', '1 402 307 gray 600 601', '1 472 549 index 600 600', '1 472 549 gray 600 600', '1 1297 1509 index 600 600', '1 1297 1509 gray 600 600', '1 401 307 index 600 601', '1 401 307 gray 600 601', '1 472 549 index 600 600', '1 472 549 gray 600 600', '1 2523 59 index 600 600']
 - 글자 겹침·글자와 자료 겹침(직접 라벨은 자료 표지에서 0.5 mm 이상): 0건
-- style.text_overlaps: 글자 87개, 겹침 쌍 0, 캔버스 밖 0
-- 지도 원 테두리와 다른 선·틀 사이 0.5 mm 미만, d 지시선과 다른 방법의 자료 표지 사이 0.5 mm 미만: 0건; 지도 종류별 최소 간격(mm) {'leader': 0.98, 'zoom_rectangle': 0.65, 'zoom_connector': 4.9, 'frame': 3.07}, d 지시선별 최소 간격(mm) {'phys': 4.1, 'nflow': 0.93, 'cbq': 9.57}
+- style.text_overlaps: 글자 86개, 겹침 쌍 0, 캔버스 밖 0
+- 지도 원 테두리와 다른 선·틀 사이 0.5 mm 미만, d 지시선과 다른 방법의 자료 표지 사이 0.5 mm 미만: 0건; 지도 종류별 최소 간격(mm) {'leader': 0.98, 'zoom_rectangle': 0.65, 'zoom_connector': 4.9, 'frame': 3.07}, d 지시선별 최소 간격(mm) {'phys': 4.03, 'nflow': 0.84, 'cbq': 9.48}
 - 지도 원 밖 글자가 원 안으로 들어옴: 0건
 - 눈금 라벨 간격 1.5 mm 미만: 0건
 - 캔버스 밖 글자: 0건
-- 지역 모양 열쇠 오른쪽 끝 169.4 mm(캔버스 170 mm)
+- 지역 모양 열쇠 오른쪽 끝 168.5 mm(캔버스 170 mm)
 - 주 패널 면적(F-17, 슬롯 기준): a 6232, b 6232 mm², 합 43%(기준 35% 이상), 가장 큰 패널 a, b (같음)
 - 지도: 북극 평사 투영(중심 경도 126.698°, 진척 위도 70.0° N), 50° N 원 지름 70.0 mm, 1 mm = 128.9 km(70° N 기준), 축척 막대 1000 km 의 측지 길이 996 km(축척 계수 1.000); 내장 래스터 지도 {'nx': 1303, 'ny': 1303, 'ppi': 473.0}; 영구동토 바탕 'ESA CCI Permafrost PFR v4.0, mean of 1997-2021 (25 annual files), aggregated to 0.1 deg'; 해안선 Natural Earth 50 m; Cartopy 0.23.0
 - 티베트 삽도: Lambert 방위 등적(중심 = 대상 중심), 17.0 × 13.0 mm, 1 mm = 61 km, 축척 200 km 의 측지 길이 200 km, 래스터 {'nx': 317, 'ny': 242, 'ppi': 474.0}
@@ -252,11 +252,11 @@ Fig 6 v3 수치·점검 기록
 
 [6] 색각·흑백(F-09)
 - 연속 색표 cmc.broc(Crameri, 색각 이상에서도 단조로운 명도) ±vmax 공유, 0 중심. 대상 원 테두리 검정, 지시선 #737373, 영구동토 바탕 #d0d0d0·#e6e6e6, 육지 #f4f4f4.
-- 방법 색은 e 의 Anchor + residual ML #9a7bc9 하나뿐이다(흰 바탕 대비 3.47:1, 기준 3:1 이상). c·d 의 자료 표지는 검정이다.
+- v4 토큰 색: c 는 행마다 방법·제품 색, d 는 구간 방법마다 color.intervals, e 는 conformal 색 #CC79A7(흰 바탕 대비 3.06:1). 지도 색표는 그대로다.
 - 흑백 렌더(사람 판정): a·b 는 broc 의 명도가 0 에서 가장 밝고 양끝에서 어두워 부호를 명도만으로 구분할 수 없다. 부호는 컬러바 위치와 설명문의 대상 수로 읽는다. e 의 40·160 라벨은 채움·빈 마커로 구분된다.
 
 [7] 설명문(Fig6_legend.md, 손으로 작성)
-- 단어 수 349(자리표시 제외 349), 자리표시 []
+- 단어 수 350(자리표시 제외 350), 자리표시 []
 
 [8] 산출 파일
 - /home/willy010313/Polar_Bigdata/outputs/figures/paper/v3_restructure/Fig6.pdf

@@ -62,30 +62,40 @@ PREV_DIR = OUT / "preview"
 CLAIMS = ROOT / "paper" / "claims"
 FONT_DIR = Path.home() / ".fonts"
 
-# ---------------------------------------------------------------- 양식 토큰(지침 2.4, 5.3)
-INK = "#111111"
-AUX = "#4d4d4d"          # 0선, 기준선, 방향 표지, 보조 표지
-BAND = "#ededed"         # ±0.5 cm 동등 띠
-GRAY_ST = "#b0b0b0"      # 대체·폐기 상태 원, 오차 하한 띠
+# ---------------------------------------------------------------- 양식 토큰(v4: design/style_tokens_v4.json 단일 원천, 2026-10-05)
+# 사용자 검토(흑백에 가까움, 굵은 글씨, 화살촉 과다) 뒤: 방법마다 색, 강조는 물리 잔차 결합(주홍) 하나, 차트 글자는 Pretendard Regular
+TOK = json.loads((ROOT / "design" / "style_tokens_v4.json").read_text(encoding="utf-8"))
+_TM, _TN, _TL, _TF = TOK["color"]["methods"], TOK["color"]["neutral"], TOK["lines"]["slide"], TOK["font"]["slide"]
+INK = _TN["text_slide"]  # #1A1A1A
+AUX = _TN["zero_line"]   # 0선, 기준선
+BAND = _TN["equiv_band"] # ±0.5 cm 동등 띠
+GRAY_ST = "#b0b0b0"      # 대체·폐기 상태 원(자료 계열 아님)
 METHOD = {
-    "source": "#4d4d4d",   # 원천 계수 Stefan(Stefan 최소제곱 포함)
-    "recal": "#2b5c8f",    # 재보정 Stefan
-    "resid": "#9a7bc9",    # 물리 잔차 결합
-    "aug": "#568f72",      # 물리 유사라벨 증강
-    "direct": "#6b7280",   # 직접 ML
-    "physin": "#ad921a",   # 물리 입력 ML
-    "cci": "#84480c",      # Stefan·CCI 평균 앵커
+    "source": _TM["P0"]["hex"],     # 원천 계수 Stefan(Stefan 최소제곱 포함) #8A9BB0
+    "recal": _TM["P1"]["hex"],      # 재보정 Stefan #1F5A99
+    "ym": _TM["Pstar"]["hex"],      # 연도 정합 Stefan #4F8CC9
+    "resid": _TM["R1"]["hex"],      # 물리 잔차 결합(제안 방법, 강조) #D55E00
+    "cvsel": _TM["W"]["hex"],       # 대상 라벨 교차검증 선정 #A33E0B
+    "aug": _TM["D1"]["hex"],        # 물리 유사라벨 증강 #009E73
+    "direct": _TM["D0"]["hex"],     # 직접 ML #A3478A(파선)
+    "physin": _TM["F1"]["hex"],     # 물리 입력 ML #E69F00
+    "cci": TOK["color"]["products"]["CCI"]["hex"],   # Stefan·CCI 평균 앵커(CCI 제품 색)
+    "placebo": _TM["placebo"]["hex"],
 }
-AX_PT, TK_PT = 18, 16    # 축 라벨 18 pt, 눈금·직접 라벨 16 pt
-LW_MAIN, LW_AUX, LW_AXIS, LW_ZERO = 3.0, 2.0, 1.5, 2.0
-MS = 8                   # 측정점 8 pt
-MS_SMALL = 6             # 지역별 개별 점(alpha 0.5)
+AX_PT, TK_PT, DL_PT = _TF["axis_label_pt"], _TF["tick_pt"], _TF["direct_label_pt"]   # 축 이름 14, 눈금 12, 직접 라벨 13 pt
+LW_MAIN, LW_AUX, LW_AXIS, LW_ZERO = _TL["data_pt"], _TL["data_aux_pt"], _TL["axis_pt"], _TL["reference_pt"]   # 2.2, 1.4, 1.0, 1.0
+LW_CI_CELL, LW_CI_BLOCK = _TL["ci_cell_pt"], _TL["ci_block_pt"]   # 3.0, 1.4
+TICK_LEN = _TL["tick_len_pt"]
+MS = _TL["marker_pt"]    # 측정점 7 pt
+MS_SMALL = 5             # 지역별 개별 점(alpha 0.5)
 DPI = 300
-W_MED, W_SEMI = 500, 600
+W_MED, W_SEMI = "normal", "normal"   # v4: 차트 안 굵기는 모두 Regular(SemiBold·Bold 없음)
+STATUS_C = TOK["color"]["status"]     # 상태(판정 기록·결과 대기·대체)와 자료 종류 색
+INTERVAL_C = TOK["color"]["intervals"]   # 예측 구간 방법 색
 
 # ---------------------------------------------------------------- 공통
 CODE_RE = re.compile(r"\b(L\d{1,2}|AB\d{1,2}|LG[A-Z]?(-[A-Z]\d)?|WF\d{1,2}|SC\d\w*|H\d{1,2}\w?|X[A-J]|P4|PE[12]"
-                     r"|L\+C|P[0-2]\*?|R[0-2]|D[01]|v[1-5])\b|\((x|i)\)")
+                     r"|L\+C|P[0-2]\*?|R[0-2]|D[01]|(?<!CCI )v[1-5])\b|\((x|i)\)")
 DASH_RE = re.compile(r"(?<![0-9])\s?[—–]\s?(?![0-9])|—")
 
 
@@ -100,17 +110,16 @@ def rel(p):
 
 
 def setup_mpl():
-    for w in ("Medium", "SemiBold"):
-        fm.fontManager.addfont(str(FONT_DIR / f"Pretendard-{w}.otf"))
+    fm.fontManager.addfont(str(FONT_DIR / "Pretendard-Regular.otf"))
     plt.rcParams.update({
-        "font.family": "Pretendard", "font.weight": W_MED, "font.size": TK_PT,
+        "font.family": "Pretendard", "font.weight": "normal", "font.size": DL_PT, "axes.titleweight": "normal",
         "text.color": INK, "axes.labelcolor": INK, "axes.edgecolor": INK,
         "axes.labelsize": AX_PT, "axes.labelweight": W_MED, "axes.linewidth": LW_AXIS,
         "axes.spines.top": False, "axes.spines.right": False, "axes.grid": False,
         "axes.unicode_minus": True, "axes.facecolor": "white", "figure.facecolor": "white",
         "xtick.labelsize": TK_PT, "ytick.labelsize": TK_PT, "xtick.color": INK, "ytick.color": INK,
         "xtick.major.width": LW_AXIS, "ytick.major.width": LW_AXIS,
-        "xtick.major.size": 5, "ytick.major.size": 5, "xtick.major.pad": 6, "ytick.major.pad": 8,
+        "xtick.major.size": TICK_LEN, "ytick.major.size": TICK_LEN, "xtick.major.pad": 6, "ytick.major.pad": 8,
         "xtick.direction": "out", "ytick.direction": "out",
         "xtick.minor.visible": False, "ytick.minor.visible": False,
         "legend.frameon": False, "savefig.dpi": DPI, "figure.dpi": DPI,
@@ -129,18 +138,18 @@ def add_ax(fig, l, b, w, h):
     return fig.add_axes([l / W, b / H, w / W, h / H])
 
 
-def text_size_in(fig, s, size=TK_PT, weight=W_MED):
+def text_size_in(fig, s, size=DL_PT, weight=W_MED):
     t = fig.text(0, 0, s, fontsize=size, fontweight=weight)
     bb = t.get_window_extent(fig.canvas.get_renderer())
     t.remove()
     return bb.width / fig.dpi, bb.height / fig.dpi
 
 
-def max_text_w(fig, labels, size=TK_PT, weight=W_MED):
+def max_text_w(fig, labels, size=DL_PT, weight=W_MED):
     return max(text_size_in(fig, s, size, weight)[0] for s in labels)
 
 
-def ftext(fig, x, y, s, size=TK_PT, weight=W_MED, ha="left", va="center", color=INK, gid=None):
+def ftext(fig, x, y, s, size=DL_PT, weight=W_MED, ha="left", va="center", color=INK, gid=None):
     """그림 좌표(in) 글자."""
     return fig.text(x, y, s, transform=fig.dpi_scale_trans, fontsize=size, fontweight=weight,
                     ha=ha, va=va, color=color, gid=gid)
@@ -179,7 +188,7 @@ def key_line(fig, x0, y, items, gap=0.34):
 
 def cat_axis(ax, labels, positions, weight=W_MED):
     ax.set_yticks(positions)
-    ax.set_yticklabels(labels, fontsize=TK_PT, fontweight=weight)
+    ax.set_yticklabels(labels, fontsize=DL_PT, fontweight=weight)
     ax.tick_params(axis="y", length=0)
     ax.spines["left"].set_visible(False)
     for t in ax.get_yticklabels():
@@ -194,9 +203,9 @@ def in_per_data_y(fig, ax):
 
 def forest_row(ax, y, d, lo, hi, dbe, lob, hib, color, off):
     """점, 셀 가중 CI(굵게), 블록 등가중 CI(가늘게, 바로 아래)(지침 2.7)."""
-    ax.plot([lo, hi], [y, y], color=color, lw=LW_MAIN, solid_capstyle="butt", zorder=3)
+    ax.plot([lo, hi], [y, y], color=color, lw=LW_CI_CELL, solid_capstyle="butt", zorder=3)
     if np.isfinite(lob) and np.isfinite(hib):
-        ax.plot([lob, hib], [y + off, y + off], color=color, lw=LW_AUX, solid_capstyle="butt", zorder=3)
+        ax.plot([lob, hib], [y + off, y + off], color=color, lw=LW_CI_BLOCK, solid_capstyle="butt", zorder=3)
     ax.plot([d], [y], marker="o", ms=MS, mfc=color, mec=color, ls="none", zorder=4)
 
 
@@ -207,8 +216,8 @@ def ref_band_zero(ax):
 
 def forest_key(fig, x0, y, color="black"):
     return key_line(fig, x0, y, [
-        ("line", "셀 가중 95% CI", dict(c=color, lw=LW_MAIN)),
-        ("line", "블록 등가중 95% CI", dict(c=color, lw=LW_AUX)),
+        ("line", "셀 가중 95% CI", dict(c=color, lw=LW_CI_CELL)),
+        ("line", "블록 등가중 95% CI", dict(c=color, lw=LW_CI_BLOCK)),
         ("band", "±0.5 cm 동등 범위", {}),
     ])
 
@@ -284,9 +293,9 @@ def audit_chart(fig):
             if pb.width > 2 and pb.height > 2 and pb.x0 <= tb.x0 and tb.x1 <= pb.x1 and pb.y0 <= tb.y0 and tb.y1 <= pb.y1:
                 out["boxed"] += 1
     fails = []
-    if out["sizes"] - {16.0, 18.0}:
+    if out["sizes"] - {float(TK_PT), float(DL_PT), float(AX_PT), float(_TF["min_pt"])}:
         fails.append("size")
-    if out["fonts"] - {"Pretendard-Medium.otf", "Pretendard-SemiBold.otf"}:
+    if out["fonts"] - {"Pretendard-Regular.otf"}:
         fails.append("font")
     for k in ("thin", "titles", "codes", "comma4", "dash", "clipped", "overlaps", "loose_numbers", "tick_gap"):
         if out[k]:
@@ -312,7 +321,7 @@ def finish(fig, sid, name, df, meta):
     csv = SRC_DIR / f"{sid}_{name}.csv"
     df.to_csv(csv, index=False, encoding="utf-8")
     MANIFEST["charts"][sid] = dict(
-        file=rel(png), source_data=rel(csv), format="PNG(경로 B, Pretendard, 300 dpi, 배치 크기 그대로)",
+        file=rel(png), source_data=rel(csv), format="PNG(경로 B, Pretendard Regular, v4 토큰, 300 dpi, 배치 크기 그대로)",
         size_in=[round(w, 3), round(h, 3)], size_px=[int(round(w * DPI)), int(round(h * DPI))], **meta,
         audit={k: a[k] for k in ("fails", "sizes", "fonts", "n_text", "chars", "overlaps", "clipped",
                                  "loose_numbers", "codes", "dash", "thin", "boxed", "tick_gap")})
@@ -396,12 +405,12 @@ def chart_s03(spec):
     ms = min(MS, round(pitch * 72 * 0.92, 1))
     for i, it in df.iterrows():
         yy = ypos[it.row] + it.lane
-        if it.cls == "gray":
-            lc, fc, ec = GRAY_ST, GRAY_ST, GRAY_ST
-        elif it.cls == "planned":
-            lc, fc, ec = "black", "white", "black"
-        else:
-            lc, fc, ec = "black", "black", "black"
+        if it.cls == "gray":                                     # v4 status 색: 대체·폐기·미실행
+            lc, fc, ec = STATUS_C["dropped"], STATUS_C["dropped"], STATUS_C["dropped"]
+        elif it.cls == "planned":                                # 결과 대기
+            lc, fc, ec = STATUS_C["pending"], "white", STATUS_C["pending"]
+        else:                                                    # 판정 기록
+            lc, fc, ec = STATUS_C["done"], STATUS_C["done"], STATUS_C["done"]
         if it.end > it.start:
             ax.plot([it.start, it.end], [yy, yy], color=lc, lw=LW_AUX, solid_capstyle="butt", zorder=2)
         ax.plot([it.end], [yy], marker="o", ms=ms, mfc=fc, mec=ec, mew=1.0, ls="none", zorder=4)
@@ -416,8 +425,8 @@ def chart_s03(spec):
     fig.canvas.draw()
     xk = ax.transData.transform((mdates.date2num(datetime(2026, 8, 4)), 0))[0] / fig.dpi
     yk0 = ax.transData.transform((0, ypos["T"]))[1] / fig.dpi
-    for k, item in enumerate([("dot", "판정 기록", dict(fc="black", ms=ms)), ("odot", "결과 대기", dict(ms=ms)),
-                              ("dot", "대체·폐기·미실행", dict(fc=GRAY_ST, ec=GRAY_ST, ms=ms))]):
+    for k, item in enumerate([("dot", "판정 기록", dict(fc=STATUS_C["done"], ms=ms)), ("odot", "결과 대기", dict(ec=STATUS_C["pending"], ms=ms)),
+                              ("dot", "대체·폐기·미실행", dict(fc=STATUS_C["dropped"], ec=STATUS_C["dropped"], ms=ms))]):
         key_line(fig, xk, yk0 - 0.36 * k, [item])
     xl = ax.transData.transform((mdates.date2num(T0), 0))[0] / fig.dpi
     ftext(fig, xl - 0.10, H - top_band - 0.16, sp["visible_text"]["event_label"], ha="right", color=AUX)
@@ -455,11 +464,13 @@ def chart_s06(spec):
     left, right, bottom, top_band = lab_w + 0.30, 0.30, 0.86, 0.50
     ax = add_ax(fig, left, bottom, W - left - right, H - bottom - top_band)
     n = len(labels)
+    row_c = [STATUS_C[k] for k in ("label", "terrain", "terrain", "climate", "soil", "product", "satellite")]   # v4: 자료 종류 색
     for i, (raw, unit, _, _) in enumerate(vals):
+        c_ = row_c[i]
         if unit != raw:
-            ax.plot([raw, unit], [i, i], color="black", lw=LW_AUX, zorder=2)
-        ax.plot([raw], [i], marker="o", ms=MS, mfc="white", mec="black", mew=1.5, ls="none", zorder=3)
-        ax.plot([unit], [i], marker="o", ms=MS, mfc="black", mec="black", ls="none", zorder=4)
+            ax.plot([raw, unit], [i, i], color=c_, lw=LW_AUX, zorder=2)
+        ax.plot([raw], [i], marker="o", ms=MS, mfc="white", mec=c_, mew=1.5, ls="none", zorder=3)
+        ax.plot([unit], [i], marker="o", ms=MS, mfc=c_, mec=c_, ls="none", zorder=4)
     ax.axvline(1000, color=AUX, lw=LW_AXIS, zorder=1)
     ax.set_xscale("log")
     ax.set_xlim(7, 25000)
@@ -520,14 +531,14 @@ def chart_s08(spec):
     ax.set_xlabel("RMSE (cm)")
     # 직접 라벨: 마지막 행 한 번(직접 ML 은 점 오른쪽, Stefan 은 점 왼쪽)
     ax.annotate(names[0], (df.direct_ml_rmse.iloc[-1], n - 1), xytext=(10, 0), textcoords="offset points",
-                ha="left", va="center", fontsize=TK_PT, fontweight=W_SEMI, color=INK, annotation_clip=False)
+                ha="left", va="center", fontsize=DL_PT, fontweight=W_SEMI, color=METHOD["direct"], annotation_clip=False)
     ax.annotate(names[1], (df.stefan_ls_rmse.iloc[-1], n - 1), xytext=(-10, 0), textcoords="offset points",
-                ha="right", va="center", fontsize=TK_PT, fontweight=W_SEMI, color=INK)
+                ha="right", va="center", fontsize=DL_PT, fontweight=W_SEMI, color=METHOD["source"])
     df["source"] = f"{rel(tpath)} (L20, item 'D0[catboost_lo] RMSE@*', MEAN5, rmse_A); {rel(mpath)} (method PS, MEAN5, rmse)"
     meta = dict(slide="S08", page=8, archetype="A2", geometry_in=dict(x=0.667, y=1.3, w=W, h=H),
                 sources=[rel(tpath), rel(mpath)],
                 notes=["다섯 지역 등가중 평균(MEAN5). 직접 ML = CatBoost(catboost_lo)",
-                       "Stefan 최소제곱은 원천 계수 Stefan 의 색과 선(#4d4d4d 실선)"])
+                       "Stefan 최소제곱은 원천 계수 Stefan 의 색과 선(#8A9BB0 실선, v4)"])
     finish(fig, "S08", "validation_ladder", df, meta)
 
 
@@ -556,18 +567,18 @@ def chart_s20(spec):
     ax = add_ax(fig, left, bottom, W - left - right, H - bottom - top)
     ax.set_xlim(10.5, 15)
     ax.set_ylim(1.6, -0.75)
-    ax.axvspan(10.5, floor, fc=GRAY_ST, ec="none", zorder=0)
+    ax.axvspan(10.5, floor, fc=_TN["grid"], ec="none", zorder=0)              # v4: 오차 하한 구역은 옅은 중립색
     pts = [(0, st, METHOD["source"], "Stefan"), (0, rs, METHOD["resid"], "물리 잔차 결합"),
            (1, p1, METHOD["recal"], "재보정 Stefan"), (1, r1, METHOD["resid"], None)]
     for yv, (a, b) in enumerate([(st, rs), (p1, r1)]):
-        ax.plot([a, b], [yv, yv], color="black", lw=LW_AUX, zorder=2)
+        ax.plot([a, b], [yv, yv], color=AUX, lw=LW_AUX, zorder=2)
     for yv, x, col, lab in pts:
         ax.plot([x], [yv], marker="o", ms=MS, mfc=col, mec=col, ls="none", zorder=3)
         if lab:
             ax.annotate(lab, (x, yv), xytext=(0, 13), textcoords="offset points", ha="center", va="bottom",
-                        fontsize=TK_PT, fontweight=W_SEMI, color=INK)
-    ax.text((10.5 + floor) / 2, -0.55, "오차 하한", ha="center", va="center", fontsize=TK_PT, fontweight=W_SEMI,
-            color=INK)
+                        fontsize=DL_PT, fontweight=W_SEMI, color=col)                 # v4: 직접 라벨은 계열 색
+    ax.text((10.5 + floor) / 2, -0.55, "오차 하한", ha="center", va="center", fontsize=DL_PT, fontweight=W_SEMI,
+            color=_TN["text_aux"])
     cat_axis(ax, rows, [0, 1])
     ax.set_xticks([11, 12, 13, 14, 15])
     ax.set_xlabel("RMSE (cm)")
@@ -632,7 +643,7 @@ def chart_s24(spec):
     ref_band_zero(ax)
     for y, r in zip(ypos, rows):
         forest_row(ax, y, r["delta"], r["ci_lo"], r["ci_hi"], r["delta_blockeq"], r["ci_lo_beq"], r["ci_hi_beq"],
-                   "black", off)
+                   METHOD["resid"], off)                                     # v4: 물리 잔차 결합의 오차 변화 = 제안 방법 색
     cat_axis(ax, df.row.tolist(), ypos)
     ax.set_xticks([-8, -6, -4, -2, 0, 2])
     ax.set_xlabel("물리 잔차 결합의 오차 변화 (cm)")
@@ -641,8 +652,8 @@ def chart_s24(spec):
         yin = ax.transData.transform((0, gy + 0.05))[1] / fig.dpi
         ftext(fig, 0.05, yin, g, weight=W_SEMI, va="top", gid="category")
     yk1, yk2 = H - 0.22, H - 0.56
-    key_line(fig, 0.05, yk1, [("line", "셀 가중 95% CI", dict(c="black", lw=LW_MAIN)),
-                              ("line", "블록 등가중 95% CI", dict(c="black", lw=LW_AUX))])
+    key_line(fig, 0.05, yk1, [("line", "셀 가중 95% CI", dict(c=METHOD["resid"], lw=LW_CI_CELL)),
+                              ("line", "블록 등가중 95% CI", dict(c=METHOD["resid"], lw=LW_CI_BLOCK))])
     key_line(fig, 0.05, yk2, [("band", "±0.5 cm 동등 범위", {})])
     df["source"] = rel(p)
     meta = dict(slide="S24", page=24, archetype="A5(오른쪽 그래프)", geometry_in=dict(x=6.817, y=1.55, w=W, h=H),
@@ -681,16 +692,17 @@ def chart_s25(spec):
     ax.set_ylim(2.55, -0.55)
     ax.axvline(0.9, color=AUX, lw=LW_ZERO, ls=(0, (1.2, 1.4)), zorder=1)
     # 행 0: 계층 conformal(9월 26일 규약) 지역별 값과 주 4지역 평균
-    ax.plot(list(hreg.values()), [0] * 4, marker="o", ms=MS_SMALL, mfc="black", mec="black", alpha=0.5, ls="none", zorder=3)
-    ax.plot([mean], [0], marker="o", ms=MS + 2, mfc="black", mec="black", ls="none", zorder=4)
+    c0, c1, c2 = INTERVAL_C["Conformal"], INTERVAL_C["CatBoost quantile"], INTERVAL_C["Normalizing flow"]   # v4: 구간 방법 색
+    ax.plot(list(hreg.values()), [0] * 4, marker="o", ms=MS_SMALL, mfc=c0, mec=c0, alpha=0.5, ls="none", zorder=3)
+    ax.plot([mean], [0], marker="o", ms=MS + 2, mfc=c0, mec=c0, ls="none", zorder=4)
     # 행 1: 알래스카 보정 CQR, 주 4지역 × 두 조건 8행의 범위
-    ax.plot([uu.coverage.min(), uu.coverage.max()], [1, 1], color="black", lw=LW_MAIN, zorder=2)
-    ax.plot(uu.coverage, [1] * len(uu), marker="o", ms=MS_SMALL, mfc="black", mec="black", alpha=0.5, ls="none", zorder=3)
+    ax.plot([uu.coverage.min(), uu.coverage.max()], [1, 1], color=c1, lw=LW_MAIN, zorder=2)
+    ax.plot(uu.coverage, [1] * len(uu), marker="o", ms=MS_SMALL, mfc=c1, mec=c1, alpha=0.5, ls="none", zorder=3)
     # 행 2: 원천 셀 교환성으로 보정한 생성 분위 구간 2종
     for x, lab in ((nf, "정규화 흐름"), (cf, "흐름 정합")):
-        ax.plot([x], [2], marker="o", ms=MS + 2, mfc="black", mec="black", ls="none", zorder=4)
+        ax.plot([x], [2], marker="o", ms=MS + 2, mfc=c2, mec=c2, ls="none", zorder=4)
         ax.annotate(lab, (x, 2), xytext=(0, 12), textcoords="offset points", ha="center", va="bottom",
-                    fontsize=TK_PT, fontweight=W_SEMI, color=INK)
+                    fontsize=DL_PT, fontweight=W_SEMI, color=c2)
     cat_axis(ax, rows, [0, 1, 2])
     ax.set_xticks([0.3, 0.5, 0.7, 0.9])
     ax.set_xticklabels(["0.3", "0.5", "0.7", "0.9"])
@@ -698,9 +710,9 @@ def chart_s25(spec):
     fig.canvas.draw()
     xl = ax.transData.transform((0.9, 0))[0] / fig.dpi
     ftext(fig, xl, H - top_band + 0.08, "목표", ha="center", va="bottom", color=AUX)
-    key_line(fig, 0.05, H - 0.22, [("dot", "주 4지역 평균", dict(fc="black", ms=MS + 2)),
-                                   ("dot", "지역별 값", dict(fc="black", ms=MS_SMALL, alpha=0.5)),
-                                   ("line", "범위", dict(c="black", lw=LW_MAIN))])
+    key_line(fig, 0.05, H - 0.22, [("dot", "주 4지역 평균", dict(fc=_TN["text_aux"], ms=MS + 2)),
+                                   ("dot", "지역별 값", dict(fc=_TN["text_aux"], ms=MS_SMALL, alpha=0.5)),
+                                   ("line", "범위", dict(c=_TN["text_aux"], lw=LW_MAIN))])
     recs = [dict(row=rows[0], item="주 4지역 평균(지역 등가중)", coverage=mean,
                  source=f"{rel(hp)} test label0, method hier2_cdf, MEAN6")]
     recs += [dict(row=rows[0], item=r, coverage=v, source=f"{rel(hp)} label0, hier2_cdf, {r}") for r, v in hreg.items()]
@@ -722,8 +734,8 @@ def chart_s25(spec):
 def chart_s29(spec):
     sp = spec["S29"]
     vals = sp["evidence"]["chart"]["values"]          # {절: [현재, 목표]}
-    check = {"서론": (797, 700), "결과": (7500, 2800), "고찰": (2012, 850), "방법": (6998, 4240)}
-    for k, v in check.items():   # 문서 표(scirep_format_and_drafts.md 3.2, MANUSCRIPT_SPEC.md 1.1)와 대조
+    check = {"서론": (633, 700), "결과": (2999, 2800), "고찰": (808, 850), "방법": (4930, 4240)}
+    for k, v in check.items():   # 원고 조립 점검표(paper/manuscript/en/COMPLIANCE.md 3절, 5차)와 계획(MANUSCRIPT_SPEC.md 1.1)
         assert tuple(vals[k]) == v, k
     rows = sp["visible_text"]["chart_rows"]
     W, H = 7.9, 4.75
@@ -733,26 +745,23 @@ def chart_s29(spec):
     ax = add_ax(fig, left, bottom, W - left - right, H - bottom - top_band)
     for i, k in enumerate(rows):
         cur, tgt = vals[k]
-        ax.plot([cur, tgt], [i, i], color=GRAY_ST, lw=LW_AUX, zorder=2)
-        ax.plot([cur], [i], marker="o", ms=MS, mfc="white", mec="black", mew=1.5, ls="none", zorder=3)
-        ax.plot([tgt], [i], marker="o", ms=MS, mfc="black", mec="black", ls="none", zorder=4)
-    i = rows.index("고찰")
-    ax.annotate("골격", (vals["고찰"][0], i), xytext=(12, 0), textcoords="offset points", ha="left", va="center",
-                fontsize=TK_PT, fontweight=W_SEMI, color=INK)
-    ax.set_xlim(0, 8000)
-    ax.set_xticks([0, 2000, 4000, 6000, 8000])
-    ax.set_xticklabels(["0", "2000", "4000", "6000", "8000"])
+        ax.plot([cur, tgt], [i, i], color=STATUS_C["dropped"], lw=LW_AUX, zorder=2)
+        ax.plot([cur], [i], marker="o", ms=MS, mfc="white", mec=STATUS_C["done"], mew=1.5, ls="none", zorder=3)      # 현재 원고 = 완료 색
+        ax.plot([tgt], [i], marker="o", ms=MS, mfc=STATUS_C["pending"], mec=STATUS_C["pending"], ls="none", zorder=4)   # 계획 = 대기 색
+    ax.set_xlim(0, 6000)
+    ax.set_xticks([0, 2000, 4000, 6000])
+    ax.set_xticklabels(["0", "2000", "4000", "6000"])
     ax.set_ylim(len(rows) - 0.5, -0.5)
     cat_axis(ax, rows, range(len(rows)))
     ax.set_xlabel("단어 수")
-    key_line(fig, 0.05, H - 0.24, [("odot", "현재 초안", {}), ("dot", "목표", dict(fc="black"))])
+    key_line(fig, 0.05, H - 0.24, [("odot", "현재 원고", dict(ec=STATUS_C["done"])), ("dot", "계획", dict(fc=STATUS_C["pending"]))])
     df = pd.DataFrame([dict(section=k, current_words=vals[k][0], target_words=vals[k][1]) for k in rows])
-    df["source"] = ("docs/research/2026-10-04/scirep_format_and_drafts.md 3.2(현재, 마크다운 공백 토큰), "
-                    "paper/manuscript/MANUSCRIPT_SPEC.md 1.1·6절(목표)")
+    df["source"] = ("paper/manuscript/en/COMPLIANCE.md 3절(현재, 렌더 PDF 단어 수, 자리표시 제외, 5차 수정 뒤), "
+                    "paper/manuscript/MANUSCRIPT_SPEC.md 1.1·6절(계획)")
     meta = dict(slide="S29", page=29, archetype="A3", geometry_in=dict(x=0.667, y=1.3, w=W, h=H),
-                sources=["docs/research/2026-10-04/scirep_format_and_drafts.md 3.2", "paper/manuscript/MANUSCRIPT_SPEC.md 1.1"],
+                sources=["paper/manuscript/en/COMPLIANCE.md 3절", "paper/manuscript/MANUSCRIPT_SPEC.md 1.1"],
                 notes=["스펙 높이 4.3 in 를 4.75 in 로 늘렸다(근거 블록 4.5 in 이상, 보조 표와 높이 일치)",
-                       "고찰 현재 값은 골격 판이라 직접 라벨 '골격'"])
+                       "2026-10-05 원고 조립 상태로 갱신: 현재 값은 렌더 PDF 단어 수(자리표시 제외), 가로축 0–6000"])
     finish(fig, "S29", "word_budget", df, meta)
 
 
@@ -778,14 +787,15 @@ def chart_s32(spec):
     for i, e in enumerate(ids):
         xs = order[e]
         filled = e in main
+        c_ = STATUS_C["done"] if filled else STATUS_C["pending"]          # v4 status 색: 본문 = 완료 색, 보충 자료 = 대기 색
         if len(xs) > 1:
-            ax.plot([xs[0], xs[-1]], [i, i], color="black", lw=LW_AUX, zorder=2)
+            ax.plot([xs[0], xs[-1]], [i, i], color=c_, lw=LW_AUX, zorder=2)
         for x in xs:
-            ax.plot([x], [i], marker="o", ms=MS, mfc="black" if filled else "white", mec="black", mew=1.5,
+            ax.plot([x], [i], marker="o", ms=MS, mfc=c_ if filled else "white", mec=c_, mew=1.5,
                     ls="none", zorder=3)
             if (e, x) in extra:
                 t = ax.annotate(extra[(e, x)], (x, i), xytext=(0, 9), textcoords="offset points", ha="center",
-                                va="bottom", fontsize=TK_PT, fontweight=W_SEMI, color=INK)
+                                va="bottom", fontsize=DL_PT, fontweight=W_SEMI, color=INK)
                 t.set_gid("label_num")
     ax.set_xlim(0.5, 12.5)
     ax.set_xticks(range(1, 13))
@@ -798,7 +808,7 @@ def chart_s32(spec):
         yin = ax.transData.transform((0, i))[1] / fig.dpi
         ftext(fig, xr, yin, pl, gid="category")
     ftext(fig, xr, H - 0.24, "원고 자리", weight=W_SEMI, gid="category")
-    key_line(fig, 0.05, H - 0.24, [("dot", "본문", dict(fc="black")), ("odot", "보충 자료", {})])
+    key_line(fig, 0.05, H - 0.24, [("dot", "본문", dict(fc=STATUS_C["done"])), ("odot", "보충 자료", dict(ec=STATUS_C["pending"]))])
     df = pd.DataFrame([dict(row=lab, experiment_spec_only=e, order=";".join(map(str, order[e])),
                             main_or_si="본문" if e in main else "보충", manuscript_place=pl)
                        for lab, e, pl in zip(labels, ids, places)])
@@ -812,18 +822,21 @@ def chart_s32(spec):
 
 # ================================================================ AP3 라벨 0 물리 기준선
 def chart_ap3(spec):
+    """라벨 0 기준선 대비 포레스트. 기존 지도 행은 기존 ALT 지도 비교(XG-1c, CCI v5)로 채우고(2026-10-05),
+    값이 주 축 밖(+15–30 cm)이라 가로축을 끊어 오른쪽 축에 그린다(두 축 모두 같은 cm 단위, 끊긴 자리는 축 사이 간격)."""
     lp = CLAIMS / "C1_label0_safety/tables/lgx_tests.csv"
     bp = CLAIMS / "C1_label0_safety/tables/lgw_bundle.csv"
+    xp = ROOT / "data/processed/xbatch/XG_product_comparison/sealed/xg_tests.csv"
     t = pd.read_csv(lp)
     b = pd.read_csv(bp)
-    mean4 = "MEAN[Lena|x,Canada|x,Russia_W|x,Russia_E|x]"
+    xg = pd.read_csv(xp)
 
-    def rec(q, row, group, desc, f):
+    def rec(q, row, group, desc, f, vcol="verdict4"):
         assert len(q) == 1, row
         r = q.iloc[0]
         return dict(group=group, row=row, contrast=desc, delta=r.delta, ci_lo=r.ci_lo, ci_hi=r.ci_hi,
                     delta_blockeq=r.delta_blockeq, ci_lo_beq=r.ci_lo_beq, ci_hi_beq=r.ci_hi_beq,
-                    verdict4=r.verdict4, pending=False, filter=f)
+                    verdict4=r[vcol], pending=False, filter=f)
 
     g1, g2 = "원천 계수 Stefan 대비", "연도 정합 Stefan 대비"
     rows = [
@@ -831,45 +844,54 @@ def chart_ap3(spec):
             "연도 정합 Stefan − 원천 계수 Stefan", f"{rel(lp)} test_id L29, contrast P0@tddm-P0|n0, MEAN"),
         rec(b[(b.ab == "AB2") & (b.scope == "MEAN")], "Stefan·위성 제품 앙상블", g1,
             "Stefan·위성 제품 앙상블 − 원천 계수 Stefan", f"{rel(bp)} ab AB2, MEAN"),
-        dict(group=g1, row="기존 ALT 지도", contrast="기존 ALT 지도 − 원천 계수 Stefan", pending=True,
-             filter="[XG: R2 | 결과 열람 뒤 설계, 등록 이탈(WRAPUP 10) | 2.7 사전 고정 해석 문장 XG-1, XG-2, XG-3, 공통 문장]"),
+        rec(xg[xg.hypothesis == "XG-1c"], "기존 지도 CCI v5", g1,
+            "기존 지도 CCI v5 − 원천 계수 Stefan(주 4지역, 학습 지점 5 km 마스크 뒤)",
+            f"{rel(xp)} hypothesis XG-1c(cci5y, 주 4지역, verdict4_blk5)", vcol="verdict4_blk5"),
         rec(t[(t.test_id == "L28") & (t.contrast == "앵커 tddm|D0-P0|n0") & (t.scope == "MEAN")], "직접 ML", g2,
             "직접 ML − 연도 정합 Stefan", f"{rel(lp)} test_id L28, item X9, contrast 앵커 tddm|D0-P0|n0, MEAN"),
     ]
-    for r in rows:
-        if not r["pending"]:
-            assert r.get("delta") is not None
     df = pd.DataFrame(rows)
     W, H = 12.0, 5.2
     fig = new_fig(W, H)
     lab_w = max(max_text_w(fig, df.row.tolist()), max_text_w(fig, [g1, g2], weight=W_SEMI) - 0.2)
     left, right, bottom, top_band = lab_w + 0.40, 0.35, 0.86, 0.55
-    ax = add_ax(fig, left, bottom, W - left - right, H - bottom - top_band)
+    avail = W - left - right
+    gap_w, side_w = 0.30, 2.70
+    main_w = avail - gap_w - side_w
+    ax = add_ax(fig, left, bottom, main_w, H - bottom - top_band)
+    ax2 = add_ax(fig, left + main_w + gap_w, bottom, side_w, H - bottom - top_band)
     ypos = [0.9, 1.9, 2.9, 4.9]
-    ax.set_ylim(5.5, 0.0)
+    for a in (ax, ax2):
+        a.set_ylim(5.5, 0.0)
     ax.set_xlim(-4.5, 5.0)
+    ax2.set_xlim(13.0, 32.0)
     fig.canvas.draw()
     off = 0.11 / in_per_data_y(fig, ax)
     ref_band_zero(ax)
+    ap3_col = {"연도 정합 Stefan": METHOD["ym"], "Stefan·위성 제품 앙상블": METHOD["cci"], "기존 지도 CCI v5": METHOD["cci"],
+               "직접 ML": METHOD["direct"]}                                  # v4: 행마다 방법 색
     for y, r in zip(ypos, rows):
-        if r["pending"]:
-            ax.text(0.75, y, "결과 대기", ha="left", va="center", fontsize=TK_PT, color=AUX, gid="category")
-            continue
-        forest_row(ax, y, r["delta"], r["ci_lo"], r["ci_hi"], r["delta_blockeq"], r["ci_lo_beq"], r["ci_hi_beq"],
-                   "black", off)
+        side = r["delta"] > 10.0                     # 주 축 밖 값은 오른쪽 축
+        forest_row(ax2 if side else ax, y, r["delta"], r["ci_lo"], r["ci_hi"], r["delta_blockeq"], r["ci_lo_beq"],
+                   r["ci_hi_beq"], ap3_col.get(r["row"], INK), off)
     cat_axis(ax, df.row.tolist(), ypos)
     ax.set_xticks([-4, -2, 0, 2, 4])
-    ax.set_xlabel("오차 변화 (cm)")
+    ax2.set_xticks([15, 20, 25, 30])
+    ax2.spines["left"].set_visible(False)
+    ax2.tick_params(axis="y", left=False, labelleft=False)
     fig.canvas.draw()
+    x_mid = (left + left + main_w + gap_w + side_w) / 2
+    ftext(fig, x_mid, 0.22, "오차 변화 (cm)", size=AX_PT, ha="center")
     for gy, g in ((0.05, g1), (4.05, g2)):
         yin = ax.transData.transform((0, gy))[1] / fig.dpi
         ftext(fig, 0.05, yin, g, weight=W_SEMI, va="top", gid="category")
     forest_key(fig, 0.05, H - 0.24)
     df["source"] = df["filter"]
     meta = dict(slide="AP3", page="부록 3", archetype="A2", geometry_in=dict(x=0.667, y=1.3, w=W, h=H),
-                sources=[rel(lp), rel(bp)],
+                sources=[rel(lp), rel(bp), rel(xp)],
                 notes=["행을 비교 기준 두 묶음으로 나누었다(행 이름 4단어 이하). 스펙의 4행과 같은 대비",
-                       "기존 ALT 지도 행은 값 없이 '결과 대기' 표지(추가 실험 자리표시는 CSV 의 filter 열)"])
+                       "기존 지도 행은 기존 ALT 지도 비교의 CCI v5 대비(XG-1c, 주 4지역). 값이 +15 cm 이상이라 가로축을 끊어 오른쪽 축(13–32 cm)에 그림",
+                       "Wei 지도 대비는 레나델타·캐나다 2지역에서만 있어(미결정) 이 4지역 평균 그림에 넣지 않음(노트)"])
     finish(fig, "AP3", "label0_baselines", df, meta)
 
 
@@ -918,8 +940,8 @@ def chart_ap5(spec):
     meta = dict(slide="AP5", page="부록 5", archetype="A2", geometry_in=dict(x=0.667, y=1.3, w=W, h=H),
                 sources=[rel(p), "docs/QA_FINAL_REVIEW_2026-10-02.md Q15 표"],
                 notes=["계열 4개가 0.1–0.3 cm 안에 몰린 행이 있어 직접 라벨 대신 열쇠 한 줄(4항목)과 행 안 세로 어긋남을 썼다",
-                       "직접 CatBoost 와 선형 ML 은 직접 ML 색(#6b7280)을 공유하고 선 모양(파선, 점선)으로 구분한다",
-                       "Stefan 은 지역 내 최소제곱 계수, 원천 계수 Stefan 의 색(#4d4d4d)"])
+                       "직접 CatBoost 와 선형 ML 은 직접 ML 색(#A3478A, v4)을 공유하고 선 모양(파선, 점선)으로 구분한다",
+                       "Stefan 은 지역 내 최소제곱 계수, 원천 계수 Stefan 의 색(#8A9BB0, v4)"])
     finish(fig, "AP5", "cv_schemes", df, meta)
 
 
@@ -979,16 +1001,7 @@ def chart_ap8(spec):
         ftext(fig, (bb.x0 + bb.x1) / 2 / fig.dpi, H - top_band + 0.10, ln, size=AX_PT, weight=W_SEMI, ha="center",
               va="bottom")
     x_mid = left + (W - left - right) / 2
-    ftext(fig, x_mid, 0.22, "조정판 − 기본판 (cm)", size=AX_PT, ha="center")
-    # 방향 표지 1개(지침 R-11): 첫 패널 아래 왼쪽, 축 방향 화살표 하나
-    fig.canvas.draw()
-    b0 = axes[0].get_window_extent(fig.canvas.get_renderer())
-    x0 = b0.x0 / fig.dpi
-    fig.add_artist(Line2D([x0 + 0.42, x0 + 0.02], [0.22, 0.22], transform=fig.dpi_scale_trans, color=AUX, lw=LW_AXIS,
-                          marker=None))
-    fig.add_artist(Line2D([x0 + 0.02], [0.22], transform=fig.dpi_scale_trans, color=AUX, marker="<", ms=7,
-                          mfc=AUX, mec=AUX, ls="none"))
-    ftext(fig, x0 + 0.52, 0.22, sp["visible_text"]["direction_marker"], color=AUX)
+    ftext(fig, x_mid, 0.22, "조정판 − 기본판 (cm, 음수 = 조정판 오차 낮음)", size=AX_PT, ha="center")   # v4: 방향은 축 이름 괄호, 화살표 없음
     key_line(fig, 0.05, H - 0.24, [("line", "직접 ML", dict(c=METHOD["direct"], lw=LW_MAIN, marker=True)),
                                    ("line", "물리 잔차 결합", dict(c=METHOD["resid"], lw=LW_MAIN, marker=True)),
                                    ("line", "셀 가중 95% CI", dict(c="black", lw=LW_MAIN)),
@@ -1052,15 +1065,15 @@ def chart_s09(spec):
     ax.set_xticks([0, 10, 20, 30, 40])
     ax.set_yticks([0, 50, 100])
     ax.set_xlabel("√TDD (√(°C·일))")
-    ax.set_ylabel("ALT (cm)")
+    ax.set_ylabel("ALT (cm, 아래로 깊어짐)")                        # v4: 방향은 축 이름 괄호 안(화살표 없음)
     # 직접 라벨 3개: 두 직선은 오른쪽 끝(원천 계수는 화면 아래쪽 선), 잔차는 가장 긴 선분 옆
     ax.annotate(names[0], (XMAX, E0 * XMAX), xytext=(8, -5), textcoords="offset points", ha="left", va="top",
-                fontsize=TK_PT, fontweight=W_SEMI, color=INK, annotation_clip=False)
+                fontsize=DL_PT, fontweight=W_SEMI, color=METHOD["source"], annotation_clip=False)
     ax.annotate(names[1], (XMAX, E_n * XMAX), xytext=(8, 5), textcoords="offset points", ha="left", va="bottom",
-                fontsize=TK_PT, fontweight=W_SEMI, color=INK, annotation_clip=False)
+                fontsize=DL_PT, fontweight=W_SEMI, color=METHOD["recal"], annotation_clip=False)
     j = max(pick, key=lambda i: abs(resid[i]))
     ax.annotate(names[2], (s_l[j], E_n * s_l[j] + resid[j] / 2), xytext=(9, 0), textcoords="offset points",
-                ha="left", va="center", fontsize=TK_PT, fontweight=W_SEMI, color=INK)
+                ha="left", va="center", fontsize=DL_PT, fontweight=W_SEMI, color=METHOD["resid"])
     # 수식 1개(18 pt, 자료가 없는 왼쪽 아래 구역)
     ax.text(0.30, 0.16, sp["visible_text"]["formula_in_figure"], transform=ax.transAxes, ha="center", va="center",
             fontsize=AX_PT, fontweight=W_MED, color=INK)
@@ -1069,15 +1082,8 @@ def chart_s09(spec):
     x0, y0, y1 = bb.x0 / fig.dpi, bb.y0 / fig.dpi, bb.y1 / fig.dpi
     # 축 범위 밖(ALT > YMAX) 행은 세로축 아래 끝의 삼각 표지 하나(지침 2.7 '축 끝의 작은 삼각 표지'). 수는 노트·CSV
     n_over = int((y_all > YMAX).sum())
-    if n_over:
-        fig.add_artist(Line2D([x0], [y0 - 0.09], transform=fig.dpi_scale_trans, color="black", marker="v", ms=5,
-                              mfc="black", mec="black", ls="none"))
-    # 방향 표지 1개(16 pt #4d4d4d, 쪽당 1개): 세로축 위쪽, 원점 아래의 빈 구역
-    ya, yb = y1 - 0.95, y1 - 1.30
-    fig.add_artist(Line2D([x0 + 0.16, x0 + 0.16], [ya, yb], transform=fig.dpi_scale_trans, color=AUX, lw=LW_AXIS))
-    fig.add_artist(Line2D([x0 + 0.16], [yb], transform=fig.dpi_scale_trans, color=AUX, marker="v", ms=7, mfc=AUX,
-                          mec=AUX, ls="none"))
-    ftext(fig, x0 + 0.28, (ya + yb) / 2, "아래로 깊어짐", color=AUX)
+    if n_over:                                             # v4: 삼각 표지 대신 축 끝에 수를 적는다
+        ftext(fig, x0 + 0.08, y0 + 0.16, f"{YMAX:.0f} cm 초과 {n_over}개", size=TK_PT, color=AUX, gid="label_num")
     df = pd.DataFrame(dict(loc_id=d.loc_id.values[idx], sqrt_tdd=s_l, alt_cm=y_l, residual_cm=resid,
                            residual_segment=[i in pick for i in range(S09_N_LAB)]))
     df["E0"], df["E_ls_10"], df["E_recal_10"] = E0, E_ls, E_n
@@ -1164,9 +1170,9 @@ def draw_workflow_path(fig, box, vals, labels, intervals, small=False):
     axm.plot([3, 10], r1, marker="o", ms=MS, mfc=METHOD["resid"], mec=METHOD["resid"], ls="none", zorder=4)
     # 구간 40–160과 전량: 교차검증 선정(고유 색 없음, 검정 경로). 320–1000 은 시험하지 않아 선분 없음
     wv = [v[("교차검증 선정", 40)], v[("교차검증 선정", 160)]]
-    axm.plot([40, 160], wv, color="black", lw=LW_MAIN, zorder=3)
-    axm.plot([40, 160], wv, marker="o", ms=MS, mfc="black", mec="black", ls="none", zorder=4)
-    axa.plot([0.5], [v[("교차검증 선정", -1)]], marker="o", ms=MS, mfc="black", mec="black", ls="none", zorder=4)
+    axm.plot([40, 160], wv, color=METHOD["cvsel"], lw=LW_MAIN, zorder=3)
+    axm.plot([40, 160], wv, marker="o", ms=MS, mfc=METHOD["cvsel"], mec=METHOD["cvsel"], ls="none", zorder=4)
+    axa.plot([0.5], [v[("교차검증 선정", -1)]], marker="o", ms=MS, mfc=METHOD["cvsel"], mec=METHOD["cvsel"], ls="none", zorder=4)
     fig.canvas.draw()
     r = fig.canvas.get_renderer()
     b0, bm, ba = (a.get_window_extent(r) for a in (ax0, axm, axa))
@@ -1175,13 +1181,16 @@ def draw_workflow_path(fig, box, vals, labels, intervals, small=False):
     # 방법 라벨 3개(16 pt SemiBold, 각 1회). 그림 좌표로 두어 축 경계에 잘리지 않게 한다
     lab0, lab1, lab2 = labels
     if small:
-        ftext(fig, b0.x1 / fig.dpi + 0.06, fy(ax0, 0) - 0.07, lab0.replace(" Stefan", "\nStefan"), weight=W_SEMI, va="top")
-        ftext(fig, fx(axm, 10), fy(axm, r1[1]) + 0.12, lab1.replace(" 저가중", "\n저가중"), weight=W_SEMI, ha="center", va="bottom")
-        ftext(fig, fx(axm, 160) + 0.12, fy(axm, wv[1]) + 0.06, lab2.replace(" ", "\n"), weight=W_SEMI, ha="left", va="center")
+        ftext(fig, b0.x1 / fig.dpi + 0.06, fy(ax0, 0) - 0.07, lab0.replace(" Stefan", "\nStefan"), weight=W_SEMI, va="top", color=METHOD["source"])
+        ftext(fig, fx(axm, 10), fy(axm, r1[1]) + 0.12, lab1.replace(" 저가중", "\n저가중"), weight=W_SEMI, ha="center", va="bottom",
+              color=METHOD["resid"])
+        ftext(fig, fx(axm, 160) + 0.12, fy(axm, wv[1]) + 0.06, lab2.replace(" ", "\n"), weight=W_SEMI, ha="left", va="center",
+              color=METHOD["cvsel"])
     else:
-        ftext(fig, b0.x1 / fig.dpi + 0.10, fy(ax0, 0) - 0.08, lab0, weight=W_SEMI, va="top")
-        ftext(fig, fx(axm, 10), fy(axm, r1[1]) + 0.14, lab1, weight=W_SEMI, ha="center", va="bottom")
-        ftext(fig, fx(axm, np.sqrt(40 * 160)), fy(axm, (wv[0] + wv[1]) / 2) + 0.14, lab2, weight=W_SEMI, ha="center", va="bottom")
+        ftext(fig, b0.x1 / fig.dpi + 0.10, fy(ax0, 0) - 0.08, lab0, weight=W_SEMI, va="top", color=METHOD["source"])
+        ftext(fig, fx(axm, 10), fy(axm, r1[1]) + 0.14, lab1, weight=W_SEMI, ha="center", va="bottom", color=METHOD["resid"])
+        ftext(fig, fx(axm, np.sqrt(40 * 160)), fy(axm, (wv[0] + wv[1]) / 2) + 0.14, lab2, weight=W_SEMI, ha="center", va="bottom",
+              color=METHOD["cvsel"])
     pos = dict(x_left=b0.x0 / fig.dpi, x0_right=b0.x1 / fig.dpi, x_main_left=bm.x0 / fig.dpi, x_main_right=bm.x1 / fig.dpi,
                x_all_right=ba.x1 / fig.dpi, x3=fx(axm, 3), y_axis=bm.y0 / fig.dpi,
                x_centers=[(b0.x0 + b0.x1) / 2 / fig.dpi, fx(axm, np.sqrt(3 * 10)), fx(axm, np.sqrt(40 * 160)),
@@ -1753,7 +1762,7 @@ def main():
         MANIFEST["values_check"] = dict(file=rel(OUT / "values_check.txt"), ok=n_ok, mismatch=n_bad)
     MANIFEST["meta"] = dict(
         generated=datetime.now().strftime("%Y-%m-%d %H:%M"), script=rel(Path(__file__)),
-        spec=rel(SPEC), chart_rule="지침 5.6 경로 B, 배치 크기 그대로 300 dpi, Pretendard Medium·SemiBold, 축 18 pt, 눈금·직접 라벨 16 pt",
+        spec=rel(SPEC), chart_rule="v4 토큰(design/style_tokens_v4.json): 경로 B, 배치 크기 그대로 300 dpi, Pretendard Regular, 축 14 pt, 눈금 12 pt, 직접 라벨 13 pt, 방법 색",
         format_choice="차트 14개 모두 경로 B PNG(한글 포함, 지침 5.6: 경로 A EMF 는 한글이 Noto Sans CJK 로 대체되어 쓰지 않음). "
                       "표 15개는 python-pptx 원어 헤어라인 표(편집 가능). python-pptx 원어 차트는 쓰지 않음(Pretendard 축·눈금 글자와 "
                       "방법 색·선 모양·두 CI 막대를 원어 차트 객체로 재현할 수 없음)",

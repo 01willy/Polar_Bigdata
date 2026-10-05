@@ -1,0 +1,103 @@
+{
+ "stem": "FigS14",
+ "created": "2026-10-05 14:44:19",
+ "size_mm": [
+  170.0,
+  86.0
+ ],
+ "audit_fails": [],
+ "sizes": [
+  7.0,
+  8.0
+ ],
+ "chars": 228,
+ "thin_lines": [],
+ "codes": [],
+ "loose_numbers": [],
+ "text_overlap_pairs": [],
+ "text_outside": [],
+ "pdffonts": {
+  "fonts": [
+   "FreeSans",
+   "FreeSansBold"
+  ],
+  "type3": false,
+  "liberation": false,
+  "ok": true
+ },
+ "pdf_bytes": 199894,
+ "sources": [
+  "data/processed/map_lena/lena_pred_v1.csv.gz",
+  "data/processed/map_lena/lena_pred_v1_meta.json"
+ ],
+ "n_shown": 38086,
+ "n_cells": 53011,
+ "n_land": 38173,
+ "n_land_gray": 87,
+ "shown_stats_meta": {
+  "a": {
+   "n": 38086,
+   "min": 40.606747118905815,
+   "p02": 41.61707584792266,
+   "p50": 46.47905156906203,
+   "p98": 50.68897523857359,
+   "max": 51.57319553116256
+  },
+  "b": {
+   "n": 38086,
+   "min": 44.28696070866466,
+   "p02": 47.2131873477892,
+   "p50": 50.68944229581313,
+   "p98": 54.74572232875068,
+   "max": 56.80539095382177
+  },
+  "c": {
+   "n": 38086,
+   "min": 36.19905990381269,
+   "p02": 39.29106731535316,
+   "p50": 42.005043492175886,
+   "p98": 46.448448634954715,
+   "max": 57.318845104767135
+  },
+  "width": {
+   "n": 38086,
+   "min": 62.322370362849185,
+   "p02": 63.873001371376795,
+   "p50": 71.33505812516567,
+   "p98": 77.79635928190051,
+   "max": 79.15344174890313
+  },
+  "diff": {
+   "n": 38086,
+   "min": -7.807296962343216,
+   "p02": -7.0990330970563384,
+   "p50": -4.93110934567374,
+   "p98": 1.045366466215036,
+   "max": 6.99328997988961
+  }
+ },
+ "interval": {
+  "method": "P0",
+  "q90": 0.707000639131762,
+  "groups": [
+   "Alaska",
+   "Canada",
+   "Russia_E",
+   "Russia_W"
+  ]
+ },
+ "extrap_top3": [
+  {
+   "column": "e5_maat",
+   "frac_outside_shown": 1.0
+  },
+  {
+   "column": "e5_fdd",
+   "frac_outside_shown": 1.0
+  },
+  {
+   "column": "e5_tcold",
+   "frac_outside_shown": 1.0
+  }
+ ]
+}

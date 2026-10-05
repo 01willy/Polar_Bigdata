@@ -1,4 +1,4 @@
-# 국문 원고 점검표 (2026-10-05, 5차: XC 채움, 마지막 추가 결과)
+# 국문 원고 점검표 (2026-10-05, 6차: 검토판, 완결성 점검)
 
 국문판은 영문 Scientific Reports 원고(`paper/manuscript/en/`, 2026-10-05 4차 수정판, XC 까지 채움)의 쌍둥이판이다. 절 순서, 소절, 수치, 그림 PDF, 표 1 본체, 참고문헌을 영문판과 같게 두고 문장을 국문으로 옮겼다(MANUSCRIPT_SPEC 1.2). 새 주장은 없다.
 
@@ -31,6 +31,12 @@
 - **표 1**: 본체는 영문판과 같은 생성 파일(`Table1_data.tex`)의 tabular 를 그대로 넣었고(열 이름 영문), 캡션과 표 설명은 국문이다. 국문 열 이름이 필요하면 표 생성 스크립트에 국문 판을 더해야 한다.
 - **보충 자료**: SI 는 영문판(`../en/si_main.pdf`)만 있다. 본문의 지시는 '보충 표 S7', '보충 방법 3', '보충 주석 2', '보충 정보' 로 옮겼다.
 - **영문판 2차 수정 반영**: 줄인 본문, XA 계열 수(Methods 와 이탈 목록), Fig. 4·Fig. 6 설명문(렌더판과 맞춘 판)을 반영하였다.
+- **영문판 10차 수정(SI 표지 정리)**: SI 표지를 기록으로 채우거나 등록 마감 문장으로 바꾸고, 확인할 수 없는 4건을 검토 메모에 넣었다. 국문 검토판의 메모도 같은 26항목이다(영문 COMPLIANCE 16절).
+- **영문판 9차 수정(SI 그림)**: SI 그림 S7–S14 배치와 S13 삭제는 영문 SI 에만 해당하며 국문판 본문은 바뀌지 않았다(영문 COMPLIANCE 15절).
+- **영문판 8차 수정(XM)**: XM 은 영문 SI(보충 표 S1·S2·S12, Supplementary Methods 9)에만 들어갔다. 고찰 D5 에는 단어 한도 때문에 넣지 않아 국문판 본문은 바뀌지 않았다(영문 COMPLIANCE 14절).
+- **영문판 7차 수정 반영(그림 v4 양식)**: 그림 4 설명문의 화살표 표현을 지우고 '축 끝에 표시'로 바꿨으며, 구간 괄호의 CI 약어를 뺐다(영문 COMPLIANCE 13절).
+- **영문판 6차 추가 반영**: R3·R7 의 빠진 값(지역 중앙값, 러시아 서부 제외 값, 지역 수; `../en/tools/build_numbers.py`), Kudryavtsev 1974 인용, 보충 표·그림 번호의 처음 인용 순서 대응(영문 COMPLIANCE 12.6절)을 같은 자리에 옮겼다. 고찰 D6 의 XC 지역 단서(러시아 동부, 알래스카, 레나델타에서는 비열등이 성립하지 않음)를 되살리고 R4 선정 규칙 문장의 블록 등가중 구간을 뺐다.
+- **영문판 6차 수정 반영**: 그림 번호를 처음 인용 순서로 바꿨다(그림 4 = 파일 Fig6, 그림 5 = Fig4, 그림 6 = Fig7, 그림 7 = Fig5; 본문·설명문·`\PlaceFigure`). 빠진 패널 인용(그림 1a, 2a,b, 2c–f, 3d, 7a–e)과 앵커 식의 $x$ 정의를 더했고, 파일로 확인되는 [미확인](Copernicus DEM 인용과 귀속 문구, 영구동토 범위·구역 자료 이름과 판, Cartopy 0.23.0)을 풀었다. 검토판 `main_review.pdf`(25쪽, `./build_review.sh`)는 검토 메모를 첫 쪽에 두고 그림과 표 1 을 처음 인용한 곳 가까이에 둔다(영문 COMPLIANCE 12절).
 - **영문판 5차 수정 반영**: R5 XB-3 문장의 CCI v5 단서, 고찰 D5 의 현장 토양 수분(XE-e) 문장, 같은 자리의 줄임(R1 호수 수온 연구 문구, 서론의 러시아 서부 $E$ 값, R4 의 라벨 40개 CI 와 그림 지시)을 같은 자리에 옮겼다.
 - **영문판 4차 수정 반영**: XC 문장(R4 의 XC-1·XC-2·지역 손해·XC-r, R6 의 배치 무작위와 공통 문장, R7 의 XC-F3 PENDING, 고찰 D6 조건 문장, Methods M7), 같은 자리의 줄임(영문 COMPLIANCE 10.2절), Fig. 6·Fig. 7 설명문 재동기화를 같은 자리에 옮겼다. 표지 대응: in new random splits of the same regions → 같은 지역을 다시 무작위로 나눈 분할에서, re-test in reused regions → 재사용 지역의 재검정, selection family → 선택 계열, pooled mean → 풀 평균.
 - **영문판 3차 수정 반영**: X 결과 문장(R1 XH, R2 XG, R3·R4·R5 XB, R5 XI·XE, R6 XD, R7 XJ, Methods M7 Algorithm P, 고찰 D5 지도 문장과 D6), 같은 자리의 줄임(영문 COMPLIANCE 9.2절), Fig. 1 설명문 재동기화, Fig. 6c 의 PENDING 표지를 같은 자리에 옮겼다. 표지 대응: designed after earlier results were viewed → 앞선 결과를 본 뒤 설계, partly unblinded → 비맹검 부분 포함, registration deviation → 등록 이탈, not a true extrapolation test → 실제 외삽 시험이 아니다, spatial proxy with warmer blocks of the same period → 같은 시기의 따뜻한 블록을 쓴 공간 대용, licence basis not recorded → 약관 근거 미기록, product values imputed → 제품 결측 대체.
@@ -81,7 +87,7 @@ MANUSCRIPT_SPEC 1.4 의 국문 정본을 따랐다. 주요 대응은 다음과 �
 
 ## 7. 남은 문제
 
-1. 영문판과 같은 자리표시 40건(DECISION 20, 미확인 11, MISSING 3, PENDING 6)이 남아 있다. 영문판에서 채우면 국문판도 같은 자리를 채운다.
+1. 영문판과 같은 자리표시가 남아 있다(DECISION 20, 미확인 4, PENDING 6; MISSING 은 0건). 영문판에서 채우면 국문판도 같은 자리를 채운다.
 2. 표 1 본체의 열 이름이 영문이다(3절).
 3. '활동층'과 '활성층'의 용어 결정(4절).
 4. 국문 SI 는 만들지 않았다.

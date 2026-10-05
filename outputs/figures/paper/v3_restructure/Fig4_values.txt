@@ -1,5 +1,5 @@
 Fig 4 v3 값 대조 기록
-생성: 2026-10-05 02:49, scripts/4_visualization/paper_v3/fig4.py
+생성: 2026-10-05 13:47, scripts/4_visualization/paper_v3/fig4.py
 
 ## 1. 원천 파일(sha256)
 - data/processed/paper_figs/fig4_a.csv: 3cfd184acf9ee32e3635996a8f5e9279f67ecb48e13591a8c81cb19c4d68c106 (claims MANIFEST 에 없음)
@@ -104,8 +104,8 @@ Fig 4 v3 값 대조 기록
 
 ## 7. audit_v3(저장 직전 그림)
 - fails: []
-- sizes: {7.0}
-- chars: 499
+- sizes: {8.0, 7.0}
+- chars: 504
 - thin_lines: []
 - titles: []
 - boxed_text: 0
@@ -117,11 +117,11 @@ Fig 4 v3 값 대조 기록
 ## 8. pdf_audit(Fig4.pdf)
 - width_mm: 170.0
 - height_mm: 122.0
-- chars: 497
-- sizes: {7.0: 497}
-- off_size: {}
+- chars: 502
+- sizes: {7.0: 498, 8.0: 4}
+- off_size: {8.0: 4}
 - lt5: 0
-- families: ['LiberationSans']
+- families: ['FreeSans', 'FreeSansBold', 'FreeSansOblique']
 - type3: False
 
 ## 9. Source Data 행 수
@@ -143,7 +143,7 @@ Fig 4 v3 값 대조 기록
 - 설명문은 Fig2_legend.md 형식('# Fig. 4' 머리, 굵은 제목 문장, 평문 패널 문자). 명세 6.6 초안에 더한 것은 하위 지역 표 참조, 북대서양 점 추정 표지, 고정 레시피의 λ 뿐이다. XA 치환 뒤 350 단어를 맞추려고 고정 레시피의 정의(재보정 앵커 + 잔차 ML)를 Methods 로 넘기고, 티베트의 d 값을 b 문장에 합치고, 구간 문장을 b·c·d 하나로 묶었다(명세 16절 규칙).
 
 ## 11. 추가 점검(저장 뒤)
-- 글자끼리 겹침 0쌍 [], 캔버스 밖 글자 [] (글자 77개)
+- 글자끼리 겹침 0쌍 [], 캔버스 밖 글자 [] (글자 79개)
 - pdftotext 내부 코드 정규식 0건 [], 연결어 대시 0건
 - pdfimages 래스터 요소 0개
 - 사람 점검(600 dpi PNG 100 % 잘라 보기): a 행 이름·직접 라벨 3개·화살표 머리 축 끝 닿음, b 직접 라벨 2개와 막대 분리, c 겹친 지역 점의 단 간격 1.6 mm(2026-10-04). d(XA, 2026-10-05): 왼쪽 W Russia 점과 티베트 모서리 표지 분리, 오른쪽 0 근처 점 겹침은 자료 그대로(빈 모양을 위에 그려 테두리가 보임), 티베트 오른쪽 끝 표지 y −5.89 cm. 글자 겹침·잘림 없음.

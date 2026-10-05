@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "version": "v4",
+    "date": "2026-10-05",
+    "status": "현행. 논문 그림, 지도, 슬라이드 패널, 덱 차트, 방법 도식이 모두 이 파일 하나를 읽는다. design/journal_grade_style_guide.md 의 글꼴·선·색 규칙(2.2, 2.3, 2.4절)은 이 파일로 대체한다.",
+    "why": "사용자 검토(2026-10-05 12시): 그림이 흑백에 가깝고 강조가 보이지 않음, 글씨가 굵고 일반적임, 화살촉 등 기호가 과함.",
+    "basis": [
+      "Nature 저자 그림 안내(Final_guide_to_authors.pdf): 산세리프, Helvetica 또는 Arial, 패널 문자 8 pt 굵은 직립 소문자, 그 밖의 글자 최대 7 pt 최소 5 pt, RGB",
+      "Scientific Reports: 선 굵기 최소 0.5 pt, 기호 최소 6 pt(검색 확인)",
+      "Okabe & Ito 2008 색맹 안전 팔레트, Crameri et al. 2020 Nat Commun(색 오용), Rougier et al. 2014(그림 10원칙)"
+    ]
+  },
+  "font": {
+    "latin": "FreeSans",
+    "latin_regular_file": "/usr/share/fonts/truetype/freefont/FreeSans.ttf",
+    "latin_bold_file": "/usr/share/fonts/truetype/freefont/FreeSansBold.ttf",
+    "latin_note": "Helvetica 계열(URW Nimbus Sans 기반) TrueType. matplotlib 에 addfont 로 등록, pdf.fonttype 42, svg.fonttype none. Liberation Sans 는 쓰지 않는다",
+    "korean": "Pretendard",
+    "korean_weight": "Regular",
+    "korean_note": "한글 라벨은 Pretendard Regular. 차트 안에서 SemiBold·Bold 를 쓰지 않는다. 덱 본문 글꼴과 같다",
+    "weights": "굵게는 패널 문자와 슬라이드 제목에만. 축 라벨·눈금·직접 라벨·범례는 모두 Regular",
+    "paper": {
+      "text_pt": 7,
+      "min_pt": 5,
+      "panel_letter_pt": 8,
+      "panel_letter_weight": "bold",
+      "panel_letter_case": "lower"
+    },
+    "slide": {
+      "axis_label_pt": 14,
+      "tick_pt": 12,
+      "direct_label_pt": 13,
+      "min_pt": 11,
+      "panel_letter_pt": 14
+    }
+  },
+  "lines": {
+    "paper": {
+      "axis_pt": 0.6,
+      "tick_pt": 0.6,
+      "tick_len_pt": 2.5,
+      "data_pt": 1.2,
+      "data_aux_pt": 0.8,
+      "reference_pt": 0.6,
+      "ci_cell_pt": 1.6,
+      "ci_block_pt": 0.8,
+      "marker_pt": 4.0,
+      "map_coast_pt": 0.5,
+      "graticule_pt": 0.4
+    },
+    "slide": {
+      "axis_pt": 1.0,
+      "tick_pt": 1.0,
+      "tick_len_pt": 4.0,
+      "data_pt": 2.2,
+      "data_aux_pt": 1.4,
+      "reference_pt": 1.0,
+      "ci_cell_pt": 3.0,
+      "ci_block_pt": 1.4,
+      "marker_pt": 7.0,
+      "map_coast_pt": 0.8,
+      "graticule_pt": 0.6
+    },
+    "spines": "왼쪽·아래만. 위·오른쪽 없음. 눈금 바깥 방향, 축마다 4–6개"
+  },
+  "color": {
+    "principle": "자료 계열마다 색을 준다(회색만 쓰는 계열 없음). 그림마다 강조색은 하나(제안 방법 = 주홍). 맥락 계열은 채도를 낮춘다. 같은 방법은 논문·지도·덱·도식에서 같은 색이다. 색만으로 정보를 전하지 않는다(선 모양·직접 라벨 병행)",
+    "methods": {
+      "P0": {
+        "en": "Source Stefan",
+        "ko": "원천 계수 Stefan",
+        "hex": "#8A9BB0",
+        "line": "solid"
+      },
+      "P1": {
+        "en": "Recalibrated Stefan",
+        "ko": "재보정 Stefan",
+        "hex": "#1F5A99",
+        "line": "solid"
+      },
+      "Pstar": {
+        "en": "Year-matched Stefan",
+        "ko": "연도 정합 Stefan",
+        "hex": "#4F8CC9",
+        "line": "dotted"
+      },
+      "R1": {
+        "en": "Anchor + residual ML",
+        "ko": "물리 잔차 결합",
+        "hex": "#D55E00",
+        "line": "solid",
+        "role": "제안 방법, 강조색"
+      },
+      "W": {
+        "en": "Target-label CV selection",
+        "ko": "대상 라벨 교차검증 선정",
+        "hex": "#A33E0B",
+        "line": "solid"
+      },
+      "WF": {
+        "en": "Workflow",
+        "ko": "라벨 수별 워크플로",
+        "hex": "#D55E00",
+        "line": "solid"
+      },
+      "D0": {
+        "en": "Direct ML",
+        "ko": "직접 ML",
+        "hex": "#A3478A",
+        "line": "dashed"
+      },
+      "D1": {
+        "en": "Physics pseudo-labels",
+        "ko": "물리 유사라벨 증강",
+        "hex": "#009E73",
+        "line": "solid"
+      },
+      "F1": {
+        "en": "Physics-input ML",
+        "ko": "물리 입력 ML",
+        "hex": "#E69F00",
+        "line": "solid"
+      },
+      "Stack": {
+        "en": "Label-weighted stack",
+        "ko": "라벨 가중 적층",
+        "hex": "#CC79A7",
+        "line": "solid"
+      },
+      "placebo": {
+        "en": "Shuffled / constant labels",
+        "ko": "섞은·상수 유사라벨(대조)",
+        "hex": "#9E9E9E",
+        "line": "dashed",
+        "note": "대조군만 회색 허용"
+      }
+    },
+    "products": {
+      "CCI": {
+        "en": "ESA CCI",
+        "hex": "#9C7A3C"
+      },
+      "Wei": {
+        "en": "Wei 2026",
+        "hex": "#3E8E91"
+      },
+      "Aalto": {
+        "en": "Aalto 2018",
+        "hex": "#7D6B9E"
+      },
+      "YK": {
+        "en": "Yi–Kimball",
+        "hex": "#6B8E23"
+      }
+    },
+    "regions": {
+      "note": "지역 정체성이 주 부호화인 패널에서만 색을 쓴다(그 밖에는 모양). Paul Tol muted",
+      "Alaska": "#332288",
+      "Lena Delta": "#88CCEE",
+      "Canada": "#44AA99",
+      "W Russia": "#117733",
+      "E Russia": "#999933",
+      "Central Russia": "#DDCC77",
+      "Tibetan Plateau": "#CC6677",
+      "North Atlantic": "#AA4499"
+    },
+    "neutral": {
+      "text_paper": "#000000",
+      "text_slide": "#1A1A1A",
+      "text_aux": "#555555",
+      "zero_line": "#4D4D4D",
+      "equiv_band": "#ECECEC",
+      "grid": "#E6E6E6",
+      "land": "#F2F2F2",
+      "coast": "#BDBDBD",
+      "no_data": "#C9CDD3"
+    },
+    "ci_band_alpha": 0.2,
+    "deck": {
+      "title_orange": "#EA851B",
+      "note": "덱 제목·결론 줄의 주황은 그대로. 제안 방법 주홍(#D55E00)과 같은 계열로 '강조 = 우리 방법'을 맞춘다"
+    },
+    "process": {
+      "learning": "#F7E9AE",
+      "evaluation_physics": "#DCEBDD",
+      "note": "방법 도식의 공정 셰브런·네트워크 블록 채움(대회 덱 v5 승인 문법)"
+    },
+    "placement": {
+      "note": "라벨 배치 전략(Fig 5, 덱 배치 쪽). 기준(무작위)은 진회색, 워크플로가 고른 분산 배치는 워크플로 주홍",
+      "Random": "#4D4D4D",
+      "Block stratified": "#0072B2",
+      "Covariate spread": "#D55E00",
+      "Variance-based active": "#CC79A7"
+    },
+    "intervals": {
+      "note": "예측 구간 방법(Fig 6d·e, 덱 예측 구간 쪽). 물리 사전은 물리 청색 계열",
+      "Physics prior": "#1F5A99",
+      "Constant": "#8A9BB0",
+      "Normalizing flow": "#009E73",
+      "Permuted flow": "#56B4E9",
+      "CatBoost quantile": "#E69F00",
+      "Conformal": "#CC79A7"
+    },
+    "status": {
+      "note": "상태·메타 차트(실험 시간표, 자료 해상도 등)도 회색만 쓰지 않는다. 판정 기록·완료 = #1F5A99, 결과 대기 = #E69F00, 대체·폐기·미실행 = #B0B0B0. 자료 종류: 라벨 #D55E00, 지형 #8C6D31, 기후 #0072B2, 토양 #009E73, 제품 #CC79A7, 위성 #56B4E9",
+      "done": "#1F5A99",
+      "pending": "#E69F00",
+      "dropped": "#B0B0B0",
+      "label": "#D55E00",
+      "terrain": "#8C6D31",
+      "climate": "#0072B2",
+      "soil": "#009E73",
+      "product": "#CC79A7",
+      "satellite": "#56B4E9"
+    }
+  },
+  "colormaps": {
+    "alt_sequential": "현행 지도와 같은 청색 순차(oslo 계열). 사용자 승인",
+    "difference_diverging": "현행 지도와 같은 남색–흰–올리브 0 중심 발산. 사용자 승인",
+    "interval_sequential": "acton 계열"
+  },
+  "symbols": {
+    "forbidden": [
+      "화살촉 주석(Lower error ↓ 등)",
+      "축 밖 삼각형 표지(▼)",
+      "그림 안 상자형 설명",
+      "그림 제목",
+      "굵은 축 라벨"
+    ],
+    "out_of_range": "축 끝에 값을 숫자로 적는다(예: '+23.8')",
+    "better_direction": "필요하면 축 라벨 괄호 안에 적는다(예: 'RMSE change (cm)'). 화살표는 쓰지 않는다"
+  }
+}

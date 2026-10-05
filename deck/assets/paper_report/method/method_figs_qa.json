@@ -1,0 +1,155 @@
+{
+ "M4_workflow": {
+  "name": "M4_workflow",
+  "size_in": [
+   12.0,
+   5.2
+  ],
+  "min_font_pt": 12.0,
+  "texts": 51,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 1,
+  "png_px": [
+   3600,
+   1560
+  ]
+ },
+ "M6_models": {
+  "name": "M6_models",
+  "size_in": [
+   12.0,
+   5.2
+  ],
+  "min_font_pt": 12.0,
+  "texts": 75,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 22,
+  "png_px": [
+   3600,
+   1560
+  ]
+ },
+ "M5_augmentation_design": {
+  "name": "M5_augmentation_design",
+  "size_in": [
+   12.0,
+   5.2
+  ],
+  "min_font_pt": 12.0,
+  "texts": 47,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 9,
+  "png_px": [
+   3600,
+   1560
+  ]
+ },
+ "M7_evaluation": {
+  "name": "M7_evaluation",
+  "size_in": [
+   12.0,
+   5.2
+  ],
+  "min_font_pt": 12.0,
+  "texts": 49,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 1,
+  "png_px": [
+   3600,
+   1560
+  ]
+ },
+ "M8_label_workflow": {
+  "name": "M8_label_workflow",
+  "size_in": [
+   12.0,
+   5.2
+  ],
+  "min_font_pt": 12.0,
+  "texts": 35,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 0,
+  "png_px": [
+   3600,
+   1560
+  ]
+ },
+ "M1_problem": {
+  "name": "M1_problem",
+  "size_in": [
+   12.0,
+   5.2
+  ],
+  "min_font_pt": 12.0,
+  "texts": 25,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 1,
+  "png_px": [
+   3600,
+   1560
+  ]
+ },
+ "M3_data": {
+  "name": "M3_data",
+  "size_in": [
+   12.0,
+   5.2
+  ],
+  "min_font_pt": 12.0,
+  "texts": 69,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 0,
+  "png_px": [
+   3600,
+   1560
+  ]
+ },
+ "M2_gap": {
+  "name": "M2_gap",
+  "size_in": [
+   12.0,
+   5.2
+  ],
+  "min_font_pt": 12.0,
+  "texts": 49,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 9,
+  "png_px": [
+   3600,
+   1560
+  ]
+ },
+ "M9_deepsets": {
+  "name": "M9_deepsets",
+  "size_in": [
+   12.0,
+   4.6
+  ],
+  "min_font_pt": 12.0,
+  "texts": 39,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "arrows": 8,
+  "png_px": [
+   3600,
+   1380
+  ]
+ }
+}

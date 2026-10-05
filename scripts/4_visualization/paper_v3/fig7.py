@@ -116,8 +116,8 @@ def use_rc():
     """공용 use_v3 에 이 그림이 쓰는 값(기울인 n, 눈금 간격)을 더한다(공용 모듈은 고치지 않는다)."""
     S.use_v3("paper")
     matplotlib.rcParams.update({
-        "mathtext.it": "Liberation Sans:italic", "mathtext.bf": "Liberation Sans:bold",
-        "mathtext.sf": "Liberation Sans",
+        "mathtext.it": f"{S.FONT_LATIN}:italic", "mathtext.bf": f"{S.FONT_LATIN}:bold",
+        "mathtext.sf": S.FONT_LATIN,
         "axes.unicode_minus": True, "xtick.major.pad": 1.5, "ytick.major.pad": 1.5, "axes.labelpad": 2.0,
         "axes.facecolor": "none", "savefig.pad_inches": 0.0, "lines.solid_capstyle": "butt",
     })
@@ -456,13 +456,16 @@ def draw_a(fig, A):
         inside = (fm.floor_minus_recal > YLIM[0]).all()
         if inside:
             if len(fm) > 1:
-                axm.plot(fm.n, fm.floor_minus_recal, color=COLOR_FLOOR, lw=S.LW["main"], zorder=1.2, solid_capstyle="butt")
-            axa.plot([-0.55, 0.55], [fa.floor_minus_recal.iloc[0]] * 2, color=COLOR_FLOOR, lw=S.LW["main"], zorder=1.2)
-        else:                                            # 축 밖: 검정 삼각 표지 하나(지침 2.7), 값은 설명문
+                axm.plot(fm.n, fm.floor_minus_recal, color=COLOR_FLOOR, lw=S.LW["ref"] * 1.5, ls=S.METHOD["error_floor"]["ls"], zorder=1.2,
+                         dash_capstyle="butt")
+            axa.plot([-0.55, 0.55], [fa.floor_minus_recal.iloc[0]] * 2, color=COLOR_FLOOR, lw=S.LW["ref"] * 1.5,
+                     ls=S.METHOD["error_floor"]["ls"], zorder=1.2, dash_capstyle="butt")
+        else:                                            # 축 밖(v4: 삼각 표지 대신 축 끝에 값을 숫자로)
             y0 = axm.get_ylim()[0]
-            off = S.MS["main"] * 0.0
-            axm.plot([fm.n.iloc[0]], [y0], ls="none", marker="v", ms=3.0, mfc=INK, mec="none", clip_on=False,
-                     transform=mm_shift(axm, 0.0, 0.53), zorder=4)
+            v = float(fm.floor_minus_recal.iloc[0])
+            t_ = axm.text(fm.n.iloc[0], y0, num_tick(round(v, 1)), ha="center", va="bottom", fontsize=FS, color=COLOR_FLOOR,
+                          transform=mm_shift(axm, 0.0, 0.5), zorder=4)
+            t_.set_gid("offaxis")
         # 하위 축 머리(범주 라벨)
         W, H = fig_wh(fig)
         t = text_mm(fig, xm + L["a_wm"] / 2, L["a_top"] - 0.9, heads[reg], ha="center", va="bottom")
@@ -476,11 +479,13 @@ def draw_a(fig, A):
     axmm_text(axA, 1.0, -1.72, S.METHOD["anchor_residual"]["short"], ha="left", va="center")
     fa = A[(A.region == "Alaska") & (A.method == "anchor_residual") & (A.n == 1000)].floor_minus_recal.iloc[0]
     axmm_text(axA, 40.6, fa - 0.62, S.METHOD["error_floor"]["short"], ha="right", va="center")
-    xf = 1.6 / ax_wh_mm(axA)[0]
-    tr = mtrans.blended_transform_factory(axA.transAxes, axA.transData)
-    axA.annotate("", xy=(xf, -5.75), xytext=(xf, -4.25), xycoords=tr, textcoords=tr,
-                 arrowprops=dict(arrowstyle="-|>", lw=1.0, color=INK2, mutation_scale=5.5, shrinkA=0, shrinkB=0))
-    axmm_text(axA, 2.7, -5.0, "Lower error", ha="left", va="center", color=INK2)
+    for t_ in axA.texts:                                                     # 직접 라벨은 계열 색(v4)
+        if t_.get_text() == S.METHOD["direct_ml"]["short"]:
+            t_.set_color(COLOR_D)
+        elif t_.get_text() == S.METHOD["anchor_residual"]["short"]:
+            t_.set_color(COLOR_R)
+        elif t_.get_text() == S.METHOD["error_floor"]["short"]:
+            t_.set_color(COLOR_FLOOR)
     return axes
 
 
@@ -647,7 +652,7 @@ def draw_c(fig, C):
         for key, _, yp in rows:
             q = C[(C.component == comp) & (C.region == key)]
             if len(q):
-                ci_pair(ax, yp, q.iloc[0], INK, orient="h")
+                ci_pair(ax, yp, q.iloc[0], COLOR_R, orient="h")        # v4: 대비 = 앵커 + 잔차 − 재보정 Stefan, 제안 방법 색
         t = text_mm(fig, x + L["c_wc"] / 2, L["c_top"] - 1.0, head, ha="center", va="bottom", linespacing=1.0)
         t.set_gid("category")
         axes.append(ax)
@@ -726,30 +731,35 @@ def draw_d(fig, D):
     wm = w[w.n > 0].sort_values("n"); wa = w[w.n < 0]
     axm.plot(r1.n, r1.delta, color=COLOR_R, lw=S.LW["ci_forest_cell"], solid_capstyle="butt", zorder=3)
     axm.plot(r1.n, r1.delta, ls="none", marker="o", ms=S.MS["main"], mfc=COLOR_R, mec="none", zorder=3.1)
-    axm.plot(wm.n, wm.delta, color=INK, lw=S.LW["ci_forest_cell"], solid_capstyle="butt", zorder=3)
-    axm.plot(wm.n, wm.delta, ls="none", marker="o", ms=S.MS["main"], mfc=INK, mec="none", zorder=3.1)
-    axa.plot([0.0], [wa.delta.iloc[0]], ls="none", marker="o", ms=S.MS["main"], mfc=INK, mec="none", zorder=3.1)
+    CW = S.METHOD["target_cv_selection"]["color"]
+    axm.plot(wm.n, wm.delta, color=CW, lw=S.LW["ci_forest_cell"], solid_capstyle="butt", zorder=3)
+    axm.plot(wm.n, wm.delta, ls="none", marker="o", ms=S.MS["main"], mfc=CW, mec="none", zorder=3.1)
+    axa.plot([0.0], [wa.delta.iloc[0]], ls="none", marker="o", ms=S.MS["main"], mfc=CW, mec="none", zorder=3.1)
     # 지역 값(2.5 pt, alpha 0.5, 지역 모양, 해당 계열 색). 풀 점과 겹치지 않게 ±0.9 mm 어긋남
     off = {"Lena": -0.9, "Canada": 0.9}
     for _, r in D[D.element == "region_point"].iterrows():
-        col = COLOR_R if r.method == "anchor_residual" else INK
+        col = COLOR_R if r.method == "anchor_residual" else CW
         ax = axm if r.n > 0 else axa
         xv = r.n if r.n > 0 else 0.0
         ax.plot([xv], [r.delta], ls="none", marker=S.REGION_MARKER[r.region], ms=S.MS["region_point"], mfc=col, mec="none",
                 alpha=0.5, transform=mm_shift(ax, off[r.region], 0.0), zorder=2.8)
     # 방법 직접 라벨(1–3 단어, 방법마다 한 번)
-    t0 = axmm_text(ax0, 0.0, -0.21, S.METHOD["source_stefan"]["short"], ha="left", va="center")
+    t0 = axmm_text(ax0, 0.0, -0.21, S.METHOD["source_stefan"]["short"], ha="left", va="center", color=S.METHOD["source_stefan"]["color"])
     t0.set_clip_on(False)
-    axmm_text(axm, 1.2, 1.06, S.METHOD["anchor_residual"]["short"], ha="left", va="center")
+    for ax in (ax0, axm, axa):                                               # 0선 = 원천 계수 Stefan(v4: 그 방법 색)
+        for ln in ax.lines:
+            if ln.get_xydata().shape[0] == 2 and np.allclose(ln.get_ydata(), 0.0) and ln.get_linewidth() == S.ZERO_LINE["lw"]:
+                ln.set_color(S.METHOD["source_stefan"]["color"]); ln.set_linewidth(S.LW["main"])
+    axmm_text(axm, 1.2, 1.06, S.METHOD["anchor_residual"]["short"], ha="left", va="center", color=COLOR_R)
     xw = (np.log10(40) - np.log10(D_XLIM[0])) / (np.log10(D_XLIM[1]) - np.log10(D_XLIM[0])) * L["d_main"][1]
-    axmm_text(axm, xw - 1.0, 1.06, S.METHOD["target_cv_selection"]["short"], ha="left", va="center")
+    axmm_text(axm, xw - 1.0, 1.06, S.METHOD["target_cv_selection"]["short"], ha="left", va="center", color=CW)
     # 지역 모양 열쇠(한 줄, 오른쪽 위 빈 곳)
     W, H = fig_wh(fig)
     ky = float(data_y_to_fig_mm(axm, 1.52))
     kx = 80.0
     for reg, name in (("Lena", "Lena Delta"), ("Canada", "Canada")):
         fig.add_artist(Line2D([(kx + 0.9) / W], [1 - ky / H], transform=fig.transFigure, ls="none",
-                              marker=S.REGION_MARKER[reg], ms=S.MS["region_point"], mfc=INK, mec="none", alpha=0.5))
+                              marker=S.REGION_MARKER[reg], ms=S.MS["region_point"], mfc=INK2, mec="none", alpha=0.6))
         tt = text_mm(fig, kx + 2.0, ky, name, ha="left", va="center")
         fig.canvas.draw()
         kx = kx + 2.0 + tt.get_window_extent(fig.canvas.get_renderer()).width / fig.dpi / MM + 2.6
@@ -784,13 +794,14 @@ def draw_d_bands(fig, axes_d):
     x3_start = L["d_main"][0]
     x_all_end = L["d_all"][0] + L["d_all"][1]
     lw = S.LW["ci_forest_cell"]
+    CB = S.METHOD["workflow"]["color"]                                       # v4: 워크플로 단계 = 워크플로 색
     # 배치: 0–160 한 선, 라벨은 선 가운데 위
-    axb.plot([left0, x160_end], [y_pl, y_pl], color=INK, lw=lw, solid_capstyle="butt")
+    axb.plot([left0, x160_end], [y_pl, y_pl], color=CB, lw=lw, solid_capstyle="butt")
     axb.text((left0 + x160_end) / 2, y_pl - 1.0, "Spread placement", ha="center", va="bottom", fontsize=FS)
     # 진단 1: 0(외삽 비율) 짧은 선, 라벨은 선 왼쪽 끝에서 시작. 진단 2: 3–All(라벨 10개 편향) 긴 선, 라벨은 가운데 위
-    axb.plot([left0, right0], [y_d1, y_d1], color=INK, lw=lw, solid_capstyle="butt")
+    axb.plot([left0, right0], [y_d1, y_d1], color=CB, lw=lw, solid_capstyle="butt")
     axb.text(left0, y_d1 - 1.0, "Extrapolation share", ha="left", va="bottom", fontsize=FS)
-    axb.plot([x3_start, x_all_end], [y_d2, y_d2], color=INK, lw=lw, solid_capstyle="butt")
+    axb.plot([x3_start, x_all_end], [y_d2, y_d2], color=CB, lw=lw, solid_capstyle="butt")
     axb.text((x3_start + x_all_end) / 2, y_d2 - 1.0, "Ten-label bias", ha="center", va="bottom", fontsize=FS)
     # 띠 머리(#4d4d4d): 배치 줄, 진단 두 줄의 가운데
     for yy, s_ in ((y_pl, "Placement"), ((y_d1 + y_d2) / 2, "Diagnosis")):
@@ -832,11 +843,12 @@ def draw_e(fig, E, ER, fs=None, key_xy=None, ms_region=None, name_right=None, he
     for y0, y1 in spans:
         ax.fill_betweenx([y0, y1], -hb, hb, facecolor=S.EQUIV_BAND, edgecolor="none", lw=0, zorder=0.5)
         ax.plot([0.0, 0.0], [y0, y1], color=S.ZERO_LINE["color"], lw=S.ZERO_LINE["lw"], solid_capstyle="butt", zorder=1.5)
+    cwf = S.METHOD["workflow"]["color"]
     for _, r in E.iterrows():
-        ci_pair(ax, pos[r.hypothesis], r, INK, orient="h")
+        ci_pair(ax, pos[r.hypothesis], r, cwf, orient="h")
     msr = ms_region or S.MS["region_point"]
     for _, r in ER[ER.shown].iterrows():
-        ax.plot([r.delta], [pos[r.hypothesis]], ls="none", marker=S.REGION_MARKER[r.region], ms=msr, mfc=INK, mec="none",
+        ax.plot([r.delta], [pos[r.hypothesis]], ls="none", marker=S.REGION_MARKER[r.region], ms=msr, mfc=cwf, mec="none",
                 alpha=0.5, zorder=2.8, gid=f"e_region|{r.hypothesis}|{r.region}")
     W, H = fig_wh(fig)
     nr = name_right if name_right is not None else L["e_name_right"]
@@ -857,7 +869,7 @@ def draw_e(fig, E, ER, fs=None, key_xy=None, ms_region=None, name_right=None, he
     cx_off, tx_off = (0.9, 2.0) if key_gap_mm is None else (r_mm, 2 * r_mm + key_gap_mm)   # 기본값 = 패널 d 열쇠와 같은 간격
     for rg in shown:
         fig.add_artist(Line2D([(kx + cx_off) / W], [1 - ky / H], transform=fig.transFigure, ls="none", marker=S.REGION_MARKER[rg], ms=msr,
-                              mfc=INK, mec="none", alpha=0.5))
+                              mfc=cwf, mec="none", alpha=0.5))
         tt = text_mm(fig, kx + tx_off, ky, S.REGION_NAME[rg], ha="left", va="center", fontsize=fs)
         fig.canvas.draw()
         rend = rend or fig.canvas.get_renderer()
@@ -1191,10 +1203,10 @@ def main():
     except OSError:
         pass
     print(f"resources: available {avail:.1f} GB, load {load:.1f}")
-    if avail is not None and (avail < 30 or load > 40):
+    if avail is not None and (avail < float(os.environ.get("PAPER_MIN_AVAIL_GB", "30")) or load > 40):   # 기본 30 GB(작업 지시), 조정 담당이 정한 값은 환경 변수로
         raise SystemExit("shared server busy: available < 30 GB or load > 40; wait and rerun")
     fig, data, meta = build("paper")
-    audit = S.audit_v3(fig, max_chars=MAX_CHARS, allowed_num_gids=("scale", "sizekey", "rowname_n"))
+    audit = S.audit_v3(fig, max_chars=MAX_CHARS, allowed_num_gids=("scale", "sizekey", "rowname_n", "offaxis"))
     audit["text_overlaps"] = drawn_text_overlaps(fig)
     print("text_overlaps:", audit["text_overlaps"])
     print("audit_v3 fails:", audit["fails"], "chars", audit["chars"], "sizes", audit["sizes"])

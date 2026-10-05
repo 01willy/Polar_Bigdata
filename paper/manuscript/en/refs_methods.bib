@@ -16,9 +16,12 @@
 %   Streletskiy2025: the web record lists five creators, the file header six.
 %     Only the first author is given, closed with "and others".
 %   Qu2026: cited as an arXiv preprint; the ICML 2026 venue is not confirmed.
-%   Kudryavtsev et al. 1974 is not cited (bibliography not confirmed); the text
-%     carries a placeholder instead. Copernicus DEM GLO-30 citation form is also
-%     a placeholder in the text.
+%   Kudryavtsev1974, Klene2001, RomanovskyOsterkamp1997 added 2026-10-05 (round 6) after web checks: Crossref records
+%     10.1080/15230430.2001.12003416 and 10.1002/(SICI)1099-1530(199701)8:1<1::AID-PPP243>3.0.CO;2-U (authors, title,
+%     journal, volume, issue, pages, year as listed by Crossref); Kudryavtsev et al. 1974 from the reference list of an
+%     encyclopedia chapter on permafrost (geocryology.com) and a reference entry in Permafrost Periglac. Process.
+%     (doi:10.1002/ppp.502, via search summary): MSU 1974, CRREL Draft Translation 606 (Hanover, NH, 1977).
+%   Copernicus DEM GLO-30 is cited by its DOI in Data availability (no reference entry).
 
 @article{Stefan1891,
   author  = {Stefan, J.},
@@ -283,4 +286,34 @@
   year         = {2018},
   doi          = {10.5281/zenodo.1243862},
   annote       = {Checked: INDEX.md crameri2018_scientific_colour_maps_zenodo (software archive; INDEX says to cite this DOI when the maps are used in figures). Version used in the figures not recorded.}
+}
+
+@book{Kudryavtsev1974,
+  author    = {Kudryavtsev, V. A. and Garagula, L. S. and Kondrat'yeva, K. A. and Melamed, V. G.},
+  title     = {Osnovy Merzlotnogo Prognoza [Fundamentals of Frost Forecasting in Geological Engineering Investigations]},
+  publisher = {Moscow State University},
+  year      = {1974},
+  note      = {In Russian. English translation: CRREL Draft Translation 606, US Army Cold Regions Research and Engineering Laboratory, Hanover, NH, 1977}
+}
+
+@article{Klene2001,
+  author  = {Klene, A. E. and Nelson, F. E. and Shiklomanov, N. I. and Hinkel, K. M.},
+  title   = {The n-factor in natural landscapes: variability of air and soil-surface temperatures, {Kuparuk River Basin}, {Alaska}, {U.S.A.}},
+  journal = {Arctic, Antarctic, and Alpine Research},
+  volume  = {33},
+  number  = {2},
+  pages   = {140--148},
+  year    = {2001},
+  doi     = {10.1080/15230430.2001.12003416}
+}
+
+@article{RomanovskyOsterkamp1997,
+  author  = {Romanovsky, V. E. and Osterkamp, T. E.},
+  title   = {Thawing of the active layer on the coastal plain of the {Alaskan} {Arctic}},
+  journal = {Permafrost and Periglacial Processes},
+  volume  = {8},
+  number  = {1},
+  pages   = {1--22},
+  year    = {1997},
+  doi     = {10.1002/(SICI)1099-1530(199701)8:1<1::AID-PPP243>3.0.CO;2-U}
 }

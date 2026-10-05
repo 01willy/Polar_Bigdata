@@ -1,0 +1,22 @@
+panel,scheme,seed,fold_sizes,max_abs_diff_km_vs_stored,source,quantity,n,median_seed0,median_mean_3seeds,model,rmse_mean_3seeds,rmse_min_seed,rmse_max_seed
+a,random_cell,0.0,2268;2268;2268;2268;2267;2267,0.0,regenerated with m1_cv_scheme_comparison.py functions; checked against data/processed/m1/cv_scheme_distances.csv,,,,,,,,
+b,site_0.05,0.0,2034;2066;2353;2033;2152;2968,0.0,regenerated with m1_cv_scheme_comparison.py functions; checked against data/processed/m1/cv_scheme_distances.csv,,,,,,,,
+c,block_0.5,0.0,4716;1753;1758;1774;1819;1786,0.0,regenerated with m1_cv_scheme_comparison.py functions; checked against data/processed/m1/cv_scheme_distances.csv,,,,,,,,
+d,knndm,0.0,4723;3483;1965;573;952;1910,0.0,regenerated with m1_cv_scheme_comparison.py functions; checked against data/processed/m1/cv_scheme_distances.csv,,,,,,,,
+e,random_cell,0.0,,,data/processed/m1/cv_scheme_distances.csv,test to nearest training cell (km),13606.0,0.0041,0.0041,,,,
+f,site_0.05,0.0,,,data/processed/m1/cv_scheme_distances.csv,test to nearest training cell (km),13606.0,0.8281,1.1095333333333335,,,,
+g,block_0.5,0.0,,,data/processed/m1/cv_scheme_distances.csv,test to nearest training cell (km),13606.0,25.7133,25.780383333333333,,,,
+h,knndm,0.0,,,data/processed/m1/cv_scheme_distances.csv,test to nearest training cell (km),13606.0,58.7106,53.498866666666665,,,,
+efgh,prediction_permafrost,,,,data/processed/m1/cv_scheme_distances.csv,map cell to nearest label (km),20000.0,81.5652,,,,,
+i,random_cell,,,,data/processed/m1/cv_scheme_comparison.csv,,,,,catboost_lo,11.552333333333332,11.54,11.573
+i,site_0.05,,,,data/processed/m1/cv_scheme_comparison.csv,,,,,catboost_lo,13.437,13.325,13.637
+i,block_0.5,,,,data/processed/m1/cv_scheme_comparison.csv,,,,,catboost_lo,16.096999999999998,15.457,16.673
+i,knndm,,,,data/processed/m1/cv_scheme_comparison.csv,,,,,catboost_lo,17.911333333333335,17.523,18.332
+i,random_cell,,,,data/processed/m1/cv_scheme_comparison.csv,,,,,stefan,14.240333333333334,14.24,14.241
+i,site_0.05,,,,data/processed/m1/cv_scheme_comparison.csv,,,,,stefan,14.319,14.276,14.362
+i,block_0.5,,,,data/processed/m1/cv_scheme_comparison.csv,,,,,stefan,14.447666666666668,14.409,14.471
+i,knndm,,,,data/processed/m1/cv_scheme_comparison.csv,,,,,stefan,14.450333333333333,14.426,14.477
+i,random_cell,,,,data/processed/m1/cv_scheme_comparison.csv,,,,,stefan_ridge_l075,12.768,12.764,12.77
+i,site_0.05,,,,data/processed/m1/cv_scheme_comparison.csv,,,,,stefan_ridge_l075,13.299333333333335,13.262,13.326
+i,block_0.5,,,,data/processed/m1/cv_scheme_comparison.csv,,,,,stefan_ridge_l075,13.370333333333335,13.298,13.435
+i,knndm,,,,data/processed/m1/cv_scheme_comparison.csv,,,,,stefan_ridge_l075,13.698,13.603,13.756
