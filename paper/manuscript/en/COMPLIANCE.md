@@ -1,13 +1,13 @@
-# 영문 원고 조립 점검표 (Scientific Reports, 2026-10-05, 4차: XC 채움)
+# 영문 원고 조립 점검표 (Scientific Reports, 2026-10-05, 5차: XC 채움, 마지막 추가 결과)
 
-조립 대상은 `main.tex`(본문 PDF)와 `si_main.tex`(Supplementary Information PDF)이다. 단어 수는 명세 10절 규칙대로 렌더 PDF 를 `pdftotext` 로 읽어 절 경계로 자른 뒤 공백 단위로 셌다(`tools/count_words.py`, 결과 `build/wordcount.json`). 위첨자 인용 번호 토큰은 뺐다. 자리표시를 포함한 값과 뺀 값을 함께 적는다(자리표시 정규식에 `[PENDING: ...]` 을 더했다). 2차 수정 내용은 6절, 3차 수정(결과 채움) 내용은 9절, 4차 수정(XC 채움) 내용은 10절에 모았다.
+조립 대상은 `main.tex`(본문 PDF)와 `si_main.tex`(Supplementary Information PDF)이다. 단어 수는 명세 10절 규칙대로 렌더 PDF 를 `pdftotext` 로 읽어 절 경계로 자른 뒤 공백 단위로 셌다(`tools/count_words.py`, 결과 `build/wordcount.json`). 위첨자 인용 번호 토큰은 뺐다. 자리표시를 포함한 값과 뺀 값을 함께 적는다(자리표시 정규식에 `[PENDING: ...]` 을 더했다). 2차 수정 내용은 6절, 3차 수정(결과 채움) 내용은 9절, 4차 수정(XC 채움) 내용은 10절, 5차(XB 민감도, XD-5, XE-e) 내용은 11절에 모았다.
 
 ## 1. 산출물
 
 | 파일 | 내용 |
 |---|---|
 | `main.tex`, `main.pdf` (39쪽, 3.4 MB) | 본문. `\documentclass[pdflatex,sn-nature]{sn-jnl}`, xelatex, bibtex(`sn-nature.bst`) |
-| `si_main.tex`, `si_main.pdf` (75쪽, 7.7 MB) | SI. 같은 클래스, 본문 폭 170 mm. 지도 그림 6개(S10–S15) 때문에 커졌다 |
+| `si_main.tex`, `si_main.pdf` (76쪽, 7.7 MB) | SI. 같은 클래스, 본문 폭 170 mm. 지도 그림 6개(S10–S15) 때문에 커졌다 |
 | `sections/si.tex` | Supplementary Methods 1–9, Notes 1–2, Supplementary Fig. S1–S9(자리 상자) |
 | `sections/si_maps.tex` | Supplementary Fig. S10–S15(1 km 지도와 XK·XL 그림). `tools/make_si_maps.py` 가 `outputs/figures/paper/v3_restructure/maps/*_legend.md` 에서 캡션을 만든다 |
 | `sections/si_tables.tex` | Supplementary Table S1–S18. `tools/make_si_tables.py` 가 생성(손으로 고치지 않는다). S13 c–o(XB–XL)는 `tools/si_x_results.py` 의 값(계획 8.2–8.9, 추가 등록 결과 절에서 옮김) |
@@ -23,7 +23,7 @@ TinyTeX 에 설치한 패키지: threeparttable, ncctools, jknapltx, rsfs, appen
 | 문서 | 오류 | 경고(줄) | BibTeX | 쪽 |
 |---|---|---|---|---|
 | main | 0 | 10 | 오류 0, 경고 0, 항목 67 | 39 |
-| si_main | 0 | 7 | 오류 0, 경고 0, 항목 12 | 75 |
+| si_main | 0 | 7 | 오류 0, 경고 0, 항목 12 | 76 |
 
 경고 내역(두 문서 공통 유형): (1) xeCJK·ctex 판이 LaTeX 2026-06-01 을 요구하나 설치 커널은 2025-11-01 이다(3건, 동작에는 영향 없음, 커널 갱신은 하지 않았다). (2) 템플릿이 부르는 mathrsfs 의 글꼴 크기 대체(4–5건). (3) hyperref 책갈피 단계 차이 2건(`\bmhead` 가 단락 수준이라 생긴다). 본문은 Overfull 0건이다. SI 는 Overfull 125건(대부분 3 pt 안팎, 최대 약 8.6 pt, 좁은 표 열의 긴 낱말과 굵은 표 머리)이다. S2 의 Plan 열 19 pt 넘침은 줄바꿈 허용으로 없앴다.
 
@@ -33,7 +33,7 @@ TinyTeX 에 설치한 패키지: threeparttable, ncctools, jknapltx, rsfs, appen
 |---|---|---|---|---|
 | 제목 | 20단어 | 14 | 14 | 충족 |
 | 초록 | 200단어 | 213 | 199 | 충족. XC 는 넣지 않았다(10.1절, 주석 `[DECISION: abstract XC sentence]`). 남은 자리는 XE PENDING |
-| 본문(서론 + 결과 + 고찰) | 4,500단어(목표 4,450 이하) | 4,634 | **4,440** | 충족(XC 를 채운 뒤. 10.2절) |
+| 본문(서론 + 결과 + 고찰) | 4,500단어(목표 4,450 이하) | 4,641 | **4,447** | 충족(5차 추가 뒤. 11절) |
 | 서론 | (계획 700) | 633 | 633 | |
 | 결과 | (계획 2,800) | 3,145 | 2,999 | |
 | 고찰 | (계획 850) | 856 | 808 | |
@@ -42,7 +42,7 @@ TinyTeX 에 설치한 패키지: threeparttable, ncctools, jknapltx, rsfs, appen
 
 결과 소절별(자리표시 제외, 괄호는 명세 4절 목표): R1 284(300), R2 434(400), R3 384(450), R4 527(350), R5 491(450), R6 371(400), R7 307(250), R8 165(200). R4 는 XC 문장(약 170단어) 때문에 목표를 넘었다.
 
-여유는 10단어다. XE-a·XE-b, XF 결과가 들어오면 다시 줄여야 한다.
+여유는 3단어다. XE-a·XE-b, XF 결과가 들어오면 다시 줄여야 한다.
 
 그림 설명문(각 350단어 이하, 'Figure N.' 머리 두 낱말 포함, 자리표시 제외)
 
@@ -114,7 +114,7 @@ SI: PENDING 15(XF, XE-a·XE-b, XD-5, XC-F3 의 표 행·주석·S2 판정 열), 
 
 1. **Fig. 6c**: 그림 작업이 기존 ALT 지도 행을 더했다(Fig6.pdf 05:00:10). 설명문을 맞추고 PENDING 표지를 풀었다. md 의 'added post hoc', 'was not resolved', '47% of cells gap-filled' 는 등록 표지에 맞춰 'registration deviation; designed after earlier results were viewed', 'no difference was established', '47.4% imputed' 로 적었다(XG 는 사후 분석이 아니라 등록 이탈과 결과 열람 뒤 설계다).
 2. **Fig. 1e**: 그림 작업이 Fig. 1 을 3차 작업 중에 두 번 다시 그렸다(04:03:41, 04:15:15; md 04:01:51, 04:12:36). 설명문은 마지막 md(지역 홀드아웃 포함, 속이 빈 기호 = 원천 계수 Stefan)와 맞췄다. md 의 '직접 ML 14.8 to 28.7 cm, Stefan 20.5–22.2 cm' 는 그림 스크립트가 계산한 3지역 평균이라 등록 원천에 없어 쓰지 않았고, 대신 XH 등록 문장의 수치(셀 가중 증가)를 썼다.
-3. **본문 길이**: 4,440단어(여유 10). XC 를 채울 때 다시 줄여야 한다. Fig. 1·4(349), Fig. 5(350)는 한도에 붙어 있다.
+3. **본문 길이**: 4,447단어(여유 3). XC 를 채울 때 다시 줄여야 한다. Fig. 1·4(349), Fig. 5(350)는 한도에 붙어 있다.
 4. **단일 파일 규칙**: 템플릿은 `\input` 없는 단일 .tex 를 요구한다. 제출 전 latexpand 로 펼치고, 한글 자리표시를 모두 바꾼 뒤 pdflatex 로도 오류 0 을 확인해야 한다(지금은 한글 때문에 xelatex 만 된다).
 5. **Code availability 두 판**: front.tex 블록 2 와 methods.tex M15 의 문구가 다르다. 조립은 methods.tex 판을 썼다.
 6. **SI 의 한계**: Supplementary Methods 1–7 과 Note 1 은 2026-09-30 영문 초안을 옮긴 것이고 다시 대조하지 않았다([verify]·[UPDATE]·[RESULT] 표지는 파랗게 남겼다). Supplementary Table S2 에는 가설별 Δ·CI·P 열이 아직 없다(S3–S13 에 값이 있다). README 표 셀 17개는 한국어 비고를 번역하지 못해 비고를 빼고 † 를 달았다(`build/si_tables.log`). SI 그림 S1–S9 는 자리 상자다. 지도 그림 S10–S15 는 그림 작업이 바꾸면 `tools/make_si_maps.py` 를 다시 돌린다(지도 작업 에이전트가 아직 실행 중이다).
@@ -183,4 +183,18 @@ R3·R5 를 먼저, 다음에 고찰을 줄였다. 옮긴 수치는 SI 표에 있
 3. Fig. 6 md 의 XG 문구('added post hoc', 'was not resolved', '47% of cells gap-filled')는 등록 표지와 다르다(10.3절 위, 8절 1).
 4. 봉인 문장(`xc_sentences.json`)의 XC-F3 문장은 새 지역에 대한 문장인데도 '같은 지역을 다시 무작위로 나눈 분할에서'를 붙였다(생성 규칙의 결과). 원고는 XC-F3 을 PENDING 으로 두어 이 문장을 쓰지 않았다.
 5. 계획 8.10 은 XC-1b·1c 가 S-XC1(같은 라벨의 규칙 W 대 고정 R1)과 같은 값이라고 적었다. 원고 R4 는 이를 '같은 라벨에서 방법 규칙과 고정 레시피를 비교한 것'으로 적었다.
+
+## 11. 5차 수정(2026-10-05, 마지막 추가 결과) 기록
+
+원천은 계획 8.6 끝(XE-e, 첫 열람 05:42:35), 8.11(XD-5, 05:38:08), 8.12(XB CCI v5 민감도 판, 05:43:31)이다. 수치는 옮겼고 다시 계산하지 않았다.
+
+| 항목 | 본문(영문·국문) | SI |
+|---|---|---|
+| XB-3 단서 | R5 의 XB-3 문장 괄호에 'not retained when CCI v5 was added'(국문 'CCI v5를 후보로 더하면 유지되지 않음')를 넣었다. 본문에서 XB-3 이 나오는 곳은 이 한 곳이다 | S13 c 주석에 같은 문장, S13 c(이어서)에 민감도 판 표(XB-1–XB-4, 판정·Holm P, 지역 행 변화, 가중). S2 의 XB 판정 열에 같은 단서. 등록 판정은 핵심 판 그대로라고 적었다 |
+| XD-5 | 없음(SI 배치) | Supplementary Methods 8 의 PENDING 을 서술 문장으로 바꿨다(후회가 작은 과제 3개·큰 과제 2개, 계열 하나 제외 효용 S9-DS 2/5·S9-GBM 5/5 음수, 사후, S9-DS 효용의 섞기 seed 민감성은 결정성 위반이 아님). S13 k(이어서) 표 두 개와 주석 |
+| XE-e | 고찰 D5 한계 문장 끝에 'on-site soil moisture did not explain the within-grid residual either (diagnostic; Supplementary Table S13)'(국문 '현장 토양 수분도 격자 안 잔차를 설명하지 못했다(진단; 보충 표 S13)') | S13 h(이어서) 표(주 −3.54·−4.89 %, −4.58·−4.48 %, 민감도 −6.59–+2.55 %, 0.5 cm 등가 비율 7.9·5.0 %)와 주석(진단, 판정을 바꾸지 않음) |
+
+길이: 위 두 문장(약 20단어)을 넣고 R1 의 'as in lake-temperature studies'(인용은 서론에 남음), 서론의 러시아 서부 $E$ 값(그림 1b 에 있음), R4 의 라벨 40개 CI(S8), R4 의 레나델타 문장 그림 지시를 줄였다. 본문 4,447단어.
+
+SI Supplementary Methods 9 의 실행 문단에 세 실행(시각, 열람 시각)과 'XB 등록 판정은 핵심 판, XB-3 은 민감도 판에서 유지되지 않음', 'XE-e 는 판정을 바꾸지 않음'을 더했다.
 

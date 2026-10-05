@@ -6,14 +6,13 @@ Values are copied, not recomputed, from (round 3, 5 October 2026):
     8.7 (XG), 8.8 (XD-alg) and 8.9 (XD-4); registered interpretation sentences of the same sections, rendered in English;
   * docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XK_XL_2026-10-05.md, results section (XK, XL);
   * paper/claims/*/README.md section 6.1 (evidence index; same values).
-XC rows come from section 8.10 (sealed tables opened 5 October 2026, 05:20:39 KST); XF, XE-a/XE-b, XD-5 and XC-F3 carry [PENDING] markers.
+XC rows come from section 8.10 (sealed tables opened 5 October 2026, 05:20:39 KST); XD-5 from 8.11, the XB CCI v5 sensitivity from 8.12 and XE-e from the end of 8.6; XF, XE-a/XE-b and XC-F3 carry [PENDING] markers.
 Minus signs are U+2212. Cell entries are LaTeX-ready (no escaping by the caller).
 """
 
 PEND_XF = ("\\textcolor{blue}{[PENDING: XF, new public regions; registered data deadline 11 October 2026, 14:22 KST; "
            "no eligible new macro region found so far]}")
 PEND_XE = "\\textcolor{blue}{[PENDING: XE-a, XE-b, XE-a0, satellite inputs (stage 2) and the xt2 table; registered deadline 8 October 2026, 14:22 KST]}"
-PEND_XD5 = "\\textcolor{blue}{[PENDING: XD-5, leave-one-family-out description and regret against the oracle; started 5 October 2026, 03:30:53 KST]}"
 
 
 def note(text):
@@ -49,7 +48,7 @@ XB_NOTE = (
     "XB-3, `Within label-rich regions, stacked residuals had 0.55 cm (cell-weighted) lower error than recalibrated-anchor residuals with 500 labels (partial, 2 of 3 regions)' and "
     "`... 0.498 cm lower error with 1,000 labels (partial, 2 of 3 regions); the difference is statistically distinguishable but below 0.5 cm in size'; `no difference was established "
     "with 200 and all labels (3 of 3 regions)'. XB-4, `Within Alaska, where the physics model is close to the error floor, the error increase of stacking relative to the recalibrated "
-    "Stefan model was within 0.5 cm (non-inferior).' Regional rows: no higher-error row. XB-3 Canada rows had opposite signs in the two weightings ($n$ 200 −0.95 [−1.29, +0.14] / "
+    "Stefan model was within 0.5 cm (non-inferior).' XB-3 was not retained when CCI v5 was added as a candidate (sensitivity edition, part c continued); the registered verdict remains the main-run one. Regional rows: no higher-error row. XB-3 Canada rows had opposite signs in the two weightings ($n$ 200 −0.95 [−1.29, +0.14] / "
     "+1.68 [+1.24, +2.13]; all −2.05 [−2.60, −0.47] / +1.05 [+0.41, +1.69]; undetermined). Weights are reported descriptively only (no causal sentence): mean weight with all labels, "
     "Alaska soil-thaw-index Stefan 0.82, Canada Kudryavtsev 0.57, Lena Delta year-matched Stefan 0.77, Tibetan Plateau affine-calibrated CCI v4 0.92; Spearman $\\rho$ of the CCI weight "
     "with the P1 RMSE of the target 0.31 ($P$ 0.094, 31 stores). Auxiliary XB-5 (not counted): Stack0 $-$ P0 without labels, four main regions +0.51 [+0.09, +0.69] / +0.09 [−0.14, +0.31], "
@@ -246,7 +245,7 @@ XD_NOTE = (
     "(statistically distinguishable but below 0.5 cm in size), and `non-inferiority was not established' for the six other rows; XD-4, `A placement policy learned and frozen in Alaskan "
     "sub-regions had lower error than Algorithm P in 2 of 5 test tasks outside Alaska (0 of 3 families; both weightings, no test)' and `... higher error in 2 of 5 test tasks (2 of 3 families; "
     "both weightings, no test).' Common limitation: the candidate pool consists of already measured cells, so gains are not guaranteed to transfer to field candidates (all land grid cells). "
-    "XD-6 is descriptive (trait means over splits; effects as cell-weighted / block-equal cm); correlations of traits with effects were not computed. " + PEND_XD5 + " "
+    "XD-6 is descriptive (trait means over splits; effects as cell-weighted / block-equal cm); correlations of traits with effects were not computed. XD-5: part k (continued). "
     "Source: data/processed/xbatch/XD\\_placement\\_policy/sealed/ (xd\\_alg\\_tests.csv, xd\\_alg\\_contrasts.csv, xd\\_alg\\_holm.csv, xd6\\_traits.csv; xd4\\_summary.json, xd4\\_tasks.csv, "
     "xd4\\_families.csv, xd4\\_ci.csv); gate passed (gate/xd\\_gate.csv).")
 
@@ -337,6 +336,88 @@ XL_NOTE = (
     "coverage is not guaranteed in extrapolated cells. Supplementary Figs~S10 to S14. Source: data/processed/xbatch/XL\\_map\\_products/xl\\_summary\\_v1.csv and xl\\_meta.json.")
 
 
+# ---------------------------------------------------------------------------------------------- XB sensitivity (8.12)
+XBS_H = ["Hypothesis", "$n$", "Main-run verdict", "CCI v5 edition: cell / block-equal [95\\% CI]", "Verdict, CCI v5 edition", "Holm $P$ (CCI v5 edition)"]
+XBS = [
+    ["XB-1 Stack $-$ P1", "10", "undetermined", "+0.27 [−0.78, +1.84] / +1.64 [+0.68, +2.67]", "undetermined (fallback 0.37)", "1.00"],
+    ["", "40", "undetermined", "−2.17 [−2.79, −0.41] / +0.70 [+0.06, +1.33]", "undetermined (CIs exclude zero on opposite sides)", "0.33"],
+    ["", "160", "undetermined", "−2.79 [−3.43, −1.06] / +0.38 [−0.43, +1.19]", "undetermined", "1.00"],
+    ["", "all", "undetermined", "−1.57 [−2.24, −0.44] / −0.04 [−0.82, +0.75]", "undetermined", "1.00"],
+    ["XB-1 hypothesis", "", "rejected", "", "rejected", ""],
+    ["XB-2 StackR(0.25) $-$ R1(0.25)", "10", "undetermined", "+0.16 [−0.84, +1.64] / +1.39 [+0.55, +2.28]", "undetermined", "1.00"],
+    ["", "40", "undetermined", "−2.02 [−2.60, −0.36] / +0.65 [+0.07, +1.22]", "undetermined (opposite sides)", "0.33"],
+    ["", "160", "undetermined", "−2.35 [−2.92, −0.74] / +0.53 [−0.21, +1.28]", "undetermined", "1.00"],
+    ["", "all", "undetermined", "−1.42 [−1.98, −0.38] / −0.04 [−0.71, +0.64]", "undetermined", "1.00"],
+    ["XB-2 hypothesis", "", "rejected", "", "rejected", ""],
+    ["XB-3 StackR $-$ R1 (CV $\\lambda$), within region", "200", "undetermined", "−1.24 [−1.34, −0.67] / +0.32 [+0.11, +0.54]", "undetermined (opposite sides)", "0.031"],
+    ["", "500", "lower error", "−0.50 [−0.62, −0.19] / −0.06 [−0.24, +0.11]", "undetermined (margin-dependent)", "1.00"],
+    ["", "1,000", "lower error", "−0.36 [−0.54, −0.03] / +0.08 [−0.14, +0.30]", "undetermined (margin-dependent)", "1.00"],
+    ["", "all", "undetermined", "−1.44 [−1.59, −0.74] / +0.17 [−0.10, +0.43]", "undetermined", "1.00"],
+    ["XB-3 hypothesis", "", "partially supported", "", "rejected", ""],
+    ["XB-4 Stack $-$ P1, non-inferiority, Alaska", "200 to all", "non-inferior at all four $n$", "all −0.70 [−0.82, −0.49] / −0.92 [−1.13, −0.73]; $n$ 200 −0.46 / −0.75", "non-inferior at all four $n$ (four-way lower error)", "$<$0.0001"],
+    ["XB-4 hypothesis", "", "supported", "", "supported", ""],
+]
+XBS_NOTE = (
+    "Sensitivity edition registered in plan 2.2 as a second-stage candidate: the year-matched CCI v5 map (affine-calibrated; missing cells take the P1 value) added as an "
+    "eighth candidate, not as a replacement ($K$ = 8 in all 219 store-by-$n$ rows). Local run on 5 October 2026, 05:20 to 05:38 KST (211 units, no failure); the keys shared "
+    "with the main run agreed within 6.0$\\times$10$^{-14}$ cm; sealed tables first opened 05:43:31 KST. Flags as in the main run; designed after earlier results were "
+    "viewed. The registered verdicts remain those of the main run (XB-1 and XB-2 rejected, XB-3 partially supported, XB-4 supported). In this edition XB-1, XB-2 and XB-4 "
+    "kept their verdicts, and XB-3 was not retained: the lower error at 500 and 1,000 labels became undetermined (block-equal point estimates −0.06 and +0.08 cm). "
+    "Regional rows: XB-1 Lena Delta at $n$ 10 changed from undetermined to higher error (+0.31 / +1.98 cm), XB-1 Canada at $n$ 160 and all labels from undetermined to lower error "
+    "(−5.54 / −1.59 and −6.03 / −1.71 cm), XB-3 Alaska and Lena Delta within region at $n$ 1,000 from lower error to undetermined and Alaska with all labels from equivalent to "
+    "undetermined; XB-2 and XB-4 regional rows did not change. Weights (descriptive, no causal statement): mean CCI v5 weight with all labels, Canada 0.21, Lena Delta 0.23, "
+    "Tibetan Plateau 0.32 and Alaska 0.03 in transfer, Canada 0.46, Lena Delta 0.10 and Alaska 0.10 within regions; Spearman $\\rho$ of the total CCI weight with the P1 RMSE "
+    "0.35 ($P$ 0.051, 31 transfer stores) and 0.50 ($P$ 0.67, three within-region targets). Source: data/processed/xbatch/XB\\_multisource\\_stacking/sealed/ "
+    "(xb\\_tests\\_cci5y.csv, xb\\_weights\\_summary\\_cci5y.csv, xb\\_cci\\_relation\\_cci5y.csv); plan 8.12.")
+
+# ---------------------------------------------------------------------------------------------- XE-e (8.6, end)
+XEE_H = ["Region", "Model", "Non-GPR VWC, registered subset (main)", "Non-GPR VWC, finite-predictor cells", "GPR VWC, registered subset", "GPR VWC, finite cells"]
+XEE = [
+    ["Alaska", "linear regression", "−3.54\\%", "−0.79\\%", "−0.54\\%", "−5.56\\%"],
+    ["", "CatBoost (mean of seeds 0 and 1)", "−4.89\\%", "−2.40\\%", "+0.82\\%", "−4.16\\%"],
+    ["Canada", "linear regression", "−4.58\\%", "+2.55\\%", "n.a.", "n.a."],
+    ["", "CatBoost", "−4.48\\%", "−6.59\\%", "n.a.", "n.a."],
+]
+XEE_NOTE = (
+    "XE-e, diagnostic (exploratory): share of the within-grid residual of the recalibrated Stefan model P1 explained by on-site volumetric water content (shallow and deep "
+    "layers) under five-fold block cross-validation. Flags: designed after earlier results were viewed; blind (the relation of VWC with P1 residuals had not been computed); "
+    "the registered rule says XE-e changes no verdict. Site data: ABoVE soil thaw depth and moisture validation, version 2 (15 m radius). Registered subsets: Alaska 2,468 cells "
+    "in 31 blocks, Canada 602 cells in 15 blocks; shares computed on cells in grid groups of at least two cells (2,466 and 599); non-GPR VWC finite in 1,329 and 595 cells. "
+    "GPR VWC shares error with ALT and is a sensitivity only; Canada has no GPR VWC (n.a.). Reference: a 0.5 cm reduction of within-grid RMSE corresponds to explained shares of "
+    "7.9\\% (Alaska) and 5.0\\% (Canada). Description: under block cross-validation on-site VWC did not explain the within-grid residual of P1 (main shares −4.89\\% to −3.54\\%, "
+    "sensitivities −6.59\\% to +2.55\\%). Run locally on 5 October 2026 (05:41, 8 s); sealed table first opened 05:42:35 KST. Source: data/processed/xbatch/XE\\_hires\\_covariates/"
+    "sealed/xe\\_e\\_xe\\_e.csv and xe\\_e\\_xe\\_e\\_meta.json; plan 8.6.")
+
+# ---------------------------------------------------------------------------------------------- XD-5 (8.11)
+XD5_H = ["Test task", "U(S9*)", "U(Algorithm P = S1)", "U(oracle)", "Median of 200 candidate sets", "Regret, S9*", "Regret, Algorithm P"]
+XD5 = [
+    ["CA-2", "−0.005", "0", "−0.089", "+0.002", "0.084", "0.089"],
+    ["CA-3", "−0.024", "0", "−0.085", "−0.028", "0.061", "0.085"],
+    ["LE-1", "+0.275", "0", "−0.069", "+0.001", "0.344", "0.069"],
+    ["LE-2", "−0.017", "0", "−0.051", "−0.024", "0.034", "0.051"],
+    ["Tibetan Plateau", "+0.106", "0", "−0.090", "−0.009", "0.195", "0.090"],
+    ["Central Russia (not counted)", "+0.023", "0", "n.a.", "n.a.", "n.a.", "n.a."],
+]
+XD5CV_H = ["Task", "Family", "S9-DS, leave family out", "S9-DS, leave task out", "S9-GBM, leave family out", "S9-GBM, leave task out"]
+XD5CV = [
+    ["LE-1", "Lena Delta", "+0.074", "+0.034", "−0.024", "−0.013"],
+    ["LE-2", "Lena Delta", "−0.015", "−0.008", "−0.029", "−0.020"],
+    ["CA-2", "Canada", "+0.066", "+0.081", "−0.004", "+0.082"],
+    ["CA-3", "Canada", "−0.031", "−0.037", "−0.044", "−0.025"],
+    ["Tibetan Plateau", "Tibetan Plateau", "+0.053", "+0.072", "−0.009", "−0.009"],
+]
+XD5_NOTE = (
+    "XD-5, descriptive (Supplementary Information; no verdict words and no $P$ values), built after the XD-4 tables were opened; local run 5 October 2026, 03:30 to 05:37 KST; "
+    "sealed tables first opened 05:38:08 KST. U is the relative change of RMSE against the mean of S1 draws, averaged over the two weightings (negative, lower error); regret = "
+    "U $-$ U(oracle), with the oracle the best of 200 candidate label sets (mean over splits and $n$). Because Algorithm P = S1, the S9* $-$ S1 description equals XD-4. "
+    "S9* had lower regret than Algorithm P in 3 of 5 test tasks (CA-2, CA-3, LE-2) and higher regret in 2 (LE-1, Tibetan Plateau); the LE-1 mean is set by four rows of splits 2 "
+    "and 4 (U(S9*) +0.38, +0.73, +0.71, +0.64; the other four rows −0.11 to −0.03). Cross-validation utility (post hoc comparison after S9* = S9-DS had been frozen): leaving a "
+    "family out, S9-DS was negative in 2 of 5 tasks (LE-2, CA-3) and S9-GBM in 5 of 5 (−0.044 to −0.004). For the Tibetan Plateau both schemes use the same training set; S9-GBM "
+    "gave the same value (−0.009) and S9-DS gave +0.053 and +0.072, because the minibatch-order seed includes the fold name. The S9-DS utility is therefore sensitive to the "
+    "minibatch-order seed; this is not a determinism failure (the frozen model gave identical selections on two GPUs, Jaccard 1.000). Alaska-family values (leave the Alaska "
+    "family out) are in plan 8.11. Common limitation: the candidate pool consists of already measured cells, so gains are not guaranteed to transfer to field candidates. "
+    "Source: data/processed/xbatch/XD\\_placement\\_policy/sealed/ (xd5\\_regret.csv, xd5\\_cv\\_ds.csv, xd5\\_cv\\_gbm.csv, xd5\\_meta.json); plan 8.11.")
+
 # ---------------------------------------------------------------------------------------------- XC (8.10)
 XC_H = ["Hypothesis and contrast", "$n$", "Pool", "$\\Delta$ cell [95\\% CI]", "$\\Delta$ block-equal [95\\% CI]", "Four-way verdict", "Holm $P$ (rank, multiplier)", "Branch"]
 XC = [
@@ -413,6 +494,9 @@ def build(longtable):
     out.append(longtable(XB_H, XB, ws=[0.17, 0.05, 0.17, 0.14, 0.14, 0.07, 0.08, 0.18],
                          title="c. XB label-weighted stacking of physics models and products (transfer: XB-1, XB-2; within region: XB-3, XB-4)"))
     out.append(note(XB_NOTE))
+    out.append(longtable(XBS_H, XBS, ws=[0.20, 0.07, 0.14, 0.27, 0.20, 0.12],
+                         title="c (continued). XB sensitivity edition with CCI v5 added as an eighth candidate (registered verdicts remain those of the main run)"))
+    out.append(note(XBS_NOTE))
     out.append(longtable(XG_H, XG, ws=[0.14, 0.04, 0.11, 0.19, 0.19, 0.09, 0.13, 0.11],
                          title="d. XG existing ALT maps scored on the same blocks (registration deviation)"))
     out.append(note(XG_NOTE))
@@ -427,6 +511,9 @@ def build(longtable):
     out.append(longtable(XE_H, XE, ws=[0.16, 0.05, 0.08, 0.22, 0.17, 0.32],
                          title="h. XE public inputs at 10 to 500 m within regions, stage 1 (xh0; auxiliary contrast XE-c)"))
     out.append(note(XE_NOTE))
+    out.append(longtable(XEE_H, XEE, ws=[0.10, 0.22, 0.19, 0.19, 0.15, 0.15],
+                         title="h (continued). XE-e diagnostic: share of the within-grid residual of P1 explained by on-site soil moisture (block cross-validation)"))
+    out.append(note(XEE_NOTE))
     out.append(longtable(XD_H, XD, ws=[0.15, 0.04, 0.11, 0.13, 0.13, 0.22, 0.12, 0.08],
                          title="i. XD placement algorithm (XD-1 to XD-3; R1 $\\lambda$ 0.25, cm; exploratory)"))
     out.append(longtable(XD4_H, XD4, ws=[0.40, 0.16, 0.16, 0.28],
@@ -434,6 +521,11 @@ def build(longtable):
     out.append(longtable(XD6_H, XD6, ws=[0.13, 0.07, 0.09, 0.12, 0.13, 0.23, 0.23],
                          title="k. XD-6 region traits and placement effect (descriptive)"))
     out.append(note(XD_NOTE))
+    out.append(longtable(XD5_H, XD5, ws=[0.22, 0.11, 0.14, 0.11, 0.16, 0.13, 0.13],
+                         title="k (continued). XD-5 regret against the best of 200 candidate sets (descriptive)"))
+    out.append(longtable(XD5CV_H, XD5CV, ws=[0.16, 0.16, 0.17, 0.17, 0.17, 0.17],
+                         title="k (continued). XD-5 cross-validation utility of the learned policies (post hoc)"))
+    out.append(note(XD5_NOTE))
     out.append(longtable(XJ_H, XJ, ws=[0.30, 0.05, 0.05, 0.17, 0.17, 0.15, 0.11],
                          title="l. XJ temperature-derived auxiliary labels"))
     out.append(note(XJ_NOTE))

@@ -1,4 +1,4 @@
-# 국문 원고 점검표 (2026-10-05, 4차: XC 채움)
+# 국문 원고 점검표 (2026-10-05, 5차: XC 채움, 마지막 추가 결과)
 
 국문판은 영문 Scientific Reports 원고(`paper/manuscript/en/`, 2026-10-05 4차 수정판, XC 까지 채움)의 쌍둥이판이다. 절 순서, 소절, 수치, 그림 PDF, 표 1 본체, 참고문헌을 영문판과 같게 두고 문장을 국문으로 옮겼다(MANUSCRIPT_SPEC 1.2). 새 주장은 없다.
 
@@ -31,6 +31,7 @@
 - **표 1**: 본체는 영문판과 같은 생성 파일(`Table1_data.tex`)의 tabular 를 그대로 넣었고(열 이름 영문), 캡션과 표 설명은 국문이다. 국문 열 이름이 필요하면 표 생성 스크립트에 국문 판을 더해야 한다.
 - **보충 자료**: SI 는 영문판(`../en/si_main.pdf`)만 있다. 본문의 지시는 '보충 표 S7', '보충 방법 3', '보충 주석 2', '보충 정보' 로 옮겼다.
 - **영문판 2차 수정 반영**: 줄인 본문, XA 계열 수(Methods 와 이탈 목록), Fig. 4·Fig. 6 설명문(렌더판과 맞춘 판)을 반영하였다.
+- **영문판 5차 수정 반영**: R5 XB-3 문장의 CCI v5 단서, 고찰 D5 의 현장 토양 수분(XE-e) 문장, 같은 자리의 줄임(R1 호수 수온 연구 문구, 서론의 러시아 서부 $E$ 값, R4 의 라벨 40개 CI 와 그림 지시)을 같은 자리에 옮겼다.
 - **영문판 4차 수정 반영**: XC 문장(R4 의 XC-1·XC-2·지역 손해·XC-r, R6 의 배치 무작위와 공통 문장, R7 의 XC-F3 PENDING, 고찰 D6 조건 문장, Methods M7), 같은 자리의 줄임(영문 COMPLIANCE 10.2절), Fig. 6·Fig. 7 설명문 재동기화를 같은 자리에 옮겼다. 표지 대응: in new random splits of the same regions → 같은 지역을 다시 무작위로 나눈 분할에서, re-test in reused regions → 재사용 지역의 재검정, selection family → 선택 계열, pooled mean → 풀 평균.
 - **영문판 3차 수정 반영**: X 결과 문장(R1 XH, R2 XG, R3·R4·R5 XB, R5 XI·XE, R6 XD, R7 XJ, Methods M7 Algorithm P, 고찰 D5 지도 문장과 D6), 같은 자리의 줄임(영문 COMPLIANCE 9.2절), Fig. 1 설명문 재동기화, Fig. 6c 의 PENDING 표지를 같은 자리에 옮겼다. 표지 대응: designed after earlier results were viewed → 앞선 결과를 본 뒤 설계, partly unblinded → 비맹검 부분 포함, registration deviation → 등록 이탈, not a true extrapolation test → 실제 외삽 시험이 아니다, spatial proxy with warmer blocks of the same period → 같은 시기의 따뜻한 블록을 쓴 공간 대용, licence basis not recorded → 약관 근거 미기록, product values imputed → 제품 결측 대체.
 

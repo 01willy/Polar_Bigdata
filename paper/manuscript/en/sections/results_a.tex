@@ -19,7 +19,7 @@
 
 \subsection{Evaluation design and validation ladder}\label{sec:results-design}
 
-On the holdout protocol described above (Fig.~1c,d; Table~1), every method was compared with two Stefan baselines that used the same target labels, as in lake-temperature studies\cite{Read2019,Jia2021}: the source-coefficient Stefan model, whose coefficient $E_0$ was estimated from the source cells (Table~1), and the Stefan model recalibrated with the target labels by shrinkage towards $E_0$ ($\kappa = 10$)\cite{Steyerberg2004}.
+On the holdout protocol described above (Fig.~1c,d; Table~1), every method was compared with two Stefan baselines that used the same target labels: the source-coefficient Stefan model, whose coefficient $E_0$ was estimated from the source cells (Table~1), and the Stefan model recalibrated with the target labels by shrinkage towards $E_0$ ($\kappa = 10$)\cite{Steyerberg2004}.
 Four-region means weight the Lena Delta, Canada, W Russia and E Russia equally and exclude Alaska, which is a held-out reference target.
 Intervals are cell-weighted unless marked block-equal.
 
@@ -68,8 +68,8 @@ Label-weighted stacking of physics models and products established no difference
 \subsection{Method selection with tens to hundreds of labels}\label{sec:results-selection}
 
 Selecting the method by five-fold block cross-validation within the target labels reduced RMSE relative to a fixed residual recipe ($\lambda = 0.25$) by 1.3~cm with 160 labels (95\% CI 0.7 to 1.7; block-equal 0.8 to 1.8; Lena Delta and Canada; unchanged under common resampling) and was non-inferior at 40 and 160 labels (margin 0.5~cm), with both results arising in Canada; this rule was designed after the label-grid results had been viewed (Fig.~4c; Fig.~7d).
-With 40 labels, the reduction of 0.87~cm (95\% CI 0.27 to 1.20) depends on the split-independence assumption.
-In the Lena Delta no difference was established (Fig.~4c).
+With 40 labels, the reduction of 0.87~cm depends on the split-independence assumption.
+No difference was established in the Lena Delta.
 With ten labels in the four main regions, non-inferiority was not established, and the rule had 0.70~cm higher error in the Lena Delta; with all labels, non-inferiority depends on the split-independence assumption.
 The rule did not increase the number of targets with lower error than the recalibrated Stefan model (Supplementary Table S8).
 

@@ -150,9 +150,10 @@ def b_S07(sl, s):
 
 def b_S08(sl, s):
     """검증 사다리: 왼쪽 Fig 1e 슬라이드판 7.50 × 4.60 in, 오른쪽 C5–C6 굵은 리드 줄 3줄."""
-    L.place(sl, panel("Fig1_e_slide.png"), L.ML, L.Y0, 7.50, 4.60)
+    yc = L.Y0 + (L.H - 4.60) / 2                     # 본문 영역 세로 가운데
+    L.place(sl, panel("Fig1_e_slide.png"), L.ML, yc, 7.50, 4.60)
     items = [tuple(x.split("  ", 1)) for x in s["visible_text"]["lead_lines"]]
-    L.lead_lines(sl, L.COL[4], L.Y0 + 0.15, 3.80, items, gap_pt=14, line_spacing=1.08)
+    L.lead_lines(sl, L.COL[4], yc + 0.15, 3.80, items, gap_pt=14, line_spacing=1.08)
     STATUS.setdefault("S08", []).append("Fig 1e 슬라이드판(3지역, 5단계)과 근거 줄 3줄")
 
 
@@ -360,12 +361,28 @@ def result_rows(s):
 
 
 def b_SX(sl, s):
+    """결과 요약 표: 행 높이는 칸의 줄 수로 정하고(줄 0.30 in), 남는 높이는 행에 고르게 나눈다(표 아래끝 6.45 in 이하)."""
     vt = s["visible_text"]["table"]
     rows = result_rows(s)
-    t = L.table_def(vt["columns"], rows, vt["geometry_in"])
-    rh = fill_row_h(t, vt["geometry_in"]["y"])
-    L.hairline_table(sl, t, row_h=rh)
-    STATUS.setdefault(s["id"], []).append(f"결과 행 {len(rows)}개")
+    g = vt["geometry_in"]
+    t = L.table_def(vt["columns"], rows, g)
+    rhs = L.row_heights(t)
+    spare = 6.45 - g["y"] - t["style"]["header_h"] - sum(rhs)
+    if spare < 0:
+        raise SystemExit(f"{s['id']} 표가 본문 영역을 넘음: {spare:.2f} in")
+    rhs = [h + min(spare / len(rhs), 0.25) for h in rhs]
+    L.hairline_table(sl, t, row_h=rhs)
+    STATUS.setdefault(s["id"], []).append(f"결과 행 {len(rows)}개, 행 높이 {[round(h, 2) for h in rhs]}")
+
+
+def b_SW1(sl, s):
+    """워크플로 순차 적용 결과: 왼쪽 Fig 7e 슬라이드판 6.00 × 4.00 in(세로 가운데), 오른쪽 C4–C6 굵은 리드 줄 3줄."""
+    g = s["evidence"]["geometry_in"]
+    yc = L.Y0 + (L.H - 4.0) / 2
+    L.place(sl, panel("Fig7_e_slide.png"), g["chart"]["x"], yc, 6.0, 4.0)
+    items = [tuple(x.split("  ", 1)) for x in s["visible_text"]["lead_lines"]]
+    L.lead_lines(sl, g["lead_lines"]["x"], yc + 0.75, g["lead_lines"]["w"], items, gap_pt=14, line_spacing=1.08)
+    STATUS.setdefault("SW1", []).append("Fig 7e 슬라이드판과 근거 줄 3줄")
 
 
 def b_AP1(sl, s):

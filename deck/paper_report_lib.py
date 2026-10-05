@@ -113,10 +113,35 @@ def break_runs(tb):
     return tb
 
 
+def lead_wrap(lead, body, width_in, pt=18, safety=0.93):
+    """리드 줄 본문을 공백(구 경계)에서만 나눈 줄바꿈 문자열로 바꾼다. 첫 줄은 리드 폭만큼 좁다.
+    LibreOffice 는 한글 낱말 가운데서도 줄을 바꾸므로 렌더 전에 직접 나눈다(지침 5.9)."""
+    if "\n" in body:
+        return body
+    maxw = width_in * safety
+    lead_w = text_w_in(lead + "  ", pt, "SemiBold") if lead else 0.0
+    t = nbsp(body)
+    for k in KEEP:
+        if k in t:
+            t = t.replace(k, k.replace(" ", "\u00a0"))
+    words = t.split(" ")
+    lines, cur, avail = [], "", maxw - lead_w
+    for w in words:
+        cand = w if not cur else cur + " " + w
+        if text_w_in(cand, pt) <= avail or not cur:
+            cur = cand
+        else:
+            lines.append(cur)
+            cur, avail = w, maxw
+    if cur:
+        lines.append(cur)
+    return "\n".join(lines)
+
+
 def lead_lines(sl, x, y, w, items, gap_pt=12, line_spacing=1.12):
     """굵은 리드 줄(지침 5.5): 줄 머리 SemiBold + 한 칸 + Medium 본문, 18 pt, 콜론 없음, 3줄 이하."""
     assert len(items) <= 3
-    paras = [[run(lead + "  ", 18, INK, F_S), run(body, 18, INK, F_M)] for lead, body in items]
+    paras = [[run(lead + "  ", 18, INK, F_S), run(lead_wrap(lead, body, w), 18, INK, F_M)] for lead, body in items]
     return break_runs(text(sl, x, y, w, 2.6, paras, line_spacing=line_spacing, space_after=gap_pt))
 
 
@@ -457,7 +482,8 @@ def hairline_table(sl, t, x=None, y=None, row_h=None, header_h=None):
     hh = (g.get("header_h") or t["style"]["header_h"]) if header_h is None else header_h
     cw = g["col_w"]
     nr, nc = len(t["wrapped_rows"]) + 1, len(cw)
-    total_h = hh + rh * (nr - 1)
+    rhs = list(rh) if isinstance(rh, (list, tuple)) else [rh] * (nr - 1)
+    total_h = hh + sum(rhs)
     gf = sl.shapes.add_table(nr, nc, Inches(x), Inches(y), Inches(sum(cw)), Inches(total_h))
     tbl = gf.table
     tbl.first_row = False
@@ -471,7 +497,7 @@ def hairline_table(sl, t, x=None, y=None, row_h=None, header_h=None):
         tbl.columns[j].width = Inches(w)
     tbl.rows[0].height = Inches(hh)
     for i in range(1, nr):
-        tbl.rows[i].height = Inches(rh)
+        tbl.rows[i].height = Inches(rhs[i - 1])
     gap = t["style"].get("col_gap", 0.18)
     acc = {tuple(a) for a in t.get("accent_cells", [])}
     top_line = (1.25, "4A4A4A")
@@ -524,7 +550,8 @@ def nbsp(s):
 
 
 KEEP = ["원천 계수 Stefan", "연도 정합 Stefan", "재보정 Stefan", "물리 잔차 결합", "잔차 ML", "직접 ML", "CCI v5", "사전 지정",
-        "학습형 정책", "두 가설", "한 가설", "두 가중", "두 방법", "마감 10-08", "마감 10-11", "10-05 오전"]
+        "학습형 정책", "두 가설", "한 가설", "두 가중", "두 방법", "마감 10-08", "마감 10-11", "10-05 오전", "오차 감소",
+        "오차 증가"]
 DETERMINERS = {"두", "세", "네", "각", "첫", "새", "큰", "그", "이", "전", "한", "온", "총"}
 
 
@@ -571,6 +598,11 @@ def wrap_text(s, width_in, pt=18, weight="Medium"):
             if W(tail + " " + last) <= maxw:
                 lines[-2], lines[-1] = head, tail + " " + last
     return lines
+
+
+def row_heights(t, min_h=0.70, line_h=0.30, pad=0.12):
+    """행마다 가장 긴 칸의 줄 수로 높이를 정한다(18 pt 한 줄 0.30 in)."""
+    return [max(min_h, max(len(c) for c in r) * line_h + pad) for r in t["wrapped_rows"]]
 
 
 def table_def(columns, rows, geo, align=None, accent=(), support=None):
