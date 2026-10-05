@@ -111,6 +111,27 @@ WITHIN_100M = {"Alaska": 49.2, "Lena": 19.0, "Canada": 60.2}               # wit
 FINAL_REQUIRED_TXT = "xe_feat 최종 해시 없음(계획 2.5: 최종판 커밋 뒤 R3)"
 SMOKE_MAX_THREADS = 2                                                       # 계획 1절·0.3 제한 스모크(코어 4개, 스레드 2)
 SMOKE_MAX_CORES = 4
+# XM(추가 등록 docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XM_2026-10-05.md, 커밋 ff7c97f). --stage xm 은 xw·xw_lc 만 적합하고 x25 는 XE r1b 조각을 다시 쓴다
+XM_OUT = XB.XBATCH_ROOT / RG.XM_EXP_NAME
+XM_FEAT_DEFAULT = XM_OUT / "inputs" / "xm_feat_v1.csv"
+XM_X25_FROM = OUT_DEFAULT / "shards"
+XM_X25_TAG = "xe_r1b"
+XM_TAG = "xm"
+XM_HOLM_M = 3                                                               # 등록 4절: XM-a 의 n 500·1,000·전량
+XM_DESIGN = "결과 열람 뒤 설계, 탐색(SI)"
+XM_BLIND = ("비맹검 부분 포함", "xh0 의 treecover_1km·water_occ_1km 이 WC 의 수목·수면 비율과 정보가 겹치고 xh0 격자 안 대비를 열람했다(등록 4절)")
+XM_CELL_SHARE = {"Alaska": 18.8, "Lena": 47.8, "Canada": 17.7}             # within_grid_inputs.md 3.3: 격자 안 분산 가운데 1 km 셀 사이 몫(%)
+XM_SENT = {   # 등록 5절 '사전 고정 해석 문장'. {inp} = 입력 이름(xw: WorldCover·Sentinel-2, xw_lc 대체: WorldCover 만)
+    "superior": "1 km 셀의 {inp} 더하면 R1 의 ERA5 격자 안 오차가 {a} cm 작아졌다(격자 안 설명 비율 {x} %)",
+    "superior_tail": "탐색 결과이므로 C8 의 격자 안 문장과 지도 문구는 고치지 않고 확인 시험 후보로 SI 에 적는다.",
+    "eq": "피복·식생 입력을 더한 R1 의 격자 안 오차는 x25 와 0.5 cm 안에서 같았다",
+    "eq_tail": "XE xh0·XE-e 와 함께 '공개 10–500 m 입력은 격자 안 오차를 줄이지 못했다'는 SI 서술을 유지한다.",
+    "und": "피복·식생 입력으로 격자 안 오차가 줄어드는 것을 확인하지 못했다",
+    "worse": "피복·식생 입력은 격자 안 오차를 {a} cm 늘렸다",
+    "na": "판정할 수 없었다",
+}
+XM_INPUT_WORD = {"xw": "WorldCover 10 m 피복 비율과 Sentinel-2 20 m 여름 식생 지수를", "xw_lc": "WorldCover 10 m 피복 비율을"}   # 조사 포함
+XM_S2_FALLBACK_TXT = "S2 군이 세 대상 모두에서 빠짐(등록 3절 (d): xw 를 돌리지 않고 xw_lc 를 주 대비에 쓴다)"
 
 # 맹검 표지(1절 어휘)와 근거 문장. 계획 2.5 표의 맹검 열을 따르고, 표가 비운 칸(XE-c 의 xh 행, XE-d, XE-e)은 같은 사유 규칙으로 채운다(구현 기록 3절)
 BLIND_HYP = {"XE-a": ("비맹검 부분 포함", "H0 10열이 H19 입력에 있었다(계획 2.5 XE-a)"),
@@ -241,14 +262,55 @@ class FeatTable:
         return {k: (g or {}).get(k, "") for k in groups}
 
 
+class XMFeatTable(FeatTable):
+    """XM 특징 표(xm_feat_v1.csv 와 xm_feat_v1_meta.json, 등록 3절). 최종 해시 파일은 쓰지 않는다(등록 3절 (e): 적합 전 sha256 을 조각과 봉인 메타에
+    적는다). path = None 이면 세기 전용 빈 표."""
+
+    def __init__(self, path=None):
+        if path in (None, "", "none"):
+            FeatTable.__init__(self, None)
+            self.df = pd.DataFrame(columns=["loc_id"] + RG.XM_COLS).set_index("loc_id")
+            return
+        FeatTable.__init__(self, path)
+
+    def s2_all_dropped(self, targets=TARGETS) -> bool:
+        """S2 군이 등록 세 대상 모두에서 90 % 규칙으로 빠졌는가(등록 3절 (d): 그러면 xw 를 돌리지 않고 xw_lc 를 주 대비에 쓴다)."""
+        if self.is_dummy:
+            return False
+        g = (self.meta or {}).get("group_decisions", {})
+        return all(not bool(((g.get(t) or {}).get("S2") or {}).get("included", False)) for t in targets)
+
+    def dropped_targets(self, group, targets=TARGETS) -> list:
+        g = (self.meta or {}).get("group_decisions", {})
+        return [t for t in targets if not bool(((g.get(t) or {}).get(group) or {}).get("included", False))] if not self.is_dummy else []
+
+
+def is_xm(variant) -> bool:
+    return variant in RG.XM_VARIANTS
+
+
 def needs_final(variant) -> bool:
-    """최종 해시가 커밋된 표에서만 돌리는 변형(2단계 열을 쓴다). xh0·xt2 는 1단계 표로 돈다(작업 R1b)."""
-    return variant not in ("x25", "xh0", "xt2")
+    """최종 해시가 커밋된 표에서만 돌리는 변형(2단계 열을 쓴다). xh0·xt2 는 1단계 표로 돈다(작업 R1b). XM 변형은 XM 특징 표로 돈다(등록 3절 (e))."""
+    return variant not in ("x25", "xh0", "xt2") + RG.XM_VARIANTS
+
+
+def feat_of(a, variant):
+    """변형의 특징 표(XM 변형은 a.FEAT_XM, 그 밖은 a.FEAT)."""
+    return a.FEAT_XM if is_xm(variant) else a.FEAT
 
 
 def variant_cols(a, variant, target):
     if variant == "x25":
         return RG.variant_columns("x25", target, XB.FEATS, SOIL_COLS)
+    if is_xm(variant):
+        ft = a.FEAT_XM
+        cols, info = RG.xm_variant_columns(variant, target, XB.FEATS, ft.decisions(target))
+        if cols is not None and not ft.is_dummy:
+            miss = [c for c in cols if c not in XB.FEATS and c not in ft.columns()]
+            if miss:
+                info["skip"] = f"XM 특징 표에 열이 없다({', '.join(miss[:4])}…)"
+                return None, info
+        return cols, info
     cols, info = RG.variant_columns(variant, target, XB.FEATS, SOIL_COLS, a.FEAT.decisions(target), a.FEAT.columns())
     if cols is not None:
         miss = [c for c in cols if c not in XB.FEATS and c not in a.FEAT.columns()]
@@ -383,7 +445,11 @@ class XERUnit(W.R9Unit):
 # ================================================================ 인자
 def parse_args(argv=None):
     ap = argparse.ArgumentParser(description="XE_hires_covariates(계획 2.5) 하네스")
-    ap.add_argument("--stage", default="r1b", choices=["r1b", "r3", "all"], help="작업 묶음: r1b = x25·xh0·xt2(R1b), r3 = x25·xh·SI 변형(R3)")
+    ap.add_argument("--stage", default="r1b", choices=["r1b", "r3", "all", "xm"],
+                    help="작업 묶음: r1b = x25·xh0·xt2(R1b), r3 = x25·xh·SI 변형(R3), xm = xw·xw_lc(XM 추가 등록, x25 는 XE r1b 조각 재사용)")
+    ap.add_argument("--feat-xm", default=str(XM_FEAT_DEFAULT), help="XM 특징 표 경로('none' = 세기 전용 빈 표)")
+    ap.add_argument("--x25-from", default=str(XM_X25_FROM), help="XM 집계가 다시 쓰는 x25 조각 폴더(XE r1b)")
+    ap.add_argument("--x25-tag", default=XM_X25_TAG, help="XM 집계가 다시 쓰는 x25 조각의 tag")
     ap.add_argument("--variants", default="", help="변형 쉼표 목록(주면 --stage 의 목록 대신 쓴다)")
     ap.add_argument("--targets", default=",".join(TARGETS))
     ap.add_argument("--grid", default=W._grid_txt(GRID))
@@ -436,9 +502,15 @@ def run_mode(a) -> str:
 def finalize(a):
     a.PERMIT = XB.run_permitted(a.ARGV)
     vs = [v for v in a.variants.split(",") if v] if a.variants else (list(RG.STAGE_VARIANTS[a.stage]) if a.stage != "all" else list(RG.VARIANTS_ALL))
-    bad = [v for v in vs if v not in RG.VARIANTS_ALL]
+    bad = [v for v in vs if v not in RG.VARIANTS_ALL + RG.XM_VARIANTS]
     if bad:
         raise SystemExit(f"알 수 없는 변형 {bad}")
+    if a.stage == "xm" and any(v not in RG.XM_VARIANTS for v in vs):
+        raise SystemExit("[거부] --stage xm 은 xw·xw_lc 만 적합한다(x25 는 XE r1b 조각을 다시 쓴다, 등록 2절)")
+    if a.stage != "xm" and any(v in RG.XM_VARIANTS for v in vs):
+        raise SystemExit("[거부] xw·xw_lc 는 --stage xm 에서만 돈다(산출 폴더와 집계가 XM 이다)")
+    if a.stage == "xm" and a.out_dir == str(OUT_DEFAULT):                 # XM 산출 경로(등록 10절)
+        a.out_dir = str(XM_OUT)
     if a.allow_unfinal and not (a.smoke or a.count_only):            # 본 실행·집계에서는 받지 않는다(계획 2.5: xh·SI 는 최종판 커밋 뒤 R3)
         raise SystemExit("[거부] --allow-unfinal 은 스모크(--smoke)와 세기(--count-only)에서만 받는다")
     a.VARIANTS = vs
@@ -455,23 +527,37 @@ def finalize(a):
         a.seeds = 1
         a.nboot = min(int(a.nboot), 500)
         if not a.variants:
-            a.VARIANTS = list(RG.STAGE_VARIANTS["r1b"])
+            a.VARIANTS = list(RG.STAGE_VARIANTS["xm" if a.stage == "xm" else "r1b"])
         if not a.PERMIT:
             a.threads = min(int(a.threads), SMOKE_MAX_THREADS)      # 제한 스모크(스레드 2)
     if a.xe_e or a.xe_e_prep:
         a.TARGETS = [t for t in a.TARGETS if t in XE_E_TARGETS]
     a.NBOOT_ASKED = int(a.nboot)
     a.threads, a.nboot = XB.local_limits(a.threads, a.nboot, a.ARGV)
-    a.TAG = (a.tag or ("xe_e" if (a.xe_e or a.xe_e_prep) else f"xe_{a.stage}")) + ("_smoke" if a.smoke else "")
+    a.TAG = (a.tag or ("xe_e" if (a.xe_e or a.xe_e_prep) else (XM_TAG if a.stage == "xm" else f"xe_{a.stage}"))) + ("_smoke" if a.smoke else "")
     a.OUT = Path(a.out_dir) if os.path.isabs(a.out_dir) else ROOT / a.out_dir
     # 봉인 폴더 = <OUT>/sealed(기본 data/processed/xbatch/XE_hires_covariates/sealed), 스모크는 <OUT>/smoke/sealed
     a.SEALED_ROOT, a.SEALED_NAME = a.OUT.parent, a.OUT.name + ("/smoke" if a.smoke else "")
     # 조각: 본 실행은 <OUT>/shards. 스모크 조각은 실제 자료의 적합 결과(RMSE·계수)를 담으므로 봉인 폴더 안(<OUT>/smoke/sealed/shards)에 둔다(0.3)
     a.SHARDS = (a.OUT / "smoke" / "sealed" / "shards") if a.smoke else (a.OUT / "shards")
-    a.GATE_LEVEL = a.gate_level or ("local_rescale" if a.smoke else "elm_hematite")
+    a.GATE_LEVEL = a.gate_level or ("local_rescale" if (a.smoke or a.stage == "xm") else "elm_hematite")   # XM: 로컬 x25 조각 대 WF9(등록 10절)
     a.h = XB.h54_args(exp=H_EXP, splits=a.SPLIT_LIST, grid=grid, threads=a.threads, cb_iters=a.cb_iters, seeds=a.seeds, nboot=a.nboot,
                       data_dir=a.data_dir, tag=a.TAG, draws_cap=a.draws_cap, allow_local=a.PERMIT)
     a.GRID = list(grid)
+    a.X25_FROM = Path(a.x25_from) if os.path.isabs(a.x25_from) else ROOT / a.x25_from
+    a.X25_TAG = str(a.x25_tag)
+    fx = None if str(a.feat_xm).lower() in ("", "none") else (Path(a.feat_xm) if os.path.isabs(a.feat_xm) else ROOT / a.feat_xm)
+    if a.stage == "xm":
+        if fx is not None and not fx.exists():
+            if a.count_only:
+                fx = None
+            else:
+                raise SystemExit(f"XM 특징 표가 없다: {fx}(scripts/1_data_prep/xm_landcover_s2_features.py 로 만든다)")
+        a.FEAT_XM = XMFeatTable(fx)
+        a.FEAT = FeatTable(None)                                          # XM 은 XE 특징 표를 쓰지 않는다
+        a.FEAT_NOTE = "XM: XE 특징 표 미사용"
+        return a
+    a.FEAT_XM = XMFeatTable(None)
     fp = None if str(a.feat).lower() in ("", "none") else (Path(a.feat) if os.path.isabs(a.feat) else ROOT / a.feat)
     a.FEAT_NOTE = ""
     if fp is not None and not fp.exists():
@@ -549,8 +635,10 @@ def check_smoke_env(a, mode):
 
 def check_feat_for_fit(a, mode):
     """적합(본 실행·스모크)에 빈 특징 표를 쓰지 않는다. x25 밖의 변형이 있으면 거부한다(고해상 열이 모두 NaN 인 채 적합되지 않게)."""
-    if mode in ("run", "smoke") and a.FEAT.is_dummy and any(v != "x25" for v in a.VARIANTS):
+    if mode in ("run", "smoke") and a.FEAT.is_dummy and any(v != "x25" and not is_xm(v) for v in a.VARIANTS):
         raise SystemExit("[거부] 적합에 빈 특징 표(--feat none 또는 없는 파일)를 쓸 수 없다. x25 밖의 변형에는 xe_feat 표와 메타가 필요하다")
+    if mode in ("run", "smoke") and a.FEAT_XM.is_dummy and any(is_xm(v) for v in a.VARIANTS):
+        raise SystemExit("[거부] XM 변형의 적합에 빈 특징 표를 쓸 수 없다(xm_feat_v1.csv 와 메타가 필요하다, 등록 3절)")
 
 
 def check_requested(a, skipped, mode):
@@ -597,10 +685,11 @@ def build_ctx(a, target, split, variant):
             raise RuntimeError(f"{target} 분할 {split}: {nm} 색인이 h54.build_rctx 와 다르다")
     base = [col for col in cols if col in XB.FEATS]
     extra = [col for col in cols if col not in XB.FEATS]
+    ft = feat_of(a, variant)
 
     def mat(idx):
         M0 = df[base].values[idx].astype(np.float32)
-        M1 = a.FEAT.matrix(df.loc_id.values[idx], extra) if extra else np.zeros((len(idx), 0), np.float32)
+        M1 = ft.matrix(df.loc_id.values[idx], extra) if extra else np.zeros((len(idx), 0), np.float32)
         return np.hstack([M0, M1])
     attach_variant(c, variant, mat(A_idx), mat(evB))
     c.meta.update(xe_cols=len(cols), xe_extra=len(extra))
@@ -609,7 +698,8 @@ def build_ctx(a, target, split, variant):
 
 def unit_cfg(a, variant, cols):
     """설정 요약. 변형마다 다른 항목(특징 표 해시, 열 수)은 data_sha 에 넣는다(공통 해시에서 빠지는 항목, h54 CFG_UNIT_KEYS 와 같다)."""
-    feat_sha = "" if variant == "x25" else ("dummy" if a.FEAT.is_dummy else a.FEAT.sha[:16])
+    ft = feat_of(a, variant)
+    feat_sha = "" if variant == "x25" else ("dummy" if ft.is_dummy else ft.sha[:16])
     dsha = XB.data_sha(a.h) + ":" + feat_sha + ":" + str(len(cols))
     return XB.make_unit_cfg("xe", variant, dsha, grid=list(a.GRID), draws=DRAWS, draws_cap=int(a.draws_cap), seeds=list(range(int(a.seeds))),
                             cb_iters=int(a.cb_iters), splits=list(a.SPLIT_LIST), wf9_group="air", loc_deg=LOC_DEG,
@@ -629,14 +719,17 @@ def run_unit(a, target, split, variant, dry=False, expected=None):
                     est_col_s=round(float(sum(stats["est_detail"].values())) * fac, 2), n_krige=stats["n_krige"], est_krige_s=stats["est_krige_s"],
                     _detail=stats["n_fit_detail"])
     cfg = unit_cfg(a, variant, cols)
+    ft = feat_of(a, variant)
     unit = {**stats, **{k: v for k, v in c.meta.items() if not isinstance(v, (dict, list))}}
     unit.update(exp="xe", stage=a.stage, target=target, mode=MODE, parent=c.parent, split=int(split), variant=variant, elapsed_s=round(time.time() - t0, 1),
                 n_fit_total=int(sum(stats["n_fit"].values())), n_A=int(len(c.yA)), n_eval=int(len(c.yB)), E0=float(c.E0), cols=list(cols),
-                groups=vinfo.get("groups", []), groups_dropped=vinfo.get("dropped", []), feat_file=str(a.FEAT.path) if a.FEAT.path else "",
-                feat_sha256=a.FEAT.sha, feat_final_ok=a.FEAT.final_ok, feat_final_local_ok=a.FEAT.final_local_ok,
-                feat_final_commit=a.FEAT.final_commit.get("how", "") if not a.FEAT.is_dummy else "", feat_group_sha=a.FEAT.group_sha(vinfo.get("groups", [])),
+                groups=vinfo.get("groups", []), groups_dropped=vinfo.get("dropped", []), feat_file=str(ft.path) if ft.path else "",
+                feat_sha256=ft.sha, feat_final_ok=ft.final_ok, feat_final_local_ok=ft.final_local_ok,
+                feat_final_commit=ft.final_commit.get("how", "") if not ft.is_dummy else "", feat_group_sha=ft.group_sha(vinfo.get("groups", [])),
                 allow_unfinal=bool(a.allow_unfinal), smoke=bool(a.smoke), threads=int(a.threads),
                 code_sha_registry=XB.code_sha(SCRIPT_DIR / "x_hires_registry.py"))
+    if is_xm(variant):                                                    # XM 추가 등록의 표지(설정 해시에는 넣지 않는다: x25 조각과 공통 설정이 같아야 한다)
+        unit.update(plan_addendum=RG.XM_PLAN_DOC, plan_addendum_commit=RG.XM_PLAN_COMMIT, same_as=vinfo.get("same_as", ""), design=XM_DESIGN)
     return XB.write_shard(a.SHARDS, a.TAG, target, MODE, split, rows, stores, cfg, unit, variant, expected, __file__)
 
 
@@ -671,6 +764,9 @@ def enumerate_units(a):
         for v in a.VARIANTS:
             if needs_final(v) and not a.FEAT.is_dummy and not a.FEAT.final_ok and not a.allow_unfinal:
                 skipped.append(dict(target=t, split=-1, variant=v, status=FINAL_REQUIRED_TXT))
+                continue
+            if v == "xw" and a.FEAT_XM.s2_all_dropped():                   # 등록 3절 (d): xw 를 돌리지 않고 xw_lc 를 주 대비에 쓴다
+                skipped.append(dict(target=t, split=-1, variant=v, status=XM_S2_FALLBACK_TXT))
                 continue
             cols, info = variant_cols(a, v, t)
             if cols is None:
@@ -1084,8 +1180,9 @@ def gate_coverage(mine, ref) -> dict:
                 n_keys_wf9=n_r, n_keys_wf9_in_x25=f_r, coverage_wf9_in_x25=(f_r / n_r) if n_r else 0.0, n_pairs_missing_in_wf9=len(miss_pairs))
 
 
-def gate_wf9(a, units):
+def gate_wf9(a, units, mine_dir=None, mine_tag=None, out_tag=None):
     """재현 관문(계획 2.5): x25 의 총·격자 안·격자 사이 저장소가 WF9 조각과 같다(1절 허용 오차). 봉인 표보다 먼저 돈다.
+    mine_dir·mine_tag 를 주면 그 폴더·tag 의 x25 조각을 본다(XM 은 XE r1b 의 x25 조각을 다시 쓴다). 표 이름은 <out_tag 또는 tag>_gate_wf9.csv.
     통과 조건: 공통 키 1개 이상, 실패 0, x25 키의 WF9 포괄률 1, 같은 (저장소, 분할)의 WF9 키의 x25 포괄률 1(스모크는 보지 않는다),
     기대 x25 단위(대상, 분할) 누락 없음. 표에는 SSE 차와 수만 있다. 반환 dict(봉인 메타와 가설 표에 적는다)."""
     st = dict(level=a.GATE_LEVEL, ref=str(a.gate_wf9), ran=False, passed=False, n_keys=0, n_fail=0, n_x25_units=0, n_x25_units_expected=0,
@@ -1093,7 +1190,7 @@ def gate_wf9(a, units):
     if not a.gate_wf9 or str(a.gate_wf9).lower() == "none":
         return dict(st, status="관문 미실시(--gate-wf9 none)")
     ref_sh = XB.find_shards(a.gate_wf9, "wf9")
-    mine_sh = [s_ for s_ in XB.find_shards(a.SHARDS, a.TAG) if s_["variant"] == "x25"]
+    mine_sh = [s_ for s_ in XB.find_shards(mine_dir or a.SHARDS, mine_tag or a.TAG) if s_["variant"] == "x25" and s_["target"] in a.TARGETS]
     exp = expected_x25(units, a.TARGETS if not a.smoke else ["Canada"])
     have = {(s_["target"], int(s_["split"])) for s_ in mine_sh}
     miss = sorted(exp - have)
@@ -1116,12 +1213,12 @@ def gate_wf9(a, units):
         ([f"x25 단위 누락 {len(miss)}"] if miss else [])
     XB.check_out_dir(a.OUT)
     a.OUT.mkdir(parents=True, exist_ok=True)
-    g.to_csv(a.OUT / f"{a.TAG}_gate_wf9.csv", index=False)
+    g.to_csv(a.OUT / f"{out_tag or a.TAG}_gate_wf9.csv", index=False)
     st.update(ran=True, passed=passed, n_keys=s_["n_keys"], n_fail=s_["n_fail"], **cov,
               status="통과" if passed else "관문 실패(" + ", ".join(why) + ")")
     print(f"[gate] x25 대 WF9({a.GATE_LEVEL}): 공통 키 {s_['n_keys']} · 실패 키 {s_['n_fail']} · x25 키 {cov['n_keys_x25']}(WF9 에 있음 "
           f"{cov['n_keys_x25_in_wf9']}) · WF9 키 {cov['n_keys_wf9']}(x25 에 있음 {cov['n_keys_wf9_in_x25']}) · x25 단위 {len(have)}/{len(exp)} · "
-          f"통과 {passed} → {a.TAG}_gate_wf9.csv", flush=True)
+          f"통과 {passed} → {out_tag or a.TAG}_gate_wf9.csv", flush=True)
     return st
 
 
@@ -1167,6 +1264,8 @@ def variant_status(a, variants) -> pd.DataFrame:
 
 
 def summarize(a):
+    if a.stage == "xm":
+        return summarize_xm(a)
     t0 = time.time()
     tms, units, runs = XB.load_tms(a.SHARDS, a.TAG, a.nboot, allow_mixed=a.allow_mixed_cfg)
     if not tms:
@@ -1234,6 +1333,215 @@ def summarize(a):
     print(f"[summarize] 조각 {len(units)} · 저장소 {len(tms)} · 변형 {variants} · 대비 행 {len(df)} · 관문 {gate.get('status')} · "
           f"재표집 {int(a.nboot)} · {time.time() - t0:.0f}s", flush=True)
     return dict(rows=len(df), tables=list(tables), gate=gate)
+
+
+# ================================================================ XM 집계(추가 등록 docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XM_2026-10-05.md 4·5절)
+def xm_x25_shards(a):
+    """XM 이 다시 쓰는 x25 조각(XE r1b, 대상 목록 안)."""
+    return [s_ for s_ in XB.find_shards(a.X25_FROM, a.X25_TAG) if s_["variant"] == "x25" and s_["target"] in a.TARGETS]
+
+
+def load_tms_xm(a):
+    """XM 조각(xw·xw_lc)과 XE r1b 의 x25 조각을 저장소 이름으로 합친 TMx(h4_common.load_stores 의 키 합집합, h54.make_tm). 공통 설정 해시가
+    하나여야 한다(xbatch_core.check_cfg, 다르면 멈춘다). 반환 (tms, units, x25 조각 목록, XM 조각 목록)."""
+    sh_xm = [s_ for s_ in XB.find_shards(a.SHARDS, a.TAG) if s_["variant"] in RG.XM_VARIANTS and s_["target"] in a.TARGETS]
+    sh_25 = xm_x25_shards(a)
+    if not sh_xm:
+        return {}, [], sh_25, sh_xm
+    units = [json.loads(s_["unit"].read_text()) for s_ in sh_25 + sh_xm]
+    XB.check_cfg(units, a.allow_mixed_cfg)
+    stores = XB.load_stores([s_["npz"] for s_ in sh_25 + sh_xm])
+    by = {}
+    for (nm, sp), st in stores.items():
+        by.setdefault(nm, {})[int(sp)] = st
+    tms = {nm: W.make_tm(nm, bs, W.units_for(units, nm), int(a.nboot), XB.is_point_only_name(nm)) for nm, bs in sorted(by.items())}
+    return tms, units, sh_25, sh_xm
+
+
+def xm_primary(variants, feat):
+    """주 대비 변형: xw(조각이 있으면), S2 가 세 대상 모두에서 빠졌거나 xw 조각이 없으면 xw_lc(등록 3절 (d))."""
+    if "xw" in variants and not feat.s2_all_dropped():
+        return "xw"
+    return "xw_lc" if "xw_lc" in variants else None
+
+
+def xm_contrast_specs(primary, variants):
+    """(가설, 변형, 대비 이름, 저장소 접미사, gA, gB, n 목록, 역할). XM-a 격자 안(주), XM-b 총, XM-c 격자 사이, XM-d 그 밖(등록 4절)."""
+    S = []
+    if primary is None:
+        return S
+    v = primary
+    nm = f"R1(λ cv, {v})−R1(λ cv, x25)"
+    fA, fB = (lambda n: gR(v, n)), (lambda n: gR("x25", n))
+    S += [("XM-a", v, nm, "~w", fA, fB, AUX_N, "주"), ("XM-b", v, nm, "", fA, fB, AUX_N, "보조"), ("XM-c", v, nm, "~b", fA, fB, AUX_N, "보조"),
+          ("XM-d", v, nm, "~l", fA, fB, AUX_N, "보조"), ("XM-d", v, nm, "~gl", fA, fB, AUX_N, "보조"),
+          ("XM-d", v, f"R1(λ cv, {v})−P1", "~w", fA, gP, AUX_N, "보조"),
+          ("XM-d", v, f"D0({v})−D0(x25)", "~w", (lambda n: gD(v, n)), (lambda n: gD("x25", n)), AUX_N, "보조")]
+    for o in variants:
+        if o == v or o not in RG.XM_VARIANTS:
+            continue
+        nmo = f"R1(λ cv, {o})−R1(λ cv, x25)"
+        fo = (lambda oo: lambda n: gR(oo, n))(o)
+        S += [("XM-d", o, nmo, part, fo, fB, AUX_N, "보조") for part in ("~w", "", "~b")]
+    return S
+
+
+def xm_row_label(hyp, n):
+    """XM-a 의 등록 n 은 500·1,000·전량이고 n 200 행은 XM-d(보조)로 적는다(등록 4절)."""
+    if hyp == "XM-a" and int(n) not in MAIN_N:
+        return "XM-d", "보조"
+    return hyp, ("주" if hyp == "XM-a" else "보조")
+
+
+def xm_run_contrasts(tms, primary, variants, targets):
+    rows, pooled = [], {}
+    for hyp0, var, name, part, fA, fB, ns, _role in xm_contrast_specs(primary, variants):
+        names = [f"{t}{part}|{MODE}" for t in targets]
+        for n in ns:
+            hyp, role = xm_row_label(hyp0, n)
+            rr, _ = XB.contrast_pool(tms, names, fA(n), fB(n), label=f"{name}[{PART_WORD[part]}]|n{W.nlab(n)}", kind="same", registered=len(TARGETS))
+            for r in rr:
+                r.update(hypothesis=hyp, hypothesis_registered=hyp0, family="xm", variant=var, contrast=name, part=PART_WORD[part], n=int(n), role=role,
+                         blind=XM_BLIND[0], blind_reason=XM_BLIND[1], design=XM_DESIGN, main_n=bool(n in MAIN_N), primary_variant=primary)
+                if r.get("scope") == "MEAN":
+                    pooled[(hyp, name, PART_WORD[part], int(n))] = r
+            rows += rr
+    return rows, pooled
+
+
+def xm_verdict_rows(pooled, region_rows, decomp, primary, gate=None, s2_dropped=(), fallback=False):
+    """XM-a 의 _rule3(우세 기준, n 500·1,000·전량), Holm(m = 3, 보조 열), 사전 고정 해석 문장(등록 5절). 문장 수치는 기준 충족 등록 n 가운데 가장 큰 n
+    (전량 > 1,000 > 500)의 풀 점 추정(셀 가중), 설명 비율은 같은 n 의 대상 평균이다. 관문을 통과하지 않았으면 판정 불가로 쓴다."""
+    name = f"R1(λ cv, {primary})−R1(λ cv, x25)" if primary else ""
+    items, lab, pv = [], [], []
+    for n in MAIN_N:
+        r = pooled.get(("XM-a", name, "격자 안", n))
+        items.append((f"n={W.nlab(n)}", None if r is None else r.get("verdict4")))
+        lab.append(f"XM-a|n{W.nlab(n)}")
+        pv.append(None if (r is None or r.get("undetermined")) else r.get("p_two"))
+    rule = XB.rule3(items, "우세") if primary else "판정 불가(주 대비 변형 없음)"
+    ht = XB.holm_table(lab, pv, XM_HOLM_M)
+    hp = dict(zip(ht.label, ht.p_holm))
+    gate_txt = "" if gate is None or gate.get("passed") else str(gate.get("status", "관문 미실시"))
+    if gate_txt:
+        rule = f"판정 불가(관문: {gate_txt})"
+    br = branch(rule, [v for _, v in items])
+    worse = [(f"{RG_NAME.get(str(r['target']).split('~')[0].split('|')[0], r['target'])}(n {W.nlab(r['n'])})", r["delta"], r["ci_lo"], r["ci_hi"])
+             for r in region_rows if r.get("hypothesis") == "XM-a" and r.get("part") == "격자 안" and int(r.get("n", 0)) in MAIN_N
+             and r.get("contrast") == name and r.get("worse")]
+    src = dict(n=None, delta=np.nan, holm=np.nan, x=np.nan)
+    inp = XM_INPUT_WORD.get(primary, "피복·식생 입력을")
+
+    def take(want):
+        n_, r_ = None, None
+        for n in N_PREF:
+            q = pooled.get(("XM-a", name, "격자 안", n))
+            if q is not None and q.get("verdict4") == want:
+                n_, r_ = n, q
+                break
+        if r_ is None:
+            return np.nan, None, np.nan
+        d_ = float(r_["delta"])
+        src.update(n=n_, delta=d_, holm=float(hp.get(f"XM-a|n{W.nlab(n_)}", np.nan)))
+        return abs(d_), n_, d_
+    if br == "우세":
+        a_, n_, d_ = take("우세")
+        x = expl_ratio(decomp, primary, n_, "~w") if n_ is not None else float("nan")
+        src["x"] = x
+        base = XM_SENT["superior"].format(inp=inp, a=f"{a_:.2f}" if np.isfinite(a_) else "a", x=f"{x:.1f}" if np.isfinite(x) else "x")
+        sent = XB.compose_sentence({"우세": base}, "우세", src["holm"], d_, worse) + " " + XM_SENT["superior_tail"]
+    elif br == "열세":
+        a_, n_, d_ = take("열세")
+        sent = XB.compose_sentence({"열세": XM_SENT["worse"].format(a=f"{a_:.2f}" if np.isfinite(a_) else "a")}, "열세", src["holm"], d_, worse)
+    elif br == "동등":
+        sent = XB.compose_sentence({"동등": XM_SENT["eq"]}, "동등", worse_regions=worse) + " " + XM_SENT["eq_tail"]
+    elif br == "미결정":
+        share = ", ".join(f"{RG_NAME.get(t, t)} {XM_CELL_SHARE[t]} %" for t in TARGETS)
+        sent = XB.compose_sentence({"미결정": XM_SENT["und"]}, "미결정", worse_regions=worse)
+        sent += f" 격자 안 분산 가운데 1 km 셀 사이 몫은 {share} 다(within_grid_inputs.md 3.3)."
+    else:
+        sent = XB.compose_sentence({"판정 불가": XM_SENT["na"]}, "판정 불가", reason=rule)
+    tail = []
+    if s2_dropped:
+        tail.append(f"S2 군이 90 % 규칙으로 빠진 대상: {', '.join(RG_NAME.get(t, t) for t in s2_dropped)}(그 대상의 xw 는 xw_lc 와 열이 같다).")
+    tail.append(f"주 대비 변형은 {primary}" + ("(S2 군이 세 대상 모두에서 빠져 xw_lc 로 대체했다, 등록 3절 (d))." if fallback else "."))
+    tail.append("XM 은 남은 변동의 원인을 구별하지 않는다.")
+    out = [dict(hypothesis="XM-a", scope="verdict", verdict=rule, items="; ".join(f"{k} {v}" for k, v in items), branch=br,
+                holm_p=";".join(f"{k}={hp[k]:.4g}" for k in hp), holm_m=XM_HOLM_M, blind=XM_BLIND[0], blind_reason=XM_BLIND[1], design=XM_DESIGN,
+                gate=gate_txt or "통과", primary_variant=primary or ""),
+           dict(hypothesis="XM-a", scope="sentence", verdict="", sentence=sent + " " + " ".join(tail), branch=br, primary_variant=primary or "",
+                sentence_n=W.nlab(src["n"]) if src["n"] is not None else "", sentence_delta=src["delta"], sentence_holm_p=src["holm"],
+                expl_within=src["x"], sentence_rule="a·Δ·Holm p 는 기준 충족 등록 n 가운데 가장 큰 n(전량 > 1,000 > 500)의 풀 점 추정(셀 가중), "
+                                                    "x 는 같은 n 의 대상 평균 격자 안 설명 비율", gate=gate_txt or "통과", design=XM_DESIGN)]
+    return pd.DataFrame(out), ht
+
+
+def summarize_xm(a):
+    """XM 집계(등록 4·5·10절). 봉인 폴더(data/processed/xbatch/XM_landcover_vegetation/sealed)에만 쓰고 화면에는 행 수와 해시만 쓴다.
+    재현 관문(다시 쓰는 x25 조각 대 WF9, local_rescale)을 봉인 표보다 먼저 돌린다. x25 조각 파일의 sha256 을 봉인 밖 표와 메타에 적는다."""
+    t0 = time.time()
+    tms, units, sh_25, sh_xm = load_tms_xm(a)
+    if not tms:
+        print(f"[summarize-xm] XM 조각 없음: {a.SHARDS}/{a.TAG}__*", flush=True)
+        return None
+    u25 = [json.loads(s_["unit"].read_text()) for s_ in sh_25]
+    gate = gate_wf9(a, u25, mine_dir=a.X25_FROM, mine_tag=a.X25_TAG, out_tag=a.TAG)
+    reuse = pd.DataFrame([dict(target=s_["target"], split=s_["split"], file=Path(s_[k]).name, sha256=RG.sha256_file(s_[k]))
+                          for s_ in sh_25 for k in ("runs", "npz", "unit")])
+    XB.check_out_dir(a.OUT)
+    a.OUT.mkdir(parents=True, exist_ok=True)
+    reuse.to_csv(a.OUT / f"{a.TAG}_x25_reuse.csv", index=False)
+    reuse_sha = RG.sha256_file(a.OUT / f"{a.TAG}_x25_reuse.csv")
+    variants = sorted({u.get("variant") for u in units if u.get("variant") in RG.XM_VARIANTS})
+    targets = [t for t in TARGETS if any(nm.startswith(f"{t}|") for nm in tms)]
+    primary = xm_primary(variants, a.FEAT_XM)
+    fallback = primary == "xw_lc"
+    rows, pooled = xm_run_contrasts(tms, primary, variants, targets)
+    region_rows = [r for r in rows if r.get("scope") == "region"]
+    dt = decomp_table(tms)
+    s2_dropped = a.FEAT_XM.dropped_targets("S2")
+    nboot_note = "" if int(a.nboot) >= XB.NBOOT else f"재표집 {int(a.nboot):,}회(등록 이탈, 등록 {XB.NBOOT:,}회)"
+
+    def mark(df_):
+        df_ = df_.copy()
+        df_["nboot"] = int(a.nboot)
+        df_["nboot_note"] = nboot_note
+        df_["gate"] = gate.get("status", "")
+        return df_
+    tables = {}
+    df = XB.clean_rows(rows)
+    if len(df):
+        tables[f"{a.TAG}_tests.csv"] = mark(df)
+    vr, ht = xm_verdict_rows(pooled, region_rows, dt, primary, gate, s2_dropped, fallback)
+    tables[f"{a.TAG}_hypotheses.csv"] = mark(vr)
+    tables[f"{a.TAG}_holm.csv"] = mark(ht)
+    if len(dt):
+        q = dt[dt.variant.isin(list(RG.XM_VARIANTS) + ["x25"])]
+        tables[f"{a.TAG}_decomp.csv"] = mark(q)
+    vst = []
+    for v in RG.XM_VARIANTS:
+        for t in TARGETS:
+            cols, info = variant_cols(a, v, t)
+            n_u = sum(1 for u in units if u.get("variant") == v and u.get("target") == t)
+            vst.append(dict(variant=v, target=t, n_units=n_u, n_cols=len(cols) if cols else 0, groups=",".join(info.get("groups", [])),
+                            dropped=",".join(info.get("dropped", [])), same_as=info.get("same_as", ""), skip=info.get("skip", "")))
+    meta = dict(stage="XM", plan=RG.XM_PLAN_DOC, plan_commit=RG.XM_PLAN_COMMIT, base_plan=f"{XB.PLAN_DOC} {RG.PLAN_SECTION}", tag=a.TAG,
+                variants=variants, primary_variant=primary, fallback_xw_lc=fallback, targets=targets, n_units_xm=len(sh_xm), n_units_x25=len(sh_25),
+                n_stores=len(tms), grid=a.GRID, splits=a.SPLIT_LIST, nboot=int(a.nboot), nboot_registered=XB.NBOOT, nboot_note=nboot_note,
+                holm_m=XM_HOLM_M, main_n=list(MAIN_N), design=XM_DESIGN, blind=list(XM_BLIND),
+                unit_status=dict(Counter(str(u.get("status")) for u in units if u.get("variant") in RG.XM_VARIANTS)),
+                n_fit_xm=int(sum(int(u.get("n_fit_total", 0)) for u in units if u.get("variant") in RG.XM_VARIANTS)),
+                unit_elapsed_s_xm=float(sum(float(u.get("elapsed_s", 0)) for u in units if u.get("variant") in RG.XM_VARIANTS)),
+                feat_file=str(a.FEAT_XM.path), feat_sha256=a.FEAT_XM.sha, feat_group_decisions=(a.FEAT_XM.meta or {}).get("group_decisions"),
+                feat_coverage=(a.FEAT_XM.meta or {}).get("coverage"), s2_dropped_targets=s2_dropped, variant_status=vst,
+                x25_from=str(a.X25_FROM), x25_tag=a.X25_TAG, x25_reuse_table=str(a.OUT / f"{a.TAG}_x25_reuse.csv"), x25_reuse_sha256=reuse_sha,
+                cfg_common=sorted({str(u.get("cfg_common")) for u in units}), gate_wf9=gate, summarize_s=round(time.time() - t0, 1),
+                reading_rule="봉인 표는 조정 담당이 연다. 수행자는 열지 않는다(등록 10절)")
+    tables[f"{a.TAG}_meta.json"] = meta
+    XB.write_sealed(a.SEALED_NAME, tables, root=a.SEALED_ROOT)
+    print(f"[summarize-xm] 조각 XM {len(sh_xm)} · x25 {len(sh_25)} · 저장소 {len(tms)} · 변형 {variants} · 주 변형 {primary} · 대비 행 {len(df)} · "
+          f"관문 {gate.get('status')} · 재표집 {int(a.nboot)} · {time.time() - t0:.0f}s", flush=True)
+    return dict(rows=len(df), tables=list(tables), gate=gate, primary=primary)
 
 
 # ================================================================ XE-e(현장 VWC 상한 진단, 계획 2.5 '진단(탐색)')
@@ -1550,8 +1858,11 @@ def main(argv=None):
         check_smoke_env(a, mode)
         res = local_resources(a)
         rep = XB.smoke_env_report()
+        ftxt = (f"XM 특징 표 {'세기 전용(빈 표)' if a.FEAT_XM.is_dummy else a.FEAT_XM.path.name}(sha256 {a.FEAT_XM.sha[:16]}) · x25 재사용 "
+                f"{a.X25_TAG}" if a.stage == "xm" else
+                f"특징 표 {'세기 전용(빈 표)' if a.FEAT.is_dummy else a.FEAT.path.name}(최종판 {'커밋 확인' if a.FEAT.final_ok else '없음'})")
         print(f"[xe] 모드 {mode} · 단계 {a.stage} · 변형 {a.VARIANTS} · 대상 {a.TARGETS} · 분할 {len(a.SPLIT_LIST)} · 격자 {a.GRID} · 스레드 {a.threads} · "
-              f"특징 표 {'세기 전용(빈 표)' if a.FEAT.is_dummy else a.FEAT.path.name}(최종판 {'커밋 확인' if a.FEAT.final_ok else '없음'})"
+              f"{ftxt}"
               + (f" · 가용 메모리 {res['mem_available_gb']} GB" if res.get("mem_available_gb") is not None else "")
               + (f" · 경고 {rep['warn']}" if rep["warn"] else ""), flush=True)
         if mode == "summarize" and a.NBOOT_ASKED > a.nboot:

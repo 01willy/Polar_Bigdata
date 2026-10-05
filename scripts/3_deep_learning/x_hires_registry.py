@@ -78,6 +78,40 @@ MACRO = {"ABoVE_AK": "Alaska", "United States (Alaska)": "Alaska", "ABoVE_CA": "
 COORD_COLS = ("loc_id", "lat", "lon", "region")                             # 특징 추출이 라벨 표에서 읽는 열(시험 (e))
 LABEL_COLS = ("alt_cm", "sigma_prior_cm", "right_censored", "fidelity_level", "alt_sd", "alt_n", "y", "z")   # 추출 코드가 읽으면 안 되는 열
 
+# ================================================================ XM(추가 등록 docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XM_2026-10-05.md, 커밋 ff7c97f)
+# 1 km 라벨 셀(LG 6B.3) 안의 WorldCover 10 m 등급 비율 11열(WC)과 Sentinel-2 20 m 여름 식생 지수 3열(S2). 특징 표는
+# data/processed/xbatch/XM_landcover_vegetation/inputs/xm_feat_v1.csv(scripts/1_data_prep/xm_landcover_s2_features.py). XE 의 군·변형과 섞지 않는다.
+XM_PLAN_DOC = "docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XM_2026-10-05.md"
+XM_PLAN_COMMIT = "ff7c97f"
+XM_EXP_NAME = "XM_landcover_vegetation"
+XM_GROUPS = {
+    "WC": ["wc1k_tree", "wc1k_shrub", "wc1k_grass", "wc1k_crop", "wc1k_built", "wc1k_bare", "wc1k_snow", "wc1k_water", "wc1k_wetland",
+           "wc1k_mangrove", "wc1k_moss"],
+    "S2": ["s2_ndvi_med", "s2_ndmi_med", "s2_ndvi_sd"],
+}
+XM_COLS = XM_GROUPS["WC"] + XM_GROUPS["S2"]
+XM_VARIANT_GROUPS = {"xw": ("WC", "S2"), "xw_lc": ("WC",)}                 # 등록 2절: xw = x25 + WC + S2(주), xw_lc = x25 + WC(보조·대체)
+XM_VARIANTS = tuple(XM_VARIANT_GROUPS)
+
+
+def xm_variant_columns(variant, target, x25, decisions=None):
+    """XM 변형·대상의 입력 열과 설명(등록 2·3절). decisions = {군: 포함 여부}(특징 메타의 90 % 규칙 결과, None 이면 모두 포함).
+    반환 (열 목록 또는 None, info). xw 에서 S2 가 빠지면 열이 xw_lc 와 같고 info['same_as'] = 'xw_lc' 다(등록 3절 (c): 그대로 적합하고 표지를 단다)."""
+    if variant not in XM_VARIANT_GROUPS:
+        raise ValueError(f"알 수 없는 XM 변형 {variant}")
+    x25 = list(x25)
+    dec = {g: True for g in XM_GROUPS} if decisions is None else dict(decisions)
+    gs = XM_VARIANT_GROUPS[variant]
+    keep = [g for g in gs if dec.get(g, False)]
+    info = dict(variant=variant, target=target, groups=keep, dropped=[g for g in gs if g not in keep], skip="", same_as="")
+    if not keep:
+        info["skip"] = "모든 군 제외(90 % 규칙)"
+        return None, info
+    if variant == "xw" and tuple(keep) == XM_VARIANT_GROUPS["xw_lc"]:
+        info["same_as"] = "xw_lc"
+    return x25 + [c for g in XM_GROUPS if g in keep for c in XM_GROUPS[g]], info
+
+
 # ================================================================ 결측 규칙과 마감(계획 2.5)
 FINITE_MIN = 0.90
 DEADLINE_H = {"O": 72, "M": 72, "V_wc": 72, "V_cavm": 72, "V_mod13q1": 96, "S": 96, "final": 100}
@@ -89,7 +123,8 @@ VARIANTS_MAIN = ("x25", "xh0", "xt2", "xh")
 VARIANTS_SI = ("add_T2", "add_M", "add_O", "add_V", "add_S", "sg250", "xh_px", "cov_AK", "cov_LE")
 VARIANTS_ALL = VARIANTS_MAIN + VARIANTS_SI
 # 작업 단위 묶음(계획 2.5 '작업': R1b = xh0·xt2, R3 = xh 와 SI 변형). 한 대비는 한 작업 안에서 닫으므로(1절 플랫폼) x25 를 두 작업에서 모두 다시 적합한다
-STAGE_VARIANTS = {"r1b": ("x25", "xh0", "xt2"), "r3": ("x25", "xh") + VARIANTS_SI}
+STAGE_VARIANTS = {"r1b": ("x25", "xh0", "xt2"), "r3": ("x25", "xh") + VARIANTS_SI,
+                  "xm": XM_VARIANTS}                                        # XM: x25 는 XE r1b 조각을 다시 쓰고 적합하지 않는다(등록 2절)
 VARIANT_GROUPS = {"xh0": ("H0",), "xt2": ("H0", "T2"), "xh": H_GROUPS, "xh_px": H_GROUPS,
                   "add_T2": ("T2",), "add_M": ("M",), "add_O": ("O",), "add_V": ("V",), "add_S": ("S",), "sg250": ("O",)}
 
