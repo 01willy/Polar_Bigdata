@@ -1,0 +1,139 @@
+# 추가 등록: XM 피복·식생 격자 안 입력(WorldCover 10 m, Sentinel-2 20 m) (2026-10-05, 실행 전)
+
+**성격**: `docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md`(개정 1, T0 = 2678100)의 추가 등록이다. 본 계획의 가설·판정·해석 문장은 바꾸지 않는다. 설계 표지는 '결과 열람 뒤 설계, 탐색(SI)'이다(XE 의 xh0 표와 XE-e 표를 연 뒤 설계했다). 이 문서를 커밋한 뒤에 특징을 추출하고, 라벨이 들어가는 통계는 그 뒤에만 계산한다. 실행 뒤에는 결과 절과 개정 이력만 더한다.
+
+**배경(사용자 질문, 2026-10-05)**: 식생, 유기층 대용, 수분을 10–500 m 공개 자료로 시험할 수 있는가. 이미 아는 사실은 다음과 같다.
+
+1. XE 1단계 xh0(x25 + H0 10열: Copernicus DEM 30 m 수문 지형, GSW 수면, Hansen 수목 피복의 1 km 창 값)의 격자 안 RMSE 대비 R1(xh0) − R1(x25)는 n 200·500·1,000·전량 모두 동등이었다(본 계획 8.6, 3대상 층화). n 전량의 격자 안 설명 비율은 알래스카 0.69 %, 레나 3.88 %, 캐나다 −2.15 % 였다.
+2. XE-e: ABoVE 현장 토양 수분(비 GPR VWC)은 P1 의 격자 안 잔차를 설명하지 못했다(블록 교차검증 설명 비율 −4.89 에서 −3.54 %, 8.6).
+3. 북위 60° 이북에서 1 km 미만 해상도의 공개 토양 수분 위성 제품은 없다(`docs/research/2026-10-04/within_grid_inputs.md` 4절).
+4. MODIS 적설·식생(XE 2단계 V·S 군)은 NASA AppEEARS 요청이 처리 중이다. XM 은 그 요청과 XE 의 xt2 표를 건드리지 않는다. XE 2단계 V 군에 등록된 WorldCover 3 × 3 창(30 m) 7열은 xh 에서 따로 시험한다. XM 의 WorldCover 군은 1 km 셀 비율 11열로 정의가 다르다.
+
+그래서 XM 은 지금 받을 수 있는 10–20 m 공개 피복·식생 자료로 같은 질문을 시험한다. 이끼·지의류와 초본 습지 비율은 유기층과 단열의 대용이고, NDMI 는 식생·지표 수분의 대용이다.
+
+## 1. 질문
+
+1 km 라벨 셀 안의 WorldCover 10 m 등급 비율과 Sentinel-2 20 m 여름 식생 지수를 x25 에 더하면 R1(재보정 Stefan 앵커 + 잔차 ML)의 ERA5 격자 안 RMSE 가 x25 보다 작아지는가.
+
+## 2. 설계
+
+| 항목 | 내용 |
+|---|---|
+| 하네스 | XE r1b 와 같다. `scripts/3_deep_learning/x_hires_covariates.py`(XERUnit ⊂ h54.R9Unit)에 변형 xw, xw_lc 와 XM 집계를 더한다. 동결 모듈(h40, h42, h54, h41)은 고치지 않는다 |
+| 대상·모드 | 알래스카, 레나, 캐나다, 지역 내(모드 r) |
+| 분할 | 1–25(WF6·WF9·XE 규칙, h54.split_structure_ext). 레나 분할 24 는 무효(채점 블록 2개 미만) |
+| 라벨 격자 | n {200, 500, 1,000, 전량}에서 \|A\| 이상인 n 은 뺀다(캐나다는 200·전량). 추출 3(전량 1), h40.draw_cells(대상, 'r', 분할, n, 추출) |
+| 방법 | P1(재보정 Stefan), R1(교차검증 λ ∈ {0.25, 0.5, 1.0}, 블록 5묶음 h42.cv_folds_of, λ 0.25·0.5·1.0 고정 키도 저장), D0(catboost: 반복 600, 학습률 0.03, 깊이 6). 잔차 학습기 catboost_lo 는 반복 200. CatBoost seed 0·1, CPU 적합 |
+| 변형 | x25(기준), xw = x25 + WC 11열 + S2 3열(주), xw_lc = x25 + WC 11열(보조, WorldCover 만) |
+| x25 의 재사용 | XE r1b 의 x25 조각(`data/processed/xbatch/XE_hires_covariates/shards/xe_r1b__cpu__*__x25_*`, 74단위, 로컬 CPU, 공통 설정 해시 569bf8a6636c)을 그대로 쓰고 다시 적합하지 않는다. 그 조각의 재현 관문(WF9 대비 local_rescale 허용 오차)은 8.6 에서 통과했다. xw·xw_lc 는 같은 로컬 CPU 에서 같은 공통 설정으로 적합하므로 대비는 한 플랫폼 안에서 닫힌다(1절 플랫폼). 집계는 두 폴더의 조각을 저장소 이름으로 합친다(h4_common.load_stores 의 키 합집합). 공통 설정 해시가 다르면 집계를 멈춘다 |
+| 분해 저장소 | XE 2.5 와 같다. 총, 격자 안(~w, 묶음 = (블록, 기온 √TDD 값)), 격자 사이(~b), 위치 안(~l, LG 6B.3 셀), 격자 안·위치 사이(~gl). 블록마다 SSE_총 = SSE_w + SSE_b, SSE_w = SSE_gl + SSE_l |
+
+## 3. 특징 정의(라벨 값 미사용)
+
+**1 km 라벨 셀**: LG 6B.3 의 약 1 km 셀이다. XE 하네스의 위치 묶음(`x_hires_covariates.loc_cell`)과 XE 특징 확인(`xe_point_covariates.py` 의 qa)이 같은 색인을 쓴다. ky = floor(lat/0.009), φ = (ky + 0.5)·0.009°, kx = floor(lon·cos φ/0.009). 셀 범위는 위도 [ky·0.009°, (ky + 1)·0.009°), 경도 [kx·0.009°/cos φ, (kx + 1)·0.009°/cos φ)이고 남북 1.00 km, 동서 약 1.00 km 다. 화소는 중심이 셀 범위 안에 있을 때 그 셀에 넣는다. 같은 셀의 라벨은 같은 특징 값을 갖는다. 셀 수는 알래스카 343, 레나 201, 캐나다 88 이다(라벨 행 13,606, 3,037, 752. 좌표만 세었다).
+
+**(a) WC 군(11열)**: ESA WorldCover 2021 v200 10 m(EPSG:4326, 화소 8.33 × 10⁻⁵°). 셀 안 화소의 등급 비율(0–1)이고 분모는 자료가 있는 화소(0 = 자료 없음)다. 이 분모 규약은 `xe_feature_tools.class_fractions` 와 같다.
+
+| 열 | 부호 | 등급 |
+|---|---|---|
+| wc1k_tree | 10 | 수목 |
+| wc1k_shrub | 20 | 관목 |
+| wc1k_grass | 30 | 초지 |
+| wc1k_crop | 40 | 경작지 |
+| wc1k_built | 50 | 시가지 |
+| wc1k_bare | 60 | 나지·희소 식생 |
+| wc1k_snow | 70 | 눈·얼음 |
+| wc1k_water | 80 | 영구 수면 |
+| wc1k_wetland | 90 | 초본 습지 |
+| wc1k_mangrove | 95 | 맹그로브 |
+| wc1k_moss | 100 | 이끼·지의류 |
+
+- 자료 화소가 셀 화소의 10 % 미만이면 그 셀의 11열은 결측이다.
+- 원자료: XE 2단계가 같은 HTTPS 주소에서 받아 sha256 을 기록한 타일 사본(`data/raw/worldcover_v200/tiles`, `manifest_tiles.csv`)을 쓴다. 필요한 타일 51개가 모두 있다. 사본의 sha256 을 다시 대조하고, 사본이 없거나 다르면 `/vsicurl/` 창 읽기로 받아 `data/raw/xm/worldcover/` 에 둔다.
+
+**(b) S2 군(3열)**: Sentinel-2 L2A. Earth Search v1 STAC(https://earth-search.aws.element84.com/v1, 모음 sentinel-2-l2a, 계정 없음)의 COG 자산 red(B04, 10 m), nir(B08, 10 m), swir16(B11, 20 m), scl(20 m)을 쓴다.
+
+| 단계 | 규칙 |
+|---|---|
+| 장면 조건 | 2019–2023 각 해 7월 1일–8월 31일(UTC), 장면 운량 eo:cloud_cover < 30 %. 같은 타일·같은 취득일의 중복 항목은 s2:sequence 가 큰 것 하나만 둔다 |
+| 타일 배정 | 셀마다 셀 범위가 들어가는 MGRS 타일 가운데, 셀 꼭짓점 네 개에서 타일 경계(자산의 proj:transform·proj:shape 로 정한 UTM 범위)까지의 최소 거리가 가장 큰 타일 하나에 배정한다 |
+| 장면 선택 | 타일마다 후보 장면의 r(그 타일에 배정된 셀 중심 가운데 항목 geometry 안에 드는 비율)을 구한다. r ≥ 0.9 인 장면을 먼저 두고, 그다음 운량 오름차순, s2:nodata_pixel_percentage 오름차순, 취득 시각 순으로 정렬해 앞의 6장면을 쓴다 |
+| 반사도 | DN × scale + offset(자산의 raster:bands 값. 처리 기준선 04.00 이후 장면은 offset −0.1). DN 0 은 자료 없음 |
+| 20 m 격자 | red·nir 의 10 m 반사도를 같은 원점의 20 m 칸으로 2 × 2 평균한다(네 칸 가운데 하나라도 자료 없음이면 결측). swir16·scl 은 20 m 원값이다 |
+| 유효 관측 | SCL 4(식생) 또는 5(비식생)이고 red·nir·swir16 반사도가 모두 0 보다 크다. SCL 6(물)과 11(눈·얼음)은 넣지 않는다(수면은 WC 의 wc1k_water 가 맡는다). 구름·그림자·결함·미분류(0–3, 7–10)도 뺀다 |
+| 지수 | NDVI = (nir − red)/(nir + red), NDMI = (nir − swir16)/(nir + swir16) |
+| 시간 합성 | 20 m 화소마다 선택 장면의 유효 관측 지수의 중앙값 |
+| 셀 값 | s2_ndvi_med = 셀 안 합성 NDVI 의 중앙값, s2_ndmi_med = 셀 안 합성 NDMI 의 중앙값, s2_ndvi_sd = 셀 안 합성 NDVI 의 표준편차(모집단, ddof 0). 합성 값이 있는 화소가 셀 화소의 10 % 미만이거나 20개 미만이면 세 열 모두 결측 |
+| 기록 열(특징 아님) | wc1k_data_frac, s2_valid_frac, s2_n_scenes, s2_tile |
+
+**(c) 결합 규칙(XE 2.5 와 같다)**: 대상마다 군(WC, S2)의 유한값 비율(라벨 행 × 군 열 칸 가운데 유한한 칸의 비율)이 90 % 미만이면 그 군을 그 대상에서 뺀다. 나머지 결측은 CatBoost 기본 처리(Min)에 맡긴다. S2 가 빠진 대상에서 xw 는 xw_lc 와 열이 같다. 그 대상의 xw 는 그대로 적합하고 표에 표지를 단다.
+
+**(d) 대체 경로**: Sentinel-2 읽기가 재시도(GDAL HTTP 재시도 5회, 장면·자산 단위 3회) 뒤에도 실패해 S2 군이 세 대상 모두에서 빠지면 xw 는 돌리지 않고 xw_lc 를 주 대비(XM-a)에 쓴다. 이 경우를 결과 절에 적는다.
+
+**(e) 고정 시점**: 특징 표 `xm_feat_v1.csv` 와 메타는 xw 적합 전에 만든다. 그 sha256 을 조각 unit.json 과 봉인 메타에 적고, 적합을 시작한 뒤에는 특징 표를 바꾸지 않는다.
+
+## 4. 대비와 판정
+
+| ID | 종류 | 대비 | n | 풀 | 판정 | 맹검 |
+|---|---|---|---|---|---|---|
+| XM-a | 주(탐색) | 격자 안 RMSE: R1(교차검증 λ, xw) − R1(교차검증 λ, x25) | 500, 1,000, 전량 | 3대상 층화(캐나다는 전량만, n 500·1,000 은 '부분(지역 2/3)') | `_rule3`(우세 기준) | 비맹검 부분 포함(xh0 의 treecover_1km·water_occ_1km 이 WC 의 수목·수면 비율과 정보가 겹치고, xh0 격자 안 대비를 열람했다) |
+| XM-b | 보조 | 총 RMSE: XM-a 와 같은 대비 | 200, 500, 1,000, 전량 | 같음 | 4분 판정 | 같음 |
+| XM-c | 보조 | 격자 사이 RMSE(~b): XM-a 와 같은 대비 | 같음 | 같음 | 4분 판정 | 같음 |
+| XM-d | 보조·서술 | n 200 의 격자 안 행, 위치 안(~l)과 격자 안·위치 사이(~gl) 성분, 격자 안 R1(xw) − P1, 격자 안 D0(xw) − D0(x25), xw_lc 의 XM-a·XM-b·XM-c 형식 대비, 설명 비율 1 − MSE_w(M)/MSE_w(P1)(XE `decomp_table`) | | | 4분 판정 또는 서술 | 같음 |
+
+- **대비와 CI**: 같은 라벨 집합 대비다(xw 와 x25 는 같은 분할·추출·seed 의 라벨을 쓴다). 분할 안 채점 블록 재표집 10,000회(h40.contrast = h4_common.boot_delta_blocks), 셀 가중과 블록 등가중 두 95 % CI. 보조 CI 는 h42.boot_delta_common 이고 판정이 다르면 '분할 독립 가정 의존'을 붙인다.
+- **4분 판정(1절)**: 우세 = 두 가중 CI 상한 < 0, 열세 = 두 가중 CI 하한 > 0, 동등 = 네 끝값 절댓값 ≤ 0.5 cm, 미결정 = 그 밖. 보조 δ 1.0 cm 와 δ_rel(0.02 × P0 RMSE)의 판정을 병기하고 셋이 다르면 '한계 의존'을 붙인다. 사용 분할의 최소 채점 블록이 5개 미만인 지역 행에는 '소수 블록'을 붙인다.
+- **층화 평균**: h42.pool_rows(풀 지역 2개 이상, 지역별 채점 블록 합집합 8개 이상일 때 CI). 지역 수준 Hartung–Knapp 구간은 보조 열이다.
+- **다수 n 종합**: XM-a 의 n 500·1,000·전량 풀 판정을 `_rule3`(우세 기준)으로 묶는다. n 200 행은 XM-d 로 적는다.
+- **다중성**: XM-a 의 n 별 양측 p 3개를 한 Holm 가족(m = 3)으로 묶는다(보조 열). 판정은 보정 전 CI 의 4분 판정이다. Holm 보정 p ≥ 0.05 인 우세·열세 문장에는 '보정 전 유의'를 붙인다.
+- **문장 수치**: 갈래의 기준(우세 또는 열세)을 충족한 등록 n 가운데 가장 큰 n(전량 > 1,000 > 500)의 풀 점 추정(셀 가중)이다(XE 의 `pick_n` 규칙과 같다). 설명 비율 x 는 같은 n 의 대상 평균이다.
+- **표지**: 모든 행에 설계 '결과 열람 뒤 설계, 탐색(SI)'과 위 맹검 표지를 단다. XM 은 Holm 가족 XE-a·XE-b(m 6)에 들지 않는다.
+
+## 5. 사전 고정 해석 문장(SI, C8)
+
+| 결과 | 원고 문장 |
+|---|---|
+| (가) XM-a 지지·부분 지지(우세), 문장 n 의 \|Δ\| ≥ 0.5 cm | '1 km 셀의 WorldCover 10 m 피복 비율과 Sentinel-2 20 m 여름 식생 지수를 더하면 R1 의 ERA5 격자 안 오차가 a cm 작아졌다(격자 안 설명 비율 x %).' 탐색 결과이므로 C8 의 격자 안 문장과 지도 문구('1 km 셀로 표시한 기후 격자 단위 보정 지도')는 고치지 않고, 확인 시험 후보로 SI 에 적는다 |
+| (가′) 우세이나 \|Δ\| < 0.5 cm | (가)의 문장 뒤에 '(통계적으로 구별되나 크기는 0.5 cm 미만)'을 붙인다. 지도 문구는 고치지 않는다 |
+| (나) 동등 | '피복·식생 입력을 더한 R1 의 격자 안 오차는 x25 와 0.5 cm 안에서 같았다.' XE xh0·XE-e 와 함께 '공개 10–500 m 입력은 격자 안 오차를 줄이지 못했다'는 SI 서술을 유지한다 |
+| (다) 미결정(열세 없음) | '피복·식생 입력으로 격자 안 오차가 줄어드는 것을 확인하지 못했다.' 격자 안 분산 가운데 1 km 셀 사이 몫(알래스카 18.8 %, 레나 47.8 %, 캐나다 17.7 %, `within_grid_inputs.md` 3.3)을 함께 적는다 |
+| (라) 열세 | '피복·식생 입력은 격자 안 오차를 a cm 늘렸다.' |
+| (마) 판정 불가 | '판정할 수 없었다(사유).' |
+| 공통 | 총 RMSE 와 격자 사이 성분(XM-b, XM-c)은 사실로만 적고 갈래 문장을 쓰지 않는다. 지역 행에 열세가 있으면 풀 문장 뒤에 '지역 X 에서는 오차가 컸다(Δ, CI)'를 덧붙인다. S2 군이 빠진 대상과 xw_lc 대체 여부를 적는다. 'XM 은 남은 변동의 원인을 구별하지 않는다'를 적는다 |
+
+## 6. 검정력 근사와 사전 기대
+
+- 격자 안 RMSE 0.5 cm 감소는 설명 비율 알래스카 7.9 %, 레나 5.8 %, 캐나다 5.0 % 에 해당한다(2.5 검정력 근사).
+- 특징은 1 km 셀 안에서 상수이므로 이 입력이 직접 겨냥하는 몫은 격자 안 분산 가운데 1 km 셀 사이 몫이다. 라벨만 쓴 자료 서술(EPSG:3338 1 km 정사각 셀 근사)에서 그 몫은 알래스카 18.8 %, 레나 47.8 %, 캐나다 17.7 % 이고 100 m 셀 안 몫은 49.2 %, 19.0 %, 60.2 % 다(`within_grid_inputs.md` 3.3).
+- 사전 기대는 '동등 또는 0.5 cm 미만의 작은 이득'이다. 레나는 1 km 셀 사이 몫이 커서 다른 두 대상보다 이득의 여지가 크다.
+
+## 7. 누설 통제
+
+- 특징은 라벨 값을 쓰지 않는다. `fidelity_base_v3.csv` 에서 좌표 열(loc_id, lat, lon, region)만 읽고, 라벨 열(`x_hires_registry.LABEL_COLS`)을 읽으려 하면 멈춘다. 장면 선택은 셀 좌표와 장면 메타데이터(운량, 자료 범위, 시각)만 쓴다.
+- 특징 추출과 하네스의 표준 출력에는 행 수, 유한값 비율, 시간, 해시만 쓴다. 하네스는 출력 제한(`xbatch_core.restricted_output`)을 쓰고, 셸에서 `grep -v -E '판정|verdict|Δ|delta|rmse|RMSE|우세|열세|동등|미결정|지지|기각'` 으로 다시 거른다.
+- 특징 값은 공변량이며 라벨 정보를 담지 않는다. 0.5° 블록 경계에 걸친 1 km 셀은 학습 후보(A)와 채점 셀에 같은 특징 값을 줄 수 있으나 라벨 값은 공유하지 않는다.
+- 누설 시험(1절, h54 시험 b·d·m 형식): 선택되지 않은 A 라벨과 B 라벨을 바꿔도 xw 의 선택·예측이 같다(단위 시험).
+
+## 8. 자료와 약관
+
+| 자료 | 판·경로 | 약관·표기 |
+|---|---|---|
+| ESA WorldCover 10 m 2021 v200 | https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_<타일>_Map.tif(3° 타일, 예 N69W150) | CC BY 4.0. 표기 '© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium'. 인용 Zanaga et al. 2022, doi:10.5281/zenodo.7254221 |
+| Sentinel-2 L2A | Earth Search v1 STAC(Element 84), 모음 sentinel-2-l2a. COG 는 AWS Open Data 의 sentinel-cogs 버킷(HTTPS) | Copernicus Sentinel 자료의 무료·완전·공개 접근 약관(Legal Notice on the use of Copernicus Sentinel Data and Service Information). 표기 'Contains modified Copernicus Sentinel data [2019–2023]' |
+
+## 9. 계산 한도
+
+- **특징 추출**: 로컬 CPU, 스레드 8 이하(입출력 스레드 포함), nice 10, 프로세스 메모리 15 GB 미만(주소 공간 상한과 최대 RSS 기록). 무거운 단계 전에 `free -g` 로 가용 메모리를 확인한다(공유 서버, 가용 약 26–35 GB). GDAL 임시 파일과 캐시는 `data/raw/xm/` 아래에 둔다. Sentinel-2 내려받기 상한은 약 25 GB 이고 읽은 COG 내부 블록의 바이트 합으로 센다. 상한에 이르면 멈추고 기록한다. 예상량은 5–12 GB[추정]다.
+- **적합**: 로컬 CPU, `--allow-local`, 워커 4 × 스레드 4 이하, nice 10, `--resume`. 단위는 변형마다 74개(알래스카 25, 레나 24, 캐나다 25), 적합은 변형마다 5,206건(XE r1b 의 xh0 세기와 같은 구성)이다.
+- **집계**: 재표집 10,000회, 로컬 CPU.
+
+## 10. 산출(경로 고정)
+
+- 특징: `data/processed/xbatch/XM_landcover_vegetation/inputs/xm_feat_v1.csv`(loc_id 키)와 `xm_feat_v1_meta.json`(군별·대상별 유한값 비율, 90 % 규칙 결과, 원자료 해시, 장면 목록, 시간, 내려받은 바이트).
+- 조각: `data/processed/xbatch/XM_landcover_vegetation/shards/xm__cpu__<대상>__r__s<분할>__<변형>_{runs.csv, blocksse.npz, unit.json}`.
+- 봉인 표: `data/processed/xbatch/XM_landcover_vegetation/sealed/`(xm_tests.csv, xm_hypotheses.csv, xm_holm.csv, xm_decomp.csv, xm_meta.json, sealed_manifest.json). 화면에는 파일 이름, 행 수, sha256 앞 16자만 쓴다. 봉인 표는 조정 담당이 연다. 수행자는 열지 않는다.
+- 재현 기록: 재사용한 x25 조각의 sha256 목록과 WF9 관문(local_rescale) 재채점 결과를 봉인 밖 `data/processed/xbatch/XM_landcover_vegetation/xm_gate_wf9.csv` 와 봉인 메타에 적는다.
+
+## 개정 이력
+
+- 2026-10-05: 등록(실행 전). 이 문서를 쓰면서 한 계산은 라벨 좌표의 1 km 셀 수(알래스카 343, 레나 201, 캐나다 88), 필요한 WorldCover 타일 수(51, 모두 사본 있음), STAC 응답과 자산 구조 확인(한 상자의 2021·2023 여름 항목, raster:bands 의 scale 0.0001 과 offset 0·−0.1, COG 내부 블록 1,024 × 1,024(반사도)와 512 × 512(SCL))이다. 라벨 값과 특징 값은 계산하지 않았다.
