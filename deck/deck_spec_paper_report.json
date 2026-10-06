@@ -1024,6 +1024,35 @@
    "requires": "deck/assets/paper_report/method/M8_label_workflow_slide.png"
   },
   {
+   "id": "NG1",
+   "page": 15,
+   "part": "3부 연구 방법",
+   "archetype": "방법 도식(12.0 × 5.2 in)",
+   "title": "워크플로 사용 절차",
+   "subtitle": "3부 연구 방법 · 새 지역에서 관측 라벨이 늘어날 때의 실제 적용 순서",
+   "takeaway": "첫 지도와 불확실성 → 다음 관측 위치 → 재보정 → 교차검증 방법 선택, 관측이 늘 때마다 반복",
+   "visible_text": {},
+   "evidence": {
+    "kind": "방법 도식",
+    "ref": "deck/assets/paper_report/method/G1_workflow_guide_slide.png"
+   },
+   "intent": "",
+   "notes": {
+    "script": "다음은 워크플로 사용 절차입니다. 라벨이 없을 때는 Stefan 식으로 첫 지도와 불확실성 지도를 만들고, 구간이 넓은 곳에 다음 관측을 둡니다. 라벨이 10개 모이면 계수를 재보정하고 편향을 진단하며, 40개 이상이면 교차검증으로 방법을 고릅니다. 새 라벨이 들어올 때마다 이 과정을 반복하여 지도를 갱신합니다.",
+    "reference_line": ""
+   },
+   "numbers": [],
+   "tracking": {
+    "claims": [],
+    "experiments": [],
+    "placeholders": [],
+    "docs": []
+   },
+   "flags": [],
+   "time_min": 1.0,
+   "requires": "deck/assets/paper_report/method/M8_label_workflow_slide.png"
+  },
+  {
    "id": "NA3",
    "page": 36,
    "part": "4부 연구 결과",
@@ -2079,7 +2108,7 @@
     "orange_spot": "없음",
     "lead_lines": [
      "라벨 0개  물리식과 물리 유사라벨 증강이 직접 ML보다 안정",
-     "라벨 10개 이상  계수 재보정, 그 뒤 교차검증 방법 선택가 재보정 Stefan보다 정확"
+     "라벨 10개 이상  계수 재보정, 그 뒤 교차검증 방법 선택이 재보정 Stefan보다 정확"
     ]
    },
    "evidence": {
@@ -2192,11 +2221,11 @@
    "archetype": "그림(S1) + 리드 줄 3줄",
    "title": "연구 강점",
    "subtitle": "6부 결론과 계획 · 안정성, 정확도, 검증",
-   "takeaway": "라벨이 적을 때 안정하고, 교차검증 방법 선택는 Stefan보다 정확",
+   "takeaway": "라벨이 적을 때 안정하고, 교차검증 방법 선택은 Stefan보다 정확",
    "visible_text": {
     "lead_lines": [
      "안정성  라벨 0개에서 2 cm 넘게 악화된 대상, 직접 ML 18/30 대 물리 유사라벨 2/30",
-     "정확도  교차검증 방법 선택가 재보정 Stefan보다 라벨 40·160개에서 1.35·1.51 cm, 알래스카 전량에서 잔차 결합 0.5 cm 낮은 오차. 기존 지도 CCI v5보다 라벨 0개에서 23.8 cm·10개에서 8.4 cm 낮은 오차",
+     "정확도  교차검증 방법 선택이 재보정 Stefan보다 라벨 40·160개에서 1.35·1.51 cm, 알래스카 전량에서 잔차 결합 0.5 cm 낮은 오차. 기존 지도 CCI v5보다 라벨 0개에서 23.8 cm·10개에서 8.4 cm 낮은 오차",
      "검증  7개 지역 홀드아웃(100 km 완충)과 사전에 정한 판정 규칙"
     ]
    },

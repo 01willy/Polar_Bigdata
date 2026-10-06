@@ -116,7 +116,7 @@ def b_S01(sl, s):
     """표지(조정 지시 2차 1, 2, 11, 12): 바탕 그림이 있으면 전면(13.333 × 7.5), 없으면 오른쪽 알래스카 지도 슬라이드판.
     제목 32 pt 두 줄, 부제 18 pt, 발표자 16 pt, 소속 14 pt 는 왼쪽(폭 7.3 in), 로고 3개는 왼쪽 아래(높이 0.45 in)."""
     vt = s["visible_text"]
-    bg = ROOT / "deck/assets/paper_report/cover_bg_v2.png"
+    bg = ROOT / "deck/assets/paper_report/cover_bg_v3.png"
     if bg.exists():
         pic = sl.shapes.add_picture(str(bg), 0, 0, Inches(13.333), Inches(7.5))
         pic.shadow.inherit = False
@@ -605,7 +605,7 @@ def b_fitfull(sl, s):
     STATUS.setdefault(s["id"], []).append(f"그림 {p.name}({w:.2f} × {h:.2f} in)")
 
 
-b_NA3 = b_NUM = b_fitfull
+b_NA3 = b_NUM = b_NG1 = b_NML = b_fitfull
 
 
 def b_NLS(sl, s):
