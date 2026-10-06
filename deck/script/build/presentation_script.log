@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.20)  6 OCT 2026 11:00
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.5.20)  6 OCT 2026 11:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -976,29 +976,30 @@ LaTeX Font Info:    Font shape `TU/Pretendard(2)/m/n' will be
 
 ] (./part1_script.tex [4
 
-] [5] [6] [7] [8] [9] [10] [11] [12]) [13] [14
+] [5] [6] [7] [8] [9] [10] [11] [12] [13]) [14] [15
 
-] (./part2_background.tex (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd) [15
+] (./part2_background.tex (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd) [16
 
 ]
 LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/m/n' will be
 (Font)              scaled to size 9.41699pt on input line 39.
 LaTeX Font Info:    Font shape `TU/Pretendard(2)/m/n' will be
 (Font)              scaled to size 9.85492pt on input line 39.
- [16]
-ignored: Infinite glue shrinkage found in box being split [17] [18]
+ [17]
+ignored: Infinite glue shrinkage found in box being split [18] [19]
 Underfull \hbox (badness 10000) in paragraph at lines 117--118
 []\TU/Pretendard(0)/m/n/10.95 시 험 은 \TU/DejaVuSansMono(0)/m/n/10 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=2 nice -n 10 taskset -c <4 \TU/Pretendard(2)/m/n/10 코 어\TU/DejaVuSansMono(0)/m/n/10 > python3 -m
  []
 
 
-ignored: Infinite glue shrinkage found in box being split [19] [20] [21] [22] [23]
-ignored: Infinite glue shrinkage found in box being split [24] [25] [26] [27] [28]
-ignored: Infinite glue shrinkage found in box being split [29
+ignored: Infinite glue shrinkage found in box being split [20] [21] [22] [23] [24]
+ignored: Infinite glue shrinkage found in box being split [25] [26] [27] [28] [29]
+ignored: Infinite glue shrinkage found in box being split [30
 
 ]
-ignored: Infinite glue shrinkage found in box being split [30]
-ignored: Infinite glue shrinkage found in box being split [31] [32]) [33] (build/presentation_script.aux)
+ignored: Infinite glue shrinkage found in box being split [31]
+ignored: Infinite glue shrinkage found in box being split [32]
+ignored: Infinite glue shrinkage found in box being split [33]) [34] (build/presentation_script.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-04-28>
@@ -1007,12 +1008,12 @@ Package rerunfilecheck Info: File `presentation_script.out' has not changed.
 (rerunfilecheck)             Checksum: D8A6199406B9DECB4ECC7F715A6BE8D0;2835.
  ) 
 Here is how much of TeX's memory you used:
- 33821 strings out of 470007
- 690600 string characters out of 5475073
- 1213104 words of memory out of 5000000
- 62065 multiletter control sequences out of 15000+600000
+ 33825 strings out of 470007
+ 690664 string characters out of 5475073
+ 1218104 words of memory out of 5000000
+ 62069 multiletter control sequences out of 15000+600000
  634772 words of font info for 110 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  116i,13n,121p,792b,2825s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on build/presentation_script.pdf (33 pages).
+Output written on build/presentation_script.pdf (34 pages).
