@@ -6,14 +6,14 @@
    5.2
   ],
   "min_font_pt": 12.0,
-  "texts": 51,
+  "texts": 48,
   "outside": [],
   "overlaps": [],
   "small": [],
   "text_line": [],
   "text_axes": [],
   "text_patch": [],
-  "arrows": 1,
+  "arrows": 0,
   "png_px": [
    3600,
    1560
@@ -26,7 +26,7 @@
    5.2
   ],
   "min_font_pt": 12.0,
-  "texts": 73,
+  "texts": 69,
   "outside": [],
   "overlaps": [],
   "small": [],
@@ -306,7 +306,7 @@
    5.2
   ],
   "min_font_pt": 12.0,
-  "texts": 56,
+  "texts": 55,
   "outside": [],
   "overlaps": [],
   "small": [],
@@ -347,6 +347,26 @@
   ],
   "min_font_pt": 12.0,
   "texts": 49,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "text_line": [],
+  "text_axes": [],
+  "text_patch": [],
+  "arrows": 0,
+  "png_px": [
+   3600,
+   1560
+  ]
+ },
+ "R3_alaska_inregion": {
+  "name": "R3_alaska_inregion",
+  "size_in": [
+   12.0,
+   5.2
+  ],
+  "min_font_pt": 14.0,
+  "texts": 26,
   "outside": [],
   "overlaps": [],
   "small": [],

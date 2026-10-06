@@ -116,7 +116,7 @@ def b_S01(sl, s):
     """표지(조정 지시 2차 1, 2, 11, 12): 바탕 그림이 있으면 전면(13.333 × 7.5), 없으면 오른쪽 알래스카 지도 슬라이드판.
     제목 32 pt 두 줄, 부제 18 pt, 발표자 16 pt, 소속 14 pt 는 왼쪽(폭 7.3 in), 로고 3개는 왼쪽 아래(높이 0.45 in)."""
     vt = s["visible_text"]
-    bg = ROOT / "deck/assets/paper_report/cover_bg_v1.png"
+    bg = ROOT / "deck/assets/paper_report/cover_bg_v2.png"
     if bg.exists():
         pic = sl.shapes.add_picture(str(bg), 0, 0, Inches(13.333), Inches(7.5))
         pic.shadow.inherit = False
@@ -480,6 +480,9 @@ def b_N01(sl, s):
         STATUS.setdefault("N01", []).append("B1 없음, Fig 1a 슬라이드판")
         fig_lines(sl, s, p, s["visible_text"]["lead_lines"], "배경 그림")
         return
+    if "_v1_" in p.name:                              # 이전 B1(세 열, 제품 불일치 포함): 전폭, 리드 줄은 노트에만
+        fig_lines(sl, s, p, s["visible_text"]["lead_lines"], "배경 그림")
+        return
     # B1 은 12.0 × 5.2 전폭 그림이고 오른쪽 아래(x 7.75–11.9, 아래에서 0.2–2.1 in)를 비워 두었다. 리드 줄은 그 자리에 둔다
     w, h = L.fit(p, 12.0, 5.2)
     L.place(sl, p, L.ML, L.Y0, w, h)
@@ -592,6 +595,17 @@ def b_NGL(sl, s):
 
 b_NCL = b_NLM = b_NGL
 b_NST = b_method
+
+
+def b_fitfull(sl, s):
+    """결과 그림 한 장을 본문 영역(12.0 × 5.2 in)에 비율 유지로 최대한 크게(논문 판 그림 확대 포함)."""
+    p = ROOT / s["evidence"]["ref"]
+    w, h = L.fit(p, 12.0, 5.2)
+    L.place(sl, p, L.ML + (12.0 - w) / 2, L.Y0 + (5.2 - h) / 2, w, h)
+    STATUS.setdefault(s["id"], []).append(f"그림 {p.name}({w:.2f} × {h:.2f} in)")
+
+
+b_NA3 = b_NUM = b_fitfull
 
 
 def b_NLS(sl, s):
