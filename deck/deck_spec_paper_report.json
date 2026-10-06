@@ -1114,6 +1114,35 @@
    "requires": "deck/assets/paper_report/maps/Alaska_obs_vs_pred_v1_slide.png"
   },
   {
+   "id": "NP1",
+   "page": 36,
+   "part": "4부 연구 결과",
+   "archetype": "그림(다른 작업 생성)",
+   "title": "기존 ALT 제품과의 정확도 비교(알래스카 실측 셀)",
+   "subtitle": "4부 연구 결과 · 라벨이 많은 지역 · 같은 실측 셀 13,606개에서 상관계수와 RMSE",
+   "takeaway": "같은 실측 셀에서 우리 방법이 기존 제품보다 상관이 높고 오차가 작음(r 0.62, RMSE 13.8 cm)",
+   "visible_text": {},
+   "evidence": {
+    "kind": "결과 그림",
+    "ref": "deck/assets/paper_report/method/P1_products_vs_ours_slide.png"
+   },
+   "intent": "",
+   "notes": {
+    "script": "",
+    "reference_line": "우리 r 0.62·RMSE 13.8 cm(블록 교차검증), Wei 2026 0.55·17.2, CCI v5 0.60·74.9, Yi–Kimball 0.43·61.0(10,606셀, 같은 셀 우리 0.51·14.5), Aalto 2018 −0.50·43.6. 결과를 본 뒤 계산한 서술 비교."
+   },
+   "numbers": [],
+   "tracking": {
+    "claims": [],
+    "experiments": [],
+    "placeholders": [],
+    "docs": []
+   },
+   "flags": [],
+   "time_min": 1.0,
+   "requires": "deck/assets/paper_report/maps/Alaska_obs_vs_pred_v1_slide.png"
+  },
+  {
    "id": "SM1",
    "page": 29,
    "part": "4부 연구 결과",
@@ -1678,6 +1707,35 @@
    "requires": "deck/assets/paper_report/maps/Lena_label_sequence_slide.png"
   },
   {
+   "id": "NC1",
+   "page": 36,
+   "part": "4부 연구 결과",
+   "archetype": "그림(다른 작업 생성)",
+   "title": "교차검증 방법 선택 절차",
+   "subtitle": "4부 연구 결과 · 단계적 예측 워크플로 · 라벨 40개 이상에서 후보 7개를 교차검증으로 비교",
+   "takeaway": "지역마다 오차가 가장 작은 방법을 절차가 스스로 고름(물리식만 약 50 %, 물리 잔차 결합 약 38 %)",
+   "visible_text": {},
+   "evidence": {
+    "kind": "결과 그림",
+    "ref": "deck/assets/paper_report/method/C1_cv_selection_slide.png"
+   },
+   "intent": "",
+   "notes": {
+    "script": "",
+    "reference_line": "새 지역 시험 1,742회 선택: 원천 계수 Stefan 30 %, 물리 잔차 결합 λ 1.0 27 %, 대상 지역 최소제곱 Stefan 17 %, λ 0.25 12 %, 물리 유사라벨 증강 11 %, 재보정 Stefan 3 %, 증강+잔차 2 %."
+   },
+   "numbers": [],
+   "tracking": {
+    "claims": [],
+    "experiments": [],
+    "placeholders": [],
+    "docs": []
+   },
+   "flags": [],
+   "time_min": 1.0,
+   "requires": "deck/assets/paper_report/maps/Alaska_obs_vs_pred_v1_slide.png"
+  },
+  {
    "id": "SW1",
    "page": 23,
    "part": "4부 연구 결과",
@@ -2064,7 +2122,7 @@
    "archetype": "그림(R1) + 리드 줄 2줄 이하",
    "title": "결과 종합",
    "subtitle": "6부 결론 · 관측 라벨 수 구간마다 권고 방법과 Stefan 대비 오차 변화",
-   "takeaway": "라벨이 없으면 물리식, 10개면 재보정, 40개 이상이면 교차검증 방법 선택, 많으면 물리 잔차 결합",
+   "takeaway": "라벨 수가 어떻든 우리 방법이 Stefan과 직접 ML보다 안정하고 정확",
    "visible_text": {
     "table": {
      "geometry_in": {
@@ -2113,7 +2171,7 @@
    },
    "evidence": {
     "kind": "결과 요약 그림(다른 작업 생성)",
-    "ref": "deck/assets/paper_report/method/R1_results_by_range_slide.png",
+    "ref": "deck/assets/paper_report/method/R4_summary_simple_slide.png",
     "fallback": "옛 요지 표(visible_text.table)",
     "status": "R1 이 오면 그림, 없으면 표"
    },
@@ -2221,7 +2279,7 @@
    "archetype": "그림(S1) + 리드 줄 3줄",
    "title": "연구 강점",
    "subtitle": "6부 결론과 계획 · 안정성, 정확도, 검증",
-   "takeaway": "라벨이 적을 때 안정하고, 교차검증 방법 선택은 Stefan보다 정확",
+   "takeaway": "새 지역에서 안정, 기존 제품보다 정확, 지역에 맞는 방법을 스스로 선택, 정직한 검증",
    "visible_text": {
     "lead_lines": [
      "안정성  라벨 0개에서 2 cm 넘게 악화된 대상, 직접 ML 18/30 대 물리 유사라벨 2/30",
@@ -7291,6 +7349,11 @@
    "date": "2026-10-06 07:05",
    "by": "coordinator",
    "change": "발표 직전 개정: 제목(라벨 수별 제거), 표지 회색 제거, 1쪽 이전 B1, 결과 순서(알래스카 성과 → 새 지역 → 워크플로 → 지도 비교 → 결론), AP3·S18·S25·SM3·NR2·S19 부록, 새 쪽 NA3·NUM, 용어 교체"
+  },
+  {
+   "date": "2026-10-06 11:15",
+   "by": "coordinator",
+   "change": "NP1(기존 제품 대비 r·RMSE), NC1(교차검증 방법 선택 절차) 추가, 결과 종합 R4 단순 그림, 강점 4패널, CI 가는 막대 제거"
   }
  ],
  "qa_precheck": [

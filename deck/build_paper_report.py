@@ -605,7 +605,7 @@ def b_fitfull(sl, s):
     STATUS.setdefault(s["id"], []).append(f"그림 {p.name}({w:.2f} × {h:.2f} in)")
 
 
-b_NA3 = b_NUM = b_NG1 = b_NML = b_fitfull
+b_NA3 = b_NUM = b_NG1 = b_NML = b_NP1 = b_NC1 = b_fitfull
 
 
 def b_NLS(sl, s):

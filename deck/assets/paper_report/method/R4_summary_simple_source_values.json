@@ -1,0 +1,6 @@
+{
+ "n0": "RESEARCH_OVERVIEW 9절 위험표(직접 ML 18/30, 물리 유사라벨 증강 2/30, 사후 서술)",
+ "n10": "fig2_pool_curves.csv E1: D0 n10 +1.31, P1 n10 −2.45",
+ "n160": "lg_tests.csv L4 MEAN4 n160 λ0.25 −0.64 (고정 레시피); Fig7_source_data panel e A1-A3 n160 −1.51 (교차검증 방법 선택)",
+ "all_alaska": "Fig7_source_data panel a Alaska n all: direct_ml +1.27, anchor_residual −0.52"
+}

@@ -1,0 +1,59 @@
+{
+ "values": {
+  "r": [
+   [
+    "우리 방법",
+    0.62,
+    "R1"
+   ],
+   [
+    "Wei 2026",
+    0.55,
+    "Wei"
+   ],
+   [
+    "CCI v5",
+    0.6,
+    "CCI"
+   ],
+   [
+    "Yi–Kimball",
+    0.43,
+    "YK"
+   ],
+   [
+    "Aalto 2018",
+    -0.5,
+    "Aalto"
+   ]
+  ],
+  "rmse": [
+   [
+    "우리 방법",
+    13.8,
+    "R1"
+   ],
+   [
+    "Wei 2026",
+    17.2,
+    "Wei"
+   ],
+   [
+    "Aalto 2018",
+    43.6,
+    "Aalto"
+   ],
+   [
+    "Yi–Kimball",
+    61.0,
+    "YK"
+   ],
+   [
+    "CCI v5",
+    74.9,
+    "CCI"
+   ]
+  ]
+ },
+ "note": "조정 지시 2026-10-06 의 값. 우리 RMSE 13.80 은 data/processed/xbatch/XK_support_scale/xk_support_scale_v1.csv (Alaska, models, 1km, r1 rmse_cw 13.7977) 와 일치. 제품 값의 원천 파일은 이 작업에서 대조하지 못했다"
+}
