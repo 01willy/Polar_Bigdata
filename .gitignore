@@ -144,3 +144,36 @@ outputs/figures/paper/_qa/
 # --- 최종 산출물 복사본(tools/sync_deliverables.sh 로 재생성) ---
 deliverables/
 catboost_info/
+
+# --- 2026-10-08 정리: 로컬 전용 대용량·재생성 산출(판정 표 sealed/·*_tests.csv 등은 따로 추적) ---
+data/processed/**/shards/
+data/processed/xbatch/*/inputs/
+data/processed/xbatch/*/smoke/
+data/processed/xbatch/_smoke/
+data/processed/xbatch/XF_new_regions/run_tables/
+data/processed/xbatch/XF_new_regions/ext_labels/
+data/processed/xbatch/XF_new_regions/v5/
+data/processed/map_alaska/cov_parts/
+data/processed/map_alaska/hillshade_v1/
+data/processed/map_alaska/label_sequence_v1/
+data/processed/map_alaska/*.csv.gz
+data/processed/map_alaska/alaska_grid_cells_v1.csv
+data/processed/map_alaska/alaska_grid_mask_v1.csv
+data/processed/covariates_ext_parts/
+results/rescale_*/data/
+results/rescale_*/bundle_top/
+results/rescale_*/*.tar.gz
+# 열람 조건을 채우지 않은 봉인 표(최종 묶음 계획서 0.3 열람 순서 2). 커밋 금지
+data/processed/xbatch/XE_hires_covariates/sealed/xe_r1b_xt2_*
+# 셀 단위 실측값·잔차를 담은 표(라벨 원천 약관 확인 전 배포 금지)
+data/processed/xbatch/XK_support_scale/xk_oof_cells_v1.csv
+data/processed/h4/fa_src_resid_cells.csv
+data/processed/map_alaska/alaska_cv_oof_v1.csv
+data/processed/map_lena/lena_cv_oof_v1.csv
+data/processed/map_lena/*/pred_labels_*.csv
+data/processed/m1/transfer_uq_cells.csv
+# 사용자 제출 문서 원본(로컬 보관)
+archive/2026_contest_submission/
+archive/*.hwp
+# 검토용 접촉 인쇄(재생성 가능)
+deck/assets/paper_report/maps/showpiece_contact_sheet.png
