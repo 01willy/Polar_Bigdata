@@ -1,0 +1,12 @@
+{
+ "ref": "S1",
+ "k_better": 2,
+ "j_families_better": 0,
+ "k_worse": 2,
+ "j_families_worse": 2,
+ "n_tasks": 5,
+ "n_families": 3,
+ "sentence_better": "",
+ "sentence_worse": "",
+ "no_test_p": "계열 3개라 최소 p 0.125, p 를 내지 않는다"
+}

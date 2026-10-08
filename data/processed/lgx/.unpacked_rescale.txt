@@ -1,0 +1,8 @@
+unpacked_at=2026-09-30 11:44:39
+finished_at=2026-09-30 11:44:48
+a_tar_sha256=00e3ae1039aaa2fe5409604a58e6c0ac9035099cdb0fd75c8330e70e36d67857
+b_tar_sha256=2c4796131e87175d8c2ef9171adcd960390e88b11b8ba211eae3603b5435b72a
+cpu=3860 ladder=292 gpu=591 realmlp=77
+sha_list=data/processed/lgx/rescale_shards_sha256.txt(14288 파일)
+read_only=data/processed/lgx/shards,data/processed/lgx/ladder/shards
+note=해제는 결과 열람이 아니다(WRAPUP 0.3). 조각 내용(blocksse, cells, runs 의 RMSE 열)은 열지 않았다

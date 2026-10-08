@@ -1,0 +1,254 @@
+{
+ "stage": "XM",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XM_2026-10-05.md",
+ "plan_commit": "ff7c97f",
+ "base_plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.5 XE_hires_covariates",
+ "tag": "xm",
+ "variants": [
+  "xw",
+  "xw_lc"
+ ],
+ "primary_variant": "xw",
+ "fallback_xw_lc": false,
+ "targets": [
+  "Alaska",
+  "Lena",
+  "Canada"
+ ],
+ "n_units_xm": 148,
+ "n_units_x25": 74,
+ "n_stores": 15,
+ "grid": [
+  200,
+  500,
+  1000,
+  -1
+ ],
+ "splits": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25
+ ],
+ "nboot": 10000,
+ "nboot_registered": 10000,
+ "nboot_note": "",
+ "holm_m": 3,
+ "main_n": [
+  500,
+  1000,
+  -1
+ ],
+ "design": "결과 열람 뒤 설계, 탐색(SI)",
+ "blind": [
+  "비맹검 부분 포함",
+  "xh0 의 treecover_1km·water_occ_1km 이 WC 의 수목·수면 비율과 정보가 겹치고 xh0 격자 안 대비를 열람했다(등록 4절)"
+ ],
+ "unit_status": {
+  "ok": 148
+ },
+ "n_fit_xm": 10412,
+ "unit_elapsed_s_xm": 2240.899999999999,
+ "feat_file": "/home/willy010313/Polar_Bigdata/data/processed/xbatch/XM_landcover_vegetation/inputs/xm_feat_v1.csv",
+ "feat_sha256": "6fcf6489e9dd618cbe51e54584a5db89578dca559489da4ce89854007bf4133f",
+ "feat_group_decisions": {
+  "Alaska": {
+   "WC": {
+    "finite_frac": 1.0,
+    "included": true,
+    "n_rows": 13606,
+    "reason": ""
+   },
+   "S2": {
+    "finite_frac": 1.0,
+    "included": true,
+    "n_rows": 13606,
+    "reason": ""
+   }
+  },
+  "Lena": {
+   "WC": {
+    "finite_frac": 1.0,
+    "included": true,
+    "n_rows": 3037,
+    "reason": ""
+   },
+   "S2": {
+    "finite_frac": 0.992756,
+    "included": true,
+    "n_rows": 3037,
+    "reason": ""
+   }
+  },
+  "Canada": {
+   "WC": {
+    "finite_frac": 1.0,
+    "included": true,
+    "n_rows": 752,
+    "reason": ""
+   },
+   "S2": {
+    "finite_frac": 0.99867,
+    "included": true,
+    "n_rows": 752,
+    "reason": ""
+   }
+  }
+ },
+ "feat_coverage": {
+  "Alaska": {
+   "WC": {
+    "rows_pct": 100.0,
+    "n_rows": 13606,
+    "cells_pct": 100.0,
+    "n_cells": 343
+   },
+   "S2": {
+    "rows_pct": 100.0,
+    "n_rows": 13606,
+    "cells_pct": 100.0,
+    "n_cells": 343
+   }
+  },
+  "Lena": {
+   "WC": {
+    "rows_pct": 100.0,
+    "n_rows": 3037,
+    "cells_pct": 100.0,
+    "n_cells": 201
+   },
+   "S2": {
+    "rows_pct": 99.28,
+    "n_rows": 3037,
+    "cells_pct": 97.01,
+    "n_cells": 201
+   }
+  },
+  "Canada": {
+   "WC": {
+    "rows_pct": 100.0,
+    "n_rows": 752,
+    "cells_pct": 100.0,
+    "n_cells": 88
+   },
+   "S2": {
+    "rows_pct": 99.87,
+    "n_rows": 752,
+    "cells_pct": 98.86,
+    "n_cells": 88
+   }
+  }
+ },
+ "s2_dropped_targets": [],
+ "variant_status": [
+  {
+   "variant": "xw",
+   "target": "Alaska",
+   "n_units": 25,
+   "n_cols": 39,
+   "groups": "WC,S2",
+   "dropped": "",
+   "same_as": "",
+   "skip": ""
+  },
+  {
+   "variant": "xw",
+   "target": "Lena",
+   "n_units": 24,
+   "n_cols": 39,
+   "groups": "WC,S2",
+   "dropped": "",
+   "same_as": "",
+   "skip": ""
+  },
+  {
+   "variant": "xw",
+   "target": "Canada",
+   "n_units": 25,
+   "n_cols": 39,
+   "groups": "WC,S2",
+   "dropped": "",
+   "same_as": "",
+   "skip": ""
+  },
+  {
+   "variant": "xw_lc",
+   "target": "Alaska",
+   "n_units": 25,
+   "n_cols": 36,
+   "groups": "WC",
+   "dropped": "",
+   "same_as": "",
+   "skip": ""
+  },
+  {
+   "variant": "xw_lc",
+   "target": "Lena",
+   "n_units": 24,
+   "n_cols": 36,
+   "groups": "WC",
+   "dropped": "",
+   "same_as": "",
+   "skip": ""
+  },
+  {
+   "variant": "xw_lc",
+   "target": "Canada",
+   "n_units": 25,
+   "n_cols": 36,
+   "groups": "WC",
+   "dropped": "",
+   "same_as": "",
+   "skip": ""
+  }
+ ],
+ "x25_from": "/home/willy010313/Polar_Bigdata/data/processed/xbatch/XE_hires_covariates/shards",
+ "x25_tag": "xe_r1b",
+ "x25_reuse_table": "/home/willy010313/Polar_Bigdata/data/processed/xbatch/XM_landcover_vegetation/xm_x25_reuse.csv",
+ "x25_reuse_sha256": "b4d582fb116316e72889a2fc8c26699452e35bd8552dbfae5f33d9ed3cf847b9",
+ "cfg_common": [
+  "569bf8a6636c"
+ ],
+ "gate_wf9": {
+  "level": "local_rescale",
+  "ref": "/home/willy010313/Polar_Bigdata/results/rescale_wf3/data/processed/wf/shards",
+  "ran": true,
+  "passed": true,
+  "n_keys": 35442,
+  "n_fail": 0,
+  "n_x25_units": 74,
+  "n_x25_units_expected": 74,
+  "missing_x25_units": "",
+  "n_keys_x25": 35442,
+  "n_keys_x25_in_wf9": 35442,
+  "coverage_x25_in_wf9": 1.0,
+  "n_keys_wf9": 35442,
+  "n_keys_wf9_in_x25": 35442,
+  "coverage_wf9_in_x25": 1.0,
+  "n_pairs_missing_in_wf9": 0,
+  "status": "통과"
+ },
+ "summarize_s": 31.5,
+ "reading_rule": "봉인 표는 조정 담당이 연다. 수행자는 열지 않는다(등록 10절)"
+}

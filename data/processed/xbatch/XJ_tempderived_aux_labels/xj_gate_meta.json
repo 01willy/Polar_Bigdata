@@ -1,0 +1,52 @@
+{
+ "stage": "XJ_tempderived_aux_labels",
+ "sides": [
+  "tgt"
+ ],
+ "levels": {
+  "tgt": "local_rescale"
+ },
+ "tol": {
+  "tgt": [
+   0.0001,
+   1e-09
+  ]
+ },
+ "deps_ref": {
+  "tgt": {
+   "deps": {},
+   "source": "기록 없음(로컬 산출)",
+   "numpy_mismatch": false
+  }
+ },
+ "deps_new": [
+  {
+   "catboost": "1.2.10",
+   "scikit-learn": "1.9.1",
+   "pandas": "2.3.3",
+   "scipy": "1.17.1",
+   "numpy": "2.1.1"
+  }
+ ],
+ "deps_note": "허용 오차는 1절 그대로 둔다. 기준과 이번 실행의 numpy 판 차이는 구현 기록 6절의 미해결 불일치다",
+ "compared": {
+  "tgt": {
+   "Tibet_LGD": {
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "keys": 60
+   }
+  }
+ },
+ "n_fail_coverage": 0,
+ "passed": true,
+ "src_tested": false,
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md",
+ "plan_commit": "2678100",
+ "written": "2026-10-05 03:02:48"
+}

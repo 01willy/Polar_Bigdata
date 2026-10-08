@@ -1,0 +1,22 @@
+created_utc=2026-10-01T05:33:59Z
+git_commit=becd9f5
+git_uncommitted_paths=0
+h40_sha16_main_run=7098f59dabe2b73f
+sha256 7098f59dabe2b73f scripts/3_deep_learning/h40_label_grid.py
+sha256 22e215e435e157be scripts/3_deep_learning/h42_label_grid_ext.py
+sha256 60aee949992b8de4 scripts/3_deep_learning/h54_workflow.py
+sha256 db746179789f21a7 src/polar/m1_core.py
+sha256 4b6b888275d5f47f src/polar/h4_common.py
+sha256 2a910d36299ee2fb src/polar/m1_stats.py
+sha256 a49559e2dce61535 src/polar/fidelity.py
+sha256 b799bd4e6aeb69b5 src/polar/physics.py
+sha256 a610dc5ced53e83d tests/test_h54_workflow.py
+sha256 6669c24278458d5d scripts/rescale/run_wf.sh
+sha256 af1c1f2bf081ac8d scripts/rescale/lg_common.sh
+sha256 71b5d3f6c297770d data/processed/fidelity_base_v3.csv
+sha256 711d0cd3ba0e2e41 data/processed/e5_soil_tdd_v3.csv
+sha256 2ef333b24d60332a data/processed/e5_soil_tdd_v4.csv
+sha256 87bd06f98bb1d141 data/processed/lg_subregion_map_v1.csv
+sha256 58e4db50f71b96a9 data/processed/lgd/run_tables/Tibet/fidelity_base_v3.csv
+sha256 7eeb6d49d5096c4c data/processed/lgd/run_tables/NAtlantic_lic/fidelity_base_v3.csv
+sha256 6a8ab259d10f3c07 data/processed/lgd/run_tables/Russia_C/fidelity_base_v3.csv

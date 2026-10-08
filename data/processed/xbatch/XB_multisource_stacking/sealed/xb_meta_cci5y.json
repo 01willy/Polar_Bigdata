@@ -1,0 +1,56 @@
+{
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md",
+ "plan_commit": "2678100",
+ "section": "2.2",
+ "design": "결과 열람 뒤 설계",
+ "blind": {
+  "XB-1": "비맹검 부분 포함(LGX L29 의 기준선, WF7 의 Pe)",
+  "XB-2": "비맹검 부분 포함(WF7 의 Re − R1)",
+  "XB-3": "비맹검 부분 포함(WF1·WF6 의 지역 내 Re)",
+  "XB-4": "비맹검 부분 포함(WF6 의 알래스카 Re 열세)",
+  "XB-5": "비맹검 부분 포함",
+  "XB-6": ""
+ },
+ "variant": "cci5y",
+ "nboot": 10000,
+ "nboot_capped": false,
+ "n_units_t": 137,
+ "n_units_r": 74,
+ "n_stores_t": 31,
+ "n_stores_r": 3,
+ "holm": {
+  "main": 12,
+  "ni": 4
+ },
+ "notes": [
+  "가중은 서술로만 쓰고 원인 문장(예: 'CCI 가 Stefan 을 보완한다')은 쓰지 않는다. 후보 사이 공선성 때문에 가중의 해석이 불안정하다",
+  "n 10 의 XB-1 은 적층 대체(사유 n<10, 묶음<2, γ̂ = 1) 때문에 사실상 P1 대 P1 비교일 수 있다(계획 2.2 퇴화 추출 규칙, 이 행의 대체 비율 xb_tests 의 fallback_ratio 열)",
+  "SI: γ 의 2단 교차검증은 구현 보고서 3.3 의 절차(묶음 j 를 뺀 Z 행으로 w_j 를 맞추고 묶음 j 의 Z 행을 채점)이며 중첩 교차검증이 아니다. Z 의 다른 묶음 행은 묶음 j 의 라벨이 들어간 계수로 만들어졌으므로 γ 선택의 채점은 낙관적일 수 있다(작은 γ 쪽). 대상 밖 라벨은 쓰지 않는다",
+  "SI: anchor_fill(비유한·0 이하 셀을 ρ·s 로, ρ = 원천 b/s 중앙값)은 계획 문구의 Ku 뿐 아니라 척도 앵커 후보 P*·Ku·Ed·Ss 모두에 썼다(h42 x9 의 앵커 경로와 같다)"
+ ],
+ "elapsed_s": 222.5,
+ "smoke_env": null,
+ "local_resources": {
+  "require": true,
+  "limit": "as",
+  "mode": "summarize",
+  "mem_available_gb": 35.5,
+  "as_limit_gb": 10.0,
+  "malloc_arenas": null
+ },
+ "shards_variant": "cci5y",
+ "max_rss_mb": 493.3,
+ "tdd_v4_missing_allowed": {
+  "false": 211
+ },
+ "cfg": {
+  "cfg_common": {
+   "ffd0e5174155": 137,
+   "fa7bbec0ff51": 74
+  },
+  "code_sha": {
+   "a6b90b68042e": 211
+  }
+ },
+ "written": "2026-10-05 05:41:47"
+}

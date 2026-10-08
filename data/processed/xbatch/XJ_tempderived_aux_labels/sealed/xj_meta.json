@@ -1,0 +1,105 @@
+{
+ "stage": "XJ_tempderived_aux_labels",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md",
+ "plan_commit": "2678100",
+ "plan_revision": "개정 1",
+ "tag": "xj",
+ "nboot": 10000,
+ "nboot_asked": 10000,
+ "nboot_capped": false,
+ "git_commit": "",
+ "code_sha": "9528e230eb6e",
+ "code_sha_core": "4f5c510a8b71",
+ "frozen": {
+  "h40": "7098f59dabe2b73f",
+  "h42": "22e215e435e157be",
+  "h54": "cf9a1f6d0929c892",
+  "h41": "492373e4d37b5ea4"
+ },
+ "n_units": 5,
+ "n_stores": 1,
+ "unit_status": {
+  "ok": 5
+ },
+ "holm_m": 15,
+ "src_tested": false,
+ "aux_lic": [
+  "근거 미기록(--aux-lic-ref 없음)"
+ ],
+ "cfg": {
+  "exp": "XJ",
+  "variant": "tgt",
+  "data_sha": "d68ff1dea108:66ff3d644ad7:52c326fdf4b4:66ff3d644ad7:508f9f395174",
+  "kappa": 10.0,
+  "r": 10.0,
+  "lams": [
+   0.25,
+   0.5,
+   1.0
+  ],
+  "lam_base": 0.25,
+  "cv_k": 5,
+  "cb_hi": {
+   "iterations": 600,
+   "learning_rate": 0.03,
+   "depth": 6,
+   "l2_leaf_reg": 3.0
+  },
+  "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md@2678100",
+  "frozen": {
+   "h40": "7098f59dabe2b73f",
+   "h42": "22e215e435e157be",
+   "h54": "cf9a1f6d0929c892",
+   "h41": "492373e4d37b5ea4"
+  },
+  "ws": [
+   0.1,
+   0.3,
+   1.0
+  ],
+  "flag_variant": true,
+  "flag_col": "is_tempderived",
+  "src_grid": [
+   0,
+   10,
+   40
+  ],
+  "tgt_grid": [
+   0,
+   3,
+   10
+  ],
+  "draws": 5,
+  "draws_cap": 0,
+  "seeds": [
+   0,
+   1
+  ],
+  "cb_iters": 200,
+  "src_methods": [
+   "D0",
+   "D1",
+   "R1"
+  ],
+  "src_tested": false,
+  "src_aux": [],
+  "tgt_aux": [
+   "F3_ext_temp"
+  ],
+  "aux_lic_ref": "",
+  "smoke_lic": "",
+  "buffer_km": 100.0,
+  "aux_rows": "append_last",
+  "aux_anchor": "E0",
+  "aux_E0": "direct_only",
+  "tgt_coef": "wls, m = n + w*n_aux(A pool), kappa 10",
+  "tgt_aux_pool": "not_B_blocks(A_blocks + other)"
+ },
+ "summarize_s": 0.3,
+ "rules": {
+  "ci": "xbatch_core.region_stat_same(h40.contrast, 보조 h42.boot_delta_common)",
+  "pool": "xbatch_core.pool(주 4지역, 등록 4)",
+  "verdict4": "xbatch_core.verdict_cols(δ 0.5·1.0·δ_rel)",
+  "holm": "m = 15, 행 없음·시험하지 않음 p 1"
+ }
+}

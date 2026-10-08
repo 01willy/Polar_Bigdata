@@ -1,0 +1,29 @@
+created_utc=2026-09-29T12:28:42Z
+git_commit=f29bfc8
+git_uncommitted_paths=0
+h40_sha16_main_run=7098f59dabe2b73f
+reference_shards=19 (from results/rescale_lg_smoke)
+sha256 7098f59dabe2b73f scripts/3_deep_learning/h40_label_grid.py
+sha256 bafb95cfb3167f65 scripts/3_deep_learning/h42_label_grid_ext.py
+sha256 492373e4d37b5ea4 scripts/2_evaluation/h41_validation_ladder.py
+sha256 db746179789f21a7 src/polar/m1_core.py
+sha256 6f4ba47bf407cdfa src/polar/tab_models.py
+sha256 4b6b888275d5f47f src/polar/h4_common.py
+sha256 2a910d36299ee2fb src/polar/m1_stats.py
+sha256 b799bd4e6aeb69b5 src/polar/physics.py
+sha256 a49559e2dce61535 src/polar/fidelity.py
+sha256 45e8adc32cf2a949 src/polar/m1_ext.py
+sha256 715e8e9d54386231 tests/test_h42_ext.py
+sha256 9d303efa41d11aab tests/test_h41_ladder.py
+sha256 af1c1f2bf081ac8d scripts/rescale/lg_common.sh
+sha256 df8ac154b578b8ff scripts/rescale/lgx_common.sh
+sha256 8e3fd1d027091f28 scripts/rescale/run_lgx.sh
+sha256 980e0f6317b999ea scripts/rescale/run_lgx_smoke.sh
+sha256 8023f6ccf25d40e4 scripts/rescale/lgx_timing_table.py
+sha256 d84217e5ab7d2586 scripts/rescale/lgx_gate_check.py
+sha256 71b5d3f6c297770d data/processed/fidelity_base_v3.csv
+sha256 711d0cd3ba0e2e41 data/processed/e5_soil_tdd_v3.csv
+sha256 87bd06f98bb1d141 data/processed/lg_subregion_map_v1.csv
+sha256 bfb4eab409938967 data/processed/lgx_label_flags_v1.csv
+sha256 e6ce00b2020565a8 data/processed/lgx_tdd_matched_v1.csv
+sha256 a417fa4e9799bea3 data/processed/lgx_cluster_map_v1.csv

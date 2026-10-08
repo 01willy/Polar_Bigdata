@@ -1,0 +1,92 @@
+{
+ "freeze": {
+  "s9_star": "S9-DS",
+  "chosen_by": "개발 교차검증 효용(AL-k 와 알래스카 x 함께 제외)이 작은 변형",
+  "variants_available": [
+   "S9-GBM",
+   "S9-DS"
+  ],
+  "cv_utility": {
+   "S9-GBM": -0.03181323051927649,
+   "S9-DS": -0.03762686911885115
+  },
+  "meta_path": "data/processed/xbatch/XD_placement_policy/policy/s9_ds_meta.json",
+  "meta_sha256": "9cdda75fa06bd29fbc59dddc66b13cce6118b170eaa2c97c0adc7031a95d0663",
+  "model_path": "/home/willy010313/Polar_Bigdata/data/processed/xbatch/XD_placement_policy/policy/s9_ds.pt",
+  "model_sha256": "e5db0a89e17099dfe40efd4f3552d66b179b3829fdc5a697f812ff1c534b266f",
+  "index_path": "/home/willy010313/Polar_Bigdata/data/processed/xbatch/XD_placement_policy/policy/s9_ds_index.json",
+  "index_sha256": "c1cdee5905c027ad2858a2ed7aba8b663c137f829e2becf856e9a223944cd3d5",
+  "features": {
+   "element": [
+    "z0",
+    "z1",
+    "z2",
+    "z3",
+    "z4",
+    "z5",
+    "z6",
+    "z7",
+    "z8",
+    "z9",
+    "z10",
+    "z11",
+    "z12",
+    "z13",
+    "z14",
+    "z15",
+    "z16",
+    "z17",
+    "z18",
+    "z19",
+    "z20",
+    "z21",
+    "z22",
+    "z23",
+    "z24",
+    "s_std",
+    "blk_frac",
+    "di",
+    "nn_dist"
+   ],
+   "context": [
+    "ctx_ncand",
+    "ctx_nblocks",
+    "ctx_effblocks",
+    "ctx_cov_between",
+    "ctx_src_diff",
+    "n"
+   ]
+  },
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "torch": "2.6.0+cu124",
+  "cuda": "12.4",
+  "cudnn": "90100",
+  "cublas": ":4096:8",
+  "deterministic": true,
+  "device_order": "PCI_BUS_ID",
+  "gpu": 0,
+  "gpu_name": "NVIDIA GeForce RTX 3090",
+  "driver": "530.41.03",
+  "catboost": null,
+  "created": "2026-10-05 03:17:05",
+  "plan_commit": "2678100",
+  "code_sha256": "b2ef7464df799ee369173345415cfcf9aaa15f981cef200262b993903947d1aa",
+  "index_relpath": "data/processed/xbatch/XD_placement_policy/policy/s9_ds_index.json",
+  "note": "이 기록을 계획 개정 이력에 적고 커밋한 뒤에만 작업 R2b(XD-4 시험)를 제출한다(커밋 뒤 --attest-freeze 로 확인 기록을 만들어 R2b 묶음에 넣는다). 비알래스카 XD-alg 행(sealed/xd_alg_*, sealed/shards)은 그 뒤에 연다"
+ },
+ "stores": [
+  "CA-2|x",
+  "CA-3|x",
+  "LE-1|x",
+  "LE-2|x",
+  "Russia_C~lgd|x",
+  "Tibet_LGD|x"
+ ],
+ "code_sha256": "b2ef7464df799ee369173345415cfcf9aaa15f981cef200262b993903947d1aa",
+ "nboot": 10000,
+ "created": "2026-10-05 03:29:17"
+}

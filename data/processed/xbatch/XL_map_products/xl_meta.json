@@ -1,0 +1,414 @@
+{
+ "extract": {
+  "lena": {
+   "n_cells": 53011,
+   "products": {
+    "cci5": {
+     "base": "cci5y",
+     "period": [
+      1997,
+      2023
+     ],
+     "years": [
+      1997,
+      1998,
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+     ],
+     "n_valid": 43330,
+     "seconds": 0.9,
+     "files": [
+      "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1997-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1998-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1999-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2000-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2001-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2002-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2003-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2004-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2005-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2006-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2007-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2008-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2009-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2010-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2011-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2012-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2013-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2014-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2015-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2016-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2017-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2018-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2019-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2020-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2021-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2022-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2023-fv05.0.nc"
+     ],
+     "crs": "위경도(spatial_ref)",
+     "res_deg": 0.0099945068359375,
+     "fill_value": 65535,
+     "units": {
+      "units": "m",
+      "how": "메타데이터",
+      "raw_median": 0.4,
+      "n_finite": 1169910
+     }
+    },
+    "wei": {
+     "base": "wei",
+     "period": [
+      2000,
+      2024
+     ],
+     "years": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+     ],
+     "n_valid": 39285,
+     "seconds": 11.9,
+     "crs": "EPSG:3995",
+     "res": [
+      1000.0,
+      1000.0
+     ],
+     "nodata": -9999.0,
+     "shape": [
+      10287,
+      13639
+     ],
+     "units": {
+      "units": "cm",
+      "how": "값 범위(중앙값 < 10 이면 m)",
+      "raw_median": 56.647003173828125,
+      "n_finite": 977303
+     }
+    },
+    "aalto": {
+     "base": "aalto",
+     "period": [
+      2000,
+      2014
+     ],
+     "years": [],
+     "n_valid": 42843,
+     "seconds": 2.4,
+     "crs": "EPSG:4326",
+     "res": [
+      0.00833333376795053,
+      0.00833333376795053
+     ],
+     "nodata": -3.4028234663852886e+38,
+     "shape": [
+      7200,
+      43200
+     ],
+     "units": {
+      "units": "cm",
+      "how": "값 범위(중앙값 < 10 이면 m)",
+      "raw_median": 55.816959381103516,
+      "n_finite": 42843
+     }
+    }
+   },
+   "output": {
+    "path": "data/processed/xbatch/XL_map_products/xl_lena_products_v1.csv.gz",
+    "bytes": 774675,
+    "sha256": "330ba4b1691d536ced59e10f176310e32b007cf121db703078634f9ef89d61c1"
+   },
+   "seconds": 15.9,
+   "gdal": {
+    "GDAL_CACHEMAX": "512",
+    "CPL_TMPDIR": "/home/willy010313/Polar_Bigdata/data/raw/tmp_gdal",
+    "unit": "MB"
+   },
+   "rule": "최근접 화소, 기간 평균(XG extract_* 함수, check_md5=False)"
+  },
+  "alaska": {
+   "n_cells": 899633,
+   "products": {
+    "cci5": {
+     "base": "cci5y",
+     "period": [
+      1997,
+      2023
+     ],
+     "years": [
+      1997,
+      1998,
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023
+     ],
+     "n_valid": 877684,
+     "seconds": 7.3,
+     "files": [
+      "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1997-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1998-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1999-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2000-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2001-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2002-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2003-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2004-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2005-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2006-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2007-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2008-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2009-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2010-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2011-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2012-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2013-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2014-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2015-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2016-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2017-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2018-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2019-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2020-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2021-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2022-fv05.0.nc",
+      "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2023-fv05.0.nc"
+     ],
+     "crs": "위경도(spatial_ref)",
+     "res_deg": 0.0099945068359375,
+     "fill_value": 65535,
+     "units": {
+      "units": "m",
+      "how": "메타데이터",
+      "raw_median": 0.8,
+      "n_finite": 22545869
+     }
+    },
+    "wei": {
+     "base": "wei",
+     "period": [
+      2000,
+      2024
+     ],
+     "years": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+     ],
+     "n_valid": 875199,
+     "seconds": 29.9,
+     "crs": "EPSG:3995",
+     "res": [
+      1000.0,
+      1000.0
+     ],
+     "nodata": -9999.0,
+     "shape": [
+      10287,
+      13639
+     ],
+     "units": {
+      "units": "cm",
+      "how": "값 범위(중앙값 < 10 이면 m)",
+      "raw_median": 62.49668884277344,
+      "n_finite": 21857891
+     }
+    },
+    "aalto": {
+     "base": "aalto",
+     "period": [
+      2000,
+      2014
+     ],
+     "years": [],
+     "n_valid": 868973,
+     "seconds": 3.6,
+     "crs": "EPSG:4326",
+     "res": [
+      0.00833333376795053,
+      0.00833333376795053
+     ],
+     "nodata": -3.4028234663852886e+38,
+     "shape": [
+      7200,
+      43200
+     ],
+     "units": {
+      "units": "cm",
+      "how": "값 범위(중앙값 < 10 이면 m)",
+      "raw_median": 83.91362762451172,
+      "n_finite": 868973
+     }
+    },
+    "yk": {
+     "base": "yk",
+     "period": [
+      2001,
+      2015
+     ],
+     "years": [
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015
+     ],
+     "n_valid": 749923,
+     "seconds": 6.2,
+     "crs": "극 투영(위경도 2차원 배열로 최근접)",
+     "fill_value": -999.0,
+     "units": {
+      "units": "m",
+      "how": "메타데이터",
+      "raw_median": 0.6899999976158142,
+      "n_finite": 10090410
+     },
+     "shape": [
+      15,
+      1650,
+      1776
+     ]
+    }
+   },
+   "output": {
+    "path": "data/processed/xbatch/XL_map_products/xl_alaska_products_v1.csv.gz",
+    "bytes": 20187472,
+    "sha256": "c4347dbb382e3f5183f5ed0ad0ff0e2eaf621e0bcbb98f4b3b41f55dca9f667d"
+   },
+   "seconds": 64.5,
+   "gdal": {
+    "GDAL_CACHEMAX": "512",
+    "CPL_TMPDIR": "/home/willy010313/Polar_Bigdata/data/raw/tmp_gdal",
+    "unit": "MB"
+   },
+   "rule": "최근접 화소, 기간 평균(XG extract_* 함수, check_md5=False)"
+  }
+ },
+ "created": "2026-10-05 02:46 KST",
+ "script": "scripts/2_evaluation/xl_map_products_v1.py",
+ "script_sha256": "38f64a4a5520413a6853c1542922bbc396418d93ff6f0ace04d835e60175cca6",
+ "registration": "docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XK_XL_2026-10-05.md(서술, 판정 없음)",
+ "inputs": {
+  "alaska_pred": {
+   "path": "data/processed/map_alaska/alaska_pred_v1.csv.gz",
+   "bytes": 24659200,
+   "sha256": "f88c3fcfa25831cb4fd0b6a0a296138daedc3bf72931087309724870af53ed7a"
+  },
+  "lena_pred": {
+   "path": "data/processed/map_lena/lena_pred_v1.csv.gz",
+   "bytes": 1652719,
+   "sha256": "04ef6916b976e72a87e54a8a05e3dff6ae4d0a0f4f1ab5bbc9382731fb36d866"
+  }
+ },
+ "elapsed_s_last": 9.3,
+ "max_rss_mb_last": 944.5,
+ "summary": {
+  "file": {
+   "path": "data/processed/xbatch/XL_map_products/xl_summary_v1.csv",
+   "bytes": 2066,
+   "sha256": "0ff06fb415503a6209c3491b04d07e4eb80bc0a0f055ca2fb57ff8ddb2a81a45"
+  },
+  "shown_rule": "회색 아님(gray = 0)·우리 예측 유한",
+  "diff": "우리(라벨 전량 재보정 Stefan + 잔차 ML) − 항목",
+  "corr": "피어슨 r, 스피어먼 ρ(두 값 유한한 표시 셀)",
+  "e5mean": "0.1° 표시판: ERA5-Land 셀(floor((좌표 + 0.05)/0.1)) 안 표시 셀 평균"
+ }
+}

@@ -1,0 +1,76 @@
+[2026-10-01T16:33:36Z]: Launching [ -f wf_payload.tar.gz ] && tar xzf wf_payload.tar.gz; WF_MODE=full WF_EXPS=wf9,wf9x,wf10 WF_BUDGET_MIN=105 WF_SUM_RESERVE_MIN=40 bash scripts/rescale/run_wf.sh, Working dir: /enc/ukrprod_Vppbeb/work.  Process output follows:
+[2026-10-01T16:33:36Z]: [payload] created_utc=2026-10-01T15:20:16Z
+[2026-10-01T16:33:36Z]: [payload] git_commit=6d4c2dd
+[2026-10-01T16:33:36Z]: [payload] git_uncommitted_paths=0
+[2026-10-01T16:33:36Z]: [payload] h40_sha16_main_run=7098f59dabe2b73f
+[2026-10-01T16:33:36Z]: [payload] sha256 7098f59dabe2b73f scripts/3_deep_learning/h40_label_grid.py
+[2026-10-01T16:33:36Z]: [payload] sha256 22e215e435e157be scripts/3_deep_learning/h42_label_grid_ext.py
+[2026-10-01T16:33:36Z]: [payload] sha256 0373b52708aaaa9f scripts/3_deep_learning/h54_workflow.py
+[2026-10-01T16:33:36Z]: [payload] sha256 db746179789f21a7 src/polar/m1_core.py
+[2026-10-01T16:33:36Z]: [payload] sha256 4b6b888275d5f47f src/polar/h4_common.py
+[2026-10-01T16:33:36Z]: [payload] sha256 2a910d36299ee2fb src/polar/m1_stats.py
+[2026-10-01T16:33:36Z]: [payload] sha256 a49559e2dce61535 src/polar/fidelity.py
+[2026-10-01T16:33:36Z]: [payload] sha256 b799bd4e6aeb69b5 src/polar/physics.py
+[2026-10-01T16:33:36Z]: [payload] sha256 f8d0d1e6cd821aae tests/test_h54_workflow.py
+[2026-10-01T16:33:36Z]: [payload] sha256 6669c24278458d5d scripts/rescale/run_wf.sh
+[2026-10-01T16:33:36Z]: [payload] sha256 af1c1f2bf081ac8d scripts/rescale/lg_common.sh
+[2026-10-01T16:33:36Z]: [payload] sha256 71b5d3f6c297770d data/processed/fidelity_base_v3.csv
+[2026-10-01T16:33:36Z]: [payload] sha256 711d0cd3ba0e2e41 data/processed/e5_soil_tdd_v3.csv
+[2026-10-01T16:33:36Z]: [payload] sha256 2ef333b24d60332a data/processed/e5_soil_tdd_v4.csv
+[2026-10-01T16:33:36Z]: [payload] sha256 87bd06f98bb1d141 data/processed/lg_subregion_map_v1.csv
+[2026-10-01T16:33:36Z]: [payload] sha256 58e4db50f71b96a9 data/processed/lgd/run_tables/Tibet/fidelity_base_v3.csv
+[2026-10-01T16:33:36Z]: [payload] sha256 7eeb6d49d5096c4c data/processed/lgd/run_tables/NAtlantic_lic/fidelity_base_v3.csv
+[2026-10-01T16:33:36Z]: [payload] sha256 6a8ab259d10f3c07 data/processed/lgd/run_tables/Russia_C/fidelity_base_v3.csv
+[2026-10-01T16:33:36Z]: [2026-10-01T16:33:36Z] [env] 작업 디렉터리 /enc/ukrprod_Vppbeb/work
+[2026-10-01T16:33:36Z]: [2026-10-01T16:33:36Z] [env] 코어 수 64 (RESCALE_CORES_PER_SLOT = 64, OMP_NUM_THREADS = 없음) · 메모리 448 GB (여유 443 GB)
+[2026-10-01T16:33:36Z]: [2026-10-01T16:33:36Z] [env] 디스크 1.8T 여유 / 1.8T
+[2026-10-01T16:33:36Z]: [2026-10-01T16:33:36Z] [env] python /program/pytorch-2.4.1/venv/bin/python3 · pip /program/pytorch-2.4.1/venv/bin/pip
+[2026-10-01T16:33:39Z]: [env] python 3.11.10 · Linux-4.18.0-553.164.1.el8_10.x86_64-x86_64-with-glibc2.28
+[2026-10-01T16:33:39Z]: [env] 가상환경 True · prefix /program/pytorch-2.4.1/venv
+[2026-10-01T16:33:39Z]: [env] numpy 2.1.1
+[2026-10-01T16:33:39Z]: [env] pandas 없음
+[2026-10-01T16:33:39Z]: [env] scipy 없음
+[2026-10-01T16:33:39Z]: [env] scikit-learn 없음
+[2026-10-01T16:33:39Z]: [env] catboost 없음
+[2026-10-01T16:33:39Z]: [env] pytabkit 없음
+[2026-10-01T16:33:39Z]: [env] pytest 없음
+[2026-10-01T16:33:39Z]: [env] torch 2.4.1
+[2026-10-01T16:33:39Z]: [env] CUDA_VISIBLE_DEVICES = None
+[2026-10-01T16:33:58Z]: [env] torch 2.4.1+cu121 · CUDA 빌드 12.1 · CUDA 사용 가능 False · GPU 수 0
+[2026-10-01T16:33:59Z]: [env] nvidia-smi: NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.
+[2026-10-01T16:33:59Z]: [env] nvidia-smi: 
+[2026-10-01T16:34:01Z]: [2026-10-01T16:34:01Z] [deps] 없는 필수 패키지: catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-01T16:34:01Z]: [2026-10-01T16:34:01Z] [deps] pip install --user catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-01T16:34:05Z]: ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-10-01T16:34:05Z]: [2026-10-01T16:34:05Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+[2026-10-01T16:34:17Z]: ERROR: Could not install packages due to an OSError: [Errno 28] No space left on device: '/program/pytorch-2.4.1/venv/bin/plotly_get_chrome'
+[2026-10-01T16:34:17Z]: 
+[2026-10-01T16:34:17Z]: [2026-10-01T16:34:17Z] [deps] 기본 위치 설치 실패. --target /enc/ukrprod_Vppbeb/work/.pydeps 에 다시 시도한다
+[2026-10-01T16:34:43Z]: [deps] 확인: catboost 1.2.10 · scikit-learn 1.9.1 · pandas 2.3.3 · scipy 1.17.1 · numpy 2.4.6
+[2026-10-01T16:34:44Z]: [2026-10-01T16:34:44Z] [wf] 모드 full · 코어 64 · 워커 14 × 스레드 4 · 실험 wf9,wf9x,wf10 · 시간 한도 105 min
+[2026-10-01T16:34:44Z]: [2026-10-01T16:34:44Z] [wf] 실행 시작(pid 18556, 제한 3832 s) → logs_wf/wf_run.log
+[2026-10-01T16:38:44Z]:   [run] [pool] 워커 14 · 스레드 4 · 코어 고정 예(워커마다 4코어)
+[2026-10-01T16:38:44Z]:   [run]     [warn] 적합 실패(wf10|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+[2026-10-01T16:38:44Z]:   [run] [data] 실험 ['wf9', 'wf9x', 'wf10'] · 작업 단위 129(건너뜀 11) · 실험별 {'wf9': 74, 'wf9x': 25, 'wf10': 30} · 분할 [1, 2, 3, 4, 5] · seed [0, 1] · 스레드 4 · 워커 14
+[2026-10-01T16:38:44Z]:   [run] [plan] 실행 129 · 재개로 건너뜀 0 · 프로세스 14 · 스레드 4
+[2026-10-01T16:38:44Z]:   [run] [done] 완료 129 · 실패 0 · 일부 적합 실패 1 · 232s
+[2026-10-01T16:38:44Z]: [2026-10-01T16:38:44Z] [pack] results_wf.tar.gz 8.6M · 파일 392개
+[2026-10-01T16:38:44Z]: [2026-10-01T16:38:44Z] [wf] 집계 시작(제한 5692 s)
+[2026-10-01T16:39:36Z]:   [summarize] [summarize] 실험 ['wf9', 'wf9x', 'wf10'] · 조각 129 · runs 20,994 · curve 421 · tests 1,015 · 51s → /enc/ukrprod_Vppbeb/work/data/processed/wf/wf3b_*
+[2026-10-01T16:39:36Z]:   [summarize]  exp test_id role target                                                                     verdict
+[2026-10-01T16:39:36Z]:   [summarize]  wf9   WF9-a    주    NaN 부분(지역 2/3, 분할 23/24): 기각: 열세인 대비가 있다(n=전량) [통계적으로 구별되나 크기는 0.5 cm 미만: n=전량]
+[2026-10-01T16:39:36Z]:   [summarize] wf9x   WF9-c    주    NaN           부분(지역 2/4): 부분 지지: 우세인 대비 = n=전량 [통계적으로 구별되나 크기는 0.5 cm 미만: n=전량]
+[2026-10-01T16:39:36Z]:   [summarize] wf10  WF10-a    주    NaN                                           판정 불가(대비 0/2; 없는 대비: n=100, n=전량)
+[2026-10-01T16:39:36Z]:   [summarize] wf10  WF10-b    주    NaN                                           판정 불가(대비 0/2; 없는 대비: n=100, n=전량)
+[2026-10-01T16:39:36Z]:   [summarize] wf10  WF10-c    주    NaN                                           판정 불가(대비 0/2; 없는 대비: n=100, n=전량)
+[2026-10-01T16:39:36Z]:   [summarize] wf10  WF10-d   서술    NaN         서술(cold 변형, 판정어 대신 4분 판정): EP(D0) ; EP(R1) − EP(D0) ; Δ_W(R1 − P1) 
+[2026-10-01T16:39:37Z]: [2026-10-01T16:39:37Z] [pack] results_wf.tar.gz 8.9M · 파일 401개
+[2026-10-01T16:39:37Z]: [2026-10-01T16:39:37Z] [wf] 단계별 상태
+[2026-10-01T16:39:37Z]:   stage,required,rc,sec,note
+[2026-10-01T16:39:37Z]:   inputs,1,0,23,
+[2026-10-01T16:39:37Z]:   deps,1,0,68,
+[2026-10-01T16:39:37Z]:   run,1,0,308,
+[2026-10-01T16:39:37Z]:   summarize,1,0,360,
+[2026-10-01T16:39:38Z]: [2026-10-01T16:39:38Z] [wf] 모든 단계 통과 · 경과 6 min
+[2026-10-01T16:39:38Z]: Exited with code 0
+[2026-10-01T16:39:38Z]: 

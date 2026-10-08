@@ -1,0 +1,128 @@
+{
+ "stage": "XI_climate_extrapolation_retest",
+ "level": "elm_hematite",
+ "tol": [
+  0.0,
+  0.0
+ ],
+ "ref_dir": "results/rescale_wf3/data/processed/wf/shards",
+ "ref_deps_source": "results/rescale_wf3/logs_wf/deps.log",
+ "deps_ref": {
+  "catboost": "1.2.10",
+  "scikit-learn": "1.9.1",
+  "pandas": "2.3.3",
+  "scipy": "1.17.1",
+  "numpy": "2.4.6"
+ },
+ "deps_new": [
+  {
+   "catboost": "1.2.10",
+   "scikit-learn": "1.9.1",
+   "pandas": "2.3.3",
+   "scipy": "1.17.1",
+   "numpy": "2.1.1"
+  }
+ ],
+ "numpy_mismatch": true,
+ "deps_note": "허용 오차는 1절 그대로 둔다. numpy 판 차이는 구현 기록 5절의 미해결 불일치다",
+ "required": [
+  "Alaska|warm",
+  "Canada|warm",
+  "Canada|cold"
+ ],
+ "expected": {
+  "Alaska|warm": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "Canada|cold": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "Canada|warm": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ]
+ },
+ "compared": {
+  "Alaska|warm": {
+   "splits": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "stores": 30,
+   "keys": 5070
+  },
+  "Canada|cold": {
+   "splits": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "stores": 30,
+   "keys": 2910
+  },
+  "Canada|warm": {
+   "splits": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "stores": 30,
+   "keys": 2910
+  }
+ },
+ "n_keys": 10890,
+ "n_fail_sse": 0,
+ "n_fail_coverage": 0,
+ "passed": true,
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md",
+ "plan_commit": "2678100",
+ "written": "2026-10-05 03:02:46"
+}

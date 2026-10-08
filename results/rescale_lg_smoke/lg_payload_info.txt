@@ -1,0 +1,12 @@
+created_utc=2026-09-29T06:33:17Z
+git_commit=6830277
+git_uncommitted_paths=3
+sha256 7098f59dabe2b73f scripts/3_deep_learning/h40_label_grid.py
+sha256 db746179789f21a7 src/polar/m1_core.py
+sha256 6f4ba47bf407cdfa src/polar/tab_models.py
+sha256 4b6b888275d5f47f src/polar/h4_common.py
+sha256 2a910d36299ee2fb src/polar/m1_stats.py
+sha256 aca9b28aa848c98f tests/test_h40_smoke.py
+sha256 71b5d3f6c297770d data/processed/fidelity_base_v3.csv
+sha256 711d0cd3ba0e2e41 data/processed/e5_soil_tdd_v3.csv
+sha256 87bd06f98bb1d141 data/processed/lg_subregion_map_v1.csv

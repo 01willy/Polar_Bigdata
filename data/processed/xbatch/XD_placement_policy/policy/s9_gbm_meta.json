@@ -1,0 +1,414 @@
+{
+ "variant": "S9-GBM",
+ "model_path": "/enc/ukrprod_QoeTd/work/data/processed/xbatch/XD_placement_policy/policy/s9_gbm.cbm",
+ "model_sha256": "e717555c7fe3153771c8d52b7698218013d8f3f75da94216542b447f66b94743",
+ "iterations": 800,
+ "cv": [
+  {
+   "iterations": 100,
+   "cv_utility": -0.027263370455191723,
+   "per_fold": [
+    -0.060671619240406316,
+    -0.020463110322379647,
+    0.04763716334764136,
+    -0.013670576069061734,
+    -0.12148327529947328,
+    0.005071194852529271
+   ]
+  },
+  {
+   "iterations": 200,
+   "cv_utility": -0.021277633086879025,
+   "per_fold": [
+    -0.06331164283323779,
+    -0.025926760243024205,
+    0.06237586706867413,
+    -0.005161744192085615,
+    -0.13000130534833992,
+    0.034359787026739225
+   ]
+  },
+  {
+   "iterations": 400,
+   "cv_utility": -0.02097503780550949,
+   "per_fold": [
+    -0.055345864161803364,
+    -0.02553449251902396,
+    0.06510915514778275,
+    -0.037771734474658286,
+    -0.12137442199486718,
+    0.049067131169513105
+   ]
+  },
+  {
+   "iterations": 800,
+   "cv_utility": -0.03181323051927649,
+   "per_fold": [
+    -0.05592581852385228,
+    -0.027738207249049896,
+    0.06303816868819015,
+    -0.01677624979448438,
+    -0.10645395418594614,
+    -0.04702332205051638
+   ]
+  }
+ ],
+ "cv_utility": -0.03181323051927649,
+ "folds": [
+  {
+   "iterations": 100,
+   "val": "AL-1",
+   "train": [
+    "AL-2",
+    "AL-3",
+    "AL-4",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 13200,
+   "n_val": 2400
+  },
+  {
+   "iterations": 100,
+   "val": "AL-2",
+   "train": [
+    "AL-1",
+    "AL-3",
+    "AL-4",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 12600,
+   "n_val": 3000
+  },
+  {
+   "iterations": 100,
+   "val": "AL-3",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-4",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 12600,
+   "n_val": 3000
+  },
+  {
+   "iterations": 100,
+   "val": "AL-4",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-3",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 13800,
+   "n_val": 1800
+  },
+  {
+   "iterations": 100,
+   "val": "AL-5",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-3",
+    "AL-4",
+    "AL-6"
+   ],
+   "n_train": 12600,
+   "n_val": 3000
+  },
+  {
+   "iterations": 100,
+   "val": "AL-6",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-3",
+    "AL-4",
+    "AL-5"
+   ],
+   "n_train": 13200,
+   "n_val": 2400
+  },
+  {
+   "iterations": 200,
+   "val": "AL-1",
+   "train": [
+    "AL-2",
+    "AL-3",
+    "AL-4",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 13200,
+   "n_val": 2400
+  },
+  {
+   "iterations": 200,
+   "val": "AL-2",
+   "train": [
+    "AL-1",
+    "AL-3",
+    "AL-4",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 12600,
+   "n_val": 3000
+  },
+  {
+   "iterations": 200,
+   "val": "AL-3",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-4",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 12600,
+   "n_val": 3000
+  },
+  {
+   "iterations": 200,
+   "val": "AL-4",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-3",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 13800,
+   "n_val": 1800
+  },
+  {
+   "iterations": 200,
+   "val": "AL-5",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-3",
+    "AL-4",
+    "AL-6"
+   ],
+   "n_train": 12600,
+   "n_val": 3000
+  },
+  {
+   "iterations": 200,
+   "val": "AL-6",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-3",
+    "AL-4",
+    "AL-5"
+   ],
+   "n_train": 13200,
+   "n_val": 2400
+  },
+  {
+   "iterations": 400,
+   "val": "AL-1",
+   "train": [
+    "AL-2",
+    "AL-3",
+    "AL-4",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 13200,
+   "n_val": 2400
+  },
+  {
+   "iterations": 400,
+   "val": "AL-2",
+   "train": [
+    "AL-1",
+    "AL-3",
+    "AL-4",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 12600,
+   "n_val": 3000
+  },
+  {
+   "iterations": 400,
+   "val": "AL-3",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-4",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 12600,
+   "n_val": 3000
+  },
+  {
+   "iterations": 400,
+   "val": "AL-4",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-3",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 13800,
+   "n_val": 1800
+  },
+  {
+   "iterations": 400,
+   "val": "AL-5",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-3",
+    "AL-4",
+    "AL-6"
+   ],
+   "n_train": 12600,
+   "n_val": 3000
+  },
+  {
+   "iterations": 400,
+   "val": "AL-6",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-3",
+    "AL-4",
+    "AL-5"
+   ],
+   "n_train": 13200,
+   "n_val": 2400
+  },
+  {
+   "iterations": 800,
+   "val": "AL-1",
+   "train": [
+    "AL-2",
+    "AL-3",
+    "AL-4",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 13200,
+   "n_val": 2400
+  },
+  {
+   "iterations": 800,
+   "val": "AL-2",
+   "train": [
+    "AL-1",
+    "AL-3",
+    "AL-4",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 12600,
+   "n_val": 3000
+  },
+  {
+   "iterations": 800,
+   "val": "AL-3",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-4",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 12600,
+   "n_val": 3000
+  },
+  {
+   "iterations": 800,
+   "val": "AL-4",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-3",
+    "AL-5",
+    "AL-6"
+   ],
+   "n_train": 13800,
+   "n_val": 1800
+  },
+  {
+   "iterations": 800,
+   "val": "AL-5",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-3",
+    "AL-4",
+    "AL-6"
+   ],
+   "n_train": 12600,
+   "n_val": 3000
+  },
+  {
+   "iterations": 800,
+   "val": "AL-6",
+   "train": [
+    "AL-1",
+    "AL-2",
+    "AL-3",
+    "AL-4",
+    "AL-5"
+   ],
+   "n_train": 13200,
+   "n_val": 2400
+  }
+ ],
+ "features": [
+  "n_set",
+  "cov_mean",
+  "cov_p90",
+  "cov_max",
+  "energy",
+  "blk_cov_frac",
+  "blk_entropy",
+  "blk_l1",
+  "s_mean",
+  "s_sd",
+  "s_ratio",
+  "s_sum2",
+  "di_mean",
+  "ctx_ncand",
+  "ctx_nblocks",
+  "ctx_effblocks",
+  "ctx_cov_between",
+  "ctx_src_diff"
+ ],
+ "gbm_cfg": {
+  "learning_rate": 0.05,
+  "depth": 4,
+  "l2_leaf_reg": 3.0
+ },
+ "seeds": [
+  0
+ ],
+ "catboost": "1.2.10",
+ "threads": 4,
+ "n_rows": 18600,
+ "tasks": [
+  "AL-1",
+  "AL-2",
+  "AL-3",
+  "AL-4",
+  "AL-5",
+  "AL-6",
+  "Alaska"
+ ],
+ "created": "2026-10-04 17:22:38",
+ "code_sha256": "b2ef7464df799ee369173345415cfcf9aaa15f981cef200262b993903947d1aa",
+ "index_path": "/enc/ukrprod_QoeTd/work/data/processed/xbatch/XD_placement_policy/policy/s9_gbm_index.json"
+}

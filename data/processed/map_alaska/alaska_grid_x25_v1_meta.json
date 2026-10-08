@@ -1,0 +1,2785 @@
+{
+ "created": "2026-10-05 02:44 KST",
+ "script": "scripts/1_data_prep/build_map_grid_alaska_v1.py",
+ "script_sha256": "689cdc6b13079d049d028bd2de7ab954d561e1af94016207ccda98ab191aeba2",
+ "reused_script": {
+  "path": "scripts/1_data_prep/build_map_grid_lena_v1.py",
+  "bytes": 46617,
+  "sha256": "b48b2a59a76bf4560f23b249fcf419d0b638e697149b91d1168628db6b61d181"
+ },
+ "instruction": "2026-10-05 지시: 알래스카 1 km 지도(육지, PFR ≥ 0.5, 59–71.5°N, 168–141°W, 0.009° 셀 규칙, x25 는 라벨 표와 같은 추출)",
+ "grid": {
+  "box": {
+   "lat0": 59.0,
+   "lat1": 71.5,
+   "lon0": -168.0,
+   "lon1": -141.0
+  },
+  "cell_deg": 0.009,
+  "rule": "ky = floor(lat/0.009), kx = floor(lon*cos(phi)/0.009), phi = (ky+0.5)*0.009; 셀 중심이 상자 안 · Natural Earth 10m 육지 안 · PFR(0.1° 최근접) ≥ 50 %",
+  "pfr_threshold_pct": 50.0,
+  "pfr_interpretation": "지시의 PFR ≥ 0.5 를 비율 0.5 = 50 % 로 읽었다(파일 단위 %). 대안 문턱의 셀 수는 domain_counts",
+  "domain_counts": {
+   "n_box": 1739845,
+   "n_ne_land": 1303263,
+   "n_pfr_finite": 1288179,
+   "n_land_pfr_ge50": 899633,
+   "n_land_pfr_ge10p0": 1173828,
+   "n_land_pfr_ge0p5": 1229208,
+   "n_land_pfr_missing": 45546,
+   "n_domain": 899633
+  },
+  "natural_earth_land": {
+   "path": "/home/willy010313/.local/share/cartopy/shapefiles/natural_earth/physical/ne_10m_land.shp",
+   "bytes": 7166824,
+   "sha256": "4cad3a49bc75c1a4c2f3d7efae04f2f8e63151c96764b2658effabf524331fa6"
+  },
+  "n_cells": 899633,
+  "n_rows_ky": 1289,
+  "cell_index_fn": "scripts/1_data_prep/build_ext_cells_v1.py:cell_index"
+ },
+ "covariates": {
+  "module": "scripts/1_data_prep/ext_cells_covariates_v1.py",
+  "module_sha256": "8ba43fe7fd53bb19b7b8e8d51507d2ed17e48a4779931c640d8a1e85e922eed9",
+  "stages": [
+   "stage_dem",
+   "stage_e5",
+   "stage_cci",
+   "stage_sg(allow_download=False)",
+   "새 SoilGrids 창(같은 WCS 경로)"
+  ],
+  "parts_dir": "data/processed/map_alaska/cov_parts",
+  "tags": [
+   "map_alaska_grid",
+   "map_alaska_qa"
+  ],
+  "era5land": {
+   "path": "data/raw/era5land/nh_monthly_2015-2020.nc",
+   "bytes": 343381638,
+   "sha256": "3558df2aa9b608208b8c213b3b4a8b9396e83677d94f1c6b44cbc4010c4a0692"
+  },
+  "cci_alt_files": {
+   "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1997-fv04.0.nc": "66340e7c17f55aed0824b3b9e2dd3a6f5c306b8f178a14ff0faaf71240476be9",
+   "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1998-fv04.0.nc": "b31b0cb6d5b182f048fed56ae8a0451cc368a1c159a11e60d915cbb32693118f",
+   "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-1999-fv04.0.nc": "536d7eeb844be75f181025d963d40718a794a2ad956ef1d3af2cd7427aba6da1",
+   "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2000-fv04.0.nc": "4d4575f7c4689bfb602a4064fdb6672723b0d3150bc9ee8bc4520246b7a0115a",
+   "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2001-fv04.0.nc": "fe36e0b13b5486b5518b14ba39c095949f741182b2312a8a594845b068c21430",
+   "ESACCI-PERMAFROST-L4-ALT-ERA5_MODISLST_BIASCORRECTED-AREA4_PP-2002-fv04.0.nc": "65e258d58f83022205fcc056ba7f9c32e1b43add1f87d809b6e7a23c1034e07d",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2003-fv04.0.nc": "0061d5107d47df484ee21f592afaa4677fc6ce11899ce4ee1a7c0bf7f0ef9be7",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2004-fv04.0.nc": "89dacedec58d83ee8411b5af1a19c4db868411ec089c05e5015bd0a1a7d06491",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2005-fv04.0.nc": "4f2608f2a297dbb9e4a8b81f63187102272de421739a1b5563286f2414b60bcd",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2006-fv04.0.nc": "76880460304dbeedd3df03a8aed9ec91189766fe544d63846ba4bc77f78fe961",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2007-fv04.0.nc": "bd7d3004b4300a72f0d33e55777d5d2801917b01b6b7f6555feadf6849d01616",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2008-fv04.0.nc": "d434d9e8eb30e3086fd1077b87d19c5c211c151ac7022991d7f6fc45e550c55d",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2009-fv04.0.nc": "f79b8b014484809aaf0b8494fb9206770c241d4b21dfdaab8f89a0734ddc6dbb",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2010-fv04.0.nc": "894baec86bdca53da50bdfc278b9183118caa1b3d1a1df8653480dddea6ad872",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2011-fv04.0.nc": "9048e7d1830550ea9f85cac292f75f42494b21110ab0bd5078f3f08bca5ed2cb",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2012-fv04.0.nc": "d4ab2165528cb299824c7a236b953cc5342c2c2ab03e0d52d14ea35888872747",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2013-fv04.0.nc": "6321853eabd8626677f11e0caa9b1ac2b70f507330153cffdb8462c729607a72",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2014-fv04.0.nc": "4d9bb2441d97e7a10f6e7e8fc7df32b1c508e14e01a4c211074cf19bfa490122",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2015-fv04.0.nc": "cd1f9bef713d91042510d9af179239191c91d57ac99d153b39e9c794e6efb6e6",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2016-fv04.0.nc": "87947c88f2670270e0fd2f9a7a24911cc0d9542c27720d2c0e12da26071e7b52",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2017-fv04.0.nc": "61cc6b1bbc4d68b250e35ea303f15c18c92587502e1f0f03ebc46afd8f8f0c53",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2018-fv04.0.nc": "ab563010050ab2a905d9a1ca6e4f90768cc2002bb4076614c827ca6648a05f92",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2019-fv04.0.nc": "03f77b97684f534b00130668b24668b39f0549b5499c1dfd2ab8fb6784dde7e2",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2020-fv04.0.nc": "e2b000b2d3ba0de3b2fb2905cd1e4b521c8d818694dc5f704961b46f5ef54bf4",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2021-fv04.0.nc": "0e3fba823495a9703161154e755d135c28de73a3a327ff1716bd46e499c8a5c6"
+  },
+  "soilgrids_windows": [
+   "map_alaska_v1_0",
+   "namerica"
+  ],
+  "soilgrids_files": {
+   "map_alaska_v1_0/bdod_5-15cm_mean.tif": "30950531eec35cb166fe05363ac4918502290c0666cc126823a06a51509c06cd",
+   "map_alaska_v1_0/cfvo_5-15cm_mean.tif": "224bcb230189bf6c1f95f0093123dcf4eb5051d1466a908882d12362c5b89241",
+   "map_alaska_v1_0/clay_5-15cm_mean.tif": "ced6e4d10d64d21f52d4c33b2c2c17e1dfc5cb19093a5311d5e061b63d00f1f8",
+   "map_alaska_v1_0/phh2o_5-15cm_mean.tif": "746c9bd4b34f220934a239c91c9580c71fe0fc7a495068d28175246e70a8301f",
+   "map_alaska_v1_0/sand_5-15cm_mean.tif": "671ba63090b428a59b429ee75cb8e2049be1251c285cd47612a7356f624b8803",
+   "map_alaska_v1_0/silt_5-15cm_mean.tif": "2bd91b15c4831f247e1c496f4b254b1e4c9342a185836e335c1dc7a59621a94e",
+   "map_alaska_v1_0/soc_0-5cm_mean.tif": "483e39020e343f11545c6a3d58315e4743cc4dc39127142c158ba2b6dcb874d2",
+   "map_alaska_v1_0/soc_15-30cm_mean.tif": "cde8b7ab03c88caf03b96a3f590b543966dac506adfa3717b1eb22ee4e71e016",
+   "map_alaska_v1_0/soc_5-15cm_mean.tif": "e95bfecd36bb46266067729f696f5ae75ebfcca3b5b40e4f40c77c1ed4862cd2",
+   "namerica/bdod_5-15cm_mean.tif": "f5f97cf0da63b79c20102e429386d1d482e1438e094b163eafcb61b95d6cfaf3",
+   "namerica/cfvo_5-15cm_mean.tif": "0fa98aacc8aa4900572fd120f3c3c4a605a0ac95a0d8966a208b05203eca9738",
+   "namerica/clay_5-15cm_mean.tif": "349aee55cccabda3d267ce54ac2fc2e7df821db5c94b6be50d32200d05ab8e1a",
+   "namerica/phh2o_5-15cm_mean.tif": "e3c62aa40e4581c306f4324d4adffe8a6ca24eee41bbcd24a0637d882167e114",
+   "namerica/sand_5-15cm_mean.tif": "2d651029b4fc2b8af34cc8cc0254ef7ec96a8c5c222115c9a62888a522b79066",
+   "namerica/silt_5-15cm_mean.tif": "6f1f10228afeaa6589da86cf327a60c9dae6cb3965faba308a2071dcfdfebe87",
+   "namerica/soc_0-5cm_mean.tif": "3b1c5cce8a4b57be69f2b4a913d29eadb566a17cd8760bd1be900ed7b13c74e5",
+   "namerica/soc_15-30cm_mean.tif": "c4f00582c7981f3691e783e0c99eb0657a7505320e103ce2b3791fd2c52b1049",
+   "namerica/soc_5-15cm_mean.tif": "ef44e46b1cb841aa3a5898ac36ca44c694813cc2dc5d998ffc1c027032e9e94b"
+  },
+  "soilgrids_new_window_meta": {
+   "path": "data/raw/soilgrids_wcs/windows_wcs_meta_map_alaska_v1.json",
+   "bytes": 564,
+   "sha256": "cf49398f8e9f59c8166e1c03d8b10c820f4f3e7580a5b17b02ea9dd044c49e61"
+  },
+  "sg_new_windows": null,
+  "soil_tdd_le0_set_nan": 22131,
+  "e5_fallback": {
+   "0.0": 892712,
+   "0.2": 6913,
+   "0.5": 8
+  },
+  "soil_fallback": {
+   "0.0": 892712,
+   "0.1": 6699,
+   "0.2": 214,
+   "0.3": 8
+  },
+  "effective_resolution": "ERA5-Land 0.1°(기후 8열·토양 도일·s), SoilGrids 창 약 5 km(9열), CCI ALT 약 1 km(2열), DEM 30 m 창(6열)"
+ },
+ "dem_tiles": [
+  {
+   "tlat": 59,
+   "tlon": -151,
+   "tile": "Copernicus_DSM_COG_10_N59_00_W151_00_DEM",
+   "n_cells": 189,
+   "status": "exists",
+   "bytes": 16371916
+  },
+  {
+   "tlat": 60,
+   "tlon": -160,
+   "tile": "Copernicus_DSM_COG_10_N60_00_W160_00_DEM",
+   "n_cells": 181,
+   "status": "exists",
+   "bytes": 22574833
+  },
+  {
+   "tlat": 60,
+   "tlon": -154,
+   "tile": "Copernicus_DSM_COG_10_N60_00_W154_00_DEM",
+   "n_cells": 1901,
+   "status": "exists",
+   "bytes": 22096447
+  },
+  {
+   "tlat": 60,
+   "tlon": -153,
+   "tile": "Copernicus_DSM_COG_10_N60_00_W153_00_DEM",
+   "n_cells": 59,
+   "status": "exists",
+   "bytes": 17163412
+  },
+  {
+   "tlat": 60,
+   "tlon": -151,
+   "tile": "Copernicus_DSM_COG_10_N60_00_W151_00_DEM",
+   "n_cells": 122,
+   "status": "exists",
+   "bytes": 20701525
+  },
+  {
+   "tlat": 60,
+   "tlon": -150,
+   "tile": "Copernicus_DSM_COG_10_N60_00_W150_00_DEM",
+   "n_cells": 300,
+   "status": "exists",
+   "bytes": 21514705
+  },
+  {
+   "tlat": 60,
+   "tlon": -149,
+   "tile": "Copernicus_DSM_COG_10_N60_00_W149_00_DEM",
+   "n_cells": 402,
+   "status": "exists",
+   "bytes": 19232491
+  },
+  {
+   "tlat": 60,
+   "tlon": -147,
+   "tile": "Copernicus_DSM_COG_10_N60_00_W147_00_DEM",
+   "n_cells": 221,
+   "status": "exists",
+   "bytes": 7878393
+  },
+  {
+   "tlat": 60,
+   "tlon": -146,
+   "tile": "Copernicus_DSM_COG_10_N60_00_W146_00_DEM",
+   "n_cells": 713,
+   "status": "exists",
+   "bytes": 14319908
+  },
+  {
+   "tlat": 60,
+   "tlon": -145,
+   "tile": "Copernicus_DSM_COG_10_N60_00_W145_00_DEM",
+   "n_cells": 608,
+   "status": "exists",
+   "bytes": 20038984
+  },
+  {
+   "tlat": 60,
+   "tlon": -144,
+   "tile": "Copernicus_DSM_COG_10_N60_00_W144_00_DEM",
+   "n_cells": 818,
+   "status": "exists",
+   "bytes": 21217824
+  },
+  {
+   "tlat": 60,
+   "tlon": -143,
+   "tile": "Copernicus_DSM_COG_10_N60_00_W143_00_DEM",
+   "n_cells": 2053,
+   "status": "exists",
+   "bytes": 20314918
+  },
+  {
+   "tlat": 60,
+   "tlon": -142,
+   "tile": "Copernicus_DSM_COG_10_N60_00_W142_00_DEM",
+   "n_cells": 1758,
+   "status": "exists",
+   "bytes": 20506061
+  },
+  {
+   "tlat": 61,
+   "tlon": -166,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W166_00_DEM",
+   "n_cells": 18,
+   "status": "exists",
+   "bytes": 18948173
+  },
+  {
+   "tlat": 61,
+   "tlon": -165,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W165_00_DEM",
+   "n_cells": 972,
+   "status": "exists",
+   "bytes": 23863171
+  },
+  {
+   "tlat": 61,
+   "tlon": -164,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W164_00_DEM",
+   "n_cells": 1758,
+   "status": "exists",
+   "bytes": 25954012
+  },
+  {
+   "tlat": 61,
+   "tlon": -163,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W163_00_DEM",
+   "n_cells": 1053,
+   "status": "exists",
+   "bytes": 22913391
+  },
+  {
+   "tlat": 61,
+   "tlon": -162,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W162_00_DEM",
+   "n_cells": 58,
+   "status": "exists",
+   "bytes": 24427081
+  },
+  {
+   "tlat": 61,
+   "tlon": -160,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W160_00_DEM",
+   "n_cells": 58,
+   "status": "exists",
+   "bytes": 23595871
+  },
+  {
+   "tlat": 61,
+   "tlon": -159,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W159_00_DEM",
+   "n_cells": 231,
+   "status": "exists",
+   "bytes": 23004040
+  },
+  {
+   "tlat": 61,
+   "tlon": -155,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W155_00_DEM",
+   "n_cells": 1354,
+   "status": "exists",
+   "bytes": 21625060
+  },
+  {
+   "tlat": 61,
+   "tlon": -154,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W154_00_DEM",
+   "n_cells": 4533,
+   "status": "exists",
+   "bytes": 21909251
+  },
+  {
+   "tlat": 61,
+   "tlon": -153,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W153_00_DEM",
+   "n_cells": 2655,
+   "status": "exists",
+   "bytes": 21737409
+  },
+  {
+   "tlat": 61,
+   "tlon": -150,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W150_00_DEM",
+   "n_cells": 809,
+   "status": "exists",
+   "bytes": 21691640
+  },
+  {
+   "tlat": 61,
+   "tlon": -149,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W149_00_DEM",
+   "n_cells": 3029,
+   "status": "exists",
+   "bytes": 22028553
+  },
+  {
+   "tlat": 61,
+   "tlon": -148,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W148_00_DEM",
+   "n_cells": 1774,
+   "status": "exists",
+   "bytes": 21042519
+  },
+  {
+   "tlat": 61,
+   "tlon": -147,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W147_00_DEM",
+   "n_cells": 1351,
+   "status": "exists",
+   "bytes": 20980965
+  },
+  {
+   "tlat": 61,
+   "tlon": -146,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W146_00_DEM",
+   "n_cells": 826,
+   "status": "exists",
+   "bytes": 21221113
+  },
+  {
+   "tlat": 61,
+   "tlon": -145,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W145_00_DEM",
+   "n_cells": 1578,
+   "status": "exists",
+   "bytes": 21882303
+  },
+  {
+   "tlat": 61,
+   "tlon": -144,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W144_00_DEM",
+   "n_cells": 2499,
+   "status": "exists",
+   "bytes": 21231310
+  },
+  {
+   "tlat": 61,
+   "tlon": -143,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W143_00_DEM",
+   "n_cells": 3297,
+   "status": "exists",
+   "bytes": 21369694
+  },
+  {
+   "tlat": 61,
+   "tlon": -142,
+   "tile": "Copernicus_DSM_COG_10_N61_00_W142_00_DEM",
+   "n_cells": 4890,
+   "status": "exists",
+   "bytes": 20879782
+  },
+  {
+   "tlat": 62,
+   "tlon": -165,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W165_00_DEM",
+   "n_cells": 2155,
+   "status": "exists",
+   "bytes": 23429743
+  },
+  {
+   "tlat": 62,
+   "tlon": -164,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W164_00_DEM",
+   "n_cells": 4145,
+   "status": "exists",
+   "bytes": 24669386
+  },
+  {
+   "tlat": 62,
+   "tlon": -163,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W163_00_DEM",
+   "n_cells": 2770,
+   "status": "exists",
+   "bytes": 23757413
+  },
+  {
+   "tlat": 62,
+   "tlon": -162,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W162_00_DEM",
+   "n_cells": 2135,
+   "status": "exists",
+   "bytes": 23292299
+  },
+  {
+   "tlat": 62,
+   "tlon": -160,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W160_00_DEM",
+   "n_cells": 287,
+   "status": "exists",
+   "bytes": 24193122
+  },
+  {
+   "tlat": 62,
+   "tlon": -159,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W159_00_DEM",
+   "n_cells": 1343,
+   "status": "exists",
+   "bytes": 23362590
+  },
+  {
+   "tlat": 62,
+   "tlon": -158,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W158_00_DEM",
+   "n_cells": 1114,
+   "status": "exists",
+   "bytes": 22640280
+  },
+  {
+   "tlat": 62,
+   "tlon": -157,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W157_00_DEM",
+   "n_cells": 612,
+   "status": "exists",
+   "bytes": 22743727
+  },
+  {
+   "tlat": 62,
+   "tlon": -155,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W155_00_DEM",
+   "n_cells": 799,
+   "status": "exists",
+   "bytes": 21365249
+  },
+  {
+   "tlat": 62,
+   "tlon": -154,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W154_00_DEM",
+   "n_cells": 2283,
+   "status": "exists",
+   "bytes": 21221977
+  },
+  {
+   "tlat": 62,
+   "tlon": -153,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W153_00_DEM",
+   "n_cells": 2454,
+   "status": "exists",
+   "bytes": 21750252
+  },
+  {
+   "tlat": 62,
+   "tlon": -152,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W152_00_DEM",
+   "n_cells": 1563,
+   "status": "exists",
+   "bytes": 22068608
+  },
+  {
+   "tlat": 62,
+   "tlon": -151,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W151_00_DEM",
+   "n_cells": 555,
+   "status": "exists",
+   "bytes": 22701587
+  },
+  {
+   "tlat": 62,
+   "tlon": -150,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W150_00_DEM",
+   "n_cells": 1242,
+   "status": "exists",
+   "bytes": 22002932
+  },
+  {
+   "tlat": 62,
+   "tlon": -149,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W149_00_DEM",
+   "n_cells": 5525,
+   "status": "exists",
+   "bytes": 21223156
+  },
+  {
+   "tlat": 62,
+   "tlon": -148,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W148_00_DEM",
+   "n_cells": 5412,
+   "status": "exists",
+   "bytes": 20359629
+  },
+  {
+   "tlat": 62,
+   "tlon": -147,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W147_00_DEM",
+   "n_cells": 3302,
+   "status": "exists",
+   "bytes": 19305846
+  },
+  {
+   "tlat": 62,
+   "tlon": -146,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W146_00_DEM",
+   "n_cells": 1185,
+   "status": "exists",
+   "bytes": 19771979
+  },
+  {
+   "tlat": 62,
+   "tlon": -145,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W145_00_DEM",
+   "n_cells": 4444,
+   "status": "exists",
+   "bytes": 20331370
+  },
+  {
+   "tlat": 62,
+   "tlon": -144,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W144_00_DEM",
+   "n_cells": 5578,
+   "status": "exists",
+   "bytes": 20934875
+  },
+  {
+   "tlat": 62,
+   "tlon": -143,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W143_00_DEM",
+   "n_cells": 5697,
+   "status": "exists",
+   "bytes": 20888338
+  },
+  {
+   "tlat": 62,
+   "tlon": -142,
+   "tile": "Copernicus_DSM_COG_10_N62_00_W142_00_DEM",
+   "n_cells": 5693,
+   "status": "exists",
+   "bytes": 20377052
+  },
+  {
+   "tlat": 63,
+   "tlon": -165,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W165_00_DEM",
+   "n_cells": 604,
+   "status": "exists",
+   "bytes": 3796620
+  },
+  {
+   "tlat": 63,
+   "tlon": -164,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W164_00_DEM",
+   "n_cells": 653,
+   "status": "exists",
+   "bytes": 3351342
+  },
+  {
+   "tlat": 63,
+   "tlon": -163,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W163_00_DEM",
+   "n_cells": 2049,
+   "status": "exists",
+   "bytes": 8924777
+  },
+  {
+   "tlat": 63,
+   "tlon": -162,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W162_00_DEM",
+   "n_cells": 2700,
+   "status": "exists",
+   "bytes": 10479876
+  },
+  {
+   "tlat": 63,
+   "tlon": -161,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W161_00_DEM",
+   "n_cells": 3936,
+   "status": "exists",
+   "bytes": 21603762
+  },
+  {
+   "tlat": 63,
+   "tlon": -160,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W160_00_DEM",
+   "n_cells": 1199,
+   "status": "exists",
+   "bytes": 24273795
+  },
+  {
+   "tlat": 63,
+   "tlon": -159,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W159_00_DEM",
+   "n_cells": 1273,
+   "status": "exists",
+   "bytes": 24263895
+  },
+  {
+   "tlat": 63,
+   "tlon": -158,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W158_00_DEM",
+   "n_cells": 3091,
+   "status": "exists",
+   "bytes": 23696007
+  },
+  {
+   "tlat": 63,
+   "tlon": -157,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W157_00_DEM",
+   "n_cells": 4633,
+   "status": "exists",
+   "bytes": 22743644
+  },
+  {
+   "tlat": 63,
+   "tlon": -156,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W156_00_DEM",
+   "n_cells": 4451,
+   "status": "exists",
+   "bytes": 22258652
+  },
+  {
+   "tlat": 63,
+   "tlon": -155,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W155_00_DEM",
+   "n_cells": 3408,
+   "status": "exists",
+   "bytes": 22445611
+  },
+  {
+   "tlat": 63,
+   "tlon": -154,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W154_00_DEM",
+   "n_cells": 3503,
+   "status": "exists",
+   "bytes": 21795611
+  },
+  {
+   "tlat": 63,
+   "tlon": -153,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W153_00_DEM",
+   "n_cells": 2952,
+   "status": "exists",
+   "bytes": 20660708
+  },
+  {
+   "tlat": 63,
+   "tlon": -152,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W152_00_DEM",
+   "n_cells": 2283,
+   "status": "exists",
+   "bytes": 20779626
+  },
+  {
+   "tlat": 63,
+   "tlon": -151,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W151_00_DEM",
+   "n_cells": 4711,
+   "status": "exists",
+   "bytes": 21410977
+  },
+  {
+   "tlat": 63,
+   "tlon": -150,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W150_00_DEM",
+   "n_cells": 5223,
+   "status": "exists",
+   "bytes": 21296486
+  },
+  {
+   "tlat": 63,
+   "tlon": -149,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W149_00_DEM",
+   "n_cells": 5508,
+   "status": "exists",
+   "bytes": 21137428
+  },
+  {
+   "tlat": 63,
+   "tlon": -148,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W148_00_DEM",
+   "n_cells": 5393,
+   "status": "exists",
+   "bytes": 20729979
+  },
+  {
+   "tlat": 63,
+   "tlon": -147,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W147_00_DEM",
+   "n_cells": 4627,
+   "status": "exists",
+   "bytes": 20702951
+  },
+  {
+   "tlat": 63,
+   "tlon": -146,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W146_00_DEM",
+   "n_cells": 3720,
+   "status": "exists",
+   "bytes": 20872838
+  },
+  {
+   "tlat": 63,
+   "tlon": -145,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W145_00_DEM",
+   "n_cells": 3496,
+   "status": "exists",
+   "bytes": 21323288
+  },
+  {
+   "tlat": 63,
+   "tlon": -144,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W144_00_DEM",
+   "n_cells": 5505,
+   "status": "exists",
+   "bytes": 20891243
+  },
+  {
+   "tlat": 63,
+   "tlon": -143,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W143_00_DEM",
+   "n_cells": 5501,
+   "status": "exists",
+   "bytes": 20034558
+  },
+  {
+   "tlat": 63,
+   "tlon": -142,
+   "tile": "Copernicus_DSM_COG_10_N63_00_W142_00_DEM",
+   "n_cells": 5504,
+   "status": "exists",
+   "bytes": 20506175
+  },
+  {
+   "tlat": 64,
+   "tlon": -167,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W167_00_DEM",
+   "n_cells": 972,
+   "status": "exists",
+   "bytes": 4563195
+  },
+  {
+   "tlat": 64,
+   "tlon": -166,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W166_00_DEM",
+   "n_cells": 2566,
+   "status": "exists",
+   "bytes": 11541559
+  },
+  {
+   "tlat": 64,
+   "tlon": -165,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W165_00_DEM",
+   "n_cells": 2421,
+   "status": "exists",
+   "bytes": 11064435
+  },
+  {
+   "tlat": 64,
+   "tlon": -164,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W164_00_DEM",
+   "n_cells": 2298,
+   "status": "exists",
+   "bytes": 10992989
+  },
+  {
+   "tlat": 64,
+   "tlon": -163,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W163_00_DEM",
+   "n_cells": 2333,
+   "status": "exists",
+   "bytes": 10635425
+  },
+  {
+   "tlat": 64,
+   "tlon": -162,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W162_00_DEM",
+   "n_cells": 1351,
+   "status": "exists",
+   "bytes": 7094567
+  },
+  {
+   "tlat": 64,
+   "tlon": -161,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W161_00_DEM",
+   "n_cells": 5002,
+   "status": "exists",
+   "bytes": 22215481
+  },
+  {
+   "tlat": 64,
+   "tlon": -160,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W160_00_DEM",
+   "n_cells": 4778,
+   "status": "exists",
+   "bytes": 22722770
+  },
+  {
+   "tlat": 64,
+   "tlon": -159,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W159_00_DEM",
+   "n_cells": 2786,
+   "status": "exists",
+   "bytes": 23612921
+  },
+  {
+   "tlat": 64,
+   "tlon": -158,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W158_00_DEM",
+   "n_cells": 4885,
+   "status": "exists",
+   "bytes": 22954092
+  },
+  {
+   "tlat": 64,
+   "tlon": -157,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W157_00_DEM",
+   "n_cells": 5310,
+   "status": "exists",
+   "bytes": 23029372
+  },
+  {
+   "tlat": 64,
+   "tlon": -156,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W156_00_DEM",
+   "n_cells": 4527,
+   "status": "exists",
+   "bytes": 23099892
+  },
+  {
+   "tlat": 64,
+   "tlon": -155,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W155_00_DEM",
+   "n_cells": 4268,
+   "status": "exists",
+   "bytes": 23193893
+  },
+  {
+   "tlat": 64,
+   "tlon": -154,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W154_00_DEM",
+   "n_cells": 5255,
+   "status": "exists",
+   "bytes": 22614410
+  },
+  {
+   "tlat": 64,
+   "tlon": -153,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W153_00_DEM",
+   "n_cells": 5310,
+   "status": "exists",
+   "bytes": 21881258
+  },
+  {
+   "tlat": 64,
+   "tlon": -152,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W152_00_DEM",
+   "n_cells": 5312,
+   "status": "exists",
+   "bytes": 22320379
+  },
+  {
+   "tlat": 64,
+   "tlon": -151,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W151_00_DEM",
+   "n_cells": 5310,
+   "status": "exists",
+   "bytes": 22355394
+  },
+  {
+   "tlat": 64,
+   "tlon": -150,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W150_00_DEM",
+   "n_cells": 5309,
+   "status": "exists",
+   "bytes": 21976073
+  },
+  {
+   "tlat": 64,
+   "tlon": -149,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W149_00_DEM",
+   "n_cells": 5307,
+   "status": "exists",
+   "bytes": 21769457
+  },
+  {
+   "tlat": 64,
+   "tlon": -148,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W148_00_DEM",
+   "n_cells": 5314,
+   "status": "exists",
+   "bytes": 21176113
+  },
+  {
+   "tlat": 64,
+   "tlon": -147,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W147_00_DEM",
+   "n_cells": 4081,
+   "status": "exists",
+   "bytes": 21785056
+  },
+  {
+   "tlat": 64,
+   "tlon": -146,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W146_00_DEM",
+   "n_cells": 4668,
+   "status": "exists",
+   "bytes": 21478688
+  },
+  {
+   "tlat": 64,
+   "tlon": -145,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W145_00_DEM",
+   "n_cells": 4829,
+   "status": "exists",
+   "bytes": 21159453
+  },
+  {
+   "tlat": 64,
+   "tlon": -144,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W144_00_DEM",
+   "n_cells": 5316,
+   "status": "downloaded",
+   "bytes": 20474571
+  },
+  {
+   "tlat": 64,
+   "tlon": -143,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W143_00_DEM",
+   "n_cells": 5303,
+   "status": "exists",
+   "bytes": 20703014
+  },
+  {
+   "tlat": 64,
+   "tlon": -142,
+   "tile": "Copernicus_DSM_COG_10_N64_00_W142_00_DEM",
+   "n_cells": 5312,
+   "status": "exists",
+   "bytes": 21370006
+  },
+  {
+   "tlat": 65,
+   "tlon": -168,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W168_00_DEM",
+   "n_cells": 1795,
+   "status": "exists",
+   "bytes": 8350765
+  },
+  {
+   "tlat": 65,
+   "tlon": -167,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W167_00_DEM",
+   "n_cells": 4245,
+   "status": "exists",
+   "bytes": 19141111
+  },
+  {
+   "tlat": 65,
+   "tlon": -166,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W166_00_DEM",
+   "n_cells": 5117,
+   "status": "exists",
+   "bytes": 22167548
+  },
+  {
+   "tlat": 65,
+   "tlon": -165,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W165_00_DEM",
+   "n_cells": 5112,
+   "status": "exists",
+   "bytes": 22026096
+  },
+  {
+   "tlat": 65,
+   "tlon": -164,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W164_00_DEM",
+   "n_cells": 5116,
+   "status": "exists",
+   "bytes": 21192068
+  },
+  {
+   "tlat": 65,
+   "tlon": -163,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W163_00_DEM",
+   "n_cells": 5117,
+   "status": "exists",
+   "bytes": 21995296
+  },
+  {
+   "tlat": 65,
+   "tlon": -162,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W162_00_DEM",
+   "n_cells": 5104,
+   "status": "exists",
+   "bytes": 22773904
+  },
+  {
+   "tlat": 65,
+   "tlon": -161,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W161_00_DEM",
+   "n_cells": 5113,
+   "status": "exists",
+   "bytes": 22374049
+  },
+  {
+   "tlat": 65,
+   "tlon": -160,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W160_00_DEM",
+   "n_cells": 5116,
+   "status": "exists",
+   "bytes": 21606601
+  },
+  {
+   "tlat": 65,
+   "tlon": -159,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W159_00_DEM",
+   "n_cells": 5111,
+   "status": "exists",
+   "bytes": 22182237
+  },
+  {
+   "tlat": 65,
+   "tlon": -158,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W158_00_DEM",
+   "n_cells": 5125,
+   "status": "exists",
+   "bytes": 23223101
+  },
+  {
+   "tlat": 65,
+   "tlon": -157,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W157_00_DEM",
+   "n_cells": 5109,
+   "status": "exists",
+   "bytes": 23070644
+  },
+  {
+   "tlat": 65,
+   "tlon": -156,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W156_00_DEM",
+   "n_cells": 5117,
+   "status": "exists",
+   "bytes": 22615876
+  },
+  {
+   "tlat": 65,
+   "tlon": -155,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W155_00_DEM",
+   "n_cells": 5113,
+   "status": "exists",
+   "bytes": 21765629
+  },
+  {
+   "tlat": 65,
+   "tlon": -154,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W154_00_DEM",
+   "n_cells": 5115,
+   "status": "exists",
+   "bytes": 21681308
+  },
+  {
+   "tlat": 65,
+   "tlon": -153,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W153_00_DEM",
+   "n_cells": 5116,
+   "status": "exists",
+   "bytes": 21727736
+  },
+  {
+   "tlat": 65,
+   "tlon": -152,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W152_00_DEM",
+   "n_cells": 5114,
+   "status": "exists",
+   "bytes": 21632932
+  },
+  {
+   "tlat": 65,
+   "tlon": -151,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W151_00_DEM",
+   "n_cells": 5115,
+   "status": "exists",
+   "bytes": 22314159
+  },
+  {
+   "tlat": 65,
+   "tlon": -150,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W150_00_DEM",
+   "n_cells": 5114,
+   "status": "exists",
+   "bytes": 22240007
+  },
+  {
+   "tlat": 65,
+   "tlon": -149,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W149_00_DEM",
+   "n_cells": 5115,
+   "status": "exists",
+   "bytes": 22092615
+  },
+  {
+   "tlat": 65,
+   "tlon": -148,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W148_00_DEM",
+   "n_cells": 5113,
+   "status": "exists",
+   "bytes": 21281135
+  },
+  {
+   "tlat": 65,
+   "tlon": -147,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W147_00_DEM",
+   "n_cells": 5118,
+   "status": "exists",
+   "bytes": 21201086
+  },
+  {
+   "tlat": 65,
+   "tlon": -146,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W146_00_DEM",
+   "n_cells": 5115,
+   "status": "exists",
+   "bytes": 20822756
+  },
+  {
+   "tlat": 65,
+   "tlon": -145,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W145_00_DEM",
+   "n_cells": 5114,
+   "status": "exists",
+   "bytes": 20974744
+  },
+  {
+   "tlat": 65,
+   "tlon": -144,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W144_00_DEM",
+   "n_cells": 5116,
+   "status": "exists",
+   "bytes": 21267705
+  },
+  {
+   "tlat": 65,
+   "tlon": -143,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W143_00_DEM",
+   "n_cells": 5115,
+   "status": "exists",
+   "bytes": 21495990
+  },
+  {
+   "tlat": 65,
+   "tlon": -142,
+   "tile": "Copernicus_DSM_COG_10_N65_00_W142_00_DEM",
+   "n_cells": 5115,
+   "status": "exists",
+   "bytes": 21675385
+  },
+  {
+   "tlat": 66,
+   "tlon": -167,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W167_00_DEM",
+   "n_cells": 555,
+   "status": "exists",
+   "bytes": 2723127
+  },
+  {
+   "tlat": 66,
+   "tlon": -166,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W166_00_DEM",
+   "n_cells": 1682,
+   "status": "exists",
+   "bytes": 8180917
+  },
+  {
+   "tlat": 66,
+   "tlon": -165,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W165_00_DEM",
+   "n_cells": 2797,
+   "status": "exists",
+   "bytes": 12837328
+  },
+  {
+   "tlat": 66,
+   "tlon": -164,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W164_00_DEM",
+   "n_cells": 814,
+   "status": "exists",
+   "bytes": 4009185
+  },
+  {
+   "tlat": 66,
+   "tlon": -163,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W163_00_DEM",
+   "n_cells": 833,
+   "status": "exists",
+   "bytes": 4106830
+  },
+  {
+   "tlat": 66,
+   "tlon": -162,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W162_00_DEM",
+   "n_cells": 2947,
+   "status": "exists",
+   "bytes": 15938525
+  },
+  {
+   "tlat": 66,
+   "tlon": -161,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W161_00_DEM",
+   "n_cells": 4021,
+   "status": "exists",
+   "bytes": 19163382
+  },
+  {
+   "tlat": 66,
+   "tlon": -160,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W160_00_DEM",
+   "n_cells": 4916,
+   "status": "exists",
+   "bytes": 22668763
+  },
+  {
+   "tlat": 66,
+   "tlon": -159,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W159_00_DEM",
+   "n_cells": 4919,
+   "status": "exists",
+   "bytes": 23483626
+  },
+  {
+   "tlat": 66,
+   "tlon": -158,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W158_00_DEM",
+   "n_cells": 4919,
+   "status": "exists",
+   "bytes": 22276259
+  },
+  {
+   "tlat": 66,
+   "tlon": -157,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W157_00_DEM",
+   "n_cells": 4911,
+   "status": "exists",
+   "bytes": 22058679
+  },
+  {
+   "tlat": 66,
+   "tlon": -156,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W156_00_DEM",
+   "n_cells": 4925,
+   "status": "exists",
+   "bytes": 22226519
+  },
+  {
+   "tlat": 66,
+   "tlon": -155,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W155_00_DEM",
+   "n_cells": 4921,
+   "status": "exists",
+   "bytes": 21847677
+  },
+  {
+   "tlat": 66,
+   "tlon": -154,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W154_00_DEM",
+   "n_cells": 4916,
+   "status": "exists",
+   "bytes": 21718007
+  },
+  {
+   "tlat": 66,
+   "tlon": -153,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W153_00_DEM",
+   "n_cells": 4918,
+   "status": "exists",
+   "bytes": 21544114
+  },
+  {
+   "tlat": 66,
+   "tlon": -152,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W152_00_DEM",
+   "n_cells": 4921,
+   "status": "exists",
+   "bytes": 21073750
+  },
+  {
+   "tlat": 66,
+   "tlon": -151,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W151_00_DEM",
+   "n_cells": 4916,
+   "status": "exists",
+   "bytes": 20874500
+  },
+  {
+   "tlat": 66,
+   "tlon": -150,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W150_00_DEM",
+   "n_cells": 4921,
+   "status": "exists",
+   "bytes": 21313805
+  },
+  {
+   "tlat": 66,
+   "tlon": -149,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W149_00_DEM",
+   "n_cells": 4921,
+   "status": "exists",
+   "bytes": 21470820
+  },
+  {
+   "tlat": 66,
+   "tlon": -148,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W148_00_DEM",
+   "n_cells": 4915,
+   "status": "exists",
+   "bytes": 21614597
+  },
+  {
+   "tlat": 66,
+   "tlon": -147,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W147_00_DEM",
+   "n_cells": 4916,
+   "status": "exists",
+   "bytes": 21715830
+  },
+  {
+   "tlat": 66,
+   "tlon": -146,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W146_00_DEM",
+   "n_cells": 4921,
+   "status": "exists",
+   "bytes": 21526733
+  },
+  {
+   "tlat": 66,
+   "tlon": -145,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W145_00_DEM",
+   "n_cells": 4919,
+   "status": "exists",
+   "bytes": 20763320
+  },
+  {
+   "tlat": 66,
+   "tlon": -144,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W144_00_DEM",
+   "n_cells": 4919,
+   "status": "exists",
+   "bytes": 21458897
+  },
+  {
+   "tlat": 66,
+   "tlon": -143,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W143_00_DEM",
+   "n_cells": 4918,
+   "status": "exists",
+   "bytes": 21214452
+  },
+  {
+   "tlat": 66,
+   "tlon": -142,
+   "tile": "Copernicus_DSM_COG_10_N66_00_W142_00_DEM",
+   "n_cells": 4916,
+   "status": "exists",
+   "bytes": 21000384
+  },
+  {
+   "tlat": 67,
+   "tlon": -166,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W166_00_DEM",
+   "n_cells": 52,
+   "status": "exists",
+   "bytes": 384342
+  },
+  {
+   "tlat": 67,
+   "tlon": -165,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W165_00_DEM",
+   "n_cells": 1243,
+   "status": "exists",
+   "bytes": 6335978
+  },
+  {
+   "tlat": 67,
+   "tlon": -164,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W164_00_DEM",
+   "n_cells": 4008,
+   "status": "exists",
+   "bytes": 18903624
+  },
+  {
+   "tlat": 67,
+   "tlon": -163,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W163_00_DEM",
+   "n_cells": 4573,
+   "status": "exists",
+   "bytes": 22609978
+  },
+  {
+   "tlat": 67,
+   "tlon": -162,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W162_00_DEM",
+   "n_cells": 4683,
+   "status": "exists",
+   "bytes": 22122475
+  },
+  {
+   "tlat": 67,
+   "tlon": -161,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W161_00_DEM",
+   "n_cells": 4765,
+   "status": "exists",
+   "bytes": 22276445
+  },
+  {
+   "tlat": 67,
+   "tlon": -160,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W160_00_DEM",
+   "n_cells": 4761,
+   "status": "exists",
+   "bytes": 22547236
+  },
+  {
+   "tlat": 67,
+   "tlon": -159,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W159_00_DEM",
+   "n_cells": 4761,
+   "status": "exists",
+   "bytes": 22146736
+  },
+  {
+   "tlat": 67,
+   "tlon": -158,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W158_00_DEM",
+   "n_cells": 4764,
+   "status": "exists",
+   "bytes": 21733901
+  },
+  {
+   "tlat": 67,
+   "tlon": -157,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W157_00_DEM",
+   "n_cells": 4763,
+   "status": "exists",
+   "bytes": 21749441
+  },
+  {
+   "tlat": 67,
+   "tlon": -156,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W156_00_DEM",
+   "n_cells": 4769,
+   "status": "exists",
+   "bytes": 21444497
+  },
+  {
+   "tlat": 67,
+   "tlon": -155,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W155_00_DEM",
+   "n_cells": 4755,
+   "status": "exists",
+   "bytes": 21386701
+  },
+  {
+   "tlat": 67,
+   "tlon": -154,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W154_00_DEM",
+   "n_cells": 4762,
+   "status": "exists",
+   "bytes": 21461422
+  },
+  {
+   "tlat": 67,
+   "tlon": -153,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W153_00_DEM",
+   "n_cells": 4761,
+   "status": "exists",
+   "bytes": 21402868
+  },
+  {
+   "tlat": 67,
+   "tlon": -152,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W152_00_DEM",
+   "n_cells": 4764,
+   "status": "exists",
+   "bytes": 21325784
+  },
+  {
+   "tlat": 67,
+   "tlon": -151,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W151_00_DEM",
+   "n_cells": 4760,
+   "status": "exists",
+   "bytes": 21374634
+  },
+  {
+   "tlat": 67,
+   "tlon": -150,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W150_00_DEM",
+   "n_cells": 4761,
+   "status": "exists",
+   "bytes": 20915907
+  },
+  {
+   "tlat": 67,
+   "tlon": -149,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W149_00_DEM",
+   "n_cells": 4764,
+   "status": "exists",
+   "bytes": 20622095
+  },
+  {
+   "tlat": 67,
+   "tlon": -148,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W148_00_DEM",
+   "n_cells": 4763,
+   "status": "exists",
+   "bytes": 20606675
+  },
+  {
+   "tlat": 67,
+   "tlon": -147,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W147_00_DEM",
+   "n_cells": 4761,
+   "status": "exists",
+   "bytes": 20382324
+  },
+  {
+   "tlat": 67,
+   "tlon": -146,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W146_00_DEM",
+   "n_cells": 4763,
+   "status": "exists",
+   "bytes": 20428168
+  },
+  {
+   "tlat": 67,
+   "tlon": -145,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W145_00_DEM",
+   "n_cells": 4764,
+   "status": "exists",
+   "bytes": 20215047
+  },
+  {
+   "tlat": 67,
+   "tlon": -144,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W144_00_DEM",
+   "n_cells": 4761,
+   "status": "exists",
+   "bytes": 20163831
+  },
+  {
+   "tlat": 67,
+   "tlon": -143,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W143_00_DEM",
+   "n_cells": 4760,
+   "status": "exists",
+   "bytes": 20131922
+  },
+  {
+   "tlat": 67,
+   "tlon": -142,
+   "tile": "Copernicus_DSM_COG_10_N67_00_W142_00_DEM",
+   "n_cells": 4764,
+   "status": "exists",
+   "bytes": 20130991
+  },
+  {
+   "tlat": 68,
+   "tlon": -167,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W167_00_DEM",
+   "n_cells": 871,
+   "status": "exists",
+   "bytes": 4355686
+  },
+  {
+   "tlat": 68,
+   "tlon": -166,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W166_00_DEM",
+   "n_cells": 3659,
+   "status": "exists",
+   "bytes": 18204184
+  },
+  {
+   "tlat": 68,
+   "tlon": -165,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W165_00_DEM",
+   "n_cells": 4205,
+   "status": "exists",
+   "bytes": 20097215
+  },
+  {
+   "tlat": 68,
+   "tlon": -164,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W164_00_DEM",
+   "n_cells": 4513,
+   "status": "exists",
+   "bytes": 21475817
+  },
+  {
+   "tlat": 68,
+   "tlon": -163,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W163_00_DEM",
+   "n_cells": 4519,
+   "status": "exists",
+   "bytes": 21259623
+  },
+  {
+   "tlat": 68,
+   "tlon": -162,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W162_00_DEM",
+   "n_cells": 4519,
+   "status": "exists",
+   "bytes": 21199766
+  },
+  {
+   "tlat": 68,
+   "tlon": -161,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W161_00_DEM",
+   "n_cells": 4517,
+   "status": "exists",
+   "bytes": 20937660
+  },
+  {
+   "tlat": 68,
+   "tlon": -160,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W160_00_DEM",
+   "n_cells": 4521,
+   "status": "exists",
+   "bytes": 20628840
+  },
+  {
+   "tlat": 68,
+   "tlon": -159,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W159_00_DEM",
+   "n_cells": 4519,
+   "status": "exists",
+   "bytes": 20421574
+  },
+  {
+   "tlat": 68,
+   "tlon": -158,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W158_00_DEM",
+   "n_cells": 4519,
+   "status": "exists",
+   "bytes": 20304445
+  },
+  {
+   "tlat": 68,
+   "tlon": -157,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W157_00_DEM",
+   "n_cells": 4521,
+   "status": "exists",
+   "bytes": 20028727
+  },
+  {
+   "tlat": 68,
+   "tlon": -156,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W156_00_DEM",
+   "n_cells": 4518,
+   "status": "exists",
+   "bytes": 20115752
+  },
+  {
+   "tlat": 68,
+   "tlon": -155,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W155_00_DEM",
+   "n_cells": 4515,
+   "status": "exists",
+   "bytes": 20401912
+  },
+  {
+   "tlat": 68,
+   "tlon": -154,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W154_00_DEM",
+   "n_cells": 4524,
+   "status": "exists",
+   "bytes": 20353050
+  },
+  {
+   "tlat": 68,
+   "tlon": -153,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W153_00_DEM",
+   "n_cells": 4521,
+   "status": "exists",
+   "bytes": 20435858
+  },
+  {
+   "tlat": 68,
+   "tlon": -152,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W152_00_DEM",
+   "n_cells": 4519,
+   "status": "exists",
+   "bytes": 20437504
+  },
+  {
+   "tlat": 68,
+   "tlon": -151,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W151_00_DEM",
+   "n_cells": 4520,
+   "status": "exists",
+   "bytes": 20460623
+  },
+  {
+   "tlat": 68,
+   "tlon": -150,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W150_00_DEM",
+   "n_cells": 4519,
+   "status": "exists",
+   "bytes": 20333043
+  },
+  {
+   "tlat": 68,
+   "tlon": -149,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W149_00_DEM",
+   "n_cells": 4518,
+   "status": "exists",
+   "bytes": 20928047
+  },
+  {
+   "tlat": 68,
+   "tlon": -148,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W148_00_DEM",
+   "n_cells": 4520,
+   "status": "exists",
+   "bytes": 21143584
+  },
+  {
+   "tlat": 68,
+   "tlon": -147,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W147_00_DEM",
+   "n_cells": 4520,
+   "status": "exists",
+   "bytes": 21018794
+  },
+  {
+   "tlat": 68,
+   "tlon": -146,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W146_00_DEM",
+   "n_cells": 4520,
+   "status": "exists",
+   "bytes": 20602747
+  },
+  {
+   "tlat": 68,
+   "tlon": -145,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W145_00_DEM",
+   "n_cells": 4516,
+   "status": "exists",
+   "bytes": 20486254
+  },
+  {
+   "tlat": 68,
+   "tlon": -144,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W144_00_DEM",
+   "n_cells": 4524,
+   "status": "exists",
+   "bytes": 20430893
+  },
+  {
+   "tlat": 68,
+   "tlon": -143,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W143_00_DEM",
+   "n_cells": 4517,
+   "status": "exists",
+   "bytes": 20481574
+  },
+  {
+   "tlat": 68,
+   "tlon": -142,
+   "tile": "Copernicus_DSM_COG_10_N68_00_W142_00_DEM",
+   "n_cells": 4520,
+   "status": "exists",
+   "bytes": 20424055
+  },
+  {
+   "tlat": 69,
+   "tlon": -164,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W164_00_DEM",
+   "n_cells": 984,
+   "status": "exists",
+   "bytes": 4772577
+  },
+  {
+   "tlat": 69,
+   "tlon": -163,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W163_00_DEM",
+   "n_cells": 4050,
+   "status": "exists",
+   "bytes": 21203703
+  },
+  {
+   "tlat": 69,
+   "tlon": -162,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W162_00_DEM",
+   "n_cells": 4321,
+   "status": "exists",
+   "bytes": 21173587
+  },
+  {
+   "tlat": 69,
+   "tlon": -161,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W161_00_DEM",
+   "n_cells": 4317,
+   "status": "exists",
+   "bytes": 21010075
+  },
+  {
+   "tlat": 69,
+   "tlon": -160,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W160_00_DEM",
+   "n_cells": 4322,
+   "status": "exists",
+   "bytes": 21455761
+  },
+  {
+   "tlat": 69,
+   "tlon": -159,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W159_00_DEM",
+   "n_cells": 4315,
+   "status": "exists",
+   "bytes": 21063796
+  },
+  {
+   "tlat": 69,
+   "tlon": -158,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W158_00_DEM",
+   "n_cells": 4318,
+   "status": "exists",
+   "bytes": 20917332
+  },
+  {
+   "tlat": 69,
+   "tlon": -157,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W157_00_DEM",
+   "n_cells": 4319,
+   "status": "exists",
+   "bytes": 21096612
+  },
+  {
+   "tlat": 69,
+   "tlon": -156,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W156_00_DEM",
+   "n_cells": 4319,
+   "status": "exists",
+   "bytes": 21652483
+  },
+  {
+   "tlat": 69,
+   "tlon": -155,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W155_00_DEM",
+   "n_cells": 4321,
+   "status": "exists",
+   "bytes": 21939495
+  },
+  {
+   "tlat": 69,
+   "tlon": -154,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W154_00_DEM",
+   "n_cells": 4318,
+   "status": "exists",
+   "bytes": 21509911
+  },
+  {
+   "tlat": 69,
+   "tlon": -153,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W153_00_DEM",
+   "n_cells": 4320,
+   "status": "exists",
+   "bytes": 21416257
+  },
+  {
+   "tlat": 69,
+   "tlon": -152,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W152_00_DEM",
+   "n_cells": 4318,
+   "status": "exists",
+   "bytes": 22272557
+  },
+  {
+   "tlat": 69,
+   "tlon": -151,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W151_00_DEM",
+   "n_cells": 4318,
+   "status": "exists",
+   "bytes": 21063040
+  },
+  {
+   "tlat": 69,
+   "tlon": -150,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W150_00_DEM",
+   "n_cells": 4316,
+   "status": "exists",
+   "bytes": 20618672
+  },
+  {
+   "tlat": 69,
+   "tlon": -149,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W149_00_DEM",
+   "n_cells": 4321,
+   "status": "exists",
+   "bytes": 20644247
+  },
+  {
+   "tlat": 69,
+   "tlon": -148,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W148_00_DEM",
+   "n_cells": 4318,
+   "status": "exists",
+   "bytes": 20944976
+  },
+  {
+   "tlat": 69,
+   "tlon": -147,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W147_00_DEM",
+   "n_cells": 4319,
+   "status": "exists",
+   "bytes": 20867711
+  },
+  {
+   "tlat": 69,
+   "tlon": -146,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W146_00_DEM",
+   "n_cells": 4309,
+   "status": "exists",
+   "bytes": 21141018
+  },
+  {
+   "tlat": 69,
+   "tlon": -145,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W145_00_DEM",
+   "n_cells": 4283,
+   "status": "exists",
+   "bytes": 20664347
+  },
+  {
+   "tlat": 69,
+   "tlon": -144,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W144_00_DEM",
+   "n_cells": 4327,
+   "status": "exists",
+   "bytes": 20971027
+  },
+  {
+   "tlat": 69,
+   "tlon": -143,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W143_00_DEM",
+   "n_cells": 4029,
+   "status": "exists",
+   "bytes": 20255870
+  },
+  {
+   "tlat": 69,
+   "tlon": -142,
+   "tile": "Copernicus_DSM_COG_10_N69_00_W142_00_DEM",
+   "n_cells": 3119,
+   "status": "exists",
+   "bytes": 15816596
+  },
+  {
+   "tlat": 70,
+   "tlon": -163,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W163_00_DEM",
+   "n_cells": 306,
+   "status": "exists",
+   "bytes": 1194551
+  },
+  {
+   "tlat": 70,
+   "tlon": -162,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W162_00_DEM",
+   "n_cells": 1120,
+   "status": "exists",
+   "bytes": 4456426
+  },
+  {
+   "tlat": 70,
+   "tlon": -161,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W161_00_DEM",
+   "n_cells": 1942,
+   "status": "exists",
+   "bytes": 7462985
+  },
+  {
+   "tlat": 70,
+   "tlon": -160,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W160_00_DEM",
+   "n_cells": 2998,
+   "status": "exists",
+   "bytes": 11965757
+  },
+  {
+   "tlat": 70,
+   "tlon": -159,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W159_00_DEM",
+   "n_cells": 3380,
+   "status": "exists",
+   "bytes": 12803742
+  },
+  {
+   "tlat": 70,
+   "tlon": -158,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W158_00_DEM",
+   "n_cells": 3914,
+   "status": "exists",
+   "bytes": 15054572
+  },
+  {
+   "tlat": 70,
+   "tlon": -157,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W157_00_DEM",
+   "n_cells": 4102,
+   "status": "exists",
+   "bytes": 16736067
+  },
+  {
+   "tlat": 70,
+   "tlon": -156,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W156_00_DEM",
+   "n_cells": 3800,
+   "status": "exists",
+   "bytes": 15755144
+  },
+  {
+   "tlat": 70,
+   "tlon": -155,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W155_00_DEM",
+   "n_cells": 3631,
+   "status": "exists",
+   "bytes": 14606807
+  },
+  {
+   "tlat": 70,
+   "tlon": -154,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W154_00_DEM",
+   "n_cells": 3461,
+   "status": "exists",
+   "bytes": 15553978
+  },
+  {
+   "tlat": 70,
+   "tlon": -153,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W153_00_DEM",
+   "n_cells": 3100,
+   "status": "exists",
+   "bytes": 12651307
+  },
+  {
+   "tlat": 70,
+   "tlon": -152,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W152_00_DEM",
+   "n_cells": 1876,
+   "status": "exists",
+   "bytes": 7689418
+  },
+  {
+   "tlat": 70,
+   "tlon": -151,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W151_00_DEM",
+   "n_cells": 1952,
+   "status": "exists",
+   "bytes": 7576917
+  },
+  {
+   "tlat": 70,
+   "tlon": -150,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W150_00_DEM",
+   "n_cells": 2071,
+   "status": "exists",
+   "bytes": 7978470
+  },
+  {
+   "tlat": 70,
+   "tlon": -149,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W149_00_DEM",
+   "n_cells": 1563,
+   "status": "exists",
+   "bytes": 6257997
+  },
+  {
+   "tlat": 70,
+   "tlon": -148,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W148_00_DEM",
+   "n_cells": 902,
+   "status": "exists",
+   "bytes": 3612428
+  },
+  {
+   "tlat": 70,
+   "tlon": -147,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W147_00_DEM",
+   "n_cells": 748,
+   "status": "exists",
+   "bytes": 2789657
+  },
+  {
+   "tlat": 70,
+   "tlon": -146,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W146_00_DEM",
+   "n_cells": 310,
+   "status": "exists",
+   "bytes": 1275915
+  },
+  {
+   "tlat": 70,
+   "tlon": -145,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W145_00_DEM",
+   "n_cells": 97,
+   "status": "exists",
+   "bytes": 457815
+  },
+  {
+   "tlat": 70,
+   "tlon": -144,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W144_00_DEM",
+   "n_cells": 392,
+   "status": "exists",
+   "bytes": 1651081
+  },
+  {
+   "tlat": 70,
+   "tlon": -143,
+   "tile": "Copernicus_DSM_COG_10_N70_00_W143_00_DEM",
+   "n_cells": 80,
+   "status": "exists",
+   "bytes": 355769
+  },
+  {
+   "tlat": 71,
+   "tlon": -158,
+   "tile": "Copernicus_DSM_COG_10_N71_00_W158_00_DEM",
+   "n_cells": 158,
+   "status": "exists",
+   "bytes": 671504
+  },
+  {
+   "tlat": 71,
+   "tlon": -157,
+   "tile": "Copernicus_DSM_COG_10_N71_00_W157_00_DEM",
+   "n_cells": 1119,
+   "status": "exists",
+   "bytes": 4463968
+  },
+  {
+   "tlat": 71,
+   "tlon": -156,
+   "tile": "Copernicus_DSM_COG_10_N71_00_W156_00_DEM",
+   "n_cells": 401,
+   "status": "exists",
+   "bytes": 1828053
+  },
+  {
+   "tlat": 71,
+   "tlon": -155,
+   "tile": "Copernicus_DSM_COG_10_N71_00_W155_00_DEM",
+   "n_cells": 121,
+   "status": "exists",
+   "bytes": 455131
+  }
+ ],
+ "dem_tiles_sha256": {
+  "Copernicus_DSM_COG_10_N59_00_W151_00_DEM": "5aca7682634ce0b3f0ed4315658c0890664887250c7b3eab10757435488bc7dd",
+  "Copernicus_DSM_COG_10_N60_00_W160_00_DEM": "4e78be6d7eaf0e2cb67a9566187f705f92c417b3a781a035b6b0015fa43cfed1",
+  "Copernicus_DSM_COG_10_N60_00_W154_00_DEM": "9cfe5d69b3cef7cf80e0624060e3c5ccaf109b02e9ad49b8c535667fb4e451bf",
+  "Copernicus_DSM_COG_10_N60_00_W153_00_DEM": "4efbbb839535f1e213008bb0eed02a6e0867fc143b3826a6acb727ab54182fda",
+  "Copernicus_DSM_COG_10_N60_00_W151_00_DEM": "d91fb03d22422dc778a4ab544123a506ee8bdcbaac20e07e447cf051e6812572",
+  "Copernicus_DSM_COG_10_N60_00_W150_00_DEM": "aeb346411896b953b11835e168eec5d17ff1bc4f7f236afd33a5529f1cda2528",
+  "Copernicus_DSM_COG_10_N60_00_W149_00_DEM": "7c8ddcd4818029446ffabbc1db09bf8a21a3c792f84b907f9c4c5de202c3b0d4",
+  "Copernicus_DSM_COG_10_N60_00_W147_00_DEM": "11e9042ce4bbf546f3db3669e5e9708054ed475ad3dcc80a7b6e45b6887a8961",
+  "Copernicus_DSM_COG_10_N60_00_W146_00_DEM": "f6c1ab508e5eb2f86a82e7c655f75d1e710229c50dc94b8998150887246dd74e",
+  "Copernicus_DSM_COG_10_N60_00_W145_00_DEM": "97e22519473e937c44c489df4db3f673c0d40e71dc7fe9cac3106bcd8cb1f227",
+  "Copernicus_DSM_COG_10_N60_00_W144_00_DEM": "1930d99c443af8cfad60351ab1add4472533e46d9f1c6cc98afc54b0d7d9d1c1",
+  "Copernicus_DSM_COG_10_N60_00_W143_00_DEM": "bf1d1d660f0fa6c68aa11922102bf8891872ac8fcba00268a59d70511f87430c",
+  "Copernicus_DSM_COG_10_N60_00_W142_00_DEM": "9c7702f1e22f266dd1ab581d7d89069f2fd73b8a98df64708f8d48b704ecda46",
+  "Copernicus_DSM_COG_10_N61_00_W166_00_DEM": "410a51d3f3b17c9947ad09b8d4ff775ae93e4aff64891206340a9d480b7e7c28",
+  "Copernicus_DSM_COG_10_N61_00_W165_00_DEM": "0040f95ded39564fbc94389d4da090afc5e2ca589d10540aebc10538d5ca3cc9",
+  "Copernicus_DSM_COG_10_N61_00_W164_00_DEM": "17a8ca44a847274aa1beb5474043d04c50e23ec35c3758d5c94822c672c85b54",
+  "Copernicus_DSM_COG_10_N61_00_W163_00_DEM": "efed35aa746cddb0b65c8dd5dd79c96040590b48a3ce2b1166a7a886f31928ff",
+  "Copernicus_DSM_COG_10_N61_00_W162_00_DEM": "e78a52e322326d4c03cc4b6c9ee96bbbd3f122a305820378e01527c6c9563598",
+  "Copernicus_DSM_COG_10_N61_00_W160_00_DEM": "29f03144ca41045e53d044dbe1095399161e5f5ded04a1a47de18ca2195e56df",
+  "Copernicus_DSM_COG_10_N61_00_W159_00_DEM": "721944c0ff5538025480eb1bfee5c64fc4d02e0d9ce0472e57c9902eae65c125",
+  "Copernicus_DSM_COG_10_N61_00_W155_00_DEM": "3eff552a04509bb5ad0b6ee4a41b317130a3de4ae24784d860ba637f5e223582",
+  "Copernicus_DSM_COG_10_N61_00_W154_00_DEM": "daee90b6d8543689e76510ae1e8080c7103d6423b24e99d12d38815a44d827cf",
+  "Copernicus_DSM_COG_10_N61_00_W153_00_DEM": "7eec94120efe33d52bd216df645022b98608f0e24cc89f4f03b843ca75abebe1",
+  "Copernicus_DSM_COG_10_N61_00_W150_00_DEM": "b0f700780a2275bb5aacd7a0f9a462693c3d7b3016e7d3c48a91f76f9c49be1a",
+  "Copernicus_DSM_COG_10_N61_00_W149_00_DEM": "572387d8c63caba9653a5388aedf916064dc714fdc681999545b907e49eb921e",
+  "Copernicus_DSM_COG_10_N61_00_W148_00_DEM": "190282f316dfeef69533e019edfa071195aa65e53c91996f7c28818c4965ce01",
+  "Copernicus_DSM_COG_10_N61_00_W147_00_DEM": "5a008e3e0f5b0bbb7e22ca8139f657b0686e1653239c7179e4241d85ff763ad5",
+  "Copernicus_DSM_COG_10_N61_00_W146_00_DEM": "342e0e28210f21fbd2f217a2a6d8523a1b2f57b2938ee160d5e80d29e75b19ec",
+  "Copernicus_DSM_COG_10_N61_00_W145_00_DEM": "aaa0cf0fec5c5f7fbfedac5049b7f4949b3898c0cfc98c906ee155cb9277ac9c",
+  "Copernicus_DSM_COG_10_N61_00_W144_00_DEM": "b642b0ea6e879b81bc52d7dc199da3141e92dca4126072f626a2e65e541c1b9f",
+  "Copernicus_DSM_COG_10_N61_00_W143_00_DEM": "69451c7733d34d2ab66d7fff6ee588a988d145160f4c6ad0e42b9b6657cf134c",
+  "Copernicus_DSM_COG_10_N61_00_W142_00_DEM": "f84686b90f53b1fd149fd66862597fcca95dc1d0f1676d4428cf9f75a0f66dda",
+  "Copernicus_DSM_COG_10_N62_00_W165_00_DEM": "a9fe7f6e318f1c2663eb671dcfc7a0b978de62bddf1a12abba3c0967f575e00a",
+  "Copernicus_DSM_COG_10_N62_00_W164_00_DEM": "9021c0c4a81e7d1f57db65b4a0c65be571617e760f0b5a40e230f3d6ea4cb1b8",
+  "Copernicus_DSM_COG_10_N62_00_W163_00_DEM": "33acfc82716c6558db53769dcd2469857cbd111ef86fd4c86c73150f1c622f1c",
+  "Copernicus_DSM_COG_10_N62_00_W162_00_DEM": "8cf1429c4efdf4d4a1576c6f144922997f11753745a491673f2e2019245c6672",
+  "Copernicus_DSM_COG_10_N62_00_W160_00_DEM": "9edd09da080066923f42153f1def2a2e57ba96ce2d1dd82de33be5787418b10b",
+  "Copernicus_DSM_COG_10_N62_00_W159_00_DEM": "cc201c5a4765b6e9e945f67ac6bebb29c182e35bd01784c75800bf28c4961cae",
+  "Copernicus_DSM_COG_10_N62_00_W158_00_DEM": "3509996b495db87bb02bfb77e46cb0fc92dc906cc5e8cf2603f3ffd08a022bba",
+  "Copernicus_DSM_COG_10_N62_00_W157_00_DEM": "47cae37ad49571628b19b3a3fc2479071190fbd6c342296ca596971b76420503",
+  "Copernicus_DSM_COG_10_N62_00_W155_00_DEM": "af27c418880decabf283d7cb673dac0ede7eeb365b62620c27b483beb20fd340",
+  "Copernicus_DSM_COG_10_N62_00_W154_00_DEM": "9b4008c8578eeca3c84eb9056d43c13af040942a030b7aa088d371fed8a9cd9e",
+  "Copernicus_DSM_COG_10_N62_00_W153_00_DEM": "ea69c6ec85bdcf1e3489d25a214d81a435cd92eb5bda019fcbfb7c64b8abdfdf",
+  "Copernicus_DSM_COG_10_N62_00_W152_00_DEM": "8fad8078da66c7463a2021df84a0b9db280fb08e16d55b4b7b517dbb2b4b8d82",
+  "Copernicus_DSM_COG_10_N62_00_W151_00_DEM": "713a27fa8e4b2b97d81a961ebfc99cf12da49192fece78965f83a9355f91442f",
+  "Copernicus_DSM_COG_10_N62_00_W150_00_DEM": "d143c4f349ee0f95b5b84691cb615484ae73ead668165ca5b54049fbd069e48d",
+  "Copernicus_DSM_COG_10_N62_00_W149_00_DEM": "8f36759efbc4912c44d2124d00afb11c78a71cbae957de4cc6c00bdba95ec26f",
+  "Copernicus_DSM_COG_10_N62_00_W148_00_DEM": "a3d46375dd602362860a90679826fea75668454648444bdc3df6a119fefb458c",
+  "Copernicus_DSM_COG_10_N62_00_W147_00_DEM": "c0394d65a76987c7d82257ebde2a1e73a6dea19cd3a6e76ce9610362a1dbaa1c",
+  "Copernicus_DSM_COG_10_N62_00_W146_00_DEM": "0eff7651c5540d7ecbf3ad8bc6f821fd6c662ed43b2d539d7e44c6b17d7ff034",
+  "Copernicus_DSM_COG_10_N62_00_W145_00_DEM": "4e010365712598683e64eddc40ab24bc7ad3a7a58e100ab1b6a77685a728edcd",
+  "Copernicus_DSM_COG_10_N62_00_W144_00_DEM": "584279d9a01ac6dba7ed4c8a27129411386b06be98d42c3319391a0023427903",
+  "Copernicus_DSM_COG_10_N62_00_W143_00_DEM": "b34dddccd301e5df09d826ec0f50c12d1c7749ce167199db58ea03ac00a94858",
+  "Copernicus_DSM_COG_10_N62_00_W142_00_DEM": "1a6d70ad89c324cad11da9226a5ef3a53804532b3ec2956527da15f2b6ab876a",
+  "Copernicus_DSM_COG_10_N63_00_W165_00_DEM": "afb90adce9bdf861aeab4367516fbc58424cd0d100ac7a946f5405653dbf903a",
+  "Copernicus_DSM_COG_10_N63_00_W164_00_DEM": "2a50d1d454b667a01b873316970dea5b06226bbb7cc31f17f633840425512f55",
+  "Copernicus_DSM_COG_10_N63_00_W163_00_DEM": "173e78f6cd5c502765329971f726248b653acc4aef23e9d869a36d1ef8aa7e81",
+  "Copernicus_DSM_COG_10_N63_00_W162_00_DEM": "ca01723e292f5855fd183bc1f69dc82f6a5b2e08233c5dcac6b69f66a898d9ff",
+  "Copernicus_DSM_COG_10_N63_00_W161_00_DEM": "69449f66d70e93f7a2bf4565b4686c03bd0c02bda4d9947e8635b55d0a607a9f",
+  "Copernicus_DSM_COG_10_N63_00_W160_00_DEM": "afa84b0776e0116d37962226cf8a58a8afa855954a05db589e72071784e0b852",
+  "Copernicus_DSM_COG_10_N63_00_W159_00_DEM": "110dc9613228a4c9a3a96c45c520fb14a3d628f7da2a9e8ede04c874bc5ff5d2",
+  "Copernicus_DSM_COG_10_N63_00_W158_00_DEM": "d04a89cb2bfa72982f2df032ee8096c0337a3b0e74a304ca5923d24452322fb9",
+  "Copernicus_DSM_COG_10_N63_00_W157_00_DEM": "1bb4bfc9403741a8ee2e4ab3731a717c0c82caa4529ccaab9960c5db96284b84",
+  "Copernicus_DSM_COG_10_N63_00_W156_00_DEM": "c5981ac5efd250e1fce4d3855bd6c27a0aa268d9fd228bee135ec579efb99d13",
+  "Copernicus_DSM_COG_10_N63_00_W155_00_DEM": "c5c1b4eef33a298e7662f4f2c78c618988ca8e9b1b3dc91a38b64831b74c479c",
+  "Copernicus_DSM_COG_10_N63_00_W154_00_DEM": "46b7258c48d0566da4676e74431eea8a16857f3d8af4d3d5993b36fe1234d0f8",
+  "Copernicus_DSM_COG_10_N63_00_W153_00_DEM": "e244cbe1bcbf7386a63df06dfd0f65c9d94843571493ab7b13779641c55cd5ca",
+  "Copernicus_DSM_COG_10_N63_00_W152_00_DEM": "3861d2fea85e96c61e488594f9a8e6240e0c4898fe1ef00452d86258f40b815a",
+  "Copernicus_DSM_COG_10_N63_00_W151_00_DEM": "11cf9f83bca3bdacbca856ea83267e414c7ab988cc4ee3f2c6db983a3d11c9e4",
+  "Copernicus_DSM_COG_10_N63_00_W150_00_DEM": "e750ccee540405aa6ecfa8f59e3737bac9cdcdc722225a702e6be99ab602e94f",
+  "Copernicus_DSM_COG_10_N63_00_W149_00_DEM": "87a255e05a9481033e6133e6e6a2cb64c1926b019d75e3fca4f2fa4c585ec69e",
+  "Copernicus_DSM_COG_10_N63_00_W148_00_DEM": "690f0165298c98ae9e9942da0eb814541e61ad0db602e65069d49b4f7b41ae93",
+  "Copernicus_DSM_COG_10_N63_00_W147_00_DEM": "9870f4aef72411a99d8dc0db0c7cc801af67b7e9e82c13f2c1d631c92180d00e",
+  "Copernicus_DSM_COG_10_N63_00_W146_00_DEM": "94ba9fb040f0f8e6043f8a191446ba7796af3425112e5307849506f805675f1c",
+  "Copernicus_DSM_COG_10_N63_00_W145_00_DEM": "38e213e32712858dd5a15b47c2f8220707a477fd6997b5f96b1dc6a8528e94f1",
+  "Copernicus_DSM_COG_10_N63_00_W144_00_DEM": "a571edfe474c369d68f2110c93ae64585e939e14947e689b52597f39ebb47e72",
+  "Copernicus_DSM_COG_10_N63_00_W143_00_DEM": "91442d88c7888f59c9ca88242572ca232dc3bbc14c5ae125498de4a87f3f29c8",
+  "Copernicus_DSM_COG_10_N63_00_W142_00_DEM": "2d02211bdcd436c1cda4b56d503f24ba41dfa76ac71f3d99610d0fb6139ecf67",
+  "Copernicus_DSM_COG_10_N64_00_W167_00_DEM": "c5ffb99de03afef69bda9b0d3d769fcc6302a0eb21fceeecae1331d47e15e319",
+  "Copernicus_DSM_COG_10_N64_00_W166_00_DEM": "92394bb5bfe9510c5ff614f71ab118acb9f51ad317242d0d7e6fd32362624673",
+  "Copernicus_DSM_COG_10_N64_00_W165_00_DEM": "4ae5d92d7ac0755fdc536998f688b7df1857d67bff37254799d951c6251c6f22",
+  "Copernicus_DSM_COG_10_N64_00_W164_00_DEM": "21460e507ebead0f9d0c4c68354d61e5b9b3a34ef0f5cfe6f4ee7e4af931972c",
+  "Copernicus_DSM_COG_10_N64_00_W163_00_DEM": "49053b49f3caa4f66331a4257d045b0c3ec31497f1ca400a39f9f0471952329f",
+  "Copernicus_DSM_COG_10_N64_00_W162_00_DEM": "ef70ddd25c0ee95cf374bedaa8fdf737a0fb881fc42e6edf86756f99325d45ed",
+  "Copernicus_DSM_COG_10_N64_00_W161_00_DEM": "2363a772ff7f288ea88d8443feaaa85ec5f5dfe0eb12a728f7f2501bc363ad01",
+  "Copernicus_DSM_COG_10_N64_00_W160_00_DEM": "2ad42572b8d0288d7065f95517f04801a2e6612ad75609cb370bb22e8d4b8a0b",
+  "Copernicus_DSM_COG_10_N64_00_W159_00_DEM": "ab29cb1f2726e074d97fcd958dee6a67c6bc56b26bb7fc4d4481e08997c05368",
+  "Copernicus_DSM_COG_10_N64_00_W158_00_DEM": "c2e6938f9752ed274251e1b898f443d29602250040d963350cb72671e3c4d64a",
+  "Copernicus_DSM_COG_10_N64_00_W157_00_DEM": "8de7c2ee4488f91b94d3af94bd93aaf9a975fad71e695ffa51b5af979c78e9ff",
+  "Copernicus_DSM_COG_10_N64_00_W156_00_DEM": "dbf02a3b4aa6449e8d94449ed66c05cc9d0897a94f7718f6878a946051030d30",
+  "Copernicus_DSM_COG_10_N64_00_W155_00_DEM": "1cd47f0420b0f50ee4a6ec53f7a439d7c4a3011bdb574b5eb7b8dcf61b63aeab",
+  "Copernicus_DSM_COG_10_N64_00_W154_00_DEM": "29835a2a13255cc4e127a586177b11af177da7d97352695b95325de4fb493a63",
+  "Copernicus_DSM_COG_10_N64_00_W153_00_DEM": "4ce85972826458084a414a048178291fc026bdd3007a9a67b5d5fdfd8762be58",
+  "Copernicus_DSM_COG_10_N64_00_W152_00_DEM": "1cef4d5062a58eb461a7bab22659fa81e9fe4d0789d466f1d0982c6d9fa01224",
+  "Copernicus_DSM_COG_10_N64_00_W151_00_DEM": "5c331d163a8ea787f8c1a25c716cdcfe9556692e8036b5a380781ff0282c7f31",
+  "Copernicus_DSM_COG_10_N64_00_W150_00_DEM": "613edc850627bf9065177b8feb1c6bdb764fe23b2339c940b073821b466db9bd",
+  "Copernicus_DSM_COG_10_N64_00_W149_00_DEM": "9837bd821039ab827421031c14a33391b2ad92309c92673d23bc60385823ac15",
+  "Copernicus_DSM_COG_10_N64_00_W148_00_DEM": "98a89a691d7b2deee1dbdf7039d1dd75652e2a5848a94518e9db3b0750072d9b",
+  "Copernicus_DSM_COG_10_N64_00_W147_00_DEM": "55331cf2d0ec8533b57ab1c6d463fbd581af1ee84cb7b7c556c69a793cb065b7",
+  "Copernicus_DSM_COG_10_N64_00_W146_00_DEM": "90fd48643689fe27b64456308c6f9d6ecb9b839c4a2bc6d92fef549f4ee13b27",
+  "Copernicus_DSM_COG_10_N64_00_W145_00_DEM": "8b8960289af2c25185667034ff4710b7ecf74ca43f39dd7ff7d97dbf8b698c51",
+  "Copernicus_DSM_COG_10_N64_00_W144_00_DEM": "3c6ed129127e1b56eafc70c83be782f2a4b453234fdd078092d128ff3db564c2",
+  "Copernicus_DSM_COG_10_N64_00_W143_00_DEM": "2389ae82b555452f0ab4de6cd5bd51d49f242df71756caaac926b82007afb2c6",
+  "Copernicus_DSM_COG_10_N64_00_W142_00_DEM": "b060d16fa3c3dc61263255bda6c551e17f014b8874ea4cbff9972b5e27483b13",
+  "Copernicus_DSM_COG_10_N65_00_W168_00_DEM": "796d48c8ae303b43fd609e7d90940f5863bb66325d061214a480310d74ef1a8d",
+  "Copernicus_DSM_COG_10_N65_00_W167_00_DEM": "8edfd29a25b197c6a5db301639584577f13dc5faa0153cd1a12e22c578ac8a1b",
+  "Copernicus_DSM_COG_10_N65_00_W166_00_DEM": "f5bcac3d61da78eeafe7f5d438ca5d6fd170629da00f53ada713acefa53a9bf2",
+  "Copernicus_DSM_COG_10_N65_00_W165_00_DEM": "d7b391a08b66b4c48f5edda7e79885948b7f8f58d7fd33513ac7bc789274df8f",
+  "Copernicus_DSM_COG_10_N65_00_W164_00_DEM": "38c983114552f4a0dd99bcc6a96ba1f3a5f79949a90363c814ff3fd2dec67fe4",
+  "Copernicus_DSM_COG_10_N65_00_W163_00_DEM": "5d202269f02f521fce31fd6b4cb0c1255baa17fc50460bf84027f6ed427bdefa",
+  "Copernicus_DSM_COG_10_N65_00_W162_00_DEM": "31b0775ecd018b29c3dfb4f274552a29c07ad51e377c80fef30402c96c7a6c73",
+  "Copernicus_DSM_COG_10_N65_00_W161_00_DEM": "e8e2db7fae4f7fae4fa37832b6a9dcfe71100332a2db5ba9461e4b926c9aa350",
+  "Copernicus_DSM_COG_10_N65_00_W160_00_DEM": "6e03098ed7a06f00836679cce0fef698492797261d55aa682049f984a65cd1bd",
+  "Copernicus_DSM_COG_10_N65_00_W159_00_DEM": "b953e8fb94a75ccd0790c2c8986bef5c9674efe6eb39d0a0be6ade4406b00f3c",
+  "Copernicus_DSM_COG_10_N65_00_W158_00_DEM": "fe915ddac950201174e9af107b5aa65b3b138a4955f885bc8cc23b3ebbbf828a",
+  "Copernicus_DSM_COG_10_N65_00_W157_00_DEM": "a9c649c0f5f5d4b00aaec0adb065d7ce6f3d1418a7b4d85125514d5c8a7ada56",
+  "Copernicus_DSM_COG_10_N65_00_W156_00_DEM": "faa71c3c623e618ad5d41837e31e3519e869708d78f91dc866be53099e72f09a",
+  "Copernicus_DSM_COG_10_N65_00_W155_00_DEM": "6b4870d52613a63f1c947f88a1d6218d84eb42477fa9019032812514ba2adffe",
+  "Copernicus_DSM_COG_10_N65_00_W154_00_DEM": "e71d195a90fa310161b80129572abb36c4e0b4a63340abf50eaacf9be93bebc9",
+  "Copernicus_DSM_COG_10_N65_00_W153_00_DEM": "6f5c3f6348b2d566749814a1ce36da45d7be9b8efece7118437bfff455afa5d5",
+  "Copernicus_DSM_COG_10_N65_00_W152_00_DEM": "2b18823c8b8582e63f05dca96ba4b3b8c8344cba1d0a1c64e2675a72835bfe24",
+  "Copernicus_DSM_COG_10_N65_00_W151_00_DEM": "483157110854bb31399c71e68db02fa5618bf4faae59c4cee806655cb945d1f9",
+  "Copernicus_DSM_COG_10_N65_00_W150_00_DEM": "3785e744230f4900c75d14d8f908e2b281a1c3a791cf1b9f1287e055a6341d2c",
+  "Copernicus_DSM_COG_10_N65_00_W149_00_DEM": "6c737fe5a4716a59ac1cefcffe7d03ea96565ecfcd84cd27adb8f6ccd362da5a",
+  "Copernicus_DSM_COG_10_N65_00_W148_00_DEM": "4db924885b6544c6a7302caa2f76166024eefe484d7b09d80b9ded43efb4115e",
+  "Copernicus_DSM_COG_10_N65_00_W147_00_DEM": "52d590f538958440745e60e6e41cf1977e74f2e1a806fd89b95d39da66e2dea7",
+  "Copernicus_DSM_COG_10_N65_00_W146_00_DEM": "3aadff0199944ba68a1cc2fe606a7b278287f0a49222b9b9348a703bc5a22115",
+  "Copernicus_DSM_COG_10_N65_00_W145_00_DEM": "31b732c249f476b8dd6860013a0ac501f32537b1c074c2b7533c82d345add27a",
+  "Copernicus_DSM_COG_10_N65_00_W144_00_DEM": "d81bb8e141f1d7fe87f88879e58567269583eb1fb55cb302f14e508222875b4d",
+  "Copernicus_DSM_COG_10_N65_00_W143_00_DEM": "b0db57854a513d5f5b7ca51467c3fc2913cb7c5b85962bc808d39090c3e904b0",
+  "Copernicus_DSM_COG_10_N65_00_W142_00_DEM": "b366ea9d6c207a6cb551527aa0ad1ea744988401c7cdb89b7b9cf37b33b411fb",
+  "Copernicus_DSM_COG_10_N66_00_W167_00_DEM": "cafd549b432b7d679c483cb854b05b29cbe7e5cee62b9fa16b7ecb81f57d5961",
+  "Copernicus_DSM_COG_10_N66_00_W166_00_DEM": "70de1c4761b794551730beefffdf9d77a4e0bc52a3186fac50d42841dcb2fd67",
+  "Copernicus_DSM_COG_10_N66_00_W165_00_DEM": "068631b2e9c4c272d6e5b2e34e3391a7e41af134c2058f10fc55677238a344d9",
+  "Copernicus_DSM_COG_10_N66_00_W164_00_DEM": "7e085ba0a9dfaeeb3110aec5a80ea9cca7e6cace9b62a12fa3a29b9bdf3c547a",
+  "Copernicus_DSM_COG_10_N66_00_W163_00_DEM": "c1445e645952bc85ef383d3348f9c47195883073419b487f23b944def92a4c7b",
+  "Copernicus_DSM_COG_10_N66_00_W162_00_DEM": "88a8fd70cc305071d0a29cb1e8d4b0538033cffc8bf88b5556b5fc9c2c77baa7",
+  "Copernicus_DSM_COG_10_N66_00_W161_00_DEM": "f761bf9e7c270a02c5f7b1e9673644c97ce47c45a974c6b15bb45972f12c7e96",
+  "Copernicus_DSM_COG_10_N66_00_W160_00_DEM": "14b20071e1d88d9fec7cbe1d96583f88756035c07f872f06b65f3a92a6198f41",
+  "Copernicus_DSM_COG_10_N66_00_W159_00_DEM": "5b75710f3aeccddcaf8028e57bece38f260c91bc44f9eca565065461c78f78d2",
+  "Copernicus_DSM_COG_10_N66_00_W158_00_DEM": "c21264568e57d58f91e507fd460470b9917c4b57e240443455c068e1be902419",
+  "Copernicus_DSM_COG_10_N66_00_W157_00_DEM": "b6743ec7b5ec51a1b291779cdd9ad195a067fdb0535beacba4acb44f4cc89bb7",
+  "Copernicus_DSM_COG_10_N66_00_W156_00_DEM": "8c18ce9cdebb094ec640b3f921416b598693012e776ed3bb5dbb23d20d3f3af6",
+  "Copernicus_DSM_COG_10_N66_00_W155_00_DEM": "e60f4cda70d23ab4950014b10f9a269b0b3c1bd9291aa36c83c57ff50ad5cff8",
+  "Copernicus_DSM_COG_10_N66_00_W154_00_DEM": "a34584bc68ede7262fb4a15b40eb75e6685494f812e8d469fd905050dce59b84",
+  "Copernicus_DSM_COG_10_N66_00_W153_00_DEM": "6498fccda123d55d4b6534f0361adb9eb91a690bb072d2e16c7e18ba450b522a",
+  "Copernicus_DSM_COG_10_N66_00_W152_00_DEM": "5233c7079162db21feb60c12225430588b8044fe78957302fdcc1684ce966e31",
+  "Copernicus_DSM_COG_10_N66_00_W151_00_DEM": "0ce4d0ffc1ee4debd9460363d039ffebb9f63308e628f11e3757deaa8f5ee385",
+  "Copernicus_DSM_COG_10_N66_00_W150_00_DEM": "7e1f88a0b20e8a67864e3ae259ac5a5e869098a3aadb448ab64581d2733bbede",
+  "Copernicus_DSM_COG_10_N66_00_W149_00_DEM": "bb7203811fd7673462f608d3f1d6dfab69a1cca14fb1f067d914c5c92c34875e",
+  "Copernicus_DSM_COG_10_N66_00_W148_00_DEM": "48cb973ea74703826e7a8f9fbd447bb3851fcc170076e91e221b3dcce874f0bf",
+  "Copernicus_DSM_COG_10_N66_00_W147_00_DEM": "7eac6f7c10f521b7b48d483337da442bc4544ea49f987693db7e265908cf0bdd",
+  "Copernicus_DSM_COG_10_N66_00_W146_00_DEM": "903aec045cb5697c59859c21b84446c872cf2cd3bfa314b4ec8997b3a417dfbe",
+  "Copernicus_DSM_COG_10_N66_00_W145_00_DEM": "b3af1baea5b1c9e007b3a3cdd363348cf15ce28f734c562b0faae8c45f52689a",
+  "Copernicus_DSM_COG_10_N66_00_W144_00_DEM": "2c3ed5db857122e130f41f69346231ff2d27eb7153abf14a155c4e962874552d",
+  "Copernicus_DSM_COG_10_N66_00_W143_00_DEM": "1656639375aab60bbdd1fb170c9fedee9da5e9328c8f549e6dfc2d0f8340a373",
+  "Copernicus_DSM_COG_10_N66_00_W142_00_DEM": "89412f68cf33a8c2d18cdffddd003bf9d9c3f1409f69e736b0d64dd53a24a338",
+  "Copernicus_DSM_COG_10_N67_00_W166_00_DEM": "8d133bbbf9f3e4fc076c1b57ead3f74aaaf4953e51a4e023365efe405e5c1d54",
+  "Copernicus_DSM_COG_10_N67_00_W165_00_DEM": "adb67b7a16ce2bce57e9f8353632f886ee36964d25e511595137fca6404c5e7a",
+  "Copernicus_DSM_COG_10_N67_00_W164_00_DEM": "6b11ccbd8fd452f63f754c8675d3d414b1c81065498ff8c2ba035893f3db78e3",
+  "Copernicus_DSM_COG_10_N67_00_W163_00_DEM": "7c49ef0aeed577fb5af28ef7d1053f0183ba47cfdb04d64444747afaa063a310",
+  "Copernicus_DSM_COG_10_N67_00_W162_00_DEM": "dc27eb17c5112b7d0e8344e8ae292d0db4c985f3e14c31d4337dc9946ad39853",
+  "Copernicus_DSM_COG_10_N67_00_W161_00_DEM": "a5d536998bac2b6aae5d12a778ee391700a2de6ac179c6efa5b5a603f225ab11",
+  "Copernicus_DSM_COG_10_N67_00_W160_00_DEM": "7249c51b7a41b3c59c94d5948f06180fae959bf208c25051fc646a824dfc541f",
+  "Copernicus_DSM_COG_10_N67_00_W159_00_DEM": "8ec8f32ccc958dd677fbb187696652d0fe31d71285225d2aeb4d2bbeb1512204",
+  "Copernicus_DSM_COG_10_N67_00_W158_00_DEM": "7b40889a319106c3a1af0bbc2b6d064d158e962948e944da1f14ea6eba31dbd9",
+  "Copernicus_DSM_COG_10_N67_00_W157_00_DEM": "de7e5e5cf5857fa2091f81d68bcceb767c0e410ec5234e3fd84354d2a885eeb8",
+  "Copernicus_DSM_COG_10_N67_00_W156_00_DEM": "88288436781f3d1f4108325e01a47ce854572194413feab0002ed703c10d2591",
+  "Copernicus_DSM_COG_10_N67_00_W155_00_DEM": "ea0809453ffb279a749f3e54708532d2590f95fc276956b910ffeb57e93cbe81",
+  "Copernicus_DSM_COG_10_N67_00_W154_00_DEM": "486c1aa473a02d1742a5633b0f7a07b1c233abb0b1f5dc311bbc1fdbcd495264",
+  "Copernicus_DSM_COG_10_N67_00_W153_00_DEM": "09155cd9cd4a1163e82456779626515afe6ffd836113128fc730ffc5744fbfcb",
+  "Copernicus_DSM_COG_10_N67_00_W152_00_DEM": "48c5307597ff3f66d267b78c4a5d8ab76c9d37f79a98e90d02255ce441b58098",
+  "Copernicus_DSM_COG_10_N67_00_W151_00_DEM": "0f5f56f757a09e6d1e3c9491b669d9719fc73a9f0835705c2ba3ee9f6f1a8ebf",
+  "Copernicus_DSM_COG_10_N67_00_W150_00_DEM": "b042d21e943ab29c8d4e2b834202490371ef78d5575e2efa55eac23e98720f5b",
+  "Copernicus_DSM_COG_10_N67_00_W149_00_DEM": "2109e07445f935f749f19dcb5ccd6db6767dba3816ec78db94aa0e7c71f13642",
+  "Copernicus_DSM_COG_10_N67_00_W148_00_DEM": "4ae5af0a0ac438e57d85d349202516b1334a02e84f4d1e49a669e91e7eaad636",
+  "Copernicus_DSM_COG_10_N67_00_W147_00_DEM": "7e134be6f57e167b221a363281ebaf566bea5286bfaa926b8196f8594f57e87e",
+  "Copernicus_DSM_COG_10_N67_00_W146_00_DEM": "bf22103d1b6d20045d0da9d9433da56214af16ef038ff17e559beb7432b47467",
+  "Copernicus_DSM_COG_10_N67_00_W145_00_DEM": "38e96b6caf636e14fbf3f2187021c28ac9972fd1f14a606c11dccf355395f38c",
+  "Copernicus_DSM_COG_10_N67_00_W144_00_DEM": "b5bb2c8ed157a2774ad44662ee299595a197dc6538520f09ae7cd33ca294c0d3",
+  "Copernicus_DSM_COG_10_N67_00_W143_00_DEM": "20e144f64946a247dc6890275741bc3f190ad3aaefb2d0b48b8e816994aaa2cf",
+  "Copernicus_DSM_COG_10_N67_00_W142_00_DEM": "04fa7417511b289d4d6f1b3404e088d5b4a4eb61190ed6280ac270d168c52b06",
+  "Copernicus_DSM_COG_10_N68_00_W167_00_DEM": "c8626cb374c9d9dadcc79f103fa59b152f547d1ce23a74f34e284a0095a1313b",
+  "Copernicus_DSM_COG_10_N68_00_W166_00_DEM": "8f7919379ce1a052cdcd99cfbe500c7170f1e266da0c3caf34bac5a675cf3490",
+  "Copernicus_DSM_COG_10_N68_00_W165_00_DEM": "b15d950bd789251658ee51c294b0088bca31bb1899e66ae5439cd088968b58bf",
+  "Copernicus_DSM_COG_10_N68_00_W164_00_DEM": "31586d1c18eaa68b8f3e7fb9feb8716052da047de31707e8f5cbf25bb2910935",
+  "Copernicus_DSM_COG_10_N68_00_W163_00_DEM": "3063b30ea2f3b82afb17348819ae67e7899de202b737278a2489162163aa4bf4",
+  "Copernicus_DSM_COG_10_N68_00_W162_00_DEM": "37d0711487efd1b5a45b8cca1f3385a984d7ad8fef211fcd57b3e557ff17598d",
+  "Copernicus_DSM_COG_10_N68_00_W161_00_DEM": "123d93e7c79593e90b7dcb106d5da0d54ba236b280747d643ec3a7e7b74f9a53",
+  "Copernicus_DSM_COG_10_N68_00_W160_00_DEM": "1b1f490cb56e4270a4fa98b9cec24a3d49c3514747dc97c106e309084dfbf74a",
+  "Copernicus_DSM_COG_10_N68_00_W159_00_DEM": "ddd671739fabb297807e8f2f74194051fff88714dd42f6c56976864a5f015f60",
+  "Copernicus_DSM_COG_10_N68_00_W158_00_DEM": "06cb5a3710fb15e287267eddd13612f919e7b8d7fe8030c748bdcdcdcfd48517",
+  "Copernicus_DSM_COG_10_N68_00_W157_00_DEM": "3008337a0e63d5618341943bc67a8e827a27c082b3ddb2263c9318c08d3054c2",
+  "Copernicus_DSM_COG_10_N68_00_W156_00_DEM": "59025702050245af9c83874e248e6ed30e26a50a44d2cceeb8abdbc7bdb1eda4",
+  "Copernicus_DSM_COG_10_N68_00_W155_00_DEM": "c358ca624e930c425542dfeff44d07dd6c7a1cb522ec38ffeff34ca28df04304",
+  "Copernicus_DSM_COG_10_N68_00_W154_00_DEM": "e59645d6dd591c0d6c596868502b5e14e1b18d5efc7bcef88e7a789e7946b2e3",
+  "Copernicus_DSM_COG_10_N68_00_W153_00_DEM": "6766c6cda67f7ae53215f738ba1520b23a3f029938eb69a811efa26658fa281f",
+  "Copernicus_DSM_COG_10_N68_00_W152_00_DEM": "23dd8fec06edf5da1dea021095cf02c9194d554a5fba8c8752696342c9038f5b",
+  "Copernicus_DSM_COG_10_N68_00_W151_00_DEM": "efaf07865c1767c19f43dd5b1bf0e88fbf80b60d99873eca23cfa281654904a5",
+  "Copernicus_DSM_COG_10_N68_00_W150_00_DEM": "99747fa975921693cd358b52402c952a0d749cab7d92d88fb43d540d693fd447",
+  "Copernicus_DSM_COG_10_N68_00_W149_00_DEM": "7fcb975e59f23d0f2240464ca46304ead70c92f53a7fc4b65da0e5d732faef9a",
+  "Copernicus_DSM_COG_10_N68_00_W148_00_DEM": "a26e4e20c4643116b34d1eebda9279aac8c99ad2a709bfa7ecd6a9fd7bbefcab",
+  "Copernicus_DSM_COG_10_N68_00_W147_00_DEM": "2d5f66bfa3b79753707a10269cff1c3fcf987908c38db76688f9d2bc2a6b8e42",
+  "Copernicus_DSM_COG_10_N68_00_W146_00_DEM": "f7fc9286964b3de7f8540ddcb8085ead6ec5a451482de1e4491b3f7d1ba36290",
+  "Copernicus_DSM_COG_10_N68_00_W145_00_DEM": "97bc39c607e1f346873b3e6bed0368e1686a239c58b9571cdb8c6d3f1ef9da3e",
+  "Copernicus_DSM_COG_10_N68_00_W144_00_DEM": "6484b921b0cdcded2515fbb692ea4a5ab497613c2e6ec70a2957a673fc5689a7",
+  "Copernicus_DSM_COG_10_N68_00_W143_00_DEM": "c1c07941fc4e425afc9ccb5fdf4a857e9abd980235afcb569be3c45032e94134",
+  "Copernicus_DSM_COG_10_N68_00_W142_00_DEM": "0541da634543e41f573fdc093bf5d3a0f2266615d7403c7b53ea94e70c48173b",
+  "Copernicus_DSM_COG_10_N69_00_W164_00_DEM": "b8ff1f2c0a8c52bbaf285bd277dd717c175728a4e2e8f866c2612a2094e907de",
+  "Copernicus_DSM_COG_10_N69_00_W163_00_DEM": "f4602935aa837d90f570524f8b5cf2dd5f900f9c6900024b953a7c752f859a8d",
+  "Copernicus_DSM_COG_10_N69_00_W162_00_DEM": "b62d440c408672ec02c474faada39f993e4a3631231302fa1a2a6333f1269756",
+  "Copernicus_DSM_COG_10_N69_00_W161_00_DEM": "1fcc5d8093e8ef9fb0e34a182bd73b3c2c24e19e9b8077950f25d44982b44314",
+  "Copernicus_DSM_COG_10_N69_00_W160_00_DEM": "8bfc4250394e03237c77c8bf0c38f585a7fa203ef36b44d8e41ba94d3d66d285",
+  "Copernicus_DSM_COG_10_N69_00_W159_00_DEM": "6a9142486f923f15cad5219dac2b207bcba54b283887f1026379a4f71636ff76",
+  "Copernicus_DSM_COG_10_N69_00_W158_00_DEM": "293fbfd78ac61846903c06b2ebdc6b0f654ae7c00bf116880bfc4ecec207746f",
+  "Copernicus_DSM_COG_10_N69_00_W157_00_DEM": "da4186024f1cd5c25a7c03d30f68d5a250577170a598901a23d51115b01e7a68",
+  "Copernicus_DSM_COG_10_N69_00_W156_00_DEM": "e40b07944c3bea906e1a365f88c5be453dc2988d159a1111ab9477e6eb8d4456",
+  "Copernicus_DSM_COG_10_N69_00_W155_00_DEM": "ecceaae872bbdffbbf562d0c8230477e419055156a26911f4ad9958e2b376b8b",
+  "Copernicus_DSM_COG_10_N69_00_W154_00_DEM": "c4ab065aa2c9310a05e9fcfb2a6e626bfde704359ca21cfde0f9f475b2618118",
+  "Copernicus_DSM_COG_10_N69_00_W153_00_DEM": "38f851f6eb1b205a600702db1a5a53c273852c88d783f0bf9f565472b5b2b9dd",
+  "Copernicus_DSM_COG_10_N69_00_W152_00_DEM": "34930c786b9b001f65f8158fcb1e9b8ff7216ecb14fec7050761f83027db5219",
+  "Copernicus_DSM_COG_10_N69_00_W151_00_DEM": "993035c044739e818e293531bb456bcbe30e493366657abf4696d0dfe303eb6b",
+  "Copernicus_DSM_COG_10_N69_00_W150_00_DEM": "fb473ef8e973ad60c50f5551c566b1e4331001b41fba7cde9ea9696d31ad0119",
+  "Copernicus_DSM_COG_10_N69_00_W149_00_DEM": "781e8fc706f4bfab3ea9b45be6eabb15e4e9d77eddaaea821f03b163fbbe010a",
+  "Copernicus_DSM_COG_10_N69_00_W148_00_DEM": "a3064d633396f0f64f40ffec4d3f9c293f8604a07640411916d5b9efd4aa74c9",
+  "Copernicus_DSM_COG_10_N69_00_W147_00_DEM": "9a630e89591110df2fe1588df7e2fc1e41dfcd4df370d05c372a76f67f837752",
+  "Copernicus_DSM_COG_10_N69_00_W146_00_DEM": "9a36ad6d5310a50d37d1ab31b6247f72a30a7c008611d2f81a47df0574935297",
+  "Copernicus_DSM_COG_10_N69_00_W145_00_DEM": "61022cf42392b464ffc1b86a58ec6d6506d179a26f22ea29f921f531d71a1285",
+  "Copernicus_DSM_COG_10_N69_00_W144_00_DEM": "8cddd685686827bcc36e02dcb7b89b76634474f72c1c7dd921bc19957acbf807",
+  "Copernicus_DSM_COG_10_N69_00_W143_00_DEM": "fdcf1edbe83153dd52efc0a5857be31f34eb98236364746bfbfcd381c568360b",
+  "Copernicus_DSM_COG_10_N69_00_W142_00_DEM": "fe27183f1189eb61861cb481ae6071ad37f1eeac0a5580e7496927e6d5657dcb",
+  "Copernicus_DSM_COG_10_N70_00_W163_00_DEM": "fdc4ba819a3069996d139a3223c793ed6779120368590ed4950c4aff6b3854b5",
+  "Copernicus_DSM_COG_10_N70_00_W162_00_DEM": "692851b2bfc657105213ee8bb11154160a6a22c87da14858ca338ea446adc00e",
+  "Copernicus_DSM_COG_10_N70_00_W161_00_DEM": "35d9e276d13809368ef0828a83c4e767e94cf3bca0563d9b14447c63b9906a86",
+  "Copernicus_DSM_COG_10_N70_00_W160_00_DEM": "fb33ea74820ff112e3b65b02536198c40d0f198e85c55fea22f212a363dcbf61",
+  "Copernicus_DSM_COG_10_N70_00_W159_00_DEM": "3be22c5f4541988862aee1f64d62ba66bbeec25517fd74bb31e1ed8f0eb6ebea",
+  "Copernicus_DSM_COG_10_N70_00_W158_00_DEM": "d80370d839aba0f58a51163adb676c47f7fee585f03fdb75b334778cdbf6179c",
+  "Copernicus_DSM_COG_10_N70_00_W157_00_DEM": "b8c8d005b7b4e705c5665e4bb85c7248a7689174814038f0ed6cd026df03d6f3",
+  "Copernicus_DSM_COG_10_N70_00_W156_00_DEM": "bd3a9e9fbd4c4934cabaa87f36f97dadd20f6d8e25fcc8888178adf1846ea3a9",
+  "Copernicus_DSM_COG_10_N70_00_W155_00_DEM": "eee6f8b0d681cb68941e94a032c7afd2ab2125606693c584f28f706966cdf618",
+  "Copernicus_DSM_COG_10_N70_00_W154_00_DEM": "4b7a87d5c061748a211c8aa53748639e8b50f6df18eb82b7b55b63f5a8cba5b5",
+  "Copernicus_DSM_COG_10_N70_00_W153_00_DEM": "dfaf3d640df917b5abd8c12fa11fecb5b1cd6b2cdc501ec5018d22c4c5eeec06",
+  "Copernicus_DSM_COG_10_N70_00_W152_00_DEM": "fbf71ca85875c1f1b65e4b418350b53f08ba6b5b26d376e1a6e592da50736e56",
+  "Copernicus_DSM_COG_10_N70_00_W151_00_DEM": "1db1b936d477a96acff47e8a4d45f36f6a703ea8ced4f99d7304c942a9e34b32",
+  "Copernicus_DSM_COG_10_N70_00_W150_00_DEM": "d5a82a2a6721dcc8417892e8e38e26db838690c8f2946af8795bb60a6b3b315f",
+  "Copernicus_DSM_COG_10_N70_00_W149_00_DEM": "49ea58e841f39d1de5d31cee48966c2efc920bbf8b803807ee6d45dcd04c483f",
+  "Copernicus_DSM_COG_10_N70_00_W148_00_DEM": "b8c61037146d395c3e26e35b95a70be5e6ecbda8647e2ed52aa0213d5ba8a8e9",
+  "Copernicus_DSM_COG_10_N70_00_W147_00_DEM": "1b696f4546fac844dfac11dafa0fff3d51ba18dd594f4f2984d7fc81e68f39cb",
+  "Copernicus_DSM_COG_10_N70_00_W146_00_DEM": "60ec6760d0c81f0ced9a7457c9fbf1633b92c5d4925928f6b827e97a3163ce19",
+  "Copernicus_DSM_COG_10_N70_00_W145_00_DEM": "c7e84d588ab7a0c6af6a385b77738376aefff43167168ccb4759fe2d36df7f2d",
+  "Copernicus_DSM_COG_10_N70_00_W144_00_DEM": "086c75d213d49b6225423235212fa0ffa89f9e536162ec5f349a7ce514fb13a5",
+  "Copernicus_DSM_COG_10_N70_00_W143_00_DEM": "b56af227a422e3e2a32012bc198ed9c1dbb70d3bac39d5e0dbd098f573b60a97",
+  "Copernicus_DSM_COG_10_N71_00_W158_00_DEM": "a3783961744df1815d14b389a7fe2bac2997891589e6edbe32b33a549f03cc98",
+  "Copernicus_DSM_COG_10_N71_00_W157_00_DEM": "61af5370bb7f92c8813c561aa50a7d3d743513f70d0d10f8991a89947c3c1ab7",
+  "Copernicus_DSM_COG_10_N71_00_W156_00_DEM": "75020ec1cc0723fcde31df6df94a5d59c31126a3e969a1e101cdf5aacb1e2706",
+  "Copernicus_DSM_COG_10_N71_00_W155_00_DEM": "e1bb55e963ad7cc65e629b2047e2cfa15707367e9d16520f7049a007d5e1b461"
+ },
+ "dem_tiles_status_counts": {
+  "exists": 255,
+  "downloaded": 1
+ },
+ "dem_url": "https://copernicus-dem-30m.s3.amazonaws.com/{nm}/{nm}.tif",
+ "masks": {
+  "pfr": {
+   "file": {
+    "path": "data/processed/cci_pfr_mean_1997_2021.nc",
+    "bytes": 1113342,
+    "sha256": "68c307013335ec815b01b2312687e74c561a270dd342dbb2199228f1980b0269"
+   },
+   "rule": "영역 정의에서 PFR ≥ 50 % 만 둔다. 열 pfr_lt50 은 항상 0"
+  },
+  "water": {
+   "files": {
+    "occurrence_170W_80Nv1_4_2021.tif": {
+     "path": "data/raw/gsw/occurrence_170W_80Nv1_4_2021.tif",
+     "bytes": 15536034,
+     "sha256": "0c487d6b274f7064bfe383aed4c77c43f5698002a692cff07081287ed7c84e3b"
+    },
+    "occurrence_160W_80Nv1_4_2021.tif": {
+     "path": "data/raw/gsw/occurrence_160W_80Nv1_4_2021.tif",
+     "bytes": 44058288,
+     "sha256": "ab644aff4e35835a1ec39c89eca74014b09409b8443a30acf0541081851a2713"
+    },
+    "occurrence_150W_80Nv1_4_2021.tif": {
+     "path": "data/raw/gsw/occurrence_150W_80Nv1_4_2021.tif",
+     "bytes": 20149414,
+     "sha256": "277579304184419ce7d66c0c8819f62de4a0e29a63943009c42ad81263b40c46"
+    },
+    "occurrence_170W_70Nv1_4_2021.tif": {
+     "path": "data/raw/gsw/occurrence_170W_70Nv1_4_2021.tif",
+     "bytes": 95105288,
+     "sha256": "33a982f3b16a0805526f0238154deb2940cfee8ff91e88da702a1d28143f70ef"
+    },
+    "occurrence_160W_70Nv1_4_2021.tif": {
+     "path": "data/raw/gsw/occurrence_160W_70Nv1_4_2021.tif",
+     "bytes": 48801776,
+     "sha256": "277599b23e668c3d488aa01fa4317962d440827ed317ef848085afd1e0453184"
+    },
+    "occurrence_150W_70Nv1_4_2021.tif": {
+     "path": "data/raw/gsw/occurrence_150W_70Nv1_4_2021.tif",
+     "bytes": 52131654,
+     "sha256": "c77b1884e32c1160f35655bc3c7dc36bace5ddf0a37b4d2bc73421de9c96948f"
+    }
+   },
+   "rule": "셀 안 30 m 화소(255 제외)의 평균 발생 빈도 ≥ 50 % 이면 회색(water). 레나와 같은 해석",
+   "n_no_gsw_coverage": 179,
+   "note": "59–60°N 띠와 GSW 유효 화소가 없는 셀은 수체를 판정하지 않는다(회색 아님)"
+  },
+  "sea_input": "DEM 타일 없음(dem_tile_absent), cci_alt 결측, e5_sqrt_tdd_soil 결측, e5_sqrt_tdd 결측이면 회색(레나와 같다)",
+  "land_rule": "격자 = Natural Earth 10m 육지 안. land 열(보고용)은 레나 정의(DEM 유효 · GSW 유효 · 수체 아님)",
+  "gray_reason_order": [
+   "dem_tile_absent",
+   "water",
+   "pfr_missing",
+   "pfr_lt50",
+   "cci_missing",
+   "soil_tdd_missing",
+   "s_missing"
+  ],
+  "summary": {
+   "n_cells": 899633,
+   "n_gray": 41116,
+   "n_shown": 858517,
+   "n_land": 886198,
+   "n_land_gray": 27738,
+   "frac_land_gray": 0.03130000293388159,
+   "by_reason_any": {
+    "dem_tile_absent": 0,
+    "water": 13256,
+    "pfr_missing": 0,
+    "pfr_lt10": 0,
+    "cci_missing": 22462,
+    "soil_tdd_missing": 22131,
+    "s_missing": 0
+   },
+   "by_reason_first": {
+    "dem_tile_absent": 0,
+    "water": 13256,
+    "pfr_missing": 0,
+    "pfr_lt10": 0,
+    "cci_missing": 18643,
+    "soil_tdd_missing": 9217,
+    "s_missing": 0
+   },
+   "land_by_reason_any": {
+    "dem_tile_absent": 0,
+    "water": 0,
+    "pfr_missing": 0,
+    "pfr_lt10": 0,
+    "cci_missing": 18522,
+    "soil_tdd_missing": 22001,
+    "s_missing": 0
+   },
+   "land_by_reason_first": {
+    "dem_tile_absent": 0,
+    "water": 0,
+    "pfr_missing": 0,
+    "pfr_lt10": 0,
+    "cci_missing": 18522,
+    "soil_tdd_missing": 9216,
+    "s_missing": 0
+   },
+   "n_x25_missing_shown": {
+    "0": 857334,
+    "4": 261,
+    "5": 6,
+    "9": 916
+   },
+   "pfr_values_shown": {
+    "min": 50.0,
+    "max": 100.0
+   },
+   "water_rule_alt": {
+    "applied": "평균 발생 빈도 ≥ 50 %(gsw_occ_mean)",
+    "alternative": "발생 빈도 ≥ 50 % 인 30 m 화소가 유효 화소의 절반 이상(gsw_water_frac50 ≥ 0.5)",
+    "n_water_applied": 13256,
+    "n_water_alt": 14458,
+    "n_alt_not_applied": 1266,
+    "n_alt_not_applied_shown": 1238,
+    "n_alt_not_applied_land": 1266,
+    "n_applied_not_alt": 64,
+    "note": "대안 해석이면 n_alt_not_applied_shown 셀이 표시에서 빠지고 n_applied_not_alt 셀은 수체가 아니게 된다. 확정은 예측 전에 한다"
+   },
+   "pfr_missing_rule": {
+    "note": "PFR 결측 셀의 회색 처리는 6.5 에 없는 추가 규칙이다. n_only 는 이 사유만으로 회색이 된 셀 수(0 이면 규칙을 빼도 표시 셀이 같다)",
+    "n_any": 0,
+    "n_first": 0,
+    "n_land_first": 0,
+    "n_only": 0,
+    "n_land_only": 0
+   }
+  }
+ },
+ "validity": {
+  "x25_all_valid_frac": 0.9731835092754489,
+  "x25_all_valid_frac_shown": 0.9986220424289792,
+  "missing_by_col": {
+   "dem_elev": 0,
+   "dem_slope": 0,
+   "dem_aspect_sin": 0,
+   "dem_aspect_cos": 0,
+   "dem_tpi": 0,
+   "dem_rough": 0,
+   "e5_maat": 0,
+   "e5_tdd": 0,
+   "e5_fdd": 0,
+   "e5_sqrt_tdd": 0,
+   "e5_twarm": 0,
+   "e5_tcold": 0,
+   "e5_stl1": 0,
+   "e5_swe": 0,
+   "sg_clay_5_15": 2881,
+   "sg_sand_5_15": 2881,
+   "sg_silt_5_15": 2881,
+   "sg_bdod_5_15": 5332,
+   "sg_cfvo_5_15": 2881,
+   "sg_phh2o_5_15": 2881,
+   "sg_soc_0_5": 5332,
+   "sg_soc_5_15": 5332,
+   "sg_soc_15_30": 5332,
+   "cci_alt": 22462,
+   "cci_valid": 0,
+   "e5_sqrt_tdd_soil": 22131
+  }
+ },
+ "qa": {
+  "file": "data/processed/map_alaska/alaska_grid_qa_v1.csv",
+  "tolerance": {
+   "abs": 1e-06,
+   "rel_dem": 0.0001,
+   "pass_frac": 0.01
+  },
+  "n_cols": 27,
+  "n_pass": 21,
+  "passed": false,
+  "max_frac_mismatch": 0.1148022931059826,
+  "n_v3": 13606,
+  "n_soil_joined": 13606,
+  "timing_s": {
+   "dem": 25.0,
+   "e5": 4.1,
+   "cci": 1.6,
+   "sg_new_windows": {
+    "n_outside_existing": 0,
+    "n_fill_candidates": 0,
+    "windows": {}
+   },
+   "sg": 0.2
+  },
+  "sg_all9_missing_rows": 0,
+  "sg_any_missing_rows": 0,
+  "v3_sg_all9_missing_rows": 0,
+  "v3_rows_in_grid": 12103,
+  "v3_cells_in_grid": 327
+ },
+ "inputs": {
+  "fidelity_base_v3": {
+   "path": "data/processed/fidelity_base_v3.csv",
+   "bytes": 8700509,
+   "sha256": "71b5d3f6c297770d41aa7215e906e737842a3594005a5b52952bb636c752dc0f"
+  },
+  "e5_soil_tdd_v3": {
+   "path": "data/processed/e5_soil_tdd_v3.csv",
+   "bytes": 2487925,
+   "sha256": "711d0cd3ba0e2e410ee9a973f69db44f543459ffa03a1e6ea935db4a3884ef04"
+  }
+ },
+ "outputs": {
+  "grid": {
+   "path": "data/processed/map_alaska/alaska_grid_x25_v1.csv.gz",
+   "bytes": 72819418,
+   "sha256": "2af91faa3d006531b90735aab1c19595a16e27af482c28eb6c86afc62b837151"
+  },
+  "cells": {
+   "path": "data/processed/map_alaska/alaska_grid_cells_v1.csv",
+   "bytes": 49219957,
+   "sha256": "548092cdcce608672b3e34a38c82ad9b1995139981300bf95b37a866a1049b44"
+  },
+  "tiles": {
+   "path": "data/processed/map_alaska/alaska_grid_dem_tiles_v1.csv",
+   "bytes": 34523,
+   "sha256": "0653b96f536383bacad3dca721b75c417a4176b2eca132e29b29dcf91a459498"
+  },
+  "mask": {
+   "path": "data/processed/map_alaska/alaska_grid_mask_v1.csv",
+   "bytes": 54572541,
+   "sha256": "3455d8f3ce0c712c73012856f158aa433447257b6a86f531343e920525deee97"
+  },
+  "qa": {
+   "path": "data/processed/map_alaska/alaska_grid_qa_v1.csv",
+   "bytes": 13626,
+   "sha256": "2d07f5c48c76ae7d6c50d944413e507e23f7bed01a3d7271674d1f1bc4d4e979"
+  }
+ },
+ "cov_parts": {
+  "map_alaska_grid_cci.csv": {
+   "path": "data/processed/map_alaska/cov_parts/map_alaska_grid_cci.csv",
+   "bytes": 18849055,
+   "sha256": "66fa1123ee542d925d181b774734ef61931634f3b5499883b308a5441ae73b33"
+  },
+  "map_alaska_grid_dem.csv": {
+   "path": "data/processed/map_alaska/cov_parts/map_alaska_grid_dem.csv",
+   "bytes": 112090073,
+   "sha256": "17fba980e6eb5ccefea16998c87a16d802dbdab6506dbda50a609cd17bc1b48c"
+  },
+  "map_alaska_grid_e5.csv": {
+   "path": "data/processed/map_alaska/cov_parts/map_alaska_grid_e5.csv",
+   "bytes": 286567169,
+   "sha256": "14e9bc8a43512107132f109a2467c31e26776de20c7ef26c7bc7f6b201eafba9"
+  },
+  "map_alaska_grid_sg.csv": {
+   "path": "data/processed/map_alaska/cov_parts/map_alaska_grid_sg.csv",
+   "bytes": 59141163,
+   "sha256": "0fe0baeda514aec31da70b9c913646236eec9326857698a3172c8255d4c5454a"
+  },
+  "map_alaska_qa_cci.csv": {
+   "path": "data/processed/map_alaska/cov_parts/map_alaska_qa_cci.csv",
+   "bytes": 207330,
+   "sha256": "c5b73e4d324b30be65e6bb169fa774eb24cd6a1f67cf60de7dfe72a2058486ad"
+  },
+  "map_alaska_qa_dem.csv": {
+   "path": "data/processed/map_alaska/cov_parts/map_alaska_qa_dem.csv",
+   "bytes": 1649441,
+   "sha256": "24db4c30e114f20a4a5a0143a5cc8e09f3a899c281669605ca208203e41b82b6"
+  },
+  "map_alaska_qa_e5.csv": {
+   "path": "data/processed/map_alaska/cov_parts/map_alaska_qa_e5.csv",
+   "bytes": 4264748,
+   "sha256": "f595ffff3b65fc963cf4297f2ece95abe9e41aa1565f232efa8068b3b9e19577"
+  },
+  "map_alaska_qa_sg.csv": {
+   "path": "data/processed/map_alaska/cov_parts/map_alaska_qa_sg.csv",
+   "bytes": 816510,
+   "sha256": "27e881a94780d9a133d4c1389af667aae3860dd5c312194ab1940a234a70a236"
+  }
+ },
+ "timing_s": {
+  "mask": 46.1,
+  "merge": 56.3
+ },
+ "elapsed_s": 128.3,
+ "max_rss_mb": 7151.0,
+ "threads": {
+  "OMP_NUM_THREADS": "1",
+  "nice": 10,
+  "dem_download_workers": 4
+ },
+ "stages_run": [
+  "mask",
+  "merge"
+ ],
+ "run_note": "3차 실행(mask, merge): 2차 실행이 qa 단계의 기록 줄(통과 열 bool 변환)에서 멈췄다. qa 표와 보조 기록은 2차에서 이미 썼다. 1차 실행에서 DEM 타일 111개를 받았고 2차에서 1개(N64 W144)를 받았다",
+ "run_history": [
+  {
+   "run": 1,
+   "time": "2026-10-05 02:13–02:23 KST",
+   "stages": "grid,tiles(,cov 중단)",
+   "note": "grid 5.7 s. DEM 타일 112개 가운데 111개를 AWS 에서 받았다(411 s, 동시 4). N64 W144 1개가 읽기 시간 초과(error)라 cov 단계 초기에 중단했다. 이 실행의 로그는 다음 실행의 로그 파일 덮어쓰기로 남지 않았다"
+  },
+  {
+   "run": 2,
+   "time": "2026-10-05 02:23–02:47 KST",
+   "stages": "tiles,cov,qa",
+   "log": "data/processed/map_alaska/build_map_grid_alaska_v1_run2_tiles_cov_qa.log",
+   "timing_s": {
+    "tiles": 4.0,
+    "dem": 348.4,
+    "e5": 202.5,
+    "cci": 72.5,
+    "sg": 26.3
+   },
+   "sg_new_windows": {
+    "window": "map_alaska_v1_0",
+    "bbox": [
+     -168.297974,
+     -166.0000624,
+     64.3245,
+     68.8125
+    ],
+    "scalesize": [
+     113,
+     79
+    ],
+    "n_cells": 5325,
+    "n_values_filled": 46392,
+    "meta": "data/raw/soilgrids_wcs/windows_wcs_meta_map_alaska_v1.json"
+   },
+   "note": "재시도 규칙(3회, 시간 초과 120 s)을 더해 N64 W144 를 받았다(4 s). qa 단계는 표와 보조 기록을 쓴 뒤 기록 줄(통과 열 bool 변환)에서 멈췄다. qa 로그의 'v3 레나' 문구는 레나 stage_qa 의 고정 문자열이고 실제 대조 대상은 알래스카 v3 13,606행이다"
+  },
+  {
+   "run": 3,
+   "time": "2026-10-05 02:47–02:50 KST",
+   "stages": "mask,merge",
+   "timing_s": {
+    "mask": 46.1,
+    "merge": 56.3
+   },
+   "max_rss_mb": 7151.0
+  }
+ ],
+ "dem_tiles_note": "dem_tiles 표의 'exists' 255개 가운데 111개는 1차 실행에서 받은 타일이다(실행 전부터 있던 타일 144개). 'downloaded' 1개는 2차 실행",
+ "qa_note": "ERA5-Land 8열·SoilGrids 9열·CCI 2열·토양 도일은 허용 차 안(불일치 ≤ 0.09 %)이다. DEM 6열은 v3 알래스카 13,606행 가운데 88.5–88.8 %가 같고 ABoVE_AK 1,525–1,562행(26개 타일, 고도 차 중앙값 0.04 m, 사분위 −0.29–0.40 m, 최대 4.6 m)이 다르다. 같은 함수(expand_calm_regions.py c 규칙)를 v3 좌표에 다시 적용해도 그 행의 v3 값이 재현되지 않으므로 그 행들의 v3 DEM 값은 다른 좌표(예: 셀 안 원 측정점)에서 계산된 것으로 보인다. 격자는 셀 중심 규칙을 쓴다"
+}

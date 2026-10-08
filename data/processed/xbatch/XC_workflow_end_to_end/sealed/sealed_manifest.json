@@ -1,0 +1,184 @@
+{
+ "entries": [
+  {
+   "file": "xc_smoke_hyp.csv",
+   "rows": 8,
+   "sha256": "4acaa285a2faee5df4c06ae54cd1b24f8cc09154083d5098f0a919e119fb0f32",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_smoke_holm.csv",
+   "rows": 8,
+   "sha256": "03547c9aa87426f604a66894eddf03df8defb12f7b9ce77f486610b920ad0e6b",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_smoke_contrasts_main.csv",
+   "rows": 9,
+   "sha256": "cb89f019cb1b980b5df34543137137c8be2f86c4aeb795609d5f6de6acc4fffb",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_smoke_loo.csv",
+   "rows": 2,
+   "sha256": "5c7efd77bd0b2fd6192e3f23201d32bedecd963e810dc8b82385b9c8e8251c0b",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_smoke_harm_b.csv",
+   "rows": 3,
+   "sha256": "0e1b4191555ca21b7da049c71ad9ff48f7d81bcd066e80aec0fdcd724aa6f84c",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_smoke_contrasts_aux.csv",
+   "rows": 70,
+   "sha256": "bfcf25c63f10465ece14f2f6fff60fe10424a52ed99f2ba53bba04778a674833",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_smoke_f2_counts.csv",
+   "rows": 8,
+   "sha256": "8d8ed59bb0917a67d1e32c9cd47c1ba9ef6981b8c4b466219f3908ec9915cee2",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_smoke_harm_a.csv",
+   "rows": 36,
+   "sha256": "aa80aa158faf173132be824ea077f9c469e4cf269db58389dfcfde88d58c2a89",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_smoke_diag.csv",
+   "rows": 2,
+   "sha256": "40c41559b2f0cf7aa28dcf3e5e71459117daab6b06bd91ab7458bbf74e015597",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_smoke_labeleq.csv",
+   "rows": 6,
+   "sha256": "dc7293a04265c47327ebcac0a62df54624e6fd22e566e2966b19ea7fc2d59c81",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_smoke_alloc.csv",
+   "rows": 4,
+   "sha256": "3ec420dab26fb019319ee80fc4448da3995dea609de6b362ec2c5120d75db8f0",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_smoke_s12.csv",
+   "rows": 1,
+   "sha256": "1a1ea11ae41968b468117a65c28ef2efb4422d260b98d6b811d6636c7eb38ce0",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_smoke_sentences.json",
+   "rows": 3,
+   "sha256": "45e13545be553775443b291ec7f41c8c8c3886643d1583b5548e8930155689a0",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_smoke_xcr_contrasts.csv",
+   "rows": 10,
+   "sha256": "842b05313cae6a1fcbcd204f7f9bd135479be7b7709c3d1a91733d26755bea50",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_smoke_meta.json",
+   "rows": 12,
+   "sha256": "a99d4fe5d4d59cd4ed2ae59abed613c508a50b674b8392895f226cbe070f39c1",
+   "written": "2026-10-04 16:03:22"
+  },
+  {
+   "file": "xc_hyp.csv",
+   "rows": 8,
+   "sha256": "5153e0ea7de7deb3cae739d303203d554f68b064f5a7bc7cb05561df4adfe373",
+   "written": "2026-10-05 05:20:05"
+  },
+  {
+   "file": "xc_holm.csv",
+   "rows": 8,
+   "sha256": "4098741b58a9483f388eed71ed17b518cec8f09ec542ac0f0ddece4caf8b6a4d",
+   "written": "2026-10-05 05:20:05"
+  },
+  {
+   "file": "xc_contrasts_main.csv",
+   "rows": 18,
+   "sha256": "5a385eb20a037935ee92215d97bb04e9aad8c949de1cb871fb96f7f8676c8e7c",
+   "written": "2026-10-05 05:20:05"
+  },
+  {
+   "file": "xc_loo.csv",
+   "rows": 13,
+   "sha256": "0bbc7379d8aa29d1f3d30c29e9d24cf1c942acb65aeacc7f83d2aefa393c2c28",
+   "written": "2026-10-05 05:20:05"
+  },
+  {
+   "file": "xc_harm_b.csv",
+   "rows": 14,
+   "sha256": "c30ea4a6af1dab9b55242b1cc4434b709560093c8c14bc14e8d773ef1164bcaf",
+   "written": "2026-10-05 05:20:05"
+  },
+  {
+   "file": "xc_contrasts_aux.csv",
+   "rows": 149,
+   "sha256": "18a84c422bcdac79368c2e7d9100cdd341797e1a42583aafe53cefae104e1437",
+   "written": "2026-10-05 05:20:05"
+  },
+  {
+   "file": "xc_f2_counts.csv",
+   "rows": 8,
+   "sha256": "dec8f1bced3db8f6916a1914010f422696fb41d928ab033d9e3c83d36b10f9c6",
+   "written": "2026-10-05 05:20:05"
+  },
+  {
+   "file": "xc_harm_a.csv",
+   "rows": 36,
+   "sha256": "fe05f01c1a6fa57c297341890bda32feb33aa5f08a080306964d839343e0f7be",
+   "written": "2026-10-05 05:20:05"
+  },
+  {
+   "file": "xc_diag.csv",
+   "rows": 21,
+   "sha256": "9a8f639fd708fb18b8200a1eae70f540ce0e56f6a0d9cdf5f185d1ebbc243b38",
+   "written": "2026-10-05 05:20:05"
+  },
+  {
+   "file": "xc_labeleq.csv",
+   "rows": 30,
+   "sha256": "c19430ddfc28a076942f520dabf7a68000bb2bb09da3de369398a77ad3b1d739",
+   "written": "2026-10-05 05:20:05"
+  },
+  {
+   "file": "xc_alloc.csv",
+   "rows": 8,
+   "sha256": "0c078498a5bdee66c1908e80ed51aee3aaba86ec76539d44a9240587f51fe0fa",
+   "written": "2026-10-05 05:20:05"
+  },
+  {
+   "file": "xc_s12.csv",
+   "rows": 2,
+   "sha256": "c4025deb6932190ced40ef68f33194b96d6ddaf5ed8cbbe75ac3a689482b124e",
+   "written": "2026-10-05 05:20:05"
+  },
+  {
+   "file": "xc_sentences.json",
+   "rows": 5,
+   "sha256": "352876680b018ffa9de6af7ffaed14a6a9bc47d35cda29b46b7ea6b6ac1dde39",
+   "written": "2026-10-05 05:20:05"
+  },
+  {
+   "file": "xc_xcr_contrasts.csv",
+   "rows": 36,
+   "sha256": "0d97ce11e194513086d6d27928953dfd8213c70e0f8e361f1ab0de1ad3d32d56",
+   "written": "2026-10-05 05:20:05"
+  },
+  {
+   "file": "xc_meta.json",
+   "rows": 19,
+   "sha256": "41d79bdf1e6e5262c9b481f04704e5718702578791dad1b215a21ae551c4e0b3",
+   "written": "2026-10-05 05:20:05"
+  }
+ ]
+}

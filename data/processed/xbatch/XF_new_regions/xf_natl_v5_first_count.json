@@ -1,0 +1,28 @@
+{
+ "created": "2026-10-04T21:10:17+09:00",
+ "deadline_count": "2026-10-05T14:22:39+09:00",
+ "before_deadline": true,
+ "priority_points": {
+  "sjm_adventdalen_wendt2023_points.csv": "6dc163415cf4a37c2873473b0d93d47aabd4e5ca10c34567d68101e44778011f",
+  "swe_stordalen_crill_points.csv": "d269a4e1e7204b3a8c2efc01faf618a6418bee70422b5878a734e5bed9005095"
+ },
+ "points_manifest_sha256": "0781442ab1dbb8eaca23566f78d127c88508b717543b5a2d6ffc3a9e68d9c76f",
+ "n_points_files": 2,
+ "v5_sha256": "82d5307d1064cce92e51d4f18088d00aba12dd134297ec7b135ec765eb8697d7",
+ "specs_sha256": "89a2a982d484b6132ff5cc3f989f81487c5910531730002375eaa46418488efe",
+ "script_sha256": "0c1612a5f546debc173f3938825181d4be141ef088711457b74d89339b2d0812",
+ "specs": {
+  "NAtlantic~lic~v5": {
+   "table_sha256": "9f227d825295fc0f1607fb79fa43e5dd9c4cc1a52d6e350202e46975caa2d7a5",
+   "n_cells": 32,
+   "n_xf_target": 10,
+   "n_blocks": 10,
+   "n_valid_splits": 5,
+   "nb_union": 8,
+   "eligible": true,
+   "xf_sources": "sjm_adventdalen_wendt2023;swe_stordalen_crill",
+   "run": true
+  }
+ },
+ "rule": "이 기록이 없거나 마감 뒤이거나 부적격이면 NAtlantic v5 민감도 행은 점 추정이다(집계기 natl_status). 라벨 값 미사용"
+}

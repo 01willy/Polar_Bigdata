@@ -1,0 +1,42 @@
+[grid] 셀 53,011개 · 행(ky) 234 · 위도 71.5005–73.5975 · 경도 123.3001–130.0996
+[dem] 유효 52431/53011 · 미보유 타일 [(72, 130, 367), (73, 130, 213)]
+  [e5] 청크 (0, 3): 셀 53011 · 영역 34×81
+[e5] 유효 51673/53011 · 토양 51673 · {'fb02': 7159, 'fb05': 4190, 'fail': 1338, 's_direct': 40324, 's02': 7159, 's05': 4190, 's_fail': 1338}
+[cci] 유효 42769/53011 · 연도 파일 25
+[sg] 기존 창 lena: 후보 53011 · 채움 398526
+[sg] 9층 모두 유효 44039/53011 · 지역별 {'Lena': 44039}
+[qa] v3 레나 F4_direct 3037행
+[dem] 유효 3037/3037 · 미보유 타일 []
+  [e5] 청크 (0, 3): 셀 3037 · 영역 33×79
+[e5] 유효 3037/3037 · 토양 3037 · {'fb02': 382, 'fb05': 1114, 'fail': 0, 's_direct': 1541, 's02': 382, 's05': 1114, 's_fail': 0}
+[cci] 유효 2958/3037 · 연도 파일 25
+[sg] 기존 창 lena: 후보 3037 · 채움 24384
+[sg] 9층 모두 유효 2641/3037 · 지역별 {'Lena': 2641}
+[qa] 6.4 대조 열 27 · 통과 27 · 최대 불일치 비율 0.0000
+[mask] {"n_cells": 53011, "n_gray": 14925, "n_shown": 38086, "n_land": 38173, "n_land_gray": 87, "frac_land_gray": 0.0022790977916328295, "by_reason_any": {"dem_tile_absent": 580, "water": 11485, "pfr_missing": 6185, "pfr_lt10": 0, "cci_missing": 10242, "soil_tdd_missing": 1338, "s_missing": 1338}, "by_reason_first": {"dem_tile_absent": 580, "water": 11485, "pfr_missing": 2783, "pfr_lt10": 0, "cci_missing": 77, "soil_tdd_missing": 0, "s_missing": 0}, "land_by_reason_any": {"dem_tile_absent": 0, "water": 0, "pfr_missing": 10, "pfr_lt10": 0, "cci_missing": 87, "soil_tdd_missing": 0, "s_missing": 0}, "land_by_reason_first": {"dem_tile_absent": 0, "water": 0, "pfr_missing": 10, "pfr_lt10": 0, "cci_missing": 77, "soil_tdd_missing": 0, "s_missing": 0}, "n_x25_missing_shown": {"0": 37694, "4": 120, "9": 272}, "pfr_values_shown": {"min": 100.0, "max": 100.0}, "water_rule_alt": {"applied": "평균 발생 빈도 ≥ 50 %(gsw_occ_mean)", "alternative": "발생 빈도 ≥ 50 % 인 30 m 화소가 유효 화소의 절반 이상(gsw_water_frac50 ≥ 0.5)", "n_water_applied": 11485, "n_water_alt": 11861, "n_alt_not_applied": 454, "n_alt_not_applied_shown": 446, "n_alt_not_applied_land": 454, "n_applied_not_alt": 78, "note": "대안 해석이면 n_alt_not_applied_shown 셀이 표시에서 빠지고 n_applied_not_alt 셀은 수체가 아니게 된다. 확정은 예측 전에 한다"}, "pfr_missing_rule": {"note": "PFR 결측 셀의 회색 처리는 6.5 에 없는 추가 규칙이다. n_only 는 이 사유만으로 회색이 된 셀 수(0 이면 규칙을 빼도 표시 셀이 같다)", "n_any": 6185, "n_first": 2783, "n_land_first": 10, "n_only": 0, "n_land_only": 0}}
+[merge] data/processed/map_lena/lena_grid_x25_v1.csv.gz (53011, 58) · 4,387,996 B · sha256 d4c393627ffe0372…
+[merge] QA 통과 True · x25 모두 유효 0.792 · 회색 14,925/53,011
+[done] {'cov': {'dem': 26.2, 'e5': 15.7, 'cci': 1.5, 'sg': 0.5}, 'qa': 7.9, 'mask': 2.8} · 합계 65s · 최대 RSS 751 MB
+	Command being timed: "nice -n 10 python3 scripts/1_data_prep/build_map_grid_lena_v1.py --stage cov,qa,mask,merge --note 2026-09-30 검증 지적 반영 재조립(수체·PFR 결측 해석의 수치 기록, 스레드 명시). 내려받기 없음"
+	User time (seconds): 59.60
+	System time (seconds): 3.01
+	Percent of CPU this job got: 95%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:05.29
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 768804
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 67
+	Minor (reclaiming a frame) page faults: 495323
+	Voluntary context switches: 1040
+	Involuntary context switches: 257
+	Swaps: 0
+	File system inputs: 520632
+	File system outputs: 69064
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

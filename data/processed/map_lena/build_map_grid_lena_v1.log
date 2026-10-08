@@ -1,0 +1,34 @@
+[grid] 셀 53,011개 · 행(ky) 234 · 위도 71.5005–73.5975 · 경도 123.3001–130.0996
+[tiles] 없는 타일 11개를 scripts/0_download/copernicus_dem.py 로 받는다(작업 폴더 map_lena_dem_0b7box99)
+OK  Copernicus_DSM_COG_10_N71_00_E123_00_DEM  (15.1MB, 0점)
+OK  Copernicus_DSM_COG_10_N71_00_E124_00_DEM  (14.6MB, 0점)
+OK  Copernicus_DSM_COG_10_N71_00_E125_00_DEM  (14.5MB, 0점)
+OK  Copernicus_DSM_COG_10_N71_00_E126_00_DEM  (14.6MB, 0점)
+MISS Copernicus_DSM_COG_10_N72_00_E130_00_DEM  (HTTP 404, 해양/비존재, 0점)
+OK  Copernicus_DSM_COG_10_N73_00_E125_00_DEM  (9.8MB, 0점)
+OK  Copernicus_DSM_COG_10_N73_00_E126_00_DEM  (8.3MB, 0점)
+OK  Copernicus_DSM_COG_10_N73_00_E127_00_DEM  (8.5MB, 0점)
+OK  Copernicus_DSM_COG_10_N73_00_E128_00_DEM  (5.3MB, 0점)
+OK  Copernicus_DSM_COG_10_N73_00_E129_00_DEM  (0.8MB, 0점)
+MISS Copernicus_DSM_COG_10_N73_00_E130_00_DEM  (HTTP 404, 해양/비존재, 0점)
+
+완료: 9개 다운(0.09GB), 2개 없음. → data/raw/dem
+[tiles] {'exists': 13, 'downloaded': 9, 'absent_public': 2}
+[dem] 유효 52431/53011 · 미보유 타일 [(72, 130, 367), (73, 130, 213)]
+  [e5] 청크 (0, 3): 셀 53011 · 영역 34×81
+[e5] 유효 51673/53011 · 토양 51673 · {'fb02': 7159, 'fb05': 4190, 'fail': 1338, 's_direct': 40324, 's02': 7159, 's05': 4190, 's_fail': 1338}
+[cci] 유효 42769/53011 · 연도 파일 25
+[sg] 기존 창 lena: 후보 53011 · 채움 398526
+[sg] 9층 모두 유효 44039/53011 · 지역별 {'Lena': 44039}
+[qa] v3 레나 F4_direct 3037행
+[dem] 유효 3037/3037 · 미보유 타일 []
+  [e5] 청크 (0, 3): 셀 3037 · 영역 33×79
+[e5] 유효 3037/3037 · 토양 3037 · {'fb02': 382, 'fb05': 1114, 'fail': 0, 's_direct': 1541, 's02': 382, 's05': 1114, 's_fail': 0}
+[cci] 유효 2958/3037 · 연도 파일 25
+[sg] 기존 창 lena: 후보 3037 · 채움 24384
+[sg] 9층 모두 유효 2641/3037 · 지역별 {'Lena': 2641}
+[qa] 6.4 대조 열 27 · 통과 27 · 최대 불일치 비율 0.0000
+[mask] {"n_cells": 53011, "n_gray": 14925, "n_shown": 38086, "n_land": 38173, "n_land_gray": 87, "frac_land_gray": 0.0022790977916328295, "by_reason_any": {"dem_tile_absent": 580, "water": 11485, "pfr_missing": 6185, "pfr_lt10": 0, "cci_missing": 10242, "soil_tdd_missing": 1338, "s_missing": 1338}, "by_reason_first": {"dem_tile_absent": 580, "water": 11485, "pfr_missing": 2783, "pfr_lt10": 0, "cci_missing": 77, "soil_tdd_missing": 0, "s_missing": 0}, "land_by_reason_any": {"dem_tile_absent": 0, "water": 0, "pfr_missing": 10, "pfr_lt10": 0, "cci_missing": 87, "soil_tdd_missing": 0, "s_missing": 0}, "land_by_reason_first": {"dem_tile_absent": 0, "water": 0, "pfr_missing": 10, "pfr_lt10": 0, "cci_missing": 77, "soil_tdd_missing": 0, "s_missing": 0}, "n_x25_missing_shown": {"0": 37694, "4": 120, "9": 272}, "pfr_values_shown": {"min": 100.0, "max": 100.0}}
+[merge] data/processed/map_lena/lena_grid_x25_v1.csv.gz (53011, 58) · 4,387,996 B · sha256 d4c393627ffe0372…
+[merge] QA 통과 True · x25 모두 유효 0.792 · 회색 14,925/53,011
+[done] {'tiles': 35.7, 'cov': {'dem': 22.5, 'e5': 12.8, 'cci': 1.8, 'sg': 0.4}, 'qa': 8.4, 'mask': 3.0} · 합계 95s · 최대 RSS 752 MB

@@ -1,0 +1,11 @@
+exp,target,mode,split,variant,learner,method,n_fit,sec,sec_per_fit,rows_per_fit,est_s,threads,elapsed_s
+XJ,Tibet_LGD,x,1,,krige,krige,0,0.0,0.0,,0.0,4,
+XJ,Tibet_LGD,x,1,,kmeans,kmeans,0,0.0,0.0,,0.0,4,0.5
+XJ,Tibet_LGD,x,2,,krige,krige,0,0.0,0.0,,0.0,4,
+XJ,Tibet_LGD,x,2,,kmeans,kmeans,0,0.0,0.0,,0.0,4,0.5
+XJ,Tibet_LGD,x,3,,krige,krige,0,0.0,0.0,,0.0,4,
+XJ,Tibet_LGD,x,3,,kmeans,kmeans,0,0.0,0.0,,0.0,4,0.5
+XJ,Tibet_LGD,x,4,,krige,krige,0,0.0,0.0,,0.0,4,
+XJ,Tibet_LGD,x,4,,kmeans,kmeans,0,0.0,0.0,,0.0,4,0.5
+XJ,Tibet_LGD,x,5,,krige,krige,0,0.0,0.0,,0.0,4,
+XJ,Tibet_LGD,x,5,,kmeans,kmeans,0,0.0,0.0,,0.0,4,0.5

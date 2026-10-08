@@ -1,0 +1,19 @@
+{
+ "tasks": [
+  "AL-1",
+  "AL-2",
+  "AL-3",
+  "AL-4",
+  "AL-5",
+  "AL-6",
+  "Alaska",
+  "CA-2",
+  "CA-3",
+  "LE-1",
+  "LE-2",
+  "Tibet_LGD"
+ ],
+ "epochs": 29,
+ "device": "cuda",
+ "gpu": 0
+}

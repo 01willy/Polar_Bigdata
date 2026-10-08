@@ -1,0 +1,273 @@
+{
+ "created": "2026-10-05 02:28 KST",
+ "script": "scripts/2_evaluation/map_lena_final_extras_v1.py",
+ "script_sha256": "35f79d8e24c61b923ca0579598d650ba8848539962019db2a7e91a1b2ea086a3",
+ "inputs": {
+  "pred": {
+   "path": "data/processed/map_lena/lena_pred_v1.csv.gz",
+   "bytes": 1652719,
+   "sha256": "04ef6916b976e72a87e54a8a05e3dff6ae4d0a0f4f1ab5bbc9382731fb36d866"
+  },
+  "grid": {
+   "path": "data/processed/map_lena/lena_grid_x25_v1.csv.gz",
+   "bytes": 4387996,
+   "sha256": "d4c393627ffe0372608ad7e37196030b4f46dc1581746bf38e7654697dbe3ce6"
+  }
+ },
+ "extrap": {
+  "rule": "h49.extrap_flags(0.5–99.5 백분위, cci_valid 제외 24열), 기준 행 = 원천 셀 ∪ 레나 라벨 전량(최종 방법 R1 의 학습 행)",
+  "n_ref_rows": 17466,
+  "final": {
+   "pct": [
+    0.5,
+    99.5
+   ],
+   "columns": [
+    "dem_elev",
+    "dem_slope",
+    "dem_aspect_sin",
+    "dem_aspect_cos",
+    "dem_tpi",
+    "dem_rough",
+    "e5_maat",
+    "e5_tdd",
+    "e5_fdd",
+    "e5_sqrt_tdd",
+    "e5_twarm",
+    "e5_tcold",
+    "e5_stl1",
+    "e5_swe",
+    "sg_clay_5_15",
+    "sg_sand_5_15",
+    "sg_silt_5_15",
+    "sg_bdod_5_15",
+    "sg_cfvo_5_15",
+    "sg_phh2o_5_15",
+    "sg_soc_0_5",
+    "sg_soc_5_15",
+    "sg_soc_15_30",
+    "cci_alt"
+   ],
+   "lo": {
+    "dem_elev": 0.3190573751926422,
+    "dem_slope": 0.019415854802355102,
+    "dem_aspect_sin": -0.9998167157173156,
+    "dem_aspect_cos": -0.9999826416373253,
+    "dem_tpi": -12.21173095703125,
+    "dem_rough": 0.3637313544750213,
+    "e5_maat": -10.963757514953612,
+    "e5_tdd": 449.57373046875,
+    "e5_fdd": 1393.9218139648438,
+    "e5_sqrt_tdd": 21.203153785905293,
+    "e5_twarm": 5.65899658203125,
+    "e5_tcold": -30.68392944335937,
+    "e5_stl1": -3.400288820266724,
+    "e5_swe": 0.0257118660956621,
+    "sg_clay_5_15": 11.0,
+    "sg_sand_5_15": 13.4,
+    "sg_silt_5_15": 26.1,
+    "sg_bdod_5_15": 0.43,
+    "sg_cfvo_5_15": 1.7,
+    "sg_phh2o_5_15": 5.1,
+    "sg_soc_0_5": 66.0,
+    "sg_soc_5_15": 55.2,
+    "sg_soc_15_30": 28.6,
+    "cci_alt": 19.2
+   },
+   "hi": {
+    "dem_elev": 905.2769409179688,
+    "dem_slope": 13.630635905265807,
+    "dem_aspect_sin": 0.9998379543423652,
+    "dem_aspect_cos": 0.9999843448400497,
+    "dem_tpi": 20.45196657180785,
+    "dem_rough": 26.432136106491082,
+    "e5_maat": 1.1028060913085938,
+    "e5_tdd": 2073.774688720703,
+    "e5_fdd": 4834.852645874023,
+    "e5_sqrt_tdd": 45.53871637102547,
+    "e5_twarm": 17.75372314453125,
+    "e5_tcold": -13.1064453125,
+    "e5_stl1": 4.283927917480469,
+    "e5_swe": 0.0923618003726005,
+    "sg_clay_5_15": 32.4,
+    "sg_sand_5_15": 52.0,
+    "sg_silt_5_15": 73.9,
+    "sg_bdod_5_15": 1.25,
+    "sg_cfvo_5_15": 16.3,
+    "sg_phh2o_5_15": 7.2,
+    "sg_soc_0_5": 416.2,
+    "sg_soc_5_15": 314.3,
+    "sg_soc_15_30": 213.5,
+    "cci_alt": 126.0
+   },
+   "top3": [
+    {
+     "column": "e5_tcold",
+     "frac_outside_shown": 0.5187733025258625
+    },
+    {
+     "column": "e5_maat",
+     "frac_outside_shown": 0.5153074620595495
+    },
+    {
+     "column": "e5_fdd",
+     "frac_outside_shown": 0.46775718111642073
+    }
+   ],
+   "cat_counts_shown": {
+    "0": 5829,
+    "1": 5907,
+    "2": 5698,
+    "3": 20652
+   },
+   "frac_outside_by_col_shown": {
+    "dem_elev": 0.03439584099144043,
+    "dem_slope": 0.049046893871763905,
+    "dem_aspect_sin": 0.013180696318857323,
+    "dem_aspect_cos": 0.02124140103975214,
+    "dem_tpi": 0.07721997584414221,
+    "dem_rough": 0.11920390694743475,
+    "e5_maat": 0.5153074620595495,
+    "e5_tdd": 0.0,
+    "e5_fdd": 0.46775718111642073,
+    "e5_sqrt_tdd": 0.0,
+    "e5_twarm": 0.0,
+    "e5_tcold": 0.5187733025258625,
+    "e5_stl1": 0.03387071364805965,
+    "e5_swe": 0.0,
+    "sg_clay_5_15": 0.0,
+    "sg_sand_5_15": 0.14811216720054612,
+    "sg_silt_5_15": 0.41897285091634723,
+    "sg_bdod_5_15": 0.0,
+    "sg_cfvo_5_15": 0.08454550228430395,
+    "sg_phh2o_5_15": 0.0,
+    "sg_soc_0_5": 0.0,
+    "sg_soc_5_15": 0.0021530221078611563,
+    "sg_soc_15_30": 0.0032295331617917347,
+    "cci_alt": 0.041695111064433125
+   }
+  },
+  "source_only": {
+   "cat_counts_shown": {
+    "3": 38086
+   },
+   "top3": [
+    {
+     "column": "e5_maat",
+     "frac_outside_shown": 1.0
+    },
+    {
+     "column": "e5_fdd",
+     "frac_outside_shown": 1.0
+    },
+    {
+     "column": "e5_tcold",
+     "frac_outside_shown": 1.0
+    }
+   ]
+  },
+  "lena_labels_only": {
+   "cat_counts_shown": {
+    "0": 2231,
+    "1": 3055,
+    "2": 3482,
+    "3": 29318
+   },
+   "top3": [
+    {
+     "column": "e5_swe",
+     "frac_outside_shown": 0.5956256892296382
+    },
+    {
+     "column": "e5_twarm",
+     "frac_outside_shown": 0.5703408076458542
+    },
+    {
+     "column": "e5_maat",
+     "frac_outside_shown": 0.4771569605629365
+    }
+   ]
+  },
+  "frac_flag_final_shown": 0.8430131806963188,
+  "frac_flag_source_shown": 1.0
+ },
+ "interval": {
+  "kind": "constant-width split-conformal on 0.5° block 5-fold CV residuals of the final method(h49 R1, λ 0.25, 라벨 전량 적합과 같은 절차)",
+  "level": 0.9,
+  "q": 25.390562290834325,
+  "width": 50.78112458166865,
+  "K": 5,
+  "flag": "",
+  "folds": [
+   {
+    "fold": 0,
+    "n_train": 1767,
+    "n_test": 1270,
+    "nb_test": 4,
+    "E_n": 1.5218751553969563
+   },
+   {
+    "fold": 1,
+    "n_train": 2907,
+    "n_test": 130,
+    "nb_test": 4,
+    "E_n": 1.3704751915756292
+   },
+   {
+    "fold": 2,
+    "n_train": 2821,
+    "n_test": 216,
+    "nb_test": 4,
+    "E_n": 1.4221205572041182
+   },
+   {
+    "fold": 3,
+    "n_train": 3022,
+    "n_test": 15,
+    "nb_test": 4,
+    "E_n": 1.4326313322348367
+   },
+   {
+    "fold": 4,
+    "n_train": 1631,
+    "n_test": 1406,
+    "nb_test": 4,
+    "E_n": 1.4786837370664092
+   }
+  ],
+  "n": 3037,
+  "rmse_r1": 20.76563702462448,
+  "rmse_p1": 21.482606265219104,
+  "bias_r1": 2.656113406962865,
+  "bias_p1": 1.601753734293083,
+  "n_lo_clipped_shown": 0,
+  "cv_seconds": 5.7,
+  "h49_interval_note": "lena_pred_v1 의 lo90_a·hi90_a 는 패널 (a)(P0, 표지 없음)의 원천 지역 보정 구간이다(q 0.707, 로그 비, 폭 ∝ 예측)"
+ },
+ "source": {
+  "n_src": 14429,
+  "n_src_parent": 0,
+  "frac_src_parent": 0.0,
+  "n_parent_excluded": 0,
+  "n_buffer_excluded": 1
+ },
+ "fits": {
+  "n": 10,
+  "sec": 5.6
+ },
+ "threads": 3,
+ "elapsed_s": 9.1,
+ "max_rss_mb": 364.3,
+ "outputs": {
+  "extras": {
+   "path": "data/processed/map_lena/lena_final_extras_v1.csv.gz",
+   "bytes": 170817,
+   "sha256": "53c6287579a2a842e090b36823f3c4432d964fb1af864b8a19f2b37f857a781a"
+  },
+  "oof": {
+   "path": "data/processed/map_lena/lena_cv_oof_v1.csv",
+   "bytes": 183253,
+   "sha256": "7cb98c1f04b249137344806d1343d22cb56236ceedc92fc3dc45750f0bbba63d"
+  }
+ }
+}

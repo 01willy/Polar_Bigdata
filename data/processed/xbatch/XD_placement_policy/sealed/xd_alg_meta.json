@@ -1,0 +1,31 @@
+{
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md",
+ "plan_commit": "2678100",
+ "nboot": 10000,
+ "holm_m": 20,
+ "stores_x": [
+  "AL-1|x",
+  "AL-2|x",
+  "AL-3|x",
+  "AL-4|x",
+  "AL-5|x",
+  "AL-6|x",
+  "Alaska|x",
+  "Canada|x",
+  "Lena|x",
+  "Russia_C~lgd|x",
+  "Russia_E|x",
+  "Russia_W|x",
+  "Tibet_LGD|x"
+ ],
+ "stores_r": [
+  "AL-1|r",
+  "AL-2|r",
+  "Alaska|r",
+  "Canada|r",
+  "Lena|r"
+ ],
+ "code_sha256": "b2ef7464df799ee369173345415cfcf9aaa15f981cef200262b993903947d1aa",
+ "created": "2026-10-04 17:27:17",
+ "opening_order": "계획 0.3: 비알래스카 행은 S9* 동결 커밋 뒤, 나머지 R1a 판정 표는 R2a 제출 뒤에 연다"
+}

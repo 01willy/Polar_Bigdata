@@ -1,0 +1,18 @@
+{
+ "files": {
+  "sjm_adventdalen_wendt2023_points.csv": {
+   "sha256": "6dc163415cf4a37c2873473b0d93d47aabd4e5ca10c34567d68101e44778011f",
+   "first_seen": "2026-10-04T16:41:00+09:00",
+   "updated": "2026-10-04T16:41:00+09:00"
+  },
+  "swe_stordalen_crill_points.csv": {
+   "sha256": "d269a4e1e7204b3a8c2efc01faf618a6418bee70422b5878a734e5bed9005095",
+   "first_seen": "2026-10-04T16:41:00+09:00",
+   "updated": "2026-10-04T16:41:00+09:00"
+  }
+ },
+ "frozen": false,
+ "last_update": "2026-10-04T16:41:00+09:00",
+ "deadline_data": "2026-10-11T14:22:39+09:00",
+ "rule": "5절 'XF 자료 T0 + 7일'. 동결 뒤 목록 밖·해시가 바뀐 점 자료는 거부한다"
+}

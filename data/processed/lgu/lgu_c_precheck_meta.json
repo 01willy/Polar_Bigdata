@@ -1,0 +1,327 @@
+{
+ "harness": "h46_spatial_diagnostics",
+ "plan": "docs/EXPERIMENT_PLAN_LGU_2026-09-29.md 5절",
+ "blind": "재현(비맹검)",
+ "note": "가설과 판정이 없는 진단이다. LGX·LG 의 산출을 읽지 않는다. 격자 원자료를 읽지 않는다.",
+ "args": {
+  "items": "variogram,icc,proximity,sar",
+  "regions": "Alaska,Lena,Canada",
+  "targets": "",
+  "sar_units": "Alaska,Canada,AL-1,AL-2,AL-3,AL-4,AL-5,AL-6,CA-1,CA-2,CA-3",
+  "splits": 5,
+  "n_grid": "10,40,160,all",
+  "draws": 5,
+  "seeds": 1,
+  "dists": "1,2,5,10,25,50,100",
+  "bins": "0,0.1,0.25,0.5,1,2,5,10,25,50,100,200",
+  "nboot": 2000,
+  "chunk": 512,
+  "workers": 2,
+  "threads": 4,
+  "gpus": "",
+  "out_dir": "data/processed/lgu",
+  "data_dir": "data/processed",
+  "tag": "lguc",
+  "subregion_map": "lg_subregion_map_v1.csv",
+  "label_flags": "lgx_label_flags_v1.csv",
+  "allow_local": true,
+  "smoke": false,
+  "precheck": true,
+  "count_only": false,
+  "summarize_only": false,
+  "no_summarize": false,
+  "resume": true,
+  "buffer_km": 100.0,
+  "ITEMS": [
+   "variogram",
+   "icc",
+   "proximity",
+   "sar"
+  ],
+  "REGIONS": [
+   "Alaska"
+  ],
+  "TARGETS": [
+   [
+    "Alaska",
+    "x"
+   ]
+  ],
+  "SAR_UNITS": [
+   "Alaska"
+  ],
+  "SPLITS": [
+   1
+  ],
+  "N_GRID": [
+   10,
+   40,
+   160,
+   -1
+  ],
+  "DRAWS": 5,
+  "DISTS": [
+   1.0,
+   2.0,
+   5.0,
+   10.0,
+   25.0,
+   50.0,
+   100.0
+  ],
+  "EDGES": [
+   0.0,
+   0.1,
+   0.25,
+   0.5,
+   1.0,
+   2.0,
+   5.0,
+   10.0,
+   25.0,
+   50.0,
+   100.0,
+   200.0
+  ],
+  "NBOOT": 2000,
+  "TAG": "lguc_precheck",
+  "PREFIX": "lgu_c_precheck"
+ },
+ "code_sha": "52e4cbcc1b18",
+ "code_sha_common": "88ecdc5e7f60",
+ "code_sha_h40": "ffd0b3a76d36",
+ "inputs": {
+  "fidelity_base_v3.csv": "214abe489347",
+  "e5_soil_tdd_v3.csv": "f8c4b4f0b505",
+  "lg_subregion_map_v1.csv": "f79eeb64564c",
+  "lgx_label_flags_v1.csv": "d1d453052b46"
+ },
+ "tables": {
+  "variogram": "/home/willy010313/Polar_Bigdata/data/processed/lgu/lgu_c_precheck_variogram.csv",
+  "icc": "/home/willy010313/Polar_Bigdata/data/processed/lgu/lgu_c_precheck_icc.csv",
+  "proximity": "/home/willy010313/Polar_Bigdata/data/processed/lgu/lgu_c_precheck_proximity.csv",
+  "sar": "/home/willy010313/Polar_Bigdata/data/processed/lgu/lgu_c_precheck_sar.csv"
+ },
+ "cell_counts": [
+  {
+   "item": "variogram",
+   "region": "Alaska",
+   "stratum": "all",
+   "n_cells": 13606,
+   "n_blocks": 74
+  },
+  {
+   "item": "variogram",
+   "region": "Alaska",
+   "stratum": "gpr",
+   "n_cells": 10879,
+   "n_blocks": 13
+  },
+  {
+   "item": "variogram",
+   "region": "Alaska",
+   "stratum": "probe",
+   "n_cells": 1348,
+   "n_blocks": 65
+  },
+  {
+   "item": "variogram",
+   "region": "Alaska",
+   "stratum": "noearly",
+   "n_cells": 13033,
+   "n_blocks": 74
+  },
+  {
+   "item": "icc",
+   "region": "Alaska",
+   "stratum": "all",
+   "n_cells": 13606,
+   "n_blocks": 74
+  },
+  {
+   "item": "icc",
+   "region": "Alaska",
+   "stratum": "gpr",
+   "n_cells": 10879,
+   "n_blocks": 13
+  },
+  {
+   "item": "icc",
+   "region": "Alaska",
+   "stratum": "probe",
+   "n_cells": 1348,
+   "n_blocks": 65
+  },
+  {
+   "item": "icc",
+   "region": "Alaska",
+   "stratum": "noearly",
+   "n_cells": 13033,
+   "n_blocks": 74
+  }
+ ],
+ "rows_not_made": [],
+ "units": [
+  {
+   "item": "variogram",
+   "sub": "Alaska",
+   "meta": {
+    "region": "Alaska",
+    "n_cells": 13606,
+    "n_nonfinite_z": 0,
+    "strata": {
+     "all": {
+      "n_cells": 13606,
+      "n_blocks": 74,
+      "var_w": 0.08696072665390381,
+      "n_pairs_total": 92554815,
+      "n_pairs_within": 24524279,
+      "n_pairs_beyond": 68030536,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 9.87
+     },
+     "gpr": {
+      "n_cells": 10879,
+      "n_blocks": 13,
+      "var_w": 0.06405504603293355,
+      "n_pairs_total": 59170881,
+      "n_pairs_within": 20253166,
+      "n_pairs_beyond": 38917715,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 4.65
+     },
+     "probe": {
+      "n_cells": 1348,
+      "n_blocks": 65,
+      "var_w": 0.12424701088369765,
+      "n_pairs_total": 907878,
+      "n_pairs_within": 307032,
+      "n_pairs_beyond": 600846,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 0.05
+     },
+     "noearly": {
+      "n_cells": 13033,
+      "n_blocks": 74,
+      "var_w": 0.07609235863077372,
+      "n_pairs_total": 84923028,
+      "n_pairs_within": 24049122,
+      "n_pairs_beyond": 60873906,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 6.41
+     }
+    },
+    "skipped": []
+   }
+  },
+  {
+   "item": "icc",
+   "sub": "Alaska",
+   "meta": {
+    "region": "Alaska",
+    "n_cells": 13606,
+    "n_nonfinite_z": 0,
+    "strata": {
+     "all": {
+      "n_cells": 13606,
+      "n_blocks": 74,
+      "flag": ""
+     },
+     "gpr": {
+      "n_cells": 10879,
+      "n_blocks": 13,
+      "flag": ""
+     },
+     "probe": {
+      "n_cells": 1348,
+      "n_blocks": 65,
+      "flag": ""
+     },
+     "noearly": {
+      "n_cells": 13033,
+      "n_blocks": 74,
+      "flag": ""
+     }
+    },
+    "skipped": []
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "Alaska:x",
+   "meta": {
+    "target": "Alaska",
+    "mode": "x",
+    "parent": "Alaska",
+    "n_target": 13606,
+    "splits_used": [
+     1
+    ],
+    "splits_skipped": [],
+    "n_src": 3860,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 1
+   }
+  },
+  {
+   "item": "sar",
+   "sub": "Alaska",
+   "meta": {
+    "unit": "Alaska",
+    "n_cells": 13606,
+    "products": {
+     "insar_alt": {
+      "n_valid": 13606
+     },
+     "polsar_alt": {
+      "n_valid": 10073
+     }
+    }
+   }
+  }
+ ],
+ "n_failed": 0,
+ "run_records": [
+  {
+   "item": "icc",
+   "sub": "Alaska",
+   "status": "ok",
+   "error": "",
+   "n_rows": 4,
+   "elapsed_s": 0.42
+  },
+  {
+   "item": "proximity",
+   "sub": "Alaska:x",
+   "status": "ok",
+   "error": "",
+   "n_rows": 56,
+   "elapsed_s": 2.16
+  },
+  {
+   "item": "sar",
+   "sub": "Alaska",
+   "status": "ok",
+   "error": "",
+   "n_rows": 14,
+   "elapsed_s": 0.08
+  },
+  {
+   "item": "variogram",
+   "sub": "Alaska",
+   "status": "ok",
+   "error": "",
+   "n_rows": 48,
+   "elapsed_s": 21.42
+  }
+ ],
+ "summarize_sec": 0.06,
+ "niceness": 10,
+ "finished": "2026-09-30 03:40:25"
+}

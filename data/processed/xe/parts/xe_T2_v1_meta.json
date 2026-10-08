@@ -1,0 +1,95 @@
+{
+ "group": "T2",
+ "created": "2026-10-05 01:59:54 +0900",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.5 XE_hires_covariates",
+ "n_rows": 17395,
+ "targets": [
+  "Alaska",
+  "Canada",
+  "Lena"
+ ],
+ "columns": [
+  "twi_pt",
+  "tpi_90",
+  "tpi_270",
+  "slope_90",
+  "slope_px",
+  "gsw_occ_pt",
+  "gsw_occ_px",
+  "treecover_pt",
+  "treecover_px"
+ ],
+ "finite_by_target": {
+  "twi_pt": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 1.0
+  },
+  "tpi_90": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 1.0
+  },
+  "tpi_270": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 1.0
+  },
+  "slope_90": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 1.0
+  },
+  "slope_px": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 1.0
+  },
+  "gsw_occ_pt": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 0.996
+  },
+  "gsw_occ_px": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 0.996
+  },
+  "treecover_pt": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 0.996
+  },
+  "treecover_px": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 0.996
+  }
+ },
+ "sources": {
+  "T2": {
+   "dem": "data/raw/dem",
+   "gsw": "data/raw/gsw",
+   "hansen": "data/raw/hansen",
+   "n_files": 127,
+   "bytes": 2245775663,
+   "latest_mtime": "2026-09-30 03:15:57 +0900"
+  }
+ },
+ "sha256": "2fe3ebf2f260a6a2a6677f435f16fefe0dd9904e7306066e49b9b9fd356708e5",
+ "max_rss_mb": 360.3,
+ "script": "scripts/1_data_prep/xe_point_covariates.py",
+ "rule": {
+  "twi_pt": "D8 누적(pysheds, 점 묶음 경계 상자 ± 0.05° 창), ln(a/tanβ), 30 m 점 화소",
+  "tpi_90": "z − 3 × 3 평균",
+  "tpi_270": "z − 9 × 9 평균",
+  "slope_90": "3 × 3 경사(°) 평균",
+  "gsw_occ_pt": "GSW occurrence 3 × 3 평균(255 결측)",
+  "treecover_pt": "Hansen treecover2000 3 × 3 평균",
+  "px": "slope_px, gsw_occ_px, treecover_px = 점 화소(민감도)"
+ },
+ "n_clusters": 224,
+ "cluster_sec": 302.20000000000016,
+ "acc_errors": 0,
+ "limit": 0
+}

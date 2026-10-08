@@ -1,0 +1,39 @@
+{
+ "n_shards": 42,
+ "nboot": 10000,
+ "nboot_registered": 10000,
+ "created": "2026-10-04 17:37:45",
+ "cfg": {
+  "cfg_common": {
+   "98ed59de915e": 42
+  },
+  "code_sha": {
+   "1caf8a4bbb42": 42
+  },
+  "n": 42
+ },
+ "regions": [
+  "Alaska",
+  "Lena",
+  "Canada"
+ ],
+ "blind": {
+  "Alaska": "재현(비맹검)",
+  "Lena": "맹검",
+  "Canada": "맹검"
+ },
+ "design": "결과 열람 뒤 설계, 서술(판정어 없음)",
+ "gates": {
+  "found": false,
+  "stale": false,
+  "gate1": "기록 없음",
+  "gate2": "기록 없음",
+  "gate2_note": "",
+  "cont_action": "flag",
+  "summary": {},
+  "ridge_rows": 8,
+  "ridge_rows_dropped": 0,
+  "ridge_note": "관문 2 미확인(기록 없음)"
+ },
+ "file_location": "파일 위치 이탈: 계획 2.8 의 scripts/2_evaluation/x_validation_ladder_regional.py, tests/test_x_ladder.py 대신 scripts/3_deep_learning/x_validation_ladder.py 와 tests/test_x_xg_xh.py(docs/research/2026-10-04/impl_notes/x_validation_ladder.md 1절)"
+}

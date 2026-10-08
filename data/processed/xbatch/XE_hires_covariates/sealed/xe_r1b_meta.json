@@ -1,0 +1,97 @@
+{
+ "stage": "XE",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.5 XE_hires_covariates",
+ "plan_commit": "2678100",
+ "tag": "xe_r1b",
+ "variants": [
+  "x25",
+  "xh0",
+  "xt2"
+ ],
+ "targets": [
+  "Alaska",
+  "Lena",
+  "Canada"
+ ],
+ "n_units": 222,
+ "n_stores": 15,
+ "grid": [
+  200,
+  500,
+  1000,
+  -1
+ ],
+ "splits": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25
+ ],
+ "nboot": 10000,
+ "nboot_registered": 10000,
+ "nboot_note": "",
+ "holm_m": 6,
+ "main_n": [
+  500,
+  1000,
+  -1
+ ],
+ "smoke": false,
+ "unit_status": {
+  "ok": 222
+ },
+ "n_fit_total": 19650,
+ "unit_elapsed_s": 4355.399999999999,
+ "feat_sha256": "b8e49740ccd866579171b837f659611c931519d6fd031ce549c19b0e2efef1be",
+ "feat_final_ok": false,
+ "feat_final_commit": {
+  "ok": false,
+  "how": "최종 해시 파일 없음 또는 표와 다름"
+ },
+ "unfinal_shards": [],
+ "feat_gate_rows": 222,
+ "feat_gate_all_same": false,
+ "gate_wf9": {
+  "level": "local_rescale",
+  "ref": "/home/willy010313/Polar_Bigdata/results/rescale_wf3/data/processed/wf/shards",
+  "ran": true,
+  "passed": true,
+  "n_keys": 35442,
+  "n_fail": 0,
+  "n_x25_units": 74,
+  "n_x25_units_expected": 74,
+  "missing_x25_units": "",
+  "n_keys_x25": 35442,
+  "n_keys_x25_in_wf9": 35442,
+  "coverage_x25_in_wf9": 1.0,
+  "n_keys_wf9": 35442,
+  "n_keys_wf9_in_x25": 35442,
+  "coverage_wf9_in_x25": 1.0,
+  "n_pairs_missing_in_wf9": 0,
+  "status": "통과"
+ },
+ "variant_target_skips": {},
+ "summarize_s": 21.6,
+ "reading_rule": "xh0 표는 R2a 제출 뒤, xt2 표는 xe_feat 최종 해시 커밋 뒤(--feat-gate-only 통과, 둘 가운데 늦은 시점), xh·SI 표는 R3 회수 뒤 재현 관문 통과 뒤에 연다(계획 0.3). 관문 결과는 gate_wf9 항목에 있다"
+}

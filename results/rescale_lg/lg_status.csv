@@ -1,0 +1,6 @@
+stage,rc,sec,note
+deps,0,84,ok
+cpu,0,4023,
+gpu,0,68824,
+summarize,0,68993,
+timing,0,68994,

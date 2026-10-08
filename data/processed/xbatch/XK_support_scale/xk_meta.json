@@ -1,0 +1,318 @@
+{
+ "created": "2026-10-05 02:44 KST",
+ "script": "scripts/2_evaluation/xk_support_scale_v1.py",
+ "script_sha256": "5f5d89af8955b90c4f41ce08d91d73b7f5a3a46cdee1de3b3f3a8ad79203f9ce",
+ "registration": "docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XK_XL_2026-10-05.md(서술, 판정어 없음)",
+ "design": {
+  "supports": [
+   "1km",
+   "0.05deg",
+   "0.1deg",
+   "0.25deg"
+  ],
+  "grid_rule": "floor((좌표 + 0.05)/g), ERA5-Land 격자 경계에 맞춤",
+  "min_cells": 3,
+  "nboot": 1000,
+  "weights": [
+   "셀 가중(격자 단위 평균)",
+   "블록 등가중(블록별 평균의 평균)"
+  ],
+  "unit_block": "격자 라벨 셀의 최빈 0.5° 블록",
+  "methods": {
+   "p1": "Recalibrated Stefan",
+   "r1": "Anchor + residual ML",
+   "cci4": "CCI v4",
+   "cci5": "CCI v5",
+   "wei": "Wei 2026",
+   "yk": "Yi-Kimball"
+  },
+  "products": {
+   "cci5": {
+    "xg_product": "cci5y",
+    "column": "value_static_cm"
+   },
+   "wei": {
+    "xg_product": "wei",
+    "column": "value_static_cm"
+   },
+   "yk": {
+    "xg_product": "yk",
+    "column": "value_static_cm"
+   },
+   "cci4": "x25 cci_alt"
+  },
+  "cell_sets": {
+   "models": "P1·R1·CCI v4 가 유한한 셀(결과 열람 뒤 추가: 레나 Wei 결측 1,695셀)",
+   "common": "지역의 모든 방법(알래스카 Yi·Kimball 제외) 값이 유한한 셀",
+   "with_yk": "알래스카, Yi·Kimball 까지 유한한 셀"
+  },
+  "masks": {
+   "none": "마스크 없음",
+   "wei5": "XG 셀 단위 5 km 규칙(Wei 학습 지점 5 km 안 셀 제외, 모든 방법 공통)"
+  },
+  "oof": "map_alaska_v1.nested_oof(블록 5겹, 겹 안 λ 교차검증과 E_n 재추정)"
+ },
+ "regions": {
+  "Alaska": {
+   "n": 13606,
+   "n_blocks": 74,
+   "E0": 1.5045949676990291,
+   "source": {
+    "n_src": 3860,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 1
+   },
+   "K": 5,
+   "flag": "",
+   "folds": [
+    {
+     "fold": 0,
+     "n_train": 9963,
+     "n_test": 3643,
+     "nb_test": 15,
+     "E1": 1.5946424164197506,
+     "lam": 0.5,
+     "inner_K": 5,
+     "inner_flag": ""
+    },
+    {
+     "fold": 1,
+     "n_train": 12903,
+     "n_test": 703,
+     "nb_test": 15,
+     "E1": 1.633758469349545,
+     "lam": 0.5,
+     "inner_K": 5,
+     "inner_flag": ""
+    },
+    {
+     "fold": 2,
+     "n_train": 13183,
+     "n_test": 423,
+     "nb_test": 15,
+     "E1": 1.622824274696851,
+     "lam": 0.5,
+     "inner_K": 5,
+     "inner_flag": ""
+    },
+    {
+     "fold": 3,
+     "n_train": 13011,
+     "n_test": 595,
+     "nb_test": 15,
+     "E1": 1.615701244367426,
+     "lam": 0.5,
+     "inner_K": 5,
+     "inner_flag": ""
+    },
+    {
+     "fold": 4,
+     "n_train": 5364,
+     "n_test": 8242,
+     "nb_test": 14,
+     "E1": 1.6028143049007841,
+     "lam": 0.5,
+     "inner_K": 5,
+     "inner_flag": ""
+    }
+   ],
+   "seconds": 12.7,
+   "fits": {
+    "n": {
+     "wf6": 35
+    },
+    "sec": {
+     "wf6": 12.6
+    },
+    "fail": {}
+   }
+  },
+  "Lena": {
+   "n": 3037,
+   "n_blocks": 20,
+   "E0": 1.6192971927795523,
+   "source": {
+    "n_src": 14429,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 1
+   },
+   "K": 5,
+   "flag": "",
+   "folds": [
+    {
+     "fold": 0,
+     "n_train": 3010,
+     "n_test": 27,
+     "nb_test": 4,
+     "E1": 1.4290426141483723,
+     "lam": 0.5,
+     "inner_K": 5,
+     "inner_flag": ""
+    },
+    {
+     "fold": 1,
+     "n_train": 1737,
+     "n_test": 1300,
+     "nb_test": 4,
+     "E1": 1.3888833836655685,
+     "lam": 0.25,
+     "inner_K": 5,
+     "inner_flag": ""
+    },
+    {
+     "fold": 2,
+     "n_train": 2516,
+     "n_test": 521,
+     "nb_test": 4,
+     "E1": 1.4773739783416246,
+     "lam": 0.5,
+     "inner_K": 5,
+     "inner_flag": ""
+    },
+    {
+     "fold": 3,
+     "n_train": 1986,
+     "n_test": 1051,
+     "nb_test": 4,
+     "E1": 1.4368347115864033,
+     "lam": 0.5,
+     "inner_K": 5,
+     "inner_flag": ""
+    },
+    {
+     "fold": 4,
+     "n_train": 2899,
+     "n_test": 138,
+     "nb_test": 4,
+     "E1": 1.4281769586379738,
+     "lam": 1.0,
+     "inner_K": 5,
+     "inner_flag": ""
+    }
+   ],
+   "seconds": 6.3,
+   "fits": {
+    "n": {
+     "wf6": 35
+    },
+    "sec": {
+     "wf6": 6.3
+    },
+    "fail": {}
+   }
+  },
+  "Canada": {
+   "n": 750,
+   "n_blocks": 39,
+   "E0": 1.5918750525571221,
+   "source": {
+    "n_src": 16697,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 20
+   },
+   "K": 5,
+   "flag": "",
+   "folds": [
+    {
+     "fold": 0,
+     "n_train": 582,
+     "n_test": 168,
+     "nb_test": 8,
+     "E1": 1.6215532510305046,
+     "lam": 1.0,
+     "inner_K": 5,
+     "inner_flag": ""
+    },
+    {
+     "fold": 1,
+     "n_train": 605,
+     "n_test": 145,
+     "nb_test": 8,
+     "E1": 1.577751773592463,
+     "lam": 1.0,
+     "inner_K": 5,
+     "inner_flag": ""
+    },
+    {
+     "fold": 2,
+     "n_train": 555,
+     "n_test": 195,
+     "nb_test": 8,
+     "E1": 1.427600866598546,
+     "lam": 0.25,
+     "inner_K": 5,
+     "inner_flag": ""
+    },
+    {
+     "fold": 3,
+     "n_train": 675,
+     "n_test": 75,
+     "nb_test": 8,
+     "E1": 1.6100351537115511,
+     "lam": 1.0,
+     "inner_K": 5,
+     "inner_flag": ""
+    },
+    {
+     "fold": 4,
+     "n_train": 583,
+     "n_test": 167,
+     "nb_test": 7,
+     "E1": 1.7249090877633826,
+     "lam": 1.0,
+     "inner_K": 5,
+     "inner_flag": ""
+    }
+   ],
+   "seconds": 4.6,
+   "fits": {
+    "n": {
+     "wf6": 35
+    },
+    "sec": {
+     "wf6": 4.6
+    },
+    "fail": {}
+   }
+  }
+ },
+ "inputs": {
+  "xg_values": {
+   "path": "data/processed/xbatch/XG_product_comparison/xg_product_values_v1.csv",
+   "bytes": 7966366,
+   "sha256": "e8cf5cf4716203f812503e61b05317b027e331a8099b0477287646a4429029a9"
+  },
+  "xg_cells": {
+   "path": "data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv",
+   "bytes": 2998444,
+   "sha256": "e7e3ba1337dde038e779dc965748cb47f5ef38c33866f49429b4770a9d994383"
+  },
+  "data": {
+   "path": "data/processed/fidelity_base_v3.csv",
+   "bytes": 8700509,
+   "sha256": "71b5d3f6c297770d41aa7215e906e737842a3594005a5b52952bb636c752dc0f"
+  }
+ },
+ "outputs": {
+  "oof": {
+   "path": "data/processed/xbatch/XK_support_scale/xk_oof_cells_v1.csv",
+   "bytes": 1668010,
+   "sha256": "f6a4f910b34b6418e1228f3c7ea233f9817e730bfdd41548325b83b15cc4988e"
+  },
+  "table": {
+   "path": "data/processed/xbatch/XK_support_scale/xk_support_scale_v1.csv",
+   "bytes": 50035,
+   "sha256": "2da3c5ac6f4135485594be5f7b5893c9fa7db2b37665da05320c9d3ec2677d2d"
+  }
+ },
+ "summarize_s": 12.9,
+ "elapsed_s": 12.9,
+ "max_rss_mb": 109.0,
+ "threads": 4
+}

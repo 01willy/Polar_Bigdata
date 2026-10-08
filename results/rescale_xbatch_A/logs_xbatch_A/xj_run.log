@@ -1,0 +1,14 @@
+[약관] 원천 쪽 보조 행: 근거 미기록(--aux-lic-ref 없음)
+[plan] 실행 5 · 재개로 건너뜀 0 · 건너뜀 1 · 워커 22 · 스레드 4
+  [완료] tgt|Tibet_LGD|3 · 1/5
+  [완료] tgt|Tibet_LGD|2 · 2/5
+  [완료] tgt|Tibet_LGD|4 · 3/5
+  [완료] tgt|Tibet_LGD|5 · 4/5
+  [완료] tgt|Tibet_LGD|1 · 5/5
+[done] 완료 5 · 실패 0 · 2s · 최대 RSS 225.9 MB
+[봉인] XJ_tempderived_aux_labels/sealed/xj_tests.csv: 행 9, sha256 cc000f747aefea65
+[봉인] XJ_tempderived_aux_labels/sealed/xj_hyp.csv: 행 15, sha256 3e83305159f0e233
+[봉인] XJ_tempderived_aux_labels/sealed/xj_holm.csv: 행 15, sha256 d40b5a6eea09bb10
+[봉인] XJ_tempderived_aux_labels/sealed/xj_curve.csv: 행 13, sha256 65181691d03c4337
+[봉인] XJ_tempderived_aux_labels/sealed/xj_meta.json: 행 21, sha256 562720afcb143504
+[summarize] 조각 5 · 저장소 1 · 대비 행 9 · 가설 행 15 · 실패 키 0 · 0s → 봉인 폴더

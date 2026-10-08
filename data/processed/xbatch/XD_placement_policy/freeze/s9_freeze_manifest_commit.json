@@ -1,0 +1,8 @@
+{
+ "manifest": "data/processed/xbatch/XD_placement_policy/freeze/s9_freeze_manifest.json",
+ "manifest_sha256": "2751fecf49b8bcbdecd4f5cadab18abbf4432ea4aa9f069b6288475df8510ad9",
+ "commit": "f4a89ea82871d7116e56d723fa4f866d86346076",
+ "checked": "2026-10-05 03:17:41",
+ "code_sha256": "b2ef7464df799ee369173345415cfcf9aaa15f981cef200262b993903947d1aa",
+ "plan_commit": "2678100"
+}

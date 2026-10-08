@@ -1,0 +1,15 @@
+{
+ "gate1": {
+  "n_keys": 117,
+  "n_fail": 0,
+  "passed": true
+ },
+ "gate2": {
+  "n_keys": 36,
+  "n_fail": 0,
+  "passed": true
+ },
+ "gate2_note": "",
+ "level": "local_rescale",
+ "created": "2026-10-05 03:02:57"
+}

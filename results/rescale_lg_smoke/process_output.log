@@ -1,0 +1,643 @@
+[2026-09-29T06:52:01Z]: Launching [ -f lg_payload.tar.gz ] && tar xzf lg_payload.tar.gz; LG_SMOKE_BUDGET_MIN=110 LG_SMOKE_PRECHECK=1 bash scripts/rescale/run_lg_smoke.sh, Working dir: /enc/ukrprod_qOkSo/work.  Process output follows:
+[2026-09-29T06:52:01Z]: [payload] created_utc=2026-09-29T06:33:17Z
+[2026-09-29T06:52:01Z]: [payload] git_commit=6830277
+[2026-09-29T06:52:01Z]: [payload] git_uncommitted_paths=3
+[2026-09-29T06:52:01Z]: [payload] sha256 7098f59dabe2b73f scripts/3_deep_learning/h40_label_grid.py
+[2026-09-29T06:52:01Z]: [payload] sha256 db746179789f21a7 src/polar/m1_core.py
+[2026-09-29T06:52:01Z]: [payload] sha256 6f4ba47bf407cdfa src/polar/tab_models.py
+[2026-09-29T06:52:01Z]: [payload] sha256 4b6b888275d5f47f src/polar/h4_common.py
+[2026-09-29T06:52:01Z]: [payload] sha256 2a910d36299ee2fb src/polar/m1_stats.py
+[2026-09-29T06:52:01Z]: [payload] sha256 aca9b28aa848c98f tests/test_h40_smoke.py
+[2026-09-29T06:52:01Z]: [payload] sha256 71b5d3f6c297770d data/processed/fidelity_base_v3.csv
+[2026-09-29T06:52:01Z]: [payload] sha256 711d0cd3ba0e2e41 data/processed/e5_soil_tdd_v3.csv
+[2026-09-29T06:52:01Z]: [payload] sha256 87bd06f98bb1d141 data/processed/lg_subregion_map_v1.csv
+[2026-09-29T06:52:01Z]: [2026-09-29T06:52:01Z] [env] 작업 디렉터리 /enc/ukrprod_qOkSo/work
+[2026-09-29T06:52:01Z]: [2026-09-29T06:52:01Z] [env] 코어 수 4 (RESCALE_CORES_PER_SLOT = 4, OMP_NUM_THREADS = 없음) · 메모리 27 GB (여유 25 GB)
+[2026-09-29T06:52:01Z]: [2026-09-29T06:52:01Z] [env] 디스크 175G 여유 / 175G
+[2026-09-29T06:52:01Z]: [2026-09-29T06:52:01Z] [env] python /program/pytorch-2.4.1/venv/bin/python3 · pip /program/pytorch-2.4.1/venv/bin/pip
+[2026-09-29T06:52:04Z]: [env] python 3.11.10 · Linux-4.18.0-553.153.1.el8_10.x86_64-x86_64-with-glibc2.28
+[2026-09-29T06:52:04Z]: [env] 가상환경 True · prefix /program/pytorch-2.4.1/venv
+[2026-09-29T06:52:04Z]: [env] numpy 2.1.1
+[2026-09-29T06:52:04Z]: [env] pandas 없음
+[2026-09-29T06:52:04Z]: [env] scipy 없음
+[2026-09-29T06:52:04Z]: [env] scikit-learn 없음
+[2026-09-29T06:52:04Z]: [env] catboost 없음
+[2026-09-29T06:52:04Z]: [env] pytabkit 없음
+[2026-09-29T06:52:04Z]: [env] pytest 없음
+[2026-09-29T06:52:04Z]: [env] torch 2.4.1
+[2026-09-29T06:52:04Z]: [env] CUDA_VISIBLE_DEVICES = None
+[2026-09-29T06:52:23Z]: [env] torch 2.4.1+cu121 · CUDA 빌드 12.1 · CUDA 사용 가능 True · GPU 수 1
+[2026-09-29T06:52:23Z]: [env] GPU 0: Tesla T4 · 15.6 GiB
+[2026-09-29T06:52:25Z]: [env] nvidia-smi: index, name, memory.total [MiB], memory.used [MiB], utilization.gpu [%]
+[2026-09-29T06:52:25Z]: [env] nvidia-smi: 0, Tesla T4, 16384 MiB, 1 MiB, 0 %
+[2026-09-29T06:52:27Z]: [2026-09-29T06:52:27Z] [deps] 없는 필수 패키지: catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-09-29T06:52:27Z]: [2026-09-29T06:52:27Z] [deps] pip install --user catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-09-29T06:52:31Z]: ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-09-29T06:52:31Z]: [2026-09-29T06:52:31Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+[2026-09-29T06:52:47Z]: ERROR: Could not install packages due to an OSError: [Errno 28] No space left on device: '/program/pytorch-2.4.1/venv/bin/plotly_get_chrome'
+[2026-09-29T06:52:47Z]: 
+[2026-09-29T06:52:47Z]: [2026-09-29T06:52:47Z] [deps] 기본 위치 설치 실패. --target /enc/ukrprod_qOkSo/work/.pydeps 에 다시 시도한다
+[2026-09-29T06:53:20Z]: [deps] 확인: catboost 1.2.10 · scikit-learn 1.9.1 · pandas 2.3.3 · scipy 1.17.1 · numpy 2.4.6
+[2026-09-29T06:53:20Z]: [2026-09-29T06:53:20Z] [deps] pip install --user pytabkit==1.7.3
+[2026-09-29T06:53:20Z]: ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-09-29T06:53:20Z]: [2026-09-29T06:53:20Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+[2026-09-29T06:53:24Z]: ERROR: Could not install packages due to an OSError: [Errno 28] No space left on device: '/program/pytorch-2.4.1/venv/lib/python3.11/site-packages/tqdm'
+[2026-09-29T06:53:24Z]: 
+[2026-09-29T06:53:25Z]: [2026-09-29T06:53:25Z] [deps] 기본 위치 설치 실패. --target /enc/ukrprod_qOkSo/work/.pydeps 에 다시 시도한다
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/scipy.libs already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/numpy-2.4.6.dist-info already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/cloudpickle-3.1.2.dist-info already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/threadpoolctl-3.7.0.dist-info already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/numpy already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/sklearn already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/packaging-26.3.dist-info already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/narwhals-2.26.0.dist-info already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/six.py already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/threadpoolctl.py already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/cloudpickle already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/six-1.17.0.dist-info already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/python_dateutil-2.9.0.post0.dist-info already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/__pycache__ already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/joblib already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/scipy already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/scikit_learn-1.9.1.dist-info already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/numpy.libs already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/scikit_learn.libs already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/pandas already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/packaging already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/dateutil already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/narwhals already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/joblib-1.6.0.dist-info already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/scipy-1.17.1.dist-info already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/bin already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:38Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/share already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:55:56Z]: [2026-09-29T06:55:56Z] [deps] 선택 패키지 pytabkit 설치함(pytabkit==1.7.3)
+[2026-09-29T06:56:01Z]: [2026-09-29T06:56:01Z] [deps] pip install --user pytest>=7
+[2026-09-29T06:56:02Z]: ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-09-29T06:56:02Z]: [2026-09-29T06:56:02Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+[2026-09-29T06:56:03Z]: ERROR: Could not install packages due to an OSError: [Errno 28] No space left on device: '/program/pytorch-2.4.1/venv/lib/python3.11/site-packages/pygments'
+[2026-09-29T06:56:03Z]: 
+[2026-09-29T06:56:03Z]: [2026-09-29T06:56:03Z] [deps] 기본 위치 설치 실패. --target /enc/ukrprod_qOkSo/work/.pydeps 에 다시 시도한다
+[2026-09-29T06:56:05Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/packaging-26.3.dist-info already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:56:05Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/__pycache__ already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:56:05Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/packaging already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:56:05Z]: WARNING: Target directory /enc/ukrprod_qOkSo/work/.pydeps/bin already exists. Specify --upgrade to force replacement.
+[2026-09-29T06:56:05Z]: [2026-09-29T06:56:05Z] [deps] 선택 패키지 pytest 설치함(pytest>=7)
+[2026-09-29T06:56:07Z]: [env] numpy 2.4.6
+[2026-09-29T06:56:07Z]: [env] pandas 2.3.3
+[2026-09-29T06:56:07Z]: [env] scipy 1.17.1
+[2026-09-29T06:56:07Z]: [env] scikit-learn 1.9.1
+[2026-09-29T06:56:07Z]: [env] catboost 1.2.10
+[2026-09-29T06:56:07Z]: [env] pytabkit 1.7.3
+[2026-09-29T06:56:07Z]: [env] pytest 9.1.1
+[2026-09-29T06:56:07Z]: [env] torch 2.4.1
+[2026-09-29T06:56:07Z]: [env] torch 2.4.1+cu121 · CUDA 빌드 12.1 · CUDA 사용 가능 True · GPU 수 1
+[2026-09-29T06:56:09Z]: [2026-09-29T06:56:09Z] [smoke] 보이는 GPU: '0' · 스레드 4 · 스모크 학습기 mlp,cfm,ddpm,tabm,nflow,ftt,realmlp · 시간 한도 110 min
+[2026-09-29T06:56:09Z]: [2026-09-29T06:56:09Z] [stage] smoke_cpu 시작(제한 1200 s): env LG_RESCALE=1 python3 -u scripts/3_deep_learning/h40_label_grid.py --part cpu --smoke --workers 1 --threads 4 --no-summarize
+[2026-09-29T06:56:11Z]: [data] 17,467셀 · 부분 cpu · 대상 3 · 분할 [1] · n [0, 3, 40, -1] · 추출 1 · seed [0] · 학습기 ['catboost_lo', 'ridge'] · α ['1', '10', '100', 'cont'] · 중첩 후보 ['10', '100', 'cont'] · λ [0.25, 0.5, 1.0] · 하위 지역 map:lg_subregion_map_v1.csv · 작업 단위 3(건너뜀 0)
+[2026-09-29T06:56:11Z]: [plan] 실행 3 · 재개로 건너뜀 0 · 프로세스 1 · 스레드 4 · 장치 CPU · epochs 100 · RealMLP epochs 256
+[2026-09-29T06:57:11Z]:   [Canada|x|s1|cpu] 적합 218 · 행 185 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 57.2s · 장치 '' · 상태 ok(실패 0) · 완료 1/3 · 누적 60s
+[2026-09-29T06:57:29Z]:   [Russia_W|x|s1|cpu] 적합 47 · 행 120 · A 16 · 채점 12/7블록 · 원천 17436 · E0 1.590 · 17.9s · 장치 '' · 상태 ok(실패 0) · 완료 2/3 · 누적 78s
+[2026-09-29T06:57:53Z]:   [AL-3|i|s1|cpu] 적합 68 · 행 173 · A 334 · 채점 317/4블록 · 원천 16816 · E0 1.609 · 24.1s · 장치 '' · 상태 ok(실패 0) · 완료 3/3 · 누적 102s
+[2026-09-29T06:57:53Z]: [done] 완료 3 · 실패 0 · 일부 적합 실패 0 · 103s
+[2026-09-29T06:57:53Z]: [2026-09-29T06:57:53Z] [stage] smoke_cpu 끝: 종료 코드 0 · 104 s · 경과 5 min
+[2026-09-29T06:57:53Z]: [2026-09-29T06:57:53Z] [stage] smoke_gpu 시작(제한 1200 s): env LG_RESCALE=1 python3 -u scripts/3_deep_learning/h40_label_grid.py --part gpu --smoke --gpus 0 --procs-per-gpu 1 --threads 4 --epochs 5 --learners mlp,cfm,ddpm,tabm,nflow,ftt,realmlp --no-summarize
+[2026-09-29T06:57:55Z]: [data] 17,467셀 · 부분 gpu · 대상 3 · 분할 [1] · n [0, 3, 40, -1] · 추출 1 · seed [0] · 학습기 ['mlp', 'cfm', 'ddpm', 'tabm', 'nflow', 'ftt', 'realmlp'] · α ['1', '10', '100', 'cont'] · 중첩 후보 ['10', '100', 'cont'] · λ [0.25, 0.5, 1.0] · 하위 지역 map:lg_subregion_map_v1.csv · 작업 단위 21(건너뜀 0)
+[2026-09-29T06:57:55Z]: [plan] 실행 21 · 재개로 건너뜀 0 · 프로세스 1 · 스레드 4 · 장치 GPU 0 · epochs 3 · RealMLP epochs 3
+[2026-09-29T06:58:03Z]:   [Canada|x|s1|gpu|mlp] 적합 29 · 행 82 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 5.1s · 장치 '0' · 상태 ok(실패 0) · 완료 1/21 · 누적 8s
+[2026-09-29T06:58:05Z]:   [Canada|x|s1|gpu|tabm] 적합 9 · 행 31 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 2.1s · 장치 '0' · 상태 ok(실패 0) · 완료 2/21 · 누적 10s
+[2026-09-29T06:58:07Z]:   [Canada|x|s1|gpu|cfm] 적합 9 · 행 31 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 2.6s · 장치 '0' · 상태 ok(실패 0) · 완료 3/21 · 누적 13s
+[2026-09-29T06:58:16Z]:   [Canada|x|s1|gpu|ddpm] 적합 9 · 행 31 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 8.5s · 장치 '0' · 상태 ok(실패 0) · 완료 4/21 · 누적 21s
+[2026-09-29T06:58:18Z]:   [Russia_W|x|s1|gpu|mlp] 적합 16 · 행 48 · A 16 · 채점 12/7블록 · 원천 17436 · E0 1.590 · 1.8s · 장치 '0' · 상태 ok(실패 0) · 완료 5/21 · 누적 23s
+[2026-09-29T06:58:19Z]:   [Russia_W|x|s1|gpu|tabm] 적합 6 · 행 21 · A 16 · 채점 12/7블록 · 원천 17436 · E0 1.590 · 1.6s · 장치 '0' · 상태 ok(실패 0) · 완료 6/21 · 누적 25s
+[2026-09-29T06:58:20Z]:   [Russia_W|x|s1|gpu|cfm] 적합 6 · 행 21 · A 16 · 채점 12/7블록 · 원천 17436 · E0 1.590 · 1.2s · 장치 '0' · 상태 ok(실패 0) · 완료 7/21 · 누적 26s
+[2026-09-29T06:58:22Z]:   [Russia_W|x|s1|gpu|ddpm] 적합 6 · 행 21 · A 16 · 채점 12/7블록 · 원천 17436 · E0 1.590 · 1.7s · 장치 '0' · 상태 ok(실패 0) · 완료 8/21 · 누적 28s
+[2026-09-29T06:58:25Z]:   [AL-3|i|s1|gpu|mlp] 적합 29 · 행 82 · A 334 · 채점 317/4블록 · 원천 16816 · E0 1.609 · 2.6s · 장치 '0' · 상태 ok(실패 0) · 완료 9/21 · 누적 30s
+[2026-09-29T06:58:27Z]:   [AL-3|i|s1|gpu|tabm] 적합 9 · 행 31 · A 334 · 채점 317/4블록 · 원천 16816 · E0 1.609 · 2.1s · 장치 '0' · 상태 ok(실패 0) · 완료 10/21 · 누적 32s
+[2026-09-29T06:58:29Z]:   [AL-3|i|s1|gpu|cfm] 적합 9 · 행 31 · A 334 · 채점 317/4블록 · 원천 16816 · E0 1.609 · 2.0s · 장치 '0' · 상태 ok(실패 0) · 완료 11/21 · 누적 34s
+[2026-09-29T06:58:35Z]:   [AL-3|i|s1|gpu|ddpm] 적합 9 · 행 31 · A 334 · 채점 317/4블록 · 원천 16816 · E0 1.609 · 6.0s · 장치 '0' · 상태 ok(실패 0) · 완료 12/21 · 누적 40s
+[2026-09-29T06:59:44Z]:   [Canada|x|s1|gpu|ftt] 적합 9 · 행 31 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 69.3s · 장치 '0' · 상태 ok(실패 0) · 완료 13/21 · 누적 110s
+[2026-09-29T06:59:51Z]:   [Canada|x|s1|gpu|nflow] 적합 9 · 행 31 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 7.0s · 장치 '0' · 상태 ok(실패 0) · 완료 14/21 · 누적 117s
+[2026-09-29T07:00:41Z]:   [Russia_W|x|s1|gpu|ftt] 적합 6 · 행 21 · A 16 · 채점 12/7블록 · 원천 17436 · E0 1.590 · 49.4s · 장치 '0' · 상태 ok(실패 0) · 완료 15/21 · 누적 166s
+[2026-09-29T07:00:46Z]:   [Russia_W|x|s1|gpu|nflow] 적합 6 · 행 21 · A 16 · 채점 12/7블록 · 원천 17436 · E0 1.590 · 4.9s · 장치 '0' · 상태 ok(실패 0) · 완료 16/21 · 누적 171s
+[2026-09-29T07:01:58Z]:   [AL-3|i|s1|gpu|ftt] 적합 9 · 행 31 · A 334 · 채점 317/4블록 · 원천 16816 · E0 1.609 · 72.7s · 장치 '0' · 상태 ok(실패 0) · 완료 17/21 · 누적 244s
+[2026-09-29T07:02:06Z]:   [AL-3|i|s1|gpu|nflow] 적합 9 · 행 31 · A 334 · 채점 317/4블록 · 원천 16816 · E0 1.609 · 7.4s · 장치 '0' · 상태 ok(실패 0) · 완료 18/21 · 누적 251s
+[2026-09-29T07:02:07Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:07Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:07Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:07Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:08Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:02:08Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:08Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:08Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:08Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:08Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:08Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:08Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:08Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:09Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:02:09Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:09Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:09Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:09Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:10Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:10Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:10Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:10Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:20Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:02:20Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:20Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:20Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:20Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:20Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:20Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:20Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:20Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:21Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:02:21Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:21Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:21Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:21Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:21Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:21Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:21Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:21Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:22Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:02:22Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:22Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:22Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:22Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:23Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:23Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:23Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:23Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:34Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:02:34Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:34Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:34Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:34Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:34Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:34Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:34Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:34Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:35Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:02:35Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:35Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:35Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:35Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:35Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:35Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:35Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:35Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:36Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:02:36Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:36Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:36Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:36Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:36Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:36Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:36Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:36Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:47Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:02:47Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:47Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:47Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:47Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:47Z]:   [Canada|x|s1|gpu|realmlp] 적합 9 · 행 31 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 41.4s · 장치 '0' · 상태 ok(실패 0) · 완료 19/21 · 누적 293s
+[2026-09-29T07:02:47Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:47Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:47Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:47Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:48Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:02:48Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:48Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:48Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:48Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:48Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:48Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:48Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:48Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:49Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:02:50Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:50Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:50Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:50Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:02:50Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:02:50Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:02:50Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:02:50Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:01Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:03:01Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:01Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:01Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:01Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:01Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:01Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:01Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:01Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:02Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:03:02Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:02Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:02Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:02Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:02Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:02Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:02Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:02Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:03Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:03:03Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:03Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:03Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:03Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:04Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:04Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:04Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:04Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:15Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:03:15Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:15Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:15Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:15Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:15Z]:   [Russia_W|x|s1|gpu|realmlp] 적합 6 · 행 21 · A 16 · 채점 12/7블록 · 원천 17436 · E0 1.590 · 28.0s · 장치 '0' · 상태 ok(실패 0) · 완료 20/21 · 누적 321s
+[2026-09-29T07:03:15Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:15Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:15Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:15Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:16Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:03:16Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:16Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:16Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:16Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:16Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:16Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:16Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:16Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:17Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:03:17Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:17Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:17Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:17Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:18Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:18Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:18Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:18Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:29Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:03:29Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:29Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:29Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:29Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:29Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:29Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:29Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:29Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:30Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:03:30Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:30Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:30Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:30Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:30Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:30Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:30Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:30Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:31Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:03:31Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:31Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:31Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:31Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:31Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:31Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:31Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:31Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:42Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:03:42Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:42Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:42Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:42Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:42Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:42Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:42Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:42Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:43Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:03:43Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:43Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:43Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:43Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:43Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:43Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:43Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:43Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:44Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:03:44Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:44Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:44Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:44Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:45Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:45Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:45Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:45Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:56Z]: `Trainer.fit` stopped: `max_epochs=3` reached.
+[2026-09-29T07:03:56Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:03:56Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:03:56Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:03:56Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:03:56Z]:   [AL-3|i|s1|gpu|realmlp] 적합 9 · 행 31 · A 334 · 채점 317/4블록 · 원천 16816 · E0 1.609 · 40.4s · 장치 '0' · 상태 ok(실패 0) · 완료 21/21 · 누적 361s
+[2026-09-29T07:03:57Z]: [done] 완료 21 · 실패 0 · 일부 적합 실패 0 · 362s
+[2026-09-29T07:03:57Z]: [2026-09-29T07:03:57Z] [stage] smoke_gpu 끝: 종료 코드 0 · 364 s · 경과 11 min
+[2026-09-29T07:03:57Z]: [2026-09-29T07:03:57Z] [stage] smoke_sum 시작(제한 600 s): python3 -u scripts/3_deep_learning/h40_label_grid.py --smoke --summarize-only --threads 4
+[2026-09-29T07:03:58Z]: [data] 17,467셀 · 부분 cpu · 대상 3 · 분할 [1] · n [0, 3, 40, -1] · 추출 1 · seed [0] · 학습기 ['catboost_lo', 'ridge'] · α ['1', '10', '100', 'cont'] · 중첩 후보 ['10', '100', 'cont'] · λ [0.25, 0.5, 1.0] · 하위 지역 map:lg_subregion_map_v1.csv · 작업 단위 3(건너뜀 0)
+[2026-09-29T07:04:04Z]: [summarize] 학습기별 적합 시간(전 조각 합계)
+[2026-09-29T07:04:04Z]: part     learner  n_fit    sec  sec_per_fit
+[2026-09-29T07:04:04Z]:  cpu catboost_lo    298  95.27     0.319698
+[2026-09-29T07:04:04Z]:  cpu       ridge     24   1.82     0.075833
+[2026-09-29T07:04:04Z]:  gpu         cfm     24   5.75     0.239583
+[2026-09-29T07:04:04Z]:  gpu        ddpm     24  16.20     0.675000
+[2026-09-29T07:04:04Z]:  gpu         ftt     24 191.42     7.975833
+[2026-09-29T07:04:04Z]:  gpu         mlp     74   7.52     0.101622
+[2026-09-29T07:04:04Z]:  gpu       nflow     24  19.29     0.803750
+[2026-09-29T07:04:04Z]:  gpu     realmlp     24 109.78     4.574167
+[2026-09-29T07:04:04Z]:  gpu        tabm     24   5.69     0.237083
+[2026-09-29T07:04:04Z]: [summarize] 조각 24 · runs 999 · curve 999 · minn 300 · tests 134 · 5s → /enc/ukrprod_qOkSo/work/data/processed/lg/lg_smoke_*
+[2026-09-29T07:04:04Z]: test_id role                        verdict                                                                                                                                                                        stat
+[2026-09-29T07:04:04Z]:      L1    주 부분(지역 2/4): 검사한 지역에서는 지지 조건 충족 두 가중 CI 상한 < 0 인 지역 0/2 (Lena: 유의 [], 셀 가중만 [], 검사 []; Canada: 유의 [], 셀 가중만 [3], 검사 [0, 3, 40]; Russia_W: 유의 [], 셀 가중만 [], 검사 [0, 3, -1]; Russia_E: 유의 [], 셀 가중만 [], 검사 [])
+[2026-09-29T07:04:04Z]:      L2    주                          판정 불가                                                                                                             R2-R1 유의 개선 n = [], 4지역 평균인 n = [] | n=40: undetermined(지역 1/4)
+[2026-09-29T07:04:04Z]:      L2    주                          판정 불가                                                                                                             R3-R1 유의 개선 n = [], 4지역 평균인 n = [] | n=40: undetermined(지역 1/4)
+[2026-09-29T07:04:04Z]:      L3    주            판정 불가(적격 대상 1개 < 2)                                                                    R0, AL 모드 i: 적격 1, n* ≤ 40 대상 0, 그중 α = 1 의 n* 보다 작은 대상 0 (Canada|x: n*=NA(α=1 NA, 블록 합집합 20, 분할 최소 20))
+[2026-09-29T07:04:04Z]:      L3   보조            판정 불가(적격 대상 1개 < 2)                                                                    R0, AL 모드 x: 적격 1, n* ≤ 40 대상 0, 그중 α = 1 의 n* 보다 작은 대상 0 (Canada|x: n*=NA(α=1 NA, 블록 합집합 20, 분할 최소 20))
+[2026-09-29T07:04:04Z]:      L3   보조            판정 불가(적격 대상 1개 < 2)                                                                    R1, AL 모드 i: 적격 1, n* ≤ 40 대상 0, 그중 α = 1 의 n* 보다 작은 대상 0 (Canada|x: n*=NA(α=1 NA, 블록 합집합 20, 분할 최소 20))
+[2026-09-29T07:04:04Z]:      L3   보조            판정 불가(적격 대상 1개 < 2)                                                                    R1, AL 모드 x: 적격 1, n* ≤ 40 대상 0, 그중 α = 1 의 n* 보다 작은 대상 0 (Canada|x: n*=NA(α=1 NA, 블록 합집합 20, 분할 최소 20))
+[2026-09-29T07:04:04Z]:      L4    주                          판정 불가                                       두 가중 CI 상한 < 0 인 최소 n: 4지역 평균 None, 2–3지역 평균 None | n=3: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+[2026-09-29T07:04:04Z]:      L5    주                          판정 불가                                      cfm: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+[2026-09-29T07:04:04Z]:      L5    주                          판정 불가                                     ddpm: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+[2026-09-29T07:04:04Z]:      L5    주                          판정 불가                                      ftt: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+[2026-09-29T07:04:04Z]:      L5    주                          판정 불가                                      mlp: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+[2026-09-29T07:04:04Z]:      L5    주                          판정 불가                                    nflow: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+[2026-09-29T07:04:04Z]:      L5    주                          판정 불가                                  realmlp: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+[2026-09-29T07:04:04Z]:      L5    주                          판정 불가                                    ridge: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+[2026-09-29T07:04:04Z]:      L5    주                          판정 불가                                     tabm: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4); n=-1: undetermined(지역 1/4)
+[2026-09-29T07:04:04Z]:      L6    주                             기각                                                                                                                                   알래스카 통과 조합의 주 4지역 통과 3/20(두 가중, 방법별 기준 λ)
+[2026-09-29T07:04:04Z]:      L6   보조                판정 불가(통과 조합 없음)                                                                                                                              민감도: 분할 안 채점 블록 ≥ 5 인 알래스카 대상만으로 조합을 고른 경우 0/0
+[2026-09-29T07:04:04Z]:      L6   보조                             기각                                                                                                                                                    민감도: 셀 가중 CI 만 쓴 경우 4/20
+[2026-09-29T07:04:04Z]:      L7    주                             기각                                                                                                                                            Canada|x n=40:X; Canada|x n=-1:X
+[2026-09-29T07:04:04Z]:      L8    주                  판정 불가(지역 1/4)                                                                                                                           Δ 3.60 [-0.73, 6.20], 블록 등가중 [2.96, 6.54], 지역 1/4
+[2026-09-29T07:04:04Z]: [2026-09-29T07:04:04Z] [stage] smoke_sum 끝: 종료 코드 0 · 7 s · 경과 12 min
+[2026-09-29T07:04:04Z]: [2026-09-29T07:04:04Z] [stage] timing 시작(제한 300 s): python3 -u scripts/rescale/lg_timing_table.py --lg-dir data/processed/lg --out-dir . --prefix lg_smoke
+[2026-09-29T07:04:04Z]: [timing] 조각 24 · 행 49 → lg_smoke_timing_by_learner.csv
+[2026-09-29T07:04:04Z]:      tag part     learner  n_fit    sec  sec_full_epochs  epochs_run  sec_per_fit
+[2026-09-29T07:04:04Z]: lg_smoke  cpu catboost_lo    298  95.27           95.270         NaN        0.320
+[2026-09-29T07:04:04Z]: lg_smoke  cpu       ridge     24   1.82            1.820         NaN        0.076
+[2026-09-29T07:04:04Z]: lg_smoke  gpu         cfm     24   5.75          191.667         3.0        0.240
+[2026-09-29T07:04:04Z]: lg_smoke  gpu        ddpm     24  16.20          540.000         3.0        0.675
+[2026-09-29T07:04:04Z]: lg_smoke  gpu         ftt     24 191.42         6380.667         3.0        7.976
+[2026-09-29T07:04:04Z]: lg_smoke  gpu         mlp     74   7.52          229.327         3.0        0.102
+[2026-09-29T07:04:04Z]: lg_smoke  gpu       nflow     24  19.29          643.000         3.0        0.804
+[2026-09-29T07:04:04Z]: lg_smoke  gpu     realmlp     24 109.78         9367.893         3.0        4.574
+[2026-09-29T07:04:04Z]: lg_smoke  gpu        tabm     24   5.69          189.667         3.0        0.237
+[2026-09-29T07:04:04Z]: [timing] 적합 수 표(lg_count_<part>_learners.csv)가 없어 본 실행 환산을 생략한다
+[2026-09-29T07:04:04Z]: [2026-09-29T07:04:04Z] [stage] timing 끝: 종료 코드 0 · 0 s · 경과 12 min
+[2026-09-29T07:04:05Z]: [2026-09-29T07:04:05Z] [pack] results_lg_smoke.tar.gz 396K · 파일 90개
+[2026-09-29T07:04:05Z]: [2026-09-29T07:04:05Z] [stage] pytest 시작(제한 1200 s): env LG_RUN_HEAVY=1 CUDA_VISIBLE_DEVICES= python3 -m pytest -q -p no:cacheprovider tests/test_h40_smoke.py
+[2026-09-29T07:04:18Z]: ............                                                             [100%]
+[2026-09-29T07:04:18Z]: 12 passed in 12.72s
+[2026-09-29T07:04:19Z]: [2026-09-29T07:04:19Z] [stage] pytest 끝: 종료 코드 0 · 14 s · 경과 12 min
+[2026-09-29T07:04:19Z]: [2026-09-29T07:04:19Z] [pack] results_lg_smoke.tar.gz 396K · 파일 91개
+[2026-09-29T07:04:19Z]: [2026-09-29T07:04:19Z] [stage] count_cpu 시작(제한 300 s): python3 -u scripts/3_deep_learning/h40_label_grid.py --part cpu --count-only --threads 4
+[2026-09-29T07:04:21Z]: [data] 17,467셀 · 부분 cpu · 대상 27 · 분할 [1, 2, 3, 4, 5] · n [0, 3, 10, 40, 160, 320, 1000, -1] · 추출 5 · seed [0, 1] · 학습기 ['catboost_lo', 'ridge'] · α ['1', '10', '100', 'cont'] · 중첩 후보 ['10', '100', 'cont'] · λ [0.25, 0.5, 1.0] · 하위 지역 map:lg_subregion_map_v1.csv · 작업 단위 117(건너뜀 18)
+[2026-09-29T07:04:39Z]: [count-only] 부분 cpu · 작업 단위 117 · 건너뜀 18(dup_of_1, dup_of_2, invalid_nb_eval<2, no_eval)
+[2026-09-29T07:04:39Z]:                 units  n_A_min  n_A_max  fit_total   rows  est_h
+[2026-09-29T07:04:39Z]: target    mode                                                  
+[2026-09-29T07:04:39Z]: Lena      x         5     1120     1737       9392  15016   1.18
+[2026-09-29T07:04:39Z]: Canada    x         5      325      406      11261  12716   1.39
+[2026-09-29T07:04:39Z]: Russia_W  x         5       14       16       2002   4938   0.33
+[2026-09-29T07:04:39Z]: Russia_E  x         5       15       17       2002   4938   0.33
+[2026-09-29T07:04:39Z]: Alaska    x         5     6322     7436       5474  13456   0.39
+[2026-09-29T07:04:39Z]: AL-6      i         4     1516     1705       4264  10496   0.65
+[2026-09-29T07:04:39Z]: AL-2      i         5     1333     1924       8282  14680   0.89
+[2026-09-29T07:04:39Z]: AL-5      i         5      270      454       6968  11920   0.97
+[2026-09-29T07:04:39Z]: AL-3      i         5      269      361       4175  10320   0.69
+[2026-09-29T07:04:39Z]: AL-4      i         3      139      287       1858   4602   0.31
+[2026-09-29T07:04:39Z]: AL-1      i         4      288     4834       3769   9296   0.46
+[2026-09-29T07:04:39Z]: AL-6      x         4     1516     1705       4264  10496   0.31
+[2026-09-29T07:04:39Z]: AL-2      x         5     1333     1924       8420  15016   0.52
+[2026-09-29T07:04:39Z]: AL-5      x         5      270      454       6902  11920   0.41
+[2026-09-29T07:04:39Z]: AL-3      x         5      269      361       4319  10656   0.29
+[2026-09-29T07:04:39Z]: AL-4      x         3      139      287       1858   4602   0.13
+[2026-09-29T07:04:39Z]: AL-1      x         4      288     4834       3865   9520   0.27
+[2026-09-29T07:04:39Z]: LE-2      i         3      183     1062       2703   6672   0.41
+[2026-09-29T07:04:39Z]:           x         3      183     1062       2703   6672   0.41
+[2026-09-29T07:04:39Z]: LE-1      i         4      448     1184       3769   9296   0.58
+[2026-09-29T07:04:39Z]:           x         4      448     1184       3769   9296   0.57
+[2026-09-29T07:04:39Z]: CA-3      i         5      113      224       3330   8250   0.56
+[2026-09-29T07:04:39Z]:           x         5      113      224       3462   8558   0.56
+[2026-09-29T07:04:39Z]: CA-2      i         5      161      237       3680   9120   0.62
+[2026-09-29T07:04:39Z]:           x         5      161      237       3824   9456   0.62
+[2026-09-29T07:04:39Z]: Russia_C  x         5        3        4        926   2279   0.15
+[2026-09-29T07:04:39Z]: Greenland x         1        2        2         58    147   0.01
+[2026-09-29T07:04:39Z]: [count-only] 축별 적합 수: v1_ridge 2,839 · method 39,512 · alpha 32,664 · alpha_cont 16,332 · nested_cv 14,412 · nested_cont 7,206 · place 3,050 · learner 1,284
+[2026-09-29T07:04:39Z]: [count-only] 총 적합 117,299 (전체 학습 90,922 + 경량[ridge V1·이어 학습] 26,377) · 저장 행 244,334
+[2026-09-29T07:04:39Z]: [count-only] 학습기별 추정(프로세스 1개 기준 누적 시간. n_fit_pseudo·est_h_pseudo = 유사라벨 행을 넣는 D1·R2 적합)
+[2026-09-29T07:04:39Z]:     learner  n_fit  rows_per_fit  base_s  equiv_fits  est_h  n_fit_pseudo  est_h_pseudo
+[2026-09-29T07:04:39Z]: catboost_lo 113176         21185    0.50      100571  13.97         11356          5.18
+[2026-09-29T07:04:39Z]:       ridge   1284         48947    0.05        3762   0.05           428          0.04
+[2026-09-29T07:04:39Z]:   추정 누적 14.0 h(4스레드 기준) → 워커 2개 7.0 h
+[2026-09-29T07:04:39Z]:   추정 누적 14.0 h(4스레드 기준) → 워커 10개 1.4 h
+[2026-09-29T07:04:39Z]:   추정 누적 14.0 h(4스레드 기준) → 워커 15개 0.9 h
+[2026-09-29T07:04:40Z]: [2026-09-29T07:04:40Z] [stage] count_cpu 끝: 종료 코드 0 · 21 s · 경과 12 min
+[2026-09-29T07:04:40Z]: [2026-09-29T07:04:40Z] [stage] count_gpu 시작(제한 300 s): python3 -u scripts/3_deep_learning/h40_label_grid.py --part gpu --count-only --threads 4
+[2026-09-29T07:04:41Z]: [data] 17,467셀 · 부분 gpu · 대상 27 · 분할 [1, 2, 3, 4, 5] · n [0, 3, 10, 40, 160, 320, 1000, -1] · 추출 5 · seed [0, 1] · 학습기 ['mlp', 'realmlp', 'ftt', 'tabm', 'cfm', 'ddpm', 'nflow'] · α ['1', '10', '100', 'cont'] · 중첩 후보 ['10', '100', 'cont'] · λ [0.25, 0.5, 1.0] · 하위 지역 map:lg_subregion_map_v1.csv · 작업 단위 231(건너뜀 3)
+[2026-09-29T07:04:52Z]: [count-only] 부분 gpu · 작업 단위 231 · 건너뜀 3(dup_of_2, invalid_nb_eval<2, no_eval)
+[2026-09-29T07:04:52Z]:                 units  n_A_min  n_A_max  fit_total  rows  est_h
+[2026-09-29T07:04:52Z]: target    mode                                                 
+[2026-09-29T07:04:52Z]: Lena      x        21     1293     1737       1428  3903  39.44
+[2026-09-29T07:04:52Z]: Canada    x        21      355      406       1428  3903  45.46
+[2026-09-29T07:04:52Z]: Russia_W  x        21       14       16        684  1899  23.68
+[2026-09-29T07:04:52Z]: Russia_E  x        21       15       17        684  1899  23.68
+[2026-09-29T07:04:52Z]: Alaska    x        21     6758     7436       1428  3903  11.41
+[2026-09-29T07:04:52Z]: AL-2      x        21     1694     1864       1428  3903  10.76
+[2026-09-29T07:04:52Z]: AL-3      x        21      305      361       1428  3903  10.58
+[2026-09-29T07:04:52Z]: AL-1      x        14      288     4834        952  2602   7.24
+[2026-09-29T07:04:52Z]: CA-3      x        21      125      224       1304  3569  41.64
+[2026-09-29T07:04:52Z]: CA-2      x        21      161      237       1428  3903  45.49
+[2026-09-29T07:04:52Z]: Russia_C  x        21        3        4        312   897  11.00
+[2026-09-29T07:04:52Z]: Greenland x         7        2        2         84   251   3.94
+[2026-09-29T07:04:52Z]: [count-only] 축별 적합 수: learner 8,988 · mlp_alpha 2,520 · mlp_cont 1,080
+[2026-09-29T07:04:52Z]: [count-only] 총 적합 12,588 (전체 학습 11,508 + 경량[ridge V1·이어 학습] 1,080) · 저장 행 34,535
+[2026-09-29T07:04:52Z]: [count-only] 학습기별 추정(프로세스 1개 기준 누적 시간. n_fit_pseudo·est_h_pseudo = 유사라벨 행을 넣는 D1·R2 적합)
+[2026-09-29T07:04:52Z]: learner  n_fit  rows_per_fit  base_s  equiv_fits  est_h  n_fit_pseudo  est_h_pseudo
+[2026-09-29T07:04:52Z]: realmlp   1284         48947   161.5        5237 234.95           428        198.24
+[2026-09-29T07:04:52Z]:     ftt   1284         48947    11.2        5237  16.29           428         13.75
+[2026-09-29T07:04:52Z]:   nflow   1284         48947     8.6        5237  12.51           428         10.56
+[2026-09-29T07:04:52Z]:    tabm   1284         48947     2.6        5237   3.78           428          3.19
+[2026-09-29T07:04:52Z]:     mlp   4884         25272     1.0       10286   2.86           428          1.23
+[2026-09-29T07:04:52Z]:    ddpm   1284         48947     1.5        5237   2.18           428          1.84
+[2026-09-29T07:04:52Z]:     cfm   1284         48947     1.2        5237   1.75           428          1.47
+[2026-09-29T07:04:52Z]:   추정 누적 274.3 GPU-h(로컬 GPU 기준) → 워커 4개 68.6 h · T4 2–3배 가정 137.2–205.7 h
+[2026-09-29T07:04:52Z]:   추정 누적 274.3 GPU-h(로컬 GPU 기준) → 워커 8개 34.3 h · T4 2–3배 가정 68.6–102.9 h
+[2026-09-29T07:04:52Z]:   추정 누적 274.3 GPU-h(로컬 GPU 기준) → 워커 12개 22.9 h · T4 2–3배 가정 45.7–68.6 h
+[2026-09-29T07:04:52Z]:   생성 모델(cfm·ddpm·nflow)의 표본 추출 시간은 채점 셀 수에 비례하며 위 추정에 들어 있지 않다
+[2026-09-29T07:04:52Z]: [2026-09-29T07:04:52Z] [stage] count_gpu 끝: 종료 코드 0 · 12 s · 경과 12 min
+[2026-09-29T07:04:52Z]: [2026-09-29T07:04:52Z] [stage] precheck_cpu 시작(제한 600 s): env LG_RESCALE=1 python3 -u scripts/3_deep_learning/h40_label_grid.py --part cpu --precheck --workers 1 --threads 4 --no-summarize
+[2026-09-29T07:04:53Z]: [data] 17,467셀 · 부분 cpu · 대상 1 · 분할 [1] · n [0, 40] · 추출 1 · seed [0] · 학습기 ['catboost_lo', 'ridge'] · α ['1', '10', '100', 'cont'] · 중첩 후보 ['10', '100', 'cont'] · λ [0.25, 0.5, 1.0] · 하위 지역 map:lg_subregion_map_v1.csv · 작업 단위 1(건너뜀 0)
+[2026-09-29T07:04:53Z]: [plan] 실행 1 · 재개로 건너뜀 0 · 프로세스 1 · 스레드 4 · 장치 CPU · epochs 100 · RealMLP epochs 256
+[2026-09-29T07:05:18Z]:   [Canada|x|s1|cpu] 적합 79 · 행 88 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 22.2s · 장치 '' · 상태 ok(실패 0) · 완료 1/1 · 누적 25s
+[2026-09-29T07:05:19Z]: [done] 완료 1 · 실패 0 · 일부 적합 실패 0 · 26s
+[2026-09-29T07:05:19Z]: [2026-09-29T07:05:19Z] [stage] precheck_cpu 끝: 종료 코드 0 · 27 s · 경과 13 min
+[2026-09-29T07:05:19Z]: [2026-09-29T07:05:19Z] [stage] precheck_gpu 시작(제한 4962 s): env LG_RESCALE=1 python3 -u scripts/3_deep_learning/h40_label_grid.py --part gpu --precheck --gpus 0 --procs-per-gpu 3 --threads 1 --learners mlp,cfm,ddpm,tabm,nflow,ftt --no-summarize
+[2026-09-29T07:05:21Z]: [data] 17,467셀 · 부분 gpu · 대상 1 · 분할 [1] · n [0, 40] · 추출 1 · seed [0] · 학습기 ['mlp', 'cfm', 'ddpm', 'tabm', 'nflow', 'ftt'] · α ['1', '10', '100', 'cont'] · 중첩 후보 ['10', '100', 'cont'] · λ [0.25, 0.5, 1.0] · 하위 지역 map:lg_subregion_map_v1.csv · 작업 단위 6(건너뜀 0)
+[2026-09-29T07:05:21Z]: [plan] 실행 6 · 재개로 건너뜀 0 · 프로세스 3 · 스레드 1 · 장치 GPU 0 · epochs 100 · RealMLP epochs 256
+[2026-09-29T07:05:51Z]:   [Canada|x|s1|gpu|tabm] 적합 6 · 행 21 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 27.8s · 장치 '0' · 상태 ok(실패 0) · 완료 1/6 · 누적 31s
+[2026-09-29T07:05:54Z]:   [Canada|x|s1|gpu|mlp] 적합 16 · 행 48 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 30.2s · 장치 '0' · 상태 ok(실패 0) · 완료 2/6 · 누적 33s
+[2026-09-29T07:06:32Z]:   [Canada|x|s1|gpu|cfm] 적합 6 · 행 21 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 68.7s · 장치 '0' · 상태 ok(실패 0) · 완료 3/6 · 누적 72s
+[2026-09-29T07:07:09Z]:   [Canada|x|s1|gpu|ddpm] 적합 6 · 행 21 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 77.2s · 장치 '0' · 상태 ok(실패 0) · 완료 4/6 · 누적 108s
+[2026-09-29T07:10:49Z]:   [Canada|x|s1|gpu|nflow] 적합 6 · 행 21 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 256.3s · 장치 '0' · 상태 ok(실패 0) · 완료 5/6 · 누적 328s
+[2026-09-29T07:28:07Z]:   [Canada|x|s1|gpu|ftt] 적합 6 · 행 21 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 1333.3s · 장치 '0' · 상태 ok(실패 0) · 완료 6/6 · 누적 1367s
+[2026-09-29T07:28:08Z]: [done] 완료 6 · 실패 0 · 일부 적합 실패 0 · 1368s
+[2026-09-29T07:28:08Z]: [2026-09-29T07:28:08Z] [stage] precheck_gpu 끝: 종료 코드 0 · 1369 s · 경과 36 min
+[2026-09-29T07:28:08Z]: [2026-09-29T07:28:08Z] [stage] precheck_realmlp 시작(제한 4193 s): env LG_RESCALE=1 python3 -u scripts/3_deep_learning/h40_label_grid.py --part gpu --precheck --tag lgrm --gpus 0 --procs-per-gpu 1 --threads 4 --learners realmlp --realmlp-epochs 8 --no-summarize
+[2026-09-29T07:28:10Z]: [data] 17,467셀 · 부분 gpu · 대상 1 · 분할 [1] · n [0, 40] · 추출 1 · seed [0] · 학습기 ['realmlp'] · α ['1', '10', '100', 'cont'] · 중첩 후보 ['10', '100', 'cont'] · λ [0.25, 0.5, 1.0] · 하위 지역 map:lg_subregion_map_v1.csv · 작업 단위 1(건너뜀 0)
+[2026-09-29T07:28:10Z]: [plan] 실행 1 · 재개로 건너뜀 0 · 프로세스 1 · 스레드 4 · 장치 GPU 0 · epochs 100 · RealMLP epochs 8
+[2026-09-29T07:28:16Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:28:16Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:28:16Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:28:16Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:28:19Z]: `Trainer.fit` stopped: `max_epochs=8` reached.
+[2026-09-29T07:28:19Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:28:19Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:28:19Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:28:19Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:28:19Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:28:19Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:28:19Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:28:19Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:28:22Z]: `Trainer.fit` stopped: `max_epochs=8` reached.
+[2026-09-29T07:28:22Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:28:22Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:28:22Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:28:22Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:28:23Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:28:23Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:28:23Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:28:23Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:28:53Z]: `Trainer.fit` stopped: `max_epochs=8` reached.
+[2026-09-29T07:28:53Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:28:53Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:28:53Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:28:53Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:28:53Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:28:53Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:28:53Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:28:53Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:28:56Z]: `Trainer.fit` stopped: `max_epochs=8` reached.
+[2026-09-29T07:28:56Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:28:56Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:28:56Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:28:56Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:28:56Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:28:56Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:28:56Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:28:56Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:28:59Z]: `Trainer.fit` stopped: `max_epochs=8` reached.
+[2026-09-29T07:28:59Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:28:59Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:28:59Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:28:59Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:28:59Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:28:59Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:28:59Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:28:59Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:29:30Z]: `Trainer.fit` stopped: `max_epochs=8` reached.
+[2026-09-29T07:29:30Z]: GPU available: True (cuda), used: True
+[2026-09-29T07:29:30Z]: TPU available: False, using: 0 TPU cores
+[2026-09-29T07:29:30Z]: 💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[2026-09-29T07:29:30Z]: LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[2026-09-29T07:29:30Z]:   [Canada|x|s1|gpu|realmlp] 적합 6 · 행 21 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 77.6s · 장치 '0' · 상태 ok(실패 0) · 완료 1/1 · 누적 81s
+[2026-09-29T07:29:31Z]: [done] 완료 1 · 실패 0 · 일부 적합 실패 0 · 82s
+[2026-09-29T07:29:31Z]: [2026-09-29T07:29:31Z] [stage] precheck_realmlp 끝: 종료 코드 0 · 83 s · 경과 37 min
+[2026-09-29T07:29:31Z]: [2026-09-29T07:29:31Z] [stage] precheck_sum 시작(제한 240 s): python3 -u scripts/3_deep_learning/h40_label_grid.py --precheck --summarize-only --threads 4
+[2026-09-29T07:29:33Z]: [data] 17,467셀 · 부분 cpu · 대상 1 · 분할 [1] · n [0, 40] · 추출 1 · seed [0] · 학습기 ['catboost_lo', 'ridge'] · α ['1', '10', '100', 'cont'] · 중첩 후보 ['10', '100', 'cont'] · λ [0.25, 0.5, 1.0] · 하위 지역 map:lg_subregion_map_v1.csv · 작업 단위 1(건너뜀 0)
+[2026-09-29T07:29:34Z]: [summarize] 학습기별 적합 시간(전 조각 합계)
+[2026-09-29T07:29:34Z]: part     learner  n_fit     sec  sec_per_fit
+[2026-09-29T07:29:34Z]:  cpu catboost_lo     71   20.62     0.290423
+[2026-09-29T07:29:34Z]:  cpu       ridge      6    0.44     0.073333
+[2026-09-29T07:29:34Z]:  gpu         cfm      6   67.52    11.253333
+[2026-09-29T07:29:34Z]:  gpu        ddpm      6   77.17    12.861667
+[2026-09-29T07:29:34Z]:  gpu         ftt      6 1333.29   222.215000
+[2026-09-29T07:29:34Z]:  gpu         mlp     16   29.08     1.817500
+[2026-09-29T07:29:34Z]:  gpu       nflow      6  256.28    42.713333
+[2026-09-29T07:29:34Z]:  gpu        tabm      6   26.62     4.436667
+[2026-09-29T07:29:34Z]: [summarize] 조각 7 · runs 199 · curve 199 · minn 125 · tests 62 · 1s → /enc/ukrprod_qOkSo/work/data/processed/lg/lg_precheck_*
+[2026-09-29T07:29:34Z]: test_id role                        verdict                                                                                                                                                            stat
+[2026-09-29T07:29:34Z]:      L1    주 부분(지역 1/4): 검사한 지역에서는 지지 조건 충족 두 가중 CI 상한 < 0 인 지역 0/1 (Lena: 유의 [], 셀 가중만 [], 검사 []; Canada: 유의 [], 셀 가중만 [], 검사 [0, 40]; Russia_W: 유의 [], 셀 가중만 [], 검사 []; Russia_E: 유의 [], 셀 가중만 [], 검사 [])
+[2026-09-29T07:29:34Z]:      L2    주                          판정 불가                                                                                                 R2-R1 유의 개선 n = [], 4지역 평균인 n = [] | n=40: undetermined(지역 1/4)
+[2026-09-29T07:29:34Z]:      L2    주                          판정 불가                                                                                                 R3-R1 유의 개선 n = [], 4지역 평균인 n = [] | n=40: undetermined(지역 1/4)
+[2026-09-29T07:29:34Z]:      L3    주            판정 불가(적격 대상 1개 < 2)                                                        R0, AL 모드 i: 적격 1, n* ≤ 40 대상 0, 그중 α = 1 의 n* 보다 작은 대상 0 (Canada|x: n*=NA(α=1 NA, 블록 합집합 20, 분할 최소 20))
+[2026-09-29T07:29:34Z]:      L3   보조            판정 불가(적격 대상 1개 < 2)                                                        R0, AL 모드 x: 적격 1, n* ≤ 40 대상 0, 그중 α = 1 의 n* 보다 작은 대상 0 (Canada|x: n*=NA(α=1 NA, 블록 합집합 20, 분할 최소 20))
+[2026-09-29T07:29:34Z]:      L3   보조            판정 불가(적격 대상 1개 < 2)                                                        R1, AL 모드 i: 적격 1, n* ≤ 40 대상 0, 그중 α = 1 의 n* 보다 작은 대상 0 (Canada|x: n*=NA(α=1 NA, 블록 합집합 20, 분할 최소 20))
+[2026-09-29T07:29:34Z]:      L3   보조            판정 불가(적격 대상 1개 < 2)                                                        R1, AL 모드 x: 적격 1, n* ≤ 40 대상 0, 그중 α = 1 의 n* 보다 작은 대상 0 (Canada|x: n*=NA(α=1 NA, 블록 합집합 20, 분할 최소 20))
+[2026-09-29T07:29:34Z]:      L4    주                          판정 불가                                                                                  두 가중 CI 상한 < 0 인 최소 n: 4지역 평균 None, 2–3지역 평균 None | n=40: undetermined(지역 1/4)
+[2026-09-29T07:29:34Z]:      L5    주                          판정 불가                                                      cfm: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4)
+[2026-09-29T07:29:34Z]:      L5    주                          판정 불가                                                     ddpm: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4)
+[2026-09-29T07:29:34Z]:      L5    주                          판정 불가                                                      ftt: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4)
+[2026-09-29T07:29:34Z]:      L5    주                          판정 불가                                                      mlp: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4)
+[2026-09-29T07:29:34Z]:      L5    주                          판정 불가                                                    nflow: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4)
+[2026-09-29T07:29:34Z]:      L5    주                          판정 불가                                                    ridge: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4)
+[2026-09-29T07:29:34Z]:      L5    주                          판정 불가                                                     tabm: 유의 개선 n = [], 유의 악화 n = [], 셀 가중만 개선 []·악화 [] | n=0: undetermined(지역 1/4); n=40: undetermined(지역 1/4)
+[2026-09-29T07:29:34Z]:      L6    주                판정 불가(통과 조합 없음)                                                                                                                        알래스카 통과 조합의 주 4지역 통과 0/0(두 가중, 방법별 기준 λ)
+[2026-09-29T07:29:34Z]:      L6   보조                판정 불가(통과 조합 없음)                                                                                                                  민감도: 분할 안 채점 블록 ≥ 5 인 알래스카 대상만으로 조합을 고른 경우 0/0
+[2026-09-29T07:29:34Z]:      L6   보조                판정 불가(통과 조합 없음)                                                                                                                                         민감도: 셀 가중 CI 만 쓴 경우 0/0
+[2026-09-29T07:29:34Z]:      L7    주                             기각                                                                                                                                                 Canada|x n=40:X
+[2026-09-29T07:29:34Z]:      L8    주                          판정 불가                                                                                                                                                                
+[2026-09-29T07:29:34Z]: [2026-09-29T07:29:34Z] [stage] precheck_sum 끝: 종료 코드 0 · 3 s · 경과 37 min
+[2026-09-29T07:29:34Z]: [2026-09-29T07:29:34Z] [stage] timing_final 시작(제한 300 s): python3 -u scripts/rescale/lg_timing_table.py --lg-dir data/processed/lg --out-dir . --prefix lg_smoke
+[2026-09-29T07:29:35Z]: [timing] 조각 32 · 행 98 → lg_smoke_timing_by_learner.csv
+[2026-09-29T07:29:35Z]:           tag part     learner  n_fit     sec  sec_full_epochs  epochs_run  sec_per_fit
+[2026-09-29T07:29:35Z]:   lg_precheck  cpu catboost_lo     71   20.62           20.620         NaN        0.290
+[2026-09-29T07:29:35Z]:   lg_precheck  cpu       ridge      6    0.44            0.440         NaN        0.073
+[2026-09-29T07:29:35Z]:   lg_precheck  gpu         cfm      6   67.52           67.520       100.0       11.253
+[2026-09-29T07:29:35Z]:   lg_precheck  gpu        ddpm      6   77.17           77.170       100.0       12.862
+[2026-09-29T07:29:35Z]:   lg_precheck  gpu         ftt      6 1333.29         1333.290       100.0      222.215
+[2026-09-29T07:29:35Z]:   lg_precheck  gpu         mlp     16   29.08           29.080       100.0        1.818
+[2026-09-29T07:29:35Z]:   lg_precheck  gpu       nflow      6  256.28          256.280       100.0       42.713
+[2026-09-29T07:29:35Z]:   lg_precheck  gpu        tabm      6   26.62           26.620       100.0        4.437
+[2026-09-29T07:29:35Z]:      lg_smoke  cpu catboost_lo    298   95.27           95.270         NaN        0.320
+[2026-09-29T07:29:35Z]:      lg_smoke  cpu       ridge     24    1.82            1.820         NaN        0.076
+[2026-09-29T07:29:35Z]:      lg_smoke  gpu         cfm     24    5.75          191.667         3.0        0.240
+[2026-09-29T07:29:35Z]:      lg_smoke  gpu        ddpm     24   16.20          540.000         3.0        0.675
+[2026-09-29T07:29:35Z]:      lg_smoke  gpu         ftt     24  191.42         6380.667         3.0        7.976
+[2026-09-29T07:29:35Z]:      lg_smoke  gpu         mlp     74    7.52          229.327         3.0        0.102
+[2026-09-29T07:29:35Z]:      lg_smoke  gpu       nflow     24   19.29          643.000         3.0        0.804
+[2026-09-29T07:29:35Z]:      lg_smoke  gpu     realmlp     24  109.78         9367.893         3.0        4.574
+[2026-09-29T07:29:35Z]:      lg_smoke  gpu        tabm     24    5.69          189.667         3.0        0.237
+[2026-09-29T07:29:35Z]: lgrm_precheck  gpu     realmlp      6   76.48         2447.360         8.0       12.747
+[2026-09-29T07:29:35Z]: [timing] 본 실행 환산 → lg_smoke_full_projection.csv (누적 시간 h, 워커 수로 나눈 벽시계 h)
+[2026-09-29T07:29:35Z]: part     learner source  n_fit_measured  calib_all  n_fit_full  est_h_full  proj_h_full  workers  proj_wall_h
+[2026-09-29T07:29:35Z]:  cpu catboost_lo  사전 점검              71      0.631      113176       13.97        8.972       14        0.641
+[2026-09-29T07:29:35Z]:  cpu       ridge  사전 점검               6      0.338        1284        0.05        0.017       14        0.001
+[2026-09-29T07:29:35Z]:  gpu     realmlp  사전 점검               6      0.419        1284      234.95       98.443       12        8.204
+[2026-09-29T07:29:35Z]:  gpu         ftt  사전 점검               6      3.290        1284       16.29       53.610       12        4.467
+[2026-09-29T07:29:35Z]:  gpu       nflow  사전 점검               6      0.824        1284       12.51       10.353       12        0.863
+[2026-09-29T07:29:35Z]:  gpu        tabm  사전 점검               6      0.283        1284        3.78        1.073       12        0.089
+[2026-09-29T07:29:35Z]:  gpu         mlp  사전 점검              16      0.618        4884        2.86        2.207       12        0.184
+[2026-09-29T07:29:35Z]:  gpu        ddpm  사전 점검               6      1.422        1284        2.18        3.102       12        0.259
+[2026-09-29T07:29:35Z]:  gpu         cfm  사전 점검               6      1.555        1284        1.75        2.727       12        0.227
+[2026-09-29T07:29:35Z]: [timing] 부분 cpu: 환산 누적 9.0 h · 벽시계 0.6 h(워커 14개) · 실측 없는 학습기 []
+[2026-09-29T07:29:35Z]: [timing] 부분 gpu: 환산 누적 171.5 h · 벽시계 14.3 h(워커 12개) · 실측 없는 학습기 []
+[2026-09-29T07:29:35Z]: [2026-09-29T07:29:35Z] [stage] timing_final 끝: 종료 코드 0 · 1 s · 경과 37 min
+[2026-09-29T07:29:35Z]: [2026-09-29T07:29:35Z] [pack] results_lg_smoke.tar.gz 508K · 파일 134개
+[2026-09-29T07:29:35Z]: [2026-09-29T07:29:35Z] [smoke] 단계별 상태
+[2026-09-29T07:29:35Z]:   stage,required,rc,sec,note
+[2026-09-29T07:29:35Z]:   deps,1,0,79,ok
+[2026-09-29T07:29:35Z]:   smoke_cpu,1,0,104,
+[2026-09-29T07:29:35Z]:   smoke_gpu,1,0,364,
+[2026-09-29T07:29:35Z]:   smoke_sum,1,0,7,
+[2026-09-29T07:29:35Z]:   timing,1,0,0,
+[2026-09-29T07:29:35Z]:   pytest,1,0,14,
+[2026-09-29T07:29:35Z]:   count_cpu,0,0,21,
+[2026-09-29T07:29:35Z]:   count_gpu,0,0,12,
+[2026-09-29T07:29:35Z]:   precheck_cpu,0,0,27,
+[2026-09-29T07:29:35Z]:   precheck_gpu,0,0,1369,
+[2026-09-29T07:29:35Z]:   precheck_realmlp,0,0,83,
+[2026-09-29T07:29:35Z]:   precheck_sum,0,0,3,
+[2026-09-29T07:29:35Z]:   timing_final,0,0,1,
+[2026-09-29T07:29:37Z]: [2026-09-29T07:29:37Z] [smoke] 모든 단계 통과 · 경과 37 min
+[2026-09-29T07:29:37Z]: Exited with code 0
+[2026-09-29T07:29:37Z]: 

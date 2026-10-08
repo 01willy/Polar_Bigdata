@@ -1,0 +1,9 @@
+label,p,rank,multiplier,p_holm,m,rank_tie,multiplier_tie,holm_final
+XC-1b,0.0524,5,4,0.2096,8,5,4,True
+XC-1c,0.008,4,5,0.04,8,4,5,True
+XC-2a,0.0,1,8,0.0,8,1,8,True
+XC-2b,0.0,2,7,0.0,8,1,8,True
+XC-2c,0.0,3,6,0.0,8,1,8,True
+XC-5b,1.0,6,3,1.0,8,6,3,True
+XC-5c,1.0,7,2,1.0,8,6,3,True
+XC-F3,1.0,8,1,1.0,8,6,3,True

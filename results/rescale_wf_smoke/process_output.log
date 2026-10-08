@@ -1,0 +1,124 @@
+[2026-10-01T04:06:20Z]: Launching [ -f wf_payload.tar.gz ] && tar xzf wf_payload.tar.gz; WF_MODE=smoke WF_BUDGET_MIN=50 bash scripts/rescale/run_wf.sh, Working dir: /enc/ukrprod_nyFtT/work.  Process output follows:
+[2026-10-01T04:06:20Z]: [payload] created_utc=2026-10-01T03:56:07Z
+[2026-10-01T04:06:20Z]: [payload] git_commit=702934b
+[2026-10-01T04:06:20Z]: [payload] git_uncommitted_paths=0
+[2026-10-01T04:06:20Z]: [payload] h40_sha16_main_run=7098f59dabe2b73f
+[2026-10-01T04:06:20Z]: [payload] sha256 7098f59dabe2b73f scripts/3_deep_learning/h40_label_grid.py
+[2026-10-01T04:06:20Z]: [payload] sha256 22e215e435e157be scripts/3_deep_learning/h42_label_grid_ext.py
+[2026-10-01T04:06:20Z]: [payload] sha256 42643d1c261764c8 scripts/3_deep_learning/h54_workflow.py
+[2026-10-01T04:06:20Z]: [payload] sha256 db746179789f21a7 src/polar/m1_core.py
+[2026-10-01T04:06:20Z]: [payload] sha256 4b6b888275d5f47f src/polar/h4_common.py
+[2026-10-01T04:06:20Z]: [payload] sha256 2a910d36299ee2fb src/polar/m1_stats.py
+[2026-10-01T04:06:20Z]: [payload] sha256 a49559e2dce61535 src/polar/fidelity.py
+[2026-10-01T04:06:20Z]: [payload] sha256 b799bd4e6aeb69b5 src/polar/physics.py
+[2026-10-01T04:06:20Z]: [payload] sha256 56de62e3af9f350e tests/test_h54_workflow.py
+[2026-10-01T04:06:20Z]: [payload] sha256 c37a90d6a5ff80b2 scripts/rescale/run_wf.sh
+[2026-10-01T04:06:20Z]: [payload] sha256 af1c1f2bf081ac8d scripts/rescale/lg_common.sh
+[2026-10-01T04:06:20Z]: [payload] sha256 71b5d3f6c297770d data/processed/fidelity_base_v3.csv
+[2026-10-01T04:06:20Z]: [payload] sha256 711d0cd3ba0e2e41 data/processed/e5_soil_tdd_v3.csv
+[2026-10-01T04:06:20Z]: [payload] sha256 2ef333b24d60332a data/processed/e5_soil_tdd_v4.csv
+[2026-10-01T04:06:20Z]: [payload] sha256 87bd06f98bb1d141 data/processed/lg_subregion_map_v1.csv
+[2026-10-01T04:06:20Z]: [payload] sha256 58e4db50f71b96a9 data/processed/lgd/run_tables/Tibet/fidelity_base_v3.csv
+[2026-10-01T04:06:20Z]: [payload] sha256 7eeb6d49d5096c4c data/processed/lgd/run_tables/NAtlantic_lic/fidelity_base_v3.csv
+[2026-10-01T04:06:20Z]: [payload] sha256 6a8ab259d10f3c07 data/processed/lgd/run_tables/Russia_C/fidelity_base_v3.csv
+[2026-10-01T04:06:20Z]: [2026-10-01T04:06:20Z] [env] 작업 디렉터리 /enc/ukrprod_nyFtT/work
+[2026-10-01T04:06:20Z]: [2026-10-01T04:06:20Z] [env] 코어 수 96 (RESCALE_CORES_PER_SLOT = 96, OMP_NUM_THREADS = 없음) · 메모리 369 GB (여유 344 GB)
+[2026-10-01T04:06:20Z]: [2026-10-01T04:06:20Z] [env] 디스크 1.2T 여유 / 1.2T
+[2026-10-01T04:06:20Z]: [2026-10-01T04:06:20Z] [env] python /program/pytorch-2.4.1/venv/bin/python3 · pip /program/pytorch-2.4.1/venv/bin/pip
+[2026-10-01T04:06:21Z]: [env] python 3.11.10 · Linux-4.18.0-553.159.1.el8_10.x86_64-x86_64-with-glibc2.28
+[2026-10-01T04:06:21Z]: [env] 가상환경 True · prefix /program/pytorch-2.4.1/venv
+[2026-10-01T04:06:21Z]: [env] numpy 2.1.1
+[2026-10-01T04:06:21Z]: [env] pandas 없음
+[2026-10-01T04:06:21Z]: [env] scipy 없음
+[2026-10-01T04:06:21Z]: [env] scikit-learn 없음
+[2026-10-01T04:06:21Z]: [env] catboost 없음
+[2026-10-01T04:06:21Z]: [env] pytabkit 없음
+[2026-10-01T04:06:21Z]: [env] pytest 없음
+[2026-10-01T04:06:21Z]: [env] torch 2.4.1
+[2026-10-01T04:06:21Z]: [env] CUDA_VISIBLE_DEVICES = None
+[2026-10-01T04:06:49Z]: [env] torch 2.4.1+cu121 · CUDA 빌드 12.1 · CUDA 사용 가능 False · GPU 수 0
+[2026-10-01T04:06:51Z]: [2026-10-01T04:06:51Z] [env] nvidia-smi 없음
+[2026-10-01T04:06:53Z]: [2026-10-01T04:06:53Z] [deps] 없는 필수 패키지: catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-01T04:06:53Z]: [2026-10-01T04:06:53Z] [deps] pip install --user catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-01T04:06:55Z]: ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-10-01T04:06:55Z]: [2026-10-01T04:06:55Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+[2026-10-01T04:07:21Z]: [deps] 확인: catboost 1.2.10 · scikit-learn 1.9.1 · pandas 2.3.3 · scipy 1.17.1 · numpy 2.1.1
+[2026-10-01T04:07:21Z]: [2026-10-01T04:07:21Z] [wf] 모드 smoke · 코어 96 · 워커 22 × 스레드 4 · 실험 wf1,wf2,wf3,wf4 · 시간 한도 50 min
+[2026-10-01T04:07:21Z]: [2026-10-01T04:07:21Z] [deps] pip install --user pytest
+[2026-10-01T04:07:21Z]: ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-10-01T04:07:21Z]: [2026-10-01T04:07:21Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+[2026-10-01T04:07:23Z]: [2026-10-01T04:07:23Z] [deps] 선택 패키지 pytest 설치함(pytest)
+[2026-10-01T04:07:23Z]: [2026-10-01T04:07:23Z] [deps] pip install --user pykrige==1.7.3
+[2026-10-01T04:07:23Z]: ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-10-01T04:07:23Z]: [2026-10-01T04:07:23Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+[2026-10-01T04:07:24Z]: [2026-10-01T04:07:24Z] [deps] 선택 패키지 pykrige 설치함(pykrige==1.7.3)
+[2026-10-01T04:07:24Z]: [2026-10-01T04:07:24Z] [stage] smoke 시작(제한 900 s): env WF_RESCALE=1 python3 -u scripts/3_deep_learning/h54_workflow.py --smoke --exps wf1,wf2,wf3,wf4 --workers 4 --threads 4
+[2026-10-01T04:08:06Z]:   [smoke] [data] 실험 ['wf1', 'wf2', 'wf3', 'wf4'] · 작업 단위 13(건너뜀 0) · 실험별 {'wf1': 3, 'wf2': 7, 'wf3': 1, 'wf4': 2} · 분할 [1] · seed [0] · 스레드 4 · 워커 4
+[2026-10-01T04:08:06Z]:   [smoke] [plan] 실행 13 · 재개로 건너뜀 0 · 프로세스 4 · 스레드 4
+[2026-10-01T04:08:06Z]:   [smoke] [pool] 워커 4 · 스레드 4 · 코어 고정 예(워커마다 4코어)
+[2026-10-01T04:08:06Z]:   [smoke] [done] 완료 13 · 실패 0 · 일부 적합 실패 0 · 38s
+[2026-10-01T04:08:06Z]:   [smoke] [summarize] 실험 ['wf1', 'wf2', 'wf3', 'wf4'] · 조각 13 · runs 379 · curve 372 · tests 119 · 2s → /enc/ukrprod_nyFtT/work/data/processed/wf/wf_smoke_*
+[2026-10-01T04:08:06Z]:   [smoke] wf1   WF1-c   서술 Canada|r                  기각: 열세인 n 의 수가 D0 보다 적은 물리 기반 레시피가 없다
+[2026-10-01T04:08:06Z]:   [smoke] wf2   WF2-a   서술 Canada|r          기각: n {50, 100, 200} 의 R1 에서 S1 보다 우세인 전략이 없다
+[2026-10-01T04:08:06Z]:   [smoke] wf3   WF3-a    주      NaN                                            판정 불가(행 없음)
+[2026-10-01T04:08:06Z]:   [smoke] wf4   WF4-a    주      NaN          판정 불가(대비 0/4; 없는 대비: n=10, n=40, n=160, n=전량)
+[2026-10-01T04:08:06Z]:   [smoke] wf4   WF4-b    주      NaN                            판정 불가(판정 가능한 대상이 없는 n: 160)
+[2026-10-01T04:08:06Z]:   [smoke] wf4   WF4-c    주      NaN                                        판정 불가(대상 2 < 3)
+[2026-10-01T04:08:06Z]: [2026-10-01T04:08:06Z] [stage] smoke 끝: 종료 코드 0 · 42 s · 경과 1 min
+[2026-10-01T04:08:06Z]: [2026-10-01T04:08:06Z] [pack] results_wf_smoke.tar.gz 140K · 파일 50개
+[2026-10-01T04:08:06Z]: [2026-10-01T04:08:06Z] [stage] pytest 시작(제한 900 s): env -u WF_RESCALE -u LG_RESCALE LG_RUN_HEAVY=1 OMP_NUM_THREADS=4 python3 -m pytest -q -p no:cacheprovider tests/test_h54_workflow.py
+[2026-10-01T04:09:13Z]:   [pytest] 30 passed in 66.07s (0:01:06)
+[2026-10-01T04:09:13Z]:   [pytest] ..............................                                           [100%]
+[2026-10-01T04:09:13Z]:   [pytest] 30 passed in 66.07s (0:01:06)
+[2026-10-01T04:09:13Z]: [2026-10-01T04:09:13Z] [stage] pytest 끝: 종료 코드 0 · 67 s · 경과 2 min
+[2026-10-01T04:09:13Z]: [2026-10-01T04:09:13Z] [pack] results_wf_smoke.tar.gz 140K · 파일 51개
+[2026-10-01T04:09:13Z]: [2026-10-01T04:09:13Z] [stage] count 시작(제한 600 s): env -u WF_RESCALE -u LG_RESCALE python3 -u scripts/3_deep_learning/h54_workflow.py --count-only --exps wf1,wf2,wf3,wf4 --threads 1
+[2026-10-01T04:09:48Z]:   [count] [data] 실험 ['wf1', 'wf2', 'wf3', 'wf4'] · 작업 단위 343(건너뜀 21) · 실험별 {'wf1': 33, 'wf2': 168, 'wf3': 10, 'wf4': 132} · 분할 [1, 2, 3, 4, 5] · seed [0, 1] · 스레드 1 · 워커 1
+[2026-10-01T04:09:48Z]:   [count] [count-only] 작업 단위 343 · 건너뜀 21 · 세기 33s
+[2026-10-01T04:09:48Z]:   [count] [count-only] 실험·학습기·방법별 적합 수와 추정 누적 시간(프로세스 1개, 스레드 4 기준)
+[2026-10-01T04:09:48Z]:   [count] [count-only] 총 적합 83,544 · 크리깅 11,131 · k-평균 138 · 추정 누적 13.6 CPU-h(4스레드 프로세스 기준)
+[2026-10-01T04:09:48Z]:   [count] [count-only] 건너뛴 분할·대상: {'invalid_nb_eval<2': 13, 'no_eval': 1, 'dup_of_2': 4, 'dup_of_1': 3}
+[2026-10-01T04:09:48Z]:   [count] wf4 catboost_lo     R2cv   7255  3.398
+[2026-10-01T04:09:48Z]:   [count] [count-only] 총 적합 83,544 · 크리깅 11,131 · k-평균 138 · 추정 누적 13.6 CPU-h(4스레드 프로세스 기준)
+[2026-10-01T04:09:48Z]:   [count]   워커 15개(4스레드) → 약 0.90 h(단위 크기 불균형과 감속 제외)
+[2026-10-01T04:09:48Z]:   [count]   워커 22개(4스레드) → 약 0.62 h(단위 크기 불균형과 감속 제외)
+[2026-10-01T04:09:48Z]:   [count]   워커 43개(4스레드) → 약 0.32 h(단위 크기 불균형과 감속 제외)
+[2026-10-01T04:09:48Z]:   [count] [count-only] 건너뛴 분할·대상: {'invalid_nb_eval<2': 13, 'no_eval': 1, 'dup_of_2': 4, 'dup_of_1': 3}
+[2026-10-01T04:09:48Z]: [2026-10-01T04:09:48Z] [stage] count 끝: 종료 코드 0 · 35 s · 경과 3 min
+[2026-10-01T04:09:48Z]: [2026-10-01T04:09:48Z] [pack] results_wf_smoke.tar.gz 148K · 파일 54개
+[2026-10-01T04:09:48Z]: [2026-10-01T04:09:48Z] [stage] precheck 시작(제한 1800 s): env WF_RESCALE=1 python3 -u scripts/3_deep_learning/h54_workflow.py --precheck --exps wf1,wf2,wf3,wf4 --workers 7 --threads 4 --nboot 1000
+[2026-10-01T04:14:49Z]:   [precheck] [data] 실험 ['wf1', 'wf2', 'wf3', 'wf4'] · 작업 단위 7(건너뜀 0) · 실험별 {'wf1': 2, 'wf2': 2, 'wf3': 1, 'wf4': 2} · 분할 [1] · seed [0, 1] · 스레드 4 · 워커 7
+[2026-10-01T04:14:49Z]:   [precheck] [plan] 실행 7 · 재개로 건너뜀 0 · 프로세스 7 · 스레드 4
+[2026-10-01T04:14:49Z]:   [precheck] [pool] 워커 7 · 스레드 4 · 코어 고정 예(워커마다 4코어)
+[2026-10-01T04:14:49Z]:   [precheck] [done] 완료 7 · 실패 0 · 일부 적합 실패 0 · 296s
+[2026-10-01T04:14:49Z]:   [precheck] [summarize] 실험 ['wf1', 'wf2', 'wf3', 'wf4'] · 조각 7 · runs 4,281 · curve 590 · tests 224 · 4s → /enc/ukrprod_nyFtT/work/data/processed/wf/wf_precheck_*
+[2026-10-01T04:14:49Z]:   [precheck] wf2   WF2-b    주      NaN                 판정 불가(대비 0/2; 없는 대비: Lena|r, Canada|r)
+[2026-10-01T04:14:49Z]:   [precheck] wf3   WF3-a    주      NaN                   기각: n ≥ 500 에서 Pc 가 P1 보다 우세인 대비가 없다
+[2026-10-01T04:14:49Z]:   [precheck] wf3   WF3-b   서술 Alaska|r          서술(방향 중립): R1c 동등 6, 미결정 18; R1i 동등 18, 미결정 6
+[2026-10-01T04:14:49Z]:   [precheck] wf4   WF4-a    주      NaN          판정 불가(대비 0/4; 없는 대비: n=10, n=40, n=160, n=전량)
+[2026-10-01T04:14:49Z]:   [precheck] wf4   WF4-b    주      NaN                      기각: W 의 우세 대상 수가 R1(0.25)보다 많지 않다
+[2026-10-01T04:14:49Z]:   [precheck] wf4   WF4-c    주      NaN                                        판정 불가(대상 2 < 3)
+[2026-10-01T04:14:49Z]: [2026-10-01T04:14:49Z] [stage] precheck 끝: 종료 코드 0 · 301 s · 경과 8 min
+[2026-10-01T04:14:49Z]: [2026-10-01T04:14:49Z] [pack] results_wf_smoke.tar.gz 1.5M · 파일 82개
+[2026-10-01T04:14:49Z]: [2026-10-01T04:14:49Z] [stage] project 시작(제한 120 s): python3 -
+[2026-10-01T04:14:49Z]:   [project] exp    est_s    ratio  proj_cpu_h
+[2026-10-01T04:14:49Z]:   [project] wf1  6134.32 0.803799    1.369655
+[2026-10-01T04:14:49Z]:   [project] wf2  1835.38 0.670687    0.341935
+[2026-10-01T04:14:49Z]:   [project] wf3   319.03 0.585369    0.051875
+[2026-10-01T04:14:49Z]:   [project] wf4 40573.69 0.503781    5.677850
+[2026-10-01T04:14:49Z]:   [project] [project] 실측/추정 비(전체) 0.62 · 환산 누적 7.4 CPU-h(워커 1개, 4스레드)
+[2026-10-01T04:14:49Z]: [2026-10-01T04:14:49Z] [stage] project 끝: 종료 코드 0 · 0 s · 경과 8 min
+[2026-10-01T04:14:49Z]: [2026-10-01T04:14:49Z] [pack] results_wf_smoke.tar.gz 1.5M · 파일 84개
+[2026-10-01T04:14:49Z]: [2026-10-01T04:14:49Z] [pack] results_wf_smoke.tar.gz 1.5M · 파일 84개
+[2026-10-01T04:14:49Z]: [2026-10-01T04:14:49Z] [wf] 단계별 상태
+[2026-10-01T04:14:49Z]:   stage,required,rc,sec,note
+[2026-10-01T04:14:49Z]:   inputs,1,0,31,
+[2026-10-01T04:14:49Z]:   deps,1,0,61,
+[2026-10-01T04:14:49Z]:   smoke,1,0,42,
+[2026-10-01T04:14:49Z]:   pytest,1,0,67,
+[2026-10-01T04:14:49Z]:   count,1,0,35,
+[2026-10-01T04:14:49Z]:   precheck,0,0,301,
+[2026-10-01T04:14:49Z]:   project,0,0,0,
+[2026-10-01T04:14:49Z]: [2026-10-01T04:14:49Z] [wf] 모든 단계 통과 · 경과 8 min
+[2026-10-01T04:14:49Z]: Exited with code 0
+[2026-10-01T04:14:49Z]: 

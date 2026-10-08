@@ -1,0 +1,12 @@
+{
+ "ref": "AP",
+ "k_better": 2,
+ "j_families_better": 0,
+ "k_worse": 2,
+ "j_families_worse": 2,
+ "n_tasks": 5,
+ "n_families": 3,
+ "sentence_better": "알래스카 하위 지역에서 학습해 동결한 배치 정책은 알래스카 밖 시험 과제 5개 가운데 2개(계열 3개 가운데 0개)에서 Algorithm P 보다 오차가 작았다(두 가중 모두, 검정 없음).",
+ "sentence_worse": "알래스카 하위 지역에서 학습해 동결한 배치 정책은 알래스카 밖 시험 과제 5개 가운데 2개(계열 3개 가운데 2개)에서 Algorithm P 보다 오차가 컸다(두 가중 모두, 검정 없음).",
+ "no_test_p": "계열 3개라 최소 p 0.125, p 를 내지 않는다"
+}

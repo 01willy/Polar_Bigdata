@@ -1,0 +1,26 @@
+part,target,normalizer,K_groups,groups,n_train_sets,n_seeds,n_fit,n_train_full,n_cal,n_target,n_eval,n_drop_eval,est_fit_s,device,note,n_keys_all,n_keys_noearly,n_keys_strata,n_aux_splits,n_aux_nd,n_keys_aux,n_emu_records,aux
+fit,Lena,nflow,4,"Alaska,Canada,Russia_E,Russia_W",5.0,3.0,15.0,14429.0,14417,3037.0,2958,0.0,311.1,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Lena,cfm,4,"Alaska,Canada,Russia_E,Russia_W",5.0,3.0,15.0,14429.0,14417,3037.0,2958,0.0,35.3,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Lena,cbq,4,"Alaska,Canada,Russia_E,Russia_W",5.0,3.0,15.0,14429.0,14417,3037.0,2958,0.0,3.1,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Lena,phys,4,"Alaska,Canada,Russia_E,Russia_W",5.0,1.0,0.0,14429.0,14417,3037.0,2958,0.0,0.0,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+score,Lena,,4,"Alaska,Canada,Russia_E,Russia_W",,,,,14417,,2958,,,,,125.0,7.0,77.0,5.0,75.0,525.0,72.0,True
+fit,Canada,nflow,4,"Alaska,Lena,Russia_E,Russia_W",5.0,3.0,15.0,16697.0,16684,750.0,747,0.0,360.0,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Canada,cfm,4,"Alaska,Lena,Russia_E,Russia_W",5.0,3.0,15.0,16697.0,16684,750.0,747,0.0,40.8,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Canada,cbq,4,"Alaska,Lena,Russia_E,Russia_W",5.0,3.0,15.0,16697.0,16684,750.0,747,0.0,3.6,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Canada,phys,4,"Alaska,Lena,Russia_E,Russia_W",5.0,1.0,0.0,16697.0,16684,750.0,747,0.0,0.0,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+score,Canada,,4,"Alaska,Lena,Russia_E,Russia_W",,,,,16684,,747,,,,,125.0,7.0,77.0,5.0,75.0,525.0,72.0,True
+fit,Russia_W,nflow,4,"Alaska,Canada,Lena,Russia_E",5.0,3.0,15.0,17436.0,17423,31.0,28,0.0,375.9,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Russia_W,cfm,4,"Alaska,Canada,Lena,Russia_E",5.0,3.0,15.0,17436.0,17423,31.0,28,0.0,42.6,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Russia_W,cbq,4,"Alaska,Canada,Lena,Russia_E",5.0,3.0,15.0,17436.0,17423,31.0,28,0.0,3.8,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Russia_W,phys,4,"Alaska,Canada,Lena,Russia_E",5.0,1.0,0.0,17436.0,17423,31.0,28,0.0,0.0,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+score,Russia_W,,4,"Alaska,Canada,Lena,Russia_E",,,,,17423,,28,,,,,125.0,7.0,77.0,0.0,0.0,0.0,0.0,False
+fit,Russia_E,nflow,4,"Alaska,Canada,Lena,Russia_W",5.0,3.0,15.0,17437.0,17424,30.0,27,0.0,376.0,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Russia_E,cfm,4,"Alaska,Canada,Lena,Russia_W",5.0,3.0,15.0,17437.0,17424,30.0,27,0.0,42.6,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Russia_E,cbq,4,"Alaska,Canada,Lena,Russia_W",5.0,3.0,15.0,17437.0,17424,30.0,27,0.0,3.8,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Russia_E,phys,4,"Alaska,Canada,Lena,Russia_W",5.0,1.0,0.0,17437.0,17424,30.0,27,0.0,0.0,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+score,Russia_E,,4,"Alaska,Canada,Lena,Russia_W",,,,,17424,,27,,,,,125.0,7.0,77.0,0.0,0.0,0.0,0.0,False
+fit,Alaska,nflow,4,"Canada,Lena,Russia_E,Russia_W",5.0,3.0,15.0,3860.0,3847,13606.0,13606,0.0,83.3,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Alaska,cfm,4,"Canada,Lena,Russia_E,Russia_W",5.0,3.0,15.0,3860.0,3847,13606.0,13606,0.0,9.4,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Alaska,cbq,4,"Canada,Lena,Russia_E,Russia_W",5.0,3.0,15.0,3860.0,3847,13606.0,13606,0.0,0.8,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+fit,Alaska,phys,4,"Canada,Lena,Russia_E,Russia_W",5.0,1.0,0.0,3860.0,3847,13606.0,13606,0.0,0.0,CPU,"적합 시간 추정(표본 추출·분위 계산 제외, 실측 아님)",,,,,,,,
+score,Alaska,,4,"Canada,Lena,Russia_E,Russia_W",,,,,3847,,13606,,,,,118.0,7.0,77.0,5.0,75.0,525.0,72.0,True

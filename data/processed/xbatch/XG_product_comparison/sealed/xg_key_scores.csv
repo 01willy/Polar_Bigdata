@@ -1,0 +1,898 @@
+target,product,mask,key,rmse,rmse_beq,ref_star,role,leak_grade,leak_check,si_only
+Lena|x,cci4,none,P0|none|1|cell|0|0.0,21.694280538290833,23.810091857494438,,서술,L0,,False
+Lena|x,cci4,none,B:cci4_raw|none|1|cell|0|0.0,22.692122891987974,30.42713749850903,,서술,L0,,False
+Lena|x,cci4,none,B:cci4_aff|none|1|cell|0|0.0,21.185483704403424,24.119530692387503,,서술,L0,,False
+Lena|x,cci4,none,P0@cci4|none|1|cell|0|0.0,23.082744243338773,30.968167686903747,,서술,L0,,False
+Lena|x,cci4,none,P0@tddm|none|1|cell|0|0.0,20.499325664914295,23.520414255014273,,서술,L0,,False
+Lena|x,cci4,none,P1|none|1|cell|10|0.0,21.915548946960094,24.504773947275748,,서술,L0,,False
+Lena|x,cci4,none,P1@cci4|none|1|cell|10|0.0,21.93308548603585,28.830253515004397,,서술,L0,,False
+Lena|x,cci4,none,R1|catboost_lo|1|cell|10|0.25,21.889991675774098,24.157125056342586,,서술,L0,,False
+Lena|x,cci4,none,P1|none|1|cell|-1|0.0,21.71703399494767,25.24597975304325,,서술,L0,,False
+Lena|x,cci4,none,P1@cci4|none|1|cell|-1|0.0,21.350148038985473,27.291776084323338,,서술,L0,,False
+Lena|x,cci4,none,R1|catboost_lo|1|cell|-1|0.25,20.91470416934856,23.992338911043344,,서술,L0,,False
+Lena|x,cci5y,none,P0|none|1|cell|0|0.0,21.694280538290833,23.810091857494438,,서술,L0,,False
+Lena|x,cci5y,none,B:cci5y_raw|none|1|cell|0|0.0,22.8810619093989,33.147376166650176,,서술,L0,,False
+Lena|x,cci5y,none,B:cci5y_aff|none|1|cell|0|0.0,20.81149266428337,24.461145135352467,,서술,L0,,False
+Lena|x,cci5y,none,P0@cci5y|none|1|cell|0|0.0,34.536671286565884,44.349580084353676,,서술,L0,,False
+Lena|x,cci5y,none,P0@tddm|none|1|cell|0|0.0,20.499325664914295,23.520414255014273,,서술,L0,,False
+Lena|x,cci5y,none,P1|none|1|cell|10|0.0,21.915548946960094,24.504773947275748,,서술,L0,,False
+Lena|x,cci5y,none,P1@cci5y|none|1|cell|10|0.0,26.808743340831796,36.245652147230736,,서술,L0,,False
+Lena|x,cci5y,none,R1|catboost_lo|1|cell|10|0.25,21.889991675774098,24.157125056342586,,서술,L0,,False
+Lena|x,cci5y,none,P1|none|1|cell|-1|0.0,21.71703399494767,25.24597975304325,,서술,L0,,False
+Lena|x,cci5y,none,P1@cci5y|none|1|cell|-1|0.0,24.08836877496798,33.670204537294254,,서술,L0,,False
+Lena|x,cci5y,none,R1|catboost_lo|1|cell|-1|0.25,20.91470416934856,23.992338911043344,,서술,L0,,False
+Lena|x,cci5s,none,P0|none|1|cell|0|0.0,21.694280538290833,23.810091857494438,,서술,L0,,False
+Lena|x,cci5s,none,B:cci5s_raw|none|1|cell|0|0.0,21.704792747444255,26.39723511524092,,서술,L0,,False
+Lena|x,cci5s,none,B:cci5s_aff|none|1|cell|0|0.0,20.929058755965713,23.96579716759124,,서술,L0,,False
+Lena|x,cci5s,none,P0@cci5s|none|1|cell|0|0.0,34.138595590410986,42.39111821329838,,서술,L0,,False
+Lena|x,cci5s,none,P0@tddm|none|1|cell|0|0.0,20.499325664914295,23.520414255014273,,서술,L0,,False
+Lena|x,cci5s,none,P1|none|1|cell|10|0.0,21.915548946960094,24.504773947275748,,서술,L0,,False
+Lena|x,cci5s,none,P1@cci5s|none|1|cell|10|0.0,25.467797705432172,31.280198522370302,,서술,L0,,False
+Lena|x,cci5s,none,R1|catboost_lo|1|cell|10|0.25,21.889991675774098,24.157125056342586,,서술,L0,,False
+Lena|x,cci5s,none,P1|none|1|cell|-1|0.0,21.71703399494767,25.24597975304325,,서술,L0,,False
+Lena|x,cci5s,none,P1@cci5s|none|1|cell|-1|0.0,22.623786314703107,25.42471768042696,,서술,L0,,False
+Lena|x,cci5s,none,R1|catboost_lo|1|cell|-1|0.25,20.91470416934856,23.992338911043344,,서술,L0,,False
+Lena|x,wei,none,P0|none|1|cell|0|0.0,21.694280538290833,23.810091857494438,,서술,L1,,False
+Lena|x,wei,none,B:wei_raw|none|1|cell|0|0.0,24.408487972230894,24.899497250549732,,서술,L1,,False
+Lena|x,wei,none,B:wei_aff|none|1|cell|0|0.0,22.252903059191585,23.857964829701242,,서술,L1,,False
+Lena|x,wei,none,P0@wei|none|1|cell|0|0.0,21.657694366853836,24.18802681314135,,서술,L1,,False
+Lena|x,wei,none,P0@tddm|none|1|cell|0|0.0,20.499325664914295,23.520414255014273,,서술,L1,,False
+Lena|x,wei,none,P1|none|1|cell|10|0.0,21.915548946960094,24.504773947275748,,서술,L1,,False
+Lena|x,wei,none,P1@wei|none|1|cell|10|0.0,22.160919506015105,24.933448539247756,,서술,L1,,False
+Lena|x,wei,none,R1|catboost_lo|1|cell|10|0.25,21.889991675774098,24.157125056342586,,서술,L1,,False
+Lena|x,wei,none,P1|none|1|cell|-1|0.0,21.71703399494767,25.24597975304325,,서술,L1,,False
+Lena|x,wei,none,P1@wei|none|1|cell|-1|0.0,21.995878206266916,25.478356310031877,,서술,L1,,False
+Lena|x,wei,none,R1|catboost_lo|1|cell|-1|0.25,20.91470416934856,23.992338911043344,,서술,L1,,False
+Lena|x,wei,blk5,P0|none|1|cell|0|0.0,21.744099061823942,24.078109682993663,,서술,L1,,False
+Lena|x,wei,blk5,B:wei_raw|none|1|cell|0|0.0,24.45780559514141,25.131542974541382,,서술,L1,,False
+Lena|x,wei,blk5,B:wei_aff|none|1|cell|0|0.0,22.302077270471507,24.11651541705477,,서술,L1,,False
+Lena|x,wei,blk5,P0@wei|none|1|cell|0|0.0,21.70326699772987,24.45182255126981,,서술,L1,,False
+Lena|x,wei,blk5,P0@tddm|none|1|cell|0|0.0,20.541948007021993,23.776357318302964,,서술,L1,,False
+Lena|x,wei,blk5,P1|none|1|cell|10|0.0,21.964137410079115,24.781826095380755,,서술,L1,,False
+Lena|x,wei,blk5,P1@wei|none|1|cell|10|0.0,22.20471395434604,25.19720137473397,,서술,L1,,False
+Lena|x,wei,blk5,R1|catboost_lo|1|cell|10|0.25,21.93851137196945,24.42664296438837,,서술,L1,,False
+Lena|x,wei,blk5,P1|none|1|cell|-1|0.0,21.762590059981164,25.53630452580266,,서술,L1,,False
+Lena|x,wei,blk5,P1@wei|none|1|cell|-1|0.0,22.03607677924113,25.74280187897263,,서술,L1,,False
+Lena|x,wei,blk5,R1|catboost_lo|1|cell|-1|0.25,20.957348773424712,24.257479525016006,,서술,L1,,False
+Lena|x,wei,blk25,P0|none|1|cell|0|0.0,27.863723650529607,24.655383786882147,,서술,L1,,False
+Lena|x,wei,blk25,B:wei_raw|none|1|cell|0|0.0,29.641132574431815,25.56038816278639,,서술,L1,,False
+Lena|x,wei,blk25,B:wei_aff|none|1|cell|0|0.0,28.185692706182493,24.64548875693223,,서술,L1,,False
+Lena|x,wei,blk25,P0@wei|none|1|cell|0|0.0,27.88884773115504,25.073634951407723,,서술,L1,,False
+Lena|x,wei,blk25,P0@tddm|none|1|cell|0|0.0,26.424281674162245,24.40404581920311,,서술,L1,,False
+Lena|x,wei,blk25,P1|none|1|cell|10|0.0,28.636004883330532,25.442678447580928,,서술,L1,,False
+Lena|x,wei,blk25,P1@wei|none|1|cell|10|0.0,28.960166666512446,25.888291405782173,,서술,L1,,False
+Lena|x,wei,blk25,R1|catboost_lo|1|cell|10|0.25,28.5035491749098,25.059142513253924,,서술,L1,,False
+Lena|x,wei,blk25,P1|none|1|cell|-1|0.0,28.74230652222834,26.275549462201734,,서술,L1,,False
+Lena|x,wei,blk25,P1@wei|none|1|cell|-1|0.0,28.997205164456364,26.48816364384005,,서술,L1,,False
+Lena|x,wei,blk25,R1|catboost_lo|1|cell|-1|0.25,27.397673172397013,24.921522548882425,,서술,L1,,False
+Lena|x,weis,none,P0|none|1|cell|0|0.0,21.694280538290833,23.810091857494438,,서술,L1,,False
+Lena|x,weis,none,B:weis_raw|none|1|cell|0|0.0,25.825122132290044,25.344759170988034,,서술,L1,,False
+Lena|x,weis,none,B:weis_aff|none|1|cell|0|0.0,23.052438811846393,24.087567436929522,,서술,L1,,False
+Lena|x,weis,none,P0@weis|none|1|cell|0|0.0,22.886204562945277,24.25412056043819,,서술,L1,,False
+Lena|x,weis,none,P0@tddm|none|1|cell|0|0.0,20.499325664914295,23.520414255014273,,서술,L1,,False
+Lena|x,weis,none,P1|none|1|cell|10|0.0,21.915548946960094,24.504773947275748,,서술,L1,,False
+Lena|x,weis,none,P1@weis|none|1|cell|10|0.0,22.734677529194684,24.826097571172625,,서술,L1,,False
+Lena|x,weis,none,R1|catboost_lo|1|cell|10|0.25,21.889991675774098,24.157125056342586,,서술,L1,,False
+Lena|x,weis,none,P1|none|1|cell|-1|0.0,21.71703399494767,25.24597975304325,,서술,L1,,False
+Lena|x,weis,none,P1@weis|none|1|cell|-1|0.0,22.369335057763116,25.79323398652225,,서술,L1,,False
+Lena|x,weis,none,R1|catboost_lo|1|cell|-1|0.25,20.91470416934856,23.992338911043344,,서술,L1,,False
+Lena|x,weis,blk5,P0|none|1|cell|0|0.0,21.744099061823942,24.078109682993663,,서술,L1,,False
+Lena|x,weis,blk5,B:weis_raw|none|1|cell|0|0.0,25.870205159494155,25.53005025693468,,서술,L1,,False
+Lena|x,weis,blk5,B:weis_aff|none|1|cell|0|0.0,23.100352287847024,24.32563300307134,,서술,L1,,False
+Lena|x,weis,blk5,P0@weis|none|1|cell|0|0.0,22.933161027364896,24.496820982231075,,서술,L1,,False
+Lena|x,weis,blk5,P0@tddm|none|1|cell|0|0.0,20.541948007021993,23.776357318302964,,서술,L1,,False
+Lena|x,weis,blk5,P1|none|1|cell|10|0.0,21.964137410079115,24.781826095380755,,서술,L1,,False
+Lena|x,weis,blk5,P1@weis|none|1|cell|10|0.0,22.78279857867542,25.093533675132957,,서술,L1,,False
+Lena|x,weis,blk5,R1|catboost_lo|1|cell|10|0.25,21.93851137196945,24.42664296438837,,서술,L1,,False
+Lena|x,weis,blk5,P1|none|1|cell|-1|0.0,21.762590059981164,25.53630452580266,,서술,L1,,False
+Lena|x,weis,blk5,P1@weis|none|1|cell|-1|0.0,22.414632800651887,26.082361711867243,,서술,L1,,False
+Lena|x,weis,blk5,R1|catboost_lo|1|cell|-1|0.25,20.957348773424712,24.257479525016006,,서술,L1,,False
+Lena|x,weis,blk25,P0|none|1|cell|0|0.0,27.863723650529607,24.655383786882147,,서술,L1,,False
+Lena|x,weis,blk25,B:weis_raw|none|1|cell|0|0.0,30.956107312369106,25.900630709628018,,서술,L1,,False
+Lena|x,weis,blk25,B:weis_aff|none|1|cell|0|0.0,28.950911027497483,24.826104772660116,,서술,L1,,False
+Lena|x,weis,blk25,P0@weis|none|1|cell|0|0.0,28.93542155837705,25.038663887626342,,서술,L1,,False
+Lena|x,weis,blk25,P0@tddm|none|1|cell|0|0.0,26.424281674162245,24.40404581920311,,서술,L1,,False
+Lena|x,weis,blk25,P1|none|1|cell|10|0.0,28.636004883330532,25.442678447580928,,서술,L1,,False
+Lena|x,weis,blk25,P1@weis|none|1|cell|10|0.0,29.58819765011566,25.75678003202764,,서술,L1,,False
+Lena|x,weis,blk25,R1|catboost_lo|1|cell|10|0.25,28.5035491749098,25.059142513253924,,서술,L1,,False
+Lena|x,weis,blk25,P1|none|1|cell|-1|0.0,28.74230652222834,26.275549462201734,,서술,L1,,False
+Lena|x,weis,blk25,P1@weis|none|1|cell|-1|0.0,29.50571251332828,26.838322714869804,,서술,L1,,False
+Lena|x,weis,blk25,R1|catboost_lo|1|cell|-1|0.25,27.397673172397013,24.921522548882425,,서술,L1,,False
+Lena|x,aalto,none,P0|none|1|cell|0|0.0,21.694280538290833,23.810091857494438,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,none,B:aalto_raw|none|1|cell|0|0.0,24.999804015693066,28.006550718931607,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,none,B:aalto_aff|none|1|cell|0|0.0,23.206614256634367,23.474001951617833,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,none,P0@aalto|none|1|cell|0|0.0,22.553968972594184,27.60281690921123,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,none,P0@tddm|none|1|cell|0|0.0,20.499325664914295,23.520414255014273,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,none,P1|none|1|cell|10|0.0,21.915548946960094,24.504773947275748,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,none,P1@aalto|none|1|cell|10|0.0,22.217104545864267,26.611211843858747,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,none,R1|catboost_lo|1|cell|10|0.25,21.889991675774098,24.157125056342586,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,none,P1|none|1|cell|-1|0.0,21.71703399494767,25.24597975304325,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,none,P1@aalto|none|1|cell|-1|0.0,22.07435793793395,25.995016205280884,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,none,R1|catboost_lo|1|cell|-1|0.25,20.91470416934856,23.992338911043344,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk5,P0|none|1|cell|0|0.0,20.49998317339278,22.92962915390647,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk5,B:aalto_raw|none|1|cell|0|0.0,28.074250026470487,27.814186455755475,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk5,B:aalto_aff|none|1|cell|0|0.0,22.21817446443771,22.319548021218772,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk5,P0@aalto|none|1|cell|0|0.0,19.793101121530057,26.901077267435873,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk5,P0@tddm|none|1|cell|0|0.0,19.838017171678864,22.903414977903246,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk5,P1|none|1|cell|10|0.0,20.78694283409942,23.67075046023423,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk5,P1@aalto|none|1|cell|10|0.0,20.222470004256543,25.906258850826028,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk5,R1|catboost_lo|1|cell|10|0.25,20.628275339421393,23.277219486789214,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk5,P1|none|1|cell|-1|0.0,20.54615668713312,24.494737806260872,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk5,P1@aalto|none|1|cell|-1|0.0,20.746618746367496,25.295745276661854,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk5,R1|catboost_lo|1|cell|-1|0.25,19.63396046554192,23.207572727358276,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk25,P0|none|1|cell|0|0.0,20.38777899762697,25.64159581105551,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk25,B:aalto_raw|none|1|cell|0|0.0,28.36699623228651,30.568055774308323,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk25,B:aalto_aff|none|1|cell|0|0.0,22.095673435638155,24.54987795703763,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk25,P0@aalto|none|1|cell|0|0.0,19.50203429221167,29.321368376633945,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk25,P0@tddm|none|1|cell|0|0.0,19.88429503009543,25.463363975208242,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk25,P1|none|1|cell|10|0.0,20.577979586265478,26.080600153432226,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk25,P1@aalto|none|1|cell|10|0.0,20.012243222074865,28.69384168653142,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk25,R1|catboost_lo|1|cell|10|0.25,20.415813425553168,25.6146380587777,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk25,P1|none|1|cell|-1|0.0,20.234476400569065,26.589708608590325,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk25,P1@aalto|none|1|cell|-1|0.0,20.610145007442448,28.389558294762743,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,aalto,blk25,R1|catboost_lo|1|cell|-1|0.25,19.35965447282292,25.349363819809387,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Lena|x,yk,none,P0|none|1|cell|0|0.0,21.694280538290833,23.810091857494438,,서술,L0,,False
+Lena|x,yk,none,P0@tddm|none|1|cell|0|0.0,20.499325664914295,23.520414255014273,,서술,L0,,False
+Lena|x,yk,none,P1|none|1|cell|10|0.0,21.915548946960094,24.504773947275748,,서술,L0,,False
+Lena|x,yk,none,R1|catboost_lo|1|cell|10|0.25,21.889991675774098,24.157125056342586,,서술,L0,,False
+Lena|x,yk,none,P1|none|1|cell|-1|0.0,21.71703399494767,25.24597975304325,,서술,L0,,False
+Lena|x,yk,none,R1|catboost_lo|1|cell|-1|0.25,20.91470416934856,23.992338911043344,,서술,L0,,False
+Canada|x,cci4,none,P0|none|1|cell|0|0.0,28.164510627275728,21.7685645470174,,서술,L0,,False
+Canada|x,cci4,none,B:cci4_raw|none|1|cell|0|0.0,29.20436264930236,35.69807714179858,,서술,L0,,False
+Canada|x,cci4,none,B:cci4_aff|none|1|cell|0|0.0,27.02857994047364,22.7205866295305,,서술,L0,,False
+Canada|x,cci4,none,P0@cci4|none|1|cell|0|0.0,29.83925143546596,36.43926062850885,,서술,L0,,False
+Canada|x,cci4,none,P0@tddm|none|1|cell|0|0.0,26.956012009496522,21.257473084693164,,서술,L0,,False
+Canada|x,cci4,none,P1|none|1|cell|10|0.0,30.425247246507457,23.191364710116293,,서술,L0,,False
+Canada|x,cci4,none,P1@cci4|none|1|cell|10|0.0,28.3371640046047,32.691224491760664,,서술,L0,,False
+Canada|x,cci4,none,R1|catboost_lo|1|cell|10|0.25,29.53162077954845,22.138639821236342,,서술,L0,,False
+Canada|x,cci4,none,P1|none|1|cell|-1|0.0,32.80268258111953,24.998838427195942,,서술,L0,,False
+Canada|x,cci4,none,P1@cci4|none|1|cell|-1|0.0,29.507119086461877,30.61702816378361,,서술,L0,,False
+Canada|x,cci4,none,R1|catboost_lo|1|cell|-1|0.25,31.54252527519744,23.818430594938224,,서술,L0,,False
+Canada|x,cci5y,none,P0|none|1|cell|0|0.0,28.164510627275728,21.7685645470174,,서술,L0,,False
+Canada|x,cci5y,none,B:cci5y_raw|none|1|cell|0|0.0,110.540780362395,74.7670021833626,,서술,L0,,False
+Canada|x,cci5y,none,B:cci5y_aff|none|1|cell|0|0.0,25.667098784268887,23.572658354040406,,서술,L0,,False
+Canada|x,cci5y,none,P0@cci5y|none|1|cell|0|0.0,29.484980392789566,33.18158365360091,,서술,L0,,False
+Canada|x,cci5y,none,P0@tddm|none|1|cell|0|0.0,26.956012009496522,21.257473084693164,,서술,L0,,False
+Canada|x,cci5y,none,P1|none|1|cell|10|0.0,30.425247246507457,23.191364710116293,,서술,L0,,False
+Canada|x,cci5y,none,P1@cci5y|none|1|cell|10|0.0,32.94110861443585,34.851447534411115,,서술,L0,,False
+Canada|x,cci5y,none,R1|catboost_lo|1|cell|10|0.25,29.53162077954845,22.138639821236342,,서술,L0,,False
+Canada|x,cci5y,none,P1|none|1|cell|-1|0.0,32.80268258111953,24.998838427195942,,서술,L0,,False
+Canada|x,cci5y,none,P1@cci5y|none|1|cell|-1|0.0,33.01449875083759,34.75402029023665,,서술,L0,,False
+Canada|x,cci5y,none,R1|catboost_lo|1|cell|-1|0.25,31.54252527519744,23.818430594938224,,서술,L0,,False
+Canada|x,cci5s,none,P0|none|1|cell|0|0.0,28.164510627275728,21.7685645470174,,서술,L0,,False
+Canada|x,cci5s,none,B:cci5s_raw|none|1|cell|0|0.0,87.00917503567584,67.64257527189372,,서술,L0,,False
+Canada|x,cci5s,none,B:cci5s_aff|none|1|cell|0|0.0,26.480950155769232,23.492288726140817,,서술,L0,,False
+Canada|x,cci5s,none,P0@cci5s|none|1|cell|0|0.0,26.384311187419154,32.07289866451741,,서술,L0,,False
+Canada|x,cci5s,none,P0@tddm|none|1|cell|0|0.0,26.956012009496522,21.257473084693164,,서술,L0,,False
+Canada|x,cci5s,none,P1|none|1|cell|10|0.0,30.425247246507457,23.191364710116293,,서술,L0,,False
+Canada|x,cci5s,none,P1@cci5s|none|1|cell|10|0.0,28.888727635598798,33.40998031533373,,서술,L0,,False
+Canada|x,cci5s,none,R1|catboost_lo|1|cell|10|0.25,29.53162077954845,22.138639821236342,,서술,L0,,False
+Canada|x,cci5s,none,P1|none|1|cell|-1|0.0,32.80268258111953,24.998838427195942,,서술,L0,,False
+Canada|x,cci5s,none,P1@cci5s|none|1|cell|-1|0.0,29.008164680840014,33.392282948350626,,서술,L0,,False
+Canada|x,cci5s,none,R1|catboost_lo|1|cell|-1|0.25,31.54252527519744,23.818430594938224,,서술,L0,,False
+Canada|x,wei,none,P0|none|1|cell|0|0.0,28.164510627275728,21.7685645470174,,서술,L1,,False
+Canada|x,wei,none,B:wei_raw|none|1|cell|0|0.0,29.243866993082026,19.266916445017635,,서술,L1,,False
+Canada|x,wei,none,B:wei_aff|none|1|cell|0|0.0,26.568434561713566,18.69303331688649,,서술,L1,,False
+Canada|x,wei,none,P0@wei|none|1|cell|0|0.0,25.739214220100177,17.828400562294952,,서술,L1,,False
+Canada|x,wei,none,P0@tddm|none|1|cell|0|0.0,26.956012009496522,21.257473084693164,,서술,L1,,False
+Canada|x,wei,none,P1|none|1|cell|10|0.0,30.425247246507457,23.191364710116293,,서술,L1,,False
+Canada|x,wei,none,P1@wei|none|1|cell|10|0.0,26.993127801428024,19.429100269975656,,서술,L1,,False
+Canada|x,wei,none,R1|catboost_lo|1|cell|10|0.25,29.53162077954845,22.138639821236342,,서술,L1,,False
+Canada|x,wei,none,P1|none|1|cell|-1|0.0,32.80268258111953,24.998838427195942,,서술,L1,,False
+Canada|x,wei,none,P1@wei|none|1|cell|-1|0.0,29.132393579448937,21.319814150287073,,서술,L1,,False
+Canada|x,wei,none,R1|catboost_lo|1|cell|-1|0.25,31.54252527519744,23.818430594938224,,서술,L1,,False
+Canada|x,wei,blk5,P0|none|1|cell|0|0.0,28.82496829990697,21.875305507950277,,서술,L1,,False
+Canada|x,wei,blk5,B:wei_raw|none|1|cell|0|0.0,28.985765788184978,28.99193172103844,,서술,L1,,False
+Canada|x,wei,blk5,B:wei_aff|none|1|cell|0|0.0,26.967941380215372,21.510878801219434,,서술,L1,,False
+Canada|x,wei,blk5,P0@wei|none|1|cell|0|0.0,25.89947915963384,22.78049788168301,,서술,L1,,False
+Canada|x,wei,blk5,P0@tddm|none|1|cell|0|0.0,27.499074786951223,22.056043564781998,,서술,L1,,False
+Canada|x,wei,blk5,P1|none|1|cell|10|0.0,31.193399526577604,23.30932549434126,,서술,L1,,False
+Canada|x,wei,blk5,P1@wei|none|1|cell|10|0.0,27.3332246432356,22.454180206983693,,서술,L1,,False
+Canada|x,wei,blk5,R1|catboost_lo|1|cell|10|0.25,30.281613287663806,22.240337436522797,,서술,L1,,False
+Canada|x,wei,blk5,P1|none|1|cell|-1|0.0,33.69493652499848,25.346983775371065,,서술,L1,,False
+Canada|x,wei,blk5,P1@wei|none|1|cell|-1|0.0,29.596497214778207,23.30046952850495,,서술,L1,,False
+Canada|x,wei,blk5,R1|catboost_lo|1|cell|-1|0.25,32.41175594605802,24.00884431488336,,서술,L1,,False
+Canada|x,wei,blk25,P0|none|1|cell|0|0.0,28.82496829990697,21.875305507950277,,서술,L1,,False
+Canada|x,wei,blk25,B:wei_raw|none|1|cell|0|0.0,28.985765788184978,28.99193172103844,,서술,L1,,False
+Canada|x,wei,blk25,B:wei_aff|none|1|cell|0|0.0,26.967941380215372,21.510878801219434,,서술,L1,,False
+Canada|x,wei,blk25,P0@wei|none|1|cell|0|0.0,25.89947915963384,22.78049788168301,,서술,L1,,False
+Canada|x,wei,blk25,P0@tddm|none|1|cell|0|0.0,27.499074786951223,22.056043564781998,,서술,L1,,False
+Canada|x,wei,blk25,P1|none|1|cell|10|0.0,31.193399526577604,23.30932549434126,,서술,L1,,False
+Canada|x,wei,blk25,P1@wei|none|1|cell|10|0.0,27.3332246432356,22.454180206983693,,서술,L1,,False
+Canada|x,wei,blk25,R1|catboost_lo|1|cell|10|0.25,30.281613287663806,22.240337436522797,,서술,L1,,False
+Canada|x,wei,blk25,P1|none|1|cell|-1|0.0,33.69493652499848,25.346983775371065,,서술,L1,,False
+Canada|x,wei,blk25,P1@wei|none|1|cell|-1|0.0,29.596497214778207,23.30046952850495,,서술,L1,,False
+Canada|x,wei,blk25,R1|catboost_lo|1|cell|-1|0.25,32.41175594605802,24.00884431488336,,서술,L1,,False
+Canada|x,weis,none,P0|none|1|cell|0|0.0,28.164510627275728,21.7685645470174,,서술,L1,,False
+Canada|x,weis,none,B:weis_raw|none|1|cell|0|0.0,29.087531696465003,20.002635096453144,,서술,L1,,False
+Canada|x,weis,none,B:weis_aff|none|1|cell|0|0.0,28.292510618245693,18.616344906557845,,서술,L1,,False
+Canada|x,weis,none,P0@weis|none|1|cell|0|0.0,27.497215452979987,18.028849213129767,,서술,L1,,False
+Canada|x,weis,none,P0@tddm|none|1|cell|0|0.0,26.956012009496522,21.257473084693164,,서술,L1,,False
+Canada|x,weis,none,P1|none|1|cell|10|0.0,30.425247246507457,23.191364710116293,,서술,L1,,False
+Canada|x,weis,none,P1@weis|none|1|cell|10|0.0,29.630890506768104,19.85042454772137,,서술,L1,,False
+Canada|x,weis,none,R1|catboost_lo|1|cell|10|0.25,29.53162077954845,22.138639821236342,,서술,L1,,False
+Canada|x,weis,none,P1|none|1|cell|-1|0.0,32.80268258111953,24.998838427195942,,서술,L1,,False
+Canada|x,weis,none,P1@weis|none|1|cell|-1|0.0,32.86209585941138,22.444080096696506,,서술,L1,,False
+Canada|x,weis,none,R1|catboost_lo|1|cell|-1|0.25,31.54252527519744,23.818430594938224,,서술,L1,,False
+Canada|x,weis,blk5,P0|none|1|cell|0|0.0,28.82496829990697,21.875305507950277,,서술,L1,,False
+Canada|x,weis,blk5,B:weis_raw|none|1|cell|0|0.0,28.890085028073525,27.27461054422211,,서술,L1,,False
+Canada|x,weis,blk5,B:weis_aff|none|1|cell|0|0.0,28.786078467570754,22.949754072043525,,서술,L1,,False
+Canada|x,weis,blk5,P0@weis|none|1|cell|0|0.0,27.819234707902513,23.511020286992512,,서술,L1,,False
+Canada|x,weis,blk5,P0@tddm|none|1|cell|0|0.0,27.499074786951223,22.056043564781998,,서술,L1,,False
+Canada|x,weis,blk5,P1|none|1|cell|10|0.0,31.193399526577604,23.30932549434126,,서술,L1,,False
+Canada|x,weis,blk5,P1@weis|none|1|cell|10|0.0,30.160188507990064,23.91468298072662,,서술,L1,,False
+Canada|x,weis,blk5,R1|catboost_lo|1|cell|10|0.25,30.281613287663806,22.240337436522797,,서술,L1,,False
+Canada|x,weis,blk5,P1|none|1|cell|-1|0.0,33.69493652499848,25.346983775371065,,서술,L1,,False
+Canada|x,weis,blk5,P1@weis|none|1|cell|-1|0.0,33.50479145087868,25.947711722567327,,서술,L1,,False
+Canada|x,weis,blk5,R1|catboost_lo|1|cell|-1|0.25,32.41175594605802,24.00884431488336,,서술,L1,,False
+Canada|x,weis,blk25,P0|none|1|cell|0|0.0,28.82496829990697,21.875305507950277,,서술,L1,,False
+Canada|x,weis,blk25,B:weis_raw|none|1|cell|0|0.0,28.890085028073525,27.27461054422211,,서술,L1,,False
+Canada|x,weis,blk25,B:weis_aff|none|1|cell|0|0.0,28.786078467570754,22.949754072043525,,서술,L1,,False
+Canada|x,weis,blk25,P0@weis|none|1|cell|0|0.0,27.819234707902513,23.511020286992512,,서술,L1,,False
+Canada|x,weis,blk25,P0@tddm|none|1|cell|0|0.0,27.499074786951223,22.056043564781998,,서술,L1,,False
+Canada|x,weis,blk25,P1|none|1|cell|10|0.0,31.193399526577604,23.30932549434126,,서술,L1,,False
+Canada|x,weis,blk25,P1@weis|none|1|cell|10|0.0,30.160188507990064,23.91468298072662,,서술,L1,,False
+Canada|x,weis,blk25,R1|catboost_lo|1|cell|10|0.25,30.281613287663806,22.240337436522797,,서술,L1,,False
+Canada|x,weis,blk25,P1|none|1|cell|-1|0.0,33.69493652499848,25.346983775371065,,서술,L1,,False
+Canada|x,weis,blk25,P1@weis|none|1|cell|-1|0.0,33.50479145087868,25.947711722567327,,서술,L1,,False
+Canada|x,weis,blk25,R1|catboost_lo|1|cell|-1|0.25,32.41175594605802,24.00884431488336,,서술,L1,,False
+Canada|x,aalto,none,P0|none|1|cell|0|0.0,28.164510627275728,21.7685645470174,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,none,B:aalto_raw|none|1|cell|0|0.0,38.7883610754249,35.8013252220656,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,none,B:aalto_aff|none|1|cell|0|0.0,45.92165736139061,36.18353231533742,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,none,P0@aalto|none|1|cell|0|0.0,27.62101568821626,23.325906809361932,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,none,P0@tddm|none|1|cell|0|0.0,26.956012009496522,21.257473084693164,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,none,P1|none|1|cell|10|0.0,30.425247246507457,23.191364710116293,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,none,P1@aalto|none|1|cell|10|0.0,29.056174249590082,23.98637090164602,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,none,R1|catboost_lo|1|cell|10|0.25,29.53162077954845,22.138639821236342,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,none,P1|none|1|cell|-1|0.0,32.80268258111953,24.998838427195942,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,none,P1@aalto|none|1|cell|-1|0.0,30.88964988098565,25.147123117650594,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,none,R1|catboost_lo|1|cell|-1|0.25,31.54252527519744,23.818430594938224,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk5,P0|none|1|cell|0|0.0,28.835900356171788,22.33160467595951,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk5,B:aalto_raw|none|1|cell|0|0.0,39.339094701701654,38.98078869969224,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk5,B:aalto_aff|none|1|cell|0|0.0,47.40047640441689,40.50774526936456,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk5,P0@aalto|none|1|cell|0|0.0,28.286038029612463,22.912240382119172,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk5,P0@tddm|none|1|cell|0|0.0,27.508424813665357,22.539836015383788,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk5,P1|none|1|cell|10|0.0,31.20622125205523,23.80706476336761,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk5,P1@aalto|none|1|cell|10|0.0,29.80810400885495,23.912492809317207,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk5,R1|catboost_lo|1|cell|10|0.25,30.29649121505299,22.73792906343354,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk5,P1|none|1|cell|-1|0.0,33.708608814398644,25.724932732048586,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk5,P1@aalto|none|1|cell|-1|0.0,31.81062656125053,25.521545061666064,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk5,R1|catboost_lo|1|cell|-1|0.25,32.42636264935933,24.423788523269998,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk25,P0|none|1|cell|0|0.0,28.835900356171788,22.33160467595951,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk25,B:aalto_raw|none|1|cell|0|0.0,39.339094701701654,38.98078869969224,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk25,B:aalto_aff|none|1|cell|0|0.0,47.40047640441689,40.50774526936456,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk25,P0@aalto|none|1|cell|0|0.0,28.286038029612463,22.912240382119172,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk25,P0@tddm|none|1|cell|0|0.0,27.508424813665357,22.539836015383788,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk25,P1|none|1|cell|10|0.0,31.20622125205523,23.80706476336761,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk25,P1@aalto|none|1|cell|10|0.0,29.80810400885495,23.912492809317207,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk25,R1|catboost_lo|1|cell|10|0.25,30.29649121505299,22.73792906343354,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk25,P1|none|1|cell|-1|0.0,33.708608814398644,25.724932732048586,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk25,P1@aalto|none|1|cell|-1|0.0,31.81062656125053,25.521545061666064,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,aalto,blk25,R1|catboost_lo|1|cell|-1|0.25,32.42636264935933,24.423788523269998,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Canada|x,yk,none,P0|none|1|cell|0|0.0,28.164510627275728,21.7685645470174,,서술,L0,,False
+Canada|x,yk,none,P0@tddm|none|1|cell|0|0.0,26.956012009496522,21.257473084693164,,서술,L0,,False
+Canada|x,yk,none,P1|none|1|cell|10|0.0,30.425247246507457,23.191364710116293,,서술,L0,,False
+Canada|x,yk,none,R1|catboost_lo|1|cell|10|0.25,29.53162077954845,22.138639821236342,,서술,L0,,False
+Canada|x,yk,none,P1|none|1|cell|-1|0.0,32.80268258111953,24.998838427195942,,서술,L0,,False
+Canada|x,yk,none,R1|catboost_lo|1|cell|-1|0.25,31.54252527519744,23.818430594938224,,서술,L0,,False
+Russia_W|x,cci4,none,P0|none|1|cell|0|0.0,42.97925140809999,38.431604391888996,,참고값(판정 없음),L0,,False
+Russia_W|x,cci4,none,B:cci4_raw|none|1|cell|0|0.0,43.55339797885943,38.84346001133683,,참고값(판정 없음),L0,,False
+Russia_W|x,cci4,none,B:cci4_aff|none|1|cell|0|0.0,41.56316405501224,35.74681753118504,,참고값(판정 없음),L0,,False
+Russia_W|x,cci4,none,P0@cci4|none|1|cell|0|0.0,43.70087896187426,38.98634348367149,,참고값(판정 없음),L0,,False
+Russia_W|x,cci4,none,P0@tddm|none|1|cell|0|0.0,42.007159982865744,37.73603138625458,,참고값(판정 없음),L0,,False
+Russia_W|x,cci4,none,P1|none|1|cell|10|0.0,31.014517478073504,25.13550733716189,,참고값(판정 없음),L0,,False
+Russia_W|x,cci4,none,P1@cci4|none|1|cell|10|0.0,41.56532010855062,35.25957071652054,,참고값(판정 없음),L0,,False
+Russia_W|x,cci4,none,R1|catboost_lo|1|cell|10|0.25,30.45809187962818,24.89167623260401,,참고값(판정 없음),L0,,False
+Russia_W|x,cci4,none,P1|none|1|cell|-1|0.0,29.481202503847918,23.434310649157034,,참고값(판정 없음),L0,,False
+Russia_W|x,cci4,none,P1@cci4|none|1|cell|-1|0.0,41.23901205708551,34.42164270648571,,참고값(판정 없음),L0,,False
+Russia_W|x,cci4,none,R1|catboost_lo|1|cell|-1|0.25,28.998375674677373,23.19468694638259,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5y,none,P0|none|1|cell|0|0.0,42.97925140809999,38.431604391888996,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5y,none,B:cci5y_raw|none|1|cell|0|0.0,48.755505369352306,42.318526169226494,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5y,none,B:cci5y_aff|none|1|cell|0|0.0,44.38529773901922,40.41855928079479,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5y,none,P0@cci5y|none|1|cell|0|0.0,55.89177419392731,51.234837908817745,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5y,none,P0@tddm|none|1|cell|0|0.0,42.007159982865744,37.73603138625458,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5y,none,P1|none|1|cell|10|0.0,31.014517478073504,25.13550733716189,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5y,none,P1@cci5y|none|1|cell|10|0.0,43.84636887361885,39.04647731867645,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5y,none,R1|catboost_lo|1|cell|10|0.25,30.45809187962818,24.89167623260401,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5y,none,P1|none|1|cell|-1|0.0,29.481202503847918,23.434310649157034,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5y,none,P1@cci5y|none|1|cell|-1|0.0,43.558184001462806,38.931011868657656,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5y,none,R1|catboost_lo|1|cell|-1|0.25,28.998375674677373,23.19468694638259,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5s,none,P0|none|1|cell|0|0.0,42.97925140809999,38.431604391888996,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5s,none,B:cci5s_raw|none|1|cell|0|0.0,46.11732223073215,42.319293742587334,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5s,none,B:cci5s_aff|none|1|cell|0|0.0,45.15225817794475,40.87574124077547,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5s,none,P0@cci5s|none|1|cell|0|0.0,56.57024903594821,51.06165979890405,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5s,none,P0@tddm|none|1|cell|0|0.0,42.007159982865744,37.73603138625458,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5s,none,P1|none|1|cell|10|0.0,31.014517478073504,25.13550733716189,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5s,none,P1@cci5s|none|1|cell|10|0.0,44.965122079586,40.00279365618108,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5s,none,R1|catboost_lo|1|cell|10|0.25,30.45809187962818,24.89167623260401,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5s,none,P1|none|1|cell|-1|0.0,29.481202503847918,23.434310649157034,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5s,none,P1@cci5s|none|1|cell|-1|0.0,44.64774160164651,39.63825983101476,,참고값(판정 없음),L0,,False
+Russia_W|x,cci5s,none,R1|catboost_lo|1|cell|-1|0.25,28.998375674677373,23.19468694638259,,참고값(판정 없음),L0,,False
+Russia_W|x,wei,none,P0|none|1|cell|0|0.0,42.97925140809999,38.431604391888996,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,none,B:wei_raw|none|1|cell|0|0.0,19.431269952934706,15.166859801311707,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,none,B:wei_aff|none|1|cell|0|0.0,28.89924310502014,26.742666961380888,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,none,P0@wei|none|1|cell|0|0.0,24.261357765360334,22.14889814410328,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,none,P0@tddm|none|1|cell|0|0.0,42.007159982865744,37.73603138625458,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,none,P1|none|1|cell|10|0.0,31.014517478073504,25.13550733716189,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,none,P1@wei|none|1|cell|10|0.0,21.023894688595174,17.811766501803987,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,none,R1|catboost_lo|1|cell|10|0.25,30.45809187962818,24.89167623260401,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,none,P1|none|1|cell|-1|0.0,29.481202503847918,23.434310649157034,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,none,P1@wei|none|1|cell|-1|0.0,20.414058688351435,16.857069837914946,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,none,R1|catboost_lo|1|cell|-1|0.25,28.998375674677373,23.19468694638259,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk5,P0|none|1|cell|0|0.0,48.78559327863713,47.98071847511149,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk5,B:wei_raw|none|1|cell|0|0.0,29.943442475223968,29.11030436995934,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk5,B:wei_aff|none|1|cell|0|0.0,41.68959450932745,41.08519077571253,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk5,P0@wei|none|1|cell|0|0.0,40.07490232731279,39.44230290904058,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk5,P0@tddm|none|1|cell|0|0.0,51.118917435400256,50.59143900168728,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk5,P1|none|1|cell|10|0.0,31.46920770757155,30.10692350108841,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk5,P1@wei|none|1|cell|10|0.0,34.183111370551615,33.447736332226086,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk5,R1|catboost_lo|1|cell|10|0.25,29.233131122656136,28.21544307642437,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk5,P1|none|1|cell|-1|0.0,28.67305959582303,27.188330588047506,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk5,P1@wei|none|1|cell|-1|0.0,32.82632910628347,32.07160433350864,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk5,R1|catboost_lo|1|cell|-1|0.25,26.734963101745553,25.59055889343453,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk25,P0|none|1|cell|0|0.0,48.78559327863713,47.98071847511149,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk25,B:wei_raw|none|1|cell|0|0.0,29.943442475223968,29.11030436995934,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk25,B:wei_aff|none|1|cell|0|0.0,41.68959450932745,41.08519077571253,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk25,P0@wei|none|1|cell|0|0.0,40.07490232731279,39.44230290904058,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk25,P0@tddm|none|1|cell|0|0.0,51.118917435400256,50.59143900168728,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk25,P1|none|1|cell|10|0.0,31.46920770757155,30.10692350108841,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk25,P1@wei|none|1|cell|10|0.0,34.183111370551615,33.447736332226086,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk25,R1|catboost_lo|1|cell|10|0.25,29.233131122656136,28.21544307642437,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk25,P1|none|1|cell|-1|0.0,28.67305959582303,27.188330588047506,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk25,P1@wei|none|1|cell|-1|0.0,32.82632910628347,32.07160433350864,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,wei,blk25,R1|catboost_lo|1|cell|-1|0.25,26.734963101745553,25.59055889343453,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,none,P0|none|1|cell|0|0.0,42.97925140809999,38.431604391888996,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,none,B:weis_raw|none|1|cell|0|0.0,20.280181286123454,16.04195059695575,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,none,B:weis_aff|none|1|cell|0|0.0,28.355403238298656,25.824033172371266,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,none,P0@weis|none|1|cell|0|0.0,25.45520749723644,22.90996738919228,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,none,P0@tddm|none|1|cell|0|0.0,42.007159982865744,37.73603138625458,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,none,P1|none|1|cell|10|0.0,31.014517478073504,25.13550733716189,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,none,P1@weis|none|1|cell|10|0.0,21.847789154049227,17.927803534604962,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,none,R1|catboost_lo|1|cell|10|0.25,30.45809187962818,24.89167623260401,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,none,P1|none|1|cell|-1|0.0,29.481202503847918,23.434310649157034,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,none,P1@weis|none|1|cell|-1|0.0,21.290977111786432,17.032109824072656,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,none,R1|catboost_lo|1|cell|-1|0.25,28.998375674677373,23.19468694638259,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk5,P0|none|1|cell|0|0.0,48.78559327863713,47.98071847511149,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk5,B:weis_raw|none|1|cell|0|0.0,29.965717465343392,29.129801096949087,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk5,B:weis_aff|none|1|cell|0|0.0,40.53653664476187,39.912328939328276,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk5,P0@weis|none|1|cell|0|0.0,39.348108142889856,38.702064530068505,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk5,P0@tddm|none|1|cell|0|0.0,51.118917435400256,50.59143900168728,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk5,P1|none|1|cell|10|0.0,31.46920770757155,30.10692350108841,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk5,P1@weis|none|1|cell|10|0.0,32.941464616905975,32.17517142661596,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk5,R1|catboost_lo|1|cell|10|0.25,29.233131122656136,28.21544307642437,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk5,P1|none|1|cell|-1|0.0,28.67305959582303,27.188330588047506,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk5,P1@weis|none|1|cell|-1|0.0,31.559121888209415,30.768524503094433,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk5,R1|catboost_lo|1|cell|-1|0.25,26.734963101745553,25.59055889343453,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk25,P0|none|1|cell|0|0.0,48.78559327863713,47.98071847511149,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk25,B:weis_raw|none|1|cell|0|0.0,29.965717465343392,29.129801096949087,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk25,B:weis_aff|none|1|cell|0|0.0,40.53653664476187,39.912328939328276,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk25,P0@weis|none|1|cell|0|0.0,39.348108142889856,38.702064530068505,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk25,P0@tddm|none|1|cell|0|0.0,51.118917435400256,50.59143900168728,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk25,P1|none|1|cell|10|0.0,31.46920770757155,30.10692350108841,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk25,P1@weis|none|1|cell|10|0.0,32.941464616905975,32.17517142661596,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk25,R1|catboost_lo|1|cell|10|0.25,29.233131122656136,28.21544307642437,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk25,P1|none|1|cell|-1|0.0,28.67305959582303,27.188330588047506,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk25,P1@weis|none|1|cell|-1|0.0,31.559121888209415,30.768524503094433,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,weis,blk25,R1|catboost_lo|1|cell|-1|0.25,26.734963101745553,25.59055889343453,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_W|x,aalto,none,P0|none|1|cell|0|0.0,42.97925140809999,38.431604391888996,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_W|x,aalto,none,B:aalto_raw|none|1|cell|0|0.0,29.76821191380113,23.830508191064872,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_W|x,aalto,none,B:aalto_aff|none|1|cell|0|0.0,54.52414315944053,51.088448732848235,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_W|x,aalto,none,P0@aalto|none|1|cell|0|0.0,42.10814717001186,37.88548615266241,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_W|x,aalto,none,P0@tddm|none|1|cell|0|0.0,42.007159982865744,37.73603138625458,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_W|x,aalto,none,P1|none|1|cell|10|0.0,31.014517478073504,25.13550733716189,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_W|x,aalto,none,P1@aalto|none|1|cell|10|0.0,32.704253219729765,27.480989495595914,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_W|x,aalto,none,R1|catboost_lo|1|cell|10|0.25,30.45809187962818,24.89167623260401,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_W|x,aalto,none,P1|none|1|cell|-1|0.0,29.481202503847918,23.434310649157034,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_W|x,aalto,none,P1@aalto|none|1|cell|-1|0.0,31.492143969358743,26.078935568043164,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_W|x,aalto,none,R1|catboost_lo|1|cell|-1|0.25,28.998375674677373,23.19468694638259,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_W|x,yk,none,P0|none|1|cell|0|0.0,42.97925140809999,38.431604391888996,,참고값(판정 없음),L0,,False
+Russia_W|x,yk,none,P0@tddm|none|1|cell|0|0.0,42.007159982865744,37.73603138625458,,참고값(판정 없음),L0,,False
+Russia_W|x,yk,none,P1|none|1|cell|10|0.0,31.014517478073504,25.13550733716189,,참고값(판정 없음),L0,,False
+Russia_W|x,yk,none,R1|catboost_lo|1|cell|10|0.25,30.45809187962818,24.89167623260401,,참고값(판정 없음),L0,,False
+Russia_W|x,yk,none,P1|none|1|cell|-1|0.0,29.481202503847918,23.434310649157034,,참고값(판정 없음),L0,,False
+Russia_W|x,yk,none,R1|catboost_lo|1|cell|-1|0.25,28.998375674677373,23.19468694638259,,참고값(판정 없음),L0,,False
+Russia_E|x,cci4,none,P0|none|1|cell|0|0.0,29.723227147921126,12.447111736968571,,참고값(판정 없음),L0,,False
+Russia_E|x,cci4,none,B:cci4_raw|none|1|cell|0|0.0,30.176201063703296,17.43272990260665,,참고값(판정 없음),L0,,False
+Russia_E|x,cci4,none,B:cci4_aff|none|1|cell|0|0.0,29.40110881887847,12.504013494359134,,참고값(판정 없음),L0,,False
+Russia_E|x,cci4,none,P0@cci4|none|1|cell|0|0.0,30.31410245475717,17.479475995166663,,참고값(판정 없음),L0,,False
+Russia_E|x,cci4,none,P0@tddm|none|1|cell|0|0.0,29.11138132393271,12.309465906460536,,참고값(판정 없음),L0,,False
+Russia_E|x,cci4,none,P1|none|1|cell|10|0.0,29.38791815833511,13.155308348893694,,참고값(판정 없음),L0,,False
+Russia_E|x,cci4,none,P1@cci4|none|1|cell|10|0.0,28.38037468042192,17.077094924305804,,참고값(판정 없음),L0,,False
+Russia_E|x,cci4,none,R1|catboost_lo|1|cell|10|0.25,30.152379270858653,13.642317530603197,,참고값(판정 없음),L0,,False
+Russia_E|x,cci4,none,P1|none|1|cell|-1|0.0,29.6337897238442,14.237552631788606,,참고값(판정 없음),L0,,False
+Russia_E|x,cci4,none,P1@cci4|none|1|cell|-1|0.0,28.211564013251177,17.141468874330812,,참고값(판정 없음),L0,,False
+Russia_E|x,cci4,none,R1|catboost_lo|1|cell|-1|0.25,30.562673476602082,14.886433782322886,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5y,none,P0|none|1|cell|0|0.0,29.723227147921126,12.447111736968571,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5y,none,B:cci5y_raw|none|1|cell|0|0.0,35.56305014775022,22.889514819451485,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5y,none,B:cci5y_aff|none|1|cell|0|0.0,33.550565972811185,12.469375896642863,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5y,none,P0@cci5y|none|1|cell|0|0.0,49.15855292457201,31.821069025371493,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5y,none,P0@tddm|none|1|cell|0|0.0,29.11138132393271,12.309465906460536,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5y,none,P1|none|1|cell|10|0.0,29.38791815833511,13.155308348893694,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5y,none,P1@cci5y|none|1|cell|10|0.0,41.92928210345691,26.175478455692343,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5y,none,R1|catboost_lo|1|cell|10|0.25,30.152379270858653,13.642317530603197,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5y,none,P1|none|1|cell|-1|0.0,29.6337897238442,14.237552631788606,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5y,none,P1@cci5y|none|1|cell|-1|0.0,41.380355551306835,25.524024261818603,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5y,none,R1|catboost_lo|1|cell|-1|0.25,30.562673476602082,14.886433782322886,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5s,none,P0|none|1|cell|0|0.0,29.723227147921126,12.447111736968571,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5s,none,B:cci5s_raw|none|1|cell|0|0.0,35.93933147352176,23.109254440213213,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5s,none,B:cci5s_aff|none|1|cell|0|0.0,33.64964883965533,12.45044776644483,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5s,none,P0@cci5s|none|1|cell|0|0.0,48.251820490364075,31.024120471367684,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5s,none,P0@tddm|none|1|cell|0|0.0,29.11138132393271,12.309465906460536,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5s,none,P1|none|1|cell|10|0.0,29.38791815833511,13.155308348893694,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5s,none,P1@cci5s|none|1|cell|10|0.0,41.868825257639585,26.75000576001485,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5s,none,R1|catboost_lo|1|cell|10|0.25,30.152379270858653,13.642317530603197,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5s,none,P1|none|1|cell|-1|0.0,29.6337897238442,14.237552631788606,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5s,none,P1@cci5s|none|1|cell|-1|0.0,41.585769733755,26.38056543549705,,참고값(판정 없음),L0,,False
+Russia_E|x,cci5s,none,R1|catboost_lo|1|cell|-1|0.25,30.562673476602082,14.886433782322886,,참고값(판정 없음),L0,,False
+Russia_E|x,wei,none,P0|none|1|cell|0|0.0,29.723227147921126,12.447111736968571,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,none,B:wei_raw|none|1|cell|0|0.0,11.412774505368949,8.735344378528307,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,none,B:wei_aff|none|1|cell|0|0.0,17.63509221180899,8.969163495276167,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,none,P0@wei|none|1|cell|0|0.0,13.448595077642091,8.354524083622112,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,none,P0@tddm|none|1|cell|0|0.0,29.11138132393271,12.309465906460536,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,none,P1|none|1|cell|10|0.0,29.38791815833511,13.155308348893694,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,none,P1@wei|none|1|cell|10|0.0,13.343639598137639,8.090673441702247,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,none,R1|catboost_lo|1|cell|10|0.25,30.152379270858653,13.642317530603197,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,none,P1|none|1|cell|-1|0.0,29.6337897238442,14.237552631788606,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,none,P1@wei|none|1|cell|-1|0.0,13.360988911065414,8.00164069410835,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,none,R1|catboost_lo|1|cell|-1|0.25,30.562673476602082,14.886433782322886,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk5,P0|none|1|cell|0|0.0,8.360814566123292,7.922631873636488,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk5,B:wei_raw|none|1|cell|0|0.0,22.638012038606142,19.75249073140105,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk5,B:wei_aff|none|1|cell|0|0.0,13.529360571180082,11.845242654499177,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk5,P0@wei|none|1|cell|0|0.0,16.289614077950898,14.133857766300329,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk5,P0@tddm|none|1|cell|0|0.0,9.341562797155643,8.568214096469694,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk5,P1|none|1|cell|10|0.0,10.834000783882297,10.236975715266066,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk5,P1@wei|none|1|cell|10|0.0,16.759661802333998,14.06271219930365,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk5,R1|catboost_lo|1|cell|10|0.25,12.282812859798367,11.360578210513014,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk5,P1|none|1|cell|-1|0.0,12.66626758859927,12.058732146174204,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk5,P1@wei|none|1|cell|-1|0.0,17.636934614434868,14.55564721447928,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk5,R1|catboost_lo|1|cell|-1|0.25,13.826301539974816,12.811550211675968,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk25,P0|none|1|cell|0|0.0,7.2907260581397235,7.033129118085675,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk25,B:wei_raw|none|1|cell|0|0.0,17.318956307341388,15.829417909856426,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk25,B:wei_aff|none|1|cell|0|0.0,11.162236296341153,9.871214302875112,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk25,P0@wei|none|1|cell|0|0.0,13.24922176503174,11.57641148754296,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk25,P0@tddm|none|1|cell|0|0.0,8.063091859103022,7.483964674137114,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk25,P1|none|1|cell|10|0.0,9.51195149987186,9.079694861127479,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk25,P1@wei|none|1|cell|10|0.0,13.261482438000979,11.197119748296364,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk25,R1|catboost_lo|1|cell|10|0.25,10.118012120156113,9.615827544535774,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk25,P1|none|1|cell|-1|0.0,11.223440999117635,10.731303532874119,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk25,P1@wei|none|1|cell|-1|0.0,13.700041678240186,11.377156020863234,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,wei,blk25,R1|catboost_lo|1|cell|-1|0.25,11.585871467629977,10.882256651589168,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,none,P0|none|1|cell|0|0.0,29.723227147921126,12.447111736968571,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,none,B:weis_raw|none|1|cell|0|0.0,11.788844037183983,9.151241736175242,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,none,B:weis_aff|none|1|cell|0|0.0,15.836227714747897,8.286449195173638,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,none,P0@weis|none|1|cell|0|0.0,13.07198892731202,7.696845347031169,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,none,P0@tddm|none|1|cell|0|0.0,29.11138132393271,12.309465906460536,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,none,P1|none|1|cell|10|0.0,29.38791815833511,13.155308348893694,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,none,P1@weis|none|1|cell|10|0.0,13.387306074358174,7.727271438482317,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,none,R1|catboost_lo|1|cell|10|0.25,30.152379270858653,13.642317530603197,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,none,P1|none|1|cell|-1|0.0,29.6337897238442,14.237552631788606,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,none,P1@weis|none|1|cell|-1|0.0,13.51768929251953,7.764081746577387,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,none,R1|catboost_lo|1|cell|-1|0.25,30.562673476602082,14.886433782322886,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk5,P0|none|1|cell|0|0.0,8.360814566123292,7.922631873636488,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk5,B:weis_raw|none|1|cell|0|0.0,22.20791758401024,19.02873882780019,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk5,B:weis_aff|none|1|cell|0|0.0,14.238856724326087,12.188289553455977,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk5,P0@weis|none|1|cell|0|0.0,15.999496641953248,13.611484258599068,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk5,P0@tddm|none|1|cell|0|0.0,9.341562797155643,8.568214096469694,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk5,P1|none|1|cell|10|0.0,10.834000783882297,10.236975715266066,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk5,P1@weis|none|1|cell|10|0.0,16.2988217628826,13.527267906777036,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk5,R1|catboost_lo|1|cell|10|0.25,12.282812859798367,11.360578210513014,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk5,P1|none|1|cell|-1|0.0,12.66626758859927,12.058732146174204,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk5,P1@weis|none|1|cell|-1|0.0,17.1623311325006,14.082841329448684,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk5,R1|catboost_lo|1|cell|-1|0.25,13.826301539974816,12.811550211675968,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk25,P0|none|1|cell|0|0.0,7.2907260581397235,7.033129118085675,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk25,B:weis_raw|none|1|cell|0|0.0,16.68499601040299,14.981327068663479,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk25,B:weis_aff|none|1|cell|0|0.0,11.211749520763963,9.791364062069377,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk25,P0@weis|none|1|cell|0|0.0,12.440289822887676,10.782776866226488,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk25,P0@tddm|none|1|cell|0|0.0,8.063091859103022,7.483964674137114,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk25,P1|none|1|cell|10|0.0,9.51195149987186,9.079694861127479,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk25,P1@weis|none|1|cell|10|0.0,12.36789110494849,10.497413637996672,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk25,R1|catboost_lo|1|cell|10|0.25,10.118012120156113,9.615827544535774,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk25,P1|none|1|cell|-1|0.0,11.223440999117635,10.731303532874119,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk25,P1@weis|none|1|cell|-1|0.0,12.762800212046631,10.760429661266981,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,weis,blk25,R1|catboost_lo|1|cell|-1|0.25,11.585871467629977,10.882256651589168,학습 지점 포함*,참고값(판정 없음),L1,,False
+Russia_E|x,aalto,none,P0|none|1|cell|0|0.0,29.723227147921126,12.447111736968571,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_E|x,aalto,none,B:aalto_raw|none|1|cell|0|0.0,32.88995997070557,21.987209624218348,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_E|x,aalto,none,B:aalto_aff|none|1|cell|0|0.0,38.970326827386685,19.21927863984376,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_E|x,aalto,none,P0@aalto|none|1|cell|0|0.0,32.791176926967054,18.00585490634315,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_E|x,aalto,none,P0@tddm|none|1|cell|0|0.0,29.11138132393271,12.309465906460536,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_E|x,aalto,none,P1|none|1|cell|10|0.0,29.38791815833511,13.155308348893694,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_E|x,aalto,none,P1@aalto|none|1|cell|10|0.0,34.21609346712475,18.633354857641507,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_E|x,aalto,none,R1|catboost_lo|1|cell|10|0.25,30.152379270858653,13.642317530603197,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_E|x,aalto,none,P1|none|1|cell|-1|0.0,29.6337897238442,14.237552631788606,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_E|x,aalto,none,P1@aalto|none|1|cell|-1|0.0,34.497701376948115,18.649490266456176,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_E|x,aalto,none,R1|catboost_lo|1|cell|-1|0.25,30.562673476602082,14.886433782322886,학습 지점 포함*,참고값(판정 없음)(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_E|x,yk,none,P0|none|1|cell|0|0.0,29.723227147921126,12.447111736968571,,참고값(판정 없음),L0,,False
+Russia_E|x,yk,none,P0@tddm|none|1|cell|0|0.0,29.11138132393271,12.309465906460536,,참고값(판정 없음),L0,,False
+Russia_E|x,yk,none,P1|none|1|cell|10|0.0,29.38791815833511,13.155308348893694,,참고값(판정 없음),L0,,False
+Russia_E|x,yk,none,R1|catboost_lo|1|cell|10|0.25,30.152379270858653,13.642317530603197,,참고값(판정 없음),L0,,False
+Russia_E|x,yk,none,P1|none|1|cell|-1|0.0,29.6337897238442,14.237552631788606,,참고값(판정 없음),L0,,False
+Russia_E|x,yk,none,R1|catboost_lo|1|cell|-1|0.25,30.562673476602082,14.886433782322886,,참고값(판정 없음),L0,,False
+Alaska|x,cci4,none,P0|none|1|cell|0|0.0,14.539077199824655,14.090123000064938,,서술,L0,,False
+Alaska|x,cci4,none,B:cci4_raw|none|1|cell|0|0.0,18.81082565881967,21.798517706079092,,서술,L0,,False
+Alaska|x,cci4,none,B:cci4_aff|none|1|cell|0|0.0,15.045833182915796,16.74396489871748,,서술,L0,,False
+Alaska|x,cci4,none,P0@cci4|none|1|cell|0|0.0,18.941444710733506,22.31857625391114,,서술,L0,,False
+Alaska|x,cci4,none,P0@tddm|none|1|cell|0|0.0,16.18698258674469,14.344581453675886,,서술,L0,,False
+Alaska|x,cci4,none,P1|none|1|cell|10|0.0,14.520737803549952,14.96478285706749,,서술,L0,,False
+Alaska|x,cci4,none,P1@cci4|none|1|cell|10|0.0,20.681734160526183,23.609689633139663,,서술,L0,,False
+Alaska|x,cci4,none,R1|catboost_lo|1|cell|10|0.25,15.089176760150622,16.469905801010295,,서술,L0,,False
+Alaska|x,cci4,none,P1|none|1|cell|-1|0.0,14.606160668225703,15.466188365594164,,서술,L0,,False
+Alaska|x,cci4,none,P1@cci4|none|1|cell|-1|0.0,21.354826423399125,23.53859719544226,,서술,L0,,False
+Alaska|x,cci4,none,R1|catboost_lo|1|cell|-1|0.25,14.257954383447217,15.300388884190847,,서술,L0,,False
+Alaska|x,cci5y,none,P0|none|1|cell|0|0.0,14.539077199824655,14.090123000064938,,서술,L0,,False
+Alaska|x,cci5y,none,B:cci5y_raw|none|1|cell|0|0.0,73.59006464889714,54.42650323290017,,서술,L0,,False
+Alaska|x,cci5y,none,B:cci5y_aff|none|1|cell|0|0.0,15.81262869902138,14.978511905401367,,서술,L0,,False
+Alaska|x,cci5y,none,P0@cci5y|none|1|cell|0|0.0,31.85522188319755,25.374283381730535,,서술,L0,,False
+Alaska|x,cci5y,none,P0@tddm|none|1|cell|0|0.0,16.18698258674469,14.344581453675886,,서술,L0,,False
+Alaska|x,cci5y,none,P1|none|1|cell|10|0.0,14.520737803549952,14.96478285706749,,서술,L0,,False
+Alaska|x,cci5y,none,P1@cci5y|none|1|cell|10|0.0,32.655793510961914,25.36025029679349,,서술,L0,,False
+Alaska|x,cci5y,none,R1|catboost_lo|1|cell|10|0.25,15.089176760150622,16.469905801010295,,서술,L0,,False
+Alaska|x,cci5y,none,P1|none|1|cell|-1|0.0,14.606160668225703,15.466188365594164,,서술,L0,,False
+Alaska|x,cci5y,none,P1@cci5y|none|1|cell|-1|0.0,29.260573043136,23.290239973481405,,서술,L0,,False
+Alaska|x,cci5y,none,R1|catboost_lo|1|cell|-1|0.25,14.257954383447217,15.300388884190847,,서술,L0,,False
+Alaska|x,cci5s,none,P0|none|1|cell|0|0.0,14.539077199824655,14.090123000064938,,서술,L0,,False
+Alaska|x,cci5s,none,B:cci5s_raw|none|1|cell|0|0.0,65.93679206540084,51.2538852415192,,서술,L0,,False
+Alaska|x,cci5s,none,B:cci5s_aff|none|1|cell|0|0.0,16.608939388603694,16.23793658628496,,서술,L0,,False
+Alaska|x,cci5s,none,P0@cci5s|none|1|cell|0|0.0,33.37601279131119,26.931451082311526,,서술,L0,,False
+Alaska|x,cci5s,none,P0@tddm|none|1|cell|0|0.0,16.18698258674469,14.344581453675886,,서술,L0,,False
+Alaska|x,cci5s,none,P1|none|1|cell|10|0.0,14.520737803549952,14.96478285706749,,서술,L0,,False
+Alaska|x,cci5s,none,P1@cci5s|none|1|cell|10|0.0,32.03612803787511,25.69597158050548,,서술,L0,,False
+Alaska|x,cci5s,none,R1|catboost_lo|1|cell|10|0.25,15.089176760150622,16.469905801010295,,서술,L0,,False
+Alaska|x,cci5s,none,P1|none|1|cell|-1|0.0,14.606160668225703,15.466188365594164,,서술,L0,,False
+Alaska|x,cci5s,none,P1@cci5s|none|1|cell|-1|0.0,31.173422378215047,24.286047348856233,,서술,L0,,False
+Alaska|x,cci5s,none,R1|catboost_lo|1|cell|-1|0.25,14.257954383447217,15.300388884190847,,서술,L0,,False
+Alaska|x,wei,none,P0|none|1|cell|0|0.0,14.539077199824655,14.090123000064938,,서술,L1,,False
+Alaska|x,wei,none,B:wei_raw|none|1|cell|0|0.0,16.79820853252812,12.448491836474942,,서술,L1,,False
+Alaska|x,wei,none,B:wei_aff|none|1|cell|0|0.0,18.496134673036305,16.80995853503894,,서술,L1,,False
+Alaska|x,wei,none,P0@wei|none|1|cell|0|0.0,16.29376101745714,14.566914587822783,,서술,L1,,False
+Alaska|x,wei,none,P0@tddm|none|1|cell|0|0.0,16.18698258674469,14.344581453675886,,서술,L1,,False
+Alaska|x,wei,none,P1|none|1|cell|10|0.0,14.520737803549952,14.96478285706749,,서술,L1,,False
+Alaska|x,wei,none,P1@wei|none|1|cell|10|0.0,15.615835701550946,13.186266971023176,,서술,L1,,False
+Alaska|x,wei,none,R1|catboost_lo|1|cell|10|0.25,15.089176760150622,16.469905801010295,,서술,L1,,False
+Alaska|x,wei,none,P1|none|1|cell|-1|0.0,14.606160668225703,15.466188365594164,,서술,L1,,False
+Alaska|x,wei,none,P1@wei|none|1|cell|-1|0.0,15.628425988199847,12.546477333065209,,서술,L1,,False
+Alaska|x,wei,none,R1|catboost_lo|1|cell|-1|0.25,14.257954383447217,15.300388884190847,,서술,L1,,False
+Alaska|x,wei,blk5,P0|none|1|cell|0|0.0,15.712579752526835,15.259779168900574,,서술,L1,,False
+Alaska|x,wei,blk5,B:wei_raw|none|1|cell|0|0.0,21.54758457760304,18.388037387553894,,서술,L1,,False
+Alaska|x,wei,blk5,B:wei_aff|none|1|cell|0|0.0,17.74311125456869,17.993502219746382,,서술,L1,,False
+Alaska|x,wei,blk5,P0@wei|none|1|cell|0|0.0,17.178368298348644,16.776623636264922,,서술,L1,,False
+Alaska|x,wei,blk5,P0@tddm|none|1|cell|0|0.0,16.336134610887875,15.328447553299517,,서술,L1,,False
+Alaska|x,wei,blk5,P1|none|1|cell|10|0.0,16.115289512551918,16.3116144085253,,서술,L1,,False
+Alaska|x,wei,blk5,P1@wei|none|1|cell|10|0.0,17.21959625504472,16.674685419901266,,서술,L1,,False
+Alaska|x,wei,blk5,R1|catboost_lo|1|cell|10|0.25,18.051378526580226,17.989328327112055,,서술,L1,,False
+Alaska|x,wei,blk5,P1|none|1|cell|-1|0.0,16.61600971639162,17.17235334544913,,서술,L1,,False
+Alaska|x,wei,blk5,P1@wei|none|1|cell|-1|0.0,18.37201432316022,16.998981205634966,,서술,L1,,False
+Alaska|x,wei,blk5,R1|catboost_lo|1|cell|-1|0.25,16.63315550443009,16.723355717034984,,서술,L1,,False
+Alaska|x,wei,blk25,P0|none|1|cell|0|0.0,15.487164213789166,14.457900749046463,,서술,L1,,False
+Alaska|x,wei,blk25,B:wei_raw|none|1|cell|0|0.0,21.64119682804695,17.68470876064225,,서술,L1,,False
+Alaska|x,wei,blk25,B:wei_aff|none|1|cell|0|0.0,17.7918482792916,18.568555044802096,,서술,L1,,False
+Alaska|x,wei,blk25,P0@wei|none|1|cell|0|0.0,17.230851720108152,17.131877256499585,,서술,L1,,False
+Alaska|x,wei,blk25,P0@tddm|none|1|cell|0|0.0,16.166456481097743,14.652190847110091,,서술,L1,,False
+Alaska|x,wei,blk25,P1|none|1|cell|10|0.0,15.853746285866398,15.384659260783701,,서술,L1,,False
+Alaska|x,wei,blk25,P1@wei|none|1|cell|10|0.0,17.26001616036039,16.64667289740794,,서술,L1,,False
+Alaska|x,wei,blk25,R1|catboost_lo|1|cell|10|0.25,17.798457578276004,17.043956697766838,,서술,L1,,False
+Alaska|x,wei,blk25,P1|none|1|cell|-1|0.0,16.334058019354337,16.138531238657603,,서술,L1,,False
+Alaska|x,wei,blk25,P1@wei|none|1|cell|-1|0.0,18.438467544986402,16.736379002564554,,서술,L1,,False
+Alaska|x,wei,blk25,R1|catboost_lo|1|cell|-1|0.25,16.387572333587194,15.77065802557693,,서술,L1,,False
+Alaska|x,weis,none,P0|none|1|cell|0|0.0,14.539077199824655,14.090123000064938,,서술,L1,,False
+Alaska|x,weis,none,B:weis_raw|none|1|cell|0|0.0,15.852301512362644,12.978976993971736,,서술,L1,,False
+Alaska|x,weis,none,B:weis_aff|none|1|cell|0|0.0,19.96375715560417,17.366471925030055,,서술,L1,,False
+Alaska|x,weis,none,P0@weis|none|1|cell|0|0.0,16.601633752724318,14.31357536788347,,서술,L1,,False
+Alaska|x,weis,none,P0@tddm|none|1|cell|0|0.0,16.18698258674469,14.344581453675886,,서술,L1,,False
+Alaska|x,weis,none,P1|none|1|cell|10|0.0,14.520737803549952,14.96478285706749,,서술,L1,,False
+Alaska|x,weis,none,P1@weis|none|1|cell|10|0.0,15.176053856807727,12.56213670151671,,서술,L1,,False
+Alaska|x,weis,none,R1|catboost_lo|1|cell|10|0.25,15.089176760150622,16.469905801010295,,서술,L1,,False
+Alaska|x,weis,none,P1|none|1|cell|-1|0.0,14.606160668225703,15.466188365594164,,서술,L1,,False
+Alaska|x,weis,none,P1@weis|none|1|cell|-1|0.0,14.862540489219992,11.89157171887407,,서술,L1,,False
+Alaska|x,weis,none,R1|catboost_lo|1|cell|-1|0.25,14.257954383447217,15.300388884190847,,서술,L1,,False
+Alaska|x,weis,blk5,P0|none|1|cell|0|0.0,15.712579752526835,15.259779168900574,,서술,L1,,False
+Alaska|x,weis,blk5,B:weis_raw|none|1|cell|0|0.0,19.42037538072275,18.187941280943953,,서술,L1,,False
+Alaska|x,weis,blk5,B:weis_aff|none|1|cell|0|0.0,19.493072543261924,18.781201240374592,,서술,L1,,False
+Alaska|x,weis,blk5,P0@weis|none|1|cell|0|0.0,18.534209332911857,16.963201432481245,,서술,L1,,False
+Alaska|x,weis,blk5,P0@tddm|none|1|cell|0|0.0,16.336134610887875,15.328447553299517,,서술,L1,,False
+Alaska|x,weis,blk5,P1|none|1|cell|10|0.0,16.115289512551918,16.3116144085253,,서술,L1,,False
+Alaska|x,weis,blk5,P1@weis|none|1|cell|10|0.0,17.157447668865764,16.408356529196944,,서술,L1,,False
+Alaska|x,weis,blk5,R1|catboost_lo|1|cell|10|0.25,18.051378526580226,17.989328327112055,,서술,L1,,False
+Alaska|x,weis,blk5,P1|none|1|cell|-1|0.0,16.61600971639162,17.17235334544913,,서술,L1,,False
+Alaska|x,weis,blk5,P1@weis|none|1|cell|-1|0.0,17.630382331981416,16.5450275389649,,서술,L1,,False
+Alaska|x,weis,blk5,R1|catboost_lo|1|cell|-1|0.25,16.63315550443009,16.723355717034984,,서술,L1,,False
+Alaska|x,weis,blk25,P0|none|1|cell|0|0.0,15.487164213789166,14.457900749046463,,서술,L1,,False
+Alaska|x,weis,blk25,B:weis_raw|none|1|cell|0|0.0,19.42452569863835,17.65215348447078,,서술,L1,,False
+Alaska|x,weis,blk25,B:weis_aff|none|1|cell|0|0.0,19.570323562871216,19.88817496879873,,서술,L1,,False
+Alaska|x,weis,blk25,P0@weis|none|1|cell|0|0.0,18.62175755965254,17.636953690676282,,서술,L1,,False
+Alaska|x,weis,blk25,P0@tddm|none|1|cell|0|0.0,16.166456481097743,14.652190847110091,,서술,L1,,False
+Alaska|x,weis,blk25,P1|none|1|cell|10|0.0,15.853746285866398,15.384659260783701,,서술,L1,,False
+Alaska|x,weis,blk25,P1@weis|none|1|cell|10|0.0,17.1930007109959,16.56073733904281,,서술,L1,,False
+Alaska|x,weis,blk25,R1|catboost_lo|1|cell|10|0.25,17.798457578276004,17.043956697766838,,서술,L1,,False
+Alaska|x,weis,blk25,P1|none|1|cell|-1|0.0,16.334058019354337,16.138531238657603,,서술,L1,,False
+Alaska|x,weis,blk25,P1@weis|none|1|cell|-1|0.0,17.657377403846073,16.36944352123918,,서술,L1,,False
+Alaska|x,weis,blk25,R1|catboost_lo|1|cell|-1|0.25,16.387572333587194,15.77065802557693,,서술,L1,,False
+Alaska|x,aalto,none,P0|none|1|cell|0|0.0,14.539077199824655,14.090123000064938,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,none,B:aalto_raw|none|1|cell|0|0.0,27.36331813750744,31.8102631382586,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,none,B:aalto_aff|none|1|cell|0|0.0,19.07736463799987,16.99328497506504,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,none,P0@aalto|none|1|cell|0|0.0,17.839134257323007,19.66114642199451,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,none,P0@tddm|none|1|cell|0|0.0,16.18698258674469,14.344581453675886,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,none,P1|none|1|cell|10|0.0,14.520737803549952,14.96478285706749,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,none,P1@aalto|none|1|cell|10|0.0,17.991891776369943,19.350434183908835,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,none,R1|catboost_lo|1|cell|10|0.25,15.089176760150622,16.469905801010295,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,none,P1|none|1|cell|-1|0.0,14.606160668225703,15.466188365594164,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,none,P1@aalto|none|1|cell|-1|0.0,18.164155894912703,18.65902663702112,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,none,R1|catboost_lo|1|cell|-1|0.25,14.257954383447217,15.300388884190847,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk5,P0|none|1|cell|0|0.0,15.713031441812513,15.367031561389359,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk5,B:aalto_raw|none|1|cell|0|0.0,33.769013405397985,34.973563584282275,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk5,B:aalto_aff|none|1|cell|0|0.0,25.816303962921523,18.206609588982186,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk5,P0@aalto|none|1|cell|0|0.0,22.291076634997175,23.325588348606466,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk5,P0@tddm|none|1|cell|0|0.0,16.33642898748021,15.378134577861086,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk5,P1|none|1|cell|10|0.0,16.115417471048634,16.390606007370238,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk5,P1@aalto|none|1|cell|10|0.0,22.430769109584894,22.70569282342538,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk5,R1|catboost_lo|1|cell|10|0.25,18.051532062097557,18.059997475341675,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk5,P1|none|1|cell|-1|0.0,16.615843724912487,17.223059373440776,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk5,P1@aalto|none|1|cell|-1|0.0,23.06075229752691,21.772656523803185,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk5,R1|catboost_lo|1|cell|-1|0.25,16.633065094928234,16.757215476094487,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk25,P0|none|1|cell|0|0.0,15.487164213789166,14.457900749046463,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk25,B:aalto_raw|none|1|cell|0|0.0,34.0353832696268,34.54845491284637,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk25,B:aalto_aff|none|1|cell|0|0.0,26.194872628311145,18.754305245763657,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk25,P0@aalto|none|1|cell|0|0.0,22.387671194220427,23.069084859965542,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk25,P0@tddm|none|1|cell|0|0.0,16.166456481097743,14.652190847110091,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk25,P1|none|1|cell|10|0.0,15.853746285866398,15.384659260783701,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk25,P1@aalto|none|1|cell|10|0.0,22.588166061195768,22.581478725182706,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk25,R1|catboost_lo|1|cell|10|0.25,17.798457578276004,17.043956697766838,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk25,P1|none|1|cell|-1|0.0,16.334058019354337,16.138531238657603,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk25,P1@aalto|none|1|cell|-1|0.0,23.30191756202155,21.875347783943596,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,aalto,blk25,R1|catboost_lo|1|cell|-1|0.25,16.387572333587194,15.77065802557693,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Alaska|x,yk,none,P0|none|1|cell|0|0.0,14.539077199824655,14.090123000064938,,서술,L0,,False
+Alaska|x,yk,none,B:yk_raw|none|1|cell|0|0.0,56.23997661974298,41.523233517494354,,서술,L0,,False
+Alaska|x,yk,none,P0@tddm|none|1|cell|0|0.0,16.18698258674469,14.344581453675886,,서술,L0,,False
+Alaska|x,yk,none,P1|none|1|cell|10|0.0,14.520737803549952,14.96478285706749,,서술,L0,,False
+Alaska|x,yk,none,R1|catboost_lo|1|cell|10|0.25,15.089176760150622,16.469905801010295,,서술,L0,,False
+Alaska|x,yk,none,P1|none|1|cell|-1|0.0,14.606160668225703,15.466188365594164,,서술,L0,,False
+Alaska|x,yk,none,R1|catboost_lo|1|cell|-1|0.25,14.257954383447217,15.300388884190847,,서술,L0,,False
+Russia_C~lgd|x,cci4,none,P0|none|1|cell|0|0.0,32.11799492053079,30.9897708111936,,서술,L0,,False
+Russia_C~lgd|x,cci4,none,B:cci4_raw|none|1|cell|0|0.0,36.46980869032378,36.661174194976525,,서술,L0,,False
+Russia_C~lgd|x,cci4,none,B:cci4_aff|none|1|cell|0|0.0,34.55093165599351,35.19814243273099,,서술,L0,,False
+Russia_C~lgd|x,cci4,none,P0@cci4|none|1|cell|0|0.0,36.591764648970084,36.82318599649222,,서술,L0,,False
+Russia_C~lgd|x,cci4,none,P1|none|1|cell|10|0.0,30.00452464910286,30.285566588114477,,서술,L0,,False
+Russia_C~lgd|x,cci4,none,P1@cci4|none|1|cell|10|0.0,35.28459226807878,34.87590502933726,,서술,L0,,False
+Russia_C~lgd|x,cci4,none,R1|catboost_lo|1|cell|10|0.25,30.061851577352105,30.490080701132786,,서술,L0,,False
+Russia_C~lgd|x,cci4,none,P1|none|1|cell|-1|0.0,28.10323193986674,29.984384540883617,,서술,L0,,False
+Russia_C~lgd|x,cci4,none,P1@cci4|none|1|cell|-1|0.0,36.625399998717725,35.109380837969915,,서술,L0,,False
+Russia_C~lgd|x,cci4,none,R1|catboost_lo|1|cell|-1|0.25,26.700651597195804,28.442889517729405,,서술,L0,,False
+Russia_C~lgd|x,cci5y,none,P0|none|1|cell|0|0.0,32.11799492053079,30.9897708111936,,서술,L0,,False
+Russia_C~lgd|x,cci5y,none,B:cci5y_raw|none|1|cell|0|0.0,35.81082237441863,36.303648699637584,,서술,L0,,False
+Russia_C~lgd|x,cci5y,none,B:cci5y_aff|none|1|cell|0|0.0,38.488463182107814,36.99747457423549,,서술,L0,,False
+Russia_C~lgd|x,cci5y,none,P0@cci5y|none|1|cell|0|0.0,52.3743568560997,51.70521460724211,,서술,L0,,False
+Russia_C~lgd|x,cci5y,none,P1|none|1|cell|10|0.0,30.00452464910286,30.285566588114477,,서술,L0,,False
+Russia_C~lgd|x,cci5y,none,P1@cci5y|none|1|cell|10|0.0,39.50007894399361,39.657763374017,,서술,L0,,False
+Russia_C~lgd|x,cci5y,none,R1|catboost_lo|1|cell|10|0.25,30.061851577352105,30.490080701132786,,서술,L0,,False
+Russia_C~lgd|x,cci5y,none,P1|none|1|cell|-1|0.0,28.10323193986674,29.984384540883617,,서술,L0,,False
+Russia_C~lgd|x,cci5y,none,P1@cci5y|none|1|cell|-1|0.0,43.329614333089545,44.39406350948622,,서술,L0,,False
+Russia_C~lgd|x,cci5y,none,R1|catboost_lo|1|cell|-1|0.25,26.700651597195804,28.442889517729405,,서술,L0,,False
+Russia_C~lgd|x,cci5s,none,P0|none|1|cell|0|0.0,32.11799492053079,30.9897708111936,,서술,L0,,False
+Russia_C~lgd|x,cci5s,none,B:cci5s_raw|none|1|cell|0|0.0,33.22278340898575,34.79791565868013,,서술,L0,,False
+Russia_C~lgd|x,cci5s,none,B:cci5s_aff|none|1|cell|0|0.0,37.49676451104058,36.160722287540864,,서술,L0,,False
+Russia_C~lgd|x,cci5s,none,P0@cci5s|none|1|cell|0|0.0,48.940452508905324,47.785037222486736,,서술,L0,,False
+Russia_C~lgd|x,cci5s,none,P1|none|1|cell|10|0.0,30.00452464910286,30.285566588114477,,서술,L0,,False
+Russia_C~lgd|x,cci5s,none,P1@cci5s|none|1|cell|10|0.0,36.76526431011756,36.37598120726811,,서술,L0,,False
+Russia_C~lgd|x,cci5s,none,R1|catboost_lo|1|cell|10|0.25,30.061851577352105,30.490080701132786,,서술,L0,,False
+Russia_C~lgd|x,cci5s,none,P1|none|1|cell|-1|0.0,28.10323193986674,29.984384540883617,,서술,L0,,False
+Russia_C~lgd|x,cci5s,none,P1@cci5s|none|1|cell|-1|0.0,38.415717674886345,39.6731072762675,,서술,L0,,False
+Russia_C~lgd|x,cci5s,none,R1|catboost_lo|1|cell|-1|0.25,26.700651597195804,28.442889517729405,,서술,L0,,False
+Russia_C~lgd|x,wei,none,P0|none|1|cell|0|0.0,32.11799492053079,30.9897708111936,,서술,L1,,False
+Russia_C~lgd|x,wei,none,B:wei_raw|none|1|cell|0|0.0,16.693945597902406,15.849765933909717,,서술,L1,,False
+Russia_C~lgd|x,wei,none,B:wei_aff|none|1|cell|0|0.0,23.890355519483638,24.78679230300936,,서술,L1,,False
+Russia_C~lgd|x,wei,none,P0@wei|none|1|cell|0|0.0,19.455655107788715,19.533701774049483,,서술,L1,,False
+Russia_C~lgd|x,wei,none,P1|none|1|cell|10|0.0,30.00452464910286,30.285566588114477,,서술,L1,,False
+Russia_C~lgd|x,wei,none,P1@wei|none|1|cell|10|0.0,18.475509052197115,18.395930542199245,,서술,L1,,False
+Russia_C~lgd|x,wei,none,R1|catboost_lo|1|cell|10|0.25,30.061851577352105,30.490080701132786,,서술,L1,,False
+Russia_C~lgd|x,wei,none,P1|none|1|cell|-1|0.0,28.10323193986674,29.984384540883617,,서술,L1,,False
+Russia_C~lgd|x,wei,none,P1@wei|none|1|cell|-1|0.0,17.390433887202022,17.324193411142865,,서술,L1,,False
+Russia_C~lgd|x,wei,none,R1|catboost_lo|1|cell|-1|0.25,26.700651597195804,28.442889517729405,,서술,L1,,False
+Russia_C~lgd|x,wei,blk5,P0|none|1|cell|0|0.0,25.117369689223516,19.222448119884863,,서술,L1,,False
+Russia_C~lgd|x,wei,blk5,B:wei_raw|none|1|cell|0|0.0,17.471177450807364,19.45227536209802,,서술,L1,,False
+Russia_C~lgd|x,wei,blk5,B:wei_aff|none|1|cell|0|0.0,21.83366988840782,20.81992622789829,,서술,L1,,False
+Russia_C~lgd|x,wei,blk5,P0@wei|none|1|cell|0|0.0,19.340077391150757,19.024930963531766,,서술,L1,,False
+Russia_C~lgd|x,wei,blk5,P1|none|1|cell|10|0.0,23.111632823371703,19.0809163423561,,서술,L1,,False
+Russia_C~lgd|x,wei,blk5,P1@wei|none|1|cell|10|0.0,18.654989937667388,18.877128019942912,,서술,L1,,False
+Russia_C~lgd|x,wei,blk5,R1|catboost_lo|1|cell|10|0.25,23.194302771174215,19.259351909981216,,서술,L1,,False
+Russia_C~lgd|x,wei,blk5,P1|none|1|cell|-1|0.0,21.32707490331152,19.35116372959358,,서술,L1,,False
+Russia_C~lgd|x,wei,blk5,P1@wei|none|1|cell|-1|0.0,17.840316300227858,18.90842639383053,,서술,L1,,False
+Russia_C~lgd|x,wei,blk5,R1|catboost_lo|1|cell|-1|0.25,20.39709358393463,18.68538724049596,,서술,L1,,False
+Russia_C~lgd|x,wei,blk25,P0|none|1|cell|0|0.0,25.117369689223516,19.222448119884863,,서술,L1,,False
+Russia_C~lgd|x,wei,blk25,B:wei_raw|none|1|cell|0|0.0,17.471177450807364,19.45227536209802,,서술,L1,,False
+Russia_C~lgd|x,wei,blk25,B:wei_aff|none|1|cell|0|0.0,21.83366988840782,20.81992622789829,,서술,L1,,False
+Russia_C~lgd|x,wei,blk25,P0@wei|none|1|cell|0|0.0,19.340077391150757,19.024930963531766,,서술,L1,,False
+Russia_C~lgd|x,wei,blk25,P1|none|1|cell|10|0.0,23.111632823371703,19.0809163423561,,서술,L1,,False
+Russia_C~lgd|x,wei,blk25,P1@wei|none|1|cell|10|0.0,18.654989937667388,18.877128019942912,,서술,L1,,False
+Russia_C~lgd|x,wei,blk25,R1|catboost_lo|1|cell|10|0.25,23.194302771174215,19.259351909981216,,서술,L1,,False
+Russia_C~lgd|x,wei,blk25,P1|none|1|cell|-1|0.0,21.32707490331152,19.35116372959358,,서술,L1,,False
+Russia_C~lgd|x,wei,blk25,P1@wei|none|1|cell|-1|0.0,17.840316300227858,18.90842639383053,,서술,L1,,False
+Russia_C~lgd|x,wei,blk25,R1|catboost_lo|1|cell|-1|0.25,20.39709358393463,18.68538724049596,,서술,L1,,False
+Russia_C~lgd|x,weis,none,P0|none|1|cell|0|0.0,32.11799492053079,30.9897708111936,,서술,L1,,False
+Russia_C~lgd|x,weis,none,B:weis_raw|none|1|cell|0|0.0,16.1298123691465,16.28138879138061,,서술,L1,,False
+Russia_C~lgd|x,weis,none,B:weis_aff|none|1|cell|0|0.0,21.72890642042099,22.581771510369975,,서술,L1,,False
+Russia_C~lgd|x,weis,none,P0@weis|none|1|cell|0|0.0,18.833764047457837,19.115277378050973,,서술,L1,,False
+Russia_C~lgd|x,weis,none,P1|none|1|cell|10|0.0,30.00452464910286,30.285566588114477,,서술,L1,,False
+Russia_C~lgd|x,weis,none,P1@weis|none|1|cell|10|0.0,18.11691119578791,18.432608922536296,,서술,L1,,False
+Russia_C~lgd|x,weis,none,R1|catboost_lo|1|cell|10|0.25,30.061851577352105,30.490080701132786,,서술,L1,,False
+Russia_C~lgd|x,weis,none,P1|none|1|cell|-1|0.0,28.10323193986674,29.984384540883617,,서술,L1,,False
+Russia_C~lgd|x,weis,none,P1@weis|none|1|cell|-1|0.0,17.130867347541,17.58144716318324,,서술,L1,,False
+Russia_C~lgd|x,weis,none,R1|catboost_lo|1|cell|-1|0.25,26.700651597195804,28.442889517729405,,서술,L1,,False
+Russia_C~lgd|x,weis,blk5,P0|none|1|cell|0|0.0,25.117369689223516,19.222448119884863,,서술,L1,,False
+Russia_C~lgd|x,weis,blk5,B:weis_raw|none|1|cell|0|0.0,16.776481715961012,19.071101650790208,,서술,L1,,False
+Russia_C~lgd|x,weis,blk5,B:weis_aff|none|1|cell|0|0.0,20.228508478208155,19.566254145540427,,서술,L1,,False
+Russia_C~lgd|x,weis,blk5,P0@weis|none|1|cell|0|0.0,18.592402207125442,18.412773689239774,,서술,L1,,False
+Russia_C~lgd|x,weis,blk5,P1|none|1|cell|10|0.0,23.111632823371703,19.0809163423561,,서술,L1,,False
+Russia_C~lgd|x,weis,blk5,P1@weis|none|1|cell|10|0.0,18.145328679048454,18.535707140928743,,서술,L1,,False
+Russia_C~lgd|x,weis,blk5,R1|catboost_lo|1|cell|10|0.25,23.194302771174215,19.259351909981216,,서술,L1,,False
+Russia_C~lgd|x,weis,blk5,P1|none|1|cell|-1|0.0,21.32707490331152,19.35116372959358,,서술,L1,,False
+Russia_C~lgd|x,weis,blk5,P1@weis|none|1|cell|-1|0.0,17.424825747199602,18.68754994517299,,서술,L1,,False
+Russia_C~lgd|x,weis,blk5,R1|catboost_lo|1|cell|-1|0.25,20.39709358393463,18.68538724049596,,서술,L1,,False
+Russia_C~lgd|x,weis,blk25,P0|none|1|cell|0|0.0,25.117369689223516,19.222448119884863,,서술,L1,,False
+Russia_C~lgd|x,weis,blk25,B:weis_raw|none|1|cell|0|0.0,16.776481715961012,19.071101650790208,,서술,L1,,False
+Russia_C~lgd|x,weis,blk25,B:weis_aff|none|1|cell|0|0.0,20.228508478208155,19.566254145540427,,서술,L1,,False
+Russia_C~lgd|x,weis,blk25,P0@weis|none|1|cell|0|0.0,18.592402207125442,18.412773689239774,,서술,L1,,False
+Russia_C~lgd|x,weis,blk25,P1|none|1|cell|10|0.0,23.111632823371703,19.0809163423561,,서술,L1,,False
+Russia_C~lgd|x,weis,blk25,P1@weis|none|1|cell|10|0.0,18.145328679048454,18.535707140928743,,서술,L1,,False
+Russia_C~lgd|x,weis,blk25,R1|catboost_lo|1|cell|10|0.25,23.194302771174215,19.259351909981216,,서술,L1,,False
+Russia_C~lgd|x,weis,blk25,P1|none|1|cell|-1|0.0,21.32707490331152,19.35116372959358,,서술,L1,,False
+Russia_C~lgd|x,weis,blk25,P1@weis|none|1|cell|-1|0.0,17.424825747199602,18.68754994517299,,서술,L1,,False
+Russia_C~lgd|x,weis,blk25,R1|catboost_lo|1|cell|-1|0.25,20.39709358393463,18.68538724049596,,서술,L1,,False
+Russia_C~lgd|x,aalto,none,P0|none|1|cell|0|0.0,32.11799492053079,30.9897708111936,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,none,B:aalto_raw|none|1|cell|0|0.0,28.527349291655433,28.403343423584225,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,none,B:aalto_aff|none|1|cell|0|0.0,48.596428040831185,49.91825291221644,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,none,P0@aalto|none|1|cell|0|0.0,32.28669890411323,31.746154339041386,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,none,P1|none|1|cell|10|0.0,30.00452464910286,30.285566588114477,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,none,P1@aalto|none|1|cell|10|0.0,29.422738844954658,29.92517323125936,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,none,R1|catboost_lo|1|cell|10|0.25,30.061851577352105,30.490080701132786,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,none,P1|none|1|cell|-1|0.0,28.10323193986674,29.984384540883617,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,none,P1@aalto|none|1|cell|-1|0.0,28.510196108192567,29.157465286256354,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,none,R1|catboost_lo|1|cell|-1|0.25,26.700651597195804,28.442889517729405,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk5,P0|none|1|cell|0|0.0,25.845832088705855,24.305335676182715,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk5,B:aalto_raw|none|1|cell|0|0.0,19.03415698905202,19.33160801128806,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk5,B:aalto_aff|none|1|cell|0|0.0,40.44046471730731,41.25926663228132,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk5,P0@aalto|none|1|cell|0|0.0,26.904761892024,25.109239249448716,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk5,P1|none|1|cell|10|0.0,23.70347457463592,22.835190782458728,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk5,P1@aalto|none|1|cell|10|0.0,22.292409824217295,21.73025398228764,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk5,R1|catboost_lo|1|cell|10|0.25,23.75091606455124,22.70845299250771,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk5,P1|none|1|cell|-1|0.0,21.776088725531547,21.964409039540733,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk5,P1@aalto|none|1|cell|-1|0.0,19.970020445535685,20.016890851269093,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk5,R1|catboost_lo|1|cell|-1|0.25,20.776263020978185,20.765534233428603,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk25,P0|none|1|cell|0|0.0,25.845832088705855,24.305335676182715,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk25,B:aalto_raw|none|1|cell|0|0.0,19.03415698905202,19.33160801128806,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk25,B:aalto_aff|none|1|cell|0|0.0,40.44046471730731,41.25926663228132,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk25,P0@aalto|none|1|cell|0|0.0,26.904761892024,25.109239249448716,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk25,P1|none|1|cell|10|0.0,23.70347457463592,22.835190782458728,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk25,P1@aalto|none|1|cell|10|0.0,22.292409824217295,21.73025398228764,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk25,R1|catboost_lo|1|cell|10|0.25,23.75091606455124,22.70845299250771,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk25,P1|none|1|cell|-1|0.0,21.776088725531547,21.964409039540733,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk25,P1@aalto|none|1|cell|-1|0.0,19.970020445535685,20.016890851269093,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,aalto,blk25,R1|catboost_lo|1|cell|-1|0.25,20.776263020978185,20.765534233428603,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Russia_C~lgd|x,yk,none,P0|none|1|cell|0|0.0,32.11799492053079,30.9897708111936,,서술,L0,,False
+Russia_C~lgd|x,yk,none,P1|none|1|cell|10|0.0,30.00452464910286,30.285566588114477,,서술,L0,,False
+Russia_C~lgd|x,yk,none,R1|catboost_lo|1|cell|10|0.25,30.061851577352105,30.490080701132786,,서술,L0,,False
+Russia_C~lgd|x,yk,none,P1|none|1|cell|-1|0.0,28.10323193986674,29.984384540883617,,서술,L0,,False
+Russia_C~lgd|x,yk,none,R1|catboost_lo|1|cell|-1|0.25,26.700651597195804,28.442889517729405,,서술,L0,,False
+Tibet_LGD|x,cci4,none,P0|none|1|cell|0|0.0,244.5110087202488,216.42712392917196,,서술,L0,,False
+Tibet_LGD|x,cci4,none,B:cci4_raw|none|1|cell|0|0.0,201.74657279130503,172.75755778023455,,서술,L0,,False
+Tibet_LGD|x,cci4,none,B:cci4_aff|none|1|cell|0|0.0,215.52779029581885,186.8001807036008,,서술,L0,,False
+Tibet_LGD|x,cci4,none,P0@cci4|none|1|cell|0|0.0,202.10654774993827,173.1352341221041,,서술,L0,,False
+Tibet_LGD|x,cci4,none,P1|none|1|cell|10|0.0,148.13661476010333,118.6791813601362,,서술,L0,,False
+Tibet_LGD|x,cci4,none,P1@cci4|none|1|cell|10|0.0,136.66765789456264,112.7405914070961,,서술,L0,,False
+Tibet_LGD|x,cci4,none,R1|catboost_lo|1|cell|10|0.25,127.23222425413545,102.85591305223029,,서술,L0,,False
+Tibet_LGD|x,cci4,none,P1|none|1|cell|-1|0.0,108.86136174077119,97.23797000956984,,서술,L0,,False
+Tibet_LGD|x,cci4,none,P1@cci4|none|1|cell|-1|0.0,112.40069196351465,98.29142507626827,,서술,L0,,False
+Tibet_LGD|x,cci4,none,R1|catboost_lo|1|cell|-1|0.25,99.78414999047405,90.73102033991911,,서술,L0,,False
+Tibet_LGD|x,cci5y,none,P0|none|1|cell|0|0.0,244.5110087202488,216.42712392917196,,서술,L0,,False
+Tibet_LGD|x,cci5y,none,B:cci5y_raw|none|1|cell|0|0.0,208.11538837154504,174.67019214492842,,서술,L0,,False
+Tibet_LGD|x,cci5y,none,B:cci5y_aff|none|1|cell|0|0.0,232.17501766356312,203.2222301862918,,서술,L0,,False
+Tibet_LGD|x,cci5y,none,P0@cci5y|none|1|cell|0|0.0,248.21544768016344,219.29788549932056,,서술,L0,,False
+Tibet_LGD|x,cci5y,none,P1|none|1|cell|10|0.0,148.13661476010333,118.6791813601362,,서술,L0,,False
+Tibet_LGD|x,cci5y,none,P1@cci5y|none|1|cell|10|0.0,170.22690296920877,138.65818675462765,,서술,L0,,False
+Tibet_LGD|x,cci5y,none,R1|catboost_lo|1|cell|10|0.25,127.23222425413545,102.85591305223029,,서술,L0,,False
+Tibet_LGD|x,cci5y,none,P1|none|1|cell|-1|0.0,108.86136174077119,97.23797000956984,,서술,L0,,False
+Tibet_LGD|x,cci5y,none,P1@cci5y|none|1|cell|-1|0.0,143.64301161920872,121.73386264384719,,서술,L0,,False
+Tibet_LGD|x,cci5y,none,R1|catboost_lo|1|cell|-1|0.25,99.78414999047405,90.73102033991911,,서술,L0,,False
+Tibet_LGD|x,cci5s,none,P0|none|1|cell|0|0.0,244.5110087202488,216.42712392917196,,서술,L0,,False
+Tibet_LGD|x,cci5s,none,B:cci5s_raw|none|1|cell|0|0.0,211.56807084961196,178.63197070886298,,서술,L0,,False
+Tibet_LGD|x,cci5s,none,B:cci5s_aff|none|1|cell|0|0.0,232.55272647826186,203.6165933791284,,서술,L0,,False
+Tibet_LGD|x,cci5s,none,P0@cci5s|none|1|cell|0|0.0,247.51758776367706,218.5543317067371,,서술,L0,,False
+Tibet_LGD|x,cci5s,none,P1|none|1|cell|10|0.0,148.13661476010333,118.6791813601362,,서술,L0,,False
+Tibet_LGD|x,cci5s,none,P1@cci5s|none|1|cell|10|0.0,168.29834055829824,137.85573994781984,,서술,L0,,False
+Tibet_LGD|x,cci5s,none,R1|catboost_lo|1|cell|10|0.25,127.23222425413545,102.85591305223029,,서술,L0,,False
+Tibet_LGD|x,cci5s,none,P1|none|1|cell|-1|0.0,108.86136174077119,97.23797000956984,,서술,L0,,False
+Tibet_LGD|x,cci5s,none,P1@cci5s|none|1|cell|-1|0.0,146.53273799609755,122.75308136371436,,서술,L0,,False
+Tibet_LGD|x,cci5s,none,R1|catboost_lo|1|cell|-1|0.25,99.78414999047405,90.73102033991911,,서술,L0,,False
+Tibet_LGD|x,wei,none,P0|none|1|cell|0|0.0,244.5110087202488,216.42712392917196,,서술,L1,,False
+Tibet_LGD|x,wei,none,B:wei_raw|none|1|cell|0|0.0,96.07650688397442,95.41210537412144,,서술,L1,,False
+Tibet_LGD|x,wei,none,B:wei_aff|none|1|cell|0|0.0,126.3869586370322,100.89983317128635,,서술,L1,,False
+Tibet_LGD|x,wei,none,P0@wei|none|1|cell|0|0.0,100.65605382285631,89.78062565477927,,서술,L1,,False
+Tibet_LGD|x,wei,none,P1|none|1|cell|10|0.0,148.13661476010333,118.6791813601362,,서술,L1,,False
+Tibet_LGD|x,wei,none,P1@wei|none|1|cell|10|0.0,97.25488630039308,91.36864877679682,,서술,L1,,False
+Tibet_LGD|x,wei,none,R1|catboost_lo|1|cell|10|0.25,127.23222425413545,102.85591305223029,,서술,L1,,False
+Tibet_LGD|x,wei,none,P1|none|1|cell|-1|0.0,108.86136174077119,97.23797000956984,,서술,L1,,False
+Tibet_LGD|x,wei,none,P1@wei|none|1|cell|-1|0.0,96.73362670354521,93.64816015622365,,서술,L1,,False
+Tibet_LGD|x,wei,none,R1|catboost_lo|1|cell|-1|0.25,99.78414999047405,90.73102033991911,,서술,L1,,False
+Tibet_LGD|x,wei,blk5,P0|none|1|cell|0|0.0,246.19425640430495,216.85982897530775,,서술,L1,,False
+Tibet_LGD|x,wei,blk5,B:wei_raw|none|1|cell|0|0.0,97.00798712594477,95.8251865832574,,서술,L1,,False
+Tibet_LGD|x,wei,blk5,B:wei_aff|none|1|cell|0|0.0,128.23728177188482,101.38993488475225,,서술,L1,,False
+Tibet_LGD|x,wei,blk5,P0@wei|none|1|cell|0|0.0,102.20194991770306,90.41230362393313,,서술,L1,,False
+Tibet_LGD|x,wei,blk5,P1|none|1|cell|10|0.0,149.9732857460067,119.11680967513823,,서술,L1,,False
+Tibet_LGD|x,wei,blk5,P1@wei|none|1|cell|10|0.0,98.46182514105207,91.87054435045225,,서술,L1,,False
+Tibet_LGD|x,wei,blk5,R1|catboost_lo|1|cell|10|0.25,129.08330205523345,103.44483352341906,,서술,L1,,False
+Tibet_LGD|x,wei,blk5,P1|none|1|cell|-1|0.0,110.91360037851139,98.30428835454059,,서술,L1,,False
+Tibet_LGD|x,wei,blk5,P1@wei|none|1|cell|-1|0.0,97.75606816116877,94.09526687486012,,서술,L1,,False
+Tibet_LGD|x,wei,blk5,R1|catboost_lo|1|cell|-1|0.25,101.47596974679558,91.55114033545912,,서술,L1,,False
+Tibet_LGD|x,wei,blk25,P0|none|1|cell|0|0.0,240.28192420941792,212.23965945127406,,서술,L1,,False
+Tibet_LGD|x,wei,blk25,B:wei_raw|none|1|cell|0|0.0,98.67837496182605,96.68943980743073,,서술,L1,,False
+Tibet_LGD|x,wei,blk25,B:wei_aff|none|1|cell|0|0.0,125.9274236837696,98.48053154010184,,서술,L1,,False
+Tibet_LGD|x,wei,blk25,P0@wei|none|1|cell|0|0.0,102.2016676810686,89.60648094506412,,서술,L1,,False
+Tibet_LGD|x,wei,blk25,P1|none|1|cell|10|0.0,145.9097552015541,115.12161568351439,,서술,L1,,False
+Tibet_LGD|x,wei,blk25,P1@wei|none|1|cell|10|0.0,99.51223262008341,92.04600238011754,,서술,L1,,False
+Tibet_LGD|x,wei,blk25,R1|catboost_lo|1|cell|10|0.25,126.26175882265098,100.3205544366983,,서술,L1,,False
+Tibet_LGD|x,wei,blk25,P1|none|1|cell|-1|0.0,110.54574475905599,97.12889395745508,,서술,L1,,False
+Tibet_LGD|x,wei,blk25,P1@wei|none|1|cell|-1|0.0,99.21772003383697,94.64456659269425,,서술,L1,,False
+Tibet_LGD|x,wei,blk25,R1|catboost_lo|1|cell|-1|0.25,101.58838657902531,90.8138631438822,,서술,L1,,False
+Tibet_LGD|x,weis,none,P0|none|1|cell|0|0.0,244.5110087202488,216.42712392917196,,서술,L1,,False
+Tibet_LGD|x,weis,none,B:weis_raw|none|1|cell|0|0.0,94.9945353617273,95.54064012186953,,서술,L1,,False
+Tibet_LGD|x,weis,none,B:weis_aff|none|1|cell|0|0.0,114.57512082875341,94.76051466519593,,서술,L1,,False
+Tibet_LGD|x,weis,none,P0@weis|none|1|cell|0|0.0,99.41551246822533,90.14716812056375,,서술,L1,,False
+Tibet_LGD|x,weis,none,P1|none|1|cell|10|0.0,148.13661476010333,118.6791813601362,,서술,L1,,False
+Tibet_LGD|x,weis,none,P1@weis|none|1|cell|10|0.0,96.19288196267867,91.90479100889067,,서술,L1,,False
+Tibet_LGD|x,weis,none,R1|catboost_lo|1|cell|10|0.25,127.23222425413545,102.85591305223029,,서술,L1,,False
+Tibet_LGD|x,weis,none,P1|none|1|cell|-1|0.0,108.86136174077119,97.23797000956984,,서술,L1,,False
+Tibet_LGD|x,weis,none,P1@weis|none|1|cell|-1|0.0,95.78694933834367,94.57248352991205,,서술,L1,,False
+Tibet_LGD|x,weis,none,R1|catboost_lo|1|cell|-1|0.25,99.78414999047405,90.73102033991911,,서술,L1,,False
+Tibet_LGD|x,weis,blk5,P0|none|1|cell|0|0.0,246.19425640430495,216.85982897530775,,서술,L1,,False
+Tibet_LGD|x,weis,blk5,B:weis_raw|none|1|cell|0|0.0,95.7281895270349,95.89864254296143,,서술,L1,,False
+Tibet_LGD|x,weis,blk5,B:weis_aff|none|1|cell|0|0.0,116.57880793035311,95.58172185321835,,서술,L1,,False
+Tibet_LGD|x,weis,blk5,P0@weis|none|1|cell|0|0.0,101.00474526742249,90.8964304317265,,서술,L1,,False
+Tibet_LGD|x,weis,blk5,P1|none|1|cell|10|0.0,149.9732857460067,119.11680967513823,,서술,L1,,False
+Tibet_LGD|x,weis,blk5,P1@weis|none|1|cell|10|0.0,97.28306386095001,92.40779344757998,,서술,L1,,False
+Tibet_LGD|x,weis,blk5,R1|catboost_lo|1|cell|10|0.25,129.08330205523345,103.44483352341906,,서술,L1,,False
+Tibet_LGD|x,weis,blk5,P1|none|1|cell|-1|0.0,110.91360037851139,98.30428835454059,,서술,L1,,False
+Tibet_LGD|x,weis,blk5,P1@weis|none|1|cell|-1|0.0,96.54680390655525,94.93939895155452,,서술,L1,,False
+Tibet_LGD|x,weis,blk5,R1|catboost_lo|1|cell|-1|0.25,101.47596974679558,91.55114033545912,,서술,L1,,False
+Tibet_LGD|x,weis,blk25,P0|none|1|cell|0|0.0,240.28192420941792,212.23965945127406,,서술,L1,,False
+Tibet_LGD|x,weis,blk25,B:weis_raw|none|1|cell|0|0.0,97.74400535815528,97.0768190853237,,서술,L1,,False
+Tibet_LGD|x,weis,blk25,B:weis_aff|none|1|cell|0|0.0,115.39742625897637,93.59464752037427,,서술,L1,,False
+Tibet_LGD|x,weis,blk25,P0@weis|none|1|cell|0|0.0,101.50710259304182,90.48243154992603,,서술,L1,,False
+Tibet_LGD|x,weis,blk25,P1|none|1|cell|10|0.0,145.9097552015541,115.12161568351439,,서술,L1,,False
+Tibet_LGD|x,weis,blk25,P1@weis|none|1|cell|10|0.0,98.77518436937517,92.96423042873843,,서술,L1,,False
+Tibet_LGD|x,weis,blk25,R1|catboost_lo|1|cell|10|0.25,126.26175882265098,100.3205544366983,,서술,L1,,False
+Tibet_LGD|x,weis,blk25,P1|none|1|cell|-1|0.0,110.54574475905599,97.12889395745508,,서술,L1,,False
+Tibet_LGD|x,weis,blk25,P1@weis|none|1|cell|-1|0.0,98.47699943952344,95.91743384031288,,서술,L1,,False
+Tibet_LGD|x,weis,blk25,R1|catboost_lo|1|cell|-1|0.25,101.58838657902531,90.8138631438822,,서술,L1,,False
+Tibet_LGD|x,aalto,none,P0|none|1|cell|0|0.0,244.5110087202488,216.42712392917196,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,none,B:aalto_raw|none|1|cell|0|0.0,95.55536317430858,97.42675985280563,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,none,B:aalto_aff|none|1|cell|0|0.0,292.8678560324965,263.69641930915543,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,none,P0@aalto|none|1|cell|0|0.0,112.82673089869381,101.11873037149766,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,none,P1|none|1|cell|10|0.0,148.13661476010333,118.6791813601362,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,none,P1@aalto|none|1|cell|10|0.0,97.81686641950674,92.52827369151667,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,none,R1|catboost_lo|1|cell|10|0.25,127.23222425413545,102.85591305223029,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,none,P1|none|1|cell|-1|0.0,108.86136174077119,97.23797000956984,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,none,P1@aalto|none|1|cell|-1|0.0,93.51106123030308,91.11896725554445,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,none,R1|catboost_lo|1|cell|-1|0.25,99.78414999047405,90.73102033991911,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk5,P0|none|1|cell|0|0.0,242.27192472694747,214.865446445769,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk5,B:aalto_raw|none|1|cell|0|0.0,97.21377755046232,98.00018139140407,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk5,B:aalto_aff|none|1|cell|0|0.0,289.79545229290363,262.3679381560256,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk5,P0@aalto|none|1|cell|0|0.0,112.40187532569234,99.72824090555214,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk5,P1|none|1|cell|10|0.0,147.95745509421144,117.30048577416895,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk5,P1@aalto|none|1|cell|10|0.0,98.36888706522345,91.89906145547313,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk5,R1|catboost_lo|1|cell|10|0.25,127.94979099548095,101.81193856936417,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk5,P1|none|1|cell|-1|0.0,110.82684289730219,96.9583322067089,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk5,P1@aalto|none|1|cell|-1|0.0,94.75275547699314,90.91915634546092,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk5,R1|catboost_lo|1|cell|-1|0.25,101.53697715920944,90.41502524533715,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk25,P0|none|1|cell|0|0.0,241.96091847993358,213.35816228149625,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk25,B:aalto_raw|none|1|cell|0|0.0,94.94979974078596,98.95182836824117,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk25,B:aalto_aff|none|1|cell|0|0.0,289.9215161000303,260.9092150154083,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk25,P0@aalto|none|1|cell|0|0.0,110.97774114922038,99.22865421631762,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk25,P1|none|1|cell|10|0.0,147.02877282101318,115.62467831316539,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk25,P1@aalto|none|1|cell|10|0.0,96.40659386639645,92.15255667879856,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk25,R1|catboost_lo|1|cell|10|0.25,126.96391021226513,100.60491125235498,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk25,P1|none|1|cell|-1|0.0,109.7292926745383,96.55030369997368,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk25,P1@aalto|none|1|cell|-1|0.0,92.69694425732783,91.53615154712297,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,aalto,blk25,R1|catboost_lo|1|cell|-1|0.25,100.58896055712859,90.52931575737853,,서술(SI 전용),L2,누설 점검 불가(대리 마스크),True
+Tibet_LGD|x,yk,none,P0|none|1|cell|0|0.0,244.5110087202488,216.42712392917196,,서술,L0,,False
+Tibet_LGD|x,yk,none,P1|none|1|cell|10|0.0,148.13661476010333,118.6791813601362,,서술,L0,,False
+Tibet_LGD|x,yk,none,R1|catboost_lo|1|cell|10|0.25,127.23222425413545,102.85591305223029,,서술,L0,,False
+Tibet_LGD|x,yk,none,P1|none|1|cell|-1|0.0,108.86136174077119,97.23797000956984,,서술,L0,,False
+Tibet_LGD|x,yk,none,R1|catboost_lo|1|cell|-1|0.25,99.78414999047405,90.73102033991911,,서술,L0,,False

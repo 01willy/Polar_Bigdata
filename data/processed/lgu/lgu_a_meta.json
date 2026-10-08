@@ -1,0 +1,367 @@
+{
+ "tag": "lgua",
+ "nboot": 1000,
+ "args": {
+  "part": "cpu",
+  "workers": 2,
+  "threads": 4,
+  "gpus": "",
+  "epochs": 100,
+  "kappa": 10.0,
+  "buffer_km": 100.0,
+  "min_cal_cells": 20,
+  "nu": 4.0,
+  "s_tau": 0.5,
+  "cap_cells": 100,
+  "clamp": 2.0,
+  "TAG": "lgua",
+  "SFX": "",
+  "SPLITS": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "N_GRID": [
+   0,
+   3,
+   10,
+   40,
+   160
+  ],
+  "DRAWS": 5,
+  "FLOW_SEEDS": [
+   0,
+   1,
+   2
+  ],
+  "CB_SEEDS": [
+   0,
+   1
+  ],
+  "RUNGS": [
+   "P0",
+   "P1",
+   "B4",
+   "hier2@h37",
+   "wconf",
+   "i0",
+   "i",
+   "ii",
+   "iii",
+   "iii+c",
+   "iv"
+  ],
+  "SENS": [
+   "t3",
+   "phys",
+   "stau025",
+   "stau100",
+   "w_cell",
+   "w_beq",
+   "sig_pool",
+   "probe_sig",
+   "noearly"
+  ],
+  "TARGETS": [
+   [
+    "Lena",
+    "x"
+   ],
+   [
+    "Canada",
+    "x"
+   ],
+   [
+    "Russia_W",
+    "x"
+   ],
+   [
+    "Russia_E",
+    "x"
+   ],
+   [
+    "Alaska",
+    "x"
+   ],
+   [
+    "AL-1",
+    "i"
+   ],
+   [
+    "AL-2",
+    "i"
+   ],
+   [
+    "AL-3",
+    "i"
+   ],
+   [
+    "AL-4",
+    "i"
+   ],
+   [
+    "AL-5",
+    "i"
+   ],
+   [
+    "AL-6",
+    "i"
+   ],
+   [
+    "CA-2",
+    "i"
+   ],
+   [
+    "CA-3",
+    "i"
+   ],
+   [
+    "LE-1",
+    "i"
+   ],
+   [
+    "LE-2",
+    "i"
+   ]
+  ],
+  "GPUS": [],
+  "OUT": "/home/willy010313/Polar_Bigdata/data/processed/lgu",
+  "PROC": "/home/willy010313/Polar_Bigdata/data/processed",
+  "SHARDS": "/home/willy010313/Polar_Bigdata/data/processed/lgu/shards",
+  "SUBMAP": "/home/willy010313/Polar_Bigdata/data/processed/lg_subregion_map_v1.csv",
+  "FLAGS": "/home/willy010313/Polar_Bigdata/data/processed/lgx_label_flags_v1.csv"
+ },
+ "fixed_deviation": {},
+ "code_sha": "ad2722e812ff",
+ "code_sha_common": "88ecdc5e7f60",
+ "code_sha_h40": "ffd0b3a76d36",
+ "inputs": {
+  "fidelity_base_v3.csv": "214abe489347",
+  "e5_soil_tdd_v3.csv": "f8c4b4f0b505",
+  "lg_subregion_map_v1.csv": "f79eeb64564c",
+  "lgx_label_flags_v1.csv": "d1d453052b46"
+ },
+ "n_targets": 15,
+ "n_failed": 0,
+ "gate": {
+  "Lena:x": {
+   "gate_pass": true,
+   "gate_state": "통과"
+  },
+  "Canada:x": {
+   "gate_pass": false,
+   "gate_state": "미통과"
+  },
+  "Russia_W:x": {
+   "gate_pass": true,
+   "gate_state": "통과"
+  },
+  "Russia_E:x": {
+   "gate_pass": false,
+   "gate_state": "미통과"
+  },
+  "Alaska:x": {
+   "gate_pass": false,
+   "gate_state": "미통과"
+  }
+ },
+ "boot": {
+  "Lena:x": {
+   "target": "Lena",
+   "mode": "x",
+   "nboot": 1000,
+   "splits": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "n_nan_rep": 0,
+   "sec": 24.3,
+   "cfg_hash": "55c2086e6ab2",
+   "inputs": {
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "cells_sha": {
+     "1": "9a14105eea9f",
+     "2": "9d279f0c1524",
+     "3": "7cd865ffb0d2",
+     "4": "613b27d6a724",
+     "5": "f6527d499a88"
+    },
+    "emu_sha": "9f162d9a3b86",
+    "code_sha": "ad2722e812ff",
+    "code_sha_common": "88ecdc5e7f60",
+    "code_sha_h40": "ffd0b3a76d36"
+   },
+   "code_sha": "ad2722e812ff",
+   "code_sha_common": "88ecdc5e7f60",
+   "code_sha_h40": "ffd0b3a76d36"
+  },
+  "Canada:x": {
+   "target": "Canada",
+   "mode": "x",
+   "nboot": 1000,
+   "splits": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "n_nan_rep": 0,
+   "sec": 28.9,
+   "cfg_hash": "55c2086e6ab2",
+   "inputs": {
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "cells_sha": {
+     "1": "09b2f94b50f0",
+     "2": "63f258906715",
+     "3": "48183a334c37",
+     "4": "f7b4892a3af3",
+     "5": "12ad1730a030"
+    },
+    "emu_sha": "87a4f8894b7c",
+    "code_sha": "ad2722e812ff",
+    "code_sha_common": "88ecdc5e7f60",
+    "code_sha_h40": "ffd0b3a76d36"
+   },
+   "code_sha": "ad2722e812ff",
+   "code_sha_common": "88ecdc5e7f60",
+   "code_sha_h40": "ffd0b3a76d36"
+  },
+  "Russia_W:x": {
+   "target": "Russia_W",
+   "mode": "x",
+   "nboot": 1000,
+   "splits": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "n_nan_rep": 0,
+   "sec": 13.4,
+   "cfg_hash": "55c2086e6ab2",
+   "inputs": {
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "cells_sha": {
+     "1": "98a9f485d4e7",
+     "2": "b5b93dd3f9b7",
+     "3": "2371ef428f25",
+     "4": "556f8256e956",
+     "5": "6e4d6f596da4"
+    },
+    "emu_sha": "d9b271739ded",
+    "code_sha": "ad2722e812ff",
+    "code_sha_common": "88ecdc5e7f60",
+    "code_sha_h40": "ffd0b3a76d36"
+   },
+   "code_sha": "ad2722e812ff",
+   "code_sha_common": "88ecdc5e7f60",
+   "code_sha_h40": "ffd0b3a76d36"
+  },
+  "Russia_E:x": {
+   "target": "Russia_E",
+   "mode": "x",
+   "nboot": 1000,
+   "splits": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "n_nan_rep": 0,
+   "sec": 13.5,
+   "cfg_hash": "55c2086e6ab2",
+   "inputs": {
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "cells_sha": {
+     "1": "372ae8883249",
+     "2": "c8bb0d1e1b60",
+     "3": "754751f2d8dc",
+     "4": "5e74d66cfab8",
+     "5": "eff723190c19"
+    },
+    "emu_sha": "d9f050d5eb54",
+    "code_sha": "ad2722e812ff",
+    "code_sha_common": "88ecdc5e7f60",
+    "code_sha_h40": "ffd0b3a76d36"
+   },
+   "code_sha": "ad2722e812ff",
+   "code_sha_common": "88ecdc5e7f60",
+   "code_sha_h40": "ffd0b3a76d36"
+  },
+  "Alaska:x": {
+   "target": "Alaska",
+   "mode": "x",
+   "nboot": 1000,
+   "splits": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "n_nan_rep": 0,
+   "sec": 29.9,
+   "cfg_hash": "55c2086e6ab2",
+   "inputs": {
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "cells_sha": {
+     "1": "7fbbd523483c",
+     "2": "58576dabbefb",
+     "3": "8bcd671a6074",
+     "4": "85e441c10258",
+     "5": "a6b0b4d7b027"
+    },
+    "emu_sha": "c3949c8566ec",
+    "code_sha": "ad2722e812ff",
+    "code_sha_common": "88ecdc5e7f60",
+    "code_sha_h40": "ffd0b3a76d36"
+   },
+   "code_sha": "ad2722e812ff",
+   "code_sha_common": "88ecdc5e7f60",
+   "code_sha_h40": "ffd0b3a76d36"
+  }
+ },
+ "blind": {
+  "A": "맹검(LG·LGX 결과 열람 전 등록)",
+  "B1": "비맹검"
+ },
+ "elapsed_s": 174.9
+}

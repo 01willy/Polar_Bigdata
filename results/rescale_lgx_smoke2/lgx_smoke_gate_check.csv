@@ -1,0 +1,4 @@
+target,mode,split,ref,status,n_keys,n_keys_phys,n_keys_ml,max_diff_phys,max_diff_ml,pass_phys,pass_ml,passed,blocks_equal,code_sha_h40_ref,code_sha_h40_now,worst_key
+AL-3,i,1,lg_smoke__cpu__AL-3__i__s1_blocksse.npz,ok,40,7,33,0.0,0.0,True,True,True,True,ffd0b3a76d36,ffd0b3a76d36,"[""R2"", ""catboost_lo"", ""1"", ""cell"", -1, 0, 0, 1.0]"
+Canada,x,1,lg_smoke__cpu__Canada__x__s1_blocksse.npz,ok,40,7,33,0.0,0.0,True,True,True,True,ffd0b3a76d36,ffd0b3a76d36,"[""R2"", ""catboost_lo"", ""1"", ""cell"", -1, 0, 0, 1.0]"
+Russia_W,x,1,lg_smoke__cpu__Russia_W__x__s1_blocksse.npz,ok,27,5,22,0.0,0.0,True,True,True,True,ffd0b3a76d36,ffd0b3a76d36,"[""R2"", ""catboost_lo"", ""1"", ""cell"", -1, 0, 0, 1.0]"

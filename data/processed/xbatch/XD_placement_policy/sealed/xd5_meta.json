@@ -1,0 +1,21 @@
+{
+ "n_learning_rows": 31800,
+ "tasks": [
+  "AL-1",
+  "AL-2",
+  "AL-3",
+  "AL-4",
+  "AL-5",
+  "AL-6",
+  "Alaska",
+  "CA-2",
+  "CA-3",
+  "LE-1",
+  "LE-2",
+  "Tibet_LGD"
+ ],
+ "created": "2026-10-05 05:37:10",
+ "code_sha256": "b2ef7464df799ee369173345415cfcf9aaa15f981cef200262b993903947d1aa",
+ "gbm_iterations": 800,
+ "gbm_meta": "data/processed/xbatch/XD_placement_policy/policy/s9_gbm_meta.json"
+}

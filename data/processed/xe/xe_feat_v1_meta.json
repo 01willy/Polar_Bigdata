@@ -1,0 +1,262 @@
+{
+ "created": "2026-10-05 01:59:55 +0900",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.5 XE_hires_covariates",
+ "plan_commit": "2678100",
+ "file": "data/processed/xe/xe_feat_v1.csv",
+ "sha256": "b8e49740ccd866579171b837f659611c931519d6fd031ce549c19b0e2efef1be",
+ "n_rows": 17395,
+ "n_by_target": {
+  "Alaska": 13606,
+  "Lena": 3037,
+  "Canada": 752
+ },
+ "stage": "stage1",
+ "groups": {
+  "H0": [
+   "twi",
+   "twi_sd",
+   "flowacc_log",
+   "curv_plan",
+   "curv_prof",
+   "rel_1km",
+   "water_occ_1km",
+   "water_occ_5km",
+   "water_dist_km",
+   "treecover_1km"
+  ],
+  "T2": [
+   "twi_pt",
+   "tpi_90",
+   "tpi_270",
+   "slope_90",
+   "gsw_occ_pt",
+   "treecover_pt"
+  ],
+  "M": [
+   "ad_slope_30",
+   "ad_curv_30",
+   "ad_tpi_50",
+   "ad_tpi_150",
+   "ad_rough_50"
+  ],
+  "O": [
+   "sg250_soc_0_5",
+   "sg250_soc_5_15",
+   "sg250_soc_15_30",
+   "sg250_bdod_5_15",
+   "sg250_clay_5_15",
+   "sg250_sand_5_15",
+   "sg250_silt_5_15",
+   "ncscd_soc_0_30",
+   "ncscd_soc_0_100"
+  ],
+  "V": [
+   "ndvi250_jja",
+   "evi250_jja",
+   "ndwi250_jja",
+   "ndvi250_max",
+   "wc_tree",
+   "wc_shrub",
+   "wc_grass",
+   "wc_wetland",
+   "wc_moss",
+   "wc_bare",
+   "wc_water",
+   "cavm_class"
+  ],
+  "S": [
+   "scd500",
+   "snowoff_doy500",
+   "snowon_doy500"
+  ]
+ },
+ "px_cols": {
+  "slope_90": "slope_px",
+  "gsw_occ_pt": "gsw_occ_px",
+  "treecover_pt": "treecover_px",
+  "wc_tree": "wc_tree_px",
+  "wc_shrub": "wc_shrub_px",
+  "wc_grass": "wc_grass_px",
+  "wc_wetland": "wc_wetland_px",
+  "wc_moss": "wc_moss_px",
+  "wc_bare": "wc_bare_px",
+  "wc_water": "wc_water_px",
+  "ad_slope_30": "ad_slope_px",
+  "ad_curv_30": "ad_curv_px"
+ },
+ "cover_cols": {},
+ "parts": {
+  "H0": {
+   "path": "data/processed/xe/parts/xe_H0_v1.csv",
+   "sha256": "547d7369d21ac001eca905c31edd592aa7370744183aa4cdd3730f47ced73d84",
+   "n_rows": 17395,
+   "created": "2026-10-05 01:58:37 +0900",
+   "sources": {
+    "H0": {
+     "path": "data/processed/covariates_ext_v1.csv",
+     "sha256": "527877c957f01299cd57ddfc4fd15d1bd01b7f2d291561ce2509a9ba946e32cf",
+     "n_files": 1,
+     "bytes": 14051991,
+     "latest_mtime": "2026-09-22 11:27:08 +0900"
+    }
+   },
+   "limit": 0
+  },
+  "T2": {
+   "path": "data/processed/xe/parts/xe_T2_v1.csv",
+   "sha256": "2fe3ebf2f260a6a2a6677f435f16fefe0dd9904e7306066e49b9b9fd356708e5",
+   "n_rows": 17395,
+   "created": "2026-10-05 01:59:54 +0900",
+   "sources": {
+    "T2": {
+     "dem": "data/raw/dem",
+     "gsw": "data/raw/gsw",
+     "hansen": "data/raw/hansen",
+     "n_files": 127,
+     "bytes": 2245775663,
+     "latest_mtime": "2026-09-30 03:15:57 +0900"
+    }
+   },
+   "limit": 0
+  }
+ },
+ "late_sources": {},
+ "group_decisions": {
+  "Alaska": {
+   "H0": {
+    "finite_frac": 1.0,
+    "included": true,
+    "n_rows": 13606,
+    "reason": ""
+   },
+   "T2": {
+    "finite_frac": 1.0,
+    "included": true,
+    "n_rows": 13606,
+    "reason": ""
+   },
+   "M": {
+    "finite_frac": 0.0,
+    "included": false,
+    "n_rows": 13606,
+    "reason": "유한값 비율 0.000 < 0.90"
+   },
+   "O": {
+    "finite_frac": 0.0,
+    "included": false,
+    "n_rows": 13606,
+    "reason": "유한값 비율 0.000 < 0.90"
+   },
+   "V": {
+    "finite_frac": 0.0,
+    "included": false,
+    "n_rows": 13606,
+    "reason": "유한값 비율 0.000 < 0.90"
+   },
+   "S": {
+    "finite_frac": 0.0,
+    "included": false,
+    "n_rows": 13606,
+    "reason": "유한값 비율 0.000 < 0.90"
+   }
+  },
+  "Lena": {
+   "H0": {
+    "finite_frac": 1.0,
+    "included": true,
+    "n_rows": 3037,
+    "reason": ""
+   },
+   "T2": {
+    "finite_frac": 1.0,
+    "included": true,
+    "n_rows": 3037,
+    "reason": ""
+   },
+   "M": {
+    "finite_frac": 0.0,
+    "included": false,
+    "n_rows": 3037,
+    "reason": "유한값 비율 0.000 < 0.90"
+   },
+   "O": {
+    "finite_frac": 0.0,
+    "included": false,
+    "n_rows": 3037,
+    "reason": "유한값 비율 0.000 < 0.90"
+   },
+   "V": {
+    "finite_frac": 0.0,
+    "included": false,
+    "n_rows": 3037,
+    "reason": "유한값 비율 0.000 < 0.90"
+   },
+   "S": {
+    "finite_frac": 0.0,
+    "included": false,
+    "n_rows": 3037,
+    "reason": "유한값 비율 0.000 < 0.90"
+   }
+  },
+  "Canada": {
+   "H0": {
+    "finite_frac": 0.998404,
+    "included": true,
+    "n_rows": 752,
+    "reason": ""
+   },
+   "T2": {
+    "finite_frac": 0.99867,
+    "included": true,
+    "n_rows": 752,
+    "reason": ""
+   },
+   "M": {
+    "finite_frac": 0.0,
+    "included": false,
+    "n_rows": 752,
+    "reason": "유한값 비율 0.000 < 0.90"
+   },
+   "O": {
+    "finite_frac": 0.0,
+    "included": false,
+    "n_rows": 752,
+    "reason": "유한값 비율 0.000 < 0.90"
+   },
+   "V": {
+    "finite_frac": 0.0,
+    "included": false,
+    "n_rows": 752,
+    "reason": "유한값 비율 0.000 < 0.90"
+   },
+   "S": {
+    "finite_frac": 0.0,
+    "included": false,
+    "n_rows": 752,
+    "reason": "유한값 비율 0.000 < 0.90"
+   }
+  }
+ },
+ "group_cols_sha256": {
+  "H0": "ee747648d7838d670b8afe66d797fc80ac0469d398b7681b1b8a3f43bbf81fa6",
+  "T2": "dd1d4bcd23cf25497a7bb9c043696a98a065109d70090dec3c60992e41002606",
+  "M": "a189f75813f0520e0a635281c5e51cef06359730caef843d0e8462779731ee72",
+  "O": "5e4f2d1a5d7067dfe6ded37fca8fa2756ac5f2c27d8087bdd708e731bac41ba8",
+  "V": "150313180a63aee3257218adf3fe65c11159f9586e3b45e9296f4022bea70f86",
+  "S": "bda5d98706951ac3b171eb5bea9d14e4f9ea60ec1d0c121488c581ac61f1911d"
+ },
+ "deadlines": {
+  "O": "2026-10-07 14:22:39 +0900",
+  "M": "2026-10-07 14:22:39 +0900",
+  "V_wc": "2026-10-07 14:22:39 +0900",
+  "V_cavm": "2026-10-07 14:22:39 +0900",
+  "V_mod13q1": "2026-10-08 14:22:39 +0900",
+  "S": "2026-10-08 14:22:39 +0900",
+  "final": "2026-10-08 18:22:39 +0900"
+ },
+ "finite_min": 0.9,
+ "finite_rule": "군의 유한값 비율 = 대상 행 × 군 열 칸 가운데 유한한 칸의 비율. 90 % 미만이면 그 군을 그 대상에서 뺀다(계획 2.5)",
+ "limited": false,
+ "finalized": false,
+ "max_rss_mb": 360.3
+}

@@ -1,0 +1,9 @@
+exp,target,mode,split,variant,elapsed_s,est_s,ratio,n_fit,kind,proj_cpu_h
+wf6,Alaska,r,1.0,,35.6,48.967999999999996,0.7270053912759354,230.0,precheck_unit,
+wf7,Alaska,x,1.0,,18.9,28.284,0.6682223165040305,128.0,precheck_unit,
+wf7,Lena,x,1.0,,31.7,59.316,0.534425787308652,128.0,precheck_unit,
+wf8,Alaska,x,1.0,S1,4.5,4.169,1.079395538498441,20.0,precheck_unit,
+wf8,Alaska,x,1.0,S4,4.5,4.169,1.079395538498441,20.0,precheck_unit,
+wf6,,,,,,2413.5,0.7270053912759354,,projection,0.4873965310679084
+wf7,,,,,,4465.54,0.5776255707762556,,projection,0.7165028031456112
+wf8,,,,,,502.11,1.079395538498441,,projection,0.15054869273207006

@@ -1,0 +1,16 @@
+alias,family,split,dup_of,mirror_of,n_A,nb_A,n_eval,nb_eval,valid,max_block_share,status,ref_split,min_eval_blocks,n_valid_splits,n_unique_splits
+NAtlantic~lic~v5,1-5,1,-1,-1,16,6,15,3,True,0.8667,,,,,
+NAtlantic~lic~v5,1-5,2,-1,-1,16,3,14,6,True,0.6429,,,,,
+NAtlantic~lic~v5,1-5,3,-1,-1,16,7,16,3,True,0.8125,,,,,
+NAtlantic~lic~v5,1-5,4,-1,-1,18,8,14,2,True,0.9286,,,,,
+NAtlantic~lic~v5,1-5,5,-1,-1,16,7,16,3,True,0.8125,,,,,
+NAtlantic~lic~v5,201-210,201,-1,-1,18,4,13,5,True,,ok,-1.0,2.0,8.0,9.0
+NAtlantic~lic~v5,201-210,202,-1,-1,17,5,13,4,True,,ok,-1.0,2.0,8.0,9.0
+NAtlantic~lic~v5,201-210,203,-1,-1,16,6,15,3,True,,ok,-1.0,2.0,8.0,9.0
+NAtlantic~lic~v5,201-210,204,-1,-1,16,3,16,7,True,,ok,-1.0,2.0,8.0,9.0
+NAtlantic~lic~v5,201-210,205,-1,-1,21,7,10,2,True,,ok,-1.0,2.0,8.0,9.0
+NAtlantic~lic~v5,201-210,206,-1,-1,20,6,12,4,True,,ok,-1.0,2.0,8.0,9.0
+NAtlantic~lic~v5,201-210,207,-1,-1,17,7,14,2,True,,ok,-1.0,2.0,8.0,9.0
+NAtlantic~lic~v5,201-210,208,-1,-1,21,8,9,1,False,,nb_eval<2,-1.0,2.0,8.0,9.0
+NAtlantic~lic~v5,201-210,209,-1,-1,16,4,13,4,True,,ok,-1.0,2.0,8.0,9.0
+NAtlantic~lic~v5,201-210,210,-1,2,16,7,15,2,False,,prior_mirror,2.0,2.0,8.0,9.0

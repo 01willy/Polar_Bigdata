@@ -1,0 +1,207 @@
+{
+ "stage": "XE-e",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.5 XE_hires_covariates XE-e",
+ "plan_commit": "2678100",
+ "tag": "xe_e",
+ "targets": [
+  "Alaska",
+  "Canada"
+ ],
+ "seeds": [
+  0,
+  1
+ ],
+ "cb_iters": 200,
+ "threads": 4,
+ "cv_k": 5,
+ "learners": [
+  "ols",
+  "catboost_lo"
+ ],
+ "sets": {
+  "main": [
+   "vwc_shallow",
+   "vwc_deep"
+  ],
+  "gpr": [
+   "vwc_gpr"
+  ]
+ },
+ "subsets": {
+  "registered": "등록 부분 집합(15 m 안에 VWC 위치가 있는 셀 전체. 층 없는 위치만 있는 셀은 예측 변수 결측)",
+  "finite": "민감도(그 묶음의 예측 변수가 유한한 셀만)"
+ },
+ "main_row": "feature_set main, subset registered(그 밖은 민감도)",
+ "subset_rule": "등록 부분 집합 소속 = 15 m 안에 VWC 위치가 있는 셀(n_loc_any > 0, 층 없는 위치 포함). 설명 비율은 2셀 이상 격자 묶음 셀에서 낸다(한 셀 묶음의 격자 안 잔차는 0). counts 의 <대상>|any|member 가 계획 2.5 의 셀·블록 수와 대조하는 값이다",
+ "registered_counts": {
+  "Alaska": [
+   2468,
+   31
+  ],
+  "Canada": [
+   602,
+   15
+  ]
+ },
+ "vwc_file": "/home/willy010313/Polar_Bigdata/data/processed/xbatch/XE_hires_covariates/inputs/xe_vwc_v1.csv",
+ "vwc_sha256": "052b63fde06e7a3975c35d3ab7de5a0297aa6afb03a9a0874235e62ab041337a",
+ "vwc_meta": {
+  "file": "data/processed/xbatch/XE_hires_covariates/inputs/xe_vwc_v1.csv",
+  "sha256": "052b63fde06e7a3975c35d3ab7de5a0297aa6afb03a9a0874235e62ab041337a",
+  "source": "/home/willy010313/Polar_Bigdata/data/raw/above/ABoVE_Soil_ThawDepth_Moisture_Validation_V2.csv",
+  "source_sha256": "d35333c6499d34a866cdf8fd0c50431edec40fad7becc31093166bfbfa44a27f",
+  "source_cols": [
+   "latitude",
+   "longitude",
+   "date",
+   "ALT_instrument",
+   "VWC_instrument",
+   "depth_bottom",
+   "VWC"
+  ],
+  "coord_cols": [
+   "loc_id",
+   "lat",
+   "lon",
+   "region",
+   "block"
+  ],
+  "radius_m": 15.0,
+  "crs": "EPSG:3338",
+  "shallow_max_cm": 12.0,
+  "n_vwc_rows": 179378,
+  "n_vwc_rows_no_layer": 6099,
+  "n_locations": 2427,
+  "n_locations_layered": 2416,
+  "counts": {
+   "Alaska|any": {
+    "cells": 2468,
+    "blocks": 31,
+    "registered": [
+     2468,
+     31
+    ]
+   },
+   "Alaska|main": {
+    "cells": 1331,
+    "blocks": 27
+   },
+   "Alaska|gpr": {
+    "cells": 1470,
+    "blocks": 17
+   },
+   "Canada|any": {
+    "cells": 602,
+    "blocks": 15,
+    "registered": [
+     602,
+     15
+    ]
+   },
+   "Canada|main": {
+    "cells": 598,
+    "blocks": 15
+   },
+   "Canada|gpr": {
+    "cells": 0,
+    "blocks": 0
+   }
+  },
+  "created": "2026-10-04 21:17:17",
+  "rules": {
+   "subset": "등록 부분 집합 = 15 m 안에 VWC 위치(층 없는 행 포함)가 있는 라벨 셀(n_loc_any > 0). 설명 비율은 그 가운데 2셀 이상 격자 묶음 셀에서 낸다(한 셀 묶음의 격자 안 잔차는 0). 계획 2.5 의 셀·블록 수(알래스카 2,468·31, 캐나다 602·15)는 counts 의 <대상>|any 와 대조한다",
+   "layers": "GPR 기기 행 = gpr(민감도). 그 밖(기기 미표기 포함): 측정 하단 0 < d ≤ 12 cm = shallow, d > 12 cm = deep, 하단 결측은 층 없음(예측 변수 결측, 소속에는 센다)",
+   "campaign": "같은 위치(소수 4자리 위경도)에서 ALT 를 잰 해의 VWC 행이 있으면 그 행만, 없으면 모든 행",
+   "aggregate": "위치·층·기기 평균 → 기기 평균의 평균 → 셀 반경 15 m 안 위치 값의 평균",
+   "plan": "계획 2.5 XE-e, 구현 기록 6절·검토 반영"
+  }
+ },
+ "counts": {
+  "Alaska|any|member": {
+   "cells": 2468,
+   "blocks": 31,
+   "cells_multi": 2466,
+   "blocks_multi": 31,
+   "registered": [
+    2468,
+    31
+   ],
+   "eval_cells": 13606,
+   "multi_cells": 13533
+  },
+  "Alaska|main|registered": {
+   "cells": 2466,
+   "blocks": 31,
+   "cells_finite": 1329,
+   "eval_cells": 13606,
+   "multi_cells": 13533
+  },
+  "Alaska|main|finite": {
+   "cells": 1329,
+   "blocks": 27,
+   "cells_finite": 1329,
+   "eval_cells": 13606,
+   "multi_cells": 13533
+  },
+  "Alaska|gpr|registered": {
+   "cells": 2466,
+   "blocks": 31,
+   "cells_finite": 1470,
+   "eval_cells": 13606,
+   "multi_cells": 13533
+  },
+  "Alaska|gpr|finite": {
+   "cells": 1470,
+   "blocks": 17,
+   "cells_finite": 1470,
+   "eval_cells": 13606,
+   "multi_cells": 13533
+  },
+  "Canada|any|member": {
+   "cells": 602,
+   "blocks": 15,
+   "cells_multi": 599,
+   "blocks_multi": 15,
+   "registered": [
+    602,
+    15
+   ],
+   "eval_cells": 747,
+   "multi_cells": 723
+  },
+  "Canada|main|registered": {
+   "cells": 599,
+   "blocks": 15,
+   "cells_finite": 595,
+   "eval_cells": 747,
+   "multi_cells": 723
+  },
+  "Canada|main|finite": {
+   "cells": 595,
+   "blocks": 15,
+   "cells_finite": 595,
+   "eval_cells": 747,
+   "multi_cells": 723
+  },
+  "Canada|gpr|registered": {
+   "cells": 599,
+   "blocks": 15,
+   "cells_finite": 0,
+   "eval_cells": 747,
+   "multi_cells": 723
+  },
+  "Canada|gpr|finite": {
+   "cells": 0,
+   "blocks": 0,
+   "cells_finite": 0,
+   "eval_cells": 747,
+   "multi_cells": 723
+  }
+ },
+ "smoke": false,
+ "elapsed_s": 7.7,
+ "max_rss_mb": 284.5,
+ "residual": "P1 격자 안 잔차 = y − ȳ_g(격자 묶음 (블록, 기온 √TDD), 채점 가능 셀 전체, E1 과 무관)",
+ "ratio": "1 − Σ(e − ê)²/Σe²(셀 가중, 블록 교차검증 묶음 밖 예측)",
+ "reading_rule": "xh·SI 표와 같은 시점(R3 회수 뒤 재현 관문 통과 뒤)에 연다(구현 기록 6절)"
+}

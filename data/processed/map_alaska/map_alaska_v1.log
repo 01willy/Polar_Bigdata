@@ -1,0 +1,6 @@
+[data] Alaska 라벨 13,606셀 · 블록 74 · E0 1.5046 · 원천 {'n_src': 3860, 'n_src_parent': 0, 'frac_src_parent': 0.0, 'n_parent_excluded': 0, 'n_buffer_excluded': 1}
+[grid] 899,633셀 · 표시 858,517 · 읽기 8.3s
+[cv] 블록 5겹 · RMSE R1 13.80 · P1 14.30 cm · q90 20.15 cm · λ 겹별 [0.5, 0.5, 0.5, 0.5, 0.5] · 11.8s
+[fit] E_ls 1.6167 · E_n 1.6166 · λ 0.5 (K 5) · 2.8s
+[pred] /home/willy010313/Polar_Bigdata/data/processed/map_alaska/alaska_pred_v1.csv.gz · 셀 899,633 · 표시 858,517 · 외삽 표시 비율 0.732 · R1 중앙값 55.7 cm
+[done] {'data': 2.5, 'read_grid': 8.3, 'cv': 11.8, 'final_fit': 2.8} · 합계 48s · 최대 RSS 1750 MB

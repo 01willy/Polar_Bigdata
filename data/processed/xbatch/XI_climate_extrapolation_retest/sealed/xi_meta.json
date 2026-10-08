@@ -1,0 +1,118 @@
+{
+ "stage": "XI_climate_extrapolation_retest",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md",
+ "plan_commit": "2678100",
+ "plan_revision": "개정 1",
+ "tag": "xi",
+ "nboot": 10000,
+ "nboot_asked": 10000,
+ "nboot_capped": false,
+ "git_commit": "",
+ "code_sha": "0c82b979ff04",
+ "code_sha_core": "4f5c510a8b71",
+ "frozen": {
+  "h40": "7098f59dabe2b73f",
+  "h42": "22e215e435e157be",
+  "h54": "cf9a1f6d0929c892",
+  "h41": "492373e4d37b5ea4"
+ },
+ "n_units": 60,
+ "n_stores": 18,
+ "unit_status": {
+  "partial": 1,
+  "ok": 59
+ },
+ "holm_m": 6,
+ "frac_min": 0.5,
+ "fracs": {
+  "Alaska|warm": {
+   "frac_mean": 1.0,
+   "width_mean": 0.6318548500384977,
+   "n_splits": 10,
+   "extrap_test": true
+  },
+  "Canada|cold": {
+   "frac_mean": 1.0,
+   "width_mean": 2.1987144380436994,
+   "n_splits": 10,
+   "extrap_test": true
+  },
+  "Canada|warm": {
+   "frac_mean": 0.953125,
+   "width_mean": 0.2013481017602629,
+   "n_splits": 10,
+   "extrap_test": true
+  },
+  "Canada~exp~lic|cold": {
+   "frac_mean": 1.0,
+   "width_mean": 1.7430349473641065,
+   "n_splits": 10,
+   "extrap_test": true
+  },
+  "Canada~exp~lic|warm": {
+   "frac_mean": 0.5835748792270532,
+   "width_mean": -0.0021728272893092536,
+   "n_splits": 10,
+   "extrap_test": true
+  },
+  "Canada~exp~lic|warm_trim": {
+   "frac_mean": 1.0,
+   "width_mean": 0.9679792891160091,
+   "n_splits": 10,
+   "extrap_test": true
+  }
+ },
+ "primary": [
+  "Canada~exp~lic",
+  "warm_trim"
+ ],
+ "basic": [
+  "Canada~exp~lic",
+  "warm"
+ ],
+ "hypotheses": {
+  "XI-a": {
+   "verdict": "기각: 열세인 대비가 없다",
+   "verdict_noninf_d10": "",
+   "verdict_basic": "기각: 우세인 대비가 있다(n=전량)",
+   "verdict_basic_noninf_d10": "",
+   "verdict_written": "기각: 열세인 대비가 없다",
+   "both_written": false,
+   "extrap_test_trim": true,
+   "extrap_test_basic": true,
+   "basic_run": true
+  },
+  "XI-b": {
+   "verdict": "기각: 우세인 대비가 없다",
+   "verdict_noninf_d10": "",
+   "verdict_basic": "기각: 열세인 대비가 있다(n=전량)",
+   "verdict_basic_noninf_d10": "",
+   "verdict_written": "기각: 우세인 대비가 없다",
+   "both_written": false,
+   "extrap_test_trim": true,
+   "extrap_test_basic": true,
+   "basic_run": true
+  },
+  "XI-c": {
+   "verdict": "지지: 모든 n 에서 두 가중 CI 상한 < 0.5 cm(n=100, n=전량)",
+   "verdict_noninf_d10": "지지: 모든 n 에서 두 가중 CI 상한 < 1 cm(n=100, n=전량)",
+   "verdict_basic": "지지: 모든 n 에서 두 가중 CI 상한 < 0.5 cm(n=100, n=전량)",
+   "verdict_basic_noninf_d10": "지지: 모든 n 에서 두 가중 CI 상한 < 1 cm(n=100, n=전량)",
+   "verdict_written": "지지: 모든 n 에서 두 가중 CI 상한 < 0.5 cm(n=100, n=전량)",
+   "both_written": false,
+   "extrap_test_trim": true,
+   "extrap_test_basic": true,
+   "basic_run": true
+  }
+ },
+ "overall_sentence": "직접 ML(catboost)의 외삽 손실(재보정 Stefan 대비)은 차이를 확인하지 못했다(같은 시기의 따뜻한 블록을 쓴 공간 대용, 외삽 폭 √TDD 차 0.97, n 100). 직접 ML(catboost)의 외삽 손실(재보정 Stefan 대비)은 차이를 확인하지 못했다(같은 시기의 따뜻한 블록을 쓴 공간 대용, 외삽 폭 √TDD 차 0.97(기본 판 -0.00), warm_trim 판 미결정, 기본 판 우세, 약한 쪽으로 씀, n 전량). 재보정 앵커 잔차와 직접 ML 의 외삽 손실 차이는 확인하지 못했다(같은 시기의 따뜻한 블록을 쓴 공간 대용, 외삽 폭 √TDD 차 0.97, n 100). 재보정 앵커 잔차와 직접 ML 의 외삽 손실 차이는 확인하지 못했다(같은 시기의 따뜻한 블록을 쓴 공간 대용, 외삽 폭 √TDD 차 0.97(기본 판 -0.00), warm_trim 판 미결정, 기본 판 열세, 약한 쪽으로 씀, n 전량). 외삽 블록에서 재보정 앵커 잔차(교차검증 λ)는 재보정 Stefan 보다 오차가 2.44 cm 작았다(같은 시기의 따뜻한 블록을 쓴 공간 대용, 외삽 폭 √TDD 차 0.97, n 100). 비열등 기준(두 가중 CI 상한 < 0.5 cm)은 충족이다. 외삽 블록에서 재보정 앵커 잔차(교차검증 λ)는 재보정 Stefan 보다 오차가 2.41 cm 작았다(같은 시기의 따뜻한 블록을 쓴 공간 대용, 외삽 폭 √TDD 차 0.97, n 전량). 비열등 기준(두 가중 CI 상한 < 0.5 cm)은 충족이다.",
+ "summarize_s": 13.8,
+ "rules": {
+  "ep": "h54.region_ep(W·I 저장소 h40.contrast 분포의 같은 번호 차)",
+  "verdict4": "xbatch_core.verdict_cols(δ 0.5·1.0·δ_rel)",
+  "xi_a_b": "xbatch_core.rule3(n {100, 전량})",
+  "xi_c": "h54._ni_text(두 가중 CI 상한 < 0.5 cm)",
+  "frac": "판마다 frac_W_outside_A 분할 평균 < 0.5 → 외삽 시험 아님(xi_tests 의 판정 열도 덮는다)",
+  "weaker": "구현 기록 3절(n 별 4분 판정, XI-c 비열등 상태, 가설 수준 판정)"
+ }
+}

@@ -1,0 +1,5 @@
+item,sub,status,elapsed_s,n_rows,pid,threads,finished
+variogram,Alaska,ok,21.42,48,16986,4,2026-09-30 03:40:25
+icc,Alaska,ok,0.42,4,16989,4,2026-09-30 03:40:04
+proximity,Alaska:x,ok,2.16,56,16989,4,2026-09-30 03:40:06
+sar,Alaska,ok,0.08,14,16989,4,2026-09-30 03:40:06

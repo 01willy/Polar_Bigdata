@@ -1,0 +1,43 @@
+{
+ "created": "2026-10-05 05:20:05",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md@2678100",
+ "algp": {
+  "name": "S1",
+  "source": "모든 후보가 제외되었다(또는 점수 없음): Algorithm P = S1. XC-5b·5c 와 S-XC3 은 시험하지 않음",
+  "is_rand": true,
+  "file": "/home/willy010313/Polar_Bigdata/data/processed/xbatch/XD_placement_policy/selection/algorithm_p_selection.json",
+  "file_sha256": "09b9b184c4db86960575e8f9abbee3b157f1bdd24e1f2ae765aafd954de33103",
+  "xc0": {
+   "chosen": "S1",
+   "reason": "모든 후보가 제외되었다(또는 점수 없음): Algorithm P = S1. XC-5b·5c 와 S-XC3 은 시험하지 않음",
+   "rule": "계획 2.3 Algorithm P 의 고정 규칙",
+   "nboot": 10000,
+   "table_file": "algorithm_p_alaska_table.csv",
+   "script_sha256": "b2ef7464df799ee369173345415cfcf9aaa15f981cef200262b993903947d1aa",
+   "selection_fn_sha256": "7b837ff5af195df67b8980aaeee2b460a1d792a4b7c6a68a673e0aa14e61bac7",
+   "core_sha256": "aba34a3346d86aeb61e923aae8bba11fbe1c88f81c4d47f3cb57b594563ab3a2",
+   "plan_commit": "2678100",
+   "created": "2026-10-05 03:03:36",
+   "table_path": "/home/willy010313/Polar_Bigdata/data/processed/xbatch/XD_placement_policy/selection/algorithm_p_alaska_table.csv",
+   "table_sha256": "8eabb67da8072d69e38b9935c12d6979ea1063cd3add636be68350986989f14d"
+  },
+  "xc0_origin": "rule",
+  "xc0_sidecar": true
+ },
+ "placement_impl": "xd",
+ "placement_sha": "6d5bde4da931",
+ "n_units_xc": 180,
+ "n_units_f3": 0,
+ "n_units_xcr": 28,
+ "holm_m": 8,
+ "holm_final": true,
+ "f3_status": "pending",
+ "f3_regions": [],
+ "code_sha": "b537afa84ee0",
+ "max_rss_mb": 375.9,
+ "nboot": 10000,
+ "nboot_registered": 10000,
+ "nboot_requested": 10000,
+ "registration_deviation": "",
+ "provisional_files": []
+}

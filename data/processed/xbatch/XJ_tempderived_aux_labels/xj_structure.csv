@@ -1,0 +1,6 @@
+side,alias,split,n_A,nb_A,n_eval,nb_eval,n_src,n_aux_total,n_aux_excl_target,n_aux_excl_buffer,n_aux_used,n_aux_A,n_aux_B,n_aux_other,n_aux_pool,aux_sources,dup_of,valid,n_valid_splits
+tgt,Tibet_LGD,1,67,16,65,18,17466,39,,,,13,24,2,15,F3_ext_temp,-1,True,5
+tgt,Tibet_LGD,2,69,10,63,24,17466,39,,,,14,23,2,16,F3_ext_temp,-1,True,5
+tgt,Tibet_LGD,3,63,19,69,15,17466,39,,,,6,31,2,8,F3_ext_temp,-1,True,5
+tgt,Tibet_LGD,4,65,20,67,14,17466,39,,,,22,15,2,24,F3_ext_temp,-1,True,5
+tgt,Tibet_LGD,5,66,19,66,15,17466,39,,,,26,11,2,28,F3_ext_temp,-1,True,5

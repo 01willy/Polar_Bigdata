@@ -1,0 +1,310 @@
+{
+ "exp": "XA_c2_gain_decomposition",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md",
+ "plan_commit": "2678100",
+ "mode": "run",
+ "nboot": 10000,
+ "threads": "4",
+ "threads_cap": 4,
+ "nice": 10,
+ "mem_available_gb_start": 43.7,
+ "wf4_shards": "/home/willy010313/Polar_Bigdata/results/rescale_wf/data/processed/wf/shards",
+ "wf4_tag": "wf4",
+ "wf4_data_sha": "bed72e7fa9d7bd41",
+ "cfg": {
+  "exp": "xa",
+  "variant": "",
+  "data_sha": "bed72e7fa9d7bd41",
+  "kappa": 10.0,
+  "r": 10.0,
+  "lams": [
+   0.25,
+   0.5,
+   1.0
+  ],
+  "lam_base": 0.25,
+  "cv_k": 5,
+  "cb_hi": {
+   "iterations": 600,
+   "learning_rate": 0.03,
+   "depth": 6,
+   "l2_leaf_reg": 3.0
+  },
+  "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md@2678100",
+  "frozen": {
+   "h40": "7098f59dabe2b73f",
+   "h42": "22e215e435e157be",
+   "h54": "cf9a1f6d0929c892",
+   "h41": "492373e4d37b5ea4"
+  },
+  "nboot": 10000,
+  "n_grid": [
+   -1,
+   10,
+   40,
+   160
+  ],
+  "gains": [
+   "G_recal",
+   "G_shr",
+   "G_W",
+   "G_ML",
+   "G_ML2",
+   "G_tot"
+  ],
+  "x_kinds": [
+   "CE2",
+   "CE1"
+  ],
+  "scales": [
+   "cm",
+   "rel",
+   "partial"
+  ],
+  "subsets": [
+   "main",
+   "x_only",
+   "macro7",
+   "no_tibet",
+   "a100",
+   "main27"
+  ],
+  "a_min": 100,
+  "cluster": [
+   3,
+   0.05
+  ],
+  "families": [
+   "알래스카",
+   "캐나다",
+   "레나",
+   "러시아 W",
+   "러시아 E",
+   "티베트",
+   "러시아 C",
+   "북대서양(단독 계열)"
+  ],
+  "n_specs": 864,
+  "code_sha": "0b2b4a9c5d16"
+ },
+ "cfg_hash": "bdb685748b7d",
+ "code_sha": "0b2b4a9c5d16",
+ "code_sha_core": "d0ebc4e7a9a2",
+ "frozen": {
+  "h40": "7098f59dabe2b73f",
+  "h42": "22e215e435e157be",
+  "h54": "cf9a1f6d0929c892",
+  "h41": "492373e4d37b5ea4"
+ },
+ "n_fits": 0,
+ "design": "사후 분석",
+ "shard": "",
+ "merge_shards": 0,
+ "gates": {
+  "passed": true,
+  "gate1": true,
+  "gate2": true,
+  "gate1_n_targets": 28,
+  "gate1_targets": [
+   "AL-1|i",
+   "AL-1|x",
+   "AL-2|i",
+   "AL-2|x",
+   "AL-3|i",
+   "AL-3|x",
+   "AL-4|i",
+   "AL-4|x",
+   "AL-5|i",
+   "AL-5|x",
+   "AL-6|i",
+   "AL-6|x",
+   "Alaska|x",
+   "CA-2|i",
+   "CA-2|x",
+   "CA-3|i",
+   "CA-3|x",
+   "Canada|x",
+   "LE-1|i",
+   "LE-1|x",
+   "LE-2|i",
+   "LE-2|x",
+   "Lena|x",
+   "NAtlantic~lic|x",
+   "Russia_C~lgd|x",
+   "Russia_E|x",
+   "Russia_W|x",
+   "Tibet_LGD|x"
+  ],
+  "skipped_wf0": false,
+  "smoke": false
+ },
+ "additivity": {
+  "n_checked": 105,
+  "n_diff_splits": 0,
+  "max_abs": 8.526512829121202e-14,
+  "passed": true
+ },
+ "subsets": {
+  "main": {
+   "n_targets": 28,
+   "families": [
+    "알래스카",
+    "캐나다",
+    "레나",
+    "러시아 W",
+    "러시아 E",
+    "티베트",
+    "러시아 C",
+    "북대서양(단독 계열)"
+   ],
+   "registered": true
+  },
+  "x_only": {
+   "n_targets": 18,
+   "families": [
+    "알래스카",
+    "캐나다",
+    "레나",
+    "러시아 W",
+    "러시아 E",
+    "티베트",
+    "러시아 C",
+    "북대서양(단독 계열)"
+   ],
+   "registered": true
+  },
+  "macro7": {
+   "n_targets": 7,
+   "families": [
+    "알래스카",
+    "캐나다",
+    "레나",
+    "러시아 W",
+    "러시아 E",
+    "티베트",
+    "러시아 C"
+   ],
+   "registered": true
+  },
+  "no_tibet": {
+   "n_targets": 27,
+   "families": [
+    "알래스카",
+    "캐나다",
+    "레나",
+    "러시아 W",
+    "러시아 E",
+    "러시아 C",
+    "북대서양(단독 계열)"
+   ],
+   "registered": true
+  },
+  "a100": {
+   "n_targets": 23,
+   "families": [
+    "알래스카",
+    "캐나다",
+    "레나"
+   ],
+   "registered": true
+  },
+  "main27": {
+   "n_targets": 27,
+   "families": [
+    "알래스카",
+    "캐나다",
+    "레나",
+    "러시아 W",
+    "러시아 E",
+    "티베트",
+    "러시아 C"
+   ],
+   "registered": false
+  }
+ },
+ "internal_check_wf4c28": {
+  "passed": true,
+  "n_compared": 4,
+  "n_absent": 0,
+  "gains_failed": [],
+  "reason": ""
+ },
+ "status": "완료",
+ "sealed": [
+  {
+   "file": "xa_targets.csv",
+   "rows": 30,
+   "sha256": "ba1d72c3b71db7f6694792fd2baeea74e676485503e437934cf993e2eea0a128"
+  },
+  {
+   "file": "xa_gains.csv",
+   "rows": 630,
+   "sha256": "88b6038ba62c46a47d24e6dcbe17445c4a96237161948466997596b088129d63"
+  },
+  {
+   "file": "xa_spearman.csv",
+   "rows": 864,
+   "sha256": "d77bebc06fd3fb104b86fece6fa053420f8196a0249d1cc9a43bb92cc6219e65"
+  },
+  {
+   "file": "xa_categories.csv",
+   "rows": 144,
+   "sha256": "ce87e0689b45b719c19cdc8c85b43cf798d2bcb486f67b87fd6e1f83f4392c7a"
+  },
+  {
+   "file": "xa_hyp.csv",
+   "rows": 6,
+   "sha256": "334481251dd94ca28a594e06b8739a7d9661a47a7d8ef7c59f4247a31b79164f"
+  },
+  {
+   "file": "xa_decomp.csv",
+   "rows": 105,
+   "sha256": "137d9a119a3fc20db261f98325ce142a087db6e4bc255268c3efbdeaabd54102"
+  },
+  {
+   "file": "xa_pool_main4.csv",
+   "rows": 48,
+   "sha256": "3abee4e7f8d75876aa493c8ca7e49a70ca94d7c1c6afef05d9a8cf913de6e5c1"
+  },
+  {
+   "file": "xa_additivity.csv",
+   "rows": 120,
+   "sha256": "4b31f61ddec2faee23d731f6b4a54875068d36c3dc1e37a68878b4632b0027e6"
+  }
+ ],
+ "cluster_frac_lt3_by_subset": {
+  "main": {
+   "n_families": 8,
+   "frac_lt3": 0.0006,
+   "insufficient": false
+  },
+  "x_only": {
+   "n_families": 8,
+   "frac_lt3": 0.0006,
+   "insufficient": false
+  },
+  "macro7": {
+   "n_families": 7,
+   "frac_lt3": 0.0036,
+   "insufficient": false
+  },
+  "no_tibet": {
+   "n_families": 7,
+   "frac_lt3": 0.0027,
+   "insufficient": false
+  },
+  "a100": {
+   "n_families": 3,
+   "frac_lt3": 0.7832,
+   "insufficient": true
+  },
+  "main27": {
+   "n_families": 7,
+   "frac_lt3": 0.0036,
+   "insufficient": false
+  }
+ },
+ "ml2_split_mismatch": 0,
+ "elapsed_s": 223.1,
+ "max_rss_mb": 366.2
+}

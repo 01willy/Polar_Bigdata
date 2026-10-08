@@ -1,0 +1,34 @@
+{
+ "entries": [
+  {
+   "file": "xh_ladder.csv",
+   "rows": 138,
+   "sha256": "dedef96fd096d2e465dc1181013b802d6b3b2ed242e049d886c5d12bf8ea75ae",
+   "written": "2026-10-04 17:37:45"
+  },
+  {
+   "file": "xh_dd.csv",
+   "rows": 48,
+   "sha256": "753e33565fc2f5907c6e3673ff2811d90af1f447cbe57b799dbba3084db3dfb9",
+   "written": "2026-10-04 17:37:45"
+  },
+  {
+   "file": "xh_stage_contrasts.csv",
+   "rows": 78,
+   "sha256": "2233058e2ae433f7b9ef33bb69898605c01ec3e36804b821e761e73365383d7f",
+   "written": "2026-10-04 17:37:45"
+  },
+  {
+   "file": "xh_reuse_h41.csv",
+   "rows": 0,
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+   "written": "2026-10-04 17:37:45"
+  },
+  {
+   "file": "xh_summary_meta.json",
+   "rows": 10,
+   "sha256": "75d055c1358b54071d6a1d1379285d071dad8823ae7f49231141715d6dea4ef1",
+   "written": "2026-10-04 17:37:45"
+  }
+ ]
+}

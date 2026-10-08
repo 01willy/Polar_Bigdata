@@ -1,0 +1,61 @@
+{
+ "created": "2026-10-04T16:42:24+09:00",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md@2678100",
+ "exp": "XF_new_regions",
+ "v5_sha256": "82d5307d1064cce92e51d4f18088d00aba12dd134297ec7b135ec765eb8697d7",
+ "specs": {
+  "NAtlantic~lic~v5": {
+   "alias": "NAtlantic~lic~v5",
+   "target": "NAtlantic",
+   "kind": "natl_v5",
+   "blind": "비맹검 부분 포함",
+   "keep_v4": [
+    20080,
+    20089,
+    20090,
+    20091,
+    20092,
+    20093,
+    20094,
+    20095,
+    20096,
+    20097,
+    20098,
+    20099,
+    20100,
+    20101,
+    20102,
+    20103,
+    20104,
+    20111,
+    20112
+   ],
+   "keep_v5": [
+    30000,
+    30001,
+    30002,
+    30003,
+    30004,
+    30005,
+    30006,
+    30007,
+    30008,
+    30009
+   ],
+   "drop_v3": [],
+   "n_lic_dropped_v4": 19,
+   "n_lic_dropped_v5": 0,
+   "note": "NAtlantic 약관 확인분 판(LGD NAtlantic~lic) + 새 공개 자료 셀. 민감도 행만(WRAPUP 7.2 (a)6)",
+   "run": true,
+   "run_skip": "",
+   "table": {
+    "dir": "run_tables/NAtlantic~lic~v5",
+    "sha256": "9f227d825295fc0f1607fb79fa43e5dd9c4cc1a52d6e350202e46975caa2d7a5",
+    "soil": "../../v5/e5_soil_tdd_v5.csv",
+    "submap_sha256": "",
+    "n_new": 29,
+    "n_drop_v3": 0
+   }
+  }
+ }
+}

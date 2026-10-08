@@ -1,0 +1,52 @@
+[XH] XH_validation_ladder · 계획 docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 개정 1 · 모드 run · 스레드 4 · 재표집 10000
+[XH] 단위 42개
+  [완료] Alaska|M1C|2| · 1/42
+  [완료] Alaska|M1C|0| · 2/42
+  [완료] Alaska|M1C|1| · 3/42
+  [완료] Lena|W1B|1| · 4/42
+  [완료] Lena|W1S|3| · 5/42
+  [완료] Lena|W1S|1| · 6/42
+  [완료] Lena|W1R|2| · 7/42
+  [완료] Lena|W1S|2| · 8/42
+  [완료] Lena|W1R|3| · 9/42
+  [완료] Lena|W1R|1| · 10/42
+  [완료] Lena|W1B|2| · 11/42
+  [완료] Lena|W1B|3| · 12/42
+  [완료] Lena|W1K|1| · 13/42
+  [완료] Canada|W1R|1| · 14/42
+  [완료] Canada|W1R|2| · 15/42
+  [완료] Canada|W1S|1| · 16/42
+  [완료] Canada|W1R|3| · 17/42
+  [완료] Canada|W1S|2| · 18/42
+  [완료] Canada|W1B|1| · 19/42
+  [완료] Canada|W1S|3| · 20/42
+  [완료] Canada|W1B|2| · 21/42
+  [완료] Lena|W1K|2| · 22/42
+  [완료] Lena|W1K|3| · 23/42
+  [완료] Alaska|W1S|2| · 24/42
+  [완료] Alaska|W1B|3| · 25/42
+  [완료] Alaska|W1B|2| · 26/42
+  [완료] Alaska|W1B|1| · 27/42
+  [완료] Alaska|W1K|3| · 28/42
+  [완료] Alaska|W1K|2| · 29/42
+  [완료] Alaska|W1S|1| · 30/42
+  [완료] Alaska|W1K|1| · 31/42
+  [완료] Alaska|W1S|3| · 32/42
+  [완료] Alaska|W1R|3| · 33/42
+  [완료] Canada|W1B|3| · 34/42
+  [완료] Alaska|W1R|1| · 35/42
+  [완료] Alaska|W1R|2| · 36/42
+  [완료] Canada|W1K|1| · 37/42
+  [완료] Canada|W1K|2| · 38/42
+  [완료] Canada|W1K|1|pm2 · 39/42
+  [완료] Canada|W1K|2|pm2 · 40/42
+  [완료] Canada|W1K|3| · 41/42
+  [완료] Canada|W1K|3|pm2 · 42/42
+[XH] 완료 42 · 실패 0 · 최대 RSS 1200.2 MB
+[봉인] XH_validation_ladder/sealed/xh_ladder.csv: 행 138, sha256 dedef96fd096d2e4
+[봉인] XH_validation_ladder/sealed/xh_dd.csv: 행 48, sha256 753e33565fc2f590
+[봉인] XH_validation_ladder/sealed/xh_stage_contrasts.csv: 행 78, sha256 2233058e2ae433f7
+[봉인] XH_validation_ladder/sealed/xh_reuse_h41.csv: 행 0, sha256 01ba4719c80b6fe9
+[봉인] XH_validation_ladder/sealed/xh_summary_meta.json: 행 10, sha256 75d055c1358b5407
+[집계] 관문 1 기록 없음 · 관문 2 기록 없음 · 오래됨 False · 능형 행 뺌 0
+[집계] 표 4개 봉인 · 최대 RSS 1200.2 MB

@@ -1,0 +1,10 @@
+{
+ "created": "2026-10-08T14:31:28+09:00",
+ "script": "scripts/2_evaluation/xg_alaska_label_cell_metrics.py",
+ "inputs": {
+  "data/processed/xbatch/XK_support_scale/xk_oof_cells_v1.csv": "f6a4f910b34b6418e1228f3c7ea233f9817e730bfdd41548325b83b15cc4988e",
+  "data/processed/xbatch/XG_product_comparison/xg_product_values_v1.csv": "e8cf5cf4716203f812503e61b05317b027e331a8099b0477287646a4429029a9"
+ },
+ "note": "사후 서술(등록 판정 아님). 셀 가중, 알래스카 라벨 셀. r2_ols = r², r2_1mse = 1 − MSE/Var(y). 덱 PRODUCT_RESULTS 는 연도 정합(value_cm) 정의와 같다. SI 의 XK 표는 기간 평균(value_static_cm) 정의다.",
+ "n_alaska_cells": 13606
+}

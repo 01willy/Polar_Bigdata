@@ -1,0 +1,7 @@
+part,target,normalizer,status,elapsed_s,n_fit,n_fit_failed,device,threads
+fit,Canada,nflow,ok,19.3,5.0,0.0,5,4.0
+fit,Canada,cfm,ok,9.1,5.0,0.0,5,4.0
+fit,Canada,cbq,ok,6.7,5.0,0.0,,4.0
+fit,Canada,phys,ok,0.5,0.0,0.0,,4.0
+score,Canada,,ok,4.9,,,,4.0
+summary_2stage,Canada,,ok,86.2,,,,

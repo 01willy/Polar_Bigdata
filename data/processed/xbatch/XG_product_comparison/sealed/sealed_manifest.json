@@ -1,0 +1,52 @@
+{
+ "entries": [
+  {
+   "file": "xg_tests.csv",
+   "rows": 6,
+   "sha256": "20240b322e05615b4a9e83ed658a4eb208d9669af6fac379a013c7e031055adc",
+   "written": "2026-10-05 03:43:22"
+  },
+  {
+   "file": "xg_confirm_rows.csv",
+   "rows": 48,
+   "sha256": "5c7d6454fe418ad2ba9167d781b0262cee5e19f79f981de2338ad61c2c1e2d6e",
+   "written": "2026-10-05 03:43:22"
+  },
+  {
+   "file": "xg_fill_sensitivity.csv",
+   "rows": 48,
+   "sha256": "619b8d069eb181f06c752cb29c1b8318c3dfb7f8a1a451ab746d4725f6ddda3b",
+   "written": "2026-10-05 03:43:22"
+  },
+  {
+   "file": "xg_descriptive.csv",
+   "rows": 428,
+   "sha256": "2ab570a42ebe16efd59a88adc7c32dde490c126403a5a33e9a337537b856a153",
+   "written": "2026-10-05 03:43:22"
+  },
+  {
+   "file": "xg_key_scores.csv",
+   "rows": 897,
+   "sha256": "936cd4b31ae7f2c56c8fb3f73ecb3c31e9fe11ac35378890fe99613722661f3f",
+   "written": "2026-10-05 03:43:22"
+  },
+  {
+   "file": "xg_product_key_notes.csv",
+   "rows": 684,
+   "sha256": "7349a907cc73d33b874579a4a9967021324e233f7ce3cfbbb5475b07da92fb5b",
+   "written": "2026-10-05 03:43:22"
+  },
+  {
+   "file": "xg_tests_cell.csv",
+   "rows": 18,
+   "sha256": "c59febfde4280c56a20e1f1243bf65f485911d23ffcbefd07de79c3d42f3a6a5",
+   "written": "2026-10-05 03:43:22"
+  },
+  {
+   "file": "xg_summary_meta.json",
+   "rows": 12,
+   "sha256": "e32032ac126104364f5db4f72bfc8135d2a520eb7109c4eade4d5666a042dc4f",
+   "written": "2026-10-05 03:43:22"
+  }
+ ]
+}

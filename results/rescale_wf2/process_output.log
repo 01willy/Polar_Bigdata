@@ -1,0 +1,77 @@
+[2026-10-01T05:59:04Z]: Launching [ -f wf_payload.tar.gz ] && tar xzf wf_payload.tar.gz; WF_MODE=full WF_EXPS=wf6,wf7,wf8 WF_BUDGET_MIN=105 WF_SUM_RESERVE_MIN=40 bash scripts/rescale/run_wf.sh, Working dir: /enc/ukrprod_OUZBT/work.  Process output follows:
+[2026-10-01T05:59:04Z]: [payload] created_utc=2026-10-01T05:33:59Z
+[2026-10-01T05:59:04Z]: [payload] git_commit=becd9f5
+[2026-10-01T05:59:04Z]: [payload] git_uncommitted_paths=0
+[2026-10-01T05:59:04Z]: [payload] h40_sha16_main_run=7098f59dabe2b73f
+[2026-10-01T05:59:04Z]: [payload] sha256 7098f59dabe2b73f scripts/3_deep_learning/h40_label_grid.py
+[2026-10-01T05:59:04Z]: [payload] sha256 22e215e435e157be scripts/3_deep_learning/h42_label_grid_ext.py
+[2026-10-01T05:59:04Z]: [payload] sha256 60aee949992b8de4 scripts/3_deep_learning/h54_workflow.py
+[2026-10-01T05:59:04Z]: [payload] sha256 db746179789f21a7 src/polar/m1_core.py
+[2026-10-01T05:59:04Z]: [payload] sha256 4b6b888275d5f47f src/polar/h4_common.py
+[2026-10-01T05:59:04Z]: [payload] sha256 2a910d36299ee2fb src/polar/m1_stats.py
+[2026-10-01T05:59:04Z]: [payload] sha256 a49559e2dce61535 src/polar/fidelity.py
+[2026-10-01T05:59:04Z]: [payload] sha256 b799bd4e6aeb69b5 src/polar/physics.py
+[2026-10-01T05:59:04Z]: [payload] sha256 a610dc5ced53e83d tests/test_h54_workflow.py
+[2026-10-01T05:59:04Z]: [payload] sha256 6669c24278458d5d scripts/rescale/run_wf.sh
+[2026-10-01T05:59:04Z]: [payload] sha256 af1c1f2bf081ac8d scripts/rescale/lg_common.sh
+[2026-10-01T05:59:04Z]: [payload] sha256 71b5d3f6c297770d data/processed/fidelity_base_v3.csv
+[2026-10-01T05:59:04Z]: [payload] sha256 711d0cd3ba0e2e41 data/processed/e5_soil_tdd_v3.csv
+[2026-10-01T05:59:04Z]: [payload] sha256 2ef333b24d60332a data/processed/e5_soil_tdd_v4.csv
+[2026-10-01T05:59:04Z]: [payload] sha256 87bd06f98bb1d141 data/processed/lg_subregion_map_v1.csv
+[2026-10-01T05:59:04Z]: [payload] sha256 58e4db50f71b96a9 data/processed/lgd/run_tables/Tibet/fidelity_base_v3.csv
+[2026-10-01T05:59:04Z]: [payload] sha256 7eeb6d49d5096c4c data/processed/lgd/run_tables/NAtlantic_lic/fidelity_base_v3.csv
+[2026-10-01T05:59:04Z]: [payload] sha256 6a8ab259d10f3c07 data/processed/lgd/run_tables/Russia_C/fidelity_base_v3.csv
+[2026-10-01T05:59:04Z]: [2026-10-01T05:59:04Z] [env] 작업 디렉터리 /enc/ukrprod_OUZBT/work
+[2026-10-01T05:59:04Z]: [2026-10-01T05:59:04Z] [env] 코어 수 96 (RESCALE_CORES_PER_SLOT = 96, OMP_NUM_THREADS = 없음) · 메모리 369 GB (여유 344 GB)
+[2026-10-01T05:59:04Z]: [2026-10-01T05:59:04Z] [env] 디스크 1.2T 여유 / 1.2T
+[2026-10-01T05:59:04Z]: [2026-10-01T05:59:04Z] [env] python /program/pytorch-2.4.1/venv/bin/python3 · pip /program/pytorch-2.4.1/venv/bin/pip
+[2026-10-01T05:59:07Z]: [env] python 3.11.10 · Linux-4.18.0-553.159.1.el8_10.x86_64-x86_64-with-glibc2.28
+[2026-10-01T05:59:07Z]: [env] 가상환경 True · prefix /program/pytorch-2.4.1/venv
+[2026-10-01T05:59:08Z]: [env] numpy 2.1.1
+[2026-10-01T05:59:08Z]: [env] pandas 없음
+[2026-10-01T05:59:08Z]: [env] scipy 없음
+[2026-10-01T05:59:08Z]: [env] scikit-learn 없음
+[2026-10-01T05:59:08Z]: [env] catboost 없음
+[2026-10-01T05:59:08Z]: [env] pytabkit 없음
+[2026-10-01T05:59:08Z]: [env] pytest 없음
+[2026-10-01T05:59:08Z]: [env] torch 2.4.1
+[2026-10-01T05:59:08Z]: [env] CUDA_VISIBLE_DEVICES = None
+[2026-10-01T05:59:19Z]: [env] torch 2.4.1+cu121 · CUDA 빌드 12.1 · CUDA 사용 가능 False · GPU 수 0
+[2026-10-01T05:59:20Z]: [2026-10-01T05:59:20Z] [env] nvidia-smi 없음
+[2026-10-01T05:59:21Z]: [2026-10-01T05:59:21Z] [deps] 없는 필수 패키지: catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-01T05:59:21Z]: [2026-10-01T05:59:21Z] [deps] pip install --user catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-01T05:59:24Z]: ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-10-01T05:59:24Z]: [2026-10-01T05:59:24Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+[2026-10-01T05:59:49Z]: [deps] 확인: catboost 1.2.10 · scikit-learn 1.9.1 · pandas 2.3.3 · scipy 1.17.1 · numpy 2.1.1
+[2026-10-01T05:59:49Z]: [2026-10-01T05:59:49Z] [wf] 모드 full · 코어 96 · 워커 22 × 스레드 4 · 실험 wf6,wf7,wf8 · 시간 한도 105 min
+[2026-10-01T05:59:49Z]: [2026-10-01T05:59:49Z] [wf] 실행 시작(pid 11329, 제한 3855 s) → logs_wf/wf_run.log
+[2026-10-01T06:03:29Z]:   [run] [pool] 워커 22 · 스레드 4 · 코어 고정 예(워커마다 4코어)
+[2026-10-01T06:03:29Z]:   [run] [data] 실험 ['wf6', 'wf7', 'wf8'] · 작업 단위 266(건너뜀 19) · 실험별 {'wf6': 74, 'wf7': 117, 'wf8': 75} · 분할 [1, 2, 3, 4, 5] · seed [0, 1] · 스레드 4 · 워커 22
+[2026-10-01T06:03:29Z]:   [run] [plan] 실행 266 · 재개로 건너뜀 0 · 프로세스 22 · 스레드 4
+[2026-10-01T06:03:29Z]:   [run] [done] 완료 266 · 실패 0 · 일부 적합 실패 0 · 203s
+[2026-10-01T06:03:29Z]: [2026-10-01T06:03:29Z] [pack] results_wf.tar.gz 5.7M · 파일 803개
+[2026-10-01T06:03:29Z]: [2026-10-01T06:03:29Z] [wf] 집계 시작(제한 5735 s)
+[2026-10-01T06:04:12Z]:   [summarize] [summarize] 실험 ['wf6', 'wf7', 'wf8'] · 조각 266 · runs 36,710 · curve 993 · tests 650 · 41s → /enc/ukrprod_OUZBT/work/data/processed/wf/wf2b_*
+[2026-10-01T06:04:12Z]:   [summarize] exp test_id role   target                                                                                                                                                                                                                                                                                                      verdict
+[2026-10-01T06:04:12Z]:   [summarize] wf6   WF6-a    주 Alaska|r                                                                        지지: P1 보다 우세인 (레시피, n) = R2(λ cv) n=200, R1(λ cv) n=500, R2(λ cv) n=500, R1(λ cv) n=1000, R2(λ cv) n=1000, R1(λ cv) n=전량 [통계적으로 구별되나 크기는 0.5 cm 미만: R2(λ cv) n=200, R1(λ cv) n=500, R2(λ cv) n=500, R2(λ cv) n=1000, Re(λ cv) n=1000]
+[2026-10-01T06:04:12Z]:   [summarize] wf6   WF6-a   보조 Alaska|r                                                                                                                                                                                                                                                               보조 지지: Pbest 보다 우세인 (레시피, n) = R1(λ cv) n=1000
+[2026-10-01T06:04:12Z]:   [summarize] wf6   WF6-a    주 Canada|r                                                                                                                                                                                                                                                      기각: R1·R2·Re(교차검증 λ)와 D0(catboost) 가운데 P1 보다 우세인 n 이 없다
+[2026-10-01T06:04:12Z]:   [summarize] wf6   WF6-a   보조 Canada|r                                                                                                                                                                                                                                                                            보조 기각: Pbest 보다 우세인 (레시피, n) 이 없다
+[2026-10-01T06:04:12Z]:   [summarize] wf6   WF6-a    주   Lena|r                                                                                                                                                                                                                                        부분(분할 23/24): 기각: R1·R2·Re(교차검증 λ)와 D0(catboost) 가운데 P1 보다 우세인 n 이 없다
+[2026-10-01T06:04:12Z]:   [summarize] wf6   WF6-a   보조   Lena|r 부분(분할 23/24): 보조 지지: Pbest 보다 우세인 (레시피, n) = R1(λ cv) n=200, R2(λ cv) n=200, Re(λ cv) n=200, D0(catboost) n=200, R1(λ cv) n=500, R2(λ cv) n=500, Re(λ cv) n=500, D0(catboost) n=500, R1(λ cv) n=1000, R2(λ cv) n=1000, Re(λ cv) n=1000, D0(catboost) n=1000, R1(λ cv) n=전량, Re(λ cv) n=전량, D0(catboost) n=전량
+[2026-10-01T06:04:12Z]:   [summarize] wf6   WF6-b    주      NaN                                                                                                                                                                                                                                            부분(지역 2/3, 분할 23/24): 기각: n ≥ 500 에서 R2(교차검증 λ)가 P1 보다 우세인 n 이 없다
+[2026-10-01T06:04:12Z]:   [summarize] wf7   WF7-a   서술      NaN                                                                                                                                                                                                                           부분(지역 2/4): 서술(방향 중립, 확인적 가설 아님): n=0 미결정, n=10 미결정, n=40 미결정, n=160 미결정, n=전량 미결정
+[2026-10-01T06:04:12Z]:   [summarize] wf7   WF7-b   서술      NaN                                                                                                                                                                                                                           부분(지역 2/4): 서술(방향 중립, 확인적 가설 아님): n=0 미결정, n=10 미결정, n=40 미결정, n=160 미결정, n=전량 미결정
+[2026-10-01T06:04:12Z]:   [summarize] wf7   WF7-a   보조      NaN                                                                                                                                                                                                                        부분(지역 2/4): 보조 서술(Re(0.25)-P0, 방향 중립): n=0 미결정, n=10 우세, n=40 미결정, n=160 미결정, n=전량 우세
+[2026-10-01T06:04:12Z]:   [summarize] wf8   WF8-a    주      NaN                                                                                                                                                                                                                                                                지지: n = 40 의 R1 에서 S4 가 S1 보다 우세인 지역 = Canada
+[2026-10-01T06:04:12Z]:   [summarize] wf8   WF8-b    주      NaN                                                                                                                                                                                                                                                                  지지: n = 10 의 R1 에서 S2·S4 가 S1 보다 열세인 지역이 없다
+[2026-10-01T06:04:12Z]: [2026-10-01T06:04:12Z] [pack] results_wf.tar.gz 6.1M · 파일 810개
+[2026-10-01T06:04:12Z]: [2026-10-01T06:04:12Z] [wf] 단계별 상태
+[2026-10-01T06:04:12Z]:   stage,required,rc,sec,note
+[2026-10-01T06:04:12Z]:   inputs,1,0,16,
+[2026-10-01T06:04:12Z]:   deps,1,0,45,
+[2026-10-01T06:04:12Z]:   run,1,0,265,
+[2026-10-01T06:04:12Z]:   summarize,1,0,308,
+[2026-10-01T06:04:12Z]: [2026-10-01T06:04:12Z] [wf] 모든 단계 통과 · 경과 5 min
+[2026-10-01T06:04:12Z]: Exited with code 0
+[2026-10-01T06:04:12Z]: 

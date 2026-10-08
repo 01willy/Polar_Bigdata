@@ -1,0 +1,87 @@
+{
+ "group": "H0",
+ "created": "2026-10-05 01:58:37 +0900",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 2.5 XE_hires_covariates",
+ "n_rows": 17395,
+ "targets": [
+  "Alaska",
+  "Canada",
+  "Lena"
+ ],
+ "columns": [
+  "twi",
+  "twi_sd",
+  "flowacc_log",
+  "curv_plan",
+  "curv_prof",
+  "rel_1km",
+  "water_occ_1km",
+  "water_occ_5km",
+  "water_dist_km",
+  "treecover_1km"
+ ],
+ "finite_by_target": {
+  "twi": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 1.0
+  },
+  "twi_sd": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 1.0
+  },
+  "flowacc_log": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 1.0
+  },
+  "curv_plan": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 1.0
+  },
+  "curv_prof": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 1.0
+  },
+  "rel_1km": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 1.0
+  },
+  "water_occ_1km": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 0.996
+  },
+  "water_occ_5km": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 0.996
+  },
+  "water_dist_km": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 0.996
+  },
+  "treecover_1km": {
+   "Alaska": 1.0,
+   "Lena": 1.0,
+   "Canada": 0.996
+  }
+ },
+ "sources": {
+  "H0": {
+   "path": "data/processed/covariates_ext_v1.csv",
+   "sha256": "527877c957f01299cd57ddfc4fd15d1bd01b7f2d291561ce2509a9ba946e32cf",
+   "n_files": 1,
+   "bytes": 14051991,
+   "latest_mtime": "2026-09-22 11:27:08 +0900"
+  }
+ },
+ "sha256": "547d7369d21ac001eca905c31edd592aa7370744183aa4cdd3730f47ced73d84",
+ "max_rss_mb": 129.4,
+ "script": "scripts/1_data_prep/xe_point_covariates.py"
+}

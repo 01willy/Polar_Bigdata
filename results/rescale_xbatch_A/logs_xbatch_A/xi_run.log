@@ -1,0 +1,69 @@
+[plan] 실행 60 · 재개로 건너뜀 0 · 건너뜀(구조) 12 · 워커 22 · 스레드 4
+    [warn] 적합 실패(wf10|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [완료] Canada|cold|7 · 1/60
+  [완료] Canada|cold|5 · 2/60
+  [완료] Canada|cold|9 · 3/60
+  [완료] Canada|cold|4 · 4/60
+  [완료] Canada|cold|1 · 5/60
+  [완료] Canada|cold|3 · 6/60
+  [완료] Canada|cold|2 · 7/60
+  [완료] Canada|warm|1 · 8/60
+  [완료] Canada|cold|8 · 9/60
+  [완료] Canada|cold|10 · 10/60
+  [완료] Canada|cold|6 · 11/60
+  [완료] Canada|warm|2 · 12/60
+  [완료] Canada|warm|3 · 13/60
+  [완료] Canada|warm|5 · 14/60
+  [완료] Canada|warm|6 · 15/60
+  [완료] Canada|warm|4 · 16/60
+  [완료] Canada|warm|9 · 17/60
+  [완료] Canada|warm|8 · 18/60
+  [완료] Canada|warm|7 · 19/60
+  [완료] Canada|warm|10 · 20/60
+  [완료] Canada~exp~lic|cold|4 · 21/60
+  [완료] Canada~exp~lic|cold|2 · 22/60
+  [완료] Canada~exp~lic|cold|1 · 23/60
+  [완료] Canada~exp~lic|cold|3 · 24/60
+  [완료] Alaska|warm|7 · 25/60
+  [완료] Alaska|warm|10 · 26/60
+  [완료] Canada~exp~lic|cold|6 · 27/60
+  [완료] Canada~exp~lic|cold|5 · 28/60
+  [완료] Canada~exp~lic|cold|8 · 29/60
+  [완료] Canada~exp~lic|cold|9 · 30/60
+  [완료] Canada~exp~lic|warm|1 · 31/60
+  [완료] Alaska|warm|3 · 32/60
+  [완료] Canada~exp~lic|cold|7 · 33/60
+  [완료] Canada~exp~lic|warm|3 · 34/60
+  [완료] Alaska|warm|2 · 35/60
+  [완료] Canada~exp~lic|warm|2 · 36/60
+  [완료] Canada~exp~lic|cold|10 · 37/60
+  [완료] Alaska|warm|4 · 38/60
+  [완료] Canada~exp~lic|warm|5 · 39/60
+  [완료] Alaska|warm|5 · 40/60
+  [완료] Canada~exp~lic|warm|6 · 41/60
+  [완료] Canada~exp~lic|warm|4 · 42/60
+  [완료] Alaska|warm|8 · 43/60
+  [완료] Alaska|warm|1 · 44/60
+  [완료] Alaska|warm|9 · 45/60
+  [완료] Alaska|warm|6 · 46/60
+  [완료] Canada~exp~lic|warm|9 · 47/60
+  [완료] Canada~exp~lic|warm_trim|1 · 48/60
+  [완료] Canada~exp~lic|warm|8 · 49/60
+  [완료] Canada~exp~lic|warm|7 · 50/60
+  [완료] Canada~exp~lic|warm_trim|2 · 51/60
+  [완료] Canada~exp~lic|warm|10 · 52/60
+  [완료] Canada~exp~lic|warm_trim|3 · 53/60
+  [완료] Canada~exp~lic|warm_trim|5 · 54/60
+  [완료] Canada~exp~lic|warm_trim|8 · 55/60
+  [완료] Canada~exp~lic|warm_trim|6 · 56/60
+  [완료] Canada~exp~lic|warm_trim|9 · 57/60
+  [완료] Canada~exp~lic|warm_trim|7 · 58/60
+  [완료] Canada~exp~lic|warm_trim|4 · 59/60
+  [완료] Canada~exp~lic|warm_trim|10 · 60/60
+[done] 완료 60 · 실패 0 · 29s · 최대 RSS 539.6 MB
+[봉인] XI_climate_extrapolation_retest/sealed/xi_tests.csv: 행 225, sha256 f20f2625b823e51f
+[봉인] XI_climate_extrapolation_retest/sealed/xi_hyp.csv: 행 6, sha256 df899f545e54f32d
+[봉인] XI_climate_extrapolation_retest/sealed/xi_holm.csv: 행 6, sha256 55a2912144524e3d
+[봉인] XI_climate_extrapolation_retest/sealed/xi_curve.csv: 행 525, sha256 8857158c39f8046b
+[봉인] XI_climate_extrapolation_retest/sealed/xi_meta.json: 행 24, sha256 b37f12612bcd5479
+[summarize] 조각 60 · 저장소 18 · 대비 행 225 · 가설 행 6 · 실패 키 0 · 14s → 봉인 폴더

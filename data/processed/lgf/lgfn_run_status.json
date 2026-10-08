@@ -1,0 +1,71 @@
+{
+ "run_id": "43749-20261001T215812",
+ "tag": "lgfn",
+ "cpu_only": false,
+ "argv": [
+  "--jobs",
+  "n_sel_fast,n_p0_fast,n_sel_slow,n_p0_slow,n_p1,n_t2",
+  "--allow-local",
+  "--gpus",
+  "9,8,7,6,5",
+  "--threads",
+  "2",
+  "--e1",
+  "1",
+  "--resume",
+  "--no-summarize"
+ ],
+ "jobs": [
+  "n_sel_fast",
+  "n_p0_fast",
+  "n_sel_slow",
+  "n_p0_slow",
+  "n_p1",
+  "n_t2"
+ ],
+ "elapsed_s": 5772.2,
+ "gpus_first": [
+  9,
+  8,
+  7,
+  6,
+  5
+ ],
+ "gpus_last": [
+  9,
+  8,
+  7,
+  6,
+  5
+ ],
+ "busy_gpus": [],
+ "unit_states": {
+  "done": 1730
+ },
+ "n_done": 346,
+ "n_fail": 0,
+ "n_partial": 0,
+ "failed_units": [],
+ "quarantined": [],
+ "blocked": [],
+ "n_blocked": 0,
+ "planner_errors": {},
+ "unrun_units": [],
+ "n_unrun": 0,
+ "gpu_lost": false,
+ "drained": "",
+ "closed": "",
+ "aborted": "",
+ "interrupted": "",
+ "settings": {
+  "E1": true,
+  "reduce_n": [],
+  "k": {
+   "mlp": 32,
+   "tabm": 32,
+   "ftt": 32,
+   "realmlp": 32
+  },
+  "source": "명령행"
+ }
+}

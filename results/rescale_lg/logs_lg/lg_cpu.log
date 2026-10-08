@@ -1,0 +1,204 @@
+[data] 17,467셀 · 부분 cpu · 대상 27 · 분할 [1, 2, 3, 4, 5] · n [0, 3, 10, 40, 160, 320, 1000, -1] · 추출 5 · seed [0, 1] · 학습기 ['catboost_lo', 'ridge'] · α ['1', '10', '100', 'cont'] · 중첩 후보 ['10', '100', 'cont'] · λ [0.25, 0.5, 1.0] · 하위 지역 map:lg_subregion_map_v1.csv · 작업 단위 117(건너뜀 18)
+[plan] 실행 117 · 재개로 건너뜀 0 · 프로세스 14 · 스레드 4 · 장치 CPU · epochs 100 · RealMLP epochs 256
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/metrics/metric.cpp:7011: All train targets are equal')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/metrics/metric.cpp:7011: All train targets are equal')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [Russia_E|x|s1|cpu] 적합 410 · 행 1010 · A 15 · 채점 14/10블록 · 원천 17437 · E0 1.591 · 242.0s · 장치 '' · 상태 ok(실패 0) · 완료 1/117 · 누적 246s
+  [Russia_E|x|s2|cpu] 적합 410 · 행 1010 · A 17 · 채점 11/8블록 · 원천 17437 · E0 1.591 · 257.9s · 장치 '' · 상태 ok(실패 0) · 완료 2/117 · 누적 262s
+  [Russia_E|x|s3|cpu] 적합 410 · 행 1010 · A 15 · 채점 14/11블록 · 원천 17437 · E0 1.591 · 272.6s · 장치 '' · 상태 ok(실패 0) · 완료 3/117 · 누적 277s
+  [Russia_W|x|s2|cpu] 적합 410 · 행 1010 · A 14 · 채점 17/12블록 · 원천 17436 · E0 1.590 · 280.8s · 장치 '' · 상태 ok(실패 0) · 완료 4/117 · 누적 285s
+  [Russia_W|x|s3|cpu] 적합 410 · 행 1010 · A 15 · 채점 16/8블록 · 원천 17436 · E0 1.590 · 283.8s · 장치 '' · 상태 ok(실패 0) · 완료 5/117 · 누적 288s
+  [Russia_W|x|s1|cpu] 적합 410 · 행 1010 · A 16 · 채점 12/7블록 · 원천 17436 · E0 1.590 · 313.8s · 장치 '' · 상태 ok(실패 0) · 완료 6/117 · 누적 318s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/metrics/metric.cpp:7011: All train targets are equal')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/metrics/metric.cpp:7011: All train targets are equal')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/metrics/metric.cpp:7011: All train targets are equal')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/metrics/metric.cpp:7011: All train targets are equal')
+  [Russia_W|x|s4|cpu] 적합 386 · 행 954 · A 16 · 채점 14/11블록 · 원천 17436 · E0 1.590 · 246.6s · 장치 '' · 상태 ok(실패 0) · 완료 7/117 · 누적 493s
+  [Russia_E|x|s4|cpu] 적합 386 · 행 954 · A 15 · 채점 14/10블록 · 원천 17437 · E0 1.591 · 236.9s · 장치 '' · 상태 ok(실패 0) · 완료 8/117 · 누적 499s
+  [Russia_W|x|s5|cpu] 적합 386 · 행 954 · A 16 · 채점 13/8블록 · 원천 17436 · E0 1.590 · 241.4s · 장치 '' · 상태 ok(실패 0) · 완료 9/117 · 누적 530s
+  [Russia_E|x|s5|cpu] 적합 386 · 행 954 · A 16 · 채점 12/8블록 · 원천 17437 · E0 1.591 · 255.9s · 장치 '' · 상태 ok(실패 0) · 완료 10/117 · 누적 574s
+  [Lena|x|s4|cpu] 적합 1468 · 행 2936 · A 1533 · 채점 1428/16블록 · 원천 14429 · E0 1.619 · 757.6s · 장치 '' · 상태 partial(실패 4) · 완료 11/117 · 누적 762s
+  [Alaska|x|s2|cpu] 적합 1114 · 행 2736 · A 6821 · 채점 6785/63블록 · 원천 3860 · E0 1.505 · 276.9s · 장치 '' · 상태 ok(실패 0) · 완료 12/117 · 누적 776s
+  [Alaska|x|s1|cpu] 적합 1114 · 행 2736 · A 7436 · 채점 6170/44블록 · 원천 3860 · E0 1.505 · 287.6s · 장치 '' · 상태 ok(실패 0) · 완료 13/117 · 누적 780s
+  [Lena|x|s3|cpu] 적합 1810 · 행 3048 · A 1737 · 채점 1278/14블록 · 원천 14429 · E0 1.619 · 818.9s · 장치 '' · 상태 partial(실패 2) · 완료 14/117 · 누적 823s
+  [Alaska|x|s3|cpu] 적합 1114 · 행 2736 · A 6758 · 채점 6848/21블록 · 원천 3860 · E0 1.505 · 301.1s · 장치 '' · 상태 ok(실패 0) · 완료 15/117 · 누적 831s
+  [Alaska|x|s4|cpu] 적합 1066 · 행 2624 · A 6540 · 채점 7066/23블록 · 원천 3860 · E0 1.505 · 300.8s · 장치 '' · 상태 ok(실패 0) · 완료 16/117 · 누적 875s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [Canada|x|s3|cpu] 적합 2023 · 행 2588 · A 406 · 채점 342/21블록 · 원천 16697 · E0 1.592 · 925.2s · 장치 '' · 상태 ok(실패 0) · 완료 17/117 · 누적 930s
+  [Lena|x|s1|cpu] 적합 2026 · 행 3048 · A 1505 · 채점 1478/11블록 · 원천 14429 · E0 1.619 · 941.1s · 장치 '' · 상태 partial(실패 2) · 완료 18/117 · 누적 945s
+  [Canada|x|s4|cpu] 적합 1873 · 행 2476 · A 325 · 채점 423/25블록 · 원천 16697 · E0 1.592 · 946.8s · 장치 '' · 상태 ok(실패 0) · 완료 19/117 · 누적 952s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [Alaska|x|s5|cpu] 적합 1066 · 행 2624 · A 6322 · 채점 7284/38블록 · 원천 3860 · E0 1.505 · 293.9s · 장치 '' · 상태 ok(실패 0) · 완료 20/117 · 누적 1056s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [Lena|x|s2|cpu] 적합 2488 · 행 3048 · A 1293 · 채점 1687/5블록 · 원천 14429 · E0 1.619 · 1109.0s · 장치 '' · 상태 partial(실패 2) · 완료 21/117 · 누적 1113s
+  [Canada|x|s1|cpu] 적합 2287 · 행 2588 · A 355 · 채점 393/20블록 · 원천 16697 · E0 1.592 · 1142.0s · 장치 '' · 상태 ok(실패 0) · 완료 22/117 · 누적 1146s
+  [Canada|x|s2|cpu] 적합 2761 · 행 2588 · A 363 · 채점 385/12블록 · 원천 16697 · E0 1.592 · 1165.5s · 장치 '' · 상태 ok(실패 0) · 완료 23/117 · 누적 1170s
+  [Lena|x|s5|cpu] 적합 1600 · 행 2936 · A 1120 · 채점 1860/16블록 · 원천 14429 · E0 1.619 · 901.4s · 장치 '' · 상태 partial(실패 4) · 완료 24/117 · 누적 1179s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-4|i|s1|cpu] 적합 736 · 행 1824 · A 287 · 채점 184/3블록 · 원천 16995 · E0 1.595 · 432.8s · 장치 '' · 상태 ok(실패 0) · 완료 25/117 · 누적 1307s
+  [Canada|x|s5|cpu] 적합 2317 · 행 2476 · A 360 · 채점 388/18블록 · 원천 16697 · E0 1.592 · 1027.1s · 장치 '' · 상태 ok(실패 0) · 완료 26/117 · 누적 1312s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-6|i|s1|cpu] 적합 1066 · 행 2624 · A 1704 · 채점 1516/5블록 · 원천 14247 · E0 1.601 · 544.2s · 장치 '' · 상태 ok(실패 0) · 완료 27/117 · 누적 1320s
+  [AL-3|i|s1|cpu] 적합 901 · 행 2224 · A 334 · 채점 317/4블록 · 원천 16816 · E0 1.609 · 521.7s · 장치 '' · 상태 ok(실패 0) · 완료 28/117 · 누적 1353s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-1|i|s2|cpu] 적합 736 · 행 1824 · A 288 · 채점 4866/8블록 · 원천 9815 · E0 1.536 · 330.9s · 장치 '' · 상태 ok(실패 0) · 완료 29/117 · 누적 1387s
+  [AL-2|i|s1|cpu] 적합 1612 · 행 2936 · A 1694 · 채점 1797/10블록 · 원천 10231 · E0 1.541 · 612.1s · 장치 '' · 상태 partial(실패 6) · 완료 30/117 · 누적 1393s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-5|i|s1|cpu] 적합 1375 · 행 2476 · A 454 · 채점 165/10블록 · 원천 16846 · E0 1.595 · 669.3s · 장치 '' · 상태 ok(실패 0) · 완료 31/117 · 누적 1493s
+  [AL-3|i|s2|cpu] 적합 901 · 행 2224 · A 361 · 채점 290/5블록 · 원천 16816 · E0 1.609 · 561.3s · 장치 '' · 상태 ok(실패 0) · 완료 32/117 · 누적 1513s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-1|i|s3|cpu] 적합 1066 · 행 2624 · A 4834 · 채점 320/6블록 · 원천 9815 · E0 1.536 · 462.6s · 장치 '' · 상태 ok(실패 0) · 완료 33/117 · 누적 1576s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-2|i|s2|cpu] 적합 1888 · 행 2936 · A 1864 · 채점 1627/10블록 · 원천 10231 · E0 1.541 · 697.1s · 장치 '' · 상태 partial(실패 6) · 완료 34/117 · 누적 1627s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-5|i|s2|cpu] 적합 1555 · 행 2476 · A 400 · 채점 219/9블록 · 원천 16846 · E0 1.595 · 737.6s · 장치 '' · 상태 partial(실패 2) · 완료 35/117 · 누적 1683s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-3|i|s3|cpu] 적합 736 · 행 1824 · A 305 · 채점 346/3블록 · 원천 16816 · E0 1.609 · 423.5s · 장치 '' · 상태 ok(실패 0) · 완료 36/117 · 누적 1731s
+  [AL-1|i|s4|cpu] 적합 901 · 행 2224 · A 437 · 채점 4717/2블록 · 원천 9815 · E0 1.536 · 383.2s · 장치 '' · 상태 ok(실패 0) · 완료 37/117 · 누적 1736s
+  [AL-6|i|s3|cpu] 적합 1066 · 행 2624 · A 1705 · 채점 1515/4블록 · 원천 14247 · E0 1.601 · 566.2s · 장치 '' · 상태 ok(실패 0) · 완료 38/117 · 누적 1736s
+  [AL-2|i|s3|cpu] 적합 1456 · 행 2936 · A 1745 · 채점 1746/15블록 · 원천 10231 · E0 1.541 · 605.9s · 장치 '' · 상태 partial(실패 6) · 완료 39/117 · 누적 1752s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-4|i|s4|cpu] 적합 561 · 행 1389 · A 140 · 채점 331/2블록 · 원천 16995 · E0 1.595 · 318.4s · 장치 '' · 상태 ok(실패 0) · 완료 40/117 · 누적 1811s
+  [AL-2|i|s4|cpu] 적합 1234 · 행 2936 · A 1333 · 채점 2158/17블록 · 원천 10231 · E0 1.541 · 502.9s · 장치 '' · 상태 partial(실패 8) · 완료 41/117 · 누적 1823s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-6|i|s4|cpu] 적합 1066 · 행 2624 · A 1705 · 채점 1515/4블록 · 원천 14247 · E0 1.601 · 543.0s · 장치 '' · 상태 ok(실패 0) · 완료 42/117 · 누적 1855s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-5|i|s3|cpu] 적합 1255 · 행 2476 · A 385 · 채점 234/14블록 · 원천 16846 · E0 1.595 · 681.0s · 장치 '' · 상태 partial(실패 4) · 완료 43/117 · 누적 1860s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-3|i|s4|cpu] 적합 901 · 행 2224 · A 349 · 채점 302/7블록 · 원천 16816 · E0 1.609 · 522.7s · 장치 '' · 상태 ok(실패 0) · 완료 44/117 · 누적 1910s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-1|i|s5|cpu] 적합 1066 · 행 2624 · A 4716 · 채점 438/9블록 · 원천 9815 · E0 1.536 · 454.3s · 장치 '' · 상태 ok(실패 0) · 완료 45/117 · 누적 1967s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-6|x|s1|cpu] 적합 1066 · 행 2624 · A 1704 · 채점 1516/5블록 · 원천 3861 · E0 1.504 · 261.1s · 장치 '' · 상태 ok(실패 0) · 완료 46/117 · 누적 1997s
+  [AL-4|x|s1|cpu] 적합 736 · 행 1824 · A 287 · 채점 184/3블록 · 원천 3861 · E0 1.504 · 175.1s · 장치 '' · 상태 ok(실패 0) · 완료 47/117 · 누적 2031s
+  [AL-3|x|s1|cpu] 적합 949 · 행 2336 · A 334 · 채점 317/4블록 · 원천 3861 · E0 1.504 · 211.1s · 장치 '' · 상태 ok(실패 0) · 완료 48/117 · 누적 2035s
+  [AL-5|i|s4|cpu] 적합 1528 · 행 2016 · A 270 · 채점 349/4블록 · 원천 16846 · E0 1.595 · 668.0s · 장치 '' · 상태 ok(실패 0) · 완료 49/117 · 누적 2061s
+  [AL-4|i|s5|cpu] 적합 561 · 행 1389 · A 139 · 채점 332/3블록 · 원천 16995 · E0 1.595 · 325.8s · 장치 '' · 상태 ok(실패 0) · 완료 50/117 · 누적 2062s
+  [AL-5|x|s1|cpu] 적합 1387 · 행 2476 · A 454 · 채점 165/10블록 · 원천 3860 · E0 1.505 · 290.8s · 장치 '' · 상태 partial(실패 4) · 완료 51/117 · 누적 2102s
+  [AL-2|x|s1|cpu] 적합 1660 · 행 3048 · A 1694 · 채점 1797/10블록 · 원천 3861 · E0 1.504 · 377.6s · 장치 '' · 상태 ok(실패 0) · 완료 52/117 · 누적 2130s
+  [AL-3|i|s5|cpu] 적합 736 · 행 1824 · A 269 · 채점 382/10블록 · 원천 16816 · E0 1.609 · 401.6s · 장치 '' · 상태 ok(실패 0) · 완료 53/117 · 누적 2133s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-6|i|s5|cpu] 적합 1066 · 행 2624 · A 1516 · 채점 1704/2블록 · 원천 14247 · E0 1.601 · 544.4s · 장치 '' · 상태 ok(실패 0) · 완료 54/117 · 누적 2171s
+  [AL-1|x|s2|cpu] 적합 784 · 행 1936 · A 288 · 채점 4866/8블록 · 원천 3861 · E0 1.504 · 184.9s · 장치 '' · 상태 ok(실패 0) · 완료 55/117 · 누적 2182s
+  [AL-3|x|s2|cpu] 적합 949 · 행 2336 · A 361 · 채점 290/5블록 · 원천 3861 · E0 1.504 · 231.8s · 장치 '' · 상태 ok(실패 0) · 완료 56/117 · 누적 2199s
+  [AL-5|x|s2|cpu] 적합 1555 · 행 2476 · A 400 · 채점 219/9블록 · 원천 3860 · E0 1.505 · 325.4s · 장치 '' · 상태 partial(실패 4) · 완료 57/117 · 누적 2236s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-3|x|s3|cpu] 적합 784 · 행 1936 · A 305 · 채점 346/3블록 · 원천 3861 · E0 1.504 · 178.1s · 장치 '' · 상태 ok(실패 0) · 완료 58/117 · 누적 2280s
+  [AL-1|x|s3|cpu] 적합 1114 · 행 2736 · A 4834 · 채점 320/6블록 · 원천 3861 · E0 1.504 · 259.8s · 장치 '' · 상태 ok(실패 0) · 완료 59/117 · 누적 2290s
+  [AL-6|x|s3|cpu] 적합 1066 · 행 2624 · A 1705 · 채점 1515/4블록 · 원천 3861 · E0 1.504 · 240.2s · 장치 '' · 상태 ok(실패 0) · 완료 60/117 · 누적 2301s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-5|i|s5|cpu] 적합 1255 · 행 2476 · A 361 · 채점 258/14블록 · 원천 16846 · E0 1.595 · 626.4s · 장치 '' · 상태 partial(실패 6) · 완료 61/117 · 누적 2309s
+  [AL-2|x|s2|cpu] 적합 1930 · 행 3048 · A 1864 · 채점 1627/10블록 · 원천 3861 · E0 1.504 · 456.3s · 장치 '' · 상태 partial(실패 2) · 완료 62/117 · 누적 2316s
+  [AL-2|i|s5|cpu] 적합 2092 · 행 2936 · A 1924 · 채점 1567/5블록 · 원천 10231 · E0 1.541 · 751.9s · 장치 '' · 상태 partial(실패 4) · 완료 63/117 · 누적 2328s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-2|x|s3|cpu] 적합 1492 · 행 3048 · A 1745 · 채점 1746/15블록 · 원천 3861 · E0 1.504 · 302.4s · 장치 '' · 상태 partial(실패 2) · 완료 64/117 · 누적 2337s
+  [AL-5|x|s3|cpu] 적합 1225 · 행 2476 · A 385 · 채점 234/14블록 · 원천 3860 · E0 1.505 · 287.5s · 장치 '' · 상태 partial(실패 2) · 완료 65/117 · 누적 2349s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-4|x|s4|cpu] 적합 561 · 행 1389 · A 140 · 채점 331/2블록 · 원천 3861 · E0 1.504 · 134.7s · 장치 '' · 상태 ok(실패 0) · 완료 66/117 · 누적 2370s
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 이어 학습 실패, 원천 모델 사용: CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [AL-1|x|s4|cpu] 적합 901 · 행 2224 · A 437 · 채점 4717/2블록 · 원천 3861 · E0 1.504 · 226.9s · 장치 '' · 상태 ok(실패 0) · 완료 67/117 · 누적 2398s
+  [AL-3|x|s4|cpu] 적합 901 · 행 2224 · A 349 · 채점 302/7블록 · 원천 3861 · E0 1.504 · 224.9s · 장치 '' · 상태 ok(실패 0) · 완료 68/117 · 누적 2407s
+  [AL-2|x|s4|cpu] 적합 1228 · 행 2936 · A 1333 · 채점 2158/17블록 · 원천 3861 · E0 1.504 · 278.9s · 장치 '' · 상태 partial(실패 8) · 완료 69/117 · 누적 2412s
+  [AL-6|x|s4|cpu] 적합 1066 · 행 2624 · A 1705 · 채점 1515/4블록 · 원천 3861 · E0 1.504 · 283.8s · 장치 '' · 상태 ok(실패 0) · 완료 70/117 · 누적 2413s
+  [AL-4|x|s5|cpu] 적합 561 · 행 1389 · A 139 · 채점 332/3블록 · 원천 3861 · E0 1.504 · 140.3s · 장치 '' · 상태 ok(실패 0) · 완료 71/117 · 누적 2468s
+  [AL-3|x|s5|cpu] 적합 736 · 행 1824 · A 269 · 채점 382/10블록 · 원천 3861 · E0 1.504 · 202.3s · 장치 '' · 상태 ok(실패 0) · 완료 72/117 · 누적 2519s
+  [AL-6|x|s5|cpu] 적합 1066 · 행 2624 · A 1516 · 채점 1704/2블록 · 원천 3861 · E0 1.504 · 245.7s · 장치 '' · 상태 ok(실패 0) · 완료 73/117 · 누적 2547s
+  [AL-1|x|s5|cpu] 적합 1066 · 행 2624 · A 4716 · 채점 438/9블록 · 원천 3861 · E0 1.504 · 271.6s · 장치 '' · 상태 ok(실패 0) · 완료 74/117 · 누적 2552s
+  [AL-5|x|s4|cpu] 적합 1480 · 행 2016 · A 270 · 채점 349/4블록 · 원천 3860 · E0 1.505 · 356.3s · 장치 '' · 상태 ok(실패 0) · 완료 75/117 · 누적 2556s
+  [AL-5|x|s5|cpu] 적합 1255 · 행 2476 · A 361 · 채점 258/14블록 · 원천 3860 · E0 1.505 · 291.7s · 장치 '' · 상태 partial(실패 2) · 완료 76/117 · 누적 2601s
+  [Russia_C|x|s1|cpu] 적합 223 · 행 547 · A 4 · 채점 3/2블록 · 원천 16208 · E0 1.600 · 150.8s · 장치 '' · 상태 ok(실패 0) · 완료 77/117 · 누적 2669s
+  [AL-2|x|s5|cpu] 적합 2110 · 행 2936 · A 1924 · 채점 1567/5블록 · 원천 3861 · E0 1.504 · 484.7s · 장치 '' · 상태 partial(실패 4) · 완료 78/117 · 누적 2775s
+  [LE-2|i|s1|cpu] 적합 901 · 행 2224 · A 893 · 채점 282/5블록 · 원천 14479 · E0 1.621 · 449.8s · 장치 '' · 상태 ok(실패 0) · 완료 79/117 · 누적 2787s
+  [CA-3|x|s1|cpu] 적합 784 · 행 1936 · A 224 · 채점 125/3블록 · 원천 16697 · E0 1.592 · 426.6s · 장치 '' · 상태 ok(실패 0) · 완료 80/117 · 누적 2838s
+  [LE-1|i|s1|cpu] 적합 901 · 행 2224 · A 448 · 채점 1335/5블록 · 원천 14753 · E0 1.619 · 470.9s · 장치 '' · 상태 ok(실패 0) · 완료 81/117 · 누적 2841s
+  [LE-2|x|s1|cpu] 적합 901 · 행 2224 · A 893 · 채점 282/5블록 · 원천 14429 · E0 1.619 · 501.0s · 장치 '' · 상태 ok(실패 0) · 완료 82/117 · 누적 2851s
+  [CA-3|i|s1|cpu] 적합 736 · 행 1824 · A 224 · 채점 125/3블록 · 원천 17096 · E0 1.581 · 457.5s · 장치 '' · 상태 ok(실패 0) · 완료 83/117 · 누적 2865s
+  [Russia_C|x|s2|cpu] 적합 58 · 행 147 · A 3 · 채점 4/3블록 · 원천 16208 · E0 1.600 · 29.8s · 장치 '' · 상태 ok(실패 0) · 완료 84/117 · 누적 2871s
+  [LE-1|x|s1|cpu] 적합 901 · 행 2224 · A 448 · 채점 1335/5블록 · 원천 14429 · E0 1.619 · 508.6s · 장치 '' · 상태 ok(실패 0) · 완료 85/117 · 누적 2907s
+  [CA-2|i|s1|cpu] 적합 736 · 행 1824 · A 161 · 채점 234/5블록 · 원천 17071 · E0 1.603 · 496.8s · 장치 '' · 상태 ok(실패 0) · 완료 86/117 · 누적 2910s
+  [CA-2|x|s1|cpu] 적합 784 · 행 1936 · A 161 · 채점 234/5블록 · 원천 16717 · E0 1.591 · 458.4s · 장치 '' · 상태 ok(실패 0) · 완료 87/117 · 누적 2927s
+  [LE-2|i|s2|cpu] 적합 1066 · 행 2624 · A 1062 · 채점 167/4블록 · 원천 14479 · E0 1.621 · 550.6s · 장치 '' · 상태 ok(실패 0) · 완료 88/117 · 누적 3097s
+  [LE-1|x|s2|cpu] 적합 901 · 행 2224 · A 557 · 채점 1226/3블록 · 원천 14429 · E0 1.619 · 500.3s · 장치 '' · 상태 ok(실패 0) · 완료 89/117 · 누적 3101s
+  [LE-2|x|s2|cpu] 적합 1066 · 행 2624 · A 1062 · 채점 167/4블록 · 원천 14429 · E0 1.619 · 606.0s · 장치 '' · 상태 ok(실패 0) · 완료 90/117 · 누적 3158s
+  [LE-1|i|s2|cpu] 적합 901 · 행 2224 · A 557 · 채점 1226/3블록 · 원천 14753 · E0 1.619 · 610.0s · 장치 '' · 상태 ok(실패 0) · 완료 91/117 · 누적 3166s
+  [CA-2|i|s2|cpu] 적합 736 · 행 1824 · A 237 · 채점 158/2블록 · 원천 17071 · E0 1.603 · 497.6s · 장치 '' · 상태 ok(실패 0) · 완료 92/117 · 누적 3167s
+  [CA-3|i|s2|cpu] 적합 736 · 행 1824 · A 176 · 채점 172/13블록 · 원천 17096 · E0 1.581 · 429.8s · 장치 '' · 상태 ok(실패 0) · 완료 93/117 · 누적 3217s
+  [CA-2|x|s2|cpu] 적합 784 · 행 1936 · A 237 · 채점 158/2블록 · 원천 16717 · E0 1.591 · 445.9s · 장치 '' · 상태 ok(실패 0) · 완료 94/117 · 누적 3221s
+  [Russia_C|x|s3|cpu] 적합 223 · 행 547 · A 4 · 채점 3/3블록 · 원천 16208 · E0 1.600 · 113.0s · 장치 '' · 상태 ok(실패 0) · 완료 95/117 · 누적 3271s
+  [CA-3|x|s2|cpu] 적합 784 · 행 1936 · A 176 · 채점 172/13블록 · 원천 16697 · E0 1.592 · 439.4s · 장치 '' · 상태 ok(실패 0) · 완료 96/117 · 누적 3278s
+  [CA-2|i|s3|cpu] 적합 736 · 행 1824 · A 228 · 채점 166/8블록 · 원천 17071 · E0 1.603 · 420.8s · 장치 '' · 상태 ok(실패 0) · 완료 97/117 · 누적 3292s
+  [CA-2|x|s3|cpu] 적합 784 · 행 1936 · A 228 · 채점 166/8블록 · 원천 16717 · E0 1.591 · 425.7s · 장치 '' · 상태 ok(실패 0) · 완료 98/117 · 누적 3333s
+  [LE-2|i|s3|cpu] 적합 736 · 행 1824 · A 183 · 채점 1014/4블록 · 원천 14479 · E0 1.621 · 432.4s · 장치 '' · 상태 ok(실패 0) · 완료 99/117 · 누적 3343s
+  [LE-2|x|s3|cpu] 적합 736 · 행 1824 · A 183 · 채점 1014/4블록 · 원천 14429 · E0 1.619 · 419.7s · 장치 '' · 상태 ok(실패 0) · 완료 100/117 · 누적 3347s
+  [CA-3|i|s3|cpu] 적합 561 · 행 1389 · A 125 · 채점 224/8블록 · 원천 17096 · E0 1.581 · 304.5s · 장치 '' · 상태 ok(실패 0) · 완료 101/117 · 누적 3402s
+  [Russia_C|x|s4|cpu] 적합 211 · 행 519 · A 4 · 채점 3/2블록 · 원천 16208 · E0 1.600 · 121.9s · 장치 '' · 상태 ok(실패 0) · 완료 102/117 · 누적 3414s
+  [LE-1|i|s3|cpu] 적합 1066 · 행 2624 · A 1184 · 채점 602/12블록 · 원천 14753 · E0 1.619 · 563.7s · 장치 '' · 상태 ok(실패 0) · 완료 103/117 · 누적 3414s
+  [CA-3|x|s3|cpu] 적합 597 · 행 1473 · A 125 · 채점 224/8블록 · 원천 16697 · E0 1.592 · 331.3s · 장치 '' · 상태 ok(실패 0) · 완료 104/117 · 누적 3433s
+  [Greenland|x|s2|cpu] 적합 58 · 행 147 · A 2 · 채점 1/1블록(무효 분할) · 원천 17464 · E0 1.592 · 30.4s · 장치 '' · 상태 ok(실패 0) · 완료 105/117 · 누적 3445s
+  [LE-1|x|s3|cpu] 적합 1066 · 행 2624 · A 1184 · 채점 602/12블록 · 원천 14429 · E0 1.619 · 582.0s · 장치 '' · 상태 ok(실패 0) · 완료 106/117 · 누적 3447s
+  [Russia_C|x|s5|cpu] 적합 211 · 행 519 · A 4 · 채점 3/3블록 · 원천 16208 · E0 1.600 · 117.8s · 장치 '' · 상태 ok(실패 0) · 완료 107/117 · 누적 3532s
+  [CA-3|i|s4|cpu] 적합 561 · 행 1389 · A 113 · 채점 235/11블록 · 원천 17096 · E0 1.581 · 301.5s · 장치 '' · 상태 ok(실패 0) · 완료 108/117 · 누적 3573s
+  [CA-3|x|s4|cpu] 적합 561 · 행 1389 · A 113 · 채점 235/11블록 · 원천 16697 · E0 1.592 · 308.7s · 장치 '' · 상태 ok(실패 0) · 완료 109/117 · 누적 3587s
+  [CA-2|i|s4|cpu] 적합 736 · 행 1824 · A 202 · 채점 193/5블록 · 원천 17071 · E0 1.603 · 383.4s · 장치 '' · 상태 ok(실패 0) · 완료 110/117 · 누적 3600s
+  [CA-2|x|s4|cpu] 적합 736 · 행 1824 · A 202 · 채점 193/5블록 · 원천 16717 · E0 1.591 · 405.4s · 장치 '' · 상태 ok(실패 0) · 완료 111/117 · 누적 3627s
+  [LE-1|x|s4|cpu] 적합 901 · 행 2224 · A 508 · 채점 1275/7블록 · 원천 14429 · E0 1.619 · 460.5s · 장치 '' · 상태 ok(실패 0) · 완료 112/117 · 누적 3628s
+  [LE-1|i|s4|cpu] 적합 901 · 행 2224 · A 508 · 채점 1275/7블록 · 원천 14753 · E0 1.619 · 467.7s · 장치 '' · 상태 ok(실패 0) · 완료 113/117 · 누적 3633s
+  [CA-2|x|s5|cpu] 적합 736 · 행 1824 · A 194 · 채점 201/8블록 · 원천 16717 · E0 1.591 · 380.3s · 장치 '' · 상태 ok(실패 0) · 완료 114/117 · 누적 3723s
+  [CA-2|i|s5|cpu] 적합 736 · 행 1824 · A 194 · 채점 201/8블록 · 원천 17071 · E0 1.603 · 396.4s · 장치 '' · 상태 ok(실패 0) · 완료 115/117 · 누적 3729s
+  [CA-3|i|s5|cpu] 적합 736 · 행 1824 · A 178 · 채점 171/4블록 · 원천 17096 · E0 1.581 · 406.8s · 장치 '' · 상태 ok(실패 0) · 완료 116/117 · 누적 3753s
+  [CA-3|x|s5|cpu] 적합 736 · 행 1824 · A 178 · 채점 171/4블록 · 원천 16697 · E0 1.592 · 387.0s · 장치 '' · 상태 ok(실패 0) · 완료 117/117 · 누적 3789s
+[done] 완료 117 · 실패 0 · 일부 적합 실패 21 · 3790s

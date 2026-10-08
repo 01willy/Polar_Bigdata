@@ -1,0 +1,34 @@
+{
+ "entries": [
+  {
+   "file": "xi_tests.csv",
+   "rows": 225,
+   "sha256": "f20f2625b823e51fb6a3875ab40dede7a38766df97745e3759c084a0469ab8eb",
+   "written": "2026-10-04 17:28:20"
+  },
+  {
+   "file": "xi_hyp.csv",
+   "rows": 6,
+   "sha256": "df899f545e54f32d948b5393b64aa7325cdaeef2a91aa0eeffbc3be4ac795474",
+   "written": "2026-10-04 17:28:20"
+  },
+  {
+   "file": "xi_holm.csv",
+   "rows": 6,
+   "sha256": "55a2912144524e3da3d550b7bee6afd31d1ca014f3c7de35c63e10f7adf95e33",
+   "written": "2026-10-04 17:28:20"
+  },
+  {
+   "file": "xi_curve.csv",
+   "rows": 525,
+   "sha256": "8857158c39f8046bdf3f303af1a364cd1235516285e2a74e9082c51f798ec968",
+   "written": "2026-10-04 17:28:20"
+  },
+  {
+   "file": "xi_meta.json",
+   "rows": 24,
+   "sha256": "b37f12612bcd54793ee5fc6ffcbdf59416ca1a976b266a9978f43a213542ca12",
+   "written": "2026-10-04 17:28:20"
+  }
+ ]
+}

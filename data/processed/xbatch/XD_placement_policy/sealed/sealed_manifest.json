@@ -1,0 +1,118 @@
+{
+ "entries": [
+  {
+   "file": "xd_alg_contrasts.csv",
+   "rows": 2494,
+   "sha256": "fa593269545fd18b705b912c8d2c3043b5c6fa324e813f3036f2360e326b2c99",
+   "written": "2026-10-04 17:27:17"
+  },
+  {
+   "file": "xd_alg_tests.csv",
+   "rows": 22,
+   "sha256": "37529790dcd932a84d2a5fc144acff165ae3f05ff4ad7d8df4c318348804adec",
+   "written": "2026-10-04 17:27:17"
+  },
+  {
+   "file": "xd_alg_holm.csv",
+   "rows": 20,
+   "sha256": "fe60ef259cc85dc3dc8e67a94a361725ec42d1a975fb1d1a040c0239e931cd9a",
+   "written": "2026-10-04 17:27:17"
+  },
+  {
+   "file": "xd6_traits.csv",
+   "rows": 141,
+   "sha256": "8801d754994b1e16eb518b30fd72a5830dc4ed98cd6fe7f17a421f014a06ad02",
+   "written": "2026-10-04 17:27:17"
+  },
+  {
+   "file": "xd_alg_meta.json",
+   "rows": 9,
+   "sha256": "682b1978a8805fbf30cac8ed7018db0bdf893d5c2e53db5ff191f337700c4e54",
+   "written": "2026-10-04 17:27:17"
+  },
+  {
+   "file": "xd4_tasks.csv",
+   "rows": 6,
+   "sha256": "f209793af7b1775dab4fbc78b6d7719e6c64939f243f1c569d26b70f46413006",
+   "written": "2026-10-05 03:29:17"
+  },
+  {
+   "file": "xd4_families.csv",
+   "rows": 3,
+   "sha256": "1e1aaf274ad8f19e4b8e088e252316b3a8703ccc6d101850bfcda5476c98bc2b",
+   "written": "2026-10-05 03:29:17"
+  },
+  {
+   "file": "xd4_ci.csv",
+   "rows": 12,
+   "sha256": "28d115d57928efea2893027c2086a29bf4b07216c0d8c8aac111713d7ccdd5e4",
+   "written": "2026-10-05 03:29:17"
+  },
+  {
+   "file": "xd4_summary.json",
+   "rows": 10,
+   "sha256": "f068f8182d04bdfbe8890991ded43da7f8010d80b0f58977bc520f80b4494802",
+   "written": "2026-10-05 03:29:17"
+  },
+  {
+   "file": "xd5_s1_tasks.csv",
+   "rows": 6,
+   "sha256": "f209793af7b1775dab4fbc78b6d7719e6c64939f243f1c569d26b70f46413006",
+   "written": "2026-10-05 03:29:17"
+  },
+  {
+   "file": "xd5_s1_families.csv",
+   "rows": 3,
+   "sha256": "1e1aaf274ad8f19e4b8e088e252316b3a8703ccc6d101850bfcda5476c98bc2b",
+   "written": "2026-10-05 03:29:17"
+  },
+  {
+   "file": "xd5_s1_ci.csv",
+   "rows": 12,
+   "sha256": "6bfd3a329d155e596e78b162cd9442ae45ce9127a9a9cea821a40f8ddc399421",
+   "written": "2026-10-05 03:29:17"
+  },
+  {
+   "file": "xd5_s1_summary.json",
+   "rows": 10,
+   "sha256": "c42e0b61f85cbc9cb3c5e4c034a984e552e06493a65b687c49f39c5114afded4",
+   "written": "2026-10-05 03:29:17"
+  },
+  {
+   "file": "xd4_meta.json",
+   "rows": 5,
+   "sha256": "f50b08b01be72b48de001d73832adcc0d9b008c76fd457cc28ef0cae7e394660",
+   "written": "2026-10-05 03:29:17"
+  },
+  {
+   "file": "xd5_cv_ds.csv",
+   "rows": 17,
+   "sha256": "a1859b6d11d88bc833149c902ca40025b20276ff8d129b7cc1f830ab628f592d",
+   "written": "2026-10-05 05:36:57"
+  },
+  {
+   "file": "xd5_cv_ds_meta.json",
+   "rows": 4,
+   "sha256": "6ef616c28d7037450daefb6cacefbb9b03f80470096ff5d13b89a70ced7827ca",
+   "written": "2026-10-05 05:36:57"
+  },
+  {
+   "file": "xd5_regret.csv",
+   "rows": 49,
+   "sha256": "b949edbd82979d8ed435a2669f490e2814669035034cc5ff41715ac769c33c4b",
+   "written": "2026-10-05 05:37:33"
+  },
+  {
+   "file": "xd5_cv_gbm.csv",
+   "rows": 17,
+   "sha256": "e351b229695cc245cfae7c54410da09ce57bfdce59165c3947819f8c1540c820",
+   "written": "2026-10-05 05:37:33"
+  },
+  {
+   "file": "xd5_meta.json",
+   "rows": 6,
+   "sha256": "1627c5e35bcc98b867c55bb8d5b1f2f687fbf3b47c4140dbadc5104b0b885ccb",
+   "written": "2026-10-05 05:37:33"
+  }
+ ]
+}

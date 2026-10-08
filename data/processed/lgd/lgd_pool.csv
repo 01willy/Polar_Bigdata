@@ -1,0 +1,6 @@
+pool,n_regions,regions,loaded,regimes,platforms,cross_env,few_blocks,lic_version,main_verdict,version_role
+P4,4,"Lena|x,Canada|x,Russia_W|x,Russia_E|x","Lena|x,Canada|x,Russia_W|x,Russia_E|x","Lena:shallow,Canada:shallow,Russia_W:shallow,Russia_E:shallow",rescale,,,full,False,SI: 약관 확인 전 자료 포함
+PE1,6,"Lena|x,Canada|x,Russia_W|x,Russia_E|x,NAtlantic|x,Russia_C|x","Lena|x,Canada|x,Russia_W|x,Russia_E|x,NAtlantic|x,Russia_C|x","Lena:shallow,Canada:shallow,Russia_W:shallow,Russia_E:shallow,NAtlantic:shallow,Russia_C:shallow","local,rescale",교차 환경; (i) CatBoost 불통과,NAtlantic,full,False,SI: 약관 확인 전 자료 포함
+PE2,7,"Lena|x,Canada|x,Russia_W|x,Russia_E|x,NAtlantic|x,Russia_C|x,Tibet_LGD|x","Lena|x,Canada|x,Russia_W|x,Russia_E|x,NAtlantic|x,Russia_C|x,Tibet_LGD|x","Lena:shallow,Canada:shallow,Russia_W:shallow,Russia_E:shallow,NAtlantic:shallow,Russia_C:shallow,Tibet_LGD:deep","local,rescale",교차 환경; (i) CatBoost 불통과,NAtlantic,full,False,SI: 약관 확인 전 자료 포함
+NEW1,2,"NAtlantic|x,Russia_C|x","NAtlantic|x,Russia_C|x","NAtlantic:shallow,Russia_C:shallow",local,,NAtlantic,full,False,SI: 약관 확인 전 자료 포함
+NEW2,3,"NAtlantic|x,Russia_C|x,Tibet_LGD|x","NAtlantic|x,Russia_C|x,Tibet_LGD|x","NAtlantic:shallow,Russia_C:shallow,Tibet_LGD:deep",local,,NAtlantic,full,False,SI: 약관 확인 전 자료 포함

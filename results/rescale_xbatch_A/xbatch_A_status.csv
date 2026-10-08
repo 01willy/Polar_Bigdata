@@ -1,0 +1,11 @@
+stage,required,rc,sec,note
+deps,1,0,0,
+selfcheck,1,0,0,
+pytest_core,0,1,13,
+xd_run,0,0,201,
+xd_gbm,0,0,20,
+xd_sum,0,0,296,
+xi_run,0,0,44,
+xj_run,0,0,4,
+xb_run,0,0,478,
+xh_run,0,0,79,

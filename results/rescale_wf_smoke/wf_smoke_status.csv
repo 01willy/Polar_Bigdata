@@ -1,0 +1,8 @@
+stage,required,rc,sec,note
+inputs,1,0,31,
+deps,1,0,61,
+smoke,1,0,42,
+pytest,1,0,67,
+count,1,0,35,
+precheck,0,0,301,
+project,0,0,0,

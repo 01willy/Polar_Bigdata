@@ -1,0 +1,506 @@
+[data] 실험 ['wf1', 'wf2', 'wf3', 'wf4'] · 작업 단위 343(건너뜀 21) · 실험별 {'wf1': 33, 'wf2': 168, 'wf3': 10, 'wf4': 132} · 분할 [1, 2, 3, 4, 5] · seed [0, 1] · 스레드 4 · 워커 22
+[plan] 실행 343 · 재개로 건너뜀 0 · 프로세스 22 · 스레드 4
+[pool] 워커 22 · 스레드 4 · 코어 고정 예(워커마다 4코어)
+  [wf4|AL-2|x|s3] 적합 255 · 행 289 · A 1745 · 채점 1746 · 72.3s · 상태 ok(실패 0) · 완료 1/343 · 누적 74s
+  [wf4|AL-1|x|s3] 적합 252 · 행 289 · A 4834 · 채점 320 · 73.8s · 상태 ok(실패 0) · 완료 2/343 · 누적 75s
+  [wf4|AL-2|x|s2] 적합 294 · 행 289 · A 1864 · 채점 1627 · 84.1s · 상태 ok(실패 0) · 완료 3/343 · 누적 85s
+  [wf4|Alaska|x|s2] 적합 288 · 행 289 · A 6821 · 채점 6785 · 86.9s · 상태 ok(실패 0) · 완료 4/343 · 누적 88s
+  [wf4|AL-2|x|s5] 적합 300 · 행 289 · A 1924 · 채점 1567 · 88.0s · 상태 ok(실패 0) · 완료 5/343 · 누적 89s
+  [wf4|AL-6|x|s4] 적합 321 · 행 289 · A 1705 · 채점 1515 · 89.2s · 상태 ok(실패 0) · 완료 6/343 · 누적 90s
+  [wf4|AL-6|x|s1] 적합 327 · 행 289 · A 1704 · 채점 1516 · 91.5s · 상태 ok(실패 0) · 완료 7/343 · 누적 93s
+  [wf4|AL-6|x|s3] 적합 330 · 행 289 · A 1705 · 채점 1515 · 91.5s · 상태 ok(실패 0) · 완료 8/343 · 누적 93s
+  [wf4|Alaska|x|s1] 적합 303 · 행 289 · A 7436 · 채점 6170 · 93.2s · 상태 ok(실패 0) · 완료 9/343 · 누적 94s
+  [wf4|Alaska|x|s5] 적합 309 · 행 289 · A 6322 · 채점 7284 · 95.1s · 상태 ok(실패 0) · 완료 10/343 · 누적 96s
+  [wf4|AL-1|x|s5] 적합 336 · 행 289 · A 4716 · 채점 438 · 98.3s · 상태 ok(실패 0) · 완료 11/343 · 누적 100s
+  [wf4|Alaska|x|s3] 적합 336 · 행 289 · A 6758 · 채점 6848 · 101.0s · 상태 ok(실패 0) · 완료 12/343 · 누적 102s
+  [wf4|Alaska|x|s4] 적합 333 · 행 289 · A 6540 · 채점 7066 · 101.1s · 상태 ok(실패 0) · 완료 13/343 · 누적 102s
+  [wf4|AL-2|i|s3] 적합 237 · 행 289 · A 1745 · 채점 1746 · 136.2s · 상태 ok(실패 0) · 완료 14/343 · 누적 137s
+  [wf4|AL-2|x|s1] 적합 285 · 행 289 · A 1694 · 채점 1797 · 84.0s · 상태 ok(실패 0) · 완료 15/343 · 누적 159s
+  [wf4|AL-1|i|s3] 적합 270 · 행 289 · A 4834 · 채점 320 · 158.6s · 상태 ok(실패 0) · 완료 16/343 · 누적 160s
+  [wf4|AL-2|i|s2] 적합 288 · 행 289 · A 1864 · 채점 1627 · 170.3s · 상태 ok(실패 0) · 완료 17/343 · 누적 172s
+  [wf4|AL-6|x|s5] 적합 294 · 행 289 · A 1516 · 채점 1704 · 88.6s · 상태 ok(실패 0) · 완료 18/343 · 누적 178s
+  [wf4|AL-2|x|s4] 적합 312 · 행 289 · A 1333 · 채점 2158 · 86.6s · 상태 ok(실패 0) · 완료 19/343 · 누적 179s
+  [wf4|AL-2|i|s5] 적합 312 · 행 289 · A 1924 · 채점 1567 · 184.0s · 상태 ok(실패 0) · 완료 20/343 · 누적 185s
+  [wf4|AL-1|i|s5] 적합 336 · 행 289 · A 4716 · 채점 438 · 197.0s · 상태 ok(실패 0) · 완료 21/343 · 누적 198s
+  [wf4|Lena|x|s3] 적합 291 · 행 289 · A 1737 · 채점 1278 · 216.0s · 상태 ok(실패 0) · 완료 22/343 · 누적 217s
+  [wf4|AL-2|i|s1] 적합 270 · 행 289 · A 1694 · 채점 1797 · 157.4s · 상태 ok(실패 0) · 완료 23/343 · 누적 231s
+  [wf4|Lena|x|s4] 적합 201 · 행 289 · A 1533 · 채점 1428 · 150.0s · 상태 ok(실패 0) · 완료 24/343 · 누적 235s
+  [wf4|AL-6|i|s3] 적합 312 · 행 289 · A 1705 · 채점 1515 · 234.4s · 상태 ok(실패 0) · 완료 25/343 · 누적 236s
+  [wf4|AL-6|i|s1] 적합 327 · 행 289 · A 1704 · 채점 1516 · 242.6s · 상태 ok(실패 0) · 완료 26/343 · 누적 244s
+  [wf4|AL-6|i|s4] 적합 330 · 행 289 · A 1705 · 채점 1515 · 249.1s · 상태 ok(실패 0) · 완료 27/343 · 누적 250s
+  [wf4|AL-2|i|s4] 적합 312 · 행 289 · A 1333 · 채점 2158 · 171.0s · 상태 ok(실패 0) · 완료 28/343 · 누적 264s
+  [wf4|LE-2|i|s2] 적합 192 · 행 289 · A 1062 · 채점 167 · 162.4s · 상태 ok(실패 0) · 완료 29/343 · 누적 265s
+  [wf4|LE-2|x|s2] 적합 192 · 행 289 · A 1062 · 채점 167 · 154.1s · 상태 ok(실패 0) · 완료 30/343 · 누적 292s
+  [wf4|AL-5|x|s1] 적합 252 · 행 289 · A 454 · 채점 165 · 75.4s · 상태 ok(실패 0) · 완료 31/343 · 누적 293s
+  [wf4|Lena|x|s1] 적합 285 · 행 289 · A 1505 · 채점 1478 · 215.6s · 상태 ok(실패 0) · 완료 32/343 · 누적 306s
+  [wf4|Lena|x|s5] 적합 258 · 행 289 · A 1120 · 채점 1860 · 216.9s · 상태 ok(실패 0) · 완료 33/343 · 누적 319s
+  [wf4|AL-1|x|s4] 적합 273 · 행 289 · A 437 · 채점 4717 · 82.0s · 상태 ok(실패 0) · 완료 34/343 · 누적 326s
+  [wf4|AL-6|i|s5] 적합 303 · 행 289 · A 1516 · 채점 1704 · 256.8s · 상태 ok(실패 0) · 완료 35/343 · 누적 345s
+  [wf4|Lena|x|s2] 적합 300 · 행 289 · A 1293 · 채점 1687 · 252.9s · 상태 ok(실패 0) · 완료 36/343 · 누적 347s
+  [wf4|LE-1|x|s3] 적합 318 · 행 289 · A 1184 · 채점 602 · 251.3s · 상태 ok(실패 0) · 완료 37/343 · 누적 351s
+  [wf4|LE-1|i|s3] 적합 327 · 행 289 · A 1184 · 채점 602 · 263.0s · 상태 ok(실패 0) · 완료 38/343 · 누적 359s
+  [wf4|AL-5|x|s2] 적합 297 · 행 289 · A 400 · 채점 219 · 94.7s · 상태 ok(실패 0) · 완료 39/343 · 누적 359s
+  [wf4|AL-5|x|s3] 적합 243 · 행 289 · A 385 · 채점 234 · 72.5s · 상태 ok(실패 0) · 완료 40/343 · 누적 365s
+  [wf4|AL-1|i|s4] 적합 276 · 행 289 · A 437 · 채점 4717 · 166.7s · 상태 ok(실패 0) · 완료 41/343 · 누적 402s
+  [wf4|LE-1|i|s4] 적합 273 · 행 289 · A 508 · 채점 1275 · 226.9s · 상태 ok(실패 0) · 완료 42/343 · 누적 406s
+  [wf4|LE-1|x|s4] 적합 276 · 행 289 · A 508 · 채점 1275 · 236.5s · 상태 ok(실패 0) · 완료 43/343 · 누적 422s
+  [wf4|AL-5|x|s5] 적합 243 · 행 289 · A 361 · 채점 258 · 75.9s · 상태 ok(실패 0) · 완료 44/343 · 누적 423s
+  [wf4|LE-1|x|s2] 적합 294 · 행 289 · A 557 · 채점 1226 · 253.3s · 상태 ok(실패 0) · 완료 45/343 · 누적 431s
+  [wf4|AL-3|x|s2] 적합 318 · 행 289 · A 361 · 채점 290 · 97.0s · 상태 ok(실패 0) · 완료 46/343 · 누적 442s
+  [wf4|LE-1|i|s2] 적합 309 · 행 289 · A 557 · 채점 1226 · 270.9s · 상태 ok(실패 0) · 완료 47/343 · 누적 442s
+  [wf4|AL-5|i|s1] 적합 246 · 행 289 · A 454 · 채점 165 · 246.2s · 상태 ok(실패 0) · 완료 48/343 · 누적 444s
+  [wf4|LE-2|i|s1] 적합 336 · 행 289 · A 893 · 채점 282 · 299.1s · 상태 ok(실패 0) · 완료 49/343 · 누적 458s
+  [wf4|LE-2|x|s1] 적합 336 · 행 289 · A 893 · 채점 282 · 298.6s · 상태 ok(실패 0) · 완료 50/343 · 누적 458s
+  [wf4|AL-3|x|s4] 적합 327 · 행 289 · A 349 · 채점 302 · 95.0s · 상태 ok(실패 0) · 완료 51/343 · 누적 460s
+  [wf4|LE-1|i|s1] 적합 288 · 행 289 · A 448 · 채점 1335 · 236.2s · 상태 ok(실패 0) · 완료 52/343 · 누적 467s
+  [wf4|LE-1|x|s1] 적합 291 · 행 289 · A 448 · 채점 1335 · 241.1s · 상태 ok(실패 0) · 완료 53/343 · 누적 477s
+  [wf4|AL-3|x|s1] 적합 321 · 행 289 · A 334 · 채점 317 · 94.0s · 상태 ok(실패 0) · 완료 54/343 · 누적 500s
+  [wf4|AL-5|i|s3] 적합 228 · 행 289 · A 385 · 채점 234 · 217.3s · 상태 ok(실패 0) · 완료 55/343 · 누적 509s
+  [wf4|AL-3|x|s3] 적합 324 · 행 289 · A 305 · 채점 346 · 97.8s · 상태 ok(실패 0) · 완료 56/343 · 누적 529s
+  [wf4|AL-1|x|s2] 적합 300 · 행 289 · A 288 · 채점 4866 · 97.6s · 상태 ok(실패 0) · 완료 57/343 · 누적 540s
+  [wf4|Canada|x|s3] 적합 315 · 행 289 · A 406 · 채점 342 · 293.3s · 상태 ok(실패 0) · 완료 58/343 · 누적 544s
+  [wf4|AL-5|i|s2] 적합 294 · 행 289 · A 400 · 채점 219 · 282.8s · 상태 ok(실패 0) · 완료 59/343 · 누적 547s
+  [wf4|AL-5|i|s5] 적합 228 · 행 289 · A 361 · 채점 258 · 221.8s · 상태 ok(실패 0) · 완료 60/343 · 누적 548s
+  [wf4|AL-5|x|s4] 적합 333 · 행 289 · A 270 · 채점 349 · 99.3s · 상태 ok(실패 0) · 완료 61/343 · 누적 560s
+  [wf4|AL-4|x|s1] 적합 336 · 행 289 · A 287 · 채점 184 · 104.0s · 상태 ok(실패 0) · 완료 62/343 · 누적 562s
+  [wf4|AL-3|x|s5] 적합 297 · 행 289 · A 269 · 채점 382 · 86.6s · 상태 ok(실패 0) · 완료 63/343 · 누적 563s
+  [wf4|Canada|x|s2] 적합 327 · 행 289 · A 363 · 채점 385 · 305.6s · 상태 ok(실패 0) · 완료 64/343 · 누적 612s
+  [wf4|AL-3|i|s2] 적합 315 · 행 289 · A 361 · 채점 290 · 308.8s · 상태 ok(실패 0) · 완료 65/343 · 누적 628s
+  [wf4|AL-1|i|s2] 적합 309 · 행 289 · A 288 · 채점 4866 · 212.7s · 상태 ok(실패 0) · 완료 66/343 · 누적 655s
+  [wf4|AL-3|i|s4] 적합 321 · 행 289 · A 349 · 채점 302 · 317.7s · 상태 ok(실패 0) · 완료 67/343 · 누적 677s
+  [wf4|Canada|x|s1] 적합 324 · 행 289 · A 355 · 채점 393 · 327.8s · 상태 ok(실패 0) · 완료 68/343 · 누적 687s
+  [wf4|Canada|x|s5] 적합 333 · 행 289 · A 360 · 채점 388 · 345.7s · 상태 ok(실패 0) · 완료 69/343 · 누적 697s
+  [wf4|AL-3|i|s1] 적합 324 · 행 289 · A 334 · 채점 317 · 302.7s · 상태 ok(실패 0) · 완료 70/343 · 누적 705s
+  [wf4|AL-3|i|s5] 적합 285 · 행 289 · A 269 · 채점 382 · 265.2s · 상태 ok(실패 0) · 완료 71/343 · 누적 732s
+  [wf4|Canada|x|s4] 적합 312 · 행 289 · A 325 · 채점 423 · 317.3s · 상태 ok(실패 0) · 완료 72/343 · 누적 739s
+  [wf4|AL-3|i|s3] 적합 327 · 행 289 · A 305 · 채점 346 · 317.2s · 상태 ok(실패 0) · 완료 73/343 · 누적 740s
+  [wf4|CA-2|i|s3] 적합 237 · 행 289 · A 228 · 채점 166 · 245.4s · 상태 ok(실패 0) · 완료 74/343 · 누적 774s
+  [wf4|AL-4|i|s1] 적합 336 · 행 289 · A 287 · 채점 184 · 337.0s · 상태 ok(실패 0) · 완료 75/343 · 누적 781s
+  [wf4|LE-2|i|s3] 적합 192 · 행 289 · A 183 · 채점 1014 · 176.1s · 상태 ok(실패 0) · 완료 76/343 · 누적 788s
+  [wf4|CA-2|x|s3] 적합 249 · 행 289 · A 228 · 채점 166 · 255.8s · 상태 ok(실패 0) · 완료 77/343 · 누적 796s
+  [wf4|AL-5|i|s4] 적합 333 · 행 289 · A 270 · 채점 349 · 338.7s · 상태 ok(실패 0) · 완료 78/343 · 누적 797s
+  [wf4|CA-2|i|s2] 적합 309 · 행 289 · A 237 · 채점 158 · 300.4s · 상태 ok(실패 0) · 완료 79/343 · 누적 801s
+  [wf4|AL-4|x|s4] 적합 195 · 행 199 · A 140 · 채점 331 · 66.0s · 상태 ok(실패 0) · 완료 80/343 · 누적 806s
+  [wf4|CA-2|x|s2] 적합 315 · 행 289 · A 237 · 채점 158 · 310.2s · 상태 ok(실패 0) · 완료 81/343 · 누적 819s
+  [wf4|CA-2|x|s5] 적합 270 · 행 289 · A 194 · 채점 201 · 267.6s · 상태 ok(실패 0) · 완료 82/343 · 누적 831s
+  [wf4|LE-2|x|s3] 적합 210 · 행 289 · A 183 · 채점 1014 · 203.7s · 상태 ok(실패 0) · 완료 83/343 · 누적 832s
+  [wf4|CA-2|i|s4] 적합 282 · 행 289 · A 202 · 채점 193 · 284.8s · 상태 ok(실패 0) · 완료 84/343 · 누적 833s
+  [wf4|CA-2|i|s5] 적합 276 · 행 289 · A 194 · 채점 201 · 286.8s · 상태 ok(실패 0) · 완료 85/343 · 누적 849s
+  [wf4|CA-2|x|s4] 적합 294 · 행 289 · A 202 · 채점 193 · 300.4s · 상태 ok(실패 0) · 완료 86/343 · 누적 860s
+  [wf4|AL-4|x|s5] 적합 231 · 행 199 · A 139 · 채점 332 · 78.5s · 상태 ok(실패 0) · 완료 87/343 · 누적 860s
+  [wf4|CA-3|x|s1] 적합 327 · 행 289 · A 224 · 채점 125 · 339.9s · 상태 ok(실패 0) · 완료 88/343 · 누적 886s
+  [wf4|CA-3|i|s1] 적합 318 · 행 289 · A 224 · 채점 125 · 343.2s · 상태 ok(실패 0) · 완료 89/343 · 누적 887s
+  [wf4|Russia_C~lgd|x|s3] 적합 108 · 행 109 · A 35 · 채점 22 · 109.8s · 상태 ok(실패 0) · 완료 90/343 · 누적 970s
+  [wf4|CA-3|i|s5] 적합 324 · 행 289 · A 178 · 채점 171 · 324.3s · 상태 ok(실패 0) · 완료 91/343 · 누적 979s
+  [wf4|Russia_C~lgd|x|s4] 적합 117 · 행 109 · A 33 · 채점 24 · 122.1s · 상태 ok(실패 0) · 완료 92/343 · 누적 982s
+  [wf4|Russia_C~lgd|x|s1] 적합 99 · 행 109 · A 28 · 채점 29 · 100.6s · 상태 ok(실패 0) · 완료 93/343 · 누적 988s
+  [wf4|AL-4|i|s4] 적합 222 · 행 199 · A 140 · 채점 331 · 257.7s · 상태 ok(실패 0) · 완료 94/343 · 누적 997s
+  [wf4|CA-3|i|s3] 적합 216 · 행 199 · A 125 · 채점 224 · 210.5s · 상태 ok(실패 0) · 완료 95/343 · 누적 998s
+  [wf4|CA-2|i|s1] 적합 276 · 행 289 · A 161 · 채점 234 · 301.8s · 상태 ok(실패 0) · 완료 96/343 · 누적 1007s
+  [wf4|Russia_C~lgd|x|s5] 적합 120 · 행 109 · A 29 · 채점 28 · 120.6s · 상태 ok(실패 0) · 완료 97/343 · 누적 1007s
+  [wf4|CA-3|x|s4] 적합 219 · 행 199 · A 113 · 채점 235 · 207.9s · 상태 ok(실패 0) · 완료 98/343 · 누적 1009s
+  [wf4|CA-3|x|s5] 적합 336 · 행 289 · A 178 · 채점 171 · 337.2s · 상태 ok(실패 0) · 완료 99/343 · 누적 1014s
+  [wf4|CA-3|x|s3] 적합 219 · 행 199 · A 125 · 채점 224 · 218.5s · 상태 ok(실패 0) · 완료 100/343 · 누적 1015s
+  [wf4|CA-3|x|s2] 적합 276 · 행 289 · A 176 · 채점 172 · 322.5s · 상태 ok(실패 0) · 완료 101/343 · 누적 1019s
+  [wf4|CA-3|i|s4] 적합 219 · 행 199 · A 113 · 채점 235 · 224.0s · 상태 ok(실패 0) · 완료 102/343 · 누적 1021s
+  [wf4|CA-3|i|s2] 적합 288 · 행 289 · A 176 · 채점 172 · 341.5s · 상태 ok(실패 0) · 완료 103/343 · 누적 1029s
+  [wf4|CA-2|x|s1] 적합 276 · 행 289 · A 161 · 채점 234 · 298.6s · 상태 ok(실패 0) · 완료 104/343 · 누적 1031s
+  [wf4|NAtlantic~lic|x|s3] 적합 6 · 행 19 · A 7 · 채점 14 · 6.6s · 상태 ok(실패 0) · 완료 105/343 · 누적 1035s
+  [wf4|NAtlantic~lic|x|s1] 적합 6 · 행 19 · A 6 · 채점 16 · 6.5s · 상태 ok(실패 0) · 완료 106/343 · 누적 1038s
+  [wf4|NAtlantic~lic|x|s5] 적합 6 · 행 19 · A 5 · 채점 17 · 6.2s · 상태 ok(실패 0) · 완료 107/343 · 누적 1041s
+  [wf4|Russia_C|x|s1] 적합 6 · 행 19 · A 4 · 채점 3 · 6.0s · 상태 ok(실패 0) · 완료 108/343 · 누적 1044s
+  [wf4|AL-4|i|s5] 적합 231 · 행 199 · A 139 · 채점 332 · 270.8s · 상태 ok(실패 0) · 완료 109/343 · 누적 1045s
+  [wf4|Russia_C|x|s3] 적합 6 · 행 19 · A 4 · 채점 3 · 5.8s · 상태 ok(실패 0) · 완료 110/343 · 누적 1047s
+  [wf4|Russia_C~lgd|x|s2] 적합 78 · 행 109 · A 26 · 채점 31 · 79.2s · 상태 ok(실패 0) · 완료 111/343 · 누적 1049s
+  [wf4|Russia_C|x|s4] 적합 6 · 행 19 · A 4 · 채점 3 · 6.0s · 상태 ok(실패 0) · 완료 112/343 · 누적 1050s
+  [wf4|Russia_C|x|s5] 적합 6 · 행 19 · A 4 · 채점 3 · 5.9s · 상태 ok(실패 0) · 완료 113/343 · 누적 1051s
+  [wf4|Russia_C|x|s2] 적합 6 · 행 19 · A 3 · 채점 4 · 5.4s · 상태 ok(실패 0) · 완료 114/343 · 누적 1053s
+  [wf4|Greenland|x|s2] 적합 6 · 행 19 · A 2 · 채점 1 · 6.1s · 상태 ok(실패 0) · 완료 115/343 · 누적 1055s
+  [wf4|Tibet_LGD|x|s2] 적합 231 · 행 199 · A 69 · 채점 63 · 246.9s · 상태 ok(실패 0) · 완료 116/343 · 누적 1066s
+  [wf4|Tibet_LGD|x|s4] 적합 231 · 행 199 · A 65 · 채점 67 · 243.0s · 상태 ok(실패 0) · 완료 117/343 · 누적 1076s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf4|Tibet_LGD|x|s1] 적합 231 · 행 199 · A 67 · 채점 65 · 247.6s · 상태 ok(실패 0) · 완료 118/343 · 누적 1078s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf4|Tibet_LGD|x|s5] 적합 231 · 행 199 · A 66 · 채점 66 · 252.2s · 상태 ok(실패 0) · 완료 119/343 · 누적 1084s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf3|Alaska|r|s1] 적합 396 · 행 659 · A 7436 · 채점 6170 · 21.6s · 상태 ok(실패 0) · 완료 120/343 · 누적 1100s
+  [wf4|Tibet_LGD|x|s3] 적합 231 · 행 199 · A 63 · 채점 69 · 252.7s · 상태 ok(실패 0) · 완료 121/343 · 누적 1102s
+  [wf4|Russia_E|x|s2] 적합 126 · 행 109 · A 17 · 채점 11 · 123.1s · 상태 ok(실패 0) · 완료 122/343 · 누적 1102s
+  [wf3|Alaska|r|s2] 적합 370 · 행 659 · A 6821 · 채점 6785 · 18.9s · 상태 ok(실패 0) · 완료 123/343 · 누적 1103s
+  [wf4|NAtlantic~lic|x|s2] 적합 84 · 행 109 · A 15 · 채점 4 · 92.6s · 상태 ok(실패 0) · 완료 124/343 · 누적 1107s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf4|Russia_W|x|s1] 적합 126 · 행 109 · A 16 · 채점 12 · 131.8s · 상태 ok(실패 0) · 완료 125/343 · 누적 1114s
+  [wf4|Russia_W|x|s4] 적합 126 · 행 109 · A 16 · 채점 14 · 126.7s · 상태 ok(실패 0) · 완료 126/343 · 누적 1114s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/metrics/metric.cpp:7011: All train targets are equal')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/metrics/metric.cpp:7011: All train targets are equal')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/metrics/metric.cpp:7011: All train targets are equal')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf3|Alaska|r|s3] 적합 422 · 행 659 · A 6758 · 채점 6848 · 20.8s · 상태 ok(실패 0) · 완료 127/343 · 누적 1121s
+  [wf3|Alaska|r|s5] 적합 380 · 행 659 · A 6322 · 채점 7284 · 19.0s · 상태 ok(실패 0) · 완료 128/343 · 누적 1121s
+  [wf4|Russia_E|x|s5] 적합 126 · 행 109 · A 16 · 채점 12 · 124.8s · 상태 ok(실패 0) · 완료 129/343 · 누적 1123s
+  [wf3|Alaska|r|s4] 적합 424 · 행 659 · A 6540 · 채점 7066 · 23.2s · 상태 ok(실패 0) · 완료 130/343 · 누적 1125s
+  [wf4|Russia_E|x|s1] 적합 126 · 행 109 · A 15 · 채점 14 · 118.6s · 상태 ok(실패 0) · 완료 131/343 · 누적 1126s
+  [wf4|Russia_W|x|s5] 적합 126 · 행 109 · A 16 · 채점 13 · 130.1s · 상태 ok(실패 0) · 완료 132/343 · 누적 1127s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf1|Alaska|r|s1] 적합 1246 · 행 1851 · A 7436 · 채점 6170 · 322.9s · 상태 ok(실패 0) · 완료 133/343 · 누적 1129s
+  [wf4|NAtlantic~lic|x|s4] 적합 99 · 행 109 · A 14 · 채점 5 · 109.9s · 상태 ok(실패 0) · 완료 134/343 · 누적 1131s
+  [wf4|Russia_W|x|s3] 적합 126 · 행 109 · A 15 · 채점 16 · 124.4s · 상태 ok(실패 0) · 완료 135/343 · 누적 1131s
+  [wf4|Russia_E|x|s3] 적합 126 · 행 109 · A 15 · 채점 14 · 122.7s · 상태 ok(실패 0) · 완료 136/343 · 누적 1131s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf4|Russia_E|x|s4] 적합 126 · 행 109 · A 15 · 채점 14 · 123.4s · 상태 ok(실패 0) · 완료 137/343 · 누적 1138s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf4|Russia_W|x|s2] 적합 126 · 행 109 · A 14 · 채점 17 · 125.5s · 상태 ok(실패 0) · 완료 138/343 · 누적 1145s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf1|AL-1|r|s3] 적합 856 · 행 1701 · A 4834 · 채점 320 · 101.7s · 상태 partial(실패 15) · 완료 139/343 · 누적 1168s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf1|Alaska|r|s1|x34] 적합 660 · 행 741 · A 7436 · 채점 6170 · 78.4s · 상태 ok(실패 0) · 완료 140/343 · 누적 1204s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf1|Alaska|r|s2|x34] 적합 632 · 행 741 · A 6821 · 채점 6785 · 74.3s · 상태 ok(실패 0) · 완료 141/343 · 누적 1206s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf1|Alaska|r|s3|x34] 적합 666 · 행 741 · A 6758 · 채점 6848 · 79.6s · 상태 ok(실패 0) · 완료 142/343 · 누적 1224s
+  [wf1|AL-1|r|s5] 적합 1156 · 행 1701 · A 4716 · 채점 438 · 149.0s · 상태 ok(실패 0) · 완료 143/343 · 누적 1225s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf1|AL-2|r|s3] 적합 814 · 행 1551 · A 1745 · 채점 1746 · 117.5s · 상태 partial(실패 9) · 완료 144/343 · 누적 1232s
+  [wf1|AL-6|r|s3] 적합 962 · 행 1551 · A 1705 · 채점 1515 · 112.5s · 상태 partial(실패 15) · 완료 145/343 · 누적 1233s
+  [wf1|AL-6|r|s4] 적합 918 · 행 1551 · A 1705 · 채점 1515 · 114.2s · 상태 partial(실패 30) · 완료 146/343 · 누적 1235s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf2|Alaska|r|s1|S6] 적합 225 · 행 226 · A 7436 · 채점 6170 · 11.6s · 상태 ok(실패 0) · 완료 147/343 · 누적 1236s
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf2|Alaska|r|s2|S6] 적합 225 · 행 226 · A 6821 · 채점 6785 · 13.6s · 상태 ok(실패 0) · 완료 148/343 · 누적 1238s
+  [wf1|Lena|r|s4] 적합 774 · 행 1551 · A 1533 · 채점 1428 · 111.3s · 상태 ok(실패 0) · 완료 149/343 · 누적 1238s
+  [wf1|AL-6|r|s1] 적합 994 · 행 1551 · A 1704 · 채점 1516 · 116.5s · 상태 partial(실패 15) · 완료 150/343 · 누적 1240s
+  [wf1|AL-2|r|s4] 적합 898 · 행 1551 · A 1333 · 채점 2158 · 112.5s · 상태 partial(실패 21) · 완료 151/343 · 누적 1244s
+  [wf2|Alaska|r|s3|S6] 적합 225 · 행 226 · A 6758 · 채점 6848 · 13.7s · 상태 ok(실패 0) · 완료 152/343 · 누적 1245s
+  [wf2|Alaska|r|s4|S6] 적합 225 · 행 226 · A 6540 · 채점 7066 · 12.2s · 상태 ok(실패 0) · 완료 153/343 · 누적 1246s
+  [wf1|AL-2|r|s2] 적합 978 · 행 1551 · A 1864 · 채점 1627 · 139.0s · 상태 partial(실패 6) · 완료 154/343 · 누적 1246s
+  [wf1|AL-6|r|s5] 적합 974 · 행 1551 · A 1516 · 채점 1704 · 117.3s · 상태 partial(실패 15) · 완료 155/343 · 누적 1247s
+  [wf1|AL-2|r|s5] 적합 1030 · 행 1551 · A 1924 · 채점 1567 · 143.8s · 상태 ok(실패 0) · 완료 156/343 · 누적 1247s
+  [wf2|Alaska|r|s5|S6] 적합 225 · 행 226 · A 6322 · 채점 7284 · 12.0s · 상태 ok(실패 0) · 완료 157/343 · 누적 1247s
+  [wf1|Alaska|r|s4|x34] 적합 666 · 행 741 · A 6540 · 채점 7066 · 80.7s · 상태 ok(실패 0) · 완료 158/343 · 누적 1248s
+  [wf1|Lena|r|s3] 적합 990 · 행 1551 · A 1737 · 채점 1278 · 134.7s · 상태 partial(실패 3) · 완료 159/343 · 누적 1249s
+  [wf1|AL-2|r|s1] 적합 918 · 행 1551 · A 1694 · 채점 1797 · 130.9s · 상태 partial(실패 15) · 완료 160/343 · 누적 1256s
+  [wf2|AL-1|r|s3|S6] 적합 225 · 행 226 · A 4834 · 채점 320 · 10.4s · 상태 ok(실패 0) · 완료 161/343 · 누적 1257s
+  [wf2|AL-1|r|s5|S6] 적합 225 · 행 226 · A 4716 · 채점 438 · 10.6s · 상태 ok(실패 0) · 완료 162/343 · 누적 1257s
+  [wf3|Lena|r|s2] 적합 214 · 행 518 · A 1293 · 채점 1687 · 9.3s · 상태 ok(실패 0) · 완료 163/343 · 누적 1258s
+  [wf3|Lena|r|s3] 적합 318 · 행 518 · A 1737 · 채점 1278 · 12.4s · 상태 ok(실패 0) · 완료 164/343 · 누적 1259s
+  [wf3|Lena|r|s4] 적합 302 · 행 518 · A 1533 · 채점 1428 · 12.7s · 상태 ok(실패 0) · 완료 165/343 · 누적 1260s
+  [wf3|Lena|r|s1] 적합 270 · 행 518 · A 1505 · 채점 1478 · 11.8s · 상태 ok(실패 0) · 완료 166/343 · 누적 1260s
+  [wf2|Alaska|r|s1|S2] 적합 100 · 행 226 · A 7436 · 채점 6170 · 6.8s · 상태 ok(실패 0) · 완료 167/343 · 누적 1264s
+  [wf2|Alaska|r|s1|S5] 적합 60 · 행 136 · A 7436 · 채점 6170 · 4.0s · 상태 ok(실패 0) · 완료 168/343 · 누적 1264s
+  [wf2|Alaska|r|s1|S1] 적합 100 · 행 226 · A 7436 · 채점 6170 · 8.0s · 상태 ok(실패 0) · 완료 169/343 · 누적 1265s
+  [wf2|Alaska|r|s1|S7] 적합 100 · 행 226 · A 7436 · 채점 6170 · 6.0s · 상태 ok(실패 0) · 완료 170/343 · 누적 1266s
+  [wf2|Alaska|r|s1|S3] 적합 100 · 행 226 · A 7436 · 채점 6170 · 8.1s · 상태 ok(실패 0) · 완료 171/343 · 누적 1267s
+  [wf2|Alaska|r|s1|S4] 적합 100 · 행 226 · A 7436 · 채점 6170 · 7.5s · 상태 ok(실패 0) · 완료 172/343 · 누적 1267s
+  [wf3|Lena|r|s5] 적합 260 · 행 518 · A 1120 · 채점 1860 · 11.1s · 상태 ok(실패 0) · 완료 173/343 · 누적 1267s
+  [wf2|Alaska|r|s2|S5] 적합 52 · 행 118 · A 6821 · 채점 6785 · 3.5s · 상태 ok(실패 0) · 완료 174/343 · 누적 1270s
+  [wf2|Alaska|r|s2|S1] 적합 100 · 행 226 · A 6821 · 채점 6785 · 6.3s · 상태 ok(실패 0) · 완료 175/343 · 누적 1270s
+  [wf2|Alaska|r|s2|S2] 적합 100 · 행 226 · A 6821 · 채점 6785 · 6.4s · 상태 ok(실패 0) · 완료 176/343 · 누적 1271s
+  [wf2|Alaska|r|s2|S3] 적합 100 · 행 226 · A 6821 · 채점 6785 · 6.2s · 상태 ok(실패 0) · 완료 177/343 · 누적 1271s
+  [wf2|Alaska|r|s2|S7] 적합 100 · 행 226 · A 6821 · 채점 6785 · 5.8s · 상태 ok(실패 0) · 완료 178/343 · 누적 1272s
+  [wf1|Lena|r|s1] 적합 1010 · 행 1551 · A 1505 · 채점 1478 · 141.6s · 상태 ok(실패 0) · 완료 179/343 · 누적 1273s
+  [wf2|Alaska|r|s3|S1] 적합 100 · 행 226 · A 6758 · 채점 6848 · 6.4s · 상태 ok(실패 0) · 완료 180/343 · 누적 1273s
+  [wf2|Alaska|r|s2|S4] 적합 100 · 행 226 · A 6821 · 채점 6785 · 7.2s · 상태 ok(실패 0) · 완료 181/343 · 누적 1274s
+  [wf2|Alaska|r|s3|S5] 적합 40 · 행 91 · A 6758 · 채점 6848 · 3.0s · 상태 ok(실패 0) · 완료 182/343 · 누적 1274s
+  [wf2|Alaska|r|s3|S2] 적합 100 · 행 226 · A 6758 · 채점 6848 · 6.9s · 상태 ok(실패 0) · 완료 183/343 · 누적 1277s
+  [wf2|Alaska|r|s3|S3] 적합 100 · 행 226 · A 6758 · 채점 6848 · 6.8s · 상태 ok(실패 0) · 완료 184/343 · 누적 1277s
+  [wf2|Alaska|r|s3|S7] 적합 84 · 행 190 · A 6758 · 채점 6848 · 5.3s · 상태 ok(실패 0) · 완료 185/343 · 누적 1278s
+  [wf2|Alaska|r|s3|S4] 적합 100 · 행 226 · A 6758 · 채점 6848 · 7.9s · 상태 ok(실패 0) · 완료 186/343 · 누적 1279s
+  [wf2|Alaska|r|s4|S5] 적합 28 · 행 64 · A 6540 · 채점 7066 · 2.3s · 상태 ok(실패 0) · 완료 187/343 · 누적 1279s
+  [wf2|Alaska|r|s4|S2] 적합 100 · 행 226 · A 6540 · 채점 7066 · 6.7s · 상태 ok(실패 0) · 완료 188/343 · 누적 1280s
+  [wf2|Alaska|r|s4|S3] 적합 100 · 행 226 · A 6540 · 채점 7066 · 6.6s · 상태 ok(실패 0) · 완료 189/343 · 누적 1280s
+  [wf2|Alaska|r|s4|S1] 적합 100 · 행 226 · A 6540 · 채점 7066 · 7.9s · 상태 ok(실패 0) · 완료 190/343 · 누적 1281s
+  [wf1|Alaska|r|s5|x34] 적합 656 · 행 741 · A 6322 · 채점 7284 · 76.9s · 상태 ok(실패 0) · 완료 191/343 · 누적 1281s
+  [wf2|Alaska|r|s4|S4] 적합 100 · 행 226 · A 6540 · 채점 7066 · 7.6s · 상태 ok(실패 0) · 완료 192/343 · 누적 1281s
+  [wf2|Alaska|r|s4|S7] 적합 84 · 행 190 · A 6540 · 채점 7066 · 5.5s · 상태 ok(실패 0) · 완료 193/343 · 누적 1283s
+  [wf1|Lena|r|s2] 적합 1038 · 행 1551 · A 1293 · 채점 1687 · 145.5s · 상태 ok(실패 0) · 완료 194/343 · 누적 1283s
+  [wf2|Alaska|r|s5|S1] 적합 100 · 행 226 · A 6322 · 채점 7284 · 6.4s · 상태 ok(실패 0) · 완료 195/343 · 누적 1284s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf2|Alaska|r|s5|S5] 적합 68 · 행 154 · A 6322 · 채점 7284 · 4.8s · 상태 ok(실패 0) · 완료 196/343 · 누적 1285s
+  [wf2|Alaska|r|s5|S2] 적합 100 · 행 226 · A 6322 · 채점 7284 · 6.6s · 상태 ok(실패 0) · 완료 197/343 · 누적 1285s
+  [wf2|Alaska|r|s5|S3] 적합 100 · 행 226 · A 6322 · 채점 7284 · 6.6s · 상태 ok(실패 0) · 완료 198/343 · 누적 1286s
+  [wf2|Alaska|r|s5|S7] 적합 100 · 행 226 · A 6322 · 채점 7284 · 6.1s · 상태 ok(실패 0) · 완료 199/343 · 누적 1287s
+  [wf2|Alaska|r|s5|S4] 적합 100 · 행 226 · A 6322 · 채점 7284 · 7.2s · 상태 ok(실패 0) · 완료 200/343 · 누적 1287s
+  [wf2|AL-1|r|s3|S1] 적합 100 · 행 226 · A 4834 · 채점 320 · 6.1s · 상태 ok(실패 0) · 완료 201/343 · 누적 1292s
+  [wf2|AL-2|r|s5|S6] 적합 225 · 행 226 · A 1924 · 채점 1567 · 11.7s · 상태 ok(실패 0) · 완료 202/343 · 누적 1293s
+  [wf2|AL-1|r|s3|S2] 적합 100 · 행 226 · A 4834 · 채점 320 · 6.2s · 상태 ok(실패 0) · 완료 203/343 · 누적 1293s
+  [wf2|AL-1|r|s3|S3] 적합 100 · 행 226 · A 4834 · 채점 320 · 5.6s · 상태 ok(실패 0) · 완료 204/343 · 누적 1293s
+  [wf2|AL-2|r|s2|S6] 적합 225 · 행 226 · A 1864 · 채점 1627 · 11.5s · 상태 ok(실패 0) · 완료 205/343 · 누적 1293s
+  [wf2|AL-2|r|s3|S6] 적합 225 · 행 226 · A 1745 · 채점 1746 · 11.1s · 상태 ok(실패 0) · 완료 206/343 · 누적 1294s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf2|AL-2|r|s1|S6] 적합 225 · 행 226 · A 1694 · 채점 1797 · 12.0s · 상태 ok(실패 0) · 완료 207/343 · 누적 1296s
+  [wf2|Lena|r|s3|S6] 적합 225 · 행 226 · A 1737 · 채점 1278 · 12.9s · 상태 ok(실패 0) · 완료 208/343 · 누적 1296s
+  [wf1|Canada|r|s3] 적합 690 · 행 1051 · A 406 · 채점 342 · 58.1s · 상태 ok(실패 0) · 완료 209/343 · 누적 1296s
+  [wf2|Lena|r|s4|S6] 적합 225 · 행 226 · A 1533 · 채점 1428 · 11.8s · 상태 ok(실패 0) · 완료 210/343 · 누적 1297s
+  [wf2|AL-1|r|s3|S5] 적합 60 · 행 136 · A 4834 · 채점 320 · 4.0s · 상태 ok(실패 0) · 완료 211/343 · 누적 1297s
+  [wf1|Canada|r|s5] 적합 698 · 행 1051 · A 360 · 채점 388 · 57.4s · 상태 ok(실패 0) · 완료 212/343 · 누적 1297s
+  [wf2|AL-1|r|s3|S4] 적합 100 · 행 226 · A 4834 · 채점 320 · 6.3s · 상태 ok(실패 0) · 완료 213/343 · 누적 1298s
+  [wf2|AL-1|r|s5|S1] 적합 100 · 행 226 · A 4716 · 채점 438 · 5.5s · 상태 ok(실패 0) · 완료 214/343 · 누적 1298s
+  [wf2|AL-1|r|s3|S7] 적합 100 · 행 226 · A 4834 · 채점 320 · 5.6s · 상태 ok(실패 0) · 완료 215/343 · 누적 1299s
+  [wf2|Lena|r|s1|S6] 적합 225 · 행 226 · A 1505 · 채점 1478 · 13.5s · 상태 ok(실패 0) · 완료 216/343 · 누적 1299s
+  [wf2|AL-1|r|s5|S2] 적합 100 · 행 226 · A 4716 · 채점 438 · 5.8s · 상태 ok(실패 0) · 완료 217/343 · 누적 1299s
+  [wf2|AL-1|r|s5|S3] 적합 100 · 행 226 · A 4716 · 채점 438 · 5.8s · 상태 ok(실패 0) · 완료 218/343 · 누적 1300s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf2|AL-1|r|s5|S5] 적합 60 · 행 136 · A 4716 · 채점 438 · 4.2s · 상태 ok(실패 0) · 완료 219/343 · 누적 1301s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf2|AL-1|r|s5|S7] 적합 100 · 행 226 · A 4716 · 채점 438 · 5.2s · 상태 ok(실패 0) · 완료 220/343 · 누적 1302s
+  [wf1|Canada|r|s2] 적합 714 · 행 1051 · A 363 · 채점 385 · 64.4s · 상태 ok(실패 0) · 완료 221/343 · 누적 1303s
+  [wf2|AL-1|r|s5|S4] 적합 100 · 행 226 · A 4716 · 채점 438 · 6.7s · 상태 ok(실패 0) · 완료 222/343 · 누적 1303s
+  [wf2|AL-1|r|s4|S6] 적합 130 · 행 181 · A 437 · 채점 4717 · 5.2s · 상태 ok(실패 0) · 완료 223/343 · 누적 1303s
+  [wf1|Canada|r|s4] 적합 714 · 행 1051 · A 325 · 채점 423 · 59.0s · 상태 ok(실패 0) · 완료 224/343 · 누적 1304s
+  [wf2|Canada|r|s3|S6] 적합 130 · 행 181 · A 406 · 채점 342 · 6.0s · 상태 ok(실패 0) · 완료 225/343 · 누적 1304s
+  [wf2|Canada|r|s5|S6] 적합 130 · 행 181 · A 360 · 채점 388 · 6.2s · 상태 ok(실패 0) · 완료 226/343 · 누적 1305s
+  [wf2|AL-1|r|s2|S6] 적합 130 · 행 181 · A 288 · 채점 4866 · 4.4s · 상태 ok(실패 0) · 완료 227/343 · 누적 1305s
+  [wf2|Canada|r|s1|S6] 적합 130 · 행 181 · A 355 · 채점 393 · 6.2s · 상태 ok(실패 0) · 완료 228/343 · 누적 1305s
+  [wf2|Canada|r|s2|S6] 적합 130 · 행 181 · A 363 · 채점 385 · 6.5s · 상태 ok(실패 0) · 완료 229/343 · 누적 1305s
+  [wf2|Canada|r|s4|S6] 적합 130 · 행 181 · A 325 · 채점 423 · 6.1s · 상태 ok(실패 0) · 완료 230/343 · 누적 1306s
+  [wf2|AL-2|r|s5|S5] 적합 36 · 행 82 · A 1924 · 채점 1567 · 2.1s · 상태 ok(실패 0) · 완료 231/343 · 누적 1306s
+  [wf1|Canada|r|s1] 적합 714 · 행 1051 · A 355 · 채점 393 · 63.7s · 상태 ok(실패 0) · 완료 232/343 · 누적 1308s
+  [wf2|AL-2|r|s4|S6] 적합 225 · 행 226 · A 1333 · 채점 2158 · 11.0s · 상태 ok(실패 0) · 완료 233/343 · 누적 1308s
+  [wf2|AL-2|r|s5|S1] 적합 100 · 행 226 · A 1924 · 채점 1567 · 6.3s · 상태 ok(실패 0) · 완료 234/343 · 누적 1308s
+  [wf2|Lena|r|s5|S6] 적합 225 · 행 226 · A 1120 · 채점 1860 · 11.3s · 상태 ok(실패 0) · 완료 235/343 · 누적 1308s
+  [wf2|AL-2|r|s2|S5] 적합 40 · 행 91 · A 1864 · 채점 1627 · 2.7s · 상태 ok(실패 0) · 완료 236/343 · 누적 1309s
+  [wf2|AL-2|r|s5|S7] 적합 68 · 행 154 · A 1924 · 채점 1567 · 4.5s · 상태 ok(실패 0) · 완료 237/343 · 누적 1309s
+  [wf2|AL-2|r|s5|S2] 적합 100 · 행 226 · A 1924 · 채점 1567 · 6.3s · 상태 ok(실패 0) · 완료 238/343 · 누적 1309s
+  [wf2|AL-2|r|s5|S3] 적합 100 · 행 226 · A 1924 · 채점 1567 · 6.3s · 상태 ok(실패 0) · 완료 239/343 · 누적 1309s
+  [wf2|AL-2|r|s5|S4] 적합 100 · 행 226 · A 1924 · 채점 1567 · 6.6s · 상태 ok(실패 0) · 완료 240/343 · 누적 1310s
+  [wf2|Lena|r|s2|S6] 적합 225 · 행 226 · A 1293 · 채점 1687 · 13.9s · 상태 ok(실패 0) · 완료 241/343 · 누적 1311s
+  [wf2|AL-2|r|s3|S5] 적합 40 · 행 91 · A 1745 · 채점 1746 · 2.3s · 상태 ok(실패 0) · 완료 242/343 · 누적 1311s
+  [wf2|AL-2|r|s2|S3] 적합 100 · 행 226 · A 1864 · 채점 1627 · 6.1s · 상태 ok(실패 0) · 완료 243/343 · 누적 1311s
+  [wf2|AL-2|r|s2|S1] 적합 100 · 행 226 · A 1864 · 채점 1627 · 6.2s · 상태 ok(실패 0) · 완료 244/343 · 누적 1311s
+  [wf2|AL-2|r|s2|S2] 적합 100 · 행 226 · A 1864 · 채점 1627 · 6.3s · 상태 ok(실패 0) · 완료 245/343 · 누적 1311s
+  [wf2|AL-2|r|s2|S4] 적합 100 · 행 226 · A 1864 · 채점 1627 · 6.6s · 상태 ok(실패 0) · 완료 246/343 · 누적 1312s
+  [wf2|AL-2|r|s2|S7] 적합 84 · 행 190 · A 1864 · 채점 1627 · 5.6s · 상태 ok(실패 0) · 완료 247/343 · 누적 1312s
+    [warn] 적합 실패(wf1|catboost_lo|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost|R1cv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+    [warn] 적합 실패(wf1|catboost_lo|Recv): CatBoostError('catboost/libs/data/quantization.cpp:2419: All features are either constant or ignored.')
+  [wf2|Lena|r|s3|S5] 적합 32 · 행 73 · A 1737 · 채점 1278 · 2.0s · 상태 ok(실패 0) · 완료 248/343 · 누적 1313s
+  [wf2|AL-2|r|s3|S1] 적합 100 · 행 226 · A 1745 · 채점 1746 · 5.8s · 상태 ok(실패 0) · 완료 249/343 · 누적 1314s
+  [wf2|AL-2|r|s3|S3] 적합 100 · 행 226 · A 1745 · 채점 1746 · 5.9s · 상태 ok(실패 0) · 완료 250/343 · 누적 1314s
+  [wf2|AL-2|r|s3|S2] 적합 100 · 행 226 · A 1745 · 채점 1746 · 6.0s · 상태 ok(실패 0) · 완료 251/343 · 누적 1314s
+  [wf2|AL-2|r|s3|S4] 적합 100 · 행 226 · A 1745 · 채점 1746 · 6.3s · 상태 ok(실패 0) · 완료 252/343 · 누적 1315s
+  [wf2|AL-2|r|s3|S7] 적합 100 · 행 226 · A 1745 · 채점 1746 · 5.8s · 상태 ok(실패 0) · 완료 253/343 · 누적 1315s
+  [wf2|Lena|r|s3|S1] 적합 100 · 행 226 · A 1737 · 채점 1278 · 6.1s · 상태 ok(실패 0) · 완료 254/343 · 누적 1315s
+  [wf2|AL-2|r|s1|S5] 적합 40 · 행 91 · A 1694 · 채점 1797 · 2.4s · 상태 ok(실패 0) · 완료 255/343 · 누적 1315s
+  [wf2|Lena|r|s3|S2] 적합 100 · 행 226 · A 1737 · 채점 1278 · 6.1s · 상태 ok(실패 0) · 완료 256/343 · 누적 1315s
+  [wf2|Lena|r|s3|S3] 적합 100 · 행 226 · A 1737 · 채점 1278 · 5.9s · 상태 ok(실패 0) · 완료 257/343 · 누적 1316s
+  [wf1|AL-1|r|s2] 적합 654 · 행 1051 · A 288 · 채점 4866 · 70.5s · 상태 partial(실패 15) · 완료 258/343 · 누적 1316s
+  [wf2|Lena|r|s3|S4] 적합 100 · 행 226 · A 1737 · 채점 1278 · 6.4s · 상태 ok(실패 0) · 완료 259/343 · 누적 1317s
+  [wf2|Lena|r|s4|S5] 적합 40 · 행 91 · A 1533 · 채점 1428 · 2.2s · 상태 ok(실패 0) · 완료 260/343 · 누적 1317s
+  [wf2|AL-2|r|s1|S1] 적합 100 · 행 226 · A 1694 · 채점 1797 · 6.3s · 상태 ok(실패 0) · 완료 261/343 · 누적 1317s
+  [wf2|AL-2|r|s1|S2] 적합 100 · 행 226 · A 1694 · 채점 1797 · 6.3s · 상태 ok(실패 0) · 완료 262/343 · 누적 1317s
+  [wf2|Lena|r|s3|S7] 적합 100 · 행 226 · A 1737 · 채점 1278 · 6.5s · 상태 ok(실패 0) · 완료 263/343 · 누적 1318s
+  [wf2|AL-2|r|s1|S3] 적합 100 · 행 226 · A 1694 · 채점 1797 · 6.0s · 상태 ok(실패 0) · 완료 264/343 · 누적 1318s
+  [wf2|AL-2|r|s1|S4] 적합 100 · 행 226 · A 1694 · 채점 1797 · 6.6s · 상태 ok(실패 0) · 완료 265/343 · 누적 1319s
+  [wf2|Lena|r|s1|S5] 적합 28 · 행 64 · A 1505 · 채점 1478 · 1.8s · 상태 ok(실패 0) · 완료 266/343 · 누적 1319s
+  [wf2|AL-2|r|s1|S7] 적합 84 · 행 190 · A 1694 · 채점 1797 · 5.7s · 상태 ok(실패 0) · 완료 267/343 · 누적 1319s
+  [wf2|Lena|r|s4|S2] 적합 100 · 행 226 · A 1533 · 채점 1428 · 5.8s · 상태 ok(실패 0) · 완료 268/343 · 누적 1320s
+  [wf2|Lena|r|s4|S1] 적합 100 · 행 226 · A 1533 · 채점 1428 · 6.6s · 상태 ok(실패 0) · 완료 269/343 · 누적 1320s
+  [wf2|Lena|r|s4|S3] 적합 100 · 행 226 · A 1533 · 채점 1428 · 5.7s · 상태 ok(실패 0) · 완료 270/343 · 누적 1320s
+  [wf2|Lena|r|s4|S4] 적합 100 · 행 226 · A 1533 · 채점 1428 · 6.2s · 상태 ok(실패 0) · 완료 271/343 · 누적 1321s
+  [wf2|Lena|r|s4|S7] 적합 100 · 행 226 · A 1533 · 채점 1428 · 5.8s · 상태 ok(실패 0) · 완료 272/343 · 누적 1321s
+  [wf2|AL-2|r|s4|S5] 적합 36 · 행 82 · A 1333 · 채점 2158 · 2.1s · 상태 ok(실패 0) · 완료 273/343 · 누적 1321s
+  [wf2|Lena|r|s1|S1] 적합 100 · 행 226 · A 1505 · 채점 1478 · 6.1s · 상태 ok(실패 0) · 완료 274/343 · 누적 1321s
+  [wf2|Lena|r|s1|S2] 적합 100 · 행 226 · A 1505 · 채점 1478 · 6.1s · 상태 ok(실패 0) · 완료 275/343 · 누적 1322s
+  [wf2|Lena|r|s1|S3] 적합 100 · 행 226 · A 1505 · 채점 1478 · 6.2s · 상태 ok(실패 0) · 완료 276/343 · 누적 1322s
+  [wf2|Lena|r|s2|S5] 적합 20 · 행 46 · A 1293 · 채점 1687 · 1.4s · 상태 ok(실패 0) · 완료 277/343 · 누적 1322s
+  [wf2|AL-2|r|s4|S1] 적합 100 · 행 226 · A 1333 · 채점 2158 · 5.6s · 상태 ok(실패 0) · 완료 278/343 · 누적 1323s
+  [wf2|Lena|r|s1|S7] 적합 100 · 행 226 · A 1505 · 채점 1478 · 6.0s · 상태 ok(실패 0) · 완료 279/343 · 누적 1323s
+  [wf1|AL-1|r|s4] 적합 614 · 행 1051 · A 437 · 채점 4717 · 87.5s · 상태 ok(실패 0) · 완료 280/343 · 누적 1323s
+  [wf2|AL-2|r|s4|S3] 적합 100 · 행 226 · A 1333 · 채점 2158 · 5.7s · 상태 ok(실패 0) · 완료 281/343 · 누적 1323s
+  [wf2|AL-2|r|s4|S2] 적합 100 · 행 226 · A 1333 · 채점 2158 · 5.9s · 상태 ok(실패 0) · 완료 282/343 · 누적 1323s
+  [wf2|Lena|r|s1|S4] 적합 100 · 행 226 · A 1505 · 채점 1478 · 6.5s · 상태 ok(실패 0) · 완료 283/343 · 누적 1324s
+  [wf2|AL-2|r|s4|S7] 적합 100 · 행 226 · A 1333 · 채점 2158 · 5.5s · 상태 ok(실패 0) · 완료 284/343 · 누적 1325s
+  [wf2|AL-2|r|s4|S4] 적합 100 · 행 226 · A 1333 · 채점 2158 · 6.1s · 상태 ok(실패 0) · 완료 285/343 · 누적 1325s
+  [wf2|Lena|r|s5|S5] 적합 28 · 행 64 · A 1120 · 채점 1860 · 2.1s · 상태 ok(실패 0) · 완료 286/343 · 누적 1325s
+  [wf2|Lena|r|s2|S1] 적합 100 · 행 226 · A 1293 · 채점 1687 · 6.1s · 상태 ok(실패 0) · 완료 287/343 · 누적 1326s
+  [wf2|Lena|r|s2|S3] 적합 100 · 행 226 · A 1293 · 채점 1687 · 6.0s · 상태 ok(실패 0) · 완료 288/343 · 누적 1326s
+  [wf2|Lena|r|s2|S2] 적합 100 · 행 226 · A 1293 · 채점 1687 · 6.2s · 상태 ok(실패 0) · 완료 289/343 · 누적 1327s
+  [wf2|AL-1|r|s4|S2] 적합 80 · 행 181 · A 437 · 채점 4717 · 3.9s · 상태 ok(실패 0) · 완료 290/343 · 누적 1327s
+  [wf2|AL-1|r|s4|S5] 적합 40 · 행 91 · A 437 · 채점 4717 · 2.6s · 상태 ok(실패 0) · 완료 291/343 · 누적 1327s
+  [wf2|AL-1|r|s4|S3] 적합 80 · 행 181 · A 437 · 채점 4717 · 3.8s · 상태 ok(실패 0) · 완료 292/343 · 누적 1327s
+  [wf2|Lena|r|s5|S1] 적합 100 · 행 226 · A 1120 · 채점 1860 · 5.8s · 상태 ok(실패 0) · 완료 293/343 · 누적 1327s
+  [wf2|AL-1|r|s4|S1] 적합 80 · 행 181 · A 437 · 채점 4717 · 3.9s · 상태 ok(실패 0) · 완료 294/343 · 누적 1327s
+  [wf2|Lena|r|s2|S4] 적합 100 · 행 226 · A 1293 · 채점 1687 · 6.5s · 상태 ok(실패 0) · 완료 295/343 · 누적 1327s
+  [wf2|Lena|r|s2|S7] 적합 100 · 행 226 · A 1293 · 채점 1687 · 6.3s · 상태 ok(실패 0) · 완료 296/343 · 누적 1328s
+  [wf2|AL-1|r|s4|S4] 적합 80 · 행 181 · A 437 · 채점 4717 · 3.9s · 상태 ok(실패 0) · 완료 297/343 · 누적 1328s
+  [wf2|Lena|r|s5|S2] 적합 100 · 행 226 · A 1120 · 채점 1860 · 5.9s · 상태 ok(실패 0) · 완료 298/343 · 누적 1328s
+  [wf2|Canada|r|s3|S5] 적합 16 · 행 37 · A 406 · 채점 342 · 0.9s · 상태 ok(실패 0) · 완료 299/343 · 누적 1328s
+  [wf2|Canada|r|s2|S5] 적합 16 · 행 37 · A 363 · 채점 385 · 0.9s · 상태 ok(실패 0) · 완료 300/343 · 누적 1328s
+  [wf2|Lena|r|s5|S3] 적합 100 · 행 226 · A 1120 · 채점 1860 · 6.1s · 상태 ok(실패 0) · 완료 301/343 · 누적 1328s
+  [wf2|Lena|r|s5|S4] 적합 100 · 행 226 · A 1120 · 채점 1860 · 6.3s · 상태 ok(실패 0) · 완료 302/343 · 누적 1329s
+  [wf2|AL-1|r|s4|S7] 적합 76 · 행 172 · A 437 · 채점 4717 · 4.1s · 상태 ok(실패 0) · 완료 303/343 · 누적 1329s
+  [wf2|Lena|r|s5|S7] 적합 100 · 행 226 · A 1120 · 채점 1860 · 6.1s · 상태 ok(실패 0) · 완료 304/343 · 누적 1329s
+  [wf2|Canada|r|s3|S1] 적합 80 · 행 181 · A 406 · 채점 342 · 4.4s · 상태 ok(실패 0) · 완료 305/343 · 누적 1330s
+  [wf2|Canada|r|s3|S3] 적합 80 · 행 181 · A 406 · 채점 342 · 3.7s · 상태 ok(실패 0) · 완료 306/343 · 누적 1330s
+  [wf2|Canada|r|s5|S5] 적합 28 · 행 64 · A 360 · 채점 388 · 1.5s · 상태 ok(실패 0) · 완료 307/343 · 누적 1330s
+  [wf2|Canada|r|s3|S7] 적합 64 · 행 145 · A 406 · 채점 342 · 3.0s · 상태 ok(실패 0) · 완료 308/343 · 누적 1330s
+  [wf2|Canada|r|s3|S2] 적합 80 · 행 181 · A 406 · 채점 342 · 4.7s · 상태 ok(실패 0) · 완료 309/343 · 누적 1330s
+  [wf2|Canada|r|s3|S4] 적합 80 · 행 181 · A 406 · 채점 342 · 4.1s · 상태 ok(실패 0) · 완료 310/343 · 누적 1331s
+  [wf1|Lena|r|s5] 적합 878 · 행 1551 · A 1120 · 채점 1860 · 125.2s · 상태 ok(실패 0) · 완료 311/343 · 누적 1331s
+  [wf2|Canada|r|s2|S1] 적합 80 · 행 181 · A 363 · 채점 385 · 4.0s · 상태 ok(실패 0) · 완료 312/343 · 누적 1331s
+  [wf2|Canada|r|s2|S3] 적합 80 · 행 181 · A 363 · 채점 385 · 4.2s · 상태 ok(실패 0) · 완료 313/343 · 누적 1332s
+  [wf2|Canada|r|s5|S1] 적합 80 · 행 181 · A 360 · 채점 388 · 3.7s · 상태 ok(실패 0) · 완료 314/343 · 누적 1332s
+  [wf2|Canada|r|s2|S4] 적합 80 · 행 181 · A 363 · 채점 385 · 4.2s · 상태 ok(실패 0) · 완료 315/343 · 누적 1332s
+  [wf2|Canada|r|s1|S5] 적합 24 · 행 55 · A 355 · 채점 393 · 1.4s · 상태 ok(실패 0) · 완료 316/343 · 누적 1332s
+  [wf1|Alaska|r|s2] 적합 1190 · 행 1851 · A 6821 · 채점 6785 · 282.3s · 상태 ok(실패 0) · 완료 317/343 · 누적 1332s
+  [wf2|Canada|r|s5|S2] 적합 80 · 행 181 · A 360 · 채점 388 · 3.9s · 상태 ok(실패 0) · 완료 318/343 · 누적 1332s
+  [wf2|Canada|r|s2|S2] 적합 80 · 행 181 · A 363 · 채점 385 · 4.9s · 상태 ok(실패 0) · 완료 319/343 · 누적 1332s
+  [wf2|Canada|r|s2|S7] 적합 80 · 행 181 · A 363 · 채점 385 · 4.7s · 상태 ok(실패 0) · 완료 320/343 · 누적 1332s
+  [wf2|Canada|r|s5|S3] 적합 80 · 행 181 · A 360 · 채점 388 · 3.8s · 상태 ok(실패 0) · 완료 321/343 · 누적 1332s
+  [wf2|Canada|r|s4|S5] 적합 16 · 행 37 · A 325 · 채점 423 · 0.9s · 상태 ok(실패 0) · 완료 322/343 · 누적 1332s
+  [wf2|Canada|r|s5|S7] 적합 80 · 행 181 · A 360 · 채점 388 · 3.7s · 상태 ok(실패 0) · 완료 323/343 · 누적 1333s
+  [wf2|Canada|r|s5|S4] 적합 80 · 행 181 · A 360 · 채점 388 · 4.6s · 상태 ok(실패 0) · 완료 324/343 · 누적 1333s
+  [wf2|Canada|r|s1|S1] 적합 80 · 행 181 · A 355 · 채점 393 · 4.1s · 상태 ok(실패 0) · 완료 325/343 · 누적 1334s
+  [wf2|Canada|r|s1|S2] 적합 80 · 행 181 · A 355 · 채점 393 · 4.2s · 상태 ok(실패 0) · 완료 326/343 · 누적 1334s
+  [wf2|Canada|r|s1|S3] 적합 80 · 행 181 · A 355 · 채점 393 · 3.8s · 상태 ok(실패 0) · 완료 327/343 · 누적 1334s
+  [wf2|AL-1|r|s2|S5] 적합 48 · 행 109 · A 288 · 채점 4866 · 1.9s · 상태 ok(실패 0) · 완료 328/343 · 누적 1334s
+  [wf2|Canada|r|s1|S4] 적합 80 · 행 181 · A 355 · 채점 393 · 4.2s · 상태 ok(실패 0) · 완료 329/343 · 누적 1334s
+  [wf2|Canada|r|s4|S1] 적합 80 · 행 181 · A 325 · 채점 423 · 3.8s · 상태 ok(실패 0) · 완료 330/343 · 누적 1334s
+  [wf2|Canada|r|s1|S7] 적합 80 · 행 181 · A 355 · 채점 393 · 4.1s · 상태 ok(실패 0) · 완료 331/343 · 누적 1335s
+  [wf2|AL-1|r|s2|S1] 적합 80 · 행 181 · A 288 · 채점 4866 · 3.0s · 상태 ok(실패 0) · 완료 332/343 · 누적 1335s
+  [wf2|AL-1|r|s2|S4] 적합 72 · 행 163 · A 288 · 채점 4866 · 2.6s · 상태 ok(실패 0) · 완료 333/343 · 누적 1335s
+  [wf2|AL-1|r|s2|S3] 적합 80 · 행 181 · A 288 · 채점 4866 · 3.0s · 상태 ok(실패 0) · 완료 334/343 · 누적 1335s
+  [wf2|Canada|r|s4|S3] 적합 80 · 행 181 · A 325 · 채점 423 · 3.8s · 상태 ok(실패 0) · 완료 335/343 · 누적 1335s
+  [wf2|Canada|r|s4|S7] 적합 80 · 행 181 · A 325 · 채점 423 · 3.6s · 상태 ok(실패 0) · 완료 336/343 · 누적 1335s
+  [wf2|Canada|r|s4|S2] 적합 80 · 행 181 · A 325 · 채점 423 · 4.3s · 상태 ok(실패 0) · 완료 337/343 · 누적 1335s
+  [wf2|AL-1|r|s2|S2] 적합 80 · 행 181 · A 288 · 채점 4866 · 3.4s · 상태 ok(실패 0) · 완료 338/343 · 누적 1335s
+  [wf2|Canada|r|s4|S4] 적합 80 · 행 181 · A 325 · 채점 423 · 3.9s · 상태 ok(실패 0) · 완료 339/343 · 누적 1336s
+  [wf2|AL-1|r|s2|S7] 적합 80 · 행 181 · A 288 · 채점 4866 · 3.5s · 상태 ok(실패 0) · 완료 340/343 · 누적 1336s
+  [wf1|Alaska|r|s3] 적합 1258 · 행 1851 · A 6758 · 채점 6848 · 326.0s · 상태 ok(실패 0) · 완료 341/343 · 누적 1377s
+  [wf1|Alaska|r|s4] 적합 1258 · 행 1851 · A 6540 · 채점 7066 · 327.8s · 상태 ok(실패 0) · 완료 342/343 · 누적 1380s
+  [wf1|Alaska|r|s5] 적합 1238 · 행 1851 · A 6322 · 채점 7284 · 363.0s · 상태 ok(실패 0) · 완료 343/343 · 누적 1418s
+[done] 완료 343 · 실패 0 · 일부 적합 실패 11 · 1419s

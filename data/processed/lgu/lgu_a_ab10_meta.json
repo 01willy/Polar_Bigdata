@@ -1,0 +1,36 @@
+{
+ "created": "2026-09-30 13:43",
+ "plan": "EXECUTION_PLAN_REMAINING_2026-09-30 6.3(LGU 개정 4 초안)",
+ "tests_file": "lgu_a_tests.csv",
+ "tests_sha16": "674e6f4ba3413b59",
+ "boot_files": {
+  "Lena": {
+   "file": "lgua_boot__Lena__x.npz",
+   "sha16": "8836bdedf36be30f",
+   "nboot": 1000,
+   "cfg_hash": "55c2086e6ab2"
+  },
+  "Canada": {
+   "file": "lgua_boot__Canada__x.npz",
+   "sha16": "67d763fef92e6606",
+   "nboot": 1000,
+   "cfg_hash": "55c2086e6ab2"
+  },
+  "Alaska": {
+   "file": "lgua_boot__Alaska__x.npz",
+   "sha16": "86fc9e922e690d1d",
+   "nboot": 1000,
+   "cfg_hash": "55c2086e6ab2"
+  }
+ },
+ "excluded": {},
+ "has_two_stage": true,
+ "p_cell_equals_p_boot": true,
+ "nboot": 1000,
+ "margin": [
+  4.951392988468925,
+  6.448276746355261
+ ],
+ "verdict_normalized": false,
+ "output_limit": "값은 화면에 출력하지 않는다"
+}

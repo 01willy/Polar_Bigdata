@@ -1,0 +1,52 @@
+{
+ "entries": [
+  {
+   "file": "xa_targets.csv",
+   "rows": 30,
+   "sha256": "ba1d72c3b71db7f6694792fd2baeea74e676485503e437934cf993e2eea0a128",
+   "written": "2026-10-04 21:06:57"
+  },
+  {
+   "file": "xa_gains.csv",
+   "rows": 630,
+   "sha256": "88b6038ba62c46a47d24e6dcbe17445c4a96237161948466997596b088129d63",
+   "written": "2026-10-04 21:06:57"
+  },
+  {
+   "file": "xa_spearman.csv",
+   "rows": 864,
+   "sha256": "d77bebc06fd3fb104b86fece6fa053420f8196a0249d1cc9a43bb92cc6219e65",
+   "written": "2026-10-04 21:06:57"
+  },
+  {
+   "file": "xa_categories.csv",
+   "rows": 144,
+   "sha256": "ce87e0689b45b719c19cdc8c85b43cf798d2bcb486f67b87fd6e1f83f4392c7a",
+   "written": "2026-10-04 21:06:57"
+  },
+  {
+   "file": "xa_hyp.csv",
+   "rows": 6,
+   "sha256": "334481251dd94ca28a594e06b8739a7d9661a47a7d8ef7c59f4247a31b79164f",
+   "written": "2026-10-04 21:06:57"
+  },
+  {
+   "file": "xa_decomp.csv",
+   "rows": 105,
+   "sha256": "137d9a119a3fc20db261f98325ce142a087db6e4bc255268c3efbdeaabd54102",
+   "written": "2026-10-04 21:06:57"
+  },
+  {
+   "file": "xa_pool_main4.csv",
+   "rows": 48,
+   "sha256": "3abee4e7f8d75876aa493c8ca7e49a70ca94d7c1c6afef05d9a8cf913de6e5c1",
+   "written": "2026-10-04 21:06:57"
+  },
+  {
+   "file": "xa_additivity.csv",
+   "rows": 120,
+   "sha256": "4b31f61ddec2faee23d731f6b4a54875068d36c3dc1e37a68878b4632b0027e6",
+   "written": "2026-10-04 21:06:57"
+  }
+ ]
+}

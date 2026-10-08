@@ -1,0 +1,5 @@
+unpacked_at=2026-09-30 12:30:38
+tar_sha256=55e6ff41e2d4e4532c78eae337cb9760c540bade7590c481e4fb067b13ec5c8e
+cpu=117 gpu=231
+note=해제는 결과 열람이 아니다. 작업 안 집계 표(lg_curve 등)는 열지 않았다
+lg_first_table_view=2026-09-30 12:31:39

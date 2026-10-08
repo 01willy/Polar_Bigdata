@@ -1,0 +1,67 @@
+{
+ "stage": "H45/LGU-B",
+ "plan": "docs/EXPERIMENT_PLAN_LGU_2026-09-29.md 4절",
+ "prefix": "lgu_b_precheck",
+ "tag": "lgub_precheck",
+ "targets": [
+  "Canada"
+ ],
+ "ok_targets": [
+  "Canada"
+ ],
+ "normalizers": [
+  "nflow",
+  "cfm",
+  "cbq",
+  "phys"
+ ],
+ "seeds": [
+  0
+ ],
+ "perms": 10,
+ "lams": [
+  0.0,
+  0.25,
+  1.0
+ ],
+ "n_aux": [
+  10,
+  40,
+  160
+ ],
+ "aux_targets": [
+  "Canada"
+ ],
+ "splits": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "draws": 5,
+ "nboot": 2000,
+ "precision_only": true,
+ "n_unit_fail": 0,
+ "blind": {
+  "LGU-B1": "재현(비맹검)",
+  "LGU-B2": "맹검",
+  "LGU-B3": "맹검",
+  "LGU-B4": "맹검(const 는 C2 hier2_cdf 와 규약이 다르다)",
+  "LGU-B5": "진단",
+  "LGU-B6": "맹검"
+ },
+ "inputs": {
+  "fidelity_base_v3.csv": "214abe489347",
+  "e5_soil_tdd_v3.csv": "f8c4b4f0b505",
+  "lg_subregion_map_v1.csv": "f79eeb64564c",
+  "lgx_label_flags_v1.csv": "d1d453052b46"
+ },
+ "code_sha": "cb1dd2991f18",
+ "code_sha_common": "88ecdc5e7f60",
+ "code_sha_h40": "ffd0b3a76d36",
+ "n_nan_boot": {
+  "Canada": 0
+ },
+ "elapsed_s": 86.9
+}

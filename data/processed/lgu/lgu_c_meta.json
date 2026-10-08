@@ -1,0 +1,1424 @@
+{
+ "harness": "h46_spatial_diagnostics",
+ "plan": "docs/EXPERIMENT_PLAN_LGU_2026-09-29.md 5절",
+ "blind": "재현(비맹검)",
+ "note": "가설과 판정이 없는 진단이다. LGX·LG 의 산출을 읽지 않는다. 격자 원자료를 읽지 않는다.",
+ "args": {
+  "items": "variogram,icc,proximity,sar",
+  "regions": "Alaska,Lena,Canada",
+  "targets": "",
+  "sar_units": "Alaska,Canada,AL-1,AL-2,AL-3,AL-4,AL-5,AL-6,CA-1,CA-2,CA-3",
+  "splits": 5,
+  "n_grid": "10,40,160,all",
+  "draws": 5,
+  "seeds": 1,
+  "dists": "1,2,5,10,25,50,100",
+  "bins": "0,0.1,0.25,0.5,1,2,5,10,25,50,100,200",
+  "nboot": 2000,
+  "chunk": 512,
+  "workers": 2,
+  "threads": 4,
+  "gpus": "",
+  "out_dir": "data/processed/lgu",
+  "data_dir": "data/processed",
+  "tag": "lguc",
+  "subregion_map": "lg_subregion_map_v1.csv",
+  "label_flags": "lgx_label_flags_v1.csv",
+  "allow_local": true,
+  "smoke": false,
+  "precheck": false,
+  "count_only": false,
+  "summarize_only": false,
+  "no_summarize": false,
+  "resume": true,
+  "buffer_km": 100.0,
+  "ITEMS": [
+   "variogram",
+   "icc",
+   "proximity",
+   "sar"
+  ],
+  "REGIONS": [
+   "Alaska",
+   "Lena",
+   "Canada"
+  ],
+  "TARGETS": [
+   [
+    "Lena",
+    "x"
+   ],
+   [
+    "Canada",
+    "x"
+   ],
+   [
+    "Russia_W",
+    "x"
+   ],
+   [
+    "Russia_E",
+    "x"
+   ],
+   [
+    "Alaska",
+    "x"
+   ],
+   [
+    "AL-1",
+    "i"
+   ],
+   [
+    "AL-2",
+    "i"
+   ],
+   [
+    "AL-3",
+    "i"
+   ],
+   [
+    "AL-4",
+    "i"
+   ],
+   [
+    "AL-5",
+    "i"
+   ],
+   [
+    "AL-6",
+    "i"
+   ],
+   [
+    "CA-2",
+    "i"
+   ],
+   [
+    "CA-3",
+    "i"
+   ],
+   [
+    "LE-1",
+    "i"
+   ],
+   [
+    "LE-2",
+    "i"
+   ]
+  ],
+  "SAR_UNITS": [
+   "Alaska",
+   "Canada",
+   "AL-1",
+   "AL-2",
+   "AL-3",
+   "AL-4",
+   "AL-5",
+   "AL-6",
+   "CA-1",
+   "CA-2",
+   "CA-3"
+  ],
+  "SPLITS": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "N_GRID": [
+   10,
+   40,
+   160,
+   -1
+  ],
+  "DRAWS": 5,
+  "DISTS": [
+   1.0,
+   2.0,
+   5.0,
+   10.0,
+   25.0,
+   50.0,
+   100.0
+  ],
+  "EDGES": [
+   0.0,
+   0.1,
+   0.25,
+   0.5,
+   1.0,
+   2.0,
+   5.0,
+   10.0,
+   25.0,
+   50.0,
+   100.0,
+   200.0
+  ],
+  "NBOOT": 2000,
+  "TAG": "lguc",
+  "PREFIX": "lgu_c"
+ },
+ "code_sha": "52e4cbcc1b18",
+ "code_sha_common": "88ecdc5e7f60",
+ "code_sha_h40": "ffd0b3a76d36",
+ "inputs": {
+  "fidelity_base_v3.csv": "214abe489347",
+  "e5_soil_tdd_v3.csv": "f8c4b4f0b505",
+  "lg_subregion_map_v1.csv": "f79eeb64564c",
+  "lgx_label_flags_v1.csv": "d1d453052b46"
+ },
+ "tables": {
+  "variogram": "/home/willy010313/Polar_Bigdata/data/processed/lgu/lgu_c_variogram.csv",
+  "icc": "/home/willy010313/Polar_Bigdata/data/processed/lgu/lgu_c_icc.csv",
+  "proximity": "/home/willy010313/Polar_Bigdata/data/processed/lgu/lgu_c_proximity.csv",
+  "sar": "/home/willy010313/Polar_Bigdata/data/processed/lgu/lgu_c_sar.csv"
+ },
+ "cell_counts": [
+  {
+   "item": "variogram",
+   "region": "Alaska",
+   "stratum": "all",
+   "n_cells": 13606,
+   "n_blocks": 74
+  },
+  {
+   "item": "variogram",
+   "region": "Alaska",
+   "stratum": "gpr",
+   "n_cells": 10879,
+   "n_blocks": 13
+  },
+  {
+   "item": "variogram",
+   "region": "Alaska",
+   "stratum": "probe",
+   "n_cells": 1348,
+   "n_blocks": 65
+  },
+  {
+   "item": "variogram",
+   "region": "Alaska",
+   "stratum": "noearly",
+   "n_cells": 13033,
+   "n_blocks": 74
+  },
+  {
+   "item": "variogram",
+   "region": "Lena",
+   "stratum": "all",
+   "n_cells": 3037,
+   "n_blocks": 20
+  },
+  {
+   "item": "variogram",
+   "region": "Lena",
+   "stratum": "probe",
+   "n_cells": 3037,
+   "n_blocks": 20
+  },
+  {
+   "item": "variogram",
+   "region": "Lena",
+   "stratum": "noearly",
+   "n_cells": 3037,
+   "n_blocks": 20
+  },
+  {
+   "item": "variogram",
+   "region": "Canada",
+   "stratum": "all",
+   "n_cells": 750,
+   "n_blocks": 39
+  },
+  {
+   "item": "variogram",
+   "region": "Canada",
+   "stratum": "probe",
+   "n_cells": 750,
+   "n_blocks": 39
+  },
+  {
+   "item": "variogram",
+   "region": "Canada",
+   "stratum": "noearly",
+   "n_cells": 744,
+   "n_blocks": 39
+  },
+  {
+   "item": "icc",
+   "region": "Alaska",
+   "stratum": "all",
+   "n_cells": 13606,
+   "n_blocks": 74
+  },
+  {
+   "item": "icc",
+   "region": "Alaska",
+   "stratum": "gpr",
+   "n_cells": 10879,
+   "n_blocks": 13
+  },
+  {
+   "item": "icc",
+   "region": "Alaska",
+   "stratum": "probe",
+   "n_cells": 1348,
+   "n_blocks": 65
+  },
+  {
+   "item": "icc",
+   "region": "Alaska",
+   "stratum": "noearly",
+   "n_cells": 13033,
+   "n_blocks": 74
+  },
+  {
+   "item": "icc",
+   "region": "Lena",
+   "stratum": "all",
+   "n_cells": 3037,
+   "n_blocks": 20
+  },
+  {
+   "item": "icc",
+   "region": "Lena",
+   "stratum": "probe",
+   "n_cells": 3037,
+   "n_blocks": 20
+  },
+  {
+   "item": "icc",
+   "region": "Lena",
+   "stratum": "noearly",
+   "n_cells": 3037,
+   "n_blocks": 20
+  },
+  {
+   "item": "icc",
+   "region": "Canada",
+   "stratum": "all",
+   "n_cells": 750,
+   "n_blocks": 39
+  },
+  {
+   "item": "icc",
+   "region": "Canada",
+   "stratum": "probe",
+   "n_cells": 750,
+   "n_blocks": 39
+  },
+  {
+   "item": "icc",
+   "region": "Canada",
+   "stratum": "noearly",
+   "n_cells": 744,
+   "n_blocks": 39
+  }
+ ],
+ "rows_not_made": [
+  {
+   "item": "variogram",
+   "region": "Lena",
+   "stratum": "gpr",
+   "n_cells": 0,
+   "reason": "cells<30"
+  },
+  {
+   "item": "variogram",
+   "region": "Canada",
+   "stratum": "gpr",
+   "n_cells": 0,
+   "reason": "cells<30"
+  },
+  {
+   "item": "icc",
+   "region": "Lena",
+   "stratum": "gpr",
+   "n_cells": 0,
+   "reason": "cells<30"
+  },
+  {
+   "item": "icc",
+   "region": "Canada",
+   "stratum": "gpr",
+   "n_cells": 0,
+   "reason": "cells<30"
+  }
+ ],
+ "units": [
+  {
+   "item": "variogram",
+   "sub": "Alaska",
+   "meta": {
+    "region": "Alaska",
+    "n_cells": 13606,
+    "n_nonfinite_z": 0,
+    "strata": {
+     "all": {
+      "n_cells": 13606,
+      "n_blocks": 74,
+      "var_w": 0.08696072665390381,
+      "n_pairs_total": 92554815,
+      "n_pairs_within": 24524279,
+      "n_pairs_beyond": 68030536,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 6.66
+     },
+     "gpr": {
+      "n_cells": 10879,
+      "n_blocks": 13,
+      "var_w": 0.06405504603293355,
+      "n_pairs_total": 59170881,
+      "n_pairs_within": 20253166,
+      "n_pairs_beyond": 38917715,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 3.91
+     },
+     "probe": {
+      "n_cells": 1348,
+      "n_blocks": 65,
+      "var_w": 0.12424701088369765,
+      "n_pairs_total": 907878,
+      "n_pairs_within": 307032,
+      "n_pairs_beyond": 600846,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 0.06
+     },
+     "noearly": {
+      "n_cells": 13033,
+      "n_blocks": 74,
+      "var_w": 0.07609235863077372,
+      "n_pairs_total": 84923028,
+      "n_pairs_within": 24049122,
+      "n_pairs_beyond": 60873906,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 5.35
+     }
+    },
+    "skipped": []
+   }
+  },
+  {
+   "item": "variogram",
+   "sub": "Lena",
+   "meta": {
+    "region": "Lena",
+    "n_cells": 3037,
+    "n_nonfinite_z": 0,
+    "strata": {
+     "all": {
+      "n_cells": 3037,
+      "n_blocks": 20,
+      "var_w": 0.1621805500657999,
+      "n_pairs_total": 4610166,
+      "n_pairs_within": 4547790,
+      "n_pairs_beyond": 62376,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 0.75
+     },
+     "probe": {
+      "n_cells": 3037,
+      "n_blocks": 20,
+      "var_w": 0.1621805500657999,
+      "n_pairs_total": 4610166,
+      "n_pairs_within": 4547790,
+      "n_pairs_beyond": 62376,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 0.5
+     },
+     "noearly": {
+      "n_cells": 3037,
+      "n_blocks": 20,
+      "var_w": 0.1621805500657999,
+      "n_pairs_total": 4610166,
+      "n_pairs_within": 4547790,
+      "n_pairs_beyond": 62376,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 0.68
+     }
+    },
+    "skipped": [
+     {
+      "item": "variogram",
+      "region": "Lena",
+      "stratum": "gpr",
+      "n_cells": 0,
+      "reason": "cells<30"
+     }
+    ]
+   }
+  },
+  {
+   "item": "variogram",
+   "sub": "Canada",
+   "meta": {
+    "region": "Canada",
+    "n_cells": 750,
+    "n_nonfinite_z": 0,
+    "strata": {
+     "all": {
+      "n_cells": 750,
+      "n_blocks": 39,
+      "var_w": 0.21004432995946773,
+      "n_pairs_total": 280875,
+      "n_pairs_within": 60796,
+      "n_pairs_beyond": 220079,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 0.02
+     },
+     "probe": {
+      "n_cells": 750,
+      "n_blocks": 39,
+      "var_w": 0.21004432995946773,
+      "n_pairs_total": 280875,
+      "n_pairs_within": 60796,
+      "n_pairs_beyond": 220079,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 0.02
+     },
+     "noearly": {
+      "n_cells": 744,
+      "n_blocks": 39,
+      "var_w": 0.18822564680793769,
+      "n_pairs_total": 276396,
+      "n_pairs_within": 60139,
+      "n_pairs_beyond": 216257,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 0.02
+     }
+    },
+    "skipped": [
+     {
+      "item": "variogram",
+      "region": "Canada",
+      "stratum": "gpr",
+      "n_cells": 0,
+      "reason": "cells<30"
+     }
+    ]
+   }
+  },
+  {
+   "item": "icc",
+   "sub": "Alaska",
+   "meta": {
+    "region": "Alaska",
+    "n_cells": 13606,
+    "n_nonfinite_z": 0,
+    "strata": {
+     "all": {
+      "n_cells": 13606,
+      "n_blocks": 74,
+      "flag": ""
+     },
+     "gpr": {
+      "n_cells": 10879,
+      "n_blocks": 13,
+      "flag": ""
+     },
+     "probe": {
+      "n_cells": 1348,
+      "n_blocks": 65,
+      "flag": ""
+     },
+     "noearly": {
+      "n_cells": 13033,
+      "n_blocks": 74,
+      "flag": ""
+     }
+    },
+    "skipped": []
+   }
+  },
+  {
+   "item": "icc",
+   "sub": "Lena",
+   "meta": {
+    "region": "Lena",
+    "n_cells": 3037,
+    "n_nonfinite_z": 0,
+    "strata": {
+     "all": {
+      "n_cells": 3037,
+      "n_blocks": 20,
+      "flag": ""
+     },
+     "probe": {
+      "n_cells": 3037,
+      "n_blocks": 20,
+      "flag": ""
+     },
+     "noearly": {
+      "n_cells": 3037,
+      "n_blocks": 20,
+      "flag": ""
+     }
+    },
+    "skipped": [
+     {
+      "item": "icc",
+      "region": "Lena",
+      "stratum": "gpr",
+      "n_cells": 0,
+      "reason": "cells<30"
+     }
+    ]
+   }
+  },
+  {
+   "item": "icc",
+   "sub": "Canada",
+   "meta": {
+    "region": "Canada",
+    "n_cells": 750,
+    "n_nonfinite_z": 0,
+    "strata": {
+     "all": {
+      "n_cells": 750,
+      "n_blocks": 39,
+      "flag": ""
+     },
+     "probe": {
+      "n_cells": 750,
+      "n_blocks": 39,
+      "flag": ""
+     },
+     "noearly": {
+      "n_cells": 744,
+      "n_blocks": 39,
+      "flag": ""
+     }
+    },
+    "skipped": [
+     {
+      "item": "icc",
+      "region": "Canada",
+      "stratum": "gpr",
+      "n_cells": 0,
+      "reason": "cells<30"
+     }
+    ]
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "Lena:x",
+   "meta": {
+    "target": "Lena",
+    "mode": "x",
+    "parent": "Lena",
+    "n_target": 3037,
+    "splits_used": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "splits_skipped": [],
+    "n_src": 14429,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 1
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "Canada:x",
+   "meta": {
+    "target": "Canada",
+    "mode": "x",
+    "parent": "Canada",
+    "n_target": 750,
+    "splits_used": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "splits_skipped": [],
+    "n_src": 16697,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 20
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "Russia_W:x",
+   "meta": {
+    "target": "Russia_W",
+    "mode": "x",
+    "parent": "Russia_W",
+    "n_target": 31,
+    "splits_used": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "splits_skipped": [],
+    "n_src": 17436,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 0
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "Russia_E:x",
+   "meta": {
+    "target": "Russia_E",
+    "mode": "x",
+    "parent": "Russia_E",
+    "n_target": 30,
+    "splits_used": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "splits_skipped": [],
+    "n_src": 17437,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 0
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "Alaska:x",
+   "meta": {
+    "target": "Alaska",
+    "mode": "x",
+    "parent": "Alaska",
+    "n_target": 13606,
+    "splits_used": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "splits_skipped": [],
+    "n_src": 3860,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 1
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "AL-1:i",
+   "meta": {
+    "target": "AL-1",
+    "mode": "i",
+    "parent": "Alaska",
+    "n_target": 5154,
+    "splits_used": [
+     2,
+     3,
+     4,
+     5
+    ],
+    "splits_skipped": [
+     {
+      "split": 1,
+      "status": "invalid_nb_eval<2"
+     }
+    ],
+    "n_src": 9815,
+    "n_src_parent": 5954,
+    "frac_src_parent": 0.6066225165562914,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 2498
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "AL-2:i",
+   "meta": {
+    "target": "AL-2",
+    "mode": "i",
+    "parent": "Alaska",
+    "n_target": 3491,
+    "splits_used": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "splits_skipped": [],
+    "n_src": 10231,
+    "n_src_parent": 6370,
+    "frac_src_parent": 0.6226175349428208,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 3745
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "AL-3:i",
+   "meta": {
+    "target": "AL-3",
+    "mode": "i",
+    "parent": "Alaska",
+    "n_target": 651,
+    "splits_used": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "splits_skipped": [],
+    "n_src": 16816,
+    "n_src_parent": 12955,
+    "frac_src_parent": 0.7703972407231209,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 0
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "AL-4:i",
+   "meta": {
+    "target": "AL-4",
+    "mode": "i",
+    "parent": "Alaska",
+    "n_target": 471,
+    "splits_used": [
+     1,
+     4,
+     5
+    ],
+    "splits_skipped": [
+     {
+      "split": 2,
+      "status": "invalid_nb_eval<2"
+     },
+     {
+      "split": 3,
+      "status": "dup_of_1"
+     }
+    ],
+    "n_src": 16995,
+    "n_src_parent": 13134,
+    "frac_src_parent": 0.7728155339805826,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 1
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "AL-5:i",
+   "meta": {
+    "target": "AL-5",
+    "mode": "i",
+    "parent": "Alaska",
+    "n_target": 619,
+    "splits_used": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "splits_skipped": [],
+    "n_src": 16846,
+    "n_src_parent": 12986,
+    "frac_src_parent": 0.7708654873560489,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 2
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "AL-6:i",
+   "meta": {
+    "target": "AL-6",
+    "mode": "i",
+    "parent": "Alaska",
+    "n_target": 3220,
+    "splits_used": [
+     1,
+     3,
+     4,
+     5
+    ],
+    "splits_skipped": [
+     {
+      "split": 2,
+      "status": "invalid_nb_eval<2"
+     }
+    ],
+    "n_src": 14247,
+    "n_src_parent": 10386,
+    "frac_src_parent": 0.7289955780164246,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 0
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "CA-2:i",
+   "meta": {
+    "target": "CA-2",
+    "mode": "i",
+    "parent": "Canada",
+    "n_target": 395,
+    "splits_used": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "splits_skipped": [],
+    "n_src": 17071,
+    "n_src_parent": 354,
+    "frac_src_parent": 0.020736922265830942,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 1
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "CA-3:i",
+   "meta": {
+    "target": "CA-3",
+    "mode": "i",
+    "parent": "Canada",
+    "n_target": 349,
+    "splits_used": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "splits_skipped": [],
+    "n_src": 17096,
+    "n_src_parent": 399,
+    "frac_src_parent": 0.023338792700046795,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 22
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "LE-1:i",
+   "meta": {
+    "target": "LE-1",
+    "mode": "i",
+    "parent": "Lena",
+    "n_target": 1786,
+    "splits_used": [
+     1,
+     2,
+     3,
+     4
+    ],
+    "splits_skipped": [
+     {
+      "split": 5,
+      "status": "invalid_nb_eval<2"
+     }
+    ],
+    "n_src": 14753,
+    "n_src_parent": 324,
+    "frac_src_parent": 0.021961634921710837,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 928
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "LE-2:i",
+   "meta": {
+    "target": "LE-2",
+    "mode": "i",
+    "parent": "Lena",
+    "n_target": 1251,
+    "splits_used": [
+     1,
+     2,
+     3
+    ],
+    "splits_skipped": [
+     {
+      "split": 4,
+      "status": "dup_of_2"
+     },
+     {
+      "split": 5,
+      "status": "invalid_nb_eval<2"
+     }
+    ],
+    "n_src": 14479,
+    "n_src_parent": 50,
+    "frac_src_parent": 0.0034532771600248634,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 1737
+   }
+  },
+  {
+   "item": "sar",
+   "sub": "Alaska",
+   "meta": {
+    "unit": "Alaska",
+    "n_cells": 13606,
+    "products": {
+     "insar_alt": {
+      "n_valid": 13606
+     },
+     "polsar_alt": {
+      "n_valid": 10073
+     }
+    }
+   }
+  },
+  {
+   "item": "sar",
+   "sub": "Canada",
+   "meta": {
+    "unit": "Canada",
+    "n_cells": 750,
+    "products": {
+     "insar_alt": {
+      "n_valid": 742
+     },
+     "polsar_alt": {
+      "n_valid": 0
+     }
+    }
+   }
+  },
+  {
+   "item": "sar",
+   "sub": "AL-1",
+   "meta": {
+    "unit": "AL-1",
+    "n_cells": 5154,
+    "products": {
+     "insar_alt": {
+      "n_valid": 5154
+     },
+     "polsar_alt": {
+      "n_valid": 5032
+     }
+    }
+   }
+  },
+  {
+   "item": "sar",
+   "sub": "AL-2",
+   "meta": {
+    "unit": "AL-2",
+    "n_cells": 3491,
+    "products": {
+     "insar_alt": {
+      "n_valid": 3491
+     },
+     "polsar_alt": {
+      "n_valid": 3490
+     }
+    }
+   }
+  },
+  {
+   "item": "sar",
+   "sub": "AL-3",
+   "meta": {
+    "unit": "AL-3",
+    "n_cells": 651,
+    "products": {
+     "insar_alt": {
+      "n_valid": 651
+     },
+     "polsar_alt": {
+      "n_valid": 647
+     }
+    }
+   }
+  },
+  {
+   "item": "sar",
+   "sub": "AL-4",
+   "meta": {
+    "unit": "AL-4",
+    "n_cells": 471,
+    "products": {
+     "insar_alt": {
+      "n_valid": 471
+     },
+     "polsar_alt": {
+      "n_valid": 471
+     }
+    }
+   }
+  },
+  {
+   "item": "sar",
+   "sub": "AL-5",
+   "meta": {
+    "unit": "AL-5",
+    "n_cells": 619,
+    "products": {
+     "insar_alt": {
+      "n_valid": 619
+     },
+     "polsar_alt": {
+      "n_valid": 433
+     }
+    }
+   }
+  },
+  {
+   "item": "sar",
+   "sub": "AL-6",
+   "meta": {
+    "unit": "AL-6",
+    "n_cells": 3220,
+    "products": {
+     "insar_alt": {
+      "n_valid": 3220
+     },
+     "polsar_alt": {
+      "n_valid": 0
+     }
+    }
+   }
+  },
+  {
+   "item": "sar",
+   "sub": "CA-1",
+   "meta": {
+    "unit": "CA-1",
+    "n_cells": 6,
+    "products": {
+     "insar_alt": {
+      "n_valid": 0
+     },
+     "polsar_alt": {
+      "n_valid": 0
+     }
+    }
+   }
+  },
+  {
+   "item": "sar",
+   "sub": "CA-2",
+   "meta": {
+    "unit": "CA-2",
+    "n_cells": 395,
+    "products": {
+     "insar_alt": {
+      "n_valid": 393
+     },
+     "polsar_alt": {
+      "n_valid": 0
+     }
+    }
+   }
+  },
+  {
+   "item": "sar",
+   "sub": "CA-3",
+   "meta": {
+    "unit": "CA-3",
+    "n_cells": 349,
+    "products": {
+     "insar_alt": {
+      "n_valid": 349
+     },
+     "polsar_alt": {
+      "n_valid": 0
+     }
+    }
+   }
+  }
+ ],
+ "n_failed": 0,
+ "run_records": [
+  {
+   "item": "variogram",
+   "sub": "Lena",
+   "status": "ok",
+   "error": "",
+   "n_rows": 36,
+   "elapsed_s": 2.42
+  },
+  {
+   "item": "variogram",
+   "sub": "Canada",
+   "status": "ok",
+   "error": "",
+   "n_rows": 36,
+   "elapsed_s": 0.07
+  },
+  {
+   "item": "icc",
+   "sub": "Alaska",
+   "status": "ok",
+   "error": "",
+   "n_rows": 4,
+   "elapsed_s": 0.02
+  },
+  {
+   "item": "icc",
+   "sub": "Lena",
+   "status": "ok",
+   "error": "",
+   "n_rows": 3,
+   "elapsed_s": 0.01
+  },
+  {
+   "item": "icc",
+   "sub": "Canada",
+   "status": "ok",
+   "error": "",
+   "n_rows": 3,
+   "elapsed_s": 0.01
+  },
+  {
+   "item": "proximity",
+   "sub": "Lena:x",
+   "status": "ok",
+   "error": "",
+   "n_rows": 168,
+   "elapsed_s": 1.37
+  },
+  {
+   "item": "proximity",
+   "sub": "Canada:x",
+   "status": "ok",
+   "error": "",
+   "n_rows": 168,
+   "elapsed_s": 1.09
+  },
+  {
+   "item": "proximity",
+   "sub": "Russia_W:x",
+   "status": "ok",
+   "error": "",
+   "n_rows": 84,
+   "elapsed_s": 0.51
+  },
+  {
+   "item": "proximity",
+   "sub": "Russia_E:x",
+   "status": "ok",
+   "error": "",
+   "n_rows": 84,
+   "elapsed_s": 0.5
+  },
+  {
+   "item": "proximity",
+   "sub": "Alaska:x",
+   "status": "ok",
+   "error": "",
+   "n_rows": 168,
+   "elapsed_s": 2.79
+  },
+  {
+   "item": "proximity",
+   "sub": "AL-1:i",
+   "status": "ok",
+   "error": "",
+   "n_rows": 140,
+   "elapsed_s": 1.52
+  },
+  {
+   "item": "proximity",
+   "sub": "AL-2:i",
+   "status": "ok",
+   "error": "",
+   "n_rows": 168,
+   "elapsed_s": 1.25
+  },
+  {
+   "item": "proximity",
+   "sub": "AL-3:i",
+   "status": "ok",
+   "error": "",
+   "n_rows": 168,
+   "elapsed_s": 0.41
+  },
+  {
+   "item": "proximity",
+   "sub": "AL-4:i",
+   "status": "ok",
+   "error": "",
+   "n_rows": 98,
+   "elapsed_s": 0.16
+  },
+  {
+   "item": "proximity",
+   "sub": "AL-5:i",
+   "status": "ok",
+   "error": "",
+   "n_rows": 168,
+   "elapsed_s": 0.2
+  },
+  {
+   "item": "proximity",
+   "sub": "AL-6:i",
+   "status": "ok",
+   "error": "",
+   "n_rows": 140,
+   "elapsed_s": 0.35
+  },
+  {
+   "item": "proximity",
+   "sub": "CA-2:i",
+   "status": "ok",
+   "error": "",
+   "n_rows": 168,
+   "elapsed_s": 0.39
+  },
+  {
+   "item": "proximity",
+   "sub": "CA-3:i",
+   "status": "ok",
+   "error": "",
+   "n_rows": 154,
+   "elapsed_s": 0.32
+  },
+  {
+   "item": "proximity",
+   "sub": "LE-1:i",
+   "status": "ok",
+   "error": "",
+   "n_rows": 140,
+   "elapsed_s": 0.82
+  },
+  {
+   "item": "proximity",
+   "sub": "LE-2:i",
+   "status": "ok",
+   "error": "",
+   "n_rows": 112,
+   "elapsed_s": 0.67
+  },
+  {
+   "item": "sar",
+   "sub": "Alaska",
+   "status": "ok",
+   "error": "",
+   "n_rows": 14,
+   "elapsed_s": 0.05
+  },
+  {
+   "item": "sar",
+   "sub": "Canada",
+   "status": "ok",
+   "error": "",
+   "n_rows": 14,
+   "elapsed_s": 0.01
+  },
+  {
+   "item": "sar",
+   "sub": "AL-1",
+   "status": "ok",
+   "error": "",
+   "n_rows": 14,
+   "elapsed_s": 0.02
+  },
+  {
+   "item": "sar",
+   "sub": "AL-2",
+   "status": "ok",
+   "error": "",
+   "n_rows": 14,
+   "elapsed_s": 0.03
+  },
+  {
+   "item": "sar",
+   "sub": "AL-3",
+   "status": "ok",
+   "error": "",
+   "n_rows": 14,
+   "elapsed_s": 0.01
+  },
+  {
+   "item": "sar",
+   "sub": "AL-4",
+   "status": "ok",
+   "error": "",
+   "n_rows": 14,
+   "elapsed_s": 0.01
+  },
+  {
+   "item": "sar",
+   "sub": "AL-5",
+   "status": "ok",
+   "error": "",
+   "n_rows": 14,
+   "elapsed_s": 0.02
+  },
+  {
+   "item": "sar",
+   "sub": "AL-6",
+   "status": "ok",
+   "error": "",
+   "n_rows": 14,
+   "elapsed_s": 0.01
+  },
+  {
+   "item": "sar",
+   "sub": "CA-1",
+   "status": "ok",
+   "error": "",
+   "n_rows": 14,
+   "elapsed_s": 0.0
+  },
+  {
+   "item": "sar",
+   "sub": "CA-2",
+   "status": "ok",
+   "error": "",
+   "n_rows": 14,
+   "elapsed_s": 0.01
+  },
+  {
+   "item": "sar",
+   "sub": "CA-3",
+   "status": "ok",
+   "error": "",
+   "n_rows": 14,
+   "elapsed_s": 0.01
+  },
+  {
+   "item": "variogram",
+   "sub": "Alaska",
+   "status": "ok",
+   "error": "",
+   "n_rows": 48,
+   "elapsed_s": 16.49
+  }
+ ],
+ "summarize_sec": 0.18,
+ "niceness": 10,
+ "finished": "2026-09-30 04:31:58"
+}

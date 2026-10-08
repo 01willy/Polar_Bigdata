@@ -1,0 +1,88 @@
+{
+ "entries": [
+  {
+   "file": "xb_tests.csv",
+   "rows": 1556,
+   "sha256": "1baada19e9f5d44e841b6b1ea3c31a6acbd24454d44676ed940f9ea2912bb7e7",
+   "written": "2026-10-04 17:36:24"
+  },
+  {
+   "file": "xb_weights.csv",
+   "rows": 4412,
+   "sha256": "e210e8513909d7f3bd5d9067631c8cc31303bad43c35b1de73e4535649aad10c",
+   "written": "2026-10-04 17:36:24"
+  },
+  {
+   "file": "xb_weights_summary.csv",
+   "rows": 219,
+   "sha256": "f6d581ecb3108386f7749b4d61cc303a5937805cb5ffbff9ff83e70ff67e2f90",
+   "written": "2026-10-04 17:36:24"
+  },
+  {
+   "file": "xb_cci_relation.csv",
+   "rows": 34,
+   "sha256": "f536fc56f1615f3037a57a373e99d97f6331fe837ffba62e95e1351b149d7896",
+   "written": "2026-10-04 17:36:24"
+  },
+  {
+   "file": "xb_fallback.csv",
+   "rows": 219,
+   "sha256": "970680725c36f540e3f35a87351bf50714a223675fd2a73606e192f080a15737",
+   "written": "2026-10-04 17:36:24"
+  },
+  {
+   "file": "xb_group_error.csv",
+   "rows": 1857,
+   "sha256": "4cc1f99e0f04a42c9be30b98fe6b9259e7d8d812ae5583464ee9a6d0670d4b5e",
+   "written": "2026-10-04 17:36:24"
+  },
+  {
+   "file": "xb_meta.json",
+   "rows": 22,
+   "sha256": "4fb534ae5fe0e35410c65484fa8b4d6a0e7a8d752b53e440f18abb8260ee2bce",
+   "written": "2026-10-04 17:36:24"
+  },
+  {
+   "file": "xb_tests_cci5y.csv",
+   "rows": 1556,
+   "sha256": "ff4dfec33f585d11f98c1bf6fdb748164b186968f885190315cf2e7bf235eb5d",
+   "written": "2026-10-05 05:41:47"
+  },
+  {
+   "file": "xb_weights_cci5y.csv",
+   "rows": 4412,
+   "sha256": "ac8081949c4c7891dd20911803f3ac573404d306a5b5de5d1784d220c81a3e05",
+   "written": "2026-10-05 05:41:47"
+  },
+  {
+   "file": "xb_weights_summary_cci5y.csv",
+   "rows": 219,
+   "sha256": "4994e8aa3405a97cd12e925a8eea3a30b578827b022ce0755b5134247967a745",
+   "written": "2026-10-05 05:41:47"
+  },
+  {
+   "file": "xb_cci_relation_cci5y.csv",
+   "rows": 34,
+   "sha256": "38bed581e506ca16963d1b2f3d756edede4d1998dca36fbea4da0a662938c4c0",
+   "written": "2026-10-05 05:41:47"
+  },
+  {
+   "file": "xb_fallback_cci5y.csv",
+   "rows": 219,
+   "sha256": "69e334348a9ed05da70db6cbde06536a9fd968d05da66e6a8a6dba76326d7d6a",
+   "written": "2026-10-05 05:41:47"
+  },
+  {
+   "file": "xb_group_error_cci5y.csv",
+   "rows": 1876,
+   "sha256": "c069fa118a2a8c21d0b182a8e5293489e748ec9ea03dce004d1638aa37d4f7fa",
+   "written": "2026-10-05 05:41:47"
+  },
+  {
+   "file": "xb_meta_cci5y.json",
+   "rows": 22,
+   "sha256": "ba25543126226f8d885b5ec5a21636feea4662a600bb4aa17ea75ccb363b7c54",
+   "written": "2026-10-05 05:41:47"
+  }
+ ]
+}

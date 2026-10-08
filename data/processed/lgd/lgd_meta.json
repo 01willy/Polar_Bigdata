@@ -1,0 +1,2023 @@
+{
+ "stage": "LGD 확장 풀 집계(h52)",
+ "plan": "docs/EXPERIMENT_PLAN_LG_2026-09-29.md 6B.5·6B.6(개정 14, 15 (m)), WRAPUP 7.2–7.5(커밋 316714c)",
+ "script": "scripts/2_evaluation/h52_lgd_pool.py",
+ "script_sha256": "ea74e9616469fe7c7b8df23e33b5c04f1e05d3c6e5d3d53412d76c93835662d2",
+ "h40_code_sha": "ffd0b3a76d36",
+ "h42_code_sha": "70ec084a1919",
+ "created": "2026-09-30 13:43",
+ "args": {
+  "lg_dir": "results/rescale_lg/data/processed/lg",
+  "lg_tag": "lg",
+  "lg_platform": "rescale",
+  "lgd_dir": "data/processed/lgd",
+  "out_dir": "",
+  "eligibility": "data/processed/lgd_eligibility_v1.csv",
+  "splitdist": "data/processed/lgx/lgx_splitdist.csv",
+  "xenv_gate": "data/processed/lgw/lgw_xenv_gate_i_summary.json",
+  "xenv_i": "auto",
+  "repro_gate": "",
+  "allow_no_repro_gate": false,
+  "nboot_h40": 1000,
+  "nboot": 10000,
+  "delta_eq": 0.5,
+  "delta_eq_aux": 1.0,
+  "l40_draws": 2000,
+  "threads": 4,
+  "allow_local": true,
+  "lic_eligibility": "",
+  "lic_permission": ""
+ },
+ "inputs": {
+  "eligibility": "5b23a9a8d7bc79eb663605a142a58e7d1ed6a5fa1555f436e007611c155f364b",
+  "manifest": "cf6e272598b711f0978eeaad97b534120bcb2ae8e28af4bf50d135a56f4a1f32",
+  "splitdist": "8983bf7a05115e290a56873440052851a4f71264ab286581c923942178f9400f",
+  "xenv": "2515d17df82a09e317abfa23ca3bbc751fdb565c677a6cbf8375a62efb2943f6",
+  "repro": "dbcb6b6928780fe1e3fb0093f868fa007a6f62bfe535f237936f0787668ba7c1",
+  "lic_eligibility": "69bab2db311c0ef42d88cac15318395a5f4a96d3e6a51112dc6ff8687d139e16",
+  "lic_permission": ""
+ },
+ "main_point": {
+  "original": [
+   "Russia_C",
+   "Greenland"
+  ],
+  "overridden": [
+   "NAtlantic~L41a",
+   "NAtlantic~L41h",
+   "Russia_C~L41a",
+   "Russia_C~L41h",
+   "Tibet_LGD~L41a",
+   "Tibet_LGD~L41c",
+   "Tibet_LGD~L41h"
+  ],
+  "rule": "WRAPUP 7.4 (b)1: 적격 표의 부적격 새 지역 + 점 추정 전용 변형 저장소"
+ },
+ "pools": {
+  "P4": [
+   "Lena|x",
+   "Canada|x",
+   "Russia_W|x",
+   "Russia_E|x"
+  ],
+  "PE1": [
+   "Lena|x",
+   "Canada|x",
+   "Russia_W|x",
+   "Russia_E|x",
+   "NAtlantic|x",
+   "Russia_C|x"
+  ],
+  "PE2": [
+   "Lena|x",
+   "Canada|x",
+   "Russia_W|x",
+   "Russia_E|x",
+   "NAtlantic|x",
+   "Russia_C|x",
+   "Tibet_LGD|x"
+  ],
+  "NEW1": [
+   "NAtlantic|x",
+   "Russia_C|x"
+  ],
+  "NEW2": [
+   "NAtlantic|x",
+   "Russia_C|x",
+   "Tibet_LGD|x"
+  ],
+  "ineligible": []
+ },
+ "regime": {
+  "Tibet_LGD|x": "deep",
+  "NAtlantic|x": "shallow",
+  "Russia_C|x": "shallow",
+  "Lena|x": "shallow",
+  "Canada|x": "shallow",
+  "Russia_W|x": "shallow",
+  "Russia_E|x": "shallow"
+ },
+ "platform": {
+  "Lena|x": "rescale",
+  "Canada|x": "rescale",
+  "Russia_W|x": "rescale",
+  "Russia_E|x": "rescale",
+  "Tibet_LGD|x": "local",
+  "NAtlantic|x": "local",
+  "Russia_C|x": "local"
+ },
+ "cross_env": "교차 환경; (i) CatBoost 불통과",
+ "xenv_i": "(i) CatBoost 불통과",
+ "xenv_summary": {
+  "check": "xenv_i",
+  "plan": "WRAPUP 8.4 (i), LG 개정 14",
+  "script": "scripts/2_evaluation/lgw_xenv_gate_i.py",
+  "script_sha256": "3eee117b630d5b8175a2e2aaa6612314731363580a914f663fbca8fdb91424b7",
+  "created": "2026-09-30 04:04",
+  "local": {
+   "python": "3.9.18",
+   "numpy": "1.26.4",
+   "pandas": "2.1.4",
+   "host": "user",
+   "sklearn": "1.3.0",
+   "catboost": "1.2.10",
+   "scipy": "1.11.4"
+  },
+  "local_threads": 1,
+  "tag": "lgxe",
+  "ref": "Rescale(qOkSo 사전 점검과 스모크 조각) python 3.11.10, numpy 2.4.6, scikit-learn 1.9.1, catboost 1.2.10, 스레드 4(WRAPUP 8.3)",
+  "scope": {
+   "units_expected": 4,
+   "units_done": 4,
+   "units": [
+    "precheck:Canada|x|s1",
+    "smoke:Russia_W|x|s1",
+    "smoke:AL-3|i|s1",
+    "smoke:Canada|x|s1"
+   ],
+   "threads": 1,
+   "registered": "8.4 (i): 네 단위, --threads 4, tag lgxe, 출력 data/processed/lgw/xenv/lg/"
+  },
+  "tolerance": {
+   "phys_cm": 1e-09,
+   "ridge_catboost_cm": 0.02
+  },
+  "key_class_rule": "물리식 = P0–P3(학습기 none), ridge = V1(학습기 none)과 ridge 학습기, CatBoost = catboost_lo",
+  "units": [
+   {
+    "unit": "precheck:Canada|x|s1",
+    "n_keys_local": 88,
+    "n_keys_ref": 88,
+    "n_common": 88,
+    "blocks_equal": true,
+    "cfg_common_equal": true,
+    "cfg_common": [
+     "fc604644f8d9",
+     "fc604644f8d9"
+    ],
+    "code_sha": [
+     "ffd0b3a76d36",
+     "ffd0b3a76d36"
+    ],
+    "threads": [
+     4,
+     4
+    ],
+    "status": [
+     "ok",
+     "ok"
+    ],
+    "elapsed_s": [
+     33.3,
+     22.2
+    ]
+   },
+   {
+    "unit": "smoke:Russia_W|x|s1",
+    "n_keys_local": 120,
+    "n_keys_ref": 120,
+    "n_common": 120,
+    "blocks_equal": true,
+    "cfg_common_equal": true,
+    "cfg_common": [
+     "185071509def",
+     "185071509def"
+    ],
+    "code_sha": [
+     "ffd0b3a76d36",
+     "ffd0b3a76d36"
+    ],
+    "threads": [
+     4,
+     4
+    ],
+    "status": [
+     "ok",
+     "ok"
+    ],
+    "elapsed_s": [
+     25.7,
+     17.9
+    ]
+   },
+   {
+    "unit": "smoke:AL-3|i|s1",
+    "n_keys_local": 173,
+    "n_keys_ref": 173,
+    "n_common": 173,
+    "blocks_equal": true,
+    "cfg_common_equal": true,
+    "cfg_common": [
+     "185071509def",
+     "185071509def"
+    ],
+    "code_sha": [
+     "ffd0b3a76d36",
+     "ffd0b3a76d36"
+    ],
+    "threads": [
+     4,
+     4
+    ],
+    "status": [
+     "ok",
+     "ok"
+    ],
+    "elapsed_s": [
+     32.5,
+     24.1
+    ]
+   },
+   {
+    "unit": "smoke:Canada|x|s1",
+    "n_keys_local": 185,
+    "n_keys_ref": 185,
+    "n_common": 185,
+    "blocks_equal": true,
+    "cfg_common_equal": true,
+    "cfg_common": [
+     "185071509def",
+     "185071509def"
+    ],
+    "code_sha": [
+     "ffd0b3a76d36",
+     "ffd0b3a76d36"
+    ],
+    "threads": [
+     4,
+     4
+    ],
+    "status": [
+     "ok",
+     "ok"
+    ],
+    "elapsed_s": [
+     86.0,
+     57.2
+    ]
+   }
+  ],
+  "refit": {
+   "precheck": {
+    "n_fail": 0,
+    "executed": 1,
+    "resumed": 0,
+    "argv": [
+     "--precheck",
+     "--part",
+     "cpu",
+     "--tag",
+     "lgxe",
+     "--out-dir",
+     "/home/willy010313/Polar_Bigdata/data/processed/lgw/xenv/lg",
+     "--threads",
+     "4",
+     "--workers",
+     "0",
+     "--allow-local",
+     "--no-summarize"
+    ],
+    "unit_elapsed_s": 33.3
+   },
+   "smoke": {
+    "n_fail": 0,
+    "executed": 3,
+    "resumed": 0,
+    "argv": [
+     "--smoke",
+     "--part",
+     "cpu",
+     "--tag",
+     "lgxe",
+     "--out-dir",
+     "/home/willy010313/Polar_Bigdata/data/processed/lgw/xenv/lg",
+     "--threads",
+     "4",
+     "--workers",
+     "0",
+     "--allow-local",
+     "--no-summarize"
+    ],
+    "unit_elapsed_s": {
+     "Canada|x": 86.0,
+     "Russia_W|x": 25.7,
+     "AL-3|i": 32.5
+    }
+   }
+  },
+  "refit_elapsed_s": 179.7,
+  "n_common": 566,
+  "max_phys": 2.842170943040401e-14,
+  "max_ml": 0.4594964609033738,
+  "median_ml": 0.0,
+  "n_ml_over_002": 12,
+  "by_class": {
+   "phys": {
+    "n_keys": 46,
+    "max_diff_cm": 2.842170943040401e-14,
+    "median_diff_cm": 0.0,
+    "n_over_tol": 0,
+    "methods_over_tol": []
+   },
+   "ridge": {
+    "n_keys": 83,
+    "max_diff_cm": 0.02047793942936238,
+    "median_diff_cm": 0.0003932317754689052,
+    "n_over_tol": 1,
+    "methods_over_tol": [
+     "R2"
+    ]
+   },
+   "catboost": {
+    "n_keys": 437,
+    "max_diff_cm": 0.4594964609033738,
+    "median_diff_cm": 0.0,
+    "n_over_tol": 11,
+    "methods_over_tol": [
+     "V1r"
+    ]
+   },
+   "ml": {
+    "n_keys": 520,
+    "max_diff_cm": 0.4594964609033738,
+    "median_diff_cm": 0.0,
+    "n_over_tol": 12
+   }
+  },
+  "by_class_base": {
+   "phys": {
+    "n_keys": 30,
+    "max_diff_cm": 7.105427357601002e-15,
+    "median_diff_cm": 0.0,
+    "n_over_tol": 0,
+    "methods_over_tol": []
+   },
+   "ridge": {
+    "n_keys": 0,
+    "max_diff_cm": null,
+    "median_diff_cm": null,
+    "n_over_tol": 0,
+    "methods_over_tol": []
+   },
+   "catboost": {
+    "n_keys": 143,
+    "max_diff_cm": 1.4210854715202004e-14,
+    "median_diff_cm": 0.0,
+    "n_over_tol": 0,
+    "methods_over_tol": []
+   },
+   "ml": {
+    "n_keys": 143,
+    "max_diff_cm": 1.4210854715202004e-14,
+    "median_diff_cm": 0.0,
+    "n_over_tol": 0
+   }
+  },
+  "blocks_equal": true,
+  "verdict": "물리식 통과, CatBoost·ridge 불통과",
+  "pass_phys": true,
+  "pass_ml": false,
+  "verdict_base": "통과",
+  "pass_phys_base": true,
+  "pass_ml_base": true,
+  "verdict_rule": "주 판정 = 8.4 의 등록 범위(공통 키 전부). 기준 방법 범위는 병기(판정에 쓰지 않는다)",
+  "v1_keys": {
+   "n": 13,
+   "max_diff_cm": 0.004172742914143157,
+   "max_by_unit": {
+    "precheck:Canada|x|s1": 0.0018852692319910602,
+    "smoke:AL-3|i|s1": 0.0008891923180662786,
+    "smoke:Canada|x|s1": 0.0019910873521027384,
+    "smoke:Russia_W|x|s1": 0.004172742914143157
+   }
+  },
+  "catboost_excl_v1r": {
+   "n": 398,
+   "max_diff_cm": 1.4210854715202004e-14
+  },
+  "by_unit": {
+   "precheck:Canada|x|s1": {
+    "n_keys": 88,
+    "max_phys": 0.0,
+    "max_ml": 0.4594964609033738,
+    "n_over_tol": 3
+   },
+   "smoke:AL-3|i|s1": {
+    "n_keys": 173,
+    "max_phys": 1.7763568394002505e-15,
+    "max_ml": 0.07649854909188036,
+    "n_over_tol": 2
+   },
+   "smoke:Canada|x|s1": {
+    "n_keys": 185,
+    "max_phys": 7.105427357601002e-15,
+    "max_ml": 0.4594964609033738,
+    "n_over_tol": 6
+   },
+   "smoke:Russia_W|x|s1": {
+    "n_keys": 120,
+    "max_phys": 2.842170943040401e-14,
+    "max_ml": 0.02047793942936238,
+    "n_over_tol": 1
+   }
+  },
+  "local_ref": {
+   "source": "data/processed/lgw/xenv/lg_threads2/shards:lg_precheck",
+   "role": "병기(판정에 쓰지 않는다): 같은 로컬 환경에서 스레드 수만 다른 재적합과의 차",
+   "units": [
+    {
+     "unit": "local-ref:precheck:Canada|x|s1",
+     "threads": [
+      4,
+      2
+     ],
+     "n_common": 88,
+     "by_class": {
+      "phys": {
+       "n_keys": 8,
+       "max_diff_cm": 0.0,
+       "median_diff_cm": 0.0,
+       "n_over_tol": 0,
+       "methods_over_tol": []
+      },
+      "ridge": {
+       "n_keys": 16,
+       "max_diff_cm": 0.006084699325427323,
+       "median_diff_cm": 0.00020973773731824963,
+       "n_over_tol": 0,
+       "methods_over_tol": []
+      },
+      "catboost": {
+       "n_keys": 64,
+       "max_diff_cm": 0.00019784009352719067,
+       "median_diff_cm": 0.0,
+       "n_over_tol": 0,
+       "methods_over_tol": []
+      },
+      "ml": {
+       "n_keys": 80,
+       "max_diff_cm": 0.006084699325427323,
+       "median_diff_cm": 0.0,
+       "n_over_tol": 0
+      }
+     }
+    }
+   ]
+  },
+  "refit_note": "재적합 기록은 data/processed/lgw/logs/xenv_i_20260930.log(04:00–04:03)에서 옮겼다. 그 뒤 local-ref 대조의 단위 짝 오류를 고쳐 대조만 다시 했다(--compare-only)"
+ },
+ "repro_gate": "재현 점검 통과",
+ "repro_gate_all_scope": [
+  {
+   "status": "병기: CatBoost 불통과(교차 환경, L40 로컬 v3 기준값 필요, (c)2 (2))(상태를 정하지 않는다)",
+   "n_keys": 457,
+   "max_diff_phys": 2.8421709430404014e-14,
+   "max_diff_ridge": 0.0060611076495789,
+   "max_diff_catboost": 0.9839176616688192,
+   "n_ml_over_tol": 30,
+   "methods_ml_over_tol": "V1r"
+  }
+ ],
+ "crn": {
+  "Tibet_L41b": "same_as → Tibet_LGD|x 의 TMx",
+  "Tibet_L41d": "same_as → Tibet_LGD|x 의 TMx",
+  "Tibet_L41e": "same_as → Tibet_LGD|x 의 TMx",
+  "Tibet_L41f": "same_as → Tibet_LGD|x 의 TMx",
+  "Tibet_L41g": "same_as → Tibet_LGD|x 의 TMx",
+  "NAtlantic_L41b": "same_as → NAtlantic|x 의 TMx",
+  "NAtlantic_L41c": "seed ← NAtlantic|x",
+  "NAtlantic_L41d": "seed ← NAtlantic|x",
+  "NAtlantic_L41e": "seed ← NAtlantic|x",
+  "NAtlantic_L41f": "seed ← NAtlantic|x",
+  "NAtlantic_L41g": "seed ← NAtlantic|x",
+  "Russia_C_L41b": "seed ← Russia_C|x",
+  "Russia_C_L41c": "same_as → Russia_C|x 의 TMx",
+  "Russia_C_L41d": "seed ← Russia_C|x",
+  "Russia_C_L41e": "seed ← Russia_C|x",
+  "Russia_C_L41f": "seed ← Russia_C|x",
+  "Russia_C_L41g": "same_as → Russia_C|x 의 TMx",
+  "Tibet_L42": "seed ← Tibet_LGD|x",
+  "NAtlantic_L42": "seed ← NAtlantic|x",
+  "Russia_C_L42": "seed ← Russia_C|x"
+ },
+ "argv": [
+  "--allow-local",
+  "--threads",
+  "4",
+  "--lg-dir",
+  "results/rescale_lg/data/processed/lg",
+  "--splitdist",
+  "data/processed/lgx/lgx_splitdist.csv"
+ ],
+ "l40_reference": "LG 본 실행(Rescale)",
+ "l40_cross_env": "교차 환경(보조); (i) CatBoost 불통과",
+ "loaded": {
+  "lg": {
+   "Lena|x": {
+    "dir": "/home/willy010313/Polar_Bigdata/results/rescale_lg/data/processed/lg/shards",
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "dceb5154e35d"
+    ],
+    "status": [
+     "partial"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Canada|x": {
+    "dir": "/home/willy010313/Polar_Bigdata/results/rescale_lg/data/processed/lg/shards",
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "dceb5154e35d"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Russia_W|x": {
+    "dir": "/home/willy010313/Polar_Bigdata/results/rescale_lg/data/processed/lg/shards",
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "dceb5154e35d"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Russia_E|x": {
+    "dir": "/home/willy010313/Polar_Bigdata/results/rescale_lg/data/processed/lg/shards",
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "dceb5154e35d"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   }
+  },
+  "lgd": {
+   "Tibet": {
+    "name": "Tibet_LGD|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "NAtlantic": {
+    "name": "NAtlantic|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Russia_C": {
+    "name": "Russia_C|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Russia_W_expanded": {
+    "name": "Russia_W~exp|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_W_expanded/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Russia_E_expanded": {
+    "name": "Russia_E~exp|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_E_expanded/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Canada_expanded": {
+    "name": "Canada~exp|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Canada_expanded/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Russia_E_expanded_noKytalyk": {
+    "name": "Russia_E~expnokyt|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_E_expanded_noKytalyk/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Tibet_L39_temp": {
+    "name": "Tibet_LGD~L39|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet_L39_temp/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Tibet_L41b": {
+    "name": "Tibet_LGD~L41b|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet/shards",
+    "same_as": "Tibet",
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Tibet_L41d": {
+    "name": "Tibet_LGD~L41d|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet/shards",
+    "same_as": "Tibet",
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Tibet_L41e": {
+    "name": "Tibet_LGD~L41e|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet/shards",
+    "same_as": "Tibet",
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Tibet_L41f": {
+    "name": "Tibet_LGD~L41f|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet/shards",
+    "same_as": "Tibet",
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Tibet_L41g": {
+    "name": "Tibet_LGD~L41g|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet/shards",
+    "same_as": "Tibet",
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "NAtlantic_L41b": {
+    "name": "NAtlantic~L41b|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic/shards",
+    "same_as": "NAtlantic",
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "NAtlantic_L41c": {
+    "name": "NAtlantic~L41c|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L41c/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "NAtlantic_L41d": {
+    "name": "NAtlantic~L41d|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L41d/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "NAtlantic_L41e": {
+    "name": "NAtlantic~L41e|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L41e/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "NAtlantic_L41f": {
+    "name": "NAtlantic~L41f|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L41f/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "NAtlantic_L41g": {
+    "name": "NAtlantic~L41g|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L41g/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "NAtlantic_L41h": {
+    "name": "NAtlantic~L41h|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L41h/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Russia_C_L41b": {
+    "name": "Russia_C~L41b|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41b/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     4,
+     5
+    ]
+   },
+   "Russia_C_L41c": {
+    "name": "Russia_C~L41c|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C/shards",
+    "same_as": "Russia_C",
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Russia_C_L41d": {
+    "name": "Russia_C~L41d|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41d/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Russia_C_L41e": {
+    "name": "Russia_C~L41e|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41e/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Russia_C_L41f": {
+    "name": "Russia_C~L41f|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41f/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Russia_C_L41g": {
+    "name": "Russia_C~L41g|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C/shards",
+    "same_as": "Russia_C",
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Russia_C_L41h": {
+    "name": "Russia_C~L41h|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41h/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Tibet_L42": {
+    "name": "Tibet_LGD~L42|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet_L42/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "NAtlantic_L42": {
+    "name": "NAtlantic~L42|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L42/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "Russia_C_L42": {
+    "name": "Russia_C~L42|x",
+    "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L42/shards",
+    "same_as": null,
+    "code_sha": [
+     "ffd0b3a76d36"
+    ],
+    "cfg_common": [
+     "cd061a5464d1"
+    ],
+    "status": [
+     "ok"
+    ],
+    "splits": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   }
+  }
+ },
+ "nboot": {
+  "L1e_L4e_L8e": 1000,
+  "four_way": 10000,
+  "l40_split_draws": 2000
+ },
+ "delta_eq": [
+  0.5,
+  1.0
+ ],
+ "rules": {
+  "L1e": "유의 개선 지역 수 > ⌊N/4⌋ 이면 기각. 전량 행은 실제 라벨 수 ≤ 40 인 지역만",
+  "compare": "(a)1: L1e 지지·기각, L4e n ≤ 10 성립, L8e 지지·기각. 다르면 풀 4분 판정의 L28 분류와 반전·희석",
+  "relative": "PE2 상대 단위 = 지역 Δ / 지역 P0 셀 가중 RMSE 점 추정(분포도 같은 값으로 나눔)",
+  "l38_direction": "(a) 가설 방향 D0 − P0 ≥ 0, (b) R1 − P0 < 0. 보조 열이며 판정에 쓰지 않는다",
+  "same_as": "실행 표가 주 설정과 같은 변형은 주 설정 조각과 주 설정의 TMx 를 쓴다(모든 행이 주 설정과 같다)",
+  "crn": "L41·L42 변형의 부트스트랩 seed 는 주 설정 저장소 이름이다(h40 TMx.seed 와 h42 boot_delta_common 의 tm.name)",
+  "common_ci": "(a)4: L1e 지역, L4e·L8e 지역과 MEAN, L4e-PE2 병기, (a)1 풀 대비, L38–L42 에 공통 재표집 보조 CI",
+  "platform": "모든 대비는 한 지역의 한 플랫폼 조각 안에서 닫힌다(WRAPUP 8.6 (1))",
+  "lic": "LG 개정 15 (m): 두 판(full, lic)을 같은 규칙으로 집계한다. PE1·PE2 는 판마다 그 판의 적격 새 지역. 주 판정 판은 사용 허락 기록으로만 정한다(결과를 보고 바꾸지 않는다). 판 안의 seed 는 그 판의 저장소 이름"
+ },
+ "n_rows": {
+  "curve": 3247,
+  "minn": 714,
+  "tests": 634,
+  "region_inference": 100
+ },
+ "lic": {
+  "rule": "LG 개정 15 (m): 약관 확인분 판 = lic_unverified 셀을 뺀 표(h51 묶음 lic). 두 판을 병기하고 (m)2 로 주 판정 판을 정한다",
+  "status": "완료",
+  "main_version": "lic",
+  "main_basis": "사용 허락 기록 없음",
+  "permission": {
+   "file": "/home/willy010313/Polar_Bigdata/data/processed/lgd/lgd_license_permission.json",
+   "exists": false,
+   "required": [
+    "calm_web_subsites",
+    "cusp_v1_1",
+    "nsidc_ggd353_thawtube",
+    "ru_yamal_walker"
+   ],
+   "granted": [],
+   "missing": [
+    "calm_web_subsites",
+    "cusp_v1_1",
+    "nsidc_ggd353_thawtube",
+    "ru_yamal_walker"
+   ]
+  },
+  "required_sources": [
+   "calm_web_subsites",
+   "cusp_v1_1",
+   "nsidc_ggd353_thawtube",
+   "ru_yamal_walker"
+  ],
+  "eligibility": {
+   "file": "/home/willy010313/Polar_Bigdata/data/processed/lgd/lgd_eligibility_lic.csv",
+   "sha256": "69bab2db311c0ef42d88cac15318395a5f4a96d3e6a51112dc6ff8687d139e16"
+  },
+  "missing_shards": [],
+  "roles": {
+   "full": "SI: 약관 확인 전 자료 포함",
+   "lic": "주 판정(LG 개정 15 (m)2)"
+  },
+  "outputs": {
+   "full": [
+    "lgd_curve.csv",
+    "lgd_minn.csv",
+    "lgd_tests.csv",
+    "lgd_region_inference.csv",
+    "lgd_pool.csv"
+   ],
+   "lic": [
+    "lgd_curve_lic.csv",
+    "lgd_minn_lic.csv",
+    "lgd_tests_lic.csv",
+    "lgd_region_inference_lic.csv",
+    "lgd_pool_lic.csv"
+   ],
+   "versions": "lgd_versions.csv"
+  },
+  "spec_map": {
+   "NAtlantic": "NAtlantic_lic",
+   "NAtlantic_L41a": "NAtlantic_L41a_lic",
+   "NAtlantic_L41b": "NAtlantic_L41b_lic",
+   "NAtlantic_L41c": "NAtlantic_L41c_lic",
+   "NAtlantic_L41d": "NAtlantic_L41d_lic",
+   "NAtlantic_L41e": "NAtlantic_L41e_lic",
+   "NAtlantic_L41f": "NAtlantic_L41f_lic",
+   "NAtlantic_L41g": "NAtlantic_L41g_lic",
+   "NAtlantic_L41h": "NAtlantic_L41h_lic",
+   "Russia_W_expanded": "Russia_W_expanded_lic",
+   "Canada_expanded": "Canada_expanded_lic",
+   "Tibet_L42": "Tibet_L42_lic",
+   "NAtlantic_L42": "NAtlantic_L42_lic",
+   "Russia_C_L42": "Russia_C_L42_lic"
+  },
+  "pools": {
+   "P4": [
+    "Lena|x",
+    "Canada|x",
+    "Russia_W|x",
+    "Russia_E|x"
+   ],
+   "PE1": [
+    "Lena|x",
+    "Canada|x",
+    "Russia_W|x",
+    "Russia_E|x",
+    "Russia_C|x"
+   ],
+   "PE2": [
+    "Lena|x",
+    "Canada|x",
+    "Russia_W|x",
+    "Russia_E|x",
+    "Russia_C|x",
+    "Tibet_LGD|x"
+   ],
+   "NEW1": [
+    "Russia_C|x"
+   ],
+   "NEW2": [
+    "Russia_C|x",
+    "Tibet_LGD|x"
+   ],
+   "ineligible": [
+    "NAtlantic~lic"
+   ]
+  },
+  "regime": {
+   "Tibet_LGD|x": "deep",
+   "NAtlantic~lic|x": "shallow",
+   "Russia_C|x": "shallow",
+   "Lena|x": "shallow",
+   "Canada|x": "shallow",
+   "Russia_W|x": "shallow",
+   "Russia_E|x": "shallow"
+  },
+  "main_point": [
+   "NAtlantic~L41a~lic",
+   "NAtlantic~L41b~lic",
+   "NAtlantic~L41c~lic",
+   "NAtlantic~L41d~lic",
+   "NAtlantic~L41e~lic",
+   "NAtlantic~L41f~lic",
+   "NAtlantic~L41g~lic",
+   "NAtlantic~L41h~lic",
+   "NAtlantic~lic",
+   "Russia_C~L41a",
+   "Russia_C~L41h",
+   "Tibet_LGD~L41a",
+   "Tibet_LGD~L41c",
+   "Tibet_LGD~L41h"
+  ],
+  "crn": {
+   "Tibet_L41b": "same_as → Tibet_LGD|x 의 TMx",
+   "Tibet_L41d": "same_as → Tibet_LGD|x 의 TMx",
+   "Tibet_L41e": "same_as → Tibet_LGD|x 의 TMx",
+   "Tibet_L41f": "same_as → Tibet_LGD|x 의 TMx",
+   "Tibet_L41g": "same_as → Tibet_LGD|x 의 TMx",
+   "NAtlantic_L41b": "same_as → NAtlantic~lic|x 의 TMx",
+   "NAtlantic_L41d": "same_as → NAtlantic~lic|x 의 TMx",
+   "Russia_C_L41b": "seed ← Russia_C|x",
+   "Russia_C_L41c": "same_as → Russia_C|x 의 TMx",
+   "Russia_C_L41d": "seed ← Russia_C|x",
+   "Russia_C_L41e": "seed ← Russia_C|x",
+   "Russia_C_L41f": "seed ← Russia_C|x",
+   "Russia_C_L41g": "same_as → Russia_C|x 의 TMx",
+   "Tibet_L42": "seed ← Tibet_LGD|x",
+   "NAtlantic_L42": "seed ← NAtlantic~lic|x",
+   "Russia_C_L42": "seed ← Russia_C|x"
+  },
+  "cross_env": "교차 환경; (i) CatBoost 불통과",
+  "platform": {
+   "Lena|x": "rescale",
+   "Canada|x": "rescale",
+   "Russia_W|x": "rescale",
+   "Russia_E|x": "rescale",
+   "Tibet_LGD|x": "local",
+   "NAtlantic~lic|x": "local",
+   "Russia_C|x": "local"
+  },
+  "l40_reference": "LG 본 실행(Rescale)",
+  "l40_cross_env": "교차 환경(보조); (i) CatBoost 불통과",
+  "loaded": {
+   "lg": {
+    "Lena|x": {
+     "dir": "/home/willy010313/Polar_Bigdata/results/rescale_lg/data/processed/lg/shards",
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "dceb5154e35d"
+     ],
+     "status": [
+      "partial"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Canada|x": {
+     "dir": "/home/willy010313/Polar_Bigdata/results/rescale_lg/data/processed/lg/shards",
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "dceb5154e35d"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Russia_W|x": {
+     "dir": "/home/willy010313/Polar_Bigdata/results/rescale_lg/data/processed/lg/shards",
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "dceb5154e35d"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Russia_E|x": {
+     "dir": "/home/willy010313/Polar_Bigdata/results/rescale_lg/data/processed/lg/shards",
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "dceb5154e35d"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    }
+   },
+   "lgd": {
+    "Tibet": {
+     "name": "Tibet_LGD|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "NAtlantic": {
+     "name": "NAtlantic~lic|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_lic/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Russia_C": {
+     "name": "Russia_C|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Russia_W_expanded": {
+     "name": "Russia_W~exp~lic|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_W_expanded_lic/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Russia_E_expanded": {
+     "name": "Russia_E~exp|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_E_expanded/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Canada_expanded": {
+     "name": "Canada~exp~lic|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Canada_expanded_lic/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Russia_E_expanded_noKytalyk": {
+     "name": "Russia_E~expnokyt|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_E_expanded_noKytalyk/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Tibet_L39_temp": {
+     "name": "Tibet_LGD~L39|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet_L39_temp/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Tibet_L41b": {
+     "name": "Tibet_LGD~L41b|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet/shards",
+     "same_as": "Tibet",
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Tibet_L41d": {
+     "name": "Tibet_LGD~L41d|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet/shards",
+     "same_as": "Tibet",
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Tibet_L41e": {
+     "name": "Tibet_LGD~L41e|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet/shards",
+     "same_as": "Tibet",
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Tibet_L41f": {
+     "name": "Tibet_LGD~L41f|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet/shards",
+     "same_as": "Tibet",
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Tibet_L41g": {
+     "name": "Tibet_LGD~L41g|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet/shards",
+     "same_as": "Tibet",
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "NAtlantic_L41b": {
+     "name": "NAtlantic~L41b~lic|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_lic/shards",
+     "same_as": "NAtlantic_lic",
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "NAtlantic_L41d": {
+     "name": "NAtlantic~L41d~lic|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_lic/shards",
+     "same_as": "NAtlantic_lic",
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Russia_C_L41b": {
+     "name": "Russia_C~L41b|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41b/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      4,
+      5
+     ]
+    },
+    "Russia_C_L41c": {
+     "name": "Russia_C~L41c|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C/shards",
+     "same_as": "Russia_C",
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Russia_C_L41d": {
+     "name": "Russia_C~L41d|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41d/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Russia_C_L41e": {
+     "name": "Russia_C~L41e|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41e/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Russia_C_L41f": {
+     "name": "Russia_C~L41f|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41f/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Russia_C_L41g": {
+     "name": "Russia_C~L41g|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C/shards",
+     "same_as": "Russia_C",
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Russia_C_L41h": {
+     "name": "Russia_C~L41h|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L41h/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Tibet_L42": {
+     "name": "Tibet_LGD~L42~lic|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Tibet_L42_lic/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "NAtlantic_L42": {
+     "name": "NAtlantic~L42~lic|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/NAtlantic_L42_lic/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
+    "Russia_C_L42": {
+     "name": "Russia_C~L42~lic|x",
+     "dir": "/home/willy010313/Polar_Bigdata/data/processed/lgd/Russia_C_L42_lic/shards",
+     "same_as": null,
+     "code_sha": [
+      "ffd0b3a76d36"
+     ],
+     "cfg_common": [
+      "cd061a5464d1"
+     ],
+     "status": [
+      "ok"
+     ],
+     "splits": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    }
+   }
+  },
+  "n_rows": {
+   "curve": 2822,
+   "minn": 609,
+   "tests": 546,
+   "region_inference": 90
+  }
+ },
+ "elapsed_s": 115.5
+}

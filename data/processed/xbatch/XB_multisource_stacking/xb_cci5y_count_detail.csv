@@ -1,0 +1,10 @@
+arm,learner,method,n_fit
+xb_r,catboost_lo,R1,2506
+xb_r,catboost_lo,R1cv,5874
+xb_r,catboost_lo,Re,2506
+xb_r,catboost_lo,Recv,5874
+xb_r,catboost_lo,StackR,2506
+xb_r,catboost_lo,StackRcv,5874
+xb_t,catboost_lo,R1,6318
+xb_t,catboost_lo,Re,6318
+xb_t,catboost_lo,StackR,4676

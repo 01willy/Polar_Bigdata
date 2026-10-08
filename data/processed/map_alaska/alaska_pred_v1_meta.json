@@ -1,0 +1,421 @@
+{
+ "created": "2026-10-05 02:45 KST",
+ "script": "scripts/2_evaluation/map_alaska_v1.py",
+ "script_sha256": "1a6d59df8ece5ecd59c4ff2922cb98b01721de686efdc205bd75d8c6651dfb19",
+ "reused": {
+  "h54": {
+   "path": "scripts/3_deep_learning/h54_workflow.py",
+   "bytes": 218493,
+   "sha256": "cf9a1f6d0929c8926f897b3ea50703493e1b47a148e67d49f15729e574dd6ef5"
+  },
+  "h40": {
+   "path": "scripts/3_deep_learning/h40_label_grid.py",
+   "bytes": 136649,
+   "sha256": "7098f59dabe2b73f74b9cfa7197b15df5b86f39124eaa60d889e130a892546f9"
+  },
+  "h42": {
+   "path": "scripts/3_deep_learning/h42_label_grid_ext.py",
+   "bytes": 270646,
+   "sha256": "22e215e435e157be25f116ffa29deba915ec40ea157bce072494e0fec1daeabb"
+  },
+  "h49": {
+   "path": "scripts/2_evaluation/h49_transfer_map.py",
+   "bytes": 71553,
+   "sha256": "7afd9fe9b8a087f3f7cd02770dcff461dc049ab5f299172e5ca755128ad12945"
+  }
+ },
+ "labels": {
+  "target": "Alaska",
+  "n": 13606,
+  "n_blocks": 74,
+  "regions": {
+   "ABoVE_AK": 13542,
+   "United States (Alaska)": 64
+  },
+  "source": "data/processed/fidelity_base_v3.csv F4_direct(polar.m1_core.load_base)",
+  "data_sha": {
+   "path": "data/processed/fidelity_base_v3.csv",
+   "bytes": 8700509,
+   "sha256": "71b5d3f6c297770d41aa7215e906e737842a3594005a5b52952bb636c752dc0f"
+  }
+ },
+ "model": {
+  "E0": 1.5045949676990291,
+  "E0_source": {
+   "n_src": 3860,
+   "n_src_parent": 0,
+   "frac_src_parent": 0.0,
+   "n_parent_excluded": 0,
+   "n_buffer_excluded": 1
+  },
+  "kappa": 10.0,
+  "E_ls": 1.616688667140627,
+  "E_n": 1.616606342155726,
+  "lam": 0.5,
+  "lam_grid": [
+   0.25,
+   0.5,
+   1.0
+  ],
+  "lam_cv_folds": 5,
+  "lam_cv_flag": "",
+  "seeds": [
+   0,
+   1
+  ],
+  "learner": "catboost_lo(h40.cb_fit: 200, depth 3, lr 0.05, l2 3)",
+  "cv_seed_key": {
+   "target": "Alaska",
+   "mode": "r",
+   "split": 0,
+   "n": -1,
+   "draw": 0
+  },
+  "features": [
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_sin",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "e5_maat",
+   "e5_tdd",
+   "e5_fdd",
+   "e5_sqrt_tdd",
+   "e5_twarm",
+   "e5_tcold",
+   "e5_stl1",
+   "e5_swe",
+   "sg_clay_5_15",
+   "sg_sand_5_15",
+   "sg_silt_5_15",
+   "sg_bdod_5_15",
+   "sg_cfvo_5_15",
+   "sg_phh2o_5_15",
+   "sg_soc_0_5",
+   "sg_soc_5_15",
+   "sg_soc_15_30",
+   "cci_alt",
+   "cci_valid"
+  ],
+  "threads": 4,
+  "g_seed_sd_mean": 0.826272685670681
+ },
+ "interval": {
+  "kind": "constant-width split-conformal on 0.5° block 5-fold CV residuals(|y − ŷ_oof|, R1, 겹 안 λ·E_n 재추정)",
+  "level": 0.9,
+  "q": 20.152728341381426,
+  "width": 40.30545668276285,
+  "rule": "[max(R1 − q, 0), R1 + q]"
+ },
+ "cv": {
+  "K": 5,
+  "flag": "",
+  "folds": [
+   {
+    "fold": 0,
+    "n_train": 9963,
+    "n_test": 3643,
+    "nb_test": 15,
+    "E1": 1.5946424164197506,
+    "lam": 0.5,
+    "inner_K": 5,
+    "inner_flag": ""
+   },
+   {
+    "fold": 1,
+    "n_train": 12903,
+    "n_test": 703,
+    "nb_test": 15,
+    "E1": 1.633758469349545,
+    "lam": 0.5,
+    "inner_K": 5,
+    "inner_flag": ""
+   },
+   {
+    "fold": 2,
+    "n_train": 13183,
+    "n_test": 423,
+    "nb_test": 15,
+    "E1": 1.622824274696851,
+    "lam": 0.5,
+    "inner_K": 5,
+    "inner_flag": ""
+   },
+   {
+    "fold": 3,
+    "n_train": 13011,
+    "n_test": 595,
+    "nb_test": 15,
+    "E1": 1.615701244367426,
+    "lam": 0.5,
+    "inner_K": 5,
+    "inner_flag": ""
+   },
+   {
+    "fold": 4,
+    "n_train": 5364,
+    "n_test": 8242,
+    "nb_test": 14,
+    "E1": 1.6028143049007841,
+    "lam": 0.5,
+    "inner_K": 5,
+    "inner_flag": ""
+   }
+  ],
+  "n": 13606,
+  "rmse_r1": 13.797700055610186,
+  "rmse_p1": 14.300324541745855,
+  "bias_r1": -1.3856716409283127,
+  "bias_p1": -1.3360558156139428,
+  "q90": 20.152728341381426,
+  "coverage_in_sample_check": 0.9001175951785977
+ },
+ "timing_s": {
+  "data": 2.5,
+  "read_grid": 8.3,
+  "cv": 11.8,
+  "final_fit": 2.8
+ },
+ "grid": {
+  "file": {
+   "path": "data/processed/map_alaska/alaska_grid_x25_v1.csv.gz",
+   "bytes": 72819418,
+   "sha256": "2af91faa3d006531b90735aab1c19595a16e27af482c28eb6c86afc62b837151"
+  },
+  "meta": {
+   "path": "data/processed/map_alaska/alaska_grid_x25_v1_meta.json",
+   "bytes": 87778,
+   "sha256": "e388f2e5d96f3c057520b71dc75a5b15f30f372c1ddbd4e12b2bff992cd375c9"
+  }
+ },
+ "counts": {
+  "n_cells": 899633,
+  "n_shown": 858517,
+  "n_gray": 41116,
+  "n_pred_finite": 899633,
+  "n_lo_clipped": 5384,
+  "n_extrap_flag_shown": 628273,
+  "frac_extrap_flag_shown": 0.7318119501419308,
+  "extrap_cat_shown": {
+   "0": 229553,
+   "1": 158897,
+   "2": 113373,
+   "3": 356694
+  }
+ },
+ "shown_stats": {
+  "pred_r1": {
+   "n": 858517,
+   "min": 16.182452307375353,
+   "p01": 36.76104138838854,
+   "p05": 41.77160401877549,
+   "p25": 48.41218682423706,
+   "p50": 55.666459990025935,
+   "p75": 63.604751098985375,
+   "p95": 71.9447805366298,
+   "p99": 74.80185345556748,
+   "max": 86.91609478091078,
+   "mean": 56.08742718682876
+  },
+  "pred_p1": {
+   "n": 858517,
+   "min": 19.22449271816888,
+   "p01": 36.04065367149683,
+   "p05": 41.058383552616,
+   "p25": 48.92394902259444,
+   "p50": 58.76266354131776,
+   "p75": 66.06180480904482,
+   "p95": 72.04860181241762,
+   "p99": 74.21266536125476,
+   "max": 75.93897402781089,
+   "mean": 57.46250245259181
+  },
+  "corr": {
+   "n": 858517,
+   "min": -15.340183253676877,
+   "p01": -9.106480940473167,
+   "p05": -6.1966164780598145,
+   "p25": -3.2841371064120723,
+   "p50": -1.3665891964952037,
+   "p75": 0.544173881319873,
+   "p95": 3.5305269497493184,
+   "p99": 5.515986454163773,
+   "max": 13.113359562327258,
+   "mean": -1.3750752657630287
+  },
+  "width90": {
+   "n": 858517,
+   "min": 36.335180648756776,
+   "p01": 40.305456682762845,
+   "p05": 40.305456682762845,
+   "p25": 40.305456682762845,
+   "p50": 40.30545668276285,
+   "p75": 40.30545668276286,
+   "p95": 40.30545668276286,
+   "p99": 40.30545668276286,
+   "max": 40.305456682762866,
+   "mean": 40.305375826711405
+  }
+ },
+ "extrap": {
+  "pct": [
+   0.5,
+   99.5
+  ],
+  "columns": [
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_sin",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "e5_maat",
+   "e5_tdd",
+   "e5_fdd",
+   "e5_sqrt_tdd",
+   "e5_twarm",
+   "e5_tcold",
+   "e5_stl1",
+   "e5_swe",
+   "sg_clay_5_15",
+   "sg_sand_5_15",
+   "sg_silt_5_15",
+   "sg_bdod_5_15",
+   "sg_cfvo_5_15",
+   "sg_phh2o_5_15",
+   "sg_soc_0_5",
+   "sg_soc_5_15",
+   "sg_soc_15_30",
+   "cci_alt"
+  ],
+  "lo": {
+   "dem_elev": 0.6540039777755737,
+   "dem_slope": 0.0318032391369342,
+   "dem_aspect_sin": -0.9998307824134828,
+   "dem_aspect_cos": -0.9999756813049316,
+   "dem_tpi": -12.081534576416013,
+   "dem_rough": 0.3592443533241748,
+   "e5_maat": -8.521889686584473,
+   "e5_tdd": 449.57373046875,
+   "e5_fdd": 1393.9218139648438,
+   "e5_sqrt_tdd": 21.203153785905293,
+   "e5_twarm": 5.65899658203125,
+   "e5_tcold": -24.89707946777344,
+   "e5_stl1": -1.850596070289612,
+   "e5_swe": 0.0277395229786634,
+   "sg_clay_5_15": 11.0,
+   "sg_sand_5_15": 13.4,
+   "sg_silt_5_15": 34.9,
+   "sg_bdod_5_15": 0.43,
+   "sg_cfvo_5_15": 1.7,
+   "sg_phh2o_5_15": 5.1,
+   "sg_soc_0_5": 187.8,
+   "sg_soc_5_15": 100.0,
+   "sg_soc_15_30": 40.3,
+   "cci_alt": 19.2
+  },
+  "hi": {
+   "dem_elev": 905.3538208007812,
+   "dem_slope": 8.14139049053193,
+   "dem_aspect_sin": 0.9998566448688508,
+   "dem_aspect_cos": 0.9998455777764319,
+   "dem_tpi": 19.5885009765625,
+   "dem_rough": 26.78484668731691,
+   "e5_maat": 1.1028060913085938,
+   "e5_tdd": 2038.753387451172,
+   "e5_fdd": 3887.496124267578,
+   "e5_sqrt_tdd": 45.15255682075127,
+   "e5_twarm": 17.38037109375,
+   "e5_tcold": -13.1064453125,
+   "e5_stl1": 3.6218998432159424,
+   "e5_swe": 0.0923618003726005,
+   "sg_clay_5_15": 27.4,
+   "sg_sand_5_15": 45.0,
+   "sg_silt_5_15": 73.9,
+   "sg_bdod_5_15": 0.89,
+   "sg_cfvo_5_15": 16.3,
+   "sg_phh2o_5_15": 7.1,
+   "sg_soc_0_5": 416.2,
+   "sg_soc_5_15": 314.3,
+   "sg_soc_15_30": 213.5,
+   "cci_alt": 126.0
+  },
+  "top3": [
+   {
+    "column": "dem_rough",
+    "frac_outside_shown": 0.4010811667095701
+   },
+   {
+    "column": "dem_slope",
+    "frac_outside_shown": 0.3476890964302396
+   },
+   {
+    "column": "dem_tpi",
+    "frac_outside_shown": 0.2673458999647066
+   }
+  ],
+  "cat_counts_shown": {
+   "0": 229553,
+   "1": 158897,
+   "2": 113373,
+   "3": 356694
+  },
+  "frac_outside_by_col_shown": {
+   "dem_elev": 0.17559465916225306,
+   "dem_slope": 0.3476890964302396,
+   "dem_aspect_sin": 0.011693420165238428,
+   "dem_aspect_cos": 0.01039932814376419,
+   "dem_tpi": 0.2673458999647066,
+   "dem_rough": 0.4010811667095701,
+   "e5_maat": 0.052744441868943774,
+   "e5_tdd": 0.03530040756327481,
+   "e5_fdd": 0.053114848046107416,
+   "e5_sqrt_tdd": 0.03530040756327481,
+   "e5_twarm": 0.07022807935078747,
+   "e5_tcold": 0.07698042088857879,
+   "e5_stl1": 0.045384075096940424,
+   "e5_swe": 0.1872228505667331,
+   "sg_clay_5_15": 0.10865131383536959,
+   "sg_sand_5_15": 0.04603752750382346,
+   "sg_silt_5_15": 0.02268912555022207,
+   "sg_bdod_5_15": 0.13883242847841104,
+   "sg_cfvo_5_15": 0.2099143057155537,
+   "sg_phh2o_5_15": 0.05939661066699902,
+   "sg_soc_0_5": 0.08544734699487605,
+   "sg_soc_5_15": 0.019337997966260425,
+   "sg_soc_15_30": 0.005740130946737222,
+   "cci_alt": 0.019305383585881235
+  }
+ },
+ "effective_resolution": "1 km 는 표시 해상도이다. 기후 8열과 s 는 ERA5-Land 0.1°, 토양 9열은 SoilGrids 약 5 km 창, CCI ALT 는 약 1 km, 지형 6열만 30 m DEM 창이다. WF9 에서 알래스카 지역 내 R1 의 이득은 ERA5 격자 사이 성분이었다(C8)",
+ "outputs": {
+  "pred": {
+   "path": "data/processed/map_alaska/alaska_pred_v1.csv.gz",
+   "bytes": 24659200,
+   "sha256": "f88c3fcfa25831cb4fd0b6a0a296138daedc3bf72931087309724870af53ed7a"
+  },
+  "oof": {
+   "path": "data/processed/map_alaska/alaska_cv_oof_v1.csv",
+   "bytes": 871655,
+   "sha256": "55f08c75a44edce3603e857ffd13d9f7dc37dc4475703238ffd3b6012e3b6a09"
+  }
+ },
+ "elapsed_s": 48.0,
+ "max_rss_mb": 1749.9,
+ "threads": {
+  "OMP_NUM_THREADS": "4",
+  "catboost": 4,
+  "nice": 10
+ },
+ "fits": {
+  "n": {
+   "wf6": 42
+  },
+  "sec": {
+   "wf6": 14.5
+  },
+  "fail": {},
+  "errors": []
+ }
+}

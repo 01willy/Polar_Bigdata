@@ -1,0 +1,40 @@
+...........F............F                                                [100%]
+=================================== FAILURES ===================================
+_____________________ test_h1_two_stage_equals_l43_region ______________________
+
+    def test_h1_two_stage_equals_l43_region():
+>       h39 = _load_h39()
+              ^^^^^^^^^^^
+
+tests/test_xbatch_core.py:278: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_xbatch_core.py:63: in _load_h39
+    spec.loader.exec_module(mod)
+<frozen importlib._bootstrap_external>:936: in exec_module
+    ???
+<frozen importlib._bootstrap_external>:1073: in get_code
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_frozen_importlib_external.SourceFileLoader object at 0x151e612d6750>
+path = '/enc/ukrprod_QoeTd/work/scripts/2_evaluation/h39_scenarios.py'
+
+>   ???
+E   FileNotFoundError: [Errno 2] No such file or directory: '/enc/ukrprod_QoeTd/work/scripts/2_evaluation/h39_scenarios.py'
+
+<frozen importlib._bootstrap_external>:1130: FileNotFoundError
+_____________________________ test_r_licence_check _____________________________
+
+    @REAL
+    def test_r_licence_check():
+        rs = XB.lic_check(strict=True)
+        assert [r["spec"] for r in rs] == list(XB.RUN_TABLE_DIRS) and all(r["n_unverified"] == 0 and r["n_rows"] > 17000 for r in rs)
+>       assert all(r["soil_link"] == "../../../e5_soil_tdd_v4.csv" for r in rs)
+E       assert False
+E        +  where False = all(<generator object test_r_licence_check.<locals>.<genexpr> at 0x151e60f83c60>)
+
+tests/test_xbatch_core.py:537: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_xbatch_core.py::test_h1_two_stage_equals_l43_region - FileN...
+FAILED tests/test_xbatch_core.py::test_r_licence_check - assert False
+2 failed, 23 passed in 13.23s

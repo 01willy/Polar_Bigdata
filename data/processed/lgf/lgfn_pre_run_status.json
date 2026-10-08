@@ -1,0 +1,58 @@
+{
+ "run_id": "43281-20260930T043448",
+ "tag": "lgfn_pre",
+ "cpu_only": false,
+ "argv": [
+  "--precheck",
+  "--allow-local",
+  "--gpus",
+  "5",
+  "--threads",
+  "2"
+ ],
+ "jobs": [
+  "n_sel_fast",
+  "n_p0_fast",
+  "n_sel_slow",
+  "n_p0_slow",
+  "n_p1",
+  "n_t2"
+ ],
+ "elapsed_s": 1489.6,
+ "gpus_first": [
+  5
+ ],
+ "gpus_last": [
+  5
+ ],
+ "busy_gpus": [],
+ "unit_states": {
+  "done": 151
+ },
+ "n_done": 151,
+ "n_fail": 0,
+ "n_partial": 0,
+ "failed_units": [],
+ "quarantined": [],
+ "blocked": [],
+ "n_blocked": 0,
+ "planner_errors": {},
+ "unrun_units": [],
+ "n_unrun": 0,
+ "gpu_lost": false,
+ "drained": "",
+ "closed": "",
+ "aborted": "",
+ "interrupted": "",
+ "settings": {
+  "E1": false,
+  "reduce_n": [],
+  "k": {
+   "mlp": 32,
+   "tabm": 32,
+   "ftt": 16,
+   "realmlp": 16
+  },
+  "source": "명령행"
+ }
+}

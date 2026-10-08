@@ -1,0 +1,80 @@
+{
+ "created": "2026-10-05 03:43:22",
+ "nboot": 10000,
+ "nboot_registered": 10000,
+ "targets": [
+  "Lena|x",
+  "Canada|x",
+  "Russia_W|x",
+  "Russia_E|x",
+  "Alaska|x",
+  "Russia_C~lgd|x",
+  "Tibet_LGD|x",
+  "Alaska|r",
+  "Lena|r",
+  "Canada|r"
+ ],
+ "products": [
+  "cci4",
+  "cci5y",
+  "cci5s",
+  "wei",
+  "weis",
+  "aalto",
+  "yk"
+ ],
+ "holm_m": 6,
+ "deviation": "등록 이탈(WRAPUP 10)",
+ "masks": [
+  "blk5",
+  "blk25"
+ ],
+ "n_rows": {
+  "xg_tests": 6,
+  "xg_confirm_rows": 48,
+  "xg_fill_sensitivity": 48,
+  "xg_descriptive": 428,
+  "xg_key_scores": 897,
+  "xg_product_key_notes": 684,
+  "xg_tests_cell": 18
+ },
+ "gates": {
+  "found": true,
+  "created": "2026-10-05 03:42:02",
+  "summary": {
+   "g1": {
+    "n": 1300,
+    "n_fail": 0,
+    "passed": true
+   },
+   "g1b": {
+    "n": 650,
+    "n_fail": 0,
+    "passed": true
+   },
+   "g2": {
+    "n": 21,
+    "n_fail": 0,
+    "passed": true
+   },
+   "g3": {
+    "n": 7,
+    "n_fail": 0,
+    "passed": true
+   }
+  },
+  "all_passed": true,
+  "stale": false,
+  "note": ""
+ },
+ "leak_check": {
+  "cci4": "",
+  "cci5y": "",
+  "cci5s": "",
+  "wei": "",
+  "weis": "",
+  "aalto": "누설 점검 불가(대리 마스크)",
+  "yk": ""
+ },
+ "file_location": "파일 위치 이탈: 계획 2.7 의 scripts/1_data_prep/xg_extract_products_v1.py, scripts/2_evaluation/xg_leak_mask_v1.py, scripts/2_evaluation/x_product_comparison.py, tests/test_x_products.py 대신 scripts/3_deep_learning/x_product_comparison.py 의 단계와 tests/test_x_xg_xh.py(docs/research/2026-10-04/impl_notes/x_product_comparison.md 1절)"
+}

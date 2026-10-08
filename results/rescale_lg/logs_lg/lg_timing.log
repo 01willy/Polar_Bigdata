@@ -1,0 +1,12 @@
+[timing] 조각 348 · 행 49 → lg_timing_by_learner.csv
+tag part     learner  n_fit       sec  sec_full_epochs  epochs_run  sec_per_fit
+ lg  cpu catboost_lo 113176  50146.08         50146.08         NaN        0.443
+ lg  cpu       ridge   1284     79.97            79.97         NaN        0.062
+ lg  gpu         cfm   1284  10272.00         10272.00       100.0        8.000
+ lg  gpu        ddpm   1284  15265.64         15265.64       100.0       11.889
+ lg  gpu         ftt   1284 315066.01        315066.01       100.0      245.379
+ lg  gpu         mlp   4884   7376.73          7376.73       100.0        1.510
+ lg  gpu       nflow   1284  78365.92         78365.92       100.0       61.033
+ lg  gpu     realmlp   1284 309857.66        309857.66       256.0      241.322
+ lg  gpu        tabm   1284   5650.32          5650.32       100.0        4.401
+[timing] 적합 수 표(lg_count_<part>_learners.csv)가 없어 본 실행 환산을 생략한다

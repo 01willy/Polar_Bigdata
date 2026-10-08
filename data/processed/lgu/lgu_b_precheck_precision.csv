@@ -1,0 +1,33 @@
+contrast,pool,n,weight,half_width_rel,main_rule_5pct,nboot,ci_kind
+LGU-B2 is10: nflow − 위약(nflow),Canada,0,cell,0.1626347237911446,검정 불가(정밀도 미달),2000,2단
+LGU-B2 is10: nflow − 위약(nflow),Canada,0,beq,0.19954862346606625,검정 불가(정밀도 미달),2000,2단
+LGU-B3 is10: nflow − cbq,Canada,0,cell,0.35110059401559607,검정 불가(정밀도 미달),2000,2단
+LGU-B3 is10: nflow − cbq,Canada,0,beq,0.2568771250508143,검정 불가(정밀도 미달),2000,2단
+LGU-B4 is10: nflow − const,Canada,0,cell,0.23486051735280128,검정 불가(정밀도 미달),2000,2단
+LGU-B4 is10: nflow − const,Canada,0,beq,0.17013889798230558,검정 불가(정밀도 미달),2000,2단
+LGU-B4 is10: nflow@mw − const,Canada,0,cell,0.1969536502703472,검정 불가(정밀도 미달),2000,2단
+LGU-B4 is10: nflow@mw − const,Canada,0,beq,0.1910249892527309,검정 불가(정밀도 미달),2000,2단
+LGU-B4 is10: cbq − const,Canada,0,cell,0.2637193290052658,검정 불가(정밀도 미달),2000,2단
+LGU-B4 is10: cbq − const,Canada,0,beq,0.3178795869154852,검정 불가(정밀도 미달),2000,2단
+LGU-B4 is10: cbq@mw − const,Canada,0,cell,0.08612442004088641,검정 불가(정밀도 미달),2000,2단
+LGU-B4 is10: cbq@mw − const,Canada,0,beq,0.2137270343704524,검정 불가(정밀도 미달),2000,2단
+LGU-B4 is10: cfm − const,Canada,0,cell,0.08628692290487262,검정 불가(정밀도 미달),2000,2단
+LGU-B4 is10: cfm − const,Canada,0,beq,0.1332462299429197,검정 불가(정밀도 미달),2000,2단
+LGU-B4 is10: cfm@mw − const,Canada,0,cell,0.07653537427090189,검정 불가(정밀도 미달),2000,2단
+LGU-B4 is10: cfm@mw − const,Canada,0,beq,0.12639012695196758,검정 불가(정밀도 미달),2000,2단
+LGU-B4 is10: phys − const,Canada,0,cell,0.051561283950398724,검정 불가(정밀도 미달),2000,2단
+LGU-B4 is10: phys − const,Canada,0,beq,0.035878020826099415,검정 가능,2000,2단
+LGU-B4 is10: phys@mw − const,Canada,0,cell,0.003704540295326562,검정 가능,2000,2단
+LGU-B4 is10: phys@mw − const,Canada,0,beq,0.005639691417830737,검정 가능,2000,2단
+LGU-B6 is10: nflow − const,Canada,10,cell,0.3822438961255604,검정 불가(정밀도 미달),2000,2단
+LGU-B6 is10: nflow − const,Canada,10,beq,0.3023020580805894,검정 불가(정밀도 미달),2000,2단
+LGU-B6 is10: cbq − const,Canada,10,cell,0.4610022379037107,검정 불가(정밀도 미달),2000,2단
+LGU-B6 is10: cbq − const,Canada,10,beq,0.522840575144566,검정 불가(정밀도 미달),2000,2단
+LGU-B6 is10: nflow − const,Canada,40,cell,0.3217420400275248,검정 불가(정밀도 미달),2000,2단
+LGU-B6 is10: nflow − const,Canada,40,beq,0.3050718354279229,검정 불가(정밀도 미달),2000,2단
+LGU-B6 is10: cbq − const,Canada,40,cell,1.0554185033349741,검정 불가(정밀도 미달),2000,2단
+LGU-B6 is10: cbq − const,Canada,40,beq,1.1117284442872535,검정 불가(정밀도 미달),2000,2단
+LGU-B6 is10: nflow − const,Canada,160,cell,0.34526395535464594,검정 불가(정밀도 미달),2000,2단
+LGU-B6 is10: nflow − const,Canada,160,beq,0.3067262828531732,검정 불가(정밀도 미달),2000,2단
+LGU-B6 is10: cbq − const,Canada,160,cell,1.0037383987174586,검정 불가(정밀도 미달),2000,2단
+LGU-B6 is10: cbq − const,Canada,160,beq,1.0702531126501686,검정 불가(정밀도 미달),2000,2단

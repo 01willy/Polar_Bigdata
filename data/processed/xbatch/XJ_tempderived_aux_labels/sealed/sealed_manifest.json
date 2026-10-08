@@ -1,0 +1,34 @@
+{
+ "entries": [
+  {
+   "file": "xj_tests.csv",
+   "rows": 9,
+   "sha256": "cc000f747aefea65d3f7ea86ec7c8fcb20cd1e12c37b799d29b661c5324f95e4",
+   "written": "2026-10-04 17:28:24"
+  },
+  {
+   "file": "xj_hyp.csv",
+   "rows": 15,
+   "sha256": "3e83305159f0e233b0dd9895b2051c339806406f41aada6743f04b1f2340964a",
+   "written": "2026-10-04 17:28:24"
+  },
+  {
+   "file": "xj_holm.csv",
+   "rows": 15,
+   "sha256": "d40b5a6eea09bb1052ec28894012607108b2cc962953826ff8ca57d940acb3a3",
+   "written": "2026-10-04 17:28:24"
+  },
+  {
+   "file": "xj_curve.csv",
+   "rows": 13,
+   "sha256": "65181691d03c4337d1e4edec0d0151777d035c8aaad777ac18133fbe1e7d10e8",
+   "written": "2026-10-04 17:28:24"
+  },
+  {
+   "file": "xj_meta.json",
+   "rows": 21,
+   "sha256": "562720afcb143504a654d9fa146a26a00d7bc9ad52c1924fb9090a741c2ef593",
+   "written": "2026-10-04 17:28:24"
+  }
+ ]
+}

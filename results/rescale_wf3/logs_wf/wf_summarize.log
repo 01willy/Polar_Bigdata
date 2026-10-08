@@ -1,0 +1,8 @@
+[summarize] 실험 ['wf9', 'wf9x', 'wf10'] · 조각 129 · runs 20,994 · curve 421 · tests 1,015 · 51s → /enc/ukrprod_Vppbeb/work/data/processed/wf/wf3b_*
+ exp test_id role target                                                                     verdict
+ wf9   WF9-a    주    NaN 부분(지역 2/3, 분할 23/24): 기각: 열세인 대비가 있다(n=전량) [통계적으로 구별되나 크기는 0.5 cm 미만: n=전량]
+wf9x   WF9-c    주    NaN           부분(지역 2/4): 부분 지지: 우세인 대비 = n=전량 [통계적으로 구별되나 크기는 0.5 cm 미만: n=전량]
+wf10  WF10-a    주    NaN                                           판정 불가(대비 0/2; 없는 대비: n=100, n=전량)
+wf10  WF10-b    주    NaN                                           판정 불가(대비 0/2; 없는 대비: n=100, n=전량)
+wf10  WF10-c    주    NaN                                           판정 불가(대비 0/2; 없는 대비: n=100, n=전량)
+wf10  WF10-d   서술    NaN         서술(cold 변형, 판정어 대신 4분 판정): EP(D0) ; EP(R1) − EP(D0) ; Δ_W(R1 − P1) 

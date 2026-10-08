@@ -1,0 +1,34 @@
+{
+ "entries": [
+  {
+   "file": "xm_tests.csv",
+   "rows": 140,
+   "sha256": "6ef9d0876cb22cdb5da2e18320a30f7bae68c8fe45a101edafef859d0494de03",
+   "written": "2026-10-05 14:19:44"
+  },
+  {
+   "file": "xm_hypotheses.csv",
+   "rows": 2,
+   "sha256": "ef6baa07bb27785bb698bb0df47d215e5153fbb80a4024894b78350ba136bcca",
+   "written": "2026-10-05 14:19:44"
+  },
+  {
+   "file": "xm_holm.csv",
+   "rows": 3,
+   "sha256": "8caba75533180c165dec68a75067c89f6baa38ccab709e411e8d419da8cfb9e7",
+   "written": "2026-10-05 14:19:44"
+  },
+  {
+   "file": "xm_decomp.csv",
+   "rows": 203,
+   "sha256": "1b5183491c5b8814aa1d3d0c74fda6b3007de33459678c26b0248aa5d2966976",
+   "written": "2026-10-05 14:19:44"
+  },
+  {
+   "file": "xm_meta.json",
+   "rows": 38,
+   "sha256": "3a52e4fa00e60ebc12b778fed57f0fda0c48097e1b7bc70f7ac6852a196eefe1",
+   "written": "2026-10-05 14:19:44"
+  }
+ ]
+}

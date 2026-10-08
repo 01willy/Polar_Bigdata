@@ -1,0 +1,8 @@
+target,split,variant,status
+Alaska,-1,cov_AK,"미실행(등록 이탈): 지역 피복 원자료(ABoVE 30 m, Lisovski 2025 10 m)의 취득·추출 경로를 만들지 않았다"
+Alaska,-1,cov_LE,대상 아님(Lena 전용)
+Lena,24,*,invalid_nb_eval<2
+Lena,-1,cov_AK,대상 아님(Alaska 전용)
+Lena,-1,cov_LE,"미실행(등록 이탈): 지역 피복 원자료(ABoVE 30 m, Lisovski 2025 10 m)의 취득·추출 경로를 만들지 않았다"
+Canada,-1,cov_AK,대상 아님(Alaska 전용)
+Canada,-1,cov_LE,대상 아님(Lena 전용)

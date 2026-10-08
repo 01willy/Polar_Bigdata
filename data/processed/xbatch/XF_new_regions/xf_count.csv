@@ -1,0 +1,6 @@
+alias,split,n_A,nb_A,n_eval,nb_eval,n_src,valid,fits_lg,fits_wf4,fits,rows_lg,rows_wf4,est_s
+NAtlantic~lic~v5,1,16,6,15,3,17462,True,178,117,295,457,109,353.4
+NAtlantic~lic~v5,2,16,3,14,6,17462,True,178,84,262,457,109,300.2
+NAtlantic~lic~v5,3,16,7,16,3,17462,True,178,117,295,457,109,353.4
+NAtlantic~lic~v5,4,18,8,14,2,17462,True,178,120,298,457,109,358.3
+NAtlantic~lic~v5,5,16,7,16,3,17462,True,178,120,298,457,109,358.3

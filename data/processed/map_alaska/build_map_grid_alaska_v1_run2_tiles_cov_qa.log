@@ -1,0 +1,43 @@
+[tiles] 필요 256 · 보유 255 · 없음 1
+  [tiles] 1/1 · 4s · 마지막 Copernicus_DSM_COG_10_N64_00_W144_00_DEM: downloaded
+[tiles] {'exists': 255, 'downloaded': 1}
+[dem] 유효 899633/899633 · 미보유 타일 []
+  [e5] 청크 (0, 0): 셀 113539 · 영역 34×237
+  [e5] 청크 (1, 0): 셀 786094 · 영역 107×283
+[e5] 유효 899633/899633 · 토양 899633 · {'fb02': 6913, 'fb05': 8, 'fail': 0, 's_direct': 892712, 's02': 6913, 's05': 8, 's_fail': 0}
+[cci] 유효 877171/899633 · 연도 파일 25
+[sg] 기존 창 namerica: 후보 894308 · 채움 8014572
+[sg] 9층 모두 유효 889198/899633 · 지역별 {'Alaska': 889198}
+[sg] 새 창 map_alaska_v1_0: lon[-168.30,-166.00] lat[64.32,68.81] size 113x79 · 셀 5325
+      clay_5-15cm: OK
+      sand_5-15cm: OK
+      silt_5-15cm: OK
+      bdod_5-15cm: OK
+      cfvo_5-15cm: OK
+      phh2o_5-15cm: OK
+      soc_0-5cm: OK
+      soc_5-15cm: OK
+      soc_15-30cm: OK
+      채움 46392
+[cov] {'dem': 348.4, 'e5': 202.5, 'cci': 72.5, 'sg_new_windows': {'n_outside_existing': 5325, 'n_fill_candidates': 5325, 'windows': {'map_alaska_v1_0': {'n_cells': 5325, 'n_values_filled': 46392, 'bbox': [-168.297974, -166.0000624, 64.3245, 68.8125], 'scalesize': [113, 79]}}}, 'sg': 26.3}
+[qa] v3 레나 F4_direct 13606행
+[dem] 유효 13606/13606 · 미보유 타일 []
+  [e5] 청크 (0, 0): 셀 5284 · 영역 33×194
+  [e5] 청크 (1, 0): 셀 8322 · 영역 93×262
+[e5] 유효 13606/13606 · 토양 13606 · {'fb02': 0, 'fb05': 0, 'fail': 0, 's_direct': 13606, 's02': 0, 's05': 0, 's_fail': 0}
+[cci] 유효 13606/13606 · 연도 파일 25
+[sg] 기존 창 namerica: 후보 13606 · 채움 122454
+[sg] 9층 모두 유효 13606/13606 · 지역별 {'Alaska': 13606}
+[qa] 대조 열 27 · 통과 21 · 최대 불일치 비율 0.1148
+Traceback (most recent call last):
+  File "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/build_map_grid_alaska_v1.py", line 495, in <module>
+    main()
+  File "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/build_map_grid_alaska_v1.py", line 398, in main
+    log("[qa] 통과하지 못한 열:\n" + prim[~prim["pass"]][["group", "column", "frac_mismatch", "n_nan_mismatch", "n_over_tol", "max_abs_diff"]].to_string())
+  File "/home/anaconda3/lib/python3.9/site-packages/pandas/core/frame.py", line 3899, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+  File "/home/anaconda3/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 6115, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+  File "/home/anaconda3/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 6176, in _raise_if_missing
+    raise KeyError(f"None of [{key}] are in the [{axis_name}]")
+KeyError: "None of [Index([-1, -1, -1, -1, -1, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,\n       -2, -2, -2, -2, -2, -2, -2, -2, -2],\n      dtype='object')] are in the [columns]"

@@ -1,0 +1,12 @@
+[self-check] 계획 docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 개정 1, T0 2678100
+  동결 h40: sha256 앞 16자 7098f59dabe2b73f (계획 값과 같음)
+  동결 h42: sha256 앞 16자 22e215e435e157be (계획 값과 같음)
+  동결 h54: sha256 앞 16자 cf9a1f6d0929c892 (계획 값과 같음)
+  동결 h41: sha256 앞 16자 492373e4d37b5ea4 (계획 값과 같음)
+  제약 파일 scripts/rescale/xbatch_constraints.txt: catboost==1.2.10, scikit-learn==1.9.1, pandas==2.3.3, scipy==1.17.1, numpy==2.1.1
+  설치 판과 다른 고정 판 0개(로컬에서는 정상, Rescale 설치 뒤에는 0 이어야 한다)
+  실행 표 Tibet: 있음
+  실행 표 NAtlantic_lic: 있음
+  실행 표 Russia_C: 있음
+  실행 표 Canada_expanded_lic: 있음
+  로컬 자원: 가용 메모리 344.7 GB, 코어 묶음 96, 허용 표지 False

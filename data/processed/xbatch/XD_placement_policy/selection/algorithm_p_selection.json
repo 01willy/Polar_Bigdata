@@ -1,0 +1,879 @@
+{
+ "chosen": "S1",
+ "spec": {
+  "name": "S1",
+  "kind": "S1",
+  "gamma": null,
+  "first": null,
+  "schedule": "해당 없음"
+ },
+ "reason": "모든 후보가 제외되었다(또는 점수 없음): Algorithm P = S1. XC-5b·5c 와 S-XC3 은 시험하지 않음",
+ "candidates": {
+  "S2": {
+   "excluded": true,
+   "n_rows": 29,
+   "n_rows_excl": 1,
+   "excl_rows": [
+    "AL-3|x n10"
+   ],
+   "score": -0.029417447235701385,
+   "per_target": [
+    {
+     "target": "AL-1",
+     "rel_cell_mean": -0.0571615995508133,
+     "rel_beq_mean": -0.09595241126609794,
+     "worse": -0.0571615995508133,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-2",
+     "rel_cell_mean": -0.023556453893979194,
+     "rel_beq_mean": -0.03307589687744521,
+     "worse": -0.023556453893979194,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-3",
+     "rel_cell_mean": 0.04105423508691524,
+     "rel_beq_mean": 0.03781221138757578,
+     "worse": 0.04105423508691524,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-4",
+     "rel_cell_mean": 0.012488941184458542,
+     "rel_beq_mean": 0.015596274658304233,
+     "worse": 0.015596274658304233,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-5",
+     "rel_cell_mean": -0.08861398918162852,
+     "rel_beq_mean": -0.2046530395051328,
+     "worse": -0.08861398918162852,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-6",
+     "rel_cell_mean": -0.029894911080754538,
+     "rel_beq_mean": -0.0761616583887977,
+     "worse": -0.029894911080754538,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "Alaska",
+     "rel_cell_mean": -0.06334568668795362,
+     "rel_beq_mean": -0.10717214087414859,
+     "worse": -0.06334568668795362,
+     "n_list": [
+      10,
+      40
+     ]
+    }
+   ]
+  },
+  "S4": {
+   "excluded": true,
+   "n_rows": 29,
+   "n_rows_excl": 3,
+   "excl_rows": [
+    "AL-3|x n10",
+    "AL-3|x n40",
+    "AL-2|r n500"
+   ],
+   "score": -0.013557875576365537,
+   "per_target": [
+    {
+     "target": "AL-1",
+     "rel_cell_mean": -0.014150028550568712,
+     "rel_beq_mean": -0.1634703200754053,
+     "worse": -0.014150028550568712,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-2",
+     "rel_cell_mean": -0.02969050041161182,
+     "rel_beq_mean": -0.03612375525775832,
+     "worse": -0.02969050041161182,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-3",
+     "rel_cell_mean": 0.056656649139004506,
+     "rel_beq_mean": 0.038324390453765955,
+     "worse": 0.056656649139004506,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-4",
+     "rel_cell_mean": -0.022946405104039752,
+     "rel_beq_mean": -0.04067142607990608,
+     "worse": -0.022946405104039752,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-5",
+     "rel_cell_mean": -0.026563015427467328,
+     "rel_beq_mean": -0.020001330047156707,
+     "worse": -0.020001330047156707,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-6",
+     "rel_cell_mean": -0.0012671842480536342,
+     "rel_beq_mean": -0.03803570021477649,
+     "worse": -0.0012671842480536342,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "Alaska",
+     "rel_cell_mean": -0.06350632981213264,
+     "rel_beq_mean": -0.09464023780903025,
+     "worse": -0.06350632981213264,
+     "n_list": [
+      10,
+      40
+     ]
+    }
+   ]
+  },
+  "S8a": {
+   "excluded": true,
+   "n_rows": 29,
+   "n_rows_excl": 2,
+   "excl_rows": [
+    "AL-3|x n10",
+    "AL-3|x n40"
+   ],
+   "score": -0.02420273722106391,
+   "per_target": [
+    {
+     "target": "AL-1",
+     "rel_cell_mean": -0.020803796485421567,
+     "rel_beq_mean": -0.11879819839878247,
+     "worse": -0.020803796485421567,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-2",
+     "rel_cell_mean": -0.02573051402396745,
+     "rel_beq_mean": -0.04532872722172013,
+     "worse": -0.02573051402396745,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-3",
+     "rel_cell_mean": 0.06264401453344678,
+     "rel_beq_mean": 0.053412371823509955,
+     "worse": 0.06264401453344678,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-4",
+     "rel_cell_mean": 0.009549181071611179,
+     "rel_beq_mean": 0.002884952387591506,
+     "worse": 0.009549181071611179,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-5",
+     "rel_cell_mean": -0.09322516236990305,
+     "rel_beq_mean": -0.19760057369956321,
+     "worse": -0.09322516236990305,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-6",
+     "rel_cell_mean": -0.03251586325373575,
+     "rel_beq_mean": -0.08872251333259507,
+     "worse": -0.03251586325373575,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "Alaska",
+     "rel_cell_mean": -0.0693370200194775,
+     "rel_beq_mean": -0.1269385246331084,
+     "worse": -0.0693370200194775,
+     "n_list": [
+      10,
+      40
+     ]
+    }
+   ]
+  },
+  "S8b": {
+   "excluded": true,
+   "n_rows": 29,
+   "n_rows_excl": 2,
+   "excl_rows": [
+    "AL-3|x n10",
+    "AL-3|x n40"
+   ],
+   "score": -0.021729251165346013,
+   "per_target": [
+    {
+     "target": "AL-1",
+     "rel_cell_mean": -0.022110479548308054,
+     "rel_beq_mean": -0.12579279170788693,
+     "worse": -0.022110479548308054,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-2",
+     "rel_cell_mean": -0.023893134021246664,
+     "rel_beq_mean": -0.04049920527406278,
+     "worse": -0.023893134021246664,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-3",
+     "rel_cell_mean": 0.07694892531049233,
+     "rel_beq_mean": 0.06838598161631451,
+     "worse": 0.07694892531049233,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-4",
+     "rel_cell_mean": 0.009549181071611179,
+     "rel_beq_mean": 0.002884952387591506,
+     "worse": 0.009549181071611179,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-5",
+     "rel_cell_mean": -0.09641592959622652,
+     "rel_beq_mean": -0.18437571408941378,
+     "worse": -0.09641592959622652,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-6",
+     "rel_cell_mean": -0.03251586325373575,
+     "rel_beq_mean": -0.08872251333259507,
+     "worse": -0.03251586325373575,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "Alaska",
+     "rel_cell_mean": -0.0636674581200086,
+     "rel_beq_mean": -0.12743208933850853,
+     "worse": -0.0636674581200086,
+     "n_list": [
+      10,
+      40
+     ]
+    }
+   ]
+  },
+  "S8c": {
+   "excluded": true,
+   "n_rows": 29,
+   "n_rows_excl": 1,
+   "excl_rows": [
+    "AL-3|x n40"
+   ],
+   "score": -0.015926955363350065,
+   "per_target": [
+    {
+     "target": "AL-1",
+     "rel_cell_mean": 0.0015717431531354006,
+     "rel_beq_mean": -0.1442646722690138,
+     "worse": 0.0015717431531354006,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-2",
+     "rel_cell_mean": -0.015111123527775914,
+     "rel_beq_mean": -0.026939633187380248,
+     "worse": -0.015111123527775914,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-3",
+     "rel_cell_mean": 0.016752221858415448,
+     "rel_beq_mean": -0.006424499525294607,
+     "worse": 0.016752221858415448,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-4",
+     "rel_cell_mean": 0.009549181071611179,
+     "rel_beq_mean": 0.002884952387591506,
+     "worse": 0.009549181071611179,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-5",
+     "rel_cell_mean": -0.07182727992179834,
+     "rel_beq_mean": -0.13802739738529865,
+     "worse": -0.07182727992179834,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-6",
+     "rel_cell_mean": -0.027972521895846696,
+     "rel_beq_mean": -0.06679278787483331,
+     "worse": -0.027972521895846696,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "Alaska",
+     "rel_cell_mean": -0.024450908281191543,
+     "rel_beq_mean": -0.03284283208498892,
+     "worse": -0.024450908281191543,
+     "n_list": [
+      10,
+      40
+     ]
+    }
+   ]
+  },
+  "S8p": {
+   "excluded": true,
+   "n_rows": 29,
+   "n_rows_excl": 5,
+   "excl_rows": [
+    "Alaska|x n10",
+    "Alaska|r n20",
+    "AL-2|r n50",
+    "AL-2|r n200",
+    "AL-2|r n500"
+   ],
+   "score": 0.011523724170353926,
+   "per_target": [
+    {
+     "target": "AL-1",
+     "rel_cell_mean": 0.020419826036149145,
+     "rel_beq_mean": -0.12397753630834277,
+     "worse": 0.020419826036149145,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-2",
+     "rel_cell_mean": 0.018432630045606926,
+     "rel_beq_mean": 0.005290511287414385,
+     "worse": 0.018432630045606926,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-3",
+     "rel_cell_mean": 0.016986676417743134,
+     "rel_beq_mean": 0.011974213415509662,
+     "worse": 0.016986676417743134,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-4",
+     "rel_cell_mean": 0.021268856802423852,
+     "rel_beq_mean": 0.016331311629286083,
+     "worse": 0.021268856802423852,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-5",
+     "rel_cell_mean": -0.0205098635181874,
+     "rel_beq_mean": -0.02473668889950838,
+     "worse": -0.0205098635181874,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "AL-6",
+     "rel_cell_mean": -0.028589209143387608,
+     "rel_beq_mean": -0.04184069454875338,
+     "worse": -0.028589209143387608,
+     "n_list": [
+      10,
+      40
+     ]
+    },
+    {
+     "target": "Alaska",
+     "rel_cell_mean": 0.03654844216225212,
+     "rel_beq_mean": 0.05265715255212944,
+     "worse": 0.05265715255212944,
+     "n_list": [
+      10,
+      40
+     ]
+    }
+   ]
+  }
+ },
+ "rule": "계획 2.3 Algorithm P 의 고정 규칙",
+ "alaska_family": {
+  "transfer": [
+   "Alaska|x",
+   "AL-1|x",
+   "AL-2|x",
+   "AL-3|x",
+   "AL-4|x",
+   "AL-5|x",
+   "AL-6|x"
+  ],
+  "inregion": [
+   "Alaska|r",
+   "AL-1|r",
+   "AL-2|r"
+  ],
+  "n_x": [
+   10,
+   40
+  ],
+  "n_r": [
+   20,
+   50,
+   100,
+   200,
+   500
+  ]
+ },
+ "stores_read": [
+  "AL-1|x",
+  "AL-2|x",
+  "AL-3|x",
+  "AL-4|x",
+  "AL-5|x",
+  "AL-6|x",
+  "Alaska|x",
+  "AL-1|r",
+  "AL-2|r",
+  "Alaska|r"
+ ],
+ "shard_files": [
+  "xdt__cpu__AL-1__x__s2__S1_blocksse.npz",
+  "xdt__cpu__AL-1__x__s2__S2_blocksse.npz",
+  "xdt__cpu__AL-1__x__s2__S4_blocksse.npz",
+  "xdt__cpu__AL-1__x__s2__S8a_blocksse.npz",
+  "xdt__cpu__AL-1__x__s2__S8b_blocksse.npz",
+  "xdt__cpu__AL-1__x__s2__S8c_blocksse.npz",
+  "xdt__cpu__AL-1__x__s2__S8p_blocksse.npz",
+  "xdt__cpu__AL-1__x__s3__S1_blocksse.npz",
+  "xdt__cpu__AL-1__x__s3__S2_blocksse.npz",
+  "xdt__cpu__AL-1__x__s3__S4_blocksse.npz",
+  "xdt__cpu__AL-1__x__s3__S8a_blocksse.npz",
+  "xdt__cpu__AL-1__x__s3__S8b_blocksse.npz",
+  "xdt__cpu__AL-1__x__s3__S8c_blocksse.npz",
+  "xdt__cpu__AL-1__x__s3__S8p_blocksse.npz",
+  "xdt__cpu__AL-1__x__s4__S1_blocksse.npz",
+  "xdt__cpu__AL-1__x__s4__S2_blocksse.npz",
+  "xdt__cpu__AL-1__x__s4__S4_blocksse.npz",
+  "xdt__cpu__AL-1__x__s4__S8a_blocksse.npz",
+  "xdt__cpu__AL-1__x__s4__S8b_blocksse.npz",
+  "xdt__cpu__AL-1__x__s4__S8c_blocksse.npz",
+  "xdt__cpu__AL-1__x__s4__S8p_blocksse.npz",
+  "xdt__cpu__AL-1__x__s5__S1_blocksse.npz",
+  "xdt__cpu__AL-1__x__s5__S2_blocksse.npz",
+  "xdt__cpu__AL-1__x__s5__S4_blocksse.npz",
+  "xdt__cpu__AL-1__x__s5__S8a_blocksse.npz",
+  "xdt__cpu__AL-1__x__s5__S8b_blocksse.npz",
+  "xdt__cpu__AL-1__x__s5__S8c_blocksse.npz",
+  "xdt__cpu__AL-1__x__s5__S8p_blocksse.npz",
+  "xdt__cpu__AL-2__x__s1__S1_blocksse.npz",
+  "xdt__cpu__AL-2__x__s1__S2_blocksse.npz",
+  "xdt__cpu__AL-2__x__s1__S4_blocksse.npz",
+  "xdt__cpu__AL-2__x__s1__S8a_blocksse.npz",
+  "xdt__cpu__AL-2__x__s1__S8b_blocksse.npz",
+  "xdt__cpu__AL-2__x__s1__S8c_blocksse.npz",
+  "xdt__cpu__AL-2__x__s1__S8p_blocksse.npz",
+  "xdt__cpu__AL-2__x__s2__S1_blocksse.npz",
+  "xdt__cpu__AL-2__x__s2__S2_blocksse.npz",
+  "xdt__cpu__AL-2__x__s2__S4_blocksse.npz",
+  "xdt__cpu__AL-2__x__s2__S8a_blocksse.npz",
+  "xdt__cpu__AL-2__x__s2__S8b_blocksse.npz",
+  "xdt__cpu__AL-2__x__s2__S8c_blocksse.npz",
+  "xdt__cpu__AL-2__x__s2__S8p_blocksse.npz",
+  "xdt__cpu__AL-2__x__s3__S1_blocksse.npz",
+  "xdt__cpu__AL-2__x__s3__S2_blocksse.npz",
+  "xdt__cpu__AL-2__x__s3__S4_blocksse.npz",
+  "xdt__cpu__AL-2__x__s3__S8a_blocksse.npz",
+  "xdt__cpu__AL-2__x__s3__S8b_blocksse.npz",
+  "xdt__cpu__AL-2__x__s3__S8c_blocksse.npz",
+  "xdt__cpu__AL-2__x__s3__S8p_blocksse.npz",
+  "xdt__cpu__AL-2__x__s4__S1_blocksse.npz",
+  "xdt__cpu__AL-2__x__s4__S2_blocksse.npz",
+  "xdt__cpu__AL-2__x__s4__S4_blocksse.npz",
+  "xdt__cpu__AL-2__x__s4__S8a_blocksse.npz",
+  "xdt__cpu__AL-2__x__s4__S8b_blocksse.npz",
+  "xdt__cpu__AL-2__x__s4__S8c_blocksse.npz",
+  "xdt__cpu__AL-2__x__s4__S8p_blocksse.npz",
+  "xdt__cpu__AL-2__x__s5__S1_blocksse.npz",
+  "xdt__cpu__AL-2__x__s5__S2_blocksse.npz",
+  "xdt__cpu__AL-2__x__s5__S4_blocksse.npz",
+  "xdt__cpu__AL-2__x__s5__S8a_blocksse.npz",
+  "xdt__cpu__AL-2__x__s5__S8b_blocksse.npz",
+  "xdt__cpu__AL-2__x__s5__S8c_blocksse.npz",
+  "xdt__cpu__AL-2__x__s5__S8p_blocksse.npz",
+  "xdt__cpu__AL-3__x__s1__S1_blocksse.npz",
+  "xdt__cpu__AL-3__x__s1__S2_blocksse.npz",
+  "xdt__cpu__AL-3__x__s1__S4_blocksse.npz",
+  "xdt__cpu__AL-3__x__s1__S8a_blocksse.npz",
+  "xdt__cpu__AL-3__x__s1__S8b_blocksse.npz",
+  "xdt__cpu__AL-3__x__s1__S8c_blocksse.npz",
+  "xdt__cpu__AL-3__x__s1__S8p_blocksse.npz",
+  "xdt__cpu__AL-3__x__s2__S1_blocksse.npz",
+  "xdt__cpu__AL-3__x__s2__S2_blocksse.npz",
+  "xdt__cpu__AL-3__x__s2__S4_blocksse.npz",
+  "xdt__cpu__AL-3__x__s2__S8a_blocksse.npz",
+  "xdt__cpu__AL-3__x__s2__S8b_blocksse.npz",
+  "xdt__cpu__AL-3__x__s2__S8c_blocksse.npz",
+  "xdt__cpu__AL-3__x__s2__S8p_blocksse.npz",
+  "xdt__cpu__AL-3__x__s3__S1_blocksse.npz",
+  "xdt__cpu__AL-3__x__s3__S2_blocksse.npz",
+  "xdt__cpu__AL-3__x__s3__S4_blocksse.npz",
+  "xdt__cpu__AL-3__x__s3__S8a_blocksse.npz",
+  "xdt__cpu__AL-3__x__s3__S8b_blocksse.npz",
+  "xdt__cpu__AL-3__x__s3__S8c_blocksse.npz",
+  "xdt__cpu__AL-3__x__s3__S8p_blocksse.npz",
+  "xdt__cpu__AL-3__x__s4__S1_blocksse.npz",
+  "xdt__cpu__AL-3__x__s4__S2_blocksse.npz",
+  "xdt__cpu__AL-3__x__s4__S4_blocksse.npz",
+  "xdt__cpu__AL-3__x__s4__S8a_blocksse.npz",
+  "xdt__cpu__AL-3__x__s4__S8b_blocksse.npz",
+  "xdt__cpu__AL-3__x__s4__S8c_blocksse.npz",
+  "xdt__cpu__AL-3__x__s4__S8p_blocksse.npz",
+  "xdt__cpu__AL-3__x__s5__S1_blocksse.npz",
+  "xdt__cpu__AL-3__x__s5__S2_blocksse.npz",
+  "xdt__cpu__AL-3__x__s5__S4_blocksse.npz",
+  "xdt__cpu__AL-3__x__s5__S8a_blocksse.npz",
+  "xdt__cpu__AL-3__x__s5__S8b_blocksse.npz",
+  "xdt__cpu__AL-3__x__s5__S8c_blocksse.npz",
+  "xdt__cpu__AL-3__x__s5__S8p_blocksse.npz",
+  "xdt__cpu__AL-4__x__s1__S1_blocksse.npz",
+  "xdt__cpu__AL-4__x__s1__S2_blocksse.npz",
+  "xdt__cpu__AL-4__x__s1__S4_blocksse.npz",
+  "xdt__cpu__AL-4__x__s1__S8a_blocksse.npz",
+  "xdt__cpu__AL-4__x__s1__S8b_blocksse.npz",
+  "xdt__cpu__AL-4__x__s1__S8c_blocksse.npz",
+  "xdt__cpu__AL-4__x__s1__S8p_blocksse.npz",
+  "xdt__cpu__AL-4__x__s4__S1_blocksse.npz",
+  "xdt__cpu__AL-4__x__s4__S2_blocksse.npz",
+  "xdt__cpu__AL-4__x__s4__S4_blocksse.npz",
+  "xdt__cpu__AL-4__x__s4__S8a_blocksse.npz",
+  "xdt__cpu__AL-4__x__s4__S8b_blocksse.npz",
+  "xdt__cpu__AL-4__x__s4__S8c_blocksse.npz",
+  "xdt__cpu__AL-4__x__s4__S8p_blocksse.npz",
+  "xdt__cpu__AL-4__x__s5__S1_blocksse.npz",
+  "xdt__cpu__AL-4__x__s5__S2_blocksse.npz",
+  "xdt__cpu__AL-4__x__s5__S4_blocksse.npz",
+  "xdt__cpu__AL-4__x__s5__S8a_blocksse.npz",
+  "xdt__cpu__AL-4__x__s5__S8b_blocksse.npz",
+  "xdt__cpu__AL-4__x__s5__S8c_blocksse.npz",
+  "xdt__cpu__AL-4__x__s5__S8p_blocksse.npz",
+  "xdt__cpu__AL-5__x__s1__S1_blocksse.npz",
+  "xdt__cpu__AL-5__x__s1__S2_blocksse.npz",
+  "xdt__cpu__AL-5__x__s1__S4_blocksse.npz",
+  "xdt__cpu__AL-5__x__s1__S8a_blocksse.npz",
+  "xdt__cpu__AL-5__x__s1__S8b_blocksse.npz",
+  "xdt__cpu__AL-5__x__s1__S8c_blocksse.npz",
+  "xdt__cpu__AL-5__x__s1__S8p_blocksse.npz",
+  "xdt__cpu__AL-5__x__s2__S1_blocksse.npz",
+  "xdt__cpu__AL-5__x__s2__S2_blocksse.npz",
+  "xdt__cpu__AL-5__x__s2__S4_blocksse.npz",
+  "xdt__cpu__AL-5__x__s2__S8a_blocksse.npz",
+  "xdt__cpu__AL-5__x__s2__S8b_blocksse.npz",
+  "xdt__cpu__AL-5__x__s2__S8c_blocksse.npz",
+  "xdt__cpu__AL-5__x__s2__S8p_blocksse.npz",
+  "xdt__cpu__AL-5__x__s3__S1_blocksse.npz",
+  "xdt__cpu__AL-5__x__s3__S2_blocksse.npz",
+  "xdt__cpu__AL-5__x__s3__S4_blocksse.npz",
+  "xdt__cpu__AL-5__x__s3__S8a_blocksse.npz",
+  "xdt__cpu__AL-5__x__s3__S8b_blocksse.npz",
+  "xdt__cpu__AL-5__x__s3__S8c_blocksse.npz",
+  "xdt__cpu__AL-5__x__s3__S8p_blocksse.npz",
+  "xdt__cpu__AL-5__x__s4__S1_blocksse.npz",
+  "xdt__cpu__AL-5__x__s4__S2_blocksse.npz",
+  "xdt__cpu__AL-5__x__s4__S4_blocksse.npz",
+  "xdt__cpu__AL-5__x__s4__S8a_blocksse.npz",
+  "xdt__cpu__AL-5__x__s4__S8b_blocksse.npz",
+  "xdt__cpu__AL-5__x__s4__S8c_blocksse.npz",
+  "xdt__cpu__AL-5__x__s4__S8p_blocksse.npz",
+  "xdt__cpu__AL-5__x__s5__S1_blocksse.npz",
+  "xdt__cpu__AL-5__x__s5__S2_blocksse.npz",
+  "xdt__cpu__AL-5__x__s5__S4_blocksse.npz",
+  "xdt__cpu__AL-5__x__s5__S8a_blocksse.npz",
+  "xdt__cpu__AL-5__x__s5__S8b_blocksse.npz",
+  "xdt__cpu__AL-5__x__s5__S8c_blocksse.npz",
+  "xdt__cpu__AL-5__x__s5__S8p_blocksse.npz",
+  "xdt__cpu__AL-6__x__s1__S1_blocksse.npz",
+  "xdt__cpu__AL-6__x__s1__S2_blocksse.npz",
+  "xdt__cpu__AL-6__x__s1__S4_blocksse.npz",
+  "xdt__cpu__AL-6__x__s1__S8a_blocksse.npz",
+  "xdt__cpu__AL-6__x__s1__S8b_blocksse.npz",
+  "xdt__cpu__AL-6__x__s1__S8c_blocksse.npz",
+  "xdt__cpu__AL-6__x__s1__S8p_blocksse.npz",
+  "xdt__cpu__AL-6__x__s3__S1_blocksse.npz",
+  "xdt__cpu__AL-6__x__s3__S2_blocksse.npz",
+  "xdt__cpu__AL-6__x__s3__S4_blocksse.npz",
+  "xdt__cpu__AL-6__x__s3__S8a_blocksse.npz",
+  "xdt__cpu__AL-6__x__s3__S8b_blocksse.npz",
+  "xdt__cpu__AL-6__x__s3__S8c_blocksse.npz",
+  "xdt__cpu__AL-6__x__s3__S8p_blocksse.npz",
+  "xdt__cpu__AL-6__x__s4__S1_blocksse.npz",
+  "xdt__cpu__AL-6__x__s4__S2_blocksse.npz",
+  "xdt__cpu__AL-6__x__s4__S4_blocksse.npz",
+  "xdt__cpu__AL-6__x__s4__S8a_blocksse.npz",
+  "xdt__cpu__AL-6__x__s4__S8b_blocksse.npz",
+  "xdt__cpu__AL-6__x__s4__S8c_blocksse.npz",
+  "xdt__cpu__AL-6__x__s4__S8p_blocksse.npz",
+  "xdt__cpu__AL-6__x__s5__S1_blocksse.npz",
+  "xdt__cpu__AL-6__x__s5__S2_blocksse.npz",
+  "xdt__cpu__AL-6__x__s5__S4_blocksse.npz",
+  "xdt__cpu__AL-6__x__s5__S8a_blocksse.npz",
+  "xdt__cpu__AL-6__x__s5__S8b_blocksse.npz",
+  "xdt__cpu__AL-6__x__s5__S8c_blocksse.npz",
+  "xdt__cpu__AL-6__x__s5__S8p_blocksse.npz",
+  "xdt__cpu__Alaska__x__s1__S1_blocksse.npz",
+  "xdt__cpu__Alaska__x__s1__S2_blocksse.npz",
+  "xdt__cpu__Alaska__x__s1__S4_blocksse.npz",
+  "xdt__cpu__Alaska__x__s1__S8a_blocksse.npz",
+  "xdt__cpu__Alaska__x__s1__S8b_blocksse.npz",
+  "xdt__cpu__Alaska__x__s1__S8c_blocksse.npz",
+  "xdt__cpu__Alaska__x__s1__S8p_blocksse.npz",
+  "xdt__cpu__Alaska__x__s2__S1_blocksse.npz",
+  "xdt__cpu__Alaska__x__s2__S2_blocksse.npz",
+  "xdt__cpu__Alaska__x__s2__S4_blocksse.npz",
+  "xdt__cpu__Alaska__x__s2__S8a_blocksse.npz",
+  "xdt__cpu__Alaska__x__s2__S8b_blocksse.npz",
+  "xdt__cpu__Alaska__x__s2__S8c_blocksse.npz",
+  "xdt__cpu__Alaska__x__s2__S8p_blocksse.npz",
+  "xdt__cpu__Alaska__x__s3__S1_blocksse.npz",
+  "xdt__cpu__Alaska__x__s3__S2_blocksse.npz",
+  "xdt__cpu__Alaska__x__s3__S4_blocksse.npz",
+  "xdt__cpu__Alaska__x__s3__S8a_blocksse.npz",
+  "xdt__cpu__Alaska__x__s3__S8b_blocksse.npz",
+  "xdt__cpu__Alaska__x__s3__S8c_blocksse.npz",
+  "xdt__cpu__Alaska__x__s3__S8p_blocksse.npz",
+  "xdt__cpu__Alaska__x__s4__S1_blocksse.npz",
+  "xdt__cpu__Alaska__x__s4__S2_blocksse.npz",
+  "xdt__cpu__Alaska__x__s4__S4_blocksse.npz",
+  "xdt__cpu__Alaska__x__s4__S8a_blocksse.npz",
+  "xdt__cpu__Alaska__x__s4__S8b_blocksse.npz",
+  "xdt__cpu__Alaska__x__s4__S8c_blocksse.npz",
+  "xdt__cpu__Alaska__x__s4__S8p_blocksse.npz",
+  "xdt__cpu__Alaska__x__s5__S1_blocksse.npz",
+  "xdt__cpu__Alaska__x__s5__S2_blocksse.npz",
+  "xdt__cpu__Alaska__x__s5__S4_blocksse.npz",
+  "xdt__cpu__Alaska__x__s5__S8a_blocksse.npz",
+  "xdt__cpu__Alaska__x__s5__S8b_blocksse.npz",
+  "xdt__cpu__Alaska__x__s5__S8c_blocksse.npz",
+  "xdt__cpu__Alaska__x__s5__S8p_blocksse.npz",
+  "xdr__cpu__AL-1__r__s2__S1_blocksse.npz",
+  "xdr__cpu__AL-1__r__s2__S2_blocksse.npz",
+  "xdr__cpu__AL-1__r__s2__S4_blocksse.npz",
+  "xdr__cpu__AL-1__r__s2__S8a_blocksse.npz",
+  "xdr__cpu__AL-1__r__s2__S8b_blocksse.npz",
+  "xdr__cpu__AL-1__r__s2__S8c_blocksse.npz",
+  "xdr__cpu__AL-1__r__s2__S8p_blocksse.npz",
+  "xdr__cpu__AL-1__r__s3__S1_blocksse.npz",
+  "xdr__cpu__AL-1__r__s3__S2_blocksse.npz",
+  "xdr__cpu__AL-1__r__s3__S4_blocksse.npz",
+  "xdr__cpu__AL-1__r__s3__S8a_blocksse.npz",
+  "xdr__cpu__AL-1__r__s3__S8b_blocksse.npz",
+  "xdr__cpu__AL-1__r__s3__S8c_blocksse.npz",
+  "xdr__cpu__AL-1__r__s3__S8p_blocksse.npz",
+  "xdr__cpu__AL-1__r__s4__S1_blocksse.npz",
+  "xdr__cpu__AL-1__r__s4__S2_blocksse.npz",
+  "xdr__cpu__AL-1__r__s4__S4_blocksse.npz",
+  "xdr__cpu__AL-1__r__s4__S8a_blocksse.npz",
+  "xdr__cpu__AL-1__r__s4__S8b_blocksse.npz",
+  "xdr__cpu__AL-1__r__s4__S8c_blocksse.npz",
+  "xdr__cpu__AL-1__r__s4__S8p_blocksse.npz",
+  "xdr__cpu__AL-1__r__s5__S1_blocksse.npz",
+  "xdr__cpu__AL-1__r__s5__S2_blocksse.npz",
+  "xdr__cpu__AL-1__r__s5__S4_blocksse.npz",
+  "xdr__cpu__AL-1__r__s5__S8a_blocksse.npz",
+  "xdr__cpu__AL-1__r__s5__S8b_blocksse.npz",
+  "xdr__cpu__AL-1__r__s5__S8c_blocksse.npz",
+  "xdr__cpu__AL-1__r__s5__S8p_blocksse.npz",
+  "xdr__cpu__AL-2__r__s1__S1_blocksse.npz",
+  "xdr__cpu__AL-2__r__s1__S2_blocksse.npz",
+  "xdr__cpu__AL-2__r__s1__S4_blocksse.npz",
+  "xdr__cpu__AL-2__r__s1__S8a_blocksse.npz",
+  "xdr__cpu__AL-2__r__s1__S8b_blocksse.npz",
+  "xdr__cpu__AL-2__r__s1__S8c_blocksse.npz",
+  "xdr__cpu__AL-2__r__s1__S8p_blocksse.npz",
+  "xdr__cpu__AL-2__r__s2__S1_blocksse.npz",
+  "xdr__cpu__AL-2__r__s2__S2_blocksse.npz",
+  "xdr__cpu__AL-2__r__s2__S4_blocksse.npz",
+  "xdr__cpu__AL-2__r__s2__S8a_blocksse.npz",
+  "xdr__cpu__AL-2__r__s2__S8b_blocksse.npz",
+  "xdr__cpu__AL-2__r__s2__S8c_blocksse.npz",
+  "xdr__cpu__AL-2__r__s2__S8p_blocksse.npz",
+  "xdr__cpu__AL-2__r__s3__S1_blocksse.npz",
+  "xdr__cpu__AL-2__r__s3__S2_blocksse.npz",
+  "xdr__cpu__AL-2__r__s3__S4_blocksse.npz",
+  "xdr__cpu__AL-2__r__s3__S8a_blocksse.npz",
+  "xdr__cpu__AL-2__r__s3__S8b_blocksse.npz",
+  "xdr__cpu__AL-2__r__s3__S8c_blocksse.npz",
+  "xdr__cpu__AL-2__r__s3__S8p_blocksse.npz",
+  "xdr__cpu__AL-2__r__s4__S1_blocksse.npz",
+  "xdr__cpu__AL-2__r__s4__S2_blocksse.npz",
+  "xdr__cpu__AL-2__r__s4__S4_blocksse.npz",
+  "xdr__cpu__AL-2__r__s4__S8a_blocksse.npz",
+  "xdr__cpu__AL-2__r__s4__S8b_blocksse.npz",
+  "xdr__cpu__AL-2__r__s4__S8c_blocksse.npz",
+  "xdr__cpu__AL-2__r__s4__S8p_blocksse.npz",
+  "xdr__cpu__AL-2__r__s5__S1_blocksse.npz",
+  "xdr__cpu__AL-2__r__s5__S2_blocksse.npz",
+  "xdr__cpu__AL-2__r__s5__S4_blocksse.npz",
+  "xdr__cpu__AL-2__r__s5__S8a_blocksse.npz",
+  "xdr__cpu__AL-2__r__s5__S8b_blocksse.npz",
+  "xdr__cpu__AL-2__r__s5__S8c_blocksse.npz",
+  "xdr__cpu__AL-2__r__s5__S8p_blocksse.npz",
+  "xdr__cpu__Alaska__r__s1__S1_blocksse.npz",
+  "xdr__cpu__Alaska__r__s1__S2_blocksse.npz",
+  "xdr__cpu__Alaska__r__s1__S4_blocksse.npz",
+  "xdr__cpu__Alaska__r__s1__S8a_blocksse.npz",
+  "xdr__cpu__Alaska__r__s1__S8b_blocksse.npz",
+  "xdr__cpu__Alaska__r__s1__S8c_blocksse.npz",
+  "xdr__cpu__Alaska__r__s1__S8p_blocksse.npz",
+  "xdr__cpu__Alaska__r__s2__S1_blocksse.npz",
+  "xdr__cpu__Alaska__r__s2__S2_blocksse.npz",
+  "xdr__cpu__Alaska__r__s2__S4_blocksse.npz",
+  "xdr__cpu__Alaska__r__s2__S8a_blocksse.npz",
+  "xdr__cpu__Alaska__r__s2__S8b_blocksse.npz",
+  "xdr__cpu__Alaska__r__s2__S8c_blocksse.npz",
+  "xdr__cpu__Alaska__r__s2__S8p_blocksse.npz",
+  "xdr__cpu__Alaska__r__s3__S1_blocksse.npz",
+  "xdr__cpu__Alaska__r__s3__S2_blocksse.npz",
+  "xdr__cpu__Alaska__r__s3__S4_blocksse.npz",
+  "xdr__cpu__Alaska__r__s3__S8a_blocksse.npz",
+  "xdr__cpu__Alaska__r__s3__S8b_blocksse.npz",
+  "xdr__cpu__Alaska__r__s3__S8c_blocksse.npz",
+  "xdr__cpu__Alaska__r__s3__S8p_blocksse.npz",
+  "xdr__cpu__Alaska__r__s4__S1_blocksse.npz",
+  "xdr__cpu__Alaska__r__s4__S2_blocksse.npz",
+  "xdr__cpu__Alaska__r__s4__S4_blocksse.npz",
+  "xdr__cpu__Alaska__r__s4__S8a_blocksse.npz",
+  "xdr__cpu__Alaska__r__s4__S8b_blocksse.npz",
+  "xdr__cpu__Alaska__r__s4__S8c_blocksse.npz",
+  "xdr__cpu__Alaska__r__s4__S8p_blocksse.npz",
+  "xdr__cpu__Alaska__r__s5__S1_blocksse.npz",
+  "xdr__cpu__Alaska__r__s5__S2_blocksse.npz",
+  "xdr__cpu__Alaska__r__s5__S4_blocksse.npz",
+  "xdr__cpu__Alaska__r__s5__S8a_blocksse.npz",
+  "xdr__cpu__Alaska__r__s5__S8b_blocksse.npz",
+  "xdr__cpu__Alaska__r__s5__S8c_blocksse.npz",
+  "xdr__cpu__Alaska__r__s5__S8p_blocksse.npz"
+ ],
+ "nboot": 10000,
+ "table_file": "algorithm_p_alaska_table.csv",
+ "script_sha256": "b2ef7464df799ee369173345415cfcf9aaa15f981cef200262b993903947d1aa",
+ "selection_fn_sha256": "7b837ff5af195df67b8980aaeee2b460a1d792a4b7c6a68a673e0aa14e61bac7",
+ "core_sha256": "aba34a3346d86aeb61e923aae8bba11fbe1c88f81c4d47f3cb57b594563ab3a2",
+ "frozen": {
+  "h40": "7098f59dabe2b73f",
+  "h42": "22e215e435e157be",
+  "h54": "cf9a1f6d0929c892",
+  "h41": "492373e4d37b5ea4"
+ },
+ "plan_commit": "2678100",
+ "created": "2026-10-05 03:03:36",
+ "table_path": "/home/willy010313/Polar_Bigdata/data/processed/xbatch/XD_placement_policy/selection/algorithm_p_alaska_table.csv",
+ "table_sha256": "8eabb67da8072d69e38b9935c12d6979ea1063cd3add636be68350986989f14d"
+}

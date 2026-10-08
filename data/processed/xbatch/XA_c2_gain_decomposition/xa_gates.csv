@@ -1,0 +1,6 @@
+gate,quantity,value,ref_plan,compared,equal_2dp,ref_file,file_abs_diff,n_targets,nboot,note
+(1) WF4-c,rho,0.38095238095238093,0.38,True,True,0.3809523809523809,5.551115123125783e-17,28,10000,
+(1) WF4-c,ci_lo,0.16637931034482759,0.17,True,True,0.1663793103448275,8.326672684688674e-17,28,10000,
+(1) WF4-c,ci_hi,0.5451696770662285,0.55,True,True,0.5451696770662285,0.0,28,10000,
+(2) WF0,rho_total,0.6565072302558399,0.66,True,True,0.6565072302558399,0.0,30,0,results/rescale_lg/data/processed/lg/lg_curve.csv;data/processed/lgd/lgd_curve_lic.csv
+(2) WF0,rho_beyond,-0.08209121245828699,-0.08,True,True,-0.0820912124582869,8.326672684688674e-17,30,0,results/rescale_lg/data/processed/lg/lg_curve.csv;data/processed/lgd/lgd_curve_lic.csv

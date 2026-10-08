@@ -1,0 +1,84 @@
+[2026-10-04T17:17:44Z]: Launching [ -f xbatch_payload.tar.gz ] && tar xzf xbatch_payload.tar.gz; XBATCH_JOB=A XBATCH_BUDGET_MIN=170 bash scripts/rescale/run_xbatch.sh, Working dir: /enc/ukrprod_QoeTd/work.  Process output follows:
+[2026-10-04T17:17:44Z]: [payload] created_utc=2026-10-04T17:09:53Z
+[2026-10-04T17:17:44Z]: [payload] git_commit=6cfe741
+[2026-10-04T17:17:44Z]: [payload] git_uncommitted_paths=0
+[2026-10-04T17:17:44Z]: [2026-10-04T17:17:44Z] [env] 작업 디렉터리 /enc/ukrprod_QoeTd/work
+[2026-10-04T17:17:44Z]: [2026-10-04T17:17:44Z] [env] 코어 수 96 (RESCALE_CORES_PER_SLOT = 96, OMP_NUM_THREADS = 없음) · 메모리 369 GB (여유 344 GB)
+[2026-10-04T17:17:44Z]: [2026-10-04T17:17:44Z] [env] 디스크 1.2T 여유 / 1.2T
+[2026-10-04T17:17:44Z]: [2026-10-04T17:17:44Z] [env] python /program/pytorch-2.4.1/venv/bin/python3 · pip /program/pytorch-2.4.1/venv/bin/pip
+[2026-10-04T17:17:47Z]: [env] python 3.11.10 · Linux-4.18.0-553.159.1.el8_10.x86_64-x86_64-with-glibc2.28
+[2026-10-04T17:17:47Z]: [env] 가상환경 True · prefix /program/pytorch-2.4.1/venv
+[2026-10-04T17:17:47Z]: [env] numpy 2.1.1
+[2026-10-04T17:17:47Z]: [env] pandas 없음
+[2026-10-04T17:17:47Z]: [env] scipy 없음
+[2026-10-04T17:17:47Z]: [env] scikit-learn 없음
+[2026-10-04T17:17:47Z]: [env] catboost 없음
+[2026-10-04T17:17:47Z]: [env] pytabkit 없음
+[2026-10-04T17:17:47Z]: [env] pytest 없음
+[2026-10-04T17:17:47Z]: [env] torch 2.4.1
+[2026-10-04T17:17:47Z]: [env] CUDA_VISIBLE_DEVICES = None
+[2026-10-04T17:18:09Z]: [env] torch 2.4.1+cu121 · CUDA 빌드 12.1 · CUDA 사용 가능 False · GPU 수 0
+[2026-10-04T17:18:12Z]: [2026-10-04T17:18:12Z] [env] nvidia-smi 없음
+[2026-10-04T17:18:41Z]:   [deps] [deps] 확인: catboost 1.2.10 · scikit-learn 1.9.1 · pandas 2.3.3 · scipy 1.17.1 · numpy 2.1.1 · torch 2.4.1
+[2026-10-04T17:18:41Z]:   [deps] [deps] 제약 파일과 다른 판 0개
+[2026-10-04T17:18:43Z]: [2026-10-04T17:18:43Z] [xb] 작업 A · 코어 96 · 워커 22 × 스레드 4 · 시간 한도 170 min
+[2026-10-04T17:18:43Z]: [2026-10-04T17:18:43Z] [stage] pytest_core 시작(제한 900 s)
+[2026-10-04T17:18:56Z]:   [pytest_core] =========================== short test summary info ============================
+[2026-10-04T17:18:56Z]:   [pytest_core] FAILED tests/test_xbatch_core.py::test_h1_two_stage_equals_l43_region - FileN...
+[2026-10-04T17:18:56Z]:   [pytest_core] FAILED tests/test_xbatch_core.py::test_r_licence_check - assert False
+[2026-10-04T17:18:56Z]:   [pytest_core] 2 failed, 23 passed in 13.23s
+[2026-10-04T17:18:56Z]: [2026-10-04T17:18:56Z] [stage] pytest_core 끝: 종료 코드 1 · 13 s · 경과 1 min
+[2026-10-04T17:18:56Z]: [2026-10-04T17:18:56Z] [stage] xd_run 시작(제한 3000 s)
+[2026-10-04T17:22:17Z]:   [xd_run]   [완료] xd_learn|AL-6|x|5|n10 · 686/688
+[2026-10-04T17:22:17Z]:   [xd_run]   [완료] xd_learn|AL-6|x|5|n40 · 687/688
+[2026-10-04T17:22:17Z]:   [xd_run]   [완료] xd_learn|AL-6|x|5|n20 · 688/688
+[2026-10-04T17:22:17Z]:   [xd_run] [완료] 완료 688 · 실패 0
+[2026-10-04T17:22:17Z]: [2026-10-04T17:22:17Z] [stage] xd_run 끝: 종료 코드 0 · 201 s · 경과 4 min
+[2026-10-04T17:22:18Z]: [2026-10-04T17:22:18Z] [stage] xd_gbm 시작(제한 1500 s)
+[2026-10-04T17:22:38Z]:   [xd_gbm] [S9-GBM] 학습 행 18600 · 반복 수 후보 [100, 200, 400, 800] · 모형 sha256 e717555c7fe31537 · 기록 sha256 44f97503a05761e6
+[2026-10-04T17:22:38Z]: [2026-10-04T17:22:38Z] [stage] xd_gbm 끝: 종료 코드 0 · 20 s · 경과 4 min
+[2026-10-04T17:22:39Z]: [2026-10-04T17:22:39Z] [stage] xd_sum 시작(제한 1800 s)
+[2026-10-04T17:27:35Z]:   [xd_sum] [봉인] XD_placement_policy/sealed/xd6_traits.csv: 행 141, sha256 8801d754994b1e16
+[2026-10-04T17:27:35Z]:   [xd_sum] [봉인] XD_placement_policy/sealed/xd_alg_meta.json: 행 9, sha256 682b1978a8805fbf
+[2026-10-04T17:27:35Z]:   [xd_sum] [선택] 알래스카 계열 저장소 10개 · 표 행 174 · 표 sha256 baaa024825d8c321 · 선택 파일 algorithm_p_selection.json sha256 0365c2cd5a4dd185
+[2026-10-04T17:27:35Z]:   [xd_sum] [선택] Algorithm P = S1
+[2026-10-04T17:27:35Z]: [2026-10-04T17:27:35Z] [stage] xd_sum 끝: 종료 코드 0 · 296 s · 경과 9 min
+[2026-10-04T17:27:36Z]: [2026-10-04T17:27:36Z] [stage] xi_run 시작(제한 1500 s)
+[2026-10-04T17:28:20Z]:   [xi_run] [봉인] XI_climate_extrapolation_retest/sealed/xi_holm.csv: 행 6, sha256 55a2912144524e3d
+[2026-10-04T17:28:20Z]:   [xi_run] [봉인] XI_climate_extrapolation_retest/sealed/xi_curve.csv: 행 525, sha256 8857158c39f8046b
+[2026-10-04T17:28:20Z]:   [xi_run] [봉인] XI_climate_extrapolation_retest/sealed/xi_meta.json: 행 24, sha256 b37f12612bcd5479
+[2026-10-04T17:28:20Z]:   [xi_run] [summarize] 조각 60 · 저장소 18 · 대비 행 225 · 가설 행 6 · 실패 키 0 · 14s → 봉인 폴더
+[2026-10-04T17:28:20Z]: [2026-10-04T17:28:20Z] [stage] xi_run 끝: 종료 코드 0 · 44 s · 경과 10 min
+[2026-10-04T17:28:21Z]: [2026-10-04T17:28:21Z] [stage] xj_run 시작(제한 900 s)
+[2026-10-04T17:28:25Z]:   [xj_run] [봉인] XJ_tempderived_aux_labels/sealed/xj_holm.csv: 행 15, sha256 d40b5a6eea09bb10
+[2026-10-04T17:28:25Z]:   [xj_run] [봉인] XJ_tempderived_aux_labels/sealed/xj_curve.csv: 행 13, sha256 65181691d03c4337
+[2026-10-04T17:28:25Z]:   [xj_run] [봉인] XJ_tempderived_aux_labels/sealed/xj_meta.json: 행 21, sha256 562720afcb143504
+[2026-10-04T17:28:25Z]:   [xj_run] [summarize] 조각 5 · 저장소 1 · 대비 행 9 · 가설 행 15 · 실패 키 0 · 0s → 봉인 폴더
+[2026-10-04T17:28:25Z]: [2026-10-04T17:28:25Z] [stage] xj_run 끝: 종료 코드 0 · 4 s · 경과 10 min
+[2026-10-04T17:28:26Z]: [2026-10-04T17:28:26Z] [stage] xb_run 시작(제한 3000 s)
+[2026-10-04T17:36:24Z]:   [xb_run] [봉인] XB_multisource_stacking/sealed/xb_cci_relation.csv: 행 34, sha256 f536fc56f1615f30
+[2026-10-04T17:36:24Z]:   [xb_run] [봉인] XB_multisource_stacking/sealed/xb_fallback.csv: 행 219, sha256 970680725c36f540
+[2026-10-04T17:36:24Z]:   [xb_run] [봉인] XB_multisource_stacking/sealed/xb_group_error.csv: 행 1857, sha256 4cc1f99e0f04a42c
+[2026-10-04T17:36:24Z]:   [xb_run] [봉인] XB_multisource_stacking/sealed/xb_meta.json: 행 22, sha256 4fb534ae5fe0e354
+[2026-10-04T17:36:24Z]: [2026-10-04T17:36:24Z] [stage] xb_run 끝: 종료 코드 0 · 478 s · 경과 18 min
+[2026-10-04T17:36:26Z]: [2026-10-04T17:36:26Z] [stage] xh_run 시작(제한 2400 s)
+[2026-10-04T17:37:45Z]:   [xh_run] [봉인] XH_validation_ladder/sealed/xh_reuse_h41.csv: 행 0, sha256 01ba4719c80b6fe9
+[2026-10-04T17:37:45Z]:   [xh_run] [봉인] XH_validation_ladder/sealed/xh_summary_meta.json: 행 10, sha256 75d055c1358b5407
+[2026-10-04T17:37:45Z]:   [xh_run] [집계] 관문 1 기록 없음 · 관문 2 기록 없음 · 오래됨 False · 능형 행 뺌 0
+[2026-10-04T17:37:45Z]:   [xh_run] [집계] 표 4개 봉인 · 최대 RSS 1200.2 MB
+[2026-10-04T17:37:45Z]: [2026-10-04T17:37:45Z] [stage] xh_run 끝: 종료 코드 0 · 79 s · 경과 20 min
+[2026-10-04T17:37:49Z]: [2026-10-04T17:37:49Z] [xb] 단계별 상태
+[2026-10-04T17:37:49Z]:   stage,required,rc,sec,note
+[2026-10-04T17:37:49Z]:   deps,1,0,0,
+[2026-10-04T17:37:49Z]:   selfcheck,1,0,0,
+[2026-10-04T17:37:49Z]:   pytest_core,0,1,13,
+[2026-10-04T17:37:49Z]:   xd_run,0,0,201,
+[2026-10-04T17:37:49Z]:   xd_gbm,0,0,20,
+[2026-10-04T17:37:49Z]:   xd_sum,0,0,296,
+[2026-10-04T17:37:49Z]:   xi_run,0,0,44,
+[2026-10-04T17:37:49Z]:   xj_run,0,0,4,
+[2026-10-04T17:37:49Z]:   xb_run,0,0,478,
+[2026-10-04T17:37:49Z]:   xh_run,0,0,79,
+[2026-10-04T17:37:49Z]: [2026-10-04T17:37:49Z] [xb] 실패한 선택 단계: pytest_core 
+[2026-10-04T17:37:49Z]: Exited with code 2
+[2026-10-04T17:37:49Z]: 

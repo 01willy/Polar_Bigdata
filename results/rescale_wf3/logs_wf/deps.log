@@ -1,0 +1,8 @@
+[2026-10-01T16:34:01Z] [deps] 없는 필수 패키지: catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-01T16:34:01Z] [deps] pip install --user catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-10-01T16:34:05Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+ERROR: Could not install packages due to an OSError: [Errno 28] No space left on device: '/program/pytorch-2.4.1/venv/bin/plotly_get_chrome'
+
+[2026-10-01T16:34:17Z] [deps] 기본 위치 설치 실패. --target /enc/ukrprod_Vppbeb/work/.pydeps 에 다시 시도한다
+[deps] 확인: catboost 1.2.10 · scikit-learn 1.9.1 · pandas 2.3.3 · scipy 1.17.1 · numpy 2.4.6

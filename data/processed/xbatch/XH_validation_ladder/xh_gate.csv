@@ -1,0 +1,154 @@
+item,region,rep,key,n_cells,max_abs_dsse,max_rel_dsse,max_ulp,ok,pass_ulp_only,note,abs_diff
+W1B_vs_h41,Alaska,1,D0w|catboost|0|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,1,D0w|catboost|1|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,1,D0w|catboost_lo|0|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,1,D0w|catboost_lo|1|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,1,PSw|none|-1|0.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,1,RSw|catboost|0|0.25,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,1,RSw|catboost|0|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,1,RSw|catboost|1|0.25,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,1,RSw|catboost|1|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,1,RSw|catboost_lo|0|0.25,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,1,RSw|catboost_lo|0|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,1,RSw|catboost_lo|1|0.25,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,1,RSw|catboost_lo|1|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,2,D0w|catboost|0|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,2,D0w|catboost|1|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,2,D0w|catboost_lo|0|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,2,D0w|catboost_lo|1|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,2,PSw|none|-1|0.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,2,RSw|catboost|0|0.25,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,2,RSw|catboost|0|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,2,RSw|catboost|1|0.25,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,2,RSw|catboost|1|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,2,RSw|catboost_lo|0|0.25,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,2,RSw|catboost_lo|0|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,2,RSw|catboost_lo|1|0.25,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,2,RSw|catboost_lo|1|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,3,D0w|catboost|0|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,3,D0w|catboost|1|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,3,D0w|catboost_lo|0|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,3,D0w|catboost_lo|1|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,3,PSw|none|-1|0.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,3,RSw|catboost|0|0.25,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,3,RSw|catboost|0|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,3,RSw|catboost|1|0.25,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,3,RSw|catboost|1|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,3,RSw|catboost_lo|0|0.25,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,3,RSw|catboost_lo|0|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,3,RSw|catboost_lo|1|0.25,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Alaska,3,RSw|catboost_lo|1|1.0,13606,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,1,D0w|catboost|0|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,1,D0w|catboost|1|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,1,D0w|catboost_lo|0|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,1,D0w|catboost_lo|1|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,1,PSw|none|-1|0.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,1,RSw|catboost|0|0.25,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,1,RSw|catboost|0|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,1,RSw|catboost|1|0.25,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,1,RSw|catboost|1|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,1,RSw|catboost_lo|0|0.25,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,1,RSw|catboost_lo|0|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,1,RSw|catboost_lo|1|0.25,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,1,RSw|catboost_lo|1|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,2,D0w|catboost|0|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,2,D0w|catboost|1|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,2,D0w|catboost_lo|0|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,2,D0w|catboost_lo|1|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,2,PSw|none|-1|0.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,2,RSw|catboost|0|0.25,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,2,RSw|catboost|0|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,2,RSw|catboost|1|0.25,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,2,RSw|catboost|1|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,2,RSw|catboost_lo|0|0.25,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,2,RSw|catboost_lo|0|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,2,RSw|catboost_lo|1|0.25,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,2,RSw|catboost_lo|1|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,3,D0w|catboost|0|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,3,D0w|catboost|1|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,3,D0w|catboost_lo|0|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,3,D0w|catboost_lo|1|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,3,PSw|none|-1|0.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,3,RSw|catboost|0|0.25,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,3,RSw|catboost|0|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,3,RSw|catboost|1|0.25,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,3,RSw|catboost|1|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,3,RSw|catboost_lo|0|0.25,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,3,RSw|catboost_lo|0|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,3,RSw|catboost_lo|1|0.25,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Lena,3,RSw|catboost_lo|1|1.0,2958,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,1,D0w|catboost|0|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,1,D0w|catboost|1|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,1,D0w|catboost_lo|0|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,1,D0w|catboost_lo|1|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,1,PSw|none|-1|0.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,1,RSw|catboost|0|0.25,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,1,RSw|catboost|0|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,1,RSw|catboost|1|0.25,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,1,RSw|catboost|1|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,1,RSw|catboost_lo|0|0.25,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,1,RSw|catboost_lo|0|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,1,RSw|catboost_lo|1|0.25,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,1,RSw|catboost_lo|1|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,2,D0w|catboost|0|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,2,D0w|catboost|1|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,2,D0w|catboost_lo|0|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,2,D0w|catboost_lo|1|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,2,PSw|none|-1|0.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,2,RSw|catboost|0|0.25,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,2,RSw|catboost|0|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,2,RSw|catboost|1|0.25,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,2,RSw|catboost|1|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,2,RSw|catboost_lo|0|0.25,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,2,RSw|catboost_lo|0|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,2,RSw|catboost_lo|1|0.25,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,2,RSw|catboost_lo|1|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,3,D0w|catboost|0|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,3,D0w|catboost|1|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,3,D0w|catboost_lo|0|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,3,D0w|catboost_lo|1|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,3,PSw|none|-1|0.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,3,RSw|catboost|0|0.25,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,3,RSw|catboost|0|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,3,RSw|catboost|1|0.25,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,3,RSw|catboost|1|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,3,RSw|catboost_lo|0|0.25,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,3,RSw|catboost_lo|0|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,3,RSw|catboost_lo|1|0.25,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+W1B_vs_h41,Canada,3,RSw|catboost_lo|1|1.0,747,0.0,0.0,0.0,True,False,1절 허용 오차 local_rescale,
+M1C_vs_m1,Alaska|M1C,0,random_cell|stefan,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,0,random_cell|ridge,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,0,random_cell|catboost_lo,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,0,random_cell|stefan_ridge_l075,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,0,site_0.05|stefan,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,0,site_0.05|ridge,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0009999999999994458
+M1C_vs_m1,Alaska|M1C,0,site_0.05|catboost_lo,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,0,site_0.05|stefan_ridge_l075,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,0,block_0.5|stefan,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,0,block_0.5|ridge,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,0,block_0.5|catboost_lo,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,0,block_0.5|stefan_ridge_l075,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,1,random_cell|stefan,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,1,random_cell|ridge,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,1,random_cell|catboost_lo,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,1,random_cell|stefan_ridge_l075,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,1,site_0.05|stefan,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,1,site_0.05|ridge,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,1,site_0.05|catboost_lo,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,1,site_0.05|stefan_ridge_l075,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,1,block_0.5|stefan,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,1,block_0.5|ridge,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,1,block_0.5|catboost_lo,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,1,block_0.5|stefan_ridge_l075,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,2,random_cell|stefan,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,2,random_cell|ridge,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,2,random_cell|catboost_lo,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,2,random_cell|stefan_ridge_l075,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,2,site_0.05|stefan,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,2,site_0.05|ridge,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,2,site_0.05|catboost_lo,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,2,site_0.05|stefan_ridge_l075,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,2,block_0.5|stefan,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,2,block_0.5|ridge,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0009999999999994458
+M1C_vs_m1,Alaska|M1C,2,block_0.5|catboost_lo,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0
+M1C_vs_m1,Alaska|M1C,2,block_0.5|stefan_ridge_l075,13606,,,,True,,m1 표 반올림 단위 안 일치,0.0

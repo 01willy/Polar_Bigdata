@@ -1,0 +1,34 @@
+{
+ "created": "2026-10-04T21:10:17+09:00",
+ "deadline_count": "2026-10-05T14:22:39+09:00",
+ "deadline_data": "2026-10-11T14:22:39+09:00",
+ "after_deadline_count": false,
+ "after_deadline_data": false,
+ "rule": {
+  "eligible": "유효 분할(1–5, h40 규칙) ≥ 1 이고 사용 분할 채점 블록 합집합 ≥ 8",
+  "eligible_xc": "분할 201–210(xbatch 새 seed 규칙: 앞선 분할 1–5 와 같거나 여집합, 새 범위 중복, 채점 블록 2 미만 제외) 유효 ≥ 1 이고 합집합 ≥ 8",
+  "point_only": "부적격이면 점 추정",
+  "natl_v5": "NAtlantic v5 는 첫 세기 기록(xf_natl_v5_first_count.json)이 T0 + 24 h 안이고 적격일 때만 4분 판정"
+ },
+ "natl_first_count": {
+  "status": "기록함",
+  "before_deadline": true,
+  "specs": {
+   "NAtlantic~lic~v5": {
+    "eligible": true,
+    "nb_union": 8
+   }
+  }
+ },
+ "v5_sha256": "82d5307d1064cce92e51d4f18088d00aba12dd134297ec7b135ec765eb8697d7",
+ "specs_sha256": "89a2a982d484b6132ff5cc3f989f81487c5910531730002375eaa46418488efe",
+ "outputs": {
+  "xf_eligibility.csv": "43ec90a6d832b20a680fa0f49c5ec4e8ca723a10514f30484ad92b17b9183fea",
+  "xf_eligibility_splits.csv": "b9e87e31d4166d7eba09f6f7c463578b5eb3abbbd226114db6e8f4cabd9deda1",
+  "xf_count.csv": "c3c711832e212920d730202ce311c0e559e8cb1cc0d30f6919ca2cf7aaff560d",
+  "xf_count_summary.csv": "2a3bc6d95c45cdbd5a6ce76d5f846f461366d70b788926ea738278ecc8fbbf7e"
+ },
+ "label_use": "라벨은 셀 유무(채점 마스크·원천 유효 행)에만 썼다. 적합 수는 √TDD 가짜 라벨 dry 실행이다",
+ "max_rss_mb": 216.4,
+ "script_sha256": "0c1612a5f546debc173f3938825181d4be141ef088711457b74d89339b2d0812"
+}

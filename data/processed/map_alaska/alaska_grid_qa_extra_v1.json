@@ -1,0 +1,20 @@
+{
+ "n_v3": 13606,
+ "n_soil_joined": 13606,
+ "timing_s": {
+  "dem": 25.0,
+  "e5": 4.1,
+  "cci": 1.6,
+  "sg_new_windows": {
+   "n_outside_existing": 0,
+   "n_fill_candidates": 0,
+   "windows": {}
+  },
+  "sg": 0.2
+ },
+ "sg_all9_missing_rows": 0,
+ "sg_any_missing_rows": 0,
+ "v3_sg_all9_missing_rows": 0,
+ "v3_rows_in_grid": 12103,
+ "v3_cells_in_grid": 327
+}

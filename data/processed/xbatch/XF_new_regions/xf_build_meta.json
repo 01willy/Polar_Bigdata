@@ -1,0 +1,66 @@
+{
+ "created": "2026-10-04T16:41:00+09:00",
+ "stages": [
+  "cells",
+  "cov",
+  "v5",
+  "tdd",
+  "tables"
+ ],
+ "points_checked_rows": 99,
+ "points": {
+  "sjm_adventdalen_wendt2023_points.csv": "6dc163415cf4a37c2873473b0d93d47aabd4e5ca10c34567d68101e44778011f",
+  "swe_stordalen_crill_points.csv": "d269a4e1e7204b3a8c2efc01faf618a6418bee70422b5878a734e5bed9005095"
+ },
+ "points_manifest": {
+  "frozen": false,
+  "n": 2,
+  "sha256": "0781442ab1dbb8eaca23566f78d127c88508b717543b5a2d6ffc3a9e68d9c76f"
+ },
+ "cells": {
+  "n_points_files": 2,
+  "n_cells": 13,
+  "by_role": {
+   "natl_v5": 13
+  },
+  "n_in_v5": 10,
+  "n_target": 10,
+  "n_v1_cell_not_v4": 0
+ },
+ "cov": {
+  "n": 10
+ },
+ "v5": {
+  "v4": 18088,
+  "new": 10,
+  "total": 18098,
+  "soil_v4": 18096,
+  "soil_new": 10
+ },
+ "v5_submap": {
+  "n": 163,
+  "n_extra": 30,
+  "sha256": "b7ba7ad5899b229bbc6a722a69180275cccad86af695bd65c3dd74b2c3d47b68"
+ },
+ "tdd": {
+  "n_new": 10,
+  "check": {
+   "n": 400,
+   "max_abs_diff": 2.2737367544323206e-13,
+   "flag_equal": true
+  },
+  "sha256": "d8cdf264717767e3a1d021cdd2794842bc4ca88deaa2c35ea147d55d43106be5"
+ },
+ "tables": {
+  "NAtlantic~lic~v5": {
+   "kind": "natl_v5",
+   "run": true,
+   "target": "NAtlantic",
+   "n_keep_v4": 19,
+   "n_keep_v5": 10,
+   "n_lines": 29
+  }
+ },
+ "elapsed_s": 84.8,
+ "max_rss_mb": 3652.8
+}

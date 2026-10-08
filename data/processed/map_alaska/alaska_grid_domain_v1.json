@@ -1,0 +1,17 @@
+{
+ "counts": {
+  "n_box": 1739845,
+  "n_ne_land": 1303263,
+  "n_pfr_finite": 1288179,
+  "n_land_pfr_ge50": 899633,
+  "n_land_pfr_ge10p0": 1173828,
+  "n_land_pfr_ge0p5": 1229208,
+  "n_land_pfr_missing": 45546,
+  "n_domain": 899633
+ },
+ "natural_earth_land": {
+  "path": "/home/willy010313/.local/share/cartopy/shapefiles/natural_earth/physical/ne_10m_land.shp",
+  "bytes": 7166824,
+  "sha256": "4cad3a49bc75c1a4c2f3d7efae04f2f8e63151c96764b2658effabf524331fa6"
+ }
+}

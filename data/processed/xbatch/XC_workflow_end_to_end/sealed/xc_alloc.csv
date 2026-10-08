@@ -1,0 +1,9 @@
+item,pool,budget_per_region,total_budget,rule,n_regions,allocation,realized_total,strat_rmse_cell,strat_rmse_beq
+S-XC9,PE1,40,200,equal,5,Lena|x:40;Canada|x:40;Russia_W|x:10;Russia_E|x:10;Russia_C~lgd|x:10,110,28.298661481221632,25.05508350070944
+S-XC9,PE1,40,200,absb10,5,Lena|x:40;Canada|x:40;Russia_W|x:10;Russia_E|x:10;Russia_C~lgd|x:10,110,28.298661481221632,25.05508350070944
+S-XC9,PE1,160,800,equal,5,Lena|x:160;Canada|x:160;Russia_W|x:10;Russia_E|x:10;Russia_C~lgd|x:10,350,28.363943069042243,25.029983764872675
+S-XC9,PE1,160,800,absb10,5,Lena|x:160;Canada|x:160;Russia_W|x:10;Russia_E|x:10;Russia_C~lgd|x:10,350,28.363943069042243,25.029983764872675
+S-XC9,AUX3,40,120,equal,3,Lena|x:40;Canada|x:40;Alaska|x:40,120,20.68019479185463,21.02137981708758
+S-XC9,AUX3,40,120,absb10,3,Lena|x:40;Canada|x:40;Alaska|x:40,120,20.68019479185463,21.02137981708758
+S-XC9,AUX3,160,480,equal,3,Lena|x:160;Canada|x:160;Alaska|x:160,480,21.033030331809798,21.062453539507956
+S-XC9,AUX3,160,480,absb10,3,Lena|x:160;Canada|x:160;Alaska|x:160,480,21.033030331809798,21.062453539507956

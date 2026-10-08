@@ -1,0 +1,25 @@
+{
+ "created": "2026-10-05 03:42:02",
+ "summary": {
+  "g1": {
+   "n": 1300,
+   "n_fail": 0,
+   "passed": true
+  },
+  "g1b": {
+   "n": 650,
+   "n_fail": 0,
+   "passed": true
+  },
+  "g2": {
+   "n": 21,
+   "n_fail": 0,
+   "passed": true
+  },
+  "g3": {
+   "n": 7,
+   "n_fail": 0,
+   "passed": true
+  }
+ }
+}
