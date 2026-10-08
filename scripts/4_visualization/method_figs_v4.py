@@ -1876,10 +1876,11 @@ def e1_evidence_scope():
 
 
 # ================================================================ 결과 그림 공용: 작은 포레스트 행
-def forest_row(ax, x0, x1, y, vmin, vmax, d, lo, hi, dlo, dhi, color, band=True, zero=True, lw_c=3.0, lw_b=1.3, dot=46):
+def forest_row(ax, x0, x1, y, vmin, vmax, d, lo, hi, dlo, dhi, color, band=True, zero=True, lw_c=3.0, lw_b=1.3, dot=46, show_beq=False):
     X_ = lambda v: x0 + (np.clip(v, vmin, vmax) - vmin) / (vmax - vmin) * (x1 - x0)
     ax.plot([X_(lo), X_(hi)], [y, y], color=color, lw=lw_c, solid_capstyle="butt", zorder=4)
-    ax.plot([X_(dlo), X_(dhi)], [y - 0.075, y - 0.075], color=color, lw=lw_b, solid_capstyle="butt", zorder=4)
+    if show_beq:
+        ax.plot([X_(dlo), X_(dhi)], [y - 0.075, y - 0.075], color=color, lw=lw_b, solid_capstyle="butt", zorder=4)
     ax.scatter([X_(d)], [y], s=dot, facecolor=color, edgecolor=color, linewidths=1.2, zorder=5)
     return X_
 
@@ -1969,7 +1970,7 @@ def r1_results_by_range():
         x0, _ = cols[k]
         for j, t_ in enumerate(lines_):
             T(ax, x0, 1.22 - j * 0.26, t_, size=FS["small"], color=AUX)
-    T(ax, 0.30, 0.36, "굵은 선 셀 가중 95% CI, 가는 선 블록 등가중 · 회색 띠 ±0.5 cm 동등 한계 · '재보정' = 재보정 Stefan", size=FS["small"], color=AUX)
+    T(ax, 0.30, 0.36, "막대 = 95% 신뢰구간 · 회색 띠 ±0.5 cm 동등 한계 · '재보정' = 재보정 Stefan", size=FS["small"], color=AUX)
     src = dict(
         n0_pseudo_vs_shuffle="data/processed/paper_figs/fig3_a.csv shuffle n0",
         n0_direct_vs_source="data/processed/paper_figs/fig2_pool_curves.csv E1 D0 n0",
@@ -2072,97 +2073,226 @@ def r2_summary_curve():
     return qa_and_save(fig, "R2_summary_curve")
 
 
-def s1_strengths():
-    """(a) 안정성 (b) 정확도 (c) 검증 설계."""
+PRODUCT_RESULTS = dict(   # 조정 지시(2026-10-06)의 값. 알래스카 라벨 셀 13,606개, 같은 셀(Yi–Kimball 은 10,606셀)
+    r=[("우리 방법", 0.62, "R1"), ("Wei 2026", 0.55, "Wei"), ("CCI v5", 0.60, "CCI"), ("Yi–Kimball", 0.43, "YK"), ("Aalto 2018", -0.50, "Aalto")],
+    rmse=[("우리 방법", 13.8, "R1"), ("Wei 2026", 17.2, "Wei"), ("Aalto 2018", 43.6, "Aalto"), ("Yi–Kimball", 61.0, "YK"), ("CCI v5", 74.9, "CCI")])
+
+
+def _pcol(key):
+    return COL["R1"] if key == "R1" else _C["products"][key]["hex"]
+
+
+def hbars(ax, x0, x1, ytop, items, vmin, vmax, fmt, size=13.5, rh=0.42, bh=0.26, label_w=1.35, ticks=None, xlabel=None):
+    """가로 막대(값을 막대 끝에). items = [(이름, 값, 색 키)]."""
+    xa = x0 + label_w
+    X_ = lambda v: xa + (v - vmin) / (vmax - vmin) * (x1 - xa)
+    for i, (nm, v, key) in enumerate(items):
+        y = ytop - i * rh
+        c = _pcol(key) if key in ("R1", "Wei", "CCI", "Aalto", "YK") else COL.get(key, key)
+        T(ax, xa - 0.10, y, nm, size=size, ha="right", color=COL["R1"] if key == "R1" else INK)
+        x_a, x_b = sorted([X_(0), X_(v)])
+        ax.add_patch(Rectangle((x_a, y - bh / 2), x_b - x_a, bh, facecolor=c, edgecolor="none", zorder=3))
+        T(ax, (X_(v) if v >= 0 else X_(0)) + 0.07, y, fmt(v), size=size, ha="left", color=c)
+    ybot = ytop - (len(items) - 1) * rh - rh * 0.75
+    vline(ax, X_(0), ybot, ytop + rh * 0.6, color=ZERO, lw=1.0, z=2)
+    if ticks is not None:
+        hline(ax, xa, x1, ybot, color=INK, lw=1.0)
+        for t_ in ticks:
+            vline(ax, X_(t_), ybot - 0.06, ybot, color=INK, lw=1.0)
+            T(ax, X_(t_), ybot - 0.20, (f"{t_:g}").replace("-", "−"), size=13, ha="center")
+    if xlabel:
+        T(ax, (xa + x1) / 2, ybot - 0.46, xlabel, size=13, ha="center", color=AUX)
+    return X_
+
+
+def p1_products_vs_ours():
     W, H = 12.0, 5.2
     fig, ax = canvas(W, H)
-    # ---- (a) 라벨 0개, 2 cm 넘게 나빠진 대상 수
-    panel_letter(ax, 0.10, 4.92, "a"); T(ax, 0.36, 4.92, "안정성", size=FS["body"])
-    T(ax, 0.10, 4.56, "라벨 0개 · 원천 계수 Stefan 보다 2 cm 넘게", size=FS["small"], color=AUX)
-    T(ax, 0.10, 4.30, "나빠진 대상 수 (30개 중)", size=FS["small"], color=AUX)
-    bx0, bx1 = 0.30, 3.40
+    panel_letter(ax, 0.10, 4.92, "a"); T(ax, 0.36, 4.92, "상관계수 r (실측 대비, 위가 좋음)", size=15)
+    hbars(ax, 0.30, 5.60, 4.30, PRODUCT_RESULTS["r"], -0.6, 0.8, lambda v: f"{v:.2f}".replace("-", "−"), ticks=[-0.5, 0, 0.5],
+          xlabel="상관계수 r")
+    vline(ax, 6.00, 0.95, 5.12, color=SEP, lw=0.8)
+    panel_letter(ax, 6.20, 4.92, "b"); T(ax, 6.46, 4.92, "RMSE (cm, 작을수록 좋음)", size=15)
+    hbars(ax, 6.40, 11.55, 4.30, PRODUCT_RESULTS["rmse"], 0.0, 80.0, lambda v: f"{v:.1f}", ticks=[0, 20, 40, 60, 80], xlabel="RMSE (cm)")
+    T(ax, 0.30, 0.62, "같은 실측 셀(알래스카 13,606개). 우리 값은 해당 블록을 학습에서 뺀 교차검증 예측(물리 잔차 결합).", size=13, color=AUX)
+    T(ax, 0.30, 0.30, "Yi–Kimball 은 10,606셀(같은 셀에서 우리 r 0.51, RMSE 14.5 cm).", size=13, color=AUX)
+    (OUT / "P1_products_vs_ours_source_values.json").write_text(json.dumps(dict(
+        values=PRODUCT_RESULTS, note="조정 지시 2026-10-06 의 값. 우리 RMSE 13.80 은 data/processed/xbatch/XK_support_scale/xk_support_scale_v1.csv (Alaska, models, 1km, r1 rmse_cw 13.7977) 와 일치. 제품 값의 원천 파일은 이 작업에서 대조하지 못했다"),
+        ensure_ascii=False, indent=1))
+    return qa_and_save(fig, "P1_products_vs_ours")
+
+
+def c1_cv_selection():
+    W, H = 12.0, 5.2
+    fig, ax = canvas(W, H)
+    head(ax, 0.10, 4.98, "절차 예시: 라벨 40개인 새 지역")
+    head(ax, 7.55, 4.98, "실제 선택 비율 (새 지역 시험)")
+    vline(ax, 7.35, 0.25, 5.12, color=SEP, lw=0.8)
+    # ① 라벨 40개 → 블록 5묶음(점 도식)
+    rng = np.random.RandomState(7)
+    gcols = [REG["Alaska"], REG["Canada"], REG["E Russia"], REG["Tibetan Plateau"], REG["Lena Delta"]]
+    centers = [(0.55, 3.95), (1.35, 4.15), (0.75, 3.15), (1.55, 3.30), (1.10, 2.45)]
+    for g, (cx, cy) in enumerate(centers):
+        pts = rng.normal(0, 0.16, size=(8, 2))
+        ax.scatter(cx + pts[:, 0], cy + pts[:, 1], s=34, color=gcols[g], linewidths=0, zorder=4)
+    T(ax, 0.20, 1.86, "라벨 40개를 블록 단위", size=13.5)
+    T(ax, 0.20, 1.58, "5묶음으로 나눔", size=13.5)
+    arrow(ax, (2.10, 3.30), (2.55, 3.30), lw=1.3)
+    # ② 후보 7개 교차검증 RMSE(예시 막대, 숫자 없음)
+    cands = ["원천 계수 Stefan", "재보정 Stefan", "대상 지역 최소제곱 Stefan", "물리 잔차 결합(λ 0.25)", "물리 잔차 결합(λ 1.0)",
+             "증강+잔차", "물리 유사라벨 증강"]
+    ex = [0.86, 0.80, 0.83, 0.70, 0.60, 0.74, 0.90]      # 예시 길이(무차원), 수치 아님
+    best = int(np.argmin(ex))
+    x0b, wmax = 4.85, 1.75
+    for i, (nm, v) in enumerate(zip(cands, ex)):
+        y = 4.45 - i * 0.40
+        T(ax, x0b - 0.10, y, nm, size=13, ha="right", color=COL["R1"] if i == best else INK)
+        ax.add_patch(Rectangle((x0b, y - 0.12), wmax * v, 0.24, facecolor=COL["R1"] if i == best else "#C9CDD3", edgecolor="none", zorder=3))
+    T(ax, x0b + wmax * ex[best] + 0.10, 4.45 - best * 0.40, "선택", size=13.5, color=COL["R1"])
+    vline(ax, x0b, 4.45 - 6 * 0.40 - 0.22, 4.67, color=INK, lw=1.0)
+    T(ax, 2.75, 1.72, "CV RMSE (예시, 블록 하나씩 빼고 채점)", size=13, color=AUX)
+    arrow(ax, (x0b + 0.85, 1.48), (x0b + 0.85, 1.12), lw=1.3)
+    T(ax, x0b - 2.30, 0.84, "선택된 방법을 라벨 40개 전부로 다시 학습 → 지도", size=13.5)
+    # 오른쪽: 실제 선택 비율
+    shares = [("원천 계수 Stefan", 30, "P0"), ("물리 잔차 결합 λ 1.0", 27, "R1"), ("대상 지역 최소제곱 Stefan", 17, "P1"),
+              ("물리 잔차 결합 λ 0.25", 12, "R1"), ("물리 유사라벨 증강", 11, "D1"), ("재보정 Stefan", 3, "P1"), ("증강+잔차", 2, "R1")]
+    xa, x1 = 9.95, 11.55
+    X_ = lambda v: xa + v / 35.0 * (x1 - xa)
+    for i, (nm, v, key) in enumerate(shares):
+        y = 4.45 - i * 0.40
+        T(ax, xa - 0.10, y, nm, size=13, ha="right")
+        ax.add_patch(Rectangle((xa, y - 0.12), X_(v) - xa, 0.24, facecolor=COL[key], edgecolor="none", zorder=3))
+        T(ax, X_(v) + 0.07, y, f"{v}%", size=13, ha="left")
+    vline(ax, xa, 4.45 - 6 * 0.40 - 0.22, 4.67, color=INK, lw=1.0)
+    T(ax, 7.55, 1.62, "선택 1,742회", size=13, color=AUX)
+    T(ax, 7.55, 1.20, "지역 특성에 따라 물리식만으로 충분한 곳과", size=13.5)
+    T(ax, 7.55, 0.90, "ML 보정이 필요한 곳을 절차가 스스로 가름", size=13.5)
+    (OUT / "C1_cv_selection_source_values.json").write_text(json.dumps(dict(
+        shares=shares, n_selections=1742, note="조정 지시 2026-10-06 의 값. 원천 파일은 이 작업에서 대조하지 못했다. 왼쪽 막대는 예시(수치 아님)"),
+        ensure_ascii=False, indent=1))
+    return qa_and_save(fig, "C1_cv_selection")
+
+
+def r4_summary_simple():
+    W, H = 12.0, 5.2
+    fig, ax = canvas(W, H)
+    cols = [(0.15, 2.95), (3.15, 5.95), (6.15, 8.95), (9.15, 11.95)]
+    heads = ["라벨 0개", "라벨 10개", "라벨 40–160개", "수백 개 이상 (알래스카)"]
+    caps = ["2 cm 넘게 나빠진 대상 수", "원천 계수 Stefan 대비 오차 변화", "재보정 Stefan 대비 오차 변화", "재보정 Stefan 대비 오차 변화"]
+    ylabs = ["대상 수 (아래가 좋음)", "오차 변화 (cm, 아래가 좋음)", "오차 변화 (cm, 아래가 좋음)", "오차 변화 (cm, 아래가 좋음)"]
+    data = [[("직접 ML", 18, COL["D0"], "18 / 30"), ("물리 유사라벨 ML", 2, COL["R1"], "2 / 30")],
+            [("직접 ML", 1.31, COL["D0"], "+1.3"), ("계수 재보정", -2.45, COL["R1"], "−2.45")],
+            [("고정 레시피", -0.64, "#9E9E9E", "−0.64"), ("교차검증 방법 선택", -1.51, COL["R1"], "−1.51")],
+            [("직접 ML", 1.27, COL["D0"], "+1.3"), ("물리 잔차 결합", -0.52, COL["R1"], "−0.52")]]
+    ranges = [(0, 20), (-3, 2), (-2, 0.5), (-1, 2)]
+    for k, ((x0, x1), hd, cap, yl, dd, (vmin, vmax)) in enumerate(zip(cols, heads, caps, ylabs, data, ranges)):
+        head(ax, x0 + 0.05, 4.98, hd)
+        T(ax, x0 + 0.05, 4.62, cap, size=13, color=AUX)
+        ab, at = 1.35, 4.10
+        Y_ = lambda v, vmin=vmin, vmax=vmax: ab + (v - vmin) / (vmax - vmin) * (at - ab)
+        xa = x0 + 0.75
+        vline(ax, xa, ab, at, color=INK, lw=1.0)
+        hline(ax, xa, x1 - 0.15, Y_(0), color=ZERO, lw=1.0)
+        T(ax, x0 + 0.20, (ab + at) / 2, yl, size=13, ha="center", rotation=90)
+        for j, (nm, v, c, lab) in enumerate(dd):
+            bx = xa + 0.25 + j * 0.88
+            y0_, y1_ = sorted([Y_(0), Y_(v)])
+            ax.add_patch(Rectangle((bx, y0_), 0.62, y1_ - y0_, facecolor=c, edgecolor="none", zorder=3))
+            T(ax, bx + 0.31, (Y_(v) + 0.16) if v >= 0 else (Y_(v) - 0.16), lab, size=14, ha="center", color=c)
+            for i_, ln in enumerate(nm.split(" ") if len(nm) > 8 else [nm]):
+                pass
+            T(ax, bx + 0.31, ab - 0.10, nm if len(nm) <= 6 else nm.replace(" ", "\n", 1), size=13, ha="center", va="top", color=c,
+              linespacing=1.15)
+    T(ax, 0.20, 0.30, "주황 = 권고 방법 · 0개: 전이 대상 30개(사후 서술) · 10개: 주 4지역 평균 · 40–160개: 레나델타·캐나다 평균(라벨 160개) · 수백 개 이상: 알래스카 라벨 전량",
+      size=12.5, color=AUX)
+    (OUT / "R4_summary_simple_source_values.json").write_text(json.dumps(dict(
+        n0="RESEARCH_OVERVIEW 9절 위험표(직접 ML 18/30, 물리 유사라벨 증강 2/30, 사후 서술)",
+        n10="fig2_pool_curves.csv E1: D0 n10 +1.31, P1 n10 −2.45",
+        n160="lg_tests.csv L4 MEAN4 n160 λ0.25 −0.64 (고정 레시피); Fig7_source_data panel e A1-A3 n160 −1.51 (교차검증 방법 선택)",
+        all_alaska="Fig7_source_data panel a Alaska n all: direct_ml +1.27, anchor_residual −0.52"), ensure_ascii=False, indent=1))
+    return qa_and_save(fig, "R4_summary_simple")
+
+
+def s1_strengths():
+    """(a) 안정성 (b) 정확도 (c) 검증 설계 (d) 기존 제품 대비. 막대 = 95% 신뢰구간."""
+    W, H = 12.0, 5.2
+    fig, ax = canvas(W, H)
+    X0 = [0.10, 3.10, 6.10, 9.10]
+    for xv in (2.95, 5.95, 8.95):
+        vline(ax, xv, 0.25, 5.12, color=SEP, lw=0.8)
+    # (a)
+    panel_letter(ax, X0[0], 4.92, "a"); T(ax, X0[0] + 0.26, 4.92, "안정성", size=FS["body"])
+    T(ax, X0[0], 4.56, "라벨 0개, 2 cm 넘게 나빠진", size=FS["small"], color=AUX)
+    T(ax, X0[0], 4.30, "대상 수 (30개 중)", size=FS["small"], color=AUX)
+    bx0, bx1 = 0.20, 2.40
     for k, (code, nm, val) in enumerate([("D0", "직접 ML", 18), ("D1", "물리 유사라벨 증강", 2)]):
         y = 3.55 - k * 0.95
         T(ax, bx0, y + 0.34, nm, size=FS["body"], color=COL[code])
         ax.add_patch(Rectangle((bx0, y - 0.16), (bx1 - bx0) * val / 30, 0.32, facecolor=COL[code], edgecolor="none", zorder=3))
-        T(ax, bx0 + (bx1 - bx0) * val / 30 + 0.10, y, f"{val} / 30", size=FS["body"])
-    hline(ax, bx0, bx1, 2.05, color=INK, lw=1.0)
-    for v in (0, 10, 20, 30):
-        vline(ax, bx0 + (bx1 - bx0) * v / 30, 1.99, 2.05, color=INK, lw=1.0)
-        T(ax, bx0 + (bx1 - bx0) * v / 30, 1.86, str(v), size=FS["small"], ha="center")
-    T(ax, (bx0 + bx1) / 2, 1.58, "대상 수", size=FS["small"], ha="center", color=AUX)
-    T(ax, 0.10, 1.10, "전이 대상 30개(지역·하위 지역) · 사후 서술", size=FS["small"], color=AUX)
-    T(ax, 0.10, 0.82, "물리 정보가 라벨 없는 지역의 손해를 막는다", size=FS["small"], color=AUX)
-    vline(ax, 3.85, 0.25, 5.12, color=SEP, lw=0.8)
-    # ---- (b) 권고 방법 − 재보정 Stefan
-    panel_letter(ax, 4.05, 4.92, "b"); T(ax, 4.31, 4.92, "정확도", size=FS["body"])
-    T(ax, 4.05, 4.56, "권고 방법 − 재보정 Stefan (cm)", size=FS["small"], color=AUX)
+        T(ax, bx0 + (bx1 - bx0) * val / 30 + 0.08, y, f"{val}/30", size=FS["body"])
+    T(ax, X0[0], 1.10, "전이 대상 30개 · 사후 서술", size=FS["small"], color=AUX)
+    # (b)
+    panel_letter(ax, X0[1], 4.92, "b"); T(ax, X0[1] + 0.26, 4.92, "정확도", size=FS["body"])
+    T(ax, X0[1], 4.56, "권고 방법 − 재보정 Stefan (cm)", size=FS["small"], color=AUX)
     f7 = pd.read_csv(ROOT / "outputs/figures/paper/v3_restructure/Fig7_source_data.csv")
     xc = f7[(f7.panel == "e") & (f7.element == "pooled") & (f7.contrast == "A1-A3")].set_index("n")
     wr = f7[(f7.panel == "a") & (f7.region == "Alaska") & (f7.method == "anchor_residual") & (f7.n == 1000)].iloc[0]
-    pts = [("방법 선택\n40개 · 전이", COL["W"], xc.loc[40.0], ("delta", "ci_lo", "ci_hi", "delta_blockeq", "delta_blockeq_lo", "delta_blockeq_hi")),
-           ("방법 선택\n160개 · 전이", COL["W"], xc.loc[160.0], ("delta", "ci_lo", "ci_hi", "delta_blockeq", "delta_blockeq_lo", "delta_blockeq_hi")),
-           ("잔차 결합\n1000개 · 알래스카", COL["R1"], wr, ("delta", "ci_lo", "ci_hi", "delta_blockeq", "delta_blockeq_lo", "delta_blockeq_hi"))]
-    px0, px1, pyb, pyt = 4.55, 7.60, 1.95, 4.20
+    pts = [("방법 선택\n40개", COL["W"], xc.loc[40.0]), ("방법 선택\n160개", COL["W"], xc.loc[160.0]), ("잔차 결합\n알래스카", COL["R1"], wr)]
+    px0, px1, pyb, pyt = 3.55, 5.80, 1.95, 4.10
     ylo, yhi = -2.4, 0.8
     Y_ = lambda v: pyb + (v - ylo) / (yhi - ylo) * (pyt - pyb)
     ax.add_patch(Rectangle((px0, Y_(-0.5)), px1 - px0, Y_(0.5) - Y_(-0.5), facecolor=BAND, edgecolor="none", zorder=1))
     hline(ax, px0, px1, Y_(0), color=COL["P1"], lw=2.0, z=2)
-    T(ax, px0 + 0.08, Y_(0) + 0.15, "재보정 Stefan = 0", size=FS["small"], color=AUX)
     vline(ax, px0, pyb, pyt, color=INK, lw=1.0)
     for v in (-2, -1, 0):
         hline(ax, px0 - 0.06, px0, Y_(v), color=INK, lw=1.0)
         T(ax, px0 - 0.12, Y_(v), f"{v:d}".replace("-", "−"), size=FS["small"], ha="right")
     hline(ax, px0, px1, pyb, color=INK, lw=1.0)
-    for k, (nm, c, r_, cols_) in enumerate(pts):
-        x_ = px0 + 0.55 + k * 1.05
-        d, lo, hi, dq, dlo, dhi = [float(r_[c_]) for c_ in cols_]
+    for k, (nm, c, r_) in enumerate(pts):
+        x_ = px0 + 0.40 + k * 0.72
+        d, lo, hi = float(r_["delta"]), float(r_["ci_lo"]), float(r_["ci_hi"])
         ax.plot([x_, x_], [Y_(lo), Y_(hi)], color=c, lw=3.0, solid_capstyle="butt", zorder=4)
-        ax.plot([x_ + 0.07, x_ + 0.07], [Y_(dlo), Y_(dhi)], color=c, lw=1.3, solid_capstyle="butt", zorder=4)
         ax.scatter([x_], [Y_(d)], s=60, facecolor=c, edgecolor=c, zorder=5)
-        T(ax, x_, Y_(min(lo, dlo)) - 0.16, f"{d:+.2f}".replace("-", "−"), size=FS["small"], color=c, ha="center", va="center")
-        vline(ax, x_, pyb - 0.06, pyb, color=INK, lw=1.0)
+        T(ax, x_, Y_(lo) - 0.16, f"{d:+.2f}".replace("-", "−"), size=FS["small"], color=c, ha="center")
         for j, ln in enumerate(nm.split("\n")):
-            T(ax, x_, pyb - 0.22 - j * 0.24, ln, size=FS["small"], ha="center", color=INK if j == 0 else AUX)
-    T(ax, 4.05, 1.10, "전이 값은 레나델타·캐나다 평균(이득은 캐나다에서)", size=FS["small"], color=AUX)
-    T(ax, 4.05, 0.82, "굵은 선 셀 가중, 가는 선 블록 등가중 95% CI · 띠 ±0.5 cm", size=FS["small"], color=AUX)
-    vline(ax, 7.90, 0.25, 5.12, color=SEP, lw=0.8)
-    # ---- (c) 검증 설계에 따른 오차(세 지역 평균)
-    panel_letter(ax, 8.10, 4.92, "c"); T(ax, 8.36, 4.92, "검증 설계", size=FS["body"])
-    T(ax, 8.10, 4.56, "검증 분리가 커질수록 직접 ML 오차만 증가", size=FS["small"], color=AUX)
+            T(ax, x_, pyb - 0.22 - j * 0.25, ln, size=FS["small"], ha="center", color=INK if j == 0 else AUX)
+    T(ax, X0[1], 1.10, "막대 = 95% 신뢰구간 · 띠 ±0.5 cm", size=FS["small"], color=AUX)
+    T(ax, X0[1], 0.82, "가로선 = 재보정 Stefan", size=FS["small"], color=AUX)
+    # (c)
+    panel_letter(ax, X0[2], 4.92, "c"); T(ax, X0[2] + 0.26, 4.92, "검증 설계", size=FS["body"])
+    T(ax, X0[2], 4.56, "검증 분리가 클수록 직접 ML 만 악화", size=FS["small"], color=AUX)
     e = pd.read_csv(ROOT / "outputs/figures/paper/v3_restructure/Fig1_source_data.csv")
     e = e[(e.panel == "e") & (e.region == "MEAN3[Alaska,Lena,Canada]") & (e.element == "rmse_mean_equal_weight")]
     order = ["Random", "Site", "Block", "kNNDM", "Region holdout"]
-    ko = ["무작위 셀", "지점", "블록", "거리 정합", "지역 홀드아웃"]
     dml = [float(e[e.kind == f"D0w|{k}"].value.iloc[0]) for k in order]
     stf = [float(e[e.kind == f"PSw|{k}"].value.iloc[0]) for k in order]
-    cx0, cx1, cyb, cyt = 8.60, 11.70, 1.95, 4.20
-    ylo3, yhi3 = 12.0, 31.0
-    Y3 = lambda v: cyb + (v - ylo3) / (yhi3 - ylo3) * (cyt - cyb)
-    xs_ = [cx0 + 0.25 + (cx1 - cx0 - 0.5) * k / 4 for k in range(5)]
+    cx0, cx1, cyb, cyt = 6.65, 8.75, 1.95, 4.10
+    Y3 = lambda v: cyb + (v - 12.0) / (31.0 - 12.0) * (cyt - cyb)
+    xs_ = [cx0 + 0.15 + (cx1 - cx0 - 0.3) * k / 4 for k in range(5)]
     vline(ax, cx0, cyb, cyt, color=INK, lw=1.0)
     for v in (15, 20, 25, 30):
         hline(ax, cx0 - 0.06, cx0, Y3(v), color=INK, lw=1.0)
         T(ax, cx0 - 0.12, Y3(v), str(v), size=FS["small"], ha="right")
     hline(ax, cx0, cx1, cyb, color=INK, lw=1.0)
-    for x_, k_ in zip(xs_, ko):
-        vline(ax, x_, cyb - 0.06, cyb, color=INK, lw=1.0)
-    T(ax, xs_[0], cyb - 0.22, ko[0], size=FS["small"], ha="center")
-    T(ax, xs_[-1], cyb - 0.22, ko[-1], size=FS["small"], ha="center")
-    T(ax, xs_[2], cyb - 0.22, "블록", size=FS["small"], ha="center", color=AUX)
-    T(ax, 8.10, (cyb + cyt) / 2, "RMSE (cm)", size=FS["small"], ha="center", rotation=90)
+    T(ax, xs_[0], cyb - 0.22, "무작위", size=FS["small"], ha="center")
+    T(ax, xs_[-1], cyb - 0.22, "지역 홀드아웃", size=FS["small"], ha="right")
     ax.plot(xs_, [Y3(v) for v in dml], color=COL["D0"], lw=2.2, ls=(0, (3.0, 1.6)), zorder=5)
-    ax.scatter(xs_, [Y3(v) for v in dml], s=30, facecolor=COL["D0"], edgecolor=COL["D0"], zorder=6)
+    ax.scatter(xs_, [Y3(v) for v in dml], s=26, facecolor=COL["D0"], edgecolor=COL["D0"], zorder=6)
     ax.plot(xs_, [Y3(v) for v in stf], color=COL["P1"], lw=2.2, zorder=5)
-    ax.scatter(xs_, [Y3(v) for v in stf], s=30, facecolor=COL["P1"], edgecolor=COL["P1"], zorder=6)
-    T(ax, xs_[-1], Y3(dml[-1]) + 0.22, f"직접 ML {dml[-1]:.1f}", size=FS["small"], color=COL["D0"], ha="right")
-    T(ax, xs_[0] + 0.05, Y3(dml[0]) - 0.22, f"{dml[0]:.1f}", size=FS["small"], color=COL["D0"], ha="left")
-    T(ax, xs_[-1], Y3(stf[-1]) - 0.24, f"Stefan {min(stf):.1f}–{max(stf):.1f}", size=FS["small"], color=COL["P1"], ha="right")
-    T(ax, 8.10, 1.10, "알래스카·레나델타·캐나다 평균 · 학습 폴드로 적합", size=FS["small"], color=AUX)
-    T(ax, 8.10, 0.82, "무작위 분할 평가는 새 지역 오차를 과소 추정", size=FS["small"], color=AUX)
-    src = dict(a="docs/RESEARCH_OVERVIEW_2026-10-02.md 3절·9절(WF0 위험표: 직접 ML 18/30, 물리 유사라벨 증강 2/30, 사후 서술); Fig6_legend.md 제목",
-               b="Fig7_source_data.csv panel e A1-A3 n 40·160 (XC-2b·2c); panel a Alaska anchor_residual n 1000",
-               c="Fig1_source_data.csv panel e MEAN3 rmse_mean_equal_weight (D0w, PSw) × 5 schemes")
+    ax.scatter(xs_, [Y3(v) for v in stf], s=26, facecolor=COL["P1"], edgecolor=COL["P1"], zorder=6)
+    T(ax, xs_[-1], Y3(dml[-1]) + 0.20, f"직접 ML {dml[-1]:.1f}", size=FS["small"], color=COL["D0"], ha="right")
+    T(ax, xs_[0], Y3(dml[0]) - 0.22, f"{dml[0]:.1f}", size=FS["small"], color=COL["D0"], ha="left")
+    T(ax, xs_[0], Y3(24.0), f"Stefan {min(stf):.1f}–{max(stf):.1f}", size=FS["small"], color=COL["P1"], ha="left")
+    T(ax, X0[2], 1.10, "RMSE (cm) · 세 지역 평균", size=FS["small"], color=AUX)
+    # (d)
+    panel_letter(ax, X0[3], 4.92, "d"); T(ax, X0[3] + 0.26, 4.92, "기존 제품 대비", size=FS["body"])
+    T(ax, X0[3], 4.56, "알래스카 실측 13,606셀과의 상관 r", size=FS["small"], color=AUX)
+    hbars(ax, X0[3] + 0.05, 11.75, 3.95, PRODUCT_RESULTS["r"], -0.6, 0.8, lambda v: f"{v:.2f}".replace("-", "−"), size=FS["small"],
+          rh=0.44, bh=0.24, label_w=1.10)
+    T(ax, X0[3], 1.10, "우리 0.62 · 가장 좋은 제품 0.60", size=FS["small"], color=AUX)
+    T(ax, X0[3], 0.82, "(위가 좋음)", size=FS["small"], color=AUX)
+    src = dict(a="RESEARCH_OVERVIEW 9절 위험표(사후 서술)", b="Fig7_source_data panel e A1-A3 n40·160; panel a Alaska anchor_residual n1000",
+               c="Fig1_source_data panel e MEAN3", d="조정 지시 2026-10-06 의 제품 상관값(P1 과 같음)")
     (OUT / "S1_strengths_source_values.json").write_text(json.dumps(src, ensure_ascii=False, indent=1))
     return qa_and_save(fig, "S1_strengths")
 
@@ -2190,15 +2320,13 @@ def r3_alaska_inregion():
         T(ax, xpos[n], ybot - 0.26, "전량" if n == -1 else f"{n}", size=15, ha="center")
     T(ax, (x0 + x1) / 2, ybot - 0.62, "알래스카 지역 내 라벨 수", size=15, ha="center")
     T(ax, 0.42, (ybot + ytop) / 2, "재보정 Stefan 대비 오차 변화\n(cm, 음수 = 오차 감소)", size=14, ha="center", rotation=90, linespacing=1.3)
-    for code, meth, ls, lw, off in (("R1", "anchor_residual", "-", 3.4, -0.07), ("D0", "direct_ml", (0, (3.2, 1.8)), 2.4, 0.07)):
+    for code, meth, ls, lw, off in (("R1", "anchor_residual", "-", 3.4, -0.10), ("D0", "direct_ml", (0, (3.2, 1.8)), 2.4, 0.10)):
         dd = a[a.method == meth].set_index("n")
         xs_ = [xpos[n] + off for n in ns]
         ys_ = [Y_(float(dd.loc[float(n)].delta)) for n in ns]
         for n, x_ in zip(ns, xs_):
             r_ = dd.loc[float(n)]
             ax.plot([x_, x_], [Y_(r_.ci_lo), Y_(r_.ci_hi)], color=COL[code], lw=3.2, solid_capstyle="butt", zorder=4)
-            ax.plot([x_ + 0.06, x_ + 0.06], [Y_(r_.delta_blockeq_lo), Y_(r_.delta_blockeq_hi)], color=COL[code], lw=1.2,
-                    solid_capstyle="butt", zorder=4)
         ax.plot(xs_, ys_, color=COL[code], lw=lw, ls=ls, zorder=5, solid_capstyle="round")
         ax.scatter(xs_, ys_, s=70, facecolor="white" if code == "D0" else COL[code], edgecolor=COL[code], linewidths=1.8, zorder=6)
     rr = a[a.method == "anchor_residual"].set_index("n")
@@ -2213,12 +2341,11 @@ def r3_alaska_inregion():
     T(ax, xr, 4.10, f"RMSE {float(rr.loc[1000.0].rmse_recal):.2f} → {float(rr.loc[1000.0].rmse_method):.2f} cm", size=14)
     T(ax, xr, 3.82, "500개 이상 두 가중 모두 감소", size=14, color=AUX)
     T(ax, xr, 3.30, "직접 ML", size=15, color=COL["D0"])
-    T(ax, xr, 2.98, "셀 가중 +1.3 ~ +3.5 cm", size=14)
-    T(ax, xr, 2.70, "블록 등가중은 음수 · 미결정", size=14, color=AUX)
-    ax.plot([xr, xr], [2.02, 2.26], color=INK, lw=3.2, solid_capstyle="butt"); T(ax, xr + 0.14, 2.14, "셀 가중 95% CI", size=14, color=AUX)
-    ax.plot([xr, xr], [1.62, 1.86], color=INK, lw=1.2, solid_capstyle="butt"); T(ax, xr + 0.14, 1.74, "블록 등가중 95% CI", size=14, color=AUX)
-    ax.add_patch(Rectangle((xr - 0.05, 1.27), 0.22, 0.16, facecolor=BAND, edgecolor="none")); T(ax, xr + 0.24, 1.35, "±0.5 cm 동등 한계", size=14, color=AUX)
-    T(ax, xr, 0.88, "분할 25회 · 블록 재표집", size=14, color=AUX)
+    T(ax, xr, 2.98, "+1.3 ~ +3.5 cm", size=14)
+    T(ax, xr, 2.70, "가중 방식에 따라 달라 미결정", size=14, color=AUX)
+    ax.plot([xr, xr], [2.02, 2.26], color=INK, lw=3.2, solid_capstyle="butt"); T(ax, xr + 0.14, 2.14, "막대 = 95% 신뢰구간", size=14, color=AUX)
+    ax.add_patch(Rectangle((xr - 0.05, 1.67), 0.22, 0.16, facecolor=BAND, edgecolor="none")); T(ax, xr + 0.24, 1.75, "±0.5 cm 동등 한계", size=14, color=AUX)
+    T(ax, xr, 1.28, "분할 25회 · 블록 재표집", size=14, color=AUX)
     (OUT / "R3_alaska_inregion_source_values.json").write_text(json.dumps(dict(
         source="outputs/figures/paper/v3_restructure/Fig7_source_data.csv panel a, region Alaska, methods anchor_residual and direct_ml, n 200/500/1000/all",
         values={f"{m}|{int(n)}": dict(delta=float(r.delta), ci=[float(r.ci_lo), float(r.ci_hi)], ci_beq=[float(r.delta_blockeq_lo), float(r.delta_blockeq_hi)])
@@ -2226,8 +2353,83 @@ def r3_alaska_inregion():
     return qa_and_save(fig, "R3_alaska_inregion")
 
 
+def figS14_panel(idx=1):
+    """FigS14(레나델타, 라벨 0개)의 패널 b(90% 구간 폭) 지도 부분. 테두리 안쪽을 고정 좌표로 자른다(4015 × 2031 px 판)."""
+    from PIL import Image
+    a = np.asarray(Image.open(ROOT / "outputs/figures/paper/v3_restructure/si/FigS14.png").convert("RGB"))
+    dark = (a.astype(int).sum(2) < 120)
+    # 패널 b 의 테두리: 가로 1450–2800, 세로 150–1450 범위에서 어두운 행·열이 가장 긴 곳
+    sub = dark[150:1450, 1450:2800]
+    rows = np.where(sub.mean(1) > 0.6)[0]
+    cols = np.where(sub.mean(0) > 0.6)[0]
+    y0, y1 = 150 + int(rows.min()), 150 + int(rows.max())
+    x0, x1 = 1450 + int(cols.min()), 1450 + int(cols.max())
+    return a[y0 + 5: y1 - 4, x0 + 5: x1 - 4]
+
+
+def g1_workflow_guide():
+    """새 지역에서 워크플로를 쓰는 순서(4단계, 라벨 수 축). 글자 13 pt 이상."""
+    W, H = 12.0, 5.2
+    fig, ax = canvas(W, H)
+    cw = 2.70
+    xs = [0.15 + k * 3.0 for k in range(4)]
+    heads = ["① 라벨 0개", "② 다음 관측 위치 선택", "③ 라벨 약 10개", "④ 라벨 40개 이상"]
+    yaxis = 4.60
+    hline(ax, xs[0], xs[3] + cw, yaxis, color=INK, lw=1.0)
+    for k in range(4):
+        cx = xs[k] + cw / 2
+        vline(ax, cx, yaxis - 0.07, yaxis + 0.07, color=INK, lw=1.0)
+        T(ax, cx, yaxis + 0.30, heads[k], size=15, ha="center", color=HEAD, weight="bold")
+    # 축소 그림(실자료)
+    tb, th_ = 2.62, 1.72
+    thumbs = [figS14_panel(1), None, None, alaska_png("c_single")]
+    from PIL import Image
+    thumbs[1] = np.asarray(Image.open(ROOT / "deck/assets/paper_report/slide_panels/Fig5_c_slide.png").convert("RGB"))
+    boxes = []
+    for k in range(4):
+        if k == 2:
+            w_, h_ = 2.05, th_
+            x_ = xs[k] + (cw - w_) / 2 + 0.18
+            stefan_scatter(fig, x_, tb + 0.12, w_ - 0.18, h_ - 0.12, size=13, labelpad=3)
+            boxes.append((x_ - 0.30, x_ + w_ - 0.18))
+            continue
+        arr = thumbs[k]
+        w_, h_ = fit_box(arr.shape, 2.05, th_)
+        x_ = xs[k] + (cw - w_) / 2
+        img_thumb(fig, x_, tb + (th_ - h_) / 2, w_, h_, arr)
+        boxes.append((x_, x_ + w_))
+    ymid = tb + th_ / 2
+    for k in range(3):
+        arrow(ax, (boxes[k][1] + 0.12, ymid), (boxes[k + 1][0] - 0.12, ymid), lw=1.4, hl=0.10, hw=0.08)
+    caps = ["90% 구간 폭 (레나델타, 라벨 0개)", "공변량 분산 배치 예 (캐나다)", "원천 → 재보정 계수 (러시아 서부)", "최종 ALT 지도 (알래스카)"]
+    for k in range(4):
+        T(ax, xs[k] + cw / 2, tb - 0.24, caps[k], size=13, ha="center", color=AUX)
+    acts = [["Stefan·유사라벨 ML 로 첫 지도", "구간 폭·학습 범위 밖 확인"],
+            ["구간 넓고 범위 밖인 곳 우선", "블록·공변량 공간에 고르게"],
+            ["Stefan 계수 재보정 (κ = 10)", "편향 진단 → 지도 갱신"],
+            ["후보 7개 교차검증으로 방법 선택", "최종 지도 + 90% 구간"]]
+    for k in range(4):
+        for j, t_ in enumerate(acts[k]):
+            T(ax, xs[k] + 0.05, 1.82 - j * 0.34, t_, size=13.5, color=INK)
+    # 반복 고리(가는 선 하나, 화살촉 하나)
+    yl = 0.82
+    x2 = xs[1] + cw / 2
+    x4 = xs[3] + cw / 2
+    vline(ax, x4, yl, 1.18, color=AUX, lw=1.0)
+    hline(ax, x2, x4, yl, color=AUX, lw=1.0)
+    arrow(ax, (x2, yl), (x2, 1.18), color=AUX, lw=1.0, hl=0.07, hw=0.06)
+    T(ax, (x2 + x4) / 2, yl - 0.24, "관측이 늘 때마다 ②–④ 반복", size=13.5, ha="center", color=AUX)
+    (OUT / "G1_workflow_guide_source_values.json").write_text(json.dumps(dict(
+        thumb1="outputs/figures/paper/v3_restructure/si/FigS14.png panel b (Lena Delta, 0 labels, width of 90% interval)",
+        thumb2="deck/assets/paper_report/slide_panels/Fig5_c_slide.png (covariate spread, Canada)",
+        thumb3="fig3.load_concept (W Russia 31 cells, E0 1.59, E_n 2.11)",
+        thumb4="deck/assets/paper_report/slide_panels/Alaska_ALT_map_v3_c_slide.png",
+        rules="methods.tex selection rule (7 candidates), recalibration κ = 10, placement"), ensure_ascii=False, indent=1))
+    return qa_and_save(fig, "G1_workflow_guide")
+
+
 # ================================================================ 실행
-FIGS = {"M4": m4_workflow, "M6": m6_models, "M6b": m6b_models_detail, "M5": m5_augmentation, "M7": m7_evaluation, "M1": m1_problem, "M3": m3_data, "M2": m2_gap, "M8": m8_label_workflow, "M9": m9_deepsets, "M10": m10_stefan_physics, "B1": b1_background, "B2": b2_prior_work, "R0": r0_summary_ladder, "E1": e1_evidence_scope, "R1": r1_results_by_range, "R2": r2_summary_curve, "S1": s1_strengths, "R3": r3_alaska_inregion}
+FIGS = {"M4": m4_workflow, "M6": m6_models, "M6b": m6b_models_detail, "M5": m5_augmentation, "M7": m7_evaluation, "M1": m1_problem, "M3": m3_data, "M2": m2_gap, "M8": m8_label_workflow, "M9": m9_deepsets, "M10": m10_stefan_physics, "B1": b1_background, "B2": b2_prior_work, "R0": r0_summary_ladder, "E1": e1_evidence_scope, "R1": r1_results_by_range, "R2": r2_summary_curve, "S1": s1_strengths, "R3": r3_alaska_inregion, "G1": g1_workflow_guide, "P1": p1_products_vs_ours, "C1": c1_cv_selection, "R4": r4_summary_simple}
 
 
 def contact_sheet():

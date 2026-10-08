@@ -1,0 +1,126 @@
+[
+ {
+  "leaf_id": "P0",
+  "fig_ref": "Figs 6a, 6c, 6d",
+  "source_csv": "data/processed/h4/c2_coverage.csv",
+  "filter": "test=='label0' & method=='hier2_cdf' & target.startswith('MEAN6[Russia_W,Russia_E,Canada,Lena]') & scope=='all'",
+  "stat": "coverage_ci",
+  "text": "Δ 0 cm by construction; 90 % interval coverage {est} [{lo}, {hi}] · Figs 6a, 6c, 6d",
+  "lo": 0.802076940615138,
+  "hi": 0.9171597520488488,
+  "est": 0.8628129262599191,
+  "width_cm": 80.53839940565388,
+  "ci_kind": "block",
+  "pending": false,
+  "render": "Δ 0 cm by construction; 90 % interval coverage 0.86 [0.80, 0.92] · Figs 6a, 6c, 6d"
+ },
+ {
+  "leaf_id": "PF",
+  "fig_ref": "Figs 3e, 4f, 5d, 7b",
+  "source_csv": "data/processed/h4/b1_summary.csv",
+  "filter": "method=='always_shrink_resid' & n in (3, 10); class by oracle |log(E_own/E0)|; targets with Δ > +1 cm at either n listed separately",
+  "stat": "d_phys_block_range_by_class",
+  "text": "Expected Δ: level {lv_lo} to {lv_hi} cm, structure {st_lo} to {st_hi} cm\nWorse by > 1 cm: {n_exc} targets, largest {exc_top} · Figs 3e, 4f, 5d, 7b",
+  "lo": -10.970292500579566,
+  "hi": 4.307323949960938,
+  "lv_lo": -10.970292500579566,
+  "lv_hi": -1.591649143523404,
+  "st_lo": -0.932903781570848,
+  "st_hi": 0.5412126275189871,
+  "exc": {
+   "CA-3": 4.307323949960938,
+   "AL-2": 2.533385681809506,
+   "CA-2": 1.5565339672776144,
+   "LE-1": 1.1555141800071358
+  },
+  "exc_cls": {
+   "CA-3": "intermediate",
+   "AL-2": "structure",
+   "CA-2": "level",
+   "LE-1": "structure"
+  },
+  "exc_blocks": {
+   "CA-3": 3,
+   "AL-2": 10,
+   "CA-2": 2,
+   "LE-1": 3
+  },
+  "ca3": 4.307323949960938,
+  "ca3_all": [
+   4.307323949960938,
+   3.7483220092634175
+  ],
+  "level_targets": [
+   "AL-1",
+   "AL-3",
+   "Russia_W"
+  ],
+  "structure_targets": [
+   "AL-4",
+   "AL-5",
+   "AL-6",
+   "Canada",
+   "LE-2",
+   "Lena"
+  ],
+  "lv_argmax": "AL-1 n=3",
+  "st_argmax": "AL-6 n=10",
+  "low_block_targets": [
+   "AL-1",
+   "AL-3",
+   "AL-4",
+   "AL-6",
+   "CA-2",
+   "CA-3",
+   "LE-1",
+   "LE-2"
+  ],
+  "min_blocks_flag": 5,
+  "ci_kind": "block (per target)",
+  "pending": false,
+  "render": "Expected Δ: level −11.0 to −1.6 cm, structure −0.9 to +0.5 cm\nWorse by > 1 cm: 4 targets, largest CA-3 +4.3 cm · Figs 3e, 4f, 5d, 7b"
+ },
+ {
+  "leaf_id": "P3",
+  "fig_ref": "Figs 2b, 4e",
+  "source_csv": "data/processed/h4/a1_recipe_table.csv",
+  "filter": "H=='H13' & target=='REGION_SUMMARY_AB4' & lam==0.25",
+  "stat": "delta_ci",
+  "text": "Expected Δ {est} [{lo}, {hi}] cm, 4-region mean · Figs 2b, 4e",
+  "lo": -1.0128220673339268,
+  "hi": -0.2688619609524243,
+  "est": -0.6777457739343017,
+  "p_holm": 0.004,
+  "ci_kind": "strat_AB4",
+  "lena_nstar": 320,
+  "lena_nmax": 320,
+  "n_struct": 8,
+  "n_struct_slow": 6,
+  "struct_fast": [
+   "AL-5",
+   "Canada"
+  ],
+  "pending": false,
+  "render": "Expected Δ −0.7 [−1.0, −0.3] cm, 4-region mean · Figs 2b, 4e"
+ },
+ {
+  "leaf_id": "PROTOCOL",
+  "fig_ref": "Fig. 7b",
+  "source_csv": "data/processed/h4/b1_protocol.csv",
+  "filter": "method=='protocol@{tau_sel}' & n==3",
+  "stat": "mean_d_n_worse",
+  "text": "Tested, not supported (b): mean Δ {n3} cm at n = 3, {n_worse} of {n_targets} targets worse",
+  "lo": -0.6752550708140616,
+  "hi": -0.4958816321041765,
+  "n3": -0.4958816321041765,
+  "n10": -0.6752550708140616,
+  "n_worse": 7,
+  "n_worse_ci": 4,
+  "n_targets": 14,
+  "gap_to_oracle": 0.6649764880117408,
+  "tau_sel": "loto",
+  "verdict": "F4 not supported",
+  "pending": false,
+  "render": "Tested, not supported (b): mean Δ −0.50 cm at n = 3, 7 of 14 targets worse"
+ }
+]

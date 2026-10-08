@@ -1,0 +1,4 @@
+test,verdict4,verdict,statement,verdict_3region,holm_p
+LGU-B2,미결정,undecided,'조건부 폭이 지역 간에 전이된다'는 쓰지 않는다(판정 미결정),미결정,
+LGU-A1,미결정,undecided,계층 모형 구간과 상수 폭 보정 구간의 구간 점수 차이는 확인되지 않았다(분산 성분 표 lgu_a_hyper.csv 병기),,
+AB10,미결정,undecided,(d) 차이를 확인하지 못했다,,0.2765531062124247

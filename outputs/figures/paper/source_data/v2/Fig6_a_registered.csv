@@ -1,0 +1,10 @@
+hypothesis,block,source,verdict_ko,verdict_en,pstar,support,support_detail,rule,holm_p
+L29,baselines,lgx_tests.csv,"P0 보다 우세인 기준선이 있다. P* = P0@tddm. L4, L8, L10 의 대비를 P* 대비로 병기한다. ML 이 P* 를 넘지 못하면 '물리식을 넘는다'를 쓰지 않는다",lower-error baseline found,P0@tddm,,,,
+L1,direct_rescale,lg_tests.csv,지지,supported,,,,,
+L30,direct_rescale,lgx_tests.csv,지지: 용량을 키우거나 원천 교차검증으로 조정해도 직접 ML 은 라벨 0 전이에서 물리식을 넘지 못한다,supported,,,,,
+L11,direct_rescale,lgx_tests.csv,지지,supported,,,,,
+L34(a),lgt,lgt_tests.csv,지지: 표형 파운데이션 모델을 학습기로 써도 직접 ML 은 라벨 0 전이에서 물리식을 넘지 못한다(4분 판정 열세),supported,,,,,
+LGF-F1,lgf_f,lgf_tests.csv,"지지(물리식보다 오차가 크거나 구별되지 않음): 표형 파운데이션 모델 TabICL v2 를 학습기로 써도(컨텍스트 상한 10,000행과 원천 전체의 두 조건) 직접 ML 은 라벨 0 전이에서 원천 계수 물리식을 넘지 못한다",supported,,A,"{""tabicl"": ""A""}",,
+LGF-N1,lgf_n,lgfn_tests.csv,"지지(물리식보다 오차가 크거나 구별되지 않음)(mlp, tabm, ftt, realmlp): 원천 지역 하나 제외 교차검증으로 초모수를 골라도 시험한 판별 신경망 4종(MLP, 다중 헤드 MLP, 축소 FT-Transformer, RealMLP)의 직접 ML 은 라벨 0 전이에서 원천 계수 물리식을 넘지 못한다 [Δ = 0(선택 결과) 지역(종류 D): mlp 1/4, tabm 1/4, ftt 2/4, realmlp 2/4]",supported,,A,"{""mlp"": ""A"", ""tabm"": ""A"", ""ftt"": ""A"", ""realmlp"": ""A""}",,
+AB1,ab,lgw_bundle.csv,(a) 방향을 쓴다,,,,,a,0.023
+AB2,ab,lgw_bundle.csv,(d) 차이를 확인하지 못했다,,,,,d,1.0
