@@ -1,5 +1,7 @@
 # 실험·데이터·산출물 마스터 인덱스
 
+> **갱신 중단 표시(2026-10-08)**: 이 색인은 2026-07-08 이후 갱신하지 않았다. 현재 상태와 다음 세션 계획은 `SESSION_HANDOFF.md` 10-08 절, 실험 등록부는 `paper/registry/experiments.csv`, 저장소 안내는 `00_START_HERE.md` 를 본다.
+
 > 이 문서 하나로 프로젝트 전체를 이해한다. 스크립트는 실행 단계별 폴더(`scripts/0_download` → `4_visualization`).
 > 모든 경로는 프로젝트 루트에서 `python3 scripts/<폴더>/<파일>.py` 로 실행.
 

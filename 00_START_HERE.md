@@ -2,6 +2,17 @@
 
 영구동토 활동층 두께(ALT) 예측 연구. 관측이 드문 새 지역에서 Stefan 물리식과 기계학습을 라벨 수에 따라 어떻게 결합할지를 지역 홀드아웃으로 평가한다.
 
+## 현재 상태(2026-10-08)
+
+| 항목 | 위치 |
+|---|---|
+| 상태와 다음 세션 계획(극지연 회의 뒤 연구·논문 목표 재설정 예정) | `SESSION_HANDOFF.md` 10-08 절 |
+| 정리 감사와 고칠 목록 | `docs/AUDIT_2026-10-08_CLEANUP.md` |
+| 판정 기록 | `docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md` 8절, 추가 등록 `docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XK_XL_2026-10-05.md`·`..._XM_2026-10-05.md` 결과 절 |
+| 실험 등록부 | `paper/registry/experiments.csv` |
+| 발표 대본·배경 지식 원천 | `deck/script/` |
+| 열린 마감 | XE 2단계(10-08), XF·R4(10-11). 처리는 `SESSION_HANDOFF.md` 10-08 절 |
+
 ## 결과물을 보려면: `deliverables/`
 
 최종본만 모은 폴더이다(복사본, `bash tools/sync_deliverables.sh` 로 갱신).
@@ -13,7 +24,7 @@
 | `deliverables/03_그림/논문그림/` | 원고 번호 Figure 1–7(처음 인용 순서), Table 1(PDF·PNG·설명문) |
 | `deliverables/03_그림/ALT지도/` | 알래스카·레나 1 km ALT 지도, 격자 크기별 오차, 기존 제품 비교 |
 | `deliverables/03_그림/보충그림/` | SI 보충 그림(파일 FigS14 = 원고 S13, FigS15 = 원고 S14) |
-| `deliverables/03_그림/방법도식/` | 문제 정의, 자료, 연구 흐름, 증강 대조 설계, 모델 구조, 평가 설계, 라벨 수별 워크플로 |
+| `deliverables/03_그림/방법도식/` | 문제 정의, 자료, 연구 흐름, 증강 대조 설계, 모델 구조, 평가 설계, 단계적 예측 워크플로 |
 | `deliverables/03_그림/슬라이드용/` | 덱에 넣은 슬라이드 크기 그림 |
 | `deliverables/04_참고문헌/` | 문헌 색인(INDEX.md)과 PDF 전체 폴더 바로가기 |
 | `deliverables/05_보고서/` | 아침 보고, 실험 계획과 판정 기록, 질의응답 문서 |

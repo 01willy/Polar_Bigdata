@@ -3,6 +3,7 @@
 영구동토 활성층 두께(ALT) 2D 매핑과 얕은 3D 지중 열구조를 관측기반 GeoAI로 예측하는 프로젝트.
 알래스카에서 학습해 타 영구동토 지대로 전이하며, 셀별 보정 불확실성(UQ)과 적용범위(AOA)를 함께 제시한다.
 
+> **2026-10-08**: 저장소 안내는 `00_START_HERE.md`, 현재 상태와 다음 세션 계획은 `SESSION_HANDOFF.md` 10-08 절을 본다. 이 README 본문은 7월 초기 계획(3D 열구조, '활성층' 표기)이다.
 > **현행 상태는 이 README가 아니라 `SESSION_HANDOFF.md`가 기준이다(README는 초기 계획 서술로 일부 stale).**
 > 3D 엔진은 크리깅·신경장이 아니라 **GBM 조건장**으로 확정되었고, 주 출력은 **셀 단위 ALT 매핑**이다.
 > 상세 진행: `docs/EXPERIMENT_LOG.md`, 방향: `docs/PLAN_FORWARD.md`.

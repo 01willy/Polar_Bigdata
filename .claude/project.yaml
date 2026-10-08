@@ -29,17 +29,22 @@ gitignore_required: ["*.pt", "*.pth", "*.ckpt", "*.parquet", "*.npy", "*.npz",
 active_phase_paths: []
 
 # Reports
-authoritative_reports_dir: outputs/report/   # 주 제출물 main.tex → main.pdf
+authoritative_reports_dir: paper/manuscript/   # 현행 원고(en·ko, main.tex → main.pdf). 7월 대회 보고서는 outputs/report/
 
 # Naming canonical
 naming_canonical: |
-  실험 단계 명칭(현행, scripts/3_deep_learning/s*.py):
+  현행(2026-10-08): 최종 묶음 XA–XM(docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md 8절, 추가 등록 XK·XL·XM 결과 절),
+    LG 계열(h40·h41·h42), WF(h54), 최종 묶음 하네스 scripts/3_deep_learning/xbatch_core.py·x_*.py, 등록부 paper/registry/experiments.csv.
+    방법 기호: P0 원천 계수 Stefan, P1 재보정 Stefan(수축 κ 10), R1 물리 잔차 결합(λ), D0 직접 ML, D1 물리 유사라벨 증강, W 교차검증 방법 선택.
+    다음 계획: 극지연 회의(10-08) 피드백으로 연구·논문 목표 재설정 예정(SESSION_HANDOFF.md 10-08 절, docs/AUDIT_2026-10-08_CLEANUP.md).
+  아래는 옛 명칭이다. S1–S14·M1·H18–H24 는 7–9월 단계 이름이며, 최종 묶음의 배치 이름(S1 = 무작위)과 다르다.
+  실험 단계 명칭(7월, scripts/3_deep_learning/s*.py):
     S1 기준선 7모델 · S2 물리식 5종 비교 · S3 유사라벨 증강 반응곡선 · S4 물리 잔차 결합(λ)
     S6 다중충실도 · S7 KPDC 현장검증 · S8 혼합 모델 · S10 표층 3D 온도장
     S11 보정 예측구간(CQR)+AOA · S12 물리+위성 앵커 결합 · S14 연별 ALT (S13 통합실험 폐기)
     E1–E4 사전등록 실험(2026-09-08) · M1 마스터 요인 실험(2026-09-18/21, scripts/3_deep_learning/m1_*.py, 결과 data/processed/m1/):
       조건 labels/covonly/noinfo/deploy × 축 D(학습집합)·X(입력)·K(앵커)·P(유사라벨)·G(모델)·λ, 확인적 요약 AB4(레나·캐나다·러시아 W·E)
-    다음 계획 정본 docs/EXPERIMENT_PLAN_NEXT_2026-09-22.md (H18–H24)
+    (옛) 09-22 계획 docs/EXPERIMENT_PLAN_NEXT_2026-09-22.md (H18–H24)
   폐기 이력(참고): B0/B0b/B1/B1b(신경장 킬스위치), tournament(6모델), curated(12.97cm=범위축소 아티팩트, "SOTA 돌파" 아님)
   공변량 집합(정본 src/polar/fidelity.py:19-38):
     전체 34 = 지형6(dem_) + 기후8(e5_ ERA5-Land) + 토양9(sg_ SoilGrids) + SAR8(InSAR5+PolSAR3) + CCI2 + 결측표시1

@@ -12,6 +12,10 @@
     "title_2026-10-05": {
       "ko": "희소 관측 영구동토 지역의 활동층 두께 예측을 위한 물리 기반 기계학습의 라벨 수별 워크플로",
       "en": "A label-count workflow of physics-based machine learning for active-layer thickness prediction in sparsely observed permafrost regions"
+    },
+    "title_2026-10-06": {
+      "ko": "희소 관측 영구동토 지역의 활동층 두께 예측을 위한 물리 기반 기계학습 워크플로",
+      "note": "덱·대본 최종 제목(10-06 사용자 지시, '라벨 수별' 제거). 위 title_2026-10-05 를 대체한다. 원고 제목은 다음 세션 목표 재설정 때 정한다"
     }
   },
   "font": {
