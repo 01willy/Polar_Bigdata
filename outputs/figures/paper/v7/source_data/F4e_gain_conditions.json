@@ -1,0 +1,59 @@
+{
+ "script": "scripts/4_visualization/v9_f4e_gain_conditions.py",
+ "csv": "outputs/figures/paper/v7/source_data/F4e_gain_conditions.csv",
+ "quantity": "delta = RMSE(Physics + residual ML) - RMSE(Stefan, recalibrated) in cm; negative = residual ML better",
+ "predictions": "data/processed/v5/runs/core_v6/preds: block CV out-of-fold, forcing year_obs, featset F8TS; R1 catboost lam 0.5 (3 seeds averaged), P1",
+ "terciles": "within-region percentiles (33.3, 66.7) of each covariate over labelled cell-years (np.digitize; ties go to the upper tercile)",
+ "interval": "polar.testbed_v5.boot_delta, block resampling, 2000 resamples, seed 0, 2.5-97.5 percentiles",
+ "shown_rule": "n >= 30 cell-years and >= 5 spatial blocks in the tercile",
+ "covariates": {
+  "tdd": {
+   "column": "y_e5_tdd",
+   "label": "TDD",
+   "group": "climate",
+   "definition": "thaw degree-days of the observation year, full season (ERA5-Land, degC d)"
+  },
+  "fdd": {
+   "column": "y_e5_fdd",
+   "label": "FDD",
+   "group": "climate",
+   "definition": "freezing degree-days of the preceding winter, Oct-Apr (ERA5-Land, degC d)"
+  },
+  "swe": {
+   "column": "y_e5_swe",
+   "label": "Snow (SWE)",
+   "group": "climate",
+   "definition": "mean snow water equivalent of the hydrological year, Oct-Sep (ERA5-Land, m)"
+  },
+  "soc": {
+   "column": "sg_soc_0_5",
+   "label": "SOC 0–5 cm",
+   "group": "soil",
+   "definition": "SoilGrids soil organic carbon 0-5 cm (value as stored in static_v5)"
+  },
+  "clay": {
+   "column": "sg_clay_5_15",
+   "label": "Clay",
+   "group": "soil",
+   "definition": "SoilGrids clay 5-15 cm (value as stored in static_v5)"
+  },
+  "slope": {
+   "column": "dem_slope",
+   "label": "Slope",
+   "group": "terrain",
+   "definition": "DEM slope (deg)"
+  },
+  "elev": {
+   "column": "dem_elev",
+   "label": "Elevation",
+   "group": "terrain",
+   "definition": "DEM elevation (m)"
+  },
+  "ndvi": {
+   "column": "c_ndvi_summer",
+   "label": "NDVI",
+   "group": "vegetation",
+   "definition": "MODIS summer NDVI, multi-year mean per cell (fill value -3000 treated as missing)"
+  }
+ }
+}

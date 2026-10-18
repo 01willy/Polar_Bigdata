@@ -1,0 +1,8 @@
+{
+ "script": "scripts/4_visualization/v7_f5_products_years.py (yearwise_rmse)",
+ "csv": "outputs/figures/paper/v7/source_data/F5_yearwise_rmse.csv",
+ "predictions": "core_v6 preds, block CV out-of-fold, year_obs, F8TS; R1 catboost lam 0.5 (3 seeds averaged), P1 recalibrated Stefan",
+ "products": "products_cell_year_v5.csv via polar.testbed_v5.load_v5: value of the observation year (prod_wei, prod_liu)",
+ "cell_years": "per year: labelled cell-years where R1, P1 and Wei 2026 all have values; Liu 2024 (to 2020) is included when it leaves >= 30 cell-years, otherwise the year is shown without Liu; years with < 30 cell-years are not shown",
+ "mask_km": "0 = all cell-years; 25 = cells more than 25 km from Wei 2026 training sites (xg_leak_cells_v1.csv, as v5_common_cells.py)"
+}

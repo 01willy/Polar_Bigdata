@@ -1,0 +1,222 @@
+{
+ "display": {
+  "overview_panels": "1 km cell values (cell centres) interpolated bilinearly in geographic coordinates, NaN-aware, onto the hillshade display grid before draping; drawn/no-data/area-of-applicability masks follow the containing 1 km cell",
+  "display_grid_m": {
+   "Alaska": 250.0,
+   "Lena": 250.0
+  },
+  "hillshade_m": 250.0,
+  "exact_cell_panels": "zoom windows (paper d, g; deck R07 b, c; R08 a, b; R09 b) and the area-of-applicability map (paper e; deck R08 c)",
+  "masks": "only the continuous ALT and ALT-difference values are interpolated; the drawn / non-permafrost land / no-data masks stay at native 1 km cell resolution. In the sporadic-permafrost belt of west-central Alaska (about 60-63 N) this leaves 1 km block edges next to smooth gradients: they are data boundaries (CCI permafrost fraction < 10 %, missing ERA5-Land soil forcing or CCI value), not a rendering defect",
+  "gap_fill": {
+   "rule": "overview panels only: gaps (water or no data) between drawn cells whose 4-connected component is <= 2 cell are filled with the interpolated value for display; the analysis masks and the zoom windows are unchanged",
+   "cells_filled": {
+    "Alaska_mean": 5072,
+    "Lena_2016": 1375
+   },
+   "remaining": "fine white specks left in the Lena Delta overview are water / no-data gaps of > 2 cells (channels and lakes of > 2 km2) at native 1 km resolution"
+  },
+  "observed_cell_circles": "open circles with a white casing drawn per circle (later circles overprint earlier ones), so overlapping circles stay separable; circles still overlap in dense clusters of the overview panels and where station spacing approaches the 1 km cell pitch (paper g, deck R09 b)",
+  "shade_weight": 0.38,
+  "outside_aoa_fade": 0.4,
+  "aoa_outside_hex": "#B4BAC5",
+  "non_permafrost_land_hex": "#E6E6E6",
+  "caption_note_ko": "표시: 개관 지도는 1 km 셀 값을 250 m 음영 격자에 쌍선형 보간(마스크는 1 km 그대로, 1셀 틈은 메움), 확대 창은 1 km 셀 그대로. 원 = 관측 셀(촘촘한 곳은 겹침). 서남부 산발 영구동토대의 각진 경계는 자료 경계(영구동토 확률 < 10 %, 강제력 결측)이다.",
+  "caption_note_en": "Overview maps drape 1 km cell values interpolated to the 250 m hillshade grid (masks at native 1 km; single-cell gaps filled for display); zoom windows show exact 1 km cells. Circles mark observed cells and may overlap in dense clusters; block edges in the sporadic-permafrost belt are data boundaries."
+ },
+ "alt_range_cm": {
+  "Alaska_mean_2011_2024": [
+   40.0,
+   90.0
+  ],
+  "Lena_2016": [
+   30.0,
+   60.0
+  ]
+ },
+ "diff_sym_max_cm": 10.0,
+ "observed_cells": {
+  "Alaska": 321,
+  "Lena": 143
+ },
+ "observed_locations": {
+  "Alaska": 13253,
+  "Lena": 2206
+ },
+ "sources": [
+  "data/processed/v5/maps/<Alaska|Lena>/{mean_2011_2024,pred_<year>}.csv.gz",
+  "data/processed/map_<key>/<key>_grid_x25_v1.csv.gz",
+  "data/processed/map_<key>/hillshade_v1/{shade,dem}_250m.tif",
+  "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1)"
+ ],
+ "paper": {
+  "size_mm": [
+   180.0,
+   165.8
+  ],
+  "zoom_windows_km": {
+   "Alaska": [
+    [
+     50.0,
+     47.0
+    ],
+    [
+     50.0,
+     47.0
+    ]
+   ],
+   "Lena": [
+    [
+     24.0,
+     24.0
+    ]
+   ]
+  },
+  "png_declared": {
+   "dpi": 600,
+   "width_mm": 180.0
+  },
+  "zoom_circle_pt": {
+   "diameter": {
+    "Alaska_d": 2.5,
+    "Lena_g": 2.83
+   },
+   "edge": 0.35,
+   "casing": 0.3,
+   "note": "at the PNG's declared size (slide: 300 dpi metadata, width_in above; the deck builder places the file at that size)"
+  }
+ },
+ "slide": {
+  "size_mm": [
+   180.0,
+   171.3
+  ],
+  "zoom_windows_km": {
+   "Alaska": [
+    [
+     50.0,
+     47.0
+    ],
+    [
+     50.0,
+     47.0
+    ]
+   ],
+   "Lena": [
+    [
+     24.0,
+     24.0
+    ]
+   ]
+  },
+  "png_declared": {
+   "dpi": 300,
+   "width_in": 11.98
+  },
+  "zoom_circle_pt": {
+   "diameter": {
+    "Alaska_d": 6.0,
+    "Lena_g": 6.0
+   },
+   "edge": 1.0,
+   "casing": 0.8,
+   "note": "at the PNG's declared size (slide: 300 dpi metadata, width_in above; the deck builder places the file at that size)"
+  }
+ },
+ "deck": {
+  "canvas_in": [
+   12.0,
+   5.1
+  ],
+  "dpi": 300,
+  "font_pt": {
+   "tick": 12,
+   "label": 13,
+   "cbar": 14,
+   "letter": 14
+  },
+  "zoom_circle_pt": {
+   "edge": 1.0,
+   "casing": 0.8,
+   "note": "diameter = ring centre line; outer diameter = diameter + edge"
+  },
+  "slides": {
+   "R07": {
+    "zoom_circle_diameter_pt": 6.0,
+    "column_gap_mm": 24.0
+   },
+   "R08": {
+    "zoom_circle_diameter_pt": 6.0,
+    "zoom_cells_outside_aoa": 1181
+   },
+   "R09": {
+    "zoom_circle_diameter_pt": 10.0,
+    "zoom_window_km": [
+     24.0,
+     16.8
+    ],
+    "zoom_cells_outside_aoa": 4,
+    "gap_mm": 20.0
+   }
+  }
+ },
+ "cvd_check_diff_colormap": {
+  "colormap": "crameri broc (MV.CM_DIFF)",
+  "simulation": "Machado 2009 severity 1.0",
+  "pairs_cm": [
+   [
+    -10.0,
+    10.0
+   ],
+   [
+    -5.0,
+    5.0
+   ],
+   [
+    -2.0,
+    2.0
+   ]
+  ],
+  "dE_CIE76": {
+   "normal": [
+    56.8,
+    56.4,
+    30.2
+   ],
+   "protanopia": [
+    50.7,
+    56.0,
+    29.9
+   ],
+   "deuteranopia": [
+    49.2,
+    57.5,
+    30.8
+   ],
+   "tritanopia": [
+    11.3,
+    32.8,
+    17.0
+   ]
+  },
+  "L_star_ends": {
+   "normal": [
+    14,
+    15
+   ],
+   "protanopia": [
+    15,
+    14
+   ],
+   "deuteranopia": [
+    14,
+    15
+   ],
+   "tritanopia": [
+    15,
+    14
+   ]
+  },
+  "verdict": "sign (loss vs gain) distinguishable in all simulations at |difference| <= vmax/2 (min dE 17); normal: end-pair dE 56.8, protanopia: end-pair dE 50.7, deuteranopia: end-pair dE 49.2, tritanopia: end-pair dE 11.3. Palette (crameri broc, MV.CM_DIFF) kept for consistency with F7; the two saturated ends are close only under tritanopia"
+ }
+}

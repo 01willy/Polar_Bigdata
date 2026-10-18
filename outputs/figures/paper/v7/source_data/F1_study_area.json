@@ -1,0 +1,211 @@
+{
+ "e_cell_years_csv": "F1_e_cell_years.csv",
+ "e_axis": "linear; 2014 Alaska campaign dominates, read small regions from the CSV",
+ "n_cells": {
+  "Alaska": 13253,
+  "Lena": 2206,
+  "Canada": 730
+ },
+ "window": [
+  2010,
+  2024
+ ],
+ "x_range": [
+  1996.5,
+  2025.5
+ ],
+ "x_major_ticks": [
+  2000,
+  2005,
+  2010,
+  2015,
+  2020,
+  2025
+ ],
+ "x_minor_ticks": "yearly from 1997",
+ "last_month_share": {
+  "Alaska": {
+   "8": 0.8523,
+   "9": 0.0861,
+   "10": 0.0616
+  },
+  "Lena": {
+   "8": 0.8703,
+   "9": 0.1297,
+   "10": 0.0
+  },
+  "Canada": {
+   "8": 0.7099,
+   "9": 0.2901,
+   "10": 0.0
+  }
+ },
+ "f_rows": [
+  {
+   "group": "Labels",
+   "name": "Alaska",
+   "years": [
+    [
+     2010,
+     2024
+    ]
+   ],
+   "hex": "#332288",
+   "encoding": "filled band = yearly values"
+  },
+  {
+   "group": "Labels",
+   "name": "Lena Delta",
+   "years": [
+    [
+     2010,
+     2022
+    ]
+   ],
+   "hex": "#3E92CC",
+   "encoding": "filled band = yearly values"
+  },
+  {
+   "group": "Labels",
+   "name": "Canada (NW)",
+   "years": [
+    [
+     2010,
+     2019
+    ],
+    [
+     2021,
+     2024
+    ]
+   ],
+   "hex": "#2A8C7A",
+   "encoding": "filled band = yearly values"
+  },
+  {
+   "group": "Climate",
+   "name": "ERA5-Land",
+   "years": [
+    [
+     2010,
+     2024
+    ]
+   ],
+   "hex": "#0072B2",
+   "encoding": "filled band = yearly values"
+  },
+  {
+   "group": "Satellite",
+   "name": "MODIS",
+   "years": [
+    [
+     2010,
+     2024
+    ]
+   ],
+   "hex": "#91cef1",
+   "encoding": "filled band = yearly values"
+  },
+  {
+   "group": "Satellite",
+   "name": "InSAR ALT (Alaska)",
+   "years": [
+    [
+     2017,
+     2017
+    ]
+   ],
+   "hex": "#22485d",
+   "encoding": "filled band = yearly values"
+  },
+  {
+   "group": "Static",
+   "name": "Terrain, soil",
+   "years": "static (all years)",
+   "hex": "#C9CDD3",
+   "encoding": "grey band = time-invariant input"
+  },
+  {
+   "group": "Products",
+   "name": "ESA CCI v4",
+   "years": [
+    [
+     1997,
+     2021
+    ]
+   ],
+   "hex": "#9C7A3C",
+   "encoding": "filled band = yearly values"
+  },
+  {
+   "group": "Products",
+   "name": "ESA CCI v5",
+   "years": [
+    [
+     1997,
+     2023
+    ]
+   ],
+   "hex": "#B8975A",
+   "encoding": "filled band = yearly values"
+  },
+  {
+   "group": "Products",
+   "name": "Wei 2026",
+   "years": [
+    [
+     2000,
+     2024
+    ]
+   ],
+   "hex": "#3B8B4F",
+   "encoding": "filled band = yearly values"
+  },
+  {
+   "group": "Products",
+   "name": "Liu 2024",
+   "years": [
+    [
+     2010,
+     2020
+    ]
+   ],
+   "hex": "#C9506A",
+   "encoding": "filled band = yearly values"
+  },
+  {
+   "group": "Products",
+   "name": "Yi–Kimball 2019 (Alaska)",
+   "years": [
+    [
+     2001,
+     2015
+    ]
+   ],
+   "hex": "#6B8E23",
+   "encoding": "filled band = yearly values"
+  },
+  {
+   "group": "Products",
+   "name": "Aalto 2018 (mean)",
+   "years": [
+    [
+     2000,
+     2014
+    ]
+   ],
+   "hex": "#7D6B9E",
+   "encoding": "outline = one multi-year mean value"
+  }
+ ],
+ "satellite_shades": {
+  "MODIS": 0.35,
+  "InSAR": -0.6
+ },
+ "insar_year": 2017,
+ "labels_csv": "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1)",
+ "meta": [
+  "data/processed/v5/forcing_meta.json",
+  "data/processed/v5/modis_cell_year_v5_meta.json",
+  "data/processed/v5/products_cell_year_v5_meta.json"
+ ]
+}

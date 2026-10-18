@@ -1,0 +1,846 @@
+{
+ "figure": "F8_product_maps",
+ "created": "2026-10-15 12:52:38",
+ "script": "scripts/4_visualization/v8_f8_product_maps.py",
+ "rows": {
+  "Alaska": {
+   "year": 2014,
+   "letters": "abcd",
+   "sources": {
+    "ours": "data/processed/v5/maps/Alaska/pred_2014.csv.gz (r1; p1 for row 3 Lena)",
+    "aoa": "data/processed/v5/maps/Alaska/mean_2011_2024.csv.gz (aoa_in; Alaska row 3: r1 − p1)",
+    "wei": "data/raw/wei2026_alt_v2/extracted/ALT_2014.tif (EPSG:3995, 1 km, nodata −9999, cm)",
+    "liu": "data/raw/liu2024_alt/ALT_2014.tif (EPSG:4326, 1/120°, int16 cm×100, ≤0 = no data)",
+    "labels": "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1, region, year)",
+    "products_at_cells": "data/processed/v5/products_cell_year_v5.csv (product wei/liu, year)",
+    "hillshade": "data/processed/map_alaska/hillshade_v1/shade_250m.tif",
+    "grid": "data/processed/map_alaska/alaska_grid_x25_v1.csv.gz"
+   },
+   "display": {
+    "crs": "EPSG:3338",
+    "pixel_m": 250.0,
+    "pixels": [
+     5927,
+     6303
+    ],
+    "ours": "geographic bilinear interpolation of 1 km cell values (interp_px)",
+    "products": "rasterio.warp.reproject bilinear onto the hillshade grid",
+    "aoa": "outside area of applicability blended 40 % with land grey",
+    "water": "#EAF2F9",
+    "non_permafrost_land": "#E6E6E6 flat (land outside our 1 km grid)",
+    "no_data": {
+     "meaning": "inside our 1 km grid (cell table) but no value in that map",
+     "rendering": "45° hatch drawn into the map pixel array as in F6 (paper and slide: period 0.5 mm, line 0.15 mm; deck: 1.27 / 0.34 mm); raster, not an SVG <pattern>; the legend handle draws the same lines as vector paths",
+     "pixels_hatched": {
+      "ours": 450242,
+      "wei": 350109,
+      "liu": 574476
+     },
+     "pixels_hatched_where_our_map_has_a_value": {
+      "wei": 90356,
+      "liu": 216526
+     },
+     "patches": {
+      "ours": {
+       "area_km2": 28140.1,
+       "patches": 916,
+       "largest_patch_km2": 4838.2,
+       "share_of_area_in_patches_over_25km2": 0.948
+      },
+      "wei": {
+       "area_km2": 21881.8,
+       "patches": 2202,
+       "largest_patch_km2": 2966.5,
+       "share_of_area_in_patches_over_25km2": 0.861
+      },
+      "liu": {
+       "area_km2": 35904.8,
+       "patches": 4502,
+       "largest_patch_km2": 3750.4,
+       "share_of_area_in_patches_over_25km2": 0.776
+      }
+     }
+    },
+    "n_cells_drawn": 858517
+   },
+   "colour": {
+    "cmap": "oslo_r (cmcrameri, 0.12–0.90)",
+    "alt_range_cm": [
+     35.0,
+     85.0
+    ],
+    "alt_range_rule": "1–99 percentile of our map, 5 cm step",
+    "extend": "both",
+    "product_p1_p99": {
+     "wei": [
+      40.8,
+      257.3
+     ],
+     "liu": [
+      45.4,
+      311.9
+     ]
+    }
+   },
+   "residual": {
+    "unit": "prediction − observed (cm), cell level",
+    "cells_from": "7861 labels → 101 one-km cells (cell mean of observed ALT)",
+    "ours_at_cell": "map r1 at the cell (full-data map; in-sample at observed cells)",
+    "products_at_cell": "cell mean of products_cell_year_v5 values",
+    "circle": "site cluster: single-linkage within 47 km (3 % of map width); colour = mean residual over cells with a value; area ∝ number of cells with a value (d = d1·√n, d1 = 1.6 pt paper / 2.8 pt deck); hollow = no value",
+    "cmap": "broc",
+    "range_cm": [
+     -20.0,
+     20.0
+    ],
+    "n_common_cells": 95,
+    "rmse_common_cells_cm": {
+     "ours": 15.86,
+     "wei": 15.76,
+     "liu": 16.38,
+     "oof": 17.08
+    },
+    "rmse_own_cells_cm": {
+     "ours": {
+      "rmse": 15.84,
+      "n": 96
+     },
+     "wei": {
+      "rmse": 15.58,
+      "n": 101
+     },
+     "liu": {
+      "rmse": 16.4,
+      "n": 100
+     },
+     "oof": {
+      "rmse": 16.76,
+      "n": 101
+     }
+    },
+    "rmse_label_level_cm": {
+     "ours": {
+      "rmse": 11.87,
+      "n": 7723
+     },
+     "wei": {
+      "rmse": 15.46,
+      "n": 7861
+     },
+     "liu": {
+      "rmse": 18.39,
+      "n": 7446
+     },
+     "oof": {
+      "rmse": 15.46,
+      "n": 7861
+     }
+    },
+    "oof_note": "oof = block-CV out-of-fold R1 prediction (runs/core_v6/preds, seeds averaged), for reference only; the figure prints map r1",
+    "clusters": [
+     {
+      "cluster": 1,
+      "lat": 64.8442,
+      "lon": -163.7202,
+      "n_cells": 1,
+      "d_ours": 7.63,
+      "d_wei": 0.88,
+      "d_liu": 10.56,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 2,
+      "lat": 65.454,
+      "lon": -164.6268,
+      "n_cells": 1,
+      "d_ours": 7.96,
+      "d_wei": 1.72,
+      "d_liu": 1.75,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 3,
+      "lat": 62.7848,
+      "lon": -164.5262,
+      "n_cells": 1,
+      "d_ours": null,
+      "d_wei": -2.8,
+      "d_liu": -5.61,
+      "n_ours": 0,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 4,
+      "lat": 63.0213,
+      "lon": -163.5607,
+      "n_cells": 1,
+      "d_ours": 17.1,
+      "d_wei": -1.11,
+      "d_liu": 36.48,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 5,
+      "lat": 61.2881,
+      "lon": -163.1395,
+      "n_cells": 9,
+      "d_ours": 10.43,
+      "d_wei": 19.74,
+      "d_liu": -0.14,
+      "n_ours": 8,
+      "n_wei": 9,
+      "n_liu": 9
+     },
+     {
+      "cluster": 6,
+      "lat": 62.0476,
+      "lon": -163.2341,
+      "n_cells": 1,
+      "d_ours": null,
+      "d_wei": 10.64,
+      "d_liu": -1.02,
+      "n_ours": 0,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 7,
+      "lat": 61.5279,
+      "lon": -165.6178,
+      "n_cells": 1,
+      "d_ours": null,
+      "d_wei": 25.91,
+      "d_liu": 34.2,
+      "n_ours": 0,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 8,
+      "lat": 64.7349,
+      "lon": -155.4846,
+      "n_cells": 1,
+      "d_ours": 14.48,
+      "d_wei": -2.6,
+      "d_liu": 7.56,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 9,
+      "lat": 64.7333,
+      "lon": -156.7833,
+      "n_cells": 1,
+      "d_ours": 13.88,
+      "d_wei": 3.99,
+      "d_liu": null,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 0
+     },
+     {
+      "cluster": 10,
+      "lat": 69.7776,
+      "lon": -144.7933,
+      "n_cells": 1,
+      "d_ours": 11.56,
+      "d_wei": 8.4,
+      "d_liu": 12.94,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 11,
+      "lat": 69.8894,
+      "lon": -142.9839,
+      "n_cells": 1,
+      "d_ours": 1.02,
+      "d_wei": 2.86,
+      "d_liu": 32.99,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 12,
+      "lat": 65.8282,
+      "lon": -144.0784,
+      "n_cells": 1,
+      "d_ours": -4.58,
+      "d_wei": -11.08,
+      "d_liu": -6.52,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 13,
+      "lat": 66.6208,
+      "lon": -145.1035,
+      "n_cells": 1,
+      "d_ours": -17.42,
+      "d_wei": -6.22,
+      "d_liu": -9.0,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 14,
+      "lat": 71.2831,
+      "lon": -156.6003,
+      "n_cells": 16,
+      "d_ours": -0.26,
+      "d_wei": 1.37,
+      "d_liu": 15.62,
+      "n_ours": 16,
+      "n_wei": 16,
+      "n_liu": 16
+     },
+     {
+      "cluster": 15,
+      "lat": 70.3717,
+      "lon": -157.1056,
+      "n_cells": 3,
+      "d_ours": 4.39,
+      "d_wei": -0.33,
+      "d_liu": 5.74,
+      "n_ours": 3,
+      "n_wei": 3,
+      "n_liu": 3
+     },
+     {
+      "cluster": 16,
+      "lat": 70.4519,
+      "lon": -152.5085,
+      "n_cells": 2,
+      "d_ours": 22.53,
+      "d_wei": 7.75,
+      "d_liu": 14.91,
+      "n_ours": 1,
+      "n_wei": 2,
+      "n_liu": 2
+     },
+     {
+      "cluster": 17,
+      "lat": 69.9896,
+      "lon": -153.0938,
+      "n_cells": 1,
+      "d_ours": 16.43,
+      "d_wei": 8.72,
+      "d_liu": 11.33,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 18,
+      "lat": 69.7516,
+      "lon": -154.6176,
+      "n_cells": 1,
+      "d_ours": -67.24,
+      "d_wei": -12.82,
+      "d_liu": -27.45,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 19,
+      "lat": 69.3957,
+      "lon": -152.1428,
+      "n_cells": 1,
+      "d_ours": 11.86,
+      "d_wei": 0.55,
+      "d_liu": 3.58,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 20,
+      "lat": 70.2508,
+      "lon": -148.786,
+      "n_cells": 4,
+      "d_ours": 0.52,
+      "d_wei": 0.51,
+      "d_liu": 2.02,
+      "n_ours": 4,
+      "n_wei": 4,
+      "n_liu": 4
+     },
+     {
+      "cluster": 21,
+      "lat": 68.9604,
+      "lon": -149.0017,
+      "n_cells": 33,
+      "d_ours": 3.58,
+      "d_wei": 2.88,
+      "d_liu": 3.38,
+      "n_ours": 33,
+      "n_wei": 33,
+      "n_liu": 33
+     },
+     {
+      "cluster": 22,
+      "lat": 64.9617,
+      "lon": -147.7003,
+      "n_cells": 9,
+      "d_ours": -0.82,
+      "d_wei": -19.45,
+      "d_liu": -12.91,
+      "n_ours": 9,
+      "n_wei": 9,
+      "n_liu": 9
+     },
+     {
+      "cluster": 23,
+      "lat": 64.5545,
+      "lon": -149.0834,
+      "n_cells": 1,
+      "d_ours": 13.5,
+      "d_wei": -6.46,
+      "d_liu": 9.14,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 24,
+      "lat": 64.3882,
+      "lon": -146.8814,
+      "n_cells": 1,
+      "d_ours": 20.77,
+      "d_wei": 2.7,
+      "d_liu": 8.44,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 25,
+      "lat": 65.6572,
+      "lon": -149.0844,
+      "n_cells": 1,
+      "d_ours": 18.31,
+      "d_wei": -4.38,
+      "d_liu": 17.52,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 26,
+      "lat": 66.45,
+      "lon": -150.6167,
+      "n_cells": 1,
+      "d_ours": 19.76,
+      "d_wei": 1.4,
+      "d_liu": 6.45,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 27,
+      "lat": 67.079,
+      "lon": -150.3534,
+      "n_cells": 1,
+      "d_ours": 13.26,
+      "d_wei": -1.03,
+      "d_liu": 4.82,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 28,
+      "lat": 66.5449,
+      "lon": -152.6454,
+      "n_cells": 1,
+      "d_ours": 18.18,
+      "d_wei": -4.3,
+      "d_liu": 9.25,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 29,
+      "lat": 70.1959,
+      "lon": -161.0781,
+      "n_cells": 1,
+      "d_ours": -4.16,
+      "d_wei": -2.39,
+      "d_liu": 7.17,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 30,
+      "lat": 68.4833,
+      "lon": -155.7333,
+      "n_cells": 1,
+      "d_ours": -3.68,
+      "d_wei": 1.44,
+      "d_liu": 4.0,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 31,
+      "lat": 68.1301,
+      "lon": -145.5401,
+      "n_cells": 1,
+      "d_ours": -7.79,
+      "d_wei": -13.35,
+      "d_liu": -0.57,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 32,
+      "lat": 64.7777,
+      "lon": -141.1095,
+      "n_cells": 1,
+      "d_ours": 18.49,
+      "d_wei": 8.42,
+      "d_liu": 34.77,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     }
+    ]
+   }
+  },
+  "Lena": {
+   "year": 2016,
+   "letters": "efgh",
+   "sources": {
+    "ours": "data/processed/v5/maps/Lena/pred_2016.csv.gz (r1; p1 for row 3 Lena)",
+    "aoa": "data/processed/v5/maps/Lena/mean_2011_2024.csv.gz (aoa_in; Alaska row 3: r1 − p1)",
+    "wei": "data/raw/wei2026_alt_v2/extracted/ALT_2016.tif (EPSG:3995, 1 km, nodata −9999, cm)",
+    "liu": "data/raw/liu2024_alt/ALT_2016.tif (EPSG:4326, 1/120°, int16 cm×100, ≤0 = no data)",
+    "labels": "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1, region, year)",
+    "products_at_cells": "data/processed/v5/products_cell_year_v5.csv (product wei/liu, year)",
+    "hillshade": "data/processed/map_lena/hillshade_v1/shade_250m.tif",
+    "grid": "data/processed/map_lena/lena_grid_x25_v1.csv.gz"
+   },
+   "display": {
+    "crs": "local polar stereographic on the WGS 84 ellipsoid, no EPSG code (hillshade grid CRS; +proj=stere +lat_0=90 +lat_ts=70 +lon_0=126.7 +x_0=0 +y_0=0 +ellps=WGS84 +units=m +no_defs=True)",
+    "pixel_m": 250.0,
+    "pixels": [
+     968,
+     983
+    ],
+    "ours": "geographic bilinear interpolation of 1 km cell values (interp_px)",
+    "products": "rasterio.warp.reproject bilinear onto the hillshade grid",
+    "aoa": "outside area of applicability blended 40 % with land grey",
+    "water": "#EAF2F9",
+    "non_permafrost_land": "#E6E6E6 flat (land outside our 1 km grid)",
+    "no_data": {
+     "meaning": "inside our 1 km grid (cell table) but no value in that map",
+     "rendering": "45° hatch drawn into the map pixel array as in F6 (paper and slide: period 0.5 mm, line 0.15 mm; deck: 1.27 / 0.34 mm); raster, not an SVG <pattern>; the legend handle draws the same lines as vector paths",
+     "pixels_hatched": {
+      "ours": 732,
+      "wei": 23475,
+      "liu": 31418
+     },
+     "pixels_hatched_where_our_map_has_a_value": {
+      "wei": 23255,
+      "liu": 31093
+     },
+     "patches": {
+      "ours": {
+       "area_km2": 45.8,
+       "patches": 36,
+       "largest_patch_km2": 3.0,
+       "share_of_area_in_patches_over_25km2": 0.0
+      },
+      "wei": {
+       "area_km2": 1467.2,
+       "patches": 375,
+       "largest_patch_km2": 76.7,
+       "share_of_area_in_patches_over_25km2": 0.416
+      },
+      "liu": {
+       "area_km2": 1963.6,
+       "patches": 476,
+       "largest_patch_km2": 101.1,
+       "share_of_area_in_patches_over_25km2": 0.413
+      }
+     }
+    },
+    "n_cells_drawn": 38086
+   },
+   "colour": {
+    "cmap": "oslo_r (cmcrameri, 0.12–0.90)",
+    "alt_range_cm": [
+     30.0,
+     60.0
+    ],
+    "alt_range_rule": "1–99 percentile of our map, 10 cm step",
+    "extend": "both",
+    "product_p1_p99": {
+     "wei": [
+      40.2,
+      72.7
+     ],
+     "liu": [
+      35.5,
+      85.1
+     ]
+    }
+   },
+   "residual": {
+    "unit": "prediction − observed (cm), cell level",
+    "cells_from": "681 labels → 35 one-km cells (cell mean of observed ALT)",
+    "ours_at_cell": "map r1 at the cell (full-data map; in-sample at observed cells)",
+    "products_at_cell": "cell mean of products_cell_year_v5 values",
+    "circle": "site cluster: single-linkage within 7 km (3 % of map width); colour = mean residual over cells with a value; area ∝ number of cells with a value (d = d1·√n, d1 = 1.6 pt paper / 2.8 pt deck); hollow = no value",
+    "cmap": "broc",
+    "range_cm": [
+     -20.0,
+     20.0
+    ],
+    "n_common_cells": 14,
+    "rmse_common_cells_cm": {
+     "ours": 19.24,
+     "wei": 26.18,
+     "liu": 30.43,
+     "oof": 12.66
+    },
+    "rmse_own_cells_cm": {
+     "ours": {
+      "rmse": 17.36,
+      "n": 29
+     },
+     "wei": {
+      "rmse": 28.27,
+      "n": 17
+     },
+     "liu": {
+      "rmse": 30.19,
+      "n": 20
+     },
+     "oof": {
+      "rmse": 12.96,
+      "n": 35
+     }
+    },
+    "rmse_label_level_cm": {
+     "ours": {
+      "rmse": 14.42,
+      "n": 606
+     },
+     "wei": {
+      "rmse": 25.12,
+      "n": 162
+     },
+     "liu": {
+      "rmse": 20.98,
+      "n": 485
+     },
+     "oof": {
+      "rmse": 9.87,
+      "n": 681
+     }
+    },
+    "oof_note": "oof = block-CV out-of-fold R1 prediction (runs/core_v6/preds, seeds averaged), for reference only; the figure prints map r1",
+    "clusters": [
+     {
+      "cluster": 1,
+      "lat": 71.8389,
+      "lon": 129.2944,
+      "n_cells": 11,
+      "d_ours": 6.83,
+      "d_wei": null,
+      "d_liu": 9.89,
+      "n_ours": 9,
+      "n_wei": 0,
+      "n_liu": 5
+     },
+     {
+      "cluster": 2,
+      "lat": 72.5138,
+      "lon": 127.9728,
+      "n_cells": 8,
+      "d_ours": 16.11,
+      "d_wei": 23.42,
+      "d_liu": 27.78,
+      "n_ours": 7,
+      "n_wei": 8,
+      "n_liu": 8
+     },
+     {
+      "cluster": 3,
+      "lat": 72.4755,
+      "lon": 126.2615,
+      "n_cells": 4,
+      "d_ours": 25.03,
+      "d_wei": 29.15,
+      "d_liu": 40.77,
+      "n_ours": 3,
+      "n_wei": 4,
+      "n_liu": 2
+     },
+     {
+      "cluster": 4,
+      "lat": 72.3703,
+      "lon": 126.3828,
+      "n_cells": 10,
+      "d_ours": 15.17,
+      "d_wei": 32.68,
+      "d_liu": 31.58,
+      "n_ours": 8,
+      "n_wei": 3,
+      "n_liu": 3
+     },
+     {
+      "cluster": 5,
+      "lat": 72.3501,
+      "lon": 125.9462,
+      "n_cells": 1,
+      "d_ours": 3.37,
+      "d_wei": 19.98,
+      "d_liu": 17.46,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     },
+     {
+      "cluster": 6,
+      "lat": 71.9697,
+      "lon": 127.0923,
+      "n_cells": 1,
+      "d_ours": 15.22,
+      "d_wei": 15.99,
+      "d_liu": 31.53,
+      "n_ours": 1,
+      "n_wei": 1,
+      "n_liu": 1
+     }
+    ]
+   }
+  }
+ },
+ "correction": {
+  "definition": "r1 − p1 (physics + residual ML − Stefan, recalibrated)",
+  "cmap": "broc",
+  "range_cm": [
+   -15.0,
+   15.0
+  ],
+  "range_rule": "max over the two maps of the 99th percentile of |r1 − p1|, 5 cm step",
+  "alaska": "mean_2011_2024.csv.gz r1 − p1",
+  "lena": "pred_2016.csv.gz r1 − p1",
+  "per_map_sym": {
+   "alaska": 15.0,
+   "lena": 10.0
+  }
+ },
+ "fonts": {
+  "paper": "FreeSans 6–7 pt, panel letters 8 pt bold",
+  "deck": "FreeSans 12 pt ticks/legend, 13 pt labels, 14 pt colorbar labels"
+ },
+ "size_key_cells": [
+  1,
+  20
+ ],
+ "outputs": {
+  "paper": [
+   "outputs/figures/paper/v7/F8_product_maps.pdf",
+   "outputs/figures/paper/v7/F8_product_maps.svg",
+   "outputs/figures/paper/v7/F8_product_maps.png"
+  ],
+  "deck": [
+   "outputs/figures/paper/v7/deck/F8_product_maps__deck_R11.png",
+   "outputs/figures/paper/v7/deck/F8_product_maps__deck_R12.png",
+   "outputs/figures/paper/v7/deck/F8_product_maps__deck_R13.png"
+  ],
+  "slide": [
+   "outputs/figures/paper/v7/slide/F8_product_maps.png",
+   "outputs/figures/paper/v7/slide/F8_product_maps__a.png",
+   "outputs/figures/paper/v7/slide/F8_product_maps__b.png",
+   "outputs/figures/paper/v7/slide/F8_product_maps__c.png",
+   "outputs/figures/paper/v7/slide/F8_product_maps__d.png",
+   "outputs/figures/paper/v7/slide/F8_product_maps__e.png",
+   "outputs/figures/paper/v7/slide/F8_product_maps__f.png",
+   "outputs/figures/paper/v7/slide/F8_product_maps__g.png",
+   "outputs/figures/paper/v7/slide/F8_product_maps__h.png",
+   "outputs/figures/paper/v7/slide/F8_product_maps__i.png",
+   "outputs/figures/paper/v7/slide/F8_product_maps__j.png",
+   "outputs/figures/paper/v7/slide/F8_product_maps__abcd.png",
+   "outputs/figures/paper/v7/slide/F8_product_maps__efgh.png",
+   "outputs/figures/paper/v7/slide/F8_product_maps__ij.png"
+  ]
+ },
+ "layout": {
+  "paper": {
+   "size_mm": [
+    180.0,
+    178.0
+   ],
+   "map_w_mm": 33.0,
+   "mini_w_mm": 19.67,
+   "row_band_mm": 17.0,
+   "row3_h_mm": 71.5,
+   "legend": {
+    "a": "pixel categories, 2 columns under a",
+    "e": "area of applicability, 1 column under e"
+   },
+   "alt_cbar": "50 mm centred under b–c and f–g"
+  },
+  "slide": {
+   "size_mm": [
+    180.0,
+    178.0
+   ],
+   "map_w_mm": 33.0,
+   "mini_w_mm": 19.67,
+   "row_band_mm": 17.0,
+   "row3_h_mm": 71.5,
+   "legend": {
+    "a": "pixel categories, 2 columns under a",
+    "e": "area of applicability, 1 column under e"
+   },
+   "alt_cbar": "50 mm centred under b–c and f–g"
+  }
+ },
+ "method_alias": {
+  "this_study": "physics + residual ML (map r1); labelled 'physics + residual ML' on panels a/e and 'this study' on the residual minis d/h"
+ },
+ "legend": {
+  "categories": [
+   "non-permafrost land",
+   "no data",
+   "water"
+  ],
+  "applicability": [
+   "inside area of applicability",
+   "outside area of applicability"
+  ],
+  "paper": "categories under panel a (2 columns), applicability under panel e (1 column); both outside the map frames",
+  "deck": "R11/R12 right column, one list under the ALT colour bar; R13 has none (colour bar only)",
+  "handles": "land and hatch swatches multiplied by the mean hillshade as on the map; applicability = cmap(0.55) and its 40 % land blend"
+ },
+ "caption_notes": [
+  "Panels i and j share one colour scale, ±15 cm, fixed to the larger of the two panels' 99th percentiles of |r1 − p1| (Alaska 15 cm, Lena Delta 10 cm) so that the two regions are directly comparable; the Lena field is therefore muted relative to its own range.",
+  "'this study' = physics + residual ML (the r1 map); the maps in a and e are full-data maps, so their values at observed cells are in-sample.",
+  "RMSE in d and h is computed on the cells where all three maps have a value (95 cells in Alaska 2014, 14 in Lena Delta 2016).",
+  "Hatching marks cells inside our 1 km grid for which the respective map has no value; flat grey is land outside the grid (non-permafrost); water is white-blue.",
+  "ALT colour range per row: Alaska 35–85 cm, Lena Delta 30–60 cm (1st–99th percentile of our map), shared by the three maps of the row."
+ ]
+}

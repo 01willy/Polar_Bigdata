@@ -1,0 +1,161 @@
+{
+ "a": {
+  "year": 2014,
+  "E": 1.949027934263291,
+  "lam": 0.5,
+  "n_train": 15540,
+  "n_features": 23,
+  "n_climate_features": 8,
+  "n_static_features": 15,
+  "features": [
+   "e5_maat",
+   "e5_tdd",
+   "e5_fdd",
+   "e5_sqrt_tdd",
+   "e5_twarm",
+   "e5_tcold",
+   "e5_stl1",
+   "e5_swe",
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_sin",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "sg_clay_5_15",
+   "sg_sand_5_15",
+   "sg_silt_5_15",
+   "sg_bdod_5_15",
+   "sg_cfvo_5_15",
+   "sg_phh2o_5_15",
+   "sg_soc_0_5",
+   "sg_soc_5_15",
+   "sg_soc_15_30"
+  ],
+  "learner": {
+   "name": "catboost",
+   "iterations": 600,
+   "learning_rate": 0.03,
+   "depth": 6
+  },
+  "n_cells_map": 858517,
+  "alt_range_cm": [
+   35.0,
+   85.0
+  ],
+  "resid_sym_max_cm": 15.0,
+  "interval_half_width_90_cm": 25.52907837384039,
+  "aoa_frac_inside": 0.5559051247674769,
+  "n_observed_cells": 7861,
+  "n_observed_rows": 7861,
+  "thumb_bins_deg": [
+   0.05,
+   0.02
+  ],
+  "input_rows": {
+   "Climate, 2014 (8)": [
+    "MAAT",
+    "FDD",
+    "Snow",
+    "TDD"
+   ],
+   "Static (15)": [
+    "Elevation",
+    "Slope",
+    "Soil carbon",
+    "Clay"
+   ]
+  },
+  "input_examples": {
+   "columns": [
+    "maat",
+    "fdd",
+    "swe",
+    "e5_tdd",
+    "dem_elev",
+    "dem_slope",
+    "sg_soc_0_5",
+    "sg_clay_5_15"
+   ]
+  },
+  "input_scales": "each thumbnail stretched to its own percentile range (no colour bar, no units)",
+  "regions": "Input / Model / Output = light dashed rounded rectangles with head labels (deck mm x ranges in GEO_A.rx)",
+  "model_boxes": "names only: 'Stefan', 'Gradient boosting'; Stefan formula below the box in mathtext",
+  "connectors": "thin lines with small filled chevrons (no triangular arrowheads)",
+  "example_label": "Alaska, 2014",
+  "pfr_mean": "not a model feature (F8TS); removed from the input panel 2026-10-15",
+  "forcing_year_layers": "TDD · FDD · SWE of the map year (grid/alaska_forcing_year.csv)",
+  "thumb_aspect_w_over_h": 0.9652
+ },
+ "qa_overlaps_M01": [],
+ "c": {
+  "region": "Lena",
+  "n_cell_years": 2436,
+  "n_cells": 2206,
+  "n_blocks": 16,
+  "years": [
+   2010,
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022
+  ],
+  "years_scored_year_holdout": [
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021
+  ],
+  "k_folds": 5,
+  "seed": 0,
+  "fold_palette": [
+   "#0072B2",
+   "#56B4E9",
+   "#E69F00",
+   "#CC79A7",
+   "#009E73"
+  ],
+  "fold_palette_name": "Okabe–Ito",
+  "year_cmap": "cmcrameri bilbao_r 0.25–0.95, norm = scored years",
+  "block_year_encoding": "point colour = year, 0.5° box edge = block fold",
+  "region_holdout": "all Lena cells scored (test); training = Alaska + Canada"
+ },
+ "d": {
+  "region": "Lena",
+  "scheme": "block",
+  "forcing": "year_obs",
+  "featset": "F8TS",
+  "pair": "R1(lam 0.5) − P1",
+  "n_boot": 2000,
+  "seed": 0,
+  "rng": "numpy RandomState(0) multinomial (testbed_v5.boot_delta)",
+  "n_blocks": 16,
+  "n": 2436,
+  "delta_cm": -3.593,
+  "ci95_cm": [
+   -7.834,
+   -0.805
+  ],
+  "deltas_vs_ref_cm": [
+   -3.593,
+   -7.834,
+   -0.805
+  ],
+  "matches_deltas_vs_ref": true
+ },
+ "qa_overlaps_M02": []
+}

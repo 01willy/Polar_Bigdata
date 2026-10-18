@@ -219,7 +219,8 @@ paper/manuscript/*_v*/si.pdf
 outputs/figures/**/*.svg
 outputs/figures/paper/v5/
 outputs/figures/paper/v6/
-outputs/figures/paper/v7/
+outputs/figures/paper/v7/*
+!outputs/figures/paper/v7/source_data/
 outputs/figures/paper/v*/_cache/
 outputs/report_v*/*.pdf
 *.cbm
