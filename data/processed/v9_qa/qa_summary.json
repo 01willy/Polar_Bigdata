@@ -1,0 +1,113 @@
+{
+ "sw_alaska": {
+  "box": "59.0–61.5°N, 163–157°W",
+  "pfr_median": 21.719999313354492,
+  "pfr_p90": 37.49823913574219,
+  "share_pfr_ge50": 0.012666666666666666,
+  "grid_pfr_min": 50.0,
+  "map_lat_min": 59.8185,
+  "map_cells_in_box": 1109
+ },
+ "dist_wei_train": {
+  "Alaska": {
+   "cells": 13606,
+   "median_km": 7.3317,
+   "min_km": 0.0,
+   "share_le5": 0.3288255181537557,
+   "share_le25": 0.6660296927825959,
+   "share_le100": 0.9457592238718212
+  },
+  "Canada": {
+   "cells": 750,
+   "median_km": 221.71775,
+   "min_km": 0.0,
+   "share_le5": 0.025333333333333333,
+   "share_le25": 0.10533333333333333,
+   "share_le100": 0.476
+  },
+  "Lena": {
+   "cells": 3037,
+   "median_km": 107.1041,
+   "min_km": 3.7933,
+   "share_le5": 0.003951267698386566,
+   "share_le25": 0.009878169245966415,
+   "share_le100": 0.41224892986499834
+  }
+ },
+ "external_calm": {
+  "cell_years": 816,
+  "cells": 73,
+  "blocks": 50,
+  "by_region": {
+   "C Siberia": {
+    "cell_years": 81,
+    "cells": 7,
+    "years": [
+     2010,
+     2024
+    ]
+   },
+   "Chukotka": {
+    "cell_years": 75,
+    "cells": 5,
+    "years": [
+     2010,
+     2024
+    ]
+   },
+   "European Russia": {
+    "cell_years": 73,
+    "cells": 6,
+    "years": [
+     2010,
+     2024
+    ]
+   },
+   "Greenland": {
+    "cell_years": 30,
+    "cells": 2,
+    "years": [
+     2010,
+     2024
+    ]
+   },
+   "Kamchatka": {
+    "cell_years": 19,
+    "cells": 3,
+    "years": [
+     2010,
+     2023
+    ]
+   },
+   "NE Siberia": {
+    "cell_years": 244,
+    "cells": 21,
+    "years": [
+     2010,
+     2023
+    ]
+   },
+   "Svalbard": {
+    "cell_years": 76,
+    "cells": 7,
+    "years": [
+     2010,
+     2024
+    ]
+   },
+   "W Siberia": {
+    "cell_years": 218,
+    "cells": 22,
+    "years": [
+     2010,
+     2024
+    ]
+   }
+  }
+ },
+ "external_excluded": [
+  "R29 A Bykovsky (Lena delta) (edoma)",
+  "R29 C Bykovsky (Lena delta) (edoma new)",
+  "R51 Samoylov"
+ ]
+}

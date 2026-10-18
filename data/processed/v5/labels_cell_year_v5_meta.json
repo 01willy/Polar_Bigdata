@@ -1,0 +1,171 @@
+{
+ "created": "2026-10-14 14:31:44",
+ "rules": {
+  "eos_months_above": [
+   8,
+   9,
+   10
+  ],
+  "eos_months_allena": [
+   8,
+   9
+  ],
+  "calm": "protocol end-of-season, month unknown",
+  "above_qc": "0<ALT<300 cm, lat 45–80, lon −170–−60",
+  "allena_qc": "QF TD != 2, drop NA",
+  "cell": "v4 loc_id",
+  "forcing_years": [
+   2010,
+   2024
+  ],
+  "aggregation": "ABoVE/CALM mean per (loc_id, year); ALLENA max per (location, year)"
+ },
+ "counts": {
+  "above": {
+   "raw": 529862,
+   "qc": 223937,
+   "no_loc": 0,
+   "early_excluded": 4824,
+   "early_by_month": {
+    "1": 606,
+    "2": 882,
+    "5": 886,
+    "6": 1746,
+    "7": 704
+   }
+  },
+  "calm": {
+   "site_years": 1484,
+   "no_loc": 189,
+   "cell_years": 1426
+  },
+  "allena": {
+   "raw": 9186,
+   "eos_qc": 6827,
+   "cell_years": 3282,
+   "cells": 3037,
+   "qc_fig_cell_years": 5
+  },
+  "total": {
+   "cell_years": 20768,
+   "cells": 17029,
+   "cell_years_in_forcing": 19172,
+   "cells_in_forcing": 16189
+  },
+  "by_region_in_forcing": {
+   "Alaska": {
+    "cell_years": 15540,
+    "cells": 13253,
+    "blocks": 73,
+    "years": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022,
+     2023,
+     2024
+    ],
+    "multi_year_cells": 636
+   },
+   "Canada": {
+    "cell_years": 1196,
+    "cells": 730,
+    "blocks": 26,
+    "years": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2021,
+     2022,
+     2023,
+     2024
+    ],
+    "multi_year_cells": 235
+   },
+   "Lena": {
+    "cell_years": 2436,
+    "cells": 2206,
+    "blocks": 16,
+    "years": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022
+    ],
+    "multi_year_cells": 136
+   }
+  },
+  "by_region_source_all_years": {
+   "Alaska|ABoVE_ds2369": 14929,
+   "Alaska|CALM": 1169,
+   "Canada|ABoVE_ds2369": 1131,
+   "Canada|CALM": 257,
+   "Lena|ALLENA_PANGAEA_973813": 3282
+  },
+  "excluded_pre2010_cell_years": {
+   "Alaska": 558,
+   "Canada": 192,
+   "Lena": 846
+  }
+ },
+ "inputs": {
+  "data/raw/above/ABoVE_Soil_ThawDepth_Moisture_Validation_V2.csv": {
+   "sha256": "d35333c6499d34a866cdf8fd0c50431edec40fad7becc31093166bfbfa44a27f",
+   "bytes": 121883773
+  },
+  "data/raw/allena/PANGAEA_973813_ALLena_main.txt": {
+   "sha256": "030da43c0b3588aca80619c426de60874e68b165cc62ecbab38571a5217daa48",
+   "bytes": 7665027
+  },
+  "data/processed/alt_global.csv": {
+   "sha256": "621bf3499bbc785484871fe2f1e3332f8b55fdc38a7fadb3ed1145d3f5367819",
+   "bytes": 432046
+  },
+  "data/processed/dl_dataset.csv": {
+   "sha256": "ccdb679153d3be0d8661981cd132840b7928f5fe5045c0aaf6036818461b62ef",
+   "bytes": 77271821
+  },
+  "data/processed/fidelity_base_v4.csv": {
+   "sha256": "4c387b2b4fb43ef602d9e0b8fe50054a6699428d5a593425b3d309e798fce52a",
+   "bytes": 8910487
+  }
+ },
+ "outputs": {
+  "data/processed/v5/labels_cell_year_v5.csv": {
+   "sha256": "385daaeb18099140d18cb3de790ed14e6a2c3dfe80cc53733fbdf41bd2124f9c",
+   "bytes": 2617926,
+   "rows": 20768
+  },
+  "data/processed/v5/static_v5.csv": {
+   "sha256": "6b1262e3b4158965f820af7af24350bc9546696d2c8ad5334c4891993a13d09c",
+   "bytes": 7697180,
+   "rows": 17029
+  }
+ },
+ "elapsed_s": 7.1
+}

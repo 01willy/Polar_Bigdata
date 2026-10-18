@@ -1,0 +1,29 @@
+[2026-10-15T08:55:05Z]: Launching [ -f v9_payload.tar.gz ] && tar xzf v9_payload.tar.gz; bash scripts/rescale/run_v9.sh, Working dir: /enc/ukrprod_gxnyhb/work.  Process output follows:
+[2026-10-15T08:55:05Z]: [2026-10-15T08:55:05Z] [env] 작업 디렉터리 /enc/ukrprod_gxnyhb/work
+[2026-10-15T08:55:05Z]: [2026-10-15T08:55:05Z] [env] 코어 수 96 (RESCALE_CORES_PER_SLOT = 96, OMP_NUM_THREADS = 없음) · 메모리 369 GB (여유 344 GB)
+[2026-10-15T08:55:05Z]: [2026-10-15T08:55:05Z] [env] 디스크 1.2T 여유 / 1.2T
+[2026-10-15T08:55:05Z]: [2026-10-15T08:55:05Z] [env] python /program/pytorch-2.4.1/venv/bin/python3 · pip /program/pytorch-2.4.1/venv/bin/pip
+[2026-10-15T08:55:08Z]: [env] python 3.11.10 · Linux-4.18.0-553.159.1.el8_10.x86_64-x86_64-with-glibc2.28
+[2026-10-15T08:55:08Z]: [env] 가상환경 True · prefix /program/pytorch-2.4.1/venv
+[2026-10-15T08:55:08Z]: [env] numpy 2.1.1
+[2026-10-15T08:55:08Z]: [env] pandas 없음
+[2026-10-15T08:55:08Z]: [env] scipy 없음
+[2026-10-15T08:55:08Z]: [env] scikit-learn 없음
+[2026-10-15T08:55:08Z]: [env] catboost 없음
+[2026-10-15T08:55:08Z]: [env] pytabkit 없음
+[2026-10-15T08:55:08Z]: [env] pytest 없음
+[2026-10-15T08:55:08Z]: [env] torch 2.4.1
+[2026-10-15T08:55:08Z]: [env] CUDA_VISIBLE_DEVICES = None
+[2026-10-15T08:55:21Z]: [env] torch 2.4.1+cu121 · CUDA 빌드 12.1 · CUDA 사용 가능 False · GPU 수 0
+[2026-10-15T08:55:21Z]: [2026-10-15T08:55:21Z] [env] nvidia-smi 없음
+[2026-10-15T08:55:22Z]: [2026-10-15T08:55:22Z] [deps] 없는 필수 패키지: catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-15T08:55:22Z]: [2026-10-15T08:55:22Z] [deps] pip install --user catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-15T08:55:23Z]: ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-10-15T08:55:23Z]: [2026-10-15T08:55:23Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+[2026-10-15T08:55:49Z]: [deps] 확인: catboost 1.2.10 · scikit-learn 1.9.1 · pandas 2.3.3 · scipy 1.17.1 · numpy 2.1.1
+[2026-10-15T08:57:48Z]: [2026-10-15T08:57:48Z] [v9] 끝 1 min
+[2026-10-15T08:57:48Z]:   stage,rc,sec
+[2026-10-15T08:57:48Z]:   fit,0,115
+[2026-10-15T08:57:48Z]:   agg,0,118
+[2026-10-15T08:57:48Z]: Exited with code 0
+[2026-10-15T08:57:48Z]: 

@@ -1,0 +1,12 @@
+[load] usable 19,172 2s
+[EXT seed 0] 4s
+[EXT seed 1] 9s
+[EXT seed 2] 13s
+[EXT] rows 11,424 cells 73 E_src 1.899 13s
+[SHAP Alaska residual] 3s
+[SHAP Alaska direct] 5s
+[SHAP Lena residual] 6s
+[SHAP Lena direct] 7s
+[SHAP Canada residual] 8s
+[SHAP Canada direct] 9s
+[done] 24s

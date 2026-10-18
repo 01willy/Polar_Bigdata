@@ -1,0 +1,58 @@
+{
+ "run_id": "85389-20260930T035233",
+ "tag": "lgfn_smoke",
+ "cpu_only": false,
+ "argv": [
+  "--smoke",
+  "--allow-local",
+  "--gpus",
+  "5",
+  "--threads",
+  "2"
+ ],
+ "jobs": [
+  "n_sel_fast",
+  "n_p0_fast",
+  "n_sel_slow",
+  "n_p0_slow",
+  "n_p1",
+  "n_t2"
+ ],
+ "elapsed_s": 190.6,
+ "gpus_first": [
+  5
+ ],
+ "gpus_last": [
+  5
+ ],
+ "busy_gpus": [],
+ "unit_states": {
+  "done": 41
+ },
+ "n_done": 41,
+ "n_fail": 0,
+ "n_partial": 0,
+ "failed_units": [],
+ "quarantined": [],
+ "blocked": [],
+ "n_blocked": 0,
+ "planner_errors": {},
+ "unrun_units": [],
+ "n_unrun": 0,
+ "gpu_lost": false,
+ "drained": "",
+ "closed": "",
+ "aborted": "",
+ "interrupted": "",
+ "settings": {
+  "E1": false,
+  "reduce_n": [],
+  "k": {
+   "mlp": 1,
+   "tabm": 1,
+   "ftt": 0,
+   "realmlp": 1
+  },
+  "source": "명령행"
+ }
+}

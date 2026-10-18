@@ -1,0 +1,14 @@
+PASS label-year equals forcing-year (TDD identical after join) n=19172
+PASS forcing varies across years within cells frac cells with sd>0 = 1.000, median sd 114 °C·d
+PASS climatological forcing constant within cell 
+PASS lag feature equals previous-year TDD 
+PASS monthly cumulative TDD monotone and tdd_cum_12 == e5_tdd 
+PASS observation months within Aug–Oct (CALM = Sep) {8: 16214, 9: 2001, 10: 957}
+PASS product value is the label-year value 
+PASS block folds disjoint in blocks folds 5
+PASS year hold-out folds contain one year each folds 15
+PASS prediction rows cover all cell-years once per seed 
+PASS cell-year counts match registry {'Alaska': 15540, 'Canada': 1196, 'Lena': 2436}
+FAIL MODIS yearly values only inside 2015–2020, else mean-filled flag 
+PASS winter_partial flag only for 2010 
+fails: 1

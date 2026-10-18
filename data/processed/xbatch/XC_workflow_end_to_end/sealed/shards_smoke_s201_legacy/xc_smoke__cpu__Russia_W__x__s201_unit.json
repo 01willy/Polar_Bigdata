@@ -1,0 +1,270 @@
+{
+ "n_fit": {
+  "xc": 42
+ },
+ "sec": {
+  "xc": 70.1
+ },
+ "fail": {},
+ "n_rows": 27,
+ "status": "ok",
+ "n_fit_detail": {
+  "xc|catboost_lo|R1": 3,
+  "xc|catboost_lo|R2": 2,
+  "xc|catboost_lo|D1": 2,
+  "xc|catboost_lo|R1cv": 10,
+  "xc|catboost_lo|R2cv": 10,
+  "xc|catboost_lo|D1cv": 10,
+  "xc|catboost_lo|StackRcv": 5
+ },
+ "sec_detail": {
+  "xc|catboost_lo|R1": 2.049,
+  "xc|catboost_lo|R2": 6.111,
+  "xc|catboost_lo|D1": 5.17,
+  "xc|catboost_lo|R1cv": 4.668,
+  "xc|catboost_lo|R2cv": 25.952,
+  "xc|catboost_lo|D1cv": 23.529,
+  "xc|catboost_lo|StackRcv": 2.593
+ },
+ "rows_detail": {
+  "xc|catboost_lo|R1": 52344,
+  "xc|catboost_lo|R2": 383618,
+  "xc|catboost_lo|D1": 383618,
+  "xc|catboost_lo|R1cv": 174464,
+  "xc|catboost_lo|R2cv": 1918064,
+  "xc|catboost_lo|D1cv": 1918064,
+  "xc|catboost_lo|StackRcv": 87244
+ },
+ "est_detail": {
+  "xc|catboost_lo|R1": 1.54,
+  "xc|catboost_lo|R2": 4.326,
+  "xc|catboost_lo|D1": 4.326,
+  "xc|catboost_lo|R1cv": 5.133,
+  "xc|catboost_lo|R2cv": 21.63,
+  "xc|catboost_lo|D1cv": 21.63,
+  "xc|catboost_lo|StackRcv": 2.567
+ },
+ "errors": [],
+ "n_stored": 27,
+ "n_stored_ml": 20,
+ "n_nonfinite_keys": 0,
+ "notes": {
+  "algp": "S8a",
+  "algp_source": "부록 XC-0 미확정(스모크·세기 기본값 P_default)",
+  "placement_impl": "xd",
+  "wplus": "on",
+  "gate": false,
+  "w_cv_rmse": {
+   "rand|10|0": {
+    "P0": 44.1899,
+    "P1": 37.9267,
+    "P2": 36.4988,
+    "R1@0.25": 37.589,
+    "R1@1.0": 37.4014,
+    "R2@0.25": 37.9369,
+    "D1": 37.9558
+   },
+   "rand|-1|0": {
+    "P0": 45.7312,
+    "P1": 34.0539,
+    "P2": 33.0856,
+    "R1@0.25": 33.4443,
+    "R1@1.0": 32.7117,
+    "R2@0.25": 34.057,
+    "D1": 34.0514,
+    "Stack": 34.5539,
+    "StackR@0.25": 33.4482
+   }
+  }
+ },
+ "n_krige": 0,
+ "krige_s": 0.0,
+ "est_krige_s": 0.0,
+ "n_kmeans": 0,
+ "kmeans_s": 0.0,
+ "est_kmeans_s": 0.0,
+ "diag": [
+  {
+   "n": 10,
+   "draw": 0,
+   "placement": "rand",
+   "split": 201,
+   "n_lab": 10,
+   "nb_lab": 8,
+   "bias": -29.62066501586806,
+   "abs_bias": 29.62066501586806
+  },
+  {
+   "n": 10,
+   "draw": 0,
+   "placement": "algP",
+   "split": 201,
+   "n_lab": 10,
+   "nb_lab": 10,
+   "bias": -42.42524977849019,
+   "abs_bias": 42.42524977849019
+  }
+ ],
+ "orders_head": {
+  "0": [
+   9,
+   10,
+   14,
+   6,
+   0,
+   7,
+   4,
+   11,
+   12,
+   8
+  ]
+ },
+ "n_A": 16,
+ "nb_A": 11,
+ "n_eval": 14,
+ "nb_eval": 9,
+ "n_src": 17436,
+ "n_src_parent": 0,
+ "frac_src_parent": 0.0,
+ "n_parent_excluded": 0,
+ "n_buffer_excluded": 0,
+ "n_cells": 31,
+ "n_blocks": 21,
+ "smd_x25": 0.5401638981909029,
+ "E_own": 2.6441227216083845,
+ "E_A": 2.5951100271936447,
+ "E_B": 2.6635472084035836,
+ "E_block_cv": 0.11263288609231896,
+ "y_mean": 90.81248883156648,
+ "y_sd": 30.022169402686004,
+ "dup_of": -1,
+ "mirror_of": -1,
+ "valid": true,
+ "n_unique_splits": 10,
+ "n_valid_splits": 10,
+ "subregion_src": "map:lg_subregion_map_v1.csv",
+ "subregion_kmeans_diff": 0,
+ "E0": 1.5895097368022235,
+ "logE_ratio_own": 0.5089137089927922,
+ "logE_ratio_AB": -0.026029856008398612,
+ "tau2": 0.17216869834279952,
+ "sigma2": 0.10544683470949325,
+ "alias": "Russia_W",
+ "data_spec": "v3",
+ "split_status": "ok",
+ "split_rule": "xbatch 1절 새 seed 제외 규칙",
+ "part": "cpu",
+ "elapsed_s": 71.0,
+ "n_fit_total": 42,
+ "plan": {
+  "split": 201,
+  "status": "ok",
+  "ref_split": -1,
+  "n_A": 16,
+  "nb_A": 11,
+  "n_eval": 14,
+  "nb_eval": 9,
+  "min_eval_blocks": 5,
+  "dup_of": -1,
+  "mirror_of": -1,
+  "valid": true,
+  "n_valid_splits": 10,
+  "n_unique_splits": 10
+ },
+ "algp": "S8a",
+ "placement_impl": "xd",
+ "tag": "xc_smoke",
+ "target": "Russia_W",
+ "mode": "x",
+ "split": 201,
+ "variant": "",
+ "expected_splits": [
+  201
+ ],
+ "store_names": [
+  "Russia_W|x"
+ ],
+ "n_keys": 27,
+ "cfg": {
+  "exp": "XC",
+  "variant": "",
+  "data_sha": "214abe489347:f8c4b4f0b505:f79eeb64564c",
+  "kappa": 10.0,
+  "r": 10.0,
+  "lams": [
+   0.25,
+   0.5,
+   1.0
+  ],
+  "lam_base": 0.25,
+  "cv_k": 5,
+  "cb_hi": {
+   "iterations": 600,
+   "learning_rate": 0.03,
+   "depth": 6,
+   "l2_leaf_reg": 3.0
+  },
+  "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md@2678100",
+  "frozen": {
+   "h40": "7098f59dabe2b73f",
+   "h42": "22e215e435e157be",
+   "h54": "cf9a1f6d0929c892",
+   "h41": "492373e4d37b5ea4"
+  },
+  "part": "xc",
+  "grid": [
+   10,
+   40,
+   -1
+  ],
+  "draws": 1,
+  "seeds": [
+   0
+  ],
+  "cb_iters": 200,
+  "w_cands": [
+   "P0",
+   "P1",
+   "P2",
+   "R1@0.25",
+   "R1@1.0",
+   "R2@0.25",
+   "D1"
+  ],
+  "w_min_n": 10,
+  "diag_n": 10,
+  "a1_r1_n": [
+   10
+  ],
+  "rand_tag": "xc-rand",
+  "p_tag": "xc-P",
+  "algp": "S8a",
+  "algp_gamma": 0.0,
+  "algp_first": "center",
+  "algp_source": "부록 XC-0 미확정(스모크·세기 기본값 P_default)",
+  "algp_file_sha256": "",
+  "placement_impl": "xd",
+  "placement_sha": "28220ba689ab",
+  "split_family": "xc",
+  "wplus": "x_multisource_stacking@70468215aaad",
+  "wplus_extra": [
+   "Stack",
+   "StackR@0.25"
+  ]
+ },
+ "cfg_hash": "672f4a4338d5",
+ "cfg_common": "8a38a430bae1",
+ "code_sha": "18d0c583c7c2",
+ "code_sha_core": "f4ef5987402a",
+ "frozen": {
+  "h40": "7098f59dabe2b73f",
+  "h42": "22e215e435e157be",
+  "h54": "cf9a1f6d0929c892",
+  "h41": "492373e4d37b5ea4"
+ },
+ "plan_commit": "2678100",
+ "threads": "2",
+ "device": "",
+ "max_rss_mb": 433.3,
+ "written": "2026-10-04 16:01:19"
+}

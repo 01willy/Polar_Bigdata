@@ -1,0 +1,153 @@
+{
+ "variant": "S9-GBM",
+ "model_path": "/home/willy010313/Polar_Bigdata/data/processed/xbatch/XD_placement_policy/policy/s9_gbm_smoke.cbm",
+ "model_sha256": "f15cbde260c02c668892f2583fe79487138da108e0994b7d8ad1390197cc6405",
+ "iterations": 800,
+ "cv": [
+  {
+   "iterations": 100,
+   "cv_utility": 0.08500457128608724,
+   "per_fold": [
+    0.26499658203873067,
+    -0.09498743946655618
+   ]
+  },
+  {
+   "iterations": 200,
+   "cv_utility": 0.08500457128608724,
+   "per_fold": [
+    0.26499658203873067,
+    -0.09498743946655618
+   ]
+  },
+  {
+   "iterations": 400,
+   "cv_utility": 0.010998228547234888,
+   "per_fold": [
+    0.11698389656102595,
+    -0.09498743946655618
+   ]
+  },
+  {
+   "iterations": 800,
+   "cv_utility": -0.019167722117960837,
+   "per_fold": [
+    0.0566519952306345,
+    -0.09498743946655618
+   ]
+  }
+ ],
+ "cv_utility": -0.019167722117960837,
+ "folds": [
+  {
+   "iterations": 100,
+   "val": "AL-3",
+   "train": [
+    "AL-5"
+   ],
+   "n_train": 12,
+   "n_val": 12
+  },
+  {
+   "iterations": 100,
+   "val": "AL-5",
+   "train": [
+    "AL-3"
+   ],
+   "n_train": 12,
+   "n_val": 12
+  },
+  {
+   "iterations": 200,
+   "val": "AL-3",
+   "train": [
+    "AL-5"
+   ],
+   "n_train": 12,
+   "n_val": 12
+  },
+  {
+   "iterations": 200,
+   "val": "AL-5",
+   "train": [
+    "AL-3"
+   ],
+   "n_train": 12,
+   "n_val": 12
+  },
+  {
+   "iterations": 400,
+   "val": "AL-3",
+   "train": [
+    "AL-5"
+   ],
+   "n_train": 12,
+   "n_val": 12
+  },
+  {
+   "iterations": 400,
+   "val": "AL-5",
+   "train": [
+    "AL-3"
+   ],
+   "n_train": 12,
+   "n_val": 12
+  },
+  {
+   "iterations": 800,
+   "val": "AL-3",
+   "train": [
+    "AL-5"
+   ],
+   "n_train": 12,
+   "n_val": 12
+  },
+  {
+   "iterations": 800,
+   "val": "AL-5",
+   "train": [
+    "AL-3"
+   ],
+   "n_train": 12,
+   "n_val": 12
+  }
+ ],
+ "features": [
+  "n_set",
+  "cov_mean",
+  "cov_p90",
+  "cov_max",
+  "energy",
+  "blk_cov_frac",
+  "blk_entropy",
+  "blk_l1",
+  "s_mean",
+  "s_sd",
+  "s_ratio",
+  "s_sum2",
+  "di_mean",
+  "ctx_ncand",
+  "ctx_nblocks",
+  "ctx_effblocks",
+  "ctx_cov_between",
+  "ctx_src_diff"
+ ],
+ "gbm_cfg": {
+  "learning_rate": 0.05,
+  "depth": 4,
+  "l2_leaf_reg": 3.0
+ },
+ "seeds": [
+  0
+ ],
+ "catboost": "1.2.10",
+ "threads": 2,
+ "n_rows": 24,
+ "tasks": [
+  "AL-3",
+  "AL-5"
+ ],
+ "created": "2026-10-04 16:00:45",
+ "code_sha256": "303215cc37c241dfb6c224af52838278361b9affaaab7d7ca1da07b66c9ae0d7",
+ "index_path": "/home/willy010313/Polar_Bigdata/data/processed/xbatch/XD_placement_policy/policy/s9_gbm_index_smoke.json"
+}

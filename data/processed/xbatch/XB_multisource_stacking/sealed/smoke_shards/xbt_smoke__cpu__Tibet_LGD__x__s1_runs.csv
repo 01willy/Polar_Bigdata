@@ -1,0 +1,32 @@
+exp,target,mode,parent,split,variant,part,axis,method,learner,alpha,placement,n,n_lab,draw,seed,lam,E_used,alpha_sel,n_blocks_lab,n_nonfinite,fit_flag,n_train_rows,cv_folds,cv_flag,stack_fallback,stack_gamma,stack_K,stack_w
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,P0,none,1,cell,0,0,0,-1,0.0,1.5913805231261562,,0,0,,0,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,P1,none,1,cell,0,0,0,-1,0.0,1.5913805231261562,,0,0,,0,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,Pe,none,1,cell,0,0,0,-1,0.0,1.5913805231261562,,0,0,,0,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,Stack,none,1,cell,0,0,0,-1,0.0,,,0,0,,0,0,,n<10,1.0,7.0,"{""P1"": 1.0}"
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,P*,none,1,cell,0,0,0,-1,0.0,1.6488271796166396,,0,0,,0,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,Stack0,none,1,cell,0,0,0,-1,0.0,,,0,0,,0,0,,,,7.0,"{""Ss"": 0.9012763662436291, ""Cr"": 0.09872363375637094}"
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,B:ens,none,1,cell,0,0,0,-1,0.0,,,0,0,,0,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,R1,catboost_lo,1,cell,0,0,0,0,0.25,1.5913805231261562,,0,0,,17466,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,Re,catboost_lo,1,cell,0,0,0,0,0.25,1.5913805231261562,,0,0,,17466,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,StackR,catboost_lo,1,cell,0,0,0,0,0.25,,,0,0,reuse_R1,17466,0,,n<10,1.0,7.0,"{""P1"": 1.0}"
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,P1,none,1,cell,3,3,0,-1,0.0,3.4137203755186603,,3,0,,0,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,Pe,none,1,cell,3,3,0,-1,0.0,3.4137203755186603,,3,0,,0,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,Stack,none,1,cell,3,3,0,-1,0.0,,,3,0,,0,0,,n<10,1.0,7.0,"{""P1"": 1.0}"
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,P*,none,1,cell,3,3,0,-1,0.0,3.32384107144317,,3,0,,0,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,R1,catboost_lo,1,cell,3,3,0,0,0.25,3.4137203755186603,,3,0,,17469,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,Re,catboost_lo,1,cell,3,3,0,0,0.25,3.4137203755186603,,3,0,,17469,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,StackR,catboost_lo,1,cell,3,3,0,0,0.25,,,3,0,reuse_R1,17469,0,,n<10,1.0,7.0,"{""P1"": 1.0}"
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,P1,none,1,cell,10,10,0,-1,0.0,6.298290278208647,,6,0,,0,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,Pe,none,1,cell,10,10,0,-1,0.0,6.298290278208647,,6,0,,0,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,Stack,none,1,cell,10,10,0,-1,0.0,,,6,0,,0,0,,,0.0,7.0,"{""Ca"": 1.0}"
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,P*,none,1,cell,10,10,0,-1,0.0,6.121729129489798,,6,0,,0,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,R1,catboost_lo,1,cell,10,10,0,0,0.25,6.298290278208647,,6,0,,17476,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,Re,catboost_lo,1,cell,10,10,0,0,0.25,6.298290278208647,,6,0,,17476,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,StackR,catboost_lo,1,cell,10,10,0,0,0.25,,,6,0,,17476,0,,,0.0,7.0,"{""Ca"": 1.0}"
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,P1,none,1,cell,-1,67,0,-1,0.0,9.802272151844724,,16,0,,0,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,Pe,none,1,cell,-1,67,0,-1,0.0,9.802272151844724,,16,0,,0,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,Stack,none,1,cell,-1,67,0,-1,0.0,,,16,0,,0,0,,,0.0,7.0,"{""Ss"": 0.10463482, ""Ca"": 0.89536518}"
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,P*,none,1,cell,-1,67,0,-1,0.0,9.354482315754371,,16,0,,0,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,R1,catboost_lo,1,cell,-1,67,0,0,0.25,9.802272151844724,,16,0,,17533,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,Re,catboost_lo,1,cell,-1,67,0,0,0.25,9.802272151844724,,16,0,,17533,0,,,,,
+xb_t,Tibet_LGD,x,Tibet_LGD,1,,cpu,xb_t,StackR,catboost_lo,1,cell,-1,67,0,0,0.25,,,16,0,,17533,0,,,0.0,7.0,"{""Ss"": 0.10463482, ""Ca"": 0.89536518}"

@@ -1,0 +1,224 @@
+/enc/ukrprod_CJsgU/work/scripts/2_evaluation/v5_aggregate.py:37: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  per_seed = df.groupby(KEY + ["seed"]).apply(lambda s: T.rmse(s.y.values, s.pred.values)).rename("rmse").reset_index()
+region scheme  forcing  featset method  learner  lam     n   rmse   bias      r  rmse_beq  r_anom  skill_anom
+Alaska  block year_obs       F8     D0 catboost -1.0 15540 34.701 11.739  0.517    25.163   0.104      -4.323
+Alaska  block year_obs       F8     P1        - -1.0 15540 18.577 -2.375  0.595    22.199   0.243       0.059
+Alaska  block year_obs       F8     R1 catboost  0.5 15540 24.467  2.197  0.581    22.100   0.124      -0.956
+Alaska  block year_obs      F8T     D0 catboost -1.0 15540 21.102  4.491  0.421    21.860   0.206      -0.000
+Alaska  block year_obs      F8T     P1        - -1.0 15540 18.577 -2.375  0.595    22.199   0.243       0.059
+Alaska  block year_obs      F8T     R1 catboost  0.5 15540 19.813 -0.131  0.557    21.439   0.245       0.054
+Alaska  block year_obs     F8TS     D0 catboost -1.0 15540 17.286  0.300  0.562    20.331   0.258       0.066
+Alaska  block year_obs     F8TS     P1        - -1.0 15540 18.577 -2.375  0.595    22.199   0.243       0.059
+Alaska  block year_obs     F8TS     R1 catboost  0.5 15540 18.422 -3.389  0.587    21.040   0.260       0.068
+Alaska  block year_obs F8TS_ALL     D0 catboost -1.0 15540 17.099  1.709  0.598    20.088   0.310       0.093
+Alaska  block year_obs F8TS_ALL     P1        - -1.0 15540 18.577 -2.375  0.595    22.199   0.243       0.059
+Alaska  block year_obs F8TS_ALL     R1 catboost  0.5 15540 17.830 -2.394  0.599    20.758   0.278       0.077
+Alaska  block year_obs   F8TS_L     D0 catboost -1.0 15540 17.180  0.258  0.569    20.299   0.299       0.089
+Alaska  block year_obs   F8TS_L     P1        - -1.0 15540 18.577 -2.375  0.595    22.199   0.243       0.059
+Alaska  block year_obs   F8TS_L     R1 catboost  0.5 15540 18.676 -3.619  0.584    20.928   0.285       0.081
+Alaska  block year_obs   F8TS_M     D0 catboost -1.0 15540 17.188  0.736  0.578    20.190   0.255       0.065
+Alaska  block year_obs   F8TS_M     P1        - -1.0 15540 18.577 -2.375  0.595    22.199   0.243       0.059
+Alaska  block year_obs   F8TS_M     R1 catboost  0.5 15540 18.137 -3.129  0.589    20.953   0.284       0.080
+Alaska  block year_obs F8TS_SAR     D0 catboost -1.0 15540 17.879  1.726  0.528    20.487   0.239       0.057
+Alaska  block year_obs F8TS_SAR     P1        - -1.0 15540 18.577 -2.375  0.595    22.199   0.243       0.059
+Alaska  block year_obs F8TS_SAR     R1 catboost  0.5 15540 17.842 -2.104  0.592    20.909   0.267       0.071
+Alaska  block year_obs   F8TS_X     D0 catboost -1.0 15540 17.614  1.988  0.551    20.288   0.233       0.054
+Alaska  block year_obs   F8TS_X     P1        - -1.0 15540 18.577 -2.375  0.595    22.199   0.243       0.059
+Alaska  block year_obs   F8TS_X     R1 catboost  0.5 15540 17.789 -2.563  0.601    20.977   0.266       0.071
+Alaska   year year_obs       F8     D0 catboost -1.0 15540 18.905  1.425  0.557    23.175   0.114      -1.024
+Alaska   year year_obs       F8     P1        - -1.0 15540 18.724 -3.325  0.590    21.900   0.232       0.049
+Alaska   year year_obs       F8     R1 catboost  0.5 15540 18.883 -2.714  0.578    22.137   0.178      -0.121
+Alaska   year year_obs      F8T     D0 catboost -1.0 15540 15.576 -0.051  0.673    16.321   0.122      -0.145
+Alaska   year year_obs      F8T     P1        - -1.0 15540 18.724 -3.325  0.590    21.900   0.232       0.049
+Alaska   year year_obs      F8T     R1 catboost  0.5 15540 17.373 -2.720  0.629    18.663   0.195      -0.000
+Alaska   year year_obs     F8TS     D0 catboost -1.0 15540 14.849 -2.056  0.708    15.116   0.111      -0.101
+Alaska   year year_obs     F8TS     P1        - -1.0 15540 18.724 -3.325  0.590    21.900   0.232       0.049
+Alaska   year year_obs     F8TS     R1 catboost  0.5 15540 17.261 -4.190  0.643    17.832   0.241       0.052
+Alaska   year year_obs F8TS_ALL     D0 catboost -1.0 15540 14.223 -1.369  0.733    14.516   0.177      -0.014
+Alaska   year year_obs F8TS_ALL     P1        - -1.0 15540 18.724 -3.325  0.590    21.900   0.232       0.049
+Alaska   year year_obs F8TS_ALL     R1 catboost  0.5 15540 16.934 -3.643  0.655    17.548   0.260       0.064
+Alaska   year year_obs   F8TS_L     D0 catboost -1.0 15540 14.590 -1.536  0.717    14.795   0.192      -0.028
+Alaska   year year_obs   F8TS_L     P1        - -1.0 15540 18.724 -3.325  0.590    21.900   0.232       0.049
+Alaska   year year_obs   F8TS_L     R1 catboost  0.5 15540 17.141 -4.296  0.647    17.890   0.269       0.067
+Alaska   year year_obs   F8TS_M     D0 catboost -1.0 15540 14.718 -1.501  0.711    14.850   0.102      -0.106
+Alaska   year year_obs   F8TS_M     P1        - -1.0 15540 18.724 -3.325  0.590    21.900   0.232       0.049
+Alaska   year year_obs   F8TS_M     R1 catboost  0.5 15540 17.334 -3.917  0.640    17.725   0.221       0.040
+Alaska   year year_obs F8TS_SAR     D0 catboost -1.0 15540 14.431 -1.077  0.722    14.804   0.112      -0.085
+Alaska   year year_obs F8TS_SAR     P1        - -1.0 15540 18.724 -3.325  0.590    21.900   0.232       0.049
+Alaska   year year_obs F8TS_SAR     R1 catboost  0.5 15540 16.929 -3.434  0.651    17.573   0.240       0.052
+Alaska   year year_obs   F8TS_X     D0 catboost -1.0 15540 14.440 -1.832  0.727    14.517   0.124      -0.081
+Alaska   year year_obs   F8TS_X     P1        - -1.0 15540 18.724 -3.325  0.590    21.900   0.232       0.049
+Alaska   year year_obs   F8TS_X     R1 catboost  0.5 15540 17.126 -3.759  0.653    17.470   0.242       0.052
+Canada  block year_obs       F8     D0 catboost -1.0  1196 43.057 19.050 -0.063    31.471  -0.127      -1.640
+Canada  block year_obs       F8     P1        - -1.0  1196 30.625  2.966  0.144    30.342   0.070      -0.164
+Canada  block year_obs       F8     R1 catboost  0.5  1196 34.506 11.228  0.059    27.823  -0.046      -0.502
+Canada  block year_obs      F8T     D0 catboost -1.0  1196 28.007  6.264  0.466    25.096  -0.066      -0.265
+Canada  block year_obs      F8T     P1        - -1.0  1196 30.625  2.966  0.144    30.342   0.070      -0.164
+Canada  block year_obs      F8T     R1 catboost  0.5  1196 27.810  4.824  0.480    27.296   0.030      -0.290
+Canada  block year_obs     F8TS     D0 catboost -1.0  1196 26.055  1.351  0.585    26.034   0.038      -0.060
+Canada  block year_obs     F8TS     P1        - -1.0  1196 30.625  2.966  0.144    30.342   0.070      -0.164
+Canada  block year_obs     F8TS     R1 catboost  0.5  1196 26.888  2.377  0.550    27.831   0.070      -0.234
+Canada  block year_obs F8TS_ALL     D0 catboost -1.0  1196 25.572  1.054  0.620    25.391   0.025      -0.063
+Canada  block year_obs F8TS_ALL     P1        - -1.0  1196 30.625  2.966  0.144    30.342   0.070      -0.164
+Canada  block year_obs F8TS_ALL     R1 catboost  0.5  1196 26.770  2.333  0.559    27.274   0.066      -0.227
+Canada  block year_obs   F8TS_L     D0 catboost -1.0  1196 26.272  1.227  0.575    25.689  -0.019      -0.159
+Canada  block year_obs   F8TS_L     P1        - -1.0  1196 30.625  2.966  0.144    30.342   0.070      -0.164
+Canada  block year_obs   F8TS_L     R1 catboost  0.5  1196 27.330  2.641  0.516    27.876   0.044      -0.274
+Canada  block year_obs   F8TS_M     D0 catboost -1.0  1196 25.486  3.092  0.625    26.204   0.163       0.026
+Canada  block year_obs   F8TS_M     P1        - -1.0  1196 30.625  2.966  0.144    30.342   0.070      -0.164
+Canada  block year_obs   F8TS_M     R1 catboost  0.5  1196 26.815  2.648  0.557    28.192   0.076      -0.176
+Canada  block year_obs   F8TS_X     D0 catboost -1.0  1196 26.074  0.840  0.579    24.575   0.020      -0.112
+Canada  block year_obs   F8TS_X     P1        - -1.0  1196 30.625  2.966  0.144    30.342   0.070      -0.164
+Canada  block year_obs   F8TS_X     R1 catboost  0.5  1196 27.017  2.398  0.536    27.095   0.052      -0.291
+Canada   year year_obs       F8     D0 catboost -1.0  1164 45.811 29.163 -0.238    33.653  -0.078      -2.245
+Canada   year year_obs       F8     P1        - -1.0  1164 28.108  3.694  0.480    29.067   0.041      -0.276
+Canada   year year_obs       F8     R1 catboost  0.5  1164 34.019 15.761  0.152    28.697  -0.059      -0.486
+Canada   year year_obs      F8T     D0 catboost -1.0  1164 24.318  8.458  0.675    21.246  -0.085      -0.322
+Canada   year year_obs      F8T     P1        - -1.0  1164 28.108  3.694  0.480    29.067   0.041      -0.276
+Canada   year year_obs      F8T     R1 catboost  0.5  1164 24.481  5.808  0.702    22.560   0.008      -0.333
+Canada   year year_obs     F8TS     D0 catboost -1.0  1164 24.642  7.258  0.635    22.808  -0.301      -0.311
+Canada   year year_obs     F8TS     P1        - -1.0  1164 28.108  3.694  0.480    29.067   0.041      -0.276
+Canada   year year_obs     F8TS     R1 catboost  0.5  1164 24.270  5.033  0.674    22.862  -0.047      -0.476
+Canada   year year_obs F8TS_ALL     D0 catboost -1.0  1164 20.491  4.470  0.760    20.560  -0.396      -0.313
+Canada   year year_obs F8TS_ALL     P1        - -1.0  1164 28.108  3.694  0.480    29.067   0.041      -0.276
+Canada   year year_obs F8TS_ALL     R1 catboost  0.5  1164 22.463  3.889  0.761    21.943  -0.065      -0.428
+Canada   year year_obs   F8TS_L     D0 catboost -1.0  1164 23.818  5.845  0.653    21.962  -0.202      -0.283
+Canada   year year_obs   F8TS_L     P1        - -1.0  1164 28.108  3.694  0.480    29.067   0.041      -0.276
+Canada   year year_obs   F8TS_L     R1 catboost  0.5  1164 24.293  4.762  0.679    22.822  -0.038      -0.409
+Canada   year year_obs   F8TS_M     D0 catboost -1.0  1164 22.285  6.621  0.716    21.587  -0.261      -0.305
+Canada   year year_obs   F8TS_M     P1        - -1.0  1164 28.108  3.694  0.480    29.067   0.041      -0.276
+Canada   year year_obs   F8TS_M     R1 catboost  0.5  1164 23.401  5.035  0.723    22.412  -0.050      -0.401
+Canada   year year_obs   F8TS_X     D0 catboost -1.0  1164 20.980  5.342  0.747    20.726  -0.531      -0.400
+Canada   year year_obs   F8TS_X     P1        - -1.0  1164 28.108  3.694  0.480    29.067   0.041      -0.276
+Canada   year year_obs   F8TS_X     R1 catboost  0.5  1164 22.554  4.023  0.752    21.956  -0.075      -0.466
+  Lena  block year_obs       F8     D0 catboost -1.0  2436 17.784  3.030  0.624    24.975   0.115      -0.372
+  Lena  block year_obs       F8     P1        - -1.0  2436 21.037  1.076  0.330    28.503   0.375       0.138
+  Lena  block year_obs       F8     R1 catboost  0.5  2436 17.841  2.293  0.634    24.165   0.271       0.016
+  Lena  block year_obs      F8T     D0 catboost -1.0  2436 15.715 -0.259  0.704    21.942   0.216      -0.647
+  Lena  block year_obs      F8T     P1        - -1.0  2436 21.037  1.076  0.330    28.503   0.375       0.138
+  Lena  block year_obs      F8T     R1 catboost  0.5  2436 17.026  0.462  0.683    22.400   0.313      -0.021
+  Lena  block year_obs     F8TS     D0 catboost -1.0  2436 15.879 -0.192  0.697    22.208   0.205      -0.502
+  Lena  block year_obs     F8TS     P1        - -1.0  2436 21.037  1.076  0.330    28.503   0.375       0.138
+  Lena  block year_obs     F8TS     R1 catboost  0.5  2436 17.444  0.517  0.667    23.422   0.305      -0.071
+  Lena  block year_obs F8TS_ALL     D0 catboost -1.0  2436 15.320 -0.157  0.725    20.981   0.300      -0.175
+  Lena  block year_obs F8TS_ALL     P1        - -1.0  2436 21.037  1.076  0.330    28.503   0.375       0.138
+  Lena  block year_obs F8TS_ALL     R1 catboost  0.5  2436 17.280  0.452  0.687    22.837   0.352       0.074
+  Lena  block year_obs   F8TS_L     D0 catboost -1.0  2436 15.897  0.043  0.696    22.463   0.237      -0.685
+  Lena  block year_obs   F8TS_L     P1        - -1.0  2436 21.037  1.076  0.330    28.503   0.375       0.138
+  Lena  block year_obs   F8TS_L     R1 catboost  0.5  2436 17.422  0.681  0.666    23.577   0.314      -0.090
+  Lena  block year_obs   F8TS_M     D0 catboost -1.0  2436 15.696 -0.877  0.711    21.714   0.247      -0.338
+  Lena  block year_obs   F8TS_M     P1        - -1.0  2436 21.037  1.076  0.330    28.503   0.375       0.138
+  Lena  block year_obs   F8TS_M     R1 catboost  0.5  2436 17.525  0.046  0.667    22.938   0.331       0.025
+  Lena  block year_obs   F8TS_X     D0 catboost -1.0  2436 15.772  0.690  0.704    22.443   0.228      -0.208
+  Lena  block year_obs   F8TS_X     P1        - -1.0  2436 21.037  1.076  0.330    28.503   0.375       0.138
+  Lena  block year_obs   F8TS_X     R1 catboost  0.5  2436 17.253  0.747  0.688    22.642   0.328       0.056
+  Lena   year year_obs       F8     D0 catboost -1.0  2419 23.073  4.578  0.097    29.262  -0.012      -1.264
+  Lena   year year_obs       F8     P1        - -1.0  2419 21.230  0.993  0.296    29.555   0.450       0.198
+  Lena   year year_obs       F8     R1 catboost  0.5  2419 21.427  2.406  0.267    29.101   0.245      -0.124
+  Lena   year year_obs      F8T     D0 catboost -1.0  2419 20.614  0.746  0.359    29.629   0.050      -0.740
+  Lena   year year_obs      F8T     P1        - -1.0  2419 21.230  0.993  0.296    29.555   0.450       0.198
+  Lena   year year_obs      F8T     R1 catboost  0.5  2419 20.307  0.223  0.412    29.232   0.287      -0.058
+  Lena   year year_obs     F8TS     D0 catboost -1.0  2419 20.192  0.473  0.404    28.817   0.067      -0.463
+  Lena   year year_obs     F8TS     P1        - -1.0  2419 21.230  0.993  0.296    29.555   0.450       0.198
+  Lena   year year_obs     F8TS     R1 catboost  0.5  2419 20.096  0.268  0.446    28.792   0.345       0.058
+  Lena   year year_obs F8TS_ALL     D0 catboost -1.0  2419 20.384  1.339  0.388    28.221   0.274      -0.117
+  Lena   year year_obs F8TS_ALL     P1        - -1.0  2419 21.230  0.993  0.296    29.555   0.450       0.198
+  Lena   year year_obs F8TS_ALL     R1 catboost  0.5  2419 20.299  0.703  0.408    28.657   0.423       0.121
+  Lena   year year_obs   F8TS_L     D0 catboost -1.0  2419 19.566  1.009  0.476    28.261   0.297      -0.069
+  Lena   year year_obs   F8TS_L     P1        - -1.0  2419 21.230  0.993  0.296    29.555   0.450       0.198
+  Lena   year year_obs   F8TS_L     R1 catboost  0.5  2419 19.970  0.680  0.460    28.594   0.459       0.166
+  Lena   year year_obs   F8TS_M     D0 catboost -1.0  2419 20.038  0.730  0.421    28.103   0.037      -0.446
+  Lena   year year_obs   F8TS_M     P1        - -1.0  2419 21.230  0.993  0.296    29.555   0.450       0.198
+  Lena   year year_obs   F8TS_M     R1 catboost  0.5  2419 20.117  0.439  0.443    28.581   0.317       0.024
+  Lena   year year_obs   F8TS_X     D0 catboost -1.0  2419 20.369  1.186  0.388    27.695   0.039      -0.430
+  Lena   year year_obs   F8TS_X     P1        - -1.0  2419 21.230  0.993  0.296    29.555   0.450       0.198
+  Lena   year year_obs   F8TS_X     R1 catboost  0.5  2419 20.179  0.735  0.433    28.440   0.316       0.014
+region scheme  forcing method  learner  lam  delta     lo    hi  delta_beq  lo_beq  hi_beq
+Alaska  block year_obs     D0 catboost -1.0  16.12  -2.80 37.94       2.96   -1.59    8.70
+Alaska  block year_obs     R1 catboost  0.5   5.89  -0.30 14.20      -0.10   -1.76    1.97
+Alaska  block year_obs     D0 catboost -1.0   2.52  -1.88  8.07      -0.34   -2.76    1.79
+Alaska  block year_obs     R1 catboost  0.5   1.24  -1.93  5.90      -0.76   -2.09    0.32
+Alaska  block year_obs     D0 catboost -1.0  -1.29  -3.97  1.47      -1.87   -4.59    0.22
+Alaska  block year_obs     R1 catboost  0.5  -0.15  -0.56  0.11      -1.16   -2.34   -0.17
+Alaska  block year_obs     D0 catboost -1.0  -1.48  -3.12  0.32      -2.11   -4.76   -0.19
+Alaska  block year_obs     R1 catboost  0.5  -0.75  -1.26 -0.22      -1.44   -2.42   -0.66
+Alaska  block year_obs     D0 catboost -1.0  -1.40  -4.01  1.25      -1.90   -4.61    0.10
+Alaska  block year_obs     R1 catboost  0.5   0.10  -0.67  0.59      -1.27   -2.44   -0.29
+Alaska  block year_obs     D0 catboost -1.0  -1.39  -3.54  0.93      -2.01   -4.72    0.02
+Alaska  block year_obs     R1 catboost  0.5  -0.44  -0.86  0.05      -1.25   -2.39   -0.34
+Alaska  block year_obs     D0 catboost -1.0  -0.70  -2.19  1.16      -1.71   -3.98   -0.02
+Alaska  block year_obs     R1 catboost  0.5  -0.74  -1.66  0.20      -1.29   -2.35   -0.52
+Alaska  block year_obs     D0 catboost -1.0  -0.96  -2.58  1.03      -1.91   -4.58    0.08
+Alaska  block year_obs     R1 catboost  0.5  -0.79  -1.41 -0.15      -1.22   -2.32   -0.34
+Alaska   year year_obs     D0 catboost -1.0   0.18  -3.68  5.16       1.27   -1.14    4.07
+Alaska   year year_obs     R1 catboost  0.5   0.16  -1.08  1.84       0.24   -0.99    1.62
+Alaska   year year_obs     D0 catboost -1.0  -3.15  -5.08 -0.58      -5.58   -8.91   -2.79
+Alaska   year year_obs     R1 catboost  0.5  -1.35  -2.80  0.78      -3.24   -5.10   -1.69
+Alaska   year year_obs     D0 catboost -1.0  -3.88  -5.07 -2.26      -6.78  -10.39   -3.52
+Alaska   year year_obs     R1 catboost  0.5  -1.46  -2.93 -0.15      -4.07   -6.22   -2.06
+Alaska   year year_obs     D0 catboost -1.0  -4.50  -6.15 -2.49      -7.38  -11.27   -3.83
+Alaska   year year_obs     R1 catboost  0.5  -1.79  -3.50 -0.41      -4.35   -6.45   -2.44
+Alaska   year year_obs     D0 catboost -1.0  -4.13  -5.50 -2.37      -7.10  -10.78   -3.77
+Alaska   year year_obs     R1 catboost  0.5  -1.58  -3.02 -0.56      -4.01   -6.07   -2.08
+Alaska   year year_obs     D0 catboost -1.0  -4.01  -5.34 -2.19      -7.05  -10.81   -3.65
+Alaska   year year_obs     R1 catboost  0.5  -1.39  -2.86 -0.07      -4.18   -6.39   -2.15
+Alaska   year year_obs     D0 catboost -1.0  -4.29  -5.78 -2.16      -7.10  -10.96   -3.58
+Alaska   year year_obs     R1 catboost  0.5  -1.80  -3.20 -0.26      -4.33   -6.58   -2.20
+Alaska   year year_obs     D0 catboost -1.0  -4.28  -5.97 -2.40      -7.38  -11.41   -3.69
+Alaska   year year_obs     R1 catboost  0.5  -1.60  -3.59 -0.09      -4.43   -6.80   -2.32
+Canada  block year_obs     D0 catboost -1.0  12.43  -5.18 23.60       1.13   -3.98    7.36
+Canada  block year_obs     R1 catboost  0.5   3.88  -5.10 10.33      -2.52   -6.13    0.66
+Canada  block year_obs     D0 catboost -1.0  -2.62  -6.77  0.20      -5.25   -8.55   -2.10
+Canada  block year_obs     R1 catboost  0.5  -2.82  -5.89 -0.78      -3.05   -4.29   -1.82
+Canada  block year_obs     D0 catboost -1.0  -4.57  -6.27 -0.17      -4.31   -6.69   -2.05
+Canada  block year_obs     R1 catboost  0.5  -3.74  -4.78 -0.82      -2.51   -3.47   -1.70
+Canada  block year_obs     D0 catboost -1.0  -5.05  -7.08 -1.05      -4.95   -8.43   -2.13
+Canada  block year_obs     R1 catboost  0.5  -3.85  -4.79 -1.28      -3.07   -4.40   -1.91
+Canada  block year_obs     D0 catboost -1.0  -4.35  -6.12 -0.45      -4.65   -7.17   -2.14
+Canada  block year_obs     R1 catboost  0.5  -3.30  -4.38 -0.80      -2.47   -3.37   -1.68
+Canada  block year_obs     D0 catboost -1.0  -5.14  -6.67 -0.41      -4.14   -6.63   -1.83
+Canada  block year_obs     R1 catboost  0.5  -3.81  -5.06 -0.67      -2.15   -3.13   -1.32
+Canada  block year_obs     D0 catboost -1.0  -4.55  -7.28 -0.63      -5.77   -9.84   -1.86
+Canada  block year_obs     R1 catboost  0.5  -3.61  -4.48 -1.22      -3.25   -4.52   -2.04
+Canada   year year_obs     D0 catboost -1.0  17.70  -0.49 26.94       4.59   -3.70   12.84
+Canada   year year_obs     R1 catboost  0.5   5.91  -2.52 11.02      -0.37   -4.65    4.05
+Canada   year year_obs     D0 catboost -1.0  -3.79  -9.43  6.71      -7.82  -18.69    0.47
+Canada   year year_obs     R1 catboost  0.5  -3.63  -6.62  1.49      -6.51  -12.69   -1.49
+Canada   year year_obs     D0 catboost -1.0  -3.47 -10.19 10.47      -6.26  -17.62    2.85
+Canada   year year_obs     R1 catboost  0.5  -3.84  -6.95  2.57      -6.21  -12.72   -0.64
+Canada   year year_obs     D0 catboost -1.0  -7.62 -12.26  2.04      -8.51  -20.24    0.02
+Canada   year year_obs     R1 catboost  0.5  -5.65  -8.22 -0.42      -7.12  -13.88   -1.64
+Canada   year year_obs     D0 catboost -1.0  -4.29  -9.58  6.95      -7.11  -18.49    1.64
+Canada   year year_obs     R1 catboost  0.5  -3.81  -6.71  2.31      -6.25  -12.74   -0.76
+Canada   year year_obs     D0 catboost -1.0  -5.82 -11.16  4.79      -7.48  -18.94    1.06
+Canada   year year_obs     R1 catboost  0.5  -4.71  -7.72  1.06      -6.66  -13.37   -1.16
+Canada   year year_obs     D0 catboost -1.0  -7.13 -12.51  3.67      -8.34  -19.93    0.20
+Canada   year year_obs     R1 catboost  0.5  -5.55  -8.37  0.12      -7.11  -13.71   -1.64
+  Lena  block year_obs     D0 catboost -1.0  -3.25 -11.34  1.99      -3.53  -10.70    4.82
+  Lena  block year_obs     R1 catboost  0.5  -3.20  -9.30  0.39      -4.34   -8.54   -0.43
+  Lena  block year_obs     D0 catboost -1.0  -5.32 -13.01  0.28      -6.56  -14.11    2.70
+  Lena  block year_obs     R1 catboost  0.5  -4.01  -8.97 -0.77      -6.10   -9.58   -1.54
+  Lena  block year_obs     D0 catboost -1.0  -5.16 -12.30  0.01      -6.29  -13.16    2.36
+  Lena  block year_obs     R1 catboost  0.5  -3.59  -7.86 -0.75      -5.08   -8.06   -1.29
+  Lena  block year_obs     D0 catboost -1.0  -5.72 -13.19 -0.54      -7.52  -13.76    1.19
+  Lena  block year_obs     R1 catboost  0.5  -3.76  -7.91 -0.92      -5.67   -8.88   -1.32
+  Lena  block year_obs     D0 catboost -1.0  -5.14 -12.24 -0.02      -6.04  -13.06    2.54
+  Lena  block year_obs     R1 catboost  0.5  -3.61  -7.91 -0.73      -4.93   -7.98   -1.37
+  Lena  block year_obs     D0 catboost -1.0  -5.34 -11.90 -0.42      -6.79  -12.87    1.53
+  Lena  block year_obs     R1 catboost  0.5  -3.51  -7.19 -0.91      -5.57   -8.31   -1.76
+  Lena  block year_obs     D0 catboost -1.0  -5.26 -12.28 -0.04      -6.06  -12.77    2.96
+  Lena  block year_obs     R1 catboost  0.5  -3.78  -8.33 -0.77      -5.86   -9.28   -1.24
+  Lena   year year_obs     D0 catboost -1.0   1.84  -0.47  5.01      -0.29   -1.63    1.95
+  Lena   year year_obs     R1 catboost  0.5   0.20  -0.40  0.98      -0.45   -1.06    0.44
+  Lena   year year_obs     D0 catboost -1.0  -0.62  -1.98  1.19       0.07   -1.45    2.47
+  Lena   year year_obs     R1 catboost  0.5  -0.92  -1.50 -0.20      -0.32   -1.23    0.72
+  Lena   year year_obs     D0 catboost -1.0  -1.04  -2.66  0.78      -0.74   -2.43    1.21
+  Lena   year year_obs     R1 catboost  0.5  -1.13  -1.85 -0.40      -0.76   -1.71    0.22
+  Lena   year year_obs     D0 catboost -1.0  -0.85  -2.27  1.44      -1.33   -2.89    1.17
+  Lena   year year_obs     R1 catboost  0.5  -0.93  -1.48 -0.09      -0.90   -1.55    0.19
+  Lena   year year_obs     D0 catboost -1.0  -1.66  -3.83  0.56      -1.29   -3.55    1.78
+  Lena   year year_obs     R1 catboost  0.5  -1.26  -2.13 -0.36      -0.96   -1.98    0.28
+  Lena   year year_obs     D0 catboost -1.0  -1.19  -2.77  0.63      -1.45   -2.81    0.50
+  Lena   year year_obs     R1 catboost  0.5  -1.11  -1.76 -0.34      -0.97   -1.65   -0.28
+  Lena   year year_obs     D0 catboost -1.0  -0.86  -2.39  1.23      -1.86   -3.46    0.66
+  Lena   year year_obs     R1 catboost  0.5  -1.05  -1.77 -0.03      -1.12   -1.81   -0.12

@@ -1,0 +1,16 @@
+{
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md",
+ "plan_commit": "2678100",
+ "nboot": 500,
+ "holm_m": 20,
+ "stores_x": [
+  "AL-3|x",
+  "Russia_W|x"
+ ],
+ "stores_r": [
+  "AL-2|r"
+ ],
+ "code_sha256": "303215cc37c241dfb6c224af52838278361b9affaaab7d7ca1da07b66c9ae0d7",
+ "created": "2026-10-04 16:00:44",
+ "opening_order": "계획 0.3: 비알래스카 행은 S9* 동결 커밋 뒤, 나머지 R1a 판정 표는 R2a 제출 뒤에 연다"
+}

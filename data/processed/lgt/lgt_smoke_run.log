@@ -1,0 +1,90 @@
+start 2026-09-30 01:29:47
+[data] 17,467셀 · 축 ['main', 'sens'] · 민감도 ['d3', 'd10', 'rid', 'tgt'] · 분할 1–1 · n [0, 10, 40, -1] · seed 1 · λ [0.25, 0.5, 1.0] · 하위 지역 map:lg_subregion_map_v1.csv · 작업 단위 4(건너뜀 0) · 스레드 2
+[plan] 실행 4 · 재개로 건너뜀 0 · GPU [9](프로세스 1개) · 스레드 2 · 가중치 tabpfn-v2-regressor.ckpt SHA-1 9bfedc2abaad · tabpfn 8.0.7 · n_estimators 8 · 컨텍스트 상한 10,000 · run_id 19082-20260930T013013 · 기록 /home/willy010313/Polar_Bigdata/data/processed/lgt/run_lgt_smoke
+  [main|Canada|x|s1] 적합 22 · 행 61 · 컨텍스트 최대 9355 · A 355 · 채점 393/20블록 · 원천 16697 · 93.6s · GPU '9' 메모리 최댓값 1579.9 MiB(예약 4402.0 MiB) · 상태 ok(실패 0) · 완료 1/4 · 누적 123s
+  [main|Russia_W|x|s1] 적합 16 · 행 46 · 컨텍스트 최대 9016 · A 16 · 채점 12/7블록 · 원천 17436 · 56.1s · GPU '9' 메모리 최댓값 1445.1 MiB(예약 3306.0 MiB) · 상태 ok(실패 0) · 완료 2/4 · 누적 180s
+  [sens|Canada|x|s1] 적합 40 · 행 85 · 컨텍스트 최대 9400 · A 355 · 채점 393/20블록 · 원천 16697 · 132.9s · GPU '9' 메모리 최댓값 1619.2 MiB(예약 5534.0 MiB) · 상태 ok(실패 0) · 완료 3/4 · 누적 313s
+  [sens|Russia_W|x|s1] 적합 20 · 행 44 · 컨텍스트 최대 9100 · A 16 · 채점 12/7블록 · 원천 17436 · 87.3s · GPU '9' 메모리 최댓값 1480.9 MiB(예약 4350.0 MiB) · 상태 ok(실패 0) · 완료 4/4 · 누적 401s
+[done] 완료 4 · 실패 0 · 일부 적합 실패 0 · 격리 0 · 402s · 상태 기록 /home/willy010313/Polar_Bigdata/data/processed/lgt/lgt_smoke_run_status.json
+[summarize] 변형·학습기별 적합 시간(전 조각 합계)
+axis      learner  n_fit    sec        rows  sec_per_fit
+ d10 catboost_ctx      6   2.02 9175.000000     0.336667
+ d10       tabpfn      6  34.48 9175.000000     5.746667
+  d3 catboost_ctx      6   2.07 9052.500000     0.345000
+  d3       tabpfn      6  35.68 9052.500000     5.946667
+main catboost_ctx     19   7.64 9061.305556     0.402105
+main       tabpfn     19 124.02 9061.305556     6.527368
+ rid catboost_ctx     14   6.44 9054.958333     0.460000
+ rid       tabpfn     14  86.14 9054.958333     6.152857
+ tgt catboost_ctx      4   0.43  197.500000     0.107500
+ tgt       tabpfn      4   3.26  197.500000     0.815000
+[smoke] 같은 행렬 True(짝 51) · n = 0 의 R1 = R0 True(키 12) · 묶음 예측 차이 0.05553436279296875 cm(허용 0.001) · CatBoost Pool 경로 차이 0.0 cm · GPU 메모리 최댓값 할당 1619.2 MiB, 예약 5534.0 MiB · 장치 대응 확인 ['PID']
+[smoke] TabPFN 열 분류(변형|컨텍스트 크기 → {분류: 적합 수}): {"main|ctx>100": {"{\"cat\": [24], \"const\": [], \"n_est\": 8}": 19}, "d3|ctx>100": {"{\"cat\": [24], \"const\": [], \"n_est\": 8}": 6}, "d10|ctx>100": {"{\"cat\": [24], \"const\": [], \"n_est\": 8}": 6}, "rid|ctx>100": {"{\"cat\": [24, 25], \"const\": [], \"n_est\": 8}": 14}, "tgt|ctx<=100": {"{\"cat\": [], \"const\": [24], \"n_est\": 8}": 2}, "tgt|ctx>100": {"{\"cat\": [24], \"const\": [], \"n_est\": 8}": 2}}
+[smoke] 적합 1건 시간(s, 변형·학습기·방법·n 별, 스모크 점검 시간 제외)
+ctx_set      learner method  n  n_fit  sec_mean  sec_max  n_ctx_mean  n_eval_mean  est_mean
+    d10 catboost_ctx     D0 10      2     0.344    0.365      9100.0        202.5     0.378
+    d10 catboost_ctx     D0 40      1     0.335    0.335      9400.0        393.0     0.385
+    d10 catboost_ctx     R1 10      2     0.330    0.338      9100.0        202.5     0.378
+    d10 catboost_ctx     R1 40      1     0.331    0.331      9400.0        393.0     0.385
+    d10       tabpfn     D0 10      2     5.578    6.032      9100.0        202.5     6.770
+    d10       tabpfn     D0 40      1     6.061    6.061      9400.0        393.0     7.086
+    d10       tabpfn     R1 10      2     5.597    6.067      9100.0        202.5     6.770
+    d10       tabpfn     R1 40      1     6.073    6.073      9400.0        393.0     7.086
+     d3 catboost_ctx     D0 10      2     0.358    0.370      9030.0        202.5     0.376
+     d3 catboost_ctx     D0 40      1     0.326    0.326      9120.0        393.0     0.378
+     d3 catboost_ctx     R1 10      2     0.345    0.370      9030.0        202.5     0.376
+     d3 catboost_ctx     R1 40      1     0.330    0.330      9120.0        393.0     0.378
+     d3       tabpfn     D0 10      2     5.941    6.087      9030.0        202.5     6.722
+     d3       tabpfn     D0 40      1     6.085    6.085      9120.0        393.0     6.889
+     d3       tabpfn     R1 10      2     5.870    5.989      9030.0        202.5     6.722
+     d3       tabpfn     R1 40      1     5.980    5.980      9120.0        393.0     6.889
+   main catboost_ctx     D0 -1      2     0.415    0.486      9185.5        202.5     0.380
+   main catboost_ctx     D0  0      2     0.734    1.124      9000.0        202.5     0.375
+   main catboost_ctx     D0 10      2     0.352    0.375      9010.0        202.5     0.376
+   main catboost_ctx     D0 40      1     0.328    0.328      9040.0        393.0     0.376
+   main catboost_ctx     R0 -1      2     0.344    0.346      9185.5        202.5     0.380
+   main catboost_ctx     R0  0      2     0.354    0.364      9000.0        202.5     0.375
+   main catboost_ctx     R0 10      2     0.415    0.465      9010.0        202.5     0.376
+   main catboost_ctx     R0 40      1     0.325    0.325      9040.0        393.0     0.376
+   main catboost_ctx     R1 -1      2     0.361    0.382      9185.5        202.5     0.380
+   main catboost_ctx     R1 10      2     0.357    0.381      9010.0        202.5     0.376
+   main catboost_ctx     R1 40      1     0.331    0.331      9040.0        393.0     0.376
+   main       tabpfn     D0 -1      2     5.977    6.251      9185.5        202.5     6.831
+   main       tabpfn     D0  0      2    12.558   19.433      9000.0        202.5     6.701
+   main       tabpfn     D0 10      2     5.562    6.066      9010.0        202.5     6.708
+   main       tabpfn     D0 40      1     5.794    5.794      9040.0        393.0     6.833
+   main       tabpfn     R0 -1      2     5.983    6.249      9185.5        202.5     6.831
+   main       tabpfn     R0  0      2     5.796    5.922      9000.0        202.5     6.701
+   main       tabpfn     R0 10      2     5.739    5.915      9010.0        202.5     6.708
+   main       tabpfn     R0 40      1     5.839    5.839      9040.0        393.0     6.833
+   main       tabpfn     R1 -1      2     6.001    6.178      9185.5        202.5     6.831
+   main       tabpfn     R1 10      2     5.730    5.930      9010.0        202.5     6.708
+   main       tabpfn     R1 40      1     5.713    5.713      9040.0        393.0     6.833
+    rid catboost_ctx D0@rid -1      2     0.466    0.471      9185.5        202.5     0.380
+    rid catboost_ctx D0@rid  0      2     0.459    0.465      9000.0        202.5     0.375
+    rid catboost_ctx D0@rid 10      2     0.458    0.463      9010.0        202.5     0.376
+    rid catboost_ctx D0@rid 40      1     0.452    0.452      9040.0        393.0     0.376
+    rid catboost_ctx R1@rid -1      2     0.466    0.467      9185.5        202.5     0.380
+    rid catboost_ctx R1@rid  0      2     0.457    0.462      9000.0        202.5     0.375
+    rid catboost_ctx R1@rid 10      2     0.460    0.467      9010.0        202.5     0.376
+    rid catboost_ctx R1@rid 40      1     0.451    0.451      9040.0        393.0     0.376
+    rid       tabpfn D0@rid -1      2     6.287    6.502      9185.5        202.5     6.831
+    rid       tabpfn D0@rid  0      2     6.187    6.211      9000.0        202.5     6.701
+    rid       tabpfn D0@rid 10      2     6.152    6.186      9010.0        202.5     6.708
+    rid       tabpfn D0@rid 40      1     6.158    6.158      9040.0        393.0     6.833
+    rid       tabpfn R1@rid -1      2     6.017    6.051      9185.5        202.5     6.831
+    rid       tabpfn R1@rid  0      2     6.312    6.360      9000.0        202.5     6.701
+    rid       tabpfn R1@rid 10      2     6.216    6.222      9010.0        202.5     6.708
+    rid       tabpfn R1@rid 40      1     5.644    5.644      9040.0        393.0     6.833
+    tgt catboost_ctx D0@tgt -1      1     0.138    0.138       355.0        393.0     0.054
+    tgt catboost_ctx D0@tgt 40      1     0.083    0.083        40.0        393.0     0.015
+    tgt catboost_ctx R1@tgt -1      1     0.141    0.141       355.0        393.0     0.054
+    tgt catboost_ctx R1@tgt 40      1     0.068    0.068        40.0        393.0     0.015
+    tgt       tabpfn D0@tgt -1      1     0.858    0.858       355.0        393.0     0.749
+    tgt       tabpfn D0@tgt 40      1     0.818    0.818        40.0        393.0     0.528
+    tgt       tabpfn R1@tgt -1      1     0.826    0.826       355.0        393.0     0.749
+    tgt       tabpfn R1@tgt 40      1     0.754    0.754        40.0        393.0     0.528
+[smoke] 실측/추정식(계획서 §6C.10) 비: {'catboost_ctx': 1.085, 'tabpfn': 0.922} · 집계 경로: {'n_curve': 227, 'n_minn': 86, 'n_tests': 228, 'n_tests_delta': 184, 'n_verdict': 11, 'n_verdict_na': 11, 'test_ids': ['L32', 'L33', 'L34', 'L35', 'L36', 'L37'], 'n_unpaired_keys': 0}
+[summarize] 조각 4 · runs 227 · curve 227 · minn 86 · tests 228 · cross 0 · 3s → /home/willy010313/Polar_Bigdata/data/processed/lgt/lgt_smoke_*
+exit=0
+end 2026-09-30 01:36:33

@@ -1,0 +1,14 @@
+[load] usable 19,172 E_src {"Alaska": 1.714, "Lena": 1.924, "Canada": 1.918} 1s
+[LL Lena b0] 46s
+[LL Lena b1] 90s
+[LL Lena b2] 133s
+[LL Lena b3] 176s
+[LL Lena b4] 220s
+[LL Lena] rows 358,092 223s
+[TL Lena b0] 74s
+[TL Lena b1] 145s
+[TL Lena b2] 214s
+[TL Lena b3] 284s
+[TL Lena b4] 355s
+[TL Lena] rows 267,960 357s
+[done] 582s

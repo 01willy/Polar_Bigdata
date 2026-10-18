@@ -1,0 +1,13 @@
+learner,kind,target,mode,criterion,trial,cstar,sel_flag,diff,d_bar,se,wins,F,need,sel_sig,main_trial,same_as_main
+mlp,D,Canada,x,cw,1,1.0,smoke_fixed,,,,0.0,0.0,0.0,88541ea332fa,1,True
+mlp,R,Canada,x,cw,1,1.0,smoke_fixed,,,,0.0,0.0,0.0,88541ea332fa,1,True
+mlp,R,Canada,x,l25,1,1.0,smoke_fixed,,,,0.0,0.0,0.0,88541ea332fa,1,True
+tabm,D,Canada,x,cw,1,1.0,smoke_fixed,,,,0.0,0.0,0.0,f2ede8e83506,1,True
+tabm,R,Canada,x,cw,1,1.0,smoke_fixed,,,,0.0,0.0,0.0,f2ede8e83506,1,True
+tabm,R,Canada,x,l25,1,1.0,smoke_fixed,,,,0.0,0.0,0.0,f2ede8e83506,1,True
+ftt,D,Canada,x,cw,1,1.0,smoke_fixed,,,,0.0,0.0,0.0,6ac065683353,1,True
+ftt,R,Canada,x,cw,1,1.0,smoke_fixed,,,,0.0,0.0,0.0,6ac065683353,1,True
+ftt,R,Canada,x,l25,1,1.0,smoke_fixed,,,,0.0,0.0,0.0,6ac065683353,1,True
+realmlp,D,Canada,x,cw,1,1.0,smoke_fixed,,,,0.0,0.0,0.0,c200c7a008c3,1,True
+realmlp,R,Canada,x,cw,1,1.0,smoke_fixed,,,,0.0,0.0,0.0,c200c7a008c3,1,True
+realmlp,R,Canada,x,l25,1,1.0,smoke_fixed,,,,0.0,0.0,0.0,c200c7a008c3,1,True

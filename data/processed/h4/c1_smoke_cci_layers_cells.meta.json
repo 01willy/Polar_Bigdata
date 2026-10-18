@@ -1,0 +1,57 @@
+{
+ "files": {
+  "alt": [
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2020-fv04.0.nc",
+   "ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2021-fv04.0.nc"
+  ],
+  "pfr": [
+   "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2020-fv04.0.nc",
+   "ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2021-fv04.0.nc"
+  ],
+  "gtd": [
+   "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2020-fv04.0.nc",
+   "ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2021-fv04.0.nc"
+  ]
+ },
+ "years": {
+  "alt": [
+   2020,
+   2021
+  ],
+  "pfr": [
+   2020,
+   2021
+  ],
+  "gtd": [
+   2020,
+   2021
+  ]
+ },
+ "failed": [],
+ "varnames": {
+  "cci_alt_files": "ALT",
+  "cci_alt_unc": "ALT_uncertainty",
+  "cci_pfr": "PFR",
+  "cci_pfr_unc": "PFR_uncertainty",
+  "cci_gtd_1m": "T1m",
+  "cci_gtd_2m": "T2m"
+ },
+ "years_limit": 2,
+ "blocksmooth": {
+  "definition": "CCI ALT 래스터 0.5° 창 화소별 다년 평균의 유효 화소 중앙값(cm)",
+  "years": [
+   2020,
+   2021
+  ],
+  "n_blocks": 232,
+  "n_blocks_valid": 231,
+  "blocks_outside": [
+   -12600122
+  ],
+  "window_shapes": {
+   "50x50": 231,
+   "0x50": 1
+  },
+  "npix_median": 2448.0
+ }
+}

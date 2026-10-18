@@ -1,0 +1,245 @@
+region     scheme  forcing featset method learner  lam     n   rmse   bias      r  rmse_beq  r_anom  skill_anom
+Alaska      block     clim    F8TS     P0       - -1.0 15540 17.773 -6.468  0.606    21.038  -0.000       0.000
+Alaska      block     clim    F8TS     P1       - -1.0 15540 16.774 -0.474  0.599    21.542  -0.000       0.000
+Alaska      block     year    F8TS     P0       - -1.0 15540 18.756 -7.531  0.593    21.010   0.204       0.041
+Alaska      block     year    F8TS     P1       - -1.0 15540 18.130 -1.906  0.588    21.874   0.203       0.041
+Alaska      block year_obs    F8TS     D0     ftt -1.0 15540 18.414  1.536  0.471    21.310   0.151       0.009
+Alaska      block year_obs    F8TS     D0     mlp -1.0 15540 18.561 -0.898  0.499    20.737   0.057      -0.022
+Alaska      block year_obs    F8TS     D0    tabm -1.0 15540 19.235 -2.710  0.494    20.953   0.064      -0.027
+Alaska      block year_obs    F8TS     P0       - -1.0 15540 19.366 -8.721  0.597    20.687   0.243       0.059
+Alaska      block year_obs    F8TS     P1       - -1.0 15540 18.577 -2.375  0.595    22.199   0.243       0.059
+Alaska      block year_obs    F8TS     R1     ftt  0.5 15540 18.772 -3.781  0.574    21.017   0.227       0.049
+Alaska      block year_obs    F8TS     R1     mlp  0.5 15540 19.175 -3.725  0.574    20.410   0.218       0.047
+Alaska      block year_obs    F8TS     R1    tabm  0.5 15540 19.325 -3.725  0.566    20.652   0.230       0.053
+Alaska      block year_obs  F8TS_M     D0     ftt -1.0 15540 19.160  2.244  0.409    21.232   0.048      -0.081
+Alaska      block year_obs  F8TS_M     D0     mlp -1.0 15540 19.970 -4.393  0.489    21.301   0.260       0.068
+Alaska      block year_obs  F8TS_M     D0    tabm -1.0 15540 20.145 -4.688  0.472    21.343   0.258       0.066
+Alaska      block year_obs  F8TS_M     R1     ftt  0.5 15540 17.977 -2.937  0.579    21.067   0.229       0.050
+Alaska      block year_obs  F8TS_M     R1     mlp  0.5 15540 19.120 -3.936  0.564    20.727   0.289       0.081
+Alaska      block year_obs  F8TS_M     R1    tabm  0.5 15540 19.449 -4.244  0.566    20.804   0.262       0.069
+Alaska block_year     clim    F8TS     P0       - -1.0 15421 17.710 -6.431  0.606    20.863  -0.000       0.000
+Alaska block_year     clim    F8TS     P1       - -1.0 15421 16.663 -0.148  0.601    21.468  -0.018      -0.001
+Alaska block_year     year    F8TS     P0       - -1.0 15421 18.712 -7.515  0.594    20.834   0.207       0.043
+Alaska block_year     year    F8TS     P1       - -1.0 15421 18.122 -2.208  0.587    21.870   0.201       0.037
+Alaska block_year year_obs    F8TS     P0       - -1.0 15421 19.337 -8.735  0.598    20.523   0.247       0.060
+Alaska block_year year_obs    F8TS     P1       - -1.0 15421 18.803 -2.983  0.592    22.175   0.236       0.046
+Alaska     random     clim    F8TS     P0       - -1.0 15540 17.773 -6.468  0.606    21.038  -0.000       0.000
+Alaska     random     clim    F8TS     P1       - -1.0 15540 16.642 -0.434  0.605    21.595  -0.004      -0.000
+Alaska     random     year    F8TS     P0       - -1.0 15540 18.756 -7.531  0.593    21.010   0.204       0.041
+Alaska     random     year    F8TS     P1       - -1.0 15540 17.820 -2.001  0.593    21.690   0.204       0.041
+Alaska     random year_obs    F8TS     P0       - -1.0 15540 19.366 -8.721  0.597    20.687   0.243       0.059
+Alaska     random year_obs    F8TS     P1       - -1.0 15540 18.221 -2.575  0.597    21.820   0.242       0.059
+Alaska     region     clim    F8TS     P0       - -1.0 15540 17.765 -6.447  0.606    21.036  -0.000       0.000
+Alaska     region     clim    F8TS     P1       - -1.0 15540 17.765 -6.447  0.606    21.036  -0.000       0.000
+Alaska     region     year    F8TS     P0       - -1.0 15540 18.749 -7.511  0.593    21.009   0.204       0.041
+Alaska     region     year    F8TS     P1       - -1.0 15540 18.749 -7.511  0.593    21.009   0.204       0.041
+Alaska     region year_obs    F8TS     P0       - -1.0 15540 19.358 -8.696  0.597    20.686   0.243       0.059
+Alaska     region year_obs    F8TS     P1       - -1.0 15540 19.358 -8.696  0.597    20.686   0.243       0.059
+Alaska       year     clim    F8TS     P0       - -1.0 15540 17.773 -6.468  0.606    21.038  -0.000       0.000
+Alaska       year     clim    F8TS     P1       - -1.0 15540 16.668 -0.216  0.604    21.647  -0.343      -0.013
+Alaska       year     year    F8TS     P0       - -1.0 15540 18.756 -7.531  0.593    21.010   0.204       0.041
+Alaska       year     year    F8TS     P1       - -1.0 15540 18.152 -2.343  0.587    21.809   0.184       0.030
+Alaska       year year_obs    F8TS     D0     ftt -1.0 15540 15.691 -1.735  0.662    18.423   0.048      -0.216
+Alaska       year year_obs    F8TS     D0     mlp -1.0 15540 17.012 -4.587  0.658    17.084   0.172      -0.088
+Alaska       year year_obs    F8TS     D0    tabm -1.0 15540 17.058 -4.440  0.656    16.678   0.226      -0.074
+Alaska       year year_obs    F8TS     P0       - -1.0 15540 19.366 -8.721  0.597    20.687   0.243       0.059
+Alaska       year year_obs    F8TS     P1       - -1.0 15540 18.724 -3.325  0.590    21.900   0.232       0.049
+Alaska       year year_obs    F8TS     R1     ftt  0.5 15540 17.608 -3.726  0.622    19.934   0.196       0.008
+Alaska       year year_obs    F8TS     R1     mlp  0.5 15540 17.546 -4.272  0.637    18.220   0.256       0.060
+Alaska       year year_obs    F8TS     R1    tabm  0.5 15540 17.627 -4.345  0.637    18.020   0.252       0.052
+Alaska       year year_obs  F8TS_M     D0     ftt -1.0 15540 15.723 -1.668  0.660    17.677   0.022      -0.223
+Alaska       year year_obs  F8TS_M     D0     mlp -1.0 15540 16.592 -3.293  0.644    17.079   0.094      -0.161
+Alaska       year year_obs  F8TS_M     D0    tabm -1.0 15540 16.776 -3.287  0.641    16.662   0.169      -0.118
+Alaska       year year_obs  F8TS_M     R1     ftt  0.5 15540 17.466 -3.439  0.621    19.906   0.121      -0.038
+Alaska       year year_obs  F8TS_M     R1     mlp  0.5 15540 17.486 -3.836  0.629    18.195   0.189       0.015
+Alaska       year year_obs  F8TS_M     R1    tabm  0.5 15540 17.330 -3.675  0.634    18.122   0.208       0.023
+Canada      block     clim    F8TS     P0       - -1.0  1196 27.615  3.768  0.563    29.769     NaN       0.000
+Canada      block     clim    F8TS     P1       - -1.0  1196 30.761  2.491  0.093    30.579  -0.000       0.000
+Canada      block     year    F8TS     P0       - -1.0  1196 27.109  5.813  0.581    29.650   0.054      -0.094
+Canada      block     year    F8TS     P1       - -1.0  1196 29.692  2.306  0.279    30.464   0.054      -0.095
+Canada      block year_obs    F8TS     D0     ftt -1.0  1196 23.996 -5.276  0.652    25.540   0.046      -0.090
+Canada      block year_obs    F8TS     D0     mlp -1.0  1196 22.727 -0.871  0.680    24.853   0.045      -0.143
+Canada      block year_obs    F8TS     D0    tabm -1.0  1196 22.782 -2.626  0.680    24.408   0.062      -0.183
+Canada      block year_obs    F8TS     P0       - -1.0  1196 27.746  7.673  0.573    28.860   0.068      -0.198
+Canada      block year_obs    F8TS     P1       - -1.0  1196 30.625  2.966  0.144    30.342   0.070      -0.164
+Canada      block year_obs    F8TS     R1     ftt  0.5  1196 24.976 -1.274  0.663    25.882   0.068      -0.129
+Canada      block year_obs    F8TS     R1     mlp  0.5  1196 24.864  0.646  0.665    25.938   0.064      -0.196
+Canada      block year_obs    F8TS     R1    tabm  0.5  1196 24.901  0.509  0.658    26.113   0.077      -0.216
+Canada      block year_obs  F8TS_M     D0     ftt -1.0  1196 25.428 -6.352  0.600    27.230   0.006      -0.203
+Canada      block year_obs  F8TS_M     D0     mlp -1.0  1196 23.678 -3.481  0.650    26.057   0.010      -0.292
+Canada      block year_obs  F8TS_M     D0    tabm -1.0  1196 24.218 -2.680  0.625    26.531   0.018      -0.262
+Canada      block year_obs  F8TS_M     R1     ftt  0.5  1196 25.423 -1.339  0.639    27.321   0.076      -0.148
+Canada      block year_obs  F8TS_M     R1     mlp  0.5  1196 25.602  0.230  0.618    27.116   0.050      -0.312
+Canada      block year_obs  F8TS_M     R1    tabm  0.5  1196 25.624  0.080  0.618    27.025   0.057      -0.295
+Canada block_year     clim    F8TS     P0       - -1.0  1135 26.533  5.276  0.655    31.943     NaN       0.000
+Canada block_year     clim    F8TS     P1       - -1.0  1135 31.212  6.277 -0.025    32.391  -0.098      -0.184
+Canada block_year     year    F8TS     P0       - -1.0  1135 26.047  7.364  0.661    31.933   0.061      -0.085
+Canada block_year     year    F8TS     P1       - -1.0  1135 30.113  6.150  0.193    32.446  -0.018      -0.341
+Canada block_year year_obs    F8TS     P0       - -1.0  1135 26.906  9.160  0.642    31.105   0.072      -0.200
+Canada block_year year_obs    F8TS     P1       - -1.0  1135 31.112  6.631  0.058    32.082   0.007      -0.396
+Canada     random     clim    F8TS     P0       - -1.0  1196 27.615  3.768  0.563    29.769     NaN       0.000
+Canada     random     clim    F8TS     P1       - -1.0  1196 27.499  1.082  0.561    30.142  -0.032      -0.003
+Canada     random     year    F8TS     P0       - -1.0  1196 27.109  5.813  0.581    29.650   0.054      -0.094
+Canada     random     year    F8TS     P1       - -1.0  1196 26.727  1.203  0.579    30.064   0.051      -0.083
+Canada     random year_obs    F8TS     P0       - -1.0  1196 27.746  7.673  0.573    28.860   0.068      -0.198
+Canada     random year_obs    F8TS     P1       - -1.0  1196 26.981  1.164  0.571    29.867   0.065      -0.163
+Canada     region     clim    F8TS     P0       - -1.0  1196 27.617  3.795  0.563    29.767     NaN       0.000
+Canada     region     clim    F8TS     P1       - -1.0  1196 27.617  3.795  0.563    29.767     NaN       0.000
+Canada     region     year    F8TS     P0       - -1.0  1196 27.114  5.840  0.581    29.650   0.054      -0.094
+Canada     region     year    F8TS     P1       - -1.0  1196 27.114  5.840  0.581    29.650   0.054      -0.094
+Canada     region year_obs    F8TS     P0       - -1.0  1196 27.751  7.697  0.573    28.859   0.068      -0.199
+Canada     region year_obs    F8TS     P1       - -1.0  1196 27.751  7.697  0.573    28.859   0.068      -0.199
+Canada       year     clim    F8TS     P0       - -1.0  1164 27.129  4.449  0.606    29.205     NaN       0.000
+Canada       year     clim    F8TS     P1       - -1.0  1164 28.688  3.695  0.439    29.823  -0.110      -0.070
+Canada       year     year    F8TS     P0       - -1.0  1164 26.607  6.548  0.622    28.864   0.063      -0.092
+Canada       year     year    F8TS     P1       - -1.0  1164 27.884  3.921  0.485    29.588   0.010      -0.212
+Canada       year year_obs    F8TS     D0     ftt -1.0  1164 24.489  5.581  0.629    21.784  -0.170      -0.504
+Canada       year year_obs    F8TS     D0     mlp -1.0  1164 29.856  9.853  0.473    26.392  -0.018      -0.885
+Canada       year year_obs    F8TS     D0    tabm -1.0  1164 30.473  9.959  0.449    26.902   0.009      -0.810
+Canada       year year_obs    F8TS     P0       - -1.0  1164 27.351  8.346  0.608    28.100   0.075      -0.202
+Canada       year year_obs    F8TS     P1       - -1.0  1164 28.108  3.694  0.480    29.067   0.041      -0.276
+Canada       year year_obs    F8TS     R1     ftt  0.5  1164 24.656  5.245  0.639    23.505  -0.008      -0.435
+Canada       year year_obs    F8TS     R1     mlp  0.5  1164 26.925  6.657  0.519    24.921   0.037      -0.659
+Canada       year year_obs    F8TS     R1    tabm  0.5  1164 26.942  6.260  0.512    24.909   0.039      -0.705
+Canada       year year_obs  F8TS_M     D0     ftt -1.0  1164 24.978  6.604  0.625    23.990  -0.036      -0.247
+Canada       year year_obs  F8TS_M     D0     mlp -1.0  1164 29.243  9.414  0.489    26.570  -0.051      -0.855
+Canada       year year_obs  F8TS_M     D0    tabm -1.0  1164 30.552 10.773  0.479    27.006  -0.037      -1.042
+Canada       year year_obs  F8TS_M     R1     ftt  0.5  1164 25.011  5.920  0.629    23.751  -0.030      -0.337
+Canada       year year_obs  F8TS_M     R1     mlp  0.5  1164 26.776  6.738  0.530    24.988   0.017      -0.737
+Canada       year year_obs  F8TS_M     R1    tabm  0.5  1164 26.794  6.729  0.525    24.980   0.020      -0.800
+  Lena      block     clim    F8TS     P0       - -1.0  2436 23.374  8.151  0.162    27.689  -0.000       0.000
+  Lena      block     clim    F8TS     P1       - -1.0  2436 22.469  0.549 -0.150    29.858     NaN       0.000
+  Lena      block     year    F8TS     P0       - -1.0  2436 21.394  6.872  0.487    26.434   0.263       0.065
+  Lena      block     year    F8TS     P1       - -1.0  2436 20.893  0.969  0.407    27.769   0.263       0.068
+  Lena      block year_obs    F8TS     D0     ftt -1.0  2436 20.134  0.327  0.422    26.832   0.100      -0.266
+  Lena      block year_obs    F8TS     D0     mlp -1.0  2436 17.919  0.421  0.591    24.375   0.200      -0.829
+  Lena      block year_obs    F8TS     D0    tabm -1.0  2436 17.792  0.210  0.595    23.308   0.224      -0.674
+  Lena      block year_obs    F8TS     P0       - -1.0  2436 21.465  6.693  0.425    27.069   0.375       0.130
+  Lena      block year_obs    F8TS     P1       - -1.0  2436 21.037  1.076  0.330    28.503   0.375       0.138
+  Lena      block year_obs    F8TS     R1     ftt  0.5  2436 19.728  0.315  0.462    26.815   0.296       0.018
+  Lena      block year_obs    F8TS     R1     mlp  0.5  2436 18.270  0.736  0.595    24.594   0.314      -0.026
+  Lena      block year_obs    F8TS     R1    tabm  0.5  2436 18.524  0.821  0.577    24.527   0.310       0.012
+  Lena      block year_obs  F8TS_M     D0     ftt -1.0  2436 18.675 -0.572  0.536    25.929   0.217      -0.073
+  Lena      block year_obs  F8TS_M     D0     mlp -1.0  2436 18.418  1.015  0.565    26.251   0.186      -0.602
+  Lena      block year_obs  F8TS_M     D0    tabm -1.0  2436 17.659  0.396  0.605    25.954   0.211      -0.508
+  Lena      block year_obs  F8TS_M     R1     ftt  0.5  2436 19.008 -0.105  0.553    26.559   0.305       0.059
+  Lena      block year_obs  F8TS_M     R1     mlp  0.5  2436 18.663  1.252  0.565    24.974   0.314       0.050
+  Lena      block year_obs  F8TS_M     R1    tabm  0.5  2436 18.352  0.551  0.595    25.209   0.338       0.074
+  Lena block_year     clim    F8TS     P0       - -1.0  2374 23.489  8.308  0.161    32.130  -0.000       0.000
+  Lena block_year     clim    F8TS     P1       - -1.0  2374 23.181  1.335 -0.395    35.105  -0.542      -0.199
+  Lena block_year     year    F8TS     P0       - -1.0  2374 21.468  6.978  0.491    30.504   0.526       0.262
+  Lena block_year     year    F8TS     P1       - -1.0  2374 21.437  1.499  0.316    32.850   0.324       0.105
+  Lena block_year year_obs    F8TS     P0       - -1.0  2374 21.561  6.756  0.423    30.982   0.568       0.320
+  Lena block_year year_obs    F8TS     P1       - -1.0  2374 21.549  1.435  0.249    33.597   0.451       0.197
+  Lena     random     clim    F8TS     P0       - -1.0  2436 23.374  8.151  0.162    27.689  -0.000       0.000
+  Lena     random     clim    F8TS     P1       - -1.0  2436 21.933  0.072  0.161    29.187   0.003      -0.000
+  Lena     random     year    F8TS     P0       - -1.0  2436 21.394  6.872  0.487    26.434   0.263       0.065
+  Lena     random     year    F8TS     P1       - -1.0  2436 20.459  0.639  0.486    27.316   0.263       0.069
+  Lena     random year_obs    F8TS     P0       - -1.0  2436 21.465  6.693  0.425    27.069   0.375       0.130
+  Lena     random year_obs    F8TS     P1       - -1.0  2436 20.549  0.520  0.424    28.014   0.375       0.139
+  Lena     region     clim    F8TS     P0       - -1.0  2436 23.374  8.151  0.162    27.689   0.000       0.000
+  Lena     region     clim    F8TS     P1       - -1.0  2436 23.374  8.151  0.162    27.689   0.000       0.000
+  Lena     region     year    F8TS     P0       - -1.0  2436 21.394  6.872  0.487    26.434   0.263       0.065
+  Lena     region     year    F8TS     P1       - -1.0  2436 21.394  6.872  0.487    26.434   0.263       0.065
+  Lena     region year_obs    F8TS     P0       - -1.0  2436 21.465  6.693  0.425    27.069   0.375       0.130
+  Lena     region year_obs    F8TS     P1       - -1.0  2436 21.465  6.693  0.425    27.069   0.375       0.130
+  Lena       year     clim    F8TS     P0       - -1.0  2419 23.381  8.269  0.158    28.514  -0.000       0.000
+  Lena       year     clim    F8TS     P1       - -1.0  2419 22.855  0.991 -0.423    30.665  -0.539      -0.245
+  Lena       year     year    F8TS     P0       - -1.0  2419 21.387  6.970  0.487    27.259   0.508       0.251
+  Lena       year     year    F8TS     P1       - -1.0  2419 21.200  1.234  0.349    28.891   0.293       0.085
+  Lena       year year_obs    F8TS     D0     ftt -1.0  2419 22.082 -0.927  0.253    30.169  -0.079      -1.384
+  Lena       year year_obs    F8TS     D0     mlp -1.0  2419 21.948  1.211  0.295    28.508   0.207      -0.198
+  Lena       year year_obs    F8TS     D0    tabm -1.0  2419 23.614  1.882  0.202    29.702   0.118      -0.363
+  Lena       year year_obs    F8TS     P0       - -1.0  2419 21.471  6.773  0.421    27.920   0.574       0.327
+  Lena       year year_obs    F8TS     P1       - -1.0  2419 21.230  0.993  0.296    29.555   0.450       0.198
+  Lena       year year_obs    F8TS     R1     ftt  0.5  2419 21.243 -0.109  0.276    30.127   0.240      -0.320
+  Lena       year year_obs    F8TS     R1     mlp  0.5  2419 20.913  0.974  0.324    28.441   0.343       0.049
+  Lena       year year_obs    F8TS     R1    tabm  0.5  2419 21.294  1.133  0.279    28.617   0.303      -0.006
+  Lena       year year_obs  F8TS_M     D0     ftt -1.0  2419 22.361 -0.362  0.241    30.494  -0.220      -1.981
+  Lena       year year_obs  F8TS_M     D0     mlp -1.0  2419 22.437  1.055  0.247    29.256  -0.053      -0.627
+  Lena       year year_obs  F8TS_M     D0    tabm -1.0  2419 22.816  1.064  0.226    29.455  -0.066      -0.685
+  Lena       year year_obs  F8TS_M     R1     ftt  0.5  2419 21.297  0.156  0.268    29.811   0.109      -0.498
+  Lena       year year_obs  F8TS_M     R1     mlp  0.5  2419 20.684  0.962  0.351    28.605   0.298       0.015
+  Lena       year year_obs  F8TS_M     R1    tabm  0.5  2419 21.001  0.889  0.312    28.542   0.298       0.016
+region     scheme  forcing method learner  lam  delta     lo    hi  delta_beq  lo_beq  hi_beq
+Alaska      block     clim     P0       - -1.0   1.00   0.02  1.60      -0.50   -2.10    0.61
+Alaska      block     year     P0       - -1.0   0.63  -0.64  1.38      -0.86   -2.50    0.28
+Alaska      block year_obs     D0     ftt -1.0  -0.16  -1.53  1.61      -0.89   -3.35    1.09
+Alaska      block year_obs     D0     mlp -1.0  -0.02  -3.18  3.27      -1.46   -4.33    0.67
+Alaska      block year_obs     D0    tabm -1.0   0.66  -1.73  3.48      -1.25   -4.23    1.08
+Alaska      block year_obs     P0       - -1.0   0.79  -0.39  1.73      -1.51   -3.52   -0.05
+Alaska      block year_obs     R1     ftt  0.5   0.20  -0.56  1.17      -1.18   -2.75    0.17
+Alaska      block year_obs     R1     mlp  0.5   0.60  -0.70  1.30      -1.79   -3.46   -0.49
+Alaska      block year_obs     R1    tabm  0.5   0.75  -0.60  1.36      -1.55   -3.20   -0.22
+Alaska block_year     clim     P0       - -1.0   1.05  -0.02  1.70      -0.60   -2.21    0.55
+Alaska block_year     year     P0       - -1.0   0.59  -0.80  1.39      -1.04   -2.72    0.17
+Alaska block_year year_obs     P0       - -1.0   0.53  -0.52  1.34      -1.65   -3.66   -0.18
+Alaska     random     clim     P0       - -1.0   1.13   0.15  1.73      -0.56   -2.11    0.52
+Alaska     random     year     P0       - -1.0   0.94  -0.31  1.68      -0.68   -2.16    0.36
+Alaska     random year_obs     P0       - -1.0   1.15  -0.08  2.12      -1.13   -2.90    0.14
+Alaska     region     clim     P0       - -1.0   0.00   0.00  0.00       0.00    0.00    0.00
+Alaska     region     year     P0       - -1.0   0.00   0.00  0.00       0.00    0.00    0.00
+Alaska     region year_obs     P0       - -1.0   0.00   0.00  0.00       0.00    0.00    0.00
+Alaska       year     clim     P0       - -1.0   1.10   0.10  1.73      -0.61   -2.20    0.49
+Alaska       year     year     P0       - -1.0   0.60  -0.76  1.41      -0.80   -2.31    0.28
+Alaska       year year_obs     D0     ftt -1.0  -3.03  -4.72 -1.39      -3.48   -5.17   -1.83
+Alaska       year year_obs     D0     mlp -1.0  -1.71  -3.11 -0.85      -4.82   -8.02   -1.86
+Alaska       year year_obs     D0    tabm -1.0  -1.67  -3.21 -0.75      -5.22   -9.09   -1.81
+Alaska       year year_obs     P0       - -1.0   0.64  -0.29  1.35      -1.21   -2.98    0.07
+Alaska       year year_obs     R1     ftt  0.5  -1.12  -1.83 -0.19      -1.97   -3.07   -1.06
+Alaska       year year_obs     R1     mlp  0.5  -1.18  -2.53 -0.33      -3.68   -5.59   -1.90
+Alaska       year year_obs     R1    tabm  0.5  -1.10  -2.51 -0.18      -3.88   -5.95   -1.99
+Canada      block     clim     P0       - -1.0  -3.15  -5.47  0.66      -0.81   -1.81    0.17
+Canada      block     year     P0       - -1.0  -2.58  -6.05  1.44      -0.81   -2.14    0.62
+Canada      block year_obs     D0     ftt -1.0  -6.63  -9.42 -1.43      -4.80   -9.02   -0.84
+Canada      block year_obs     D0     mlp -1.0  -7.90 -10.33 -0.62      -5.49  -10.25   -0.68
+Canada      block year_obs     D0    tabm -1.0  -7.84 -10.22 -1.00      -5.93  -10.54   -1.21
+Canada      block year_obs     P0       - -1.0  -2.88  -6.66  1.49      -1.48   -3.17    0.44
+Canada      block year_obs     R1     ftt  0.5  -5.65  -7.68 -2.13      -4.46   -7.24   -1.84
+Canada      block year_obs     R1     mlp  0.5  -5.76  -7.20 -1.68      -4.40   -6.85   -2.05
+Canada      block year_obs     R1    tabm  0.5  -5.72  -7.34 -1.46      -4.23   -6.73   -1.88
+Canada block_year     clim     P0       - -1.0  -4.68  -6.26 -0.44      -0.45   -1.97    0.62
+Canada block_year     year     P0       - -1.0  -4.07  -6.93  0.29      -0.51   -1.93    0.62
+Canada block_year year_obs     P0       - -1.0  -4.21  -7.21  0.72      -0.98   -2.56    0.55
+Canada     random     clim     P0       - -1.0   0.12  -1.30  1.28      -0.37   -1.02    0.42
+Canada     random     year     P0       - -1.0   0.38  -2.05  2.24      -0.41   -1.58    0.94
+Canada     random year_obs     P0       - -1.0   0.77  -2.95  3.49      -1.01   -2.55    0.88
+Canada     region     clim     P0       - -1.0   0.00   0.00  0.00       0.00    0.00    0.00
+Canada     region     year     P0       - -1.0   0.00   0.00  0.00       0.00    0.00    0.00
+Canada     region year_obs     P0       - -1.0   0.00   0.00  0.00       0.00    0.00    0.00
+Canada       year     clim     P0       - -1.0  -1.56  -3.05 -0.35      -0.62   -1.29    0.07
+Canada       year     year     P0       - -1.0  -1.28  -3.65  0.51      -0.72   -1.70    0.35
+Canada       year year_obs     D0     ftt -1.0  -3.62  -8.72  6.34      -7.28  -16.32    0.37
+Canada       year year_obs     D0     mlp -1.0   1.75  -7.38 20.22      -2.68  -15.02    8.71
+Canada       year year_obs     D0    tabm -1.0   2.36  -7.24 21.61      -2.17  -14.13    8.93
+Canada       year year_obs     P0       - -1.0  -0.76  -4.27  1.71      -0.97   -2.37    0.65
+Canada       year year_obs     R1     ftt  0.5  -3.45  -6.33  2.45      -5.56  -10.20   -1.30
+Canada       year year_obs     R1     mlp  0.5  -1.18  -5.28  8.08      -4.15  -10.32    2.02
+Canada       year year_obs     R1    tabm  0.5  -1.17  -5.06  7.72      -4.16  -10.20    1.90
+  Lena      block     clim     P0       - -1.0   0.90  -2.51  3.46      -2.17   -4.42    1.30
+  Lena      block     year     P0       - -1.0   0.50  -2.13  2.45      -1.33   -3.41    1.92
+  Lena      block year_obs     D0     ftt -1.0  -0.90  -2.24 -0.16      -1.67   -3.61    0.02
+  Lena      block year_obs     D0     mlp -1.0  -3.12  -9.83  0.74      -4.13  -10.13    3.33
+  Lena      block year_obs     D0    tabm -1.0  -3.24  -9.42  0.31      -5.20  -10.60    1.85
+  Lena      block year_obs     P0       - -1.0   0.43  -2.41  2.25      -1.43   -3.44    1.82
+  Lena      block year_obs     R1     ftt  0.5  -1.31  -2.37 -0.74      -1.69   -3.04   -0.61
+  Lena      block year_obs     R1     mlp  0.5  -2.77  -6.45 -0.46      -3.91   -6.54   -1.15
+  Lena      block year_obs     R1    tabm  0.5  -2.51  -5.85 -0.45      -3.98   -6.40   -1.11
+  Lena block_year     clim     P0       - -1.0   0.31  -3.69  2.46      -2.98   -5.63    1.63
+  Lena block_year     year     P0       - -1.0   0.03  -3.08  1.85      -2.35   -4.89    2.01
+  Lena block_year year_obs     P0       - -1.0   0.01  -3.24  1.76      -2.61   -4.84    1.39
+  Lena     random     clim     P0       - -1.0   1.44  -1.56  4.05      -1.50   -3.34    1.44
+  Lena     random     year     P0       - -1.0   0.93  -1.11  2.88      -0.88   -2.49    1.78
+  Lena     random year_obs     P0       - -1.0   0.92  -1.44  2.53      -0.95   -2.46    1.63
+  Lena     region     clim     P0       - -1.0   0.00   0.00  0.00       0.00    0.00    0.00
+  Lena     region     year     P0       - -1.0   0.00   0.00  0.00       0.00    0.00    0.00
+  Lena     region year_obs     P0       - -1.0   0.00   0.00  0.00       0.00    0.00    0.00
+  Lena       year     clim     P0       - -1.0   0.53  -2.77  2.86      -2.15   -4.44    1.78
+  Lena       year     year     P0       - -1.0   0.19  -2.45  2.19      -1.63   -3.85    2.02
+  Lena       year year_obs     D0     ftt -1.0   0.85  -0.10  1.70       0.61    0.17    1.29
+  Lena       year year_obs     D0     mlp -1.0   0.72  -0.64  4.08      -1.05   -3.80    2.19
+  Lena       year year_obs     D0    tabm -1.0   2.38   0.48  5.21       0.15   -2.96    3.64
+  Lena       year year_obs     P0       - -1.0   0.24  -2.60  2.09      -1.63   -3.72    1.84
+  Lena       year year_obs     R1     ftt  0.5   0.01  -0.76  0.53       0.57    0.04    1.01
+  Lena       year year_obs     R1     mlp  0.5  -0.32  -0.76  0.50      -1.11   -2.49    0.15
+  Lena       year year_obs     R1    tabm  0.5   0.06  -0.54  0.67      -0.94   -2.48    0.43

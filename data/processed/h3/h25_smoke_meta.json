@@ -1,0 +1,40 @@
+{
+ "stage": "H25/H26",
+ "plan": "docs/EXPERIMENT_PLAN_LABEL_BUDGET_2026-09-22.md",
+ "targets": [
+  "Lena",
+  "AL-1",
+  "Russia_W"
+ ],
+ "splits": [
+  0
+ ],
+ "n_grid": [
+  3,
+  20
+ ],
+ "reps": 2,
+ "reps_cb": 1,
+ "seeds": [
+  0
+ ],
+ "lams": [
+  0.25,
+  0.5
+ ],
+ "alphas": [
+  1.0,
+  10.0,
+  100.0
+ ],
+ "r": 10.0,
+ "kappa": 10.0,
+ "buffer_km": 100.0,
+ "k_sub": "Alaska:6,Canada:3,Lena:2",
+ "rules": [
+  "random",
+  "kmedoid"
+ ],
+ "git_commit": "640098c",
+ "elapsed_s": 24.1
+}

@@ -1,0 +1,157 @@
+{
+ "tag": "lgua_smoke",
+ "nboot": 200,
+ "args": {
+  "part": "cpu",
+  "workers": 2,
+  "threads": 4,
+  "gpus": "",
+  "epochs": 3,
+  "kappa": 10.0,
+  "buffer_km": 100.0,
+  "min_cal_cells": 20,
+  "nu": 4.0,
+  "s_tau": 0.5,
+  "cap_cells": 100,
+  "clamp": 2.0,
+  "TAG": "lgua_smoke",
+  "SFX": "_smoke",
+  "SPLITS": [
+   1
+  ],
+  "N_GRID": [
+   0,
+   3,
+   10,
+   40
+  ],
+  "DRAWS": 1,
+  "FLOW_SEEDS": [
+   0
+  ],
+  "CB_SEEDS": [
+   0
+  ],
+  "RUNGS": [
+   "P0",
+   "P1",
+   "B4",
+   "hier2@h37",
+   "wconf",
+   "i0",
+   "i",
+   "ii",
+   "iii",
+   "iii+c",
+   "iv"
+  ],
+  "SENS": [
+   "t3",
+   "phys",
+   "stau025",
+   "stau100",
+   "w_cell",
+   "w_beq",
+   "sig_pool",
+   "probe_sig",
+   "noearly"
+  ],
+  "TARGETS": [
+   [
+    "Russia_W",
+    "x"
+   ],
+   [
+    "Canada",
+    "x"
+   ],
+   [
+    "AL-3",
+    "i"
+   ]
+  ],
+  "GPUS": [],
+  "OUT": "/home/willy010313/Polar_Bigdata/data/processed/lgu",
+  "PROC": "/home/willy010313/Polar_Bigdata/data/processed",
+  "SHARDS": "/home/willy010313/Polar_Bigdata/data/processed/lgu/shards",
+  "SUBMAP": "/home/willy010313/Polar_Bigdata/data/processed/lg_subregion_map_v1.csv",
+  "FLAGS": "/home/willy010313/Polar_Bigdata/data/processed/lgx_label_flags_v1.csv"
+ },
+ "fixed_deviation": {},
+ "code_sha": "402225551e25",
+ "code_sha_common": "88ecdc5e7f60",
+ "code_sha_h40": "ffd0b3a76d36",
+ "inputs": {
+  "fidelity_base_v3.csv": "214abe489347",
+  "e5_soil_tdd_v3.csv": "f8c4b4f0b505",
+  "lg_subregion_map_v1.csv": "f79eeb64564c",
+  "lgx_label_flags_v1.csv": "d1d453052b46"
+ },
+ "n_targets": 3,
+ "n_failed": 0,
+ "gate": {
+  "Canada:x": {
+   "gate_pass": true,
+   "gate_state": "판정 불가(적합 실패)"
+  }
+ },
+ "boot": {
+  "Russia_W:x": {
+   "target": "Russia_W",
+   "mode": "x",
+   "nboot": 200,
+   "splits": [
+    1
+   ],
+   "n_nan_rep": 0,
+   "sec": 1.4,
+   "cfg_hash": "88e8a3ccfe6a",
+   "inputs": {
+    "splits": [
+     1
+    ],
+    "cells_sha": {
+     "1": "b0e2360fa76b"
+    },
+    "emu_sha": "6411f989e6f3",
+    "code_sha": "402225551e25",
+    "code_sha_common": "88ecdc5e7f60",
+    "code_sha_h40": "ffd0b3a76d36"
+   },
+   "code_sha": "402225551e25",
+   "code_sha_common": "88ecdc5e7f60",
+   "code_sha_h40": "ffd0b3a76d36"
+  },
+  "Canada:x": {
+   "target": "Canada",
+   "mode": "x",
+   "nboot": 200,
+   "splits": [
+    1
+   ],
+   "n_nan_rep": 0,
+   "sec": 2.2,
+   "cfg_hash": "88e8a3ccfe6a",
+   "inputs": {
+    "splits": [
+     1
+    ],
+    "cells_sha": {
+     "1": "b564ebc556d9"
+    },
+    "emu_sha": "8695a9b92bae",
+    "code_sha": "402225551e25",
+    "code_sha_common": "88ecdc5e7f60",
+    "code_sha_h40": "ffd0b3a76d36"
+   },
+   "code_sha": "402225551e25",
+   "code_sha_common": "88ecdc5e7f60",
+   "code_sha_h40": "ffd0b3a76d36"
+  }
+ },
+ "blind": {
+  "A": "맹검(LG·LGX 결과 열람 전 등록)",
+  "B1": "비맹검"
+ },
+ "elapsed_s": 8.7
+}

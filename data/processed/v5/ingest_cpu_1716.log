@@ -1,0 +1,18 @@
+[ingest 17:16] 복원 results/rescale_v6_cpu/results_v6_cpu.tar.gz
+[ingest 17:16] 수치 매크로
+Traceback (most recent call last):
+  File "/home/willy010313/Polar_Bigdata/scripts/2_evaluation/v6_numbers.py", line 180, in <module>
+    main(a.run, a.forcing or ("year_obs" if a.run == "core_v6" else "year"))
+  File "/home/willy010313/Polar_Bigdata/scripts/2_evaluation/v6_numbers.py", line 107, in main
+    cc = pd.read_csv(R / "common_cells_eval.csv")
+  File "/home/anaconda3/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 948, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/anaconda3/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 611, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/anaconda3/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 1448, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/home/anaconda3/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 1705, in _make_engine
+    self.handles = get_handle(
+  File "/home/anaconda3/lib/python3.9/site-packages/pandas/io/common.py", line 863, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: '/home/willy010313/Polar_Bigdata/data/processed/v5/runs/core_v6/common_cells_eval.csv'

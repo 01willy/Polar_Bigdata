@@ -1,0 +1,19 @@
+/enc/ukrprod_CJsgU/work/scripts/2_evaluation/v5_aggregate.py:37: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  per_seed = df.groupby(KEY + ["seed"]).apply(lambda s: T.rmse(s.y.values, s.pred.values)).rename("rmse").reset_index()
+region scheme  forcing featset method  learner  lam     n   rmse   bias     r  rmse_beq  r_anom  skill_anom
+Alaska  block year_obs    F8TS     D0 catboost -1.0 15540 17.832  2.752 0.587    22.852   0.256      -0.037
+Alaska  block year_obs    F8TS     P1        - -1.0 15540 18.629 -2.274 0.591    23.440   0.242       0.058
+Alaska  block year_obs    F8TS     R1 catboost  0.5 15540 17.671  0.269 0.612    22.982   0.273       0.060
+Canada  block year_obs    F8TS     D0 catboost -1.0  1196 25.070 -2.747 0.623    24.847  -0.201      -0.151
+Canada  block year_obs    F8TS     P1        - -1.0  1196 29.364  0.736 0.326    28.665   0.070      -0.148
+Canada  block year_obs    F8TS     R1 catboost  0.5  1196 25.535 -0.133 0.646    26.386   0.050      -0.131
+  Lena  block year_obs    F8TS     D0 catboost -1.0  2436 19.412 -1.732 0.486    24.991   0.347       0.105
+  Lena  block year_obs    F8TS     P1        - -1.0  2436 21.336  0.703 0.271    25.494   0.383       0.145
+  Lena  block year_obs    F8TS     R1 catboost  0.5  2436 20.010 -0.467 0.445    24.160   0.387       0.144
+region scheme  forcing method  learner  lam  delta    lo    hi  delta_beq  lo_beq  hi_beq
+Alaska  block year_obs     D0 catboost -1.0  -0.80 -4.39  3.01      -0.59   -3.14    1.75
+Alaska  block year_obs     R1 catboost  0.5  -0.96 -3.17  1.37      -0.46   -1.60    0.66
+Canada  block year_obs     D0 catboost -1.0  -4.29 -7.93 -0.55      -3.82   -5.51   -2.00
+Canada  block year_obs     R1 catboost  0.5  -3.83 -5.81 -0.79      -2.28   -3.20   -1.45
+  Lena  block year_obs     D0 catboost -1.0  -1.92 -3.58  0.06      -0.50   -3.11    3.32
+  Lena  block year_obs     R1 catboost  0.5  -1.33 -2.27 -0.52      -1.33   -2.41   -0.43

@@ -1,0 +1,40 @@
+exp,target,mode,parent,split,variant,part,axis,method,learner,alpha,placement,n,n_lab,draw,seed,lam,E_used,alpha_sel,n_blocks_lab,n_nonfinite,fit_flag,n_train_rows,cv_folds,cv_flag,stack_fallback,stack_gamma,stack_K,stack_w
+xb_r,Canada,r,Canada,1,,cpu,xb_r,P0,none,1,cell,0,0,0,-1,0.0,1.5918750525571221,,0,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,P1,none,1,cell,20,20,0,-1,0.0,1.2570894381563777,,6,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,Stack,none,1,cell,20,20,0,-1,0.0,,,6,0,,0,0,,,0.75,7.0,"{""P1"": 0.75, ""Ss"": 0.25}"
+xb_r,Canada,r,Canada,1,,cpu,xb_r,Pe,none,1,cell,20,20,0,-1,0.0,1.2570894381563777,,6,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,P*,none,1,cell,20,20,0,-1,0.0,1.255320747451257,,6,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,cand_Ku,none,1,cell,20,20,0,-1,0.0,0.49761695910275916,,6,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,cand_Ed,none,1,cell,20,20,0,-1,0.0,0.39050437240273406,,6,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,cand_Ss,none,1,cell,20,20,0,-1,0.0,1.2555946634127644,,6,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,cand_Cr,none,1,cell,20,20,0,-1,0.0,,,6,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,cand_Ca,none,1,cell,20,20,0,-1,0.0,,,6,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,R1,catboost_lo,1,cell,20,20,0,0,0.25,1.2570894381563777,,6,0,,20,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,R1,catboost_lo,1,cell,20,20,0,0,0.5,1.2570894381563777,,6,0,,20,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,R1,catboost_lo,1,cell,20,20,0,0,1.0,1.2570894381563777,,6,0,,20,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,R1,catboost_lo,1,cell,20,20,0,0,-1.0,1.2570894381563777,lam=0.25,6,0,,20,5,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,Re,catboost_lo,1,cell,20,20,0,0,0.25,1.2570894381563777,,6,0,,20,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,Re,catboost_lo,1,cell,20,20,0,0,-1.0,1.2570894381563777,lam=0.25,6,0,,20,5,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,StackR,catboost_lo,1,cell,20,20,0,0,0.25,,,6,0,,20,0,,,0.75,7.0,"{""P1"": 0.75, ""Ss"": 0.25}"
+xb_r,Canada,r,Canada,1,,cpu,xb_r,StackR,catboost_lo,1,cell,20,20,0,0,0.5,,,6,0,,20,0,,,0.75,7.0,"{""P1"": 0.75, ""Ss"": 0.25}"
+xb_r,Canada,r,Canada,1,,cpu,xb_r,StackR,catboost_lo,1,cell,20,20,0,0,1.0,,,6,0,,20,0,,,0.75,7.0,"{""P1"": 0.75, ""Ss"": 0.25}"
+xb_r,Canada,r,Canada,1,,cpu,xb_r,StackR,catboost_lo,1,cell,20,20,0,0,-1.0,,lam=0.25,6,0,,20,5,,,0.75,7.0,"{""P1"": 0.75, ""Ss"": 0.25}"
+xb_r,Canada,r,Canada,1,,cpu,xb_r,P1,none,1,cell,-1,355,0,-1,0.0,1.342008308993712,,17,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,Stack,none,1,cell,-1,355,0,-1,0.0,,,17,0,,0,0,,,0.0,7.0,"{""P*"": 0.02049747, ""Ku"": 0.97950253}"
+xb_r,Canada,r,Canada,1,,cpu,xb_r,Pe,none,1,cell,-1,355,0,-1,0.0,1.342008308993712,,17,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,P*,none,1,cell,-1,355,0,-1,0.0,1.2994596819900905,,17,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,cand_Ku,none,1,cell,-1,355,0,-1,0.0,0.4726193723685001,,17,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,cand_Ed,none,1,cell,-1,355,0,-1,0.0,0.38741886754897453,,17,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,cand_Ss,none,1,cell,-1,355,0,-1,0.0,1.3734856745452755,,17,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,cand_Cr,none,1,cell,-1,355,0,-1,0.0,,,17,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,cand_Ca,none,1,cell,-1,355,0,-1,0.0,,,17,0,,0,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,R1,catboost_lo,1,cell,-1,355,0,0,0.25,1.342008308993712,,17,0,,355,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,R1,catboost_lo,1,cell,-1,355,0,0,0.5,1.342008308993712,,17,0,,355,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,R1,catboost_lo,1,cell,-1,355,0,0,1.0,1.342008308993712,,17,0,,355,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,R1,catboost_lo,1,cell,-1,355,0,0,-1.0,1.342008308993712,lam=0.25,17,0,,355,5,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,Re,catboost_lo,1,cell,-1,355,0,0,0.25,1.342008308993712,,17,0,,355,0,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,Re,catboost_lo,1,cell,-1,355,0,0,-1.0,1.342008308993712,lam=0.25,17,0,,355,5,,,,,
+xb_r,Canada,r,Canada,1,,cpu,xb_r,StackR,catboost_lo,1,cell,-1,355,0,0,0.25,,,17,0,,355,0,,,0.0,7.0,"{""P*"": 0.02049747, ""Ku"": 0.97950253}"
+xb_r,Canada,r,Canada,1,,cpu,xb_r,StackR,catboost_lo,1,cell,-1,355,0,0,0.5,,,17,0,,355,0,,,0.0,7.0,"{""P*"": 0.02049747, ""Ku"": 0.97950253}"
+xb_r,Canada,r,Canada,1,,cpu,xb_r,StackR,catboost_lo,1,cell,-1,355,0,0,1.0,,,17,0,,355,0,,,0.0,7.0,"{""P*"": 0.02049747, ""Ku"": 0.97950253}"
+xb_r,Canada,r,Canada,1,,cpu,xb_r,StackR,catboost_lo,1,cell,-1,355,0,0,-1.0,,lam=0.25,17,0,,355,5,,,0.0,7.0,"{""P*"": 0.02049747, ""Ku"": 0.97950253}"

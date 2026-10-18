@@ -1,0 +1,36 @@
+{
+ "stage": "H23",
+ "design": "docs/EXPERIMENT_DESIGN_H18-H24_2026-09-22.md",
+ "E_AK": 1.616688667140627,
+ "targets": [
+  "Lena"
+ ],
+ "n_grid": [
+  3,
+  5,
+  10
+ ],
+ "reps": 2,
+ "seeds": [
+  0
+ ],
+ "splits": [
+  0
+ ],
+ "episodes": 100,
+ "inner_steps": 5,
+ "adapt_steps": 10,
+ "inner_lr": 0.01,
+ "kappa": 10.0,
+ "lams": [
+  0.25,
+  0.5,
+  1.0
+ ],
+ "gpu": "6",
+ "meta": {
+  "Lena|0|0|train_s": 10.9
+ },
+ "git_commit": "8385a1c",
+ "elapsed_s": 14.0
+}

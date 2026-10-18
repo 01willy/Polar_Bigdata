@@ -1,0 +1,23 @@
+{
+ "args": {
+  "proc": "data/processed/v5",
+  "out": "data/processed/v5/runs",
+  "tag": "smoke_gpu",
+  "regions": "Lena",
+  "schemes": "block",
+  "forcings": "year",
+  "featsets": "F8TS",
+  "methods": "D0,R1",
+  "learners": "mlp,tabm,ftt",
+  "lams": "0.5",
+  "seeds": "0",
+  "k": 5,
+  "fold_seed": 0,
+  "threads": 4,
+  "epochs": 60,
+  "gpu": "6",
+  "nice": 10
+ },
+ "started": "2026-10-10 09:54:35",
+ "rows": 19172
+}

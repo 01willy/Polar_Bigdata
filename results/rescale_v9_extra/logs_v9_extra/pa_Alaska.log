@@ -1,0 +1,14 @@
+[load] usable 19,172 2s
+[PA Alaska wei b0] tr 10,743 te 4,789 11s
+[PA Alaska wei b1] tr 12,913 te 2,619 22s
+[PA Alaska wei b2] tr 12,914 te 2,618 33s
+[PA Alaska wei b3] tr 12,914 te 2,618 44s
+[PA Alaska wei b4] tr 12,644 te 2,888 55s
+[PA Alaska wei] rows 232,980 57s
+[PA Alaska liu b0] tr 9,990 te 4,336 10s
+[PA Alaska liu b1] tr 11,870 te 2,456 21s
+[PA Alaska liu b2] tr 11,743 te 2,583 31s
+[PA Alaska liu b3] tr 12,251 te 2,075 42s
+[PA Alaska liu b4] tr 11,450 te 2,876 52s
+[PA Alaska liu] rows 214,890 55s
+[done] 114s

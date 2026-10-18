@@ -1,0 +1,190 @@
+{
+ "chosen": "S8c",
+ "spec": {
+  "name": "S8c",
+  "kind": "S8",
+  "gamma": 0.5,
+  "first": "center",
+  "schedule": "그 팔의 n 격자(XC 는 10, 40, 160)"
+ },
+ "reason": "제외되지 않은 후보 가운데 점수 최소",
+ "candidates": {
+  "S2": {
+   "excluded": false,
+   "n_rows": 3,
+   "n_rows_excl": 0,
+   "excl_rows": [],
+   "score": 0.13225167218774053,
+   "per_target": [
+    {
+     "target": "AL-3",
+     "rel_cell_mean": 0.07764359507403804,
+     "rel_beq_mean": 0.13225167218774053,
+     "worse": 0.13225167218774053,
+     "n_list": [
+      10,
+      40
+     ]
+    }
+   ]
+  },
+  "S4": {
+   "excluded": false,
+   "n_rows": 3,
+   "n_rows_excl": 0,
+   "excl_rows": [],
+   "score": 0.15029303962070348,
+   "per_target": [
+    {
+     "target": "AL-3",
+     "rel_cell_mean": 0.08599684405529706,
+     "rel_beq_mean": 0.15029303962070348,
+     "worse": 0.15029303962070348,
+     "n_list": [
+      10,
+      40
+     ]
+    }
+   ]
+  },
+  "S8a": {
+   "excluded": false,
+   "n_rows": 3,
+   "n_rows_excl": 0,
+   "excl_rows": [],
+   "score": 0.17622878874303366,
+   "per_target": [
+    {
+     "target": "AL-3",
+     "rel_cell_mean": 0.09348264645478607,
+     "rel_beq_mean": 0.17622878874303366,
+     "worse": 0.17622878874303366,
+     "n_list": [
+      10,
+      40
+     ]
+    }
+   ]
+  },
+  "S8b": {
+   "excluded": false,
+   "n_rows": 3,
+   "n_rows_excl": 0,
+   "excl_rows": [],
+   "score": 0.17313572589316542,
+   "per_target": [
+    {
+     "target": "AL-3",
+     "rel_cell_mean": 0.09776283655999594,
+     "rel_beq_mean": 0.17313572589316542,
+     "worse": 0.17313572589316542,
+     "n_list": [
+      10,
+      40
+     ]
+    }
+   ]
+  },
+  "S8c": {
+   "excluded": false,
+   "n_rows": 3,
+   "n_rows_excl": 0,
+   "excl_rows": [],
+   "score": 0.053195830166781796,
+   "per_target": [
+    {
+     "target": "AL-3",
+     "rel_cell_mean": 0.02231214534118353,
+     "rel_beq_mean": 0.053195830166781796,
+     "worse": 0.053195830166781796,
+     "n_list": [
+      10,
+      40
+     ]
+    }
+   ]
+  },
+  "S8p": {
+   "excluded": true,
+   "n_rows": 3,
+   "n_rows_excl": 1,
+   "excl_rows": [
+    "AL-2|r n20"
+   ],
+   "score": 0.10369035985056362,
+   "per_target": [
+    {
+     "target": "AL-3",
+     "rel_cell_mean": 0.04322562072131991,
+     "rel_beq_mean": 0.10369035985056362,
+     "worse": 0.10369035985056362,
+     "n_list": [
+      10,
+      40
+     ]
+    }
+   ]
+  }
+ },
+ "rule": "계획 2.3 Algorithm P 의 고정 규칙",
+ "alaska_family": {
+  "transfer": [
+   "Alaska|x",
+   "AL-1|x",
+   "AL-2|x",
+   "AL-3|x",
+   "AL-4|x",
+   "AL-5|x",
+   "AL-6|x"
+  ],
+  "inregion": [
+   "Alaska|r",
+   "AL-1|r",
+   "AL-2|r"
+  ],
+  "n_x": [
+   10,
+   40
+  ],
+  "n_r": [
+   20,
+   50,
+   100,
+   200,
+   500
+  ]
+ },
+ "stores_read": [
+  "AL-3|x",
+  "AL-2|r"
+ ],
+ "shard_files": [
+  "xdt_smoke__cpu__AL-3__x__s1__S1_blocksse.npz",
+  "xdt_smoke__cpu__AL-3__x__s1__S2_blocksse.npz",
+  "xdt_smoke__cpu__AL-3__x__s1__S4_blocksse.npz",
+  "xdt_smoke__cpu__AL-3__x__s1__S8a_blocksse.npz",
+  "xdt_smoke__cpu__AL-3__x__s1__S8b_blocksse.npz",
+  "xdt_smoke__cpu__AL-3__x__s1__S8c_blocksse.npz",
+  "xdt_smoke__cpu__AL-3__x__s1__S8p_blocksse.npz",
+  "xdr_smoke__cpu__AL-2__r__s1__S1_blocksse.npz",
+  "xdr_smoke__cpu__AL-2__r__s1__S2_blocksse.npz",
+  "xdr_smoke__cpu__AL-2__r__s1__S4_blocksse.npz",
+  "xdr_smoke__cpu__AL-2__r__s1__S8a_blocksse.npz",
+  "xdr_smoke__cpu__AL-2__r__s1__S8b_blocksse.npz",
+  "xdr_smoke__cpu__AL-2__r__s1__S8c_blocksse.npz",
+  "xdr_smoke__cpu__AL-2__r__s1__S8p_blocksse.npz"
+ ],
+ "nboot": 500,
+ "table_file": "algorithm_p_alaska_table_smoke.csv",
+ "script_sha256": "303215cc37c241dfb6c224af52838278361b9affaaab7d7ca1da07b66c9ae0d7",
+ "selection_fn_sha256": "07c7bb4e9bd50336c19447ab6c165601ae1b9385f911b9e52c08a95b71a74570",
+ "core_sha256": "e3e1cdef92f65917299def5bc4e174fb43244e01b4c26aff1ea12dc0386bddd4",
+ "frozen": {
+  "h40": "7098f59dabe2b73f",
+  "h42": "22e215e435e157be",
+  "h54": "cf9a1f6d0929c892",
+  "h41": "492373e4d37b5ea4"
+ },
+ "plan_commit": "2678100",
+ "created": "2026-10-04 16:00:44"
+}

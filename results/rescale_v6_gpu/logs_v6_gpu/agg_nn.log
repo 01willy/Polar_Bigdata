@@ -1,0 +1,75 @@
+/enc/ukrprod_RkmTeb/work/scripts/2_evaluation/v5_aggregate.py:37: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  per_seed = df.groupby(KEY + ["seed"]).apply(lambda s: T.rmse(s.y.values, s.pred.values)).rename("rmse").reset_index()
+region scheme  forcing featset method learner  lam     n   rmse   bias     r  rmse_beq  r_anom  skill_anom
+Alaska  block year_obs    F8TS     D0     ftt -1.0 15540 18.414  1.536 0.471    21.310   0.151       0.009
+Alaska  block year_obs    F8TS     D0     mlp -1.0 15540 18.561 -0.898 0.499    20.737   0.057      -0.022
+Alaska  block year_obs    F8TS     D0    tabm -1.0 15540 19.235 -2.710 0.494    20.953   0.064      -0.027
+Alaska  block year_obs    F8TS     R1     ftt  0.5 15540 18.772 -3.781 0.574    21.017   0.227       0.049
+Alaska  block year_obs    F8TS     R1     mlp  0.5 15540 19.175 -3.725 0.574    20.410   0.218       0.047
+Alaska  block year_obs    F8TS     R1    tabm  0.5 15540 19.325 -3.725 0.566    20.652   0.230       0.053
+Alaska  block year_obs  F8TS_M     D0     ftt -1.0 15540 19.160  2.244 0.409    21.232   0.048      -0.081
+Alaska  block year_obs  F8TS_M     D0     mlp -1.0 15540 19.970 -4.393 0.489    21.301   0.260       0.068
+Alaska  block year_obs  F8TS_M     D0    tabm -1.0 15540 20.145 -4.688 0.472    21.343   0.258       0.066
+Alaska  block year_obs  F8TS_M     R1     ftt  0.5 15540 17.977 -2.937 0.579    21.067   0.229       0.050
+Alaska  block year_obs  F8TS_M     R1     mlp  0.5 15540 19.120 -3.936 0.564    20.727   0.289       0.081
+Alaska  block year_obs  F8TS_M     R1    tabm  0.5 15540 19.449 -4.244 0.566    20.804   0.262       0.069
+Alaska   year year_obs    F8TS     D0     ftt -1.0 15540 15.691 -1.735 0.662    18.423   0.048      -0.216
+Alaska   year year_obs    F8TS     D0     mlp -1.0 15540 17.012 -4.587 0.658    17.084   0.172      -0.088
+Alaska   year year_obs    F8TS     D0    tabm -1.0 15540 17.058 -4.440 0.656    16.678   0.226      -0.074
+Alaska   year year_obs    F8TS     R1     ftt  0.5 15540 17.608 -3.726 0.622    19.934   0.196       0.008
+Alaska   year year_obs    F8TS     R1     mlp  0.5 15540 17.546 -4.272 0.637    18.220   0.256       0.060
+Alaska   year year_obs    F8TS     R1    tabm  0.5 15540 17.627 -4.345 0.637    18.020   0.252       0.052
+Alaska   year year_obs  F8TS_M     D0     ftt -1.0 15540 15.723 -1.668 0.660    17.677   0.022      -0.223
+Alaska   year year_obs  F8TS_M     D0     mlp -1.0 15540 16.592 -3.293 0.644    17.079   0.094      -0.161
+Alaska   year year_obs  F8TS_M     D0    tabm -1.0 15540 16.776 -3.287 0.641    16.662   0.169      -0.118
+Alaska   year year_obs  F8TS_M     R1     ftt  0.5 15540 17.466 -3.439 0.621    19.906   0.121      -0.038
+Alaska   year year_obs  F8TS_M     R1     mlp  0.5 15540 17.486 -3.836 0.629    18.195   0.189       0.015
+Alaska   year year_obs  F8TS_M     R1    tabm  0.5 15540 17.330 -3.675 0.634    18.122   0.208       0.023
+Canada  block year_obs    F8TS     D0     ftt -1.0  1196 23.996 -5.276 0.652    25.540   0.046      -0.090
+Canada  block year_obs    F8TS     D0     mlp -1.0  1196 22.727 -0.871 0.680    24.853   0.045      -0.143
+Canada  block year_obs    F8TS     D0    tabm -1.0  1196 22.782 -2.626 0.680    24.408   0.062      -0.183
+Canada  block year_obs    F8TS     R1     ftt  0.5  1196 24.976 -1.274 0.663    25.882   0.068      -0.129
+Canada  block year_obs    F8TS     R1     mlp  0.5  1196 24.864  0.646 0.665    25.938   0.064      -0.196
+Canada  block year_obs    F8TS     R1    tabm  0.5  1196 24.901  0.509 0.658    26.113   0.077      -0.216
+Canada  block year_obs  F8TS_M     D0     ftt -1.0  1196 25.428 -6.352 0.600    27.230   0.006      -0.203
+Canada  block year_obs  F8TS_M     D0     mlp -1.0  1196 23.678 -3.481 0.650    26.057   0.010      -0.292
+Canada  block year_obs  F8TS_M     D0    tabm -1.0  1196 24.218 -2.680 0.625    26.531   0.018      -0.262
+Canada  block year_obs  F8TS_M     R1     ftt  0.5  1196 25.423 -1.339 0.639    27.321   0.076      -0.148
+Canada  block year_obs  F8TS_M     R1     mlp  0.5  1196 25.602  0.230 0.618    27.116   0.050      -0.312
+Canada  block year_obs  F8TS_M     R1    tabm  0.5  1196 25.624  0.080 0.618    27.025   0.057      -0.295
+Canada   year year_obs    F8TS     D0     ftt -1.0  1164 24.489  5.581 0.629    21.784  -0.170      -0.504
+Canada   year year_obs    F8TS     D0     mlp -1.0  1164 29.856  9.853 0.473    26.392  -0.018      -0.885
+Canada   year year_obs    F8TS     D0    tabm -1.0  1164 30.473  9.959 0.449    26.902   0.009      -0.810
+Canada   year year_obs    F8TS     R1     ftt  0.5  1164 24.656  5.245 0.639    23.505  -0.008      -0.435
+Canada   year year_obs    F8TS     R1     mlp  0.5  1164 26.925  6.657 0.519    24.921   0.037      -0.659
+Canada   year year_obs    F8TS     R1    tabm  0.5  1164 26.942  6.260 0.512    24.909   0.039      -0.705
+Canada   year year_obs  F8TS_M     D0     ftt -1.0  1164 24.978  6.604 0.625    23.990  -0.036      -0.247
+Canada   year year_obs  F8TS_M     D0     mlp -1.0  1164 29.243  9.414 0.489    26.570  -0.051      -0.855
+Canada   year year_obs  F8TS_M     D0    tabm -1.0  1164 30.552 10.773 0.479    27.006  -0.037      -1.042
+Canada   year year_obs  F8TS_M     R1     ftt  0.5  1164 25.011  5.920 0.629    23.751  -0.030      -0.337
+Canada   year year_obs  F8TS_M     R1     mlp  0.5  1164 26.776  6.738 0.530    24.988   0.017      -0.737
+Canada   year year_obs  F8TS_M     R1    tabm  0.5  1164 26.794  6.729 0.525    24.980   0.020      -0.800
+  Lena  block year_obs    F8TS     D0     ftt -1.0  2436 20.134  0.327 0.422    26.832   0.100      -0.266
+  Lena  block year_obs    F8TS     D0     mlp -1.0  2436 17.919  0.421 0.591    24.375   0.200      -0.829
+  Lena  block year_obs    F8TS     D0    tabm -1.0  2436 17.792  0.210 0.595    23.308   0.224      -0.674
+  Lena  block year_obs    F8TS     R1     ftt  0.5  2436 19.728  0.315 0.462    26.815   0.296       0.018
+  Lena  block year_obs    F8TS     R1     mlp  0.5  2436 18.270  0.736 0.595    24.594   0.314      -0.026
+  Lena  block year_obs    F8TS     R1    tabm  0.5  2436 18.524  0.821 0.577    24.527   0.310       0.012
+  Lena  block year_obs  F8TS_M     D0     ftt -1.0  2436 18.675 -0.572 0.536    25.929   0.217      -0.073
+  Lena  block year_obs  F8TS_M     D0     mlp -1.0  2436 18.418  1.015 0.565    26.251   0.186      -0.602
+  Lena  block year_obs  F8TS_M     D0    tabm -1.0  2436 17.659  0.396 0.605    25.954   0.211      -0.508
+  Lena  block year_obs  F8TS_M     R1     ftt  0.5  2436 19.008 -0.105 0.553    26.559   0.305       0.059
+  Lena  block year_obs  F8TS_M     R1     mlp  0.5  2436 18.663  1.252 0.565    24.974   0.314       0.050
+  Lena  block year_obs  F8TS_M     R1    tabm  0.5  2436 18.352  0.551 0.595    25.209   0.338       0.074
+  Lena   year year_obs    F8TS     D0     ftt -1.0  2419 22.082 -0.927 0.253    30.169  -0.079      -1.384
+  Lena   year year_obs    F8TS     D0     mlp -1.0  2419 21.948  1.211 0.295    28.508   0.207      -0.198
+  Lena   year year_obs    F8TS     D0    tabm -1.0  2419 23.614  1.882 0.202    29.702   0.118      -0.363
+  Lena   year year_obs    F8TS     R1     ftt  0.5  2419 21.243 -0.109 0.276    30.127   0.240      -0.320
+  Lena   year year_obs    F8TS     R1     mlp  0.5  2419 20.913  0.974 0.324    28.441   0.343       0.049
+  Lena   year year_obs    F8TS     R1    tabm  0.5  2419 21.294  1.133 0.279    28.617   0.303      -0.006
+  Lena   year year_obs  F8TS_M     D0     ftt -1.0  2419 22.361 -0.362 0.241    30.494  -0.220      -1.981
+  Lena   year year_obs  F8TS_M     D0     mlp -1.0  2419 22.437  1.055 0.247    29.256  -0.053      -0.627
+  Lena   year year_obs  F8TS_M     D0    tabm -1.0  2419 22.816  1.064 0.226    29.455  -0.066      -0.685
+  Lena   year year_obs  F8TS_M     R1     ftt  0.5  2419 21.297  0.156 0.268    29.811   0.109      -0.498
+  Lena   year year_obs  F8TS_M     R1     mlp  0.5  2419 20.684  0.962 0.351    28.605   0.298       0.015
+  Lena   year year_obs  F8TS_M     R1    tabm  0.5  2419 21.001  0.889 0.312    28.542   0.298       0.016

@@ -1,0 +1,224 @@
+{
+ "created": "2026-09-18",
+ "n_datasets": 106,
+ "n_alt": 103,
+ "status_counts": {
+  "dup_v3_001": 72,
+  "same_calm_site": 12,
+  "no_coords": 11,
+  "new_coord": 5,
+  "same_calm_site_coarse": 3
+ },
+ "new_coord_unique_by_macro": {
+  "Russia_E": 1,
+  "Russia_W": 4
+ },
+ "new_coord_datasets": [
+  {
+   "dataset_id": 237,
+   "al_name": "Lavrentiya",
+   "country": "Russia",
+   "macro": "Russia_E",
+   "lat": 65.6,
+   "lon": 171.05,
+   "n_valid": 3025,
+   "year_min": 2000,
+   "year_max": 2025,
+   "n_years": 25,
+   "value_mean": 67.5
+  },
+  {
+   "dataset_id": 273,
+   "al_name": "Yubileynoe 3 WET",
+   "country": "Russia",
+   "macro": "Russia_W",
+   "lat": 65.95,
+   "lon": 75.872,
+   "n_valid": 121,
+   "year_min": 2007,
+   "year_max": 2007,
+   "n_years": 1,
+   "value_mean": 35.2
+  },
+  {
+   "dataset_id": 274,
+   "al_name": "Yubileynoe 3 DRY",
+   "country": "Russia",
+   "macro": "Russia_W",
+   "lat": 65.951,
+   "lon": 75.872,
+   "n_valid": 121,
+   "year_min": 2007,
+   "year_max": 2007,
+   "n_years": 1,
+   "value_mean": 23.1
+  },
+  {
+   "dataset_id": 271,
+   "al_name": "Yubileynoe 2 WET",
+   "country": "Russia",
+   "macro": "Russia_W",
+   "lat": 66.009,
+   "lon": 75.78,
+   "n_valid": 121,
+   "year_min": 2007,
+   "year_max": 2007,
+   "n_years": 1,
+   "value_mean": 28.5
+  },
+  {
+   "dataset_id": 272,
+   "al_name": "Yubileynoe 2 DRY",
+   "country": "Russia",
+   "macro": "Russia_W",
+   "lat": 66.01,
+   "lon": 75.78,
+   "n_valid": 121,
+   "year_min": 2007,
+   "year_max": 2007,
+   "n_years": 1,
+   "value_mean": 27.3
+  }
+ ],
+ "same_calm_site_datasets": [
+  {
+   "dataset_id": 225,
+   "al_name": "North Head (Grid)",
+   "near_calm_site": "C3 A",
+   "near_calm_name": "North Head (thaw tube)",
+   "near_calm_dist": 0.0,
+   "near_v3_region": "Canada"
+  },
+  {
+   "dataset_id": 213,
+   "al_name": "Zackenberg ZEROCALM 1",
+   "near_calm_site": "G1",
+   "near_calm_name": "\"Zackenberg; ZEROCALM 1\"",
+   "near_calm_dist": 0.053,
+   "near_v3_region": "CALM_Greenland"
+  },
+  {
+   "dataset_id": 215,
+   "al_name": "Zackenberg ZEROCALM 2",
+   "near_calm_site": "G1",
+   "near_calm_name": "\"Zackenberg; ZEROCALM 1\"",
+   "near_calm_dist": 0.053,
+   "near_v3_region": "CALM_Greenland"
+  },
+  {
+   "dataset_id": 269,
+   "al_name": "Nadym Grid",
+   "near_calm_site": "R1",
+   "near_calm_name": "\"Nadym; West Siberia \"",
+   "near_calm_dist": 0.052,
+   "near_v3_region": "GTNPenv_RU"
+  },
+  {
+   "dataset_id": 1526,
+   "al_name": "Omolon",
+   "near_calm_site": "R35",
+   "near_calm_name": "Omolon",
+   "near_calm_dist": 0.011,
+   "near_v3_region": "CALM_Russia_E"
+  },
+  {
+   "dataset_id": 252,
+   "al_name": "Konkovaya River R15a",
+   "near_calm_site": "R15 A",
+   "near_calm_name": "Konkovaya River, Kolyma",
+   "near_calm_dist": 0.026,
+   "near_v3_region": "CALM_Russia_E"
+  },
+  {
+   "dataset_id": 253,
+   "al_name": "Konkovaya River R15b",
+   "near_calm_site": "R15 A",
+   "near_calm_name": "Konkovaya River, Kolyma",
+   "near_calm_dist": 0.029,
+   "near_v3_region": "CALM_Russia_E"
+  },
+  {
+   "dataset_id": 263,
+   "al_name": "Yakutskoe Lake",
+   "near_calm_site": "R25",
+   "near_calm_name": "Jakutskoe Lake",
+   "near_calm_dist": 0.011,
+   "near_v3_region": "CALM_Russia_E"
+  },
+  {
+   "dataset_id": 265,
+   "al_name": "Allaiha",
+   "near_calm_site": "R31",
+   "near_calm_name": "Allaiha (Indigirka basin)",
+   "near_calm_dist": 0.015,
+   "near_v3_region": "CALM_Russia_E"
+  },
+  {
+   "dataset_id": 1505,
+   "al_name": "UNISCALM",
+   "near_calm_site": "N3",
+   "near_calm_name": "UNISCALM",
+   "near_calm_dist": 0.086,
+   "near_v3_region": "GTNPenv_SJ"
+  },
+  {
+   "dataset_id": 1518,
+   "al_name": "Pearl Creek",
+   "near_calm_site": "U19",
+   "near_calm_name": "Pearl Creek",
+   "near_calm_dist": 0.017,
+   "near_v3_region": "United States (Alaska)"
+  },
+  {
+   "dataset_id": 277,
+   "al_name": "West Dock 1km",
+   "near_calm_site": "U5",
+   "near_calm_name": "West Dock 1 km grid",
+   "near_calm_dist": 0.002,
+   "near_v3_region": "GTNPenv_US"
+  },
+  {
+   "dataset_id": 1516,
+   "al_name": "Bonanza Creek",
+   "near_calm_site": "U18",
+   "near_calm_name": "Bonanza Creek LTER",
+   "near_calm_dist": 0.133,
+   "near_v3_region": "United States (Alaska)"
+  },
+  {
+   "dataset_id": 281,
+   "al_name": "Imnavait 1km",
+   "near_calm_site": "U14",
+   "near_calm_name": "Galbraith Lake",
+   "near_calm_dist": 0.023,
+   "near_v3_region": "ABoVE_AK"
+  },
+  {
+   "dataset_id": 13,
+   "al_name": "Happy Valley 1km",
+   "near_calm_site": "U10",
+   "near_calm_name": "Lupine Hill",
+   "near_calm_dist": 0.095,
+   "near_v3_region": "United States (Alaska)"
+  }
+ ],
+ "no_coords_site_ids": [
+  32,
+  36,
+  62,
+  295,
+  296,
+  297,
+  299,
+  300,
+  301,
+  312,
+  329
+ ],
+ "rules": {
+  "dup": "v3 셀 체비쇼프 0.01° 이내",
+  "same_site": "alt_global.csv 사이트명 토큰 일치 + 0.1° 이내",
+  "same_site_coarse": "사이트명 토큰 일치 + 0.5° 이내(GTN-P 대표 좌표가 소수 1자리인 경우)"
+ },
+ "verdict_rule": "편입 가치: 신규 매크로 지역 ≥ 1 또는 기존 소표본 지역 셀 ≥ 2배"
+}

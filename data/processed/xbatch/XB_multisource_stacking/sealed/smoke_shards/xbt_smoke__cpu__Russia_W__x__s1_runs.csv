@@ -1,0 +1,32 @@
+exp,target,mode,parent,split,variant,part,axis,method,learner,alpha,placement,n,n_lab,draw,seed,lam,E_used,alpha_sel,n_blocks_lab,n_nonfinite,fit_flag,n_train_rows,cv_folds,cv_flag,stack_fallback,stack_gamma,stack_K,stack_w
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,P0,none,1,cell,0,0,0,-1,0.0,1.5895097368022235,,0,0,,0,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,P1,none,1,cell,0,0,0,-1,0.0,1.5895097368022235,,0,0,,0,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,Pe,none,1,cell,0,0,0,-1,0.0,1.5895097368022235,,0,0,,0,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,Stack,none,1,cell,0,0,0,-1,0.0,,,0,0,,0,0,,n<10,1.0,7.0,"{""P1"": 1.0}"
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,P*,none,1,cell,0,0,0,-1,0.0,1.646917922909178,,0,0,,0,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,Stack0,none,1,cell,0,0,0,-1,0.0,,,0,0,,0,0,,,,7.0,"{""Ss"": 0.900644605499508, ""Cr"": 0.09935539450049202}"
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,B:ens,none,1,cell,0,0,0,-1,0.0,,,0,0,,0,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,R1,catboost_lo,1,cell,0,0,0,0,0.25,1.5895097368022235,,0,0,,17436,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,Re,catboost_lo,1,cell,0,0,0,0,0.25,1.5895097368022235,,0,0,,17436,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,StackR,catboost_lo,1,cell,0,0,0,0,0.25,,,0,0,reuse_R1,17436,0,,n<10,1.0,7.0,"{""P1"": 1.0}"
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,P1,none,1,cell,3,3,0,-1,0.0,1.6815973658756707,,3,0,,0,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,Pe,none,1,cell,3,3,0,-1,0.0,1.6815973658756707,,3,0,,0,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,Stack,none,1,cell,3,3,0,-1,0.0,,,3,0,,0,0,,n<10,1.0,7.0,"{""P1"": 1.0}"
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,P*,none,1,cell,3,3,0,-1,0.0,1.7369534662421056,,3,0,,0,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,R1,catboost_lo,1,cell,3,3,0,0,0.25,1.6815973658756707,,3,0,,17439,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,Re,catboost_lo,1,cell,3,3,0,0,0.25,1.6815973658756707,,3,0,,17439,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,StackR,catboost_lo,1,cell,3,3,0,0,0.25,,,3,0,reuse_R1,17439,0,,n<10,1.0,7.0,"{""P1"": 1.0}"
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,P1,none,1,cell,10,10,0,-1,0.0,2.1005197734607663,,9,0,,0,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,Pe,none,1,cell,10,10,0,-1,0.0,2.1005197734607663,,9,0,,0,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,Stack,none,1,cell,10,10,0,-1,0.0,,,9,0,,0,0,,,0.0,7.0,"{""Ku"": 1.0}"
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,P*,none,1,cell,10,10,0,-1,0.0,2.1551890460174628,,9,0,,0,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,R1,catboost_lo,1,cell,10,10,0,0,0.25,2.1005197734607663,,9,0,,17446,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,Re,catboost_lo,1,cell,10,10,0,0,0.25,2.1005197734607663,,9,0,,17446,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,StackR,catboost_lo,1,cell,10,10,0,0,0.25,,,9,0,,17446,0,,,0.0,7.0,"{""Ku"": 1.0}"
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,P1,none,1,cell,-1,16,0,-1,0.0,2.165389166076931,,11,0,,0,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,Pe,none,1,cell,-1,16,0,-1,0.0,2.165389166076931,,11,0,,0,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,Stack,none,1,cell,-1,16,0,-1,0.0,,,11,0,,0,0,,gamma=1,1.0,7.0,"{""P1"": 1.0}"
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,P*,none,1,cell,-1,16,0,-1,0.0,2.2141176693268125,,11,0,,0,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,R1,catboost_lo,1,cell,-1,16,0,0,0.25,2.165389166076931,,11,0,,17452,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,Re,catboost_lo,1,cell,-1,16,0,0,0.25,2.165389166076931,,11,0,,17452,0,,,,,
+xb_t,Russia_W,x,Russia_W,1,,cpu,xb_t,StackR,catboost_lo,1,cell,-1,16,0,0,0.25,,,11,0,reuse_R1,17452,0,,gamma=1,1.0,7.0,"{""P1"": 1.0}"

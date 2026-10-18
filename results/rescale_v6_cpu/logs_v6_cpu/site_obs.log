@@ -1,0 +1,16 @@
+[Alaska b0] cells 4,709 rows 70,635 32s
+[Alaska b1] cells 2,137 rows 32,055 63s
+[Alaska b2] cells 2,461 rows 36,915 93s
+[Alaska b3] cells 1,104 rows 16,560 124s
+[Alaska b4] cells 2,842 rows 42,630 155s
+[Lena b0] cells 806 rows 12,090 167s
+[Lena b1] cells 519 rows 7,785 179s
+[Lena b2] cells 347 rows 5,205 193s
+[Lena b3] cells 267 rows 4,005 207s
+[Lena b4] cells 267 rows 4,005 220s
+[Canada b0] cells 157 rows 2,355 230s
+[Canada b1] cells 143 rows 2,145 241s
+[Canada b2] cells 142 rows 2,130 253s
+[Canada b3] cells 139 rows 2,085 264s
+[Canada b4] cells 149 rows 2,235 276s
+[done] rows 242,835, multi-year sites (>=4 yrs) 276 279s

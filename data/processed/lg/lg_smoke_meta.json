@@ -1,0 +1,207 @@
+{
+ "stage": "H40/LG",
+ "plan": "docs/EXPERIMENT_PLAN_LG_2026-09-29.md",
+ "git_commit": "6830277",
+ "tag": "lg_smoke",
+ "args": {
+  "part": "cpu",
+  "targets": "",
+  "modes": "i,x",
+  "splits": 5,
+  "n_grid": "0,3,10,40,160,320,1000,all",
+  "draws": 5,
+  "seeds": 2,
+  "learners": "",
+  "methods": "",
+  "alphas": "1,10,100,cont",
+  "lams": "0.25,0.5,1.0",
+  "workers": 2,
+  "threads": 4,
+  "gpus": "0,1,2,3",
+  "procs_per_gpu": 1,
+  "epochs": 100,
+  "out_dir": "data/processed/lg",
+  "data_dir": "data/processed",
+  "tag": "lg",
+  "resume": true,
+  "smoke": true,
+  "count_only": false,
+  "summarize_only": false,
+  "no_summarize": false,
+  "kappa": 10.0,
+  "r": 10.0,
+  "buffer_km": 100.0,
+  "k_sub": "Alaska:6,Canada:3,Lena:2",
+  "min_cells_prior": 3,
+  "learner_targets": "",
+  "learner_splits": 3,
+  "learner_draws": 2,
+  "learner_n_grid": "0,10,40,160,all",
+  "place_n_grid": "10,40,160",
+  "nested_targets": "",
+  "nested_methods": "R0,R1",
+  "nested_min_n": 10,
+  "nested_max_folds": 0,
+  "cb_iters": 200,
+  "cont_trees": 100,
+  "ft_epochs": 20,
+  "ft_lr": 0.0001,
+  "nboot": 1000
+ },
+ "targets": [
+  "Russia_W|x",
+  "AL-3|i",
+  "Canada|x"
+ ],
+ "splits": [
+  1
+ ],
+ "n_grid": [
+  0,
+  3,
+  40,
+  -1
+ ],
+ "draws": 1,
+ "seeds": [
+  0
+ ],
+ "lams": [
+  0.25,
+  0.5,
+  1.0
+ ],
+ "alphas": [
+  "1",
+  "10",
+  "100",
+  "cont"
+ ],
+ "methods": [
+  "P0",
+  "P1",
+  "P2",
+  "P3",
+  "D0",
+  "D1",
+  "R0",
+  "R1",
+  "R2",
+  "R3",
+  "V1",
+  "V1r"
+ ],
+ "learner_targets": [
+  "Russia_W|x",
+  "AL-3|i",
+  "Canada|x"
+ ],
+ "nested_targets": [
+  "Lena|x",
+  "Canada|x",
+  "AL-2|i",
+  "AL-5|i",
+  "AL-2|x",
+  "AL-5|x"
+ ],
+ "key_fields": [
+  "method",
+  "learner",
+  "alpha",
+  "placement",
+  "n",
+  "draw",
+  "seed",
+  "lam"
+ ],
+ "p0_key": [
+  "P0",
+  "none",
+  "1",
+  "cell",
+  0,
+  0,
+  -1,
+  0.0
+ ],
+ "all_n": -1,
+ "n_units": 6,
+ "parts": [
+  "cpu",
+  "gpu"
+ ],
+ "n_fit": {
+  "cpu:v1_ridge": 11,
+  "cpu:method": 74,
+  "cpu:alpha": 48,
+  "cpu:alpha_cont": 24,
+  "cpu:place": 2,
+  "cpu:learner": 24,
+  "cpu:nested_cv": 150,
+  "cpu:nested_cont": 50,
+  "gpu:learner": 48,
+  "gpu:mlp_alpha": 35,
+  "gpu:mlp_cont": 15
+ },
+ "n_fit_total": 481,
+ "unit_elapsed_s_sum": 242.89999999999998,
+ "elapsed_s": 0.5,
+ "summarize_s": 3.6,
+ "n_rows": 710,
+ "n_curve": 710,
+ "n_minn": 230,
+ "n_tests": 97,
+ "split_info": {
+  "AL-3": {
+   "1": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 4,
+    "n_eval": 317,
+    "n_A": 334,
+    "nb_A": 12,
+    "valid": true,
+    "n_unique_splits": 1,
+    "n_valid_splits": 1
+   }
+  },
+  "Canada": {
+   "1": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 20,
+    "n_eval": 393,
+    "n_A": 355,
+    "nb_A": 17,
+    "valid": true,
+    "n_unique_splits": 1,
+    "n_valid_splits": 1
+   }
+  },
+  "Russia_W": {
+   "1": {
+    "dup_of": -1,
+    "mirror_of": -1,
+    "nb_eval": 7,
+    "n_eval": 12,
+    "n_A": 16,
+    "nb_A": 11,
+    "valid": true,
+    "n_unique_splits": 1,
+    "n_valid_splits": 1
+   }
+  }
+ },
+ "skipped": [],
+ "ci_rule": "h4_common.boot_delta_blocks: 분할 안 채점 블록 재표집, 방법·추출·seed 공통 인덱스, 분할 분포 평균. 유효 분할만 결합",
+ "sig_rule": "셀 가중·블록 등가중 CI 가 모두 0 을 제외할 때만 improve/worse",
+ "minn_rule": "h4_common.min_n: d_p0_hi < 0 & split_win ≥ 2/3 & rep_win ≥ 0.75. 유효 분할 < 2 는 절단",
+ "strat_rule": "m1_stats.summarize_delta. 지역 분포는 블록 합집합 ≥ 8 이고 유효 분할 ≥ 1 일 때만 CI 풀에 넣는다",
+ "conventions": {
+  "P_n0": "n = 0 에서 P1–P3 = P0",
+  "R3": "원천 잔차는 D1 표본 내 예측 기준",
+  "V1": "ẑ 를 학습 z 범위로 자름",
+  "nested": "선택은 seed 0 적합, 같은 α 를 모든 seed 에 적용",
+  "mlp_cont": "BatchNorm·Dropout 평가 모드 고정"
+ }
+}

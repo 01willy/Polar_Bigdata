@@ -1,0 +1,66 @@
+{
+ "created": "2026-10-15 17:41:52",
+ "nc": "data/raw/era5land/nh_monthly_2010-2024.nc",
+ "nc_sha256": "9a7fddda51230426a55a9be0f252d4db73c40d6ff2476d3e293116efed000d88",
+ "nc_bytes": 854779796,
+ "cells_file": "data/processed/v9_ext/static_v5.csv",
+ "n_cells": 73,
+ "n_ok": 73,
+ "grid_stats": {
+  "direct": 64,
+  "nb2": 9,
+  "nb5": 0,
+  "fail": 0
+ },
+ "years": [
+  2010,
+  2011,
+  2012,
+  2013,
+  2014,
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024
+ ],
+ "vars": [
+  "e5_maat",
+  "e5_tdd",
+  "e5_sqrt_tdd",
+  "e5_twarm",
+  "e5_fdd",
+  "e5_tcold",
+  "e5_stl1",
+  "e5_tdd_soil",
+  "e5_sqrt_tdd_soil",
+  "e5_swe",
+  "e5_swe_max"
+ ],
+ "definitions": "연도 y, T_m = 2 m 기온 월평균 °C, S_m = 토양 0–7 cm 온도 월평균 °C, W_m = 적설 수당량 m, d_m = 그 달의 일수)\n  e5_maat        y 의 1–12월 T_m 평균\n  e5_tdd         Σ_{m∈y} max(T_m, 0)·d_m (융해 도일, °C·d).  e5_sqrt_tdd = √e5_tdd\n  e5_twarm       y 의 월 최고 T_m\n  e5_fdd         Σ_{m∈Oct(y−1)…Apr(y)} max(−T_m, 0)·d_m (전겨울 동결 도일).  e5_tcold = 그 창의 월 최저 T_m\n  e5_stl1        y 의 1–12월 S_m 평균.  e5_tdd_soil = Σ_{m∈y} max(S_m, 0)·d_m.  e5_sqrt_tdd_soil = √\n  e5_swe         Oct(y−1)…Sep(y) 12개월 W_m 평균(수문년).  e5_swe_max = 그 창의 월 최댓값\n  tdd_cum_m      1월부터 m월 말까지의 누적 TDD(관측 월까지의 도일, 관측일 정합용). tdd_cum_12 = e5_tdd\n  winter_partial 1 이면 y = 2010 이라 Oct–Dec 2009 가 없어 겨울 창이 Jan–Apr(2010)·Jan–Sep(2010) 로 줄었다\n",
+ "crosscheck_vs_static_v5": {
+  "n": 0,
+  "tdd_absdiff_median": NaN,
+  "tdd_absdiff_p99": NaN,
+  "tdd_absdiff_max": NaN,
+  "maat_absdiff_max": NaN,
+  "frac_within_0p5": NaN,
+  "note": "기존 열은 2015–2020 월 기후값(별도 파일 nh_monthly_2015-2020.nc)·최근접 격자(육지 확인 없음) 규칙. 차이는 파일·격자 규칙 차이"
+ },
+ "outputs": {
+  "forcing_year.csv": {
+   "rows": 1095,
+   "sha256": "8428baaa00d1afb7535284939e8fe5aeea52f1bee7240c03542c7c0fe668eee1"
+  },
+  "forcing_clim.csv": {
+   "rows": 73,
+   "sha256": "196c88d4c725d1baa7f88bb440f6e41b7d04d8e38da7193e885bf6ab115b7523"
+  }
+ },
+ "elapsed_s": 23.7
+}

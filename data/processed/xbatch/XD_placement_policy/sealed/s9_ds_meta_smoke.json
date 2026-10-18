@@ -1,0 +1,108 @@
+{
+ "variant": "S9-DS",
+ "model_path": "/home/willy010313/Polar_Bigdata/data/processed/xbatch/XD_placement_policy/policy/s9_ds_smoke.pt",
+ "model_sha256": "28ad487524706b7f102db82de8bc313ba1a2fe56ea081f25cdde6df766132ff5",
+ "cv_utility": -0.04719926352158414,
+ "best_epoch": 2,
+ "cv": {
+  "best_epoch": 2,
+  "cv_utility": -0.04719926352158414,
+  "curve": [
+   0.035033346959800406,
+   -0.04719926352158414
+  ],
+  "per_fold": [
+   [
+    0.165054133386157,
+    0.0566519952306345
+   ],
+   [
+    -0.09498743946655618,
+    -0.15105052227380278
+   ]
+  ],
+  "folds": [
+   {
+    "val": "AL-3",
+    "train": [
+     "AL-5"
+    ],
+    "n_train_groups": 1,
+    "n_val_groups": 1
+   },
+   {
+    "val": "AL-5",
+    "train": [
+     "AL-3"
+    ],
+    "n_train_groups": 1,
+    "n_val_groups": 1
+   }
+  ]
+ },
+ "features": {
+  "element": [
+   "z0",
+   "z1",
+   "z2",
+   "z3",
+   "z4",
+   "z5",
+   "z6",
+   "z7",
+   "z8",
+   "z9",
+   "z10",
+   "z11",
+   "z12",
+   "z13",
+   "z14",
+   "z15",
+   "z16",
+   "z17",
+   "z18",
+   "z19",
+   "z20",
+   "z21",
+   "z22",
+   "z23",
+   "z24",
+   "s_std",
+   "blk_frac",
+   "di",
+   "nn_dist"
+  ],
+  "context": [
+   "ctx_ncand",
+   "ctx_nblocks",
+   "ctx_effblocks",
+   "ctx_cov_between",
+   "ctx_src_diff",
+   "n"
+  ]
+ },
+ "seeds": [
+  0
+ ],
+ "torch": "2.6.0+cu124",
+ "cuda": "12.4",
+ "cudnn": "90100",
+ "cublas": ":4096:8",
+ "device": "cuda",
+ "gpu": 0,
+ "gpu_name": "NVIDIA GeForce RTX 3090",
+ "driver": "530.41.03",
+ "threads": 2,
+ "deterministic": true,
+ "n_groups": 2,
+ "n_sets": 24,
+ "tasks": [
+  "AL-3",
+  "AL-5"
+ ],
+ "elapsed_s": 2.9,
+ "created": "2026-10-04 16:00:54",
+ "code_sha256": "2cd7c8422c9186dd46d5e9648dd3aa475b5cfc7f606ac88eaa89fa9b0406556c",
+ "policy_code_sha256": "303215cc37c241dfb6c224af52838278361b9affaaab7d7ca1da07b66c9ae0d7",
+ "index_path": "/home/willy010313/Polar_Bigdata/data/processed/xbatch/XD_placement_policy/policy/s9_ds_index_smoke.json"
+}

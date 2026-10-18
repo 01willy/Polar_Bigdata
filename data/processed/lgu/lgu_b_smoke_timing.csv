@@ -1,0 +1,13 @@
+part,target,normalizer,status,elapsed_s,n_fit,n_fit_failed,device,threads
+fit,Canada,nflow,ok,3.8,5.0,0.0,,4.0
+fit,Canada,cfm,ok,54.1,5.0,0.0,,4.0
+fit,Canada,cbq,ok,5.6,5.0,0.0,,4.0
+fit,Canada,phys,ok,0.5,0.0,0.0,,4.0
+score,Canada,,ok,1.7,,,,4.0
+fit,Russia_W,nflow,ok,1.8,5.0,0.0,,4.0
+fit,Russia_W,cfm,ok,51.8,5.0,0.0,,4.0
+fit,Russia_W,cbq,ok,5.6,5.0,0.0,,4.0
+fit,Russia_W,phys,ok,0.5,0.0,0.0,,4.0
+score,Russia_W,,ok,1.5,,,,4.0
+summary_2stage,Russia_W,,ok,2.9,,,,
+summary_2stage,Canada,,ok,4.9,,,,

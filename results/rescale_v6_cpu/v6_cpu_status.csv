@@ -1,0 +1,16 @@
+stage,rc,sec
+core,0,4329
+core_region,0,414
+featsets,0,6036
+confirm,0,148
+blk025,0,144
+blk100,0,146
+rf,0,182
+site_obs,0,280
+site_year,0,144
+agg_core,0,60
+agg_feat,0,7
+agg_confirm_v6,0,1
+agg_blk025_v6,0,2
+agg_blk100_v6,0,2
+agg_rf,0,5

@@ -1,0 +1,17 @@
+target,parent,rule,stage,lam,alpha,breakeven_n_ci,censored,be_flag,breakeven_n_ci_all,censored_all,n_valid_splits,n_unique_splits,n_blocks_min,ci_flag,breakeven_n_rec50,censored_rec50,breakeven_n_ci_rep,n_max,n_tested,n_splits,best_n,best_d_phys
+AL-4,Alaska,kmedoid,S1,0.0,1.0,-1,True,valid_splits<2;blocks<5,-1,True,1,1,3,blocks<5,-1,True,-1,20,2,1,3,0.005184282489896219
+AL-4,Alaska,kmedoid,S1refit,0.0,1.0,-1,True,valid_splits<2;blocks<5,-1,True,1,1,3,blocks<5,-1,True,-1,20,2,1,3,0.12070463504592865
+AL-4,Alaska,kmedoid,S3,0.25,1.0,-1,True,valid_splits<2;blocks<5,20,False,1,1,3,blocks<5,20,False,-1,20,2,1,20,-1.1674372697519253
+AL-4,Alaska,kmedoid,S3,0.5,1.0,-1,True,valid_splits<2;blocks<5,-1,True,1,1,3,blocks<5,-1,True,-1,20,2,1,20,0.15889191254292712
+AL-4,Alaska,random,S1,0.0,1.0,-1,True,valid_splits<2;blocks<5,-1,True,1,1,3,blocks<5,-1,True,-1,20,2,1,20,0.024344154881632107
+AL-4,Alaska,random,S1refit,0.0,1.0,-1,True,valid_splits<2;blocks<5,-1,True,1,1,3,blocks<5,-1,True,-1,20,2,1,20,0.053858129133580235
+AL-4,Alaska,random,S3,0.25,1.0,-1,True,valid_splits<2;blocks<5,3,False,1,1,3,blocks<5,3,False,-1,20,2,1,3,-1.219024160312113
+AL-4,Alaska,random,S3,0.5,1.0,-1,True,valid_splits<2;blocks<5,3,False,1,1,3,blocks<5,-1,True,-1,20,2,1,3,-0.9222846088600072
+LE-2,Lena,kmedoid,S1,0.0,1.0,-1,True,valid_splits<2,-1,True,1,1,5,,-1,True,-1,20,2,1,3,-0.03593751124009614
+LE-2,Lena,kmedoid,S1refit,0.0,1.0,-1,True,valid_splits<2,-1,True,1,1,5,,-1,True,-1,20,2,1,3,-0.03750477294872567
+LE-2,Lena,kmedoid,S3,0.25,1.0,-1,True,valid_splits<2,-1,True,1,1,5,,-1,True,-1,20,2,1,20,-0.0920352529073547
+LE-2,Lena,kmedoid,S3,0.5,1.0,-1,True,valid_splits<2,-1,True,1,1,5,,-1,True,-1,20,2,1,20,-0.039285851426566154
+LE-2,Lena,random,S1,0.0,1.0,-1,True,valid_splits<2,-1,True,1,1,5,,-1,True,-1,20,2,1,3,-0.005968804979771036
+LE-2,Lena,random,S1refit,0.0,1.0,-1,True,valid_splits<2,-1,True,1,1,5,,-1,True,-1,20,2,1,20,0.5286737217591213
+LE-2,Lena,random,S3,0.25,1.0,-1,True,valid_splits<2,-1,True,1,1,5,,-1,True,-1,20,2,1,20,-0.45255630180772144
+LE-2,Lena,random,S3,0.5,1.0,-1,True,valid_splits<2,20,False,1,1,5,,-1,True,-1,20,2,1,20,-0.7620964151515075

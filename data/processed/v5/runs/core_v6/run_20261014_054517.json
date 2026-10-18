@@ -1,0 +1,28 @@
+{
+ "args": {
+  "proc": "data/processed/v5",
+  "out": "data/processed/v5/runs",
+  "tag": "core_v6",
+  "regions": "Lena",
+  "schemes": "block,year,random,block_year",
+  "forcings": "year_obs,year,clim",
+  "featsets": "F8TS",
+  "methods": "P0,P1,P1a,Ku,Ed,PE,D0,F1,D1,R1",
+  "learners": "catboost",
+  "lams": "0.25,0.5,1",
+  "seeds": "0,1,2",
+  "k": 5,
+  "fold_seed": 0,
+  "threads": 24,
+  "epochs": 100,
+  "gpu": "",
+  "nice": 10,
+  "exclude_years": "",
+  "exclude_source": "",
+  "block_deg": 0.5,
+  "year_weight": false,
+  "no_products": true
+ },
+ "started": "2026-10-14 05:45:17",
+ "rows": 19172
+}

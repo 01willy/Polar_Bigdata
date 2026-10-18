@@ -1,0 +1,76 @@
+{
+ "stage": "H22",
+ "design": "docs/EXPERIMENT_DESIGN_H18-H24_2026-09-22.md",
+ "E_AK": 1.616688667140627,
+ "targets": [
+  "Lena"
+ ],
+ "methods": [
+  "erm",
+  "irm",
+  "vrex",
+  "groupdro",
+  "dann",
+  "regemb",
+  "stable"
+ ],
+ "ytypes": [
+  "resid",
+  "direct"
+ ],
+ "hp": {
+  "irm": [
+   1.0
+  ],
+  "vrex": [
+   1.0
+  ],
+  "dann": [
+   0.1
+  ],
+  "erm": [
+   0.0
+  ],
+  "groupdro": [
+   0.01
+  ],
+  "regemb": [
+   0.0
+  ]
+ },
+ "seeds": [
+  0
+ ],
+ "splits": [
+  0
+ ],
+ "epochs": 8,
+ "be": 512,
+ "gpu": "5",
+ "meta": {
+  "noinfo|Lena|0|resid|regemb_near": "Russia_E",
+  "Lena|resid|stable_feats": [
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_sin",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "sg_clay_5_15",
+   "cci_alt"
+  ],
+  "noinfo|Lena|0|direct|regemb_near": "Russia_E",
+  "Lena|direct|stable_feats": [
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_sin",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "sg_clay_5_15",
+   "cci_alt"
+  ]
+ },
+ "git_commit": "8385a1c",
+ "elapsed_s": 15.9
+}

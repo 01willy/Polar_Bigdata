@@ -1,0 +1,66 @@
+{
+ "stage": "H24",
+ "design": "docs/EXPERIMENT_DESIGN_H18-H24_2026-09-22.md",
+ "E_AK": 1.616688667140627,
+ "E0_sandbox": 1.9943492856967027,
+ "E_reg": {
+  "Lena": 1.4339838226739525,
+  "Canada": 1.597397653108288,
+  "Russia_W": 2.6441227216083845,
+  "Russia_C": 2.0522801480634487,
+  "Russia_E": 1.887204956079742,
+  "Greenland": 2.3511064126463994
+ },
+ "kappa": 10.0,
+ "strategies": [
+  "random",
+  "block_rr",
+  "kmedoid",
+  "farthest",
+  "stefan_strat",
+  "geo_strat",
+  "calm_sites"
+ ],
+ "n_grid": [
+  3,
+  10
+ ],
+ "n_grid_ak": [
+  5,
+  50
+ ],
+ "reps": 2,
+ "reps_cb": 1,
+ "seeds": [
+  0
+ ],
+ "lam": 0.25,
+ "tasks": [
+  {
+   "target": "Alaska",
+   "split": 0,
+   "n_A": 6803,
+   "n_eval": 6803,
+   "n_fit": 27,
+   "elapsed_s": 8.5
+  },
+  {
+   "target": "Russia_W",
+   "split": 0,
+   "n_A": 16,
+   "n_eval": 12,
+   "n_fit": 25,
+   "elapsed_s": 11.4
+  },
+  {
+   "target": "Lena",
+   "split": 0,
+   "n_A": 1519,
+   "n_eval": 1496,
+   "n_fit": 25,
+   "elapsed_s": 11.7
+  }
+ ],
+ "git_commit": "8385a1c",
+ "elapsed_s": 11.9
+}

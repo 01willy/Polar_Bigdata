@@ -1,0 +1,99 @@
+{
+ "stage": "XI_climate_extrapolation_retest",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md",
+ "plan_commit": "2678100",
+ "plan_revision": "개정 1",
+ "tag": "xi_smoke",
+ "nboot": 500,
+ "nboot_asked": 10000,
+ "nboot_capped": true,
+ "git_commit": "d8a3758",
+ "code_sha": "d7673b4f0d7f",
+ "code_sha_core": "d0ebc4e7a9a2",
+ "frozen": {
+  "h40": "7098f59dabe2b73f",
+  "h42": "22e215e435e157be",
+  "h54": "cf9a1f6d0929c892",
+  "h41": "492373e4d37b5ea4"
+ },
+ "n_units": 3,
+ "n_stores": 9,
+ "unit_status": {
+  "ok": 3
+ },
+ "holm_m": 6,
+ "frac_min": 0.5,
+ "fracs": {
+  "Canada|warm": {
+   "frac_mean": 0.953125,
+   "width_mean": 0.34578921109033445,
+   "n_splits": 1,
+   "extrap_test": true
+  },
+  "Canada~exp~lic|warm": {
+   "frac_mean": 0.024154589371980676,
+   "width_mean": -0.392118272435134,
+   "n_splits": 1,
+   "extrap_test": false
+  },
+  "Canada~exp~lic|warm_trim": {
+   "frac_mean": 1.0,
+   "width_mean": 0.46518161773315114,
+   "n_splits": 1,
+   "extrap_test": true
+  }
+ },
+ "primary": [
+  "Canada~exp~lic",
+  "warm_trim"
+ ],
+ "basic": [
+  "Canada~exp~lic",
+  "warm"
+ ],
+ "hypotheses": {
+  "XI-a": {
+   "verdict": "기각: 우세인 대비가 있다(n=100)",
+   "verdict_noninf_d10": "",
+   "verdict_basic": "외삽 시험 아님",
+   "verdict_basic_noninf_d10": "",
+   "verdict_written": "외삽 시험 아님",
+   "both_written": true,
+   "extrap_test_trim": true,
+   "extrap_test_basic": false,
+   "basic_run": true
+  },
+  "XI-b": {
+   "verdict": "기각: 열세인 대비가 있다(n=100)",
+   "verdict_noninf_d10": "",
+   "verdict_basic": "외삽 시험 아님",
+   "verdict_basic_noninf_d10": "",
+   "verdict_written": "외삽 시험 아님",
+   "both_written": true,
+   "extrap_test_trim": true,
+   "extrap_test_basic": false,
+   "basic_run": true
+  },
+  "XI-c": {
+   "verdict": "지지: 모든 n 에서 두 가중 CI 상한 < 0.5 cm(n=100, n=전량)",
+   "verdict_noninf_d10": "지지: 모든 n 에서 두 가중 CI 상한 < 1 cm(n=100, n=전량)",
+   "verdict_basic": "외삽 시험 아님",
+   "verdict_basic_noninf_d10": "외삽 시험 아님",
+   "verdict_written": "외삽 시험 아님",
+   "both_written": true,
+   "extrap_test_trim": true,
+   "extrap_test_basic": false,
+   "basic_run": true
+  }
+ },
+ "overall_sentence": "기후 외삽은 판정할 수 없었다.",
+ "summarize_s": 0.7,
+ "rules": {
+  "ep": "h54.region_ep(W·I 저장소 h40.contrast 분포의 같은 번호 차)",
+  "verdict4": "xbatch_core.verdict_cols(δ 0.5·1.0·δ_rel)",
+  "xi_a_b": "xbatch_core.rule3(n {100, 전량})",
+  "xi_c": "h54._ni_text(두 가중 CI 상한 < 0.5 cm)",
+  "frac": "판마다 frac_W_outside_A 분할 평균 < 0.5 → 외삽 시험 아님(xi_tests 의 판정 열도 덮는다)",
+  "weaker": "구현 기록 3절(n 별 4분 판정, XI-c 비열등 상태, 가설 수준 판정)"
+ }
+}

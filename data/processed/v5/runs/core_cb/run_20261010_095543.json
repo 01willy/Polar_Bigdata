@@ -1,0 +1,23 @@
+{
+ "args": {
+  "proc": "data/processed/v5",
+  "out": "data/processed/v5/runs",
+  "tag": "core_cb",
+  "regions": "Alaska",
+  "schemes": "block,year,random,block_year",
+  "forcings": "year,clim",
+  "featsets": "F8TS",
+  "methods": "P0,P1,P1a,Ku,D0,F1,D1,R1,S",
+  "learners": "catboost",
+  "lams": "0.25,0.5,1",
+  "seeds": "0,1,2",
+  "k": 5,
+  "fold_seed": 0,
+  "threads": 10,
+  "epochs": 100,
+  "gpu": "",
+  "nice": 10
+ },
+ "started": "2026-10-10 09:55:43",
+ "rows": 19172
+}

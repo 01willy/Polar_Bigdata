@@ -1,0 +1,5 @@
+product,unit,kind,value,count,n_finite,n_valid,n_ge99_5_valid,n_ge99_5_invalid,frac_ge99_5_valid,n_window_95_105,n_eq_100,n_distinct_ge99_5,frac_integer_ge99_5,max_value,y_median_ge99_5,y_median_lt99_5,prod_median_lt99_5,std_median_ge99_5,std_median_lt99_5
+insar_alt,Canada,summary,,0,742,742,0,0,0.0,0,0,0,,79.15625,,55.0,43.1953125,,
+polsar_alt,Canada,summary,,0,0,0,0,0,,0,0,0,,,,,,,
+insar_alt,CA-1,summary,,0,0,0,0,0,,0,0,0,,,,,,,
+polsar_alt,CA-1,summary,,0,0,0,0,0,,0,0,0,,,,,,,

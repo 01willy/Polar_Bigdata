@@ -1,0 +1,81 @@
+[2026-10-14T05:44:23Z]: Launching [ -f v6_payload.tar.gz ] && tar xzf v6_payload.tar.gz; V6_JOB=cpu V6_BUDGET_MIN=225 bash scripts/rescale/run_v6.sh, Working dir: /enc/ukrprod_CJsgU/work.  Process output follows:
+[2026-10-14T05:44:23Z]: [2026-10-14T05:44:23Z] [env] 작업 디렉터리 /enc/ukrprod_CJsgU/work
+[2026-10-14T05:44:23Z]: [2026-10-14T05:44:23Z] [env] 코어 수 96 (RESCALE_CORES_PER_SLOT = 96, OMP_NUM_THREADS = 없음) · 메모리 369 GB (여유 344 GB)
+[2026-10-14T05:44:23Z]: [2026-10-14T05:44:23Z] [env] 디스크 1.2T 여유 / 1.2T
+[2026-10-14T05:44:23Z]: [2026-10-14T05:44:23Z] [env] python /program/pytorch-2.4.1/venv/bin/python3 · pip /program/pytorch-2.4.1/venv/bin/pip
+[2026-10-14T05:44:26Z]: [env] python 3.11.10 · Linux-4.18.0-553.159.1.el8_10.x86_64-x86_64-with-glibc2.28
+[2026-10-14T05:44:26Z]: [env] 가상환경 True · prefix /program/pytorch-2.4.1/venv
+[2026-10-14T05:44:26Z]: [env] numpy 2.1.1
+[2026-10-14T05:44:26Z]: [env] pandas 없음
+[2026-10-14T05:44:26Z]: [env] scipy 없음
+[2026-10-14T05:44:26Z]: [env] scikit-learn 없음
+[2026-10-14T05:44:26Z]: [env] catboost 없음
+[2026-10-14T05:44:26Z]: [env] pytabkit 없음
+[2026-10-14T05:44:26Z]: [env] pytest 없음
+[2026-10-14T05:44:26Z]: [env] torch 2.4.1
+[2026-10-14T05:44:26Z]: [env] CUDA_VISIBLE_DEVICES = None
+[2026-10-14T05:44:42Z]: [env] torch 2.4.1+cu121 · CUDA 빌드 12.1 · CUDA 사용 가능 False · GPU 수 0
+[2026-10-14T05:44:44Z]: [2026-10-14T05:44:44Z] [env] nvidia-smi 없음
+[2026-10-14T05:44:46Z]: [2026-10-14T05:44:46Z] [deps] 없는 필수 패키지: catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-14T05:44:46Z]: [2026-10-14T05:44:46Z] [deps] pip install --user catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-14T05:44:49Z]: ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-10-14T05:44:49Z]: [2026-10-14T05:44:49Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+[2026-10-14T05:45:14Z]: [deps] 확인: catboost 1.2.10 · scikit-learn 1.9.1 · pandas 2.3.3 · scipy 1.17.1 · numpy 2.1.1
+[2026-10-14T06:57:25Z]: [2026-10-14T06:57:25Z] [stage] core_region
+[2026-10-14T07:04:19Z]:   [core_region] [ALL__region__clim__F8TS__R1__catboost__lam1] n 57,516 rmse 22.57 21s (total 413s)
+[2026-10-14T07:04:19Z]:   [core_region] [done] 413s
+[2026-10-14T07:25:53Z]: [2026-10-14T07:25:53Z] [stage] confirm
+[2026-10-14T07:28:21Z]:   [confirm] [Canada__block__year_obs__F8TS__R1__catboost__lam0.5] n 3,588 rmse 27.02 15s (total 146s)
+[2026-10-14T07:28:21Z]:   [confirm] [done] 146s
+[2026-10-14T07:28:25Z]: [2026-10-14T07:28:25Z] [stage] blk025
+[2026-10-14T07:30:49Z]:   [blk025] [Canada__block__year_obs__F8TS__R1__catboost__lam0.5] n 3,588 rmse 25.54 15s (total 143s)
+[2026-10-14T07:30:49Z]:   [blk025] [done] 143s
+[2026-10-14T07:30:52Z]: [2026-10-14T07:30:52Z] [stage] blk100
+[2026-10-14T07:33:18Z]:   [blk100] [Canada__block__year_obs__F8TS__R1__catboost__lam0.5] n 3,588 rmse 30.32 14s (total 144s)
+[2026-10-14T07:33:18Z]:   [blk100] [done] 144s
+[2026-10-14T07:33:22Z]: [2026-10-14T07:33:22Z] [stage] rf
+[2026-10-14T07:36:24Z]:   [rf] [Canada__year__year_obs__F8TS__R1__rf__lam0.5] n 3,492 rmse 25.05 13s (total 180s)
+[2026-10-14T07:36:24Z]:   [rf] [done] 180s
+[2026-10-14T07:36:27Z]: [2026-10-14T07:36:27Z] [stage] site_obs
+[2026-10-14T07:41:07Z]:   [site_obs] [Canada b4] cells 149 rows 2,235 276s
+[2026-10-14T07:41:07Z]:   [site_obs] [done] rows 242,835, multi-year sites (>=4 yrs) 276 279s
+[2026-10-14T07:41:11Z]: [2026-10-14T07:41:11Z] [stage] site_year
+[2026-10-14T07:43:35Z]:   [site_year] [Canada b4] cells 149 rows 2,235 139s
+[2026-10-14T07:43:35Z]:   [site_year] [done] rows 242,835, multi-year sites (>=4 yrs) 276 143s
+[2026-10-14T07:43:40Z]: [2026-10-14T07:43:40Z] [stage] agg_core
+[2026-10-14T07:44:40Z]:   [agg_core] Alaska      block     year     PE -1.00        1   0.00   0.00   0.00
+[2026-10-14T07:44:40Z]:   [agg_core] Alaska    
+[2026-10-14T07:44:44Z]: [2026-10-14T07:44:44Z] [stage] agg_feat
+[2026-10-14T07:44:51Z]:   [agg_feat]   Lena   year year_obs     D0 catboost -1.0  -0.86  -2.39  1.23      -1.86   -3.46    0.66
+[2026-10-14T07:44:51Z]:   [agg_feat]   Lena   year year_obs     R1 catboost  0.5  -1.05  -1.77 -0.03      -1.12   -1.81   -0.12
+[2026-10-14T07:44:56Z]: [2026-10-14T07:44:56Z] [stage] agg_confirm_v6
+[2026-10-14T07:44:57Z]:   [agg_confirm_v6]   Lena  block year_obs     D0 catboost -1.0  -5.03 -11.99  0.33      -5.88  -13.20    3.27
+[2026-10-14T07:44:57Z]:   [agg_confirm_v6]   Lena  block year_obs     R1 catboost  0.5  -3.61  -7.88 -0.78      -5.63   -8.58   -1.81
+[2026-10-14T07:45:01Z]: [2026-10-14T07:45:01Z] [stage] agg_blk025_v6
+[2026-10-14T07:45:03Z]:   [agg_blk025_v6]   Lena  block year_obs     D0 catboost -1.0  -1.92 -3.58  0.06      -0.50   -3.11    3.32
+[2026-10-14T07:45:03Z]:   [agg_blk025_v6]   Lena  block year_obs     R1 catboost  0.5  -1.33 -2.27 -0.52      -1.33   -2.41   -0.43
+[2026-10-14T07:45:07Z]: [2026-10-14T07:45:07Z] [stage] agg_blk100_v6
+[2026-10-14T07:45:09Z]:   [agg_blk100_v6]   Lena  block year_obs     D0 catboost -1.0  -1.22 -2.21  0.99      -2.90   -9.50    6.14
+[2026-10-14T07:45:09Z]:   [agg_blk100_v6]   Lena  block year_obs     R1 catboost  0.5  -1.25 -2.64 -0.62      -4.12   -6.45   -1.05
+[2026-10-14T07:45:13Z]: [2026-10-14T07:45:13Z] [stage] agg_rf
+[2026-10-14T07:45:18Z]:   [agg_rf]   Lena       year year_obs     P0       - -1.0   0.24  -2.60  2.09      -1.63   -3.72    1.84
+[2026-10-14T07:45:18Z]:   [agg_rf]   Lena       year year_obs     R1      rf  0.5  -1.07  -1.51 -0.63      -0.86   -1.51   -0.15
+[2026-10-14T07:45:26Z]: [2026-10-14T07:45:26Z] [v6] 끝 120 min
+[2026-10-14T07:45:26Z]:   stage,rc,sec
+[2026-10-14T07:45:26Z]:   core,0,4329
+[2026-10-14T07:45:26Z]:   core_region,0,414
+[2026-10-14T07:45:26Z]:   featsets,0,6036
+[2026-10-14T07:45:26Z]:   confirm,0,148
+[2026-10-14T07:45:26Z]:   blk025,0,144
+[2026-10-14T07:45:26Z]:   blk100,0,146
+[2026-10-14T07:45:26Z]:   rf,0,182
+[2026-10-14T07:45:26Z]:   site_obs,0,280
+[2026-10-14T07:45:26Z]:   site_year,0,144
+[2026-10-14T07:45:26Z]:   agg_core,0,60
+[2026-10-14T07:45:26Z]:   agg_feat,0,7
+[2026-10-14T07:45:26Z]:   agg_confirm_v6,0,1
+[2026-10-14T07:45:26Z]:   agg_blk025_v6,0,2
+[2026-10-14T07:45:26Z]:   agg_blk100_v6,0,2
+[2026-10-14T07:45:26Z]:   agg_rf,0,5
+[2026-10-14T07:45:26Z]: Exited with code 0
+[2026-10-14T07:45:26Z]: 

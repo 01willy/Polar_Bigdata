@@ -1,0 +1,28 @@
+{
+ "args": {
+  "proc": "data/processed/v5",
+  "out": "data/processed/v5/runs",
+  "tag": "blk100_v6",
+  "regions": "Alaska,Lena,Canada",
+  "schemes": "block",
+  "forcings": "year_obs",
+  "featsets": "F8TS",
+  "methods": "P1,D0,R1",
+  "learners": "catboost",
+  "lams": "0.5",
+  "seeds": "0,1,2",
+  "k": 5,
+  "fold_seed": 0,
+  "threads": 96,
+  "epochs": 100,
+  "gpu": "",
+  "nice": 10,
+  "exclude_years": "",
+  "exclude_source": "",
+  "block_deg": 1.0,
+  "year_weight": false,
+  "no_products": true
+ },
+ "started": "2026-10-14 07:30:55",
+ "rows": 19172
+}

@@ -1,0 +1,482 @@
+{
+ "n_fit": {
+  "xb_r": 36
+ },
+ "sec": {
+  "xb_r": 2.9
+ },
+ "fail": {},
+ "n_rows": 39,
+ "status": "ok",
+ "n_fit_detail": {
+  "xb_r|catboost_lo|R1cv": 10,
+  "xb_r|catboost_lo|Recv": 10,
+  "xb_r|catboost_lo|StackRcv": 10,
+  "xb_r|catboost_lo|R1": 2,
+  "xb_r|catboost_lo|Re": 2,
+  "xb_r|catboost_lo|StackR": 2
+ },
+ "sec_detail": {
+  "xb_r|catboost_lo|R1cv": 1.171,
+  "xb_r|catboost_lo|Recv": 0.635,
+  "xb_r|catboost_lo|StackRcv": 0.623,
+  "xb_r|catboost_lo|R1": 0.156,
+  "xb_r|catboost_lo|Re": 0.137,
+  "xb_r|catboost_lo|StackR": 0.162
+ },
+ "rows_detail": {
+  "xb_r|catboost_lo|R1cv": 1500,
+  "xb_r|catboost_lo|Recv": 1500,
+  "xb_r|catboost_lo|StackRcv": 1500,
+  "xb_r|catboost_lo|R1": 375,
+  "xb_r|catboost_lo|Re": 375,
+  "xb_r|catboost_lo|StackR": 375
+ },
+ "est_detail": {
+  "xb_r|catboost_lo|R1cv": 0.8,
+  "xb_r|catboost_lo|Recv": 0.8,
+  "xb_r|catboost_lo|StackRcv": 0.8,
+  "xb_r|catboost_lo|R1": 0.16,
+  "xb_r|catboost_lo|Re": 0.16,
+  "xb_r|catboost_lo|StackR": 0.16
+ },
+ "errors": [],
+ "n_stored": 39,
+ "n_stored_ml": 20,
+ "n_nonfinite_keys": 0,
+ "notes": {
+  "xb_cands": {
+   "names": [
+    "P1",
+    "P*",
+    "Ku",
+    "Ed",
+    "Ss",
+    "Cr",
+    "Ca"
+   ],
+   "K": 7,
+   "dropped": {},
+   "info": {
+    "P1": {
+     "c0": 1.5918750525571221
+    },
+    "P*": {
+     "miss_A": 0.0,
+     "miss_B": 0.0,
+     "miss_src": 0.0,
+     "target_miss_A": 0.0,
+     "target_miss_B": 0.0,
+     "decision": "target",
+     "rho": 0.9248913445436199,
+     "n_replaced": {
+      "src": 0,
+      "A": 0,
+      "B": 0
+     },
+     "c0": 1.6600518308590109
+    },
+    "Ku": {
+     "rho": 2.0019186011174956,
+     "n_replaced": {
+      "src": 1955,
+      "A": 0,
+      "B": 0
+     },
+     "c0": 0.726885573281548
+    },
+    "Ed": {
+     "rho": 2.6459259809466467,
+     "n_replaced": {
+      "src": 0,
+      "A": 0,
+      "B": 0
+     },
+     "c0": 0.5423521342494987
+    },
+    "Ss": {
+     "rho": 1.0235162154200432,
+     "n_replaced": {
+      "src": 2,
+      "A": 1,
+      "B": 0
+     },
+     "c0": 1.5271539693644507
+    },
+    "Cr": {
+     "valid_A": 0.9971830985915493,
+     "valid_B": 1.0
+    },
+    "Ca": {
+     "a0": 29.601013812569498,
+     "b0": 0.45085410452954466
+    }
+   },
+   "stack0_exclude": [],
+   "resid_src_excluded": 0,
+   "variant": "",
+   "parent": "Canada",
+   "pstar_target": {
+    "miss_A": 0.0,
+    "miss_B": 0.0,
+    "n_A": 750,
+    "n_B": 747
+   },
+   "tdd_src": {
+    "v1": "lgx_tdd_matched_v1.csv:54f132e461ea",
+    "v4": "xb_tdd_matched_v4.csv:6ca0fa4bb8fa",
+    "v4_missing_allowed": false,
+    "v4_sha256_16": "4b22ca458685950c"
+   },
+   "pre2010_A": 0.028169014084507043,
+   "flag_missing_A": 0,
+   "pre2010_B": 0.005089058524173028,
+   "flag_missing_B": 0
+  }
+ },
+ "n_krige": 0,
+ "krige_s": 0.0,
+ "est_krige_s": 0.0,
+ "n_kmeans": 0,
+ "kmeans_s": 0.0,
+ "est_kmeans_s": 0.0,
+ "stack": [
+  {
+   "n": 20,
+   "draw": "0",
+   "n_lab": 20,
+   "fallback": "",
+   "gamma": 0.75,
+   "folds": 5,
+   "fold_flag": "",
+   "K": 7,
+   "names": [
+    "P1",
+    "P*",
+    "Ku",
+    "Ed",
+    "Ss",
+    "Cr",
+    "Ca"
+   ],
+   "w_hat": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0
+   ],
+   "w_star": [
+    0.75,
+    0.0,
+    0.0,
+    0.0,
+    0.25,
+    0.0,
+    0.0
+   ],
+   "support": [
+    4
+   ],
+   "is_p1": false,
+   "dry": false
+  },
+  {
+   "n": -1,
+   "draw": "0",
+   "n_lab": 355,
+   "fallback": "",
+   "gamma": 0.0,
+   "folds": 5,
+   "fold_flag": "",
+   "K": 7,
+   "names": [
+    "P1",
+    "P*",
+    "Ku",
+    "Ed",
+    "Ss",
+    "Cr",
+    "Ca"
+   ],
+   "w_hat": [
+    0.0,
+    0.0204974677,
+    0.9795025323,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "w_star": [
+    0.0,
+    0.0204974677,
+    0.9795025323,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "support": [
+    1,
+    2
+   ],
+   "is_p1": false,
+   "dry": false
+  }
+ ],
+ "n_A": 355,
+ "nb_A": 17,
+ "n_eval": 393,
+ "nb_eval": 20,
+ "n_src": 16697,
+ "E0": 1.5918750525571221,
+ "E_A": 1.3349698091750244,
+ "n_cells": 750,
+ "dup_of": -1,
+ "valid": true,
+ "n_valid_splits": 25,
+ "n_unique_splits": 25,
+ "src_mode": "x",
+ "n_src_parent": 0,
+ "subregion_src": "map:lg_subregion_map_v1.csv",
+ "arm": "xb_r",
+ "alias": "Canada",
+ "elapsed_s": 4.5,
+ "n_fit_total": 36,
+ "xb_cands": {
+  "names": [
+   "P1",
+   "P*",
+   "Ku",
+   "Ed",
+   "Ss",
+   "Cr",
+   "Ca"
+  ],
+  "K": 7,
+  "dropped": {},
+  "info": {
+   "P1": {
+    "c0": 1.5918750525571221
+   },
+   "P*": {
+    "miss_A": 0.0,
+    "miss_B": 0.0,
+    "miss_src": 0.0,
+    "target_miss_A": 0.0,
+    "target_miss_B": 0.0,
+    "decision": "target",
+    "rho": 0.9248913445436199,
+    "n_replaced": {
+     "src": 0,
+     "A": 0,
+     "B": 0
+    },
+    "c0": 1.6600518308590109
+   },
+   "Ku": {
+    "rho": 2.0019186011174956,
+    "n_replaced": {
+     "src": 1955,
+     "A": 0,
+     "B": 0
+    },
+    "c0": 0.726885573281548
+   },
+   "Ed": {
+    "rho": 2.6459259809466467,
+    "n_replaced": {
+     "src": 0,
+     "A": 0,
+     "B": 0
+    },
+    "c0": 0.5423521342494987
+   },
+   "Ss": {
+    "rho": 1.0235162154200432,
+    "n_replaced": {
+     "src": 2,
+     "A": 1,
+     "B": 0
+    },
+    "c0": 1.5271539693644507
+   },
+   "Cr": {
+    "valid_A": 0.9971830985915493,
+    "valid_B": 1.0
+   },
+   "Ca": {
+    "a0": 29.601013812569498,
+    "b0": 0.45085410452954466
+   }
+  },
+  "stack0_exclude": [],
+  "resid_src_excluded": 0,
+  "variant": "",
+  "parent": "Canada",
+  "pstar_target": {
+   "miss_A": 0.0,
+   "miss_B": 0.0,
+   "n_A": 750,
+   "n_B": 747
+  },
+  "tdd_src": {
+   "v1": "lgx_tdd_matched_v1.csv:54f132e461ea",
+   "v4": "xb_tdd_matched_v4.csv:6ca0fa4bb8fa",
+   "v4_missing_allowed": false,
+   "v4_sha256_16": "4b22ca458685950c"
+  },
+  "pre2010_A": 0.028169014084507043,
+  "flag_missing_A": 0,
+  "pre2010_B": 0.005089058524173028,
+  "flag_missing_B": 0
+ },
+ "plan_section": "2.2",
+ "tdd_src": {
+  "v1": "lgx_tdd_matched_v1.csv:54f132e461ea",
+  "v4": "xb_tdd_matched_v4.csv:6ca0fa4bb8fa",
+  "v4_missing_allowed": false,
+  "v4_sha256_16": "4b22ca458685950c"
+ },
+ "tdd_v4_missing_allowed": false,
+ "K": 7,
+ "pstar_dropped": "",
+ "pstar_target": {
+  "miss_A": 0.0,
+  "miss_B": 0.0,
+  "n_A": 750,
+  "n_B": 747
+ },
+ "resid_src_excluded_km5": 0,
+ "runs_sealed_cols": [
+  "rmse_cm",
+  "rmse_beq_cm",
+  "bias_cm"
+ ],
+ "smoke_env": {
+  "threads": "2",
+  "cores": 4,
+  "warn": [],
+  "mem_available_gb": 49.9,
+  "permitted": false
+ },
+ "tag": "xbr_smoke",
+ "part": "cpu",
+ "target": "Canada",
+ "mode": "r",
+ "split": 1,
+ "variant": "",
+ "expected_splits": [
+  1
+ ],
+ "store_names": [
+  "Canada|r"
+ ],
+ "n_keys": 39,
+ "cfg": {
+  "exp": "xb_r",
+  "variant": "",
+  "data_sha": "214abe489347:f8c4b4f0b505:f79eeb64564c",
+  "kappa": 10.0,
+  "r": 10.0,
+  "lams": [
+   0.25,
+   0.5,
+   1.0
+  ],
+  "lam_base": 0.25,
+  "cv_k": 5,
+  "cb_hi": {
+   "iterations": 600,
+   "learning_rate": 0.03,
+   "depth": 6,
+   "l2_leaf_reg": 3.0
+  },
+  "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md@2678100",
+  "frozen": {
+   "h40": "7098f59dabe2b73f",
+   "h42": "22e215e435e157be",
+   "h54": "cf9a1f6d0929c892",
+   "h41": "492373e4d37b5ea4"
+  },
+  "grid": [
+   20,
+   -1
+  ],
+  "draws": 3,
+  "draws_cap": 1,
+  "seeds": [
+   0
+  ],
+  "cb_iters": 200,
+  "cands": [
+   "P1",
+   "P*",
+   "Ku",
+   "Ed",
+   "Ss",
+   "Cr",
+   "Ca"
+  ],
+  "gammas": [
+   0.0,
+   0.25,
+   0.5,
+   0.75,
+   1.0
+  ],
+  "stack_min_n": 10,
+  "min_folds": 2,
+  "fold_rule": "cv_folds_of(A 블록) 의 묶음 수 K < 2 = 묶음 부족(셀 묶음도 K ≥ 2 이면 적층)",
+  "pstar_max_miss": 0.05,
+  "tie_rel": 1e-10,
+  "neg_tol": 1e-12,
+  "tdd": {
+   "v1": "lgx_tdd_matched_v1.csv:54f132e461ea",
+   "v4": "xb_tdd_matched_v4.csv:6ca0fa4bb8fa",
+   "v4_missing_allowed": false,
+   "v4_sha256_16": "4b22ca458685950c"
+  },
+  "products": {},
+  "methods": [
+   "P0",
+   "P1",
+   "P*",
+   "cand_*",
+   "Pe",
+   "Stack",
+   "R1",
+   "Re",
+   "StackR"
+  ],
+  "lam_cv": "h54.lam_cv 묶음, 묶음마다 적층 재적합",
+  "wei_km": 5.0,
+  "pstar_rule": "대상 수준(대상 셀 전체·대상 채점 셀)",
+  "wei_km5_scope": "확장 판 전체",
+  "mask_required": {
+   "cci5y": false,
+   "Wei": true,
+   "YK": false
+  },
+  "draw": "h40.draw_cells(대상, 모드, 분할, n, 추출)",
+  "splits_rule": "wf6 1–25"
+ },
+ "cfg_hash": "50519aa10ce5",
+ "cfg_common": "76db6bd7e0a5",
+ "code_sha": "5b0d21ff61c6",
+ "code_sha_core": "3992c09ae349",
+ "frozen": {
+  "h40": "7098f59dabe2b73f",
+  "h42": "22e215e435e157be",
+  "h54": "cf9a1f6d0929c892",
+  "h41": "492373e4d37b5ea4"
+ },
+ "plan_commit": "2678100",
+ "threads": "2",
+ "device": "",
+ "max_rss_mb": 285.0,
+ "written": "2026-10-04 16:15:19"
+}

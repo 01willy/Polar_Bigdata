@@ -1,0 +1,27 @@
+{
+ "args": {
+  "proc": "data/processed/v5",
+  "out": "data/processed/v5/runs",
+  "tag": "featsets2",
+  "regions": "Alaska,Lena,Canada",
+  "schemes": "block,year",
+  "forcings": "year",
+  "featsets": "F8TS_L,F8TS_MS",
+  "methods": "P1,D0,R1",
+  "learners": "catboost",
+  "lams": "0.5",
+  "seeds": "0,1,2",
+  "k": 5,
+  "fold_seed": 0,
+  "threads": 8,
+  "epochs": 100,
+  "gpu": "",
+  "nice": 10,
+  "exclude_years": "",
+  "exclude_source": "",
+  "block_deg": 0.5,
+  "year_weight": false
+ },
+ "started": "2026-10-12 14:54:53",
+ "rows": 19172
+}

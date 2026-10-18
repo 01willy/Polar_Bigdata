@@ -1,0 +1,25 @@
+family,cond,target,chosen,select_mean_others,score
+all,covonly,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.25}",28.652,15.029
+all,covonly,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.0}",14.568,28.848
+anchored,covonly,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.25}",28.652,15.029
+anchored,covonly,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.0}",14.568,28.848
+analytic,covonly,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.0}",28.848,14.568
+analytic,covonly,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.0}",14.568,28.848
+all,noinfo,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.5}",25.008,21.262
+all,noinfo,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.25}",20.739,25.278
+anchored,noinfo,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.5}",25.008,21.262
+anchored,noinfo,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.25}",20.739,25.278
+analytic,noinfo,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.0}",25.821,20.761
+analytic,noinfo,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.0}",20.761,25.821
+all,labels,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""none"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 1.0}",28.012,17.048
+all,labels,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.25}",14.129,28.68
+anchored,labels,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 1.0}",28.651,15.182
+anchored,labels,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.25}",14.129,28.68
+analytic,labels,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.0}",28.841,14.567
+analytic,labels,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.0}",14.567,28.841
+all,deploy,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.5}",25.008,21.262
+all,deploy,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.25}",20.739,25.278
+anchored,deploy,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.5}",25.008,21.262
+anchored,deploy,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.25}",20.739,25.278
+analytic,deploy,Lena,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.0}",25.821,20.761
+analytic,deploy,Canada,"{""dset"": ""alaska"", ""xset"": ""x25"", ""anchor"": ""stefan_cci"", ""pseudo"": ""none"", ""r"": 0.0, ""resid"": ""catboost_lo"", ""iw"": 0, ""lam"": 0.0}",20.761,25.821

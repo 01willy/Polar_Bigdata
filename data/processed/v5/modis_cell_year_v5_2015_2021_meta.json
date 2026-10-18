@@ -1,0 +1,70 @@
+{
+ "created": "2026-10-10 09:53:11",
+ "files": {
+  "mod13q1_labels": [
+   "xe-mod13q1-labels-p01of03-MOD13Q1-061-results.csv",
+   "xe-mod13q1-labels-p02of03-MOD13Q1-061-results.csv",
+   "xe-mod13q1-labels-p03of03-MOD13Q1-061-results.csv"
+  ],
+  "mod10a2_labels": [
+   "xe-mod10a2-labels-p01of02-MOD10A2-061-results.csv",
+   "xe-mod10a2-labels-p02of02-MOD10A2-061-results.csv"
+  ]
+ },
+ "vi_scale_applied": 1.0,
+ "rows": 120054,
+ "cells": 17385,
+ "years_vi": [
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020
+ ],
+ "years_snow": [
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020,
+  2021
+ ],
+ "cells_vi": 17385,
+ "cells_snow": 16768,
+ "rules": {
+  "vi": "6–8월 pixel_reliability ≤ 1, 합성 2개 이상",
+  "snow": "MOD10A2 200 = 눈, 25 = 눈 없음, 수문년 유효 합성 20개 이상",
+  "snow_off": "1–7월 마지막 눈 합성 시작 DOY",
+  "snow_on": "전년 9–12월 첫 눈 합성 시작 DOY"
+ },
+ "summary": {
+  "ndvi_summer": {
+   "median": 0.60735,
+   "p10": 0.49192,
+   "p90": 0.6909166666666667
+  },
+  "evi_summer": {
+   "median": 0.3222333333333333,
+   "p10": 0.22061666666666668,
+   "p90": 0.40095
+  },
+  "snow_off_doy": {
+   "median": 137.0,
+   "p10": 105.0,
+   "p90": 169.0
+  },
+  "snow_on_doy": {
+   "median": 281.0,
+   "p10": 281.0,
+   "p90": 305.0
+  },
+  "snow_days": {
+   "median": 144.0,
+   "p10": 112.0,
+   "p90": 176.0
+  }
+ },
+ "elapsed_s": 13.8
+}

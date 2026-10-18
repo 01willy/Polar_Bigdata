@@ -1,0 +1,9 @@
+learner,kind,target,mode,main_trial,cw_trial,l25_trial,changed_cw,changed_l25,sel_default,main_flag
+ftt,D,Canada,x,1,1,,False,False,False,smoke_fixed
+ftt,R,Canada,x,1,1,1.0,False,False,False,smoke_fixed
+mlp,D,Canada,x,1,1,,False,False,False,smoke_fixed
+mlp,R,Canada,x,1,1,1.0,False,False,False,smoke_fixed
+realmlp,D,Canada,x,1,1,,False,False,False,smoke_fixed
+realmlp,R,Canada,x,1,1,1.0,False,False,False,smoke_fixed
+tabm,D,Canada,x,1,1,,False,False,False,smoke_fixed
+tabm,R,Canada,x,1,1,1.0,False,False,False,smoke_fixed

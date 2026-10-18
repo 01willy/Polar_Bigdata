@@ -1,0 +1,52 @@
+{
+ "format": "xd_index_v1",
+ "policy": "S9-DS",
+ "model_sha256": "28ad487524706b7f102db82de8bc313ba1a2fe56ea081f25cdde6df766132ff5",
+ "n_max": 20,
+ "batch": 5,
+ "ff_top": 300,
+ "n_rand": 200,
+ "policy_seeds": [
+  0
+ ],
+ "created": "2026-10-04 16:00:55",
+ "code_sha256": "303215cc37c241dfb6c224af52838278361b9affaaab7d7ca1da07b66c9ae0d7",
+ "plan_commit": "2678100",
+ "entries": [
+  {
+   "alias": "AL-5",
+   "target": "AL-5",
+   "mode": "x",
+   "split": 1,
+   "policy_seed": 0,
+   "nA": 454,
+   "a_fp": "bfb69706d4503f11",
+   "order": [
+    209,
+    15,
+    16,
+    347,
+    348,
+    417,
+    418,
+    420,
+    421,
+    349,
+    6,
+    7,
+    14,
+    21,
+    395,
+    12,
+    18,
+    19,
+    20,
+    383
+   ]
+  }
+ ],
+ "device": "cuda",
+ "gpu": 0,
+ "torch": "2.6.0+cu124",
+ "cuda": "12.4"
+}

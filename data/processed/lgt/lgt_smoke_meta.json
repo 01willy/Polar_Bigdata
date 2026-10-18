@@ -1,0 +1,264 @@
+{
+ "stage": "H43/LGT",
+ "plan": "docs/EXPERIMENT_PLAN_LG_2026-09-29.md §6C",
+ "git_commit": "bd3599d",
+ "tag": "lgt_smoke",
+ "tags": {
+  "main": "lgt_smoke",
+  "sens": "lgts_smoke"
+ },
+ "args": {
+  "axes": "main,sens",
+  "sens": "d3,d10,rid,tgt",
+  "targets": "Russia_W:x,Canada:x",
+  "splits": 1,
+  "n_grid": "0,10,40,all",
+  "draws": 1,
+  "seeds": 1,
+  "lams": "0.25,0.5,1.0",
+  "kappa": 10.0,
+  "ctx_max": 10000,
+  "ctx_reserve": 1000,
+  "ctx_src_min": 1000,
+  "n_est": 8,
+  "model_path": "tabpfn-v2-regressor.ckpt",
+  "pred_chunk": 4096,
+  "cb_iters": 200,
+  "gpus": "9",
+  "gpu_mem_max_mib": 2,
+  "threads": 2,
+  "out_dir": "data/processed/lgt",
+  "data_dir": "data/processed",
+  "subregion_map": "lg_subregion_map_v1.csv",
+  "tag": "lgt",
+  "nboot": 1000,
+  "delta_eq": 0.5,
+  "delta_eq_aux": 1.0,
+  "cross_lg": false,
+  "lg_dir": "data/processed/lg",
+  "lg_tag": "lg",
+  "resume": false,
+  "overwrite": false,
+  "rerun_partial": false,
+  "smoke": true,
+  "count_only": false,
+  "dry_build": false,
+  "summarize_only": false,
+  "no_summarize": false,
+  "no_cells": false,
+  "allow_mixed_cfg": false,
+  "pool_retries": 2,
+  "threads_asked": 2,
+  "save_cells": true
+ },
+ "key_fields": [
+  "method",
+  "learner",
+  "alpha",
+  "placement",
+  "n",
+  "draw",
+  "seed",
+  "lam"
+ ],
+ "p0_key": [
+  "P0",
+  "none",
+  "1",
+  "cell",
+  0,
+  0,
+  -1,
+  0.0
+ ],
+ "all_n": -1,
+ "learners": [
+  "tabpfn",
+  "catboost_ctx"
+ ],
+ "n_units": 4,
+ "n_units_axis": {
+  "main": 2,
+  "sens": 2
+ },
+ "n_fit": {
+  "main:tabpfn": 19,
+  "main:catboost_ctx": 19,
+  "d3:tabpfn": 6,
+  "d3:catboost_ctx": 6,
+  "d10:tabpfn": 6,
+  "d10:catboost_ctx": 6,
+  "rid:tabpfn": 14,
+  "rid:catboost_ctx": 14,
+  "tgt:tabpfn": 4,
+  "tgt:catboost_ctx": 4
+ },
+ "n_fit_total": 98,
+ "unit_elapsed_s_sum": 369.90000000000003,
+ "elapsed_s": 402.3,
+ "n_rows": 227,
+ "n_curve": 227,
+ "n_minn": 86,
+ "n_tests": 228,
+ "n_cross": 0,
+ "n_gate": 0,
+ "cross_note": "교차 비교를 켜지 않았다(--cross-lg)",
+ "shard_cfg": {
+  "lgt_smoke|main": {
+   "cfg_hash": {
+    "3d64cd623b85": 2
+   },
+   "code_sha": {
+    "c04b2238d72a": 2
+   },
+   "code_sha_h40": {
+    "ffd0b3a76d36": 2
+   },
+   "model_sha1": {
+    "9bfedc2abaad8fce6f07f8b083d8af8d55f5c9d0": 2
+   },
+   "n": 2
+  },
+  "lgts_smoke|sens": {
+   "cfg_hash": {
+    "61480d81b252": 2
+   },
+   "code_sha": {
+    "c04b2238d72a": 2
+   },
+   "code_sha_h40": {
+    "ffd0b3a76d36": 2
+   },
+   "model_sha1": {
+    "9bfedc2abaad8fce6f07f8b083d8af8d55f5c9d0": 2
+   },
+   "n": 2
+  }
+ },
+ "unit_status": {
+  "ok": 4
+ },
+ "n_failed_keys": 0,
+ "n_flagged_rows": 0,
+ "flags": {},
+ "curve_failed": [],
+ "n_fail": 0,
+ "skipped": [],
+ "floor": {
+  "n_bundles_total": 736,
+  "n_bundles_ge5": 314,
+  "columns": [
+   "e5_maat",
+   "e5_tdd",
+   "e5_fdd",
+   "e5_sqrt_tdd",
+   "e5_twarm",
+   "e5_tcold",
+   "e5_stl1",
+   "e5_swe",
+   "sg_clay_5_15",
+   "sg_sand_5_15",
+   "sg_silt_5_15",
+   "sg_bdod_5_15",
+   "sg_cfvo_5_15",
+   "sg_phh2o_5_15",
+   "sg_soc_0_5",
+   "sg_soc_5_15",
+   "sg_soc_15_30",
+   "cci_alt",
+   "cci_valid"
+  ],
+  "rule": "소수 6자리 반올림, 결측은 표지값 −9999, 5셀 이상 묶음의 합동 분산(ddof 1)"
+ },
+ "smoke": {
+  "same_matrix": true,
+  "n_pairs": 51,
+  "r1_eq_r0_n0": true,
+  "n_r1_r0": 12,
+  "chunk_maxdiff": 0.05553436279296875,
+  "chunk_ok": false,
+  "gpu_mem_peak_mib": 1619.2,
+  "sec_per_fit": {
+   "d10|catboost_ctx": 0.337,
+   "d10|tabpfn": 5.747,
+   "d3|catboost_ctx": 0.345,
+   "d3|tabpfn": 5.947,
+   "main|catboost_ctx": 0.402,
+   "main|tabpfn": 6.527,
+   "rid|catboost_ctx": 0.46,
+   "rid|tabpfn": 6.153,
+   "tgt|catboost_ctx": 0.107,
+   "tgt|tabpfn": 0.815
+  },
+  "gpu_mem_reserved_peak_mib": 5534.0,
+  "cb_pool_maxdiff": 0.0,
+  "tabpfn_schema": {
+   "main|ctx>100": {
+    "{\"cat\": [24], \"const\": [], \"n_est\": 8}": 19
+   },
+   "d3|ctx>100": {
+    "{\"cat\": [24], \"const\": [], \"n_est\": 8}": 6
+   },
+   "d10|ctx>100": {
+    "{\"cat\": [24], \"const\": [], \"n_est\": 8}": 6
+   },
+   "rid|ctx>100": {
+    "{\"cat\": [24, 25], \"const\": [], \"n_est\": 8}": 14
+   },
+   "tgt|ctx<=100": {
+    "{\"cat\": [], \"const\": [24], \"n_est\": 8}": 2
+   },
+   "tgt|ctx>100": {
+    "{\"cat\": [24], \"const\": [], \"n_est\": 8}": 2
+   }
+  },
+  "device_check": [
+   "PID"
+  ],
+  "sec_ratio_to_est": {
+   "catboost_ctx": 1.085,
+   "tabpfn": 0.922
+  },
+  "fit_timing_rows": 62,
+  "structure": {
+   "n_curve": 227,
+   "n_minn": 86,
+   "n_tests": 228,
+   "n_tests_delta": 184,
+   "n_verdict": 11,
+   "n_verdict_na": 11,
+   "test_ids": [
+    "L32",
+    "L33",
+    "L34",
+    "L35",
+    "L36",
+    "L37"
+   ],
+   "n_unpaired_keys": 0
+  }
+ },
+ "n_unpaired_keys": 0,
+ "n_unpaired_learner": {},
+ "unpaired_units": {},
+ "gpu_mem_peak_mib": 1619.2,
+ "env": [
+  "{\"catboost\": \"1.2.10\", \"gpu_name\": \"NVIDIA GeForce RTX 3090\", \"numpy\": \"1.26.4\", \"pandas\": \"2.1.4\", \"python\": \"3.9.18\", \"sklearn\": \"1.3.0\", \"tabpfn\": \"8.0.7\", \"torch\": \"2.6.0+cu124\"}"
+ ],
+ "code_sha": "c04b2238d72a",
+ "code_sha_h40": "ffd0b3a76d36",
+ "code_sha_h42": "70ec084a1919",
+ "delta_eq": 0.5,
+ "delta_eq_aux": 1.0,
+ "nboot": 1000,
+ "rules": {
+  "ci": "h4_common.boot_delta_blocks: 분할 안 채점 블록 재표집, 방법·추출·seed 공통 인덱스, 분할 분포 평균",
+  "verdict4": "우세 = 두 가중의 CI 상한 < 0, 열세 = 두 가중의 CI 하한 > 0, 동등 = 네 끝값의 절댓값이 한계 이하, 그 밖은 미결정",
+  "hypotheses": "L32–L37 은 모두 보조다. 확인적 가설 집합(계획서 §6A.2)을 바꾸지 않는다",
+  "holm": "item LGT 의 primary 행: L32 기준 λ 5개, L33 6개, L34 2개, L35 1개. 보조 열이며 판정에 쓰지 않는다",
+  "base_lam": "D0 1.0, R0·R1 0.25",
+  "cross": "교차 환경(보조). 가설 판정에 쓰지 않는다",
+  "failed": "비유한 예측 또는 적합 실패 키. chunk 와 tsub 표지는 저장된 키다"
+ },
+ "summarize_s": 2.7
+}

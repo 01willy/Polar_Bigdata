@@ -1,0 +1,15 @@
+target,parent,method,lam,n_star,censored,n_max,n_tested
+LE-2,Lena,anchor,0.0,,True,3,1
+LE-2,Lena,cb,0.25,,True,3,1
+LE-2,Lena,cb,0.5,,True,3,1
+LE-2,Lena,cbr,0.25,,True,3,1
+LE-2,Lena,cbr,0.5,,True,3,1
+LE-2,Lena,tfm,0.25,,True,3,1
+LE-2,Lena,tfm,0.5,,True,3,1
+Russia_W,Russia_W,anchor,0.0,,True,3,1
+Russia_W,Russia_W,cb,0.25,,True,3,1
+Russia_W,Russia_W,cb,0.5,,True,3,1
+Russia_W,Russia_W,cbr,0.25,,True,3,1
+Russia_W,Russia_W,cbr,0.5,,True,3,1
+Russia_W,Russia_W,tfm,0.25,,True,3,1
+Russia_W,Russia_W,tfm,0.5,,True,3,1

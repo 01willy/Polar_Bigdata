@@ -1,0 +1,598 @@
+{
+ "n_fit": {
+  "xb_t": 9
+ },
+ "sec": {
+  "xb_t": 4.5
+ },
+ "fail": {},
+ "n_rows": 31,
+ "status": "ok",
+ "n_fit_detail": {
+  "xb_t|catboost_lo|R1": 4,
+  "xb_t|catboost_lo|Re": 4,
+  "xb_t|catboost_lo|StackR": 1
+ },
+ "sec_detail": {
+  "xb_t|catboost_lo|R1": 1.973,
+  "xb_t|catboost_lo|Re": 2.032,
+  "xb_t|catboost_lo|StackR": 0.482
+ },
+ "rows_detail": {
+  "xb_t|catboost_lo|R1": 69773,
+  "xb_t|catboost_lo|Re": 69773,
+  "xb_t|catboost_lo|StackR": 17446
+ },
+ "est_detail": {
+  "xb_t|catboost_lo|R1": 2.053,
+  "xb_t|catboost_lo|Re": 2.053,
+  "xb_t|catboost_lo|StackR": 0.513
+ },
+ "errors": [],
+ "n_stored": 31,
+ "n_stored_ml": 12,
+ "n_nonfinite_keys": 0,
+ "notes": {
+  "xb_cands": {
+   "names": [
+    "P1",
+    "P*",
+    "Ku",
+    "Ed",
+    "Ss",
+    "Cr",
+    "Ca"
+   ],
+   "K": 7,
+   "dropped": {},
+   "info": {
+    "P1": {
+     "c0": 1.5895097368022235
+    },
+    "P*": {
+     "miss_A": 0.0,
+     "miss_B": 0.0,
+     "miss_src": 0.0,
+     "target_miss_A": 0.0,
+     "target_miss_B": 0.0,
+     "decision": "target",
+     "rho": 0.9248913445436199,
+     "n_replaced": {
+      "src": 0,
+      "A": 0,
+      "B": 0
+     },
+     "c0": 1.646917922909178
+    },
+    "Ku": {
+     "rho": 2.0096539881255024,
+     "n_replaced": {
+      "src": 1956,
+      "A": 0,
+      "B": 0
+     },
+     "c0": 0.7026557792283591
+    },
+    "Ed": {
+     "rho": 2.6459259809466467,
+     "n_replaced": {
+      "src": 0,
+      "A": 0,
+      "B": 0
+     },
+     "c0": 0.5313147456209344
+    },
+    "Ss": {
+     "rho": 1.0222187190299217,
+     "n_replaced": {
+      "src": 3,
+      "A": 0,
+      "B": 0
+     },
+     "c0": 1.5302399934143622
+    },
+    "Cr": {
+     "valid_A": 1.0,
+     "valid_B": 1.0
+    },
+    "Ca": {
+     "a0": 29.31685538408293,
+     "b0": 0.45577126346000335
+    }
+   },
+   "stack0_exclude": [],
+   "resid_src_excluded": 0,
+   "variant": "",
+   "parent": "Russia_W",
+   "pstar_target": {
+    "miss_A": 0.0,
+    "miss_B": 0.0,
+    "n_A": 31,
+    "n_B": 28
+   },
+   "tdd_src": {
+    "v1": "lgx_tdd_matched_v1.csv:54f132e461ea",
+    "v4": "xb_tdd_matched_v4.csv:6ca0fa4bb8fa",
+    "v4_missing_allowed": false,
+    "v4_sha256_16": "4b22ca458685950c"
+   },
+   "pre2010_A": 0.0,
+   "flag_missing_A": 0,
+   "pre2010_B": 0.08333333333333333,
+   "flag_missing_B": 0
+  },
+  "cci_valid_frac": {
+   "src": 0.9951250286763019,
+   "B": 1.0
+  },
+  "stack0": {
+   "names": [
+    "P1",
+    "P*",
+    "Ku",
+    "Ed",
+    "Ss",
+    "Cr",
+    "Ca"
+   ],
+   "w": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.9006446055,
+    0.0993553945,
+    0.0
+   ],
+   "fallback": "",
+   "regions": 9,
+   "excluded": []
+  }
+ },
+ "n_krige": 0,
+ "krige_s": 0.0,
+ "est_krige_s": 0.0,
+ "n_kmeans": 0,
+ "kmeans_s": 0.0,
+ "est_kmeans_s": 0.0,
+ "diag": [],
+ "stack": [
+  {
+   "n": 0,
+   "draw": "0",
+   "n_lab": 0,
+   "fallback": "n<10",
+   "gamma": 1.0,
+   "folds": 0,
+   "fold_flag": "",
+   "K": 7,
+   "names": [
+    "P1",
+    "P*",
+    "Ku",
+    "Ed",
+    "Ss",
+    "Cr",
+    "Ca"
+   ],
+   "w_hat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "w_star": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "support": [],
+   "is_p1": true,
+   "dry": false
+  },
+  {
+   "n": 3,
+   "draw": "0",
+   "n_lab": 3,
+   "fallback": "n<10",
+   "gamma": 1.0,
+   "folds": 0,
+   "fold_flag": "",
+   "K": 7,
+   "names": [
+    "P1",
+    "P*",
+    "Ku",
+    "Ed",
+    "Ss",
+    "Cr",
+    "Ca"
+   ],
+   "w_hat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "w_star": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "support": [],
+   "is_p1": true,
+   "dry": false
+  },
+  {
+   "n": 10,
+   "draw": "0",
+   "n_lab": 10,
+   "fallback": "",
+   "gamma": 0.0,
+   "folds": 5,
+   "fold_flag": "",
+   "K": 7,
+   "names": [
+    "P1",
+    "P*",
+    "Ku",
+    "Ed",
+    "Ss",
+    "Cr",
+    "Ca"
+   ],
+   "w_hat": [
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "w_star": [
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "support": [
+    2
+   ],
+   "is_p1": false,
+   "dry": false
+  },
+  {
+   "n": -1,
+   "draw": "0",
+   "n_lab": 16,
+   "fallback": "gamma=1",
+   "gamma": 1.0,
+   "folds": 5,
+   "fold_flag": "",
+   "K": 7,
+   "names": [
+    "P1",
+    "P*",
+    "Ku",
+    "Ed",
+    "Ss",
+    "Cr",
+    "Ca"
+   ],
+   "w_hat": [
+    0.1999048577,
+    0.0,
+    0.7442780368,
+    0.0,
+    0.0,
+    0.0,
+    0.0558171055
+   ],
+   "w_star": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "support": [
+    0,
+    2,
+    6
+   ],
+   "is_p1": true,
+   "dry": false
+  }
+ ],
+ "n_A": 16,
+ "nb_A": 11,
+ "n_eval": 12,
+ "nb_eval": 7,
+ "n_src": 17436,
+ "n_src_parent": 0,
+ "frac_src_parent": 0.0,
+ "n_parent_excluded": 0,
+ "n_buffer_excluded": 0,
+ "n_cells": 31,
+ "n_blocks": 21,
+ "smd_x25": 0.5401638981909029,
+ "E_own": 2.6441227216083845,
+ "E_A": 2.5253138093736234,
+ "E_B": 2.5990388190575024,
+ "E_block_cv": 0.11263288609231896,
+ "y_mean": 90.81248883156648,
+ "y_sd": 30.022169402686004,
+ "dup_of": -1,
+ "mirror_of": -1,
+ "valid": true,
+ "n_unique_splits": 5,
+ "n_valid_splits": 5,
+ "subregion_src": "map:lg_subregion_map_v1.csv",
+ "subregion_kmeans_diff": 0,
+ "E0": 1.5895097368022235,
+ "logE_ratio_own": 0.5089137089927922,
+ "logE_ratio_AB": -0.028776355754079556,
+ "tau2": 0.17216869834279952,
+ "sigma2": 0.10544683470949325,
+ "alias": "Russia_W",
+ "data_spec": "v3",
+ "arm": "xb_t",
+ "elapsed_s": 5.2,
+ "n_fit_total": 9,
+ "xb_cands": {
+  "names": [
+   "P1",
+   "P*",
+   "Ku",
+   "Ed",
+   "Ss",
+   "Cr",
+   "Ca"
+  ],
+  "K": 7,
+  "dropped": {},
+  "info": {
+   "P1": {
+    "c0": 1.5895097368022235
+   },
+   "P*": {
+    "miss_A": 0.0,
+    "miss_B": 0.0,
+    "miss_src": 0.0,
+    "target_miss_A": 0.0,
+    "target_miss_B": 0.0,
+    "decision": "target",
+    "rho": 0.9248913445436199,
+    "n_replaced": {
+     "src": 0,
+     "A": 0,
+     "B": 0
+    },
+    "c0": 1.646917922909178
+   },
+   "Ku": {
+    "rho": 2.0096539881255024,
+    "n_replaced": {
+     "src": 1956,
+     "A": 0,
+     "B": 0
+    },
+    "c0": 0.7026557792283591
+   },
+   "Ed": {
+    "rho": 2.6459259809466467,
+    "n_replaced": {
+     "src": 0,
+     "A": 0,
+     "B": 0
+    },
+    "c0": 0.5313147456209344
+   },
+   "Ss": {
+    "rho": 1.0222187190299217,
+    "n_replaced": {
+     "src": 3,
+     "A": 0,
+     "B": 0
+    },
+    "c0": 1.5302399934143622
+   },
+   "Cr": {
+    "valid_A": 1.0,
+    "valid_B": 1.0
+   },
+   "Ca": {
+    "a0": 29.31685538408293,
+    "b0": 0.45577126346000335
+   }
+  },
+  "stack0_exclude": [],
+  "resid_src_excluded": 0,
+  "variant": "",
+  "parent": "Russia_W",
+  "pstar_target": {
+   "miss_A": 0.0,
+   "miss_B": 0.0,
+   "n_A": 31,
+   "n_B": 28
+  },
+  "tdd_src": {
+   "v1": "lgx_tdd_matched_v1.csv:54f132e461ea",
+   "v4": "xb_tdd_matched_v4.csv:6ca0fa4bb8fa",
+   "v4_missing_allowed": false,
+   "v4_sha256_16": "4b22ca458685950c"
+  },
+  "pre2010_A": 0.0,
+  "flag_missing_A": 0,
+  "pre2010_B": 0.08333333333333333,
+  "flag_missing_B": 0
+ },
+ "plan_section": "2.2",
+ "tdd_src": {
+  "v1": "lgx_tdd_matched_v1.csv:54f132e461ea",
+  "v4": "xb_tdd_matched_v4.csv:6ca0fa4bb8fa",
+  "v4_missing_allowed": false,
+  "v4_sha256_16": "4b22ca458685950c"
+ },
+ "tdd_v4_missing_allowed": false,
+ "K": 7,
+ "pstar_dropped": "",
+ "pstar_target": {
+  "miss_A": 0.0,
+  "miss_B": 0.0,
+  "n_A": 31,
+  "n_B": 28
+ },
+ "resid_src_excluded_km5": 0,
+ "runs_sealed_cols": [
+  "rmse_cm",
+  "rmse_beq_cm",
+  "bias_cm"
+ ],
+ "smoke_env": {
+  "threads": "2",
+  "cores": 4,
+  "warn": [],
+  "mem_available_gb": 49.9,
+  "permitted": false
+ },
+ "tag": "xbt_smoke",
+ "part": "cpu",
+ "target": "Russia_W",
+ "mode": "x",
+ "split": 1,
+ "variant": "",
+ "expected_splits": [
+  1
+ ],
+ "store_names": [
+  "Russia_W|x"
+ ],
+ "n_keys": 31,
+ "cfg": {
+  "exp": "xb_t",
+  "variant": "",
+  "data_sha": "214abe489347:f8c4b4f0b505:f79eeb64564c",
+  "kappa": 10.0,
+  "r": 10.0,
+  "lams": [
+   0.25,
+   0.5,
+   1.0
+  ],
+  "lam_base": 0.25,
+  "cv_k": 5,
+  "cb_hi": {
+   "iterations": 600,
+   "learning_rate": 0.03,
+   "depth": 6,
+   "l2_leaf_reg": 3.0
+  },
+  "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md@2678100",
+  "frozen": {
+   "h40": "7098f59dabe2b73f",
+   "h42": "22e215e435e157be",
+   "h54": "cf9a1f6d0929c892",
+   "h41": "492373e4d37b5ea4"
+  },
+  "grid": [
+   0,
+   3,
+   10,
+   -1
+  ],
+  "draws": 5,
+  "draws_cap": 1,
+  "seeds": [
+   0
+  ],
+  "cb_iters": 200,
+  "cands": [
+   "P1",
+   "P*",
+   "Ku",
+   "Ed",
+   "Ss",
+   "Cr",
+   "Ca"
+  ],
+  "gammas": [
+   0.0,
+   0.25,
+   0.5,
+   0.75,
+   1.0
+  ],
+  "stack_min_n": 10,
+  "min_folds": 2,
+  "fold_rule": "cv_folds_of(A 블록) 의 묶음 수 K < 2 = 묶음 부족(셀 묶음도 K ≥ 2 이면 적층)",
+  "pstar_max_miss": 0.05,
+  "tie_rel": 1e-10,
+  "neg_tol": 1e-12,
+  "tdd": {
+   "v1": "lgx_tdd_matched_v1.csv:54f132e461ea",
+   "v4": "xb_tdd_matched_v4.csv:6ca0fa4bb8fa",
+   "v4_missing_allowed": false,
+   "v4_sha256_16": "4b22ca458685950c"
+  },
+  "products": {},
+  "methods": [
+   "P0",
+   "P1",
+   "P*",
+   "Pe",
+   "Stack",
+   "R1",
+   "Re",
+   "StackR",
+   "Stack0",
+   "B:ens"
+  ],
+  "lam_cv": "",
+  "wei_km": 5.0,
+  "pstar_rule": "대상 수준(대상 셀 전체·대상 채점 셀)",
+  "wei_km5_scope": "확장 판 전체",
+  "mask_required": {
+   "cci5y": false,
+   "Wei": true,
+   "YK": false
+  },
+  "draw": "h40.draw_cells(대상, 모드, 분할, n, 추출)",
+  "splits_rule": "h40 1–5"
+ },
+ "cfg_hash": "b127699fb0e0",
+ "cfg_common": "6acaf52f4a10",
+ "code_sha": "5b0d21ff61c6",
+ "code_sha_core": "3992c09ae349",
+ "frozen": {
+  "h40": "7098f59dabe2b73f",
+  "h42": "22e215e435e157be",
+  "h54": "cf9a1f6d0929c892",
+  "h41": "492373e4d37b5ea4"
+ },
+ "plan_commit": "2678100",
+ "threads": "2",
+ "device": "",
+ "max_rss_mb": 300.7,
+ "written": "2026-10-04 16:15:24"
+}

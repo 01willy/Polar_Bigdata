@@ -1,0 +1,141 @@
+{
+ "stage": "H38 D1/D2",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_PAPER_2026-09-26.md §4 D1·D2, §5 F11",
+ "tag": "d1_smoke",
+ "target": "Mongolia_CAsia",
+ "args": {
+  "target": "Mongolia_CAsia",
+  "splits": 3,
+  "reps": 20,
+  "seeds": 2,
+  "budgets": "3,10",
+  "taus": "0.10,0.15,0.20",
+  "tau_main": 0.15,
+  "kappa": 10.0,
+  "lam": 0.25,
+  "alpha": 1.0,
+  "buffer_km": 100.0,
+  "workers": 1,
+  "threads": 4,
+  "tag": "d1",
+  "smoke": true,
+  "force_prediction": false,
+  "skip_d2": false
+ },
+ "splits": [
+  0
+ ],
+ "reps": 2,
+ "seeds": [
+  0
+ ],
+ "budgets": [
+  3,
+  10
+ ],
+ "taus": [
+  0.1,
+  0.15,
+  0.2
+ ],
+ "feats": [
+  "dem_elev",
+  "dem_slope",
+  "dem_aspect_sin",
+  "dem_aspect_cos",
+  "dem_tpi",
+  "dem_rough",
+  "e5_maat",
+  "e5_tdd",
+  "e5_fdd",
+  "e5_sqrt_tdd",
+  "e5_twarm",
+  "e5_tcold",
+  "e5_stl1",
+  "e5_swe",
+  "sg_clay_5_15",
+  "sg_sand_5_15",
+  "sg_silt_5_15",
+  "sg_bdod_5_15",
+  "sg_cfvo_5_15",
+  "sg_phh2o_5_15",
+  "sg_soc_0_5",
+  "sg_soc_5_15",
+  "sg_soc_15_30",
+  "cci_alt",
+  "cci_valid"
+ ],
+ "src_sources": [
+  "F4_direct"
+ ],
+ "tgt_sources": [
+  "F4_direct",
+  "F4_calm_temp"
+ ],
+ "prediction_file": "data/processed/h4/d1_smoke_prediction.json",
+ "prediction_mtime": "2026-09-26T13:15:11",
+ "label_read_at": "2026-09-26T13:15:11",
+ "prediction_before_labels": true,
+ "task_meta": [
+  {
+   "split": 0,
+   "n_A": 23,
+   "n_eval": 21,
+   "n_blocks_eval": 10,
+   "n_src": 17467,
+   "E0": 1.5917024900004222,
+   "E_allA": 7.467661091924576,
+   "E_own": 7.569424756808712,
+   "n_fit": 9,
+   "elapsed_s": 5.9
+  }
+ ],
+ "f11_actual": {
+  "r_allA_by_split": {
+   "0": 1.5458
+  },
+  "r_own": 1.559312882890586,
+  "true_branch_allA": {
+   "0": "shrink"
+  },
+  "frac_shrink_by_split": {
+   "0": 1.0
+  }
+ },
+ "f11_verdict": {
+  "n3": {
+   "delta": -42.371468635054214,
+   "ci": [
+    NaN,
+    NaN
+   ],
+   "win_rate": 1.0,
+   "delta_le_0": true,
+   "ci_hi_lt_0": null,
+   "shrink_frac": 1.0,
+   "s3_delta": -66.95950364137617,
+   "protocol_win_rate_ge_S3": true
+  },
+  "n10": {
+   "delta": -83.91549812514076,
+   "ci": [
+    NaN,
+    NaN
+   ],
+   "win_rate": 1.0,
+   "delta_le_0": true,
+   "ci_hi_lt_0": null,
+   "shrink_frac": 1.0,
+   "s3_delta": -97.79455207839568,
+   "protocol_win_rate_ge_S3": true
+  }
+ },
+ "git_commit": "834e4bf",
+ "n_rows": {
+  "runs": 36,
+  "summary": 19,
+  "branch": 3,
+  "d2": 5
+ },
+ "elapsed_s": 7.5
+}

@@ -1,0 +1,12 @@
+[load] rows 19,172 cells 16,189 blocks 85 1s
+[year_obs] usable 19,172 E0 {"Alaska": 1.714, "Lena": 1.924, "Canada": 1.918}
+[Alaska__block__year_obs__F8TS__P1__-__lam-1] n 15,540 rmse 18.53 1s (total 2s)
+[Alaska__block__year_obs__F8TS__D0__catboost__lam-1] n 46,620 rmse 17.38 40s (total 42s)
+[Alaska__block__year_obs__F8TS__R1__catboost__lam0.5] n 46,620 rmse 18.41 40s (total 83s)
+[Lena__block__year_obs__F8TS__P1__-__lam-1] n 2,436 rmse 20.70 0s (total 83s)
+[Lena__block__year_obs__F8TS__D0__catboost__lam-1] n 7,308 rmse 19.52 16s (total 99s)
+[Lena__block__year_obs__F8TS__R1__catboost__lam0.5] n 7,308 rmse 19.46 17s (total 116s)
+[Canada__block__year_obs__F8TS__P1__-__lam-1] n 1,196 rmse 31.42 0s (total 116s)
+[Canada__block__year_obs__F8TS__D0__catboost__lam-1] n 3,588 rmse 32.45 14s (total 130s)
+[Canada__block__year_obs__F8TS__R1__catboost__lam0.5] n 3,588 rmse 30.32 14s (total 144s)
+[done] 144s

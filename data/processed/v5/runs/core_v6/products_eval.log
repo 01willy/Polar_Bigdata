@@ -1,0 +1,52 @@
+region      series              definition     n  rmse   bias     r  rmse_beq  delta_vs_product  delta_lo  delta_hi
+Alaska     ours:P0               all cells 15540 19.37  -8.72  0.60     20.69               NaN       NaN       NaN
+Alaska     ours:P1               all cells 15540 18.58  -2.38  0.60     22.20               NaN       NaN       NaN
+Alaska     ours:Ku               all cells 15540 21.66  -4.10  0.56     24.72               NaN       NaN       NaN
+Alaska     ours:D0               all cells 15540 17.29   0.30  0.56     20.33               NaN       NaN       NaN
+Alaska ours:R1:0.5               all cells 15540 18.42  -3.39  0.59     21.04               NaN       NaN       NaN
+Alaska       cci4y            year-matched 15110 28.53  -3.34  0.54     33.42               NaN       NaN       NaN
+Alaska     ours:P0 vs cci4y (year-matched) 15110 18.91  -8.80  0.60     19.91             -9.62    -20.15     -2.50
+Alaska     ours:P1 vs cci4y (year-matched) 15110 18.10  -2.55  0.60     21.57            -10.43    -20.18     -3.36
+Alaska     ours:Ku vs cci4y (year-matched) 15110 21.23  -4.24  0.57     24.48             -7.30    -19.05     -0.70
+Alaska     ours:D0 vs cci4y (year-matched) 15110 16.59   0.52  0.58     19.45            -11.94    -19.30     -4.12
+Alaska ours:R1:0.5 vs cci4y (year-matched) 15110 17.89  -3.47  0.60     20.26            -10.64    -20.42     -3.60
+Alaska       cci4y             period mean 15540 23.39  -2.89  0.57     30.00               NaN       NaN       NaN
+Alaska     ours:P0  vs cci4y (period mean) 15540 19.37  -8.72  0.60     20.69             -4.03     -9.23     -0.41
+Alaska     ours:P1  vs cci4y (period mean) 15540 18.58  -2.38  0.60     22.20             -4.82     -9.27     -1.28
+Alaska     ours:Ku  vs cci4y (period mean) 15540 21.66  -4.10  0.56     24.72             -1.73     -8.02      2.25
+Alaska     ours:D0  vs cci4y (period mean) 15540 17.29   0.30  0.56     20.33             -6.11     -8.88     -2.09
+Alaska ours:R1:0.5  vs cci4y (period mean) 15540 18.42  -3.39  0.59     21.04             -4.97     -9.44     -1.41
+Alaska       cci5y            year-matched 14156 71.82  32.76  0.58     77.93               NaN       NaN       NaN
+Alaska     ours:P0 vs cci5y (year-matched) 14156 19.68  -9.36  0.59     20.85            -52.14    -86.98    -18.32
+Alaska     ours:P1 vs cci5y (year-matched) 14156 18.70  -3.33  0.59     22.28            -53.12    -88.23    -19.02
+Alaska     ours:Ku vs cci5y (year-matched) 14156 22.02  -5.27  0.54     24.92            -49.80    -85.53    -15.79
+Alaska     ours:D0 vs cci5y (year-matched) 14156 17.37  -0.05  0.57     20.44            -54.45    -88.45    -21.91
+Alaska ours:R1:0.5 vs cci5y (year-matched) 14156 18.46  -4.48  0.58     21.19            -53.36    -88.73    -19.44
+Alaska       cci5y             period mean 15540 67.94  37.11  0.56     70.35               NaN       NaN       NaN
+Alaska     ours:P0  vs cci5y (period mean) 15540 19.37  -8.72  0.60     20.69            -48.57    -82.32    -12.45
+Alaska     ours:P1  vs cci5y (period mean) 15540 18.58  -2.38  0.60     22.20            -49.36    -83.39    -13.07
+Alaska     ours:Ku  vs cci5y (period mean) 15540 21.66  -4.10  0.56     24.72            -46.28    -81.07     -9.56
+Alaska     ours:D0  vs cci5y (period mean) 15540 17.29   0.30  0.56     20.33            -50.66    -84.52    -15.31
+Alaska ours:R1:0.5  vs cci5y (period mean) 15540 18.42  -3.39  0.59     21.04            -49.52    -83.35    -13.51
+Alaska         wei            year-matched 15532 19.51   2.84  0.48     19.64               NaN       NaN       NaN
+Alaska     ours:P0   vs wei (year-matched) 15532 19.37  -8.72  0.60     20.69             -0.14     -4.63      4.05
+Alaska     ours:P1   vs wei (year-matched) 15532 18.58  -2.38  0.60     22.20             -0.93     -5.28      2.79
+Alaska     ours:Ku   vs wei (year-matched) 15532 21.66  -4.10  0.56     24.72              2.15     -2.80      7.38
+Alaska     ours:D0   vs wei (year-matched) 15532 17.29   0.30  0.56     20.33             -2.22     -5.61     -0.34
+Alaska ours:R1:0.5   vs wei (year-matched) 15532 18.43  -3.39  0.59     21.04             -1.09     -5.49      2.62
+Alaska         wei             period mean 15540 18.43   2.46  0.50     19.94               NaN       NaN       NaN
+Alaska     ours:P0    vs wei (period mean) 15540 19.37  -8.72  0.60     20.69              0.93     -2.92      4.55
+Alaska     ours:P1    vs wei (period mean) 15540 18.58  -2.38  0.60     22.20              0.15     -3.22      3.24
+Alaska     ours:Ku    vs wei (period mean) 15540 21.66  -4.10  0.56     24.72              3.23     -1.44      8.06
+Alaska     ours:D0    vs wei (period mean) 15540 17.29   0.30  0.56     20.33             -1.15     -3.14      0.03
+Alaska ours:R1:0.5    vs wei (period mean) 15540 18.42  -3.39  0.59     21.04             -0.01     -3.48      3.07
+Alaska         liu            year-matched 14326 18.78   5.71  0.41     19.71               NaN       NaN       NaN
+Alaska     ours:P0   vs liu (year-matched) 14326 18.10  -8.37  0.61     19.41             -0.68     -2.16      2.04
+Alaska     ours:P1   vs liu (year-matched) 14326 17.37  -2.12  0.60     21.05             -1.40     -3.17      1.07
+Alaska     ours:Ku   vs liu (year-matched) 14326 20.37  -3.32  0.58     23.78              1.60     -0.24      3.90
+Alaska     ours:D0   vs liu (year-matched) 14326 15.68   1.01  0.59     18.94             -3.10     -6.70      0.80
+Alaska ours:R1:0.5   vs liu (year-matched) 14326 17.08  -2.93  0.60     19.74             -1.70     -3.38      0.80
+Alaska         liu             period mean 15081 20.93   5.89  0.34     21.34               NaN       NaN       NaN
+Alaska     ours:P0    vs liu (period mean) 15081 19.26  -8.36  0.60     20.66             -1.67     -3.80      1.69
+Alaska     ours:P1    vs liu (period mean) 15081 18.51  -1.90  0.60     22.03             -2.42     -5.03      0.73
+Alaska     ours:Ku    vs liu (period mean) 15081 21.46  -3.46  0.56     24.39       

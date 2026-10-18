@@ -1,0 +1,26 @@
+{
+ "args": {
+  "proc": "data/processed/v5",
+  "out": "data/processed/v5/runs",
+  "tag": "ladder_smoke",
+  "exp": "LL,TL",
+  "regions": "Lena",
+  "forcing": "year_obs",
+  "featset": "F8TS",
+  "ns_ll": "50,all",
+  "ns_tl": "0,50",
+  "seeds": "0",
+  "k": 2,
+  "lam": 0.5,
+  "threads": 4,
+  "nice": 10,
+  "learner": "catboost"
+ },
+ "started": "2026-10-15 11:28:07",
+ "rows": 19172,
+ "E_src": {
+  "Alaska": 1.7142024386834935,
+  "Lena": 1.9236808063385062,
+  "Canada": 1.9181191628018144
+ }
+}

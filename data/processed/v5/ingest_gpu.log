@@ -1,0 +1,19 @@
+[ingest 18:05] 복원 results/rescale_v6_gpu/results_v6_gpu.tar.gz
+[ingest 18:05] 수치 매크로
+Traceback (most recent call last):
+  File "/home/willy010313/Polar_Bigdata/scripts/2_evaluation/v6_numbers.py", line 182, in <module>
+    main(a.run, a.forcing or ("year_obs" if a.run == "core_v6" else "year"))
+  File "/home/willy010313/Polar_Bigdata/scripts/2_evaluation/v6_numbers.py", line 96, in main
+    d = pd.read_csv(f); d = d[(d.scheme == "block") & (d.ref == "P1") & (d.featset == featset)]
+  File "/home/anaconda3/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 948, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/anaconda3/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 611, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/anaconda3/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 1448, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/home/anaconda3/lib/python3.9/site-packages/pandas/io/parsers/readers.py", line 1723, in _make_engine
+    return mapping[engine](f, **self.options)
+  File "/home/anaconda3/lib/python3.9/site-packages/pandas/io/parsers/c_parser_wrapper.py", line 93, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "parsers.pyx", line 586, in pandas._libs.parsers.TextReader.__cinit__
+pandas.errors.EmptyDataError: No columns to parse from file

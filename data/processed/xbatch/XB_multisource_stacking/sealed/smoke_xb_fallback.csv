@@ -1,0 +1,11 @@
+arm,store,n,ratio,n_draws,n_fb,reasons
+xb_t,Russia_W|x,-1,1.0,1,1,"{""gamma=1"": 1}"
+xb_t,Russia_W|x,0,1.0,1,1,"{""n<10"": 1}"
+xb_t,Russia_W|x,3,1.0,1,1,"{""n<10"": 1}"
+xb_t,Russia_W|x,10,0.0,1,0,{}
+xb_t,Tibet_LGD|x,-1,0.0,1,0,{}
+xb_t,Tibet_LGD|x,0,1.0,1,1,"{""n<10"": 1}"
+xb_t,Tibet_LGD|x,3,1.0,1,1,"{""n<10"": 1}"
+xb_t,Tibet_LGD|x,10,0.0,1,0,{}
+xb_r,Canada|r,-1,0.0,1,0,{}
+xb_r,Canada|r,20,0.0,1,0,{}

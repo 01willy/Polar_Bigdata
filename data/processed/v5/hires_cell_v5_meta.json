@@ -1,0 +1,36 @@
+{
+ "ncscd_soc": {
+  "file": "NCSCDv2_Circumpolar_WGS84_SOCC200_0012deg.tif",
+  "nodata": -32768.0,
+  "frac_finite": 0.8944741323624406
+ },
+ "ncscd_gelisol": {
+  "file": "NCSCDv2_Circumpolar_WGS84_gelisol_pct_0012deg.tif",
+  "nodata": -128.0,
+  "frac_finite": 0.8944741323624406
+ },
+ "cavm_class": {
+  "file": "data/raw/cavm_raster/v1/unzipped/raster_cavm_v1.tif",
+  "frac_finite": 0.8510188501967232,
+  "classes": [
+   1,
+   22,
+   23,
+   24,
+   31,
+   33,
+   34,
+   41,
+   42,
+   43
+  ]
+ },
+ "worldcover": {
+  "tiles_dir": "data/raw/worldcover_v200/tiles",
+  "window_deg": 0.009,
+  "cells_without_tile": 0,
+  "frac_finite": 1.0
+ },
+ "created": "2026-10-12 14:46:29",
+ "elapsed_s": 10.2
+}

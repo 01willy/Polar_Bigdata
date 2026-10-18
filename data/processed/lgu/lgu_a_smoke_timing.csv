@@ -1,0 +1,11 @@
+kind,target,mode,split,status,elapsed_s,device,threads,n_fit,sec,note,wall_s
+emu,AL-3,i,-1,ok,1.3,,4.0,"{""catboost"": 0}",,,
+emu,Canada,x,-1,ok,5.5,,4.0,"{""catboost"": 5}",,,
+emu,Russia_W,x,-1,ok,4.9,,4.0,"{""catboost"": 5}",,,
+cpu,AL-3,i,1,ok,0.7,,4.0,{},,,
+cpu,Canada,x,1,ok,1.5,,4.0,{},,,
+cpu,Russia_W,x,1,ok,1.1,,4.0,{},,,
+gate,Canada,x,-1,ok,21.9,,4.0,"{""catboost"": 16, ""nflow"": 4}",,,
+flow,Canada,x,-1,ok,2.7,,4.0,"{""nflow"": 1}",,,
+boot,Russia_W,x,-1,ok,,,,,1.9,재표집 200 · 분할 [1] · 정의 안 된 재표집 0,1.9
+boot,Canada,x,-1,ok,,,,,2.8,재표집 200 · 분할 [1] · 정의 안 된 재표집 0,2.8

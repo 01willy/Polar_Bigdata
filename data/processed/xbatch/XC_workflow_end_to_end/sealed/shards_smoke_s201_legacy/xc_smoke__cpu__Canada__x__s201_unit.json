@@ -1,0 +1,290 @@
+{
+ "n_fit": {
+  "xc": 77
+ },
+ "sec": {
+  "xc": 119.0
+ },
+ "fail": {},
+ "n_rows": 48,
+ "status": "ok",
+ "n_fit_detail": {
+  "xc|catboost_lo|R1": 5,
+  "xc|catboost_lo|R2": 4,
+  "xc|catboost_lo|D1": 4,
+  "xc|catboost_lo|R1cv": 18,
+  "xc|catboost_lo|R2cv": 18,
+  "xc|catboost_lo|D1cv": 18,
+  "xc|catboost_lo|StackRcv": 10
+ },
+ "sec_detail": {
+  "xc|catboost_lo|R1": 2.257,
+  "xc|catboost_lo|R2": 9.591,
+  "xc|catboost_lo|D1": 9.424,
+  "xc|catboost_lo|R1cv": 8.399,
+  "xc|catboost_lo|R2cv": 43.285,
+  "xc|catboost_lo|D1cv": 41.224,
+  "xc|catboost_lo|StackRcv": 4.795
+ },
+ "rows_detail": {
+  "xc|catboost_lo|R1": 83995,
+  "xc|catboost_lo|R2": 735168,
+  "xc|catboost_lo|D1": 735168,
+  "xc|catboost_lo|R1cv": 302526,
+  "xc|catboost_lo|R2cv": 3307986,
+  "xc|catboost_lo|D1cv": 3307986,
+  "xc|catboost_lo|StackRcv": 168770
+ },
+ "est_detail": {
+  "xc|catboost_lo|R1": 2.509,
+  "xc|catboost_lo|R2": 8.433,
+  "xc|catboost_lo|D1": 8.433,
+  "xc|catboost_lo|R1cv": 9.034,
+  "xc|catboost_lo|R2cv": 37.948,
+  "xc|catboost_lo|D1cv": 37.948,
+  "xc|catboost_lo|StackRcv": 5.032
+ },
+ "errors": [],
+ "n_stored": 48,
+ "n_stored_ml": 37,
+ "n_nonfinite_keys": 0,
+ "notes": {
+  "algp": "S8a",
+  "algp_source": "부록 XC-0 미확정(스모크·세기 기본값 P_default)",
+  "placement_impl": "xd",
+  "wplus": "on",
+  "gate": false,
+  "w_cv_rmse": {
+   "rand|10|0": {
+    "P0": 18.5743,
+    "P1": 19.899,
+    "P2": 22.3798,
+    "R1@0.25": 18.3751,
+    "R1@1.0": 14.2872,
+    "R2@0.25": 19.8864,
+    "D1": 19.944
+   },
+   "rand|40|0": {
+    "P0": 21.5207,
+    "P1": 21.2166,
+    "P2": 21.1429,
+    "R1@0.25": 20.3784,
+    "R1@1.0": 19.2462,
+    "R2@0.25": 21.1857,
+    "D1": 21.1493
+   },
+   "algP|40|0": {
+    "P0": 18.2963,
+    "P1": 17.879,
+    "P2": 17.901,
+    "R1@0.25": 16.7316,
+    "R1@1.0": 16.4661,
+    "R2@0.25": 17.8369,
+    "D1": 17.5917,
+    "Stack": 17.879,
+    "StackR@0.25": 16.7316
+   },
+   "rand|-1|0": {
+    "P0": 22.948,
+    "P1": 23.3084,
+    "P2": 23.3316,
+    "R1@0.25": 22.2206,
+    "R1@1.0": 20.1508,
+    "R2@0.25": 23.1529,
+    "D1": 22.8105,
+    "Stack": 21.3065,
+    "StackR@0.25": 20.8091
+   }
+  }
+ },
+ "n_krige": 0,
+ "krige_s": 0.0,
+ "est_krige_s": 0.0,
+ "n_kmeans": 0,
+ "kmeans_s": 0.0,
+ "est_kmeans_s": 0.0,
+ "diag": [
+  {
+   "n": 10,
+   "draw": 0,
+   "placement": "rand",
+   "split": 201,
+   "n_lab": 10,
+   "nb_lab": 3,
+   "bias": 8.308033514502375,
+   "abs_bias": 8.308033514502375
+  },
+  {
+   "n": 10,
+   "draw": 0,
+   "placement": "algP",
+   "split": 201,
+   "n_lab": 10,
+   "nb_lab": 10,
+   "bias": -5.575224442770618,
+   "abs_bias": 5.575224442770618
+  }
+ ],
+ "orders_head": {
+  "0": [
+   237,
+   408,
+   405,
+   398,
+   406,
+   404,
+   174,
+   409,
+   400,
+   407
+  ]
+ },
+ "n_A": 410,
+ "nb_A": 23,
+ "n_eval": 338,
+ "nb_eval": 14,
+ "n_src": 16697,
+ "n_src_parent": 0,
+ "frac_src_parent": 0.0,
+ "n_parent_excluded": 0,
+ "n_buffer_excluded": 20,
+ "n_cells": 750,
+ "n_blocks": 39,
+ "smd_x25": 0.7657578556977411,
+ "E_own": 1.597397653108288,
+ "E_A": 1.380577279079747,
+ "E_B": 1.815331878087633,
+ "E_block_cv": 0.2198089273856386,
+ "y_mean": 63.08151797337844,
+ "y_sd": 31.004434455491594,
+ "dup_of": -1,
+ "mirror_of": -1,
+ "valid": true,
+ "n_unique_splits": 10,
+ "n_valid_splits": 10,
+ "subregion_src": "map:lg_subregion_map_v1.csv",
+ "subregion_kmeans_diff": 0,
+ "E0": 1.5918750525571221,
+ "logE_ratio_own": 0.003463238537866947,
+ "logE_ratio_AB": -0.2737665740699087,
+ "tau2": 0.1652403412957091,
+ "sigma2": 0.10084712007192818,
+ "alias": "Canada",
+ "data_spec": "v3",
+ "split_status": "ok",
+ "split_rule": "xbatch 1절 새 seed 제외 규칙",
+ "part": "cpu",
+ "elapsed_s": 120.6,
+ "n_fit_total": 77,
+ "plan": {
+  "split": 201,
+  "status": "ok",
+  "ref_split": -1,
+  "n_A": 410,
+  "nb_A": 23,
+  "n_eval": 338,
+  "nb_eval": 14,
+  "min_eval_blocks": 5,
+  "dup_of": -1,
+  "mirror_of": -1,
+  "valid": true,
+  "n_valid_splits": 10,
+  "n_unique_splits": 10
+ },
+ "algp": "S8a",
+ "placement_impl": "xd",
+ "tag": "xc_smoke",
+ "target": "Canada",
+ "mode": "x",
+ "split": 201,
+ "variant": "",
+ "expected_splits": [
+  201
+ ],
+ "store_names": [
+  "Canada|x"
+ ],
+ "n_keys": 48,
+ "cfg": {
+  "exp": "XC",
+  "variant": "",
+  "data_sha": "214abe489347:f8c4b4f0b505:f79eeb64564c",
+  "kappa": 10.0,
+  "r": 10.0,
+  "lams": [
+   0.25,
+   0.5,
+   1.0
+  ],
+  "lam_base": 0.25,
+  "cv_k": 5,
+  "cb_hi": {
+   "iterations": 600,
+   "learning_rate": 0.03,
+   "depth": 6,
+   "l2_leaf_reg": 3.0
+  },
+  "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md@2678100",
+  "frozen": {
+   "h40": "7098f59dabe2b73f",
+   "h42": "22e215e435e157be",
+   "h54": "cf9a1f6d0929c892",
+   "h41": "492373e4d37b5ea4"
+  },
+  "part": "xc",
+  "grid": [
+   10,
+   40,
+   -1
+  ],
+  "draws": 1,
+  "seeds": [
+   0
+  ],
+  "cb_iters": 200,
+  "w_cands": [
+   "P0",
+   "P1",
+   "P2",
+   "R1@0.25",
+   "R1@1.0",
+   "R2@0.25",
+   "D1"
+  ],
+  "w_min_n": 10,
+  "diag_n": 10,
+  "a1_r1_n": [
+   10
+  ],
+  "rand_tag": "xc-rand",
+  "p_tag": "xc-P",
+  "algp": "S8a",
+  "algp_gamma": 0.0,
+  "algp_first": "center",
+  "algp_source": "부록 XC-0 미확정(스모크·세기 기본값 P_default)",
+  "algp_file_sha256": "",
+  "placement_impl": "xd",
+  "placement_sha": "28220ba689ab",
+  "split_family": "xc",
+  "wplus": "x_multisource_stacking@70468215aaad",
+  "wplus_extra": [
+   "Stack",
+   "StackR@0.25"
+  ]
+ },
+ "cfg_hash": "672f4a4338d5",
+ "cfg_common": "8a38a430bae1",
+ "code_sha": "18d0c583c7c2",
+ "code_sha_core": "f4ef5987402a",
+ "frozen": {
+  "h40": "7098f59dabe2b73f",
+  "h42": "22e215e435e157be",
+  "h54": "cf9a1f6d0929c892",
+  "h41": "492373e4d37b5ea4"
+ },
+ "plan_commit": "2678100",
+ "threads": "2",
+ "device": "",
+ "max_rss_mb": 442.6,
+ "written": "2026-10-04 16:03:19"
+}

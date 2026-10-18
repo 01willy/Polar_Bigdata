@@ -1,0 +1,37 @@
+[2026-10-14T06:47:50Z]: Launching [ -f v6_payload.tar.gz ] && tar xzf v6_payload.tar.gz; V6_JOB=gpu V6_BUDGET_MIN=105 bash scripts/rescale/run_v6.sh, Working dir: /enc/ukrprod_RkmTeb/work.  Process output follows:
+[2026-10-14T06:47:50Z]: [2026-10-14T06:47:50Z] [env] 작업 디렉터리 /enc/ukrprod_RkmTeb/work
+[2026-10-14T06:47:50Z]: [2026-10-14T06:47:50Z] [env] 코어 수 24 (RESCALE_CORES_PER_SLOT = 24, OMP_NUM_THREADS = 없음) · 메모리 216 GB (여유 213 GB)
+[2026-10-14T06:47:50Z]: [2026-10-14T06:47:50Z] [env] 디스크 890G 여유 / 890G
+[2026-10-14T06:47:50Z]: [2026-10-14T06:47:50Z] [env] python /program/pytorch-2.4.1/venv/bin/python3 · pip /program/pytorch-2.4.1/venv/bin/pip
+[2026-10-14T06:47:52Z]: [env] python 3.11.10 · Linux-4.18.0-553.164.1.el8_10.x86_64-x86_64-with-glibc2.28
+[2026-10-14T06:47:52Z]: [env] 가상환경 True · prefix /program/pytorch-2.4.1/venv
+[2026-10-14T06:47:52Z]: [env] numpy 2.1.1
+[2026-10-14T06:47:52Z]: [env] pandas 없음
+[2026-10-14T06:47:52Z]: [env] scipy 없음
+[2026-10-14T06:47:52Z]: [env] scikit-learn 없음
+[2026-10-14T06:47:52Z]: [env] catboost 없음
+[2026-10-14T06:47:52Z]: [env] pytabkit 없음
+[2026-10-14T06:47:52Z]: [env] pytest 없음
+[2026-10-14T06:47:52Z]: [env] torch 2.4.1
+[2026-10-14T06:47:52Z]: [env] CUDA_VISIBLE_DEVICES = None
+[2026-10-14T06:48:20Z]: [env] torch 2.4.1+cu121 · CUDA 빌드 12.1 · CUDA 사용 가능 True · GPU 수 1
+[2026-10-14T06:48:20Z]: [env] GPU 0: NVIDIA A100 80GB PCIe · 79.3 GiB
+[2026-10-14T06:48:22Z]: [env] nvidia-smi: index, name, memory.total [MiB], memory.used [MiB], utilization.gpu [%]
+[2026-10-14T06:48:22Z]: [env] nvidia-smi: 0, NVIDIA A100 80GB PCIe, 81920 MiB, 1 MiB, 0 %
+[2026-10-14T06:48:24Z]: [2026-10-14T06:48:24Z] [deps] 없는 필수 패키지: catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-14T06:48:24Z]: [2026-10-14T06:48:24Z] [deps] pip install --user catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-14T06:48:28Z]: ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-10-14T06:48:28Z]: [2026-10-14T06:48:28Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+[2026-10-14T06:48:40Z]: ERROR: Could not install packages due to an OSError: [Errno 28] No space left on device: '/program/pytorch-2.4.1/venv/bin/plotly_get_chrome'
+[2026-10-14T06:48:40Z]: 
+[2026-10-14T06:48:40Z]: [2026-10-14T06:48:40Z] [deps] 기본 위치 설치 실패. --target /enc/ukrprod_RkmTeb/work/.pydeps 에 다시 시도한다
+[2026-10-14T06:49:07Z]: [deps] 확인: catboost 1.2.10 · scikit-learn 1.9.1 · pandas 2.3.3 · scipy 1.17.1 · numpy 2.4.6
+[2026-10-14T07:36:39Z]: [2026-10-14T07:36:39Z] [stage] agg_nn
+[2026-10-14T07:36:44Z]:   [agg_nn]   Lena   year year_obs  F8TS_M     R1     mlp  0.5  2419 20.684  0.962 0.351    28.605   0.298       0.015
+[2026-10-14T07:36:44Z]:   [agg_nn]   Lena   year year_obs  F8TS_M     R1    tabm  0.5  2419 21.001  0.889 0.312    28.542   0.298       0.016
+[2026-10-14T07:36:45Z]: [2026-10-14T07:36:45Z] [v6] 끝 47 min
+[2026-10-14T07:36:45Z]:   stage,rc,sec
+[2026-10-14T07:36:45Z]:   nn,0,2851
+[2026-10-14T07:36:45Z]:   agg_nn,0,5
+[2026-10-14T07:36:45Z]: Exited with code 0
+[2026-10-14T07:36:45Z]: 

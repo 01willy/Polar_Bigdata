@@ -1,0 +1,7 @@
+task,family,counted,v_cell,v_beq,direction,n_pairs
+LE-1,Lena,True,,,행 없음,0
+LE-2,Lena,True,,,행 없음,0
+CA-2,Canada,True,,,행 없음,0
+CA-3,Canada,True,,,행 없음,0
+Tibet_LGD,Tibet,True,,,행 없음,0
+Russia_C~lgd,Russia_C,False,,,행 없음,0

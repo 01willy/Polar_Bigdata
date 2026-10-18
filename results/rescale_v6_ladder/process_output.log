@@ -1,0 +1,29 @@
+[2026-10-15T02:27:02Z]: Launching [ -f v6c_payload.tar.gz ] && tar xzf v6c_payload.tar.gz; V6_JOB=ladder V6_BUDGET_MIN=225 bash scripts/rescale/run_v6c.sh, Working dir: /enc/ukrprod_nMsgU/work.  Process output follows:
+[2026-10-15T02:27:02Z]: [2026-10-15T02:27:02Z] [env] 작업 디렉터리 /enc/ukrprod_nMsgU/work
+[2026-10-15T02:27:02Z]: [2026-10-15T02:27:02Z] [env] 코어 수 96 (RESCALE_CORES_PER_SLOT = 96, OMP_NUM_THREADS = 없음) · 메모리 369 GB (여유 344 GB)
+[2026-10-15T02:27:02Z]: [2026-10-15T02:27:02Z] [env] 디스크 1.2T 여유 / 1.2T
+[2026-10-15T02:27:02Z]: [2026-10-15T02:27:02Z] [env] python /program/pytorch-2.4.1/venv/bin/python3 · pip /program/pytorch-2.4.1/venv/bin/pip
+[2026-10-15T02:27:07Z]: [env] python 3.11.10 · Linux-4.18.0-553.159.1.el8_10.x86_64-x86_64-with-glibc2.28
+[2026-10-15T02:27:07Z]: [env] 가상환경 True · prefix /program/pytorch-2.4.1/venv
+[2026-10-15T02:27:07Z]: [env] numpy 2.1.1
+[2026-10-15T02:27:07Z]: [env] pandas 없음
+[2026-10-15T02:27:07Z]: [env] scipy 없음
+[2026-10-15T02:27:07Z]: [env] scikit-learn 없음
+[2026-10-15T02:27:07Z]: [env] catboost 없음
+[2026-10-15T02:27:07Z]: [env] pytabkit 없음
+[2026-10-15T02:27:07Z]: [env] pytest 없음
+[2026-10-15T02:27:07Z]: [env] torch 2.4.1
+[2026-10-15T02:27:07Z]: [env] CUDA_VISIBLE_DEVICES = None
+[2026-10-15T02:27:35Z]: [env] torch 2.4.1+cu121 · CUDA 빌드 12.1 · CUDA 사용 가능 False · GPU 수 0
+[2026-10-15T02:27:38Z]: [2026-10-15T02:27:38Z] [env] nvidia-smi 없음
+[2026-10-15T02:27:40Z]: [2026-10-15T02:27:40Z] [deps] 없는 필수 패키지: catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-15T02:27:40Z]: [2026-10-15T02:27:40Z] [deps] pip install --user catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-15T02:27:43Z]: ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-10-15T02:27:43Z]: [2026-10-15T02:27:43Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+[2026-10-15T02:28:11Z]: [deps] 확인: catboost 1.2.10 · scikit-learn 1.9.1 · pandas 2.3.3 · scipy 1.17.1 · numpy 2.1.1
+[2026-10-15T02:39:18Z]: [2026-10-15T02:39:18Z] [v6c] 끝 11 min
+[2026-10-15T02:39:18Z]:   stage,rc,sec
+[2026-10-15T02:39:18Z]:   ladder,0,621
+[2026-10-15T02:39:18Z]:   agg,0,665
+[2026-10-15T02:39:18Z]: Exited with code 0
+[2026-10-15T02:39:18Z]: 

@@ -1,0 +1,27 @@
+[ingest 17:18] 복원 results/rescale_v6_cpu/results_v6_cpu.tar.gz
+[ingest 17:18] 제품 비교·연도별·공통 셀(로컬 채점)
+[ingest 17:18] 수치 매크로
+[numbers] 1038 macros from runs/core_v6 forcing year_obs -> /home/willy010313/Polar_Bigdata/paper/manuscript/en_v6/numbers.tex
+[ingest 17:18] 논리 점검
+[ingest 17:18] 그림 F3 F4 F5
+[F3] done
+[F4] done
+[F5] done
+[F3] done
+[F4] done
+[F5] done
+[ingest 17:18] 지도 Alaska (관측일 정합 학습)
+[ingest 17:23] 지도 Lena (관측일 정합 학습)
+[ingest 17:23] 그림 F6
+[F6] done
+[F6] done
+[numbers] 1053 macros from runs/core_v6 forcing year_obs -> /home/willy010313/Polar_Bigdata/paper/manuscript/en_v6/numbers.tex
+[ingest 17:27] 덱
+[audit] 지적 쪽 7/29
+[pdf] deck/render/v6_report.pdf 쪽 PNG 29
+[ingest 17:27] 보고서
+0
+Pages:          9
+[ingest 17:28] 원고
+main: engine xelatex, errors 0, warning lines 13, pages 21
+[ingest 17:28] 끝: cpu

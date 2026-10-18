@@ -1,0 +1,13 @@
+[load] usable 19,172 2s
+[PA Lena wei b1] tr 475 te 339 3s
+[PA Lena wei b2] tr 458 te 356 7s
+[PA Lena wei b3] tr 724 te 90 11s
+[PA Lena wei b4] tr 785 te 29 16s
+[PA Lena wei] rows 12,210 16s
+[PA Lena liu b0] tr 474 te 561 4s
+[PA Lena liu b1] tr 908 te 127 8s
+[PA Lena liu b2] tr 787 te 248 12s
+[PA Lena liu b3] tr 964 te 71 16s
+[PA Lena liu b4] tr 1,007 te 28 20s
+[PA Lena liu] rows 15,525 20s
+[done] 39s

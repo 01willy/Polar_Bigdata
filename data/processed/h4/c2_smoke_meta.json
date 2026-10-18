@@ -1,0 +1,93 @@
+{
+ "stage": "H37/C2",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_PAPER_2026-09-26.md §4 C2, §5 F10",
+ "primary_method": "hier2_cdf",
+ "methods_label0": [
+  "pooled",
+  "hier2_cdf",
+  "hier2_exact",
+  "hier2_sub",
+  "hier2_blk"
+ ],
+ "targets": [
+  "Lena",
+  "Russia_W"
+ ],
+ "splits": [
+  0
+ ],
+ "n_grid": [
+  3
+ ],
+ "reps": 2,
+ "rules": [
+  "kmedoid",
+  "random"
+ ],
+ "src_weights": [
+  "0",
+  "1/K",
+  "1",
+  "2",
+  "4"
+ ],
+ "alpha": 0.1,
+ "B_sub": 100,
+ "nboot": 200,
+ "min_cal_cells": 20,
+ "buffer_km": 100.0,
+ "ref_file": "data/processed/m1/transfer_uq_summary.csv",
+ "score": "abs(log y - log(E0*sqrt_tdd)); E0 = source least squares (target + buffer excluded)",
+ "note_exact": "hier2_exact (subsampling-once expectation, +inf mass 1/(K+1)) is infinite when K+1 < 1/alpha; K here is 4-5",
+ "per_target": [
+  {
+   "n_cells": 31,
+   "n_eval_all": 28,
+   "elapsed_s": 0.4,
+   "target": "Russia_W",
+   "E0": 1.5895097368022233,
+   "n_src": 17436,
+   "cal_groups": "Alaska,Canada,Lena,Russia_E",
+   "K_groups": 4,
+   "N_cal": 17423,
+   "K_blocks": 154,
+   "hier2_sub_sd": 0.2671166251937497,
+   "q_pooled": 0.5090564074685839,
+   "q_hier2_cdf": 0.6157701603369752,
+   "q_hier2_exact": Infinity,
+   "q_hier2_blk": 0.6628734292579659,
+   "q_hier2_sub": 0.5753081040234194
+  },
+  {
+   "n_cells": 3037,
+   "n_eval_all": 2958,
+   "elapsed_s": 1.2,
+   "target": "Lena",
+   "E0": 1.6192971927795523,
+   "n_src": 14429,
+   "cal_groups": "Alaska,Canada,Russia_E,Russia_W",
+   "K_groups": 4,
+   "N_cal": 14417,
+   "K_blocks": 155,
+   "hier2_sub_sd": 0.21369941905421092,
+   "q_pooled": 0.46011830442058166,
+   "q_hier2_cdf": 0.7051456969688448,
+   "q_hier2_exact": Infinity,
+   "q_hier2_blk": 0.6682297390457288,
+   "q_hier2_sub": 0.6572814411037021
+  }
+ ],
+ "F10": {
+  "F10_n_in_band": 1,
+  "F10_n_regions": 2,
+  "F10_regions_in_band": [
+   "Lena"
+  ],
+  "ref_cqr_ak_n_below_085": 5
+ },
+ "git_commit": "834e4bf",
+ "smoke": true,
+ "n_rows_runs": 60,
+ "n_rows_coverage": 74,
+ "elapsed_s": 3.0
+}

@@ -1,0 +1,59 @@
+[start] c1_smoke workers=2 nboot=200 targets=['Lena', 'Canada', 'Russia_W', 'Russia_C', 'Russia_E', 'Greenland']
+[extract] alt: 파일 2개 (/home/willy010313/Polar_Bigdata/data/raw/cci_alt), 연도 [2020, 2021]
+[extract] pfr: 파일 2개 (/home/willy010313/Polar_Bigdata/data/raw/cci_pfr), 연도 [2020, 2021]
+[extract] gtd: 파일 2개 (/home/willy010313/Polar_Bigdata/data/raw/cci_gtd), 연도 [2020, 2021]
+[extract] 블록 창 232개, 창 크기(행×열) 분포 {'50x50': 231, '0x50': 1}
+[extract] 래스터 범위(25–85°N) 밖 블록 [-12600122]: 블록 평활 결측 → 셀 cci 대체
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2021-fv04.0.nc: cci_alt_files 유효 17460, cci_alt_unc 유효 17460
+[extract] alt ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2020-fv04.0.nc: cci_alt_files 유효 17460, cci_alt_unc 유효 17460
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2020-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] pfr ESACCI-PERMAFROST-L4-PFR-MODISLST_CRYOGRID-AREA4_PP-2021-fv04.0.nc: cci_pfr 유효 17481, cci_pfr_unc 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2020-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[extract] gtd ESACCI-PERMAFROST-L4-GTD-MODISLST_CRYOGRID-AREA4_PP-2021-fv04.0.nc: cci_gtd_1m 유효 17481, cci_gtd_2m 유효 17481
+[saved] /home/willy010313/Polar_Bigdata/data/processed/h4/c1_smoke_cci_layers_cells.csv (17572, 21)
+[check] 파일 재추출 ALT 대 base cci_alt: n=17459 r=0.9529 |diff| 중앙 7.80 cm (base = 25년 평균, 스모크는 2년)
+[check] 블록 평활 래스터 중앙값 대 관측 셀 중앙값(이전 정의): 블록 220 |diff| 중앙 7.80 cm, 창 유효 화소 중앙 2333
+[E0] 알래스카 원천 n=13606 E0=1.6167 잔차 RMSE=14.24 cm (σ_st²=202.7)
+[σ²_src] 지역별 Stefan 잔차 RMSE(E0 고정): Alaska 14.2 cm (n=13606), Canada 27.8 cm (n=750), Greenland 43.4 cm (n=3), Lena 21.7 cm (n=3037), Russia_C 53.4 cm (n=7), Russia_E 27.1 cm (n=30), Russia_W 45.7 cm (n=31)
+[check] Lena: npz stefan 대 재계산 E0·√TDD 최대차 0.000 cm; 채점 셀 n=2958, 블록 20
+[check] Lena: npz stefan_cci 대 0.5(st+cci) 최대차 0.000 cm
+[check] Canada: npz stefan 대 재계산 E0·√TDD 최대차 0.000 cm; 채점 셀 n=747, 블록 36
+[check] Canada: npz stefan_cci 대 0.5(st+cci) 최대차 0.000 cm
+[check] Russia_W: npz stefan 대 재계산 E0·√TDD 최대차 0.000 cm; 채점 셀 n=28, 블록 18
+[check] Russia_W: npz stefan_cci 대 0.5(st+cci) 최대차 0.000 cm
+[check] Russia_C: npz stefan 대 재계산 E0·√TDD 최대차 0.000 cm; 채점 셀 n=7, 블록 6
+[check] Russia_C: npz stefan_cci 대 0.5(st+cci) 최대차 0.000 cm
+[check] Russia_E: npz stefan 대 재계산 E0·√TDD 최대차 0.000 cm; 채점 셀 n=27, 블록 19
+[check] Russia_E: npz stefan_cci 대 0.5(st+cci) 최대차 0.000 cm
+[check] Greenland: npz stefan 대 재계산 E0·√TDD 최대차 0.000 cm; 채점 셀 n=1, 블록 1
+[check] Greenland: npz stefan_cci 대 0.5(st+cci) 최대차 0.000 cm
+[F9] 주 판정 F9_pass(§4, (ii)–(iv))=True; 병기 F9_pass_strict(§5, (ii)·(iv))=True; 기준 충족 구성원=['cci_blocksmooth', 'cci_uncw']; driver=strict_member
+[F9] AB4 Holm 판정(가족 F9, m=4): 통과=True cci_uncw Δ=-0.33 CI_holm=[-0.64,-0.00] p_holm=0.030; cci_blocksmooth Δ=-2.35 CI_holm=[-3.59,-0.55] p_holm=0.020; gate_gtd_pfr Δ=-0.45 CI_holm=[-1.18,0.71] p_holm=0.660
+target           Canada  Greenland   Lena  Russia_C  Russia_E  Russia_W
+rule                                                                   
+cci_blocksmooth   22.51      26.70  20.48     54.70     29.90     36.74
+cci_uncw          26.32      30.25  21.05     53.75     28.05     42.29
+cci_uncw_srcvar   25.52      27.63  20.75     54.49     27.79     41.95
+gate_gtd_pfr      25.86      30.90  20.76     52.55     27.59     43.02
+stefan            26.50      30.90  21.62     53.39     28.44     42.46
+stefan_cci        25.72      21.20  20.76     54.00     27.66     41.44
+family                             test level  n_cells  delta  ci_lo  ci_hi  p_boot  p_holm  ci_lo_holm  ci_hi_holm  improve_holm holm_consistent  delta_beq        ci_flag
+    F9          C1_stefan_cci_vs_stefan   AB4     3760 -0.862 -2.036  0.813   0.330   0.660      -2.353       1.147         False            True      1.278        neg 4/4
+    F9          C1_stefan_cci_vs_stefan MAIN6     3768 -2.089    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN     -0.449 neg 5/6; 점 추정만
+    F9            C1_cci_uncw_vs_stefan   AB4     3760 -0.329 -0.601 -0.046   0.010   0.030      -0.636      -0.004          True            True      0.267        neg 4/4
+    F9            C1_cci_uncw_vs_stefan MAIN6     3768 -0.268    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN     -0.002 neg 5/6; 점 추정만
+    F9     C1_cci_blocksmooth_vs_stefan   AB4     3760 -2.350 -3.363 -0.806   0.005   0.020      -3.590      -0.548          True            True     -0.003        neg 3/4
+    F9     C1_cci_blocksmooth_vs_stefan MAIN6     3768 -2.048    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN     -0.446 neg 4/6; 점 추정만
+    F9        C1_gate_gtd_pfr_vs_stefan   AB4     3760 -0.449 -1.034  0.576   0.470   0.660      -1.179       0.709         False            True      0.790        neg 3/4
+    F9        C1_gate_gtd_pfr_vs_stefan MAIN6     3768 -0.440    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN      0.575 neg 4/6; 점 추정만
+ vs_eq        C1_cci_uncw_vs_stefan_cci   AB4     3760  0.532 -0.972  1.548   0.560   1.000      -1.247       1.738         False            True     -1.011        neg 0/4
+ vs_eq        C1_cci_uncw_vs_stefan_cci MAIN6     3768  1.821    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN      0.447 neg 1/6; 점 추정만
+ vs_eq C1_cci_blocksmooth_vs_stefan_cci   AB4     3760 -1.488 -2.477 -0.628   0.005   0.015      -2.704      -0.417          True            True     -1.281        neg 3/4
+ vs_eq C1_cci_blocksmooth_vs_stefan_cci MAIN6     3768  0.041    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN      0.003 neg 3/6; 점 추정만
+ vs_eq    C1_gate_gtd_pfr_vs_stefan_cci   AB4     3760  0.413 -1.064  1.522   0.540   1.000      -1.332       1.826         False            True     -0.488        neg 1/4
+ vs_eq    C1_gate_gtd_pfr_vs_stefan_cci MAIN6     3768  1.649    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN      1.024 neg 2/6; 점 추정만
+  sens     C1_cci_uncw_srcvar_vs_stefan   AB4     3760 -0.754 -1.641  0.447   0.300   0.600      -1.733       0.532         False            True      1.118        neg 4/4
+  sens     C1_cci_uncw_srcvar_vs_stefan MAIN6     3768 -0.864    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN      0.304 neg 5/6; 점 추정만
+  sens C1_cci_uncw_srcvar_vs_stefan_cci   AB4     3760  0.108 -0.714  0.650   0.710   0.710      -0.935       0.713         False            True     -0.160        neg 2/4
+  sens C1_cci_uncw_srcvar_vs_stefan_cci MAIN6     3768  1.225    NaN    NaN     NaN     NaN         NaN         NaN         False             NaN      0.753 neg 2/6; 점 추정만
+[done] c1_smoke 경과 0.1 min → /home/willy010313/Polar_Bigdata/data/processed/h4/c1_smoke_{cci_layers,tests,worst,cells,blocksse,meta}

@@ -1,0 +1,3 @@
+target,parent,split,n_A,n_eval,n_blocks_eval,n_src,n_ctx_src,E0,E_own_A,sigma2,tau2,tau2_raw,logE0_prior,n_prior_regions,prior_regions,n_fit,t_tfm_s,t_cb_s,t_cbr_s,elapsed_s
+Russia_W,Russia_W,0,16,12,8,17436,9991,1.5895097368022233,2.808352740013687,0.10544683470949325,0.17216869834279952,0.17216869834279952,0.46342562705126267,6,Alaska;Canada;Greenland;Lena;Russia_C;Russia_E,3,12.5,0.9,0.7,14.7
+LE-2,Lena,0,893,282,5,14479,9991,1.6206838420594403,1.3874752362652967,0.09406040311244733,0.12752786896399576,0.12752786896399576,0.482848184902764,7,Alaska;Canada;Greenland;Lena;Russia_C;Russia_E;Russia_W,3,6.9,0.6,0.6,8.9

@@ -1,0 +1,1099 @@
+/enc/ukrprod_CJsgU/work/scripts/2_evaluation/v5_aggregate.py:37: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  per_seed = df.groupby(KEY + ["seed"]).apply(lambda s: T.rmse(s.y.values, s.pred.values)).rename("rmse").reset_index()
+region     scheme  forcing featset method  learner   lam     n   rmse    bias      r  rmse_beq  r_anom  skill_anom
+Alaska      block     clim    F8TS     D0 catboost -1.00 15540 17.605  -0.507  0.547    20.656   0.000       0.000
+Alaska      block     clim    F8TS     D1 catboost -1.00 15540 16.722  -0.620  0.602    21.030   0.000       0.000
+Alaska      block     clim    F8TS     Ed        - -1.00 15540 18.472  -1.900  0.570    21.948  -0.000       0.000
+Alaska      block     clim    F8TS     F1 catboost -1.00 15540 17.773  -0.785  0.531    21.025   0.000       0.000
+Alaska      block     clim    F8TS     Ku        - -1.00 15540 19.463  -2.652  0.556    22.931  -0.000       0.000
+Alaska      block     clim    F8TS     P0        - -1.00 15540 17.773  -6.468  0.606    21.038  -0.000       0.000
+Alaska      block     clim    F8TS     P1        - -1.00 15540 16.774  -0.474  0.599    21.542  -0.000       0.000
+Alaska      block     clim    F8TS    P1a        - -1.00 15540 17.015  -1.411  0.585    21.213   0.000       0.000
+Alaska      block     clim    F8TS     PE        - -1.00 15540 16.774  -0.474  0.599    21.542  -0.000       0.000
+Alaska      block     clim    F8TS     R1 catboost  0.25 15540 16.871  -1.121  0.591    21.231   0.000       0.000
+Alaska      block     clim    F8TS     R1 catboost  0.50 15540 17.106  -1.768  0.578    21.092  -0.000       0.000
+Alaska      block     clim    F8TS     R1 catboost  1.00 15540 17.963  -3.061  0.530    21.341  -0.000       0.000
+Alaska      block     year    F8TS     D0 catboost -1.00 15540 17.320   0.370  0.555    20.530   0.239       0.057
+Alaska      block     year    F8TS     D1 catboost -1.00 15540 18.006  -2.053  0.592    21.060   0.221       0.048
+Alaska      block     year    F8TS     Ed        - -1.00 15540 20.580  -3.653  0.561    22.159   0.208       0.043
+Alaska      block     year    F8TS     F1 catboost -1.00 15540 17.343   0.283  0.552    20.460   0.231       0.053
+Alaska      block     year    F8TS     Ku        - -1.00 15540 21.861  -3.734  0.555    24.737   0.179       0.026
+Alaska      block     year    F8TS     P0        - -1.00 15540 18.756  -7.531  0.593    21.010   0.204       0.041
+Alaska      block     year    F8TS     P1        - -1.00 15540 18.130  -1.906  0.588    21.874   0.203       0.041
+Alaska      block     year    F8TS    P1a        - -1.00 15540 17.324  -1.378  0.566    21.084   0.199       0.036
+Alaska      block     year    F8TS     PE        - -1.00 15540 18.130  -1.906  0.588    21.874   0.203       0.041
+Alaska      block     year    F8TS     R1 catboost  0.25 15540 17.869  -2.108  0.585    21.351   0.219       0.048
+Alaska      block     year    F8TS     R1 catboost  0.50 15540 17.728  -2.309  0.580    21.007   0.226       0.051
+Alaska      block     year    F8TS     R1 catboost  1.00 15540 17.814  -2.712  0.559    20.889   0.216       0.046
+Alaska      block year_obs    F8TS     D0 catboost -1.00 15540 17.286   0.300  0.562    20.331   0.258       0.066
+Alaska      block year_obs    F8TS     D1 catboost -1.00 15540 18.449  -2.533  0.600    20.989   0.262       0.068
+Alaska      block year_obs    F8TS     Ed        - -1.00 15540 20.007  -3.770  0.591    22.325   0.247       0.061
+Alaska      block year_obs    F8TS     F1 catboost -1.00 15540 17.457   0.183  0.548    20.333   0.213       0.044
+Alaska      block year_obs    F8TS     Ku        - -1.00 15540 21.659  -4.099  0.556    24.722   0.197       0.035
+Alaska      block year_obs    F8TS     P0        - -1.00 15540 19.366  -8.721  0.597    20.687   0.243       0.059
+Alaska      block year_obs    F8TS     P1        - -1.00 15540 18.577  -2.375  0.595    22.199   0.243       0.059
+Alaska      block year_obs    F8TS    P1a        - -1.00 15540 17.231  -1.724  0.575    21.006   0.243       0.052
+Alaska      block year_obs    F8TS     PE        - -1.00 15540 19.031  -2.965  0.593    22.216   0.240       0.057
+Alaska      block year_obs    F8TS     R1 catboost  0.25 15540 18.423  -2.882  0.593    21.489   0.256       0.066
+Alaska      block year_obs    F8TS     R1 catboost  0.50 15540 18.422  -3.389  0.587    21.040   0.260       0.068
+Alaska      block year_obs    F8TS     R1 catboost  1.00 15540 18.874  -4.402  0.563    20.982   0.241       0.056
+Alaska block_year     clim    F8TS     D0 catboost -1.00 15421 17.611  -0.705  0.538    21.141  -0.105      -0.040
+Alaska block_year     clim    F8TS     D1 catboost -1.00 15421 16.677  -0.397  0.600    20.856  -0.015      -0.005
+Alaska block_year     clim    F8TS     Ed        - -1.00 15421 18.149  -1.752  0.574    21.881   0.049       0.002
+Alaska block_year     clim    F8TS     F1 catboost -1.00 15421 17.813  -0.451  0.523    21.321  -0.124      -0.046
+Alaska block_year     clim    F8TS     Ku        - -1.00 15421 19.079  -2.613  0.560    22.872   0.057       0.003
+Alaska block_year     clim    F8TS     P0        - -1.00 15421 17.710  -6.431  0.606    20.863  -0.000       0.000
+Alaska block_year     clim    F8TS     P1        - -1.00 15421 16.663  -0.148  0.601    21.468  -0.018      -0.001
+Alaska block_year     clim    F8TS    P1a        - -1.00 15421 16.846  -0.820  0.589    21.174  -0.133      -0.015
+Alaska block_year     clim    F8TS     PE        - -1.00 15421 16.662  -0.150  0.601    21.465   0.029       0.001
+Alaska block_year     clim    F8TS     R1 catboost  0.25 15421 16.787  -0.969  0.593    21.231  -0.057      -0.005
+Alaska block_year     clim    F8TS     R1 catboost  0.50 15421 17.051  -1.790  0.579    21.154  -0.055      -0.011
+Alaska block_year     clim    F8TS     R1 catboost  1.00 15421 17.970  -3.432  0.533    21.486  -0.053      -0.031
+Alaska block_year     year    F8TS     D0 catboost -1.00 15421 17.291   0.503  0.568    20.667   0.150       0.012
+Alaska block_year     year    F8TS     D1 catboost -1.00 15421 18.064  -2.442  0.588    21.074   0.209       0.041
+Alaska block_year     year    F8TS     Ed        - -1.00 15421 20.454  -3.979  0.562    22.226   0.195       0.034
+Alaska block_year     year    F8TS     F1 catboost -1.00 15421 17.752   1.001  0.520    20.710   0.173       0.025
+Alaska block_year     year    F8TS     Ku        - -1.00 15421 21.478  -4.211  0.559    24.593   0.189       0.028
+Alaska block_year     year    F8TS     P0        - -1.00 15421 18.712  -7.515  0.594    20.834   0.207       0.043
+Alaska block_year     year    F8TS     P1        - -1.00 15421 18.122  -2.208  0.587    21.870   0.201       0.037
+Alaska block_year     year    F8TS    P1a        - -1.00 15421 17.083  -0.932  0.574    20.993   0.185       0.033
+Alaska block_year     year    F8TS     PE        - -1.00 15421 18.120  -2.224  0.587    21.867   0.204       0.038
+Alaska block_year     year    F8TS     R1 catboost  0.25 15421 17.839  -2.713  0.586    21.394   0.201       0.037
+Alaska block_year     year    F8TS     R1 catboost  0.50 15421 17.728  -3.217  0.581    21.094   0.191       0.031
+Alaska block_year     year    F8TS     R1 catboost  1.00 15421 18.033  -4.227  0.555    21.047   0.153      -0.003
+Alaska block_year year_obs    F8TS     D0 catboost -1.00 15421 17.510   0.397  0.547    20.502   0.166       0.016
+Alaska block_year year_obs    F8TS     D1 catboost -1.00 15421 18.702  -3.293  0.595    20.775   0.238       0.046
+Alaska block_year year_obs    F8TS     Ed        - -1.00 15421 20.173  -4.329  0.589    22.353   0.229       0.043
+Alaska block_year year_obs    F8TS     F1 catboost -1.00 15421 17.776   0.708  0.521    20.464   0.162       0.013
+Alaska block_year year_obs    F8TS     Ku        - -1.00 15421 21.266  -4.563  0.560    24.576   0.208       0.039
+Alaska block_year year_obs    F8TS     P0        - -1.00 15421 19.337  -8.735  0.598    20.523   0.247       0.060
+Alaska block_year year_obs    F8TS     P1        - -1.00 15421 18.803  -2.983  0.592    22.175   0.236       0.046
+Alaska block_year year_obs    F8TS    P1a        - -1.00 15421 17.095  -1.948  0.582    20.843   0.215       0.044
+Alaska block_year year_obs    F8TS     PE        - -1.00 15421 19.024  -3.223  0.596    22.166   0.239       0.042
+Alaska block_year year_obs    F8TS     R1 catboost  0.25 15421 18.524  -3.563  0.589    21.543   0.225       0.040
+Alaska block_year year_obs    F8TS     R1 catboost  0.50 15421 18.456  -4.142  0.581    21.157   0.205       0.026
+Alaska block_year year_obs    F8TS     R1 catboost  1.00 15421 18.953  -5.302  0.546    21.165   0.150      -0.031
+Alaska     random     clim    F8TS     D0 catboost -1.00 15540 12.312   0.004  0.807    12.693  -0.155      -0.086
+Alaska     random     clim    F8TS     D1 catboost -1.00 15540 12.933  -0.133  0.786    14.614  -0.127      -0.068
+Alaska     random     clim    F8TS     Ed        - -1.00 15540 18.017  -2.009  0.580    21.811  -0.000      -0.000
+Alaska     random     clim    F8TS     F1 catboost -1.00 15540 12.303  -0.001  0.807    12.667  -0.154      -0.084
+Alaska     random     clim    F8TS     Ku        - -1.00 15540 18.905  -2.829  0.567    22.724   0.000      -0.000
+Alaska     random     clim    F8TS     P0        - -1.00 15540 17.773  -6.468  0.606    21.038  -0.000       0.000
+Alaska     random     clim    F8TS     P1        - -1.00 15540 16.642  -0.434  0.605    21.595  -0.004      -0.000
+Alaska     random     clim    F8TS    P1a        - -1.00 15540 16.557  -0.000  0.605    21.362   0.003      -0.000
+Alaska     random     clim    F8TS     PE        - -1.00 15540 16.642  -0.434  0.605    21.595  -0.004      -0.000
+Alaska     random     clim    F8TS     R1 catboost  0.25 15540 15.076  -0.325  0.689    18.648  -0.154      -0.015
+Alaska     random     clim    F8TS     R1 catboost  0.50 15540 13.779  -0.216  0.752    16.062  -0.155      -0.034
+Alaska     random     clim    F8TS     R1 catboost  1.00 15540 12.319   0.002  0.807    12.850  -0.155      -0.083
+Alaska     random     year    F8TS     D0 catboost -1.00 15540 11.897  -0.010  0.822    13.137   0.564       0.317
+Alaska     random     year    F8TS     D1 catboost -1.00 15540 13.017  -0.556  0.782    16.120   0.527       0.269
+Alaska     random     year    F8TS     Ed        - -1.00 15540 19.839  -3.973  0.572    21.827   0.210       0.044
+Alaska     random     year    F8TS     F1 catboost -1.00 15540 11.896  -0.013  0.822    13.212   0.570       0.325
+Alaska     random     year    F8TS     Ku        - -1.00 15540 21.266  -4.197  0.561    24.548   0.180       0.026
+Alaska     random     year    F8TS     P0        - -1.00 15540 18.756  -7.531  0.593    21.010   0.204       0.041
+Alaska     random     year    F8TS     P1        - -1.00 15540 17.820  -2.001  0.593    21.690   0.204       0.041
+Alaska     random     year    F8TS    P1a        - -1.00 15540 16.759  -0.000  0.592    21.136   0.204       0.038
+Alaska     random     year    F8TS     PE        - -1.00 15540 17.820  -2.001  0.593    21.690   0.204       0.041
+Alaska     random     year    F8TS     R1 catboost  0.25 15540 15.704  -1.504  0.674    18.866   0.451       0.164
+Alaska     random     year    F8TS     R1 catboost  0.50 15540 13.914  -1.006  0.745    16.421   0.535       0.250
+Alaska     random     year    F8TS     R1 catboost  1.00 15540 11.893  -0.011  0.822    13.484   0.561       0.314
+Alaska     random year_obs    F8TS     D0 catboost -1.00 15540 11.839   0.001  0.823    13.061   0.570       0.324
+Alaska     random year_obs    F8TS     D1 catboost -1.00 15540 12.965  -0.641  0.783    15.899   0.536       0.279
+Alaska     random year_obs    F8TS     Ed        - -1.00 15540 19.571  -4.054  0.593    21.941   0.247       0.061
+Alaska     random year_obs    F8TS     F1 catboost -1.00 15540 11.854  -0.011  0.823    13.143   0.573       0.328
+Alaska     random year_obs    F8TS     Ku        - -1.00 15540 21.139  -4.481  0.561    24.543   0.180       0.026
+Alaska     random year_obs    F8TS     P0        - -1.00 15540 19.366  -8.721  0.597    20.687   0.243       0.059
+Alaska     random year_obs    F8TS     P1        - -1.00 15540 18.221  -2.575  0.597    21.820   0.242       0.059
+Alaska     random year_obs    F8TS    P1a        - -1.00 15540 16.698  -0.001  0.596    21.121   0.242       0.053
+Alaska     random year_obs    F8TS     PE        - -1.00 15540 18.221  -2.575  0.597    21.820   0.242       0.059
+Alaska     random year_obs    F8TS     R1 catboost  0.25 15540 15.939  -1.933  0.673    18.930   0.453       0.178
+Alaska     random year_obs    F8TS     R1 catboost  0.50 15540 14.004  -1.291  0.744    16.420   0.539       0.262
+Alaska     random year_obs    F8TS     R1 catboost  1.00 15540 11.848  -0.007  0.823    13.386   0.570       0.324
+Alaska     region     clim    F8TS     D0 catboost -1.00 15540 28.226  16.297  0.196    24.885  -0.000       0.000
+Alaska     region     clim    F8TS     D1 catboost -1.00 15540 17.774  -6.493  0.606    20.907   0.000       0.000
+Alaska     region     clim    F8TS     Ed        - -1.00 15540 24.266 -17.372  0.581    24.941   0.000       0.000
+Alaska     region     clim    F8TS     F1 catboost -1.00 15540 26.357  13.912  0.256    24.534   0.000       0.000
+Alaska     region     clim    F8TS     Ku        - -1.00 15540 23.686 -16.175  0.567    24.482  -0.000       0.000
+Alaska     region     clim    F8TS     P0        - -1.00 15540 17.765  -6.447  0.606    21.036  -0.000       0.000
+Alaska     region     clim    F8TS     P1        - -1.00 15540 17.765  -6.447  0.606    21.036  -0.000       0.000
+Alaska     region     clim    F8TS    P1a        - -1.00 15540 20.282  -9.222  0.606    22.266  -0.000       0.000
+Alaska     region     clim    F8TS     PE        - -1.00 15540 23.283 -15.653  0.570    24.176   0.000       0.000
+Alaska     region     clim    F8TS     R1 catboost  0.25 15540 17.103  -3.879  0.600    21.095   0.000       0.000
+Alaska     region     clim    F8TS     R1 catboost  0.50 15540 17.397  -1.312  0.566    21.640  -0.000       0.000
+Alaska     region     clim    F8TS     R1 catboost  1.00 15540 20.561   3.822  0.472    24.025  -0.000       0.000
+Alaska     region     year    F8TS     D0 catboost -1.00 15540 23.852  10.321  0.268    23.270   0.169       0.028
+Alaska     region     year    F8TS     D1 catboost -1.00 15540 18.757  -7.574  0.593    20.899   0.179       0.032
+Alaska     region     year    F8TS     Ed        - -1.00 15540 24.912 -17.832  0.572    24.642   0.211       0.040
+Alaska     region     year    F8TS     F1 catboost -1.00 15540 22.583   8.436  0.285    23.090   0.151       0.021
+Alaska     region     year    F8TS     Ku        - -1.00 15540 25.149 -16.715  0.551    24.220   0.275       0.072
+Alaska     region     year    F8TS     P0        - -1.00 15540 18.749  -7.511  0.593    21.009   0.204       0.041
+Alaska     region     year    F8TS     P1        - -1.00 15540 18.749  -7.511  0.593    21.009   0.204       0.041
+Alaska     region     year    F8TS    P1a        - -1.00 15540 22.866 -10.732  0.593    22.214   0.204       0.037
+Alaska     region     year    F8TS     PE        - -1.00 15540 24.413 -15.836  0.556    23.712   0.274       0.071
+Alaska     region     year    F8TS     R1 catboost  0.25 15540 17.493  -4.317  0.594    20.885   0.206       0.042
+Alaska     region     year    F8TS     R1 catboost  0.50 15540 17.490  -1.123  0.564    21.299   0.200       0.040
+Alaska     region     year    F8TS     R1 catboost  1.00 15540 21.023   5.265  0.428    23.588   0.174       0.027
+Alaska     region year_obs    F8TS     D0 catboost -1.00 15540 20.560   5.295  0.376    22.640   0.187       0.035
+Alaska     region year_obs    F8TS     D1 catboost -1.00 15540 19.336  -8.772  0.599    20.653   0.219       0.048
+Alaska     region year_obs    F8TS     Ed        - -1.00 15540 25.190 -18.591  0.594    24.017   0.248       0.056
+Alaska     region year_obs    F8TS     F1 catboost -1.00 15540 19.552   3.111  0.410    22.427   0.201       0.040
+Alaska     region year_obs    F8TS     Ku        - -1.00 15540 25.144 -17.058  0.556    24.232   0.274       0.071
+Alaska     region year_obs    F8TS     P0        - -1.00 15540 19.358  -8.696  0.597    20.686   0.243       0.059
+Alaska     region year_obs    F8TS     P1        - -1.00 15540 19.358  -8.696  0.597    20.686   0.243       0.059
+Alaska     region year_obs    F8TS    P1a        - -1.00 15540 22.723 -11.496  0.597    21.459   0.243       0.056
+Alaska     region year_obs    F8TS     PE        - -1.00 15540 24.046 -15.814  0.568    23.332   0.281       0.073
+Alaska     region year_obs    F8TS     R1 catboost  0.25 15540 17.892  -6.447  0.609    20.660   0.253       0.063
+Alaska     region year_obs    F8TS     R1 catboost  0.50 15540 17.546  -4.197  0.583    21.182   0.254       0.064
+Alaska     region year_obs    F8TS     R1 catboost  1.00 15540 20.259   0.302  0.414    23.689   0.241       0.057
+Alaska       year     clim    F8TS     D0 catboost -1.00 15540 14.774  -1.032  0.709    15.422  -0.515      -0.339
+Alaska       year     clim    F8TS     D1 catboost -1.00 15540 15.011  -0.101  0.696    16.073  -0.631      -0.210
+Alaska       year     clim    F8TS     Ed        - -1.00 15540 18.097  -1.813  0.578    21.883  -0.214      -0.013
+Alaska       year     clim    F8TS     F1 catboost -1.00 15540 14.800  -1.160  0.708    15.522  -0.515      -0.338
+Alaska       year     clim    F8TS     Ku        - -1.00 15540 19.009  -2.694  0.565    22.807  -0.170      -0.012
+Alaska       year     clim    F8TS     P0        - -1.00 15540 17.773  -6.468  0.606    21.038  -0.000       0.000
+Alaska       year     clim    F8TS     P1        - -1.00 15540 16.668  -0.216  0.604    21.647  -0.343      -0.013
+Alaska       year     clim    F8TS    P1a        - -1.00 15540 16.784  -0.618  0.596    21.452  -0.270      -0.034
+Alaska       year     clim    F8TS     PE        - -1.00 15540 16.668  -0.216  0.604    21.647  -0.343      -0.013
+Alaska       year     clim    F8TS     R1 catboost  0.25 15540 15.829  -0.401  0.650    19.549  -0.540      -0.081
+Alaska       year     clim    F8TS     R1 catboost  0.50 15540 15.245  -0.587  0.681    17.889  -0.527      -0.157
+Alaska       year     clim    F8TS     R1 catboost  1.00 15540 14.950  -0.957  0.701    16.385  -0.516      -0.333
+Alaska       year     year    F8TS     D0 catboost -1.00 15540 14.983  -2.227  0.704    15.310   0.087      -0.123
+Alaska       year     year    F8TS     D1 catboost -1.00 15540 17.143  -2.532  0.634    17.825   0.202       0.036
+Alaska       year     year    F8TS     Ed        - -1.00 15540 20.362  -4.093  0.565    22.056   0.176       0.027
+Alaska       year     year    F8TS     F1 catboost -1.00 15540 14.874  -1.699  0.707    15.305   0.119      -0.095
+Alaska       year     year    F8TS     Ku        - -1.00 15540 21.499  -4.329  0.559    24.662   0.166       0.016
+Alaska       year     year    F8TS     P0        - -1.00 15540 18.756  -7.531  0.593    21.010   0.204       0.041
+Alaska       year     year    F8TS     P1        - -1.00 15540 18.152  -2.343  0.587    21.809   0.184       0.030
+Alaska       year     year    F8TS    P1a        - -1.00 15540 17.126  -1.142  0.580    21.213   0.122       0.014
+Alaska       year     year    F8TS     PE        - -1.00 15540 18.152  -2.343  0.587    21.809   0.184       0.030
+Alaska       year     year    F8TS     R1 catboost  0.25 15540 17.266  -2.627  0.622    19.682   0.200       0.038
+Alaska       year     year    F8TS     R1 catboost  0.50 15540 16.604  -2.912  0.651    17.917   0.188       0.027
+Alaska       year     year    F8TS     R1 catboost  1.00 15540 16.060  -3.482  0.682    15.933   0.144      -0.057
+Alaska       year year_obs    F8TS     D0 catboost -1.00 15540 14.849  -2.056  0.708    15.116   0.111      -0.101
+Alaska       year year_obs    F8TS     D1 catboost -1.00 15540 17.682  -3.682  0.636    17.562   0.246       0.053
+Alaska       year year_obs    F8TS     Ed        - -1.00 15540 20.181  -4.551  0.586    22.119   0.226       0.046
+Alaska       year year_obs    F8TS     F1 catboost -1.00 15540 14.873  -1.817  0.707    15.353   0.123      -0.086
+Alaska       year year_obs    F8TS     Ku        - -1.00 15540 21.310  -4.661  0.560    24.650   0.168       0.017
+Alaska       year year_obs    F8TS     P0        - -1.00 15540 19.366  -8.721  0.597    20.687   0.243       0.059
+Alaska       year year_obs    F8TS     P1        - -1.00 15540 18.724  -3.325  0.590    21.900   0.232       0.049
+Alaska       year year_obs    F8TS    P1a        - -1.00 15540 17.302  -2.101  0.580    21.153   0.168       0.028
+Alaska       year year_obs    F8TS     PE        - -1.00 15540 18.923  -3.440  0.593    21.907   0.238       0.050
+Alaska       year year_obs    F8TS     R1 catboost  0.25 15540 17.867  -3.758  0.619    19.681   0.249       0.060
+Alaska       year year_obs    F8TS     R1 catboost  0.50 15540 17.261  -4.190  0.643    17.832   0.241       0.052
+Alaska       year year_obs    F8TS     R1 catboost  1.00 15540 16.905  -5.056  0.665    15.752   0.193      -0.022
+Canada      block     clim    F8TS     D0 catboost -1.00  1196 27.268   5.538  0.523    26.961  -0.000       0.000
+Canada      block     clim    F8TS     D1 catboost -1.00  1196 30.678   2.398  0.111    30.185     NaN       0.000
+Canada      block     clim    F8TS     Ed        - -1.00  1196 27.216  -0.035  0.464    31.872   0.000       0.000
+Canada      block     clim    F8TS     F1 catboost -1.00  1196 27.677   5.011  0.485    26.938  -0.000       0.000
+Canada      block     clim    F8TS     Ku        - -1.00  1196 26.818  -0.599  0.491    32.881  -0.000       0.000
+Canada      block     clim    F8TS     P0        - -1.00  1196 27.615   3.768  0.563    29.769     NaN       0.000
+Canada      block     clim    F8TS     P1        - -1.00  1196 30.761   2.491  0.093    30.579  -0.000       0.000
+Canada      block     clim    F8TS    P1a        - -1.00  1196 29.219  -0.621  0.335    36.028   0.000      -0.000
+Canada      block     clim    F8TS     PE        - -1.00  1196 28.628   0.781  0.368    33.051     NaN       0.000
+Canada      block     clim    F8TS     R1 catboost  0.25  1196 29.484   3.035  0.331    29.695     NaN       0.000
+Canada      block     clim    F8TS     R1 catboost  0.50  1196 28.382   3.578  0.453    28.975   0.000       0.000
+Canada      block     clim    F8TS     R1 catboost  1.00  1196 26.784   4.664  0.537    28.077  -0.000       0.000
+Canada      block     year    F8TS     D0 catboost -1.00  1196 29.276  -1.014  0.306    26.815  -0.048      -0.117
+Canada      block     year    F8TS     D1 catboost -1.00  1196 29.540   2.176  0.301    29.788   0.047      -0.067
+Canada      block     year    F8TS     Ed        - -1.00  1196 26.609  -0.259  0.500    32.121   0.052      -0.058
+Canada      block     year    F8TS     F1 catboost -1.00  1196 28.398  -0.554  0.398    26.238  -0.060      -0.075
+Canada      block     year    F8TS     Ku        - -1.00  1196 25.434  -0.793  0.562    32.405   0.039      -0.121
+Canada      block     year    F8TS     P0        - -1.00  1196 27.109   5.813  0.581    29.650   0.054      -0.094
+Canada      block     year    F8TS     P1        - -1.00  1196 29.692   2.306  0.279    30.464   0.054      -0.095
+Canada      block     year    F8TS    P1a        - -1.00  1196 28.511  -1.214  0.381    34.521   0.050      -0.361
+Canada      block     year    F8TS     PE        - -1.00  1196 27.424  -2.023  0.456    32.622   0.038      -0.058
+Canada      block     year    F8TS     R1 catboost  0.25  1196 28.726   1.132  0.405    29.353   0.044      -0.120
+Canada      block     year    F8TS     R1 catboost  0.50  1196 27.977  -0.042  0.466    28.406   0.033      -0.163
+Canada      block     year    F8TS     R1 catboost  1.00  1196 27.199  -2.390  0.487    27.074   0.016      -0.304
+Canada      block year_obs    F8TS     D0 catboost -1.00  1196 26.055   1.351  0.585    26.034   0.038      -0.060
+Canada      block year_obs    F8TS     D1 catboost -1.00  1196 30.484   2.928  0.164    29.630   0.066      -0.129
+Canada      block year_obs    F8TS     Ed        - -1.00  1196 25.425   0.682  0.585    30.016   0.065      -0.148
+Canada      block year_obs    F8TS     F1 catboost -1.00  1196 25.617   2.185  0.615    25.530   0.075      -0.014
+Canada      block year_obs    F8TS     Ku        - -1.00  1196 25.434  -0.793  0.562    32.405   0.039      -0.121
+Canada      block year_obs    F8TS     P0        - -1.00  1196 27.746   7.673  0.573    28.860   0.068      -0.198
+Canada      block year_obs    F8TS     P1        - -1.00  1196 30.625   2.966  0.144    30.342   0.070      -0.164
+Canada      block year_obs    F8TS    P1a        - -1.00  1196 29.005  -1.172  0.336    33.100   0.069      -0.532
+Canada      block year_obs    F8TS     PE        - -1.00  1196 26.488   1.982  0.517    31.609   0.071      -0.148
+Canada      block year_obs    F8TS     R1 catboost  0.25  1196 28.632   2.672  0.411    28.967   0.071      -0.193
+Canada      block year_obs    F8TS     R1 catboost  0.50  1196 26.888   2.377  0.550    27.831   0.070      -0.234
+Canada      block year_obs    F8TS     R1 catboost  1.00  1196 24.353   1.789  0.633    26.392   0.067      -0.353
+Canada block_year     clim    F8TS     D0 catboost -1.00  1135 28.965  10.464  0.469    30.060  -0.061      -0.162
+Canada block_year     clim    F8TS     D1 catboost -1.00  1135 31.101   6.272  0.003    31.118  -0.097      -0.194
+Canada block_year     clim    F8TS     Ed        - -1.00  1135 26.595   2.893  0.475    34.887  -0.098      -0.063
+Canada block_year     clim    F8TS     F1 catboost -1.00  1135 29.408  10.424  0.426    30.352  -0.034      -0.100
+Canada block_year     clim    F8TS     Ku        - -1.00  1135 25.801   2.078  0.518    35.994  -0.098      -0.044
+Canada block_year     clim    F8TS     P0        - -1.00  1135 26.533   5.276  0.655    31.943     NaN       0.000
+Canada block_year     clim    F8TS     P1        - -1.00  1135 31.212   6.277 -0.025    32.391  -0.098      -0.184
+Canada block_year     clim    F8TS    P1a        - -1.00  1135 29.536   4.306  0.299    39.030  -0.097      -0.996
+Canada block_year     clim    F8TS     PE        - -1.00  1135 29.500   5.591  0.302    36.268  -0.088      -0.899
+Canada block_year     clim    F8TS     R1 catboost  0.25  1135 30.067   7.126  0.244    31.816  -0.092      -0.175
+Canada block_year     clim    F8TS     R1 catboost  0.50  1135 29.107   7.974  0.419    31.435  -0.083      -0.171
+Canada block_year     clim    F8TS     R1 catboost  1.00  1135 27.819   9.672  0.535    31.283  -0.063      -0.177
+Canada block_year     year    F8TS     D0 catboost -1.00  1135 30.617   3.981  0.124    29.714  -0.106      -0.607
+Canada block_year     year    F8TS     D1 catboost -1.00  1135 30.069   6.106  0.199    30.853  -0.022      -0.349
+Canada block_year     year    F8TS     Ed        - -1.00  1135 25.917   2.708  0.514    35.289   0.003      -0.139
+Canada block_year     year    F8TS     F1 catboost -1.00  1135 30.097   4.006  0.174    29.869  -0.125      -0.403
+Canada block_year     year    F8TS     Ku        - -1.00  1135 24.188   1.887  0.596    35.371   0.005      -0.185
+Canada block_year     year    F8TS     P0        - -1.00  1135 26.047   7.364  0.661    31.933   0.061      -0.085
+Canada block_year     year    F8TS     P1        - -1.00  1135 30.113   6.150  0.193    32.446  -0.018      -0.341
+Canada block_year     year    F8TS    P1a        - -1.00  1135 28.432   3.227  0.357    37.347  -0.022      -1.221
+Canada block_year     year    F8TS     PE        - -1.00  1135 28.404   3.182  0.367    35.638  -0.068      -1.636
+Canada block_year     year    F8TS     R1 catboost  0.25  1135 29.406   5.285  0.273    31.805  -0.028      -0.436
+Canada block_year     year    F8TS     R1 catboost  0.50  1135 28.929   4.420  0.309    31.358  -0.035      -0.553
+Canada block_year     year    F8TS     R1 catboost  1.00  1135 28.708   2.689  0.317    31.074  -0.045      -0.853
+Canada block_year year_obs    F8TS     D0 catboost -1.00  1135 28.111   6.798  0.431    29.174  -0.082      -0.496
+Canada block_year year_obs    F8TS     D1 catboost -1.00  1135 31.022   6.640  0.074    30.567   0.004      -0.403
+Canada block_year year_obs    F8TS     Ed        - -1.00  1135 24.560   3.387  0.617    32.566   0.032      -0.226
+Canada block_year year_obs    F8TS     F1 catboost -1.00  1135 26.983   6.724  0.516    29.158  -0.127      -0.349
+Canada block_year year_obs    F8TS     Ku        - -1.00  1135 24.188   1.887  0.596    35.371   0.005      -0.185
+Canada block_year year_obs    F8TS     P0        - -1.00  1135 26.906   9.160  0.642    31.105   0.072      -0.200
+Canada block_year year_obs    F8TS     P1        - -1.00  1135 31.112   6.631  0.058    32.082   0.007      -0.396
+Canada block_year year_obs    F8TS    P1a        - -1.00  1135 28.733   2.585  0.313    35.539   0.014      -0.998
+Canada block_year year_obs    F8TS     PE        - -1.00  1135 27.923   7.219  0.440    35.072  -0.044      -1.404
+Canada block_year year_obs    F8TS     R1 catboost  0.25  1135 29.410   6.699  0.312    31.259  -0.001      -0.516
+Canada block_year year_obs    F8TS     R1 catboost  0.50  1135 27.991   6.767  0.462    30.709  -0.007      -0.662
+Canada block_year year_obs    F8TS     R1 catboost  1.00  1135 26.179   6.903  0.549    30.484  -0.016      -1.038
+Canada     random     clim    F8TS     D0 catboost -1.00  1196 16.625   0.075  0.841    17.058  -0.472      -0.283
+Canada     random     clim    F8TS     D1 catboost -1.00  1196 17.903   0.197  0.836    18.171  -0.289      -0.197
+Canada     random     clim    F8TS     Ed        - -1.00  1196 25.742   0.358  0.548    31.269  -0.044      -0.002
+Canada     random     clim    F8TS     F1 catboost -1.00  1196 16.611   0.071  0.841    17.206  -0.471      -0.276
+Canada     random     clim    F8TS     Ku        - -1.00  1196 25.551  -0.087  0.555    32.222  -0.044      -0.002
+Canada     random     clim    F8TS     P0        - -1.00  1196 27.615   3.768  0.563    29.769     NaN       0.000
+Canada     random     clim    F8TS     P1        - -1.00  1196 27.499   1.082  0.561    30.142  -0.032      -0.003
+Canada     random     clim    F8TS    P1a        - -1.00  1196 25.427   0.004  0.561    34.179   0.028       0.001
+Canada     random     clim    F8TS     PE        - -1.00  1196 25.544   0.035  0.556    31.855  -0.068      -0.006
+Canada     random     clim    F8TS     R1 catboost  0.25  1196 23.317   0.835  0.787    24.744  -0.449      -0.061
+Canada     random     clim    F8TS     R1 catboost  0.50  1196 19.820   0.587  0.831    20.265  -0.470      -0.127
+Canada     random     clim    F8TS     R1 catboost  1.00  1196 16.614   0.092  0.841    17.074  -0.472      -0.279
+Canada     random     year    F8TS     D0 catboost -1.00  1196 16.210   0.078  0.849    16.544   0.215      -0.011
+Canada     random     year    F8TS     D1 catboost -1.00  1196 18.843  -0.315  0.813    22.941   0.231       0.019
+Canada     random     year    F8TS     Ed        - -1.00  1196 25.232   0.223  0.571    31.505   0.049      -0.061
+Canada     random     year    F8TS     F1 catboost -1.00  1196 16.212   0.048  0.849    16.652   0.210      -0.021
+Canada     random     year    F8TS     Ku        - -1.00  1196 24.621  -0.209  0.599    31.987   0.036      -0.134
+Canada     random     year    F8TS     P0        - -1.00  1196 27.109   5.813  0.581    29.650   0.054      -0.094
+Canada     random     year    F8TS     P1        - -1.00  1196 26.727   1.203  0.579    30.064   0.051      -0.083
+Canada     random     year    F8TS    P1a        - -1.00  1196 25.025   0.002  0.580    33.189   0.054      -0.433
+Canada     random     year    F8TS     PE        - -1.00  1196 24.604  -0.062  0.599    31.659   0.040      -0.122
+Canada     random     year    F8TS     R1 catboost  0.25  1196 22.785   0.921  0.777    24.988   0.122      -0.020
+Canada     random     year    F8TS     R1 catboost  0.50  1196 19.473   0.640  0.831    20.676   0.178       0.011
+Canada     random     year    F8TS     R1 catboost  1.00  1196 16.272   0.077  0.848    16.766   0.207      -0.026
+Canada     random year_obs    F8TS     D0 catboost -1.00  1196 16.192   0.073  0.850    16.417   0.225      -0.003
+Canada     random year_obs    F8TS     D1 catboost -1.00  1196 18.771  -0.450  0.818    22.707   0.234       0.016
+Canada     random year_obs    F8TS     Ed        - -1.00  1196 24.441   0.905  0.620    29.793   0.061      -0.164
+Canada     random year_obs    F8TS     F1 catboost -1.00  1196 16.172   0.048  0.850    16.439   0.223      -0.007
+Canada     random year_obs    F8TS     Ku        - -1.00  1196 24.621  -0.209  0.599    31.987   0.036      -0.134
+Canada     random year_obs    F8TS     P0        - -1.00  1196 27.746   7.673  0.573    28.860   0.068      -0.198
+Canada     random year_obs    F8TS     P1        - -1.00  1196 26.981   1.164  0.571    29.867   0.065      -0.163
+Canada     random year_obs    F8TS    P1a        - -1.00  1196 25.212  -0.001  0.571    32.025   0.068      -0.926
+Canada     random year_obs    F8TS     PE        - -1.00  1196 24.386   0.537  0.614    30.459   0.059      -0.142
+Canada     random year_obs    F8TS     R1 catboost  0.25  1196 22.944   0.899  0.780    24.789   0.120      -0.068
+Canada     random year_obs    F8TS     R1 catboost  0.50  1196 19.539   0.634  0.833    20.455   0.174      -0.013
+Canada     random year_obs    F8TS     R1 catboost  1.00  1196 16.222   0.104  0.849    16.447   0.214      -0.023
+Canada     region     clim    F8TS     D0 catboost -1.00  1196 25.307  -6.898  0.621    29.577     NaN       0.000
+Canada     region     clim    F8TS     D1 catboost -1.00  1196 27.551   3.445  0.559    29.213     NaN       0.000
+Canada     region     clim    F8TS     Ed        - -1.00  1196 30.816  16.867  0.549    36.938     NaN       0.000
+Canada     region     clim    F8TS     F1 catboost -1.00  1196 24.660  -4.744  0.623    28.671   0.000       0.000
+Canada     region     clim    F8TS     Ku        - -1.00  1196 31.958  18.465  0.556    39.840  -0.000       0.000
+Canada     region     clim    F8TS     P0        - -1.00  1196 27.617   3.795  0.563    29.767     NaN       0.000
+Canada     region     clim    F8TS     P1        - -1.00  1196 27.617   3.795  0.563    29.767     NaN       0.000
+Canada     region     clim    F8TS    P1a        - -1.00  1196 27.698   2.773  0.563    29.805  -0.000      -0.000
+Canada     region     clim    F8TS     PE        - -1.00  1196 27.617   3.795  0.563    29.767     NaN       0.000
+Canada     region     clim    F8TS     R1 catboost  0.25  1196 26.688   3.416  0.567    29.147     NaN       0.000
+Canada     region     clim    F8TS     R1 catboost  0.50  1196 26.064   3.037  0.562    28.925  -0.000       0.000
+Canada     region     clim    F8TS     R1 catboost  1.00  1196 25.807   2.278  0.549    29.700  -0.000       0.000
+Canada     region     year    F8TS     D0 catboost -1.00  1196 23.713   1.824  0.647    28.576  -0.017      -0.052
+Canada     region     year    F8TS     D1 catboost -1.00  1196 26.814   5.453  0.599    28.729   0.054      -0.066
+Canada     region     year    F8TS     Ed        - -1.00  1196 31.660  18.765  0.572    38.602   0.053      -0.107
+Canada     region     year    F8TS     F1 catboost -1.00  1196 23.905   0.601  0.645    28.605  -0.026      -0.072
+Canada     region     year    F8TS     Ku        - -1.00  1196 35.370  24.159  0.599    43.205   0.039      -0.266
+Canada     region     year    F8TS     P0        - -1.00  1196 27.114   5.840  0.581    29.650   0.054      -0.094
+Canada     region     year    F8TS     P1        - -1.00  1196 27.114   5.840  0.581    29.650   0.054      -0.094
+Canada     region     year    F8TS    P1a        - -1.00  1196 27.477   1.738  0.581    29.733   0.054      -0.041
+Canada     region     year    F8TS     PE        - -1.00  1196 27.114   5.840  0.581    29.650   0.054      -0.094
+Canada     region     year    F8TS     R1 catboost  0.25  1196 25.082   5.851  0.630    28.941   0.046      -0.080
+Canada     region     year    F8TS     R1 catboost  0.50  1196 24.343   5.862  0.639    29.249   0.034      -0.076
+Canada     region     year    F8TS     R1 catboost  1.00  1196 26.984   5.884  0.641    32.711   0.004      -0.096
+Canada     region year_obs    F8TS     D0 catboost -1.00  1196 23.904  -0.164  0.646    27.876  -0.041      -0.076
+Canada     region year_obs    F8TS     D1 catboost -1.00  1196 27.383   7.161  0.595    28.005   0.058      -0.132
+Canada     region year_obs    F8TS     Ed        - -1.00  1196 32.139  21.264  0.621    36.042   0.064      -0.299
+Canada     region year_obs    F8TS     F1 catboost -1.00  1196 23.460  -0.887  0.656    27.133   0.028      -0.027
+Canada     region year_obs    F8TS     Ku        - -1.00  1196 35.370  24.159  0.599    43.205   0.039      -0.266
+Canada     region year_obs    F8TS     P0        - -1.00  1196 27.751   7.697  0.573    28.859   0.068      -0.199
+Canada     region year_obs    F8TS     P1        - -1.00  1196 27.751   7.697  0.573    28.859   0.068      -0.199
+Canada     region year_obs    F8TS    P1a        - -1.00  1196 27.841   2.433  0.573    29.471   0.068      -0.075
+Canada     region year_obs    F8TS     PE        - -1.00  1196 27.751   7.697  0.573    28.859   0.068      -0.199
+Canada     region year_obs    F8TS     R1 catboost  0.25  1196 25.370   7.200  0.644    27.588   0.066      -0.163
+Canada     region year_obs    F8TS     R1 catboost  0.50  1196 24.249   6.703  0.653    27.312   0.064      -0.136
+Canada     region year_obs    F8TS     R1 catboost  1.00  1196 26.260   5.710  0.648    29.754   0.054      -0.103
+Canada       year     clim    F8TS     D0 catboost -1.00  1164 23.030   5.510  0.688    23.165  -0.678      -0.471
+Canada       year     clim    F8TS     D1 catboost -1.00  1164 21.670   2.647  0.748    19.336  -0.665      -0.336
+Canada       year     clim    F8TS     Ed        - -1.00  1164 26.314   2.440  0.510    31.690  -0.110      -0.049
+Canada       year     clim    F8TS     F1 catboost -1.00  1164 23.130   5.757  0.687    23.147  -0.679      -0.467
+Canada       year     clim    F8TS     Ku        - -1.00  1164 25.832   1.762  0.534    32.645  -0.111      -0.039
+Canada       year     clim    F8TS     P0        - -1.00  1164 27.129   4.449  0.606    29.205     NaN       0.000
+Canada       year     clim    F8TS     P1        - -1.00  1164 28.688   3.695  0.439    29.823  -0.110      -0.070
+Canada       year     clim    F8TS    P1a        - -1.00  1164 25.328   1.698  0.559    33.737  -0.128      -0.034
+Canada       year     clim    F8TS     PE        - -1.00  1164 26.303   2.177  0.509    32.332  -0.121      -0.072
+Canada       year     clim    F8TS     R1 catboost  0.25  1164 25.428   4.026  0.701    25.843  -0.389      -0.153
+Canada       year     clim    F8TS     R1 catboost  0.50  1164 23.053   4.357  0.726    23.007  -0.586      -0.248
+Canada       year     clim    F8TS     R1 catboost  1.00  1164 22.025   5.018  0.714    22.392  -0.682      -0.473
+Canada       year     year    F8TS     D0 catboost -1.00  1164 24.038   6.986  0.655    22.755  -0.359      -0.364
+Canada       year     year    F8TS     D1 catboost -1.00  1164 26.755   4.144  0.596    24.410  -0.060      -0.320
+Canada       year     year    F8TS     Ed        - -1.00  1164 25.674   2.363  0.543    31.763   0.013      -0.135
+Canada       year     year    F8TS     F1 catboost -1.00  1164 23.972   7.163  0.661    22.798  -0.323      -0.312
+Canada       year     year    F8TS     Ku        - -1.00  1164 24.551   1.699  0.595    32.071   0.010      -0.227
+Canada       year     year    F8TS     P0        - -1.00  1164 26.607   6.548  0.622    28.864   0.063      -0.092
+Canada       year     year    F8TS     P1        - -1.00  1164 27.884   3.921  0.485    29.588   0.010      -0.212
+Canada       year     year    F8TS    P1a        - -1.00  1164 25.201   1.799  0.565    32.500   0.044      -0.789
+Canada       year     year    F8TS     PE        - -1.00  1164 24.990   1.935  0.575    31.821  -0.004      -0.263
+Canada       year     year    F8TS     R1 catboost  0.25  1164 25.631   4.481  0.662    26.012  -0.060      -0.233
+Canada       year     year    F8TS     R1 catboost  0.50  1164 24.038   5.042  0.693    23.486  -0.142      -0.269
+Canada       year     year    F8TS     R1 catboost  1.00  1164 23.318   6.164  0.674    22.868  -0.302      -0.385
+Canada       year year_obs    F8TS     D0 catboost -1.00  1164 24.642   7.258  0.635    22.808  -0.301      -0.311
+Canada       year year_obs    F8TS     D1 catboost -1.00  1164 27.032   3.995  0.588    23.915  -0.012      -0.370
+Canada       year year_obs    F8TS     Ed        - -1.00  1164 24.607   2.782  0.612    29.434   0.043      -0.245
+Canada       year year_obs    F8TS     F1 catboost -1.00  1164 23.838   7.431  0.668    22.187  -0.199      -0.308
+Canada       year year_obs    F8TS     Ku        - -1.00  1164 24.551   1.699  0.595    32.071   0.010      -0.227
+Canada       year year_obs    F8TS     P0        - -1.00  1164 27.351   8.346  0.608    28.100   0.075      -0.202
+Canada       year year_obs    F8TS     P1        - -1.00  1164 28.108   3.694  0.480    29.067   0.041      -0.276
+Canada       year year_obs    F8TS    P1a        - -1.00  1164 25.169   2.128  0.567    30.609   0.065      -1.449
+Canada       year year_obs    F8TS     PE        - -1.00  1164 24.918   2.779  0.586    30.686   0.037      -0.298
+Canada       year year_obs    F8TS     R1 catboost  0.25  1164 25.828   4.363  0.652    25.459  -0.006      -0.364
+Canada       year year_obs    F8TS     R1 catboost  0.50  1164 24.270   5.033  0.674    22.862  -0.047      -0.476
+Canada       year year_obs    F8TS     R1 catboost  1.00  1164 23.830   6.372  0.659    22.029  -0.107      -0.768
+  Lena      block     clim    F8TS     D0 catboost -1.00  2436 17.188   1.634  0.639    22.464   0.000       0.000
+  Lena      block     clim    F8TS     D1 catboost -1.00  2436 22.183   0.575  0.016    29.164     NaN       0.000
+  Lena      block     clim    F8TS     Ed        - -1.00  2436 22.636  -0.005 -0.186    30.406   0.000       0.000
+  Lena      block     clim    F8TS     F1 catboost -1.00  2436 17.192   1.652  0.637    22.549  -0.000       0.000
+  Lena      block     clim    F8TS     Ku        - -1.00  2436 22.551   0.038 -0.154    30.265     NaN       0.000
+  Lena      block     clim    F8TS     P0        - -1.00  2436 23.374   8.151  0.162    27.689  -0.000       0.000
+  Lena      block     clim    F8TS     P1        - -1.00  2436 22.469   0.549 -0.150    29.858     NaN       0.000
+  Lena      block     clim    F8TS    P1a        - -1.00  2436 24.211   2.359 -0.026    30.884   0.000       0.000
+  Lena      block     clim    F8TS     PE        - -1.00  2436 22.820   1.316 -0.277    30.358     NaN       0.000
+  Lena      block     clim    F8TS     R1 catboost  0.25  2436 20.585   0.779  0.516    27.438     NaN       0.000
+  Lena      block     clim    F8TS     R1 catboost  0.50  2436 19.025   1.008  0.606    25.478   0.000       0.000
+  Lena      block     clim    F8TS     R1 catboost  1.00  2436 17.211   1.468  0.636    23.374   0.000       0.000
+  Lena      block     year    F8TS     D0 catboost -1.00  2436 16.624  -0.848  0.662    24.576   0.170      -1.012
+  Lena      block     year    F8TS     D1 catboost -1.00  2436 20.594   0.837  0.461    27.407   0.198       0.027
+  Lena      block     year    F8TS     Ed        - -1.00  2436 21.175   1.157  0.339    28.068   0.259       0.066
+  Lena      block     year    F8TS     F1 catboost -1.00  2436 16.757  -1.368  0.657    24.235   0.157      -1.245
+  Lena      block     year    F8TS     Ku        - -1.00  2436 20.435   1.247  0.425    26.775   0.171      -0.015
+  Lena      block     year    F8TS     P0        - -1.00  2436 21.394   6.872  0.487    26.434   0.263       0.065
+  Lena      block     year    F8TS     P1        - -1.00  2436 20.893   0.969  0.407    27.769   0.263       0.068
+  Lena      block     year    F8TS    P1a        - -1.00  2436 20.607  -0.675  0.394    26.897   0.266      -0.357
+  Lena      block     year    F8TS     PE        - -1.00  2436 20.536   1.215  0.409    26.898   0.171      -0.015
+  Lena      block     year    F8TS     R1 catboost  0.25  2436 19.166   0.305  0.612    25.507   0.255       0.020
+  Lena      block     year    F8TS     R1 catboost  0.50  2436 17.850  -0.359  0.649    24.117   0.222      -0.206
+  Lena      block     year    F8TS     R1 catboost  1.00  2436 16.804  -1.687  0.654    24.458   0.190      -1.193
+  Lena      block year_obs    F8TS     D0 catboost -1.00  2436 15.879  -0.192  0.697    22.208   0.205      -0.502
+  Lena      block year_obs    F8TS     D1 catboost -1.00  2436 20.741   1.005  0.380    28.024   0.367       0.132
+  Lena      block year_obs    F8TS     Ed        - -1.00  2436 21.329   1.150  0.272    28.820   0.369       0.134
+  Lena      block year_obs    F8TS     F1 catboost -1.00  2436 16.099  -0.475  0.686    23.846   0.176      -0.775
+  Lena      block year_obs    F8TS     Ku        - -1.00  2436 20.437   1.167  0.421    26.790   0.179      -0.010
+  Lena      block year_obs    F8TS     P0        - -1.00  2436 21.465   6.693  0.425    27.069   0.375       0.130
+  Lena      block year_obs    F8TS     P1        - -1.00  2436 21.037   1.076  0.330    28.503   0.375       0.138
+  Lena      block year_obs    F8TS    P1a        - -1.00  2436 21.160   0.651  0.335    28.628   0.376      -0.251
+  Lena      block year_obs    F8TS     PE        - -1.00  2436 20.701   1.072  0.379    27.081   0.179      -0.010
+  Lena      block year_obs    F8TS     R1 catboost  0.25  2436 19.033   0.796  0.592    25.502   0.360       0.104
+  Lena      block year_obs    F8TS     R1 catboost  0.50  2436 17.444   0.517  0.667    23.422   0.305      -0.071
+  Lena      block year_obs    F8TS     R1 catboost  1.00  2436 15.977  -0.042  0.691    22.936   0.232      -0.838
+  Lena block_year     clim    F8TS     D0 catboost -1.00  2374 23.136   3.389  0.155    33.262  -0.261      -2.480
+  Lena block_year     clim    F8TS     D1 catboost -1.00  2374 23.024   1.230 -0.303    34.936  -0.451      -0.241
+  Lena block_year     clim    F8TS     Ed        - -1.00  2374 23.601   1.087 -0.345    35.502  -0.518      -0.252
+  Lena block_year     clim    F8TS     F1 catboost -1.00  2374 23.242   3.281  0.144    33.187  -0.286      -2.624
+  Lena block_year     clim    F8TS     Ku        - -1.00  2374 23.494   1.079 -0.336    35.319  -0.517      -0.255
+  Lena block_year     clim    F8TS     P0        - -1.00  2374 23.489   8.308  0.161    32.130  -0.000       0.000
+  Lena block_year     clim    F8TS     P1        - -1.00  2374 23.181   1.335 -0.395    35.105  -0.542      -0.199
+  Lena block_year     clim    F8TS    P1a        - -1.00  2374 25.686   3.348 -0.192    35.565  -0.412      -1.179
+  Lena block_year     clim    F8TS     PE        - -1.00  2374 23.835   2.193 -0.453    35.417  -0.482      -0.391
+  Lena block_year     clim    F8TS     R1 catboost  0.25  2374 22.679   1.794 -0.100    34.351  -0.365      -0.466
+  Lena block_year     clim    F8TS     R1 catboost  0.50  2374 22.493   2.252  0.068    33.788  -0.303      -0.912
+  Lena block_year     clim    F8TS     R1 catboost  1.00  2374 23.088   3.170  0.155    33.275  -0.261      -2.341
+  Lena block_year     year    F8TS     D0 catboost -1.00  2374 21.244   1.321  0.298    32.039  -0.141      -0.641
+  Lena block_year     year    F8TS     D1 catboost -1.00  2374 21.365   1.347  0.333    32.805   0.294       0.085
+  Lena block_year     year    F8TS     Ed        - -1.00  2374 22.020   2.010  0.148    33.114   0.224       0.039
+  Lena block_year     year    F8TS     F1 catboost -1.00  2374 21.115   0.233  0.314    31.476  -0.180      -0.638
+  Lena block_year     year    F8TS     Ku        - -1.00  2374 21.008   1.600  0.361    31.331   0.217       0.040
+  Lena block_year     year    F8TS     P0        - -1.00  2374 21.468   6.978  0.491    30.504   0.526       0.262
+  Lena block_year     year    F8TS     P1        - -1.00  2374 21.437   1.499  0.316    32.850   0.324       0.105
+  Lena block_year     year    F8TS    P1a        - -1.00  2374 21.643  -0.969  0.306    32.857   0.288      -0.902
+  Lena block_year     year    F8TS     PE        - -1.00  2374 21.503   1.418  0.258    32.578   0.217       0.040
+  Lena block_year     year    F8TS     R1 catboost  0.25  2374 21.000   1.133  0.395    32.285   0.210       0.013
+  Lena block_year     year    F8TS     R1 catboost  0.50  2374 20.732   0.767  0.392    31.832   0.122      -0.115
+  Lena block_year     year    F8TS     R1 catboost  1.00  2374 20.730   0.036  0.355    31.283   0.020      -0.483
+  Lena block_year year_obs    F8TS     D0 catboost -1.00  2374 20.605   1.252  0.374    31.316   0.009      -0.451
+  Lena block_year year_obs    F8TS     D1 catboost -1.00  2374 21.479   1.336  0.263    33.518   0.430       0.175
+  Lena block_year year_obs    F8TS     Ed        - -1.00  2374 22.056   1.737  0.145    33.915   0.390       0.133
+  Lena block_year year_obs    F8TS     F1 catboost -1.00  2374 20.761   0.569  0.354    31.313  -0.049      -0.526
+  Lena block_year year_obs    F8TS     Ku        - -1.00  2374 21.015   1.497  0.354    31.357   0.213       0.037
+  Lena block_year year_obs    F8TS     P0        - -1.00  2374 21.561   6.756  0.423    30.982   0.568       0.320
+  Lena block_year year_obs    F8TS     P1        - -1.00  2374 21.549   1.435  0.249    33.597   0.451       0.197
+  Lena block_year year_obs    F8TS    P1a        - -1.00  2374 22.111   0.623  0.265    33.571   0.389      -1.388
+  Lena block_year year_obs    F8TS     PE        - -1.00  2374 22.013   1.096  0.141    33.965   0.083      -0.037
+  Lena block_year year_obs    F8TS     R1 catboost  0.25  2374 21.035   1.247  0.349    32.996   0.399       0.131
+  Lena block_year year_obs    F8TS     R1 catboost  0.50  2374 20.665   1.059  0.392    32.502   0.337       0.024
+  Lena block_year year_obs    F8TS     R1 catboost  1.00  2374 20.384   0.682  0.395    31.859   0.228      -0.317
+  Lena     random     clim    F8TS     D0 catboost -1.00  2436 12.917  -0.051  0.812    17.830  -0.606      -0.290
+  Lena     random     clim    F8TS     D1 catboost -1.00  2436 16.489  -1.103  0.745    22.898  -0.544      -0.193
+  Lena     random     clim    F8TS     Ed        - -1.00  2436 22.054  -0.797  0.081    29.707   0.004      -0.000
+  Lena     random     clim    F8TS     F1 catboost -1.00  2436 12.867  -0.033  0.813    17.563  -0.596      -0.285
+  Lena     random     clim    F8TS     Ku        - -1.00  2436 21.983  -0.761  0.129    29.567   0.004      -0.000
+  Lena     random     clim    F8TS     P0        - -1.00  2436 23.374   8.151  0.162    27.689  -0.000       0.000
+  Lena     random     clim    F8TS     P1        - -1.00  2436 21.933   0.072  0.161    29.187   0.003      -0.000
+  Lena     random     clim    F8TS    P1a        - -1.00  2436 21.821   0.004  0.161    29.554   0.010       0.000
+  Lena     random     clim    F8TS     PE        - -1.00  2436 21.943  -0.114  0.163    29.218  -0.074      -0.005
+  Lena     random     clim    F8TS     R1 catboost  0.25  2436 18.551   0.046  0.795    24.475  -0.596      -0.065
+  Lena     random     clim    F8TS     R1 catboost  0.50  2436 15.686   0.020  0.810    20.594  -0.601      -0.135
+  Lena     random     clim    F8TS     R1 catboost  1.00  2436 12.907  -0.031  0.812    17.554  -0.602      -0.290
+  Lena     random     year    F8TS     D0 catboost -1.00  2436 12.355  -0.026  0.829    17.681   0.618       0.372
+  Lena     random     year    F8TS     D1 catboost -1.00  2436 15.406  -0.805  0.777    21.832   0.569       0.319
+  Lena     random     year    F8TS     Ed        - -1.00  2436 20.612   0.384  0.462    27.471   0.260       0.067
+  Lena     random     year    F8TS     F1 catboost -1.00  2436 12.357  -0.054  0.829    17.743   0.604       0.352
+  Lena     random     year    F8TS     Ku        - -1.00  2436 19.862   0.579  0.519    26.148   0.171      -0.008
+  Lena     random     year    F8TS     P0        - -1.00  2436 21.394   6.872  0.487    26.434   0.263       0.065
+  Lena     random     year    F8TS     P1        - -1.00  2436 20.459   0.639  0.486    27.316   0.263       0.069
+  Lena     random     year    F8TS    P1a        - -1.00  2436 19.318   0.001  0.486    26.541   0.263      -0.181
+  Lena     random     year    F8TS     PE        - -1.00  2436 19.862   0.579  0.519    26.148   0.171      -0.008
+  Lena     random     year    F8TS     R1 catboost  0.25  2436 17.385   0.471  0.773    23.651   0.499       0.224
+  Lena     random     year    F8TS     R1 catboost  0.50  2436 14.798   0.303  0.819    20.626   0.594       0.331
+  Lena     random     year    F8TS     R1 catboost  1.00  2436 12.316  -0.034  0.830    17.778   0.639       0.403
+  Lena     random year_obs    F8TS     D0 catboost -1.00  2436 12.296  -0.058  0.831    17.362   0.653       0.424
+  Lena     random year_obs    F8TS     D1 catboost -1.00  2436 15.390  -0.818  0.774    22.041   0.598       0.354
+  Lena     random year_obs    F8TS     Ed        - -1.00  2436 20.720   0.157  0.392    28.209   0.371       0.136
+  Lena     random year_obs    F8TS     F1 catboost -1.00  2436 12.234  -0.068  0.833    17.637   0.657       0.429
+  Lena     random year_obs    F8TS     Ku        - -1.00  2436 19.850   0.494  0.520    26.154   0.179      -0.003
+  Lena     random year_obs    F8TS     P0        - -1.00  2436 21.465   6.693  0.425    27.069   0.375       0.130
+  Lena     random year_obs    F8TS     P1        - -1.00  2436 20.549   0.520  0.424    28.014   0.375       0.139
+  Lena     random year_obs    F8TS    P1a        - -1.00  2436 20.024   0.003  0.424    28.178   0.375      -0.051
+  Lena     random year_obs    F8TS     PE        - -1.00  2436 19.850   0.494  0.520    26.154   0.179      -0.003
+  Lena     random year_obs    F8TS     R1 catboost  0.25  2436 17.415   0.379  0.750    24.058   0.528       0.272
+  Lena     random year_obs    F8TS     R1 catboost  0.50  2436 14.776   0.238  0.816    20.757   0.614       0.366
+  Lena     random year_obs    F8TS     R1 catboost  1.00  2436 12.262  -0.044  0.832    17.586   0.666       0.441
+  Lena     region     clim    F8TS     D0 catboost -1.00  2436 45.630  39.761  0.093    41.695     NaN       0.000
+  Lena     region     clim    F8TS     D1 catboost -1.00  2436 23.364   8.148  0.190    27.625   0.000       0.000
+  Lena     region     clim    F8TS     Ed        - -1.00  2436 28.732  17.388 -0.049    28.372  -0.000       0.000
+  Lena     region     clim    F8TS     F1 catboost -1.00  2436 48.152  42.564  0.117    44.212     NaN       0.000
+  Lena     region     clim    F8TS     Ku        - -1.00  2436 25.230  11.949  0.022    27.367  -0.000       0.000
+  Lena     region     clim    F8TS     P0        - -1.00  2436 23.374   8.151  0.162    27.689   0.000       0.000
+  Lena     region     clim    F8TS     P1        - -1.00  2436 23.374   8.151  0.162    27.689   0.000       0.000
+  Lena     region     clim    F8TS    P1a        - -1.00  2436 23.674   8.938  0.162    27.644  -0.000       0.000
+  Lena     region     clim    F8TS     PE        - -1.00  2436 23.374   8.151  0.162    27.689   0.000       0.000
+  Lena     region     clim    F8TS     R1 catboost  0.25  2436 24.578  11.468  0.255    27.596   0.000       0.000
+  Lena     region     clim    F8TS     R1 catboost  0.50  2436 26.184  14.785  0.273    27.947   0.000       0.000
+  Lena     region     clim    F8TS     R1 catboost  1.00  2436 30.329  21.420  0.252    29.895     NaN       0.000
+  Lena     region     year    F8TS     D0 catboost -1.00  2436 44.300  39.091  0.334    42.789   0.058      -0.002
+  Lena     region     year    F8TS     D1 catboost -1.00  2436 21.410   6.833  0.520    26.190   0.278       0.074
+  Lena     region     year    F8TS     Ed        - -1.00  2436 25.407  14.839  0.385    26.988   0.262       0.053
+  Lena     region     year    F8TS     F1 catboost -1.00  2436 44.303  38.901  0.290    42.001  -0.058      -0.030
+  Lena     region     year    F8TS     Ku        - -1.00  2436 21.876   9.742  0.515    25.010   0.171      -0.047
+  Lena     region     year    F8TS     P0        - -1.00  2436 21.394   6.872  0.487    26.434   0.263       0.065
+  Lena     region     year    F8TS     P1        - -1.00  2436 21.394   6.872  0.487    26.434   0.263       0.065
+  Lena     region     year    F8TS    P1a        - -1.00  2436 22.945   9.859  0.487    26.763   0.263       0.068
+  Lena     region     year    F8TS     PE        - -1.00  2436 21.394   6.872  0.487    26.434   0.263       0.065
+  Lena     region     year    F8TS     R1 catboost  0.25  2436 22.734  10.860  0.509    26.607   0.231       0.046
+  Lena     region     year    F8TS     R1 catboost  0.50  2436 24.723  14.849  0.506    27.619   0.194       0.024
+  Lena     region     year    F8TS     R1 catboost  1.00  2436 30.094  22.826  0.476    31.781   0.108      -0.031
+  Lena     region year_obs    F8TS     D0 catboost -1.00  2436 39.267  33.605  0.398    39.312   0.200       0.036
+  Lena     region year_obs    F8TS     D1 catboost -1.00  2436 21.486   6.657  0.447    26.969   0.350       0.122
+  Lena     region year_obs    F8TS     Ed        - -1.00  2436 25.847  15.148  0.321    27.545   0.371       0.101
+  Lena     region year_obs    F8TS     F1 catboost -1.00  2436 41.174  35.395  0.310    40.318  -0.057      -0.050
+  Lena     region year_obs    F8TS     Ku        - -1.00  2436 21.835   9.637  0.512    24.968   0.178      -0.042
+  Lena     region year_obs    F8TS     P0        - -1.00  2436 21.465   6.693  0.425    27.069   0.375       0.130
+  Lena     region year_obs    F8TS     P1        - -1.00  2436 21.465   6.693  0.425    27.069   0.375       0.130
+  Lena     region year_obs    F8TS    P1a        - -1.00  2436 23.230  10.280  0.425    27.149   0.375       0.137
+  Lena     region year_obs    F8TS     PE        - -1.00  2436 21.465   6.693  0.425    27.069   0.375       0.130
+  Lena     region year_obs    F8TS     R1 catboost  0.25  2436 22.258   9.571  0.450    27.002   0.364       0.120
+  Lena     region year_obs    F8TS     R1 catboost  0.50  2436 23.457  12.449  0.458    27.458   0.351       0.106
+  Lena     region year_obs    F8TS     R1 catboost  1.00  2436 26.840  18.205  0.453    29.819   0.320       0.072
+  Lena       year     clim    F8TS     D0 catboost -1.00  2419 20.913   0.382  0.338    29.265  -0.672      -0.672
+  Lena       year     clim    F8TS     D1 catboost -1.00  2419 22.175  -0.321  0.052    30.349  -0.680      -0.609
+  Lena       year     clim    F8TS     Ed        - -1.00  2419 23.174   0.399 -0.397    31.170  -0.502      -0.310
+  Lena       year     clim    F8TS     F1 catboost -1.00  2419 21.125   0.330  0.321    29.134  -0.675      -0.670
+  Lena       year     clim    F8TS     Ku        - -1.00  2419 23.098   0.403 -0.375    31.033  -0.503      -0.314
+  Lena       year     clim    F8TS     P0        - -1.00  2419 23.381   8.269  0.158    28.514  -0.000       0.000
+  Lena       year     clim    F8TS     P1        - -1.00  2419 22.855   0.991 -0.423    30.665  -0.539      -0.245
+  Lena       year     clim    F8TS    P1a        - -1.00  2419 23.580   0.901 -0.255    30.699  -0.504      -0.502
+  Lena       year     clim    F8TS     PE        - -1.00  2419 23.250   0.916 -0.532    31.069  -0.491      -0.377
+  Lena       year     clim    F8TS     R1 catboost  0.25  2419 21.954   0.753  0.106    30.041  -0.657      -0.332
+  Lena       year     clim    F8TS     R1 catboost  0.50  2419 21.333   0.516  0.260    29.610  -0.690      -0.431
+  Lena       year     clim    F8TS     R1 catboost  1.00  2419 21.017   0.040  0.327    29.358  -0.669      -0.664
+  Lena       year     year    F8TS     D0 catboost -1.00  2419 20.814   1.056  0.336    29.224  -0.126      -0.473
+  Lena       year     year    F8TS     D1 catboost -1.00  2419 21.042   1.046  0.377    28.908   0.179       0.011
+  Lena       year     year    F8TS     Ed        - -1.00  2419 21.629   1.309  0.219    29.148   0.199       0.022
+  Lena       year     year    F8TS     F1 catboost -1.00  2419 20.827   0.800  0.338    28.755  -0.158      -0.668
+  Lena       year     year    F8TS     Ku        - -1.00  2419 20.776   1.091  0.386    27.607   0.183       0.012
+  Lena       year     year    F8TS     P0        - -1.00  2419 21.387   6.970  0.487    27.259   0.508       0.251
+  Lena       year     year    F8TS     P1        - -1.00  2419 21.200   1.234  0.349    28.891   0.293       0.085
+  Lena       year     year    F8TS    P1a        - -1.00  2419 21.180  -0.597  0.319    30.101   0.285      -0.661
+  Lena       year     year    F8TS     PE        - -1.00  2419 21.398   0.819  0.256    28.631  -0.018      -0.114
+  Lena       year     year    F8TS     R1 catboost  0.25  2419 20.704   0.997  0.416    28.642   0.249       0.049
+  Lena       year     year    F8TS     R1 catboost  0.50  2419 20.340   0.760  0.428    28.496   0.204      -0.004
+  Lena       year     year    F8TS     R1 catboost  1.00  2419 20.036   0.285  0.420    28.523   0.136      -0.158
+  Lena       year year_obs    F8TS     D0 catboost -1.00  2419 20.192   0.473  0.404    28.817   0.067      -0.463
+  Lena       year year_obs    F8TS     D1 catboost -1.00  2419 21.070   0.821  0.327    29.589   0.382       0.121
+  Lena       year year_obs    F8TS     Ed        - -1.00  2419 21.617   0.893  0.205    29.802   0.397       0.147
+  Lena       year year_obs    F8TS     F1 catboost -1.00  2419 19.878  -0.215  0.435    28.267   0.061      -0.427
+  Lena       year year_obs    F8TS     Ku        - -1.00  2419 20.766   0.987  0.386    27.619   0.203       0.023
+  Lena       year year_obs    F8TS     P0        - -1.00  2419 21.471   6.773  0.421    27.920   0.574       0.327
+  Lena       year year_obs    F8TS     P1        - -1.00  2419 21.230   0.993  0.296    29.555   0.450       0.198
+  Lena       year year_obs    F8TS    P1a        - -1.00  2419 21.268  -0.013  0.300    30.580   0.405      -0.592
+  Lena       year year_obs    F8TS     PE        - -1.00  2419 21.848   0.565  0.148    29.884   0.066      -0.062
+  Lena       year year_obs    F8TS     R1 catboost  0.25  2419 20.594   0.630  0.401    29.121   0.400       0.139
+  Lena       year year_obs    F8TS     R1 catboost  0.50  2419 20.096   0.268  0.446    28.792   0.345       0.058
+  Lena       year year_obs    F8TS     R1 catboost  1.00  2419 19.551  -0.457  0.468    28.465   0.247      -0.173
+region     scheme  forcing method  learner   lam  delta     lo    hi  delta_beq  lo_beq  hi_beq
+Alaska      block     clim     D0 catboost -1.00   0.83  -0.28  2.06      -0.89   -2.89    0.77
+Alaska      block     clim     D1 catboost -1.00  -0.05  -0.18  0.02      -0.51   -1.08   -0.08
+Alaska      block     clim     Ed        - -1.00   1.70   0.18  2.91       0.41   -0.75    1.55
+Alaska      block     clim     F1 catboost -1.00   1.00  -0.25  2.47      -0.52   -2.51    1.10
+Alaska      block     clim     Ku        - -1.00   2.69   0.69  4.27       1.39   -0.05    2.90
+Alaska      block     clim     P0        - -1.00   1.00   0.02  1.60      -0.50   -2.08    0.62
+Alaska      block     clim    P1a        - -1.00   0.24  -0.11  0.47      -0.33   -0.66   -0.07
+Alaska      block     clim     PE        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Alaska      block     clim     R1 catboost  0.25   0.10  -0.22  0.44      -0.31   -0.76    0.06
+Alaska      block     clim     R1 catboost  0.50   0.33  -0.32  1.04      -0.45   -1.33    0.26
+Alaska      block     clim     R1 catboost  1.00   1.19  -0.11  2.76      -0.20   -1.75    1.09
+Alaska      block     year     D0 catboost -1.00  -0.81  -3.03  1.58      -1.34   -3.44    0.38
+Alaska      block     year     D1 catboost -1.00  -0.12  -0.33 -0.03      -0.81   -1.48   -0.25
+Alaska      block     year     Ed        - -1.00   2.45   0.59  3.81       0.28   -0.94    1.47
+Alaska      block     year     F1 catboost -1.00  -0.79  -3.07  1.59      -1.41   -3.40    0.21
+Alaska      block     year     Ku        - -1.00   3.73   0.79  6.35       2.86    0.99    4.94
+Alaska      block     year     P0        - -1.00   0.63  -0.71  1.36      -0.86   -2.50    0.31
+Alaska      block     year    P1a        - -1.00  -0.81  -2.47  0.91      -0.79   -1.60   -0.16
+Alaska      block     year     PE        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Alaska      block     year     R1 catboost  0.25  -0.26  -0.61  0.17      -0.52   -1.02   -0.10
+Alaska      block     year     R1 catboost  0.50  -0.40  -1.13  0.49      -0.87   -1.83   -0.07
+Alaska      block     year     R1 catboost  1.00  -0.32  -1.82  1.55      -0.98   -2.71    0.45
+Alaska      block year_obs     D0 catboost -1.00  -1.29  -4.03  1.45      -1.87   -4.55    0.26
+Alaska      block year_obs     D1 catboost -1.00  -0.13  -0.31 -0.05      -1.21   -2.10   -0.52
+Alaska      block year_obs     Ed        - -1.00   1.43  -0.40  2.91       0.13   -1.21    1.43
+Alaska      block year_obs     F1 catboost -1.00  -1.12  -3.80  1.62      -1.87   -4.45    0.15
+Alaska      block year_obs     Ku        - -1.00   3.08   0.48  5.26       2.52    0.53    4.48
+Alaska      block year_obs     P0        - -1.00   0.79  -0.38  1.71      -1.51   -3.50   -0.05
+Alaska      block year_obs    P1a        - -1.00  -1.35  -3.05  0.16      -1.19   -2.30   -0.27
+Alaska      block year_obs     PE        - -1.00   0.45   0.00  1.01       0.02    0.00    0.06
+Alaska      block year_obs     R1 catboost  0.25  -0.15  -0.38 -0.01      -0.71   -1.32   -0.19
+Alaska      block year_obs     R1 catboost  0.50  -0.15  -0.57  0.12      -1.16   -2.34   -0.16
+Alaska      block year_obs     R1 catboost  1.00   0.30  -0.65  1.15      -1.22   -3.41    0.56
+Alaska block_year     clim     D0 catboost -1.00   0.95  -0.24  2.22      -0.33   -2.27    1.32
+Alaska block_year     clim     D1 catboost -1.00   0.01  -0.17  0.18      -0.61   -1.59    0.24
+Alaska block_year     clim     Ed        - -1.00   1.49   0.09  2.56       0.41   -0.78    1.59
+Alaska block_year     clim     F1 catboost -1.00   1.15  -0.08  2.49      -0.15   -2.05    1.45
+Alaska block_year     clim     Ku        - -1.00   2.42   0.56  3.90       1.40   -0.09    2.92
+Alaska block_year     clim     P0        - -1.00   1.05  -0.04  1.70      -0.60   -2.21    0.55
+Alaska block_year     clim    P1a        - -1.00   0.18  -0.09  0.47      -0.29   -0.60   -0.05
+Alaska block_year     clim     PE        - -1.00  -0.00  -0.00  0.00      -0.00   -0.01   -0.00
+Alaska block_year     clim     R1 catboost  0.25   0.12  -0.21  0.44      -0.24   -0.65    0.14
+Alaska block_year     clim     R1 catboost  0.50   0.39  -0.29  1.06      -0.31   -1.12    0.41
+Alaska block_year     clim     R1 catboost  1.00   1.31  -0.08  2.76       0.02   -1.46    1.34
+Alaska block_year     year     D0 catboost -1.00  -0.83  -2.96  1.60      -1.20   -3.23    0.48
+Alaska block_year     year     D1 catboost -1.00  -0.06  -0.27  0.09      -0.80   -1.79    0.07
+Alaska block_year     year     Ed        - -1.00   2.33   0.51  3.69       0.36   -0.87    1.57
+Alaska block_year     year     F1 catboost -1.00  -0.37  -2.42  1.95      -1.16   -3.22    0.52
+Alaska block_year     year     Ku        - -1.00   3.36   0.77  5.87       2.72    0.91    4.79
+Alaska block_year     year     P0        - -1.00   0.59  -0.83  1.37      -1.04   -2.69    0.21
+Alaska block_year     year    P1a        - -1.00  -1.04  -2.96  0.88      -0.88   -1.64   -0.26
+Alaska block_year     year     PE        - -1.00  -0.00  -0.01  0.00      -0.00   -0.01    0.01
+Alaska block_year     year     R1 catboost  0.25  -0.28  -0.70  0.18      -0.48   -0.95   -0.04
+Alaska block_year     year     R1 catboost  0.50  -0.39  -1.23  0.56      -0.78   -1.71    0.05
+Alaska block_year     year     R1 catboost  1.00  -0.09  -1.83  1.91      -0.82   -2.53    0.70
+Alaska block_year year_obs     D0 catboost -1.00  -1.29  -3.88  1.41      -1.67   -4.24    0.43
+Alaska block_year year_obs     D1 catboost -1.00  -0.10  -0.32  0.06      -1.40   -2.79   -0.25
+Alaska block_year year_obs     Ed        - -1.00   1.37  -0.46  2.83       0.18   -1.16    1.50
+Alaska block_year year_obs     F1 catboost -1.00  -1.03  -3.54  1.67      -1.71   -4.18    0.29
+Alaska block_year year_obs     Ku        - -1.00   2.46   0.30  4.46       2.40    0.44    4.37
+Alaska block_year year_obs     P0        - -1.00   0.53  -0.51  1.33      -1.65   -3.64   -0.17
+Alaska block_year year_obs    P1a        - -1.00  -1.71  -3.55 -0.10      -1.33   -2.42   -0.44
+Alaska block_year year_obs     PE        - -1.00   0.22  -0.29  0.65      -0.01   -0.07    0.05
+Alaska block_year year_obs     R1 catboost  0.25  -0.28  -0.57  0.13      -0.63   -1.21   -0.10
+Alaska block_year year_obs     R1 catboost  0.50  -0.35  -0.99  0.50      -1.02   -2.15    0.00
+Alaska block_year year_obs     R1 catboost  1.00   0.15  -1.44  2.10      -1.01   -3.12    0.86
+Alaska     random     clim     D0 catboost -1.00  -4.33  -6.44 -2.84      -8.90  -12.50   -5.19
+Alaska     random     clim     D1 catboost -1.00  -3.71  -5.44 -2.47      -6.98   -9.73   -4.44
+Alaska     random     clim     Ed        - -1.00   1.37   0.15  2.35       0.22   -0.97    1.35
+Alaska     random     clim     F1 catboost -1.00  -4.34  -6.44 -2.85      -8.93  -12.55   -5.27
+Alaska     random     clim     Ku        - -1.00   2.26   0.63  3.61       1.13   -0.29    2.59
+Alaska     random     clim     P0        - -1.00   1.13   0.16  1.72      -0.56   -2.11    0.53
+Alaska     random     clim    P1a        - -1.00  -0.08  -0.34  0.14      -0.23   -0.48   -0.03
+Alaska     random     clim     PE        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Alaska     random     clim     R1 catboost  0.25  -1.57  -2.32 -1.03      -2.95   -4.15   -1.76
+Alaska     random     clim     R1 catboost  0.50  -2.86  -4.25 -1.88      -5.53   -7.83   -3.24
+Alaska     random     clim     R1 catboost  1.00  -4.32  -6.41 -2.83      -8.75  -12.41   -4.96
+Alaska     random     year     D0 catboost -1.00  -5.92  -7.80 -4.33      -8.55  -12.84   -5.02
+Alaska     random     year     D1 catboost -1.00  -4.80  -5.88 -3.58      -5.57   -7.03   -4.10
+Alaska     random     year     Ed        - -1.00   2.02   0.55  3.15       0.14   -1.08    1.26
+Alaska     random     year     F1 catboost -1.00  -5.92  -7.82 -4.32      -8.48  -12.78   -5.03
+Alaska     random     year     Ku        - -1.00   3.45   0.82  6.00       2.86    1.03    4.95
+Alaska     random     year     P0        - -1.00   0.94  -0.38  1.69      -0.68   -2.14    0.38
+Alaska     random     year    P1a        - -1.00  -1.06  -2.69  0.38      -0.55   -1.21   -0.01
+Alaska     random     year     PE        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Alaska     random     year     R1 catboost  0.25  -2.12  -2.74 -1.57      -2.82   -4.18   -1.71
+Alaska     random     year     R1 catboost  0.50  -3.91  -5.07 -2.87      -5.27   -7.90   -3.11
+Alaska     random     year     R1 catboost  1.00  -5.93  -7.80 -4.33      -8.21  -12.46   -4.66
+Alaska     random year_obs     D0 catboost -1.00  -6.38  -8.06 -4.32      -8.76  -12.69   -5.49
+Alaska     random year_obs     D1 catboost -1.00  -5.26  -6.52 -3.54      -5.92   -7.37   -4.43
+Alaska     random year_obs     Ed        - -1.00   1.35  -0.16  2.66       0.12   -1.18    1.36
+Alaska     random year_obs     F1 catboost -1.00  -6.37  -8.05 -4.31      -8.68  -12.60   -5.41
+Alaska     random year_obs     Ku        - -1.00   2.92   0.57  5.02       2.72    0.81    4.66
+Alaska     random year_obs     P0        - -1.00   1.15  -0.07  2.11      -1.13   -2.86    0.14
+Alaska     random year_obs    P1a        - -1.00  -1.52  -3.53  0.11      -0.70   -1.61    0.07
+Alaska     random year_obs     PE        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Alaska     random year_obs     R1 catboost  0.25  -2.28  -2.84 -1.56      -2.89   -4.15   -1.89
+Alaska     random year_obs     R1 catboost  0.50  -4.22  -5.27 -2.86      -5.40   -7.81   -3.48
+Alaska     random year_obs     R1 catboost  1.00  -6.37  -8.03 -4.32      -8.43  -12.23   -5.30
+Alaska     region     clim     D0 catboost -1.00  10.46   1.06 17.96       3.85    0.55    7.92
+Alaska     region     clim     D1 catboost -1.00   0.01  -0.08  0.07      -0.13   -0.42    0.17
+Alaska     region     clim     Ed        - -1.00   6.50   4.55  7.70       3.90    2.42    5.39
+Alaska     region     clim     F1 catboost -1.00   8.59   0.84 14.75       3.50    0.61    7.05
+Alaska     region     clim     Ku        - -1.00   5.92   3.26  7.43       3.45    1.99    4.93
+Alaska     region     clim     P0        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Alaska     region     clim    P1a        - -1.00   2.52  -0.82  5.97       1.23    0.34    2.30
+Alaska     region     clim     PE        - -1.00   5.52   3.02  6.95       3.14    1.74    4.55
+Alaska     region     clim     R1 catboost  0.25  -0.66  -1.43  0.14       0.06   -0.42    0.66
+Alaska     region     clim     R1 catboost  0.50  -0.37  -1.47  0.84       0.60   -0.45    1.96
+Alaska     region     clim     R1 catboost  1.00   2.80   1.28  4.68       2.99    0.51    6.07
+Alaska     region     year     D0 catboost -1.00   5.10   0.32  8.59       2.26   -0.58    5.78
+Alaska     region     year     D1 catboost -1.00   0.01  -0.11  0.09      -0.11   -0.47    0.28
+Alaska     region     year     Ed        - -1.00   6.16   4.06  7.37       3.63    2.05    5.18
+Alaska     region     year     F1 catboost -1.00   3.83  -0.00  6.58       2.08   -0.68    5.67
+Alaska     region     year     Ku        - -1.00   6.40   2.69  8.56       3.21    1.75    4.69
+Alaska     region     year     P0        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Alaska     region     year    P1a        - -1.00   4.12  -0.13  7.88       1.21    0.40    2.17
+Alaska     region     year     PE        - -1.00   5.66   2.32  7.64       2.70    1.32    4.08
+Alaska     region     year     R1 catboost  0.25  -1.26  -2.97  0.18      -0.12   -0.59    0.49
+Alaska     region     year     R1 catboost  0.50  -1.26  -3.66  0.85       0.29   -0.77    1.67
+Alaska     region     year     R1 catboost  1.00   2.27   0.72  3.78       2.58    0.04    5.75
+Alaska     region year_obs     D0 catboost -1.00   1.20  -0.99  2.34       1.95   -0.50    5.06
+Alaska     region year_obs     D1 catboost -1.00  -0.02  -0.10  0.06      -0.03   -0.45    0.39
+Alaska     region year_obs     Ed        - -1.00   5.83   4.34  6.62       3.33    1.68    4.82
+Alaska     region year_obs     F1 catboost -1.00   0.19  -1.53  1.96       1.74   -0.54    4.69
+Alaska     region year_obs     Ku        - -1.00   5.79   1.80  7.78       3.55    1.89    5.17
+Alaska     region year_obs     P0        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Alaska     region year_obs    P1a        - -1.00   3.37   0.22  6.32       0.77    0.09    1.59
+Alaska     region year_obs     PE        - -1.00   4.69   1.35  6.38       2.65    1.12    4.08
+Alaska     region year_obs     R1 catboost  0.25  -1.47  -3.46  0.34      -0.03   -0.55    0.60
+Alaska     region year_obs     R1 catboost  0.50  -1.81  -4.89  0.98       0.50   -0.65    1.90
+Alaska     region year_obs     R1 catboost  1.00   0.90  -0.77  3.04       3.00    0.32    6.34
+Alaska       year     clim     D0 catboost -1.00  -1.89  -3.96 -0.28      -6.22   -9.80   -2.68
+Alaska       year     clim     D1 catboost -1.00  -1.66  -3.45 -0.37      -5.57   -9.17   -2.18
+Alaska       year     clim     Ed        - -1.00   1.43   0.15  2.44       0.24   -0.94    1.35
+Alaska       year     clim     F1 catboost -1.00  -1.87  -3.95 -0.25      -6.13   -9.74   -2.52
+Alaska       year     clim     Ku        - -1.00   2.34   0.65  3.76       1.16   -0.27    2.65
+Alaska       year     clim     P0        - -1.00   1.10   0.10  1.73      -0.61   -2.20    0.49
+Alaska       year     clim    P1a        - -1.00   0.12  -0.10  0.25      -0.20   -0.42   -0.01
+Alaska       year     clim     PE        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Alaska       year     clim     R1 catboost  0.25  -0.84  -1.60 -0.25      -2.10   -3.26   -0.90
+Alaska       year     clim     R1 catboost  0.50  -1.42  -2.78 -0.37      -3.76   -5.95   -1.56
+Alaska       year     clim     R1 catboost  1.00  -1.72  -3.65 -0.14      -5.26   -8.61   -2.02
+Alaska       year     year     D0 catboost -1.00  -3.17  -4.64 -1.93      -6.50  -10.23   -2.84
+Alaska       year     year     D1 catboost -1.00  -1.01  -2.16 -0.31      -3.98   -6.20   -1.80
+Alaska       year     year     Ed        - -1.00   2.21   0.58  3.45       0.25   -0.99    1.37
+Alaska       year     year     F1 catboost -1.00  -3.28  -4.82 -2.01      -6.50  -10.48   -2.68
+Alaska       year     year     Ku        - -1.00   3.35   0.84  5.82       2.85    1.05    4.89
+Alaska       year     year     P0        - -1.00   0.60  -0.85  1.38      -0.80   -2.31    0.29
+Alaska       year     year    P1a        - -1.00  -1.03  -2.40  0.39      -0.60   -1.25   -0.04
+Alaska       year     year     PE        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Alaska       year     year     R1 catboost  0.25  -0.89  -1.60 -0.42      -2.13   -3.38   -0.95
+Alaska       year     year     R1 catboost  0.50  -1.55  -2.84 -0.70      -3.89   -6.23   -1.70
+Alaska       year     year     R1 catboost  1.00  -2.09  -4.11 -0.71      -5.88   -9.44   -2.48
+Alaska       year year_obs     D0 catboost -1.00  -3.88  -5.11 -2.15      -6.78  -10.40   -3.31
+Alaska       year year_obs     D1 catboost -1.00  -1.04  -2.19 -0.33      -4.34   -6.36   -2.32
+Alaska       year year_obs     Ed        - -1.00   1.46  -0.24  2.80       0.22   -1.07    1.44
+Alaska       year year_obs     F1 catboost -1.00  -3.85  -5.13 -2.04      -6.55  -10.18   -2.99
+Alaska       year year_obs     Ku        - -1.00   2.59   0.52  4.45       2.75    0.87    4.65
+Alaska       year year_obs     P0        - -1.00   0.64  -0.28  1.35      -1.21   -2.95    0.07
+Alaska       year year_obs    P1a        - -1.00  -1.42  -2.84 -0.09      -0.75   -1.62    0.00
+Alaska       year year_obs     PE        - -1.00   0.20  -0.28  0.60       0.01   -0.05    0.07
+Alaska       year year_obs     R1 catboost  0.25  -0.86  -1.66 -0.19      -2.22   -3.40   -1.12
+Alaska       year year_obs     R1 catboost  0.50  -1.46  -2.93 -0.14      -4.07   -6.26   -2.01
+Alaska       year year_obs     R1 catboost  1.00  -1.82  -4.12  0.70      -6.15   -9.56   -2.88
+Canada      block     clim     D0 catboost -1.00  -3.49  -8.63  0.21      -3.62   -6.03   -1.05
+Canada      block     clim     D1 catboost -1.00  -0.08  -0.24  0.01      -0.39   -0.67   -0.11
+Canada      block     clim     Ed        - -1.00  -3.54  -5.80  3.20       1.29   -0.97    3.32
+Canada      block     clim     F1 catboost -1.00  -3.08  -7.93  0.42      -3.64   -6.11   -0.93
+Canada      block     clim     Ku        - -1.00  -3.94  -6.51  4.09       2.30   -0.48    4.66
+Canada      block     clim     P0        - -1.00  -3.15  -5.50  0.64      -0.81   -1.81    0.16
+Canada      block     clim    P1a        - -1.00  -1.54  -3.46  4.85       5.45   -0.00   10.04
+Canada      block     clim     PE        - -1.00  -2.13  -4.40  4.01       2.47    0.04    4.60
+Canada      block     clim     R1 catboost  0.25  -1.28  -2.52 -0.27      -0.88   -1.29   -0.48
+Canada      block     clim     R1 catboost  0.50  -2.38  -4.80 -0.39      -1.60   -2.39   -0.78
+Canada      block     clim     R1 catboost  1.00  -3.98  -8.46 -0.19      -2.50   -4.05   -0.70
+Canada      block     year     D0 catboost -1.00  -0.42  -4.04  3.12      -3.65   -6.49   -0.50
+Canada      block     year     D1 catboost -1.00  -0.15  -0.44 -0.01      -0.68   -1.15   -0.20
+Canada      block     year     Ed        - -1.00  -3.08  -5.25  3.41       1.66   -0.57    3.62
+Canada      block     year     F1 catboost -1.00  -1.29  -4.28  1.46      -4.23   -7.16   -1.02
+Canada      block     year     Ku        - -1.00  -4.26  -7.21  3.07       1.94   -0.81    4.00
+Canada      block     year     P0        - -1.00  -2.58  -6.20  1.41      -0.81   -2.11    0.65
+Canada      block     year    P1a        - -1.00  -1.18  -2.85  3.56       4.06    0.09    7.35
+Canada      block     year     PE        - -1.00  -2.27  -4.64  3.03       2.16   -0.06    3.94
+Canada      block     year     R1 catboost  0.25  -0.97  -1.76 -0.19      -1.11   -1.59   -0.61
+Canada      block     year     R1 catboost  0.50  -1.71  -3.26 -0.24      -2.06   -3.06   -0.99
+Canada      block     year     R1 catboost  1.00  -2.49  -5.27  0.14      -3.39   -5.53   -1.11
+Canada      block year_obs     D0 catboost -1.00  -4.57  -6.23 -0.24      -4.31   -6.67   -2.05
+Canada      block year_obs     D1 catboost -1.00  -0.14  -0.39 -0.02      -0.71   -1.11   -0.36
+Canada      block year_obs     Ed        - -1.00  -5.20  -7.42  0.91      -0.33   -2.69    1.58
+Canada      block year_obs     F1 catboost -1.00  -5.01  -6.42 -0.82      -4.81   -7.02   -2.51
+Canada      block year_obs     Ku        - -1.00  -5.19  -8.15  3.54       2.06   -1.35    4.73
+Canada      block year_obs     P0        - -1.00  -2.88  -6.67  1.42      -1.48   -3.17    0.48
+Canada      block year_obs    P1a        - -1.00  -1.62  -2.67  2.01       2.76   -1.25    6.24
+Canada      block year_obs     PE        - -1.00  -4.14  -6.50  2.61       1.27   -1.50    3.53
+Canada      block year_obs     R1 catboost  0.25  -1.99  -2.52 -0.53      -1.37   -1.85   -0.97
+Canada      block year_obs     R1 catboost  0.50  -3.74  -4.77 -0.83      -2.51   -3.45   -1.69
+Canada      block year_obs     R1 catboost  1.00  -6.27  -8.28 -0.68      -3.95   -5.81   -2.07
+Canada block_year     clim     D0 catboost -1.00  -2.25  -7.44  5.62      -2.33   -5.50    2.07
+Canada block_year     clim     D1 catboost -1.00  -0.11  -0.22  0.22      -1.27   -2.38   -0.07
+Canada block_year     clim     Ed        - -1.00  -4.62  -7.27  4.56       2.50   -0.26    5.20
+Canada block_year     clim     F1 catboost -1.00  -1.80  -6.93  6.09      -2.04   -5.30    2.51
+Canada block_year     clim     Ku        - -1.00  -5.41  -8.05  4.79       3.60    0.29    6.59
+Canada block_year     clim     P0        - -1.00  -4.68  -6.28 -0.55      -0.45   -2.00    0.58
+Canada block_year     clim    P1a        - -1.00  -1.68  -3.52  1.37       6.64    0.78   11.26
+Canada block_year     clim     PE        - -1.00  -1.71  -3.10  4.80       3.88    1.21    6.57
+Canada block_year     clim     R1 catboost  0.25  -1.15  -2.52  0.46      -0.58   -1.12    0.09
+Canada block_year     clim     R1 catboost  0.50  -2.10  -4.79  1.08      -0.96   -2.06    0.46
+Canada block_year     clim     R1 catboost  1.00  -3.39  -8.25  2.79      -1.11   -3.40    2.03
+Canada block_year     year     D0 catboost -1.00   0.50  -2.97  5.69      -2.73   -6.43    1.98
+Canada block_year     year     D1 catboost -1.00  -0.04  -0.19  0.13      -1.59   -2.89   -0.18
+Canada block_year     year     Ed        - -1.00  -4.20  -6.63  4.59       2.84    0.15    5.53
+Canada block_year     year     F1 catboost -1.00  -0.02  -3.61  5.44      -2.58   -6.29    2.16
+Canada block_year     year     Ku        - -1.00  -5.92  -8.41  2.97       2.93    0.04    5.32
+Canada block_year     year     P0        - -1.00  -4.07  -6.97  0.24      -0.51   -1.98    0.55
+Canada block_year     year    P1a        - -1.00  -1.68  -2.82  0.75       4.90    0.32    8.75
+Canada block_year     year     PE        - -1.00  -1.71  -2.71  2.92       3.19    1.07    5.16
+Canada block_year     year     R1 catboost  0.25  -0.71  -1.58  0.72      -0.64   -1.22    0.15
+Canada block_year     year     R1 catboost  0.50  -1.18  -2.89  1.64      -1.09   -2.32    0.59
+Canada block_year     year     R1 catboost  1.00  -1.40  -4.49  3.99      -1.37   -4.10    2.33
+Canada block_year year_obs     D0 catboost -1.00  -3.00  -5.65  6.46      -2.91   -6.00    1.42
+Canada block_year year_obs     D1 catboost -1.00  -0.09  -0.21  0.11      -1.51   -2.63   -0.33
+Canada block_year year_obs     Ed        - -1.00  -6.55  -9.09  1.15       0.48   -2.34    2.76
+Canada block_year year_obs     F1 catboost -1.00  -4.13  -7.16  6.65      -2.92   -6.20    1.72
+Canada block_year year_obs     Ku        - -1.00  -6.92 -10.02  3.77       3.29   -0.36    6.45
+Canada block_year year_obs     P0        - -1.00  -4.21  -7.32  0.70      -0.98   -2.58    0.59
+Canada block_year year_obs    P1a        - -1.00  -2.38  -3.37 -1.24       3.46   -1.16    7.37
+Canada block_year year_obs     PE        - -1.00  -3.19  -4.98  3.46       2.99    0.03    5.76
+Canada block_year year_obs     R1 catboost  0.25  -1.70  -2.48  0.70      -0.82   -1.40   -0.10
+Canada block_year year_obs     R1 catboost  0.50  -3.12  -4.70  1.71      -1.37   -2.56    0.18
+Canada block_year year_obs     R1 catboost  1.00  -4.93  -8.05  4.36      -1.60   -4.13    1.96
+Canada     random     clim     D0 catboost -1.00 -10.87 -16.51 -6.25     -13.08  -23.90   -5.54
+Canada     random     clim     D1 catboost -1.00  -9.60 -14.52 -5.26     -11.97  -21.07   -5.07
+Canada     random     clim     Ed        - -1.00  -1.76  -3.35  2.35       1.13   -0.87    2.90
+Canada     random     clim     F1 catboost -1.00 -10.89 -16.49 -6.19     -12.94  -23.81   -5.31
+Canada     random     clim     Ku        - -1.00  -1.95  -4.06  3.01       2.08   -0.43    4.09
+Canada     random     clim     P0        - -1.00   0.12  -1.30  1.28      -0.37   -1.02    0.43
+Canada     random     clim    P1a        - -1.00  -2.07  -4.77  3.40       4.04   -0.72    7.97
+Canada     random     clim     PE        - -1.00  -1.95  -3.82  2.51       1.71   -0.64    3.55
+Canada     random     clim     R1 catboost  0.25  -4.18  -6.19 -2.62      -5.40   -8.62   -2.61
+Canada     random     clim     R1 catboost  0.50  -7.68 -11.49 -4.69      -9.88  -16.20   -4.55
+Canada     random     clim     R1 catboost  1.00 -10.88 -16.51 -6.17     -13.07  -23.90   -5.51
+Canada     random     year     D0 catboost -1.00 -10.52 -15.98 -6.59     -13.52  -24.24   -5.65
+Canada     random     year     D1 catboost -1.00  -7.88 -10.23 -4.80      -7.12  -10.45   -4.24
+Canada     random     year     Ed        - -1.00  -1.50  -3.11  2.50       1.44   -0.54    3.14
+Canada     random     year     F1 catboost -1.00 -10.52 -15.98 -6.56     -13.41  -24.04   -5.64
+Canada     random     year     Ku        - -1.00  -2.11  -4.55  2.56       1.92   -0.53    3.75
+Canada     random     year     P0        - -1.00   0.38  -2.05  2.24      -0.41   -1.57    0.97
+Canada     random     year    P1a        - -1.00  -1.70  -4.34  2.66       3.13   -0.54    6.14
+Canada     random     year     PE        - -1.00  -2.12  -4.31  2.20       1.59   -0.67    3.28
+Canada     random     year     R1 catboost  0.25  -3.94  -5.77 -2.59      -5.08   -8.15   -2.40
+Canada     random     year     R1 catboost  0.50  -7.25 -10.75 -4.68      -9.39  -15.49   -4.26
+Canada     random     year     R1 catboost  1.00 -10.45 -15.90 -6.47     -13.30  -23.99   -5.45
+Canada     random year_obs     D0 catboost -1.00 -10.79 -15.66 -6.67     -13.45  -23.43   -6.14
+Canada     random year_obs     D1 catboost -1.00  -8.21 -10.24 -4.72      -7.16  -10.55   -4.43
+Canada     random year_obs     Ed        - -1.00  -2.54  -3.85  0.78      -0.07   -2.27    1.69
+Canada     random year_obs     F1 catboost -1.00 -10.81 -15.65 -6.72     -13.43  -23.33   -6.15
+Canada     random year_obs     Ku        - -1.00  -2.36  -4.58  3.01       2.12   -1.07    4.69
+Canada     random year_obs     P0        - -1.00   0.77  -2.95  3.46      -1.01   -2.56    0.91
+Canada     random year_obs    P1a        - -1.00  -1.77  -4.02  1.52       2.16   -1.52    5.26
+Canada     random year_obs     PE        - -1.00  -2.59  -4.20  1.49       0.59   -2.01    2.62
+Canada     random year_obs     R1 catboost  0.25  -4.04  -5.65 -2.71      -5.08   -7.96   -2.64
+Canada     random year_obs     R1 catboost  0.50  -7.44 -10.55 -4.88      -9.41  -15.22   -4.69
+Canada     random year_obs     R1 catboost  1.00 -10.76 -15.58 -6.67     -13.42  -23.26   -6.13
+Canada     region     clim     D0 catboost -1.00  -2.31  -3.87  0.09      -0.19   -4.40    3.20
+Canada     region     clim     D1 catboost -1.00  -0.07  -0.57  0.15      -0.55   -1.23    0.20
+Canada     region     clim     Ed        - -1.00   3.20  -1.63 12.55       7.17    1.98   12.87
+Canada     region     clim     F1 catboost -1.00  -2.96  -4.02 -0.74      -1.10   -4.30    1.83
+Canada     region     clim     Ku        - -1.00   4.34  -0.41 15.01      10.07    4.32   16.13
+Canada     region     clim     P0        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Canada     region     clim    P1a        - -1.00   0.08  -0.39  0.72       0.04   -0.24    0.31
+Canada     region     clim     PE        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Canada     region     clim     R1 catboost  0.25  -0.93  -1.28 -0.07      -0.62   -1.44    0.02
+Canada     region     clim     R1 catboost  0.50  -1.55  -2.31  0.49      -0.84   -2.42    0.45
+Canada     region     clim     R1 catboost  1.00  -1.81  -3.63  3.34      -0.07   -3.26    2.91
+Canada     region     year     D0 catboost -1.00  -3.40  -5.34  0.44      -1.07   -3.44    1.60
+Canada     region     year     D1 catboost -1.00  -0.30  -0.69 -0.06      -0.92   -1.51   -0.41
+Canada     region     year     Ed        - -1.00   4.55   0.35 13.92       8.95    3.33   14.78
+Canada     region     year     F1 catboost -1.00  -3.21  -5.13  0.94      -1.05   -3.58    1.91
+Canada     region     year     Ku        - -1.00   8.26   4.19 18.22      13.56    7.06   20.23
+Canada     region     year     P0        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Canada     region     year    P1a        - -1.00   0.36  -1.56  3.13       0.08   -1.03    1.15
+Canada     region     year     PE        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Canada     region     year     R1 catboost  0.25  -2.03  -2.82 -0.03      -0.71   -1.60    0.17
+Canada     region     year     R1 catboost  0.50  -2.77  -4.17  1.25      -0.40   -2.25    1.78
+Canada     region     year     R1 catboost  1.00  -0.13  -3.97  7.77       3.06   -1.58    8.52
+Canada     region year_obs     D0 catboost -1.00  -3.85  -6.96  1.40      -0.98   -3.98    1.78
+Canada     region year_obs     D1 catboost -1.00  -0.37  -0.63 -0.10      -0.85   -1.99   -0.20
+Canada     region year_obs     Ed        - -1.00   4.39   1.76 11.47       7.18    2.43   12.27
+Canada     region year_obs     F1 catboost -1.00  -4.29  -7.50  0.21      -1.73   -4.73    0.72
+Canada     region year_obs     Ku        - -1.00   7.62   2.57 19.08      14.35    7.96   20.94
+Canada     region year_obs     P0        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Canada     region year_obs    P1a        - -1.00   0.09  -2.50  3.80       0.61   -0.77    1.86
+Canada     region year_obs     PE        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+Canada     region year_obs     R1 catboost  0.25  -2.38  -3.00 -0.84      -1.27   -2.10   -0.57
+Canada     region year_obs     R1 catboost  0.50  -3.50  -5.15 -0.10      -1.55   -3.26   -0.00
+Canada     region year_obs     R1 catboost  1.00  -1.49  -6.36  6.11       0.90   -3.06    5.26
+Canada       year     clim     D0 catboost -1.00  -5.66 -12.47  6.75      -6.66  -19.11    3.08
+Canada       year     clim     D1 catboost -1.00  -7.02 -10.46 -0.55     -10.49  -21.75   -2.45
+Canada       year     clim     Ed        - -1.00  -2.37  -4.03  3.15       1.87   -0.38    4.00
+Canada       year     clim     F1 catboost -1.00  -5.56 -12.52  7.20      -6.68  -19.15    3.11
+Canada       year     clim     Ku        - -1.00  -2.86  -4.92  3.41       2.82    0.05    5.22
+Canada       year     clim     P0        - -1.00  -1.56  -3.10 -0.35      -0.62   -1.26    0.11
+Canada       year     clim    P1a        - -1.00  -3.36  -5.37  1.92       3.91   -0.67    7.70
+Canada       year     clim     PE        - -1.00  -2.38  -4.07  3.33       2.51   -0.03    4.79
+Canada       year     clim     R1 catboost  0.25  -3.26  -5.22  0.42      -3.98   -7.63   -0.74
+Canada       year     clim     R1 catboost  0.50  -5.63  -9.45  1.35      -6.82  -14.28   -0.63
+Canada       year     clim     R1 catboost  1.00  -6.66 -12.85  4.49      -7.43  -19.70    2.08
+Canada       year     year     D0 catboost -1.00  -3.85 -10.28  8.01      -6.83  -19.10    2.22
+Canada       year     year     D1 catboost -1.00  -1.13  -3.13 -0.23      -5.18   -9.90   -1.08
+Canada       year     year     Ed        - -1.00  -2.21  -3.90  3.17       2.18   -0.07    4.29
+Canada       year     year     F1 catboost -1.00  -3.91 -10.86  8.75      -6.79  -19.16    2.44
+Canada       year     year     Ku        - -1.00  -3.33  -5.69  2.39       2.48   -0.06    4.56
+Canada       year     year     P0        - -1.00  -1.28  -3.72  0.50      -0.72   -1.70    0.37
+Canada       year     year    P1a        - -1.00  -2.68  -4.97  1.39       2.91   -0.39    5.61
+Canada       year     year     PE        - -1.00  -2.89  -4.83  2.26       2.23   -0.02    4.11
+Canada       year     year     R1 catboost  0.25  -2.25  -3.89  0.80      -3.58   -7.03   -0.49
+Canada       year     year     R1 catboost  0.50  -3.85  -7.15  2.24      -6.10  -12.95   -0.28
+Canada       year     year     R1 catboost  1.00  -4.57 -10.63  6.77      -6.72  -18.72    2.29
+Canada       year year_obs     D0 catboost -1.00  -3.47 -10.14 10.19      -6.26  -18.06    2.85
+Canada       year year_obs     D1 catboost -1.00  -1.08  -3.00 -0.19      -5.15   -9.73   -1.20
+Canada       year year_obs     Ed        - -1.00  -3.50  -4.79  0.77       0.37   -1.93    2.28
+Canada       year year_obs     F1 catboost -1.00  -4.27 -10.65  8.60      -6.88  -18.41    2.14
+Canada       year year_obs     Ku        - -1.00  -3.56  -5.69  3.12       3.00   -0.24    5.72
+Canada       year year_obs     P0        - -1.00  -0.76  -4.30  1.68      -0.97   -2.36    0.68
+Canada       year year_obs    P1a        - -1.00  -2.94  -5.02 -0.06       1.54   -1.70    4.20
+Canada       year year_obs     PE        - -1.00  -3.19  -4.70  1.96       1.62   -0.96    3.81
+Canada       year year_obs     R1 catboost  0.25  -2.28  -3.78  0.94      -3.61   -6.89   -0.66
+Canada       year year_obs     R1 catboost  0.50  -3.84  -6.84  2.53      -6.21  -12.72   -0.64
+Canada       year year_obs     R1 catboost  1.00  -4.28  -9.80  7.50      -7.04  -18.62    1.62
+  Lena      block     clim     D0 catboost -1.00  -5.28 -13.17  0.03      -7.39  -13.69   -0.83
+  Lena      block     clim     D1 catboost -1.00  -0.29  -0.45 -0.12      -0.69   -1.64   -0.16
+  Lena      block     clim     Ed        - -1.00   0.17  -0.71  0.79       0.55   -0.19    1.21
+  Lena      block     clim     F1 catboost -1.00  -5.28 -13.39 -0.26      -7.31  -13.88   -0.82
+  Lena      block     clim     Ku        - -1.00   0.08  -0.88  0.68       0.41   -0.36    1.11
+  Lena      block     clim     P0        - -1.00   0.90  -2.61  3.38      -2.17   -4.32    1.27
+  Lena      block     clim    P1a        - -1.00   1.74  -0.19  4.18       1.03   -0.16    2.43
+  Lena      block     clim     PE        - -1.00   0.35  -0.00  0.69       0.50   -0.00    1.04
+  Lena      block     clim     R1 catboost  0.25  -1.88  -4.03 -0.45      -2.42   -4.17   -0.61
+  Lena      block     clim     R1 catboost  0.50  -3.44  -7.67 -0.66      -4.38   -7.94   -0.85
+  Lena      block     clim     R1 catboost  1.00  -5.26 -13.24 -0.16      -6.48  -13.24    0.37
+  Lena      block     year     D0 catboost -1.00  -4.27 -10.16  0.46      -3.19   -9.27    3.91
+  Lena      block     year     D1 catboost -1.00  -0.30  -0.45 -0.13      -0.36   -0.92    0.05
+  Lena      block     year     Ed        - -1.00   0.28  -0.40  0.83       0.30   -0.50    0.99
+  Lena      block     year     F1 catboost -1.00  -4.14  -9.78  0.18      -3.53   -8.93    2.45
+  Lena      block     year     Ku        - -1.00  -0.46  -1.80  0.46      -0.99   -1.87    0.24
+  Lena      block     year     P0        - -1.00   0.50  -2.16  2.41      -1.33   -3.39    1.92
+  Lena      block     year    P1a        - -1.00  -0.29  -2.65  1.12      -0.87   -2.32    1.06
+  Lena      block     year     PE        - -1.00  -0.36  -1.53  0.47      -0.87   -1.70    0.25
+  Lena      block     year     R1 catboost  0.25  -1.73  -3.29 -0.54      -2.26   -3.56   -0.82
+  Lena      block     year     R1 catboost  0.50  -3.04  -6.11 -0.63      -3.65   -5.90   -1.20
+  Lena      block     year     R1 catboost  1.00  -4.09  -9.86  0.60      -3.31   -9.53    4.69
+  Lena      block year_obs     D0 catboost -1.00  -5.16 -12.32  0.12      -6.29  -13.06    2.36
+  Lena      block year_obs     D1 catboost -1.00  -0.30  -0.45 -0.11      -0.48   -1.47    0.13
+  Lena      block year_obs     Ed        - -1.00   0.29  -0.41  0.93       0.32   -0.45    1.01
+  Lena      block year_obs     F1 catboost -1.00  -4.94 -12.12  0.42      -4.66  -11.64    3.40
+  Lena      block year_obs     Ku        - -1.00  -0.60  -2.00  0.26      -1.71   -3.17    0.18
+  Lena      block year_obs     P0        - -1.00   0.43  -2.41  2.22      -1.43   -3.43    1.80
+  Lena      block year_obs    P1a        - -1.00   0.12  -1.31  1.15       0.12   -1.09    1.42
+  Lena      block year_obs     PE        - -1.00  -0.34  -1.17  0.26      -1.42   -3.00    0.18
+  Lena      block year_obs     R1 catboost  0.25  -2.00  -4.19 -0.55      -3.00   -4.59   -1.14
+  Lena      block year_obs     R1 catboost  0.50  -3.59  -7.83 -0.81      -5.08   -8.02   -1.32
+  Lena      block year_obs     R1 catboost  1.00  -5.06 -12.19  0.13      -5.57  -12.44    3.28
+  Lena block_year     clim     D0 catboost -1.00  -0.04  -3.78  2.19      -1.84   -4.23    1.08
+  Lena block_year     clim     D1 catboost -1.00  -0.16  -0.28 -0.09      -0.17   -0.39    0.01
+  Lena block_year     clim     Ed        - -1.00   0.42  -0.43  1.11       0.40   -0.39    1.06
+  Lena block_year     clim     F1 catboost -1.00   0.06  -3.76  2.49      -1.92   -4.26    0.90
+  Lena block_year     clim     Ku        - -1.00   0.31  -0.60  0.98       0.21   -0.57    0.86
+  Lena block_year     clim     P0        - -1.00   0.31  -3.83  2.52      -2.98   -5.78    1.63
+  Lena block_year     clim    P1a        - -1.00   2.51  -0.26  5.99       0.46   -0.96    2.35
+  Lena block_year     clim     PE        - -1.00   0.65   0.07  1.03       0.31   -0.42    0.93
+  Lena block_year     clim     R1 catboost  0.25  -0.50  -1.23 -0.05      -0.75   -1.20   -0.32
+  Lena block_year     clim     R1 catboost  0.50  -0.69  -2.23  0.28      -1.32   -2.25   -0.36
+  Lena block_year     clim     R1 catboost  1.00  -0.09  -3.59  2.09      -1.83   -3.99    0.85
+  Lena block_year     year     D0 catboost -1.00  -0.19  -2.21  1.85      -0.81   -2.62    1.07
+  Lena block_year     year     D1 catboost -1.00  -0.07  -0.15 -0.01      -0.04   -0.41    0.16
+  Lena block_year     year     Ed        - -1.00   0.58  -0.12  1.24       0.26   -0.60    1.00
+  Lena block_year     year     F1 catboost -1.00  -0.32  -2.28  1.53      -1.37   -2.86    0.39
+  Lena block_year     year     Ku        - -1.00  -0.43  -1.83  0.50      -1.52   -2.18   -0.67
+  Lena block_year     year     P0        - -1.00   0.03  -3.24  1.90      -2.35   -4.97    2.08
+  Lena block_year     year    P1a        - -1.00   0.21  -1.94  1.59       0.01   -1.18    1.97
+  Lena block_year     year     PE        - -1.00   0.07  -1.12  0.68      -0.27   -1.19    0.37
+  Lena block_year     year     R1 catboost  0.25  -0.44  -0.82 -0.17      -0.57   -0.90   -0.20
+  Lena block_year     year     R1 catboost  0.50  -0.71  -1.51 -0.08      -1.02   -1.72   -0.22
+  Lena block_year     year     R1 catboost  1.00  -0.71  -2.54  0.92      -1.57   -3.10    0.45
+  Lena block_year year_obs     D0 catboost -1.00  -0.94  -3.94  1.39      -2.28   -4.61    0.42
+  Lena block_year year_obs     D1 catboost -1.00  -0.07  -0.13 -0.02      -0.08   -0.31    0.01
+  Lena block_year year_obs     Ed        - -1.00   0.51  -0.23  1.24       0.32   -0.46    1.01
+  Lena block_year year_obs     F1 catboost -1.00  -0.79  -3.74  1.80      -2.28   -4.47    0.17
+  Lena block_year year_obs     Ku        - -1.00  -0.53  -1.99  0.34      -2.24   -3.60   -0.28
+  Lena block_year year_obs     P0        - -1.00   0.01  -3.40  1.81      -2.61   -4.94    1.40
+  Lena block_year year_obs    P1a        - -1.00   0.56  -1.24  1.95      -0.03   -0.75    0.83
+  Lena block_year year_obs     PE        - -1.00   0.46  -0.28  1.03       0.37   -0.38    1.04
+  Lena block_year year_obs     R1 catboost  0.25  -0.51  -0.99 -0.22      -0.60   -1.14   -0.05
+  Lena block_year year_obs     R1 catboost  0.50  -0.88  -1.88 -0.22      -1.09   -2.20   -0.00
+  Lena block_year year_obs     R1 catboost  1.00  -1.16  -3.25  0.45      -1.74   -4.00    0.48
+  Lena     random     clim     D0 catboost -1.00  -9.02 -18.81 -2.78     -11.36  -19.30   -1.42
+  Lena     random     clim     D1 catboost -1.00  -5.44 -10.01 -2.39      -6.29   -9.81   -2.47
+  Lena     random     clim     Ed        - -1.00   0.12  -0.59  0.68       0.52   -0.24    1.20
+  Lena     random     clim     F1 catboost -1.00  -9.07 -18.93 -2.82     -11.62  -19.46   -1.93
+  Lena     random     clim     Ku        - -1.00   0.05  -0.72  0.55       0.38   -0.39    1.09
+  Lena     random     clim     P0        - -1.00   1.44  -1.64  3.98      -1.50   -3.27    1.48
+  Lena     random     clim    P1a        - -1.00  -0.11  -0.85  0.42       0.37   -0.73    1.78
+  Lena     random     clim     PE        - -1.00   0.01  -0.17  0.13       0.03   -0.12    0.17
+  Lena     random     clim     R1 catboost  0.25  -3.38  -6.81 -1.19      -4.71   -7.15   -1.84
+  Lena     random     clim     R1 catboost  0.50  -6.25 -12.77 -2.10      -8.59  -13.33   -2.87
+  Lena     random     clim     R1 catboost  1.00  -9.03 -18.88 -2.80     -11.63  -19.51   -1.92
+  Lena     random     year     D0 catboost -1.00  -8.10 -16.68 -2.16      -9.63  -16.19   -2.68
+  Lena     random     year     D1 catboost -1.00  -5.05  -9.41 -1.83      -5.48   -8.83   -2.09
+  Lena     random     year     Ed        - -1.00   0.15  -0.37  0.54       0.16   -0.65    0.84
+  Lena     random     year     F1 catboost -1.00  -8.10 -16.83 -2.17      -9.57  -16.21   -2.69
+  Lena     random     year     Ku        - -1.00  -0.60  -1.80  0.14      -1.17   -2.05    0.02
+  Lena     random     year     P0        - -1.00   0.93  -1.17  2.83      -0.88   -2.47    1.78
+  Lena     random     year    P1a        - -1.00  -1.14  -3.67  0.30      -0.77   -3.21    2.47
+  Lena     random     year     PE        - -1.00  -0.60  -1.80  0.14      -1.17   -2.05    0.02
+  Lena     random     year     R1 catboost  0.25  -3.07  -6.09 -0.93      -3.66   -5.95   -1.17
+  Lena     random     year     R1 catboost  0.50  -5.66 -11.44 -1.64      -6.69  -11.08   -2.03
+  Lena     random     year     R1 catboost  1.00  -8.14 -16.83 -2.17      -9.54  -16.16   -2.60
+  Lena     random year_obs     D0 catboost -1.00  -8.25 -17.17 -2.15     -10.65  -17.34   -2.84
+  Lena     random year_obs     D1 catboost -1.00  -5.16  -9.69 -1.82      -5.97   -9.51   -2.01
+  Lena     random year_obs     Ed        - -1.00   0.17  -0.27  0.59       0.19   -0.59    0.90
+  Lena     random year_obs     F1 catboost -1.00  -8.31 -17.34 -2.15     -10.38  -17.33   -2.63
+  Lena     random year_obs     Ku        - -1.00  -0.70  -2.14  0.07      -1.86   -3.26   -0.02
+  Lena     random year_obs     P0        - -1.00   0.92  -1.44  2.50      -0.95   -2.47    1.63
+  Lena     random year_obs    P1a        - -1.00  -0.52  -1.83  0.24       0.16   -1.54    1.96
+  Lena     random year_obs     PE        - -1.00  -0.70  -2.14  0.07      -1.86   -3.26   -0.02
+  Lena     random year_obs     R1 catboost  0.25  -3.13  -6.27 -0.91      -3.96   -6.29   -1.22
+  Lena     random year_obs     R1 catboost  0.50  -5.77 -11.81 -1.61      -7.26  -11.71   -2.12
+  Lena     random year_obs     R1 catboost  1.00  -8.29 -17.23 -2.14     -10.43  -17.25   -2.71
+  Lena     region     clim     D0 catboost -1.00  22.26   9.99 30.20      14.01    4.37   25.43
+  Lena     region     clim     D1 catboost -1.00  -0.01  -0.19  0.20      -0.06   -0.25    0.10
+  Lena     region     clim     Ed        - -1.00   5.36  -0.42  9.05       0.68   -2.45    5.15
+  Lena     region     clim     F1 catboost -1.00  24.78  10.94 32.93      16.52    5.75   28.83
+  Lena     region     clim     Ku        - -1.00   1.86  -0.52  3.81      -0.32   -1.71    1.50
+  Lena     region     clim     P0        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+  Lena     region     clim    P1a        - -1.00   0.30   0.00  0.59      -0.05   -0.30    0.32
+  Lena     region     clim     PE        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+  Lena     region     clim     R1 catboost  0.25   1.20  -0.28  2.35      -0.09   -1.03    1.48
+  Lena     region     clim     R1 catboost  0.50   2.81  -0.23  5.03       0.26   -1.73    3.43
+  Lena     region     clim     R1 catboost  1.00   6.95   0.77 10.99       2.21   -2.06    8.43
+  Lena     region     year     D0 catboost -1.00  22.91  11.98 29.31      16.35    6.75   27.43
+  Lena     region     year     D1 catboost -1.00   0.02  -0.08  0.13      -0.24   -0.73    0.09
+  Lena     region     year     Ed        - -1.00   4.01  -0.71  7.23       0.55   -2.22    4.45
+  Lena     region     year     F1 catboost -1.00  22.91  11.21 30.14      15.57    6.28   26.28
+  Lena     region     year     Ku        - -1.00   0.48  -2.59  2.17      -1.42   -3.00    0.72
+  Lena     region     year     P0        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+  Lena     region     year    P1a        - -1.00   1.55   0.64  2.57       0.33   -0.38    1.25
+  Lena     region     year     PE        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+  Lena     region     year     R1 catboost  0.25   1.34  -0.40  2.46       0.17   -1.26    2.40
+  Lena     region     year     R1 catboost  0.50   3.33  -0.27  5.37       1.19   -1.81    5.50
+  Lena     region     year     R1 catboost  1.00   8.70   1.67 12.00       5.35   -0.81   13.16
+  Lena     region year_obs     D0 catboost -1.00  17.80   7.98 23.86      12.24    2.67   23.46
+  Lena     region year_obs     D1 catboost -1.00   0.02  -0.23  0.45      -0.10   -0.58    0.42
+  Lena     region year_obs     Ed        - -1.00   4.38  -1.08  7.86       0.48   -2.44    4.71
+  Lena     region year_obs     F1 catboost -1.00  19.71   9.26 26.04      13.25    3.49   24.60
+  Lena     region year_obs     Ku        - -1.00   0.37  -2.78  1.92      -2.10   -4.36    1.01
+  Lena     region year_obs     P0        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+  Lena     region year_obs    P1a        - -1.00   1.77   0.52  3.24       0.08   -1.04    1.53
+  Lena     region year_obs     PE        - -1.00   0.00   0.00  0.00       0.00    0.00    0.00
+  Lena     region year_obs     R1 catboost  0.25   0.79  -0.56  1.51      -0.07   -1.29    1.84
+  Lena     region year_obs     R1 catboost  0.50   1.99  -0.78  3.39       0.39   -2.18    4.25
+  Lena     region year_obs     R1 catboost  1.00   5.38  -0.20  7.89       2.75   -2.69   10.07
+  Lena       year     clim     D0 catboost -1.00  -1.94  -4.56  0.34      -1.40   -3.92    1.63
+  Lena       year     clim     D1 catboost -1.00  -0.68  -1.48 -0.26      -0.32   -0.65   -0.09
+  Lena       year     clim     Ed        - -1.00   0.32  -0.43  0.99       0.51   -0.23    1.18
+  Lena       year     clim     F1 catboost -1.00  -1.73  -4.28  0.60      -1.53   -3.78    1.40
+  Lena       year     clim     Ku        - -1.00   0.24  -0.53  0.85       0.37   -0.35    1.02
+  Lena       year     clim     P0        - -1.00   0.53  -2.88  2.93      -2.15   -4.52    2.00
+  Lena       year     clim    P1a        - -1.00   0.72  -0.44  1.76       0.03   -1.02    0.87
+  Lena       year     clim     PE        - -1.00   0.40  -0.05  0.88       0.40   -0.24    1.01
+  Lena       year     clim     R1 catboost  0.25  -0.90  -1.52 -0.50      -0.62   -1.15   -0.11
+  Lena       year     clim     R1 catboost  0.50  -1.52  -2.74 -0.60      -1.06   -2.14    0.03
+  Lena       year     clim     R1 catboost  1.00  -1.84  -4.26  0.34      -1.31   -3.61    1.46
+  Lena       year     year     D0 catboost -1.00  -0.39  -1.30  1.07       0.33   -1.07    1.83
+  Lena       year     year     D1 catboost -1.00  -0.16  -0.30 -0.00       0.02   -0.16    0.14
+  Lena       year     year     Ed        - -1.00   0.43  -0.14  0.94       0.26   -0.53    0.98
+  Lena       year     year     F1 catboost -1.00  -0.37  -1.47  1.15      -0.14   -1.26    1.01
+  Lena       year     year     Ku        - -1.00  -0.42  -1.59  0.38      -1.28   -1.86   -0.62
+  Lena       year     year     P0        - -1.00   0.19  -2.65  2.16      -1.63   -3.94    2.12
+  Lena       year     year    P1a        - -1.00  -0.02  -1.37  0.94       1.21   -0.45    4.30
+  Lena       year     year     PE        - -1.00   0.20  -0.97  0.90      -0.26   -1.15    0.36
+  Lena       year     year     R1 catboost  0.25  -0.50  -0.80 -0.20      -0.25   -0.66    0.18
+  Lena       year     year     R1 catboost  0.50  -0.86  -1.48 -0.23      -0.39   -1.25    0.47
+  Lena       year     year     R1 catboost  1.00  -1.16  -2.49  0.22      -0.37   -2.19    1.53
+  Lena       year year_obs     D0 catboost -1.00  -1.04  -2.74  0.76      -0.74   -2.50    1.27
+  Lena       year year_obs     D1 catboost -1.00  -0.16  -0.30 -0.01       0.03   -0.13    0.26
+  Lena       year year_obs     Ed        - -1.00   0.39  -0.17  0.95       0.25   -0.51    0.96
+  Lena       year year_obs     F1 catboost -1.00  -1.35  -3.28  0.61      -1.29   -3.20    0.91
+  Lena       year year_obs     Ku        - -1.00  -0.46  -1.69  0.31      -1.94   -3.08   -0.44
+  Lena       year year_obs     P0        - -1.00   0.24  -2.69  2.08      -1.63   -3.77    2.08
+  Lena       year year_obs    P1a        - -1.00   0.04  -0.92  0.65       1.03   -0.27    3.32
+  Lena       year year_obs     PE        - -1.00   0.62  -0.19  1.25       0.33   -0.42    1.02
+  Lena       year year_obs     R1 catboost  0.25  -0.64  -0.99 -0.30      -0.43   -0.92    0.05
+  Lena       year year_obs     R1 catboost  0.50  -1.13  -1.89 -0.40      -0.76   -1.75    0.23
+  Lena       year year_obs     R1 catboost  1.00  -1.68  -3.34 -0.01      -1.09   -3.15    1.09
+/enc/ukrprod_CJsgU/work/scripts/2_evaluation/v5_aggregate.py:37: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  per_seed = df.groupby(KEY + ["seed"]).apply(lambda s: T.rmse(s.y.values, s.pred.values)).rename("rmse").reset_index()
+region     scheme  forcing method   lam  tdd_bin  delta     lo     hi
+Alaska      block     clim     D0 -1.00        0  -0.19  -2.42   0.03
+Alaska      block     clim     D0 -1.00        1   0.06  -1.82   0.83
+Alaska      block     clim     D0 -1.00        2   2.02  -0.76   3.61
+Alaska      block     clim     D1 -1.00        0  -0.00  -0.65   0.02
+Alaska      block     clim     D1 -1.00        1  -0.16  -0.54  -0.06
+Alaska      block     clim     D1 -1.00        2   0.01  -0.23   0.24
+Alaska      block     clim     Ed -1.00        0   3.25  -0.92   3.66
+Alaska      block     clim     Ed -1.00        1   0.07  -0.83   1.77
+Alaska      block     clim     Ed -1.00        2   2.18  -0.03   3.89
+Alaska      block     clim     F1 -1.00        0  -0.34  -2.32  -0.15
+Alaska      block     clim     F1 -1.00        1   0.32  -1.57   1.55
+Alaska      block     clim     F1 -1.00        2   2.28  -0.74   4.17
+Alaska      block     clim     Ku -1.00        0   4.95  -0.25   5.42
+Alaska      block     clim     Ku -1.00        1   0.60  -0.64   3.17
+Alaska      block     clim     Ku -1.00        2   3.10   0.68   5.19
+Alaska      block     clim     P0 -1.00        0   1.98   1.90   3.74
+Alaska      block     clim     P0 -1.00        1  -0.04  -1.01   1.27
+Alaska      block     clim     P0 -1.00        2   1.34  -0.76   1.94
+Alaska      block     clim    P1a -1.00        0   0.43  -0.65   0.55
+Alaska      block     clim    P1a -1.00        1   0.07  -0.17   0.15
+Alaska      block     clim    P1a -1.00        2   0.30  -0.53   0.76
+Alaska      block     clim     PE -1.00        0   0.00   0.00   0.00
+Alaska      block     clim     PE -1.00        1   0.00   0.00   0.00
+Alaska      block     clim     PE -1.00        2   0.00   0.00   0.00
+Alaska      block     clim     R1  0.25        0  -0.07  -0.78  -0.01
+Alaska      block     clim     R1  0.25        1  -0.11  -0.66   0.24
+Alaska      block     clim     R1  0.25        2   0.37  -0.36   0.82
+Alaska      block     clim     R1  0.50        0  -0.07  -1.40   0.05
+Alaska      block     clim     R1  0.50        1  -0.10  -1.17   0.63
+Alaska      block     clim     R1  0.50        2   0.92  -0.51   1.86
+Alaska      block     clim     R1  1.00        0   0.13  -2.07   0.36
+Alaska      block     clim     R1  1.00        1   0.28  -1.70   1.86
+Alaska      block     clim     R1  1.00        2   2.53  -0.24   4.54
+Alaska      block     year     D0 -1.00        0  -4.46  -4.81  -2.15
+Alaska      block     year     D0 -1.00        1  -0.74  -3.13   0.10
+Alaska      block     year     D0 -1.00        2   1.23  -1.95   3.49
+Alaska      block     year     D1 -1.00        0  -0.03  -1.01   0.00
+Alaska      block     year     D1 -1.00        1  -0.34  -0.96  -0.17
+Alaska      block     year     D1 -1.00        2  -0.03  -0.35   0.16
+Alaska      block     year     Ed -1.00        0   3.79  -0.70   4.11
+Alaska      block     year     Ed -1.00        1   0.42  -0.37   1.73
+Alaska      block     year     Ed -1.00        2   3.04  -0.15   5.45
+Alaska      block     year     F1 -1.00        0  -4.70  -5.09  -2.13
+Alaska      block     year     F1 -1.00        1  -0.64  -3.19   0.20
+Alaska      block     year     F1 -1.00        2   1.32  -1.56   3.40
+Alaska      block     year     Ku -1.00        0   7.71  -0.85   8.38
+Alaska      block     year     Ku -1.00        1   2.03   0.52   6.09
+Alaska      block     year     Ku -1.00        2   1.79  -1.47   5.34
+Alaska      block     year     P0 -1.00        0   1.85   1.70   4.26
+Alaska      block     year     P0 -1.00        1   0.26  -0.76   1.31
+Alaska      block     year     P0 -1.00        2   0.01  -2.86   1.45
+Alaska      block     year    P1a -1.00        0  -3.55  -3.79  -1.63
+Alaska      block     year    P1a -1.00        1   0.23  -0.64   0.50
+Alaska      block     year    P1a -1.00        2   0.05  -2.75   1.79
+Alaska      block     year     PE -1.00        0   0.00   0.00   0.00
+Alaska      block     year     PE -1.00        1   0.00   0.00   0.00
+Alaska    

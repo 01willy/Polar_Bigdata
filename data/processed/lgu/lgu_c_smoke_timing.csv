@@ -1,0 +1,6 @@
+item,sub,status,elapsed_s,n_rows,pid,threads,finished
+variogram,Canada,ok,0.68,36,46419,4,2026-09-30 03:25:53
+icc,Canada,ok,0.6,3,46416,4,2026-09-30 03:25:53
+proximity,Canada:x,ok,0.96,56,46416,4,2026-09-30 03:25:54
+sar,Canada,ok,0.01,14,46419,4,2026-09-30 03:25:53
+sar,CA-1,ok,0.01,14,46419,4,2026-09-30 03:25:53

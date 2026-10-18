@@ -1,0 +1,20 @@
+{
+ "created": "2026-10-04 16:03:22",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md@2678100",
+ "algp": {
+  "name": "S8a",
+  "source": "부록 XC-0 미확정(스모크·세기 기본값 P_default)",
+  "is_rand": false,
+  "gamma": 0.0,
+  "first": "center"
+ },
+ "placement_impl": "xd",
+ "placement_sha": "28220ba689ab",
+ "nboot": 500,
+ "n_units_xc": 2,
+ "n_units_f3": 0,
+ "n_units_xcr": 1,
+ "holm_m": 8,
+ "code_sha": "18d0c583c7c2",
+ "max_rss_mb": 442.6
+}

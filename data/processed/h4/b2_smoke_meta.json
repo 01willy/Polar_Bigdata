@@ -1,0 +1,124 @@
+{
+ "stage": "H33/B2",
+ "plan": "docs/EXPERIMENT_PLAN_FINAL_PAPER_2026-09-26.md §4 Track B2, §5 F5·F6",
+ "targets": [
+  "Lena",
+  "AL-1",
+  "Russia_W"
+ ],
+ "splits": [
+  0
+ ],
+ "n_grid": [
+  3,
+  20
+ ],
+ "reps": 2,
+ "reps_cb": 1,
+ "seeds": [
+  0
+ ],
+ "lams": [
+  0.25,
+  0.5
+ ],
+ "eps": [
+  0.05,
+  0.1
+ ],
+ "kappa": 10.0,
+ "buffer_km": 100.0,
+ "k_sub": "Alaska:6,Canada:3,Lena:2",
+ "rules": [
+  "random",
+  "kmedoid"
+ ],
+ "ests": [
+  "shrink_k10",
+  "offset_mle",
+  "mixed_boost",
+  "ppi",
+  "offset_mle30",
+  "offset_ls"
+ ],
+ "min_region_cells": 3,
+ "extra_offset_min_cells": 30,
+ "nboot": 1000,
+ "gpb_timeout": 900.0,
+ "ci_rule": "h4_common.boot_delta_blocks(분할 안 채점 블록 재표집, 방법·반복·seed 공유 인덱스), ci_rep = 보조",
+ "min_n_rule": "ci_hi<0 & split_win>=0.667 & rep_win>=0.75",
+ "struct_threshold": 0.15,
+ "struct_f5": [
+  "Canada",
+  "CA-3"
+ ],
+ "breakeven_file": "/home/willy010313/Polar_Bigdata/data/processed/h3/h25_breakeven.csv",
+ "workers": 2,
+ "threads": 4,
+ "smoke": true,
+ "summarize_only": false,
+ "git_commit": "834e4bf",
+ "elapsed_s": 63.7,
+ "n_rows": {
+  "runs": 286,
+  "curve": 223,
+  "minn": 96,
+  "pooling": 144,
+  "f5": 26,
+  "regional": 304,
+  "ppi_ci": 23,
+  "theory": 3,
+  "theory_corr": 96
+ },
+ "mb_fits": 26,
+ "mb_fallback_fits": 0,
+ "mb_fallback_by_task": {
+  "AL-1|0": 0,
+  "Lena|0": 0,
+  "Russia_W|0": 0
+ },
+ "mb_last_err": {},
+ "mixed_boost_covpars_n0": {
+  "AL-1|0": {
+   "sigma2": 0.035761418216062234,
+   "tau2": 0.08640070722804624
+  },
+  "Lena|0": {
+   "sigma2": 0.029327506211228285,
+   "tau2": 0.03133722534772701
+  },
+  "Russia_W|0": {
+   "sigma2": 0.035592649140108665,
+   "tau2": 0.20903856705109278
+  }
+ },
+ "prior_by_target": {
+  "Lena": {
+   "sigma2": 0.093533600045969,
+   "tau2": 0.15218617866957992,
+   "tau2_raw": 0.15218617866957992,
+   "kappa_eff": 0.6145998333333879,
+   "logE0": 0.48199222349457016,
+   "logE0_regmean": 0.7273823836473435,
+   "hier_regions": "Alaska:13606,Canada:750,Greenland:3,Russia_C:6,Russia_E:30,Russia_W:31"
+  },
+  "AL-1": {
+   "sigma2": 0.1137384979268755,
+   "tau2": 0.16066240358987596,
+   "tau2_raw": 0.16066240358987596,
+   "kappa_eff": 0.7079347463095135,
+   "logE0": 0.4290837197702741,
+   "logE0_regmean": 0.6468317768740958,
+   "hier_regions": "Alaska:5954,Canada:750,Greenland:3,Lena:3037,Russia_C:7,Russia_E:30,Russia_W:31"
+  },
+  "Russia_W": {
+   "sigma2": 0.10544683470949325,
+   "tau2": 0.17216869834279952,
+   "tau2_raw": 0.17216869834279952,
+   "kappa_eff": 0.6124622868411392,
+   "logE0": 0.46342562705126267,
+   "logE0_regmean": 0.6135442788684933,
+   "hier_regions": "Alaska:13606,Canada:750,Greenland:3,Lena:3037,Russia_C:7,Russia_E:30"
+  }
+ }
+}

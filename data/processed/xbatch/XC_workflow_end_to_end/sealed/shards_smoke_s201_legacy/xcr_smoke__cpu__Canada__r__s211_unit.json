@@ -1,0 +1,186 @@
+{
+ "n_fit": {
+  "xcr": 29
+ },
+ "sec": {
+  "xcr": 2.4
+ },
+ "fail": {},
+ "n_rows": 18,
+ "status": "ok",
+ "n_fit_detail": {
+  "xcr|catboost_lo|R1cv": 10,
+  "xcr|catboost_lo|R1": 2,
+  "xcr|catboost_lo|R2": 1,
+  "xcr|catboost_lo|D1": 1,
+  "xcr|catboost_lo|R1wcv": 5,
+  "xcr|catboost_lo|R2wcv": 5,
+  "xcr|catboost_lo|D1wcv": 5
+ },
+ "sec_detail": {
+  "xcr|catboost_lo|R1cv": 0.549,
+  "xcr|catboost_lo|R1": 0.118,
+  "xcr|catboost_lo|R2": 0.111,
+  "xcr|catboost_lo|D1": 0.147,
+  "xcr|catboost_lo|R1wcv": 0.318,
+  "xcr|catboost_lo|R2wcv": 0.579,
+  "xcr|catboost_lo|D1wcv": 0.544
+ },
+ "rows_detail": {
+  "xcr|catboost_lo|R1cv": 1600,
+  "xcr|catboost_lo|R1": 400,
+  "xcr|catboost_lo|R2": 2200,
+  "xcr|catboost_lo|D1": 2200,
+  "xcr|catboost_lo|R1wcv": 800,
+  "xcr|catboost_lo|R2wcv": 8800,
+  "xcr|catboost_lo|D1wcv": 8800
+ },
+ "est_detail": {
+  "xcr|catboost_lo|R1cv": 0.8,
+  "xcr|catboost_lo|R1": 0.16,
+  "xcr|catboost_lo|R2": 0.148,
+  "xcr|catboost_lo|D1": 0.148,
+  "xcr|catboost_lo|R1wcv": 0.4,
+  "xcr|catboost_lo|R2wcv": 0.642,
+  "xcr|catboost_lo|D1wcv": 0.642
+ },
+ "errors": [],
+ "n_stored": 18,
+ "n_stored_ml": 13,
+ "n_nonfinite_keys": 0,
+ "notes": {
+  "algp": "S8a",
+  "placement_impl": "xd"
+ },
+ "n_krige": 0,
+ "krige_s": 0.0,
+ "est_krige_s": 0.0,
+ "n_kmeans": 0,
+ "kmeans_s": 0.0,
+ "est_kmeans_s": 0.0,
+ "n_A": 346,
+ "nb_A": 22,
+ "n_eval": 403,
+ "nb_eval": 16,
+ "n_src": 16697,
+ "E0": 1.5918750525571221,
+ "E_A": 1.357450692902127,
+ "n_cells": 750,
+ "dup_of": -1,
+ "valid": true,
+ "n_valid_splits": 10,
+ "n_unique_splits": 10,
+ "src_mode": "x",
+ "n_src_parent": 0,
+ "subregion_src": "map:lg_subregion_map_v1.csv",
+ "split_status": "ok",
+ "split_rule": "xbatch 1절 새 seed 제외 규칙",
+ "part": "cpu",
+ "alias": "Canada",
+ "elapsed_s": 2.5,
+ "n_fit_total": 29,
+ "plan": {
+  "split": 211,
+  "status": "ok",
+  "ref_split": -1,
+  "n_A": 346,
+  "nb_A": 22,
+  "n_eval": 403,
+  "nb_eval": 16,
+  "min_eval_blocks": 5,
+  "dup_of": -1,
+  "mirror_of": -1,
+  "valid": true,
+  "n_valid_splits": 10,
+  "n_unique_splits": 10
+ },
+ "algp": "S8a",
+ "placement_impl": "xd",
+ "tag": "xcr_smoke",
+ "target": "Canada",
+ "mode": "r",
+ "split": 211,
+ "variant": "",
+ "expected_splits": [
+  211
+ ],
+ "store_names": [
+  "Canada|r"
+ ],
+ "n_keys": 18,
+ "cfg": {
+  "exp": "XC",
+  "variant": "",
+  "data_sha": "214abe489347:f8c4b4f0b505:f79eeb64564c",
+  "kappa": 10.0,
+  "r": 10.0,
+  "lams": [
+   0.25,
+   0.5,
+   1.0
+  ],
+  "lam_base": 0.25,
+  "cv_k": 5,
+  "cb_hi": {
+   "iterations": 600,
+   "learning_rate": 0.03,
+   "depth": 6,
+   "l2_leaf_reg": 3.0
+  },
+  "plan": "docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md@2678100",
+  "frozen": {
+   "h40": "7098f59dabe2b73f",
+   "h42": "22e215e435e157be",
+   "h54": "cf9a1f6d0929c892",
+   "h41": "492373e4d37b5ea4"
+  },
+  "part": "xcr",
+  "grid": [
+   200
+  ],
+  "draws": 1,
+  "seeds": [
+   0
+  ],
+  "cb_iters": 200,
+  "w_cands": [
+   "P0",
+   "P1",
+   "P2",
+   "R1@0.25",
+   "R1@1.0",
+   "R2@0.25",
+   "D1"
+  ],
+  "w_min_n": 10,
+  "diag_n": 10,
+  "a1_r1_n": [
+   10
+  ],
+  "rand_tag": "xc-rand",
+  "p_tag": "xc-P",
+  "algp": "S8a",
+  "algp_gamma": 0.0,
+  "algp_first": "center",
+  "algp_source": "부록 XC-0 미확정(스모크·세기 기본값 P_default)",
+  "algp_file_sha256": "",
+  "placement_impl": "xd",
+  "placement_sha": "28220ba689ab",
+  "split_family": "xcr"
+ },
+ "cfg_hash": "0c66d6775158",
+ "cfg_common": "26027714ef49",
+ "code_sha": "18d0c583c7c2",
+ "code_sha_core": "f4ef5987402a",
+ "frozen": {
+  "h40": "7098f59dabe2b73f",
+  "h42": "22e215e435e157be",
+  "h54": "cf9a1f6d0929c892",
+  "h41": "492373e4d37b5ea4"
+ },
+ "plan_commit": "2678100",
+ "threads": "2",
+ "device": "",
+ "max_rss_mb": 442.6,
+ "written": "2026-10-04 16:03:22"
+}

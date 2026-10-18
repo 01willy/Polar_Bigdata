@@ -1,0 +1,122 @@
+{
+ "units": 4,
+ "units_axis": {
+  "main": 2,
+  "sens": 2
+ },
+ "fits": {
+  "d10|catboost_ctx": 6,
+  "d10|tabpfn": 6,
+  "d3|catboost_ctx": 6,
+  "d3|tabpfn": 6,
+  "main|catboost_ctx": 19,
+  "main|tabpfn": 19,
+  "rid|catboost_ctx": 14,
+  "rid|tabpfn": 14,
+  "tgt|catboost_ctx": 4,
+  "tgt|tabpfn": 4
+ },
+ "est_h": {
+  "d10|catboost_ctx": 0.0,
+  "d10|tabpfn": 0.01,
+  "d3|catboost_ctx": 0.0,
+  "d3|tabpfn": 0.01,
+  "main|catboost_ctx": 0.0,
+  "main|tabpfn": 0.04,
+  "rid|catboost_ctx": 0.0,
+  "rid|tabpfn": 0.03,
+  "tgt|catboost_ctx": 0.0,
+  "tgt|tabpfn": 0.0
+ },
+ "design": {
+  "main": {
+   "design": 16800,
+   "count": 19,
+   "same": false
+  },
+  "d3": {
+   "design": 1424,
+   "count": 6,
+   "same": false
+  },
+  "d10": {
+   "design": 1000,
+   "count": 6,
+   "same": false
+  },
+  "rid": {
+   "design": 1440,
+   "count": 14,
+   "same": false
+  },
+  "tgt": {
+   "design": 1108,
+   "count": 4,
+   "same": false
+  }
+ },
+ "design_match": null,
+ "n_fit_tabpfn": 49,
+ "est_h_tabpfn": 0.09,
+ "est_h_catboost": 0.0,
+ "n_ctx_max": 9400,
+ "n_tsub": 0,
+ "ctx_dev_max": 2.112,
+ "ctx_dev_bound_max": 3.348,
+ "n_over_bound": 0,
+ "n_src_regions": [
+  9,
+  9
+ ],
+ "n_check_fail": 0,
+ "low_card_x25": {
+  "cci_valid": 2
+ },
+ "skipped": [],
+ "errors": [],
+ "tag": "lgt_smoke",
+ "code_sha": "cc5f29084fb3",
+ "args": {
+  "axes": "main,sens",
+  "sens": "d3,d10,rid,tgt",
+  "targets": "Russia_W:x,Canada:x",
+  "splits": 1,
+  "n_grid": "0,10,40,all",
+  "draws": 1,
+  "seeds": 1,
+  "lams": "0.25,0.5,1.0",
+  "kappa": 10.0,
+  "ctx_max": 10000,
+  "ctx_reserve": 1000,
+  "ctx_src_min": 1000,
+  "n_est": 8,
+  "model_path": "tabpfn-v2-regressor.ckpt",
+  "pred_chunk": 4096,
+  "cb_iters": 200,
+  "gpus": "",
+  "gpu_mem_max_mib": 0,
+  "threads": 2,
+  "out_dir": "data/processed/lgt",
+  "data_dir": "data/processed",
+  "subregion_map": "lg_subregion_map_v1.csv",
+  "tag": "lgt",
+  "nboot": 1000,
+  "delta_eq": 0.5,
+  "delta_eq_aux": 1.0,
+  "cross_lg": false,
+  "lg_dir": "data/processed/lg",
+  "lg_tag": "lg",
+  "resume": false,
+  "rerun_partial": false,
+  "smoke": true,
+  "count_only": true,
+  "dry_build": false,
+  "summarize_only": false,
+  "no_summarize": false,
+  "no_cells": false,
+  "allow_mixed_cfg": false,
+  "pool_retries": 2,
+  "threads_asked": 2,
+  "save_cells": true
+ }
+}

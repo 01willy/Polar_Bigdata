@@ -1,0 +1,32 @@
+[2026-10-14T07:14:01Z]: Launching [ -f v6b_payload.tar.gz ] && tar xzf v6b_payload.tar.gz; V6_JOB=modis V6_BUDGET_MIN=80 bash scripts/rescale/run_v6b.sh, Working dir: /enc/ukrprod_CECkU/work.  Process output follows:
+[2026-10-14T07:14:01Z]: [2026-10-14T07:14:01Z] [env] 작업 디렉터리 /enc/ukrprod_CECkU/work
+[2026-10-14T07:14:01Z]: [2026-10-14T07:14:01Z] [env] 코어 수 96 (RESCALE_CORES_PER_SLOT = 96, OMP_NUM_THREADS = 없음) · 메모리 369 GB (여유 344 GB)
+[2026-10-14T07:14:01Z]: [2026-10-14T07:14:01Z] [env] 디스크 1.2T 여유 / 1.2T
+[2026-10-14T07:14:01Z]: [2026-10-14T07:14:01Z] [env] python /program/pytorch-2.4.1/venv/bin/python3 · pip /program/pytorch-2.4.1/venv/bin/pip
+[2026-10-14T07:14:03Z]: [env] python 3.11.10 · Linux-4.18.0-553.159.1.el8_10.x86_64-x86_64-with-glibc2.28
+[2026-10-14T07:14:03Z]: [env] 가상환경 True · prefix /program/pytorch-2.4.1/venv
+[2026-10-14T07:14:03Z]: [env] numpy 2.1.1
+[2026-10-14T07:14:03Z]: [env] pandas 없음
+[2026-10-14T07:14:03Z]: [env] scipy 없음
+[2026-10-14T07:14:03Z]: [env] scikit-learn 없음
+[2026-10-14T07:14:03Z]: [env] catboost 없음
+[2026-10-14T07:14:03Z]: [env] pytabkit 없음
+[2026-10-14T07:14:03Z]: [env] pytest 없음
+[2026-10-14T07:14:03Z]: [env] torch 2.4.1
+[2026-10-14T07:14:03Z]: [env] CUDA_VISIBLE_DEVICES = None
+[2026-10-14T07:14:25Z]: [env] torch 2.4.1+cu121 · CUDA 빌드 12.1 · CUDA 사용 가능 False · GPU 수 0
+[2026-10-14T07:14:27Z]: [2026-10-14T07:14:27Z] [env] nvidia-smi 없음
+[2026-10-14T07:14:28Z]: [2026-10-14T07:14:28Z] [deps] 없는 필수 패키지: catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-14T07:14:28Z]: [2026-10-14T07:14:28Z] [deps] pip install --user catboost>=1.2 scikit-learn>=1.3 pandas>=2.1,<3 scipy>=1.11
+[2026-10-14T07:14:30Z]: ERROR: Can not perform a '--user' install. User site-packages are not visible in this virtualenv.
+[2026-10-14T07:14:30Z]: [2026-10-14T07:14:30Z] [deps] --user 설치 실패(가상환경이면 정상이다). 기본 위치에 다시 시도한다
+[2026-10-14T07:14:58Z]: [deps] 확인: catboost 1.2.10 · scikit-learn 1.9.1 · pandas 2.3.3 · scipy 1.17.1 · numpy 2.1.1
+[2026-10-14T07:23:38Z]: [2026-10-14T07:23:38Z] [stage] agg_modis
+[2026-10-14T07:23:42Z]:   [agg_modis]   Lena   year year_obs     D0 catboost -1.0  -1.05  -2.55  0.63      -1.26   -2.56    0.62
+[2026-10-14T07:23:42Z]:   [agg_modis]   Lena   year year_obs     R1 catboost  0.5  -0.97  -1.44 -0.38      -0.85   -1.34   -0.28
+[2026-10-14T07:23:43Z]: [2026-10-14T07:23:43Z] [v6b] 끝 8 min
+[2026-10-14T07:23:43Z]:   stage,rc,sec
+[2026-10-14T07:23:43Z]:   modis,0,520
+[2026-10-14T07:23:43Z]:   agg_modis,0,4
+[2026-10-14T07:23:43Z]: Exited with code 0
+[2026-10-14T07:23:43Z]: 

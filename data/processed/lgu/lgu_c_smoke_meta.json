@@ -1,0 +1,353 @@
+{
+ "harness": "h46_spatial_diagnostics",
+ "plan": "docs/EXPERIMENT_PLAN_LGU_2026-09-29.md 5절",
+ "blind": "재현(비맹검)",
+ "note": "가설과 판정이 없는 진단이다. LGX·LG 의 산출을 읽지 않는다. 격자 원자료를 읽지 않는다.",
+ "args": {
+  "items": "variogram,icc,proximity,sar",
+  "regions": "Alaska,Lena,Canada",
+  "targets": "",
+  "sar_units": "Alaska,Canada,AL-1,AL-2,AL-3,AL-4,AL-5,AL-6,CA-1,CA-2,CA-3",
+  "splits": 5,
+  "n_grid": "10,40,160,all",
+  "draws": 5,
+  "seeds": 1,
+  "dists": "1,2,5,10,25,50,100",
+  "bins": "0,0.1,0.25,0.5,1,2,5,10,25,50,100,200",
+  "nboot": 2000,
+  "chunk": 512,
+  "workers": 2,
+  "threads": 4,
+  "gpus": "",
+  "out_dir": "data/processed/lgu",
+  "data_dir": "data/processed",
+  "tag": "lguc",
+  "subregion_map": "lg_subregion_map_v1.csv",
+  "label_flags": "lgx_label_flags_v1.csv",
+  "allow_local": true,
+  "smoke": true,
+  "precheck": false,
+  "count_only": false,
+  "summarize_only": false,
+  "no_summarize": false,
+  "resume": false,
+  "buffer_km": 100.0,
+  "ITEMS": [
+   "variogram",
+   "icc",
+   "proximity",
+   "sar"
+  ],
+  "REGIONS": [
+   "Canada"
+  ],
+  "TARGETS": [
+   [
+    "Canada",
+    "x"
+   ]
+  ],
+  "SAR_UNITS": [
+   "Canada",
+   "CA-1"
+  ],
+  "SPLITS": [
+   1
+  ],
+  "N_GRID": [
+   10,
+   40,
+   160,
+   -1
+  ],
+  "DRAWS": 2,
+  "DISTS": [
+   1.0,
+   2.0,
+   5.0,
+   10.0,
+   25.0,
+   50.0,
+   100.0
+  ],
+  "EDGES": [
+   0.0,
+   0.1,
+   0.25,
+   0.5,
+   1.0,
+   2.0,
+   5.0,
+   10.0,
+   25.0,
+   50.0,
+   100.0,
+   200.0
+  ],
+  "NBOOT": 200,
+  "TAG": "lguc_smoke",
+  "PREFIX": "lgu_c_smoke"
+ },
+ "code_sha": "52e4cbcc1b18",
+ "code_sha_common": "88ecdc5e7f60",
+ "code_sha_h40": "ffd0b3a76d36",
+ "inputs": {
+  "fidelity_base_v3.csv": "214abe489347",
+  "e5_soil_tdd_v3.csv": "f8c4b4f0b505",
+  "lg_subregion_map_v1.csv": "f79eeb64564c",
+  "lgx_label_flags_v1.csv": "d1d453052b46"
+ },
+ "tables": {
+  "variogram": "/home/willy010313/Polar_Bigdata/data/processed/lgu/lgu_c_smoke_variogram.csv",
+  "icc": "/home/willy010313/Polar_Bigdata/data/processed/lgu/lgu_c_smoke_icc.csv",
+  "proximity": "/home/willy010313/Polar_Bigdata/data/processed/lgu/lgu_c_smoke_proximity.csv",
+  "sar": "/home/willy010313/Polar_Bigdata/data/processed/lgu/lgu_c_smoke_sar.csv"
+ },
+ "cell_counts": [
+  {
+   "item": "variogram",
+   "region": "Canada",
+   "stratum": "all",
+   "n_cells": 750,
+   "n_blocks": 39
+  },
+  {
+   "item": "variogram",
+   "region": "Canada",
+   "stratum": "probe",
+   "n_cells": 750,
+   "n_blocks": 39
+  },
+  {
+   "item": "variogram",
+   "region": "Canada",
+   "stratum": "noearly",
+   "n_cells": 744,
+   "n_blocks": 39
+  },
+  {
+   "item": "icc",
+   "region": "Canada",
+   "stratum": "all",
+   "n_cells": 750,
+   "n_blocks": 39
+  },
+  {
+   "item": "icc",
+   "region": "Canada",
+   "stratum": "probe",
+   "n_cells": 750,
+   "n_blocks": 39
+  },
+  {
+   "item": "icc",
+   "region": "Canada",
+   "stratum": "noearly",
+   "n_cells": 744,
+   "n_blocks": 39
+  }
+ ],
+ "rows_not_made": [
+  {
+   "item": "variogram",
+   "region": "Canada",
+   "stratum": "gpr",
+   "n_cells": 0,
+   "reason": "cells<30"
+  },
+  {
+   "item": "icc",
+   "region": "Canada",
+   "stratum": "gpr",
+   "n_cells": 0,
+   "reason": "cells<30"
+  }
+ ],
+ "units": [
+  {
+   "item": "variogram",
+   "sub": "Canada",
+   "meta": {
+    "region": "Canada",
+    "n_cells": 750,
+    "n_nonfinite_z": 0,
+    "strata": {
+     "all": {
+      "n_cells": 750,
+      "n_blocks": 39,
+      "var_w": 0.21004432995946773,
+      "n_pairs_total": 280875,
+      "n_pairs_within": 60796,
+      "n_pairs_beyond": 220079,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 0.03
+     },
+     "probe": {
+      "n_cells": 750,
+      "n_blocks": 39,
+      "var_w": 0.21004432995946773,
+      "n_pairs_total": 280875,
+      "n_pairs_within": 60796,
+      "n_pairs_beyond": 220079,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 0.03
+     },
+     "noearly": {
+      "n_cells": 744,
+      "n_blocks": 39,
+      "var_w": 0.18822564680793769,
+      "n_pairs_total": 276396,
+      "n_pairs_within": 60139,
+      "n_pairs_beyond": 216257,
+      "fit_bins": 11,
+      "fit_flag": "ok",
+      "sec": 0.03
+     }
+    },
+    "skipped": [
+     {
+      "item": "variogram",
+      "region": "Canada",
+      "stratum": "gpr",
+      "n_cells": 0,
+      "reason": "cells<30"
+     }
+    ]
+   }
+  },
+  {
+   "item": "icc",
+   "sub": "Canada",
+   "meta": {
+    "region": "Canada",
+    "n_cells": 750,
+    "n_nonfinite_z": 0,
+    "strata": {
+     "all": {
+      "n_cells": 750,
+      "n_blocks": 39,
+      "flag": ""
+     },
+     "probe": {
+      "n_cells": 750,
+      "n_blocks": 39,
+      "flag": ""
+     },
+     "noearly": {
+      "n_cells": 744,
+      "n_blocks": 39,
+      "flag": ""
+     }
+    },
+    "skipped": [
+     {
+      "item": "icc",
+      "region": "Canada",
+      "stratum": "gpr",
+      "n_cells": 0,
+      "reason": "cells<30"
+     }
+    ]
+   }
+  },
+  {
+   "item": "proximity",
+   "sub": "Canada:x",
+   "meta": {
+    "target": "Canada",
+    "mode": "x",
+    "parent": "Canada",
+    "n_target": 750,
+    "splits_used": [
+     1
+    ],
+    "splits_skipped": [],
+    "n_src": 16697,
+    "n_src_parent": 0,
+    "frac_src_parent": 0.0,
+    "n_parent_excluded": 0,
+    "n_buffer_excluded": 20
+   }
+  },
+  {
+   "item": "sar",
+   "sub": "Canada",
+   "meta": {
+    "unit": "Canada",
+    "n_cells": 750,
+    "products": {
+     "insar_alt": {
+      "n_valid": 742
+     },
+     "polsar_alt": {
+      "n_valid": 0
+     }
+    }
+   }
+  },
+  {
+   "item": "sar",
+   "sub": "CA-1",
+   "meta": {
+    "unit": "CA-1",
+    "n_cells": 6,
+    "products": {
+     "insar_alt": {
+      "n_valid": 0
+     },
+     "polsar_alt": {
+      "n_valid": 0
+     }
+    }
+   }
+  }
+ ],
+ "n_failed": 0,
+ "run_records": [
+  {
+   "item": "icc",
+   "sub": "Canada",
+   "status": "ok",
+   "error": "",
+   "n_rows": 3,
+   "elapsed_s": 0.6
+  },
+  {
+   "item": "variogram",
+   "sub": "Canada",
+   "status": "ok",
+   "error": "",
+   "n_rows": 36,
+   "elapsed_s": 0.68
+  },
+  {
+   "item": "sar",
+   "sub": "Canada",
+   "status": "ok",
+   "error": "",
+   "n_rows": 14,
+   "elapsed_s": 0.01
+  },
+  {
+   "item": "sar",
+   "sub": "CA-1",
+   "status": "ok",
+   "error": "",
+   "n_rows": 14,
+   "elapsed_s": 0.01
+  },
+  {
+   "item": "proximity",
+   "sub": "Canada:x",
+   "status": "ok",
+   "error": "",
+   "n_rows": 56,
+   "elapsed_s": 0.96
+  }
+ ],
+ "summarize_sec": 0.09,
+ "niceness": 10,
+ "finished": "2026-09-30 03:25:54"
+}

@@ -1,0 +1,14 @@
+[load] usable 19,172 2s
+[PA Canada wei b0] tr 702 te 489 4s
+[PA Canada wei b1] tr 970 te 221 8s
+[PA Canada wei b2] tr 1,033 te 158 13s
+[PA Canada wei b3] tr 1,028 te 163 17s
+[PA Canada wei b4] tr 1,031 te 160 22s
+[PA Canada wei] rows 17,865 22s
+[PA Canada liu b0] tr 240 te 292 3s
+[PA Canada liu b1] tr 467 te 65 7s
+[PA Canada liu b2] tr 510 te 22 10s
+[PA Canada liu b3] tr 500 te 32 14s
+[PA Canada liu b4] tr 411 te 121 17s
+[PA Canada liu] rows 7,980 17s
+[done] 41s
