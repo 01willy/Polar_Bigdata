@@ -858,7 +858,8 @@ def export_pdf(pptx_path, pdf_path, work_dir):
     tmp = Path(tempfile.mkdtemp(prefix="pr_", dir=str(work_dir)))
     prof = f"file://{tmp}/lo_profile"
     soff = shutil.which("soffice")
-    env = dict(os.environ, OMP_NUM_THREADS="2")
+    # GPU 접근 차단(2026-10-14 사용자 지적): soffice 가 OpenCL/GL 초기화로 nvidia-smi 에 잡힌다. CUDA 가시성 0, OpenCL·GL 끔, 순수 소프트웨어 VCL.
+    env = dict(os.environ, OMP_NUM_THREADS="2", CUDA_VISIBLE_DEVICES="", SAL_DISABLE_OPENCL="1", SAL_DISABLEGL="1", SAL_USE_VCLPLUGIN="svp", SAL_NOOPENGL="1")
     pre = ["nice", "-n", "10"]
     subprocess.run(pre + [soff, f"-env:UserInstallation={prof}", "--headless", "--convert-to", "odp", "--outdir",
                           str(tmp), str(pptx_path)], check=True, capture_output=True, timeout=900, env=env)

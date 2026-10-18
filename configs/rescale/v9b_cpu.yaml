@@ -1,0 +1,18 @@
+# v9b: 외부 지역 소수 라벨 적응(EXTFT). 2026-10-16. 묶음: bash scripts/rescale/make_payload_v9b.sh
+name: polar-v9b-extft
+hardware:
+  core_type: elm
+  cores_per_slot: 96
+  slots: 1
+  walltime_hours: 2
+max_cost_usd: 7
+low_priority: false
+analysis:
+  code: pytorch
+  version: "2.4.1"
+code_paths:
+  - work/v9b_payload.tar.gz
+dataset_file_ids: []
+command: |
+  [ -f v9b_payload.tar.gz ] && tar xzf v9b_payload.tar.gz; bash scripts/rescale/run_v9b.sh
+results_dir: results/rescale_v9b_extft

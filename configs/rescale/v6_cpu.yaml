@@ -1,0 +1,20 @@
+# v6 핵심 재실행(관측일 정합 주 강제력): CatBoost·물리식, 공변량 사다리, 확인 실행, 지점 시계열, 집계. 2026-10-14.
+# 묶음: bash scripts/rescale/make_payload_v6.sh · 확인: python3 tools/rescale_client.py run configs/rescale/v6_cpu.yaml --dry-run
+# 근거: 로컬 core_cb(두 강제력, 10스레드)가 알래스카 52분. elm 96코어에서 지역 3개 병렬(각 24스레드)·강제력 3판이면 약 1.5 h, 사다리·확인·시계열·집계 약 1 h. 상한 4 h.
+name: polar-v6-cpu
+hardware:
+  core_type: elm
+  cores_per_slot: 96
+  slots: 1
+  walltime_hours: 4
+max_cost_usd: 14
+low_priority: false
+analysis:
+  code: pytorch
+  version: "2.4.1"
+code_paths:
+  - work/v6_payload.tar.gz
+dataset_file_ids: []
+command: |
+  [ -f v6_payload.tar.gz ] && tar xzf v6_payload.tar.gz; V6_JOB=cpu V6_BUDGET_MIN=225 bash scripts/rescale/run_v6.sh
+results_dir: results/rescale_v6_cpu

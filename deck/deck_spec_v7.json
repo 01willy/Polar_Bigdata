@@ -1,0 +1,367 @@
+{
+ "meta": {
+  "version": "v7",
+  "date": "2026-10-14",
+  "title": "해마다 달라지는 영구동토 활동층 두께의 1 km 예측",
+  "grammar": "V7: 주황 제목(명사구) + 회색 부제 한 줄 + 그림이 본문을 채움 + 맨 아래 회색 한 줄 설명. 하단 결론 줄 없음. 강조는 주황 외곽선 상자(채움 없음) 쪽당 최대 1개(목표·결론·의의)",
+  "basis": [
+   "docs/DESIGN_BRIEF_v7_2026-10-14.md",
+   "docs/RESULTS_v6_2026-10-14.md",
+   "docs/numbers_v6.json"
+  ],
+  "figures": {
+   "paper_slide": "outputs/figures/paper/v7/slide/",
+   "deck_only": "deck/assets/v7/"
+  },
+  "rules": "문장은 명사구 한 줄, 수사 없음, 내부 용어 없음, 수치는 {nMacro} 토큰"
+ },
+ "slides": [
+  {
+   "id": "S01",
+   "type": "cover",
+   "title": "해마다 달라지는 영구동토 활동층 두께의 1 km 예측",
+   "subtitle": "물리식 · 기계학습 · 결합 방법 · 기존 제품의 같은 셀 · 같은 해 비교",
+   "presenter": "연구 결과 보고 · 2026년 10월",
+   "affiliation": "Polar Bigdata 연구팀",
+   "notes": "활동층 두께를 해마다 1 km 격자로 예측하는 방법을 비교한 결과입니다."
+  },
+  {
+   "id": "N01",
+   "type": "fig",
+   "title": "활동층 두께와 관측 현황",
+   "subtitle": "배경 · 활동층 두께(ALT): 영구동토 위에서 여름에 녹는 층의 두께 · 세 지역의 점 관측",
+   "assets": [
+    "F1_study_area__deck_N01.png"
+   ],
+   "caption": "영구동토 확률(ESA CCI, 위성 기반 영구동토 확률 산출물)과 세 지역 · 1 km 셀 {nncellAll}개, 셀-연도 {nncyAll}개(같은 셀의 다른 해는 다른 행)",
+   "notes": "활동층 두께는 해마다 달라집니다. 관측은 세 지역의 점 관측이고 해마다 다른 장소를 쟀습니다.",
+   "fallback_assets": [
+    "F1_study_area__a.png",
+    "F1_study_area__e.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "N02",
+   "type": "fig",
+   "title": "입력의 시간 정의",
+   "subtitle": "문제 · 기존 제품은 여러 해 평균 기후로 지점의 다년 평균을 맞추고, 지도에 해가 없음",
+   "assets": [
+    "F2_problem_time__deck_N02.png"
+   ],
+   "caption": "a 한 셀의 연도별 융해 도일과 평균값, 관측일까지의 누적(삽도) · b 장기 지점의 관측 연도 변동과 제품의 연도 값",
+   "notes": "기존 제품의 입력은 여러 해 평균입니다. 같은 셀의 관측은 해마다 다르고 제품 값은 평평합니다.",
+   "fallback_assets": [
+    "F2_problem_time__ab.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "N03",
+   "type": "fig",
+   "title": "목표 · 기존 한계 · 개선 · 기대 효과",
+   "subtitle": "연구 목표와 구성",
+   "assets": [
+    "G1_goal_slide.png"
+   ],
+   "deck_only": true,
+   "caption": "목표 · 기존 연구 한계 · 개선 · 기대 효과(실자료 요약)",
+   "notes": "목표는 해마다의 1 km 지도와 같은 셀, 같은 해의 비교입니다.",
+   "box": [
+    "목표  그 해 기후를 입력해 해마다의 1 km 활동층 지도를 만들고, 같은 셀 · 같은 해에서 기존 제품과 비교"
+   ]
+  },
+  {
+   "id": "N04",
+   "type": "fig",
+   "title": "물리 기준: Stefan 관계",
+   "subtitle": "방법 · 녹는 깊이 ∝ √(누적 융해 도일 TDD) · 레나 델타 계절 안 실측과 세 지역 다년 셀",
+   "assets": [
+    "F2_problem_time__deck_N04.png"
+   ],
+   "caption": "c 한 계절의 녹는 깊이와 √TDD(실측, Stefan 적합) · d 다년 셀의 ALT와 관측일까지의 √TDD",
+   "notes": "Stefan 관계는 실측에서 확인됩니다. 계수는 학습 겹에서 다시 맞춥니다.",
+   "fallback_assets": [
+    "F2_problem_time__cd.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "N05",
+   "type": "fig",
+   "title": "세 지역의 관측 셀",
+   "subtitle": "자료 · 1 km 셀 수: 알래스카 {nncellAk} · 레나 델타 {nncellLe} · 캐나다 북서부 {nncellCa} · 별표 = 4년 이상 관측",
+   "assets": [
+    "F1_study_area__deck_N05.png"
+   ],
+   "caption": "점 크기 = 관측 연도 수, 격자 = 0.5° 블록(공간 분할 단위)",
+   "notes": "세 지역의 관측 셀입니다. 점 크기는 관측 연도 수입니다.",
+   "fallback_assets": [
+    "F1_study_area__b.png",
+    "F1_study_area__c.png",
+    "F1_study_area__d.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "N06",
+   "type": "fig",
+   "title": "관측 연도와 자료 기간",
+   "subtitle": "자료 · 라벨 · ERA5-Land 강제력 · 위성 입력 · 비교 제품의 기간(2010–2024 분석 창)",
+   "assets": [
+    "F1_study_area__deck_N06.png"
+   ],
+   "caption": "알래스카 라벨의 {ntopyrshareAk}%가 {ntopyrAk}년, 레나 델타는 {nnyrLe}개 해에 분포",
+   "notes": "알래스카는 2014년에 몰려 있고 레나 델타는 여러 해에 퍼져 있습니다.",
+   "fallback_assets": [
+    "F1_study_area__e.png",
+    "F1_study_area__f.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "M01",
+   "type": "fig",
+   "title": "방법 구조",
+   "subtitle": "정적 공변량 + 그 해 강제력 → 물리식(Stefan) → 잔차 학습(gradient boosting) → 그 해 지도",
+   "assets": [
+    "F3_method__deck_M01.png"
+   ],
+   "caption": "a 자료 흐름(적색 파선 = 학습 때만) · b 비교한 네 구조: 물리 정보가 들어가는 위치",
+   "notes": "물리식이 기준이고 학습은 잔차만 맡습니다. 네 구조는 물리 정보의 위치만 다릅니다.",
+   "fallback_assets": [
+    "F3_method__ab.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "M02",
+   "type": "fig",
+   "title": "평가 설계",
+   "subtitle": "방법 · 다섯 가지 분할 · 블록 부트스트랩 95% 구간 · 같은 셀 · 같은 해 채점",
+   "assets": [
+    "F3_method__deck_M02.png"
+   ],
+   "caption": "c 무작위 · 공간 블록 · 연도 · 블록×연도 · 지역 홀드아웃(색 = 채점 겹, 교차검증 폴드) · d 블록 재추출 2,000회의 ΔRMSE 분포",
+   "notes": "주 결과는 공간 블록 분할입니다. 판정은 블록 부트스트랩 구간으로 합니다.",
+   "fallback_assets": [
+    "F3_method__cd.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "R01",
+   "type": "fig",
+   "title": "그 해 기후 입력의 효과",
+   "subtitle": "결과 · 관측일까지 누적한 강제력 − 여러 해 평균 강제력, 공간 블록 분할",
+   "assets": [
+    "F4_results_core__deck_R01.png"
+   ],
+   "caption": "레나 델타 재보정 Stefan {ndforcLePo} cm · 알래스카 {ndforcAkPo} cm · 캐나다 {ndforcCaPo} cm",
+   "notes": "그 해 입력은 해가 고루 관측된 레나 델타에서 물리식을 개선합니다.",
+   "fallback_assets": [
+    "F4_results_core__a.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "R02",
+   "type": "fig",
+   "title": "검증 분할에 따른 오차",
+   "subtitle": "결과 · 무작위 → 공간 블록 → 연도 → 블록×연도 → 지역 홀드아웃, 세 지역",
+   "assets": [
+    "F4_results_core__deck_R02.png"
+   ],
+   "caption": "무작위 분할은 직접 학습을 공간 블록보다 {noptimLeDz}–{noptimCaDz} cm 과대평가 · 지역 홀드아웃에서 직접 학습 레나 델타 {ndrefLeregDz} cm",
+   "notes": "무작위 분할은 기계학습을 과대평가합니다. 새 지역에서는 물리식이 남습니다.",
+   "fallback_assets": [
+    "F4_results_core__b.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "R03",
+   "type": "fig",
+   "title": "잔차 결합의 이득과 조건",
+   "subtitle": "결과 · 재보정 Stefan 대비 ΔRMSE(음수 = 결합이 낫다) · 공변량 · 융해 도일 3분위 · 학습기",
+   "assets": [
+    "F4_results_core__deck_R03.png"
+   ],
+   "caption": "레나 델타 {ndrefLeblkRo} · 캐나다 {ndrefCablkRo} · 알래스카 {ndrefAkblkRo} cm · 지형·토양 입력이 조건, 따뜻한 3분위에서 큼 · TabM · FT-T = 표 형식 신경망",
+   "notes": "이득은 지형과 토양 입력이 있어야 생기고 따뜻한 셀에서 큽니다. 학습기 차이는 작습니다.",
+   "fallback_assets": [
+    "F4_results_core__cd.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "R04",
+   "type": "fig",
+   "title": "기존 제품과 같은 셀 · 같은 해 비교",
+   "subtitle": "결과 · 공통 셀-연도 RMSE · 빈 마커 = 제품 학습 지점 25 km 밖 · 짝지은 차이와 95% 구간",
+   "assets": [
+    "F5_products_years__deck_R04.png"
+   ],
+   "caption": "레나 델타 {nccLeRoall} cm 대 Wei {nccLeWeiall} · Liu {nccLeLiuall} cm · 알래스카 25 km 밖 {nccAkRomask} 대 Wei {nccAkWeimask} · Liu {nccAkLiumask} cm",
+   "notes": "레나 델타에서는 모든 제품보다 낫고, 알래스카는 학습 지점을 뺀 뒤 Wei 보다 낫습니다.",
+   "fallback_assets": [
+    "F5_products_years__ab.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "R05",
+   "type": "fig",
+   "title": "연도별 평가",
+   "subtitle": "결과 · 다년 셀의 연도 간 변화(관측 대 예측) · 연도별 편향(공간 블록 분할)",
+   "assets": [
+    "F5_products_years__deck_R05.png"
+   ],
+   "caption": "변화 상관 알래스카 {nrdeltaAkRo} · 레나 델타 {nrdeltaLeRo} · 캐나다 {nrdeltaCaRo} · 연도별 편향 알래스카 {nybiasminAk}~{nybiasmaxAk} · 레나 델타 {nybiasminLe}~{nybiasmaxLe} · 캐나다 {nybiasminCa}~{nybiasmaxCa} cm",
+   "notes": "연도 간 변화는 일부만 맞춥니다. 큰 편향은 관측 캠페인 구성의 변화와 일치합니다.",
+   "fallback_assets": [
+    "F5_products_years__cd.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "R06",
+   "type": "fig",
+   "title": "장기 관측 지점의 연도별 시계열",
+   "subtitle": "결과 · 알래스카 · 레나 델타 최장 기록 지점, 관측 · 물리식 · 잔차 결합 · 제품(2010–2024)",
+   "assets": [
+    "F5_products_years__deck_R06.png"
+   ],
+   "caption": "원 = 관측, 사각형 = 관측일 기준 예측, 선 = 계절 말 예측과 제품의 연도 값",
+   "notes": "장기 지점에서 예측은 관측 변동 폭 안에서 움직입니다.",
+   "fallback_assets": [
+    "F5_products_years__ef.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "R07",
+   "type": "fig",
+   "title": "연도를 명시한 알래스카 1 km 지도",
+   "subtitle": "결과 · 2011–2024 평균, 1 km 확대 2곳, 2014 · 2022년의 편차(그 해 ERA5-Land 강제력)",
+   "assets": [
+    "F6_maps__deck_R07.png"
+   ],
+   "caption": "2014년 북부가 얕고 2022년 내륙이 깊음 · 점 = 관측 셀",
+   "notes": "모든 지도에 입력 기후의 해가 붙습니다.",
+   "fallback_assets": [
+    "F6_maps__abcd.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "R08",
+   "type": "fig",
+   "title": "1 km 상세와 적용 가능 영역",
+   "subtitle": "결과 · North Slope · Interior 확대(원 = 관측 셀) · 적용 가능 영역 안쪽 {naoaAk}%",
+   "assets": [
+    "F6_maps__deck_R08.png"
+   ],
+   "caption": "지형을 따라 바뀌는 두께(좌), 적용 가능 영역 안쪽 {naoaAk}%(우) · 원 = 관측 셀",
+   "notes": "확대 창에서 지형에 따른 두께 변화가 보입니다. 적용 범위 밖은 표시합니다.",
+   "fallback_assets": [
+    "F6_maps__d.png",
+    "F6_maps__e.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "R09",
+   "type": "fig",
+   "title": "레나 델타 2016년 지도",
+   "subtitle": "결과 · 1 km 지도와 사모일로프-쿠룽나흐 확대 · 원 = 관측 셀",
+   "assets": [
+    "F6_maps__deck_R09.png"
+   ],
+   "caption": "섬과 수로를 따라 바뀌는 두께 · 적용 가능 영역 안쪽 {naoaLe}%(격자 전체 기준)",
+   "notes": "레나 델타 2016년 지도입니다.",
+   "fallback_assets": [
+    "F6_maps__fg.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "R10",
+   "type": "fig",
+   "title": "해마다 다른 지도",
+   "subtitle": "결과 · 알래스카 2011–2024 연도별 1 km 지도(같은 색 범위) · 격자 전체 평균과 관측 평균",
+   "assets": [
+    "F7_series_significance__deck_R10.png"
+   ],
+   "caption": "연도별 지도 시리즈와 지역 평균의 연도 변화",
+   "notes": "해마다의 지도를 같은 색 범위로 보면 연도 차이가 드러납니다.",
+   "fallback_assets": [
+    "F7_series_significance__ab.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "C01",
+   "type": "fig",
+   "title": "결론",
+   "subtitle": "같은 셀 · 같은 해 · 같은 분할의 비교 결과 · 학습 지점 25 km 밖 공통 셀 RMSE · 적용 가능 영역과 90% 구간 폭",
+   "assets": [
+    "F7_series_significance__deck_C01.png"
+   ],
+   "box": [
+    "그 해 기후 입력  해가 고루 관측된 레나 델타에서 물리식 오차 {ndforcLePo} cm",
+    "물리 잔차 결합  재보정 Stefan 대비 레나 {ndrefLeblkRo} · 캐나다 {ndrefCablkRo} cm, 새 지역에서 물리식 수준 유지",
+    "기존 제품  레나 델타 전 제품 대비 우세, 알래스카는 학습 지점 밖에서 우세 또는 동급"
+   ],
+   "caption": "학습 지점 25 km 밖 공통 셀 RMSE: 물리 + 잔차 ML 대 최선 제품 · 적용 가능 영역 안쪽 비율과 90% 구간 반폭(지도 2지역)",
+   "notes": "결론 세 가지입니다.",
+   "fallback_assets": [
+    "F7_series_significance__c.png",
+    "F7_series_significance__d.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "C02",
+   "type": "fig",
+   "title": "의의와 활용",
+   "subtitle": "연도가 있는 1 km 지도 · 제품 평가의 공통 기준 · 결합의 조건",
+   "assets": [
+    "F7_series_significance__deck_C02.png"
+   ],
+   "box": [
+    "연도가 있는 1 km 지도  입력 · 라벨 · 채점이 같은 해, 적용 범위와 구간 폭 동봉",
+    "제품 평가의 기준  같은 셀 · 같은 해 · 학습 지점 제외 조건의 공개 비교",
+    "결합의 조건  지형 · 토양 입력, 기후 구간별 이득, 새 지역 전이 안전성"
+   ],
+   "caption": "알래스카 연도별 지도(2012 · 2016 · 2020 · 2024, 같은 색 범위)와 격자 전체 평균의 연도 변화",
+   "notes": "의의는 연도가 있는 지도, 제품 평가 기준, 결합의 조건입니다.",
+   "fallback_assets": [
+    "F1_study_area__a.png",
+    "F7_series_significance__a.png"
+   ],
+   "deck_native": true
+  },
+  {
+   "id": "S99",
+   "type": "references",
+   "title": "참고문헌",
+   "refs": [
+    "Aalto et al. (2018) Geophys. Res. Lett. 45, 4889",
+    "Biskaborn et al. (2019) Nat. Commun. 10, 264",
+    "Boike et al. (2019) Earth Syst. Sci. Data 11, 261 (Samoylov)",
+    "Gautam et al. (2025) Sci. Rep.",
+    "Hjort et al. (2018) Nat. Commun. 9, 5147",
+    "Liu et al. (2024) Environ. Res. Lett. 19",
+    "Meyer & Pebesma (2021) Methods Ecol. Evol. 12, 1620",
+    "Muñoz-Sabater et al. (2021) Earth Syst. Sci. Data 13, 4349 (ERA5-Land)",
+    "Obu et al. (2019) Earth-Sci. Rev. 193, 299 (ESA CCI)",
+    "Ploton et al. (2020) Nat. Commun. 11, 4540",
+    "Stefan (1891); Kudryavtsev et al. (1974)",
+    "Talucci et al. (2025) Earth Syst. Sci. Data 17, 2887",
+    "Wei et al. (2026) Earth Syst. Sci. Data Discuss."
+   ],
+   "notes": "참고문헌입니다."
+  }
+ ]
+}

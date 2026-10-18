@@ -1,0 +1,467 @@
+{
+ "meta": {
+  "version": "v9",
+  "date": "2026-10-15",
+  "title": "물리 잔차 기반 기계학습 워크플로를 활용한 영구동토 활동층 두께 예측과 지역별 편차 분석",
+  "grammar": "V9: 주황 제목 + 회색 부제 + 그림 12 in 폭 + 의미 줄(개조식, 잉크 14 pt) + 필요 시 회색 설명 줄. 강조 상자는 목표 · 결론 · 의의 쪽만. 어절 단위 줄바꿈. 수치는 nMacro 토큰",
+  "basis": [
+   "docs/DESIGN_BRIEF_v9_2026-10-15.md",
+   "docs/numbers_v6.json",
+   "docs/numbers_v9.json"
+  ]
+ },
+ "slides": [
+  {
+   "id": "S01",
+   "type": "cover",
+   "title": "물리 잔차 기반 기계학습 워크플로를 활용한 영구동토 활동층 두께 예측과\n지역별 편차 분석",
+   "subtitle": "연구 결과 종합 보고 · 2026년 10월",
+   "presenter": "백승원",
+   "affiliation": "서울대학교 에너지시스템공학부 석박통합과정 · SAiL",
+   "notes": "연구 결과 종합 보고입니다."
+  },
+  {
+   "id": "B01",
+   "type": "fig",
+   "title": "활동층 두께란",
+   "subtitle": "배경 · 영구동토 위에서 여름에 녹고 겨울에 다시 어는 층의 두께, 한 해 최대 융해 깊이",
+   "assets": [
+    "G0_alt_concept.png"
+   ],
+   "deck_native": true,
+   "meaning": "여름 누적 융해 도일에 따라 해마다 변하는 값, 지반 안정성과 탄소 방출 평가의 기본 변수",
+   "caption": "토양 기둥 개략 · 사모일로프 2015년 계절 안 융해 깊이(실측) · 같은 해 누적 융해 도일(ERA5-Land)"
+  },
+  {
+   "id": "N01",
+   "type": "fig",
+   "title": "활동층 두께 관측 현황",
+   "subtitle": "배경 · 북반구 영구동토 확률과 세 연구 지역 · 관측 연도별 셀-연도 수",
+   "assets": [
+    "F1_study_area__deck_N01.png"
+   ],
+   "deck_native": true,
+   "meaning": "관측의 지역 · 연도 편중: 알래스카 라벨의 {ntopyrshareAk}%가 {ntopyrAk}년, 레나 델타는 {nnyrLe}개 해에 분산",
+   "caption": "영구동토 확률 = ESA CCI 1997–2021 평균 · 셀-연도 = 1 km 셀 × 관측 연도"
+  },
+  {
+   "id": "B02",
+   "type": "fig",
+   "title": "기존 연구의 한계",
+   "subtitle": "문제 · 제품 간 불일치 · 단일 계수 Stefan 식의 체계적 잔차 · 연도 정보 부족",
+   "assets": [
+    "G2_limits.png"
+   ],
+   "deck_native": true,
+   "meaning": "같은 셀에서 제품 간 차이가 크고, Stefan 잔차가 토양 · 지형에 따라 체계적으로 변화",
+   "caption": "잔차 = 관측 − Stefan(재보정) · 토양 유기탄소 · 경사는 지역 안 5개 구간"
+  },
+  {
+   "id": "B03",
+   "type": "fig",
+   "title": "목표 · 개선 · 기대 효과",
+   "subtitle": "연구 목표와 구성",
+   "assets": [
+    "G1_goal_slide.png"
+   ],
+   "deck_native": true,
+   "box": [
+    "관측 연도 기후 입력과 Stefan 기준 잔차 학습으로 세 영구동토 지역의 활동층 두께 예측, 같은 셀 · 같은 해 · 같은 검증 분할 비교로 지역별 편차와 이득 조건 규명"
+   ]
+  },
+  {
+   "id": "B04",
+   "type": "fig",
+   "title": "전체 연구 흐름",
+   "subtitle": "셀 · 연도 자료 · 관측 연도 기후 입력 · 물리 기준(Stefan) · 잔차 학습 · 다섯 가지 검증 분할 · 지도와 제품 비교",
+   "assets": [
+    "G3_flow.png"
+   ],
+   "deck_native": true,
+   "meaning": "모든 방법에 같은 입력 · 같은 분할 · 같은 채점 규칙 적용, Stefan 식이 기준값이자 결합의 골격"
+  },
+  {
+   "id": "B05",
+   "type": "fig",
+   "title": "입력 자료",
+   "subtitle": "관측 연도 기후 입력(ERA5-Land) · 정적 공변량(지형 · 토양) · 위성 입력(MODIS) · 비교 제품",
+   "assets": [
+    "G4_inputs.png"
+   ],
+   "deck_native": true,
+   "meaning": "해마다 바뀌는 입력은 기후뿐, 지형 · 토양은 고정, 제품은 비교 대상으로만 사용",
+   "caption": "모델 입력 23개 = 기후 8 · 지형 6 · 토양 9 · 영구동토 확률은 지도 범위 기준(50% 이상)으로만 사용"
+  },
+  {
+   "id": "N05",
+   "type": "fig",
+   "title": "세 지역의 관측 셀",
+   "subtitle": "자료 · 1 km 관측 셀: 알래스카 {nncellAk} · 레나 델타 {nncellLe} · 캐나다 북서부 {nncellCa}",
+   "assets": [
+    "F1_study_area__deck_N05.png"
+   ],
+   "deck_native": true,
+   "meaning": "관측 지점의 공간 편중, 새 장소에서의 정확도는 0.5° 공간 블록 단위 검증으로 평가"
+  },
+  {
+   "id": "N06",
+   "type": "fig",
+   "title": "관측 연도와 자료 기간",
+   "subtitle": "자료 · 관측 연도별 셀-연도 수와 입력 · 제품의 제공 기간, 분석 기간 2010–2024",
+   "assets": [
+    "F1_study_area__deck_N06.png"
+   ],
+   "deck_native": true,
+   "meaning": "제품마다 제공 기간이 달라 연도 일치 비교는 제품별 공통 연도에서만 가능(Liu 2024는 2020년까지)"
+  },
+  {
+   "id": "N02",
+   "type": "fig",
+   "title": "입력의 시간 정의",
+   "subtitle": "설계 · 관측 연도 기후 입력 = 관측일까지 누적한 그 해의 융해 도일",
+   "assets": [
+    "F2_problem_time__deck_N02.png"
+   ],
+   "deck_native": true,
+   "meaning": "같은 셀도 해마다 융해 도일과 관측일까지의 누적량이 달라 입력과 라벨의 연도 일치 필요"
+  },
+  {
+   "id": "B06",
+   "type": "fig",
+   "title": "Stefan 물리식",
+   "subtitle": "방법 · 활동층 두께는 누적 융해 도일(TDD)의 제곱근에 비례 · 비례 계수 E 는 토양 · 수분이 결정",
+   "assets": [
+    "G5_stefan.png"
+   ],
+   "deck_native": true,
+   "meaning": "지역마다 다른 계수 E 를 학습 겹 라벨로 재보정한 값이 물리 기준, Stefan(재보정)",
+   "caption": "사모일로프 2015 계절 안 실측과 Stefan 곡선"
+  },
+  {
+   "id": "N04",
+   "type": "fig",
+   "title": "다년 셀에서의 Stefan 관계",
+   "subtitle": "설계 · 계절 안 실측(레나 델타)과 다년 관측 셀의 연도 간 편차",
+   "assets": [
+    "F2_problem_time__deck_N04.png"
+   ],
+   "deck_native": true,
+   "meaning": "계절 안 관계는 뚜렷, 같은 셀의 연도 간 편차는 융해 도일로 일부만 설명, 나머지가 잔차 학습 대상"
+  },
+  {
+   "id": "M01",
+   "type": "fig",
+   "title": "방법 구조",
+   "subtitle": "입력(관측 연도 기후 · 정적 공변량) · Stefan · 잔차 학습(gradient boosting) · 연도별 지도",
+   "assets": [
+    "F3_method__deck_M01.png"
+   ],
+   "deck_native": true,
+   "meaning": "Stefan 이 기준값 산출, 학습기는 Stefan 이 맞추지 못한 잔차만 학습",
+   "caption": "관측 ALT 는 학습 단계에서만 사용"
+  },
+  {
+   "id": "M02",
+   "type": "fig",
+   "title": "평가 설계",
+   "subtitle": "다섯 가지 검증 분할 · 블록 부트스트랩 95% 구간 · 같은 셀 · 같은 해 채점",
+   "assets": [
+    "F3_method__deck_M02.png"
+   ],
+   "deck_native": true,
+   "meaning": "주 결과는 공간 블록 분할, 차이 판정은 블록 2,000회 재추출 구간이 0을 제외할 때만",
+   "caption": "무작위 · 공간 블록 · 연도 · 블록 × 연도 · 지역 홀드아웃(색 = 채점 겹)"
+  },
+  {
+   "id": "R01",
+   "type": "fig",
+   "title": "관측 연도 기후 입력의 효과",
+   "subtitle": "결과 · 평년 기후 입력(2011–2024 평균)과 관측 연도 기후 입력(관측일까지 누적)의 공간 블록 RMSE",
+   "assets": [
+    "F4_results_core__deck_R01.png"
+   ],
+   "deck_native": true,
+   "meaning": "관측 연도 입력의 오차 감소: 레나 델타(Stefan {ndforcLePo|pt}, 잔차 결합 {ndforcLeRo|pt} cm) · 캐나다(잔차 결합 {ndforcCaRo|pt} cm), 알래스카 판정 불가",
+   "caption": "빈 원 = 평년 기후 입력 · 채운 원 = 관측 연도 기후 입력 · 연도 일치 입력은 해마다 다른 지도 산출의 전제"
+  },
+  {
+   "id": "R02",
+   "type": "fig",
+   "title": "검증 분할에 따른 오차",
+   "subtitle": "결과 · 무작위 · 공간 블록 · 연도 · 블록 × 연도 · 지역 홀드아웃 분할의 RMSE와 제품 RMSE",
+   "assets": [
+    "F4_results_core__deck_R02.png"
+   ],
+   "deck_native": true,
+   "meaning": "무작위 분할의 직접 ML 성능 과대평가 {noptimLeDz}–{noptimCaDz} cm, 새 지역에서 직접 ML 오차 급증(레나 델타 {ndrefLeregDz|pt} cm)",
+   "caption": "파선 = 그 해 제품 값이 있는 라벨 셀-연도의 제품 RMSE · 지역 홀드아웃은 대상 지역 라벨이 없어 Stefan(재보정) = Stefan(원천 계수)"
+  },
+  {
+   "id": "R03",
+   "type": "fig",
+   "title": "잔차 결합의 이득과 조건",
+   "subtitle": "결과 · Stefan(재보정) 대비 ΔRMSE(음수 = 결합 우세), 공변량 구성과 조건별 3분위",
+   "assets": [
+    "F4_results_core__deck_R03.png"
+   ],
+   "deck_native": true,
+   "meaning": "레나 델타 {ndrefLeblkRo|pt} · 캐나다 {ndrefCablkRo|pt} cm 개선, 알래스카 차이 없음, 이득에는 지형 · 토양 입력 필요"
+  },
+  {
+   "id": "R03e",
+   "type": "fig",
+   "title": "이득 조건의 다각 분석",
+   "subtitle": "결과 · 공변량별 지역 안 3분위의 물리 + 잔차 ML − Stefan(재보정) ΔRMSE, 굵은 테두리 = 95% 구간이 0 제외",
+   "assets": [
+    "F4_results_core__deck_R03e.png"
+   ],
+   "deck_native": true,
+   "meaning": "레나 델타 · 캐나다는 대부분의 조건 3분위에서 이득, Stefan 오차가 큰 3분위일수록 큰 이득, 알래스카는 모든 칸 1 cm 미만",
+   "caption": "유의 칸: 레나 델타 {ngcLesig}/{ngcLecells} · 캐나다 {ngcCasig}/{ngcCacells} · 알래스카 {ngcAksig}/{ngcAkcells} · 레나 델타의 큰 이득 칸은 같은 셀-연도(2012 · 2020년)를 공유"
+  },
+  {
+   "id": "R03s",
+   "type": "fig",
+   "title": "잔차 학습기의 입력 기여",
+   "subtitle": "결과 · 잔차 학습기와 직접 ML 의 SHAP 기여(평균 절댓값), 기후 · 지형 · 토양 비중과 상위 입력",
+   "assets": [
+    "F10_extra__deck_SHAP.png"
+   ],
+   "deck_native": true,
+   "meaning": "잔차 학습기의 주 입력: 레나 델타 지형(고도), 캐나다 토양 유기탄소 · 사면 방향, 알래스카 여름 기온 · 지형",
+   "caption": "지역별 전량 학습 CatBoost · 잔차 = 관측 − Stefan(재보정)"
+  },
+  {
+   "id": "R03b",
+   "type": "fig",
+   "title": "물리 정보의 투입 위치와 학습기",
+   "subtitle": "결과 · 직접 ML · 물리 입력 ML · 물리 유사라벨 · 물리 + 잔차 ML 의 Stefan(재보정) 대비 차이, 학습기 5종",
+   "assets": [
+    "F4_results_core__deck_R03b.png"
+   ],
+   "deck_native": true,
+   "meaning": "지역 안에서 물리 유사라벨 증강은 Stefan 수준, 잔차 결합만 Stefan 을 안정적으로 넘음, 학습기와 무관",
+   "caption": "학습기: CatBoost · 랜덤 포레스트 · MLP · TabM · FT-Transformer"
+  },
+  {
+   "id": "R03c",
+   "type": "fig",
+   "title": "라벨 수에 따른 이득",
+   "subtitle": "결과 · 학습 라벨을 n개로 줄였을 때 Stefan(재보정) 대비 ΔRMSE, 공간 블록 분할",
+   "assets": [
+    "F9_label_ladder__deck_LL.png"
+   ],
+   "deck_native": true,
+   "meaning": "라벨 25–100개에서도 물리 + 잔차 ML 이 Stefan 이상, 직접 ML 은 라벨이 적을 때 알래스카 · 캐나다에서 Stefan 보다 나쁨",
+   "caption": "띠 = 물리 + 잔차 ML 의 95% 블록 구간 · 씨앗 3개 평균"
+  },
+  {
+   "id": "R03d",
+   "type": "fig",
+   "title": "새 지역 전이와 소수 라벨",
+   "subtitle": "결과 · 다른 두 지역으로 학습하고 대상 지역 라벨 n개(0–500)를 더한 경우의 대상 지역 RMSE",
+   "assets": [
+    "F9_label_ladder__deck_TL.png"
+   ],
+   "deck_native": true,
+   "meaning": "대상 라벨 0에서 직접 ML 붕괴(레나 델타 {ntlrmseLeDszero} cm), 라벨 25–50개로 회복, Stefan 기준 결합은 라벨 0에서도 붕괴 없음",
+   "caption": "원천 = 다른 두 지역 전량 · 대상 지역 공간 블록 5겹 채점"
+  },
+  {
+   "id": "EXT",
+   "type": "fig",
+   "title": "외부 지역 무라벨 시험",
+   "subtitle": "결과 · 세 지역으로 학습한 모델의 CALM 외부 지점 예측({nextcells}개 셀, {nextcy} 셀-연도, 2010–2024)",
+   "assets": [
+    "F10_extra__deck_EXT.png"
+   ],
+   "deck_native": true,
+   "meaning": "활동층이 깊은 서 · 중부 시베리아 · 유럽 러시아 · 스발바르에서 오차 큼, 인근 지점으로 Stefan 재보정 시 감소",
+   "caption": "Wei 2026 · Liu 2024는 이 지점들을 학습에 사용 · 활동층 약 6 m 시추공 1곳 제외 · 괄호 = 셀-연도 수"
+  },
+  {
+   "id": "R04",
+   "type": "fig",
+   "title": "기존 제품과 같은 셀 · 같은 해 비교",
+   "subtitle": "결과 · 모든 비교 제품 값이 있는 셀-연도의 RMSE, 빈 표지 = 제품 학습 지점 25 km 밖",
+   "assets": [
+    "F5_products_years__deck_R04.png"
+   ],
+   "deck_native": true,
+   "meaning": "레나 델타는 모든 제품보다 낮은 오차({nccLeRoall} 대 {nccLeCcifiveall}–{nccLeWeiall} cm), 알래스카 · 캐나다는 제품과 동등",
+   "caption": "우리 방법 = 공간 블록 검증 예측 · 제품 = 같은 해 값 · 레나 델타 셀과 Wei 학습 지점 거리 중앙값 {ndistweiLemed} km"
+  },
+  {
+   "id": "PA",
+   "type": "fig",
+   "title": "제품 기준값과 Stefan 기준값의 잔차 결합",
+   "subtitle": "결과 · 같은 지역 라벨로 Wei 2026을 재보정 · 잔차 학습한 결과와 Stefan 기준 결합, 같은 셀-연도",
+   "assets": [
+    "F10_extra__deck_PA.png"
+   ],
+   "deck_native": true,
+   "meaning": "레나 델타는 제품을 같은 라벨로 보정해도 Stefan 기준 결합이 우세({npadLeRoRp|pt} cm), 알래스카 · 캐나다는 차이 없음",
+   "caption": "Liu 2024 기준에서도 같은 방향(레나 델타 {npadLeRoRpLiu|pt} cm) · 레나 라벨 없이도 Stefan(원천 계수)이 Wei 대비 {ntlvpLePzWeizero|pt} cm"
+  },
+  {
+   "id": "R05",
+   "type": "fig",
+   "title": "연도별 평가",
+   "subtitle": "결과 · 관측 연도별 RMSE, 물리 + 잔차 ML · Stefan(재보정) · Wei 2026 · Liu 2024, 같은 셀-연도",
+   "assets": [
+    "F5_products_years__deck_R05.png"
+   ],
+   "deck_native": true,
+   "meaning": "물리 + 잔차 ML 우위 연도: 레나 델타 {nywLeRoWeiwin}/{nywLeRoWein}, 알래스카 Wei 대비 {nywAkRoWeiwin}/{nywAkRoWein} · Stefan 대비 {nywAkRoPowin}/{nywAkRoPon}, 캐나다 Stefan 대비 {nywCaRoPowin}/{nywCaRoPon}",
+   "caption": "해마다 세 계열(물리 + 잔차 ML · Stefan · Wei)이 모두 값을 가진 셀-연도, Liu 는 2020년까지 · 셀-연도 30개 이상인 해 · 아래 막대 = 셀-연도 수"
+  },
+  {
+   "id": "R06",
+   "type": "fig",
+   "title": "장기 관측 지점의 연도별 시계열",
+   "subtitle": "결과 · 알래스카 · 레나 델타 최장 기록 지점의 관측 · Stefan · 물리 + 잔차 ML · 제품, 2010–2024",
+   "assets": [
+    "F5_products_years__deck_R06.png"
+   ],
+   "deck_native": true,
+   "meaning": "관측일 기준 예측이 관측과 같은 날의 비교 대상, 계절 말 예측은 그 해 최대 융해 깊이 추정",
+   "caption": "관측일 기준 = 관측일까지 누적한 그 해 융해 도일로 계산 · 계절 말 = 그 해 전체 누적 융해 도일로 계산"
+  },
+  {
+   "id": "R07",
+   "type": "fig",
+   "title": "연도를 명시한 알래스카 1 km 지도",
+   "subtitle": "결과 · 2011–2024 평균, 1 km 확대 2곳, 2014 · 2022년의 평균 대비 편차(그 해 ERA5-Land 기후 입력)",
+   "assets": [
+    "F6_maps__deck_R07.png"
+   ],
+   "deck_native": true,
+   "meaning": "모든 지도에 입력 기후의 연도 표기, 2014년 북부 얕음 · 2022년 내륙 깊음",
+   "caption": "표시용 250 m 보간 · 흐림 = 적용 가능 영역 밖 · 점 = 관측 셀"
+  },
+  {
+   "id": "R08",
+   "type": "fig",
+   "title": "1 km 상세와 적용 가능 영역",
+   "subtitle": "결과 · North Slope · Interior 확대(원 = 관측 셀) · 적용 가능 영역 안쪽 {naoaAk}%",
+   "assets": [
+    "F6_maps__deck_R08.png"
+   ],
+   "deck_native": true,
+   "meaning": "지형을 따라 두께 변화, 학습 자료와 공변량 거리가 먼 셀은 적용 범위 밖으로 표시",
+   "caption": "확대 창은 1 km 셀 그대로"
+  },
+  {
+   "id": "R09",
+   "type": "fig",
+   "title": "레나 델타 2016년 지도",
+   "subtitle": "결과 · 1 km 지도와 사모일로프-쿠룽나흐 확대 · 적용 가능 영역 안쪽 {naoaLe}%",
+   "assets": [
+    "F6_maps__deck_R09.png"
+   ],
+   "deck_native": true,
+   "meaning": "섬과 수로를 따라 두께 변화, 장기 관측 지점 주변 1 km 셀 차이 확인",
+   "caption": "표시용 250 m 보간 · 원 = 관측 셀"
+  },
+  {
+   "id": "R11",
+   "type": "fig",
+   "title": "제품 지도 · 우리 지도 · 관측(알래스카 2014)",
+   "subtitle": "결과 · 같은 색 범위의 세 지도와 관측 셀에서의 잔차",
+   "assets": [
+    "F8_product_maps__deck_R11.png"
+   ],
+   "deck_native": true,
+   "meaning": "관측 셀 RMSE 비슷(우리 {nfeAkOurs} · Wei {nfeAkWei} · Liu {nfeAkLiu} cm), 큰 지도 차이는 산지와 적용 범위 밖에 집중",
+   "caption": "회색 = 지도 범위 밖(영구동토 확률 50% 미만, 남서 알래스카 포함) · 북부 산지(고도 600 m 이상)에서 Wei {nmapAkFootMtnWei} · Liu {nmapAkFootMtnLiu} cm 더 깊음"
+  },
+  {
+   "id": "R12",
+   "type": "fig",
+   "title": "제품 지도 · 우리 지도 · 관측(레나 델타 2016)",
+   "subtitle": "결과 · 같은 색 범위의 세 지도와 관측 셀에서의 잔차",
+   "assets": [
+    "F8_product_maps__deck_R12.png"
+   ],
+   "deck_native": true,
+   "meaning": "관측 셀 RMSE 우리 {nfeLeOurs} · Wei {nfeLeWei} · Liu {nfeLeLiu} cm, 두 제품 모두 레나 델타 셀을 과대 추정",
+   "caption": "Wei 학습 지점에서 레나 델타 셀까지 거리 중앙값 {ndistweiLemed} km · 북부 셀 평균 편향 Wei {nbiasLeNorthWei} · Liu {nbiasLeNorthLiu} cm"
+  },
+  {
+   "id": "R13",
+   "type": "fig",
+   "title": "물리 잔차 보정량 지도",
+   "subtitle": "결과 · 물리 + 잔차 ML − Stefan(재보정), 알래스카 2011–2024 평균 · 레나 델타 2016",
+   "assets": [
+    "F8_product_maps__deck_R13.png"
+   ],
+   "deck_native": true,
+   "meaning": "학습이 Stefan 을 고치는 양은 대체로 ±10 cm, 산지 · 북사면에서 음수, 델타 동부 저지에서 양수",
+   "caption": "발산 색 = 보정량(cm), 0 중심"
+  },
+  {
+   "id": "R10",
+   "type": "fig",
+   "title": "해마다 다른 지도",
+   "subtitle": "결과 · 알래스카 연도별 1 km 지도의 2011–2024 평균 대비 편차와 지역 평균 편차",
+   "assets": [
+    "F7_series_significance__deck_R10.png"
+   ],
+   "deck_native": true,
+   "meaning": "해마다 다른 공간 편차: 2019년 내륙 깊음 · 2012–2013년 북부 · 서부 얕음, 예측 변동 폭은 관측보다 작음",
+   "caption": "편차 = 그 해 − 평균(cm), 모든 해 같은 색 범위 ±15 cm · 빗금 = 적용 가능 영역 밖"
+  },
+  {
+   "id": "C01",
+   "type": "fig",
+   "title": "결론",
+   "subtitle": "같은 셀 · 같은 해 · 같은 분할의 비교 결과",
+   "assets": [
+    "G6_conclusion.png"
+   ],
+   "deck_native": true,
+   "box": [
+    "관측 연도 기후 입력과 Stefan 기준 잔차 학습으로 레나 델타 · 캐나다 오차 감소({ndrefLeblkRo|pt} · {ndrefCablkRo|pt} cm), 레나 델타는 같은 셀 · 같은 해 모든 제품보다 낮은 오차({nccLeRoall} 대 {nccLeCcifiveall}–{nccLeWeiall} cm)",
+    "새 지역 전이에서 직접 ML 의 오차 급증(레나 델타 {ndrefLeregDz|pt} cm)을 Stefan 기준 결합이 억제({ndrefLeregRo|pt} cm)",
+    "알래스카는 제품과 동등(제품도 같은 관측으로 학습), 활동층이 깊은 외부 지역은 인근 관측으로 Stefan 재보정 필요"
+   ]
+  },
+  {
+   "id": "C02",
+   "type": "fig",
+   "title": "의의와 활용",
+   "subtitle": "방법과 결과의 활용",
+   "assets": [
+    "G7_significance.png"
+   ],
+   "deck_native": true,
+   "box": [
+    "새 지역 적용: 라벨 없는 직접 ML 은 지역에 따라 실패(레나 델타 {ntlrmseLeDszero} cm), Stefan 기준 결합은 붕괴 없음, 대상 지역 라벨 25개부터 지역별 최적 방법 선택 가능",
+    "관측 계획: 라벨 수에 따른 오차 곡선으로 지역별 필요 관측 수 산정, 연도별 지도로 이상 기후 해의 활동층 변화 감시"
+   ],
+   "caption": "원천 = 다른 두 지역 전량 · 캐나다는 직접 ML(원천 + n)이 모든 n 에서 최저 오차"
+  },
+  {
+   "id": "S99",
+   "type": "references",
+   "title": "참고문헌",
+   "refs": [
+    "Aalto et al. (2018) Geophys. Res. Lett. 45, 4889",
+    "Biskaborn et al. (2019) Nat. Commun. 10, 264",
+    "Boike et al. (2019) Earth Syst. Sci. Data 11, 261 (Samoylov)",
+    "Gautam et al. (2025) Sci. Rep.",
+    "Hjort et al. (2018) Nat. Commun. 9, 5147",
+    "Liu et al. (2024) Environ. Res. Lett. 19",
+    "Lundberg & Lee (2017) NeurIPS 30 (SHAP)",
+    "Meyer & Pebesma (2021) Methods Ecol. Evol. 12, 1620",
+    "Muñoz-Sabater et al. (2021) Earth Syst. Sci. Data 13, 4349 (ERA5-Land)",
+    "Obu et al. (2019) Earth-Sci. Rev. 193, 299 (ESA CCI)",
+    "Ploton et al. (2020) Nat. Commun. 11, 4540",
+    "Stefan (1891); Kudryavtsev et al. (1974)",
+    "Streletskiy et al. (2025) PANGAEA 972777 (CALM)",
+    "Talucci et al. (2025) Earth Syst. Sci. Data 17, 2887",
+    "Wei et al. (2026) Earth Syst. Sci. Data Discuss."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+# v9: 추가 실험(제품 기반 잔차 결합 PA, 외부 지역 무라벨 시험 EXT, SHAP). 2026-10-15. 묶음: bash scripts/rescale/make_payload_v9.sh
+name: polar-v9-extra
+hardware:
+  core_type: elm
+  cores_per_slot: 96
+  slots: 1
+  walltime_hours: 3
+max_cost_usd: 11
+low_priority: false
+analysis:
+  code: pytorch
+  version: "2.4.1"
+code_paths:
+  - work/v9_payload.tar.gz
+dataset_file_ids: []
+command: |
+  [ -f v9_payload.tar.gz ] && tar xzf v9_payload.tar.gz; bash scripts/rescale/run_v9.sh
+results_dir: results/rescale_v9_extra

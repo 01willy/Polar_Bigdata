@@ -1,0 +1,18 @@
+# v6b: MODIS 2010–2024 입력 사다리(관측일 정합). 2026-10-14. 묶음: bash scripts/rescale/make_payload_v6b.sh
+name: polar-v6b-modis
+hardware:
+  core_type: elm
+  cores_per_slot: 96
+  slots: 1
+  walltime_hours: 1.5
+max_cost_usd: 6
+low_priority: false
+analysis:
+  code: pytorch
+  version: "2.4.1"
+code_paths:
+  - work/v6b_payload.tar.gz
+dataset_file_ids: []
+command: |
+  [ -f v6b_payload.tar.gz ] && tar xzf v6b_payload.tar.gz; V6_JOB=modis V6_BUDGET_MIN=80 bash scripts/rescale/run_v6b.sh
+results_dir: results/rescale_v6_modis

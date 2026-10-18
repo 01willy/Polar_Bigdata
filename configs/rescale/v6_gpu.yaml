@@ -1,0 +1,18 @@
+# v6 신경망 학습기(MLP·TabM·FT-T), 관측일 정합, F8TS·F8TS_M, 블록·연도 분할. A100 1장(mallorn-1-24core, 0.2199 달러/코어·시간 × 24 = 5.28 달러/시간). 상한 2 h.
+name: polar-v6-gpu
+hardware:
+  core_type: mallorn-1-24core
+  cores_per_slot: 24
+  slots: 1
+  walltime_hours: 2
+max_cost_usd: 11
+low_priority: false
+analysis:
+  code: pytorch
+  version: "2.4.1"
+code_paths:
+  - work/v6_payload.tar.gz
+dataset_file_ids: []
+command: |
+  [ -f v6_payload.tar.gz ] && tar xzf v6_payload.tar.gz; V6_JOB=gpu V6_BUDGET_MIN=105 bash scripts/rescale/run_v6.sh
+results_dir: results/rescale_v6_gpu

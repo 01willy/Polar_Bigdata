@@ -28,6 +28,7 @@
 """
 import argparse
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -1701,8 +1702,13 @@ def export_pdf_no_autospace(pptx_path, pdf_dir):
     tmp = Path(tempfile.mkdtemp(prefix="prev_", dir=str(PREV_DIR)))
     prof = f"file://{tmp}/lo_profile"
     soff = shutil.which("soffice")
-    subprocess.run([soff, f"-env:UserInstallation={prof}", "--headless", "--convert-to", "odp", "--outdir", str(tmp),
-                    str(pptx_path)], check=True, capture_output=True, timeout=600)
+    # GPU 접근 차단(2026-10-14 사용자 지적, paper_report_lib.export_pdf 와 같은 보호): soffice 가 OpenCL/GL 초기화로
+    # nvidia-smi 에 잡힌다. CUDA 가시성 0, OpenCL·GL 끔, 순수 소프트웨어 VCL, nice 10.
+    env = dict(os.environ, OMP_NUM_THREADS="2", CUDA_VISIBLE_DEVICES="", SAL_DISABLE_OPENCL="1", SAL_DISABLEGL="1",
+               SAL_USE_VCLPLUGIN="svp", SAL_NOOPENGL="1")
+    pre = ["nice", "-n", "10"]
+    subprocess.run(pre + [soff, f"-env:UserInstallation={prof}", "--headless", "--convert-to", "odp", "--outdir", str(tmp),
+                          str(pptx_path)], check=True, capture_output=True, timeout=600, env=env)
     odp = tmp / (pptx_path.stem + ".odp")
     patched = tmp / (pptx_path.stem + "_na.odp")
     with zipfile.ZipFile(odp) as zin, zipfile.ZipFile(patched, "w") as zout:
@@ -1715,8 +1721,8 @@ def export_pdf_no_autospace(pptx_path, pdf_dir):
                 data = s.encode("utf-8")
             ct = zipfile.ZIP_STORED if item.filename == "mimetype" else zipfile.ZIP_DEFLATED
             zout.writestr(item, data, compress_type=ct)
-    subprocess.run([soff, f"-env:UserInstallation={prof}", "--headless", "--convert-to", "pdf", "--outdir", str(tmp),
-                    str(patched)], check=True, capture_output=True, timeout=600)
+    subprocess.run(pre + [soff, f"-env:UserInstallation={prof}", "--headless", "--convert-to", "pdf", "--outdir", str(tmp),
+                          str(patched)], check=True, capture_output=True, timeout=600, env=env)
     pdf = pdf_dir / "preview_evidence.pdf"
     shutil.move(str(tmp / (patched.stem + ".pdf")), pdf)
     shutil.rmtree(tmp, ignore_errors=True)

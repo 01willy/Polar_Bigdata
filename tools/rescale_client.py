@@ -447,6 +447,8 @@ def cmd_fetch(client, args):
         return
     dest_dir = Path(args.dest)
     total = 0
+    skip = tuple(s for s in (args.skip or "").split(",") if s)
+    files = [f for f in files if not any((f.get("relativePath") or f.get("name") or "").startswith(s) for s in skip)]
     for f in files:
         rel = f.get("relativePath") or f.get("name")
         n = client.download(f["id"], dest_dir / rel)
@@ -557,6 +559,7 @@ def main():
     p = sub.add_parser("fetch", help="download a job's output files")
     p.add_argument("job_id")
     p.add_argument("--dest", default="results/rescale")
+    p.add_argument("--skip", default=".pydeps", help="comma-separated path prefixes to skip (default: the node's pip --target folder)")
     p.set_defaults(func=cmd_fetch)
 
     args = ap.parse_args()
