@@ -8,7 +8,8 @@
 - **구성**: Introduction → Data and methods(식 (1)–(9), Code availability) → Results(6절) → Discussion(물리 기준과 전이성 · 선행 연구와의 비교 · 새 지역 적용 절차 · 한계) → Conclusions → Data availability. 그림 7 + 표 1 = 8, 처음 인용 위치에 삽입(첫 제출 허용 확인).
 - **규정**: 제목 14단어, 초록 199단어, 본문 약 3,800단어(한도 4,500), 그림 설명 350단어 이하. LLM 사용 진술은 사용자 요청으로 뺐으나 Sci Rep 은 Methods 기록을 요구하므로 제출 전 다시 결정.
 - **색**: color.paper_v11(덱 색 체계의 채도 낮춘 판), POLAR_PALETTE=paper11.
-- **남은 것**: 저자 결정 자리표시(교신 저자, 공저자, 감사의 글, 저장소 DOI, LLM 진술), 사용자 검토, 커밋 승인.
+- **커밋 · 인계(10-18)**: 10-08 이후 분량을 8개 커밋으로 main 에 push(5bf8c9a … dbcb552), GPT 인계 `gpt/handoff/20261018_1904-reset-cellyear-paper-v11.md`(ec256da). 큰 실행 표 · 중간 그림 · 빌드 산출은 .gitignore 로 로컬 보관.
+- **남은 것**: 저자 결정 자리표시(교신 저자, 공저자, 감사의 글, 저장소 DOI, LLM 진술), 사용자 · 극지연 검토, 선택 보강 실험(알래스카 연도 균형, 캐나다 라벨 선택; Rescale 전용).
 
 ## ★ 이전(2026-10-16 오후, v11 로 대체): 논문 초안 v10: 영문 · 국문 원고 + 보충 자료(Sci Rep 양식), 논문용 절제 색 그림
 
