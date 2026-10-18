@@ -1,0 +1,400 @@
+{
+ "stem": "G1_goal",
+ "size_in": [
+  12.0,
+  4.9
+ ],
+ "sources": {
+  "labels": "data/processed/v5/labels_cell_year_v5.csv",
+  "map_2014": "data/processed/v5/maps/Alaska/pred_2014.csv.gz",
+  "map_2018": "data/processed/v5/maps/Alaska/pred_2018.csv.gz",
+  "map_2022": "data/processed/v5/maps/Alaska/pred_2022.csv.gz",
+  "products": "data/processed/v5/products_cell_year_v5.csv",
+  "forcing": "data/processed/v5/forcing_year.csv",
+  "forcing_clim": "data/processed/v5/forcing_clim.csv",
+  "common_cells": "data/processed/v5/runs/core_v6/common_cells_eval.csv"
+ },
+ "choices": {
+  "product_hex": {
+   "Wei": "#3B8B4F",
+   "Liu": "#C9506A",
+   "CCI5": "#B8975A"
+  },
+  "design_notes": {
+   "x_labels": "해·월·지역 눈금은 그 자체로 읽히므로 x축 제목을 두지 않는다(세로 여유). TDD 축 눈금 = 1·4·7·10월 1일",
+   "tdd_panel": "같은 셀 2014 일 누적 TDD 곡선 + 관측일 표식(제안 방법 색) · 안내선 + 평년 연 TDD(2011–2024 평균, forcing_clim clim1124_tdd) 파선. 라벨: 표식 '관측 연도 기후 입력', 파선 '평년 기후 입력', 곡선 '2014'",
+   "lena_panel": "최장 기록 레나 델타 셀: 관측 ALT(점) + 제품 3종(Wei 2026·Liu 2024·ESA CCI v5). 범례 아래 끝이 자료보다 위(자동 y 상한)",
+   "architecture": "Stefan 블록(E√TDD, 초록) ⊕(제안 방법 색) 잔차 ML 블록(트리 3개, 노랑) — 산출 지도 썸네일(알래스카 2014 R1). 연결선은 화살촉 없음",
+   "maps": "알래스카 2014·2018·2022 R1(같은 색표·범위), 경위도 눈금 글자·관측 점 없음, 축척 막대는 첫 지도 틀 안",
+   "bars": "x 눈금 = 지역 이름, 제품 이름은 제품 막대 위(제품 색), 주황 막대 열쇠는 축 안 왼쪽 위. Δ 글줄 없음",
+   "margins": "위 0.11 in · 아래 0.08 in · 옆 0.10 in",
+   "fonts": "축 제목 14 pt, 설명·직접 라벨·범례·한글 눈금 13 pt, 숫자 눈금 12 pt, 열 머리 15 pt 굵게"
+  },
+  "alaska_map_range_cm": [
+   40.0,
+   90.0
+  ],
+  "alaska_cell_years_by_year": {
+   "2010": 60,
+   "2011": 56,
+   "2012": 55,
+   "2013": 1343,
+   "2014": 7861,
+   "2015": 171,
+   "2016": 2237,
+   "2017": 877,
+   "2018": 1526,
+   "2019": 450,
+   "2020": 149,
+   "2021": 325,
+   "2022": 371,
+   "2023": 29,
+   "2024": 30
+  },
+  "lena_long_cell": {
+   "loc_id": 16271,
+   "n_years": 6,
+   "lat": 72.345,
+   "lon": 126.173,
+   "years": [
+    2013,
+    2014,
+    2018,
+    2019,
+    2020,
+    2021
+   ],
+   "alt_cm": [
+    22.5,
+    30.3,
+    50.4,
+    46.8,
+    57.0,
+    46.0
+   ],
+   "obs_range_cm": [
+    22.5,
+    57.0
+   ],
+   "products": {
+    "wei": {
+     "2010": 70.6,
+     "2011": 71.0,
+     "2012": 70.1,
+     "2013": 69.3,
+     "2014": 70.8,
+     "2015": 69.0,
+     "2016": 68.4,
+     "2017": 68.4,
+     "2018": 73.5,
+     "2019": 71.2,
+     "2020": 76.3,
+     "2021": 81.3,
+     "2022": 73.9,
+     "2023": 125.6,
+     "2024": 84.4
+    },
+    "liu": {
+     "2010": 58.1,
+     "2011": 68.3,
+     "2012": 65.7,
+     "2013": 57.6,
+     "2014": 59.8,
+     "2015": 63.6,
+     "2016": 58.2,
+     "2017": 57.5,
+     "2018": 61.6,
+     "2019": 62.2,
+     "2020": 75.0
+    },
+    "cci5y": {
+     "2010": 50.0,
+     "2011": 50.0,
+     "2012": 50.0,
+     "2013": 40.0,
+     "2014": 50.0,
+     "2015": 40.0,
+     "2016": 40.0,
+     "2017": 40.0,
+     "2018": 50.0,
+     "2019": 50.0,
+     "2020": 50.0,
+     "2021": 60.0,
+     "2022": 30.0,
+     "2023": 60.0
+    }
+   }
+  },
+  "lena_panel_ytop_cm": 175.0,
+  "tdd_curve": {
+   "loc_id": 317,
+   "year": 2014,
+   "obs_doy": 224.0,
+   "tdd_obs": 182.2,
+   "tdd_year": 273.7,
+   "clim_tdd_2011_2024": 441.6,
+   "n_cells_same_doy": 5875,
+   "lat": 71.274,
+   "lon": -156.632,
+   "band_years": [
+    2011,
+    2024
+   ],
+   "band_n_years": 14,
+   "band_year_end": {
+    "min": [
+     2014,
+     273.7
+    ],
+    "max": [
+     2019,
+     641.2
+    ]
+   }
+  },
+  "tdd_panel_in": {
+   "ytop": 532.7,
+   "labels": [
+    "Year-specific climate input (marker)",
+    "Mean climate input (2011–2024) (dashed)",
+    "2014 (curve)"
+   ],
+   "month_ticks_doy": [
+    0.0,
+    90.0,
+    181.0,
+    273.0
+   ]
+  },
+  "architecture_glyph_in": {
+   "row_x0": 4.07,
+   "row_w": 3.76,
+   "block_h": 0.72,
+   "block_y": 0.823,
+   "thumb_xywh": [
+    7.03,
+    0.847,
+    0.8,
+    0.674
+   ],
+   "trees": 3,
+   "connector": "small flow chevron (no arrow line, no arrowhead)"
+  },
+  "alaska_maps_in": {
+   "w": 0.97,
+   "h": 0.817,
+   "bottom": 2.833
+  },
+  "rmse_mask25": [
+   {
+    "region": "Alaska",
+    "ours": 15.335157320001455,
+    "n": 4229,
+    "product": "Liu 2024",
+    "product_key": "Liu",
+    "product_hex": "#C9506A",
+    "prod_rmse": 15.21218033585683,
+    "delta_ours_minus_product": 0.12
+   },
+   {
+    "region": "Lena",
+    "ours": 21.154837836282077,
+    "n": 449,
+    "product": "ESA CCI v5",
+    "product_key": "CCI5",
+    "product_hex": "#B8975A",
+    "prod_rmse": 28.448138254653887,
+    "delta_ours_minus_product": -7.29
+   },
+   {
+    "region": "Canada",
+    "ours": 23.618714371493976,
+    "n": 489,
+    "product": "Wei 2026",
+    "product_key": "Wei",
+    "product_hex": "#3B8B4F",
+    "prod_rmse": 27.357492796289996,
+    "delta_ours_minus_product": -3.74
+   }
+  ],
+  "rmse_bars": {
+   "xlim": [
+    0,
+    50.0
+   ],
+   "orientation": "horizontal",
+   "labels": "bar-end names; first orange bar labelled '물리 + 잔차 ML'",
+   "unit": "caption 'RMSE (cm)'"
+  }
+ },
+ "layout_in": {
+  "Y_HEAD": 4.6933,
+  "Y_HEADRULE": 4.5467,
+  "Y_CAP1": 4.3917,
+  "AX1_T": 4.1567,
+  "AX1_B": 2.696,
+  "XT1_B": 2.4566,
+  "Y_CAP2": 2.2016,
+  "AX2_T": 1.9666,
+  "AX2_B": 0.3194,
+  "XT2_B": 0.08,
+  "xt_zone": 0.2394,
+  "h_cap": 0.17,
+  "h_tick": 0.16,
+  "h_tick_ko": 0.17,
+  "CAP2_B": 2.1166,
+  "CAP1_B": 4.3067,
+  "m_bot": 0.08,
+  "m_top": 0.11,
+  "ax1_h": 1.4607,
+  "ax2_h": 1.6471,
+  "x_off": 0.898
+ },
+ "qa": {
+  "min_font_pt": 12.0,
+  "texts": 64,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "text_line": [],
+  "text_axes": [],
+  "text_patch": [],
+  "png_px": [
+   3600,
+   1470
+  ],
+  "png_px_ok": true,
+  "ink_margin_px": {
+   "top": 33,
+   "bottom": 36,
+   "left": 30,
+   "right": 19
+  },
+  "ink_margin_in": {
+   "top": 0.11,
+   "bottom": 0.12,
+   "left": 0.1,
+   "right": 0.063
+  },
+  "non_tick_text_below_13pt": [],
+  "korean_text_below_13pt": [],
+  "ylabel_position": {
+   "Cell-years": {
+    "x0_in": 0.327,
+    "column_left_in": 0.1,
+    "inside_column": true,
+    "top_in": 3.852,
+    "bottom_in": 3.001
+   },
+   "ALT (cm)": {
+    "x0_in": 0.423,
+    "column_left_in": 0.1,
+    "inside_column": true,
+    "top_in": 1.542,
+    "bottom_in": 0.744
+   },
+   "Cumulative TDD\n(°C·d)": {
+    "x0_in": 4.218,
+    "column_left_in": 4.1,
+    "inside_column": true,
+    "top_in": 4.123,
+    "bottom_in": 2.73
+   }
+  },
+  "ylabel_rotation": {
+   "Cell-years": {
+    "shape_upright": [
+     51,
+     232
+    ],
+    "shape_rotated_back": [
+     51,
+     232
+    ],
+    "mean_abs_diff": 0.44,
+    "frac_pixels_differ": 0.0,
+    "ok": true
+   },
+   "ALT (cm)": {
+    "shape_upright": [
+     51,
+     217
+    ],
+    "shape_rotated_back": [
+     51,
+     217
+    ],
+    "mean_abs_diff": 0.38,
+    "frac_pixels_differ": 0.0,
+    "ok": true
+   },
+   "Cumulative TDD": {
+    "shape_upright": [
+     41,
+     384
+    ],
+    "shape_rotated_back": [
+     41,
+     384
+    ],
+    "mean_abs_diff": 0.52,
+    "frac_pixels_differ": 0.0,
+    "ok": true
+   },
+   "(°C·d)": {
+    "shape_upright": [
+     51,
+     143
+    ],
+    "shape_rotated_back": [
+     51,
+     143
+    ],
+    "mean_abs_diff": 0.37,
+    "frac_pixels_differ": 0.0,
+    "ok": true
+   }
+  },
+  "bare_sqrt_glyph_texts": [],
+  "xticks1_to_caption2_gap_in": 0.17,
+  "ylabel_top_to_caption_gap_in": {
+   "row1": 0.184,
+   "row2": 0.575
+  },
+  "glyph_gaps_in": {
+   "caption_to_block": 0.573,
+   "thumb_label_bottom": 0.617
+  },
+  "tdd_labels": {
+   "평년 기후 입력": {
+    "curve": false,
+    "clim_line": false,
+    "guide": false,
+    "obs_guide_vertical": false,
+    "top_gap_in": 0.05
+   },
+   "관측 연도 기후 입력": {
+    "curve": false,
+    "clim_line": false,
+    "guide": false,
+    "obs_guide_vertical": false,
+    "top_gap_in": 0.578
+   },
+   "2014": {
+    "curve": false,
+    "clim_line": false,
+    "guide": false,
+    "obs_guide_vertical": false,
+    "top_gap_in": 0.74
+   }
+  },
+  "lena_legend_data_inside": 0,
+  "lena_legend_left_gap_in": 0.11,
+  "bar_labels_right_margin_in": 0.086,
+  "legend6_bottom_to_alaska_items_in": 0.142,
+  "legend6_bottom_to_lena_label_in": 0.792,
+  "scalebar_inside_map": true,
+  "cbar_label_to_ticks_gap_in": 0.136,
+  "top_margin_in": 0.11
+ }
+}

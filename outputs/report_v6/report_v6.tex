@@ -1,0 +1,92 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,top=20mm,bottom=20mm,left=18mm,right=18mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\xeCJKsetup{CJKspace=true}
+\usepackage{graphicx,booktabs,array,float,caption,titlesec,enumitem,longtable}
+\usepackage[hidelinks]{hyperref}
+\setmainfont{Noto Serif CJK KR}[UprightFont={Noto Serif CJK KR}, BoldFont={Noto Serif CJK KR Bold}, AutoFakeSlant=0.18]
+\setCJKmainfont{Noto Serif CJK KR}[UprightFont={Noto Serif CJK KR}, BoldFont={Noto Serif CJK KR Bold}, AutoFakeSlant=0.18]
+\newfontfamily\headfont{Pretendard SemiBold}[BoldFont={Pretendard Bold}]
+\newCJKfontfamily\cjkhead{Pretendard SemiBold}[BoldFont={Pretendard Bold}]
+\setlength{\parindent}{0em}\setlength{\parskip}{0.45em}\linespread{1.08}
+\titleformat{\section}{\headfont\cjkhead\large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\headfont\cjkhead\normalsize\bfseries}{\thesubsection}{0.55em}{}
+\titlespacing*{\section}{0pt}{1.6ex}{0.6ex}\titlespacing*{\subsection}{0pt}{1.0ex}{0.3ex}
+\renewcommand{\figurename}{그림}\renewcommand{\tablename}{표}
+\captionsetup{font=small,labelfont=bf,labelsep=period,justification=justified,singlelinecheck=false}
+\graphicspath{{../figures/paper/v6/}{../../deck/assets/v6/method/}}
+\newcommand{\fig}[3]{\begin{figure}[H]\centering\IfFileExists{../figures/paper/v6/#1}{\includegraphics[width=#2\textwidth]{#1}}{\IfFileExists{../../deck/assets/v6/method/#1}{\includegraphics[width=#2\textwidth]{#1}}{\fbox{\parbox[c][40mm][c]{0.9\textwidth}{\centering 그림 대기: \detokenize{#1}}}}}\caption{#3}\end{figure}}
+\input{../../paper/manuscript/en_v6/numbers.tex}
+\begin{document}
+{\headfont\cjkhead\LARGE\bfseries 해마다 달라지는 영구동토 활동층 두께의 1 km 예측}\\[0.3em]
+{\large 물리식과 기계학습의 결합을 세 지역 · 같은 셀 · 같은 해에서 기존 지도 제품과 비교한 연구 결과 보고}\\[0.2em]
+\parbox{\textwidth}{\raggedright 2026년 10월 14일 · 백승원 · 수치 원천 \texttt{data/processed/v5/runs/\nrunTag} (주 강제력 \texttt{\nforcingMain}), 매크로 \texttt{paper/manuscript/en\_v6/numbers.tex} · 원고 초안 \texttt{paper/manuscript/en\_v6/main.pdf} · 덱 \texttt{deck/render/v6\_report.pdf}}
+
+\section{한 쪽 요약}
+활동층 두께(ALT)는 여름에 녹는 땅의 깊이로 해마다 달라진다. 기존 1 km 지도 제품은 여러 해 평균 기후로 지점의 다년 평균 두께를 맞추므로 어느 해의 지도인지 말할 수 없고, 제품마다 검증 조건이 달라 서로 비교할 수 없다. 이 연구는 분석 단위를 \emph{셀-연도}(1 km 셀 × 관측 연도)로 정하고, 기후 입력을 관측한 그 해의 ERA5-Land 융해 도일을 관측일까지 누적한 값으로 두어, 물리식(Stefan), 직접 학습, 물리 입력 학습, 물리 유사라벨 증강, 물리 잔차 결합을 같은 입력 · 같은 분할 · 같은 채점에서 비교하고 기존 제품 6종과 같은 셀 · 같은 해에서 견주었다. 자료는 알래스카 · 레나 델타 · 캐나다 북서부의 \nncyAll{} 셀-연도(2010--2024)다.
+\begin{enumerate}[leftmargin=1.4em,itemsep=0.1em]
+\item \textbf{그 해 기후 입력.} 해가 고루 관측된 레나 델타에서 물리식 오차를 \ndforcLePo{} cm 줄인다(구간이 0 을 제외). 라벨의 \ntopyrshareAk{}\% 가 \ntopyrAk{}년 한 해에 몰린 알래스카에서는 판정할 수 없다(\ndforcAkPo{} cm).
+\item \textbf{검증 방식.} 무작위 분할은 직접 학습을 공간 블록 분할보다 \noptimLeDz{}--\noptimCaDz{} cm 낮게 보고한다. 새 지역으로 옮기면 직접 학습은 알래스카 \ndrefAkregDz{}, 레나 \ndrefLeregDz{} cm 로 무너지고 물리식과 잔차 결합은 유지된다.
+\item \textbf{물리 잔차 결합.} 공간 블록 분할에서 재보정 Stefan 대비 레나 \ndrefLeblkRo{}, 캐나다 \ndrefCablkRo{}, 알래스카 \ndrefAkblkRo{} cm. 이득은 지형 · 토양 입력이 있어야 생기고(기후 입력만: 알래스카 \ndfeatAkFclim{} cm) 각 지역의 따뜻한 3분위에서 크다(레나 \ndtddLewarm{}, 캐나다 중간 \ndtddCamid{} cm).
+\item \textbf{기존 제품.} 같은 셀 · 같은 해에서 레나 델타는 모든 제품보다 낫다(잔차 결합 \nccLeRoall{} cm 대 Wei \nccLeWeiall{}, Liu \nccLeLiuall{} cm). 알래스카는 제품 학습 지점 25 km 밖에서 Wei 보다 \ndprodAkweiRomask{} cm, Liu 와 \ndprodAkliuRomask{} cm. 캐나다는 Wei 와 같은 수준(\ndprodCaweiRomask{} cm).
+\item \textbf{연도별.} 다년 관측 셀의 연도 간 변화 상관은 잔차 결합 \nrdeltaAkRo{}(알래스카), 제품 \nrdeltaAkWei{}--\nrdeltaAkLiu{}. 연도별 큰 편향은 기후가 아니라 관측 캠페인 구성의 변화다.
+\end{enumerate}
+
+\section{문제 정의와 시간 정의}
+\fig{V1_time_design_slide.png}{1.0}{예측 대상과 입력의 시간 정의. (a) 기존 제품 · 선행 연구와 이 연구의 차이. (b) 알래스카 한 셀의 2014년 일 누적 융해 도일(실자료)과 세 가지 기후 입력(관측일까지, 그 해 전체, 2011--2024 평균). (c) 셀-연도 표의 실제 행 세 개.}
+기존 방식은 같은 지점의 여러 해를 평균한 라벨에 여러 해 평균 기후를 대응시킨다. 이 연구는 같은 셀의 다른 해를 다른 행으로 두고, 입력 · 라벨 · 채점이 모두 같은 해, 같은 날짜를 가리키게 한다. 8월 관측과 9월 관측은 녹은 깊이가 다르므로 기후 입력도 관측일까지만 누적한다. 관측일까지 누적한 융해 도일과 그 해 전체 값의 비는 알래스카 중앙값 0.73, 레나 델타 0.81, 캐나다 0.89 다.
+
+\section{자료와 방법}
+\fig{F1_study_area.png}{0.98}{연구 지역과 관측. (a) 영구동토 확률과 세 지역. (b--d) 관측 셀과 다년 관측 셀(별표). (e) 연도별 셀-연도 수. (f) 라벨 · 강제력 · 위성 입력 · 제품의 기간.}
+\begin{tabular}{lrrrrrl}
+\toprule 지역 & 셀-연도 & 셀 & 블록 & 연도 수 & 다년 셀 & 최다 연도(비율) \\ \midrule
+알래스카 & \nncyAk & \nncellAk & \nnblkAk & \nnyrAk & \nnmultiAk & \ntopyrAk{} (\ntopyrshareAk\%) \\
+레나 델타 & \nncyLe & \nncellLe & \nnblkLe & \nnyrLe & \nnmultiLe & \ntopyrLe{} (\ntopyrshareLe\%) \\
+캐나다 북서부 & \nncyCa & \nncellCa & \nnblkCa & \nnyrCa & \nnmultiCa & \ntopyrCa{} (\ntopyrshareCa\%) \\
+\bottomrule
+\end{tabular}
+
+\fig{V2_workflow_slide.png}{1.0}{작업 흐름. 셀 · 연도 자료 구축, 그 해 강제력, 물리 기준선, 학습 결합 4종, 다섯 가지 분할, 제품 비교와 연도별 지도.}
+\fig{F2_thaw_and_design.png}{0.98}{물리 기준선과 평가 설계. (a) 레나 델타 두 지점의 한 계절 녹는 깊이 대 관측일까지 누적 융해 도일의 제곱근과 Stefan 적합. (b) 다년 관측 셀의 연도별 ALT 대 그 해 융해 도일의 제곱근. (c) 분할 세 가지.}
+\fig{V3_methods_slide.png}{1.0}{비교한 방법의 구조. 물리 정보가 들어가는 위치만 다르고 학습기는 모두 CatBoost 다.}
+\fig{V4_pseudo_residual_slide.png}{1.0}{유사라벨 증강과 잔차 결합의 설계. 오른쪽은 레나 델타 블록 교차검증의 실제 오차 분포다.}
+\fig{V5_evaluation_slide.png}{1.0}{평가 설계. 다섯 가지 분할, 블록 부트스트랩 채점, 제품 비교 조건(같은 셀 · 같은 해, 학습 지점 25 km 제외, 공통 셀, 적용 범위).}
+
+\section{결과}
+\subsection{그 해 기후 입력의 효과와 검증 방식에 따른 순위}
+\fig{F3_time_validation.png}{0.98}{시간 정합과 검증. (a) 그 해 입력 − 평균 입력의 RMSE 차이(공간 블록). (b) 다섯 분할의 RMSE. (c) 연도 홀드아웃의 연도 편차 상관. (d) 다년 셀의 연도 간 변화(관측 대 예측). (e) 잔차 결합의 연도별 편향.}
+그 해 입력은 레나 델타에서 물리식 오차를 \ndforcLePo{}(재보정 Stefan), \ndforcLePz{}(원천 계수), \ndforcLeKu{}(Kudryavtsev) cm 줄인다. 알래스카 \ndforcAkPo{}, 캐나다 \ndforcCaPo{} cm 는 구간이 0 을 포함한다. 무작위 분할의 직접 학습 RMSE 는 알래스카 \nrmseAkrandDz{}, 레나 \nrmseLerandDz{}, 캐나다 \nrmseCarandDz{} cm 이고 공간 블록 분할에서는 각각 \noptimAkDz{}, \noptimLeDz{}, \noptimCaDz{} cm 높아진다. 지역 홀드아웃에서 직접 학습은 알래스카 \nrmseAkregDz{}, 레나 \nrmseLeregDz{} cm 이고 잔차 결합은 \nrmseAkregRo{}, \nrmseLeregRo{} cm 다.
+
+\subsection{물리 잔차 결합의 이득과 조건, 기존 제품과의 비교}
+\fig{F4_gain_products.png}{0.98}{이득의 조건과 제품 비교. (a) 공변량 사다리. (b) 융해 도일 3분위. (c) 학습기. (d) 공통 셀-연도의 RMSE(빈 마커 = 제품 학습 지점 25 km 밖). (e) 관측 10분위별 예측 평균.}
+재보정 Stefan 대비 잔차 결합은 레나 \ndrefLeblkRo{}, 캐나다 \ndrefCablkRo{}, 알래스카 \ndrefAkblkRo{} cm 다. 직접 학습은 \ndrefLeblkDz{}, \ndrefCablkDz{}, \ndrefAkblkDz{} cm, 유사라벨 증강은 \ndrefLeblkDo{}, \ndrefCablkDo{}, \ndrefAkblkDo{} cm 로 직접 학습과 다르지 않다. 기후 입력만 쓰면 알래스카 \ndfeatAkFclim{} cm 로 물리식보다 나쁘고, 지형을 더하면 \ndfeatAkFterr{}, 토양까지 더하면 \ndfeatAkFsoil{} cm 다. 따뜻한 3분위에서 레나 \ndtddLewarm{}, 캐나다 \ndtddCawarm{} cm, 추운 3분위에서 레나 \ndtddLecold{}, 캐나다 \ndtddCacold{} cm 이고 알래스카는 모든 3분위에서 1 cm 안이다. 학습기를 바꿔도 지역 차이보다 작고 이득의 부호는 바뀌지 않는다(알래스카 MLP \ndlrnAkmlpRo{}, 캐나다 FT-Transformer 직접 학습 \ndlrnCafttDz{} cm).
+
+공통 셀-연도에서 레나 델타는 잔차 결합 \nccLeRoall{} cm 대 Wei \nccLeWeiall{}, Liu \nccLeLiuall{}, CCI v4 \nccLeCcifourall{} cm 다. 알래스카는 전체 공통 셀에서 잔차 결합 \nccAkRoall{}, Liu \nccAkLiuall{}, Wei \nccAkWeiall{} cm 이고 제품 학습 지점 25 km 밖에서는 \nccAkRomask{}, Wei \nccAkWeimask{}, Liu \nccAkLiumask{} cm 다. 캐나다는 직접 학습 \nccCaDzall{}, 잔차 결합 \nccCaRoall{}, Wei \nccCaWeiall{} cm 다.
+
+\subsection{연도별 평가}
+연도 홀드아웃의 연도 편차 상관은 잔차 결합 알래스카 \nranomAkyrRo{}, 레나 \nranomLeyrRo{}, 캐나다 \nranomCayrRo{} 다. 다년 셀의 연도 간 변화 상관은 알래스카에서 잔차 결합 \nrdeltaAkRo{}(\nnpairsAk{} 쌍), Wei \nrdeltaAkWei{}, Liu \nrdeltaAkLiu{} 이고, 레나(\nnpairsLe{} 쌍)에서는 Wei \nrdeltaLeWei{} 가 잔차 결합 \nrdeltaLeRo{} 보다 높다. 관측일 정합으로 알래스카의 연도별 편향 범위는 \nybiasminAkYr{}--\nybiasmaxAkYr{}(그 해 전체 입력)에서 \nybiasminAk{}--\nybiasmaxAk{} cm 로 줄었다. 잔차 결합의 연도별 편향은 알래스카 \nybiasminAk{}--\nybiasmaxAk{}, 레나 \nybiasminLe{}--\nybiasmaxLe{}, 캐나다 \nybiasminCa{}--\nybiasmaxCa{} cm 이고, 큰 편향은 관측 캠페인 구성(깊은 내륙 지점, 9--10월 관측, 수로 지점, 산불 유역)의 변화와 일치한다. 같은 셀-연도에서 9월 관측은 8월 관측보다 약 10 cm 깊고, 탐침과 레이더 관측은 차이가 없다.
+\fig{F5_site_series.png}{0.98}{장기 관측 지점의 연도별 시계열(관측, 재보정 Stefan, 잔차 결합, 제품). Rescale 지점 시계열 결과 도착 뒤 생성.}
+
+\subsection{연도를 명시한 1 km 지도}
+\fig{F6_maps.png}{0.98}{연도를 명시한 지도. (a) 알래스카 2011--2024 평균(흐림 = 적용 범위 밖). (b, c) 2014년과 2022년의 편차. (d) 1 km 확대. (e) 적용 가능 영역. (f) 레나 델타 2016년. (g) 사모일로프 확대.}
+모든 지도에 입력 기후의 해가 붙는다. 적용 가능 영역은 알래스카 격자의 \naoaAk{}\%, 레나 델타의 \naoaLe{}\% 다.
+
+\section{결론, 의의, 차별점, 한계}
+\textbf{결론.} 물리 잔차 결합이 세 지역 모두에서 가장 안전한 선택이다. 지역 안에서는 물리식보다 낫거나 같고, 새 지역에서는 물리식 수준을 유지하며, 기존 제품과 같은 셀 · 같은 해에서 비교하면 레나 델타에서 확실히 우세하고 알래스카에서는 누설을 뺀 뒤 우세하며 캐나다에서는 방법에 따라 다르다.
+
+\textbf{의의.} (1) 입력 · 라벨 · 채점이 같은 해를 가리키므로 지도마다 해를 붙일 수 있다. (2) 같은 셀 · 같은 해 · 학습 지점 제외라는 조건으로 제품과 방법을 한 시험지에서 비교했다. (3) 물리식에 학습을 더하면 언제 나아지는지를 입력 · 기후 · 지역 조건으로 정리했다.
+
+\textbf{차별점.} 선행 연구는 여러 해 평균 입력과 다년 평균 라벨, 무작위 분할 또는 제품마다 다른 검증, 결합 구조 하나씩 보고, 연도 없는 지도 한 장이다. 이 연구는 그 해 관측일까지의 입력과 셀 · 연도 라벨, 다섯 분할과 블록 부트스트랩 구간, 다섯 구조의 같은 자리 비교, 같은 셀 · 같은 해의 제품 비교, 해마다의 1 km 지도와 적용 범위다. 기법의 신규성은 주장하지 않는다.
+
+\textbf{한계.} 연도 간 변화 상관은 0.3 안팎이고 잔차 학습은 연도 변화를 물리식보다 더 맞추지 못하며, 레나 다년 셀에서는 Wei 제품이 변화를 더 잘 따라간다. 알래스카 연도 효과는 2014년 집중 관측 때문에 미결정이고 캐나다는 라벨이 적다. 유사라벨 증강은 무익하고 학습기 선택은 부차적이라는 음성 결과도 함께 보고한다.
+
+\section{남은 일}
+\begin{itemize}[leftmargin=1.4em,itemsep=0.05em]
+\item Rescale 핵심 재실행(관측일 정합 주 강제력, core\_v6)과 신경망 실행(nn\_v6) 결과 반영: 수치 매크로 재생성, 그림 3--5 · 덱 · 원고 갱신.
+\item MODIS 2010--2024 입력(AppEEARS 재요청 완료, 260,760 셀-연도)으로 사다리의 MODIS · 전체 묶음 재실행(Rescale v6b).
+\item 관측일 정합 모델로 1 km 지도 재생성, 장기 지점 시계열 그림(그림 5) 생성.
+\item 원고의 [DECISION] 항목(저자, 저장소, 사사) 결정과 참고문헌 서지 확인(Liu 2024).
+\end{itemize}
+\end{document}

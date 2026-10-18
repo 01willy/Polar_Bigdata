@@ -1,0 +1,87 @@
+{
+ "decorative_only": true,
+ "note": "Cover background for the deck. Colour sub-range differs from the paper maps and there is no colour bar: not a quantitative figure.",
+ "year": 2022,
+ "colour_range_cm": [
+  40.0,
+  95.0
+ ],
+ "cmap": "oslo_r 0.12-0.62 (paper maps: 0.12-0.90)",
+ "cells_drawn": 858517,
+ "cells_inside_aoa": 477254,
+ "m_per_px": 575.0170592600821,
+ "text": "none (v9: label line and 200 km scale bar removed)",
+ "x_fade": [
+  0.42,
+  0.58
+ ],
+ "y_fade_px": 600,
+ "size_px": [
+  4000,
+  2250
+ ],
+ "layer_px_counts_500m": {
+  "px_drawn": 3462483,
+  "px_lake_filled": 51548,
+  "px_dem_void_in_cells": 186,
+  "px_hole_filled": 45638,
+  "n_hole_components": 2091,
+  "px_grid_nodata_total": 112268,
+  "px_land_outside_grid_total": 2338328,
+  "px_land_out_flat": 2404958,
+  "px_ocean": 3371786
+ },
+ "render": {
+  "edge_sigma_px": 10.0,
+  "lake_sigma_px": 2.5,
+  "lake_dim": 0.94,
+  "fade_out_desaturate": 0.55,
+  "fade_out_dim": 0.92,
+  "w_shade": 0.42,
+  "hole_max_px": 4000,
+  "hole_desat": 0.3,
+  "hole_dim": 0.98,
+  "hole_sigma_px": 3.0,
+  "land_hex": "#2A3340",
+  "land_shaded": false,
+  "glow_hex": "#152338"
+ },
+ "qa": {
+  "navy_Lstar": 10.0,
+  "land_flat_Lstar": {
+   "mean": 20.2,
+   "p10": 20.0,
+   "p90": 20.5,
+   "n_px": 12423
+  },
+  "ocean_Lstar": {
+   "mean": 13.3,
+   "max": 52.7,
+   "n_px": 763973
+  },
+  "delta_Lstar_land_vs_ocean_mean": 6.9,
+  "map_floor_Lstar": {
+   "p1": 36.1,
+   "p5": 44.9,
+   "min": 18.7
+  },
+  "delta_Lstar_map_p1_vs_navy": 26.1,
+  "dark_isolated_px_inside_map": 0,
+  "land_outside_grid_canvas": {
+   "px": 903660,
+   "frac_of_land_px": 0.278,
+   "largest_component_px": 823356,
+   "largest_component_frac_of_land_px": 0.253
+  },
+  "left40_max_rgb": [
+   18,
+   31,
+   51
+  ],
+  "left45_max_rgb": [
+   21,
+   34,
+   53
+  ]
+ }
+}

@@ -1,0 +1,48 @@
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(./qa_v9.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-04-28>
+(/home/willy010313/.TinyTeX/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(/home/willy010313/.TinyTeX/texmf-dist/tex/latex/base/size10.clo)) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty))) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/home/willy010313/.TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty)) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty)) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty)) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def))) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/base/fontenc.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (/home/willy010313/.TinyTeX/texmf-dist/tex/xelatex/xecjk/xeCJK.sty
+
+LaTeX Warning: You have requested release `2026/06/01' of LaTeX,
+               but only release `2025-11-01' is available.
+
+(/home/willy010313/.TinyTeX/texmf-dist/tex/latex/ctex/ctexhook.sty
+
+LaTeX Warning: You have requested release `2026/06/01' of LaTeX,
+               but only release `2025-11-01' is available.
+
+) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/ctex/ctexpatch.sty
+
+LaTeX Warning: You have requested release `2026/06/01' of LaTeX,
+               but only release `2025-11-01' is available.
+
+) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/l3packages/xtemplate/xtemplate.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/xelatex/xecjk/xeCJK.cfg)) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/graphics/trig.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def))) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/tools/array.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/float/float.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/caption/caption.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/caption/caption3.sty)) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/titlesec/titlesec.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/enumitem/enumitem.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/tools/tabularx.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/tools/longtable.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty))) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty))) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def) (/home/willy010313/.TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/url/url.sty) (/home/willy010313/.TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (/home/willy010313/.TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))) (../../paper/manuscript/en_v6/numbers.tex) (./numbers_v9.tex) (./qa_v9.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+(/home/willy010313/.TinyTeX/texmf-dist/tex/latex/caption/ltcaption.sty) (./qa_v9.out) (./qa_v9.out)
+
+Package xeCJK Warning: Unknown CJK family `\CJKttdefault' is being ignored.
+(xeCJK)                
+(xeCJK)                Try to use `\setCJKmonofont[<...>]{<...>}' to define
+(xeCJK)                it.
+
+(/home/willy010313/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd) (/home/willy010313/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd)
+Overfull \hbox (9.66093pt too wide) in paragraph at lines 60--60
+[]|\TU/lmtt/m/n/9 labels_cell_year_v5.csv|  
+
+Overfull \hbox (19.11093pt too wide) in paragraph at lines 60--60
+[]|\TU/lmtt/m/n/9 products_cell_year_v5.csv|  
+[1]
+Overfull \hbox (52.33548pt too wide) in paragraph at lines 90--91
+[]\TU/NotoSerifCJKKR(1)/b/n/10 추 출\TU/NotoSerifCJKKR(0)/b/n/10 . \TU/NotoSerifCJKKR(1)/m/n/10 라 벨 셀 마 다 셀 중 심 좌 표 의 제 품 화 소 값 을 연 도 별 로 읽 었 다 \TU/NotoSerifCJKKR(0)/m/n/10 (\TU/lmtt/m/n/10 scripts/1_data_prep/build_v5_products_cell_year.py\TU/NotoSerifCJKKR(0)/m/n/10 ).
+[2] [3] [4] [5] [6] [7] [8] (./qa_v9.aux) )
+(see the transcript file for additional information)
+Output written on qa_v9.pdf (8 pages).
+Transcript written on qa_v9.log.

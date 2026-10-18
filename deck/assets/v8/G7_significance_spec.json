@@ -1,0 +1,189 @@
+{
+ "stem": "G7_significance",
+ "size_in": [
+  12.0,
+  3.7
+ ],
+ "sources": {
+  "ladder": "data/processed/v5/runs/ladder_v6/ladder_metrics.csv"
+ },
+ "numbers": {
+  "TL_rmse_cm": {
+   "Alaska:P0": [
+    19.37,
+    19.37,
+    19.37,
+    19.37,
+    19.37,
+    19.37
+   ],
+   "Alaska:P1n": [
+    19.37,
+    18.69,
+    18.42,
+    18.2,
+    18.39,
+    18.39
+   ],
+   "Alaska:D0S": [
+    21.47,
+    19.5,
+    19.91,
+    20.3,
+    21.26,
+    18.5
+   ],
+   "Alaska:R1S": [
+    17.76,
+    17.33,
+    17.19,
+    17.1,
+    16.99,
+    17.51
+   ],
+   "Lena:P0": [
+    21.46,
+    21.46,
+    21.46,
+    21.46,
+    21.46,
+    21.46
+   ],
+   "Lena:P1n": [
+    21.46,
+    20.63,
+    20.82,
+    20.75,
+    20.99,
+    20.96
+   ],
+   "Lena:D0S": [
+    39.48,
+    21.31,
+    20.41,
+    18.97,
+    17.95,
+    17.45
+   ],
+   "Lena:R1S": [
+    23.8,
+    19.9,
+    19.93,
+    19.33,
+    19.09,
+    18.5
+   ],
+   "Canada:P0": [
+    27.75,
+    27.75,
+    27.75,
+    27.75,
+    27.75,
+    27.75
+   ],
+   "Canada:P1n": [
+    27.75,
+    31.26,
+    30.58,
+    30.17,
+    30.8,
+    30.75
+   ],
+   "Canada:D0S": [
+    24.16,
+    23.77,
+    23.75,
+    23.34,
+    22.74,
+    22.78
+   ],
+   "Canada:R1S": [
+    24.28,
+    26.34,
+    25.72,
+    25.44,
+    25.86,
+    26.07
+   ]
+  },
+  "n_label": [
+   0,
+   25,
+   50,
+   100,
+   250,
+   500
+  ],
+  "n_test": {
+   "Alaska": 15540,
+   "Lena": 2436,
+   "Canada": 1196
+  }
+ },
+ "choices": {
+  "layout": {
+   "panels": [
+    [
+     0.86,
+     0.66,
+     3.153,
+     2.54
+    ],
+    [
+     4.813,
+     0.66,
+     3.153,
+     2.54
+    ],
+    [
+     8.767,
+     0.66,
+     3.153,
+     2.54
+    ]
+   ],
+   "x": "log, n = 0 drawn at x = 10",
+   "n25": "thin grey vertical line",
+   "clipped": [
+    {
+     "region": "Lena",
+     "method": "D0S",
+     "n": 0,
+     "value": 39.48,
+     "drawn_at": 26.0
+    }
+   ],
+   "region_label": "inside, bottom-left (region colour)",
+   "legend": "one row above the panels"
+  }
+ },
+ "checks": {},
+ "qa_extra": {
+  "text_line_hits": [],
+  "legend_in_canvas": true,
+  "legend_to_panels_gap_in": 0.24
+ },
+ "qa": {
+  "min_font_pt": 12.0,
+  "texts": 44,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "text_line": [],
+  "text_axes": [],
+  "text_patch": [],
+  "png_px": [
+   3600,
+   1110
+  ],
+  "png_px_ok": true,
+  "ink_margin_px": {
+   "top": 27,
+   "bottom": 52,
+   "left": 102,
+   "right": 22
+  },
+  "text_below_12pt": [],
+  "bare_sqrt_glyph_texts": []
+ }
+}

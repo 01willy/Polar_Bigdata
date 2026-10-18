@@ -1,0 +1,392 @@
+{
+ "a": {
+  "inputs": [
+   "data/processed/v5/maps/Alaska/pred_2014.csv.gz (e5_tdd, p1 = Stefan recalibrated, r1 = physics + residual ML)",
+   "data/processed/v5/maps/Alaska/meta.json (lam, E, feats, learner)",
+   "data/processed/v5/maps/Alaska/mean_2011_2024.csv.gz (aoa_in)",
+   "data/processed/v5/maps/Alaska/forcing_2014_thumb.csv.gz (e5_maat, e5_fdd, e5_swe, year 2014)",
+   "data/processed/map_alaska/alaska_grid_x25_v1.csv.gz (dem_elev, dem_slope, sg_soc_0_5, sg_clay_5_15, land)",
+   "data/processed/v5/labels_cell_year_v5.csv (Alaska, year 2014, in_forcing == 1: observed cells)"
+  ],
+  "years": {
+   "example_year": 2014,
+   "applicability": "area of applicability of the residual learner computed once from 2011–2024 mean climate + static covariates (scripts/3_deep_learning/v5_map_predict.py: DI threshold = 95th percentile of cross-block nearest-neighbour distances of training rows in standardised F8TS space); not year-specific; thumbnail box = inside when ≥ 50 % of its 1 km cells are inside"
+  },
+  "lam": 0.5,
+  "E_cm_per_sqrt_degC_day": 1.949027934263291,
+  "n_train": 15540,
+  "learner": {
+   "name": "catboost",
+   "iterations": 600,
+   "learning_rate": 0.03,
+   "depth": 6
+  },
+  "n_features": 23,
+  "n_climate_features": 8,
+  "n_static_features": 15,
+  "features": [
+   "e5_maat",
+   "e5_tdd",
+   "e5_fdd",
+   "e5_sqrt_tdd",
+   "e5_twarm",
+   "e5_tcold",
+   "e5_stl1",
+   "e5_swe",
+   "dem_elev",
+   "dem_slope",
+   "dem_aspect_sin",
+   "dem_aspect_cos",
+   "dem_tpi",
+   "dem_rough",
+   "sg_clay_5_15",
+   "sg_sand_5_15",
+   "sg_silt_5_15",
+   "sg_bdod_5_15",
+   "sg_cfvo_5_15",
+   "sg_phh2o_5_15",
+   "sg_soc_0_5",
+   "sg_soc_5_15",
+   "sg_soc_15_30"
+  ],
+  "thumbnails": {
+   "input_cmap": "cmcrameri grayC_r 0.04–0.82 (one colormap for all eight input thumbnails), each stretched to its own 2–98th percentile (slope 0–98th)",
+   "alt_cmap": "cmcrameri oslo_r 0.12–0.90, Physics ALT and ALT 2014 share one scale",
+   "alt_range_cm": [
+    35.0,
+    85.0
+   ],
+   "alt_ticks_cm": [
+    40,
+    60,
+    80
+   ],
+   "residual": "(r1 − p1)/λ = residual prediction before weighting; cmcrameri vik, symmetric",
+   "residual_range_cm": [
+    -25.0,
+    25.0
+   ],
+   "applicability_colours": {
+    "inside": "#8FA6C8",
+    "outside": "#DCDCDC"
+   },
+   "bins_deg": [
+    0.05,
+    0.02
+   ],
+   "n_map_cells": 858517,
+   "observed_cells": 7861,
+   "observed_rows": 7861
+  },
+  "encoding": {
+   "accent": "#D55E00: residual-ML path (gradient boosting → residual → ⊕, applicability) and the ALT 2014 frame",
+   "training_only": "dashed #8C8C8C: observed y → ⊖, ŷ_P → ⊖, y − ŷ_P → gradient boosting",
+   "boxes": "face #EEEEEE, edge #333333 0.6 pt",
+   "connectors": "0.6 pt lines with open chevrons",
+   "learner_inputs": "bracket grouping the eight input thumbnails (all 23 variables) → gradient boosting; TDD → Stefan crosses the bracket"
+  },
+  "numbers_printed": {
+   "lambda": 0.5,
+   "climate variables": 8,
+   "static variables": 15,
+   "example year": 2014,
+   "residual colour bar ticks (cm)": [
+    -25.0,
+    0,
+    25.0
+   ],
+   "ALT colour bar ticks (cm)": [
+    40,
+    60,
+    80
+   ]
+  }
+ },
+ "b": {
+  "structures": [
+   "Direct ML",
+   "Physics-input ML",
+   "Physics pseudo-labels",
+   "Physics + residual ML"
+  ],
+  "encoding": {
+   "physics_input": "recalibrated Stefan and Kudryavtsev predictions enter the learner as input features (solid line; testbed_v5.run_method F1)",
+   "pseudo_labels": "Stefan values used as additional training targets (dashed grey: training only)",
+   "residual": "learner output added to the Stefan anchor with weight λ (vermillion)"
+  },
+  "methods_code": {
+   "Direct ML": "D0",
+   "Physics-input ML": "F1",
+   "Physics pseudo-labels": "D1",
+   "Physics + residual ML": "R1"
+  },
+  "source": "polar.testbed_v5.run_method",
+  "numbers_printed": "none"
+ },
+ "c": {
+  "inputs": [
+   "data/processed/v5/labels_cell_year_v5.csv, forcing_year.csv, forcing_clim.csv, static_v5.csv via polar.testbed_v5.load_v5",
+   "polar.testbed_v5.with_forcing('year_obs') → usable_mask → region == 'Lena' → make_folds(k = 5, seed = 0)",
+   "check against data/processed/v5/runs/core_v6/preds/Lena__<scheme>__year_obs__F8TS__P1__-__lam-1.csv.gz and ALL__region__...: {'random': True, 'block': True, 'year': True, 'block_year': True, 'region': True}"
+  ],
+  "years": {
+   "lena_labels": "2010–2022",
+   "year_list": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022
+   ]
+  },
+  "n_rows": 2436,
+  "n_cells": 2206,
+  "n_blocks": 16,
+  "cell_status_rule": "a cell is test if any of its cell-years is in the test fold, else training if any is in training, else excluded",
+  "year_holdout_rule": "years with < 20 Lena cell-years (2010, 2011, 2022) are never test years and stay in training",
+  "block_year_rule": "test = block fold i and year y; training = other block folds and other years; excluded = same fold other years or same year other folds",
+  "region_rule": "all Lena cell-years are test; training = Alaska and Canada (NW) cell-years more than 100 km from any Lena cell",
+  "panels": {
+   "Random": {
+    "scheme": "random",
+    "fold_shown": "r0",
+    "rows": {
+     "test": 488,
+     "training": 1948,
+     "excluded": 0
+    },
+    "cells": {
+     "test": 475,
+     "training": 1731,
+     "excluded": 0
+    },
+    "n_folds": 5,
+    "fold_names": [
+     "r0",
+     "r1",
+     "r2",
+     "r3",
+     "r4"
+    ],
+    "years_tested": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "Spatial block (0.5°)": {
+    "scheme": "block",
+    "fold_shown": "b0",
+    "rows": {
+     "test": 928,
+     "training": 1508,
+     "excluded": 0
+    },
+    "cells": {
+     "test": 806,
+     "training": 1400,
+     "excluded": 0
+    },
+    "n_folds": 5,
+    "fold_names": [
+     "b0",
+     "b1",
+     "b2",
+     "b3",
+     "b4"
+    ],
+    "years_tested": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022
+    ]
+   },
+   "Year hold-out": {
+    "scheme": "year",
+    "fold_shown": "y2016",
+    "rows": {
+     "test": 681,
+     "training": 1755,
+     "excluded": 0
+    },
+    "cells": {
+     "test": 681,
+     "training": 1525,
+     "excluded": 0
+    },
+    "n_folds": 10,
+    "fold_names": [
+     "y2012",
+     "y2013",
+     "y2014",
+     "y2015",
+     "y2016",
+     "y2017",
+     "y2018",
+     "y2019",
+     "y2020",
+     "y2021"
+    ],
+    "years_tested": [
+     2016
+    ]
+   },
+   "Block × year": {
+    "scheme": "block_year",
+    "fold_shown": "b0y2016",
+    "rows": {
+     "test": 504,
+     "training": 1331,
+     "excluded": 601
+    },
+    "cells": {
+     "test": 504,
+     "training": 1232,
+     "excluded": 470
+    },
+    "n_folds": 23,
+    "fold_names": [
+     "b0y2014",
+     "b0y2015",
+     "b0y2016",
+     "b0y2019",
+     "b0y2021",
+     "b1y2013",
+     "b1y2014",
+     "b1y2016",
+     "b1y2017",
+     "b1y2018",
+     "b1y2019",
+     "b1y2020",
+     "b1y2021",
+     "b2y2015",
+     "b2y2016",
+     "b3y2012",
+     "b3y2013",
+     "b3y2014",
+     "b3y2016",
+     "b3y2020",
+     "b4y2012",
+     "b4y2019",
+     "b4y2020"
+    ],
+    "years_tested": [
+     2016
+    ]
+   },
+   "Region hold-out": {
+    "scheme": "region",
+    "fold_shown": "L_Lena",
+    "rows": {
+     "test": 2436,
+     "training": 0,
+     "excluded": 0
+    },
+    "cells": {
+     "test": 2206,
+     "training": 0,
+     "excluded": 0
+    },
+    "n_folds": 1,
+    "fold_names": [
+     "L_Lena"
+    ],
+    "years_tested": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022
+    ],
+    "training_rows_other_regions": {
+     "Alaska": 15540,
+     "Canada": 1196
+    }
+   }
+  },
+  "colours": {
+   "test": "#000000",
+   "training": "#9A9A9A",
+   "excluded": "#D9D9D9"
+  },
+  "map_extent_lonlat": [
+   123.5,
+   130.4,
+   71.35,
+   72.95
+  ],
+  "scale_bar": {
+   "km": 50.0,
+   "lon": [
+    123.75,
+    125.164
+   ],
+   "lat": 71.48
+  },
+  "numbers_printed": {
+   "scale bar": "50 km",
+   "titles": "Spatial block (0.5°)"
+  }
+ },
+ "qa": {
+  "n_texts": 69,
+  "font_sizes_pt": [
+   6.0,
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "problems": []
+ },
+ "figure": {
+  "width_mm": 180.0,
+  "height_mm": 118.3,
+  "png_dpi": 600,
+  "font": "FreeSans",
+  "text_pt": 7.0,
+  "small_pt": 6.5,
+  "min_pt": 6.0,
+  "letter_pt": 8.0,
+  "palette": "POLAR_PALETTE=paper",
+  "script": "scripts/4_visualization/paper_v10/fig2_method.py"
+ }
+}

@@ -1,0 +1,148 @@
+{
+ "stem": "G5_stefan",
+ "size_in": [
+  12.0,
+  4.65
+ ],
+ "sources": {
+  "meta_Alaska": "data/processed/v5/runs/core_v6/meta/Alaska__block__year_obs__F8TS__P1__-__lam-1.json",
+  "meta_Lena": "data/processed/v5/runs/core_v6/meta/Lena__block__year_obs__F8TS__P1__-__lam-1.json",
+  "meta_Canada": "data/processed/v5/runs/core_v6/meta/Canada__block__year_obs__F8TS__P1__-__lam-1.json",
+  "allena": "data/raw/allena/PANGAEA_973813_ALLena_main.txt",
+  "era5land": "data/raw/era5land/nh_monthly_2010-2024.nc"
+ },
+ "choices": {
+  "coefficients": [
+   {
+    "region": "Alaska",
+    "E_source": 1.714202438683493,
+    "E_recal": 1.9525972487228807,
+    "E_recal_folds": {
+     "b0|s0": 1.8777678275815801,
+     "b1|s0": 1.9831869068686778,
+     "b2|s0": 1.9669977635352383,
+     "b3|s0": 1.9985478389083098,
+     "b4|s0": 1.936485906720597
+    },
+    "n_folds": 5,
+    "n": 15540
+   },
+   {
+    "region": "Lena",
+    "E_source": 1.9236808063385067,
+    "E_recal": 1.6834878068697006,
+    "E_recal_folds": {
+     "b0|s0": 1.7183128135185162,
+     "b1|s0": 1.738564640145274,
+     "b2|s0": 1.7155415072314817,
+     "b3|s0": 1.6702138897595504,
+     "b4|s0": 1.574806183693682
+    },
+    "n_folds": 5,
+    "n": 2436
+   },
+   {
+    "region": "Canada",
+    "E_source": 1.9181191628018144,
+    "E_recal": 1.752970128384169,
+    "E_recal_folds": {
+     "b0|s0": 1.9750982771765049,
+     "b1|s0": 1.5614922627869783,
+     "b2|s0": 1.7414213545809543,
+     "b3|s0": 1.7595844682783452,
+     "b4|s0": 1.7272542790980618
+    },
+    "n_folds": 5,
+    "n": 1196
+   }
+  ],
+  "series_Samoylov_2015": {
+   "lat": 72.374,
+   "lon": 126.497,
+   "E": 1.3609,
+   "E_unit": "cm/$\\sqrt{\\mathrm{°C·d}}$",
+   "n_probe": 1602,
+   "n_days": 45,
+   "doy_first": 192,
+   "doy_last": 265,
+   "tdd_at_last_day": 720.8,
+   "color": "#1B86BB"
+  },
+  "series_Kurungnakh_2020": {
+   "lat": 72.373,
+   "lon": 126.495,
+   "E": 1.0763,
+   "E_unit": "cm/$\\sqrt{\\mathrm{°C·d}}$",
+   "n_probe": 12,
+   "n_days": 6,
+   "doy_first": 171,
+   "doy_last": 264,
+   "tdd_at_last_day": 1103.7,
+   "color": "#88CCEE"
+  },
+  "middle": {
+   "site": "Samoylov",
+   "year": 2015,
+   "x_doy": [
+    140.0,
+    278.0
+   ],
+   "month_ticks": {
+    "152": "Jun",
+    "182": "Jul",
+    "213": "Aug",
+    "244": "Sep",
+    "274": "Oct"
+   },
+   "cum_tdd_max_in_window": 745.9,
+   "E": 1.3609,
+   "depth_axis": "downward",
+   "tdd_source": "ERA5-Land monthly means, daily linear interpolation (v7_f2_problem_time._daily_tdd)"
+  },
+  "right": {
+   "x": "√TDD to the observation day",
+   "lines": "origin-through least squares per series",
+   "E": {
+    "Samoylov_2015": 1.3609,
+    "Kurungnakh_2020": 1.0763
+   },
+   "note": "E 값은 그림에 적지 않는다(v9 글자 최소화)"
+  },
+  "canvas_fill": {
+   "x0_in": 0.0,
+   "x1_in": 12.0,
+   "y0_in": 0.0,
+   "y1_in": 4.65
+  }
+ },
+ "qa_extra": {
+  "legend3_points_inside": 0,
+  "legend3_line_inside": 0,
+  "legend2_points_inside": 0,
+  "legend2_curve_inside": 0,
+  "legend2_band_inside": 0,
+  "equation_box_in": [
+   0.238,
+   3.391,
+   3.412,
+   3.929
+  ]
+ },
+ "qa": {
+  "min_font_pt": 12.0,
+  "texts": 47,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "text_line": [],
+  "text_axes": [],
+  "text_patch": [],
+  "png_px": [
+   3600,
+   1395
+  ],
+  "png_px_ok": true,
+  "non_tick_text_below_13pt": [],
+  "bare_sqrt_glyph_texts": []
+ }
+}

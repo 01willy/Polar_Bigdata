@@ -1,0 +1,115 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,top=20mm,bottom=20mm,left=18mm,right=18mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\xeCJKsetup{CJKspace=true}
+\usepackage{graphicx,booktabs,array,float,caption,titlesec,enumitem,longtable}
+\usepackage[hidelinks]{hyperref}
+\setmainfont{Noto Serif CJK KR}[UprightFont={Noto Serif CJK KR}, BoldFont={Noto Serif CJK KR Bold}, AutoFakeSlant=0.18]
+\setCJKmainfont{Noto Serif CJK KR}[UprightFont={Noto Serif CJK KR}, BoldFont={Noto Serif CJK KR Bold}, AutoFakeSlant=0.18]
+\newfontfamily\headfont{Pretendard SemiBold}[BoldFont={Pretendard Bold}]
+\newCJKfontfamily\cjkhead{Pretendard SemiBold}[BoldFont={Pretendard Bold}]
+\setlength{\parindent}{0em}\setlength{\parskip}{0.45em}\linespread{1.08}
+\titleformat{\section}{\headfont\cjkhead\large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\headfont\cjkhead\normalsize\bfseries}{\thesubsection}{0.55em}{}
+\titlespacing*{\section}{0pt}{1.6ex}{0.6ex}\titlespacing*{\subsection}{0pt}{1.0ex}{0.3ex}
+\renewcommand{\figurename}{그림}\renewcommand{\tablename}{표}
+\captionsetup{font=small,labelfont=bf,labelsep=period,justification=justified,singlelinecheck=false}
+\graphicspath{{../figures/paper/v5/}}
+\newcommand{\fig}[3]{\begin{figure}[H]\centering\includegraphics[width=#2\textwidth]{#1}\caption{#3}\end{figure}}
+\begin{document}
+{\headfont\cjkhead\LARGE\bfseries 연구 재설정 뒤 결과 종합 보고}\\[0.3em]
+{\large 영구동토 활동층 두께(ALT): 시간 정의를 명시한 같은 시험지에서 물리식·기계학습·결합·기존 제품의 비교}\\[0.2em]
+\parbox{\textwidth}{\raggedright 2026년 10월 12일 · 백승원 · 근거 표 \texttt{data/processed/v5/runs/} · 문서 \texttt{docs/RESULTS\_v5\_2026-10-10.md}, \texttt{docs/RESULTS\_v5\_SUPPLEMENT\_2026-10-12.md}, \texttt{docs/SYNTHESIS\_v5\_2026-10-12.md}}
+
+\section{한 쪽 요약}
+극지연 피드백(입력 연도 혼재, 지도 연도 불명, 희소 라벨 초점) 세 가지를 모두 설계에 반영했다. 분석 단위를 셀-연도로 바꾸고, 그 해의 ERA5-Land 강제력을 짝지었으며, 라벨이 풍부한 알래스카·레나 델타·캐나다 북서부 세 지역에서 방법 9종과 기존 제품 6종을 같은 셀·같은 해·같은 분할에서 비교했다. 결론은 다섯 가지다.
+\begin{enumerate}[leftmargin=1.4em,itemsep=0.1em]
+\item 연도 정합은 라벨이 여러 해에 퍼진 레나에서 물리식 오차를 1.6--2.1 cm 줄이고, 한 해(2014)에 몰린 알래스카에서는 줄이지 않는다(그림 2, 9).
+\item 검증 설계가 방법 순위를 바꾼다. 무작위 분할은 직접 ML 오차를 블록 분할보다 4--13 cm 낮게 보고하고, 지역 홀드아웃에서 직접 ML 은 물리식보다 5--23 cm 나쁘다(그림 3). 분할 씨앗·블록 크기를 바꿔도 재현된다(그림 9).
+\item 물리 잔차 결합은 블록 교차검증에서 레나 $-3.0$, 캐나다 $-1.7$ cm 로 재보정 Stefan 보다 낮고, 알래스카에서는 차이를 확인하지 못했다. 이득은 지형·토양 입력이 있을 때만 생기며, 알래스카의 결과는 학습기 종류(CatBoost·RF·MLP·TabM·FT-T)·$\lambda$ 선택·연도 가중·확장 입력 어느 것으로도 바뀌지 않는다. 캐나다에서만 신경망이 CatBoost 보다 2--3 cm 더 낮다(그림 4, 9).
+\item 같은 셀·같은 해에서 우리 방법은 세 지역 모두 기존 제품 6종보다 오차가 낮다. 알래스카에서 Wei 2026·Liu 2024 와 비슷해 보이는 것은 그 제품들이 우리 시험 셀 근처(또는 같은 ABoVE 지점)로 학습했기 때문이고, 학습 지점 25 km 밖에서는 Wei 보다 5 cm 낮다(그림 5, 10).
+\item 다년 관측 셀의 연도 간 변화는 어떤 방법도 상관 0.3 을 넘지 못하며, 연도별 큰 편향은 캠페인 구성(장소·관측 월·화재 교란)에서 온다. 연도 명시 지도는 그 해 강제력에 대한 응답으로 해석한다(그림 8).
+\end{enumerate}
+
+\section{무엇이 달라졌나}
+\subsection{피드백과 조치}
+\begin{tabular}{p{0.22\textwidth}p{0.36\textwidth}p{0.36\textwidth}}
+\toprule 피드백 & 확인한 사실 & 조치 \\ \midrule
+입력 연도 혼재 & 기후 공변량은 2015--2020 고정 기후값, 라벨은 셀 다년 평균. 알래스카 40블록 중 22블록이 단일 연도(공간·시간 교락) & 셀-연도 라벨 + 같은 해 강제력(2010--2024). 입력 등록부에 기간·연도 처리·약관 기록 \\
+지도 연도 불명 & 2015--2020 평균 강제력에 2014 중심 라벨. 연도 정의 없음 & 2011--2024 연도별 1 km 지도, 제목에 연도와 강제력 명시, 평균·편차·구간·적용 영역 동반 \\
+희소 라벨 초점 & 라벨 0--160 축과 새 지역 워크플로가 주장의 중심. 확인 지역 4곳 중 2곳이 27--28셀 & 라벨 수 축·배치 처방 폐기. 3지역 한정, 방법 9종·제품 6종·검증 5단 비교 \\
+\bottomrule
+\end{tabular}
+
+\subsection{설계의 입력과 출력}
+\begin{tabular}{p{0.16\textwidth}p{0.38\textwidth}p{0.40\textwidth}}
+\toprule 항목 & 이전(10-08 까지) & 지금(v5) \\ \midrule
+분석 단위 & 셀(다년 평균), 17,572셀 11지역 & 셀-연도 19,172개, 3지역, 2010--2024, 계절 말 관측만 \\
+강제력 & 2015--2020 월 기후값 8종 & 연별 11종(달력년·전겨울·수문년 창), 기후값 판은 비교용 \\
+공변량 & 34종 고정 & 기후 8 $\to$ +지형 6 $\to$ +토양 9 $\to$ +MODIS $\to$ +고해상 $\to$ +SAR 사다리 \\
+제품 & CCI 를 공변량으로 사용 & 비교 대상으로만 사용(6종, 연도 정합 추출, 학습 지점 누설 마스크) \\
+검증 & 지역 홀드아웃(라벨 수별) & 무작위·블록·연도·블록$\times$연도·지역 홀드아웃 5단 \\
+출력 & 연도 없는 지도, 라벨 수 곡선 & 연도별 지도, 방법$\times$검증 단 표, 제품 비교표, 그림 10종 \\
+\bottomrule
+\end{tabular}
+
+\fig{Fig1_data_time_ab.png}{0.98}{자료와 시간축. (a) 세 지역 라벨 셀. (b) 지역별 연도별 셀-연도 수. 알래스카는 2014년에, 캐나다는 2022년에 몰려 있고 레나는 10개 해에 퍼져 있다.}
+\fig{Fig1_data_time_c.png}{0.98}{입력과 제품의 기간. 분석 창은 2010--2024 이다.}
+
+\section{결과 하나씩}
+\subsection{연도 정합의 효과(질문 1)}
+\fig{Fig2_forcing_effect.png}{0.98}{같은 셀에 '그 해' 강제력을 넣은 판과 '2011--2024 평균' 강제력을 넣은 판의 짝지은 RMSE 차이(음수 = 그 해 강제력이 낫다). (a) 블록 교차검증, (b) 연도 홀드아웃. (c) 연간 편차 상관(기후값 판은 구조적으로 0).}
+레나에서는 물리식(P0·P1·Ku)과 잔차 결합(R1)의 오차가 1.2--2.1 cm 줄고 신뢰구간이 0 을 넘지 않는다. 알래스카에서는 물리식 오차가 1.0--1.5 cm 커지는 방향이나 신뢰구간이 0 을 포함한다. 2014 년을 빼면 이 악화가 절반(P1 +0.8)으로 준다(그림 9b). 관측 월까지의 누적 TDD 를 쓰면 전체 오차는 거의 같지만 9--10월 관측 연도의 편향이 3--4 cm 준다(그림 9a). 해석: 라벨이 여러 해에 퍼진 지역에서는 그 해 강제력이 실제 차이와 맞물리고, 한 해에 몰린 지역에서는 그 해의 특수성에 계수가 과적합한다. 기후값 강제력은 연간 변동을 아예 내지 못하므로 연도 명시 지도에는 쓸 수 없다.
+
+\subsection{검증 설계에 따른 방법 순위(질문 2)}
+\fig{Fig3_method_ladder.png}{0.98}{검증 사다리 5단에서 방법별 RMSE(연도 정합 강제력, CatBoost, $\lambda$ 0.5). 무작위 분할에서 직접 ML 이 가장 좋아 보이지만 지역 홀드아웃에서 무너진다. 물리식은 모든 단에서 안정적이다.}
+\input{Table2_body.tex}
+
+\subsection{잔차 결합의 조건(질문 3)}
+\fig{Fig4_conditions.png}{0.98}{잔차 결합(R1) 이득의 조건. (a) 기후 레짐(TDD 3분위), (b) 공변량 집합(기후 $\to$ +지형 $\to$ +토양 $\to$ +전년 강제력 $\to$ +MODIS $\to$ +고해상 $\to$ +전부 $\to$ +SAR), (c) 학습기. 기후 입력만으로는 이득이 없고 지형·토양이 들어가야 생긴다. 입력을 더 보태도 0.3--0.5 cm 안에서만 움직이고(알래스카 최선 $-$0.9 [$-$2.0, +0.3]), 학습기 차이는 지역 차이보다 작다.}
+\fig{Fig9_supplementary.png}{0.98}{보강 실험. (a) 관측 월 정합 $-$ 연도 정합, (b) 알래스카 2014 제외 진단, (c) 블록 크기 민감도(0.25$^\circ$·0.5$^\circ$·1$^\circ$), (d) 토양형 Stefan(Ed), 물리 앙상블(PE), $\lambda$ 교차검증 선택(R1cv), 연도 가중(R1 yr-wt).}
+
+\subsection{기존 제품과의 비교(질문 4)}
+\fig{Fig10_common_cells.png}{0.98}{가장 직관적인 비교. 지역마다 Wei·Liu·CCI v4 가 모두 값을 가진 같은 셀-연도에서 RMSE. 채움 = 전체 공통 셀, 빈 마커 = 제품 학습 지점 25 km 밖. 우리 값은 블록 교차검증 밖 예측이다.}
+\fig{Fig5_products.png}{0.98}{짝지은 차이와 편향. (a) R1 $-$ 제품(음수 = 우리가 낫다), 빈 마커는 25 km 마스크. (b) 편향. (c) 알래스카 연도별 편향.}
+알래스카 전체 셀에서 Liu 2024 가 우리와 비슷한 것(18.8 대 16.3 cm)은 Liu 가 우리 라벨과 같은 ABoVE 지점으로 학습했기 때문이다. 학습 지점 25 km 밖 셀에서 Wei 는 20.8, 우리는 15.0--15.3 cm 다. 레나·캐나다에서는 마스크와 무관하게 우리가 모든 제품보다 낮다. 편향은 우리 $\pm$3 cm, Wei +4$\sim$+22, Liu +6$\sim$+20 cm 다.
+
+\subsection{연도별 평가(질문 5)}
+\fig{Fig8_yearwise.png}{0.98}{연도별 평가. (a) 알래스카 연도별 편향(우리 블록 CV·연도 홀드아웃 대 Wei·Liu; 위 숫자는 셀-연도 수). (b) 다년 관측 셀에서 연도 간 변화의 상관(가로 막대 = 관측 변화와 TDD 변화의 상관). (c) 연도 편향 대 그 해 TDD 편차.}
+2020--2021 알래스카 편향 $-$16 cm 는 페어뱅크스 근처 깊은 활동층 지점을 9--10월 탐침으로 잰 자료이고(같은 위치의 2014년 8월 GPR 값 69--79 cm 대 85 cm), 레나 2020 은 다른 지형 단위('channel' 캠페인), 캐나다 2023--2024 는 Scotty Creek 화재 교란·비교란 지점(ALT 110 cm)이다. 같은 셀·같은 해의 8월 대 9월 쌍에서 9월이 10 cm 깊고 GPR 대 탐침은 차이가 없다. 다년 셀의 연도 간 변화 상관은 R1 0.27(알래스카)·0.25(레나)·0.06(캐나다), 제품 0.12--0.16 이고, 관측된 변화 자체가 TDD 변화와 0.06--0.22 로만 상관한다. 연도 역빈도 가중은 편향을 줄이지 못했다(기각).
+
+\subsection{연도를 명시한 지도}
+\fig{Fig6_maps_alaska.png}{0.98}{알래스카 1 km ALT 지도. (a--d) 2014·2016·2018·2022년(각 해 ERA5-Land 강제력), (e) 2011--2024 평균, (f) 2014 $-$ 평균.}
+\fig{Fig7_aoa_lena.png}{0.98}{(a) 적용 가능 영역(AOA, 파랑 = 안), (b) 잔차 보정량, (c, d) 레나 델타 2016년 ALT 와 평균 대비 편차.}
+
+\section{기존 결과와의 연결}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.1em]
+\item 10-02 '알래스카 지역 안 이득 0.4--0.5 cm, 격자 단위 보정' $\to$ 셀-연도·연도 정합에서도 $-$0.4 cm(미결정). 같은 결론.
+\item 10-02 '라벨 0 직접 ML 위험' $\to$ '지역 홀드아웃에서 직접 ML 붕괴' 로 검증 사다리의 한 단이 됐다.
+\item 09-30 '연도 정합 Stefan $-$1.0 cm' $\to$ 레나 $-$2.0 으로 재확인, 알래스카는 반대. 지역 의존성이 새로 드러났다.
+\item 10-05 XG '알래스카 r 0.62·RMSE 13.8' $\to$ 셀-연도 시험지에서 17.7(블록 CV). 옛 값은 셀 다년 평균이라 작았다. 섞어 쓰지 않는다.
+\item 07월 S14 '연간 편차 skill 0' $\to$ 다년 셀 $\Delta$ 상관 0.27 로 정밀화됐고 원인(캠페인 구성)이 밝혀졌다.
+\end{itemize}
+
+\section{연구 의의, 차별점, 강점}
+\textbf{의의.} ALT 에서 (1) 셀-연도 라벨과 같은 해 강제력을 짝지은 시험지, (2) 검증 사다리 5단, (3) 물리식·ML·결합·제품을 한 시험지에서 비교, (4) 제품 학습 지점 누설을 통제한 비교, (5) 연도 명시 지도와 연간 재현력의 정직한 보고를 함께 한 연구는 조사 범위에 없다.
+
+\textbf{차별점.} Gautam 2025(Sci Rep): 무작위 1회 분할·단일 지역 $\to$ 사다리·3지역·신뢰구간. Wei 2026·Liu 2024·Ran 2022·Aalto 2018: 지도 제품 $\to$ 같은 셀·같은 해 채점과 누설 마스크. CCI·Yi·Kimball: 순방향 모형 $\to$ 편향 정량. Pilyugina 2023·Tama 2025 등 결합 구조 연구: 하나씩 $\to$ 다섯 구조와 조건. 기법 신규성은 주장하지 않는다.
+
+\textbf{강점.} 결과가 분할 씨앗(0.2 cm 안 재현), 블록 크기, 학습기 5종, $\lambda$ 선택, 가중 방식에 걸쳐 같고, 음성 결과(알래스카·연간 변동·연도 가중·$\lambda$ 선택)를 그대로 보고한다. 입력 등록부와 코드로 전부 재생산된다.
+
+\section{Sci Rep 에 보고할 문장(초록 후보)}
+\begin{enumerate}[leftmargin=1.4em,itemsep=0.1em]
+\item 세 지역 19,172 셀-연도에서 그 해 강제력과 기후값 강제력을 비교하면, 라벨이 여러 해에 퍼진 레나에서 물리식 오차가 2 cm 줄고 한 해에 몰린 알래스카에서는 줄지 않는다.
+\item 무작위 분할은 직접 ML 의 오차를 공간 블록 분할보다 4--13 cm 낮게 보고하고, 지역 홀드아웃에서 직접 ML 은 물리식보다 5--23 cm 나쁘다.
+\item 물리 잔차 결합은 블록 교차검증에서 레나 $-$3.0, 캐나다 $-$1.7 cm 로 재보정 Stefan 보다 낮고 알래스카에서는 차이를 확인하지 못했다. 이득은 지형·토양 입력이 있을 때만 생기고 학습기에 따라 달라지지 않는다.
+\item 같은 셀·같은 해에서 우리 예측은 세 지역 모두 기존 제품 6종보다 낮고, 제품 학습 지점 25 km 밖 알래스카 셀에서 Wei 2026 보다 5 cm 낮다.
+\item 다년 관측 셀의 연도 간 변화는 어떤 방법도 상관 0.3 을 넘지 못하며, 연도별 큰 편향은 캠페인 구성에서 온다.
+\end{enumerate}
+게재 조건 세 가지: 제품 비교에 누설 마스크 판을 병기할 것, 알래스카 결론을 과장하지 않을 것(제목·초록은 조건부), 캐나다 블록 수(26)와 1$^\circ$ 블록에서의 역전을 적을 것.
+
+\section{남은 일}
+MODIS 2010--2024 재요청 결과 반영, 관측 월 정합을 기본 강제력으로 채택할지 결정(권고: 채택), FireALT 확충 라벨과 화재 교란 축, 원고 재작성.
+\end{document}

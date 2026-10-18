@@ -1,0 +1,1918 @@
+{
+ "S1": {
+  "title": "Stefan relation within a season and among years",
+  "stem": "FigS1_stefan",
+  "script": "scripts/4_visualization/paper_v10/si_s01_stefan.py",
+  "inputs": [
+   "data/raw/allena/PANGAEA_973813_ALLena_main.txt",
+   "data/raw/era5land/nh_monthly_2010-2024.nc",
+   "data/processed/v5/labels_cell_year_v5.csv",
+   "data/processed/v5/forcing_year.csv (via polar.testbed_v5.with_forcing year_obs)",
+   "data/processed/v5/runs/core_v6/meta/<Region>__block__year_obs__F8TS__P1__-__lam-1.json"
+  ],
+  "years": {
+   "a": "2015 (Samoylov)",
+   "b": "Samoylov 2015, Kurungnakh 2020",
+   "c": "label years of cells observed in >= 4 years (per region in values.c)",
+   "d": "all label cell-years (Alaska 2010-2024, Lena Delta 2010-2022, Canada (NW) 2010-2024)"
+  },
+  "values": {
+   "a": {
+    "site": "Samoylov",
+    "year": 2015,
+    "lat": 72.374,
+    "lon": 126.497,
+    "E": 1.3609,
+    "n_probe": 1602,
+    "n_days": 45,
+    "doy_range": [
+     192,
+     265
+    ],
+    "tdd_max_window": 745.9
+   },
+   "b": {
+    "Samoylov_2015": {
+     "E": 1.3609,
+     "n_probe": 1602,
+     "n_days": 45
+    },
+    "Kurungnakh_2020": {
+     "E": 1.0763,
+     "n_probe": 12,
+     "n_days": 6
+    }
+   },
+   "c": {
+    "Alaska": {
+     "n_cells": 203,
+     "n_cell_years": 1808,
+     "n_shown": 1763,
+     "slope": 1.4676,
+     "r": 0.164,
+     "years": [
+      2010,
+      2024
+     ]
+    },
+    "Lena": {
+     "n_cells": 25,
+     "n_cell_years": 134,
+     "n_shown": 133,
+     "slope": 1.6715,
+     "r": 0.388,
+     "years": [
+      2010,
+      2022
+     ]
+    },
+    "Canada": {
+     "n_cells": 48,
+     "n_cell_years": 219,
+     "n_shown": 219,
+     "slope": -0.7092,
+     "r": -0.117,
+     "years": [
+      2010,
+      2024
+     ]
+    }
+   },
+   "c_def": {
+    "min_observed_years": 4,
+    "x": "sqrt(TDD to the observation day) minus the cell mean",
+    "y": "ALT minus the cell mean",
+    "n_outside_axes": 46,
+    "xlim": [
+     -8.0,
+     6.0
+    ],
+    "ylim": [
+     -45.0,
+     45.0
+    ],
+    "slope_unit": "cm per sqrt(degC d)"
+   },
+   "d": [
+    {
+     "region": "Alaska",
+     "E_source": 1.714202438683493,
+     "E_recal": 1.9525972487228807,
+     "E_recal_folds": {
+      "b0|s0": 1.8777678275815801,
+      "b1|s0": 1.9831869068686778,
+      "b2|s0": 1.9669977635352383,
+      "b3|s0": 1.9985478389083098,
+      "b4|s0": 1.936485906720597
+     },
+     "n": 15540
+    },
+    {
+     "region": "Lena",
+     "E_source": 1.9236808063385067,
+     "E_recal": 1.6834878068697006,
+     "E_recal_folds": {
+      "b0|s0": 1.7183128135185162,
+      "b1|s0": 1.738564640145274,
+      "b2|s0": 1.7155415072314817,
+      "b3|s0": 1.6702138897595504,
+      "b4|s0": 1.574806183693682
+     },
+     "n": 2436
+    },
+    {
+     "region": "Canada",
+     "E_source": 1.9181191628018144,
+     "E_recal": 1.752970128384169,
+     "E_recal_folds": {
+      "b0|s0": 1.9750982771765049,
+      "b1|s0": 1.5614922627869783,
+      "b2|s0": 1.7414213545809543,
+      "b3|s0": 1.7595844682783452,
+      "b4|s0": 1.7272542790980618
+     },
+     "n": 1196
+    }
+   ]
+  },
+  "numbers_printed": {
+   "b": {
+    "Samoylov_2015": "E = 1.36",
+    "Kurungnakh_2020": "E = 1.08"
+   },
+   "c": {
+    "Alaska": "slope 1.47",
+    "Lena": "slope 1.67",
+    "Canada": "slope -0.71"
+   }
+  },
+  "outputs": {
+   "FigS1_stefan.pdf": {
+    "path": "outputs/figures/paper/v10_si/FigS1_stefan.pdf",
+    "bytes": 39207
+   },
+   "FigS1_stefan.png": {
+    "path": "outputs/figures/paper/v10_si/FigS1_stefan.png",
+    "bytes": 531120
+   }
+  },
+  "size_mm": [
+   180.0,
+   107.0
+  ],
+  "qa": {
+   "n_texts": 75,
+   "min_font_pt": 6.0,
+   "small": [],
+   "color": [],
+   "outside": [],
+   "overlaps": [],
+   "text_ink": [],
+   "ok": true
+  }
+ },
+ "S2": {
+  "title": "Model structures and learners",
+  "stem": "FigS2_structures",
+  "script": "scripts/4_visualization/paper_v10/si_s02_structures.py",
+  "inputs": [
+   "data/processed/v5/runs/core_v6/deltas_vs_ref.csv",
+   "data/processed/v5/runs/rf_v6/deltas_vs_ref.csv",
+   "data/processed/v5/runs/nn_v6/deltas_vs_ref.csv"
+  ],
+  "years": "all label cell-years: Alaska 2010-2024, Lena Delta 2010-2022, Canada (NW) 2010-2024 (labels_cell_year_v5, in_forcing == 1)",
+  "definition": "Delta RMSE = method - Stefan (recalibrated) on the same cell-years, spatial-block CV, climate input to the observation day, covariates F8TS; a: CatBoost; b: Physics + residual ML (lambda 0.5) and Direct ML for five learners; bars = 95 % block-bootstrap intervals",
+  "label_year_ranges": {
+   "Alaska": {
+    "years": [
+     2010,
+     2024
+    ],
+    "n_cell_years": 15540,
+    "n_cells": 13253
+   },
+   "Canada": {
+    "years": [
+     2010,
+     2024
+    ],
+    "n_cell_years": 1196,
+    "n_cells": 730
+   },
+   "Lena": {
+    "years": [
+     2010,
+     2022
+    ],
+    "n_cell_years": 2436,
+    "n_cells": 2206
+   }
+  },
+  "values": {
+   "a": {
+    "Direct ML": {
+     "Alaska": {
+      "delta_cm": -1.291,
+      "ci95": [
+       -4.034,
+       1.447
+      ],
+      "n": 15540
+     },
+     "Lena": {
+      "delta_cm": -5.158,
+      "ci95": [
+       -12.325,
+       0.123
+      ],
+      "n": 2436
+     },
+     "Canada": {
+      "delta_cm": -4.57,
+      "ci95": [
+       -6.234,
+       -0.238
+      ],
+      "n": 1196
+     }
+    },
+    "Physics-input ML": {
+     "Alaska": {
+      "delta_cm": -1.12,
+      "ci95": [
+       -3.801,
+       1.617
+      ],
+      "n": 15540
+     },
+     "Lena": {
+      "delta_cm": -4.938,
+      "ci95": [
+       -12.123,
+       0.424
+      ],
+      "n": 2436
+     },
+     "Canada": {
+      "delta_cm": -5.008,
+      "ci95": [
+       -6.424,
+       -0.819
+      ],
+      "n": 1196
+     }
+    },
+    "Physics pseudo-labels": {
+     "Alaska": {
+      "delta_cm": -0.128,
+      "ci95": [
+       -0.309,
+       -0.054
+      ],
+      "n": 15540
+     },
+     "Lena": {
+      "delta_cm": -0.296,
+      "ci95": [
+       -0.447,
+       -0.112
+      ],
+      "n": 2436
+     },
+     "Canada": {
+      "delta_cm": -0.141,
+      "ci95": [
+       -0.394,
+       -0.017
+      ],
+      "n": 1196
+     }
+    },
+    "Physics + residual ML": {
+     "Alaska": {
+      "delta_cm": -0.155,
+      "ci95": [
+       -0.569,
+       0.119
+      ],
+      "n": 15540
+     },
+     "Lena": {
+      "delta_cm": -3.593,
+      "ci95": [
+       -7.834,
+       -0.805
+      ],
+      "n": 2436
+     },
+     "Canada": {
+      "delta_cm": -3.737,
+      "ci95": [
+       -4.775,
+       -0.835
+      ],
+      "n": 1196
+     }
+    }
+   },
+   "b": {
+    "CatBoost": {
+     "Physics + residual ML": {
+      "Alaska": {
+       "delta_cm": -0.155,
+       "ci95": [
+        -0.569,
+        0.119
+       ]
+      },
+      "Lena": {
+       "delta_cm": -3.593,
+       "ci95": [
+        -7.834,
+        -0.805
+       ]
+      },
+      "Canada": {
+       "delta_cm": -3.737,
+       "ci95": [
+        -4.775,
+        -0.835
+       ]
+      }
+     },
+     "Direct ML": {
+      "Alaska": {
+       "delta_cm": -1.291,
+       "ci95": [
+        -4.034,
+        1.447
+       ]
+      },
+      "Lena": {
+       "delta_cm": -5.158,
+       "ci95": [
+        -12.325,
+        0.123
+       ]
+      },
+      "Canada": {
+       "delta_cm": -4.57,
+       "ci95": [
+        -6.234,
+        -0.238
+       ]
+      }
+     }
+    },
+    "RF": {
+     "Physics + residual ML": {
+      "Alaska": {
+       "delta_cm": -0.327,
+       "ci95": [
+        -0.857,
+        -0.014
+       ]
+      },
+      "Lena": {
+       "delta_cm": -3.623,
+       "ci95": [
+        -8.517,
+        -0.769
+       ]
+      },
+      "Canada": {
+       "delta_cm": -4.134,
+       "ci95": [
+        -5.608,
+        -0.4
+       ]
+      }
+     },
+     "Direct ML": {
+      "Alaska": {
+       "delta_cm": -1.079,
+       "ci95": [
+        -3.394,
+        1.393
+       ]
+      },
+      "Lena": {
+       "delta_cm": -3.826,
+       "ci95": [
+        -11.264,
+        2.669
+       ]
+      },
+      "Canada": {
+       "delta_cm": -5.724,
+       "ci95": [
+        -8.27,
+        1.89
+       ]
+      }
+     }
+    },
+    "MLP": {
+     "Physics + residual ML": {
+      "Alaska": {
+       "delta_cm": 0.598,
+       "ci95": [
+        -0.696,
+        1.297
+       ]
+      },
+      "Lena": {
+       "delta_cm": -2.767,
+       "ci95": [
+        -6.451,
+        -0.462
+       ]
+      },
+      "Canada": {
+       "delta_cm": -5.762,
+       "ci95": [
+        -7.202,
+        -1.682
+       ]
+      }
+     },
+     "Direct ML": {
+      "Alaska": {
+       "delta_cm": -0.016,
+       "ci95": [
+        -3.176,
+        3.275
+       ]
+      },
+      "Lena": {
+       "delta_cm": -3.118,
+       "ci95": [
+        -9.833,
+        0.74
+       ]
+      },
+      "Canada": {
+       "delta_cm": -7.898,
+       "ci95": [
+        -10.328,
+        -0.62
+       ]
+      }
+     }
+    },
+    "TabM": {
+     "Physics + residual ML": {
+      "Alaska": {
+       "delta_cm": 0.748,
+       "ci95": [
+        -0.604,
+        1.356
+       ]
+      },
+      "Lena": {
+       "delta_cm": -2.513,
+       "ci95": [
+        -5.849,
+        -0.451
+       ]
+      },
+      "Canada": {
+       "delta_cm": -5.724,
+       "ci95": [
+        -7.339,
+        -1.46
+       ]
+      }
+     },
+     "Direct ML": {
+      "Alaska": {
+       "delta_cm": 0.658,
+       "ci95": [
+        -1.732,
+        3.484
+       ]
+      },
+      "Lena": {
+       "delta_cm": -3.245,
+       "ci95": [
+        -9.424,
+        0.307
+       ]
+      },
+      "Canada": {
+       "delta_cm": -7.844,
+       "ci95": [
+        -10.219,
+        -0.998
+       ]
+      }
+     }
+    },
+    "FT-T": {
+     "Physics + residual ML": {
+      "Alaska": {
+       "delta_cm": 0.195,
+       "ci95": [
+        -0.557,
+        1.171
+       ]
+      },
+      "Lena": {
+       "delta_cm": -1.309,
+       "ci95": [
+        -2.372,
+        -0.737
+       ]
+      },
+      "Canada": {
+       "delta_cm": -5.649,
+       "ci95": [
+        -7.679,
+        -2.132
+       ]
+      }
+     },
+     "Direct ML": {
+      "Alaska": {
+       "delta_cm": -0.163,
+       "ci95": [
+        -1.533,
+        1.607
+       ]
+      },
+      "Lena": {
+       "delta_cm": -0.903,
+       "ci95": [
+        -2.24,
+        -0.155
+       ]
+      },
+      "Canada": {
+       "delta_cm": -6.629,
+       "ci95": [
+        -9.421,
+        -1.429
+       ]
+      }
+     }
+    }
+   }
+  },
+  "numbers_printed": "none (values in this JSON)",
+  "outputs": {
+   "FigS2_structures.pdf": {
+    "path": "outputs/figures/paper/v10_si/FigS2_structures.pdf",
+    "bytes": 19108
+   },
+   "FigS2_structures.png": {
+    "path": "outputs/figures/paper/v10_si/FigS2_structures.png",
+    "bytes": 156711
+   }
+  },
+  "size_mm": [
+   180.0,
+   66.0
+  ],
+  "qa": {
+   "n_texts": 29,
+   "min_font_pt": 6.5,
+   "small": [],
+   "color": [],
+   "outside": [],
+   "overlaps": [],
+   "text_ink": [],
+   "ok": true
+  }
+ },
+ "S3": {
+  "title": "SHAP attribution of the residual learner",
+  "stem": "FigS3_shap",
+  "script": "scripts/4_visualization/paper_v10/si_s03_shap.py",
+  "inputs": [
+   "data/processed/v5/runs/extra_v9/shap_groups.csv",
+   "data/processed/v5/runs/extra_v9/shap_summary.csv"
+  ],
+  "years": "all label cell-years of each region: Alaska 2010-2024, Lena Delta 2010-2022, Canada (NW) 2010-2024; climate input to the observation day",
+  "n_cell_years": {
+   "Alaska": 15540,
+   "Canada": 1196,
+   "Lena": 2436
+  },
+  "groups": "climate = ERA5-Land inputs (e5_*), terrain = DEM inputs (dem_*), soil = SoilGrids (sg_*)",
+  "values": {
+   "a": {
+    "Alaska": {
+     "residual": {
+      "climate": 0.4579,
+      "terrain": 0.3369,
+      "soil": 0.2052
+     },
+     "direct": {
+      "climate": 0.4734,
+      "terrain": 0.2477,
+      "soil": 0.279
+     }
+    },
+    "Lena": {
+     "residual": {
+      "climate": 0.3328,
+      "terrain": 0.501,
+      "soil": 0.1662
+     },
+     "direct": {
+      "climate": 0.4338,
+      "terrain": 0.4111,
+      "soil": 0.1551
+     }
+    },
+    "Canada": {
+     "residual": {
+      "climate": 0.2057,
+      "terrain": 0.4076,
+      "soil": 0.3867
+     },
+     "direct": {
+      "climate": 0.2592,
+      "terrain": 0.3189,
+      "soil": 0.4218
+     }
+    }
+   },
+   "b": {
+    "Alaska": {
+     "Warmest-month T": 1.77,
+     "Topographic position": 1.629,
+     "Roughness": 1.604,
+     "Snow water eq.": 1.341
+    },
+    "Lena": {
+     "Elevation": 3.877,
+     "Mean annual T": 2.607,
+     "Slope": 2.092,
+     "Roughness": 0.947
+    },
+    "Canada": {
+     "SOC 5–15 cm": 3.115,
+     "Aspect (E–W)": 2.609,
+     "Roughness": 1.758,
+     "Topographic position": 1.692
+    }
+   }
+  },
+  "numbers_printed": "a: group shares in percent (shares >= 10 % printed inside the bars)",
+  "outputs": {
+   "FigS3_shap.pdf": {
+    "path": "outputs/figures/paper/v10_si/FigS3_shap.pdf",
+    "bytes": 16766
+   },
+   "FigS3_shap.png": {
+    "path": "outputs/figures/paper/v10_si/FigS3_shap.png",
+    "bytes": 279104
+   }
+  },
+  "size_mm": [
+   180.0,
+   64.0
+  ],
+  "qa": {
+   "n_texts": 59,
+   "min_font_pt": 6.0,
+   "small": [],
+   "color": [],
+   "outside": [],
+   "overlaps": [],
+   "text_ink": [],
+   "ok": true
+  }
+ },
+ "S4": {
+  "title": "Product-anchored residual learning",
+  "stem": "FigS4_product_anchor",
+  "script": "scripts/4_visualization/paper_v10/si_s04_product_anchor.py",
+  "inputs": [
+   "data/processed/v5/runs/extra_v9/pa_metrics.csv (product == 'wei')",
+   "data/processed/v5/runs/extra_v9/preds_PA_<region>_wei.csv.gz"
+  ],
+  "years": {
+   "Alaska": {
+    "years": [
+     2010,
+     2024
+    ],
+    "n_cell_years": 15532
+   },
+   "Lena": {
+    "years": [
+     2013,
+     2021
+    ],
+    "n_cell_years": 814
+   },
+   "Canada": {
+    "years": [
+     2010,
+     2024
+    ],
+    "n_cell_years": 1191
+   }
+  },
+  "definition": "label cell-years where Wei 2026 has a value of the observation year; spatial-block CV; Wei 2026, recalibrated = linear recalibration fitted on the training folds; + residual ML = CatBoost residual learner (lambda 0.5) on the anchor",
+  "values_rmse_cm": {
+   "Alaska": {
+    "Wei 2026": 19.513,
+    "Wei 2026, recalibrated": 19.854,
+    "Wei 2026 + residual ML": 18.888,
+    "Stefan (recalibrated)": 18.582,
+    "Physics + residual ML": 18.475
+   },
+   "Lena": {
+    "Wei 2026": 30.301,
+    "Wei 2026, recalibrated": 24.402,
+    "Wei 2026 + residual ML": 22.141,
+    "Stefan (recalibrated)": 21.12,
+    "Physics + residual ML": 19.339
+   },
+   "Canada": {
+    "Wei 2026": 27.366,
+    "Wei 2026, recalibrated": 24.958,
+    "Wei 2026 + residual ML": 23.696,
+    "Stefan (recalibrated)": 30.709,
+    "Physics + residual ML": 27.05
+   }
+  },
+  "numbers_printed": {
+   "Alaska": "n = 15,532",
+   "Lena": "n = 814",
+   "Canada": "n = 1,191"
+  },
+  "outputs": {
+   "FigS4_product_anchor.pdf": {
+    "path": "outputs/figures/paper/v10_si/FigS4_product_anchor.pdf",
+    "bytes": 12790
+   },
+   "FigS4_product_anchor.png": {
+    "path": "outputs/figures/paper/v10_si/FigS4_product_anchor.png",
+    "bytes": 124946
+   }
+  },
+  "size_mm": [
+   180.0,
+   47.0
+  ],
+  "qa": {
+   "n_texts": 24,
+   "min_font_pt": 6.0,
+   "small": [],
+   "color": [],
+   "outside": [],
+   "overlaps": [],
+   "text_ink": [],
+   "ok": true
+  }
+ },
+ "S5": {
+  "title": "External CALM regions without local labels and adaptation by sub-region",
+  "stem": "FigS5_external",
+  "script": "scripts/4_visualization/paper_v10/si_s05_external.py",
+  "inputs": [
+   "data/processed/v5/runs/extra_v9/ext_metrics.csv",
+   "data/processed/v5/runs/extra_v9/preds_EXTFT_*.csv.gz",
+   "data/processed/v9_ext/labels_cell_year_v5.csv"
+  ],
+  "years": {
+   "external_labels": [
+    2010,
+    2024
+   ],
+   "c_rows": "rows where Wei 2026, Liu 2024 (to 2020) and ESA CCI v5 all have a value of the observation year",
+   "training_labels": "Alaska 2010-2024, Lena Delta 2010-2022, Canada (NW) 2010-2024"
+  },
+  "definition": {
+   "b": "sites inside the covariate range of the training data (subset in_range); each series scored on its own rows (n per series)",
+   "c": "seed-averaged predictions; 5 local labels drawn from the same sub-region; ESA CCI v5 on the same rows"
+  },
+  "n_external_sites": 73,
+  "n_external_cell_years": 816,
+  "values_b": {
+   "W Siberia": {
+    "Physics + residual ML, source regions only": {
+     "rmse_cm": 50.47,
+     "n": 218
+    },
+    "Physics + residual ML, Stefan recalibrated locally": {
+     "rmse_cm": 33.41,
+     "n": 218
+    },
+    "Wei 2026 (trained on these sites)": {
+     "rmse_cm": 28.11,
+     "n": 218
+    },
+    "Liu 2024 (trained on these sites)": {
+     "rmse_cm": 22.03,
+     "n": 153
+    },
+    "ESA CCI v5 (no ALT training)": {
+     "rmse_cm": 37.69,
+     "n": 214
+    }
+   },
+   "C Siberia": {
+    "Physics + residual ML, source regions only": {
+     "rmse_cm": 60.08,
+     "n": 81
+    },
+    "Physics + residual ML, Stefan recalibrated locally": {
+     "rmse_cm": 53.49,
+     "n": 81
+    },
+    "Wei 2026 (trained on these sites)": {
+     "rmse_cm": 11.65,
+     "n": 81
+    },
+    "Liu 2024 (trained on these sites)": {
+     "rmse_cm": 8.1,
+     "n": 62
+    },
+    "ESA CCI v5 (no ALT training)": {
+     "rmse_cm": 72.69,
+     "n": 65
+    }
+   },
+   "European Russia": {
+    "Physics + residual ML, source regions only": {
+     "rmse_cm": 55.33,
+     "n": 73
+    },
+    "Physics + residual ML, Stefan recalibrated locally": {
+     "rmse_cm": 42.95,
+     "n": 73
+    },
+    "Wei 2026 (trained on these sites)": {
+     "rmse_cm": 16.36,
+     "n": 57
+    },
+    "Liu 2024 (trained on these sites)": {
+     "rmse_cm": 14.81,
+     "n": 30
+    },
+    "ESA CCI v5 (no ALT training)": {
+     "rmse_cm": 109.36,
+     "n": 38
+    }
+   },
+   "NE Siberia": {
+    "Physics + residual ML, source regions only": {
+     "rmse_cm": 28.59,
+     "n": 244
+    },
+    "Physics + residual ML, Stefan recalibrated locally": {
+     "rmse_cm": 29.83,
+     "n": 244
+    },
+    "Wei 2026 (trained on these sites)": {
+     "rmse_cm": 12.75,
+     "n": 231
+    },
+    "Liu 2024 (trained on these sites)": {
+     "rmse_cm": 26.54,
+     "n": 158
+    },
+    "ESA CCI v5 (no ALT training)": {
+     "rmse_cm": 31.73,
+     "n": 217
+    }
+   },
+   "Chukotka": {
+    "Physics + residual ML, source regions only": {
+     "rmse_cm": 13.71,
+     "n": 75
+    },
+    "Physics + residual ML, Stefan recalibrated locally": {
+     "rmse_cm": 16.35,
+     "n": 75
+    },
+    "Wei 2026 (trained on these sites)": {
+     "rmse_cm": 19.75,
+     "n": 60
+    },
+    "Liu 2024 (trained on these sites)": {
+     "rmse_cm": 19.97,
+     "n": 33
+    },
+    "ESA CCI v5 (no ALT training)": {
+     "rmse_cm": 43.87,
+     "n": 70
+    }
+   },
+   "Kamchatka": {
+    "Physics + residual ML, source regions only": {
+     "rmse_cm": 7.49,
+     "n": 19
+    },
+    "Physics + residual ML, Stefan recalibrated locally": {
+     "rmse_cm": 8.51,
+     "n": 19
+    },
+    "Wei 2026 (trained on these sites)": {
+     "rmse_cm": 5.94,
+     "n": 19
+    },
+    "Liu 2024 (trained on these sites)": {
+     "rmse_cm": 47.43,
+     "n": 16
+    },
+    "ESA CCI v5 (no ALT training)": {
+     "rmse_cm": 124.39,
+     "n": 19
+    }
+   },
+   "Svalbard": {
+    "Physics + residual ML, source regions only": {
+     "rmse_cm": 127.33,
+     "n": 65
+    },
+    "Physics + residual ML, Stefan recalibrated locally": {
+     "rmse_cm": 135.85,
+     "n": 65
+    },
+    "Wei 2026 (trained on these sites)": {
+     "rmse_cm": 24.68,
+     "n": 65
+    },
+    "Liu 2024 (trained on these sites)": {
+     "rmse_cm": 18.57,
+     "n": 32
+    },
+    "ESA CCI v5 (no ALT training)": {
+     "rmse_cm": 108.26,
+     "n": 49
+    }
+   },
+   "Greenland": {
+    "Physics + residual ML, source regions only": {
+     "rmse_cm": 49.59,
+     "n": 30
+    },
+    "Physics + residual ML, Stefan recalibrated locally": {
+     "rmse_cm": 14.44,
+     "n": 30
+    },
+    "Wei 2026 (trained on these sites)": {
+     "rmse_cm": 36.92,
+     "n": 30
+    },
+    "ESA CCI v5 (no ALT training)": {
+     "rmse_cm": 20.02,
+     "n": 28
+    }
+   },
+   "All sites": {
+    "Physics + residual ML, source regions only": {
+     "rmse_cm": 54.76,
+     "n": 805
+    },
+    "Physics + residual ML, Stefan recalibrated locally": {
+     "rmse_cm": 50.51,
+     "n": 805
+    },
+    "Wei 2026 (trained on these sites)": {
+     "rmse_cm": 21.16,
+     "n": 761
+    },
+    "Liu 2024 (trained on these sites)": {
+     "rmse_cm": 23.02,
+     "n": 484
+    },
+    "ESA CCI v5 (no ALT training)": {
+     "rmse_cm": 57.75,
+     "n": 700
+    }
+   }
+  },
+  "values_c": {
+   "W Siberia": {
+    "no_local_labels": 47.67,
+    "five_local_labels": 33.5,
+    "esa_cci_v5": 37.33,
+    "n_rows": 153
+   },
+   "C Siberia": {
+    "no_local_labels": 62.83,
+    "five_local_labels": 59.59,
+    "esa_cci_v5": 67.22,
+    "n_rows": 52
+   },
+   "European Russia": {
+    "no_local_labels": 59.47,
+    "five_local_labels": 52.21,
+    "esa_cci_v5": 100.37,
+    "n_rows": 30
+   },
+   "NE Siberia": {
+    "no_local_labels": 32.58,
+    "five_local_labels": 34.81,
+    "esa_cci_v5": 34.97,
+    "n_rows": 158
+   },
+   "Chukotka": {
+    "no_local_labels": 8.76,
+    "five_local_labels": 14.55,
+    "esa_cci_v5": 48.16,
+    "n_rows": 33
+   },
+   "Svalbard": {
+    "no_local_labels": 144.34,
+    "five_local_labels": 64.35,
+    "esa_cci_v5": 116.41,
+    "n_rows": 32
+   }
+  },
+  "numbers_printed": {
+   "b_row_labels": "sub-region number, name and n (Physics + residual ML rows)"
+  },
+  "outputs": {
+   "FigS5_external.pdf": {
+    "path": "outputs/figures/paper/v10_si/FigS5_external.pdf",
+    "bytes": 733759
+   },
+   "FigS5_external.png": {
+    "path": "outputs/figures/paper/v10_si/FigS5_external.png",
+    "bytes": 749890
+   }
+  },
+  "size_mm": [
+   180.0,
+   80.0
+  ],
+  "qa": {
+   "n_texts": 44,
+   "min_font_pt": 6.0,
+   "small": [],
+   "color": [],
+   "outside": [],
+   "overlaps": [],
+   "text_ink": [],
+   "ok": true
+  }
+ },
+ "S6": {
+  "title": "Product maps against our map in the same year",
+  "stem": "FigS6_product_maps",
+  "script": "scripts/4_visualization/paper_v10/si_s06_s07_product_maps.py",
+  "inputs": [
+   "data/processed/v5/maps/Alaska/pred_2014.csv.gz",
+   "data/processed/v5/maps/Lena/pred_2016.csv.gz",
+   "data/processed/v5/maps/<Region>/mean_2011_2024.csv.gz (aoa_in)",
+   "data/raw/wei2026_alt_v2/extracted/ALT_{2014,2016}.tif",
+   "data/raw/liu2024_alt/ALT_{2014,2016}.tif",
+   "data/processed/v5/labels_cell_year_v5.csv",
+   "data/processed/v5/products_cell_year_v5.csv"
+  ],
+  "years": {
+   "alaska": 2014,
+   "lena_delta": 2016
+  },
+  "definition": {
+   "maps": "our map = Physics + residual ML trained on all labels (values at observed cells are in-sample; block-CV out-of-fold RMSE in rmse_common_cm['oof'])",
+   "residuals": "observed cells of the year aggregated to 1 km cells, clusters = single-linkage within 3 % of the map width; RMSE on the cells where all three maps have a value"
+  },
+  "values": {
+   "Alaska": {
+    "year": 2014,
+    "alt_range_cm": [
+     35.0,
+     85.0
+    ],
+    "extend": "both",
+    "n_cells_drawn": 858517,
+    "n_labels": 7861,
+    "n_label_cells": 101,
+    "n_clusters": 32,
+    "n_common_cells": 95,
+    "rmse_common_cm": {
+     "ours": 15.86,
+     "wei": 15.76,
+     "liu": 16.38,
+     "oof": 17.08
+    },
+    "rmse_own_cells": {
+     "ours": {
+      "rmse": 15.84,
+      "n": 96
+     },
+     "wei": {
+      "rmse": 15.58,
+      "n": 101
+     },
+     "liu": {
+      "rmse": 16.4,
+      "n": 100
+     },
+     "oof": {
+      "rmse": 16.76,
+      "n": 101
+     }
+    },
+    "product_value_range_p1_p99": {
+     "wei": [
+      40.82435806274414,
+      257.3091735839844
+     ],
+     "liu": [
+      45.39987857818603,
+      311.94571075439455
+     ]
+    }
+   },
+   "Lena": {
+    "year": 2016,
+    "alt_range_cm": [
+     30.0,
+     60.0
+    ],
+    "extend": "both",
+    "n_cells_drawn": 38086,
+    "n_labels": 681,
+    "n_label_cells": 35,
+    "n_clusters": 6,
+    "n_common_cells": 14,
+    "rmse_common_cm": {
+     "ours": 19.24,
+     "wei": 26.18,
+     "liu": 30.43,
+     "oof": 12.66
+    },
+    "rmse_own_cells": {
+     "ours": {
+      "rmse": 17.36,
+      "n": 29
+     },
+     "wei": {
+      "rmse": 28.27,
+      "n": 17
+     },
+     "liu": {
+      "rmse": 30.19,
+      "n": 20
+     },
+     "oof": {
+      "rmse": 12.96,
+      "n": 35
+     }
+    },
+    "product_value_range_p1_p99": {
+     "wei": [
+      40.20560123443604,
+      72.7478646850586
+     ],
+     "liu": [
+      35.51713562011719,
+      85.06295013427734
+     ]
+    }
+   }
+  },
+  "numbers_printed": {
+   "Alaska": {
+    "ours": "RMSE 15.9 cm",
+    "wei": "RMSE 15.8 cm",
+    "liu": "RMSE 16.4 cm"
+   },
+   "Lena": {
+    "ours": "RMSE 19.2 cm",
+    "wei": "RMSE 26.2 cm",
+    "liu": "RMSE 30.4 cm"
+   }
+  },
+  "outputs": {
+   "FigS6_product_maps.pdf": {
+    "path": "outputs/figures/paper/v10_si/FigS6_product_maps.pdf",
+    "bytes": 4471911
+   },
+   "FigS6_product_maps.png": {
+    "path": "outputs/figures/paper/v10_si/FigS6_product_maps.png",
+    "bytes": 4784232
+   }
+  },
+  "size_mm": [
+   180.0,
+   109.0
+  ],
+  "qa": {
+   "n_texts": 80,
+   "min_font_pt": 6.0,
+   "small": [],
+   "color": [],
+   "outside": [],
+   "overlaps": [],
+   "text_ink": [],
+   "ok": true
+  }
+ },
+ "S7": {
+  "title": "Residual ML correction maps",
+  "stem": "FigS7_correction_maps",
+  "script": "scripts/4_visualization/paper_v10/si_s06_s07_product_maps.py",
+  "inputs": [
+   "data/processed/v5/maps/Alaska/mean_2011_2024.csv.gz (r1 - p1)",
+   "data/processed/v5/maps/Lena/pred_2016.csv.gz (r1 - p1)"
+  ],
+  "years": {
+   "alaska": "mean of the yearly maps 2011-2024",
+   "lena_delta": 2016
+  },
+  "definition": "Physics + residual ML minus Stefan (recalibrated) per 1 km cell; common symmetric range = larger of the two regions' 99th percentile of |correction| rounded up to 5 cm; cells outside the area of applicability lighter",
+  "values": {
+   "range_cm": [
+    -15.0,
+    15.0
+   ],
+   "corr_sym_cm": {
+    "Alaska": 15.0,
+    "Lena": 10.0
+   }
+  },
+  "numbers_printed": "scale bars (200 km, 50 km)",
+  "outputs": {
+   "FigS7_correction_maps.pdf": {
+    "path": "outputs/figures/paper/v10_si/FigS7_correction_maps.pdf",
+    "bytes": 4892673
+   },
+   "FigS7_correction_maps.png": {
+    "path": "outputs/figures/paper/v10_si/FigS7_correction_maps.png",
+    "bytes": 5401457
+   }
+  },
+  "size_mm": [
+   180.0,
+   81.2
+  ],
+  "qa": {
+   "n_texts": 26,
+   "min_font_pt": 6.0,
+   "small": [],
+   "color": [],
+   "outside": [],
+   "overlaps": [],
+   "text_ink": [],
+   "ok": true
+  }
+ },
+ "S8": {
+  "title": "Long-record sites",
+  "stem": "FigS8_site_series",
+  "script": "scripts/4_visualization/paper_v10/si_s08_site_series.py",
+  "inputs": [
+   "data/processed/v5/site_series/site_series_year_obs.csv.gz",
+   "data/processed/v5/products_cell_year_v5.csv",
+   "data/processed/v5/labels_cell_year_v5.csv"
+  ],
+  "years": "2010-2024 (predictions every year; observed years listed per site)",
+  "definition": "cell with the most observed years per region (ties: most probe records, lowest loc_id); predictions = spatial-block out-of-fold (v5_site_series.py, 3 seeds): observation day = climate input to the observation day, end of season = full-season TDD",
+  "sites": {
+   "Alaska": {
+    "wei_years": [
+     2010,
+     2020
+    ],
+    "liu_years": [
+     2010,
+     2020
+    ],
+    "loc_id": 14268,
+    "lat": 71.3167,
+    "lon": -156.6,
+    "observed_years": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022,
+     2023,
+     2024
+    ],
+    "n_observed_years": 15,
+    "products_drawn": [
+     "wei",
+     "liu"
+    ],
+    "observed_cm": {
+     "2010": 41.0,
+     "2011": 41.0,
+     "2012": 38.0,
+     "2013": 41.0,
+     "2014": 34.0,
+     "2015": 40.0,
+     "2016": 40.0,
+     "2017": 39.0,
+     "2018": 38.0,
+     "2019": 47.0,
+     "2020": 45.0,
+     "2021": 31.0,
+     "2022": 32.0,
+     "2023": 44.0,
+     "2024": 38.0
+    },
+    "r1_obs_cm": {
+     "2010": 33.3,
+     "2011": 32.9,
+     "2012": 39.3,
+     "2013": 32.6,
+     "2014": 28.3,
+     "2015": 35.1,
+     "2016": 34.0,
+     "2017": 36.8,
+     "2018": 31.6,
+     "2019": 40.1,
+     "2020": 30.5,
+     "2021": 30.2,
+     "2022": 34.2,
+     "2023": 40.1,
+     "2024": 36.4
+    }
+   },
+   "Lena": {
+    "loc_id": 14813,
+    "lat": 71.7839,
+    "lon": 129.4119,
+    "observed_years": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2017,
+     2019,
+     2021
+    ],
+    "n_observed_years": 8,
+    "products_drawn": [],
+    "observed_cm": {
+     "2010": 50.0,
+     "2011": 47.3,
+     "2012": 35.5,
+     "2013": 34.8,
+     "2014": 41.9,
+     "2017": 47.0,
+     "2019": 46.6,
+     "2021": 56.0
+    },
+    "r1_obs_cm": {
+     "2010": 39.2,
+     "2011": 43.0,
+     "2012": 38.4,
+     "2013": 34.3,
+     "2014": 43.9,
+     "2017": 39.7,
+     "2019": 47.4,
+     "2021": 48.0
+    }
+   }
+  },
+  "numbers_printed": "site coordinates",
+  "outputs": {
+   "FigS8_site_series.pdf": {
+    "path": "outputs/figures/paper/v10_si/FigS8_site_series.pdf",
+    "bytes": 17420
+   },
+   "FigS8_site_series.png": {
+    "path": "outputs/figures/paper/v10_si/FigS8_site_series.png",
+    "bytes": 381634
+   }
+  },
+  "size_mm": [
+   180.0,
+   66.0
+  ],
+  "qa": {
+   "n_texts": 36,
+   "min_font_pt": 6.0,
+   "small": [],
+   "color": [],
+   "outside": [],
+   "overlaps": [],
+   "text_ink": [],
+   "ok": true
+  }
+ },
+ "S9": {
+  "title": "1 km detail, area of applicability and the Lena Delta 2016 map",
+  "stem": "FigS9_map_detail",
+  "script": "scripts/4_visualization/paper_v10/si_s09_map_detail.py",
+  "inputs": [
+   "data/processed/v5/maps/Alaska/mean_2011_2024.csv.gz",
+   "data/processed/v5/maps/Lena/{mean_2011_2024,pred_2016}.csv.gz",
+   "data/processed/map_{alaska,lena}/{*_grid_x25_v1.csv.gz, hillshade_v1/shade_250m.tif}",
+   "data/processed/v5/labels_cell_year_v5.csv"
+  ],
+  "years": {
+   "a_b": "mean of the yearly maps 2011-2024",
+   "c": "static (covariate dissimilarity to the training labels, 2011-2024 mean map table)",
+   "d_e": "2016"
+  },
+  "values": {
+   "a_b": {
+    "North Slope, Toolik": {
+     "centre_lonlat": [
+      -149.55,
+      68.75
+     ],
+     "width_km": 50.0,
+     "cells_outside_aoa_in_window": 217
+    },
+    "Interior, Fairbanks": {
+     "centre_lonlat": [
+      -147.85,
+      64.85
+     ],
+     "width_km": 50.0,
+     "cells_outside_aoa_in_window": 964
+    }
+   },
+   "c": {
+    "frac_inside_aoa": 0.5559,
+    "colours": {
+     "inside": "#7A7A7A",
+     "outside": "#BDBDBD"
+    }
+   },
+   "d_e": {
+    "year": 2016,
+    "range_cm": [
+     30.0,
+     60.0
+    ],
+    "extend": "neither",
+    "observed_cells_drawn_d": 143,
+    "zoom_width_km": 24.0,
+    "cells_outside_aoa_in_zoom": 4,
+    "frac_inside_aoa": 0.6172
+   },
+   "a_b_range_cm": [
+    40.0,
+    90.0
+   ]
+  },
+  "numbers_printed": "scale bars (10, 200, 50, 5 km)",
+  "outputs": {
+   "FigS9_map_detail.pdf": {
+    "path": "outputs/figures/paper/v10_si/FigS9_map_detail.pdf",
+    "bytes": 2758208
+   },
+   "FigS9_map_detail.png": {
+    "path": "outputs/figures/paper/v10_si/FigS9_map_detail.png",
+    "bytes": 3441356
+   }
+  },
+  "size_mm": [
+   180.0,
+   144.6
+  ],
+  "qa": {
+   "n_texts": 42,
+   "min_font_pt": 6.0,
+   "small": [],
+   "color": [],
+   "outside": [],
+   "overlaps": [],
+   "text_ink": [],
+   "ok": true
+  }
+ },
+ "S10": {
+  "title": "Product training-site distances and latitude-band bias",
+  "stem": "FigS10_training_sites",
+  "script": "scripts/4_visualization/paper_v10/si_s10_training_sites.py",
+  "inputs": [
+   "data/raw/qtp_alt_open_2026-09-29/essd-2026-447_supplement/ALT_variables.xlsx",
+   "data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv (product == 'wei', label cells '|r')",
+   "data/processed/v5/labels_cell_year_v5.csv",
+   "data/processed/v9_qa/map_band_alaska2014_by_elev.csv"
+  ],
+  "years": {
+   "a_b": "label cells of all years (Alaska 2010-2024, Lena Delta 2010-2022, Canada (NW) 2010-2024)",
+   "c": "2014 (Alaska map and Wei 2026 / Liu 2024 ALT_2014)"
+  },
+  "definition": {
+   "c": "mean of (product - Physics + residual ML map) over every 10th 1 km map cell of Alaska 2014, by latitude band and elevation class"
+  },
+  "values": {
+   "a": {
+    "n_wei_sites": 195
+   },
+   "b": {
+    "Alaska": {
+     "cells": 13606,
+     "median_km": 7.33,
+     "share_le25km": 0.666,
+     "share_le100km": 0.9458
+    },
+    "Lena": {
+     "cells": 3037,
+     "median_km": 107.1,
+     "share_le25km": 0.0099,
+     "share_le100km": 0.4122
+    },
+    "Canada": {
+     "cells": 750,
+     "median_km": 221.72,
+     "share_le25km": 0.1053,
+     "share_le100km": 0.476
+    }
+   },
+   "c": {
+    "elev<=600m": {
+     "wei": {
+      "59–64°N": -3.91,
+      "64–66°N": -8.76,
+      "66–68°N": -5.69,
+      "68–70°N": 2.82,
+      "70–72°N": -1.71
+     },
+     "liu": {
+      "59–64°N": -3.85,
+      "64–66°N": -3.36,
+      "66–68°N": -1.0,
+      "68–70°N": 4.13,
+      "70–72°N": 4.76
+     }
+    },
+    "n_cells": {
+     "elev<=600m": {
+      "59–64°N": 6060,
+      "64–66°N": 19610,
+      "66–68°N": 16185,
+      "68–70°N": 13043,
+      "70–72°N": 3731
+     },
+     "elev>600m": {
+      "59–64°N": 9950,
+      "64–66°N": 4592,
+      "66–68°N": 5266,
+      "68–70°N": 7415,
+      "70–72°N": null
+     }
+    },
+    "elev>600m": {
+     "wei": {
+      "59–64°N": 67.25,
+      "64–66°N": 1.98,
+      "66–68°N": 14.59,
+      "68–70°N": 21.91,
+      "70–72°N": null
+     },
+     "liu": {
+      "59–64°N": 99.27,
+      "64–66°N": 40.8,
+      "66–68°N": 45.72,
+      "68–70°N": 55.19,
+      "70–72°N": null
+     }
+    }
+   }
+  },
+  "numbers_printed": "none",
+  "omitted": "v9_f11_qa.py panel c (Lena Delta transfer RMSE vs products) is not part of S10",
+  "outputs": {
+   "FigS10_training_sites.pdf": {
+    "path": "outputs/figures/paper/v10_si/FigS10_training_sites.pdf",
+    "bytes": 780915
+   },
+   "FigS10_training_sites.png": {
+    "path": "outputs/figures/paper/v10_si/FigS10_training_sites.png",
+    "bytes": 783741
+   }
+  },
+  "size_mm": [
+   180.0,
+   86.0
+  ],
+  "qa": {
+   "n_texts": 36,
+   "min_font_pt": 6.0,
+   "small": [],
+   "color": [],
+   "outside": [],
+   "overlaps": [],
+   "text_ink": [],
+   "ok": true
+  }
+ },
+ "S11": {
+  "title": "Label ladder with all model structures",
+  "stem": "FigS11_label_ladder",
+  "script": "scripts/4_visualization/paper_v10/si_s11_label_ladder.py",
+  "inputs": [
+   "data/processed/v5/runs/ladder_v6/ladder_metrics.csv",
+   "data/processed/v5/runs/ladder_v6/ladder_deltas.csv"
+  ],
+  "years": "label cell-years of each region pooled (Alaska 2010-2024, Lena Delta 2010-2022, Canada (NW) 2010-2024); climate input to the observation day",
+  "definition": {
+   "a": "Delta RMSE vs Stefan (recalibrated) at the same number of training labels, spatial-block CV, band = 95 % block bootstrap of Physics + residual ML; x = ordered label-number categories ('all' = all training-fold labels)",
+   "b": "region hold-out RMSE against target-region labels added (0, 25, 50, 100, 250, 500)"
+  },
+  "values": {
+   "a": {
+    "Alaska": {
+     "Direct ML": {
+      "25": 2.815,
+      "50": 2.106,
+      "100": 2.04,
+      "250": 1.204,
+      "500": -0.69,
+      "1000": -0.791,
+      "2500": -1.092,
+      "all": -1.291
+     },
+     "Physics pseudo-labels": {
+      "25": -0.205,
+      "50": -0.202,
+      "100": -0.122,
+      "250": -0.071,
+      "500": -0.081,
+      "1000": -0.062,
+      "2500": -0.066,
+      "all": -0.128
+     },
+     "Physics-input ML": {
+      "25": 2.273,
+      "50": 1.589,
+      "100": 2.224,
+      "250": 1.018,
+      "500": -0.635,
+      "1000": -1.036,
+      "2500": -1.334,
+      "all": -1.12
+     },
+     "Physics + residual ML": {
+      "25": -0.853,
+      "50": -0.484,
+      "100": -0.669,
+      "250": -0.774,
+      "500": -0.599,
+      "1000": -0.403,
+      "2500": -0.157,
+      "all": -0.155
+     },
+     "n_all_training_labels": 10743
+    },
+    "Lena": {
+     "Direct ML": {
+      "25": -0.833,
+      "50": -1.368,
+      "100": -2.944,
+      "250": -4.027,
+      "500": -4.488,
+      "1000": -4.778,
+      "all": -5.158
+     },
+     "Physics pseudo-labels": {
+      "25": 0.014,
+      "50": -0.154,
+      "100": -0.159,
+      "250": -0.22,
+      "500": -0.167,
+      "1000": -0.191,
+      "all": -0.296
+     },
+     "Physics-input ML": {
+      "25": -1.057,
+      "50": -1.411,
+      "100": -2.961,
+      "250": -4.135,
+      "500": -4.259,
+      "1000": -4.46,
+      "all": -4.938
+     },
+     "Physics + residual ML": {
+      "25": -0.841,
+      "50": -1.072,
+      "100": -2.033,
+      "250": -2.481,
+      "500": -2.995,
+      "1000": -3.335,
+      "all": -3.593
+     },
+     "n_all_training_labels": 1508
+    },
+    "Canada": {
+     "Direct ML": {
+      "25": 1.224,
+      "50": -0.302,
+      "100": -1.889,
+      "250": -3.672,
+      "500": -5.148,
+      "all": -4.57
+     },
+     "Physics pseudo-labels": {
+      "25": 0.017,
+      "50": -0.125,
+      "100": -0.15,
+      "250": -0.09,
+      "500": -0.115,
+      "all": -0.141
+     },
+     "Physics-input ML": {
+      "25": 1.867,
+      "50": 0.08,
+      "100": -2.245,
+      "250": -3.511,
+      "500": -5.524,
+      "all": -5.008
+     },
+     "Physics + residual ML": {
+      "25": -0.345,
+      "50": -0.809,
+      "100": -1.902,
+      "250": -2.844,
+      "500": -3.819,
+      "all": -3.737
+     },
+     "n_all_training_labels": 707
+    }
+   },
+   "b": {
+    "Alaska": {
+     "Stefan (source coeff.)": {
+      "0": 19.366,
+      "25": 19.366,
+      "50": 19.366,
+      "100": 19.366,
+      "250": 19.366,
+      "500": 19.366
+     },
+     "Stefan (recalibrated on target labels)": {
+      "0": 19.366,
+      "25": 18.692,
+      "50": 18.419,
+      "100": 18.204,
+      "250": 18.387,
+      "500": 18.391
+     },
+     "Direct ML": {
+      "0": 21.465,
+      "25": 19.503,
+      "50": 19.911,
+      "100": 20.295,
+      "250": 21.262,
+      "500": 18.499
+     },
+     "Physics pseudo-labels": {
+      "0": 19.403,
+      "25": 18.675,
+      "50": 18.405,
+      "100": 18.186,
+      "250": 18.359,
+      "500": 18.369
+     },
+     "Physics + residual ML": {
+      "0": 17.76,
+      "25": 17.326,
+      "50": 17.193,
+      "100": 17.095,
+      "250": 16.987,
+      "500": 17.507
+     },
+     "Physics + residual ML, target labels only": {
+      "25": 17.839,
+      "50": 17.934,
+      "100": 17.535,
+      "250": 17.613,
+      "500": 17.791
+     }
+    },
+    "Lena": {
+     "Stefan (source coeff.)": {
+      "0": 21.465,
+      "25": 21.465,
+      "50": 21.465,
+      "100": 21.465,
+      "250": 21.465,
+      "500": 21.465
+     },
+     "Stefan (recalibrated on target labels)": {
+      "0": 21.465,
+      "25": 20.634,
+      "50": 20.817,
+      "100": 20.75,
+      "250": 20.994,
+      "500": 20.956
+     },
+     "Direct ML": {
+      "0": 39.479,
+      "25": 21.306,
+      "50": 20.409,
+      "100": 18.971,
+      "250": 17.948,
+      "500": 17.446
+     },
+     "Physics pseudo-labels": {
+      "0": 21.409,
+      "25": 20.567,
+      "50": 20.677,
+      "100": 20.481,
+      "250": 20.512,
+      "500": 20.16
+     },
+     "Physics + residual ML": {
+      "0": 23.802,
+      "25": 19.903,
+      "50": 19.929,
+      "100": 19.329,
+      "250": 19.09,
+      "500": 18.496
+     },
+     "Physics + residual ML, target labels only": {
+      "25": 19.793,
+      "50": 19.745,
+      "100": 18.717,
+      "250": 18.513,
+      "500": 17.961
+     }
+    },
+    "Canada": {
+     "Stefan (source coeff.)": {
+      "0": 27.746,
+      "25": 27.746,
+      "50": 27.746,
+      "100": 27.746,
+      "250": 27.746,
+      "500": 27.746
+     },
+     "Stefan (recalibrated on target labels)": {
+      "0": 27.746,
+      "25": 31.258,
+      "50": 30.581,
+      "100": 30.169,
+      "250": 30.802,
+      "500": 30.752
+     },
+     "Direct ML": {
+      "0": 24.155,
+      "25": 23.772,
+      "50": 23.747,
+      "100": 23.339,
+      "250": 22.736,
+      "500": 22.777
+     },
+     "Physics pseudo-labels": {
+      "0": 27.319,
+      "25": 30.861,
+      "50": 30.124,
+      "100": 29.687,
+      "250": 30.19,
+      "500": 30.065
+     },
+     "Physics + residual ML": {
+      "0": 24.281,
+      "25": 26.335,
+      "50": 25.716,
+      "100": 25.44,
+      "250": 25.86,
+      "500": 26.067
+     },
+     "Physics + residual ML, target labels only": {
+      "25": 30.913,
+      "50": 29.772,
+      "100": 28.267,
+      "250": 27.958,
+      "500": 26.934
+     }
+    }
+   }
+  },
+  "numbers_printed": "none",
+  "outputs": {
+   "FigS11_label_ladder.pdf": {
+    "path": "outputs/figures/paper/v10_si/FigS11_label_ladder.pdf",
+    "bytes": 31039
+   },
+   "FigS11_label_ladder.png": {
+    "path": "outputs/figures/paper/v10_si/FigS11_label_ladder.png",
+    "bytes": 665775
+   }
+  },
+  "size_mm": [
+   180.0,
+   116.0
+  ],
+  "qa": {
+   "n_texts": 89,
+   "min_font_pt": 6.5,
+   "small": [],
+   "color": [],
+   "outside": [],
+   "overlaps": [],
+   "text_ink": [],
+   "ok": true
+  }
+ }
+}

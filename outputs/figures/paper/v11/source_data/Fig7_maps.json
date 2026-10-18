@@ -1,0 +1,399 @@
+{
+ "figure": "Fig. 7",
+ "script": "scripts/4_visualization/paper_v11/fig7_maps.py",
+ "years": [
+  2011,
+  2024
+ ],
+ "inputs": {
+  "maps": "data/processed/v5/maps/{Alaska,Lena}/pred_<year>.csv.gz and mean_2011_2024.csv.gz (column r1 = Physics + residual ML)",
+  "grid": "data/processed/map_alaska/alaska_grid_x25_v1.csv.gz; hillshade data/processed/map_alaska/hillshade_v1/shade_250m.tif",
+  "labels": "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1)",
+  "projection": "EPSG:3338 (Alaska Albers)"
+ },
+ "a": {
+  "variable": "mean ALT 2011-2024 of Physics + residual ML (mean_2011_2024.csv.gz, r1)",
+  "colormap": "cmcrameri oslo_r section 0.16-0.88",
+  "range_cm": [
+   40.0,
+   90.0
+  ],
+  "extend": "both",
+  "display": "1 km cell centres bilinearly interpolated to the 250 m hillshade grid (v7_f6_maps.interp_cells); gaps of <= 2 cells filled for display; hillshade weight 0.30 on mapped cells only",
+  "n_cells_mapped": 858517,
+  "frac_inside_aoa": 0.5559,
+  "outside_aoa": "colour blended 40 % towards the land grey #DDDDDD",
+  "observed_cells_drawn": 321,
+  "observed_sites": 13253,
+  "land": "#DDDDDD",
+  "water": "#EEF3F7",
+  "scale_bar_km": 200
+ },
+ "b": {
+  "variable": "ALT(year) - mean ALT 2011-2024, per 1 km cell",
+  "colormap": "cmcrameri vik",
+  "range_cm": [
+   -15.0,
+   15.0
+  ],
+  "extend": "both",
+  "frac_cells_beyond_range_all_years": 0.0021,
+  "outside_aoa": "same blending as a (lighter)",
+  "years": [
+   2011,
+   2012,
+   2013,
+   2014,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024
+  ],
+  "per_year": {
+   "2011": {
+    "mean_cm": -2.483,
+    "p01_cm": -8.41,
+    "p99_cm": 1.35,
+    "frac_beyond_15cm": 0.0
+   },
+   "2012": {
+    "mean_cm": -3.163,
+    "p01_cm": -14.01,
+    "p99_cm": 6.94,
+    "frac_beyond_15cm": 0.0046
+   },
+   "2013": {
+    "mean_cm": -2.875,
+    "p01_cm": -9.44,
+    "p99_cm": 2.55,
+    "frac_beyond_15cm": 0.0
+   },
+   "2014": {
+    "mean_cm": -2.228,
+    "p01_cm": -7.26,
+    "p99_cm": 3.1,
+    "frac_beyond_15cm": 0.0
+   },
+   "2015": {
+    "mean_cm": 0.22,
+    "p01_cm": -3.4,
+    "p99_cm": 3.24,
+    "frac_beyond_15cm": 0.0
+   },
+   "2016": {
+    "mean_cm": 3.415,
+    "p01_cm": -2.42,
+    "p99_cm": 10.26,
+    "frac_beyond_15cm": 0.0
+   },
+   "2017": {
+    "mean_cm": 0.413,
+    "p01_cm": -3.51,
+    "p99_cm": 4.11,
+    "frac_beyond_15cm": 0.0
+   },
+   "2018": {
+    "mean_cm": -0.13,
+    "p01_cm": -7.16,
+    "p99_cm": 8.85,
+    "frac_beyond_15cm": 0.0
+   },
+   "2019": {
+    "mean_cm": 7.069,
+    "p01_cm": -0.34,
+    "p99_cm": 16.87,
+    "frac_beyond_15cm": 0.0234
+   },
+   "2020": {
+    "mean_cm": 0.659,
+    "p01_cm": -5.04,
+    "p99_cm": 5.85,
+    "frac_beyond_15cm": 0.0
+   },
+   "2021": {
+    "mean_cm": -2.801,
+    "p01_cm": -7.11,
+    "p99_cm": 1.94,
+    "frac_beyond_15cm": 0.0
+   },
+   "2022": {
+    "mean_cm": 0.037,
+    "p01_cm": -4.48,
+    "p99_cm": 6.5,
+    "frac_beyond_15cm": 0.0
+   },
+   "2023": {
+    "mean_cm": 1.779,
+    "p01_cm": -3.42,
+    "p99_cm": 11.8,
+    "frac_beyond_15cm": 0.0019
+   },
+   "2024": {
+    "mean_cm": 0.085,
+    "p01_cm": -3.92,
+    "p99_cm": 5.41,
+    "frac_beyond_15cm": 0.0
+   }
+  }
+ },
+ "c": {
+  "definition": "mapped cells: mean of the year map over all mapped cells minus the 2011-2024 mean of these yearly means; observed cells: labels (in_forcing == 1) matched to the nearest map cell within 1.5 km, observed ALT minus the cell's 2011-2024 map mean, averaged per year for years with >= 50 cell-years, then centred to the mean predicted anomaly of the same years (v7_f7_series_significance.observed_anomaly)",
+  "colours": {
+   "Alaska": "#3B3B8F",
+   "Lena Delta": "#4A90C2"
+  },
+  "regions": {
+   "Alaska": {
+    "mean_2011_2024_cm": 64.612,
+    "predicted_anomaly_cm": {
+     "2011": -2.483,
+     "2012": -3.163,
+     "2013": -2.875,
+     "2014": -2.228,
+     "2015": 0.22,
+     "2016": 3.415,
+     "2017": 0.413,
+     "2018": -0.13,
+     "2019": 7.069,
+     "2020": 0.659,
+     "2021": -2.801,
+     "2022": 0.037,
+     "2023": 1.779,
+     "2024": 0.085
+    },
+    "observed_anomaly_cm": {
+     "2011": 0.977,
+     "2012": -0.361,
+     "2013": -3.401,
+     "2014": -0.906,
+     "2015": -10.905,
+     "2016": -0.637,
+     "2017": -2.978,
+     "2018": -0.184,
+     "2019": 6.763,
+     "2020": 6.571,
+     "2021": 5.498,
+     "2022": -2.302
+    },
+    "observed_n_cell_years": {
+     "2011": 50,
+     "2012": 50,
+     "2013": 1314,
+     "2014": 7723,
+     "2015": 169,
+     "2016": 1068,
+     "2017": 877,
+     "2018": 1510,
+     "2019": 448,
+     "2020": 149,
+     "2021": 325,
+     "2022": 371
+    },
+    "observed_years": [
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022
+    ],
+    "labelled_points": [],
+    "ylim_cm": [
+     -15.0,
+     10.0
+    ]
+   },
+   "Lena": {
+    "mean_2011_2024_cm": 48.679,
+    "predicted_anomaly_cm": {
+     "2011": -1.467,
+     "2012": 1.685,
+     "2013": -5.464,
+     "2014": -0.87,
+     "2015": -6.103,
+     "2016": -6.791,
+     "2017": -9.437,
+     "2018": 3.088,
+     "2019": 4.293,
+     "2020": 9.971,
+     "2021": 4.592,
+     "2022": 0.909,
+     "2023": 1.942,
+     "2024": 3.652
+    },
+    "observed_anomaly_cm": {
+     "2012": -1.188,
+     "2013": -15.098,
+     "2014": -6.775,
+     "2015": -10.281,
+     "2016": -12.124,
+     "2017": -5.052,
+     "2018": 0.677,
+     "2019": -5.245,
+     "2020": 46.928,
+     "2021": 3.121
+    },
+    "observed_n_cell_years": {
+     "2012": 299,
+     "2013": 241,
+     "2014": 93,
+     "2015": 471,
+     "2016": 681,
+     "2017": 139,
+     "2018": 64,
+     "2019": 95,
+     "2020": 143,
+     "2021": 165
+    },
+    "observed_years": [
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021
+    ],
+    "labelled_points": [
+     {
+      "year": 2020,
+      "anomaly_cm": 46.93,
+      "n": 143
+     }
+    ],
+    "ylim_cm": [
+     -20.0,
+     50.0
+    ]
+   }
+  }
+ },
+ "years_used": {
+  "a": "2011-2024 (mean of the 14 yearly maps)",
+  "b": "2011-2024 (one map per year)",
+  "c": {
+   "mapped_cells": "2011-2024",
+   "observed_cells": {
+    "Alaska": [
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022
+    ],
+    "Lena": [
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021
+    ]
+   }
+  }
+ },
+ "numbers_printed": {
+  "a": "colour bar ticks, graticule labels, scale bar 200 km",
+  "b": "year labels 2011-2024, colour bar ticks -15 to 15",
+  "c": {
+   "Alaska": [],
+   "Lena": [
+    {
+     "year": 2020,
+     "anomaly_cm": 46.93,
+     "n": 143
+    }
+   ]
+  }
+ },
+ "outputs": {
+  "Fig7_maps.pdf": {
+   "path": "outputs/figures/paper/v11/Fig7_maps.pdf",
+   "bytes": 4536493
+  },
+  "Fig7_maps.svg": {
+   "path": "outputs/figures/paper/v11/Fig7_maps.svg",
+   "bytes": 8198093
+  },
+  "Fig7_maps.png": {
+   "path": "outputs/figures/paper/v11/Fig7_maps.png",
+   "bytes": 4767388
+  }
+ },
+ "canvas_mm": [
+  180.0,
+  137.1
+ ],
+ "pdf_page_mm": [
+  180.0,
+  137.1
+ ],
+ "pdf_fonts": [
+  "BICWAS+FreeSans",
+  "FITYBK+FreeSansBold"
+ ],
+ "qa": {
+  "n_texts": 68,
+  "min_font_pt": 6.0,
+  "font_sizes_pt": [
+   6.0,
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ },
+ "layout_mm": {
+  "a": [
+   7.8,
+   4.8,
+   82.6,
+   77.66
+  ],
+  "b_map": [
+   19.85,
+   18.67
+  ],
+  "c": [
+   15.0,
+   107.46,
+   73.5,
+   22.0
+  ]
+ }
+}

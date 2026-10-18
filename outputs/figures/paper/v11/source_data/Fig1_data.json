@@ -1,0 +1,447 @@
+{
+ "a": {
+  "inputs": [
+   "data/processed/cci_pfr_mean_1997_2021.nc (variable pfr_mean; attrs.title: ESA CCI Permafrost PFR v4.0, mean of 1997-2021 (25 annual files), aggregated to 0.1 deg)",
+   "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1, unique loc_id per region)"
+  ],
+  "years": {
+   "permafrost_probability": "1997–2021 mean",
+   "labels": "2010–2024"
+  },
+  "projection": "North Polar Stereographic, central longitude -90°, boundary 56°N; bilinear resampling to 1500 × 1500 px",
+  "colormap": "cmcrameri oslo_r, section 0.0–0.3 (0 % white, 100 % light steel blue); colour bar 0–100 %",
+  "ocean": "#EBEBEB",
+  "land_without_value": "#FFFFFF",
+  "region_outline_colours": {
+   "Alaska": "#3B3B8F",
+   "Lena Delta": "#4A90C2",
+   "Canada (NW)": "#3A9384"
+  },
+  "region_boxes_lonlat": {
+   "Alaska": {
+    "lon": [
+     -168.0,
+     -141.0
+    ],
+    "lat": [
+     59.0,
+     71.5
+    ]
+   },
+   "Lena Delta": {
+    "lon": [
+     123.3,
+     130.1
+    ],
+    "lat": [
+     71.5,
+     73.6
+    ]
+   },
+   "Canada (NW)": {
+    "lon": [
+     -141.0,
+     -112.0
+    ],
+    "lat": [
+     60.0,
+     70.0
+    ]
+   }
+  },
+  "label_cell_extent": {
+   "Alaska": {
+    "lat": [
+     61.16817996153846,
+     71.32358573913044
+    ],
+    "lon": [
+     -165.9737382,
+     -141.1095
+    ]
+   },
+   "Canada (NW)": {
+    "lat": [
+     60.4494,
+     69.3692
+    ],
+    "lon": [
+     -140.8383,
+     -113.0023
+    ]
+   },
+   "Lena Delta": {
+    "lat": [
+     71.5549,
+     72.7738
+    ],
+    "lon": [
+     123.8963,
+     130.0328
+    ]
+   }
+  },
+  "leaders_mm": {
+   "Alaska": {
+    "label_mm": [
+     17.8,
+     36.73
+    ],
+    "box_point_mm": [
+     27.16,
+     36.73
+    ],
+    "box_point_lonlat": [
+     -168.0,
+     65.25
+    ]
+   },
+   "Lena": {
+    "label_mm": [
+     17.8,
+     20.36
+    ],
+    "box_point_mm": [
+     39.43,
+     20.36
+    ],
+    "box_point_lonlat": [
+     123.3,
+     72.55
+    ]
+   },
+   "Canada": {
+    "label_mm": [
+     17.8,
+     52.7
+    ],
+    "box_point_mm": [
+     32.36,
+     52.7
+    ],
+    "box_point_lonlat": [
+     -126.5,
+     60.0
+    ]
+   }
+  },
+  "scale_bar": {
+   "km": 1000,
+   "centre_lonlat": [
+    -52.87,
+    59.96
+   ],
+   "note": "horizontal bar in projected coordinates; geodesic length between its ends = 1,000 km"
+  },
+  "numbers_printed": {
+   "Alaska cells": 13253,
+   "Lena Delta cells": 2206,
+   "Canada (NW) cells": 730,
+   "colour bar ticks (%)": [
+    0,
+    50,
+    100
+   ],
+   "graticule labels": [
+    "60°N",
+    "70°N",
+    "80°N"
+   ],
+   "scale bar": "1,000 km"
+  },
+  "cell_years_per_region": {
+   "Alaska": 15540,
+   "Lena Delta": 2436,
+   "Canada (NW)": 1196
+  }
+ },
+ "b": {
+  "inputs": [
+   "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1; rows = cell-years)"
+  ],
+  "years": "2010–2024",
+  "cell_years": {
+   "Alaska": {
+    "2010": 60,
+    "2011": 56,
+    "2012": 55,
+    "2013": 1343,
+    "2014": 7861,
+    "2015": 171,
+    "2016": 2237,
+    "2017": 877,
+    "2018": 1526,
+    "2019": 450,
+    "2020": 149,
+    "2021": 325,
+    "2022": 371,
+    "2023": 29,
+    "2024": 30
+   },
+   "Lena Delta": {
+    "2010": 8,
+    "2011": 2,
+    "2012": 327,
+    "2013": 241,
+    "2014": 93,
+    "2015": 471,
+    "2016": 681,
+    "2017": 139,
+    "2018": 64,
+    "2019": 95,
+    "2020": 143,
+    "2021": 165,
+    "2022": 7,
+    "2023": 0,
+    "2024": 0
+   },
+   "Canada (NW)": {
+    "2010": 7,
+    "2011": 9,
+    "2012": 29,
+    "2013": 121,
+    "2014": 8,
+    "2015": 4,
+    "2016": 4,
+    "2017": 150,
+    "2018": 150,
+    "2019": 65,
+    "2020": 0,
+    "2021": 44,
+    "2022": 445,
+    "2023": 80,
+    "2024": 80
+   }
+  },
+  "totals": {
+   "Alaska": 15540,
+   "Lena Delta": 2436,
+   "Canada (NW)": 1196
+  },
+  "y_ticks": {
+   "Alaska": [
+    0,
+    4000,
+    8000
+   ],
+   "Lena Delta": [
+    0,
+    400,
+    800
+   ],
+   "Canada (NW)": [
+    0,
+    250,
+    500
+   ]
+  },
+  "bar_colours": {
+   "Alaska": "#3B3B8F",
+   "Lena Delta": "#4A90C2",
+   "Canada (NW)": "#3A9384"
+  },
+  "numbers_printed": "axis ticks only (y ticks per region listed in y_ticks; x ticks 2010–2024 every 2 years)"
+ },
+ "c": {
+  "inputs": [
+   "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1)",
+   "data/processed/v5/forcing_meta.json (years)",
+   "data/processed/v5/products_cell_year_v5_meta.json (products.*.years / period)",
+   "data/processed/v5/products_cell_year_v5.csv (years with a value at label cell-years)",
+   "docs/research/2026-10-04/alt_products.md (Zenodo 10.5281/zenodo.10070610, ALT_YYYY.tif for 2003–2020)"
+  ],
+  "axis_years": [
+   1997,
+   2025
+  ],
+  "analysis_window": [
+   2010,
+   2024
+  ],
+  "colours": {
+   "rule": "years used = series colour; available = tint 0.36 of the series colour (blend towards white); key swatches use the neutral #595959 with the same rule",
+   "label_rows": "region colours",
+   "climate_input": "#595959",
+   "static": "hatch #8C8C8C",
+   "products": {
+    "Wei 2026": "#5B8C5A",
+    "Liu 2024": "#B65A72",
+    "ESA CCI v4": "#A07D4A",
+    "ESA CCI v5": "#C4A869",
+    "Yi–Kimball 2019 (Alaska)": "#7E8F3C",
+    "Aalto 2018": "#8273A6"
+   },
+   "analysis_window": "#F0F0F0"
+  },
+  "rows": [
+   {
+    "group": "Labels",
+    "name": "Alaska",
+    "colour": "#3B3B8F",
+    "encoding": "band in the region colour = years with labels",
+    "years": "2010–2024"
+   },
+   {
+    "group": "Labels",
+    "name": "Lena Delta",
+    "colour": "#4A90C2",
+    "encoding": "band in the region colour = years with labels",
+    "years": "2010–2022"
+   },
+   {
+    "group": "Labels",
+    "name": "Canada (NW)",
+    "colour": "#3A9384",
+    "encoding": "band in the region colour = years with labels",
+    "years": "2010–2019, 2021–2024"
+   },
+   {
+    "group": "Inputs",
+    "name": "ERA5-Land monthly climate",
+    "colour": "#595959",
+    "encoding": "dark band = years used",
+    "years": "2010–2024"
+   },
+   {
+    "group": "Inputs",
+    "name": "Terrain, soil",
+    "colour": "#8C8C8C",
+    "encoding": "hatched full-width band = no time dimension; key: Static (no year)",
+    "years": "static (no year)"
+   },
+   {
+    "group": "Products",
+    "name": "Wei 2026",
+    "colour": "#5B8C5A",
+    "encoding": "light tint = available period, full colour = years used for the comparison",
+    "years": "2000–2024",
+    "years_used": "2010–2024",
+    "available_source": "data/processed/v5/products_cell_year_v5_meta.json (products.wei.years)",
+    "extracted_years_in_project": "2000–2024"
+   },
+   {
+    "group": "Products",
+    "name": "Liu 2024",
+    "colour": "#B65A72",
+    "encoding": "light tint = available period, full colour = years used for the comparison",
+    "years": "2003–2020",
+    "years_used": "2010–2020",
+    "available_source": "docs/research/2026-10-04/alt_products.md (Zenodo 10.5281/zenodo.10070610, ALT_YYYY.tif for 2003–2020)",
+    "extracted_years_in_project": "2010–2020"
+   },
+   {
+    "group": "Products",
+    "name": "ESA CCI v4",
+    "colour": "#A07D4A",
+    "encoding": "light tint = available period, full colour = years used for the comparison",
+    "years": "1997–2021",
+    "years_used": "2010–2021",
+    "available_source": "data/processed/v5/products_cell_year_v5_meta.json (products.cci4y.years)",
+    "extracted_years_in_project": "1997–2021"
+   },
+   {
+    "group": "Products",
+    "name": "ESA CCI v5",
+    "colour": "#C4A869",
+    "encoding": "light tint = available period, full colour = years used for the comparison",
+    "years": "1997–2023",
+    "years_used": "2010–2023",
+    "available_source": "data/processed/v5/products_cell_year_v5_meta.json (products.cci5y.years)",
+    "extracted_years_in_project": "1997–2023"
+   },
+   {
+    "group": "Products",
+    "name": "Yi–Kimball 2019 (Alaska)",
+    "colour": "#7E8F3C",
+    "encoding": "light tint = available period, full colour = years used for the comparison",
+    "years": "2001–2015",
+    "years_used": "2010–2015",
+    "available_source": "data/processed/v5/products_cell_year_v5_meta.json (products.yk.years)",
+    "extracted_years_in_project": "2001–2015"
+   },
+   {
+    "group": "Products",
+    "name": "Aalto 2018",
+    "colour": "#8273A6",
+    "encoding": "outlined band = one multi-year mean value (2000–2014); key: Multi-year mean",
+    "years": "2000–2014",
+    "available_source": "data/processed/v5/products_cell_year_v5_meta.json (products.aalto.period)"
+   }
+  ],
+  "years_used_definition": "years of label cell-years (in_forcing == 1) that have a product value; same as scripts/2_evaluation/v10_numbers.py nyrsprod*",
+  "numbers_printed": "axis ticks only (2000, 2005, 2010, 2015, 2020, 2025); product names carry publication years"
+ },
+ "qa": {
+  "n_texts": 62,
+  "min_font_pt": 6.0,
+  "font_sizes_pt": [
+   6.0,
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ },
+ "figure": {
+  "width_mm": 180.0,
+  "height_mm": 106.0,
+  "pdf_page_mm": [
+   180.0,
+   106.0
+  ],
+  "pdf_fonts": [
+   "BICWAS+FreeSans",
+   "FITYBK+FreeSansBold"
+  ],
+  "png_dpi": 600,
+  "font": "FreeSans",
+  "text_pt": 7.0,
+  "tick_pt": 6.5,
+  "letter_pt": 8.0,
+  "text_colour": "#262626",
+  "axis_colour": "#404040",
+  "palette": "POLAR_PALETTE=paper11 (design/style_tokens_v4.json color.paper_v11)",
+  "script": "scripts/4_visualization/paper_v11/fig1_data.py",
+  "outputs": {
+   "Fig1_data.pdf": {
+    "path": "outputs/figures/paper/v11/Fig1_data.pdf",
+    "bytes": 876968
+   },
+   "Fig1_data.svg": {
+    "path": "outputs/figures/paper/v11/Fig1_data.svg",
+    "bytes": 2212686
+   },
+   "Fig1_data.png": {
+    "path": "outputs/figures/paper/v11/Fig1_data.png",
+    "bytes": 1156036
+   }
+  },
+  "change_from_v10": "panel d (cumulative TDD time definition) removed (moved to the new methods figure Fig. 2); layout re-balanced; region boxes, b bars and c label rows in region colours, c product rows in product colours"
+ },
+ "years_used": {
+  "a": "permafrost probability 1997–2021 mean; label cells 2010–2024",
+  "b": "2010–2024",
+  "c": {
+   "Alaska": "2010–2024",
+   "Lena Delta": "2010–2022",
+   "Canada (NW)": "2010–2019, 2021–2024",
+   "ERA5-Land monthly climate": "2010–2024",
+   "Terrain, soil": "static",
+   "Wei 2026": "used 2010–2024, available 2000–2024",
+   "Liu 2024": "used 2010–2020, available 2003–2020",
+   "ESA CCI v4": "used 2010–2021, available 1997–2021",
+   "ESA CCI v5": "used 2010–2023, available 1997–2023",
+   "Yi–Kimball 2019 (Alaska)": "used 2010–2015, available 2001–2015",
+   "Aalto 2018": "2000–2014"
+  }
+ }
+}

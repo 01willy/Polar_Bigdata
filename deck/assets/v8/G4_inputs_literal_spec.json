@@ -1,0 +1,469 @@
+{
+ "stem": "G4_inputs_literal",
+ "variant": "literal",
+ "size_in": [
+  12.0,
+  5.1
+ ],
+ "year": 2014,
+ "sources": {
+  "grid_static": {
+   "file": "data/processed/map_alaska/alaska_grid_x25_v1.csv.gz",
+   "n_cells": 858517,
+   "rule": "gray == 0",
+   "pfr_file": "data/processed/cci_pfr_mean_1997_2021.nc (0.1°, ESA CCI PFR v4 1997–2021 평균, 최근접)"
+  },
+  "forcing_2014": {
+   "tdd": "data/processed/v5/maps/Alaska/pred_2014.csv.gz",
+   "fdd_swe": "data/processed/v5/grid/alaska_forcing_year.csv",
+   "cache": "deck/assets/v8/_cache/G4_alaska_forcing_2014.csv.gz",
+   "n_cells": 858517,
+   "tdd_max_abs_diff_pred_vs_forcing": 0.0
+  },
+  "modis": {
+   "labels": "data/processed/v5/labels_cell_year_v5.csv",
+   "modis": "data/processed/v5/modis_cell_year_v5.csv",
+   "n_label_cells": 13253,
+   "n_ndvi": 13042,
+   "n_snow_off": 13250,
+   "products": {
+    "ndvi": "MOD13Q1 250 m (6–8월)",
+    "snow": "MOD10A2 500 m"
+   }
+  },
+  "products": {
+   "wei": {
+    "file": "data/raw/wei2026_alt_v2/extracted/ALT_2014.tif",
+    "crs": "EPSG:3995",
+    "units": "cm",
+    "nodata": -9999.0,
+    "n_src_px_finite": 1611549,
+    "sample_grid_stats_cm": {
+     "n": 151467,
+     "p2": 42.4,
+     "p50": 65.4,
+     "p98": 209.9
+    }
+   },
+   "liu": {
+    "file": "data/raw/liu2024_alt/ALT_2014.tif",
+    "crs": "EPSG:4326",
+    "units": "cm (int16 × 0.01)",
+    "nodata": "<= 0, 32767",
+    "n_32767": 33826,
+    "n_src_px_finite": 2955976,
+    "sample_grid_stats_cm": {
+     "n": 147649,
+     "p2": 47.4,
+     "p50": 68.4,
+     "p98": 241.7
+    }
+   },
+   "cci": {
+    "file": "data/raw/cci_alt_v5/ESACCI-PERMAFROST-L4-ALT-MODISLST_CRYOGRID-AREA4_PP-2014-fv05.0.nc",
+    "units": "m → cm",
+    "n_src_px_finite": 1905807,
+    "sample_grid_stats_cm": {
+     "n": 139100,
+     "p2": 30.0,
+     "p50": 96.1,
+     "p98": 350.0
+    }
+   },
+   "yk": {
+    "file": "data/raw/ornl_ds1760/Alaska_active_layer_thickness_1km_2001-2015.nc4",
+    "time_index": 13,
+    "year": 2014,
+    "units": "m → cm",
+    "n_src_px_finite": 694342
+   },
+   "aalto": {
+    "file": "data/raw/aalto2018_alt/ALT_Rasters.zip/ALT_Baseline.tif",
+    "crs": "EPSG:4326",
+    "units": "cm",
+    "period": "2000–2014",
+    "nodata": "<= 0",
+    "n_zero_px": 949834,
+    "n_src_px_finite": 2408896
+   },
+   "sample_grid": {
+    "dx_deg": 0.06,
+    "dy_deg": 0.025,
+    "nx": 442,
+    "ny": 468,
+    "extent": [
+     -167.5,
+     -141.0,
+     59.8,
+     71.5
+    ]
+   },
+   "cache": "deck/assets/v8/_cache/G4_products_2014.npz"
+  },
+  "cci_points": {
+   "labels": "data/processed/v5/labels_cell_year_v5.csv",
+   "products": "data/processed/v5/products_cell_year_v5.csv",
+   "product": "cci5y",
+   "year": 2014,
+   "n": 13252
+  }
+ },
+ "layout": {
+  "bands": 4,
+  "slots": 5,
+  "x0": 2.5,
+  "pitch": 1.892,
+  "map_w": 0.632,
+  "map_h": 0.66,
+  "band_h": 1.275,
+  "extent": [
+   -167.5,
+   -141.0,
+   59.8,
+   71.5
+  ],
+  "aspect": 2.366,
+  "head_x": 0.1,
+  "head_color": "#262626",
+  "H": 5.1,
+  "n_band": 4,
+  "y_lab": 0.17,
+  "y_map": 0.27,
+  "hm": 0.66,
+  "y_src": 0.265,
+  "sub0": 0.24,
+  "dsub": 0.2,
+  "dot_s": 4.0,
+  "unit_at": "after_ticks",
+  "src_lines": true,
+  "ref_graticule": true,
+  "band_lines": true,
+  "reference": {
+   "band": 1,
+   "slot": 1,
+   "graticule_lon": [],
+   "graticule_lat": [
+    65.0,
+    70.0
+   ],
+   "scale_km": 500.0,
+   "scale_lat_ref": 65.0,
+   "scale_bar_in": 0.254,
+   "scale_bar_x": [
+    2.186,
+    2.44
+   ]
+  }
+ },
+ "panels": [
+  {
+   "band": 1,
+   "slot": 1,
+   "label": "TDD",
+   "source": "ERA5-Land · 9 km",
+   "range": [
+    400.0,
+    2000.0
+   ],
+   "ticks": [
+    400.0,
+    1200.0,
+    2000.0
+   ],
+   "unit": "°C·d",
+   "extend": "min",
+   "kind": "cells"
+  },
+  {
+   "band": 1,
+   "slot": 2,
+   "label": "FDD",
+   "source": "ERA5-Land · 9 km",
+   "range": [
+    1500.0,
+    4100.0
+   ],
+   "ticks": [
+    1500.0,
+    2800.0,
+    4100.0
+   ],
+   "unit": "°C·d",
+   "extend": "both",
+   "kind": "cells"
+  },
+  {
+   "band": 1,
+   "slot": 3,
+   "label": "SWE",
+   "source": "ERA5-Land · 9 km",
+   "range": [
+    0.0,
+    200.0
+   ],
+   "ticks": [
+    0.0,
+    100.0,
+    200.0
+   ],
+   "unit": "mm",
+   "extend": "max",
+   "kind": "cells"
+  },
+  {
+   "band": 2,
+   "slot": 1,
+   "label": "Elevation",
+   "source": "Copernicus DEM · 30 m",
+   "range": [
+    0.0,
+    1800.0
+   ],
+   "ticks": [
+    0.0,
+    900.0,
+    1800.0
+   ],
+   "unit": "m",
+   "extend": "both",
+   "kind": "cells"
+  },
+  {
+   "band": 2,
+   "slot": 2,
+   "label": "Slope",
+   "source": "Copernicus DEM · 30 m",
+   "range": [
+    0.0,
+    40.0
+   ],
+   "ticks": [
+    0.0,
+    20.0,
+    40.0
+   ],
+   "unit": "°",
+   "extend": "max",
+   "kind": "cells"
+  },
+  {
+   "band": 2,
+   "slot": 3,
+   "label": "Soil carbon",
+   "source": "SoilGrids · 5 km window",
+   "range": [
+    150.0,
+    450.0
+   ],
+   "ticks": [
+    150.0,
+    300.0,
+    450.0
+   ],
+   "unit": "g/kg",
+   "extend": "min",
+   "kind": "cells"
+  },
+  {
+   "band": 2,
+   "slot": 4,
+   "label": "Clay content",
+   "source": "SoilGrids · 5 km window",
+   "range": [
+    5.0,
+    35.0
+   ],
+   "ticks": [
+    5.0,
+    20.0,
+    35.0
+   ],
+   "unit": "%",
+   "extend": "neither",
+   "kind": "cells"
+  },
+  {
+   "band": 2,
+   "slot": 5,
+   "label": "Map domain",
+   "source": "ESA CCI PFR · 0.1°",
+   "range": [
+    50.0,
+    100.0
+   ],
+   "ticks": [
+    50.0,
+    75.0,
+    100.0
+   ],
+   "unit": "%",
+   "extend": "neither",
+   "kind": "cells"
+  },
+  {
+   "band": 3,
+   "slot": 1,
+   "label": "Summer NDVI",
+   "source": "MOD13Q1 · 13,042 cells",
+   "range": [
+    0.4,
+    0.8
+   ],
+   "ticks": [
+    0.4,
+    0.6000000000000001,
+    0.8
+   ],
+   "unit": "",
+   "extend": "min",
+   "kind": "dots"
+  },
+  {
+   "band": 3,
+   "slot": 2,
+   "label": "Snow-off date",
+   "source": "MOD10A2 · 13,250 cells",
+   "range": [
+    90.0,
+    210.0
+   ],
+   "ticks": [
+    90.0,
+    150.0,
+    210.0
+   ],
+   "unit": "DOY",
+   "extend": "neither",
+   "kind": "dots"
+  },
+  {
+   "band": 4,
+   "slot": 1,
+   "label": "Wei 2026",
+   "source": "1 km · 2014",
+   "range": [
+    30.0,
+    230.0
+   ],
+   "unit": "cm",
+   "extend": "both",
+   "color": "#3B8B4F",
+   "kind": "box_mean"
+  },
+  {
+   "band": 4,
+   "slot": 2,
+   "label": "Liu 2024",
+   "source": "1 km · 2014",
+   "range": [
+    30.0,
+    230.0
+   ],
+   "unit": "cm",
+   "extend": "both",
+   "color": "#C9506A",
+   "kind": "box_mean"
+  },
+  {
+   "band": 4,
+   "slot": 3,
+   "label": "ESA CCI v5",
+   "source": "label cells 13,252 · 2014",
+   "range": [
+    30.0,
+    230.0
+   ],
+   "unit": "cm",
+   "extend": "both",
+   "color": "#B8975A",
+   "kind": "dots"
+  }
+ ],
+ "choices": {
+  "subsample": {
+   "rule": "ky % 6 == 0 and kx % 6 == 0",
+   "n_static": 23848,
+   "n_forcing": 23848
+  },
+  "alt_range_cm": {
+   "lo": 30.0,
+   "hi": 230.0,
+   "rule": "pooled drawn products 2–95 pct, step 10; colorbar extend shows clipping",
+   "extend": "both"
+  },
+  "product_hex": {
+   "Wei": "#3B8B4F",
+   "Liu": "#C9506A",
+   "CCI5": "#B8975A",
+   "YK": "#6B8E23",
+   "Aalto": "#7D6B9E"
+  }
+ },
+ "qa_head_col": {
+  "max_right_in": 1.774,
+  "first_thumb_x_in": 2.5,
+  "fits": true,
+  "head_to_band_top_gap_in": [
+   0.05,
+   0.047,
+   0.05
+  ],
+  "band_lines": true,
+  "map_bottom_to_next_head_top_in": [
+   0.395,
+   0.392,
+   0.395
+  ],
+  "row_baselines": {
+   "Yearly climate": {
+    "n_texts": 7,
+    "baselines_in": [
+     4.9
+    ],
+    "same": true
+   },
+   "Static covariates": {
+    "n_texts": 11,
+    "baselines_in": [
+     3.625
+    ],
+    "same": true
+   },
+   "Satellite inputs": {
+    "n_texts": 4,
+    "baselines_in": [
+     2.35
+    ],
+    "same": true
+   },
+   "Products": {
+    "n_texts": 5,
+    "baselines_in": [
+     1.075
+    ],
+    "same": true
+   }
+  }
+ },
+ "qa": {
+  "name": "G4_inputs_literal",
+  "size_in": [
+   12.0,
+   5.1
+  ],
+  "min_font_pt": 12.0,
+  "texts": 86,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "text_line": [],
+  "text_axes": [],
+  "text_patch": [],
+  "arrows": 0,
+  "png_px": [
+   3600,
+   1530
+  ]
+ },
+ "brief_deviation": "main (v9 layout, 4.65 in): 3 bands (yearly ERA5-Land + MODIS merged), 5 products (adds Yi–Kimball, Aalto), CCI as raster, box-mean sampling, no per-thumbnail source lines; literal: 4 bands, 3 products (CCI as label-cell dots), every-6th-cell subsample. User sign-off pending."
+}

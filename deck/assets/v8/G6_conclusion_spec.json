@@ -1,0 +1,181 @@
+{
+ "stem": "G6_conclusion",
+ "size_in": [
+  12.0,
+  3.7
+ ],
+ "sources": {
+  "map_mean": "data/processed/v5/maps/Alaska/mean_2011_2024.csv.gz",
+  "map_years": "data/processed/v5/maps/Alaska/pred_<year>.csv.gz (r1)",
+  "deltas": "data/processed/v5/runs/core_v6/deltas_vs_ref.csv",
+  "summary": "data/processed/v5/runs/core_v6/summary_metrics.csv"
+ },
+ "numbers": {
+  "regional_mean_anomaly_cm": {
+   "2011": -2.48,
+   "2012": -3.16,
+   "2013": -2.87,
+   "2014": -2.23,
+   "2015": 0.22,
+   "2016": 3.42,
+   "2017": 0.41,
+   "2018": -0.13,
+   "2019": 7.07,
+   "2020": 0.66,
+   "2021": -2.8,
+   "2022": 0.04,
+   "2023": 1.78,
+   "2024": 0.09
+  },
+  "region_holdout_delta_vs_stefan_cm": {
+   "Alaska:D0": {
+    "delta": 1.202,
+    "lo": -0.989,
+    "hi": 2.342,
+    "n_blocks": 73,
+    "n": 15540
+   },
+   "Alaska:R1": {
+    "delta": -1.811,
+    "lo": -4.886,
+    "hi": 0.983,
+    "n_blocks": 73,
+    "n": 15540
+   },
+   "Lena:D0": {
+    "delta": 17.803,
+    "lo": 7.975,
+    "hi": 23.859,
+    "n_blocks": 16,
+    "n": 2436
+   },
+   "Lena:R1": {
+    "delta": 1.993,
+    "lo": -0.783,
+    "hi": 3.391,
+    "n_blocks": 16,
+    "n": 2436
+   },
+   "Canada:D0": {
+    "delta": -3.847,
+    "lo": -6.955,
+    "hi": 1.4,
+    "n_blocks": 26,
+    "n": 1196
+   },
+   "Canada:R1": {
+    "delta": -3.502,
+    "lo": -5.15,
+    "hi": -0.1,
+    "n_blocks": 26,
+    "n": 1196
+   }
+  }
+ },
+ "choices": {
+  "years": {
+   "rule": "argmin / argmax of the regional mean anomaly 2011–2024",
+   "low": 2012,
+   "high": 2019,
+   "low_mean_cm": -3.16,
+   "high_mean_cm": 7.07
+  },
+  "colour_range": {
+   "rule": "±MV.sym_max(|anomaly| 99th pct of all years, 5 cm step), same as F7",
+   "source": "outputs/figures/paper/v7/_cache/f7_alaska_anom_1500x1344.npz",
+   "vmax_cm": 15.0,
+   "extend": "both",
+   "p99_abs_cm": 11.96
+  },
+  "maps": {
+   "years": [
+    2012,
+    2019
+   ],
+   "size_in": [
+    2.978,
+    2.8
+   ],
+   "display": "1 km cell centres → 250 m hillshade grid, bilinear (v7_f6_maps.render smooth, fill_max 2)",
+   "cmap": "broc (MV.CM_DIFF)",
+   "no_data_land": "#D0D0D0",
+   "aoa": "not marked (labels = year only)",
+   "scalebar": "200 km inside map 1",
+   "labels": "year only"
+  }
+ },
+ "checks": {
+  "region_holdout_P1_equals_P0": {
+   "Alaska": {
+    "rmse_P0": 19.3575,
+    "rmse_P1": 19.3575,
+    "equal": true
+   },
+   "Lena": {
+    "rmse_P0": 21.4646,
+    "rmse_P1": 21.4646,
+    "equal": true
+   },
+   "Canada": {
+    "rmse_P0": 27.7513,
+    "rmse_P1": 27.7513,
+    "equal": true
+   }
+  }
+ },
+ "qa_extra_xtick_gaps_in": [
+  0.514,
+  0.239
+ ],
+ "qa_extra": {
+  "legend_data_inside": 0,
+  "cbar_label_to_b_ylabel_gap_in": 0.4,
+  "labels_inside_maps": [
+   true,
+   true,
+   true
+  ],
+  "panel_gap_maps_to_b_in": 0.994,
+  "elapsed_s": 56.9
+ },
+ "layout_in": {
+  "maps": [
+   0.4,
+   0.52,
+   2.978,
+   2.8,
+   0.1
+  ],
+  "cbar": [
+   6.576,
+   0.11
+  ],
+  "b_axes": [
+   8.496,
+   0.52
+  ]
+ },
+ "qa": {
+  "min_font_pt": 12.0,
+  "texts": 27,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "text_line": [],
+  "text_axes": [],
+  "text_patch": [],
+  "png_px": [
+   3600,
+   1110
+  ],
+  "png_px_ok": true,
+  "ink_margin_px": {
+   "top": 24,
+   "bottom": 84,
+   "left": 32,
+   "right": 17
+  },
+  "text_below_12pt": [],
+  "bare_sqrt_glyph_texts": []
+ }
+}

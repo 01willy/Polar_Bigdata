@@ -1,0 +1,884 @@
+% numbers_v9.tex: scripts/2_evaluation/v9_numbers.py 가 docs/numbers_v9.json 에서 만든다. 손으로 고치지 않는다.
+\newcommand{\npaAkPrawLiu}{18.8}
+\newcommand{\npanAkLiu}{14,326}
+\newcommand{\npaAkPcalLiu}{19.3}
+\newcommand{\npaAkPoLiu}{17.4}
+\newcommand{\npaAkRoLiu}{17.2}
+\newcommand{\npaAkRpLiu}{18.0}
+\newcommand{\npaAkRpoLiu}{17.8}
+\newcommand{\npaAkRoxLiu}{17.2}
+\newcommand{\npaAkPraw}{19.5}
+\newcommand{\npanAk}{15,532}
+\newcommand{\npaAkPcal}{19.9}
+\newcommand{\npaAkPo}{18.6}
+\newcommand{\npaAkRo}{18.5}
+\newcommand{\npaAkRp}{18.9}
+\newcommand{\npaAkRpo}{18.4}
+\newcommand{\npaAkRox}{18.6}
+\newcommand{\npaCaPrawLiu}{27.9}
+\newcommand{\npanCaLiu}{532}
+\newcommand{\npaCaPcalLiu}{28.0}
+\newcommand{\npaCaPoLiu}{30.6}
+\newcommand{\npaCaRoLiu}{30.2}
+\newcommand{\npaCaRpLiu}{28.1}
+\newcommand{\npaCaRpoLiu}{29.0}
+\newcommand{\npaCaRoxLiu}{29.3}
+\newcommand{\npaCaPraw}{27.4}
+\newcommand{\npanCa}{1,191}
+\newcommand{\npaCaPcal}{25.0}
+\newcommand{\npaCaPo}{30.7}
+\newcommand{\npaCaRo}{27.1}
+\newcommand{\npaCaRp}{23.7}
+\newcommand{\npaCaRpo}{23.5}
+\newcommand{\npaCaRox}{26.9}
+\newcommand{\npaLePrawLiu}{25.6}
+\newcommand{\npanLeLiu}{1,035}
+\newcommand{\npaLePcalLiu}{20.0}
+\newcommand{\npaLePoLiu}{18.0}
+\newcommand{\npaLeRoLiu}{16.8}
+\newcommand{\npaLeRpLiu}{17.9}
+\newcommand{\npaLeRpoLiu}{16.7}
+\newcommand{\npaLeRoxLiu}{16.8}
+\newcommand{\npaLePraw}{30.3}
+\newcommand{\npanLe}{814}
+\newcommand{\npaLePcal}{24.4}
+\newcommand{\npaLePo}{21.1}
+\newcommand{\npaLeRo}{19.3}
+\newcommand{\npaLeRp}{22.1}
+\newcommand{\npaLeRpo}{21.2}
+\newcommand{\npaLeRox}{19.3}
+\newcommand{\npadAkRoPoLiu}{−0.1 [−0.6, +0.5]}
+\newcommand{\npadAkRpPcalLiu}{−1.3 [−1.9, −0.2]}
+\newcommand{\npadAkRoRpLiu}{−0.8 [−1.8, +1.0]}
+\newcommand{\npadAkRoPcalLiu}{−2.1 [−3.1, −0.3]}
+\newcommand{\npadAkPcalPrawLiu}{+0.5 [−1.1, +2.9]}
+\newcommand{\npadAkRoPrawLiu}{−1.5 [−3.5, +1.3]}
+\newcommand{\npadAkPoPrawLiu}{−1.4 [−3.2, +1.0]}
+\newcommand{\npadAkRoxRoLiu}{−0.0 [−0.3, +0.3]}
+\newcommand{\npadAkRpoRpLiu}{−0.2 [−1.1, +1.1]}
+\newcommand{\npadAkRoPo}{−0.1 [−0.6, +0.2]}
+\newcommand{\npadAkRpPcal}{−1.0 [−1.5, −0.0]}
+\newcommand{\npadAkRoRp}{−0.4 [−3.9, +2.6]}
+\newcommand{\npadAkRoPcal}{−1.4 [−5.2, +1.7]}
+\newcommand{\npadAkPcalPraw}{+0.3 [−2.5, +2.0]}
+\newcommand{\npadAkRoPraw}{−1.0 [−5.4, +2.6]}
+\newcommand{\npadAkPoPraw}{−0.9 [−5.3, +2.8]}
+\newcommand{\npadAkRoxRo}{+0.2 [−0.2, +0.5]}
+\newcommand{\npadAkRpoRp}{−0.5 [−1.0, +0.3]}
+\newcommand{\npadCaRoPoLiu}{−0.4 [−4.1, +1.0]}
+\newcommand{\npadCaRpPcalLiu}{+0.1 [−3.4, +1.2]}
+\newcommand{\npadCaRoRpLiu}{+2.1 [−0.6, +11.1]}
+\newcommand{\npadCaRoPcalLiu}{+2.2 [−3.0, +9.0]}
+\newcommand{\npadCaPcalPrawLiu}{+0.1 [−2.4, +8.8]}
+\newcommand{\npadCaRoPrawLiu}{+2.3 [−0.5, +15.9]}
+\newcommand{\npadCaPoPrawLiu}{+2.7 [−1.4, +19.7]}
+\newcommand{\npadCaRoxRoLiu}{−0.9 [−1.3, −0.1]}
+\newcommand{\npadCaRpoRpLiu}{+0.9 [−1.6, +1.6]}
+\newcommand{\npadCaRoPo}{−3.7 [−4.8, −0.8]}
+\newcommand{\npadCaRpPcal}{−1.3 [−2.3, −0.0]}
+\newcommand{\npadCaRoRp}{+3.4 [−1.0, +5.7]}
+\newcommand{\npadCaRoPcal}{+2.1 [−1.9, +4.9]}
+\newcommand{\npadCaPcalPraw}{−2.4 [−6.5, +1.0]}
+\newcommand{\npadCaRoPraw}{−0.3 [−7.8, +3.1]}
+\newcommand{\npadCaPoPraw}{+3.3 [−6.6, +7.1]}
+\newcommand{\npadCaRoxRo}{−0.2 [−0.6, +0.2]}
+\newcommand{\npadCaRpoRp}{−0.2 [−1.6, +1.3]}
+\newcommand{\npadLeRoPoLiu}{−1.2 [−2.6, −0.5]}
+\newcommand{\npadLeRpPcalLiu}{−2.1 [−4.4, −0.4]}
+\newcommand{\npadLeRoRpLiu}{−1.2 [−3.2, −0.5]}
+\newcommand{\npadLeRoPcalLiu}{−3.2 [−5.8, −1.9]}
+\newcommand{\npadLePcalPrawLiu}{−5.6 [−12.2, +0.2]}
+\newcommand{\npadLeRoPrawLiu}{−8.8 [−16.3, −4.2]}
+\newcommand{\npadLePoPrawLiu}{−7.6 [−15.2, −2.1]}
+\newcommand{\npadLeRoxRoLiu}{+0.0 [−0.1, +0.3]}
+\newcommand{\npadLeRpoRpLiu}{−1.3 [−3.6, −0.1]}
+\newcommand{\npadLeRoPo}{−1.8 [−5.3, −0.7]}
+\newcommand{\npadLeRpPcal}{−2.3 [−7.4, −0.4]}
+\newcommand{\npadLeRoRp}{−2.8 [−6.2, −0.1]}
+\newcommand{\npadLeRoPcal}{−5.1 [−8.6, −2.8]}
+\newcommand{\npadLePcalPraw}{−5.9 [−11.5, +9.3]}
+\newcommand{\npadLeRoPraw}{−11.0 [−15.9, +1.3]}
+\newcommand{\npadLePoPraw}{−9.2 [−14.8, +6.5]}
+\newcommand{\npadLeRoxRo}{−0.0 [−0.2, +0.2]}
+\newcommand{\npadLeRpoRp}{−0.9 [−5.9, +0.5]}
+\newcommand{\nextAllxPz}{83.3}
+\newcommand{\nextnAllx}{816}
+\newcommand{\nextAllxPoloc}{68.8}
+\newcommand{\nextAllxDz}{83.0}
+\newcommand{\nextAllxFo}{82.9}
+\newcommand{\nextAllxRo}{83.5}
+\newcommand{\nextAllxRoloc}{69.3}
+\newcommand{\nextAllxAalto}{70.0}
+\newcommand{\nextAllxCcifour}{77.8}
+\newcommand{\nextAllxCcifive}{60.9}
+\newcommand{\nextAllxLiu}{34.2}
+\newcommand{\nextAllxWei}{36.7}
+\newcommand{\nextAllPz}{54.3}
+\newcommand{\nextnAll}{805}
+\newcommand{\nextAllPoloc}{49.7}
+\newcommand{\nextAllDz}{54.8}
+\newcommand{\nextAllFo}{54.5}
+\newcommand{\nextAllRo}{54.8}
+\newcommand{\nextAllRoloc}{50.5}
+\newcommand{\nextAllAalto}{45.0}
+\newcommand{\nextAllCcifour}{55.1}
+\newcommand{\nextAllCcifive}{57.8}
+\newcommand{\nextAllLiu}{23.0}
+\newcommand{\nextAllWei}{21.2}
+\newcommand{\nextCsPz}{59.0}
+\newcommand{\nextnCs}{81}
+\newcommand{\nextCsPoloc}{53.6}
+\newcommand{\nextCsDz}{65.5}
+\newcommand{\nextCsFo}{65.8}
+\newcommand{\nextCsRo}{60.1}
+\newcommand{\nextCsRoloc}{53.5}
+\newcommand{\nextCsAalto}{45.3}
+\newcommand{\nextCsCcifour}{68.2}
+\newcommand{\nextCsCcifive}{72.7}
+\newcommand{\nextCsLiu}{8.1}
+\newcommand{\nextCsWei}{11.7}
+\newcommand{\nextChPz}{12.2}
+\newcommand{\nextnCh}{75}
+\newcommand{\nextChPoloc}{14.7}
+\newcommand{\nextChDz}{15.6}
+\newcommand{\nextChFo}{18.0}
+\newcommand{\nextChRo}{13.7}
+\newcommand{\nextChRoloc}{16.3}
+\newcommand{\nextChAalto}{38.3}
+\newcommand{\nextChCcifour}{15.5}
+\newcommand{\nextChCcifive}{43.9}
+\newcommand{\nextChLiu}{20.0}
+\newcommand{\nextChWei}{19.7}
+\newcommand{\nextErPz}{55.4}
+\newcommand{\nextnEr}{73}
+\newcommand{\nextErPoloc}{42.9}
+\newcommand{\nextErDz}{55.6}
+\newcommand{\nextErFo}{54.8}
+\newcommand{\nextErRo}{55.3}
+\newcommand{\nextErRoloc}{42.9}
+\newcommand{\nextErAalto}{67.1}
+\newcommand{\nextErCcifour}{52.0}
+\newcommand{\nextErCcifive}{109.4}
+\newcommand{\nextErLiu}{14.8}
+\newcommand{\nextErWei}{16.4}
+\newcommand{\nextGrPz}{50.0}
+\newcommand{\nextnGr}{30}
+\newcommand{\nextGrPoloc}{14.1}
+\newcommand{\nextGrDz}{32.5}
+\newcommand{\nextGrFo}{30.8}
+\newcommand{\nextGrRo}{49.6}
+\newcommand{\nextGrRoloc}{14.4}
+\newcommand{\nextGrAalto}{19.9}
+\newcommand{\nextGrCcifour}{43.6}
+\newcommand{\nextGrCcifive}{20.0}
+\newcommand{\nextGrLiu}{nan}
+\newcommand{\nextGrWei}{36.9}
+\newcommand{\nextKaPz}{7.6}
+\newcommand{\nextnKa}{19}
+\newcommand{\nextKaPoloc}{8.5}
+\newcommand{\nextKaDz}{9.0}
+\newcommand{\nextKaFo}{9.1}
+\newcommand{\nextKaRo}{7.5}
+\newcommand{\nextKaRoloc}{8.5}
+\newcommand{\nextKaAalto}{95.6}
+\newcommand{\nextKaCcifour}{24.3}
+\newcommand{\nextKaCcifive}{124.4}
+\newcommand{\nextKaLiu}{47.4}
+\newcommand{\nextKaWei}{5.9}
+\newcommand{\nextNsPz}{27.4}
+\newcommand{\nextnNs}{244}
+\newcommand{\nextNsPoloc}{27.3}
+\newcommand{\nextNsDz}{33.2}
+\newcommand{\nextNsFo}{34.3}
+\newcommand{\nextNsRo}{28.6}
+\newcommand{\nextNsRoloc}{29.8}
+\newcommand{\nextNsAalto}{22.4}
+\newcommand{\nextNsCcifour}{37.3}
+\newcommand{\nextNsCcifive}{31.7}
+\newcommand{\nextNsLiu}{26.5}
+\newcommand{\nextNsWei}{12.8}
+\newcommand{\nextSvPz}{127.5}
+\newcommand{\nextnSv}{65}
+\newcommand{\nextSvPoloc}{133.5}
+\newcommand{\nextSvDz}{117.5}
+\newcommand{\nextSvFo}{116.9}
+\newcommand{\nextSvRo}{127.3}
+\newcommand{\nextSvRoloc}{135.8}
+\newcommand{\nextSvAalto}{86.6}
+\newcommand{\nextSvCcifour}{119.2}
+\newcommand{\nextSvCcifive}{108.3}
+\newcommand{\nextSvLiu}{18.6}
+\newcommand{\nextSvWei}{24.7}
+\newcommand{\nextWsPz}{49.9}
+\newcommand{\nextnWs}{218}
+\newcommand{\nextWsPoloc}{34.4}
+\newcommand{\nextWsDz}{53.7}
+\newcommand{\nextWsFo}{52.1}
+\newcommand{\nextWsRo}{50.5}
+\newcommand{\nextWsRoloc}{33.4}
+\newcommand{\nextWsAalto}{34.1}
+\newcommand{\nextWsCcifour}{46.8}
+\newcommand{\nextWsCcifive}{37.7}
+\newcommand{\nextWsLiu}{22.0}
+\newcommand{\nextWsWei}{28.1}
+\newcommand{\nextdAllxRoPz}{+0.2 [−0.2, +0.9]}
+\newcommand{\nextdAllxDzPz}{−0.2 [−2.3, +2.9]}
+\newcommand{\nextdAllxFoPz}{−0.4 [−2.6, +2.6]}
+\newcommand{\nextdAllxRolocPoloc}{+0.5 [−0.1, +1.4]}
+\newcommand{\nextdAllxPolocPz}{−14.5 [−34.4, +15.6]}
+\newcommand{\nextdAllxRolocRo}{−14.2 [−34.3, +16.7]}
+\newcommand{\nextdAllxRoWei}{+48.9 [+24.2, +73.4]}
+\newcommand{\nextdAllxRolocWei}{+34.5 [+12.8, +55.0]}
+\newcommand{\nextdAllxPzWei}{+48.6 [+23.7, +73.0]}
+\newcommand{\nextdAllxRoLiu}{+46.2 [+20.8, +73.3]}
+\newcommand{\nextdAllxRolocLiu}{+22.4 [+8.4, +36.5]}
+\newcommand{\nextdAllRoPz}{+0.4 [−0.3, +1.1]}
+\newcommand{\nextdAllDzPz}{+0.5 [−2.5, +3.8]}
+\newcommand{\nextdAllFoPz}{+0.2 [−3.0, +3.5]}
+\newcommand{\nextdAllRolocPoloc}{+0.8 [−0.2, +1.6]}
+\newcommand{\nextdAllPolocPz}{−4.6 [−29.5, +22.8]}
+\newcommand{\nextdAllRolocRo}{−4.2 [−29.3, +23.4]}
+\newcommand{\nextdAllRoWei}{+34.7 [+20.8, +49.4]}
+\newcommand{\nextdAllRolocWei}{+30.7 [+9.2, +57.4]}
+\newcommand{\nextdAllPzWei}{+34.1 [+20.1, +48.6]}
+\newcommand{\nextdAllRoLiu}{+32.7 [+14.8, +51.4]}
+\newcommand{\nextdAllRolocLiu}{+14.6 [+5.7, +24.1]}
+\newcommand{\nshapAkDirClimate}{47}
+\newcommand{\nshapAkDirSoil}{28}
+\newcommand{\nshapAkDirTerrain}{25}
+\newcommand{\nshapAkResClimate}{46}
+\newcommand{\nshapAkResSoil}{21}
+\newcommand{\nshapAkResTerrain}{34}
+\newcommand{\nshapCaDirClimate}{26}
+\newcommand{\nshapCaDirSoil}{42}
+\newcommand{\nshapCaDirTerrain}{32}
+\newcommand{\nshapCaResClimate}{21}
+\newcommand{\nshapCaResSoil}{39}
+\newcommand{\nshapCaResTerrain}{41}
+\newcommand{\nshapLeDirClimate}{43}
+\newcommand{\nshapLeDirSoil}{16}
+\newcommand{\nshapLeDirTerrain}{41}
+\newcommand{\nshapLeResClimate}{33}
+\newcommand{\nshapLeResSoil}{17}
+\newcommand{\nshapLeResTerrain}{50}
+\newcommand{\ntlvpAkPzWeizero}{−0.1 [−4.6, +4.1]}
+\newcommand{\ntlvprmseAkPzWeizero}{19.4}
+\newcommand{\ntlvprmseAkWeizero}{19.5}
+\newcommand{\ntlvpAkPnWeizero}{−0.1 [−4.6, +4.1]}
+\newcommand{\ntlvprmseAkPnWeizero}{19.4}
+\newcommand{\ntlvpAkDsWeizero}{+2.0 [−4.2, +7.1]}
+\newcommand{\ntlvprmseAkDsWeizero}{21.5}
+\newcommand{\ntlvpAkRsWeizero}{−1.7 [−4.8, +1.1]}
+\newcommand{\ntlvprmseAkRsWeizero}{17.8}
+\newcommand{\ntlvpAkPzLiuzero}{−0.7 [−2.2, +2.0]}
+\newcommand{\ntlvprmseAkPzLiuzero}{18.1}
+\newcommand{\ntlvprmseAkLiuzero}{18.8}
+\newcommand{\ntlvpAkPnLiuzero}{−0.7 [−2.2, +2.0]}
+\newcommand{\ntlvprmseAkPnLiuzero}{18.1}
+\newcommand{\ntlvpAkDsLiuzero}{+1.5 [−0.3, +2.5]}
+\newcommand{\ntlvprmseAkDsLiuzero}{20.2}
+\newcommand{\ntlvpAkRsLiuzero}{−2.2 [−6.0, +2.0]}
+\newcommand{\ntlvprmseAkRsLiuzero}{16.6}
+\newcommand{\ntlvpAkPzWeitwfive}{−0.1 [−4.6, +4.1]}
+\newcommand{\ntlvprmseAkPzWeitwfive}{19.4}
+\newcommand{\ntlvprmseAkWeitwfive}{19.5}
+\newcommand{\ntlvpAkPnWeitwfive}{−0.8 [−5.0, +2.8]}
+\newcommand{\ntlvprmseAkPnWeitwfive}{18.7}
+\newcommand{\ntlvpAkDsWeitwfive}{−0.0 [−4.5, +3.6]}
+\newcommand{\ntlvprmseAkDsWeitwfive}{19.5}
+\newcommand{\ntlvpAkRsWeitwfive}{−2.2 [−5.2, +0.3]}
+\newcommand{\ntlvprmseAkRsWeitwfive}{17.3}
+\newcommand{\ntlvpAkPzLiutwfive}{−0.7 [−2.2, +2.0]}
+\newcommand{\ntlvprmseAkPzLiutwfive}{18.1}
+\newcommand{\ntlvprmseAkLiutwfive}{18.8}
+\newcommand{\ntlvpAkPnLiutwfive}{−1.3 [−3.2, +1.4]}
+\newcommand{\ntlvprmseAkPnLiutwfive}{17.5}
+\newcommand{\ntlvpAkDsLiutwfive}{−0.6 [−2.0, +1.4]}
+\newcommand{\ntlvprmseAkDsLiutwfive}{18.2}
+\newcommand{\ntlvpAkRsLiutwfive}{−2.5 [−6.5, +1.7]}
+\newcommand{\ntlvprmseAkRsLiutwfive}{16.2}
+\newcommand{\ntlvpLePzWeizero}{−7.2 [−9.5, +0.6]}
+\newcommand{\ntlvprmseLePzWeizero}{23.1}
+\newcommand{\ntlvprmseLeWeizero}{30.3}
+\newcommand{\ntlvpLePnWeizero}{−7.2 [−9.5, +0.6]}
+\newcommand{\ntlvprmseLePnWeizero}{23.1}
+\newcommand{\ntlvpLeDsWeizero}{+12.1 [+1.9, +17.7]}
+\newcommand{\ntlvprmseLeDsWeizero}{42.4}
+\newcommand{\ntlvpLeRsWeizero}{−4.3 [−6.1, −0.8]}
+\newcommand{\ntlvprmseLeRsWeizero}{26.0}
+\newcommand{\ntlvpLePzLiuzero}{−5.7 [−10.8, −3.1]}
+\newcommand{\ntlvprmseLePzLiuzero}{19.9}
+\newcommand{\ntlvprmseLeLiuzero}{25.6}
+\newcommand{\ntlvpLePnLiuzero}{−5.7 [−10.8, −3.1]}
+\newcommand{\ntlvprmseLePnLiuzero}{19.9}
+\newcommand{\ntlvpLeDsLiuzero}{+15.9 [+4.6, +21.0]}
+\newcommand{\ntlvprmseLeDsLiuzero}{41.5}
+\newcommand{\ntlvpLeRsLiuzero}{−2.7 [−6.2, −1.1]}
+\newcommand{\ntlvprmseLeRsLiuzero}{22.9}
+\newcommand{\ntlvpLePzWeitwfive}{−7.2 [−9.5, +0.6]}
+\newcommand{\ntlvprmseLePzWeitwfive}{23.1}
+\newcommand{\ntlvprmseLeWeitwfive}{30.3}
+\newcommand{\ntlvpLePnWeitwfive}{−9.4 [−14.1, +2.7]}
+\newcommand{\ntlvprmseLePnWeitwfive}{20.9}
+\newcommand{\ntlvpLeDsWeitwfive}{−5.6 [−7.4, −1.1]}
+\newcommand{\ntlvprmseLeDsWeitwfive}{24.7}
+\newcommand{\ntlvpLeRsWeitwfive}{−9.2 [−12.6, +0.8]}
+\newcommand{\ntlvprmseLeRsWeitwfive}{21.1}
+\newcommand{\ntlvpLePzLiutwfive}{−5.7 [−10.8, −3.1]}
+\newcommand{\ntlvprmseLePzLiutwfive}{19.9}
+\newcommand{\ntlvprmseLeLiutwfive}{25.6}
+\newcommand{\ntlvpLePnLiutwfive}{−7.5 [−14.4, −2.9]}
+\newcommand{\ntlvprmseLePnLiutwfive}{18.1}
+\newcommand{\ntlvpLeDsLiutwfive}{−4.2 [−5.2, −3.6]}
+\newcommand{\ntlvprmseLeDsLiutwfive}{21.4}
+\newcommand{\ntlvpLeRsLiutwfive}{−7.5 [−12.5, −3.9]}
+\newcommand{\ntlvprmseLeRsLiutwfive}{18.1}
+\newcommand{\ntlvpCaPzWeizero}{+0.4 [−6.4, +4.2]}
+\newcommand{\ntlvprmseCaPzWeizero}{27.8}
+\newcommand{\ntlvprmseCaWeizero}{27.4}
+\newcommand{\ntlvpCaPnWeizero}{+0.4 [−6.4, +4.2]}
+\newcommand{\ntlvprmseCaPnWeizero}{27.8}
+\newcommand{\ntlvpCaDsWeizero}{−3.2 [−8.0, +0.7]}
+\newcommand{\ntlvprmseCaDsWeizero}{24.2}
+\newcommand{\ntlvpCaRsWeizero}{−3.1 [−8.0, +0.9]}
+\newcommand{\ntlvprmseCaRsWeizero}{24.3}
+\newcommand{\ntlvpCaPzLiuzero}{−0.5 [−4.1, +15.3]}
+\newcommand{\ntlvprmseCaPzLiuzero}{27.5}
+\newcommand{\ntlvprmseCaLiuzero}{27.9}
+\newcommand{\ntlvpCaPnLiuzero}{−0.5 [−4.1, +15.3]}
+\newcommand{\ntlvprmseCaPnLiuzero}{27.5}
+\newcommand{\ntlvpCaDsLiuzero}{−2.8 [−11.2, +16.2]}
+\newcommand{\ntlvprmseCaDsLiuzero}{25.1}
+\newcommand{\ntlvpCaRsLiuzero}{−3.3 [−9.4, +15.4]}
+\newcommand{\ntlvprmseCaRsLiuzero}{24.7}
+\newcommand{\ntlvpCaPzWeitwfive}{+0.4 [−6.4, +4.2]}
+\newcommand{\ntlvprmseCaPzWeitwfive}{27.8}
+\newcommand{\ntlvprmseCaWeitwfive}{27.4}
+\newcommand{\ntlvpCaPnWeitwfive}{+4.0 [−6.9, +8.3]}
+\newcommand{\ntlvprmseCaPnWeitwfive}{31.3}
+\newcommand{\ntlvpCaDsWeitwfive}{−3.6 [−7.7, +0.9]}
+\newcommand{\ntlvprmseCaDsWeitwfive}{23.8}
+\newcommand{\ntlvpCaRsWeitwfive}{−1.0 [−8.2, +3.3]}
+\newcommand{\ntlvprmseCaRsWeitwfive}{26.4}
+\newcommand{\ntlvpCaPzLiutwfive}{−0.5 [−4.1, +15.3]}
+\newcommand{\ntlvprmseCaPzLiutwfive}{27.5}
+\newcommand{\ntlvprmseCaLiutwfive}{27.9}
+\newcommand{\ntlvpCaPnLiutwfive}{+2.1 [−2.4, +19.0]}
+\newcommand{\ntlvprmseCaPnLiutwfive}{30.0}
+\newcommand{\ntlvpCaDsLiutwfive}{−3.1 [−11.3, +16.9]}
+\newcommand{\ntlvprmseCaDsLiutwfive}{24.8}
+\newcommand{\ntlvpCaRsLiutwfive}{−2.9 [−8.7, +16.7]}
+\newcommand{\ntlvprmseCaRsLiutwfive}{25.0}
+\newcommand{\nbiasAkSouthRo}{+0.5}
+\newcommand{\nbiasAkSouthPo}{+0.3}
+\newcommand{\nbiasAkSouthWei}{+13.6}
+\newcommand{\nbiasAkSouthLiu}{−1.0}
+\newcommand{\nbiasAkSouthCcifour}{−2.6}
+\newcommand{\nbiasobsAkSouth}{66.3}
+\newcommand{\nbiasAkIntRo}{+0.2}
+\newcommand{\nbiasAkIntPo}{+6.3}
+\newcommand{\nbiasAkIntWei}{−10.4}
+\newcommand{\nbiasAkIntLiu}{−4.0}
+\newcommand{\nbiasAkIntCcifour}{+25.9}
+\newcommand{\nbiasobsAkInt}{72.5}
+\newcommand{\nbiasAkMidRo}{+12.6}
+\newcommand{\nbiasAkMidPo}{+17.3}
+\newcommand{\nbiasAkMidWei}{+16.2}
+\newcommand{\nbiasAkMidLiu}{+17.7}
+\newcommand{\nbiasAkMidCcifour}{+28.7}
+\newcommand{\nbiasobsAkMid}{43.9}
+\newcommand{\nbiasAkFootRo}{+2.5}
+\newcommand{\nbiasAkFootPo}{+3.0}
+\newcommand{\nbiasAkFootWei}{+4.5}
+\newcommand{\nbiasAkFootLiu}{+5.2}
+\newcommand{\nbiasAkFootCcifour}{+4.4}
+\newcommand{\nbiasobsAkFoot}{48.3}
+\newcommand{\nbiasAkNorthRo}{−12.8}
+\newcommand{\nbiasAkNorthPo}{−12.9}
+\newcommand{\nbiasAkNorthWei}{+0.2}
+\newcommand{\nbiasAkNorthLiu}{+14.1}
+\newcommand{\nbiasAkNorthCcifour}{−22.9}
+\newcommand{\nbiasobsAkNorth}{41.2}
+\newcommand{\nbiasLeSouthRo}{+0.5}
+\newcommand{\nbiasLeSouthPo}{+1.2}
+\newcommand{\nbiasLeSouthWei}{+7.0}
+\newcommand{\nbiasLeSouthLiu}{+14.0}
+\newcommand{\nbiasLeSouthCcifour}{−3.5}
+\newcommand{\nbiasobsLeSouth}{41.4}
+\newcommand{\nbiasLeNorthRo}{+0.5}
+\newcommand{\nbiasLeNorthPo}{+1.0}
+\newcommand{\nbiasLeNorthWei}{+21.1}
+\newcommand{\nbiasLeNorthLiu}{+19.9}
+\newcommand{\nbiasLeNorthCcifour}{−10.8}
+\newcommand{\nbiasobsLeNorth}{42.4}
+\newcommand{\nbiasCaSouthRo}{−13.1}
+\newcommand{\nbiasCaSouthPo}{−18.5}
+\newcommand{\nbiasCaSouthWei}{+10.4}
+\newcommand{\nbiasCaSouthLiu}{+4.9}
+\newcommand{\nbiasCaSouthCcifour}{+10.7}
+\newcommand{\nbiasobsCaSouth}{87.2}
+\newcommand{\nbiasCaMidRo}{+15.4}
+\newcommand{\nbiasCaMidPo}{+21.2}
+\newcommand{\nbiasCaMidWei}{+14.5}
+\newcommand{\nbiasCaMidLiu}{+26.1}
+\newcommand{\nbiasCaMidCcifour}{−18.7}
+\newcommand{\nbiasobsCaMid}{49.9}
+\newcommand{\nbiasCaFootRo}{+2.0}
+\newcommand{\nbiasCaFootPo}{+2.0}
+\newcommand{\nbiasCaFootWei}{+14.1}
+\newcommand{\nbiasCaFootLiu}{−17.3}
+\newcommand{\nbiasCaFootCcifour}{−64.3}
+\newcommand{\nbiasobsCaFoot}{56.1}
+\newcommand{\nmapAkSouthLowWei}{−3.9}
+\newcommand{\nmapAkSouthLowLiu}{−3.8}
+\newcommand{\nmapAkSouthMtnWei}{+67.3}
+\newcommand{\nmapAkSouthMtnLiu}{+99.3}
+\newcommand{\nmapAkIntLowWei}{−8.8}
+\newcommand{\nmapAkIntLowLiu}{−3.4}
+\newcommand{\nmapAkIntMtnWei}{+2.0}
+\newcommand{\nmapAkIntMtnLiu}{+40.8}
+\newcommand{\nmapAkMidLowWei}{−5.7}
+\newcommand{\nmapAkMidLowLiu}{−1.0}
+\newcommand{\nmapAkMidMtnWei}{+14.6}
+\newcommand{\nmapAkMidMtnLiu}{+45.7}
+\newcommand{\nmapAkFootLowWei}{+2.8}
+\newcommand{\nmapAkFootLowLiu}{+4.1}
+\newcommand{\nmapAkFootMtnWei}{+21.9}
+\newcommand{\nmapAkFootMtnLiu}{+55.2}
+\newcommand{\nmapAkNorthLowWei}{−1.7}
+\newcommand{\nmapAkNorthLowLiu}{+4.8}
+\newcommand{\nswpfrmed}{22}
+\newcommand{\nswpfrge}{1}
+\newcommand{\nmaplatmin}{59.8}
+\newcommand{\ndistweiAkmed}{7}
+\newcommand{\ndistweiAkle}{67}
+\newcommand{\ndistweiAkmin}{0}
+\newcommand{\ndistweiCamed}{222}
+\newcommand{\ndistweiCale}{11}
+\newcommand{\ndistweiCamin}{0}
+\newcommand{\ndistweiLemed}{107}
+\newcommand{\ndistweiLele}{1}
+\newcommand{\ndistweiLemin}{4}
+\newcommand{\nextcells}{73}
+\newcommand{\nextcy}{816}
+\newcommand{\nextblocks}{50}
+\newcommand{\nextsubs}{8}
+\newcommand{\nfeAkOurs}{15.9}
+\newcommand{\nfeAkWei}{15.8}
+\newcommand{\nfeAkLiu}{16.4}
+\newcommand{\nfeAkOof}{17.1}
+\newcommand{\nfeLeOurs}{19.2}
+\newcommand{\nfeLeWei}{26.2}
+\newcommand{\nfeLeLiu}{30.4}
+\newcommand{\nfeLeOof}{12.7}
+\newcommand{\nywAkn}{13}
+\newcommand{\nywAkRoWeiwin}{7}
+\newcommand{\nywAkRoWein}{13}
+\newcommand{\nywAkRoLiuwin}{4}
+\newcommand{\nywAkRoLiun}{11}
+\newcommand{\nywAkRoPowin}{9}
+\newcommand{\nywAkRoPon}{13}
+\newcommand{\nywCan}{8}
+\newcommand{\nywCaRoWeiwin}{5}
+\newcommand{\nywCaRoWein}{8}
+\newcommand{\nywCaRoLiuwin}{2}
+\newcommand{\nywCaRoLiun}{4}
+\newcommand{\nywCaRoPowin}{7}
+\newcommand{\nywCaRoPon}{8}
+\newcommand{\nywLen}{6}
+\newcommand{\nywLeRoWeiwin}{6}
+\newcommand{\nywLeRoWein}{6}
+\newcommand{\nywLeRoLiuwin}{4}
+\newcommand{\nywLeRoLiun}{4}
+\newcommand{\nywLeRoPowin}{6}
+\newcommand{\nywLeRoPon}{6}
+\newcommand{\ngcAksig}{5}
+\newcommand{\ngcAkcells}{24}
+\newcommand{\ngcAkmaxabs}{0.9}
+\newcommand{\ngcAkcorr}{0.51}
+\newcommand{\ngcCasig}{17}
+\newcommand{\ngcCacells}{23}
+\newcommand{\ngcCamaxabs}{6.8}
+\newcommand{\ngcCacorr}{−0.79}
+\newcommand{\ngcLesig}{19}
+\newcommand{\ngcLecells}{23}
+\newcommand{\ngcLemaxabs}{6.8}
+\newcommand{\ngcLecorr}{−0.99}
+\newcommand{\nlabpten}{30}
+\newcommand{\nlabpninety}{77}
+\newcommand{\nbiasnAkSouthWei}{3,443}
+\newcommand{\nbiasnAkSouthLiu}{3,338}
+\newcommand{\nbiasnAkIntWei}{2,418}
+\newcommand{\nbiasnAkIntLiu}{1,856}
+\newcommand{\nbiasnAkMidWei}{167}
+\newcommand{\nbiasnAkMidLiu}{163}
+\newcommand{\nbiasnAkFootWei}{4,217}
+\newcommand{\nbiasnAkFootLiu}{4,159}
+\newcommand{\nbiasnAkNorthWei}{5,287}
+\newcommand{\nbiasnAkNorthLiu}{4,810}
+\newcommand{\nbiasnLeSouthWei}{13}
+\newcommand{\nbiasnLeSouthLiu}{575}
+\newcommand{\nbiasnLeNorthWei}{801}
+\newcommand{\nbiasnLeNorthLiu}{460}
+\newcommand{\nbiasnCaSouthWei}{437}
+\newcommand{\nbiasnCaSouthLiu}{220}
+\newcommand{\nbiasnCaMidWei}{530}
+\newcommand{\nbiasnCaMidLiu}{299}
+\newcommand{\nbiasnCaFootWei}{224}
+\newcommand{\nbiasnCaFootLiu}{13}
+\newcommand{\nweisitesAkN}{14}
+\newcommand{\nftAllPnzero}{55.7}
+\newcommand{\nftAllRszero}{56.2}
+\newcommand{\nftAllDszero}{56.6}
+\newcommand{\nftAllWeizero}{18.0}
+\newcommand{\nftAllLiuzero}{23.2}
+\newcommand{\nftAllCcifivezero}{60.7}
+\newcommand{\nftCsPnzero}{61.7}
+\newcommand{\nftCsRszero}{62.8}
+\newcommand{\nftCsDszero}{68.2}
+\newcommand{\nftCsWeizero}{6.1}
+\newcommand{\nftCsLiuzero}{7.0}
+\newcommand{\nftCsCcifivezero}{67.2}
+\newcommand{\nftChPnzero}{7.9}
+\newcommand{\nftChRszero}{8.8}
+\newcommand{\nftChDszero}{9.5}
+\newcommand{\nftChWeizero}{12.7}
+\newcommand{\nftChLiuzero}{20.0}
+\newcommand{\nftChCcifivezero}{48.2}
+\newcommand{\nftErPnzero}{57.0}
+\newcommand{\nftErRszero}{59.5}
+\newcommand{\nftErDszero}{62.1}
+\newcommand{\nftErWeizero}{15.9}
+\newcommand{\nftErLiuzero}{14.8}
+\newcommand{\nftErCcifivezero}{100.4}
+\newcommand{\nftKaPnzero}{8.0}
+\newcommand{\nftKaRszero}{7.9}
+\newcommand{\nftKaDszero}{9.6}
+\newcommand{\nftKaWeizero}{5.0}
+\newcommand{\nftKaLiuzero}{47.4}
+\newcommand{\nftKaCcifivezero}{135.4}
+\newcommand{\nftNsPnzero}{32.1}
+\newcommand{\nftNsRszero}{32.6}
+\newcommand{\nftNsDszero}{35.2}
+\newcommand{\nftNsWeizero}{11.3}
+\newcommand{\nftNsLiuzero}{26.5}
+\newcommand{\nftNsCcifivezero}{35.0}
+\newcommand{\nftSvPnzero}{144.1}
+\newcommand{\nftSvRszero}{144.3}
+\newcommand{\nftSvDszero}{133.7}
+\newcommand{\nftSvWeizero}{24.9}
+\newcommand{\nftSvLiuzero}{18.6}
+\newcommand{\nftSvCcifivezero}{116.4}
+\newcommand{\nftWsPnzero}{47.2}
+\newcommand{\nftWsRszero}{47.7}
+\newcommand{\nftWsDszero}{50.3}
+\newcommand{\nftWsWeizero}{25.3}
+\newcommand{\nftWsLiuzero}{22.0}
+\newcommand{\nftWsCcifivezero}{37.3}
+\newcommand{\nftAllPnfive}{40.3}
+\newcommand{\nftAllRsfive}{40.3}
+\newcommand{\nftAllDsfive}{50.9}
+\newcommand{\nftAllWeifive}{18.0}
+\newcommand{\nftAllLiufive}{23.2}
+\newcommand{\nftAllCcifivefive}{60.7}
+\newcommand{\nftCsPnfive}{59.6}
+\newcommand{\nftCsRsfive}{59.6}
+\newcommand{\nftCsDsfive}{68.6}
+\newcommand{\nftCsWeifive}{6.1}
+\newcommand{\nftCsLiufive}{7.0}
+\newcommand{\nftCsCcifivefive}{67.2}
+\newcommand{\nftChPnfive}{13.7}
+\newcommand{\nftChRsfive}{14.6}
+\newcommand{\nftChDsfive}{9.2}
+\newcommand{\nftChWeifive}{12.7}
+\newcommand{\nftChLiufive}{20.0}
+\newcommand{\nftChCcifivefive}{48.2}
+\newcommand{\nftErPnfive}{51.0}
+\newcommand{\nftErRsfive}{52.2}
+\newcommand{\nftErDsfive}{63.0}
+\newcommand{\nftErWeifive}{15.9}
+\newcommand{\nftErLiufive}{14.8}
+\newcommand{\nftErCcifivefive}{100.4}
+\newcommand{\nftKaPnfive}{12.5}
+\newcommand{\nftKaRsfive}{11.7}
+\newcommand{\nftKaDsfive}{10.0}
+\newcommand{\nftKaWeifive}{5.0}
+\newcommand{\nftKaLiufive}{47.4}
+\newcommand{\nftKaCcifivefive}{135.4}
+\newcommand{\nftNsPnfive}{34.0}
+\newcommand{\nftNsRsfive}{34.8}
+\newcommand{\nftNsDsfive}{34.5}
+\newcommand{\nftNsWeifive}{11.3}
+\newcommand{\nftNsLiufive}{26.5}
+\newcommand{\nftNsCcifivefive}{35.0}
+\newcommand{\nftSvPnfive}{65.0}
+\newcommand{\nftSvRsfive}{64.4}
+\newcommand{\nftSvDsfive}{99.8}
+\newcommand{\nftSvWeifive}{24.9}
+\newcommand{\nftSvLiufive}{18.6}
+\newcommand{\nftSvCcifivefive}{116.4}
+\newcommand{\nftWsPnfive}{34.3}
+\newcommand{\nftWsRsfive}{33.5}
+\newcommand{\nftWsDsfive}{48.1}
+\newcommand{\nftWsWeifive}{25.3}
+\newcommand{\nftWsLiufive}{22.0}
+\newcommand{\nftWsCcifivefive}{37.3}
+\newcommand{\nftAllPnten}{39.2}
+\newcommand{\nftAllRsten}{39.3}
+\newcommand{\nftAllDsten}{49.6}
+\newcommand{\nftAllWeiten}{18.0}
+\newcommand{\nftAllLiuten}{23.2}
+\newcommand{\nftAllCcifiveten}{60.7}
+\newcommand{\nftCsPnten}{56.1}
+\newcommand{\nftCsRsten}{55.7}
+\newcommand{\nftCsDsten}{65.0}
+\newcommand{\nftCsWeiten}{6.1}
+\newcommand{\nftCsLiuten}{7.0}
+\newcommand{\nftCsCcifiveten}{67.2}
+\newcommand{\nftChPnten}{14.1}
+\newcommand{\nftChRsten}{14.7}
+\newcommand{\nftChDsten}{9.6}
+\newcommand{\nftChWeiten}{12.7}
+\newcommand{\nftChLiuten}{20.0}
+\newcommand{\nftChCcifiveten}{48.2}
+\newcommand{\nftErPnten}{49.4}
+\newcommand{\nftErRsten}{51.6}
+\newcommand{\nftErDsten}{63.7}
+\newcommand{\nftErWeiten}{15.9}
+\newcommand{\nftErLiuten}{14.8}
+\newcommand{\nftErCcifiveten}{100.4}
+\newcommand{\nftKaPnten}{12.3}
+\newcommand{\nftKaRsten}{11.7}
+\newcommand{\nftKaDsten}{9.7}
+\newcommand{\nftKaWeiten}{5.0}
+\newcommand{\nftKaLiuten}{47.4}
+\newcommand{\nftKaCcifiveten}{135.4}
+\newcommand{\nftNsPnten}{34.2}
+\newcommand{\nftNsRsten}{35.4}
+\newcommand{\nftNsDsten}{34.6}
+\newcommand{\nftNsWeiten}{11.3}
+\newcommand{\nftNsLiuten}{26.5}
+\newcommand{\nftNsCcifiveten}{35.0}
+\newcommand{\nftSvPnten}{61.5}
+\newcommand{\nftSvRsten}{60.9}
+\newcommand{\nftSvDsten}{97.1}
+\newcommand{\nftSvWeiten}{24.9}
+\newcommand{\nftSvLiuten}{18.6}
+\newcommand{\nftSvCcifiveten}{116.4}
+\newcommand{\nftWsPnten}{34.1}
+\newcommand{\nftWsRsten}{32.9}
+\newcommand{\nftWsDsten}{46.4}
+\newcommand{\nftWsWeiten}{25.3}
+\newcommand{\nftWsLiuten}{22.0}
+\newcommand{\nftWsCcifiveten}{37.3}
+\newcommand{\nftAllPntwfive}{39.7}
+\newcommand{\nftAllRstwfive}{39.7}
+\newcommand{\nftAllDstwfive}{47.5}
+\newcommand{\nftAllWeitwfive}{18.0}
+\newcommand{\nftAllLiutwfive}{23.2}
+\newcommand{\nftAllCcifivetwfive}{60.7}
+\newcommand{\nftCsPntwfive}{56.7}
+\newcommand{\nftCsRstwfive}{56.1}
+\newcommand{\nftCsDstwfive}{59.3}
+\newcommand{\nftCsWeitwfive}{6.1}
+\newcommand{\nftCsLiutwfive}{7.0}
+\newcommand{\nftCsCcifivetwfive}{67.2}
+\newcommand{\nftChPntwfive}{13.8}
+\newcommand{\nftChRstwfive}{14.3}
+\newcommand{\nftChDstwfive}{8.6}
+\newcommand{\nftChWeitwfive}{12.7}
+\newcommand{\nftChLiutwfive}{20.0}
+\newcommand{\nftChCcifivetwfive}{48.2}
+\newcommand{\nftErPntwfive}{49.5}
+\newcommand{\nftErRstwfive}{53.6}
+\newcommand{\nftErDstwfive}{64.8}
+\newcommand{\nftErWeitwfive}{15.9}
+\newcommand{\nftErLiutwfive}{14.8}
+\newcommand{\nftErCcifivetwfive}{100.4}
+\newcommand{\nftKaPntwfive}{12.3}
+\newcommand{\nftKaRstwfive}{11.8}
+\newcommand{\nftKaDstwfive}{10.3}
+\newcommand{\nftKaWeitwfive}{5.0}
+\newcommand{\nftKaLiutwfive}{47.4}
+\newcommand{\nftKaCcifivetwfive}{135.4}
+\newcommand{\nftNsPntwfive}{33.3}
+\newcommand{\nftNsRstwfive}{34.4}
+\newcommand{\nftNsDstwfive}{34.9}
+\newcommand{\nftNsWeitwfive}{11.3}
+\newcommand{\nftNsLiutwfive}{26.5}
+\newcommand{\nftNsCcifivetwfive}{35.0}
+\newcommand{\nftSvPntwfive}{70.3}
+\newcommand{\nftSvRstwfive}{68.3}
+\newcommand{\nftSvDstwfive}{96.0}
+\newcommand{\nftSvWeitwfive}{24.9}
+\newcommand{\nftSvLiutwfive}{18.6}
+\newcommand{\nftSvCcifivetwfive}{116.4}
+\newcommand{\nftWsPntwfive}{33.0}
+\newcommand{\nftWsRstwfive}{31.6}
+\newcommand{\nftWsDstwfive}{42.0}
+\newcommand{\nftWsWeitwfive}{25.3}
+\newcommand{\nftWsLiutwfive}{22.0}
+\newcommand{\nftWsCcifivetwfive}{37.3}
+\newcommand{\nftAllPnfifty}{40.6}
+\newcommand{\nftAllRsfifty}{40.6}
+\newcommand{\nftAllDsfifty}{46.6}
+\newcommand{\nftAllWeififty}{18.0}
+\newcommand{\nftAllLiufifty}{23.2}
+\newcommand{\nftAllCcifivefifty}{60.7}
+\newcommand{\nftCsPnfifty}{57.8}
+\newcommand{\nftCsRsfifty}{56.9}
+\newcommand{\nftCsDsfifty}{56.6}
+\newcommand{\nftCsWeififty}{6.1}
+\newcommand{\nftCsLiufifty}{7.0}
+\newcommand{\nftCsCcifivefifty}{67.2}
+\newcommand{\nftChPnfifty}{13.3}
+\newcommand{\nftChRsfifty}{13.8}
+\newcommand{\nftChDsfifty}{8.8}
+\newcommand{\nftChWeififty}{12.7}
+\newcommand{\nftChLiufifty}{20.0}
+\newcommand{\nftChCcifivefifty}{48.2}
+\newcommand{\nftErPnfifty}{50.0}
+\newcommand{\nftErRsfifty}{55.3}
+\newcommand{\nftErDsfifty}{64.6}
+\newcommand{\nftErWeififty}{15.9}
+\newcommand{\nftErLiufifty}{14.8}
+\newcommand{\nftErCcifivefifty}{100.4}
+\newcommand{\nftKaPnfifty}{12.3}
+\newcommand{\nftKaRsfifty}{11.8}
+\newcommand{\nftKaDsfifty}{10.3}
+\newcommand{\nftKaWeififty}{5.0}
+\newcommand{\nftKaLiufifty}{47.4}
+\newcommand{\nftKaCcifivefifty}{135.4}
+\newcommand{\nftNsPnfifty}{33.0}
+\newcommand{\nftNsRsfifty}{33.8}
+\newcommand{\nftNsDsfifty}{33.5}
+\newcommand{\nftNsWeififty}{11.3}
+\newcommand{\nftNsLiufifty}{26.5}
+\newcommand{\nftNsCcifivefifty}{35.0}
+\newcommand{\nftSvPnfifty}{74.7}
+\newcommand{\nftSvRsfifty}{73.2}
+\newcommand{\nftSvDsfifty}{98.7}
+\newcommand{\nftSvWeififty}{24.9}
+\newcommand{\nftSvLiufifty}{18.6}
+\newcommand{\nftSvCcifivefifty}{116.4}
+\newcommand{\nftWsPnfifty}{33.7}
+\newcommand{\nftWsRsfifty}{32.2}
+\newcommand{\nftWsDsfifty}{40.0}
+\newcommand{\nftWsWeififty}{25.3}
+\newcommand{\nftWsLiufifty}{22.0}
+\newcommand{\nftWsCcifivefifty}{37.3}
+\newcommand{\nftAllPnall}{40.6}
+\newcommand{\nftAllRsall}{40.5}
+\newcommand{\nftAllDsall}{45.9}
+\newcommand{\nftAllWeiall}{18.0}
+\newcommand{\nftAllLiuall}{23.2}
+\newcommand{\nftAllCcifiveall}{60.7}
+\newcommand{\nftCsPnall}{58.1}
+\newcommand{\nftCsRsall}{57.0}
+\newcommand{\nftCsDsall}{56.5}
+\newcommand{\nftCsWeiall}{6.1}
+\newcommand{\nftCsLiuall}{7.0}
+\newcommand{\nftCsCcifiveall}{67.2}
+\newcommand{\nftChPnall}{13.3}
+\newcommand{\nftChRsall}{14.0}
+\newcommand{\nftChDsall}{8.5}
+\newcommand{\nftChWeiall}{12.7}
+\newcommand{\nftChLiuall}{20.0}
+\newcommand{\nftChCcifiveall}{48.2}
+\newcommand{\nftErPnall}{51.3}
+\newcommand{\nftErRsall}{57.1}
+\newcommand{\nftErDsall}{66.9}
+\newcommand{\nftErWeiall}{15.9}
+\newcommand{\nftErLiuall}{14.8}
+\newcommand{\nftErCcifiveall}{100.4}
+\newcommand{\nftKaPnall}{12.3}
+\newcommand{\nftKaRsall}{11.7}
+\newcommand{\nftKaDsall}{10.3}
+\newcommand{\nftKaWeiall}{5.0}
+\newcommand{\nftKaLiuall}{47.4}
+\newcommand{\nftKaCcifiveall}{135.4}
+\newcommand{\nftNsPnall}{33.1}
+\newcommand{\nftNsRsall}{33.4}
+\newcommand{\nftNsDsall}{33.1}
+\newcommand{\nftNsWeiall}{11.3}
+\newcommand{\nftNsLiuall}{26.5}
+\newcommand{\nftNsCcifiveall}{35.0}
+\newcommand{\nftSvPnall}{74.8}
+\newcommand{\nftSvRsall}{73.6}
+\newcommand{\nftSvDsall}{98.7}
+\newcommand{\nftSvWeiall}{24.9}
+\newcommand{\nftSvLiuall}{18.6}
+\newcommand{\nftSvCcifiveall}{116.4}
+\newcommand{\nftWsPnall}{33.1}
+\newcommand{\nftWsRsall}{31.6}
+\newcommand{\nftWsDsall}{36.9}
+\newcommand{\nftWsWeiall}{25.3}
+\newcommand{\nftWsLiuall}{22.0}
+\newcommand{\nftWsCcifiveall}{37.3}
+\newcommand{\nftrows}{474}
+\newcommand{\nftdPnWeizero}{+34.1 [+20.1, +48.6]}
+\newcommand{\nftdRsWeizero}{+34.7 [+20.8, +49.4]}
+\newcommand{\nftdDsWeizero}{+34.9 [+21.9, +48.6]}
+\newcommand{\nftdPnLiuzero}{+32.1 [+14.5, +50.8]}
+\newcommand{\nftdRsLiuzero}{+32.7 [+14.8, +51.4]}
+\newcommand{\nftdDsLiuzero}{+33.1 [+17.2, +50.2]}
+\newcommand{\nftdPnCcifivezero}{−2.8 [−16.6, +8.4]}
+\newcommand{\nftdRsCcifivezero}{−2.3 [−16.5, +9.0]}
+\newcommand{\nftdDsCcifivezero}{−2.4 [−16.5, +8.7]}
+\newcommand{\nftdRsPnzero}{+0.4 [−0.3, +1.1]}
+\newcommand{\nftdRsDszero}{−0.1 [−2.9, +2.5]}
+\newcommand{\nftdPnWeifive}{+23.4 [+10.5, +38.6]}
+\newcommand{\nftdRsWeifive}{+23.9 [+10.9, +39.1]}
+\newcommand{\nftdDsWeifive}{+28.7 [+18.4, +38.9]}
+\newcommand{\nftdPnLiufive}{+17.0 [+7.5, +27.3]}
+\newcommand{\nftdRsLiufive}{+17.0 [+7.9, +27.2]}
+\newcommand{\nftdDsLiufive}{+27.5 [+14.4, +40.3]}
+\newcommand{\nftdPnCcifivefive}{−19.7 [−31.2, −9.6]}
+\newcommand{\nftdRsCcifivefive}{−19.5 [−31.3, −9.2]}
+\newcommand{\nftdDsCcifivefive}{−8.8 [−21.7, +1.9]}
+\newcommand{\nftdRsPnfive}{+0.4 [−0.5, +1.2]}
+\newcommand{\nftdRsDsfive}{−4.7 [−16.1, +10.0]}
+\newcommand{\nftdPnWeiten}{+23.0 [+10.2, +38.5]}
+\newcommand{\nftdRsWeiten}{+23.4 [+10.5, +39.2]}
+\newcommand{\nftdDsWeiten}{+27.2 [+17.1, +37.3]}
+\newcommand{\nftdPnLiuten}{+16.0 [+6.6, +26.1]}
+\newcommand{\nftdRsLiuten}{+16.1 [+7.0, +26.0]}
+\newcommand{\nftdDsLiuten}{+26.1 [+13.6, +38.7]}
+\newcommand{\nftdPnCcifiveten}{−20.5 [−32.6, −10.2]}
+\newcommand{\nftdRsCcifiveten}{−20.4 [−32.5, −9.8]}
+\newcommand{\nftdDsCcifiveten}{−10.2 [−23.0, +0.5]}
+\newcommand{\nftdRsPnten}{+0.3 [−0.6, +1.2]}
+\newcommand{\nftdRsDsten}{−3.7 [−15.7, +11.2]}
+\newcommand{\nftdPnWeitwfive}{+22.3 [+10.2, +36.2]}
+\newcommand{\nftdRsWeitwfive}{+22.7 [+10.9, +36.6]}
+\newcommand{\nftdDsWeitwfive}{+25.1 [+15.0, +35.3]}
+\newcommand{\nftdPnLiutwfive}{+16.5 [+6.9, +27.3]}
+\newcommand{\nftdRsLiutwfive}{+16.4 [+7.0, +27.0]}
+\newcommand{\nftdDsLiutwfive}{+24.0 [+11.7, +36.7]}
+\newcommand{\nftdPnCcifivetwfive}{−19.9 [−31.4, −9.9]}
+\newcommand{\nftdRsCcifivetwfive}{−19.9 [−31.4, −9.9]}
+\newcommand{\nftdDsCcifivetwfive}{−12.5 [−25.1, −2.6]}
+\newcommand{\nftdRsPntwfive}{+0.4 [−0.9, +1.5]}
+\newcommand{\nftdRsDstwfive}{−2.4 [−12.1, +9.9]}
+\newcommand{\nftdPnWeififty}{+23.2 [+11.1, +37.3]}
+\newcommand{\nftdRsWeififty}{+23.5 [+11.6, +37.4]}
+\newcommand{\nftdDsWeififty}{+24.5 [+13.8, +35.3]}
+\newcommand{\nftdPnLiufifty}{+17.4 [+7.8, +28.0]}
+\newcommand{\nftdRsLiufifty}{+17.3 [+7.9, +27.8]}
+\newcommand{\nftdDsLiufifty}{+23.2 [+10.4, +36.5]}
+\newcommand{\nftdPnCcifivefifty}{−18.9 [−29.9, −9.5]}
+\newcommand{\nftdRsCcifivefifty}{−19.0 [−29.7, −9.4]}
+\newcommand{\nftdDsCcifivefifty}{−13.3 [−25.6, −3.9]}
+\newcommand{\nftdRsPnfifty}{+0.3 [−1.1, +1.5]}
+\newcommand{\nftdRsDsfifty}{−0.9 [−9.9, +10.9]}
+\newcommand{\nftdPnWeiall}{+23.1 [+11.0, +36.9]}
+\newcommand{\nftdRsWeiall}{+23.3 [+11.4, +37.2]}
+\newcommand{\nftdDsWeiall}{+23.6 [+12.3, +34.9]}
+\newcommand{\nftdPnLiuall}{+17.4 [+8.0, +28.0]}
+\newcommand{\nftdRsLiuall}{+17.3 [+7.7, +27.8]}
+\newcommand{\nftdDsLiuall}{+22.4 [+9.4, +36.2]}
+\newcommand{\nftdPnCcifiveall}{−19.0 [−29.8, −9.5]}
+\newcommand{\nftdRsCcifiveall}{−19.1 [−29.7, −9.7]}
+\newcommand{\nftdDsCcifiveall}{−14.2 [−26.1, −5.2]}
+\newcommand{\nftdRsPnall}{+0.2 [−1.2, +1.3]}
+\newcommand{\nftdRsDsall}{−0.3 [−9.4, +11.1]}

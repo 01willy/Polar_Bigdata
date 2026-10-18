@@ -1,0 +1,480 @@
+{
+ "stem": "G2_limits",
+ "size_in": [
+  12.0,
+  4.65
+ ],
+ "sources": {
+  "labels": "data/processed/v5/labels_cell_year_v5.csv",
+  "products": "data/processed/v5/products_cell_year_v5.csv",
+  "stefan_oof": "data/processed/v5/runs/core_v6/preds/Alaska__block__year_obs__F8TS__P1__-__lam-1.csv.gz",
+  "static": "data/processed/v5/static_v5.csv",
+  "site_series": "data/processed/v5/site_series/site_series_year_obs.csv.gz"
+ },
+ "choices": {
+  "colors": {
+   "products": {
+    "wei": "#3B8B4F",
+    "liu": "#C9506A",
+    "cci4y": "#9C7A3C",
+    "cci5y": "#B8975A"
+   },
+   "stefan_P1": "#1F5A99",
+   "alaska": "#332288"
+  },
+  "fonts_pt": {
+   "head": 15.0,
+   "axis_label": 14.0,
+   "tick": 12.0,
+   "caption_legend": 13.0
+  },
+  "common_cells": {
+   "n": 14326,
+   "n_cells": 12609,
+   "years": [
+    2010,
+    2020
+   ],
+   "stats": {
+    "wei": {
+     "rmse": 17.89,
+     "bias": 3.95,
+     "p1": -51.4,
+     "p2_5": -33.1,
+     "p5": -21.3,
+     "q25": -5.1,
+     "median": 4.7,
+     "q75": 14.6,
+     "p95": 28.8,
+     "p97_5": 34.0,
+     "p99": 39.7,
+     "min": -185.2,
+     "max": 64.5
+    },
+    "liu": {
+     "rmse": 18.78,
+     "bias": 5.71,
+     "p1": -52.1,
+     "p2_5": -32.8,
+     "p5": -22.0,
+     "q25": -3.4,
+     "median": 6.0,
+     "q75": 16.8,
+     "p95": 32.8,
+     "p97_5": 36.8,
+     "p99": 41.5,
+     "min": -160.8,
+     "max": 67.5
+    },
+    "cci4y": {
+     "rmse": 27.05,
+     "bias": -2.76,
+     "p1": -53.0,
+     "p2_5": -39.0,
+     "p5": -35.2,
+     "q25": -20.0,
+     "median": -6.6,
+     "q75": 9.2,
+     "p95": 46.9,
+     "p97_5": 74.0,
+     "p99": 94.0,
+     "min": -170.0,
+     "max": 149.0
+    }
+   },
+   "product_years": {
+    "wei": [
+     2000,
+     2024
+    ],
+    "liu": [
+     2010,
+     2020
+    ],
+    "cci4y": [
+     1997,
+     2021
+    ],
+    "cci5y": [
+     1997,
+     2023
+    ]
+   }
+  },
+  "violin": {
+   "kde": "matplotlib GaussianKDE, bw 0.15, body = rows inside the 2.5–97.5 percentile (central 95 %)",
+   "xlim": [
+    -40.0,
+    80.0
+   ],
+   "body_range_cm": {
+    "wei": [
+     -33.1,
+     34.0
+    ],
+    "liu": [
+     -32.8,
+     36.8
+    ],
+    "cci4y": [
+     -39.0,
+     74.0
+    ]
+   },
+   "body_rows": {
+    "wei": 13606,
+    "liu": 13607,
+    "cci4y": 13608
+   },
+   "stats_rows": "RMSE·사분위·중앙값은 절단 없는 전체 행(common_cells.n). 그림 안 각주는 v9 에서 뺐다(덱 설명 줄 몫)"
+  },
+  "rmse_column": {
+   "width_in": 0.62,
+   "header": "RMSE (cm), 두 줄",
+   "unit": "cm",
+   "values": {
+    "wei": 17.89,
+    "liu": 18.78,
+    "cci4y": 27.05
+   },
+   "n_common_cell_years": 14326,
+   "years": [
+    2010,
+    2020
+   ]
+  },
+  "stefan_residual": {
+   "file": "data/processed/v5/runs/core_v6/preds/Alaska__block__year_obs__F8TS__P1__-__lam-1.csv.gz",
+   "n_cell_years": 15540,
+   "seeds": [
+    0
+   ],
+   "n_seeds": 1,
+   "seed_note": "P1 = E·√TDD, E 는 최소제곱 배율(testbed_v5.fit_phys/ls_scale) 하나라 씨앗과 무관(결정적). OOF 파일은 seed 0 하나. 대본·캡션에는 '블록 교차검증 OOF 잔차(seed 0, 결정적 재보정)' 로 적는다. '복수 씨앗 평균' 이라고 쓰지 않는다.",
+   "scheme": "block (5-fold, OOF)",
+   "method": "P1 recalibrated Stefan",
+   "rmse_cm": 18.58,
+   "units": {
+    "sg_soc_0_5": "g/kg (SoilGrids column already physical, src/polar/physics.py)",
+    "dem_slope": "degrees"
+   },
+   "x_axis": "등간격 5분위 배치(값 비례 아님) · 눈금 = 구간 중앙값 · x축 제목 '구간'(v9: 각주 삭제, 덱 설명 줄 몫)",
+   "soc_discrete": {
+    "n_unique": 171,
+    "max": 419.2,
+    "n_rows_ge_405": 2079,
+    "unique_ge_405": [
+     405.0,
+     405.1,
+     416.2,
+     419.2
+    ],
+    "note": "토양 유기탄소 열은 이산 값(소수의 고유값). 5번째 구간 405.0–419.2 g/kg 은 자료 상한의 값 묶음이라 그림에 '상한 405–419' 직접 라벨"
+   },
+   "bins": {
+    "sg_soc_0_5": {
+     "mid": [
+      216.9,
+      291.8,
+      331.9,
+      399.6,
+      405.1
+     ],
+     "lo": [
+      100.2,
+      281.1,
+      299.6,
+      349.0,
+      405.0
+     ],
+     "hi": [
+      280.5,
+      299.5,
+      348.9,
+      399.6,
+      419.2
+     ],
+     "mean": [
+      -3.89,
+      0.02,
+      -3.95,
+      8.34,
+      13.59
+     ],
+     "ci95": [
+      0.88,
+      0.5,
+      0.66,
+      0.39,
+      0.46
+     ],
+     "n": [
+      3151,
+      3547,
+      2893,
+      3870,
+      2079
+     ]
+    },
+    "dem_slope": {
+     "mid": [
+      0.2,
+      0.45,
+      0.91,
+      1.71,
+      3.6
+     ],
+     "lo": [
+      0.0,
+      0.32,
+      0.63,
+      1.23,
+      2.44
+     ],
+     "hi": [
+      0.32,
+      0.63,
+      1.23,
+      2.44,
+      19.21
+     ],
+     "mean": [
+      9.31,
+      7.23,
+      0.07,
+      -1.12,
+      -3.61
+     ],
+     "ci95": [
+      0.61,
+      0.53,
+      0.6,
+      0.61,
+      0.75
+     ],
+     "n": [
+      3108,
+      3108,
+      3113,
+      3104,
+      3107
+     ]
+    }
+   },
+   "ci95_max_cm": 0.88,
+   "ylim": [
+    -6.5,
+    16.5
+   ]
+  },
+  "alaska_cell_years_by_year": {
+   "2010": 60,
+   "2011": 56,
+   "2012": 55,
+   "2013": 1343,
+   "2014": 7861,
+   "2015": 171,
+   "2016": 2237,
+   "2017": 877,
+   "2018": 1526,
+   "2019": 450,
+   "2020": 149,
+   "2021": 325,
+   "2022": 371,
+   "2023": 29,
+   "2024": 30
+  },
+  "lena_long_cell": {
+   "loc_id": 16271,
+   "n_years": 6,
+   "lat": null,
+   "lon": null,
+   "same_cell_as": "v7 F2 panel b (pick_lena_cell)",
+   "observed": {
+    "2013": 22.5,
+    "2014": 30.3,
+    "2018": 50.4,
+    "2019": 46.8,
+    "2020": 57.0,
+    "2021": 46.0
+   },
+   "products": {
+    "wei": {
+     "2010": 70.6,
+     "2011": 71.0,
+     "2012": 70.1,
+     "2013": 69.3,
+     "2014": 70.8,
+     "2015": 69.0,
+     "2016": 68.4,
+     "2017": 68.4,
+     "2018": 73.5,
+     "2019": 71.2,
+     "2020": 76.3,
+     "2021": 81.3,
+     "2022": 73.9,
+     "2023": 125.6,
+     "2024": 84.4
+    },
+    "liu": {
+     "2010": 58.1,
+     "2011": 68.3,
+     "2012": 65.7,
+     "2013": 57.6,
+     "2014": 59.8,
+     "2015": 63.6,
+     "2016": 58.2,
+     "2017": 57.5,
+     "2018": 61.6,
+     "2019": 62.2,
+     "2020": 75.0
+    },
+    "cci5y": {
+     "2010": 50.0,
+     "2011": 50.0,
+     "2012": 50.0,
+     "2013": 40.0,
+     "2014": 50.0,
+     "2015": 40.0,
+     "2016": 40.0,
+     "2017": 40.0,
+     "2018": 50.0,
+     "2019": 50.0,
+     "2020": 50.0,
+     "2021": 60.0,
+     "2022": 30.0,
+     "2023": 60.0
+    }
+   },
+   "series_last_year": {
+    "wei": 2024,
+    "liu": 2020,
+    "cci5y": 2023
+   }
+  },
+  "lena_panel_ytop_cm": 150.0
+ },
+ "layout_in": {
+  "cols": [
+   [
+    0.1,
+    3.6
+   ],
+   [
+    4.2,
+    7.7
+   ],
+   [
+    8.3,
+    11.9
+   ]
+  ],
+  "sep_x": [
+   3.9,
+   8.0
+  ],
+  "y_head": 4.48,
+  "y_headrule": 4.340000000000001,
+  "y_cap1": 4.140000000000001,
+  "y_cap2": 1.975,
+  "ax1": [
+   2.675,
+   3.8800000000000003
+  ],
+  "ax2": [
+   0.55,
+   1.755
+  ],
+  "row_h": 1.205,
+  "note": "v9: 각주·통계 글줄·직접 주석 삭제, 열 사이 0.60 in, 높이 4.65 in"
+ },
+ "qa_extra": {
+  "non_tick_text_below_13pt": [],
+  "legend_bottom_cm": 105.1,
+  "legend_x_years": [
+   2009.9,
+   2022.5
+  ],
+  "series_max_under_legend": [
+   [
+    "wei",
+    81.3
+   ],
+   [
+    "liu",
+    75.0
+   ],
+   [
+    "cci5y",
+    60.0
+   ],
+   [
+    "observed",
+    57.0
+   ]
+  ],
+  "legend_clear_of_lines": true,
+  "legend_left_gap_to_yaxis_in": 0.117,
+  "text_widths_in": [
+   [
+    "Same cell, same year (Alaska)",
+    2.38,
+    3.5
+   ],
+   [
+    "Stefan residual by soil carbon (Al",
+    3.01,
+    3.5
+   ],
+   [
+    "Stefan residual by slope (Alaska)",
+    2.58,
+    3.5
+   ],
+   [
+    "Observations per year (Alaska)",
+    2.44,
+    3.6
+   ],
+   [
+    "Long-term cell (Lena Delta)",
+    2.13,
+    3.6
+   ]
+  ],
+  "texts_fit_columns": true,
+  "rmse_column_gap_to_axes_in": 0.104,
+  "ci_px_at_300dpi": {
+   "sg_soc_0_5": [
+    27.7,
+    15.8,
+    20.8,
+    12.2,
+    14.6
+   ],
+   "dem_slope": [
+    19.2,
+    16.6,
+    18.7,
+    19.2,
+    23.6
+   ]
+  }
+ },
+ "qa": {
+  "min_font_pt": 12.0,
+  "texts": 60,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "text_line": [],
+  "text_axes": [],
+  "text_patch": [],
+  "png_px": [
+   3600,
+   1395
+  ],
+  "png_px_ok": true
+ },
+ "caption_note": "열 2 잔차는 블록 교차검증 OOF(seed 0; P1 재보정은 최소제곱 배율 하나라 결정적) 기준, 구간 = 등간격 배치 5분위(눈금 = 구간 중앙값), 수염 = 95 % CI. 열 1 바이올린 몸통은 중심 95 %, RMSE 는 전체 행(공통 셀-연도 14,326개, 2010–2020). 열 3 아래는 v7 F2 b 와 같은 레나 셀. 이 설명은 그림 안에 두지 않는다(덱 설명 줄 몫)."
+}

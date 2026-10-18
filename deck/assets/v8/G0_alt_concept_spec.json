@@ -1,0 +1,340 @@
+{
+ "stem": "G0_alt_concept",
+ "size_in": [
+  12.0,
+  4.65
+ ],
+ "sources": {
+  "thaw_depth": "data/raw/allena/PANGAEA_973813_ALLena_main.txt (v7_f2_problem_time._allena_series)",
+  "tdd": "data/raw/era5land/nh_monthly_2010-2024.nc (v7_f2_problem_time._daily_tdd, forcing_clim.csv e5_grid)"
+ },
+ "choices": {
+  "colors": {
+   "active_layer": "#dcd3c1",
+   "active_layer_hatch": "#8C6D31",
+   "permafrost": "#AABFD6",
+   "permafrost_hatch": "#697581",
+   "site": "#1B86BB"
+  },
+  "site": {
+   "name": "Samoylov",
+   "lat": 72.374,
+   "lon": 126.497,
+   "year": 2015,
+   "n_probe": 1602,
+   "n_days": 45
+  },
+  "schematic_in": {
+   "axis_x": 0.45999999999999996,
+   "winter": [
+    0.58,
+    1.08
+   ],
+   "summer": [
+    1.3,
+    1.8
+   ],
+   "column_width": 0.5,
+   "y_surface": 3.99,
+   "y_bottom": 0.45,
+   "y_front": 3.351,
+   "alt_m": 0.3609,
+   "layer_label_x": 1.92,
+   "bracket_x": 1.94,
+   "bracket_style": "vertical line + end ticks, no arrowheads",
+   "alt_label_x": 2.06,
+   "alt_label_lines": [
+    "Active layer",
+    "thickness (ALT)"
+   ],
+   "alt_line_pitch_in": 0.21,
+   "legend": {
+    "entries": [
+     "Active layer, frozen",
+     "Active layer, thawed",
+     "Permafrost, frozen"
+    ],
+    "x": 1.92,
+    "y_top": 1.15,
+    "encoding": "색 = 층, 빗금 = 동결 상태"
+   }
+  },
+  "x_axis_doy": {
+   "lo": 145,
+   "hi": 275,
+   "month_ticks": [
+    152,
+    182,
+    213,
+    244,
+    274
+   ],
+   "tick_rule": "1st of month (F2 convention)",
+   "labels": [
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct"
+   ]
+  },
+  "notes": {
+   "text": [
+    "Probe mean ± SD (ALLena)",
+    "ERA5-Land monthly, interpolated"
+   ],
+   "size_pt": 12.0,
+   "color": "#555555",
+   "y_in": 0.21,
+   "why": "자료 출처 각주; 눈금 크기(12 pt) 로 라벨(13 pt) 보다 작게"
+  }
+ },
+ "numbers": {
+  "alt_cm": 36.09,
+  "alt_doy": 259,
+  "alt_date": "2015-09-16",
+  "n_probe_on_alt_day": 57,
+  "sd_on_alt_day": 1.9,
+  "tdd_on_alt_day": 702.0,
+  "tdd_at_axis_end": 745.9,
+  "daily": {
+   "doy": [
+    192,
+    194,
+    195,
+    196,
+    199,
+    200,
+    202,
+    204,
+    207,
+    208,
+    211,
+    212,
+    213,
+    214,
+    221,
+    222,
+    223,
+    224,
+    225,
+    226,
+    227,
+    229,
+    231,
+    236,
+    237,
+    239,
+    240,
+    244,
+    245,
+    246,
+    247,
+    249,
+    250,
+    251,
+    252,
+    253,
+    256,
+    258,
+    259,
+    260,
+    261,
+    262,
+    263,
+    264,
+    265
+   ],
+   "mean_cm": [
+    24.08,
+    23.61,
+    23.8,
+    24.65,
+    25.21,
+    25.96,
+    26.01,
+    28.49,
+    29.4,
+    30.3,
+    30.05,
+    29.95,
+    30.3,
+    30.04,
+    31.08,
+    31.62,
+    30.99,
+    31.12,
+    31.67,
+    30.03,
+    30.11,
+    29.17,
+    31.55,
+    33.03,
+    33.07,
+    32.64,
+    33.14,
+    33.92,
+    34.34,
+    33.51,
+    33.16,
+    33.7,
+    32.9,
+    32.74,
+    34.11,
+    33.73,
+    33.75,
+    35.04,
+    36.09,
+    34.45,
+    34.66,
+    34.28,
+    34.77,
+    33.53,
+    33.1
+   ],
+   "sd_cm": [
+    6.15,
+    5.27,
+    5.94,
+    6.03,
+    4.92,
+    5.56,
+    4.77,
+    6.18,
+    6.04,
+    5.44,
+    5.15,
+    5.2,
+    5.49,
+    5.56,
+    4.3,
+    3.5,
+    4.23,
+    3.61,
+    3.93,
+    3.14,
+    4.58,
+    4.49,
+    3.18,
+    3.31,
+    2.85,
+    1.79,
+    1.96,
+    3.38,
+    2.93,
+    2.2,
+    2.53,
+    2.53,
+    2.52,
+    1.81,
+    1.98,
+    2.55,
+    2.73,
+    2.32,
+    1.9,
+    2.31,
+    2.0,
+    2.63,
+    2.88,
+    2.15,
+    2.24
+   ],
+   "n": [
+    25,
+    15,
+    30,
+    57,
+    56,
+    19,
+    19,
+    71,
+    20,
+    73,
+    39,
+    37,
+    92,
+    20,
+    21,
+    41,
+    40,
+    41,
+    22,
+    57,
+    40,
+    41,
+    2,
+    20,
+    39,
+    21,
+    39,
+    20,
+    21,
+    37,
+    40,
+    40,
+    22,
+    21,
+    38,
+    40,
+    33,
+    36,
+    57,
+    22,
+    21,
+    55,
+    40,
+    40,
+    22
+   ]
+  },
+  "first_obs": {
+   "doy": 192,
+   "date": "2015-07-11",
+   "mean_cm": 24.08
+  }
+ },
+ "qa": {
+  "min_font_pt": 12.0,
+  "texts": 48,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "text_line": [],
+  "text_axes": [],
+  "text_patch": [],
+  "png_px": [
+   3600,
+   1395
+  ],
+  "png_px_ok": true,
+  "non_tick_text_below_13pt": [],
+  "ylabel_rotation": {
+   "Thaw depth (cm)": {
+    "shape_upright": [
+     51,
+     394
+    ],
+    "shape_rotated_back": [
+     51,
+     394
+    ],
+    "mean_abs_diff": 0.42,
+    "frac_pixels_differ": 0.0,
+    "ok": true
+   },
+   "Cumulative TDD (°C·d)": {
+    "shape_upright": [
+     51,
+     546
+    ],
+    "shape_rotated_back": [
+     51,
+     546
+    ],
+    "mean_abs_diff": 0.39,
+    "frac_pixels_differ": 0.0,
+    "ok": true
+   }
+  }
+ }
+}

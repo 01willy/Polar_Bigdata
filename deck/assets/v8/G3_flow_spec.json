@@ -1,0 +1,348 @@
+{
+ "stem": "G3_flow",
+ "size_in": [
+  12.0,
+  4.65
+ ],
+ "layout": {
+  "chevrons": {
+   "x0": 0.1,
+   "pitch": 1.9583,
+   "w": 2.0083,
+   "y": 3.95,
+   "h": 0.62,
+   "tip": 0.17,
+   "gap": 0.12,
+   "cx": [
+    1.104,
+    3.062,
+    5.021,
+    6.979,
+    8.938,
+    10.896
+   ],
+   "style": "stage tint fill + darker same-hue edge, ink text 14 pt",
+   "stage_colours": [
+    [
+     "#e3e7ec",
+     "#9caabc"
+    ],
+    [
+     "#fae6dc",
+     "#eba581"
+    ],
+    [
+     "#DCEBDD",
+     "#86AE8A"
+    ],
+    [
+     "#F7E9AE",
+     "#C9AE5B"
+    ],
+    [
+     "#e8e4ee",
+     "#a99dbf"
+    ],
+    [
+     "#dce4f0",
+     "#86a3cb"
+    ]
+   ],
+   "perpendicular_gap_in": 0.105,
+   "text_fit": [
+    [
+     "Cell-year data",
+     0.372,
+     0.496
+    ],
+    [
+     "Year-specific / climate input",
+     0.316,
+     0.388
+    ],
+    [
+     "Physics baseline / (Stefan)",
+     0.179,
+     0.25
+    ],
+    [
+     "Residual learning",
+     0.155,
+     0.278
+    ],
+    [
+     "Validation / (five splits)",
+     0.409,
+     0.481
+    ],
+    [
+     "Maps and / product comparison",
+     0.055,
+     0.126
+    ]
+   ]
+  },
+  "col1": {
+   "polar_D_in": 1.74,
+   "region_line_w_in": 2.763
+  },
+  "col2": {
+   "map_wh_in": [
+    1.6,
+    1.504
+   ]
+  },
+  "col4": {
+   "map_wh_in": [
+    1.6,
+    1.504
+   ]
+  },
+  "col5": {
+   "map_wh_in": [
+    0.567,
+    0.56
+   ],
+   "row_pitch_in": 0.65,
+   "names_w_in": 1.24,
+   "key_w_in": 2.294
+  },
+  "col6": {
+   "map_wh_in": [
+    1.6,
+    1.504
+   ],
+   "wei_wh_in": [
+    1.234,
+    1.16
+   ]
+  }
+ },
+ "sources": {
+  "labels": "data/processed/v5/labels_cell_year_v5.csv",
+  "map_2014": "data/processed/v5/maps/Alaska/pred_2014.csv.gz",
+  "map_mean_aoa": "data/processed/v5/maps/Alaska/mean_2011_2024.csv.gz",
+  "pfr": "data/processed/cci_pfr_mean_1997_2021.nc",
+  "forcing": "data/processed/v5/forcing_year.csv",
+  "site_series": "data/processed/v5/site_series/site_series_year_obs.csv.gz",
+  "lena_E": "data/processed/v5/maps/Lena/meta.json"
+ },
+ "choices": {
+  "alaska_2014": {
+   "n_cells_drawn": 858517,
+   "tdd_range": [
+    300.0,
+    1900.0
+   ],
+   "corr_sym_max": 10.0,
+   "alt_range": [
+    35.0,
+    85.0
+   ],
+   "hillshade": "map_alaska/hillshade_v1/shade_250m.tif, step 2",
+   "aoa_fade": "corr·alt 만(F6 와 같다)",
+   "tdd_cmap": "lajolla_r trimmed 0.12–0.80 (deck thumbnail)",
+   "elapsed_s": 6.3
+  },
+  "cell_years_by_year": {
+   "Alaska": {
+    "2010": 60,
+    "2011": 56,
+    "2012": 55,
+    "2013": 1343,
+    "2014": 7861,
+    "2015": 171,
+    "2016": 2237,
+    "2017": 877,
+    "2018": 1526,
+    "2019": 450,
+    "2020": 149,
+    "2021": 325,
+    "2022": 371,
+    "2023": 29,
+    "2024": 30
+   },
+   "Lena": {
+    "2010": 8,
+    "2011": 2,
+    "2012": 327,
+    "2013": 241,
+    "2014": 93,
+    "2015": 471,
+    "2016": 681,
+    "2017": 139,
+    "2018": 64,
+    "2019": 95,
+    "2020": 143,
+    "2021": 165,
+    "2022": 7,
+    "2023": 0,
+    "2024": 0
+   },
+   "Canada": {
+    "2010": 7,
+    "2011": 9,
+    "2012": 29,
+    "2013": 121,
+    "2014": 8,
+    "2015": 4,
+    "2016": 4,
+    "2017": 150,
+    "2018": 150,
+    "2019": 65,
+    "2020": 0,
+    "2021": 44,
+    "2022": 445,
+    "2023": 80,
+    "2024": 80
+   }
+  },
+  "alaska_tdd_by_year": {
+   "n_cells": 13253,
+   "mean_tdd": {
+    "2010": 951.9,
+    "2011": 871.1,
+    "2012": 933.9,
+    "2013": 880.2,
+    "2014": 829.9,
+    "2015": 948.5,
+    "2016": 1078.2,
+    "2017": 1039.5,
+    "2018": 926.5,
+    "2019": 1178.1,
+    "2020": 976.0,
+    "2021": 871.4,
+    "2022": 953.9,
+    "2023": 1016.3,
+    "2024": 954.4
+   }
+  },
+  "lena_stefan": {
+   "n_cell_years": 2436,
+   "n_cells": 2206,
+   "E_map": 1.6792,
+   "E_origin_ls": 1.6792,
+   "sqrt_tdd_range": [
+    20.96,
+    33.47
+   ],
+   "alt_max": 260.0,
+   "n_alt_above_150": 12,
+   "clipped": {
+    "n": 12,
+    "marker": "open up-triangle on the top spine at y = 150 cm",
+    "y_max_data": 260.0
+   }
+  },
+  "lena_splits": {
+   "n_cell_years": 2436,
+   "n_cells": 2206,
+   "n_blocks": 16,
+   "years_scored": [
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021
+   ],
+   "seed": 0,
+   "example": {
+    "fold": "f0 (겹 1)",
+    "year": 2016,
+    "test_blocks": [
+     "14300258"
+    ]
+   },
+   "zoom": {
+    "extent": [
+     128.85,
+     130.3,
+     71.47,
+     71.92
+    ],
+    "n_cell_years": 1265,
+    "n_cells": 1143,
+    "blocks": [
+     "14300257",
+     "14300258",
+     "14300259",
+     "14300260"
+    ]
+   },
+   "counts_in_zoom": {
+    "random": {
+     "test": 243,
+     "train": 1022,
+     "excluded": 0
+    },
+    "block": {
+     "test": 928,
+     "train": 337,
+     "excluded": 0
+    },
+    "year": {
+     "test": 504,
+     "train": 761,
+     "excluded": 0
+    },
+    "block_year": {
+     "test": 504,
+     "train": 337,
+     "excluded": 424
+    },
+    "region": {
+     "test": 1265,
+     "train": 0,
+     "excluded": 0
+    }
+   },
+   "encoding": "dot = cell-year (test drawn last); train = YEL_EDGE, test = GRN_EDGE (process block edge colours), excluded = neutral no_data; 0.5° block grid hairlines; test block outline in test colour for block / block × year; region hold-out = all Lena cells test",
+   "colours": {
+    "train": "#C9AE5B",
+    "test": "#86AE8A",
+    "excluded": "#C9CDD3"
+   },
+   "note": "fold palette (Okabe–Ito 5) of v7 F3 c is not used here: two-tone train/test is legible at thumbnail scale"
+  },
+  "wei_2014_thumb": {
+   "source": "cache outputs/figures/paper/v7/_cache/f8_alaska_wei_2014_s1.npz",
+   "resample": "2 × 2 nanmean to step 2",
+   "mask": "pixels drawn in our 2014 map",
+   "n_px": 3443955,
+   "colour_range": [
+    35.0,
+    85.0
+   ],
+   "cmap": "MV.CM_ALT (same as ours)"
+  }
+ },
+ "qa": {
+  "min_font_pt": 12.0,
+  "texts": 63,
+  "outside": [],
+  "overlaps": [],
+  "small": [],
+  "text_line": [],
+  "text_axes": [],
+  "text_patch": [],
+  "png_px": [
+   3600,
+   1395
+  ],
+  "png_px_ok": true,
+  "font_size_violations": [],
+  "scalebar_text_inside_map": [
+   true,
+   true,
+   true
+  ],
+  "chevron_text_fits": true,
+  "bare_sqrt_glyph_texts": [],
+  "elapsed_s": 32.4
+ }
+}

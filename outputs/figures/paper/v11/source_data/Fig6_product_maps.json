@@ -1,0 +1,1647 @@
+{
+ "figure": "Fig. 6",
+ "script": "scripts/4_visualization/paper_v11/fig6_product_maps.py",
+ "inputs": {
+  "our_map": "data/processed/v5/maps/Alaska/pred_2014.csv.gz and data/processed/v5/maps/Lena/pred_2016.csv.gz (column r1); mean_2011_2024.csv.gz (aoa_in)",
+  "products": "data/raw/wei2026_alt_v2/extracted/ALT_{2014,2016}.tif, data/raw/liu2024_alt/ALT_{2014,2016}.tif",
+  "labels": "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1)",
+  "product_values_at_labels": "data/processed/v5/products_cell_year_v5.csv (product wei / liu, year of the row)",
+  "our_errors": "data/processed/v5/runs/core_v6/preds/<Region>__block__year_obs__F8TS__R1__catboost__lam0.5.csv.gz (spatial-block CV, 3 seeds averaged)"
+ },
+ "years_used": {
+  "alaska": 2014,
+  "lena_delta": 2016
+ },
+ "definition": {
+  "maps": "a-c and e-g share one colour range per row (1st-99th percentile of our map in 5 cm (Alaska) or 10 cm (Lena Delta) steps); product rasters bilinearly reprojected to the 250 m display grid; our map interpolated from 1 km cell centres for display; cells outside the area of applicability blended 40 % towards the land grey",
+  "errors": "labels of the year aggregated to 1 km map cells (cell means); our series = block-CV out-of-fold predictions (seeds averaged per label, then cell mean), not the in-sample map; product series = product value of the year at the label sites (cell mean); common cells = cells where our map, Wei 2026 and Liu 2024 all have a value; RMSE over the common cells (cell-level, equal weight per cell)",
+  "dots": "beeswarm per series (x offsets only for legibility); values beyond the axis drawn as open markers on the lower spine with the values printed just above them (6 pt grey)"
+ },
+ "values": {
+  "Alaska": {
+   "year": 2014,
+   "alt_range_cm": [
+    35.0,
+    85.0
+   ],
+   "extend": "both",
+   "colour_bar_ticks_cm": [
+    40.0,
+    50.0,
+    60.0,
+    70.0,
+    80.0
+   ],
+   "share_of_drawn_pixels_beyond_range": {
+    "wei": {
+     "below": 0.0006,
+     "above": 0.1364
+    },
+    "liu": {
+     "below": 0.0002,
+     "above": 0.2052
+    },
+    "ours": {
+     "below": 0.0028,
+     "above": 0.0043
+    }
+   },
+   "product_value_range_p1_p99_cm": {
+    "wei": [
+     40.8,
+     257.3
+    ],
+    "liu": [
+     45.4,
+     311.9
+    ]
+   },
+   "n_map_cells_drawn": 858517,
+   "n_labels": 7861,
+   "n_observed_cells": 101,
+   "n_cells_with_value": {
+    "oof": 101,
+    "wei": 101,
+    "liu": 100,
+    "mapv": 96
+   },
+   "n_common_cells": 95,
+   "oof_seeds_per_label": [
+    3
+   ],
+   "rmse_common_cm": {
+    "physics_residual_ml_block_cv": 17.08,
+    "wei_2026": 15.76,
+    "liu_2024": 16.38,
+    "our_map_in_sample_not_shown": 15.86
+   },
+   "bias_common_cm": {
+    "physics_residual_ml_block_cv": -1.64,
+    "wei_2026": 0.99,
+    "liu_2024": 4.79
+   },
+   "error_axis_cm": [
+    -55.0,
+    45.0
+   ],
+   "values_beyond_error_axis_cm": {
+    "oof": [
+     -95.0,
+     -65.3
+    ],
+    "wei": [
+     -110.0
+    ],
+    "liu": [
+     -89.2
+    ]
+   },
+   "alternative_common_cells": {
+    "definition": "cells where the block-CV prediction, Wei 2026 and Liu 2024 all have a value (no condition on our map)",
+    "n": 100,
+    "rmse_cm": {
+     "oof": 16.81,
+     "wei": 15.66,
+     "liu": 16.4
+    }
+   },
+   "label_level_rmse_not_shown": {
+    "oof": {
+     "rmse": 15.46,
+     "n": 7861
+    },
+    "wei": {
+     "rmse": 15.46,
+     "n": 7861
+    },
+    "liu": {
+     "rmse": 18.39,
+     "n": 7446
+    },
+    "mapv": {
+     "rmse": 11.87,
+     "n": 7723
+    }
+   },
+   "product_training_sites": {
+    "note": "no distance mask in this figure: Wei 2026 and Liu 2024 values at all common cells are used, including cells at or near Wei 2026 training sites; distances are to Wei 2026 training sites (supplement table), the same distance used for the 25 km mask of Fig. 5",
+    "distance_source": "data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv (product == 'wei', nearest Wei 2026 training site per label; cell value = minimum over its labels)",
+    "n_common_within_25km": 85,
+    "n_common_within_1km": 48,
+    "n_common_gt25km": 10,
+    "rmse_common_gt25km_cm_not_shown": {
+     "oof": 5.06,
+     "wei": 20.01,
+     "liu": 4.82
+    }
+   },
+   "cells": [
+    {
+     "cell_id": "6806_-8722",
+     "lat": 61.2585,
+     "lon": -163.2361,
+     "n_labels": 121,
+     "observed_cm": 60.17,
+     "physics_residual_ml_block_cv_cm": 61.09,
+     "wei_2026_cm": 83.92,
+     "liu_2024_cm": 64.54,
+     "our_map_cm": 74.47,
+     "dist_wei_training_site_km": 87.24
+    },
+    {
+     "cell_id": "6806_-8723",
+     "lat": 61.2585,
+     "lon": -163.2548,
+     "n_labels": 89,
+     "observed_cm": 62.76,
+     "physics_residual_ml_block_cv_cm": 61.64,
+     "wei_2026_cm": 83.87,
+     "liu_2024_cm": 63.53,
+     "our_map_cm": 74.82,
+     "dist_wei_training_site_km": 87.25
+    },
+    {
+     "cell_id": "6807_-8719",
+     "lat": 61.2675,
+     "lon": -163.2267,
+     "n_labels": 494,
+     "observed_cm": 66.22,
+     "physics_residual_ml_block_cv_cm": 61.37,
+     "wei_2026_cm": 90.34,
+     "liu_2024_cm": 62.55,
+     "our_map_cm": 74.94,
+     "dist_wei_training_site_km": 86.24
+    },
+    {
+     "cell_id": "6807_-8720",
+     "lat": 61.2675,
+     "lon": -163.2454,
+     "n_labels": 302,
+     "observed_cm": 61.0,
+     "physics_residual_ml_block_cv_cm": 61.41,
+     "wei_2026_cm": 89.37,
+     "liu_2024_cm": 61.58,
+     "our_map_cm": 73.79,
+     "dist_wei_training_site_km": 86.24
+    },
+    {
+     "cell_id": "6808_-8716",
+     "lat": 61.2765,
+     "lon": -163.2173,
+     "n_labels": 3,
+     "observed_cm": 70.11,
+     "physics_residual_ml_block_cv_cm": 61.76,
+     "wei_2026_cm": 92.43,
+     "liu_2024_cm": 61.46,
+     "our_map_cm": 74.52,
+     "dist_wei_training_site_km": 86.22
+    },
+    {
+     "cell_id": "6808_-8717",
+     "lat": 61.2765,
+     "lon": -163.236,
+     "n_labels": 198,
+     "observed_cm": 64.94,
+     "physics_residual_ml_block_cv_cm": 61.18,
+     "wei_2026_cm": 90.5,
+     "liu_2024_cm": 61.48,
+     "our_map_cm": 76.57,
+     "dist_wei_training_site_km": 85.99
+    },
+    {
+     "cell_id": "6817_-8687",
+     "lat": 61.3575,
+     "lon": -163.0951,
+     "n_labels": 287,
+     "observed_cm": 68.3,
+     "physics_residual_ml_block_cv_cm": 61.67,
+     "wei_2026_cm": 79.62,
+     "liu_2024_cm": 65.11,
+     "our_map_cm": 74.92,
+     "dist_wei_training_site_km": 77.12
+    },
+    {
+     "cell_id": "6817_-8688",
+     "lat": 61.3575,
+     "lon": -163.1139,
+     "n_labels": 9,
+     "observed_cm": 62.42,
+     "physics_residual_ml_block_cv_cm": 62.68,
+     "wei_2026_cm": 80.24,
+     "liu_2024_cm": 65.04,
+     "our_map_cm": 75.33,
+     "dist_wei_training_site_km": 77.32
+    },
+    {
+     "cell_id": "7002_-8245",
+     "lat": 63.0225,
+     "lon": -163.5667,
+     "n_labels": 1,
+     "observed_cm": 52.0,
+     "physics_residual_ml_block_cv_cm": 65.92,
+     "wei_2026_cm": 50.89,
+     "liu_2024_cm": 88.48,
+     "our_map_cm": 69.1,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7154_-7055",
+     "lat": 64.3905,
+     "lon": -146.8888,
+     "n_labels": 22,
+     "observed_cm": 65.01,
+     "physics_residual_ml_block_cv_cm": 70.36,
+     "wei_2026_cm": 67.71,
+     "liu_2024_cm": 73.45,
+     "our_map_cm": 85.78,
+     "dist_wei_training_site_km": 66.3
+    },
+    {
+     "cell_id": "7172_-7118",
+     "lat": 64.5525,
+     "lon": -149.0805,
+     "n_labels": 1,
+     "observed_cm": 65.0,
+     "physics_residual_ml_block_cv_cm": 84.59,
+     "wei_2026_cm": 58.54,
+     "liu_2024_cm": 74.14,
+     "our_map_cm": 78.5,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7188_-7035",
+     "lat": 64.6965,
+     "lon": -148.1249,
+     "n_labels": 1,
+     "observed_cm": 168.0,
+     "physics_residual_ml_block_cv_cm": 73.03,
+     "wei_2026_cm": 57.98,
+     "liu_2024_cm": 78.8,
+     "our_map_cm": 79.67,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7192_-7375",
+     "lat": 64.7325,
+     "lon": -155.4909,
+     "n_labels": 1,
+     "observed_cm": 66.0,
+     "physics_residual_ml_block_cv_cm": 70.69,
+     "wei_2026_cm": 63.4,
+     "liu_2024_cm": 73.56,
+     "our_map_cm": 80.48,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7197_-6682",
+     "lat": 64.7775,
+     "lon": -141.1139,
+     "n_labels": 1,
+     "observed_cm": 51.0,
+     "physics_residual_ml_block_cv_cm": 65.61,
+     "wei_2026_cm": 59.42,
+     "liu_2024_cm": 85.77,
+     "our_map_cm": 69.49,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7204_-7734",
+     "lat": 64.8405,
+     "lon": -163.7145,
+     "n_labels": 1,
+     "observed_cm": 60.0,
+     "physics_residual_ml_block_cv_cm": 66.41,
+     "wei_2026_cm": 60.88,
+     "liu_2024_cm": 70.56,
+     "our_map_cm": 67.63,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7207_-6972",
+     "lat": 64.8675,
+     "lon": -147.7315,
+     "n_labels": 63,
+     "observed_cm": 65.45,
+     "physics_residual_ml_block_cv_cm": 76.68,
+     "wei_2026_cm": 64.28,
+     "liu_2024_cm": 65.3,
+     "our_map_cm": 74.88,
+     "dist_wei_training_site_km": 3.43
+    },
+    {
+     "cell_id": "7208_-6967",
+     "lat": 64.8765,
+     "lon": -147.675,
+     "n_labels": 25,
+     "observed_cm": 62.66,
+     "physics_residual_ml_block_cv_cm": 69.09,
+     "wei_2026_cm": 59.5,
+     "liu_2024_cm": 61.27,
+     "our_map_cm": 78.63,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7208_-6970",
+     "lat": 64.8765,
+     "lon": -147.7386,
+     "n_labels": 1,
+     "observed_cm": 68.0,
+     "physics_residual_ml_block_cv_cm": 83.12,
+     "wei_2026_cm": 63.8,
+     "liu_2024_cm": 65.3,
+     "our_map_cm": 77.13,
+     "dist_wei_training_site_km": 3.43
+    },
+    {
+     "cell_id": "7211_-6967",
+     "lat": 64.9035,
+     "lon": -147.8236,
+     "n_labels": 1,
+     "observed_cm": 90.0,
+     "physics_residual_ml_block_cv_cm": 72.98,
+     "wei_2026_cm": 60.54,
+     "liu_2024_cm": 71.22,
+     "our_map_cm": 77.78,
+     "dist_wei_training_site_km": 7.27
+    },
+    {
+     "cell_id": "7216_-6945",
+     "lat": 64.9485,
+     "lon": -147.6043,
+     "n_labels": 25,
+     "observed_cm": 81.48,
+     "physics_residual_ml_block_cv_cm": 73.37,
+     "wei_2026_cm": 57.24,
+     "liu_2024_cm": 70.29,
+     "our_map_cm": 84.04,
+     "dist_wei_training_site_km": 8.31
+    },
+    {
+     "cell_id": "7216_-6946",
+     "lat": 64.9485,
+     "lon": -147.6256,
+     "n_labels": 52,
+     "observed_cm": 68.48,
+     "physics_residual_ml_block_cv_cm": 73.97,
+     "wei_2026_cm": 60.25,
+     "liu_2024_cm": 71.61,
+     "our_map_cm": 85.4,
+     "dist_wei_training_site_km": 8.18
+    },
+    {
+     "cell_id": "7240_-6903",
+     "lat": 65.1645,
+     "lon": -147.9056,
+     "n_labels": 1,
+     "observed_cm": 54.0,
+     "physics_residual_ml_block_cv_cm": 69.46,
+     "wei_2026_cm": 52.94,
+     "liu_2024_cm": 53.58,
+     "our_map_cm": 69.81,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7263_-6810",
+     "lat": 65.3715,
+     "lon": -147.0618,
+     "n_labels": 1,
+     "observed_cm": 43.0,
+     "physics_residual_ml_block_cv_cm": 64.63,
+     "wei_2026_cm": 49.52,
+     "liu_2024_cm": 47.54,
+     "our_map_cm": 66.35,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7272_-7600",
+     "lat": 65.4525,
+     "lon": -164.6309,
+     "n_labels": 1,
+     "observed_cm": 58.0,
+     "physics_residual_ml_block_cv_cm": 58.06,
+     "wei_2026_cm": 59.72,
+     "liu_2024_cm": 59.75,
+     "our_map_cm": 65.96,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7295_-6828",
+     "lat": 65.6595,
+     "lon": -149.0871,
+     "n_labels": 1,
+     "observed_cm": 51.0,
+     "physics_residual_ml_block_cv_cm": 71.12,
+     "wei_2026_cm": 46.62,
+     "liu_2024_cm": 68.52,
+     "our_map_cm": 69.31,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7314_-6555",
+     "lat": 65.8305,
+     "lon": -144.077,
+     "n_labels": 1,
+     "observed_cm": 84.0,
+     "physics_residual_ml_block_cv_cm": 78.12,
+     "wei_2026_cm": 72.92,
+     "liu_2024_cm": 77.48,
+     "our_map_cm": 79.42,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7383_-6687",
+     "lat": 66.4515,
+     "lon": -150.625,
+     "n_labels": 1,
+     "observed_cm": 43.0,
+     "physics_residual_ml_block_cv_cm": 62.62,
+     "wei_2026_cm": 44.4,
+     "liu_2024_cm": 49.45,
+     "our_map_cm": 62.76,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7393_-6752",
+     "lat": 66.5415,
+     "lon": -152.6396,
+     "n_labels": 1,
+     "observed_cm": 55.0,
+     "physics_residual_ml_block_cv_cm": 72.68,
+     "wei_2026_cm": 50.7,
+     "liu_2024_cm": 64.25,
+     "our_map_cm": 73.18,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7402_-6398",
+     "lat": 66.6225,
+     "lon": -145.1092,
+     "n_labels": 1,
+     "observed_cm": 99.0,
+     "physics_residual_ml_block_cv_cm": 72.89,
+     "wei_2026_cm": 92.78,
+     "liu_2024_cm": 90.0,
+     "our_map_cm": 81.58,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7453_-6506",
+     "lat": 67.0815,
+     "lon": -150.35,
+     "n_labels": 26,
+     "observed_cm": 48.66,
+     "physics_residual_ml_block_cv_cm": 57.25,
+     "wei_2026_cm": 47.64,
+     "liu_2024_cm": 53.48,
+     "our_map_cm": 61.92,
+     "dist_wei_training_site_km": 70.89
+    },
+    {
+     "cell_id": "7563_-6207",
+     "lat": 68.0715,
+     "lon": -149.5745,
+     "n_labels": 1,
+     "observed_cm": 36.0,
+     "physics_residual_ml_block_cv_cm": 41.82,
+     "wei_2026_cm": 39.21,
+     "liu_2024_cm": 38.4,
+     "our_map_cm": 42.59,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7570_-6023",
+     "lat": 68.1345,
+     "lon": -145.5378,
+     "n_labels": 1,
+     "observed_cm": 65.0,
+     "physics_residual_ml_block_cv_cm": 58.06,
+     "wei_2026_cm": 51.65,
+     "liu_2024_cm": 64.43,
+     "our_map_cm": 57.21,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7608_-6095",
+     "lat": 68.4765,
+     "lon": -149.5041,
+     "n_labels": 118,
+     "observed_cm": 51.12,
+     "physics_residual_ml_block_cv_cm": 46.08,
+     "wei_2026_cm": 56.51,
+     "liu_2024_cm": 52.04,
+     "our_map_cm": 49.14,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7609_-6346",
+     "lat": 68.4855,
+     "lon": -155.7234,
+     "n_labels": 1,
+     "observed_cm": 52.0,
+     "physics_residual_ml_block_cv_cm": 49.43,
+     "wei_2026_cm": 53.44,
+     "liu_2024_cm": 56.0,
+     "our_map_cm": 48.32,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7623_-6051",
+     "lat": 68.6115,
+     "lon": -149.3173,
+     "n_labels": 3,
+     "observed_cm": 50.33,
+     "physics_residual_ml_block_cv_cm": 48.28,
+     "wei_2026_cm": 53.21,
+     "liu_2024_cm": 50.24,
+     "our_map_cm": 51.73,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7624_-6060",
+     "lat": 68.6205,
+     "lon": -149.5994,
+     "n_labels": 2,
+     "observed_cm": 45.0,
+     "physics_residual_ml_block_cv_cm": 49.09,
+     "wei_2026_cm": 45.18,
+     "liu_2024_cm": 47.28,
+     "our_map_cm": 48.59,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7624_-6061",
+     "lat": 68.6205,
+     "lon": -149.6241,
+     "n_labels": 1,
+     "observed_cm": 45.0,
+     "physics_residual_ml_block_cv_cm": 48.78,
+     "wei_2026_cm": 45.98,
+     "liu_2024_cm": 42.72,
+     "our_map_cm": 49.64,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7626_-6050",
+     "lat": 68.6385,
+     "lon": -149.4724,
+     "n_labels": 74,
+     "observed_cm": 44.59,
+     "physics_residual_ml_block_cv_cm": 47.25,
+     "wei_2026_cm": 56.01,
+     "liu_2024_cm": 46.13,
+     "our_map_cm": 47.84,
+     "dist_wei_training_site_km": 5.56
+    },
+    {
+     "cell_id": "7627_-6038",
+     "lat": 68.6475,
+     "lon": -149.2359,
+     "n_labels": 59,
+     "observed_cm": 40.6,
+     "physics_residual_ml_block_cv_cm": 47.56,
+     "wei_2026_cm": 43.67,
+     "liu_2024_cm": 46.47,
+     "our_map_cm": 51.51,
+     "dist_wei_training_site_km": 4.82
+    },
+    {
+     "cell_id": "7627_-6039",
+     "lat": 68.6475,
+     "lon": -149.2606,
+     "n_labels": 68,
+     "observed_cm": 48.59,
+     "physics_residual_ml_block_cv_cm": 47.36,
+     "wei_2026_cm": 44.24,
+     "liu_2024_cm": 47.32,
+     "our_map_cm": 49.64,
+     "dist_wei_training_site_km": 4.82
+    },
+    {
+     "cell_id": "7628_-6035",
+     "lat": 68.6565,
+     "lon": -149.2217,
+     "n_labels": 107,
+     "observed_cm": 44.55,
+     "physics_residual_ml_block_cv_cm": 48.47,
+     "wei_2026_cm": 45.46,
+     "liu_2024_cm": 46.53,
+     "our_map_cm": 51.06,
+     "dist_wei_training_site_km": 5.59
+    },
+    {
+     "cell_id": "7628_-6036",
+     "lat": 68.6565,
+     "lon": -149.2464,
+     "n_labels": 179,
+     "observed_cm": 43.53,
+     "physics_residual_ml_block_cv_cm": 46.54,
+     "wei_2026_cm": 50.24,
+     "liu_2024_cm": 47.1,
+     "our_map_cm": 50.06,
+     "dist_wei_training_site_km": 5.73
+    },
+    {
+     "cell_id": "7628_-6037",
+     "lat": 68.6565,
+     "lon": -149.2711,
+     "n_labels": 30,
+     "observed_cm": 43.62,
+     "physics_residual_ml_block_cv_cm": 46.22,
+     "wei_2026_cm": 44.35,
+     "liu_2024_cm": 48.14,
+     "our_map_cm": 50.32,
+     "dist_wei_training_site_km": 5.59
+    },
+    {
+     "cell_id": "7634_-6046",
+     "lat": 68.7105,
+     "lon": -149.8552,
+     "n_labels": 3,
+     "observed_cm": 39.22,
+     "physics_residual_ml_block_cv_cm": 44.44,
+     "wei_2026_cm": 64.96,
+     "liu_2024_cm": 54.73,
+     "our_map_cm": 53.75,
+     "dist_wei_training_site_km": 13.42
+    },
+    {
+     "cell_id": "7664_-5932",
+     "lat": 68.9805,
+     "lon": -148.8309,
+     "n_labels": 1,
+     "observed_cm": 88.0,
+     "physics_residual_ml_block_cv_cm": 54.66,
+     "wei_2026_cm": 51.51,
+     "liu_2024_cm": 48.24,
+     "our_map_cm": 56.4,
+     "dist_wei_training_site_km": 18.39
+    },
+    {
+     "cell_id": "7673_-5907",
+     "lat": 69.0615,
+     "lon": -148.751,
+     "n_labels": 7,
+     "observed_cm": 77.01,
+     "physics_residual_ml_block_cv_cm": 49.89,
+     "wei_2026_cm": 73.5,
+     "liu_2024_cm": 67.18,
+     "our_map_cm": 64.87,
+     "dist_wei_training_site_km": 9.64
+    },
+    {
+     "cell_id": "7673_-5908",
+     "lat": 69.0615,
+     "lon": -148.7762,
+     "n_labels": 128,
+     "observed_cm": 60.23,
+     "physics_residual_ml_block_cv_cm": 50.1,
+     "wei_2026_cm": 50.26,
+     "liu_2024_cm": 67.19,
+     "our_map_cm": 56.3,
+     "dist_wei_training_site_km": 9.39
+    },
+    {
+     "cell_id": "7673_-5909",
+     "lat": 69.0615,
+     "lon": -148.8014,
+     "n_labels": 69,
+     "observed_cm": 40.79,
+     "physics_residual_ml_block_cv_cm": 49.7,
+     "wei_2026_cm": 53.96,
+     "liu_2024_cm": 64.35,
+     "our_map_cm": 51.65,
+     "dist_wei_training_site_km": 9.2
+    },
+    {
+     "cell_id": "7674_-5905",
+     "lat": 69.0705,
+     "lon": -148.7617,
+     "n_labels": 109,
+     "observed_cm": 67.03,
+     "physics_residual_ml_block_cv_cm": 51.88,
+     "wei_2026_cm": 51.39,
+     "liu_2024_cm": 51.53,
+     "our_map_cm": 64.73,
+     "dist_wei_training_site_km": 9.01
+    },
+    {
+     "cell_id": "7674_-5906",
+     "lat": 69.0705,
+     "lon": -148.7869,
+     "n_labels": 32,
+     "observed_cm": 48.03,
+     "physics_residual_ml_block_cv_cm": 50.94,
+     "wei_2026_cm": 57.11,
+     "liu_2024_cm": 64.92,
+     "our_map_cm": 52.65,
+     "dist_wei_training_site_km": 9.04
+    },
+    {
+     "cell_id": "7674_-5907",
+     "lat": 69.0705,
+     "lon": -148.8121,
+     "n_labels": 168,
+     "observed_cm": 44.64,
+     "physics_residual_ml_block_cv_cm": 50.21,
+     "wei_2026_cm": 56.83,
+     "liu_2024_cm": 66.06,
+     "our_map_cm": 53.97,
+     "dist_wei_training_site_km": 8.61
+    },
+    {
+     "cell_id": "7678_-5899",
+     "lat": 69.1065,
+     "lon": -148.8551,
+     "n_labels": 117,
+     "observed_cm": 37.92,
+     "physics_residual_ml_block_cv_cm": 48.68,
+     "wei_2026_cm": 48.05,
+     "liu_2024_cm": 59.48,
+     "our_map_cm": 48.47,
+     "dist_wei_training_site_km": 4.22
+    },
+    {
+     "cell_id": "7678_-5900",
+     "lat": 69.1065,
+     "lon": -148.8804,
+     "n_labels": 60,
+     "observed_cm": 58.23,
+     "physics_residual_ml_block_cv_cm": 50.36,
+     "wei_2026_cm": 52.45,
+     "liu_2024_cm": 47.63,
+     "our_map_cm": 52.34,
+     "dist_wei_training_site_km": 4.06
+    },
+    {
+     "cell_id": "7679_-5897",
+     "lat": 69.1155,
+     "lon": -148.8659,
+     "n_labels": 177,
+     "observed_cm": 47.17,
+     "physics_residual_ml_block_cv_cm": 49.61,
+     "wei_2026_cm": 51.04,
+     "liu_2024_cm": 47.3,
+     "our_map_cm": 50.92,
+     "dist_wei_training_site_km": 3.12
+    },
+    {
+     "cell_id": "7680_-5866",
+     "lat": 69.1245,
+     "lon": -148.1443,
+     "n_labels": 1,
+     "observed_cm": 37.7,
+     "physics_residual_ml_block_cv_cm": 44.29,
+     "wei_2026_cm": 47.69,
+     "liu_2024_cm": 44.14,
+     "our_map_cm": 51.49,
+     "dist_wei_training_site_km": 17.59
+    },
+    {
+     "cell_id": "7680_-5884",
+     "lat": 69.1245,
+     "lon": -148.5989,
+     "n_labels": 1,
+     "observed_cm": 51.0,
+     "physics_residual_ml_block_cv_cm": 53.73,
+     "wei_2026_cm": 47.41,
+     "liu_2024_cm": 48.74,
+     "our_map_cm": 51.71,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7680_-5894",
+     "lat": 69.1245,
+     "lon": -148.8514,
+     "n_labels": 87,
+     "observed_cm": 37.06,
+     "physics_residual_ml_block_cv_cm": 49.94,
+     "wei_2026_cm": 46.62,
+     "liu_2024_cm": 45.0,
+     "our_map_cm": 48.02,
+     "dist_wei_training_site_km": 2.37
+    },
+    {
+     "cell_id": "7680_-5895",
+     "lat": 69.1245,
+     "lon": -148.8767,
+     "n_labels": 6,
+     "observed_cm": 36.03,
+     "physics_residual_ml_block_cv_cm": 49.25,
+     "wei_2026_cm": 45.87,
+     "liu_2024_cm": 45.21,
+     "our_map_cm": 47.14,
+     "dist_wei_training_site_km": 2.94
+    },
+    {
+     "cell_id": "7682_-5889",
+     "lat": 69.1425,
+     "lon": -148.8478,
+     "n_labels": 1,
+     "observed_cm": 42.0,
+     "physics_residual_ml_block_cv_cm": 53.2,
+     "wei_2026_cm": 44.65,
+     "liu_2024_cm": 49.25,
+     "our_map_cm": 46.1,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7683_-5886",
+     "lat": 69.1515,
+     "lon": -148.8333,
+     "n_labels": 65,
+     "observed_cm": 24.88,
+     "physics_residual_ml_block_cv_cm": 49.92,
+     "wei_2026_cm": 44.65,
+     "liu_2024_cm": 47.68,
+     "our_map_cm": 48.71,
+     "dist_wei_training_site_km": 0.23
+    },
+    {
+     "cell_id": "7683_-5887",
+     "lat": 69.1515,
+     "lon": -148.8586,
+     "n_labels": 14,
+     "observed_cm": 26.41,
+     "physics_residual_ml_block_cv_cm": 48.95,
+     "wei_2026_cm": 44.65,
+     "liu_2024_cm": 49.25,
+     "our_map_cm": 46.57,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7710_-5950",
+     "lat": 69.3945,
+     "lon": -152.1475,
+     "n_labels": 1,
+     "observed_cm": 37.0,
+     "physics_residual_ml_block_cv_cm": 46.84,
+     "wei_2026_cm": 37.55,
+     "liu_2024_cm": 40.58,
+     "our_map_cm": 48.86,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7711_-5817",
+     "lat": 69.4035,
+     "lon": -148.8084,
+     "n_labels": 1,
+     "observed_cm": 42.0,
+     "physics_residual_ml_block_cv_cm": 54.57,
+     "wei_2026_cm": 41.67,
+     "liu_2024_cm": 45.1,
+     "our_map_cm": 50.21,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7715_-5802",
+     "lat": 69.4395,
+     "lon": -148.6733,
+     "n_labels": 1,
+     "observed_cm": 55.0,
+     "physics_residual_ml_block_cv_cm": 54.4,
+     "wei_2026_cm": 51.87,
+     "liu_2024_cm": 48.83,
+     "our_map_cm": 52.84,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7722_-5781",
+     "lat": 69.5025,
+     "lon": -148.5707,
+     "n_labels": 1,
+     "observed_cm": 64.0,
+     "physics_residual_ml_block_cv_cm": 55.26,
+     "wei_2026_cm": 69.85,
+     "liu_2024_cm": 61.6,
+     "our_map_cm": 56.18,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7741_-5741",
+     "lat": 69.6735,
+     "lon": -148.7307,
+     "n_labels": 1,
+     "observed_cm": 68.0,
+     "physics_residual_ml_block_cv_cm": 54.73,
+     "wei_2026_cm": 60.27,
+     "liu_2024_cm": 60.94,
+     "our_map_cm": 56.41,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7750_-5945",
+     "lat": 69.7545,
+     "lon": -154.6063,
+     "n_labels": 1,
+     "observed_cm": 120.0,
+     "physics_residual_ml_block_cv_cm": 54.72,
+     "wei_2026_cm": 107.18,
+     "liu_2024_cm": 92.55,
+     "our_map_cm": 52.76,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7753_-5561",
+     "lat": 69.7815,
+     "lon": -144.8042,
+     "n_labels": 1,
+     "observed_cm": 36.0,
+     "physics_residual_ml_block_cv_cm": 47.79,
+     "wei_2026_cm": 44.4,
+     "liu_2024_cm": 48.94,
+     "our_map_cm": 47.56,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7765_-5463",
+     "lat": 69.8895,
+     "lon": -142.9842,
+     "n_labels": 1,
+     "observed_cm": 45.0,
+     "physics_residual_ml_block_cv_cm": 43.53,
+     "wei_2026_cm": 47.86,
+     "liu_2024_cm": 77.99,
+     "our_map_cm": 46.02,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7776_-5822",
+     "lat": 69.9885,
+     "lon": -153.1039,
+     "n_labels": 1,
+     "observed_cm": 37.0,
+     "physics_residual_ml_block_cv_cm": 52.59,
+     "wei_2026_cm": 45.72,
+     "liu_2024_cm": 48.33,
+     "our_map_cm": 53.43,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7781_-5960",
+     "lat": 70.0335,
+     "lon": -157.0721,
+     "n_labels": 1,
+     "observed_cm": 46.0,
+     "physics_residual_ml_block_cv_cm": 51.86,
+     "wei_2026_cm": 48.74,
+     "liu_2024_cm": 50.44,
+     "our_map_cm": 51.57,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7795_-5599",
+     "lat": 70.1595,
+     "lon": -148.4563,
+     "n_labels": 1,
+     "observed_cm": 70.0,
+     "physics_residual_ml_block_cv_cm": 47.31,
+     "wei_2026_cm": 65.4,
+     "liu_2024_cm": 65.8,
+     "our_map_cm": 52.04,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7799_-6064",
+     "lat": 70.1955,
+     "lon": -161.0673,
+     "n_labels": 1,
+     "observed_cm": 51.0,
+     "physics_residual_ml_block_cv_cm": 42.83,
+     "wei_2026_cm": 48.61,
+     "liu_2024_cm": 58.17,
+     "our_map_cm": 46.84,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7808_-5585",
+     "lat": 70.2765,
+     "lon": -148.9282,
+     "n_labels": 1,
+     "observed_cm": 41.0,
+     "physics_residual_ml_block_cv_cm": 48.05,
+     "wei_2026_cm": 44.49,
+     "liu_2024_cm": 49.4,
+     "our_map_cm": 48.88,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7809_-5580",
+     "lat": 70.2855,
+     "lon": -148.8601,
+     "n_labels": 1,
+     "observed_cm": 49.0,
+     "physics_residual_ml_block_cv_cm": 46.3,
+     "wei_2026_cm": 50.35,
+     "liu_2024_cm": 45.6,
+     "our_map_cm": 49.62,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7809_-5581",
+     "lat": 70.2855,
+     "lon": -148.8868,
+     "n_labels": 1,
+     "observed_cm": 35.0,
+     "physics_residual_ml_block_cv_cm": 45.58,
+     "wei_2026_cm": 36.82,
+     "liu_2024_cm": 42.27,
+     "our_map_cm": 46.53,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7815_-5685",
+     "lat": 70.3395,
+     "lon": -152.0615,
+     "n_labels": 1,
+     "observed_cm": 28.0,
+     "physics_residual_ml_block_cv_cm": 51.25,
+     "wei_2026_cm": 33.53,
+     "liu_2024_cm": 48.29,
+     "our_map_cm": 50.53,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7827_-5854",
+     "lat": 70.4475,
+     "lon": -157.4131,
+     "n_labels": 1,
+     "observed_cm": 52.0,
+     "physics_residual_ml_block_cv_cm": 53.4,
+     "wei_2026_cm": 45.98,
+     "liu_2024_cm": 52.52,
+     "our_map_cm": 51.64,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7847_-5781",
+     "lat": 70.6275,
+     "lon": -156.8381,
+     "n_labels": 1,
+     "observed_cm": 39.0,
+     "physics_residual_ml_block_cv_cm": 49.45,
+     "wei_2026_cm": 41.27,
+     "liu_2024_cm": 51.27,
+     "our_map_cm": 46.95,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7916_-5592",
+     "lat": 71.2485,
+     "lon": -156.5446,
+     "n_labels": 504,
+     "observed_cm": 44.11,
+     "physics_residual_ml_block_cv_cm": 27.16,
+     "wei_2026_cm": 38.84,
+     "liu_2024_cm": 67.74,
+     "our_map_cm": 40.6,
+     "dist_wei_training_site_km": 7.17
+    },
+    {
+     "cell_id": "7916_-5593",
+     "lat": 71.2485,
+     "lon": -156.5726,
+     "n_labels": 142,
+     "observed_cm": 45.44,
+     "physics_residual_ml_block_cv_cm": 29.25,
+     "wei_2026_cm": 39.64,
+     "liu_2024_cm": 68.11,
+     "our_map_cm": 37.99,
+     "dist_wei_training_site_km": 7.51
+    },
+    {
+     "cell_id": "7917_-5589",
+     "lat": 71.2575,
+     "lon": -156.5331,
+     "n_labels": 114,
+     "observed_cm": 41.75,
+     "physics_residual_ml_block_cv_cm": 26.06,
+     "wei_2026_cm": 38.64,
+     "liu_2024_cm": 67.37,
+     "our_map_cm": 37.42,
+     "dist_wei_training_site_km": 6.96
+    },
+    {
+     "cell_id": "7917_-5590",
+     "lat": 71.2575,
+     "lon": -156.5611,
+     "n_labels": 381,
+     "observed_cm": 43.72,
+     "physics_residual_ml_block_cv_cm": 25.14,
+     "wei_2026_cm": 39.98,
+     "liu_2024_cm": 67.17,
+     "our_map_cm": 39.83,
+     "dist_wei_training_site_km": 6.52
+    },
+    {
+     "cell_id": "7917_-5591",
+     "lat": 71.2575,
+     "lon": -156.5891,
+     "n_labels": 325,
+     "observed_cm": 36.81,
+     "physics_residual_ml_block_cv_cm": 24.72,
+     "wei_2026_cm": 45.64,
+     "liu_2024_cm": 52.37,
+     "our_map_cm": 40.11,
+     "dist_wei_training_site_km": 6.32
+    },
+    {
+     "cell_id": "7917_-5592",
+     "lat": 71.2575,
+     "lon": -156.6171,
+     "n_labels": 218,
+     "observed_cm": 39.53,
+     "physics_residual_ml_block_cv_cm": 24.03,
+     "wei_2026_cm": 46.75,
+     "liu_2024_cm": 42.65,
+     "our_map_cm": 40.3,
+     "dist_wei_training_site_km": 6.22
+    },
+    {
+     "cell_id": "7918_-5590",
+     "lat": 71.2665,
+     "lon": -156.6336,
+     "n_labels": 91,
+     "observed_cm": 37.54,
+     "physics_residual_ml_block_cv_cm": 25.09,
+     "wei_2026_cm": 46.76,
+     "liu_2024_cm": 42.83,
+     "our_map_cm": 36.8,
+     "dist_wei_training_site_km": 6.14
+    },
+    {
+     "cell_id": "7919_-5587",
+     "lat": 71.2755,
+     "lon": -156.6221,
+     "n_labels": 190,
+     "observed_cm": 34.54,
+     "physics_residual_ml_block_cv_cm": 23.9,
+     "wei_2026_cm": 45.75,
+     "liu_2024_cm": 42.32,
+     "our_map_cm": 35.03,
+     "dist_wei_training_site_km": 4.99
+    },
+    {
+     "cell_id": "7919_-5588",
+     "lat": 71.2755,
+     "lon": -156.6501,
+     "n_labels": 128,
+     "observed_cm": 36.03,
+     "physics_residual_ml_block_cv_cm": 24.62,
+     "wei_2026_cm": 45.75,
+     "liu_2024_cm": 42.32,
+     "our_map_cm": 38.78,
+     "dist_wei_training_site_km": 5.09
+    },
+    {
+     "cell_id": "7922_-5579",
+     "lat": 71.3025,
+     "lon": -156.6155,
+     "n_labels": 280,
+     "observed_cm": 36.54,
+     "physics_residual_ml_block_cv_cm": 26.42,
+     "wei_2026_cm": 39.39,
+     "liu_2024_cm": 45.22,
+     "our_map_cm": 38.36,
+     "dist_wei_training_site_km": 1.53
+    },
+    {
+     "cell_id": "7923_-5575",
+     "lat": 71.3115,
+     "lon": -156.5759,
+     "n_labels": 273,
+     "observed_cm": 38.88,
+     "physics_residual_ml_block_cv_cm": 24.26,
+     "wei_2026_cm": 35.32,
+     "liu_2024_cm": 61.25,
+     "our_map_cm": 38.74,
+     "dist_wei_training_site_km": 0.31
+    },
+    {
+     "cell_id": "7923_-5576",
+     "lat": 71.3115,
+     "lon": -156.604,
+     "n_labels": 461,
+     "observed_cm": 34.85,
+     "physics_residual_ml_block_cv_cm": 25.19,
+     "wei_2026_cm": 37.32,
+     "liu_2024_cm": 58.72,
+     "our_map_cm": 40.85,
+     "dist_wei_training_site_km": 0.32
+    },
+    {
+     "cell_id": "7923_-5577",
+     "lat": 71.3115,
+     "lon": -156.6321,
+     "n_labels": 264,
+     "observed_cm": 44.19,
+     "physics_residual_ml_block_cv_cm": 25.95,
+     "wei_2026_cm": 39.02,
+     "liu_2024_cm": 61.41,
+     "our_map_cm": 39.89,
+     "dist_wei_training_site_km": 1.72
+    },
+    {
+     "cell_id": "7924_-5573",
+     "lat": 71.3205,
+     "lon": -156.5924,
+     "n_labels": 154,
+     "observed_cm": 31.92,
+     "physics_residual_ml_block_cv_cm": 24.21,
+     "wei_2026_cm": 37.78,
+     "liu_2024_cm": 36.44,
+     "our_map_cm": 40.01,
+     "dist_wei_training_site_km": 0.0
+    },
+    {
+     "cell_id": "7924_-5574",
+     "lat": 71.3205,
+     "lon": -156.6205,
+     "n_labels": 701,
+     "observed_cm": 44.43,
+     "physics_residual_ml_block_cv_cm": 25.58,
+     "wei_2026_cm": 37.56,
+     "liu_2024_cm": 62.19,
+     "our_map_cm": 42.99,
+     "dist_wei_training_site_km": 0.84
+    },
+    {
+     "cell_id": "7924_-5575",
+     "lat": 71.3205,
+     "lon": -156.6487,
+     "n_labels": 56,
+     "observed_cm": 39.75,
+     "physics_residual_ml_block_cv_cm": 24.95,
+     "wei_2026_cm": 37.82,
+     "liu_2024_cm": 61.81,
+     "our_map_cm": 38.24,
+     "dist_wei_training_site_km": 1.83
+    }
+   ]
+  },
+  "Lena": {
+   "year": 2016,
+   "alt_range_cm": [
+    30.0,
+    60.0
+   ],
+   "extend": "both",
+   "colour_bar_ticks_cm": [
+    30.0,
+    40.0,
+    50.0,
+    60.0
+   ],
+   "share_of_drawn_pixels_beyond_range": {
+    "wei": {
+     "below": 0.0,
+     "above": 0.2437
+    },
+    "liu": {
+     "below": 0.0,
+     "above": 0.4125
+    },
+    "ours": {
+     "below": 0.0,
+     "above": 0.0
+    }
+   },
+   "product_value_range_p1_p99_cm": {
+    "wei": [
+     40.2,
+     72.7
+    ],
+    "liu": [
+     35.5,
+     85.1
+    ]
+   },
+   "n_map_cells_drawn": 38086,
+   "n_labels": 681,
+   "n_observed_cells": 35,
+   "n_cells_with_value": {
+    "oof": 35,
+    "wei": 17,
+    "liu": 20,
+    "mapv": 29
+   },
+   "n_common_cells": 14,
+   "oof_seeds_per_label": [
+    3
+   ],
+   "rmse_common_cm": {
+    "physics_residual_ml_block_cv": 12.66,
+    "wei_2026": 26.18,
+    "liu_2024": 30.43,
+    "our_map_in_sample_not_shown": 19.24
+   },
+   "bias_common_cm": {
+    "physics_residual_ml_block_cv": 7.88,
+    "wei_2026": 23.59,
+    "liu_2024": 27.34
+   },
+   "error_axis_cm": [
+    -20.0,
+    55.0
+   ],
+   "values_beyond_error_axis_cm": {},
+   "alternative_common_cells": {
+    "definition": "cells where the block-CV prediction, Wei 2026 and Liu 2024 all have a value (no condition on our map)",
+    "n": 15,
+    "rmse_cm": {
+     "oof": 14.36,
+     "wei": 27.81,
+     "liu": 33.81
+    }
+   },
+   "label_level_rmse_not_shown": {
+    "oof": {
+     "rmse": 9.87,
+     "n": 681
+    },
+    "wei": {
+     "rmse": 25.12,
+     "n": 162
+    },
+    "liu": {
+     "rmse": 20.98,
+     "n": 485
+    },
+    "mapv": {
+     "rmse": 14.42,
+     "n": 606
+    }
+   },
+   "product_training_sites": {
+    "note": "no distance mask in this figure: Wei 2026 and Liu 2024 values at all common cells are used, including cells at or near Wei 2026 training sites; distances are to Wei 2026 training sites (supplement table), the same distance used for the 25 km mask of Fig. 5",
+    "distance_source": "data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv (product == 'wei', nearest Wei 2026 training site per label; cell value = minimum over its labels)",
+    "n_common_within_25km": 0,
+    "n_common_within_1km": 0,
+    "n_common_gt25km": 14,
+    "rmse_common_gt25km_cm_not_shown": {
+     "oof": 12.66,
+     "wei": 26.18,
+     "liu": 30.43
+    }
+   },
+   "cells": [
+    {
+     "cell_id": "7996_4371",
+     "lat": 71.9685,
+     "lon": 127.1032,
+     "n_labels": 1,
+     "observed_cm": 30.0,
+     "physics_residual_ml_block_cv_cm": 36.35,
+     "wei_2026_cm": 45.99,
+     "liu_2024_cm": 61.53,
+     "our_map_cm": 45.22,
+     "dist_wei_training_site_km": 72.82
+    },
+    {
+     "cell_id": "8038_4243",
+     "lat": 72.3465,
+     "lon": 125.9366,
+     "n_labels": 2,
+     "observed_cm": 44.5,
+     "physics_residual_ml_block_cv_cm": 36.82,
+     "wei_2026_cm": 64.48,
+     "liu_2024_cm": 61.96,
+     "our_map_cm": 47.87,
+     "dist_wei_training_site_km": 129.53
+    },
+    {
+     "cell_id": "8039_4250",
+     "lat": 72.3555,
+     "lon": 126.2066,
+     "n_labels": 3,
+     "observed_cm": 31.67,
+     "physics_residual_ml_block_cv_cm": 39.36,
+     "wei_2026_cm": 69.44,
+     "liu_2024_cm": 59.79,
+     "our_map_cm": 42.55,
+     "dist_wei_training_site_km": 123.14
+    },
+    {
+     "cell_id": "8041_4247",
+     "lat": 72.3735,
+     "lon": 126.2422,
+     "n_labels": 1,
+     "observed_cm": 14.0,
+     "physics_residual_ml_block_cv_cm": 33.42,
+     "wei_2026_cm": 51.31,
+     "liu_2024_cm": 54.49,
+     "our_map_cm": 44.98,
+     "dist_wei_training_site_km": 123.91
+    },
+    {
+     "cell_id": "8041_4248",
+     "lat": 72.3735,
+     "lon": 126.2719,
+     "n_labels": 2,
+     "observed_cm": 27.0,
+     "physics_residual_ml_block_cv_cm": 36.83,
+     "wei_2026_cm": 49.94,
+     "liu_2024_cm": 53.12,
+     "our_map_cm": 44.05,
+     "dist_wei_training_site_km": 123.56
+    },
+    {
+     "cell_id": "8052_4224",
+     "lat": 72.4725,
+     "lon": 126.2454,
+     "n_labels": 2,
+     "observed_cm": 16.5,
+     "physics_residual_ml_block_cv_cm": 33.11,
+     "wei_2026_cm": 45.66,
+     "liu_2024_cm": 58.76,
+     "our_map_cm": 39.87,
+     "dist_wei_training_site_km": 131.64
+    },
+    {
+     "cell_id": "8052_4225",
+     "lat": 72.4725,
+     "lon": 126.2753,
+     "n_labels": 6,
+     "observed_cm": 17.33,
+     "physics_residual_ml_block_cv_cm": 35.37,
+     "wei_2026_cm": 41.93,
+     "liu_2024_cm": 56.61,
+     "our_map_cm": 40.5,
+     "dist_wei_training_site_km": 130.64
+    },
+    {
+     "cell_id": "8055_4278",
+     "lat": 72.4995,
+     "lon": 128.0502,
+     "n_labels": 91,
+     "observed_cm": 26.39,
+     "physics_residual_ml_block_cv_cm": 32.01,
+     "wei_2026_cm": 50.8,
+     "liu_2024_cm": 49.24,
+     "our_map_cm": 43.9,
+     "dist_wei_training_site_km": 105.15
+    },
+    {
+     "cell_id": "8056_4271",
+     "lat": 72.5085,
+     "lon": 127.9044,
+     "n_labels": 2,
+     "observed_cm": 7.5,
+     "physics_residual_ml_block_cv_cm": 33.4,
+     "wei_2026_cm": 54.88,
+     "liu_2024_cm": 54.69,
+     "our_map_cm": 41.35,
+     "dist_wei_training_site_km": 107.32
+    },
+    {
+     "cell_id": "8056_4275",
+     "lat": 72.5085,
+     "lon": 128.0242,
+     "n_labels": 24,
+     "observed_cm": 24.45,
+     "physics_residual_ml_block_cv_cm": 31.45,
+     "wei_2026_cm": 47.48,
+     "liu_2024_cm": 48.96,
+     "our_map_cm": 46.48,
+     "dist_wei_training_site_km": 105.52
+    },
+    {
+     "cell_id": "8056_4276",
+     "lat": 72.5085,
+     "lon": 128.0541,
+     "n_labels": 17,
+     "observed_cm": 24.92,
+     "physics_residual_ml_block_cv_cm": 30.79,
+     "wei_2026_cm": 47.48,
+     "liu_2024_cm": 48.98,
+     "our_map_cm": 43.36,
+     "dist_wei_training_site_km": 105.48
+    },
+    {
+     "cell_id": "8057_4268",
+     "lat": 72.5175,
+     "lon": 127.8783,
+     "n_labels": 3,
+     "observed_cm": 33.67,
+     "physics_residual_ml_block_cv_cm": 36.54,
+     "wei_2026_cm": 43.88,
+     "liu_2024_cm": 55.25,
+     "our_map_cm": 41.26,
+     "dist_wei_training_site_km": 108.41
+    },
+    {
+     "cell_id": "8057_4269",
+     "lat": 72.5175,
+     "lon": 127.9083,
+     "n_labels": 5,
+     "observed_cm": 29.6,
+     "physics_residual_ml_block_cv_cm": 35.76,
+     "wei_2026_cm": 41.64,
+     "liu_2024_cm": 56.68,
+     "our_map_cm": 42.01,
+     "dist_wei_training_site_km": 107.81
+    },
+    {
+     "cell_id": "8058_4272",
+     "lat": 72.5265,
+     "lon": 128.062,
+     "n_labels": 1,
+     "observed_cm": 49.0,
+     "physics_residual_ml_block_cv_cm": 35.61,
+     "wei_2026_cm": 51.93,
+     "liu_2024_cm": 39.25,
+     "our_map_cm": 49.91,
+     "dist_wei_training_site_km": 107.67
+    }
+   ]
+  }
+ },
+ "numbers_printed": {
+  "Alaska": {
+   "RMSE (cm)": [
+    "17.1",
+    "15.8",
+    "16.4"
+   ],
+   "n": 95,
+   "beyond_axis": {
+    "oof": [
+     -95.0,
+     -65.3
+    ],
+    "wei": [
+     -110.0
+    ],
+    "liu": [
+     -89.2
+    ]
+   }
+  },
+  "Lena": {
+   "RMSE (cm)": [
+    "12.7",
+    "26.2",
+    "30.4"
+   ],
+   "n": 14,
+   "beyond_axis": {}
+  }
+ },
+ "outputs": {
+  "Fig6_product_maps.pdf": {
+   "path": "outputs/figures/paper/v11/Fig6_product_maps.pdf",
+   "bytes": 4986263
+  },
+  "Fig6_product_maps.svg": {
+   "path": "outputs/figures/paper/v11/Fig6_product_maps.svg",
+   "bytes": 8093313
+  },
+  "Fig6_product_maps.png": {
+   "path": "outputs/figures/paper/v11/Fig6_product_maps.png",
+   "bytes": 5605225
+  }
+ },
+ "canvas_mm": [
+  180.0,
+  114.6
+ ],
+ "pdf_page_mm": [
+  180.0,
+  114.6
+ ],
+ "pdf_fonts": [
+  "BICWAS+FreeSans",
+  "FITYBK+FreeSansBold"
+ ],
+ "qa": {
+  "n_texts": 72,
+  "min_font_pt": 6.0,
+  "font_sizes_pt": [
+   6.0,
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ },
+ "layout_mm": {
+  "map_width": 38.67,
+  "map_heights": [
+   36.36,
+   38.05
+  ],
+  "error_panel": [
+   141.4,
+   38.0
+  ]
+ },
+ "style": "cmcrameri oslo_r section (0.16, 0.88) for ALT; series colours: Physics + residual ML #D1603D, Wei 2026 #5B8C5A, Liu 2024 #B65A72"
+}

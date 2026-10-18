@@ -1,0 +1,824 @@
+{
+ "figure": "Fig. 5",
+ "script": "scripts/4_visualization/paper_v11/fig5_products.py",
+ "inputs": {
+  "common_cells": "data/processed/v5/runs/core_v6/common_cells_eval.csv",
+  "yearwise": "outputs/figures/paper/v7/source_data/F5_yearwise_rmse.csv",
+  "training_site_distance": "data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv (product == 'wei', nearest site per label cell)"
+ },
+ "a": {
+  "definition": "RMSE on common cell-years: label cell-years where Wei 2026, Liu 2024 and ESA CCI v4 all have a value of the observation year; ESA CCI v5 and Aalto 2018 are scored on the common cell-years where they have a value. Our methods: block cross-validation out-of-fold predictions (core_v6, climate input to the observation day, covariate set F8TS; Physics + residual ML = CatBoost lambda 0.5, Direct ML = CatBoost, seeds averaged).",
+  "filled": "all common cell-years",
+  "open": "cells more than 25 km from the nearest Wei 2026 training site",
+  "x_range_cm": [
+   10.0,
+   45.0
+  ],
+  "values": {
+   "Alaska": {
+    "Stefan (recalibrated)|0": {
+     "rmse_cm": 17.372,
+     "n": 14326
+    },
+    "Stefan (recalibrated)|25": {
+     "rmse_cm": 15.257,
+     "n": 4229
+    },
+    "Physics + residual ML|0": {
+     "rmse_cm": 17.076,
+     "n": 14326
+    },
+    "Physics + residual ML|25": {
+     "rmse_cm": 15.335,
+     "n": 4229
+    },
+    "Direct ML|0": {
+     "rmse_cm": 15.675,
+     "n": 14326
+    },
+    "Direct ML|25": {
+     "rmse_cm": 14.4,
+     "n": 4229
+    },
+    "Wei 2026|0": {
+     "rmse_cm": 17.894,
+     "n": 14326
+    },
+    "Wei 2026|25": {
+     "rmse_cm": 20.833,
+     "n": 4229
+    },
+    "Liu 2024|0": {
+     "rmse_cm": 18.777,
+     "n": 14326
+    },
+    "Liu 2024|25": {
+     "rmse_cm": 15.212,
+     "n": 4229
+    },
+    "ESA CCI v4|0": {
+     "rmse_cm": 27.053,
+     "n": 14326
+    },
+    "ESA CCI v4|25": {
+     "rmse_cm": 20.141,
+     "n": 4229
+    },
+    "ESA CCI v5|0": {
+     "rmse_cm": 67.567,
+     "n": 13048
+    },
+    "ESA CCI v5|25": {
+     "rmse_cm": 118.489,
+     "n": 3012
+    },
+    "Aalto 2018|0": {
+     "rmse_cm": 46.151,
+     "n": 14326
+    },
+    "Aalto 2018|25": {
+     "rmse_cm": 63.513,
+     "n": 4229
+    }
+   },
+   "Lena": {
+    "Stefan (recalibrated)|0": {
+     "rmse_cm": 25.515,
+     "n": 461
+    },
+    "Stefan (recalibrated)|25": {
+     "rmse_cm": 25.643,
+     "n": 449
+    },
+    "Physics + residual ML|0": {
+     "rmse_cm": 21.146,
+     "n": 461
+    },
+    "Physics + residual ML|25": {
+     "rmse_cm": 21.155,
+     "n": 449
+    },
+    "Direct ML|0": {
+     "rmse_cm": 17.863,
+     "n": 461
+    },
+    "Direct ML|25": {
+     "rmse_cm": 17.744,
+     "n": 449
+    },
+    "Wei 2026|0": {
+     "rmse_cm": 34.551,
+     "n": 461
+    },
+    "Wei 2026|25": {
+     "rmse_cm": 34.832,
+     "n": 449
+    },
+    "Liu 2024|0": {
+     "rmse_cm": 32.981,
+     "n": 461
+    },
+    "Liu 2024|25": {
+     "rmse_cm": 33.184,
+     "n": 449
+    },
+    "ESA CCI v4|0": {
+     "rmse_cm": 30.961,
+     "n": 461
+    },
+    "ESA CCI v4|25": {
+     "rmse_cm": 30.938,
+     "n": 449
+    },
+    "ESA CCI v5|0": {
+     "rmse_cm": 28.357,
+     "n": 461
+    },
+    "ESA CCI v5|25": {
+     "rmse_cm": 28.448,
+     "n": 449
+    },
+    "Aalto 2018|0": {
+     "rmse_cm": 30.555,
+     "n": 461
+    },
+    "Aalto 2018|25": {
+     "rmse_cm": 30.752,
+     "n": 449
+    }
+   },
+   "Canada": {
+    "Stefan (recalibrated)|0": {
+     "rmse_cm": 29.581,
+     "n": 532
+    },
+    "Stefan (recalibrated)|25": {
+     "rmse_cm": 27.44,
+     "n": 489
+    },
+    "Physics + residual ML|0": {
+     "rmse_cm": 25.835,
+     "n": 532
+    },
+    "Physics + residual ML|25": {
+     "rmse_cm": 23.619,
+     "n": 489
+    },
+    "Direct ML|0": {
+     "rmse_cm": 24.142,
+     "n": 532
+    },
+    "Direct ML|25": {
+     "rmse_cm": 22.366,
+     "n": 489
+    },
+    "Wei 2026|0": {
+     "rmse_cm": 26.997,
+     "n": 532
+    },
+    "Wei 2026|25": {
+     "rmse_cm": 27.357,
+     "n": 489
+    },
+    "Liu 2024|0": {
+     "rmse_cm": 27.919,
+     "n": 532
+    },
+    "Liu 2024|25": {
+     "rmse_cm": 28.754,
+     "n": 489
+    },
+    "ESA CCI v4|0": {
+     "rmse_cm": 33.483,
+     "n": 532
+    },
+    "ESA CCI v4|25": {
+     "rmse_cm": 27.93,
+     "n": 489
+    },
+    "ESA CCI v5|0": {
+     "rmse_cm": 76.023,
+     "n": 532
+    },
+    "ESA CCI v5|25": {
+     "rmse_cm": 74.296,
+     "n": 489
+    },
+    "Aalto 2018|0": {
+     "rmse_cm": 56.488,
+     "n": 532
+    },
+    "Aalto 2018|25": {
+     "rmse_cm": 55.726,
+     "n": 489
+    }
+   }
+  },
+  "n_label": {
+   "Alaska": {
+    "all": 14326,
+    "gt25km": 4229
+   },
+   "Lena": {
+    "all": 461,
+    "gt25km": 449
+   },
+   "Canada": {
+    "all": 532,
+    "gt25km": 489
+   }
+  },
+  "common_cell_years": {
+   "Alaska": {
+    "0": {
+     "n": 14326,
+     "n_cells": 12609,
+     "years": [
+      2010,
+      2020
+     ],
+     "n_by_year": {
+      "2010": 59,
+      "2011": 55,
+      "2012": 54,
+      "2013": 1322,
+      "2014": 7446,
+      "2015": 171,
+      "2016": 2237,
+      "2017": 858,
+      "2018": 1526,
+      "2019": 449,
+      "2020": 149
+     },
+     "n_cci5y": 13048,
+     "n_aalto": 14326
+    },
+    "25": {
+     "n": 4229,
+     "n_cells": 4086,
+     "years": [
+      2013,
+      2019
+     ],
+     "n_by_year": {
+      "2013": 595,
+      "2014": 1685,
+      "2016": 1340,
+      "2017": 105,
+      "2018": 377,
+      "2019": 127
+     },
+     "n_cci5y": 3012,
+     "n_aalto": 4229
+    }
+   },
+   "Lena": {
+    "0": {
+     "n": 461,
+     "n_cells": 437,
+     "years": [
+      2013,
+      2020
+     ],
+     "n_by_year": {
+      "2013": 80,
+      "2014": 59,
+      "2015": 109,
+      "2016": 155,
+      "2017": 16,
+      "2018": 10,
+      "2019": 17,
+      "2020": 15
+     },
+     "n_cci5y": 461,
+     "n_aalto": 461
+    },
+    "25": {
+     "n": 449,
+     "n_cells": 425,
+     "years": [
+      2013,
+      2020
+     ],
+     "n_by_year": {
+      "2013": 68,
+      "2014": 59,
+      "2015": 109,
+      "2016": 155,
+      "2017": 16,
+      "2018": 10,
+      "2019": 17,
+      "2020": 15
+     },
+     "n_cci5y": 449,
+     "n_aalto": 449
+    }
+   },
+   "Canada": {
+    "0": {
+     "n": 532,
+     "n_cells": 351,
+     "years": [
+      2010,
+      2019
+     ],
+     "n_by_year": {
+      "2010": 5,
+      "2011": 7,
+      "2012": 26,
+      "2013": 119,
+      "2014": 6,
+      "2015": 3,
+      "2016": 3,
+      "2017": 149,
+      "2018": 149,
+      "2019": 65
+     },
+     "n_cci5y": 532,
+     "n_aalto": 532
+    },
+    "25": {
+     "n": 489,
+     "n_cells": 343,
+     "years": [
+      2012,
+      2019
+     ],
+     "n_by_year": {
+      "2012": 19,
+      "2013": 113,
+      "2017": 146,
+      "2018": 146,
+      "2019": 65
+     },
+     "n_cci5y": 489,
+     "n_aalto": 489
+    }
+   }
+  },
+  "printed_beyond_axis": [
+   {
+    "region": "Alaska",
+    "series": "ESA CCI v5",
+    "subset": "all",
+    "rmse_cm": 67.6
+   },
+   {
+    "region": "Alaska",
+    "series": "ESA CCI v5",
+    "subset": "> 25 km",
+    "rmse_cm": 118.5
+   },
+   {
+    "region": "Alaska",
+    "series": "Aalto 2018",
+    "subset": "all",
+    "rmse_cm": 46.2
+   },
+   {
+    "region": "Alaska",
+    "series": "Aalto 2018",
+    "subset": "> 25 km",
+    "rmse_cm": 63.5
+   },
+   {
+    "region": "Canada",
+    "series": "ESA CCI v5",
+    "subset": "all",
+    "rmse_cm": 76.0
+   },
+   {
+    "region": "Canada",
+    "series": "ESA CCI v5",
+    "subset": "> 25 km",
+    "rmse_cm": 74.3
+   },
+   {
+    "region": "Canada",
+    "series": "Aalto 2018",
+    "subset": "all",
+    "rmse_cm": 56.5
+   },
+   {
+    "region": "Canada",
+    "series": "Aalto 2018",
+    "subset": "> 25 km",
+    "rmse_cm": 55.7
+   }
+  ]
+ },
+ "b": {
+  "definition": "per observation year: labelled cell-years where Physics + residual ML, Stefan (recalibrated) and Wei 2026 all have values; Liu 2024 (to 2020) is included when it leaves >= 30 cell-years, otherwise the year is shown without Liu; years with < 30 cell-years are not shown. All cell-years (no distance mask).",
+  "min_cell_years": 30,
+  "years": {
+   "Alaska": {
+    "years_shown": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022
+    ],
+    "n_cell_years": {
+     "2010": 59,
+     "2011": 55,
+     "2012": 54,
+     "2013": 1322,
+     "2014": 7446,
+     "2015": 171,
+     "2016": 2237,
+     "2017": 858,
+     "2018": 1526,
+     "2019": 449,
+     "2020": 149,
+     "2021": 323,
+     "2022": 369
+    },
+    "liu_included": {
+     "2010": true,
+     "2011": true,
+     "2012": true,
+     "2013": true,
+     "2014": true,
+     "2015": true,
+     "2016": true,
+     "2017": true,
+     "2018": true,
+     "2019": true,
+     "2020": true,
+     "2021": false,
+     "2022": false
+    },
+    "rmse_cm": {
+     "r1": {
+      "2010": 15.02,
+      "2011": 14.85,
+      "2012": 16.45,
+      "2013": 16.5,
+      "2014": 15.21,
+      "2015": 21.9,
+      "2016": 16.04,
+      "2017": 20.11,
+      "2018": 18.29,
+      "2019": 27.6,
+      "2020": 36.56,
+      "2021": 38.37,
+      "2022": 31.12
+     },
+     "p1": {
+      "2010": 17.77,
+      "2011": 15.97,
+      "2012": 18.18,
+      "2013": 17.13,
+      "2014": 15.3,
+      "2015": 24.78,
+      "2016": 16.17,
+      "2017": 21.51,
+      "2018": 19.26,
+      "2019": 26.63,
+      "2020": 33.81,
+      "2021": 36.56,
+      "2022": 30.23
+     },
+     "wei": {
+      "2010": 7.69,
+      "2011": 8.02,
+      "2012": 10.07,
+      "2013": 15.94,
+      "2014": 15.67,
+      "2015": 17.75,
+      "2016": 18.19,
+      "2017": 20.09,
+      "2018": 19.9,
+      "2019": 28.16,
+      "2020": 45.59,
+      "2021": 46.03,
+      "2022": 34.77
+     },
+     "liu": {
+      "2010": 13.51,
+      "2011": 13.86,
+      "2012": 11.83,
+      "2013": 14.97,
+      "2014": 18.39,
+      "2015": 16.37,
+      "2016": 15.6,
+      "2017": 19.96,
+      "2018": 20.75,
+      "2019": 28.33,
+      "2020": 41.71,
+      "2021": null,
+      "2022": null
+     }
+    },
+    "ylim_cm": [
+     0,
+     50.0
+    ]
+   },
+   "Lena": {
+    "years_shown": [
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2020
+    ],
+    "n_cell_years": {
+     "2013": 80,
+     "2014": 59,
+     "2015": 109,
+     "2016": 155,
+     "2017": 109,
+     "2020": 38
+    },
+    "liu_included": {
+     "2013": true,
+     "2014": true,
+     "2015": true,
+     "2016": true,
+     "2017": false,
+     "2020": false
+    },
+    "rmse_cm": {
+     "r1": {
+      "2013": 21.39,
+      "2014": 10.44,
+      "2015": 7.27,
+      "2016": 9.12,
+      "2017": 11.27,
+      "2020": 62.85
+     },
+     "p1": {
+      "2013": 23.62,
+      "2014": 10.77,
+      "2015": 9.07,
+      "2016": 13.6,
+      "2017": 12.46,
+      "2020": 75.68
+     },
+     "wei": {
+      "2013": 45.43,
+      "2014": 20.12,
+      "2015": 26.51,
+      "2016": 25.04,
+      "2017": 18.27,
+      "2020": 69.44
+     },
+     "liu": {
+      "2013": 40.41,
+      "2014": 19.3,
+      "2015": 17.2,
+      "2016": 25.7,
+      "2017": null,
+      "2020": null
+     }
+    },
+    "ylim_cm": [
+     0,
+     90.0
+    ]
+   },
+   "Canada": {
+    "years_shown": [
+     2013,
+     2017,
+     2018,
+     2019,
+     2021,
+     2022,
+     2023,
+     2024
+    ],
+    "n_cell_years": {
+     "2013": 119,
+     "2017": 149,
+     "2018": 149,
+     "2019": 65,
+     "2021": 44,
+     "2022": 445,
+     "2023": 80,
+     "2024": 80
+    },
+    "liu_included": {
+     "2013": true,
+     "2017": true,
+     "2018": true,
+     "2019": true,
+     "2021": false,
+     "2022": false,
+     "2023": false,
+     "2024": false
+    },
+    "rmse_cm": {
+     "r1": {
+      "2013": 21.01,
+      "2017": 24.33,
+      "2018": 21.07,
+      "2019": 32.47,
+      "2021": 22.02,
+      "2022": 23.09,
+      "2023": 35.64,
+      "2024": 42.64
+     },
+     "p1": {
+      "2013": 20.79,
+      "2017": 30.09,
+      "2018": 26.22,
+      "2019": 35.9,
+      "2021": 25.11,
+      "2022": 25.2,
+      "2023": 42.23,
+      "2024": 49.85
+     },
+     "wei": {
+      "2013": 29.83,
+      "2017": 21.44,
+      "2018": 25.69,
+      "2019": 36.22,
+      "2021": 16.72,
+      "2022": 26.54,
+      "2023": 38.23,
+      "2024": 26.95
+     },
+     "liu": {
+      "2013": 18.31,
+      "2017": 30.08,
+      "2018": 32.07,
+      "2019": 31.2,
+      "2021": null,
+      "2022": null,
+      "2023": null,
+      "2024": null
+     }
+    },
+    "ylim_cm": [
+     0,
+     60.0
+    ]
+   }
+  }
+ },
+ "years_used": {
+  "a": {
+   "Alaska": {
+    "all": "2010-2020",
+    "gt25km": "2013-2019"
+   },
+   "Lena": {
+    "all": "2013-2020",
+    "gt25km": "2013-2020"
+   },
+   "Canada": {
+    "all": "2010-2019",
+    "gt25km": "2012-2019"
+   }
+  },
+  "b": {
+   "Alaska": {
+    "years_shown": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020,
+     2021,
+     2022
+    ],
+    "liu_included": [
+     2010,
+     2011,
+     2012,
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2018,
+     2019,
+     2020
+    ]
+   },
+   "Lena": {
+    "years_shown": [
+     2013,
+     2014,
+     2015,
+     2016,
+     2017,
+     2020
+    ],
+    "liu_included": [
+     2013,
+     2014,
+     2015,
+     2016
+    ]
+   },
+   "Canada": {
+    "years_shown": [
+     2013,
+     2017,
+     2018,
+     2019,
+     2021,
+     2022,
+     2023,
+     2024
+    ],
+    "liu_included": [
+     2013,
+     2017,
+     2018,
+     2019
+    ]
+   }
+  }
+ },
+ "outputs": {
+  "Fig5_products.pdf": {
+   "path": "outputs/figures/paper/v11/Fig5_products.pdf",
+   "bytes": 29506
+  },
+  "Fig5_products.svg": {
+   "path": "outputs/figures/paper/v11/Fig5_products.svg",
+   "bytes": 108757
+  },
+  "Fig5_products.png": {
+   "path": "outputs/figures/paper/v11/Fig5_products.png",
+   "bytes": 429469
+  }
+ },
+ "canvas_mm": [
+  180.0,
+  106.0
+ ],
+ "pdf_page_mm": [
+  180.0,
+  106.0
+ ],
+ "pdf_fonts": [
+  "BICWAS+FreeSans",
+  "FITYBK+FreeSansBold"
+ ],
+ "qa": {
+  "n_texts": 85,
+  "min_font_pt": 6.0,
+  "font_sizes_pt": [
+   6.0,
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ },
+ "style": {
+  "font": "FreeSans 7 pt (ticks 6.5 pt, small numbers 6 pt), panel letters 8 pt bold, text #262626, axes #404040 0.5 pt",
+  "colours": "design/style_tokens_v4.json color.paper_v11 (POLAR_PALETTE=paper11)",
+  "markers": {
+   "Stefan (recalibrated)": "s",
+   "Physics + residual ML": "o",
+   "Direct ML": "o",
+   "Wei 2026": "D",
+   "Liu 2024": "v",
+   "ESA CCI v4": "s",
+   "ESA CCI v5": "s",
+   "Aalto 2018": "o"
+  },
+  "series_colours": {
+   "Stefan (recalibrated)": "#2E6DA4",
+   "Physics + residual ML": "#D1603D",
+   "Direct ML": "#8E5B9E",
+   "Wei 2026": "#5B8C5A",
+   "Liu 2024": "#B65A72",
+   "ESA CCI v4": "#A07D4A",
+   "ESA CCI v5": "#C4A869",
+   "Aalto 2018": "#8273A6"
+  },
+  "n_bars": "#D4D4D4"
+ }
+}
