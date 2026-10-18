@@ -273,3 +273,8 @@ data/processed/xbatch/XM_landcover_vegetation/xm_gate_wf9.csv
 data/processed/xe/parts/xe_H0_v1.csv
 data/processed/xe/parts/xe_T2_v1.csv
 data/processed/xe/xe_feat_v1.csv
+# 2026-10-16 정리(보완): 백업 · 덱 그림 캐시 · LaTeX 보조 파일
+*.bak_[0-9]*
+deck/assets/*/_cache/
+outputs/report_v*/*.aux
+outputs/report_v*/*.out
