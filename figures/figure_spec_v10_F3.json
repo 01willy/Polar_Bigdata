@@ -1,0 +1,60 @@
+{
+  "stem": "Fig3_accuracy",
+  "script": "scripts/4_visualization/paper_v10/fig3_accuracy.py",
+  "helpers": "scripts/4_visualization/paper_v10/fig34_common.py",
+  "message": "Year-specific climate input, the validation split and the covariate set determine how much physics + residual ML gains over recalibrated Stefan; the gain is largest where Stefan errs most.",
+  "medium": "Scientific Reports, double column, 180 mm wide, fixed canvas (no tight bbox)",
+  "size_mm": [
+    180.0,
+    142.0
+  ],
+  "style": {
+    "font": "FreeSans 7 pt (ticks 6.5 pt, heat-map values 6 pt), panel letters 8 pt bold, all text black (white only inside dark heat-map cells)",
+    "lines": "axes 0.5 pt black, data 0.9 pt, reference/zero 0.5 pt grey #808080, no grid, top/right spines off",
+    "methods": "Stefan (source coeff.) #9A9A9A thin; Stefan (recalibrated) #0072B2; Physics + residual ML #D55E00; Direct ML #1A1A1A dashed, open markers",
+    "regions": "grey shades + markers: Alaska #1A1A1A circle, Lena Delta #5C5C5C square, Canada (NW) #949494 triangle",
+    "heat_map": "cmcrameri vik, symmetric about 0; black outline = 95% CI excludes 0; light grey hatching = insufficient data; values 6 pt"
+  },
+  "layout": "row 1: a (3 region panels, slope chart mean vs observation-year climate input) | b (3 region panels, RMSE by validation split); row 2: c (horizontal interval plot by covariate set) | d (tercile heat map + colour bar + key). One method legend at the top, one region legend above c.",
+  "panels": {
+    "a": {
+      "source": "data/processed/v5/runs/core_v6/summary_metrics.csv",
+      "filter": "scheme block, featset F8TS, forcing clim and year_obs; P1, R1 (catboost, lam 0.5), D0 (catboost)",
+      "years": "labels 2010-2024 (Lena 2010-2022); mean climate = 2011-2024 ERA5-Land mean; year-specific = TDD to observation day"
+    },
+    "b": {
+      "source": "data/processed/v5/runs/core_v6/summary_metrics.csv",
+      "filter": "forcing year_obs, featset F8TS; schemes random, block, year, block_year, region; P0, P1, R1 (catboost, lam 0.5), D0 (catboost)",
+      "out_of_range": "values > 1.3 x max of the non-region splits are drawn on the top edge with the value printed"
+    },
+    "c": {
+      "source": [
+        "data/processed/v5/runs/modis_v6/deltas_vs_ref.csv",
+        "data/processed/v5/runs/featsets_v6/deltas_vs_ref.csv"
+      ],
+      "filter": "scheme block, forcing year_obs, ref P1, method R1 catboost lam 0.5; modis_v6 (MODIS 2010-2024) preferred over featsets_v6 for F8TS, F8TS_M, F8TS_ALL, as in v6_numbers.py and v7_f4_results_core.py"
+    },
+    "d": {
+      "source": "outputs/figures/paper/v7/source_data/F4e_gain_conditions.csv",
+      "filter": "covariate != all; shown = n >= 30 cell-years and >= 5 blocks; excludes_0 from 2000 block-bootstrap resamples"
+    }
+  },
+  "exports": [
+    "outputs/figures/paper/v10/Fig3_accuracy.pdf",
+    "outputs/figures/paper/v10/Fig3_accuracy.svg",
+    "outputs/figures/paper/v10/Fig3_accuracy.png (600 dpi)",
+    "outputs/figures/paper/v10/source_data/Fig3_accuracy.json"
+  ],
+  "qa": "2026-10-16 independent review (scientific-figure-reviewer): acceptable, no blocking issues; 12 plotted/printed values spot-checked against the source CSVs, all match; zero overlaps, no text below 6 pt; vector PDF/SVG with embedded FreeSans. Minor: in a, open/filled markers mean climate input (2011-2024 mean / observation year) for all three methods, while open markers mean Direct ML elsewhere; kept as specified because the x-tick labels state the input, caption should say so.",
+  "ink_margins_mm": {
+    "left": 0.8,
+    "right": 1.0,
+    "bottom": 1.8,
+    "top": 1.2
+  },
+  "qa_automatic": {
+    "problems": [],
+    "checks": "fig34_common.qa: font >= 6 pt, text-text overlap, text outside canvas, text over foreign axes, in-axes labels touching lines/markers; pdffonts: FreeSans/FreeSansBold embedded (CID TrueType); svg text kept as text"
+  },
+  "marker_rule": "Stefan methods squares (as Fig. 5), ML methods circles; Direct ML open circles, dashed"
+}

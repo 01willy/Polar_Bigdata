@@ -1,0 +1,290 @@
+{
+ "meta": {
+  "version": "v7",
+  "date": "2026-10-14",
+  "contract": "docs/FIGURE_CONTRACT_v7.md",
+  "brief": "docs/DESIGN_BRIEF_v7_2026-10-14.md",
+  "numbers": "docs/numbers_v6.json",
+  "outdir": "outputs/figures/paper/v7/",
+  "slide_outdir": "outputs/figures/paper/v7/slide/",
+  "deck_only_outdir": "deck/assets/v7/",
+  "deck_native_outdir": "outputs/figures/paper/v7/deck/ (<stem>__deck_<slide>.png, 3600 px 폭, --deck 인자)"
+ },
+ "figures": [
+  {
+   "id": "F1",
+   "stem": "F1_study_area",
+   "script": "scripts/4_visualization/v7_f1_study_area.py",
+   "panels": {
+    "a": "범북극 영구동토 확률(ESA CCI)과 세 지역",
+    "b": "알래스카 관측 셀(음영, 점 크기 = 관측 연도 수, 별 = 4년 이상)",
+    "c": "레나 델타",
+    "d": "캐나다 북서부",
+    "e": "연도별 셀-연도 수와 관측 월 비율",
+    "f": "자료 기간"
+   },
+   "crops": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "bcd",
+    "ef"
+   ],
+   "sources": [
+    "data/processed/v5/labels_cell_year_v5.csv",
+    "data/processed/cci_pfr_mean_1997_2021.nc",
+    "data/processed/map_*/hillshade_v1/shade_250m.tif"
+   ],
+   "deck": [
+    "N01",
+    "N05",
+    "N06",
+    "C02"
+   ],
+   "deck_native": [
+    "N01",
+    "N05",
+    "N06"
+   ]
+  },
+  {
+   "id": "F2",
+   "stem": "F2_problem_time",
+   "script": "scripts/4_visualization/v7_f2_problem_time.py",
+   "panels": {
+    "a": "한 셀의 연도별 TDD, 평균, 관측 ALT, 관측일까지 누적(삽도)",
+    "b": "장기 지점 관측 대 제품의 연도 값",
+    "c": "계절 안 녹는 깊이 대 √TDD(Samoylov 2015, Kurungnakh 2020)",
+    "d": "다년 셀 ALT 대 √TDD"
+   },
+   "crops": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "ab",
+    "cd"
+   ],
+   "sources": [
+    "forcing_year.csv",
+    "products_cell_year_v5.csv",
+    "site_series_year_obs.csv.gz",
+    "ALLENA 원자료"
+   ],
+   "deck": [
+    "N02",
+    "N04"
+   ],
+   "deck_native": [
+    "N02",
+    "N04"
+   ]
+  },
+  {
+   "id": "F3",
+   "stem": "F3_method",
+   "script": "scripts/4_visualization/v7_f3_method.py",
+   "panels": {
+    "a": "자료 흐름 구조도(실자료 썸네일, 물리 블록, 학습 블록, 학습 전용 적색 파선)",
+    "b": "비교 구조 4종 글리프",
+    "c": "다섯 분할(레나 실제 셀)",
+    "d": "블록 부트스트랩 ΔRMSE 분포"
+   },
+   "crops": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "ab",
+    "cd"
+   ],
+   "sources": [
+    "maps/Alaska/pred_2014.csv.gz",
+    "map_alaska/alaska_grid_x25_v1.csv.gz",
+    "runs/core_v6/preds"
+   ],
+   "deck": [
+    "M01",
+    "M02"
+   ],
+   "deck_native": [
+    "M01",
+    "M02"
+   ]
+  },
+  {
+   "id": "F4",
+   "stem": "F4_results_core",
+   "script": "scripts/4_visualization/v7_f4_results_core.py",
+   "panels": {
+    "a": "그 해 입력 − 평균 입력 ΔRMSE",
+    "b": "분할별 RMSE 경사 차트",
+    "c": "공변량 사다리 이득",
+    "d": "TDD 3분위 이득",
+    "e": "학습기별 이득"
+   },
+   "crops": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "cde"
+   ],
+   "sources": [
+    "runs/core_v6/{summary_metrics,deltas_forcing,deltas_vs_ref,conditions_tdd}.csv",
+    "runs/modis_v6",
+    "runs/featsets_v6",
+    "runs/rf_v6",
+    "runs/nn_v6"
+   ],
+   "deck": [
+    "R01",
+    "R02",
+    "R03"
+   ],
+   "deck_native": [
+    "R01",
+    "R02",
+    "R03"
+   ]
+  },
+  {
+   "id": "F5",
+   "stem": "F5_products_years",
+   "script": "scripts/4_visualization/v7_f5_products_years.py",
+   "panels": {
+    "a": "공통 셀 RMSE(전체/25 km 마스크)",
+    "b": "우리 − 제품 짝지은 차이",
+    "c": "연도 간 변화 밀도(관측 연도 연속 쌍, yearwise 정의)",
+    "d": "연도별 편향",
+    "e": "알래스카 장기 지점",
+    "f": "레나 장기 지점"
+   },
+   "crops": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "ab",
+    "cd",
+    "ef"
+   ],
+   "sources": [
+    "runs/core_v6/common_cells_eval.csv",
+    "products_eval_mask25.csv",
+    "yearwise/yearwise_metrics.csv",
+    "site_series_year_obs.csv.gz"
+   ],
+   "deck": [
+    "R04",
+    "R05",
+    "R06"
+   ],
+   "deck_native": [
+    "R04",
+    "R05",
+    "R06"
+   ]
+  },
+  {
+   "id": "F6",
+   "stem": "F6_maps",
+   "script": "scripts/4_visualization/v7_f6_maps.py",
+   "panels": {
+    "a": "알래스카 평균 ALT(AOA 흐림)",
+    "b": "2014 − 평균",
+    "c": "2022 − 평균",
+    "d": "1 km 확대 2곳",
+    "e": "적용 가능 영역",
+    "f": "레나 2016",
+    "g": "사모일로프 확대"
+   },
+   "crops": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "abcd",
+    "efg",
+    "fg"
+   ],
+   "sources": [
+    "maps/Alaska",
+    "maps/Lena",
+    "hillshade_v1"
+   ],
+   "deck": [
+    "R07",
+    "R08",
+    "R09"
+   ],
+   "deck_native": [
+    "R07",
+    "R08",
+    "R09"
+   ]
+  },
+  {
+   "id": "F7",
+   "stem": "F7_series_significance",
+   "script": "scripts/4_visualization/v7_f7_series_significance.py",
+   "panels": {
+    "a": "알래스카 2011–2024 연도별 지도(같은 색 범위)",
+    "b": "격자 전체 평균 연도 편차와 관측 평균",
+    "c": "25 km 밖 공통 셀 RMSE: 우리 대 최선 제품",
+    "d": "AOA 비율과 90% 구간 반폭"
+   },
+   "crops": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "ab",
+    "cd"
+   ],
+   "sources": [
+    "maps/Alaska/pred_<year>.csv.gz",
+    "maps/Lena",
+    "common_cells_eval.csv",
+    "maps/*/meta.json"
+   ],
+   "deck": [
+    "R10",
+    "C01",
+    "C02"
+   ],
+   "deck_native": [
+    "R10",
+    "C01",
+    "C02"
+   ]
+  },
+  {
+   "id": "G1",
+   "stem": "G1_goal_slide",
+   "script": "scripts/4_visualization/v7_g1_goal_slide.py",
+   "deck_only": true,
+   "panels": {
+    "목표": "한 줄",
+    "기존 한계": "관측 연도 편중, 제품의 연도 없음",
+    "개선": "관측일까지 강제력, 물리 + 잔차 ML + 블록 분할",
+    "기대 효과": "연도별 1 km 지도, 최선 제품 대비 오차"
+   },
+   "deck": [
+    "N03"
+   ],
+   "deck_native": [
+    "N03"
+   ]
+  }
+ ]
+}

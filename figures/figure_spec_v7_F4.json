@@ -1,0 +1,116 @@
+{
+  "stem": "F4_results_core",
+  "script": "scripts/4_visualization/v7_f4_results_core.py",
+  "message": "Year-specific forcing, validation-split dependence, and the conditions under which physics + residual ML beats recalibrated Stefan (covariates, thermal regime, where the physics enters the model, learner)",
+  "size_mm": [180, 199],
+  "grid_mm": {
+    "row1_y": [154.5, 192.5],
+    "row2_y": [88.5, 126.5],
+    "row3_y": [24.5, 62.5],
+    "left_x": 16,
+    "right_x": 176,
+    "a_x": [16, 61],
+    "b_x": [[73.15, 98.15], [106.15, 131.15], [139.15, 164.15]],
+    "b_note": "b positioned after drawing so that the right end of its direct-label stack sits at right_x (measured shift -1.85 mm)",
+    "c_x": [16, 112.1],
+    "d_x": [126.4, 176],
+    "e_x": [16, 81.1],
+    "f_x": [95.4, 176],
+    "row_gutter_mm": 14.3,
+    "category_width_mm": 15.5,
+    "row_rule": "rows 2 and 3 share one category width u (= (right - left - gutter) / (6.2 + 3.2)); c = 6.2 u, d = 3.2 u, e = 4.2 u, f = remainder",
+    "x_label_offset_mm": {"row1": 18.5, "row2": 12.5, "row3": 19.5},
+    "x_label_offset_slide_b_mm": "slide mode only: panel b x label placed 2.8 mm below the lowest tick label (measured), so the stand-alone b crop has no gap; paper keeps row1 alignment with 'Method' of a",
+    "panel_letter_offset_mm": [4, 1]
+  },
+  "panels": {
+    "a": {
+      "source": "data/processed/v5/runs/core_v6/deltas_forcing.csv",
+      "filter": "scheme block, pair year_obs:clim, featset F8TS, methods P0 P1 Ku D0 R1(lam 0.5, catboost)",
+      "encoding": "ΔRMSE ± 95 % CI, regions offset on x (0.26), region colours, zero line; the only region legend of the figure (above axes); tick labels rotated 40°"
+    },
+    "b": {
+      "source": "data/processed/v5/runs/core_v6/summary_metrics.csv",
+      "filter": "forcing year_obs, featset F8TS, methods P0(thin grey) P1 D0 R1",
+      "encoding": "slope chart per region over random/block/year/block×year/region on one continuous axis (no axis break); values above 1.3 × max of the non-region splits (direct ML, Lena Delta, region hold-out) are drawn at the top edge as an open marker with the printed value and the line runs continuously to that marker; direct labels (two lines each) at the right end of the last subpanel in text-safe darkened method colours (WCAG ≥ 4.5:1); facet labels in neutral text_aux; where P0 = P1 (region hold-out) the two lines meet at one point (explained in the legend)"
+    },
+    "c": {
+      "source": ["data/processed/v5/runs/modis_v6/deltas_vs_ref.csv", "data/processed/v5/runs/featsets_v6/deltas_vs_ref.csv"],
+      "filter": "scheme block, forcing year_obs, ref P1, R1 lam 0.5; modis_v6 preferred; featsets F8 F8T F8TS F8TS_M F8TS_X F8TS_ALL",
+      "encoding": "ΔRMSE ± CI, lines within region, region colours"
+    },
+    "d": {
+      "source": "data/processed/v5/runs/core_v6/conditions_tdd.csv",
+      "filter": "scheme block, forcing year_obs, F8TS, R1 lam 0.5; tdd_bin 0/1/2 = cold/mid/warm",
+      "encoding": "ΔRMSE ± CI, lines within region"
+    },
+    "e": {
+      "source": "data/processed/v5/runs/core_v6/deltas_vs_ref.csv",
+      "filter": "scheme block, forcing year_obs, F8TS, ref P1, catboost; methods D0 (direct ML), F1 (physics-input ML), D1 (physics pseudo-labels), R1 lam 0.5 (physics + residual ML)",
+      "encoding": "ΔRMSE ± CI vs recalibrated Stefan, regions offset, region colours, zero line; pseudo-label result ≈ 0 is visible against the zero line"
+    },
+    "f": {
+      "source": ["data/processed/v5/runs/core_v6/deltas_vs_ref.csv", "data/processed/v5/runs/rf_v6/deltas_vs_ref.csv", "data/processed/v5/runs/nn_v6/deltas_vs_ref.csv"],
+      "filter": "scheme block, forcing year_obs, F8TS, ref P1; R1 lam 0.5 filled, D0 open; learners catboost rf mlp tabm ftt",
+      "encoding": "R1 filled, D0 open markers of the same region colour; the only marker legend of the figure (above axes)"
+    }
+  },
+  "shared": {
+    "y_label_c_e": "ΔRMSE vs recalibrated\\nStefan (cm) (on c and e; slide crops d, f carry 'ΔRMSE (cm)')",
+    "y_range_cd": "all CIs of c and d with 5 % pad, nothing clipped, no printed numbers = [-13.3, 15.51] (measured)",
+    "y_range_ef": "all CIs of e and f with 5 % pad = [-13.12, 4.27] (measured)",
+    "y_ticks": "MultipleLocator(4), one locator per axis",
+    "legends": "region legend once (a), marker legend once (f: filled = physics + residual ML, open = direct ML); b uses direct end labels in method colours, no boxed legend",
+    "colours": "S.REGION_HEX, S.METHOD_HEX (design/style_tokens_v4.json)"
+  },
+  "exports": [
+    "outputs/figures/paper/v7/F4_results_core.{pdf,svg,png}",
+    "outputs/figures/paper/v7/slide/F4_results_core.png",
+    "outputs/figures/paper/v7/slide/F4_results_core__{a,b,c,d,e,f,cd,ef}.png",
+    "outputs/figures/paper/v7/deck/F4_results_core__deck_R01.png",
+    "outputs/figures/paper/v7/deck/F4_results_core__deck_R02.png",
+    "outputs/figures/paper/v7/deck/F4_results_core__deck_R03.png",
+    "outputs/figures/paper/v7/deck/F4_results_core__deck_R03b.png"
+  ],
+  "used_by": {
+    "deck_spec_v8": "R01 ← deck_R01 (fallback __a), R02 ← deck_R02 (fallback __b), R03 ← deck_R03 (fallback __cd), R03b ← deck_R03b (fallback __ef); C01 columns use __a and __c, C02 uses __b",
+    "pages_index": "deck/render/v7_pages_index.md page-12 (R03, __cd) and page-13 (R03b, __ef)",
+    "manuscript_legend": "paper/manuscript/en_v6/sections/legends.tex, v7 block (\\ifdefined\\vsevenfigs), Figure 4 a–f"
+  },
+  "run": "OMP_NUM_THREADS=2 nice -n 10 python3 scripts/4_visualization/v7_f4_results_core.py [--slide | --deck]  (CPU only; no CUDA, no soffice)",
+  "export": "paper: fixed canvas 180 x 199 mm (no bbox tight; margins left 4.1, right 4.0, bottom 2.6, top 2.6 mm, measured); slide: S.export (tight bbox) + panel crops",
+  "caption_notes_en": [
+    "a: region legend applies to a and c–f",
+    "b: lines are coloured by method, not by region; at region hold-out recalibrated Stefan has no in-region data to recalibrate and reverts to the source coefficients, so the two Stefan lines meet; open marker with number = value beyond axis range (direct ML, Lena Delta, region hold-out; value from numbers.tex \\nrmseLeregDz)",
+    "e: physics pseudo-labels ≈ 0 at full labels (reproduce the physical model without adding to it; \\ndrefLeblkDo, \\ndrefCablkDo, \\ndrefAkblkDo); only the residual structure lowers RMSE in the Lena Delta and Canada",
+    "f: RF = random forest; MLP = multilayer perceptron; TabM = tabular ensemble MLP; FT-T = feature-tokenizer transformer"
+  ],
+  "deck": {
+    "run": "OMP_NUM_THREADS=2 nice -n 10 python3 scripts/4_visualization/v7_f4_results_core.py --deck",
+    "canvas_in": [12.0, 5.1],
+    "dpi": 300,
+    "pixels": [3600, 1530],
+    "mode": "RGB, white background, no bbox tight (fig.set_size_inches with +1e-9 in so int(w*dpi) = 3600)",
+    "fonts_pt": {"axis_label": 14, "tick": 12, "direct_label": 13, "legend": 13, "panel_letter": "14 bold (only when ≥ 2 panels on the slide)"},
+    "lines_pt": {"data": 2.2, "aux": 1.4, "ci_bar": 2.4, "ci_bar_direct_ml": 1.4, "marker": 7.0, "zero_line": 1.0},
+    "layout_in": {"axes_bottom": 0.88, "x_label_below_axes": 0.6, "note": "two-line horizontal tick labels (12 pt) on every slide; ink fills ≥ 95 % of height and ≥ 96 % of width (measured)"},
+    "slides": {
+      "R01": "panel a alone, axes 1.02–11.88 in × 0.88–4.98 in; methods spread along x (region offset 0.30), two-line horizontal method labels, region legend inside upper-left, y headroom 24 % of span; no panel letter",
+      "R02": "panel b three slope subpanels (0.84 in left, 1.12 in right for direct labels, 0.50 in gaps); y label once (left), direct labels once (right of last subpanel); no axis break: the Lena Delta direct-ML region value is drawn at the top edge as an open marker with the printed value, line continuous to it; integer ticks (MaxNLocator 7, steps 1·2·5); no panel letter",
+      "R03": "panels c, d (category width shared) with letters a b; region legend above c; common y range over all CIs of c–d, nothing clipped, no printed numbers",
+      "R03b": "panels e, f (category width shared) with letters a b; region legend above e, marker legend above f (filled = physics + residual ML, open = direct ML); common y range over all CIs of e–f"
+    },
+    "exports": [
+      "outputs/figures/paper/v7/deck/F4_results_core__deck_R01.png",
+      "outputs/figures/paper/v7/deck/F4_results_core__deck_R02.png",
+      "outputs/figures/paper/v7/deck/F4_results_core__deck_R03.png",
+      "outputs/figures/paper/v7/deck/F4_results_core__deck_R03b.png"
+    ]
+  },
+  "qa": {
+    "paper": "PNG inspected at full size: no overlaps or clipping; legends do not cover data; b clipped value printed once (Lena Delta); c–f CIs fully inside the axes",
+    "slide": "crops a, b, c, d, e, f, cd, ef inspected; b crop gap between tick labels and 'Validation split' removed (2.8 mm)",
+    "deck": "R01–R03b 3600 × 1530 px, ink fill ≥ 95 % height, ≥ 96 % width (printed by save_deck)"
+  },
+  "revision": "2026-10-14 review fixes: common right boundary of rows, fixed-canvas export, text-safe label colours, tighter c–e range with clipped values, slide-only y labels, integer ticks, symmetric 4 mm margins | 2026-10-14 (evening) deck mode: panel drawers factored into draw_a…draw_f shared by paper/slide/deck; P0 ring markers in b removed | 2026-10-15 revision v8: b without axis break (clipped open marker + value, continuous line); new panel e (model structure D0/F1/D1/R1 − P1); legends reduced to one region legend (a) and one marker legend (f); rows c·d and e·f with un-clipped CI ranges (no printed CI numbers); deck R03 = c·d, R03b = e·f; canvas 180 × 199 mm | 2026-10-15 review fixes: pages index and deck_spec fallbacks → __cd / __ef, R03b page added; v7 Figure 4 legend (a–f) written in legends.tex; slide-mode b x-label measured (no gap in the b crop)"
+}

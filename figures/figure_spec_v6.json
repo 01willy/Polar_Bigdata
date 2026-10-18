@@ -1,0 +1,29 @@
+{
+ "meta": {"version": "v6", "date": "2026-10-14", "target": "Scientific Reports 본문 그림 6 + SI", "style": "design/style_tokens_v4.json, src/polar/style_v5.py; Helvetica 계열 7 pt, 선 0.6/1.2 pt, 색 지각 균일(oslo_r·broc·acton), 범례 상자 대신 직접 라벨, 패널 문자 소문자 굵게",
+          "principles": ["그림 하나 = 메시지 하나, 다패널은 같은 질문의 다른 면", "모든 지도에 연도·강제력·투영·축척·컬러바 단위", "불확실성·신뢰구간을 항상 함께", "AI 생성 도식 금지. 개념 패널은 실제 관측 자료 위에 직접 라벨"],
+          "export": "outputs/figures/paper/v6/<stem>.{pdf,svg,png600}, slide/<stem>.png(300 dpi, 12 in)", "script": "scripts/4_visualization/v6_figs.py, v6_maps.py"},
+ "main": {
+  "F1_study_area": {"message": "세 지역의 관측은 장소와 해가 고르지 않고, 입력은 그 해 강제력으로 맞춘다", "width": "double", "height_mm": 120,
+    "panels": {"a": "북극 투영 지도: ESA CCI 영구동토 확률(1997–2021 평균) 바탕, 세 지역 상자, 지역별 셀 수", "b–d": "지역 확대(알래스카·레나·캐나다): 1 km 라벨 셀 밀도, 다년 관측 지점 표시(별표), 축척",
+               "e": "지역별 셀-연도 수 × 연도(막대)와 관측 월 분포", "f": "입력·제품 기간 띠(라벨, ERA5-Land 연별, MODIS, 제품 6종)"},
+    "data": ["labels_cell_year_v5.csv", "cci_pfr_mean_1997_2021.nc", "registry"]},
+  "F2_thaw_and_design": {"message": "관측된 융해 깊이는 관측일까지의 융해 도일 제곱근에 비례하며, 이 연구는 그 관계를 셀-연도 단위로 평가한다", "width": "double", "height_mm": 95,
+    "panels": {"a": "실제 관측: 레나·알래스카 지점의 계절 안 융해 깊이(6–10월) 대 관측일 누적 TDD, Stefan 적합선(실자료)", "b": "같은 셀의 여러 해 관측(다년 지점)에서 관측 ALT 대 연도별 √TDD: 해마다의 변동을 보여 주는 실자료",
+               "c": "검증 사다리 도식: 실제 알래스카 셀 지도 위에 블록 겹 색과 연도 겹을 겹쳐 그린 작은 지도 세 장(무작위·블록·연도)", "d": "방법 사다리: 물리식 → 물리 잔차 결합의 입력·출력을 실제 한 셀의 값으로 보인 수치 띠"},
+    "data": ["ABoVE raw dates", "ALLENA raw dates", "forcing_year tdd_cum", "labels"]},
+  "F3_time_and_validation": {"message": "그 해 강제력은 라벨이 여러 해에 퍼진 지역에서 오차를 줄이고, 검증 설계가 방법 순위를 바꾼다", "width": "double", "height_mm": 110,
+    "panels": {"a": "관측일 정합 − 기후값 ΔRMSE(방법 × 지역, 블록 CV)", "b": "검증 사다리 5단 × 방법 RMSE(세 지역, 선·점), 물리식 안정·직접 학습 붕괴", "c": "다년 셀의 연도 간 변화 Δpred 대 Δobs 산점(세 지역, 상관 표기)", "d": "연도별 편향(세 지역, 캠페인 구성 표시)"},
+    "data": ["runs/core_v6"]},
+  "F4_gain_and_products": {"message": "물리 잔차 결합의 이득은 지형·토양 입력이 있을 때 레나·캐나다에서 생기고, 같은 셀·같은 해에서 기존 제품보다 낮다", "width": "double", "height_mm": 110,
+    "panels": {"a": "공변량 사다리 × 지역 ΔRMSE(R1 − P1)", "b": "TDD 3분위 × 지역", "c": "공통 셀 RMSE: 우리(P1·R1·D0) 대 제품 6종, 누설 마스크 표시", "d": "관측 대 예측 산점 밀도(세 지역, R1), 1:1 선, 제품 하나(Wei) 대비 잔차 분포"},
+    "data": ["runs/core_v6", "products_cell_year_v5", "common_cells_eval"]},
+  "F5_site_series": {"message": "장기 관측 지점에서 연도별 예측은 해마다 안정적이고 관측의 연간 변동 일부를 따라간다", "width": "double", "height_mm": 120,
+    "panels": {"a–f": "지역별 대표 다년 지점 2곳씩(알래스카 CALM 2, 레나 2, 캐나다 2): 2010–2024 관측(점)·P1·R1(선)·제품(Wei·Liu·CCI, 얇은 선), 관측일 TDD 표시", "g": "전 다년 지점의 연도별 예측 변동 폭 대 관측 변동 폭(안정성)", "h": "다년 지점 위치 지도(작은)"},
+    "data": ["site_series_year_obs.csv.gz", "products_cell_year_v5"]},
+  "F6_maps": {"message": "연도를 명시한 1 km 지도: 해마다 다른 활동층 두께와 그 신뢰 범위", "width": "double", "height_mm": 170,
+    "panels": {"a": "알래스카 2011–2024 평균 ALT(지형 음영 드레이프, 250 m 바탕)", "b": "2014 − 평균, c: 2022 − 평균(발산 색)", "d": "확대 창 2곳(북극 해안 평원·페어뱅크스 인근) 1 km 상세 + 관측 셀", "e": "예측 구간 반폭과 적용 가능 영역", "f": "레나 델타 2016 ALT(음영 드레이프) + 확대 창"},
+    "data": ["v5/maps(core_v6)", "hillshade_v1 shade_250m", "labels"]}
+ },
+ "si": {"S1_robustness": "분할 씨앗·블록 크기·λ·가중·새 물리식(현 Fig 9)", "S2_learners": "학습기 5종 × 지역 × 입력", "S3_products_pairwise": "제품별 짝지은 차이와 편향(현 Fig 5)", "S4_year_bias_all": "지역별 연도 편향과 캠페인 구성 표", "S5_alaska_years": "알래스카 연도별 지도 4장(현 Fig 6)", "S6_aoa_lena": "AOA·보정량·레나(현 Fig 7)", "S7_modis": "MODIS 입력 추가 효과"},
+ "tables": {"T1": "자료·입력 요약(지역·셀-연도·연도·출처·강제력·입력·제품)", "T2": "방법 × 검증 단 RMSE(연도 정합), SI 로 보내도 됨"}
+}

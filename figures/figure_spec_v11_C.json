@@ -1,0 +1,169 @@
+{
+ "spec_meta": {
+  "version": "v11 role C",
+  "date": "2026-10-16",
+  "plan": "docs/PAPER_PLAN_v11_2026-10-16.md (section 3 rows Fig. 1, 5, 6, 7 and Supplementary list; section 4 style)",
+  "scripts": "scripts/4_visualization/paper_v11/{c11_common,c11_maps,fig1_data,fig5_products,fig6_product_maps,fig7_maps,si_s04_external,si_s05_training_sites,si_s06_product_anchor,si_s07_map_detail,si_s08_correction_maps,si_s09_site_series}.py; run_c11.sh",
+  "medium": "Scientific Reports, 180 mm double-column width, fixed canvas (no bbox cropping), PDF + SVG (main) / PDF (SI) vector text, PNG 600 dpi",
+  "style": {
+   "palette": "design/style_tokens_v4.json color.paper_v11 via POLAR_PALETTE=paper11 (methods: Physics + residual ML #D1603D, Stefan recalibrated #2E6DA4, Direct ML #8E5B9E; products: Wei 2026 #5B8C5A, Liu 2024 #B65A72, ESA CCI v4 #A07D4A, ESA CCI v5 #C4A869, Aalto #8273A6, Yi–Kimball #7E8F3C; regions: Alaska #3B3B8F circle, Lena Delta #4A90C2 square, Canada #3A9384 triangle)",
+   "text": "FreeSans 6–7 pt (#262626), panel letters 8 pt bold, axes #404040 0.5 pt, grid #E8E8E8, data lines 0.6–0.9 pt, markers 2.1–3.4 pt",
+   "maps": "ALT cmcrameri oslo_r section 0.16–0.88; anomaly/correction cmcrameri vik symmetric; land not mapped #DDDDDD; water #EEF3F7; outside the area of applicability = colours blended 40 % towards the land grey (key: faded colour ramp)",
+   "rules": "keys and legends inside the figure; no titles or sentences in panels; values beyond an axis drawn at the axis end and printed"
+  }
+ },
+ "figures": {
+  "Fig1_data": {
+   "message": "Where the ALT labels are, how many cell-years each observation year holds, and which years every label set, input and product covers.",
+   "layout": "row 1: a polar map (region boxes in region colours, labels with leaders, vertical colour bar) | b three stacked bar panels (region colours); row 2: c full-width data-period chart with key above. Panel d of v10 removed (cumulative TDD moved to Fig. 2).",
+   "size_mm": [
+    180.0,
+    106.0
+   ],
+   "source_data": "outputs/figures/paper/v11/source_data/Fig1_data.json",
+   "exports": [
+    "outputs/figures/paper/v11/Fig1_data.pdf",
+    "outputs/figures/paper/v11/Fig1_data.svg",
+    "outputs/figures/paper/v11/Fig1_data.png"
+   ]
+  },
+  "Fig5_products": {
+   "message": "RMSE of our three methods and five ALT products on the same cell-years per region (all cells and cells > 25 km from Wei 2026 training sites), and RMSE by observation year.",
+   "layout": "a three region panels of RMSE dots (filled all, open > 25 km from Wei training sites); b three yearly RMSE panels with log n strips",
+   "size_mm": [
+    180.0,
+    106.0
+   ],
+   "source_data": "outputs/figures/paper/v11/source_data/Fig5_products.json",
+   "exports": [
+    "outputs/figures/paper/v11/Fig5_products.pdf",
+    "outputs/figures/paper/v11/Fig5_products.svg",
+    "outputs/figures/paper/v11/Fig5_products.png"
+   ]
+  },
+  "Fig6_product_maps": {
+   "message": "Our map and the Wei 2026 and Liu 2024 maps of the same year on one colour range, and the error at the observed cells of that year (ours = spatial-block out-of-fold): RMSE 17.1 / 15.8 / 16.4 cm in Alaska 2014 (95 cells) and 12.7 / 26.2 / 30.4 cm in the Lena Delta 2016 (14 cells).",
+   "layout": "two rows (Alaska 2014, Lena Delta 2016): three maps on one colour range (ours, Wei 2026, Liu 2024) + error beeswarm (predicted − observed per 1 km cell; ours = spatial-block out-of-fold) with RMSE above each column",
+   "size_mm": [
+    180.0,
+    114.6
+   ],
+   "source_data": "outputs/figures/paper/v11/source_data/Fig6_product_maps.json",
+   "exports": [
+    "outputs/figures/paper/v11/Fig6_product_maps.pdf",
+    "outputs/figures/paper/v11/Fig6_product_maps.svg",
+    "outputs/figures/paper/v11/Fig6_product_maps.png"
+   ]
+  },
+  "Fig7_maps": {
+   "message": "Year-labelled 1 km ALT maps 2011–2024: the Alaska mean, the yearly anomalies from that mean, and the regional mean anomalies of Alaska and the Lena Delta next to the observed-cell anomalies.",
+   "layout": "a Alaska mean 2011–2024 (large) | b 14 yearly anomaly maps (4 × 4 grid, colour bar in the free slots); c regional anomaly series (Alaska, Lena Delta; region colours) with observed-cell means",
+   "size_mm": [
+    180.0,
+    137.1
+   ],
+   "source_data": "outputs/figures/paper/v11/source_data/Fig7_maps.json",
+   "exports": [
+    "outputs/figures/paper/v11/Fig7_maps.pdf",
+    "outputs/figures/paper/v11/Fig7_maps.svg",
+    "outputs/figures/paper/v11/Fig7_maps.png"
+   ]
+  }
+ },
+ "si_items": {
+  "S4": {
+   "stem": "FigS4_external",
+   "title": "External CALM regions without local labels and adaptation by sub-region",
+   "script": "scripts/4_visualization/paper_v11/si_s04_external.py",
+   "v10_number": "S5 (scripts/4_visualization/paper_v10/si_s05_external.py)",
+   "size_mm": [
+    180.0,
+    80.0
+   ],
+   "legend_draft": "Fig. S4 | External CALM regions without local labels. a, external CALM sites (numbered sub-regions) and the three training regions. b, RMSE per sub-region without local labels for Physics + residual ML (source regions only, and with Stefan recalibrated locally) and three products. c, Physics + residual ML with 0 and 5 local labels and ESA CCI v5 on the same rows.",
+   "exports": [
+    "outputs/figures/paper/v11_si/FigS4_external.pdf",
+    "outputs/figures/paper/v11_si/FigS4_external.png"
+   ]
+  },
+  "S5": {
+   "stem": "FigS5_training_sites",
+   "title": "Product training-site distances and latitude-band bias",
+   "script": "scripts/4_visualization/paper_v11/si_s05_training_sites.py",
+   "v10_number": "S10 (scripts/4_visualization/paper_v10/si_s10_training_sites.py)",
+   "size_mm": [
+    180.0,
+    86.0
+   ],
+   "legend_draft": "Fig. S5 | Distance to product training sites and latitude-band differences. a, Wei 2026 training sites and the label cells of the three regions. b, cumulative share of label cells against the distance to the nearest Wei 2026 training site (dashed line: 25 km). c, Alaska 2014: mean difference between product and our map by latitude band and elevation class.",
+   "exports": [
+    "outputs/figures/paper/v11_si/FigS5_training_sites.pdf",
+    "outputs/figures/paper/v11_si/FigS5_training_sites.png"
+   ]
+  },
+  "S6": {
+   "stem": "FigS6_product_anchor",
+   "title": "Product-anchored residual learning",
+   "script": "scripts/4_visualization/paper_v11/si_s06_product_anchor.py",
+   "v10_number": "S4 (scripts/4_visualization/paper_v10/si_s04_product_anchor.py)",
+   "size_mm": [
+    180.0,
+    47.0
+   ],
+   "legend_draft": "Fig. S6 | Product-anchored residual learning. RMSE on the same cell-years (label cell-years with a Wei 2026 value of the observation year; spatial-block cross-validation) for Wei 2026 as published, recalibrated, and with a residual learner, compared with Stefan (recalibrated) and Physics + residual ML, per region.",
+   "exports": [
+    "outputs/figures/paper/v11_si/FigS6_product_anchor.pdf",
+    "outputs/figures/paper/v11_si/FigS6_product_anchor.png"
+   ]
+  },
+  "S7": {
+   "stem": "FigS7_map_detail",
+   "title": "1 km detail, area of applicability and the Lena Delta 2016 map",
+   "script": "scripts/4_visualization/paper_v11/si_s07_map_detail.py",
+   "v10_number": "S9 (scripts/4_visualization/paper_v10/si_s09_map_detail.py)",
+   "size_mm": [
+    180.0,
+    144.6
+   ],
+   "legend_draft": "Fig. S7 | 1 km detail and area of applicability. a, b, Alaska mean ALT 2011–2024 in two 50 km windows (North Slope near Toolik; Interior near Fairbanks) drawn as 1 km cells. c, area of applicability of the Alaska map with the two windows. d, Lena Delta ALT 2016. e, Samoylov–Kurungnakh window (24 km).",
+   "exports": [
+    "outputs/figures/paper/v11_si/FigS7_map_detail.pdf",
+    "outputs/figures/paper/v11_si/FigS7_map_detail.png"
+   ]
+  },
+  "S8": {
+   "stem": "FigS8_correction_maps",
+   "title": "Residual ML correction maps",
+   "script": "scripts/4_visualization/paper_v11/si_s08_correction_maps.py",
+   "v10_number": "S7 (S7 part of scripts/4_visualization/paper_v10/si_s06_s07_product_maps.py)",
+   "size_mm": [
+    180.0,
+    85.8
+   ],
+   "legend_draft": "Fig. S8 | Residual ML correction. Physics + residual ML minus Stefan (recalibrated) per 1 km cell: a, Alaska, mean of the yearly maps 2011–2024; b, Lena Delta, 2016. Negative values: the residual learner lowers the Stefan estimate.",
+   "exports": [
+    "outputs/figures/paper/v11_si/FigS8_correction_maps.pdf",
+    "outputs/figures/paper/v11_si/FigS8_correction_maps.png"
+   ]
+  },
+  "S9": {
+   "stem": "FigS9_site_series",
+   "title": "Long-record sites",
+   "script": "scripts/4_visualization/paper_v11/si_s09_site_series.py",
+   "v10_number": "S8 (scripts/4_visualization/paper_v10/si_s08_site_series.py)",
+   "size_mm": [
+    180.0,
+    66.0
+   ],
+   "legend_draft": "Fig. S9 | Long-record sites. Observed ALT and spatial-block cross-validated predictions 2010–2024 at the label cell with the most observed years in Alaska (a) and the Lena Delta (b): Physics + residual ML at the observation day and at the end of the season, Stefan (recalibrated) at the end of the season, and the Wei 2026 and Liu 2024 values of each year where available.",
+   "exports": [
+    "outputs/figures/paper/v11_si/FigS9_site_series.pdf",
+    "outputs/figures/paper/v11_si/FigS9_site_series.png"
+   ]
+  }
+ },
+ "qa_checklist": [
+  "automatic: every text >= 6 pt, FreeSans only, text colour #262626 (grey #6B6B6B only for the out-of-range values of Fig. 6d), no text outside the canvas, no text-text overlap, no in-axes text over data ink (plots); pdffonts: FreeSans embedded",
+  "visual: every PNG opened and inspected after each change (crowding, colour legibility, map land vs near-zero anomaly, keys inside the figure)"
+ ]
+}

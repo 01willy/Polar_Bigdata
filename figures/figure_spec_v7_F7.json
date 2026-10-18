@@ -1,0 +1,26 @@
+{
+  "figure": "F7_series_significance",
+  "version": "v7",
+  "date": "2026-10-14",
+  "script": "scripts/4_visualization/v7_f7_series_significance.py",
+  "run": "OMP_NUM_THREADS=2 nice -n 10 python3 scripts/4_visualization/v7_f7_series_significance.py [--slide]  (CPU only)",
+  "size_mm": [180, 168],
+  "message": "연도별 1 km ALT 지도 시리즈(알래스카)와 그 지역 평균의 연도 편차가 관측 셀 평균을 따르는지, 제품 학습 지점 밖 공통 셀에서 최선 제품 대비 정확도, 적용 범위·구간 폭",
+  "panels": {
+    "a": {"content": "Alaska ALT 2011–2024, 2 × 7 small multiples, same colour range (MV.pct_range over all years, oslo_r), year label top-left, observed cells of that year (black dots), outside-AOA cells faded, shared horizontal colorbar 'ALT (cm)', 200 km scale bar on 2011, graticule labels on left column and bottom row",
+          "data": ["data/processed/v5/maps/Alaska/pred_<year>.csv.gz (cell_id, lat, lon, r1)", "data/processed/v5/maps/Alaska/mean_2011_2024.csv.gz (aoa_in)", "data/processed/v5/labels_cell_year_v5.csv (in_forcing==1)"],
+          "render": "cells binned to a 0.045° × 0.02° lon/lat raster (mean r1, mean aoa_in), imshow in PlateCarree with aspect 1/cos(65°); Natural Earth 50m land/coastline (cartopy shapereader)",
+          "cache": "outputs/figures/paper/v7/_cache/f7_alaska_600x605.npz"},
+    "b": {"content": "regional mean predicted ALT anomaly per year (line, all mapped cells, vs 2011–2024 mean) for Alaska and Lena Delta; open circles = observed cell means for years with ≥ 50 cell-years",
+          "observed_definition": "per cell-year (observed − mapped 2011–2024 mean at the nearest cell, ≤ 1.5 km), averaged per year, then centred to the predicted anomaly mean over the same years (removes site composition and the observation-day offset); must be stated in the caption",
+          "data": ["maps/<Region>/pred_<year>.csv.gz", "maps/<Region>/mean_2011_2024.csv.gz", "labels_cell_year_v5.csv"]},
+    "c": {"content": "RMSE on common cells beyond 25 km from product training sites: physics + residual ML (R1 (CatBoost)) vs best published product (min RMSE over Wei 2026, Liu 2024, ESA CCI v4) per region; horizontal bars, method/product colours, values not printed",
+          "data": ["data/processed/v5/runs/core_v6/common_cells_eval.csv (mask_km == 25)"]},
+    "d": {"content": "share of mapped cells inside the area of applicability (%) and 90 % prediction-interval half-width (cm), Alaska and Lena Delta, region colours",
+          "data": ["data/processed/v5/maps/<Region>/meta.json ('aoa'.'frac_inside', 'interval'.'half_width_90')"]}
+  },
+  "slide_crops": ["a", "b", "c", "d", "ab", "cd"],
+  "exports": ["outputs/figures/paper/v7/F7_series_significance.{pdf,svg,png}", "outputs/figures/paper/v7/slide/F7_series_significance.png", "outputs/figures/paper/v7/slide/F7_series_significance__{a,b,c,d,ab,cd}.png"],
+  "style": "src/polar/style_v5.py (FreeSans 7 pt, panel letters 8 pt bold), design/style_tokens_v4.json (map_base.paper land/coast/graticule, methods.R1, products, regions)",
+  "bans_checked": ["no titles or interpretation text", "legends frameon=False", "no icons, no arrows, no rainbow colormap", "numbers only from CSV/JSON"]
+}

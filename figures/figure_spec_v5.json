@@ -1,0 +1,23 @@
+{
+ "meta": {"version": "v5", "date": "2026-10-10", "basis": "docs/RESET_2026-10-10_KOPRI_FEEDBACK.md 7절", "style": "design/style_tokens_v4.json via src/polar/style_v5.py",
+          "export": "outputs/figures/paper/v5/<stem>.{pdf,svg,png}", "width_mm": {"single": 88, "double": 180}, "script": "scripts/4_visualization/v5_figs.py"},
+ "figures": {
+  "Fig1_data_time": {"message": "라벨은 셀·연도 단위이며 지역·연도 분포가 다르다. 강제력·제품·위성 입력의 기간이 라벨 연도와 어떻게 겹치는지 한눈에 보인다",
+    "panels": {"a": "북극 투영 지도, 3지역 라벨 셀(지역 색)", "b": "지역별 연도별 셀-연도 수(2010–2024, 막대, 지역마다 축 독립)",
+               "c": "입력·제품 기간 띠(1995–2025): 라벨, ERA5-Land 강제력, MODIS, SAR, 제품 6종, 정적 입력"},
+    "data": ["data/processed/v5/labels_cell_year_v5.csv", "docs/INPUT_REGISTRY_v5.md"], "width": "double", "height_mm": 95},
+  "Fig2_forcing_effect": {"message": "연도 정합 강제력이 기후값 강제력에 비해 오차·편향·연간 편차 재현을 얼마나 바꾸는가",
+    "panels": {"a": "방법 × 지역 짝지은 ΔRMSE(year − clim), 블록 CV", "b": "같은 것, 연도 홀드아웃", "c": "연간 편차 상관 r_anom(year 대 clim)"},
+    "data": ["data/processed/v5/runs/core_cb/deltas_forcing.csv", "summary_metrics.csv"], "width": "double", "height_mm": 70},
+  "Fig3_method_ladder": {"message": "검증 설계에 따라 방법 순위와 격차가 달라진다", "panels": {"a-c": "지역별 패널: 검증 단(x) × 방법(색) RMSE 점·블록 부트스트랩 CI, 연도 정합 강제력"},
+    "data": ["summary_metrics.csv", "deltas_vs_ref.csv"], "width": "double", "height_mm": 75},
+  "Fig4_conditions": {"message": "잔차 결합의 이득은 기후 레짐·공변량 집합·학습기에 따라 달라진다",
+    "panels": {"a": "TDD 구간별 ΔRMSE(R1 − P1)", "b": "공변량 집합별 ΔRMSE", "c": "학습기별 ΔRMSE"}, "data": ["runs/core_cb", "runs/core_nn", "runs/featsets"], "width": "double", "height_mm": 70},
+  "Fig5_products": {"message": "같은 셀·같은 해에서 기존 제품보다 오차가 작고 편향이 없다", "panels": {"a": "지역별 제품·우리 방법 RMSE·편향 점", "b": "연도별 편향 선(알래스카)", "c": "산점(우리 R1 대 Wei)"},
+    "data": ["data/processed/v5/products_cell_year_v5.csv", "runs/core_cb/preds"], "width": "double", "height_mm": 75},
+  "Fig6_maps_alaska": {"message": "연도를 명시한 ALT 지도와 다년 평균·편차", "panels": {"a-d": "2014·2016·2018·2022 ALT(강제력 명시)", "e": "2011–2024 평균", "f": "선택 연도 편차"},
+    "data": ["data/processed/v5/grid/alaska_forcing_year.csv", "maps/alaska_pred_v5"], "colormap": "alt_sequential(청색), difference_diverging(남색–흰–올리브)", "width": "double", "height_mm": 120},
+  "Fig7_uncertainty_lena": {"message": "예측 구간 폭과 적용 가능 영역, 레나 지도", "panels": {"a": "알래스카 구간 폭", "b": "AOA", "c-d": "레나 연도 지도·편차"}, "width": "double", "height_mm": 100}
+ },
+ "tables": {"Table1_inputs": "docs/INPUT_REGISTRY_v5.md 2–7절 요약", "Table2_methods": "방법 × 검증 단 RMSE(연도 정합), summary_metrics.csv"}
+}

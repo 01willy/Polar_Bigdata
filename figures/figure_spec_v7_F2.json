@@ -1,0 +1,113 @@
+{
+ "meta": {
+  "version": "v8",
+  "date": "2026-10-15",
+  "figure": "F2_problem_time",
+  "script": "scripts/4_visualization/v7_f2_problem_time.py",
+  "contract": "docs/FIGURE_CONTRACT_v7.md, docs/DESIGN_BRIEF_v8_2026-10-15.md (항 6)",
+  "export": "outputs/figures/paper/v7/F2_problem_time.{pdf,svg,png}, slide/F2_problem_time.png, slide/F2_problem_time__{a,b,c,d,ab,cd}.png, deck/F2_problem_time__deck_{N02,N04}.png",
+  "source_data": "outputs/figures/paper/v7/source_data/F2_problem_time.json (논문판), F2_problem_time__slide.json (슬라이드판), F2_problem_time__deck.json (덱)",
+  "run": "OMP_NUM_THREADS=2 nice -n 10 python3 scripts/4_visualization/v7_f2_problem_time.py [--slide | --deck]  (CPU 만)",
+  "revision": "2026-10-15 설계 지침 v8 항 6: a 삽도 → a1·a2 분리, a2 오른쪽 전체 축(진회색), b 관측 열쇠에 연도 수·CCI 점선, c 띠(alpha 0.2)+작은 점, d 셀 안 편차 밀도 + 지역 회귀선. 덱 N02 = a1 | a2 | b 한 줄. 개정 2(10-15 검토 반영): b 계열 끝점 표식 + 끝점 옆 라벨(자동 배치, ≥ 5.5 pt), a1 라벨 간격 5.5 pt(점 단위), a2 막대 지역 색 원색 + 기후값 파선 흰 테두리, d 캡션에 축 밖 셀-연도 수, PDF 쪽 크기 기록, b y 상한을 열쇠 아래 자료가 겹치지 않게 잰 값으로"
+ },
+ "message": "입력 강제력은 '그 해, 관측일까지' 정의해야 하며(제품은 연도 정보가 없다), 융해 깊이는 관측일까지 누적 TDD 의 제곱근에 비례한다(Stefan)",
+ "size_mm": [
+  180,
+  125
+ ],
+ "layout": "축 위치를 mm 로 직접 지정(_ax): 위 줄 a1 x 11–35 · a2 x 49–103 · b x 127–167, 아래 줄 c x 11–82 · d x 107–178, 높이 45 mm",
+ "panels": {
+  "a1": {
+   "content": "선택 셀의 2014 일별 누적 TDD(tdd_cum_1..12 선형 보간) 곡선, 관측일 세로 점선·빈 원 표식, '관측일까지'(c_obs)·'연간'(c_full) 수평 점선. 라벨 'full year'(선 위 5.5 pt, 왼쪽), 'to observation\\nday'(선 아래 5.5 pt, 왼쪽 두 줄; 변위는 점 단위 offset_copy 라 판·배율에 무관, qa.a1_clearance_pt), '1 Sep'(세로선 오른쪽). x 축 라벨 = 연도(2014), 월 눈금 Jan/Apr/Jul/Oct. 삽도 아님(a2 와 겹침 0)",
+   "cell_rule": "관측 연도 수 최대(15년, 동률 16셀) → 관측일까지 누적 TDD 비율 중앙값 최소 → loc_id 오름차순. 선택 loc_id 14268(71.3°N 156.6°W, CALM). CALM 은 관측일이 없어 파이프라인 규약(9월 1일, testbed_v5.with_forcing)으로 표시",
+   "data": [
+    "labels_cell_year_v5.csv",
+    "forcing_year.csv"
+   ]
+  },
+  "a2": {
+   "content": "같은 셀의 연도별 TDD 막대(관측 해 = 알래스카 지역 색 원색 #332288, F1 e·F7 의 지역 막대와 같은 채움·alpha 없음; 관측 없는 해 = no_data 회색; 이 셀은 15년 모두 관측), 2011–2024 기후값 파선(forcing_clim.clim1124_tdd, 진회색 + 흰 테두리 2.0 × 선 폭이라 막대 위에서도 읽힌다) + 'climatological forcing' 라벨(막대·원과 겹치지 않는 가장 낮은 창을 자동 탐색, 축 안으로 제한), 관측 ALT = 검은 빈 원(오른쪽 축). 오른쪽 축은 패널 바닥부터 꼭대기까지 전체 길이, spine·눈금·눈금 글자·축 라벨 'Observed ALT (cm)' 모두 진회색(neutral.zero_line). 원 띠는 패널 높이의 0.56–0.92 에 들도록 축 범위를 잡는다(막대 위). 좌표 라벨은 왼쪽 위",
+   "data": [
+    "labels_cell_year_v5.csv",
+    "forcing_year.csv",
+    "forcing_clim.csv"
+   ]
+  },
+  "b": {
+   "content": "레나 장기 지점의 관측 ALT(검은 빈 원)와 Wei 2026(실선)·Liu 2024(파선, 토큰)·ESA CCI v5(점선)의 연도 값(제품 색 = style_v5.PRODUCT_HEX). 각 계열의 마지막 자료 연도에 제품 색 속찬 점(END_MS 2.2 pt × K.ms, 관측 원 3.0 보다 작다): 끝 연도 Wei 2026 2024, Liu 2024 2020, ESA CCI v5 2023 가 그림에서 바로 보인다. 직접 라벨은 그 끝점 옆에 자동 배치(_place_end_labels: 후보 오른쪽 → 왼쪽 위 → 오른쪽 위 → 위 → 아래쪽, 변위 4·6·8·11·15 pt; 다른 선·끝점·관측 원·좌표 라벨·열쇠·먼저 놓은 라벨과 ≥ K.lab_gap_pt(논문 5.5, 덱 7.0) 떨어지고 그림 오른쪽 가장자리 안). 논문판 배치: Wei 2026: left/center (+4.0, +0.0) pt, ESA CCI v5: left/center (+4.0, +0.0) pt, Liu 2024: right/bottom (-7.7, +7.7) pt. 왼쪽 위 좌표 라벨 아래 테두리 없는 열쇠 'observed ALT (this cell, N years)'(N 은 site_series 에서 센다). y 상한은 열쇠·좌표 라벨 x 범위 안의 자료 최고점(Wei 2023)이 글자 바닥에서 lab_gap_pt 아래 오도록 잰 값(논문 152.3, 덱 147.3 cm; 왼쪽 spine 은 마지막 눈금까지). 2010–2024",
+   "cell_rule": "site_series_year_obs(observed==1) 중 연도별 제품 3종이 모두 값을 가진 셀에서 관측 연도 수 최대 → loc_id 오름차순. 선택 loc_id 16271(72.3°N 126.2°E, 6년). 관측 최장 셀 14813(8년)은 Wei·Liu 화소가 결측(물 마스크, products 표 value_cm NaN)이라 제외하고 source_data b.longest_record_cell_excluded 에 기록",
+   "data": [
+    "site_series/site_series_year_obs.csv.gz",
+    "products_cell_year_v5.csv"
+   ],
+   "qa": {
+    "label_min_gap_pt": 14.67,
+    "label_min_clearance_pt": 8.96,
+    "label_right_in": 6.943,
+    "deck_label_min_clearance_pt": 12.48
+   }
+  },
+  "c": {
+   "content": "계절 안 융해 깊이(일별 평균 = 작은 반투명 점 alpha 0.75, ± 1 SD = 지점 색 띠 alpha 0.2(토큰 ci_band_alpha)) 대 √(관측일까지 누적 TDD), 사모일로프 2015(#1B86BB)·쿠룽나흐 2020(#88CCEE), 원점 통과 Stefan 적합 ALT = E√TDD. 왼쪽 위 테두리 없는 열쇠에 지점·연도와 E(단위 cm/√(°C·d)). 오차 막대 없음(논문·덱 동일)",
+   "data": [
+    "data/raw/allena/PANGAEA_973813_ALLena_main.txt",
+    "data/raw/era5land/nh_monthly_2010-2024.nc",
+    "forcing_clim.csv(격자 좌표)",
+    "static_v5.csv"
+   ]
+  },
+  "d": {
+   "content": "관측 4년 이상 셀(276셀 2,161 셀-연도)의 셀 안 편차: y = ALT − 셀 평균(cm), x = √TDD(관측일) − 셀 평균(√(°C·d)). 전체(세 지역 합) 밀도 육각 격자(gridsize 24×14, 중립 회색 순차 #E6E6E6→#2E2E2E, 로그 개수, 컬러바 'cell-years' 눈금 1·3·10·30), 축 범위 x −8..6 · y ±45(밖 46 셀-연도 = 2,161 의 2.1 % 는 그리지 않고 source_data d.n_outside_axes 에 기록; 회귀 기울기는 전체로 계산), x·y 0 기준선(연회색). 지역별 원점 통과 회귀선(편차는 셀마다 평균 0 이므로 OLS 와 같다, 각 지역 dx 1–99 백분위 범위, 흰 테두리 없음, 알래스카 맨 위). 열쇠(왼쪽 위)에 '지역, 기울기 cm per √(°C·d)'. 열쇠·컬러바는 자료 없는 위쪽 띠(y > 45, 열쇠 높이로 띠 높이 계산, 왼쪽 spine 은 ±45 까지만)에 둔다. 1:1 기준선 없음",
+   "slopes_source": "outputs/figures/paper/v7/source_data/F2_problem_time.json d_<region>.slope (Alaska 1.47, Canada −0.71, Lena 1.67)",
+   "data": [
+    "polar.testbed_v5.load_v5 + with_forcing(df, 'year_obs')"
+   ]
+  }
+ },
+ "slide_crops": [
+  "a(a1+a2+오른쪽 축)",
+  "b",
+  "c",
+  "d(+컬러바)",
+  "ab",
+  "cd"
+ ],
+ "rules_applied": [
+  "제목·해석 문장 없음",
+  "범례 상자 테두리 없음(frameon=False)",
+  "화살표 없음",
+  "글꼴 FreeSans 7 pt(최소 6 pt: a1·좌표·기후값·컬러바 라벨), 덱 12–14 pt",
+  "위·오른쪽 spine 없음(a2 의 오른쪽 축만 예외, 진회색)",
+  "모든 축에 단위, E·기울기에 단위",
+  "삽도 없음(겹침 0)",
+  "지역·제품 색 = 토큰(style_v5.REGION_HEX·PRODUCT_HEX)",
+  "직접 라벨 1–3 단어, 선 끝점 옆(좌표 라벨 '지역, 위도 경도'·열쇠 항목은 예외)",
+  "라벨–선·라벨–라벨 간격 ≥ 5.5 pt(논문)·7 pt(덱), qa 에 기록",
+  "지역 막대 채움 = 원색(F1 e·F7 과 동일, alpha 토큰 없음)"
+ ],
+ "colors": {
+  "regions": "design/style_tokens_v4.json color.regions. a2 막대는 원색(alpha 없음) = F1 e 연도별 셀-연도 막대·F7 과 같은 채움. d 회귀선도 원색",
+  "region_tints": "color.region_tints['Lena Delta'] dark #1B86BB / light #88CCEE (c)",
+  "products": "style_v5.PRODUCT_HEX: Wei #3B8B4F(실선), Liu #C9506A(파선, 토큰 line), CCI5 #B8975A(점선); 끝점 표식·직접 라벨도 같은 색 (b)",
+  "density": "d 밀도: 중립 회색 순차(#E6E6E6→#2E2E2E, LogNorm). 지역 정보는 회귀선 색"
+ },
+ "caption_notes": [
+  "a1: 관측일은 이 CALM 셀에 기록된 현장 날짜가 아니라 파이프라인 규약(9월 1일, testbed_v5.with_forcing)이다. 15개 관측 해 모두 같은 규약",
+  "a2: 막대는 ERA5-Land 연간 TDD(e5_tdd, 관측 해 = 지역 색 원색), 파선은 2011–2024 평균(climatological forcing, 흰 테두리), 원은 관측 ALT(오른쪽 축, 전체 길이)",
+  "b: 관측 6년 셀. 관측 최장 셀(8년)은 Wei·Liu 값이 없어 제외. Aalto 2018 은 연도 값이 없어 생략. 속찬 점은 각 제품의 마지막 자료 연도: Wei 2026 2010–2024, Liu 2024 2010–2020, ESA CCI v5 2010–2023",
+  "c: 점은 일별 평균 융해 깊이, 띠는 ± 1 SD(탐침 간). E 는 원점 통과 최소제곱 계수, 단위 cm/√(°C·d)",
+  "d: 알래스카 203셀 1,808 셀-연도, 레나 25셀 134, 캐나다 48셀 219. 기울기는 (ALT − 셀 평균) 을 (√TDD − 셀 평균) 에 원점 통과 회귀한 값. 캐나다 기울기는 음수(−0.71)로 자료 그대로 보인다. 축은 x −8..6 √(°C·d), y ±45 cm 로 잘라 2,161 셀-연도 중 축 밖 46개(2.1 %)는 그리지 않았다(기울기·상관은 전체로 계산)"
+ ],
+ "deck": {
+  "canvas": "슬라이드 본문 한 장 = 12.0 × 5.10 in, 300 dpi → 3600 × 1530 px, RGB 흰 바탕, bbox 자르기 없음(PIL 로 픽셀 수 검증)",
+  "slides": {
+   "N02": "a1 | a2 | b 한 줄. 축(인치) a1 x 0.76–2.66, a2 x 3.43–6.50, b x 8.05–11.03, y 0.64–4.70. 패널 문자 a(0.04 in)·b(7.08 in) y 4.86. 캔버스 사용 폭 0.973·높이 0.97",
+   "N04": "c | d. 축 c x 0.64–5.59, d x 6.98–11.85, y 0.64–4.70. 캔버스 사용 폭 0.988·높이 0.976"
+  },
+  "fonts": "토큰 font.slide: 축 라벨 14, 눈금 12, 직접 라벨 13, a1·좌표·기후값·컬러바 라벨 12, 열쇠 12, 패널 문자 14 굵게. 선 폭·표식 지름 1.8배",
+  "shared": "자료 선택·적재(load_data, pick_*)와 패널 그리기(draw_a1, draw_a2, draw_b, draw_c, draw_d)는 논문판과 같은 함수. 크기 표 K(_K_PAPER/_K_DECK)와 축 위치만 다르다",
+  "qa_record": "outputs/figures/paper/v7/source_data/F2_problem_time__deck.json (qa: a1 라벨 간격 pt, a2 기후값 라벨 위치·원 겹침 여부, b 라벨 자리·최소 간격·다른 선과의 최소 거리 pt·오른쪽 끝 in·y 상한, d 열쇠·컬러바 간격 pt, 캔버스 사용률·픽셀 수)",
+  "coverage_note": "덱에는 캡션이 없으므로 b 의 제품 적용 연도는 끝점 표식(속찬 점)과 끝점 옆 라벨로 전달한다(문장 각주 없음, 그림 안 문장 금지)"
+ },
+ "export_size_note": "저장은 bbox_inches='tight'(style_v5.export, 모든 v7 그림 공통)이라 PDF 쪽 크기는 캔버스 180 × 125 mm 보다 작다: 측정 178.7 × 120.7 mm(pdfinfo, qa.pdf_page_mm). Scientific Reports 는 폭 ≤ 180 mm 만 요구하므로 정확한 캔버스 크기는 필요 없다"
+}

@@ -148,9 +148,14 @@
         "en": "ESA CCI",
         "hex": "#9C7A3C"
       },
+      "CCI5": {
+        "en": "ESA CCI v5",
+        "hex": "#B8975A",
+        "note": "v5 는 v4(CCI)와 구분되는 밝은 황갈색. style_v5.PRODUCT_HEX['cci5y'] 와 같다"
+      },
       "Wei": {
         "en": "Wei 2026",
-        "hex": "#3E8E91"
+        "hex": "#3B8B4F"
       },
       "Aalto": {
         "en": "Aalto 2018",
@@ -159,18 +164,32 @@
       "YK": {
         "en": "Yi–Kimball",
         "hex": "#6B8E23"
+      },
+      "Liu": {
+        "en": "Liu 2024",
+        "hex": "#C9506A",
+        "line": "dashed",
+        "note": "CCI 계열과 색상이 가까워 선은 파선으로 구분한다(F2b). style_v5.PRODUCT_HEX['liu'] 와 같다"
       }
     },
+    "products_note": "2026-10-14 F5 검토 반영: Wei 2026 은 청록(#3E8E91) 이 지역색 Canada(#44AA99) 와 겹쳐 녹색(#3B8B4F) 으로 옮김. Liu 2024 항목 신설(#C9506A, 장미색; 옛 임시값 #C27C5B 는 제안 방법 주홍과 색상각이 가까워 폐기). 제품 색은 지역색(남색·하늘색·청록)·방법색(청·주홍·자주) 과 색상각을 띄운다",
     "regions": {
-      "note": "지역 정체성이 주 부호화인 패널에서만 색을 쓴다(그 밖에는 모양). Paul Tol muted",
+      "note": "지역 정체성이 주 부호화인 패널에서만 색을 쓴다(그 밖에는 모양). Paul Tol muted 기반. 2026-10-15 사용자 지적(레나·캐나다 글자와 점이 흰 바탕에서 옅음)으로 레나 #88CCEE→#3E92CC(흰 바탕 대비 3.4:1), 캐나다 #44AA99→#2A8C7A(4.1:1)로 진하게 바꿈",
       "Alaska": "#332288",
-      "Lena Delta": "#88CCEE",
-      "Canada": "#44AA99",
+      "Lena Delta": "#3E92CC",
+      "Canada": "#2A8C7A",
       "W Russia": "#117733",
       "E Russia": "#999933",
       "Central Russia": "#DDCC77",
       "Tibetan Plateau": "#CC6677",
       "North Atlantic": "#AA4499"
+    },
+    "region_tints": {
+      "note": "한 지역 안의 지점 2곳을 같은 색상의 두 명도로 구분한다(F2c 사모일로프 = dark, 쿠룽나흐 = light). HSL 색상 200°·채도 0.75 고정, 명도 0.42/0.73",
+      "Lena Delta": {
+        "dark": "#1B86BB",
+        "light": "#88CCEE"
+      }
     },
     "neutral": {
       "text_paper": "#000000",
@@ -231,7 +250,8 @@
         "pf_continuous": "#B7C7DA",
         "pf_discontinuous": "#D5DFEA",
         "graticule": "#D0D0D0",
-        "buffer_line": "#333333"
+        "buffer_line": "#333333",
+        "no_data_diverging": "#D0D0D0"
       },
       "slide": {
         "ocean": "#FFFFFF",
@@ -241,9 +261,103 @@
         "pf_continuous": "#AABFD6",
         "pf_discontinuous": "#CDD9E7",
         "graticule": "#CCCCCC",
-        "buffer_line": "#333333"
+        "buffer_line": "#333333",
+        "no_data_diverging": "#D0D0D0"
       },
-      "rule": "영구동토 구역은 색만이 아니라 열쇠에 이름을 적는다(Continuous / Discontinuous). 지역 원·점은 regions 색, 테두리는 같은 색의 60 % 밝기"
+      "rule": "영구동토 구역은 색만이 아니라 열쇠에 이름을 적는다(Continuous / Discontinuous). 지역 원·점은 regions 색, 테두리는 같은 색의 60 % 밝기",
+      "no_data_diverging_rule": "발산(편차) 색표 지도의 '지도 없음' 육지색. neutral.no_data(#C9CDD3)는 푸른 기가 있어 broc 의 음의 편차 셀(−3 cm, L* ≈ 78)과 섞이므로, 무채색 L* ≈ 83 의 #D0D0D0 을 쓴다. 순차 색표(oslo) 지도는 그대로 neutral.no_data. 2026-10-15 F7 a 에서 채택"
+    },
+    "paper_v10": {
+      "note": "2026-10-16 논문 초안용 절제 색(사용자 지적: 그림이 알록달록). 색은 방법 구분에만 쓴다: 제안 방법 주홍, Stefan 청색, 직접 ML 검정 파선. 제품은 회색 계열 + 표식 모양, 지역은 회색 명도 + 표식 모양. POLAR_PALETTE=paper 로 style_v5 가 읽는다",
+      "methods": {
+        "P0": "#9A9A9A",
+        "P1": "#0072B2",
+        "R1": "#D55E00",
+        "D0": "#1A1A1A",
+        "F1": "#009E73",
+        "D1": "#CC79A7",
+        "Stack": "#B07AA1",
+        "Pstar": "#56B4E9",
+        "P1a": "#3B7FB8",
+        "Ku": "#7FA9CC",
+        "W": "#A33E0B",
+        "WF": "#D55E00"
+      },
+      "products": {
+        "Wei": "#4D4D4D",
+        "Liu": "#8C8C8C",
+        "CCI": "#A6A6A6",
+        "CCI5": "#BDBDBD",
+        "Aalto": "#C8C8C8",
+        "YK": "#6E6E6E"
+      },
+      "regions": {
+        "Alaska": "#1A1A1A",
+        "Lena Delta": "#5C5C5C",
+        "Canada": "#949494"
+      },
+      "markers": {
+        "Alaska": "o",
+        "Lena Delta": "s",
+        "Canada": "^",
+        "Wei": "D",
+        "Liu": "v",
+        "CCI": "s",
+        "CCI5": "s",
+        "Aalto": "o",
+        "YK": "X"
+      },
+      "maps": {
+        "alt": "oslo_r (cmcrameri)",
+        "anomaly": "vik (cmcrameri), symmetric",
+        "delta_heatmap": "vik, symmetric, centred at 0",
+        "inputs": "single sequential grey-blue (cmcrameri oslo_r) for every input thumbnail"
+      },
+      "text": "#000000",
+      "axis": "#000000",
+      "grid": "#E6E6E6",
+      "zero_line": "#808080"
+    },
+    "paper_v11": {
+      "note": "2026-10-16 논문 v11 색. 사용자 지적: v10 의 회색 위주는 알아보기 어렵고, 덱 색은 괜찮았으나 지나치게 쨍한 색만 다듬을 것. 덱 색 체계를 유지하되 채도를 낮춤. 글자 #262626, 축 #404040. POLAR_PALETTE=paper11 로 style_v5 가 읽는다",
+      "methods": {
+        "P0": "#8C9BAB",
+        "P1": "#2E6DA4",
+        "R1": "#D1603D",
+        "D0": "#8E5B9E",
+        "F1": "#C9A227",
+        "D1": "#4C9A7A",
+        "Stack": "#B07AA1",
+        "Pstar": "#6FA3D0",
+        "P1a": "#3B7FB8",
+        "Ku": "#7FA9CC",
+        "W": "#A33E0B",
+        "WF": "#D1603D"
+      },
+      "products": {
+        "Wei": "#5B8C5A",
+        "Liu": "#B65A72",
+        "CCI": "#A07D4A",
+        "CCI5": "#C4A869",
+        "Aalto": "#8273A6",
+        "YK": "#7E8F3C"
+      },
+      "regions": {
+        "Alaska": "#3B3B8F",
+        "Lena Delta": "#4A90C2",
+        "Canada": "#3A9384"
+      },
+      "maps": {
+        "alt": "oslo_r (cmcrameri)",
+        "anomaly": "vik (cmcrameri), symmetric",
+        "climate_inputs": "lajolla (cmcrameri)",
+        "terrain_inputs": "grayC (cmcrameri)",
+        "soil_inputs": "bamako (cmcrameri)"
+      },
+      "text": "#262626",
+      "axis": "#404040",
+      "grid": "#E8E8E8",
+      "zero_line": "#8C8C8C"
     }
   },
   "colormaps": {

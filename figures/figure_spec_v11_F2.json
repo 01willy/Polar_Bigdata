@@ -1,0 +1,63 @@
+{
+  "stem": "Fig2_workflow",
+  "script": "scripts/4_visualization/paper_v11/fig2_workflow.py",
+  "created": "2026-10-16",
+  "message": "Each label is a cell-year whose climate input is accumulated to its observation day; ALT is predicted as a recalibrated Stefan anchor plus a down-weighted gradient-boosting residual, evaluated under five validation designs, label-number and new-region experiments, and applied to year-labelled maps and same-cell, same-year product comparison.",
+  "medium": "Scientific Reports main-text figure, 180 mm wide, about 150-165 mm tall, fixed canvas (no tight bbox)",
+  "style_source": "docs/PAPER_PLAN_v11_2026-10-16.md section 4; design/style_tokens_v4.json color.paper_v11 via polar.style_v5 (POLAR_PALETTE=paper11)",
+  "layout": {
+    "grid": "180 x 160 mm; three full-width rows; panel letter in a 4.5 mm gutter with the row header and a hairline on the same line; one element-label line per row (7.4 mm below the row top); content edges 4.8-179.2 mm",
+    "a": "Cell-year design: two-column soil schematic (observation day, end of season) | cumulative TDD of one Lena Delta cell in 2013 (TDD_obs, full season, 2011-2024 mean, other years) | four-row cell-year table (two cells x 2013, 2021)",
+    "b": "Physics-residual model: Stefan anchor scatter (Alaska labels, E = 1.95) | equation strip over a two-lane Alaska 2014 map flow: inputs (climate/terrain/soil) -> gradient boosting g(x) -> residual map; full-season TDD -> Stefan -> Stefan map; plus node (lambda) -> ALT 2014; dashed training target",
+    "c": "Evaluation and outputs: five validation designs on Lena Delta label cells | schematic label-number and new-region curves at the design steps || compared structures with Figs 3-4 line keys | ALT anomaly 2012, 2019 | same-cell, same-year dot plot (Lena Delta cell-year 2013: observed, this study, four products)"
+  },
+  "encoding": {
+    "accent": "#D1603D (proposed method): gradient boosting block tint, residual path, ALT 2014 frame, residual segments",
+    "physics": "#2E6DA4 (Stefan recalibrated): Stefan line, Stefan block tint, Stefan map frame",
+    "training_only": "dashed #8C8C8C",
+    "text": "#262626, FreeSans 6-7 pt, letters 8 pt bold, equation 8 pt",
+    "boxes": "operation blocks only, light tint fill, #808080 0.5 pt edge",
+    "connectors": "0.6-0.7 pt, horizontal/vertical only, small open chevrons",
+    "maps": "ALT oslo_r, residual and anomaly vik (symmetric), inputs lajolla (climate) grayC (terrain) bamako (soil)"
+  },
+  "data": [
+    "data/processed/v5/labels_cell_year_v5.csv, forcing_year.csv, forcing_clim.csv, static_v5.csv (polar.testbed_v5.load_v5, with_forcing('year_obs'))",
+    "data/processed/v5/maps/Alaska/{pred_2012,pred_2014,pred_2019,mean_2011_2024}.csv.gz, meta.json, forcing_2014_thumb.csv.gz",
+    "data/processed/map_alaska/alaska_grid_x25_v1.csv.gz",
+    "data/processed/v5/runs/core_v6/preds (fold check for the validation-design maps)"
+  ],
+  "exports": [
+    "outputs/figures/paper/v11/Fig2_workflow.pdf",
+    "outputs/figures/paper/v11/Fig2_workflow.svg",
+    "outputs/figures/paper/v11/Fig2_workflow.png (600 dpi)",
+    "outputs/figures/paper/v11/source_data/Fig2_workflow.json"
+  ],
+  "qa": "automatic (font size >= 6 pt, FreeSans only, no text overlap, no text outside canvas, no text over map frames or touching connectors) plus visual review of the 600 dpi PNG; result recorded in source_data JSON",
+  "revisions": [
+    "drawn hat over ALT (mathtext widehat renders an oversized wedge in FreeSans)",
+    "orphan product key replaced by a real-data dot plot (coordinator review)",
+    "vector exports saved at 600 dpi so embedded rasters meet the 450 ppi rule",
+    "reviewer fixes: 'Schematic' tag on the two curve icons, 'Seasonally frozen' key, '19 > 200 cm' axis-end count, accent frame on the residual map, excluded cells as open rings drawn above training dots, 'Full season' label on the TDD -> Stefan connector"
+  ],
+  "qa_result": {
+    "automatic": {
+      "n_texts": 164,
+      "font_sizes_pt": [
+        6.0,
+        6.5,
+        7.0,
+        8.0
+      ],
+      "fonts": [
+        "FreeSans"
+      ],
+      "problems": []
+    },
+    "visual": "600 dpi PNG and 600 dpi PDF raster checked row by row; independent scientific-figure-reviewer pass applied (schematic tag, seasonally frozen key, off-scale count, residual map frame, excluded rings); coordinator review applied (real-data same-cell, same-year dot plot)",
+    "size_mm": [
+      180.0,
+      160.0
+    ],
+    "fonts": "FreeSans, FreeSans Bold, FreeSans Oblique embedded (pdffonts)"
+  }
+}

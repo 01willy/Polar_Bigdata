@@ -5713,6 +5713,71 @@
       "panels": 4,
       "layout_variant": "layout_B(지도 없음, LGU-B2 미결정)",
       "message": "no tested direct learner has lower error than P0 at n = 0 (the physics baseline P* has); region-held-out intervals: conditional width not established (LGU-B2), hierarchical model not established (LGU-A1)"
+    },
+    {
+      "id": "v7_F1_study_area",
+      "version": "v7 (2026-10-15 revision: e·f data inventory on one shared year axis)",
+      "script": "scripts/4_visualization/v7_f1_study_area.py",
+      "contract": "docs/FIGURE_CONTRACT_v7.md; docs/DESIGN_BRIEF_v8_2026-10-15.md 2절 8쪽",
+      "intent": "연구 지역(a 범북극 영구동토 확률 + 세 지역 상자, b–d 지역 지도의 관측 셀과 관측 연도 수)과 자료 목록(e 연도별 셀-연도 누적 막대, f 자료별 기간 띠)을 한 그림에 둔다. 메시지: 라벨은 공간·연도 모두 고르지 않고(2014 알래스카 캠페인), 입력·제품의 기간이 분석 창 2010–2024 와 어떻게 겹치는지 한 연도 축에서 읽힌다",
+      "medium": "paper (Sci Rep 2-column 180 mm) + slide crops + deck-native PNG",
+      "layout": {
+        "figsize_mm": [
+          180.0,
+          225.6
+        ],
+        "height_limit_mm": "script assert ≤ 227 (contract 230, 3 mm slack kept)",
+        "row1": "a circle x 6.8, y 5.5, D 67.5 (colourbar below, 0.8 D wide); b Alaska x 87.1, y 3.5, 89.9 × 79.5 (EPSG:3338, zoom inset upper-left 46 % height, size key lower-right)",
+        "row2": "c Lena x 12.0, y 91.0, 64.8 × 66.4 (polar stereo, inset lower-left 30 %); d Canada x 92.8, y 91.0, 84.2 × 66.4 (plate carrée, 65°N aspect)",
+        "row3_ef": "shared year axis x 36.5 (label columns computed from FreeSans widths), top 166.9, width 140.5; e bars 15.5 mm high; gap 2.0; f rows pitch 2.2 mm × (13 rows + 4 group gaps × 0.4 + 1.2) = 34.8 mm",
+        "f_rows": [
+          "Labels: Alaska, Lena Delta, Canada (NW) (observed years only; Canada 2020 gap shows)",
+          "Forcing: ERA5-Land 2010–2024",
+          "Satellite: MODIS 2010–2024, InSAR ALT (Alaska) 2017",
+          "Static: Terrain, soil (full-axis grey band, 'static')",
+          "Products: ESA CCI v4, ESA CCI v5, Wei 2026, Liu 2024, Yi–Kimball 2019 (Alaska), Aalto 2018 (mean, outline)"
+        ],
+        "x_axis": "1996.5–2025.5, major ticks 2000–2025 (5 yr), minor ticks yearly from 1997; analysis window 2010–2024 shaded (neutral.equiv_band) by one background axes behind e and f"
+      },
+      "colors": {
+        "regions": "S.REGION_HEX (tokens color.regions: Alaska #332288, Lena Delta #88CCEE, Canada #44AA99) — bars, Labels rows, map markers, boxes in a",
+        "inputs": "tokens color.status: ERA5-Land climate #0072B2; MODIS = shade(satellite #56B4E9, −0.35) = #387597, InSAR = shade(satellite, −0.60) = #22485D (two darker shades: the raw satellite colour is ΔE 14 from Lena Delta; the shades are ΔE ≥ 30; script asserts ΔE ≥ 20 to all Labels rows)",
+        "static": "neutral.no_data #C9CDD3",
+        "products": "S.PRODUCT_HEX (cci4y #9C7A3C, cci5y #B8975A, wei #3B8B4F, liu #C9506A, yk #6B8E23, aalto #7D6B9E)",
+        "pfr": "white → #3a6699 sequential (panel a only)"
+      },
+      "fonts_pt": {
+        "paper": "letter 8 bold, tick 6, band/row 6, group 6, share line 5.5",
+        "deck": "axis label 14, tick 12, row/group 12, letter 14 bold"
+      },
+      "exports": [
+        "outputs/figures/paper/v7/F1_study_area.pdf",
+        "outputs/figures/paper/v7/F1_study_area.svg",
+        "outputs/figures/paper/v7/F1_study_area.png",
+        "outputs/figures/paper/v7/slide/F1_study_area.png + __a __b __c __d __e __f __ef __bcd.png",
+        "outputs/figures/paper/v7/deck/F1_study_area__deck_N01.png (a + bars 2010–2024)",
+        "outputs/figures/paper/v7/deck/F1_study_area__deck_N05.png (b | c·d)",
+        "outputs/figures/paper/v7/deck/F1_study_area__deck_N06.png (e + f, 12 × 5.1 in, 3600 × 1530 px)"
+      ],
+      "source_data": [
+        "outputs/figures/paper/v7/source_data/F1_study_area.json",
+        "outputs/figures/paper/v7/source_data/F1_e_cell_years.csv (year × region cell-years; panel e is linear so small-region yearly values are read here)"
+      ],
+      "inputs": [
+        "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1)",
+        "data/processed/cci_pfr_mean_1997_2021.nc",
+        "data/processed/map_<alaska|lena>/hillshade_v1/{shade,dem}_250m.tif",
+        "data/processed/v5/forcing_meta.json, modis_cell_year_v5_meta.json, products_cell_year_v5_meta.json",
+        "InSAR ALT year 2017 = constant from docs/PAPER_SCIREP_FRONTMATTER_DRAFT.md data table"
+      ],
+      "caption_notes_en": [
+        "Panel e is linear; the 2014 Alaska campaign dominates, and yearly counts per region are given in Source Data (F1_e_cell_years.csv).",
+        "Panel f: filled band = yearly values; outline band (Aalto 2018) = one multi-year mean value; grey band = time-invariant inputs; minor ticks mark single years.",
+        "ESA CCI v4/v5 start in 1997, Wei 2026 and Aalto 2018 (mean period) in 2000; the shared axis therefore starts at 1997 with labelled ticks from 2000."
+      ],
+      "deck_caption_ko": "deck/deck_spec_v8.json N06.caption",
+      "generated": "2026-10-15",
+      "qa": "pass (deck N01/N05/N06 3600 × 1530 px verified; PDF height 225.6 mm; minor ticks and band colours checked at full resolution)"
     }
   ],
   "m1/m1_sc_main_effects": {

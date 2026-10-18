@@ -1,0 +1,57 @@
+{
+  "stem": "Fig4_labels",
+  "version": "v11 (2026-10-16), restyle of figures/figure_spec_v10_F4.json; numbers unchanged",
+  "script": "scripts/4_visualization/paper_v11/fig4_labels.py",
+  "helpers": "scripts/4_visualization/paper_v11/fig34_common11.py",
+  "message": "Physics + residual ML stays at or below recalibrated Stefan from 25 labels upward, recovers in a new region with 25 target labels, and in external CALM regions 5 local labels cut the error to the level of recalibrated Stefan.",
+  "medium": "Scientific Reports, double column, 180 mm wide, fixed canvas",
+  "size_mm": [
+    180.0,
+    122.0
+  ],
+  "style": {
+    "palette": "design/style_tokens_v4.json color.paper_v11 via src/polar/style_v5.py (POLAR_PALETTE=paper11)",
+    "font": "FreeSans 7 pt (ticks and direct labels 6.5 pt, heat-map values 6 pt), panel letters 8 pt bold; text #262626 (white only inside dark heat-map cells, chosen by WCAG contrast)",
+    "lines": "axes and ticks 0.5 pt #404040; data lines 0.8-1.0 pt (Physics + residual ML 1.0, Stefan recalibrated and Direct ML 0.9, Stefan source 0.8); zero/reference 0.5 pt #8C8C8C; light grid #E8E8E8 0.4 pt at major ticks of the value axis",
+    "markers": "circles 3.5 pt, squares 3.1 pt (equal area), Stefan source squares 3.0 pt, Direct ML open circles 3.4 pt (edge 0.6 pt)",
+    "methods": "Stefan (source coeff.) #8C9BAB squares; Stefan (recalibrated) #2E6DA4 squares; Physics + residual ML #D1603D filled circles; Direct ML #8E5B9E dashed, open circles",
+    "band": "95% interval band = solid tint of #D1603D (20 %)",
+    "halo_c": "Stefan (recalibrated on n) in c = 3.0 pt light-blue line (tint of #2E6DA4, 38 %) under Physics + residual ML, keyed inside c",
+    "products_c": "reference lines in v11 product colours, 0.9 pt: ESA CCI v5 #C4A869 dashed; Liu 2024 #B65A72 and Wei 2026 #5B8C5A dotted (trained on these sites), labelled at the right end in dark grey"
+  },
+  "layout": "row 1: a (3 region panels, widths proportional to the number of label categories); row 2: b (3 region panels) | c (one panel, reference labels at the right end). One method legend at the top.",
+  "changes_from_v10": [
+    "v11 colours (v10 black Direct ML, grey product lines)",
+    "dark-grey text and axes",
+    "light y grid lines in a, b, c",
+    "c: product reference lines in product colours; white backing behind 'trained on these sites'",
+    "a: y label 'ΔRMSE vs recalibrated Stefan (cm)'",
+    "c: thin grey bracket joins the two product lines that 'trained on these sites' refers to"
+  ],
+  "panels": {
+    "a": {
+      "source": "data/processed/v5/runs/ladder_v6/ladder_deltas.csv",
+      "filter": "exp LL, ref P1 (same n), methods R1 and D0; n values present only in some folds dropped (n_test < 0.95 x n_test of 'all'), as v8_f9_label_ladder.load"
+    },
+    "b": {
+      "source": "data/processed/v5/runs/ladder_v6/ladder_metrics.csv",
+      "filter": "exp TL, methods P0, P1n, D0S, R1S, n_label 0-500"
+    },
+    "c": {
+      "source": "data/processed/v5/runs/extra_v9/preds_EXTFT_*.csv.gz (recomputed; checked against outputs/figures/paper/v7/source_data/F10_extft.csv)",
+      "filter": "seed-mean predictions, rows with Wei 2026, Liu 2024 and ESA CCI v5 values (474 cell-years, 2010-2020)"
+    }
+  },
+  "exports": [
+    "outputs/figures/paper/v11/Fig4_labels.pdf",
+    "outputs/figures/paper/v11/Fig4_labels.svg",
+    "outputs/figures/paper/v11/Fig4_labels.png (600 dpi)",
+    "outputs/figures/paper/v11/source_data/Fig4_labels.json"
+  ],
+  "qa": "2026-10-16 independent review (visual-reviewer, 600 dpi crops of all six figures). Fixed: Fig. 3c region key on a white backing (grid lines ran through it); Fig. 3d key swatch now shows the outline on the neutral (zero) colour; Fig. 4c thin bracket joins the Liu 2024 / Wei 2026 lines next to 'trained on these sites' (note already on a white backing); S1c lighter Alaska density tints; S3 group colours shifted 3-8 % so 6 pt numbers reach >= 4.5:1 contrast; S10 small horizontal dodge per series. Kept by design: out-of-range values drawn on the top edge with the value printed (token rule symbols.out_of_range; arrows/triangles forbidden); Fig. 4c Stefan (recalibrated) as a light halo under Physics + residual ML (curves within 0.55 cm, keyed in the panel); S2 regions by marker shape only (colour encodes model structure); Stefan squares vs Lena Delta squares (both fixed by the palette and marker specs; never in the same panel). Automatic QA after fixes: 0 problems in all six figures; 13 plotted values spot-checked against the source CSVs, all match.",
+  "qa_automatic": {
+    "problems": [],
+    "checks": "as Fig. 3; numbers equal to v10 source data (286 numeric values)"
+  },
+  "marker_rule": "Stefan methods squares, ML methods circles; Direct ML open circles, dashed"
+}

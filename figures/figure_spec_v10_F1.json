@@ -1,0 +1,66 @@
+{
+  "stem": "Fig1_data",
+  "script": "scripts/4_visualization/paper_v10/fig1_data.py",
+  "message": "Where the ALT labels are, how many cell-years each observation year holds, which years every input and product covers, and how the year-specific climate input is defined in time.",
+  "medium": "Scientific Reports, double column, 180 mm wide, fixed canvas (no tight bbox)",
+  "size_mm": [
+    180.0,
+    121.3
+  ],
+  "style": {
+    "font": "FreeSans 7 pt (ticks and row labels 6.5 pt, map graticule and scale-bar labels 6 pt), panel letters 8 pt bold, all text black",
+    "lines": "axes 0.6 pt black, data 1.0 pt, reference lines 0.6-0.8 pt grey #808080, region outlines 0.8 pt black with white halo, leaders 0.5 pt",
+    "colour": "only the map colormap (cmcrameri oslo_r 0-0.6 for permafrost probability); bars and bands in greys (#4D4D4D used, #C4C4C4 available, #EFEFEF analysis window)",
+    "map": "North Polar Stereographic, central longitude -90, boundary 56N; ocean #E9E9E9, land without value white, coastlines 50m 0.3 pt grey; 1,000 km scale bar inside the circle (geodesic length)"
+  },
+  "layout": "row 1: a (polar map, region labels outside the circle with leaders, vertical colour bar) | b (three stacked bar panels, independent y axes); row 2: c (timeline with group and row labels, legend above) | d (cumulative TDD curve with direct labels)",
+  "panels": {
+    "a": {
+      "source": [
+        "data/processed/cci_pfr_mean_1997_2021.nc",
+        "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1)"
+      ],
+      "years": "probability 1997-2021 mean; labels 2010-2024"
+    },
+    "b": {
+      "source": "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1)",
+      "years": "2010-2024"
+    },
+    "c": {
+      "source": [
+        "data/processed/v5/labels_cell_year_v5.csv",
+        "data/processed/v5/forcing_meta.json",
+        "data/processed/v5/products_cell_year_v5_meta.json",
+        "data/processed/v5/products_cell_year_v5.csv",
+        "docs/research/2026-10-04/alt_products.md (Liu 2024 available period)"
+      ],
+      "years": "axis 1997-2025, analysis window 2010-2024; years used = label cell-years with a product value (same definition as v10_numbers.py nyrsprod*)"
+    },
+    "d": {
+      "source": [
+        "data/processed/v5/forcing_year.csv",
+        "data/processed/v5/forcing_clim.csv",
+        "data/processed/v5/labels_cell_year_v5.csv"
+      ],
+      "years": "2014; mean 2011-2024",
+      "cell": "loc_id 14268 (CALM, 71.32N 156.60W), observation day = pipeline convention 1 September (no date in the CALM record)"
+    }
+  },
+  "exports": [
+    "outputs/figures/paper/v10/Fig1_data.pdf",
+    "outputs/figures/paper/v10/Fig1_data.svg",
+    "outputs/figures/paper/v10/Fig1_data.png (600 dpi)",
+    "outputs/figures/paper/v10/source_data/Fig1_data.json"
+  ],
+  "qa": "2026-10-16: automatic QA 0 problems (87 texts; sizes 6/6.5/7/8 pt). Independent visual and scientific review applied: region outlines drawn halo-first so the shared 141W Alaska/Canada edge is one line; c legend extended with 'Multi-year mean' (outline) and 'Static (no year)' (hatch), row-label suffixes removed; d observation-day label states the date '(1 Sep)' because the CALM eos record has no date (pipeline convention). Caption notes: boxes are the nominal study regions (label-cell extents in source data); scale bar exact only at its own position (polar stereographic); 2014 is the lowest-TDD year of the example cell in 2011-2024.",
+  "ink_margins_mm": {
+    "left": 1.02,
+    "right": 0.89,
+    "top": 1.23,
+    "bottom": 1.35
+  },
+  "qa_automatic": {
+    "problems": [],
+    "checks": "built-in qa(): font >= 6 pt, FreeSans only, text-text overlap, text outside canvas, text over foreign axes, in-axes labels touching lines/patches; pdffonts: FreeSans family embedded (CID TrueType); svg text kept as text"
+  }
+}

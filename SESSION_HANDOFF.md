@@ -1,8 +1,93 @@
 # SESSION_HANDOFF — Polar_Bigdata (현재 상태 스냅샷)
 
-**갱신**: 2026-10-08(최종 묶음 XA–XM 판정, 원고·덱·발표 완료, 극지연 회의 뒤 전면 재설정 예정) · 2026-10-02(LGF 판정, WF 1–3차, Fig 6, 연구 개요) · 2026-09-30(로컬 전환·개정 네 건·LGX 해제) · 2026-09-29(LG 계획·하네스·Rescale 사전 점검 제출) · 2026-09-26 저녁(통합 실험 실행·감사·논문 그림) · 09-26 오전(통합 계획 확정) · 09-22(H18–H30) · **다음 세션은 이 파일부터 읽으세요.**
+**갱신**: 2026-10-16 저녁(논문 초안 v11: 방법 → 결과, 그림 본문 삽입, Fig. 2 신설, 절제 색) · 2026-10-16 오후(논문 초안 v10 영문 · 국문 · 보충 자료) · 2026-10-16(덱 v10 28쪽·영문 그림·외부 적응 실험) · 2026-10-15 저녁(덱 v9·답변서·추가 실험) · 2026-10-14(관측일 정합 채택·그림/덱/원고 재작성·Rescale 재실행) · 2026-10-12(보강 실험·연도별 평가·누설 마스크·PDF 보고서·덱) · 2026-10-10(극지연 피드백 반영 재설정, v5 시간축 입력·시험지·실험 실행 중) · 2026-10-08(최종 묶음 XA–XM 판정, 원고·덱·발표 완료, 극지연 회의 뒤 전면 재설정 예정) · 2026-10-02(LGF 판정, WF 1–3차, Fig 6, 연구 개요) · 2026-09-30(로컬 전환·개정 네 건·LGX 해제) · 2026-09-29(LG 계획·하네스·Rescale 사전 점검 제출) · 2026-09-26 저녁(통합 실험 실행·감사·논문 그림) · 09-26 오전(통합 계획 확정) · 09-22(H18–H30) · **다음 세션은 이 파일부터 읽으세요.**
 
-## ★ 최신(2026-10-08): 최종 묶음 XA–XM 판정, 원고·보고 덱·발표(10-06) 완료, 극지연 회의 뒤 전면 재설정 예정
+## ★ 최신(2026-10-16 저녁): 논문 초안 v11: 방법 → 결과 순서, 그림 본문 삽입, 절제 색 복원, 연구 흐름 그림(Fig. 2) 신설, 제품 지도 비교 본문화
+
+정본: 계획 `docs/PAPER_PLAN_v11_2026-10-16.md`, 영문 `paper/manuscript/en_v11/{main,si}.tex`(빌드 `./build.sh`, 점검 `python3 compliance.py` → `COMPLIANCE_v11.md`), 국문 `paper/manuscript/ko_v11/`, 매크로 `paper/manuscript/shared_v10/`(v6 · v9 · v10) + `shared_v11/numbers_v11.tex`(`scripts/2_evaluation/v11_numbers.py`), 그림 `outputs/figures/paper/v11/`(Fig1–7), `v11_si/`(S1–S10), 스크립트 `scripts/4_visualization/paper_v11/`, 납품 `deliverables/12_paper_v11_2026-10-16/`(`tools/package_paper_v11.sh`).
+- **구성**: Introduction → Data and methods(식 (1)–(9), Code availability) → Results(6절) → Discussion(물리 기준과 전이성 · 선행 연구와의 비교 · 새 지역 적용 절차 · 한계) → Conclusions → Data availability. 그림 7 + 표 1 = 8, 처음 인용 위치에 삽입(첫 제출 허용 확인).
+- **규정**: 제목 14단어, 초록 199단어, 본문 약 3,800단어(한도 4,500), 그림 설명 350단어 이하. LLM 사용 진술은 사용자 요청으로 뺐으나 Sci Rep 은 Methods 기록을 요구하므로 제출 전 다시 결정.
+- **색**: color.paper_v11(덱 색 체계의 채도 낮춘 판), POLAR_PALETTE=paper11.
+- **남은 것**: 저자 결정 자리표시(교신 저자, 공저자, 감사의 글, 저장소 DOI, LLM 진술), 사용자 검토, 커밋 승인.
+
+## ★ 이전(2026-10-16 오후, v11 로 대체): 논문 초안 v10: 영문 · 국문 원고 + 보충 자료(Sci Rep 양식), 논문용 절제 색 그림
+
+당시 정본: 계획 `docs/PAPER_PLAN_v10_2026-10-16.md`, 영문 `paper/manuscript/en_v10/{main,si}.tex`(빌드 `./build.sh`), 국문 `paper/manuscript/ko_v10/{main,si}.tex`, 매크로 `paper/manuscript/shared_v10/`, 규정 점검 `paper/manuscript/en_v10/COMPLIANCE_v10.md`, 그림 `outputs/figures/paper/v10/`(본문 Fig1–6), `outputs/figures/paper/v10_si/`(보충 S1–S11).
+- **구성**: 서론 · 결과(관측과 관측 연도 입력, 검증 설계와 전이, 이득과 조건, 적은 라벨과 새 지역, 같은 셀 · 같은 해 제품 비교, 연도별 지도) · 고찰 · 방법 · 자료 가용성 · 그림 설명 · 표 1(라벨 + 입력 · 제품 기간과 사용 연도).
+- **사용 연도 명시**: 그림 설명 · 표 1 · 보충 표 S2(분석별 라벨 · 입력 · 제품 · 비교 행 연도).
+- **납품**: `deliverables/11_paper_v10_2026-10-16/`(영문 · 국문 원고, 첫 제출 압축본, 보충 자료, 그림). 덱 v10 의 제품 지도 쪽은 공간 블록 검증 값으로 고쳐 다시 빌드했다.
+- **남은 것**: 저자 결정 자리표시(교신 저자, 공저자, 감사의 글, 저장소 DOI, LLM 진술), 사용자 검토, 커밋 승인.
+
+## ★ 이전(2026-10-16 오전, 덱은 현행): 덱 v10(28쪽, 20분 발표) · 그림 전부 영문 · 외부 지역 소수 라벨 적응 실험(Rescale dfuMW)
+
+정본: 덱 명세 `deck/deck_spec_v10.json` + 빌더 `deck/build_v9.py`(`DECK_SPEC=deck_spec_v10.json DECK_OUT=v10_report`), 출력 `deck/render/v10_report.{pptx,pdf}`, 결론 근거 그림 `scripts/4_visualization/v9_f12_conclusion.py`(`deck/assets/v9/C01_evidence.png`, `C02_evidence.png`), 외부 적응 그림 `v9_f10_extra.py --ft`, 로그 `docs/EXPERIMENT_LOG.md`(10-16).
+- **구성**: 표지 · 배경 3 · 목표 · 흐름 · 입력 · 관측 셀 · 시간 정의 · Stefan · 방법 2 · 결과 13(기후 입력, 검증 분할, 이득 조건 병합, 투입 위치, 라벨 사다리, 전이, 외부 적응, 제품 비교, 연도별, 지도 4) · 결론 · 의의 · 참고문헌. 뺀 쪽은 v9 덱(`deck/render/v9_report.pdf`)에 남아 있다.
+- **문법 추가**: 그림 안 글자 전부 영문(덱 제목 · 설명은 국문), 목표 쪽은 큰 그림 + 주황 굵은 목표 문장, 결론 · 의의는 근거 그림 + 주장 카드(주황 세로 막대, 한 상자 금지).
+- **외부 적응 판정**: 그 지역 라벨 5개로 56.2 → 40.3 cm(세 제품 공통 474 셀-연도), 독립 제품 ESA CCI v5 60.7 cm 보다 낮음(CCI v5 값이 있는 700 셀-연도에서 −19.5 [−31.3, −9.2]). Wei · Liu(이 지점으로 학습) 18–23 cm 에는 못 미침. 이득은 Stefan 계수 재보정에서 나오고 잔차의 추가 이득은 없음(+0.4 [−0.5, +1.2], 채점 805 셀-연도). 얕은 활동층의 추코트카 · 캄차카는 무라벨이 더 낫다.
+- **사용자 질문 답**: 조건 열지도 0.0 = |Δ| < 0.05 cm, n/a = 셀-연도 30 또는 블록 5 미만(빗금 표시). 직접 ML 은 지역 안 전량 라벨에서 물리 잔차보다 점추정이 낮음(Stefan 대비 구간은 알래스카 · 레나만 0 포함, 캐나다 −4.6 [−6.2, −0.2]), 라벨 없는 새 지역에서 붕괴(레나 39.5 cm, 전이 실험 라벨 0개, 레나 전체 셀-연도). 제품 기준 결합은 워크플로의 일반성과 Stefan 기준의 우위(레나)를 보이는 공정성 대조.
+- **납품**: `deliverables/10_v10_2026-10-16/`(덱 28쪽 pdf · pptx, 갱신 답변서, 그림).
+- **남은 것**: 사용자 검토, 커밋 승인(10-10 이후 전부 미커밋).
+
+## ★ 이전(2026-10-15 저녁): 3차 지적 27항 반영 덱 v9(37쪽) · 연구 질문 답변서(PDF) · Rescale 추가 실험(gxnyhb)
+
+정본: 지침 `docs/DESIGN_BRIEF_v9_2026-10-15.md`, 덱 명세 `deck/deck_spec_v9.json` + 빌더 `deck/build_v9.py`(출력 `deck/render/v9_report.{pptx,pdf}`), 수치 `docs/numbers_v9.json`(`scripts/2_evaluation/v9_numbers.py`), 답변서 `outputs/report_v9/qa_v9.pdf`(xelatex), 로그 `docs/EXPERIMENT_LOG.md`(10-15 저녁).
+- **표지**: 사용자가 `deck/render/v8_report.pptx` 표지를 직접 고침(흰 제목, '활용한', '예측과' 뒤 줄바꿈). v9 빌더가 같은 설정을 재현하고 v8_report 덮어쓰기를 막는다(단언).
+- **덱 v9 문법**: 개조식 명사형 문장, '강제력' 금지(관측 연도 · 평년 기후 입력), 한글 어절 단위 줄바꿈(빌더가 a:br 삽입), 그림 12 in 폭 채움(덱 PNG 12 × 4.65 in, 높은 그림은 의미 줄을 그림 아래로), 결론 · 의의는 그림 + 주황 상자 하나. 지역색 레나 #3E92CC · 캐나다 #2A8C7A, 그림 열 머리 잉크색.
+- **새 쪽**: N01(관측 현황 복원), R03e(이득 조건 열지도), R03s(SHAP), EXT(외부 지역 무라벨 시험), PA(제품 기준 결합 대 Stefan 기준 결합).
+- **추가 실험 판정**: 레나에서 같은 라벨로 제품을 보정해도 Stefan 기준 결합이 우세(−2.8 [−6.2, −0.1]), 레나 라벨 없이도 Stefan 원천 계수가 Wei 보다 낮음(23.1 대 30.3 cm), 외부 깊은 활동층 지역은 오차 큼(인근 재보정 필요), SHAP 레나 지형 · 캐나다 토양 · 알래스카 기후. 알래스카 해안 평야 과소 추정(−12.8 cm)은 과제.
+- **정정**: 영구동토 확률은 입력이 아니라 지도 범위 기준. 레나 델타 제품 대비 차이는 '10 cm 이상'이 아니라 7.3–13.5 cm(공통 셀), 짝 비교는 다섯 제품 모두 유의. 캐나다 전이는 직접 ML 이 최저.
+- **납품**: `deliverables/09_v9_2026-10-15/`(덱 pdf·pptx, `연구질문_답변서_2026-10-15.pdf`, 그림).
+- **남은 것**: 사용자 검토, 원고 v9(보류 유지), 커밋 승인 대기(10-10 이후 변경 전부 미커밋). 네 번째 지역 후보 서시베리아(CALM 22셀 + 야말 156셀).
+
+## ★ 이전(2026-10-15): 2차 반려 23항 반영 — 제목·표지, 배경/한계/흐름/입력/물리 쪽 신설, 그림 벌 v8, 라벨 수 사다리 실험, 덱 v8(32쪽)
+
+정본: 조치 계획 `docs/DESIGN_BRIEF_v8_2026-10-15.md`(항목별 대응), 그림 명세 `figures/figure_spec_v8.json`, 덱 명세 `deck/deck_spec_v8.json` + 빌더 `deck/build_v7.py`(`DECK_SPEC=deck_spec_v8.json DECK_OUT=v8_report`), 산출 `deck/render/v8_report.{pptx,pdf}`, `deliverables/08_v8_2026-10-15/`. 사다리 실험 결과 `docs/RESULTS_v6_LADDER_2026-10-15.md`(Rescale nMsgU, LL·TL), 로그 `docs/EXPERIMENT_LOG.md`(10-15).
+- **제목(표지 A안, 사용자 확정 대기)**: 물리 잔차 기반 기계학습 워크플로를 이용한 영구동토 활동층 두께 예측과 지역별 편차 분석. 후보 B·C(영문)는 명세 meta.title_candidates.
+- **덱 v8 문법**: 주황 제목 + 회색 부제 + 그림 + 의미 줄(잉크 14 pt, 1–2줄) + 회색 설명 줄. 결론·의의는 세 열 덱 전용 그림(G6·G7) + 열별 주황 상자(머리 + 2줄). 표지는 남색 배경 + 알래스카 2022 ALT 드레이프.
+- **추가 실험 판정(사다리)**: 유사라벨 증강은 모든 n 에서 물리식과 같음(학습기를 물리식으로 끌어당김), 잔차 결합은 n 25–100 에서 세 지역 모두 물리식 이상, 새 지역 전이에서 라벨 0 직접 학습은 레나에서 붕괴(39.5 cm)·25–50개로 회복, 잔차 결합(원천+n)은 알래스카에서 모든 n 최선, 캐나다는 원천 직접 학습이 최선. 워크플로 권고: 라벨 0 → 원천 Stefan(+원천 잔차), 25–250 → 재보정 Stefan + 잔차, 그 이상 → 지역별 비교.
+- **남은 것**: 원고 v8(영문·국문)은 덱 확정 뒤. 커밋 미실시(승인 대기). soffice 는 `tools/soffice_nogpu.sh`/`export_pdf` 만.
+
+## ★ 이전(2026-10-14 밤): v6 덱·원고 전면 반려 → 논문급 그림 벌 v7 + 덱 v7(22쪽) 완성, 원고는 보류
+
+정본: 설계 지침 `docs/DESIGN_BRIEF_v7_2026-10-14.md`, 그림 계약 `docs/FIGURE_CONTRACT_v7.md`, 그림 명세 `figures/figure_spec_v7.json`, 덱 명세 `deck/deck_spec_v7.json`, 빌더 `deck/build_v7.py`, 산출 `deck/render/v7_report.{pptx,pdf}`, `deliverables/07_v7_2026-10-14/`. 참고 자료 `ppt_레퍼런스/`(사용자 덱 5종 + 논문 25편, README).
+- **그림 벌 v7**(`scripts/4_visualization/v7_*.py`): 논문판(`outputs/figures/paper/v7/`), 슬라이드 패널 크롭(`slide/`), 슬라이드 원본 크기판(`deck/`, `--deck`). 제작 → 시각 검토 → 수정 두 차례(워크플로). 수치는 CSV·`docs/numbers_v6.json` 에서만.
+- **덱 v7 문법**: 주황 제목 + 회색 부제 + 그림이 본문을 채움 + 회색 설명 한 줄. 결론 줄·헤어라인 없음. 강조는 주황 외곽선 상자(목표·결론·의의). 문체는 명사구. 감사(pptx_audit) 지적 0쪽.
+- **남은 것**: 사용자 확인 뒤 (1) 원고 v7(영문, 그림 F1–F7 + 표 1) 작성, (2) 국문 보고서 갱신, (3) 커밋(10-10·10-12·10-14 변경 전부 미커밋). LibreOffice 는 반드시 `tools/soffice_nogpu.sh` 또는 `export_pdf`(GPU 차단 환경변수)로만.
+- **알려진 잔여 결함**: F1 d(캐나다)에 음영 없음(DEM 미보유), F1 a 레나 상자가 투영 때문에 45° 회전, F6 R09 경위도 라벨이 R07·R08 보다 작음, F7 C02 지도 글자가 작음(3.7 in 높이 제약), 덱 패널 문자가 쪽마다 다시 시작(논문 문자와 다름).
+
+## ★ 이전(2026-10-14): 관측일 정합(core_v6·nn_v6·modis_v6) 결과 전부 반영 · 그림 F1–F6·방법 도식 V1–V5·덱 30쪽·국문 보고서 9쪽·영문 원고 21쪽
+
+정본: 결과 요약 `docs/RESULTS_v6_2026-10-14.md`(매크로에서 생성, `scripts/2_evaluation/v6_results_doc.py`), 결정 `docs/DECISIONS_2026-10-14.md`, 로그 `docs/EXPERIMENT_LOG.md`(10-14), 수치 매크로 `paper/manuscript/en_v6/numbers.tex`·`docs/numbers_v6.json`(`v6_numbers.py`), 원고 `paper/manuscript/en_v6/main.pdf`, 보고서 `outputs/report_v6/report_v6.pdf`, 덱 `deck/render/v6_report.pdf`, 논리 점검 `data/processed/v5/audit_logic_core_v6.md`(13/13).
+- **핵심 판정(관측일 정합)**: 잔차 결합이 재보정 Stefan 보다 레나 −3.6·캐나다 −3.7 cm 낫고 알래스카는 −0.2(차이 없음). 이득은 지형·토양 입력이 있어야 하고 따뜻한 3분위에서 크다(10-12 의 '추운 셀' 판정 뒤집힘). 무작위 분할 과대평가 3.6–9.9 cm, 새 지역에서 직접 학습 레나 +17.8 cm. 공통 셀에서 레나는 모든 제품보다 10 cm 이상 낫고, 알래스카는 학습 지점 25 km 밖에서 Wei 보다 5.2 cm(구간 0 포함)·Liu 와 같음, 캐나다는 Wei 와 같은 수준. 관측일 정합으로 알래스카 연도별 편향 범위가 −15.9~+6.9 에서 −8.1~+10.6 cm 로 줄었다. 연도 간 변화 상관은 0.3 안팎이고 레나 다년 셀(230쌍)에서는 Wei(0.55)가 더 높다.
+- **Rescale**: CJsgU(CPU)·CECkU(MODIS)·RkmTeb(GPU) 모두 반영 완료(`scripts/rescale/ingest_v6.sh`). nn_v6 집계는 로컬에서 `--ref-run core_v6` 로 다시 했다(run_v6.sh GPU 분기의 agg_nn 에 `--ref-run` 누락, 다음 GPU 실행 때 고칠 것). 학습기 판정: 신경망은 알래스카에서 조금 나쁘고 캐나다에서 약 2 cm 낫지만 구간이 겹치며 이득 부호는 불변.
+- **지도**: `data/processed/v5/maps/{Alaska,Lena}/` 는 관측일 정합 학습(core_v6 구간)으로 재생성(AOA 알래스카 56 %, 레나 62 %).
+- **커밋**: 10-10·10-12·10-14 변경 전부 미커밋. 제안 묶음: feat(v5/v6 코드·style 크롭·ingest), data(v5 표·MODIS 2010–2024·core_v6 집계 표), figs(F1–F6·V1–V5·슬라이드판), deck(spec_v6·build_v6), docs(결정·결과·로그·핸드오프), paper(en_v6·report_v6). 대용량(`grid`, `maps`, `runs/*/preds`, `results/rescale_v6_*`)은 .gitignore 확인.
+- **사용자 확인 항목**: 원고 [DECISION](저자·저장소·사사·LLM 고지), Liu 2024 서지, 덱 발표자 표기, 커밋 승인, 결론 문장(DECISIONS 3절) 확인.
+
+## ★ 이전(2026-10-12): 보강 실험 12묶음·연도별 평가·누설 마스크 제품 비교 완료, PDF 보고서와 26쪽 덱 작성(커밋 대기)
+
+정본: 종합 `docs/SYNTHESIS_v5_2026-10-12.md`, 보강 `docs/RESULTS_v5_SUPPLEMENT_2026-10-12.md`, 검토 `docs/REVIEW_2026-10-12_RESET_POSITIONING.md`, 보고서 `outputs/report_v5/report_v5.pdf`, 덱 `deck/render/v5_report.{pptx,pdf}`(명세 `deck/deck_spec_v5.json`), 허브 `deliverables/06_v5_2026-10-12/`, 로그 10-12 항목.
+- **핵심 판정(10-10 + 10-12)**: 연도 정합은 레나 −2 cm 지지·알래스카 미결정(2014 집중 관측이 절반 원인). 검증 설계가 순위를 바꾸며 씨앗·블록 크기에 견고(캐나다 1° 예외). R1 − P1 레나 −3.0·캐나다 −1.7·알래스카 −0.4(미결정, 학습기·λ·가중·확장 입력 어느 것도 1 cm 를 넘지 못함). 같은 셀·같은 해에서 세 지역 모두 제품 6종보다 낮고, 누설 마스크 25 km 뒤 알래스카 R1 − Wei −5.3 [−11.9, +0.9], Liu 는 ABoVE 학습 누설로 동급. 연도별 큰 편향은 캠페인 구성, 다년 셀 Δ 상관 0.27.
+- **관측 월 정합(year_obs)**: 전체 오차 불변, 늦가을 관측 연도 편향 3–4 cm 감소 → 기본 강제력으로 채택 권고(채택 시 core_cb·지도 재실행 약 1시간).
+- **실행 태그**: `data/processed/v5/runs/{core_cb,ens,forcing_obs,featsets,featsets2,featsets3,core_nn,core_rf,nn2,methods2,yearweight,confirm_fs1,ak_no2014,blk025,blk100}`. nn2(알래스카 신경망, 관측 월 정합·MODIS 집합)는 집계 중.
+- **대기**: AppEEARS MODIS 2010–2024 재요청 6건(처리 중, `scripts/0_download/appeears_v5_request.py status --fetch`), FireALT 확충 라벨 481셀(공변량 추출 파이프라인 별도).
+- **커밋**: 10-10·10-12 변경이 모두 미커밋. 제안 묶음: feat(v5 코드)·data(v5 표·집계)·figs(Fig 1–10·슬라이드판)·docs(재설정·등록부·결과·종합·검토·구조)·report(PDF·덱·허브). 사용자 승인 뒤 커밋·푸시.
+- **사용자 확인 항목**: 관측 월 정합 채택, 주 지역 3곳·저널(Sci Rep) 확정, 약관 회신 내용, 커밋 승인.
+
+## ★ 이전(2026-10-10): 극지연 피드백 반영 전면 재설정 — v5 시간축 입력 체계·3지역 시험지·실험 첫 실행 완료, 지도·그림 7종·표, 논문 구조 초안
+
+정본: 재설정 `docs/RESET_2026-10-10_KOPRI_FEEDBACK.md`(피드백 원문 3건, 시간축 사실 감사, 유지·변경 대조, 새 틀 Q1–Q4, 단계 A–H), 입력 등록부 `docs/INPUT_REGISTRY_v5.md`, 결과 `docs/RESULTS_v5_2026-10-10.md`, 논문 구조 `docs/PAPER_STRUCTURE_v5.md`([판정] 포함), 그림 명세 `figures/figure_spec_v5.json`, 로그 10-10 항목.
+- **피드백 요지와 전환**: (1) 입력 연도 혼재, (2) 지도 예측 연도 불명, (3) 희소 라벨 초점 근거 부족 → 시간축 명시(셀-연도 라벨 + 연도 정합 ERA5-Land 강제력 2010–2024), 라벨 많은 3지역(알래스카·레나·캐나다) 한정, 보유 방법 9종·기존 제품 6종의 조건별 비교 분석 논문. 10-01 주제·현행 원고 제목·초록·라벨 수 워크플로·관측 배치 처방은 폐기.
+- **v5 입력(`data/processed/v5/`)**: 셀-연도 라벨(알래스카 15,540·레나 2,436·캐나다 1,196), 연별 강제력 11종(전겨울·수문년 창), 정적, 제품 셀-연도 6종(CCI v4·v5, Wei 2026, Liu 2024(cm×100 배율 확인), Yi·Kimball, Aalto), MODIS 셀-연도(AppEEARS), 격자 연별 강제력(알래스카 899,633·레나 53,011셀). 큰 표(`forcing_year`, 제품 긴 표, grid/, maps/, runs/*/preds)는 .gitignore.
+- **코드**: `src/polar/testbed_v5.py`(+시험 4건), `scripts/3_deep_learning/v5_compare.py`, `v5_map_predict.py`, `scripts/2_evaluation/v5_aggregate.py`(`--conditions`, `--ref-run`), `v5_products_eval.py`, `v5_tables.py`, `scripts/4_visualization/v5_figs.py`(Fig 1–7), `src/polar/style_v5.py`, 입력 빌더 `scripts/1_data_prep/build_v5_*.py`, `scripts/0_download/liu2024_alt.py`.
+- **실행 완료(로컬 CPU·GPU 6–8)**: core_cb(CatBoost, 3지역 × 5단 × 강제력 year·clim × 9방법 × λ 3 × 씨앗 3), core_nn(MLP·TabM·FT-T), core_rf, featsets(F8·F8T·F8TS·F8TS_M·F8TS_SAR), 지도(알래스카 858,517셀·레나 38,086셀 × 2011–2024, `data/processed/v5/maps/`). 집계 표 `runs/core_cb/{summary_metrics,deltas_vs_ref,deltas_forcing,conditions_tdd,products_eval,products_bias_by_year}.csv`, Table 2 `outputs/figures/paper/v5/Table2_methods_v5.{csv,md,tex}`.
+- **판정 요약(`docs/RESULTS_v5_2026-10-10.md`)**: Q1 연도 정합은 레나 물리식 −1.6~−2.1 cm(지지), 알래스카 +1.4 [−0.2, +3.0](미결정). Q2 무작위 분할은 직접 ML 오차를 블록보다 4–13 cm 낮게 보고, 블록 CV R1 − P1 레나 −3.0·캐나다 −1.7(지지)·알래스카 −0.4(미결정), 지역 홀드아웃서 직접 ML 붕괴(레나 +22.9). Q3 기후 입력만으론 이득 없음, 지형·토양 필요, MODIS +0.3~0.4, 학습기 차이 작음. Q4 레나는 제품 6종 전부보다 낮음, 알래스카 Wei·Liu 동급, CCI·YK·Aalto 보다 11–54 cm 낮음.
+- **그림(`outputs/figures/paper/v5/`, pdf·svg·png 600 dpi, 점검 완료)**: Fig1 자료·시간축(ab, c), Fig2 강제력 효과, Fig3 검증 사다리, Fig4 조건, Fig5 제품 비교, Fig6 알래스카 연도 지도, Fig7 AOA·보정·레나 지도.
+- **다음**: (1) 사용자 확인 4건(아래) 뒤 원고 재작성(`docs/PAPER_STRUCTURE_v5.md` 순서, 옛 원고 `paper/manuscript` 는 보존하고 새 판 작성). (2) 보강 실험 후보: λ 축(0.25·1 결과는 표에 있음), 알래스카 연도 정합 악화의 원인(2014 집중·계수 적합) 진단, 캐나다 확충 라벨(FireALT 등 약관 확인분) 포함 민감도, Liu·Wei 누설 마스크 비교(XG 의 마스크 재사용). (3) SI: 강제력 정의 표, 라벨 월 분포, 학습기 전체 표, 제품별 산점. (4) deliverables 허브 v5 동기화.
+- **사용자 확인 항목**: 주 지역 3곳(캐나다 포함) 기본값, 목표 변수 셀-연도 기본값, 약관 회신 내용(어느 제공자가 허락했는지), 저널 목표(Sci Rep 양식 유지).
+- **운영**: GPU 는 다른 사용자가 없을 때만, 에이전트 최소 사용(이 세션 0회), CPU 32스레드 상한(한때 부하 41, 이후 30 안팎).
+
+## ★ 이전(2026-10-08): 최종 묶음 XA–XM 판정, 원고·보고 덱·발표(10-06) 완료, 극지연 회의 뒤 전면 재설정 예정
 
 정본: 판정 `docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md` 8.1–8.12 와 추가 등록 `docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XK_XL_2026-10-05.md`·`..._ADDENDUM_XM_2026-10-05.md` 결과 절, 요약 `docs/MORNING_REPORT_2026-10-05.md` 2절, 원고 `paper/manuscript/{en,ko}`(검토판 `main_review.pdf`), 덱 `deck/deck_spec_paper_report.json` → `deck/render/permafrost_paper_report.{pptx,pdf}`(85쪽), 대본 `deck/script/` → `deck/render/발표대본_연구결과보고_2026-10-06.pdf`, 산출물 허브 `deliverables/`(`bash tools/sync_deliverables.sh`), 안내 `00_START_HERE.md`, 로그 10-08 항목.
 - **다음 세션(사용자 10-08 결정)**: 극지연(KOPRI) 회의 피드백을 반영해 (1) 연구 목표와 논문 목표를 다시 정하고, (2) 실험 입력 관리 체계(입력 표 버전·출처·약관·해시, 지역·라벨 원천 목록)를 정비하고, (3) 필요하면 전체 실험을 다시 설계·실행한다. 첫 작업은 사용자에게 회의 피드백 항목을 받아 문서로 남기고, 현재 주장과 판정 가운데 유지할 것과 바꿀 것을 대조하는 일이다. 피드백 내용은 아직 받지 않았다.

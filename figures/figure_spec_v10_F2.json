@@ -1,0 +1,55 @@
+{
+  "stem": "Fig2_method",
+  "script": "scripts/4_visualization/paper_v10/fig2_method.py",
+  "message": "The physics-residual model adds a gradient-boosting residual to the recalibrated Stefan estimate; it is compared with three other structures under five validation splits.",
+  "medium": "Scientific Reports, double column, 180 mm wide, fixed canvas (no tight bbox)",
+  "size_mm": [
+    180.0,
+    118.3
+  ],
+  "style": {
+    "font": "FreeSans 7 pt (thumbnail names, formula and annotations 6.5 pt, colour-bar ticks 6 pt), math variables FreeSans Oblique, panel letters 8 pt bold, all text black",
+    "lines": "connectors 0.6 pt with open chevrons (no filled arrowheads); boxes face #EEEEEE, edge #333333 0.5 pt; Input/Model/Output regions dashed #B3B3B3",
+    "colour": "accent only #D55E00: residual-ML path (gradient boosting -> residual -> plus node, applicability) and the ALT 2014 frame; training-only paths dashed grey #8C8C8C; input thumbnails cmcrameri grayC_r (one colormap), ALT oslo_r, residual vik (symmetric)",
+    "maps_c": "Lena Delta, latitude-corrected lon/lat axes, land #EFEFEF, coastline 0.3 pt grey; test #D55E00, training #3A3A3A, excluded #B5B5B5; 50 km scale bar in the first map"
+  },
+  "layout": "row 1: a (full-width structure diagram); row 2: b (four glyphs, one per quarter); row 3: c (five small maps with one shared legend)",
+  "panels": {
+    "a": {
+      "source": [
+        "data/processed/v5/maps/Alaska/pred_2014.csv.gz",
+        "data/processed/v5/maps/Alaska/meta.json",
+        "data/processed/v5/maps/Alaska/mean_2011_2024.csv.gz",
+        "data/processed/v5/maps/Alaska/forcing_2014_thumb.csv.gz",
+        "data/processed/map_alaska/alaska_grid_x25_v1.csv.gz",
+        "data/processed/v5/labels_cell_year_v5.csv"
+      ],
+      "years": "example year 2014; applicability from the 2011-2024 mean map"
+    },
+    "b": {
+      "source": "polar.testbed_v5.run_method (D0, F1, D1, R1)"
+    },
+    "c": {
+      "source": "polar.testbed_v5 load_v5 -> with_forcing('year_obs') -> usable_mask -> Lena rows -> make_folds(k 5, seed 0); verified against runs/core_v6/preds fold assignments",
+      "years": "Lena labels 2010-2022",
+      "folds_shown": "random r0, block b0, year 2016, block x year b0 x 2016, region L_Lena"
+    }
+  },
+  "exports": [
+    "outputs/figures/paper/v10/Fig2_method.pdf",
+    "outputs/figures/paper/v10/Fig2_method.svg",
+    "outputs/figures/paper/v10/Fig2_method.png (600 dpi)",
+    "outputs/figures/paper/v10/source_data/Fig2_method.json"
+  ],
+  "qa": "2026-10-16: automatic QA 0 problems (69 texts; sizes 6/6.5/7/8 pt). Independent visual and scientific review applied: learner inputs drawn as a bracket over all eight thumbnails (TDD -> Stefan crosses it), model boxes equal height, strokes >= 0.5 pt, mathtext radical from FreeSans (no CM fallback font), applicability labelled '2011-2024 mean' (AOA computed from mean climate + static covariates in v5_map_predict.py), physics-input glyph shows 'Stefan, Kudryavtsev' (testbed_v5.run_method F1), training grey unified with Fig. 1 (#4D4D4D). Kept as briefed: test cells in vermillion. Caption notes: one example fold per split (random r0, block b0, year 2016, block x year b0 x 2016, region L_Lena); a cell is drawn as test if any of its cell-years is in the test fold; Physics ALT shares the ALT 2014 colour scale.",
+  "ink_margins_mm": {
+    "left": 0.89,
+    "right": 0.85,
+    "top": 1.69,
+    "bottom": 1.27
+  },
+  "qa_automatic": {
+    "problems": [],
+    "checks": "built-in qa(): font >= 6 pt, FreeSans only, text-text overlap, text outside canvas, text over foreign axes, in-axes labels touching lines/patches; pdffonts: FreeSans family embedded (CID TrueType); svg text kept as text"
+  }
+}

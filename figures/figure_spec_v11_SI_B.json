@@ -1,0 +1,55 @@
+{
+  "stems": {
+    "S1": "FigS1_stefan",
+    "S2": "FigS2_structures",
+    "S3": "FigS3_shap",
+    "S10": "FigS10_label_ladder (v10 FigS11_label_ladder)"
+  },
+  "version": "v11 (2026-10-16), restyle of the v10 supplementary figures; numbers unchanged",
+  "scripts": [
+    "scripts/4_visualization/paper_v11/si_s01_stefan.py",
+    "scripts/4_visualization/paper_v11/si_s02_structures.py",
+    "scripts/4_visualization/paper_v11/si_s03_shap.py",
+    "scripts/4_visualization/paper_v11/si_s10_label_ladder.py"
+  ],
+  "helpers": "scripts/4_visualization/paper_v11/si11_common.py (copy of paper_v10/common.py with the v11 palette; named so that other v11 helper modules are not overwritten)",
+  "medium": "Scientific Reports supplementary information, 180 mm wide, PDF + PNG 600 dpi",
+  "sizes_mm": {
+    "S1": [
+      180,
+      107
+    ],
+    "S2": [
+      180,
+      66
+    ],
+    "S3": [
+      180,
+      64
+    ],
+    "S10": [
+      180,
+      116
+    ]
+  },
+  "style": {
+    "palette": "design/style_tokens_v4.json color.paper_v11 via src/polar/style_v5.py (POLAR_PALETTE=paper11)",
+    "font": "FreeSans 7 pt (ticks and direct labels 6.5 pt, heat-map values 6 pt), panel letters 8 pt bold; text #262626 (white only inside dark heat-map cells, chosen by WCAG contrast)",
+    "lines": "axes and ticks 0.5 pt #404040; data lines 0.8-1.0 pt (Physics + residual ML 1.0, Stefan recalibrated and Direct ML 0.9, Stefan source 0.8); zero/reference 0.5 pt #8C8C8C; light grid #E8E8E8 0.4 pt at major ticks of the value axis",
+    "markers": "circles 3.5 pt, squares 3.1 pt (equal area), Stefan source squares 3.0 pt, Direct ML open circles 3.4 pt (edge 0.6 pt)",
+    "methods": "Stefan (source coeff.) #8C9BAB squares; Stefan (recalibrated) #2E6DA4 squares; Physics + residual ML #D1603D filled circles; Direct ML #8E5B9E dashed, open circles",
+    "S1": "observations dark grey; Stefan curve and site fits #2E6DA4 (solid Samoylov, dashed Kurungnakh); Alaska density in two tints of #3B3B8F; Lena Delta / Canada points and regression lines in region colours",
+    "S2": "colour = model structure (D0 #8E5B9E, F1 #C9A227, D1 #4C9A7A, R1 #D1603D), marker = region; b: Physics + residual ML filled, Direct ML open",
+    "S3": "input groups in the deck SHAP colours (v9_f10_extra.GROUP_HEX): climate #4F7CAC, terrain #8C8C5A, soil #A8744F; in-bar numbers dark grey or white by contrast",
+    "S10": "v11 method colours; Physics + residual ML band = tint of #D1603D; markers 3.0 pt circles / 2.7 pt squares"
+  },
+  "exports": [
+    "outputs/figures/paper/v11_si/FigS1_stefan.{pdf,png}",
+    "outputs/figures/paper/v11_si/FigS2_structures.{pdf,png}",
+    "outputs/figures/paper/v11_si/FigS3_shap.{pdf,png}",
+    "outputs/figures/paper/v11_si/FigS10_label_ladder.{pdf,png}",
+    "outputs/figures/paper/v11_si/SI_figures.json (entries S1, S2, S3, S10)"
+  ],
+  "qa": "2026-10-16 independent review (visual-reviewer, 600 dpi crops of all six figures). Fixed: Fig. 3c region key on a white backing (grid lines ran through it); Fig. 3d key swatch now shows the outline on the neutral (zero) colour; Fig. 4c thin bracket joins the Liu 2024 / Wei 2026 lines next to 'trained on these sites' (note already on a white backing); S1c lighter Alaska density tints; S3 group colours shifted 3-8 % so 6 pt numbers reach >= 4.5:1 contrast; S10 small horizontal dodge per series. Kept by design: out-of-range values drawn on the top edge with the value printed (token rule symbols.out_of_range; arrows/triangles forbidden); Fig. 4c Stefan (recalibrated) as a light halo under Physics + residual ML (curves within 0.55 cm, keyed in the panel); S2 regions by marker shape only (colour encodes model structure); Stefan squares vs Lena Delta squares (both fixed by the palette and marker specs; never in the same panel). Automatic QA after fixes: 0 problems in all six figures; 13 plotted values spot-checked against the source CSVs, all match.",
+  "qa_automatic": "si11_common.qa_figure: font >= 6 pt, text colour #262626 or white, text outside canvas, text-text overlaps, text touching data ink: all ok"
+}

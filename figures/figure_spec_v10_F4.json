@@ -1,0 +1,45 @@
+{
+  "stem": "Fig4_labels",
+  "script": "scripts/4_visualization/paper_v10/fig4_labels.py",
+  "helpers": "scripts/4_visualization/paper_v10/fig34_common.py",
+  "message": "Physics + residual ML stays at or below recalibrated Stefan from 25 labels upward, recovers in a new region with 25 target labels, and in external CALM regions 5 local labels cut the error to the level of recalibrated Stefan.",
+  "medium": "Scientific Reports, double column, 180 mm wide, fixed canvas",
+  "size_mm": [
+    180.0,
+    122.0
+  ],
+  "style": "same tokens as Fig. 3 (fig34_common.py); 95% interval band = solid light tint of #D55E00; product reference lines grey (ESA CCI v5 dashed, Wei 2026 / Liu 2024 dotted)",
+  "layout": "row 1: a (3 region panels, widths proportional to the number of label categories); row 2: b (3 region panels) | c (one panel, reference labels at the right end). One method legend at the top.",
+  "panels": {
+    "a": {
+      "source": "data/processed/v5/runs/ladder_v6/ladder_deltas.csv",
+      "filter": "exp LL, ref P1 (same n), methods R1 and D0; n values present only in some folds dropped (n_test < 0.95 x n_test of 'all'), as v8_f9_label_ladder.load"
+    },
+    "b": {
+      "source": "data/processed/v5/runs/ladder_v6/ladder_metrics.csv",
+      "filter": "exp TL, methods P0, P1n, D0S, R1S, n_label 0-500"
+    },
+    "c": {
+      "source": "data/processed/v5/runs/extra_v9/preds_EXTFT_*.csv.gz (recomputed; checked against outputs/figures/paper/v7/source_data/F10_extft.csv)",
+      "filter": "seed-mean predictions, rows with Wei 2026, Liu 2024 and ESA CCI v5 values (474 cell-years, 2010-2020)"
+    }
+  },
+  "exports": [
+    "outputs/figures/paper/v10/Fig4_labels.pdf",
+    "outputs/figures/paper/v10/Fig4_labels.svg",
+    "outputs/figures/paper/v10/Fig4_labels.png (600 dpi)",
+    "outputs/figures/paper/v10/source_data/Fig4_labels.json"
+  ],
+  "qa": "2026-10-16 independent review (scientific-figure-reviewer): acceptable, no blocking issues; 12 plotted/printed values spot-checked against the source CSVs, all match; zero overlaps, no text below 6 pt; vector PDF/SVG with embedded FreeSans.",
+  "ink_margins_mm": {
+    "left": 0.8,
+    "right": 1.0,
+    "bottom": 1.36,
+    "top": 1.2
+  },
+  "qa_automatic": {
+    "problems": [],
+    "checks": "fig34_common.qa: font >= 6 pt, text-text overlap, text outside canvas, text over foreign axes, in-axes labels touching lines/markers; pdffonts: FreeSans/FreeSansBold embedded (CID TrueType); svg text kept as text"
+  },
+  "marker_rule": "Stefan methods squares (as Fig. 5), ML methods circles; Direct ML open circles, dashed"
+}
