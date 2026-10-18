@@ -1,0 +1,34 @@
+% table1.tex (v11): Table 1, labels by region and the periods of inputs and products. Numbers from macros.
+\begin{table}[!htbp]
+\caption{Data and years used. Top: ALT labels by region (cell-years of 2010--2024 with year-specific climate input). Bottom: inputs and products, with the period available and the years used in this study. Blocks are the 0.5$^\circ$ cells used for spatial cross-validation and bootstrap; there are no Canadian labels in 2020.}\label{tab:data}
+\scriptsize
+\begin{tabular}{@{}lrrrlrl@{}}
+\toprule
+Region & Cell-years & Cells & Blocks & Years & Cells $\geq$4 yr & Largest year \\
+\midrule
+Alaska & \nncyAk{} & \nncellAk{} & \nnblkAk{} & 2010--2024 & \nnmultiAk{} & \ntopyrAk{} (\ntopyrshareAk\%) \\
+Lena Delta & \nncyLe{} & \nncellLe{} & \nnblkLe{} & 2010--2022 & \nnmultiLe{} & \ntopyrLe{} (\ntopyrshareLe\%) \\
+Canada (NW) & \nncyCa{} & \nncellCa{} & \nnblkCa{} & 2010--2024 & \nnmultiCa{} & \ntopyrCa{} (\ntopyrshareCa\%) \\
+External CALM & \nftScoredRows{} & \nftScoredCells{} & \nftScoredBlocks{} & \nyrsext{} & -- & -- \\
+\bottomrule
+\end{tabular}
+
+\vspace{6pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.25\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.16\textwidth}>{\raggedright\arraybackslash}p{0.16\textwidth}@{}}
+\toprule
+Data & Resolution & Available & Used & Role \\
+\midrule
+ERA5-Land monthly\cite{munozsabater2021_era5_land} & 0.1$^\circ$ & 1950-- & 2010--2024; mean 2011--2024 & Climate input \\
+Copernicus DEM\cite{CopDEM2021} & 30 m & static & -- & Terrain \\
+SoilGrids 2.0\cite{Poggio2021} & 250 m & static & -- & Soil \\
+MODIS MOD13Q1, MOD10A2\cite{Didan2021,HallRiggs2021} & 250--500 m & 2000-- & 2010--2024 & Sensitivity test \\
+ESA CCI permafrost probability\cite{Westermann2024} & 1 km & 1997--2021 & mean & Map domain \\
+Wei et al.\cite{Wei2026} & 1 km & 2000--2024 & \nyrsprodWei & Comparison \\
+Liu et al.\cite{Liu2024} & 1 km & 2003--2020 & \nyrsprodLiu & Comparison \\
+ESA CCI ALT v4\cite{Westermann2024} & 1 km & 1997--2021 & \nyrsprodCcifour & Comparison \\
+ESA CCI ALT v5\cite{Westermann2025} & 1 km & 1997--2023 & \nyrsprodCcifive & Comparison \\
+Yi and Kimball\cite{YiKimball2019} & 1 km & 2001--2015 & \nyrsprodYk{} (Alaska) & Comparison \\
+Aalto et al.\cite{Aalto2018} & 30$''$ & 2000--2014 & time-invariant & Comparison \\
+\bottomrule
+\end{tabular}
+\end{table}

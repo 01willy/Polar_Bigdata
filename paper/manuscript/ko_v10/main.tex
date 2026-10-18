@@ -1,0 +1,55 @@
+%% main.tex (국문 v10, 2026-10-16): Scientific Reports Article 국문판(영문판 en_v10 과 같은 구성 · 같은 매크로 · 같은 그림). Springer Nature LaTeX template v3.1 (paper/manuscript/template).
+%% Build: ./build.sh (xelatex, bibtex sn-nature.bst). Numbers: ../shared_v10/numbers_v6.tex (v6 macros), numbers_v9.tex, numbers_v10.tex.
+%% Order (Sci Rep): title page and abstract, Introduction, Results, Discussion, Methods (ends with Code availability),
+%% Data availability, References, Acknowledgements, Author contributions, Additional information, Figure legends, Table 1, Figures.
+\documentclass[pdflatex,sn-nature]{sn-jnl}
+\usepackage{graphicx}%
+\usepackage{amsmath,amssymb,amsfonts}%
+\usepackage{xcolor}%
+\usepackage{textcomp}%
+\usepackage{booktabs}%
+\usepackage{array}%
+\usepackage{iftex}%
+\usepackage[switch]{lineno}%
+\ifXeTeX
+  \usepackage{xeCJK}%
+  \setCJKmainfont{Noto Serif CJK KR}[BoldFont={Noto Serif CJK KR Bold}]%
+  \setCJKsansfont{Noto Sans CJK KR}%
+  \xeCJKsetup{CJKspace=true}%
+\fi
+\renewcommand{\figurename}{그림}\renewcommand{\tablename}{표}\renewcommand{\refname}{참고문헌}\renewcommand{\abstractname}{초록}
+\raggedbottom
+\unnumbered
+\setcitestyle{super,open={},close={}}
+\input{../shared_v10/numbers_v6}
+\input{../shared_v10/numbers_v9}
+\input{../shared_v10/numbers_v10}
+\graphicspath{{../../../outputs/figures/paper/v10/}}
+\newcommand{\placefigure}[2]{\begin{figure}[p]\centering\IfFileExists{../../../outputs/figures/paper/v10/#2.pdf}{\includegraphics[width=\textwidth,height=0.88\textheight,keepaspectratio]{#2.pdf}}{\fbox{\parbox[c][60mm][c]{0.9\textwidth}{\centering 그림 #1 준비 중}}}\par\medskip{\small\bfseries 그림 #1}\end{figure}\clearpage}
+\def\keywordname{핵심어}
+\begin{document}
+\def\frontblock{1}\input{sections/front}
+\maketitle
+\linenumbers
+\section{서론}\label{sec:intro}
+\input{sections/intro}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/methods}
+\def\frontblock{3}\input{sections/front}
+\bibliography{references}
+\backmatter
+\def\frontblock{4}\input{sections/front}
+\clearpage
+\nolinenumbers
+\input{sections/legends}
+\clearpage
+\input{sections/table1}
+\clearpage
+\placefigure{1}{Fig1_data}
+\placefigure{2}{Fig2_method}
+\placefigure{3}{Fig3_accuracy}
+\placefigure{4}{Fig4_labels}
+\placefigure{5}{Fig5_products}
+\placefigure{6}{Fig6_maps}
+\end{document}

@@ -1,0 +1,32 @@
+% front.tex (v10): title, authors, abstract, keywords (block 1); Data availability (block 3); back matter (block 4).
+\providecommand{\frontblock}{0}
+\ifnum\frontblock=1
+\title[Physics-residual learning of year-specific active-layer thickness]{Active-layer thickness prediction and regional differences across permafrost regions using a physics-residual machine-learning workflow}
+
+\author*[1]{\fnm{Seungwon} \sur{Baek}}\email{[corresponding e-mail]}
+\author[2]{\fnm{[Co-author]} \sur{[KOPRI]}}
+\affil*[1]{\orgdiv{Department of Energy Systems Engineering}, \orgname{Seoul National University}, \orgaddress{\city{Seoul}, \country{Republic of Korea}}}
+\affil[2]{\orgname{Korea Polar Research Institute}, \orgaddress{\city{Incheon}, \country{Republic of Korea}}}
+
+\abstract{Active-layer thickness (ALT) changes from year to year, but most 1 km ALT products are fitted to multi-year conditions and are rarely evaluated against observations of the same cell and year. We assembled \nncyAll{} cell-year ALT observations (2010--2024) from Alaska, the Lena Delta and north-western Canada, paired each with ERA5-Land thawing degree-days of the observation year accumulated to the observation day, and compared the Stefan model, direct machine learning (ML) and a physics-residual workflow in which gradient boosting learns the residual of a recalibrated Stefan model. Under spatial-block cross-validation, the physics-residual model reduced the Stefan error by \ndrefLeblkRoabs{} cm in the Lena Delta and \ndrefCablkRoabs{} cm in Canada and was on par in Alaska. When a region was withheld from training, the direct-ML error in the Lena Delta increased by \ndrefLeregDzabs{} cm, whereas the physics-residual model stayed close to Stefan. In the Lena Delta, 25 labels from the region restored accuracy, and five labels lowered the error in external permafrost-monitoring regions from \nftAllRszero{} to \nftAllRsfive{} cm. In the same cells and years, the Lena Delta error (\nccLeRoall{} cm) was lower than that of five published products (\nccLeCcifiveall--\nccLeWeiall{} cm). The workflow yields year-labelled 1 km maps for 2011--2024.}
+
+\keywords{permafrost, active-layer thickness, Stefan model, physics-guided machine learning, spatial cross-validation, ERA5-Land}
+\fi
+
+\ifnum\frontblock=3
+\bmhead{Data availability}
+All input data are public. ALT observations: ABoVE soil moisture and active-layer thickness, version 2 (ORNL DAAC, \url{https://doi.org/10.3334/ORNLDAAC/2369}), ALLena thaw-depth data (PANGAEA, \url{https://doi.org/10.1594/PANGAEA.973813}) and GTN-P CALM (PANGAEA, \url{https://doi.org/10.1594/PANGAEA.972777}). Climate: ERA5-Land monthly averaged data (Copernicus Climate Data Store). Covariates: Copernicus DEM GLO-30, SoilGrids 2.0, ESA CCI permafrost probability, MODIS MOD13Q1 and MOD10A2 version 6.1 (via AppEEARS). Products: Wei et al. (\url{https://doi.org/10.5281/zenodo.21667583}), Liu et al. (\url{https://doi.org/10.5281/zenodo.10070610}), ESA CCI ALT v4 and v5 (CEDA), Aalto et al. (\url{https://zenodo.org/records/5003804}) and Yi and Kimball (\url{https://doi.org/10.3334/ORNLDAAC/1760}). The cell-year label table, the yearly climate-input table, the static covariate table, the out-of-fold predictions of all methods and the yearly 1 km maps of Alaska and the Lena Delta (2011--2024) will be deposited in a public repository on acceptance [repository and DOI].
+\fi
+
+\ifnum\frontblock=4
+\bmhead{Acknowledgements}
+[Funding and acknowledgements.]
+
+\bmhead{Author contributions}
+S.B. designed the study, assembled the data, ran the experiments and wrote the manuscript. [Co-author contributions.]
+
+\bmhead{Additional information}
+\textbf{Supplementary information} accompanies this paper (Supplementary Methods, Figures S1--S11 and Tables S1--S6).
+
+\textbf{Competing interests} The authors declare no competing interests.
+\fi

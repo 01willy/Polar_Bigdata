@@ -1,0 +1,33 @@
+% front.tex (v6): title, authors, abstract, keywords (block 1); Data availability (block 3);
+% Acknowledgements, Author contributions, Additional information (block 4).
+% Numbers come from numbers.tex (scripts/2_evaluation/v6_numbers.py). [DECISION] marks user decisions.
+\providecommand{\frontblock}{0}
+
+\ifnum\frontblock=1
+\title[Year-specific active-layer thickness from physics-constrained learning]{Year-specific active-layer thickness at 1 km from physics-constrained machine learning: a same-cell, same-year comparison against pan-Arctic products}
+
+\author*[1]{\fnm{Seungwon} \sur{Baek}}\email{[DECISION: corresponding e-mail]}
+\author[2]{\fnm{[DECISION]} \sur{[co-author]}}
+\affil*[1]{\orgdiv{[DECISION: department]}, \orgname{Seoul National University}, \orgaddress{\city{Seoul}, \country{Republic of Korea}}}
+\affil[2]{\orgname{Korea Polar Research Institute}, \orgaddress{\city{Incheon}, \country{Republic of Korea}}}
+
+\abstract{Active-layer thickness (ALT) changes from year to year, yet most 1 km ALT products are fitted to multi-year mean climate and observations and cannot be assigned to a year. We assembled \nncyAll{} cell-year ALT observations (2010--2024) from Alaska, the Lena Delta and north-western Canada, forced each cell-year with ERA5-Land degree-days accumulated to its observation day, and compared a recalibrated Stefan model, gradient boosting, physics-informed inputs, physics pseudo-labels and a physics-plus-residual model on identical spatial-block, year, block-by-year and region splits. Year-specific forcing lowered Stefan error by 2 cm where observations span many years (Lena Delta) and could not be assessed where \ntopyrshareAk{}\% of the labels fall in one year (Alaska). Random splits overstated direct learning by \noptimLeDz{}--\noptimCaDz{} cm, and in region hold-out direct learning failed while physics-anchored models held. A residual learner on the Stefan anchor reduced RMSE by \ndrefLeblkRo{} cm in the Lena Delta and \ndrefCablkRo{} cm in Canada, with no change in Alaska; the gain required terrain and soil covariates. On common cell-years the combined model outperformed six published products in the Lena Delta and matched or exceeded them elsewhere once cells near their training sites were excluded. We release year-labelled 1 km maps with their area of applicability.}
+
+\keywords{permafrost, active layer thickness, Stefan equation, physics-informed machine learning, spatial cross-validation, ERA5-Land}
+\fi
+
+\ifnum\frontblock=3
+\bmhead{Data availability}
+The cell-year label table, the yearly ERA5-Land forcing table, the static covariate table, the out-of-fold predictions of every method and split, the product extractions and the 1 km yearly maps for Alaska and the Lena Delta are deposited at [DECISION: repository and DOI]. The observations are from ABoVE (ORNL DAAC), the Samoylov/Lena Delta thaw-depth series (PANGAEA) and the Circumpolar Active Layer Monitoring network; ERA5-Land is from the Copernicus Climate Data Store; the compared products are from their published archives (ESA CCI Permafrost v4 and v5, Wei et al. 2026, Liu et al. 2024, Yi and Kimball 2019, Aalto et al. 2018). Static covariates are from Copernicus DEM, SoilGrids 2.0, NCSCD, the Circumpolar Arctic Vegetation Map and ESA WorldCover.
+\fi
+
+\ifnum\frontblock=4
+\bmhead{Acknowledgements}
+[DECISION: funding and KOPRI acknowledgement.]
+
+\bmhead{Author contributions}
+[DECISION: contributions.]
+
+\bmhead{Additional information}
+\textbf{Competing interests} The authors declare no competing interests.
+\fi

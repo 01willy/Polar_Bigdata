@@ -1,0 +1,34 @@
+% table1.tex (국문 v10): 표 1. 지역별 라벨과 입력 · 제품의 기간 · 사용 연도. 수치는 매크로.
+\begin{table}[t]
+\caption{자료와 사용 연도. 위: 지역별 ALT 라벨(관측 연도 기후 입력이 있는 2010--2024년 셀-연도). 아래: 입력 자료와 제품의 제공 기간과 이 연구에서 쓴 연도. 블록은 공간 교차검증과 부트스트랩에 쓰는 0.5$^\circ$ 칸이며, 캐나다는 2020년 라벨이 없다.}\label{tab:data}
+\scriptsize
+\begin{tabular}{@{}lrrrlrl@{}}
+\toprule
+지역 & 셀-연도 & 셀 & 블록 & 연도 & 4개 해 이상 셀 & 최다 연도 \\
+\midrule
+알래스카 & \nncyAk{} & \nncellAk{} & \nnblkAk{} & 2010--2024 & \nnmultiAk{} & \ntopyrAk{} (\ntopyrshareAk\%) \\
+레나 델타 & \nncyLe{} & \nncellLe{} & \nnblkLe{} & 2010--2022 & \nnmultiLe{} & \ntopyrLe{} (\ntopyrshareLe\%) \\
+캐나다 북서부 & \nncyCa{} & \nncellCa{} & \nnblkCa{} & 2010--2024 & \nnmultiCa{} & \ntopyrCa{} (\ntopyrshareCa\%) \\
+외부 CALM 지역 & \nextcy{} & \nextcells{} & \nextblocks{} & \nyrsext{} & -- & -- \\
+\bottomrule
+\end{tabular}
+
+\vspace{6pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.26\textwidth}>{\raggedright\arraybackslash}p{0.11\textwidth}>{\raggedright\arraybackslash}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.16\textwidth}>{\raggedright\arraybackslash}p{0.16\textwidth}@{}}
+\toprule
+자료 & 해상도 & 제공 기간 & 사용 연도 & 역할 \\
+\midrule
+ERA5-Land 월평균\cite{munozsabater2021_era5_land} & 0.1$^\circ$ & 1950년부터 & 2010--2024년, 평균 2011--2024년 & 기후 입력 \\
+Copernicus DEM\cite{CopDEM2021} & 30 m & 정적 & -- & 지형 \\
+SoilGrids 2.0\cite{Poggio2021} & 250 m & 정적 & -- & 토양 \\
+MODIS MOD13Q1, MOD10A2\cite{Didan2021,HallRiggs2021} & 250--500 m & 2000년부터 & 2010--2024년 & 민감도 시험 \\
+ESA CCI 영구동토 확률\cite{Westermann2024} & 1 km & 1997--2021년 & 평균 & 지도 범위 \\
+Wei 등\cite{Wei2026} & 1 km & 2000--2024년 & \nyrsprodWei{}년 & 비교 \\
+Liu 등\cite{Liu2024} & 1 km & 2003--2020년 & \nyrsprodLiu{}년 & 비교 \\
+ESA CCI ALT v4\cite{Westermann2024} & 1 km & 1997--2021년 & \nyrsprodCcifour{}년 & 비교 \\
+ESA CCI ALT v5\cite{Westermann2025} & 1 km & 1997--2023년 & \nyrsprodCcifive{}년 & 비교 \\
+Yi와 Kimball\cite{YiKimball2019} & 1 km & 2001--2015년 & \nyrsprodYk{}년(알래스카) & 비교 \\
+Aalto 등\cite{Aalto2018} & 30$''$ & 2000--2014년 & 시간 불변 & 비교 \\
+\bottomrule
+\end{tabular}
+\end{table}

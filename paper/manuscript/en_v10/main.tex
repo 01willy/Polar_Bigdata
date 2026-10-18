@@ -1,0 +1,53 @@
+%% main.tex (v10, 2026-10-16): Scientific Reports Article. Springer Nature LaTeX template v3.1 (paper/manuscript/template).
+%% Build: ./build.sh (xelatex, bibtex sn-nature.bst). Numbers: ../shared_v10/numbers_v6.tex (v6 macros), numbers_v9.tex, numbers_v10.tex.
+%% Order (Sci Rep): title page and abstract, Introduction, Results, Discussion, Methods (ends with Code availability),
+%% Data availability, References, Acknowledgements, Author contributions, Additional information, Figure legends, Table 1, Figures.
+\documentclass[pdflatex,sn-nature]{sn-jnl}
+\usepackage{graphicx}%
+\usepackage{amsmath,amssymb,amsfonts}%
+\usepackage{xcolor}%
+\usepackage{textcomp}%
+\usepackage{booktabs}%
+\usepackage{array}%
+\usepackage{iftex}%
+\usepackage[switch]{lineno}%
+\ifXeTeX
+  \usepackage{xeCJK}%
+  \setCJKmainfont{Noto Serif CJK KR}%
+  \xeCJKsetup{CJKspace=true}%
+  \xeCJKDeclareCharClass{CJK}{"0370 -> "03FF}%
+\fi
+\raggedbottom
+\unnumbered
+\setcitestyle{super,open={},close={}}
+\input{../shared_v10/numbers_v6}
+\input{../shared_v10/numbers_v9}
+\input{../shared_v10/numbers_v10}
+\graphicspath{{../../../outputs/figures/paper/v10/}}
+\newcommand{\placefigure}[2]{\begin{figure}[p]\centering\IfFileExists{../../../outputs/figures/paper/v10/#2.pdf}{\includegraphics[width=\textwidth,height=0.88\textheight,keepaspectratio]{#2.pdf}}{\fbox{\parbox[c][60mm][c]{0.9\textwidth}{\centering Figure #1 in preparation}}}\par\medskip{\small\bfseries Figure #1}\end{figure}\clearpage}
+\begin{document}
+\def\frontblock{1}\input{sections/front}
+\maketitle
+\linenumbers
+\section{Introduction}\label{sec:intro}
+\input{sections/intro}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/methods}
+\def\frontblock{3}\input{sections/front}
+\bibliography{references}
+\backmatter
+\def\frontblock{4}\input{sections/front}
+\clearpage
+\nolinenumbers
+\input{sections/legends}
+\clearpage
+\input{sections/table1}
+\clearpage
+\placefigure{1}{Fig1_data}
+\placefigure{2}{Fig2_method}
+\placefigure{3}{Fig3_accuracy}
+\placefigure{4}{Fig4_labels}
+\placefigure{5}{Fig5_products}
+\placefigure{6}{Fig6_maps}
+\end{document}

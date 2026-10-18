@@ -1,0 +1,32 @@
+% front.tex (국문 v10): 제목 · 저자 · 초록 · 핵심어(블록 1), 자료 가용성(블록 3), 뒷부분(블록 4). 수치는 shared_v10 매크로.
+\providecommand{\frontblock}{0}
+\ifnum\frontblock=1
+\title[물리 잔차 기반 기계학습의 연도별 활동층 두께 예측]{물리 잔차 기반 기계학습 워크플로를 활용한 영구동토 활동층 두께 예측과 지역별 편차 분석}
+
+\author*[1]{\fnm{백승원}}\email{[교신 저자 전자우편]}
+\author[2]{\fnm{[공저자]} \sur{[극지연구소]}}
+\affil*[1]{\orgdiv{에너지시스템공학부}, \orgname{서울대학교}, \orgaddress{\city{서울}, \country{대한민국}}}
+\affil[2]{\orgname{극지연구소}, \orgaddress{\city{인천}, \country{대한민국}}}
+
+\abstract{활동층 두께(ALT)는 해마다 달라지지만, 기존 1 km ALT 제품은 대부분 여러 해의 조건에 맞춰 만들어졌고 같은 셀 · 같은 해의 관측과 비교된 적이 드물다. 이 연구는 알래스카, 레나 델타, 캐나다 북서부의 셀-연도 ALT 관측 \nncyAll{}개(2010--2024년)를 모으고, 각 관측에 관측 연도의 ERA5-Land 융해 도일을 관측일까지 누적한 값을 대응시켰다. 이 자료로 Stefan 모델, 직접 기계학습(ML), 그리고 재보정한 Stefan 모델의 잔차를 gradient boosting 으로 학습하는 물리 잔차 워크플로를 비교하였다. 공간 블록 교차검증에서 물리 잔차 모델은 Stefan 모델의 오차를 레나 델타에서 \ndrefLeblkRoabs{} cm, 캐나다에서 \ndrefCablkRoabs{} cm 줄였고 알래스카에서는 같은 수준이었다. 한 지역을 학습에서 뺀 시험에서 레나 델타의 직접 ML 오차는 \ndrefLeregDzabs{} cm 늘었으나, 물리 잔차 모델은 Stefan 모델 수준을 유지하였다. 레나 델타에서는 그 지역 라벨 25개로 정확도가 회복되었고, 외부 영구동토 관측 지역에서는 라벨 5개로 오차가 \nftAllRszero{} cm에서 \nftAllRsfive{} cm로 낮아졌다. 같은 셀 · 같은 해 비교에서 레나 델타의 오차(\nccLeRoall{} cm)는 공개 제품 5종(\nccLeCcifiveall--\nccLeWeiall{} cm)보다 낮았다. 이 워크플로는 2011--2024년의 연도별 1 km 지도를 산출한다.}
+
+\keywords{영구동토, 활동층 두께, Stefan 모델, 물리 기반 기계학습, 공간 교차검증, ERA5-Land}
+\fi
+
+\ifnum\frontblock=3
+\bmhead{자료 가용성}
+모든 입력 자료는 공개 자료이다. ALT 관측: ABoVE 토양 수분 · 활동층 두께 v2(ORNL DAAC, \url{https://doi.org/10.3334/ORNLDAAC/2369}), ALLena 융해 깊이 자료(PANGAEA, \url{https://doi.org/10.1594/PANGAEA.973813}), GTN-P CALM(PANGAEA, \url{https://doi.org/10.1594/PANGAEA.972777}). 기후: ERA5-Land 월평균(Copernicus Climate Data Store). 공변량: Copernicus DEM GLO-30, SoilGrids 2.0, ESA CCI 영구동토 확률, MODIS MOD13Q1 · MOD10A2 v6.1(AppEEARS). 제품: Wei 등(\url{https://doi.org/10.5281/zenodo.21667583}), Liu 등(\url{https://doi.org/10.5281/zenodo.10070610}), ESA CCI ALT v4 · v5(CEDA), Aalto 등(\url{https://zenodo.org/records/5003804}), Yi와 Kimball(\url{https://doi.org/10.3334/ORNLDAAC/1760}). 셀-연도 라벨 표, 연도별 기후 입력 표, 정적 공변량 표, 모든 방법의 겹 밖 예측, 알래스카 · 레나 델타의 연도별 1 km 지도(2011--2024년)는 게재 시 공개 저장소에 둔다[저장소 · DOI].
+\fi
+
+\ifnum\frontblock=4
+\bmhead{감사의 글}
+[연구비 · 감사의 글.]
+
+\bmhead{저자 기여}
+백승원은 연구를 설계하고 자료를 구축하였으며 실험을 수행하고 원고를 작성하였다. [공저자 기여.]
+
+\bmhead{추가 정보}
+\textbf{보충 자료} 보충 방법, 보충 그림 S1--S11, 보충 표 S1--S6을 함께 제공한다.
+
+\textbf{이해 상충} 저자들은 이해 상충이 없음을 밝힌다.
+\fi
