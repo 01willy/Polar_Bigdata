@@ -22,6 +22,8 @@ def fmt(x, nd=1):
     if x is None or (isinstance(x, float) and not np.isfinite(x)):
         return "--"
     s = f"{x:.{nd}f}"
+    if float(s) == 0.0:
+        s = s.replace("-", "")                          # no negative zero
     return s.replace("-", "−")
 
 
@@ -29,8 +31,10 @@ def sfmt(x, nd=1):
     """부호 있는 값."""
     if x is None or not np.isfinite(x):
         return "--"
-    s = f"{x:+.{nd}f}".replace("-", "−")
-    return s
+    s = f"{x:+.{nd}f}"
+    if float(s) == 0.0:
+        s = s.lstrip("+-")                              # no signed zero
+    return s.replace("-", "−")
 
 
 def ci(d, lo, hi, nd=1):
@@ -153,7 +157,7 @@ def main(run, forcing, featset="F8TS", lam=0.5):
         top = q.year.value_counts(normalize=True)
         out[f"topyr{RK[r]}"] = str(int(top.index[0])); out[f"topyrshare{RK[r]}"] = f"{top.iloc[0]*100:.0f}"
     out["ncyAll"] = f"{len(lab):,}"; out["ncellAll"] = f"{lab.loc_id.nunique():,}"
-    for r, key in (("Alaska", "Alaska"), ("Lena", "Lena")):
+    for r, key in (("Alaska", "Alaska"), ("Lena", "Lena"), ("Canada", "Canada")):      # 2026-10-20: 캐나다 지도 추가
         mj = PROC / "maps" / key / "meta.json"
         if mj.exists():
             m = json.load(open(mj)); a_ = m.get("aoa", {}); v = None

@@ -1,0 +1,106 @@
+% methods.tex (v14, 2026-10-20): Data and methods, placed before Results. Unnumbered subsections; equations (1)-(13).
+\section{Data and methods}\label{sec:methods}
+
+\subsection{Study regions and active-layer observations}
+We used three regions with dense, multi-year thaw-depth observations: Alaska, the Lena Delta and north-western Canada (Canada (NW) in the figures and tables; Fig.~\ref{fig:data}, Table~\ref{tab:data}). Observations for Alaska and Canada were taken from the ABoVE soil moisture and active-layer thickness compilation, version 2\cite{Moore2025}, and from the CALM end-of-season grid values\cite{Streletskiy2025}; observations for the Lena Delta were taken from the ALLena thaw-depth data set\cite{Veremeeva2025}. ABoVE probe measurements were restricted to August--October and to $0<\mathrm{ALT}<300$ cm, because measurements made earlier in the season record thaw depth rather than the seasonal maximum. ALLena measurements were restricted to August--September values without the probe-limit flag; the seasonal maximum of each location and year was taken as the label and the mean day of its measurements as the observation day. Observations were grouped by site, defined as a location with coordinates rounded to 0.0001$^\circ$ (about 10 m), and averaged within each site and year, retaining the mean day of observation; probe points of the ABoVE transects are therefore separate sites, and several sites can lie in one 1 km cell. CALM values without a date were assigned day 244 (1 September). We kept the years 2010--2024, for which year-specific climate inputs are available. The resulting labels comprise \nncyAk{} site-years in Alaska (\nyrsAk), \nncyLe{} in the Lena Delta (\nyrsLe) and \nncyCa{} in Canada (\nyrsCa), distributed over \nnblkAk, \nnblkLe{} and \nnblkCa{} blocks of 0.5$^\circ$ (Table~\ref{tab:data}). The sites lie in \nnkmcellAk, \nnkmcellLe{} and \nnkmcellCa{} cells of 1 km, that is \nnkmcyAk, \nnkmcyLe{} and \nnkmcyCa{} cell-years; up to \nnkmmaxAk{} sites of one transect fall in one cell and year, so that site-years are not independent samples at the 1 km scale, which the spatial-block design accounts for. Sources, versions and licences are listed in Supplementary Table~S1, the years used in each analysis in Supplementary Table~S2 and the processing steps in Supplementary Methods~S1.
+
+\input{sections/table1}
+
+\paperfig{Fig1_data}{1.0}{\textbf{Study regions, observations and data periods.} \textbf{a}, ESA CCI permafrost probability (mean of 1997--2021) with the three study regions and the number of sites with ALT labels in 2010--2024. \textbf{b}, Site-year labels per observation year. \textbf{c}, Periods covered by the labels, the ERA5-Land climate input, the static covariates and the six published products; dark bars mark the years with product values at the label sites, and the shaded band marks the analysis period.}{fig:data}
+
+\subsection{Year-specific climate input}
+Monthly ERA5-Land fields for January 2010 to December 2024\cite{munozsabater2021_era5_land} (2 m air temperature, top-layer soil temperature and snow water equivalent) were extracted at the nearest land grid cell of each site. For site $c$ and year $y$, the thawing degree-day sum is
+\begin{equation}
+\mathrm{TDD}_{c,y} = \sum_{m=1}^{12} \max\!\left(T_{c,y,m},\,0\right) d_{y,m},
+\label{eq:tdd}
+\end{equation}
+where $T_{c,y,m}$ is the monthly mean air temperature and $d_{y,m}$ the number of days in month $m$. Because most observations were made before the end of the thaw season, the model input is the TDD accumulated to the day of observation $t$,
+\begin{equation}
+\mathrm{TDD}^{\mathrm{obs}}_{c,y} = C_{c,y,k-1} + \frac{t - t_{k-1}}{d_{y,k}} \left( C_{c,y,k} - C_{c,y,k-1} \right),
+\label{eq:tddobs}
+\end{equation}
+where $C_{c,y,k}$ is the cumulative TDD to the end of month $k$, $k$ is the month containing $t$ and $t_{k-1}$ is the last day of the preceding month. Seven further climate variables were computed for each cell and year: the mean annual air temperature, $\sqrt{\mathrm{TDD}}$, the warmest and the coldest monthly mean temperature, the freezing degree-days of the preceding winter (October $y-1$ to April $y$), the mean top-layer soil temperature and the mean snow water equivalent of the hydrological year (October $y-1$ to September $y$) (Supplementary Table~S3, Supplementary Methods~S2). Two alternative inputs were evaluated on the same site-years: the full-season TDD of the observation year, and the 2011--2024 mean of the yearly values (mean climate input), which corresponds to the multi-year inputs of existing products. Yearly maps use the TDD accumulated to day of year 244 (1 September in non-leap years), the end-of-season reference date of the CALM protocol; this input lies within the range of the training labels (pooled interquartile range of observation days 224--234), whereas the full-season sum exceeds the observation-day sum by 12--37\% depending on the region. Yearly map values therefore represent ALT on 1 September.
+
+\subsection{Static covariates}
+Six terrain variables (elevation, slope, the sine and cosine of aspect, topographic position index and roughness) were computed from the 30 m Copernicus DEM\cite{CopDEM2021} in a $33\times33$ pixel window (about 1 km) around each site. Nine soil variables (clay, sand, silt, bulk density, coarse fragments and pH at 5--15 cm, and soil organic carbon at 0--5, 5--15 and 15--30 cm) were sampled from SoilGrids 2.0 at 250 m\cite{Poggio2021}. The main feature vector $\mathbf{x}$ therefore contains 23 variables (eight climate, six terrain and nine soil). Sensitivity tests used nested sets: climate only; climate and terrain; the main set plus MODIS summer NDVI, EVI and snow-off timing for 2010--2024 (MOD13Q1 and MOD10A2, version 6.1)\cite{Didan2021,HallRiggs2021}; the main set plus high-resolution soil carbon and land-cover classes\cite{Palmtag2022}; and all variables including the climate of the preceding year. The ESA CCI permafrost probability (mean of 1997--2021)\cite{Westermann2024} was used only to define the map domain (probability of at least 50\%) and not as a predictor.
+
+\subsection{Model formulation}
+The Stefan model describes the thaw depth as
+\begin{equation}
+\widehat{\mathrm{ALT}}_{\mathrm{S}} = E\,\sqrt{\mathrm{TDD}^{\mathrm{obs}}},
+\label{eq:stefan}
+\end{equation}
+where $E$ (cm\,($^\circ$C\,d)$^{-1/2}$) summarises the thermal properties and moisture of the soil\cite{Stefan1891,Riseborough2008}. The relation holds within a season at the Lena Delta monitoring sites and, with more scatter, among years at cells observed repeatedly (Supplementary Fig.~S1). For a set of $n$ training labels $y_i$ with $s_i = \sqrt{\mathrm{TDD}^{\mathrm{obs}}_i}$, the coefficient is recalibrated by least squares through the origin,
+\begin{equation}
+\hat{E} = \frac{\sum_{i=1}^{n} y_i\, s_i}{\sum_{i=1}^{n} s_i^{2}}.
+\label{eq:E}
+\end{equation}
+The source-coefficient Stefan model uses $\hat{E}$ fitted on the other two regions, and the recalibrated Stefan model uses $\hat{E}$ fitted on the training labels of the target region. The physics-residual model retains the recalibrated Stefan prediction as an anchor and adds a learned correction (Fig.~\ref{fig:workflow}):
+\begin{equation}
+\widehat{\mathrm{ALT}} = \hat{E}\, s + \lambda\, g(\mathbf{x}), \qquad g = \arg\min_{f} \sum_{i=1}^{n} \left[ \left( y_i - \hat{E}\, s_i \right) - f(\mathbf{x}_i) \right]^{2},
+\label{eq:residual}
+\end{equation}
+where $g$ is a CatBoost gradient-boosting regressor\cite{Prokhorenkova2018} (600 iterations, learning rate 0.03, depth 6, L2 regularisation 3) and $\lambda=0.5$ shrinks the correction towards the physical anchor ($\lambda = 0.25$ and 1 were tested as sensitivity cases, and a value selected by inner block cross-validation with the full-season input). Three alternative structures place the physical information elsewhere,
+\begin{equation}
+\widehat{\mathrm{ALT}}_{\mathrm{D}} = f_{\mathrm{D}}(\mathbf{x}), \qquad
+\widehat{\mathrm{ALT}}_{\mathrm{I}} = f_{\mathrm{I}}\!\left(\mathbf{x},\, \hat{E}\,s,\, \widehat{\mathrm{ALT}}_{\mathrm{K}}\right), \qquad
+\widehat{\mathrm{ALT}}_{\mathrm{A}} = f_{\mathrm{A}}(\mathbf{x}) \;\text{fitted to}\; \{(\mathbf{x}_i, y_i)\}_{i=1}^{n} \cup \{(\mathbf{x}_j, \hat{E}\,s_j)\}_{j=1}^{n},
+\label{eq:alt}
+\end{equation}
+where direct ML ($f_{\mathrm{D}}$) fits CatBoost to ALT from $\mathbf{x}$ alone, physics-input ML ($f_{\mathrm{I}}$) adds the recalibrated Stefan prediction and the Kudryavtsev\cite{Kudryavtsev1974} prediction $\widehat{\mathrm{ALT}}_{\mathrm{K}}$ as features, and physics pseudo-labels ($f_{\mathrm{A}}$) augment the $n$ training rows with an equal number of rows $j$ drawn from the cells of the scoring fold, with their covariates and the training-fold Stefan prediction as the target. All learned models were fitted with three random seeds and their predictions averaged (the transfer models without target labels with one seed). Random forest, a multilayer perceptron, TabM and FT-Transformer\cite{Gorishniy2021,Gorishniy2025,Holzmuller2024} replaced CatBoost in a learner sensitivity test, and SHAP values\cite{Lundberg2017} of the residual and direct models were computed for models fitted to all labels of each region.
+
+\paperfig{Fig2_workflow}{1.0}{\textbf{Site-year design, Stefan anchor, physics-residual model and validation designs.} \textbf{a}, Thaw depth on the observation day and ALT at the end of the season (left); cumulative thawing degree-days of a Lena Delta cell in 2013, with the model input accumulated to the observation day and the map input to 1 September (centre); observed ALT against $\sqrt{\mathrm{TDD_{obs}}}$ for the Alaska site-years with the Stefan anchor and five residuals (right). \textbf{b}, Physics-residual model: the Stefan anchor plus gradient boosting of its residual from 23 climate, terrain and soil inputs (equation~(\ref{eq:residual})), illustrated with the Alaska map of 2014. \textbf{c}, Validation designs on the Lena Delta label cells (colour marks the fold, the observation year or the test region), and ALT anomalies of the Alaska map in 2012 and 2019.}{fig:workflow}
+
+\subsection{Validation designs and uncertainty}
+All models were evaluated on out-of-fold predictions under five designs\cite{Roberts2017,Ploton2020}: random five-fold cross-validation by site-year; spatial-block five-fold cross-validation, with 0.5$^\circ$ blocks assigned to folds balanced by the number of site-years (main design); year hold-out, in which each observation year with at least 20 site-years is predicted by models trained on the other years; block-by-year hold-out, in which both the block fold and the year of the scored site-years are excluded from training (folds with at least 10 site-years); and region hold-out, in which a region is predicted by models trained on the other two regions after removing training cells within 100 km of the test region. Accuracy is expressed as
+\begin{equation}
+\mathrm{RMSE} = \left[ \frac{1}{n} \sum_{i=1}^{n} \left( \hat{y}_i - y_i \right)^{2} \right]^{1/2}, \qquad \Delta\mathrm{RMSE}_{A,B} = \mathrm{RMSE}_{A} - \mathrm{RMSE}_{B},
+\label{eq:rmse}
+\end{equation}
+where both terms of $\Delta\mathrm{RMSE}$ are computed on the same site-years, so that negative values favour method $A$. Uncertainty was quantified with a paired block bootstrap: the 0.5$^\circ$ blocks were resampled with replacement $B=2000$ times (1000 times for the label-number experiments and for part of the covariate-set and learner sensitivity runs, Supplementary Table~S4), $\Delta\mathrm{RMSE}$ was recomputed from all site-years of the resampled blocks, and the 2.5th and 97.5th percentiles of the replicates define the 95\% interval,
+\begin{equation}
+\mathrm{CI}_{95} = \left[ Q_{0.025}\!\left( \Delta\mathrm{RMSE}^{(b)} \right),\; Q_{0.975}\!\left( \Delta\mathrm{RMSE}^{(b)} \right) \right], \quad b = 1,\ldots,B.
+\label{eq:ci}
+\end{equation}
+We describe a difference as resolved when its interval excludes zero. Conditions of the gain were examined within regional terciles of eight covariates (full-season TDD of the observation year, freezing degree-days, snow water equivalent, soil organic carbon, clay, slope, elevation and summer NDVI); terciles with fewer than 30 site-years or fewer than five blocks were not evaluated. Year-wise RMSE was computed for years with at least 30 site-years, and the correlation between observed and predicted year-to-year changes was computed at cells observed in several years.
+
+\subsection{Label-number and transfer experiments}
+Within each region, the training labels of each spatial-block fold were subsampled to $n$ = 25, 50, 100, 250, 500, 1000, 2500 or all (three random draws), the Stefan coefficient was recalibrated on the same $n$ labels, and the complete test fold was scored. For transfer, each region was scored in its spatial-block folds by models trained on all labels of the other two regions plus $n$ = 0, 25, 50, 100, 250 or 500 labels drawn from the training folds of the target region; the Stefan coefficient was refitted on the $n$ target labels, and the residual learner was trained on the source rows anchored with the source coefficient together with the target rows anchored with the refitted coefficient,
+\begin{equation}
+\widehat{\mathrm{ALT}}_{\mathrm{T}} = \hat{E}_{\mathrm{T}}\, s + \lambda\, g_{\mathrm{ST}}(\mathbf{x}), \qquad
+g_{\mathrm{ST}} = \arg\min_{f} \Big[ \sum_{i \in \mathrm{S}} \big( y_i - \hat{E}_{\mathrm{S}}\, s_i - f(\mathbf{x}_i) \big)^{2} + \sum_{i \in \mathrm{T}} \big( y_i - \hat{E}_{\mathrm{T}}\, s_i - f(\mathbf{x}_i) \big)^{2} \Big],
+\label{eq:transfer}
+\end{equation}
+where S denotes the source rows, T the $n$ target rows, $\hat{E}_{\mathrm{S}}$ the coefficient fitted on the source rows and $\hat{E}_{\mathrm{T}}$ the coefficient refitted on the target rows ($\hat{E}_{\mathrm{T}} = \hat{E}_{\mathrm{S}}$ for $n < 3$); the source rows were not buffered by 100 km in this experiment. The external test used CALM observations of 2010--2024\cite{Streletskiy2025} outside the three study regions and outside mountain permafrost (Switzerland and Kazakhstan). Censored values, values flagged as early, burnt, flooded or not reaching the permafrost table, and sites within 100 km of the study labels were removed, leaving \nextcy{} site-years in \nextcells{} cells in eight regions (Supplementary Methods~S3). Each external region was scored block by block (cell by cell for Greenland, which forms one block) by models trained on the three study regions plus $n$ = 0, 5, 10, 25, 50 or all labels from the other blocks of the same region. One Svalbard borehole with a mean ALT of about 6 m, outside the training range, was excluded from scoring, which left \nftScoredRows{} site-years in \nftScoredCells{} cells and \nftScoredBlocks{} blocks. The runs are listed in Supplementary Table~S4.
+
+\subsection{Comparison with published products}
+Six products were sampled at the label cells: Wei et al.\cite{Wei2026} (1 km, 2000--2024), Liu et al.\cite{Liu2024} (1 km, 2003--2020), ESA CCI Permafrost ALT v4 (1997--2021) and v5 (1997--2023)\cite{Westermann2024,Westermann2025}, Yi and Kimball\cite{YiKimball2019} (Alaska, 2001--2015) and Aalto et al.\cite{Aalto2018} (one value per cell for the 2000--2014 baseline). For yearly products the value of the observation year was used (Supplementary Methods~S4). Products and models were compared on common site-years, at which Wei et al., Liu et al. and ESA CCI v4 all provide a value for the observation year (\nyrscc); ESA CCI v5 and Aalto et al. were scored on the common site-years where they have a value, and the year-wise comparison used all site-years of a year with a value of Wei et al. Wei et al. published the coordinates of their training sites, and a leakage mask removed label cells within 25 km of these sites. Liu et al. were trained on an earlier version of the ABoVE observations used here\cite{Liu2024}, so their Alaska and Canada values are not independent of our labels. To test whether the residual learner can also correct a product, the product value $p$ of the observation year was recalibrated on the training fold,
+\begin{equation}
+\hat{p} = a + b\, p,
+\label{eq:prod}
+\end{equation}
+and the residual $y-\hat{p}$ was learned with the same covariates, learner, $\lambda$ and folds as in equation~(\ref{eq:residual}) (Supplementary Methods~S5).
+
+\subsection{Yearly mapping, area of applicability and prediction intervals}
+For each of the three regions, the recalibrated Stefan and physics-residual models were fitted to all site-years of the region and applied to the 1 km cells with an ESA CCI permafrost probability of at least 50\%, excluding cells that are water (mean Global Surface Water occurrence of at least 50\%) or lack an input (\nncellmapAk{}, \nncellmapLe{} and \nncellmapCa{} cells), using the climate of each year from 2011 to 2024 with the TDD accumulated to 1 September. The area of applicability followed Meyer and Pebesma\cite{MeyerPebesma2021}. With $\mathbf{z}$ the standardised 23-dimensional feature vector (with the 2011--2024 mean of the yearly map inputs), the dissimilarity of map cell $k$ is $d_k = \min_{j} \lVert \mathbf{z}_k - \mathbf{z}_j \rVert_2$ over all training rows $j$, and the cell is inside the area of applicability when
+\begin{equation}
+d_k \leq \tau, \qquad \tau = Q_{0.95}\!\left\{ \min_{j:\, b(j) \neq b(i)} \lVert \mathbf{z}_i - \mathbf{z}_j \rVert_2 \;:\; i \in \text{training rows} \right\},
+\label{eq:aoa}
+\end{equation}
+where $b(\cdot)$ denotes the spatial block. For year $y$ and cell $k$, the anomaly is $a_{k,y} = \widehat{\mathrm{ALT}}_{k,y} - \overline{\widehat{\mathrm{ALT}}}_{k}$, where the overbar denotes the 2011--2024 mean; the regional mean anomaly is the mean of $a_{k,y}$ over the mapped cells, and the trend of each cell is the least-squares slope
+\begin{equation}
+\beta_k = \frac{\sum_{y} \left( y - \bar{y} \right) a_{k,y}}{\sum_{y} \left( y - \bar{y} \right)^{2}},
+\label{eq:trend}
+\end{equation}
+expressed in cm per decade. The observed anomaly of a year is the mean over the labels of that year of $y_i - \overline{\widehat{\mathrm{ALT}}}_{k(i)}$, where $k(i)$ is the map cell nearest to site $i$ within 1.5~km, computed for years with at least 50 site-years and centred on the mean predicted anomaly of the same years. The 90\% prediction interval of a map value is
+\begin{equation}
+\left[ \widehat{\mathrm{ALT}}_{k,y} + Q_{0.05}(r),\; \widehat{\mathrm{ALT}}_{k,y} + Q_{0.95}(r) \right],
+\label{eq:pi}
+\end{equation}
+where $r$ denotes the spatial-block out-of-fold residuals of the region. For display, the 1 km values were interpolated bilinearly onto a 250 m (Lena Delta) or 500 m (Alaska, Canada) hillshade grid. The map of 2013, the year with the most observed cells in Alaska and Canada among the years observed in all three regions, was compared with the two ML products on the cells observed in that year where all three maps have a value, using the product values of 2013 at the label sites, the cell means of the observations and our spatial-block out-of-fold predictions; the product maps are displayed on the cells of our map, and each region uses one colour range from the 5th--95th percentiles of the pooled values of the three maps inside the area of applicability.
+
+\subsection{Computation}
+Models were fitted with fixed random seeds on cloud nodes (Rescale; 96-core CPU nodes, and one NVIDIA A100 GPU node for the neural learners); data preparation, aggregation and figures were run on a local server (Supplementary Table~S4).
+
+\subsection{Code availability}
+The code for data preparation, modelling, evaluation and figures is available at [repository and DOI]. Every number in the text is generated from the stored result tables by the scripts that produce the manuscript macros.

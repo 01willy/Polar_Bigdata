@@ -56,8 +56,9 @@ for p, k in (("wei", "Wei"), ("liu", "Liu"), ("cci4y", "Ccifour"), ("cci5y", "Cc
 Y = pd.read_csv(ROOT / "outputs" / "figures" / "paper" / "v7" / "source_data" / "F5_yearwise_rmse.csv"); Y = Y[(Y.mask_km == 0) & Y.shown]
 for r, g in Y.groupby("region"):
     rg = ranges(g.year.unique()); put(f"yrsyw{RK[r]}", en_join(rg)); put(f"yrsyw{RK[r]}ko", ko_join(rg)); put(f"nyw{RK[r]}", str(g.year.nunique()))
-# 지도 연도, 구간 폭, 적용 범위
-for r in ("Alaska", "Lena"):
+# 지도 연도, 구간 폭, 적용 범위(지도 폴더가 있는 지역만: 2026-10-20 캐나다 추가)
+MAP_REGIONS = [r for r in ("Alaska", "Lena", "Canada") if (P / "v5" / "maps" / r / "meta.json").exists()]
+for r in MAP_REGIONS:
     m = json.load(open(P / "v5" / "maps" / r / "meta.json"))
     put(f"yrsmap{RK[r]}", f"{min(m['years'])}–{max(m['years'])}"); put(f"hw{RK[r]}", f"{m['interval']['half_width_90']:.1f}")
 # 관측일 누적 TDD / 계절 전체 TDD 비(라벨 셀-연도 중앙값)
@@ -72,7 +73,7 @@ for r, g in lab.groupby("region"):
 # 외부 CALM 자료 연도
 ex = pd.read_csv(P / "v9_ext" / "labels_cell_year_v5.csv"); put("yrsext", f"{int(ex.year.min())}–{int(ex.year.max())}")
 # 연도별 지도의 지역 평균 편차(그 해 r1 − 2011–2024 평균 r1, 지도 셀 평균)
-for r in ("Alaska", "Lena"):
+for r in MAP_REGIONS:
     md = P / "v5" / "maps" / r; mean = pd.read_csv(md / "mean_2011_2024.csv.gz", usecols=["cell_id", "r1"]).set_index("cell_id").r1
     m = json.load(open(md / "meta.json")); an = {}
     for yr in m["years"]:
