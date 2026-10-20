@@ -279,3 +279,22 @@ data/processed/xe/xe_feat_v1.csv
 deck/assets/*/_cache/
 outputs/report_v*/*.aux
 outputs/report_v*/*.out
+
+# --- 2026-10-20 v13.2/v14: 캐나다 지도 격자(알래스카 규칙과 같음), 옛 전체 계절 지도, 9월 1일 시계열, 원고 빌드 부산물 ---
+data/processed/map_canada/cov_parts/
+data/processed/map_canada/hillshade_v1/
+data/processed/map_canada/*.csv.gz
+data/processed/map_canada/canada_grid_cells_v1.csv
+data/processed/map_canada/canada_grid_mask_v1.csv
+data/processed/v5/maps_fullseason_2026-10-14/
+data/processed/v5/site_series/site_series_year_obs_d244.csv.gz
+paper/manuscript/*_v*/build/
+paper/manuscript/*_v*/main_submission.pdf
+paper/manuscript/*_v*/main_png.tex
+# v12 그림(반려된 양식)은 PNG 를 추적하지 않고 source_data 만 둔다(납품 13_ 폴더에 보존)
+outputs/figures/paper/v12/*.png
+outputs/figures/paper/v12_si/*.png
+outputs/figures/paper/v*/_cache
+outputs/figures/paper/v13/*.png
+outputs/figures/paper/v13_si/*.png
+!paper/manuscript/en_v14/main_submission.pdf
