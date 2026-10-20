@@ -9,7 +9,9 @@ import os, argparse, sys, time
 from pathlib import Path
 ap = argparse.ArgumentParser(); ap.add_argument("--forcing", default="year_obs"); ap.add_argument("--lam", type=float, default=0.5)
 ap.add_argument("--threads", type=int, default=8); ap.add_argument("--seeds", default="0,1,2"); ap.add_argument("--k", type=int, default=5)
-ap.add_argument("--out", default="data/processed/v5/site_series"); a = ap.parse_args()
+ap.add_argument("--out", default="data/processed/v5/site_series")
+ap.add_argument("--ref-doy", type=int, default=0, help="end-of-season reference day for the *_eos series (0 = full-season TDD; 244 = 1 September, as the yearly maps; 2026-10-20)")
+a = ap.parse_args()
 os.environ["CUDA_VISIBLE_DEVICES"] = ""; os.nice(10)
 import numpy as np, pandas as pd
 ROOT = Path(__file__).resolve().parents[2]; sys.path.insert(0, str(ROOT / "src"))
@@ -28,6 +30,12 @@ for region in T.REGIONS:
     # 전 연도 격자: 셀 × 2010–2024(끝-계절 강제력 = 연간 TDD)
     grid = fy[fy.loc_id.isin(cells.loc_id)].merge(st[["loc_id"] + scols], on="loc_id", how="left").merge(cells, on="loc_id")
     grid = grid[np.isfinite(grid.e5_sqrt_tdd) & (grid.e5_sqrt_tdd > 0)].reset_index(drop=True)
+    if a.ref_doy > 0:                                   # TDD accumulated to the reference day (linear within the month, non-leap calendar as v5_map_predict)
+        starts = np.cumsum([0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]); k = int(np.searchsorted(starts, a.ref_doy, side="right"))   # month containing the day (1-12)
+        c_prev = grid[f"tdd_cum_{k - 1}"].values if k > 1 else 0.0; c_k = grid[f"tdd_cum_{k}"].values
+        frac = (a.ref_doy - starts[k - 1]) / (starts[k] - starts[k - 1])
+        grid["e5_tdd"] = c_prev + frac * (c_k - c_prev); grid["e5_sqrt_tdd"] = np.sqrt(np.clip(grid.e5_tdd, 0, None))
+        grid = grid[grid.e5_sqrt_tdd > 0].reset_index(drop=True)
     obs = d.set_index(["loc_id", "year"])
     for f in folds:
         tr = d.iloc[f.tr]; te_blocks = set(d.block.values[f.te])
@@ -65,7 +73,7 @@ for region in T.REGIONS:
                                       tdd_eos=g.e5_tdd.values, tdd_obs=tdd_obs, p1_eos=p1_eos, r1_eos=r1_eos, d0_eos=d0, p1_obs=p1_obs, r1_obs=r1_obs, d0_obs=d0_obs)))
         print(f"[{region} {f.name}] cells {g.loc_id.nunique():,} rows {len(g):,} {time.time()-t0:.0f}s", flush=True)
 out = pd.concat(rows, ignore_index=True)
-out.to_csv(OUT / f"site_series_{a.forcing}.csv.gz", index=False)
+out.to_csv(OUT / (f"site_series_{a.forcing}.csv.gz" if a.ref_doy == 0 else f"site_series_{a.forcing}_d{a.ref_doy}.csv.gz"), index=False)
 multi = out[out.observed == 1].groupby(["region", "loc_id"]).year.nunique().reset_index().rename(columns={"year": "n_years"})
 multi = multi[multi.n_years >= 4].sort_values(["region", "n_years"], ascending=[True, False])
 multi.to_csv(OUT / "site_list.csv", index=False)

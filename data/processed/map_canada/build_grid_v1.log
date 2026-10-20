@@ -1,0 +1,49 @@
+[chain] DEM download finished: [done] tiles 290: exists 79 · downloaded 211 (3.95 GB) · absent 0 · error 0 · 1584 s · free 55.2 GB
+[grid] {"n_box": 1484821, "n_ne_land": 1417907, "n_pfr_finite": 1392248, "n_land_pfr_ge50": 1223119, "n_land_pfr_ge10p0": 1341085, "n_land_pfr_ge0p5": 1370624, "n_land_pfr_missing": 44931, "n_domain": 1223119} · 228.4s
+[tiles] 필요 286 · 보유 286 · 없음 0
+[tiles] {'exists': 286}
+[dem] 유효 1223119/1223119 · 미보유 타일 []
+  [e5] 청크 (0, 0): 셀 46416 · 영역 20×298
+  [e5] 청크 (1, 0): 셀 1176703 · 영역 105×298
+[e5] 유효 1223119/1223119 · 토양 1223119 · {'fb02': 5717, 'fb05': 57, 'fail': 0, 's_direct': 1217345, 's02': 5717, 's05': 57, 's_fail': 0}
+[cci] 유효 1184890/1223119 · 연도 파일 25
+[sg] 기존 창 namerica: 후보 1213445 · 채움 10776891
+[sg] 9층 모두 유효 1195599/1223119 · 지역별 {'Canada': 1195599}
+[sg] 새 창 map_canada_v1_0: lon[-113.00,-112.20] lat[59.71,70.30] size 47x190 · 셀 9674
+      clay_5-15cm: OK
+      sand_5-15cm: OK
+      silt_5-15cm: OK
+      bdod_5-15cm: OK
+      cfvo_5-15cm: OK
+      phh2o_5-15cm: OK
+      soc_0-5cm: OK
+      soc_5-15cm: OK
+      soc_15-30cm: OK
+      채움 86165
+[cov] {'dem': 1584.9, 'e5': 696.8, 'cci': 126.2, 'sg_new_windows': {'n_outside_existing': 9674, 'n_fill_candidates': 9674, 'windows': {'map_canada_v1_0': {'n_cells': 9674, 'n_values_filled': 86165, 'bbox': [-112.9999895, -112.2000202, 59.7075, 70.2975], 'scalesize': [47, 190]}}}, 'sg': 54.1}
+[qa] v3 레나 F4_direct 742행
+[dem] 유효 742/742 · 미보유 타일 []
+  [e5] 청크 (0, 0): 셀 1 · 영역 13×13
+  [e5] 청크 (1, 0): 셀 740 · 영역 101×291
+  [e5] 청크 (2, 0): 셀 1 · 영역 13×13
+[e5] 유효 742/742 · 토양 742 · {'fb02': 0, 'fb05': 0, 'fail': 0, 's_direct': 742, 's02': 0, 's05': 0, 's_fail': 0}
+[cci] 유효 741/742 · 연도 파일 25
+[sg] 기존 창 namerica: 후보 742 · 채움 6678
+[sg] 9층 모두 유효 742/742 · 지역별 {'Canada': 742}
+[qa] 대조 열 27 · 통과 21 · 최대 불일치 비율 0.1119
+[qa] 통과하지 못한 열:
+  group          column  frac_mismatch  n_nan_mismatch  n_over_tol  max_abs_diff
+0   dem        dem_elev       0.107817               0        80.0      2.368011
+1   dem       dem_slope       0.111860               0        83.0      3.809118
+2   dem  dem_aspect_sin       0.111860               0        83.0      1.969417
+3   dem  dem_aspect_cos       0.111860               0        83.0      1.949077
+4   dem         dem_tpi       0.111860               0        83.0      3.046402
+5   dem       dem_rough       0.111860               0        83.0      0.927067
+[mask] {"n_cells": 1223119, "n_gray": 71950, "n_shown": 1151169, "n_land": 1160343, "n_land_gray": 9174, "frac_land_gray": 0.007906282883595626, "by_reason_any": {"dem_tile_absent": 0, "water": 62776, "pfr_missing": 0, "pfr_lt10": 0, "cci_missing": 38229, "soil_tdd_missing": 7018, "s_missing": 0}, "by_reason_first": {"dem_tile_absent": 0, "water": 62776, "pfr_missing": 0, "pfr_lt10": 0, "cci_missing": 6195, "soil_tdd_missing": 2979, "s_missing": 0}, "land_by_reason_any": {"dem_tile_absent": 0, "water": 0, "pfr_missing": 0, "pfr_lt10": 0, "cci_missing": 6195, "soil_tdd_missing": 7009, "s_missing": 0}, "land_by_reason_first": {"dem_tile_absent": 0, "water": 0, "pfr_missing": 0, "pfr_lt10": 0, "cci_missing": 6195, "soil_tdd_missing": 2979, "s_missing": 0}, "n_x25_missing_shown": {"0": 1148446, "4": 649, "5": 11, "9": 2063}, "pfr_values_shown": {"min": 50.00239944458008, "max": 100.0}, "water_rule_alt": {"applied": "평균 발생 빈도 ≥ 50 %(gsw_occ_mean)", "alternative": "발생 빈도 ≥ 50 % 인 30 m 화소가 유효 화소의 절반 이상(gsw_water_frac50 ≥ 0.5)", "n_water_applied": 62776, "n_water_alt": 67851, "n_alt_not_applied": 5230, "n_alt_not_applied_shown": 5064, "n_alt_not_applied_land": 5230, "n_applied_not_alt": 155, "note": "대안 해석이면 n_alt_not_applied_shown 셀이 표시에서 빠지고 n_applied_not_alt 셀은 수체가 아니게 된다. 확정은 예측 전에 한다"}, "pfr_missing_rule": {"note": "PFR 결측 셀의 회색 처리는 6.5 에 없는 추가 규칙이다. n_only 는 이 사유만으로 회색이 된 셀 수(0 이면 규칙을 빼도 표시 셀이 같다)", "n_any": 0, "n_first": 0, "n_land_first": 0, "n_only": 0, "n_land_only": 0}} · 376.1s
+Traceback (most recent call last):
+  File "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/build_map_grid_canada_v1.py", line 497, in <module>
+    main()
+  File "/home/willy010313/Polar_Bigdata/scripts/1_data_prep/build_map_grid_canada_v1.py", line 415, in main
+    assert np.allclose(mk.pfr_mean.values, gx.pfr_mean.values, equal_nan=True), "PFR 값이 격자 단계와 다르다"
+AssertionError: PFR 값이 격자 단계와 다르다
+[chain] EXIT 1

@@ -1,0 +1,17 @@
+[chain2] cells ready 13:17
+[cells] 1,223,119 (cell_id)
+[nc] t2m (180, 591, 3600) land 47.2% 7s
+[grid] {'direct': 1217345, 'nb2': 5717, 'nb5': 57, 'fail': 0} 305s
+[calc] cells 0–200000 619s
+[calc] cells 200000–400000 624s
+[calc] cells 400000–600000 628s
+[calc] cells 600000–800000 632s
+[calc] cells 800000–1000000 637s
+[calc] cells 1000000–1200000 642s
+[calc] cells 1200000–1223119 643s
+{"grid": {"direct": 1217345, "nb2": 5717, "nb5": 57, "fail": 0}, "check": {}, "rows": 18346785, "elapsed": 1567.8}
+[chain2] forcing EXIT 0
+[canada] DEM 250 m (6341, 6720) · 타일 286 · 없음 0 · 743.3s
+{"crs": "EPSG:3978 (NAD83 / Canada Atlas Lambert)", "box": {"lat0": 60.0, "lat1": 70.0, "lon0": -141.0, "lon1": -112.5}, "pad_m": 20000.0, "extent": [-2303090.501254485, -623191.9858561865, 1314042.0690130622, 2899261.83924536], "recipe": "scripts/4_visualization/paper_v3/hillshade_maps_v1.py build_dem (Resampling.average, hillshade az 315, alt 45, ve 2)", "elapsed_s": 756.6}
+{'shape': [6341, 6720], 'n_tiles': 286, 'missing_tiles': [], 'seconds': 743.3, 'res_m': 250.0, 'crs': 'EPSG:3978', 'dem_stats': {'min': -3.3025357723236084, 'p50': 390.43292236328125, 'p99': 2031.0063427734349, 'max': 5886.9326171875, 'frac_finite': 0.5304861689984305}}
+[chain2] hillshade EXIT 0
