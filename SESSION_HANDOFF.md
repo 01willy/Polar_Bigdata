@@ -9,6 +9,7 @@
 - **본문**: 서론 · 결과 · 고찰 · 결론 전면 개정(영 · 국문), 수식 (6) 대안 구조 · (9) 전이 · (12) 추세 · (13) 예측 구간 추가, 캡션 70–137단어, Data availability 에 캐나다 지도, 표 1 Yi–Kimball '미채점', 보충이 numbers_v14 읽음.
 - **감사 반영**: "2013 유일한 해" 오류 정정, Fig 2 캡션 전체 계절 문구 제거, S5 in_range 정의, S6c 를 v14 Fig 6 JSON(2013 · 9월 1일)로, S10 을 `v5_site_series.py --ref-doy 244`(`data/processed/v5/site_series/site_series_year_obs_d244.csv.gz`)로, IQR 224–234 · 12–37 %, 244일 = 평년 9월 1일, 전이 n=0 씨앗 1, ALLena 정의, B 혼재 문구.
 - **결과(16:55)**: 그림 17장 QA 통과(Fig 6 3지역, Fig 7, S6 · S10 재계산 포함), 영문 25쪽 · 국문 22쪽 · 보충 20쪽 오류 0 · 미정의 0, 점검표 전 항목 통과(초록 200단어, 본문 4,403단어, 수식 13개, 압축본 0.98 MB), 납품 `deliverables/15_paper_v14_2026-10-20/`(벡터 원고 19.4 MB, 보충 7.4 MB, 그림 14 + 20). 남은 결정: 그림 대안 선택(`docs/FIGURE_PROPOSALS_v14_2026-10-20.md`), 저자 자리표시 · LLM 진술, 1 km 재집계 재실행 여부.
+- **커밋 · 인계(17:45)**: /cleanup 으로 10-18 저녁 이후 변경 전부를 main 에 로컬 커밋 4건(data 2ec53a2 캐나다 격자 파이프라인 · d244 시계열, figures 1736ce3 v12–v14 스크립트 · v14 PNG · 대안 렌더, paper 074c5f0 원고 v12–v14 · 매크로 · tools · 압축 제출본, docs 14b6561 감사 4건 · 대안 문서 · 로그 · .gitignore) + 인계 07c4e19(`gpt/handoff/20261020_1740-paper-v14-truth-maps-scirep.md`). **push 미실행(사용자 승인 대기, origin/main 보다 5 커밋 앞섬)**. v12 · v13 PNG 와 `_cache` 링크는 .gitignore 로 제외, 재생성은 스크립트 · source_data 로 가능.
 
 ## ★ 이전(2026-10-20 오후, v14 로 대체): v13.2 — 4차 지적 8항 + 변인 통제 감사(지점-연도 · 9월 1일 TDD 지도 · Fig 6 2013 × 3지역 · 캐나다 1 km 지도)
 
