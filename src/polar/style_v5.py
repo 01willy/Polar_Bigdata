@@ -32,8 +32,8 @@ F = TOK["font"]; L = TOK["lines"]["paper"]
 import os as _os
 PALETTE = _os.environ.get("POLAR_PALETTE", "deck")
 REGION_MARKER = {"Alaska": "o", "Lena": "s", "Canada": "^"}
-if PALETTE in ("paper", "paper11"):          # 논문 색: paper = v10 회색 위주(color.paper_v10), paper11 = v11 차분한 색(color.paper_v11). 딕셔너리를 제자리에서 바꾼다
-    _PP = C["paper_v10" if PALETTE == "paper" else "paper_v11"]
+if PALETTE in ("paper", "paper11", "paper12", "paper13"):   # 논문 색: paper = v10 회색 위주, paper11 = v11 차분한 색, paper12 = v12 순흑 글자 · 원색(color.paper_v12). 딕셔너리를 제자리에서 바꾼다
+    _PP = C[{"paper": "paper_v10", "paper11": "paper_v11", "paper12": "paper_v12", "paper13": "paper_v13"}[PALETTE]]
     METHOD_HEX.update(_PP["methods"])
     PRODUCT_HEX.update({k: _PP["products"][v] for k, v in (("CCI", "CCI"), ("CCI5", "CCI5"), ("Wei", "Wei"), ("Aalto", "Aalto"), ("YK", "YK"), ("Liu", "Liu"),
                                                             ("cci4y", "CCI"), ("cci5y", "CCI5"), ("wei", "Wei"), ("yk", "YK"), ("aalto", "Aalto"), ("liu", "Liu"))})
@@ -67,10 +67,10 @@ def setup(paper=True, scale=1.0):
         "axes.titlesize": t, "axes.titleweight": "normal", "legend.frameon": False, "figure.dpi": 150,
         "axes.unicode_minus": False, "mathtext.default": "regular",
     })
-    if PALETTE == "paper11":                 # v11: 글자 · 축을 순흑 대신 짙은 회색으로, 눈금 · 축선을 가늘게
-        _P11 = C["paper_v11"]
+    if PALETTE in ("paper11", "paper12", "paper13"):   # v11: 짙은 회색 글자. v12: 순흑. v13: 검정 라벨 + #333333 눈금(토큰 paper_v13)
+        _P11 = C[{"paper11": "paper_v11", "paper12": "paper_v12", "paper13": "paper_v13"}[PALETTE]]
         plt.rcParams.update({"text.color": _P11["text"], "axes.labelcolor": _P11["text"], "xtick.color": _P11["axis"], "ytick.color": _P11["axis"],
-                             "xtick.labelcolor": _P11["text"], "ytick.labelcolor": _P11["text"], "axes.edgecolor": _P11["axis"], "grid.color": _P11["grid"]})
+                             "xtick.labelcolor": _P11.get("text_tick", _P11["text"]), "ytick.labelcolor": _P11.get("text_tick", _P11["text"]), "axes.edgecolor": _P11["axis"]})
 
 
 def figure(w_mm=W2, h_mm=100.0):

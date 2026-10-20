@@ -91,12 +91,16 @@ REG = {
                    xlocs=[-170, -160, -150, -140], ylocs=[60, 65, 70], scale_km=200, simplify=0.01, zoom_half_m=25000.0, zoom_min_cover=0.8),
     "lena": dict(name="Lena Delta", box=dict(lat0=71.5, lat1=73.6, lon0=123.3, lon1=130.1), pad_m=3000.0,
                  xlocs=[124, 126, 128, 130], ylocs=[72, 73], scale_km=50, simplify=0.002),
+    "canada": dict(name="Canada (NW)", box=dict(lat0=60.0, lat1=70.0, lon0=-141.0, lon1=-112.5), pad_m=20000.0,
+                   xlocs=[-140, -130, -120], ylocs=[60, 65, 70], scale_km=200, simplify=0.01, zoom_half_m=25000.0, zoom_min_cover=0.8),
 }
 
 
 def projection(key):
     if key == "alaska":
         return ccrs.epsg(3338)                                         # NAD83 / Alaska Albers
+    if key == "canada":
+        return ccrs.epsg(3978)                                         # NAD83 / Canada Atlas Lambert
     return ccrs.NorthPolarStereo(central_longitude=126.7, true_scale_latitude=70.0)
 
 

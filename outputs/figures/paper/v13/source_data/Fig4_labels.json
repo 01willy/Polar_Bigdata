@@ -1,0 +1,635 @@
+{
+ "figure": "Fig. 4",
+ "version": "v13 (2026-10-18): a, b as v12; c map of the external sub-regions, d pooled external curve, e per-sub-region 0 -> 5 labels (from Supplementary Fig. S5c of v12)",
+ "files": [
+  "outputs/figures/paper/v13/Fig4_labels.pdf",
+  "outputs/figures/paper/v13/Fig4_labels.svg",
+  "outputs/figures/paper/v13/Fig4_labels.png"
+ ],
+ "script": "scripts/4_visualization/paper_v13/fig4_labels.py",
+ "size_mm": [
+  180.0,
+  158.0
+ ],
+ "qa_problems": [],
+ "ink_margins_mm": {
+  "left": 0.8,
+  "right": 1.0,
+  "bottom": 8.09,
+  "top": 1.4
+ },
+ "style": {
+  "palette": "design/style_tokens_v4.json color.paper_v13 (POLAR_PALETTE=paper13)",
+  "text": "#000000",
+  "ticks": "#333333",
+  "notes": "#595959",
+  "axes": "#000000",
+  "methods": {
+   "Stefan (source coeff.)": "#8C8C8C",
+   "Stefan (recalibrated)": "#1A7AB3",
+   "Direct ML": "#7F4F9F",
+   "Physics + residual ML": "#C9671D"
+  },
+  "band_95": "#f4e1d2",
+  "stefan_halo_d": "#a8cce2",
+  "product_reference_lines_d": {
+   "ESA CCI v5": [
+    "#D4AF37",
+    "dashed"
+   ],
+   "Liu 2024": [
+    "#C4547A",
+    "dotted"
+   ],
+   "Wei 2026": [
+    "#4E9A6A",
+    "dotted"
+   ]
+  }
+ },
+ "main_setting": "climate input year_obs (ERA5-Land of the label year, TDD to the observation day), featset F8TS, CatBoost, Physics + residual ML lambda 0.5, 3 seeds (seed-mean predictions)",
+ "panels": {
+  "a": {
+   "quantity": "dRMSE = RMSE(method) - RMSE(Stefan recalibrated on the same n labels) (cm); band = 95 % block-bootstrap interval of Physics + residual ML (1000 resamples)",
+   "label_years": {
+    "Alaska": "2010-2024",
+    "Lena Delta": "2010-2022",
+    "Canada (NW)": "2010-2024"
+   },
+   "fold_sizes": {
+    "Alaska": {
+     "all_training_labels_per_fold": {
+      "b0": 10743,
+      "b1": 12921,
+      "b2": 12922,
+      "b3": 12922,
+      "b4": 12652
+     },
+     "years": "2010-2024",
+     "test_cell_years": 15540
+    },
+    "Lena": {
+     "all_training_labels_per_fold": {
+      "b0": 1508,
+      "b1": 1818,
+      "b2": 2080,
+      "b3": 2169,
+      "b4": 2169
+     },
+     "years": "2010-2022",
+     "test_cell_years": 2436
+    },
+    "Canada": {
+     "all_training_labels_per_fold": {
+      "b0": 707,
+      "b1": 975,
+      "b2": 1033,
+      "b3": 1033,
+      "b4": 1036
+     },
+     "years": "2010-2024",
+     "test_cell_years": 1196
+    }
+   },
+   "dropped_categories": [
+    [
+     "Canada",
+     "1000"
+    ]
+   ],
+   "values": {
+    "Alaska": {
+     "categories": [
+      "25",
+      "50",
+      "100",
+      "250",
+      "500",
+      "1000",
+      "2500",
+      "All"
+     ],
+     "Physics + residual ML": {
+      "25": [
+       -0.85,
+       -1.87,
+       0.15
+      ],
+      "50": [
+       -0.48,
+       -1.22,
+       0.28
+      ],
+      "100": [
+       -0.67,
+       -1.38,
+       -0.01
+      ],
+      "250": [
+       -0.77,
+       -1.53,
+       -0.08
+      ],
+      "500": [
+       -0.6,
+       -1.27,
+       0.12
+      ],
+      "1000": [
+       -0.4,
+       -0.75,
+       0.04
+      ],
+      "2500": [
+       -0.16,
+       -0.47,
+       0.09
+      ],
+      "All": [
+       -0.15,
+       -0.62,
+       0.11
+      ]
+     },
+     "Direct ML": {
+      "25": [
+       2.82,
+       -0.26,
+       4.54
+      ],
+      "50": [
+       2.11,
+       -0.55,
+       3.8
+      ],
+      "100": [
+       2.04,
+       -0.79,
+       3.68
+      ],
+      "250": [
+       1.2,
+       -1.1,
+       3.04
+      ],
+      "500": [
+       -0.69,
+       -1.91,
+       0.69
+      ],
+      "1000": [
+       -0.79,
+       -2.56,
+       1.04
+      ],
+      "2500": [
+       -1.09,
+       -3.95,
+       1.67
+      ],
+      "All": [
+       -1.29,
+       -4.08,
+       1.39
+      ]
+     }
+    },
+    "Lena Delta": {
+     "categories": [
+      "25",
+      "50",
+      "100",
+      "250",
+      "500",
+      "1000",
+      "All"
+     ],
+     "Physics + residual ML": {
+      "25": [
+       -0.84,
+       -2.21,
+       -0.15
+      ],
+      "50": [
+       -1.07,
+       -2.38,
+       -0.35
+      ],
+      "100": [
+       -2.03,
+       -5.33,
+       -0.3
+      ],
+      "250": [
+       -2.48,
+       -6.01,
+       -0.43
+      ],
+      "500": [
+       -3.0,
+       -7.0,
+       -0.56
+      ],
+      "1000": [
+       -3.34,
+       -7.55,
+       -0.63
+      ],
+      "All": [
+       -3.59,
+       -8.47,
+       -0.86
+      ]
+     },
+     "Direct ML": {
+      "25": [
+       -0.83,
+       -4.08,
+       1.01
+      ],
+      "50": [
+       -1.37,
+       -3.42,
+       0.43
+      ],
+      "100": [
+       -2.94,
+       -8.44,
+       0.54
+      ],
+      "250": [
+       -4.03,
+       -10.15,
+       -0.26
+      ],
+      "500": [
+       -4.49,
+       -12.31,
+       0.4
+      ],
+      "1000": [
+       -4.78,
+       -12.48,
+       -0.31
+      ],
+      "All": [
+       -5.16,
+       -12.57,
+       -0.09
+      ]
+     }
+    },
+    "Canada (NW)": {
+     "categories": [
+      "25",
+      "50",
+      "100",
+      "250",
+      "500",
+      "All"
+     ],
+     "Physics + residual ML": {
+      "25": [
+       -0.35,
+       -3.16,
+       1.73
+      ],
+      "50": [
+       -0.81,
+       -2.53,
+       0.47
+      ],
+      "100": [
+       -1.9,
+       -3.75,
+       -0.32
+      ],
+      "250": [
+       -2.84,
+       -3.98,
+       -0.81
+      ],
+      "500": [
+       -3.82,
+       -4.88,
+       -0.99
+      ],
+      "All": [
+       -3.74,
+       -4.87,
+       -0.81
+      ]
+     },
+     "Direct ML": {
+      "25": [
+       1.22,
+       -1.54,
+       3.39
+      ],
+      "50": [
+       -0.3,
+       -1.34,
+       0.45
+      ],
+      "100": [
+       -1.89,
+       -3.33,
+       0.07
+      ],
+      "250": [
+       -3.67,
+       -4.74,
+       -1.12
+      ],
+      "500": [
+       -5.15,
+       -6.47,
+       -1.43
+      ],
+      "All": [
+       -4.57,
+       -6.3,
+       -0.25
+      ]
+     }
+    }
+   }
+  },
+  "b": {
+   "quantity": "RMSE (cm) in the held-out region for models trained on the other two regions plus n target-region labels",
+   "values": {
+    "Alaska": {
+     "Stefan (source coeff.)": {
+      "0": 19.37,
+      "25": 19.37,
+      "50": 19.37,
+      "100": 19.37,
+      "250": 19.37,
+      "500": 19.37
+     },
+     "Stefan (recalibrated)": {
+      "0": 19.37,
+      "25": 18.69,
+      "50": 18.42,
+      "100": 18.2,
+      "250": 18.39,
+      "500": 18.39
+     },
+     "Direct ML": {
+      "0": 21.47,
+      "25": 19.5,
+      "50": 19.91,
+      "100": 20.3,
+      "250": 21.26,
+      "500": 18.5
+     },
+     "Physics + residual ML": {
+      "0": 17.76,
+      "25": 17.33,
+      "50": 17.19,
+      "100": 17.1,
+      "250": 16.99,
+      "500": 17.51
+     }
+    },
+    "Lena Delta": {
+     "Stefan (source coeff.)": {
+      "0": 21.46,
+      "25": 21.46,
+      "50": 21.46,
+      "100": 21.46,
+      "250": 21.46,
+      "500": 21.46
+     },
+     "Stefan (recalibrated)": {
+      "0": 21.46,
+      "25": 20.63,
+      "50": 20.82,
+      "100": 20.75,
+      "250": 20.99,
+      "500": 20.96
+     },
+     "Direct ML": {
+      "0": 39.48,
+      "25": 21.31,
+      "50": 20.41,
+      "100": 18.97,
+      "250": 17.95,
+      "500": 17.45
+     },
+     "Physics + residual ML": {
+      "0": 23.8,
+      "25": 19.9,
+      "50": 19.93,
+      "100": 19.33,
+      "250": 19.09,
+      "500": 18.5
+     }
+    },
+    "Canada (NW)": {
+     "Stefan (source coeff.)": {
+      "0": 27.75,
+      "25": 27.75,
+      "50": 27.75,
+      "100": 27.75,
+      "250": 27.75,
+      "500": 27.75
+     },
+     "Stefan (recalibrated)": {
+      "0": 27.75,
+      "25": 31.26,
+      "50": 30.58,
+      "100": 30.17,
+      "250": 30.8,
+      "500": 30.75
+     },
+     "Direct ML": {
+      "0": 24.16,
+      "25": 23.77,
+      "50": 23.75,
+      "100": 23.34,
+      "250": 22.74,
+      "500": 22.78
+     },
+     "Physics + residual ML": {
+      "0": 24.28,
+      "25": 26.34,
+      "50": 25.72,
+      "100": 25.44,
+      "250": 25.86,
+      "500": 26.07
+     }
+    }
+   },
+   "clipped": [
+    {
+     "region": "Lena Delta",
+     "method": "Direct ML",
+     "n_label": "0",
+     "value": 39.48,
+     "printed": "39.5",
+     "threshold_cm": 27.9,
+     "axis_top_cm": 24.82
+    }
+   ]
+  },
+  "c": {
+   "content": "external CALM sub-regions (numbered as in e) and the label cells of the three study regions",
+   "n_external_cells": 73,
+   "n_external_cell_years": 816,
+   "sub_regions": [
+    "W Siberia",
+    "C Siberia",
+    "European Russia",
+    "NE Siberia",
+    "Chukotka",
+    "Kamchatka",
+    "Svalbard",
+    "Greenland"
+   ]
+  },
+  "d": {
+   "quantity": "RMSE (cm) on the external cell-years with Wei 2026, Liu 2024 and ESA CCI v5 values against labels from the same external region",
+   "values": {
+    "Physics + residual ML": {
+     "0": 56.2,
+     "5": 40.34,
+     "10": 39.33,
+     "25": 39.71,
+     "50": 40.56,
+     "All": 40.51
+    },
+    "Stefan (recalibrated on n)": {
+     "0": 55.65,
+     "5": 40.29,
+     "10": 39.23,
+     "25": 39.75,
+     "50": 40.61,
+     "All": 40.62
+    },
+    "Direct ML": {
+     "0": 56.59,
+     "5": 50.91,
+     "10": 49.59,
+     "25": 47.5,
+     "50": 46.62,
+     "All": 45.87
+    },
+    "Stefan (source coeff.)": {
+     "0": 55.65,
+     "5": 55.65,
+     "10": 55.65,
+     "25": 55.65,
+     "50": 55.65,
+     "All": 55.65
+    },
+    "ESA CCI v5 (reference line)": 60.71,
+    "Liu 2024 (reference line)": 23.19,
+    "Wei 2026 (reference line)": 17.97
+   },
+   "cell_years": 474,
+   "cells": 52,
+   "blocks": 35,
+   "years": "2010-2020",
+   "subregions": {
+    "NE Siberia": 158,
+    "W Siberia": 153,
+    "C Siberia": 52,
+    "Chukotka": 33,
+    "Svalbard": 32,
+    "European Russia": 30,
+    "Kamchatka": 16
+   },
+   "all_external_cell_years": 805,
+   "all_external_years": "2010-2024",
+   "all_external_subregions": [
+    "C Siberia",
+    "Chukotka",
+    "European Russia",
+    "Greenland",
+    "Kamchatka",
+    "NE Siberia",
+    "Svalbard",
+    "W Siberia"
+   ],
+   "n_label_all_pool_sizes": [
+    6,
+    13,
+    15,
+    45,
+    50,
+    51,
+    58,
+    59,
+    60,
+    61,
+    63,
+    66,
+    67,
+    72,
+    157,
+    189,
+    190,
+    191,
+    199,
+    202,
+    203,
+    204,
+    205,
+    212,
+    213,
+    218,
+    229,
+    230,
+    231,
+    232,
+    233,
+    243
+   ]
+  },
+  "e": {
+   "quantity": "RMSE (cm) per sub-region on the same cell-years: Physics + residual ML with 0 and 5 local labels, ESA CCI v5; sub-regions with >= 30 such cell-years",
+   "values": {
+    "W Siberia": {
+     "no_local_labels": 47.67,
+     "five_local_labels": 33.5,
+     "esa_cci_v5": 37.33,
+     "n_cell_years": 153
+    },
+    "C Siberia": {
+     "no_local_labels": 62.83,
+     "five_local_labels": 59.59,
+     "esa_cci_v5": 67.22,
+     "n_cell_years": 52
+    },
+    "European Russia": {
+     "no_local_labels": 59.47,
+     "five_local_labels": 52.21,
+     "esa_cci_v5": 100.37,
+     "n_cell_years": 30
+    },
+    "NE Siberia": {
+     "no_local_labels": 32.58,
+     "five_local_labels": 34.81,
+     "esa_cci_v5": 34.97,
+     "n_cell_years": 158
+    },
+    "Chukotka": {
+     "no_local_labels": 8.76,
+     "five_local_labels": 14.55,
+     "esa_cci_v5": 48.16,
+     "n_cell_years": 33
+    },
+    "Svalbard": {
+     "no_local_labels": 144.34,
+     "five_local_labels": 64.35,
+     "esa_cci_v5": 116.41,
+     "n_cell_years": 32
+    }
+   },
+   "inputs": [
+    "data/processed/v5/runs/extra_v9/preds_EXTFT_*.csv.gz (scripts/4_visualization/v9_f10_extra.ft_table)"
+   ]
+  }
+ }
+}

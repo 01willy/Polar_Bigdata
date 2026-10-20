@@ -1,0 +1,446 @@
+{
+ "a": {
+  "layout_mm": {
+   "soil_columns": [
+    13.65,
+    37.65
+   ],
+   "curve_axes": [
+    68.38,
+    108.38
+   ],
+   "stefan_axes": [
+    122.88,
+    178.2
+   ]
+  },
+  "soil_column": "vector schematic, no data: two columns (observation day, end of season); thawed #E8D6BC, seasonally frozen #DCE5EE, permafrost #BFCDDC; dashed line = thaw front on the observation day; solid = permafrost table",
+  "curve": {
+   "cell": 14813,
+   "lat": 71.7839,
+   "lon": 129.4119,
+   "year": 2013,
+   "observation_day": {
+    "doy": 229.0,
+    "date": "17 Aug"
+   },
+   "tdd_obs_degC_day": 471.79,
+   "tdd_full_season_degC_day": 628.76,
+   "tdd_to_1_sep_degC_day": 577.83,
+   "tdd_mean_2011_2024_degC_day": 859.46,
+   "season_end_doy": 273.0,
+   "season_end_date": "30 Sep",
+   "month_end_cumulative_tdd": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    143.79,
+    345.16,
+    576.07,
+    628.76,
+    628.76,
+    628.76,
+    628.76
+   ],
+   "light_lines": "the same cell's daily cumulative TDD in the other years 2011-2024 (13 lines)",
+   "cell_rule": "Lena Delta cell with dated observations in the coldest and warmest year 2011-2024 and the most label years; the cell-year with the smallest TDD_obs / full-season ratio",
+   "inputs": [
+    "data/processed/v5/forcing_year.csv (tdd_cum_1..12, e5_tdd)",
+    "data/processed/v5/forcing_clim.csv (clim1124_tdd via polar.testbed_v5)",
+    "data/processed/v5/labels_cell_year_v5.csv (obs_doy)"
+   ],
+   "rule": "daily linear interpolation of month-end cumulative TDD (0 on 1 January); TDD_obs equals polar.testbed_v5.with_forcing('year_obs') e5_tdd (checked < 0.5 degC d)"
+  },
+  "stefan_anchor": {
+   "region": "Alaska",
+   "n_cell_years": 15540,
+   "label_years": "2010-2024",
+   "E_cm_per_sqrt_degC_day": 1.949,
+   "E_printed": "1.95",
+   "E_rule": "least squares through the origin on all Alaska labels (polar.testbed_v5.ls_scale), equal to data/processed/v5/maps/Alaska/meta.json E",
+   "x": "sqrt(TDD to the observation day), polar.testbed_v5.with_forcing('year_obs')",
+   "axis_range": {
+    "x": [
+     0,
+     50.0
+    ],
+    "y": [
+     0,
+     200.0
+    ]
+   },
+   "n_above_y_range": 19,
+   "residual_sd_cm": 18.04,
+   "highlighted": [
+    {
+     "cell": 4306,
+     "year": 2014,
+     "sqrt_tdd_obs": 13.5,
+     "alt_cm": 44.4,
+     "residual_cm": 18.0
+    },
+    {
+     "cell": 343,
+     "year": 2013,
+     "sqrt_tdd_obs": 17.63,
+     "alt_cm": 16.0,
+     "residual_cm": -18.4
+    },
+    {
+     "cell": 1406,
+     "year": 2013,
+     "sqrt_tdd_obs": 25.59,
+     "alt_cm": 67.8,
+     "residual_cm": 17.9
+    },
+    {
+     "cell": 2038,
+     "year": 2014,
+     "sqrt_tdd_obs": 31.58,
+     "alt_cm": 45.9,
+     "residual_cm": -15.6
+    },
+    {
+     "cell": 10568,
+     "year": 2016,
+     "sqrt_tdd_obs": 38.74,
+     "alt_cm": 93.9,
+     "residual_cm": 18.4
+    }
+   ],
+   "highlight_rule": "at the 10/30/50/70/90th percentiles of sqrt(TDD_obs): among the 400 nearest cell-years, the one whose residual is closest to +1, -1, +1, -1, +1 residual s.d."
+  }
+ },
+ "b": {
+  "flow": {
+   "year": 2014,
+   "inputs": {
+    "swe": {
+     "name": "Snow",
+     "colormap": "from_list",
+     "percentiles": [
+      2,
+      98
+     ]
+    },
+    "fdd": {
+     "name": "FDD",
+     "colormap": "from_list",
+     "percentiles": [
+      2,
+      98
+     ]
+    },
+    "e5_tdd": {
+     "name": "TDD",
+     "colormap": "from_list",
+     "percentiles": [
+      2,
+      98
+     ]
+    },
+    "dem_elev": {
+     "name": "Elevation",
+     "colormap": "from_list",
+     "percentiles": [
+      2,
+      98
+     ]
+    },
+    "dem_slope": {
+     "name": "Slope",
+     "colormap": "from_list",
+     "percentiles": [
+      2,
+      98
+     ]
+    },
+    "sg_soc_0_5": {
+     "name": "Soil carbon",
+     "colormap": "from_list",
+     "percentiles": [
+      2,
+      98
+     ]
+    },
+    "sg_clay_5_15": {
+     "name": "Clay",
+     "colormap": "from_list",
+     "percentiles": [
+      2,
+      98
+     ]
+    }
+   },
+   "colour_rule": "one cmcrameri colour map per variable (snow oslo_r, FDD devon_r, TDD lajolla_r, elevation lapaz_r, slope acton_r, soil carbon bamako_r, clay turku_r); darker = larger; each thumbnail stretched to its own percentile range (no absolute scale)",
+   "n_features": {
+    "climate": 8,
+    "terrain": 6,
+    "soil": 9,
+    "total": 23
+   },
+   "features": [
+    "e5_maat",
+    "e5_tdd",
+    "e5_fdd",
+    "e5_sqrt_tdd",
+    "e5_twarm",
+    "e5_tcold",
+    "e5_stl1",
+    "e5_swe",
+    "dem_elev",
+    "dem_slope",
+    "dem_aspect_sin",
+    "dem_aspect_cos",
+    "dem_tpi",
+    "dem_rough",
+    "sg_clay_5_15",
+    "sg_sand_5_15",
+    "sg_silt_5_15",
+    "sg_bdod_5_15",
+    "sg_cfvo_5_15",
+    "sg_phh2o_5_15",
+    "sg_soc_0_5",
+    "sg_soc_5_15",
+    "sg_soc_15_30"
+   ],
+   "input_ranges": {
+    "swe": [
+     0.0205585161844889,
+     0.3335963090260823
+    ],
+    "fdd": [
+     1545.9520263671875,
+     4065.107223510742
+    ],
+    "e5_tdd": [
+     418.8887451171875,
+     1681.9134918212885
+    ],
+    "dem_elev": [
+     4.411496977505001,
+     1594.8901734249998
+    ],
+    "dem_slope": [
+     0.3635669988695,
+     31.895160388749993
+    ],
+    "sg_soc_0_5": [
+     161.10085714285714,
+     368.90000000000003
+    ],
+    "sg_clay_5_15": [
+     9.3,
+     26.25
+    ]
+   },
+   "stefan_map": "p1 = E sqrt(TDD to 1 September, 2014)",
+   "residual_map": "(r1 - p1) / lambda = residual prediction before weighting",
+   "alt_map": "r1 = p1 + lambda * residual (seed mean of 3 CatBoost models trained on all Alaska labels)",
+   "alt_range_cm": [
+    35.0,
+    85.0
+   ],
+   "alt_ticks_cm": [
+    40,
+    60,
+    80
+   ],
+   "residual_range_cm": [
+    -25.0,
+    25.0
+   ],
+   "lam": 0.5,
+   "learner": "catboost",
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "n_train": 15540,
+   "n_map_cells": 858517,
+   "inputs_files": [
+    "data/processed/v5/maps/Alaska/pred_2014.csv.gz (e5_tdd, p1, r1)",
+    "data/processed/v5/maps/Alaska/forcing_2014_thumb.csv.gz (e5_fdd, e5_swe)",
+    "data/processed/map_alaska/alaska_grid_x25_v1.csv.gz (dem_elev, dem_slope, sg_soc_0_5, sg_clay_5_15, land)",
+    "data/processed/v5/maps/Alaska/meta.json (E, lam, feats, learner, seeds, n_train)"
+   ],
+   "raster": "1 km map cells averaged in 0.05 deg x 0.02 deg boxes",
+   "thumbnail_mm": [
+    15.93,
+    16.5
+   ]
+  },
+  "equation": {
+   "main": "ALT_hat = E_hat sqrt(TDD_obs) + lambda g(x)",
+   "target": "g ~ ALT - E_hat sqrt(TDD_obs) (training only)",
+   "lam": 0.5,
+   "note": "maps use the TDD accumulated to 1 September in place of TDD_obs"
+  },
+  "diagram_style": {
+   "connectors": "black 0.7 pt with filled triangular heads 1.4 mm",
+   "boxes": "0.6 pt black edge, light tint of the method colour",
+   "box_titles": "7 pt bold above the box"
+  }
+ },
+ "c": {
+  "validation": {
+   "inputs": [
+    "polar.testbed_v5 load_v5 -> with_forcing('year_obs') -> usable_mask -> region == 'Lena' -> make_folds(k = 5, seed = 0)",
+    "checked against data/processed/v5/runs/core_v6/preds/Lena__<scheme>__year_obs__F8TS__P1__-__lam-1.csv.gz and ALL__region__...: {'random': True, 'block': True, 'year': True, 'block_year': True, 'region': True}"
+   ],
+   "n_rows": 2436,
+   "n_cells": 2206,
+   "n_blocks": 16,
+   "years": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022
+   ],
+   "panels": {
+    "Random": {
+     "scheme": "random",
+     "rows_per_fold": {
+      "0": 488,
+      "1": 487,
+      "2": 487,
+      "3": 487,
+      "4": 487
+     }
+    },
+    "Spatial block 0.5°": {
+     "scheme": "block",
+     "rows_per_fold": {
+      "0": 928,
+      "1": 618,
+      "2": 356,
+      "3": 267,
+      "4": 267
+     }
+    },
+    "Year hold-out": {
+     "scheme": "year",
+     "years_scored": [
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021
+     ],
+     "rows_not_scored": 17
+    },
+    "Block × year": {
+     "scheme": "block_year",
+     "years_scored": [
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021
+     ],
+     "rows_not_scored": 17
+    },
+    "Region hold-out": {
+     "scheme": "region",
+     "test": "all Lena Delta cell-years",
+     "training_rows_other_regions": {
+      "Alaska": 15540,
+      "Canada": 1196
+     }
+    }
+   },
+   "fold_palette": [
+    "#2A7BB5",
+    "#6BB5DE",
+    "#D8A24A",
+    "#C98AAE",
+    "#3A9E7F"
+   ],
+   "year_cmap": "cmcrameri bilbao_r 0.25-0.95 over the scored years",
+   "map_mm": [
+    23.0,
+    17.4
+   ],
+   "encoding": "random: dot colour = fold of the cell-year; spatial block: 0.5 deg box edge and dot colour = block fold; year hold-out: dot = year (grey = year with < 20 cell-years, not scored); block x year: box = block fold, dot = year; region hold-out: all Lena Delta cell-years are test, training = Alaska and Canada (NW) cell-years more than 100 km from any Lena Delta cell"
+  },
+  "anomaly": {
+   "years": [
+    2012,
+    2019
+   ],
+   "definition": "r1(year) - mean_2011_2024 r1 per 1 km cell, box means 0.05 x 0.02 deg",
+   "range_cm": [
+    -15,
+    15
+   ],
+   "inputs": [
+    "data/processed/v5/maps/Alaska/pred_<year>.csv.gz (r1)",
+    "data/processed/v5/maps/Alaska/mean_2011_2024.csv.gz (r1)"
+   ],
+   "stats": {
+    "2012": {
+     "mean": -2.64,
+     "p1": -12.51,
+     "p99": 6.42
+    },
+    "2019": {
+     "mean": 5.98,
+     "p1": -1.04,
+     "p99": 15.73
+    }
+   }
+  }
+ },
+ "qa": {
+  "n_texts": 88,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "problems": []
+ },
+ "figure": {
+  "width_mm": 180.0,
+  "height_mm": 132.0,
+  "png_dpi": 600,
+  "font": "FreeSans",
+  "sizes_pt": {
+   "text": 7.0,
+   "letter": 8.0,
+   "equation": 8.0
+  },
+  "palette": "POLAR_PALETTE=paper13",
+  "script": "scripts/4_visualization/paper_v13/fig2_workflow.py",
+  "rows": {
+   "a": "cell-year design (soil columns, cumulative TDD) and the Stefan anchor",
+   "b": "physics-residual model flow, Alaska 2014",
+   "c": "validation designs (Lena Delta) and yearly ALT anomaly maps (Alaska)"
+  }
+ }
+}

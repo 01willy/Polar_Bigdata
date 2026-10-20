@@ -70,9 +70,12 @@ AOA_IN = "#8BBCDF"; AOA_OUT = "#B4BAC5"             # 적용 범위 안·밖(밖
 REG = {"alaska": dict(region="Alaska", box=(-168.0, -141.0, 59.0, 71.5), pad=2e4, lons=[-170, -165, -160, -155, -150, -145, -140], lats=[60, 65, 70],
                       lat_lab=[60, 65, 70], step=1),
        "lena": dict(region="Lena", box=(123.3, 130.1, 71.5, 73.6), pad=3e3, lons=[122, 124, 126, 128, 130, 132], lats=[71, 72, 73, 74],
-                    lat_lab=[72, 73], step=1)}
+                    lat_lab=[72, 73], step=1),
+       "canada": dict(region="Canada", box=(-141.0, -112.5, 60.0, 70.0), pad=2e4, lons=[-145, -140, -135, -130, -125, -120, -115, -110], lats=[60, 65, 70],
+                      lat_lab=[60, 65, 70], step=1)}
 ZOOM = {"alaska": [("North Slope, Toolik", (-149.55, 68.75), 25e3), ("Interior, Fairbanks", (-147.85, 64.85), 25e3)],
-        "lena": [("Samoylov–Kurungnakh", (126.4, 72.36), 12e3)]}
+        "lena": [("Samoylov–Kurungnakh", (126.4, 72.36), 12e3)],
+        "canada": [("Old Crow Flats, Yukon", (-139.7, 67.9), 25e3), ("Mackenzie Delta, Inuvik", (-133.5, 68.3), 25e3)]}
 LINKS: list = []                  # 확대 창 연결선(슬라이드 단독 크롭에서는 숨긴다)
 SLIDE_SCALE = 1.69                # 슬라이드판 저장 배율(style_v5.setup(scale=1.69)): 종이 크기로 그려 1.69 배로 저장한다
 META: dict = {}                   # source_data/F6_maps.json 에 쓸 그림 메타(표시 보간·색 범위·관측 셀 수)

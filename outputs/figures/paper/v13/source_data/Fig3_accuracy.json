@@ -1,0 +1,1567 @@
+{
+ "figure": "Fig. 3",
+ "version": "v11 (2026-10-16): v11 palette restyle of v10 Fig. 3; numbers unchanged from v10",
+ "files": [
+  "outputs/figures/paper/v13/Fig3_accuracy.pdf",
+  "outputs/figures/paper/v13/Fig3_accuracy.svg",
+  "outputs/figures/paper/v13/Fig3_accuracy.png"
+ ],
+ "script": "scripts/4_visualization/paper_v13/fig3_accuracy.py",
+ "size_mm": [
+  180.0,
+  142.0
+ ],
+ "fonts_pt": {
+  "axis_labels_legends": 7.0,
+  "ticks_direct_labels": 6.5,
+  "heat_map_values": 6.5,
+  "panel_letters_bold": 8.0
+ },
+ "style": {
+  "palette": "design/style_tokens_v4.json color.paper_v13 (POLAR_PALETTE=paper13)",
+  "text": "#000000",
+  "axes": "#000000",
+  "grid": "none",
+  "methods": {
+   "Stefan (source coeff.)": "#8C8C8C",
+   "Stefan (recalibrated)": "#1A7AB3",
+   "Direct ML": "#7F4F9F",
+   "Physics + residual ML": "#C9671D"
+  },
+  "regions": {
+   "Alaska": [
+    "#3B3B8F",
+    "o"
+   ],
+   "Lena Delta": [
+    "#4A90C2",
+    "s"
+   ],
+   "Canada (NW)": [
+    "#3A9384",
+    "^"
+   ]
+  }
+ },
+ "qa_problems": [],
+ "ink_margins_mm": {
+  "left": 0.8,
+  "right": 1.0,
+  "bottom": 1.8,
+  "top": 1.4
+ },
+ "main_setting": "spatial block CV (0.5 degree blocks, 5 folds), climate input year_obs (ERA5-Land thaw degree-days accumulated to the observation day of the label year), featset F8TS (8 climate + terrain + soil covariates), CatBoost, Physics + residual ML lambda 0.5, 3 seeds averaged",
+ "label_years_by_region_and_split": {
+  "Alaska": {
+   "random": {
+    "first": 2010,
+    "last": 2024,
+    "n_years": 15,
+    "cell_years": 15540,
+    "cells": 13253,
+    "blocks": 73
+   },
+   "block": {
+    "first": 2010,
+    "last": 2024,
+    "n_years": 15,
+    "cell_years": 15540,
+    "cells": 13253,
+    "blocks": 73
+   },
+   "year": {
+    "first": 2010,
+    "last": 2024,
+    "n_years": 15,
+    "cell_years": 15540,
+    "cells": 13253,
+    "blocks": 73
+   },
+   "block_year": {
+    "first": 2010,
+    "last": 2024,
+    "n_years": 15,
+    "cell_years": 15421,
+    "cells": 13252,
+    "blocks": 73
+   },
+   "region": {
+    "first": 2010,
+    "last": 2024,
+    "n_years": 15,
+    "cell_years": 15540,
+    "cells": 13253
+   }
+  },
+  "Lena Delta": {
+   "random": {
+    "first": 2010,
+    "last": 2022,
+    "n_years": 13,
+    "cell_years": 2436,
+    "cells": 2206,
+    "blocks": 16
+   },
+   "block": {
+    "first": 2010,
+    "last": 2022,
+    "n_years": 13,
+    "cell_years": 2436,
+    "cells": 2206,
+    "blocks": 16
+   },
+   "year": {
+    "first": 2012,
+    "last": 2021,
+    "n_years": 10,
+    "cell_years": 2419,
+    "cells": 2199,
+    "blocks": 14
+   },
+   "block_year": {
+    "first": 2012,
+    "last": 2021,
+    "n_years": 10,
+    "cell_years": 2374,
+    "cells": 2163,
+    "blocks": 11
+   },
+   "region": {
+    "first": 2010,
+    "last": 2022,
+    "n_years": 13,
+    "cell_years": 2436,
+    "cells": 2206
+   }
+  },
+  "Canada (NW)": {
+   "random": {
+    "first": 2010,
+    "last": 2024,
+    "n_years": 14,
+    "cell_years": 1196,
+    "cells": 730,
+    "blocks": 26
+   },
+   "block": {
+    "first": 2010,
+    "last": 2024,
+    "n_years": 14,
+    "cell_years": 1196,
+    "cells": 730,
+    "blocks": 26
+   },
+   "year": {
+    "first": 2012,
+    "last": 2024,
+    "n_years": 9,
+    "cell_years": 1164,
+    "cells": 730,
+    "blocks": 26
+   },
+   "block_year": {
+    "first": 2012,
+    "last": 2024,
+    "n_years": 9,
+    "cell_years": 1135,
+    "cells": 721,
+    "blocks": 22
+   },
+   "region": {
+    "first": 2010,
+    "last": 2024,
+    "n_years": 14,
+    "cell_years": 1196,
+    "cells": 730
+   }
+  }
+ },
+ "panels": {
+  "a": {
+   "quantity": "pooled out-of-fold RMSE (cm), spatial block CV",
+   "input_files": [
+    "data/processed/v5/runs/core_v6/summary_metrics.csv",
+    "data/processed/v5/runs/core_v6/deltas_forcing.csv (delta check, not printed)"
+   ],
+   "row_filter": "scheme == block, featset == F8TS, forcing in {clim, year_obs}; P1 (learner '-'), R1 (catboost, lam 0.5), D0 (catboost)",
+   "label_years": {
+    "Alaska": "2010-2024",
+    "Lena Delta": "2010-2022",
+    "Canada (NW)": "2010-2024"
+   },
+   "climate_input_years": {
+    "clim (x tick '2011-2024 mean')": "ERA5-Land 2011-2024 mean of each covariate per cell",
+    "year_obs (x tick 'Year-specific')": "ERA5-Land of the label year, TDD accumulated to the observation day"
+   },
+   "symbols": "method colour and marker as in the legend; the climate input is the x position (v10 open/filled marker coding removed)",
+   "y_span_cm_all_panels": 8.0,
+   "plotted_rmse_cm": {
+    "Alaska": {
+     "Stefan (recalibrated)": {
+      "mean_2011_2024": 16.77,
+      "year_specific": 18.58
+     },
+     "Direct ML": {
+      "mean_2011_2024": 17.6,
+      "year_specific": 17.29
+     },
+     "Physics + residual ML": {
+      "mean_2011_2024": 17.11,
+      "year_specific": 18.42
+     }
+    },
+    "Lena Delta": {
+     "Stefan (recalibrated)": {
+      "mean_2011_2024": 22.47,
+      "year_specific": 21.04
+     },
+     "Direct ML": {
+      "mean_2011_2024": 17.19,
+      "year_specific": 15.88
+     },
+     "Physics + residual ML": {
+      "mean_2011_2024": 19.02,
+      "year_specific": 17.44
+     }
+    },
+    "Canada (NW)": {
+     "Stefan (recalibrated)": {
+      "mean_2011_2024": 30.76,
+      "year_specific": 30.63
+     },
+     "Direct ML": {
+      "mean_2011_2024": 27.27,
+      "year_specific": 26.06
+     },
+     "Physics + residual ML": {
+      "mean_2011_2024": 28.38,
+      "year_specific": 26.89
+     }
+    }
+   },
+   "change_year_specific_minus_mean_cm_95ci_not_printed": {
+    "Alaska": {
+     "Stefan (recalibrated)": [
+      1.8,
+      -0.1,
+      3.89
+     ],
+     "Direct ML": [
+      -0.32,
+      -0.89,
+      0.02
+     ],
+     "Physics + residual ML": [
+      1.32,
+      -0.89,
+      3.73
+     ]
+    },
+    "Lena Delta": {
+     "Stefan (recalibrated)": [
+      -1.43,
+      -2.55,
+      -0.84
+     ],
+     "Direct ML": [
+      -1.31,
+      -2.11,
+      0.53
+     ],
+     "Physics + residual ML": [
+      -1.58,
+      -2.44,
+      -1.02
+     ]
+    },
+    "Canada (NW)": {
+     "Stefan (recalibrated)": [
+      -0.14,
+      -2.23,
+      1.61
+     ],
+     "Direct ML": [
+      -1.21,
+      -4.01,
+      2.04
+     ],
+     "Physics + residual ML": [
+      -1.49,
+      -2.04,
+      -0.39
+     ]
+    }
+   },
+   "n_cell_years": {
+    "Alaska": 15540,
+    "Lena Delta": 2436,
+    "Canada (NW)": 1196
+   },
+   "printed_numbers": "none (tick labels only)"
+  },
+  "b": {
+   "quantity": "pooled out-of-fold RMSE (cm) by validation split, climate input year_obs",
+   "input_files": [
+    "data/processed/v5/runs/core_v6/summary_metrics.csv"
+   ],
+   "row_filter": "forcing == year_obs, featset == F8TS, scheme in {random, block, year, block_year, region}; P0, P1 (learner '-'), R1 (catboost, lam 0.5), D0 (catboost)",
+   "label_years": {
+    "Alaska": {
+     "random": "2010-2024 (15 years, 15540 cell-years)",
+     "block": "2010-2024 (15 years, 15540 cell-years)",
+     "year": "2010-2024 (15 years, 15540 cell-years)",
+     "block_year": "2010-2024 (15 years, 15421 cell-years)",
+     "region": "2010-2024 (15 years, 15540 cell-years)"
+    },
+    "Lena Delta": {
+     "random": "2010-2022 (13 years, 2436 cell-years)",
+     "block": "2010-2022 (13 years, 2436 cell-years)",
+     "year": "2012-2021 (10 years, 2419 cell-years)",
+     "block_year": "2012-2021 (10 years, 2374 cell-years)",
+     "region": "2010-2022 (13 years, 2436 cell-years)"
+    },
+    "Canada (NW)": {
+     "random": "2010-2024 (14 years, 1196 cell-years)",
+     "block": "2010-2024 (14 years, 1196 cell-years)",
+     "year": "2012-2024 (9 years, 1164 cell-years)",
+     "block_year": "2012-2024 (9 years, 1135 cell-years)",
+     "region": "2010-2024 (14 years, 1196 cell-years)"
+    }
+   },
+   "climate_input_years": "ERA5-Land of the label year, TDD to the observation day",
+   "note": "region hold-out: no in-region labels to recalibrate, so Stefan (recalibrated) uses the source coefficient and equals Stefan (source coeff.)",
+   "plotted_rmse_cm": {
+    "Alaska": {
+     "Stefan (source coeff.)": {
+      "random": 19.37,
+      "block": 19.37,
+      "year": 19.37,
+      "block_year": 19.34,
+      "region": 19.36
+     },
+     "Stefan (recalibrated)": {
+      "random": 18.22,
+      "block": 18.58,
+      "year": 18.72,
+      "block_year": 18.8,
+      "region": 19.36
+     },
+     "Direct ML": {
+      "random": 11.84,
+      "block": 17.29,
+      "year": 14.85,
+      "block_year": 17.51,
+      "region": 20.56
+     },
+     "Physics + residual ML": {
+      "random": 14.0,
+      "block": 18.42,
+      "year": 17.26,
+      "block_year": 18.46,
+      "region": 17.55
+     }
+    },
+    "Lena Delta": {
+     "Stefan (source coeff.)": {
+      "random": 21.46,
+      "block": 21.46,
+      "year": 21.47,
+      "block_year": 21.56,
+      "region": 21.46
+     },
+     "Stefan (recalibrated)": {
+      "random": 20.55,
+      "block": 21.04,
+      "year": 21.23,
+      "block_year": 21.55,
+      "region": 21.46
+     },
+     "Direct ML": {
+      "random": 12.3,
+      "block": 15.88,
+      "year": 20.19,
+      "block_year": 20.61,
+      "region": 39.27
+     },
+     "Physics + residual ML": {
+      "random": 14.78,
+      "block": 17.44,
+      "year": 20.1,
+      "block_year": 20.66,
+      "region": 23.46
+     }
+    },
+    "Canada (NW)": {
+     "Stefan (source coeff.)": {
+      "random": 27.75,
+      "block": 27.75,
+      "year": 27.35,
+      "block_year": 26.91,
+      "region": 27.75
+     },
+     "Stefan (recalibrated)": {
+      "random": 26.98,
+      "block": 30.63,
+      "year": 28.11,
+      "block_year": 31.11,
+      "region": 27.75
+     },
+     "Direct ML": {
+      "random": 16.19,
+      "block": 26.06,
+      "year": 24.64,
+      "block_year": 28.11,
+      "region": 23.9
+     },
+     "Physics + residual ML": {
+      "random": 19.54,
+      "block": 26.89,
+      "year": 24.27,
+      "block_year": 27.99,
+      "region": 24.25
+     }
+    }
+   },
+   "n_cell_years": {
+    "Alaska": {
+     "random": 15540,
+     "block": 15540,
+     "year": 15540,
+     "block_year": 15421,
+     "region": 15540
+    },
+    "Lena Delta": {
+     "random": 2436,
+     "block": 2436,
+     "year": 2419,
+     "block_year": 2374,
+     "region": 2436
+    },
+    "Canada (NW)": {
+     "random": 1196,
+     "block": 1196,
+     "year": 1164,
+     "block_year": 1135,
+     "region": 1196
+    }
+   },
+   "out_of_range_rule": "values > 1.3 x the largest value of the random/block/year/block x year splits in that panel are drawn on the top edge (open marker) with the value printed",
+   "printed_numbers": [
+    {
+     "region": "Lena Delta",
+     "method": "Direct ML",
+     "scheme": "Region",
+     "value": 39.27,
+     "printed": "39.3",
+     "threshold_cm": 28.03,
+     "axis_top_cm": 25.24
+    }
+   ]
+  },
+  "c": {
+   "quantity": "dRMSE = RMSE(Physics + residual ML) - RMSE(Stefan, recalibrated) (cm), spatial block, 95 % block-bootstrap interval",
+   "input_files": [
+    "data/processed/v5/runs/modis_v6/deltas_vs_ref.csv",
+    "data/processed/v5/runs/featsets_v6/deltas_vs_ref.csv"
+   ],
+   "row_filter": "scheme == block, forcing == year_obs, ref == P1, method R1, learner catboost, lam 0.5; modis_v6 (MODIS 2010-2024) preferred where both files have the featset (F8TS, F8TS_M, F8TS_ALL), featsets_v6 for F8, F8T, F8TS_X",
+   "featsets": {
+    "F8": "Climate only",
+    "F8T": "+ Terrain",
+    "F8TS": "+ Soil (main set)",
+    "F8TS_M": "+ MODIS",
+    "F8TS_X": "+ High-resolution soil and land cover",
+    "F8TS_ALL": "All"
+   },
+   "featset_definitions": {
+    "F8": "8 ERA5-Land climate covariates",
+    "F8T": "F8 + terrain",
+    "F8TS": "F8 + terrain + SoilGrids (main set)",
+    "F8TS_M": "main set + MODIS (summer NDVI, EVI, snow-off day, snow days; 2010-2024)",
+    "F8TS_X": "main set + NCSCD SOC, CAVM class, WorldCover fractions",
+    "F8TS_ALL": "main set + MODIS + previous-year climate + hi-res soil and land cover"
+   },
+   "label_years": {
+    "Alaska": "2010-2024",
+    "Lena Delta": "2010-2022",
+    "Canada (NW)": "2010-2024"
+   },
+   "climate_input_years": "year_obs (label year, TDD to the observation day)",
+   "plotted_delta_cm_95ci": {
+    "Alaska": {
+     "Climate only": [
+      5.89,
+      -0.3,
+      14.2
+     ],
+     "+ Terrain": [
+      1.24,
+      -1.93,
+      5.9
+     ],
+     "+ Soil (main set)": [
+      -0.15,
+      -0.57,
+      0.12
+     ],
+     "+ MODIS": [
+      -0.3,
+      -0.64,
+      0.05
+     ],
+     "+ High-resolution soil and land cover": [
+      -0.79,
+      -1.41,
+      -0.15
+     ],
+     "All": [
+      -0.86,
+      -1.46,
+      -0.28
+     ]
+    },
+    "Lena Delta": {
+     "Climate only": [
+      -3.2,
+      -9.3,
+      0.39
+     ],
+     "+ Terrain": [
+      -4.01,
+      -8.97,
+      -0.77
+     ],
+     "+ Soil (main set)": [
+      -3.59,
+      -7.83,
+      -0.81
+     ],
+     "+ MODIS": [
+      -3.37,
+      -6.85,
+      -0.92
+     ],
+     "+ High-resolution soil and land cover": [
+      -3.78,
+      -8.33,
+      -0.77
+     ],
+     "All": [
+      -3.79,
+      -7.98,
+      -0.96
+     ]
+    },
+    "Canada (NW)": {
+     "Climate only": [
+      3.88,
+      -5.1,
+      10.33
+     ],
+     "+ Terrain": [
+      -2.82,
+      -5.89,
+      -0.78
+     ],
+     "+ Soil (main set)": [
+      -3.74,
+      -4.77,
+      -0.83
+     ],
+     "+ MODIS": [
+      -3.4,
+      -4.62,
+      -0.79
+     ],
+     "+ High-resolution soil and land cover": [
+      -3.61,
+      -4.48,
+      -1.22
+     ],
+     "All": [
+      -3.99,
+      -5.04,
+      -1.18
+     ]
+    }
+   },
+   "row_source": {
+    "Alaska": {
+     "F8": "data/processed/v5/runs/featsets_v6/deltas_vs_ref.csv",
+     "F8T": "data/processed/v5/runs/featsets_v6/deltas_vs_ref.csv",
+     "F8TS": "data/processed/v5/runs/modis_v6/deltas_vs_ref.csv",
+     "F8TS_M": "data/processed/v5/runs/modis_v6/deltas_vs_ref.csv",
+     "F8TS_X": "data/processed/v5/runs/featsets_v6/deltas_vs_ref.csv",
+     "F8TS_ALL": "data/processed/v5/runs/modis_v6/deltas_vs_ref.csv"
+    },
+    "Lena Delta": {
+     "F8": "data/processed/v5/runs/featsets_v6/deltas_vs_ref.csv",
+     "F8T": "data/processed/v5/runs/featsets_v6/deltas_vs_ref.csv",
+     "F8TS": "data/processed/v5/runs/modis_v6/deltas_vs_ref.csv",
+     "F8TS_M": "data/processed/v5/runs/modis_v6/deltas_vs_ref.csv",
+     "F8TS_X": "data/processed/v5/runs/featsets_v6/deltas_vs_ref.csv",
+     "F8TS_ALL": "data/processed/v5/runs/modis_v6/deltas_vs_ref.csv"
+    },
+    "Canada (NW)": {
+     "F8": "data/processed/v5/runs/featsets_v6/deltas_vs_ref.csv",
+     "F8T": "data/processed/v5/runs/featsets_v6/deltas_vs_ref.csv",
+     "F8TS": "data/processed/v5/runs/modis_v6/deltas_vs_ref.csv",
+     "F8TS_M": "data/processed/v5/runs/modis_v6/deltas_vs_ref.csv",
+     "F8TS_X": "data/processed/v5/runs/featsets_v6/deltas_vs_ref.csv",
+     "F8TS_ALL": "data/processed/v5/runs/modis_v6/deltas_vs_ref.csv"
+    }
+   },
+   "printed_numbers": "none (tick labels only)"
+  },
+  "d": {
+   "quantity": "dRMSE = RMSE(Physics + residual ML) - RMSE(Stefan, recalibrated) (cm) within regional terciles of each covariate, spatial block out-of-fold predictions",
+   "input_files": [
+    "outputs/figures/paper/v7/source_data/F4e_gain_conditions.csv (computed by scripts/4_visualization/v9_f4e_gain_conditions.py from data/processed/v5/runs/core_v6/preds)"
+   ],
+   "row_filter": "covariate != all; cell shown when n >= 30 cell-years and >= 5 blocks; outline when the 95 % block-bootstrap interval (2000 resamples) excludes 0",
+   "covariate_definitions": {
+    "TDD": "thaw degree-days of the label year, full season (ERA5-Land)",
+    "FDD": "freezing degree-days of the preceding winter, Oct-Apr (ERA5-Land)",
+    "Snow (SWE)": "mean snow water equivalent of the hydrological year, Oct-Sep (ERA5-Land)",
+    "SOC 0-5 cm": "SoilGrids",
+    "Clay": "SoilGrids 5-15 cm",
+    "Slope": "DEM",
+    "Elevation": "DEM",
+    "NDVI": "MODIS summer NDVI, multi-year mean per cell"
+   },
+   "terciles": "within-region 33.3 / 66.7 percentiles over the labelled cell-years",
+   "label_years": {
+    "Alaska": "2010-2024",
+    "Lena Delta": "2010-2022",
+    "Canada (NW)": "2010-2024"
+   },
+   "colour": "cmcrameri vik, limits -7.0 to +7.0 cm (symmetric about 0)",
+   "keys_in_figure": [
+    "dark outline: 95% interval excludes 0",
+    "hatching: insufficient data (fewer than 30 cell-years or 5 blocks)"
+   ],
+   "region_wide_delta_cm_95ci": {
+    "Alaska": [
+     -0.15,
+     -0.57,
+     0.12
+    ],
+    "Lena Delta": [
+     -3.59,
+     -7.83,
+     -0.81
+    ],
+    "Canada (NW)": [
+     -3.74,
+     -4.77,
+     -0.83
+    ]
+   },
+   "printed_numbers": [
+    {
+     "region": "Alaska",
+     "covariate": "TDD",
+     "tercile": "Low",
+     "value": -0.113,
+     "printed": "−0.1",
+     "lo": -1.452,
+     "hi": -0.029,
+     "n": 5160,
+     "blocks": 11,
+     "excludes_0": true
+    },
+    {
+     "region": "Alaska",
+     "covariate": "TDD",
+     "tercile": "Mid",
+     "value": -0.484,
+     "printed": "−0.5",
+     "lo": -1.414,
+     "hi": 0.254,
+     "n": 5193,
+     "blocks": 51,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "TDD",
+     "tercile": "High",
+     "value": 0.068,
+     "printed": "+0.1",
+     "lo": -1.075,
+     "hi": 0.496,
+     "n": 5187,
+     "blocks": 31,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "FDD",
+     "tercile": "Low",
+     "value": 0.227,
+     "printed": "+0.2",
+     "lo": -0.17,
+     "hi": 1.304,
+     "n": 5145,
+     "blocks": 47,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "FDD",
+     "tercile": "Mid",
+     "value": 0.106,
+     "printed": "+0.1",
+     "lo": -0.967,
+     "hi": 1.258,
+     "n": 5218,
+     "blocks": 34,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "FDD",
+     "tercile": "High",
+     "value": -0.92,
+     "printed": "−0.9",
+     "lo": -2.071,
+     "hi": -0.527,
+     "n": 5177,
+     "blocks": 51,
+     "excludes_0": true
+    },
+    {
+     "region": "Alaska",
+     "covariate": "Snow (SWE)",
+     "tercile": "Low",
+     "value": -0.157,
+     "printed": "−0.2",
+     "lo": -1.08,
+     "hi": 0.429,
+     "n": 5106,
+     "blocks": 45,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "Snow (SWE)",
+     "tercile": "Mid",
+     "value": -0.139,
+     "printed": "−0.1",
+     "lo": -1.117,
+     "hi": 0.941,
+     "n": 1845,
+     "blocks": 39,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "Snow (SWE)",
+     "tercile": "High",
+     "value": -0.161,
+     "printed": "−0.2",
+     "lo": -0.865,
+     "hi": 0.07,
+     "n": 8589,
+     "blocks": 52,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "SOC 0–5 cm",
+     "tercile": "Low",
+     "value": -0.076,
+     "printed": "−0.1",
+     "lo": -1.124,
+     "hi": 0.336,
+     "n": 5149,
+     "blocks": 46,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "SOC 0–5 cm",
+     "tercile": "Mid",
+     "value": -0.367,
+     "printed": "−0.4",
+     "lo": -1.055,
+     "hi": 0.308,
+     "n": 5168,
+     "blocks": 38,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "SOC 0–5 cm",
+     "tercile": "High",
+     "value": -0.061,
+     "printed": "−0.1",
+     "lo": -0.872,
+     "hi": 0.15,
+     "n": 5223,
+     "blocks": 5,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "Clay",
+     "tercile": "Low",
+     "value": 0.271,
+     "printed": "+0.3",
+     "lo": -0.419,
+     "hi": 1.072,
+     "n": 4420,
+     "blocks": 26,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "Clay",
+     "tercile": "Mid",
+     "value": -0.612,
+     "printed": "−0.6",
+     "lo": -1.838,
+     "hi": -0.236,
+     "n": 4838,
+     "blocks": 38,
+     "excludes_0": true
+    },
+    {
+     "region": "Alaska",
+     "covariate": "Clay",
+     "tercile": "High",
+     "value": -0.254,
+     "printed": "−0.3",
+     "lo": -0.69,
+     "hi": 0.066,
+     "n": 6282,
+     "blocks": 23,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "Slope",
+     "tercile": "Low",
+     "value": 0.057,
+     "printed": "+0.1",
+     "lo": -0.874,
+     "hi": 0.999,
+     "n": 5172,
+     "blocks": 36,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "Slope",
+     "tercile": "Mid",
+     "value": -0.475,
+     "printed": "−0.5",
+     "lo": -1.022,
+     "hi": -0.102,
+     "n": 5193,
+     "blocks": 48,
+     "excludes_0": true
+    },
+    {
+     "region": "Alaska",
+     "covariate": "Slope",
+     "tercile": "High",
+     "value": -0.095,
+     "printed": "−0.1",
+     "lo": -1.206,
+     "hi": 0.511,
+     "n": 5175,
+     "blocks": 45,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "Elevation",
+     "tercile": "Low",
+     "value": -0.039,
+     "printed": "0.0",
+     "lo": -1.236,
+     "hi": 0.399,
+     "n": 5175,
+     "blocks": 10,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "Elevation",
+     "tercile": "Mid",
+     "value": -0.36,
+     "printed": "−0.4",
+     "lo": -1.231,
+     "hi": 0.368,
+     "n": 5190,
+     "blocks": 38,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "Elevation",
+     "tercile": "High",
+     "value": -0.047,
+     "printed": "0.0",
+     "lo": -1.158,
+     "hi": 0.777,
+     "n": 5175,
+     "blocks": 35,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "NDVI",
+     "tercile": "Low",
+     "value": -0.068,
+     "printed": "−0.1",
+     "lo": -0.924,
+     "hi": 0.347,
+     "n": 4898,
+     "blocks": 25,
+     "excludes_0": false
+    },
+    {
+     "region": "Alaska",
+     "covariate": "NDVI",
+     "tercile": "Mid",
+     "value": -0.495,
+     "printed": "−0.5",
+     "lo": -1.069,
+     "hi": -0.159,
+     "n": 4962,
+     "blocks": 34,
+     "excludes_0": true
+    },
+    {
+     "region": "Alaska",
+     "covariate": "NDVI",
+     "tercile": "High",
+     "value": 0.001,
+     "printed": "0.0",
+     "lo": -0.708,
+     "hi": 0.45,
+     "n": 4926,
+     "blocks": 46,
+     "excludes_0": false
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "TDD",
+     "tercile": "Low",
+     "value": -0.344,
+     "printed": "−0.3",
+     "lo": -1.125,
+     "hi": 0.643,
+     "n": 507,
+     "blocks": 5,
+     "excludes_0": false
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "TDD",
+     "tercile": "Mid",
+     "value": -1.647,
+     "printed": "−1.6",
+     "lo": -4.314,
+     "hi": -0.789,
+     "n": 1106,
+     "blocks": 9,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "TDD",
+     "tercile": "High",
+     "value": -6.161,
+     "printed": "−6.2",
+     "lo": -12.015,
+     "hi": -0.724,
+     "n": 823,
+     "blocks": 12,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "FDD",
+     "tercile": "Low",
+     "value": -1.446,
+     "printed": "−1.4",
+     "lo": -6.719,
+     "hi": -0.512,
+     "n": 807,
+     "blocks": 10,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "FDD",
+     "tercile": "Mid",
+     "value": -6.807,
+     "printed": "−6.8",
+     "lo": -12.48,
+     "hi": -1.062,
+     "n": 722,
+     "blocks": 10,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "FDD",
+     "tercile": "High",
+     "value": -1.058,
+     "printed": "−1.1",
+     "lo": -1.574,
+     "hi": -0.308,
+     "n": 907,
+     "blocks": 7,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "Snow (SWE)",
+     "tercile": "Low",
+     "value": -1.609,
+     "printed": "−1.6",
+     "lo": -3.052,
+     "hi": -0.519,
+     "n": 780,
+     "blocks": 5,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "Snow (SWE)",
+     "tercile": "Mid",
+     "value": -6.425,
+     "printed": "−6.4",
+     "lo": -12.172,
+     "hi": -0.639,
+     "n": 738,
+     "blocks": 12,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "Snow (SWE)",
+     "tercile": "High",
+     "value": -1.303,
+     "printed": "−1.3",
+     "lo": -4.528,
+     "hi": -0.367,
+     "n": 918,
+     "blocks": 10,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "SOC 0–5 cm",
+     "tercile": "Low",
+     "value": -4.867,
+     "printed": "−4.9",
+     "lo": -14.704,
+     "hi": -1.477,
+     "n": 198,
+     "blocks": 8,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "SOC 0–5 cm",
+     "tercile": "Mid",
+     "value": -3.02,
+     "printed": "−3.0",
+     "lo": -12.176,
+     "hi": -0.418,
+     "n": 1112,
+     "blocks": 6,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "SOC 0–5 cm",
+     "tercile": "High",
+     "value": -5.163,
+     "printed": "−5.2",
+     "lo": -12.067,
+     "hi": -3.158,
+     "n": 717,
+     "blocks": 10,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "Clay",
+     "tercile": "Mid",
+     "value": -3.353,
+     "printed": "−3.4",
+     "lo": -11.065,
+     "hi": -0.414,
+     "n": 1338,
+     "blocks": 10,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "Clay",
+     "tercile": "High",
+     "value": -4.715,
+     "printed": "−4.7",
+     "lo": -15.555,
+     "hi": -3.017,
+     "n": 800,
+     "blocks": 10,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "Slope",
+     "tercile": "Low",
+     "value": -3.418,
+     "printed": "−3.4",
+     "lo": -7.06,
+     "hi": -0.896,
+     "n": 811,
+     "blocks": 13,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "Slope",
+     "tercile": "Mid",
+     "value": -5.037,
+     "printed": "−5.0",
+     "lo": -10.804,
+     "hi": -0.691,
+     "n": 814,
+     "blocks": 12,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "Slope",
+     "tercile": "High",
+     "value": -1.746,
+     "printed": "−1.7",
+     "lo": -6.079,
+     "hi": -0.279,
+     "n": 811,
+     "blocks": 12,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "Elevation",
+     "tercile": "Low",
+     "value": -6.013,
+     "printed": "−6.0",
+     "lo": -12.062,
+     "hi": -0.748,
+     "n": 809,
+     "blocks": 15,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "Elevation",
+     "tercile": "Mid",
+     "value": -1.208,
+     "printed": "−1.2",
+     "lo": -2.953,
+     "hi": 0.139,
+     "n": 816,
+     "blocks": 8,
+     "excludes_0": false
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "Elevation",
+     "tercile": "High",
+     "value": -1.626,
+     "printed": "−1.6",
+     "lo": -2.225,
+     "hi": 0.072,
+     "n": 811,
+     "blocks": 7,
+     "excludes_0": false
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "NDVI",
+     "tercile": "Low",
+     "value": -0.871,
+     "printed": "−0.9",
+     "lo": -1.475,
+     "hi": -0.43,
+     "n": 286,
+     "blocks": 9,
+     "excludes_0": true
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "NDVI",
+     "tercile": "Mid",
+     "value": -1.963,
+     "printed": "−2.0",
+     "lo": -3.557,
+     "hi": 0.449,
+     "n": 275,
+     "blocks": 5,
+     "excludes_0": false
+    },
+    {
+     "region": "Lena Delta",
+     "covariate": "NDVI",
+     "tercile": "High",
+     "value": -2.579,
+     "printed": "−2.6",
+     "lo": -4.543,
+     "hi": -0.153,
+     "n": 325,
+     "blocks": 7,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "TDD",
+     "tercile": "Low",
+     "value": -2.566,
+     "printed": "−2.6",
+     "lo": -4.64,
+     "hi": -0.267,
+     "n": 374,
+     "blocks": 9,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "TDD",
+     "tercile": "Mid",
+     "value": -4.309,
+     "printed": "−4.3",
+     "lo": -4.614,
+     "hi": -1.841,
+     "n": 407,
+     "blocks": 10,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "TDD",
+     "tercile": "High",
+     "value": -4.1,
+     "printed": "−4.1",
+     "lo": -5.598,
+     "hi": 0.243,
+     "n": 415,
+     "blocks": 14,
+     "excludes_0": false
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "FDD",
+     "tercile": "Low",
+     "value": -4.698,
+     "printed": "−4.7",
+     "lo": -5.749,
+     "hi": -1.009,
+     "n": 364,
+     "blocks": 18,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "FDD",
+     "tercile": "Mid",
+     "value": -2.21,
+     "printed": "−2.2",
+     "lo": -4.479,
+     "hi": 0.468,
+     "n": 379,
+     "blocks": 11,
+     "excludes_0": false
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "FDD",
+     "tercile": "High",
+     "value": -3.993,
+     "printed": "−4.0",
+     "lo": -4.473,
+     "hi": -0.808,
+     "n": 453,
+     "blocks": 7,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "Snow (SWE)",
+     "tercile": "Low",
+     "value": -4.634,
+     "printed": "−4.6",
+     "lo": -5.879,
+     "hi": 0.894,
+     "n": 340,
+     "blocks": 13,
+     "excludes_0": false
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "Snow (SWE)",
+     "tercile": "Mid",
+     "value": -4.225,
+     "printed": "−4.2",
+     "lo": -5.02,
+     "hi": -1.106,
+     "n": 437,
+     "blocks": 16,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "Snow (SWE)",
+     "tercile": "High",
+     "value": -2.367,
+     "printed": "−2.4",
+     "lo": -3.651,
+     "hi": -0.602,
+     "n": 419,
+     "blocks": 15,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "SOC 0–5 cm",
+     "tercile": "Low",
+     "value": -4.65,
+     "printed": "−4.6",
+     "lo": -5.768,
+     "hi": -1.208,
+     "n": 362,
+     "blocks": 13,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "SOC 0–5 cm",
+     "tercile": "Mid",
+     "value": 0.048,
+     "printed": "0.0",
+     "lo": -1.199,
+     "hi": 0.893,
+     "n": 304,
+     "blocks": 13,
+     "excludes_0": false
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "Clay",
+     "tercile": "Low",
+     "value": -4.514,
+     "printed": "−4.5",
+     "lo": -5.715,
+     "hi": -0.024,
+     "n": 360,
+     "blocks": 10,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "Clay",
+     "tercile": "Mid",
+     "value": -6.29,
+     "printed": "−6.3",
+     "lo": -6.827,
+     "hi": 0.062,
+     "n": 182,
+     "blocks": 5,
+     "excludes_0": false
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "Clay",
+     "tercile": "High",
+     "value": -2.412,
+     "printed": "−2.4",
+     "lo": -3.296,
+     "hi": -0.56,
+     "n": 654,
+     "blocks": 17,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "Slope",
+     "tercile": "Low",
+     "value": -4.679,
+     "printed": "−4.7",
+     "lo": -5.322,
+     "hi": -1.498,
+     "n": 397,
+     "blocks": 17,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "Slope",
+     "tercile": "Mid",
+     "value": -3.644,
+     "printed": "−3.6",
+     "lo": -4.317,
+     "hi": -0.331,
+     "n": 401,
+     "blocks": 17,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "Slope",
+     "tercile": "High",
+     "value": -2.788,
+     "printed": "−2.8",
+     "lo": -5.111,
+     "hi": -0.338,
+     "n": 398,
+     "blocks": 20,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "Elevation",
+     "tercile": "Low",
+     "value": -0.78,
+     "printed": "−0.8",
+     "lo": -2.091,
+     "hi": 0.167,
+     "n": 398,
+     "blocks": 18,
+     "excludes_0": false
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "Elevation",
+     "tercile": "Mid",
+     "value": -2.537,
+     "printed": "−2.5",
+     "lo": -2.744,
+     "hi": -1.765,
+     "n": 393,
+     "blocks": 8,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "Elevation",
+     "tercile": "High",
+     "value": -6.775,
+     "printed": "−6.8",
+     "lo": -7.7,
+     "hi": -3.142,
+     "n": 405,
+     "blocks": 7,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "NDVI",
+     "tercile": "Low",
+     "value": -1.599,
+     "printed": "−1.6",
+     "lo": -2.393,
+     "hi": -0.636,
+     "n": 392,
+     "blocks": 20,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "NDVI",
+     "tercile": "Mid",
+     "value": -5.272,
+     "printed": "−5.3",
+     "lo": -6.502,
+     "hi": -0.945,
+     "n": 313,
+     "blocks": 9,
+     "excludes_0": true
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "NDVI",
+     "tercile": "High",
+     "value": -4.542,
+     "printed": "−4.5",
+     "lo": -6.832,
+     "hi": -0.806,
+     "n": 478,
+     "blocks": 5,
+     "excludes_0": true
+    }
+   ],
+   "outlined_cells": [
+    "Alaska TDD Low",
+    "Alaska FDD High",
+    "Alaska Clay Mid",
+    "Alaska Slope Mid",
+    "Alaska NDVI Mid",
+    "Lena Delta TDD Mid",
+    "Lena Delta TDD High",
+    "Lena Delta FDD Low",
+    "Lena Delta FDD Mid",
+    "Lena Delta FDD High",
+    "Lena Delta Snow (SWE) Low",
+    "Lena Delta Snow (SWE) Mid",
+    "Lena Delta Snow (SWE) High",
+    "Lena Delta SOC 0–5 cm Low",
+    "Lena Delta SOC 0–5 cm Mid",
+    "Lena Delta SOC 0–5 cm High",
+    "Lena Delta Clay Mid",
+    "Lena Delta Clay High",
+    "Lena Delta Slope Low",
+    "Lena Delta Slope Mid",
+    "Lena Delta Slope High",
+    "Lena Delta Elevation Low",
+    "Lena Delta NDVI Low",
+    "Lena Delta NDVI High",
+    "Canada (NW) TDD Low",
+    "Canada (NW) TDD Mid",
+    "Canada (NW) FDD Low",
+    "Canada (NW) FDD High",
+    "Canada (NW) Snow (SWE) Mid",
+    "Canada (NW) Snow (SWE) High",
+    "Canada (NW) SOC 0–5 cm Low",
+    "Canada (NW) Clay Low",
+    "Canada (NW) Clay High",
+    "Canada (NW) Slope Low",
+    "Canada (NW) Slope Mid",
+    "Canada (NW) Slope High",
+    "Canada (NW) Elevation Mid",
+    "Canada (NW) Elevation High",
+    "Canada (NW) NDVI Low",
+    "Canada (NW) NDVI Mid",
+    "Canada (NW) NDVI High"
+   ],
+   "hatched_cells": [
+    {
+     "region": "Lena Delta",
+     "covariate": "Clay",
+     "tercile": "Low",
+     "n": 11,
+     "blocks": 4
+    },
+    {
+     "region": "Canada (NW)",
+     "covariate": "SOC 0–5 cm",
+     "tercile": "High",
+     "n": 530,
+     "blocks": 4
+    }
+   ],
+   "cell_mm": [
+    7.4,
+    5.4
+   ]
+  }
+ }
+}

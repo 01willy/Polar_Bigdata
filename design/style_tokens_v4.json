@@ -358,6 +358,157 @@
       "axis": "#404040",
       "grid": "#E8E8E8",
       "zero_line": "#8C8C8C"
+    },
+    "paper_v12": {
+      "note": "2026-10-18 논문 v12 색(docs/FIGURE_AUDIT_v12_2026-10-18.md 6절). 사용자 지적: v11 의 회색 글자 · 채도 낮춘 색 · 가는 선이 AI 투. 상위 학술지(Ploton 2020, Hjort 2018, Langer 2024) 관행대로 글자 · 축 순흑, Okabe–Ito 원색, 격자선 없음. POLAR_PALETTE=paper12 로 style_v5 가 읽는다",
+      "methods": {
+        "P0": "#7F7F7F",
+        "P1": "#0072B2",
+        "R1": "#D55E00",
+        "D0": "#7B3294",
+        "F1": "#E69F00",
+        "D1": "#009E73",
+        "Stack": "#CC79A7",
+        "Pstar": "#56B4E9",
+        "P1a": "#3B7FB8",
+        "Ku": "#7FA9CC",
+        "W": "#A33E0B",
+        "WF": "#D55E00"
+      },
+      "products": {
+        "Wei": "#2CA25F",
+        "Liu": "#D6336C",
+        "CCI": "#8C6D31",
+        "CCI5": "#E7B800",
+        "Aalto": "#56B4E9",
+        "YK": "#6B8E23"
+      },
+      "regions": {
+        "Alaska": "#332288",
+        "Lena Delta": "#3E92CC",
+        "Canada": "#2A8C7A"
+      },
+      "maps": {
+        "alt": "oslo_r (cmcrameri)",
+        "anomaly": "vik (cmcrameri), symmetric",
+        "climate_inputs": "lajolla (cmcrameri)",
+        "terrain_inputs": "grayC (cmcrameri)",
+        "soil_inputs": "bamako (cmcrameri)"
+      },
+      "text": "#000000",
+      "axis": "#000000",
+      "grid": "none",
+      "zero_line": "#666666",
+      "lines_pt": {
+        "axis": 0.8,
+        "tick": 0.8,
+        "tick_len": 2.5,
+        "data": 1.1,
+        "proposed": 1.4,
+        "aux": 0.8,
+        "reference": 0.6,
+        "ci": 0.8,
+        "map_coast": 0.6,
+        "graticule": 0.4,
+        "diagram_connector": 0.8,
+        "diagram_box_edge": 0.8
+      },
+      "marker_pt": {
+        "circle": 4.0,
+        "square": 3.6,
+        "triangle": 4.4,
+        "open_edge": 0.8
+      },
+      "font_pt": {
+        "text": 7.0,
+        "panel_letter": 8.0
+      },
+      "diagram": {
+        "box_face": "#F2F2F2",
+        "box_edge": "#000000",
+        "box_title_weight": "bold",
+        "arrow": "filled triangle 1.6 mm, black",
+        "forbidden": [
+          "row headers with hairlines",
+          "open chevron arrowheads",
+          "schematic (fake) curves",
+          "pastel rounded blocks"
+        ]
+      }
+    },
+    "paper_v13": {
+      "note": "2026-10-18 밤 논문 v13 색(사용자 지적: v12 는 선이 굵고 색이 쨍해 발표용 같고 글자 강약이 없음). 글자 위계: 패널 문자 · 축 라벨 검정, 눈금 · 범례 #333333, 보조 주석 #595959. 선 가늘게(축 0.6, 자료 0.9, 제안 1.2 pt). 색은 Okabe–Ito 색상에 채도 약 25 % 낮춤. POLAR_PALETTE=paper13",
+      "methods": {
+        "P0": "#8C8C8C",
+        "P1": "#1A7AB3",
+        "R1": "#C9671D",
+        "D0": "#7F4F9F",
+        "F1": "#D9A21B",
+        "D1": "#2E9D7B",
+        "Stack": "#B07AA1",
+        "Pstar": "#6FA3D0",
+        "P1a": "#3B7FB8",
+        "Ku": "#7FA9CC",
+        "W": "#A33E0B",
+        "WF": "#C9671D"
+      },
+      "products": {
+        "Wei": "#4E9A6A",
+        "Liu": "#C4547A",
+        "CCI": "#8C6D31",
+        "CCI5": "#D4AF37",
+        "Aalto": "#5AA7D6",
+        "YK": "#7A9A3A"
+      },
+      "regions": {
+        "Alaska": "#3B3B8F",
+        "Lena Delta": "#4A90C2",
+        "Canada": "#3A9384"
+      },
+      "folds": [
+        "#2A7BB5",
+        "#6BB5DE",
+        "#D8A24A",
+        "#C98AAE",
+        "#3A9E7F"
+      ],
+      "maps": {
+        "alt": "oslo_r (cmcrameri)",
+        "anomaly": "vik (cmcrameri), symmetric",
+        "inputs": "per variable as in deck v7: MAAT lipari, FDD devon_r, snow oslo_r, TDD lajolla_r, elevation lapaz_r, slope acton_r, soil carbon bamako_r, clay turku_r"
+      },
+      "text": "#000000",
+      "text_tick": "#333333",
+      "text_aux": "#595959",
+      "axis": "#000000",
+      "grid": "none",
+      "zero_line": "#808080",
+      "lines_pt": {
+        "axis": 0.6,
+        "tick": 0.6,
+        "tick_len": 2.2,
+        "data": 0.9,
+        "proposed": 1.2,
+        "aux": 0.7,
+        "reference": 0.5,
+        "ci": 0.7,
+        "map_coast": 0.5,
+        "graticule": 0.35,
+        "diagram_connector": 0.7,
+        "diagram_box_edge": 0.6
+      },
+      "marker_pt": {
+        "circle": 3.4,
+        "square": 3.1,
+        "triangle": 3.8,
+        "open_edge": 0.7
+      },
+      "font_pt": {
+        "label": 7.0,
+        "tick": 6.5,
+        "aux": 6.5,
+        "panel_letter": 8.0
+      }
     }
   },
   "colormaps": {
