@@ -3,6 +3,30 @@
 > 세션별 작업 기록. 큐레이션된 마스터 인덱스는 [EXPERIMENTS.md](EXPERIMENTS.md),
 > GPT 공유 핸드오프는 [gpt/handoff/](../gpt/handoff/) 참조.
 
+## 2026-10-21 13:30 — 논문 v14 → v14.1(Fig 6 지역별 연도 · 학습 지점 거리 구분, 보충 표 S7 셀-연도 재채점, 저자 표기, 그림 2차 제안, 납품 폴더 재구성)
+
+- **질문 1(알래스카 2013 r 낮음)**: 연도별 · 거리별 재계산(스크래치 `fig6_yearwise_common_cells.csv`). 알래스카는 2010–2020 전 기간 세 지도 동급(전체 셀-연도 772: 20.4 / 20.1 / 19.5 cm), 제품의 r 우위는 Wei 학습 지점 25 km 안에서만. 2013 은 알래스카에서도 관측 셀 최다 해.
+- **질문 2(1 km 재집계)**: 라벨 = 지점(0.0001°), 셀당 지점 중앙값 3–5(최대 723), 셀 안 관측 합동 SD 13.0 · 12.7 · 17.5 cm. 기존 겹 밖 예측의 셀-연도 재채점으로 주요 결론 유지 확인 → 전면 재실행 대신 보충 표 S7(`scripts/2_evaluation/v14_cellyear_rescore.py`, B 2000).
+- **Fig 6 v14.1**(`fig6_product_maps.py`): 지역별 관측 셀 최다 해(2013 · 2016 · 2013), 25 km 안 · 밖 표지 구분과 RMSE 두 값, 통계 글 모서리 자동 선택, 범례 2줄. 매크로 `\nfe*Far*` 추가. 본문 · 캡션 영 · 국문, 표 S2.
+- **원고**: 방법 절 셀-연도 문장, 보충 표 S7(두 tabular, 생성 파일 `shared_v14/table_s7{a,b}_cellyear_{en,ko}.tex`), 저자 블록(백승원 · 김승희 · 정윤택 · 조용채), 기여 문장. 빌드 영문 25쪽 · 국문 22쪽 · 보충 21쪽 오류 0. 점검표 본문 4,442단어, 캡션 70–164단어.
+- **조사**(에이전트, `docs/research/2026-10-21/map_and_figure_practice.md`): 지도 논문 19편 · 방법 논문 22편. 주 지도 = 다년 평균, 추세 별도, 연도별 편차 지도 선례 없음, 검증 설계 비교 = Δ + 0선, 라벨 곡선 = 중앙값 + 띠 + 기준선, 제품 비교 = 지도 나열 + 산점, Taylor/target 은 보충만.
+- **그림 2차 제안**(`proposals_v14_1.py`, 8장): P3_D 엄격도 꺾은선, P3_E 블록 CV 밀도, P3_F 세 질문 배치(권장), P4_E 라벨 예산, P4_F 전이 열 표, P5_D 관측 대 예측 행렬(권장), P5_F 오차 분포, P7_D 편차 산점(미권장). Fig 7f 보충 이동안 기록. 문서 `docs/FIGURE_PROPOSALS_v14_1_2026-10-21.md`.
+- **폴더**: `deliverables/` 종류별 재구성(`tools/sync_deliverables.sh` v2; paper · figure_proposals · deck · reports · references · archive), `00_START_HERE.md` 폴더 역할 표, README 포인터. 마무리 체인 `tools/finish_paper_v14_1.sh`.
+- **버그**: `\\` 4중 역슬래시 표 머리(생성 스크립트 이스케이프), 국문 매크로 뒤 한글(`\ncySitesMedCa{}개`), tabular 안 `\input` 과 `\\` 로 'no line here to end' → 완전한 tabular 파일 입력으로 해결. Fig 6 산점 통계 글과 표지 겹침 → 모서리 자동 선택.
+
+## 2026-10-20 16:58 — 논문 v13.2 → v14: 변인 통제 감사 반영, 캐나다 1 km 지도, 그림 대안, 본문 개정
+
+- **지도 재생성(9월 1일 TDD)**: `scripts/1_data_prep/build_v5_forcing_year.py`(tdd_cum 열) → `data/processed/v5/grid/{lena,alaska,canada}_forcing_*.csv`; `scripts/3_deep_learning/v5_map_predict.py --ref-doy 244`(새 옵션) → `data/processed/v5/maps/{Lena,Alaska,Canada}/` (옛 전체 계절 지도는 `maps_fullseason_2026-10-14/`). 로컬 CPU, 레나 7분 · 알래스카 12분 · 캐나다 7분.
+- **캐나다 격자 신규**: `scripts/0_download/copernicus_dem_box.py`(290 타일 3.95 GB), `scripts/1_data_prep/build_map_grid_canada_v1.py`(1,223,119 셀; merge 의 PFR 단언을 1 %p 허용으로 완화), `hillshade_canada_v1.py`. 지도 적용 가능 영역 43 %, 90 % 구간 반폭 41.3 cm.
+- **그림 v13.2**(`scripts/4_visualization/paper_v13/`): Fig 6 2013 × 3지역, Fig 7 3지역(a–c 평균 · d 편차 · e 추세 · f 연도별), S8 창 4 + AOA 3, S9 평균 보정 3지역, Fig 4 3열 격자, Fig 2 범례, Fig 5 끊은 축, 레나 격자 해안선(`c13_maps.coast`), 경위선 120점 · 해안선 단순화(`graticule`, `coast(tol_m)`).
+- **그림 v14**(`scripts/4_visualization/paper_v14/`): Fig 6 관측 셀 관측 ALT 색 채움 · 제품 마스크 · 지역별 색 범위(AOA 안 5–95 %) · 관측 대 예측 산점(r · RMSE); Fig 7 관측 셀 관측 평균 ALT 채움; Fig 3 설계 A(입력 효과 숲 그림 + 설계별 점과 Δ 띠); 대안 렌더 `outputs/figures/paper/v14_proposals/`(Fig3_B 사양 곡선 61개 사양, Fig3_C 전이 벌점, Fig4_C 절대 RMSE, Fig5_B 표적 도식; `fig3_proposals.py`, `fig45_proposals.py`); S6c 를 v14 Fig 6 JSON(2013 지도)로, S10 을 `v5_site_series.py --ref-doy 244`(새 옵션, `site_series_year_obs_d244.csv.gz`)로.
+- **매크로**: `v13_numbers.py` Fig 6 · 7 · 라벨 단위 매크로(`\providecommand+\renewcommand` 덮어쓰기), `v14_numbers.py`(Fig 6 r · 색 범위 추가), `v10_numbers.py` MAP_REGIONS, `v6_numbers.py` aoa 캐나다, 부호 0 형식(`−0.0` 제거).
+- **원고 v14**(`paper/manuscript/{en,ko}_v14/`): 용어 '지점-연도', 고찰 소제목 제거 6문단, 결론 고유 결과 3가지, 서론 · 결과 축약, 캡션 70–137단어, 수식 (6) 대안 구조 · (9) 전이 · (12) 추세 · (13) 예측 구간, 초록 200단어, Data availability 캐나다 지도, 표 1 Yi–Kimball '미채점', S5 in_range = ALT ≤ 300 cm, S6 · S10 캡션. 빌드 영문 25쪽 · 국문 22쪽 · 보충 20쪽 오류 0. 점검표 전 항목 통과(본문 4,403단어, 압축본 0.98 MB: `tools/build_submission_png.sh` 래스터 그림 빌드).
+- **감사**: 에이전트 4건(`docs/AUDIT_FIGURE_CONTROL_2026-10-20.md`, `AUDIT_TEXT_NUMBERS_2026-10-20.md`, `AUDIT_EXPERIMENT_SETTINGS_2026-10-20.md`, `AUDIT_DATAFLOW_NUMBERS_v14_2026-10-20.md`). 판정: 라벨은 1 km 셀이 아니라 지점(0.0001°) → 용어 정정(1 km 재집계 재실행은 사용자 결정); 지도 입력 전체 계절 TDD → 9월 1일로 통일; "2013 유일한 해" 오류 정정; 연도 · 관측일 정합 · 겹 구조 · 매크로 263개 원천 일치 확인.
+- **납품**: `deliverables/14_paper_v13_2026-10-18/`(v13.2), `deliverables/15_paper_v14_2026-10-20/`(v14, `tools/package_paper_v14.sh`). 기록 `docs/FIGURE_AUDIT_v12_2026-10-18.md` 12–13절, `docs/FIGURE_PROPOSALS_v14_2026-10-20.md`.
+- **남은 결정**: 그림 대안 선택, 1 km 재집계 재실행, 저자 자리표시 · LLM 진술.
+
+
 ## 2026-10-16 17:00–: 논문 초안 v11(사용자 지적 10항): 방법을 결과 앞으로, 그림 본문 삽입, 색 복원(절제), 연구 흐름 그림 신설, 제품 지도 비교 본문화, 선행 연구 대비 서술 보강
 
 - **지시(10-16 저녁)**: Methods 를 Results 앞으로, 소제목을 논문 범주로, LLM 사용 진술 제외, AI 투 · 수사 표현 제거, Sci Rep 공식 지침 재확인(그림 · 표 · 설명 위치), v10 그림의 과한 무채색을 덱 색 체계의 절제판으로 복원, 전체 연구 흐름 그림 추가, 알래스카 · 레나 델타 제품 지도 대 우리 지도 비교를 본문에, 의의 · 주장 · 선행 연구 대비 차별점 강화, 그래프 전문성, Fig. 2 를 대표 방법 그림으로.
@@ -1111,15 +1135,3 @@ GPT 계획(`gpt/20260709_claude_next_research_plan_dl_alt_3d.md`) P2/P3/P6-C 실
 - **라벨 수 사다리 결과(nMsgU, 10 min, rc 0)**: `data/processed/v5/runs/ladder_v6/`, 요약 `docs/RESULTS_v6_LADDER_2026-10-15.md`, 매크로 ll*/tl*(docs/numbers_v6.json 1,367개). 판정: 물리 유사라벨은 모든 n 에서 재보정 Stefan 과 같음(학습기를 물리식으로 끌어당김; 직접 학습이 물리식보다 나쁜 알래스카·캐나다 n ≤ 250 에서만 직접 학습보다 우위). 잔차 결합은 n 25–100 에서 세 지역 모두 물리식 이상, 이득은 알래스카에서 n 이 적을수록(n 25 −0.9), 레나·캐나다에서 n 이 많을수록 큼(전량 −3.6·−3.7). 새 지역 전이: 라벨 0 에서 직접 학습은 레나에서 무너짐(39.5 대 Stefan 21.5), 25–50개로 회복; 잔차 결합(원천+n)은 알래스카에서 모든 n 에서 최선(17.0–17.8); 캐나다는 원천 직접 학습(24.2)이 최선이고 소수 라벨로 E 재보정 시 악화(단일 계수가 맞지 않는 지역). 그림 F9(`scripts/4_visualization/v8_f9_label_ladder.py`, 캐나다 n 1,000 은 일부 겹만 포함해 제외).
 - **그림 벌 v8(10-15 오후)**: 워크플로 11건(제작·검토·수정) 완료. 신설 G0 활동층 개념(사모일로프 2015 실측), G2 기존 한계(제품 불일치·Stefan 잔차 구조·시간 불균형), G3 전체 흐름(셰브런 + 실자료), G4 입력 자료 갤러리(ERA5-Land·DEM·SoilGrids·MODIS·제품 5종), G5 Stefan 물리식(원천·재보정 E, 실측 곡선), F8 제품 지도 비교(알래스카 2014·레나 2016, 관측 셀 잔차, 보정량 지도), F9 라벨 수 사다리, 표지 cover_bg_v8(알래스카 2022 드레이프, 남색 배경). 개정 F1(자료 기간 통합 패널), F2(삽도 분리·셀 안 편차 밀도), F3(입력/모델/출력 열·트리 앙상블 글리프), F4(연속 축·구조별 이득 패널 신설·학습기), F6(범례 밖으로·250 m 표시 보간), F7(편차 지도 ±15 cm·AOA 해치 전 연도). 명세 `figures/figure_spec_v8.json`. 덱 v8 `deck/deck_spec_v8.json`(32쪽: 활동층이란 → 기존 한계 → 목표·개선·기대효과 → 흐름 → 입력 → 관측 셀 → 기간 → 시간 정의 → Stefan → 다년 셀 → 방법 → 평가 → 결과 13쪽 → 결론 → 의의 → 참고문헌), 쪽마다 의미 줄(잉크 14 pt) + 설명 줄, 결론·의의는 세 열 그림 + 열 상자. 빌더 `deck/build_v7.py`(DECK_SPEC/DECK_OUT, 의미 줄 줄바꿈 높이 계산, columns 쪽).
 - **덱 v8 완성(10-15 14시)**: `deck/render/v8_report.pdf` 32쪽, 감사 지적 0쪽. 결론·의의 쪽은 덱 전용 세 열 그림 G6(그 해 입력·지역 안/새 지역 ΔRMSE·최선 제품 대비)·G7(2022 편차 지도·공통 셀 RMSE·레나 전이 곡선) + 열별 주황 상자(머리 + 3줄). 지도 비교 쪽 의미 줄 수치는 `outputs/figures/paper/v7/source_data/F8_product_maps.json` 에서 읽음. 산출 동기화 `deliverables/08_v8_2026-10-15/`. 남은 것: 사용자 확인(제목 안, 결론 문구), 원고 v8, 커밋.
-
-## 2026-10-20 16:58 — 논문 v13.2 → v14: 변인 통제 감사 반영, 캐나다 1 km 지도, 그림 대안, 본문 개정
-
-- **지도 재생성(9월 1일 TDD)**: `scripts/1_data_prep/build_v5_forcing_year.py`(tdd_cum 열) → `data/processed/v5/grid/{lena,alaska,canada}_forcing_*.csv`; `scripts/3_deep_learning/v5_map_predict.py --ref-doy 244`(새 옵션) → `data/processed/v5/maps/{Lena,Alaska,Canada}/` (옛 전체 계절 지도는 `maps_fullseason_2026-10-14/`). 로컬 CPU, 레나 7분 · 알래스카 12분 · 캐나다 7분.
-- **캐나다 격자 신규**: `scripts/0_download/copernicus_dem_box.py`(290 타일 3.95 GB), `scripts/1_data_prep/build_map_grid_canada_v1.py`(1,223,119 셀; merge 의 PFR 단언을 1 %p 허용으로 완화), `hillshade_canada_v1.py`. 지도 적용 가능 영역 43 %, 90 % 구간 반폭 41.3 cm.
-- **그림 v13.2**(`scripts/4_visualization/paper_v13/`): Fig 6 2013 × 3지역, Fig 7 3지역(a–c 평균 · d 편차 · e 추세 · f 연도별), S8 창 4 + AOA 3, S9 평균 보정 3지역, Fig 4 3열 격자, Fig 2 범례, Fig 5 끊은 축, 레나 격자 해안선(`c13_maps.coast`), 경위선 120점 · 해안선 단순화(`graticule`, `coast(tol_m)`).
-- **그림 v14**(`scripts/4_visualization/paper_v14/`): Fig 6 관측 셀 관측 ALT 색 채움 · 제품 마스크 · 지역별 색 범위(AOA 안 5–95 %) · 관측 대 예측 산점(r · RMSE); Fig 7 관측 셀 관측 평균 ALT 채움; Fig 3 설계 A(입력 효과 숲 그림 + 설계별 점과 Δ 띠); 대안 렌더 `outputs/figures/paper/v14_proposals/`(Fig3_B 사양 곡선 61개 사양, Fig3_C 전이 벌점, Fig4_C 절대 RMSE, Fig5_B 표적 도식; `fig3_proposals.py`, `fig45_proposals.py`); S6c 를 v14 Fig 6 JSON(2013 지도)로, S10 을 `v5_site_series.py --ref-doy 244`(새 옵션, `site_series_year_obs_d244.csv.gz`)로.
-- **매크로**: `v13_numbers.py` Fig 6 · 7 · 라벨 단위 매크로(`\providecommand+\renewcommand` 덮어쓰기), `v14_numbers.py`(Fig 6 r · 색 범위 추가), `v10_numbers.py` MAP_REGIONS, `v6_numbers.py` aoa 캐나다, 부호 0 형식(`−0.0` 제거).
-- **원고 v14**(`paper/manuscript/{en,ko}_v14/`): 용어 '지점-연도', 고찰 소제목 제거 6문단, 결론 고유 결과 3가지, 서론 · 결과 축약, 캡션 70–137단어, 수식 (6) 대안 구조 · (9) 전이 · (12) 추세 · (13) 예측 구간, 초록 200단어, Data availability 캐나다 지도, 표 1 Yi–Kimball '미채점', S5 in_range = ALT ≤ 300 cm, S6 · S10 캡션. 빌드 영문 25쪽 · 국문 22쪽 · 보충 20쪽 오류 0. 점검표 전 항목 통과(본문 4,403단어, 압축본 0.98 MB: `tools/build_submission_png.sh` 래스터 그림 빌드).
-- **감사**: 에이전트 4건(`docs/AUDIT_FIGURE_CONTROL_2026-10-20.md`, `AUDIT_TEXT_NUMBERS_2026-10-20.md`, `AUDIT_EXPERIMENT_SETTINGS_2026-10-20.md`, `AUDIT_DATAFLOW_NUMBERS_v14_2026-10-20.md`). 판정: 라벨은 1 km 셀이 아니라 지점(0.0001°) → 용어 정정(1 km 재집계 재실행은 사용자 결정); 지도 입력 전체 계절 TDD → 9월 1일로 통일; "2013 유일한 해" 오류 정정; 연도 · 관측일 정합 · 겹 구조 · 매크로 263개 원천 일치 확인.
-- **납품**: `deliverables/14_paper_v13_2026-10-18/`(v13.2), `deliverables/15_paper_v14_2026-10-20/`(v14, `tools/package_paper_v14.sh`). 기록 `docs/FIGURE_AUDIT_v12_2026-10-18.md` 12–13절, `docs/FIGURE_PROPOSALS_v14_2026-10-20.md`.
-- **남은 결정**: 그림 대안 선택, 1 km 재집계 재실행, 저자 자리표시 · LLM 진술.

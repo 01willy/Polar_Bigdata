@@ -46,3 +46,8 @@ v13 에서 재설계되어 v14 에서는 캡션만 줄였다. 대안으로 (i) F
 
 - Fig 3 A, Fig 6 A, Fig 7 A 적용. Fig 4 · 5 는 현행 유지(캡션 간결화).
 - 대안 렌더: `outputs/figures/paper/v14_proposals/` (Fig3_B, Fig3_C, Fig4_C, Fig5_B; PNG 600 dpi + PDF). 스크립트 `scripts/4_visualization/paper_v14/fig3_proposals.py`, `fig45_proposals.py`.
+
+## 사용자 판정(2026-10-21)과 후속
+
+- Fig3_B 사양 곡선: 기각. Fig5_B 표적 도식: 글자 겹침과 의미 전달 문제로 보류. Fig3_C · Fig4_C: 미채택.
+- 2차 제안(선행 연구 조사 기반, 유형별 3안)은 `docs/FIGURE_PROPOSALS_v14_1_2026-10-21.md` 와 `deliverables/figure_proposals/` 를 본다.

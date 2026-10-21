@@ -1,44 +1,55 @@
 # Polar_Bigdata 안내
 
-영구동토 활동층 두께(ALT) 예측 연구. 관측이 드문 새 지역에서 Stefan 물리식과 기계학습을 라벨 수에 따라 어떻게 결합할지를 지역 홀드아웃으로 평가한다.
+영구동토 활동층 두께(ALT) 연구. 지점-연도 설계(관측 지점 × 관측 연도, ERA5-Land 기후 입력을 관측일까지 누적)로 Stefan 물리식과 잔차 기계학습을 결합하고, 공간 블록 · 지역 홀드아웃 검증과 공개 제품 비교, 2011--2024년 연도별 1 km 지도를 제공한다. Scientific Reports 투고 원고(v14.1) 단계이다.
 
-## 현재 상태(2026-10-08)
+## 현재 상태(2026-10-21)
 
 | 항목 | 위치 |
 |---|---|
-| 상태와 다음 세션 계획(극지연 회의 뒤 연구·논문 목표 재설정 예정) | `SESSION_HANDOFF.md` 10-08 절 |
-| 정리 감사와 고칠 목록 | `docs/AUDIT_2026-10-08_CLEANUP.md` |
-| 판정 기록 | `docs/EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md` 8절, 추가 등록 `docs/EXPERIMENT_PLAN_FINAL_BATCH_ADDENDUM_XK_XL_2026-10-05.md`·`..._XM_2026-10-05.md` 결과 절 |
-| 실험 등록부 | `paper/registry/experiments.csv` |
-| 발표 대본·배경 지식 원천 | `deck/script/` |
-| 열린 마감 | XE 2단계(10-08), XF·R4(10-11). 처리는 `SESSION_HANDOFF.md` 10-08 절 |
+| 상태 스냅샷과 남은 결정 | `SESSION_HANDOFF.md` 최신 절 |
+| 실험 · 세션 기록 | `docs/EXPERIMENT_LOG.md` |
+| GPT 인계 보고 | `gpt/handoff/INDEX.md`(최신이 위) |
+| 원고 규정 점검표 | `paper/manuscript/en_v14/COMPLIANCE_v14.md` |
+| 그림 설계 대안 | 2차 `docs/FIGURE_PROPOSALS_v14_1_2026-10-21.md`(1차 `..._v14_2026-10-20.md`), 조사 `docs/research/2026-10-21/`, 렌더 `deliverables/figure_proposals/` |
 
 ## 결과물을 보려면: `deliverables/`
 
-최종본만 모은 폴더이다(복사본, `bash tools/sync_deliverables.sh` 로 갱신).
+최종본만 모은 폴더이다(복사본, `VER=v14 bash tools/sync_deliverables.sh` 로 갱신). 종류별 폴더 하나씩, 현재 판만 둔다.
 
 | 폴더 | 내용 |
 |---|---|
-| `deliverables/01_발표자료/` | 보고 덱 PPTX·PDF |
-| `deliverables/02_논문초안/` | 영문 본문(검토용: 그림이 본문 안 / 제출형식: 그림이 끝), 영문 SI, 국문 본문 |
-| `deliverables/03_그림/논문그림/` | 원고 번호 Figure 1–7(처음 인용 순서), Table 1(PDF·PNG·설명문) |
-| `deliverables/03_그림/ALT지도/` | 알래스카·레나 1 km ALT 지도, 격자 크기별 오차, 기존 제품 비교 |
-| `deliverables/03_그림/보충그림/` | SI 보충 그림(파일 FigS14 = 원고 S13, FigS15 = 원고 S14) |
-| `deliverables/03_그림/방법도식/` | 문제 정의, 자료, 연구 흐름, 증강 대조 설계, 모델 구조, 평가 설계, 단계적 예측 워크플로 |
-| `deliverables/03_그림/슬라이드용/` | 덱에 넣은 슬라이드 크기 그림 |
-| `deliverables/04_참고문헌/` | 문헌 색인(INDEX.md)과 PDF 전체 폴더 바로가기 |
-| `deliverables/05_보고서/` | 아침 보고, 실험 계획과 판정 기록, 질의응답 문서 |
+| `deliverables/paper/` | 영문 · 국문 원고(전체 · 압축 제출본), 보충 자료, 규정 점검표, 본문 그림 `figures_main/`, 보충 그림 `figures_supplementary/`, 그림별 원천 자료 `source_data/`, 표 `tables/` |
+| `deliverables/figure_proposals/` | 그림 설계 대안 렌더(PNG)와 제안 문서 |
+| `deliverables/deck/` | 최신 발표 덱(PDF · PPTX) |
+| `deliverables/reports/` | 감사 보고, 조사 노트, 세션 상태, 실험 기록, 최신 GPT 인계 |
+| `deliverables/references/` | 문헌 색인과 PDF 폴더 바로가기 |
+| `deliverables/archive/` | 이전 묶음(01_–15_, 날짜별 판) |
 
-## 작업 폴더(원본)
+## 작업 폴더(원본). 폴더 이름이 역할을 정한다
 
 | 폴더 | 역할 |
 |---|---|
-| `paper/` | 원고 원천: `manuscript/en`, `manuscript/ko`(LaTeX), `registry/`(실험 등록부), `claims/`(주장별 근거) |
-| `outputs/figures/paper/v3_restructure/` | 논문 그림 원본(그림 스크립트의 출력 위치) |
-| `deck/` | 덱 생성 코드(`build_paper_report.py`)와 그림 자산(`assets/paper_report/`), 렌더(`render/`) |
-| `design/` | 그림·덱 디자인 규칙. 현행 색·글꼴 토큰은 `design/style_tokens_v4.json` |
-| `docs/` | 실험 계획·결과 기록(날짜별), 판정 기록은 `EXPERIMENT_PLAN_FINAL_BATCH_2026-10-04.md` 8절 |
-| `references/` | 참고 논문 PDF(주제별 폴더), 색인 `INDEX.md` |
-| `scripts/`, `src/`, `tests/` | 자료 처리·실험·그림 코드와 시험 |
-| `data/`, `results/` | 자료와 실행 결과(대부분 git 밖) |
-| `archive/` | 지난 대회 제출물·다른 프로젝트 파일 등 현행 작업에 쓰지 않는 것 |
+| `paper/` | 원고 원천. `manuscript/{en,ko}_v14/`(LaTeX, `build.sh`), `manuscript/shared_v*/`(수치 매크로 · 공용 표), `registry/`(실험 등록부), `claims/`(주장별 근거). 이전 판 `*_v6`–`*_v13` 은 기록용 |
+| `outputs/` | 스크립트가 만든 산출물. `figures/paper/v14/`(본문 그림 + `source_data/`), `v14_si/`(보충), `v14_proposals/`(대안), `maps/`, `report*/`, `models/` |
+| `results/` | Rescale 클라우드 실행의 원시 결과(`rescale_*/`, 내려받은 그대로). 집계 · 그림은 `outputs/` |
+| `data/` | `raw/`(원자료, git 밖) · `processed/`(라벨 · 공변량 · 지도 격자 · 예측) |
+| `scripts/` | 파이프라인. `0_download` → `1_data_prep` → `2_evaluation`(채점 · 매크로) → `3_deep_learning`(모델 · 지도) → `4_visualization/paper_v14`(그림) |
+| `src/polar/` | 공용 라이브러리(스타일 토큰 로더 `style_v5.py` 등) |
+| `docs/` | 계획 · 감사 · 조사 노트 · 실험 기록(날짜별 파일) |
+| `deck/` | 발표 덱 생성 코드 · 자산 · 렌더(`render/`) |
+| `design/` | 그림 · 덱 디자인 토큰(`style_tokens_v4.json`, paper13 색표) |
+| `figures/` | 그림 명세 JSON(전역 규칙: `figure_spec*.json`). 그림 파일이 아니다 |
+| `references/` | 참고 논문 PDF(주제별 폴더, git 밖)와 색인 `INDEX.md`; 협업자 문헌 `10_kopri_collaborators/` |
+| `gpt/handoff/` | GPT 인계 보고 |
+| `tools/` | 빌드 · 납품 · 클라우드 보조 스크립트(`sync_deliverables.sh`, `build_submission_png.sh`, `finish_paper_v14_1.sh`, `rescale_client.py`) |
+| `configs/`, `tests/`, `logs/` | 실행 설정, 시험, 실행 로그(`logs/fig_v14/` 등) |
+| `work/` | Rescale 업로드 묶음(tar, git 밖) |
+| `kpdc/` | KPDC 극지 데이터 센터 자료(git 밖) |
+| `archive/` | 지난 대회 제출물 등 현행 작업에 쓰지 않는 것 |
+
+## 다시 만들기
+
+- 그림: `cd scripts/4_visualization/paper_v14 && POLAR_PALETTE=paper13 CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=2 MPLBACKEND=Agg nice -n 10 python3 figN_*.py`
+- 수치 매크로: `python3 scripts/2_evaluation/v14_numbers.py`, 셀-연도 재채점 표: `python3 scripts/2_evaluation/v14_cellyear_rescore.py`
+- 원고: `bash paper/manuscript/en_v14/build.sh main si`(국문은 `ko_v14`)
+- 한 번에: `nohup bash tools/finish_paper_v14_1.sh > logs/fig_v14/finish_chain_v14_1.log 2>&1 &`(매크로 → 빌드 → 점검표 → deliverables 동기화)
