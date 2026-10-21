@@ -33,7 +33,7 @@ has_cite = "\\cite" in ab
 sub = H / "main_submission.pdf"; mb = f"{sub.stat().st_size / 1e6:.1f} MB" if sub.exists() else "미생성"
 mbv = ("통과" if sub.stat().st_size <= 3e6 else "**초과**") if sub.exists() else "확인"
 n_eq = (H / "sections" / "methods.tex").read_text(encoding="utf-8").count("\\begin{equation}")
-out = f"""# Sci Rep 규정 점검표 (원고 v14, 2026-10-20)
+out = f"""# Sci Rep 규정 점검표 (원고 v14.1, 2026-10-21)
 
 근거: nature.com/srep/author-instructions/submission-guidelines(2026-10-16 내려받음).
 
@@ -53,6 +53,6 @@ out = f"""# Sci Rep 규정 점검표 (원고 v14, 2026-10-20)
 | Data availability | 본문 끝, 참고문헌 앞 | 결론 뒤 | 통과 |
 | 첫 제출 파일 | 3 MB 이하 단일 파일 | 압축본 {mb} | {mbv} |
 | LLM 사용 진술 | Methods 에 기록하도록 권고 | 사용자 요청으로 제외 | 제출 전 재확인 |
-| 자리표시 | 제출 전 0 | 교신 저자 전자우편, 공저자 · 기여, 감사의 글, 저장소 DOI | 저자 결정 필요 |
+| 자리표시 | 제출 전 0 | 교신 저자 전자우편, 감사의 글, 저장소 DOI | 저자 결정 필요 |
 """
 (H / "COMPLIANCE_v14.md").write_text(out, encoding="utf-8"); print(out)

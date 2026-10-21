@@ -3,10 +3,12 @@
 \ifnum\frontblock=1
 \title[Physics-residual learning of year-specific active-layer thickness]{Active-layer thickness prediction and regional differences across permafrost regions using a physics-residual machine-learning workflow}
 
-\author*[1]{\fnm{Seungwon} \sur{Baek}}\email{[corresponding e-mail]}
-\author[2]{\fnm{[Co-author]} \sur{[KOPRI]}}
+\author[1]{\fnm{Seungwon} \sur{Baek}}
+\author[2]{\fnm{Seung Hee} \sur{Kim}}
+\author[2]{\fnm{Yoon Taek} \sur{Jung}}
+\author*[1]{\fnm{Yongchae} \sur{Cho}}\email{[corresponding e-mail]}
 \affil*[1]{\orgdiv{Department of Energy Systems Engineering}, \orgname{Seoul National University}, \orgaddress{\city{Seoul}, \country{Republic of Korea}}}
-\affil[2]{\orgname{Korea Polar Research Institute}, \orgaddress{\city{Incheon}, \country{Republic of Korea}}}
+\affil[2]{\orgdiv{Center of Remote Sensing and GIS}, \orgname{Korea Polar Research Institute}, \orgaddress{\city{Incheon}, \country{Republic of Korea}}}
 
 \abstract{Active-layer thickness (ALT) varies from year to year, yet gridded products are mostly trained on multi-year conditions and rarely evaluated against same-location, same-year observations. We combined \nncyAll{} site-year observations from Alaska, the Lena Delta and north-western Canada (2010--2024) with ERA5-Land thawing degree-days accumulated to the observation day, and tested a physics-residual workflow in which gradient boosting learns the residual of a locally recalibrated Stefan model. Under spatial-block cross-validation, the physics-residual model reduced the Stefan error by \ndrefLeblkRoabs{} cm in the Lena Delta and \ndrefCablkRoabs{} cm in Canada and matched it in Alaska; the gain required soil and terrain covariates and was largest where the regional Stefan model erred most. When the Lena Delta was withheld from training, direct machine learning exceeded the Stefan error by \ndrefLeregDzabs{} cm, whereas the physics-residual model remained close to it, and 25 local labels then reduced its error from \ntlrmseLeRszero{} to \ntlrmseLeRstwfive{} cm. In the same cells and years, the Lena Delta error (\nccLeRoall{} cm) was lower than that of five published products (\nccLeCcifiveall--\nccLeWeiall{} cm), which do not represent its thin active layers. The workflow provides year-labelled 1 km ALT maps of the three regions for 2011--2024 with an area of applicability and prediction intervals.}
 
@@ -23,10 +25,10 @@ All input data are publicly available. ALT observations: ABoVE soil moisture and
 [Funding and acknowledgements.]
 
 \bmhead{Author contributions}
-S.B. designed the study, compiled the data, performed the analyses and wrote the manuscript. [Co-author contributions.]
+S.B. designed the study, compiled the data, performed the analyses and wrote the manuscript. S.H.K. and Y.T.J. contributed to the interpretation of the remote-sensing covariates and the permafrost field data and revised the manuscript. Y.C. supervised the study and revised the manuscript. All authors approved the final manuscript.
 
 \bmhead{Additional information}
-\textbf{Supplementary information} accompanies this paper (Supplementary Methods S1--S5, Supplementary Tables S1--S6 and Supplementary Figures S1--S10).
+\textbf{Supplementary information} accompanies this paper (Supplementary Methods S1--S5, Supplementary Tables S1--S7 and Supplementary Figures S1--S10).
 
 \textbf{Competing interests} The authors declare no competing interests.
 \fi

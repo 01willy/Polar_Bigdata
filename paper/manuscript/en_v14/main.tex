@@ -28,6 +28,7 @@
 \input{../shared_v10/numbers_v10}
 \IfFileExists{../shared_v11/numbers_v11.tex}{\input{../shared_v11/numbers_v11}}{}
 \input{../shared_v14/numbers_v14}
+\input{../shared_v14/numbers_v14_cellyear}
 \newcommand{\figdirv}{../../../outputs/figures/paper/v14/}
 % \paperfig{file stem}{width (fraction of \textwidth)}{caption}{label}
 \newcommand{\paperfig}[4]{\begin{figure}[!htbp]\centering\IfFileExists{\figdirv#1.pdf}{\includegraphics[width=#2\textwidth]{\figdirv#1.pdf}}{\fbox{\parbox[c][45mm][c]{0.9\textwidth}{\centering \detokenize{#1} in preparation}}}\caption{#3}\label{#4}\end{figure}}

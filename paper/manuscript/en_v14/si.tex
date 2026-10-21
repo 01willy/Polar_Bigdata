@@ -4,7 +4,7 @@
 \ifXeTeX\usepackage{xeCJK}\setCJKmainfont{Noto Serif CJK KR}\xeCJKsetup{CJKspace=true}\fi
 \raggedbottom\unnumbered
 \setcitestyle{super,open={},close={}}
-\input{../shared_v10/numbers_v6}\input{../shared_v10/numbers_v9}\input{../shared_v10/numbers_v10}\IfFileExists{../shared_v11/numbers_v11.tex}{\input{../shared_v11/numbers_v11}}{}\input{../shared_v14/numbers_v14}
+\input{../shared_v10/numbers_v6}\input{../shared_v10/numbers_v9}\input{../shared_v10/numbers_v10}\IfFileExists{../shared_v11/numbers_v11.tex}{\input{../shared_v11/numbers_v11}}{}\input{../shared_v14/numbers_v14}\input{../shared_v14/numbers_v14_cellyear}
 \renewcommand{\figurename}{Supplementary Figure}\renewcommand{\tablename}{Supplementary Table}
 \renewcommand{\thefigure}{S\arabic{figure}}\renewcommand{\thetable}{S\arabic{table}}
 \newcommand{\sifig}[3]{\begin{figure}[p]\centering\IfFileExists{../../../outputs/figures/paper/v14_si/#1.pdf}{\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{../../../outputs/figures/paper/v14_si/#1.pdf}}{\fbox{\parbox[c][50mm][c]{0.9\textwidth}{\centering \detokenize{#1} in preparation}}}\caption{#2}\label{#3}\end{figure}\clearpage}
@@ -12,7 +12,7 @@
 \title{Supplementary Information for: Active-layer thickness prediction and regional differences across permafrost regions using a physics-residual machine-learning workflow}
 \author[1]{\fnm{Seungwon} \sur{Baek}}
 \affil[1]{\orgname{Seoul National University}, \orgaddress{\city{Seoul}, \country{Republic of Korea}}}
-\abstract{This file contains Supplementary Methods S1--S5, Supplementary Tables S1--S6 and Supplementary Figures S1--S10. Every number is generated from the stored result tables; the years used in each analysis are listed in Supplementary Table S2.}
+\abstract{This file contains Supplementary Methods S1--S5, Supplementary Tables S1--S7 and Supplementary Figures S1--S10. Every number is generated from the stored result tables; the years used in each analysis are listed in Supplementary Table S2.}
 \maketitle
 
 \section{Supplementary Methods}
@@ -73,7 +73,7 @@ Transfer (Fig.~4b) & source regions 2010--2024; target $n$ from 2010--2024 & as 
 External regions (Fig.~4d,e, Supplementary Fig.~S5) & CALM \nyrsext{} & as above & rows with Wei, Liu and CCI v5 values (2010--2020) \\
 Common-cell comparison (Fig.~5a) & \nyrscc{} (Alaska \nyrsccAk, Lena Delta \nyrsccLe, Canada \nyrsccCa) & as above & Wei, Liu, CCI v4 of the same year \\
 Year-wise comparison (Fig.~5d) & years with $\geq$30 site-years: Alaska \nyrsywAk; Lena Delta \nyrsywLe; Canada \nyrsywCa & as above & Wei to 2024, Liu to 2020 \\
-Product maps (Fig.~6) & 2013 in all three regions & TDD to 1 September & Wei, Liu of 2013 \\
+Product maps (Fig.~6) & Alaska and Canada 2013, Lena Delta 2016 (year with the most observed cells per region) & TDD to 1 September & Wei, Liu of the same year \\
 Yearly maps (Fig.~7) & training 2010--2024 & TDD to 1 September of each year 2011--2024 & -- \\
 Product-anchored test (Supplementary Fig.~S7) & 2010--2024 rows with product values & as above & Wei \nyrsprodWei, Liu \nyrsprodLiu \\
 \bottomrule
@@ -116,6 +116,16 @@ dfuMW & 96-core CPU & external regions with few labels \\
 
 \input{../shared_v11/si_tables_en}
 
+
+
+\begin{table}[p]
+\caption{Scores on 1 km cell-years. (a) RMSE (cm) on site-years / cell-years under three validation designs; a cell-year is the mean of the observations and of the out-of-fold predictions over the label sites of one 1 km cell in one year ($n$ = site-years / cell-years; in the region hold-out the recalibrated Stefan model equals the source-coefficient model). (b) Paired differences with 95\% block-bootstrap intervals ($B = 2000$) on both units. The pooled within-cell-year standard deviation of the observations is \ncyWithinSdAk{} cm in Alaska, \ncyWithinSdLe{} cm in the Lena Delta and \ncyWithinSdCa{} cm in Canada (NW), a spread below the resolution of a 1 km map.}\label{tab:s7}
+\scriptsize
+\noindent(a)\par\vspace{2pt}\noindent
+\input{../shared_v14/table_s7a_cellyear_en}\par\vspace{6pt}
+\noindent(b)\par\vspace{2pt}\noindent
+\input{../shared_v14/table_s7b_cellyear_en}
+\end{table}
 
 \clearpage
 

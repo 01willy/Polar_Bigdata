@@ -4,7 +4,7 @@
 \ifXeTeX\usepackage{xeCJK}\setCJKmainfont{Noto Serif CJK KR}[BoldFont={Noto Serif CJK KR Bold}]\xeCJKsetup{CJKspace=true}\fi
 \raggedbottom\unnumbered
 \setcitestyle{super,open={},close={}}
-\input{../shared_v10/numbers_v6}\input{../shared_v10/numbers_v9}\input{../shared_v10/numbers_v10}\IfFileExists{../shared_v11/numbers_v11.tex}{\input{../shared_v11/numbers_v11}}{}\input{../shared_v14/numbers_v14}
+\input{../shared_v10/numbers_v6}\input{../shared_v10/numbers_v9}\input{../shared_v10/numbers_v10}\IfFileExists{../shared_v11/numbers_v11.tex}{\input{../shared_v11/numbers_v11}}{}\input{../shared_v14/numbers_v14}\input{../shared_v14/numbers_v14_cellyear}
 \renewcommand{\figurename}{보충 그림}\renewcommand{\tablename}{보충 표}\renewcommand{\refname}{참고문헌}\renewcommand{\abstractname}{개요}
 \renewcommand{\thefigure}{S\arabic{figure}}\renewcommand{\thetable}{S\arabic{table}}
 \newcommand{\sifig}[3]{\begin{figure}[p]\centering\IfFileExists{../../../outputs/figures/paper/v14_si/#1.pdf}{\includegraphics[width=\textwidth,height=0.72\textheight,keepaspectratio]{../../../outputs/figures/paper/v14_si/#1.pdf}}{\fbox{\parbox[c][50mm][c]{0.9\textwidth}{\centering \detokenize{#1} 준비 중}}}\caption{#2}\label{#3}\end{figure}\clearpage}
@@ -13,7 +13,7 @@
 \title{보충 자료: 물리 잔차 기반 기계학습 워크플로를 활용한 영구동토 활동층 두께 예측과 지역별 편차 분석}
 \author[1]{\fnm{백승원}}
 \affil[1]{\orgname{서울대학교}, \orgaddress{\city{서울}, \country{대한민국}}}
-\abstract{이 파일은 보충 방법 S1--S5, 보충 표 S1--S6, 보충 그림 S1--S10을 담는다. 모든 수치는 저장된 결과 표에서 생성하였고, 분석별 사용 연도는 보충 표 S2에 정리하였다.}
+\abstract{이 파일은 보충 방법 S1--S5, 보충 표 S1--S7, 보충 그림 S1--S10을 담는다. 모든 수치는 저장된 결과 표에서 생성하였고, 분석별 사용 연도는 보충 표 S2에 정리하였다.}
 \maketitle
 
 \section{보충 방법}
@@ -74,7 +74,7 @@ Yi와 Kimball\cite{YiKimball2019} & ORNL DAAC 1760 & NASA EOSDIS 공개 & Earthd
 외부 지역(그림~4d,e, 보충 그림 S5) & CALM \nyrsext{}년 & 위와 같음 & Wei · Liu · CCI v5 값이 있는 행(2010--2020년) \\
 공통 셀 비교(그림~5a) & \nyrscc{}년(알래스카 \nyrsccAk, 레나 델타 \nyrsccLe, 캐나다 \nyrsccCa) & 위와 같음 & 같은 해의 Wei, Liu, CCI v4 \\
 연도별 비교(그림~5d) & 지점-연도 30개 이상인 해: 알래스카 \nyrsywAkko; 레나 델타 \nyrsywLeko; 캐나다 \nyrsywCako & 위와 같음 & Wei 2024년까지, Liu 2020년까지 \\
-제품 지도(그림~6) & 세 지역 모두 2013년 & 9월 1일까지의 TDD & 2013년의 Wei, Liu \\
+제품 지도(그림~6) & 알래스카 · 캐나다 2013년, 레나 델타 2016년(지역별 관측 셀이 가장 많은 해) & 9월 1일까지의 TDD & 같은 해의 Wei, Liu \\
 연도별 지도(그림~7) & 학습 2010--2024년 & 2011--2024년 각 해의 9월 1일까지의 TDD & -- \\
 제품 기준 시험(보충 그림 S7) & 제품 값이 있는 2010--2024년 행 & 위와 같음 & Wei \nyrsprodWei, Liu \nyrsprodLiu \\
 \bottomrule
@@ -117,6 +117,16 @@ dfuMW & 96코어 CPU & 적은 라벨의 외부 지역 시험 \\
 
 \input{../shared_v11/si_tables_ko}
 
+
+
+\begin{table}[p]
+\caption{1 km 셀-연도 단위의 점수. (a) 세 검증 설계에서 지점-연도 / 셀-연도 단위의 RMSE(cm). 셀-연도는 한 1 km 셀의 라벨 지점들에 대한 관측과 겹 밖 예측의 한 해 평균이다($n$ = 지점-연도 / 셀-연도; 지역 홀드아웃에서 재보정 Stefan 모델은 원천 계수 모델과 같다). (b) 두 단위의 쌍 차이와 95\% 블록 부트스트랩 구간($B = 2000$). 관측의 셀-연도 안 합동 표준편차는 알래스카 \ncyWithinSdAk{} cm, 레나 델타 \ncyWithinSdLe{} cm, 캐나다(북서부) \ncyWithinSdCa{} cm 로, 1 km 지도의 해상도 아래의 산포이다.}\label{tab:s7}
+\scriptsize
+\noindent(a)\par\vspace{2pt}\noindent
+\input{../shared_v14/table_s7a_cellyear_ko}\par\vspace{6pt}
+\noindent(b)\par\vspace{2pt}\noindent
+\input{../shared_v14/table_s7b_cellyear_ko}
+\end{table}
 
 \clearpage
 
