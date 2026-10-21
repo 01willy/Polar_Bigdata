@@ -1,0 +1,93 @@
+{
+ "design": "observed vs predicted on all site-years under spatial-block CV; hexbin log density (n >= 2000) or points",
+ "source": "core_v6/preds/<Region>__block__year_obs__F8TS__*.csv.gz (seed mean) + labels",
+ "values": {
+  "Alaska_P1": {
+   "n": 15540,
+   "rmse": 18.58,
+   "r": 0.595,
+   "axis_top": 120.0
+  },
+  "Alaska_R1": {
+   "n": 15540,
+   "rmse": 18.42,
+   "r": 0.587,
+   "axis_top": 120.0
+  },
+  "Alaska_D0": {
+   "n": 15540,
+   "rmse": 17.29,
+   "r": 0.562,
+   "axis_top": 120.0
+  },
+  "Lena_P1": {
+   "n": 2436,
+   "rmse": 21.04,
+   "r": 0.33,
+   "axis_top": 120.0
+  },
+  "Lena_R1": {
+   "n": 2436,
+   "rmse": 17.44,
+   "r": 0.667,
+   "axis_top": 120.0
+  },
+  "Lena_D0": {
+   "n": 2436,
+   "rmse": 15.88,
+   "r": 0.697,
+   "axis_top": 120.0
+  },
+  "Canada_P1": {
+   "n": 1196,
+   "rmse": 30.63,
+   "r": 0.144,
+   "axis_top": 160.0
+  },
+  "Canada_R1": {
+   "n": 1196,
+   "rmse": 26.89,
+   "r": 0.55,
+   "axis_top": 160.0
+  },
+  "Canada_D0": {
+   "n": 1196,
+   "rmse": 26.06,
+   "r": 0.585,
+   "axis_top": 160.0
+  }
+ },
+ "outputs": {
+  "P3_E_obs_pred_density.pdf": {
+   "path": "outputs/figures/paper/v14_proposals/P3_E_obs_pred_density.pdf",
+   "bytes": 63488
+  },
+  "P3_E_obs_pred_density.svg": {
+   "path": "outputs/figures/paper/v14_proposals/P3_E_obs_pred_density.svg",
+   "bytes": 915168
+  },
+  "P3_E_obs_pred_density.png": {
+   "path": "outputs/figures/paper/v14_proposals/P3_E_obs_pred_density.png",
+   "bytes": 1272956
+  }
+ },
+ "qa": {
+  "n_texts": 135,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ }
+}

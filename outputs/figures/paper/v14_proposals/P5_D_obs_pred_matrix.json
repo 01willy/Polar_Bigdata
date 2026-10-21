@@ -1,0 +1,93 @@
+{
+ "design": "observed vs predicted on the common site-years (Wei, Liu, CCI v4 and our block-CV prediction all present): regions x (ours, Wei, Liu)",
+ "source": "labels + products_cell_year_v5.csv + core_v6 block OOF (R1)",
+ "values": {
+  "Alaska_R1": {
+   "n": 14326,
+   "rmse": 17.08,
+   "bias": -2.93,
+   "r": 0.603
+  },
+  "Alaska_wei": {
+   "n": 14326,
+   "rmse": 17.89,
+   "bias": 3.95,
+   "r": 0.528
+  },
+  "Alaska_liu": {
+   "n": 14326,
+   "rmse": 18.78,
+   "bias": 5.71,
+   "r": 0.409
+  },
+  "Lena_R1": {
+   "n": 461,
+   "rmse": 21.15,
+   "bias": 2.78,
+   "r": 0.727
+  },
+  "Lena_wei": {
+   "n": 461,
+   "rmse": 34.55,
+   "bias": 21.88,
+   "r": 0.048
+  },
+  "Lena_liu": {
+   "n": 461,
+   "rmse": 32.98,
+   "bias": 19.76,
+   "r": 0.067
+  },
+  "Canada_R1": {
+   "n": 532,
+   "rmse": 25.84,
+   "bias": 3.37,
+   "r": 0.343
+  },
+  "Canada_wei": {
+   "n": 532,
+   "rmse": 27.0,
+   "bias": 10.59,
+   "r": 0.441
+  },
+  "Canada_liu": {
+   "n": 532,
+   "rmse": 27.92,
+   "bias": 16.28,
+   "r": 0.57
+  }
+ },
+ "outputs": {
+  "P5_D_obs_pred_matrix.pdf": {
+   "path": "outputs/figures/paper/v14_proposals/P5_D_obs_pred_matrix.pdf",
+   "bytes": 50286
+  },
+  "P5_D_obs_pred_matrix.svg": {
+   "path": "outputs/figures/paper/v14_proposals/P5_D_obs_pred_matrix.svg",
+   "bytes": 747413
+  },
+  "P5_D_obs_pred_matrix.png": {
+   "path": "outputs/figures/paper/v14_proposals/P5_D_obs_pred_matrix.png",
+   "bytes": 1160117
+  }
+ },
+ "qa": {
+  "n_texts": 129,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ }
+}

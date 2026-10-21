@@ -1,0 +1,226 @@
+{
+ "design": "error distributions (predicted − observed) of our three methods and three products on the common site-years",
+ "source": "as P5_D",
+ "values": {
+  "Alaska_P1": {
+   "n": 14326,
+   "median": -2.4,
+   "q1": -12.83,
+   "q3": 9.39,
+   "share_beyond_80cm": 0.0024
+  },
+  "Alaska_R1": {
+   "n": 14326,
+   "median": -2.79,
+   "q1": -12.83,
+   "q3": 8.47,
+   "share_beyond_80cm": 0.0029
+  },
+  "Alaska_D0": {
+   "n": 14326,
+   "median": 2.91,
+   "q1": -5.72,
+   "q3": 10.45,
+   "share_beyond_80cm": 0.0034
+  },
+  "Alaska_wei": {
+   "n": 14326,
+   "median": 4.67,
+   "q1": -5.11,
+   "q3": 14.57,
+   "share_beyond_80cm": 0.0034
+  },
+  "Alaska_liu": {
+   "n": 14326,
+   "median": 5.98,
+   "q1": -3.39,
+   "q3": 16.84,
+   "share_beyond_80cm": 0.0027
+  },
+  "Alaska_cci4y": {
+   "n": 14326,
+   "median": -6.56,
+   "q1": -20.01,
+   "q3": 9.17,
+   "share_beyond_80cm": 0.0233
+  },
+  "Lena_P1": {
+   "n": 461,
+   "median": 9.53,
+   "q1": 3.54,
+   "q3": 15.69,
+   "share_beyond_80cm": 0.0152
+  },
+  "Lena_R1": {
+   "n": 461,
+   "median": 5.23,
+   "q1": -0.11,
+   "q3": 10.74,
+   "share_beyond_80cm": 0.013
+  },
+  "Lena_D0": {
+   "n": 461,
+   "median": 1.06,
+   "q1": -4.43,
+   "q3": 7.08,
+   "share_beyond_80cm": 0.013
+  },
+  "Lena_wei": {
+   "n": 461,
+   "median": 24.41,
+   "q1": 16.78,
+   "q3": 31.98,
+   "share_beyond_80cm": 0.013
+  },
+  "Lena_liu": {
+   "n": 461,
+   "median": 22.06,
+   "q1": 15.25,
+   "q3": 29.08,
+   "share_beyond_80cm": 0.013
+  },
+  "Lena_cci4y": {
+   "n": 461,
+   "median": -2.0,
+   "q1": -18.7,
+   "q3": 15.9,
+   "share_beyond_80cm": 0.0195
+  },
+  "Canada_P1": {
+   "n": 532,
+   "median": 11.93,
+   "q1": -9.35,
+   "q3": 26.67,
+   "share_beyond_80cm": 0.0244
+  },
+  "Canada_R1": {
+   "n": 532,
+   "median": 8.56,
+   "q1": -10.0,
+   "q3": 21.25,
+   "share_beyond_80cm": 0.0188
+  },
+  "Canada_D0": {
+   "n": 532,
+   "median": 6.43,
+   "q1": -9.75,
+   "q3": 19.43,
+   "share_beyond_80cm": 0.0094
+  },
+  "Canada_wei": {
+   "n": 532,
+   "median": 11.7,
+   "q1": -1.05,
+   "q3": 25.71,
+   "share_beyond_80cm": 0.0132
+  },
+  "Canada_liu": {
+   "n": 532,
+   "median": 18.73,
+   "q1": 2.49,
+   "q3": 33.15,
+   "share_beyond_80cm": 0.0038
+  },
+  "Canada_cci4y": {
+   "n": 532,
+   "median": -9.0,
+   "q1": -23.0,
+   "q3": 5.54,
+   "share_beyond_80cm": 0.047
+  }
+ },
+ "outputs": {
+  "P5_F_error_distributions.pdf": {
+   "path": "outputs/figures/paper/v14_proposals/P5_F_error_distributions.pdf",
+   "bytes": 82572
+  },
+  "P5_F_error_distributions.svg": {
+   "path": "outputs/figures/paper/v14_proposals/P5_F_error_distributions.svg",
+   "bytes": 224750
+  },
+  "P5_F_error_distributions.png": {
+   "path": "outputs/figures/paper/v14_proposals/P5_F_error_distributions.png",
+   "bytes": 555589
+  }
+ },
+ "qa": {
+  "n_texts": 53,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [
+   [
+    "Stefan (recal.)",
+    "Physics + res. ML"
+   ],
+   [
+    "Physics + res. ML",
+    "Direct ML"
+   ],
+   [
+    "Direct ML",
+    "Wei 2026"
+   ],
+   [
+    "Wei 2026",
+    "Liu 2024"
+   ],
+   [
+    "Liu 2024",
+    "ESA CCI v4"
+   ],
+   [
+    "Stefan (recal.)",
+    "Physics + res. ML"
+   ],
+   [
+    "Physics + res. ML",
+    "Direct ML"
+   ],
+   [
+    "Direct ML",
+    "Wei 2026"
+   ],
+   [
+    "Wei 2026",
+    "Liu 2024"
+   ],
+   [
+    "Liu 2024",
+    "ESA CCI v4"
+   ],
+   [
+    "Stefan (recal.)",
+    "Physics + res. ML"
+   ],
+   [
+    "Physics + res. ML",
+    "Direct ML"
+   ],
+   [
+    "Direct ML",
+    "Wei 2026"
+   ],
+   [
+    "Wei 2026",
+    "Liu 2024"
+   ],
+   [
+    "Liu 2024",
+    "ESA CCI v4"
+   ]
+  ],
+  "text_ink": [],
+  "ok": false
+ }
+}

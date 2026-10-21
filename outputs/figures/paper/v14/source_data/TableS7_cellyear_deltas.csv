@@ -1,0 +1,16 @@
+region,design,pair,n_site_years,n_cell_years,delta_site_year_cm,ci_site_lo,ci_site_hi,delta_cell_year_cm,ci_cell_lo,ci_cell_hi,resolved_site,resolved_cell,B
+Alaska,block,R1-P1,15540,910,-0.155,-0.549,0.121,-0.002,-1.838,1.217,False,False,2000
+Alaska,block,D0-P0,15540,910,-2.08,-5.528,1.395,0.365,-2.132,1.585,False,False,2000
+Alaska,region,R1-P0,15540,910,-1.811,-4.943,0.924,-0.911,-2.316,0.858,False,False,2000
+Alaska,region,D0-P0,15540,910,1.202,-0.925,2.349,-0.47,-3.144,2.899,False,False,2000
+Alaska,random,D0-P0,15540,910,-7.527,-9.709,-5.087,-13.122,-21.587,-4.697,True,True,2000
+Lena,block,R1-P1,2436,244,-3.593,-7.732,-0.776,-3.555,-7.345,-0.762,True,True,2000
+Lena,block,D0-P0,2436,244,-5.586,-10.301,-1.535,-5.067,-9.511,-0.538,True,True,2000
+Lena,region,R1-P0,2436,244,1.993,-0.766,3.345,2.525,0.378,4.19,False,True,2000
+Lena,region,D0-P0,2436,244,17.803,6.987,23.646,17.662,12.405,24.827,True,True,2000
+Lena,random,D0-P0,2436,244,-9.168,-16.045,-3.821,-9.691,-15.923,-3.705,True,True,2000
+Canada,block,R1-P1,1196,144,-3.737,-4.818,-0.768,-2.521,-3.879,-1.419,True,True,2000
+Canada,block,D0-P0,1196,144,-1.691,-5.039,2.514,-2.375,-4.844,-0.305,False,True,2000
+Canada,region,R1-P0,1196,144,-3.502,-5.174,-0.201,-0.232,-2.278,1.809,True,False,2000
+Canada,region,D0-P0,1196,144,-3.847,-7.047,1.251,1.242,-2.238,4.32,False,False,2000
+Canada,random,D0-P0,1196,144,-11.554,-15.343,-7.188,-18.892,-33.286,-6.73,True,True,2000

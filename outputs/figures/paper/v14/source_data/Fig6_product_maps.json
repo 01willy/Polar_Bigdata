@@ -1,27 +1,31 @@
 {
  "figure": "Fig. 6",
  "script": "scripts/4_visualization/paper_v14/fig6_product_maps.py",
- "version": "v14 (2026-10-20)",
+ "version": "v14.1 (2026-10-21): per-region year, training-site distance split",
  "inputs": {
-  "our_map": "data/processed/v5/maps/<Region>/pred_2013.csv.gz (column r1; model fitted to all labels, TDD to 1 September); mean_2011_2024.csv.gz (aoa_in)",
-  "products": "data/raw/wei2026_alt_v2/extracted/ALT_2013.tif, data/raw/liu2024_alt/ALT_2013.tif",
+  "our_map": "data/processed/v5/maps/<Region>/pred_<year>.csv.gz (column r1; model fitted to all labels, TDD to 1 September); mean_2011_2024.csv.gz (aoa_in)",
+  "products": "data/raw/wei2026_alt_v2/extracted/ALT_<year>.tif, data/raw/liu2024_alt/ALT_<year>.tif",
   "labels": "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1)",
   "product_values_at_labels": "data/processed/v5/products_cell_year_v5.csv (product wei / liu, year of the figure)",
   "our_errors": "data/processed/v5/runs/core_v6/preds/<Region>__block__year_obs__F8TS__R1__catboost__lam0.5.csv.gz (spatial-block CV, 3 seeds averaged)",
   "elevation": "data/processed/map_<region>/<region>_grid_x25_v1.csv.gz (dem_elev) for the band differences"
  },
- "year_used": 2013,
+ "year_used": {
+  "Alaska": 2013,
+  "Lena Delta": 2016,
+  "Canada (NW)": 2013
+ },
  "rows": [
   "Alaska",
   "Lena Delta",
   "Canada (NW)"
  ],
- "why_this_year": "the year with the most observed cells in Alaska and Canada among the years observed in all three regions (1 km cells with Wei 2026 and Liu 2024 values: see n_common_cells)",
+ "why_this_year": "per region, the year with the most observed 1 km cells with a value in our map, Wei 2026 and Liu 2024 (Liu 2024 ends in 2020); Alaska 2013 (126 common cells; next 2018 and 2014), Lena Delta 2016 (14; next 2014), Canada 2013 (33; other years at most 12)",
  "definition": {
   "colour_range": "per region: 5th-95th percentile of the pooled display pixels of our map, Wei 2026 and Liu 2024 inside our area of applicability, rounded outwards to 5 cm; values beyond are drawn at the end colours",
   "product_mask": "product pixels are drawn only where our map has a value (same area in the three maps)",
   "observed_cells": "common cells (our map, Wei 2026 and Liu 2024 all have a value) drawn as filled circles coloured by the observed ALT on the same scale",
-  "scatter": "observed cell mean against the prediction of each series at the common cells; our series = block-CV out-of-fold predictions (seeds averaged per label, then cell mean), not the in-sample map; r = Pearson correlation; RMSE over the common cells"
+  "scatter": "observed cell mean against the prediction of each series at the common cells; our series = block-CV out-of-fold predictions (seeds averaged per label, then cell mean), not the in-sample map; r = Pearson correlation; RMSE over the common cells; markers filled = cell within 25 km of a Wei 2026 training site, open = beyond; the panel prints the RMSE for all cells and for the open cells"
  },
  "values": {
   "Alaska": {
@@ -95,6 +99,8 @@
     3
    ],
    "scatter_axis_top_cm": 140.0,
+   "stats_text_corner": "tl",
+   "stats_text_marker_hits": 1,
    "rmse_common_cm": {
     "physics_residual_ml_block_cv": 14.91,
     "wei_2026": 13.42,
@@ -108,19 +114,34 @@
     "our_map_in_sample_not_shown": 0.473
    },
    "bias_common_cm": {
-    "physics_residual_ml_block_cv": 2.17,
-    "wei_2026": 2.44,
-    "liu_2024": 1.94
+    "physics_residual_ml_block_cv": 2.171,
+    "wei_2026": 2.436,
+    "liu_2024": 1.939
    },
    "product_training_sites": {
-    "note": "no distance mask in this figure; distances are to Wei 2026 training sites (the 25 km mask of Fig. 5)",
+    "note": "distances are to the nearest Wei 2026 training site (the 25 km mask of Fig. 5a); scatter markers: filled = within, open = beyond",
     "distance_source": "data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv (product == 'wei', nearest Wei 2026 training site per label; cell value = minimum over its labels)",
     "n_common_within_25km": 59,
     "n_common_gt25km": 67,
-    "rmse_common_gt25km_cm_not_shown": {
+    "rmse_common_gt25km_cm": {
      "oof": 9.13,
      "wei": 10.91,
      "liu": 8.5
+    },
+    "r_common_gt25km": {
+     "oof": 0.305,
+     "wei": 0.271,
+     "liu": 0.442
+    },
+    "rmse_common_within25km_cm": {
+     "oof": 19.5,
+     "wei": 15.8,
+     "liu": 16.59
+    },
+    "r_common_within25km": {
+     "oof": 0.395,
+     "wei": 0.629,
+     "liu": 0.607
     }
    },
    "band_differences": {
@@ -1744,55 +1765,56 @@
    ]
   },
   "Lena": {
-   "year": 2013,
+   "year": 2016,
    "letters": "efgh",
    "colour_range_cm": [
-    35.0,
+    30.0,
     70.0
    ],
    "extend": "both",
    "ticks_cm": [
+    30.0,
     40.0,
     50.0,
     60.0,
     70.0
    ],
    "pooled_percentiles_inside_aoa_cm": {
-    "p2": 36.1,
-    "p5": 37.9,
-    "p50": 47.9,
-    "p95": 68.1,
-    "p98": 71.9
+    "p2": 33.4,
+    "p5": 34.8,
+    "p50": 47.0,
+    "p95": 67.7,
+    "p98": 71.3
    },
    "series_p5_p50_p95_inside_aoa_cm": {
     "ours_in_aoa": [
-     36.8,
-     41.9,
-     47.9
+     33.2,
+     37.7,
+     42.7
     ],
     "wei_in_aoa": [
-     45.1,
-     55.9,
-     64.6
+     45.3,
+     56.2,
+     65.0
     ],
     "liu_in_aoa": [
-     38.1,
-     52.6,
-     72.5
+     37.9,
+     52.3,
+     71.7
     ]
    },
    "share_of_drawn_pixels_beyond_range": {
     "ours": [
-     0.0143,
+     0.0015,
      0.0
     ],
     "wei": [
-     0.0001,
-     0.0262
+     0.0,
+     0.0257
     ],
     "liu": [
-     0.0067,
-     0.1089
+     0.0,
+     0.0973
     ]
    },
    "n_map_cells_drawn": 38086,
@@ -1801,46 +1823,55 @@
     "liu": 35554
    },
    "display_pixel_m": 250,
-   "n_labels": 241,
-   "n_observed_cells": 19,
+   "n_labels": 681,
+   "n_observed_cells": 35,
    "n_cells_with_value": {
-    "oof": 19,
-    "wei": 8,
-    "liu": 7,
-    "mapv": 19
+    "oof": 35,
+    "wei": 17,
+    "liu": 20,
+    "mapv": 29
    },
-   "n_common_cells": 6,
+   "n_common_cells": 14,
    "oof_seeds_per_label": [
     3
    ],
    "scatter_axis_top_cm": 80.0,
+   "stats_text_corner": "br",
+   "stats_text_marker_hits": 0,
    "rmse_common_cm": {
-    "physics_residual_ml_block_cv": 16.57,
-    "wei_2026": 32.27,
-    "liu_2024": 29.64,
-    "our_map_in_sample_not_shown": 11.58
+    "physics_residual_ml_block_cv": 12.66,
+    "wei_2026": 26.18,
+    "liu_2024": 30.43,
+    "our_map_in_sample_not_shown": 15.13
    },
    "r_common": {
-    "physics_residual_ml_block_cv": 0.861,
-    "wei_2026": -0.803,
-    "liu_2024": -0.772,
-    "our_map_in_sample_not_shown": 0.924
+    "physics_residual_ml_block_cv": 0.473,
+    "wei_2026": 0.287,
+    "liu_2024": -0.212,
+    "our_map_in_sample_not_shown": 0.693
    },
    "bias_common_cm": {
-    "physics_residual_ml_block_cv": 0.24,
-    "wei_2026": 19.79,
-    "liu_2024": 20.72
+    "physics_residual_ml_block_cv": 7.878,
+    "wei_2026": 23.593,
+    "liu_2024": 27.341
    },
    "product_training_sites": {
-    "note": "no distance mask in this figure; distances are to Wei 2026 training sites (the 25 km mask of Fig. 5)",
+    "note": "distances are to the nearest Wei 2026 training site (the 25 km mask of Fig. 5a); scatter markers: filled = within, open = beyond",
     "distance_source": "data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv (product == 'wei', nearest Wei 2026 training site per label; cell value = minimum over its labels)",
-    "n_common_within_25km": 2,
-    "n_common_gt25km": 4,
-    "rmse_common_gt25km_cm_not_shown": {
-     "oof": 19.68,
-     "wei": 39.16,
-     "liu": 35.0
-    }
+    "n_common_within_25km": 0,
+    "n_common_gt25km": 14,
+    "rmse_common_gt25km_cm": {
+     "oof": 12.66,
+     "wei": 26.18,
+     "liu": 30.43
+    },
+    "r_common_gt25km": {
+     "oof": 0.473,
+     "wei": 0.287,
+     "liu": -0.212
+    },
+    "rmse_common_within25km_cm": null,
+    "r_common_within25km": null
    },
    "band_differences": {
     "definition": "mean (product − our map) over the 1 km map cells of the latitude band with a value in both, split at 600 m elevation (grid dem_elev); product cell value = mean of its display pixels",
@@ -1849,10 +1880,10 @@
       "band": "(71, 72]",
       "mtn": "elev<=600m",
       "n_cells": 10786,
-      "ours_mean_cm": 40.66,
-      "wei_minus_ours_cm": 14.56,
+      "ours_mean_cm": 38.06,
+      "wei_minus_ours_cm": 17.44,
       "n_cells_wei": 10515,
-      "liu_minus_ours_cm": 20.03,
+      "liu_minus_ours_cm": 22.57,
       "n_cells_liu": 10481
      },
      {
@@ -1869,10 +1900,10 @@
       "band": "(72, 73]",
       "mtn": "elev<=600m",
       "n_cells": 18626,
-      "ours_mean_cm": 41.98,
-      "wei_minus_ours_cm": 12.67,
+      "ours_mean_cm": 38.21,
+      "wei_minus_ours_cm": 16.35,
       "n_cells_wei": 17342,
-      "liu_minus_ours_cm": 17.5,
+      "liu_minus_ours_cm": 21.0,
       "n_cells_liu": 16999
      },
      {
@@ -1889,10 +1920,10 @@
       "band": "(73, 74]",
       "mtn": "elev<=600m",
       "n_cells": 8674,
-      "ours_mean_cm": 40.95,
-      "wei_minus_ours_cm": 16.57,
+      "ours_mean_cm": 36.19,
+      "wei_minus_ours_cm": 21.63,
       "n_cells_wei": 8250,
-      "liu_minus_ours_cm": 6.32,
+      "liu_minus_ours_cm": 10.78,
       "n_cells_liu": 8074
      },
      {
@@ -1909,76 +1940,172 @@
    },
    "cells": [
     {
-     "cell_id": "7954_4522",
-     "lat": 71.5905,
-     "lon": 128.8844,
-     "n_labels": 8,
-     "observed_cm": 43.5,
-     "physics_residual_ml_block_cv_cm": 40.95,
-     "wei_2026_cm": 47.94,
-     "liu_2024_cm": 59.24,
-     "our_map_cm": 38.43,
-     "dist_wei_training_site_km": 3.79
+     "cell_id": "7996_4371",
+     "lat": 71.9685,
+     "lon": 127.1032,
+     "n_labels": 1,
+     "observed_cm": 30.0,
+     "physics_residual_ml_block_cv_cm": 36.35,
+     "wei_2026_cm": 45.99,
+     "liu_2024_cm": 61.53,
+     "our_map_cm": 40.63,
+     "dist_wei_training_site_km": 72.82
     },
     {
-     "cell_id": "7955_4520",
-     "lat": 71.5995,
-     "lon": 128.8882,
-     "n_labels": 4,
-     "observed_cm": 48.12,
-     "physics_residual_ml_block_cv_cm": 38.59,
-     "wei_2026_cm": 57.97,
-     "liu_2024_cm": 59.24,
-     "our_map_cm": 41.69,
-     "dist_wei_training_site_km": 3.86
-    },
-    {
-     "cell_id": "8038_4251",
+     "cell_id": "8038_4243",
      "lat": 72.3465,
-     "lon": 126.174,
-     "n_labels": 14,
-     "observed_cm": 17.18,
-     "physics_residual_ml_block_cv_cm": 37.25,
-     "wei_2026_cm": 69.32,
-     "liu_2024_cm": 61.36,
-     "our_map_cm": 35.16,
-     "dist_wei_training_site_km": 123.46
-    },
-    {
-     "cell_id": "8039_4248",
-     "lat": 72.3555,
-     "lon": 126.1472,
+     "lon": 125.9366,
      "n_labels": 2,
-     "observed_cm": 37.1,
-     "physics_residual_ml_block_cv_cm": 40.55,
-     "wei_2026_cm": 61.92,
-     "liu_2024_cm": 65.33,
-     "our_map_cm": 37.5,
-     "dist_wei_training_site_km": 124.93
+     "observed_cm": 44.5,
+     "physics_residual_ml_block_cv_cm": 36.82,
+     "wei_2026_cm": 64.48,
+     "liu_2024_cm": 61.96,
+     "our_map_cm": 42.39,
+     "dist_wei_training_site_km": 129.53
     },
     {
-     "cell_id": "8039_4249",
+     "cell_id": "8039_4250",
      "lat": 72.3555,
-     "lon": 126.1769,
-     "n_labels": 48,
-     "observed_cm": 20.73,
-     "physics_residual_ml_block_cv_cm": 39.03,
-     "wei_2026_cm": 69.26,
-     "liu_2024_cm": 63.55,
-     "our_map_cm": 34.7,
-     "dist_wei_training_site_km": 123.72
+     "lon": 126.2066,
+     "n_labels": 3,
+     "observed_cm": 31.67,
+     "physics_residual_ml_block_cv_cm": 39.36,
+     "wei_2026_cm": 69.44,
+     "liu_2024_cm": 59.79,
+     "our_map_cm": 37.84,
+     "dist_wei_training_site_km": 123.14
     },
     {
-     "cell_id": "8047_4242",
-     "lat": 72.4275,
-     "lon": 126.4688,
+     "cell_id": "8041_4247",
+     "lat": 72.3735,
+     "lon": 126.2422,
+     "n_labels": 1,
+     "observed_cm": 14.0,
+     "physics_residual_ml_block_cv_cm": 33.42,
+     "wei_2026_cm": 51.31,
+     "liu_2024_cm": 54.49,
+     "our_map_cm": 39.88,
+     "dist_wei_training_site_km": 123.91
+    },
+    {
+     "cell_id": "8041_4248",
+     "lat": 72.3735,
+     "lon": 126.2719,
+     "n_labels": 2,
+     "observed_cm": 27.0,
+     "physics_residual_ml_block_cv_cm": 36.83,
+     "wei_2026_cm": 49.94,
+     "liu_2024_cm": 53.12,
+     "our_map_cm": 38.84,
+     "dist_wei_training_site_km": 123.56
+    },
+    {
+     "cell_id": "8052_4224",
+     "lat": 72.4725,
+     "lon": 126.2454,
+     "n_labels": 2,
+     "observed_cm": 16.5,
+     "physics_residual_ml_block_cv_cm": 33.11,
+     "wei_2026_cm": 45.66,
+     "liu_2024_cm": 58.76,
+     "our_map_cm": 35.05,
+     "dist_wei_training_site_km": 131.64
+    },
+    {
+     "cell_id": "8052_4225",
+     "lat": 72.4725,
+     "lon": 126.2753,
      "n_labels": 6,
-     "observed_cm": 73.0,
-     "physics_residual_ml_block_cv_cm": 44.73,
-     "wei_2026_cm": 51.95,
-     "liu_2024_cm": 55.2,
-     "our_map_cm": 58.2,
-     "dist_wei_training_site_km": 122.79
+     "observed_cm": 17.33,
+     "physics_residual_ml_block_cv_cm": 35.37,
+     "wei_2026_cm": 41.93,
+     "liu_2024_cm": 56.61,
+     "our_map_cm": 35.85,
+     "dist_wei_training_site_km": 130.64
+    },
+    {
+     "cell_id": "8055_4278",
+     "lat": 72.4995,
+     "lon": 128.0502,
+     "n_labels": 91,
+     "observed_cm": 26.39,
+     "physics_residual_ml_block_cv_cm": 32.01,
+     "wei_2026_cm": 50.8,
+     "liu_2024_cm": 49.24,
+     "our_map_cm": 39.01,
+     "dist_wei_training_site_km": 105.15
+    },
+    {
+     "cell_id": "8056_4271",
+     "lat": 72.5085,
+     "lon": 127.9044,
+     "n_labels": 2,
+     "observed_cm": 7.5,
+     "physics_residual_ml_block_cv_cm": 33.4,
+     "wei_2026_cm": 54.88,
+     "liu_2024_cm": 54.69,
+     "our_map_cm": 36.61,
+     "dist_wei_training_site_km": 107.32
+    },
+    {
+     "cell_id": "8056_4275",
+     "lat": 72.5085,
+     "lon": 128.0242,
+     "n_labels": 24,
+     "observed_cm": 24.45,
+     "physics_residual_ml_block_cv_cm": 31.45,
+     "wei_2026_cm": 47.48,
+     "liu_2024_cm": 48.96,
+     "our_map_cm": 40.64,
+     "dist_wei_training_site_km": 105.52
+    },
+    {
+     "cell_id": "8056_4276",
+     "lat": 72.5085,
+     "lon": 128.0541,
+     "n_labels": 17,
+     "observed_cm": 24.92,
+     "physics_residual_ml_block_cv_cm": 30.79,
+     "wei_2026_cm": 47.48,
+     "liu_2024_cm": 48.98,
+     "our_map_cm": 39.07,
+     "dist_wei_training_site_km": 105.48
+    },
+    {
+     "cell_id": "8057_4268",
+     "lat": 72.5175,
+     "lon": 127.8783,
+     "n_labels": 3,
+     "observed_cm": 33.67,
+     "physics_residual_ml_block_cv_cm": 36.54,
+     "wei_2026_cm": 43.88,
+     "liu_2024_cm": 55.25,
+     "our_map_cm": 36.66,
+     "dist_wei_training_site_km": 108.41
+    },
+    {
+     "cell_id": "8057_4269",
+     "lat": 72.5175,
+     "lon": 127.9083,
+     "n_labels": 5,
+     "observed_cm": 29.6,
+     "physics_residual_ml_block_cv_cm": 35.76,
+     "wei_2026_cm": 41.64,
+     "liu_2024_cm": 56.68,
+     "our_map_cm": 37.28,
+     "dist_wei_training_site_km": 107.81
+    },
+    {
+     "cell_id": "8058_4272",
+     "lat": 72.5265,
+     "lon": 128.062,
+     "n_labels": 1,
+     "observed_cm": 49.0,
+     "physics_residual_ml_block_cv_cm": 35.61,
+     "wei_2026_cm": 51.93,
+     "liu_2024_cm": 39.25,
+     "our_map_cm": 44.84,
+     "dist_wei_training_site_km": 107.67
     }
    ]
   },
@@ -2055,6 +2182,8 @@
     3
    ],
    "scatter_axis_top_cm": 160.0,
+   "stats_text_corner": "tl",
+   "stats_text_marker_hits": 3,
    "rmse_common_cm": {
     "physics_residual_ml_block_cv": 23.74,
     "wei_2026": 29.86,
@@ -2068,19 +2197,34 @@
     "our_map_in_sample_not_shown": 0.676
    },
    "bias_common_cm": {
-    "physics_residual_ml_block_cv": -4.01,
-    "wei_2026": 20.45,
-    "liu_2024": 7.79
+    "physics_residual_ml_block_cv": -4.012,
+    "wei_2026": 20.451,
+    "liu_2024": 7.786
    },
    "product_training_sites": {
-    "note": "no distance mask in this figure; distances are to Wei 2026 training sites (the 25 km mask of Fig. 5)",
+    "note": "distances are to the nearest Wei 2026 training site (the 25 km mask of Fig. 5a); scatter markers: filled = within, open = beyond",
     "distance_source": "data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv (product == 'wei', nearest Wei 2026 training site per label; cell value = minimum over its labels)",
     "n_common_within_25km": 6,
     "n_common_gt25km": 27,
-    "rmse_common_gt25km_cm_not_shown": {
+    "rmse_common_gt25km_cm": {
      "oof": 17.52,
      "wei": 31.4,
      "liu": 20.98
+    },
+    "r_common_gt25km": {
+     "oof": 0.154,
+     "wei": 0.202,
+     "liu": 0.253
+    },
+    "rmse_common_within25km_cm": {
+     "oof": 41.46,
+     "wei": 21.61,
+     "liu": 16.17
+    },
+    "r_common_within25km": {
+     "oof": -0.019,
+     "wei": 0.807,
+     "liu": 0.908
     }
    },
    "band_differences": {
@@ -2604,16 +2748,16 @@
   },
   "Lena": {
    "r": [
-    "0.86",
-    "-0.80",
-    "-0.77"
+    "0.47",
+    "0.29",
+    "-0.21"
    ],
    "RMSE (cm)": [
-    "16.6",
-    "32.3",
-    "29.6"
+    "12.7",
+    "26.2",
+    "30.4"
    ],
-   "n": 6
+   "n": 14
   },
   "Canada": {
    "r": [
@@ -2632,31 +2776,31 @@
  "outputs": {
   "Fig6_product_maps.pdf": {
    "path": "outputs/figures/paper/v14/Fig6_product_maps.pdf",
-   "bytes": 7851959
+   "bytes": 7779201
   },
   "Fig6_product_maps.svg": {
    "path": "outputs/figures/paper/v14/Fig6_product_maps.svg",
-   "bytes": 12747664
+   "bytes": 12644278
   },
   "Fig6_product_maps.png": {
    "path": "outputs/figures/paper/v14/Fig6_product_maps.png",
-   "bytes": 8403540
+   "bytes": 8395082
   }
  },
  "canvas_mm": [
   180.0,
-  164.9
+  168.5
  ],
  "pdf_page_mm": [
   180.0,
-  164.9
+  168.5
  ],
  "pdf_fonts": [
   "BICWAS+FreeSans",
   "FITYBK+FreeSansBold"
  ],
  "qa": {
-  "n_texts": 98,
+  "n_texts": 104,
   "min_font_pt": 6.5,
   "font_sizes_pt": [
    6.5,

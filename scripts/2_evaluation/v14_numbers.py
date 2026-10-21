@@ -77,14 +77,22 @@ if f6p.exists():
     def setm(k, v):
         out.append(r"\providecommand{\n%s}{}\renewcommand{\n%s}{%s}" % (k, k, v))
 
-    setm("feYear", str(f6["year_used"]))
+    if not isinstance(f6["year_used"], dict):
+        setm("feYear", str(f6["year_used"]))
     if "colour_range" in f6:                                   # v13 (one range for all maps)
         cr = f6["colour_range"]; setm("feLo", f"{cr['lo_cm']:.0f}"); setm("feHi", f"{cr['hi_cm']:.0f}")
     for reg, v in f6["values"].items():
         r = RK6[reg]; ts = v["product_training_sites"]
         setm(f"fe{r}N", str(v["n_common_cells"])); setm(f"fe{r}Year", str(v["year"]))
         setm(f"fe{r}Nobs", str(v["n_observed_cells"])); setm(f"fe{r}Nlab", f"{v['n_labels']:,}")
-        setm(f"fe{r}NearWei", str(ts["n_common_within_25km"])); setm(f"fe{r}FarWei", str(ts["n_common_gt25km"]))
+        setm(f"fe{r}NNear", str(ts["n_common_within_25km"])); setm(f"fe{r}NFar", str(ts["n_common_gt25km"]))   # counts (v14.1: names distinct from the RMSE macros fe{r}Far{Wei,...})
+        for k, name in (("Oof", "oof"), ("Wei", "wei"), ("Liu", "liu")):                 # v14.1: statistics at the cells beyond 25 km from a Wei 2026 training site
+            if ts.get("rmse_common_gt25km_cm"):
+                setm(f"fe{r}Far{k}", f"{ts['rmse_common_gt25km_cm'][name]:.1f}")
+            if ts.get("r_common_gt25km"):
+                setm(f"fe{r}FarR{k}", f"{ts['r_common_gt25km'][name]:.2f}")
+            if ts.get("rmse_common_within25km_cm"):
+                setm(f"fe{r}Near{k}", f"{ts['rmse_common_within25km_cm'][name]:.1f}")
         for k, name in (("Oof", "physics_residual_ml_block_cv"), ("Wei", "wei_2026"), ("Liu", "liu_2024")):
             setm(f"fe{r}{k}", f"{v['rmse_common_cm'][name]:.1f}")
             cells_key = {"physics_residual_ml_block_cv": "physics_residual_ml_block_cv_cm", "wei_2026": "wei_2026_cm", "liu_2024": "liu_2024_cm"}[name]

@@ -1,0 +1,134 @@
+{
+ "design": "label budget summary: within-region ladder (a) and transfer ladder (b)",
+ "source": "ladder_v6/ladder_metrics.csv",
+ "values": {
+  "LL": {
+   "Alaska_P1": {
+    "n_within_2cm": "25",
+    "n_within_1cm": "25",
+    "full_rmse": 18.58
+   },
+   "Alaska_R1": {
+    "n_within_2cm": "25",
+    "n_within_1cm": "25",
+    "full_rmse": 18.42
+   },
+   "Alaska_D0": {
+    "n_within_2cm": "500",
+    "n_within_1cm": "500",
+    "full_rmse": 17.29
+   },
+   "Lena_P1": {
+    "n_within_2cm": "25",
+    "n_within_1cm": "25",
+    "full_rmse": 21.04
+   },
+   "Lena_R1": {
+    "n_within_2cm": "100",
+    "n_within_1cm": "500",
+    "full_rmse": 17.44
+   },
+   "Lena_D0": {
+    "n_within_2cm": "100",
+    "n_within_1cm": "500",
+    "full_rmse": 15.88
+   },
+   "Canada_P1": {
+    "n_within_2cm": "25",
+    "n_within_1cm": "25",
+    "full_rmse": 30.63
+   },
+   "Canada_R1": {
+    "n_within_2cm": "100",
+    "n_within_1cm": "500",
+    "full_rmse": 26.89
+   },
+   "Canada_D0": {
+    "n_within_2cm": "250",
+    "n_within_1cm": "500",
+    "full_rmse": 26.06
+   }
+  },
+  "TL": {
+   "Alaska_P1": {
+    "n_beats_source_stefan_by_0_5cm": "25",
+    "source_stefan_rmse": 19.37
+   },
+   "Alaska_R1": {
+    "n_beats_source_stefan_by_0_5cm": "0",
+    "source_stefan_rmse": 19.37
+   },
+   "Alaska_D0": {
+    "n_beats_source_stefan_by_0_5cm": "500",
+    "source_stefan_rmse": 19.37
+   },
+   "Lena_P1": {
+    "n_beats_source_stefan_by_0_5cm": "25",
+    "source_stefan_rmse": 21.46
+   },
+   "Lena_R1": {
+    "n_beats_source_stefan_by_0_5cm": "25",
+    "source_stefan_rmse": 21.46
+   },
+   "Lena_D0": {
+    "n_beats_source_stefan_by_0_5cm": "50",
+    "source_stefan_rmse": 21.46
+   },
+   "Canada_P1": {
+    "n_beats_source_stefan_by_0_5cm": null,
+    "source_stefan_rmse": 27.75
+   },
+   "Canada_R1": {
+    "n_beats_source_stefan_by_0_5cm": "0",
+    "source_stefan_rmse": 27.75
+   },
+   "Canada_D0": {
+    "n_beats_source_stefan_by_0_5cm": "0",
+    "source_stefan_rmse": 27.75
+   }
+  }
+ },
+ "outputs": {
+  "P4_E_label_budget.pdf": {
+   "path": "outputs/figures/paper/v14_proposals/P4_E_label_budget.pdf",
+   "bytes": 19027
+  },
+  "P4_E_label_budget.svg": {
+   "path": "outputs/figures/paper/v14_proposals/P4_E_label_budget.svg",
+   "bytes": 31059
+  },
+  "P4_E_label_budget.png": {
+   "path": "outputs/figures/paper/v14_proposals/P4_E_label_budget.png",
+   "bytes": 318219
+  }
+ },
+ "qa": {
+  "n_texts": 44,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [
+   [
+    "none ≤ 500",
+    "#1a7ab3"
+   ]
+  ],
+  "font": [],
+  "outside": [],
+  "overlaps": [
+   [
+    "250",
+    "500"
+   ]
+  ],
+  "text_ink": [],
+  "ok": false
+ }
+}

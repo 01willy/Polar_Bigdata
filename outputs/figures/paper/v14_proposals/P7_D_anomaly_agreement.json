@@ -1,0 +1,124 @@
+{
+ "design": "observed vs mapped regional ALT anomaly per year (alternative to Fig. 7d time series)",
+ "source": "v14/source_data/Fig7_maps.json (d)",
+ "values": {
+  "Alaska": {
+   "years": [
+    "2011",
+    "2012",
+    "2013",
+    "2014",
+    "2015",
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022"
+   ],
+   "r": 0.129
+  },
+  "Lena": {
+   "years": [
+    "2012",
+    "2013",
+    "2014",
+    "2015",
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021"
+   ],
+   "r": 0.725
+  },
+  "Canada": {
+   "years": [
+    "2013",
+    "2017",
+    "2018",
+    "2019",
+    "2022",
+    "2023",
+    "2024"
+   ],
+   "r": 0.637
+  }
+ },
+ "outputs": {
+  "P7_D_anomaly_agreement.pdf": {
+   "path": "outputs/figures/paper/v14_proposals/P7_D_anomaly_agreement.pdf",
+   "bytes": 17270
+  },
+  "P7_D_anomaly_agreement.svg": {
+   "path": "outputs/figures/paper/v14_proposals/P7_D_anomaly_agreement.svg",
+   "bytes": 35486
+  },
+  "P7_D_anomaly_agreement.png": {
+   "path": "outputs/figures/paper/v14_proposals/P7_D_anomaly_agreement.png",
+   "bytes": 257838
+  }
+ },
+ "qa": {
+  "n_texts": 81,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [
+   [
+    "13",
+    "12"
+   ],
+   [
+    "13",
+    "14"
+   ],
+   [
+    "18",
+    "22"
+   ],
+   [
+    "13",
+    "14"
+   ],
+   [
+    "13",
+    "18"
+   ],
+   [
+    "15",
+    "14"
+   ],
+   [
+    "19",
+    "18"
+   ],
+   [
+    "18",
+    "22"
+   ],
+   [
+    "18",
+    "13"
+   ],
+   [
+    "22",
+    "13"
+   ]
+  ],
+  "text_ink": [],
+  "ok": false
+ }
+}

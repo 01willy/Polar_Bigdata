@@ -46,13 +46,18 @@ STEM = "Fig6_product_maps"
 PROC = C.ROOT / "data" / "processed"; MAPS = PROC / "v5" / "maps"
 CELL = F6.CELL
 W_SHADE = 0.30
-YEAR = 2013                                     # the year with the most observed cells in Alaska and Canada among the years observed in all three regions
+YEARS = {"alaska": 2013, "lena": 2016, "canada": 2013}   # v14.1: per region, the year with the most observed 1 km cells that have a value in our map and in both products
+WHY_YEAR = ("per region, the year with the most observed 1 km cells with a value in our map, Wei 2026 and Liu 2024 (Liu 2024 ends in 2020); "
+            "Alaska 2013 (126 common cells; next 2018 and 2014), Lena Delta 2016 (14; next 2014), Canada 2013 (33; other years at most 12)")
+FAR_KM = 25.0                                   # scatter: cells farther than this from the nearest Wei 2026 training site are drawn open (as Fig. 5a)
 ROWS = [dict(key="alaska", region="Alaska", lon_lab=(-160, -150), lat_lab=(60, 65, 70), scale_km=200, letters="abcd", step=2,
              lat_edges=(59, 64, 66, 68, 70, 72)),
         dict(key="lena", region="Lena", lon_lab=(124, 128), lat_lab=(72, 73), scale_km=50, letters="efgh", step=1,
              lat_edges=(71, 72, 73, 74)),
         dict(key="canada", region="Canada", lon_lab=(-135, -125, -115), lat_lab=(60, 65), scale_km=200, letters="ijkl", step=2,
              lat_edges=(59, 64, 66, 68, 70, 72))]
+for _r in ROWS:
+    _r["year"] = YEARS[_r["key"]]
 _sel = os.environ.get("FIG6_ROWS")
 if _sel:
     ROWS = [r for r in ROWS if r["key"] in _sel.split(",")]
@@ -86,7 +91,7 @@ def render_px(base, vpx, cmap, norm, drawn, aoa=None, w_shade=W_SHADE):
 
 def error_table(row, map_r1, tf):
     """Observed cells of the year: label rows -> 1 km cells (cell means). Columns obs, oof (block CV, seeds averaged), wei, liu, mapv (r1 map value, in-sample)."""
-    region, yr = row["region"], YEAR
+    region, yr = row["region"], row["year"]
     lab = pd.read_csv(PROC / "v5" / "labels_cell_year_v5.csv"); lab = lab[lab.in_forcing == 1]
     pr = pd.read_csv(PROC / "v5" / "products_cell_year_v5.csv")
     l = lab[(lab.region == region) & (lab.year == yr)].copy()
@@ -110,16 +115,20 @@ def error_table(row, map_r1, tf):
     common = c[c[["mapv", "wei", "liu"]].notna().all(axis=1)].copy()
     rmse = lambda q, m: float(np.sqrt(np.mean(q[f"e_{m}"] ** 2))) if len(q) else float("nan")
     corr = lambda q, m: (float(np.corrcoef(q.obs.values, q[m].values)[0, 1]) if len(q) >= 3 else float("nan"))
-    far = common[common.dist_wei_km > 25.0]
+    far = common[common.dist_wei_km > FAR_KM]; near = common[common.dist_wei_km <= FAR_KM]
     out = dict(cells=c, common=common, n_labels=int(len(l)), n_cells=int(len(c)), n_common=int(len(common)),
                n_seeds=sorted(int(v) for v in n_seed.unique()),
                rmse={m: rmse(common, m) for m in ("oof", "wei", "liu", "mapv")}, r={m: corr(common, m) for m in ("oof", "wei", "liu", "mapv")},
                bias={m: float(common[f"e_{m}"].mean()) for m in ("oof", "wei", "liu", "mapv")},
                n_with_value={m: int(c[m].notna().sum()) for m in ("oof", "wei", "liu", "mapv")},
-               training_sites=dict(note="no distance mask in this figure; distances are to Wei 2026 training sites (the 25 km mask of Fig. 5)",
+               training_sites=dict(note=f"distances are to the nearest Wei 2026 training site (the {FAR_KM:.0f} km mask of Fig. 5a); scatter markers: filled = within, open = beyond",
                                    distance_source=str(LEAK.relative_to(C.ROOT)) + " (product == 'wei', nearest Wei 2026 training site per label; cell value = minimum over its labels)",
-                                   n_common_within_25km=int((common.dist_wei_km <= 25.0).sum()), n_common_gt25km=int(len(far)),
-                                   rmse_common_gt25km_cm_not_shown=({m: round(rmse(far, m), 2) for m in ("oof", "wei", "liu")} if len(far) else None)))
+                                   n_common_within_25km=int(len(near)), n_common_gt25km=int(len(far)),
+                                   rmse_common_gt25km_cm=({m: round(rmse(far, m), 2) for m in ("oof", "wei", "liu")} if len(far) else None),
+                                   r_common_gt25km=({m: round(corr(far, m), 3) for m in ("oof", "wei", "liu")} if len(far) >= 3 else None),
+                                   rmse_common_within25km_cm=({m: round(rmse(near, m), 2) for m in ("oof", "wei", "liu")} if len(near) else None),
+                                   r_common_within25km=({m: round(corr(near, m), 3) for m in ("oof", "wei", "liu")} if len(near) >= 3 else None)),
+               far=far, near=near)
     return out
 
 
@@ -149,7 +158,7 @@ def band_stats(row, cells, r1, prod_cell, elev):
 
 
 def load_row(row):
-    t0 = time.time(); key, region, yr = row["key"], row["region"], YEAR
+    t0 = time.time(); key, region, yr = row["key"], row["region"], row["year"]
     cells, lut, ky0, kx0 = F6.cell_table(key)
     pred = pd.read_csv(MAPS / region / f"pred_{yr}.csv.gz", dtype={"cell_id": str}, usecols=["cell_id", "r1"]).set_index("cell_id")
     mean = pd.read_csv(MAPS / region / "mean_2011_2024.csv.gz", dtype={"cell_id": str}, usecols=["cell_id", "aoa_in"]).set_index("cell_id")
@@ -212,15 +221,40 @@ def draw_scatter(fig, ax, Dk, bottom):
     cm = Dk["err"]["common"]; e = Dk["err"]
     top = 20.0 * np.ceil((max(float(cm.obs.max()), float(cm[["oof", "wei", "liu"]].max().max())) * 1.04) / 20.0)
     ax.plot([0, top], [0, top], color=C.ZERO, lw=C.LW_REF, zorder=1)
+    near = cm.dist_wei_km <= FAR_KM; far = ~near
     for j, (m, name, col) in enumerate(SERIES):
-        ax.scatter(cm.obs.values, cm[m].values, s=SC_PT ** 2, facecolor=col, edgecolor="white", lw=0.25, alpha=0.9, zorder=3 + j)
+        if near.any():
+            ax.scatter(cm.obs.values[near], cm[m].values[near], s=SC_PT ** 2, facecolor=col, edgecolor="white", lw=0.25, alpha=0.9, zorder=3 + j)
+        if far.any():
+            ax.scatter(cm.obs.values[far], cm[m].values[far], s=SC_PT ** 2, facecolor="white", edgecolor=col, lw=0.5, alpha=0.95, zorder=3 + j)
     ax.set_xlim(0, top); ax.set_ylim(0, top); ax.set_aspect("equal")
     loc = mticker.MultipleLocator(40.0 if top > 100 else 20.0); ax.xaxis.set_major_locator(loc); ax.yaxis.set_major_locator(mticker.MultipleLocator(40.0 if top > 100 else 20.0))
     ax.set_ylabel("Predicted ALT (cm)")
     ax.set_xlabel(f"Observed ALT (cm), n = {e['n_common']}", labelpad=1.5)
-    for j, (m, name, col) in enumerate(SERIES):                               # statistics in the series colour, bottom right (below the 1:1 line)
-        ax.text(0.97, 0.04 + (len(SERIES) - 1 - j) * 0.085, f"r {e['r'][m]:.2f}, RMSE {e['rmse'][m]:.1f}", transform=ax.transAxes, ha="right", va="bottom",
-                fontsize=C.FS_SMALL, color=col)
+    ts = e["training_sites"]; two = ts["rmse_common_gt25km_cm"] is not None and ts["n_common_gt25km"] >= 3 and ts["n_common_within_25km"] >= 3
+    head = f"RMSE (cm): all | >{FAR_KM:.0f} km" if two else "RMSE (cm)"                 # mini-table in the series colours
+    vals = [(f"{e['rmse'][m]:.1f} | {ts['rmse_common_gt25km_cm'][m]:.1f}" if two else f"{e['rmse'][m]:.1f}", col) for m, name, col in SERIES]
+    pts = ax.transData.transform(np.column_stack([np.repeat(cm.obs.values, len(SERIES)), cm[[m for m, _, _ in SERIES]].values.ravel()]))
+    best = None
+    for corner in ("tl", "br"):                                               # corner with the fewest markers under the text block (top left first)
+        if corner == "tl":
+            x, ha, ys, va = 0.04, "left", [0.97 - i * 0.085 for i in range(len(vals) + 1)], "top"
+        else:
+            x, ha, ys, va = 0.97, "right", [0.04 + (len(vals) - i) * 0.085 for i in range(len(vals) + 1)], "bottom"
+        arts = [ax.text(x, ys[0], head, transform=ax.transAxes, ha=ha, va=va, fontsize=C.FS_SMALL, color=C.TEXT)]
+        arts += [ax.text(x, ys[i + 1], v, transform=ax.transAxes, ha=ha, va=va, fontsize=C.FS_SMALL, color=c_) for i, (v, c_) in enumerate(vals)]
+        fig.canvas.draw()
+        pad = 2.0; hits = 0
+        for t in arts:
+            bb = t.get_window_extent(fig.canvas.get_renderer()).expanded(1.0, 1.0)
+            hits += int(((pts[:, 0] >= bb.x0 - pad) & (pts[:, 0] <= bb.x1 + pad) & (pts[:, 1] >= bb.y0 - pad) & (pts[:, 1] <= bb.y1 + pad)).sum())
+        if best is None or hits < best[0]:
+            if best is not None:
+                for t in best[1]: t.remove()
+            best = (hits, arts, corner)
+        else:
+            for t in arts: t.remove()
+    Dk["stats_corner"] = best[2]; Dk["stats_marker_hits"] = best[0]
     return top
 
 
@@ -243,7 +277,7 @@ def main():
     for k in keys:
         h = wm * D[k]["asp"]; ys.append(y); hs.append(h); y += h + band + gap_row
     y_key = y - gap_row + 1.0
-    H = y_key + 4.6
+    H = y_key + 8.2                            # two legend rows
     fig = C.figure(W, H)
     out = {}
     for i, k in enumerate(keys):
@@ -260,7 +294,7 @@ def main():
         # colour bar of the row under the Wei and Liu maps
         xc0 = xm0 + wm + gm; wcb = 2 * wm + gm
         cax = C.ax_mm(fig, xc0 + 0.18 * wcb, y0 + hrow + 2.6, 0.64 * wcb, 1.7)
-        MP.colorbar(fig, cax, MP.CM_ALT, Dk["norm"], f"ALT {YEAR} (cm)", Dk["ticks"], extend=Dk["ext"])
+        MP.colorbar(fig, cax, MP.CM_ALT, Dk["norm"], f"ALT {Dk['year']} (cm)", Dk["ticks"], extend=Dk["ext"])
         # observed versus predicted
         axs = C.ax_mm(fig, xs, y0, ws, hrow)
         top = draw_scatter(fig, axs, Dk, bottom=(i == len(keys) - 1))
@@ -268,12 +302,12 @@ def main():
         if i == 0:
             C.text_mm(fig, xs - ml_s + 3.5, y0 - 6.75, "Observed vs predicted", fontsize=C.FS, ha="left", va="top")
         e = Dk["err"]
-        out[Dk["region"]] = dict(year=YEAR, letters=lt, colour_range_cm=[Dk["lo"], Dk["hi"]], extend=Dk["ext"], ticks_cm=[float(t) for t in Dk["ticks"]],
+        out[Dk["region"]] = dict(year=Dk["year"], letters=lt, colour_range_cm=[Dk["lo"], Dk["hi"]], extend=Dk["ext"], ticks_cm=[float(t) for t in Dk["ticks"]],
                                  pooled_percentiles_inside_aoa_cm=Dk["pooled_pct"], series_p5_p50_p95_inside_aoa_cm=Dk["series_pct"],
                                  share_of_drawn_pixels_beyond_range=Dk["frac_beyond"], n_map_cells_drawn=Dk["n_cells_drawn"],
                                  n_map_cells_with_product_value=Dk["prod_cells_with_value"], display_pixel_m=250 * Dk["step"],
                                  n_labels=e["n_labels"], n_observed_cells=e["n_cells"], n_cells_with_value=e["n_with_value"], n_common_cells=e["n_common"],
-                                 oof_seeds_per_label=e["n_seeds"], scatter_axis_top_cm=top,
+                                 oof_seeds_per_label=e["n_seeds"], scatter_axis_top_cm=top, stats_text_corner=Dk.get("stats_corner"), stats_text_marker_hits=Dk.get("stats_marker_hits"),
                                  rmse_common_cm=dict(physics_residual_ml_block_cv=round(e["rmse"]["oof"], 2), wei_2026=round(e["rmse"]["wei"], 2),
                                                      liu_2024=round(e["rmse"]["liu"], 2), our_map_in_sample_not_shown=round(e["rmse"]["mapv"], 2)),
                                  r_common=dict(physics_residual_ml_block_cv=round(e["r"]["oof"], 3), wei_2026=round(e["r"]["wei"], 3), liu_2024=round(e["r"]["liu"], 3),
@@ -291,29 +325,33 @@ def main():
                                         for ci, r in e["common"].iterrows()])
     # ---------------- key (one line)
     hs_ = [Line2D([], [], ls="none", marker="o", ms=OBS_PT + 0.3, mfc=MP.CM_ALT(0.55), mec=C.TEXT, mew=0.4), MP.FadedRamp(MP.CM_ALT),
-           Patch(facecolor=MP.LAND_HEX, edgecolor="#B5B5B5", lw=0.3), Patch(facecolor=MP.WATER_HEX, edgecolor="#B5B5B5", lw=0.3)]
-    labs = ["Observed cell, filled with the observed ALT", "Outside area of applicability (lighter)", "Not mapped (products masked to our cells)", "Water"]
-    fig.legend(hs_, labs, loc="upper left", bbox_to_anchor=(xm0 / W, 1 - y_key / H), ncol=4, fontsize=C.FS_SMALL, handlelength=2.2, handleheight=0.9,
+           Patch(facecolor=MP.LAND_HEX, edgecolor="#B5B5B5", lw=0.3), Patch(facecolor=MP.WATER_HEX, edgecolor="#B5B5B5", lw=0.3),
+           Line2D([], [], ls="none", marker="o", ms=SC_PT + 0.3, mfc=C.AXIS, mec="white", mew=0.3),
+           Line2D([], [], ls="none", marker="o", ms=SC_PT + 0.3, mfc="white", mec=C.AXIS, mew=0.6)]
+    labs = ["Observed cell, filled with the observed ALT", "Outside area of applicability (lighter)", "Not mapped (products masked to our cells)", "Water",
+            f"Cell within {FAR_KM:.0f} km of a Wei 2026 training site", f"Cell beyond {FAR_KM:.0f} km (d, h, l; statistics for both)"]
+    fig.legend(hs_, labs, loc="upper left", bbox_to_anchor=(xm0 / W, 1 - y_key / H), ncol=3, fontsize=C.FS_SMALL, handlelength=2.2, handleheight=0.9,
                handletextpad=0.5, columnspacing=1.5, borderaxespad=0.0, handler_map={MP.FadedRamp: MP.RampHandler()})
     rep = C.qa_figure(fig, text_ink=False, allow_colors=tuple(c for _, _, c in SERIES))
     C.print_qa(STEM, rep)
     paths = C.export(fig, STEM, C.OUT_MAIN)
     plt.close(fig)
-    src = dict(figure="Fig. 6", script="scripts/4_visualization/paper_v14/fig6_product_maps.py", version="v14 (2026-10-20)",
-               inputs=dict(our_map=f"data/processed/v5/maps/<Region>/pred_{YEAR}.csv.gz (column r1; model fitted to all labels, TDD to 1 September); mean_2011_2024.csv.gz (aoa_in)",
-                           products=f"data/raw/wei2026_alt_v2/extracted/ALT_{YEAR}.tif, data/raw/liu2024_alt/ALT_{YEAR}.tif",
+    src = dict(figure="Fig. 6", script="scripts/4_visualization/paper_v14/fig6_product_maps.py", version="v14.1 (2026-10-21): per-region year, training-site distance split",
+               inputs=dict(our_map="data/processed/v5/maps/<Region>/pred_<year>.csv.gz (column r1; model fitted to all labels, TDD to 1 September); mean_2011_2024.csv.gz (aoa_in)",
+                           products="data/raw/wei2026_alt_v2/extracted/ALT_<year>.tif, data/raw/liu2024_alt/ALT_<year>.tif",
                            labels="data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1)",
                            product_values_at_labels="data/processed/v5/products_cell_year_v5.csv (product wei / liu, year of the figure)",
                            our_errors="data/processed/v5/runs/core_v6/preds/" + OOF.format(region="<Region>") + " (spatial-block CV, 3 seeds averaged)",
                            elevation="data/processed/map_<region>/<region>_grid_x25_v1.csv.gz (dem_elev) for the band differences"),
-               year_used=YEAR, rows=[C.REGION[D[k]["region"]][0] for k in keys],
-               why_this_year="the year with the most observed cells in Alaska and Canada among the years observed in all three regions (1 km cells with Wei 2026 and Liu 2024 values: see n_common_cells)",
+               year_used={C.REGION[D[k]["region"]][0]: D[k]["year"] for k in keys}, rows=[C.REGION[D[k]["region"]][0] for k in keys],
+               why_this_year=WHY_YEAR,
                definition=dict(colour_range=f"per region: {RANGE_PCT[0]:.0f}th-{RANGE_PCT[1]:.0f}th percentile of the pooled display pixels of our map, Wei 2026 and Liu 2024 "
                                             f"inside our area of applicability, rounded outwards to {RANGE_STEP:.0f} cm; values beyond are drawn at the end colours",
                                product_mask="product pixels are drawn only where our map has a value (same area in the three maps)",
                                observed_cells="common cells (our map, Wei 2026 and Liu 2024 all have a value) drawn as filled circles coloured by the observed ALT on the same scale",
                                scatter="observed cell mean against the prediction of each series at the common cells; our series = block-CV out-of-fold predictions "
-                                       "(seeds averaged per label, then cell mean), not the in-sample map; r = Pearson correlation; RMSE over the common cells"),
+                                       "(seeds averaged per label, then cell mean), not the in-sample map; r = Pearson correlation; RMSE over the common cells; "
+                                       f"markers filled = cell within {FAR_KM:.0f} km of a Wei 2026 training site, open = beyond; the panel prints the RMSE for all cells and for the open cells"),
                values=out, numbers_printed={r: {"r": [f"{v['r_common']['physics_residual_ml_block_cv']:.2f}", f"{v['r_common']['wei_2026']:.2f}", f"{v['r_common']['liu_2024']:.2f}"],
                                                 "RMSE (cm)": [f"{v['rmse_common_cm']['physics_residual_ml_block_cv']:.1f}", f"{v['rmse_common_cm']['wei_2026']:.1f}",
                                                               f"{v['rmse_common_cm']['liu_2024']:.1f}"], "n": v["n_common_cells"]} for r, v in out.items()},

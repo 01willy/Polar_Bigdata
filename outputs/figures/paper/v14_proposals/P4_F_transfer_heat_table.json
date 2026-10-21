@@ -1,0 +1,384 @@
+{
+ "design": "heat table of RMSE by number of target-region labels for the physics-residual and direct models; colour = change from the no-label Stefan model",
+ "source": "ladder_v6/ladder_metrics.csv (TL), v7/source_data/F10_extft.csv",
+ "values": {
+  "0_Alaska": {
+   "baseline": 19.37,
+   "rmse": {
+    "0": 17.76,
+    "25": 17.33,
+    "50": 17.19,
+    "100": 17.1,
+    "250": 16.99,
+    "500": 17.51
+   }
+  },
+  "0_Lena Delta": {
+   "baseline": 21.46,
+   "rmse": {
+    "0": 23.8,
+    "25": 19.9,
+    "50": 19.93,
+    "100": 19.33,
+    "250": 19.09,
+    "500": 18.5
+   }
+  },
+  "0_Canada (NW)": {
+   "baseline": 27.75,
+   "rmse": {
+    "0": 24.28,
+    "25": 26.34,
+    "50": 25.72,
+    "100": 25.44,
+    "250": 25.86,
+    "500": 26.07
+   }
+  },
+  "1_Alaska": {
+   "baseline": 19.37,
+   "rmse": {
+    "0": 21.47,
+    "25": 19.5,
+    "50": 19.91,
+    "100": 20.3,
+    "250": 21.26,
+    "500": 18.5
+   }
+  },
+  "1_Lena Delta": {
+   "baseline": 21.46,
+   "rmse": {
+    "0": 39.48,
+    "25": 21.31,
+    "50": 20.41,
+    "100": 18.97,
+    "250": 17.95,
+    "500": 17.45
+   }
+  },
+  "1_Canada (NW)": {
+   "baseline": 27.75,
+   "rmse": {
+    "0": 24.16,
+    "25": 23.77,
+    "50": 23.75,
+    "100": 23.34,
+    "250": 22.74,
+    "500": 22.78
+   }
+  },
+  "2_All external": {
+   "baseline": 55.65,
+   "rmse": {
+    "0": 56.2,
+    "5": 40.34,
+    "10": 39.33,
+    "25": 39.71,
+    "50": 40.56,
+    "all": 40.51
+   }
+  },
+  "2_W Siberia": {
+   "baseline": 47.24,
+   "rmse": {
+    "0": 47.67,
+    "5": 33.5,
+    "10": 32.91,
+    "25": 31.62,
+    "50": 32.2,
+    "all": 31.59
+   }
+  },
+  "2_C Siberia": {
+   "baseline": 61.71,
+   "rmse": {
+    "0": 62.83,
+    "5": 59.59,
+    "10": 55.75,
+    "25": 56.07,
+    "50": 56.92,
+    "all": 57.02
+   }
+  },
+  "2_European Russia": {
+   "baseline": 56.99,
+   "rmse": {
+    "0": 59.47,
+    "5": 52.21,
+    "10": 51.59,
+    "25": 53.55,
+    "50": 55.33,
+    "all": 57.12
+   }
+  },
+  "2_NE Siberia": {
+   "baseline": 32.15,
+   "rmse": {
+    "0": 32.58,
+    "5": 34.81,
+    "10": 35.39,
+    "25": 34.37,
+    "50": 33.84,
+    "all": 33.4
+   }
+  },
+  "2_Chukotka": {
+   "baseline": 7.88,
+   "rmse": {
+    "0": 8.76,
+    "5": 14.55,
+    "10": 14.71,
+    "25": 14.32,
+    "50": 13.85,
+    "all": 13.98
+   }
+  },
+  "2_Svalbard": {
+   "baseline": 144.13,
+   "rmse": {
+    "0": 144.34,
+    "5": 64.35,
+    "10": 60.89,
+    "25": 68.32,
+    "50": 73.17,
+    "all": 73.58
+   }
+  },
+  "2_Kamchatka": {
+   "baseline": 8.01,
+   "rmse": {
+    "0": 7.95,
+    "5": 11.69,
+    "10": 11.74,
+    "25": 11.75,
+    "50": 11.75,
+    "all": 11.67
+   }
+  },
+  "3_All external": {
+   "baseline": 55.65,
+   "rmse": {
+    "0": 56.59,
+    "5": 50.91,
+    "10": 49.59,
+    "25": 47.5,
+    "50": 46.62,
+    "all": 45.87
+   }
+  },
+  "3_W Siberia": {
+   "baseline": 47.24,
+   "rmse": {
+    "0": 50.33,
+    "5": 48.05,
+    "10": 46.35,
+    "25": 41.98,
+    "50": 40.03,
+    "all": 36.88
+   }
+  },
+  "3_C Siberia": {
+   "baseline": 61.71,
+   "rmse": {
+    "0": 68.18,
+    "5": 68.57,
+    "10": 64.96,
+    "25": 59.29,
+    "50": 56.59,
+    "all": 56.5
+   }
+  },
+  "3_European Russia": {
+   "baseline": 56.99,
+   "rmse": {
+    "0": 62.11,
+    "5": 62.97,
+    "10": 63.65,
+    "25": 64.81,
+    "50": 64.62,
+    "all": 66.93
+   }
+  },
+  "3_NE Siberia": {
+   "baseline": 32.15,
+   "rmse": {
+    "0": 35.24,
+    "5": 34.55,
+    "10": 34.62,
+    "25": 34.87,
+    "50": 33.51,
+    "all": 33.12
+   }
+  },
+  "3_Chukotka": {
+   "baseline": 7.88,
+   "rmse": {
+    "0": 9.46,
+    "5": 9.16,
+    "10": 9.56,
+    "25": 8.56,
+    "50": 8.81,
+    "all": 8.47
+   }
+  },
+  "3_Svalbard": {
+   "baseline": 144.13,
+   "rmse": {
+    "0": 133.75,
+    "5": 99.83,
+    "10": 97.13,
+    "25": 95.97,
+    "50": 98.68,
+    "all": 98.69
+   }
+  },
+  "3_Kamchatka": {
+   "baseline": 8.01,
+   "rmse": {
+    "0": 9.58,
+    "5": 10.03,
+    "10": 9.73,
+    "25": 10.3,
+    "50": 10.3,
+    "all": 10.33
+   }
+  }
+ },
+ "outputs": {
+  "P4_F_transfer_heat_table.pdf": {
+   "path": "outputs/figures/paper/v14_proposals/P4_F_transfer_heat_table.pdf",
+   "bytes": 23344
+  },
+  "P4_F_transfer_heat_table.svg": {
+   "path": "outputs/figures/paper/v14_proposals/P4_F_transfer_heat_table.svg",
+   "bytes": 77833
+  },
+  "P4_F_transfer_heat_table.png": {
+   "path": "outputs/figures/paper/v14_proposals/P4_F_transfer_heat_table.png",
+   "bytes": 472495
+  }
+ },
+ "qa": {
+  "n_texts": 207,
+  "min_font_pt": 5.5,
+  "font_sizes_pt": [
+   5.5,
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [
+   [
+    "Stefan | (no labels)",
+    5.5
+   ],
+   [
+    "Stefan | (no labels)",
+    5.5
+   ],
+   [
+    "Stefan | (no labels)",
+    5.5
+   ],
+   [
+    "Stefan | (no labels)",
+    5.5
+   ]
+  ],
+  "color": [
+   [
+    "39",
+    "#ffffff"
+   ],
+   [
+    "40",
+    "#ffffff"
+   ],
+   [
+    "39",
+    "#ffffff"
+   ],
+   [
+    "40",
+    "#ffffff"
+   ],
+   [
+    "41",
+    "#ffffff"
+   ],
+   [
+    "41",
+    "#ffffff"
+   ],
+   [
+    "34",
+    "#ffffff"
+   ],
+   [
+    "33",
+    "#ffffff"
+   ],
+   [
+    "32",
+    "#ffffff"
+   ],
+   [
+    "32",
+    "#ffffff"
+   ],
+   [
+    "32",
+    "#ffffff"
+   ],
+   [
+    "64",
+    "#ffffff"
+   ],
+   [
+    "61",
+    "#ffffff"
+   ],
+   [
+    "68",
+    "#ffffff"
+   ],
+   [
+    "73",
+    "#ffffff"
+   ],
+   [
+    "74",
+    "#ffffff"
+   ],
+   [
+    "100",
+    "#ffffff"
+   ],
+   [
+    "97",
+    "#ffffff"
+   ],
+   [
+    "96",
+    "#ffffff"
+   ],
+   [
+    "99",
+    "#ffffff"
+   ],
+   [
+    "99",
+    "#ffffff"
+   ]
+  ],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": false
+ }
+}
