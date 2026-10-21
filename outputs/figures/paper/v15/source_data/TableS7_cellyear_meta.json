@@ -1,0 +1,36 @@
+{
+ "script": "scripts/2_evaluation/v14_cellyear_rescore.py",
+ "cell_deg": 0.009,
+ "B": 2000,
+ "seed": 0,
+ "definition": "cell-year = mean of the observations and of the out-of-fold predictions over the label sites of one 1 km cell in one year; site-year values recomputed from the same prediction files (point estimates equal the manuscript values; intervals re-drawn)",
+ "within_cell": {
+  "Alaska": {
+   "pooled_within_cell_year_sd_cm": 12.994837656152269,
+   "within_share_of_variance": 0.3673890717043093,
+   "sites_per_cell_median": 5.0,
+   "sites_per_cell_max": 723,
+   "n_site_years": 15540,
+   "n_cells": 321,
+   "n_cell_years": 910
+  },
+  "Lena": {
+   "pooled_within_cell_year_sd_cm": 12.714988262164718,
+   "within_share_of_variance": 0.29763466837502406,
+   "sites_per_cell_median": 3.0,
+   "sites_per_cell_max": 450,
+   "n_site_years": 2436,
+   "n_cells": 143,
+   "n_cell_years": 244
+  },
+  "Canada": {
+   "pooled_within_cell_year_sd_cm": 17.536587080468713,
+   "within_share_of_variance": 0.2865755299108965,
+   "sites_per_cell_median": 5.0,
+   "sites_per_cell_max": 98,
+   "n_site_years": 1196,
+   "n_cells": 71,
+   "n_cell_years": 144
+  }
+ }
+}

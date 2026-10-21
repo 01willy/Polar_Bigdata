@@ -1,0 +1,63 @@
+{
+ "design": "four selected years (two cold, two warm) instead of 14 yearly panels; 0.1 deg box means of the 1 km anomaly",
+ "years": [
+  2012,
+  2016,
+  2019,
+  2023
+ ],
+ "values": {
+  "2012": {
+   "tdd_anom": -43.0,
+   "map_anom": -2.64,
+   "boxes": 18365
+  },
+  "2016": {
+   "tdd_anom": 92.4,
+   "map_anom": 3.45,
+   "boxes": 18365
+  },
+  "2019": {
+   "tdd_anom": 160.4,
+   "map_anom": 5.98,
+   "boxes": 18365
+  },
+  "2023": {
+   "tdd_anom": 67.0,
+   "map_anom": 2.04,
+   "boxes": 18365
+  }
+ },
+ "outputs": {
+  "P7_E_anomaly_selected_years.pdf": {
+   "path": "outputs/figures/paper/v15_proposals/P7_E_anomaly_selected_years.pdf",
+   "bytes": 2505845
+  },
+  "P7_E_anomaly_selected_years.svg": {
+   "path": "outputs/figures/paper/v15_proposals/P7_E_anomaly_selected_years.svg",
+   "bytes": 23458192
+  },
+  "P7_E_anomaly_selected_years.png": {
+   "path": "outputs/figures/paper/v15_proposals/P7_E_anomaly_selected_years.png",
+   "bytes": 331496
+  }
+ },
+ "qa": {
+  "n_texts": 13,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ }
+}

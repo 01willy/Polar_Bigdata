@@ -1,0 +1,233 @@
+{
+ "design": "spatial-block OOF RMSE by distance from each test site to the nearest training site of its fold (bins with >= 30 site-years), plus the region hold-out RMSE",
+ "values": {
+  "Alaska": {
+   "P1": {
+    "bins": [
+     "< 5",
+     "5–25",
+     "25–100",
+     "> 100"
+    ],
+    "rmse": [
+     10.07,
+     14.76,
+     21.66,
+     25.25
+    ],
+    "n": [
+     890,
+     6423,
+     8155,
+     72
+    ],
+    "region_holdout": 19.36
+   },
+   "R1": {
+    "bins": [
+     "< 5",
+     "5–25",
+     "25–100",
+     "> 100"
+    ],
+    "rmse": [
+     10.0,
+     14.5,
+     21.58,
+     22.62
+    ],
+    "n": [
+     890,
+     6423,
+     8155,
+     72
+    ],
+    "region_holdout": 17.55
+   },
+   "D0": {
+    "bins": [
+     "< 5",
+     "5–25",
+     "25–100",
+     "> 100"
+    ],
+    "rmse": [
+     10.74,
+     13.86,
+     20.04,
+     21.6
+    ],
+    "n": [
+     890,
+     6423,
+     8155,
+     72
+    ],
+    "region_holdout": 20.56
+   }
+  },
+  "Lena": {
+   "P1": {
+    "bins": [
+     "< 5",
+     "5–25",
+     "25–100",
+     "> 100"
+    ],
+    "rmse": [
+     26.28,
+     21.68,
+     8.87,
+     null
+    ],
+    "n": [
+     847,
+     941,
+     648,
+     0
+    ],
+    "region_holdout": 21.46
+   },
+   "R1": {
+    "bins": [
+     "< 5",
+     "5–25",
+     "25–100",
+     "> 100"
+    ],
+    "rmse": [
+     20.56,
+     19.04,
+     8.05,
+     null
+    ],
+    "n": [
+     847,
+     941,
+     648,
+     0
+    ],
+    "region_holdout": 23.46
+   },
+   "D0": {
+    "bins": [
+     "< 5",
+     "5–25",
+     "25–100",
+     "> 100"
+    ],
+    "rmse": [
+     17.84,
+     18.06,
+     7.65,
+     null
+    ],
+    "n": [
+     847,
+     941,
+     648,
+     0
+    ],
+    "region_holdout": 39.27
+   }
+  },
+  "Canada": {
+   "P1": {
+    "bins": [
+     "< 5",
+     "5–25",
+     "25–100",
+     "> 100"
+    ],
+    "rmse": [
+     15.44,
+     27.75,
+     36.9,
+     null
+    ],
+    "n": [
+     86,
+     648,
+     437,
+     25
+    ],
+    "region_holdout": 27.75
+   },
+   "R1": {
+    "bins": [
+     "< 5",
+     "5–25",
+     "25–100",
+     "> 100"
+    ],
+    "rmse": [
+     14.51,
+     23.88,
+     32.88,
+     null
+    ],
+    "n": [
+     86,
+     648,
+     437,
+     25
+    ],
+    "region_holdout": 24.25
+   },
+   "D0": {
+    "bins": [
+     "< 5",
+     "5–25",
+     "25–100",
+     "> 100"
+    ],
+    "rmse": [
+     15.51,
+     22.0,
+     32.94,
+     null
+    ],
+    "n": [
+     86,
+     648,
+     437,
+     25
+    ],
+    "region_holdout": 23.9
+   }
+  }
+ },
+ "outputs": {
+  "P3_G_error_vs_distance.pdf": {
+   "path": "outputs/figures/paper/v15_proposals/P3_G_error_vs_distance.pdf",
+   "bytes": 19658
+  },
+  "P3_G_error_vs_distance.svg": {
+   "path": "outputs/figures/paper/v15_proposals/P3_G_error_vs_distance.svg",
+   "bytes": 31607
+  },
+  "P3_G_error_vs_distance.png": {
+   "path": "outputs/figures/paper/v15_proposals/P3_G_error_vs_distance.png",
+   "bytes": 332814
+  }
+ },
+ "qa": {
+  "n_texts": 45,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ }
+}

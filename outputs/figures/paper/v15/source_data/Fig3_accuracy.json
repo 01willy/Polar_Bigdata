@@ -1,0 +1,276 @@
+{
+ "figure": "Fig. 3",
+ "script": "scripts/4_visualization/paper_v15/fig3_accuracy.py",
+ "version": "v15 (2026-10-21)",
+ "inputs": {
+  "predictions": "data/processed/v5/runs/core_v6/preds/<Region>__block__year_obs__F8TS__{P1,R1,D0}*.csv.gz (seed mean)",
+  "labels": "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1)",
+  "deltas": "data/processed/v5/runs/core_v6/deltas_vs_ref.csv (ref P1, forcing year_obs, F8TS)"
+ },
+ "a": {
+  "definition": "observed vs block-CV out-of-fold prediction on all site-years; hexagonal bins with log density (n >= 2000) or points; 1:1 line; RMSE and Pearson r",
+  "values": {
+   "Alaska_P1": {
+    "n": 15540,
+    "rmse": 18.58,
+    "r": 0.595,
+    "axis_top": 120.0
+   },
+   "Alaska_R1": {
+    "n": 15540,
+    "rmse": 18.42,
+    "r": 0.587,
+    "axis_top": 120.0
+   },
+   "Alaska_D0": {
+    "n": 15540,
+    "rmse": 17.29,
+    "r": 0.562,
+    "axis_top": 120.0
+   },
+   "Lena_P1": {
+    "n": 2436,
+    "rmse": 21.04,
+    "r": 0.33,
+    "axis_top": 120.0
+   },
+   "Lena_R1": {
+    "n": 2436,
+    "rmse": 17.44,
+    "r": 0.667,
+    "axis_top": 120.0
+   },
+   "Lena_D0": {
+    "n": 2436,
+    "rmse": 15.88,
+    "r": 0.697,
+    "axis_top": 120.0
+   },
+   "Canada_P1": {
+    "n": 1196,
+    "rmse": 30.63,
+    "r": 0.144,
+    "axis_top": 160.0
+   },
+   "Canada_R1": {
+    "n": 1196,
+    "rmse": 26.89,
+    "r": 0.55,
+    "axis_top": 160.0
+   },
+   "Canada_D0": {
+    "n": 1196,
+    "rmse": 26.06,
+    "r": 0.585,
+    "axis_top": 160.0
+   }
+  }
+ },
+ "b": {
+  "definition": "RMSE(method) - RMSE(recalibrated Stefan) on the same site-years under each design; 95 % paired block-bootstrap interval; region hold-out: reference = source-coefficient Stefan",
+  "designs": [
+   "random",
+   "block",
+   "year",
+   "block_year",
+   "region"
+  ],
+  "values": {
+   "Alaska_R1_random": [
+    -4.22,
+    -5.27,
+    -2.86
+   ],
+   "Alaska_R1_block": [
+    -0.15,
+    -0.57,
+    0.12
+   ],
+   "Alaska_R1_year": [
+    -1.46,
+    -2.93,
+    -0.14
+   ],
+   "Alaska_R1_block_year": [
+    -0.35,
+    -0.99,
+    0.5
+   ],
+   "Alaska_R1_region": [
+    -1.81,
+    -4.89,
+    0.98
+   ],
+   "Alaska_D0_random": [
+    -6.38,
+    -8.06,
+    -4.32
+   ],
+   "Alaska_D0_block": [
+    -1.29,
+    -4.03,
+    1.45
+   ],
+   "Alaska_D0_year": [
+    -3.88,
+    -5.11,
+    -2.15
+   ],
+   "Alaska_D0_block_year": [
+    -1.29,
+    -3.88,
+    1.41
+   ],
+   "Alaska_D0_region": [
+    1.2,
+    -0.99,
+    2.34
+   ],
+   "Lena_R1_random": [
+    -5.77,
+    -11.81,
+    -1.61
+   ],
+   "Lena_R1_block": [
+    -3.59,
+    -7.83,
+    -0.81
+   ],
+   "Lena_R1_year": [
+    -1.13,
+    -1.89,
+    -0.4
+   ],
+   "Lena_R1_block_year": [
+    -0.88,
+    -1.88,
+    -0.22
+   ],
+   "Lena_R1_region": [
+    1.99,
+    -0.78,
+    3.39
+   ],
+   "Lena_D0_random": [
+    -8.25,
+    -17.17,
+    -2.15
+   ],
+   "Lena_D0_block": [
+    -5.16,
+    -12.32,
+    0.12
+   ],
+   "Lena_D0_year": [
+    -1.04,
+    -2.74,
+    0.76
+   ],
+   "Lena_D0_block_year": [
+    -0.94,
+    -3.94,
+    1.39
+   ],
+   "Lena_D0_region": [
+    17.8,
+    7.98,
+    23.86
+   ],
+   "Canada_R1_random": [
+    -7.44,
+    -10.55,
+    -4.88
+   ],
+   "Canada_R1_block": [
+    -3.74,
+    -4.77,
+    -0.83
+   ],
+   "Canada_R1_year": [
+    -3.84,
+    -6.84,
+    2.53
+   ],
+   "Canada_R1_block_year": [
+    -3.12,
+    -4.7,
+    1.71
+   ],
+   "Canada_R1_region": [
+    -3.5,
+    -5.15,
+    -0.1
+   ],
+   "Canada_D0_random": [
+    -10.79,
+    -15.66,
+    -6.67
+   ],
+   "Canada_D0_block": [
+    -4.57,
+    -6.23,
+    -0.24
+   ],
+   "Canada_D0_year": [
+    -3.47,
+    -10.14,
+    10.19
+   ],
+   "Canada_D0_block_year": [
+    -3.0,
+    -5.65,
+    6.46
+   ],
+   "Canada_D0_region": [
+    -3.85,
+    -6.96,
+    1.4
+   ]
+  }
+ },
+ "outputs": {
+  "Fig3_accuracy.pdf": {
+   "path": "outputs/figures/paper/v15/Fig3_accuracy.pdf",
+   "bytes": 70870
+  },
+  "Fig3_accuracy.svg": {
+   "path": "outputs/figures/paper/v15/Fig3_accuracy.svg",
+   "bytes": 908811
+  },
+  "Fig3_accuracy.png": {
+   "path": "outputs/figures/paper/v15/Fig3_accuracy.png",
+   "bytes": 1140845
+  }
+ },
+ "canvas_mm": [
+  180.0,
+  197.0
+ ],
+ "pdf_page_mm": [
+  180.0,
+  197.0
+ ],
+ "pdf_fonts": [
+  "BICWAS+FreeSans",
+  "FITYBK+FreeSansBold"
+ ],
+ "qa": {
+  "n_texts": 118,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ }
+}
