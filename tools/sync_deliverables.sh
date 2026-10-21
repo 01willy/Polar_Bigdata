@@ -35,11 +35,11 @@ for f in "$FIG"/source_data/* "$SI"/source_data/*; do [ -f "$f" ] && cp -p "$f" 
 for f in "$FIG"/source_data/TableS7_* paper/manuscript/shared_$VER/table_s7*_{en,ko}.tex "$EN/sections/table1.tex" "$KO/sections/table1.tex"; do [ -f "$f" ] && cp -p "$f" "$D/paper/tables/"; done
 
 # ---- figure proposals
-rm -rf "$D/figure_proposals"/*; for f in outputs/figures/paper/${VER}_proposals/*.png docs/FIGURE_PROPOSALS_*.md; do [ -f "$f" ] && cp -p "$f" "$D/figure_proposals/"; done
+rm -rf "$D/figure_proposals"/*; for f in outputs/figures/paper/v14_proposals/*.png outputs/figures/paper/${VER}_proposals/*.png docs/FIGURE_PROPOSALS_*.md; do [ -f "$f" ] && cp -p "$f" "$D/figure_proposals/"; done
 
 # ---- deck (latest render) and reports
 rm -rf "$D/deck"/*; latest=$(ls -t deck/render/*.pdf 2>/dev/null | head -1); [ -n "$latest" ] && cp -p "$latest" "$D/deck/" && { pp="${latest%.pdf}.pptx"; [ -f "$pp" ] && cp -p "$pp" "$D/deck/"; }
-rm -rf "$D/reports"/*; for f in docs/AUDIT_*2026-10-2*.md docs/research/2026-10-21/*.md docs/RESET_2026-10-10_KOPRI_FEEDBACK.md SESSION_HANDOFF.md docs/EXPERIMENT_LOG.md; do [ -f "$f" ] && cp -p "$f" "$D/reports/"; done
+rm -rf "$D/reports"/*; for f in docs/AUDIT_*2026-10-2*.md docs/REVIEW_RESPONSE_*.md docs/research/2026-10-21/*.md docs/RESET_2026-10-10_KOPRI_FEEDBACK.md SESSION_HANDOFF.md docs/EXPERIMENT_LOG.md; do [ -f "$f" ] && cp -p "$f" "$D/reports/"; done
 lh=$(ls -t gpt/handoff/2*.md 2>/dev/null | head -1); [ -n "$lh" ] && cp -p "$lh" "$D/reports/HANDOFF_latest_$(basename "$lh")"
 
 # ---- references

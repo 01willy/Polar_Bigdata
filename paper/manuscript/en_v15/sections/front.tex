@@ -1,0 +1,34 @@
+% front.tex (v11): title, authors, abstract, keywords (block 1); Data availability (block 3); back matter (block 4).
+\providecommand{\frontblock}{0}
+\ifnum\frontblock=1
+\title[Physics-residual learning of year-specific active-layer thickness]{Active-layer thickness prediction and regional differences across permafrost regions using a physics-residual machine-learning workflow}
+
+\author[1]{\fnm{Seungwon} \sur{Baek}}
+\author[2]{\fnm{Seung Hee} \sur{Kim}}
+\author[2]{\fnm{Yoon Taek} \sur{Jung}}
+\author*[1]{\fnm{Yongchae} \sur{Cho}}\email{[corresponding e-mail]}
+\affil*[1]{\orgdiv{Department of Energy Systems Engineering}, \orgname{Seoul National University}, \orgaddress{\city{Seoul}, \country{Republic of Korea}}}
+\affil[2]{\orgdiv{Center of Remote Sensing and GIS}, \orgname{Korea Polar Research Institute}, \orgaddress{\city{Incheon}, \country{Republic of Korea}}}
+
+\abstract{Active-layer thickness (ALT) is measured at few clustered sites, and models extending them face a trade-off: a Stefan model transfers to unobserved regions but uses one soil coefficient, whereas machine learning (ML) fits its training sites and fails beyond them, as do gridded products. We compared a physics-residual workflow, in which gradient boosting learns the residual of a recalibrated Stefan model from climate, terrain and soil inputs, with the Stefan model, direct ML and five products on \nncyAll{} site-year observations from Alaska, the Lena Delta and Canada. Under spatial-block validation it reduced the Stefan error by \ndrefLeblkRoabs{} cm in the Lena Delta and \ndrefCablkRoabs{} cm in Canada, a gain requiring soil and terrain inputs. With a region withheld, direct ML exceeded the Stefan error by \ndrefLeregDzabs{} cm in the Lena Delta, whereas the physics-residual model stayed within \ndrefLeregRoabs{} cm and gained \ntlgainLeRstwfive{} cm from 25 local labels. On the same site-years ML products missed the thin Lena Delta active layers, where the physics-residual model was most accurate. Anchoring the learner to the physics gives accuracy where labels are dense and transferability where they are scarce; the year-labelled 1 km maps for 2011--2024 include an area of applicability and prediction intervals.}
+
+\keywords{permafrost, active-layer thickness, Stefan model, physics-guided machine learning, spatial cross-validation, ERA5-Land}
+\fi
+
+\ifnum\frontblock=3
+\bmhead{Data availability}
+All input data are publicly available. ALT observations: ABoVE soil moisture and active-layer thickness, version 2 (ORNL DAAC, \url{https://doi.org/10.3334/ORNLDAAC/2369}), ALLena thaw-depth data (PANGAEA, \url{https://doi.org/10.1594/PANGAEA.973813}) and GTN-P CALM (PANGAEA, \url{https://doi.org/10.1594/PANGAEA.972777}). Climate: ERA5-Land monthly averaged data (Copernicus Climate Data Store). Covariates: Copernicus DEM GLO-30, SoilGrids 2.0, ESA CCI permafrost probability, and MODIS MOD13Q1 and MOD10A2 version 6.1 (accessed through AppEEARS). Products: Wei et al. (\url{https://doi.org/10.5281/zenodo.21667583}), Liu et al. (\url{https://doi.org/10.5281/zenodo.10070610}), ESA CCI ALT v4 and v5 (CEDA), Aalto et al. (\url{https://zenodo.org/records/5003804}) and Yi and Kimball (\url{https://doi.org/10.3334/ORNLDAAC/1760}). The site-year label table, the yearly climate-input table, the static covariate table, the out-of-fold predictions of all methods and the yearly 1 km maps of Alaska, the Lena Delta and north-western Canada (2011--2024) will be deposited in a public repository upon acceptance [repository and DOI].
+\fi
+
+\ifnum\frontblock=4
+\bmhead{Acknowledgements}
+[Funding and acknowledgements.]
+
+\bmhead{Author contributions}
+S.B. designed the study, compiled the data, performed the analyses and wrote the manuscript. S.H.K. and Y.T.J. contributed to the interpretation of the remote-sensing covariates and the permafrost field data and revised the manuscript. Y.C. supervised the study and revised the manuscript. All authors approved the final manuscript.
+
+\bmhead{Additional information}
+\textbf{Supplementary information} accompanies this paper (Supplementary Methods S1--S4, Supplementary Tables S1--S8 and Supplementary Figures S1--S10).
+
+\textbf{Competing interests} The authors declare no competing interests.
+\fi

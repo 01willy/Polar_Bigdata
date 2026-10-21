@@ -1,0 +1,50 @@
+%% main.tex (국문 v11, 2026-10-16): 영문판 en_v11 과 같은 구성 · 같은 매크로 · 같은 그림.
+%% Structure follows the author's request and the journal guidance ("no specific requirements" for the main body):
+%% Introduction, Data and methods (ends with Code availability), Results, Discussion, Conclusions, Data availability,
+%% References, back matter. Figures and Table 1 are placed near their first citation, which the guidelines allow for first
+%% submissions ("Figures can be inserted in the text at the appropriate positions"); legends are the figure captions.
+%% Build: ./build.sh (xelatex + bibtex sn-nature.bst). Numbers: ../shared_v10 macros (v6, v9, v10) and ../shared_v11/numbers_v11.tex.
+\documentclass[pdflatex,sn-nature]{sn-jnl}
+\usepackage{graphicx}%
+\usepackage{amsmath,amssymb,amsfonts}%
+\usepackage{xcolor}%
+\usepackage{textcomp}%
+\usepackage{booktabs}%
+\usepackage{array}%
+\usepackage{iftex}%
+\usepackage[section]{placeins}%
+\usepackage[switch]{lineno}%
+\ifXeTeX
+  \usepackage{xeCJK}%
+  \setCJKmainfont{Noto Serif CJK KR}[BoldFont={Noto Serif CJK KR Bold}]%
+  \setCJKsansfont{Noto Sans CJK KR}%
+  \xeCJKsetup{CJKspace=true}%
+\fi
+\raggedbottom
+\renewcommand{\figurename}{그림}\renewcommand{\tablename}{표}\renewcommand{\refname}{참고문헌}\renewcommand{\abstractname}{초록}\def\keywordname{핵심어}
+\unnumbered
+\setcitestyle{super,open={},close={}}
+\input{../shared_v10/numbers_v6}
+\input{../shared_v10/numbers_v9}
+\input{../shared_v10/numbers_v10}
+\IfFileExists{../shared_v11/numbers_v11.tex}{\input{../shared_v11/numbers_v11}}{}
+\input{../shared_v15/numbers_v15}
+\input{../shared_v15/numbers_v15_cellyear}\input{../shared_v15/numbers_v15_extra}
+\newcommand{\figdirv}{../../../outputs/figures/paper/v15/}
+% \paperfig{file stem}{width (fraction of \textwidth)}{caption}{label}
+\newcommand{\paperfig}[4]{\begin{figure}[!htbp]\centering\IfFileExists{\figdirv#1.pdf}{\includegraphics[width=#2\textwidth]{\figdirv#1.pdf}}{\fbox{\parbox[c][45mm][c]{0.9\textwidth}{\centering \detokenize{#1} 준비 중}}}\caption{#3}\label{#4}\end{figure}}
+\begin{document}
+\def\frontblock{1}\input{sections/front}
+\maketitle
+\linenumbers
+\section{서론}\label{sec:intro}
+\input{sections/intro}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusions}
+\def\frontblock{3}\input{sections/front}
+\bibliography{references}
+\backmatter
+\def\frontblock{4}\input{sections/front}
+\end{document}
