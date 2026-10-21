@@ -298,3 +298,4 @@ outputs/figures/paper/v*/_cache
 outputs/figures/paper/v13/*.png
 outputs/figures/paper/v13_si/*.png
 !paper/manuscript/en_v14/main_submission.pdf
+!paper/manuscript/en_v15/main_submission.pdf

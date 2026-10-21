@@ -207,3 +207,13 @@
 6. **그림 2차 제안**(`docs/FIGURE_PROPOSALS_v14_1_2026-10-21.md`, 렌더 8장 `v14_proposals/P*`): Fig 3 D · E · F, Fig 4 E · F, Fig 5 D · F, Fig 7 d 대안. 1차 판정(사양 곡선 기각, 표적 도식 보류) 기록.
 7. **납품 · 폴더**: `deliverables/` 를 종류별(paper, figure_proposals, deck, reports, references, archive)로 재구성(`tools/sync_deliverables.sh` v2, 날짜별 묶음은 archive/). 루트 `00_START_HERE.md` 에 폴더 역할 표(results = Rescale 원시 결과, outputs = 생성 산출물, figures = 명세 JSON 등). 마무리 체인 `tools/finish_paper_v14_1.sh`.
 8. **결과**: Fig 6 QA 통과, 영문 25쪽 · 국문 22쪽 · 보충 21쪽 오류 0, 점검표 전 항목 통과(본문 4,442단어, 캡션 70–164단어, 압축본 1.0 MB).
+
+## 15. v15 (2026-10-21): 사용자 전체 검토 57항 반영
+
+점검표 `docs/REVIEW_RESPONSE_v15_2026-10-21.md`(항목별 결정 · 근거 · 상태). 원고 `paper/manuscript/{en,ko}_v15/`, 그림 `outputs/figures/paper/v15/` · `v15_si/`, 스크립트 `scripts/4_visualization/paper_v15/`, 매크로 `shared_v15/`(`v15_numbers.py`, `v15_cellyear_rescore.py`, `v15_extra_numbers.py`), 마무리 체인 `tools/finish_paper_v15.sh`.
+
+1. **그림 재구성**: Fig 3 = 블록 CV 관측 대 예측 밀도(3지역 × Stefan 재보정 · 물리 잔차 · 직접 ML) + 설계별 Δ 숲 그림(물리 잔차 · 직접 ML, 95 % 구간). Fig 4 = 공변량 묶음 Δ + 3분위 열 표 + 지역 안 라벨 사다리 + 전이 사다리(외부 CALM 패널 c–e 제거). Fig 5 = 공통 지점-연도 RMSE 점(직접 ML 제외) + 관측 대 예측 3 × 3 행렬 + 오차 분포 바이올린. Fig 6 = 산점 패널을 지도에서 띄우고 RMSE 표를 패널 아래 띠에 둠. Fig 1 = Aalto 2018 을 2000–2014 빗금 막대로. Fig 2 = 'To obs. day' 글자 이동, c 편차 지도 높이를 검증 패널과 맞춤. Fig 7 유지(7f 보충 이동안은 3차 제안서에 기록).
+2. **보충**: S5 외부 CALM 그림 → 연도별 입력 효과(옛 Fig 3a) + 연도별 RMSE(옛 Fig 5d). 표 S7 셀-연도 재채점, 표 S8 관측 프로그램별 잔차(새 `v15_extra_numbers.py`). 보충 방법 S3(외부 지역) 삭제, S4 · S5 → S3 · S4. 표 S2 외부 행 삭제, 표 S4 외부 실행 행 삭제 · 업체명 제거.
+3. **본문**: 초록 200단어(관측 편중 · Stefan 한계 · ML 한계 · 제품의 검증 공백 → 방법 → 결과 → 결론 문장), 서론 4문단(두 경로와 제품: Liu 2024 · Wei 2026 은 연도별 예측 변수와 지점-연도 라벨을 쓰므로 '다년 평균 학습' 서술을 정정), 결과 5절(질문 순서, 정성 해석 문장, 셀-연도 채점, Fig 7 편차의 TDD 상관 해석), 고찰 6문단(역할 분담 · 알래스카 이득 부재의 이유 · 제품 비교의 의미 · 선행 연구 · 지도와 새 지역 · 한계), 결론(목적 → 근거 → 의미, 새 지역 규칙). 방법: Stefan 선택 이유와 대안 기준값(Kudryavtsev, 앙상블; 표 S5), edaphic factor 관행 인용(Nelson 1997, Shiklomanov & Nelson 2002), λ = 0.5 선택 근거, CatBoost 선택(Grinsztajn 2022)과 학습기 비교, 블록 부트스트랩 인용(Efron & Tibshirani 1993), 적용 영역 50 % 기준(Obu 2019 구역), 추세 관행(Liu 2024, Yi 2018), 계산 문장 업체명 제거, 제품 공개 저장소 · 영역 · Yi–Kimball 참고 전용, Liu 학습 자료(ABoVE SMALT) 설명, 세 프로그램의 규약 차이와 '같은 해' 원칙, 0<ALT<300 을 말로. 표 1 에 영역 열, 해상도 단위 통일, 외부 행 삭제.
+4. **사실 확인 결과**: 알래스카 이득 부재는 2013 이나 λ 의 문제가 아님(λ 0.25/0.5/1 모두 −0.15 ~ +0.30; 평균 기후 입력 +0.33). 10-06 발표(재설정 전 설계)의 1.1 cm 이득은 연도별 입력이 Stefan 항에 들어가며 사라짐. 전량 라벨 블록 CV 에서 직접 ML 의 점 오차 우위(≤ 1.6 cm)는 사실이며 셀-연도에서는 알래스카에서 역전. 제품 학습 자료: Liu 2024 = CALM 2,409 + ABoVE SMALT + QTP(2,966 지점-연도, 10겹 CV), Wei 2026 = 2,196 연도별 관측, LOSO.
+5. **결과**: 빌드 영문 26쪽 · 국문 23쪽 · 보충 21쪽(영 · 국) 오류 0 · 미정의 0; 점검표 전 항목 통과(초록 200단어, 본문 4,498단어, 캡션 70–167단어, 압축본 1.1 MB); 납품 `deliverables/paper/`(VER=v15).
