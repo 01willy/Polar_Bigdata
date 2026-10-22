@@ -78,14 +78,14 @@ def load_row(row):
 def main():
     t0 = time.time(); C.setup(); M = MP.Med()
     D = [load_row(r) for r in ROWS]
-    v = max(d["sym"] for d in D); norm = Normalize(-v, v); ticks = list(np.arange(-v, v + 1e-6, 5.0 if v <= 20 else 10.0))
+    v = 10.0; norm = Normalize(-v, v); ticks = list(np.arange(-v, v + 1e-6, 5.0))                  # v15.2: fixed +-10 cm so that the correction is visible
     ext = MV.extend_of(np.concatenate([d["fin"] for d in D]), -v, v)
-    W = 180.0; xa = 9.0; g = 9.0; cbw = 16.0; y1 = 4.5
+    W = 180.0; xa = 9.0; g = 9.0; cbw = 0.0; y1 = 4.5                                            # v15.2: no vertical bar, maps fill the width
     h = (W - xa - (len(D) - 1) * g - cbw - 1.0) / sum(1.0 / d["asp"] for d in D)
     xs = []; x = xa
     for d in D:
         xs.append(x); x += h / d["asp"] + g
-    H = y1 + h + 6.5 + 4.6
+    H = y1 + h + 6.5 + 4.6 + 9.0
     fig = C.figure(W, H)
     for i, (Dk, x0) in enumerate(zip(D, xs)):
         wk = h / Dk["asp"]; ax = C.ax_mm(fig, x0, y1, wk, h)
@@ -96,12 +96,12 @@ def main():
         MP.scalebar(ax, Dk["lim"], Dk["scale_km"], M); MP.corner_label(ax, C.REGION[Dk["region"]][0], M)
         C.letter(fig, x0 - 8.0 if i else 0.5, 0.6, "abc"[i])
         Dk["base"] = None; gc.collect()
-    cax = C.ax_mm(fig, x - g + 3.0, y1 + (h - 36.0) / 2.0, 1.9, 36.0)
-    MP.colorbar(fig, cax, MP.CM_ANOM, norm, "Residual ML correction (cm)", ticks, extend=ext, orientation="vertical")
+    cax = C.ax_mm(fig, W / 2 - 24.0, y1 + h + 6.0, 48.0, 1.8)
+    MP.colorbar(fig, cax, MP.CM_ANOM, norm, "Residual ML correction, physics + residual ML − recalibrated Stefan (cm)", ticks, extend=ext)
     fig.legend([MP.FadedRamp(MP.CM_ANOM, lo=0.0, hi=1.0), Patch(facecolor=MP.LAND_HEX, edgecolor="#B5B5B5", lw=0.3),
                 Patch(facecolor=MP.WATER_HEX, edgecolor="#B5B5B5", lw=0.3)],
                ["Outside area of applicability (lighter colours)", "Not mapped", "Water"], loc="upper left",
-               bbox_to_anchor=(xa / W, 1 - (y1 + h + 6.6) / H), ncol=3, fontsize=C.FS_SMALL, handlelength=2.2,
+               bbox_to_anchor=(xa / W, 1 - (y1 + h + 15.2) / H), ncol=3, fontsize=C.FS_SMALL, handlelength=2.2,
                handleheight=0.9, columnspacing=1.6, handler_map={MP.FadedRamp: MP.RampHandler()}, borderaxespad=0, borderpad=0)
     rep = C.qa_figure(fig, text_ink=False); C.print_qa(STEM, rep)
     paths = C.export_si(fig, STEM); plt.close(fig)

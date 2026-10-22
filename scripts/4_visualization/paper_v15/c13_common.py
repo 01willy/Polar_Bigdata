@@ -51,9 +51,9 @@ METHOD = dict(PP["methods"])
 METHOD_NAME = {"R1": "Physics + residual ML", "P1": "Stefan (recalibrated)", "P0": "Stefan (source coeff.)", "D0": "Direct ML",
                "F1": "Physics-input ML", "D1": "Physics pseudo-labels"}
 MARKER = {"Alaska": "o", "Lena": "s", "Canada": "^", "wei": "D", "liu": "v", "cci4y": "s", "cci5y": "s", "aalto": "o", "yk": "X"}
-PRODUCT = {"wei": ("Wei 2026", PP["products"]["Wei"], MARKER["wei"]), "liu": ("Liu 2024", PP["products"]["Liu"], MARKER["liu"]),
+PRODUCT = {"wei": ("Wei et al. 2026", PP["products"]["Wei"], MARKER["wei"]), "liu": ("Liu et al. 2024", PP["products"]["Liu"], MARKER["liu"]),
            "cci4y": ("ESA CCI v4", PP["products"]["CCI"], MARKER["cci4y"]), "cci5y": ("ESA CCI v5", PP["products"]["CCI5"], MARKER["cci5y"]),
-           "aalto": ("Aalto 2018", PP["products"]["Aalto"], MARKER["aalto"]), "yk": ("Yi–Kimball 2019", PP["products"]["YK"], MARKER["yk"])}
+           "aalto": ("Aalto et al. 2018", PP["products"]["Aalto"], MARKER["aalto"]), "yk": ("Yi–Kimball 2019", PP["products"]["YK"], MARKER["yk"])}
 REGION = {"Alaska": ("Alaska", PP["regions"]["Alaska"], MARKER["Alaska"]),
           "Lena": ("Lena Delta", PP["regions"]["Lena Delta"], MARKER["Lena"]),
           "Canada": ("Canada (NW)", PP["regions"]["Canada"], MARKER["Canada"])}

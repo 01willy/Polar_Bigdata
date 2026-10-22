@@ -2,8 +2,8 @@
 Copied from scripts/4_visualization/paper_v10/si_s10_training_sites.py and edited (v11 colours: Wei 2026 sites in the Wei colour, label cells and
 distance curves in region colours, product bars in product colours; dark-grey text; output v11_si).
 
-a  Wei 2026 training sites (supplement table ALT_variables.xlsx) and the label cells of the three regions (north polar stereographic).
-b  Cumulative share of label cells against the distance to the nearest Wei 2026 training site (log axis; dashed line 25 km).
+a  Wei et al. 2026 training sites (supplement table ALT_variables.xlsx) and the label cells of the three regions (north polar stereographic).
+b  Cumulative share of label cells against the distance to the nearest Wei et al. 2026 training site (log axis; dashed line 25 km).
 c  Alaska 2013: mean difference product map - our map (Physics + residual ML, 2013, TDD to 1 September) by latitude band and elevation class
    (<= 600 m, > 600 m) for Wei 2026 and Liu 2024 (all 1 km cells with a value in both maps; outputs/figures/paper/v15/source_data/Fig6_product_maps.json).
 Inputs: data/raw/qtp_alt_open_2026-09-29/essd-2026-447_supplement/ALT_variables.xlsx, data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv,
@@ -70,7 +70,7 @@ def main():
     axm.scatter(w.LONG, w.LAT, s=5.0, marker="x", color=WEI_D, lw=0.4, transform=PC, zorder=4)
     hs = [Line2D([], [], ls="none", marker="x", color=WEI_D, ms=3.2, mew=0.6)] + \
          [Line2D([], [], ls="none", marker=C.REGION[r][2], ms=2.8, mfc=C.REGION[r][1], mec="none") for r in REG]
-    fig.legend(hs, ["Wei 2026 training sites"] + [f"{C.REGION[r][0]} label cells" for r in REG], loc="upper left",
+    fig.legend(hs, ["Wei et al. 2026 training sites"] + [f"{C.REGION[r][0]} label cells" for r in REG], loc="upper left",
                bbox_to_anchor=(1.0 / W, 1 - 71.5 / H), ncol=2, fontsize=C.FS_SMALL, handlelength=0.9, labelspacing=0.35, columnspacing=1.2)
     src["a"] = dict(n_wei_sites=int(len(w)), colours=dict(wei_sites=WEI_D, regions={C.REGION[r][0]: C.REGION[r][1] for r in REG}))
     # ---------------- b: distance distribution
@@ -84,7 +84,7 @@ def main():
     axb.axvline(25, color=C.ZERO, lw=0.5, ls=C.DASH, zorder=0)
     axb.set_xscale("log"); axb.set_xlim(0.5, 2000); axb.set_xticks([1, 10, 25, 100, 1000]); axb.set_xticklabels(["1", "10", "25", "100", "1000"])
     axb.minorticks_off(); axb.set_ylim(0, 1.02); axb.yaxis.set_major_locator(mticker.MultipleLocator(0.5))
-    axb.set_xlabel("Distance to the nearest Wei 2026 training site (km)"); axb.set_ylabel("Share of label cells")
+    axb.set_xlabel("Distance to the nearest Wei et al. 2026 training site (km)"); axb.set_ylabel("Share of label cells")
     axb.legend([Line2D([], [], color=C.REGION[r][1], lw=C.LW_MAIN, ls=LS[r]) for r in REG], [C.REGION[r][0] for r in REG], loc="lower right",
                bbox_to_anchor=(1.0, 0.02), fontsize=C.FS_SMALL, handlelength=2.2)
     # ---------------- c: latitude band x elevation, product - our map (Alaska 2013, v14 Fig. 6 source data)
@@ -108,7 +108,7 @@ def main():
     axc.set_ylabel("Product − our map (cm)")
     hs = [Patch(facecolor=wf, edgecolor=we, lw=0.5), Patch(facecolor="white", edgecolor=we, hatch=HT["wei_minus"], lw=0.5),
           Patch(facecolor=lf, edgecolor=le, lw=0.5), Patch(facecolor="white", edgecolor=le, hatch=HT["liu_minus"], lw=0.5)]
-    axc.legend(hs, ["Wei 2026, elevation ≤ 600 m", "Wei 2026, elevation > 600 m", "Liu 2024, elevation ≤ 600 m", "Liu 2024, elevation > 600 m"],
+    axc.legend(hs, ["Wei et al. 2026, elevation ≤ 600 m", "Wei et al. 2026, elevation > 600 m", "Liu et al. 2024, elevation ≤ 600 m", "Liu et al. 2024, elevation > 600 m"],
                loc="upper right", bbox_to_anchor=(1.0, 1.03), ncol=2, fontsize=C.FS_SMALL, handlelength=1.4, handleheight=0.9, columnspacing=1.0)
     C.letter(fig, 0.5, 0.5, "a"); C.letter(fig, 72.0, 0.5, "b"); C.letter(fig, 72.0, 42.5, "c")
     rep = C.qa_figure(fig); C.print_qa(STEM, rep)
@@ -121,8 +121,8 @@ def main():
         years=dict(a_b="label cells of all years (Alaska 2010-2024, Lena Delta 2010-2022, Canada (NW) 2010-2024)", c="2013 (Alaska map with the TDD to 1 September, all 1 km cells with a value in both maps; v14 Fig. 6 source data)"),
         definition=dict(c="mean of (product - Physics + residual ML map) over every 10th 1 km map cell of Alaska 2013, by latitude band and elevation class"),
         values=src, numbers_printed="none (axis ticks only)", omitted="v9_f11_qa.py panel c (Lena Delta transfer RMSE vs products) is not part of this figure",
-        legend_draft="Fig. S5 | Distance to product training sites and latitude-band differences. a, Wei 2026 training sites and the label cells of the "
-                     "three regions. b, cumulative share of label cells against the distance to the nearest Wei 2026 training site (dashed line: "
+        legend_draft="Fig. S5 | Distance to product training sites and latitude-band differences. a, Wei et al. 2026 training sites and the label cells of the "
+                     "three regions. b, cumulative share of label cells against the distance to the nearest Wei et al. 2026 training site (dashed line: "
                      "25 km). c, Alaska 2013: mean difference between product and our map by latitude band and elevation class.",
         outputs=C.file_info(paths), size_mm=[W, H], pdf_fonts=C.pdf_fonts(paths[0]), qa=rep))
     for p in paths:

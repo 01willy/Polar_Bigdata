@@ -44,9 +44,9 @@ MK = S.C["paper_v10"]["markers"]                  # shapes only (paper_v13 has n
 METHOD = dict(PP["methods"])
 METHOD_NAME = {"R1": "Physics + residual ML", "P1": "Stefan (recalibrated)", "P0": "Stefan (source coeff.)", "D0": "Direct ML",
                "F1": "Physics-input ML", "D1": "Physics pseudo-labels"}
-PRODUCT = {"wei": ("Wei 2026", PP["products"]["Wei"], MK["Wei"]), "liu": ("Liu 2024", PP["products"]["Liu"], MK["Liu"]),
+PRODUCT = {"wei": ("Wei et al. 2026", PP["products"]["Wei"], MK["Wei"]), "liu": ("Liu et al. 2024", PP["products"]["Liu"], MK["Liu"]),
            "cci4y": ("ESA CCI v4", PP["products"]["CCI"], MK["CCI"]), "cci5y": ("ESA CCI v5", PP["products"]["CCI5"], MK["CCI5"]),
-           "aalto": ("Aalto 2018", PP["products"]["Aalto"], MK["Aalto"])}
+           "aalto": ("Aalto et al. 2018", PP["products"]["Aalto"], MK["Aalto"])}
 REGION = {"Alaska": ("Alaska", PP["regions"]["Alaska"], MK["Alaska"]),
           "Lena": ("Lena Delta", PP["regions"]["Lena Delta"], MK["Lena Delta"]),
           "Canada": ("Canada (NW)", PP["regions"]["Canada"], MK["Canada"])}

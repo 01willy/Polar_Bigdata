@@ -67,7 +67,7 @@ def main():
                fontsize=C.FS_SMALL, handletextpad=0.5, columnspacing=1.6, borderaxespad=0.0)
     C.letter(fig, 2.0, ya - 4.5, "a")
     # ---------------- b: observed vs predicted matrix
-    series = [("R1", MN["R1"], MC["R1"]), ("wei", "Wei 2026", C.PRODUCT["wei"][1]), ("liu", "Liu 2024", C.PRODUCT["liu"][1])]
+    series = [("R1", MN["R1"], MC["R1"]), ("wei", "Wei et al. 2026", C.PRODUCT["wei"][1]), ("liu", "Liu et al. 2024", C.PRODUCT["liu"][1])]
     meta_b = {}
     for i, r in enumerate(REGIONS):
         q = c[c.region == r]; top = float(np.ceil(np.percentile(np.concatenate([q.alt_cm.values] + [q[k].values for k, _, _ in series]), 99.5) / 20) * 20)
@@ -83,7 +83,7 @@ def main():
             else: ax.set_xticklabels([])
     C.letter(fig, 2.0, yb - 8.5, "b"); C.text_mm(fig, 7.0, yb - 8.2, "Observed against predicted on the common site-years", fontsize=C.FS, ha="left", va="top")
     # ---------------- c: error distributions
-    vs = [("P1", "Stefan (recal.)", MC["P1"]), ("R1", "Physics + ML", MC["R1"]), ("wei", "Wei 2026", C.PRODUCT["wei"][1]), ("liu", "Liu 2024", C.PRODUCT["liu"][1]), ("cci4y", "ESA CCI v4", C.PRODUCT["cci4y"][1])]
+    vs = [("P1", "Stefan (recal.)", MC["P1"]), ("R1", "Physics + ML", MC["R1"]), ("wei", "Wei et al. 2026", C.PRODUCT["wei"][1]), ("liu", "Liu et al. 2024", C.PRODUCT["liu"][1]), ("cci4y", "ESA CCI v4", C.PRODUCT["cci4y"][1])]
     LIM = 80.0; meta_c = {}; wc = s
     for i, r in enumerate(REGIONS):
         q = c[c.region == r]; ax = C.ax_mm(fig, cols[i], yc, wc, hc); C.clean_axes(ax)

@@ -61,7 +61,10 @@ def main():
     R = {r["key"]: load_region(r) for r in REGS}
     for k, Rk in R.items():
         olon, olat, nloc = F6.obs_cells(lab, Rk["reg"]); Rk["ox"], Rk["oy"] = Rk["tf"].transform(olon, olat); Rk["nloc"] = int(nloc)
-    allm = np.concatenate([R[k]["mean"].r1.values for k in R]); lo, hi = F6.MV.pct_range(allm, step=5.0); norm = Normalize(lo, hi)
+    allm = np.concatenate([R[k]["mean"].r1.values for k in R]); lo, hi = F6.MV.pct_range(allm, step=5.0)
+    import json as _json; _f7 = (C.OUT_MAIN / "source_data" / "Fig7_maps.json")
+    if _f7.exists(): lo, hi = (float(v) for v in _json.loads(_f7.read_text())["a_b_c"]["range_cm"])        # v15.2: same colour range as Fig. 7a-c
+    norm = Normalize(lo, hi)
     ext = F6.MV.extend_of(allm, lo, hi); tick = 20.0 if hi - lo >= 80 else 10.0; ticks = list(np.arange(tick * np.ceil(lo / tick), hi + 1e-6, tick))
     print(f"  data {time.time() - t0:.0f} s; colour range {lo}-{hi} ({ext})")
     # ---------------- layout (mm)

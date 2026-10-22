@@ -18,19 +18,19 @@
      "rmse_cm": 15.335,
      "n": 4229
     },
-    "Wei 2026|0": {
+    "Wei et al. 2026|0": {
      "rmse_cm": 17.894,
      "n": 14326
     },
-    "Wei 2026|25": {
+    "Wei et al. 2026|25": {
      "rmse_cm": 20.833,
      "n": 4229
     },
-    "Liu 2024|0": {
+    "Liu et al. 2024|0": {
      "rmse_cm": 18.777,
      "n": 14326
     },
-    "Liu 2024|25": {
+    "Liu et al. 2024|25": {
      "rmse_cm": 15.212,
      "n": 4229
     },
@@ -50,11 +50,11 @@
      "rmse_cm": 118.489,
      "n": 3012
     },
-    "Aalto 2018|0": {
+    "Aalto et al. 2018|0": {
      "rmse_cm": 46.151,
      "n": 14326
     },
-    "Aalto 2018|25": {
+    "Aalto et al. 2018|25": {
      "rmse_cm": 63.513,
      "n": 4229
     }
@@ -76,19 +76,19 @@
      "rmse_cm": 21.155,
      "n": 449
     },
-    "Wei 2026|0": {
+    "Wei et al. 2026|0": {
      "rmse_cm": 34.551,
      "n": 461
     },
-    "Wei 2026|25": {
+    "Wei et al. 2026|25": {
      "rmse_cm": 34.832,
      "n": 449
     },
-    "Liu 2024|0": {
+    "Liu et al. 2024|0": {
      "rmse_cm": 32.981,
      "n": 461
     },
-    "Liu 2024|25": {
+    "Liu et al. 2024|25": {
      "rmse_cm": 33.184,
      "n": 449
     },
@@ -108,11 +108,11 @@
      "rmse_cm": 28.448,
      "n": 449
     },
-    "Aalto 2018|0": {
+    "Aalto et al. 2018|0": {
      "rmse_cm": 30.555,
      "n": 461
     },
-    "Aalto 2018|25": {
+    "Aalto et al. 2018|25": {
      "rmse_cm": 30.752,
      "n": 449
     }
@@ -134,19 +134,19 @@
      "rmse_cm": 23.619,
      "n": 489
     },
-    "Wei 2026|0": {
+    "Wei et al. 2026|0": {
      "rmse_cm": 26.997,
      "n": 532
     },
-    "Wei 2026|25": {
+    "Wei et al. 2026|25": {
      "rmse_cm": 27.357,
      "n": 489
     },
-    "Liu 2024|0": {
+    "Liu et al. 2024|0": {
      "rmse_cm": 27.919,
      "n": 532
     },
-    "Liu 2024|25": {
+    "Liu et al. 2024|25": {
      "rmse_cm": 28.754,
      "n": 489
     },
@@ -166,11 +166,11 @@
      "rmse_cm": 74.296,
      "n": 489
     },
-    "Aalto 2018|0": {
+    "Aalto et al. 2018|0": {
      "rmse_cm": 56.488,
      "n": 532
     },
-    "Aalto 2018|25": {
+    "Aalto et al. 2018|25": {
      "rmse_cm": 55.726,
      "n": 489
     }
@@ -214,13 +214,13 @@
     },
     {
      "region": "Alaska",
-     "series": "Aalto 2018",
+     "series": "Aalto et al. 2018",
      "subset": "all",
      "rmse_cm": 46.2
     },
     {
      "region": "Alaska",
-     "series": "Aalto 2018",
+     "series": "Aalto et al. 2018",
      "subset": "> 25 km",
      "rmse_cm": 63.5
     },
@@ -238,13 +238,13 @@
     },
     {
      "region": "Canada",
-     "series": "Aalto 2018",
+     "series": "Aalto et al. 2018",
      "subset": "all",
      "rmse_cm": 56.5
     },
     {
      "region": "Canada",
-     "series": "Aalto 2018",
+     "series": "Aalto et al. 2018",
      "subset": "> 25 km",
      "rmse_cm": 55.7
     }
@@ -442,15 +442,15 @@
  "outputs": {
   "Fig5_products.pdf": {
    "path": "outputs/figures/paper/v15/Fig5_products.pdf",
-   "bytes": 114038
+   "bytes": 114073
   },
   "Fig5_products.svg": {
    "path": "outputs/figures/paper/v15/Fig5_products.svg",
-   "bytes": 929428
+   "bytes": 929505
   },
   "Fig5_products.png": {
    "path": "outputs/figures/paper/v15/Fig5_products.png",
-   "bytes": 1504448
+   "bytes": 1522755
   }
  },
  "canvas_mm": [
@@ -487,14 +487,14 @@
    ],
    [
     "Physics + ML",
-    "Wei 2026"
+    "Wei et al. 2026"
    ],
    [
-    "Wei 2026",
-    "Liu 2024"
+    "Wei et al. 2026",
+    "Liu et al. 2024"
    ],
    [
-    "Liu 2024",
+    "Liu et al. 2024",
     "ESA CCI v4"
    ],
    [
@@ -503,14 +503,14 @@
    ],
    [
     "Physics + ML",
-    "Wei 2026"
+    "Wei et al. 2026"
    ],
    [
-    "Wei 2026",
-    "Liu 2024"
+    "Wei et al. 2026",
+    "Liu et al. 2024"
    ],
    [
-    "Liu 2024",
+    "Liu et al. 2024",
     "ESA CCI v4"
    ],
    [
@@ -519,14 +519,14 @@
    ],
    [
     "Physics + ML",
-    "Wei 2026"
+    "Wei et al. 2026"
    ],
    [
-    "Wei 2026",
-    "Liu 2024"
+    "Wei et al. 2026",
+    "Liu et al. 2024"
    ],
    [
-    "Liu 2024",
+    "Liu et al. 2024",
     "ESA CCI v4"
    ]
   ],

@@ -103,8 +103,8 @@ def load():
     pmeta = json.loads((V5 / "products_cell_year_v5_meta.json").read_text())["products"]
     pr = pd.read_csv(V5 / "products_cell_year_v5.csv")
     prods = []
-    for key, name in (("wei", "Wei 2026"), ("liu", "Liu 2024"), ("cci4y", "ESA CCI v4"), ("cci5y", "ESA CCI v5"), ("yk", "Yi–Kimball 2019 (Alaska)"),
-                      ("aalto", "Aalto 2018")):
+    for key, name in (("wei", "Wei et al. 2026"), ("liu", "Liu et al. 2024"), ("cci4y", "ESA CCI v4"), ("cci5y", "ESA CCI v5"), ("yk", "Yi–Kimball 2019 (Alaska)"),
+                      ("aalto", "Aalto et al. 2018")):
         m = pmeta[key]; period = tuple(int(v) for v in m["period"])
         if key == "liu":
             assert LIU_AVAILABLE[0] <= period[0] and period[1] <= LIU_AVAILABLE[1], period

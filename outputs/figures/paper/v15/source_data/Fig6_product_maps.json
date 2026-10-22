@@ -25,7 +25,7 @@
   "colour_range": "per region: 5th-95th percentile of the pooled display pixels of our map, Wei 2026 and Liu 2024 inside our area of applicability, rounded outwards to 5 cm; values beyond are drawn at the end colours",
   "product_mask": "product pixels are drawn only where our map has a value (same area in the three maps)",
   "observed_cells": "common cells (our map, Wei 2026 and Liu 2024 all have a value) drawn as filled circles coloured by the observed ALT on the same scale",
-  "scatter": "observed cell mean against the prediction of each series at the common cells; our series = block-CV out-of-fold predictions (seeds averaged per label, then cell mean), not the in-sample map; r = Pearson correlation; RMSE over the common cells; markers filled = cell within 25 km of a Wei 2026 training site, open = beyond; the panel prints the RMSE for all cells and for the open cells"
+  "scatter": "observed cell mean against the prediction of each series at the common cells; our series = block-CV out-of-fold predictions (seeds averaged per label, then cell mean), not the in-sample map; r = Pearson correlation; RMSE over the common cells; markers filled = cell within 25 km of a Wei et al. 2026 training site, open = beyond; the panel prints the RMSE for all cells and for the open cells"
  },
  "values": {
   "Alaska": {
@@ -119,8 +119,8 @@
     "liu_2024": 1.939
    },
    "product_training_sites": {
-    "note": "distances are to the nearest Wei 2026 training site (the 25 km mask of Fig. 5a); scatter markers: filled = within, open = beyond",
-    "distance_source": "data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv (product == 'wei', nearest Wei 2026 training site per label; cell value = minimum over its labels)",
+    "note": "distances are to the nearest Wei et al. 2026 training site (the 25 km mask of Fig. 5a); scatter markers: filled = within, open = beyond",
+    "distance_source": "data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv (product == 'wei', nearest Wei et al. 2026 training site per label; cell value = minimum over its labels)",
     "n_common_within_25km": 59,
     "n_common_gt25km": 67,
     "rmse_common_gt25km_cm": {
@@ -1856,8 +1856,8 @@
     "liu_2024": 27.341
    },
    "product_training_sites": {
-    "note": "distances are to the nearest Wei 2026 training site (the 25 km mask of Fig. 5a); scatter markers: filled = within, open = beyond",
-    "distance_source": "data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv (product == 'wei', nearest Wei 2026 training site per label; cell value = minimum over its labels)",
+    "note": "distances are to the nearest Wei et al. 2026 training site (the 25 km mask of Fig. 5a); scatter markers: filled = within, open = beyond",
+    "distance_source": "data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv (product == 'wei', nearest Wei et al. 2026 training site per label; cell value = minimum over its labels)",
     "n_common_within_25km": 0,
     "n_common_gt25km": 14,
     "rmse_common_gt25km_cm": {
@@ -2202,8 +2202,8 @@
     "liu_2024": 7.786
    },
    "product_training_sites": {
-    "note": "distances are to the nearest Wei 2026 training site (the 25 km mask of Fig. 5a); scatter markers: filled = within, open = beyond",
-    "distance_source": "data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv (product == 'wei', nearest Wei 2026 training site per label; cell value = minimum over its labels)",
+    "note": "distances are to the nearest Wei et al. 2026 training site (the 25 km mask of Fig. 5a); scatter markers: filled = within, open = beyond",
+    "distance_source": "data/processed/xbatch/XG_product_comparison/xg_leak_cells_v1.csv (product == 'wei', nearest Wei et al. 2026 training site per label; cell value = minimum over its labels)",
     "n_common_within_25km": 6,
     "n_common_gt25km": 27,
     "rmse_common_gt25km_cm": {
@@ -2776,15 +2776,15 @@
  "outputs": {
   "Fig6_product_maps.pdf": {
    "path": "outputs/figures/paper/v15/Fig6_product_maps.pdf",
-   "bytes": 7581292
+   "bytes": 7581302
   },
   "Fig6_product_maps.svg": {
    "path": "outputs/figures/paper/v15/Fig6_product_maps.svg",
-   "bytes": 12344813
+   "bytes": 12344876
   },
   "Fig6_product_maps.png": {
    "path": "outputs/figures/paper/v15/Fig6_product_maps.png",
-   "bytes": 8265389
+   "bytes": 8277738
   }
  },
  "canvas_mm": [

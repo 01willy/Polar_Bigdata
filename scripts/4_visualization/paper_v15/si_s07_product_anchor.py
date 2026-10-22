@@ -22,8 +22,8 @@ STEM = "FigS7_product_anchor"
 RUN = C.ROOT / "data" / "processed" / "v5" / "runs" / "extra_v9"
 REG = C.REGIONS
 WEI = C.PRODUCT["wei"][1]
-ROWS = [("Praw", "Wei 2026", WEI, WEI, "D", True), ("Pcal", "Wei 2026, recalibrated", WEI, WEI, "D", False),
-        ("RP", "Wei 2026 + residual ML", WEI, WEI, "o", True),
+ROWS = [("Praw", "Wei et al. 2026", WEI, WEI, "D", True), ("Pcal", "Wei et al. 2026, recalibrated", WEI, WEI, "D", False),
+        ("RP", "Wei et al. 2026 + residual ML", WEI, WEI, "o", True),
         ("P1", C.METHOD_NAME["P1"], C.METHOD["P1"], C.METHOD["P1"], "s", True), ("R1", C.METHOD_NAME["R1"], C.METHOD["R1"], C.METHOD["R1"], "o", True)]
 X = (15.0, 32.0)
 

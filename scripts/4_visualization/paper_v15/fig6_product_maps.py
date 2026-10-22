@@ -49,7 +49,7 @@ W_SHADE = 0.30
 YEARS = {"alaska": 2013, "lena": 2016, "canada": 2013}   # v14.1: per region, the year with the most observed 1 km cells that have a value in our map and in both products
 WHY_YEAR = ("per region, the year with the most observed 1 km cells with a value in our map, Wei 2026 and Liu 2024 (Liu 2024 ends in 2020); "
             "Alaska 2013 (126 common cells; next 2018 and 2014), Lena Delta 2016 (14; next 2014), Canada 2013 (33; other years at most 12)")
-FAR_KM = 25.0                                   # scatter: cells farther than this from the nearest Wei 2026 training site are drawn open (as Fig. 5a)
+FAR_KM = 25.0                                   # scatter: cells farther than this from the nearest Wei et al. 2026 training site are drawn open (as Fig. 5a)
 ROWS = [dict(key="alaska", region="Alaska", lon_lab=(-160, -150), lat_lab=(60, 65, 70), scale_km=200, letters="abcd", step=2,
              lat_edges=(59, 64, 66, 68, 70, 72)),
         dict(key="lena", region="Lena", lon_lab=(124, 128), lat_lab=(72, 73), scale_km=50, letters="efgh", step=1,
@@ -64,8 +64,8 @@ if _sel:
 RANGE_PCT = (5.0, 95.0)                         # per-row colour range: pooled values of the three maps inside the area of applicability
 RANGE_STEP = 5.0
 ELEV_SPLIT = 600.0                              # band statistics: elevation split (m)
-SERIES = [("oof", "Physics + residual ML", C.METHOD["R1"]), ("wei", "Wei 2026", C.PRODUCT["wei"][1]), ("liu", "Liu 2024", C.PRODUCT["liu"][1])]
-MAP_HEAD = {"ours": C.METHOD_NAME["R1"], "wei": "Wei 2026", "liu": "Liu 2024"}
+SERIES = [("oof", "Physics + residual ML", C.METHOD["R1"]), ("wei", "Wei et al. 2026", C.PRODUCT["wei"][1]), ("liu", "Liu et al. 2024", C.PRODUCT["liu"][1])]
+MAP_HEAD = {"ours": C.METHOD_NAME["R1"], "wei": "Wei et al. 2026", "liu": "Liu et al. 2024"}
 OOF = "{region}__block__year_obs__F8TS__R1__catboost__lam0.5.csv.gz"
 LEAK = C.ROOT / "data" / "processed" / "xbatch" / "XG_product_comparison" / "xg_leak_cells_v1.csv"
 OBS_PT = 2.7                                    # observed-cell circles on the maps (filled with the observed ALT colour): diameter (pt)
@@ -121,8 +121,8 @@ def error_table(row, map_r1, tf):
                rmse={m: rmse(common, m) for m in ("oof", "wei", "liu", "mapv")}, r={m: corr(common, m) for m in ("oof", "wei", "liu", "mapv")},
                bias={m: float(common[f"e_{m}"].mean()) for m in ("oof", "wei", "liu", "mapv")},
                n_with_value={m: int(c[m].notna().sum()) for m in ("oof", "wei", "liu", "mapv")},
-               training_sites=dict(note=f"distances are to the nearest Wei 2026 training site (the {FAR_KM:.0f} km mask of Fig. 5a); scatter markers: filled = within, open = beyond",
-                                   distance_source=str(LEAK.relative_to(C.ROOT)) + " (product == 'wei', nearest Wei 2026 training site per label; cell value = minimum over its labels)",
+               training_sites=dict(note=f"distances are to the nearest Wei et al. 2026 training site (the {FAR_KM:.0f} km mask of Fig. 5a); scatter markers: filled = within, open = beyond",
+                                   distance_source=str(LEAK.relative_to(C.ROOT)) + " (product == 'wei', nearest Wei et al. 2026 training site per label; cell value = minimum over its labels)",
                                    n_common_within_25km=int(len(near)), n_common_gt25km=int(len(far)),
                                    rmse_common_gt25km_cm=({m: round(rmse(far, m), 2) for m in ("oof", "wei", "liu")} if len(far) else None),
                                    r_common_gt25km=({m: round(corr(far, m), 3) for m in ("oof", "wei", "liu")} if len(far) >= 3 else None),
@@ -315,7 +315,7 @@ def main():
            Line2D([], [], ls="none", marker="o", ms=SC_PT + 0.3, mfc=C.AXIS, mec="white", mew=0.3),
            Line2D([], [], ls="none", marker="o", ms=SC_PT + 0.3, mfc="white", mec=C.AXIS, mew=0.6)]
     labs = ["Observed cell, filled with the observed ALT", "Outside area of applicability (lighter)", "Not mapped (products masked to our cells)", "Water",
-            f"Cell within {FAR_KM:.0f} km of a Wei 2026 training site", f"Cell beyond {FAR_KM:.0f} km (d, h, l; statistics for both)"]
+            f"Cell within {FAR_KM:.0f} km of a Wei et al. 2026 training site", f"Cell beyond {FAR_KM:.0f} km (d, h, l; statistics for both)"]
     fig.legend(hs_, labs, loc="upper left", bbox_to_anchor=(xm0 / W, 1 - y_key / H), ncol=3, fontsize=C.FS_SMALL, handlelength=2.2, handleheight=0.9,
                handletextpad=0.5, columnspacing=1.5, borderaxespad=0.0, handler_map={MP.FadedRamp: MP.RampHandler()})
     rep = C.qa_figure(fig, text_ink=False, allow_colors=tuple(c for _, _, c in SERIES))
@@ -337,7 +337,7 @@ def main():
                                observed_cells="common cells (our map, Wei 2026 and Liu 2024 all have a value) drawn as filled circles coloured by the observed ALT on the same scale",
                                scatter="observed cell mean against the prediction of each series at the common cells; our series = block-CV out-of-fold predictions "
                                        "(seeds averaged per label, then cell mean), not the in-sample map; r = Pearson correlation; RMSE over the common cells; "
-                                       f"markers filled = cell within {FAR_KM:.0f} km of a Wei 2026 training site, open = beyond; the panel prints the RMSE for all cells and for the open cells"),
+                                       f"markers filled = cell within {FAR_KM:.0f} km of a Wei et al. 2026 training site, open = beyond; the panel prints the RMSE for all cells and for the open cells"),
                values=out, numbers_printed={r: {"r": [f"{v['r_common']['physics_residual_ml_block_cv']:.2f}", f"{v['r_common']['wei_2026']:.2f}", f"{v['r_common']['liu_2024']:.2f}"],
                                                 "RMSE (cm)": [f"{v['rmse_common_cm']['physics_residual_ml_block_cv']:.1f}", f"{v['rmse_common_cm']['wei_2026']:.1f}",
                                                               f"{v['rmse_common_cm']['liu_2024']:.1f}"], "n": v["n_common_cells"]} for r, v in out.items()},

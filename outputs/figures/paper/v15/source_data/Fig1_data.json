@@ -263,12 +263,12 @@
    "label_rows": "region colours",
    "climate_input": "#595959",
    "products": {
-    "Wei 2026": "#5E8F74",
-    "Liu 2024": "#A86F85",
+    "Wei et al. 2026": "#5E8F74",
+    "Liu et al. 2024": "#A86F85",
     "ESA CCI v4": "#8A7A5F",
     "ESA CCI v5": "#B9A25C",
     "Yi–Kimball 2019 (Alaska)": "#8B9A5E",
-    "Aalto 2018": "#7FA3BE"
+    "Aalto et al. 2018": "#7FA3BE"
    },
    "analysis_window": "#F0F0F0"
   },
@@ -310,7 +310,7 @@
    },
    {
     "group": "Products",
-    "name": "Wei 2026",
+    "name": "Wei et al. 2026",
     "colour": "#5E8F74",
     "encoding": "grey line = available period, bar in the product colour = years used for the comparison",
     "years": "2000–2024",
@@ -320,7 +320,7 @@
    },
    {
     "group": "Products",
-    "name": "Liu 2024",
+    "name": "Liu et al. 2024",
     "colour": "#A86F85",
     "encoding": "grey line = available period, bar in the product colour = years used for the comparison",
     "years": "2003–2020",
@@ -360,7 +360,7 @@
    },
    {
     "group": "Products",
-    "name": "Aalto 2018",
+    "name": "Aalto et al. 2018",
     "colour": "#7FA3BE",
     "encoding": "hatched bar 2000-2014 = one multi-year mean value; note 'one value (2000-2014 mean)'",
     "years": "2000–2014",
@@ -412,15 +412,15 @@
   "outputs": {
    "Fig1_data.pdf": {
     "path": "outputs/figures/paper/v15/Fig1_data.pdf",
-    "bytes": 877201
+    "bytes": 877273
    },
    "Fig1_data.svg": {
     "path": "outputs/figures/paper/v15/Fig1_data.svg",
-    "bytes": 2209934
+    "bytes": 2209955
    },
    "Fig1_data.png": {
     "path": "outputs/figures/paper/v15/Fig1_data.png",
-    "bytes": 1185635
+    "bytes": 1191249
    }
   },
   "change_from_v10": "panel d (cumulative TDD time definition) removed (moved to the new methods figure Fig. 2); layout re-balanced; region boxes, b bars and c label rows in region colours, c product rows in product colours"
@@ -434,12 +434,12 @@
    "Canada (NW)": "2010–2019, 2021–2024",
    "ERA5-Land monthly climate": "2010–2024",
    "Terrain, soil": "static",
-   "Wei 2026": "used 2010–2024, available 2000–2024",
-   "Liu 2024": "used 2010–2020, available 2003–2020",
+   "Wei et al. 2026": "used 2010–2024, available 2000–2024",
+   "Liu et al. 2024": "used 2010–2020, available 2003–2020",
    "ESA CCI v4": "used 2010–2021, available 1997–2021",
    "ESA CCI v5": "used 2010–2023, available 1997–2023",
    "Yi–Kimball 2019 (Alaska)": "used 2010–2015, available 2001–2015",
-   "Aalto 2018": "2000–2014"
+   "Aalto et al. 2018": "2000–2014"
   }
  }
 }

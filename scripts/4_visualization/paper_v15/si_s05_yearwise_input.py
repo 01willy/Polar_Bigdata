@@ -1,54 +1,82 @@
-"""Supplementary Fig. S5 (v15, 2026-10-21): (a) effect of the year-specific climate input (block RMSE change, year_obs minus 2011-2024 mean input) for
-the recalibrated Stefan model, the physics-residual model and direct ML; (b) year-wise RMSE (years with >= 30 site-years) of the physics-residual
-model, the recalibrated Stefan model, Wei et al. and Liu et al. Reuses _f3_v14_parts.data_ab (a) and fig5_products.draw_b (b)."""
+"""Supplementary Fig. S5 (v15.2, 2026-10-22): RMSE per observation year as a heat table (replaces the dot-line panels of v15.0/15.1).
+
+Rows = observation years with at least 30 site-years in the region; columns = recalibrated Stefan, physics + residual ML (both spatial-block
+out-of-fold, climate input of the observation year to the observation day), Wei et al. 2026 and Liu et al. 2024 (product value of the observation
+year); one column group per region. Cell text = RMSE (cm); cell colour = RMSE minus the RMSE of the physics-residual model in the same year
+(blue, lower; red, higher; +-10 cm). Row set per year = site-years with a Wei et al. value for that year (Liu et al. on the subset with a Liu value,
+2010-2020; n printed as n_wei / n_liu). The effect of the year-specific climate input (former panel a) is Fig. 3a of the main text.
+Inputs: data/processed/v5/labels_cell_year_v5.csv, products_cell_year_v5.csv, core_v6 out-of-fold predictions (fig5_products_v15.oof_all).
+Run: cd /home/willy010313/Polar_Bigdata && POLAR_PALETTE=paper15 CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=2 MPLBACKEND=Agg nice -n 10 python3 scripts/4_visualization/paper_v15/si_s05_yearwise_input.py
+"""
 from __future__ import annotations
 import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import c13_common as C  # noqa: E402
-import _f3_v14_parts as F3  # noqa: E402
-import fig5_products as F5  # noqa: E402
+import fig5_products_v15 as G5  # noqa: E402
 import numpy as np, pandas as pd  # noqa: E402
+import matplotlib as mpl  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
-from matplotlib.lines import Line2D  # noqa: E402
+from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm  # noqa: E402
+from matplotlib.patches import Rectangle  # noqa: E402
 
-STEM = "FigS5_yearwise_input"; REGIONS = C.REGIONS; RN = {r: C.REGION[r][0] for r in REGIONS}; MN = C.METHOD_NAME; MC = C.METHOD
+STEM = "FigS5_yearwise"; REGIONS = C.REGIONS; RN = {r: C.REGION[r][0] for r in REGIONS}; MN = C.METHOD_NAME; MC = C.METHOD
+NEG, POS = "#3C78A8", "#B5534A"; CM_DIV = LinearSegmentedColormap.from_list("div15", [NEG, "#FFFFFF", POS]); VMAX = 10.0; MIN_N = 30
+COLS = [("P1", "Stefan\n(recal.)", MC["P1"]), ("R1", "Physics\n+ ML", MC["R1"]), ("wei", "Wei et al.\n2026", C.PRODUCT["wei"][1]), ("liu", "Liu et al.\n2024", C.PRODUCT["liu"][1])]
+
+
+def rmse(e):
+    e = np.asarray(e, float); e = e[np.isfinite(e)]; return float(np.sqrt(np.mean(e ** 2))) if len(e) else np.nan
+
+
+def rows():
+    lab = pd.read_csv(C.ROOT / "data/processed/v5/labels_cell_year_v5.csv"); lab = lab[lab.in_forcing == 1].copy()
+    pr = pd.read_csv(C.ROOT / "data/processed/v5/products_cell_year_v5.csv"); idx = pd.MultiIndex.from_arrays([lab.loc_id, lab.year])
+    for p in ("wei", "liu"):
+        lab[p] = pr[pr["product"] == p].set_index(["loc_id", "year"]).value_cm.reindex(idx).values
+    for m in ("P1", "R1"):
+        lab[m] = G5.oof_all(m).reindex(idx).values
+    return lab[np.isfinite(lab.wei) & np.isfinite(lab.R1) & np.isfinite(lab.P1)].copy()
 
 
 def main():
-    C.setup(); W, H = 180.0, 74.0; fig = C.figure(W, H)
-    t, dl = F3.data_ab()
-    # ---------------- a: forest, rows = regions, series = P1 / R1 / D0
-    ax = C.ax_mm(fig, 24.0, 8.0, 44.0, 36.0); C.clean_axes(ax)
-    for i, r in enumerate(REGIONS): ax.axhline(i, color="#EDEDED", lw=0.4, zorder=0)
-    vals = {}
-    for m, dy, filled in (("P1", -0.25, True), ("R1", 0.0, True), ("D0", 0.25, False)):
-        for i, r in enumerate(REGIONS):
-            z = dl[(dl.region == r) & (dl.method == m)].iloc[0]; c = MC[m]; y = i + dy
-            ax.plot([z.lo, z.hi], [y, y], color=c, lw=C.LW_AUX, zorder=2); ax.plot(z.delta, y, marker=("s" if m == "P1" else "o"), ms=C.MS, mfc=(c if filled else "white"), mec=c, mew=0.7, ls="none", zorder=3)
-            vals[f"{r}_{m}"] = [round(float(z.delta), 2), round(float(z.lo), 2), round(float(z.hi), 2)]
-    ax.axvline(0, color=C.ZERO, lw=C.LW_REF, zorder=1); ax.set_yticks(range(3)); ax.set_yticklabels([RN[r] for r in REGIONS]); ax.set_ylim(2.5, -0.5)
-    ax.set_xlabel("ΔRMSE, year-specific − mean climate input (cm)")
-    hs = [Line2D([], [], ls="none", marker="s", ms=C.MS, color=MC["P1"]), Line2D([], [], ls="none", marker="o", ms=C.MS, color=MC["R1"]), Line2D([], [], ls="none", marker="o", ms=C.MS, mfc="white", mec=MC["D0"], mew=0.7)]
-    fig.legend(hs, [MN["P1"], MN["R1"], MN["D0"]], loc="upper left", bbox_to_anchor=(24.0 / W, 1 - 58.0 / H), ncol=3, fontsize=C.FS_SMALL, frameon=False, handletextpad=0.5, columnspacing=1.4, borderaxespad=0.0)
-    C.letter(fig, 2.0, 3.0, "a")
-    # ---------------- b: year-wise RMSE (fig5_products panel d)
-    yw = pd.read_csv(F5.YW_CSV)
-    xb0, gap_b, xbr = 84.0, 9.0, 2.0; wb = (W - xb0 - 2 * gap_b - xbr) / 3.0; yb, hb, hs_, gs = 8.0, 24.0, 8.0, 1.3
-    axes_d = [C.ax_mm(fig, xb0 + j * (wb + gap_b), yb, wb, hb) for j in range(3)]
-    strips = [C.ax_mm(fig, xb0 + j * (wb + gap_b), yb + hb + gs, wb, hs_) for j in range(3)]
-    src_d = {"b": dict(definition="per observation year: labelled site-years where the physics-residual model, the recalibrated Stefan model and Wei et al. all have values; Liu et al. to 2020", min_cell_years=F5.MIN_N_YEAR, years={})}
-    F5.draw_b(fig, axes_d, strips, yw, src_d)
-    C.letter(fig, xb0 - 12.0, 3.0, "b")
-    key = [Line2D([], [], color=f, ls=ls, lw=lw, marker=mk, ms=ms, mfc=f, mec=("white" if k in ("r1", "p1") else e), mew=0.4) for k, n, f, e, mk, ls, lw, ms in F5.YW_SER]
-    labs = [n for _, n, *_ in F5.YW_SER]
-    key.append(plt.Rectangle((0, 0), 1, 1, facecolor=F5.NBAR, edgecolor="none")); labs.append("Site-years (n)")
-    fig.legend(key, labs, loc="upper left", bbox_to_anchor=(24.0 / W, 1 - 64.0 / H), ncol=5, handlelength=1.8, handletextpad=0.4, columnspacing=1.1, fontsize=C.FS_SMALL, frameon=False, borderaxespad=0.0)
-    rep = C.qa_figure(fig, ignore_ink_for=[], allow_overlap=()); C.print_qa(STEM, rep)
+    C.setup(); d = rows(); tab = {}
+    for r in REGIONS:
+        q = d[d.region == r]; cnt = q.groupby("year").size(); yrs = [int(y) for y in cnt[cnt >= MIN_N].index]
+        rec = []
+        for y in yrs:
+            z = q[q.year == y]; zl = z[np.isfinite(z.liu)]
+            rec.append(dict(year=y, n=int(len(z)), n_liu=int(len(zl)), P1=rmse(z.P1 - z.alt_cm), R1=rmse(z.R1 - z.alt_cm), wei=rmse(z.wei - z.alt_cm), liu=rmse(zl.liu - zl.alt_cm) if len(zl) >= MIN_N else np.nan))
+        tab[r] = pd.DataFrame(rec)
+    nrow = max(len(t) for t in tab.values()); cw, rh = 9.0, 5.6; gap_g = 3.5; x0 = 8.0; y0 = 21.0; xn = 15.5; xc = 17.0
+    W = 180.0; H = y0 + nrow * rh + 14.0; fig = C.figure(W, H); norm = TwoSlopeNorm(vcenter=0, vmin=-VMAX, vmax=VMAX); meta = {}
+    gw = 4 * cw + xc                                                                   # group width: year column + n column + 4 cells
+    for gi, r in enumerate(REGIONS):
+        t = tab[r]; gx = x0 + gi * (gw + gap_g); ax = C.ax_mm(fig, gx, y0, gw, nrow * rh); ax.set_axis_off(); ax.set_xlim(0, gw); ax.set_ylim(nrow * rh, 0)
+        ax.text(xc + 2 * cw, -rh * 2.1, RN[r], ha="center", va="bottom", fontsize=C.FS, color=C.TEXT)
+        ax.text(0.0, -0.25 * rh, "Year", ha="left", va="bottom", fontsize=C.FS_SMALL, color=C.TEXT); ax.text(xn, -0.25 * rh, "n", ha="right", va="bottom", fontsize=C.FS_SMALL, color=C.TEXT)
+        for ci, (k, name, col) in enumerate(COLS):
+            ax.text(xc + (ci + 0.5) * cw, -0.22 * rh, name, ha="center", va="bottom", fontsize=C.FS_SMALL, color=col, linespacing=1.05)
+        for i, z in t.iterrows():
+            ax.text(0.0, (i + 0.5) * rh, str(int(z.year)), ha="left", va="center", fontsize=C.FS_SMALL, color=C.TEXT)
+            ax.text(xn, (i + 0.5) * rh, f"{int(z.n):,}", ha="right", va="center", fontsize=C.FS_SMALL, color=C.TEXT_TICK)
+            for ci, (k, name, col) in enumerate(COLS):
+                v = z[k]; xx = xc + ci * cw
+                if not np.isfinite(v):
+                    ax.text(xx + 0.5 * cw, (i + 0.5) * rh, "–", ha="center", va="center", fontsize=C.FS_SMALL, color=C.AUX); continue
+                dv = v - z.R1; face = "#F4F4F4" if k == "R1" else CM_DIV(norm(dv))
+                ax.add_patch(Rectangle((xx + 0.08, i * rh + 0.08), cw - 0.16, rh - 0.16, facecolor=face, edgecolor="none"))
+                ax.text(xx + 0.5 * cw, (i + 0.5) * rh, f"{v:.1f}", ha="center", va="center", fontsize=C.FS_SMALL, color=("white" if abs(dv) > 7.0 else C.TEXT))
+        meta[r] = t.round(2).to_dict(orient="records")
+    cax = C.ax_mm(fig, 70.0, y0 + nrow * rh + 4.0, 40.0, 1.6); cb = mpl.colorbar.ColorbarBase(cax, cmap=CM_DIV, norm=norm, orientation="horizontal", ticks=[-10, -5, 0, 5, 10], extend="both")
+    cb.outline.set_linewidth(C.LW_AX); cax.tick_params(labelsize=C.FS_TICK, length=1.5, width=0.5, pad=1.0); cax.set_xlabel("RMSE − RMSE of physics + residual ML, same year (cm)", fontsize=C.FS_SMALL, labelpad=1.5)
+    C.letter(fig, 2.0, 2.5, "a"); C.text_mm(fig, 7.0, 2.8, "RMSE (cm) per observation year on the site-years with a Wei et al. value; Liu et al. on its subset (to 2020)", fontsize=C.FS, ha="left", va="top")
+    rep = C.qa_figure(fig, text_ink=False); C.print_qa(STEM, rep)
     paths = C.export_si(fig, STEM); plt.close(fig)
-    C.update_si_json("S5", dict(figure="Supplementary Fig. S5", script="scripts/4_visualization/paper_v15/si_s05_yearwise_input.py",
-                                a=dict(definition="block RMSE(year-specific input to the observation day) - RMSE(2011-2024 mean input), 95 % paired block-bootstrap interval; core_v6/deltas_forcing.csv", values=vals),
-                                b=src_d["b"], outputs=C.file_info(paths), canvas_mm=[W, H], qa=rep))
+    C.update_si_json("S5", dict(figure="Supplementary Fig. S5", script="scripts/4_visualization/paper_v15/si_s05_yearwise_input.py", version="v15.2 (2026-10-22) heat table",
+                                definition=f"per observation year with >= {MIN_N} site-years: RMSE of recalibrated Stefan and physics-residual (spatial-block out-of-fold, seed mean, year-specific input), "
+                                           "Wei et al. 2026 and Liu et al. 2024 (product value of the year) on the site-years with a Wei value; Liu on the subset with a Liu value; colour = RMSE - RMSE(physics-residual)",
+                                values=meta, outputs=C.file_info(paths), canvas_mm=[W, round(H, 1)], qa=rep))
     for p in paths: print(p, p.stat().st_size)
 
 
