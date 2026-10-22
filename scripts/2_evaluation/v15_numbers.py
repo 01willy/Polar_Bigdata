@@ -28,7 +28,7 @@ if f7p.exists():
     import numpy as _np
     ser = (f7.get("d") or {}).get("series", {})                        # v13.2: d = regional mean anomaly series, three regions
     for reg, rk in (("Alaska", "Ak"), ("Lena", "Le"), ("Canada", "Ca")):
-        if reg in ser:
+        if reg in ser and "observed" in ser[reg]:                      # v15.1 (2026-10-22): Fig 7d is the TDD scatter; the observed-cell series macros are no longer produced
             pr, ob = ser[reg]["predicted"], ser[reg]["observed"]; yrs = sorted(set(pr) & set(ob))
             out.append(r"\providecommand{\nanobsn%s}{}\renewcommand{\nanobsn%s}{%d}" % (rk, rk, len(yrs)))
             if len(yrs) >= 2:
@@ -106,7 +106,7 @@ if f6p.exists():
 # ---- Fig. 7 d (v13.2): Lena Delta observed-anomaly agreement without 2020 (replaces the v11 values computed from the full-season maps)
 if f7p.exists():
     ser = (f7.get("d") or {}).get("series", {})
-    if "Lena" in ser:
+    if "Lena" in ser and "observed" in ser["Lena"]:
         pr, ob = ser["Lena"]["predicted"], ser["Lena"]["observed"]; yrs = sorted(set(pr) & set(ob)); keep = [y for y in yrs if y != "2020"]
         if len(keep) >= 2:
             pv = _np.array([pr[y] for y in keep]); ov = _np.array([ob[y]["mean"] for y in keep])

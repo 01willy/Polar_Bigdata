@@ -12,7 +12,7 @@
 \title{Supplementary Information for: Active-layer thickness prediction and regional differences across permafrost regions using a physics-residual machine-learning workflow}
 \author[1]{\fnm{Seungwon} \sur{Baek}}
 \affil[1]{\orgname{Seoul National University}, \orgaddress{\city{Seoul}, \country{Republic of Korea}}}
-\abstract{This file contains Supplementary Methods S1--S4, Supplementary Tables S1--S8 and Supplementary Figures S1--S10. Every number is generated from the stored result tables; the years used in each analysis are listed in Supplementary Table S2.}
+\abstract{This file contains Supplementary Methods S1--S4, Supplementary Tables S1--S8 and Supplementary Figures S1--S11. Every number is generated from the stored result tables; the years used in each analysis are listed in Supplementary Table S2.}
 \maketitle
 
 \section{Supplementary Methods}
@@ -141,6 +141,7 @@ gxnyhb & 96-core CPU & product-anchored residual test, SHAP \\
 \sifig{FigS8_map_detail}{\textbf{Detail of the 1 km maps and area of applicability.} (a--d) Mean ALT of 2011--2024 drawn as 1 km cells over hillshade in four windows: North Slope near Toolik (a) and Interior near Fairbanks (b) in Alaska (50 km), Samoylov and Kurungnakh in the Lena Delta (c, 24 km) and the Mackenzie Delta near Inuvik in Canada (d, 50 km); one colour range for the four windows. (e--g) Area of applicability of the Alaska, Lena Delta and Canada (NW) maps with the windows of a--d.}{fig:s8}
 \sifig{FigS9_correction_maps}{\textbf{Residual correction of the Stefan model.} Physics-residual minus recalibrated Stefan prediction per 1 km cell for the mean of the yearly maps of 2011--2024 in (a) Alaska, (b) the Lena Delta and (c) Canada (NW); negative values indicate that the residual learner lowers the Stefan estimate. The 1 km values are interpolated to 250 m (Lena Delta) or 500 m (Alaska, Canada) for display.}{fig:s9}
 \sifig{FigS10_site_series}{\textbf{Yearly series at long-record cells.} Observed ALT and spatial-block out-of-fold predictions (from a separate three-seed block cross-validation fit) for 2010--2024 at the label site with the most observed years in (a) Alaska and (b) the Lena Delta: the physics-residual model at the observation day and with the TDD to 1 September (as the yearly maps), the recalibrated Stefan model with the TDD to 1 September, and the values of Wei et al. and Liu et al. for each year where available.}{fig:s10}
+\sifig{FigS11_obs_pred_density}{\textbf{Observed against predicted ALT under spatial-block cross-validation.} All site-years of each region for the recalibrated Stefan model, the physics-residual model and direct ML (rows, regions; columns, methods); colour marks the density of site-years and the line is 1:1; RMSE and Pearson $r$ are printed. The recalibrated Stefan model predicts a narrow range of values because one coefficient cannot separate the sites of a region; the learned models spread the predictions along the 1:1 line.}{fig:s11}
 
 \bibliography{references}
 \end{document}

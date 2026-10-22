@@ -54,11 +54,13 @@ for lang, RN_, MN_ in (("en", REN, MEN), ("ko", RKO, MKO)):
             "ko": r"지역 & 프로그램 & 규약 & $n$ & 평균 ALT (cm) & Stefan(재보정) & 물리 잔차 ML & 직접 ML \\"}[lang]
     (SH / f"table_s8_source_{lang}.tex").write_text("\\begin{tabular}{@{}lllrrlll@{}}\n\\toprule\n" + head + "\n\\midrule\n" + "\n".join(lines) + "\n\\bottomrule\n\\end{tabular}\n")
 # TDD-anomaly agreement of the yearly maps
-f7 = json.loads((ROOT / "outputs/figures/paper/v14/source_data/Fig7_tdd_anomaly_by_year.json").read_text())
+# v15.1 (2026-10-22): read from the Fig 7 source data (panel d: regional TDD anomaly x map anomaly, computed over the mapped cells of each year)
+f7d = json.loads((ROOT / "outputs/figures/paper/v15/source_data/Fig7_maps.json").read_text())["d"]["series"]
 for r, k in RK.items():
-    t = pd.DataFrame(f7[r]); m(f"tddanom{k}", f"{np.corrcoef(t.tdd_anom, t.r1_anom)[0, 1]:.2f}")
-    m(f"tddmax{k}", str(int(t.loc[t.tdd.idxmax(), 'year']))); m(f"tddmin{k}", str(int(t.loc[t.tdd.idxmin(), 'year'])))
-    m(f"tddrange{k}", f"{int(round(t.tdd.min())):,}--{int(round(t.tdd.max())):,}")
+    z = f7d[r]; yrs = sorted(z["tdd_anom"]); ta = np.array([z["tdd_anom"][y] for y in yrs]); ma = np.array([z["map_anom"][y] for y in yrs]); tdd = z["mean_tdd_degd"] + ta
+    m(f"tddanom{k}", f"{np.corrcoef(ta, ma)[0, 1]:.2f}")
+    m(f"tddmax{k}", yrs[int(np.argmax(ta))]); m(f"tddmin{k}", yrs[int(np.argmin(ta))])
+    m(f"tddrange{k}", f"{int(round(tdd.min())):,}--{int(round(tdd.max())):,}")
 
 # derived macros used by the abstract: |region hold-out delta of the physics-residual model| and the gain from 25 target labels (Lena Delta)
 # (dref*regRoabs are defined in numbers_v6.tex)
