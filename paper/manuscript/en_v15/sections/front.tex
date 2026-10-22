@@ -1,7 +1,7 @@
 % front.tex (v11): title, authors, abstract, keywords (block 1); Data availability (block 3); back matter (block 4).
 \providecommand{\frontblock}{0}
 \ifnum\frontblock=1
-\title[Physics-residual learning of year-specific active-layer thickness]{Active-layer thickness prediction and regional differences across permafrost regions using a physics-residual machine-learning workflow}
+\title[Physics-residual learning of year-specific active-layer thickness]{Active-layer thickness prediction and\\ regional differences across permafrost regions\\ using a physics-residual machine-learning workflow}
 
 \author[1]{\fnm{Seungwon} \sur{Baek}}
 \author[2]{\fnm{Seung Hee} \sur{Kim}}
@@ -10,7 +10,7 @@
 \affil*[1]{\orgdiv{Department of Energy Systems Engineering}, \orgname{Seoul National University}, \orgaddress{\city{Seoul}, \postcode{08826}, \country{Republic of Korea}}}
 \affil[2]{\orgdiv{Center of Remote Sensing and GIS}, \orgname{Korea Polar Research Institute}, \orgaddress{\city{Incheon}, \postcode{21990}, \country{Republic of Korea}}}
 
-\abstract{Active-layer thickness (ALT) observations are sparse and clustered, and the models that map them trade off: a Stefan model transfers to unobserved regions but represents the soil by one coefficient, whereas machine learning (ML) and ML-based products lose accuracy away from their training sites. We compared a physics-residual workflow, in which gradient boosting learns the residual of a recalibrated Stefan model from climate, terrain and soil, with the Stefan model, direct ML and five products on \nncyAll{} site-year observations from Alaska, the Lena Delta and Canada, with the climate of each year. Under spatial-block validation it reduced the Stefan error by \ndrefLeblkRoabs{} cm in the Lena Delta and \ndrefCablkRoabs{} cm in Canada. With a region withheld, direct ML exceeded the Stefan error by \ndrefLeregDzabs{} cm in the Lena Delta, whereas the physics-residual model stayed within \ndrefLeregRoabs{} cm and gained \ntlgainLeRstwfive{} cm from 25 local labels; with few labels it also beat direct ML. On the same site-years it was closer to the observations than the ML products, especially in the Lena Delta. The year-labelled 1 km maps carry an area of applicability and prediction intervals, and sparsely observed regions gain a physically anchored start that improves as local labels arrive.}
+\abstract{Active-layer thickness (ALT) observations are sparse and clustered. A Stefan model applies to unobserved regions but uses one soil coefficient, whereas machine learning (ML) and ML-based products lose accuracy away from their training sites. We compared a physics-residual workflow, in which gradient boosting learns the residual of a locally recalibrated Stefan model from climate, terrain and soil inputs, against the Stefan model, ML trained on the inputs alone (direct ML) and five products, on \nncyAll{} site-year observations from Alaska, the Lena Delta and north-western Canada, each with the climate of its year. Under spatial-block validation it reduced the Stefan error by \ndrefLeblkRoabs{} cm in the Lena Delta and \ndrefCablkRoabs{} cm in Canada. With a region withheld, direct ML exceeded the Stefan error by \ndrefLeregDzabs{} cm in the Lena Delta, whereas the physics-residual model stayed within \ndrefLeregRoabs{} cm and gained \ntlgainLeRstwfive{} cm from 25 local labels, with which it also outperformed direct ML. On the same site-years it matched the ML products in Alaska and Canada and surpassed them in the Lena Delta. The yearly 1 km maps carry an area of applicability and prediction intervals, and sparsely observed regions gain a Stefan-based map that improves with representative local labels.}
 
 \keywords{permafrost, active-layer thickness, Stefan model, physics-guided machine learning, spatial cross-validation, spatial transferability}
 \fi
@@ -28,7 +28,7 @@ All input data are publicly available. ALT observations: ABoVE soil moisture and
 S.B. designed the study, compiled the data, performed the analyses and wrote the manuscript. S.H.K. and Y.T.J. contributed to the interpretation of the remote-sensing covariates and the permafrost field data and revised the manuscript. Y.C. supervised the study and revised the manuscript. All authors approved the final manuscript.
 
 \bmhead{Additional information}
-\textbf{Supplementary information} accompanies this paper (Supplementary Methods S1--S4, Supplementary Tables S1--S8 and Supplementary Figures S1--S11).
+\textbf{Supplementary information} accompanies this paper (Supplementary Methods S1--S5, Supplementary Tables S1--S7 and Supplementary Figures S1--S11).
 
 \textbf{Competing interests} The authors declare no competing interests.
 \fi

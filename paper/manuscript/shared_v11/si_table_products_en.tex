@@ -1,0 +1,37 @@
+% si_table_products_en.tex: scripts/2_evaluation/v10_si_tables.py 가 만든다 (보충 표 S6).
+\begin{table}[htbp]
+\caption{Comparison with the products on the common site-years, that is, the site-years for which Wei et al., Liu et al. and ESA CCI v4 all provide a value of the observation year (2010--2020; each site-year is scored with the product value and the out-of-fold prediction of its own year). All = all common site-years; $>$25 km = site-years in cells more than 25 km from the training sites of Wei et al. RMSE and mean bias (prediction minus observation) in cm. Our models are spatial-block out-of-fold predictions.}\label{tab:s6}
+\scriptsize
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Series & RMSE, all & RMSE, $>$25 km & Bias, all \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Alaska} ($n$ = 14,326 / 4,229)} \\
+Physics + residual ML & 17.1 & 15.3 & −2.9 \\
+Stefan, recalibrated & 17.4 & 15.3 & −2.1 \\
+Wei et al. 2026 & 17.9 & 20.8 & +3.9 \\
+Liu et al. 2024 & 18.8 & 15.2 & +5.7 \\
+ESA CCI v4 & 27.1 & 20.1 & −2.8 \\
+ESA CCI v5 & 67.6 & 118.5 & +30.5 \\
+Aalto et al. 2018 & 46.2 & 63.5 & −7.5 \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Lena Delta} ($n$ = 461 / 449)} \\
+Physics + residual ML & 21.1 & 21.2 & +2.8 \\
+Stefan, recalibrated & 25.5 & 25.6 & +5.7 \\
+Wei et al. 2026 & 34.6 & 34.8 & +21.9 \\
+Liu et al. 2024 & 33.0 & 33.2 & +19.8 \\
+ESA CCI v4 & 31.0 & 30.9 & −4.7 \\
+ESA CCI v5 & 28.4 & 28.4 & +1.3 \\
+Aalto et al. 2018 & 30.6 & 30.8 & +16.7 \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{Canada (NW)} ($n$ = 532 / 489)} \\
+Physics + residual ML & 25.8 & 23.6 & +3.4 \\
+Stefan, recalibrated & 29.6 & 27.4 & +6.1 \\
+Wei et al. 2026 & 27.0 & 27.4 & +10.6 \\
+Liu et al. 2024 & 27.9 & 28.8 & +16.3 \\
+ESA CCI v4 & 33.5 & 27.9 & −7.2 \\
+ESA CCI v5 & 76.0 & 74.3 & +42.8 \\
+Aalto et al. 2018 & 56.5 & 55.7 & +3.9 \\
+\bottomrule
+\end{tabular}
+\end{table}

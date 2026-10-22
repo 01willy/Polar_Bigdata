@@ -31,7 +31,7 @@
 \input{../shared_v15/numbers_v15_cellyear}\input{../shared_v15/numbers_v15_extra}
 \newcommand{\figdirv}{../../../outputs/figures/paper/v15/}
 % \paperfig{file stem}{width (fraction of \textwidth)}{caption}{label}
-\newcommand{\paperfig}[4]{\begin{figure}[!htbp]\centering\IfFileExists{\figdirv#1.pdf}{\includegraphics[width=#2\textwidth]{\figdirv#1.pdf}}{\fbox{\parbox[c][45mm][c]{0.9\textwidth}{\centering \detokenize{#1} in preparation}}}\caption{#3}\label{#4}\end{figure}}
+\newcommand{\paperfig}[4]{\begin{figure}[tbp]\centering\IfFileExists{\figdirv#1.pdf}{\includegraphics[width=#2\textwidth,height=0.84\textheight,keepaspectratio]{\figdirv#1.pdf}}{\fbox{\parbox[c][45mm][c]{0.9\textwidth}{\centering \detokenize{#1} in preparation}}}\caption{#3}\label{#4}\end{figure}}
 \begin{document}
 \def\frontblock{1}\input{sections/front}
 \maketitle

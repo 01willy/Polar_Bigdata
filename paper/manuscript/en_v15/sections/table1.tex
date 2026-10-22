@@ -1,8 +1,8 @@
 % table1.tex (v15): Table 1, labels by region and the inputs and products with domain, resolution, period and years used. Numbers from macros.
-\begin{table}[!htbp]
-\caption{Data and years used. Top: ALT labels by region (site-years of 2010--2024 with year-specific climate input; a site is an observation location with coordinates rounded to 0.0001$^\circ$, and the 1 km cells are the map cells that contain the sites; blocks are the 0.5$^\circ$ cells used for spatial cross-validation and bootstrap; there are no Canadian labels in 2020). Bottom: inputs and products, with their spatial domain, resolution, the period available and the years used in this study.}\label{tab:data}
+\begin{table}[tbp]
+\caption{Data and years used. Top: ALT labels by region (site-years of 2010--2024 with year-specific climate input; a site is an observation location with coordinates rounded to 0.0001$^\circ$, and the 1 km cells are the map cells that contain the sites; blocks are the 0.5$^\circ$ cells used for spatial cross-validation and bootstrap; there are no Canadian labels in 2020). Bottom: inputs and products, with their spatial domain, resolution (ERA5-Land 0.1$^\circ$ is about 9 km; Aalto et al. 30$''$ about 1 km), the period available and the years used in this study.}\label{tab:data}
 \scriptsize
-\setlength{\tabcolsep}{4pt}
+\setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lrrrrlrl@{}}
 \toprule
 Region & Site-years & Sites & 1 km cells & Blocks & Years & Sites $\geq$4 yr & Largest year \\
@@ -14,21 +14,21 @@ Canada (NW) & \nncyCa{} & \nncellCa{} & \nnkmcellCa{} & \nnblkCa{} & 2010--2024 
 \end{tabular}
 
 \vspace{6pt}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.09\textwidth}>{\raggedright\arraybackslash}p{0.17\textwidth}>{\raggedright\arraybackslash}p{0.15\textwidth}@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.21\textwidth}>{\raggedright\arraybackslash}p{0.10\textwidth}>{\raggedright\arraybackslash}p{0.11\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.16\textwidth}@{}}
 \toprule
 Data & Domain & Resolution & Available & Used & Role \\
 \midrule
-ERA5-Land monthly\cite{munozsabater2021_era5_land} & global & 0.1$^\circ$ (about 9 km) & 1950-- & 2010--2024; mean 2011--2024 & Climate input \\
+ERA5-Land monthly\cite{munozsabater2021_era5_land} & global & 0.1$^\circ$ & 1950-- & 2010--2024 (mean 2011--2024 in Fig.~3a) & Climate input \\
 Copernicus DEM\cite{CopDEM2021} & global & 30 m & static & -- & Terrain \\
 SoilGrids 2.0\cite{Poggio2021} & global & 250 m & static & -- & Soil \\
-MODIS MOD13Q1, MOD10A2\cite{Didan2021,HallRiggs2021} & global & 250 m, 500 m & 2000-- & 2010--2024 & Sensitivity test \\
-ESA CCI permafrost probability\cite{Westermann2024} & Northern Hemisphere & 1 km & 1997--2021 & mean 1997--2021 & Map domain (probability $\geq$ 50\%) \\
-Wei et al.\cite{Wei2026} & Northern Hemisphere & 1 km & yearly 2000--2024 & \nyrsprodWei & Comparison \\
-Liu et al.\cite{Liu2024} & Northern Hemisphere & 1 km & yearly 2003--2020 & \nyrsprodLiu & Comparison \\
-ESA CCI ALT v4\cite{Westermann2024} & Northern Hemisphere & 1 km & yearly 1997--2021 & \nyrsprodCcifour & Comparison \\
-ESA CCI ALT v5\cite{Westermann2025} & Northern Hemisphere & 1 km & yearly 1997--2023 & \nyrsprodCcifive & Comparison \\
-Aalto et al.\cite{Aalto2018} & circum-Arctic & 30$''$ (about 1 km) & mean 2000--2014 & one value per cell & Comparison \\
-Yi and Kimball\cite{YiKimball2019} & Alaska (ABoVE domain) & 1 km & yearly 2001--2015 & \nyrsprodYk & Reference, not scored \\
+MODIS MOD13Q1, MOD10A2\cite{Didan2021,HallRiggs2021} & global & 250, 500 m & 2000-- & 2010--2024 & Sensitivity \\
+ESA CCI permafrost probability\cite{Westermann2024} & N. Hemisphere & 1 km & 1997--2021 & mean 1997--2021 & Map domain ($\geq$ 50\%) \\
+Wei et al.\cite{Wei2026} & N. Hemisphere & 1 km & yearly 2000--2024 & \nyrsprodWei & Comparison \\
+Liu et al.\cite{Liu2024} & N. Hemisphere & 1 km & yearly 2003--2020 & \nyrsprodLiu & Comparison \\
+ESA CCI ALT v4\cite{Westermann2024} & N. Hemisphere & 1 km & yearly 1997--2021 & \nyrsprodCcifour & Comparison \\
+ESA CCI ALT v5\cite{Westermann2025} & N. Hemisphere & 1 km & yearly 1997--2023 & \nyrsprodCcifive & Comparison \\
+Aalto et al.\cite{Aalto2018} & circum-Arctic & 30$''$ & mean 2000--2014 & one value per cell & Comparison \\
+Yi and Kimball\cite{YiKimball2019} & Alaska & 1 km & yearly 2001--2015 & \nyrsprodYk & Reference, not scored \\
 \bottomrule
 \end{tabular}
 \end{table}

@@ -63,7 +63,7 @@ def s5(lang):
            "training sites of Wei et al. RMSE and mean bias (prediction minus observation) in cm. Our models are spatial-block out-of-fold predictions." if lang == "en" else
            "공통 지점-연도(Wei 등, Liu 등, ESA CCI v4 모두 관측 연도 값을 제공하는 지점-연도, 2010--2020년; 각 지점-연도는 그 해의 제품 값과 겹 밖 예측으로 채점)에서의 제품 비교. 전체 = 모든 공통 지점-연도, 25 km 밖 = Wei 등 학습 지점에서 25 km 넘게 떨어진 셀의 지점-연도. 우리 모델은 공간 블록 겹 밖 예측이다. RMSE · 편향(예측 − 관측) 단위 cm.")
     hdr = ("Series", "RMSE, all", "RMSE, $>$25 km", "Bias, all") if lang == "en" else ("계열", "RMSE 전체", "RMSE 25 km 밖", "편향 전체")
-    out = [r"\begin{table}[htbp]", r"\caption{" + cap + r"}\label{tab:s5}", r"\scriptsize", r"\begin{tabular}{@{}lrrr@{}}", r"\toprule", " & ".join(hdr) + r" \\"]
+    out = [r"\begin{table}[htbp]", r"\caption{" + cap + r"}\label{tab:s6}", r"\scriptsize", r"\begin{tabular}{@{}lrrr@{}}", r"\toprule", " & ".join(hdr) + r" \\"]
     for rk, ren, rko in REG:
         a0 = c[(c.region == rk) & (c.mask_km == 0)]; b0 = c[(c.region == rk) & (c.mask_km == 25)]
         nn = (f"$n$ = {int(a0.n.max()):,} / {int(b0.n.max()):,}" if len(a0) and len(b0) else "")
@@ -77,5 +77,6 @@ def s5(lang):
 
 
 for lang in ("en", "ko"):
-    (OUT / f"si_tables_{lang}.tex").write_text("% si_tables_" + lang + ".tex: scripts/2_evaluation/v10_si_tables.py 가 만든다.\n" + s4(lang) + "\n\n" + s5(lang) + "\n", encoding="utf-8")
+    (OUT / f"si_table_designs_{lang}.tex").write_text("% si_table_designs_" + lang + ".tex: scripts/2_evaluation/v10_si_tables.py 가 만든다 (보충 표 S4).\n" + s4(lang) + "\n", encoding="utf-8")
+    (OUT / f"si_table_products_{lang}.tex").write_text("% si_table_products_" + lang + ".tex: scripts/2_evaluation/v10_si_tables.py 가 만든다 (보충 표 S6).\n" + s5(lang) + "\n", encoding="utf-8")
     print("written", lang)

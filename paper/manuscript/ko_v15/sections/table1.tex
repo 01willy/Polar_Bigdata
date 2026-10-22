@@ -1,8 +1,8 @@
 % table1.tex (국문 v15): 표 1. 지역별 라벨과 입력 · 제품의 영역 · 해상도 · 기간 · 사용 연도. 수치는 매크로.
-\begin{table}[!htbp]
-\caption{자료와 사용 연도. 위: 지역별 ALT 라벨(관측 연도 기후 입력이 있는 2010--2024년 지점-연도; 지점은 좌표를 0.0001$^\circ$ 로 반올림한 관측 위치이고 1 km 셀은 지점을 포함하는 지도 셀이다; 블록은 공간 교차검증과 부트스트랩에 쓴 0.5$^\circ$ 셀이며, 2020년에는 캐나다 라벨이 없다). 아래: 입력과 제품의 공간 영역, 해상도, 제공 기간, 이 연구에서 쓴 연도.}\label{tab:data}
+\begin{table}[tbp]
+\caption{자료와 사용 연도. 위: 지역별 ALT 라벨(관측 연도 기후 입력이 있는 2010--2024년 지점-연도; 지점은 좌표를 0.0001$^\circ$ 로 반올림한 관측 위치이고 1 km 셀은 지점을 포함하는 지도 셀이다; 블록은 공간 교차검증과 부트스트랩에 쓴 0.5$^\circ$ 셀이며, 2020년에는 캐나다 라벨이 없다). 아래: 입력과 제품의 공간 영역, 해상도, 제공 기간, 이 연구에서 쓴 연도(ERA5-Land 0.1$^\circ$ 는 약 9 km, Aalto 등 30$''$ 는 약 1 km).}\label{tab:data}
 \scriptsize
-\setlength{\tabcolsep}{4pt}
+\setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lrrrrlrl@{}}
 \toprule
 지역 & 지점-연도 & 지점 & 1 km 셀 & 블록 & 연도 & 4개 해 이상 지점 & 최다 연도 \\
@@ -14,21 +14,21 @@
 \end{tabular}
 
 \vspace{6pt}
-\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.12\textwidth}>{\raggedright\arraybackslash}p{0.10\textwidth}>{\raggedright\arraybackslash}p{0.16\textwidth}>{\raggedright\arraybackslash}p{0.15\textwidth}@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.21\textwidth}>{\raggedright\arraybackslash}p{0.10\textwidth}>{\raggedright\arraybackslash}p{0.11\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.16\textwidth}@{}}
 \toprule
 자료 & 영역 & 해상도 & 제공 기간 & 사용 & 역할 \\
 \midrule
-ERA5-Land 월별\cite{munozsabater2021_era5_land} & 전 지구 & 0.1$^\circ$(약 9 km) & 1950-- & 2010--2024; 평균 2011--2024 & 기후 입력 \\
+ERA5-Land 월별\cite{munozsabater2021_era5_land} & 전 지구 & 0.1$^\circ$ & 1950-- & 2010--2024(그림~3a 에서 2011--2024년 평균) & 기후 입력 \\
 Copernicus DEM\cite{CopDEM2021} & 전 지구 & 30 m & 정적 & -- & 지형 \\
 SoilGrids 2.0\cite{Poggio2021} & 전 지구 & 250 m & 정적 & -- & 토양 \\
-MODIS MOD13Q1, MOD10A2\cite{Didan2021,HallRiggs2021} & 전 지구 & 250 m, 500 m & 2000-- & 2010--2024 & 민감도 시험 \\
-ESA CCI 영구동토 확률\cite{Westermann2024} & 북반구 & 1 km & 1997--2021 & 1997--2021 평균 & 지도 영역(확률 $\geq$ 50\%) \\
+MODIS MOD13Q1, MOD10A2\cite{Didan2021,HallRiggs2021} & 전 지구 & 250, 500 m & 2000-- & 2010--2024 & 민감도 시험 \\
+ESA CCI 영구동토 확률\cite{Westermann2024} & 북반구 & 1 km & 1997--2021 & 1997--2021 평균 & 지도 영역($\geq$ 50\%) \\
 Wei 등\cite{Wei2026} & 북반구 & 1 km & 연도별 2000--2024 & \nyrsprodWei & 비교 \\
 Liu 등\cite{Liu2024} & 북반구 & 1 km & 연도별 2003--2020 & \nyrsprodLiu & 비교 \\
 ESA CCI ALT v4\cite{Westermann2024} & 북반구 & 1 km & 연도별 1997--2021 & \nyrsprodCcifour & 비교 \\
 ESA CCI ALT v5\cite{Westermann2025} & 북반구 & 1 km & 연도별 1997--2023 & \nyrsprodCcifive & 비교 \\
-Aalto 등\cite{Aalto2018} & 환북극 & 30$''$(약 1 km) & 2000--2014 평균 & 셀당 값 하나 & 비교 \\
-Yi와 Kimball\cite{YiKimball2019} & 알래스카(ABoVE 영역) & 1 km & 연도별 2001--2015 & \nyrsprodYk & 참고, 미채점 \\
+Aalto 등\cite{Aalto2018} & 환북극 & 30$''$ & 2000--2014 평균 & 셀당 값 하나 & 비교 \\
+Yi와 Kimball\cite{YiKimball2019} & 알래스카 & 1 km & 연도별 2001--2015 & \nyrsprodYk & 참고, 미채점 \\
 \bottomrule
 \end{tabular}
 \end{table}
