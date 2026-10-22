@@ -231,3 +231,11 @@
 7. **본문**: 결과 1절 제목 '기후 입력, 검증 설계, 지역 안과 밖의 대비', 그림 3 · 4 · 7 캡션 교체, 본문 4,485단어 · 초록 200단어, 빌드 영문 26쪽 · 국문 22쪽 · 보충 22쪽 오류 0.
 8. **4차 제안 15안**(`proposals_v15_2a.py` · `_2b.py`): P1_1–3, P2_1–3, P3_1–3, P45_1–3, P67_1–3, 모두 QA 통과. 3차 안(P3_G · P7_E · P1_B)은 반려로 기록.
 9. **저자**: 극지연 소속 'Center of Remote Sensing and GIS, Korea Polar Research Institute, Incheon 21990', 교신 yc.cho@snu.ac.kr, 서울대 우편번호 08826 (front.tex 영 · 국).
+
+## 17. v15.2 (2026-10-22 저녁): 보충 자료 재구성, 초록 · 서론 수정, 질문 답변 문서
+
+1. **보충 그림**: S4 지역 안 사다리만(두 학습기 + 띠), S5 연도 × 방법 RMSE 열지도표(`si_s05_yearwise_input.py`, 스템 FigS5_yearwise), S8 그림 7 색 범위 고정, S9 ±10 cm · 전폭, S10 세 지역 · 관측 선 · 따뜻한/추운 해 음영. 제품 표기 'Wei et al. 2026' 등으로 통일(c13_common · si13_common PRODUCT).
+2. **보충 표**: 실행 표 삭제 → 계산 환경(방법 S5); S4(설계 × 방법) 관측 연도 입력만 · 물리 잔차 먼저 · 읽는 법; S5 직접 ML 행 제거; S6 열 순서 · 정의; 표 S2 압축. 생성기 `v10_si_tables.py`(출력 shared_v11), `v15_cellyear_rescore.py`.
+3. **배치**: [htbp], 그림당 clearpage 제거, 참고문헌 앞 clearpage. 보충 15쪽(영 · 국).
+4. **본문**: 초록 200단어(완화 · 기대효과 문장), 핵심어, 서론 3문장; 보충 표 번호 재배정(S5→S4 … S8→S7), 보충 방법 S5 인용. 본문 4,491단어.
+5. **문서**: `paper/manuscript/qa_notes/qa_notes_ko.{tex,pdf}`(Q1–Q12 · 결과 표 · 평가), 점검표 30항.

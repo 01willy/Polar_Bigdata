@@ -10,6 +10,7 @@
 | 실험 · 세션 기록 | `docs/EXPERIMENT_LOG.md` |
 | GPT 인계 보고 | `gpt/handoff/INDEX.md`(최신이 위) |
 | 원고 규정 점검표 | `paper/manuscript/en_v15/COMPLIANCE_v15.md` |
+| 연구 질문 · 답변 · 방향 정리 | `paper/manuscript/qa_notes/qa_notes_ko.pdf`(소스 `qa_notes_ko.tex`, `build.sh`), 납품 `deliverables/paper/연구_질문_답변_정리.pdf` |
 | 그림 설계 대안 | 4차 `docs/FIGURE_PROPOSALS_v15_2_2026-10-22.md`(3차 `..._v15_2026-10-21.md`, 2차 `..._v14_1_2026-10-21.md`, 1차 `..._v14_2026-10-20.md`), 조사 `docs/research/2026-10-21/`, 렌더 `deliverables/figure_proposals/` |
 | 검토 57항 처리 점검표 | `docs/REVIEW_RESPONSE_v15_2026-10-21.md` |
 

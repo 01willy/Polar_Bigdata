@@ -23,6 +23,7 @@ EN=paper/manuscript/en_$VER; KO=paper/manuscript/ko_$VER; FIG=outputs/figures/pa
 if [ "$NOBUILD" != "--no-build" ]; then VER=$VER bash tools/build_submission_png.sh en ko > logs/fig_$VER/submission_png.log 2>&1 || echo "[sync] compressed copy failed (see logs/fig_$VER/submission_png.log)"; fi
 cp_if "$EN/main.pdf" "$D/paper/manuscript_en.pdf"; cp_if "$EN/main_submission.pdf" "$D/paper/manuscript_en_submission_compressed.pdf"; cp_if "$EN/si.pdf" "$D/paper/supplementary_en.pdf"
 cp_if "$KO/main.pdf" "$D/paper/원고_국문.pdf"; cp_if "$KO/main_submission.pdf" "$D/paper/원고_국문_압축본.pdf"; cp_if "$KO/si.pdf" "$D/paper/보충자료_국문.pdf"
+cp_if "paper/manuscript/qa_notes/qa_notes_ko.pdf" "$D/paper/연구_질문_답변_정리.pdf"   # v15.2: Q&A and direction notes (Korean)
 cp_if "$EN/COMPLIANCE_$VER.md" "$D/paper/COMPLIANCE.md"
 rm -rf "$D/paper/figures_main"/* "$D/paper/figures_supplementary"/* "$D/paper/source_data"/* "$D/paper/tables"/*
 for f in "$FIG"/Fig*_*.pdf "$FIG"/Fig*_*.png; do [ -f "$f" ] && cp -p "$f" "$D/paper/figures_main/"; done
@@ -39,7 +40,7 @@ rm -rf "$D/figure_proposals"/*; for f in outputs/figures/paper/v14_proposals/*.p
 
 # ---- deck (latest render) and reports
 rm -rf "$D/deck"/*; latest=$(ls -t deck/render/*.pdf 2>/dev/null | head -1); [ -n "$latest" ] && cp -p "$latest" "$D/deck/" && { pp="${latest%.pdf}.pptx"; [ -f "$pp" ] && cp -p "$pp" "$D/deck/"; }
-rm -rf "$D/reports"/*; for f in docs/AUDIT_*2026-10-2*.md docs/REVIEW_RESPONSE_*.md docs/research/2026-10-21/*.md docs/RESET_2026-10-10_KOPRI_FEEDBACK.md SESSION_HANDOFF.md docs/EXPERIMENT_LOG.md; do [ -f "$f" ] && cp -p "$f" "$D/reports/"; done
+rm -rf "$D/reports"/*; for f in docs/AUDIT_*2026-10-2*.md docs/REVIEW_RESPONSE_*.md docs/research/2026-10-21/*.md docs/research/2026-10-22/*.md docs/RESET_2026-10-10_KOPRI_FEEDBACK.md SESSION_HANDOFF.md docs/EXPERIMENT_LOG.md; do [ -f "$f" ] && cp -p "$f" "$D/reports/"; done
 lh=$(ls -t gpt/handoff/2*.md 2>/dev/null | head -1); [ -n "$lh" ] && cp -p "$lh" "$D/reports/HANDOFF_latest_$(basename "$lh")"
 
 # ---- references
