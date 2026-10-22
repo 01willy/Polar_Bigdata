@@ -1,0 +1,69 @@
+{
+ "Stefan term": {
+  "median": 62.6,
+  "p5": 44.42,
+  "p95": 78.11,
+  "n_cells": 858517
+ },
+ "Learned residual, weight 0.5": {
+  "median": -1.73,
+  "p5": -8.08,
+  "p95": 3.95,
+  "n_cells": 858517
+ },
+ "ALT map 2014": {
+  "median": 60.52,
+  "p5": 44.48,
+  "p95": 74.23,
+  "n_cells": 858517
+ },
+ "proposal": "P2_1",
+ "message": "One line explains the model: physics term plus a learned, spatially structured correction",
+ "canvas_mm": [
+  180.0,
+  84.8
+ ],
+ "inputs": "data/processed/v5/maps/Alaska/pred_2014.csv.gz (p1, r1); residual = r1 - p1",
+ "outputs": {
+  "P2_1_equation_strip.pdf": {
+   "path": "outputs/figures/paper/v15_proposals/P2_1_equation_strip.pdf",
+   "bytes": 2536475
+  },
+  "P2_1_equation_strip.svg": {
+   "path": "outputs/figures/paper/v15_proposals/P2_1_equation_strip.svg",
+   "bytes": 3932206
+  },
+  "P2_1_equation_strip.png": {
+   "path": "outputs/figures/paper/v15_proposals/P2_1_equation_strip.png",
+   "bytes": 2701007
+  }
+ },
+ "pdf_page_mm": [
+  180.0,
+  84.8
+ ],
+ "pdf_fonts": [
+  "BICWAS+FreeSans",
+  "FITYBK+FreeSansBold"
+ ],
+ "qa": {
+  "n_texts": 29,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0,
+   14.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ }
+}

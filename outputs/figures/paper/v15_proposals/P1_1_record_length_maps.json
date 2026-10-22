@@ -1,0 +1,72 @@
+{
+ "classes": {
+  "Alaska": {
+   "1 year": 12617,
+   "2–4 years": 455,
+   "5 years or more": 181
+  },
+  "Lena": {
+   "1 year": 2070,
+   "2–4 years": 111,
+   "5 years or more": 25
+  },
+  "Canada": {
+   "1 year": 495,
+   "2–4 years": 228,
+   "5 years or more": 7
+  }
+ },
+ "sites": {
+  "Alaska": 13253,
+  "Lena": 2206,
+  "Canada": 730
+ },
+ "proposal": "P1_1",
+ "message": "Repeat observations exist at few sites; most sites were measured once",
+ "canvas_mm": [
+  180.0,
+  65.2
+ ],
+ "inputs": "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1); number of distinct years per loc_id",
+ "outputs": {
+  "P1_1_record_length_maps.pdf": {
+   "path": "outputs/figures/paper/v15_proposals/P1_1_record_length_maps.pdf",
+   "bytes": 461092
+  },
+  "P1_1_record_length_maps.svg": {
+   "path": "outputs/figures/paper/v15_proposals/P1_1_record_length_maps.svg",
+   "bytes": 3070477
+  },
+  "P1_1_record_length_maps.png": {
+   "path": "outputs/figures/paper/v15_proposals/P1_1_record_length_maps.png",
+   "bytes": 972176
+  }
+ },
+ "pdf_page_mm": [
+  180.0,
+  65.2
+ ],
+ "pdf_fonts": [
+  "BICWAS+FreeSans",
+  "FITYBK+FreeSansBold"
+ ],
+ "qa": {
+  "n_texts": 27,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ }
+}

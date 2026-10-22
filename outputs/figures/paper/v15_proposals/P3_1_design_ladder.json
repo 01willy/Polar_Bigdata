@@ -1,0 +1,112 @@
+{
+ "Alaska_P1": [
+  18.22,
+  18.58,
+  18.72,
+  18.8,
+  19.36
+ ],
+ "Alaska_R1": [
+  14.0,
+  18.42,
+  17.26,
+  18.46,
+  17.55
+ ],
+ "Alaska_D0": [
+  11.84,
+  17.29,
+  14.85,
+  17.51,
+  20.56
+ ],
+ "Lena_P1": [
+  20.55,
+  21.04,
+  21.23,
+  21.55,
+  21.46
+ ],
+ "Lena_R1": [
+  14.78,
+  17.44,
+  20.1,
+  20.66,
+  23.46
+ ],
+ "Lena_D0": [
+  12.3,
+  15.88,
+  20.19,
+  20.61,
+  39.27
+ ],
+ "Canada_P1": [
+  26.98,
+  30.63,
+  28.11,
+  31.11,
+  27.75
+ ],
+ "Canada_R1": [
+  19.54,
+  26.89,
+  24.27,
+  27.99,
+  24.25
+ ],
+ "Canada_D0": [
+  16.19,
+  26.06,
+  24.64,
+  28.11,
+  23.9
+ ],
+ "proposal": "P3_1",
+ "message": "Random splits flatter the learners; the ranking changes with the design, the physics term degrades least",
+ "canvas_mm": [
+  180.0,
+  64.0
+ ],
+ "outputs": {
+  "P3_1_design_ladder.pdf": {
+   "path": "outputs/figures/paper/v15_proposals/P3_1_design_ladder.pdf",
+   "bytes": 18575
+  },
+  "P3_1_design_ladder.svg": {
+   "path": "outputs/figures/paper/v15_proposals/P3_1_design_ladder.svg",
+   "bytes": 28225
+  },
+  "P3_1_design_ladder.png": {
+   "path": "outputs/figures/paper/v15_proposals/P3_1_design_ladder.png",
+   "bytes": 297465
+  }
+ },
+ "pdf_page_mm": [
+  180.0,
+  64.0
+ ],
+ "pdf_fonts": [
+  "BICWAS+FreeSans",
+  "FITYBK+FreeSansBold"
+ ],
+ "qa": {
+  "n_texts": 34,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ }
+}

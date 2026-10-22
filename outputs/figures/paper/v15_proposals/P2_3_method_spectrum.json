@@ -1,0 +1,87 @@
+{
+ "P0": {
+  "rmse_block": 21.46,
+  "rmse_region": 21.46,
+  "n": 2436
+ },
+ "P1": {
+  "rmse_block": 21.04,
+  "rmse_region": 21.46,
+  "n": 2436
+ },
+ "R1": {
+  "rmse_block": 17.44,
+  "rmse_region": 23.46,
+  "n": 2436
+ },
+ "D0": {
+  "rmse_block": 15.88,
+  "rmse_region": 39.27,
+  "n": 2436
+ },
+ "proposal": "P2_3",
+ "message": "The methods form a spectrum; the physics term is what survives the region hold-out",
+ "canvas_mm": [
+  180.0,
+  70.0
+ ],
+ "outputs": {
+  "P2_3_method_spectrum.pdf": {
+   "path": "outputs/figures/paper/v15_proposals/P2_3_method_spectrum.pdf",
+   "bytes": 187099
+  },
+  "P2_3_method_spectrum.svg": {
+   "path": "outputs/figures/paper/v15_proposals/P2_3_method_spectrum.svg",
+   "bytes": 352282
+  },
+  "P2_3_method_spectrum.png": {
+   "path": "outputs/figures/paper/v15_proposals/P2_3_method_spectrum.png",
+   "bytes": 646592
+  }
+ },
+ "pdf_page_mm": [
+  180.0,
+  70.0
+ ],
+ "pdf_fonts": [
+  "BICWAS+FreeSans",
+  "FITYBK+FreeSansBold"
+ ],
+ "qa": {
+  "n_texts": 59,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0,
+   9.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [
+   [
+    "Stefan, source coefficient",
+    "#8c8c8c"
+   ],
+   [
+    "Stefan, recalibrated",
+    "#1a7ab3"
+   ],
+   [
+    "Physics + residual ML",
+    "#c9671d"
+   ],
+   [
+    "Direct ML",
+    "#7f4f9f"
+   ]
+  ],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": false
+ }
+}

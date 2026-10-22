@@ -1,0 +1,98 @@
+{
+ "Alaska_wei": {
+  "year": 2013,
+  "mean": -8.15,
+  "p10": -25.4,
+  "p90": 12.0,
+  "within10": 0.613,
+  "pixels": 859556
+ },
+ "Lena_wei": {
+  "year": 2016,
+  "mean": -17.91,
+  "p10": -26.4,
+  "p90": -9.0,
+  "within10": 0.133,
+  "pixels": 35153
+ },
+ "Canada_wei": {
+  "year": 2013,
+  "mean": -27.2,
+  "p10": -82.2,
+  "p90": 2.8,
+  "within10": 0.345,
+  "pixels": 1085252
+ },
+ "Alaska_liu": {
+  "year": 2013,
+  "mean": -21.25,
+  "p10": -85.9,
+  "p90": 8.7,
+  "within10": 0.57,
+  "pixels": 851620
+ },
+ "Lena_liu": {
+  "year": 2016,
+  "mean": -19.18,
+  "p10": -30.9,
+  "p90": -5.4,
+  "within10": 0.201,
+  "pixels": 34679
+ },
+ "Canada_liu": {
+  "year": 2013,
+  "mean": -33.96,
+  "p10": -126.9,
+  "p90": 3.6,
+  "within10": 0.464,
+  "pixels": 1059662
+ },
+ "proposal": "P67_3",
+ "message": "Where the products are deeper than our map and by how much: the Lena Delta products are 15-30 cm deeper almost everywhere",
+ "canvas_mm": [
+  180.0,
+  132.9
+ ],
+ "definition": "pixel-level difference at the Fig 6 year of each region; products masked to the drawn cells of our map",
+ "outputs": {
+  "P67_3_map_minus_product.pdf": {
+   "path": "outputs/figures/paper/v15_proposals/P67_3_map_minus_product.pdf",
+   "bytes": 5462442
+  },
+  "P67_3_map_minus_product.svg": {
+   "path": "outputs/figures/paper/v15_proposals/P67_3_map_minus_product.svg",
+   "bytes": 8670459
+  },
+  "P67_3_map_minus_product.png": {
+   "path": "outputs/figures/paper/v15_proposals/P67_3_map_minus_product.png",
+   "bytes": 6385552
+  }
+ },
+ "pdf_page_mm": [
+  180.0,
+  132.9
+ ],
+ "pdf_fonts": [
+  "BICWAS+FreeSans",
+  "FITYBK+FreeSansBold"
+ ],
+ "qa": {
+  "n_texts": 37,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ }
+}

@@ -1,0 +1,83 @@
+{
+ "Alaska": {
+  "cells": 316,
+  "site_years": 14326,
+  "share_closer_wei": 0.516,
+  "share_closer_liu": 0.5,
+  "mean_abs_err": {
+   "ours": 12.93,
+   "wei": 13.11,
+   "liu": 13.98
+  }
+ },
+ "Lena": {
+  "cells": 39,
+  "site_years": 461,
+  "share_closer_wei": 0.821,
+  "share_closer_liu": 0.846,
+  "mean_abs_err": {
+   "ours": 11.52,
+   "wei": 28.21,
+   "liu": 26.15
+  }
+ },
+ "Canada": {
+  "cells": 45,
+  "site_years": 532,
+  "share_closer_wei": 0.533,
+  "share_closer_liu": 0.422,
+  "mean_abs_err": {
+   "ours": 20.17,
+   "wei": 21.03,
+   "liu": 23.1
+  }
+ },
+ "proposal": "P45_2",
+ "message": "Cell by cell, our map is closer to the observation than the products in most of the Lena Delta and Canada and in about half of Alaska",
+ "canvas_mm": [
+  180.0,
+  100.7
+ ],
+ "definition": "common site-years (Wei, Liu, CCI v4 and our block-CV prediction present), averaged per 1 km cell",
+ "outputs": {
+  "P45_2_site_difference_maps.pdf": {
+   "path": "outputs/figures/paper/v15_proposals/P45_2_site_difference_maps.pdf",
+   "bytes": 298052
+  },
+  "P45_2_site_difference_maps.svg": {
+   "path": "outputs/figures/paper/v15_proposals/P45_2_site_difference_maps.svg",
+   "bytes": 908476
+  },
+  "P45_2_site_difference_maps.png": {
+   "path": "outputs/figures/paper/v15_proposals/P45_2_site_difference_maps.png",
+   "bytes": 1082134
+  }
+ },
+ "pdf_page_mm": [
+  180.0,
+  100.7
+ ],
+ "pdf_fonts": [
+  "BICWAS+FreeSans",
+  "FITYBK+FreeSansBold"
+ ],
+ "qa": {
+  "n_texts": 46,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ }
+}

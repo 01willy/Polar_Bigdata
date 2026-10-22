@@ -1,0 +1,71 @@
+{
+ "Alaska": {
+  "blocks": 73,
+  "blocks_gain": 49,
+  "blocks_loss": 24,
+  "median_delta": -0.6,
+  "site_year_weighted_delta": -0.2
+ },
+ "Lena": {
+  "blocks": 16,
+  "blocks_gain": 12,
+  "blocks_loss": 4,
+  "median_delta": -0.74,
+  "site_year_weighted_delta": -2.29
+ },
+ "Canada": {
+  "blocks": 26,
+  "blocks_gain": 21,
+  "blocks_loss": 5,
+  "median_delta": -2.13,
+  "site_year_weighted_delta": -3.38
+ },
+ "proposal": "P3_2",
+ "message": "The gain is spatially structured: most blocks improve in the Lena Delta and Canada, Alaska is mixed",
+ "canvas_mm": [
+  180.0,
+  71.7
+ ],
+ "definition": "per 0.5 degree block (block CV fold assignment), RMSE over its site-years, seed-mean out-of-fold predictions",
+ "outputs": {
+  "P3_2_block_gain_maps.pdf": {
+   "path": "outputs/figures/paper/v15_proposals/P3_2_block_gain_maps.pdf",
+   "bytes": 290536
+  },
+  "P3_2_block_gain_maps.svg": {
+   "path": "outputs/figures/paper/v15_proposals/P3_2_block_gain_maps.svg",
+   "bytes": 856729
+  },
+  "P3_2_block_gain_maps.png": {
+   "path": "outputs/figures/paper/v15_proposals/P3_2_block_gain_maps.png",
+   "bytes": 956927
+  }
+ },
+ "pdf_page_mm": [
+  180.0,
+  71.7
+ ],
+ "pdf_fonts": [
+  "BICWAS+FreeSans",
+  "FITYBK+FreeSansBold"
+ ],
+ "qa": {
+  "n_texts": 30,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ }
+}

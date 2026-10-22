@@ -1,0 +1,199 @@
+{
+ "Alaska": {
+  "bands": [
+   61.0,
+   62.0,
+   63.0,
+   64.0,
+   65.0,
+   66.0,
+   67.0,
+   68.0,
+   69.0,
+   70.0,
+   71.0
+  ],
+  "n": [
+   3227,
+   38,
+   73,
+   1414,
+   442,
+   20,
+   143,
+   2041,
+   2118,
+   474,
+   4336
+  ],
+  "alt_cm": [
+   66.1,
+   59.3,
+   52.0,
+   70.0,
+   54.4,
+   45.5,
+   40.0,
+   46.8,
+   45.2,
+   53.2,
+   38.9
+  ],
+  "R1": [
+   61.9,
+   64.9,
+   61.9,
+   77.5,
+   60.0,
+   70.8,
+   52.7,
+   48.4,
+   51.4,
+   48.3,
+   25.4
+  ],
+  "wei": [
+   79.8,
+   51.5,
+   63.6,
+   62.6,
+   58.1,
+   49.9,
+   62.2,
+   55.9,
+   49.4,
+   55.8,
+   39.4
+  ],
+  "liu": [
+   64.9,
+   61.7,
+   53.6,
+   66.1,
+   62.1,
+   55.8,
+   67.8,
+   49.7,
+   51.4,
+   52.3,
+   65.5
+  ]
+ },
+ "Lena": {
+  "bands": [
+   71.5,
+   72.25,
+   72.5
+  ],
+  "n": [
+   12,
+   136,
+   311
+  ],
+  "alt_cm": [
+   48.0,
+   27.0,
+   29.0
+  ],
+  "R1": [
+   40.3,
+   40.1,
+   33.0
+  ],
+  "wei": [
+   51.3,
+   69.3,
+   53.4
+  ],
+  "liu": [
+   59.2,
+   63.5,
+   49.0
+  ]
+ },
+ "Canada": {
+  "bands": [
+   60.0,
+   61.0,
+   62.0,
+   67.0
+  ],
+  "n": [
+   21,
+   84,
+   107,
+   299
+  ],
+  "alt_cm": [
+   100.0,
+   83.3,
+   64.5,
+   48.0
+  ],
+  "R1": [
+   74.1,
+   74.3,
+   60.0,
+   64.8
+  ],
+  "wei": [
+   101.6,
+   65.4,
+   88.9,
+   74.0
+  ],
+  "liu": [
+   96.0,
+   89.4,
+   71.0,
+   74.3
+  ]
+ },
+ "proposal": "P67_2",
+ "message": "Along latitude the observations and our map move together; the products stay flat or offset",
+ "canvas_mm": [
+  180.0,
+  66.0
+ ],
+ "outputs": {
+  "P67_2_latitude_profiles.pdf": {
+   "path": "outputs/figures/paper/v15_proposals/P67_2_latitude_profiles.pdf",
+   "bytes": 20995
+  },
+  "P67_2_latitude_profiles.svg": {
+   "path": "outputs/figures/paper/v15_proposals/P67_2_latitude_profiles.svg",
+   "bytes": 42581
+  },
+  "P67_2_latitude_profiles.png": {
+   "path": "outputs/figures/paper/v15_proposals/P67_2_latitude_profiles.png",
+   "bytes": 496940
+  }
+ },
+ "pdf_page_mm": [
+  180.0,
+  66.0
+ ],
+ "pdf_fonts": [
+  "BICWAS+FreeSans",
+  "FITYBK+FreeSansBold"
+ ],
+ "qa": {
+  "n_texts": 64,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ }
+}

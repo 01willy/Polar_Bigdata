@@ -1,0 +1,94 @@
+{
+ "Alaska": {
+  "site_years": 13954,
+  "map_cells": 858517,
+  "tdd_cells_p1_p99": [
+   513.0,
+   1890.0
+  ],
+  "tdd_sites_p1_p99": [
+   250.0,
+   1895.0
+  ],
+  "elev_sites_p99": 906.0,
+  "elev_cells_p99": 1792.0,
+  "share_sites_inside_cell_range": 0.634
+ },
+ "Lena": {
+  "site_years": 2043,
+  "map_cells": 38086,
+  "tdd_cells_p1_p99": [
+   551.0,
+   872.0
+  ],
+  "tdd_sites_p1_p99": [
+   506.0,
+   1038.0
+  ],
+  "elev_sites_p99": 46.0,
+  "elev_cells_p99": 386.0,
+  "share_sites_inside_cell_range": 0.793
+ },
+ "Canada": {
+  "site_years": 1180,
+  "map_cells": 1151169,
+  "tdd_cells_p1_p99": [
+   650.0,
+   1867.0
+  ],
+  "tdd_sites_p1_p99": [
+   1050.0,
+   2254.0
+  ],
+  "elev_sites_p99": 301.0,
+  "elev_cells_p99": 1912.0,
+  "share_sites_inside_cell_range": 0.801
+ },
+ "proposal": "P1_3",
+ "message": "The observation network covers the climate range of the maps but not the high terrain; basis of the area of applicability",
+ "canvas_mm": [
+  180.0,
+  69.0
+ ],
+ "outputs": {
+  "P1_3_climate_space.pdf": {
+   "path": "outputs/figures/paper/v15_proposals/P1_3_climate_space.pdf",
+   "bytes": 127365
+  },
+  "P1_3_climate_space.svg": {
+   "path": "outputs/figures/paper/v15_proposals/P1_3_climate_space.svg",
+   "bytes": 210966
+  },
+  "P1_3_climate_space.png": {
+   "path": "outputs/figures/paper/v15_proposals/P1_3_climate_space.png",
+   "bytes": 369204
+  }
+ },
+ "pdf_page_mm": [
+  180.0,
+  69.0
+ ],
+ "pdf_fonts": [
+  "BICWAS+FreeSans",
+  "FITYBK+FreeSansBold"
+ ],
+ "qa": {
+  "n_texts": 46,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ }
+}

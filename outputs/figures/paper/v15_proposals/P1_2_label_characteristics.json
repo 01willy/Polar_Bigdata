@@ -1,0 +1,133 @@
+{
+ "a": {
+  "Alaska_ABoVE_ds2369": {
+   "n": 14929,
+   "median": 50.0,
+   "q10": 31.6,
+   "q90": 76.5
+  },
+  "Alaska_CALM": {
+   "n": 611,
+   "median": 53.0,
+   "q10": 38.0,
+   "q90": 75.0
+  },
+  "Lena_ALLENA_PANGAEA_973813": {
+   "n": 2436,
+   "median": 37.0,
+   "q10": 23.0,
+   "q90": 63.0
+  },
+  "Canada_ABoVE_ds2369": {
+   "n": 1131,
+   "median": 55.0,
+   "q10": 33.2,
+   "q90": 107.0
+  },
+  "Canada_CALM": {
+   "n": 65,
+   "median": 83.0,
+   "q10": 46.8,
+   "q90": 144.6
+  }
+ },
+ "b": {
+  "Alaska": {
+   "n": 14929,
+   "median_doy": 224.0,
+   "q10": 223.0,
+   "q90": 254.0
+  },
+  "Lena": {
+   "n": 2436,
+   "median_doy": 234.0,
+   "q10": 226.0,
+   "q90": 248.5
+  },
+  "Canada": {
+   "n": 1131,
+   "median_doy": 237.0,
+   "q10": 224.0,
+   "q90": 254.0
+  }
+ },
+ "c": {
+  "Alaska_ABoVE_ds2369": {
+   "mean_error": -3.53,
+   "lo": -8.99,
+   "hi": 2.71,
+   "n": 14929
+  },
+  "Alaska_CALM": {
+   "mean_error": 0.13,
+   "lo": -8.44,
+   "hi": 6.09,
+   "n": 611
+  },
+  "Lena_ALLENA_PANGAEA_973813": {
+   "mean_error": 0.52,
+   "lo": -7.6,
+   "hi": 2.86,
+   "n": 2436
+  },
+  "Canada_ABoVE_ds2369": {
+   "mean_error": 3.84,
+   "lo": -14.26,
+   "hi": 13.61,
+   "n": 1131
+  },
+  "Canada_CALM": {
+   "mean_error": -22.99,
+   "lo": -46.73,
+   "hi": -0.33,
+   "n": 65
+  }
+ },
+ "proposal": "P1_2",
+ "message": "Labels differ by source in level and timing; the residual by source is the label-bias check",
+ "canvas_mm": [
+  180.0,
+  62.0
+ ],
+ "outputs": {
+  "P1_2_label_characteristics.pdf": {
+   "path": "outputs/figures/paper/v15_proposals/P1_2_label_characteristics.pdf",
+   "bytes": 26345
+  },
+  "P1_2_label_characteristics.svg": {
+   "path": "outputs/figures/paper/v15_proposals/P1_2_label_characteristics.svg",
+   "bytes": 55339
+  },
+  "P1_2_label_characteristics.png": {
+   "path": "outputs/figures/paper/v15_proposals/P1_2_label_characteristics.png",
+   "bytes": 389647
+  }
+ },
+ "pdf_page_mm": [
+  180.0,
+  62.0
+ ],
+ "pdf_fonts": [
+  "BICWAS+FreeSans",
+  "FITYBK+FreeSansBold"
+ ],
+ "qa": {
+  "n_texts": 56,
+  "min_font_pt": 6.5,
+  "font_sizes_pt": [
+   6.5,
+   7.0,
+   8.0
+  ],
+  "fonts": [
+   "FreeSans"
+  ],
+  "small": [],
+  "color": [],
+  "font": [],
+  "outside": [],
+  "overlaps": [],
+  "text_ink": [],
+  "ok": true
+ }
+}
