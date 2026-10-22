@@ -34,7 +34,7 @@ for _p in (ROOT / "src", ROOT / "scripts" / "4_visualization", ROOT / "scripts" 
         sys.path.insert(0, str(_p))
 import polar.style_v5 as S  # noqa: E402
 
-if S.PALETTE != "paper13":
+if S.PALETTE not in ("paper13", "paper15"):
     raise RuntimeError("run with POLAR_PALETTE=paper13 (style_v5 palette is %r)" % S.PALETTE)
 
 OUT_MAIN = ROOT / "outputs" / "figures" / "paper" / "v15"
@@ -46,7 +46,7 @@ MM = 1.0 / 25.4
 PT_MM = 25.4 / 72.0                       # mm per pt
 
 # ------------------------------------------------------------------ palette (tokens color.paper_v13)
-PP = S.C["paper_v13"]
+PP = S.C["paper_v15"]
 METHOD = dict(PP["methods"])
 METHOD_NAME = {"R1": "Physics + residual ML", "P1": "Stefan (recalibrated)", "P0": "Stefan (source coeff.)", "D0": "Direct ML",
                "F1": "Physics-input ML", "D1": "Physics pseudo-labels"}

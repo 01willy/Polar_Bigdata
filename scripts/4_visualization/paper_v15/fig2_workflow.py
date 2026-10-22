@@ -52,7 +52,7 @@ import numpy as np
 import pandas as pd
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "src"))
-if os.environ.get("POLAR_PALETTE") != "paper13":
+if os.environ.get("POLAR_PALETTE") not in ("paper13", "paper15"):
     raise SystemExit("run with POLAR_PALETTE=paper13 (v11 paper palette in polar.style_v5)")
 import polar.style_v5 as S  # noqa: E402
 import polar.testbed_v5 as TB  # noqa: E402
@@ -728,13 +728,13 @@ def row_c(fig, ax, y0, dr, F, check, A):
             xk = x + tw_mm(ax, "Fold", FS_T) + 1.6
             for k in range(5):
                 ax.add_patch(Circle((xk, yk1), 0.6, facecolor=FOLD_HEX[k], edgecolor="none", zorder=5))
-                T(ax, xk + 1.0, yk1, str(k + 1), ha="left", color=AUX); xk += 1.0 + tw_mm(ax, str(k + 1), FS_T) + 1.9
+                T(ax, xk + 1.0, yk1, str(k + 1), ha="left", color=AUX); xk += 1.0 + tw_mm(ax, str(k + 1), FS_T) + 1.3
         if s == "year":
             cax = fig.add_axes(rect(x + 6.0, yk1 - 0.55, mw - 12.0, 1.1))
             cb = fig.colorbar(ScalarMappable(norm=nYR, cmap=CM_YEAR), cax=cax, orientation="horizontal", ticks=[])
             cb.outline.set_linewidth(0.4); cb.outline.set_edgecolor(FRAME)
             T(ax, x + 5.2, yk1, str(min(y_scored)), ha="right", color=AUX); T(ax, x + mw - 5.2, yk1, str(max(y_scored)), ha="left", color=AUX)
-            T(ax, x + mw / 2, yk2, "Dot = year, grey = not scored", ha="center", color=AUX)
+            T(ax, x + mw / 2, yk2, "Dot = year", ha="center", color=AUX); T(ax, x + mw / 2, yk2 + 2.8, "Grey = not scored", ha="center", color=AUX)
         if s == "block_year":
             T(ax, x + mw / 2, yk1, "Box = block fold", ha="center", color=AUX)
             T(ax, x + mw / 2, yk2, "Dot = year", ha="center", color=AUX)

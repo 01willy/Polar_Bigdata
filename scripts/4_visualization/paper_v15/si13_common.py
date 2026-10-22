@@ -14,7 +14,7 @@ import os
 import sys
 from pathlib import Path
 
-if os.environ.get("POLAR_PALETTE") != "paper13":
+if os.environ.get("POLAR_PALETTE") not in ("paper13", "paper15"):
     raise SystemExit("run with POLAR_PALETTE=paper13 (v11 paper palette in polar.style_v5)")
 os.environ.setdefault("CUDA_VISIBLE_DEVICES", "")
 import numpy as np  # noqa: E402

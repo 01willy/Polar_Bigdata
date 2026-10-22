@@ -1340,11 +1340,11 @@
   "outputs": {
    "FigS5_yearwise_input.pdf": {
     "path": "outputs/figures/paper/v15_si/FigS5_yearwise_input.pdf",
-    "bytes": 24445
+    "bytes": 24438
    },
    "FigS5_yearwise_input.png": {
     "path": "outputs/figures/paper/v15_si/FigS5_yearwise_input.png",
-    "bytes": 297579
+    "bytes": 297482
    }
   },
   "canvas_mm": [
@@ -1393,11 +1393,11 @@
    "a": {
     "n_wei_sites": 195,
     "colours": {
-     "wei_sites": "#3e7b55",
+     "wei_sites": "#4b725d",
      "regions": {
-      "Alaska": "#3B3B8F",
-      "Lena Delta": "#4A90C2",
-      "Canada (NW)": "#3A9384"
+      "Alaska": "#3F4A7A",
+      "Lena Delta": "#5F8FB0",
+      "Canada (NW)": "#5B8C7E"
      }
     }
    },
@@ -1478,11 +1478,11 @@
   "outputs": {
    "FigS6_training_sites.pdf": {
     "path": "outputs/figures/paper/v15_si/FigS6_training_sites.pdf",
-    "bytes": 781199
+    "bytes": 781202
    },
    "FigS6_training_sites.png": {
     "path": "outputs/figures/paper/v15_si/FigS6_training_sites.png",
-    "bytes": 806772
+    "bytes": 806806
    }
   },
   "size_mm": [
@@ -1575,7 +1575,7 @@
    "Canada": "n = 1,191"
   },
   "colours": {
-   "wei_rows": "#4E9A6A",
+   "wei_rows": "#5E8F74",
    "stefan": "#1A7AB3",
    "physics_residual_ml": "#C9671D"
   },
@@ -1583,11 +1583,11 @@
   "outputs": {
    "FigS7_product_anchor.pdf": {
     "path": "outputs/figures/paper/v15_si/FigS7_product_anchor.pdf",
-    "bytes": 12875
+    "bytes": 12876
    },
    "FigS7_product_anchor.png": {
     "path": "outputs/figures/paper/v15_si/FigS7_product_anchor.png",
-    "bytes": 125869
+    "bytes": 125857
    }
   },
   "size_mm": [
@@ -1971,11 +1971,11 @@
   "outputs": {
    "FigS10_site_series.pdf": {
     "path": "outputs/figures/paper/v15_si/FigS10_site_series.pdf",
-    "bytes": 17608
+    "bytes": 17615
    },
    "FigS10_site_series.png": {
     "path": "outputs/figures/paper/v15_si/FigS10_site_series.png",
-    "bytes": 372146
+    "bytes": 372502
    }
   },
   "size_mm": [
@@ -1993,6 +1993,114 @@
     6.5,
     7.0,
     8.0
+   ],
+   "fonts": [
+    "FreeSans"
+   ],
+   "small": [],
+   "color": [],
+   "font": [],
+   "outside": [],
+   "overlaps": [],
+   "text_ink": [],
+   "ok": true
+  }
+ },
+ "S11": {
+  "figure": "Supplementary Fig. S11",
+  "script": "scripts/4_visualization/paper_v15/fig3_accuracy.py",
+  "version": "v15 (2026-10-21)",
+  "inputs": {
+   "predictions": "data/processed/v5/runs/core_v6/preds/<Region>__block__year_obs__F8TS__{P1,R1,D0}*.csv.gz (seed mean)",
+   "labels": "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1)",
+   "deltas": "data/processed/v5/runs/core_v6/deltas_vs_ref.csv (ref P1, forcing year_obs, F8TS)"
+  },
+  "a": {
+   "definition": "observed vs block-CV out-of-fold prediction on all site-years; hexagonal bins with log density (n >= 2000) or points; 1:1 line; RMSE and Pearson r",
+   "values": {
+    "Alaska_P1": {
+     "n": 15540,
+     "rmse": 18.58,
+     "r": 0.595,
+     "axis_top": 120.0
+    },
+    "Alaska_R1": {
+     "n": 15540,
+     "rmse": 18.42,
+     "r": 0.587,
+     "axis_top": 120.0
+    },
+    "Alaska_D0": {
+     "n": 15540,
+     "rmse": 17.29,
+     "r": 0.562,
+     "axis_top": 120.0
+    },
+    "Lena_P1": {
+     "n": 2436,
+     "rmse": 21.04,
+     "r": 0.33,
+     "axis_top": 120.0
+    },
+    "Lena_R1": {
+     "n": 2436,
+     "rmse": 17.44,
+     "r": 0.667,
+     "axis_top": 120.0
+    },
+    "Lena_D0": {
+     "n": 2436,
+     "rmse": 15.88,
+     "r": 0.697,
+     "axis_top": 120.0
+    },
+    "Canada_P1": {
+     "n": 1196,
+     "rmse": 30.63,
+     "r": 0.144,
+     "axis_top": 160.0
+    },
+    "Canada_R1": {
+     "n": 1196,
+     "rmse": 26.89,
+     "r": 0.55,
+     "axis_top": 160.0
+    },
+    "Canada_D0": {
+     "n": 1196,
+     "rmse": 26.06,
+     "r": 0.585,
+     "axis_top": 160.0
+    }
+   }
+  },
+  "outputs": {
+   "FigS11_obs_pred_density.pdf": {
+    "path": "outputs/figures/paper/v15_si/FigS11_obs_pred_density.pdf",
+    "bytes": 60135
+   },
+   "FigS11_obs_pred_density.png": {
+    "path": "outputs/figures/paper/v15_si/FigS11_obs_pred_density.png",
+    "bytes": 967848
+   }
+  },
+  "canvas_mm": [
+   136.0,
+   138.0
+  ],
+  "pdf_page_mm": [
+   136.0,
+   138.0
+  ],
+  "pdf_fonts": [
+   "BICWAS+FreeSans"
+  ],
+  "qa": {
+   "n_texts": 91,
+   "min_font_pt": 6.5,
+   "font_sizes_pt": [
+    6.5,
+    7.0
    ],
    "fonts": [
     "FreeSans"

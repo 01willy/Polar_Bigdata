@@ -442,24 +442,24 @@
  "outputs": {
   "Fig5_products.pdf": {
    "path": "outputs/figures/paper/v15/Fig5_products.pdf",
-   "bytes": 114202
+   "bytes": 114038
   },
   "Fig5_products.svg": {
    "path": "outputs/figures/paper/v15/Fig5_products.svg",
-   "bytes": 927238
+   "bytes": 929428
   },
   "Fig5_products.png": {
    "path": "outputs/figures/paper/v15/Fig5_products.png",
-   "bytes": 1520828
+   "bytes": 1504448
   }
  },
  "canvas_mm": [
   180.0,
-  239.0
+  238.0
  ],
  "pdf_page_mm": [
   180.0,
-  239.0
+  238.0
  ],
  "pdf_fonts": [
   "BICWAS+FreeSans",
@@ -483,7 +483,15 @@
   "overlaps": [
    [
     "Stefan (recal.)",
-    "Physics + res. ML"
+    "Physics + ML"
+   ],
+   [
+    "Physics + ML",
+    "Wei 2026"
+   ],
+   [
+    "Wei 2026",
+    "Liu 2024"
    ],
    [
     "Liu 2024",
@@ -491,7 +499,15 @@
    ],
    [
     "Stefan (recal.)",
-    "Physics + res. ML"
+    "Physics + ML"
+   ],
+   [
+    "Physics + ML",
+    "Wei 2026"
+   ],
+   [
+    "Wei 2026",
+    "Liu 2024"
    ],
    [
     "Liu 2024",
@@ -499,7 +515,15 @@
    ],
    [
     "Stefan (recal.)",
-    "Physics + res. ML"
+    "Physics + ML"
+   ],
+   [
+    "Physics + ML",
+    "Wei 2026"
+   ],
+   [
+    "Wei 2026",
+    "Liu 2024"
    ],
    [
     "Liu 2024",

@@ -231,11 +231,13 @@ def draw_scatter(fig, ax, Dk, bottom):
     loc = mticker.MultipleLocator(40.0 if top > 100 else 20.0); ax.xaxis.set_major_locator(loc); ax.yaxis.set_major_locator(mticker.MultipleLocator(40.0 if top > 100 else 20.0))
     ax.set_ylabel("Predicted ALT (cm)")
     ax.set_xlabel(f"Observed ALT (cm), n = {e['n_common']}", labelpad=1.5)
-    ts = e["training_sites"]; two = ts["rmse_common_gt25km_cm"] is not None and ts["n_common_gt25km"] >= 3 and ts["n_common_within_25km"] >= 3
+    ts = e["training_sites"]; two = ts["rmse_common_gt25km_cm"] is not None and ts["n_common_gt25km"] >= 3
     # statistics table below the panel (in the band that holds the colour bar of the maps): header + one line per series, nothing inside the axes
     head = f"RMSE (cm), all | >{FAR_KM:.0f} km" if two else "RMSE (cm)"
     vals = [(f"{e['rmse'][m]:.1f} | {ts['rmse_common_gt25km_cm'][m]:.1f}" if two else f"{e['rmse'][m]:.1f}", name, col) for m, name, col in SERIES]
     Dk["stats_lines"] = [(head, C.TEXT)] + [(f"{name}: {v}", col) for v, name, col in vals]
+    if two and ts["n_common_within_25km"] == 0:
+        Dk["stats_lines"].append(("(all cells are beyond 25 km)", C.AUX))
     Dk["stats_corner"] = "below"; Dk["stats_marker_hits"] = 0
     return top
 
@@ -252,7 +254,7 @@ def main():
     wm = (W - xm0 - 2 * gm - ml_s - ws - mr) / 3.0
     xs = W - mr - ws
     y_head = 7.4                               # top band: letters and column titles 6.9 mm above the maps
-    band = 18.5                                # band under each row: colour bar (maps) and the statistics table (scatter)
+    band = 21.0                                # band under each row: colour bar (maps) and the statistics table (scatter, up to 5 lines)
     gap_row = 4.6                              # letters of the next row
     ys, hs = [], []
     y = y_head
@@ -282,9 +284,9 @@ def main():
         top = draw_scatter(fig, axs, Dk, bottom=(i == len(keys) - 1))
         for q_, (txt, col) in enumerate(Dk["stats_lines"]):                     # statistics under the x-axis label, left aligned with the panel
             C.text_mm(fig, xs, y0 + hrow + 7.6 + q_ * 2.5, txt, fontsize=C.FS_SMALL, ha="left", va="top", color=col)
-        C.letter(fig, xs - ml_s + 0.2, y0 - (6.9 if i == 0 else 4.4), lt[3])
+        C.letter(fig, xs - 3.6, y0 - (6.9 if i == 0 else 4.4), lt[3])
         if i == 0:
-            C.text_mm(fig, xs - ml_s + 3.5, y0 - 6.75, "Observed vs predicted", fontsize=C.FS, ha="left", va="top")
+            C.text_mm(fig, xs - 0.2, y0 - 6.75, "Observed vs predicted", fontsize=C.FS, ha="left", va="top")
         e = Dk["err"]
         out[Dk["region"]] = dict(year=Dk["year"], letters=lt, colour_range_cm=[Dk["lo"], Dk["hi"]], extend=Dk["ext"], ticks_cm=[float(t) for t in Dk["ticks"]],
                                  pooled_percentiles_inside_aoa_cm=Dk["pooled_pct"], series_p5_p50_p95_inside_aoa_cm=Dk["series_pct"],

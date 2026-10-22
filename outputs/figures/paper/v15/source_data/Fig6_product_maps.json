@@ -2776,31 +2776,31 @@
  "outputs": {
   "Fig6_product_maps.pdf": {
    "path": "outputs/figures/paper/v15/Fig6_product_maps.pdf",
-   "bytes": 7580254
+   "bytes": 7581292
   },
   "Fig6_product_maps.svg": {
    "path": "outputs/figures/paper/v15/Fig6_product_maps.svg",
-   "bytes": 12342998
+   "bytes": 12344813
   },
   "Fig6_product_maps.png": {
    "path": "outputs/figures/paper/v15/Fig6_product_maps.png",
-   "bytes": 8241268
+   "bytes": 8265389
   }
  },
  "canvas_mm": [
   180.0,
-  192.1
+  199.6
  ],
  "pdf_page_mm": [
   180.0,
-  192.1
+  199.6
  ],
  "pdf_fonts": [
   "BICWAS+FreeSans",
   "FITYBK+FreeSansBold"
  ],
  "qa": {
-  "n_texts": 104,
+  "n_texts": 105,
   "min_font_pt": 6.5,
   "font_sizes_pt": [
    6.5,
@@ -2830,5 +2830,5 @@
    32.0
   ]
  },
- "style": "cmcrameri oslo_r section (0.16, 0.88) for ALT; series colours: Physics + residual ML #C9671D, Wei 2026 #4E9A6A, Liu 2024 #C4547A"
+ "style": "cmcrameri oslo_r section (0.16, 0.88) for ALT; series colours: Physics + residual ML #C9671D, Wei 2026 #5E8F74, Liu 2024 #A86F85"
 }

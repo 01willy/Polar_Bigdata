@@ -414,7 +414,7 @@
   }
  },
  "qa": {
-  "n_texts": 88,
+  "n_texts": 89,
   "font_sizes_pt": [
    6.5,
    7.0,
@@ -435,7 +435,7 @@
    "letter": 8.0,
    "equation": 8.0
   },
-  "palette": "POLAR_PALETTE=paper13",
+  "palette": "POLAR_PALETTE=paper15",
   "script": "scripts/4_visualization/paper_v15/fig2_workflow.py",
   "rows": {
    "a": "cell-year design (soil columns, cumulative TDD) and the Stefan anchor",

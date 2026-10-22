@@ -23,8 +23,8 @@ from matplotlib.lines import Line2D
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "src"))
-if os.environ.get("POLAR_PALETTE") != "paper13":
-    raise SystemExit("run with POLAR_PALETTE=paper13 (v11 paper palette in polar.style_v5)")
+if os.environ.get("POLAR_PALETTE") not in ("paper13", "paper15"):
+    raise SystemExit("run with POLAR_PALETTE=paper13 or paper15 (paper palettes in polar.style_v5)")
 import polar.style_v5 as S  # noqa: E402
 
 OUT = ROOT / "outputs" / "figures" / "paper" / "v15"; SRC = OUT / "source_data"

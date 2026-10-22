@@ -89,7 +89,7 @@
       "width_km": 50.0,
       "cells_outside_aoa_in_window": 203
      },
-     "Mackenzie Delta, Inuvik": {
+     "Mackenzie Delta": {
       "centre_lonlat": [
        -133.5,
        68.3
@@ -104,11 +104,28 @@
   }
  },
  "d": {
-  "definition": "mapped cells: mean of the year map over all mapped cells minus the 2011-2024 mean of these yearly means; observed cells: labels (in_forcing == 1) matched to the nearest map cell within 1.5 km, observed ALT minus the cell's 2011-2024 map mean, averaged per year (years with >= 50 site-years), centred to the predicted anomaly mean of the same years",
+  "definition": "x: regional mean of the ERA5-Land TDD to 1 September over the mapped cells of the year minus its 2011-2024 mean (degree C d); y: regional mean of the year map (column r1) minus the 2011-2024 mean of these yearly means (cm); least-squares line, Pearson r; labelled points: warmest and coldest thaw seasons",
   "series": {
    "Alaska": {
     "mean_alt_cm": 61.68,
-    "predicted": {
+    "mean_tdd_degd": 1138.5,
+    "tdd_anom": {
+     "2011": -92.89,
+     "2012": -42.96,
+     "2013": -23.57,
+     "2014": -108.78,
+     "2015": 51.89,
+     "2016": 92.36,
+     "2017": 64.55,
+     "2018": -89.35,
+     "2019": 160.43,
+     "2020": 30.61,
+     "2021": -45.04,
+     "2022": -24.02,
+     "2023": 67.04,
+     "2024": -40.27
+    },
+    "map_anom": {
      "2011": -2.818,
      "2012": -2.641,
      "2013": -1.929,
@@ -124,65 +141,37 @@
      "2023": 2.037,
      "2024": -0.445
     },
-    "observed": {
-     "2011": {
-      "mean": 0.195,
-      "n": 50
-     },
-     "2012": {
-      "mean": -1.155,
-      "n": 50
-     },
-     "2013": {
-      "mean": -3.675,
-      "n": 1314
-     },
-     "2014": {
-      "mean": -1.481,
-      "n": 7723
-     },
-     "2015": {
-      "mean": -9.829,
-      "n": 169
-     },
-     "2016": {
-      "mean": -2.463,
-      "n": 1068
-     },
-     "2017": {
-      "mean": -2.869,
-      "n": 877
-     },
-     "2018": {
-      "mean": -1.135,
-      "n": 1510
-     },
-     "2019": {
-      "mean": 6.983,
-      "n": 448
-     },
-     "2020": {
-      "mean": 8.003,
-      "n": 149
-     },
-     "2021": {
-      "mean": 7.208,
-      "n": 325
-     },
-     "2022": {
-      "mean": -1.376,
-      "n": 371
-     }
-    },
-    "labelled": [],
+    "r": 0.921,
+    "slope_cm_per_100degd": 2.956,
+    "xlim": [
+     -208.56187988308633,
+     208.56187988308633
+    ],
     "ylim": [
-     -15.0,
-     10.0
+     -8.578421147352255,
+     8.578421147352255
     ]
    },
    "Lena": {
     "mean_alt_cm": 46.62,
-    "predicted": {
+    "mean_tdd_degd": 770.2,
+    "tdd_anom": {
+     "2011": 3.36,
+     "2012": 24.72,
+     "2013": -165.66,
+     "2014": -20.55,
+     "2015": -189.81,
+     "2016": -206.87,
+     "2017": -210.08,
+     "2018": 125.04,
+     "2019": 144.05,
+     "2020": 109.95,
+     "2021": 158.54,
+     "2022": 21.53,
+     "2023": 62.03,
+     "2024": 143.74
+    },
+    "map_anom": {
      "2011": -0.125,
      "2012": 1.062,
      "2013": -5.247,
@@ -198,63 +187,37 @@
      "2023": 2.93,
      "2024": 4.251
     },
-    "observed": {
-     "2012": {
-      "mean": -1.047,
-      "n": 299
-     },
-     "2013": {
-      "mean": -15.214,
-      "n": 241
-     },
-     "2014": {
-      "mean": -7.404,
-      "n": 93
-     },
-     "2015": {
-      "mean": -10.825,
-      "n": 471
-     },
-     "2016": {
-      "mean": -12.379,
-      "n": 681
-     },
-     "2017": {
-      "mean": -5.355,
-      "n": 139
-     },
-     "2018": {
-      "mean": 0.3,
-      "n": 64
-     },
-     "2019": {
-      "mean": -5.666,
-      "n": 95
-     },
-     "2020": {
-      "mean": 46.489,
-      "n": 143
-     },
-     "2021": {
-      "mean": 2.683,
-      "n": 165
-     }
-    },
-    "labelled": [
-     {
-      "year": 2020,
-      "anomaly_cm": 46.49,
-      "n": 143
-     }
+    "r": 0.955,
+    "slope_cm_per_100degd": 3.754,
+    "xlim": [
+     -273.10354070270614,
+     273.10354070270614
     ],
     "ylim": [
-     -20.0,
-     50.0
+     -12.589447688893506,
+     12.589447688893506
     ]
    },
    "Canada": {
     "mean_alt_cm": 63.45,
-    "predicted": {
+    "mean_tdd_degd": 1258.9,
+    "tdd_anom": {
+     "2011": -77.79,
+     "2012": 64.18,
+     "2013": -0.11,
+     "2014": -24.9,
+     "2015": -28.37,
+     "2016": 66.95,
+     "2017": 63.72,
+     "2018": -133.89,
+     "2019": -153.8,
+     "2020": -158.53,
+     "2021": -41.41,
+     "2022": 26.6,
+     "2023": 304.12,
+     "2024": 93.23
+    },
+    "map_anom": {
      "2011": -2.015,
      "2012": 1.428,
      "2013": -0.041,
@@ -270,51 +233,15 @@
      "2023": 6.356,
      "2024": 1.966
     },
-    "observed": {
-     "2013": {
-      "mean": -9.375,
-      "n": 120
-     },
-     "2017": {
-      "mean": -11.797,
-      "n": 150
-     },
-     "2018": {
-      "mean": -14.191,
-      "n": 150
-     },
-     "2019": {
-      "mean": 1.62,
-      "n": 65
-     },
-     "2022": {
-      "mean": -14.229,
-      "n": 445
-     },
-     "2023": {
-      "mean": 26.949,
-      "n": 80
-     },
-     "2024": {
-      "mean": 25.698,
-      "n": 80
-     }
-    },
-    "labelled": [
-     {
-      "year": 2023,
-      "anomaly_cm": 26.95,
-      "n": 80
-     },
-     {
-      "year": 2024,
-      "anomaly_cm": 25.7,
-      "n": 80
-     }
+    "r": 0.996,
+    "slope_cm_per_100degd": 2.155,
+    "xlim": [
+     -395.357666463281,
+     395.357666463281
     ],
     "ylim": [
-     -20.0,
-     30.0
+     -9.080063367991132,
+     9.080063367991132
     ]
    }
   }
@@ -468,32 +395,32 @@
  },
  "canvas_mm": [
   180.0,
-  205.6
+  239.1
  ],
  "outputs": {
   "Fig7_maps.pdf": {
    "path": "outputs/figures/paper/v15/Fig7_maps.pdf",
-   "bytes": 7795111
+   "bytes": 8111685
   },
   "Fig7_maps.svg": {
    "path": "outputs/figures/paper/v15/Fig7_maps.svg",
-   "bytes": 13164547
+   "bytes": 13688290
   },
   "Fig7_maps.png": {
    "path": "outputs/figures/paper/v15/Fig7_maps.png",
-   "bytes": 8487443
+   "bytes": 9109333
   }
  },
  "pdf_page_mm": [
   180.0,
-  205.6
+  239.1
  ],
  "pdf_fonts": [
   "BICWAS+FreeSans",
   "FITYBK+FreeSansBold"
  ],
  "qa": {
-  "n_texts": 105,
+  "n_texts": 116,
   "min_font_pt": 6.5,
   "font_sizes_pt": [
    6.5,
@@ -511,5 +438,5 @@
   "text_ink": [],
   "ok": true
  },
- "style": "design/style_tokens_v4.json color.paper_v13 (POLAR_PALETTE=paper13); FreeSans 7 pt labels, 6.5 pt ticks; letters 8 pt bold"
+ "style": "design/style_tokens_v4.json color.paper_v15 (POLAR_PALETTE=paper15); FreeSans 7 pt labels, 6.5 pt ticks; letters 8 pt bold"
 }

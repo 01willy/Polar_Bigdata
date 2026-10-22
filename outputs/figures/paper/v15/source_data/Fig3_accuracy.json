@@ -1,261 +1,185 @@
 {
  "figure": "Fig. 3",
  "script": "scripts/4_visualization/paper_v15/fig3_accuracy.py",
- "version": "v15 (2026-10-21)",
+ "version": "v15.1 (2026-10-22)",
  "inputs": {
-  "predictions": "data/processed/v5/runs/core_v6/preds/<Region>__block__year_obs__F8TS__{P1,R1,D0}*.csv.gz (seed mean)",
-  "labels": "data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1)",
-  "deltas": "data/processed/v5/runs/core_v6/deltas_vs_ref.csv (ref P1, forcing year_obs, F8TS)"
+  "summary": "data/processed/v5/runs/core_v6/summary_metrics.csv (forcing year_obs, F8TS; R1 lambda 0.5 CatBoost)",
+  "deltas_forcing": "core_v6/deltas_forcing.csv (year_obs:clim, block)"
  },
- "a": {
-  "definition": "observed vs block-CV out-of-fold prediction on all site-years; hexagonal bins with log density (n >= 2000) or points; 1:1 line; RMSE and Pearson r",
-  "values": {
-   "Alaska_P1": {
-    "n": 15540,
-    "rmse": 18.58,
-    "r": 0.595,
-    "axis_top": 120.0
-   },
-   "Alaska_R1": {
-    "n": 15540,
-    "rmse": 18.42,
-    "r": 0.587,
-    "axis_top": 120.0
-   },
-   "Alaska_D0": {
-    "n": 15540,
-    "rmse": 17.29,
-    "r": 0.562,
-    "axis_top": 120.0
-   },
-   "Lena_P1": {
-    "n": 2436,
-    "rmse": 21.04,
-    "r": 0.33,
-    "axis_top": 120.0
-   },
-   "Lena_R1": {
-    "n": 2436,
-    "rmse": 17.44,
-    "r": 0.667,
-    "axis_top": 120.0
-   },
-   "Lena_D0": {
-    "n": 2436,
-    "rmse": 15.88,
-    "r": 0.697,
-    "axis_top": 120.0
-   },
-   "Canada_P1": {
-    "n": 1196,
-    "rmse": 30.63,
-    "r": 0.144,
-    "axis_top": 160.0
-   },
-   "Canada_R1": {
-    "n": 1196,
-    "rmse": 26.89,
-    "r": 0.55,
-    "axis_top": 160.0
-   },
-   "Canada_D0": {
-    "n": 1196,
-    "rmse": 26.06,
-    "r": 0.585,
-    "axis_top": 160.0
-   }
-  }
+ "definitions": {
+  "a": "RMSE(year-specific input) - RMSE(2011-2024 mean input), spatial-block CV, 95 % paired block bootstrap",
+  "b": "RMSE under each design; colour = RMSE - RMSE(recalibrated Stefan, same design; source-coefficient Stefan for the region hold-out)",
+  "c": "block-CV RMSE (own labels) and region hold-out RMSE (other two regions only) per method; Stefan: recalibrated vs source coefficient"
  },
- "b": {
-  "definition": "RMSE(method) - RMSE(recalibrated Stefan) on the same site-years under each design; 95 % paired block-bootstrap interval; region hold-out: reference = source-coefficient Stefan",
-  "designs": [
-   "random",
-   "block",
-   "year",
-   "block_year",
-   "region"
+ "designs": [
+  "random",
+  "block",
+  "year",
+  "block_year",
+  "region"
+ ],
+ "values": {
+  "a_Alaska_P1": [
+   1.8,
+   -0.1,
+   3.89
   ],
-  "values": {
-   "Alaska_R1_random": [
-    -4.22,
-    -5.27,
-    -2.86
+  "a_Lena_P1": [
+   -1.43,
+   -2.55,
+   -0.84
+  ],
+  "a_Canada_P1": [
+   -0.14,
+   -2.23,
+   1.61
+  ],
+  "a_Alaska_R1": [
+   1.32,
+   -0.89,
+   3.73
+  ],
+  "a_Lena_R1": [
+   -1.58,
+   -2.44,
+   -1.02
+  ],
+  "a_Canada_R1": [
+   -1.49,
+   -2.04,
+   -0.39
+  ],
+  "a_Alaska_D0": [
+   -0.32,
+   -0.89,
+   0.02
+  ],
+  "a_Lena_D0": [
+   -1.31,
+   -2.11,
+   0.53
+  ],
+  "a_Canada_D0": [
+   -1.21,
+   -4.01,
+   2.04
+  ],
+  "b_Alaska_random_P1": 18.22,
+  "b_Alaska_block_P1": 18.58,
+  "b_Alaska_year_P1": 18.72,
+  "b_Alaska_block_year_P1": 18.8,
+  "b_Alaska_region_P1": 19.36,
+  "b_Alaska_random_R1": 14.0,
+  "b_Alaska_block_R1": 18.42,
+  "b_Alaska_year_R1": 17.26,
+  "b_Alaska_block_year_R1": 18.46,
+  "b_Alaska_region_R1": 17.55,
+  "b_Alaska_random_D0": 11.84,
+  "b_Alaska_block_D0": 17.29,
+  "b_Alaska_year_D0": 14.85,
+  "b_Alaska_block_year_D0": 17.51,
+  "b_Alaska_region_D0": 20.56,
+  "b_Lena_random_P1": 20.55,
+  "b_Lena_block_P1": 21.04,
+  "b_Lena_year_P1": 21.23,
+  "b_Lena_block_year_P1": 21.55,
+  "b_Lena_region_P1": 21.46,
+  "b_Lena_random_R1": 14.78,
+  "b_Lena_block_R1": 17.44,
+  "b_Lena_year_R1": 20.1,
+  "b_Lena_block_year_R1": 20.66,
+  "b_Lena_region_R1": 23.46,
+  "b_Lena_random_D0": 12.3,
+  "b_Lena_block_D0": 15.88,
+  "b_Lena_year_D0": 20.19,
+  "b_Lena_block_year_D0": 20.61,
+  "b_Lena_region_D0": 39.27,
+  "b_Canada_random_P1": 26.98,
+  "b_Canada_block_P1": 30.63,
+  "b_Canada_year_P1": 28.11,
+  "b_Canada_block_year_P1": 31.11,
+  "b_Canada_region_P1": 27.75,
+  "b_Canada_random_R1": 19.54,
+  "b_Canada_block_R1": 26.89,
+  "b_Canada_year_R1": 24.27,
+  "b_Canada_block_year_R1": 27.99,
+  "b_Canada_region_R1": 24.25,
+  "b_Canada_random_D0": 16.19,
+  "b_Canada_block_D0": 26.06,
+  "b_Canada_year_D0": 24.64,
+  "b_Canada_block_year_D0": 28.11,
+  "b_Canada_region_D0": 23.9,
+  "c_Alaska": {
+   "P1": [
+    18.58,
+    19.36
    ],
-   "Alaska_R1_block": [
-    -0.15,
-    -0.57,
-    0.12
+   "R1": [
+    18.42,
+    17.55
    ],
-   "Alaska_R1_year": [
-    -1.46,
-    -2.93,
-    -0.14
+   "D0": [
+    17.29,
+    20.56
+   ]
+  },
+  "c_Lena": {
+   "P1": [
+    21.04,
+    21.46
    ],
-   "Alaska_R1_block_year": [
-    -0.35,
-    -0.99,
-    0.5
+   "R1": [
+    17.44,
+    23.46
    ],
-   "Alaska_R1_region": [
-    -1.81,
-    -4.89,
-    0.98
+   "D0": [
+    15.88,
+    39.27
+   ]
+  },
+  "c_Canada": {
+   "P1": [
+    30.63,
+    27.75
    ],
-   "Alaska_D0_random": [
-    -6.38,
-    -8.06,
-    -4.32
+   "R1": [
+    26.89,
+    24.25
    ],
-   "Alaska_D0_block": [
-    -1.29,
-    -4.03,
-    1.45
-   ],
-   "Alaska_D0_year": [
-    -3.88,
-    -5.11,
-    -2.15
-   ],
-   "Alaska_D0_block_year": [
-    -1.29,
-    -3.88,
-    1.41
-   ],
-   "Alaska_D0_region": [
-    1.2,
-    -0.99,
-    2.34
-   ],
-   "Lena_R1_random": [
-    -5.77,
-    -11.81,
-    -1.61
-   ],
-   "Lena_R1_block": [
-    -3.59,
-    -7.83,
-    -0.81
-   ],
-   "Lena_R1_year": [
-    -1.13,
-    -1.89,
-    -0.4
-   ],
-   "Lena_R1_block_year": [
-    -0.88,
-    -1.88,
-    -0.22
-   ],
-   "Lena_R1_region": [
-    1.99,
-    -0.78,
-    3.39
-   ],
-   "Lena_D0_random": [
-    -8.25,
-    -17.17,
-    -2.15
-   ],
-   "Lena_D0_block": [
-    -5.16,
-    -12.32,
-    0.12
-   ],
-   "Lena_D0_year": [
-    -1.04,
-    -2.74,
-    0.76
-   ],
-   "Lena_D0_block_year": [
-    -0.94,
-    -3.94,
-    1.39
-   ],
-   "Lena_D0_region": [
-    17.8,
-    7.98,
-    23.86
-   ],
-   "Canada_R1_random": [
-    -7.44,
-    -10.55,
-    -4.88
-   ],
-   "Canada_R1_block": [
-    -3.74,
-    -4.77,
-    -0.83
-   ],
-   "Canada_R1_year": [
-    -3.84,
-    -6.84,
-    2.53
-   ],
-   "Canada_R1_block_year": [
-    -3.12,
-    -4.7,
-    1.71
-   ],
-   "Canada_R1_region": [
-    -3.5,
-    -5.15,
-    -0.1
-   ],
-   "Canada_D0_random": [
-    -10.79,
-    -15.66,
-    -6.67
-   ],
-   "Canada_D0_block": [
-    -4.57,
-    -6.23,
-    -0.24
-   ],
-   "Canada_D0_year": [
-    -3.47,
-    -10.14,
-    10.19
-   ],
-   "Canada_D0_block_year": [
-    -3.0,
-    -5.65,
-    6.46
-   ],
-   "Canada_D0_region": [
-    -3.85,
-    -6.96,
-    1.4
+   "D0": [
+    26.06,
+    23.9
    ]
   }
  },
  "outputs": {
   "Fig3_accuracy.pdf": {
    "path": "outputs/figures/paper/v15/Fig3_accuracy.pdf",
-   "bytes": 70870
+   "bytes": 25437
   },
   "Fig3_accuracy.svg": {
    "path": "outputs/figures/paper/v15/Fig3_accuracy.svg",
-   "bytes": 908811
+   "bytes": 58862
   },
   "Fig3_accuracy.png": {
    "path": "outputs/figures/paper/v15/Fig3_accuracy.png",
-   "bytes": 1140845
+   "bytes": 565329
   }
  },
  "canvas_mm": [
   180.0,
-  197.0
+  106.0
  ],
  "pdf_page_mm": [
   180.0,
-  197.0
+  106.0
  ],
  "pdf_fonts": [
   "BICWAS+FreeSans",
   "FITYBK+FreeSansBold"
  ],
  "qa": {
-  "n_texts": 118,
+  "n_texts": 122,
   "min_font_pt": 6.5,
   "font_sizes_pt": [
    6.5,
@@ -266,11 +190,144 @@
    "FreeSans"
   ],
   "small": [],
-  "color": [],
+  "color": [
+   [
+    "Stefan | (recal.)",
+    "#1a7ab3"
+   ],
+   [
+    "Physics | + ML",
+    "#c9671d"
+   ],
+   [
+    "Direct | ML",
+    "#7f4f9f"
+   ],
+   [
+    "11.8",
+    "#ffffff"
+   ],
+   [
+    "Stefan | (recal.)",
+    "#1a7ab3"
+   ],
+   [
+    "Physics | + ML",
+    "#c9671d"
+   ],
+   [
+    "14.8",
+    "#ffffff"
+   ],
+   [
+    "Direct | ML",
+    "#7f4f9f"
+   ],
+   [
+    "12.3",
+    "#ffffff"
+   ],
+   [
+    "39.3",
+    "#ffffff"
+   ],
+   [
+    "Stefan | (recal.)",
+    "#1a7ab3"
+   ],
+   [
+    "Physics | + ML",
+    "#c9671d"
+   ],
+   [
+    "19.5",
+    "#ffffff"
+   ],
+   [
+    "Direct | ML",
+    "#7f4f9f"
+   ],
+   [
+    "16.2",
+    "#ffffff"
+   ],
+   [
+    "18.6",
+    "#1a7ab3"
+   ],
+   [
+    "19.4",
+    "#1a7ab3"
+   ],
+   [
+    "18.4",
+    "#c9671d"
+   ],
+   [
+    "17.5",
+    "#c9671d"
+   ],
+   [
+    "17.3",
+    "#7f4f9f"
+   ],
+   [
+    "20.6",
+    "#7f4f9f"
+   ],
+   [
+    "21.0",
+    "#1a7ab3"
+   ],
+   [
+    "21.5",
+    "#1a7ab3"
+   ],
+   [
+    "17.4",
+    "#c9671d"
+   ],
+   [
+    "23.5",
+    "#c9671d"
+   ],
+   [
+    "15.9",
+    "#7f4f9f"
+   ],
+   [
+    "39.3",
+    "#7f4f9f"
+   ],
+   [
+    "30.6",
+    "#1a7ab3"
+   ],
+   [
+    "27.8",
+    "#1a7ab3"
+   ],
+   [
+    "26.9",
+    "#c9671d"
+   ],
+   [
+    "24.2",
+    "#c9671d"
+   ],
+   [
+    "26.1",
+    "#7f4f9f"
+   ],
+   [
+    "23.9",
+    "#7f4f9f"
+   ]
+  ],
   "font": [],
   "outside": [],
   "overlaps": [],
   "text_ink": [],
-  "ok": true
+  "ok": false
  }
 }

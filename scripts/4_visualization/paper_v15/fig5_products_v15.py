@@ -53,39 +53,40 @@ def main():
     cc = pd.read_csv(F5.CC_CSV); c = common_rows()
     for r in REGIONS:
         n_a = int(cc[(cc.region == r) & (cc.mask_km == 0) & (cc.series == "R1 (CatBoost)")].n.iloc[0]); assert n_a == int((c.region == r).sum()), (r, n_a)
-    W = 180.0; ya, ha = 9.0, 28.0; s = 33.0; g = 5.0; yb = ya + ha + 17.0; yc = yb + 3 * s + 2 * g + 23.0; hc = 40.0; H = yc + hc + 13.0
+    W = 180.0; s = 36.0; g = 5.0; xa0 = 30.5; gap_col = (W - xa0 - 9.5 - 3 * s) / 2; cols = [xa0 + j * (s + gap_col) for j in range(3)]   # one 3-column grid for a, b, c
+    ya, ha = 9.0, 24.0; yb = ya + ha + 14.0; yc = yb + 3 * s + 2 * g + 21.0; hc = s; H = yc + hc + 16.0
     fig = C.figure(W, H); src = {"a": {"values": {}, "n_label": {}}}
     # ---------------- a (fig5_products panel a)
-    xa0, gap_a, xr = 27.5, 11.0, 9.5; wa = (W - xa0 - 2 * gap_a - xr) / 3.0; ws = 8.0; gs_ = 1.6
-    axes_a = [C.ax_mm(fig, xa0 + j * (wa + gap_a), ya, wa - ws - gs_, ha) for j in range(3)]
-    sides_a = [C.ax_mm(fig, xa0 + j * (wa + gap_a) + wa - ws, ya, ws, ha) for j in range(3)]
+    wa = s; ws = 7.5; gs_ = 1.5
+    axes_a = [C.ax_mm(fig, cols[j], ya, wa - ws - gs_, ha) for j in range(3)]
+    sides_a = [C.ax_mm(fig, cols[j] + wa - ws, ya, ws, ha) for j in range(3)]
     F5.draw_a(fig, axes_a, sides_a, cc, src)
     from matplotlib.lines import Line2D
     hs = [Line2D([], [], ls="none", marker="o", ms=C.MS, mfc=C.AUX, mec=C.AUX), Line2D([], [], ls="none", marker="o", ms=C.MS, mfc="white", mec=C.AUX, mew=0.7)]
-    fig.legend(hs, ["All common site-years", "Sites > 25 km from product training sites"], loc="upper left", bbox_to_anchor=(xa0 / W, 1 - 1.0 / H), ncol=2, frameon=False,
+    fig.legend(hs, ["All common site-years", "Sites > 25 km from product training sites"], loc="upper left", bbox_to_anchor=(cols[0] / W, 1 - 1.0 / H), ncol=2, frameon=False,
                fontsize=C.FS_SMALL, handletextpad=0.5, columnspacing=1.6, borderaxespad=0.0)
     C.letter(fig, 2.0, ya - 4.5, "a")
     # ---------------- b: observed vs predicted matrix
     series = [("R1", MN["R1"], MC["R1"]), ("wei", "Wei 2026", C.PRODUCT["wei"][1]), ("liu", "Liu 2024", C.PRODUCT["liu"][1])]
-    x0 = 15.0; gx = 7.0; meta_b = {}
+    meta_b = {}
     for i, r in enumerate(REGIONS):
         q = c[c.region == r]; top = float(np.ceil(np.percentile(np.concatenate([q.alt_cm.values] + [q[k].values for k, _, _ in series]), 99.5) / 20) * 20)
         for j, (k, name, col) in enumerate(series):
-            ax = C.ax_mm(fig, x0 + j * (s + gx), yb + i * (s + g), s, s); C.clean_axes(ax)
+            ax = C.ax_mm(fig, cols[j], yb + i * (s + g), s, s); C.clean_axes(ax)
             density(ax, q.alt_cm.values, q[k].values, col, top)
             e = rmse(q[k] - q.alt_cm); rr = float(np.corrcoef(q.alt_cm, q[k])[0, 1]); bias = float((q[k] - q.alt_cm).mean())
             ax.text(0.04, 0.96, f"RMSE {e:.1f}\nbias {bias:+.1f}\nr {rr:.2f}".replace("-", "−"), transform=ax.transAxes, ha="left", va="top", fontsize=C.FS_SMALL, color=C.TEXT)
             meta_b[f"{r}_{k}"] = dict(n=int(len(q)), rmse=round(e, 2), bias=round(bias, 2), r=round(rr, 3), axis_top=top)
-            if i == 0: C.text_mm(fig, x0 + j * (s + gx), yb - 1.2, name, fontsize=C.FS, ha="left", va="bottom")
+            if i == 0: C.text_mm(fig, cols[j], yb - 1.2, name, fontsize=C.FS, ha="left", va="bottom")
             if j == 0: ax.set_ylabel(f"{RN[r]}, n = {len(q):,}\nPredicted (cm)")
             if i == 2: ax.set_xlabel("Observed ALT (cm)")
             else: ax.set_xticklabels([])
     C.letter(fig, 2.0, yb - 8.5, "b"); C.text_mm(fig, 7.0, yb - 8.2, "Observed against predicted on the common site-years", fontsize=C.FS, ha="left", va="top")
     # ---------------- c: error distributions
-    vs = [("P1", "Stefan (recal.)", MC["P1"]), ("R1", "Physics + res. ML", MC["R1"]), ("wei", "Wei 2026", C.PRODUCT["wei"][1]), ("liu", "Liu 2024", C.PRODUCT["liu"][1]), ("cci4y", "ESA CCI v4", C.PRODUCT["cci4y"][1])]
-    LIM = 80.0; meta_c = {}; xc0 = 15.0; wc = 48.0; gc = 9.0
+    vs = [("P1", "Stefan (recal.)", MC["P1"]), ("R1", "Physics + ML", MC["R1"]), ("wei", "Wei 2026", C.PRODUCT["wei"][1]), ("liu", "Liu 2024", C.PRODUCT["liu"][1]), ("cci4y", "ESA CCI v4", C.PRODUCT["cci4y"][1])]
+    LIM = 80.0; meta_c = {}; wc = s
     for i, r in enumerate(REGIONS):
-        q = c[c.region == r]; ax = C.ax_mm(fig, xc0 + i * (wc + gc), yc, wc, hc); C.clean_axes(ax)
+        q = c[c.region == r]; ax = C.ax_mm(fig, cols[i], yc, wc, hc); C.clean_axes(ax)
         for j, (k, name, col) in enumerate(vs):
             e = (q[k] - q.alt_cm).values; e = e[np.isfinite(e)]; ec = np.clip(e, -LIM, LIM)
             vp = ax.violinplot([ec], positions=[j], widths=0.8, showextrema=False, showmedians=False, points=200)
@@ -94,10 +95,10 @@ def main():
             beyond = float((np.abs(e) > LIM).mean())
             if beyond > 0.005: ax.text(j, LIM + 2, f"{beyond * 100:.0f}%", ha="center", va="bottom", fontsize=C.FS_SMALL, color=C.AUX)
             meta_c[f"{r}_{k}"] = dict(n=int(len(e)), median=round(float(md), 2), q1=round(float(q1), 2), q3=round(float(q3), 2), share_beyond_80cm=round(beyond, 4))
-        ax.axhline(0, color=C.ZERO, lw=C.LW_REF); ax.set_xticks(range(len(vs))); ax.set_xticklabels([n for _, n, _ in vs], rotation=30, ha="right", rotation_mode="anchor")
+        ax.axhline(0, color=C.ZERO, lw=C.LW_REF); ax.set_xticks(range(len(vs))); ax.set_xticklabels([n for _, n, _ in vs], rotation=45, ha="right", rotation_mode="anchor")
         ax.set_ylim(-LIM - 4, LIM + 12); ax.set_yticks([-80, -40, 0, 40, 80])
         if i == 0: ax.set_ylabel("Predicted − observed (cm)")
-        C.text_mm(fig, xc0 + i * (wc + gc), yc - 1.2, RN[r], fontsize=C.FS, ha="left", va="bottom")
+        C.text_mm(fig, cols[i], yc - 1.2, RN[r], fontsize=C.FS, ha="left", va="bottom")
     C.letter(fig, 2.0, yc - 8.5, "c"); C.text_mm(fig, 7.0, yc - 8.2, "Error distributions on the common site-years (clipped at ±80 cm; white dot = median, bar = interquartile range)", fontsize=C.FS, ha="left", va="top")
     rep = C.qa_figure(fig, text_ink=False); C.print_qa(STEM, rep)
     paths = C.export(fig, STEM, C.OUT_MAIN); plt.close(fig)

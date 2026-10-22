@@ -13,9 +13,9 @@
   "ocean": "#EBEBEB",
   "land_without_value": "#FFFFFF",
   "region_outline_colours": {
-   "Alaska": "#3B3B8F",
-   "Lena Delta": "#4A90C2",
-   "Canada (NW)": "#3A9384"
+   "Alaska": "#3F4A7A",
+   "Lena Delta": "#5F8FB0",
+   "Canada (NW)": "#5B8C7E"
   },
   "region_boxes_lonlat": {
    "Alaska": {
@@ -236,9 +236,9 @@
    ]
   },
   "bar_colours": {
-   "Alaska": "#3B3B8F",
-   "Lena Delta": "#4A90C2",
-   "Canada (NW)": "#3A9384"
+   "Alaska": "#3F4A7A",
+   "Lena Delta": "#5F8FB0",
+   "Canada (NW)": "#5B8C7E"
   },
   "numbers_printed": "axis ticks only (y ticks per region listed in y_ticks; x ticks 2010–2024 every 2 years)"
  },
@@ -263,12 +263,12 @@
    "label_rows": "region colours",
    "climate_input": "#595959",
    "products": {
-    "Wei 2026": "#4E9A6A",
-    "Liu 2024": "#C4547A",
-    "ESA CCI v4": "#8C6D31",
-    "ESA CCI v5": "#D4AF37",
-    "Yi–Kimball 2019 (Alaska)": "#7A9A3A",
-    "Aalto 2018": "#5AA7D6"
+    "Wei 2026": "#5E8F74",
+    "Liu 2024": "#A86F85",
+    "ESA CCI v4": "#8A7A5F",
+    "ESA CCI v5": "#B9A25C",
+    "Yi–Kimball 2019 (Alaska)": "#8B9A5E",
+    "Aalto 2018": "#7FA3BE"
    },
    "analysis_window": "#F0F0F0"
   },
@@ -276,21 +276,21 @@
    {
     "group": "Labels",
     "name": "Alaska",
-    "colour": "#3B3B8F",
+    "colour": "#3F4A7A",
     "encoding": "bar in the region colour = years with labels",
     "years": "2010–2024"
    },
    {
     "group": "Labels",
     "name": "Lena Delta",
-    "colour": "#4A90C2",
+    "colour": "#5F8FB0",
     "encoding": "bar in the region colour = years with labels",
     "years": "2010–2022"
    },
    {
     "group": "Labels",
     "name": "Canada (NW)",
-    "colour": "#3A9384",
+    "colour": "#5B8C7E",
     "encoding": "bar in the region colour = years with labels",
     "years": "2010–2019, 2021–2024"
    },
@@ -311,7 +311,7 @@
    {
     "group": "Products",
     "name": "Wei 2026",
-    "colour": "#4E9A6A",
+    "colour": "#5E8F74",
     "encoding": "grey line = available period, bar in the product colour = years used for the comparison",
     "years": "2000–2024",
     "years_used": "2010–2024",
@@ -321,7 +321,7 @@
    {
     "group": "Products",
     "name": "Liu 2024",
-    "colour": "#C4547A",
+    "colour": "#A86F85",
     "encoding": "grey line = available period, bar in the product colour = years used for the comparison",
     "years": "2003–2020",
     "years_used": "2010–2020",
@@ -331,7 +331,7 @@
    {
     "group": "Products",
     "name": "ESA CCI v4",
-    "colour": "#8C6D31",
+    "colour": "#8A7A5F",
     "encoding": "grey line = available period, bar in the product colour = years used for the comparison",
     "years": "1997–2021",
     "years_used": "2010–2021",
@@ -341,7 +341,7 @@
    {
     "group": "Products",
     "name": "ESA CCI v5",
-    "colour": "#D4AF37",
+    "colour": "#B9A25C",
     "encoding": "grey line = available period, bar in the product colour = years used for the comparison",
     "years": "1997–2023",
     "years_used": "2010–2023",
@@ -351,7 +351,7 @@
    {
     "group": "Products",
     "name": "Yi–Kimball 2019 (Alaska)",
-    "colour": "#7A9A3A",
+    "colour": "#8B9A5E",
     "encoding": "grey line = available period, bar in the product colour = years used for the comparison",
     "years": "2001–2015",
     "years_used": "2010–2015",
@@ -361,7 +361,7 @@
    {
     "group": "Products",
     "name": "Aalto 2018",
-    "colour": "#5AA7D6",
+    "colour": "#7FA3BE",
     "encoding": "hatched bar 2000-2014 = one multi-year mean value; note 'one value (2000-2014 mean)'",
     "years": "2000–2014",
     "available_source": "data/processed/v5/products_cell_year_v5_meta.json (products.aalto.period)"
@@ -407,12 +407,12 @@
   "letter_pt": 8.0,
   "text_colour": "#000000",
   "axis_colour": "#000000",
-  "palette": "POLAR_PALETTE=paper13 (design/style_tokens_v4.json color.paper_v13)",
+  "palette": "POLAR_PALETTE=paper15 (design/style_tokens_v4.json color.paper_v13)",
   "script": "scripts/4_visualization/paper_v15/fig1_data.py",
   "outputs": {
    "Fig1_data.pdf": {
     "path": "outputs/figures/paper/v15/Fig1_data.pdf",
-    "bytes": 877184
+    "bytes": 877201
    },
    "Fig1_data.svg": {
     "path": "outputs/figures/paper/v15/Fig1_data.svg",
@@ -420,7 +420,7 @@
    },
    "Fig1_data.png": {
     "path": "outputs/figures/paper/v15/Fig1_data.png",
-    "bytes": 1185510
+    "bytes": 1185635
    }
   },
   "change_from_v10": "panel d (cumulative TDD time definition) removed (moved to the new methods figure Fig. 2); layout re-balanced; region boxes, b bars and c label rows in region colours, c product rows in product colours"
