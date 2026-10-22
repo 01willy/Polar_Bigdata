@@ -131,7 +131,7 @@ def draw_series(ax, reg, S_, show_ylabel):
     ax.text(0.97, 0.04, f"r = {s['r']:.2f}\n{s['slope_cm_per_100degd']:+.1f} cm per 100 °C d".replace("-", "−"), transform=ax.transAxes, ha="right", va="bottom",
             fontsize=C.FS_SMALL, color=C.TEXT)
     ax.set_xlabel("TDD anomaly of the year (°C d)")
-    if show_ylabel: ax.set_ylabel("Map ALT anomaly (cm)")
+    if show_ylabel: ax.set_ylabel("Map ALT anomaly (cm)", labelpad=1.0)
     return [float(v) for v in ax.get_xlim()], [float(v) for v in ax.get_ylim()]
 
 
@@ -182,13 +182,13 @@ def main():
         B4[k] = F6.Base(k, R[k]["cells"], R[k]["lut"], R[k]["ky0"], R[k]["kx0"], step=4, tag="full"); TF[k] = B4[k].tf
         LIM[k] = F6.region_limits(k, TF[k]); ASP[k] = (LIM[k][3] - LIM[k][2]) / (LIM[k][1] - LIM[k][0])
     aspA, aspL, aspC = ASP.get("alaska", 0.78), ASP.get("lena", 0.95), ASP.get("canada", 0.83)
-    W = 180.0; wmap = 46.0; cols = {k: x for k, x in zip(keys, [9.5, 69.0, 128.5])}       # three equal-width columns used by rows a-c, d and e
+    W = 180.0; wmap = 44.0; cols = {k: x for k, x in zip(keys, [9.5, 69.0, 128.5])}       # three equal-width columns used by rows a-c, d and e
     hmap = {k: wmap * ASP[k] for k in keys}; hmax = max(hmap.values())
-    y1 = 6.5; wz = 20.0; y_win = y1 + hmax + 6.0                                          # windows below the maps, labels above the windows
+    y1 = 6.5; wz = 19.0; y_win = y1 + hmax + 6.0                                          # windows below the maps, labels above the windows
     y_cb1 = y_win + wz + 3.5
-    y2 = y_cb1 + 13.5; hd = 21.0                                                          # d: three scatter panels side by side
-    y3 = y2 + hd + 11.5; y_cb3 = y3 + hmax + 3.0                                      # e: trend maps in the same columns
-    y4 = y_cb3 + 10.5; gd = 1.0; xd = 12.0; wd = (W - xd - 7.0 - 6 * gd) / 7.0; hd4 = wd * aspA
+    y2 = y_cb1 + 15.5; hd = 21.0                                                          # d: three scatter panels side by side
+    y3 = y2 + hd + 14.0; y_cb3 = y3 + hmax + 3.0                                      # e: trend maps in the same columns
+    y4 = y_cb3 + 13.0; gd = 1.0; xd = 14.0; wd = (W - xd - 9.0 - 6 * gd) / 7.0; hd4 = wd * aspA
     y_cb4 = y4 + 2 * hd4 + gd + 2.4
     H = y_cb4 + 8.0
     print(f"  canvas {W} x {H:.1f} mm (rows {y1}, {y2:.1f}, {y3:.1f}, {y4:.1f}; map heights {({k: round(v, 1) for k, v in hmap.items()})})")
@@ -207,8 +207,8 @@ def main():
     hs = [Line2D([], [], ls="none", marker="o", ms=2.4, mfc=MP.CM_ALT(0.55), mec=C.TEXT, mew=0.35), MP.FadedRamp(MP.CM_ALT),
           Patch(facecolor=MP.LAND_HEX, edgecolor="#B5B5B5", lw=0.3), Patch(facecolor=MP.WATER_HEX, edgecolor="#B5B5B5", lw=0.3)]
     fig.legend(hs, ["Observed cell (observed mean ALT)", "Outside area of applicability", "Not mapped", "Water"], loc="upper left",
-               bbox_to_anchor=((cols[keys[0]] + 62.0) / W, 1 - (y_cb1 - 1.4) / H), ncol=2, handlelength=1.6, handleheight=0.9, handletextpad=0.45, labelspacing=0.35,
-               columnspacing=1.2, fontsize=C.FS_SMALL, handler_map={MP.FadedRamp: MP.RampHandler()}, borderaxespad=0, borderpad=0)
+               bbox_to_anchor=((cols[keys[0]] + 72.0) / W, 1 - (y_cb1 - 1.4) / H), ncol=2, handlelength=1.6, handleheight=0.9, handletextpad=0.45, labelspacing=0.35, columnspacing=2.6,
+               fontsize=C.FS_SMALL, handler_map={MP.FadedRamp: MP.RampHandler()}, borderaxespad=0, borderpad=0)
     # ---------------- d: series (three panels side by side)
     S_ = series(D)
     axe = [C.ax_mm(fig, cols[k], y2, wmap, hd) for k in keys]

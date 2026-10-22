@@ -7,7 +7,7 @@ Symmetric common range (largest of the regions' 99th percentile of |correction|,
 colours; display interpolation of the 1 km cell values (250 m Lena Delta, 500 m Alaska and Canada); cells outside the area of applicability lighter;
 no hillshade (diverging map).
 Run: cd /home/willy010313/Polar_Bigdata && POLAR_PALETTE=paper13 CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=2 MPLBACKEND=Agg nice -n 10 \\
-       python3 scripts/4_visualization/paper_v15/si_s09_correction_maps.py
+       python3 scripts/4_visualization/paper_v15/si_s11_correction_maps.py
 """
 from __future__ import annotations
 
@@ -28,7 +28,7 @@ import v8_f8_product_maps as F8  # noqa: E402
 
 F6 = MP.F6
 MV = F6.MV
-STEM = "FigS9_correction_maps"
+STEM = "FigS11_correction_maps"
 PROC = C.ROOT / "data" / "processed"; MAPS = PROC / "v5" / "maps"
 SRC = "mean_2011_2024"
 ROWS = [dict(key="alaska", region="Alaska", lon_lab=(-160, -150), lat_lab=(60, 65, 70), scale_km=200, step=2),
@@ -106,8 +106,8 @@ def main():
     rep = C.qa_figure(fig, text_ink=False); C.print_qa(STEM, rep)
     paths = C.export_si(fig, STEM); plt.close(fig)
     names = [C.REGION[d["region"]][0] for d in D]
-    C.update_si_json("S9", dict(
-        title="Residual ML correction maps, mean 2011-2024, three regions", stem=STEM, script="scripts/4_visualization/paper_v15/si_s09_correction_maps.py",
+    C.update_si_json("S11", dict(
+        title="Residual ML correction maps, mean 2011-2024, three regions", stem=STEM, script="scripts/4_visualization/paper_v15/si_s11_correction_maps.py",
         inputs=[f"data/processed/v5/maps/{{Alaska,Lena,Canada}}/{SRC}.csv.gz (r1 - p1, aoa_in)"],
         years="mean of the yearly maps 2011-2024 (all regions)",
         definition="Physics + residual ML minus Stefan (recalibrated) per 1 km cell; common symmetric range = largest of the regions' 99th percentile of "

@@ -395,25 +395,25 @@
  },
  "canvas_mm": [
   180.0,
-  239.1
+  240.1
  ],
  "outputs": {
   "Fig7_maps.pdf": {
    "path": "outputs/figures/paper/v15/Fig7_maps.pdf",
-   "bytes": 8111685
+   "bytes": 7642733
   },
   "Fig7_maps.svg": {
    "path": "outputs/figures/paper/v15/Fig7_maps.svg",
-   "bytes": 13688290
+   "bytes": 12981915
   },
   "Fig7_maps.png": {
    "path": "outputs/figures/paper/v15/Fig7_maps.png",
-   "bytes": 9109333
+   "bytes": 8602274
   }
  },
  "pdf_page_mm": [
   180.0,
-  239.1
+  240.1
  ],
  "pdf_fonts": [
   "BICWAS+FreeSans",

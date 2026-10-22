@@ -39,10 +39,8 @@ def common_rows():
 
 
 def density(ax, x, y, col, top):
-    if len(x) >= 2000:
-        ax.hexbin(x, y, gridsize=26, extent=(0, top, 0, top), cmap=ramp(col), norm=LogNorm(vmin=1), mincnt=1, linewidths=0.1, edgecolors="none")
-    else:
-        ax.scatter(x, y, s=2.0 ** 2, facecolor=col, edgecolor="white", lw=0.2, alpha=0.85)
+    gs = 26 if len(x) >= 2000 else 20                                                           # v15.3: hexagonal log density in every region (uniform grammar)
+    ax.hexbin(x, y, gridsize=gs, extent=(0, top, 0, top), cmap=ramp(col), norm=LogNorm(vmin=1), mincnt=1, linewidths=0.1, edgecolors="none")
     ax.plot([0, top], [0, top], color=C.ZERO, lw=C.LW_REF, zorder=1); ax.set_xlim(0, top); ax.set_ylim(0, top); ax.set_aspect("equal")
     step = 40 if top > 120 else 20; ax.xaxis.set_major_locator(mticker.MultipleLocator(step)); ax.yaxis.set_major_locator(mticker.MultipleLocator(step))
 
@@ -105,7 +103,7 @@ def main():
     src.update(dict(figure="Fig. 5", script="scripts/4_visualization/paper_v15/fig5_products_v15.py", version="v15 (2026-10-21)",
                     inputs=dict(common_cells=str(F5.CC_CSV.relative_to(ROOT)), labels="data/processed/v5/labels_cell_year_v5.csv", products="data/processed/v5/products_cell_year_v5.csv",
                                 predictions="core_v6/preds/<Region>__block__year_obs__F8TS__{P1,R1}*.csv.gz (seed mean)"),
-                    b=dict(definition="common site-years (Wei, Liu, CCI v4 and our block-CV prediction all present); hexagonal log density (n >= 2000) or points; RMSE, mean bias, Pearson r", values=meta_b),
+                    b=dict(definition="common site-years (Wei, Liu, CCI v4 and our block-CV prediction all present); hexagonal log density in every region (gridsize 26 for n >= 2000, else 20); RMSE, mean bias, Pearson r", values=meta_b),
                     c=dict(definition="predicted - observed on the same rows; violins clipped at +-80 cm (share beyond printed); white dot median, bar interquartile range", values=meta_c),
                     outputs=C.file_info(paths), canvas_mm=[W, round(H, 1)], pdf_page_mm=C.pdf_page_mm(paths[0]), pdf_fonts=C.pdf_fonts(paths[0]), qa=rep))
     C.write_json(C.SRC_MAIN / f"{STEM}.json", src)

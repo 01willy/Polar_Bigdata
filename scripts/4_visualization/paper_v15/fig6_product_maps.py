@@ -177,8 +177,10 @@ def load_row(row):
     pm = {p: F8.product_masks(base, prod[p])[0] & drawn for p in ("wei", "liu")}          # v14: products masked to the drawn cells of our map
     prod_cell = {p: product_cell_means(base, prod[p], pm[p], len(cells)) for p in prod}
     in_aoa = drawn & (px_aoa > 0.5)
-    pooled = np.concatenate([px_r1[in_aoa]] + [prod[p][pm[p] & in_aoa] for p in prod])
-    lo = RANGE_STEP * np.floor(np.percentile(pooled, RANGE_PCT[0]) / RANGE_STEP); hi = RANGE_STEP * np.ceil(np.percentile(pooled, RANGE_PCT[1]) / RANGE_STEP)
+    pooled = px_r1[in_aoa]                                                                   # v15.3: range anchored on our map (5th-95th); the upper end extends to the product medians
+    lo = RANGE_STEP * np.floor(np.percentile(pooled, RANGE_PCT[0]) / RANGE_STEP)
+    hi_ours = np.percentile(pooled, RANGE_PCT[1]); hi_prod = max(np.percentile(prod[p][pm[p] & in_aoa], 50) for p in prod)
+    hi = RANGE_STEP * np.ceil(max(hi_ours, hi_prod) / RANGE_STEP)
     allv = np.concatenate([px_r1[drawn]] + [prod[p][pm[p]] for p in prod]); ext = MV.extend_of(allv, lo, hi)
     tick = 20.0 if hi - lo >= 70 else 10.0; ticks = [t for t in np.arange(tick * np.ceil(lo / tick), hi + 1e-6, tick)]
     fin = r1[np.isfinite(r1)]

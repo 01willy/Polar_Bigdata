@@ -5,7 +5,7 @@ the yearly maps), physics + residual ML at the observation day (squares), and th
 product has a value at the cell. The warmest and coldest thaw seasons of the region (regional mean TDD, Fig. 7d) are shaded so that the spikes of
 the observed series can be read against the climate of the year. Predictions are spatial-block out-of-fold (v5_site_series.py, 3 seeds).
 Inputs: data/processed/v5/site_series/site_series_year_obs_d244.csv.gz, products_cell_year_v5.csv, labels_cell_year_v5.csv, Fig7_maps.json (d).
-Run: cd /home/willy010313/Polar_Bigdata && POLAR_PALETTE=paper15 CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=2 MPLBACKEND=Agg nice -n 10 python3 scripts/4_visualization/paper_v15/si_s10_site_series.py
+Run: cd /home/willy010313/Polar_Bigdata && POLAR_PALETTE=paper15 CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=2 MPLBACKEND=Agg nice -n 10 python3 scripts/4_visualization/paper_v15/si_s09_site_series.py
 """
 from __future__ import annotations
 import json, sys
@@ -19,7 +19,7 @@ import matplotlib.ticker as mticker  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.patches import Patch  # noqa: E402
 
-STEM = "FigS10_site_series"; PROC = C.ROOT / "data" / "processed" / "v5"; YR = (2010, 2024); REGIONS = ["Alaska", "Lena", "Canada"]
+STEM = "FigS9_site_series"; PROC = C.ROOT / "data" / "processed" / "v5"; YR = (2010, 2024); REGIONS = ["Alaska", "Lena", "Canada"]
 PN = {"wei": "Wei et al. 2026", "liu": "Liu et al. 2024"}
 
 
@@ -71,7 +71,7 @@ def main():
     fig.legend(hs, labs, loc="upper left", bbox_to_anchor=(xs[0] / W, 1 - 1.0 / H), ncol=4, handlelength=1.8, columnspacing=1.4, labelspacing=0.3, fontsize=C.FS_TICK, frameon=False, borderaxespad=0)
     rep = C.qa_figure(fig, ignore_ink_for=["warmest", "coldest"]); C.print_qa(STEM, rep)
     paths = C.export_si(fig, STEM); plt.close(fig)
-    C.update_si_json("S10", dict(title="Long-record sites", stem=STEM, script="scripts/4_visualization/paper_v15/si_s10_site_series.py", version="v15.2 (2026-10-22): three regions, observed joined, warm/cold seasons shaded",
+    C.update_si_json("S9", dict(title="Long-record sites", stem=STEM, script="scripts/4_visualization/paper_v15/si_s09_site_series.py", version="v15.2 (2026-10-22): three regions, observed joined, warm/cold seasons shaded",
                                  inputs=["data/processed/v5/site_series/site_series_year_obs_d244.csv.gz", "data/processed/v5/products_cell_year_v5.csv", "data/processed/v5/labels_cell_year_v5.csv", "Fig7_maps.json d"],
                                  definition="site with the most observed years per region (ties: most probe records, lowest loc_id); predictions = spatial-block out-of-fold (3 seeds): observation day = climate input to the observation day, "
                                             "1 September = TDD to day 244 (as the yearly maps); shaded years = warmest and coldest regional mean TDD of 2011-2024",

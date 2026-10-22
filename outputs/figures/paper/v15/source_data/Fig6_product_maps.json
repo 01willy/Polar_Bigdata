@@ -32,7 +32,7 @@
    "year": 2013,
    "letters": "abcd",
    "colour_range_cm": [
-    45.0,
+    50.0,
     80.0
    ],
    "extend": "both",
@@ -43,11 +43,11 @@
     80.0
    ],
    "pooled_percentiles_inside_aoa_cm": {
-    "p2": 45.3,
-    "p5": 48.1,
-    "p50": 60.0,
-    "p95": 76.4,
-    "p98": 81.4
+    "p2": 48.2,
+    "p5": 50.2,
+    "p50": 59.7,
+    "p95": 75.7,
+    "p98": 78.3
    },
    "series_p5_p50_p95_inside_aoa_cm": {
     "ours_in_aoa": [
@@ -68,15 +68,15 @@
    },
    "share_of_drawn_pixels_beyond_range": {
     "ours": [
-     0.0182,
+     0.0887,
      0.0064
     ],
     "wei": [
-     0.0188,
+     0.0845,
      0.1054
     ],
     "liu": [
-     0.0103,
+     0.0644,
      0.221
     ]
    },
@@ -1769,22 +1769,21 @@
    "letters": "efgh",
    "colour_range_cm": [
     30.0,
-    70.0
+    60.0
    ],
    "extend": "both",
    "ticks_cm": [
     30.0,
     40.0,
     50.0,
-    60.0,
-    70.0
+    60.0
    ],
    "pooled_percentiles_inside_aoa_cm": {
-    "p2": 33.4,
-    "p5": 34.8,
-    "p50": 47.0,
-    "p95": 67.7,
-    "p98": 71.3
+    "p2": 31.9,
+    "p5": 33.2,
+    "p50": 37.7,
+    "p95": 42.7,
+    "p98": 43.9
    },
    "series_p5_p50_p95_inside_aoa_cm": {
     "ours_in_aoa": [
@@ -1810,11 +1809,11 @@
     ],
     "wei": [
      0.0,
-     0.0257
+     0.2467
     ],
     "liu": [
      0.0,
-     0.0973
+     0.4021
     ]
    },
    "n_map_cells_drawn": 38086,
@@ -2114,23 +2113,20 @@
    "letters": "ijkl",
    "colour_range_cm": [
     55.0,
-    110.0
+    85.0
    ],
    "extend": "both",
    "ticks_cm": [
     60.0,
     70.0,
-    80.0,
-    90.0,
-    100.0,
-    110.0
+    80.0
    ],
    "pooled_percentiles_inside_aoa_cm": {
-    "p2": 53.0,
-    "p5": 56.7,
-    "p50": 72.6,
-    "p95": 105.8,
-    "p98": 113.1
+    "p2": 55.3,
+    "p5": 57.6,
+    "p50": 66.0,
+    "p95": 82.4,
+    "p98": 84.0
    },
    "series_p5_p50_p95_inside_aoa_cm": {
     "ours_in_aoa": [
@@ -2152,15 +2148,15 @@
    "share_of_drawn_pixels_beyond_range": {
     "ours": [
      0.1134,
-     0.0
+     0.0041
     ],
     "wei": [
      0.0536,
-     0.1684
+     0.4451
     ],
     "liu": [
      0.0503,
-     0.2138
+     0.3672
     ]
    },
    "n_map_cells_drawn": 1151169,
@@ -2776,15 +2772,15 @@
  "outputs": {
   "Fig6_product_maps.pdf": {
    "path": "outputs/figures/paper/v15/Fig6_product_maps.pdf",
-   "bytes": 7581302
+   "bytes": 7498439
   },
   "Fig6_product_maps.svg": {
    "path": "outputs/figures/paper/v15/Fig6_product_maps.svg",
-   "bytes": 12344876
+   "bytes": 12229551
   },
   "Fig6_product_maps.png": {
    "path": "outputs/figures/paper/v15/Fig6_product_maps.png",
-   "bytes": 8277738
+   "bytes": 8172444
   }
  },
  "canvas_mm": [
@@ -2800,7 +2796,7 @@
   "FITYBK+FreeSansBold"
  ],
  "qa": {
-  "n_texts": 105,
+  "n_texts": 101,
   "min_font_pt": 6.5,
   "font_sizes_pt": [
    6.5,

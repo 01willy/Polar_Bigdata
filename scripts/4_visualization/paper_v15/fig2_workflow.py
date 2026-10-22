@@ -567,7 +567,7 @@ def row_b(fig, ax, y0, A, meta):
     TH = 16.5; TW = TH * A["wh"]
     xf0 = X0 + 2.0
     yU = y0 + 13.0; yL = yU + TH + 8.0
-    g_in, g_grp = 1.9, 3.6
+    g_in, g_grp = 2.6, 5.2                                  # v15.3: panel b stretched to the content width
     xs_L = [xf0, xf0 + TW + g_in, xf0 + 2 * TW + g_in + g_grp, xf0 + 3 * TW + 2 * g_in + g_grp]
     x_in_r = xs_L[-1] + TW
     xs_U = [xf0, xf0 + TW + g_in, xf0 + 2 * (TW + g_in)]
@@ -586,12 +586,12 @@ def row_b(fig, ax, y0, A, meta):
     T(ax, xs_L[2], yL - TH / 2 - 0.9, f"Soil, {n_soil} variables", ha="left", va="bottom")
     T(ax, xf0, yL + TH / 2 + 4.6, "Each input stretched to its 2nd–98th percentile", ha="left", va="top", color=AUX)
     # bracket (all 23 inputs) -> gradient boosting; TDD -> Stefan crosses the bracket through a gap
-    xbr = x_in_r + 2.4; ytb, ybb = yU - TH / 2, yL + TH / 2
+    xbr = x_in_r + 3.4; ytb, ybb = yU - TH / 2, yL + TH / 2
     for (ya_, yb_) in ((ytb, yU - 1.1), (yU + 1.1, ybb)):
         ax.plot([xbr, xbr], [ya_, yb_], color=AXIS, lw=LW_LINE, zorder=5, solid_capstyle="butt")
     for yy in (ytb, ybb):
         ax.plot([xbr - 1.0, xbr], [yy, yy], color=AXIS, lw=LW_LINE, zorder=5, solid_capstyle="butt")
-    bx, bw, bh = xbr + 5.6, 18.0, 8.0
+    bx, bw, bh = xbr + 7.0, 21.0, 8.0
     block(ax, bx, yU - bh / 2, bw, bh, FACE_STEFAN, "Stefan\nmodel", fs=FS)
     block(ax, bx, yL - bh / 2, bw, bh, FACE_GB, "Gradient\nboosting", fs=FS)
     line(ax, [(xs_U[2] + TW, yU), (bx, yU)])
@@ -602,7 +602,7 @@ def row_b(fig, ax, y0, A, meta):
     line(ax, [(xg, yt), (xg, yL + bh / 2)], color=TRAIN, ls=DASH)
     T(ax, xg, yt + 0.6, "Training target", ha="center", va="top", color=AUX)
     # outputs: Stefan map, residual map, weighted sum, ALT map
-    ox = bx + bw + 6.0
+    ox = bx + bw + 8.5
     lo_alt = float(5 * math.floor(min(A["stats"]["p1"]["p1"], A["stats"]["r1"]["p1"]) / 5))
     hi_alt = float(5 * math.ceil(max(A["stats"]["p1"]["p99"], A["stats"]["r1"]["p99"]) / 5))
     nALT = Normalize(lo_alt, hi_alt)
@@ -613,12 +613,12 @@ def row_b(fig, ax, y0, A, meta):
     T(ax, ox + TW / 2, yU + TH / 2 + 0.8, f"Stefan, {yr}", ha="center", va="top")
     ia = thumb(fig, ox, yL - TH / 2, TW, TH, edge=ACCENT, lw=0.7); alaska_img(ia, A, A["ras"]["resid"], CM_DIV, nRES)
     T(ax, ox + TW / 2, yL + TH / 2 + 0.8, f"Residual, {yr}", ha="center", va="top")
-    xp = ox + TW + 6.2; rp_ = 1.6
+    xp = ox + TW + 8.0; rp_ = 1.6
     line(ax, [(ox + TW, yU), (xp - rp_, yU)])
     line(ax, [(ox + TW, yL), (xp, yL), (xp, yU + rp_)], color=ACCENT)
     T(ax, xp + 1.3, (yU + yL) / 2 + 1.6, "weight 0.5", ha="left", color=AUX)
     op_node(ax, xp, yU, rp_)
-    gx = xp + rp_ + 4.8
+    gx = xp + rp_ + 6.5
     line(ax, [(xp + rp_, yU), (gx, yU)], color=ACCENT)
     ia = thumb(fig, gx, yU - TH / 2, TW, TH, edge=ACCENT, lw=0.9); alaska_img(ia, A, A["ras"]["r1"], CM_ALT, nALT)
     T(ax, gx + TW / 2, yU + TH / 2 + 0.8, f"ALT {yr}", ha="center", va="top")

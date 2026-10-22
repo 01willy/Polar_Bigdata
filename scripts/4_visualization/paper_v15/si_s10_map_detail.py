@@ -10,7 +10,7 @@ e-g  Area of applicability (inside / outside; static, from the covariates of the
 Inputs: data/processed/v5/maps/{Alaska,Lena,Canada}/mean_2011_2024.csv.gz (r1, aoa_in), data/processed/map_<region>/ (grid, hillshade),
         data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1).
 Run: cd /home/willy010313/Polar_Bigdata && POLAR_PALETTE=paper13 CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=2 MPLBACKEND=Agg nice -n 10 \\
-       python3 scripts/4_visualization/paper_v15/si_s08_map_detail.py
+       python3 scripts/4_visualization/paper_v15/si_s10_map_detail.py
 """
 from __future__ import annotations
 
@@ -30,7 +30,7 @@ from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.patches import Patch  # noqa: E402
 
 F6 = MP.F6
-STEM = "FigS8_map_detail"
+STEM = "FigS10_map_detail"
 PROC = C.ROOT / "data" / "processed"; MAPS = PROC / "v5" / "maps"
 AOA_IN = to_hex(MP.CM_ALT(0.50))                                  # inside: mid ALT blue
 AOA_OUT = to_hex(MP.faded(MP.CM_ALT, 0.10))                       # outside: light blue-grey (low end of the ALT colours blended 40 % towards the land grey)
@@ -51,8 +51,10 @@ def load_region(r):
     key = r["key"]; cells, lut, ky0, kx0 = F6.cell_table(key)
     m = pd.read_csv(MAPS / r["reg"] / "mean_2011_2024.csv.gz", dtype={"cell_id": str}).set_index("cell_id")
     v = F6.cell_values(key, cells, m.r1); a = np.nan_to_num(F6.cell_values(key, cells, m.aoa_in.astype(float)), nan=0.0)
+    di = F6.cell_values(key, cells, m.aoa_di.astype(float))                                                   # v15.3: dissimilarity index (continuous)
+    import json as _json; thr = float(_json.loads((MAPS / r["reg"] / "meta.json").read_text())["aoa"]["threshold"])
     b = F6.Base(key, cells, lut, ky0, kx0, step=r["step"], tag="full"); tf = b.tf; lim = F6.region_limits(key, tf)
-    return dict(r, cells=cells, lut=lut, ky0=ky0, kx0=kx0, mean=m, v=v, a=a, base=b, tf=tf, lim=lim, asp=(lim[3] - lim[2]) / (lim[1] - lim[0]))
+    return dict(r, cells=cells, lut=lut, ky0=ky0, kx0=kx0, mean=m, v=v, a=a, di=di, thr=thr, base=b, tf=tf, lim=lim, asp=(lim[3] - lim[2]) / (lim[1] - lim[0]))
 
 
 def main():
@@ -77,7 +79,7 @@ def main():
         xs2[r["key"]] = x; x += h2 / R[r["key"]]["asp"] + g2
     assert x - g2 <= W - 0.5, ("row 2 too wide", x - g2)
     y_key2 = y2 + h2 + 6.5
-    H = y_key2 + 4.5
+    H = y_key2 + 9.5
     fig = C.figure(W, H); src = {"windows": {}, "aoa": {}}
     # ---------------- a-d: windows (1 km cells)
     zl_by_key = {k: [] for k in R}
@@ -104,7 +106,8 @@ def main():
     for i, r in enumerate(REGS):
         Rk = R[r["key"]]; b = Rk["base"]; w2 = h2 / Rk["asp"]
         ax = C.ax_mm(fig, xs2[r["key"]], y2, w2, h2)
-        rgb, _ = MP.render(b, np.where(np.isfinite(Rk["v"]), Rk["a"], np.nan), ListedColormap([AOA_OUT, AOA_IN]), Normalize(-0.5, 1.5), smooth=False, w_shade=W_SHADE)
+        from matplotlib.colors import TwoSlopeNorm as _TSN
+        rgb, _ = MP.render(b, np.where(np.isfinite(Rk["v"]), Rk["di"] / Rk["thr"], np.nan), MP.CM_ANOM, _TSN(vcenter=1.0, vmin=0.0, vmax=2.0), smooth=False, w_shade=W_SHADE)
         MP.frame(ax, rgb, b.extent, Rk["lim"]); del rgb
         MP.coast(ax, r["key"], Rk["tf"], M, base=b, cells=Rk["cells"], tol_m=600.0); MP.graticule(ax, r["key"], Rk["tf"], Rk["lim"], M, lon_lab=r["lon_lab"], lat_lab=r["lat_lab"])
         ax.tick_params(colors=C.AXIS, labelcolor=C.TEXT)
@@ -112,18 +115,19 @@ def main():
             MP.box(ax, zl, lw=0.6)
         MP.scalebar(ax, Rk["lim"], r["scale_km"], M); MP.corner_label(ax, C.REGION[Rk["reg"]][0], M)
         C.letter(fig, xs2[r["key"]] - 8.0, y2 - 3.7, "efg"[i])
-        src["aoa"][C.REGION[Rk["reg"]][0]] = dict(panel="efg"[i], frac_inside_aoa=round(float(Rk["mean"].aoa_in.mean()), 4), n_cells_mapped=int(np.isfinite(Rk["v"]).sum()),
+        src["aoa"][C.REGION[Rk["reg"]][0]] = dict(panel="efg"[i], frac_inside_aoa=round(float(Rk["mean"].aoa_in.mean()), 4), n_cells_mapped=int(np.isfinite(Rk["v"]).sum()), di_threshold=round(Rk["thr"], 4),
                                                   observed_sites=Rk["nloc"])
         Rk["base"] = None; gc.collect()
-    fig.legend([Patch(facecolor=AOA_IN, edgecolor="none"), Patch(facecolor=AOA_OUT, edgecolor="none"), Patch(facecolor=MP.LAND_HEX, edgecolor="#B5B5B5", lw=0.3),
-                Patch(facecolor=MP.WATER_HEX, edgecolor="#B5B5B5", lw=0.3)],
-               ["Inside area of applicability", "Outside", "Not mapped", "Water"], loc="upper left",
-               bbox_to_anchor=(9.0 / W, 1 - y_key2 / H), ncol=4, fontsize=C.FS_SMALL, handlelength=1.3, handleheight=0.9, columnspacing=1.4, borderaxespad=0, borderpad=0)
+    from matplotlib.colors import TwoSlopeNorm as _TSN
+    cax2 = C.ax_mm(fig, 14.0, y_key2 - 0.5, 46.0, 1.8)
+    MP.colorbar(fig, cax2, MP.CM_ANOM, _TSN(vcenter=1.0, vmin=0.0, vmax=2.0), "Dissimilarity index / threshold (> 1: outside)", [0, 0.5, 1, 1.5, 2], extend="max")
+    fig.legend([Patch(facecolor=MP.LAND_HEX, edgecolor="#B5B5B5", lw=0.3), Patch(facecolor=MP.WATER_HEX, edgecolor="#B5B5B5", lw=0.3)], ["Not mapped", "Water"], loc="upper left",
+               bbox_to_anchor=(70.0 / W, 1 - (y_key2 - 0.9) / H), ncol=2, fontsize=C.FS_SMALL, handlelength=1.3, handleheight=0.9, columnspacing=1.4, borderaxespad=0, borderpad=0)
     src["colour_range_cm"] = [lo, hi]; src["colours"] = dict(inside=AOA_IN, outside=AOA_OUT)
     rep = C.qa_figure(fig, text_ink=False); C.print_qa(STEM, rep)
     paths = C.export_si(fig, STEM); plt.close(fig)
-    C.update_si_json("S8", dict(
-        title="1 km detail and area of applicability in the three regions", stem=STEM, script="scripts/4_visualization/paper_v15/si_s08_map_detail.py",
+    C.update_si_json("S10", dict(
+        title="1 km detail and area of applicability in the three regions", stem=STEM, script="scripts/4_visualization/paper_v15/si_s10_map_detail.py",
         inputs=["data/processed/v5/maps/{Alaska,Lena,Canada}/mean_2011_2024.csv.gz (r1, aoa_in)",
                 "data/processed/map_{alaska,lena,canada}/{*_grid_x25_v1.csv.gz, hillshade_v1/shade_250m.tif}", "data/processed/v5/labels_cell_year_v5.csv"],
         years=dict(a_d="mean of the yearly maps 2011-2024", e_g="static (covariate dissimilarity to the training labels, 2011-2024 mean map table)"),

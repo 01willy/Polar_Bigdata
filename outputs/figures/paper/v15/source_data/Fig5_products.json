@@ -262,7 +262,7 @@
   "predictions": "core_v6/preds/<Region>__block__year_obs__F8TS__{P1,R1}*.csv.gz (seed mean)"
  },
  "b": {
-  "definition": "common site-years (Wei, Liu, CCI v4 and our block-CV prediction all present); hexagonal log density (n >= 2000) or points; RMSE, mean bias, Pearson r",
+  "definition": "common site-years (Wei, Liu, CCI v4 and our block-CV prediction all present); hexagonal log density in every region (gridsize 26 for n >= 2000, else 20); RMSE, mean bias, Pearson r",
   "values": {
    "Alaska_R1": {
     "n": 14326,
@@ -442,15 +442,15 @@
  "outputs": {
   "Fig5_products.pdf": {
    "path": "outputs/figures/paper/v15/Fig5_products.pdf",
-   "bytes": 114073
+   "bytes": 98575
   },
   "Fig5_products.svg": {
    "path": "outputs/figures/paper/v15/Fig5_products.svg",
-   "bytes": 929505
+   "bytes": 484374
   },
   "Fig5_products.png": {
    "path": "outputs/figures/paper/v15/Fig5_products.png",
-   "bytes": 1522755
+   "bytes": 1241529
   }
  },
  "canvas_mm": [

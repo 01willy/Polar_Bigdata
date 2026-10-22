@@ -26,22 +26,23 @@ COV_SHORT = {"tdd": "TDD", "fdd": "FDD", "swe": "Snow (SWE)", "soc": "SOC", "cla
 def main():
     t0 = time.time(); C.setup()
     W, H = 180.0, 128.0; fig = F4.C.new_fig(H); meta = {}                                  # fig34_common13 figure (its ax_mm needs fig._h_mm); c13_common.ax_mm also works on it
-    # ---------------- a: covariate sets (forest)
+    # ---------------- a: covariate sets (heat table, v15.3: replaces the forest plot)
     lad = F3.data_c(); feats = [f for f in F3.FEATS if f in set(lad.featset)]
-    ax = C.ax_mm(fig, 30.0, 11.0, 50.0, 50.0); C.clean_axes(ax)
-    for k in range(len(feats)): ax.axhline(k, color="#EDEDED", lw=0.4, zorder=0)
-    for i, r in enumerate(REGIONS):
-        for k, f in enumerate(feats):
+    xa0, ya0, cwa, rha = 33.0, 15.0, 15.0, 6.2; norm_a = TwoSlopeNorm(vcenter=0, vmin=-VMAX, vmax=VMAX)
+    ax = C.ax_mm(fig, xa0, ya0, 3 * cwa, len(feats) * rha); ax.set_axis_off(); ax.set_xlim(0, 3 * cwa); ax.set_ylim(len(feats) * rha, 0)
+    for j_, r in enumerate(REGIONS):
+        ax.text((j_ + 0.5) * cwa, -0.25 * rha, RN[r], ha="center", va="bottom", fontsize=C.FS_SMALL, color=C.TEXT)
+    for k, f in enumerate(feats):
+        ax.text(-0.8, (k + 0.5) * rha, FEAT_SHORT.get(f, f), ha="right", va="center", fontsize=C.FS_SMALL, color=C.TEXT)
+        for j_, r in enumerate(REGIONS):
             q = lad[(lad.region == r) & (lad.featset == f)]
             if q.empty: continue
-            y = k + (i - 1) * 0.25
-            ax.plot([q.lo.iloc[0], q.hi.iloc[0]], [y, y], color=RC[r], lw=C.LW_AUX, zorder=2); ax.plot(q.delta.iloc[0], y, marker=C.REGION[r][2], ms=C.MS, color=RC[r], mec=RC[r], ls="none", zorder=3)
-            meta[f"a_{r}_{f}"] = [round(float(q.delta.iloc[0]), 2), round(float(q.lo.iloc[0]), 2), round(float(q.hi.iloc[0]), 2)]
-    ax.axvline(0, color=C.ZERO, lw=C.LW_REF, zorder=1); ax.set_yticks(range(len(feats))); ax.set_yticklabels([FEAT_SHORT.get(f, f) for f in feats]); ax.set_ylim(len(feats) - 0.5, -0.5)
-    ax.set_xlabel("ΔRMSE vs recalibrated Stefan (cm)")
-    hs = [Line2D([], [], ls="none", marker=C.REGION[r][2], color=RC[r], ms=C.MS) for r in REGIONS]
-    fig.legend(hs, [RN[r] for r in REGIONS], loc="upper left", bbox_to_anchor=(30.0 / W, 1 - 6.2 / H), ncol=3, fontsize=C.FS_SMALL, frameon=False, handletextpad=0.4, columnspacing=1.4, borderaxespad=0.0)
-    C.letter(fig, 2.0, 3.0, "a"); C.text_mm(fig, 7.0, 3.3, "Covariate set (spatial-block validation)", fontsize=C.FS, ha="left", va="top")
+            v, lo, hi = float(q.delta.iloc[0]), float(q.lo.iloc[0]), float(q.hi.iloc[0]); ex = (lo > 0) or (hi < 0)
+            ax.add_patch(Rectangle((j_ * cwa + 0.08, k * rha + 0.08), cwa - 0.16, rha - 0.16, facecolor=CM_DIV(norm_a(v)), edgecolor=(C.TEXT if ex else "none"), lw=0.6))
+            ax.text((j_ + 0.5) * cwa, (k + 0.5) * rha, f"{v:+.1f}".replace("-", "−"), ha="center", va="center", fontsize=C.FS_SMALL, color=("white" if abs(v) > 4 else C.TEXT))
+            meta[f"a_{r}_{f}"] = [round(v, 2), round(lo, 2), round(hi, 2)]
+    C.text_mm(fig, xa0 - 20.0, ya0 + len(feats) * rha + 2.0, "ΔRMSE vs recalibrated Stefan (cm); outlined: 95% interval excludes 0", fontsize=C.FS_SMALL, ha="left", va="top", color=C.AUX)
+    C.letter(fig, 2.0, 3.0, "a"); C.text_mm(fig, 7.0, 3.3, "Covariate set given to the residual learner (spatial-block validation)", fontsize=C.FS, ha="left", va="top")
     # ---------------- b: terciles heat table
     ter = F3.data_d(); ter = ter[ter.tercile >= 0]; covs = [c for c, _, _ in F3.COVS if c in set(ter.covariate)]
     ax = C.ax_mm(fig, 108.0, 11.0, 70.0, 50.0); ax.set_axis_off(); norm = TwoSlopeNorm(vcenter=0, vmin=-VMAX, vmax=VMAX)

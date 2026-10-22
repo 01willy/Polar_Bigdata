@@ -16,7 +16,7 @@ from matplotlib.colors import LinearSegmentedColormap, LogNorm  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 
 ROOT = C.ROOT; RUNS = ROOT / "data" / "processed" / "v5" / "runs"; P = RUNS / "core_v6" / "preds"
-STEM = "FigS11_obs_pred_density"
+STEM = "FigS3_obs_pred_density"
 REGIONS = C.REGIONS; RN = {r: C.REGION[r][0] for r in REGIONS}
 PAT = {"P0": "P0__-__lam-1", "P1": "P1__-__lam-1", "R1": "R1__catboost__lam0.5", "D0": "D0__catboost__lam-1"}
 MN = C.METHOD_NAME; MC = C.METHOD
@@ -87,7 +87,7 @@ def main():
                            labels="data/processed/v5/labels_cell_year_v5.csv (in_forcing == 1)", deltas="data/processed/v5/runs/core_v6/deltas_vs_ref.csv (ref P1, forcing year_obs, F8TS)"),
                a=dict(definition="observed vs block-CV out-of-fold prediction on all site-years; hexagonal bins with log density (n >= 2000) or points; 1:1 line; RMSE and Pearson r", values=meta["a"]),
                outputs=C.file_info(paths), canvas_mm=[W, round(H, 1)], pdf_page_mm=C.pdf_page_mm(paths[0]), pdf_fonts=C.pdf_fonts(paths[0]), qa=rep)
-    C.update_si_json("S11", src)
+    C.update_si_json("S3", src)
     for p in paths: print(p, p.stat().st_size)
     print(f"  total {time.time() - t0:.0f} s")
 

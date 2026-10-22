@@ -6,7 +6,7 @@ year); one column group per region. Cell text = RMSE (cm); cell colour = RMSE mi
 (blue, lower; red, higher; +-10 cm). Row set per year = site-years with a Wei et al. value for that year (Liu et al. on the subset with a Liu value,
 2010-2020; n printed as n_wei / n_liu). The effect of the year-specific climate input (former panel a) is Fig. 3a of the main text.
 Inputs: data/processed/v5/labels_cell_year_v5.csv, products_cell_year_v5.csv, core_v6 out-of-fold predictions (fig5_products_v15.oof_all).
-Run: cd /home/willy010313/Polar_Bigdata && POLAR_PALETTE=paper15 CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=2 MPLBACKEND=Agg nice -n 10 python3 scripts/4_visualization/paper_v15/si_s05_yearwise_input.py
+Run: cd /home/willy010313/Polar_Bigdata && POLAR_PALETTE=paper15 CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=2 MPLBACKEND=Agg nice -n 10 python3 scripts/4_visualization/paper_v15/si_s07_yearwise.py
 """
 from __future__ import annotations
 import sys
@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm  # noqa: E402
 from matplotlib.patches import Rectangle  # noqa: E402
 
-STEM = "FigS5_yearwise"; REGIONS = C.REGIONS; RN = {r: C.REGION[r][0] for r in REGIONS}; MN = C.METHOD_NAME; MC = C.METHOD
+STEM = "FigS7_yearwise"; REGIONS = C.REGIONS; RN = {r: C.REGION[r][0] for r in REGIONS}; MN = C.METHOD_NAME; MC = C.METHOD
 NEG, POS = "#3C78A8", "#B5534A"; CM_DIV = LinearSegmentedColormap.from_list("div15", [NEG, "#FFFFFF", POS]); VMAX = 10.0; MIN_N = 30
 COLS = [("P1", "Stefan\n(recal.)", MC["P1"]), ("R1", "Physics\n+ ML", MC["R1"]), ("wei", "Wei et al.\n2026", C.PRODUCT["wei"][1]), ("liu", "Liu et al.\n2024", C.PRODUCT["liu"][1])]
 
@@ -73,7 +73,7 @@ def main():
     C.letter(fig, 2.0, 2.5, "a"); C.text_mm(fig, 7.0, 2.8, "RMSE (cm) per observation year on the site-years with a Wei et al. value; Liu et al. on its subset (to 2020)", fontsize=C.FS, ha="left", va="top")
     rep = C.qa_figure(fig, text_ink=False); C.print_qa(STEM, rep)
     paths = C.export_si(fig, STEM); plt.close(fig)
-    C.update_si_json("S5", dict(figure="Supplementary Fig. S5", script="scripts/4_visualization/paper_v15/si_s05_yearwise_input.py", version="v15.2 (2026-10-22) heat table",
+    C.update_si_json("S7", dict(figure="Supplementary Fig. S5", script="scripts/4_visualization/paper_v15/si_s07_yearwise.py", version="v15.2 (2026-10-22) heat table",
                                 definition=f"per observation year with >= {MIN_N} site-years: RMSE of recalibrated Stefan and physics-residual (spatial-block out-of-fold, seed mean, year-specific input), "
                                            "Wei et al. 2026 and Liu et al. 2024 (product value of the year) on the site-years with a Wei value; Liu on the subset with a Liu value; colour = RMSE - RMSE(physics-residual)",
                                 values=meta, outputs=C.file_info(paths), canvas_mm=[W, round(H, 1)], qa=rep))

@@ -5,7 +5,7 @@ training labels drawn at random from the training folds of a spatial-block cross
 number, averaged); bands = 95 % block-bootstrap intervals. The transfer ladder (former panel b) is Fig. 4c of the main text; the two other
 model structures (physics-input ML, physics pseudo-labels) are in the deposited ladder tables.
 Inputs: data/processed/v5/runs/ladder_v6/ladder_metrics.csv, ladder_deltas.csv via v8_f9_label_ladder.load().
-Run: cd /home/willy010313/Polar_Bigdata && POLAR_PALETTE=paper15 CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=2 MPLBACKEND=Agg nice -n 10 python3 scripts/4_visualization/paper_v15/si_s04_label_ladder.py
+Run: cd /home/willy010313/Polar_Bigdata && POLAR_PALETTE=paper15 CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=2 MPLBACKEND=Agg nice -n 10 python3 scripts/4_visualization/paper_v15/si_s05_label_ladder.py
 """
 from __future__ import annotations
 import sys
@@ -19,7 +19,7 @@ from matplotlib.lines import Line2D  # noqa: E402
 from matplotlib.patches import Patch  # noqa: E402
 import v8_f9_label_ladder as F9  # noqa: E402
 
-STEM = "FigS4_label_ladder"; REG = C.REGIONS; DASH = (0, (3.4, 1.7))
+STEM = "FigS5_label_ladder"; REG = C.REGIONS; DASH = (0, (3.4, 1.7))
 SER = {"R1": (C.METHOD_NAME["R1"], C.METHOD["R1"], "-", "o", True), "D0": (C.METHOD_NAME["D0"], C.METHOD["D0"], DASH, "o", False)}
 DODGE = {"R1": -0.08, "D0": 0.08}
 
@@ -53,7 +53,7 @@ def main():
     C.letter(fig, 0.5, 0.5, "a")
     rep = C.qa_figure(fig); C.print_qa(STEM, rep)
     paths = C.export_si(fig, STEM); plt.close(fig)
-    C.update_si_json("S4", dict(title="Within-region label ladder", stem=STEM, script="scripts/4_visualization/paper_v15/si_s04_label_ladder.py", version="v15.2 (2026-10-22): two learners, bands for both",
+    C.update_si_json("S5", dict(title="Within-region label ladder", stem=STEM, script="scripts/4_visualization/paper_v15/si_s05_label_ladder.py", version="v15.2 (2026-10-22): two learners, bands for both",
                                 inputs=["data/processed/v5/runs/ladder_v6/ladder_metrics.csv", "data/processed/v5/runs/ladder_v6/ladder_deltas.csv"],
                                 definition="Delta RMSE vs Stefan recalibrated on the same labels, spatial-block CV, labels drawn at random from the training folds (3 draws), 95 % block bootstrap",
                                 values=src, outputs=C.file_info(paths), size_mm=[W, H], qa=rep))

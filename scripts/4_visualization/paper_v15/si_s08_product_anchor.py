@@ -18,7 +18,7 @@ import pandas as pd  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 
-STEM = "FigS7_product_anchor"
+STEM = "FigS8_product_anchor"
 RUN = C.ROOT / "data" / "processed" / "v5" / "runs" / "extra_v9"
 REG = C.REGIONS
 WEI = C.PRODUCT["wei"][1]
@@ -60,7 +60,7 @@ def main():
             ax.set_xlabel("RMSE on the same site-years (cm)")
     rep = C.qa_figure(fig); C.print_qa(STEM, rep)
     paths = C.export_si(fig, STEM); plt.close(fig)
-    C.update_si_json("S7", dict(
+    C.update_si_json("S8", dict(
         title="Product-anchored residual learning", stem=STEM, script="scripts/4_visualization/paper_v15/si_s06_product_anchor.py",
         v10_number="S4 (scripts/4_visualization/paper_v10/si_s04_product_anchor.py)",
         inputs=["data/processed/v5/runs/extra_v9/pa_metrics.csv (product == 'wei')", "data/processed/v5/runs/extra_v9/preds_PA_<region>_wei.csv.gz"],

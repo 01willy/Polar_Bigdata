@@ -155,15 +155,15 @@
  "outputs": {
   "Fig3_accuracy.pdf": {
    "path": "outputs/figures/paper/v15/Fig3_accuracy.pdf",
-   "bytes": 25437
+   "bytes": 25434
   },
   "Fig3_accuracy.svg": {
    "path": "outputs/figures/paper/v15/Fig3_accuracy.svg",
-   "bytes": 58862
+   "bytes": 58871
   },
   "Fig3_accuracy.png": {
    "path": "outputs/figures/paper/v15/Fig3_accuracy.png",
-   "bytes": 565329
+   "bytes": 565345
   }
  },
  "canvas_mm": [

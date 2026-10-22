@@ -48,7 +48,7 @@ def main():
     ax.axvline(0, color=C.ZERO, lw=C.LW_REF, zorder=1); ax.set_yticks(range(3)); ax.set_yticklabels([RN[r] for r in REGIONS]); ax.set_ylim(2.5, -0.5)
     ax.set_xlabel("ΔRMSE, year-specific − mean climate input (cm)")
     hs = [Line2D([], [], ls="none", marker="s", ms=C.MS, color=MC["P1"]), Line2D([], [], ls="none", marker="o", ms=C.MS, color=MC["R1"]), Line2D([], [], ls="none", marker="o", ms=C.MS, mfc="white", mec=MC["D0"], mew=0.7)]
-    fig.legend(hs, [MN["P1"], MN["R1"], MN["D0"]], loc="upper left", bbox_to_anchor=(7.0 / W, 1 - 6.3 / H), ncol=3, fontsize=C.FS_SMALL, frameon=False, handletextpad=0.5, columnspacing=1.4, borderaxespad=0.0)
+    fig.legend(hs, [MN["P1"], MN["R1"], MN["D0"]], loc="upper left", bbox_to_anchor=(7.0 / W, 1 - 55.0 / H), ncol=3, fontsize=C.FS_SMALL, frameon=False, handletextpad=0.5, columnspacing=1.4, borderaxespad=0.0)
     C.letter(fig, 2.0, 3.0, "a"); C.text_mm(fig, 7.0, 3.3, "Year-specific climate input (spatial-block CV)", fontsize=C.FS, ha="left", va="top")
     # ---------------- b: heat table designs x (region, method)
     val = rmse_table(); x0, y0 = 90.0, 19.0; cw, rh = 9.2, 6.0; gap_g = 2.2

@@ -597,7 +597,7 @@
    "ok": true
   }
  },
- "S3": {
+ "S4": {
   "title": "SHAP attribution of the residual learner",
   "stem": "FigS3_shap",
   "script": "scripts/4_visualization/paper_v15/si_s03_shap.py",
@@ -704,7 +704,7 @@
    "ok": true
   }
  },
- "S4": {
+ "S5": {
   "title": "Within-region label ladder",
   "stem": "FigS4_label_ladder",
   "script": "scripts/4_visualization/paper_v15/si_s04_label_ladder.py",
@@ -972,7 +972,7 @@
    "ok": true
   }
  },
- "S5": {
+ "S7": {
   "figure": "Supplementary Fig. S5",
   "script": "scripts/4_visualization/paper_v15/si_s05_yearwise_input.py",
   "version": "v15.2 (2026-10-22) heat table",
@@ -1517,7 +1517,7 @@
    "ok": true
   }
  },
- "S7": {
+ "S8": {
   "title": "Product-anchored residual learning",
   "stem": "FigS7_product_anchor",
   "script": "scripts/4_visualization/paper_v15/si_s06_product_anchor.py",
@@ -1620,7 +1620,7 @@
    "ok": true
   }
  },
- "S8": {
+ "S10": {
   "title": "1 km detail and area of applicability in the three regions",
   "stem": "FigS8_map_detail",
   "script": "scripts/4_visualization/paper_v15/si_s08_map_detail.py",
@@ -1685,18 +1685,21 @@
      "panel": "e",
      "frac_inside_aoa": 0.5623,
      "n_cells_mapped": 858517,
+     "di_threshold": 3.7065,
      "observed_sites": 13253
     },
     "Lena Delta": {
      "panel": "f",
      "frac_inside_aoa": 0.6215,
      "n_cells_mapped": 38086,
+     "di_threshold": 3.4652,
      "observed_sites": 2206
     },
     "Canada (NW)": {
      "panel": "g",
      "frac_inside_aoa": 0.4287,
      "n_cells_mapped": 1151169,
+     "di_threshold": 4.5752,
      "observed_sites": 730
     }
    },
@@ -1714,23 +1717,23 @@
   "outputs": {
    "FigS8_map_detail.pdf": {
     "path": "outputs/figures/paper/v15_si/FigS8_map_detail.pdf",
-    "bytes": 2503716
+    "bytes": 3079518
    },
    "FigS8_map_detail.png": {
     "path": "outputs/figures/paper/v15_si/FigS8_map_detail.png",
-    "bytes": 2918170
+    "bytes": 3486232
    }
   },
   "size_mm": [
    180.0,
-   113.5
+   118.5
   ],
   "pdf_fonts": [
    "BICWAS+FreeSans",
    "FITYBK+FreeSansBold"
   ],
   "qa": {
-   "n_texts": 45,
+   "n_texts": 49,
    "min_font_pt": 6.5,
    "font_sizes_pt": [
     6.5,
@@ -1749,7 +1752,7 @@
    "ok": true
   }
  },
- "S9": {
+ "S11": {
   "title": "Residual ML correction maps, mean 2011-2024, three regions",
   "stem": "FigS9_correction_maps",
   "script": "scripts/4_visualization/paper_v15/si_s09_correction_maps.py",
@@ -1846,7 +1849,7 @@
    "ok": true
   }
  },
- "S10": {
+ "S9": {
   "title": "Long-record sites",
   "stem": "FigS10_site_series",
   "script": "scripts/4_visualization/paper_v15/si_s10_site_series.py",
@@ -2119,7 +2122,7 @@
    "ok": true
   }
  },
- "S11": {
+ "S3": {
   "figure": "Supplementary Fig. S11",
   "script": "scripts/4_visualization/paper_v15/fig3_accuracy.py",
   "version": "v15 (2026-10-21)",

@@ -18,85 +18,85 @@
    -0.3,
    14.2
   ],
-  "a_Alaska_F8T": [
-   1.24,
-   -1.93,
-   5.9
-  ],
-  "a_Alaska_F8TS": [
-   -0.15,
-   -0.57,
-   0.12
-  ],
-  "a_Alaska_F8TS_M": [
-   -0.3,
-   -0.64,
-   0.05
-  ],
-  "a_Alaska_F8TS_X": [
-   -0.79,
-   -1.41,
-   -0.15
-  ],
-  "a_Alaska_F8TS_ALL": [
-   -0.86,
-   -1.46,
-   -0.28
-  ],
   "a_Lena_F8": [
    -3.2,
    -9.3,
    0.39
-  ],
-  "a_Lena_F8T": [
-   -4.01,
-   -8.97,
-   -0.77
-  ],
-  "a_Lena_F8TS": [
-   -3.59,
-   -7.83,
-   -0.81
-  ],
-  "a_Lena_F8TS_M": [
-   -3.37,
-   -6.85,
-   -0.92
-  ],
-  "a_Lena_F8TS_X": [
-   -3.78,
-   -8.33,
-   -0.77
-  ],
-  "a_Lena_F8TS_ALL": [
-   -3.79,
-   -7.98,
-   -0.96
   ],
   "a_Canada_F8": [
    3.88,
    -5.1,
    10.33
   ],
+  "a_Alaska_F8T": [
+   1.24,
+   -1.93,
+   5.9
+  ],
+  "a_Lena_F8T": [
+   -4.01,
+   -8.97,
+   -0.77
+  ],
   "a_Canada_F8T": [
    -2.82,
    -5.89,
    -0.78
+  ],
+  "a_Alaska_F8TS": [
+   -0.15,
+   -0.57,
+   0.12
+  ],
+  "a_Lena_F8TS": [
+   -3.59,
+   -7.83,
+   -0.81
   ],
   "a_Canada_F8TS": [
    -3.74,
    -4.77,
    -0.83
   ],
+  "a_Alaska_F8TS_M": [
+   -0.3,
+   -0.64,
+   0.05
+  ],
+  "a_Lena_F8TS_M": [
+   -3.37,
+   -6.85,
+   -0.92
+  ],
   "a_Canada_F8TS_M": [
    -3.4,
    -4.62,
    -0.79
   ],
+  "a_Alaska_F8TS_X": [
+   -0.79,
+   -1.41,
+   -0.15
+  ],
+  "a_Lena_F8TS_X": [
+   -3.78,
+   -8.33,
+   -0.77
+  ],
   "a_Canada_F8TS_X": [
    -3.61,
    -4.48,
    -1.22
+  ],
+  "a_Alaska_F8TS_ALL": [
+   -0.86,
+   -1.46,
+   -0.28
+  ],
+  "a_Lena_F8TS_ALL": [
+   -3.79,
+   -7.98,
+   -0.96
   ],
   "a_Canada_F8TS_ALL": [
    -3.99,
@@ -508,15 +508,15 @@
  "outputs": {
   "Fig4_conditions.pdf": {
    "path": "outputs/figures/paper/v15/Fig4_conditions.pdf",
-   "bytes": 29603
+   "bytes": 27801
   },
   "Fig4_conditions.svg": {
    "path": "outputs/figures/paper/v15/Fig4_conditions.svg",
-   "bytes": 86726
+   "bytes": 79833
   },
   "Fig4_conditions.png": {
    "path": "outputs/figures/paper/v15/Fig4_conditions.png",
-   "bytes": 642519
+   "bytes": 683094
   }
  },
  "canvas_mm": [
@@ -532,7 +532,7 @@
   "FITYBK+FreeSansBold"
  ],
  "qa": {
-  "n_texts": 151,
+  "n_texts": 163,
   "min_font_pt": 6.5,
   "font_sizes_pt": [
    6.5,
@@ -544,6 +544,14 @@
   ],
   "small": [],
   "color": [
+   [
+    "+5.9",
+    "#ffffff"
+   ],
+   [
+    "−4.0",
+    "#ffffff"
+   ],
    [
     "−6.2",
     "#ffffff"

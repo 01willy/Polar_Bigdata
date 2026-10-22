@@ -1,13 +1,13 @@
 """Supplementary Fig. S3 (v11): SHAP attribution of the residual learner (content of v9_f10_extra.py SHAP).
 
-Copied from paper_v10/si_s03_shap.py (data unchanged) and restyled for v11 (si13_common.py, POLAR_PALETTE=paper13). Input groups take the
+Copied from paper_v10/si_s04_shap.py (data unchanged) and restyled for v11 (si13_common.py, POLAR_PALETTE=paper13). Input groups take the
 muted colours of the deck SHAP figure (v9_f10_extra.GROUP_HEX: climate blue, terrain olive, soil brown) instead of the v10 greys; numbers inside
 the bars use dark grey or white, whichever has the higher contrast on the bar.
 a  Share of mean |SHAP| by input group (climate, terrain, soil) for the residual learner of Physics + residual ML and for Direct ML, per region.
 b  The four inputs with the largest mean |SHAP| of the residual learner (cm), per region; bar colour = input group.
 Inputs: data/processed/v5/runs/extra_v9/shap_groups.csv, shap_summary.csv (CatBoost, all label cell-years of each region).
 Output: outputs/figures/paper/v15_si/FigS3_shap.{pdf,png}, entry S3 of outputs/figures/paper/v15_si/SI_figures.json.
-Run: cd /home/willy010313/Polar_Bigdata && POLAR_PALETTE=paper13 CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=2 nice -n 10 python3 scripts/4_visualization/paper_v15/si_s03_shap.py
+Run: cd /home/willy010313/Polar_Bigdata && POLAR_PALETTE=paper13 CUDA_VISIBLE_DEVICES="" OMP_NUM_THREADS=2 nice -n 10 python3 scripts/4_visualization/paper_v15/si_s04_shap.py
 """
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.patches import Patch  # noqa: E402
 import v9_f10_extra as F10  # noqa: E402
 
-STEM = "FigS3_shap"
+STEM = "FigS4_shap"
 RUN = C.ROOT / "data" / "processed" / "v5" / "runs" / "extra_v9"
 REG = C.REGIONS
 GROUP_HEX = {"climate": "#4D78A7", "terrain": "#919161", "soil": "#9B6B49"}   # deck SHAP colours (v9_f10_extra.GROUP_HEX #4F7CAC, #8C8C5A, #A8744F)
@@ -82,8 +82,8 @@ def main():
     rep = C.qa_figure(fig, ignore_ink_for=[str(v) for v in range(101)]); C.print_qa(STEM, rep)
     paths = C.export_si(fig, STEM); plt.close(fig)
     n = s.groupby("region").n.first().to_dict()
-    C.update_si_json("S3", dict(
-        title="SHAP attribution of the residual learner", stem=STEM, script="scripts/4_visualization/paper_v15/si_s03_shap.py",
+    C.update_si_json("S4", dict(
+        title="SHAP attribution of the residual learner", stem=STEM, script="scripts/4_visualization/paper_v15/si_s04_shap.py",
         version="v11 (2026-10-16): v11 restyle of v10 FigS3_shap (input-group colours from the deck SHAP figure); numbers unchanged",
         inputs=["data/processed/v5/runs/extra_v9/shap_groups.csv", "data/processed/v5/runs/extra_v9/shap_summary.csv"],
         years="all label cell-years of each region: Alaska 2010-2024, Lena Delta 2010-2022, Canada (NW) 2010-2024; climate input to the observation day",
