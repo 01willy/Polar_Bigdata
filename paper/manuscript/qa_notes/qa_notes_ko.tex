@@ -1,0 +1,120 @@
+% qa_notes_ko.tex (2026-10-22): 연구 질문 · 답변 · 방향 정리 문서. 빌드: bash paper/manuscript/qa_notes/build.sh -> qa_notes_ko.pdf (deliverables/paper/ 로 복사)
+\documentclass[10pt,a4paper]{article}
+\usepackage{xeCJK}\setCJKmainfont{Noto Serif CJK KR}\xeCJKsetup{CJKspace=true}
+\usepackage[margin=22mm]{geometry}\usepackage{booktabs,longtable,array,tabularx}\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{3pt}\setlength{\parindent}{0pt}\renewcommand{\arraystretch}{1.12}
+\title{\large 물리 잔차 ALT 연구: 질문 · 답변 · 방향 정리}
+\author{\normalsize Polar\_Bigdata 세션 기록(원고 v15.2 기준)}\date{\normalsize 2026-10-22, 최신 갱신}
+\begin{document}\maketitle
+
+\section{문서의 목적과 관리 규칙}
+이 문서는 원고 검토 중에 나온 질문(2026-10-21 · 10-22)과 그 답, 그리고 연구의 목적 · 결과 · 결론에 대한 정성적 서술을 한 곳에 모은다. 원고 본문이 아니라 저자 내부 참고용이며, 질문이 더해질 때마다 3절에 항목을 추가하고 8절에 변경 이력을 남긴다. 수치는 모두 저장된 결과 표(\texttt{data/processed/v5/runs/core\_v6}, \texttt{ladder\_v6})와 그림 source\_data 에서 가져왔고, 본문 매크로와 같은 값이다. 소스: \texttt{paper/manuscript/qa\_notes/qa\_notes\_ko.tex}.
+
+\section{연구의 목적 · 명분 · 의의}
+\textbf{문제.} ALT 관측은 드물고 군집되어 있어 지역 지도는 관측을 확장하는 모델에 의존한다. Stefan 모델은 전이되지만 지역당 계수 하나로 토양 · 지형 차이를 담지 못하고, 직접 ML 은 학습 지점을 맞추지만 학습 지점에서 떨어진 곳과 새 지역에서 정확도가 떨어지며, 공개 격자 제품은 자기 지점 집합 안에서만 검증되어 있다.
+
+\textbf{접근.} 재보정 Stefan 모델을 기준으로 두고 그 잔차를 기후 · 지형 · 토양 23개 입력으로부터 gradient boosting 이 학습하는 물리 잔차 워크플로. 모든 라벨 · 입력 · 예측 · 점수가 '지점 하나 · 명시된 한 해'를 가리키는 지점-연도 설계, 다섯 검증 설계(무작위 → 지역 제외), 공개 제품 5종을 같은 지점-연도에서 채점.
+
+\textbf{주장(원고 제목 · 초록).} (i) 방법의 순위는 검증 설계에 따라 바뀌며 직접 ML 은 지역이나 라벨 대부분을 빼면 가장 많이 잃는다. (ii) 잔차 학습기는 토양 · 지형 입력이 있을 때 물리를 개선하고, 새 지역에서는 라벨 25개부터 이득을 준다. (iii) 공개 제품의 지역 차이는 학습 지점 분포로 설명되며, 같은 지점-연도에서 물리 잔차 모델이 제품보다 관측에 가깝다. (iv) 적용 가능 영역과 예측 구간이 딸린 2011--2024년 연도별 1 km 지도 세 지역.
+
+\textbf{의의.} 기법 자체(잔차 학습)는 새롭지 않다. 기여는 ALT 에 대해 물리 기준 잔차 학습을 지점-연도 단위로, 다섯 검증 설계와 라벨 수 · 전이 실험으로, 공개 제품과 같은 조건에서 처음 체계적으로 시험한 평가 설계와, 관측이 드문 지역에 적용할 수 있는 절차(물리 출발점 + 소수 지역 라벨)에 있다.
+
+\section{질문과 답변}
+
+\subsection*{Q1 (10-21). 알래스카 2013 공통 셀에서 우리 지도의 상관(0.34)이 제품(0.53 · 0.57)보다 낮은데 중요한가, 2013 을 쓸 이유가 있나}
+2013 은 알래스카에서 관측 셀이 가장 많은 해이므로 선택 기준(지역별 관측 셀 최다 해)에 따른 것이다. 상관이 낮은 이유는 알래스카 2013 공통 셀 126개의 관측 범위가 좁고(대부분 40--80 cm) 셀 안 산포(합동 표준편차 13 cm)가 크기 때문이며, RMSE 로 보면 우리 14.9 cm 대 Wei 13.4 · Liu 12.9 cm 로 차이가 작고 25 km 밖에서는 9.1 대 10.9 · 8.5 cm 이다. 이득 부재는 2013 이나 가중치 $\lambda$ 의 문제가 아니다(평균 입력 +0.33, 연도 입력 $-0.15$, $\lambda$ 0.25/1 에서 $-0.15$/+0.30). 알래스카에서는 라벨이 15,540개로 조밀해 재보정 Stefan 이 이미 지역 수준을 맞추고, 남는 오차의 큰 부분이 1 km 안의 산포여서 어느 방법도 줄이지 못한다(보충 표 S6). 원고는 이를 '알래스카 이득 부재' 로 그대로 적는다.
+
+\subsection*{Q2 (10-21). 1 km 셀 단위 라벨 재집계는 왜 필요하고 전면 재실행이 필요한가}
+한 1 km 셀에 여러 탐침 지점이 들어가므로(알래스카 중앙값 여러 지점) 지점-연도 점수는 셀 안 산포를 모델 오차로 센다. 같은 겹 밖 예측을 셀 · 연도별로 평균해 다시 채점하면(재실행 없이 재집계만) 지도 해상도에서의 오차를 얻는다. 결과(보충 표 S6): 물리 잔차 대 Stefan 의 이득은 두 단위에서 유지되고, 알래스카에서 직접 ML 의 지점-연도 우위(17.3 대 18.4)는 셀-연도에서 뒤집힌다(24.7 대 24.0); 지역 제외에서는 두 단위 모두 직접 ML 이 가장 부정확하다(알래스카 23.9 대 23.4, 레나 37.4 대 22.2). 전면 재실행은 필요하지 않다.
+
+\subsection*{Q3 (10-21 · 10-22). 지도를 2011--2024년 평균으로 그리는 선행 연구 근거는 무엇이고, PDF 에 어떻게 기록되어 있나}
+확인한 PDF(\texttt{references/}) 와 캡션 원문의 요지는 다음과 같다(상세 조사: \texttt{docs/research/2026-10-21/map\_and\_figure\_practice.md}).
+\begin{small}\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.2\textwidth}>{\raggedright\arraybackslash}p{0.34\textwidth}X@{}}
+\toprule 논문 · PDF & 본문 지도 & 캡션 원문(요지) \\ \midrule
+Liu et al. 2024, ERL 19, 014020 (\texttt{08\_recent\_alt\_2022\_2026/liu2024\_widespread\_alt\_deepening\_2003\_2020\_erl.pdf}) & 2003--2020 평균 지도 + 추세 지도; 연도별 지도 없음 & Figure 4 ``Spatial patterns of (a) mean, (b) standard deviation, (c) coefficient of variation \ldots''(2003--2020); Figure 5 ``\ldots (a) mean \ldots'' of the trend; Figure 3 ``site-level comparison \ldots of mean ALT'' \\
+Wei et al. 2026, ESSD Discussions (\texttt{08\_recent\_alt\_2022\_2026/wei2026\_nh\_alt\_1km\_2000\_2024\_essdd.pdf}) & 선택 연도 소형 다중(a--f) + 면적 비율; 제품 비교는 2000--2020 평균 & Figure 4 ``Spatiotemporal distribution of ALT (a--f) and the proportion of ALT area at different levels (g) from 2000 to 2024''; Figure 7 ``Spatial comparison of the reconstructed ALT dataset with existing 1 km hemispheric products'' \\
+Ran et al. 2022, ESSD 14, 865 (\texttt{01\_benchmark/ran2022\_panarctic.pdf}) & 2000--2016 평균 & Figure 4 ``Distribution of the average active layer thickness (ALT) in the Northern Hemisphere for the period of 2000--2016'' \\
+Aalto et al. 2018, GRL 45, 4889 (\texttt{12\_manuscript\_refs/aalto2018\_circumarctic\_ground\_temp\_alt.pdf}) & 기간 평균(2000--2014, 2041--2060)과 차이 & Figure 4 ``Forecasted mean annual ground temperatures (MAGT) and active layer thickness (ALT) across study domain for two periods and their differences'' \\
+Yi et al. 2018, The Cryosphere 12, 145 (조사 문서 11번, pdftotext 캡션) & 2001--2015 평균 ALT + 추세 지도 & Fig 3a 다년 평균 1 km ALT, Fig 5a 2001--2015 추세 \\
+Obu et al. 2019, Earth-Sci. Rev. 193, 299 (\texttt{02\_alt\_dl\_mapping/obu2019\_ttop\_nh.pdf}) & 2000--2016 평균 MAGT & Fig 3 다년 평균 MAGT(ALT 지도 없음) \\
+ESA CCI Permafrost v4 PUG (\texttt{01\_benchmark/esa\_cci\_permafrost\_v4.pdf}) & 연도별 제품; 설명서 예시는 단일 연도 & ALT 2015 예시 지도 \\
+\bottomrule\end{tabularx}\end{small}
+결론: 본문 주 지도를 다년 평균으로 두는 것이 ALT · 영구동토 ML 지도 논문의 지배적 관행이고(위 6편 중 5편), 연도별 지도는 선택 연도 소형 다중(Wei)이나 단일 연도 예시(CCI)로만 쓰인다. 우리 그림 7 은 평균 지도(a--c)에 연도별 편차 14장(f) · TDD 응답(d) · 추세(e)를 더하고, 그림 6 은 특정 연도의 관측 셀과 제품을 같은 해에서 비교하므로 관행 안에 있으면서 극지연의 '연도 불명' 지적을 해소한다. 권고: 그림 7a--c · 보충 그림 S8 은 '14장 연도별 지도의 평균' 으로 두고 캡션에 명시하며(현재 반영), 특정 연도 비교는 그림 6 · 보충 그림 S5 가 맡는다. 제품 비교까지 단일 연도로 한 예는 선행 연구에 없으므로, 이 점은 원고에서 '처음' 으로 적되 과장하지 않는다.
+
+\subsection*{Q4 (10-22). 보충 방법 S3 의 제품들은 다른 지역 예측을 염두에 둔 것인가, 공개되어 사용이 허용되는가}
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item Wei et al. 2026 (ESSD Discussions, 저자 CC BY 4.0; 자료 Zenodo 21667583 v2, CC BY 4.0): ``A 1 km resolution dataset of Northern Hemisphere permafrost active layer thickness \ldots from 2000 to 2024''; 연구 영역은 ``the extensive permafrost domain of the Northern Hemisphere \ldots including Siberia, Alaska, and the Canadian Arctic''. 반구 전체 제품이며 임의 지역 사용이 전제이다. 토론 단계 원고이므로 인용 시 ESSDD 로 표기한다.
+\item Liu et al. 2024 (ERL, open access CC BY 4.0; 자료 Zenodo 10070610, CC BY 4.0): ``northern permafrost regions (NPRs) from 2003 to 2020''. 반구 제품.
+\item ESA CCI Permafrost ALT v4 · v5 (CEDA, ESA CCI 자료 정책: 출처 표기 조건의 자유 이용): 범북극 연도별 1 km 제품(1997--2021).
+\item Aalto et al. 2018 (GRL; 자료 Zenodo 5003804, CC0): ``circum-Arctic'' 영역(북위 30도 이상 육지), 2000--2014 기준기 값.
+\item Yi \& Kimball 2019 (ORNL DAAC 1760, NASA EOSDIS 공개): 알래스카 한정이므로 알래스카에만 썼다.
+\end{itemize}
+따라서 다섯 제품 모두 공개 약관으로 재사용이 허용되고, Yi \& Kimball 을 뺀 넷은 반구 전체를 덮는 제품이라 우리 세 지역에서의 채점은 제품의 의도된 사용 범위 안이다. 다만 어느 제품도 '학습 지점을 주지 않은 지역의 특정 해 관측' 으로 검증된 적은 없고, 이것이 그림 5 · 6 의 명분이다. 원고 보충 방법 S3 과 보충 표 S1 에 약관 · 저장소를 적었다.
+
+\subsection*{Q5 (10-22). 라벨 수를 늘리면서 어떤 자료를 어떻게 늘렸나}
+\textbf{지역 안 사다리(보충 그림 S4).} 지역의 지점-연도를 0.5도 공간 블록 5겹으로 나눈 뒤, 겹마다 학습 겹(다른 4겹)의 지점-연도에서 $n$개(25, 50, 100, 250, 500, 1000, 2500, 전량)를 무작위로(균등, 비복원, 씨앗 0 · 1 · 2) 뽑아 모델을 학습하고, 제외한 겹의 모든 지점-연도로 채점한다. 기준은 같은 $n$개로 재보정한 Stefan 모델이고, 차이는 5겹을 합친 뒤 블록 부트스트랩으로 구간을 구한다. 추출은 블록 · 연도로 층화하지 않으므로 한 추출이 공간적으로 몰릴 수 있고, 3회 평균이 이를 완화한다. \textbf{전이 사다리(그림 4c).} 원천 = 다른 두 지역의 전체 지점-연도, 대상 라벨 = 대상 지역 학습 겹에서 무작위 $n$개(0, 25, 50, 100, 250, 500), 시험 = 대상 지역의 제외 겹. Stefan 은 $n \ge 3$ 이면 대상 라벨로 재보정, 아니면 원천 계수. 코드: \texttt{scripts/3\_deep\_learning/v6\_label\_ladder.py}.
+
+\subsection*{Q6 (10-22). 입력 연도가 섞이거나 평균 입력이 쓰인 실험은 없는가(변인 통제 감사)}
+코드 경로를 따라 확인한 결과이다.
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item 라벨: 지점-연도(관측 위치 · 관측 연도). 한 지점의 한 해 여러 측정은 평균, 평균 관측일 보존.
+\item 기후 입력: \texttt{testbed\_v5.with\_forcing(\ldots, "year\_obs")} 가 관측 연도의 월 자료에서 관측일까지 누적한 TDD 를 쓴다(날짜 없는 CALM 은 9월 1일). 나머지 7개 기후 변수도 관측 연도 값. 전년 지연 변수(민감도)는 관측 전년.
+\item 정적 입력: 지형 · 토양(시간 불변). MODIS(민감도 묶음)는 \texttt{build\_v5\_modis\_cell\_year.py} 가 셀 · 연도별로 만든 값을 쓴다.
+\item 지도: \texttt{v5\_map\_predict.py} 가 해마다 그 해의 기후 입력(TDD 는 9월 1일까지)으로 예측하고, 2011--2024년 평균 지도는 14장 연도별 지도의 평균이다(평균 입력으로 만든 지도가 아님). 적용 가능 영역의 비유사도 지수만 2011--2024년 평균 입력으로 계산한다(방법에 기술).
+\item 제품: 관측 연도의 제품 값(Aalto 는 단일 기준기 값).
+\item 평균 기후 입력은 그림 3a 의 민감도 비교에만 쓰이고, 보충 표 S2 가 분석별 연도 · 입력을 나열한다.
+\end{itemize}
+따라서 '연도 혼재' 실험은 없다. 설계상 주의점 하나: 지도는 9월 1일 TDD(계절 말) 기준이고 라벨 채점은 관측일 기준이므로, 지도와 관측을 직접 비교하는 그림 6 · 보충 그림 S10 은 이 차이를 캡션에 밝힌다.
+
+\subsection*{Q7 (10-22). 직접 ML 만으로 물리 제품이나 Stefan 보다 좋게 나올 수 있나, 어느 해의 예측인가}
+가능하다. 지역 안 공간 블록 검증에서 직접 ML 은 그 지역의 라벨 수천 개와 지형 · 토양 입력으로 학습하므로 계수 하나인 Stefan 보다 지점 차이를 잘 맞추고(알래스카 17.3 대 18.6 cm), 공개 제품은 우리 라벨로 학습하지 않았거나(Wei 는 CALM · GTN-P 201개 지점) 관측으로 학습하지 않은(CCI) 모델이므로 우리 지역에서 더 나쁠 수 있다. 모든 수치는 2010--2024년 지점-연도 전부를 각자 자기 해의 입력과 제품 값으로 채점한 것이다(연도별 결과는 보충 그림 S5). 그러나 이 우위는 시험 지점이 학습 지점 사이에 끼어 있는 설계에서만 나타나고, 지역을 빼면(레나 39.3 cm) 또는 라벨이 적으면(알래스카 · 캐나다 25--250개에서 Stefan 보다 나쁨) 사라진다. 원고는 이 사실을 숨기지 않되 순서를 바꿔, 물리 잔차 모델의 이득과 안정성을 먼저 적고 직접 ML 의 전량 라벨 우위는 조건부 사실로 뒤에 둔다(보충 표 S4 · S6 캡션의 '읽는 법').
+
+\subsection*{Q8 (10-22). 지점-연도와 셀-연도의 차이}
+지점-연도 = 관측 위치 하나(좌표 0.0001도 반올림)의 한 해. 셀-연도 = 한 1 km 지도 셀 안 모든 지점의 관측과 예측을 한 해 단위로 평균한 것. 알래스카 15,540 지점-연도가 910 셀-연도가 되는 것은 ABoVE 탐침 측선의 여러 지점이 한 셀에 들어가기 때문이다. 보충 방법 S1 과 보충 표 S6 캡션에 정의를 넣었다.
+
+\subsection*{Q9 (10-22). 그림에서 'Wei' 라고 적어도 되나}
+그림 안 짧은 표기로 'Wei 2026' 은 흔하지만 'Wei et al. 2026' 이 안전하다. 모든 그림 · 표 · 보충의 제품 표기를 'Wei et al. 2026', 'Liu et al. 2024', 'Aalto et al. 2018' 로 통일하였다(색표 공용 모듈과 각 스크립트).
+
+\subsection*{Q10 (10-22). 옛 보충 그림 S5a 에서 캐나다 직접 ML 의 구간이 길었던 이유}
+연도별 입력 대 평균 입력의 RMSE 차이에 대한 95\% 블록 부트스트랩 구간인데, 캐나다는 블록 26개뿐이고 직접 ML 의 블록별 차이가 블록마다 부호가 달라 구간이 넓다(그림 3a 에서도 캐나다 직접 ML 이 가장 넓다). 판정은 '차이 미해결' 이며 모델이 나쁘다는 뜻이 아니다. 옛 S5a 는 본문 그림 3a 와 중복이라 보충에서 뺐다.
+
+\subsection*{Q11 (10-22). 보충 그림 S10 에 레나 제품 값이 없고 캐나다 패널이 없던 이유}
+레나 델타의 최다 관측 지점(사모일로프 부근)은 Wei · Liu 래스터에 값이 없는 셀(수역 · 삼각주 마스크)이라 제품 선을 그릴 수 없다. 캐나다는 옛 스크립트가 두 지역만 골랐기 때문이며, v15.2 에서 세 지역으로 바꾸고 관측을 선으로 잇고, 지역별 가장 따뜻한 해 · 추운 해를 음영으로 표시해 '튀는 해' 가 더운 계절(알래스카 2019, 레나 2021)임을 읽게 하였다. 캐나다 지점은 관측이 모델보다 약 20 cm 깊은 수준 차이를 보이는데, 이는 CALM 격자 평균(원고 보충 표 S7 의 캐나다 CALM 편향 $-23$ cm)과 같은 현상이다.
+
+\subsection*{Q12 (10-21). 왜 Stefan 인가, 왜 CatBoost 인가}
+Stefan: 매개변수 하나라 소수 관측으로 재보정 · 전이되고, 입력이 연도별 TDD 라 연도 응답을 가지며, Kudryavtsev 는 블록 CV 에서 더 나쁘다(21.7/20.4/25.4 대 Stefan 18.6/21.0/30.6 cm; 레나 · 캐나다에서 우세하나 지역 제외에서 25.1/21.8/35.4 로 불안정). CatBoost: 학습기 5종(CatBoost · RF · MLP · TabM · FT-T) 비교에서 물리 잔차 구조의 이득이 가장 안정적이고(보충 그림 S2b), 표 자료에서 gradient boosting 이 신경망과 대등하거나 낫다는 선행 결과(Grinsztajn 2022)와 맞다.
+
+\section{결과 정리와 정성적 결론}
+\begin{small}\begin{tabular}{@{}lrrrrrr@{}}\toprule
+RMSE (cm), 지점-연도 & \multicolumn{2}{c}{알래스카} & \multicolumn{2}{c}{레나 델타} & \multicolumn{2}{c}{캐나다(북서부)} \\
+ & 블록 CV & 지역 제외 & 블록 CV & 지역 제외 & 블록 CV & 지역 제외 \\ \midrule
+Stefan(재보정 / 원천) & 18.6 & 19.4 & 21.0 & 21.5 & 30.6 & 27.8 \\
+물리 + 잔차 ML & 18.4 & 17.5 & 17.4 & 23.5 & 26.9 & 24.2 \\
+직접 ML & 17.3 & 20.6 & 15.9 & 39.3 & 26.1 & 23.9 \\ \midrule
+전이, 대상 라벨 0 / 25 / 500 (물리 잔차) & \multicolumn{2}{c}{17.8 / 17.3 / 17.5} & \multicolumn{2}{c}{23.8 / 19.9 / 18.5} & \multicolumn{2}{c}{24.3 / 26.3 / 26.1} \\
+전이, 대상 라벨 0 / 25 / 500 (직접 ML) & \multicolumn{2}{c}{21.5 / 19.5 / 18.5} & \multicolumn{2}{c}{39.5 / 21.3 / 17.5} & \multicolumn{2}{c}{24.2 / 23.8 / 22.8} \\
+지역 안 라벨 25개, Stefan 대비 $\Delta$ (물리 잔차 / 직접) & \multicolumn{2}{c}{$-0.9$ / $+2.8$} & \multicolumn{2}{c}{$-0.8$ / $-0.8$} & \multicolumn{2}{c}{$-0.3$ / $+1.2$} \\
+공통 지점-연도: 물리 잔차 / Wei / Liu & \multicolumn{2}{c}{17.1 / 17.9 / 18.8} & \multicolumn{2}{c}{21.1 / 34.6 / 33.0} & \multicolumn{2}{c}{25.8 / 27.0 / 27.9} \\
+관측에 더 가까운 셀 비율(대 Wei / 대 Liu) & \multicolumn{2}{c}{52 / 50 \%} & \multicolumn{2}{c}{82 / 85 \%} & \multicolumn{2}{c}{53 / 42 \%} \\
+\bottomrule\end{tabular}\end{small}
+
+\textbf{Stefan 대비.} 레나 · 캐나다에서 3.6 · 3.7 cm(약 17 · 12 \%) 개선, 알래스카는 개선 없음. 이득은 토양 · 지형 입력에서 나오고(기후만으로는 없음), 잔차는 Stefan 항에 없는 정보를 학습한다(SHAP).
+
+\textbf{직접 ML 대비.} 전량 라벨 · 지역 안 설계에서는 직접 ML 이 0.8--1.6 cm 더 정확하다(셀-연도에서는 알래스카가 뒤집힘). 그러나 지역을 빼면 직접 ML 은 알래스카(20.6 대 17.5)와 레나(39.3 대 23.5)에서 크게 나빠지고, 라벨 25--250개에서는 알래스카 · 캐나다에서 Stefan 보다 나쁘며, 전이에서 대상 라벨이 적을 때 알래스카 · 레나에서 물리 잔차 모델이 앞선다. 캐나다 전이에서는 직접 ML 이 모든 $n$ 에서 1.5--3 cm 더 정확한데, 이는 알래스카의 ABoVE 탐침 자료가 캐나다와 같은 프로그램 · 규약이라 원천 라벨이 대상을 잘 대표하기 때문으로 해석한다. 즉 물리 잔차 모델의 장점은 '가장 정확' 이 아니라 '설계 · 지역 · 라벨 수에 걸쳐 가장 안정적이고 Stefan 보다 나빠지지 않음' 이다.
+
+\textbf{제품 대비.} 같은 지점-연도에서 세 지역 모두 물리 잔차 모델이 Wei · Liu 보다 RMSE 가 낮고, 레나에서 차이가 크다(제품은 관측과 무관한 좁은 범위를 예측). 알래스카 · 캐나다에서는 차이가 1--2 cm 로 작아 '약간 나은 수준' 이 정직한 표현이다. 지역을 빼고도(지역 제외 RMSE 17.5 / 23.5 / 24.2) 제품(17.9 / 34.6 / 27.0)과 같거나 낫다는 점이 전이성 주장의 근거이다.
+
+\section{선행 연구 대비 차별점}
+(1) 지점-연도 설계: 라벨 · 입력 · 예측 · 점수가 한 해를 가리키며 입력은 관측일까지 누적(제품은 연도 평균 변수 또는 다년 평균 라벨). (2) 다섯 검증 설계를 같은 자료에 적용해 순위 변화를 보임(제품 논문은 무작위 또는 지점 제외 분할 하나). (3) 라벨 수 · 전이 사다리로 '새 지역에 몇 개가 필요한가' 를 수치로 제시. (4) 공개 제품 5종을 같은 지점 · 같은 해에서 채점하고 학습 지점 거리(25 km)로 나누어 비교. (5) 적용 가능 영역과 예측 구간을 지도에 함께 제공. 기법(잔차 학습, gradient boosting)은 Willard 2022 · Read 2019 의 틀 안에 있고, Gautam 2025(알래스카, Stefan 대 RF)를 세 지역 · 다섯 설계 · 제품 비교로 확장한 위치이다.
+
+\section{기대효과 · 적용 가능성 · 한계}
+\textbf{기대효과.} 관측이 드문 지역에서 (a) 원천 계수 Stefan 으로 시작하고 (b) 지역 관측 25개 안팎으로 재보정 · 잔차 보정하며 (c) 적용 가능 영역 밖은 쓰지 않는 절차. 연도별 지도는 기후의 해별 변동을 담으므로 지반 안정성 · 수문 · 탄소 연구에서 특정 해의 융해 깊이를 요구하는 응용(예: 더운 해의 융해 심화)에 쓸 수 있다. \textbf{결합 가능성.} 보충 그림 S7 은 잔차 학습기를 제품(Wei) 기준에도 붙일 수 있음을 보이며(알래스카 19.6 → 18.7 cm), Stefan 기준이 여전히 더 정확하다. 물리 모델 두 개의 앙상블(Stefan + Kudryavtsev)과 제품 결합은 후속 과제로 적는다. \textbf{한계.} 알래스카에서 이득이 없고, 1 km 안 산포(13 cm)는 어느 방법도 줄이지 못하며, 캐나다 전이는 직접 ML 이 더 나아 '물리 기준이 항상 낫다' 고 말할 수 없다. 추세는 모델 응답이지 관측 추세가 아니다.
+
+\section{냉정한 평가(2026-10-22)}
+초록이 제시한 세 비교 가운데 Stefan 대비 개선(두 지역)과 제품 대비 우위(레나 명확, 나머지 약간)는 달성했고, 직접 ML 대비는 '조건부' 다. 목표를 '모든 설정에서 가장 정확한 모델' 로 잡으면 달성하지 못했고, '물리의 전이성을 지키면서 ML 의 정확도에 가까워지는 모델' 로 잡으면 달성했다. 원고는 후자로 명분을 세운다: 제목 · 초록 · 서론 · 결론을 '안정성 · 전이성 · 새 지역 절차' 로 맞추고, 직접 ML 의 전량 라벨 우위는 사실로 적되 그 조건(지점 끼워 넣기 설계)과 붕괴(지역 제외 · 소수 라벨)를 같은 문장에 둔다. 사용자가 든 '특정 라벨 조건에서 가장 뛰어난 지점이 있고, ML 과 물리 잔차 ML 의 혼용 · 제품 결합의 가능성을 연 것' 이라는 판단에 동의하며, 혼용 규칙(예: 라벨 수 · 적용 가능 영역에 따라 직접 ML 과 물리 잔차를 고르는 결정 규칙)은 수치가 더 필요해 고찰의 '향후' 로 둔다.
+
+\section{변경 이력}
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item 2026-10-22: 문서 신설. Q1--Q12, 결과 표, 평가 수록. 원고 v15.2(보충 재구성 · 초록 · 서론 수정)와 동기.
+\end{itemize}
+\end{document}

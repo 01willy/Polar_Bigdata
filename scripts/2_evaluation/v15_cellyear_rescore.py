@@ -21,7 +21,7 @@ OUT_SRC = ROOT / "outputs/figures/paper/v15/source_data"; SH = ROOT / "paper/man
 CELL = 0.009; B = 2000; SEED = 0
 REGIONS = ("Alaska", "Lena", "Canada"); RK = {"Alaska": "Ak", "Lena": "Le", "Canada": "Ca"}
 REGION_EN = {"Alaska": "Alaska", "Lena": "Lena Delta", "Canada": "Canada (NW)"}; REGION_KO = {"Alaska": "알래스카", "Lena": "레나 델타", "Canada": "캐나다(북서부)"}
-METHODS = (("P0", "P0__-__lam-1"), ("P1", "P1__-__lam-1"), ("R1", "R1__catboost__lam0.5"), ("D0", "D0__catboost__lam-1"))
+METHODS = (("R1", "R1__catboost__lam0.5"), ("P1", "P1__-__lam-1"), ("P0", "P0__-__lam-1"), ("D0", "D0__catboost__lam-1"))   # v15.2: physics-residual first
 MK = {"P0": "Pz", "P1": "Po", "R1": "Ro", "D0": "Dz"}
 DESIGNS = (("block", "Spatial block", "공간 블록"), ("region", "Region hold-out", "지역 홀드아웃"), ("random", "Random", "무작위"))
 PAIRS = {"block": (("R1", "P1"), ("D0", "P0")), "region": (("R1", "P0"), ("D0", "P0")), "random": (("D0", "P0"),)}
@@ -118,12 +118,12 @@ for lang, RN, NM, DN in (("en", REGION_EN, NAME_EN, {d: e for d, e, _ in DESIGNS
                 comp = f"{NM[a]} − {NM[b]}"
                 L.append(f"{RN[region]} & {DN[design]} & {comp} & {s} & {c} \\\\")
     body_b = "\n".join(L)
-    HA = {"en": r"Region & Design & $n$ & Stefan (source) & Stefan (recalibrated) & Physics + residual ML & Direct ML \\",
-          "ko": r"지역 & 설계 & $n$ & Stefan(원천 계수) & Stefan(재보정) & 물리 잔차 ML & 직접 ML \\"}[lang]
-    HB = {"en": r"Region & Design & Comparison & Site-years: $\Delta$RMSE [95\% CI] & Cell-years: $\Delta$RMSE [95\% CI] \\",
-          "ko": r"지역 & 설계 & 비교 & 지점-연도: $\Delta$RMSE [95\% 구간] & 셀-연도: $\Delta$RMSE [95\% 구간] \\"}[lang]
-    tab_a = "\\begin{tabular}{@{}llcrrrr@{}}\n\\toprule\n" + HA + "\n\\midrule\n" + body_a + "\n\\bottomrule\n\\end{tabular}\n"
-    tab_b = "\\begin{tabular}{@{}lllll@{}}\n\\toprule\n" + HB + "\n\\midrule\n" + body_b + "\n\\bottomrule\n\\end{tabular}\n"
+    HA = {"en": r"Region & Design & $n$ (site-years / cell-years) & Physics + residual ML & Stefan (recal.) & Stefan (source) & Direct ML \\",
+          "ko": r"지역 & 설계 & $n$(지점-연도 / 셀-연도) & 물리 잔차 ML & Stefan(재보정) & Stefan(원천) & 직접 ML \\"}[lang]
+    HB = {"en": r"Region & Design & Comparison & Site-years, $\Delta$RMSE [95\% CI] & Cell-years, $\Delta$RMSE [95\% CI] \\",
+          "ko": r"지역 & 설계 & 비교 & 지점-연도 $\Delta$RMSE [95\% 구간] & 셀-연도 $\Delta$RMSE [95\% 구간] \\"}[lang]
+    tab_a = "\\setlength{\\tabcolsep}{3.5pt}\\begin{tabular}{@{}llcrrrr@{}}\n\\toprule\n" + HA + "\n\\midrule\n" + body_a + "\n\\bottomrule\n\\end{tabular}\n"
+    tab_b = "\\setlength{\\tabcolsep}{3.5pt}\\begin{tabular}{@{}lllll@{}}\n\\toprule\n" + HB + "\n\\midrule\n" + body_b + "\n\\bottomrule\n\\end{tabular}\n"
     (SH / f"table_s7a_cellyear_{lang}.tex").write_text(tab_a); (SH / f"table_s7b_cellyear_{lang}.tex").write_text(tab_b)
     (SH / f"table_s7_cellyear_{lang}.tex").unlink(missing_ok=True)
 (SH / "numbers_v14_cellyear.tex").write_text("\n".join(macros) + "\n")
